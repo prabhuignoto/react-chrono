@@ -4,8 +4,9 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   outline: 0;
-  width: 100%;
   position: relative;
+  width: 100%;
+  user-select: none;
   
   &.horizontal {
     height: 10rem;
@@ -42,10 +43,10 @@ export const TimelineMain = styled.div`
   transition: all 0.2s ease;
   
   &.vertical {
-    height: 100%;
-    width: 100%;
     align-items: flex-start;
+    height: 100%;
     justify-content: flex-start;
+    width: 100%;
   }
   `;
 
@@ -69,10 +70,10 @@ export const TimelineControlContainer = styled.div`
 
 export const TimelineContentRender = styled.div`
   left: 0;
-  right: 0;
   margin-left: auto;
   margin-right: auto;
-  top: 3rem;
   position: absolute;
+  right: 0;
+  top: 3rem;
   width: 70%;
 `;

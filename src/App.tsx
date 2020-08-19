@@ -85,7 +85,7 @@ function App() {
         items={items}
         titlePosition="TOP"
         itemWidth={250}
-        mode="VERTICAL"
+        mode="HORIZONTAL"
       />
     </div>
   );

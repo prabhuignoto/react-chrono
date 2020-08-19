@@ -1,17 +1,17 @@
 import { TimelineItemViewModel } from "./TimelineItemModel";
 
 export interface TimelineCollectionModel {
-  items: TimelineItemViewModel[];
-  itemWidth: number;
   handleItemClick: (id?: string) => void;
-  onScroll: (t: Scroll) => void;
+  itemWidth: number;
+  items: TimelineItemViewModel[];
   mode: "HORIZONTAL" | "VERTICAL"
+  onScroll: (t: Scroll) => void;
 }
 
 export interface Scroll {
-  circleWidth?: number;
   circleHeight?: number;
   circleOffset: number;
+  circleWidth?: number;
   contentHeight?: number;
   contentOffset?: number;
 }

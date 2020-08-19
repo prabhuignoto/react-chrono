@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const TimelineCollectionWrapper = styled.ul`
   display: flex;
   list-style: none;
-  width: 100%;
-  padding: 1rem;
   margin: 0;
+  padding: 1rem;
+  width: 100%;
   &.vertical {
     flex-direction: column;
   }
@@ -18,20 +18,20 @@ export const TimelineItemWrapper = styled.li<{ width: number }>`
   width: ${p => p.width}px;
 
   &.vertical {
-    width: 100%;
-    margin-bottom: 2rem;
     /* TO DO */
+    margin-bottom: 2rem;
     min-height: 100px;
+    width: 100%;
   }
 `;
 
 
 export const Connector = styled.div`
-  position: absolute;
-  left: 0;
   background: red;
   height: 100%;
-  width: 3px;
-  top: 0;
+  left: 0;
   left: 4rem;
+  position: absolute;
+  top: 0;
+  width: 3px;
 `;

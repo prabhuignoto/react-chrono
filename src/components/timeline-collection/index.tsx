@@ -24,7 +24,7 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
           <TimelineItem
             {...item}
             onClick={handleItemClick}
-            scroll={onScroll}
+            onScroll={onScroll}
             mode={mode}
           />
           {/* <Connector /> */}

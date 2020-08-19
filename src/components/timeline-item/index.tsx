@@ -12,14 +12,14 @@ import {
 } from "./timeline-item.styles";
 
 const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
+  active,
   contentText,
+  id,
+  mode,
+  onClick,
+  onScroll,
   position,
   title,
-  active,
-  onClick,
-  id,
-  scroll,
-  mode,
 }) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -42,12 +42,12 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
         const wrapperOffsetTop = wrapper.offsetTop;
 
         if (mode === "HORIZONTAL") {
-          scroll({
+          onScroll({
             circleOffset: circleOffsetLeft + wrapperOffsetLeft,
             circleWidth: circle.clientWidth,
           });
         } else {
-          scroll({
+          onScroll({
             circleOffset: circleOffsetTop + wrapperOffsetTop,
             circleHeight: circle.clientHeight,
             contentHeight: content?.clientHeight,
@@ -56,7 +56,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
         }
       }
     }
-  }, [active, scroll, mode]);
+  }, [active, onScroll, mode]);
 
   const timelineContent = () => {
     let className = "";

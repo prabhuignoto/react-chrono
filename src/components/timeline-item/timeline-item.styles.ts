@@ -94,7 +94,10 @@ export const TimelineTitleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 1rem;
+
+  &.vertical {
+    margin-bottom: 1rem;
+  }
   
   &.horizontal {
     position: absolute;
