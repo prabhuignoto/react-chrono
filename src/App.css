@@ -4,8 +4,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1200px;
+  width: 1300px;
   margin: 0 auto;
+  min-height: 900px;
 }
 
 .App-logo {
@@ -41,4 +42,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  border: 1px solid red;
+  min-height: 100vh;
 }

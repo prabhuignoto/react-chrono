@@ -11,17 +11,17 @@ import {
 const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   onNext,
   onPrevious,
-  disableLeftNav,
-  disableRightNav
+  disableLeft,
+  disableRight
 }) => {
   return (
     <TimelineControlWrapper>
-      <TimelineControlItem disable={disableLeftNav}>
+      <TimelineControlItem disable={disableLeft}>
         <TimelineControlButton onClick={onPrevious}>
           <ChevronLeft />
         </TimelineControlButton>
       </TimelineControlItem>
-      <TimelineControlItem disable={disableRightNav}>
+      <TimelineControlItem disable={disableRight}>
         <TimelineControlButton onClick={onNext}>
           <ChevronRightIcon />
         </TimelineControlButton>

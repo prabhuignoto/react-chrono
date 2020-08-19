@@ -1,19 +1,14 @@
 import { nanoid } from "nanoid";
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Scroll } from "../models/TimelineCollnModel";
+import { TimelineItemViewModel } from "../models/TimelineItemModel";
 import { TimelineModel } from "../models/TimelineModel";
+import TimelineCollection from "../timeline-collection";
 import TimelineControl from "../timeline-control";
-import TimelineItem from "../timeline-item";
 import {
   Outline,
-  TimelineCollection,
   TimelineContentRender,
   TimelineControlContainer,
-  TimelineItemWrapper,
   TimelineMain,
   TimelineMainWrapper,
   Wrapper,
@@ -22,22 +17,18 @@ import {
 const Timeline: React.FunctionComponent<TimelineModel> = ({
   items,
   itemWidth = 320,
+  titlePosition = "TOP",
+  mode = "HORIZONTAL",
 }) => {
   const [timelineItems, setTimelineItems] = useState(
     items.map((item, index) => {
-      let position = "top";
-      if (index % 2 === 0) {
-        position = "top";
-      }
       return Object.assign({}, item, {
-        position,
+        position: titlePosition.toLowerCase(),
         id: nanoid(),
       });
     })
   );
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
-  const [disableLeftNav, setDisableLeftNav] = useState(true);
-  const [disableRightNav, setDisableRightNav] = useState(false);
 
   const timelineMainRef = useRef<HTMLDivElement>(null);
 
@@ -57,9 +48,17 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     event.preventDefault();
     event.stopPropagation();
 
-    if (event.keyCode === 39) {
+    const { keyCode } = event;
+
+    if (
+      (mode === "HORIZONTAL" && keyCode === 39) ||
+      (mode === "VERTICAL" && keyCode === 40)
+    ) {
       handleNext();
-    } else if (event.keyCode === 37) {
+    } else if (
+      (mode === "HORIZONTAL" && keyCode === 37) ||
+      (mode === "VERTICAL" && keyCode === 38)
+    ) {
       handlePrevious();
     }
   };
@@ -85,82 +84,79 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     }
   };
 
-  const scroll = useCallback(
+  const handleScroll = useCallback(
     ({
-      circleWidth,
-      circleOffset: circleLeft,
-    }: {
-      circleWidth: number;
-      circleOffset: number;
-    }) => {
+      circleWidth = 0,
+      circleHeight = 0,
+      circleOffset = 0,
+      contentHeight = 0,
+      contentOffset = 0,
+    }: Partial<Scroll>) => {
       const ref = timelineMainRef.current;
 
       if (ref) {
-        const { clientWidth, scrollLeft, scrollWidth } = ref;
-        let contrRight = scrollLeft + clientWidth;
+        const { clientWidth, scrollLeft, scrollTop, clientHeight } = ref;
 
-        if (scrollLeft > 0) {
-          setDisableLeftNav(false);
-        }
+        if (mode === "HORIZONTAL") {
+          let contrRight = scrollLeft + clientWidth;
+          let circRight = circleOffset + circleWidth;
+          let isVisible = circleOffset >= scrollLeft && circRight <= contrRight;
+          let isPartiallyVisible =
+            (circleOffset < scrollLeft && circRight > scrollLeft) ||
+            (circRight > contrRight && circleOffset < contrRight);
 
-        if (scrollLeft <= 0) {
-          setDisableLeftNav(true);
-        }
+          const leftGap = circleOffset - scrollLeft;
+          const rightGap = contrRight - circleOffset;
 
-        if (scrollWidth === scrollLeft + clientWidth) {
-          setDisableRightNav(true);
-        } else if (scrollLeft + clientWidth < scrollWidth) {
-          setDisableRightNav(false);
-        }
+          if (!(isVisible || isPartiallyVisible)) {
+            ref.scrollLeft = circleOffset - itemWidth;
+          } else if (leftGap <= itemWidth && leftGap >= 0) {
+            ref.scrollLeft = circleOffset - itemWidth;
+          } else if (rightGap <= itemWidth && rightGap >= 0) {
+            ref.scrollLeft = circleOffset - itemWidth;
+          }
+        } else if (mode === "VERTICAL") {
+          let contrBottom = scrollTop + clientHeight;
+          let circBottom = contentOffset + contentHeight;
+          let isVisible =
+            contentOffset >= scrollTop && circBottom <= contrBottom;
+          let isPartiallyVisible =
+            (contentOffset < scrollTop && circBottom > scrollTop) ||
+            (circBottom > contrBottom && contentOffset < contrBottom);
 
-        let circRight = circleLeft + circleWidth;
-
-        let isVisible = circleLeft >= scrollLeft && circRight <= contrRight;
-        let isPartiallyVisible =
-          (circleLeft < scrollLeft && circRight > scrollLeft) ||
-          (circRight > contrRight && circleLeft < contrRight);
-
-        const leftGap = circleLeft - scrollLeft;
-        const rightGap = contrRight - circleLeft;
-
-        if (!(isVisible || isPartiallyVisible)) {
-          ref.scrollLeft = circleLeft - itemWidth;
-        } else if (leftGap <= itemWidth && leftGap >= 0) {
-          ref.scrollLeft = circleLeft - 640;
-        } else if (rightGap <= itemWidth && rightGap >= 0) {
-          ref.scrollLeft = circleLeft - itemWidth;
+          if (!isVisible || !isPartiallyVisible) {
+            ref.scrollTop = contentOffset - contentHeight;
+          }
         }
       }
     },
-    [itemWidth]
+    [itemWidth, mode]
   );
 
   return (
-    <Wrapper tabIndex={0} onKeyDown={(evt) => handleKeySelection(evt)}>
-      <TimelineMainWrapper
-        ref={timelineMainRef}
-      >
-        <TimelineMain>
-          <Outline />
-          <TimelineCollection>
-            {timelineItems.map((item) => (
-              <TimelineItemWrapper key={item.id} width={itemWidth}>
-                <TimelineItem
-                  {...item}
-                  onClick={handleTimelineItemClick}
-                  scroll={scroll}
-                />
-              </TimelineItemWrapper>
-            ))}
-          </TimelineCollection>
+    <Wrapper
+      tabIndex={0}
+      onKeyDown={(evt) => handleKeySelection(evt)}
+      className={mode.toLowerCase()}
+    >
+      <TimelineMainWrapper ref={timelineMainRef} className={mode.toLowerCase()}>
+        <TimelineMain className={mode.toLowerCase()}>
+          {mode === "HORIZONTAL" && <Outline />}
+          <TimelineCollection
+            items={timelineItems as TimelineItemViewModel[]}
+            itemWidth={itemWidth}
+            handleItemClick={handleTimelineItemClick}
+            onScroll={handleScroll}
+            mode={mode}
+          />
         </TimelineMain>
       </TimelineMainWrapper>
       <TimelineControlContainer>
         <TimelineControl
           onNext={handleNext}
           onPrevious={handlePrevious}
-          disableLeftNav={disableLeftNav}
-          disableRightNav={disableRightNav}
+          disableLeft={activeTimelineItem === 0}
+          disableRight={activeTimelineItem === items.length - 1}
         />
       </TimelineControlContainer>
       <TimelineContentRender id="content-render" />

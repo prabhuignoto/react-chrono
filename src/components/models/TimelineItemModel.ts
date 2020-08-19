@@ -1,3 +1,5 @@
+import { Scroll } from "./TimelineCollnModel";
+
 export interface TimelineItemModel {
   contentText: string;
   position?: string;
@@ -8,5 +10,6 @@ export interface TimelineItemModel {
 
 export interface TimelineItemViewModel extends TimelineItemModel {
   onClick: (id?: string) => void;
-  scroll: ({ circleOffset, circleWidth }: { circleOffset: number, circleWidth: number }) => void;
+  scroll: ({ circleOffset, circleWidth, circleHeight, contentHeight }: Scroll) => void;
+  mode: "HORIZONTAL" | "VERTICAL"
 }

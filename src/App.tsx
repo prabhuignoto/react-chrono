@@ -81,7 +81,12 @@ function App() {
   ];
   return (
     <div className="App">
-      <Timeline items={items} CardPosition="ALTERNATE" />
+      <Timeline
+        items={items}
+        titlePosition="TOP"
+        itemWidth={250}
+        mode="VERTICAL"
+      />
     </div>
   );
 }

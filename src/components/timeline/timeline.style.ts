@@ -3,31 +3,50 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 10rem;
   outline: 0;
   width: 100%;
   position: relative;
+  
+  &.horizontal {
+    height: 10rem;
+  }
+
+  &.vertical {
+    height: 100%;
+  }
   `;
 
 export const TimelineMainWrapper = styled.div`
   align-items: center;
   display: flex;
-  height: 8rem;
   justify-content: center;
-  overflow-x: hidden;
+  overflow: hidden;
   position: relative;
   scroll-behavior: smooth;
   width: 100%;
-  `;
+
+  &.horizontal {
+    height: 8rem;
+  }
+
+  &.vertical {
+    height: 100%;
+  }
+ `;
 
 export const TimelineMain = styled.div`
   align-items: center;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   left: 0;
   position: absolute;
   transition: all 0.2s ease;
+  
+  &.vertical {
+    height: 100%;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
   `;
 
 export const Outline = styled.div`
@@ -39,18 +58,7 @@ export const Outline = styled.div`
   position: absolute;
   right: 0;
   width: 100%;
-  `
-
-export const TimelineCollection = styled.ul<{ dir?: string }>`
-  display: flex;
-  flex-direction: ${p => p.dir === "vertical" ? "column" : "row"};
-  list-style: none;
-  width: 100%;
-`;
-
-export const TimelineItemWrapper = styled.li<{ width: number }>`
-  width: ${p => p.width}px;
-`;
+  `;
 
 export const TimelineControlContainer = styled.div`
   align-items: center;

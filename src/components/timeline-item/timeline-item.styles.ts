@@ -6,6 +6,11 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
+
+  &.vertical {
+    justify-content: flex-start;
+    height: 100%;
+  }
 `;
 
 export const Item = styled.div``;
@@ -37,14 +42,25 @@ const show = keyframes`
   }
 `;
 
+export const CircleWrapper = styled.div`
+  width: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+`;
+
 export const Circle = styled.div`
   background: #0f52ba;
   border-radius: 50%;
   cursor: pointer;
   height: 1rem;
   margin: 1rem;
-  position: relative;
   width: 1rem;
+
+  &.vertical {
+  }
 
   &.active {
     animation: ${scaleUp} 0.1s ease-in;
@@ -74,29 +90,40 @@ export const Circle = styled.div`
   }
 `;
 
-export const TimelineTitleContainer = styled.div<{ position?: string }>`
-  position: absolute;
-  &.top {
-    bottom: 3rem;
-  }
-  &.bottom {
-    top: 3rem;
+export const TimelineTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+  
+  &.horizontal {
+    position: absolute;
+    &.top {
+      bottom: 3rem;
+    }
+    &.bottom {
+      top: 3rem;
+    }
   }
 `;
 
-export const TimelineContentContainer = styled.div<{position?: string}>`
+export const TimelineContentContainer = styled.div<{ position?: string }>`
   align-items: flex-start;
   animation: ${show} 0.25s ease-in;
-  background: #fff;
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
-  border-left: 2px solid #0f52ba;
-  display: flex;
-  filter: drop-shadow(2px 2px 10px rgba(0,0,0,0.25));
-  min-width: 650px;
   padding: 0.5rem;
-  position: absolute;
-  z-index: 9999;
+  
+  &.horizontal {
+    position: absolute;
+    min-width: 250px;
+    z-index: 9999;
+  }
+
+  &.vertical {
+    width: calc(100% - 5rem);
+    margin-left: auto;
+    flex-direction: column;
+    height: 100%;
+  }
 
   &.top {
     bottom: 4rem;
@@ -104,4 +131,4 @@ export const TimelineContentContainer = styled.div<{position?: string}>`
   &.bottom {
     top: 4rem;
   }
-`
+`;

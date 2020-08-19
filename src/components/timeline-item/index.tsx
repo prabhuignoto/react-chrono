@@ -5,6 +5,7 @@ import TimelineItemContent from "../timeline-item-content";
 import TimelineItemTitle from "../timeline-item-title";
 import {
   Circle,
+  CircleWrapper,
   TimelineContentContainer,
   TimelineTitleContainer,
   Wrapper,
@@ -18,9 +19,11 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   onClick,
   id,
   scroll,
+  mode,
 }) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
     onClick && onClick(id);
@@ -30,45 +33,78 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
     if (active) {
       const circle = circleRef.current;
       const wrapper = wrapperRef.current;
+      const content = contentRef.current;
 
       if (circle && wrapper) {
-        const circleOffset = circle.offsetLeft;
-        const wrapperOffset = wrapper.offsetLeft;
+        const circleOffsetLeft = circle.offsetLeft;
+        const wrapperOffsetLeft = wrapper.offsetLeft;
+        const circleOffsetTop = circle.offsetLeft;
+        const wrapperOffsetTop = wrapper.offsetTop;
 
-        scroll({
-          circleOffset: circleOffset + wrapperOffset,
-          circleWidth: circle.clientWidth,
-        });
+        if (mode === "HORIZONTAL") {
+          scroll({
+            circleOffset: circleOffsetLeft + wrapperOffsetLeft,
+            circleWidth: circle.clientWidth,
+          });
+        } else {
+          scroll({
+            circleOffset: circleOffsetTop + wrapperOffsetTop,
+            circleHeight: circle.clientHeight,
+            contentHeight: content?.clientHeight,
+            contentOffset: wrapperOffsetTop,
+          });
+        }
       }
     }
-  }, [active, scroll]);
+  }, [active, scroll, mode]);
+
+  const timelineContent = () => {
+    let className = "";
+
+    if (mode === "HORIZONTAL") {
+      className = `horizontal ${position === "top" ? "bottom" : "top"}`;
+    } else {
+      className = "vertical";
+    }
+
+    return (
+      <TimelineContentContainer className={className} ref={contentRef}>
+        {mode === "VERTICAL" && (
+          <TimelineTitleContainer
+            className={`${mode.toLowerCase()} ${position}`}
+          >
+            <TimelineItemTitle title={title} active={active} />
+          </TimelineTitleContainer>
+        )}
+        <TimelineItemContent content={contentText} />
+      </TimelineContentContainer>
+    );
+  };
 
   const showTimelineContent = () => {
     const ele = document.getElementById("content-render");
 
     if (ele) {
-      return ReactDOM.createPortal(
-        <TimelineContentContainer
-          className={position === "top" ? "bottom" : "top"}
-        >
-          <TimelineItemContent content={contentText} />
-        </TimelineContentContainer>,
-        ele
-      );
+      return ReactDOM.createPortal(timelineContent(), ele);
     }
   };
 
   return (
-    <Wrapper ref={wrapperRef}>
-      {active && showTimelineContent()}
-      <Circle
-        className={active ? "active" : "in-active"}
-        onClick={handleClick}
-        ref={circleRef}
-      />
-      <TimelineTitleContainer position={position} className={position}>
-        <TimelineItemTitle title={title} active={active} />
-      </TimelineTitleContainer>
+    <Wrapper ref={wrapperRef} className={mode.toLowerCase()}>
+      {mode === "HORIZONTAL" && active ? showTimelineContent() : null}
+      <CircleWrapper>
+        <Circle
+          className={`${mode.toLowerCase()} ${active ? "active" : "in-active"}`}
+          onClick={handleClick}
+          ref={circleRef}
+        ></Circle>
+      </CircleWrapper>
+      {mode === "HORIZONTAL" && (
+        <TimelineTitleContainer className={`${mode.toLowerCase()} ${position}`}>
+          <TimelineItemTitle title={title} active={active} />
+        </TimelineTitleContainer>
+      )}
+      {mode === "VERTICAL" && timelineContent()}
     </Wrapper>
   );
 };

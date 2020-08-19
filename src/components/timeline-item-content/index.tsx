@@ -1,10 +1,17 @@
 import React from "react";
-import { TimelineItemContentWrapper } from "./timeline-item-content.styles";
+import {
+  TimelineContentText,
+  TimelineItemContentWrapper,
+} from "./timeline-item-content.styles";
 
 const TimelineItemContent: React.FunctionComponent<{
   content: string;
 }> = ({ content }) => {
-  return <TimelineItemContentWrapper>{content}</TimelineItemContentWrapper>;
+  return (
+    <TimelineItemContentWrapper>
+      <TimelineContentText>{content}</TimelineContentText>
+    </TimelineItemContentWrapper>
+  );
 };
 
 export default TimelineItemContent;
