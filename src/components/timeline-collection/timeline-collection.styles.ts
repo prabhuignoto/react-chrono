@@ -24,14 +24,3 @@ export const TimelineItemWrapper = styled.li<{ width: number }>`
     width: 100%;
   }
 `;
-
-
-export const Connector = styled.div`
-  background: red;
-  height: 100%;
-  left: 0;
-  left: 4rem;
-  position: absolute;
-  top: 0;
-  width: 3px;
-`;

@@ -4,7 +4,7 @@ export interface TimelineCollectionModel {
   handleItemClick: (id?: string) => void;
   itemWidth: number;
   items: TimelineItemViewModel[];
-  mode: "HORIZONTAL" | "VERTICAL"
+  mode: "HORIZONTAL" | "VERTICAL" | "TREE";
   onScroll: (t: Scroll) => void;
 }
 

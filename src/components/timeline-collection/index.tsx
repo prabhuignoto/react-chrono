@@ -27,7 +27,6 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
             onScroll={onScroll}
             mode={mode}
           />
-          {/* <Connector /> */}
         </TimelineItemWrapper>
       ))}
     </TimelineCollectionWrapper>

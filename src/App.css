@@ -1,12 +1,11 @@
 .App {
   text-align: center;
-  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 900px;
+  width: 950px;
   margin: 0 auto;
-  min-height: 900px;
+  height: 900px;
 }
 
 .App-logo {
@@ -48,6 +47,5 @@
   display: flex;
   align-items: center;
   justify-items: center;
-  border: 1px solid red;
   min-height: 100vh;
 }

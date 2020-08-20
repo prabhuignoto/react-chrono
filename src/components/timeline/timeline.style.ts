@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
     height: 10rem;
   }
 
-  &.vertical {
+  &.vertical, &.tree {
     height: 100%;
   }
   `;
@@ -25,6 +25,7 @@ export const TimelineMainWrapper = styled.div`
   position: relative;
   scroll-behavior: smooth;
   width: 100%;
+  padding: 1rem;
 
   &.horizontal {
     height: 8rem;
@@ -41,6 +42,10 @@ export const TimelineMain = styled.div`
   left: 0;
   position: absolute;
   transition: all 0.2s ease;
+
+  &.tree {
+    height: 100%;
+  }
   
   &.vertical {
     align-items: flex-start;

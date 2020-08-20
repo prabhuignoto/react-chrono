@@ -9,7 +9,7 @@ export interface TimelineItemModel {
 }
 
 export interface TimelineItemViewModel extends TimelineItemModel {
-  mode: "HORIZONTAL" | "VERTICAL"
+  mode: "HORIZONTAL" | "VERTICAL" | "TREE";
   onClick: (id?: string) => void;
   onScroll: ({ circleOffset, circleWidth, circleHeight, contentHeight }: Scroll) => void;
 }

@@ -56,7 +56,6 @@ export const Circle = styled.div`
   border-radius: 50%;
   cursor: pointer;
   height: 1rem;
-  margin: 1rem;
   width: 1rem;
 
   &.vertical {

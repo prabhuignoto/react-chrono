@@ -7,14 +7,15 @@
     "@testing-library/react": "^10.4.8",
     "@testing-library/user-event": "^12.1.1",
     "@types/jest": "^26.0.10",
-    "@types/node": "^14.0.27",
+    "@types/node": "^14.6.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "nanoid": "^3.1.12",
     "react": "^16.13.1",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-scripts": "3.4.3",
-    "styled-components": "5.1.1"
+    "styled-components": "5.1.1",
+    "use-debounce": "^3.4.3"
   },
   "scripts": {
     "start": "react-scripts start",

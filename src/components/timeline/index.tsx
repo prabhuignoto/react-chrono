@@ -1,10 +1,12 @@
 import { nanoid } from "nanoid";
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useDebounce } from "use-debounce";
 import { Scroll } from "../models/TimelineCollnModel";
 import { TimelineItemViewModel } from "../models/TimelineItemModel";
 import { TimelineModel } from "../models/TimelineModel";
 import TimelineCollection from "../timeline-collection";
 import TimelineControl from "../timeline-control";
+import TimelineTree from "../timeline-tree";
 import {
   Outline,
   TimelineContentRender,
@@ -29,18 +31,19 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     })
   );
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
+  const [debActvTimelineItem] = useDebounce(activeTimelineItem, 150);
 
   const timelineMainRef = useRef<HTMLDivElement>(null);
 
   const handleNext = () => {
-    if (activeTimelineItem < timelineItems.length - 1) {
-      setActiveTimelineItem(activeTimelineItem + 1);
+    if (debActvTimelineItem < timelineItems.length - 1) {
+      setActiveTimelineItem(debActvTimelineItem + 1);
     }
   };
 
   const handlePrevious = () => {
-    if (activeTimelineItem > 0) {
-      setActiveTimelineItem(activeTimelineItem - 1);
+    if (debActvTimelineItem > 0) {
+      setActiveTimelineItem(debActvTimelineItem - 1);
     }
   };
 
@@ -52,13 +55,21 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
 
     if (
       (mode === "HORIZONTAL" && keyCode === 39) ||
-      (mode === "VERTICAL" && keyCode === 40)
+      ((mode === "VERTICAL" || mode === "TREE") && keyCode === 40)
     ) {
       handleNext();
     } else if (
       (mode === "HORIZONTAL" && keyCode === 37) ||
-      (mode === "VERTICAL" && keyCode === 38)
+      ((mode === "VERTICAL" || mode === "TREE") && keyCode === 38)
     ) {
+      handlePrevious();
+    }
+  };
+
+  const handleWheel = (evt: React.WheelEvent) => {
+    if (evt.deltaY > 0) {
+      handleNext();
+    } else if (evt.deltaY < 0) {
       handlePrevious();
     }
   };
@@ -67,11 +78,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     setTimelineItems((items) =>
       items.map((item, index) =>
         Object.assign({}, item, {
-          active: index === activeTimelineItem,
+          active: index === debActvTimelineItem,
         })
       )
     );
-  }, [activeTimelineItem]);
+  }, [debActvTimelineItem]);
 
   const handleTimelineItemClick = (id?: string) => {
     if (id) {
@@ -115,16 +126,18 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
           } else if (rightGap <= itemWidth && rightGap >= 0) {
             ref.scrollLeft = circleOffset - itemWidth;
           }
-        } else if (mode === "VERTICAL") {
+        } else if (mode === "VERTICAL" || mode === "TREE") {
           let contrBottom = scrollTop + clientHeight;
           let circBottom = contentOffset + contentHeight;
           let isVisible =
             contentOffset >= scrollTop && circBottom <= contrBottom;
+          
+            debugger;
           let isPartiallyVisible =
             (contentOffset < scrollTop && circBottom > scrollTop) ||
             (circBottom > contrBottom && contentOffset < contrBottom);
 
-          if (!isVisible || !isPartiallyVisible) {
+          if (!isVisible || isPartiallyVisible) {
             ref.scrollTop = contentOffset - contentHeight;
           }
         }
@@ -137,26 +150,36 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     <Wrapper
       tabIndex={0}
       onKeyDown={(evt) => handleKeySelection(evt)}
+      onWheel={(evt) => handleWheel(evt)}
       className={mode.toLowerCase()}
     >
       <TimelineMainWrapper ref={timelineMainRef} className={mode.toLowerCase()}>
-        <TimelineMain className={mode.toLowerCase()}>
-          {mode === "HORIZONTAL" && <Outline />}
-          <TimelineCollection
+        {mode !== "TREE" ? (
+          <TimelineMain className={mode.toLowerCase()}>
+            {mode === "HORIZONTAL" && <Outline />}
+            <TimelineCollection
+              items={timelineItems as TimelineItemViewModel[]}
+              itemWidth={itemWidth}
+              handleItemClick={handleTimelineItemClick}
+              onScroll={handleScroll}
+              mode={mode}
+            />
+          </TimelineMain>
+        ) : (
+          <TimelineTree
             items={timelineItems as TimelineItemViewModel[]}
-            itemWidth={itemWidth}
-            handleItemClick={handleTimelineItemClick}
+            onClick={handleTimelineItemClick}
+            activeTimelineItem={debActvTimelineItem}
             onScroll={handleScroll}
-            mode={mode}
           />
-        </TimelineMain>
+        )}
       </TimelineMainWrapper>
       <TimelineControlContainer>
         <TimelineControl
           onNext={handleNext}
           onPrevious={handlePrevious}
-          disableLeft={activeTimelineItem === 0}
-          disableRight={activeTimelineItem === items.length - 1}
+          disableLeft={debActvTimelineItem === 0}
+          disableRight={debActvTimelineItem === items.length - 1}
         />
       </TimelineControlContainer>
       <TimelineContentRender id="content-render" />
