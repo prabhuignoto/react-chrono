@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react'
-import { TreeTrunkWrapper, TrunkCircleWrapper } from './timeline-tree.styles';
-import { Circle } from '../timeline-item/timeline-item.styles';
-import { TreeLeafModel } from '../models/TimelineTreeModel';
+import React, { useEffect, useRef } from "react";
+import { TreeLeafModel } from "../models/TimelineTreeModel";
+import { Circle } from "../timeline-item/timeline-item.styles";
+import { TreeTrunkWrapper, TrunkCircleWrapper } from "./timeline-tree.styles";
 
 const TreeLeaf: React.FunctionComponent<TreeLeafModel> = ({
   className,
@@ -21,7 +21,7 @@ const TreeLeaf: React.FunctionComponent<TreeLeafModel> = ({
   }, [active, onActive]);
 
   return (
-    <TreeTrunkWrapper className={className}>
+    <TreeTrunkWrapper className={className} data-testid="tree-leaf">
       <TrunkCircleWrapper
         className={className}
         onClick={() => id && onClick(id)}

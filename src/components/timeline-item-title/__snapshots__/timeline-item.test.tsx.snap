@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check Timeline Item Title Snapshot 1`] = `
+<div
+  class="sc-AxjAm cSaKSh active"
+  title="Test"
+>
+  Test
+</div>
+`;

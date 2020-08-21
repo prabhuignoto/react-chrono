@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.3",
-    "@testing-library/react": "^10.4.8",
+    "@testing-library/react": "^10.4.9",
     "@testing-library/user-event": "^12.1.1",
     "@types/jest": "^26.0.10",
     "@types/node": "^14.6.0",
@@ -39,9 +39,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.10.4",
     "@types/nanoid": "^2.1.0",
     "@types/styled-components": "5.1.0",
     "react-hot-loader": "^4.12.21",
+    "ts-jest": "^26.2.0",
     "typescript": "3.8.3"
   }
 }

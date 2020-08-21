@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check Timeline Leaf snapshot 1`] = `
+<div
+  class="sc-fzozJi cUDTqO random-class"
+  data-testid="tree-leaf"
+>
+  <div
+    class="sc-fzpans jRCOFi random-class"
+  >
+    <div
+      class="sc-AxhCb fUotBl in-active"
+    />
+  </div>
+</div>
+`;

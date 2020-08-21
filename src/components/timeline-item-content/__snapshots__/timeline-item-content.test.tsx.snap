@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Timeline Item Content Snapshot 1`] = `
+<span
+  class="sc-AxirZ izgUJV"
+>
+  This is a test
+</span>
+`;

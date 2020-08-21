@@ -5,7 +5,7 @@ const TimelineItemTitle: React.FunctionComponent<{
   title?: string;
   active?: boolean;
 }> = ({ title, active }) => {
-  return <PaneTitle className={active ? "active" : ""}>{title}</PaneTitle>;
+  return <PaneTitle className={active ? "active" : ""} title={title}>{title}</PaneTitle>;
 };
 
 export default TimelineItemTitle;

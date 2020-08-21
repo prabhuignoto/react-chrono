@@ -68,7 +68,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     }
   };
 
-  const handleWheel = (evt: React.WheelEvent) => {
+  const handleMouseWheel = (evt: React.WheelEvent) => {
     if (evt.deltaY > 0) {
       handleNext();
     } else if (evt.deltaY < 0) {
@@ -120,7 +120,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     <Wrapper
       tabIndex={0}
       onKeyDown={(evt) => handleKeySelection(evt)}
-      onWheel={(evt) => handleWheel(evt)}
+      onWheel={(evt) => handleMouseWheel(evt)}
       className={mode.toLowerCase()}
     >
       <TimelineMainWrapper ref={timelineMainRef} className={mode.toLowerCase()}>
