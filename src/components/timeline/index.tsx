@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useDebounce } from "use-debounce";
+import useNewScrollPosition from "../effects/useNewScrollPosition";
 import { Scroll } from "../models/TimelineCollnModel";
 import { TimelineItemViewModel } from "../models/TimelineItemModel";
 import { TimelineModel } from "../models/TimelineModel";
@@ -31,7 +32,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     })
   );
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
-  const [debActvTimelineItem] = useDebounce(activeTimelineItem, 150);
+  const [debActvTimelineItem] = useDebounce(activeTimelineItem, 50);
+  const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
 
   const timelineMainRef = useRef<HTMLDivElement>(null);
 
@@ -95,56 +97,24 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     }
   };
 
-  const handleScroll = useCallback(
-    ({
-      circleWidth = 0,
-      circleHeight = 0,
-      circleOffset = 0,
-      contentHeight = 0,
-      contentOffset = 0,
-    }: Partial<Scroll>) => {
-      const ref = timelineMainRef.current;
+  const handleScroll = useCallback((scroll: Partial<Scroll>) => {
+    const element = timelineMainRef.current;
+    if (element) {
+      setNewOffset(element, scroll);
+    }
+  }, []);
 
-      if (ref) {
-        const { clientWidth, scrollLeft, scrollTop, clientHeight } = ref;
-
-        if (mode === "HORIZONTAL") {
-          let contrRight = scrollLeft + clientWidth;
-          let circRight = circleOffset + circleWidth;
-          let isVisible = circleOffset >= scrollLeft && circRight <= contrRight;
-          let isPartiallyVisible =
-            (circleOffset < scrollLeft && circRight > scrollLeft) ||
-            (circRight > contrRight && circleOffset < contrRight);
-
-          const leftGap = circleOffset - scrollLeft;
-          const rightGap = contrRight - circleOffset;
-
-          if (!(isVisible || isPartiallyVisible)) {
-            ref.scrollLeft = circleOffset - itemWidth;
-          } else if (leftGap <= itemWidth && leftGap >= 0) {
-            ref.scrollLeft = circleOffset - itemWidth;
-          } else if (rightGap <= itemWidth && rightGap >= 0) {
-            ref.scrollLeft = circleOffset - itemWidth;
-          }
-        } else if (mode === "VERTICAL" || mode === "TREE") {
-          let contrBottom = scrollTop + clientHeight;
-          let circBottom = contentOffset + contentHeight;
-          let isVisible =
-            contentOffset >= scrollTop && circBottom <= contrBottom;
-          
-            debugger;
-          let isPartiallyVisible =
-            (contentOffset < scrollTop && circBottom > scrollTop) ||
-            (circBottom > contrBottom && contentOffset < contrBottom);
-
-          if (!isVisible || isPartiallyVisible) {
-            ref.scrollTop = contentOffset - contentHeight;
-          }
-        }
-      }
-    },
-    [itemWidth, mode]
-  );
+  useEffect(() => {
+    const ele = timelineMainRef.current;
+    if (!ele) {
+      return;
+    }
+    if (mode === "HORIZONTAL") {
+      ele.scrollLeft = newOffSet;
+    } else {
+      ele.scrollTop = newOffSet;
+    }
+  }, [newOffSet, mode]);
 
   return (
     <Wrapper
@@ -161,7 +131,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
               items={timelineItems as TimelineItemViewModel[]}
               itemWidth={itemWidth}
               handleItemClick={handleTimelineItemClick}
-              onScroll={handleScroll}
+              autoScroll={handleScroll}
               mode={mode}
             />
           </TimelineMain>
@@ -170,7 +140,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             items={timelineItems as TimelineItemViewModel[]}
             onClick={handleTimelineItemClick}
             activeTimelineItem={debActvTimelineItem}
-            onScroll={handleScroll}
+            autoScroll={handleScroll}
           />
         )}
       </TimelineMainWrapper>

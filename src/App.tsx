@@ -7,7 +7,7 @@ import Timeline from "./components/timeline";
 function App() {
   const items: TimelineItemModel[] = [
     {
-      title: "June 28, 1914",
+      title: "June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914",
       contentText:
         "Archduke Franz Ferdinand of Austria and his wife, Sophie, are assassinated by a Bosnian Serb nationalist in Sarajevo.",
     },
@@ -88,6 +88,7 @@ function App() {
         // mode="VERTICAL"
         // mode="HORIZONTAL"
         mode="TREE"
+        autoPlay
       />
     </div>
   );

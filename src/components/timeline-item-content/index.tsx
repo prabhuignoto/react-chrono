@@ -6,9 +6,10 @@ import {
 
 const TimelineItemContent: React.FunctionComponent<{
   content: string;
-}> = ({ content }) => {
+  active?: boolean;
+}> = ({ content, active }) => {
   return (
-    <TimelineItemContentWrapper>
+    <TimelineItemContentWrapper className={active ? "active" : ""}>
       <TimelineContentText>{content}</TimelineContentText>
     </TimelineItemContentWrapper>
   );

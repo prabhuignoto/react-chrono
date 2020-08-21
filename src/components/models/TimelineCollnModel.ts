@@ -5,13 +5,13 @@ export interface TimelineCollectionModel {
   itemWidth: number;
   items: TimelineItemViewModel[];
   mode: "HORIZONTAL" | "VERTICAL" | "TREE";
-  onScroll: (t: Scroll) => void;
+  autoScroll: (t: Partial<Scroll>) => void;
 }
 
 export interface Scroll {
-  circleHeight?: number;
+  circleHeight: number;
   circleOffset: number;
-  circleWidth?: number;
-  contentHeight?: number;
-  contentOffset?: number;
+  circleWidth: number;
+  contentHeight: number;
+  contentOffset: number;
 }

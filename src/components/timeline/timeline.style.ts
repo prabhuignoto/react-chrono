@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   user-select: none;
   
   &.horizontal {
-    height: 10rem;
+    height: 12rem;
   }
 
   &.vertical, &.tree {
@@ -28,7 +28,7 @@ export const TimelineMainWrapper = styled.div`
   padding: 1rem;
 
   &.horizontal {
-    height: 8rem;
+    height: 10rem;
   }
 
   &.vertical {

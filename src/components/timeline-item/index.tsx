@@ -17,7 +17,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   id,
   mode,
   onClick,
-  onScroll,
+  autoScroll,
   position,
   title,
 }) => {
@@ -42,12 +42,12 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
         const wrapperOffsetTop = wrapper.offsetTop;
 
         if (mode === "HORIZONTAL") {
-          onScroll({
+          autoScroll({
             circleOffset: circleOffsetLeft + wrapperOffsetLeft,
             circleWidth: circle.clientWidth,
           });
         } else {
-          onScroll({
+          autoScroll({
             circleOffset: circleOffsetTop + wrapperOffsetTop,
             circleHeight: circle.clientHeight,
             contentHeight: content?.clientHeight,
@@ -56,7 +56,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
         }
       }
     }
-  }, [active, onScroll, mode]);
+  }, [active, autoScroll, mode]);
 
   const timelineContent = () => {
     let className = "";
@@ -76,7 +76,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
             <TimelineItemTitle title={title} active={active} />
           </TimelineTitleContainer>
         )}
-        <TimelineItemContent content={contentText} />
+        <TimelineItemContent content={contentText} active={active} />
       </TimelineContentContainer>
     );
   };

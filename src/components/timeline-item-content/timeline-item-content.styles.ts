@@ -5,7 +5,7 @@ export const TimelineItemContentWrapper = styled.div`
   background: #fff;
   border-radius: 1rem;
   display: flex;
-  filter: drop-shadow(2px 2px 10px rgba(0,0,0,0.25));
+  filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.25));
   font-family: 'Roboto Mono', monospace;
   font-size: 0.85rem;
   font-weight: 400;
@@ -16,6 +16,10 @@ export const TimelineItemContentWrapper = styled.div`
   min-height: 100px;
   text-align: left;
   width: 100%;
+
+  &.active {
+    color: #0f52ba;
+  }
 `;
 
 export const TimelineContentText = styled.span`
