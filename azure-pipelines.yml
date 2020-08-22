@@ -23,3 +23,7 @@ steps:
 - script: |
     yarn run coverage
   displayName: 'Running Tests and Generate coverage reports.'
+
+- script: |
+    bash <(curl -s https://codecov.io/bash)
+  displayName: 'Upload to codecov.io'
