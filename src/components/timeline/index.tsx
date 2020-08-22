@@ -1,5 +1,4 @@
-import { nanoid } from "nanoid";
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDebounce } from "use-debounce";
 import useNewScrollPosition from "../effects/useNewScrollPosition";
 import { Scroll } from "../models/TimelineCollnModel";
@@ -22,15 +21,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   itemWidth = 320,
   titlePosition = "TOP",
   mode = "HORIZONTAL",
+  onTimelineUpdated,
 }) => {
-  const [timelineItems, setTimelineItems] = useState(
-    items.map((item, index) => {
-      return Object.assign({}, item, {
-        position: titlePosition.toLowerCase(),
-        id: nanoid(),
-      });
-    })
-  );
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
   const [debActvTimelineItem] = useDebounce(activeTimelineItem, 50);
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -38,7 +30,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   const timelineMainRef = useRef<HTMLDivElement>(null);
 
   const handleNext = () => {
-    if (debActvTimelineItem < timelineItems.length - 1) {
+    if (debActvTimelineItem < items.length - 1) {
       setActiveTimelineItem(debActvTimelineItem + 1);
     }
   };
@@ -77,19 +69,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   };
 
   useEffect(() => {
-    setTimelineItems((items) =>
-      items.map((item, index) =>
-        Object.assign({}, item, {
-          active: index === debActvTimelineItem,
-        })
-      )
-    );
+    onTimelineUpdated && onTimelineUpdated(debActvTimelineItem);
   }, [debActvTimelineItem]);
 
   const handleTimelineItemClick = (id?: string) => {
     if (id) {
-      for (let idx = 0; idx < timelineItems.length; idx++) {
-        if (timelineItems[idx].id === id) {
+      for (let idx = 0; idx < items.length; idx++) {
+        if (items[idx].id === id) {
           setActiveTimelineItem(idx);
           break;
         }
@@ -128,7 +114,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
           <TimelineMain className={mode.toLowerCase()}>
             {mode === "HORIZONTAL" && <Outline />}
             <TimelineCollection
-              items={timelineItems as TimelineItemViewModel[]}
+              items={items as TimelineItemViewModel[]}
               itemWidth={itemWidth}
               handleItemClick={handleTimelineItemClick}
               autoScroll={handleScroll}
@@ -137,7 +123,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
           </TimelineMain>
         ) : (
           <TimelineTree
-            items={timelineItems as TimelineItemViewModel[]}
+            items={items as TimelineItemViewModel[]}
             onClick={handleTimelineItemClick}
             activeTimelineItem={debActvTimelineItem}
             autoScroll={handleScroll}

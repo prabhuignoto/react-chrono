@@ -22,7 +22,7 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
         <TimelineItemWrapper
           key={item.id}
           width={itemWidth}
-          className={mode.toLowerCase()}
+          className={`${mode.toLowerCase()} ${item.visible ? "visible" : ""}`}
         >
           <TimelineItem
             {...item}

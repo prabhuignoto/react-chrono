@@ -17,6 +17,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
   active,
   onClick,
   onActive,
+  visible,
   title,
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -30,7 +31,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
 
   return (
     <Branch
-      className={className}
+      className={`${className} ${visible ? "visible" : ""}`}
       key={index}
       ref={contentRef}
       data-testid="branch-main"

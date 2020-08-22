@@ -6,6 +6,7 @@ export interface TimelineItemModel {
   id?: string;
   position?: string;
   title: string;
+  visible?: boolean;
 }
 
 export interface TimelineItemViewModel extends TimelineItemModel {

@@ -5,5 +5,5 @@ export interface TimelineModel {
   items: TimelineItemModel[];
   mode?: "VERTICAL" | "HORIZONTAL" | "TREE";
   titlePosition?: "TOP" | "BOTTOM" | "ALTERNATE";
-  autoPlay?: boolean;
+  onTimelineUpdated?: (id: number) => void;
 }

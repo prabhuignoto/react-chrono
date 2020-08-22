@@ -12,12 +12,16 @@ export const Branch = styled.div`
   position: relative;
   align-items: center;
   width: 100%;
+  visibility: hidden;
   
   &.left {
     margin-right: auto;
   }
   &.right {
     margin-left: auto;
+  }
+  &.visible {
+    visibility: visible;
   }
 `;
 

@@ -1,13 +1,13 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
 import "./App.css";
+import Timeline from "./components";
 import { TimelineItemModel } from "./components/models/TimelineItemModel";
-import Timeline from "./components/timeline";
 
 function App() {
   const items: TimelineItemModel[] = [
     {
-      title: "June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914",
+      title: "June 28, 1914 June 28,",
       contentText:
         "Archduke Franz Ferdinand of Austria and his wife, Sophie, are assassinated by a Bosnian Serb nationalist in Sarajevo.",
     },
@@ -85,10 +85,10 @@ function App() {
         items={items}
         titlePosition="TOP"
         itemWidth={250}
-        // mode="VERTICAL"
+        // mode="TREE"
         mode="HORIZONTAL"
         // mode="TREE"
-        autoPlay
+        slideShow
       />
     </div>
   );

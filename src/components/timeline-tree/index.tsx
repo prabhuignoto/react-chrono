@@ -35,10 +35,11 @@ const TimelineTree: React.FunctionComponent<{
             index={index}
             onClick={onClick}
             contentText={item.contentText}
-            active={activeTimelineItem === index}
+            active={item.active}
             onActive={handleOnActive}
             key={item.id}
             title={item.title}
+            visible={item.visible}
           />
         );
       })}
