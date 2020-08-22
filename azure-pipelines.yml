@@ -21,9 +21,5 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
-    yarn run test
-  displayName: 'Run Tests'
-
-- script: |
     jest --coverage --env="jsdom"
-  displayName: 'Running coverage reports'
+  displayName: 'Running Tests and Generate coverage reports.'
