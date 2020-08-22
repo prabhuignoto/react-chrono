@@ -21,5 +21,5 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
-    yarn run coverage"
+    yarn run coverage
   displayName: 'Running Tests and Generate coverage reports.'
