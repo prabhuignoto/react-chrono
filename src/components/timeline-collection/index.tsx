@@ -14,7 +14,10 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
   mode,
 }) => {
   return (
-    <TimelineCollectionWrapper className={mode.toLowerCase()}>
+    <TimelineCollectionWrapper
+      className={mode.toLowerCase()}
+      data-testid="timeline-collection"
+    >
       {items.map((item) => (
         <TimelineItemWrapper
           key={item.id}
