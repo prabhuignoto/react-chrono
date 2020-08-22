@@ -43,6 +43,7 @@
     "@babel/preset-typescript": "^7.10.4",
     "@types/nanoid": "^2.1.0",
     "@types/styled-components": "5.1.0",
+    "jest": "^26.4.1",
     "react-hot-loader": "^4.12.21",
     "ts-jest": "^26.2.0",
     "typescript": "3.8.3"
