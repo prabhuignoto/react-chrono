@@ -1,10 +1,10 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 import {
   TimelineItemModel,
   TimelineItemViewModel,
-} from "../models/TimelineItemModel";
-import Collection from "./index";
+} from "../../models/TimelineItemModel";
+import Collection from "../index";
 
 const onClick = jest.fn();
 const autoScroll = jest.fn();
