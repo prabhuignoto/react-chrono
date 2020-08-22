@@ -7,6 +7,7 @@ exports[`Check Timeline Leaf snapshot 1`] = `
 >
   <div
     class="sc-fzpans jRCOFi random-class"
+    data-testid="tree-leaf-click"
   >
     <div
       class="sc-AxhCb fUotBl in-active"

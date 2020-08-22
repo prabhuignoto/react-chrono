@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Tree render 1`] = `
+<div
+  class="sc-fzozJi iNxIKn"
+  data-testid="tree-main"
+>
+  <div
+    class="sc-fzoLsD dxSmZJ left"
+    data-testid="branch-main"
+  >
+    <div
+      class="sc-fznZeY jzOIvf left"
+    >
+      <div
+        class="sc-AxiKw jUuDCK"
+        title="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
+      >
+        June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
+      </div>
+    </div>
+    <div
+      class="sc-fznyAO hhDdtW left"
+    >
+      <div
+        class="sc-AxjAm eEVtq"
+      >
+        <span
+          class="sc-AxirZ izgUJV"
+        >
+          Archduke Franz Ferdinand of Austria and his wife, Sophie, are assassinated by a Bosnian Serb nationalist in Sarajevo.
+        </span>
+      </div>
+    </div>
+    <div
+      class="sc-fzplWN hftWTh left"
+      data-testid="tree-leaf"
+    >
+      <div
+        class="sc-fznKkj dpatIe left"
+        data-testid="tree-leaf-click"
+      >
+        <div
+          class="sc-AxheI dRuAGA in-active"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    class="sc-fzoLsD dxSmZJ right"
+    data-testid="branch-main"
+  >
+    <div
+      class="sc-fznZeY jzOIvf right"
+    >
+      <div
+        class="sc-AxiKw jUuDCK"
+        title="July 28, 1914"
+      >
+        July 28, 1914
+      </div>
+    </div>
+    <div
+      class="sc-fznyAO hhDdtW right"
+    >
+      <div
+        class="sc-AxjAm eEVtq"
+      >
+        <span
+          class="sc-AxirZ izgUJV"
+        >
+          World War I begins when Austria-Hungary declares war on Serbia.
+        </span>
+      </div>
+    </div>
+    <div
+      class="sc-fzplWN hftWTh right"
+      data-testid="tree-leaf"
+    >
+      <div
+        class="sc-fznKkj dpatIe right"
+        data-testid="tree-leaf-click"
+      >
+        <div
+          class="sc-AxheI dRuAGA in-active"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    class="sc-fzoLsD dxSmZJ left"
+    data-testid="branch-main"
+  >
+    <div
+      class="sc-fznZeY jzOIvf left"
+    >
+      <div
+        class="sc-AxiKw jUuDCK active"
+        title="August 1–28, 1914"
+      >
+        August 1–28, 1914
+      </div>
+    </div>
+    <div
+      class="sc-fznyAO hhDdtW left"
+    >
+      <div
+        class="sc-AxjAm eEVtq active"
+      >
+        <span
+          class="sc-AxirZ izgUJV"
+        >
+          Germany declares war on Russia, France, and Belgium. Britain declares war on Germany.
+    Austria declares war on Russia. Montenegro declares war on Austria. France declares war on Austria.
+    Britain declares war on Austria. Montenegro declares war on Germany. Japan declares war on Germany. Austria declares war on Belgium.
+        </span>
+      </div>
+    </div>
+    <div
+      class="sc-fzplWN hftWTh left"
+      data-testid="tree-leaf"
+    >
+      <div
+        class="sc-fznKkj dpatIe left"
+        data-testid="tree-leaf-click"
+      >
+        <div
+          class="sc-AxheI dRuAGA active"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    class="sc-fzoLsD dxSmZJ right"
+    data-testid="branch-main"
+  >
+    <div
+      class="sc-fznZeY jzOIvf right"
+    >
+      <div
+        class="sc-AxiKw jUuDCK"
+        title="September 6, 1914"
+      >
+        September 6, 1914
+      </div>
+    </div>
+    <div
+      class="sc-fznyAO hhDdtW right"
+    >
+      <div
+        class="sc-AxjAm eEVtq"
+      >
+        <span
+          class="sc-AxirZ izgUJV"
+        >
+          First Battle of the Marne begins. The Germans had advanced to within 30 miles of Paris, but over the next two days, the French are reinforced by 6,000 infantrymen who are transported to the front by hundreds of taxis.
+      The Germans dig in north of the Aisne River, and the trench warfare that is to typify the Western Front for the next four years begins.
+        </span>
+      </div>
+    </div>
+    <div
+      class="sc-fzplWN hftWTh right"
+      data-testid="tree-leaf"
+    >
+      <div
+        class="sc-fznKkj dpatIe right"
+        data-testid="tree-leaf-click"
+      >
+        <div
+          class="sc-AxheI dRuAGA in-active"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

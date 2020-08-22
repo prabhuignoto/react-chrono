@@ -1,10 +1,13 @@
 import React, { useRef } from "react";
-import TimelineItemContent from "../timeline-item-content";
-import { TimelineItemContentWrapper } from "./timeline-tree.styles";
-import TimelineItemTitle from "../timeline-item-title";
-import { Branch, TimelineTreeTitleWrapper } from "./timeline-tree.styles";
-import TreeLeaf from "./timeline-tree-leaf";
 import { TreeBranchModel } from "../models/TimelineTreeModel";
+import TimelineItemContent from "../timeline-item-content";
+import TimelineItemTitle from "../timeline-item-title";
+import TreeLeaf from "./timeline-tree-leaf";
+import {
+  Branch,
+  TimelineItemContentWrapper,
+  TimelineTreeTitleWrapper,
+} from "./timeline-tree.styles";
 
 const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
   className,
@@ -26,7 +29,12 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
   };
 
   return (
-    <Branch className={className} key={index} ref={contentRef}>
+    <Branch
+      className={className}
+      key={index}
+      ref={contentRef}
+      data-testid="branch-main"
+    >
       <TimelineTreeTitleWrapper className={className}>
         <TimelineItemTitle title={title} active={active} />
       </TimelineTreeTitleWrapper>

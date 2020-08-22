@@ -25,7 +25,7 @@ const TimelineTree: React.FunctionComponent<{
   };
 
   return (
-    <TimelineTreeWrapper>
+    <TimelineTreeWrapper data-testid="tree-main">
       {items.map((item, index) => {
         let className = index % 2 === 0 ? "left" : "right";
         return (

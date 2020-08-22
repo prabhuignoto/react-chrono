@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
-import Leaf from "./timeline-tree-leaf";
+import Leaf from "../timeline-tree-leaf";
 
 test("Check Timeline Leaf render", () => {
   const onClick = jest.fn();
@@ -76,4 +76,5 @@ test("Check Timeline Leaf onClick", async () => {
   fireEvent.click(element.children[0]);
   expect(onClick).toBeCalled();
   expect(onClick).toBeCalledWith("zz12xx");
+  expect(onActive).toBeCalled();
 });

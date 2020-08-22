@@ -26,6 +26,7 @@ const TreeLeaf: React.FunctionComponent<TreeLeafModel> = ({
         className={className}
         onClick={() => id && onClick(id)}
         ref={circleRef}
+        data-testid="tree-leaf-click"
       >
         <Circle className={active ? "active" : "in-active"} />
       </TrunkCircleWrapper>
