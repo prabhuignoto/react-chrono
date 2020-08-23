@@ -4,7 +4,7 @@ import {
   TimelineItemModel,
   TimelineItemViewModel,
 } from "../../models/TimelineItemModel";
-import Collection from "../index";
+import Collection from "../timeline-collection";
 
 const onClick = jest.fn();
 const autoScroll = jest.fn();

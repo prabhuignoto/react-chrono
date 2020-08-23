@@ -4,9 +4,9 @@ import useNewScrollPosition from "../effects/useNewScrollPosition";
 import { Scroll } from "../models/TimelineCollnModel";
 import { TimelineItemViewModel } from "../models/TimelineItemModel";
 import { TimelineModel } from "../models/TimelineModel";
-import TimelineCollection from "../timeline-collection";
-import TimelineControl from "../timeline-control";
-import TimelineTree from "../timeline-tree";
+import TimelineCollection from "../timeline-collection/timeline-collection";
+import TimelineControl from "../timeline-control/timeline-control";
+import TimelineTree from "../timeline-tree/timeline-tree";
 import {
   Outline,
   TimelineContentRender,

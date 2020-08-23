@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { TreeBranchModel } from "../models/TimelineTreeModel";
-import TimelineItemContent from "../timeline-item-content";
-import TimelineItemTitle from "../timeline-item-title";
+import TimelineItemContent from "../timeline-item-content/timeline-item-content";
+import TimelineItemTitle from "../timeline-item-title/timeline-item-title";
 import TreeLeaf from "./timeline-tree-leaf";
 import {
   Branch,

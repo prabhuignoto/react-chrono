@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import React, { useEffect, useRef, useState } from "react";
 import { TimelineItemModel } from "./models/TimelineItemModel";
 import { TimelineModel } from "./models/TimelineModel";
-import Timeline from "./timeline";
+import Timeline from "./timeline/timeline";
 
 interface TimelineMainModel extends TimelineModel {
   slideShow: boolean;

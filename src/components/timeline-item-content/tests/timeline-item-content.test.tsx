@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
-import Content from "../index";
+import Content from "../timeline-item-content";
 
 test("Test Timeline Item Content", () => {
   const { getByText } = render(<Content content="This is a test" />);

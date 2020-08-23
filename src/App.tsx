@@ -87,7 +87,7 @@ function App() {
         itemWidth={250}
         // mode="TREE"
         // mode="HORIZONTAL"
-        mode="TREE"
+        // mode="TREE"
         slideShow
       />
     </div>

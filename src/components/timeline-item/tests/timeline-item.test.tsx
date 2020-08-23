@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import React from "react";
-import Item from "../index";
+import Item from "../timeline-item";
 
 const onClick = jest.fn();
 const autoScroll = jest.fn();
