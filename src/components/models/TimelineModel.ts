@@ -10,4 +10,6 @@ export interface TimelineModel {
   onTimelineUpdated?: (id: number) => void;
   slideShowRunning?: boolean;
   titlePosition?: "TOP" | "BOTTOM" | "ALTERNATE";
+  disableNavOnScroll?: boolean;
+  disableNavOnKey?: boolean;
 }

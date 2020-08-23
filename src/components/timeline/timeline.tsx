@@ -16,14 +16,16 @@ import {
 } from "./timeline.style";
 
 const Timeline: React.FunctionComponent<TimelineModel> = ({
-  items,
+  activeTimelineItem,
+  disableNavOnScroll,
+  disableNavOnKey,
   itemWidth = 320,
+  items,
   mode = "HORIZONTAL",
-  onTimelineUpdated,
   onNext,
   onPrevious,
+  onTimelineUpdated,
   slideShowRunning,
-  activeTimelineItem
 }) => {
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
 
@@ -57,6 +59,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   };
 
   const handleMouseWheel = (evt: React.WheelEvent) => {
+    if (slideShowRunning) {
+      return;
+    }
+
     if (evt.deltaY > 0) {
       handleNext();
     } else if (evt.deltaY < 0) {
@@ -65,7 +71,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   };
 
   const handleTimelineItemClick = (id?: string) => {
-    if (id) {
+    if (id && !slideShowRunning) {
       for (let idx = 0; idx < items.length; idx++) {
         if (items[idx].id === id) {
           onTimelineUpdated && onTimelineUpdated(idx);
@@ -100,8 +106,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   return (
     <Wrapper
       tabIndex={0}
-      onKeyDown={(evt) => handleKeySelection(evt)}
-      onWheel={(evt) => handleMouseWheel(evt)}
+      onKeyDown={(evt) => (!disableNavOnKey ? handleKeySelection(evt) : null)}
+      onWheel={(evt) => (!disableNavOnScroll ? handleMouseWheel(evt) : null)}
       className={mode.toLowerCase()}
     >
       <TimelineMainWrapper ref={timelineMainRef} className={mode.toLowerCase()}>

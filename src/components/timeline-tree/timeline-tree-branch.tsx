@@ -39,7 +39,9 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
       <TimelineTreeTitleWrapper className={className}>
         <TimelineItemTitle title={title} active={active} />
       </TimelineTreeTitleWrapper>
-      <TimelineItemContentWrapper className={className}>
+      <TimelineItemContentWrapper
+        className={`${className} ${visible ? "visible" : ""}`}
+      >
         <TimelineItemContent content={contentText} active={active} />
       </TimelineItemContentWrapper>
       <TreeLeaf

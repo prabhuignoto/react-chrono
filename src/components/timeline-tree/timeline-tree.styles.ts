@@ -1,10 +1,23 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const TimelineTreeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
   padding: 1rem;
+`;
+
+const animateVisible = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+  }
 `;
 
 export const Branch = styled.div`
@@ -20,6 +33,7 @@ export const Branch = styled.div`
   &.right {
     margin-left: auto;
   }
+
   &.visible {
     visibility: visible;
   }
@@ -70,12 +84,18 @@ export const TreeTrunkWrapper = styled.div`
 
 export const TimelineItemContentWrapper = styled.div`
   width: 45%;
+  visibility: hidden;
   &.left {
     order: 1;
   }
   
   &.right {
     order: 2;
+  }
+
+  &.visible {
+    visibility: visible;
+    animation: ${animateVisible} 0.25s ease-in;
   }
 `;
 

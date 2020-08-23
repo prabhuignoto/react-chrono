@@ -14,7 +14,9 @@ const TimelineMain: React.FunctionComponent<Partial<TimelineMainModel>> = ({
   itemWidth = 320,
   titlePosition = "TOP",
   mode = "HORIZONTAL",
-  slideShow,
+  disableNavOnScroll = false,
+  disableNavOnKey = false,
+  slideShow = false,
 }) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
@@ -68,7 +70,7 @@ const TimelineMain: React.FunctionComponent<Partial<TimelineMainModel>> = ({
           setSlideshowRunning(false);
           setActiveTimelineItem(newItems.length - 1);
         }
-      }, 500);
+      }, 3000);
     }
   }, [items, slideShow, titlePosition]);
 
@@ -115,6 +117,8 @@ const TimelineMain: React.FunctionComponent<Partial<TimelineMainModel>> = ({
       onNext={handleOnNext}
       onPrevious={handleOnPrevious}
       activeTimelineItem={debActvTimelineItem}
+      disableNavOnScroll={disableNavOnScroll}
+      disableNavOnKey={disableNavOnKey}
     />
   );
 };

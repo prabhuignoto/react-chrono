@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Scroll } from "../models/TimelineCollnModel";
 import { TimelineItemViewModel } from "../models/TimelineItemModel";
 import TreeBranch from "./timeline-tree-branch";
@@ -10,8 +10,6 @@ const TimelineTree: React.FunctionComponent<{
   activeTimelineItem: number;
   autoScroll: (s: Partial<Scroll>) => void;
 }> = ({ items, onClick, activeTimelineItem, autoScroll }) => {
-  useEffect(() => {}, [activeTimelineItem]);
-
   const handleOnActive = (
     offset: number,
     wrapperOffset: number,
