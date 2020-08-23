@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Timeline Item render - Horizontal 1`] = `
+<div
+  class="sc-AxhCb IpIEE horizontal"
+  data-testid="timeline-item"
+>
+  <div
+    class="sc-AxgMl hIEZtR"
+  >
+    <div
+      class="sc-AxheI dRuAGA horizontal active"
+      data-testid="timeline-circle"
+    />
+  </div>
+  <div
+    class="sc-Axmtr jAsnA horizontal top"
+    data-testid="timeline-title"
+  >
+    <div
+      class="sc-AxiKw jUuDCK active"
+      title="test title"
+    >
+      test title
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Test Timeline Item render - Vertical 1`] = `
+<div
+  class="sc-AxhCb IpIEE vertical"
+  data-testid="timeline-item"
+>
+  <div
+    class="sc-AxgMl hIEZtR"
+  >
+    <div
+      class="sc-AxheI dRuAGA vertical active"
+      data-testid="timeline-circle"
+    />
+  </div>
+  <div
+    class="sc-AxmLO gXXkzo vertical"
+  >
+    <div
+      class="sc-Axmtr jAsnA vertical bottom"
+      data-testid="timeline-title"
+    >
+      <div
+        class="sc-AxiKw jUuDCK active"
+        title="test title"
+      >
+        test title
+      </div>
+    </div>
+    <div
+      class="sc-AxjAm eEVtq active"
+    >
+      <span
+        class="sc-AxirZ izgUJV"
+      >
+        This is a test content
+      </span>
+    </div>
+  </div>
+</div>
+`;

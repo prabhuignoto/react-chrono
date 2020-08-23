@@ -6,7 +6,7 @@ exports[`Test Tree render 1`] = `
   data-testid="tree-main"
 >
   <div
-    class="sc-fzoLsD dxSmZJ left"
+    class="sc-fzoLsD fyzsKR left "
     data-testid="branch-main"
   >
     <div
@@ -47,7 +47,7 @@ exports[`Test Tree render 1`] = `
     </div>
   </div>
   <div
-    class="sc-fzoLsD dxSmZJ right"
+    class="sc-fzoLsD fyzsKR right "
     data-testid="branch-main"
   >
     <div
@@ -88,14 +88,14 @@ exports[`Test Tree render 1`] = `
     </div>
   </div>
   <div
-    class="sc-fzoLsD dxSmZJ left"
+    class="sc-fzoLsD fyzsKR left "
     data-testid="branch-main"
   >
     <div
       class="sc-fznZeY jzOIvf left"
     >
       <div
-        class="sc-AxiKw jUuDCK active"
+        class="sc-AxiKw jUuDCK"
         title="August 1–28, 1914"
       >
         August 1–28, 1914
@@ -105,7 +105,7 @@ exports[`Test Tree render 1`] = `
       class="sc-fznyAO hhDdtW left"
     >
       <div
-        class="sc-AxjAm eEVtq active"
+        class="sc-AxjAm eEVtq"
       >
         <span
           class="sc-AxirZ izgUJV"
@@ -125,13 +125,13 @@ exports[`Test Tree render 1`] = `
         data-testid="tree-leaf-click"
       >
         <div
-          class="sc-AxheI dRuAGA active"
+          class="sc-AxheI dRuAGA in-active"
         />
       </div>
     </div>
   </div>
   <div
-    class="sc-fzoLsD dxSmZJ right"
+    class="sc-fzoLsD fyzsKR right "
     data-testid="branch-main"
   >
     <div

@@ -71,6 +71,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
       <TimelineContentContainer className={className} ref={contentRef}>
         {mode === "VERTICAL" && (
           <TimelineTitleContainer
+            data-testid="timeline-title"
             className={`${mode.toLowerCase()} ${position}`}
           >
             <TimelineItemTitle title={title} active={active} />
@@ -90,17 +91,25 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   };
 
   return (
-    <Wrapper ref={wrapperRef} className={mode.toLowerCase()}>
+    <Wrapper
+      ref={wrapperRef}
+      className={mode.toLowerCase()}
+      data-testid="timeline-item"
+    >
       {mode === "HORIZONTAL" && active ? showTimelineContent() : null}
       <CircleWrapper>
         <Circle
           className={`${mode.toLowerCase()} ${active ? "active" : "in-active"}`}
           onClick={handleClick}
           ref={circleRef}
+          data-testid="timeline-circle"
         ></Circle>
       </CircleWrapper>
       {mode === "HORIZONTAL" && (
-        <TimelineTitleContainer className={`${mode.toLowerCase()} ${position}`}>
+        <TimelineTitleContainer
+          className={`${mode.toLowerCase()} ${position}`}
+          data-testid="timeline-title"
+        >
           <TimelineItemTitle title={title} active={active} />
         </TimelineTitleContainer>
       )}

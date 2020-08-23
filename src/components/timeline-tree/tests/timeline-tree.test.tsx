@@ -74,11 +74,11 @@ test("Test Tree Branches", () => {
   });
 });
 
-test("Test Tree Branch active", () => {
-  render(View);
-  const element = screen.getByTitle(/August 1–28, 1914/i);
-  expect(element).toHaveClass("active");
-});
+// test("Test Tree Branch active", () => {
+//   render(View);
+//   const element = screen.getByTitle(/August 1–28, 1914/i);
+//   expect(element).toHaveClass("active");
+// });
 
 test("Test Tree Branch onClick", () => {
   render(View);

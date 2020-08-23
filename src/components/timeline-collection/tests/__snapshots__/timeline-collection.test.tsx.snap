@@ -6,21 +6,24 @@ exports[`Test Collection Horizontal render 1`] = `
   data-testid="timeline-collection"
 >
   <li
-    class="sc-fzoLsD dkcRA-d horizontal"
+    class="sc-fzoLsD iwRVyL horizontal "
     width="250"
   >
     <div
       class="sc-AxhCb IpIEE horizontal"
+      data-testid="timeline-item"
     >
       <div
         class="sc-AxgMl hIEZtR"
       >
         <div
           class="sc-AxheI dRuAGA horizontal in-active"
+          data-testid="timeline-circle"
         />
       </div>
       <div
         class="sc-Axmtr jAsnA horizontal undefined"
+        data-testid="timeline-title"
       >
         <div
           class="sc-AxiKw jUuDCK"
@@ -32,21 +35,24 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fzoLsD dkcRA-d horizontal"
+    class="sc-fzoLsD iwRVyL horizontal "
     width="250"
   >
     <div
       class="sc-AxhCb IpIEE horizontal"
+      data-testid="timeline-item"
     >
       <div
         class="sc-AxgMl hIEZtR"
       >
         <div
           class="sc-AxheI dRuAGA horizontal in-active"
+          data-testid="timeline-circle"
         />
       </div>
       <div
         class="sc-Axmtr jAsnA horizontal undefined"
+        data-testid="timeline-title"
       >
         <div
           class="sc-AxiKw jUuDCK"
@@ -58,21 +64,24 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fzoLsD dkcRA-d horizontal"
+    class="sc-fzoLsD iwRVyL horizontal "
     width="250"
   >
     <div
       class="sc-AxhCb IpIEE horizontal"
+      data-testid="timeline-item"
     >
       <div
         class="sc-AxgMl hIEZtR"
       >
         <div
           class="sc-AxheI dRuAGA horizontal in-active"
+          data-testid="timeline-circle"
         />
       </div>
       <div
         class="sc-Axmtr jAsnA horizontal undefined"
+        data-testid="timeline-title"
       >
         <div
           class="sc-AxiKw jUuDCK"
@@ -84,21 +93,24 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fzoLsD dkcRA-d horizontal"
+    class="sc-fzoLsD iwRVyL horizontal "
     width="250"
   >
     <div
       class="sc-AxhCb IpIEE horizontal"
+      data-testid="timeline-item"
     >
       <div
         class="sc-AxgMl hIEZtR"
       >
         <div
           class="sc-AxheI dRuAGA horizontal in-active"
+          data-testid="timeline-circle"
         />
       </div>
       <div
         class="sc-Axmtr jAsnA horizontal undefined"
+        data-testid="timeline-title"
       >
         <div
           class="sc-AxiKw jUuDCK"
@@ -118,65 +130,73 @@ exports[`Test Collection Tree render 1`] = `
   data-testid="timeline-collection"
 >
   <li
-    class="sc-fzoLsD dkcRA-d tree"
+    class="sc-fzoLsD iwRVyL tree "
     width="250"
   >
     <div
       class="sc-AxhCb IpIEE tree"
+      data-testid="timeline-item"
     >
       <div
         class="sc-AxgMl hIEZtR"
       >
         <div
           class="sc-AxheI dRuAGA tree in-active"
+          data-testid="timeline-circle"
         />
       </div>
     </div>
   </li>
   <li
-    class="sc-fzoLsD dkcRA-d tree"
+    class="sc-fzoLsD iwRVyL tree "
     width="250"
   >
     <div
       class="sc-AxhCb IpIEE tree"
+      data-testid="timeline-item"
     >
       <div
         class="sc-AxgMl hIEZtR"
       >
         <div
           class="sc-AxheI dRuAGA tree in-active"
+          data-testid="timeline-circle"
         />
       </div>
     </div>
   </li>
   <li
-    class="sc-fzoLsD dkcRA-d tree"
+    class="sc-fzoLsD iwRVyL tree "
     width="250"
   >
     <div
       class="sc-AxhCb IpIEE tree"
+      data-testid="timeline-item"
     >
       <div
         class="sc-AxgMl hIEZtR"
       >
         <div
           class="sc-AxheI dRuAGA tree in-active"
+          data-testid="timeline-circle"
         />
       </div>
     </div>
   </li>
   <li
-    class="sc-fzoLsD dkcRA-d tree"
+    class="sc-fzoLsD iwRVyL tree "
     width="250"
   >
     <div
       class="sc-AxhCb IpIEE tree"
+      data-testid="timeline-item"
     >
       <div
         class="sc-AxgMl hIEZtR"
       >
         <div
           class="sc-AxheI dRuAGA tree in-active"
+          data-testid="timeline-circle"
         />
       </div>
     </div>
@@ -190,17 +210,19 @@ exports[`Test Collection Vertical render 1`] = `
   data-testid="timeline-collection"
 >
   <li
-    class="sc-fzoLsD dkcRA-d vertical"
+    class="sc-fzoLsD iwRVyL vertical "
     width="250"
   >
     <div
       class="sc-AxhCb IpIEE vertical"
+      data-testid="timeline-item"
     >
       <div
         class="sc-AxgMl hIEZtR"
       >
         <div
           class="sc-AxheI dRuAGA vertical in-active"
+          data-testid="timeline-circle"
         />
       </div>
       <div
@@ -208,6 +230,7 @@ exports[`Test Collection Vertical render 1`] = `
       >
         <div
           class="sc-Axmtr jAsnA vertical undefined"
+          data-testid="timeline-title"
         >
           <div
             class="sc-AxiKw jUuDCK"
@@ -229,17 +252,19 @@ exports[`Test Collection Vertical render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fzoLsD dkcRA-d vertical"
+    class="sc-fzoLsD iwRVyL vertical "
     width="250"
   >
     <div
       class="sc-AxhCb IpIEE vertical"
+      data-testid="timeline-item"
     >
       <div
         class="sc-AxgMl hIEZtR"
       >
         <div
           class="sc-AxheI dRuAGA vertical in-active"
+          data-testid="timeline-circle"
         />
       </div>
       <div
@@ -247,6 +272,7 @@ exports[`Test Collection Vertical render 1`] = `
       >
         <div
           class="sc-Axmtr jAsnA vertical undefined"
+          data-testid="timeline-title"
         >
           <div
             class="sc-AxiKw jUuDCK"
@@ -268,17 +294,19 @@ exports[`Test Collection Vertical render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fzoLsD dkcRA-d vertical"
+    class="sc-fzoLsD iwRVyL vertical "
     width="250"
   >
     <div
       class="sc-AxhCb IpIEE vertical"
+      data-testid="timeline-item"
     >
       <div
         class="sc-AxgMl hIEZtR"
       >
         <div
           class="sc-AxheI dRuAGA vertical in-active"
+          data-testid="timeline-circle"
         />
       </div>
       <div
@@ -286,6 +314,7 @@ exports[`Test Collection Vertical render 1`] = `
       >
         <div
           class="sc-Axmtr jAsnA vertical undefined"
+          data-testid="timeline-title"
         >
           <div
             class="sc-AxiKw jUuDCK"
@@ -309,17 +338,19 @@ exports[`Test Collection Vertical render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fzoLsD dkcRA-d vertical"
+    class="sc-fzoLsD iwRVyL vertical "
     width="250"
   >
     <div
       class="sc-AxhCb IpIEE vertical"
+      data-testid="timeline-item"
     >
       <div
         class="sc-AxgMl hIEZtR"
       >
         <div
           class="sc-AxheI dRuAGA vertical in-active"
+          data-testid="timeline-circle"
         />
       </div>
       <div
@@ -327,6 +358,7 @@ exports[`Test Collection Vertical render 1`] = `
       >
         <div
           class="sc-Axmtr jAsnA vertical undefined"
+          data-testid="timeline-title"
         >
           <div
             class="sc-AxiKw jUuDCK"

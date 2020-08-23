@@ -100,14 +100,3 @@ test("Test Collection Items length", () => {
 
   expect(Array.from(element.children).length).toEqual(4);
 });
-
-test("Test Collection Items Test Handlers", () => {
-  render(Tree);
-  const element = screen.getByTestId("timeline-collection");
-  const firstItem = element.children[0];
-
-  fireEvent.click(firstItem.children[0]);
-  console.log(firstItem.children[0].innerHTML);
-
-  expect(onClick).toBeCalled();
-});
