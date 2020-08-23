@@ -8,11 +8,11 @@ export const TimelineTreeWrapper = styled.div`
 `;
 
 export const Branch = styled.div`
+  align-items: center;
   display: flex;
   position: relative;
-  align-items: center;
-  width: 100%;
   visibility: hidden;
+  width: 100%;
   
   &.left {
     margin-right: auto;
@@ -26,24 +26,24 @@ export const Branch = styled.div`
 `;
 
 export const Trunk = styled.div`
-  width: 4px;
+  background: #0f52ba;
   height: 100%;
-  position: absolute;
   height: 100%;
   left: 0;
-  right: 0;
   margin-left: auto;
   margin-right: auto;
-  background: #0f52ba;
+  position: absolute;
+  right: 0;
+  width: 4px;
 `;
 
 export const TreeTrunkWrapper = styled.div`
-  height: 100%;
-  width: 10%;
-  position: relative;
-  display: flex;
   align-items: center;
+  display: flex;
+  height: 100%;
   justify-content: center;
+  position: relative;
+  width: 10%;
   
   &.left {
     order: 2;
@@ -54,16 +54,16 @@ export const TreeTrunkWrapper = styled.div`
   }
 
   &::after {
+    background: #0f52ba;
     content: '';
     display: block;
+    height: 100%;
     left: 0;
-    right: 0;
     margin-left: auto;
     margin-right: auto;
-    height: 100%;
     position: absolute;
+    right: 0;
     width: 3px;
-    background: #0f52ba;
     z-index: -1;
   }
 `;
@@ -79,22 +79,22 @@ export const TimelineItemContentWrapper = styled.div`
   }
 `;
 
-export const TrunkCircleWrapper = styled.div`
+export const TrunkPointWrapper = styled.div`
   position: relative;
 `;
 
 export const TimelineTreeTitleWrapper = styled.div`
-  width: 45%;
-  display: flex;
   align-items: center;
+  display: flex;
+  width: 45%;
 
   &.left {
-    order: 3;
     justify-content: flex-start;
+    order: 3;
   }
   
   &.right {
-    order: 1;
     justify-content: flex-end;
+    order: 1;
   }
 `;

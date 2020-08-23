@@ -42,7 +42,7 @@ const show = keyframes`
   }
 `;
 
-export const CircleWrapper = styled.div`
+export const TimelinePointWrapper = styled.div`
   width: 5rem;
   display: flex;
   align-items: center;
@@ -51,7 +51,7 @@ export const CircleWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const Circle = styled.div`
+export const TimelinePoint = styled.div`
   background: #0f52ba;
   border-radius: 50%;
   cursor: pointer;

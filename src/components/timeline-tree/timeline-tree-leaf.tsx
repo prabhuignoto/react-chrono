@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { TreeLeafModel } from "../models/TimelineTreeModel";
-import { Circle } from "../timeline-item/timeline-item.styles";
-import { TreeTrunkWrapper, TrunkCircleWrapper } from "./timeline-tree.styles";
+import { TimelinePoint } from "../timeline-item/timeline-item.styles";
+import { TreeTrunkWrapper, TrunkPointWrapper } from "./timeline-tree.styles";
 
 const TreeLeaf: React.FunctionComponent<TreeLeafModel> = ({
   className,
@@ -22,14 +22,14 @@ const TreeLeaf: React.FunctionComponent<TreeLeafModel> = ({
 
   return (
     <TreeTrunkWrapper className={className} data-testid="tree-leaf">
-      <TrunkCircleWrapper
+      <TrunkPointWrapper
         className={className}
         onClick={() => id && onClick(id)}
         ref={circleRef}
         data-testid="tree-leaf-click"
       >
-        <Circle className={active ? "active" : "in-active"} />
-      </TrunkCircleWrapper>
+        <TimelinePoint className={active ? "active" : "in-active"} />
+      </TrunkPointWrapper>
     </TreeTrunkWrapper>
   );
 };

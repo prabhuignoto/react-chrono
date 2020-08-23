@@ -1,11 +1,13 @@
 import React from "react";
-import { PaneTitle } from "./timeline-item-pane.styles";
+import { TitleWrapper } from "./timeline-item-title.styles";
 
 const TimelineItemTitle: React.FunctionComponent<{
   title?: string;
   active?: boolean;
-}> = ({ title, active }) => {
-  return <PaneTitle className={active ? "active" : ""} title={title}>{title}</PaneTitle>;
-};
+}> = ({ title, active }) => (
+  <TitleWrapper className={active ? "active" : ""} title={title}>
+    {title}
+  </TitleWrapper>
+);
 
 export default TimelineItemTitle;

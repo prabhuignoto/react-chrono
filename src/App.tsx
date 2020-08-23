@@ -85,10 +85,8 @@ function App() {
         items={items}
         titlePosition="TOP"
         itemWidth={250}
-        // mode="TREE"
-        // mode="HORIZONTAL"
-        // mode="TREE"
-        slideShow
+        mode="HORIZONTAL"
+        slideShow={false}
       />
     </div>
   );

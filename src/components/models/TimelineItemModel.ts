@@ -12,5 +12,5 @@ export interface TimelineItemModel {
 export interface TimelineItemViewModel extends TimelineItemModel {
   mode: "HORIZONTAL" | "VERTICAL" | "TREE";
   onClick: (id?: string) => void;
-  autoScroll: ({ circleOffset, circleWidth, circleHeight, contentHeight }: Partial<Scroll>) => void;
+  autoScroll: ({ timelinePointOffset, timelinePointWidth, timelinePointHeight, timelineContentHeight }: Partial<Scroll>) => void;
 }

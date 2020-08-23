@@ -11,45 +11,45 @@ useNewScrollPosition = function (mode: Mode, itemWidth?: number) {
 
   const computeNewOffset = useCallback((parent: HTMLElement, scroll: Partial<Scroll>) => {
     const { clientWidth, scrollLeft, scrollTop, clientHeight } = parent;
-    const { circleOffset, circleWidth, contentHeight, contentOffset } = scroll;
+    const { timelinePointOffset, timelinePointWidth, timelineContentHeight, timelineContentOffset } = scroll;
 
-    if (!circleOffset) {
+    if (!timelinePointOffset) {
       return
     }
 
-    if (mode === "HORIZONTAL" && itemWidth && circleWidth) {
+    if (mode === "HORIZONTAL" && itemWidth && timelinePointWidth) {
       let contrRight = scrollLeft + clientWidth;
-      let circRight = circleOffset + circleWidth;
-      let isVisible = circleOffset >= scrollLeft && circRight <= contrRight;
+      let circRight = timelinePointOffset + timelinePointWidth;
+      let isVisible = timelinePointOffset >= scrollLeft && circRight <= contrRight;
       let isPartiallyVisible =
-        (circleOffset < scrollLeft && circRight > scrollLeft) ||
-        (circRight > contrRight && circleOffset < contrRight);
+        (timelinePointOffset < scrollLeft && circRight > scrollLeft) ||
+        (circRight > contrRight && timelinePointOffset < contrRight);
 
-      const leftGap = circleOffset - scrollLeft;
-      const rightGap = contrRight - circleOffset;
+      const leftGap = timelinePointOffset - scrollLeft;
+      const rightGap = contrRight - timelinePointOffset;
 
       if (!(isVisible || isPartiallyVisible)) {
-        setNewOffset(circleOffset - itemWidth);
+        setNewOffset(timelinePointOffset - itemWidth);
       } else if (leftGap <= itemWidth && leftGap >= 0) {
-        setNewOffset(circleOffset - itemWidth);
+        setNewOffset(timelinePointOffset - itemWidth);
       } else if (rightGap <= itemWidth && rightGap >= 0) {
-        setNewOffset(circleOffset - itemWidth);
+        setNewOffset(timelinePointOffset - itemWidth);
       }
     } else if (mode === "VERTICAL" || mode === "TREE") {
-      if (!contentOffset || !contentHeight) {
+      if (!timelineContentOffset || !timelineContentHeight) {
         return;
       }
       let contrBottom = scrollTop + clientHeight;
-      let circBottom = contentOffset + contentHeight;
+      let circBottom = timelineContentOffset + timelineContentHeight;
       let isVisible =
-        contentOffset >= scrollTop && circBottom <= contrBottom;
+        timelineContentOffset >= scrollTop && circBottom <= contrBottom;
 
       let isPartiallyVisible =
-        (contentOffset < scrollTop && circBottom > scrollTop) ||
-        (circBottom > contrBottom && contentOffset < contrBottom);
+        (timelineContentOffset < scrollTop && circBottom > scrollTop) ||
+        (circBottom > contrBottom && timelineContentOffset < contrBottom);
 
       if (!isVisible || isPartiallyVisible) {
-        setNewOffset(contentOffset - contentHeight);
+        setNewOffset(timelineContentOffset - timelineContentHeight);
       }
     }
   }, [mode, itemWidth]);

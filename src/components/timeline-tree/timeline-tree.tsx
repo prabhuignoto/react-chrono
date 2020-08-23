@@ -18,9 +18,9 @@ const TimelineTree: React.FunctionComponent<{
     height: number
   ) => {
     autoScroll({
-      circleOffset: offset,
-      contentHeight: height,
-      contentOffset: wrapperOffset,
+      timelinePointOffset: offset,
+      timelineContentHeight: height,
+      timelineContentOffset: wrapperOffset,
     });
   };
 

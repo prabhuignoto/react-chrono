@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDebounce } from "use-debounce";
+import React, { useCallback, useEffect, useRef } from "react";
 import useNewScrollPosition from "../effects/useNewScrollPosition";
 import { Scroll } from "../models/TimelineCollnModel";
 import { TimelineItemViewModel } from "../models/TimelineItemModel";
@@ -19,26 +18,23 @@ import {
 const Timeline: React.FunctionComponent<TimelineModel> = ({
   items,
   itemWidth = 320,
-  titlePosition = "TOP",
   mode = "HORIZONTAL",
   onTimelineUpdated,
+  onNext,
+  onPrevious,
+  slideShowRunning,
+  activeTimelineItem
 }) => {
-  const [activeTimelineItem, setActiveTimelineItem] = useState(0);
-  const [debActvTimelineItem] = useDebounce(activeTimelineItem, 50);
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
 
   const timelineMainRef = useRef<HTMLDivElement>(null);
 
   const handleNext = () => {
-    if (debActvTimelineItem < items.length - 1) {
-      setActiveTimelineItem(debActvTimelineItem + 1);
-    }
+    onNext();
   };
 
   const handlePrevious = () => {
-    if (debActvTimelineItem > 0) {
-      setActiveTimelineItem(debActvTimelineItem - 1);
-    }
+    onPrevious();
   };
 
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -68,27 +64,26 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     }
   };
 
-  useEffect(() => {
-    onTimelineUpdated && onTimelineUpdated(debActvTimelineItem);
-  }, [debActvTimelineItem]);
-
   const handleTimelineItemClick = (id?: string) => {
     if (id) {
       for (let idx = 0; idx < items.length; idx++) {
         if (items[idx].id === id) {
-          setActiveTimelineItem(idx);
+          onTimelineUpdated && onTimelineUpdated(idx);
           break;
         }
       }
     }
   };
 
-  const handleScroll = useCallback((scroll: Partial<Scroll>) => {
-    const element = timelineMainRef.current;
-    if (element) {
-      setNewOffset(element, scroll);
-    }
-  }, []);
+  const handleScroll = useCallback(
+    (scroll: Partial<Scroll>) => {
+      const element = timelineMainRef.current;
+      if (element) {
+        setNewOffset(element, scroll);
+      }
+    },
+    [setNewOffset]
+  );
 
   useEffect(() => {
     const ele = timelineMainRef.current;
@@ -125,17 +120,17 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
           <TimelineTree
             items={items as TimelineItemViewModel[]}
             onClick={handleTimelineItemClick}
-            activeTimelineItem={debActvTimelineItem}
+            activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
           />
         )}
       </TimelineMainWrapper>
-      <TimelineControlContainer>
+      <TimelineControlContainer className={slideShowRunning ? "hide" : "show"}>
         <TimelineControl
           onNext={handleNext}
           onPrevious={handlePrevious}
-          disableLeft={debActvTimelineItem === 0}
-          disableRight={debActvTimelineItem === items.length - 1}
+          disableLeft={activeTimelineItem === 0}
+          disableRight={activeTimelineItem === items.length - 1}
         />
       </TimelineControlContainer>
       <TimelineContentRender id="content-render" />

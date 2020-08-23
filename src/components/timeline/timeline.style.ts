@@ -71,6 +71,14 @@ export const TimelineControlContainer = styled.div`
   display: flex;
   height: 2rem;
   width: 100%;
+
+  &.hide {
+    visibility: hidden;
+  }
+
+  &.show {
+    visibility: visible;
+  }
 `;
 
 export const TimelineContentRender = styled.div`

@@ -22,3 +22,9 @@ test("Check Timeline Active", () => {
     "background: #ffdf00;color: #0f52ba;font-weight: 600;"
   );
 });
+
+test("Check Timeline Not Active", () => {
+  const { getByText } = render(<Title title="Test" active={false} />);
+  const titleElement = getByText(/test/i);
+  expect(titleElement).not.toHaveClass("active");
+});

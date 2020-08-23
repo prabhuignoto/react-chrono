@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useDebounce } from "use-debounce";
 import { TimelineItemModel } from "./models/TimelineItemModel";
 import { TimelineModel } from "./models/TimelineModel";
 import Timeline from "./timeline/timeline";
@@ -8,7 +9,7 @@ interface TimelineMainModel extends TimelineModel {
   slideShow: boolean;
 }
 
-const TimelineMain: React.FunctionComponent<TimelineMainModel> = ({
+const TimelineMain: React.FunctionComponent<Partial<TimelineMainModel>> = ({
   items,
   itemWidth = 320,
   titlePosition = "TOP",
@@ -18,20 +19,30 @@ const TimelineMain: React.FunctionComponent<TimelineMainModel> = ({
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
   const timer = useRef<number>();
+  const [slideshowRunning, setSlideshowRunning] = useState(false);
+
+  const [activeTimelineItem, setActiveTimelineItem] = useState(0);
+  const [debActvTimelineItem] = useDebounce(activeTimelineItem, 50);
 
   useEffect(() => {
+    if (!items) {
+      return;
+    }
+
     const newItems = items.map((item, index) => {
       return Object.assign({}, item, {
         position: titlePosition.toLowerCase(),
         id: nanoid(),
         visible: slideShow ? index === 0 : true,
-        active: index === 0
+        active: index === 0,
       });
     });
+
     setItems(newItems);
 
     if (slideShow) {
       timeLineItemsRef.current = newItems.slice(0);
+      setSlideshowRunning(true);
 
       timer.current = setInterval(() => {
         const invisibleElements = timeLineItemsRef.current?.filter(
@@ -48,16 +59,18 @@ const TimelineMain: React.FunctionComponent<TimelineMainModel> = ({
             })
           );
 
-          if(newItems) {
+          if (newItems) {
             timeLineItemsRef.current = newItems.slice(0);
             setItems(newItems);
           }
         } else {
           clearInterval(timer.current);
+          setSlideshowRunning(false);
+          setActiveTimelineItem(newItems.length - 1);
         }
-      }, 2000);
+      }, 500);
     }
-  }, []);
+  }, [items, slideShow, titlePosition]);
 
   const handleTimelineUpdate = (actvTimelineIndex: number) => {
     setItems((items) =>
@@ -67,6 +80,28 @@ const TimelineMain: React.FunctionComponent<TimelineMainModel> = ({
         })
       )
     );
+    setActiveTimelineItem(actvTimelineIndex);
+  };
+
+  const handleOnNext = () => {
+    if (!items) {
+      return;
+    }
+    if (debActvTimelineItem < items.length - 1) {
+      const newTimeLineItem = debActvTimelineItem + 1;
+
+      handleTimelineUpdate(newTimeLineItem);
+      setActiveTimelineItem(newTimeLineItem);
+    }
+  };
+
+  const handleOnPrevious = () => {
+    if (debActvTimelineItem > 0) {
+      const newTimeLineItem = debActvTimelineItem - 1;
+
+      handleTimelineUpdate(newTimeLineItem);
+      setActiveTimelineItem(newTimeLineItem);
+    }
   };
 
   return (
@@ -75,7 +110,11 @@ const TimelineMain: React.FunctionComponent<TimelineMainModel> = ({
       titlePosition={titlePosition}
       mode={mode}
       items={timeLineItems}
-      onTimelineUpdated={handleTimelineUpdate}
+      onTimelineUpdated={useCallback(handleTimelineUpdate, [])}
+      slideShowRunning={slideshowRunning}
+      onNext={handleOnNext}
+      onPrevious={handleOnPrevious}
+      activeTimelineItem={debActvTimelineItem}
     />
   );
 };

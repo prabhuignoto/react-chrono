@@ -3,7 +3,7 @@ export interface TreeLeafModel {
   id?: string;
   active?: boolean;
   onClick: (id: string) => void;
-  onActive: (circleOffset: number) => void;
+  onActive: (timelinePointOffset: number) => void;
 }
 
 export interface TreeBranchModel {
@@ -14,9 +14,9 @@ export interface TreeBranchModel {
   id?: string;
   onClick: (id: string) => void;
   onActive: (
-    circleOffset: number,
-    contentHeight: number,
-    contentOffset: number
+    timelinePointOffset: number,
+    timelineContentHeight: number,
+    timelineContentOffset: number
   ) => void;
   title: string;
   visible?: boolean;

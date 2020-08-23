@@ -7,8 +7,8 @@ export const TimelineItemContentWrapper = styled.div`
   display: flex;
   filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.25));
   font-family: 'Roboto Mono', monospace;
-  font-size: 0.85rem;
-  font-weight: 400;
+  font-size: 0.9rem;
+  font-weight: 500;
   height: 100%;
   justify-content: center;
   line-height: 1.5rem;

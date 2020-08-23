@@ -1,9 +1,13 @@
 import { TimelineItemModel } from "./TimelineItemModel";
 
 export interface TimelineModel {
+  activeTimelineItem: number;
   itemWidth?: number;
   items: TimelineItemModel[];
   mode?: "VERTICAL" | "HORIZONTAL" | "TREE";
-  titlePosition?: "TOP" | "BOTTOM" | "ALTERNATE";
+  onNext: () => void;
+  onPrevious: () => void;
   onTimelineUpdated?: (id: number) => void;
+  slideShowRunning?: boolean;
+  titlePosition?: "TOP" | "BOTTOM" | "ALTERNATE";
 }

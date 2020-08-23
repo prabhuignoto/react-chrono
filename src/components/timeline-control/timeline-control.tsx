@@ -12,7 +12,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   onNext,
   onPrevious,
   disableLeft,
-  disableRight
+  disableRight,
 }) => {
   return (
     <TimelineControlWrapper>

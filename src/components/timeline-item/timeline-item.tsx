@@ -4,9 +4,9 @@ import { TimelineItemViewModel } from "../models/TimelineItemModel";
 import TimelineItemContent from "../timeline-item-content/timeline-item-content";
 import TimelineItemTitle from "../timeline-item-title/timeline-item-title";
 import {
-  Circle,
-  CircleWrapper,
   TimelineContentContainer,
+  TimelinePoint,
+  TimelinePointWrapper,
   TimelineTitleContainer,
   Wrapper,
 } from "./timeline-item.styles";
@@ -43,15 +43,15 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
 
         if (mode === "HORIZONTAL") {
           autoScroll({
-            circleOffset: circleOffsetLeft + wrapperOffsetLeft,
-            circleWidth: circle.clientWidth,
+            timelinePointOffset: circleOffsetLeft + wrapperOffsetLeft,
+            timelinePointWidth: circle.clientWidth,
           });
         } else {
           autoScroll({
-            circleOffset: circleOffsetTop + wrapperOffsetTop,
-            circleHeight: circle.clientHeight,
-            contentHeight: content?.clientHeight,
-            contentOffset: wrapperOffsetTop,
+            timelinePointOffset: circleOffsetTop + wrapperOffsetTop,
+            timelinePointHeight: circle.clientHeight,
+            timelineContentHeight: content?.clientHeight,
+            timelineContentOffset: wrapperOffsetTop,
           });
         }
       }
@@ -97,14 +97,14 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
       data-testid="timeline-item"
     >
       {mode === "HORIZONTAL" && active ? showTimelineContent() : null}
-      <CircleWrapper>
-        <Circle
+      <TimelinePointWrapper>
+        <TimelinePoint
           className={`${mode.toLowerCase()} ${active ? "active" : "in-active"}`}
           onClick={handleClick}
           ref={circleRef}
           data-testid="timeline-circle"
-        ></Circle>
-      </CircleWrapper>
+        ></TimelinePoint>
+      </TimelinePointWrapper>
       {mode === "HORIZONTAL" && (
         <TimelineTitleContainer
           className={`${mode.toLowerCase()} ${position}`}
