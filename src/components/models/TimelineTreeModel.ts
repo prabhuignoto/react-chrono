@@ -10,6 +10,7 @@ export interface TreeBranchModel {
   className: string;
   index: number;
   contentText: string;
+  contentTitle?: string;
   active?: boolean;
   id?: string;
   onClick: (id: string) => void;

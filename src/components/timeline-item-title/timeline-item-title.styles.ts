@@ -5,7 +5,7 @@ export const TitleWrapper = styled.div`
   font-family: 'Roboto Mono', monospace;
   padding: 0.25rem 0.5rem;
   white-space: nowrap;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 400;
   overflow: hidden;
   max-width:  180px;

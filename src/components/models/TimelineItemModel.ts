@@ -2,6 +2,7 @@ import { Scroll } from "./TimelineCollnModel";
 
 export interface TimelineItemModel {
   active?: boolean;
+  contentTitle?: string;
   contentText: string;
   id?: string;
   position?: string;

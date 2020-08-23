@@ -38,6 +38,7 @@ const TimelineTree: React.FunctionComponent<{
             key={item.id}
             title={item.title}
             visible={item.visible}
+            contentTitle={item.contentTitle}
           />
         );
       })}

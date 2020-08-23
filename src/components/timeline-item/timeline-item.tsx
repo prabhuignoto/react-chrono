@@ -14,6 +14,7 @@ import {
 const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   active,
   contentText,
+  contentTitle,
   id,
   mode,
   onClick,
@@ -77,7 +78,11 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
             <TimelineItemTitle title={title} active={active} />
           </TimelineTitleContainer>
         )}
-        <TimelineItemContent content={contentText} active={active} />
+        <TimelineItemContent
+          content={contentText}
+          active={active}
+          title={contentTitle}
+        />
       </TimelineContentContainer>
     );
   };

@@ -26,6 +26,7 @@ export const Branch = styled.div`
   position: relative;
   visibility: hidden;
   width: 100%;
+  min-height: 200px;
   
   &.left {
     margin-right: auto;

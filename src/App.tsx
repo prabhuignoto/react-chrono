@@ -7,37 +7,80 @@ import { TimelineItemModel } from "./components/models/TimelineItemModel";
 function App() {
   const items: TimelineItemModel[] = [
     {
-      title: "1920",
-      contentText: "Robert Goddard suggested sending rockets to the Moon.",
+      title: "1 September 1939",
+      contentText: "German troops dismantle a Polish border post.",
+      contentTitle: "The German invasion of Poland",
     },
     {
-      title: "1959",
+      title: "May 1940",
+      contentTitle: "Dunkirk",
       contentText:
-        "Soviet spacecraft Luna 2 reached the Moon, impacting near the crater Autolycus.",
+        "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.",
     },
     {
-      title: "1961",
-      contentText: `U.S. Pres. John F. Kennedy proposed a crewed lunar program.`,
+      title: "25 July 1940",
+      contentTitle: "The Battle of Britain",
+      contentText: `RAF Spitfire pilots scramble for their planes`,
     },
     {
-      title: "1964",
-      contentText: `NASA’s Ranger 7 produced the first close-up pictures of the lunar surface.`,
+      title: "June 1941",
+      contentTitle: "Operation Barbarossa",
+      contentText: `A column of Red Army prisoners taken during the first days of the German invasion`,
     },
     {
-      title: "1966",
-      contentText: `Luna 9 showed the lunar surface was not too soft to support a spacecraft.`,
+      title: "7 December 1941",
+      contentTitle: "Pearl Harbor",
+      contentText: `The destroyer USS Shaw explodes in dry dock after being hit by Japanese aircraft`,
     },
     {
-      title: "1967",
-      contentText: `NASA’s Lunar Orbiter missions completed photographic mapping of the Moon.`,
+      title: "15 February 1942",
+      contentTitle: "The fall of Singapore",
+      contentText: `Lieutenant General Arthur Percival and staff on their way to the Singapore Ford factory to negotiate the island’s surrender with General Yamashita`,
     },
     {
-      title: "1968",
-      contentText: `NASA’s Apollo 8 made the first crewed flight to the Moon, circling it 10 times before returning to Earth.`,
+      title: "4 June 1942",
+      contentTitle: "Midway",
+      contentText: `The American aircraft carrier USS Yorktown under Japanese attack during the battle of Midway`,
     },
     {
-      title: "1969",
-      contentText: `Apollo 11 made the first landing on the Moon.`,
+      title: "25 October 1942",
+      contentTitle: "Alamein",
+      contentText: `German prisoners of war wait for transport after their capture at Alamein`,
+    },
+    {
+      title: "February 1943",
+      contentTitle: "Stalingrad",
+      contentText: `Red Army soldiers hoist the Soviet flag over a recaptured Stalingrad factory following the German surrender`,
+    },
+    {
+      title: "6 June 1944",
+      contentTitle: "D-Day, Operation Overlord",
+      contentText: `British commandos of the First Special Service Brigade land on Sword Beach`,
+    },
+    {
+      title: "February 1945",
+      contentTitle: "The Big Three",
+      contentText: `Churchill, Roosevelt and Stalin sit for a group photograph during the Yalta conference`,
+    },
+    {
+      title: "13/14 February 1945",
+      contentTitle: "Dresden",
+      contentText: `Dresden under incendiary bomb attack`,
+    },
+    {
+      title: "17 April 1945",
+      contentTitle: "Belsen",
+      contentText: `Bodies of dead prisoners at the newly liberated Belsen concentration camp`,
+    },
+    {
+      title: "8 May 1945",
+      contentTitle: "VE Day",
+      contentText: `millions of people rejoice in the news that Germany has surrendered – the war in Europe was finally over`,
+    },
+    {
+      title: "9 August 1945",
+      contentTitle: "Nagasaki",
+      contentText: `Atomic bomb mushroom cloud over the Japanese city of Nagasaki`,
     },
   ];
   return (
@@ -46,9 +89,7 @@ function App() {
         items={items}
         titlePosition="TOP"
         itemWidth={250}
-        mode="HORIZONTAL"
-        slideShow
-        disableNavOnScroll
+        mode="TREE"
       />
     </div>
   );
