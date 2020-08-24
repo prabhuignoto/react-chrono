@@ -26,6 +26,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   onPrevious,
   onTimelineUpdated,
   slideShowRunning,
+  onLast,
+  onFirst,
 }) => {
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
 
@@ -37,6 +39,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
 
   const handlePrevious = () => {
     onPrevious();
+  };
+
+  const handleFirst = () => {
+    onFirst();
+  };
+
+  const handleLast = () => {
+    onLast();
   };
 
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -55,6 +65,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
       ((mode === "VERTICAL" || mode === "TREE") && keyCode === 38)
     ) {
       handlePrevious();
+    } else if (keyCode === 36) {
+      handleFirst();
+    } else if (keyCode === 35) {
+      handleLast();
     }
   };
 

@@ -4,6 +4,7 @@ export interface TimelineItemModel {
   active?: boolean;
   contentTitle?: string;
   contentText: string;
+  contentDetailedText?: string;
   id?: string;
   position?: string;
   title: string;

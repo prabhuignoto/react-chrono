@@ -17,6 +17,7 @@ const TimelineMain: React.FunctionComponent<Partial<TimelineMainModel>> = ({
   disableNavOnScroll = false,
   disableNavOnKey = false,
   slideShow = false,
+  slideItemDuration = 2500,
 }) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
@@ -24,7 +25,7 @@ const TimelineMain: React.FunctionComponent<Partial<TimelineMainModel>> = ({
   const [slideshowRunning, setSlideshowRunning] = useState(false);
 
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
-  const [debActvTimelineItem] = useDebounce(activeTimelineItem, 50);
+  const [debActvTimelineItem] = useDebounce(activeTimelineItem, 250);
 
   useEffect(() => {
     if (!items) {
@@ -70,9 +71,9 @@ const TimelineMain: React.FunctionComponent<Partial<TimelineMainModel>> = ({
           setSlideshowRunning(false);
           setActiveTimelineItem(newItems.length - 1);
         }
-      }, 3000);
+      }, slideItemDuration);
     }
-  }, [items, slideShow, titlePosition]);
+  }, [items, slideShow, titlePosition, slideItemDuration]);
 
   const handleTimelineUpdate = (actvTimelineIndex: number) => {
     setItems((items) =>
@@ -106,6 +107,19 @@ const TimelineMain: React.FunctionComponent<Partial<TimelineMainModel>> = ({
     }
   };
 
+  const handleFirst = () => {
+    setActiveTimelineItem(0);
+    handleTimelineUpdate(0);
+  };
+
+  const handleLast = () => {
+    if (timeLineItems.length) {
+      const idx = timeLineItems.length - 1;
+      setActiveTimelineItem(idx);
+      handleTimelineUpdate(idx);
+    }
+  };
+
   return (
     <Timeline
       itemWidth={itemWidth}
@@ -119,6 +133,9 @@ const TimelineMain: React.FunctionComponent<Partial<TimelineMainModel>> = ({
       activeTimelineItem={debActvTimelineItem}
       disableNavOnScroll={disableNavOnScroll}
       disableNavOnKey={disableNavOnKey}
+      slideItemDuration={slideItemDuration}
+      onFirst={handleFirst}
+      onLast={handleLast}
     />
   );
 };

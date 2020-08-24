@@ -14,6 +14,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
   index,
   contentText,
   contentTitle,
+  contentDetailedText,
   id,
   active,
   onClick,
@@ -47,6 +48,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
           content={contentText}
           active={active}
           title={contentTitle}
+          detailedText={contentDetailedText}
         />
       </TimelineItemContentWrapper>
       <TreeLeaf

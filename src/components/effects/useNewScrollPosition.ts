@@ -48,8 +48,13 @@ useNewScrollPosition = function (mode: Mode, itemWidth?: number) {
         (timelineContentOffset < scrollTop && circBottom > scrollTop) ||
         (circBottom > contrBottom && timelineContentOffset < contrBottom);
 
-      if (!isVisible || isPartiallyVisible) {
-        setNewOffset(timelineContentOffset - timelineContentHeight);
+      const newOffset = timelineContentOffset - timelineContentHeight;
+      const notVisible = !isVisible || isPartiallyVisible;
+
+      if (notVisible && (newOffset + timelineContentHeight) < contrBottom) {
+        setNewOffset(newOffset + Math.round(timelineContentHeight / 2));
+      } else if (notVisible) {
+        setNewOffset(newOffset);
       }
     }
   }, [mode, itemWidth]);

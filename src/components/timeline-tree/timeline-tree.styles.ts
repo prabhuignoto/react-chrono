@@ -10,12 +10,10 @@ export const TimelineTreeWrapper = styled.div`
 const animateVisible = keyframes`
   from {
     opacity: 0;
-    transform: scale(0.9);
     visibility: hidden;
   }
   to {
     opacity: 1;
-    transform: scale(1);
     visibility: visible;
   }
 `;
@@ -26,7 +24,7 @@ export const Branch = styled.div`
   position: relative;
   visibility: hidden;
   width: 100%;
-  min-height: 200px;
+  /* min-height: 200px; */
   
   &.left {
     margin-right: auto;

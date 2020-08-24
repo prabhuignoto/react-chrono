@@ -22,14 +22,62 @@ export const TimelineItemContentWrapper = styled.div`
   `;
 
 export const TimelineContentText = styled.span`
-  padding: 0.25rem 0.75rem 0.5rem;
+  padding: 0.25rem 0.75rem 0rem;
   font-weight: 400;
   font-size: 0.9rem;
 `;
 
 export const TimelineContentTitle = styled.span`
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  margin: 0.25rem 0;
+  margin-top: 0.5rem;
   padding-left: 0.75rem;
+  color: #323232;
+  &.active {
+    color: #0f52ba;
+  }
+`;
+
+export const TimelineContentDetails = styled.p`
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #666666;
+  padding: 0 0.75rem;
+  margin: 0;
+`;
+
+export const TimelineContentDetailsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.25rem;
+  transition: max-height .2s linear;
+  max-height: 300px;
+  overflow-y: auto;
+
+  &.show-less {
+    max-height: 100px;
+    overflow: hidden;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0.35em;
+  }
+  
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: #0f52ba;
+    outline: 1px solid #0f52ba;
+  }
+`;
+
+export const ShowMore = styled.span`
+  font-size: 0.75rem;
+  margin-left: 0.75rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
 `;

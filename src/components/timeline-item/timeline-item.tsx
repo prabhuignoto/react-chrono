@@ -15,6 +15,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   active,
   contentText,
   contentTitle,
+  contentDetailedText,
   id,
   mode,
   onClick,
@@ -82,6 +83,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
           content={contentText}
           active={active}
           title={contentTitle}
+          detailedText={contentDetailedText}
         />
       </TimelineContentContainer>
     );

@@ -11,6 +11,7 @@ export interface TreeBranchModel {
   index: number;
   contentText: string;
   contentTitle?: string;
+  contentDetailedText?: string;
   active?: boolean;
   id?: string;
   onClick: (id: string) => void;

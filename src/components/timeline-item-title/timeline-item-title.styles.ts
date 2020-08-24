@@ -15,6 +15,5 @@ export const TitleWrapper = styled.div`
     background: #ffdf00;
     color: #0f52ba;
     font-weight: 600;
-    border-radius: 1rem;
   }
 `;
