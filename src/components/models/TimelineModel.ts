@@ -6,12 +6,12 @@ export interface TimelineModel extends TimelineProps{
   onLast: () => void;
   onNext: () => void;
   onPrevious: () => void;
+  slideShowRunning?: boolean;
   onTimelineUpdated?: (id: number) => void;
 }
 
 export interface TimelineProps {
   slideItemDuration?: number;
-  slideShowRunning?: boolean;
   titlePosition?: "TOP" | "BOTTOM" | "ALTERNATE";
   disableNavOnKey?: boolean;
   disableNavOnScroll?: boolean;

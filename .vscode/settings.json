@@ -3,6 +3,7 @@
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "cSpell.words": [
     "actv",
+    "crono",
     "debounced",
     "debounced actv timeline item",
     "item",
