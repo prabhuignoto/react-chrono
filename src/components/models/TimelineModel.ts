@@ -1,18 +1,26 @@
 import { TimelineItemModel } from "./TimelineItemModel";
 
-export interface TimelineModel {
+export interface TimelineModel extends TimelineProps{
   activeTimelineItem: number;
-  itemWidth?: number;
-  items: TimelineItemModel[];
-  mode?: "VERTICAL" | "HORIZONTAL" | "TREE";
+  onFirst: () => void;
+  onLast: () => void;
   onNext: () => void;
   onPrevious: () => void;
   onTimelineUpdated?: (id: number) => void;
-  onFirst: () => void;
-  onLast: () => void;
-  slideShowRunning?: boolean;
+}
+
+export interface TimelineProps {
   slideItemDuration?: number;
+  slideShowRunning?: boolean;
   titlePosition?: "TOP" | "BOTTOM" | "ALTERNATE";
-  disableNavOnScroll?: boolean;
   disableNavOnKey?: boolean;
+  disableNavOnScroll?: boolean;
+  itemWidth?: number;
+  items: TimelineItemModel[];
+  mode?: "VERTICAL" | "HORIZONTAL" | "TREE";
+  slideShow?: boolean;
+  theme?: {
+    primary: string;
+    secondary: string;
+  }
 }

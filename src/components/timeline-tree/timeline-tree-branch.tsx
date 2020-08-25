@@ -21,6 +21,8 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
   onActive,
   visible,
   title,
+  theme,
+  onShowMore,
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -49,6 +51,11 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
           active={active}
           title={contentTitle}
           detailedText={contentDetailedText}
+          onShowMore={() =>
+            setTimeout(() => {
+              handleOnActive(0);
+            }, 200)
+          }
         />
       </TimelineItemContentWrapper>
       <TreeLeaf
@@ -57,6 +64,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
         active={active}
         onClick={onClick}
         onActive={handleOnActive}
+        theme={theme}
       />
     </Branch>
   );

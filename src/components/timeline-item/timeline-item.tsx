@@ -22,6 +22,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   autoScroll,
   position,
   title,
+  theme,
 }) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -60,6 +61,9 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
     }
   }, [active, autoScroll, mode]);
 
+  const handleOnShowMore = () => {
+  };
+
   const timelineContent = () => {
     let className = "";
 
@@ -76,7 +80,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
             data-testid="timeline-title"
             className={`${mode.toLowerCase()} ${position}`}
           >
-            <TimelineItemTitle title={title} active={active} />
+            <TimelineItemTitle title={title} active={active} theme={theme} />
           </TimelineTitleContainer>
         )}
         <TimelineItemContent
@@ -84,6 +88,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
           active={active}
           title={contentTitle}
           detailedText={contentDetailedText}
+          onShowMore={handleOnShowMore}
         />
       </TimelineContentContainer>
     );
@@ -117,7 +122,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
           className={`${mode.toLowerCase()} ${position}`}
           data-testid="timeline-title"
         >
-          <TimelineItemTitle title={title} active={active} />
+          <TimelineItemTitle title={title} active={active} theme={theme} />
         </TimelineTitleContainer>
       )}
       {mode === "VERTICAL" && timelineContent()}

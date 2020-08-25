@@ -13,7 +13,8 @@ const TimelineItemContent: React.FunctionComponent<{
   active?: boolean;
   title?: string;
   detailedText?: string;
-}> = ({ content, active, title, detailedText }) => {
+  onShowMore: () => void;
+}> = ({ content, active, title, detailedText, onShowMore }) => {
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
   const [canShowMore, setCanShowMore] = useState(false);
@@ -34,10 +35,19 @@ const TimelineItemContent: React.FunctionComponent<{
     }
   }, [active]);
 
+  useEffect(() => {
+    const detailsEle = detailsRef.current;
+
+    if (detailsEle) {
+      detailsEle.scrollTop = 0;
+    }
+  }, [showMore]);
+
   const handleMouseWheel = (event: WheelEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-  }
+    if (showMore) {
+      event.stopPropagation();
+    }
+  };
 
   return (
     <TimelineItemContentWrapper className={active ? "active" : ""}>
@@ -47,15 +57,23 @@ const TimelineItemContent: React.FunctionComponent<{
         </TimelineContentTitle>
       )}
       <TimelineContentText>{content}</TimelineContentText>
-      <TimelineContentDetailsWrapper className={!showMore ? "show-less" : ""}>
-        <TimelineContentDetails ref={detailsRef} onWheel={handleMouseWheel}>
+      <TimelineContentDetailsWrapper
+        ref={detailsRef}
+        className={!showMore ? "show-less" : ""}
+      >
+        <TimelineContentDetails onWheel={handleMouseWheel}>
           {detailedText}
         </TimelineContentDetails>
       </TimelineContentDetailsWrapper>
       {canShowMore && (
         <ShowMore
           role="button"
-          onClick={() => active && setShowMore(!showMore)}
+          onClick={() => {
+            if (active) {
+              setShowMore(!showMore);
+              onShowMore();
+            }
+          }}
           className="show-more"
         >
           {active ? (showMore ? "show less" : "show more") : "..."}

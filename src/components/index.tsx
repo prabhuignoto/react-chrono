@@ -2,14 +2,14 @@ import { nanoid } from "nanoid";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { TimelineItemModel } from "./models/TimelineItemModel";
-import { TimelineModel } from "./models/TimelineModel";
+import { TimelineModel, TimelineProps } from "./models/TimelineModel";
 import Timeline from "./timeline/timeline";
 
 interface TimelineMainModel extends TimelineModel {
   slideShow: boolean;
 }
 
-const TimelineMain: React.FunctionComponent<Partial<TimelineMainModel>> = ({
+const TimelineMain: React.FunctionComponent<Partial<TimelineProps>> = ({
   items,
   itemWidth = 320,
   titlePosition = "TOP",
@@ -18,6 +18,10 @@ const TimelineMain: React.FunctionComponent<Partial<TimelineMainModel>> = ({
   disableNavOnKey = false,
   slideShow = false,
   slideItemDuration = 2500,
+  theme = {
+    primary: "#0f52ba",
+    secondary: "#ffdf00",
+  },
 }) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
@@ -136,6 +140,7 @@ const TimelineMain: React.FunctionComponent<Partial<TimelineMainModel>> = ({
       slideItemDuration={slideItemDuration}
       onFirst={handleFirst}
       onLast={handleLast}
+      theme={theme}
     />
   );
 };

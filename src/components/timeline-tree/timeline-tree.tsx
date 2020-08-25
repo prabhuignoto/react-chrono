@@ -1,15 +1,15 @@
 import React from "react";
-import { Scroll } from "../models/TimelineCollnModel";
-import { TimelineItemViewModel } from "../models/TimelineItemModel";
+import { TimelineTreeModel } from "../models/TimelineTreeModel";
 import TreeBranch from "./timeline-tree-branch";
 import { TimelineTreeWrapper } from "./timeline-tree.styles";
 
-const TimelineTree: React.FunctionComponent<{
-  items: TimelineItemViewModel[];
-  onClick: (id?: string) => void;
-  activeTimelineItem: number;
-  autoScroll: (s: Partial<Scroll>) => void;
-}> = ({ items, onClick, activeTimelineItem, autoScroll }) => {
+const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
+  items,
+  onClick,
+  activeTimelineItem,
+  autoScroll,
+  theme,
+}) => {
   const handleOnActive = (
     offset: number,
     wrapperOffset: number,
@@ -21,6 +21,8 @@ const TimelineTree: React.FunctionComponent<{
       timelineContentOffset: wrapperOffset,
     });
   };
+
+  const handleOnShowMore = () => {};
 
   return (
     <TimelineTreeWrapper data-testid="tree-main">
@@ -40,10 +42,11 @@ const TimelineTree: React.FunctionComponent<{
             visible={item.visible}
             contentTitle={item.contentTitle}
             contentDetailedText={item.contentDetailedText}
+            theme={theme}
+            onShowMore={handleOnShowMore}
           />
         );
       })}
-      {/* <Trunk /> */}
     </TimelineTreeWrapper>
   );
 };

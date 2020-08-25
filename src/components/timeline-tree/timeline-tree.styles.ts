@@ -24,7 +24,6 @@ export const Branch = styled.div`
   position: relative;
   visibility: hidden;
   width: 100%;
-  /* min-height: 200px; */
   
   &.left {
     margin-right: auto;
@@ -38,19 +37,7 @@ export const Branch = styled.div`
   }
 `;
 
-export const Trunk = styled.div`
-  background: #0f52ba;
-  height: 100%;
-  height: 100%;
-  left: 0;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
-  right: 0;
-  width: 4px;
-`;
-
-export const TreeTrunkWrapper = styled.div`
+export const TreeTrunkWrapper = styled.div<{bg?: string}>`
   align-items: center;
   display: flex;
   height: 100%;
@@ -67,7 +54,7 @@ export const TreeTrunkWrapper = styled.div`
   }
 
   &::after {
-    background: #0f52ba;
+    background: ${p => p.bg};
     content: '';
     display: block;
     height: 100%;

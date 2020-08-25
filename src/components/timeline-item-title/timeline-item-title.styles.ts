@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { Theme } from "../models/TimelineTreeModel";
 
-export const TitleWrapper = styled.div`
+export const TitleWrapper = styled.div<{ theme: Theme }>`
   border-radius: 0.2rem;
   font-family: 'Roboto Mono', monospace;
   padding: 0.25rem 0.5rem;
@@ -12,8 +13,8 @@ export const TitleWrapper = styled.div`
   text-overflow: ellipsis;
 
   &.active {
-    background: #ffdf00;
-    color: #0f52ba;
+    background: ${p => p.theme.secondary};;
+    color: ${p => p.theme.primary};
     font-weight: 600;
   }
 `;

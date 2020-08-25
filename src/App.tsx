@@ -140,8 +140,7 @@ function App() {
       <Timeline
         items={items}
         titlePosition="TOP"
-        itemWidth={250}
-        mode="HORIZONTAL"
+        mode="TREE"
       />
     </div>
   );

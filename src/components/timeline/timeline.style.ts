@@ -3,11 +3,14 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  outline: 0;
   position: relative;
   width: 100%;
   user-select: none;
-  
+  outline: 0;
+
+  &:focus {
+  }
+
   &.horizontal {
     height: 12rem;
   }
@@ -26,6 +29,7 @@ export const TimelineMainWrapper = styled.div`
   scroll-behavior: smooth;
   width: 100%;
   padding: 1rem;
+
 
   &.horizontal {
     height: 10rem;
@@ -55,8 +59,8 @@ export const TimelineMain = styled.div`
   }
   `;
 
-export const Outline = styled.div`
-  background: #0f52ba;
+export const Outline = styled.div<{color?: string}>`
+  background: ${p => p.color};
   height: 3px;
   left: 0;
   margin-left: auto;
@@ -88,5 +92,8 @@ export const TimelineContentRender = styled.div`
   position: absolute;
   right: 0;
   top: 3rem;
-  width: 70%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

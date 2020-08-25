@@ -44,6 +44,7 @@ export const TimelineContentDetails = styled.p`
   color: #666666;
   padding: 0 0.75rem;
   margin: 0;
+  touch-action: none;
 `;
 
 export const TimelineContentDetailsWrapper = styled.div`
@@ -55,6 +56,7 @@ export const TimelineContentDetailsWrapper = styled.div`
   transition: max-height .2s linear;
   max-height: 300px;
   overflow-y: auto;
+  scrollbar-width: 0.35em;
 
   &.show-less {
     max-height: 100px;
@@ -70,8 +72,8 @@ export const TimelineContentDetailsWrapper = styled.div`
   }
   
   &::-webkit-scrollbar-thumb {
-    background-color: #0f52ba;
-    outline: 1px solid #0f52ba;
+    background-color: #3e74c7;
+    outline: 1px solid #3e74c7;
   }
 `;
 

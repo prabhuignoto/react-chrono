@@ -28,6 +28,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   slideShowRunning,
   onLast,
   onFirst,
+  theme
 }) => {
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
 
@@ -127,7 +128,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
       <TimelineMainWrapper ref={timelineMainRef} className={mode.toLowerCase()}>
         {mode !== "TREE" ? (
           <TimelineMain className={mode.toLowerCase()}>
-            {mode === "HORIZONTAL" && <Outline />}
+            {mode === "HORIZONTAL" && <Outline color={theme?.primary}/>}
             <TimelineCollection
               items={items as TimelineItemViewModel[]}
               itemWidth={itemWidth}
@@ -142,6 +143,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             onClick={handleTimelineItemClick}
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
+            theme={theme}
           />
         )}
       </TimelineMainWrapper>
