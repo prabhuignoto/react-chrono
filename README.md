@@ -1,11 +1,9 @@
-# react-crono
-
 [![DeepScan grade](https://deepscan.io/api/teams/10074/projects/13508/branches/229834/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10074&pid=13508&bid=229834)
 [![Depfu](https://badges.depfu.com/badges/48a23a6a830309649b7e516467cd9a48/overview.svg)](https://depfu.com/github/prabhuignoto/react-crono?project_id=15325)
 
-> A timeline component for React
-
 ![logo](logo.png)
+
+> A timeline component for React
 
 ## Features
 
