@@ -1,7 +1,6 @@
 {
   "name": "crono",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
   "dependencies": {
     "@hot-loader/react-dom": "^16.13.0",
     "@testing-library/jest-dom": "^5.11.4",
