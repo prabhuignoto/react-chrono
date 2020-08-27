@@ -1,7 +1,7 @@
 import React from "react";
+import { Crono } from "react-crono";
 import { hot } from "react-hot-loader/root";
 import "./App.css";
-import { Crono } from "./components";
 import { TimelineItemModel } from "./components/models/TimelineItemModel";
 
 function App() {

@@ -13,7 +13,7 @@ const banner = `/*
 `;
 
 export default {
-  input: "src/components/index.tsx",
+  input: "src/components/react-crono.tsx",
   output: [
     {
       file: pkg.main,

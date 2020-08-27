@@ -12,7 +12,6 @@
     "@types/react-dom": "^16.9.0",
     "nanoid": "^3.1.12",
     "react": "^16.13.1",
-    "react-crono": "^1.0.2",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-scripts": "3.4.0",
     "styled-components": "5.1.1",
@@ -20,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "tsc --outDir dist/lib --declarationDir dist/types --declaration true && rollup -c",
+    "build": "tsc --outDir dist/lib --declarationDir dist --declaration true && rollup -c",
     "test": "react-scripts test ----updateSnapshot",
     "coverage": "react-scripts test a --coverage --watchAll=false",
     "eject": "react-scripts eject"
