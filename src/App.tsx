@@ -1,7 +1,7 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
 import "./App.css";
-import Timeline from "./components";
+import { Crono } from "./components";
 import { TimelineItemModel } from "./components/models/TimelineItemModel";
 
 function App() {
@@ -137,9 +137,7 @@ function App() {
   ];
   return (
     <div className="App">
-      <Timeline
-        items={items}
-      />
+      <Crono items={items} />
     </div>
   );
 }

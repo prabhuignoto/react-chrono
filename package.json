@@ -1,5 +1,5 @@
 {
-  "name": "crono",
+  "name": "react-crono",
   "version": "1.0.1",
   "dependencies": {
     "@hot-loader/react-dom": "^16.13.0",
@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rollup -c",
     "test": "react-scripts test ----updateSnapshot",
     "coverage": "react-scripts test a --coverage --watchAll=false",
     "eject": "react-scripts eject"
@@ -41,10 +41,28 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.10.4",
+    "@rollup/plugin-typescript": "^5.0.2",
     "@types/nanoid": "^2.1.0",
     "@types/styled-components": "5.1.0",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0",
     "react-hot-loader": "^4.12.21",
+    "rollup": "^2.26.5",
+    "rollup-plugin-filesize": "^9.0.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.0",
     "ts-jest": "^26.2.0",
     "typescript": "3.8.3"
-  }
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "5.1.1",
+    "use-debounce": "^3.4.3"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/react-crono.js",
+  "module": "dist/react-crono.esm.js"
 }
