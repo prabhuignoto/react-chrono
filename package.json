@@ -1,6 +1,6 @@
 {
   "name": "react-crono",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "dependencies": {
     "@hot-loader/react-dom": "^16.13.0",
     "@testing-library/jest-dom": "^5.11.4",
