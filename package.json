@@ -41,7 +41,7 @@
     ]
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.10.4",
