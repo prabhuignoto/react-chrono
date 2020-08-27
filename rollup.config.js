@@ -1,9 +1,7 @@
-import typescript from "@rollup/plugin-typescript";
-import filesize from "rollup-plugin-filesize";
+import esbuild from "rollup-plugin-esbuild";
 import resolve from "rollup-plugin-node-resolve";
-import { terser } from "rollup-plugin-terser";
-import pkg from "./package.json";
 import progress from "rollup-plugin-progress";
+import pkg from "./package.json";
 
 const banner = `/*
  * ${pkg.name}
@@ -21,7 +19,7 @@ export default {
       format: "cjs",
       exports: "named",
       strict: true,
-      banner, 
+      banner,
     },
     {
       file: pkg.module,
@@ -36,9 +34,11 @@ export default {
       clearLine: false, // default: true
     }),
     resolve(),
-    typescript(),
-    terser(),
-    filesize(),
+    esbuild({
+      include: /\.[jt]sx?$/,
+      target: "esnext",
+      minify: true
+    }),
   ],
   external: [
     "react",
