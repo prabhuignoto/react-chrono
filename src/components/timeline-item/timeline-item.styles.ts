@@ -70,7 +70,7 @@ export const TimelinePoint = styled.div`
       border-radius: 50%;
       content: '';
       display: block;
-      height: 12px;
+      height: 80%;
       left: 0;
       margin-left: auto;
       margin-right: auto;
@@ -78,7 +78,7 @@ export const TimelinePoint = styled.div`
       right: 0;
       top: 50%;
       transform: translateY(-50%);
-      width: 12px;
+      width: 80%;
       z-index: -1;
     }
   }

@@ -3,6 +3,7 @@ import filesize from "rollup-plugin-filesize";
 import resolve from "rollup-plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
 import pkg from "./package.json";
+import progress from "rollup-plugin-progress";
 
 const banner = `/*
  * ${pkg.name}
@@ -20,7 +21,7 @@ export default {
       format: "cjs",
       exports: "named",
       strict: true,
-      banner,
+      banner, 
     },
     {
       file: pkg.module,
@@ -30,7 +31,15 @@ export default {
       banner,
     },
   ],
-  plugins: [resolve(), typescript(), terser(), filesize()],
+  plugins: [
+    progress({
+      clearLine: false, // default: true
+    }),
+    resolve(),
+    typescript(),
+    terser(),
+    filesize(),
+  ],
   external: [
     "react",
     "react-dom",

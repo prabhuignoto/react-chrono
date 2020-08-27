@@ -16,6 +16,7 @@
     "@mdx-js/react": "^1.5.8",
     "clsx": "^1.1.1",
     "react": "^16.8.4",
+    "react-crono": "^1.0.4",
     "react-dom": "^16.8.4"
   },
   "browserslist": {
@@ -29,5 +30,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "^2.0.0-alpha.51",
+    "typescript": "^4.0.2"
   }
 }

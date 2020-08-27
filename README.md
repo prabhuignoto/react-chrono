@@ -48,6 +48,16 @@ yarn install react-crono
   />
 ```
 
+## Slideshow
+
+```sh
+  <Crono
+    items={items}
+    mode="TREE"
+    slideShow
+  />
+```
+
 ![app-tree](app-tree.png)
 
 ## Props
