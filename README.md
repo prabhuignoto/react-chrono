@@ -17,7 +17,7 @@
 ## Installation
 
 ```sh
-yarn run install && yarn run start
+yarn install react-crono
 ```
 
 ## Getting Started
@@ -32,7 +32,7 @@ yarn run install && yarn run start
     contentDetailedText: "On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France...",
   }, ...];
 
-  <Timeline items={items} />
+  <Crono items={items} />
 ```
 
 ![app-home](app-home.png)
@@ -42,7 +42,7 @@ yarn run install && yarn run start
 `react-crono` also supports a Tree mode.
 
 ```sh
-  <Timeline
+  <Crono
     items={items}
     mode="TREE"
   />
