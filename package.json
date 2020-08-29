@@ -1,6 +1,8 @@
 {
   "name": "react-crono",
   "version": "1.0.5",
+  "license": "MIT",
+  "description": "a modern timeline component for React",
   "dependencies": {
     "@hot-loader/react-dom": "^16.13.0",
     "@testing-library/jest-dom": "^5.11.4",
@@ -20,8 +22,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "tsc --outDir dist/lib --declarationDir dist --declaration true && rollup -c",
-    "test": "react-scripts test ----updateSnapshot",
+    "build": "rimraf ./dist && rollup -c",
+    "test": "react-scripts test --updateSnapshot",
     "coverage": "react-scripts test a --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
@@ -44,7 +46,13 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
+    "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-typescript": "^7.10.4",
+    "@babel/runtime": "^7.11.2",
+    "@rollup/plugin-babel": "^5.2.0",
+    "@rollup/plugin-buble": "^0.21.3",
+    "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-typescript": "^5.0.2",
     "@types/nanoid": "^2.1.0",
     "@types/styled-components": "5.1.0",
@@ -53,9 +61,8 @@
     "esbuild": "^0.6.28",
     "react-hot-loader": "^4.12.21",
     "rollup": "^2.26.5",
-    "rollup-plugin-esbuild": "^2.4.2",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-progress": "^1.1.2",
+    "rollup-plugin-typescript2": "^0.27.2",
     "ts-jest": "^26.2.0",
     "typescript": "3.8.3"
   },
@@ -69,5 +76,6 @@
     "dist"
   ],
   "main": "dist/react-crono.js",
-  "module": "dist/react-crono.esm.js"
+  "module": "dist/react-crono.esm.js",
+  "umd": "dist/react-crono.umd.js"
 }

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "lib": [
       "dom",
       "dom.iterable",
@@ -17,7 +17,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react",
-    "noEmit": true
+    "noEmit": true,
+    "rootDir": "src",
+    "declaration": true,
+    "declarationDir": "dist"
   },
   "include": [
     "src/components"
@@ -25,9 +28,10 @@
   "exclude": [
     "src/**/*.test.tsx",
     "node_modules",
-    "dist"
+    "dist",
+    "rollup.config.js"
   ],
   "files": [
-    "src/components/react-crono.tsx"
+    "src/index.ts"
   ]
 }

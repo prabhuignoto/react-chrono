@@ -1,7 +1,10 @@
-import esbuild from "rollup-plugin-esbuild";
-import resolve from "rollup-plugin-node-resolve";
-import progress from "rollup-plugin-progress";
+import babel from "@rollup/plugin-babel";
+// import typescript from "@rollup/plugin-typescript";
+import typescript from "rollup-plugin-typescript2";
+import common from "@rollup/plugin-commonjs";
 import pkg from "./package.json";
+import resolve from "rollup-plugin-node-resolve";
+import buble from "@rollup/plugin-buble";
 
 const banner = `/*
  * ${pkg.name}
@@ -12,7 +15,7 @@ const banner = `/*
 `;
 
 export default {
-  input: "src/components/react-crono.tsx",
+  input: "src/index.ts",
   output: [
     {
       file: pkg.main,
@@ -28,17 +31,40 @@ export default {
       strict: true,
       banner,
     },
+    {
+      file: pkg.umd,
+      format: "umd",
+      exports: "named",
+      strict: true,
+      banner,
+      name: "ReactCrono",
+      globals: {
+        nanoid: "nanoid",
+        react: "React",
+        "use-debounce": "useDebounce",
+        "react-dom": "ReactDOM",
+        "styled-components": "styled",
+      },
+    },
   ],
   plugins: [
-    progress({
-      clearLine: false, // default: true
+    typescript(),
+    babel({
+      extensions: ["tsx", "ts"],
+      babelHelpers: "runtime",
+      plugins: [
+        "@babel/plugin-transform-runtime",
+        "@babel/plugin-proposal-optional-chaining",
+      ],
     }),
+    buble({
+      objectAssign: true,
+      transforms: {
+        templateString: false
+      }
+    }),
+    common(),
     resolve(),
-    esbuild({
-      include: /\.[jt]sx?$/,
-      target: "esnext",
-      minify: true
-    }),
   ],
   external: [
     "react",
@@ -46,5 +72,6 @@ export default {
     "nanoid",
     "use-debounce",
     "styled-components",
+    "@babel/runtime",
   ],
 };

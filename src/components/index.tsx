@@ -145,4 +145,4 @@ const Crono: React.FunctionComponent<Partial<TimelineProps>> = ({
   );
 };
 
-export { Crono };
+export default Crono;
