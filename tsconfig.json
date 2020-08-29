@@ -15,7 +15,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "jsx": "react",
     "noEmit": true,
     "rootDir": "src",
@@ -31,7 +31,5 @@
     "dist",
     "rollup.config.js"
   ],
-  "fisrc/react-crono.ts
-    "src/index.ts"
-  ]
+  "files": ["src/react-crono.ts"]
 }
