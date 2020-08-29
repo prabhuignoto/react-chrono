@@ -3,12 +3,12 @@ import React from "react";
 import { hot } from "react-hot-loader/root";
 import "./App.css";
 import data from "./data";
-import { ReactCrono } from "./index";
+import { Crono } from "./react-crono";
 
 function App() {
   return (
     <div className="App">
-      <ReactCrono items={data} mode="HORIZONTAL" />
+      <Crono items={data} mode="HORIZONTAL" />
     </div>
   );
 }

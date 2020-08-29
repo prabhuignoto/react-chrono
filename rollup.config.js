@@ -1,5 +1,4 @@
 import babel from "@rollup/plugin-babel";
-// import typescript from "@rollup/plugin-typescript";
 import typescript from "rollup-plugin-typescript2";
 import common from "@rollup/plugin-commonjs";
 import pkg from "./package.json";
@@ -15,7 +14,7 @@ const banner = `/*
 `;
 
 export default {
-  input: "src/index.ts",
+  input: "src/react-crono.ts",
   output: [
     {
       file: pkg.main,
