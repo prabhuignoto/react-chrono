@@ -1,5 +1,5 @@
 import React from "react";
-import { TimelineTreeModel } from "../models/TimelineTreeModel";
+import { TimelineTreeModel } from "../../models/TimelineTreeModel";
 import TreeBranch from "./timeline-tree-branch";
 import { TimelineTreeWrapper } from "./timeline-tree.styles";
 

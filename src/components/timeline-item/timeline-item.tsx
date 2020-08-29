@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
-import { TimelineItemViewModel } from "../models/TimelineItemModel";
+import { TimelineItemViewModel } from "../../models/TimelineItemModel";
 import TimelineItemContent from "../timeline-item-content/timeline-item-content";
 import TimelineItemTitle from "../timeline-item-title/timeline-item-title";
 import {

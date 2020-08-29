@@ -3,7 +3,7 @@ import React from "react";
 import { hot } from "react-hot-loader/root";
 import "./App.css";
 import data from "./data";
-import { Crono } from "./react-crono";
+import { Crono } from "../react-crono";
 
 function App() {
   return (

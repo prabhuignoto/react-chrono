@@ -1,6 +1,6 @@
 import React from "react";
 import TimelineItem from "../timeline-item/timeline-item";
-import { TimelineCollectionModel } from "../models/TimelineCollnModel";
+import { TimelineCollectionModel } from "../../models/TimelineCollnModel";
 import {
   TimelineCollectionWrapper,
   TimelineItemWrapper,

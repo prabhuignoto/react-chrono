@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Scroll } from '../models/TimelineCollnModel';
+import { Scroll } from '../../models/TimelineCollnModel';
 
 type Mode = "HORIZONTAL" | "VERTICAL" | "TREE";
 

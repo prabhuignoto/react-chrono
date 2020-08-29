@@ -55,8 +55,8 @@ export const TimelinePoint = styled.div`
   background: #0f52ba;
   border-radius: 50%;
   cursor: pointer;
-  height: 1rem;
-  width: 1rem;
+  height: 16px;
+  width: 16px;
 
   &.vertical {
   }
@@ -70,7 +70,7 @@ export const TimelinePoint = styled.div`
       border-radius: 50%;
       content: '';
       display: block;
-      height: 80%;
+      height: 12px;
       left: 0;
       margin-left: auto;
       margin-right: auto;
@@ -78,7 +78,7 @@ export const TimelinePoint = styled.div`
       right: 0;
       top: 50%;
       transform: translateY(-50%);
-      width: 80%;
+      width: 12px;
       z-index: -1;
     }
   }
