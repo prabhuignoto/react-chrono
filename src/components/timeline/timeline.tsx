@@ -1,8 +1,9 @@
+import { nanoid } from "nanoid";
 import React, { useCallback, useEffect, useRef } from "react";
-import useNewScrollPosition from "../effects/useNewScrollPosition";
 import { Scroll } from "../../models/TimelineCollnModel";
 import { TimelineItemViewModel } from "../../models/TimelineItemModel";
 import { TimelineModel } from "../../models/TimelineModel";
+import useNewScrollPosition from "../effects/useNewScrollPosition";
 import TimelineCollection from "../timeline-collection/timeline-collection";
 import TimelineControl from "../timeline-control/timeline-control";
 import TimelineTree from "../timeline-tree/timeline-tree";
@@ -28,11 +29,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   slideShowRunning,
   onLast,
   onFirst,
-  theme
+  theme,
 }) => {
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
 
   const timelineMainRef = useRef<HTMLDivElement>(null);
+  const id = useRef(nanoid());
 
   const handleNext = () => {
     onNext();
@@ -73,18 +75,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     }
   };
 
-  const handleMouseWheel = (evt: React.WheelEvent) => {
-    if (slideShowRunning) {
-      return;
-    }
-
-    if (evt.deltaY > 0) {
-      handleNext();
-    } else if (evt.deltaY < 0) {
-      handlePrevious();
-    }
-  };
-
   const handleTimelineItemClick = (id?: string) => {
     if (id && !slideShowRunning) {
       for (let idx = 0; idx < items.length; idx++) {
@@ -122,19 +112,19 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     <Wrapper
       tabIndex={0}
       onKeyDown={(evt) => (!disableNavOnKey ? handleKeySelection(evt) : null)}
-      onWheel={(evt) => (!disableNavOnScroll ? handleMouseWheel(evt) : null)}
       className={mode.toLowerCase()}
     >
       <TimelineMainWrapper ref={timelineMainRef} className={mode.toLowerCase()}>
         {mode !== "TREE" ? (
           <TimelineMain className={mode.toLowerCase()}>
-            {mode === "HORIZONTAL" && <Outline color={theme?.primary}/>}
+            {mode === "HORIZONTAL" && <Outline color={theme?.primary} />}
             <TimelineCollection
               items={items as TimelineItemViewModel[]}
               itemWidth={itemWidth}
               handleItemClick={handleTimelineItemClick}
               autoScroll={handleScroll}
               mode={mode}
+              wrapperId={id.current}
             />
           </TimelineMain>
         ) : (
@@ -155,7 +145,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
           disableRight={activeTimelineItem === items.length - 1}
         />
       </TimelineControlContainer>
-      <TimelineContentRender id="content-render" />
+      <TimelineContentRender id={id.current} />
     </Wrapper>
   );
 };

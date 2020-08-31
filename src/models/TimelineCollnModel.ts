@@ -6,6 +6,7 @@ export interface TimelineCollectionModel {
   itemWidth: number;
   items: TimelineItemViewModel[];
   mode: "HORIZONTAL" | "VERTICAL" | "TREE";
+  wrapperId: string;
 }
 
 export interface Scroll {

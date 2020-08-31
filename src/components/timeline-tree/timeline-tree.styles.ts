@@ -64,7 +64,7 @@ export const TreeTrunkWrapper = styled.div<{bg?: string}>`
     position: absolute;
     right: 0;
     width: 3px;
-    z-index: -1;
+    z-index: 0;
   }
 `;
 
@@ -87,6 +87,7 @@ export const TimelineItemContentWrapper = styled.div`
 
 export const TrunkPointWrapper = styled.div`
   position: relative;
+  z-index: 1;
 `;
 
 export const TimelineTreeTitleWrapper = styled.div`

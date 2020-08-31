@@ -23,6 +23,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   position,
   title,
   theme,
+  wrapperId
 }) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -59,7 +60,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
         }
       }
     }
-  }, [active, autoScroll, mode]);
+  }, [active]);
 
   const handleOnShowMore = () => {
   };
@@ -95,7 +96,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   };
 
   const showTimelineContent = () => {
-    const ele = document.getElementById("content-render");
+    const ele = document.getElementById(wrapperId);
 
     if (ele) {
       return ReactDOM.createPortal(timelineContent(), ele);

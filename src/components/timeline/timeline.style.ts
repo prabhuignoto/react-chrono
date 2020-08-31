@@ -7,14 +7,14 @@ export const Wrapper = styled.div`
   width: 100%;
   user-select: none;
   outline: 0;
-
+  
   &:focus {
   }
-
+  
   &.horizontal {
     height: 12rem;
   }
-
+  
   &.vertical, &.tree {
     height: 100%;
   }
@@ -28,8 +28,8 @@ export const TimelineMainWrapper = styled.div`
   position: relative;
   scroll-behavior: smooth;
   width: 100%;
-  padding: 1rem;
-
+  overscroll-behavior: none;
+  padding: 1rem 0;
 
   &.horizontal {
     height: 10rem;
@@ -59,7 +59,7 @@ export const TimelineMain = styled.div`
   }
   `;
 
-export const Outline = styled.div<{color?: string}>`
+export const Outline = styled.div<{ color?: string }>`
   background: ${p => p.color};
   height: 3px;
   left: 0;

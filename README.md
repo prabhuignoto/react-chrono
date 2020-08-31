@@ -9,7 +9,6 @@
 
 - **Timeline modes** - The component supports multiple modes to layout the timeline either `Vertically` or `Horizontally`.
 - **Tree Mode** - In `Tree` mode the individual timeline content boxes are alternated between left and right.
-- **Timeline QuickScroll** - The `QuickScroll` allows to jump through the Timeline items swiftly. QuickScroll is by default enabled on all the Modes.
 - **Slideshow** - The `Slideshow` starts the component in Slideshow mode. The component automatically plays the series for you.
 - **QuickJump** - Quickly jump to the start or end of the timeline by using the  <kbd>HOME</kbd> or <kbd>END</kbd> key.
 - **Keyboard Support** - The timelines can be navigated with the <kbd>UP</kbd> , <kbd>DOWN</kbd> keys in `vertical` or `tree` mode. In `horizontal` mode <kbd>LEFT</kbd> , <kbd>RIGHT</kbd> keys can be used for navigation.
