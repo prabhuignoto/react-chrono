@@ -1,15 +1,13 @@
 import styled from "styled-components";
 
 export const Horizontal = styled.div`
-  height: 450px;
   width: 1200px;
   position: relative;
-  margin-bottom: 8rem;
+  margin-bottom: 5rem;
   border-radius: 10px;
 `;
 
 export const Vertical = styled.div`
-  height: 950px;
   width: 1200px;
   position: relative;
   margin-bottom: 4em;
@@ -24,7 +22,13 @@ export const Wrapper = styled.div`
 export const ComponentContainer = styled.div`
   background: #f2f2f2;
   border-radius: 10px;
-  height: 100%;
+  height: 350px; 
+`;
+
+export const ComponentContainerTree = styled.div`
+  background: #f2f2f2;
+  border-radius: 10px;
+  height: 800px; 
 `;
 
 export const Header = styled.header`
@@ -46,3 +50,9 @@ export const Footer = styled.footer`
 `;
 
 export const URL = styled.a``;
+
+export const DescriptionContent = styled.p``;
+
+export const DescriptionHeader = styled.h3``;
+
+export const Description = styled.div``;
