@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  `;
+`;
 
 export const ComponentContainer = styled.div`
   background: #f2f2f2;
@@ -51,8 +51,14 @@ export const Footer = styled.footer`
 
 export const URL = styled.a``;
 
-export const DescriptionContent = styled.p``;
+export const DescriptionContent = styled.p`
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 300;
+`;
 
-export const DescriptionHeader = styled.h3``;
+export const DescriptionHeader = styled.h3`
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 400;
+`;
 
 export const Description = styled.div``;

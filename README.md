@@ -64,7 +64,6 @@ yarn install react-crono
 | name               | description                                                                           | default      |
 |--------------------|---------------------------------------------------------------------------------------|--------------|
 | mode               | sets the layout for the timeline component. can be `HORIZONTAL`, `VERTICAL` or `TREE` | `HORIZONTAL` |
-| disableNavOnScroll | disables timeline navigation through mouse scroll                                     | false        |
 | disableNavOnKey    | disables timeline navigation through keyboard                                         | false        |
 | slideShow          | starts the timeline in slideshow                                                      |              |
 | slideItemDuration  | delay between timeline points during a slideshow                                      | 2500         |
