@@ -16,6 +16,7 @@ import {
   URL,
   Vertical,
   Wrapper,
+  Pre,
 } from "./App.styles";
 import data from "./data";
 import GithubLogo from "./github.svg";
@@ -50,11 +51,11 @@ function App() {
             War 2 rendered in Horizontal mode.
           </DescriptionContent>
         </Description>
-        <pre>
+        <Pre>
           <code className="language-html">
             {'<Crono items={data} mode="HORIZONTAL" />'}
           </code>
-        </pre>
+        </Pre>
         <ComponentContainer>
           <Crono items={data} mode="HORIZONTAL" />
         </ComponentContainer>
@@ -68,11 +69,11 @@ function App() {
             the exact time duration to wait before displaying the next card.
           </DescriptionContent>
         </Description>
-        <pre>
+        <Pre>
           <code className="language-html">
             {`<Crono items={data} mode="HORIZONTAL" slideShow slideItemDuration={5000} />`}
           </code>
-        </pre>
+        </Pre>
         <ComponentContainer>
           <Crono
             items={data}
@@ -88,14 +89,14 @@ function App() {
           <DescriptionContent>
             In <strong>TREE</strong> mode, the component will be rendered
             vertically, with cards alternating between left and right.{" "}
-            <em>slideShow</em> option works for<strong>Tree</strong> as well.
+            <em>slideShow</em> option works for <strong>Tree</strong> as well.
           </DescriptionContent>
         </Description>
-        <pre>
+        <Pre>
           <code className="language-html">
             {'<Crono items={data} mode="TREE" />'}
           </code>
-        </pre>
+        </Pre>
         <ComponentContainerTree>
           <Crono items={data} mode="TREE" />
         </ComponentContainerTree>

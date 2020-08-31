@@ -21,13 +21,14 @@ export const Wrapper = styled.div`
 
 export const ComponentContainer = styled.div`
   background: #f2f2f2;
-  border-radius: 10px;
-  height: 350px; 
+  border-radius: 4px;
+  height: 350px;
+  margin-top: 2rem;
 `;
 
 export const ComponentContainerTree = styled.div`
   background: #f2f2f2;
-  border-radius: 10px;
+  border-radius: 4px;
   height: 800px; 
 `;
 
@@ -53,12 +54,18 @@ export const URL = styled.a``;
 
 export const DescriptionContent = styled.p`
   font-family: 'Roboto Mono', monospace;
-  font-weight: 300;
+  font-weight: 400;
 `;
 
 export const DescriptionHeader = styled.h3`
   font-family: 'Roboto Mono', monospace;
-  font-weight: 400;
+  font-weight: 500;
+  text-transform: uppercase;
 `;
 
 export const Description = styled.div``;
+
+export const Pre = styled.pre`
+  margin-top: 2rem;
+  border-radius: 4px;
+`;
