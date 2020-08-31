@@ -24,6 +24,7 @@ export const ComponentContainer = styled.div`
   border-radius: 4px;
   height: 350px;
   margin-top: 2rem;
+  padding: 2rem 0;
 `;
 
 export const ComponentContainerTree = styled.div`

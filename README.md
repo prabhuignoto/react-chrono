@@ -31,7 +31,9 @@ yarn install react-crono
     contentDetailedText: "On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France...",
   }, ...];
 
-  <Crono items={items} />
+  <div style={{ width: "500px", height: "400px" }}>
+    <Crono items={items} />
+  </div>
 ```
 
 ![app-home](app-home.png)
@@ -41,20 +43,24 @@ yarn install react-crono
 `react-crono` also supports a Tree mode.
 
 ```sh
-  <Crono
-    items={items}
-    mode="TREE"
-  />
+  <div style={{ width: "500px", height: "950px" }}>
+    <Crono
+      items={items}
+      mode="TREE"
+    />
+  </div>
 ```
 
 ## Slideshow
 
 ```sh
-  <Crono
-    items={items}
-    mode="TREE"
-    slideShow
-  />
+  <div style={{ width: "500px", height: "950px" }}>
+    <Crono
+      items={items}
+      mode="TREE"
+      slideShow
+    />
+  </div>
 ```
 
 ![app-tree](app-tree.png)
@@ -65,10 +71,48 @@ yarn install react-crono
 |--------------------|---------------------------------------------------------------------------------------|--------------|
 | mode               | sets the layout for the timeline component. can be `HORIZONTAL`, `VERTICAL` or `TREE` | `HORIZONTAL` |
 | disableNavOnKey    | disables timeline navigation through keyboard                                         | false        |
-| slideShow          | starts the timeline in slideshow                                                      |              |
+| slideShow          | starts the timeline in slideshow mode                                                 |              |
 | slideItemDuration  | delay between timeline points during a slideshow                                      | 2500         |
 | titlePosition      | sets the position of the title in `HORIZONTAL` mode                                   | `TOP`        |
 | itemWidth          | width of the timeline section in `HORIZONTAL` mode                                    | 320          |
+
+### Mode
+
+`react-crono` supports three modes `HORIZONTAL`, `VERTICAL` and `TREE`. The mode prop can be used to define the orientation of the cards.
+
+### Keyboard Navigation & Disabling it
+
+The timeline by default can be navigated via keyboard.
+
+- For `HORIZONTAL` mode use your <kbd>LEFT</kbd> <kbd>RIGHT</kbd> arrow keys for navigation.
+- For `VERTICAL` or `TREE` mode, navigation can be done via the <kbd>UP</kbd> <kbd>DOWN</kbd> arrow keys.
+- To easily jump to the first item or the last item in the timeline, use <kbd>HOME</kbd> or <kbd>END</kbd> key.
+
+The keyboard navigation can be completely disabled by setting the `disableNavOnKey` to true.
+
+```sh
+  <Crono items={items} disableNavOnKey />
+```
+
+### Slideshow Mode
+
+Slideshow can be enabled by setting the `slideShow` prop to true. You can also set an optional `slideItemDuration` that sets the time delay between cards.
+
+```sh
+  <Crono items={items} slideShow slideItemDuration={4500} />
+```
+
+### Title Position
+
+This setting only applies for the `HORIZONTAL` mode. The prop `titlePosition` sets the position of the individual titles to either `TOP` or `BOTTOM`.
+
+```sh
+  <Crono items={items}  titlePosition="BOTTOM" />
+```
+
+### Item Width
+
+The `itemWidth` prop can be used to set the width of each individual timeline sections. This setting is applicable only for the `HORIZONTAL` mode.
 
 ## Built with
 
