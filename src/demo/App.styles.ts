@@ -11,12 +11,13 @@ export const Vertical = styled.div`
   width: 1200px;
   position: relative;
   margin-bottom: 4em;
-  `;
+`;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{show: boolean}>`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  display: ${p => p.show ? "block" : "none"};
 `;
 
 export const ComponentContainer = styled.div`

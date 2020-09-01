@@ -4,13 +4,15 @@
   "license": "MIT",
   "description": "a modern timeline component for React",
   "dependencies": {
+    "@types/webfontloader": "^1.6.32",
     "nanoid": "^3.1.12",
     "react": "^16.13.1",
     "react-crono": "^1.0.5",
-    "react-dom": "npm:@hot-loader/react-dom",
+    "react-dom": "^16.13.1",
     "react-scripts": "3.4.0",
     "styled-components": "5.1.1",
-    "use-debounce": "^3.4.3"
+    "use-debounce": "^3.4.3",
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,7 +39,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.11.0",
-    "@babel/plugin-transform-runtime": "^7.11.0",
+    "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-typescript": "^7.10.4",
     "@babel/runtime": "^7.11.2",
     "@hot-loader/react-dom": "^16.13.0",
@@ -48,10 +50,10 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^10.4.9",
     "@testing-library/user-event": "^12.1.3",
-    "@types/jest": "^26.0.10",
+    "@types/jest": "^26.0.12",
     "@types/nanoid": "^2.1.0",
     "@types/node": "^14.6.2",
-    "@types/react": "^16.9.48",
+    "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.0",
     "@types/styled-components": "5.1.2",
     "babel-core": "^6.26.3",
