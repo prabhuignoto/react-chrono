@@ -45,6 +45,10 @@ export const TimelineContentDetails = styled.p`
   padding: 0 0.75rem;
   margin: 0;
   touch-action: none;
+
+  &.active {
+    background: #f9f9f9;
+  }
 `;
 
 export const TimelineContentDetailsWrapper = styled.div`

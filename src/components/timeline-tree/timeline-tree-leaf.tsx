@@ -10,6 +10,7 @@ const TreeLeaf: React.FunctionComponent<TreeLeafModel> = ({
   active,
   onActive,
   theme,
+  alternateCards
 }) => {
   const circleRef = useRef<HTMLDivElement>(null);
 
@@ -26,6 +27,7 @@ const TreeLeaf: React.FunctionComponent<TreeLeafModel> = ({
       className={className}
       data-testid="tree-leaf"
       bg={theme?.primary}
+      alternateCards={alternateCards}
     >
       <TrunkPointWrapper
         className={className}

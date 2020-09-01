@@ -26,7 +26,9 @@ const TimelineItemContent: React.FunctionComponent<{
       return;
     }
 
-    setCanShowMore(detailsEle.scrollHeight > 100);
+    setTimeout(() => {
+      setCanShowMore(detailsEle.scrollHeight > 100);
+    }, 200);
   }, []);
 
   useEffect(() => {
@@ -61,7 +63,10 @@ const TimelineItemContent: React.FunctionComponent<{
         ref={detailsRef}
         className={!showMore ? "show-less" : ""}
       >
-        <TimelineContentDetails onWheel={handleMouseWheel}>
+        <TimelineContentDetails
+          onWheel={handleMouseWheel}
+          className={showMore ? "active" : ""}
+        >
           {detailedText}
         </TimelineContentDetails>
       </TimelineContentDetailsWrapper>

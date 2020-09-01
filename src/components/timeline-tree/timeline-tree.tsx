@@ -6,9 +6,9 @@ import { TimelineTreeWrapper } from "./timeline-tree.styles";
 const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   items,
   onClick,
-  activeTimelineItem,
   autoScroll,
   theme,
+  alternateCards = true,
 }) => {
   const handleOnActive = (
     offset: number,
@@ -27,7 +27,14 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   return (
     <TimelineTreeWrapper data-testid="tree-main">
       {items.map((item, index) => {
-        let className = index % 2 === 0 ? "left" : "right";
+        let className = "";
+
+        if (alternateCards) {
+          className = index % 2 === 0 ? "left" : "right";
+        } else {
+          className = "right";
+        }
+
         return (
           <TreeBranch
             className={className}
@@ -44,6 +51,7 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
             contentDetailedText={item.contentDetailedText}
             theme={theme}
             onShowMore={handleOnShowMore}
+            alternateCards={alternateCards}
           />
         );
       })}

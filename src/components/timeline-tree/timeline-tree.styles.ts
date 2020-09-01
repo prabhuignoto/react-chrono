@@ -18,7 +18,7 @@ const animateVisible = keyframes`
   }
 `;
 
-export const Branch = styled.div`
+export const Branch = styled.div<{ alternateCards?: boolean }>`
   align-items: center;
   display: flex;
   position: relative;
@@ -37,13 +37,14 @@ export const Branch = styled.div`
   }
 `;
 
-export const TreeTrunkWrapper = styled.div<{bg?: string}>`
+export const TreeTrunkWrapper = styled.div<{ bg?: string, alternateCards?: boolean }>`
   align-items: center;
   display: flex;
   height: 100%;
   justify-content: center;
   position: relative;
-  width: 10%;
+
+  ${p => p.alternateCards ? "width: 10%" : "width: 5%"};
   
   &.left {
     order: 2;
@@ -68,9 +69,10 @@ export const TreeTrunkWrapper = styled.div<{bg?: string}>`
   }
 `;
 
-export const TimelineItemContentWrapper = styled.div`
-  width: 45%;
+export const TimelineItemContentWrapper = styled.div<{ alternateCards?: boolean }>`
   visibility: hidden;
+  ${p => p.alternateCards ? "width: 45%;" : "width: 80%; height: 85%"};
+  
   &.left {
     order: 1;
   }
@@ -90,10 +92,10 @@ export const TrunkPointWrapper = styled.div`
   z-index: 1;
 `;
 
-export const TimelineTreeTitleWrapper = styled.div`
+export const TimelineTreeTitleWrapper = styled.div<{ alternateCards?: boolean }>`
   align-items: center;
   display: flex;
-  width: 45%;
+  ${p => p.alternateCards ? "width: 45%" : "width: 15%"};
 
   &.left {
     justify-content: flex-start;

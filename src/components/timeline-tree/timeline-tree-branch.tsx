@@ -22,7 +22,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
   visible,
   title,
   theme,
-  onShowMore,
+  alternateCards,
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -39,12 +39,17 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
       key={index}
       ref={contentRef}
       data-testid="branch-main"
+      alternateCards={alternateCards}
     >
-      <TimelineTreeTitleWrapper className={className}>
+      <TimelineTreeTitleWrapper
+        className={className}
+        alternateCards={alternateCards}
+      >
         <TimelineItemTitle title={title} active={active} />
       </TimelineTreeTitleWrapper>
       <TimelineItemContentWrapper
         className={`${className} ${visible ? "visible" : ""}`}
+        alternateCards={alternateCards}
       >
         <TimelineItemContent
           content={contentText}

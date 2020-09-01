@@ -7,6 +7,7 @@ export interface TreeLeafModel {
   active?: boolean;
   onClick: (id: string) => void;
   onActive: (timelinePointOffset: number) => void;
+  alternateCards?: boolean;
   theme?: Theme;
 }
 
@@ -28,6 +29,7 @@ export interface TreeBranchModel {
   title: string;
   visible?: boolean;
   theme?: Theme;
+  alternateCards?: boolean;
 }
 
 export interface TimelineTreeModel {
@@ -35,7 +37,8 @@ export interface TimelineTreeModel {
   onClick: (id?: string) => void;
   activeTimelineItem: number;
   autoScroll: (s: Partial<Scroll>) => void;
-  theme?: Theme
+  theme?: Theme;
+  alternateCards?: boolean;
 }
 
 export interface Theme {

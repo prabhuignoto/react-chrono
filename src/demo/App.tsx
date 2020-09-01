@@ -37,7 +37,6 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
         families: ["Roboto Mono:300,400,500"],
       },
       active: () => {
-        debugger;
         this.setState({
           fontsLoaded: true,
         });
@@ -85,6 +84,44 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
               <Crono items={data} mode="HORIZONTAL" />
             </ComponentContainer>
           </Horizontal>
+          <Vertical>
+            <Description>
+              <DescriptionHeader>Vertical</DescriptionHeader>
+              <DescriptionContent>
+                In <strong>TREE</strong> mode, the component will be rendered
+                vertically, with cards alternating between left and right.{" "}
+                <em>slideShow</em> option works for <strong>Tree</strong> as
+                well.
+              </DescriptionContent>
+            </Description>
+            <Pre>
+              <code className="language-html">
+                {'<Crono items={data} mode="TREE" />'}
+              </code>
+            </Pre>
+            <ComponentContainerTree>
+              <Crono items={data} mode="VERTICAL" />
+            </ComponentContainerTree>
+          </Vertical>
+          <Vertical>
+            <Description>
+              <DescriptionHeader>Tree</DescriptionHeader>
+              <DescriptionContent>
+                In <strong>TREE</strong> mode, the component will be rendered
+                vertically, with cards alternating between left and right.{" "}
+                <em>slideShow</em> option works for <strong>Tree</strong> as
+                well.
+              </DescriptionContent>
+            </Description>
+            <Pre>
+              <code className="language-html">
+                {'<Crono items={data} mode="TREE" />'}
+              </code>
+            </Pre>
+            <ComponentContainerTree>
+              <Crono items={data} mode="TREE" />
+            </ComponentContainerTree>
+          </Vertical>
           <Horizontal>
             <Description>
               <DescriptionHeader>Slideshow</DescriptionHeader>
@@ -109,25 +146,6 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
               />
             </ComponentContainer>
           </Horizontal>
-          <Vertical>
-            <Description>
-              <DescriptionHeader>Tree</DescriptionHeader>
-              <DescriptionContent>
-                In <strong>TREE</strong> mode, the component will be rendered
-                vertically, with cards alternating between left and right.{" "}
-                <em>slideShow</em> option works for <strong>Tree</strong> as
-                well.
-              </DescriptionContent>
-            </Description>
-            <Pre>
-              <code className="language-html">
-                {'<Crono items={data} mode="TREE" />'}
-              </code>
-            </Pre>
-            <ComponentContainerTree>
-              <Crono items={data} mode="TREE" />
-            </ComponentContainerTree>
-          </Vertical>
           <Footer>
             <URL href="https://www.prabhumurthy.com" target="_new">
               www.prabhumurthy.com

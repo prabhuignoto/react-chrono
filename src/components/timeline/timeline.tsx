@@ -7,14 +7,7 @@ import useNewScrollPosition from "../effects/useNewScrollPosition";
 import TimelineCollection from "../timeline-collection/timeline-collection";
 import TimelineControl from "../timeline-control/timeline-control";
 import TimelineTree from "../timeline-tree/timeline-tree";
-import {
-  Outline,
-  TimelineContentRender,
-  TimelineControlContainer,
-  TimelineMain,
-  TimelineMainWrapper,
-  Wrapper,
-} from "./timeline.style";
+import { Outline, TimelineContentRender, TimelineControlContainer, TimelineMain, TimelineMainWrapper, Wrapper } from "./timeline.style";
 
 const Timeline: React.FunctionComponent<TimelineModel> = ({
   activeTimelineItem,
@@ -115,9 +108,18 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
       className={mode.toLowerCase()}
     >
       <TimelineMainWrapper ref={timelineMainRef} className={mode.toLowerCase()}>
-        {mode !== "TREE" ? (
+        {mode === "TREE" ? (
+          <TimelineTree
+            items={items as TimelineItemViewModel[]}
+            onClick={handleTimelineItemClick}
+            activeTimelineItem={activeTimelineItem}
+            autoScroll={handleScroll}
+            theme={theme}
+          />
+        ) : null}
+        {mode === "HORIZONTAL" ? (
           <TimelineMain className={mode.toLowerCase()}>
-            {mode === "HORIZONTAL" && <Outline color={theme?.primary} />}
+            <Outline color={theme?.primary} />
             <TimelineCollection
               items={items as TimelineItemViewModel[]}
               itemWidth={itemWidth}
@@ -127,15 +129,17 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
               wrapperId={id.current}
             />
           </TimelineMain>
-        ) : (
+        ) : null}
+        {mode === "VERTICAL" ? (
           <TimelineTree
             items={items as TimelineItemViewModel[]}
             onClick={handleTimelineItemClick}
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
             theme={theme}
+            alternateCards={false}
           />
-        )}
+        ) : null}
       </TimelineMainWrapper>
       <TimelineControlContainer className={slideShowRunning ? "hide" : "show"}>
         <TimelineControl
