@@ -96,7 +96,7 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
             </Description>
             <Pre>
               <code className="language-html">
-                {'<Crono items={data} mode="TREE" />'}
+                {'<Crono items={data} mode="VERTICAL" />'}
               </code>
             </Pre>
             <ComponentContainerTree>
