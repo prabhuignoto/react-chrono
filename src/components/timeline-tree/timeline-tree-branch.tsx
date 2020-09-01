@@ -70,6 +70,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
         onClick={onClick}
         onActive={handleOnActive}
         theme={theme}
+        alternateCards={alternateCards}
       />
     </Branch>
   );
