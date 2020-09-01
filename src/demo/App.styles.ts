@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 export const Horizontal = styled.div`
-  width: 1200px;
+  width: 100%;
   position: relative;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   border-radius: 10px;
 `;
 
 export const Vertical = styled.div`
-  width: 1200px;
+  width: 100%;
   position: relative;
-  margin-bottom: 4em;
+  margin-bottom: 3rem;
 `;
 
 export const Wrapper = styled.div<{show: boolean}>`
@@ -18,6 +18,7 @@ export const Wrapper = styled.div<{show: boolean}>`
   flex-direction: column;
   margin: 0 auto;
   display: ${p => p.show ? "block" : "none"};
+  width: 1200px;
 `;
 
 export const ComponentContainer = styled.div`
@@ -40,7 +41,8 @@ export const Header = styled.header`
   width: 100%;
 `
 
-export const LogoImage = styled.img``;
+export const LogoImage = styled.img`
+`;
 
 export const Github = styled.img`
 `;
@@ -63,6 +65,7 @@ export const DescriptionHeader = styled.h3`
   font-family: 'Roboto Mono', monospace;
   font-weight: 500;
   text-transform: uppercase;
+  color: rgb(242,98,53);
 `;
 
 export const Description = styled.div``;

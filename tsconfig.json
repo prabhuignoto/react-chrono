@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -22,16 +18,7 @@
     "declaration": true,
     "declarationDir": "dist"
   },
-  "include": [
-    "src/components", "src/models"
-  ],
-  "exclude": [
-    "src/**/*.test.tsx",
-    "node_modules",
-    "dist",
-    "rollup.config.js"
-  ],
-  "files": [
-    "src/react-crono.ts"
-  ]
+  "include": ["src/components", "src/models"],
+  "exclude": ["src/**/*.test.tsx", "node_modules", "dist", "rollup.config.js"],
+  "files": ["src/react-chrono.ts"]
 }

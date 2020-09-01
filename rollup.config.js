@@ -1,9 +1,9 @@
 import babel from "@rollup/plugin-babel";
-import typescript from "rollup-plugin-typescript2";
-import common from "@rollup/plugin-commonjs";
-import pkg from "./package.json";
-import resolve from "rollup-plugin-node-resolve";
 import buble from "@rollup/plugin-buble";
+import common from "@rollup/plugin-commonjs";
+import resolve from "rollup-plugin-node-resolve";
+import typescript from "rollup-plugin-typescript2";
+import pkg from "./package.json";
 
 const banner = `/*
  * ${pkg.name}
@@ -14,7 +14,7 @@ const banner = `/*
 `;
 
 export default {
-  input: "src/react-crono.ts",
+  input: "src/react-chrono.ts",
   output: [
     {
       file: pkg.main,
@@ -59,8 +59,8 @@ export default {
     buble({
       objectAssign: true,
       transforms: {
-        templateString: false
-      }
+        templateString: false,
+      },
     }),
     common(),
     resolve(),

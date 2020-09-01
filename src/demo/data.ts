@@ -1,4 +1,4 @@
-import { TimelineItemModel } from "react-crono/dist/models/TimelineItemModel";
+import { TimelineItemModel } from "react-chrono/dist/models/TimelineItemModel";
 
 const items: TimelineItemModel[] = [
   // {

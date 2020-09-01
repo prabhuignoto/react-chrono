@@ -9,7 +9,7 @@ interface TimelineMainModel extends TimelineModel {
   slideShow: boolean;
 }
 
-const Crono: React.FunctionComponent<Partial<TimelineProps>> = ({
+const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   items,
   itemWidth = 320,
   titlePosition = "TOP",
@@ -145,4 +145,4 @@ const Crono: React.FunctionComponent<Partial<TimelineProps>> = ({
   );
 };
 
-export default Crono;
+export default Chrono;

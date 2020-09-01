@@ -1,7 +1,7 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
 import fontLoader from "webfontloader";
-import { Crono } from "../react-crono";
+import { Chrono } from "../react-chrono";
 import "./App.css";
 import {
   ComponentContainer,
@@ -51,7 +51,7 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
           <Header>
             <LogoImage src={AppLogo} />
             <a
-              href="http://github.com/prabhuignoto/react-crono"
+              href="http://github.com/prabhuignoto/react-chrono"
               target="_new"
               style={{
                 marginLeft: "auto",
@@ -63,44 +63,42 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
               <Github src={GithubLogo} />
             </a>
           </Header>
+          <DescriptionContent>
+            <strong>react-chrono</strong> is a modern timeline component built
+            for React. The component can be used to layout the events either{" "}
+            <em>horizontally</em> or
+            <em>vertically</em>. The time line can be easily navigated via the
+            control buttons or keyboard.
+          </DescriptionContent>
           <Horizontal>
             <Description>
               <DescriptionHeader>Horizontal</DescriptionHeader>
               <DescriptionContent>
-                <strong>react-crono</strong> is a modern timeline component
-                built for React. The component can be used to layout the events
-                either <em>horizontally</em> or
-                <em>vertically</em>. The time line can be easily navigated via
-                the control buttons or keyboard. Below is the depiction of the
-                events of World War 2 rendered in Horizontal mode.
+                Lasting six years and one day, the Second World War started on 1
+                September 1939. Here we trace the timeline of a conflict that
+                engulfed the world
               </DescriptionContent>
             </Description>
             <Pre>
               <code className="language-html">
-                {'<Crono items={data} mode="HORIZONTAL" />'}
+                {'<Chrono items={data} mode="HORIZONTAL" />'}
               </code>
             </Pre>
             <ComponentContainer>
-              <Crono items={data} mode="HORIZONTAL" />
+              <Chrono items={data} mode="HORIZONTAL" />
             </ComponentContainer>
           </Horizontal>
           <Vertical>
             <Description>
               <DescriptionHeader>Vertical</DescriptionHeader>
-              <DescriptionContent>
-                In <strong>TREE</strong> mode, the component will be rendered
-                vertically, with cards alternating between left and right.{" "}
-                <em>slideShow</em> option works for <strong>Tree</strong> as
-                well.
-              </DescriptionContent>
             </Description>
             <Pre>
               <code className="language-html">
-                {'<Crono items={data} mode="VERTICAL" />'}
+                {'<Chrono items={data} mode="VERTICAL" />'}
               </code>
             </Pre>
             <ComponentContainerTree>
-              <Crono items={data} mode="VERTICAL" />
+              <Chrono items={data} mode="VERTICAL" />
             </ComponentContainerTree>
           </Vertical>
           <Vertical>
@@ -115,11 +113,11 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
             </Description>
             <Pre>
               <code className="language-html">
-                {'<Crono items={data} mode="TREE" />'}
+                {'<Chrono items={data} mode="TREE" />'}
               </code>
             </Pre>
             <ComponentContainerTree>
-              <Crono items={data} mode="TREE" />
+              <Chrono items={data} mode="TREE" />
             </ComponentContainerTree>
           </Vertical>
           <Horizontal>
@@ -134,11 +132,11 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
             </Description>
             <Pre>
               <code className="language-html">
-                {`<Crono items={data} mode="HORIZONTAL" slideShow slideItemDuration={5000} />`}
+                {`<Chrono items={data} mode="HORIZONTAL" slideShow slideItemDuration={5000} />`}
               </code>
             </Pre>
             <ComponentContainer>
-              <Crono
+              <Chrono
                 items={data}
                 mode="HORIZONTAL"
                 slideShow
@@ -146,6 +144,28 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
               />
             </ComponentContainer>
           </Horizontal>
+          <Vertical>
+            <Description>
+              <DescriptionContent>
+                SlideShow is also supported for all the modes. Here is a component in TREE mode with slideShow enabled.
+              </DescriptionContent>
+            </Description>
+            <Pre>
+              <code className="language-html">
+                {
+                  '<Chrono items={data} mode="TREE" slideShow slideItemDuration={4000} />'
+                }
+              </code>
+            </Pre>
+            <ComponentContainerTree>
+              <Chrono
+                items={data}
+                mode="TREE"
+                slideShow
+                slideItemDuration={3500}
+              />
+            </ComponentContainerTree>
+          </Vertical>
           <Footer>
             <URL href="https://www.prabhumurthy.com" target="_new">
               www.prabhumurthy.com

@@ -5,8 +5,8 @@ export const TimelineItemContentWrapper = styled.div`
   background: #fff;
   border-radius: 0.75rem;
   display: flex;
-  flex-direction: column;
   filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.25));
+  flex-direction: column;
   font-family: 'Roboto Mono', monospace;
   height: 100%;
   justify-content: flex-start;
@@ -22,28 +22,28 @@ export const TimelineItemContentWrapper = styled.div`
   `;
 
 export const TimelineContentText = styled.span`
-  padding: 0.25rem 0.75rem 0rem;
-  font-weight: 400;
   font-size: 0.9rem;
+  font-weight: 400;
+  padding: 0.25rem 0.75rem 0rem;
 `;
 
 export const TimelineContentTitle = styled.span`
+  color: #323232;
   font-size: 1.2rem;
   font-weight: 500;
   margin-top: 0.5rem;
   padding-left: 0.75rem;
-  color: #323232;
   &.active {
     color: #0f52ba;
   }
 `;
 
 export const TimelineContentDetails = styled.p`
+  color: #666666;
   font-size: 0.8rem;
   font-weight: 400;
-  color: #666666;
-  padding: 0 0.75rem;
   margin: 0;
+  padding: 0 0.75rem;
   touch-action: none;
 
   &.active {
@@ -52,15 +52,15 @@ export const TimelineContentDetails = styled.p`
 `;
 
 export const TimelineContentDetailsWrapper = styled.div`
-  width: 100%;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-top: 0.25rem;
-  transition: max-height .2s linear;
   max-height: 300px;
   overflow-y: auto;
   scrollbar-width: 0.35em;
+  transition: max-height .2s linear;
+  width: 100%;
 
   &.show-less {
     max-height: 100px;
@@ -81,9 +81,10 @@ export const TimelineContentDetailsWrapper = styled.div`
   }
 `;
 
-export const ShowMore = styled.span`
-  font-size: 0.75rem;
-  margin-left: 0.75rem;
-  margin-bottom: 0.5rem;
+export const ShowMore = styled.span<{show?: boolean}>`
   cursor: pointer;
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.75rem;
+  visibility: ${p => p.show ? "visible" : "hidden"};
 `;

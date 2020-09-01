@@ -44,7 +44,7 @@ export const TreeTrunkWrapper = styled.div<{ bg?: string, alternateCards?: boole
   justify-content: center;
   position: relative;
 
-  ${p => p.alternateCards ? "width: 10%" : "width: 5%"};
+  ${p => p.alternateCards ? "width: 10%" : "width: 10%"};
   
   &.left {
     order: 2;
@@ -71,7 +71,7 @@ export const TreeTrunkWrapper = styled.div<{ bg?: string, alternateCards?: boole
 
 export const TimelineItemContentWrapper = styled.div<{ alternateCards?: boolean }>`
   visibility: hidden;
-  ${p => p.alternateCards ? "width: 45%;" : "width: 80%; height: 85%"};
+  ${p => p.alternateCards ? "width: 45%;" : "width: 75%; height: 85%"};
   
   &.left {
     order: 1;

@@ -9221,9 +9221,9 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
-react-crono@^1.0.4:
+react-chrono@^1.0.4:
   version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-crono/-/react-crono-1.0.4.tgz#39918ba2b6d6b5433134aba1369500fb9882eeae"
+  resolved "https://registry.yarnpkg.com/react-chrono/-/react-chrono-1.0.4.tgz#39918ba2b6d6b5433134aba1369500fb9882eeae"
   integrity sha512-0BB08oMF3t/PQovLyedS44j23paZLsVe5CxzyphdUOw2U9UyyfANeKQ72FIhRc2US6NDxg5fIwcTwJvkrHK2nA==
   dependencies:
     "@hot-loader/react-dom" "^16.13.0"
@@ -9241,9 +9241,9 @@ react-crono@^1.0.4:
     styled-components "5.1.1"
     use-debounce "^3.4.3"
 
-react-crono@^1.0.5:
+react-chrono@^1.0.5:
   version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-crono/-/react-crono-1.0.5.tgz#6fb0ec18109c9c0fad89a1e49b3031170419c6c8"
+  resolved "https://registry.yarnpkg.com/react-chrono/-/react-chrono-1.0.5.tgz#6fb0ec18109c9c0fad89a1e49b3031170419c6c8"
   integrity sha512-fU5nKNQN+BnA8DZ8jnXK1Vejz3Jl6R9FPa2GCsbCuQ9cKtBpH9tZJ6bOAoOzZX7gG0Jzi2NdzUqE4m5kTsUVTA==
   dependencies:
     "@hot-loader/react-dom" "^16.13.0"
@@ -9256,7 +9256,7 @@ react-crono@^1.0.5:
     "@types/react-dom" "^16.9.0"
     nanoid "^3.1.12"
     react "^16.13.1"
-    react-crono "^1.0.4"
+    react-chrono "^1.0.4"
     react-dom "npm:@hot-loader/react-dom"
     react-scripts "3.4.0"
     styled-components "5.1.1"

@@ -1,6 +1,5 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
-import { Crono } from "../react-crono";
 import "./App.css";
 import {
   ComponentContainer,
@@ -23,7 +22,7 @@ function App() {
       <Header>
         <LogoImage src={AppLogo} />
         <a
-          href="http://github.com/prabhuignoto/react-crono"
+          href="http://github.com/prabhuignoto/react-chrono"
           target="_new"
           style={{
             marginLeft: "auto",
@@ -38,21 +37,21 @@ function App() {
       <Horizontal>
         <pre>
           <code className="language-html">
-            {'<Crono items={data} mode="HORIZONTAL" />'}
+            {'<chrono items={data} mode="HORIZONTAL" />'}
           </code>
         </pre>
         <ComponentContainer>
-          <Crono items={data} mode="HORIZONTAL" />
+          <chrono items={data} mode="HORIZONTAL" />
         </ComponentContainer>
       </Horizontal>
       <Horizontal>
         <pre>
           <code className="language-html">
-            {`<Crono items={data} mode="HORIZONTAL" slideShow slideItemDuration={5000} />`}
+            {`<chrono items={data} mode="HORIZONTAL" slideShow slideItemDuration={5000} />`}
           </code>
         </pre>
         <ComponentContainer>
-          <Crono
+          <chrono
             items={data}
             mode="HORIZONTAL"
             slideShow
@@ -63,11 +62,11 @@ function App() {
       <Vertical>
         <pre>
           <code className="language-html">
-            {'<Crono items={data} mode="TREE" />'}
+            {'<chrono items={data} mode="TREE" />'}
           </code>
         </pre>
         <ComponentContainer>
-          <Crono items={data} mode="TREE" />
+          <chrono items={data} mode="TREE" />
         </ComponentContainer>
       </Vertical>
       <Footer>

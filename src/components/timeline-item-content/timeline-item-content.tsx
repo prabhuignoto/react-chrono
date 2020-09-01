@@ -1,12 +1,5 @@
 import React, { useEffect, useRef, useState, WheelEvent } from "react";
-import {
-  ShowMore,
-  TimelineContentDetails,
-  TimelineContentDetailsWrapper,
-  TimelineContentText,
-  TimelineContentTitle,
-  TimelineItemContentWrapper,
-} from "./timeline-item-content.styles";
+import { ShowMore, TimelineContentDetails, TimelineContentDetailsWrapper, TimelineContentText, TimelineContentTitle, TimelineItemContentWrapper } from "./timeline-item-content.styles";
 
 const TimelineItemContent: React.FunctionComponent<{
   content: string;
@@ -25,10 +18,9 @@ const TimelineItemContent: React.FunctionComponent<{
     if (!detailsEle) {
       return;
     }
-
     setTimeout(() => {
       setCanShowMore(detailsEle.scrollHeight > 100);
-    }, 200);
+    }, 100);
   }, []);
 
   useEffect(() => {
@@ -70,7 +62,7 @@ const TimelineItemContent: React.FunctionComponent<{
           {detailedText}
         </TimelineContentDetails>
       </TimelineContentDetailsWrapper>
-      {canShowMore && (
+      {
         <ShowMore
           role="button"
           onClick={() => {
@@ -80,10 +72,11 @@ const TimelineItemContent: React.FunctionComponent<{
             }
           }}
           className="show-more"
+          show={canShowMore}
         >
           {active ? (showMore ? "show less" : "show more") : "..."}
         </ShowMore>
-      )}
+      }
     </TimelineItemContentWrapper>
   );
 };
