@@ -1273,7 +1273,7 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@hot-loader/react-dom@^16.13.0", "react-dom@npm:@hot-loader/react-dom":
+"@hot-loader/react-dom@^16.13.0":
   name react-dom
   version "16.13.0"
   resolved "https://registry.yarnpkg.com/@hot-loader/react-dom/-/react-dom-16.13.0.tgz#de245b42358110baf80aaf47a0592153d4047997"
@@ -1649,13 +1649,6 @@
     "@babel/runtime" "^7.10.3"
     "@testing-library/dom" "^7.22.3"
 
-"@testing-library/user-event@^12.1.2":
-  version "12.1.2"
-  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-12.1.2.tgz#f84699a082670b3a8cbe972ff5a43352e30bd87b"
-  integrity sha512-ClbmHIYzGFGr0J0Uw7ZD+VcHzpdlj2BenffyMMiEqqJ+mey8fJQdc3qs7lczKoEQyaN+YmK2QqJbpYkwuVSGEg==
-  dependencies:
-    "@babel/runtime" "^7.10.2"
-
 "@testing-library/user-event@^12.1.3":
   version "12.1.3"
   resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-12.1.3.tgz#0b19022f4e59596563f3f53293d67b3ab2c394f3"
@@ -1771,7 +1764,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@*", "@types/jest@26.x", "@types/jest@^26.0.10":
+"@types/jest@*", "@types/jest@26.x":
   version "26.0.10"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.10.tgz#8faf7e9756c033c39014ae76a7329efea00ea607"
   integrity sha512-i2m0oyh8w/Lum7wWK/YOZJakYF8Mx08UaKA1CtbmFeDquVhAEdA7znacsVSf2hJ1OQ/OfVMGN90pw/AtzF8s/Q==
@@ -1809,11 +1802,6 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-13.9.2.tgz#ace1880c03594cc3e80206d96847157d8e7fa349"
   integrity sha512-bnoqK579sAYrQbp73wwglccjJ4sfRdKU7WNEZ5FW4K2U6Kc0/eZ5kvXG0JKsEKFB50zrFmfFt52/cvBbZa7eXg==
 
-"@types/node@^14.6.0":
-  version "14.6.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.6.0.tgz#7d4411bf5157339337d7cff864d9ff45f177b499"
-  integrity sha512-mikldZQitV94akrc4sCcSjtJfsTKt4p+e/s0AGscVA6XArQ9kFclP+ZiYUMnq987rc6QlYxXv/EivqlfSLxpKA==
-
 "@types/node@^14.6.2":
   version "14.6.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.6.2.tgz#264b44c5a28dfa80198fc2f7b6d3c8a054b9491f"
@@ -1848,7 +1836,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.9.0":
+"@types/react@*":
   version "16.9.46"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.46.tgz#f0326cd7adceda74148baa9bff6e918632f5069e"
   integrity sha512-dbHzO3aAq1lB3jRQuNpuZ/mnu+CdD3H0WVaaBQA8LTT3S33xhVBUj232T8M3tAhSWJs/D/UqORYUlJNl/8VQZg==
@@ -9220,47 +9208,6 @@ react-app-polyfill@^1.0.6:
     raf "^3.4.1"
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
-
-react-chrono@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-chrono/-/react-chrono-1.0.4.tgz#39918ba2b6d6b5433134aba1369500fb9882eeae"
-  integrity sha512-0BB08oMF3t/PQovLyedS44j23paZLsVe5CxzyphdUOw2U9UyyfANeKQ72FIhRc2US6NDxg5fIwcTwJvkrHK2nA==
-  dependencies:
-    "@hot-loader/react-dom" "^16.13.0"
-    "@testing-library/jest-dom" "^5.11.4"
-    "@testing-library/react" "^10.4.9"
-    "@testing-library/user-event" "^12.1.2"
-    "@types/jest" "^26.0.10"
-    "@types/node" "^14.6.0"
-    "@types/react" "^16.9.0"
-    "@types/react-dom" "^16.9.0"
-    nanoid "^3.1.12"
-    react "^16.13.1"
-    react-dom "npm:@hot-loader/react-dom"
-    react-scripts "3.4.0"
-    styled-components "5.1.1"
-    use-debounce "^3.4.3"
-
-react-chrono@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-chrono/-/react-chrono-1.0.5.tgz#6fb0ec18109c9c0fad89a1e49b3031170419c6c8"
-  integrity sha512-fU5nKNQN+BnA8DZ8jnXK1Vejz3Jl6R9FPa2GCsbCuQ9cKtBpH9tZJ6bOAoOzZX7gG0Jzi2NdzUqE4m5kTsUVTA==
-  dependencies:
-    "@hot-loader/react-dom" "^16.13.0"
-    "@testing-library/jest-dom" "^5.11.4"
-    "@testing-library/react" "^10.4.9"
-    "@testing-library/user-event" "^12.1.2"
-    "@types/jest" "^26.0.10"
-    "@types/node" "^14.6.0"
-    "@types/react" "^16.9.0"
-    "@types/react-dom" "^16.9.0"
-    nanoid "^3.1.12"
-    react "^16.13.1"
-    react-chrono "^1.0.4"
-    react-dom "npm:@hot-loader/react-dom"
-    react-scripts "3.4.0"
-    styled-components "5.1.1"
-    use-debounce "^3.4.3"
 
 react-dev-utils@^10.2.0:
   version "10.2.1"
