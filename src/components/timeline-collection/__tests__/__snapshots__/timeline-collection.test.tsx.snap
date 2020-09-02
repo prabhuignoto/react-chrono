@@ -2,31 +2,31 @@
 
 exports[`Test Collection Horizontal render 1`] = `
 <ul
-  class="sc-fzozJi Zwgbw horizontal"
+  class="sc-fznyAO fPPEyL horizontal"
   data-testid="timeline-collection"
 >
   <li
-    class="sc-fzoLsD iwRVyL horizontal "
+    class="sc-fznKkj hxcbnX horizontal "
     width="250"
   >
     <div
-      class="sc-AxhCb IpIEE horizontal"
+      class="sc-Axmtr hYmEjG horizontal"
       data-testid="timeline-item"
     >
       <div
-        class="sc-AxgMl hIEZtR"
+        class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-AxheI dRuAGA horizontal in-active"
+          class="sc-fzoLsD fZqnJh horizontal in-active"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-Axmtr jAsnA horizontal undefined"
+        class="sc-fzpans jyHixq horizontal undefined"
         data-testid="timeline-title"
       >
         <div
-          class="sc-AxiKw jUuDCK"
+          class="sc-AxheI gcvhjJ"
           title="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
         >
           June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
@@ -35,27 +35,27 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fzoLsD iwRVyL horizontal "
+    class="sc-fznKkj hxcbnX horizontal "
     width="250"
   >
     <div
-      class="sc-AxhCb IpIEE horizontal"
+      class="sc-Axmtr hYmEjG horizontal"
       data-testid="timeline-item"
     >
       <div
-        class="sc-AxgMl hIEZtR"
+        class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-AxheI dRuAGA horizontal in-active"
+          class="sc-fzoLsD fZqnJh horizontal in-active"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-Axmtr jAsnA horizontal undefined"
+        class="sc-fzpans jyHixq horizontal undefined"
         data-testid="timeline-title"
       >
         <div
-          class="sc-AxiKw jUuDCK"
+          class="sc-AxheI gcvhjJ"
           title="July 28, 1914"
         >
           July 28, 1914
@@ -64,27 +64,27 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fzoLsD iwRVyL horizontal "
+    class="sc-fznKkj hxcbnX horizontal "
     width="250"
   >
     <div
-      class="sc-AxhCb IpIEE horizontal"
+      class="sc-Axmtr hYmEjG horizontal"
       data-testid="timeline-item"
     >
       <div
-        class="sc-AxgMl hIEZtR"
+        class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-AxheI dRuAGA horizontal in-active"
+          class="sc-fzoLsD fZqnJh horizontal in-active"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-Axmtr jAsnA horizontal undefined"
+        class="sc-fzpans jyHixq horizontal undefined"
         data-testid="timeline-title"
       >
         <div
-          class="sc-AxiKw jUuDCK"
+          class="sc-AxheI gcvhjJ"
           title="August 1–28, 1914"
         >
           August 1–28, 1914
@@ -93,27 +93,27 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fzoLsD iwRVyL horizontal "
+    class="sc-fznKkj hxcbnX horizontal "
     width="250"
   >
     <div
-      class="sc-AxhCb IpIEE horizontal"
+      class="sc-Axmtr hYmEjG horizontal"
       data-testid="timeline-item"
     >
       <div
-        class="sc-AxgMl hIEZtR"
+        class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-AxheI dRuAGA horizontal in-active"
+          class="sc-fzoLsD fZqnJh horizontal in-active"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-Axmtr jAsnA horizontal undefined"
+        class="sc-fzpans jyHixq horizontal undefined"
         data-testid="timeline-title"
       >
         <div
-          class="sc-AxiKw jUuDCK"
+          class="sc-AxheI gcvhjJ"
           title="September 6, 1914"
         >
           September 6, 1914
@@ -126,76 +126,76 @@ exports[`Test Collection Horizontal render 1`] = `
 
 exports[`Test Collection Tree render 1`] = `
 <ul
-  class="sc-fzozJi Zwgbw tree"
+  class="sc-fznyAO fPPEyL tree"
   data-testid="timeline-collection"
 >
   <li
-    class="sc-fzoLsD iwRVyL tree "
+    class="sc-fznKkj hxcbnX tree "
     width="250"
   >
     <div
-      class="sc-AxhCb IpIEE tree"
+      class="sc-Axmtr hYmEjG tree"
       data-testid="timeline-item"
     >
       <div
-        class="sc-AxgMl hIEZtR"
+        class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-AxheI dRuAGA tree in-active"
+          class="sc-fzoLsD fZqnJh tree in-active"
           data-testid="timeline-circle"
         />
       </div>
     </div>
   </li>
   <li
-    class="sc-fzoLsD iwRVyL tree "
+    class="sc-fznKkj hxcbnX tree "
     width="250"
   >
     <div
-      class="sc-AxhCb IpIEE tree"
+      class="sc-Axmtr hYmEjG tree"
       data-testid="timeline-item"
     >
       <div
-        class="sc-AxgMl hIEZtR"
+        class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-AxheI dRuAGA tree in-active"
+          class="sc-fzoLsD fZqnJh tree in-active"
           data-testid="timeline-circle"
         />
       </div>
     </div>
   </li>
   <li
-    class="sc-fzoLsD iwRVyL tree "
+    class="sc-fznKkj hxcbnX tree "
     width="250"
   >
     <div
-      class="sc-AxhCb IpIEE tree"
+      class="sc-Axmtr hYmEjG tree"
       data-testid="timeline-item"
     >
       <div
-        class="sc-AxgMl hIEZtR"
+        class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-AxheI dRuAGA tree in-active"
+          class="sc-fzoLsD fZqnJh tree in-active"
           data-testid="timeline-circle"
         />
       </div>
     </div>
   </li>
   <li
-    class="sc-fzoLsD iwRVyL tree "
+    class="sc-fznKkj hxcbnX tree "
     width="250"
   >
     <div
-      class="sc-AxhCb IpIEE tree"
+      class="sc-Axmtr hYmEjG tree"
       data-testid="timeline-item"
     >
       <div
-        class="sc-AxgMl hIEZtR"
+        class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-AxheI dRuAGA tree in-active"
+          class="sc-fzoLsD fZqnJh tree in-active"
           data-testid="timeline-circle"
         />
       </div>
@@ -206,175 +206,227 @@ exports[`Test Collection Tree render 1`] = `
 
 exports[`Test Collection Vertical render 1`] = `
 <ul
-  class="sc-fzozJi Zwgbw vertical"
+  class="sc-fznyAO fPPEyL vertical"
   data-testid="timeline-collection"
 >
   <li
-    class="sc-fzoLsD iwRVyL vertical "
+    class="sc-fznKkj hxcbnX vertical "
     width="250"
   >
     <div
-      class="sc-AxhCb IpIEE vertical"
+      class="sc-Axmtr hYmEjG vertical"
       data-testid="timeline-item"
     >
       <div
-        class="sc-AxgMl hIEZtR"
+        class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-AxheI dRuAGA vertical in-active"
+          class="sc-fzoLsD fZqnJh vertical in-active"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-AxmLO gXXkzo vertical"
+        class="sc-fzplWN ceLUBz vertical"
       >
         <div
-          class="sc-Axmtr jAsnA vertical undefined"
+          class="sc-fzpans jyHixq vertical undefined"
           data-testid="timeline-title"
         >
           <div
-            class="sc-AxiKw jUuDCK"
+            class="sc-AxheI gcvhjJ"
             title="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
           >
             June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
           </div>
         </div>
         <div
-          class="sc-AxjAm eEVtq"
+          class="sc-AxjAm dBmnAc"
         >
           <span
-            class="sc-AxirZ izgUJV"
+            class="sc-AxirZ itZkid"
           >
             Archduke Franz Ferdinand of Austria and his wife, Sophie, are assassinated by a Bosnian Serb nationalist in Sarajevo.
+          </span>
+          <div
+            class="sc-AxhUy hgOZcx show-less"
+          >
+            <p
+              class="sc-AxhCb iaRluf"
+            />
+          </div>
+          <span
+            class="sc-AxgMl iOHsOw show-more"
+            role="button"
+          >
+            ...
           </span>
         </div>
       </div>
     </div>
   </li>
   <li
-    class="sc-fzoLsD iwRVyL vertical "
+    class="sc-fznKkj hxcbnX vertical "
     width="250"
   >
     <div
-      class="sc-AxhCb IpIEE vertical"
+      class="sc-Axmtr hYmEjG vertical"
       data-testid="timeline-item"
     >
       <div
-        class="sc-AxgMl hIEZtR"
+        class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-AxheI dRuAGA vertical in-active"
+          class="sc-fzoLsD fZqnJh vertical in-active"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-AxmLO gXXkzo vertical"
+        class="sc-fzplWN ceLUBz vertical"
       >
         <div
-          class="sc-Axmtr jAsnA vertical undefined"
+          class="sc-fzpans jyHixq vertical undefined"
           data-testid="timeline-title"
         >
           <div
-            class="sc-AxiKw jUuDCK"
+            class="sc-AxheI gcvhjJ"
             title="July 28, 1914"
           >
             July 28, 1914
           </div>
         </div>
         <div
-          class="sc-AxjAm eEVtq"
+          class="sc-AxjAm dBmnAc"
         >
           <span
-            class="sc-AxirZ izgUJV"
+            class="sc-AxirZ itZkid"
           >
             World War I begins when Austria-Hungary declares war on Serbia.
+          </span>
+          <div
+            class="sc-AxhUy hgOZcx show-less"
+          >
+            <p
+              class="sc-AxhCb iaRluf"
+            />
+          </div>
+          <span
+            class="sc-AxgMl iOHsOw show-more"
+            role="button"
+          >
+            ...
           </span>
         </div>
       </div>
     </div>
   </li>
   <li
-    class="sc-fzoLsD iwRVyL vertical "
+    class="sc-fznKkj hxcbnX vertical "
     width="250"
   >
     <div
-      class="sc-AxhCb IpIEE vertical"
+      class="sc-Axmtr hYmEjG vertical"
       data-testid="timeline-item"
     >
       <div
-        class="sc-AxgMl hIEZtR"
+        class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-AxheI dRuAGA vertical in-active"
+          class="sc-fzoLsD fZqnJh vertical in-active"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-AxmLO gXXkzo vertical"
+        class="sc-fzplWN ceLUBz vertical"
       >
         <div
-          class="sc-Axmtr jAsnA vertical undefined"
+          class="sc-fzpans jyHixq vertical undefined"
           data-testid="timeline-title"
         >
           <div
-            class="sc-AxiKw jUuDCK"
+            class="sc-AxheI gcvhjJ"
             title="August 1–28, 1914"
           >
             August 1–28, 1914
           </div>
         </div>
         <div
-          class="sc-AxjAm eEVtq"
+          class="sc-AxjAm dBmnAc"
         >
           <span
-            class="sc-AxirZ izgUJV"
+            class="sc-AxirZ itZkid"
           >
             Germany declares war on Russia, France, and Belgium. Britain declares war on Germany.
     Austria declares war on Russia. Montenegro declares war on Austria. France declares war on Austria.
     Britain declares war on Austria. Montenegro declares war on Germany. Japan declares war on Germany. Austria declares war on Belgium.
+          </span>
+          <div
+            class="sc-AxhUy hgOZcx show-less"
+          >
+            <p
+              class="sc-AxhCb iaRluf"
+            />
+          </div>
+          <span
+            class="sc-AxgMl iOHsOw show-more"
+            role="button"
+          >
+            ...
           </span>
         </div>
       </div>
     </div>
   </li>
   <li
-    class="sc-fzoLsD iwRVyL vertical "
+    class="sc-fznKkj hxcbnX vertical "
     width="250"
   >
     <div
-      class="sc-AxhCb IpIEE vertical"
+      class="sc-Axmtr hYmEjG vertical"
       data-testid="timeline-item"
     >
       <div
-        class="sc-AxgMl hIEZtR"
+        class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-AxheI dRuAGA vertical in-active"
+          class="sc-fzoLsD fZqnJh vertical in-active"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-AxmLO gXXkzo vertical"
+        class="sc-fzplWN ceLUBz vertical"
       >
         <div
-          class="sc-Axmtr jAsnA vertical undefined"
+          class="sc-fzpans jyHixq vertical undefined"
           data-testid="timeline-title"
         >
           <div
-            class="sc-AxiKw jUuDCK"
+            class="sc-AxheI gcvhjJ"
             title="September 6, 1914"
           >
             September 6, 1914
           </div>
         </div>
         <div
-          class="sc-AxjAm eEVtq"
+          class="sc-AxjAm dBmnAc"
         >
           <span
-            class="sc-AxirZ izgUJV"
+            class="sc-AxirZ itZkid"
           >
             First Battle of the Marne begins. The Germans had advanced to within 30 miles of Paris, but over the next two days, the French are reinforced by 6,000 infantrymen who are transported to the front by hundreds of taxis.
       The Germans dig in north of the Aisne River, and the trench warfare that is to typify the Western Front for the next four years begins.
+          </span>
+          <div
+            class="sc-AxhUy hgOZcx show-less"
+          >
+            <p
+              class="sc-AxhCb iaRluf"
+            />
+          </div>
+          <span
+            class="sc-AxgMl iOHsOw show-more"
+            role="button"
+          >
+            ...
           </span>
         </div>
       </div>

@@ -7,11 +7,11 @@
 
 ## Features
 
-- **Timeline modes** - The component supports multiple modes to layout the timeline either `Vertically` or `Horizontally`.
-- **Tree Mode** - In `Tree` mode the individual timeline content boxes are alternated between left and right.
-- **Slideshow** - The `Slideshow` starts the component in Slideshow mode. The component automatically plays the series for you.
-- **QuickJump** - Quickly jump to the start or end of the timeline by using the <kbd>HOME</kbd> or <kbd>END</kbd> key.
-- **Keyboard Support** - The timelines can be navigated with the <kbd>UP</kbd> , <kbd>DOWN</kbd> keys in `vertical` or `tree` mode. In `horizontal` mode <kbd>LEFT</kbd> , <kbd>RIGHT</kbd> keys can be used for navigation.
+- **Modes** - Layout the timeline either `Vertically` or `Horizontally` using the `mode` prop.
+- **Tree** - In `Tree` mode the timeline cards are alternated between left and right.
+- **Slideshow** - Play the timeline automatically with the `slideShow` prop.
+- **Keyboard Support** - The timeline can be navigated with the <kbd>UP</kbd> , <kbd>DOWN</kbd> keys in `vertical` or `tree` mode. In `horizontal` mode <kbd>LEFT</kbd> , <kbd>RIGHT</kbd> keys can be used for navigation. Quickly jump to the start or end of the timeline by using the <kbd>HOME</kbd> or <kbd>END</kbd> key.
+- **Custom theme** - Customize the colors using the `theme` prop
 
 ## Installation
 
@@ -21,14 +21,18 @@ yarn install react-chrono
 
 ## Getting Started
 
-`react-chrono` has some great defaults to get you started quickly.
+Please make sure you wrap the component in a container that has a width and height. When no `mode` is specified, the component defaults to `HORIZONTAL`.
+
+Use the `items` prop to create the timeline. Each Timeline item must have the following properties.
+
+`title`, `contentTitle`, `contentText`, `contentDetailedText`
 
 ```sh
   const items = [{
     title: "May 1940",
     contentTitle: "Dunkirk",
     contentText:"Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.",
-    contentDetailedText: "On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France...",
+    contentDetailedText: "On 10 May 1940, Hitler began his long-awaited offensive in the west...",
   }, ...];
 
   <div style={{ width: "500px", height: "400px" }}>
@@ -38,9 +42,18 @@ yarn install react-chrono
 
 ![app-home](app-home.png)
 
-## Tree
+### Vertical
 
-`react-chrono` also supports a Tree mode.
+```sh
+  <div style={{ width: "500px", height: "950px" }}>
+    <chrono
+      items={items}
+      mode="VERTICAL"
+    />
+  </div>
+```
+
+### Tree
 
 ```sh
   <div style={{ width: "500px", height: "950px" }}>
@@ -51,7 +64,11 @@ yarn install react-chrono
   </div>
 ```
 
-## Slideshow
+![app-tree](app-tree.png)
+
+### Slideshow
+
+Play the timeline automatically with the `slideShow` mode.
 
 ```sh
   <div style={{ width: "500px", height: "950px" }}>
@@ -63,13 +80,12 @@ yarn install react-chrono
   </div>
 ```
 
-![app-tree](app-tree.png)
-
 ## Props
 
 | name              | description                                                                           | default      |
 | ----------------- | ------------------------------------------------------------------------------------- | ------------ |
 | mode              | sets the layout for the timeline component. can be `HORIZONTAL`, `VERTICAL` or `TREE` | `HORIZONTAL` |
+| items             | collection of timeline items                                                          |              |
 | disableNavOnKey   | disables timeline navigation through keyboard                                         | false        |
 | slideShow         | starts the timeline in slideshow mode                                                 |              |
 | slideItemDuration | delay between timeline points during a slideshow                                      | 2500         |

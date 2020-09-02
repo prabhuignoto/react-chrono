@@ -116,6 +116,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
           onClick={handleClick}
           ref={circleRef}
           data-testid="timeline-circle"
+          theme={theme}
         ></TimelinePoint>
       </TimelinePointWrapper>
       {mode === "HORIZONTAL" && (

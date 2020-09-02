@@ -18,9 +18,6 @@ test("Check Timeline Active", () => {
   const { getByText } = render(<Title title="Test" active />);
   const titleElement = getByText(/test/i);
   expect(titleElement).toHaveClass("active");
-  expect(titleElement).toHaveStyle(
-    "background: #ffdf00;color: #0f52ba;font-weight: 600;"
-  );
 });
 
 test("Check Timeline Not Active", () => {

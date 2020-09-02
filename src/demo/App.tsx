@@ -147,7 +147,8 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
           <Vertical>
             <Description>
               <DescriptionContent>
-                SlideShow is also supported for all the modes. Here is a component in TREE mode with slideShow enabled.
+                SlideShow is also supported for all the modes. Here is a
+                component in TREE mode with slideShow enabled.
               </DescriptionContent>
             </Description>
             <Pre>

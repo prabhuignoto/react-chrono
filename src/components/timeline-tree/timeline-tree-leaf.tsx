@@ -18,7 +18,7 @@ const TreeLeaf: React.FunctionComponent<TreeLeafModel> = ({
     if (active) {
       const circle = circleRef.current;
 
-      circle && onActive(circle?.offsetTop);
+      circle && onActive(circle.offsetTop);
     }
   }, [active, onActive]);
 
@@ -35,7 +35,7 @@ const TreeLeaf: React.FunctionComponent<TreeLeafModel> = ({
         ref={circleRef}
         data-testid="tree-leaf-click"
       >
-        <TimelinePoint className={active ? "active" : "in-active"} />
+        <TimelinePoint className={active ? "active" : "in-active"} theme={theme}/>
       </TrunkPointWrapper>
     </TreeTrunkWrapper>
   );

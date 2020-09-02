@@ -2,42 +2,55 @@
 
 exports[`Test tree branch render 1`] = `
 <div
-  class="sc-fzoLsD fyzsKR test-class "
+  class="sc-fznKkj bKFzvT test-class "
   data-testid="branch-main"
 >
   <div
-    class="sc-fznZeY jzOIvf test-class"
+    class="sc-fzqNJr cyEaWa test-class"
   >
     <div
-      class="sc-AxiKw jUuDCK active"
+      class="sc-AxheI gcvhjJ active"
       title="branch title"
     >
       branch title
     </div>
   </div>
   <div
-    class="sc-fznyAO hhDdtW test-class"
+    class="sc-fzokOt caKWyu test-class "
   >
     <div
-      class="sc-AxjAm eEVtq active"
+      class="sc-AxjAm dBmnAc active"
     >
       <span
-        class="sc-AxirZ izgUJV"
+        class="sc-AxirZ itZkid"
       >
         Tree branch test
+      </span>
+      <div
+        class="sc-AxhUy hgOZcx show-less"
+      >
+        <p
+          class="sc-AxhCb iaRluf"
+        />
+      </div>
+      <span
+        class="sc-AxgMl iOHsOw show-more"
+        role="button"
+      >
+        show more
       </span>
     </div>
   </div>
   <div
-    class="sc-fzplWN hftWTh test-class"
+    class="sc-fznZeY jSFqfu test-class"
     data-testid="tree-leaf"
   >
     <div
-      class="sc-fznKkj dpatIe test-class"
+      class="sc-fzqBZW elIYAn test-class"
       data-testid="tree-leaf-click"
     >
       <div
-        class="sc-AxheI dRuAGA active"
+        class="sc-fzoLsD fZqnJh active"
       />
     </div>
   </div>

@@ -127,6 +127,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
               autoScroll={handleScroll}
               mode={mode}
               wrapperId={id.current}
+              theme={theme}
             />
           </TimelineMain>
         ) : null}

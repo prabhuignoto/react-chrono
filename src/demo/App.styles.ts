@@ -25,14 +25,16 @@ export const ComponentContainer = styled.div`
   background: #f2f2f2;
   border-radius: 4px;
   height: 350px;
-  margin-top: 2rem;
-  padding: 2rem 0;
+  margin-top: 1rem;
+  padding: 1rem 0;
 `;
 
 export const ComponentContainerTree = styled.div`
   background: #f2f2f2;
   border-radius: 4px;
   height: 800px; 
+  margin-top: 1rem;
+  padding: 1rem 0;
 `;
 
 export const Header = styled.header`

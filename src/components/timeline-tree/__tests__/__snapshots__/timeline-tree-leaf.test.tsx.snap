@@ -2,15 +2,15 @@
 
 exports[`Check Timeline Leaf snapshot 1`] = `
 <div
-  class="sc-fzozJi cUDTqO random-class"
+  class="sc-AxmLO lcAcct random-class"
   data-testid="tree-leaf"
 >
   <div
-    class="sc-fzpans jRCOFi random-class"
+    class="sc-fzoLsD gXIptZ random-class"
     data-testid="tree-leaf-click"
   >
     <div
-      class="sc-AxhCb fUotBl in-active"
+      class="sc-AxhCb lfWUfN in-active"
     />
   </div>
 </div>

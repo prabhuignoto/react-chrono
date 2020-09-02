@@ -3,7 +3,7 @@ import React from "react";
 import {
   TimelineItemModel,
   TimelineItemViewModel,
-} from "../../models/TimelineItemModel";
+} from "../../../models/TimelineItemModel";
 import Tree from "../timeline-tree";
 
 const onClick = jest.fn();

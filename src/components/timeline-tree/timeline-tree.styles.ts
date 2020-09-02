@@ -43,8 +43,7 @@ export const TreeTrunkWrapper = styled.div<{ bg?: string, alternateCards?: boole
   height: 100%;
   justify-content: center;
   position: relative;
-
-  ${p => p.alternateCards ? "width: 10%" : "width: 10%"};
+  width: 10%;
   
   &.left {
     order: 2;

@@ -1,13 +1,14 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 import {
   TimelineItemModel,
   TimelineItemViewModel,
-} from "../../models/TimelineItemModel";
+} from "../../../models/TimelineItemModel";
 import Collection from "../timeline-collection";
 
 const onClick = jest.fn();
 const autoScroll = jest.fn();
+const id = "test_sdccs_test";
 
 const items: TimelineItemModel[] = [
   {
@@ -44,6 +45,7 @@ const Horizontal = (
     mode="HORIZONTAL"
     handleItemClick={onClick}
     autoScroll={autoScroll}
+    wrapperId={id}
   />
 );
 
@@ -54,6 +56,7 @@ const Vertical = (
     mode="VERTICAL"
     handleItemClick={onClick}
     autoScroll={autoScroll}
+    wrapperId={id}
   />
 );
 
@@ -64,6 +67,7 @@ const Tree = (
     mode="TREE"
     handleItemClick={onClick}
     autoScroll={autoScroll}
+    wrapperId={id}
   />
 );
 

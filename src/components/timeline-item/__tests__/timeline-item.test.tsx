@@ -1,9 +1,11 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import Item from "../timeline-item";
 
 const onClick = jest.fn();
 const autoScroll = jest.fn();
+
+const id = "test_azsxcs1212_test";
 
 const Horizontal = (
   <Item
@@ -15,6 +17,7 @@ const Horizontal = (
     autoScroll={autoScroll}
     position="top"
     title="test title"
+    wrapperId={id}
   />
 );
 
@@ -28,6 +31,7 @@ const Vertical = (
     autoScroll={autoScroll}
     position="bottom"
     title="test title"
+    wrapperId={id}
   />
 );
 
@@ -76,4 +80,3 @@ test("Test Timeline Item - Handler", () => {
   expect(onClick).toBeCalled();
   expect(onClick).toBeCalledWith("CC22CC");
 });
-

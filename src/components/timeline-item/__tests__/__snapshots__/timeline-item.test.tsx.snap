@@ -2,23 +2,23 @@
 
 exports[`Test Timeline Item render - Horizontal 1`] = `
 <div
-  class="sc-AxhCb IpIEE horizontal"
+  class="sc-Axmtr hYmEjG horizontal"
   data-testid="timeline-item"
 >
   <div
-    class="sc-AxgMl hIEZtR"
+    class="sc-fzozJi hdDtNg"
   >
     <div
-      class="sc-AxheI dRuAGA horizontal active"
+      class="sc-fzoLsD fZqnJh horizontal active"
       data-testid="timeline-circle"
     />
   </div>
   <div
-    class="sc-Axmtr jAsnA horizontal top"
+    class="sc-fzpans jyHixq horizontal top"
     data-testid="timeline-title"
   >
     <div
-      class="sc-AxiKw jUuDCK active"
+      class="sc-AxheI gcvhjJ active"
       title="test title"
     >
       test title
@@ -29,38 +29,51 @@ exports[`Test Timeline Item render - Horizontal 1`] = `
 
 exports[`Test Timeline Item render - Vertical 1`] = `
 <div
-  class="sc-AxhCb IpIEE vertical"
+  class="sc-Axmtr hYmEjG vertical"
   data-testid="timeline-item"
 >
   <div
-    class="sc-AxgMl hIEZtR"
+    class="sc-fzozJi hdDtNg"
   >
     <div
-      class="sc-AxheI dRuAGA vertical active"
+      class="sc-fzoLsD fZqnJh vertical active"
       data-testid="timeline-circle"
     />
   </div>
   <div
-    class="sc-AxmLO gXXkzo vertical"
+    class="sc-fzplWN ceLUBz vertical"
   >
     <div
-      class="sc-Axmtr jAsnA vertical bottom"
+      class="sc-fzpans jyHixq vertical bottom"
       data-testid="timeline-title"
     >
       <div
-        class="sc-AxiKw jUuDCK active"
+        class="sc-AxheI gcvhjJ active"
         title="test title"
       >
         test title
       </div>
     </div>
     <div
-      class="sc-AxjAm eEVtq active"
+      class="sc-AxjAm dBmnAc active"
     >
       <span
-        class="sc-AxirZ izgUJV"
+        class="sc-AxirZ itZkid"
       >
         This is a test content
+      </span>
+      <div
+        class="sc-AxhUy hgOZcx show-less"
+      >
+        <p
+          class="sc-AxhCb iaRluf"
+        />
+      </div>
+      <span
+        class="sc-AxgMl iOHsOw show-more"
+        role="button"
+      >
+        show more
       </span>
     </div>
   </div>

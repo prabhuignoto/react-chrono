@@ -4,6 +4,7 @@ import Branch from "../timeline-tree-branch";
 
 const onClick = jest.fn();
 const onActive = jest.fn();
+const showMore = jest.fn();
 
 const View = (
   <Branch
@@ -15,6 +16,7 @@ const View = (
     active
     onClick={() => onClick("zz22ww")}
     onActive={onActive}
+    onShowMore={showMore}
   />
 );
 

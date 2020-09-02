@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { Theme } from "../../models/TimelineTreeModel";
 
 export const Wrapper = styled.div`
   align-items: center;
@@ -51,8 +52,8 @@ export const TimelinePointWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const TimelinePoint = styled.div`
-  background: #0f52ba;
+export const TimelinePoint = styled.div<{theme: Theme}>`
+  background: ${p => p.theme.primary};
   border-radius: 50%;
   cursor: pointer;
   height: 16px;
@@ -66,7 +67,7 @@ export const TimelinePoint = styled.div`
     transform: scale(1.4);
 
     &::after {
-      background: #ffdf00;
+      background: ${p => p.theme.secondary};
       border-radius: 50%;
       content: '';
       display: block;
