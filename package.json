@@ -58,7 +58,7 @@
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "react-hot-loader": "^4.12.21",
-    "rollup": "^2.26.8",
+    "rollup": "^2.26.9",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-typescript2": "^0.27.2",
     "ts-jest": "^26.3.0",
