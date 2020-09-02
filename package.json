@@ -4,14 +4,10 @@
   "license": "MIT",
   "description": "a modern timeline component for React",
   "dependencies": {
-    "@types/webfontloader": "^1.6.32",
     "nanoid": "^3.1.12",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.0",
     "styled-components": "5.1.1",
-    "use-debounce": "^3.4.3",
-    "webfontloader": "^1.6.28"
+    "use-debounce": "^3.4.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,7 +33,11 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.0",
+    "webfontloader": "^1.6.28",
     "@babel/plugin-proposal-optional-chaining": "^7.11.0",
+    "@types/webfontloader": "^1.6.32",
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-typescript": "^7.10.4",
     "@babel/runtime": "^7.11.2",
