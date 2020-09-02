@@ -15,6 +15,5 @@ export const TitleWrapper = styled.div<{ theme: Theme }>`
   &.active {
     background: ${p => p.theme.secondary};;
     color: ${p => p.theme.primary};
-    font-weight: 400;
   }
 `;

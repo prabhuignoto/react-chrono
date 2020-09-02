@@ -10,19 +10,19 @@ import {
 } from "./timeline-tree.styles";
 
 const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
+  active,
+  alternateCards,
   className,
-  index,
+  contentDetailedText,
   contentText,
   contentTitle,
-  contentDetailedText,
   id,
-  active,
-  onClick,
+  index,
   onActive,
-  visible,
-  title,
+  onClick,
   theme,
-  alternateCards,
+  title,
+  visible,
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +45,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
         className={className}
         alternateCards={alternateCards}
       >
-        <TimelineItemTitle title={title} active={active} />
+        <TimelineItemTitle title={title} active={active} theme={theme} />
       </TimelineTreeTitleWrapper>
       <TimelineItemContentWrapper
         className={`${className} ${visible ? "visible" : ""}`}
@@ -61,6 +61,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
               handleOnActive(0);
             }, 200)
           }
+          theme={theme}
         />
       </TimelineItemContentWrapper>
       <TreeLeaf

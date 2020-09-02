@@ -90,6 +90,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
           title={contentTitle}
           detailedText={contentDetailedText}
           onShowMore={handleOnShowMore}
+          theme={theme}
         />
       </TimelineContentContainer>
     );

@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { Theme } from "../../models/TimelineTreeModel";
 
-export const TimelineItemContentWrapper = styled.div`
+export const TimelineItemContentWrapper = styled.div<{theme: Theme}>`
   align-items: flex-start;
   background: #fff;
   border-radius: 0.75rem;
@@ -17,9 +18,9 @@ export const TimelineItemContentWrapper = styled.div`
   width: 100%;
   
   &.active {
-    color: #0f52ba;
+    color: ${p => p.theme.primary};
   }
-  `;
+`;
 
 export const TimelineContentText = styled.span`
   font-size: 0.9rem;
@@ -27,14 +28,14 @@ export const TimelineContentText = styled.span`
   padding: 0.25rem 0.75rem 0rem;
 `;
 
-export const TimelineContentTitle = styled.span`
+export const TimelineContentTitle = styled.span<{theme: Theme}>`
   color: #323232;
   font-size: 1.2rem;
   font-weight: 500;
   margin-top: 0.5rem;
   padding-left: 0.75rem;
   &.active {
-    color: #0f52ba;
+    color: ${p => p.theme.primary};
   }
 `;
 
@@ -51,7 +52,7 @@ export const TimelineContentDetails = styled.p`
   }
 `;
 
-export const TimelineContentDetailsWrapper = styled.div`
+export const TimelineContentDetailsWrapper = styled.div<{theme: Theme}>`
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -76,8 +77,8 @@ export const TimelineContentDetailsWrapper = styled.div`
   }
   
   &::-webkit-scrollbar-thumb {
-    background-color: #3e74c7;
-    outline: 1px solid #3e74c7;
+    background-color: ${p => p.theme.primary};
+    outline: 1px solid ${p => p.theme.primary};
   }
 `;
 

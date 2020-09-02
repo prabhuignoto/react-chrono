@@ -1,13 +1,22 @@
 import React, { useEffect, useRef, useState, WheelEvent } from "react";
-import { ShowMore, TimelineContentDetails, TimelineContentDetailsWrapper, TimelineContentText, TimelineContentTitle, TimelineItemContentWrapper } from "./timeline-item-content.styles";
+import { TimelineContentModel } from "../../models/TimelineContentModel";
+import {
+  ShowMore,
+  TimelineContentDetails,
+  TimelineContentDetailsWrapper,
+  TimelineContentText,
+  TimelineContentTitle,
+  TimelineItemContentWrapper,
+} from "./timeline-item-content.styles";
 
-const TimelineItemContent: React.FunctionComponent<{
-  content: string;
-  active?: boolean;
-  title?: string;
-  detailedText?: string;
-  onShowMore: () => void;
-}> = ({ content, active, title, detailedText, onShowMore }) => {
+const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
+  content,
+  active,
+  title,
+  detailedText,
+  onShowMore,
+  theme,
+}) => {
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
   const [canShowMore, setCanShowMore] = useState(false);
@@ -44,9 +53,12 @@ const TimelineItemContent: React.FunctionComponent<{
   };
 
   return (
-    <TimelineItemContentWrapper className={active ? "active" : ""}>
+    <TimelineItemContentWrapper
+      className={active ? "active" : ""}
+      theme={theme}
+    >
       {title && (
-        <TimelineContentTitle className={active ? "active" : ""}>
+        <TimelineContentTitle className={active ? "active" : ""} theme={theme}>
           {title}
         </TimelineContentTitle>
       )}
@@ -54,6 +66,7 @@ const TimelineItemContent: React.FunctionComponent<{
       <TimelineContentDetailsWrapper
         ref={detailsRef}
         className={!showMore ? "show-less" : ""}
+        theme={theme}
       >
         <TimelineContentDetails
           onWheel={handleMouseWheel}
