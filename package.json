@@ -7,7 +7,7 @@
     "nanoid": "^3.1.12",
     "react": "^16.13.1",
     "styled-components": "5.1.1",
-    "use-debounce": "^3.4.3"
+    "use-debounce": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,11 +33,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.0",
-    "webfontloader": "^1.6.28",
     "@babel/plugin-proposal-optional-chaining": "^7.11.0",
-    "@types/webfontloader": "^1.6.32",
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-typescript": "^7.10.4",
     "@babel/runtime": "^7.11.2",
@@ -55,14 +51,18 @@
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.0",
     "@types/styled-components": "5.1.2",
+    "@types/webfontloader": "^1.6.32",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
+    "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
+    "react-scripts": "3.4.0",
     "rollup": "^2.26.9",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-typescript2": "^0.27.2",
     "ts-jest": "^26.3.0",
-    "typescript": "3.8.3"
+    "typescript": "3.8.3",
+    "webfontloader": "^1.6.28"
   },
   "peerDependencies": {
     "react": "^16.13.1",
