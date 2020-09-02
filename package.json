@@ -1,6 +1,6 @@
 {
   "name": "react-chrono",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "license": "MIT",
   "description": "a modern timeline component for React",
   "dependencies": {
