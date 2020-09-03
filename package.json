@@ -13,8 +13,8 @@
     "start": "react-scripts start",
     "build:demo": "react-scripts build",
     "build": "rimraf ./dist && rollup -c",
-    "test": "react-scripts test --updateSnapshot",
-    "coverage": "react-scripts test a --coverage --watchAll=false",
+    "test": "react-scripts test -u",
+    "coverage": "react-scripts test a -u --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "browserslist": {

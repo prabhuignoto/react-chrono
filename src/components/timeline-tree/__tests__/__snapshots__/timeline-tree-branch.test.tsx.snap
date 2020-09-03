@@ -9,7 +9,7 @@ exports[`Test tree branch render 1`] = `
     class="sc-fzqNJr cyEaWa test-class"
   >
     <div
-      class="sc-AxheI gcvhjJ active"
+      class="sc-AxheI ekKnFk active"
       title="branch title"
     >
       branch title
@@ -19,7 +19,7 @@ exports[`Test tree branch render 1`] = `
     class="sc-fzokOt caKWyu test-class "
   >
     <div
-      class="sc-AxjAm dBmnAc active"
+      class="sc-AxjAm egePtC active"
     >
       <span
         class="sc-AxirZ itZkid"
@@ -27,7 +27,7 @@ exports[`Test tree branch render 1`] = `
         Tree branch test
       </span>
       <div
-        class="sc-AxhUy hgOZcx show-less"
+        class="sc-AxhUy ftcwA-d show-less"
       >
         <p
           class="sc-AxhCb iaRluf"
