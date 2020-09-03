@@ -87,9 +87,9 @@ Play the timeline automatically with the `slideShow` mode.
 | name              | description                                                                           | default      |
 | ----------------- | ------------------------------------------------------------------------------------- | ------------ |
 | mode              | sets the layout for the timeline component. can be `HORIZONTAL`, `VERTICAL` or `TREE` | `HORIZONTAL` |
-| items             | collection of timeline items                                                          |              |
+| items             | collection of timeline items                                                          | []           |
 | disableNavOnKey   | disables timeline navigation through keyboard                                         | false        |
-| slideShow         | starts the timeline in slideshow mode                                                 |              |
+| slideShow         | starts the timeline in slideshow mode                                                 | false        |
 | slideItemDuration | delay between timeline points during a slideshow                                      | 2500         |
 | titlePosition     | sets the position of the title in `HORIZONTAL` mode                                   | `TOP`        |
 | itemWidth         | width of the timeline section in `HORIZONTAL` mode                                    | 320          |
