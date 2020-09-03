@@ -14,7 +14,7 @@ useNewScrollPosition = function (mode: Mode, itemWidth?: number) {
     const { timelinePointOffset, timelinePointWidth, timelineContentHeight, timelineContentOffset } = scroll;
 
     if (!timelinePointOffset) {
-      return
+      return;
     }
 
     if (mode === "HORIZONTAL" && itemWidth && timelinePointWidth) {

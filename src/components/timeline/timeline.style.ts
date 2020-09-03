@@ -57,7 +57,7 @@ export const TimelineMain = styled.div`
   `;
 
 export const Outline = styled.div<{ color?: string }>`
-  background: ${p => p.color};
+  background: ${(p) => p.color};
   height: 3px;
   left: 0;
   margin-left: auto;

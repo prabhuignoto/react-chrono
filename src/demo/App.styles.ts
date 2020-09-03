@@ -42,9 +42,9 @@ export const Header = styled.header`
   width: 100%;
 `
 
-export const LogoImage = styled.img;
+export const LogoImage = styled.img``;
 
-export const Github = styled.img;
+export const Github = styled.img``;
 
 export const Footer = styled.footer`
   display: flex;

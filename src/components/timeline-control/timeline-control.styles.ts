@@ -9,7 +9,7 @@ export const TimelineControlWrapper = styled.ul`
 
 export const TimelineControlItem = styled.li<{disable: boolean}>`
   padding: 0.2rem;
-  ${p => p.disable ? "pointer-events: none; filter: opacity(0.4)" : ""};
+  ${(p) => p.disable ? "pointer-events: none; filter: opacity(0.4)" : ""};
 `;
 
 export const TimelineControlButton = styled.button`

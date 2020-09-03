@@ -18,7 +18,7 @@ export const TimelineItemContentWrapper = styled.div<{theme: Theme}>`
   width: 100%;
   
   &.active {
-    color: ${p => p.theme.primary};
+    color: ${(p) => p.theme.primary};
   }
 `;
 
@@ -35,7 +35,7 @@ export const TimelineContentTitle = styled.span<{theme: Theme}>`
   margin-top: 0.5rem;
   padding-left: 0.75rem;
   &.active {
-    color: ${p => p.theme.primary};
+    color: ${(p) => p.theme.primary};
   }
 `;
 
@@ -77,8 +77,8 @@ export const TimelineContentDetailsWrapper = styled.div<{theme: Theme}>`
   }
   
   &::-webkit-scrollbar-thumb {
-    background-color: ${p => p.theme.primary};
-    outline: 1px solid ${p => p.theme.primary};
+    background-color: ${(p) => p.theme.primary};
+    outline: 1px solid ${(p) => p.theme.primary};
   }
 `;
 
@@ -87,5 +87,5 @@ export const ShowMore = styled.span<{show?: boolean}>`
   font-size: 0.75rem;
   margin-bottom: 0.5rem;
   margin-left: 0.75rem;
-  visibility: ${p => p.show ? "visible" : "hidden"};
+  visibility: ${(p) => p.show ? "visible" : "hidden"};
 `;

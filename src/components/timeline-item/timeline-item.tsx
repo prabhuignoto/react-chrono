@@ -60,7 +60,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
         }
       }
     }
-  }, [active]);
+  }, [active, autoScroll, mode]);
 
   const handleOnShowMore = () => {
   };

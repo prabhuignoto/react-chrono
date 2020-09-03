@@ -15,11 +15,10 @@ export const TimelineCollectionWrapper = styled.ul`
 `;
 
 export const TimelineItemWrapper = styled.li<{ width: number }>`
-  width: ${p => p.width}px;
+  width: ${(p) => p.width}px;
   visibility: hidden;
 
   &.vertical {
-    /* TO DO */
     margin-bottom: 2rem;
     min-height: 100px;
     width: 100%;
