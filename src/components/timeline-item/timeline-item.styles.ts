@@ -59,9 +59,6 @@ export const TimelinePoint = styled.div<{theme: Theme}>`
   height: 16px;
   width: 16px;
 
-  &.vertical {
-  }
-
   &.active {
     animation: ${scaleUp} 0.1s ease-in;
     transform: scale(1.4);

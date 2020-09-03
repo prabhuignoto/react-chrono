@@ -14,10 +14,9 @@ export const Vertical = styled.div`
 `;
 
 export const Wrapper = styled.div<{show: boolean}>`
-  display: flex;
+  display: ${p => p.show ? "block" : "none"};
   flex-direction: column;
   margin: 0 auto;
-  display: ${p => p.show ? "block" : "none"};
   width: 1200px;
 `;
 
@@ -43,11 +42,9 @@ export const Header = styled.header`
   width: 100%;
 `
 
-export const LogoImage = styled.img`
-`;
+export const LogoImage = styled.img;
 
-export const Github = styled.img`
-`;
+export const Github = styled.img;
 
 export const Footer = styled.footer`
   display: flex;

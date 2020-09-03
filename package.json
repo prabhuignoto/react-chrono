@@ -15,7 +15,8 @@
     "build": "rimraf ./dist && rollup -c",
     "test": "react-scripts test -u",
     "coverage": "react-scripts test a -u --coverage --watchAll=false",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint:css": "stylelint ./src/**/*style.ts"
   },
   "browserslist": {
     "production": [
@@ -60,6 +61,10 @@
     "rollup": "^2.26.9",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-typescript2": "^0.27.2",
+    "stylelint": "^13.7.0",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0",
     "ts-jest": "^26.3.0",
     "typescript": "3.8.3",
     "webfontloader": "^1.6.28"

@@ -13,7 +13,7 @@ export const TitleWrapper = styled.div<{ theme: Theme }>`
   text-overflow: ellipsis;
 
   &.active {
-    background: ${p => p.theme.secondary};;
+    background: ${p => p.theme.secondary};
     color: ${p => p.theme.primary};
   }
 `;

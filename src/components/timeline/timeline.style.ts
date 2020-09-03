@@ -8,9 +8,6 @@ export const Wrapper = styled.div`
   user-select: none;
   outline: 0;
   
-  &:focus {
-  }
-  
   &.horizontal {
     height: 12rem;
   }
