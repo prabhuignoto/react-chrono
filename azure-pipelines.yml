@@ -21,6 +21,10 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
+    yarn run lint:css
+  displayName: 'Running Style Lint.'
+
+- script: |
     yarn run coverage
   displayName: 'Running Tests and Generate coverage reports.'
 
