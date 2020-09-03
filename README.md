@@ -3,7 +3,7 @@
 ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/prabhuignoto/react-chrono?style=plastic)
 [![Depfu](https://badges.depfu.com/badges/48a23a6a830309649b7e516467cd9a48/overview.svg)](https://depfu.com/github/prabhuignoto/react-chrono?project_id=15325)
 
-![logo](logo.png)
+![logo](./readme-assets/logo.png)
 
 > A timeline component for React
 
@@ -42,7 +42,7 @@ Use the `items` prop to create the timeline. Each Timeline item must have the fo
   </div>
 ```
 
-![app-home](app-home.png)
+![app-home](./readme-assets/app-home.png)
 
 ### Vertical
 
@@ -66,7 +66,7 @@ Use the `items` prop to create the timeline. Each Timeline item must have the fo
   </div>
 ```
 
-![app-tree](app-tree.png)
+![app-tree](./readme-assets/app-tree.png)
 
 ### Slideshow
 
