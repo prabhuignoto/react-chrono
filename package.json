@@ -7,7 +7,8 @@
     "nanoid": "^3.1.12",
     "react": "^16.13.1",
     "styled-components": "5.1.1",
-    "use-debounce": "^4.0.0"
+    "use-debounce": "^4.0.0",
+    "snyk": "^1.388.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -15,7 +16,9 @@
     "build": "rimraf ./dist && rollup -c",
     "test": "react-scripts test --updateSnapshot",
     "coverage": "react-scripts test a --coverage --watchAll=false",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "snyk-protect": "snyk protect",
+    "prepare": "yarn run snyk-protect"
   },
   "browserslist": {
     "production": [
@@ -75,5 +78,6 @@
   ],
   "main": "dist/react-chrono.js",
   "module": "dist/react-chrono.esm.js",
-  "umd": "dist/react-chrono.umd.js"
+  "umd": "dist/react-chrono.umd.js",
+  "snyk": true
 }
