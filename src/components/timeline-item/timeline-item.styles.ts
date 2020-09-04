@@ -127,7 +127,7 @@ export const TimelineContentContainer = styled.div<{ position?: string }>`
   }
 
   &.top {
-    bottom: 4rem;
+    /* bottom: 0rem; */
   }
   &.bottom {
     top: 4rem;

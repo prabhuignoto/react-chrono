@@ -7,13 +7,19 @@ import useNewScrollPosition from "../effects/useNewScrollPosition";
 import TimelineCollection from "../timeline-collection/timeline-collection";
 import TimelineControl from "../timeline-control/timeline-control";
 import TimelineTree from "../timeline-tree/timeline-tree";
-import { Outline, TimelineContentRender, TimelineControlContainer, TimelineMain, TimelineMainWrapper, Wrapper } from "./timeline.style";
+import {
+  Outline,
+  TimelineContentRender,
+  TimelineControlContainer,
+  TimelineMain,
+  TimelineMainWrapper,
+  Wrapper,
+} from "./timeline.style";
 
 const Timeline: React.FunctionComponent<TimelineModel> = ({
   activeTimelineItem,
-  disableNavOnScroll,
   disableNavOnKey,
-  itemWidth = 320,
+  itemWidth = 200,
   items,
   mode = "HORIZONTAL",
   onNext,
@@ -23,6 +29,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   onLast,
   onFirst,
   theme,
+  titlePosition,
 }) => {
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
 
@@ -105,7 +112,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     <Wrapper
       tabIndex={0}
       onKeyDown={(evt) => (!disableNavOnKey ? handleKeySelection(evt) : null)}
-      className={mode.toLowerCase()}
+      className={`${mode.toLowerCase()} ${titlePosition?.toLowerCase()}`}
     >
       <TimelineMainWrapper ref={timelineMainRef} className={mode.toLowerCase()}>
         {mode === "TREE" ? (
@@ -115,6 +122,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
             theme={theme}
+            slideShowRunning={slideShowRunning}
           />
         ) : null}
         {mode === "HORIZONTAL" ? (
@@ -128,6 +136,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
               mode={mode}
               wrapperId={id.current}
               theme={theme}
+              slideShowRunning={slideShowRunning}
             />
           </TimelineMain>
         ) : null}
@@ -139,6 +148,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             autoScroll={handleScroll}
             theme={theme}
             alternateCards={false}
+            slideShowRunning={slideShowRunning}
           />
         ) : null}
       </TimelineMainWrapper>

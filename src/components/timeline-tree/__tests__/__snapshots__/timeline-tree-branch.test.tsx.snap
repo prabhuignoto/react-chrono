@@ -9,7 +9,7 @@ exports[`Test tree branch render 1`] = `
     class="sc-fzqNJr cyEaWa test-class"
   >
     <div
-      class="sc-AxheI ekKnFk active"
+      class="sc-AxheI eBxqlH active"
       title="branch title"
     >
       branch title
@@ -34,7 +34,7 @@ exports[`Test tree branch render 1`] = `
         />
       </div>
       <span
-        class="sc-AxgMl iOHsOw show-more"
+        class="sc-AxgMl bJuvTb show-more"
         role="button"
       >
         show more
@@ -50,7 +50,7 @@ exports[`Test tree branch render 1`] = `
       data-testid="tree-leaf-click"
     >
       <div
-        class="sc-fzoLsD fZqnJh active"
+        class="sc-fzoLsD jJElQn active"
       />
     </div>
   </div>

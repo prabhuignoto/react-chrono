@@ -23,6 +23,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
   theme,
   title,
   visible,
+  slideShowRunning,
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -62,6 +63,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
             }, 200)
           }
           theme={theme}
+          slideShowActive={slideShowRunning}
         />
       </TimelineItemContentWrapper>
       <TreeLeaf

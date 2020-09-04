@@ -9,7 +9,7 @@ exports[`Test Timeline Item render - Horizontal 1`] = `
     class="sc-fzozJi hdDtNg"
   >
     <div
-      class="sc-fzoLsD fZqnJh horizontal active"
+      class="sc-fzoLsD jJElQn horizontal active"
       data-testid="timeline-circle"
     />
   </div>
@@ -18,7 +18,7 @@ exports[`Test Timeline Item render - Horizontal 1`] = `
     data-testid="timeline-title"
   >
     <div
-      class="sc-AxheI gcvhjJ active"
+      class="sc-AxheI eBxqlH active"
       title="test title"
     >
       test title
@@ -36,26 +36,26 @@ exports[`Test Timeline Item render - Vertical 1`] = `
     class="sc-fzozJi hdDtNg"
   >
     <div
-      class="sc-fzoLsD fZqnJh vertical active"
+      class="sc-fzoLsD jJElQn vertical active"
       data-testid="timeline-circle"
     />
   </div>
   <div
-    class="sc-fzplWN ceLUBz vertical"
+    class="sc-fzplWN cvmzSX vertical"
   >
     <div
       class="sc-fzpans jyHixq vertical bottom"
       data-testid="timeline-title"
     >
       <div
-        class="sc-AxheI gcvhjJ active"
+        class="sc-AxheI eBxqlH active"
         title="test title"
       >
         test title
       </div>
     </div>
     <div
-      class="sc-AxjAm dBmnAc active"
+      class="sc-AxjAm egePtC active"
     >
       <span
         class="sc-AxirZ itZkid"
@@ -63,14 +63,14 @@ exports[`Test Timeline Item render - Vertical 1`] = `
         This is a test content
       </span>
       <div
-        class="sc-AxhUy hgOZcx show-less"
+        class="sc-AxhUy ftcwA-d show-less"
       >
         <p
           class="sc-AxhCb iaRluf"
         />
       </div>
       <span
-        class="sc-AxgMl iOHsOw show-more"
+        class="sc-AxgMl bJuvTb show-more"
         role="button"
       >
         show more

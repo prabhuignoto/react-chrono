@@ -24,5 +24,4 @@ test("Test Timeline Item Content Snapshot", () => {
   render(<Content content="This is a test" active onShowMore={fn} />);
   const element = screen.getByText(/this is a test/i);
   expect(element.parentElement).toHaveClass("active");
-  expect(element.parentElement).toHaveStyle("color: #0f52ba;");
 });

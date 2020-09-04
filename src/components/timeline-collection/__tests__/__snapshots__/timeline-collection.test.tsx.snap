@@ -6,7 +6,7 @@ exports[`Test Collection Horizontal render 1`] = `
   data-testid="timeline-collection"
 >
   <li
-    class="sc-fznKkj hxcbnX horizontal "
+    class="sc-fznKkj kWlSMh horizontal "
     width="250"
   >
     <div
@@ -17,7 +17,7 @@ exports[`Test Collection Horizontal render 1`] = `
         class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-fzoLsD fZqnJh horizontal in-active"
+          class="sc-fzoLsD jJElQn horizontal in-active"
           data-testid="timeline-circle"
         />
       </div>
@@ -26,7 +26,7 @@ exports[`Test Collection Horizontal render 1`] = `
         data-testid="timeline-title"
       >
         <div
-          class="sc-AxheI gcvhjJ"
+          class="sc-AxheI eBxqlH"
           title="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
         >
           June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
@@ -35,7 +35,7 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fznKkj hxcbnX horizontal "
+    class="sc-fznKkj kWlSMh horizontal "
     width="250"
   >
     <div
@@ -46,7 +46,7 @@ exports[`Test Collection Horizontal render 1`] = `
         class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-fzoLsD fZqnJh horizontal in-active"
+          class="sc-fzoLsD jJElQn horizontal in-active"
           data-testid="timeline-circle"
         />
       </div>
@@ -55,7 +55,7 @@ exports[`Test Collection Horizontal render 1`] = `
         data-testid="timeline-title"
       >
         <div
-          class="sc-AxheI gcvhjJ"
+          class="sc-AxheI eBxqlH"
           title="July 28, 1914"
         >
           July 28, 1914
@@ -64,7 +64,7 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fznKkj hxcbnX horizontal "
+    class="sc-fznKkj kWlSMh horizontal "
     width="250"
   >
     <div
@@ -75,7 +75,7 @@ exports[`Test Collection Horizontal render 1`] = `
         class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-fzoLsD fZqnJh horizontal in-active"
+          class="sc-fzoLsD jJElQn horizontal in-active"
           data-testid="timeline-circle"
         />
       </div>
@@ -84,7 +84,7 @@ exports[`Test Collection Horizontal render 1`] = `
         data-testid="timeline-title"
       >
         <div
-          class="sc-AxheI gcvhjJ"
+          class="sc-AxheI eBxqlH"
           title="August 1–28, 1914"
         >
           August 1–28, 1914
@@ -93,7 +93,7 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fznKkj hxcbnX horizontal "
+    class="sc-fznKkj kWlSMh horizontal "
     width="250"
   >
     <div
@@ -104,7 +104,7 @@ exports[`Test Collection Horizontal render 1`] = `
         class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-fzoLsD fZqnJh horizontal in-active"
+          class="sc-fzoLsD jJElQn horizontal in-active"
           data-testid="timeline-circle"
         />
       </div>
@@ -113,7 +113,7 @@ exports[`Test Collection Horizontal render 1`] = `
         data-testid="timeline-title"
       >
         <div
-          class="sc-AxheI gcvhjJ"
+          class="sc-AxheI eBxqlH"
           title="September 6, 1914"
         >
           September 6, 1914
@@ -130,7 +130,7 @@ exports[`Test Collection Tree render 1`] = `
   data-testid="timeline-collection"
 >
   <li
-    class="sc-fznKkj hxcbnX tree "
+    class="sc-fznKkj kWlSMh tree "
     width="250"
   >
     <div
@@ -141,14 +141,14 @@ exports[`Test Collection Tree render 1`] = `
         class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-fzoLsD fZqnJh tree in-active"
+          class="sc-fzoLsD jJElQn tree in-active"
           data-testid="timeline-circle"
         />
       </div>
     </div>
   </li>
   <li
-    class="sc-fznKkj hxcbnX tree "
+    class="sc-fznKkj kWlSMh tree "
     width="250"
   >
     <div
@@ -159,14 +159,14 @@ exports[`Test Collection Tree render 1`] = `
         class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-fzoLsD fZqnJh tree in-active"
+          class="sc-fzoLsD jJElQn tree in-active"
           data-testid="timeline-circle"
         />
       </div>
     </div>
   </li>
   <li
-    class="sc-fznKkj hxcbnX tree "
+    class="sc-fznKkj kWlSMh tree "
     width="250"
   >
     <div
@@ -177,14 +177,14 @@ exports[`Test Collection Tree render 1`] = `
         class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-fzoLsD fZqnJh tree in-active"
+          class="sc-fzoLsD jJElQn tree in-active"
           data-testid="timeline-circle"
         />
       </div>
     </div>
   </li>
   <li
-    class="sc-fznKkj hxcbnX tree "
+    class="sc-fznKkj kWlSMh tree "
     width="250"
   >
     <div
@@ -195,7 +195,7 @@ exports[`Test Collection Tree render 1`] = `
         class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-fzoLsD fZqnJh tree in-active"
+          class="sc-fzoLsD jJElQn tree in-active"
           data-testid="timeline-circle"
         />
       </div>
@@ -210,7 +210,7 @@ exports[`Test Collection Vertical render 1`] = `
   data-testid="timeline-collection"
 >
   <li
-    class="sc-fznKkj hxcbnX vertical "
+    class="sc-fznKkj kWlSMh vertical "
     width="250"
   >
     <div
@@ -221,26 +221,26 @@ exports[`Test Collection Vertical render 1`] = `
         class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-fzoLsD fZqnJh vertical in-active"
+          class="sc-fzoLsD jJElQn vertical in-active"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-fzplWN ceLUBz vertical"
+        class="sc-fzplWN cvmzSX vertical"
       >
         <div
           class="sc-fzpans jyHixq vertical undefined"
           data-testid="timeline-title"
         >
           <div
-            class="sc-AxheI gcvhjJ"
+            class="sc-AxheI eBxqlH"
             title="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
           >
             June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
           </div>
         </div>
         <div
-          class="sc-AxjAm dBmnAc"
+          class="sc-AxjAm egePtC"
         >
           <span
             class="sc-AxirZ itZkid"
@@ -248,14 +248,14 @@ exports[`Test Collection Vertical render 1`] = `
             Archduke Franz Ferdinand of Austria and his wife, Sophie, are assassinated by a Bosnian Serb nationalist in Sarajevo.
           </span>
           <div
-            class="sc-AxhUy hgOZcx show-less"
+            class="sc-AxhUy ftcwA-d show-less"
           >
             <p
               class="sc-AxhCb iaRluf"
             />
           </div>
           <span
-            class="sc-AxgMl iOHsOw show-more"
+            class="sc-AxgMl bJuvTb show-more"
             role="button"
           >
             ...
@@ -265,7 +265,7 @@ exports[`Test Collection Vertical render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fznKkj hxcbnX vertical "
+    class="sc-fznKkj kWlSMh vertical "
     width="250"
   >
     <div
@@ -276,26 +276,26 @@ exports[`Test Collection Vertical render 1`] = `
         class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-fzoLsD fZqnJh vertical in-active"
+          class="sc-fzoLsD jJElQn vertical in-active"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-fzplWN ceLUBz vertical"
+        class="sc-fzplWN cvmzSX vertical"
       >
         <div
           class="sc-fzpans jyHixq vertical undefined"
           data-testid="timeline-title"
         >
           <div
-            class="sc-AxheI gcvhjJ"
+            class="sc-AxheI eBxqlH"
             title="July 28, 1914"
           >
             July 28, 1914
           </div>
         </div>
         <div
-          class="sc-AxjAm dBmnAc"
+          class="sc-AxjAm egePtC"
         >
           <span
             class="sc-AxirZ itZkid"
@@ -303,14 +303,14 @@ exports[`Test Collection Vertical render 1`] = `
             World War I begins when Austria-Hungary declares war on Serbia.
           </span>
           <div
-            class="sc-AxhUy hgOZcx show-less"
+            class="sc-AxhUy ftcwA-d show-less"
           >
             <p
               class="sc-AxhCb iaRluf"
             />
           </div>
           <span
-            class="sc-AxgMl iOHsOw show-more"
+            class="sc-AxgMl bJuvTb show-more"
             role="button"
           >
             ...
@@ -320,7 +320,7 @@ exports[`Test Collection Vertical render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fznKkj hxcbnX vertical "
+    class="sc-fznKkj kWlSMh vertical "
     width="250"
   >
     <div
@@ -331,26 +331,26 @@ exports[`Test Collection Vertical render 1`] = `
         class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-fzoLsD fZqnJh vertical in-active"
+          class="sc-fzoLsD jJElQn vertical in-active"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-fzplWN ceLUBz vertical"
+        class="sc-fzplWN cvmzSX vertical"
       >
         <div
           class="sc-fzpans jyHixq vertical undefined"
           data-testid="timeline-title"
         >
           <div
-            class="sc-AxheI gcvhjJ"
+            class="sc-AxheI eBxqlH"
             title="August 1–28, 1914"
           >
             August 1–28, 1914
           </div>
         </div>
         <div
-          class="sc-AxjAm dBmnAc"
+          class="sc-AxjAm egePtC"
         >
           <span
             class="sc-AxirZ itZkid"
@@ -360,14 +360,14 @@ exports[`Test Collection Vertical render 1`] = `
     Britain declares war on Austria. Montenegro declares war on Germany. Japan declares war on Germany. Austria declares war on Belgium.
           </span>
           <div
-            class="sc-AxhUy hgOZcx show-less"
+            class="sc-AxhUy ftcwA-d show-less"
           >
             <p
               class="sc-AxhCb iaRluf"
             />
           </div>
           <span
-            class="sc-AxgMl iOHsOw show-more"
+            class="sc-AxgMl bJuvTb show-more"
             role="button"
           >
             ...
@@ -377,7 +377,7 @@ exports[`Test Collection Vertical render 1`] = `
     </div>
   </li>
   <li
-    class="sc-fznKkj hxcbnX vertical "
+    class="sc-fznKkj kWlSMh vertical "
     width="250"
   >
     <div
@@ -388,26 +388,26 @@ exports[`Test Collection Vertical render 1`] = `
         class="sc-fzozJi hdDtNg"
       >
         <div
-          class="sc-fzoLsD fZqnJh vertical in-active"
+          class="sc-fzoLsD jJElQn vertical in-active"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-fzplWN ceLUBz vertical"
+        class="sc-fzplWN cvmzSX vertical"
       >
         <div
           class="sc-fzpans jyHixq vertical undefined"
           data-testid="timeline-title"
         >
           <div
-            class="sc-AxheI gcvhjJ"
+            class="sc-AxheI eBxqlH"
             title="September 6, 1914"
           >
             September 6, 1914
           </div>
         </div>
         <div
-          class="sc-AxjAm dBmnAc"
+          class="sc-AxjAm egePtC"
         >
           <span
             class="sc-AxirZ itZkid"
@@ -416,14 +416,14 @@ exports[`Test Collection Vertical render 1`] = `
       The Germans dig in north of the Aisne River, and the trench warfare that is to typify the Western Front for the next four years begins.
           </span>
           <div
-            class="sc-AxhUy hgOZcx show-less"
+            class="sc-AxhUy ftcwA-d show-less"
           >
             <p
               class="sc-AxhCb iaRluf"
             />
           </div>
           <span
-            class="sc-AxgMl iOHsOw show-more"
+            class="sc-AxgMl bJuvTb show-more"
             role="button"
           >
             ...

@@ -11,7 +11,7 @@ interface TimelineMainModel extends TimelineModel {
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   items,
-  itemWidth = 320,
+  itemWidth = 300,
   titlePosition = "TOP",
   mode = "HORIZONTAL",
   disableNavOnScroll = false,

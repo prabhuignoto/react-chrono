@@ -13,7 +13,8 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
   autoScroll,
   mode,
   wrapperId,
-  theme
+  theme,
+  slideShowRunning
 }) => {
   return (
     <TimelineCollectionWrapper
@@ -33,6 +34,7 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
             mode={mode}
             wrapperId={wrapperId}
             theme={theme}
+            slideShowRunning={slideShowRunning}
           />
         </TimelineItemWrapper>
       ))}

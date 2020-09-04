@@ -23,7 +23,8 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   position,
   title,
   theme,
-  wrapperId
+  wrapperId,
+  slideShowRunning,
 }) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -62,8 +63,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
     }
   }, [active, autoScroll, mode]);
 
-  const handleOnShowMore = () => {
-  };
+  const handleOnShowMore = () => {};
 
   const timelineContent = () => {
     let className = "";
@@ -91,6 +91,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
           detailedText={contentDetailedText}
           onShowMore={handleOnShowMore}
           theme={theme}
+          slideShowActive={slideShowRunning}
         />
       </TimelineContentContainer>
     );

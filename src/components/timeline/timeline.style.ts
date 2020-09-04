@@ -9,7 +9,14 @@ export const Wrapper = styled.div`
   outline: 0;
   
   &.horizontal {
-    height: 12rem;
+
+    &.top {
+      justify-content: flex-start;
+    }
+
+    &.bottom {
+      justify-content: flex-end;
+    }
   }
   
   &.vertical, &.tree {

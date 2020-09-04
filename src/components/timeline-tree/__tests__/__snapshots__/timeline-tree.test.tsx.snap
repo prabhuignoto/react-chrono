@@ -13,7 +13,7 @@ exports[`Test Tree render 1`] = `
       class="sc-fzqNJr dgYEiL left"
     >
       <div
-        class="sc-AxheI gcvhjJ"
+        class="sc-AxheI eBxqlH"
         title="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
       >
         June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
@@ -23,7 +23,7 @@ exports[`Test Tree render 1`] = `
       class="sc-fzokOt ksVrgY left "
     >
       <div
-        class="sc-AxjAm dBmnAc"
+        class="sc-AxjAm egePtC"
       >
         <span
           class="sc-AxirZ itZkid"
@@ -31,14 +31,14 @@ exports[`Test Tree render 1`] = `
           Archduke Franz Ferdinand of Austria and his wife, Sophie, are assassinated by a Bosnian Serb nationalist in Sarajevo.
         </span>
         <div
-          class="sc-AxhUy hgOZcx show-less"
+          class="sc-AxhUy ftcwA-d show-less"
         >
           <p
             class="sc-AxhCb iaRluf"
           />
         </div>
         <span
-          class="sc-AxgMl iOHsOw show-more"
+          class="sc-AxgMl bJuvTb show-more"
           role="button"
         >
           ...
@@ -54,7 +54,7 @@ exports[`Test Tree render 1`] = `
         data-testid="tree-leaf-click"
       >
         <div
-          class="sc-fzoLsD fZqnJh in-active"
+          class="sc-fzoLsD jJElQn in-active"
         />
       </div>
     </div>
@@ -67,7 +67,7 @@ exports[`Test Tree render 1`] = `
       class="sc-fzqNJr dgYEiL right"
     >
       <div
-        class="sc-AxheI gcvhjJ"
+        class="sc-AxheI eBxqlH"
         title="July 28, 1914"
       >
         July 28, 1914
@@ -77,7 +77,7 @@ exports[`Test Tree render 1`] = `
       class="sc-fzokOt ksVrgY right "
     >
       <div
-        class="sc-AxjAm dBmnAc"
+        class="sc-AxjAm egePtC"
       >
         <span
           class="sc-AxirZ itZkid"
@@ -85,14 +85,14 @@ exports[`Test Tree render 1`] = `
           World War I begins when Austria-Hungary declares war on Serbia.
         </span>
         <div
-          class="sc-AxhUy hgOZcx show-less"
+          class="sc-AxhUy ftcwA-d show-less"
         >
           <p
             class="sc-AxhCb iaRluf"
           />
         </div>
         <span
-          class="sc-AxgMl iOHsOw show-more"
+          class="sc-AxgMl bJuvTb show-more"
           role="button"
         >
           ...
@@ -108,7 +108,7 @@ exports[`Test Tree render 1`] = `
         data-testid="tree-leaf-click"
       >
         <div
-          class="sc-fzoLsD fZqnJh in-active"
+          class="sc-fzoLsD jJElQn in-active"
         />
       </div>
     </div>
@@ -121,7 +121,7 @@ exports[`Test Tree render 1`] = `
       class="sc-fzqNJr dgYEiL left"
     >
       <div
-        class="sc-AxheI gcvhjJ"
+        class="sc-AxheI eBxqlH"
         title="August 1–28, 1914"
       >
         August 1–28, 1914
@@ -131,7 +131,7 @@ exports[`Test Tree render 1`] = `
       class="sc-fzokOt ksVrgY left "
     >
       <div
-        class="sc-AxjAm dBmnAc"
+        class="sc-AxjAm egePtC"
       >
         <span
           class="sc-AxirZ itZkid"
@@ -141,14 +141,14 @@ exports[`Test Tree render 1`] = `
     Britain declares war on Austria. Montenegro declares war on Germany. Japan declares war on Germany. Austria declares war on Belgium.
         </span>
         <div
-          class="sc-AxhUy hgOZcx show-less"
+          class="sc-AxhUy ftcwA-d show-less"
         >
           <p
             class="sc-AxhCb iaRluf"
           />
         </div>
         <span
-          class="sc-AxgMl iOHsOw show-more"
+          class="sc-AxgMl bJuvTb show-more"
           role="button"
         >
           ...
@@ -164,7 +164,7 @@ exports[`Test Tree render 1`] = `
         data-testid="tree-leaf-click"
       >
         <div
-          class="sc-fzoLsD fZqnJh in-active"
+          class="sc-fzoLsD jJElQn in-active"
         />
       </div>
     </div>
@@ -177,7 +177,7 @@ exports[`Test Tree render 1`] = `
       class="sc-fzqNJr dgYEiL right"
     >
       <div
-        class="sc-AxheI gcvhjJ"
+        class="sc-AxheI eBxqlH"
         title="September 6, 1914"
       >
         September 6, 1914
@@ -187,7 +187,7 @@ exports[`Test Tree render 1`] = `
       class="sc-fzokOt ksVrgY right "
     >
       <div
-        class="sc-AxjAm dBmnAc"
+        class="sc-AxjAm egePtC"
       >
         <span
           class="sc-AxirZ itZkid"
@@ -196,14 +196,14 @@ exports[`Test Tree render 1`] = `
       The Germans dig in north of the Aisne River, and the trench warfare that is to typify the Western Front for the next four years begins.
         </span>
         <div
-          class="sc-AxhUy hgOZcx show-less"
+          class="sc-AxhUy ftcwA-d show-less"
         >
           <p
             class="sc-AxhCb iaRluf"
           />
         </div>
         <span
-          class="sc-AxgMl iOHsOw show-more"
+          class="sc-AxgMl bJuvTb show-more"
           role="button"
         >
           ...
@@ -219,7 +219,7 @@ exports[`Test Tree render 1`] = `
         data-testid="tree-leaf-click"
       >
         <div
-          class="sc-fzoLsD fZqnJh in-active"
+          class="sc-fzoLsD jJElQn in-active"
         />
       </div>
     </div>

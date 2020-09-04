@@ -26,6 +26,7 @@ export const ComponentContainer = styled.div`
   height: 350px;
   margin-top: 1rem;
   padding: 1rem 0;
+  display: flex;
 `;
 
 export const ComponentContainerTree = styled.div`

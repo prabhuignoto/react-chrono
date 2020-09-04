@@ -30,6 +30,7 @@ export interface TreeBranchModel {
   visible?: boolean;
   theme?: Theme;
   alternateCards?: boolean;
+  slideShowRunning?: boolean;
 }
 
 export interface TimelineTreeModel {
@@ -39,6 +40,7 @@ export interface TimelineTreeModel {
   autoScroll: (s: Partial<Scroll>) => void;
   theme?: Theme;
   alternateCards?: boolean;
+  slideShowRunning?: boolean;
 }
 
 export interface Theme {

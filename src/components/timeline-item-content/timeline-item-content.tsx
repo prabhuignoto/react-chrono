@@ -16,6 +16,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   detailedText,
   onShowMore,
   theme,
+  slideShowActive,
 }) => {
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
@@ -85,7 +86,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
             }
           }}
           className="show-more"
-          show={canShowMore}
+          show={canShowMore && !slideShowActive}
         >
           {active ? (showMore ? "show less" : "show more") : "..."}
         </ShowMore>

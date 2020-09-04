@@ -7,4 +7,5 @@ export interface TimelineContentModel {
   detailedText?: string;
   onShowMore: () => void;
   theme?: Theme;
+  slideShowActive?: boolean;
 }

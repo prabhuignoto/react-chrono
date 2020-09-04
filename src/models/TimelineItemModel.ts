@@ -18,4 +18,5 @@ export interface TimelineItemViewModel extends TimelineItemModel {
   onClick: (id?: string) => void;
   autoScroll: ({ timelinePointOffset, timelinePointWidth, timelinePointHeight, timelineContentHeight }: Partial<Scroll>) => void;
   wrapperId: string;
+  slideShowRunning?: boolean;
 }

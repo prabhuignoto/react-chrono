@@ -9,6 +9,7 @@ export interface TimelineCollectionModel {
   mode: "HORIZONTAL" | "VERTICAL" | "TREE";
   wrapperId: string;
   theme?: Theme;
+  slideShowRunning?: boolean;
 }
 
 export interface Scroll {
