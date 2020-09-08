@@ -11,11 +11,11 @@
 
 ## Features
 
-- **Modes** - Layout the timeline either `Vertically` or `Horizontally` using the `mode` prop.
-- **Tree** - In `Tree` mode the timeline cards are alternated between left and right.
-- **Slideshow** - Play the timeline automatically with the `slideShow` prop.
-- **Keyboard Support** - The timeline can be navigated with the <kbd>UP</kbd> , <kbd>DOWN</kbd> keys in `vertical` or `tree` mode. In `horizontal` mode <kbd>LEFT</kbd> , <kbd>RIGHT</kbd> keys can be used for navigation. Quickly jump to the start or end of the timeline by using the <kbd>HOME</kbd> or <kbd>END</kbd> key.
-- **Custom theme** - Customize the colors using the `theme` prop
+✅ **Modes** - Layout the timeline either `Vertically` or `Horizontally` using the `mode` prop.
+✅ **Tree** - In `Tree` mode the timeline cards are alternated between left and right.
+✅ **Slideshow** - Play the timeline automatically with the `slideShow` prop.
+✅ **Keyboard Support** - The timeline can be navigated with the <kbd>UP</kbd> , <kbd>DOWN</kbd> keys in `vertical` or `tree` mode. In `horizontal` mode <kbd>LEFT</kbd> , <kbd>RIGHT</kbd> keys can be used for navigation. Quickly jump to the start or end of the timeline by using the <kbd>HOME</kbd> or <kbd>END</kbd> key.
+✅ **Custom theme** - Customize the colors using the `theme` prop
 
 ## Installation
 
@@ -23,7 +23,7 @@
 yarn install react-chrono
 ```
 
-## Getting Started
+## 🚀 Getting Started
 
 Please make sure you wrap the component in a container that has a width and height. When no `mode` is specified, the component defaults to `HORIZONTAL`.
 
@@ -57,7 +57,7 @@ Use the `items` prop to create the timeline. Each Timeline item must have the fo
   </div>
 ```
 
-### Tree
+### Tree 
 
 ```sh
   <div style={{ width: "500px", height: "950px" }}>
