@@ -12,9 +12,13 @@
 ## Features
 
 ✅ **Modes** - Layout the timeline either `Vertically` or `Horizontally` using the `mode` prop.
+
 ✅ **Tree** - In `Tree` mode the timeline cards are alternated between left and right.
+
 ✅ **Slideshow** - Play the timeline automatically with the `slideShow` prop.
+
 ✅ **Keyboard Support** - The timeline can be navigated with the <kbd>UP</kbd> , <kbd>DOWN</kbd> keys in `vertical` or `tree` mode. In `horizontal` mode <kbd>LEFT</kbd> , <kbd>RIGHT</kbd> keys can be used for navigation. Quickly jump to the start or end of the timeline by using the <kbd>HOME</kbd> or <kbd>END</kbd> key.
+
 ✅ **Custom theme** - Customize the colors using the `theme` prop
 
 ## Installation
