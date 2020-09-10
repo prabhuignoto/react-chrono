@@ -17,8 +17,13 @@ steps:
 
 - script: |
     yarn install
-    yarn run build
-  displayName: 'npm install and build'
+    yarn run build:demo
+  displayName: 'Running Build fro Demo site'
+
+- script: |
+    yarn install
+    yarn run rollup
+  displayName: 'Running Rollup'
 
 - script: |
     yarn run lint:css
