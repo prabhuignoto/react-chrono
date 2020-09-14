@@ -7,15 +7,15 @@ export interface TimelineCollectionModel {
   itemWidth: number;
   items: TimelineItemViewModel[];
   mode: "HORIZONTAL" | "VERTICAL" | "TREE";
-  wrapperId: string;
-  theme?: Theme;
   slideShowRunning?: boolean;
+  theme?: Theme;
+  wrapperId: string;
 }
 
 export interface Scroll {
+  timelineContentHeight: number;
+  timelineContentOffset: number;
   timelinePointHeight: number;
   timelinePointOffset: number;
   timelinePointWidth: number;
-  timelineContentHeight: number;
-  timelineContentOffset: number;
 }

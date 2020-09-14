@@ -3,6 +3,8 @@ import buble from "@rollup/plugin-buble";
 import common from "@rollup/plugin-commonjs";
 import resolve from "rollup-plugin-node-resolve";
 import typescript from "rollup-plugin-typescript2";
+import cssnano from "cssnano";
+import postcss from "rollup-plugin-postcss"
 import pkg from "./package.json";
 
 const banner = `/*
@@ -61,6 +63,11 @@ export default {
       transforms: {
         templateString: false,
       },
+    }),
+    postcss({
+      plugins: [cssnano({
+        preset: 'default'
+      })]
     }),
     common(),
     resolve(),

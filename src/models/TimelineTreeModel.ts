@@ -2,23 +2,23 @@ import { TimelineItemViewModel } from "./TimelineItemModel";
 import { Scroll } from "./TimelineCollnModel";
 
 export interface TreeLeafModel {
+  active?: boolean;
+  alternateCards?: boolean;
   className: string;
   id?: string;
-  active?: boolean;
-  onClick: (id: string) => void;
   onActive: (timelinePointOffset: number) => void;
-  alternateCards?: boolean;
+  onClick: (id: string) => void;
   theme?: Theme;
 }
 
 export interface TreeBranchModel {
+  active?: boolean;
   className: string;
-  index: number;
+  contentDetailedText?: string;
   contentText: string;
   contentTitle?: string;
-  contentDetailedText?: string;
-  active?: boolean;
   id?: string;
+  index: number;
   onClick: (id: string) => void;
   onActive: (
     timelinePointOffset: number,
@@ -26,21 +26,21 @@ export interface TreeBranchModel {
     timelineContentOffset: number
   ) => void;
   onShowMore: () => void;
-  title: string;
-  visible?: boolean;
-  theme?: Theme;
   alternateCards?: boolean;
   slideShowRunning?: boolean;
+  theme?: Theme;
+  title: string;
+  visible?: boolean;
 }
 
 export interface TimelineTreeModel {
+  activeTimelineItem: number;
+  alternateCards?: boolean;
+  autoScroll: (s: Partial<Scroll>) => void;
   items: TimelineItemViewModel[];
   onClick: (id?: string) => void;
-  activeTimelineItem: number;
-  autoScroll: (s: Partial<Scroll>) => void;
-  theme?: Theme;
-  alternateCards?: boolean;
   slideShowRunning?: boolean;
+  theme?: Theme;
 }
 
 export interface Theme {

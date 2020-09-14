@@ -6,19 +6,19 @@ export interface TimelineModel extends TimelineProps{
   onLast: () => void;
   onNext: () => void;
   onPrevious: () => void;
-  slideShowRunning?: boolean;
   onTimelineUpdated?: (id: number) => void;
+  slideShowRunning?: boolean;
 }
 
 export interface TimelineProps {
-  slideItemDuration?: number;
-  titlePosition?: "TOP" | "BOTTOM" | "ALTERNATE";
   disableNavOnKey?: boolean;
   disableNavOnScroll?: boolean;
   itemWidth?: number;
   items: TimelineItemModel[];
   mode?: "VERTICAL" | "HORIZONTAL" | "TREE";
+  slideItemDuration?: number;
   slideShow?: boolean;
+  titlePosition?: "TOP" | "BOTTOM" | "ALTERNATE";
   theme?: {
     primary: string;
     secondary: string;

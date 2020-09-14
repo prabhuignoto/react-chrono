@@ -1,11 +1,11 @@
 import { Theme } from "./TimelineTreeModel";
 
 export interface TimelineContentModel {
-  content: string;
   active?: boolean;
-  title?: string;
+  content: string;
   detailedText?: string;
   onShowMore: () => void;
-  theme?: Theme;
   slideShowActive?: boolean;
+  theme?: Theme;
+  title?: string;
 }

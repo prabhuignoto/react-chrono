@@ -1,11 +1,17 @@
 import { Scroll } from "./TimelineCollnModel";
 import { Theme } from "./TimelineTreeModel";
 
+/**
+ *
+ *
+ * @export
+ * @interface TimelineItemModel
+ */
 export interface TimelineItemModel {
   active?: boolean;
-  contentTitle?: string;
-  contentText: string;
   contentDetailedText?: string;
+  contentText: string;
+  contentTitle?: string;
   id?: string;
   position?: string;
   title: string;
@@ -13,10 +19,10 @@ export interface TimelineItemModel {
 }
 
 export interface TimelineItemViewModel extends TimelineItemModel {
-  mode: "HORIZONTAL" | "VERTICAL" | "TREE";
-  theme?: Theme;
-  onClick: (id?: string) => void;
   autoScroll: ({ timelinePointOffset, timelinePointWidth, timelinePointHeight, timelineContentHeight }: Partial<Scroll>) => void;
-  wrapperId: string;
+  mode: "HORIZONTAL" | "VERTICAL" | "TREE";
+  onClick: (id?: string) => void;
   slideShowRunning?: boolean;
+  theme?: Theme;
+  wrapperId: string;
 }

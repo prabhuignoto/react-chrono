@@ -2,23 +2,23 @@
 
 exports[`Test Timeline Item render - Horizontal 1`] = `
 <div
-  class="sc-Axmtr hYmEjG horizontal"
+  class="sc-iCoHVE yuLvB horizontal"
   data-testid="timeline-item"
 >
   <div
-    class="sc-fzozJi hdDtNg"
+    class="sc-pNWxx dztYkU"
   >
     <div
-      class="sc-fzoLsD jJElQn horizontal active"
+      class="sc-jrsJCI glldHT horizontal active"
       data-testid="timeline-circle"
     />
   </div>
   <div
-    class="sc-fzpans jyHixq horizontal top"
+    class="sc-kEqYlL efYomT horizontal top"
     data-testid="timeline-title"
   >
     <div
-      class="sc-AxheI eBxqlH active"
+      class="sc-gKAblj bWyEMM active"
       title="test title"
     >
       test title
@@ -29,48 +29,48 @@ exports[`Test Timeline Item render - Horizontal 1`] = `
 
 exports[`Test Timeline Item render - Vertical 1`] = `
 <div
-  class="sc-Axmtr hYmEjG vertical"
+  class="sc-iCoHVE yuLvB vertical"
   data-testid="timeline-item"
 >
   <div
-    class="sc-fzozJi hdDtNg"
+    class="sc-pNWxx dztYkU"
   >
     <div
-      class="sc-fzoLsD jJElQn vertical active"
+      class="sc-jrsJCI glldHT vertical active"
       data-testid="timeline-circle"
     />
   </div>
   <div
-    class="sc-fzplWN cvmzSX vertical"
+    class="sc-iqAbSa hHCKmM vertical"
   >
     <div
-      class="sc-fzpans jyHixq vertical bottom"
+      class="sc-kEqYlL efYomT vertical bottom"
       data-testid="timeline-title"
     >
       <div
-        class="sc-AxheI eBxqlH active"
+        class="sc-gKAblj bWyEMM active"
         title="test title"
       >
         test title
       </div>
     </div>
     <div
-      class="sc-AxjAm egePtC active"
+      class="sc-bdnylx hvWJRz active"
     >
       <span
-        class="sc-AxirZ itZkid"
+        class="sc-gtssRu bcPOLu"
       >
         This is a test content
       </span>
       <div
-        class="sc-AxhUy ftcwA-d show-less"
+        class="sc-eCApGN UqUWF show-less"
       >
         <p
-          class="sc-AxhCb iaRluf"
+          class="sc-hKFyIo bBEQRC"
         />
       </div>
       <span
-        class="sc-AxgMl bJuvTb show-more"
+        class="sc-jSFkmK kOUyCF show-more"
         role="button"
       >
         show more
