@@ -17,7 +17,7 @@
 
 ✅ **Slideshow** - Play the timeline automatically with the `slideShow` prop.
 
-✅ **Keyboard Support** - The timeline can be navigated with the <kbd>UP</kbd> , <kbd>DOWN</kbd> keys in `vertical` or `tree` mode. In `horizontal` mode <kbd>LEFT</kbd> , <kbd>RIGHT</kbd> keys can be used for navigation. Quickly jump to the start or end of the timeline by using the <kbd>HOME</kbd> or <kbd>END</kbd> key.
+✅ **Keyboard Support** - The timeline can be navigated with the <kbd>UP</kbd> , <kbd>DOWN</kbd> keys in `vertical` or `tree` mode. In `horizontal` mode <kbd>LEFT</kbd> , <kbd>RIGHT</kbd> keys can be used for navigation.
 
 ✅ **Custom theme** - Customize the colors using the `theme` prop
 
@@ -29,11 +29,13 @@ yarn install react-chrono
 
 ## 🚀 Getting Started
 
-Please make sure you wrap the component in a container that has a width and height. When no `mode` is specified, the component defaults to `HORIZONTAL`.
+Please make sure you wrap the component in a container that has a width and height. When no `mode` is specified, the component defaults to `HORIZONTAL` mode.
 
-Use the `items` prop to create the timeline. Each Timeline item must have the following properties.
+Use the `items` prop to create the timeline. Each Timeline item have the following properties.
 
 `title`, `contentTitle`, `contentText`, `contentDetailedText`
+
+Here is a Timeline with minimal settings.
 
 ```sh
   const items = [{
@@ -52,6 +54,8 @@ Use the `items` prop to create the timeline. Each Timeline item must have the fo
 
 ### Vertical
 
+To render the timeline vertically use the `VERTICAL` mode
+
 ```sh
   <div style={{ width: "500px", height: "950px" }}>
     <chrono
@@ -61,7 +65,9 @@ Use the `items` prop to create the timeline. Each Timeline item must have the fo
   </div>
 ```
 
-### Tree 
+### Tree
+
+In `Tree` mode the timeline is rendered vertically with cards alternating between left and right sides.
 
 ```sh
   <div style={{ width: "500px", height: "950px" }}>
@@ -88,16 +94,18 @@ Play the timeline automatically with the `slideShow` mode.
   </div>
 ```
 
+![slideshow](./readme-assets/demo.gif)
+
 ## Props
 
 | name              | description                                                                           | default      |
 | ----------------- | ------------------------------------------------------------------------------------- | ------------ |
 | mode              | sets the layout for the timeline component. can be `HORIZONTAL`, `VERTICAL` or `TREE` | `HORIZONTAL` |
 | items             | collection of timeline items                                                          | []           |
-| disableNavOnKey   | disables timeline navigation through keyboard                                         | false        |
+| disableNavOnKey   | disables keyboard navigation                                                          | false        |
 | slideShow         | starts the timeline in slideshow mode                                                 | false        |
-| slideItemDuration | delay between timeline points during a slideshow                                      | 2500         |
-| titlePosition     | sets the position of the title in `HORIZONTAL` mode                                   | `TOP`        |
+| slideItemDuration | The amount of delay in `ms` for the timeline points in `slideshow` mode               | 2500         |
+| titlePosition     | sets the position of the title in `HORIZONTAL` mode. can be `TOP` or `BOTTOM`         | `TOP`        |
 | itemWidth         | width of the timeline section in `HORIZONTAL` mode                                    | 320          |
 
 ### Mode
@@ -109,7 +117,7 @@ Play the timeline automatically with the `slideShow` mode.
 The timeline by default can be navigated via keyboard.
 
 - For `HORIZONTAL` mode use your <kbd>LEFT</kbd> <kbd>RIGHT</kbd> arrow keys for navigation.
-- For `VERTICAL` or `TREE` mode, navigation can be done via the <kbd>UP</kbd> <kbd>DOWN</kbd> arrow keys.
+- For `VERTICAL` or `TREE` mode, the timeline can be navigated via the <kbd>UP</kbd> <kbd>DOWN</kbd> arrow keys.
 - To easily jump to the first item or the last item in the timeline, use <kbd>HOME</kbd> or <kbd>END</kbd> key.
 
 The keyboard navigation can be completely disabled by setting the `disableNavOnKey` to true.
