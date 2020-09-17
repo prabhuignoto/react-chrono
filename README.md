@@ -9,6 +9,10 @@
 
 > A Flexible Timeline component for React
 
+**Try it on CoderSandbox!**
+
+[![Edit react-chrono](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-chrono-bg56e?fontsize=14&hidenavigation=1&theme=dark)
+
 ## Features
 
 ✅ **Modes** - Render timelines in three unique modes.
