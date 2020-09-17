@@ -7,17 +7,17 @@
 
 ![logo](./readme-assets/logo.png)
 
-> A timeline component for React
+> A Flexible Timeline component for React
 
 ## Features
 
-✅ **Modes** - Layout the timeline either `Vertically` or `Horizontally` using the `mode` prop.
+✅ **Modes** - Render timelines in three unique modes.
 
-✅ **Tree** - In `Tree` mode the timeline cards are alternated between left and right.
+✅ **Tree** - Use the `Tree` mode to layout timeline cards vertically in a tree like fashion.
 
-✅ **Slideshow** - Play the timeline automatically with the `slideShow` prop.
+✅ **Slideshow** - Auto play the timeline in `slideshow` mode.
 
-✅ **Keyboard Support** - The timeline can be navigated with the <kbd>UP</kbd> , <kbd>DOWN</kbd> keys in `vertical` or `tree` mode. In `horizontal` mode <kbd>LEFT</kbd> , <kbd>RIGHT</kbd> keys can be used for navigation.
+✅ **Keyboard Support** - Navigate the timelines using <kbd>UP</kbd> , <kbd>DOWN</kbd> keys in `vertical` or `tree` mode. In `horizontal` mode <kbd>LEFT</kbd> , <kbd>RIGHT</kbd> keys can be used.
 
 ✅ **Custom theme** - Customize the colors using the `theme` prop
 
@@ -29,13 +29,13 @@ yarn install react-chrono
 
 ## 🚀 Getting Started
 
-Please make sure you wrap the component in a container that has a width and height. When no `mode` is specified, the component defaults to `HORIZONTAL` mode.
+Please make sure you wrap the component in a container that has a `width` and `height`. When no `mode` is specified, the component defaults to `HORIZONTAL` mode.
 
 Use the `items` prop to create the timeline. Each Timeline item have the following properties.
 
 `title`, `contentTitle`, `contentText`, `contentDetailedText`
 
-Here is a Timeline with minimal settings.
+Here is an example Timeline with minimal settings.
 
 ```sh
   const items = [{
@@ -95,6 +95,10 @@ Play the timeline automatically with the `slideShow` mode.
 ```
 
 ![slideshow](./readme-assets/demo.gif)
+
+#### Slideshow in Tree mode
+
+![tree-slideshow](./readme-assets/vertical_slideshow.gif)
 
 ## Props
 
