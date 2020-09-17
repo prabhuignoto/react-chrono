@@ -88,7 +88,6 @@ Play the timeline automatically with the `slideShow` mode.
   <div style={{ width: "500px", height: "950px" }}>
     <chrono
       items={items}
-      mode="TREE"
       slideShow
     />
   </div>
