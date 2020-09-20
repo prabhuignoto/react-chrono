@@ -7,7 +7,7 @@
     "nanoid": "^3.1.12",
     "react": "^16.13.1",
     "styled-components": "5.2.0",
-    "use-debounce": "^4.0.0"
+    "use-debounce": "^5.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -47,7 +47,7 @@
     "@testing-library/user-event": "^12.1.5",
     "@types/jest": "^26.0.14",
     "@types/nanoid": "^2.1.0",
-    "@types/node": "^14.10.3",
+    "@types/node": "^14.11.1",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.0",
     "@types/styled-components": "5.1.3",
@@ -58,7 +58,7 @@
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
     "react-scripts": "3.4.0",
-    "rollup": "^2.27.0",
+    "rollup": "^2.27.1",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-postcss": "^3.1.8",
     "rollup-plugin-typescript2": "^0.27.2",
@@ -66,7 +66,7 @@
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.10.0",
-    "ts-jest": "^26.3.0",
+    "ts-jest": "^26.4.0",
     "typescript": "3.8.3",
     "webfontloader": "^1.6.28"
   },
