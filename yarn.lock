@@ -5582,6 +5582,11 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
+github-buttons@^2.8.0:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/github-buttons/-/github-buttons-2.14.0.tgz#32ce381651091accda09217cd7a6e4c77f91e222"
+  integrity sha512-rAwKwFOiWoyhb3g5ZyXjI3XXprAa36jCd0tm467aEUYtiDZkqEXkepuzNg9LryLbnuLRQmcifIPTxLUBnuYpXQ==
+
 glob-parent@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-3.1.0.tgz#9e6af6299d8d3bd2bd40430832bd113df906c5ae"
@@ -9896,6 +9901,13 @@ react-error-overlay@^6.0.7:
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
   integrity sha512-TAv1KJFh3RhqxNvhzxj6LeT5NWklP6rDr2a0jaTfsZ5wSZWHOGeqQyejUp3xxLfPt2UpyJEcVQB/zyPcmonNFA==
+
+react-github-btn@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-github-btn/-/react-github-btn-1.2.0.tgz#464066f999a77c0eed27980260601b51cbe15614"
+  integrity sha512-/b2TGTeek5Ky+KtuP5BxOaXgb1FGhbwgZNI6rkwkGk7+xtCtsNMkdchOcCnC3qU1JGTWPKzYZWpPBIouVhXAoQ==
+  dependencies:
+    github-buttons "^2.8.0"
 
 react-hot-loader@^4.12.21:
   version "4.12.21"

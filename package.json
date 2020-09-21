@@ -6,6 +6,7 @@
   "dependencies": {
     "nanoid": "^3.1.12",
     "react": "^16.13.1",
+    "react-github-btn": "^1.2.0",
     "styled-components": "5.2.0",
     "use-debounce": "^5.0.0"
   },

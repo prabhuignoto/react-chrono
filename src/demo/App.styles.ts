@@ -45,7 +45,9 @@ export const Header = styled.header`
 
 export const LogoImage = styled.img``;
 
-export const Github = styled.img``;
+export const Github = styled.img`
+  margin-left: 1rem;
+`;
 
 export const Footer = styled.footer`
   display: flex;

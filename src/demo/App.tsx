@@ -22,6 +22,7 @@ import {
 import data from "./data";
 import GithubLogo from "./github.svg";
 import AppLogo from "./logo.png";
+import GitHubButton from "react-github-btn";
 
 class App extends React.Component<{}, { fontsLoaded: boolean }> {
   constructor(props) {
@@ -60,7 +61,8 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
                 justifyContent: "center",
               }}
             >
-              <Github src={GithubLogo} />
+            <GitHubButton href="https://github.com/prabhuignoto/react-chrono" data-icon="octicon-star" data-size="large" data-show-count="true">Star</GitHubButton>
+            <Github src={GithubLogo} />
             </a>
           </Header>
           <DescriptionContent>
