@@ -10,7 +10,6 @@ import {
   DescriptionContent,
   DescriptionHeader,
   Footer,
-  Github,
   Header,
   Horizontal,
   LogoImage,
@@ -20,9 +19,7 @@ import {
   Wrapper,
 } from "./App.styles";
 import data from "./data";
-import GithubLogo from "./github.svg";
 import AppLogo from "./logo.png";
-import GitHubButton from "react-github-btn";
 
 class App extends React.Component<{}, { fontsLoaded: boolean }> {
   constructor(props) {
@@ -61,8 +58,14 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
                 justifyContent: "center",
               }}
             >
-            <GitHubButton href="https://github.com/prabhuignoto/react-chrono" data-icon="octicon-star" data-size="large" data-show-count="true">Star</GitHubButton>
-            <Github src={GithubLogo} />
+              <iframe
+                src="https://ghbtns.com/github-btn.html?user=prabhuignoto&repo=react-chrono&type=star&count=true&size=large"
+                frameborder="0"
+                scrolling="0"
+                width="120" 
+                height="30"
+                title="GitHub"
+              ></iframe>
             </a>
           </Header>
           <DescriptionContent>
@@ -72,6 +75,9 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
             <em>vertically</em>. The time line can be easily navigated via the
             control buttons or keyboard.
           </DescriptionContent>
+
+          <br/>
+
           <Horizontal>
             <Description>
               <DescriptionHeader>Horizontal</DescriptionHeader>
