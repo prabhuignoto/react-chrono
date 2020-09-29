@@ -7,7 +7,7 @@
 
 ![logo](./readme-assets/social-logo-small.png)
 
-> A Flexible Timeline component for React
+![slideshow](./readme-assets/demo.gif)
 
 **Try it on CoderSandbox!**
 
@@ -15,15 +15,15 @@
 
 ## Features
 
-✅ **Modes** - Render timelines in three unique modes.
+✅ **Modes** - Render timelines in three modes.
 
-✅ **Tree** - Use the `Tree` mode to layout timeline cards vertically in a tree like fashion.
+✅ **Tree** - Use the `Tree` mode to layout the timeline cards vertically in a tree like fashion.
 
-✅ **Slideshow** - Auto play the timeline in `slideshow` mode.
+✅ **Slideshow** - Auto play the timeline with `slideshow` mode.
 
 ✅ **Keyboard Support** - Navigate the timelines using <kbd>UP</kbd> , <kbd>DOWN</kbd> keys in `vertical` or `tree` mode. In `horizontal` mode <kbd>LEFT</kbd> , <kbd>RIGHT</kbd> keys can be used.
 
-✅ **Custom theme** - Customize the colors using the `theme` prop
+✅ **Custom theme** - Customize colors using the `theme` prop.
 
 ## Installation
 
@@ -93,13 +93,10 @@ Play the timeline automatically with the `slideShow` mode.
     <chrono
       items={items}
       slideShow
+      mode="TREE"
     />
   </div>
 ```
-
-![slideshow](./readme-assets/demo.gif)
-
-#### Slideshow in Tree mode
 
 ![tree-slideshow](./readme-assets/vertical_slideshow.gif)
 
@@ -109,11 +106,12 @@ Play the timeline automatically with the `slideShow` mode.
 | ----------------- | ------------------------------------------------------------------------------------- | ------------ |
 | mode              | sets the layout for the timeline component. can be `HORIZONTAL`, `VERTICAL` or `TREE` | `HORIZONTAL` |
 | items             | collection of timeline items                                                          | []           |
-| disableNavOnKey   | disables keyboard navigation                                                          | false        |
-| slideShow         | starts the timeline in slideshow mode                                                 | false        |
-| slideItemDuration | The amount of delay in `ms` for the timeline points in `slideshow` mode               | 2500         |
-| titlePosition     | sets the position of the title in `HORIZONTAL` mode. can be `TOP` or `BOTTOM`         | `TOP`        |
-| itemWidth         | width of the timeline section in `HORIZONTAL` mode                                    | 320          |
+| disableNavOnKey   | prop to disable keyboard navigation.                                                  | false        |
+| slideShow         | starts the timeline in slideshow mode.                                                | false        |
+| slideItemDuration | The amount of delay in `ms` for the timeline points in `slideshow` mode.              | 2500         |
+| titlePosition     | sets the position of the title in `HORIZONTAL` mode. can be `TOP` or `BOTTOM`.        | `TOP`        |
+| itemWidth         | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
+| theme             | prop to customize the colors.                                                         | 300          |
 
 ### Mode
 
@@ -130,7 +128,7 @@ The timeline by default can be navigated via keyboard.
 The keyboard navigation can be completely disabled by setting the `disableNavOnKey` to true.
 
 ```sh
-  <chrono items={items} disableNavOnKey />
+<chrono items={items} disableNavOnKey />
 ```
 
 ### Slideshow Mode
@@ -138,7 +136,7 @@ The keyboard navigation can be completely disabled by setting the `disableNavOnK
 Slideshow can be enabled by setting the `slideShow` prop to true. You can also set an optional `slideItemDuration` that sets the time delay between cards.
 
 ```sh
-  <chrono items={items} slideShow slideItemDuration={4500} />
+<chrono items={items} slideShow slideItemDuration={4500} />
 ```
 
 ### Title Position
@@ -146,12 +144,20 @@ Slideshow can be enabled by setting the `slideShow` prop to true. You can also s
 This setting only applies for the `HORIZONTAL` mode. The prop `titlePosition` sets the position of the individual titles to either `TOP` or `BOTTOM`.
 
 ```sh
-  <chrono items={items}  titlePosition="BOTTOM" />
+<chrono items={items}  titlePosition="BOTTOM" />
 ```
 
 ### Item Width
 
 The `itemWidth` prop can be used to set the width of each individual timeline sections. This setting is applicable only for the `HORIZONTAL` mode.
+
+### Theme
+
+Customize colors with `theme` prop.
+
+```sh
+<chrono items={items}  titlePosition="BOTTOM" theme={{primary: "red", secondary: "blue" }} />
+```
 
 ## Build Setup
 
