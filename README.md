@@ -5,7 +5,7 @@
 ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/prabhuignoto/react-chrono?style=flat)
 [![Depfu](https://badges.depfu.com/badges/48a23a6a830309649b7e516467cd9a48/overview.svg)](https://depfu.com/github/prabhuignoto/react-chrono?project_id=15325)
 
-![logo](./readme-assets/logo.png)
+![logo](./readme-assets/social-logo-small.png)
 
 > A Flexible Timeline component for React
 
@@ -152,6 +152,30 @@ This setting only applies for the `HORIZONTAL` mode. The prop `titlePosition` se
 ### Item Width
 
 The `itemWidth` prop can be used to set the width of each individual timeline sections. This setting is applicable only for the `HORIZONTAL` mode.
+
+## Build Setup
+
+``` bash
+# install dependencies
+yarn install
+
+# start dev setup
+yarn run start
+
+# run css linting
+yarn run lint:css
+
+# package lib
+npm run rollup
+```
+
+## Contributing
+
+1. Fork it ( [https://github.com/prabhuignoto/react-chrono/fork](https://github.com/prabhuignoto/react-chrono/fork) )
+2. Create your feature branch (`git checkout -b new-feature`)
+3. Commit your changes (`git commit -am 'Add feature'`)
+4. Push to the branch (`git push origin new-feature`)
+5. Create a new Pull Request
 
 ## Built with
 
