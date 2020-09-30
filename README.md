@@ -9,11 +9,11 @@
 
 ![slideshow](./readme-assets/demo.gif)
 
-**Try it on CoderSandbox!**
+**Try it on CodeSandbox!**
 
 [![Edit react-chrono](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-chrono-bg56e?fontsize=14&hidenavigation=1&theme=dark)
 
-## Features
+<h2>Features</h2>
 
 ✅ **Modes** - Render timelines in three modes.
 
@@ -24,6 +24,25 @@
 ✅ **Keyboard Support** - Navigate the timelines using <kbd>UP</kbd> , <kbd>DOWN</kbd> keys in `vertical` or `tree` mode. In `horizontal` mode <kbd>LEFT</kbd> , <kbd>RIGHT</kbd> keys can be used.
 
 ✅ **Custom theme** - Customize colors using the `theme` prop.
+
+<h2>Table of Contents</h2>
+
+- [Installation](#installation)
+- [🚀 Getting Started](#-getting-started)
+  - [Vertical Mode](#vertical-mode)
+  - [Tree View](#tree-view)
+  - [Slideshow Mode](#slideshow-mode)
+- [Props](#props)
+  - [Mode](#mode)
+  - [Keyboard Navigation & Disabling it](#keyboard-navigation--disabling-it)
+  - [Slideshow Mode](#slideshow-mode-1)
+  - [Title Position](#title-position)
+  - [Item Width](#item-width)
+  - [Theme](#theme)
+- [Build Setup](#build-setup)
+- [Contributing](#contributing)
+- [Built with](#built-with)
+- [Meta](#meta)
 
 ## Installation
 
@@ -56,7 +75,7 @@ Here is an example Timeline with minimal settings.
 
 ![app-home](./readme-assets/app-home.png)
 
-### Vertical
+### Vertical Mode
 
 To render the timeline vertically use the `VERTICAL` mode
 
@@ -69,7 +88,7 @@ To render the timeline vertically use the `VERTICAL` mode
   </div>
 ```
 
-### Tree
+### Tree View
 
 In `Tree` mode the timeline is rendered vertically with cards alternating between left and right sides.
 
@@ -84,7 +103,7 @@ In `Tree` mode the timeline is rendered vertically with cards alternating betwee
 
 ![app-tree](./readme-assets/app-tree.png)
 
-### Slideshow
+### Slideshow Mode
 
 Play the timeline automatically with the `slideShow` mode.
 
