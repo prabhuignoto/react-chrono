@@ -15,36 +15,33 @@
 
 <h2>Features</h2>
 
-✅ **Modes** - Render timelines in three modes.
-
-✅ **Tree** - Use the `Tree` mode to layout the timeline cards vertically in a tree like fashion.
-
-✅ **Slideshow** - Auto play the timeline with `slideshow` mode.
-
-✅ **Keyboard Support** - Navigate the timelines using <kbd>UP</kbd> , <kbd>DOWN</kbd> keys in `vertical` or `tree` mode. In `horizontal` mode <kbd>LEFT</kbd> , <kbd>RIGHT</kbd> keys can be used.
-
-✅ **Custom theme** - Customize colors using the `theme` prop.
+- 🚥 Render timelines in three different modes ([Horizontal](#-getting-started), [Vertical](#vertical-mode), [Tree](#tree-view)).
+- 🌲&nbsp; Use the [Tree](#tree-view) mode to layout the timeline cards vertically in a tree like fashion.
+- 📺&nbsp; Auto play the timeline with the [slideshow](#slideshow-mode) prop.
+- ⌨&nbsp; Navigate the timelines via Keyboard.
+- 🎨&nbsp; [Customize](#theme) colors with ease.
+- 💪&nbsp; Built with [Typescript](https://www.typescriptlang.org/)
 
 <h2>Table of Contents</h2>
 
-- [Installation](#installation)
+- [⚡ Installation](#-installation)
 - [🚀 Getting Started](#-getting-started)
   - [Vertical Mode](#vertical-mode)
   - [Tree View](#tree-view)
   - [Slideshow Mode](#slideshow-mode)
 - [Props](#props)
   - [Mode](#mode)
-  - [Keyboard Navigation & Disabling it](#keyboard-navigation--disabling-it)
+  - [⌨ Keyboard Navigation & Disabling it](#-keyboard-navigation--disabling-it)
   - [Slideshow Mode](#slideshow-mode-1)
   - [Title Position](#title-position)
   - [Item Width](#item-width)
-  - [Theme](#theme)
-- [Build Setup](#build-setup)
-- [Contributing](#contributing)
+  - [🎨 Theme](#-theme)
+- [📦Build Setup](#build-setup)
+- [🔨 Contributing](#-contributing)
 - [Built with](#built-with)
 - [Meta](#meta)
 
-## Installation
+## ⚡ Installation
 
 ```sh
 yarn install react-chrono
@@ -136,7 +133,7 @@ Play the timeline automatically with the `slideShow` mode.
 
 `react-chrono` supports three modes `HORIZONTAL`, `VERTICAL` and `TREE`. The mode prop can be used to define the orientation of the cards.
 
-### Keyboard Navigation & Disabling it
+### ⌨ Keyboard Navigation & Disabling it
 
 The timeline by default can be navigated via keyboard.
 
@@ -170,7 +167,7 @@ This setting only applies for the `HORIZONTAL` mode. The prop `titlePosition` se
 
 The `itemWidth` prop can be used to set the width of each individual timeline sections. This setting is applicable only for the `HORIZONTAL` mode.
 
-### Theme
+### 🎨 Theme
 
 Customize colors with `theme` prop.
 
@@ -178,7 +175,7 @@ Customize colors with `theme` prop.
 <chrono items={items}  titlePosition="BOTTOM" theme={{primary: "red", secondary: "blue" }} />
 ```
 
-## Build Setup
+## 📦Build Setup
 
 ``` bash
 # install dependencies
@@ -191,10 +188,10 @@ yarn run start
 yarn run lint:css
 
 # package lib
-npm run rollup
+yarn run rollup
 ```
 
-## Contributing
+## 🔨 Contributing
 
 1. Fork it ( [https://github.com/prabhuignoto/react-chrono/fork](https://github.com/prabhuignoto/react-chrono/fork) )
 2. Create your feature branch (`git checkout -b new-feature`)
