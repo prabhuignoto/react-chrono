@@ -1,6 +1,6 @@
 {
   "name": "react-chrono",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "license": "MIT",
   "description": "a modern timeline component for React",
   "keywords": [
@@ -94,7 +94,10 @@
     "dist"
   ],
   "lint-staged": {
-    "src/components/**/*.style(s).ts": ["stylelint ./src/**/*style.ts", "git add"]
+    "src/components/**/*.style(s).ts": [
+      "stylelint ./src/**/*style.ts",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {
