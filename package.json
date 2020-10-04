@@ -74,6 +74,7 @@
     "babel-runtime": "^6.26.0",
     "chromatic": "^5.2.0",
     "cssnano": "^4.1.10",
+    "lint-staged": "^10.4.0",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
     "react-is": "^16.13.1",
@@ -99,9 +100,12 @@
   "files": [
     "dist"
   ],
+  "lint-staged": {
+    "src/components/**/*.styles.ts": "lint:css"
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint:css",
+      "pre-commit": "lint-staged",
       "pre-push": "yarn test"
     }
   },
