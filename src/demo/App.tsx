@@ -62,7 +62,7 @@ class App extends React.Component<{}, { fontsLoaded: boolean }> {
                 src="https://ghbtns.com/github-btn.html?user=prabhuignoto&repo=react-chrono&type=star&count=true&size=large"
                 frameborder="0"
                 scrolling="0"
-                width="120"
+                width="200"
                 height="30"
                 title="GitHub"
               ></iframe>
