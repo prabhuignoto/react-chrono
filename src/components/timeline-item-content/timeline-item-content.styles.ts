@@ -13,7 +13,7 @@ export const TimelineItemContentWrapper = styled.div<{theme: Theme}>`
   justify-content: flex-start;
   line-height: 1.5rem;
   margin: 0 auto;
-  /* min-height: 100px; */
+  min-height: 100px;
   text-align: left;
   width: 100%;
   
@@ -64,7 +64,7 @@ export const TimelineContentDetailsWrapper = styled.div<{theme: Theme}>`
   width: 100%;
 
   &.show-less {
-    /* max-height: 100px; */
+    max-height: 100px;
     overflow: hidden;
   }
 
