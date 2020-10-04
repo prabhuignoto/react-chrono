@@ -27,9 +27,7 @@
     "test": "react-scripts test -u",
     "coverage": "react-scripts test a -u --coverage --watchAll=false",
     "eject": "react-scripts eject",
-    "lint:css": "stylelint ./src/**/*style.ts",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "lint:css": "stylelint ./src/**/*style.ts"
   },
   "browserslist": {
     "production": [
@@ -55,10 +53,6 @@
     "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-buble": "^0.21.3",
     "@rollup/plugin-commonjs": "^15.1.0",
-    "@storybook/addon-actions": "^6.0.25",
-    "@storybook/addon-essentials": "^6.0.25",
-    "@storybook/addon-links": "^6.0.25",
-    "@storybook/react": "^6.0.25",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^12.1.7",
@@ -77,7 +71,6 @@
     "lint-staged": "^10.4.0",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
-    "react-is": "^16.13.1",
     "react-scripts": "3.4.3",
     "rollup": "^2.28.2",
     "rollup-plugin-node-resolve": "^5.2.0",
@@ -101,7 +94,7 @@
     "dist"
   ],
   "lint-staged": {
-    "src/components/**/*.styles.ts": "lint:css"
+    "src/components/**/*.style(s).ts": ["stylelint ./src/**/*style.ts", "git add"]
   },
   "husky": {
     "hooks": {
