@@ -13,7 +13,7 @@ export const TimelineItemContentWrapper = styled.div<{theme: Theme}>`
   justify-content: flex-start;
   line-height: 1.5rem;
   margin: 0 auto;
-  min-height: 100px;
+  /* min-height: 100px; */
   text-align: left;
   width: 100%;
   
@@ -30,8 +30,8 @@ export const TimelineContentText = styled.span`
 
 export const TimelineContentTitle = styled.span<{theme: Theme}>`
   color: #323232;
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 600;
   margin-top: 0.5rem;
   padding-left: 0.75rem;
   &.active {
@@ -64,7 +64,7 @@ export const TimelineContentDetailsWrapper = styled.div<{theme: Theme}>`
   width: 100%;
 
   &.show-less {
-    max-height: 100px;
+    /* max-height: 100px; */
     overflow: hidden;
   }
 

@@ -63,18 +63,20 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           {title}
         </TimelineContentTitle>
       )}
-      <TimelineContentText>{content}</TimelineContentText>
+      {content && <TimelineContentText>{content}</TimelineContentText>}
       <TimelineContentDetailsWrapper
         ref={detailsRef}
         className={!showMore ? "show-less" : ""}
         theme={theme}
       >
-        <TimelineContentDetails
-          onWheel={handleMouseWheel}
-          className={showMore ? "active" : ""}
-        >
-          {detailedText}
-        </TimelineContentDetails>
+        {detailedText && (
+          <TimelineContentDetails
+            onWheel={handleMouseWheel}
+            className={showMore ? "active" : ""}
+          >
+            {detailedText}
+          </TimelineContentDetails>
+        )}
       </TimelineContentDetailsWrapper>
       {
         <ShowMore

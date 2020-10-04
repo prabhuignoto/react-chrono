@@ -110,7 +110,6 @@ export const TimelineTitleContainer = styled.div`
 export const TimelineContentContainer = styled.div<{ position?: string }>`
   align-items: flex-start;
   animation: ${show} 0.25s ease-in;
-  padding: 0.5rem;
   
   &.horizontal {
     position: absolute;
