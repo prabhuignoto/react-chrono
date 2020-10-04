@@ -85,6 +85,7 @@ export const TimelineContentDetailsWrapper = styled.div<{theme: Theme}>`
 export const ShowMore = styled.span<{show?: boolean}>`
   cursor: pointer;
   font-size: 0.75rem;
+  margin-top: auto;
   margin-bottom: 0.5rem;
   margin-left: 0.75rem;
   visibility: ${(p) => p.show ? "visible" : "hidden"};
