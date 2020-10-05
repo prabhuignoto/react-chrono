@@ -13,18 +13,26 @@ const Features: React.FunctionComponent = () => (
       in a tree like fashion.
     </Feature>
     <Feature>
-      <span className="icon">📺</span> Auto play the timeline with <a href="#slideshow">slideshow</a> mode.
+      <span className="icon">📺</span> Auto play the timeline with{" "}
+      <a href="#slideshow">slideshow</a> mode.
     </Feature>
     <Feature>
       <span className="icon">⌨</span> Navigate the timeline via Keyboard.
     </Feature>
     <Feature>
+      <span className="icon">🦘</span> Quick jump to start or end of the timeline with HOME,END key.
+    </Feature>
+    <Feature>
       <span className="icon">💪</span> Built with{" "}
-      <a href="https://www.typescriptlang.org/" target="_new">Typescript</a>
+      <a href="https://www.typescriptlang.org/" target="_new">
+        Typescript
+      </a>
     </Feature>
     <Feature>
       <span className="icon">🎨</span> Powered by{" "}
-      <a href="https://styled-components.com/" target="_new">styled-components</a>
+      <a href="https://styled-components.com/" target="_new">
+        styled-components
+      </a>
     </Feature>
   </FeatureSet>
 );
