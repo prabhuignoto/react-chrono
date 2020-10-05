@@ -1,46 +1,84 @@
 import styled from "styled-components";
 
-export const Horizontal = styled.div`
+const ModeWrapper = styled.div`
   width: 100%;
   position: relative;
   margin-bottom: 3rem;
+  /* border: 1px solid #e5e5e5; */
+  margin-top: 2rem;
   border-radius: 10px;
+  padding: 1.5rem 0;
+  background: #fff;
 `;
 
-export const Vertical = styled.div`
-  width: 100%;
-  position: relative;
-  margin-bottom: 3rem;
-`;
+export const Horizontal = styled(ModeWrapper)``;
 
-export const Wrapper = styled.div<{show: boolean}>`
+export const Vertical = styled(ModeWrapper)``;
+
+export const Wrapper = styled.div<{ show: boolean }>`
   display: ${p => p.show ? "block" : "none"};
   flex-direction: column;
   margin: 0 auto;
   width: 1200px;
+  background: #fff;
+  padding:0 2rem;
+  filter: drop-shadow(0 0 60px rgba(0,0,0,0.1))
 `;
 
-export const ComponentContainer = styled.div`
+export const ComponentContainer = styled.div<{ type?: string }>`
   background: #f2f2f2;
   border-radius: 4px;
-  height: 350px;
-  margin-top: 1rem;
+  margin: 0 auto;
+  margin-bottom: 2rem;
   padding: 1rem 0;
   display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ${p => {
+    switch (p.type) {
+      case "desktop":
+        return `height: 400px; width: 90%;`
+      case "big-screen":
+        return `height: 400px; width: 90%;`
+      case "tablet":
+        return `height: 380px; width: 90%;`
+      default:
+        break;
+    }
+  }}
 `;
 
-export const ComponentContainerTree = styled.div`
+export const ComponentContainerTree = styled.div<{ type?: string }>`
   background: #f2f2f2;
   border-radius: 4px;
-  height: 800px; 
+  height: 800px;
+  margin: 0 auto;
   margin-top: 1rem;
   padding: 1rem 0;
+
+  ${p => {
+    switch (p.type) {
+      case "desktop":
+        return `height: 550px; width: 90%;`
+      case "big-screen":
+        return `height: 650px; width: 90%;`
+      case "tablet":
+        return `height: 500px; width: 90%;`
+      default:
+        break;
+    }
+  }}
 `;
 
 export const Header = styled.header`
-  margin: 2rem 0;
+  margin: 0 auto;
   display: flex;
-  width: 100%;
+  width: 95%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 `
 
 export const LogoImage = styled.img``;
@@ -56,23 +94,68 @@ export const Footer = styled.footer`
   height: 8rem;
 `;
 
-export const URL = styled.a``;
+export const URL = styled.a`
+  margin: 0 1rem;
+`;
 
 export const DescriptionContent = styled.p`
   font-family: 'Roboto Mono', monospace;
   font-weight: 400;
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 2rem;  
+  font-size: 1rem;
 `;
 
 export const DescriptionHeader = styled.h3`
   font-family: 'Roboto Mono', monospace;
   font-weight: 500;
-  text-transform: uppercase;
-  color: rgb(242,98,53);
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1rem;
 `;
 
 export const Description = styled.div``;
 
 export const Pre = styled.pre`
-  margin-top: 2rem;
-  border-radius: 4px;
+  margin: 0 auto;
+  width: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 150px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+`;
+
+export const FeatureSet = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  width: 95%;
+  margin-top: 1.5rem;
+`;
+
+export const Feature = styled.li`
+  font-family: 'Roboto Mono', monospace;
+  margin-bottom: 0.5rem;
+
+  .icon {
+    font-size: 1.2rem;
+    margin-right: 0.25rem;
+  }
+`;
+
+export const GithubLogo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

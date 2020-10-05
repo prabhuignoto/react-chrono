@@ -5,7 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #fff;
+  background-image: linear-gradient(
+    180.3deg,
+    rgba(214, 224, 255, 1) 37.2%,
+    rgba(254, 168, 168, 1) 137.3%
+  );
 }
 
 code {
