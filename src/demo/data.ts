@@ -1,16 +1,6 @@
-import { TimelineItemModel } from "react-chrono/dist/models/TimelineItemModel";
+import { TimelineItemModel } from "../models/TimelineItemModel";
 
 const items: TimelineItemModel[] = [
-  // {
-  //   title: "1 September 1939",
-  //   contentText: "German troops dismantle a Polish border post.",
-  //   contentTitle: "The German invasion of Poland",
-  //   contentDetailedText: `The Second World War began at dawn on Friday 1 September 1939, when Adolf Hitler launched his invasion of Poland.
-  //   The Poles fought bravely, but they were heavily outnumbered in both men and machines, and especially in the air. Britain and France declared war on Germany on 3 September 1939, but gave no real assistance to Poland. Two weeks later, Stalin invaded eastern Poland, and on 27 September Warsaw surrendered. Organised Polish resistance ceased after another week’s fighting. Poland was divided up between Hitler and Stalin.
-  //   In Poland the Nazis unleashed a reign of terror that was eventually to claim six million victims, half of whom were Polish Jews murdered in extermination camps. The Soviet regime was no less harsh. In March and April 1940, Stalin ordered the murder of over 20,000 Polish officers and others who had been captured in September 1939. Tens of thousands of Poles were also forcibly deported to Siberia.
-  //   By May 1945, and despite his promises to Churchill and Roosevelt, Stalin had installed a subservient communist regime in Poland.
-  //   Back in 1939, Poland’s then-leader Marshal Eduard Smigly-Rydz had warned, “With the Germans we risk losing our liberty, but with the Russians we lose our soul.”`,
-  // },
   {
     title: "May 1940",
     contentTitle: "Dunkirk",

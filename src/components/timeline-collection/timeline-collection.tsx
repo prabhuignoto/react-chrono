@@ -1,10 +1,11 @@
 import React from "react";
-import TimelineItem from "../timeline-item/timeline-item";
+// import TimelineItem from "../timeline-item/timeline-item";
 import { TimelineCollectionModel } from "../../models/TimelineCollnModel";
 import {
   TimelineCollectionWrapper,
   TimelineItemWrapper,
 } from "./timeline-collection.styles";
+import TimelineItem from "../timeline-elements/timeline-item/timeline-item";
 
 const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
   items,

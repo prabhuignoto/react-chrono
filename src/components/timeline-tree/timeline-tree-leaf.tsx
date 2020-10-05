@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { TreeLeafModel } from "../../models/TimelineTreeModel";
-import { TimelinePoint } from "../timeline-item/timeline-item.styles";
 import { TreeTrunkWrapper, TrunkPointWrapper } from "./timeline-tree.styles";
+import { TimelinePoint } from "../timeline-elements/timeline-item/timeline-item.styles";
 
 const TreeLeaf: React.FunctionComponent<TreeLeafModel> = ({
   className,

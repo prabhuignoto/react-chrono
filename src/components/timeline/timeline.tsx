@@ -5,7 +5,7 @@ import { TimelineItemViewModel } from "../../models/TimelineItemModel";
 import { TimelineModel } from "../../models/TimelineModel";
 import useNewScrollPosition from "../effects/useNewScrollPosition";
 import TimelineCollection from "../timeline-collection/timeline-collection";
-import TimelineControl from "../timeline-control/timeline-control";
+// import TimelineControl from "../timeline-control/timeline-control";
 import TimelineTree from "../timeline-tree/timeline-tree";
 import {
   Outline,
@@ -15,6 +15,7 @@ import {
   TimelineMainWrapper,
   Wrapper,
 } from "./timeline.style";
+import TimelineControl from "../timeline-elements/timeline-control/timeline-control";
 
 const Timeline: React.FunctionComponent<TimelineModel> = ({
   activeTimelineItem,

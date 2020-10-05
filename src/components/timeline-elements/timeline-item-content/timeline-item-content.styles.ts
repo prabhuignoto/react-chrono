@@ -1,19 +1,19 @@
 import styled from "styled-components";
-import { Theme } from "../../models/TimelineTreeModel";
+import { Theme } from "../../../models/TimelineTreeModel";
 
 export const TimelineItemContentWrapper = styled.div<{theme: Theme}>`
   align-items: flex-start;
   background: #fff;
-  border-radius: 0.75rem;
+  border-radius: 7px;
   display: flex;
-  filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.25));
+  filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));
   flex-direction: column;
   font-family: 'Roboto Mono', monospace;
   height: 100%;
   justify-content: flex-start;
   line-height: 1.5rem;
   margin: 0 auto;
-  min-height: 100px;
+  /* min-height: 100px; */
   text-align: left;
   width: 100%;
   
@@ -56,7 +56,8 @@ export const TimelineContentDetailsWrapper = styled.div<{theme: Theme}>`
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 0.25rem;
+  /* margin-top: 0.25rem; */
+  margin-top: auto;
   max-height: 300px;
   overflow-y: auto;
   scrollbar-width: 0.35em;

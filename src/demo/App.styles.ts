@@ -58,9 +58,9 @@ export const ComponentContainerTree = styled.div<{ type?: string }>`
   ${p => {
     switch (p.type) {
       case "desktop":
-        return `height: 550px; width: 90%;`
+        return `height: 600px; width: 90%;`
       case "big-screen":
-        return `height: 650px; width: 90%;`
+        return `height: 750px; width: 90%;`
       case "tablet":
         return `height: 500px; width: 90%;`
       default:
@@ -77,7 +77,7 @@ export const Header = styled.header`
   justify-content: center;
   margin-top: 2rem;
   margin-bottom: 2rem;
-`
+`;
 
 export const LogoImage = styled.img``;
 
@@ -132,6 +132,15 @@ export const Pre = styled.pre`
     max-height: 100%;
     max-width: 100%;
   }
+`;
+
+export const FeatureSetHeader = styled.header`
+  width: 95%;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
 `;
 
 export const FeatureSet = styled.ul`

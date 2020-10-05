@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState, WheelEvent } from "react";
-import { TimelineContentModel } from "../../models/TimelineContentModel";
 import {
   ShowMore,
   TimelineContentDetails,
@@ -8,6 +7,7 @@ import {
   TimelineContentTitle,
   TimelineItemContentWrapper,
 } from "./timeline-item-content.styles";
+import { TimelineContentModel } from "../../../models/TimelineContentModel";
 
 const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   content,

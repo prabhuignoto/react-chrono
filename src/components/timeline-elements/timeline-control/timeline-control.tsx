@@ -1,12 +1,12 @@
 import React from "react";
-import ChevronLeft from "../icons/chev-left";
-import ChevronRightIcon from "../icons/chev-right";
-import { TimelineControlModel } from "../../models/TimelineControl";
 import {
   TimelineControlButton,
   TimelineControlItem,
   TimelineControlWrapper,
 } from "./timeline-control.styles";
+import { TimelineControlModel } from "../../../models/TimelineControl";
+import ChevronLeft from "../../icons/chev-left";
+import ChevronRightIcon from "../../icons/chev-right";
 
 const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   onNext,

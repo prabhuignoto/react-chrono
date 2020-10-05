@@ -38,7 +38,8 @@
   - [🎨 Theme](#-theme)
 - [📦Build Setup](#build-setup)
 - [🔨 Contributing](#-contributing)
-- [Built with](#built-with)
+- [🧱 Built with](#-built-with)
+- [🔭 What's coming next](#-whats-coming-next)
 - [Meta](#meta)
 
 ## ⚡ Installation
@@ -199,9 +200,16 @@ yarn run rollup
 4. Push to the branch (`git push origin new-feature`)
 5. Create a new Pull Request
 
-## Built with
+## 🧱 Built with
 
-- [ReactJS](react) - The Component is written in React and [Typescript](typescript).
+- [React JS](react) - The Component is written in React and [Typescript](typescript).
+- [styled-components](styled-components) - The Component is written in React and [Typescript](styled-components).
+
+## 🔭 What's coming next
+
+- Support for Mobile devices & Tablets (responsive).
+- Polished UI control for navigating the timeline.
+- Support for embedding images in the timeline.
 
 ## Meta
 
@@ -215,3 +223,4 @@ Distributed under the MIT license. See `LICENSE` for more information.
 
 [react]: https://reactjs.org
 [typescript]: https://typescriptlang.org
+[styled-components]: https://styled-components.com/

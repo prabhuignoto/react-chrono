@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { Theme } from "../../models/TimelineTreeModel";
+import { Theme } from "../../../models/TimelineTreeModel";
 
 export const Wrapper = styled.div`
   align-items: center;

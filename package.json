@@ -96,7 +96,7 @@
     "dist"
   ],
   "lint-staged": {
-    "src/components/**/*.style(s).ts": [
+    "src/components/**/*.style.ts": [
       "stylelint ./src/**/*style.ts",
       "git add"
     ]

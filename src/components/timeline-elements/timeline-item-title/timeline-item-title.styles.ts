@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Theme } from "../../models/TimelineTreeModel";
+import { Theme } from "../../../models/TimelineTreeModel";
 
 export const TitleWrapper = styled.div<{ theme: Theme }>`
   border-radius: 0.2rem;
