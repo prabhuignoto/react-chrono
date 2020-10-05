@@ -26,7 +26,6 @@ export const Wrapper = styled.div<{ show: boolean }>`
 `;
 
 export const ComponentContainer = styled.div<{ type?: string }>`
-  background: #f2f2f2;
   border-radius: 4px;
   margin: 0 auto;
   margin-bottom: 2rem;
@@ -50,7 +49,6 @@ export const ComponentContainer = styled.div<{ type?: string }>`
 `;
 
 export const ComponentContainerTree = styled.div<{ type?: string }>`
-  background: #f2f2f2;
   border-radius: 4px;
   height: 800px;
   margin: 0 auto;
