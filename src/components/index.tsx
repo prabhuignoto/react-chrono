@@ -2,12 +2,8 @@ import { nanoid } from "nanoid";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { TimelineItemModel } from "../models/TimelineItemModel";
-import { TimelineModel, TimelineProps } from "../models/TimelineModel";
+import { TimelineProps } from "../models/TimelineModel";
 import Timeline from "./timeline/timeline";
-
-interface TimelineMainModel extends TimelineModel {
-  slideShow: boolean;
-}
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   items,
