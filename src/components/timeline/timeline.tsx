@@ -5,7 +5,7 @@ import { TimelineItemViewModel } from "../../models/TimelineItemModel";
 import { TimelineModel } from "../../models/TimelineModel";
 import useNewScrollPosition from "../effects/useNewScrollPosition";
 import TimelineCollection from "../timeline-collection/timeline-collection";
-// import TimelineControl from "../timeline-control/timeline-control";
+import TimelineControl from "../timeline-elements/timeline-control/timeline-control";
 import TimelineTree from "../timeline-tree/timeline-tree";
 import {
   Outline,
@@ -15,7 +15,6 @@ import {
   TimelineMainWrapper,
   Wrapper,
 } from "./timeline.style";
-import TimelineControl from "../timeline-elements/timeline-control/timeline-control";
 
 const Timeline: React.FunctionComponent<TimelineModel> = ({
   activeTimelineItem,
@@ -30,28 +29,20 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   onLast,
   onFirst,
   theme,
-  titlePosition,
+  titlePosition = "TOP",
 }) => {
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
 
   const timelineMainRef = useRef<HTMLDivElement>(null);
   const id = useRef(nanoid());
 
-  const handleNext = () => {
-    onNext();
-  };
+  const handleNext = () => onNext();
 
-  const handlePrevious = () => {
-    onPrevious();
-  };
+  const handlePrevious = () => onPrevious();
 
-  const handleFirst = () => {
-    onFirst();
-  };
+  const handleFirst = () => onFirst();
 
-  const handleLast = () => {
-    onLast();
-  };
+  const handleLast = () => onLast();
 
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -109,10 +100,48 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     }
   }, [newOffSet, mode]);
 
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const element = entry.target as HTMLDivElement;
+        if (entry.isIntersecting) {
+          element.style.visibility = "visible";
+          element
+            .querySelectorAll("img")
+            .forEach((ele) => (ele.style.display = "block"));
+        } else {
+          element.style.visibility = "hidden";
+          element
+            .querySelectorAll("img")
+            .forEach((ele) => (ele.style.display = "none"));
+        }
+      });
+    },
+    {
+      root: timelineMainRef.current,
+      threshold: 0,
+    }
+  );
+
+  useEffect(() => {
+    setTimeout(() => {
+      const element = timelineMainRef.current;
+
+      if (element) {
+        const childElements = element.querySelectorAll(".branch-main");
+
+        Array.from(childElements).forEach((elem) => observer.observe(elem));
+      }
+    }, 0);
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <Wrapper
       tabIndex={0}
-      onKeyDown={(evt) => (!disableNavOnKey ? handleKeySelection(evt) : null)}
+      onKeyDown={(evt: React.KeyboardEvent<HTMLDivElement>) =>
+        !disableNavOnKey ? handleKeySelection(evt) : null
+      }
       className={`${mode.toLowerCase()} ${titlePosition?.toLowerCase()}`}
     >
       <TimelineMainWrapper ref={timelineMainRef} className={mode.toLowerCase()}>
@@ -124,6 +153,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             autoScroll={handleScroll}
             theme={theme}
             slideShowRunning={slideShowRunning}
+            mode={mode}
           />
         ) : null}
         {mode === "HORIZONTAL" ? (
@@ -150,15 +180,22 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             theme={theme}
             alternateCards={false}
             slideShowRunning={slideShowRunning}
+            mode={mode}
           />
         ) : null}
       </TimelineMainWrapper>
-      <TimelineControlContainer className={slideShowRunning ? "hide" : "show"}>
+      <TimelineControlContainer
+        className={slideShowRunning ? "hide" : "show"}
+        mode={mode}
+      >
         <TimelineControl
           onNext={handleNext}
           onPrevious={handlePrevious}
+          onFirst={handleFirst}
+          onLast={handleLast}
           disableLeft={activeTimelineItem === 0}
           disableRight={activeTimelineItem === items.length - 1}
+          mode={mode}
         />
       </TimelineControlContainer>
       <TimelineContentRender id={id.current} />

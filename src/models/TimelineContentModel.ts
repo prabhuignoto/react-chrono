@@ -1,3 +1,4 @@
+import { Media } from "./TimelineItemMedia";
 import { Theme } from "./TimelineTreeModel";
 
 export interface TimelineContentModel {
@@ -8,4 +9,6 @@ export interface TimelineContentModel {
   slideShowActive?: boolean;
   theme?: Theme;
   title?: string;
+  media?: Media;
+  mode?: "VERTICAL" | "HORIZONTAL" | "TREE";
 }

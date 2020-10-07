@@ -1,5 +1,6 @@
 import { TimelineItemViewModel } from "./TimelineItemModel";
 import { Scroll } from "./TimelineCollnModel";
+import { Media } from "./TimelineItemMedia";
 
 export interface TreeLeafModel {
   active?: boolean;
@@ -13,24 +14,26 @@ export interface TreeLeafModel {
 
 export interface TreeBranchModel {
   active?: boolean;
+  alternateCards?: boolean;
   className: string;
   contentDetailedText?: string;
   contentText: string;
   contentTitle?: string;
   id?: string;
   index: number;
+  media?: Media;
+  mode?: "VERTICAL" | "HORIZONTAL" | "TREE";
   onClick: (id: string) => void;
+  onShowMore: () => void;
+  slideShowRunning?: boolean;
+  theme?: Theme;
+  title: string;
+  visible?: boolean;
   onActive: (
     timelinePointOffset: number,
     timelineContentHeight: number,
     timelineContentOffset: number
   ) => void;
-  onShowMore: () => void;
-  alternateCards?: boolean;
-  slideShowRunning?: boolean;
-  theme?: Theme;
-  title: string;
-  visible?: boolean;
 }
 
 export interface TimelineTreeModel {
@@ -41,6 +44,8 @@ export interface TimelineTreeModel {
   onClick: (id?: string) => void;
   slideShowRunning?: boolean;
   theme?: Theme;
+  mode?: "VERTICAL" | "HORIZONTAL" | "TREE";
+  sRef?: React.Ref<any>;
 }
 
 export interface Theme {

@@ -15,23 +15,23 @@ export const Horizontal = styled(ModeWrapper)``;
 
 export const Vertical = styled(ModeWrapper)``;
 
-export const Wrapper = styled.div<{ show: boolean }>`
+export const Wrapper = styled.div<{ show: boolean, type?: string }>`
   display: ${p => p.show ? "block" : "none"};
   flex-direction: column;
   margin: 0 auto;
   width: 1200px;
   background: #fff;
-  padding:0 2rem;
+  padding:${p => p.type !== "tablet" ? "0 2rem" : ""};
   filter: drop-shadow(0 0 60px rgba(0,0,0,0.1))
 `;
 
 export const ComponentContainer = styled.div<{ type?: string }>`
   border-radius: 4px;
   margin: 0 auto;
-  margin-bottom: 2rem;
+  margin-bottom: 7rem;
   padding: 1rem 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 
   ${p => {
@@ -41,7 +41,7 @@ export const ComponentContainer = styled.div<{ type?: string }>`
       case "big-screen":
         return `height: 400px; width: 90%;`
       case "tablet":
-        return `height: 380px; width: 90%;`
+        return `height: 380px; width: 100%;`
       default:
         break;
     }
@@ -58,11 +58,11 @@ export const ComponentContainerTree = styled.div<{ type?: string }>`
   ${p => {
     switch (p.type) {
       case "desktop":
-        return `height: 600px; width: 90%;`
+        return `height: 650px; width: 90%;`
       case "big-screen":
-        return `height: 750px; width: 90%;`
+        return `height: 850px; width: 90%;`
       case "tablet":
-        return `height: 500px; width: 90%;`
+        return `height: 500px; width: 100%;`
       default:
         break;
     }
@@ -77,6 +77,7 @@ export const Header = styled.header`
   justify-content: center;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 `;
 
 export const LogoImage = styled.img``;
@@ -117,22 +118,6 @@ export const DescriptionHeader = styled.h3`
 `;
 
 export const Description = styled.div``;
-
-export const Pre = styled.pre`
-  margin: 0 auto;
-  width: 95%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  height: 150px;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-
-  img {
-    max-height: 100%;
-    max-width: 100%;
-  }
-`;
 
 export const FeatureSetHeader = styled.header`
   width: 95%;

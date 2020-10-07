@@ -2,23 +2,23 @@
 
 exports[`Test Timeline Item render - Horizontal 1`] = `
 <div
-  class="sc-iCoHVE yuLvB horizontal"
+  class="sc-jrsJCI jrJYYY horizontal"
   data-testid="timeline-item"
 >
   <div
-    class="sc-pNWxx dztYkU"
+    class="sc-iqAbSa jCfIgE"
   >
     <div
-      class="sc-jrsJCI glldHT horizontal active"
+      class="sc-crzoUp eTkkct horizontal active"
       data-testid="timeline-circle"
     />
   </div>
   <div
-    class="sc-kEqYlL efYomT horizontal top"
+    class="sc-dIsAE kPRNOX horizontal top"
     data-testid="timeline-title"
   >
     <div
-      class="sc-gKAblj bWyEMM active"
+      class="sc-pNWxx enbFGE active"
       title="test title"
     >
       test title
@@ -29,48 +29,44 @@ exports[`Test Timeline Item render - Horizontal 1`] = `
 
 exports[`Test Timeline Item render - Vertical 1`] = `
 <div
-  class="sc-iCoHVE yuLvB vertical"
+  class="sc-jrsJCI jrJYYY vertical"
   data-testid="timeline-item"
 >
   <div
-    class="sc-pNWxx dztYkU"
+    class="sc-iqAbSa jCfIgE"
   >
     <div
-      class="sc-jrsJCI glldHT vertical active"
+      class="sc-crzoUp eTkkct vertical active"
       data-testid="timeline-circle"
     />
   </div>
   <div
-    class="sc-iqAbSa hHCKmM vertical"
+    class="sc-bqGHjH kRxa-dL vertical"
   >
     <div
-      class="sc-kEqYlL efYomT vertical bottom"
+      class="sc-dIsAE kPRNOX vertical bottom"
       data-testid="timeline-title"
     >
       <div
-        class="sc-gKAblj bWyEMM active"
+        class="sc-pNWxx enbFGE active"
         title="test title"
       >
         test title
       </div>
     </div>
     <div
-      class="sc-bdnylx hvWJRz active"
+      class="sc-bdnylx hCfMCf active"
     >
       <span
-        class="sc-gtssRu bcPOLu"
+        class="sc-gtssRu gtPOxj"
       >
         This is a test content
       </span>
       <div
-        class="sc-eCApGN UqUWF show-less"
-      >
-        <p
-          class="sc-hKFyIo bBEQRC"
-        />
-      </div>
+        class="sc-eCApGN jmcrwE show-less"
+      />
       <span
-        class="sc-jSFkmK kOUyCF show-more"
+        class="sc-jSFkmK fWqWpN show-more"
         role="button"
       >
         show more

@@ -1,4 +1,5 @@
 import { Scroll } from "./TimelineCollnModel";
+import { Media } from "./TimelineItemMedia";
 import { Theme } from "./TimelineTreeModel";
 
 /**
@@ -13,6 +14,7 @@ export interface TimelineItemModel {
   contentText: string;
   contentTitle?: string;
   id?: string;
+  media?: Media;
   position?: string;
   title: string;
   visible?: boolean;

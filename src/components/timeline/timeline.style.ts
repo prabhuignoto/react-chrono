@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { TimelineMode } from "../../models/TimelineModel";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -74,11 +75,13 @@ export const Outline = styled.div<{ color?: string }>`
   width: 100%;
   `;
 
-export const TimelineControlContainer = styled.div`
+export const TimelineControlContainer = styled.div<{mode?: TimelineMode}>`
   align-items: center;
+  justify-content: flex-end;
   display: flex;
-  height: 2rem;
+  height: 3rem;
   width: 100%;
+  margin-top: 1rem;
 
   &.hide {
     visibility: hidden;

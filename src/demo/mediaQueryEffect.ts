@@ -1,9 +1,6 @@
 import { useMediaQuery } from "react-responsive";
 
-
-
 const useMediaType = function () {
-
   let type = "";
 
   const isDesktopOrLaptop = useMediaQuery({

@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState, WheelEvent } from "react";
+import { TimelineContentModel } from "../../../models/TimelineContentModel";
+import { MediaURL } from "../../../models/TimelineItemMedia";
+import { Theme } from "../../../models/TimelineTreeModel";
 import {
+  Media,
+  MediaDetailsWrapper,
+  MediaWrapper,
   ShowMore,
   TimelineContentDetails,
   TimelineContentDetailsWrapper,
@@ -7,7 +13,6 @@ import {
   TimelineContentTitle,
   TimelineItemContentWrapper,
 } from "./timeline-item-content.styles";
-import { TimelineContentModel } from "../../../models/TimelineContentModel";
 
 const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   content,
@@ -17,10 +22,13 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   onShowMore,
   theme,
   slideShowActive,
+  media,
+  mode,
 }) => {
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
   const [canShowMore, setCanShowMore] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     const detailsEle = detailsRef.current;
@@ -53,32 +61,80 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
     }
   };
 
+  const Title = React.memo<{ title?: string; theme?: Theme; color?: string }>(
+    ({ title, theme, color }) =>
+      title && theme ? (
+        <TimelineContentTitle
+          className={active ? "active" : ""}
+          theme={theme}
+          style={{ color }}
+        >
+          {title}
+        </TimelineContentTitle>
+      ) : null
+  );
+
+  const ContentText = React.memo<{ content: string; color?: string }>(
+    ({ content, color }) =>
+      content ? (
+        <TimelineContentText style={{ color }}>{content}</TimelineContentText>
+      ) : null
+  );
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
   return (
     <TimelineItemContentWrapper
       className={active ? "active" : ""}
       theme={theme}
+      noMedia={!media}
     >
-      {title && (
-        <TimelineContentTitle className={active ? "active" : ""} theme={theme}>
-          {title}
-        </TimelineContentTitle>
+      {/* main title */}
+      {!media && <Title title={title} theme={theme} />}
+
+      {/* main timeline text */}
+      {!media && <ContentText content={content} />}
+
+      {/* media */}
+      {media && media.type === "IMAGE" && (
+        <MediaWrapper theme={theme} active={active} mode={mode}>
+          <Media
+            src={(media.source as MediaURL).url}
+            mode={mode}
+            onLoad={handleImageLoad}
+            visible={imageLoaded}
+            active={active}
+          />
+          {imageLoaded && (
+            <MediaDetailsWrapper mode={mode}>
+              <Title title={title} theme={theme} />
+              <ContentText content={content} />
+            </MediaDetailsWrapper>
+          )}
+        </MediaWrapper>
       )}
-      {content && <TimelineContentText>{content}</TimelineContentText>}
-      <TimelineContentDetailsWrapper
-        ref={detailsRef}
-        className={!showMore ? "show-less" : ""}
-        theme={theme}
-      >
-        {detailedText && (
-          <TimelineContentDetails
-            onWheel={handleMouseWheel}
-            className={showMore ? "active" : ""}
-          >
-            {detailedText}
-          </TimelineContentDetails>
-        )}
-      </TimelineContentDetailsWrapper>
-      {
+
+      {/* detailed text */}
+      {!media && (
+        <TimelineContentDetailsWrapper
+          ref={detailsRef}
+          className={!showMore ? "show-less" : ""}
+          theme={theme}
+        >
+          {detailedText && (
+            <TimelineContentDetails
+              onWheel={handleMouseWheel}
+              className={showMore ? "active" : ""}
+            >
+              {detailedText}
+            </TimelineContentDetails>
+          )}
+        </TimelineContentDetailsWrapper>
+      )}
+
+      {!media && (
         <ShowMore
           role="button"
           onClick={() => {
@@ -92,7 +148,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
         >
           {active ? (showMore ? "show less" : "show more") : "..."}
         </ShowMore>
-      }
+      )}
     </TimelineItemContentWrapper>
   );
 };
