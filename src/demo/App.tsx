@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { hot } from "react-hot-loader/root";
 import fontLoader from "webfontloader";
-import AppLogo from "../assets/logo.png";
 import { TimelineItemModel } from "../models/TimelineItemModel";
 import { Chrono } from "../react-chrono";
 import "./App.css";
@@ -12,10 +11,7 @@ import {
   DescriptionContent,
   DescriptionHeader,
   Footer,
-  GithubLogo,
-  Header,
   Horizontal,
-  LogoImage,
   URL,
   Vertical,
   Wrapper,
@@ -23,6 +19,7 @@ import {
 import data from "./data";
 import Features from "./Features";
 import useMediaQuery from "./mediaQueryEffect";
+import AppHeader from "./AppHeader";
 
 const NewDemo: React.FunctionComponent = () => {
   const [state, setState] = useState({ fontsLoaded: false, mediaType: "" });
@@ -61,56 +58,42 @@ const NewDemo: React.FunctionComponent = () => {
   return (
     <Wrapper show={state.fontsLoaded} type={state.mediaType}>
       <>
-        <Header>
-          <LogoImage src={AppLogo} />
-          <a
-            href="http://github.com/prabhuignoto/react-chrono"
-            target="_new"
-            style={{
-              marginLeft: "auto",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <GithubLogo>
-              <iframe
-                src="https://ghbtns.com/github-btn.html?user=prabhuignoto&repo=react-chrono&type=star&count=true&size=large"
-                frameBorder="0"
-                scrolling="0"
-                width="200"
-                height="30"
-                title="GitHub"
-                style={{ position: "absolute" }}
-              ></iframe>
-            </GithubLogo>
-          </a>
-        </Header>
+        {/* header */}
+        <AppHeader />
+
+        {/* project description */}
         <DescriptionContent>
           <strong>react-chrono</strong> is a modern timeline component built for
           React.
         </DescriptionContent>
+
+        {/* features */}
         <Features />
         <br />
+
+        {/* demo description */}
         <DescriptionContent>
           Lasting six years and one day, the Second World War started on 1
           September 1939. Here we trace the timeline of a conflict that engulfed
           the world.
         </DescriptionContent>
+
+        {/* Horizontal with Media */}
         <Horizontal>
           <Description>
             <span>
               <DescriptionHeader># Horizontal</DescriptionHeader>
             </span>
             <DescriptionContent>
-              Timelines are rendered horizontally by default. The positioning of
-              the cards can be customized to either top or bottom.
+              Timelines are rendered horizontally by default. Use the control buttons or LEFT, RIGHT keys on your keyboard to navigate.
             </DescriptionContent>
           </Description>
           <ComponentContainer type={state.mediaType}>
-            <Chrono items={data} mode="HORIZONTAL" slideShow/>
+            <Chrono items={data} mode="HORIZONTAL" titlePosition="TOP" />
           </ComponentContainer>
         </Horizontal>
+
+        {/* Vertical with no Media */}
         <Vertical>
           <Description>
             <span>
@@ -125,20 +108,23 @@ const NewDemo: React.FunctionComponent = () => {
             <Chrono items={items} mode="VERTICAL" />
           </ComponentContainerTree>
         </Vertical>
+
+        {/* Tree Mode */}
         <Vertical id="tree-mode">
           <Description>
             <span>
               <DescriptionHeader># Tree</DescriptionHeader>
             </span>
             <DescriptionContent>
-              In <strong>TREE</strong> mode, the component will be rendered
-              vertically, with cards alternating between left and right.
+              In <strong>TREE</strong> mode, the cards are rendered vertically in an alternating fashion.
             </DescriptionContent>
           </Description>
           <ComponentContainerTree type={state.mediaType}>
             <Chrono items={items} mode="TREE" />
           </ComponentContainerTree>
         </Vertical>
+
+        {/* Horizontal Slideshow */}
         <Horizontal id="slideshow">
           <Description>
             <span>
@@ -159,13 +145,16 @@ const NewDemo: React.FunctionComponent = () => {
             />
           </ComponentContainer>
         </Horizontal>
+
+
+        {/* Tree Slideshow */}
         <Vertical>
           <Description>
             <span>
               <DescriptionHeader># Slideshow with Tree</DescriptionHeader>
             </span>
             <DescriptionContent>
-              SlideShow is also supported for all 3 modes.
+              SlideShow is also supported in all the modes.
             </DescriptionContent>
           </Description>
           <ComponentContainerTree type={state.mediaType}>
