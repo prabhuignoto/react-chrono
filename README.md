@@ -129,7 +129,7 @@ Play the timeline automatically with the `slideShow` mode.
 | name              | description                                                                           | default      |
 | ----------------- | ------------------------------------------------------------------------------------- | ------------ |
 | mode              | sets the layout of the component. can be `HORIZONTAL`, `VERTICAL` or `TREE` | `HORIZONTAL`           |
-| items             | collection of timeline items                                                          | []           |
+| items             | collection of timeline items. This should be a collection of [Timeline Item Model](#timeline-item-model)                                                         | []           |
 | disableNavOnKey   | prop to disable keyboard navigation.                                                  | false        |
 | slideShow         | starts the timeline in slideshow mode.                                                | false        |
 | slideItemDuration | The amount of delay in `ms` for the timeline points in `slideshow` mode.              | 2500         |
