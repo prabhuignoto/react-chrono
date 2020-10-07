@@ -7,7 +7,7 @@ const ModeWrapper = styled.div`
   /* border: 1px solid #e5e5e5; */
   margin-top: 2rem;
   border-radius: 10px;
-  /* padding: 1.5rem 0; */
+  padding: 1.5rem 0;
   background: #fff;
 `;
 

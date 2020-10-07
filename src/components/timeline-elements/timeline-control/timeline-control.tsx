@@ -21,22 +21,30 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   return (
     <TimelineControlWrapper>
       <TimelineControlItem disable={disableLeft}>
-        <TimelineControlButton onClick={onFirst}>
+        <TimelineControlButton
+          onClick={onFirst}
+          title="first"
+          aria-label="first"
+        >
           <ChevronsLeftIcon />
         </TimelineControlButton>
       </TimelineControlItem>
       <TimelineControlItem disable={disableLeft}>
-        <TimelineControlButton onClick={onPrevious}>
+        <TimelineControlButton
+          onClick={onPrevious}
+          title="previous"
+          aria-label="previous"
+        >
           <ChevronLeft />
         </TimelineControlButton>
       </TimelineControlItem>
       <TimelineControlItem disable={disableRight}>
-        <TimelineControlButton onClick={onNext}>
+        <TimelineControlButton onClick={onNext} title="next" aria-label="next">
           <ChevronRightIcon />
         </TimelineControlButton>
       </TimelineControlItem>
       <TimelineControlItem disable={disableRight}>
-        <TimelineControlButton onClick={onLast}>
+        <TimelineControlButton onClick={onLast} title="last" aria-label="last">
           <ChevronsRightIcon />
         </TimelineControlButton>
       </TimelineControlItem>

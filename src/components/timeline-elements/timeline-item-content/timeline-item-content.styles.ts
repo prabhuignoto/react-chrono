@@ -99,7 +99,10 @@ export const ShowMore = styled.span<{ show?: boolean }>`
 `;
 
 export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: TimelineMode }>`
-  height: ${p => p.mode === "HORIZONTAL" ? "350px" : "300px"};
+  /* height: ${p => p.mode === "HORIZONTAL" ? "350px" : "300px"}; */
+  /* height: 100%; */
+  min-height: 250px;
+  max-height: 450px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -112,12 +115,10 @@ export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: 
 `;
 
 export const Media = styled.img<{ mode?: TimelineMode, visible?: boolean, active?: boolean }>`
-  object-fit: ${p => p.mode === "TREE" ? "contain" : "contain"};
-  object-fit: "contain";
-  width: 100%;
+  max-width: 100%;
   justify-self: center;
   flex: 4;
-  height: 100%;
+  max-height: 100%;
   visibility: ${p => p.visible ? "visible" : "hidden"};
   border: ${p => p.active ? `1px solid ${p.theme.primary}` : ""};
 `;
@@ -141,7 +142,7 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
   flex-direction: column;
   flex: 1;
   border-radius: 6px;
-  background: rgba(255,255,255, 0.8);
+  background: rgba(255,255,255, 0.9);
   /* background: rgba(0,0,0,0.7); */
   filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
   padding-bottom: 0.5rem;

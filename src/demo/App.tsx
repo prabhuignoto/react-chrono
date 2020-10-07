@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { hot } from "react-hot-loader/root";
 import fontLoader from "webfontloader";
+import AppLogo from "../assets/logo.png";
 import { TimelineItemModel } from "../models/TimelineItemModel";
 import { Chrono } from "../react-chrono";
 import "./App.css";
@@ -21,14 +22,11 @@ import {
 } from "./App.styles";
 import data from "./data";
 import Features from "./Features";
-import AppLogo from "../assets/logo.png";
 import useMediaQuery from "./mediaQueryEffect";
 
 const NewDemo: React.FunctionComponent = () => {
   const [state, setState] = useState({ fontsLoaded: false, mediaType: "" });
-
   const type = useMediaQuery();
-
   const [items, setItems] = useState<TimelineItemModel[]>();
 
   const setFont = useCallback(() => {
@@ -43,18 +41,20 @@ const NewDemo: React.FunctionComponent = () => {
         });
       },
     });
-  },[type])
+  }, [type]);
 
   useEffect(() => {
     setFont();
   }, [setFont]);
 
   useEffect(() => {
-    const newItems = data.map(({ title, contentTitle, contentText, media }) => ({
-      title,
-      contentTitle,
-      contentText,
-    }));
+    const newItems = data.map(
+      ({ title, contentTitle, contentText, media }) => ({
+        title,
+        contentTitle,
+        contentText,
+      })
+    );
     setItems(newItems);
   }, []);
 
@@ -100,9 +100,7 @@ const NewDemo: React.FunctionComponent = () => {
         <Horizontal>
           <Description>
             <span>
-              <DescriptionHeader>
-                # Horizontal
-              </DescriptionHeader>
+              <DescriptionHeader># Horizontal</DescriptionHeader>
             </span>
             <DescriptionContent>
               Timelines are rendered horizontally by default. The positioning of
@@ -110,15 +108,13 @@ const NewDemo: React.FunctionComponent = () => {
             </DescriptionContent>
           </Description>
           <ComponentContainer type={state.mediaType}>
-            <Chrono items={data} mode="HORIZONTAL" />
+            <Chrono items={data} mode="HORIZONTAL" slideShow/>
           </ComponentContainer>
         </Horizontal>
         <Vertical>
           <Description>
             <span>
-              <DescriptionHeader>
-                # Vertical
-              </DescriptionHeader>
+              <DescriptionHeader># Vertical</DescriptionHeader>
             </span>
             <DescriptionContent>
               Use the <strong>VERTICAL</strong> mode to render the timelines
@@ -132,9 +128,7 @@ const NewDemo: React.FunctionComponent = () => {
         <Vertical id="tree-mode">
           <Description>
             <span>
-              <DescriptionHeader>
-                # Tree
-              </DescriptionHeader>
+              <DescriptionHeader># Tree</DescriptionHeader>
             </span>
             <DescriptionContent>
               In <strong>TREE</strong> mode, the component will be rendered
@@ -148,9 +142,7 @@ const NewDemo: React.FunctionComponent = () => {
         <Horizontal id="slideshow">
           <Description>
             <span>
-              <DescriptionHeader>
-                # Slideshow
-              </DescriptionHeader>
+              <DescriptionHeader># Slideshow</DescriptionHeader>
             </span>
             <DescriptionContent>
               In slideshow mode, the component autoplays the timeline for you.
@@ -170,21 +162,14 @@ const NewDemo: React.FunctionComponent = () => {
         <Vertical>
           <Description>
             <span>
-              <DescriptionHeader>
-                # Slideshow with Tree
-              </DescriptionHeader>
+              <DescriptionHeader># Slideshow with Tree</DescriptionHeader>
             </span>
             <DescriptionContent>
               SlideShow is also supported for all 3 modes.
             </DescriptionContent>
           </Description>
           <ComponentContainerTree type={state.mediaType}>
-            <Chrono
-              items={data}
-              mode="TREE"
-              slideShow
-              slideItemDuration={3500}
-            />
+            <Chrono items={data} mode="TREE" slideItemDuration={1500} slideShow />
           </ComponentContainerTree>
         </Vertical>
         <Footer>

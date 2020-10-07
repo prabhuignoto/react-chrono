@@ -36,21 +36,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   const timelineMainRef = useRef<HTMLDivElement>(null);
   const id = useRef(nanoid());
 
-  const handleNext = () => {
-    onNext();
-  };
+  const handleNext = () => onNext();
 
-  const handlePrevious = () => {
-    onPrevious();
-  };
+  const handlePrevious = () => onPrevious();
 
-  const handleFirst = () => {
-    onFirst();
-  };
+  const handleFirst = () => onFirst();
 
-  const handleLast = () => {
-    onLast();
-  };
+  const handleLast = () => onLast();
 
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
     event.preventDefault();

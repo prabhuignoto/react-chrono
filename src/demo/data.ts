@@ -51,7 +51,7 @@ const items: TimelineItemModel[] = [
     contentText: `The destroyer USS Shaw explodes in dry dock after being hit by Japanese aircraft`,
     media: {
       source: {
-        url: "https://cdn.britannica.com/s:800x1000/96/192896-050-665CC9A3/Explosion-USS-Shaw-magazine-attack-Pearl-Harbor-Dec-7-1941.jpg",
+        url: "https://pearlharborwarbirds.com/wp-content/uploads/2016/09/Awesome-Color-Photos-of-the-Attack-on-Pearl-Harbor-1.jpg",
       },
       type: "IMAGE",
       name: "Pearl Harbor"
@@ -81,7 +81,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: "IMAGE",
       source: {
-        url: "https://www.nationalww2museum.org/sites/default/files/styles/wide_medium/public/2017-06/battle_of_midway-002.jpg"
+        url: "https://dlbztvn8kichw.cloudfront.net/wp-content/uploads/2018/10/03131301/The-Battle-Of-Midway.jpg"
       }
     },
     contentText: `The American aircraft carrier USS Yorktown under Japanese attack during the battle of Midway`,
@@ -96,7 +96,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: "IMAGE",
       source: {
-        url: "https://qphs.fs.quoracdn.net/main-qimg-b131ffa5825d451de2446a1df94ff401"
+        url: "https://i.dailymail.co.uk/i/newpix/2018/03/08/11/49FEAE2A00000578-5477117-image-a-79_1520509429888.jpg"
       }
     },
     contentDetailedText: `The North African campaign began in September1940, and for the next two years the fighting was marked by a succession of Allied and Axis advances and retreats. In the summer of 1942, the Axis forces under ‘Desert Fox’ field marshal, Erwin Rommel, looked poised to take Cairo and advance on the Suez Canal.
@@ -155,7 +155,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: "IMAGE",
       source: {
-        url: "https://upload.wikimedia.org/wikipedia/commons/1/17/Bundesarchiv_Bild_146-1994-041-07%2C_Dresden%2C_zerst%C3%B6rtes_Stadtzentrum.jpg"
+        url: "https://i.pinimg.com/originals/7f/13/57/7f1357ae886a0cfd317c2abbc232e637.jpg"
       }
     },
     contentDetailedText: `At Yalta, an Allied plan to bomb the hitherto untouched city of Dresden was discussed. The reason for attacking the city was due principally to its strategic importance as a communications centre in the rear of the German retreat that followed the Soviet winter offensive of January 1945. It was also believed that Dresden might be used as an alternative to Berlin as the Reich capital.
