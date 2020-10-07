@@ -1,4 +1,3 @@
-import { Mode } from "fs";
 import { Media } from "./TimelineItemMedia";
 import { Theme } from "./TimelineTreeModel";
 
