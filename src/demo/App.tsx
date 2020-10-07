@@ -141,7 +141,7 @@ const NewDemo: React.FunctionComponent = () => {
               items={items}
               mode="HORIZONTAL"
               slideShow
-              slideItemDuration={5000}
+              slideItemDuration={3500}
             />
           </ComponentContainer>
         </Horizontal>
@@ -158,7 +158,7 @@ const NewDemo: React.FunctionComponent = () => {
             </DescriptionContent>
           </Description>
           <ComponentContainerTree type={state.mediaType}>
-            <Chrono items={data} mode="TREE" slideItemDuration={1500} slideShow />
+            <Chrono items={data} mode="TREE" slideItemDuration={3500} slideShow />
           </ComponentContainerTree>
         </Vertical>
         <Footer>
