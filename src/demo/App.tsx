@@ -50,7 +50,7 @@ const NewDemo: React.FunctionComponent = () => {
   }, [setFont]);
 
   useEffect(() => {
-    const newItems = data.map(({ title, contentTitle, contentText }) => ({
+    const newItems = data.map(({ title, contentTitle, contentText, media }) => ({
       title,
       contentTitle,
       contentText,
@@ -59,7 +59,7 @@ const NewDemo: React.FunctionComponent = () => {
   }, []);
 
   return (
-    <Wrapper show={state.fontsLoaded}>
+    <Wrapper show={state.fontsLoaded} type={state.mediaType}>
       <>
         <Header>
           <LogoImage src={AppLogo} />
@@ -180,7 +180,7 @@ const NewDemo: React.FunctionComponent = () => {
           </Description>
           <ComponentContainerTree type={state.mediaType}>
             <Chrono
-              items={items}
+              items={data}
               mode="TREE"
               slideShow
               slideItemDuration={3500}

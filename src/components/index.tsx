@@ -10,7 +10,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   itemWidth = 300,
   titlePosition = "TOP",
   mode = "HORIZONTAL",
-  disableNavOnScroll = false,
   disableNavOnKey = false,
   slideShow = false,
   slideItemDuration = 2500,
@@ -47,7 +46,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       timeLineItemsRef.current = newItems.slice(0);
       setSlideshowRunning(true);
 
-      timer.current = setInterval(() => {
+      timer.current = window.setInterval(() => {
         const invisibleElements = timeLineItemsRef.current?.filter(
           (item) => !item.visible
         );
@@ -131,7 +130,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       onNext={handleOnNext}
       onPrevious={handleOnPrevious}
       activeTimelineItem={debActvTimelineItem}
-      disableNavOnScroll={disableNavOnScroll}
       disableNavOnKey={disableNavOnKey}
       slideItemDuration={slideItemDuration}
       onFirst={handleFirst}

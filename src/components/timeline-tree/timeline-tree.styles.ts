@@ -4,16 +4,17 @@ export const TimelineTreeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
   padding: 1rem;
 `;
 
 const animateVisible = keyframes`
   from {
-    opacity: 0;
+    /* opacity: 0; */
     visibility: hidden;
   }
   to {
-    opacity: 1;
+    /* opacity: 1; */
     visibility: visible;
   }
 `;

@@ -25,6 +25,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   theme,
   wrapperId,
   slideShowRunning,
+  media
 }) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -92,6 +93,8 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
           onShowMore={handleOnShowMore}
           theme={theme}
           slideShowActive={slideShowRunning}
+          media={media}
+          mode={mode}
         />
       </TimelineContentContainer>
     );

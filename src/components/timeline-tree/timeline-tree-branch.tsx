@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
 import { TreeBranchModel } from "../../models/TimelineTreeModel";
+import TimelineItemContent from "../timeline-elements/timeline-item-content/timeline-item-content";
+import TimelineItemTitle from "../timeline-elements/timeline-item-title/timeline-item-title";
 import TreeLeaf from "./timeline-tree-leaf";
 import {
   Branch,
   TimelineItemContentWrapper,
   TimelineTreeTitleWrapper,
 } from "./timeline-tree.styles";
-import TimelineItemContent from "../timeline-elements/timeline-item-content/timeline-item-content";
-import TimelineItemTitle from "../timeline-elements/timeline-item-title/timeline-item-title";
 
 const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
   active,
@@ -24,6 +24,8 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
   title,
   visible,
   slideShowRunning,
+  media,
+  mode,
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -36,18 +38,21 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
 
   return (
     <Branch
-      className={`${className} ${visible ? "visible" : ""}`}
+      className={`${className} ${visible ? "visible" : ""} branch-main`}
       key={index}
       ref={contentRef}
       data-testid="branch-main"
       alternateCards={alternateCards}
     >
+      {/* title */}
       <TimelineTreeTitleWrapper
         className={className}
         alternateCards={alternateCards}
       >
         <TimelineItemTitle title={title} active={active} theme={theme} />
       </TimelineTreeTitleWrapper>
+
+      {/* content section */}
       <TimelineItemContentWrapper
         className={`${className} ${visible ? "visible" : ""}`}
         alternateCards={alternateCards}
@@ -64,8 +69,12 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
           }
           theme={theme}
           slideShowActive={slideShowRunning}
+          media={media}
+          mode={mode}
         />
       </TimelineItemContentWrapper>
+
+      {/* leaf */}
       <TreeLeaf
         className={className}
         id={id}

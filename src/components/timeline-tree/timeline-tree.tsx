@@ -9,7 +9,9 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   autoScroll,
   theme,
   alternateCards = true,
-  slideShowRunning
+  slideShowRunning,
+  mode,
+  sRef,
 }) => {
   const handleOnActive = (
     offset: number,
@@ -54,6 +56,8 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
             onShowMore={handleOnShowMore}
             alternateCards={alternateCards}
             slideShowRunning={slideShowRunning}
+            media={item.media}
+            mode={mode}
           />
         );
       })}

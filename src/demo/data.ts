@@ -4,6 +4,13 @@ const items: TimelineItemModel[] = [
   {
     title: "May 1940",
     contentTitle: "Dunkirk",
+    media: {
+      name: "dunkirk beach",
+      source: {
+        url: "https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"
+      },
+      type: "IMAGE"
+    },
     contentText:
       "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.",
     contentDetailedText: `On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France. Holland capitulated after only five days of fighting, and the Belgians surrendered on 28 May. With the success of the German ‘Blitzkrieg’, the British Expeditionary Force and French troops were in danger of being cut off and destroyed.
@@ -12,6 +19,13 @@ const items: TimelineItemModel[] = [
   {
     title: "25 July 1940",
     contentTitle: "The Battle of Britain",
+    media: {
+      name: "Battle of britain",
+      source: {
+        url: "https://thumbs-prod.si-cdn.com/NbOmrVrVAO-uSo0O8kVNdpqVyCk=/800x600/filters:no_upscale()/https://public-media.si-cdn.com/filer/c6/b0/c6b0f904-ae9c-47e5-86a9-493dfaefd43c/spitfire_1.jpg"
+      },
+      type: "IMAGE"
+    },
     contentText: `RAF Spitfire pilots scramble for their planes`,
     contentDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority. The first phase of the battle began on 10 July with Luftwaffe attacks on shipping in the Channel.
       The following month, RAF Fighter Command airfields and aircraft factories came under attack. Under the dynamic direction of Lord Beaverbrook, production of Spitfire and Hurricane fighters increased, and despite its losses in pilots and planes, the RAF was never as seriously weakened as the Germans supposed.`,
@@ -19,6 +33,13 @@ const items: TimelineItemModel[] = [
   {
     title: "June 1941",
     contentTitle: "Operation Barbarossa",
+    media: {
+      name: "Operation Barbarossa",
+      source: {
+        url: "https://cdn.britannica.com/01/150101-050-810CE9A9/soldiers-German-part-Soviet-Union-Operation-Barbarossa-1941.jpg"
+      },
+      type: "IMAGE"
+    },
     contentText: `A column of Red Army prisoners taken during the first days of the German invasion`,
     contentDetailedText: `Since the 1920s, Hitler had seen Russia, with its immense natural resources, as the principal target for conquest and expansion. It would provide, he believed, the necessary ‘Lebensraum’, or living space, for the German people. And by conquering Russia, Hitler would also destroy the “Jewish pestilential creed of Bolshevism”. His non-aggression pact with Stalin in August 1939 he regarded as a mere temporary expedient.
       Barely a month after the fall of France, and while the Battle of Britain was being fought, Hitler started planning for the Blitzkrieg campaign against Russia, which began on 22 June 1941. Despite repeated warnings, Stalin was taken by surprise, and for the first few months the Germans achieved spectacular victories, capturing huge swathes of land and hundreds of thousands of prisoners. But they failed to take Moscow or Leningrad before winter set in.
@@ -28,12 +49,26 @@ const items: TimelineItemModel[] = [
     title: "7 December 1941",
     contentTitle: "Pearl Harbor",
     contentText: `The destroyer USS Shaw explodes in dry dock after being hit by Japanese aircraft`,
+    media: {
+      source: {
+        url: "https://cdn.britannica.com/s:800x1000/96/192896-050-665CC9A3/Explosion-USS-Shaw-magazine-attack-Pearl-Harbor-Dec-7-1941.jpg",
+      },
+      type: "IMAGE",
+      name: "Pearl Harbor"
+    },
     contentDetailedText: `After Japan’s occupation of French Indo-China in July 1941, US President Franklin D Roosevelt, followed by Britain and the Netherlands, ordered the freezing of Japanese assets.
       Many Japanese now believed that there was no alternative between economic ruin and going to war with the United States and the European colonial powers. In October 1941, a hardline government under General Hideki Tojo came to power, and preparations were made to deliver a devastating blow against the Americans.`,
   },
   {
     title: "15 February 1942",
     contentTitle: "The fall of Singapore",
+    media: {
+      type: "IMAGE",
+      source: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Surrender_Singapore.jpg"
+      },
+      name: "Fall of singapore"
+    },
     contentText: `Lieutenant General Arthur Percival and staff on their way to the Singapore Ford factory to negotiate the island’s surrender with General Yamashita`,
     contentDetailedText: `The Japanese began their invasion of Malaya on 8 December 1941, and very soon the British and empire defenders were in full retreat.
       Told previously that the Japanese were no match for European troops, morale among the defending forces slumped as General Tomoyuki Yamashita’s forces moved swiftly southwards towards Singapore.
@@ -43,6 +78,12 @@ const items: TimelineItemModel[] = [
   {
     title: "4 June 1942",
     contentTitle: "Midway",
+    media: {
+      type: "IMAGE",
+      source: {
+        url: "https://www.nationalww2museum.org/sites/default/files/styles/wide_medium/public/2017-06/battle_of_midway-002.jpg"
+      }
+    },
     contentText: `The American aircraft carrier USS Yorktown under Japanese attack during the battle of Midway`,
     contentDetailedText: `For six months after Pearl Harbor, just as Admiral Yamamoto predicted, Japanese forces carried all before them, capturing Hong Kong, Malaya, the Philippines and the Dutch East Indies. In May 1942, in an attempt to consolidate their grip on their new conquests, the Japanese sought to eliminate the United States as a strategic Pacific power.
       This would be done by luring into a trap the US navy carriers that had escaped Pearl Harbor, while at the same time the Japanese would occupy the Midway atoll in preparation for further attacks. The loss of the carriers would, the Japanese hoped, force the Americans to the negotiating table. In the event, it was the Americans who inflicted a crushing defeat on the Japanese. Their codebreakers were able to determine the location and date of the Japanese attack. This enabled US admiral Chester Nimitz to organise a trap of his own.
@@ -52,6 +93,12 @@ const items: TimelineItemModel[] = [
     title: "25 October 1942",
     contentTitle: "Alamein",
     contentText: `German prisoners of war wait for transport after their capture at Alamein`,
+    media: {
+      type: "IMAGE",
+      source: {
+        url: "https://qphs.fs.quoracdn.net/main-qimg-b131ffa5825d451de2446a1df94ff401"
+      }
+    },
     contentDetailedText: `The North African campaign began in September1940, and for the next two years the fighting was marked by a succession of Allied and Axis advances and retreats. In the summer of 1942, the Axis forces under ‘Desert Fox’ field marshal, Erwin Rommel, looked poised to take Cairo and advance on the Suez Canal.
       The British Middle East commander General Claude Auchinleck took personal command of the defending Eighth Army and halted the retreat at the strong defensive line at El Alamein. But Churchill, dissatisfied with Auchinleck, replaced him in August with General Harold Alexander, while Lieutenant -General Bernard Montgomery took over command of the Eighth Army.
       Montgomery immediately began to build up an enormous superiority in men and equipment, finally launching his offensive at Alamein on 23 October 1942. By the beginning of November, the Axis forces were in full retreat, although final victory in North Africa was not achieved until May 1943.
@@ -61,6 +108,12 @@ const items: TimelineItemModel[] = [
     title: "February 1943",
     contentTitle: "Stalingrad",
     contentText: `Red Army soldiers hoist the Soviet flag over a recaptured Stalingrad factory following the German surrender`,
+    media: {
+      type: "IMAGE",
+      source: {
+        url: "https://www.thesun.co.uk/wp-content/uploads/2018/02/nintchdbpict000382291893.jpg"
+      }
+    },
     contentDetailedText: `Throughout September and October, under General Vassili Chuikov, the city’s defenders contested every yard of ground of the devastated city.
       The Red Army’s stubborn defence allowed General Georgi Zhukov time to prepare a counterattack that was launched on 19 November 1942, and which soon trapped the Sixth Army commanded by General Friederich Paulus.
       Hitler, wrongly assured by Göring that the Luftwaffe could supply Stalingrad by air, ordered Paulus to hold out. He also ordered Field Marshal Erich Manstein to break through and relieve the beleaguered Sixth Army. Manstein was unsuccessful, and on 31 January 1943 Paulus capitulated. Of the 91,000 German troops who went into captivity, less than 6,000 returned home after the war. Stalingrad was one of Germany’s greatest defeats, and it effectively marked the end of Hitler’s dreams of an empire in the east.
@@ -70,6 +123,12 @@ const items: TimelineItemModel[] = [
     title: "6 June 1944",
     contentTitle: "D-Day, Operation Overlord",
     contentText: `British commandos of the First Special Service Brigade land on Sword Beach`,
+    media: {
+      type: "IMAGE",
+      source: {
+        url: "https://www.britishpoles.uk/wp-content/uploads/2019/06/D-Day-landings-1.jpg"
+      }
+    },
     contentDetailedText: `Operation Overlord, the invasion and liberation of north-west Europe, began on D-Day, 6 June 1944.
       That day, under the overall command of US General Dwight Eisenhower, British, Canadian and American troops, supported by the Allied navies and air forces, came ashore on the coast of Normandy. By the end of the day, 158,000 men, including airborne troops, had landed. Initially, except on the American Omaha beach, German resistance was unexpectedly light. But it soon stiffened and the Allied breakout from the beachhead area was painfully slow.
       The fierceness of the fighting can be gauged by the fact that in Normandy British infantry battalions were suffering the same percentage casualty rates as they had on the Western Front in 1914–1918. Eventually the breakout was achieved, and on 25 August, Paris was liberated. Brussels followed on 3 September. Hopes that the war might be won in 1944 were dashed by the Allied failure at Arnhem and the unexpected German offensive in the Ardennes in December.
@@ -79,6 +138,12 @@ const items: TimelineItemModel[] = [
     title: "February 1945",
     contentTitle: "The Big Three",
     contentText: `Churchill, Roosevelt and Stalin sit for a group photograph during the Yalta conference`,
+    media: {
+      type: "IMAGE",
+      source: {
+        url: "https://1.bp.blogspot.com/-GGJh_zNQ5IQ/XQvEH7JYOlI/AAAAAAAADJA/TO-j7KLr5q0zUaPhpl2KvoxihXVwBesjwCLcBGAs/s1600/Yalta_Conference_%2528Churchill%252C_Roosevelt%252C_Stalin%2529.jpg"
+      }
+    },
     contentDetailedText: `Between June 1940 and June 1941, Britain stood alone against Hitler. But then, after the German invasion of Russia and the Japanese attack on Pearl Harbor, she gained two powerful allies.
       For the next four years Churchill did his utmost to foster ‘The Grand Alliance’ against the Nazis. He even earned the grudging admiration of Nazi propaganda chief Dr Goebbels who said, “…I can feel only respect for this man, for whom no humiliation is too base and no trouble too great when the victory of the Allies is at stake”.
       Churchill conferred with both Roosevelt and Stalin to hammer out strategy and to discuss postwar arrangements. The three men congregated for the first time at Tehran in November 1943. There, and again at their last meeting at Yalta, Churchill was conscious of the fact that Britain, exhausted by her war effort, was now very much the junior partner of the two emerging superpowers.`,
@@ -87,23 +152,25 @@ const items: TimelineItemModel[] = [
     title: "13/14 February 1945",
     contentTitle: "Dresden",
     contentText: `Dresden under incendiary bomb attack`,
+    media: {
+      type: "IMAGE",
+      source: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/1/17/Bundesarchiv_Bild_146-1994-041-07%2C_Dresden%2C_zerst%C3%B6rtes_Stadtzentrum.jpg"
+      }
+    },
     contentDetailedText: `At Yalta, an Allied plan to bomb the hitherto untouched city of Dresden was discussed. The reason for attacking the city was due principally to its strategic importance as a communications centre in the rear of the German retreat that followed the Soviet winter offensive of January 1945. It was also believed that Dresden might be used as an alternative to Berlin as the Reich capital.
       The attack was part of a plan codenamed ‘Thunderclap’, designed to convince the Germans that the war was lost. It was drawn up in January 1945, when Hitler’s Ardennes offensive, V2 rocket attacks on Britain and the deployment of snorkel-equipped U-boats clearly demonstrated that Germany was still capable of offering stubborn resistance. Strategic bombing attacks had previously failed to break Germany, although they had proved valuable in reducing its capacity to wage war.
       Now, on the night of 13/14 February 1945, Dresden was attacked by 800 RAF bombers, followed by 400 bombers of the United States Army Air Force. The bombing created a firestorm that destroyed 1,600 acres of Dresden. Even today it is still uncertain as to how many died and estimates have ranged from 25,000 to 135,000. Most authorities now put the death toll at around 35,000. The scale of destruction, the enormous death toll, and its timing at such a late stage in the war, have all ensured that the bombing of Dresden still remains highly controversial.`,
   },
   {
-    title: "17 April 1945",
-    contentTitle: "Belsen",
-    contentText: `Bodies of dead prisoners at the newly liberated Belsen concentration camp`,
-    contentDetailedText: `
-      Bergen-Belsen concentration camp was liberated by the British Army on 15 April 1945. The photographs, newsreel films and Richard Dimbleby’s moving BBC broadcast from the camp sent a shockwave of horror and revulsion through Britain.
-      Stories about concentration camps and the Nazi persecution and extermination of the Jews had been circulating since 1933, but this was the first time that the British public were faced with the reality of Hitler’s Final Solution of the Jewish Question – the Holocaust.
-      Even today it is not known for certain when the order to set about systematic extermination of European Jewry was given.
-      But by December 1941, the first extermination camp at Chelmno in German-occupied Poland was in operation, while mass shootings of Soviet Jews had begun in June.`,
-  },
-  {
     title: "8 May 1945",
     contentTitle: "VE Day",
+    media: {
+      type: "IMAGE",
+      source: {
+        url: "https://ic.c4assets.com/brands/ve-day-in-colour-britains-biggest-party/d708c2d9-8fec-4592-a90f-ddfe3513c914.jpg?interpolation=progressive-bicubic&output-quality=90"
+      }
+    },
     contentText: `millions of people rejoice in the news that Germany has surrendered – the war in Europe was finally over`,
     contentDetailedText: `On the afternoon of 8 May 1945, the British prime minister Winston Churchill made the radio announcement that the world had long been waiting for.
       “Yesterday morning,” he declared, “at 2.41 a.m., at General Eisenhower’s headquarters, General Jodl, the representative of the German High Command, and Grand Admiral Dönitz, the designated head of the German State, signed the act of unconditional surrender of all German land, sea and air forces in Europe.”
@@ -113,6 +180,12 @@ const items: TimelineItemModel[] = [
     title: "9 August 1945",
     contentTitle: "Nagasaki",
     contentText: `Atomic bomb mushroom cloud over the Japanese city of Nagasaki`,
+    media: {
+      type: "IMAGE",
+      source: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/5/54/Atomic_bombing_of_Japan.jpg"
+      }
+    },
     contentDetailedText: `The Second World War began at dawn on Friday 1 September 1939, when Adolf Hitler launched his invasion of Poland.
       The Poles fought bravely, but they were heavily outnumbered in both men and machines, and especially in the air. Britain and France declared war on Germany on 3 September 1939, but gave no real assistance to Poland. Two weeks later, Stalin invaded eastern Poland, and on 27 September Warsaw surrendered. Organised Polish resistance ceased after another week’s fighting. Poland was divided up between Hitler and Stalin.
       In Poland the Nazis unleashed a reign of terror that was eventually to claim six million victims, half of whom were Polish Jews murdered in extermination camps. The Soviet regime was no less harsh. In March and April 1940, Stalin ordered the murder of over 20,000 Polish officers and others who had been captured in September 1939. Tens of thousands of Poles were also forcibly deported to Siberia.
