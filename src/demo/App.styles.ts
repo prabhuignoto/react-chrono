@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from '@emotion/styled';
 
 const ModeWrapper = styled.div`
   width: 100%;

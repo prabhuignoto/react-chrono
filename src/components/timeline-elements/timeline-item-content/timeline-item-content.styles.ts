@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from '@emotion/styled';
 import { TimelineMode } from "../../../models/TimelineModel";
 import { Theme } from "../../../models/TimelineTreeModel";
 
@@ -12,7 +12,6 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
   justify-content: flex-start;
   line-height: 1.5rem;
   margin: 0 auto;
-  /* min-height: 100px; */
   text-align: left;
   width: 100%;
 
@@ -48,9 +47,8 @@ export const TimelineContentDetails = styled.p`
   font-size: 0.8rem;
   font-weight: 400;
   margin: 0;
-  padding-left: 0.5rem;
   touch-action: none;
-  width: 95%;
+  width: 97%;
 
   &.active {
     background: #f9f9f9;
@@ -65,6 +63,7 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   margin-top: auto;
   max-height: 350px;
   overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: 0.35em;
   transition: max-height .2s linear;
   width: 100%;
@@ -120,7 +119,6 @@ export const Media = styled.img<{ mode?: TimelineMode, visible?: boolean, active
   flex: 4;
   max-height: 100%;
   visibility: ${p => p.visible ? "visible" : "hidden"};
-  border: ${p => p.active ? `1px solid ${p.theme.primary}` : ""};
 `;
 
 export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
@@ -142,7 +140,7 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
   flex-direction: column;
   flex: 1;
   border-radius: 6px;
-  background: rgba(255,255,255, 0.9);
+  background: rgba(255,255,255, 0.95);
   /* background: rgba(0,0,0,0.7); */
   filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
   padding-bottom: 0.5rem;

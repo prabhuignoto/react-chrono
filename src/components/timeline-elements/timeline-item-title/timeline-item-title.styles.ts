@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from '@emotion/styled';
 import { Theme } from "../../../models/TimelineTreeModel";
 
 export const TitleWrapper = styled.div<{ theme: Theme }>`

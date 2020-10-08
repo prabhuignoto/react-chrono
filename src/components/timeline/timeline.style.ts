@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from '@emotion/styled';
 import { TimelineMode } from "../../models/TimelineModel";
 
 export const Wrapper = styled.div`
@@ -75,7 +75,7 @@ export const Outline = styled.div<{ color?: string }>`
   width: 100%;
   `;
 
-export const TimelineControlContainer = styled.div<{mode?: TimelineMode}>`
+export const TimelineControlContainer = styled.div<{ mode?: TimelineMode }>`
   align-items: center;
   justify-content: flex-end;
   display: flex;

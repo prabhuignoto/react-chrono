@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from '@emotion/styled';
 
 export const TimelineControlWrapper = styled.ul`
   display: flex;
@@ -10,7 +10,7 @@ export const TimelineControlWrapper = styled.ul`
   /* box-shadow: inset 0 0 8px 6px rgba(0,0,0,0.2), 0 0 2px 2px rgba(0,0,0,0.3); */
 `;
 
-export const TimelineControlItem = styled.li<{disable: boolean}>`
+export const TimelineControlItem = styled.li<{ disable: boolean }>`
   padding: 0.1rem;
   ${(p) => p.disable ? "pointer-events: none; filter: opacity(0.4)" : ""};
 `;

@@ -1,4 +1,5 @@
-import styled, { keyframes } from "styled-components";
+import styled from "@emotion/styled";
+import { keyframes } from "@emotion/core";
 import { Theme } from "../../../models/TimelineTreeModel";
 
 export const Wrapper = styled.div`
