@@ -237,8 +237,8 @@ yarn run rollup
 
 ## 🧱 Built with
 
-- [React JS](react) - The Component is written in React and [Typescript](typescript).
-- [styled-components](styled-components) - The Component is written in React and [Typescript](styled-components).
+- The Component is written in React and [Typescript](typescript).
+- Styled with [emotion](emotion).
 
 ## 🔭 What's coming next
 
@@ -257,4 +257,4 @@ Distributed under the MIT license. See `LICENSE` for more information.
 
 [react]: https://reactjs.org
 [typescript]: https://typescriptlang.org
-[styled-components]: https://styled-components.com/
+[emotion]: https://emotion.sh/
