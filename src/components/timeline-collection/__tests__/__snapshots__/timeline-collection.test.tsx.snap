@@ -2,31 +2,31 @@
 
 exports[`Test Collection Horizontal render 1`] = `
 <ul
-  class="sc-bdnylx iSxgtw horizontal"
+  class="horizontal css-1e5kp6i"
   data-testid="timeline-collection"
 >
   <li
-    class="sc-gtssRu QNAxy horizontal "
+    class="horizontal  css-uqbp81"
     width="250"
   >
     <div
-      class="sc-iqAbSa LvJIG horizontal"
+      class="horizontal css-16eji5t"
       data-testid="timeline-item"
     >
       <div
-        class="sc-dIsAE biHERP"
+        class="css-1p18t0t"
       >
         <div
-          class="sc-bqGHjH bjgoZi horizontal in-active"
+          class="horizontal in-active css-1a01u17"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-ksluoS gXzCzs horizontal undefined"
+        class="horizontal undefined css-lzd26m"
         data-testid="timeline-title"
       >
         <div
-          class="sc-kEqYlL issezT"
+          class=" css-1w5m28t"
           title="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
         >
           June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
@@ -35,27 +35,27 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="sc-gtssRu QNAxy horizontal "
+    class="horizontal  css-uqbp81"
     width="250"
   >
     <div
-      class="sc-iqAbSa LvJIG horizontal"
+      class="horizontal css-16eji5t"
       data-testid="timeline-item"
     >
       <div
-        class="sc-dIsAE biHERP"
+        class="css-1p18t0t"
       >
         <div
-          class="sc-bqGHjH bjgoZi horizontal in-active"
+          class="horizontal in-active css-1a01u17"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-ksluoS gXzCzs horizontal undefined"
+        class="horizontal undefined css-lzd26m"
         data-testid="timeline-title"
       >
         <div
-          class="sc-kEqYlL issezT"
+          class=" css-1w5m28t"
           title="July 28, 1914"
         >
           July 28, 1914
@@ -64,27 +64,27 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="sc-gtssRu QNAxy horizontal "
+    class="horizontal  css-uqbp81"
     width="250"
   >
     <div
-      class="sc-iqAbSa LvJIG horizontal"
+      class="horizontal css-16eji5t"
       data-testid="timeline-item"
     >
       <div
-        class="sc-dIsAE biHERP"
+        class="css-1p18t0t"
       >
         <div
-          class="sc-bqGHjH bjgoZi horizontal in-active"
+          class="horizontal in-active css-1a01u17"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-ksluoS gXzCzs horizontal undefined"
+        class="horizontal undefined css-lzd26m"
         data-testid="timeline-title"
       >
         <div
-          class="sc-kEqYlL issezT"
+          class=" css-1w5m28t"
           title="August 1–28, 1914"
         >
           August 1–28, 1914
@@ -93,27 +93,27 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="sc-gtssRu QNAxy horizontal "
+    class="horizontal  css-uqbp81"
     width="250"
   >
     <div
-      class="sc-iqAbSa LvJIG horizontal"
+      class="horizontal css-16eji5t"
       data-testid="timeline-item"
     >
       <div
-        class="sc-dIsAE biHERP"
+        class="css-1p18t0t"
       >
         <div
-          class="sc-bqGHjH bjgoZi horizontal in-active"
+          class="horizontal in-active css-1a01u17"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-ksluoS gXzCzs horizontal undefined"
+        class="horizontal undefined css-lzd26m"
         data-testid="timeline-title"
       >
         <div
-          class="sc-kEqYlL issezT"
+          class=" css-1w5m28t"
           title="September 6, 1914"
         >
           September 6, 1914
@@ -126,76 +126,76 @@ exports[`Test Collection Horizontal render 1`] = `
 
 exports[`Test Collection Tree render 1`] = `
 <ul
-  class="sc-bdnylx iSxgtw tree"
+  class="tree css-1e5kp6i"
   data-testid="timeline-collection"
 >
   <li
-    class="sc-gtssRu QNAxy tree "
+    class="tree  css-uqbp81"
     width="250"
   >
     <div
-      class="sc-iqAbSa LvJIG tree"
+      class="tree css-16eji5t"
       data-testid="timeline-item"
     >
       <div
-        class="sc-dIsAE biHERP"
+        class="css-1p18t0t"
       >
         <div
-          class="sc-bqGHjH bjgoZi tree in-active"
+          class="tree in-active css-1a01u17"
           data-testid="timeline-circle"
         />
       </div>
     </div>
   </li>
   <li
-    class="sc-gtssRu QNAxy tree "
+    class="tree  css-uqbp81"
     width="250"
   >
     <div
-      class="sc-iqAbSa LvJIG tree"
+      class="tree css-16eji5t"
       data-testid="timeline-item"
     >
       <div
-        class="sc-dIsAE biHERP"
+        class="css-1p18t0t"
       >
         <div
-          class="sc-bqGHjH bjgoZi tree in-active"
+          class="tree in-active css-1a01u17"
           data-testid="timeline-circle"
         />
       </div>
     </div>
   </li>
   <li
-    class="sc-gtssRu QNAxy tree "
+    class="tree  css-uqbp81"
     width="250"
   >
     <div
-      class="sc-iqAbSa LvJIG tree"
+      class="tree css-16eji5t"
       data-testid="timeline-item"
     >
       <div
-        class="sc-dIsAE biHERP"
+        class="css-1p18t0t"
       >
         <div
-          class="sc-bqGHjH bjgoZi tree in-active"
+          class="tree in-active css-1a01u17"
           data-testid="timeline-circle"
         />
       </div>
     </div>
   </li>
   <li
-    class="sc-gtssRu QNAxy tree "
+    class="tree  css-uqbp81"
     width="250"
   >
     <div
-      class="sc-iqAbSa LvJIG tree"
+      class="tree css-16eji5t"
       data-testid="timeline-item"
     >
       <div
-        class="sc-dIsAE biHERP"
+        class="css-1p18t0t"
       >
         <div
-          class="sc-bqGHjH bjgoZi tree in-active"
+          class="tree in-active css-1a01u17"
           data-testid="timeline-circle"
         />
       </div>
@@ -206,52 +206,52 @@ exports[`Test Collection Tree render 1`] = `
 
 exports[`Test Collection Vertical render 1`] = `
 <ul
-  class="sc-bdnylx iSxgtw vertical"
+  class="vertical css-1e5kp6i"
   data-testid="timeline-collection"
 >
   <li
-    class="sc-gtssRu QNAxy vertical "
+    class="vertical  css-uqbp81"
     width="250"
   >
     <div
-      class="sc-iqAbSa LvJIG vertical"
+      class="vertical css-16eji5t"
       data-testid="timeline-item"
     >
       <div
-        class="sc-dIsAE biHERP"
+        class="css-1p18t0t"
       >
         <div
-          class="sc-bqGHjH bjgoZi vertical in-active"
+          class="vertical in-active css-1a01u17"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-hBMVcZ kEgMpR vertical"
+        class="vertical css-nyflco"
       >
         <div
-          class="sc-ksluoS gXzCzs vertical undefined"
+          class="vertical undefined css-lzd26m"
           data-testid="timeline-title"
         >
           <div
-            class="sc-kEqYlL issezT"
+            class=" css-1w5m28t"
             title="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
           >
             June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
           </div>
         </div>
         <div
-          class="sc-dlnjPT hURYze"
+          class=" css-1a8fhdt"
         >
           <span
-            class="sc-hKFyIo chbspV"
+            class="css-4hae14"
           >
             Archduke Franz Ferdinand of Austria and his wife, Sophie, are assassinated by a Bosnian Serb nationalist in Sarajevo.
           </span>
           <div
-            class="sc-gKAblj kcnvpv show-less"
+            class="show-less css-hrwi5d"
           />
           <span
-            class="sc-iCoHVE dZriIx show-more"
+            class="show-more css-1rml49d"
             role="button"
           >
             ...
@@ -261,48 +261,48 @@ exports[`Test Collection Vertical render 1`] = `
     </div>
   </li>
   <li
-    class="sc-gtssRu QNAxy vertical "
+    class="vertical  css-uqbp81"
     width="250"
   >
     <div
-      class="sc-iqAbSa LvJIG vertical"
+      class="vertical css-16eji5t"
       data-testid="timeline-item"
     >
       <div
-        class="sc-dIsAE biHERP"
+        class="css-1p18t0t"
       >
         <div
-          class="sc-bqGHjH bjgoZi vertical in-active"
+          class="vertical in-active css-1a01u17"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-hBMVcZ kEgMpR vertical"
+        class="vertical css-nyflco"
       >
         <div
-          class="sc-ksluoS gXzCzs vertical undefined"
+          class="vertical undefined css-lzd26m"
           data-testid="timeline-title"
         >
           <div
-            class="sc-kEqYlL issezT"
+            class=" css-1w5m28t"
             title="July 28, 1914"
           >
             July 28, 1914
           </div>
         </div>
         <div
-          class="sc-dlnjPT hURYze"
+          class=" css-1a8fhdt"
         >
           <span
-            class="sc-hKFyIo chbspV"
+            class="css-4hae14"
           >
             World War I begins when Austria-Hungary declares war on Serbia.
           </span>
           <div
-            class="sc-gKAblj kcnvpv show-less"
+            class="show-less css-hrwi5d"
           />
           <span
-            class="sc-iCoHVE dZriIx show-more"
+            class="show-more css-1rml49d"
             role="button"
           >
             ...
@@ -312,50 +312,50 @@ exports[`Test Collection Vertical render 1`] = `
     </div>
   </li>
   <li
-    class="sc-gtssRu QNAxy vertical "
+    class="vertical  css-uqbp81"
     width="250"
   >
     <div
-      class="sc-iqAbSa LvJIG vertical"
+      class="vertical css-16eji5t"
       data-testid="timeline-item"
     >
       <div
-        class="sc-dIsAE biHERP"
+        class="css-1p18t0t"
       >
         <div
-          class="sc-bqGHjH bjgoZi vertical in-active"
+          class="vertical in-active css-1a01u17"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-hBMVcZ kEgMpR vertical"
+        class="vertical css-nyflco"
       >
         <div
-          class="sc-ksluoS gXzCzs vertical undefined"
+          class="vertical undefined css-lzd26m"
           data-testid="timeline-title"
         >
           <div
-            class="sc-kEqYlL issezT"
+            class=" css-1w5m28t"
             title="August 1–28, 1914"
           >
             August 1–28, 1914
           </div>
         </div>
         <div
-          class="sc-dlnjPT hURYze"
+          class=" css-1a8fhdt"
         >
           <span
-            class="sc-hKFyIo chbspV"
+            class="css-4hae14"
           >
             Germany declares war on Russia, France, and Belgium. Britain declares war on Germany.
     Austria declares war on Russia. Montenegro declares war on Austria. France declares war on Austria.
     Britain declares war on Austria. Montenegro declares war on Germany. Japan declares war on Germany. Austria declares war on Belgium.
           </span>
           <div
-            class="sc-gKAblj kcnvpv show-less"
+            class="show-less css-hrwi5d"
           />
           <span
-            class="sc-iCoHVE dZriIx show-more"
+            class="show-more css-1rml49d"
             role="button"
           >
             ...
@@ -365,49 +365,49 @@ exports[`Test Collection Vertical render 1`] = `
     </div>
   </li>
   <li
-    class="sc-gtssRu QNAxy vertical "
+    class="vertical  css-uqbp81"
     width="250"
   >
     <div
-      class="sc-iqAbSa LvJIG vertical"
+      class="vertical css-16eji5t"
       data-testid="timeline-item"
     >
       <div
-        class="sc-dIsAE biHERP"
+        class="css-1p18t0t"
       >
         <div
-          class="sc-bqGHjH bjgoZi vertical in-active"
+          class="vertical in-active css-1a01u17"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class="sc-hBMVcZ kEgMpR vertical"
+        class="vertical css-nyflco"
       >
         <div
-          class="sc-ksluoS gXzCzs vertical undefined"
+          class="vertical undefined css-lzd26m"
           data-testid="timeline-title"
         >
           <div
-            class="sc-kEqYlL issezT"
+            class=" css-1w5m28t"
             title="September 6, 1914"
           >
             September 6, 1914
           </div>
         </div>
         <div
-          class="sc-dlnjPT hURYze"
+          class=" css-1a8fhdt"
         >
           <span
-            class="sc-hKFyIo chbspV"
+            class="css-4hae14"
           >
             First Battle of the Marne begins. The Germans had advanced to within 30 miles of Paris, but over the next two days, the French are reinforced by 6,000 infantrymen who are transported to the front by hundreds of taxis.
       The Germans dig in north of the Aisne River, and the trench warfare that is to typify the Western Front for the next four years begins.
           </span>
           <div
-            class="sc-gKAblj kcnvpv show-less"
+            class="show-less css-hrwi5d"
           />
           <span
-            class="sc-iCoHVE dZriIx show-more"
+            class="show-more css-1rml49d"
             role="button"
           >
             ...

@@ -2,39 +2,39 @@
 
 exports[`Test Tree render 1`] = `
 <div
-  class="sc-jrsJCI bDPuPE"
+  class="css-15px0b4"
   data-testid="tree-main"
 >
   <div
-    class="sc-kEqYlL lbyWlm left  branch-main"
+    class="left  branch-main css-1uu8hqk"
     data-testid="branch-main"
   >
     <div
-      class="sc-bqGHjH gFGBHt left"
+      class="left css-2zvd49"
     >
       <div
-        class="sc-pNWxx enbFGE"
+        class=" css-1w5m28t"
         title="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
       >
         June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
       </div>
     </div>
     <div
-      class="sc-crzoUp eMKTxY left "
+      class="left  css-3ra8v1"
     >
       <div
-        class="sc-bdnylx hCfMCf"
+        class=" css-1a8fhdt"
       >
         <span
-          class="sc-gtssRu gtPOxj"
+          class="css-4hae14"
         >
           Archduke Franz Ferdinand of Austria and his wife, Sophie, are assassinated by a Bosnian Serb nationalist in Sarajevo.
         </span>
         <div
-          class="sc-eCApGN jmcrwE show-less"
+          class="show-less css-hrwi5d"
         />
         <span
-          class="sc-jSFkmK fWqWpN show-more"
+          class="show-more css-1rml49d"
           role="button"
         >
           ...
@@ -42,49 +42,49 @@ exports[`Test Tree render 1`] = `
       </div>
     </div>
     <div
-      class="sc-iqAbSa jbmaIk left"
+      class="left css-ey985k"
       data-testid="tree-leaf"
     >
       <div
-        class="sc-dIsAE fUZNng left"
+        class="left css-kooiip"
         data-testid="tree-leaf-click"
       >
         <div
-          class="sc-fFSRdu cjFqWk in-active"
+          class="in-active css-1a01u17"
         />
       </div>
     </div>
   </div>
   <div
-    class="sc-kEqYlL lbyWlm right  branch-main"
+    class="right  branch-main css-1uu8hqk"
     data-testid="branch-main"
   >
     <div
-      class="sc-bqGHjH gFGBHt right"
+      class="right css-2zvd49"
     >
       <div
-        class="sc-pNWxx enbFGE"
+        class=" css-1w5m28t"
         title="July 28, 1914"
       >
         July 28, 1914
       </div>
     </div>
     <div
-      class="sc-crzoUp eMKTxY right "
+      class="right  css-3ra8v1"
     >
       <div
-        class="sc-bdnylx hCfMCf"
+        class=" css-1a8fhdt"
       >
         <span
-          class="sc-gtssRu gtPOxj"
+          class="css-4hae14"
         >
           World War I begins when Austria-Hungary declares war on Serbia.
         </span>
         <div
-          class="sc-eCApGN jmcrwE show-less"
+          class="show-less css-hrwi5d"
         />
         <span
-          class="sc-jSFkmK fWqWpN show-more"
+          class="show-more css-1rml49d"
           role="button"
         >
           ...
@@ -92,51 +92,51 @@ exports[`Test Tree render 1`] = `
       </div>
     </div>
     <div
-      class="sc-iqAbSa jbmaIk right"
+      class="right css-ey985k"
       data-testid="tree-leaf"
     >
       <div
-        class="sc-dIsAE fUZNng right"
+        class="right css-kooiip"
         data-testid="tree-leaf-click"
       >
         <div
-          class="sc-fFSRdu cjFqWk in-active"
+          class="in-active css-1a01u17"
         />
       </div>
     </div>
   </div>
   <div
-    class="sc-kEqYlL lbyWlm left  branch-main"
+    class="left  branch-main css-1uu8hqk"
     data-testid="branch-main"
   >
     <div
-      class="sc-bqGHjH gFGBHt left"
+      class="left css-2zvd49"
     >
       <div
-        class="sc-pNWxx enbFGE"
+        class=" css-1w5m28t"
         title="August 1–28, 1914"
       >
         August 1–28, 1914
       </div>
     </div>
     <div
-      class="sc-crzoUp eMKTxY left "
+      class="left  css-3ra8v1"
     >
       <div
-        class="sc-bdnylx hCfMCf"
+        class=" css-1a8fhdt"
       >
         <span
-          class="sc-gtssRu gtPOxj"
+          class="css-4hae14"
         >
           Germany declares war on Russia, France, and Belgium. Britain declares war on Germany.
     Austria declares war on Russia. Montenegro declares war on Austria. France declares war on Austria.
     Britain declares war on Austria. Montenegro declares war on Germany. Japan declares war on Germany. Austria declares war on Belgium.
         </span>
         <div
-          class="sc-eCApGN jmcrwE show-less"
+          class="show-less css-hrwi5d"
         />
         <span
-          class="sc-jSFkmK fWqWpN show-more"
+          class="show-more css-1rml49d"
           role="button"
         >
           ...
@@ -144,50 +144,50 @@ exports[`Test Tree render 1`] = `
       </div>
     </div>
     <div
-      class="sc-iqAbSa jbmaIk left"
+      class="left css-ey985k"
       data-testid="tree-leaf"
     >
       <div
-        class="sc-dIsAE fUZNng left"
+        class="left css-kooiip"
         data-testid="tree-leaf-click"
       >
         <div
-          class="sc-fFSRdu cjFqWk in-active"
+          class="in-active css-1a01u17"
         />
       </div>
     </div>
   </div>
   <div
-    class="sc-kEqYlL lbyWlm right  branch-main"
+    class="right  branch-main css-1uu8hqk"
     data-testid="branch-main"
   >
     <div
-      class="sc-bqGHjH gFGBHt right"
+      class="right css-2zvd49"
     >
       <div
-        class="sc-pNWxx enbFGE"
+        class=" css-1w5m28t"
         title="September 6, 1914"
       >
         September 6, 1914
       </div>
     </div>
     <div
-      class="sc-crzoUp eMKTxY right "
+      class="right  css-3ra8v1"
     >
       <div
-        class="sc-bdnylx hCfMCf"
+        class=" css-1a8fhdt"
       >
         <span
-          class="sc-gtssRu gtPOxj"
+          class="css-4hae14"
         >
           First Battle of the Marne begins. The Germans had advanced to within 30 miles of Paris, but over the next two days, the French are reinforced by 6,000 infantrymen who are transported to the front by hundreds of taxis.
       The Germans dig in north of the Aisne River, and the trench warfare that is to typify the Western Front for the next four years begins.
         </span>
         <div
-          class="sc-eCApGN jmcrwE show-less"
+          class="show-less css-hrwi5d"
         />
         <span
-          class="sc-jSFkmK fWqWpN show-more"
+          class="show-more css-1rml49d"
           role="button"
         >
           ...
@@ -195,15 +195,15 @@ exports[`Test Tree render 1`] = `
       </div>
     </div>
     <div
-      class="sc-iqAbSa jbmaIk right"
+      class="right css-ey985k"
       data-testid="tree-leaf"
     >
       <div
-        class="sc-dIsAE fUZNng right"
+        class="right css-kooiip"
         data-testid="tree-leaf-click"
       >
         <div
-          class="sc-fFSRdu cjFqWk in-active"
+          class="in-active css-1a01u17"
         />
       </div>
     </div>

@@ -2,23 +2,23 @@
 
 exports[`Test Timeline Item render - Horizontal 1`] = `
 <div
-  class="sc-jrsJCI jrJYYY horizontal"
+  class="horizontal css-16eji5t"
   data-testid="timeline-item"
 >
   <div
-    class="sc-iqAbSa jCfIgE"
+    class="css-1p18t0t"
   >
     <div
-      class="sc-crzoUp eTkkct horizontal active"
+      class="horizontal active css-1a01u17"
       data-testid="timeline-circle"
     />
   </div>
   <div
-    class="sc-dIsAE kPRNOX horizontal top"
+    class="horizontal top css-lzd26m"
     data-testid="timeline-title"
   >
     <div
-      class="sc-pNWxx enbFGE active"
+      class="active css-1w5m28t"
       title="test title"
     >
       test title
@@ -29,44 +29,44 @@ exports[`Test Timeline Item render - Horizontal 1`] = `
 
 exports[`Test Timeline Item render - Vertical 1`] = `
 <div
-  class="sc-jrsJCI jrJYYY vertical"
+  class="vertical css-16eji5t"
   data-testid="timeline-item"
 >
   <div
-    class="sc-iqAbSa jCfIgE"
+    class="css-1p18t0t"
   >
     <div
-      class="sc-crzoUp eTkkct vertical active"
+      class="vertical active css-1a01u17"
       data-testid="timeline-circle"
     />
   </div>
   <div
-    class="sc-bqGHjH kRxa-dL vertical"
+    class="vertical css-nyflco"
   >
     <div
-      class="sc-dIsAE kPRNOX vertical bottom"
+      class="vertical bottom css-lzd26m"
       data-testid="timeline-title"
     >
       <div
-        class="sc-pNWxx enbFGE active"
+        class="active css-1w5m28t"
         title="test title"
       >
         test title
       </div>
     </div>
     <div
-      class="sc-bdnylx hCfMCf active"
+      class="active css-1a8fhdt"
     >
       <span
-        class="sc-gtssRu gtPOxj"
+        class="css-4hae14"
       >
         This is a test content
       </span>
       <div
-        class="sc-eCApGN jmcrwE show-less"
+        class="show-less css-hrwi5d"
       />
       <span
-        class="sc-jSFkmK fWqWpN show-more"
+        class="show-more css-1rml49d"
         role="button"
       >
         show more
