@@ -37,8 +37,8 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       return;
     }
     setTimeout(() => {
-      setCanShowMore(detailsEle.scrollHeight > 100);
-    }, 100);
+      setCanShowMore(detailsEle.scrollHeight > 50);
+    }, 300);
   }, []);
 
   useEffect(() => {

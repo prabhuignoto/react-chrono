@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 export const TimelineControlWrapper = styled.ul`
   display: flex;
   list-style: none;
-  margin: 0;
   padding: 0;
   border-radius: 20px;
   background: #0f52ba;
+  margin: 1rem 0;
   /* box-shadow: inset 0 0 8px 6px rgba(0,0,0,0.2), 0 0 2px 2px rgba(0,0,0,0.3); */
 `;
 

@@ -61,7 +61,7 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   flex-direction: column;
   /* margin-top: 0.25rem; */
   margin-top: auto;
-  max-height: 350px;
+  max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: 0.35em;
@@ -69,7 +69,7 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   width: 100%;
 
   &.show-less {
-    max-height: 100px;
+    max-height: 50px;
     overflow: hidden;
   }
 

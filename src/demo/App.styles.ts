@@ -95,6 +95,7 @@ export const Footer = styled.footer`
 
 export const URL = styled.a`
   margin: 0 1rem;
+  text-decoration: none;
 `;
 
 export const DescriptionContent = styled.p`
@@ -147,6 +148,12 @@ export const Feature = styled.li`
 `;
 
 export const GithubLogo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const SandBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -68,6 +68,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   };
 
   const handleTimelineItemClick = (id?: string) => {
+    if (slideShowRunning) {
+      return;
+    }
     if (id && !slideShowRunning) {
       for (let idx = 0; idx < items.length; idx++) {
         if (items[idx].id === id) {
@@ -140,7 +143,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     <Wrapper
       tabIndex={0}
       onKeyDown={(evt: React.KeyboardEvent<HTMLDivElement>) =>
-        !disableNavOnKey ? handleKeySelection(evt) : null
+        !disableNavOnKey && !slideShowRunning ? handleKeySelection(evt) : null
       }
       className={`${mode.toLowerCase()} ${titlePosition?.toLowerCase()}`}
     >
