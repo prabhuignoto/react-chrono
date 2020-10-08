@@ -47,9 +47,8 @@ export const TimelineContentDetails = styled.p`
   font-size: 0.8rem;
   font-weight: 400;
   margin: 0;
-  padding-left: 0.5rem;
   touch-action: none;
-  width: 95%;
+  width: 97%;
 
   &.active {
     background: #f9f9f9;
@@ -64,6 +63,7 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   margin-top: auto;
   max-height: 350px;
   overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: 0.35em;
   transition: max-height .2s linear;
   width: 100%;

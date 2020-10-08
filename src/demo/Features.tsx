@@ -50,7 +50,8 @@ const Features: React.FunctionComponent = () => (
         <span className="icon" role="img" aria-label="keyboard support">
           🔧
         </span>
-        &nbsp;Optimized to render images efficiently on (tree & vertical mode). Images not visible are automatically hidden.
+        &nbsp;Optimized to render images efficiently on (tree & vertical mode).
+        Images not visible are automatically hidden.
       </Feature>
       <Feature>
         <span className="icon" role="img" aria-label="typescript">
@@ -58,7 +59,7 @@ const Features: React.FunctionComponent = () => (
         </span>{" "}
         Built with{" "}
         <a href="https://www.typescriptlang.org/" target="_new">
-          Typescript
+          typescript
         </a>
       </Feature>
       <Feature>
@@ -66,8 +67,8 @@ const Features: React.FunctionComponent = () => (
           🎨
         </span>{" "}
         Powered by{" "}
-        <a href="https://styled-components.com/" target="_new">
-          styled-components
+        <a href="https://emotion.sh/docs/introduction" target="_new">
+          emotion
         </a>
       </Feature>
     </FeatureSet>

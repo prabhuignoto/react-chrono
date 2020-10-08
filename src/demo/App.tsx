@@ -46,10 +46,11 @@ const NewDemo: React.FunctionComponent = () => {
 
   useEffect(() => {
     const newItems = data.map(
-      ({ title, contentTitle, contentText, media }) => ({
+      ({ title, contentTitle, contentText, contentDetailedText }) => ({
         title,
         contentTitle,
         contentText,
+        contentDetailedText,
       })
     );
     setItems(newItems);
