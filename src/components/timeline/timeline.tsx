@@ -140,7 +140,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     <Wrapper
       tabIndex={0}
       onKeyDown={(evt: React.KeyboardEvent<HTMLDivElement>) =>
-        !disableNavOnKey ? handleKeySelection(evt) : null
+        !disableNavOnKey && !slideShowRunning ? handleKeySelection(evt) : null
       }
       className={`${mode.toLowerCase()} ${titlePosition?.toLowerCase()}`}
     >

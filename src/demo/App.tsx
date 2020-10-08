@@ -12,14 +12,16 @@ import {
   DescriptionHeader,
   Footer,
   Horizontal,
+  SandBox,
   URL,
   Vertical,
   Wrapper,
 } from "./App.styles";
+import AppHeader from "./AppHeader";
 import data from "./data";
+import dataMixed from "./data-mixed";
 import Features from "./Features";
 import useMediaQuery from "./mediaQueryEffect";
-import AppHeader from "./AppHeader";
 
 const NewDemo: React.FunctionComponent = () => {
   const [state, setState] = useState({ fontsLoaded: false, mediaType: "" });
@@ -86,7 +88,8 @@ const NewDemo: React.FunctionComponent = () => {
               <DescriptionHeader># Horizontal</DescriptionHeader>
             </span>
             <DescriptionContent>
-              Timelines are rendered horizontally by default. Use the control buttons or LEFT, RIGHT keys on your keyboard to navigate.
+              Timelines are rendered horizontally by default. Use the control
+              buttons or LEFT, RIGHT keys on your keyboard to navigate.
             </DescriptionContent>
           </Description>
           <ComponentContainer type={state.mediaType}>
@@ -108,6 +111,14 @@ const NewDemo: React.FunctionComponent = () => {
           <ComponentContainerTree type={state.mediaType}>
             <Chrono items={items} mode="VERTICAL" />
           </ComponentContainerTree>
+          <SandBox>
+            <a href="https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3?fontsize=14&hidenavigation=1&theme=dark">
+              <img
+                alt="Edit react-chrono-tree-horizontal"
+                src="https://codesandbox.io/static/img/play-codesandbox.svg"
+              />
+            </a>
+          </SandBox>
         </Vertical>
 
         {/* Tree Mode */}
@@ -117,12 +128,45 @@ const NewDemo: React.FunctionComponent = () => {
               <DescriptionHeader># Tree</DescriptionHeader>
             </span>
             <DescriptionContent>
-              In <strong>TREE</strong> mode, the cards are rendered vertically in an alternating fashion.
+              In <strong>TREE</strong> mode, the cards are rendered vertically
+              in an alternating fashion.
             </DescriptionContent>
           </Description>
           <ComponentContainerTree type={state.mediaType}>
             <Chrono items={items} mode="TREE" />
           </ComponentContainerTree>
+          <SandBox>
+            <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
+              <img
+                alt="Edit react-chrono-tree-text"
+                src="https://codesandbox.io/static/img/play-codesandbox.svg"
+              />
+            </a>
+          </SandBox>
+        </Vertical>
+
+        {/* mixed mode */}
+        <Vertical>
+          <Description>
+            <span>
+              <DescriptionHeader># Mixed mode</DescriptionHeader>
+            </span>
+            <DescriptionContent>
+              The rendering is data driven. This allows to mix both media and
+              textual content.
+            </DescriptionContent>
+          </Description>
+          <ComponentContainerTree type={state.mediaType}>
+            <Chrono items={dataMixed} mode="TREE" />
+          </ComponentContainerTree>
+          <SandBox>
+            <a href="https://codesandbox.io/s/react-chrono-tree-image-uh2nz?fontsize=14&hidenavigation=1&theme=dark">
+              <img
+                alt="Edit react-chrono-tree-image"
+                src="https://codesandbox.io/static/img/play-codesandbox.svg"
+              />
+            </a>
+          </SandBox>
         </Vertical>
 
         {/* Horizontal Slideshow */}
@@ -142,11 +186,18 @@ const NewDemo: React.FunctionComponent = () => {
               items={items}
               mode="HORIZONTAL"
               slideShow
-              slideItemDuration={3500}
+              slideItemDuration={4500}
             />
           </ComponentContainer>
+          <SandBox>
+            <a href="https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?fontsize=14&hidenavigation=1&theme=dark">
+              <img
+                alt="Edit react-chrono-tree-text-slide"
+                src="https://codesandbox.io/static/img/play-codesandbox.svg"
+              />
+            </a>
+          </SandBox>
         </Horizontal>
-
 
         {/* Tree Slideshow */}
         <Vertical>
@@ -155,13 +206,28 @@ const NewDemo: React.FunctionComponent = () => {
               <DescriptionHeader># Slideshow with Tree</DescriptionHeader>
             </span>
             <DescriptionContent>
-              SlideShow is also supported in all the modes.
+              SlideShow is supported in all 3 modes.
             </DescriptionContent>
           </Description>
           <ComponentContainerTree type={state.mediaType}>
-            <Chrono items={data} mode="TREE" slideItemDuration={3500} slideShow />
+            <Chrono
+              items={data}
+              mode="TREE"
+              slideItemDuration={4500}
+              slideShow
+            />
           </ComponentContainerTree>
+          <SandBox>
+            <a href="https://codesandbox.io/s/react-chrono-tree-demo-zksyo?fontsize=14&hidenavigation=1&theme=dark">
+              <img
+                alt="Edit react-chrono-tree-demo"
+                src="https://codesandbox.io/static/img/play-codesandbox.svg"
+              />
+            </a>
+          </SandBox>
         </Vertical>
+
+        {/* footer */}
         <Footer>
           <URL href="https://www.prabhumurthy.com" target="_new">
             {new Date().getFullYear()}&copy;www.prabhumurthy.com
@@ -169,8 +235,24 @@ const NewDemo: React.FunctionComponent = () => {
           <URL
             href="https://github.com/prabhuignoto/react-chrono"
             target="_new"
+            style={{
+              marginLeft: "auto",
+              display: "flex",
+              alignItems: "center",
+            }}
           >
-            Github
+            <img
+              src="github.svg"
+              style={{
+                width: "1.25rem",
+                height: "1.25rem",
+                marginRight: "0.2rem",
+              }}
+            />
+            <span>Github</span>
+          </URL>
+          <URL href="#" onClick={() => (document.body.scrollTop = 0)}>
+            ⏫ TOP
           </URL>
         </Footer>
       </>
