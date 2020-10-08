@@ -17,7 +17,7 @@ export default () => (
     >
       <GithubLogo>
         <iframe
-          src="https://ghbtns.com/github-btn.html?user=prabhuignoto&repo=react-chrono&type=star&count=true&size=large"
+          src="https://ghbtns.com/github-btn.html?user=prabhuignoto&repo=react-chrono&type=star&count=true&size=small"
           frameBorder="0"
           scrolling="0"
           width="200"

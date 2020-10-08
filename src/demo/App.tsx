@@ -58,6 +58,10 @@ const NewDemo: React.FunctionComponent = () => {
     setItems(newItems);
   }, []);
 
+  const isPc = useCallback(() => {
+    return type === "desktop" || type === "big-screen";
+  }, [type]);
+
   return (
     <Wrapper show={state.fontsLoaded} type={state.mediaType}>
       <>
@@ -82,68 +86,74 @@ const NewDemo: React.FunctionComponent = () => {
         </DescriptionContent>
 
         {/* Horizontal with Media */}
-        <Horizontal>
-          <Description>
-            <span>
-              <DescriptionHeader># Horizontal</DescriptionHeader>
-            </span>
-            <DescriptionContent>
-              Timelines are rendered horizontally by default. Use the control
-              buttons or LEFT, RIGHT keys on your keyboard to navigate.
-            </DescriptionContent>
-          </Description>
-          <ComponentContainer type={state.mediaType}>
-            <Chrono items={data} mode="HORIZONTAL" titlePosition="TOP" />
-          </ComponentContainer>
-        </Horizontal>
+        {isPc() && (
+          <Horizontal>
+            <Description>
+              <span>
+                <DescriptionHeader># Horizontal</DescriptionHeader>
+              </span>
+              <DescriptionContent>
+                Timelines are rendered horizontally by default. Use the control
+                buttons or LEFT, RIGHT keys on your keyboard to navigate.
+              </DescriptionContent>
+            </Description>
+            <ComponentContainer type={state.mediaType}>
+              <Chrono items={data} mode="HORIZONTAL" titlePosition="TOP" />
+            </ComponentContainer>
+          </Horizontal>
+        )}
 
         {/* Vertical with no Media */}
-        <Vertical>
-          <Description>
-            <span>
-              <DescriptionHeader># Vertical</DescriptionHeader>
-            </span>
-            <DescriptionContent>
-              Use the <strong>VERTICAL</strong> mode to render the timelines
-              vertically.
-            </DescriptionContent>
-          </Description>
-          <ComponentContainerTree type={state.mediaType}>
-            <Chrono items={items} mode="VERTICAL" />
-          </ComponentContainerTree>
-          <SandBox>
-            <a href="https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3?fontsize=14&hidenavigation=1&theme=dark">
-              <img
-                alt="Edit react-chrono-tree-horizontal"
-                src="https://codesandbox.io/static/img/play-codesandbox.svg"
-              />
-            </a>
-          </SandBox>
-        </Vertical>
+        {isPc() && (
+          <Vertical>
+            <Description>
+              <span>
+                <DescriptionHeader># Vertical</DescriptionHeader>
+              </span>
+              <DescriptionContent>
+                Use the <strong>VERTICAL</strong> mode to render the timelines
+                vertically.
+              </DescriptionContent>
+            </Description>
+            <ComponentContainerTree type={state.mediaType}>
+              <Chrono items={items} mode="VERTICAL" />
+            </ComponentContainerTree>
+            <SandBox>
+              <a href="https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3?fontsize=14&hidenavigation=1&theme=dark">
+                <img
+                  alt="Edit react-chrono-tree-horizontal"
+                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                />
+              </a>
+            </SandBox>
+          </Vertical>
+        )}
 
         {/* Tree Mode */}
-        <Vertical id="tree-mode">
-          <Description>
-            <span>
-              <DescriptionHeader># Tree</DescriptionHeader>
-            </span>
-            <DescriptionContent>
-              In <strong>TREE</strong> mode, the cards are rendered vertically
-              in an alternating fashion.
-            </DescriptionContent>
-          </Description>
-          <ComponentContainerTree type={state.mediaType}>
-            <Chrono items={items} mode="TREE" />
-          </ComponentContainerTree>
-          <SandBox>
-            <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
-              <img
-                alt="Edit react-chrono-tree-text"
-                src="https://codesandbox.io/static/img/play-codesandbox.svg"
-              />
-            </a>
-          </SandBox>
-        </Vertical>
+        {isPc() && (
+          <Vertical id="tree-mode">
+            <Description>
+              <span>
+                <DescriptionHeader># Tree</DescriptionHeader>
+              </span>
+              <DescriptionContent>
+                In <strong>TREE</strong> mode, the cards are rendered vertically
+                in an alternating fashion.
+              </DescriptionContent>
+            </Description>
+            <ComponentContainerTree type={state.mediaType}>
+              <Chrono items={items} mode="TREE" />
+            </ComponentContainerTree>
+            <SandBox>
+              <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
+                <img
+                  alt="Edit react-chrono-tree-text"
+                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                />
+              </a>
+            </SandBox>
+          </Vertical>
+        )}
 
         {/* mixed mode */}
         <Vertical>
@@ -170,62 +180,66 @@ const NewDemo: React.FunctionComponent = () => {
         </Vertical>
 
         {/* Horizontal Slideshow */}
-        <Horizontal id="slideshow">
-          <Description>
-            <span>
-              <DescriptionHeader># Slideshow</DescriptionHeader>
-            </span>
-            <DescriptionContent>
-              In slideshow mode, the component autoplays the timeline for you.
-              An optional <em>slideItemDuration</em> can be used to adjust the
-              exact time duration to wait before displaying the next card.
-            </DescriptionContent>
-          </Description>
-          <ComponentContainer type={state.mediaType}>
-            <Chrono
-              items={items}
-              mode="HORIZONTAL"
-              slideShow
-              slideItemDuration={4500}
-            />
-          </ComponentContainer>
-          <SandBox>
-            <a href="https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?fontsize=14&hidenavigation=1&theme=dark">
-              <img
-                alt="Edit react-chrono-tree-text-slide"
-                src="https://codesandbox.io/static/img/play-codesandbox.svg"
+        {isPc() && (
+          <Horizontal id="slideshow">
+            <Description>
+              <span>
+                <DescriptionHeader># Slideshow</DescriptionHeader>
+              </span>
+              <DescriptionContent>
+                In slideshow mode, the component autoplays the timeline for you.
+                An optional <em>slideItemDuration</em> can be used to adjust the
+                exact time duration to wait before displaying the next card.
+              </DescriptionContent>
+            </Description>
+            <ComponentContainer type={state.mediaType}>
+              <Chrono
+                items={items}
+                mode="HORIZONTAL"
+                slideShow
+                slideItemDuration={4500}
               />
-            </a>
-          </SandBox>
-        </Horizontal>
+            </ComponentContainer>
+            <SandBox>
+              <a href="https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?fontsize=14&hidenavigation=1&theme=dark">
+                <img
+                  alt="Edit react-chrono-tree-text-slide"
+                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                />
+              </a>
+            </SandBox>
+          </Horizontal>
+        )}
 
         {/* Tree Slideshow */}
-        <Vertical>
-          <Description>
-            <span>
-              <DescriptionHeader># Slideshow with Tree</DescriptionHeader>
-            </span>
-            <DescriptionContent>
-              SlideShow is supported in all 3 modes.
-            </DescriptionContent>
-          </Description>
-          <ComponentContainerTree type={state.mediaType}>
-            <Chrono
-              items={data}
-              mode="TREE"
-              slideItemDuration={4500}
-              slideShow
-            />
-          </ComponentContainerTree>
-          <SandBox>
-            <a href="https://codesandbox.io/s/react-chrono-tree-demo-zksyo?fontsize=14&hidenavigation=1&theme=dark">
-              <img
-                alt="Edit react-chrono-tree-demo"
-                src="https://codesandbox.io/static/img/play-codesandbox.svg"
+        {isPc() && (
+          <Vertical>
+            <Description>
+              <span>
+                <DescriptionHeader># Slideshow with Tree</DescriptionHeader>
+              </span>
+              <DescriptionContent>
+                SlideShow is supported in all 3 modes.
+              </DescriptionContent>
+            </Description>
+            <ComponentContainerTree type={state.mediaType}>
+              <Chrono
+                items={data}
+                mode="TREE"
+                slideItemDuration={4500}
+                slideShow
               />
-            </a>
-          </SandBox>
-        </Vertical>
+            </ComponentContainerTree>
+            <SandBox>
+              <a href="https://codesandbox.io/s/react-chrono-tree-demo-zksyo?fontsize=14&hidenavigation=1&theme=dark">
+                <img
+                  alt="Edit react-chrono-tree-demo"
+                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                />
+              </a>
+            </SandBox>
+          </Vertical>
+        )}
 
         {/* footer */}
         <Footer>
@@ -252,7 +266,7 @@ const NewDemo: React.FunctionComponent = () => {
             <span>Github</span>
           </URL>
           <URL href="#" onClick={() => (document.body.scrollTop = 0)}>
-            ⏫ TOP
+            <span role="img" aria-label="go to top">⏫</span> TOP
           </URL>
         </Footer>
       </>

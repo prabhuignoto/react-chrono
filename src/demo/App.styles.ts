@@ -19,7 +19,17 @@ export const Wrapper = styled.div<{ show: boolean, type?: string }>`
   display: ${p => p.show ? "block" : "none"};
   flex-direction: column;
   margin: 0 auto;
-  width: 1200px;
+  width: ${p => {
+    if(p.type === "tablet") {
+      return "90%";
+    } else if(p.type === "big-screen") {
+      return "1400px"
+    } else if(p.type === "desktop") {
+      return "1200px"
+    } else {
+      return "100%";
+    }
+  }};
   background: #fff;
   padding:${p => p.type !== "tablet" ? "0 2rem" : ""};
   filter: drop-shadow(0 0 60px rgba(0,0,0,0.1))
@@ -62,7 +72,7 @@ export const ComponentContainerTree = styled.div<{ type?: string }>`
       case "big-screen":
         return `height: 850px; width: 90%;`
       case "tablet":
-        return `height: 500px; width: 100%;`
+        return `height: 850px; width: 100%;`
       default:
         break;
     }
