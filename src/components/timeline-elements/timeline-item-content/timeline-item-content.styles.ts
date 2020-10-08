@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from '@emotion/styled';
 import { TimelineMode } from "../../../models/TimelineModel";
 import { Theme } from "../../../models/TimelineTreeModel";
 
@@ -12,7 +12,6 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
   justify-content: flex-start;
   line-height: 1.5rem;
   margin: 0 auto;
-  /* min-height: 100px; */
   text-align: left;
   width: 100%;
 
@@ -120,7 +119,6 @@ export const Media = styled.img<{ mode?: TimelineMode, visible?: boolean, active
   flex: 4;
   max-height: 100%;
   visibility: ${p => p.visible ? "visible" : "hidden"};
-  border: ${p => p.active ? `1px solid ${p.theme.primary}` : ""};
 `;
 
 export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`

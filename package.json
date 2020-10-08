@@ -15,11 +15,12 @@
     "type": "git"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.35",
+    "@emotion/styled": "^10.0.27",
     "nanoid": "^3.1.12",
-    "react": "^17.0.0-rc.2",
-    "react-dom": "^17.0.0-rc.2",
+    "react": "^17.0.0-rc.3",
+    "react-dom": "^17.0.0-rc.3",
     "react-responsive": "^8.1.0",
-    "styled-components": "5.2.0",
     "use-debounce": "^5.0.1"
   },
   "scripts": {
@@ -64,7 +65,6 @@
     "@types/react": "^16.9.51",
     "@types/react-dom": "^16.9.0",
     "@types/react-responsive": "^8.0.2",
-    "@types/styled-components": "^5.1.3",
     "@types/webfontloader": "^1.6.32",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
@@ -88,7 +88,6 @@
   "peerDependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "styled-components": "5.1.1",
     "use-debounce": "^3.4.3"
   },
   "resolutions": {
