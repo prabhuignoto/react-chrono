@@ -140,7 +140,7 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
   flex-direction: column;
   flex: 1;
   border-radius: 6px;
-  background: rgba(255,255,255, 0.9);
+  background: rgba(255,255,255, 0.95);
   /* background: rgba(0,0,0,0.7); */
   filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
   padding-bottom: 0.5rem;
