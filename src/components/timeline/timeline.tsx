@@ -68,9 +68,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   };
 
   const handleTimelineItemClick = (id?: string) => {
-    if (slideShowRunning) {
-      return;
-    }
     if (id && !slideShowRunning) {
       for (let idx = 0; idx < items.length; idx++) {
         if (items[idx].id === id) {
