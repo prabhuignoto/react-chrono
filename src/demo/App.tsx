@@ -3,23 +3,26 @@ import { hot } from "react-hot-loader/root";
 import fontLoader from "webfontloader";
 import { TimelineItemModel } from "../models/TimelineItemModel";
 import { Chrono } from "../react-chrono";
+import {
+  HorizontalSlideshow,
+  VerticalBasic,
+  VerticalTree,
+  VerticalTreeMixed,
+  VerticalTreeSlideshow,
+} from "./app-samples";
 import "./App.css";
 import {
   ComponentContainer,
-  ComponentContainerTree,
   Description,
   DescriptionContent,
   DescriptionHeader,
   Footer,
   Horizontal,
-  SandBox,
   URL,
-  Vertical,
   Wrapper,
 } from "./App.styles";
 import AppHeader from "./AppHeader";
 import data from "./data";
-import dataMixed from "./data-mixed";
 import Features from "./Features";
 import useMediaQuery from "./mediaQueryEffect";
 
@@ -115,142 +118,27 @@ const NewDemo: React.FunctionComponent = () => {
         )}
 
         {/* Vertical with no Media */}
-        {isPc && (
-          <Vertical>
-            <Description>
-              <span>
-                <DescriptionHeader># Vertical</DescriptionHeader>
-              </span>
-              <DescriptionContent>
-                Use the <strong>VERTICAL</strong> mode to render the timelines
-                vertically.
-              </DescriptionContent>
-            </Description>
-            <ComponentContainerTree type={state.mediaType}>
-              <Chrono items={items} mode="VERTICAL" />
-              <SandBox>
-                <a href="https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3?fontsize=14&hidenavigation=1&theme=dark">
-                  <img
-                    alt="Edit react-chrono-tree-horizontal"
-                    src="https://codesandbox.io/static/img/play-codesandbox.svg"
-                  />
-                </a>
-              </SandBox>
-            </ComponentContainerTree>
-          </Vertical>
-        )}
+        {isPc && <VerticalBasic type={state.mediaType} items={items} />}
 
         {/* Tree Mode */}
-        {isPc && (
-          <Vertical id="tree-mode">
-            <Description>
-              <span>
-                <DescriptionHeader># Tree</DescriptionHeader>
-              </span>
-              <DescriptionContent>
-                In <strong>TREE</strong> mode, the cards are rendered vertically
-                in an alternating fashion.
-              </DescriptionContent>
-            </Description>
-            <ComponentContainerTree type={state.mediaType}>
-              <Chrono items={items} mode="TREE" />
-              <SandBox>
-                <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
-                  <img
-                    alt="Edit react-chrono-tree-text"
-                    src="https://codesandbox.io/static/img/play-codesandbox.svg"
-                  />
-                </a>
-              </SandBox>
-            </ComponentContainerTree>
-          </Vertical>
-        )}
+        {isPc && <VerticalTree type={state.mediaType} items={items} />}
 
         {/* mixed mode */}
-        <Vertical>
-          <Description>
-            <span>
-              <DescriptionHeader># Mixed mode</DescriptionHeader>
-            </span>
-            <DescriptionContent>
-              The rendering is data driven. This allows to mix both media and
-              textual content.
-            </DescriptionContent>
-          </Description>
-          <ComponentContainerTree type={state.mediaType}>
-            <Chrono items={dataMixed} mode="TREE" cardHeight={cardHeight} />
-            <SandBox>
-              <a href="https://codesandbox.io/s/react-chrono-tree-image-uh2nz?fontsize=14&hidenavigation=1&theme=dark">
-                <img
-                  alt="Edit react-chrono-tree-image"
-                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
-                />
-              </a>
-            </SandBox>
-          </ComponentContainerTree>
-        </Vertical>
+        {isPc && (
+          <VerticalTreeMixed type={state.mediaType} cardHeight={cardHeight} />
+        )}
 
         {/* Horizontal Slideshow */}
         {isPc && (
-          <Horizontal id="slideshow">
-            <Description>
-              <span>
-                <DescriptionHeader># Slideshow</DescriptionHeader>
-              </span>
-              <DescriptionContent>
-                In slideshow mode, the component autoplays the timeline for you.
-                An optional <em>slideItemDuration</em> can be used to adjust the
-                exact time duration to wait before displaying the next card.
-              </DescriptionContent>
-            </Description>
-            <ComponentContainer type={state.mediaType}>
-              <Chrono
-                items={items}
-                mode="HORIZONTAL"
-                slideShow
-                slideItemDuration={4500}
-                cardHeight={cardHeight}
-              />
-              <SandBox>
-                <a href="https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?fontsize=14&hidenavigation=1&theme=dark">
-                  <img
-                    alt="Edit react-chrono-tree-text-slide"
-                    src="https://codesandbox.io/static/img/play-codesandbox.svg"
-                  />
-                </a>
-              </SandBox>
-            </ComponentContainer>
-          </Horizontal>
+          <HorizontalSlideshow type={state.mediaType} cardHeight={cardHeight} />
         )}
 
         {/* Tree Slideshow */}
         {isPc && (
-          <Vertical>
-            <Description>
-              <span>
-                <DescriptionHeader># Slideshow with Tree</DescriptionHeader>
-              </span>
-              <DescriptionContent>
-                SlideShow is supported in all 3 modes.
-              </DescriptionContent>
-            </Description>
-            <ComponentContainerTree type={state.mediaType}>
-              <Chrono
-                items={data}
-                mode="TREE"
-                slideItemDuration={2000}
-                cardHeight={cardHeight}
-              />
-              <SandBox>
-                <a href="https://codesandbox.io/s/react-chrono-tree-demo-zksyo?fontsize=14&hidenavigation=1&theme=dark">
-                  <img
-                    alt="Edit react-chrono-tree-demo"
-                    src="https://codesandbox.io/static/img/play-codesandbox.svg"
-                  />
-                </a>
-              </SandBox>
-            </ComponentContainerTree>
-          </Vertical>
+          <VerticalTreeSlideshow
+            type={state.mediaType}
+            cardHeight={cardHeight}
+          />
         )}
 
         {/* footer */}

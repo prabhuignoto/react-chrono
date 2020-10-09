@@ -38,7 +38,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       : [];
 
   // setup the slideshow
-  const setupSlideShow = useCallback(() => {
+  const setupSlideShow = () => {
     if (!items || !items.length) {
       return;
     }
@@ -84,7 +84,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     };
     runShow();
     timer.current = window.setInterval(runShow, slideItemDuration);
-  }, []);
+  };
 
   useEffect(() => {
     if (!items) {
