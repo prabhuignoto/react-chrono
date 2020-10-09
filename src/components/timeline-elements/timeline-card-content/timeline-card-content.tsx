@@ -12,7 +12,7 @@ import {
   TimelineContentText,
   TimelineContentTitle,
   TimelineItemContentWrapper,
-} from "./timeline-item-content.styles";
+} from "./timeline-card-content.styles";
 
 const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   content,
@@ -24,6 +24,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   slideShowActive,
   media,
   mode,
+  cardHeight
 }) => {
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
@@ -90,6 +91,8 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       className={active ? "active" : ""}
       theme={theme}
       noMedia={!media}
+      minHeight={cardHeight}
+      mode={mode}
     >
       {/* main title */}
       {!media && <Title title={title} theme={theme} />}

@@ -30,6 +30,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   onFirst,
   theme,
   titlePosition = "TOP",
+  onRestartSlideshow,
+  slideShow,
+  cardHeight
 }) => {
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
 
@@ -48,7 +51,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     event.preventDefault();
     event.stopPropagation();
 
-    const { keyCode } = event;
+    const { keyCode } = event;  
 
     if (
       (mode === "HORIZONTAL" && keyCode === 39) ||
@@ -145,6 +148,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
       className={`${mode.toLowerCase()} ${titlePosition?.toLowerCase()}`}
     >
       <TimelineMainWrapper ref={timelineMainRef} className={mode.toLowerCase()}>
+        {/* TREE */}
         {mode === "TREE" ? (
           <TimelineTree
             items={items as TimelineItemViewModel[]}
@@ -154,8 +158,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             theme={theme}
             slideShowRunning={slideShowRunning}
             mode={mode}
+            cardHeight={cardHeight}
           />
         ) : null}
+
+        {/* HORIZONTAL */}
         {mode === "HORIZONTAL" ? (
           <TimelineMain className={mode.toLowerCase()}>
             <Outline color={theme?.primary} />
@@ -168,9 +175,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
               wrapperId={id.current}
               theme={theme}
               slideShowRunning={slideShowRunning}
+              cardHeight={cardHeight}
             />
           </TimelineMain>
         ) : null}
+
+        {/* VERTICAL */}
         {mode === "VERTICAL" ? (
           <TimelineTree
             items={items as TimelineItemViewModel[]}
@@ -181,13 +191,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             alternateCards={false}
             slideShowRunning={slideShowRunning}
             mode={mode}
+            cardHeight={cardHeight}
           />
         ) : null}
       </TimelineMainWrapper>
-      <TimelineControlContainer
-        className={slideShowRunning ? "hide" : "show"}
-        mode={mode}
-      >
+
+      {/* Timeline Controls */}
+      <TimelineControlContainer mode={mode}>
         <TimelineControl
           onNext={handleNext}
           onPrevious={handlePrevious}
@@ -196,6 +206,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
           disableLeft={activeTimelineItem === 0}
           disableRight={activeTimelineItem === items.length - 1}
           mode={mode}
+          theme={theme}
+          onReplay={onRestartSlideshow}
+          slideShowRunning={slideShowRunning}
+          slideShowEnabled={slideShow}
         />
       </TimelineControlContainer>
       <TimelineContentRender id={id.current} />

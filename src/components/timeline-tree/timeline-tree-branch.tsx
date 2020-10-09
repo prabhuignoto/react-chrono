@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { TreeBranchModel } from "../../models/TimelineTreeModel";
-import TimelineItemContent from "../timeline-elements/timeline-item-content/timeline-item-content";
-import TimelineItemTitle from "../timeline-elements/timeline-item-title/timeline-item-title";
+import TimelineItemContent from "../timeline-elements/timeline-card-content/timeline-card-content";
+import TimelineItemTitle from "../timeline-elements/timeline-item-title/timeline-card-title";
 import TreeLeaf from "./timeline-tree-leaf";
 import {
   Branch,
@@ -26,6 +26,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
   slideShowRunning,
   media,
   mode,
+  cardHeight
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -71,6 +72,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
           slideShowActive={slideShowRunning}
           media={media}
           mode={mode}
+          cardHeight={cardHeight}
         />
       </TimelineItemContentWrapper>
 

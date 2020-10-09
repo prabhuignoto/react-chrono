@@ -11,7 +11,7 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   alternateCards = true,
   slideShowRunning,
   mode,
-  sRef,
+  cardHeight,
 }) => {
   const handleOnActive = (
     offset: number,
@@ -58,6 +58,7 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
             slideShowRunning={slideShowRunning}
             media={item.media}
             mode={mode}
+            cardHeight={cardHeight}
           />
         );
       })}

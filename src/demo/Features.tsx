@@ -53,7 +53,7 @@ const Features: React.FunctionComponent = () => (
         &nbsp;Optimized to render images efficiently on (tree & vertical mode).
         Images not visible are automatically hidden.
       </Feature>
-      <Feature>
+      {/* <Feature>
         <span className="icon" role="img" aria-label="typescript">
           💪
         </span>{" "}
@@ -70,7 +70,7 @@ const Features: React.FunctionComponent = () => (
         <a href="https://emotion.sh/docs/introduction" target="_new">
           emotion
         </a>
-      </Feature>
+      </Feature> */}
     </FeatureSet>
   </>
 );

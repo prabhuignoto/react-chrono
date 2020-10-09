@@ -10,6 +10,7 @@ export interface TimelineCollectionModel {
   slideShowRunning?: boolean;
   theme?: Theme;
   wrapperId: string;
+  cardHeight?: number;
 }
 
 export interface Scroll {

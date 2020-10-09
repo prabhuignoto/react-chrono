@@ -2,18 +2,24 @@ import styled from '@emotion/styled';
 import { TimelineMode } from "../../../models/TimelineModel";
 import { Theme } from "../../../models/TimelineTreeModel";
 
-export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: boolean }>`
+export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: boolean, minHeight?: number, mode?: TimelineMode }>`
   align-items: flex-start;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
   font-family: 'Roboto Mono', monospace;
-  height: 100%;
+
+  height: ${p => {
+    if(!p.noMedia) {
+      return 0
+    }
+  }};
   justify-content: flex-start;
   line-height: 1.5rem;
-  margin: 0 auto;
+  margin: 1rem 0;
   text-align: left;
   width: 100%;
+  min-height: ${p => !p.noMedia ? p.minHeight : "150"}px;
 
   ${p => p.noMedia ? `
     background: #fff;
@@ -99,13 +105,13 @@ export const ShowMore = styled.span<{ show?: boolean }>`
 
 export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: TimelineMode }>`
   /* height: ${p => p.mode === "HORIZONTAL" ? "350px" : "300px"}; */
-  /* height: 100%; */
-  min-height: 250px;
-  max-height: 450px;
+  height: 100%;
+  /* min-height: 250px;
+  max-height: 450px; */
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: ${p => p.mode !== "HORIZONTAL" ? "90%" : "70%"};
+  width: ${p => p.mode !== "HORIZONTAL" ? "100%" : "100%"};
   align-self: center;
   padding: 0.5rem;
   position: relative;
@@ -119,6 +125,9 @@ export const Media = styled.img<{ mode?: TimelineMode, visible?: boolean, active
   flex: 4;
   max-height: 100%;
   visibility: ${p => p.visible ? "visible" : "hidden"};
+  border-radius: 4px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
@@ -130,9 +139,9 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
   margin-right: auto;
   width: ${p => {
     switch (p.mode) {
-      case "HORIZONTAL": return "80%";
-      case "VERTICAL": return "80%";
-      case "TREE": return "80%";
+      case "HORIZONTAL": return "60%";
+      case "VERTICAL": return "60%";
+      case "TREE": return "60%";
     }
   }};
   min-height: 100px;

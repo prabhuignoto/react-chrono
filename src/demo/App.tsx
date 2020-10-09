@@ -27,6 +27,8 @@ const NewDemo: React.FunctionComponent = () => {
   const [state, setState] = useState({ fontsLoaded: false, mediaType: "" });
   const type = useMediaQuery();
   const [items, setItems] = useState<TimelineItemModel[]>();
+  const [isPc, setIsPc] = useState(false);
+  const [cardHeight, setCardHeight] = useState(250);
 
   const setFont = useCallback(() => {
     fontLoader.load({
@@ -56,10 +58,19 @@ const NewDemo: React.FunctionComponent = () => {
       })
     );
     setItems(newItems);
+    setIsPc(type === "desktop" || type === "big-screen");
   }, []);
 
-  const isPc = useCallback(() => {
-    return type === "desktop" || type === "big-screen";
+  useEffect(() => {
+    if (type === "desktop") {
+      setCardHeight(250);
+    } else if (type === "big-screen") {
+      setCardHeight(300);
+    } else if (type === "tablet") {
+      setCardHeight(300);
+    } else {
+      setCardHeight(200);
+    }
   }, [type]);
 
   return (
@@ -86,7 +97,7 @@ const NewDemo: React.FunctionComponent = () => {
         </DescriptionContent>
 
         {/* Horizontal with Media */}
-        {isPc() && (
+        {isPc && (
           <Horizontal>
             <Description>
               <span>
@@ -98,13 +109,13 @@ const NewDemo: React.FunctionComponent = () => {
               </DescriptionContent>
             </Description>
             <ComponentContainer type={state.mediaType}>
-              <Chrono items={data} mode="HORIZONTAL" titlePosition="TOP" />
+              <Chrono items={data} mode="HORIZONTAL" cardHeight={cardHeight} />
             </ComponentContainer>
           </Horizontal>
         )}
 
         {/* Vertical with no Media */}
-        {isPc() && (
+        {isPc && (
           <Vertical>
             <Description>
               <span>
@@ -130,7 +141,7 @@ const NewDemo: React.FunctionComponent = () => {
         )}
 
         {/* Tree Mode */}
-        {isPc() && (
+        {isPc && (
           <Vertical id="tree-mode">
             <Description>
               <span>
@@ -167,7 +178,7 @@ const NewDemo: React.FunctionComponent = () => {
             </DescriptionContent>
           </Description>
           <ComponentContainerTree type={state.mediaType}>
-            <Chrono items={dataMixed} mode="TREE" />
+            <Chrono items={dataMixed} mode="TREE" cardHeight={cardHeight} />
           </ComponentContainerTree>
           <SandBox>
             <a href="https://codesandbox.io/s/react-chrono-tree-image-uh2nz?fontsize=14&hidenavigation=1&theme=dark">
@@ -180,7 +191,7 @@ const NewDemo: React.FunctionComponent = () => {
         </Vertical>
 
         {/* Horizontal Slideshow */}
-        {isPc() && (
+        {isPc && (
           <Horizontal id="slideshow">
             <Description>
               <span>
@@ -198,6 +209,7 @@ const NewDemo: React.FunctionComponent = () => {
                 mode="HORIZONTAL"
                 slideShow
                 slideItemDuration={4500}
+                cardHeight={cardHeight}
               />
             </ComponentContainer>
             <SandBox>
@@ -212,7 +224,7 @@ const NewDemo: React.FunctionComponent = () => {
         )}
 
         {/* Tree Slideshow */}
-        {isPc() && (
+        {isPc && (
           <Vertical>
             <Description>
               <span>
@@ -226,8 +238,8 @@ const NewDemo: React.FunctionComponent = () => {
               <Chrono
                 items={data}
                 mode="TREE"
-                slideItemDuration={4500}
-                slideShow
+                slideItemDuration={2000}
+                cardHeight={cardHeight}
               />
             </ComponentContainerTree>
             <SandBox>
@@ -266,7 +278,10 @@ const NewDemo: React.FunctionComponent = () => {
             <span>Github</span>
           </URL>
           <URL href="#" onClick={() => (document.body.scrollTop = 0)}>
-            <span role="img" aria-label="go to top">⏫</span> TOP
+            <span role="img" aria-label="go to top">
+              ⏫
+            </span>{" "}
+            TOP
           </URL>
         </Footer>
       </>

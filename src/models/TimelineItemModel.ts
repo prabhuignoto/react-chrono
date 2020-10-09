@@ -27,4 +27,5 @@ export interface TimelineItemViewModel extends TimelineItemModel {
   slideShowRunning?: boolean;
   theme?: Theme;
   wrapperId: string;
+  cardHeight?: number;
 }

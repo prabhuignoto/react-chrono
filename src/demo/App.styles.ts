@@ -68,7 +68,7 @@ export const ComponentContainerTree = styled.div<{ type?: string }>`
   ${p => {
     switch (p.type) {
       case "desktop":
-        return `height: 650px; width: 90%;`
+        return `height: 700px; width: 90%;`
       case "big-screen":
         return `height: 850px; width: 90%;`
       case "tablet":
