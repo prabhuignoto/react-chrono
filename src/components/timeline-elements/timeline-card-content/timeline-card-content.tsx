@@ -38,15 +38,17 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       return;
     }
     setTimeout(() => {
-      setCanShowMore(detailsEle.scrollHeight > 50);
-    }, 300);
+      // setCanShowMore(detailsEle.scrollHeight > 50);
+      setCanShowMore(!!detailedText);
+    }, 100);
   }, []);
 
-  useEffect(() => {
-    if (!active && ShowMore) {
-      setShowMore(false);
-    }
-  }, [active]);
+  // disabling auto collapse on inactive
+  // useEffect(() => {
+    // if (!active && ShowMore) {
+    //   setShowMore(false);
+    // }
+  // }, [active]);
 
   useEffect(() => {
     const detailsEle = detailsRef.current;

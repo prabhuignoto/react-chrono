@@ -7,7 +7,6 @@ export const TimelineNavWrapper = styled.ul<{theme?: Theme}>`
   padding: 0;
   border-radius: 20px;
   background: ${p => p.theme.primary};
-  margin-left: 1rem;
 `;
 
 export const TimelineNavItem = styled.li<{ disable: boolean }>`
@@ -35,7 +34,8 @@ export const TimelineNavButton = styled.button`
 
 export const TimelineControlContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
 `;
 
 export const ControlButton = styled.div<{theme?: Theme}>`
