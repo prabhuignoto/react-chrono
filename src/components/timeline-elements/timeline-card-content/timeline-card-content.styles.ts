@@ -112,7 +112,7 @@ export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: 
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: ${p => p.mode !== "HORIZONTAL" ? "100%" : "100%"};
+  width: 100%;
   align-self: center;
   padding: 0.5rem;
   position: relative;
