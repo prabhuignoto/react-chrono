@@ -123,9 +123,9 @@ export const DescriptionHeader = styled.h3`
   width: 95%;
   margin: 0 auto;
   margin-bottom: 1rem;
-  font-size: 1rem;
   border-bottom: 1px solid #ccc;
   padding-bottom: 1rem;
+  font-size: 1.2rem;
 `;
 
 export const Description = styled.div``;
@@ -150,9 +150,11 @@ export const FeatureSet = styled.ul`
 export const Feature = styled.li`
   font-family: 'Roboto Mono', monospace;
   margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
 
   .icon {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-right: 0.25rem;
   }
 `;

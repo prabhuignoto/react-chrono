@@ -96,6 +96,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     if (slideShowActive && slideShow) {
       setupSlideShow();
     }
+  // eslint-disable-next-line
   }, [slideShowActive]);
 
   useEffect(() => {
@@ -106,6 +107,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       timeLineItemsRef.current = items;
       setItems(items);
     }
+    // eslint-disable-next-line
   }, []);
 
   const handleTimelineUpdate = (actvTimelineIndex: number) => {

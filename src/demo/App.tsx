@@ -63,7 +63,7 @@ const NewDemo: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (type === "desktop") {
-      setCardHeight(280);
+      setCardHeight(260);
     } else if (type === "big-screen") {
       setCardHeight(320);
     } else if (type === "tablet") {
@@ -77,7 +77,7 @@ const NewDemo: React.FunctionComponent = () => {
     <Wrapper show={state.fontsLoaded} type={state.mediaType}>
       <>
         {/* header */}
-        <AppHeader />
+        <AppHeader type={type}/>
 
         {/* project description */}
         <DescriptionContent>
@@ -256,7 +256,7 @@ const NewDemo: React.FunctionComponent = () => {
         {/* footer */}
         <Footer>
           <URL href="https://www.prabhumurthy.com" target="_new">
-            {new Date().getFullYear()}&copy;www.prabhumurthy.com
+            {new Date().getFullYear()}&nbsp;&copy;www.prabhumurthy.com
           </URL>
           <URL
             href="https://github.com/prabhuignoto/react-chrono"
@@ -281,7 +281,7 @@ const NewDemo: React.FunctionComponent = () => {
             <span role="img" aria-label="go to top">
               ⏫
             </span>{" "}
-            TOP
+            Back to Top
           </URL>
         </Footer>
       </>

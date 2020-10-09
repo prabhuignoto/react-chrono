@@ -24,7 +24,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   slideShowActive,
   media,
   mode,
-  cardHeight
+  cardHeight,
 }) => {
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);

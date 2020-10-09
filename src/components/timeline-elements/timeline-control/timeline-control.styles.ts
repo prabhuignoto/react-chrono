@@ -47,6 +47,7 @@ export const ControlButton = styled.div<{theme?: Theme}>`
   background: ${p => p.theme.primary};
   border-radius: 50%;
   margin: 0 0.2rem;
+  cursor: pointer;
 
   svg {
     color: #fff;

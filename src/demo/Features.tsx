@@ -4,7 +4,7 @@ import { Feature, FeatureSet, FeatureSetHeader } from "./App.styles";
 const Features: React.FunctionComponent = () => (
   <>
     <FeatureSetHeader>
-      <span role="img" aria-label="features">
+      <span role="img" className="icon" aria-label="features">
         ✨
       </span>{" "}
       Features
@@ -25,8 +25,10 @@ const Features: React.FunctionComponent = () => (
         cards vertically in a tree like fashion.
       </Feature>
       <Feature>
-        <span className="icon" role="img" aria-label="slideshow"></span>📺 Auto
-        play the timeline with <a href="#slideshow">slideshow</a> mode.
+        <span className="icon" role="img" aria-label="slideshow">
+          📺
+        </span>{" "}
+        Auto play the timeline with <a href="#slideshow">slideshow</a> mode.
       </Feature>
       <Feature>
         <span className="icon" role="img" aria-label="slideshow">

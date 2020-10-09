@@ -31,7 +31,7 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
 `;
 
 export const TimelineContentText = styled.span`
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
   padding-left: 0.5rem;
   width: 95%;
@@ -67,6 +67,7 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   flex-direction: column;
   /* margin-top: 0.25rem; */
   margin-top: auto;
+  font-size: 0.8rem;
   max-height: 200px;
   overflow-y: auto;
   overflow-x: hidden;
