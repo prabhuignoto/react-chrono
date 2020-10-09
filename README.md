@@ -57,6 +57,9 @@ Please make sure you wrap the component in a container that has a `width` and `h
 When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please check [props](#props) for all the available options.
 
 ```sh
+  import React from "react"
+  import { Chrono } from "react-chrono";
+  
   const Home = () => {
     const items = [{
       title: "May 1940",
