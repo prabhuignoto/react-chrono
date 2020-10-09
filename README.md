@@ -72,7 +72,7 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
 
     return (
       <div style={{ width: "500px", height: "400px" }}>
-        <chrono items={items} />
+        <chrono items={items} cardHeight={300} />
       </div>
     )
   }
@@ -134,7 +134,8 @@ Play the timeline automatically with the `slideShow` mode.
 | slideShow         | starts the timeline in slideshow mode.                                                | false        |
 | slideItemDuration | The amount of delay in `ms` for the timeline points in `slideshow` mode.              | 2500         |
 | itemWidth         | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
-| theme             | prop to customize the colors.                                                         | 300          |
+| cardHeight        | sets the minimum height of the timeline card.                                         | 250          |
+| theme             | prop to customize the colors.                                                         |              |
 
 ### Mode
 

@@ -27,11 +27,13 @@ const NewDemo: React.FunctionComponent = () => {
   const [state, setState] = useState({ fontsLoaded: false, mediaType: "" });
   const type = useMediaQuery();
   const [items, setItems] = useState<TimelineItemModel[]>();
+  const [isPc, setIsPc] = useState(false);
+  const [cardHeight, setCardHeight] = useState(250);
 
   const setFont = useCallback(() => {
     fontLoader.load({
       google: {
-        families: ["Roboto Mono:300,400,500"],
+        families: ["Open Sans:300,400,500"],
       },
       active: () => {
         setState({
@@ -56,22 +58,31 @@ const NewDemo: React.FunctionComponent = () => {
       })
     );
     setItems(newItems);
+    setIsPc(type === "desktop" || type === "big-screen");
   }, []);
 
-  const isPc = useCallback(() => {
-    return type === "desktop" || type === "big-screen";
+  useEffect(() => {
+    if (type === "desktop") {
+      setCardHeight(260);
+    } else if (type === "big-screen") {
+      setCardHeight(320);
+    } else if (type === "tablet") {
+      setCardHeight(300);
+    } else {
+      setCardHeight(200);
+    }
   }, [type]);
 
   return (
     <Wrapper show={state.fontsLoaded} type={state.mediaType}>
       <>
         {/* header */}
-        <AppHeader />
+        <AppHeader type={type} />
 
         {/* project description */}
-        <DescriptionContent>
-          <strong>react-chrono</strong> is a modern timeline component built for
-          React.
+        <DescriptionContent style={{ fontSize: "1.2rem" }}>
+          <strong>react-chrono</strong> is a modern timeline component built for{" "}
+          <a href="https://reactjs.org">React</a>.
         </DescriptionContent>
 
         {/* features */}
@@ -86,7 +97,7 @@ const NewDemo: React.FunctionComponent = () => {
         </DescriptionContent>
 
         {/* Horizontal with Media */}
-        {isPc() && (
+        {isPc && (
           <Horizontal>
             <Description>
               <span>
@@ -98,13 +109,13 @@ const NewDemo: React.FunctionComponent = () => {
               </DescriptionContent>
             </Description>
             <ComponentContainer type={state.mediaType}>
-              <Chrono items={data} mode="HORIZONTAL" titlePosition="TOP" />
+              <Chrono items={data} mode="HORIZONTAL" cardHeight={cardHeight} />
             </ComponentContainer>
           </Horizontal>
         )}
 
         {/* Vertical with no Media */}
-        {isPc() && (
+        {isPc && (
           <Vertical>
             <Description>
               <span>
@@ -117,20 +128,20 @@ const NewDemo: React.FunctionComponent = () => {
             </Description>
             <ComponentContainerTree type={state.mediaType}>
               <Chrono items={items} mode="VERTICAL" />
+              <SandBox>
+                <a href="https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3?fontsize=14&hidenavigation=1&theme=dark">
+                  <img
+                    alt="Edit react-chrono-tree-horizontal"
+                    src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                  />
+                </a>
+              </SandBox>
             </ComponentContainerTree>
-            <SandBox>
-              <a href="https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3?fontsize=14&hidenavigation=1&theme=dark">
-                <img
-                  alt="Edit react-chrono-tree-horizontal"
-                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
-                />
-              </a>
-            </SandBox>
           </Vertical>
         )}
 
         {/* Tree Mode */}
-        {isPc() && (
+        {isPc && (
           <Vertical id="tree-mode">
             <Description>
               <span>
@@ -143,15 +154,15 @@ const NewDemo: React.FunctionComponent = () => {
             </Description>
             <ComponentContainerTree type={state.mediaType}>
               <Chrono items={items} mode="TREE" />
+              <SandBox>
+                <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
+                  <img
+                    alt="Edit react-chrono-tree-text"
+                    src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                  />
+                </a>
+              </SandBox>
             </ComponentContainerTree>
-            <SandBox>
-              <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
-                <img
-                  alt="Edit react-chrono-tree-text"
-                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
-                />
-              </a>
-            </SandBox>
           </Vertical>
         )}
 
@@ -167,20 +178,20 @@ const NewDemo: React.FunctionComponent = () => {
             </DescriptionContent>
           </Description>
           <ComponentContainerTree type={state.mediaType}>
-            <Chrono items={dataMixed} mode="TREE" />
+            <Chrono items={dataMixed} mode="TREE" cardHeight={cardHeight} />
+            <SandBox>
+              <a href="https://codesandbox.io/s/react-chrono-tree-image-uh2nz?fontsize=14&hidenavigation=1&theme=dark">
+                <img
+                  alt="Edit react-chrono-tree-image"
+                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                />
+              </a>
+            </SandBox>
           </ComponentContainerTree>
-          <SandBox>
-            <a href="https://codesandbox.io/s/react-chrono-tree-image-uh2nz?fontsize=14&hidenavigation=1&theme=dark">
-              <img
-                alt="Edit react-chrono-tree-image"
-                src="https://codesandbox.io/static/img/play-codesandbox.svg"
-              />
-            </a>
-          </SandBox>
         </Vertical>
 
         {/* Horizontal Slideshow */}
-        {isPc() && (
+        {isPc && (
           <Horizontal id="slideshow">
             <Description>
               <span>
@@ -198,21 +209,22 @@ const NewDemo: React.FunctionComponent = () => {
                 mode="HORIZONTAL"
                 slideShow
                 slideItemDuration={4500}
+                cardHeight={cardHeight}
               />
+              <SandBox>
+                <a href="https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?fontsize=14&hidenavigation=1&theme=dark">
+                  <img
+                    alt="Edit react-chrono-tree-text-slide"
+                    src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                  />
+                </a>
+              </SandBox>
             </ComponentContainer>
-            <SandBox>
-              <a href="https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?fontsize=14&hidenavigation=1&theme=dark">
-                <img
-                  alt="Edit react-chrono-tree-text-slide"
-                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
-                />
-              </a>
-            </SandBox>
           </Horizontal>
         )}
 
         {/* Tree Slideshow */}
-        {isPc() && (
+        {isPc && (
           <Vertical>
             <Description>
               <span>
@@ -226,25 +238,25 @@ const NewDemo: React.FunctionComponent = () => {
               <Chrono
                 items={data}
                 mode="TREE"
-                slideItemDuration={4500}
-                slideShow
+                slideItemDuration={2000}
+                cardHeight={cardHeight}
               />
+              <SandBox>
+                <a href="https://codesandbox.io/s/react-chrono-tree-demo-zksyo?fontsize=14&hidenavigation=1&theme=dark">
+                  <img
+                    alt="Edit react-chrono-tree-demo"
+                    src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                  />
+                </a>
+              </SandBox>
             </ComponentContainerTree>
-            <SandBox>
-              <a href="https://codesandbox.io/s/react-chrono-tree-demo-zksyo?fontsize=14&hidenavigation=1&theme=dark">
-                <img
-                  alt="Edit react-chrono-tree-demo"
-                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
-                />
-              </a>
-            </SandBox>
           </Vertical>
         )}
 
         {/* footer */}
         <Footer>
           <URL href="https://www.prabhumurthy.com" target="_new">
-            {new Date().getFullYear()}&copy;www.prabhumurthy.com
+            {new Date().getFullYear()}&nbsp;&copy;www.prabhumurthy.com
           </URL>
           <URL
             href="https://github.com/prabhuignoto/react-chrono"
@@ -266,7 +278,10 @@ const NewDemo: React.FunctionComponent = () => {
             <span>Github</span>
           </URL>
           <URL href="#" onClick={() => (document.body.scrollTop = 0)}>
-            <span role="img" aria-label="go to top">⏫</span> TOP
+            <span role="img" aria-label="go to top">
+              ⏫
+            </span>{" "}
+            Back to Top
           </URL>
         </Footer>
       </>

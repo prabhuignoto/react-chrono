@@ -1,6 +1,5 @@
 import { nanoid } from "nanoid";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDebounce } from "use-debounce";
 import { TimelineItemModel } from "../models/TimelineItemModel";
 import { TimelineProps } from "../models/TimelineModel";
 import Timeline from "./timeline/timeline";
@@ -17,62 +16,97 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     primary: "#0f52ba",
     secondary: "#ffdf00",
   },
+  cardHeight = 250
 }) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
   const timer = useRef<number>();
-  const [slideshowRunning, setSlideshowRunning] = useState(false);
+  const [slideShowActive, setSlideshowActive] = useState(slideShow);
 
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
-  const [debActvTimelineItem] = useDebounce(activeTimelineItem, 250);
+
+  const initItems = () =>
+    items
+      ? items.map((item, index) => {
+          return Object.assign({}, item, {
+            position: titlePosition.toLowerCase(),
+            id: nanoid(),
+            visible: slideShow ? index === 0 : true,
+            active: index === 0,
+          });
+        })
+      : [];
+
+  // setup the slideshow
+  const setupSlideShow = useCallback(() => {
+    if (!items || !items.length) {
+      return;
+    }
+
+    const newItems = !timeLineItems.length
+      ? initItems()
+      : timeLineItems.map((item) =>
+          Object.assign({}, item, {
+            visible: false,
+          })
+        );
+
+    timeLineItemsRef.current = newItems.slice(0);
+
+    if (timer.current) {
+      window.clearInterval(timer.current);
+    }
+
+    const runShow = () => {
+      const invisibleElements = timeLineItemsRef.current?.filter(
+        (item) => !item.visible
+      );
+
+      if (invisibleElements && invisibleElements.length) {
+        const itemToShow = invisibleElements[0];
+
+        const newItems = timeLineItemsRef.current?.map((item) =>
+          Object.assign({}, item, {
+            visible: !item.visible ? itemToShow.id === item.id : true,
+            active: itemToShow.id === item.id,
+          })
+        );
+
+        if (newItems) {
+          timeLineItemsRef.current = newItems.slice(0);
+          setItems(newItems);
+        }
+      } else {
+        clearInterval(timer.current);
+        setSlideshowActive(false);
+        setActiveTimelineItem(newItems.length - 1);
+      }
+    };
+    runShow();
+    timer.current = window.setInterval(runShow, slideItemDuration);
+  }, []);
 
   useEffect(() => {
     if (!items) {
       return;
     }
 
-    const newItems = items.map((item, index) => {
-      return Object.assign({}, item, {
-        position: titlePosition.toLowerCase(),
-        id: nanoid(),
-        visible: slideShow ? index === 0 : true,
-        active: index === 0,
-      });
-    });
-
-    setItems(newItems);
-
-    if (slideShow) {
-      timeLineItemsRef.current = newItems.slice(0);
-      setSlideshowRunning(true);
-
-      timer.current = window.setInterval(() => {
-        const invisibleElements = timeLineItemsRef.current?.filter(
-          (item) => !item.visible
-        );
-
-        if (invisibleElements && invisibleElements.length) {
-          const itemToShow = invisibleElements[0];
-
-          const newItems = timeLineItemsRef.current?.map((item) =>
-            Object.assign({}, item, {
-              visible: !item.visible ? itemToShow.id === item.id : true,
-              active: itemToShow.id === item.id,
-            })
-          );
-
-          if (newItems) {
-            timeLineItemsRef.current = newItems.slice(0);
-            setItems(newItems);
-          }
-        } else {
-          clearInterval(timer.current);
-          setSlideshowRunning(false);
-          setActiveTimelineItem(newItems.length - 1);
-        }
-      }, slideItemDuration);
+    if (slideShowActive && slideShow) {
+      setupSlideShow();
     }
-  }, [items, slideShow, titlePosition, slideItemDuration]);
+  // eslint-disable-next-line
+  }, [slideShowActive]);
+
+  useEffect(() => {
+    if (slideShow) {
+      setupSlideShow();
+    } else {
+      const items = initItems();
+      timeLineItemsRef.current = items;
+      setItems(items);
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const handleTimelineUpdate = (actvTimelineIndex: number) => {
     setItems((items) =>
@@ -85,12 +119,16 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     setActiveTimelineItem(actvTimelineIndex);
   };
 
+  const restartSlideShow = () => {
+    setSlideshowActive(true);
+  };
+
   const handleOnNext = () => {
     if (!items) {
       return;
     }
-    if (debActvTimelineItem < items.length - 1) {
-      const newTimeLineItem = debActvTimelineItem + 1;
+    if (activeTimelineItem < items.length - 1) {
+      const newTimeLineItem = activeTimelineItem + 1;
 
       handleTimelineUpdate(newTimeLineItem);
       setActiveTimelineItem(newTimeLineItem);
@@ -98,8 +136,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   };
 
   const handleOnPrevious = () => {
-    if (debActvTimelineItem > 0) {
-      const newTimeLineItem = debActvTimelineItem - 1;
+    if (activeTimelineItem > 0) {
+      const newTimeLineItem = activeTimelineItem - 1;
 
       handleTimelineUpdate(newTimeLineItem);
       setActiveTimelineItem(newTimeLineItem);
@@ -121,20 +159,23 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
 
   return (
     <Timeline
-      itemWidth={itemWidth}
-      titlePosition={titlePosition}
-      mode={mode}
-      items={timeLineItems}
-      onTimelineUpdated={useCallback(handleTimelineUpdate, [])}
-      slideShowRunning={slideshowRunning}
-      onNext={handleOnNext}
-      onPrevious={handleOnPrevious}
-      activeTimelineItem={debActvTimelineItem}
+      activeTimelineItem={activeTimelineItem}
       disableNavOnKey={disableNavOnKey}
-      slideItemDuration={slideItemDuration}
+      itemWidth={itemWidth}
+      items={timeLineItems}
+      mode={mode}
       onFirst={handleFirst}
       onLast={handleLast}
+      onNext={handleOnNext}
+      onPrevious={handleOnPrevious}
+      onRestartSlideshow={restartSlideShow}
+      onTimelineUpdated={useCallback(handleTimelineUpdate, [])}
+      slideItemDuration={slideItemDuration}
+      slideShowRunning={slideShowActive}
       theme={theme}
+      titlePosition={titlePosition}
+      slideShow={slideShow}
+      cardHeight={cardHeight}
     />
   );
 };

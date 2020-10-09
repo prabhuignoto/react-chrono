@@ -1,21 +1,20 @@
 import styled from '@emotion/styled';
+import { Theme } from '../../../models/TimelineTreeModel';
 
-export const TimelineControlWrapper = styled.ul`
+export const TimelineNavWrapper = styled.ul<{theme?: Theme}>`
   display: flex;
   list-style: none;
   padding: 0;
   border-radius: 20px;
-  background: #0f52ba;
-  margin: 1rem 0;
-  /* box-shadow: inset 0 0 8px 6px rgba(0,0,0,0.2), 0 0 2px 2px rgba(0,0,0,0.3); */
+  background: ${p => p.theme.primary};
 `;
 
-export const TimelineControlItem = styled.li<{ disable: boolean }>`
+export const TimelineNavItem = styled.li<{ disable: boolean }>`
   padding: 0.1rem;
   ${(p) => p.disable ? "pointer-events: none; filter: opacity(0.4)" : ""};
 `;
 
-export const TimelineControlButton = styled.button`
+export const TimelineNavButton = styled.button`
   background: none;
   border: 0;
   cursor: pointer;
@@ -33,18 +32,30 @@ export const TimelineControlButton = styled.button`
   }
 `;
 
-export const TimelineControlContainer = styled.div``;
+export const TimelineControlContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+`;
 
-export const MediaToggle = styled.div`
-  width: 3rem;
+export const ControlButton = styled.div<{theme?: Theme}>`
+  width: 2rem;
   height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: ${p => p.theme.primary};
+  border-radius: 50%;
+  margin: 0 0.2rem;
+  cursor: pointer;
 
   svg {
-    width: 100%;
-    height: 100%;
+    color: #fff;
+    width: 60%;
+    height: 60%;
   }
-`;
+`
 
+export const MediaToggle = styled(ControlButton)``;
+
+export const ReplayWrapper = styled(ControlButton)``;

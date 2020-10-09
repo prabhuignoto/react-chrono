@@ -34,6 +34,7 @@ export interface TreeBranchModel {
     timelineContentHeight: number,
     timelineContentOffset: number
   ) => void;
+  cardHeight?: number;
 }
 
 export interface TimelineTreeModel {
@@ -46,6 +47,7 @@ export interface TimelineTreeModel {
   theme?: Theme;
   mode?: "VERTICAL" | "HORIZONTAL" | "TREE";
   sRef?: React.Ref<any>;
+  cardHeight?: number;
 }
 
 export interface Theme {

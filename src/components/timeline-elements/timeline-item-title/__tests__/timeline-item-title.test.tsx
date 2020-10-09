@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import Title from "../timeline-item-title";
+import Title from "../timeline-card-title";
 
 test("Check Timeline Item Title", () => {
   const { getByText } = render(<Title title="Test" />);

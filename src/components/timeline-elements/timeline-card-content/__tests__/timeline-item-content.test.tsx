@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
-import Content from "../timeline-item-content";
+import Content from "../timeline-card-content";
 
 const fn = jest.fn();
 

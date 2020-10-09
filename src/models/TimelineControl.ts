@@ -1,4 +1,5 @@
 import { TimelineMode } from "./TimelineModel";
+import { Theme } from "./TimelineTreeModel";
 
 export interface TimelineControlModel {
   disableLeft: boolean;
@@ -8,4 +9,8 @@ export interface TimelineControlModel {
   onFirst: () => void;
   onLast: () => void;
   mode?: TimelineMode;
+  theme?: Theme;
+  slideShowEnabled?: boolean;
+  slideShowRunning?: boolean;
+  onReplay?: () => void;
 }

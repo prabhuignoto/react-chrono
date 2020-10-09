@@ -2,18 +2,24 @@ import styled from '@emotion/styled';
 import { TimelineMode } from "../../../models/TimelineModel";
 import { Theme } from "../../../models/TimelineTreeModel";
 
-export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: boolean }>`
+export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: boolean, minHeight?: number, mode?: TimelineMode }>`
   align-items: flex-start;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-  font-family: 'Roboto Mono', monospace;
-  height: 100%;
+  font-family: 'Open Sans', monospace;
+
+  height: ${p => {
+    if (!p.noMedia) {
+      return 0
+    }
+  }};
   justify-content: flex-start;
   line-height: 1.5rem;
-  margin: 0 auto;
+  margin: 1rem 0;
   text-align: left;
   width: 100%;
+  min-height: ${p => !p.noMedia ? p.minHeight : "150"}px;
 
   ${p => p.noMedia ? `
     background: #fff;
@@ -25,8 +31,8 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
 `;
 
 export const TimelineContentText = styled.span`
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.8rem;
+  font-weight: 600;
   padding-left: 0.5rem;
   width: 95%;
 `;
@@ -34,7 +40,7 @@ export const TimelineContentText = styled.span`
 export const TimelineContentTitle = styled.span<{ theme: Theme }>`
   color: #323232;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-top: 0.5rem;
   padding-left: 0.5rem;
   &.active {
@@ -61,7 +67,8 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   flex-direction: column;
   /* margin-top: 0.25rem; */
   margin-top: auto;
-  max-height: 300px;
+  font-size: 0.8rem;
+  max-height: 200px;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: 0.35em;
@@ -99,13 +106,13 @@ export const ShowMore = styled.span<{ show?: boolean }>`
 
 export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: TimelineMode }>`
   /* height: ${p => p.mode === "HORIZONTAL" ? "350px" : "300px"}; */
-  /* height: 100%; */
-  min-height: 250px;
-  max-height: 450px;
+  height: 100%;
+  /* min-height: 250px;
+  max-height: 450px; */
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: ${p => p.mode !== "HORIZONTAL" ? "90%" : "70%"};
+  width: 100%;
   align-self: center;
   padding: 0.5rem;
   position: relative;
@@ -119,6 +126,9 @@ export const Media = styled.img<{ mode?: TimelineMode, visible?: boolean, active
   flex: 4;
   max-height: 100%;
   visibility: ${p => p.visible ? "visible" : "hidden"};
+  border-radius: 4px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
@@ -130,9 +140,9 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
   margin-right: auto;
   width: ${p => {
     switch (p.mode) {
-      case "HORIZONTAL": return "80%";
-      case "VERTICAL": return "80%";
-      case "TREE": return "80%";
+      case "HORIZONTAL": return "60%";
+      case "VERTICAL": return "60%";
+      case "TREE": return "60%";
     }
   }};
   min-height: 100px;

@@ -11,4 +11,5 @@ export interface TimelineContentModel {
   title?: string;
   media?: Media;
   mode?: "VERTICAL" | "HORIZONTAL" | "TREE";
+  cardHeight?: number;
 }

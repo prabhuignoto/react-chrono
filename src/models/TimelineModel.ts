@@ -8,7 +8,7 @@ import { TimelineItemModel } from "./TimelineItemModel";
  * @extends {TimelineProps}
  */
 export interface TimelineModel extends TimelineProps {
-  
+
   /**
    * active timeline item
    *
@@ -16,32 +16,37 @@ export interface TimelineModel extends TimelineProps {
    * @memberof TimelineModel
    */
   activeTimelineItem: number;
+
   /**
    * invoked to jump timeline to the first item
    *
    * @memberof TimelineModel
    */
   onFirst: () => void;
+
   /**
    * invoked to jump timeline to the last item
    *
    * @memberof TimelineModel
    */
   onLast: () => void;
+
   /**
    * invoked to move to the next item on the list
    *
    * @memberof TimelineModel
    */
   onNext: () => void;
+
   /**
    * invoked to move the timeline to the previous item
    *
    * @memberof TimelineModel
    */
   onPrevious: () => void;
+
   onTimelineUpdated?: (id: number) => void;
-  
+
   /**
    * indicates if a slideshow is activated
    *
@@ -65,8 +70,11 @@ export interface TimelineProps {
    * @memberof TimelineProps
    */
   disableNavOnKey?: boolean;
+
   itemWidth?: number;
+
   items: TimelineItemModel[];
+
   /**
    * sets the mode of timeline
    *
@@ -74,7 +82,9 @@ export interface TimelineProps {
    * @memberof TimelineProps
    */
   mode?: TimelineMode;
+
   slideItemDuration?: number;
+
   /**
    * enables slideshow
    *
@@ -82,6 +92,7 @@ export interface TimelineProps {
    * @memberof TimelineProps
    */
   slideShow?: boolean;
+
   /**
    * sets the position of the title.
    *
@@ -89,6 +100,7 @@ export interface TimelineProps {
    * @memberof TimelineProps
    */
   titlePosition?: "TOP" | "BOTTOM" | "ALTERNATE";
+  
   /**
    * sets the theme
    *
@@ -101,7 +113,15 @@ export interface TimelineProps {
   theme?: {
     primary: string;
     secondary: string;
-  }
+  },
+  /**
+   * Minimum height of the card
+   *
+   * @type {number}
+   * @memberof TimelineModel
+   */
+  cardHeight?: number;
+  onRestartSlideshow?: () => void;
 }
 
 export type TimelineMode = "VERTICAL" | "HORIZONTAL" | "TREE";
