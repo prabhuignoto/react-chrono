@@ -20,11 +20,11 @@ export const Wrapper = styled.div<{ show: boolean, type?: string }>`
   flex-direction: column;
   margin: 0 auto;
   width: ${p => {
-    if(p.type === "tablet") {
+    if (p.type === "tablet") {
       return "90%";
-    } else if(p.type === "big-screen") {
+    } else if (p.type === "big-screen") {
       return "1400px"
-    } else if(p.type === "desktop") {
+    } else if (p.type === "desktop") {
       return "1200px"
     } else {
       return "100%";
@@ -109,7 +109,7 @@ export const URL = styled.a`
 `;
 
 export const DescriptionContent = styled.p`
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Open Sans', monospace;
   font-weight: 400;
   width: 95%;
   margin: 0 auto;
@@ -118,7 +118,7 @@ export const DescriptionContent = styled.p`
 `;
 
 export const DescriptionHeader = styled.h3`
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Open Sans', monospace;
   font-weight: 500;
   width: 95%;
   margin: 0 auto;
@@ -148,7 +148,7 @@ export const FeatureSet = styled.ul`
 `;
 
 export const Feature = styled.li`
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Open Sans', monospace;
   margin-bottom: 0.5rem;
   font-size: 1rem;
   font-weight: 500;

@@ -1,6 +1,5 @@
 import { nanoid } from "nanoid";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDebounce } from "use-debounce";
 import { TimelineItemModel } from "../models/TimelineItemModel";
 import { TimelineProps } from "../models/TimelineModel";
 import Timeline from "./timeline/timeline";
@@ -25,7 +24,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   const [slideShowActive, setSlideshowActive] = useState(slideShow);
 
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
-  const [debActvTimelineItem] = useDebounce(activeTimelineItem, 250);
 
   const initItems = () =>
     items
@@ -40,7 +38,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       : [];
 
   // setup the slideshow
-  const setupSlideShow = () => {
+  const setupSlideShow = useCallback(() => {
     if (!items || !items.length) {
       return;
     }
@@ -86,7 +84,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     };
     runShow();
     timer.current = window.setInterval(runShow, slideItemDuration);
-  };
+  }, []);
 
   useEffect(() => {
     if (!items) {
@@ -129,8 +127,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     if (!items) {
       return;
     }
-    if (debActvTimelineItem < items.length - 1) {
-      const newTimeLineItem = debActvTimelineItem + 1;
+    if (activeTimelineItem < items.length - 1) {
+      const newTimeLineItem = activeTimelineItem + 1;
 
       handleTimelineUpdate(newTimeLineItem);
       setActiveTimelineItem(newTimeLineItem);
@@ -138,8 +136,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   };
 
   const handleOnPrevious = () => {
-    if (debActvTimelineItem > 0) {
-      const newTimeLineItem = debActvTimelineItem - 1;
+    if (activeTimelineItem > 0) {
+      const newTimeLineItem = activeTimelineItem - 1;
 
       handleTimelineUpdate(newTimeLineItem);
       setActiveTimelineItem(newTimeLineItem);
@@ -161,7 +159,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
 
   return (
     <Timeline
-      activeTimelineItem={debActvTimelineItem}
+      activeTimelineItem={activeTimelineItem}
       disableNavOnKey={disableNavOnKey}
       itemWidth={itemWidth}
       items={timeLineItems}

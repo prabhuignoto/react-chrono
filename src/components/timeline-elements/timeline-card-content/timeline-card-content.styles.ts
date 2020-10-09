@@ -7,10 +7,10 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Open Sans', monospace;
 
   height: ${p => {
-    if(!p.noMedia) {
+    if (!p.noMedia) {
       return 0
     }
   }};
@@ -32,7 +32,7 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
 
 export const TimelineContentText = styled.span`
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
   padding-left: 0.5rem;
   width: 95%;
 `;
@@ -40,7 +40,7 @@ export const TimelineContentText = styled.span`
 export const TimelineContentTitle = styled.span<{ theme: Theme }>`
   color: #323232;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-top: 0.5rem;
   padding-left: 0.5rem;
   &.active {

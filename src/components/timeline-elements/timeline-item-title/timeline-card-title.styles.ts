@@ -3,7 +3,7 @@ import { Theme } from "../../../models/TimelineTreeModel";
 
 export const TitleWrapper = styled.div<{ theme: Theme }>`
   border-radius: 0.2rem;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Open Sans', monospace;
   font-size: 0.85rem;
   font-weight: 600;
   /* max-width:  180px; */

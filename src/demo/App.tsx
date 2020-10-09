@@ -33,7 +33,7 @@ const NewDemo: React.FunctionComponent = () => {
   const setFont = useCallback(() => {
     fontLoader.load({
       google: {
-        families: ["Roboto Mono:300,400,500"],
+        families: ["Open Sans:300,400,500"],
       },
       active: () => {
         setState({
@@ -77,12 +77,12 @@ const NewDemo: React.FunctionComponent = () => {
     <Wrapper show={state.fontsLoaded} type={state.mediaType}>
       <>
         {/* header */}
-        <AppHeader type={type}/>
+        <AppHeader type={type} />
 
         {/* project description */}
-        <DescriptionContent>
-          <strong>react-chrono</strong> is a modern timeline component built for
-          React.
+        <DescriptionContent style={{ fontSize: "1.2rem" }}>
+          <strong>react-chrono</strong> is a modern timeline component built for{" "}
+          <a href="https://reactjs.org">React</a>.
         </DescriptionContent>
 
         {/* features */}

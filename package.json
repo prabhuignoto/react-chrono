@@ -21,8 +21,7 @@
     "react": "^17.0.0-rc.3",
     "react-chrono": "^1.1.2",
     "react-dom": "^16.13.1",
-    "react-responsive": "^8.1.0",
-    "use-debounce": "^5.0.1"
+    "react-responsive": "^8.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -88,8 +87,7 @@
   },
   "peerDependencies": {
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "use-debounce": "^3.4.3"
+    "react-dom": "^16.13.1"
   },
   "resolutions": {
     "**/@typescript-eslint/eslint-plugin": "^4.1.1",
