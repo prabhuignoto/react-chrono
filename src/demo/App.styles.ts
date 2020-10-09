@@ -168,5 +168,5 @@ export const GithubLogo = styled.div`
 export const SandBox = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 `;

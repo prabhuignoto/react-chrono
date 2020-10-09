@@ -128,15 +128,15 @@ const NewDemo: React.FunctionComponent = () => {
             </Description>
             <ComponentContainerTree type={state.mediaType}>
               <Chrono items={items} mode="VERTICAL" />
+              <SandBox>
+                <a href="https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3?fontsize=14&hidenavigation=1&theme=dark">
+                  <img
+                    alt="Edit react-chrono-tree-horizontal"
+                    src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                  />
+                </a>
+              </SandBox>
             </ComponentContainerTree>
-            <SandBox>
-              <a href="https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3?fontsize=14&hidenavigation=1&theme=dark">
-                <img
-                  alt="Edit react-chrono-tree-horizontal"
-                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
-                />
-              </a>
-            </SandBox>
           </Vertical>
         )}
 
@@ -154,15 +154,15 @@ const NewDemo: React.FunctionComponent = () => {
             </Description>
             <ComponentContainerTree type={state.mediaType}>
               <Chrono items={items} mode="TREE" />
+              <SandBox>
+                <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
+                  <img
+                    alt="Edit react-chrono-tree-text"
+                    src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                  />
+                </a>
+              </SandBox>
             </ComponentContainerTree>
-            <SandBox>
-              <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
-                <img
-                  alt="Edit react-chrono-tree-text"
-                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
-                />
-              </a>
-            </SandBox>
           </Vertical>
         )}
 
@@ -179,15 +179,15 @@ const NewDemo: React.FunctionComponent = () => {
           </Description>
           <ComponentContainerTree type={state.mediaType}>
             <Chrono items={dataMixed} mode="TREE" cardHeight={cardHeight} />
+            <SandBox>
+              <a href="https://codesandbox.io/s/react-chrono-tree-image-uh2nz?fontsize=14&hidenavigation=1&theme=dark">
+                <img
+                  alt="Edit react-chrono-tree-image"
+                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                />
+              </a>
+            </SandBox>
           </ComponentContainerTree>
-          <SandBox>
-            <a href="https://codesandbox.io/s/react-chrono-tree-image-uh2nz?fontsize=14&hidenavigation=1&theme=dark">
-              <img
-                alt="Edit react-chrono-tree-image"
-                src="https://codesandbox.io/static/img/play-codesandbox.svg"
-              />
-            </a>
-          </SandBox>
         </Vertical>
 
         {/* Horizontal Slideshow */}
@@ -211,15 +211,15 @@ const NewDemo: React.FunctionComponent = () => {
                 slideItemDuration={4500}
                 cardHeight={cardHeight}
               />
+              <SandBox>
+                <a href="https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?fontsize=14&hidenavigation=1&theme=dark">
+                  <img
+                    alt="Edit react-chrono-tree-text-slide"
+                    src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                  />
+                </a>
+              </SandBox>
             </ComponentContainer>
-            <SandBox>
-              <a href="https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?fontsize=14&hidenavigation=1&theme=dark">
-                <img
-                  alt="Edit react-chrono-tree-text-slide"
-                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
-                />
-              </a>
-            </SandBox>
           </Horizontal>
         )}
 
@@ -241,15 +241,15 @@ const NewDemo: React.FunctionComponent = () => {
                 slideItemDuration={2000}
                 cardHeight={cardHeight}
               />
+              <SandBox>
+                <a href="https://codesandbox.io/s/react-chrono-tree-demo-zksyo?fontsize=14&hidenavigation=1&theme=dark">
+                  <img
+                    alt="Edit react-chrono-tree-demo"
+                    src="https://codesandbox.io/static/img/play-codesandbox.svg"
+                  />
+                </a>
+              </SandBox>
             </ComponentContainerTree>
-            <SandBox>
-              <a href="https://codesandbox.io/s/react-chrono-tree-demo-zksyo?fontsize=14&hidenavigation=1&theme=dark">
-                <img
-                  alt="Edit react-chrono-tree-demo"
-                  src="https://codesandbox.io/static/img/play-codesandbox.svg"
-                />
-              </a>
-            </SandBox>
           </Vertical>
         )}
 
