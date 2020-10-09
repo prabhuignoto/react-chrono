@@ -55,7 +55,8 @@ exports[`Test Timeline Item render - Vertical 1`] = `
       </div>
     </div>
     <div
-      class="active css-1a8fhdt"
+      class="active css-4vv57n"
+      mode="VERTICAL"
     >
       <span
         class="css-4hae14"
@@ -63,7 +64,7 @@ exports[`Test Timeline Item render - Vertical 1`] = `
         This is a test content
       </span>
       <div
-        class="show-less css-hrwi5d"
+        class="show-less css-15httry"
       />
       <span
         class="show-more css-1rml49d"

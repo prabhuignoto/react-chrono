@@ -16,10 +16,10 @@ exports[`Test tree branch render 1`] = `
     </div>
   </div>
   <div
-    class="test-class  css-efrj35"
+    class="test-class  css-jzwqig"
   >
     <div
-      class="active css-1a8fhdt"
+      class="active css-4vv57n"
     >
       <span
         class="css-4hae14"
@@ -27,7 +27,7 @@ exports[`Test tree branch render 1`] = `
         Tree branch test
       </span>
       <div
-        class="show-less css-hrwi5d"
+        class="show-less css-15httry"
       />
       <span
         class="show-more css-1rml49d"

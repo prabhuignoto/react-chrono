@@ -240,7 +240,8 @@ exports[`Test Collection Vertical render 1`] = `
           </div>
         </div>
         <div
-          class=" css-1a8fhdt"
+          class=" css-4vv57n"
+          mode="VERTICAL"
         >
           <span
             class="css-4hae14"
@@ -248,7 +249,7 @@ exports[`Test Collection Vertical render 1`] = `
             Archduke Franz Ferdinand of Austria and his wife, Sophie, are assassinated by a Bosnian Serb nationalist in Sarajevo.
           </span>
           <div
-            class="show-less css-hrwi5d"
+            class="show-less css-15httry"
           />
           <span
             class="show-more css-1rml49d"
@@ -291,7 +292,8 @@ exports[`Test Collection Vertical render 1`] = `
           </div>
         </div>
         <div
-          class=" css-1a8fhdt"
+          class=" css-4vv57n"
+          mode="VERTICAL"
         >
           <span
             class="css-4hae14"
@@ -299,7 +301,7 @@ exports[`Test Collection Vertical render 1`] = `
             World War I begins when Austria-Hungary declares war on Serbia.
           </span>
           <div
-            class="show-less css-hrwi5d"
+            class="show-less css-15httry"
           />
           <span
             class="show-more css-1rml49d"
@@ -342,7 +344,8 @@ exports[`Test Collection Vertical render 1`] = `
           </div>
         </div>
         <div
-          class=" css-1a8fhdt"
+          class=" css-4vv57n"
+          mode="VERTICAL"
         >
           <span
             class="css-4hae14"
@@ -352,7 +355,7 @@ exports[`Test Collection Vertical render 1`] = `
     Britain declares war on Austria. Montenegro declares war on Germany. Japan declares war on Germany. Austria declares war on Belgium.
           </span>
           <div
-            class="show-less css-hrwi5d"
+            class="show-less css-15httry"
           />
           <span
             class="show-more css-1rml49d"
@@ -395,7 +398,8 @@ exports[`Test Collection Vertical render 1`] = `
           </div>
         </div>
         <div
-          class=" css-1a8fhdt"
+          class=" css-4vv57n"
+          mode="VERTICAL"
         >
           <span
             class="css-4hae14"
@@ -404,7 +408,7 @@ exports[`Test Collection Vertical render 1`] = `
       The Germans dig in north of the Aisne River, and the trench warfare that is to typify the Western Front for the next four years begins.
           </span>
           <div
-            class="show-less css-hrwi5d"
+            class="show-less css-15httry"
           />
           <span
             class="show-more css-1rml49d"
