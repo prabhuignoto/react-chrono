@@ -66,7 +66,7 @@ const NewDemo: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (type === "desktop") {
-      setCardHeight(260);
+      setCardHeight(230);
     } else if (type === "big-screen") {
       setCardHeight(320);
     } else if (type === "tablet") {
