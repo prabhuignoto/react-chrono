@@ -42,7 +42,6 @@ export default {
       globals: {
         nanoid: "nanoid",
         react: "React",
-        "use-debounce": "useDebounce",
         "react-dom": "ReactDOM",
         "styled-components": "styled",
       },
@@ -76,7 +75,6 @@ export default {
     "react",
     "react-dom",
     "nanoid",
-    "use-debounce",
     "styled-components",
     "@babel/runtime",
   ],

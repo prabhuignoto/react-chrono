@@ -1,6 +1,5 @@
 import { nanoid } from "nanoid";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDebounce } from "use-debounce";
 import { TimelineItemModel } from "../models/TimelineItemModel";
 import { TimelineProps } from "../models/TimelineModel";
 import Timeline from "./timeline/timeline";
