@@ -75,7 +75,7 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
 
     return (
       <div style={{ width: "500px", height: "400px" }}>
-        <chrono items={items} cardHeight={300} />
+        <Chrono items={items} cardHeight={300} />
       </div>
     )
   }
