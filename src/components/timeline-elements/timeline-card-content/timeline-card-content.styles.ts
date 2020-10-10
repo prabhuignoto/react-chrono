@@ -140,7 +140,7 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
   margin-right: auto;
   width: ${p => {
     switch (p.mode) {
-      case "HORIZONTAL": return "60%";
+      case "HORIZONTAL": return "70%";
       case "VERTICAL": return "60%";
       case "TREE": return "60%";
     }

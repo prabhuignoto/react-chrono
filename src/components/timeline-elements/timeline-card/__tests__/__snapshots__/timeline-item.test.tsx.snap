@@ -18,7 +18,7 @@ exports[`Test Timeline Item render - Horizontal 1`] = `
     data-testid="timeline-title"
   >
     <div
-      class="active css-174f7ov"
+      class="active css-jh9ivn"
       title="test title"
     >
       test title
@@ -48,18 +48,18 @@ exports[`Test Timeline Item render - Vertical 1`] = `
       data-testid="timeline-title"
     >
       <div
-        class="active css-174f7ov"
+        class="active css-jh9ivn"
         title="test title"
       >
         test title
       </div>
     </div>
     <div
-      class="active css-4vv57n"
+      class="active css-rvukg4"
       mode="VERTICAL"
     >
       <span
-        class="css-pwm4w2"
+        class="css-1uk2dbl"
       >
         This is a test content
       </span>
