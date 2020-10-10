@@ -36,6 +36,11 @@ export const TimelineMainWrapper = styled.div`
   overscroll-behavior: none;
   padding: 1rem 0;
 
+  &::-webkit-scrollbar {
+    width: 0;    
+  }
+  scrollbar-width: none;
+
   &.horizontal {
     height: 10rem;
   }

@@ -16,7 +16,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     primary: "#0f52ba",
     secondary: "#ffdf00",
   },
-  cardHeight = 250
+  cardHeight = 250,
 }) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
@@ -94,7 +94,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     if (slideShowActive && slideShow) {
       setupSlideShow();
     }
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [slideShowActive]);
 
   useEffect(() => {

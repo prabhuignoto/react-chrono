@@ -74,6 +74,7 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   scrollbar-width: 0.35em;
   transition: max-height .2s linear;
   width: 100%;
+  overscroll-behavior: contain;
 
   &.show-less {
     max-height: 50px;
@@ -140,7 +141,7 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
   margin-right: auto;
   width: ${p => {
     switch (p.mode) {
-      case "HORIZONTAL": return "60%";
+      case "HORIZONTAL": return "70%";
       case "VERTICAL": return "60%";
       case "TREE": return "60%";
     }

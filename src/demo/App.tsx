@@ -112,7 +112,7 @@ const NewDemo: React.FunctionComponent = () => {
               </DescriptionContent>
             </Description>
             <ComponentContainer type={state.mediaType}>
-              <Chrono items={data} mode="HORIZONTAL" cardHeight={cardHeight} />
+              <Chrono items={items} mode="HORIZONTAL" cardHeight={cardHeight} />
             </ComponentContainer>
           </Horizontal>
         )}

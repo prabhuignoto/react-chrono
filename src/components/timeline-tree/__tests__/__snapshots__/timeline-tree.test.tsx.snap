@@ -13,7 +13,7 @@ exports[`Test Tree render 1`] = `
       class="left css-2zvd49"
     >
       <div
-        class=" css-174f7ov"
+        class=" css-jh9ivn"
         title="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
       >
         June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
@@ -23,10 +23,10 @@ exports[`Test Tree render 1`] = `
       class="left  css-evhdlb"
     >
       <div
-        class=" css-4vv57n"
+        class=" css-rvukg4"
       >
         <span
-          class="css-pwm4w2"
+          class="css-1uk2dbl"
         >
           Archduke Franz Ferdinand of Austria and his wife, Sophie, are assassinated by a Bosnian Serb nationalist in Sarajevo.
         </span>
@@ -63,7 +63,7 @@ exports[`Test Tree render 1`] = `
       class="right css-2zvd49"
     >
       <div
-        class=" css-174f7ov"
+        class=" css-jh9ivn"
         title="July 28, 1914"
       >
         July 28, 1914
@@ -73,10 +73,10 @@ exports[`Test Tree render 1`] = `
       class="right  css-evhdlb"
     >
       <div
-        class=" css-4vv57n"
+        class=" css-rvukg4"
       >
         <span
-          class="css-pwm4w2"
+          class="css-1uk2dbl"
         >
           World War I begins when Austria-Hungary declares war on Serbia.
         </span>
@@ -113,7 +113,7 @@ exports[`Test Tree render 1`] = `
       class="left css-2zvd49"
     >
       <div
-        class=" css-174f7ov"
+        class=" css-jh9ivn"
         title="August 1–28, 1914"
       >
         August 1–28, 1914
@@ -123,10 +123,10 @@ exports[`Test Tree render 1`] = `
       class="left  css-evhdlb"
     >
       <div
-        class=" css-4vv57n"
+        class=" css-rvukg4"
       >
         <span
-          class="css-pwm4w2"
+          class="css-1uk2dbl"
         >
           Germany declares war on Russia, France, and Belgium. Britain declares war on Germany.
     Austria declares war on Russia. Montenegro declares war on Austria. France declares war on Austria.
@@ -165,7 +165,7 @@ exports[`Test Tree render 1`] = `
       class="right css-2zvd49"
     >
       <div
-        class=" css-174f7ov"
+        class=" css-jh9ivn"
         title="September 6, 1914"
       >
         September 6, 1914
@@ -175,10 +175,10 @@ exports[`Test Tree render 1`] = `
       class="right  css-evhdlb"
     >
       <div
-        class=" css-4vv57n"
+        class=" css-rvukg4"
       >
         <span
-          class="css-pwm4w2"
+          class="css-1uk2dbl"
         >
           First Battle of the Marne begins. The Germans had advanced to within 30 miles of Paris, but over the next two days, the French are reinforced by 6,000 infantrymen who are transported to the front by hundreds of taxis.
       The Germans dig in north of the Aisne River, and the trench warfare that is to typify the Western Front for the next four years begins.

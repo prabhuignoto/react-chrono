@@ -9,7 +9,7 @@ exports[`Test tree branch render 1`] = `
     class="test-class css-mfd0wg"
   >
     <div
-      class="active css-174f7ov"
+      class="active css-jh9ivn"
       title="branch title"
     >
       branch title
@@ -19,10 +19,10 @@ exports[`Test tree branch render 1`] = `
     class="test-class  css-jzwqig"
   >
     <div
-      class="active css-4vv57n"
+      class="active css-rvukg4"
     >
       <span
-        class="css-pwm4w2"
+        class="css-1uk2dbl"
       >
         Tree branch test
       </span>

@@ -73,6 +73,8 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
           media={media}
           mode={mode}
           cardHeight={cardHeight}
+          onClick={onClick}
+          id={id}
         />
       </TimelineItemContentWrapper>
 
