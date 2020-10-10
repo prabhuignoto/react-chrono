@@ -74,6 +74,7 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   scrollbar-width: 0.35em;
   transition: max-height .2s linear;
   width: 100%;
+  overscroll-behavior: contain;
 
   &.show-less {
     max-height: 50px;
