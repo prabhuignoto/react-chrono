@@ -100,7 +100,7 @@ const NewDemo: React.FunctionComponent = () => {
         </DescriptionContent>
 
         {/* Horizontal with Media */}
-        {!isMobile && items.length && (
+        {!isMobile && items.length > 0 && (
           <Horizontal>
             <Description>
               <span>
@@ -118,13 +118,17 @@ const NewDemo: React.FunctionComponent = () => {
         )}
 
         {/* Vertical with no Media */}
-        {!isMobile && <VerticalBasic type={state.mediaType} items={items} />}
+        {!isMobile && items.length > 0 && (
+          <VerticalBasic type={state.mediaType} items={items} />
+        )}
 
         {/* Tree Mode */}
-        {items.length && <VerticalTree type={state.mediaType} items={items} />}
+        {items.length > 0 && (
+          <VerticalTree type={state.mediaType} items={items} />
+        )}
 
         {/* mixed mode */}
-        {!isMobile && (
+        {!isMobile && items.length > 0 && (
           <VerticalTreeMixed type={state.mediaType} cardHeight={cardHeight} />
         )}
 
@@ -134,7 +138,7 @@ const NewDemo: React.FunctionComponent = () => {
         )} */}
 
         {/* Tree Slideshow */}
-        {!isMobile && (
+        {!isMobile && items.length > 0 && (
           <VerticalTreeSlideshow
             type={state.mediaType}
             cardHeight={cardHeight}

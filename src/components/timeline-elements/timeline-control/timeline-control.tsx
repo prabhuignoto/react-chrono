@@ -75,7 +75,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
             </TimelineNavButton>
           </TimelineNavItem>
           <TimelineNavItem>
-            {slideShowEnabled && !slideShowRunning && (
+            {slideShowEnabled && (
               <ReplayWrapper
                 theme={theme}
                 onClick={onReplay}

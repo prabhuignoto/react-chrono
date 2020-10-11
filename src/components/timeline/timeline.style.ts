@@ -88,26 +88,14 @@ export const TimelineControlContainer = styled.div<{ mode?: TimelineMode, active
   margin-top: 1rem;
   position: absolute;
   width: 0;
+  right: 0;
+  bottom: 0;
   
   filter: ${p => {
     if (p.active) {
       return `opacity(1);`;
     } else {
       return `opacity(0.9);`;
-    }
-  }};
-
-  ${p => {
-    if (p.mode === "HORIZONTAL") {
-      return `
-        right: 0;
-        bottom: 0;
-      `;
-    } else {
-      return `
-        right: 0;
-        bottom: 0;
-      `;
     }
   }};
 
