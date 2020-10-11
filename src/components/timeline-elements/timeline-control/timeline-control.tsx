@@ -24,13 +24,16 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   slideShowRunning,
   onReplay,
   slideShowEnabled,
+  mode
 }) => {
   return (
     <TimelineControlContainer>
       {!slideShowRunning && (
-        <TimelineNavWrapper theme={theme}>
+        <TimelineNavWrapper>
           <TimelineNavItem disable={disableLeft}>
             <TimelineNavButton
+              mode={mode}
+              theme={theme}
               onClick={onFirst}
               title="first"
               aria-label="first"
@@ -40,6 +43,8 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
           </TimelineNavItem>
           <TimelineNavItem disable={disableLeft}>
             <TimelineNavButton
+              mode={mode}
+              theme={theme}
               onClick={onPrevious}
               title="previous"
               aria-label="previous"
@@ -48,21 +53,39 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
             </TimelineNavButton>
           </TimelineNavItem>
           <TimelineNavItem disable={disableRight}>
-            <TimelineNavButton onClick={onNext} title="next" aria-label="next">
+            <TimelineNavButton
+              mode={mode}
+              theme={theme}
+              onClick={onNext}
+              title="next"
+              aria-label="next"
+            >
               <ChevronRightIcon />
             </TimelineNavButton>
           </TimelineNavItem>
           <TimelineNavItem disable={disableRight}>
-            <TimelineNavButton onClick={onLast} title="last" aria-label="last">
+            <TimelineNavButton
+              mode={mode}
+              theme={theme}
+              onClick={onLast}
+              title="last"
+              aria-label="last"
+            >
               <ChevronsRightIcon />
             </TimelineNavButton>
           </TimelineNavItem>
+          <TimelineNavItem>
+            {slideShowEnabled && !slideShowRunning && (
+              <ReplayWrapper
+                theme={theme}
+                onClick={onReplay}
+                title="replay slideshow"
+              >
+                <ReplayIcon />
+              </ReplayWrapper>
+            )}
+          </TimelineNavItem>
         </TimelineNavWrapper>
-      )}
-      {slideShowEnabled && !slideShowRunning && (
-        <ReplayWrapper theme={theme} onClick={onReplay} title="replay slideshow">
-          <ReplayIcon />
-        </ReplayWrapper>
       )}
     </TimelineControlContainer>
   );

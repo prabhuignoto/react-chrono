@@ -28,6 +28,7 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
   &.active {
     color: ${(p) => p.theme.primary};
   }
+  overflow: hidden;
 `;
 
 export const TimelineContentText = styled.span`
@@ -104,27 +105,44 @@ export const ShowMore = styled.span<{ show?: boolean }>`
   height: ${(p) => !p.show ? "0" : ""};
 `;
 
-export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: TimelineMode }>`
+export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: TimelineMode, dir?: string }>`
   /* height: ${p => p.mode === "HORIZONTAL" ? "350px" : "300px"}; */
   height: 100%;
   /* min-height: 250px;
   max-height: 450px; */
   flex-direction: row;
   align-items: center;
-  justify-content: center;
   width: 100%;
   align-self: center;
   padding: 0.5rem;
   position: relative;
   background: ${p => p.active ? `rgba(${p.theme.secondary}, 0.35)` : ""};
   border-radius: 4px;
+
+  ${p => {
+    if (p.mode === "HORIZONTAL") {
+      return `
+        justify-content: flex-start;
+      `;
+    } else {
+      if (p.dir === "left") {
+        return `
+        justify-content: flex-start;
+      `;
+      } else {
+        return `
+        justify-content: flex-end;
+      `;
+      }
+    }
+  }}
 `;
 
 export const Media = styled.img<{ mode?: TimelineMode, visible?: boolean, active?: boolean }>`
   max-width: 100%;
   justify-self: center;
   flex: 4;
-  max-height: 100%;
+  max-height: 70%;
   visibility: ${p => p.visible ? "visible" : "hidden"};
   border-radius: 4px;
   margin-left: auto;
@@ -132,17 +150,17 @@ export const Media = styled.img<{ mode?: TimelineMode, visible?: boolean, active
 `;
 
 export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
-  position: absolute;
+  /* position: absolute; */
   bottom: -1rem;
   left: 0;
   right: 0;
-  margin-left: auto;
+  /* margin-left: auto; */
   margin-right: auto;
   width: ${p => {
     switch (p.mode) {
-      case "HORIZONTAL": return "70%";
-      case "VERTICAL": return "60%";
-      case "TREE": return "60%";
+      case "HORIZONTAL": return "100%";
+      case "VERTICAL": return "100%";
+      case "TREE": return "100%";
     }
   }};
   min-height: 100px;
@@ -150,8 +168,8 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
   flex-direction: column;
   flex: 1;
   border-radius: 6px;
-  background: rgba(255,255,255, 0.95);
+  /* background: rgba(255,255,255, 0.95); */
   /* background: rgba(0,0,0,0.7); */
-  filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
+  /* filter: drop-shadow(0 0 20px rgba(0,0,0,0.5)); */
   padding-bottom: 0.5rem;
 `;

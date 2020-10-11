@@ -115,7 +115,7 @@ export const TimelineContentContainer = styled.div<{ position?: string }>`
   &.horizontal {
     position: absolute;
     min-width: 400px;
-    max-width: 80%;
+    max-width: 70%;
     z-index: 9999;
   }
 
@@ -132,5 +132,6 @@ export const TimelineContentContainer = styled.div<{ position?: string }>`
 
   &.bottom {
     top: 6rem;
+    /* left: 0; */
   }
 `;

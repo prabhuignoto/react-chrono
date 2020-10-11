@@ -12,21 +12,21 @@ import {
 const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
   active,
   alternateCards,
+  cardHeight,
   className,
   contentDetailedText,
   contentText,
   contentTitle,
   id,
   index,
+  media,
+  mode,
   onActive,
   onClick,
+  slideShowRunning,
   theme,
   title,
   visible,
-  slideShowRunning,
-  media,
-  mode,
-  cardHeight
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -59,22 +59,23 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
         alternateCards={alternateCards}
       >
         <TimelineItemContent
-          content={contentText}
           active={active}
-          title={contentTitle}
+          cardHeight={cardHeight}
+          content={contentText}
           detailedText={contentDetailedText}
+          id={id}
+          media={media}
+          mode={mode}
+          onClick={onClick}
+          slideShowActive={slideShowRunning}
+          theme={theme}
+          title={contentTitle}
           onShowMore={() =>
             setTimeout(() => {
               handleOnActive(0);
             }, 200)
           }
-          theme={theme}
-          slideShowActive={slideShowRunning}
-          media={media}
-          mode={mode}
-          cardHeight={cardHeight}
-          onClick={onClick}
-          id={id}
+          branchDir={className}
         />
       </TimelineItemContentWrapper>
 

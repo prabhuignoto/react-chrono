@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Scroll } from "../../models/TimelineCollnModel";
 import { TimelineItemViewModel } from "../../models/TimelineItemModel";
 import { TimelineModel } from "../../models/TimelineModel";
@@ -32,9 +32,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   titlePosition = "TOP",
   onRestartSlideshow,
   slideShow,
-  cardHeight
+  cardHeight,
 }) => {
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
+  const [controlActive, setControlActive] = useState(false);
 
   const timelineMainRef = useRef<HTMLDivElement>(null);
   const id = useRef(nanoid());
@@ -51,7 +52,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     event.preventDefault();
     event.stopPropagation();
 
-    const { keyCode } = event;  
+    const { keyCode } = event;
 
     if (
       (mode === "HORIZONTAL" && keyCode === 39) ||
@@ -90,6 +91,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     },
     [setNewOffset]
   );
+
+  const handleControlMouseEnter = () => {
+    setControlActive(true);
+  }
+  const handleControlMouseLeave = () => setControlActive(false);
 
   useEffect(() => {
     const ele = timelineMainRef.current;
@@ -197,7 +203,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
       </TimelineMainWrapper>
 
       {/* Timeline Controls */}
-      <TimelineControlContainer mode={mode}>
+      <TimelineControlContainer
+        mode={mode}
+        onMouseEnter={handleControlMouseEnter}
+        onMouseLeave={handleControlMouseLeave}
+        active={controlActive}
+      >
         <TimelineControl
           onNext={handleNext}
           onPrevious={handlePrevious}
