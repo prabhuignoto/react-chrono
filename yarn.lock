@@ -1948,10 +1948,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.2.tgz#2de1ed6670439387da1c9f549a2ade2b0a799256"
   integrity sha512-jiE3QIxJ8JLNcb1Ps6rDbysDhN4xa8DJJvuC9prr6w+1tIh+QAbYyNF3tyiZNLDBIuBCf4KEcV2UvQm/V60xfA==
 
-"@types/node@^14.11.7":
-  version "14.11.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.7.tgz#4d9673b8331ce262628ea89d9ef3964b6c1e5489"
-  integrity sha512-hSEXknS4KiayUdZ7401J/T6eykXHJkDEipnyQMJ4/GstK4kWjbHnwXlcpvIWfPKiEH1JU96DkbzJ1nHRmpmKLw==
+"@types/node@^14.11.8":
+  version "14.11.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.8.tgz#fe2012f2355e4ce08bca44aeb3abbb21cf88d33f"
+  integrity sha512-KPcKqKm5UKDkaYPTuXSx8wEP7vE9GnuaXIZKijwRYcePpZFDVuy2a57LarFKiORbHOuTOOwYzxVxcUzsh2P2Pw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -1995,10 +1995,10 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
-"@types/react@^16.9.51":
-  version "16.9.51"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.51.tgz#f8aa51ffa9996f1387f63686696d9b59713d2b60"
-  integrity sha512-lQa12IyO+DMlnSZ3+AGHRUiUcpK47aakMMoBG8f7HGxJT8Yfe+WE128HIXaHOHVPReAW0oDS3KAI0JI2DDe1PQ==
+"@types/react@^16.9.52":
+  version "16.9.52"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.52.tgz#c46c72d1a1d8d9d666f4dd2066c0e22600ccfde1"
+  integrity sha512-EHRjmnxiNivwhGdMh9sz1Yw9AUxTSZFxKqdBWAAzyZx3sufWwx6ogqHYh/WB1m/I4ZpjkoZLExF5QTy2ekVi/Q==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -10061,6 +10061,19 @@ react-chrono@^1.1.2:
     react-dom "^17.0.0-rc.3"
     react-responsive "^8.1.0"
     use-debounce "^5.0.1"
+
+react-chrono@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/react-chrono/-/react-chrono-1.1.5.tgz#0024bfe63c039c4093d818e7ecf7b9fad41dc640"
+  integrity sha512-NHPmD8h2Lx9BluiopVGZZIluYr9f/o36OF6nODIO00/ZpSGL/JN7EDoUivnB6KhxKEvcX+fGp4puGZwysS/hRQ==
+  dependencies:
+    "@emotion/core" "^10.0.35"
+    "@emotion/styled" "^10.0.27"
+    nanoid "^3.1.12"
+    react "^17.0.0-rc.3"
+    react-chrono "^1.1.2"
+    react-dom "^16.13.1"
+    react-responsive "^8.1.0"
 
 react-dev-utils@^10.2.1:
   version "10.2.1"
