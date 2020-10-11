@@ -97,7 +97,7 @@ export const TrunkPointWrapper = styled.div`
 export const TimelineTreeTitleWrapper = styled.div<{ alternateCards?: boolean }>`
   align-items: center;
   display: flex;
-  ${(p) => p.alternateCards ? "width: 45%" : "width: 15%"};
+  ${(p) => p.alternateCards ? "width: 45%" : "width: 10%"};
 
   &.left {
     justify-content: flex-start;

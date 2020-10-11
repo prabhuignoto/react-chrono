@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState, WheelEvent } from 'react'
-import { TimelineContentModel } from '../../../models/TimelineContentModel'
-import { MediaURL } from '../../../models/TimelineItemMedia'
-import { Theme } from '../../../models/TimelineTreeModel'
+import React, { useEffect, useRef, useState, WheelEvent } from "react";
+import { TimelineContentModel } from "../../../models/TimelineContentModel";
+import { MediaURL } from "../../../models/TimelineItemMedia";
+import { Theme } from "../../../models/TimelineTreeModel";
 import {
   Media,
   MediaDetailsWrapper,
@@ -11,8 +11,8 @@ import {
   TimelineContentDetailsWrapper,
   TimelineContentText,
   TimelineContentTitle,
-  TimelineItemContentWrapper
-} from './timeline-card-content.styles'
+  TimelineItemContentWrapper,
+} from "./timeline-card-content.styles";
 
 const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   active,
@@ -26,24 +26,25 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   onShowMore,
   slideShowActive,
   theme,
-  title
+  title,
+  branchDir,
 }: TimelineContentModel) => {
-  const [showMore, setShowMore] = useState(false)
-  const detailsRef = useRef<HTMLDivElement>(null)
-  const [canShowMore, setCanShowMore] = useState(false)
-  const [imageLoaded, setImageLoaded] = useState(false)
+  const [showMore, setShowMore] = useState(false);
+  const detailsRef = useRef<HTMLDivElement>(null);
+  const [canShowMore, setCanShowMore] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    const detailsEle = detailsRef.current
+    const detailsEle = detailsRef.current;
 
     if (!detailsEle) {
-      return
+      return;
     }
     window.setTimeout(() => {
       // setCanShowMore(detailsEle.scrollHeight > 50);
-      setCanShowMore(!!detailedText)
-    }, 100)
-  }, [])
+      setCanShowMore(!!detailedText);
+    }, 100);
+  }, []);
 
   // disabling auto collapse on inactive
   // useEffect(() => {
@@ -53,46 +54,56 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   // }, [active]);
 
   useEffect(() => {
-    const detailsEle = detailsRef.current
+    const detailsEle = detailsRef.current;
 
     if (detailsEle) {
-      detailsEle.scrollTop = 0
+      detailsEle.scrollTop = 0;
     }
-  }, [showMore])
+  }, [showMore]);
 
   const handleMouseWheel = (event: WheelEvent) => {
     if (showMore) {
-      event.stopPropagation()
+      event.stopPropagation();
     }
-  }
+  };
 
-  const Title = React.memo<{ title?: string; theme?: Theme; color?: string }>(
-    ({ title, theme, color }) =>
-      title && theme ? (
-        <TimelineContentTitle
-          className={active ? 'active' : ''}
-          theme={theme}
-          style={{ color }}
-        >
-          {title}
-        </TimelineContentTitle>
-      ) : null
-  )
+  const Title = React.memo<{
+    title?: string;
+    theme?: Theme;
+    color?: string;
+    dir?: typeof branchDir;
+  }>(({ title, theme, color, dir }) =>
+    title && theme ? (
+      <TimelineContentTitle
+        className={active ? "active" : ""}
+        theme={theme}
+        style={{ color }}
+        dir={dir}
+      >
+        {title}
+      </TimelineContentTitle>
+    ) : null
+  );
 
-  const ContentText = React.memo<{ content: string; color?: string }>(
-    ({ content, color }) =>
-      content ? (
-        <TimelineContentText style={{ color }}>{content}</TimelineContentText>
-      ) : null
-  )
+  const ContentText = React.memo<{
+    content: string;
+    color?: string;
+    dir?: typeof branchDir;
+  }>(({ content, color, dir }) =>
+    content ? (
+      <TimelineContentText style={{ color }} dir={dir}>
+        {content}
+      </TimelineContentText>
+    ) : null
+  );
 
   const handleImageLoad = () => {
-    setImageLoaded(true)
-  }
+    setImageLoaded(true);
+  };
 
   return (
     <TimelineItemContentWrapper
-      className={active ? 'active' : ''}
+      className={active ? "active" : ""}
       theme={theme}
       noMedia={!media}
       minHeight={cardHeight}
@@ -106,19 +117,20 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       {!media && <ContentText content={content} />}
 
       {/* media */}
-      {media && media.type === 'IMAGE' && (
-        <MediaWrapper theme={theme} active={active} mode={mode}>
+      {media && media.type === "IMAGE" && (
+        <MediaWrapper theme={theme} active={active} mode={mode} dir={branchDir}>
           <Media
             src={(media.source as MediaURL).url}
             mode={mode}
             onLoad={handleImageLoad}
             visible={imageLoaded}
             active={active}
+            dir={branchDir}
           />
           {imageLoaded && (
             <MediaDetailsWrapper mode={mode}>
-              <Title title={title} theme={theme} />
-              <ContentText content={content} />
+              <Title title={title} theme={theme} dir={branchDir} />
+              <ContentText content={content} dir={branchDir} />
             </MediaDetailsWrapper>
           )}
         </MediaWrapper>
@@ -127,13 +139,13 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       {/* detailed text */}
       <TimelineContentDetailsWrapper
         ref={detailsRef}
-        className={!showMore ? 'show-less' : ''}
+        className={!showMore ? "show-less" : ""}
         theme={theme}
       >
         {detailedText && !media && (
           <TimelineContentDetails
             onWheel={handleMouseWheel}
-            className={showMore ? 'active' : ''}
+            className={showMore ? "active" : ""}
           >
             {detailedText}
           </TimelineContentDetails>
@@ -145,18 +157,18 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           role="button"
           onClick={() => {
             if (active) {
-              setShowMore(!showMore)
-              onShowMore()
+              setShowMore(!showMore);
+              onShowMore();
             }
           }}
           className="show-more"
           show={canShowMore && !slideShowActive}
         >
-          {active ? (showMore ? 'show less' : 'show more') : '...'}
+          {active ? (showMore ? "show less" : "show more") : "..."}
         </ShowMore>
       )}
     </TimelineItemContentWrapper>
-  )
-}
+  );
+};
 
-export default TimelineItemContent
+export default TimelineItemContent;
