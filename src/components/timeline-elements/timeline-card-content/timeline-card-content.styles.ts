@@ -31,14 +31,15 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
   overflow: hidden;
 `;
 
-export const TimelineContentText = styled.span`
+export const TimelineContentText = styled.span<{dir?: string}>`
   font-size: 0.8rem;
   font-weight: 600;
   padding-left: 0.5rem;
   width: 95%;
+  text-align: left;
 `;
 
-export const TimelineContentTitle = styled.span<{ theme: Theme }>`
+export const TimelineContentTitle = styled.span<{ theme: Theme, dir?: string }>`
   color: #323232;
   font-size: 1rem;
   font-weight: 600;
@@ -47,6 +48,7 @@ export const TimelineContentTitle = styled.span<{ theme: Theme }>`
   &.active {
     color: ${(p) => p.theme.primary};
   }
+  text-align: left;
 `;
 
 export const TimelineContentDetails = styled.p`
@@ -138,15 +140,15 @@ export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: 
   }}
 `;
 
-export const Media = styled.img<{ mode?: TimelineMode, visible?: boolean, active?: boolean }>`
+export const Media = styled.img<{ mode?: TimelineMode, visible?: boolean, active?: boolean, dir?: string }>`
   max-width: 100%;
   justify-self: center;
   flex: 4;
   max-height: 70%;
   visibility: ${p => p.visible ? "visible" : "hidden"};
   border-radius: 4px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-right: auto
+  /* ${p => p.dir === "left" ? "margin-left: auto;" : "margin-right: auto"}; */
 `;
 
 export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`

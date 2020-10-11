@@ -67,24 +67,34 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
     }
   };
 
-  const Title = React.memo<{ title?: string; theme?: Theme; color?: string }>(
-    ({ title, theme, color }) =>
-      title && theme ? (
-        <TimelineContentTitle
-          className={active ? "active" : ""}
-          theme={theme}
-          style={{ color }}
-        >
-          {title}
-        </TimelineContentTitle>
-      ) : null
+  const Title = React.memo<{
+    title?: string;
+    theme?: Theme;
+    color?: string;
+    dir?: typeof branchDir;
+  }>(({ title, theme, color, dir }) =>
+    title && theme ? (
+      <TimelineContentTitle
+        className={active ? "active" : ""}
+        theme={theme}
+        style={{ color }}
+        dir={dir}
+      >
+        {title}
+      </TimelineContentTitle>
+    ) : null
   );
 
-  const ContentText = React.memo<{ content: string; color?: string }>(
-    ({ content, color }) =>
-      content ? (
-        <TimelineContentText style={{ color }}>{content}</TimelineContentText>
-      ) : null
+  const ContentText = React.memo<{
+    content: string;
+    color?: string;
+    dir?: typeof branchDir;
+  }>(({ content, color, dir }) =>
+    content ? (
+      <TimelineContentText style={{ color }} dir={dir}>
+        {content}
+      </TimelineContentText>
+    ) : null
   );
 
   const handleImageLoad = () => {
@@ -115,11 +125,12 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
             onLoad={handleImageLoad}
             visible={imageLoaded}
             active={active}
+            dir={branchDir}
           />
           {imageLoaded && (
             <MediaDetailsWrapper mode={mode}>
-              <Title title={title} theme={theme} />
-              <ContentText content={content} />
+              <Title title={title} theme={theme} dir={branchDir} />
+              <ContentText content={content} dir={branchDir} />
             </MediaDetailsWrapper>
           )}
         </MediaWrapper>

@@ -35,8 +35,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   cardHeight,
 }) => {
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
-  const [controlActive, setControlActive] = useState(false);
-
   const timelineMainRef = useRef<HTMLDivElement>(null);
   const id = useRef(nanoid());
 
@@ -91,11 +89,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     },
     [setNewOffset]
   );
-
-  const handleControlMouseEnter = () => {
-    setControlActive(true);
-  }
-  const handleControlMouseLeave = () => setControlActive(false);
 
   useEffect(() => {
     const ele = timelineMainRef.current;
@@ -205,9 +198,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
       {/* Timeline Controls */}
       <TimelineControlContainer
         mode={mode}
-        onMouseEnter={handleControlMouseEnter}
-        onMouseLeave={handleControlMouseLeave}
-        active={controlActive}
       >
         <TimelineControl
           onNext={handleNext}

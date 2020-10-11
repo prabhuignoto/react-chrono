@@ -11,10 +11,8 @@ const ReplayIcon: React.FunctionComponent = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="feather feather-rotate-ccw"
   >
-    <polyline points="1 4 1 10 7 10"></polyline>
-    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+    <polygon points="5 3 19 12 5 21 5 3"></polygon>
   </svg>
 );
 
