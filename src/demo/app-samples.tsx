@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import Chrono from "../components";
+import { TimelineItemModel } from "../models/TimelineItemModel";
 import {
   ComponentContainer,
   ComponentContainerTree,
@@ -10,9 +11,8 @@ import {
   SandBox,
   Vertical,
 } from "./App.styles";
-import dataMixed from "./data-mixed";
 import data from "./data";
-import { TimelineItemModel } from "../models/TimelineItemModel";
+import dataMixed from "./data-mixed";
 
 export const VerticalBasic: FunctionComponent<{
   type: string;
@@ -35,7 +35,7 @@ export const VerticalBasic: FunctionComponent<{
           <img
             alt="Edit react-chrono-tree-horizontal"
             src="https://codesandbox.io/static/img/play-codesandbox.svg"
-            />
+          />
         </a>
       </SandBox>
     </ComponentContainerTree>
@@ -55,9 +55,9 @@ export const VerticalTree: FunctionComponent<{
         In <strong>TREE</strong> mode, the cards are rendered vertically in an
         alternating fashion.
       </DescriptionContent>
-    </Description>  
+    </Description>
     <ComponentContainerTree type={type}>
-      <Chrono items={items} mode="TREE"/>
+      <Chrono items={items} mode="TREE" />
       <SandBox>
         <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
           <img

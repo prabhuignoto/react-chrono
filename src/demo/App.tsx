@@ -121,7 +121,7 @@ const NewDemo: React.FunctionComponent = () => {
         {isPc && <VerticalBasic type={state.mediaType} items={items} />}
 
         {/* Tree Mode */}
-        {isPc && <VerticalTree type={state.mediaType} items={items} />}
+        {<VerticalTree type={state.mediaType} items={items} />}
 
         {/* mixed mode */}
         {isPc && (
