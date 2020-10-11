@@ -12,7 +12,7 @@ export const TimelineNavWrapper = styled.ul<{ theme?: Theme }>`
 
 export const TimelineNavItem = styled.li<{ disable?: boolean }>`
   padding: 0.1rem;
-  ${(p) => p.disable ? "pointer-events: none; filter: opacity(0.4)" : ""};
+  ${(p) => p.disable ? "pointer-events: none; filter: opacity(0.7)" : ""};
 `;
 
 export const TimelineNavButton = styled.button<{ theme?: Theme, mode?: TimelineMode }>`

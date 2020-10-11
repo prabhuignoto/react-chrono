@@ -30,7 +30,7 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
   }
 `;
 
-export const TimelineContentText = styled.span<{dir?: string}>`
+export const TimelineContentText = styled.span<{ dir?: string }>`
   font-size: 0.8rem;
   font-weight: 600;
   padding-left: 0.5rem;
@@ -143,10 +143,11 @@ export const Media = styled.img<{ mode?: TimelineMode, visible?: boolean, active
   max-width: 100%;
   justify-self: center;
   flex: 4;
-  max-height: 70%;
   visibility: ${p => p.visible ? "visible" : "hidden"};
   border-radius: 4px;
-  margin-right: auto
+  margin-right: auto;
+  object-fit: contain;
+  height: 70%;
   /* ${p => p.dir === "left" ? "margin-left: auto;" : "margin-right: auto"}; */
 `;
 
