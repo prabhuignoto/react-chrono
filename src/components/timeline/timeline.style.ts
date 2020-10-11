@@ -30,11 +30,11 @@ export const TimelineMainWrapper = styled.div`
   display: flex;
   justify-content: center;
   overflow: hidden;
+  overscroll-behavior: none;
+  padding: 1rem 0;
   position: relative;
   scroll-behavior: smooth;
   width: 100%;
-  overscroll-behavior: none;
-  padding: 1rem 0;
 
   &::-webkit-scrollbar {
     width: 0;    
@@ -80,13 +80,24 @@ export const Outline = styled.div<{ color?: string }>`
   width: 100%;
   `;
 
-export const TimelineControlContainer = styled.div<{ mode?: TimelineMode }>`
+export const TimelineControlContainer = styled.div<{ mode?: TimelineMode, active?: boolean }>`
   align-items: center;
-  justify-content: flex-end;
   display: flex;
   height: 3rem;
-  width: 100%;
+  justify-content: flex-end;
   margin-top: 1rem;
+  position: absolute;
+  width: 0;
+  right: 0;
+  bottom: 0;
+  
+  filter: ${p => {
+    if (p.active) {
+      return `opacity(1);`;
+    } else {
+      return `opacity(0.9);`;
+    }
+  }};
 
   &.hide {
     visibility: hidden;

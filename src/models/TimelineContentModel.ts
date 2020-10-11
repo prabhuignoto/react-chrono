@@ -15,4 +15,5 @@ export interface TimelineContentModel {
   slideShowActive?: boolean;
   theme?: Theme;
   title?: string;
+  branchDir?: string;
 }

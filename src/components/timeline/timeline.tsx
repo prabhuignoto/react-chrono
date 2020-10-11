@@ -32,10 +32,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   titlePosition = "TOP",
   onRestartSlideshow,
   slideShow,
-  cardHeight
+  cardHeight,
 }) => {
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
-
   const timelineMainRef = useRef<HTMLDivElement>(null);
   const id = useRef(nanoid());
 
@@ -51,7 +50,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     event.preventDefault();
     event.stopPropagation();
 
-    const { keyCode } = event;  
+    const { keyCode } = event;
 
     if (
       (mode === "HORIZONTAL" && keyCode === 39) ||
@@ -108,15 +107,19 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
       entries.forEach((entry) => {
         const element = entry.target as HTMLDivElement;
         if (entry.isIntersecting) {
-          element.style.visibility = "visible";
+          // element.style.visibility = "visible";
+          element.querySelectorAll("img").forEach(ele => ele.style.display = "block");
           element
-            .querySelectorAll("img")
-            .forEach((ele) => (ele.style.display = "block"));
+            .querySelectorAll(":scope > div")
+            .forEach((ele) => ((ele as HTMLDivElement).style.visibility = "visible"));
         } else {
-          element.style.visibility = "hidden";
+          // element.style.visibility = "hidden";
           element
             .querySelectorAll("img")
             .forEach((ele) => (ele.style.display = "none"));
+          element
+            .querySelectorAll(":scope > div")
+            .forEach((ele) => ((ele as HTMLDivElement).style.visibility = "hidden"));
         }
       });
     },

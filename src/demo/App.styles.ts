@@ -5,10 +5,12 @@ const ModeWrapper = styled.div`
   position: relative;
   margin-bottom: 3rem;
   /* border: 1px solid #e5e5e5; */
-  margin-top: 2rem;
+  margin-top: 3rem;
   border-radius: 10px;
   padding: 1.5rem 0;
   background: #fff;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Horizontal = styled(ModeWrapper)``;
@@ -25,7 +27,7 @@ export const Wrapper = styled.div<{ show: boolean, type?: string }>`
     } else if (p.type === "big-screen") {
       return "1400px"
     } else if (p.type === "desktop") {
-      return "1200px"
+      return "95%"
     } else {
       return "100%";
     }
@@ -43,6 +45,7 @@ export const ComponentContainer = styled.div<{ type?: string }>`
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  flex-direction: column; 
 
   ${p => {
     switch (p.type) {
@@ -169,4 +172,5 @@ export const SandBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  margin-top: 3rem;
 `;
