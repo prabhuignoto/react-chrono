@@ -72,7 +72,7 @@ export const TreeTrunkWrapper = styled.div<{ bg?: string, alternateCards?: boole
 
 export const TimelineItemContentWrapper = styled.div<{ alternateCards?: boolean }>`
   visibility: hidden;
-  ${(p) => p.alternateCards ? "width: 47%;" : "width: 75%; height: 85%"};
+  ${(p) => p.alternateCards ? "width: 45%;" : "width: 75%; height: 85%"};
   /* padding: 1rem 0; */
   
   &.left {
@@ -97,7 +97,7 @@ export const TrunkPointWrapper = styled.div`
 export const TimelineTreeTitleWrapper = styled.div<{ alternateCards?: boolean }>`
   align-items: center;
   display: flex;
-  ${(p) => p.alternateCards ? "width: 47%" : "width: 6%"};
+  ${(p) => p.alternateCards ? "width: 45%" : "width: 10%"};
 
   &.left {
     justify-content: flex-start;

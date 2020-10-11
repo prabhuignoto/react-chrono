@@ -5,7 +5,7 @@ const ModeWrapper = styled.div`
   position: relative;
   margin-bottom: 3rem;
   /* border: 1px solid #e5e5e5; */
-  margin-top: 2rem;
+  margin-top: 3rem;
   border-radius: 10px;
   padding: 1.5rem 0;
   background: #fff;

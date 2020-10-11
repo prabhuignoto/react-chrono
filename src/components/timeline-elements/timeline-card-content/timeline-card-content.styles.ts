@@ -28,7 +28,6 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
   &.active {
     color: ${(p) => p.theme.primary};
   }
-  overflow: hidden;
 `;
 
 export const TimelineContentText = styled.span<{dir?: string}>`

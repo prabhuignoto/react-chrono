@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { hot } from "react-hot-loader/root";
 import fontLoader from "webfontloader";
+import Chrono from "../components";
 import { TimelineItemModel } from "../models/TimelineItemModel";
-import { Chrono } from "../react-chrono";
+import Footer from "./app-footer";
 import {
-  HorizontalSlideshow,
   VerticalBasic,
   VerticalTree,
   VerticalTreeMixed,
@@ -16,9 +16,7 @@ import {
   Description,
   DescriptionContent,
   DescriptionHeader,
-  Footer,
   Horizontal,
-  URL,
   Wrapper,
 } from "./App.styles";
 import AppHeader from "./AppHeader";
@@ -29,8 +27,7 @@ import useMediaQuery from "./mediaQueryEffect";
 const NewDemo: React.FunctionComponent = () => {
   const [state, setState] = useState({ fontsLoaded: false, mediaType: "" });
   const type = useMediaQuery();
-  const [items, setItems] = useState<TimelineItemModel[]>();
-  const [isPc, setIsPc] = useState(false);
+  const [items, setItems] = useState<TimelineItemModel[]>([]);
   const [cardHeight, setCardHeight] = useState(250);
 
   const setFont = useCallback(() => {
@@ -61,7 +58,6 @@ const NewDemo: React.FunctionComponent = () => {
       })
     );
     setItems(newItems);
-    setIsPc(type === "desktop" || type === "big-screen");
   }, []);
 
   useEffect(() => {
@@ -75,6 +71,10 @@ const NewDemo: React.FunctionComponent = () => {
       setCardHeight(200);
     }
   }, [type]);
+
+  const isMobile = useMemo(() => {
+    return state.mediaType !== "desktop" && state.mediaType !== "big-screen";
+  }, [state.mediaType]);
 
   return (
     <Wrapper show={state.fontsLoaded} type={state.mediaType}>
@@ -100,7 +100,7 @@ const NewDemo: React.FunctionComponent = () => {
         </DescriptionContent>
 
         {/* Horizontal with Media */}
-        {isPc && (
+        {!isMobile && items.length && (
           <Horizontal>
             <Description>
               <span>
@@ -118,23 +118,23 @@ const NewDemo: React.FunctionComponent = () => {
         )}
 
         {/* Vertical with no Media */}
-        {isPc && <VerticalBasic type={state.mediaType} items={items} />}
+        {!isMobile && <VerticalBasic type={state.mediaType} items={items} />}
 
         {/* Tree Mode */}
-        {<VerticalTree type={state.mediaType} items={items} />}
+        {items.length && <VerticalTree type={state.mediaType} items={items} />}
 
         {/* mixed mode */}
-        {isPc && (
+        {!isMobile && (
           <VerticalTreeMixed type={state.mediaType} cardHeight={cardHeight} />
         )}
 
         {/* Horizontal Slideshow */}
-        {isPc && (
+        {/* {!isMobile && (
           <HorizontalSlideshow type={state.mediaType} cardHeight={cardHeight} />
-        )}
+        )} */}
 
         {/* Tree Slideshow */}
-        {isPc && (
+        {!isMobile && (
           <VerticalTreeSlideshow
             type={state.mediaType}
             cardHeight={cardHeight}
@@ -142,36 +142,7 @@ const NewDemo: React.FunctionComponent = () => {
         )}
 
         {/* footer */}
-        <Footer>
-          <URL href="https://www.prabhumurthy.com" target="_new">
-            {new Date().getFullYear()}&nbsp;&copy;www.prabhumurthy.com
-          </URL>
-          <URL
-            href="https://github.com/prabhuignoto/react-chrono"
-            target="_new"
-            style={{
-              marginLeft: "auto",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <img
-              src="github.svg"
-              style={{
-                width: "1.25rem",
-                height: "1.25rem",
-                marginRight: "0.2rem",
-              }}
-            />
-            <span>Github</span>
-          </URL>
-          <URL href="#" onClick={() => (document.body.scrollTop = 0)}>
-            <span role="img" aria-label="go to top">
-              ⏫
-            </span>{" "}
-            Back to Top
-          </URL>
-        </Footer>
+        <Footer />
       </>
     </Wrapper>
   );
