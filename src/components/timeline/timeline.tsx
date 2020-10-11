@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { Scroll } from "../../models/TimelineCollnModel";
 import { TimelineItemViewModel } from "../../models/TimelineItemModel";
 import { TimelineModel } from "../../models/TimelineModel";
@@ -107,15 +107,19 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
       entries.forEach((entry) => {
         const element = entry.target as HTMLDivElement;
         if (entry.isIntersecting) {
-          element.style.visibility = "visible";
+          // element.style.visibility = "visible";
+          element.querySelectorAll("img").forEach(ele => ele.style.display = "block");
           element
-            .querySelectorAll("img")
-            .forEach((ele) => (ele.style.display = "block"));
+            .querySelectorAll(":scope > div")
+            .forEach((ele) => ((ele as HTMLDivElement).style.visibility = "visible"));
         } else {
-          element.style.visibility = "hidden";
+          // element.style.visibility = "hidden";
           element
             .querySelectorAll("img")
             .forEach((ele) => (ele.style.display = "none"));
+          element
+            .querySelectorAll(":scope > div")
+            .forEach((ele) => ((ele as HTMLDivElement).style.visibility = "hidden"));
         }
       });
     },
@@ -196,9 +200,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
       </TimelineMainWrapper>
 
       {/* Timeline Controls */}
-      <TimelineControlContainer
-        mode={mode}
-      >
+      <TimelineControlContainer mode={mode}>
         <TimelineControl
           onNext={handleNext}
           onPrevious={handlePrevious}
