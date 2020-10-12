@@ -88,7 +88,7 @@ export const ComponentContainerTree = styled.div<{ type?: string }>`
 export const Header = styled.header`
   margin: 0 auto;
   display: flex;
-  width: 95%;
+  width: 100%;
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
@@ -131,8 +131,9 @@ export const DescriptionHeader = styled.h3`
   margin: 0 auto;
   margin-bottom: 1rem;
   border-bottom: 1px solid #ccc;
-  padding-bottom: 1rem;
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
 `;
 
 export const Description = styled.div``;
@@ -176,5 +177,5 @@ export const SandBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 3rem;
+  margin-left: auto;
 `;

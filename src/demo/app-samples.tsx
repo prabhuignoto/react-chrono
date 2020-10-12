@@ -21,7 +21,17 @@ export const VerticalBasic: FunctionComponent<{
   <Vertical id="vertical">
     <Description>
       <span>
-        <DescriptionHeader># Vertical</DescriptionHeader>
+        <DescriptionHeader>
+          <span># Vertical</span>
+          <SandBox>
+            <a href="https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3?fontsize=14&hidenavigation=1&theme=dark">
+              <img
+                alt="Edit react-chrono-tree-horizontal"
+                src="https://codesandbox.io/static/img/play-codesandbox.svg"
+              />
+            </a>
+          </SandBox>
+        </DescriptionHeader>
       </span>
       <DescriptionContent>
         Use the <strong>VERTICAL</strong> mode to render the timelines
@@ -30,14 +40,6 @@ export const VerticalBasic: FunctionComponent<{
     </Description>
     <ComponentContainerTree type={type}>
       <Chrono items={items} mode="VERTICAL" />
-      <SandBox>
-        <a href="https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3?fontsize=14&hidenavigation=1&theme=dark">
-          <img
-            alt="Edit react-chrono-tree-horizontal"
-            src="https://codesandbox.io/static/img/play-codesandbox.svg"
-          />
-        </a>
-      </SandBox>
     </ComponentContainerTree>
   </Vertical>
 );
@@ -49,7 +51,17 @@ export const VerticalTree: FunctionComponent<{
   <Vertical id="tree">
     <Description>
       <span>
-        <DescriptionHeader># Tree</DescriptionHeader>
+        <DescriptionHeader>
+          <span># Tree</span>
+          <SandBox>
+            <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
+              <img
+                alt="Edit react-chrono-tree-text"
+                src="https://codesandbox.io/static/img/play-codesandbox.svg"
+              />
+            </a>
+          </SandBox>
+        </DescriptionHeader>
       </span>
       <DescriptionContent>
         In <strong>TREE</strong> mode, the cards are rendered vertically in an
@@ -64,14 +76,6 @@ export const VerticalTree: FunctionComponent<{
         slideItemDuration={6500}
         theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
       />
-      <SandBox>
-        <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
-          <img
-            alt="Edit react-chrono-tree-text"
-            src="https://codesandbox.io/static/img/play-codesandbox.svg"
-          />
-        </a>
-      </SandBox>
     </ComponentContainerTree>
   </Vertical>
 );
@@ -83,7 +87,17 @@ export const VerticalTreeMixed: FunctionComponent<{
   <Vertical>
     <Description>
       <span>
-        <DescriptionHeader># Media</DescriptionHeader>
+        <DescriptionHeader>
+          <span># Media</span>
+          <SandBox>
+            <a href="https://codesandbox.io/s/react-chrono-tree-image-uh2nz?fontsize=14&hidenavigation=1&theme=dark">
+              <img
+                alt="Edit react-chrono-tree-image"
+                src="https://codesandbox.io/static/img/play-codesandbox.svg"
+              />
+            </a>
+          </SandBox>
+        </DescriptionHeader>
       </span>
       <DescriptionContent>
         Render Images & Videos in the timeline with ease.
@@ -96,14 +110,6 @@ export const VerticalTreeMixed: FunctionComponent<{
         cardHeight={cardHeight}
         theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
       />
-      <SandBox>
-        <a href="https://codesandbox.io/s/react-chrono-tree-image-uh2nz?fontsize=14&hidenavigation=1&theme=dark">
-          <img
-            alt="Edit react-chrono-tree-image"
-            src="https://codesandbox.io/static/img/play-codesandbox.svg"
-          />
-        </a>
-      </SandBox>
     </ComponentContainerTree>
   </Vertical>
 );
