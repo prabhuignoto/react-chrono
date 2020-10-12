@@ -18,7 +18,7 @@ export const VerticalBasic: FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
 }> = ({ type, items }) => (
-  <Vertical>
+  <Vertical id="vertical">
     <Description>
       <span>
         <DescriptionHeader># Vertical</DescriptionHeader>
@@ -46,7 +46,7 @@ export const VerticalTree: FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
 }> = ({ type, items }) => (
-  <Vertical id="tree-mode">
+  <Vertical id="tree">
     <Description>
       <span>
         <DescriptionHeader># Tree</DescriptionHeader>
@@ -83,15 +83,19 @@ export const VerticalTreeMixed: FunctionComponent<{
   <Vertical>
     <Description>
       <span>
-        <DescriptionHeader># Mixed mode</DescriptionHeader>
+        <DescriptionHeader># Media</DescriptionHeader>
       </span>
       <DescriptionContent>
-        The rendering is data driven. This allows to mix both media and textual
-        content.
+        Render Images & Videos in the timeline with ease.
       </DescriptionContent>
     </Description>
     <ComponentContainerTree type={type}>
-      <Chrono items={dataMixed} mode="TREE" cardHeight={cardHeight} slideShow />
+      <Chrono
+        items={dataMixed}
+        mode="TREE"
+        cardHeight={cardHeight}
+        theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
+      />
       <SandBox>
         <a href="https://codesandbox.io/s/react-chrono-tree-image-uh2nz?fontsize=14&hidenavigation=1&theme=dark">
           <img
@@ -156,9 +160,8 @@ export const VerticalTreeSlideshow: FunctionComponent<{
       <Chrono
         items={data}
         mode="TREE"
-        slideShow
-        slideItemDuration={222500}
         cardHeight={cardHeight}
+        theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
       />
       <SandBox>
         <a href="https://codesandbox.io/s/react-chrono-tree-demo-zksyo?fontsize=14&hidenavigation=1&theme=dark">

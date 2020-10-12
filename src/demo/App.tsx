@@ -96,7 +96,7 @@ const NewDemo: React.FunctionComponent = () => {
 
         {/* Horizontal with Media */}
         {!isMobile && items.length > 0 && (
-          <Horizontal>
+          <Horizontal id="horizontal">
             <Description>
               <span>
                 <DescriptionHeader># Horizontal</DescriptionHeader>

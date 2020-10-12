@@ -22,7 +22,7 @@ export const Wrapper = styled.div<{ show: boolean, type?: string }>`
   margin: 0 auto;
   width: ${p => {
     if (p.type === "tablet") {
-      return "95%";
+      return "100%";
     } else if (p.type === "big-screen") {
       return "1400px"
     } else if (p.type === "desktop") {
@@ -34,7 +34,7 @@ export const Wrapper = styled.div<{ show: boolean, type?: string }>`
     }
   }};
   background: #fff;
-  padding:${p => p.type !== "tablet" ? "0 2rem" : ""};
+  padding:${p => p.type !== "tablet" ? "0 1rem" : ""};
   filter: drop-shadow(0 0 60px rgba(0,0,0,0.1))
 `;
 
@@ -77,6 +77,8 @@ export const ComponentContainerTree = styled.div<{ type?: string }>`
         return `height: 850px; width: 90%;`
       case "tablet":
         return `height: 850px; width: 100%;`
+      case "mobile":
+        return `height: 650px; width: 100%;`
       default:
         break;
     }
@@ -124,7 +126,7 @@ export const DescriptionContent = styled.p`
 
 export const DescriptionHeader = styled.h3`
   font-family: 'Open Sans', monospace;
-  font-weight: 500;
+  font-weight: 600;
   width: 95%;
   margin: 0 auto;
   margin-bottom: 1rem;
