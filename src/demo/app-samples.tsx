@@ -29,7 +29,7 @@ export const VerticalBasic: FunctionComponent<{
       </DescriptionContent>
     </Description>
     <ComponentContainerTree type={type}>
-      <Chrono items={items} mode="VERTICAL"/>
+      <Chrono items={items} mode="VERTICAL" />
       <SandBox>
         <a href="https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3?fontsize=14&hidenavigation=1&theme=dark">
           <img
@@ -57,7 +57,13 @@ export const VerticalTree: FunctionComponent<{
       </DescriptionContent>
     </Description>
     <ComponentContainerTree type={type}>
-      <Chrono items={items} mode="TREE" slideShow/>
+      <Chrono
+        items={items}
+        mode="TREE"
+        slideShow
+        slideItemDuration={6500}
+        theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
+      />
       <SandBox>
         <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
           <img
@@ -151,7 +157,7 @@ export const VerticalTreeSlideshow: FunctionComponent<{
         items={data}
         mode="TREE"
         slideShow
-        slideItemDuration={2500}
+        slideItemDuration={222500}
         cardHeight={cardHeight}
       />
       <SandBox>

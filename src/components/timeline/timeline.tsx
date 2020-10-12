@@ -34,7 +34,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   slideShow,
   cardHeight,
   onMediaStateChange,
-  slideShowEnabled
+  slideShowEnabled,
+  slideItemDuration
 }) => {
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const timelineMainRef = useRef<HTMLDivElement>(null);
@@ -101,8 +102,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     }
   }, [newOffSet, mode]);
 
+  // setup observer to hide/show timeline cards aka load on demand
   const observer = new IntersectionObserver(
     (entries) => {
+      // helper functions to hide image/videos
       const hide = (ele: HTMLImageElement | HTMLVideoElement) =>
         (ele.style.display = "none");
       const show = (ele: HTMLImageElement | HTMLVideoElement) =>
@@ -111,6 +114,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
       entries.forEach((entry) => {
         const element = entry.target as HTMLDivElement;
         if (entry.isIntersecting) {
+          // show img and video when visible.
           element.querySelectorAll("img").forEach(show);
           element.querySelectorAll("video").forEach(show);
           element
@@ -119,6 +123,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
               (ele) => ((ele as HTMLDivElement).style.visibility = "visible")
             );
         } else {
+          // hide img and video when not visible.
           element.querySelectorAll("img").forEach(hide);
           element.querySelectorAll("video").forEach(hide);
           element
@@ -169,6 +174,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             mode={mode}
             cardHeight={cardHeight}
             onMediaStateChange={onMediaStateChange}
+            slideItemDuration={slideItemDuration}
           />
         ) : null}
 
@@ -187,6 +193,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
               slideShowRunning={slideShowRunning}
               cardHeight={cardHeight}
               onMediaStateChange={onMediaStateChange}
+              slideItemDuration={slideItemDuration}
             />
           </TimelineMain>
         ) : null}
@@ -204,6 +211,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             mode={mode}
             cardHeight={cardHeight}
             onMediaStateChange={onMediaStateChange}
+            slideItemDuration={slideItemDuration}
           />
         ) : null}
       </TimelineMainWrapper>

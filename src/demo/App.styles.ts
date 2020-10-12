@@ -3,9 +3,8 @@ import styled from '@emotion/styled';
 const ModeWrapper = styled.div`
   width: 100%;
   position: relative;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
   /* border: 1px solid #e5e5e5; */
-  margin-top: 3rem;
   border-radius: 10px;
   padding: 1.5rem 0;
   background: #fff;
@@ -23,11 +22,13 @@ export const Wrapper = styled.div<{ show: boolean, type?: string }>`
   margin: 0 auto;
   width: ${p => {
     if (p.type === "tablet") {
-      return "90%";
+      return "95%";
     } else if (p.type === "big-screen") {
       return "1400px"
     } else if (p.type === "desktop") {
       return "95%"
+    } else if (p.type === "mobile") {
+      return "100%";
     } else {
       return "100%";
     }
@@ -104,6 +105,7 @@ export const Footer = styled.footer`
   align-items: center;
   justify-content: center;
   height: 8rem;
+  flex-wrap: wrap;
 `;
 
 export const URL = styled.a`

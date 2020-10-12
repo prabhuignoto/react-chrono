@@ -28,5 +28,6 @@ export interface TimelineItemViewModel extends TimelineItemModel {
   theme?: Theme;
   wrapperId: string;
   cardHeight?: number;
+  slideItemDuration?: number;
   onMediaStateChange: (state: { id?: string; playing?: boolean; paused?: boolean }) => void;
 }

@@ -11,7 +11,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   mode = "HORIZONTAL",
   disableNavOnKey = false,
   slideShow = false,
-  slideItemDuration = 2500,
+  slideItemDuration = 5000,
   theme = {
     primary: "#0f52ba",
     secondary: "#ffdf00",

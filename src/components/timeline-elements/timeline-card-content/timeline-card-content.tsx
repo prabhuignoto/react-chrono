@@ -1,12 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { TimelineContentModel } from "../../../models/TimelineContentModel";
-import { MemoTitle, MemoContentText } from "../memoized";
+import { MemoContentText, MemoTitle } from "../memoized";
 import CardMedia from "../timeline-card-media/timeline-card-media";
 import {
   ShowMore,
+  SlideShowProgressBar,
   TimelineContentDetails,
   TimelineContentDetailsWrapper,
-  TimelineItemContentWrapper,
+  TimelineItemContentWrapper
 } from "./timeline-card-content.styles";
 
 const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = React.memo(
@@ -22,6 +23,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = React
     onShowMore,
     onMediaStateChange,
     slideShowActive,
+    slideItemDuration,
     theme,
     title,
     branchDir,
@@ -29,6 +31,10 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = React
     const [showMore, setShowMore] = useState(false);
     const detailsRef = useRef<HTMLDivElement>(null);
     const canShowMore = useRef(!!detailedText);
+
+    const showProgressbar = useMemo(() => {
+      return slideShowActive && active && media?.type !== "VIDEO";
+    }, [slideShowActive, active, media]);
 
     // disabling auto collapse on inactive
     useEffect(() => {
@@ -102,6 +108,9 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = React
           >
             {active ? (showMore ? "show less" : "show more") : "..."}
           </ShowMore>
+        )}
+        {showProgressbar && (
+          <SlideShowProgressBar theme={theme} duration={slideItemDuration} />
         )}
       </TimelineItemContentWrapper>
     );

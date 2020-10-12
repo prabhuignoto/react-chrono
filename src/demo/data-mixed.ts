@@ -7,10 +7,10 @@ const items: TimelineItemModel[] = [
     media: {
       name: "dunkirk beach",
       source: {
-        // url: "https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"
-        url: "/dunkirk.mp4"
+        url: "https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"
+        // url: "/dunkirk.mp4"
       },
-      type: "VIDEO"
+      type: "IMAGE"
     },
     contentText:
       "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.",
@@ -26,6 +26,13 @@ const items: TimelineItemModel[] = [
   {
     title: "June 1941",
     contentTitle: "Operation Barbarossa",
+    media: {
+      source: {
+        url: "/operation-barbarasso.mp4",
+        type: "mp4",
+      },
+      type: "VIDEO"
+    },
     contentText: `A column of Red Army prisoners taken during the first days of the German invasion`,
     contentDetailedText: `Since the 1920s, Hitler had seen Russia, with its immense natural resources, as the principal target for conquest and expansion. It would provide, he believed, the necessary ‘Lebensraum’, or living space, for the German people. And by conquering Russia, Hitler would also destroy the “Jewish pestilential creed of Bolshevism”. His non-aggression pact with Stalin in August 1939 he regarded as a mere temporary expedient.
       Barely a month after the fall of France, and while the Battle of Britain was being fought, Hitler started planning for the Blitzkrieg campaign against Russia, which began on 22 June 1941. Despite repeated warnings, Stalin was taken by surprise, and for the first few months the Germans achieved spectacular victories, capturing huge swathes of land and hundreds of thousands of prisoners. But they failed to take Moscow or Leningrad before winter set in.

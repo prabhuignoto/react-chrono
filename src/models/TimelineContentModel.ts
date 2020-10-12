@@ -14,6 +14,7 @@ export interface TimelineContentModel {
   onShowMore: () => void;
   onMediaStateChange: (state: { id?: string; playing?: boolean; paused?: boolean }) => void;
   slideShowActive?: boolean;
+  slideItemDuration?: number;
   theme?: Theme;
   title?: string;
   branchDir?: string;

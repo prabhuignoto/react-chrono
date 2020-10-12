@@ -9,7 +9,7 @@ const items: TimelineItemModel[] = [
       source: {
         url: "https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"
       },
-      type: "VIDEO"
+      type: "IMAGE"
     },
     contentText:
       "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.",
