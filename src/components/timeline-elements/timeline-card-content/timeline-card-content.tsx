@@ -1,49 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { TimelineContentModel } from "../../../models/TimelineContentModel";
-import { Theme } from "../../../models/TimelineTreeModel";
+import { MemoTitle, MemoContentText } from "../memoized";
+import CardMedia from "../timeline-card-media/timeline-card-media";
 import {
-  CardImage,
-  CardVideo,
-  MediaDetailsWrapper,
-  MediaWrapper,
   ShowMore,
   TimelineContentDetails,
   TimelineContentDetailsWrapper,
-  TimelineContentText,
-  TimelineContentTitle,
   TimelineItemContentWrapper,
 } from "./timeline-card-content.styles";
-
-const Title = React.memo<{
-  title?: string;
-  theme?: Theme;
-  color?: string;
-  dir?: string;
-  active?: boolean;
-}>(({ title, theme, color, dir, active }) =>
-  title && theme ? (
-    <TimelineContentTitle
-      className={active ? "active" : ""}
-      theme={theme}
-      style={{ color }}
-      dir={dir}
-    >
-      {title}
-    </TimelineContentTitle>
-  ) : null
-);
-
-const ContentText = React.memo<{
-  content: string;
-  color?: string;
-  dir?: string;
-}>(({ content, color, dir }) =>
-  content ? (
-    <TimelineContentText style={{ color }} dir={dir}>
-      {content}
-    </TimelineContentText>
-  ) : null
-);
 
 const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = React.memo(
   ({
@@ -65,8 +29,6 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = React
     const [showMore, setShowMore] = useState(false);
     const detailsRef = useRef<HTMLDivElement>(null);
     const canShowMore = useRef(!!detailedText);
-    const [imageLoaded, setImageLoaded] = useState(false);
-    const videoRef = useRef<HTMLVideoElement>(null);
 
     // disabling auto collapse on inactive
     useEffect(() => {
@@ -74,18 +36,6 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = React
       if (active && slideShowActive) {
         setShowMore(true);
         onShowMore();
-      }
-
-      if (!videoRef) {
-        return;
-      }
-
-      if (active) {
-        // play the video when active
-        videoRef.current?.play();
-      } else {
-        // pause the video when not active
-        videoRef.current?.pause();
       }
     }, [active]);
 
@@ -97,10 +47,6 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = React
       }
     }, [showMore]);
 
-    const handleImageLoad = () => {
-      setImageLoaded(true);
-    };
-
     return (
       <TimelineItemContentWrapper
         className={active ? "active" : ""}
@@ -111,71 +57,22 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = React
         onClick={() => onClick && id && onClick(id)}
       >
         {/* main title */}
-        {!media && <Title title={title} theme={theme} />}
+        {!media && <MemoTitle title={title} theme={theme} />}
 
         {/* main timeline text */}
-        {!media && <ContentText content={content} />}
+        {!media && <MemoContentText content={content} />}
 
-        {/* media - image*/}
-        {media && media.type === "IMAGE" && (
-          <MediaWrapper
-            theme={theme}
-            active={active}
+        {media && (
+          <CardMedia
+            media={media}
+            content={content}
+            title={title}
             mode={mode}
-            dir={branchDir}
-          >
-            <CardImage
-              src={media.source.url}
-              mode={mode}
-              onLoad={handleImageLoad}
-              visible={imageLoaded}
-              active={active}
-              dir={branchDir}
-            />
-            {imageLoaded && (
-              <MediaDetailsWrapper mode={mode}>
-                <Title title={title} theme={theme} dir={branchDir} active={active} />
-                <ContentText content={content} dir={branchDir} />
-              </MediaDetailsWrapper>
-            )}
-          </MediaWrapper>
-        )}
-
-        {media && media.type === "VIDEO" && (
-          <MediaWrapper theme={theme} active={active} mode={mode}>
-            <CardVideo
-              controls
-              autoPlay={active}
-              ref={videoRef}
-              onPlay={() =>
-                onMediaStateChange({
-                  id,
-                  paused: false,
-                  playing: true,
-                })
-              }
-              onPause={() =>
-                onMediaStateChange({
-                  id,
-                  paused: true,
-                  playing: false,
-                })
-              }
-              onEnded={() =>
-                onMediaStateChange({
-                  id,
-                  paused: false,
-                  playing: false,
-                })
-              }
-            >
-              <source src={media.source.url}></source>
-            </CardVideo>
-            <MediaDetailsWrapper mode={mode}>
-              <Title title={title} theme={theme} dir={branchDir} active={active} />
-              <ContentText content={content} dir={branchDir} />
-            </MediaDetailsWrapper>
-          </MediaWrapper>
+            onMediaStateChange={onMediaStateChange}
+            id={id}
+            active={active}
+            theme={theme}
+          />
         )}
 
         {/* detailed text */}

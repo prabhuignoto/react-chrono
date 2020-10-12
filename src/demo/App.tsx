@@ -21,6 +21,7 @@ import {
 } from "./App.styles";
 import AppHeader from "./AppHeader";
 import data from "./data";
+import dataMixed from "./data-mixed";
 import Features from "./Features";
 import useMediaQuery from "./mediaQueryEffect";
 
@@ -112,7 +113,7 @@ const NewDemo: React.FunctionComponent = () => {
               </DescriptionContent>
             </Description>
             <ComponentContainer type={state.mediaType}>
-              <Chrono items={items} mode="HORIZONTAL" cardHeight={cardHeight} />
+              <Chrono items={dataMixed} mode="HORIZONTAL" cardHeight={300} />
             </ComponentContainer>
           </Horizontal>
         )} */}
@@ -123,14 +124,14 @@ const NewDemo: React.FunctionComponent = () => {
         )} */}
 
         {/* Tree Mode */}
-        {/* {items.length > 0 && (
+        {items.length > 0 && (
           <VerticalTree type={state.mediaType} items={items} />
-        )} */}
+        )}
 
         {/* mixed mode */}
-        {!isMobile && items.length > 0 && (
+        {/* {!isMobile && items.length > 0 && (
           <VerticalTreeMixed type={state.mediaType} cardHeight={cardHeight} />
-        )}
+        )} */}
 
         {/* Horizontal Slideshow */}
         {/* {!isMobile && (

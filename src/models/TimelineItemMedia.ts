@@ -10,3 +10,9 @@ export interface Media {
   type: MediaType;
   source: MediaSource;
 }
+
+export interface MediaState {
+  id?: string;
+  paused?: boolean;
+  playing?: boolean;
+}
