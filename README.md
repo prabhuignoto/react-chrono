@@ -7,7 +7,7 @@
 
 ![logo](./readme-assets/social-logo-small.png)
 
-![slideshow](./readme-assets/demo.gif)
+![slideshow](./readme-assets/demo2.gif)
 
 **Try it on CodeSandbox!**
 
