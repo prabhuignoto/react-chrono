@@ -21,9 +21,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
   const timer = useRef<number>();
-  const [slideShowActive, setSlideshowActive] = useState(slideShow);
+  const [slideShowActive, setSlideshowActive] = useState(false);
 
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
+  const activeMediaState = useRef<{ playing: boolean; paused: boolean }>();
 
   const initItems = () =>
     items
@@ -62,6 +63,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
         (item) => !item.visible
       );
 
+      if (activeMediaState.current && activeMediaState.current.playing) {
+        return;
+      }
+
       if (invisibleElements && invisibleElements.length) {
         const itemToShow = invisibleElements[0];
 
@@ -99,12 +104,12 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
 
   useEffect(() => {
     if (slideShow) {
-      setupSlideShow();
+      // setupSlideShow();
     } else {
-      const items = initItems();
-      timeLineItemsRef.current = items;
-      setItems(items);
     }
+    const items = initItems();
+    timeLineItemsRef.current = items;
+    setItems(items);
     // eslint-disable-next-line
   }, []);
 
@@ -149,6 +154,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     handleTimelineUpdate(0);
   };
 
+  const handleActiveMedia = (data: any) => {
+    activeMediaState.current = data;
+  };
+
   const handleLast = () => {
     if (timeLineItems.length) {
       const idx = timeLineItems.length - 1;
@@ -172,10 +181,12 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       onTimelineUpdated={useCallback(handleTimelineUpdate, [])}
       slideItemDuration={slideItemDuration}
       slideShowRunning={slideShowActive}
+      slideShowEnabled={slideShow}
       theme={theme}
       titlePosition={titlePosition}
       slideShow={slideShow}
       cardHeight={cardHeight}
+      onMediaStateChange={handleActiveMedia}
     />
   );
 };

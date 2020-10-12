@@ -33,17 +33,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   onRestartSlideshow,
   slideShow,
   cardHeight,
+  onMediaStateChange,
+  slideShowEnabled
 }) => {
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const timelineMainRef = useRef<HTMLDivElement>(null);
   const id = useRef(nanoid());
 
   const handleNext = () => onNext();
-
   const handlePrevious = () => onPrevious();
-
   const handleFirst = () => onFirst();
-
   const handleLast = () => onLast();
 
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -104,22 +103,29 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
 
   const observer = new IntersectionObserver(
     (entries) => {
+      const hide = (ele: HTMLImageElement | HTMLVideoElement) =>
+        (ele.style.display = "none");
+      const show = (ele: HTMLImageElement | HTMLVideoElement) =>
+        (ele.style.display = "block");
+
       entries.forEach((entry) => {
         const element = entry.target as HTMLDivElement;
         if (entry.isIntersecting) {
-          // element.style.visibility = "visible";
-          element.querySelectorAll("img").forEach(ele => ele.style.display = "block");
+          element.querySelectorAll("img").forEach(show);
+          element.querySelectorAll("video").forEach(show);
           element
             .querySelectorAll(":scope > div")
-            .forEach((ele) => ((ele as HTMLDivElement).style.visibility = "visible"));
+            .forEach(
+              (ele) => ((ele as HTMLDivElement).style.visibility = "visible")
+            );
         } else {
-          // element.style.visibility = "hidden";
-          element
-            .querySelectorAll("img")
-            .forEach((ele) => (ele.style.display = "none"));
+          element.querySelectorAll("img").forEach(hide);
+          element.querySelectorAll("video").forEach(hide);
           element
             .querySelectorAll(":scope > div")
-            .forEach((ele) => ((ele as HTMLDivElement).style.visibility = "hidden"));
+            .forEach(
+              (ele) => ((ele as HTMLDivElement).style.visibility = "hidden")
+            );
         }
       });
     },
@@ -162,6 +168,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             slideShowRunning={slideShowRunning}
             mode={mode}
             cardHeight={cardHeight}
+            onMediaStateChange={onMediaStateChange}
           />
         ) : null}
 
@@ -179,6 +186,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
               theme={theme}
               slideShowRunning={slideShowRunning}
               cardHeight={cardHeight}
+              onMediaStateChange={onMediaStateChange}
             />
           </TimelineMain>
         ) : null}
@@ -195,6 +203,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             slideShowRunning={slideShowRunning}
             mode={mode}
             cardHeight={cardHeight}
+            onMediaStateChange={onMediaStateChange}
           />
         ) : null}
       </TimelineMainWrapper>
@@ -212,7 +221,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
           theme={theme}
           onReplay={onRestartSlideshow}
           slideShowRunning={slideShowRunning}
-          slideShowEnabled={slideShow}
+          slideShowEnabled={slideShowEnabled}
         />
       </TimelineControlContainer>
       <TimelineContentRender id={id.current} />

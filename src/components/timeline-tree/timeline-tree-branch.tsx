@@ -27,6 +27,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
   theme,
   title,
   visible,
+  onMediaStateChange
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -76,6 +77,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
             }, 200)
           }
           branchDir={className}
+          onMediaStateChange={onMediaStateChange}
         />
       </TimelineItemContentWrapper>
 

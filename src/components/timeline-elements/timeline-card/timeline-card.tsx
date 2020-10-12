@@ -26,7 +26,8 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   wrapperId,
   slideShowRunning,
   media,
-  cardHeight
+  cardHeight,
+  onMediaStateChange
 }) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -97,6 +98,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
           media={media}
           mode={mode}
           cardHeight={cardHeight}
+          onMediaStateChange={onMediaStateChange}
         />
       </TimelineContentContainer>
     );

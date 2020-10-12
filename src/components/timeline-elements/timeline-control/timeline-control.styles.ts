@@ -42,10 +42,11 @@ export const TimelineNavButton = styled.button<{ theme?: Theme, mode?: TimelineM
   }
 `;
 
-export const TimelineControlContainer = styled.div`
+export const TimelineControlContainer = styled.div<{ slideShowActive?: boolean}>`
   display: flex;
   align-items: center;
   justify-content: center;
+  visibility: ${p => p.slideShowActive ? "hidden" : "visible"};
 `;
 
 export const ControlButton = styled.div<{ theme?: Theme }>`

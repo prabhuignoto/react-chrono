@@ -7,9 +7,10 @@ const items: TimelineItemModel[] = [
     media: {
       name: "dunkirk beach",
       source: {
-        url: "https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"
+        // url: "https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"
+        url: "/dunkirk.mp4"
       },
-      type: "IMAGE"
+      type: "VIDEO"
     },
     contentText:
       "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.",
@@ -36,9 +37,10 @@ const items: TimelineItemModel[] = [
     contentText: `The destroyer USS Shaw explodes in dry dock after being hit by Japanese aircraft`,
     media: {
       source: {
-        url: "https://pearlharborwarbirds.com/wp-content/uploads/2016/09/Awesome-Color-Photos-of-the-Attack-on-Pearl-Harbor-1.jpg",
+        // url: "https://pearlharborwarbirds.com/wp-content/uploads/2016/09/Awesome-Color-Photos-of-the-Attack-on-Pearl-Harbor-1.jpg",
+        url: "/pearl-harbor.mp4"
       },
-      type: "IMAGE",
+      type: "VIDEO",
       name: "Pearl Harbor"
     },
     contentDetailedText: `After Japan’s occupation of French Indo-China in July 1941, US President Franklin D Roosevelt, followed by Britain and the Netherlands, ordered the freezing of Japanese assets.
@@ -97,9 +99,11 @@ const items: TimelineItemModel[] = [
     contentTitle: "D-Day, Operation Overlord",
     contentText: `British commandos of the First Special Service Brigade land on Sword Beach`,
     media: {
-      type: "IMAGE",
+      type: "VIDEO",
       source: {
-        url: "https://www.britishpoles.uk/wp-content/uploads/2019/06/D-Day-landings-1.jpg"
+        // url: "https://www.britishpoles.uk/wp-content/uploads/2019/06/D-Day-landings-1.jpg"
+        url: "/d-day.mp4",
+        type: "mp4"
       }
     },
     contentDetailedText: `Operation Overlord, the invasion and liberation of north-west Europe, began on D-Day, 6 June 1944.

@@ -54,6 +54,9 @@ export interface TimelineModel extends TimelineProps {
    * @memberof TimelineModel
    */
   slideShowRunning?: boolean;
+
+  onMediaStateChange: (state: { id?: string; playing?: boolean; paused?: boolean }) => void;
+  slideShowEnabled?: boolean;
 }
 
 /**

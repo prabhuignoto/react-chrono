@@ -20,6 +20,7 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
   text-align: left;
   width: 100%;
   min-height: ${p => !p.noMedia ? p.minHeight : "150"}px;
+  position: relative;
 
   ${p => p.noMedia ? `
     background: #fff;
@@ -107,10 +108,7 @@ export const ShowMore = styled.span<{ show?: boolean }>`
 `;
 
 export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: TimelineMode, dir?: string }>`
-  /* height: ${p => p.mode === "HORIZONTAL" ? "350px" : "300px"}; */
   height: 100%;
-  /* min-height: 250px;
-  max-height: 450px; */
   flex-direction: row;
   align-items: center;
   width: 100%;
@@ -139,7 +137,7 @@ export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: 
   }}
 `;
 
-export const Media = styled.img<{ mode?: TimelineMode, visible?: boolean, active?: boolean, dir?: string }>`
+export const CardImage = styled.img<{ mode?: TimelineMode, visible?: boolean, active?: boolean, dir?: string }>`
   max-width: 100%;
   justify-self: center;
   flex: 4;
@@ -148,7 +146,14 @@ export const Media = styled.img<{ mode?: TimelineMode, visible?: boolean, active
   margin-right: auto;
   object-fit: contain;
   height: 70%;
-  /* ${p => p.dir === "left" ? "margin-left: auto;" : "margin-right: auto"}; */
+  margin-left: auto;
+`;
+
+export const CardVideo = styled.video`
+  max-width: 100%;
+  max-height: 100%;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
@@ -170,8 +175,5 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
   flex-direction: column;
   flex: 1;
   border-radius: 6px;
-  /* background: rgba(255,255,255, 0.95); */
-  /* background: rgba(0,0,0,0.7); */
-  /* filter: drop-shadow(0 0 20px rgba(0,0,0,0.5)); */
   padding-bottom: 0.5rem;
 `;

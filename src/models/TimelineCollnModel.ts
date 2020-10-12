@@ -12,6 +12,7 @@ export interface TimelineCollectionModel {
   theme?: Theme;
   wrapperId: string;
   cardHeight?: number;
+  onMediaStateChange: (state: { id?: string; playing?: boolean; paused?: boolean }) => void;
 }
 
 export interface Scroll {

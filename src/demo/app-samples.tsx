@@ -85,7 +85,7 @@ export const VerticalTreeMixed: FunctionComponent<{
       </DescriptionContent>
     </Description>
     <ComponentContainerTree type={type}>
-      <Chrono items={dataMixed} mode="TREE" cardHeight={cardHeight} />
+      <Chrono items={dataMixed} mode="TREE" cardHeight={cardHeight} slideShow />
       <SandBox>
         <a href="https://codesandbox.io/s/react-chrono-tree-image-uh2nz?fontsize=14&hidenavigation=1&theme=dark">
           <img
