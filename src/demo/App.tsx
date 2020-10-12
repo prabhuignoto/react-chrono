@@ -4,13 +4,7 @@ import fontLoader from "webfontloader";
 import Chrono from "../components";
 import { TimelineItemModel } from "../models/TimelineItemModel";
 import Footer from "./app-footer";
-import {
-  HorizontalSlideshow,
-  VerticalBasic,
-  VerticalTree,
-  VerticalTreeMixed,
-  VerticalTreeSlideshow,
-} from "./app-samples";
+import { VerticalBasic, VerticalTree, VerticalTreeMixed } from "./app-samples";
 import "./App.css";
 import {
   ComponentContainer,
@@ -22,7 +16,6 @@ import {
 } from "./App.styles";
 import AppHeader from "./AppHeader";
 import data from "./data";
-import dataMixed from "./data-mixed";
 import Features from "./Features";
 import useMediaQuery from "./mediaQueryEffect";
 
