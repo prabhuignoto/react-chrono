@@ -7,7 +7,10 @@
 
 ![logo](./readme-assets/social-logo-small.png)
 
-![slideshow](./readme-assets/demo2.gif)
+<!-- ![slideshow](./readme-assets/demo2.gif) -->
+<div style="text-align: center">
+  <img src="./readme-assets/demo2.gif"/>
+</div>
 
 **Try it on CodeSandbox!**
 
@@ -18,11 +21,13 @@
 - 🚥 Render timelines in three different modes ([Horizontal](#-getting-started), [Vertical](#vertical-mode), [Tree](#tree-view)).
 - 🌲&nbsp; Use the [Tree](#tree-view) mode to layout the timeline cards vertically in a tree like fashion.
 - 📺&nbsp; Auto play the timeline with the [slideshow](#slideshow-mode) mode.
-- 🖼️&nbsp; Display images in the timeline with ease.
-- ⌨&nbsp; Navigate the timeline via Keyboard.
-- 🔧&nbsp; Optimized to render images efficiently on (tree & vertical mode). Images not visible are automatically hidden.
+- 🖼️&nbsp; [Display Images & Videos](#media) in the timeline with ease.
+- ⌨&nbsp; Navigate the timeline via [Keyboard](#-keyboard-navigation--disabling-it).
+- ⚡&nbsp; Data driven API.
+- 🔧&nbsp; Optimized to render images & videos efficiently on (tree & vertical mode).
 - 🎨&nbsp; [Customize](#theme) colors with ease.
 - 💪&nbsp; Built with [Typescript](https://www.typescriptlang.org/).
+- 🎨&nbsp; Styled with [emotion](https://emotion.sh).
 
 <h2>Table of Contents</h2>
 
@@ -35,6 +40,9 @@
   - [Mode](#mode)
   - [Timeline item Model](#timeline-item-model)
   - [⌨ Keyboard Navigation & Disabling it](#-keyboard-navigation--disabling-it)
+  - [Media](#media)
+    - [Image](#image)
+    - [Video](#video)
   - [Slideshow Mode](#slideshow-mode)
   - [Item Width](#item-width)
   - [🎨 Theme](#-theme)
@@ -135,7 +143,7 @@ Play the timeline automatically with the `slideShow` mode.
 | items             | collection of timeline items. This should be a collection of [Timeline Item Model](#timeline-item-model)                                                         | []           |
 | disableNavOnKey   | prop to disable keyboard navigation.                                                  | false        |
 | slideShow         | starts the timeline in slideshow mode.                                                | false        |
-| slideItemDuration | The amount of delay in `ms` for the timeline points in `slideshow` mode.              | 2500         |
+| slideItemDuration | The amount of delay in `ms` for the timeline points in `slideshow` mode.              | 5000         |
 | itemWidth         | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
 | cardHeight        | sets the minimum height of the timeline card.                                         | 250          |
 | theme             | prop to customize the colors.                                                         |              |
@@ -163,7 +171,7 @@ Play the timeline automatically with the `slideShow` mode.
 | title        | title of the timeline item                   | String |
 | contentTitle | title that is displayed on the timeline card | String |
 | contentText  | text displayed in the timeline card          | String |
-| media        | media object to set image.                   | Object |
+| media        | media object to set image or video.          | Object |
 
 ```sh
 {
@@ -189,10 +197,49 @@ The timeline can be navigated via keyboard.
 - For `VERTICAL` or `TREE` mode, the timeline can be navigated via the <kbd>UP</kbd> <kbd>DOWN</kbd> arrow keys.
 - To easily jump to the first item or the last item in the timeline, use <kbd>HOME</kbd> or <kbd>END</kbd> key.
 
-To disable eyboard navigation set `disableNavOnKey` to true.
+To disable keyboard navigation set `disableNavOnKey` to true.
 
 ```sh
 <chrono items={items} disableNavOnKey />
+```
+
+### Media
+
+Both images and videos can be embedded in the timeline. Just add the `media` attribute to the [Timeline Item model](#timeline-item-model) and the component will take care of the rest.
+
+#### Image
+
+```sh
+{
+  title: "May 1940",
+  contentTitle: "Dunkirk",
+  media: {
+    name: "dunkirk beach",
+    source: {
+      url: "http://someurl/image.jpg"
+    },
+    type: "IMAGE"
+  }
+}
+```
+
+#### Video
+
+Videos start playing automatically when active will be paused when not active. Like images, videos are also automatically hidden when not in the visible viewport of the container.
+
+```sh
+{
+  title: "7 December 1941",
+  contentTitle: "Pearl Harbor",
+  media: {
+    source: {
+      url: "/pearl-harbor.mp4",
+      type: "mp4"
+    },
+    type: "VIDEO",
+    name: "Pearl Harbor"
+  }
+}
 ```
 
 ### Slideshow Mode

@@ -6,7 +6,9 @@ export default ({ type }: { type: string }) => {
 
   return (
     <Header>
-      <LogoImage src={AppLogo} />
+      <a href="https://react-chrono.vercel.app/">
+        <LogoImage src={AppLogo} />
+      </a>
       <a
         href="http://github.com/prabhuignoto/react-chrono"
         target="_new"

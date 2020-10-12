@@ -1,53 +1,50 @@
-import { TimelineItemViewModel } from "./TimelineItemModel";
 import { Scroll } from "./TimelineCollnModel";
 import { Media } from "./TimelineItemMedia";
+import { TimelineItemViewModel } from "./TimelineItemModel";
+import { TimelineMode } from "./TimelineModel";
 
-export interface TreeLeafModel {
-  active?: boolean;
-  alternateCards?: boolean;
-  className: string;
-  id?: string;
-  onActive: (timelinePointOffset: number) => void;
-  onClick: (id: string) => void;
+interface CommonPropsModel {
+  onClick: (id?: string) => void;
+  slideItemDuration?: number;
+  slideShowRunning?: boolean;
   theme?: Theme;
+  cardHeight?: number;
+  mode?: TimelineMode;
+  alternateCards?: boolean;
 }
 
-export interface TreeBranchModel {
+interface CommonBranchAndLeafModel extends CommonPropsModel {
   active?: boolean;
-  alternateCards?: boolean;
   className: string;
+  id?: string;
+}
+
+export interface TreeLeafModel extends CommonBranchAndLeafModel {
+  onActive: (timelinePointOffset: number) => void;
+}
+
+export interface TreeBranchModel extends CommonBranchAndLeafModel {
   contentDetailedText?: string;
   contentText: string;
   contentTitle?: string;
-  id?: string;
   index: number;
   media?: Media;
-  mode?: "VERTICAL" | "HORIZONTAL" | "TREE";
-  onClick: (id: string) => void;
   onShowMore: () => void;
-  slideShowRunning?: boolean;
-  theme?: Theme;
   title: string;
   visible?: boolean;
   onActive: (
     timelinePointOffset: number,
     timelineContentHeight: number,
     timelineContentOffset: number
-  ) => void;
-  cardHeight?: number;
+    ) => void;
+  onMediaStateChange: (state: { id?: string; playing?: boolean; paused?: boolean }) => void;
 }
 
-export interface TimelineTreeModel {
+export interface TimelineTreeModel extends CommonPropsModel {
   activeTimelineItem: number;
-  alternateCards?: boolean;
   autoScroll: (s: Partial<Scroll>) => void;
   items: TimelineItemViewModel[];
-  onClick: (id?: string) => void;
-  slideShowRunning?: boolean;
-  theme?: Theme;
-  mode?: "VERTICAL" | "HORIZONTAL" | "TREE";
-  sRef?: React.Ref<any>;
-  cardHeight?: number;
+  onMediaStateChange: (state: { id?: string; playing?: boolean; paused?: boolean }) => void;
 }
 
 export interface Theme {
@@ -55,3 +52,4 @@ export interface Theme {
   secondary: string;
   textColor?: string;
 }
+

@@ -12,16 +12,17 @@ const Features: React.FunctionComponent = () => (
     <FeatureSet>
       <Feature>
         <span className="icon" role="img" aria-label="modes">
-          🚥
+          💡
         </span>
-        &nbsp;Render timelines in three different modes (Horizontal, Vertical,
-        Tree).
+        &nbsp;&nbsp;Render timelines in three different modes (
+        <a href="#horizontal">Horizontal</a>,&nbsp;
+        <a href="#vertical"> Vertical</a>,&nbsp; <a href="#tree"> Tree</a>).
       </Feature>
       <Feature>
         <span className="icon" role="img" aria-label="tree">
           🌲
         </span>
-        &nbsp;Use the <a href="#tree-mode">Tree mode</a> to layout the timeline
+        &nbsp;Use the <a href="#tree-mode">Tree mode</a> to layout timeline
         cards vertically in a tree like fashion.
       </Feature>
       <Feature>
@@ -34,7 +35,7 @@ const Features: React.FunctionComponent = () => (
         <span className="icon" role="img" aria-label="slideshow">
           🖼️
         </span>{" "}
-        Display images in the timeline with ease.
+        Display images & videos in the timeline with ease.
       </Feature>
       <Feature>
         <span className="icon" role="img" aria-label="keyboard support">
@@ -43,17 +44,23 @@ const Features: React.FunctionComponent = () => (
         Navigate the timeline via Keyboard.
       </Feature>
       <Feature>
+        <span className="icon" role="img" aria-label="keyboard support">
+          ⚡
+        </span>{" "}
+        Data driven API
+      </Feature>
+      <Feature>
         <span className="icon" role="img" aria-label="quick jump">
           🦘
         </span>{" "}
-        Quick jump to the start or end of the timeline with HOME,END key.
+        Quick jump to the start or end of the timeline with HOME,END keys.
       </Feature>
       <Feature>
         <span className="icon" role="img" aria-label="keyboard support">
           🔧
         </span>
         &nbsp;Optimized to render images efficiently on (tree & vertical mode).
-        Images not visible are automatically hidden.
+        images & videos not visible are automatically hidden.
       </Feature>
       {/* <Feature>
         <span className="icon" role="img" aria-label="typescript">

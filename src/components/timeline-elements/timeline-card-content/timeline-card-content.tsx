@@ -1,174 +1,121 @@
-import React, { useEffect, useRef, useState, WheelEvent } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { TimelineContentModel } from "../../../models/TimelineContentModel";
-import { MediaURL } from "../../../models/TimelineItemMedia";
-import { Theme } from "../../../models/TimelineTreeModel";
+import { MemoContentText, MemoTitle } from "../memoized";
+import CardMedia from "../timeline-card-media/timeline-card-media";
 import {
-  Media,
-  MediaDetailsWrapper,
-  MediaWrapper,
   ShowMore,
+  SlideShowProgressBar,
   TimelineContentDetails,
   TimelineContentDetailsWrapper,
-  TimelineContentText,
-  TimelineContentTitle,
-  TimelineItemContentWrapper,
+  TimelineItemContentWrapper
 } from "./timeline-card-content.styles";
 
-const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
-  active,
-  cardHeight,
-  content,
-  detailedText,
-  id,
-  media,
-  mode,
-  onClick,
-  onShowMore,
-  slideShowActive,
-  theme,
-  title,
-  branchDir,
-}: TimelineContentModel) => {
-  const [showMore, setShowMore] = useState(false);
-  const detailsRef = useRef<HTMLDivElement>(null);
-  const [canShowMore, setCanShowMore] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
+const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = React.memo(
+  ({
+    active,
+    cardHeight,
+    content,
+    detailedText,
+    id,
+    media,
+    mode,
+    onClick,
+    onShowMore,
+    onMediaStateChange,
+    slideShowActive,
+    slideItemDuration,
+    theme,
+    title,
+    branchDir,
+  }: TimelineContentModel) => {
+    const [showMore, setShowMore] = useState(false);
+    const detailsRef = useRef<HTMLDivElement>(null);
+    const canShowMore = useRef(!!detailedText);
 
-  useEffect(() => {
-    const detailsEle = detailsRef.current;
+    const showProgressbar = useMemo(() => {
+      return slideShowActive && active && media?.type !== "VIDEO";
+    }, [slideShowActive, active, media]);
 
-    if (!detailsEle) {
-      return;
-    }
-    window.setTimeout(() => {
-      // setCanShowMore(detailsEle.scrollHeight > 50);
-      setCanShowMore(!!detailedText);
-    }, 100);
-  }, []);
+    // disabling auto collapse on inactive
+    useEffect(() => {
+      // auto expand the details content when active and slideshow is running
+      if (active && slideShowActive) {
+        setShowMore(true);
+        onShowMore();
+      }
+    }, [active]);
 
-  // disabling auto collapse on inactive
-  // useEffect(() => {
-  // if (!active && ShowMore) {
-  //   setShowMore(false);
-  // }
-  // }, [active]);
+    useEffect(() => {
+      const detailsEle = detailsRef.current;
 
-  useEffect(() => {
-    const detailsEle = detailsRef.current;
+      if (detailsEle) {
+        detailsEle.scrollTop = 0;
+      }
+    }, [showMore]);
 
-    if (detailsEle) {
-      detailsEle.scrollTop = 0;
-    }
-  }, [showMore]);
-
-  const handleMouseWheel = (event: WheelEvent) => {
-    if (showMore) {
-      event.stopPropagation();
-    }
-  };
-
-  const Title = React.memo<{
-    title?: string;
-    theme?: Theme;
-    color?: string;
-    dir?: typeof branchDir;
-  }>(({ title, theme, color, dir }) =>
-    title && theme ? (
-      <TimelineContentTitle
+    return (
+      <TimelineItemContentWrapper
         className={active ? "active" : ""}
         theme={theme}
-        style={{ color }}
-        dir={dir}
+        noMedia={!media}
+        minHeight={cardHeight}
+        mode={mode}
+        onClick={() => onClick && id && onClick(id)}
       >
-        {title}
-      </TimelineContentTitle>
-    ) : null
-  );
+        {/* main title */}
+        {!media && <MemoTitle title={title} theme={theme} />}
 
-  const ContentText = React.memo<{
-    content: string;
-    color?: string;
-    dir?: typeof branchDir;
-  }>(({ content, color, dir }) =>
-    content ? (
-      <TimelineContentText style={{ color }} dir={dir}>
-        {content}
-      </TimelineContentText>
-    ) : null
-  );
+        {/* main timeline text */}
+        {!media && <MemoContentText content={content} />}
 
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-  };
-
-  return (
-    <TimelineItemContentWrapper
-      className={active ? "active" : ""}
-      theme={theme}
-      noMedia={!media}
-      minHeight={cardHeight}
-      mode={mode}
-      onClick={() => onClick && id && onClick(id)}
-    >
-      {/* main title */}
-      {!media && <Title title={title} theme={theme} />}
-
-      {/* main timeline text */}
-      {!media && <ContentText content={content} />}
-
-      {/* media */}
-      {media && media.type === "IMAGE" && (
-        <MediaWrapper theme={theme} active={active} mode={mode} dir={branchDir}>
-          <Media
-            src={(media.source as MediaURL).url}
+        {media && (
+          <CardMedia
+            media={media}
+            content={content}
+            title={title}
             mode={mode}
-            onLoad={handleImageLoad}
-            visible={imageLoaded}
+            onMediaStateChange={onMediaStateChange}
+            id={id}
             active={active}
-            dir={branchDir}
+            theme={theme}
           />
-          {imageLoaded && (
-            <MediaDetailsWrapper mode={mode}>
-              <Title title={title} theme={theme} dir={branchDir} />
-              <ContentText content={content} dir={branchDir} />
-            </MediaDetailsWrapper>
-          )}
-        </MediaWrapper>
-      )}
-
-      {/* detailed text */}
-      <TimelineContentDetailsWrapper
-        ref={detailsRef}
-        className={!showMore ? "show-less" : ""}
-        theme={theme}
-      >
-        {detailedText && !media && (
-          <TimelineContentDetails
-            onWheel={handleMouseWheel}
-            className={showMore ? "active" : ""}
-          >
-            {detailedText}
-          </TimelineContentDetails>
         )}
-      </TimelineContentDetailsWrapper>
 
-      {!media && (
-        <ShowMore
-          role="button"
-          onClick={() => {
-            if (active) {
-              setShowMore(!showMore);
-              onShowMore();
-            }
-          }}
-          className="show-more"
-          show={canShowMore && !slideShowActive}
+        {/* detailed text */}
+        <TimelineContentDetailsWrapper
+          ref={detailsRef}
+          className={!showMore ? "show-less" : ""}
+          theme={theme}
         >
-          {active ? (showMore ? "show less" : "show more") : "..."}
-        </ShowMore>
-      )}
-    </TimelineItemContentWrapper>
-  );
-};
+          {detailedText && !media && (
+            <TimelineContentDetails className={showMore ? "active" : ""}>
+              {detailedText}
+            </TimelineContentDetails>
+          )}
+        </TimelineContentDetailsWrapper>
+
+        {!media && (
+          <ShowMore
+            role="button"
+            onClick={() => {
+              if (active) {
+                setShowMore(!showMore);
+                onShowMore();
+              }
+            }}
+            className="show-more"
+            show={canShowMore.current}
+          >
+            {active ? (showMore ? "show less" : "show more") : "..."}
+          </ShowMore>
+        )}
+        {showProgressbar && (
+          <SlideShowProgressBar theme={theme} duration={slideItemDuration} />
+        )}
+      </TimelineItemContentWrapper>
+    );
+  },
+  (prev, next) => prev.id !== next.id
+);
 
 export default TimelineItemContent;

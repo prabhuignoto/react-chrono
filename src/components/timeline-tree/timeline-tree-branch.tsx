@@ -9,26 +9,30 @@ import {
   TimelineTreeTitleWrapper,
 } from "./timeline-tree.styles";
 
-const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
-  active,
-  alternateCards,
-  cardHeight,
-  className,
-  contentDetailedText,
-  contentText,
-  contentTitle,
-  id,
-  index,
-  media,
-  mode,
-  onActive,
-  onClick,
-  slideShowRunning,
-  theme,
-  title,
-  visible,
-}) => {
+const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const {
+    active,
+    alternateCards,
+    cardHeight,
+    className,
+    contentDetailedText,
+    contentText,
+    contentTitle,
+    id,
+    index,
+    media,
+    mode,
+    onActive,
+    onClick,
+    onMediaStateChange,
+    slideItemDuration,
+    slideShowRunning,
+    theme,
+    title,
+    visible,
+  } = props;
 
   const handleOnActive = (offset: number) => {
     if (contentRef.current) {
@@ -76,6 +80,8 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = ({
             }, 200)
           }
           branchDir={className}
+          onMediaStateChange={onMediaStateChange}
+          slideItemDuration={slideItemDuration}
         />
       </TimelineItemContentWrapper>
 

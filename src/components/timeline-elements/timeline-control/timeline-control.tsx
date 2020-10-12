@@ -13,7 +13,7 @@ import {
   TimelineNavWrapper,
 } from "./timeline-control.styles";
 
-const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
+const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.memo(({
   onNext,
   onPrevious,
   onFirst,
@@ -24,71 +24,69 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   slideShowRunning,
   onReplay,
   slideShowEnabled,
-  mode
+  mode,
 }) => {
   return (
-    <TimelineControlContainer>
-      {!slideShowRunning && (
-        <TimelineNavWrapper>
-          <TimelineNavItem disable={disableLeft}>
-            <TimelineNavButton
-              mode={mode}
+    <TimelineControlContainer slideShowActive={slideShowRunning}>
+      <TimelineNavWrapper>
+        <TimelineNavItem disable={disableLeft}>
+          <TimelineNavButton
+            mode={mode}
+            theme={theme}
+            onClick={onFirst}
+            title="first"
+            aria-label="first"
+          >
+            <ChevronsLeftIcon />
+          </TimelineNavButton>
+        </TimelineNavItem>
+        <TimelineNavItem disable={disableLeft}>
+          <TimelineNavButton
+            mode={mode}
+            theme={theme}
+            onClick={onPrevious}
+            title="previous"
+            aria-label="previous"
+          >
+            <ChevronLeft />
+          </TimelineNavButton>
+        </TimelineNavItem>
+        <TimelineNavItem disable={disableRight}>
+          <TimelineNavButton
+            mode={mode}
+            theme={theme}
+            onClick={onNext}
+            title="next"
+            aria-label="next"
+          >
+            <ChevronRightIcon />
+          </TimelineNavButton>
+        </TimelineNavItem>
+        <TimelineNavItem disable={disableRight}>
+          <TimelineNavButton
+            mode={mode}
+            theme={theme}
+            onClick={onLast}
+            title="last"
+            aria-label="last"
+          >
+            <ChevronsRightIcon />
+          </TimelineNavButton>
+        </TimelineNavItem>
+        <TimelineNavItem>
+          {slideShowEnabled && (
+            <ReplayWrapper
               theme={theme}
-              onClick={onFirst}
-              title="first"
-              aria-label="first"
+              onClick={onReplay}
+              title="replay slideshow"
             >
-              <ChevronsLeftIcon />
-            </TimelineNavButton>
-          </TimelineNavItem>
-          <TimelineNavItem disable={disableLeft}>
-            <TimelineNavButton
-              mode={mode}
-              theme={theme}
-              onClick={onPrevious}
-              title="previous"
-              aria-label="previous"
-            >
-              <ChevronLeft />
-            </TimelineNavButton>
-          </TimelineNavItem>
-          <TimelineNavItem disable={disableRight}>
-            <TimelineNavButton
-              mode={mode}
-              theme={theme}
-              onClick={onNext}
-              title="next"
-              aria-label="next"
-            >
-              <ChevronRightIcon />
-            </TimelineNavButton>
-          </TimelineNavItem>
-          <TimelineNavItem disable={disableRight}>
-            <TimelineNavButton
-              mode={mode}
-              theme={theme}
-              onClick={onLast}
-              title="last"
-              aria-label="last"
-            >
-              <ChevronsRightIcon />
-            </TimelineNavButton>
-          </TimelineNavItem>
-          <TimelineNavItem>
-            {slideShowEnabled && (
-              <ReplayWrapper
-                theme={theme}
-                onClick={onReplay}
-                title="replay slideshow"
-              >
-                <ReplayIcon />
-              </ReplayWrapper>
-            )}
-          </TimelineNavItem>
-        </TimelineNavWrapper>
-      )}
+              <ReplayIcon />
+            </ReplayWrapper>
+          )}
+        </TimelineNavItem>
+      </TimelineNavWrapper>
     </TimelineControlContainer>
   );
-};
+});
 
 export default TimelineControl;

@@ -4,12 +4,7 @@ import fontLoader from "webfontloader";
 import Chrono from "../components";
 import { TimelineItemModel } from "../models/TimelineItemModel";
 import Footer from "./app-footer";
-import {
-  VerticalBasic,
-  VerticalTree,
-  VerticalTreeMixed,
-  VerticalTreeSlideshow,
-} from "./app-samples";
+import { VerticalBasic, VerticalTree, VerticalTreeMixed } from "./app-samples";
 import "./App.css";
 import {
   ComponentContainer,
@@ -101,7 +96,7 @@ const NewDemo: React.FunctionComponent = () => {
 
         {/* Horizontal with Media */}
         {!isMobile && items.length > 0 && (
-          <Horizontal>
+          <Horizontal id="horizontal">
             <Description>
               <span>
                 <DescriptionHeader># Horizontal</DescriptionHeader>
@@ -112,18 +107,18 @@ const NewDemo: React.FunctionComponent = () => {
               </DescriptionContent>
             </Description>
             <ComponentContainer type={state.mediaType}>
-              <Chrono items={items} mode="HORIZONTAL" cardHeight={cardHeight} />
+              <Chrono items={items} mode="HORIZONTAL" cardHeight={300} />
             </ComponentContainer>
           </Horizontal>
         )}
 
         {/* Vertical with no Media */}
-        {!isMobile && items.length > 0 && (
+        {items.length > 0 && (
           <VerticalBasic type={state.mediaType} items={items} />
         )}
 
         {/* Tree Mode */}
-        {items.length > 0 && (
+        {!isMobile && items.length > 0 && (
           <VerticalTree type={state.mediaType} items={items} />
         )}
 
@@ -138,12 +133,12 @@ const NewDemo: React.FunctionComponent = () => {
         )} */}
 
         {/* Tree Slideshow */}
-        {!isMobile && items.length > 0 && (
+        {/* {!isMobile && items.length > 0 && (
           <VerticalTreeSlideshow
             type={state.mediaType}
             cardHeight={cardHeight}
           />
-        )}
+        )} */}
 
         {/* footer */}
         <Footer />

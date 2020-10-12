@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { TimelineMode } from "../../../models/TimelineModel";
 import { Theme } from "../../../models/TimelineTreeModel";
+import { keyframes } from "@emotion/core";
 
 export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: boolean, minHeight?: number, mode?: TimelineMode }>`
   align-items: flex-start;
@@ -20,10 +21,12 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
   text-align: left;
   width: 100%;
   min-height: ${p => !p.noMedia ? p.minHeight : "150"}px;
+  position: relative;
 
   ${p => p.noMedia ? `
     background: #fff;
     filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));`: null};
+
 
   &.active {
     color: ${(p) => p.theme.primary};
@@ -106,72 +109,24 @@ export const ShowMore = styled.span<{ show?: boolean }>`
   height: ${(p) => !p.show ? "0" : ""};
 `;
 
-export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: TimelineMode, dir?: string }>`
-  /* height: ${p => p.mode === "HORIZONTAL" ? "350px" : "300px"}; */
-  height: 100%;
-  /* min-height: 250px;
-  max-height: 450px; */
-  flex-direction: row;
-  align-items: center;
+const DecreaseBarAnimation = keyframes`
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+`;
+
+export const SlideShowProgressBar = styled.span<{ theme?: Theme, duration?: number}>`
+  position: absolute;
   width: 100%;
-  align-self: center;
-  padding: 0.5rem;
-  position: relative;
-  background: ${p => p.active ? `rgba(${p.theme.secondary}, 0.35)` : ""};
-  border-radius: 4px;
-
-  ${p => {
-    if (p.mode === "HORIZONTAL") {
-      return `
-        justify-content: flex-start;
-      `;
-    } else {
-      if (p.dir === "left") {
-        return `
-        justify-content: flex-start;
-      `;
-      } else {
-        return `
-        justify-content: flex-end;
-      `;
-      }
-    }
-  }}
-`;
-
-export const Media = styled.img<{ mode?: TimelineMode, visible?: boolean, active?: boolean, dir?: string }>`
-  max-width: 100%;
-  justify-self: center;
-  flex: 4;
-  visibility: ${p => p.visible ? "visible" : "hidden"};
-  border-radius: 4px;
-  margin-right: auto;
-  object-fit: contain;
-  height: 70%;
-  /* ${p => p.dir === "left" ? "margin-left: auto;" : "margin-right: auto"}; */
-`;
-
-export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
-  /* position: absolute; */
-  bottom: -1rem;
+  height: 3px;
+  background: ${p => p.theme.primary};
+  bottom: -0.5rem;
   left: 0;
-  right: 0;
-  /* margin-left: auto; */
-  margin-right: auto;
-  width: ${p => {
-    switch (p.mode) {
-      case "HORIZONTAL": return "100%";
-      case "VERTICAL": return "100%";
-      case "TREE": return "100%";
-    }
-  }};
-  min-height: 100px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  border-radius: 6px;
-  /* background: rgba(255,255,255, 0.95); */
-  /* background: rgba(0,0,0,0.7); */
-  /* filter: drop-shadow(0 0 20px rgba(0,0,0,0.5)); */
-  padding-bottom: 0.5rem;
+  animation: ${DecreaseBarAnimation} ${p => p.duration}ms ease-in;
+  border-radius: 30px;
 `;
+
+

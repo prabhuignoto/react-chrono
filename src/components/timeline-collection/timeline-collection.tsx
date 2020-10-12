@@ -15,7 +15,9 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
   wrapperId,
   theme,
   slideShowRunning,
-  cardHeight
+  cardHeight,
+  onMediaStateChange,
+  slideItemDuration
 }) => {
   return (
     <TimelineCollectionWrapper
@@ -37,6 +39,8 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
             theme={theme}
             slideShowRunning={slideShowRunning}
             cardHeight={cardHeight}
+            onMediaStateChange={onMediaStateChange}
+            slideItemDuration={slideItemDuration}
           />
         </TimelineItemWrapper>
       ))}

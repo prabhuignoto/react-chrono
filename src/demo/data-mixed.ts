@@ -8,6 +8,7 @@ const items: TimelineItemModel[] = [
       name: "dunkirk beach",
       source: {
         url: "https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"
+        // url: "/dunkirk.mp4"
       },
       type: "IMAGE"
     },
@@ -25,6 +26,13 @@ const items: TimelineItemModel[] = [
   {
     title: "June 1941",
     contentTitle: "Operation Barbarossa",
+    media: {
+      source: {
+        url: "/operation-barbarasso.mp4",
+        type: "mp4",
+      },
+      type: "VIDEO"
+    },
     contentText: `A column of Red Army prisoners taken during the first days of the German invasion`,
     contentDetailedText: `Since the 1920s, Hitler had seen Russia, with its immense natural resources, as the principal target for conquest and expansion. It would provide, he believed, the necessary ‘Lebensraum’, or living space, for the German people. And by conquering Russia, Hitler would also destroy the “Jewish pestilential creed of Bolshevism”. His non-aggression pact with Stalin in August 1939 he regarded as a mere temporary expedient.
       Barely a month after the fall of France, and while the Battle of Britain was being fought, Hitler started planning for the Blitzkrieg campaign against Russia, which began on 22 June 1941. Despite repeated warnings, Stalin was taken by surprise, and for the first few months the Germans achieved spectacular victories, capturing huge swathes of land and hundreds of thousands of prisoners. But they failed to take Moscow or Leningrad before winter set in.
@@ -36,9 +44,10 @@ const items: TimelineItemModel[] = [
     contentText: `The destroyer USS Shaw explodes in dry dock after being hit by Japanese aircraft`,
     media: {
       source: {
-        url: "https://pearlharborwarbirds.com/wp-content/uploads/2016/09/Awesome-Color-Photos-of-the-Attack-on-Pearl-Harbor-1.jpg",
+        // url: "https://pearlharborwarbirds.com/wp-content/uploads/2016/09/Awesome-Color-Photos-of-the-Attack-on-Pearl-Harbor-1.jpg",
+        url: "/pearl-harbor.mp4"
       },
-      type: "IMAGE",
+      type: "VIDEO",
       name: "Pearl Harbor"
     },
     contentDetailedText: `After Japan’s occupation of French Indo-China in July 1941, US President Franklin D Roosevelt, followed by Britain and the Netherlands, ordered the freezing of Japanese assets.
@@ -97,9 +106,11 @@ const items: TimelineItemModel[] = [
     contentTitle: "D-Day, Operation Overlord",
     contentText: `British commandos of the First Special Service Brigade land on Sword Beach`,
     media: {
-      type: "IMAGE",
+      type: "VIDEO",
       source: {
-        url: "https://www.britishpoles.uk/wp-content/uploads/2019/06/D-Day-landings-1.jpg"
+        // url: "https://www.britishpoles.uk/wp-content/uploads/2019/06/D-Day-landings-1.jpg"
+        url: "/d-day.mp4",
+        type: "mp4"
       }
     },
     contentDetailedText: `Operation Overlord, the invasion and liberation of north-west Europe, began on D-Day, 6 June 1944.

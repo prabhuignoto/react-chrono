@@ -13,20 +13,22 @@ import { TimelineItemViewModel } from "../../../models/TimelineItemModel";
 
 const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   active,
+  autoScroll,
+  cardHeight,
+  contentDetailedText,
   contentText,
   contentTitle,
-  contentDetailedText,
   id,
+  media,
   mode,
   onClick,
-  autoScroll,
+  onMediaStateChange,
   position,
-  title,
-  theme,
-  wrapperId,
+  slideItemDuration,
   slideShowRunning,
-  media,
-  cardHeight
+  theme,
+  title,
+  wrapperId,
 }) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -97,6 +99,8 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
           media={media}
           mode={mode}
           cardHeight={cardHeight}
+          onMediaStateChange={onMediaStateChange}
+          slideItemDuration={slideItemDuration}
         />
       </TimelineContentContainer>
     );

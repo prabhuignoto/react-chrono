@@ -3,9 +3,8 @@ import styled from '@emotion/styled';
 const ModeWrapper = styled.div`
   width: 100%;
   position: relative;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
   /* border: 1px solid #e5e5e5; */
-  margin-top: 3rem;
   border-radius: 10px;
   padding: 1.5rem 0;
   background: #fff;
@@ -23,17 +22,19 @@ export const Wrapper = styled.div<{ show: boolean, type?: string }>`
   margin: 0 auto;
   width: ${p => {
     if (p.type === "tablet") {
-      return "90%";
+      return "100%";
     } else if (p.type === "big-screen") {
       return "1400px"
     } else if (p.type === "desktop") {
       return "95%"
+    } else if (p.type === "mobile") {
+      return "100%";
     } else {
       return "100%";
     }
   }};
   background: #fff;
-  padding:${p => p.type !== "tablet" ? "0 2rem" : ""};
+  padding:${p => p.type !== "tablet" ? "0 1rem" : ""};
   filter: drop-shadow(0 0 60px rgba(0,0,0,0.1))
 `;
 
@@ -76,6 +77,8 @@ export const ComponentContainerTree = styled.div<{ type?: string }>`
         return `height: 850px; width: 90%;`
       case "tablet":
         return `height: 850px; width: 100%;`
+      case "mobile":
+        return `height: 650px; width: 100%;`
       default:
         break;
     }
@@ -85,7 +88,7 @@ export const ComponentContainerTree = styled.div<{ type?: string }>`
 export const Header = styled.header`
   margin: 0 auto;
   display: flex;
-  width: 95%;
+  width: 100%;
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
@@ -104,6 +107,7 @@ export const Footer = styled.footer`
   align-items: center;
   justify-content: center;
   height: 8rem;
+  flex-wrap: wrap;
 `;
 
 export const URL = styled.a`
@@ -122,13 +126,14 @@ export const DescriptionContent = styled.p`
 
 export const DescriptionHeader = styled.h3`
   font-family: 'Open Sans', monospace;
-  font-weight: 500;
+  font-weight: 600;
   width: 95%;
   margin: 0 auto;
   margin-bottom: 1rem;
   border-bottom: 1px solid #ccc;
-  padding-bottom: 1rem;
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
 `;
 
 export const Description = styled.div``;
@@ -172,5 +177,5 @@ export const SandBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 3rem;
+  margin-left: auto;
 `;

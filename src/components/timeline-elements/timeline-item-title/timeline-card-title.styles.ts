@@ -5,12 +5,10 @@ export const TitleWrapper = styled.div<{ theme: Theme }>`
   border-radius: 0.2rem;
   font-family: 'Open Sans', monospace;
   font-size: 0.85rem;
-  font-weight: 600;
-  /* max-width:  180px; */
+  font-weight: 400;
   overflow: hidden;
   padding: 0.25rem 0.5rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-align: right;
 
   &.active {
     background: ${(p) => p.theme.secondary};

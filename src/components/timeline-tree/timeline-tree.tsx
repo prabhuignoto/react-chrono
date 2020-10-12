@@ -12,6 +12,8 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   slideShowRunning,
   mode,
   cardHeight,
+  onMediaStateChange,
+  slideItemDuration
 }) => {
   const handleOnActive = (
     offset: number,
@@ -59,6 +61,8 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
             media={item.media}
             mode={mode}
             cardHeight={cardHeight}
+            slideItemDuration={slideItemDuration}
+            onMediaStateChange={onMediaStateChange}
           />
         );
       })}

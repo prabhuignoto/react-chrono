@@ -1,11 +1,18 @@
 export type MediaType = "VIDEO" | "IMAGE";
 
-export interface MediaURL {
+export interface MediaSource {
   url: string;
+  type?: string;
 }
 
-export type Media = {
+export interface Media {
   name?: string;
   type: MediaType;
-  source: MediaURL | React.FunctionComponent;
+  source: MediaSource;
+}
+
+export interface MediaState {
+  id?: string;
+  paused?: boolean;
+  playing?: boolean;
 }

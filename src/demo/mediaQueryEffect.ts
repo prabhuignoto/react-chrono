@@ -7,10 +7,8 @@ const useMediaType = function () {
     query: '(min-device-width: 1224px)'
   })
   const isBigScreen = useMediaQuery({ query: '(min-device-width: 1824px)' })
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
-  const isTabletOrMobileDevice = useMediaQuery({
-    query: '(max-device-width: 1224px)'
-  })
+  const isTabletOrMobile = useMediaQuery({ query: '(min-device-width: 768px)' })
+  const isMobile = useMediaQuery({ query: '(min-device-width: 480px)'})
   const isPortrait = useMediaQuery({ query: '(orientation: portrait)' })
   const isRetina = useMediaQuery({ query: '(min-resolution: 2dppx)' })
 
@@ -20,8 +18,8 @@ const useMediaType = function () {
     type = "desktop";
   } else if (isTabletOrMobile) {
     type = "tablet";
-  } else if (isTabletOrMobileDevice) {
-    type = "tablet";
+  } else if (isMobile) {
+    type = "mobile";
   } else if (isPortrait) {
     type = "potrait";
   } else if (isRetina) {
