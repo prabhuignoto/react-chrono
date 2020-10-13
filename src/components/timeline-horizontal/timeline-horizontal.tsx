@@ -3,7 +3,7 @@ import { TimelineCollectionModel } from "../../models/TimelineCollnModel";
 import {
   TimelineCollectionWrapper,
   TimelineItemWrapper,
-} from "./timeline-collection.styles";
+} from "./timeline-horizontal.styles";
 import TimelineItem from "../timeline-elements/timeline-card/timeline-card";
 
 const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({

@@ -29,6 +29,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
   return (
     <TimelineControlContainer slideShowActive={slideShowRunning}>
       <TimelineNavWrapper>
+        {/* jump to first */}
         <TimelineNavItem disable={disableLeft}>
           <TimelineNavButton
             mode={mode}
@@ -40,6 +41,8 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
             <ChevronsLeftIcon />
           </TimelineNavButton>
         </TimelineNavItem>
+
+        {/* previous */}
         <TimelineNavItem disable={disableLeft}>
           <TimelineNavButton
             mode={mode}
@@ -51,6 +54,8 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
             <ChevronLeft />
           </TimelineNavButton>
         </TimelineNavItem>
+
+        {/* next */}
         <TimelineNavItem disable={disableRight}>
           <TimelineNavButton
             mode={mode}
@@ -62,6 +67,8 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
             <ChevronRightIcon />
           </TimelineNavButton>
         </TimelineNavItem>
+
+        {/* jump to last */}
         <TimelineNavItem disable={disableRight}>
           <TimelineNavButton
             mode={mode}
@@ -73,12 +80,14 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
             <ChevronsRightIcon />
           </TimelineNavButton>
         </TimelineNavItem>
+
+        {/* slideshow button */}
         <TimelineNavItem>
           {slideShowEnabled && (
             <ReplayWrapper
               theme={theme}
               onClick={onReplay}
-              title="replay slideshow"
+              title="Play Slideshow"
             >
               <ReplayIcon />
             </ReplayWrapper>

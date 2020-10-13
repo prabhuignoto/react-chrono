@@ -4,7 +4,7 @@ import {
   TimelineItemModel,
   TimelineItemViewModel,
 } from "../../../models/TimelineItemModel";
-import Collection from "../timeline-collection";
+import Collection from "../timeline-horizontal";
 
 const onClick = jest.fn();
 const autoScroll = jest.fn();
@@ -46,6 +46,7 @@ const Horizontal = (
     handleItemClick={onClick}
     autoScroll={autoScroll}
     wrapperId={id}
+    onMediaStateChange={() => {}}
   />
 );
 
@@ -57,6 +58,7 @@ const Vertical = (
     handleItemClick={onClick}
     autoScroll={autoScroll}
     wrapperId={id}
+    onMediaStateChange={() => {}}
   />
 );
 
@@ -68,6 +70,7 @@ const Tree = (
     handleItemClick={onClick}
     autoScroll={autoScroll}
     wrapperId={id}
+    onMediaStateChange={() => {}}
   />
 );
 

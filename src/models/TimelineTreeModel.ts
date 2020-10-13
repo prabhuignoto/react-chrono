@@ -4,13 +4,13 @@ import { TimelineItemViewModel } from "./TimelineItemModel";
 import { TimelineMode } from "./TimelineModel";
 
 interface CommonPropsModel {
+  alternateCards?: boolean;
+  cardHeight?: number;
+  mode?: TimelineMode;
   onClick: (id?: string) => void;
   slideItemDuration?: number;
   slideShowRunning?: boolean;
   theme?: Theme;
-  cardHeight?: number;
-  mode?: TimelineMode;
-  alternateCards?: boolean;
 }
 
 interface CommonBranchAndLeafModel extends CommonPropsModel {
@@ -29,7 +29,7 @@ export interface TreeBranchModel extends CommonBranchAndLeafModel {
   contentTitle?: string;
   index: number;
   media?: Media;
-  onShowMore: () => void;
+  onShowMore?: () => void;
   title: string;
   visible?: boolean;
   onActive: (

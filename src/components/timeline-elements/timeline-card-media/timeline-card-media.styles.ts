@@ -72,3 +72,15 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
   border-radius: 6px;
   padding-bottom: 0.5rem;
 `;
+
+export const ErrorMessage = styled.span`
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  color: #a3a3a3;
+  text-align: center;
+`;

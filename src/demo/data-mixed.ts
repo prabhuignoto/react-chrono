@@ -7,7 +7,7 @@ const items: TimelineItemModel[] = [
     media: {
       name: "dunkirk beach",
       source: {
-        url: "https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"
+        url: "https://i2-prod.mirror.co.uk/incomings/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colousr.jpg"
         // url: "/dunkirk.mp4"
       },
       type: "IMAGE"

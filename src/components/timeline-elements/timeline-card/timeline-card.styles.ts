@@ -57,8 +57,8 @@ export const TimelinePoint = styled.div<{theme: Theme}>`
   background: ${p => p.theme.primary};
   border-radius: 50%;
   cursor: pointer;
-  height: 16px;
-  width: 16px;
+  height: 1rem;
+  width: 1rem;
 
   &.active {
     animation: ${scaleUp} 0.1s ease-in;
@@ -69,7 +69,7 @@ export const TimelinePoint = styled.div<{theme: Theme}>`
       border-radius: 50%;
       content: '';
       display: block;
-      height: 12px;
+      height: 0.75rem;
       left: 0;
       margin-left: auto;
       margin-right: auto;
@@ -77,7 +77,7 @@ export const TimelinePoint = styled.div<{theme: Theme}>`
       right: 0;
       top: 50%;
       transform: translateY(-50%);
-      width: 12px;
+      width: 0.75rem;
       z-index: -1;
     }
   }

@@ -4,7 +4,7 @@ import { Scroll } from "../../models/TimelineCollnModel";
 import { TimelineItemViewModel } from "../../models/TimelineItemModel";
 import { TimelineModel } from "../../models/TimelineModel";
 import useNewScrollPosition from "../effects/useNewScrollPosition";
-import TimelineCollection from "../timeline-collection/timeline-collection";
+import TimelineCollection from "../timeline-horizontal/timeline-horizontal";
 import TimelineControl from "../timeline-elements/timeline-control/timeline-control";
 import TimelineTree from "../timeline-tree/timeline-tree";
 import {
@@ -16,36 +16,44 @@ import {
   Wrapper,
 } from "./timeline.style";
 
-const Timeline: React.FunctionComponent<TimelineModel> = ({
-  activeTimelineItem,
-  disableNavOnKey,
-  itemWidth = 200,
-  items,
-  mode = "HORIZONTAL",
-  onNext,
-  onPrevious,
-  onTimelineUpdated,
-  slideShowRunning,
-  onLast,
-  onFirst,
-  theme,
-  titlePosition = "TOP",
-  onRestartSlideshow,
-  slideShow,
-  cardHeight,
-  onMediaStateChange,
-  slideShowEnabled,
-  slideItemDuration
-}) => {
-  const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
-  const timelineMainRef = useRef<HTMLDivElement>(null);
-  const id = useRef(nanoid());
+const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
+  // de-structure the props
+  const {
+    activeTimelineItem,
+    disableNavOnKey,
+    itemWidth = 200,
+    items,
+    mode = "HORIZONTAL",
+    onNext,
+    onPrevious,
+    onTimelineUpdated,
+    slideShowRunning,
+    onLast,
+    onFirst,
+    theme,
+    titlePosition = "TOP",
+    onRestartSlideshow,
+    cardHeight,
+    onMediaStateChange,
+    slideShowEnabled,
+    slideItemDuration,
+  } = props;
 
+  const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
+  
+  // reference to the timeline
+  const timelineMainRef = useRef<HTMLDivElement>(null);
+
+  // generate a unique id for the timeline content
+  const id = useRef(nanoid());
+  
+  // handlers for navigation
   const handleNext = () => onNext();
   const handlePrevious = () => onPrevious();
   const handleFirst = () => onFirst();
   const handleLast = () => onLast();
 
+  // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
@@ -141,12 +149,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   );
 
   useEffect(() => {
+    // setup observer for the timeline elements
     setTimeout(() => {
       const element = timelineMainRef.current;
 
       if (element) {
         const childElements = element.querySelectorAll(".branch-main");
-
         Array.from(childElements).forEach((elem) => observer.observe(elem));
       }
     }, 0);
@@ -232,6 +240,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
           slideShowEnabled={slideShowEnabled}
         />
       </TimelineControlContainer>
+
+      {/* placeholder to render timeline content for horizontal mode */}
       <TimelineContentRender id={id.current} />
     </Wrapper>
   );

@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { TreeBranchModel } from "../../models/TimelineTreeModel";
-import TimelineItemContent from "../timeline-elements/timeline-card-content/timeline-card-content";
+import TimelineCard from "../timeline-elements/timeline-card-content/timeline-card-content";
 import TimelineItemTitle from "../timeline-elements/timeline-item-title/timeline-card-title";
 import TreeLeaf from "./timeline-tree-leaf";
 import {
   Branch,
-  TimelineItemContentWrapper,
+  TimelineCardContentWrapper,
   TimelineTreeTitleWrapper,
 } from "./timeline-tree.styles";
 
@@ -58,11 +58,11 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
       </TimelineTreeTitleWrapper>
 
       {/* content section */}
-      <TimelineItemContentWrapper
+      <TimelineCardContentWrapper
         className={`${className} ${visible ? "visible" : ""}`}
         alternateCards={alternateCards}
       >
-        <TimelineItemContent
+        <TimelineCard
           active={active}
           cardHeight={cardHeight}
           content={contentText}
@@ -83,7 +83,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
           onMediaStateChange={onMediaStateChange}
           slideItemDuration={slideItemDuration}
         />
-      </TimelineItemContentWrapper>
+      </TimelineCardContentWrapper>
 
       {/* leaf */}
       <TreeLeaf
