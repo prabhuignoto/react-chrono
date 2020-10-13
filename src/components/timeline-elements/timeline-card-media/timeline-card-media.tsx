@@ -62,7 +62,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
       paused: false,
       playing: false,
     });
-  }, [loadFailed]);
+  }, [onMediaStateChange, id]);
 
   const ErrorMessageMem: React.FunctionComponent<{
     message: string;

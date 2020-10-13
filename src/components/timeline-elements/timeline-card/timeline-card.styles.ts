@@ -70,13 +70,11 @@ export const TimelinePoint = styled.div<{theme: Theme}>`
       content: '';
       display: block;
       height: 0.75rem;
-      left: 0;
-      margin-left: auto;
-      margin-right: auto;
       position: absolute;
       right: 0;
       top: 50%;
-      transform: translateY(-50%);
+      transform: translateY(-50%) translateX(-50%);
+      left: 50%;
       width: 0.75rem;
       z-index: -1;
     }

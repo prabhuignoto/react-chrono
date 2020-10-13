@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { TimelineContentModel } from "../../../models/TimelineContentModel";
 import { MemoContentText, MemoTitle } from "../memoized";
 import CardMedia from "../timeline-card-media/timeline-card-media";
@@ -26,7 +26,6 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = React
     slideItemDuration,
     theme,
     title,
-    branchDir,
   }: TimelineContentModel) => {
     const [showMore, setShowMore] = useState(false);
     const detailsRef = useRef<HTMLDivElement>(null);
@@ -43,7 +42,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = React
         setShowMore(true);
         onShowMore();
       }
-    }, [active]);
+    }, [active, slideShowActive, onShowMore]);
 
     useEffect(() => {
       const detailsEle = detailsRef.current;
@@ -97,12 +96,12 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = React
         {!media && (
           <ShowMore
             role="button"
-            onClick={() => {
+            onClick={useCallback(() => {
               if (active) {
                 setShowMore(!showMore);
                 onShowMore();
               }
-            }}
+            }, [showMore, active, onShowMore])}
             className="show-more"
             show={canShowMore.current}
           >

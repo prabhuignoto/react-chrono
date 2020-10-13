@@ -26,7 +26,7 @@ export const Wrapper = styled.div<{ show: boolean, type?: string }>`
     } else if (p.type === "big-screen") {
       return "1400px"
     } else if (p.type === "desktop") {
-      return "95%"
+      return "80%"
     } else if (p.type === "mobile") {
       return "100%";
     } else {
@@ -51,7 +51,7 @@ export const ComponentContainer = styled.div<{ type?: string }>`
   ${p => {
     switch (p.type) {
       case "desktop":
-        return `height: 400px; width: 90%;`
+        return `height: 300px; width: 90%;`
       case "big-screen":
         return `height: 400px; width: 90%;`
       case "tablet":
@@ -72,7 +72,7 @@ export const ComponentContainerTree = styled.div<{ type?: string }>`
   ${p => {
     switch (p.type) {
       case "desktop":
-        return `height: 700px; width: 90%;`
+        return `height: 600px; width: 90%;`
       case "big-screen":
         return `height: 850px; width: 90%;`
       case "tablet":
