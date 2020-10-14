@@ -23,14 +23,14 @@ export const VerticalBasic: FunctionComponent<{
       <span>
         <DescriptionHeader>
           <span># Vertical</span>
-          <SandBox>
+          {/* <SandBox>
             <a href="https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3?fontsize=14&hidenavigation=1&theme=dark">
               <img
                 alt="Edit react-chrono-tree-horizontal"
                 src="https://codesandbox.io/static/img/play-codesandbox.svg"
               />
             </a>
-          </SandBox>
+          </SandBox> */}
         </DescriptionHeader>
       </span>
       <DescriptionContent>
@@ -58,14 +58,14 @@ export const VerticalTree: FunctionComponent<{
       <span>
         <DescriptionHeader>
           <span># Tree</span>
-          <SandBox>
+          {/* <SandBox>
             <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
               <img
                 alt="Edit react-chrono-tree-text"
                 src="https://codesandbox.io/static/img/play-codesandbox.svg"
               />
             </a>
-          </SandBox>
+          </SandBox> */}
         </DescriptionHeader>
       </span>
       <DescriptionContent>
@@ -94,14 +94,14 @@ export const VerticalTreeMixed: FunctionComponent<{
       <span>
         <DescriptionHeader>
           <span># Media</span>
-          <SandBox>
+          {/* <SandBox>
             <a href="https://codesandbox.io/s/react-chrono-tree-image-uh2nz?fontsize=14&hidenavigation=1&theme=dark">
               <img
                 alt="Edit react-chrono-tree-image"
                 src="https://codesandbox.io/static/img/play-codesandbox.svg"
               />
             </a>
-          </SandBox>
+          </SandBox> */}
         </DescriptionHeader>
       </span>
       <DescriptionContent>
@@ -143,14 +143,14 @@ export const HorizontalSlideshow: FunctionComponent<{
         slideItemDuration={2000}
         cardHeight={cardHeight}
       />
-      <SandBox>
+      {/* <SandBox>
         <a href="https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?fontsize=14&hidenavigation=1&theme=dark">
           <img
             alt="Edit react-chrono-tree-text-slide"
             src="https://codesandbox.io/static/img/play-codesandbox.svg"
           />
         </a>
-      </SandBox>
+      </SandBox> */}
     </ComponentContainer>
   </Horizontal>
 );
@@ -175,14 +175,14 @@ export const VerticalTreeSlideshow: FunctionComponent<{
         cardHeight={cardHeight}
         theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
       />
-      <SandBox>
+      {/* <SandBox>
         <a href="https://codesandbox.io/s/react-chrono-tree-demo-zksyo?fontsize=14&hidenavigation=1&theme=dark">
           <img
             alt="Edit react-chrono-tree-demo"
             src="https://codesandbox.io/static/img/play-codesandbox.svg"
           />
         </a>
-      </SandBox>
+      </SandBox> */}
     </ComponentContainerTree>
   </Vertical>
 );
