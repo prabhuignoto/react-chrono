@@ -8,8 +8,8 @@
 ![logo](./readme-assets/social-logo-small.png)
 
 <!-- ![slideshow](./readme-assets/demo2.gif) -->
-<div style="text-align: center">
-  <img src="./readme-assets/demo2.gif"/>
+<div style="text-align: center; width: 100%;">
+  <img src="./readme-assets/demo2.gif">
 </div>
 
 **Try it on CodeSandbox!**
@@ -143,6 +143,7 @@ Play the timeline automatically with the `slideShow` mode.
 | slideShow         | Enables slideshow control.                                                            | false        |
 | slideItemDuration | The amount of delay in `ms` for the timeline points in `slideshow` mode.              | 5000         |
 | itemWidth         | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
+| hideControls      | hides the navigation controls.                                                        | 300          |
 | cardHeight        | sets the minimum height of the timeline card.                                         | 250          |
 | theme             | prop to customize the colors.                                                         |              |
 
@@ -292,7 +293,6 @@ yarn run rollup
 ## 🔭 What's coming next
 
 - Support for Mobile devices & Tablets (responsive).
-- Support for embedding videos.
 
 ## Meta
 

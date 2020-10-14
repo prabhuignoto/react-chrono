@@ -4,7 +4,6 @@ const ModeWrapper = styled.div`
   width: 100%;
   position: relative;
   margin-bottom: 5rem;
-  /* border: 1px solid #e5e5e5; */
   border-radius: 10px;
   padding: 1.5rem 0;
   background: #fff;
@@ -41,7 +40,7 @@ export const Wrapper = styled.div<{ show: boolean, type?: string }>`
 export const ComponentContainer = styled.div<{ type?: string }>`
   border-radius: 4px;
   margin: 0 auto;
-  margin-bottom: 7rem;
+  margin-bottom: 1rem;
   padding: 1rem 0;
   display: flex;
   align-items: flex-start;
@@ -53,7 +52,7 @@ export const ComponentContainer = styled.div<{ type?: string }>`
       case "desktop":
         return `height: 300px; width: 90%;`
       case "big-screen":
-        return `height: 400px; width: 90%;`
+        return `height: 350px; width: 90%;`
       case "tablet":
         return `height: 380px; width: 100%;`
       default:
@@ -120,8 +119,8 @@ export const DescriptionContent = styled.p`
   font-weight: 400;
   width: 95%;
   margin: 0 auto;
-  margin-bottom: 2rem;  
-  font-size: 1rem;
+  margin: 2rem 0 2rem 2rem;
+  font-size: 0.85rem;
 `;
 
 export const DescriptionHeader = styled.h3`
@@ -129,11 +128,11 @@ export const DescriptionHeader = styled.h3`
   font-weight: 600;
   width: 95%;
   margin: 0 auto;
-  margin-bottom: 1rem;
   border-bottom: 1px solid #ccc;
-  font-size: 1.2rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
+  padding-bottom: 0.75rem;
 `;
 
 export const Description = styled.div``;
@@ -141,10 +140,10 @@ export const Description = styled.div``;
 export const FeatureSetHeader = styled.header`
   width: 95%;
   margin: 0 auto;
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 600;
   border-bottom: 1px solid #ccc;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 `;
 
 export const FeatureSet = styled.ul`
@@ -158,11 +157,11 @@ export const FeatureSet = styled.ul`
 export const Feature = styled.li`
   font-family: 'Open Sans', monospace;
   margin-bottom: 0.5rem;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 500;
 
   .icon {
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin-right: 0.25rem;
   }
 `;

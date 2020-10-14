@@ -4,8 +4,8 @@ import { Theme } from "../../../models/TimelineTreeModel";
 export const TitleWrapper = styled.div<{ theme: Theme }>`
   border-radius: 0.2rem;
   font-family: 'Open Sans', monospace;
-  font-size: 0.85rem;
-  font-weight: 400;
+  font-size: 0.8rem;
+  font-weight: 600;
   overflow: hidden;
   padding: 0.25rem 0.5rem;
   text-align: right;

@@ -17,79 +17,29 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     secondary: "#ffdf00",
   },
   cardHeight = 250,
+  hideControls = false,
 }) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
-  const timer = useRef<number>();
   const [slideShowActive, setSlideshowActive] = useState(false);
 
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
   const activeMediaState = useRef<{ playing: boolean; paused: boolean }>();
 
-  const initItems = () =>
-    items
-      ? items.map((item, index) => {
-          return Object.assign({}, item, {
-            position: titlePosition.toLowerCase(),
-            id: nanoid(),
-            visible: slideShow ? index === 0 : true,
-            active: index === 0,
-          });
-        })
-      : [];
-
-  // setup the slideshow
-  const setupSlideShow = () => {
-    if (!items || !items.length) {
-      return;
-    }
-
-    const newItems = !timeLineItems.length
-      ? initItems()
-      : timeLineItems.map((item) =>
-          Object.assign({}, item, {
-            visible: false,
+  const initItems = useCallback(
+    () =>
+      items
+        ? items.map((item, index) => {
+            return Object.assign({}, item, {
+              position: titlePosition.toLowerCase(),
+              id: nanoid(),
+              visible: slideShow ? index === 0 : true,
+              active: index === 0,
+            });
           })
-        );
-
-    timeLineItemsRef.current = newItems.slice(0);
-
-    if (timer.current) {
-      window.clearInterval(timer.current);
-    }
-
-    const runShow = () => {
-      const invisibleElements = timeLineItemsRef.current?.filter(
-        (item) => !item.visible
-      );
-
-      if (activeMediaState.current && activeMediaState.current.playing) {
-        return;
-      }
-
-      if (invisibleElements && invisibleElements.length) {
-        const itemToShow = invisibleElements[0];
-
-        const newItems = timeLineItemsRef.current?.map((item) =>
-          Object.assign({}, item, {
-            visible: !item.visible ? itemToShow.id === item.id : true,
-            active: itemToShow.id === item.id,
-          })
-        );
-
-        if (newItems) {
-          timeLineItemsRef.current = newItems.slice(0);
-          setItems(newItems);
-        }
-      } else {
-        clearInterval(timer.current);
-        setSlideshowActive(false);
-        setActiveTimelineItem(newItems.length - 1);
-      }
-    };
-    runShow();
-    timer.current = window.setInterval(runShow, slideItemDuration);
-  };
+        : [],
+    [items, slideShow, titlePosition]
+  );
 
   useEffect(() => {
     if (!items) {
@@ -97,23 +47,18 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     }
 
     if (slideShowActive && slideShow) {
-      setupSlideShow();
+      // setupSlideShow();
     }
     // eslint-disable-next-line
   }, [slideShowActive]);
 
   useEffect(() => {
-    if (slideShow) {
-      // setupSlideShow();
-    } else {
-    }
     const items = initItems();
     timeLineItemsRef.current = items;
     setItems(items);
-    // eslint-disable-next-line
-  }, []);
+  }, [initItems, items]);
 
-  const handleTimelineUpdate = (actvTimelineIndex: number) => {
+  const handleTimelineUpdate = useCallback((actvTimelineIndex: number) => {
     setItems((items) =>
       items.map((item, index) =>
         Object.assign({}, item, {
@@ -122,13 +67,20 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       )
     );
     setActiveTimelineItem(actvTimelineIndex);
-  };
+
+    if (items) {
+      if (items.length - 1 === actvTimelineIndex) {
+        setSlideshowActive(false);
+      }
+    }
+  }, [items]);
 
   const restartSlideShow = useCallback(() => {
     setSlideshowActive(true);
-  }, []);
+    handleTimelineUpdate(0);
+  }, [handleTimelineUpdate]);
 
-  const handleOnNext = useCallback(() => {
+  const handleOnNext = () => {
     if (!items) {
       return;
     }
@@ -138,21 +90,21 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       handleTimelineUpdate(newTimeLineItem);
       setActiveTimelineItem(newTimeLineItem);
     }
-  }, [activeTimelineItem]);
+  };
 
-  const handleOnPrevious = useCallback(() => {
+  const handleOnPrevious = () => {
     if (activeTimelineItem > 0) {
       const newTimeLineItem = activeTimelineItem - 1;
 
       handleTimelineUpdate(newTimeLineItem);
       setActiveTimelineItem(newTimeLineItem);
     }
-  }, [activeTimelineItem]);
+  };
 
   const handleFirst = useCallback(() => {
     setActiveTimelineItem(0);
     handleTimelineUpdate(0);
-  }, []);
+  }, [handleTimelineUpdate]);
 
   const handleActiveMedia = (data: any) => {
     activeMediaState.current = data;
@@ -164,7 +116,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       setActiveTimelineItem(idx);
       handleTimelineUpdate(idx);
     }
-  }, [timeLineItems]);
+  }, [timeLineItems, handleTimelineUpdate]);
 
   return (
     <Timeline
@@ -187,6 +139,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       slideShow={slideShow}
       cardHeight={cardHeight}
       onMediaStateChange={handleActiveMedia}
+      hideControls={hideControls}
     />
   );
 };

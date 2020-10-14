@@ -32,6 +32,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
     theme,
     title,
     visible,
+    onElapsed,
   } = props;
 
   const handleOnActive = (offset: number) => {
@@ -82,6 +83,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
           branchDir={className}
           onMediaStateChange={onMediaStateChange}
           slideItemDuration={slideItemDuration}
+          onElapsed={onElapsed || function () {}}
         />
       </TimelineCardContentWrapper>
 

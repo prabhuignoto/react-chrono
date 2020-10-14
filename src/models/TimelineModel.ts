@@ -45,7 +45,7 @@ export interface TimelineModel extends TimelineProps {
    */
   onPrevious: () => void;
 
-  onTimelineUpdated?: (id: number) => void;
+  onTimelineUpdated: (id: number) => void;
 
   /**
    * indicates if a slideshow is activated
@@ -126,6 +126,7 @@ export interface TimelineProps {
    */
   cardHeight?: number;
   onRestartSlideshow?: () => void;
+  hideControls?: boolean;
 }
 
 export type TimelineMode = "VERTICAL" | "HORIZONTAL" | "TREE";

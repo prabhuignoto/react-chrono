@@ -11,12 +11,13 @@ interface CommonPropsModel {
   slideItemDuration?: number;
   slideShowRunning?: boolean;
   theme?: Theme;
+  onElapsed?: (id: string) => void;
 }
 
 interface CommonBranchAndLeafModel extends CommonPropsModel {
   active?: boolean;
   className: string;
-  id?: string;
+  id: string;
 }
 
 export interface TreeLeafModel extends CommonBranchAndLeafModel {
@@ -36,7 +37,7 @@ export interface TreeBranchModel extends CommonBranchAndLeafModel {
     timelinePointOffset: number,
     timelineContentHeight: number,
     timelineContentOffset: number
-    ) => void;
+  ) => void;
   onMediaStateChange: (state: { id?: string; playing?: boolean; paused?: boolean }) => void;
 }
 

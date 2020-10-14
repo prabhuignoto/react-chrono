@@ -4,8 +4,8 @@ import { Scroll } from "../../models/TimelineCollnModel";
 import { TimelineItemViewModel } from "../../models/TimelineItemModel";
 import { TimelineModel } from "../../models/TimelineModel";
 import useNewScrollPosition from "../effects/useNewScrollPosition";
-import TimelineCollection from "../timeline-horizontal/timeline-horizontal";
 import TimelineControl from "../timeline-elements/timeline-control/timeline-control";
+import TimelineCollection from "../timeline-horizontal/timeline-horizontal";
 import TimelineTree from "../timeline-tree/timeline-tree";
 import {
   Outline,
@@ -37,16 +37,17 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
     onMediaStateChange,
     slideShowEnabled,
     slideItemDuration,
+    hideControls
   } = props;
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
-  
+
   // reference to the timeline
   const timelineMainRef = useRef<HTMLDivElement>(null);
 
   // generate a unique id for the timeline content
   const id = useRef(nanoid());
-  
+
   // handlers for navigation
   const handleNext = () => onNext();
   const handlePrevious = () => onPrevious();
@@ -77,11 +78,15 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
     }
   };
 
-  const handleTimelineItemClick = (id?: string) => {
-    if (id && !slideShowRunning) {
+  const handleTimelineItemClick = (id?: string, isSlideShow?: boolean) => {
+    if (id) {
       for (let idx = 0; idx < items.length; idx++) {
         if (items[idx].id === id) {
-          onTimelineUpdated && onTimelineUpdated(idx);
+          if (isSlideShow && idx < items.length - 1) {
+            onTimelineUpdated(idx + 1);
+          } else {
+            onTimelineUpdated(idx);
+          }
           break;
         }
       }
@@ -183,6 +188,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
             cardHeight={cardHeight}
             onMediaStateChange={onMediaStateChange}
             slideItemDuration={slideItemDuration}
+            onElapsed={(id: string) => handleTimelineItemClick(id, true)}
           />
         ) : null}
 
@@ -220,12 +226,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
             cardHeight={cardHeight}
             onMediaStateChange={onMediaStateChange}
             slideItemDuration={slideItemDuration}
+            onElapsed={(id: string) => handleTimelineItemClick(id, true)}
           />
         ) : null}
       </TimelineMainWrapper>
 
       {/* Timeline Controls */}
-      <TimelineControlContainer mode={mode}>
+      {!hideControls && <TimelineControlContainer mode={mode}>
         <TimelineControl
           onNext={handleNext}
           onPrevious={handlePrevious}
@@ -239,7 +246,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
           slideShowRunning={slideShowRunning}
           slideShowEnabled={slideShowEnabled}
         />
-      </TimelineControlContainer>
+      </TimelineControlContainer>}
 
       {/* placeholder to render timeline content for horizontal mode */}
       <TimelineContentRender id={id.current} />

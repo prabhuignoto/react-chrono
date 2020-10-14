@@ -78,7 +78,7 @@ const NewDemo: React.FunctionComponent = () => {
         <AppHeader type={type} />
 
         {/* project description */}
-        <DescriptionContent style={{ fontSize: "1.2rem" }}>
+        <DescriptionContent style={{ fontSize: "1rem" }}>
           <strong>react-chrono</strong> is a modern timeline component built for{" "}
           <a href="https://reactjs.org">React</a>.
         </DescriptionContent>
@@ -95,7 +95,7 @@ const NewDemo: React.FunctionComponent = () => {
         </DescriptionContent>
 
         {/* Horizontal with Media */}
-        {!isMobile && items.length > 0 && (
+        {/* {!isMobile && items.length > 0 && (
           <Horizontal id="horizontal">
             <Description>
               <span>
@@ -110,12 +110,12 @@ const NewDemo: React.FunctionComponent = () => {
               <Chrono items={items} mode="HORIZONTAL" cardHeight={300} />
             </ComponentContainer>
           </Horizontal>
-        )}
+        )} */}
 
         {/* Vertical with no Media */}
-        {items.length > 0 && (
+        {/* {items.length > 0 && (
           <VerticalBasic type={state.mediaType} items={items} />
-        )}
+        )} */}
 
         {/* Tree Mode */}
         {!isMobile && items.length > 0 && (
@@ -123,9 +123,9 @@ const NewDemo: React.FunctionComponent = () => {
         )}
 
         {/* mixed mode */}
-        {!isMobile && items.length > 0 && (
+        {/* {!isMobile && items.length > 0 && (
           <VerticalTreeMixed type={state.mediaType} cardHeight={cardHeight} />
-        )}
+        )} */}
 
         {/* Horizontal Slideshow */}
         {/* {!isMobile && (
