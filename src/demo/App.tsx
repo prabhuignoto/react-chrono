@@ -4,13 +4,7 @@ import fontLoader from "webfontloader";
 import Chrono from "../components";
 import { TimelineItemModel } from "../models/TimelineItemModel";
 import Footer from "./app-footer";
-import {
-  HorizontalSlideshow,
-  VerticalBasic,
-  VerticalTree,
-  VerticalTreeMixed,
-  VerticalTreeSlideshow,
-} from "./app-samples";
+import { VerticalBasic, VerticalTree, VerticalTreeMixed } from "./app-samples";
 import "./App.css";
 import {
   ComponentContainer,
@@ -119,6 +113,7 @@ const NewDemo: React.FunctionComponent = () => {
                 mode="HORIZONTAL"
                 cardHeight={300}
                 slideShow
+                slideItemDuration={500}
               />
             </ComponentContainer>
           </Horizontal>
@@ -140,17 +135,17 @@ const NewDemo: React.FunctionComponent = () => {
         )}
 
         {/* Horizontal Slideshow */}
-        {!isMobile && (
+        {/* {!isMobile && (
           <HorizontalSlideshow type={state.mediaType} cardHeight={cardHeight} />
-        )}
+        )} */}
 
         {/* Tree Slideshow */}
-        {!isMobile && items.length > 0 && (
+        {/* {!isMobile && items.length > 0 && (
           <VerticalTreeSlideshow
             type={state.mediaType}
             cardHeight={cardHeight}
           />
-        )}
+        )} */}
 
         {/* footer */}
         <Footer />

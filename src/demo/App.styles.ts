@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 const ModeWrapper = styled.div`
   width: 100%;
   position: relative;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   border-radius: 10px;
   padding: 1.5rem 0;
   background: #fff;
@@ -44,7 +44,7 @@ export const ComponentContainer = styled.div<{ type?: string }>`
   padding: 1rem 0;
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column; 
 
   ${p => {

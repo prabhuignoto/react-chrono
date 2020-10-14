@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { TimelineContentModel } from "../../../models/TimelineContentModel";
 import { MediaState } from "../../../models/TimelineItemMedia";
 import { MemoContentText, MemoTitle } from "../memoized";
@@ -78,6 +78,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       }
       const interval = Math.round(slideItemDuration - slideShowElapsed.current);
       setPaused(false);
+
       if (interval > 0) {
         setupTimer(interval);
       }

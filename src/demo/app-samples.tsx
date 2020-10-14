@@ -8,7 +8,6 @@ import {
   DescriptionContent,
   DescriptionHeader,
   Horizontal,
-  SandBox,
   Vertical,
 } from "./App.styles";
 import data from "./data";
@@ -39,12 +38,7 @@ export const VerticalBasic: FunctionComponent<{
       </DescriptionContent>
     </Description>
     <ComponentContainerTree type={type}>
-      <Chrono
-        items={items}
-        mode="VERTICAL"
-        slideShow
-        slideItemDuration={1000}
-      />
+      <Chrono items={items} mode="VERTICAL" slideShow slideItemDuration={500} />
     </ComponentContainerTree>
   </Vertical>
 );
@@ -78,7 +72,7 @@ export const VerticalTree: FunctionComponent<{
         items={items}
         mode="TREE"
         slideShow
-        slideItemDuration={5000}
+        slideItemDuration={350}
         theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
       />
     </ComponentContainerTree>
@@ -113,7 +107,7 @@ export const VerticalTreeMixed: FunctionComponent<{
         items={dataMixed}
         mode="TREE"
         cardHeight={cardHeight}
-        slideItemDuration={1000}
+        slideItemDuration={350}
         slideShow
         theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
       />
@@ -140,7 +134,7 @@ export const HorizontalSlideshow: FunctionComponent<{
       <Chrono
         items={data}
         mode="HORIZONTAL"
-        slideItemDuration={2000}
+        slideItemDuration={1000}
         cardHeight={cardHeight}
       />
       {/* <SandBox>
