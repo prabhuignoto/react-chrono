@@ -97,6 +97,8 @@ To render the timeline vertically use the `VERTICAL` mode
   </div>
 ```
 
+![vertical-basic](./readme-assets/vertical-basic.png)
+
 ### Tree View
 
 In `Tree` mode the timeline is rendered vertically with cards alternating between left and right side.
