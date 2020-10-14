@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TimelineContentModel } from "../../../models/TimelineContentModel";
 import { MediaState } from "../../../models/TimelineItemMedia";
 import { MemoContentText, MemoTitle } from "../memoized";
