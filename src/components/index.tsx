@@ -107,7 +107,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       setActiveTimelineItem(idx);
       handleTimelineUpdate(idx);
     }
-  }, [timeLineItems, handleTimelineUpdate]);
+  }, [timeLineItems]);
 
   return (
     <Timeline
