@@ -113,7 +113,7 @@ const NewDemo: React.FunctionComponent = () => {
                 mode="HORIZONTAL"
                 cardHeight={300}
                 slideShow
-                slideItemDuration={500}
+                slideItemDuration={1500}
               />
             </ComponentContainer>
           </Horizontal>
