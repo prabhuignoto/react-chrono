@@ -36,7 +36,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
 
   const handleClick = () => {
     if (onClick && !slideShowRunning) {
-      onClick && onClick(id);
+      onClick(id);
     }
   };
 

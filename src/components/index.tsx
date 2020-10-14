@@ -30,7 +30,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
           return Object.assign({}, item, {
             position: titlePosition.toLowerCase(),
             id: nanoid(),
-            visible: slideShow ? index === 0 : true,
+            visible: true,
             active: index === 0,
           });
         })
@@ -96,10 +96,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     }
   };
 
-  const handleFirst = useCallback(() => {
+  const handleFirst = () => {
     setActiveTimelineItem(0);
     handleTimelineUpdate(0);
-  }, [handleTimelineUpdate]);
+  };
 
   const handleLast = useCallback(() => {
     if (timeLineItems.length) {
