@@ -34,10 +34,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
     titlePosition = "TOP",
     onRestartSlideshow,
     cardHeight,
-    onMediaStateChange,
     slideShowEnabled,
     slideItemDuration,
-    hideControls
+    hideControls,
   } = props;
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -186,7 +185,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
             slideShowRunning={slideShowRunning}
             mode={mode}
             cardHeight={cardHeight}
-            onMediaStateChange={onMediaStateChange}
             slideItemDuration={slideItemDuration}
             onElapsed={(id: string) => handleTimelineItemClick(id, true)}
           />
@@ -206,8 +204,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
               theme={theme}
               slideShowRunning={slideShowRunning}
               cardHeight={cardHeight}
-              onMediaStateChange={onMediaStateChange}
               slideItemDuration={slideItemDuration}
+              onElapsed={(id: string) => handleTimelineItemClick(id, true)}
             />
           </TimelineMain>
         ) : null}
@@ -224,7 +222,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
             slideShowRunning={slideShowRunning}
             mode={mode}
             cardHeight={cardHeight}
-            onMediaStateChange={onMediaStateChange}
             slideItemDuration={slideItemDuration}
             onElapsed={(id: string) => handleTimelineItemClick(id, true)}
           />
@@ -232,21 +229,23 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
       </TimelineMainWrapper>
 
       {/* Timeline Controls */}
-      {!hideControls && <TimelineControlContainer mode={mode}>
-        <TimelineControl
-          onNext={handleNext}
-          onPrevious={handlePrevious}
-          onFirst={handleFirst}
-          onLast={handleLast}
-          disableLeft={activeTimelineItem === 0}
-          disableRight={activeTimelineItem === items.length - 1}
-          mode={mode}
-          theme={theme}
-          onReplay={onRestartSlideshow}
-          slideShowRunning={slideShowRunning}
-          slideShowEnabled={slideShowEnabled}
-        />
-      </TimelineControlContainer>}
+      {!hideControls && (
+        <TimelineControlContainer mode={mode}>
+          <TimelineControl
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+            onFirst={handleFirst}
+            onLast={handleLast}
+            disableLeft={activeTimelineItem === 0}
+            disableRight={activeTimelineItem === items.length - 1}
+            mode={mode}
+            theme={theme}
+            onReplay={onRestartSlideshow}
+            slideShowRunning={slideShowRunning}
+            slideShowEnabled={slideShowEnabled}
+          />
+        </TimelineControlContainer>
+      )}
 
       {/* placeholder to render timeline content for horizontal mode */}
       <TimelineContentRender id={id.current} />

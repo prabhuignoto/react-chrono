@@ -38,14 +38,12 @@ export interface TreeBranchModel extends CommonBranchAndLeafModel {
     timelineContentHeight: number,
     timelineContentOffset: number
   ) => void;
-  onMediaStateChange: (state: { id?: string; playing?: boolean; paused?: boolean }) => void;
 }
 
 export interface TimelineTreeModel extends CommonPropsModel {
   activeTimelineItem: number;
   autoScroll: (s: Partial<Scroll>) => void;
   items: TimelineItemViewModel[];
-  onMediaStateChange: (state: { id?: string; playing?: boolean; paused?: boolean }) => void;
 }
 
 export interface Theme {

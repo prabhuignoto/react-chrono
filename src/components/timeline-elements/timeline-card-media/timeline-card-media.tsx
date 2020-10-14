@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Media, MediaState } from "../../../models/TimelineItemMedia";
 import { TimelineMode } from "../../../models/TimelineModel";
 import { Theme } from "../../../models/TimelineTreeModel";
@@ -20,6 +20,7 @@ interface CardMediaModel {
   theme?: Theme;
   title?: string;
   content: string;
+  slideshowActive?: boolean;
 }
 
 const CardMedia: React.FunctionComponent<CardMediaModel> = ({
@@ -31,6 +32,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   title,
   content,
   media,
+  slideshowActive,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);
@@ -51,25 +53,30 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
 
   const [mediaLoaded, setMediaLoaded] = useState(false);
 
-  const handleMediaLoaded = useCallback(() => {
+  const handleMediaLoaded = () => {
     setMediaLoaded(true);
-  }, []);
+  };
 
-  const handleError = useCallback(() => {
+  const handleError = () => {
     setLoadFailed(true);
     onMediaStateChange({
       id,
       paused: false,
       playing: false,
     });
-  }, [onMediaStateChange, id]);
+  };
 
   const ErrorMessageMem: React.FunctionComponent<{
     message: string;
   }> = React.memo(({ message }) => <ErrorMessage>{message}</ErrorMessage>);
 
   return (
-    <MediaWrapper theme={theme} active={active} mode={mode}>
+    <MediaWrapper
+      theme={theme}
+      active={active}
+      mode={mode}
+      slideShowActive={slideshowActive}
+    >
       {media.type === "VIDEO" &&
         (!loadFailed ? (
           <CardVideo

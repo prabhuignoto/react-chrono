@@ -4,7 +4,13 @@ import fontLoader from "webfontloader";
 import Chrono from "../components";
 import { TimelineItemModel } from "../models/TimelineItemModel";
 import Footer from "./app-footer";
-import { VerticalBasic, VerticalTree, VerticalTreeMixed } from "./app-samples";
+import {
+  HorizontalSlideshow,
+  VerticalBasic,
+  VerticalTree,
+  VerticalTreeMixed,
+  VerticalTreeSlideshow,
+} from "./app-samples";
 import "./App.css";
 import {
   ComponentContainer,
@@ -45,11 +51,12 @@ const NewDemo: React.FunctionComponent = () => {
 
   useEffect(() => {
     const newItems = data.map(
-      ({ title, contentTitle, contentText, contentDetailedText }) => ({
+      ({ title, contentTitle, contentText, contentDetailedText, id }) => ({
         title,
         contentTitle,
         contentText,
         contentDetailedText,
+        id,
       })
     );
     setItems(newItems);
@@ -107,7 +114,7 @@ const NewDemo: React.FunctionComponent = () => {
               </DescriptionContent>
             </Description>
             <ComponentContainer type={state.mediaType}>
-              <Chrono items={items} mode="HORIZONTAL" cardHeight={300} />
+              <Chrono items={items} mode="HORIZONTAL" cardHeight={300} slideShow />
             </ComponentContainer>
           </Horizontal>
         )} */}
@@ -118,14 +125,14 @@ const NewDemo: React.FunctionComponent = () => {
         )} */}
 
         {/* Tree Mode */}
-        {!isMobile && items.length > 0 && (
+        {/* {!isMobile && items.length > 0 && (
           <VerticalTree type={state.mediaType} items={items} />
-        )}
+        )} */}
 
         {/* mixed mode */}
-        {/* {!isMobile && items.length > 0 && (
+        {!isMobile && items.length > 0 && (
           <VerticalTreeMixed type={state.mediaType} cardHeight={cardHeight} />
-        )} */}
+        )}
 
         {/* Horizontal Slideshow */}
         {/* {!isMobile && (

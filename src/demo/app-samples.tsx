@@ -39,7 +39,12 @@ export const VerticalBasic: FunctionComponent<{
       </DescriptionContent>
     </Description>
     <ComponentContainerTree type={type}>
-      <Chrono items={items} mode="VERTICAL" />
+      <Chrono
+        items={items}
+        mode="VERTICAL"
+        slideShow
+        slideItemDuration={1000}
+      />
     </ComponentContainerTree>
   </Vertical>
 );
@@ -73,7 +78,7 @@ export const VerticalTree: FunctionComponent<{
         items={items}
         mode="TREE"
         slideShow
-        slideItemDuration={1000}
+        slideItemDuration={5000}
         theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
       />
     </ComponentContainerTree>
@@ -108,6 +113,8 @@ export const VerticalTreeMixed: FunctionComponent<{
         items={dataMixed}
         mode="TREE"
         cardHeight={cardHeight}
+        slideItemDuration={1000}
+        slideShow
         theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
       />
     </ComponentContainerTree>
@@ -133,8 +140,7 @@ export const HorizontalSlideshow: FunctionComponent<{
       <Chrono
         items={data}
         mode="HORIZONTAL"
-        slideShow
-        slideItemDuration={4500}
+        slideItemDuration={2000}
         cardHeight={cardHeight}
       />
       <SandBox>

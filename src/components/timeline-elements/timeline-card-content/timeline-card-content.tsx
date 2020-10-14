@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TimelineContentModel } from "../../../models/TimelineContentModel";
+import { MediaState } from "../../../models/TimelineItemMedia";
 import { MemoContentText, MemoTitle } from "../memoized";
 import CardMedia from "../timeline-card-media/timeline-card-media";
 import {
@@ -18,7 +19,6 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   media,
   mode,
   onShowMore,
-  onMediaStateChange,
   slideShowActive,
   slideItemDuration,
   onElapsed,
@@ -32,14 +32,15 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   const canShowMore = useRef(!!detailedText);
   const slideShowElapsed = useRef(0);
   const timerRef = useRef(0);
+  const [paused, setPaused] = useState(false);
 
   // disabling auto collapse on inactive
   // useEffect(() => {
-    // auto expand the details content when active and slideshow is running
-    // if (active && slideShowActive) {
-    //   setShowMore(true);
-    //   onShowMore();
-    // }
+  // auto expand the details content when active and slideshow is running
+  // if (active && slideShowActive) {
+  //   setShowMore(true);
+  //   onShowMore();
+  // }
   // }, [active, slideShowActive, onShowMore]);
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
     }
   }, [showMore]);
 
-  const setupTimer = useCallback((interval: number) => {
+  const setupTimer = (interval: number) => {
     if (!slideItemDuration) {
       return;
     }
@@ -59,28 +60,29 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       window.clearInterval(timerRef.current);
       onElapsed(id);
     }, interval);
-  }, []);
+  };
 
   // pause the slide show
-  const tryHandlePauseSlideshow = useCallback(() => {
+  const tryHandlePauseSlideshow = () => {
     if (active && slideShowActive) {
       window.clearTimeout(timerRef.current);
+      setPaused(true);
     }
-  }, [active, slideShowActive]);
+  };
 
   // resumes the slide show
-  const tryHandleResumeSlideshow = useCallback(() => {
+  const tryHandleResumeSlideshow = () => {
     if (active && slideShowActive) {
       if (!slideItemDuration) {
         return;
       }
       const interval = Math.round(slideItemDuration - slideShowElapsed.current);
-
+      setPaused(false);
       if (interval > 0) {
         setupTimer(interval);
       }
     }
-  }, [active, slideShowActive, setupTimer, slideItemDuration]);
+  };
 
   useEffect(() => {
     if (!slideItemDuration) {
@@ -90,7 +92,15 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
     if (active && slideShowActive) {
       setupTimer(slideItemDuration);
     }
-  }, [active, slideShowActive, setupTimer, slideItemDuration]);
+  }, [active, slideShowActive]);
+
+  const handleMediaState = (state: MediaState) => {
+    if (state.playing) {
+      slideShowActive && tryHandlePauseSlideshow();
+    } else if (state.paused) {
+      !paused && slideShowActive && onElapsed(id);
+    }
+  };
 
   return (
     <TimelineItemContentWrapper
@@ -121,10 +131,11 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           content={content}
           title={title}
           mode={mode}
-          onMediaStateChange={onMediaStateChange}
+          onMediaStateChange={handleMediaState}
           id={id}
           active={active}
           theme={theme}
+          slideshowActive={slideShowActive}
         />
       )}
 
@@ -140,13 +151,13 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           </TimelineContentDetails>
         )}
       </TimelineContentDetailsWrapper>
-      
+
       {/* display the show more button for textual content */}
       {!media && (
         <ShowMore
           role="button"
           onClick={() => {
-            if (active) {
+            if ((active && paused) || !slideShowActive) {
               setShowMore(!showMore);
               onShowMore();
             }

@@ -13,7 +13,6 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   slideShowRunning,
   mode,
   cardHeight,
-  onMediaStateChange,
   slideItemDuration,
   onElapsed
 }) => {
@@ -67,7 +66,6 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
             mode={mode}
             cardHeight={cardHeight}
             slideItemDuration={slideItemDuration}
-            onMediaStateChange={onMediaStateChange}
             onElapsed={onElapsed}
           />
         );

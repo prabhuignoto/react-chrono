@@ -52,7 +52,7 @@ export const ComponentContainer = styled.div<{ type?: string }>`
       case "desktop":
         return `height: 300px; width: 90%;`
       case "big-screen":
-        return `height: 350px; width: 90%;`
+        return `height: 450px; width: 90%;`
       case "tablet":
         return `height: 380px; width: 100%;`
       default:

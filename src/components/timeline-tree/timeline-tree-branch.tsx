@@ -26,7 +26,6 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
     mode,
     onActive,
     onClick,
-    onMediaStateChange,
     slideItemDuration,
     slideShowRunning,
     theme,
@@ -81,7 +80,6 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
             }, 200)
           }
           branchDir={className}
-          onMediaStateChange={onMediaStateChange}
           slideItemDuration={slideItemDuration}
           onElapsed={onElapsed || function () {}}
         />
@@ -96,6 +94,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
         onActive={handleOnActive}
         theme={theme}
         alternateCards={alternateCards}
+        slideShowRunning={slideShowRunning}
       />
     </Branch>
   );

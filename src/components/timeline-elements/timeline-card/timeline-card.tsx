@@ -22,7 +22,6 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   media,
   mode,
   onClick,
-  onMediaStateChange,
   onElapsed,
   position,
   slideItemDuration,
@@ -36,7 +35,9 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   const contentRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
-    onClick && onClick(id);
+    if (onClick && !slideShowRunning) {
+      onClick && onClick(id);
+    }
   };
 
   useEffect(() => {
@@ -100,7 +101,6 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
           media={media}
           mode={mode}
           cardHeight={cardHeight}
-          onMediaStateChange={onMediaStateChange}
           slideItemDuration={slideItemDuration}
           onElapsed={onElapsed}
           id={id}

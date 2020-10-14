@@ -22,24 +22,19 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
   const [slideShowActive, setSlideshowActive] = useState(false);
-
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
-  const activeMediaState = useRef<{ playing: boolean; paused: boolean }>();
 
-  const initItems = useCallback(
-    () =>
-      items
-        ? items.map((item, index) => {
-            return Object.assign({}, item, {
-              position: titlePosition.toLowerCase(),
-              id: nanoid(),
-              visible: slideShow ? index === 0 : true,
-              active: index === 0,
-            });
-          })
-        : [],
-    [items, slideShow, titlePosition]
-  );
+  const initItems = () =>
+    items
+      ? items.map((item, index) => {
+          return Object.assign({}, item, {
+            position: titlePosition.toLowerCase(),
+            id: nanoid(),
+            visible: slideShow ? index === 0 : true,
+            active: index === 0,
+          });
+        })
+      : [];
 
   useEffect(() => {
     if (!items) {
@@ -56,9 +51,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     const items = initItems();
     timeLineItemsRef.current = items;
     setItems(items);
-  }, [initItems, items]);
+  }, [items]);
 
-  const handleTimelineUpdate = useCallback((actvTimelineIndex: number) => {
+  const handleTimelineUpdate = (actvTimelineIndex: number) => {
     setItems((items) =>
       items.map((item, index) =>
         Object.assign({}, item, {
@@ -73,12 +68,12 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
         setSlideshowActive(false);
       }
     }
-  }, [items]);
+  };
 
-  const restartSlideShow = useCallback(() => {
+  const restartSlideShow = () => {
     setSlideshowActive(true);
     handleTimelineUpdate(0);
-  }, [handleTimelineUpdate]);
+  };
 
   const handleOnNext = () => {
     if (!items) {
@@ -105,10 +100,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     setActiveTimelineItem(0);
     handleTimelineUpdate(0);
   }, [handleTimelineUpdate]);
-
-  const handleActiveMedia = (data: any) => {
-    activeMediaState.current = data;
-  };
 
   const handleLast = useCallback(() => {
     if (timeLineItems.length) {
@@ -138,7 +129,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       titlePosition={titlePosition}
       slideShow={slideShow}
       cardHeight={cardHeight}
-      onMediaStateChange={handleActiveMedia}
       hideControls={hideControls}
     />
   );

@@ -35,7 +35,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
             mode={mode}
             theme={theme}
             onClick={onFirst}
-            title="first"
+            title="Go to First"
             aria-label="first"
           >
             <ChevronsLeftIcon />
@@ -48,7 +48,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
             mode={mode}
             theme={theme}
             onClick={onPrevious}
-            title="previous"
+            title="Previous"
             aria-label="previous"
           >
             <ChevronLeft />
@@ -61,7 +61,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
             mode={mode}
             theme={theme}
             onClick={onNext}
-            title="next"
+            title="Next"
             aria-label="next"
           >
             <ChevronRightIcon />
@@ -74,7 +74,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
             mode={mode}
             theme={theme}
             onClick={onLast}
-            title="last"
+            title="Go to Last"
             aria-label="last"
           >
             <ChevronsRightIcon />

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { TimelineMode } from "../../../models/TimelineModel";
 import { Theme } from "../../../models/TimelineTreeModel";
 
-export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: TimelineMode, dir?: string }>`
+export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: TimelineMode, dir?: string, slideShowActive?: boolean }>`
   height: 100%;
   flex-direction: row;
   align-items: center;
@@ -12,6 +12,7 @@ export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: 
   position: relative;
   background: ${p => p.active ? `rgba(${p.theme.secondary}, 0.35)` : ""};
   border-radius: 4px;
+  pointer-events: ${p => !p.active && p.slideShowActive ? "none" : ""};
 
   ${p => {
     if (p.mode === "HORIZONTAL") {
