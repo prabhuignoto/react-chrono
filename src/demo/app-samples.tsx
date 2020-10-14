@@ -107,8 +107,6 @@ export const VerticalTreeMixed: FunctionComponent<{
         items={dataMixed}
         mode="TREE"
         cardHeight={cardHeight}
-        slideItemDuration={1350}
-        slideShow
         theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
       />
     </ComponentContainerTree>
