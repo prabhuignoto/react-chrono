@@ -42,8 +42,7 @@ export default {
       globals: {
         nanoid: "nanoid",
         react: "React",
-        "react-dom": "ReactDOM",
-        "styled-components": "styled",
+        "react-dom": "ReactDOM"
       },
     },
   ],
@@ -75,7 +74,6 @@ export default {
     "react",
     "react-dom",
     "nanoid",
-    "styled-components",
     "@babel/runtime",
   ],
 };
