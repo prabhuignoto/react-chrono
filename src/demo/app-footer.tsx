@@ -17,6 +17,7 @@ export default () => (
     >
       <img
         src="github.svg"
+        alt="github"
         style={{
           width: "1.25rem",
           height: "1.25rem",

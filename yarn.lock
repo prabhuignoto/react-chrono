@@ -10075,6 +10075,19 @@ react-chrono@^1.1.5:
     react-dom "^16.13.1"
     react-responsive "^8.1.0"
 
+react-chrono@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-chrono/-/react-chrono-1.2.0.tgz#d342721aad8e985d505056f54b96278a7356d696"
+  integrity sha512-vAJ2YXRLPXC5mPpjJMe5pQS3BB+RcraDbqHiAsEWs0tkvxXtzb2I3dnXatWiGI2tTtHQ5x8usKWa5A7Q6RmR7g==
+  dependencies:
+    "@emotion/core" "^10.0.35"
+    "@emotion/styled" "^10.0.27"
+    nanoid "^3.1.12"
+    react "^17.0.0-rc.3"
+    react-chrono "^1.1.5"
+    react-dom "^16.13.1"
+    react-responsive "^8.1.0"
+
 react-dev-utils@^10.2.1:
   version "10.2.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-10.2.1.tgz#f6de325ae25fa4d546d09df4bb1befdc6dd19c19"
@@ -10222,6 +10235,15 @@ react-scripts@3.4.3:
     workbox-webpack-plugin "4.3.1"
   optionalDependencies:
     fsevents "2.1.2"
+
+react@^16.13.1:
+  version "16.13.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
+  integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
 
 react@^17.0.0-rc.3:
   version "17.0.0-rc.3"

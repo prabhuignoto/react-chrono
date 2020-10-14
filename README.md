@@ -7,11 +7,6 @@
 
 ![logo](./readme-assets/social-logo-small.png)
 
-<!-- ![slideshow](./readme-assets/demo2.gif) -->
-<div style="text-align: center">
-  <img src="./readme-assets/demo2.gif"/>
-</div>
-
 **Try it on CodeSandbox!**
 
 [![Edit react-chrono](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-chrono-bg56e?fontsize=14&hidenavigation=1&theme=dark)
@@ -22,7 +17,7 @@
 - 🌲&nbsp; Use the [Tree](#tree-view) mode to layout the timeline cards vertically in a tree like fashion.
 - 📺&nbsp; Auto play the timeline with the [slideshow](#slideshow-mode) mode.
 - 🖼️&nbsp; [Display Images & Videos](#media) in the timeline with ease.
-- ⌨&nbsp; Navigate the timeline via [Keyboard](#-keyboard-navigation--disabling-it).
+- ⌨&nbsp; Keyboard accessible. [Keyboard](#-keyboard-navigation--disabling-it).
 - ⚡&nbsp; Data driven API.
 - 🔧&nbsp; Optimized to render images & videos efficiently on (tree & vertical mode).
 - 🎨&nbsp; [Customize](#theme) colors with ease.
@@ -39,11 +34,9 @@
 - [Props](#props)
   - [Mode](#mode)
   - [Timeline item Model](#timeline-item-model)
-  - [⌨ Keyboard Navigation & Disabling it](#-keyboard-navigation--disabling-it)
+  - [Keyboard Navigation & Disabling it](#keyboard-navigation--disabling-it)
   - [Media](#media)
-    - [Image](#image)
-    - [Video](#video)
-  - [Slideshow Mode](#slideshow-mode)
+  - [Slideshow](#slideshow-1)
   - [Item Width](#item-width)
   - [🎨 Theme](#-theme)
 - [📦Build Setup](#build-setup)
@@ -139,12 +132,13 @@ Play the timeline automatically with the `slideShow` mode.
 
 | name              | description                                                                           | default      |
 | ----------------- | ------------------------------------------------------------------------------------- | ------------ |
-| mode              | sets the layout of the component. can be `HORIZONTAL`, `VERTICAL` or `TREE` | `HORIZONTAL`           |
-| items             | collection of timeline items. This should be a collection of [Timeline Item Model](#timeline-item-model)                                                         | []           |
-| disableNavOnKey   | prop to disable keyboard navigation.                                                  | false        |
-| slideShow         | starts the timeline in slideshow mode.                                                | false        |
+| mode              | sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `TREE` | `HORIZONTAL`             |
+| items             | collection of [Timeline Item Model](#timeline-item-model).                            | []           |
+| disableNavOnKey   | Disables keyboard navigation.                                                         | false        |
+| slideShow         | Enables slideshow control.                                                            | false        |
 | slideItemDuration | The amount of delay in `ms` for the timeline points in `slideshow` mode.              | 5000         |
 | itemWidth         | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
+| hideControls      | hides the navigation controls.                                                        | 300          |
 | cardHeight        | sets the minimum height of the timeline card.                                         | 250          |
 | theme             | prop to customize the colors.                                                         |              |
 
@@ -189,7 +183,7 @@ Play the timeline automatically with the `slideShow` mode.
 }
 ```
 
-### ⌨ Keyboard Navigation & Disabling it
+### Keyboard Navigation & Disabling it
 
 The timeline can be navigated via keyboard.
 
@@ -207,7 +201,7 @@ To disable keyboard navigation set `disableNavOnKey` to true.
 
 Both images and videos can be embedded in the timeline. Just add the `media` attribute to the [Timeline Item model](#timeline-item-model) and the component will take care of the rest.
 
-#### Image
+To embed a image
 
 ```sh
 {
@@ -223,7 +217,7 @@ Both images and videos can be embedded in the timeline. Just add the `media` att
 }
 ```
 
-#### Video
+To embed a video
 
 Videos start playing automatically when active will be paused when not active. Like images, videos are also automatically hidden when not in the visible viewport of the container.
 
@@ -242,7 +236,7 @@ Videos start playing automatically when active will be paused when not active. L
 }
 ```
 
-### Slideshow Mode
+### Slideshow
 
 Slideshow can be enabled by setting the `slideShow` prop to true. You can also set an optional `slideItemDuration` that sets the time delay between cards.
 
@@ -294,7 +288,6 @@ yarn run rollup
 ## 🔭 What's coming next
 
 - Support for Mobile devices & Tablets (responsive).
-- Support for embedding videos.
 
 ## Meta
 

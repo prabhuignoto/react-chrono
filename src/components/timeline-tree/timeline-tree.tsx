@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { TimelineTreeModel } from "../../models/TimelineTreeModel";
 import TreeBranch from "./timeline-tree-branch";
 import { TimelineTreeWrapper } from "./timeline-tree.styles";
 
+// This component is used to render both tree and vertical modes
 const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   items,
   onClick,
@@ -12,28 +13,31 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   slideShowRunning,
   mode,
   cardHeight,
-  onMediaStateChange,
-  slideItemDuration
+  slideItemDuration,
+  onElapsed
 }) => {
-  const handleOnActive = (
-    offset: number,
-    wrapperOffset: number,
-    height: number
-  ) => {
-    autoScroll({
-      timelinePointOffset: offset,
-      timelineContentHeight: height,
-      timelineContentOffset: wrapperOffset,
-    });
-  };
+  // check if the timeline that has become active is visible.
+  // if not auto scroll the content and bring it to the view.
+  const handleOnActive = useCallback(
+    (offset: number, wrapperOffset: number, height: number) => {
+      autoScroll({
+        timelinePointOffset: offset,
+        timelineContentHeight: height,
+        timelineContentOffset: wrapperOffset,
+      });
+    },
+    [autoScroll]
+  );
 
-  const handleOnShowMore = () => {};
+  // todo remove this
+  const handleOnShowMore = useCallback(() => {}, []);
 
   return (
     <TimelineTreeWrapper data-testid="tree-main">
       {items.map((item, index) => {
         let className = "";
 
+        // in tree mode alternate cards position
         if (alternateCards) {
           className = index % 2 === 0 ? "left" : "right";
         } else {
@@ -62,7 +66,7 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
             mode={mode}
             cardHeight={cardHeight}
             slideItemDuration={slideItemDuration}
-            onMediaStateChange={onMediaStateChange}
+            onElapsed={onElapsed}
           />
         );
       })}

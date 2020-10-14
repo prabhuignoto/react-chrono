@@ -3,7 +3,7 @@ import { TimelineCollectionModel } from "../../models/TimelineCollnModel";
 import {
   TimelineCollectionWrapper,
   TimelineItemWrapper,
-} from "./timeline-collection.styles";
+} from "./timeline-horizontal.styles";
 import TimelineItem from "../timeline-elements/timeline-card/timeline-card";
 
 const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
@@ -16,8 +16,8 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
   theme,
   slideShowRunning,
   cardHeight,
-  onMediaStateChange,
-  slideItemDuration
+  slideItemDuration,
+  onElapsed
 }) => {
   return (
     <TimelineCollectionWrapper
@@ -39,8 +39,8 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
             theme={theme}
             slideShowRunning={slideShowRunning}
             cardHeight={cardHeight}
-            onMediaStateChange={onMediaStateChange}
             slideItemDuration={slideItemDuration}
+            onElapsed={onElapsed}
           />
         </TimelineItemWrapper>
       ))}

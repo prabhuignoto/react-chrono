@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
+import { TimelineItemViewModel } from "../../../models/TimelineItemModel";
 import TimelineItemContent from "../timeline-card-content/timeline-card-content";
 import TimelineItemTitle from "../timeline-item-title/timeline-card-title";
 import {
@@ -9,7 +10,6 @@ import {
   TimelineTitleContainer,
   Wrapper,
 } from "./timeline-card.styles";
-import { TimelineItemViewModel } from "../../../models/TimelineItemModel";
 
 const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   active,
@@ -22,7 +22,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   media,
   mode,
   onClick,
-  onMediaStateChange,
+  onElapsed,
   position,
   slideItemDuration,
   slideShowRunning,
@@ -35,7 +35,9 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
   const contentRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
-    onClick && onClick(id);
+    if (onClick && !slideShowRunning) {
+      onClick(id);
+    }
   };
 
   useEffect(() => {
@@ -99,8 +101,9 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
           media={media}
           mode={mode}
           cardHeight={cardHeight}
-          onMediaStateChange={onMediaStateChange}
           slideItemDuration={slideItemDuration}
+          onElapsed={onElapsed}
+          id={id}
         />
       </TimelineContentContainer>
     );

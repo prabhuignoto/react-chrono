@@ -12,6 +12,7 @@ const TreeLeaf: React.FunctionComponent<TreeLeafModel> = (props) => {
     onActive,
     theme,
     alternateCards,
+    slideShowRunning,
   } = props;
   const circleRef = useRef<HTMLDivElement>(null);
 
@@ -32,7 +33,11 @@ const TreeLeaf: React.FunctionComponent<TreeLeafModel> = (props) => {
     >
       <TrunkPointWrapper
         className={className}
-        onClick={() => id && onClick(id)}
+        onClick={() => {
+          if (id && onClick && !slideShowRunning) {
+            onClick(id);
+          }
+        }}
         ref={circleRef}
         data-testid="tree-leaf-click"
       >

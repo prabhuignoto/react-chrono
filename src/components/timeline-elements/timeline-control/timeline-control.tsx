@@ -29,56 +29,65 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
   return (
     <TimelineControlContainer slideShowActive={slideShowRunning}>
       <TimelineNavWrapper>
+        {/* jump to first */}
         <TimelineNavItem disable={disableLeft}>
           <TimelineNavButton
             mode={mode}
             theme={theme}
             onClick={onFirst}
-            title="first"
+            title="Go to First"
             aria-label="first"
           >
             <ChevronsLeftIcon />
           </TimelineNavButton>
         </TimelineNavItem>
+
+        {/* previous */}
         <TimelineNavItem disable={disableLeft}>
           <TimelineNavButton
             mode={mode}
             theme={theme}
             onClick={onPrevious}
-            title="previous"
+            title="Previous"
             aria-label="previous"
           >
             <ChevronLeft />
           </TimelineNavButton>
         </TimelineNavItem>
+
+        {/* next */}
         <TimelineNavItem disable={disableRight}>
           <TimelineNavButton
             mode={mode}
             theme={theme}
             onClick={onNext}
-            title="next"
+            title="Next"
             aria-label="next"
           >
             <ChevronRightIcon />
           </TimelineNavButton>
         </TimelineNavItem>
+
+        {/* jump to last */}
         <TimelineNavItem disable={disableRight}>
           <TimelineNavButton
             mode={mode}
             theme={theme}
             onClick={onLast}
-            title="last"
+            title="Go to Last"
             aria-label="last"
           >
             <ChevronsRightIcon />
           </TimelineNavButton>
         </TimelineNavItem>
+
+        {/* slideshow button */}
         <TimelineNavItem>
           {slideShowEnabled && (
             <ReplayWrapper
               theme={theme}
               onClick={onReplay}
-              title="replay slideshow"
+              title="Play Slideshow"
             >
               <ReplayIcon />
             </ReplayWrapper>

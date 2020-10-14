@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { TimelineMode } from "../../../models/TimelineModel";
 import { Theme } from "../../../models/TimelineTreeModel";
-import { keyframes } from "@emotion/core";
 
 export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: boolean, minHeight?: number, mode?: TimelineMode }>`
   align-items: flex-start;
@@ -109,24 +108,20 @@ export const ShowMore = styled.span<{ show?: boolean }>`
   height: ${(p) => !p.show ? "0" : ""};
 `;
 
-const DecreaseBarAnimation = keyframes`
-  0% {
+export const SlideShowProgressBar = styled.span`
+  position: absolute;
+  height: 5px;
+  bottom: -1rem;
+  left: 0;
+  width: 100%;
+  display: block;
+
+  svg {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
   }
-  100% {
-    width: 0%;
-  }
-`;
-
-export const SlideShowProgressBar = styled.span<{ theme?: Theme, duration?: number}>`
-  position: absolute;
-  width: 100%;
-  height: 3px;
-  background: ${p => p.theme.primary};
-  bottom: -0.5rem;
-  left: 0;
-  animation: ${DecreaseBarAnimation} ${p => p.duration}ms ease-in;
-  border-radius: 30px;
 `;
 
 

@@ -45,11 +45,12 @@ const NewDemo: React.FunctionComponent = () => {
 
   useEffect(() => {
     const newItems = data.map(
-      ({ title, contentTitle, contentText, contentDetailedText }) => ({
+      ({ title, contentTitle, contentText, contentDetailedText, id }) => ({
         title,
         contentTitle,
         contentText,
         contentDetailedText,
+        id,
       })
     );
     setItems(newItems);
@@ -57,7 +58,7 @@ const NewDemo: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (type === "desktop") {
-      setCardHeight(230);
+      setCardHeight(250);
     } else if (type === "big-screen") {
       setCardHeight(400);
     } else if (type === "tablet") {
@@ -78,7 +79,7 @@ const NewDemo: React.FunctionComponent = () => {
         <AppHeader type={type} />
 
         {/* project description */}
-        <DescriptionContent style={{ fontSize: "1.2rem" }}>
+        <DescriptionContent style={{ fontSize: "1rem" }}>
           <strong>react-chrono</strong> is a modern timeline component built for{" "}
           <a href="https://reactjs.org">React</a>.
         </DescriptionContent>
@@ -107,7 +108,13 @@ const NewDemo: React.FunctionComponent = () => {
               </DescriptionContent>
             </Description>
             <ComponentContainer type={state.mediaType}>
-              <Chrono items={items} mode="HORIZONTAL" cardHeight={300} />
+              <Chrono
+                items={items}
+                mode="HORIZONTAL"
+                cardHeight={300}
+                slideShow
+                slideItemDuration={1500}
+              />
             </ComponentContainer>
           </Horizontal>
         )}

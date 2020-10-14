@@ -13,7 +13,7 @@ export interface TimelineItemModel {
   contentDetailedText?: string;
   contentText: string;
   contentTitle?: string;
-  id?: string;
+  id: string;
   media?: Media;
   position?: string;
   title: string;
@@ -29,5 +29,5 @@ export interface TimelineItemViewModel extends TimelineItemModel {
   wrapperId: string;
   cardHeight?: number;
   slideItemDuration?: number;
-  onMediaStateChange: (state: { id?: string; playing?: boolean; paused?: boolean }) => void;
+  onElapsed: (id: string) => void;
 }

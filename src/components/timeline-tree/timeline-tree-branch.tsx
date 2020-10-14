@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { TreeBranchModel } from "../../models/TimelineTreeModel";
-import TimelineItemContent from "../timeline-elements/timeline-card-content/timeline-card-content";
+import TimelineCard from "../timeline-elements/timeline-card-content/timeline-card-content";
 import TimelineItemTitle from "../timeline-elements/timeline-item-title/timeline-card-title";
 import TreeLeaf from "./timeline-tree-leaf";
 import {
   Branch,
-  TimelineItemContentWrapper,
+  TimelineCardContentWrapper,
   TimelineTreeTitleWrapper,
 } from "./timeline-tree.styles";
 
@@ -26,12 +26,12 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
     mode,
     onActive,
     onClick,
-    onMediaStateChange,
     slideItemDuration,
     slideShowRunning,
     theme,
     title,
     visible,
+    onElapsed,
   } = props;
 
   const handleOnActive = (offset: number) => {
@@ -58,11 +58,11 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
       </TimelineTreeTitleWrapper>
 
       {/* content section */}
-      <TimelineItemContentWrapper
+      <TimelineCardContentWrapper
         className={`${className} ${visible ? "visible" : ""}`}
         alternateCards={alternateCards}
       >
-        <TimelineItemContent
+        <TimelineCard
           active={active}
           cardHeight={cardHeight}
           content={contentText}
@@ -80,10 +80,10 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
             }, 200)
           }
           branchDir={className}
-          onMediaStateChange={onMediaStateChange}
           slideItemDuration={slideItemDuration}
+          onElapsed={onElapsed || function () {}}
         />
-      </TimelineItemContentWrapper>
+      </TimelineCardContentWrapper>
 
       {/* leaf */}
       <TreeLeaf
@@ -94,6 +94,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
         onActive={handleOnActive}
         theme={theme}
         alternateCards={alternateCards}
+        slideShowRunning={slideShowRunning}
       />
     </Branch>
   );

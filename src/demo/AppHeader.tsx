@@ -3,7 +3,6 @@ import AppLogo from "../assets/logo.png";
 import { GithubLogo, Header, LogoImage } from "./App.styles";
 
 export default ({ type }: { type: string }) => {
-
   return (
     <Header>
       <a href="https://react-chrono.vercel.app/">
@@ -21,7 +20,7 @@ export default ({ type }: { type: string }) => {
       >
         <GithubLogo>
           <iframe
-            src={`https://ghbtns.com/github-btn.html?user=prabhuignoto&repo=react-chrono&type=star&count=true&size=large`}
+            src={`https://ghbtns.com/github-btn.html?user=prabhuignoto&repo=react-chrono&type=star&count=true&size=small`}
             frameBorder="0"
             scrolling="0"
             width="300"

@@ -70,7 +70,7 @@ export const TreeTrunkWrapper = styled.div<{ bg?: string, alternateCards?: boole
   }
 `;
 
-export const TimelineItemContentWrapper = styled.div<{ alternateCards?: boolean }>`
+export const TimelineCardContentWrapper = styled.div<{ alternateCards?: boolean }>`
   visibility: hidden;
   ${(p) => p.alternateCards ? "width: 45%;" : "width: 75%; height: 85%"};
   /* padding: 1rem 0; */

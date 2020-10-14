@@ -9,7 +9,7 @@ exports[`Test Timeline Item render - Horizontal 1`] = `
     class="css-1p18t0t"
   >
     <div
-      class="horizontal active css-1a01u17"
+      class="horizontal active css-1yzc5y5"
       data-testid="timeline-circle"
     />
   </div>
@@ -18,7 +18,7 @@ exports[`Test Timeline Item render - Horizontal 1`] = `
     data-testid="timeline-title"
   >
     <div
-      class="active css-jh9ivn"
+      class="active css-x77ob3"
       title="test title"
     >
       test title
@@ -36,35 +36,35 @@ exports[`Test Timeline Item render - Vertical 1`] = `
     class="css-1p18t0t"
   >
     <div
-      class="vertical active css-1a01u17"
+      class="vertical active css-1yzc5y5"
       data-testid="timeline-circle"
     />
   </div>
   <div
-    class="vertical css-nyflco"
+    class="vertical css-1t5nnqc"
   >
     <div
       class="vertical bottom css-lzd26m"
       data-testid="timeline-title"
     >
       <div
-        class="active css-jh9ivn"
+        class="active css-x77ob3"
         title="test title"
       >
         test title
       </div>
     </div>
     <div
-      class="active css-rvukg4"
+      class="active css-74e5rn"
       mode="VERTICAL"
     >
       <span
-        class="css-1uk2dbl"
+        class="css-c1e5f8"
       >
         This is a test content
       </span>
       <div
-        class="show-less css-y2y44s"
+        class="show-less css-or8e72"
       />
       <span
         class="show-more css-1rml49d"

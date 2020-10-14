@@ -22,14 +22,14 @@ const Features: React.FunctionComponent = () => (
         <span className="icon" role="img" aria-label="tree">
           🌲
         </span>
-        &nbsp;Use the <a href="#tree-mode">Tree mode</a> to layout timeline
-        cards vertically in a tree like fashion.
+        &nbsp;Use the <a href="#tree">Tree mode</a> to layout timeline cards
+        vertically in a tree like fashion.
       </Feature>
       <Feature>
         <span className="icon" role="img" aria-label="slideshow">
           📺
         </span>{" "}
-        Auto play the timeline with <a href="#slideshow">slideshow</a> mode.
+        Auto play the timeline with <a href="#tree">slideshow</a> mode.
       </Feature>
       <Feature>
         <span className="icon" role="img" aria-label="slideshow">
@@ -59,8 +59,7 @@ const Features: React.FunctionComponent = () => (
         <span className="icon" role="img" aria-label="keyboard support">
           🔧
         </span>
-        &nbsp;Optimized to render images efficiently on (tree & vertical mode).
-        images & videos not visible are automatically hidden.
+        &nbsp; Optimized to only render timeline items that are visible in the containing element (vertical and tree modes).
       </Feature>
       {/* <Feature>
         <span className="icon" role="img" aria-label="typescript">

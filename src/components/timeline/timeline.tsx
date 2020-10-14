@@ -4,8 +4,8 @@ import { Scroll } from "../../models/TimelineCollnModel";
 import { TimelineItemViewModel } from "../../models/TimelineItemModel";
 import { TimelineModel } from "../../models/TimelineModel";
 import useNewScrollPosition from "../effects/useNewScrollPosition";
-import TimelineCollection from "../timeline-collection/timeline-collection";
 import TimelineControl from "../timeline-elements/timeline-control/timeline-control";
+import TimelineCollection from "../timeline-horizontal/timeline-horizontal";
 import TimelineTree from "../timeline-tree/timeline-tree";
 import {
   Outline,
@@ -16,36 +16,44 @@ import {
   Wrapper,
 } from "./timeline.style";
 
-const Timeline: React.FunctionComponent<TimelineModel> = ({
-  activeTimelineItem,
-  disableNavOnKey,
-  itemWidth = 200,
-  items,
-  mode = "HORIZONTAL",
-  onNext,
-  onPrevious,
-  onTimelineUpdated,
-  slideShowRunning,
-  onLast,
-  onFirst,
-  theme,
-  titlePosition = "TOP",
-  onRestartSlideshow,
-  slideShow,
-  cardHeight,
-  onMediaStateChange,
-  slideShowEnabled,
-  slideItemDuration
-}) => {
+const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
+  // de-structure the props
+  const {
+    activeTimelineItem,
+    disableNavOnKey,
+    itemWidth = 200,
+    items,
+    mode = "HORIZONTAL",
+    onNext,
+    onPrevious,
+    onTimelineUpdated,
+    slideShowRunning,
+    onLast,
+    onFirst,
+    theme,
+    titlePosition = "TOP",
+    onRestartSlideshow,
+    cardHeight,
+    slideShowEnabled,
+    slideItemDuration,
+    hideControls,
+  } = props;
+
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
+
+  // reference to the timeline
   const timelineMainRef = useRef<HTMLDivElement>(null);
+
+  // generate a unique id for the timeline content
   const id = useRef(nanoid());
 
+  // handlers for navigation
   const handleNext = () => onNext();
   const handlePrevious = () => onPrevious();
   const handleFirst = () => onFirst();
   const handleLast = () => onLast();
 
+  // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
@@ -69,11 +77,15 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
     }
   };
 
-  const handleTimelineItemClick = (id?: string) => {
-    if (id && !slideShowRunning) {
+  const handleTimelineItemClick = (id?: string, isSlideShow?: boolean) => {
+    if (id) {
       for (let idx = 0; idx < items.length; idx++) {
         if (items[idx].id === id) {
-          onTimelineUpdated && onTimelineUpdated(idx);
+          if (isSlideShow && idx < items.length - 1) {
+            onTimelineUpdated(idx + 1);
+          } else {
+            onTimelineUpdated(idx);
+          }
           break;
         }
       }
@@ -141,12 +153,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
   );
 
   useEffect(() => {
+    // setup observer for the timeline elements
     setTimeout(() => {
       const element = timelineMainRef.current;
 
       if (element) {
         const childElements = element.querySelectorAll(".branch-main");
-
         Array.from(childElements).forEach((elem) => observer.observe(elem));
       }
     }, 0);
@@ -173,8 +185,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             slideShowRunning={slideShowRunning}
             mode={mode}
             cardHeight={cardHeight}
-            onMediaStateChange={onMediaStateChange}
             slideItemDuration={slideItemDuration}
+            onElapsed={(id: string) => handleTimelineItemClick(id, true)}
           />
         ) : null}
 
@@ -192,8 +204,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
               theme={theme}
               slideShowRunning={slideShowRunning}
               cardHeight={cardHeight}
-              onMediaStateChange={onMediaStateChange}
               slideItemDuration={slideItemDuration}
+              onElapsed={(id: string) => handleTimelineItemClick(id, true)}
             />
           </TimelineMain>
         ) : null}
@@ -210,28 +222,32 @@ const Timeline: React.FunctionComponent<TimelineModel> = ({
             slideShowRunning={slideShowRunning}
             mode={mode}
             cardHeight={cardHeight}
-            onMediaStateChange={onMediaStateChange}
             slideItemDuration={slideItemDuration}
+            onElapsed={(id: string) => handleTimelineItemClick(id, true)}
           />
         ) : null}
       </TimelineMainWrapper>
 
       {/* Timeline Controls */}
-      <TimelineControlContainer mode={mode}>
-        <TimelineControl
-          onNext={handleNext}
-          onPrevious={handlePrevious}
-          onFirst={handleFirst}
-          onLast={handleLast}
-          disableLeft={activeTimelineItem === 0}
-          disableRight={activeTimelineItem === items.length - 1}
-          mode={mode}
-          theme={theme}
-          onReplay={onRestartSlideshow}
-          slideShowRunning={slideShowRunning}
-          slideShowEnabled={slideShowEnabled}
-        />
-      </TimelineControlContainer>
+      {!hideControls && (
+        <TimelineControlContainer mode={mode}>
+          <TimelineControl
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+            onFirst={handleFirst}
+            onLast={handleLast}
+            disableLeft={activeTimelineItem === 0}
+            disableRight={activeTimelineItem === items.length - 1}
+            mode={mode}
+            theme={theme}
+            onReplay={onRestartSlideshow}
+            slideShowRunning={slideShowRunning}
+            slideShowEnabled={slideShowEnabled}
+          />
+        </TimelineControlContainer>
+      )}
+
+      {/* placeholder to render timeline content for horizontal mode */}
       <TimelineContentRender id={id.current} />
     </Wrapper>
   );
