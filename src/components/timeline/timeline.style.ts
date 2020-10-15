@@ -43,7 +43,7 @@ export const TimelineMainWrapper = styled.div`
   scrollbar-width: none;
 
   &.horizontal {
-    height: 6rem;
+    height: 3rem;
   }
 
   &.vertical {
@@ -55,6 +55,7 @@ export const TimelineMain = styled.div`
   align-items: center;
   display: flex;
   left: 0;
+  bottom: 0;
   position: absolute;
   transition: all 0.2s ease;
 
@@ -85,7 +86,8 @@ export const TimelineControlContainer = styled.div<{ mode?: TimelineMode, active
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-top: auto;
+  /* margin-top: auto;
+  margin-bottom: auto; */
   
   filter: ${p => {
     if (p.active) {

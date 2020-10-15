@@ -13,6 +13,7 @@ export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: 
   background: ${p => p.active ? `rgba(${p.theme.secondary}, 0.35)` : ""};
   border-radius: 4px;
   pointer-events: ${p => !p.active && p.slideShowActive ? "none" : ""};
+  text-align: center;
 
   ${p => {
     if (p.mode === "HORIZONTAL") {
@@ -41,7 +42,7 @@ export const CardImage = styled.img<{ mode?: TimelineMode, visible?: boolean, ac
   border-radius: 4px;
   margin-right: auto;
   object-fit: contain;
-  height: 70%;
+  max-height: 70%;
   margin-left: auto;
 `;
 

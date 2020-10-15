@@ -98,10 +98,10 @@ export const TimelineTitleContainer = styled.div`
   &.horizontal {
     position: absolute;
     &.top {
-      bottom: 3rem;
+      bottom: 2rem;
     }
     &.bottom {
-      top: 3rem;
+      top: 1rem;
     }
   }
 `;

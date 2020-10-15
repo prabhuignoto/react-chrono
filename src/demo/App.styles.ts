@@ -38,11 +38,11 @@ export const ComponentContainer = styled.div<{ type?: string }>`
   ${p => {
     switch (p.type) {
       case "desktop":
-        return `height: 450px; width: 80%;`
+        return `width: 80%;`
       case "big-screen":
-        return `height: 500px; width: 80%;`
+        return `width: 80%;`
       case "tablet":
-        return `height: 550px; width: 100%;`
+        return `width: 100%;`
       default:
         break;
     }
