@@ -111,7 +111,7 @@ export const TimelineContentRender = styled.div`
   /* position: absolute; */
   /* right: 0; */
   /* top: 3rem; */
-  width: 80%;
+  width: 98%;
   display: flex;
   align-items: center;
   justify-content: center;
