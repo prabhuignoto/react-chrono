@@ -11,13 +11,13 @@ interface CommonPropsModel {
   slideItemDuration?: number;
   slideShowRunning?: boolean;
   theme?: Theme;
-  onElapsed?: (id: string) => void;
+  onElapsed?: (id?: string) => void;
 }
 
 interface CommonBranchAndLeafModel extends CommonPropsModel {
   active?: boolean;
   className: string;
-  id: string;
+  id?: string;
 }
 
 export interface TreeLeafModel extends CommonBranchAndLeafModel {

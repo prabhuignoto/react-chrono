@@ -38,7 +38,12 @@ export const VerticalBasic: FunctionComponent<{
       </DescriptionContent>
     </Description>
     <ComponentContainerTree type={type}>
-      <Chrono items={items} mode="VERTICAL" slideShow slideItemDuration={1500} />
+      <Chrono
+        items={items}
+        mode="VERTICAL"
+        slideShow
+        slideItemDuration={1500}
+      />
     </ComponentContainerTree>
   </Vertical>
 );
@@ -81,7 +86,7 @@ export const VerticalTree: FunctionComponent<{
 
 export const VerticalTreeMixed: FunctionComponent<{
   type: string;
-  cardHeight: number;
+  cardHeight?: number;
 }> = ({ type, cardHeight }) => (
   <Vertical>
     <Description>
@@ -115,7 +120,7 @@ export const VerticalTreeMixed: FunctionComponent<{
 
 export const HorizontalSlideshow: FunctionComponent<{
   type: string;
-  cardHeight: number;
+  cardHeight?: number;
 }> = ({ type, cardHeight }) => (
   <Horizontal id="slideshow">
     <Description>

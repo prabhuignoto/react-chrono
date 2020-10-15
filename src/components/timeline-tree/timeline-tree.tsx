@@ -14,7 +14,7 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   mode,
   cardHeight,
   slideItemDuration,
-  onElapsed
+  onElapsed,
 }) => {
   // check if the timeline that has become active is visible.
   // if not auto scroll the content and bring it to the view.

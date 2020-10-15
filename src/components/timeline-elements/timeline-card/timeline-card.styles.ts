@@ -111,10 +111,10 @@ export const TimelineContentContainer = styled.div<{ position?: string }>`
   animation: ${show} 0.25s ease-in;
   
   &.horizontal {
-    position: absolute;
+    /* position: absolute; */
     min-width: 400px;
     max-width: 70%;
-    z-index: 9999;
+    /* z-index: 9999; */
   }
 
   &.vertical {

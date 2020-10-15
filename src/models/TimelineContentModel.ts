@@ -7,12 +7,12 @@ export interface TimelineContentModel {
   cardHeight?: number;
   content: string;
   detailedText?: string;
-  id: string;
+  id?: string;
   media?: Media;
   mode?: TimelineMode;
   onClick?: (id: string) => void;
   onShowMore: () => void;
-  onElapsed: (id: string) => void;
+  onElapsed: (id?: string) => void;
   slideShowActive?: boolean;
   slideItemDuration?: number;
   theme?: Theme;

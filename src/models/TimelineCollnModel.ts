@@ -12,7 +12,7 @@ export interface TimelineCollectionModel {
   theme?: Theme;
   wrapperId: string;
   cardHeight?: number;
-  onElapsed: (id: string) => void;
+  onElapsed: (id?: string) => void;
   slideItemDuration?: number;
 }
 
@@ -24,7 +24,7 @@ export interface Scroll {
    * @memberof Scroll
    */
   timelineContentHeight: number;
-  
+
   /**
    * Offset of the Content card
    *
@@ -32,7 +32,7 @@ export interface Scroll {
    * @memberof Scroll
    */
   timelineContentOffset: number;
-  
+
   /**
    * Height of the timeline point
    *
@@ -40,7 +40,7 @@ export interface Scroll {
    * @memberof Scroll
    */
   timelinePointHeight: number;
-  
+
   /**
    * Offset of the timeline point
    *

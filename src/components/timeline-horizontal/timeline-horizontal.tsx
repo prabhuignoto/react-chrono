@@ -1,10 +1,10 @@
 import React from "react";
 import { TimelineCollectionModel } from "../../models/TimelineCollnModel";
+import TimelineItem from "../timeline-elements/timeline-card/timeline-card";
 import {
   TimelineCollectionWrapper,
   TimelineItemWrapper,
 } from "./timeline-horizontal.styles";
-import TimelineItem from "../timeline-elements/timeline-card/timeline-card";
 
 const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
   items,
@@ -17,7 +17,7 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
   slideShowRunning,
   cardHeight,
   slideItemDuration,
-  onElapsed
+  onElapsed,
 }) => {
   return (
     <TimelineCollectionWrapper

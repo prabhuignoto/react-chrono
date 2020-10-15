@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 const ModeWrapper = styled.div`
-  width: 100%;
+  width: 850px;
   position: relative;
   margin-bottom: 3rem;
   border-radius: 10px;
@@ -15,26 +15,14 @@ export const Horizontal = styled(ModeWrapper)``;
 
 export const Vertical = styled(ModeWrapper)``;
 
-export const Wrapper = styled.div<{ show: boolean, type?: string }>`
-  display: ${p => p.show ? "block" : "none"};
+export const Wrapper = styled.div`
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
-  width: ${p => {
-    if (p.type === "tablet") {
-      return "100%";
-    } else if (p.type === "big-screen") {
-      return "1400px"
-    } else if (p.type === "desktop") {
-      return "80%"
-    } else if (p.type === "mobile") {
-      return "100%";
-    } else {
-      return "100%";
-    }
-  }};
+  width: 100%;
   background: #fff;
-  padding:${p => p.type !== "tablet" ? "0 1rem" : ""};
-  filter: drop-shadow(0 0 60px rgba(0,0,0,0.1))
 `;
 
 export const ComponentContainer = styled.div<{ type?: string }>`
@@ -52,7 +40,7 @@ export const ComponentContainer = styled.div<{ type?: string }>`
       case "desktop":
         return `height: 300px; width: 90%;`
       case "big-screen":
-        return `height: 450px; width: 90%;`
+        return `height: 550px; width: 90%;`
       case "tablet":
         return `height: 380px; width: 100%;`
       default:

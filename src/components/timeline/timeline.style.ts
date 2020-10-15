@@ -42,7 +42,7 @@ export const TimelineMainWrapper = styled.div`
   scrollbar-width: none;
 
   &.horizontal {
-    height: 10rem;
+    height: 3rem;
   }
 
   &.vertical {
@@ -83,13 +83,8 @@ export const Outline = styled.div<{ color?: string }>`
 export const TimelineControlContainer = styled.div<{ mode?: TimelineMode, active?: boolean }>`
   align-items: center;
   display: flex;
-  height: 3rem;
-  justify-content: flex-end;
+  justify-content: center;
   margin-top: 1rem;
-  position: absolute;
-  width: 0;
-  right: 0;
-  bottom: 0;
   
   filter: ${p => {
     if (p.active) {
@@ -109,12 +104,12 @@ export const TimelineControlContainer = styled.div<{ mode?: TimelineMode, active
 `;
 
 export const TimelineContentRender = styled.div`
-  left: 0;
+  /* left: 0; */
   margin-left: auto;
   margin-right: auto;
-  position: absolute;
-  right: 0;
-  top: 3rem;
+  /* position: absolute; */
+  /* right: 0; */
+  /* top: 3rem; */
   width: 80%;
   display: flex;
   align-items: center;

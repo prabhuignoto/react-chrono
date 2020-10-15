@@ -58,7 +58,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
     timerRef.current = window.setInterval(() => {
       // clear the timer and move to the next card
       window.clearInterval(timerRef.current);
-      onElapsed(id);
+      id && onElapsed(id);
     }, interval);
   };
 
@@ -99,7 +99,9 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
     if (state.playing) {
       slideShowActive && tryHandlePauseSlideshow();
     } else if (state.paused) {
-      !paused && slideShowActive && onElapsed(id);
+      if (!paused && slideShowActive && id) {
+        onElapsed(id);
+      }
     }
   };
 
@@ -111,7 +113,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       minHeight={cardHeight}
       mode={mode}
       onClick={() => {
-        if (!slideShowActive && onClick) {
+        if (!slideShowActive && onClick && id) {
           onClick(id);
         }
       }}

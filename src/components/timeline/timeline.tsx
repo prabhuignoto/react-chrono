@@ -186,7 +186,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
             mode={mode}
             cardHeight={cardHeight}
             slideItemDuration={slideItemDuration}
-            onElapsed={(id: string) => handleTimelineItemClick(id, true)}
+            onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
           />
         ) : null}
 
@@ -205,7 +205,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
               slideShowRunning={slideShowRunning}
               cardHeight={cardHeight}
               slideItemDuration={slideItemDuration}
-              onElapsed={(id: string) => handleTimelineItemClick(id, true)}
+              onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
             />
           </TimelineMain>
         ) : null}
@@ -223,11 +223,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
             mode={mode}
             cardHeight={cardHeight}
             slideItemDuration={slideItemDuration}
-            onElapsed={(id: string) => handleTimelineItemClick(id, true)}
+            onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
           />
         ) : null}
       </TimelineMainWrapper>
-
+      {/* placeholder to render timeline content for horizontal mode */}
+      <TimelineContentRender id={id.current} />
       {/* Timeline Controls */}
       {!hideControls && (
         <TimelineControlContainer mode={mode}>
@@ -247,8 +248,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
         </TimelineControlContainer>
       )}
 
-      {/* placeholder to render timeline content for horizontal mode */}
-      <TimelineContentRender id={id.current} />
     </Wrapper>
   );
 };
