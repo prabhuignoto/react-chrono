@@ -47,9 +47,10 @@
   - [Timeline item Model](#timeline-item-model)
   - [Keyboard Navigation & Disabling it](#keyboard-navigation--disabling-it)
   - [Media](#media)
-  - [Slideshow](#slideshow-1)
+  - [Slideshow mode](#slideshow-mode)
   - [Item Width](#item-width)
   - [🎨 Theme](#-theme)
+  - [📦 Codesandbox Examples](#-codesandbox-examples)
 - [📦Build Setup](#build-setup)
 - [🔨 Contributing](#-contributing)
 - [🧱 Built with](#-built-with)
@@ -249,7 +250,7 @@ Videos start playing automatically when active will be paused when not active. L
 }
 ```
 
-### Slideshow
+### Slideshow mode
 
 Slideshow can be enabled by setting the `slideShow` prop to true. You can also set an optional `slideItemDuration` that sets the time delay between cards.
 
@@ -268,6 +269,14 @@ Customize colors with `theme` prop.
 ```sh
 <chrono items={items}  titlePosition="BOTTOM" theme={{primary: "red", secondary: "blue" }} />
 ```
+
+### 📦 Codesandbox Examples
+
+[Horizontal Basic](https://codesandbox.io/s/condescending-swirles-xodxo?file=/src/App.js)
+[Tree](https://codesandbox.io/s/react-chrono-tree-text-xtksq)
+[Tree with Images](https://codesandbox.io/s/react-chrono-tree-image-uh2nz)
+[Vertical basic](https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?file=/src/App.js)
+[Vertical mode with Mixed content](https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3)
 
 ## 📦Build Setup
 
