@@ -17,6 +17,8 @@ steps:
 
 - script: |
     yarn install
+    yarn add react
+    yarn add react-dom
     yarn run rollup
   displayName: 'Running Rollup'
 
