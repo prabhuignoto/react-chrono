@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { hot } from "react-hot-loader/root";
 import { TimelineItemModel } from "../models/TimelineItemModel";
 import { VerticalTree } from "./app-samples";
 import "./App.css";
@@ -75,4 +74,4 @@ const NewDemo: React.FunctionComponent = () => {
   );
 };
 
-export default hot(NewDemo);
+export default NewDemo;
