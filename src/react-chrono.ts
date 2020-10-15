@@ -2,5 +2,5 @@ import ReactChrono from "./components";
 import { TimelineItemModel } from "./models/TimelineItemModel";
 
 export { ReactChrono as Chrono };
-export type { TimelineItemModel as TimelineItem };
+export type TimelineItem = TimelineItemModel;
 
