@@ -3,9 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 750px;
   margin: 0 auto;
-  height: 650px;
 }
 
 .App-logo {

@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   position: relative;
   width: 100%;
+  height: 100%;
   user-select: none;
   outline: 0;
   
@@ -42,7 +43,7 @@ export const TimelineMainWrapper = styled.div`
   scrollbar-width: none;
 
   &.horizontal {
-    height: 3rem;
+    height: 6rem;
   }
 
   &.vertical {
@@ -84,7 +85,7 @@ export const TimelineControlContainer = styled.div<{ mode?: TimelineMode, active
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: auto;
   
   filter: ${p => {
     if (p.active) {

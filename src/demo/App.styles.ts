@@ -38,11 +38,11 @@ export const ComponentContainer = styled.div<{ type?: string }>`
   ${p => {
     switch (p.type) {
       case "desktop":
-        return `height: 300px; width: 90%;`
+        return `height: 450px; width: 80%;`
       case "big-screen":
-        return `height: 550px; width: 90%;`
+        return `height: 500px; width: 80%;`
       case "tablet":
-        return `height: 380px; width: 100%;`
+        return `height: 550px; width: 100%;`
       default:
         break;
     }
@@ -59,9 +59,9 @@ export const ComponentContainerTree = styled.div<{ type?: string }>`
   ${p => {
     switch (p.type) {
       case "desktop":
-        return `height: 600px; width: 90%;`
+        return `height: 600px; width: 75%;`
       case "big-screen":
-        return `height: 850px; width: 90%;`
+        return `height: 850px; width: 75%;`
       case "tablet":
         return `height: 850px; width: 100%;`
       case "mobile":

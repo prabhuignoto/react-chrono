@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import Chrono from "../components";
 import { TimelineItemModel } from "../models/TimelineItemModel";
-import { VerticalTree } from "./app-samples";
+import { VerticalBasic } from "./app-samples";
 import "./App.css";
-import { Wrapper } from "./App.styles";
+import { ComponentContainer, Description, DescriptionContent, DescriptionHeader, Horizontal, Wrapper } from "./App.styles";
 import data from "./data";
 
 const NewDemo: React.FunctionComponent = () => {
@@ -25,7 +26,7 @@ const NewDemo: React.FunctionComponent = () => {
     <Wrapper>
       <>
         {/* Horizontal with Media */}
-        {/* {items.length > 0 && (
+        {items.length > 0 && (
           <Horizontal id="horizontal">
             <Description>
               <span>
@@ -46,7 +47,7 @@ const NewDemo: React.FunctionComponent = () => {
               />
             </ComponentContainer>
           </Horizontal>
-        )} */}
+        )}
 
         {/* Vertical with no Media */}
         {/* {items.length > 0 && (
@@ -54,7 +55,7 @@ const NewDemo: React.FunctionComponent = () => {
         )} */}
 
         {/* Tree Mode */}
-        {items.length > 0 && <VerticalTree type={"big-screen"} items={items} />}
+        {/* {items.length > 0 && <VerticalTree type={"big-screen"} items={items} />} */}
 
         {/* mixed mode */}
         {/* {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} */}
