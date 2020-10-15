@@ -5,7 +5,8 @@
 [![Depfu](https://badges.depfu.com/badges/48a23a6a830309649b7e516467cd9a48/overview.svg)](https://depfu.com/github/prabhuignoto/react-chrono?project_id=15325)
 ![https://badgen.net/bundlephobia/min/react](https://badgen.net/bundlephobia/min/react)
 
-![logo](./readme-assets/social-logo-small.png)
+<!-- ![logo](./readme-assets/social-logo-small.png) -->
+![demo](./readme-assets/demo3.gif)
 
 **Try it on CodeSandbox!**
 
