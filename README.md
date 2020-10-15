@@ -18,9 +18,9 @@
   <img src="./readme-assets/demo3.gif" />
 </div>
 
-**Try it on CodeSandbox!**
+<!-- **Try it on CodeSandbox!**
 
-[![Edit react-chrono](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-chrono-bg56e?fontsize=14&hidenavigation=1&theme=dark)
+[![Edit react-chrono](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-chrono-bg56e?fontsize=14&hidenavigation=1&theme=dark) -->
 
 <h2>Features</h2>
 
