@@ -2,7 +2,7 @@
   "name": "react-chrono",
   "version": "1.2.8",
   "license": "MIT",
-  "description": "A modern Timeline component for React",
+  "description": "A Modern Timeline component for React",
   "keywords": [
     "timeline",
     "react-timeline",
@@ -17,7 +17,9 @@
   "dependencies": {
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
-    "nanoid": "^3.1.12"
+    "nanoid": "^3.1.12",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,10 +46,10 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-optional-chaining": "^7.12.0",
-    "@babel/plugin-transform-runtime": "^7.12.0",
-    "@babel/preset-typescript": "^7.12.0",
-    "@babel/runtime": "^7.12.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "@babel/runtime": "^7.12.1",
     "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-buble": "^0.21.3",
     "@rollup/plugin-commonjs": "^15.1.0",
@@ -64,9 +66,9 @@
     "babel-loader": "^8.1.0",
     "babel-runtime": "^6.26.0",
     "cssnano": "^4.1.10",
-    "lint-staged": "^10.4.0",
+    "lint-staged": "^10.4.1",
     "react-scripts": "3.4.3",
-    "rollup": "^2.30.0",
+    "rollup": "^2.31.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-postcss": "^3.1.8",
     "rollup-plugin-typescript2": "^0.27.3",

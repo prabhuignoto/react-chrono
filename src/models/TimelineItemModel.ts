@@ -20,7 +20,7 @@ export interface TimelineItemModel {
   visible?: boolean;
 }
 
-export interface TimelineItemViewModel extends TimelineItemModel {
+export interface TimelineCardModel extends TimelineItemModel {
   autoScroll: ({ timelinePointOffset, timelinePointWidth, timelinePointHeight, timelineContentHeight }: Partial<Scroll>) => void;
   mode: "HORIZONTAL" | "VERTICAL" | "TREE";
   onClick: (id?: string) => void;

@@ -8,12 +8,14 @@ export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: 
   align-items: center;
   width: 100%;
   align-self: center;
-  padding: 0.5rem;
+  /* padding: 1rem 0; */
   position: relative;
-  background: ${p => p.active ? `rgba(${p.theme.secondary}, 0.35)` : ""};
+  /* background: ${p => p.active ? `rgba(${p.theme.secondary}, 0.35)` : ""}; */
   border-radius: 4px;
   pointer-events: ${p => !p.active && p.slideShowActive ? "none" : ""};
   text-align: center;
+  /* background: #fff; */
+  /* filter: drop-shadow(0 0 4px rgba(0,0,0,0.25)); */
 
   ${p => {
     if (p.mode === "HORIZONTAL") {

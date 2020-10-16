@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import ReactDOM from "react-dom";
-import { TimelineItemViewModel } from "../../../models/TimelineItemModel";
+import { TimelineCardModel } from "../../../models/TimelineItemModel";
 import TimelineItemContent from "../timeline-card-content/timeline-card-content";
 import TimelineItemTitle from "../timeline-item-title/timeline-card-title";
 import {
@@ -11,7 +11,7 @@ import {
   Wrapper,
 } from "./timeline-card.styles";
 
-const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
+const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   active,
   autoScroll,
   cardHeight,
@@ -71,7 +71,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
 
   const handleOnShowMore = () => {};
 
-  const timelineContent = () => {
+  const timelineContent = useMemo(() => {
     let className = "";
 
     if (mode === "HORIZONTAL") {
@@ -107,15 +107,15 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
         />
       </TimelineContentContainer>
     );
-  };
+  }, []);
 
-  const showTimelineContent = () => {
+  const showTimelineContent = useMemo(() => {
     const ele = document.getElementById(wrapperId);
 
     if (ele) {
-      return ReactDOM.createPortal(timelineContent(), ele);
+      return ReactDOM.createPortal(timelineContent, ele);
     }
-  };
+  }, []);
 
   return (
     <Wrapper
@@ -123,7 +123,7 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
       className={mode.toLowerCase()}
       data-testid="timeline-item"
     >
-      {mode === "HORIZONTAL" && active ? showTimelineContent() : null}
+      {mode === "HORIZONTAL" && active ? showTimelineContent : null}
       <TimelinePointWrapper>
         <TimelinePoint
           className={`${mode.toLowerCase()} ${active ? "active" : "in-active"}`}
@@ -141,9 +141,9 @@ const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
           <TimelineItemTitle title={title} active={active} theme={theme} />
         </TimelineTitleContainer>
       )}
-      {mode === "VERTICAL" && timelineContent()}
+      {mode === "VERTICAL" && timelineContent}
     </Wrapper>
   );
 };
 
-export default TimelineItem;
+export default TimelineCard;

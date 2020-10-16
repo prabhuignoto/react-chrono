@@ -1,3 +1,4 @@
+import { css, keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
 import { TimelineMode } from "../../../models/TimelineModel";
 import { Theme } from "../../../models/TimelineTreeModel";
@@ -9,11 +10,6 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
   flex-direction: column;
   font-family: 'Open Sans', monospace;
 
-  height: ${p => {
-    if (!p.noMedia) {
-      return 0
-    }
-  }};
   justify-content: flex-start;
   line-height: 1.5rem;
   margin: 1rem 0;
@@ -21,6 +17,12 @@ export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: b
   width: 100%;
   min-height: ${p => !p.noMedia ? p.minHeight : "150"}px;
   position: relative;
+
+  height: ${p => {
+    if (!p.noMedia && p.mode === "HORIZONTAL") {
+      return 0
+    }
+  }};
 
   ${p => p.noMedia ? `
     background: #fff;
@@ -108,13 +110,40 @@ export const ShowMore = styled.span<{ show?: boolean }>`
   height: ${(p) => !p.show ? "0" : ""};
 `;
 
-export const SlideShowProgressBar = styled.span`
-  position: absolute;
-  height: 5px;
-  bottom: -1rem;
-  left: 0;
-  width: 100%;
+const slideAnimation = (start?: number, end?: number) => keyframes`
+  0% {
+    width: ${start}px;
+  }
+  100% {
+    width: ${end}px;
+  }  
+`;
+
+export const SlideShowProgressBar = styled.span<{
+  startWidth?: number, paused?: boolean, duration?: number, color?: string;
+}>`
+  animation-iteration-count: 1;
+  animation-play-state: paused;
+  background: ${p => p.color};
+  bottom: -0.75rem;
   display: block;
+  height: 3px;
+  left: 0;
+  position: absolute;
+
+  ${p => {
+    if (!p.paused && (p.startWidth && p.startWidth > 0)) {
+      return css`
+        animation: ${slideAnimation(p.startWidth, 0)} ${p.duration}ms ease-in;
+        animation-play-state: running;
+      `;
+    } else {
+      return css`
+        animation-play-state: paused;
+        width: ${p.startWidth}px;
+      `;
+    }
+  }}
 
   svg {
     position: absolute;

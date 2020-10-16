@@ -1,4 +1,4 @@
-import { TimelineItemViewModel } from "./TimelineItemModel";
+import { TimelineCardModel } from "./TimelineItemModel";
 import { TimelineMode } from "./TimelineModel";
 import { Theme } from "./TimelineTreeModel";
 
@@ -6,7 +6,7 @@ export interface TimelineCollectionModel {
   autoScroll: (t: Partial<Scroll>) => void;
   handleItemClick: (id?: string) => void;
   itemWidth: number;
-  items: TimelineItemViewModel[];
+  items: TimelineCardModel[];
   mode: TimelineMode;
   slideShowRunning?: boolean;
   theme?: Theme;

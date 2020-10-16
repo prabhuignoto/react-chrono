@@ -14,7 +14,7 @@ exports[`Test Timeline Item render - Horizontal 1`] = `
     />
   </div>
   <div
-    class="horizontal top css-lzd26m"
+    class="horizontal top css-4fwi1l"
     data-testid="timeline-title"
   >
     <div
@@ -41,10 +41,10 @@ exports[`Test Timeline Item render - Vertical 1`] = `
     />
   </div>
   <div
-    class="vertical css-6vs5dz"
+    class="vertical css-1p33aop"
   >
     <div
-      class="vertical bottom css-lzd26m"
+      class="vertical bottom css-4fwi1l"
       data-testid="timeline-title"
     >
       <div

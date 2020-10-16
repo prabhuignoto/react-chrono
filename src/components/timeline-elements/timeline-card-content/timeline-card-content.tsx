@@ -1,10 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { TimelineContentModel } from "../../../models/TimelineContentModel";
 import { MediaState } from "../../../models/TimelineItemMedia";
 import { MemoContentText, MemoTitle } from "../memoized";
 import CardMedia from "../timeline-card-media/timeline-card-media";
 import {
   ShowMore,
+  SlideShowProgressBar,
   TimelineContentDetails,
   TimelineContentDetailsWrapper,
   TimelineItemContentWrapper,
@@ -29,19 +36,21 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const containerWidth = useRef<number>(0);
+  const progressRef = useRef<HTMLDivElement>(null);
   const canShowMore = useRef(!!detailedText);
   const slideShowElapsed = useRef(0);
   const timerRef = useRef(0);
   const [paused, setPaused] = useState(false);
+  const startTime = useRef<Date>();
 
-  // disabling auto collapse on inactive
-  // useEffect(() => {
-  // auto expand the details content when active and slideshow is running
-  // if (active && slideShowActive) {
-  //   setShowMore(true);
-  //   onShowMore();
-  // }
-  // }, [active, slideShowActive, onShowMore]);
+  // const [elapsed, setElapsed] = useState(0);
+  const [remainInterval, setRemainInterval] = useState(slideItemDuration);
+  const [startWidth, setStartWidth] = useState(0);
+
+  const canShowProgressBar = useMemo(() => {
+    return active && slideShowActive && media?.type !== "VIDEO";
+  }, [active, slideShowActive]);
 
   useEffect(() => {
     const detailsEle = detailsRef.current;
@@ -51,39 +60,66 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
     }
   }, [showMore]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (containerRef.current) {
+        containerWidth.current = containerRef.current.clientWidth;
+        setStartWidth(containerWidth.current);
+      }
+    }, 200);
+  }, []);
+
   const setupTimer = (interval: number) => {
     if (!slideItemDuration) {
       return;
     }
+
+    startTime.current = new Date();
+
+    setPaused(false);
+
     timerRef.current = window.setInterval(() => {
       // clear the timer and move to the next card
       window.clearInterval(timerRef.current);
       id && onElapsed(id);
+      setPaused(true);
+      setStartWidth(0);
     }, interval);
   };
 
   // pause the slide show
-  const tryHandlePauseSlideshow = () => {
+  const tryHandlePauseSlideshow = useCallback(() => {
     if (active && slideShowActive) {
       window.clearTimeout(timerRef.current);
       setPaused(true);
+
+      if (startTime.current) {
+        const elapsed: any = +new Date() - +startTime.current;
+        slideShowElapsed.current = elapsed;
+      }
+
+      if (progressRef.current) {
+        setStartWidth(progressRef.current.clientWidth);
+      }
     }
-  };
+  }, [active, slideShowActive]);
 
   // resumes the slide show
-  const tryHandleResumeSlideshow = () => {
+  const tryHandleResumeSlideshow = useCallback(() => {
     if (active && slideShowActive) {
       if (!slideItemDuration) {
         return;
       }
-      const interval = Math.round(slideItemDuration - slideShowElapsed.current);
+      const remainingInterval = slideItemDuration - slideShowElapsed.current;
+
+      setRemainInterval(remainingInterval);
       setPaused(false);
 
-      if (interval > 0) {
-        setupTimer(interval);
+      if (remainingInterval > 0) {
+        setupTimer(remainingInterval);
       }
     }
-  };
+  }, [active, slideShowActive, slideItemDuration]);
 
   useEffect(() => {
     if (!slideItemDuration) {
@@ -91,6 +127,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
     }
     // setup the timer
     if (active && slideShowActive) {
+      setStartWidth(containerWidth.current);
       setupTimer(slideItemDuration);
     }
   }, [active, slideShowActive]);
@@ -99,7 +136,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
     if (state.playing) {
       slideShowActive && tryHandlePauseSlideshow();
     } else if (state.paused) {
-      if (!paused && slideShowActive && id) {
+      if (paused && slideShowActive && id) {
         onElapsed(id);
       }
     }
@@ -170,6 +207,16 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
         >
           {active ? (showMore ? "show less" : "show more") : "..."}
         </ShowMore>
+      )}
+
+      {canShowProgressBar && (
+        <SlideShowProgressBar
+          startWidth={startWidth}
+          paused={paused}
+          duration={remainInterval}
+          ref={progressRef}
+          color={theme?.primary}
+        ></SlideShowProgressBar>
       )}
     </TimelineItemContentWrapper>
   );

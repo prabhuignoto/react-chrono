@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import React, { useCallback, useEffect, useRef } from "react";
 import { Scroll } from "../../models/TimelineCollnModel";
-import { TimelineItemViewModel } from "../../models/TimelineItemModel";
+import { TimelineCardModel } from "../../models/TimelineItemModel";
 import { TimelineModel } from "../../models/TimelineModel";
 import useNewScrollPosition from "../effects/useNewScrollPosition";
 import TimelineControl from "../timeline-elements/timeline-control/timeline-control";
@@ -177,7 +177,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
         {/* TREE */}
         {mode === "TREE" ? (
           <TimelineTree
-            items={items as TimelineItemViewModel[]}
+            items={items as TimelineCardModel[]}
             onClick={handleTimelineItemClick}
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
@@ -195,7 +195,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
           <TimelineMain className={mode.toLowerCase()}>
             <Outline color={theme?.primary} />
             <TimelineCollection
-              items={items as TimelineItemViewModel[]}
+              items={items as TimelineCardModel[]}
               itemWidth={itemWidth}
               handleItemClick={handleTimelineItemClick}
               autoScroll={handleScroll}
@@ -213,7 +213,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
         {/* VERTICAL */}
         {mode === "VERTICAL" ? (
           <TimelineTree
-            items={items as TimelineItemViewModel[]}
+            items={items as TimelineCardModel[]}
             onClick={handleTimelineItemClick}
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
@@ -247,7 +247,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
           />
         </TimelineControlContainer>
       )}
-
     </Wrapper>
   );
 };

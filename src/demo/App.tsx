@@ -55,13 +55,13 @@ const NewDemo: React.FunctionComponent = () => {
         )} */}
 
         {/* Tree Mode */}
-        {/* {items.length > 0 && <VerticalTree type={"big-screen"} items={items} />} */}
+        {items.length > 0 && <VerticalTree type={"big-screen"} items={items} />}
 
         {/* mixed mode */}
         {/* {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} */}
 
         {/* Horizontal Slideshow */}
-        {<HorizontalSlideshow type={"big-screen"} />}
+        {/* {<HorizontalSlideshow type={"big-screen"} />} */}
 
         {/* Tree Slideshow */}
         {/* {items.length > 0 && (

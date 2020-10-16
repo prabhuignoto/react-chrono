@@ -1,6 +1,6 @@
 import { Scroll } from "./TimelineCollnModel";
 import { Media } from "./TimelineItemMedia";
-import { TimelineItemViewModel } from "./TimelineItemModel";
+import { TimelineCardModel } from "./TimelineItemModel";
 import { TimelineMode } from "./TimelineModel";
 
 interface CommonPropsModel {
@@ -43,7 +43,7 @@ export interface TreeBranchModel extends CommonBranchAndLeafModel {
 export interface TimelineTreeModel extends CommonPropsModel {
   activeTimelineItem: number;
   autoScroll: (s: Partial<Scroll>) => void;
-  items: TimelineItemViewModel[];
+  items: TimelineCardModel[];
 }
 
 export interface Theme {

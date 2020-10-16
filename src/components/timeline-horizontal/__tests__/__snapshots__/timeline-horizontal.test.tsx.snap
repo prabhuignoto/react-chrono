@@ -22,7 +22,7 @@ exports[`Test Collection Horizontal render 1`] = `
         />
       </div>
       <div
-        class="horizontal undefined css-lzd26m"
+        class="horizontal undefined css-4fwi1l"
         data-testid="timeline-title"
       >
         <div
@@ -51,7 +51,7 @@ exports[`Test Collection Horizontal render 1`] = `
         />
       </div>
       <div
-        class="horizontal undefined css-lzd26m"
+        class="horizontal undefined css-4fwi1l"
         data-testid="timeline-title"
       >
         <div
@@ -80,7 +80,7 @@ exports[`Test Collection Horizontal render 1`] = `
         />
       </div>
       <div
-        class="horizontal undefined css-lzd26m"
+        class="horizontal undefined css-4fwi1l"
         data-testid="timeline-title"
       >
         <div
@@ -109,7 +109,7 @@ exports[`Test Collection Horizontal render 1`] = `
         />
       </div>
       <div
-        class="horizontal undefined css-lzd26m"
+        class="horizontal undefined css-4fwi1l"
         data-testid="timeline-title"
       >
         <div
@@ -226,10 +226,10 @@ exports[`Test Collection Vertical render 1`] = `
         />
       </div>
       <div
-        class="vertical css-6vs5dz"
+        class="vertical css-1p33aop"
       >
         <div
-          class="vertical undefined css-lzd26m"
+          class="vertical undefined css-4fwi1l"
           data-testid="timeline-title"
         >
           <div
@@ -278,10 +278,10 @@ exports[`Test Collection Vertical render 1`] = `
         />
       </div>
       <div
-        class="vertical css-6vs5dz"
+        class="vertical css-1p33aop"
       >
         <div
-          class="vertical undefined css-lzd26m"
+          class="vertical undefined css-4fwi1l"
           data-testid="timeline-title"
         >
           <div
@@ -330,10 +330,10 @@ exports[`Test Collection Vertical render 1`] = `
         />
       </div>
       <div
-        class="vertical css-6vs5dz"
+        class="vertical css-1p33aop"
       >
         <div
-          class="vertical undefined css-lzd26m"
+          class="vertical undefined css-4fwi1l"
           data-testid="timeline-title"
         >
           <div
@@ -384,10 +384,10 @@ exports[`Test Collection Vertical render 1`] = `
         />
       </div>
       <div
-        class="vertical css-6vs5dz"
+        class="vertical css-1p33aop"
       >
         <div
-          class="vertical undefined css-lzd26m"
+          class="vertical undefined css-4fwi1l"
           data-testid="timeline-title"
         >
           <div
