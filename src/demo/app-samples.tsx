@@ -140,6 +140,7 @@ export const HorizontalSlideshow: FunctionComponent<{
         mode="HORIZONTAL"
         slideItemDuration={500}
         cardHeight={450}
+        slideShow
       />
       {/* <SandBox>
         <a href="https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?fontsize=14&hidenavigation=1&theme=dark">

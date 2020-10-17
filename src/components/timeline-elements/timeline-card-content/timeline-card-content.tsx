@@ -66,7 +66,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
         containerWidth.current = containerRef.current.clientWidth;
         setStartWidth(containerWidth.current);
       }
-    }, 200);
+    }, 100);
   }, []);
 
   const setupTimer = (interval: number) => {
@@ -84,6 +84,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       id && onElapsed(id);
       setPaused(true);
       setStartWidth(0);
+      setRemainInterval(slideItemDuration);
     }, interval);
   };
 
@@ -132,7 +133,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
     }
   }, [active, slideShowActive]);
 
-  const handleMediaState = (state: MediaState) => {
+  const handleMediaState = useCallback((state: MediaState) => {
     if (state.playing) {
       slideShowActive && tryHandlePauseSlideshow();
     } else if (state.paused) {
@@ -140,7 +141,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
         onElapsed(id);
       }
     }
-  };
+  }, [paused, slideShowActive]);
 
   return (
     <TimelineItemContentWrapper

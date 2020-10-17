@@ -144,7 +144,7 @@ Play the timeline automatically with the `slideShow` mode.
   </div>
 ```
 
-![tree-slideshow](./readme-assets/vertical_slideshow.gif)
+<!-- ![tree-slideshow](./readme-assets/vertical_slideshow.gif) -->
 
 ## Props
 

@@ -9,6 +9,22 @@ import {
   MediaWrapper,
 } from "./timeline-card-media.styles";
 
+/**
+ * Component to render video or image
+ *
+ * @param {*} {
+ *   active,
+ *   id,
+ *   mode,
+ *   onMediaStateChange,
+ *   theme,
+ *   title,
+ *   content,
+ *   media,
+ *   slideshowActive,
+ * }
+ * @returns
+ */
 const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   active,
   id,
@@ -50,7 +66,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
       paused: false,
       playing: false,
     });
-  }, []);
+  }, [id, onMediaStateChange]);
 
   const ErrorMessageMem: React.FunctionComponent<{
     message: string;
@@ -63,6 +79,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
       mode={mode}
       slideShowActive={slideshowActive}
     >
+      {/* video */}
       {media.type === "VIDEO" &&
         (!loadFailed ? (
           <CardVideo
@@ -98,6 +115,8 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         ) : (
           <ErrorMessageMem message="Failed to load the video" />
         ))}
+
+      {/* image */}
       {media.type === "IMAGE" &&
         (!loadFailed ? (
           <CardImage
@@ -111,6 +130,8 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         ) : (
           <ErrorMessageMem message="Failed to load the image." />
         ))}
+
+      {/* details */}
       <MediaDetailsWrapper mode={mode}>
         <MemoTitle title={title} theme={theme} active={active} />
         <MemoContentText content={content} />

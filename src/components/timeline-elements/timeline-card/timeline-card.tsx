@@ -107,6 +107,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         />
       </TimelineContentContainer>
     );
+    //eslint-disable-next-line
   }, []);
 
   const showTimelineContent = useMemo(() => {
@@ -115,6 +116,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     if (ele) {
       return ReactDOM.createPortal(timelineContent, ele);
     }
+    //eslint-disable-next-line
   }, []);
 
   return (

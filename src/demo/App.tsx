@@ -26,7 +26,7 @@ const NewDemo: React.FunctionComponent = () => {
     <Wrapper>
       <>
         {/* Horizontal with Media */}
-        {/* {items.length > 0 && (
+        {items.length > 0 && (
           <Horizontal id="horizontal">
             <Description>
               <span>
@@ -47,7 +47,7 @@ const NewDemo: React.FunctionComponent = () => {
               />
             </ComponentContainer>
           </Horizontal>
-        )} */}
+        )}
 
         {/* Vertical with no Media */}
         {/* {items.length > 0 && (
