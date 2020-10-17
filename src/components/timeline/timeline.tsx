@@ -39,6 +39,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
     hideControls,
   } = props;
 
+
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
 
   // reference to the timeline
@@ -48,10 +49,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
   const id = useRef(nanoid());
 
   // handlers for navigation
-  const handleNext = () => onNext();
-  const handlePrevious = () => onPrevious();
-  const handleFirst = () => onFirst();
-  const handleLast = () => onLast();
+  const handleNext = useCallback(() => onNext(), [onNext]);
+  const handlePrevious = useCallback(() => onPrevious(), [onPrevious]);
+  const handleFirst = useCallback(() => onFirst(), [onFirst]);
+  const handleLast = useCallback(() => onLast(), [onLast]);
+
+  const observer = useRef<any>(null);
 
   // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -114,44 +117,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
     }
   }, [newOffSet, mode]);
 
-  // setup observer to hide/show timeline cards aka load on demand
-  const observer = new IntersectionObserver(
-    (entries) => {
-      // helper functions to hide image/videos
-      const hide = (ele: HTMLImageElement | HTMLVideoElement) =>
-        (ele.style.display = "none");
-      const show = (ele: HTMLImageElement | HTMLVideoElement) =>
-        (ele.style.display = "block");
-
-      entries.forEach((entry) => {
-        const element = entry.target as HTMLDivElement;
-        if (entry.isIntersecting) {
-          // show img and video when visible.
-          element.querySelectorAll("img").forEach(show);
-          element.querySelectorAll("video").forEach(show);
-          element
-            .querySelectorAll(":scope > div")
-            .forEach(
-              (ele) => ((ele as HTMLDivElement).style.visibility = "visible")
-            );
-        } else {
-          // hide img and video when not visible.
-          element.querySelectorAll("img").forEach(hide);
-          element.querySelectorAll("video").forEach(hide);
-          element
-            .querySelectorAll(":scope > div")
-            .forEach(
-              (ele) => ((ele as HTMLDivElement).style.visibility = "hidden")
-            );
-        }
-      });
-    },
-    {
-      root: timelineMainRef.current,
-      threshold: 0,
-    }
-  );
-
   useEffect(() => {
     // setup observer for the timeline elements
     setTimeout(() => {
@@ -159,9 +124,57 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
 
       if (element) {
         const childElements = element.querySelectorAll(".branch-main");
-        Array.from(childElements).forEach((elem) => observer.observe(elem));
+        Array.from(childElements).forEach((elem) => {
+          if (observer.current) {
+            observer.current.observe(elem);
+          }
+        });
       }
     }, 0);
+
+    // setup observer to hide/show timeline cards aka load on demand
+    if(mode !== "HORIZONTAL") {
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          // helper functions to hide image/videos
+          const hide = (ele: HTMLImageElement | HTMLVideoElement) =>
+            (ele.style.display = "none");
+          const show = (ele: HTMLImageElement | HTMLVideoElement) =>
+            (ele.style.display = "block");
+  
+          entries.forEach((entry) => {
+            const element = entry.target as HTMLDivElement;
+            if (entry.isIntersecting) {
+              // show img and video when visible.
+              element.querySelectorAll("img").forEach(show);
+              element.querySelectorAll("video").forEach(show);
+              element
+                .querySelectorAll(":scope > div")
+                .forEach(
+                  (ele) => ((ele as HTMLDivElement).style.visibility = "visible")
+                );
+            } else {
+              // hide img and video when not visible.
+              element.querySelectorAll("img").forEach(hide);
+              element.querySelectorAll("video").forEach(hide);
+              element
+                .querySelectorAll(":scope > div")
+                .forEach(
+                  (ele) => ((ele as HTMLDivElement).style.visibility = "hidden")
+                );
+            }
+          });
+        },
+        {
+          root: timelineMainRef.current,
+          threshold: 0,
+        }
+      );
+    }
+
+    return () => {
+      (observer.current as IntersectionObserver).disconnect();
+    }
     // eslint-disable-next-line
   }, []);
 

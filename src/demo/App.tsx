@@ -43,7 +43,7 @@ const NewDemo: React.FunctionComponent = () => {
                 mode="HORIZONTAL"
                 cardHeight={300}
                 slideShow
-                slideItemDuration={750}
+                slideItemDuration={2550}
               />
             </ComponentContainer>
           </Horizontal>
@@ -55,7 +55,7 @@ const NewDemo: React.FunctionComponent = () => {
         )} */}
 
         {/* Tree Mode */}
-        {items.length > 0 && <VerticalTree type={"big-screen"} items={items} />}
+        {/* {items.length > 0 && <VerticalTree type={"big-screen"} items={items} />} */}
 
         {/* mixed mode */}
         {/* {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} */}

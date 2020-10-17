@@ -33,6 +33,8 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   title,
   onClick,
 }: TimelineContentModel) => {
+  console.log("peradnuo");
+
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -133,15 +135,18 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
     }
   }, [active, slideShowActive]);
 
-  const handleMediaState = useCallback((state: MediaState) => {
-    if (state.playing) {
-      slideShowActive && tryHandlePauseSlideshow();
-    } else if (state.paused) {
-      if (paused && slideShowActive && id) {
-        onElapsed(id);
+  const handleMediaState = useCallback(
+    (state: MediaState) => {
+      if (state.playing) {
+        slideShowActive && tryHandlePauseSlideshow();
+      } else if (state.paused) {
+        if (paused && slideShowActive && id) {
+          onElapsed(id);
+        }
       }
-    }
-  }, [paused, slideShowActive]);
+    },
+    [paused, slideShowActive]
+  );
 
   return (
     <TimelineItemContentWrapper

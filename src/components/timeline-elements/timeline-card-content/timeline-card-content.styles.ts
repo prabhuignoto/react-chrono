@@ -105,7 +105,7 @@ export const ShowMore = styled.span<{ show?: boolean }>`
   font-size: 0.75rem;
   margin-top: auto;
   margin-bottom: 0.5rem;
-  margin-left: 0.75rem;
+  margin-left: 0.5rem;
   visibility: ${(p) => p.show ? "visible" : "hidden"};
   height: ${(p) => !p.show ? "0" : ""};
 `;
