@@ -33,7 +33,6 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   title,
   onClick,
 }: TimelineContentModel) => {
-  console.log("peradnuo");
 
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
@@ -47,7 +46,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   const startTime = useRef<Date>();
 
   // const [elapsed, setElapsed] = useState(0);
-  const [remainInterval, setRemainInterval] = useState(slideItemDuration);
+  const [remainInterval, setRemainInterval] = useState(0);
   const [startWidth, setStartWidth] = useState(0);
 
   const canShowProgressBar = useMemo(() => {
@@ -76,17 +75,19 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       return;
     }
 
+    setRemainInterval(interval);
+
     startTime.current = new Date();
 
     setPaused(false);
 
-    timerRef.current = window.setInterval(() => {
+    timerRef.current = window.setTimeout(() => {
       // clear the timer and move to the next card
-      window.clearInterval(timerRef.current);
-      id && onElapsed(id);
+      window.clearTimeout(timerRef.current);
       setPaused(true);
       setStartWidth(0);
       setRemainInterval(slideItemDuration);
+      id && onElapsed(id);
     }, interval);
   };
 
@@ -115,7 +116,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       }
       const remainingInterval = slideItemDuration - slideShowElapsed.current;
 
-      setRemainInterval(remainingInterval);
+      // setRemainInterval(remainingInterval);
       setPaused(false);
 
       if (remainingInterval > 0) {

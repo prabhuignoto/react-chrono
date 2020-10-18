@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import React, { useCallback, useEffect, useRef } from "react";
 import { Scroll } from "../../models/TimelineCollnModel";
-import { TimelineItemViewModel } from "../../models/TimelineItemModel";
+import { TimelineCardModel } from "../../models/TimelineItemModel";
 import { TimelineModel } from "../../models/TimelineModel";
 import useNewScrollPosition from "../effects/useNewScrollPosition";
 import TimelineControl from "../timeline-elements/timeline-control/timeline-control";
@@ -40,6 +40,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
   } = props;
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
+  const observer = useRef<IntersectionObserver | null>(null);
 
   // reference to the timeline
   const timelineMainRef = useRef<HTMLDivElement>(null);
@@ -114,44 +115,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
     }
   }, [newOffSet, mode]);
 
-  // setup observer to hide/show timeline cards aka load on demand
-  const observer = new IntersectionObserver(
-    (entries) => {
-      // helper functions to hide image/videos
-      const hide = (ele: HTMLImageElement | HTMLVideoElement) =>
-        (ele.style.display = "none");
-      const show = (ele: HTMLImageElement | HTMLVideoElement) =>
-        (ele.style.display = "block");
-
-      entries.forEach((entry) => {
-        const element = entry.target as HTMLDivElement;
-        if (entry.isIntersecting) {
-          // show img and video when visible.
-          element.querySelectorAll("img").forEach(show);
-          element.querySelectorAll("video").forEach(show);
-          element
-            .querySelectorAll(":scope > div")
-            .forEach(
-              (ele) => ((ele as HTMLDivElement).style.visibility = "visible")
-            );
-        } else {
-          // hide img and video when not visible.
-          element.querySelectorAll("img").forEach(hide);
-          element.querySelectorAll("video").forEach(hide);
-          element
-            .querySelectorAll(":scope > div")
-            .forEach(
-              (ele) => ((ele as HTMLDivElement).style.visibility = "hidden")
-            );
-        }
-      });
-    },
-    {
-      root: timelineMainRef.current,
-      threshold: 0,
-    }
-  );
-
   useEffect(() => {
     // setup observer for the timeline elements
     setTimeout(() => {
@@ -159,9 +122,53 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
 
       if (element) {
         const childElements = element.querySelectorAll(".branch-main");
-        Array.from(childElements).forEach((elem) => observer.observe(elem));
+        Array.from(childElements).forEach((elem) => {
+          if (observer.current) {
+            observer.current.observe(elem);
+          }
+        });
       }
     }, 0);
+
+    if (mode !== "HORIZONTAL") {
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          // helper functions to hide image/videos
+          const hide = (ele: HTMLImageElement | HTMLVideoElement) =>
+            (ele.style.display = "none");
+          const show = (ele: HTMLImageElement | HTMLVideoElement) =>
+            (ele.style.display = "block");
+
+          entries.forEach((entry) => {
+            const element = entry.target as HTMLDivElement;
+            if (entry.isIntersecting) {
+              // show img and video when visible.
+              element.querySelectorAll("img").forEach(show);
+              element.querySelectorAll("video").forEach(show);
+              element
+                .querySelectorAll(":scope > div")
+                .forEach(
+                  (ele) =>
+                    ((ele as HTMLDivElement).style.visibility = "visible")
+                );
+            } else {
+              // hide img and video when not visible.
+              element.querySelectorAll("img").forEach(hide);
+              element.querySelectorAll("video").forEach(hide);
+              element
+                .querySelectorAll(":scope > div")
+                .forEach(
+                  (ele) => ((ele as HTMLDivElement).style.visibility = "hidden")
+                );
+            }
+          });
+        },
+        {
+          root: timelineMainRef.current,
+          threshold: 0,
+        }
+      );
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -177,7 +184,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
         {/* TREE */}
         {mode === "TREE" ? (
           <TimelineTree
-            items={items as TimelineItemViewModel[]}
+            items={items as TimelineCardModel[]}
             onClick={handleTimelineItemClick}
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
@@ -195,7 +202,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
           <TimelineMain className={mode.toLowerCase()}>
             <Outline color={theme?.primary} />
             <TimelineCollection
-              items={items as TimelineItemViewModel[]}
+              items={items as TimelineCardModel[]}
               itemWidth={itemWidth}
               handleItemClick={handleTimelineItemClick}
               autoScroll={handleScroll}
@@ -213,7 +220,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
         {/* VERTICAL */}
         {mode === "VERTICAL" ? (
           <TimelineTree
-            items={items as TimelineItemViewModel[]}
+            items={items as TimelineCardModel[]}
             onClick={handleTimelineItemClick}
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
@@ -247,7 +254,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
           />
         </TimelineControlContainer>
       )}
-
     </Wrapper>
   );
 };

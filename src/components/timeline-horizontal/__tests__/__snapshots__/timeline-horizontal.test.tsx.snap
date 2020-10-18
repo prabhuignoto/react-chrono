@@ -22,7 +22,7 @@ exports[`Test Collection Horizontal render 1`] = `
         />
       </div>
       <div
-        class="horizontal undefined css-lzd26m"
+        class="horizontal undefined css-4fwi1l"
         data-testid="timeline-title"
       >
         <div
@@ -51,7 +51,7 @@ exports[`Test Collection Horizontal render 1`] = `
         />
       </div>
       <div
-        class="horizontal undefined css-lzd26m"
+        class="horizontal undefined css-4fwi1l"
         data-testid="timeline-title"
       >
         <div
@@ -80,7 +80,7 @@ exports[`Test Collection Horizontal render 1`] = `
         />
       </div>
       <div
-        class="horizontal undefined css-lzd26m"
+        class="horizontal undefined css-4fwi1l"
         data-testid="timeline-title"
       >
         <div
@@ -109,7 +109,7 @@ exports[`Test Collection Horizontal render 1`] = `
         />
       </div>
       <div
-        class="horizontal undefined css-lzd26m"
+        class="horizontal undefined css-4fwi1l"
         data-testid="timeline-title"
       >
         <div
@@ -226,10 +226,10 @@ exports[`Test Collection Vertical render 1`] = `
         />
       </div>
       <div
-        class="vertical css-6vs5dz"
+        class="vertical css-1p33aop"
       >
         <div
-          class="vertical undefined css-lzd26m"
+          class="vertical undefined css-4fwi1l"
           data-testid="timeline-title"
         >
           <div
@@ -240,7 +240,7 @@ exports[`Test Collection Vertical render 1`] = `
           </div>
         </div>
         <div
-          class=" css-74e5rn"
+          class=" css-12jyub2"
           mode="VERTICAL"
         >
           <span
@@ -252,7 +252,7 @@ exports[`Test Collection Vertical render 1`] = `
             class="show-less css-or8e72"
           />
           <span
-            class="show-more css-1rml49d"
+            class="show-more css-fb75q5"
             role="button"
           >
             ...
@@ -278,10 +278,10 @@ exports[`Test Collection Vertical render 1`] = `
         />
       </div>
       <div
-        class="vertical css-6vs5dz"
+        class="vertical css-1p33aop"
       >
         <div
-          class="vertical undefined css-lzd26m"
+          class="vertical undefined css-4fwi1l"
           data-testid="timeline-title"
         >
           <div
@@ -292,7 +292,7 @@ exports[`Test Collection Vertical render 1`] = `
           </div>
         </div>
         <div
-          class=" css-74e5rn"
+          class=" css-12jyub2"
           mode="VERTICAL"
         >
           <span
@@ -304,7 +304,7 @@ exports[`Test Collection Vertical render 1`] = `
             class="show-less css-or8e72"
           />
           <span
-            class="show-more css-1rml49d"
+            class="show-more css-fb75q5"
             role="button"
           >
             ...
@@ -330,10 +330,10 @@ exports[`Test Collection Vertical render 1`] = `
         />
       </div>
       <div
-        class="vertical css-6vs5dz"
+        class="vertical css-1p33aop"
       >
         <div
-          class="vertical undefined css-lzd26m"
+          class="vertical undefined css-4fwi1l"
           data-testid="timeline-title"
         >
           <div
@@ -344,7 +344,7 @@ exports[`Test Collection Vertical render 1`] = `
           </div>
         </div>
         <div
-          class=" css-74e5rn"
+          class=" css-12jyub2"
           mode="VERTICAL"
         >
           <span
@@ -358,7 +358,7 @@ exports[`Test Collection Vertical render 1`] = `
             class="show-less css-or8e72"
           />
           <span
-            class="show-more css-1rml49d"
+            class="show-more css-fb75q5"
             role="button"
           >
             ...
@@ -384,10 +384,10 @@ exports[`Test Collection Vertical render 1`] = `
         />
       </div>
       <div
-        class="vertical css-6vs5dz"
+        class="vertical css-1p33aop"
       >
         <div
-          class="vertical undefined css-lzd26m"
+          class="vertical undefined css-4fwi1l"
           data-testid="timeline-title"
         >
           <div
@@ -398,7 +398,7 @@ exports[`Test Collection Vertical render 1`] = `
           </div>
         </div>
         <div
-          class=" css-74e5rn"
+          class=" css-12jyub2"
           mode="VERTICAL"
         >
           <span
@@ -411,7 +411,7 @@ exports[`Test Collection Vertical render 1`] = `
             class="show-less css-or8e72"
           />
           <span
-            class="show-more css-1rml49d"
+            class="show-more css-fb75q5"
             role="button"
           >
             ...

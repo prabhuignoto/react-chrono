@@ -19,7 +19,7 @@ exports[`Test tree branch render 1`] = `
     class="test-class  css-1yrljia"
   >
     <div
-      class="active css-74e5rn"
+      class="active css-12jyub2"
     >
       <span
         class="css-c1e5f8"
@@ -30,7 +30,7 @@ exports[`Test tree branch render 1`] = `
         class="show-less css-or8e72"
       />
       <span
-        class="show-more css-1rml49d"
+        class="show-more css-fb75q5"
         role="button"
       >
         show more

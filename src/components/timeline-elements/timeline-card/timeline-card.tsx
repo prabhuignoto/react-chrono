@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
-import { TimelineItemViewModel } from "../../../models/TimelineItemModel";
+import { TimelineCardModel } from "../../../models/TimelineItemModel";
 import TimelineItemContent from "../timeline-card-content/timeline-card-content";
 import TimelineItemTitle from "../timeline-item-title/timeline-card-title";
 import {
@@ -11,7 +11,7 @@ import {
   Wrapper,
 } from "./timeline-card.styles";
 
-const TimelineItem: React.FunctionComponent<TimelineItemViewModel> = ({
+const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
   active,
   autoScroll,
   cardHeight,

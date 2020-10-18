@@ -78,7 +78,7 @@ export const VerticalTree: FunctionComponent<{
         mode="TREE"
         slideShow
         slideItemDuration={1350}
-        theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
+        // theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
       />
     </ComponentContainerTree>
   </Vertical>
@@ -137,6 +137,7 @@ export const HorizontalSlideshow: FunctionComponent<{
       <Chrono
         items={data}
         mode="HORIZONTAL"
+        slideShow
         slideItemDuration={1500}
         cardHeight={450}
       />

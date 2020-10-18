@@ -122,8 +122,6 @@ const slideAnimation = (start?: number, end?: number) => keyframes`
 export const SlideShowProgressBar = styled.span<{
   startWidth?: number, paused?: boolean, duration?: number, color?: string;
 }>`
-  animation-iteration-count: 1;
-  animation-play-state: paused;
   background: ${p => p.color};
   bottom: -0.75rem;
   display: block;

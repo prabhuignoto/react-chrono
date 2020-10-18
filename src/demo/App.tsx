@@ -5,6 +5,7 @@ import { HorizontalSlideshow, VerticalBasic, VerticalTree, VerticalTreeMixed } f
 import "./App.css";
 import { ComponentContainer, Description, DescriptionContent, DescriptionHeader, Horizontal, Wrapper } from "./App.styles";
 import data from "./data";
+import {hot} from "react-hot-loader/root";
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
@@ -43,16 +44,16 @@ const NewDemo: React.FunctionComponent = () => {
                 mode="HORIZONTAL"
                 cardHeight={300}
                 slideShow
-                slideItemDuration={750}
+                slideItemDuration={2550}
               />
             </ComponentContainer>
           </Horizontal>
         )} */}
 
         {/* Vertical with no Media */}
-        {/* {items.length > 0 && (
-          <VerticalBasic type={"big-screen"} items={items} />
-        )} */}
+          {/* {items.length > 0 && (
+            <VerticalBasic type={"big-screen"} items={items} />
+          )} */}
 
         {/* Tree Mode */}
         {/* {items.length > 0 && <VerticalTree type={"big-screen"} items={items} />} */}
@@ -61,7 +62,7 @@ const NewDemo: React.FunctionComponent = () => {
         {/* {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} */}
 
         {/* Horizontal Slideshow */}
-        {<HorizontalSlideshow type={"big-screen"} />}
+        {/* {<HorizontalSlideshow type={"big-screen"} />} */}
 
         {/* Tree Slideshow */}
         {/* {items.length > 0 && (
@@ -75,4 +76,4 @@ const NewDemo: React.FunctionComponent = () => {
   );
 };
 
-export default NewDemo;
+export default hot(NewDemo);
