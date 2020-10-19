@@ -1,5 +1,5 @@
+import { Theme } from "./Theme";
 import { TimelineMode } from "./TimelineModel";
-import { Theme } from "./TimelineTreeModel";
 
 export type MediaType = "VIDEO" | "IMAGE";
 

@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { TimelineContentModel } from "../../../models/TimelineContentModel";
-import { MediaState } from "../../../models/TimelineItemMedia";
+import { MediaState } from "../../../models/TimelineMediaModel";
 import { MemoContentText, MemoTitle } from "../memoized";
 import CardMedia from "../timeline-card-media/timeline-card-media";
 import {
@@ -33,7 +33,6 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   title,
   onClick,
 }: TimelineContentModel) => {
-
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -138,10 +137,13 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
 
   const handleMediaState = useCallback(
     (state: MediaState) => {
+      if (!slideShowActive) {
+        return;
+      }
       if (state.playing) {
-        slideShowActive && tryHandlePauseSlideshow();
+        tryHandlePauseSlideshow();
       } else if (state.paused) {
-        if (paused && slideShowActive && id) {
+        if (paused && id) {
           onElapsed(id);
         }
       }

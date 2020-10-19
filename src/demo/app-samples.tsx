@@ -13,6 +13,34 @@ import {
 import data from "./data";
 import dataMixed from "./data-mixed";
 
+export const HorizontalBasic: FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({items}) => {
+  return (
+    <Horizontal id="horizontal">
+      <Description>
+        <span>
+          <DescriptionHeader># Horizontal</DescriptionHeader>
+        </span>
+        <DescriptionContent>
+          Timelines are rendered horizontally by default. Use the control
+          buttons or LEFT, RIGHT keys on your keyboard to navigate.
+        </DescriptionContent>
+      </Description>
+      <ComponentContainer type={"big-screen"}>
+        <Chrono
+          items={items}
+          mode="HORIZONTAL"
+          cardHeight={300}
+          slideShow
+          slideItemDuration={2550}
+        />
+      </ComponentContainer>
+    </Horizontal>
+  );
+};
+
 export const VerticalBasic: FunctionComponent<{
   type: string;
   items: TimelineItemModel[];

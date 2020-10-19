@@ -1,22 +1,20 @@
 import { css, keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
+import { Theme } from '../../../models/Theme';
 import { TimelineMode } from "../../../models/TimelineModel";
-import { Theme } from "../../../models/TimelineTreeModel";
 
 export const TimelineItemContentWrapper = styled.div<{ theme: Theme, noMedia?: boolean, minHeight?: number, mode?: TimelineMode }>`
   align-items: flex-start;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-  font-family: 'Open Sans', monospace;
-
   justify-content: flex-start;
   line-height: 1.5rem;
   margin: 1rem 0;
-  text-align: left;
-  width: 100%;
   min-height: ${p => !p.noMedia ? p.minHeight : "150"}px;
   position: relative;
+  text-align: left;
+  width: 100%;
 
   height: ${p => {
     if (!p.noMedia && p.mode === "HORIZONTAL") {

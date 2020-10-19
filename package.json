@@ -86,8 +86,6 @@
     "react-dom": "^16.13.1"
   },
   "resolutions": {
-    "**/@typescript-eslint/eslint-plugin": "^4.1.1",
-    "**/@typescript-eslint/parser": "^4.1.1"
   },
   "files": [
     "dist"

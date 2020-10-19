@@ -1,11 +1,10 @@
 import { useCallback, useState } from 'react';
 import { Scroll } from '../../models/TimelineCollnModel';
+import { TimelineMode } from '../../models/TimelineModel';
 
-type Mode = "HORIZONTAL" | "VERTICAL" | "TREE";
+let useNewScrollPosition: (mode: TimelineMode, itemWidth?: number) => [number, (e: HTMLElement, s: Partial<Scroll>) => void]
 
-let useNewScrollPosition: (mode: Mode, itemWidth?: number) => [number, (e: HTMLElement, s: Partial<Scroll>) => void]
-
-useNewScrollPosition = function (mode: Mode, itemWidth?: number) {
+useNewScrollPosition = function (mode: TimelineMode, itemWidth?: number) {
 
   const [newOffset, setNewOffset] = useState(0);
 

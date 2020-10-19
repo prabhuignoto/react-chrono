@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { TimelineCardModel } from "../../../models/TimelineItemModel";
 import TimelineItemContent from "../timeline-card-content/timeline-card-content";

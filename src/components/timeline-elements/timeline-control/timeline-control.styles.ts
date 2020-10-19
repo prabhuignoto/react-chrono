@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
+import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
-import { Theme } from '../../../models/TimelineTreeModel';
 
 export const TimelineNavWrapper = styled.ul<{ theme?: Theme }>`
   border-radius: 25px;

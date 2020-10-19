@@ -1,7 +1,6 @@
+import { Theme } from "./Theme";
 import { Scroll } from "./TimelineCollnModel";
-import { Media } from "./TimelineItemMedia";
-import { Theme } from "./TimelineTreeModel";
-
+import { Media } from "./TimelineMediaModel";
 /**
  *
  *

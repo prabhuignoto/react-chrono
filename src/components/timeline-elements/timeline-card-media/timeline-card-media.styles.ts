@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
+import { Theme } from "../../../models/Theme";
 import { TimelineMode } from "../../../models/TimelineModel";
-import { Theme } from "../../../models/TimelineTreeModel";
 
 export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: TimelineMode, dir?: string, slideShowActive?: boolean }>`
   height: 100%;
