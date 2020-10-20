@@ -1,5 +1,6 @@
+import { Theme } from "./Theme";
 import { Scroll } from "./TimelineCollnModel";
-import { Media } from "./TimelineItemMedia";
+import { Media } from "./TimelineMediaModel";
 import { TimelineCardModel } from "./TimelineItemModel";
 import { TimelineMode } from "./TimelineModel";
 
@@ -45,10 +46,3 @@ export interface TimelineTreeModel extends CommonPropsModel {
   autoScroll: (s: Partial<Scroll>) => void;
   items: TimelineCardModel[];
 }
-
-export interface Theme {
-  primary: string;
-  secondary: string;
-  textColor?: string;
-}
-

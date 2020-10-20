@@ -1,7 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Media, MediaState } from "../../../models/TimelineItemMedia";
-import { TimelineMode } from "../../../models/TimelineModel";
-import { Theme } from "../../../models/TimelineTreeModel";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { CardMediaModel } from "../../../models/TimelineMediaModel";
 import { MemoContentText, MemoTitle } from "../memoized";
 import {
   CardImage,
@@ -10,18 +8,6 @@ import {
   MediaDetailsWrapper,
   MediaWrapper,
 } from "./timeline-card-media.styles";
-
-interface CardMediaModel {
-  active?: boolean;
-  media: Media;
-  id?: string;
-  mode?: TimelineMode;
-  onMediaStateChange: (state: MediaState) => void;
-  theme?: Theme;
-  title?: string;
-  content: string;
-  slideshowActive?: boolean;
-}
 
 const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   active,
@@ -53,18 +39,18 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
 
   const [mediaLoaded, setMediaLoaded] = useState(false);
 
-  const handleMediaLoaded = () => {
+  const handleMediaLoaded = useCallback(() => {
     setMediaLoaded(true);
-  };
+  }, []);
 
-  const handleError = () => {
+  const handleError = useCallback(() => {
     setLoadFailed(true);
     onMediaStateChange({
       id,
       paused: false,
       playing: false,
     });
-  };
+  }, []);
 
   const ErrorMessageMem: React.FunctionComponent<{
     message: string;

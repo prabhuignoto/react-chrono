@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Chrono from "../components";
 import { TimelineItemModel } from "../models/TimelineItemModel";
-import { HorizontalSlideshow, VerticalBasic, VerticalTree, VerticalTreeMixed } from "./app-samples";
+import { HorizontalBasic, HorizontalSlideshow, VerticalBasic, VerticalTree, VerticalTreeMixed, VerticalTreeSlideshow } from "./app-samples";
 import "./App.css";
 import { ComponentContainer, Description, DescriptionContent, DescriptionHeader, Horizontal, Wrapper } from "./App.styles";
 import data from "./data";
@@ -28,26 +28,7 @@ const NewDemo: React.FunctionComponent = () => {
       <>
         {/* Horizontal with Media */}
         {/* {items.length > 0 && (
-          <Horizontal id="horizontal">
-            <Description>
-              <span>
-                <DescriptionHeader># Horizontal</DescriptionHeader>
-              </span>
-              <DescriptionContent>
-                Timelines are rendered horizontally by default. Use the control
-                buttons or LEFT, RIGHT keys on your keyboard to navigate.
-              </DescriptionContent>
-            </Description>
-            <ComponentContainer type={"big-screen"}>
-              <Chrono
-                items={items}
-                mode="HORIZONTAL"
-                cardHeight={300}
-                slideShow
-                slideItemDuration={2550}
-              />
-            </ComponentContainer>
-          </Horizontal>
+          <HorizontalBasic items={items} type="big-screen" />
         )} */}
 
         {/* Vertical with no Media */}
@@ -65,12 +46,12 @@ const NewDemo: React.FunctionComponent = () => {
         {/* {<HorizontalSlideshow type={"big-screen"} />} */}
 
         {/* Tree Slideshow */}
-        {/* {items.length > 0 && (
+        {items.length > 0 && (
           <VerticalTreeSlideshow
             type={'big-screen'}
-            cardHeight={cardHeight}
+            cardHeight={250}
           />
-        )} */}
+        )}
       </>
     </Wrapper>
   );

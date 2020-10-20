@@ -1,5 +1,5 @@
 import React from "react";
-import { Theme } from "../../../models/TimelineTreeModel";
+import { Theme } from "../../../models/Theme";
 import {
   TimelineContentText,
   TimelineContentTitle,

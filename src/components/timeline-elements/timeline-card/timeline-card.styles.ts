@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/core";
-import { Theme } from "../../../models/TimelineTreeModel";
+import { Theme } from "../../../models/Theme";
 
 export const Wrapper = styled.div`
   align-items: center;

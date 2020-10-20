@@ -169,6 +169,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
         }
       );
     }
+
+    return () => {
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+    };
     // eslint-disable-next-line
   }, []);
 
@@ -251,6 +257,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
             onReplay={onRestartSlideshow}
             slideShowRunning={slideShowRunning}
             slideShowEnabled={slideShowEnabled}
+            id={id.current}
           />
         </TimelineControlContainer>
       )}

@@ -1,6 +1,6 @@
-import { Media } from "./TimelineItemMedia";
+import { Theme } from "./Theme";
+import { Media } from "./TimelineMediaModel";
 import { TimelineMode } from "./TimelineModel";
-import { Theme } from "./TimelineTreeModel";
 
 export interface TimelineContentModel {
   active?: boolean;

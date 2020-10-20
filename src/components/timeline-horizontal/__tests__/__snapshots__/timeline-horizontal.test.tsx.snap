@@ -26,7 +26,7 @@ exports[`Test Collection Horizontal render 1`] = `
         data-testid="timeline-title"
       >
         <div
-          class=" css-x77ob3"
+          class=" css-cv0sm8"
           title="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
         >
           June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
@@ -55,7 +55,7 @@ exports[`Test Collection Horizontal render 1`] = `
         data-testid="timeline-title"
       >
         <div
-          class=" css-x77ob3"
+          class=" css-cv0sm8"
           title="July 28, 1914"
         >
           July 28, 1914
@@ -84,7 +84,7 @@ exports[`Test Collection Horizontal render 1`] = `
         data-testid="timeline-title"
       >
         <div
-          class=" css-x77ob3"
+          class=" css-cv0sm8"
           title="August 1–28, 1914"
         >
           August 1–28, 1914
@@ -113,7 +113,7 @@ exports[`Test Collection Horizontal render 1`] = `
         data-testid="timeline-title"
       >
         <div
-          class=" css-x77ob3"
+          class=" css-cv0sm8"
           title="September 6, 1914"
         >
           September 6, 1914
@@ -233,14 +233,14 @@ exports[`Test Collection Vertical render 1`] = `
           data-testid="timeline-title"
         >
           <div
-            class=" css-x77ob3"
+            class=" css-cv0sm8"
             title="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
           >
             June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
           </div>
         </div>
         <div
-          class=" css-12jyub2"
+          class=" css-1c1cjoa"
           mode="VERTICAL"
         >
           <span
@@ -285,14 +285,14 @@ exports[`Test Collection Vertical render 1`] = `
           data-testid="timeline-title"
         >
           <div
-            class=" css-x77ob3"
+            class=" css-cv0sm8"
             title="July 28, 1914"
           >
             July 28, 1914
           </div>
         </div>
         <div
-          class=" css-12jyub2"
+          class=" css-1c1cjoa"
           mode="VERTICAL"
         >
           <span
@@ -337,14 +337,14 @@ exports[`Test Collection Vertical render 1`] = `
           data-testid="timeline-title"
         >
           <div
-            class=" css-x77ob3"
+            class=" css-cv0sm8"
             title="August 1–28, 1914"
           >
             August 1–28, 1914
           </div>
         </div>
         <div
-          class=" css-12jyub2"
+          class=" css-1c1cjoa"
           mode="VERTICAL"
         >
           <span
@@ -391,14 +391,14 @@ exports[`Test Collection Vertical render 1`] = `
           data-testid="timeline-title"
         >
           <div
-            class=" css-x77ob3"
+            class=" css-cv0sm8"
             title="September 6, 1914"
           >
             September 6, 1914
           </div>
         </div>
         <div
-          class=" css-12jyub2"
+          class=" css-1c1cjoa"
           mode="VERTICAL"
         >
           <span

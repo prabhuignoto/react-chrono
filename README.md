@@ -32,9 +32,9 @@
 - 🌲&nbsp; Use the [Tree](#tree-view) mode to layout the timeline cards vertically in a tree like fashion.
 - 📺&nbsp; Auto play the timeline with the [slideshow](#slideshow-mode) mode.
 - 🖼️&nbsp; [Display Images & Videos](#media) in the timeline with ease.
-- ⌨&nbsp; Keyboard accessible. [Keyboard](#-keyboard-navigation--disabling-it).
+- ⌨&nbsp; [Keyboard accessible](#keyboard-navigation--disabling-it).
 - ⚡&nbsp; Data driven API.
-- 🔧&nbsp; Optimized to render images & videos efficiently on (tree & vertical mode).
+- 🔧&nbsp; Optimized to render images & videos efficiently on (Tree & Vertical mode).
 - 🎨&nbsp; [Customize](#theme) colors with ease.
 - 💪&nbsp; Built with [Typescript](https://www.typescriptlang.org/).
 - 🎨&nbsp; Styled with [emotion](https://emotion.sh).
@@ -49,13 +49,13 @@
 - [Props](#props)
   - [Mode](#mode)
   - [Timeline item Model](#timeline-item-model)
-  - [Keyboard Navigation & Disabling it](#keyboard-navigation--disabling-it)
+  - [Keyboard Navigation](#keyboard-navigation)
   - [Media](#media)
   - [Slideshow mode](#slideshow-mode)
   - [Item Width](#item-width)
   - [🎨 Theme](#-theme)
-  - [📦 Codesandbox Examples](#-codesandbox-examples)
-- [📦Build Setup](#build-setup)
+- [📦 CodeSandbox Examples](#-codesandbox-examples)
+- [📦 Build Setup](#-build-setup)
 - [🔨 Contributing](#-contributing)
 - [🧱 Built with](#-built-with)
 - [🔭 What's coming next](#-whats-coming-next)
@@ -178,12 +178,13 @@ Play the timeline automatically with the `slideShow` mode.
 
 ### Timeline item Model
 
-| name         | description                                  | type   |
-|--------------|----------------------------------------------|--------|
-| title        | title of the timeline item                   | String |
-| contentTitle | title that is displayed on the timeline card | String |
-| contentText  | text displayed in the timeline card          | String |
-| media        | media object to set image or video.          | Object |
+| name                 | description                                  | type   |
+|----------------------|----------------------------------------------|--------|
+| title                | title of the timeline item                   | String |
+| contentTitle         | title that is displayed on the timeline card | String |
+| contentText          | text displayed in the timeline card          | String |
+| contentDetailedText  | detailed text displayed in the timeline card | String |
+| media                | media object to set image or video.          | Object |
 
 ```sh
 {
@@ -201,13 +202,13 @@ Play the timeline automatically with the `slideShow` mode.
 }
 ```
 
-### Keyboard Navigation & Disabling it
+### Keyboard Navigation
 
 The timeline can be navigated via keyboard.
 
 - For `HORIZONTAL` mode use your <kbd>LEFT</kbd> <kbd>RIGHT</kbd> arrow keys for navigation.
 - For `VERTICAL` or `TREE` mode, the timeline can be navigated via the <kbd>UP</kbd> <kbd>DOWN</kbd> arrow keys.
-- To easily jump to the first item or the last item in the timeline, use <kbd>HOME</kbd> or <kbd>END</kbd> key.
+- To easily jump to the first item or the last item in the timeline, use <kbd>HOME</kbd> or <kbd>END</kbd> keys.
 
 To disable keyboard navigation set `disableNavOnKey` to true.
 
@@ -219,7 +220,9 @@ To disable keyboard navigation set `disableNavOnKey` to true.
 
 Both images and videos can be embedded in the timeline. Just add the `media` attribute to the [Timeline Item model](#timeline-item-model) and the component will take care of the rest.
 
-To embed a image
+<h5>
+  To embed a image
+</h5>
 
 ```sh
 {
@@ -235,9 +238,11 @@ To embed a image
 }
 ```
 
-To embed a video
+<h5>
+  To embed a video
+</h5>
 
-Videos start playing automatically when active will be paused when not active. Like images, videos are also automatically hidden when not in the visible viewport of the container.
+Videos start playing automatically when active and will be automatically paused when not active. Like images, videos are also automatically hidden when not in the visible viewport of the container.
 
 ```sh
 {
@@ -274,7 +279,7 @@ Customize colors with `theme` prop.
 <chrono items={items}  titlePosition="BOTTOM" theme={{primary: "red", secondary: "blue" }} />
 ```
 
-### 📦 Codesandbox Examples
+## 📦 CodeSandbox Examples
 
 - [Horizontal Basic](https://codesandbox.io/s/condescending-swirles-xodxo?file=/src/App.js)
 - [Tree](https://codesandbox.io/s/react-chrono-tree-text-xtksq)
@@ -282,7 +287,7 @@ Customize colors with `theme` prop.
 - [Vertical basic](https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?file=/src/App.js)
 - [Vertical mode with Mixed content](https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3)
 
-## 📦Build Setup
+## 📦 Build Setup
 
 ``` bash
 # install dependencies

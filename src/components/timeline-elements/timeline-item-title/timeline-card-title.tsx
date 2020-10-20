@@ -1,6 +1,6 @@
 import React from "react";
+import { Theme } from "../../../models/Theme";
 import { TitleWrapper } from "./timeline-card-title.styles";
-import { Theme } from "../../../models/TimelineTreeModel";
 
 const TimelineItemTitle: React.FunctionComponent<{
   title?: string;
