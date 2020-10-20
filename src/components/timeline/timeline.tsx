@@ -172,7 +172,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
 
     return () => {
       if (observer.current) {
-        observer.current?.disconnect();
+        observer.current.disconnect();
       }
     };
     // eslint-disable-next-line
