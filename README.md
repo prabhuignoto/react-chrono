@@ -54,7 +54,7 @@
   - [Slideshow mode](#slideshow-mode)
   - [Item Width](#item-width)
   - [🎨 Theme](#-theme)
-  - [📦 CodeSandbox Examples](#-codesandbox-examples)
+- [📦 CodeSandbox Examples](#-codesandbox-examples)
 - [📦 Build Setup](#-build-setup)
 - [🔨 Contributing](#-contributing)
 - [🧱 Built with](#-built-with)
@@ -279,7 +279,7 @@ Customize colors with `theme` prop.
 <chrono items={items}  titlePosition="BOTTOM" theme={{primary: "red", secondary: "blue" }} />
 ```
 
-### 📦 CodeSandbox Examples
+## 📦 CodeSandbox Examples
 
 - [Horizontal Basic](https://codesandbox.io/s/condescending-swirles-xodxo?file=/src/App.js)
 - [Tree](https://codesandbox.io/s/react-chrono-tree-text-xtksq)
