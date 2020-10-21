@@ -1,0 +1,12 @@
+{
+  "deepscan.ignoreConfirmWarning": true,
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "cSpell.words": [
+    "actv",
+    "chrono",
+    "debounced",
+    "debounced actv timeline item",
+    "item",
+    "timeline"
+  ]
+}
