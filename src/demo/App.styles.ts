@@ -33,16 +33,16 @@ export const ComponentContainer = styled.div<{ type?: string }>`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  flex-direction: column; 
+  flex-direction: column;
 
-  ${p => {
+  ${(p) => {
     switch (p.type) {
-      case "desktop":
-        return `width: 80%;`
-      case "big-screen":
-        return `width: 80%;`
-      case "tablet":
-        return `width: 100%;`
+      case 'desktop':
+        return `width: 80%;`;
+      case 'big-screen':
+        return `width: 80%;`;
+      case 'tablet':
+        return `width: 100%;`;
       default:
         break;
     }
@@ -56,16 +56,16 @@ export const ComponentContainerTree = styled.div<{ type?: string }>`
   margin-top: 1rem;
   padding: 1rem 0;
 
-  ${p => {
+  ${(p) => {
     switch (p.type) {
-      case "desktop":
-        return `height: 600px; width: 75%;`
-      case "big-screen":
-        return `height: 850px; width: 85%;`
-      case "tablet":
-        return `height: 850px; width: 100%;`
-      case "mobile":
-        return `height: 650px; width: 100%;`
+      case 'desktop':
+        return `height: 600px; width: 75%;`;
+      case 'big-screen':
+        return `height: 850px; width: 85%;`;
+      case 'tablet':
+        return `height: 850px; width: 100%;`;
+      case 'mobile':
+        return `height: 650px; width: 100%;`;
       default:
         break;
     }

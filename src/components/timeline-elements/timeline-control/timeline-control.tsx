@@ -1,17 +1,17 @@
-import React from "react";
-import { TimelineControlModel } from "../../../models/TimelineControlModel";
-import ChevronLeft from "../../icons/chev-left";
-import ChevronRightIcon from "../../icons/chev-right";
-import ChevronsLeftIcon from "../../icons/chevs-left";
-import ChevronsRightIcon from "../../icons/chevs-right";
-import ReplayIcon from "../../icons/replay-icon";
+import React from 'react';
+import { TimelineControlModel } from '../../../models/TimelineControlModel';
+import ChevronLeft from '../../icons/chev-left';
+import ChevronRightIcon from '../../icons/chev-right';
+import ChevronsLeftIcon from '../../icons/chevs-left';
+import ChevronsRightIcon from '../../icons/chevs-right';
+import ReplayIcon from '../../icons/replay-icon';
 import {
   ReplayWrapper,
   TimelineControlContainer,
   TimelineNavButton,
   TimelineNavItem,
   TimelineNavWrapper,
-} from "./timeline-control.styles";
+} from './timeline-control.styles';
 
 const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.memo(
   ({
@@ -26,7 +26,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
     onReplay,
     slideShowEnabled,
     mode,
-  }) => {
+  }: TimelineControlModel) => {
     return (
       <TimelineControlContainer slideShowActive={slideShowRunning}>
         <TimelineNavWrapper>
@@ -97,7 +97,9 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
         </TimelineNavWrapper>
       </TimelineControlContainer>
     );
-  }
+  },
 );
+
+TimelineControl.displayName = 'Timeline Control';
 
 export default TimelineControl;

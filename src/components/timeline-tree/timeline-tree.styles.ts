@@ -1,5 +1,5 @@
-import { keyframes } from "@emotion/core";
-import styled from "@emotion/styled";
+import { keyframes } from '@emotion/core';
+import styled from '@emotion/styled';
 
 export const TimelineTreeWrapper = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ export const Branch = styled.div<{ alternateCards?: boolean }>`
   position: relative;
   visibility: hidden;
   width: 100%;
-  
+
   &.left {
     margin-right: auto;
   }
@@ -39,18 +39,21 @@ export const Branch = styled.div<{ alternateCards?: boolean }>`
   }
 `;
 
-export const TreeTrunkWrapper = styled.div<{ bg?: string, alternateCards?: boolean }>`
+export const TreeTrunkWrapper = styled.div<{
+  bg?: string;
+  alternateCards?: boolean;
+}>`
   align-items: center;
   display: flex;
   height: 100%;
   justify-content: center;
   position: relative;
   width: 10%;
-  
+
   &.left {
     order: 2;
   }
-  
+
   &.right {
     order: 1;
   }
@@ -70,15 +73,17 @@ export const TreeTrunkWrapper = styled.div<{ bg?: string, alternateCards?: boole
   }
 `;
 
-export const TimelineCardContentWrapper = styled.div<{ alternateCards?: boolean }>`
+export const TimelineCardContentWrapper = styled.div<{
+  alternateCards?: boolean;
+}>`
   visibility: hidden;
-  ${(p) => p.alternateCards ? "width: 45%;" : "width: 75%; height: 85%"};
+  ${(p) => (p.alternateCards ? 'width: 45%;' : 'width: 75%; height: 85%')};
   /* padding: 1rem 0; */
-  
+
   &.left {
     order: 1;
   }
-  
+
   &.right {
     order: 2;
   }
@@ -94,16 +99,18 @@ export const TrunkPointWrapper = styled.div`
   z-index: 1;
 `;
 
-export const TimelineTreeTitleWrapper = styled.div<{ alternateCards?: boolean }>`
+export const TimelineTreeTitleWrapper = styled.div<{
+  alternateCards?: boolean;
+}>`
   align-items: center;
   display: flex;
-  ${(p) => p.alternateCards ? "width: 45%" : "width: 10%"};
+  ${(p) => (p.alternateCards ? 'width: 45%' : 'width: 10%')};
 
   &.left {
     justify-content: flex-start;
     order: 3;
   }
-  
+
   &.right {
     justify-content: flex-end;
     order: 1;

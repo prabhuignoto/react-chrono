@@ -1,12 +1,12 @@
-import { nanoid } from "nanoid";
-import React, { useCallback, useEffect, useRef } from "react";
-import { Scroll } from "../../models/TimelineCollnModel";
-import { TimelineCardModel } from "../../models/TimelineItemModel";
-import { TimelineModel } from "../../models/TimelineModel";
-import useNewScrollPosition from "../effects/useNewScrollPosition";
-import TimelineControl from "../timeline-elements/timeline-control/timeline-control";
-import TimelineCollection from "../timeline-horizontal/timeline-horizontal";
-import TimelineTree from "../timeline-tree/timeline-tree";
+import { nanoid } from 'nanoid';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { Scroll } from '../../models/TimelineCollnModel';
+import { TimelineCardModel } from '../../models/TimelineItemModel';
+import { TimelineModel } from '../../models/TimelineModel';
+import useNewScrollPosition from '../effects/useNewScrollPosition';
+import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
+import TimelineCollection from '../timeline-horizontal/timeline-horizontal';
+import TimelineTree from '../timeline-tree/timeline-tree';
 import {
   Outline,
   TimelineContentRender,
@@ -14,16 +14,18 @@ import {
   TimelineMain,
   TimelineMainWrapper,
   Wrapper,
-} from "./timeline.style";
+} from './timeline.style';
 
-const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
+const Timeline: React.FunctionComponent<TimelineModel> = (
+  props: TimelineModel,
+) => {
   // de-structure the props
   const {
     activeTimelineItem,
     disableNavOnKey,
     itemWidth = 200,
     items,
-    mode = "HORIZONTAL",
+    mode = 'HORIZONTAL',
     onNext,
     onPrevious,
     onTimelineUpdated,
@@ -31,7 +33,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
     onLast,
     onFirst,
     theme,
-    titlePosition = "TOP",
+    titlePosition = 'TOP',
     onRestartSlideshow,
     cardHeight,
     slideShowEnabled,
@@ -62,13 +64,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
     const { keyCode } = event;
 
     if (
-      (mode === "HORIZONTAL" && keyCode === 39) ||
-      ((mode === "VERTICAL" || mode === "TREE") && keyCode === 40)
+      (mode === 'HORIZONTAL' && keyCode === 39) ||
+      ((mode === 'VERTICAL' || mode === 'TREE') && keyCode === 40)
     ) {
       handleNext();
     } else if (
-      (mode === "HORIZONTAL" && keyCode === 37) ||
-      ((mode === "VERTICAL" || mode === "TREE") && keyCode === 38)
+      (mode === 'HORIZONTAL' && keyCode === 37) ||
+      ((mode === 'VERTICAL' || mode === 'TREE') && keyCode === 38)
     ) {
       handlePrevious();
     } else if (keyCode === 36) {
@@ -100,7 +102,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
         setNewOffset(element, scroll);
       }
     },
-    [setNewOffset]
+    [setNewOffset],
   );
 
   useEffect(() => {
@@ -108,7 +110,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
     if (!ele) {
       return;
     }
-    if (mode === "HORIZONTAL") {
+    if (mode === 'HORIZONTAL') {
       ele.scrollLeft = newOffSet;
     } else {
       ele.scrollTop = newOffSet;
@@ -121,7 +123,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
       const element = timelineMainRef.current;
 
       if (element) {
-        const childElements = element.querySelectorAll(".branch-main");
+        const childElements = element.querySelectorAll('.branch-main');
         Array.from(childElements).forEach((elem) => {
           if (observer.current) {
             observer.current.observe(elem);
@@ -130,35 +132,36 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
       }
     }, 0);
 
-    if (mode !== "HORIZONTAL") {
+    if (mode !== 'HORIZONTAL') {
       observer.current = new IntersectionObserver(
         (entries) => {
           // helper functions to hide image/videos
           const hide = (ele: HTMLImageElement | HTMLVideoElement) =>
-            (ele.style.display = "none");
+            (ele.style.display = 'none');
           const show = (ele: HTMLImageElement | HTMLVideoElement) =>
-            (ele.style.display = "block");
+            (ele.style.display = 'block');
 
           entries.forEach((entry) => {
             const element = entry.target as HTMLDivElement;
             if (entry.isIntersecting) {
               // show img and video when visible.
-              element.querySelectorAll("img").forEach(show);
-              element.querySelectorAll("video").forEach(show);
+              element.querySelectorAll('img').forEach(show);
+              element.querySelectorAll('video').forEach(show);
               element
-                .querySelectorAll(":scope > div")
+                .querySelectorAll(':scope > div')
                 .forEach(
                   (ele) =>
-                    ((ele as HTMLDivElement).style.visibility = "visible")
+                    ((ele as HTMLDivElement).style.visibility = 'visible'),
                 );
             } else {
               // hide img and video when not visible.
-              element.querySelectorAll("img").forEach(hide);
-              element.querySelectorAll("video").forEach(hide);
+              element.querySelectorAll('img').forEach(hide);
+              element.querySelectorAll('video').forEach(hide);
               element
-                .querySelectorAll(":scope > div")
+                .querySelectorAll(':scope > div')
                 .forEach(
-                  (ele) => ((ele as HTMLDivElement).style.visibility = "hidden")
+                  (ele) =>
+                    ((ele as HTMLDivElement).style.visibility = 'hidden'),
                 );
             }
           });
@@ -166,7 +169,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
         {
           root: timelineMainRef.current,
           threshold: 0,
-        }
+        },
       );
     }
 
@@ -188,7 +191,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
     >
       <TimelineMainWrapper ref={timelineMainRef} className={mode.toLowerCase()}>
         {/* TREE */}
-        {mode === "TREE" ? (
+        {mode === 'TREE' ? (
           <TimelineTree
             items={items as TimelineCardModel[]}
             onClick={handleTimelineItemClick}
@@ -204,7 +207,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
         ) : null}
 
         {/* HORIZONTAL */}
-        {mode === "HORIZONTAL" ? (
+        {mode === 'HORIZONTAL' ? (
           <TimelineMain className={mode.toLowerCase()}>
             <Outline color={theme?.primary} />
             <TimelineCollection
@@ -224,7 +227,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (props) => {
         ) : null}
 
         {/* VERTICAL */}
-        {mode === "VERTICAL" ? (
+        {mode === 'VERTICAL' ? (
           <TimelineTree
             items={items as TimelineCardModel[]}
             onClick={handleTimelineItemClick}

@@ -1,13 +1,19 @@
-import React from "react";
-import { Theme } from "../../../models/Theme";
-import { TitleWrapper } from "./timeline-card-title.styles";
+import React from 'react';
+import { Theme } from '../../../models/Theme';
+import { TitleWrapper } from './timeline-card-title.styles';
 
-const TimelineItemTitle: React.FunctionComponent<{
+interface TitleModel {
   title?: string;
   active?: boolean;
   theme?: Theme;
-}> = ({ title, active, theme }) => (
-  <TitleWrapper className={active ? "active" : ""} title={title} theme={theme}>
+}
+
+const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
+  title,
+  active,
+  theme,
+}: TitleModel) => (
+  <TitleWrapper className={active ? 'active' : ''} title={title} theme={theme}>
     {title}
   </TitleWrapper>
 );

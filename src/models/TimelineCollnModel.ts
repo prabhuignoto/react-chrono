@@ -1,6 +1,6 @@
-import { Theme } from "./Theme";
-import { TimelineCardModel } from "./TimelineItemModel";
-import { TimelineMode } from "./TimelineModel";
+import { Theme } from './Theme';
+import { TimelineCardModel } from './TimelineItemModel';
+import { TimelineMode } from './TimelineModel';
 
 export interface TimelineCollectionModel {
   autoScroll: (t: Partial<Scroll>) => void;
@@ -12,7 +12,7 @@ export interface TimelineCollectionModel {
   theme?: Theme;
   wrapperId: string;
   cardHeight?: number;
-  onElapsed: (id?: string) => void;
+  onElapsed?: (id?: string) => void;
   slideItemDuration?: number;
 }
 

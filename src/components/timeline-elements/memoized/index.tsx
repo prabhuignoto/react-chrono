@@ -1,37 +1,48 @@
-import React from "react";
-import { Theme } from "../../../models/Theme";
+import React from 'react';
+import { Theme } from '../../../models/Theme';
 import {
   TimelineContentText,
   TimelineContentTitle,
-} from "../timeline-card-content/timeline-card-content.styles";
+} from '../timeline-card-content/timeline-card-content.styles';
 
-export const MemoTitle = React.memo<{
+interface Title {
   title?: string;
   theme?: Theme;
   color?: string;
   dir?: string;
   active?: boolean;
-}>(({ title, theme, color, dir, active }) =>
+}
+
+interface Content {
+  content: string;
+  color?: string;
+  dir?: string;
+}
+
+const MemoTitle = React.memo(({ title, theme, color, dir, active }: Title) =>
   title && theme ? (
     <TimelineContentTitle
-      className={active ? "active" : ""}
+      className={active ? 'active' : ''}
       theme={theme}
       style={{ color }}
       dir={dir}
     >
       {title}
     </TimelineContentTitle>
-  ) : null
+  ) : null,
 );
 
-export const MemoContentText = React.memo<{
-  content: string;
-  color?: string;
-  dir?: string;
-}>(({ content, color, dir }) =>
-  content ? (
-    <TimelineContentText style={{ color }} dir={dir}>
-      {content}
-    </TimelineContentText>
-  ) : null
+MemoTitle.displayName = 'Timeline Title';
+
+const MemoContentText = React.memo<Content>(
+  ({ content, color, dir }: Content) =>
+    content ? (
+      <TimelineContentText style={{ color }} dir={dir}>
+        {content}
+      </TimelineContentText>
+    ) : null,
 );
+
+MemoContentText.displayName = 'Timeline Content';
+
+export { MemoTitle, MemoContentText };

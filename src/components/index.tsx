@@ -1,24 +1,24 @@
-import { nanoid } from "nanoid";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { TimelineItemModel } from "../models/TimelineItemModel";
-import { TimelineProps } from "../models/TimelineModel";
-import Timeline from "./timeline/timeline";
+import { nanoid } from 'nanoid';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { TimelineItemModel } from '../models/TimelineItemModel';
+import { TimelineProps } from '../models/TimelineModel';
+import Timeline from './timeline/timeline';
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   items,
   itemWidth = 300,
-  titlePosition = "TOP",
-  mode = "HORIZONTAL",
+  titlePosition = 'TOP',
+  mode = 'HORIZONTAL',
   disableNavOnKey = false,
   slideShow = false,
   slideItemDuration = 5000,
   theme = {
-    primary: "#0f52ba",
-    secondary: "#ffdf00",
+    primary: '#0f52ba',
+    secondary: '#ffdf00',
   },
   cardHeight = 250,
   hideControls = false,
-}) => {
+}: Partial<TimelineProps>) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
   const [slideShowActive, setSlideshowActive] = useState(false);
@@ -58,8 +58,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       items.map((item, index) =>
         Object.assign({}, item, {
           active: index === actvTimelineIndex,
-        })
-      )
+        }),
+      ),
     );
     setActiveTimelineItem(actvTimelineIndex);
 

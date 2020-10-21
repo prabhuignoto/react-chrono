@@ -1,9 +1,11 @@
-import React, { useEffect, useRef } from "react";
-import { TreeLeafModel } from "../../models/TimelineTreeModel";
-import { TimelinePoint } from "../timeline-elements/timeline-card/timeline-card.styles";
-import { TreeTrunkWrapper, TrunkPointWrapper } from "./timeline-tree.styles";
+import React, { useEffect, useRef } from 'react';
+import { TreeLeafModel } from '../../models/TimelineTreeModel';
+import { TimelinePoint } from '../timeline-elements/timeline-card/timeline-card.styles';
+import { TreeTrunkWrapper, TrunkPointWrapper } from './timeline-tree.styles';
 
-const TreeLeaf: React.FunctionComponent<TreeLeafModel> = (props) => {
+const TreeLeaf: React.FunctionComponent<TreeLeafModel> = (
+  props: TreeLeafModel,
+) => {
   const {
     className,
     id,
@@ -42,7 +44,7 @@ const TreeLeaf: React.FunctionComponent<TreeLeafModel> = (props) => {
         data-testid="tree-leaf-click"
       >
         <TimelinePoint
-          className={active ? "active" : "in-active"}
+          className={active ? 'active' : 'in-active'}
           theme={theme}
         />
       </TrunkPointWrapper>

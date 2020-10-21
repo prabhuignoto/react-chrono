@@ -1,15 +1,17 @@
-import React, { useRef } from "react";
-import { TreeBranchModel } from "../../models/TimelineTreeModel";
-import TimelineCard from "../timeline-elements/timeline-card-content/timeline-card-content";
-import TimelineItemTitle from "../timeline-elements/timeline-item-title/timeline-card-title";
-import TreeLeaf from "./timeline-tree-leaf";
+import React, { useRef } from 'react';
+import { TreeBranchModel } from '../../models/TimelineTreeModel';
+import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
+import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
+import TreeLeaf from './timeline-tree-leaf';
 import {
   Branch,
   TimelineCardContentWrapper,
   TimelineTreeTitleWrapper,
-} from "./timeline-tree.styles";
+} from './timeline-tree.styles';
 
-const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
+const TreeBranch: React.FunctionComponent<TreeBranchModel> = (
+  props: TreeBranchModel,
+) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -43,7 +45,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
 
   return (
     <Branch
-      className={`${className} ${visible ? "visible" : ""} branch-main`}
+      className={`${className} ${visible ? 'visible' : ''} branch-main`}
       key={index}
       ref={contentRef}
       data-testid="branch-main"
@@ -59,7 +61,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (props) => {
 
       {/* content section */}
       <TimelineCardContentWrapper
-        className={`${className} ${visible ? "visible" : ""}`}
+        className={`${className} ${visible ? 'visible' : ''}`}
         alternateCards={alternateCards}
       >
         <TimelineCard

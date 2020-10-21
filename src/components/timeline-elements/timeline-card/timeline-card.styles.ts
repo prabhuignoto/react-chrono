@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import { keyframes } from "@emotion/core";
-import { Theme } from "../../../models/Theme";
+import { keyframes } from '@emotion/core';
+import styled from '@emotion/styled';
+import { Theme } from '../../../models/Theme';
 
 export const Wrapper = styled.div`
   align-items: center;
@@ -53,8 +53,8 @@ export const TimelinePointWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const TimelinePoint = styled.div<{theme: Theme}>`
-  background: ${p => p.theme.primary};
+export const TimelinePoint = styled.div<{ theme: Theme }>`
+  background: ${(p) => p.theme.primary};
   border-radius: 50%;
   cursor: pointer;
   height: 1rem;
@@ -65,7 +65,7 @@ export const TimelinePoint = styled.div<{theme: Theme}>`
     transform: scale(1.4);
 
     &::after {
-      background: ${p => p.theme.secondary};
+      background: ${(p) => p.theme.secondary};
       border-radius: 50%;
       content: '';
       display: block;
@@ -79,7 +79,7 @@ export const TimelinePoint = styled.div<{theme: Theme}>`
       z-index: -1;
     }
   }
-  
+
   &.in-active {
     animation: ${scaleDown} 0.1s ease-in;
     transform: scale(1);
@@ -94,7 +94,7 @@ export const TimelineTitleContainer = styled.div`
   &.vertical {
     margin-bottom: 1rem;
   }
-  
+
   &.horizontal {
     position: absolute;
     &.top {
@@ -109,7 +109,7 @@ export const TimelineTitleContainer = styled.div`
 export const TimelineContentContainer = styled.div<{ position?: string }>`
   align-items: flex-start;
   animation: ${show} 0.25s ease-in;
-  
+
   &.horizontal {
     /* position: absolute; */
     min-width: 400px;

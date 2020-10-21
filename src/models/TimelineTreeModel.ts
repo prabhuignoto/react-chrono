@@ -1,8 +1,8 @@
-import { Theme } from "./Theme";
-import { Scroll } from "./TimelineCollnModel";
-import { Media } from "./TimelineMediaModel";
-import { TimelineCardModel } from "./TimelineItemModel";
-import { TimelineMode } from "./TimelineModel";
+import { Theme } from './Theme';
+import { Scroll } from './TimelineCollnModel';
+import { Media } from './TimelineMediaModel';
+import { TimelineCardModel } from './TimelineItemModel';
+import { TimelineMode } from './TimelineModel';
 
 interface CommonPropsModel {
   alternateCards?: boolean;
@@ -37,7 +37,7 @@ export interface TreeBranchModel extends CommonBranchAndLeafModel {
   onActive: (
     timelinePointOffset: number,
     timelineContentHeight: number,
-    timelineContentOffset: number
+    timelineContentOffset: number,
   ) => void;
 }
 

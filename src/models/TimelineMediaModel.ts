@@ -1,7 +1,7 @@
-import { Theme } from "./Theme";
-import { TimelineMode } from "./TimelineModel";
+import { Theme } from './Theme';
+import { TimelineMode } from './TimelineModel';
 
-export type MediaType = "VIDEO" | "IMAGE";
+export type MediaType = 'VIDEO' | 'IMAGE';
 
 export interface MediaSource {
   url: string;

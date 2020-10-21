@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from "react";
-import Chrono from "../components";
-import { TimelineItemModel } from "../models/TimelineItemModel";
+import React, { FunctionComponent } from 'react';
+import Chrono from '../components';
+import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
   ComponentContainer,
   ComponentContainerTree,
@@ -9,14 +9,14 @@ import {
   DescriptionHeader,
   Horizontal,
   Vertical,
-} from "./App.styles";
-import data from "./data";
-import dataMixed from "./data-mixed";
+} from './App.styles';
+import data from './data';
+import dataMixed from './data-mixed';
 
-export const HorizontalBasic: FunctionComponent<{
+export const HorizontalBasic: React.FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
-}> = ({items}) => {
+}> = ({ items }) => {
   return (
     <Horizontal id="horizontal">
       <Description>
@@ -28,7 +28,7 @@ export const HorizontalBasic: FunctionComponent<{
           buttons or LEFT, RIGHT keys on your keyboard to navigate.
         </DescriptionContent>
       </Description>
-      <ComponentContainer type={"big-screen"}>
+      <ComponentContainer type={'big-screen'}>
         <Chrono
           items={items}
           mode="HORIZONTAL"
@@ -106,7 +106,7 @@ export const VerticalTree: FunctionComponent<{
         mode="TREE"
         slideShow
         slideItemDuration={1350}
-        // theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
+        theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
     </ComponentContainerTree>
   </Vertical>
@@ -140,7 +140,7 @@ export const VerticalTreeMixed: FunctionComponent<{
         items={dataMixed}
         mode="TREE"
         cardHeight={cardHeight}
-        theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
+        theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
     </ComponentContainerTree>
   </Vertical>
@@ -199,7 +199,7 @@ export const VerticalTreeSlideshow: FunctionComponent<{
         items={data}
         mode="TREE"
         cardHeight={cardHeight}
-        theme={{ primary: "#8675a9", secondary: "#ffd5cd" }}
+        theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
       {/* <SandBox>
         <a href="https://codesandbox.io/s/react-chrono-tree-demo-zksyo?fontsize=14&hidenavigation=1&theme=dark">

@@ -4,18 +4,18 @@ import React, {
   useMemo,
   useRef,
   useState,
-} from "react";
-import { TimelineContentModel } from "../../../models/TimelineContentModel";
-import { MediaState } from "../../../models/TimelineMediaModel";
-import { MemoContentText, MemoTitle } from "../memoized";
-import CardMedia from "../timeline-card-media/timeline-card-media";
+} from 'react';
+import { TimelineContentModel } from '../../../models/TimelineContentModel';
+import { MediaState } from '../../../models/TimelineMediaModel';
+import { MemoContentText, MemoTitle } from '../memoized';
+import CardMedia from '../timeline-card-media/timeline-card-media';
 import {
   ShowMore,
   SlideShowProgressBar,
   TimelineContentDetails,
   TimelineContentDetailsWrapper,
   TimelineItemContentWrapper,
-} from "./timeline-card-content.styles";
+} from './timeline-card-content.styles';
 
 const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   active,
@@ -49,7 +49,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   const [startWidth, setStartWidth] = useState(0);
 
   const canShowProgressBar = useMemo(() => {
-    return active && slideShowActive && media?.type !== "VIDEO";
+    return active && slideShowActive && media?.type !== 'VIDEO';
   }, [active, slideShowActive]);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       setPaused(true);
       setStartWidth(0);
       setRemainInterval(slideItemDuration);
-      id && onElapsed(id);
+      id && onElapsed && onElapsed(id);
     }, interval);
   };
 
@@ -143,17 +143,17 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       if (state.playing) {
         tryHandlePauseSlideshow();
       } else if (state.paused) {
-        if (paused && id) {
+        if (paused && id && onElapsed) {
           onElapsed(id);
         }
       }
     },
-    [paused, slideShowActive]
+    [paused, slideShowActive],
   );
 
   return (
     <TimelineItemContentWrapper
-      className={active ? "active" : ""}
+      className={active ? 'active' : ''}
       theme={theme}
       noMedia={!media}
       minHeight={cardHeight}
@@ -191,11 +191,11 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       {/* detailed text */}
       <TimelineContentDetailsWrapper
         ref={detailsRef}
-        className={!showMore ? "show-less" : ""}
+        className={!showMore ? 'show-less' : ''}
         theme={theme}
       >
         {detailedText && !media && (
-          <TimelineContentDetails className={showMore ? "active" : ""}>
+          <TimelineContentDetails className={showMore ? 'active' : ''}>
             {detailedText}
           </TimelineContentDetails>
         )}
@@ -214,7 +214,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           className="show-more"
           show={canShowMore.current}
         >
-          {active ? (showMore ? "show less" : "show more") : "..."}
+          {active ? (showMore ? 'show less' : 'show more') : '...'}
         </ShowMore>
       )}
 

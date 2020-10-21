@@ -23,13 +23,13 @@ steps:
   displayName: 'Running Rollup'
 
 - script: |
-    yarn run lint:css
-  displayName: 'Running Style Lint.'
+    yarn run lint:all
+  displayName: 'Linting Code and Styles.'
 
-- script: |
-    yarn run coverage
-  displayName: 'Running Tests and Generate coverage reports.'
+# - script: |
+#     yarn run coverage
+#   displayName: 'Running Tests and Generate coverage reports.'
 
-- script: |
-    bash <(curl -s https://codecov.io/bash)
-  displayName: 'Upload to codecov.io'
+# - script: |
+#     bash <(curl -s https://codecov.io/bash)
+#   displayName: 'Upload to codecov.io'
