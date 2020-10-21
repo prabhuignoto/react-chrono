@@ -1,15 +1,15 @@
-import React, { useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
-import { TimelineCardModel } from "../../../models/TimelineItemModel";
-import TimelineItemContent from "../timeline-card-content/timeline-card-content";
-import TimelineItemTitle from "../timeline-item-title/timeline-card-title";
+import React, { useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
+import { TimelineCardModel } from '../../../models/TimelineItemModel';
+import TimelineItemContent from '../timeline-card-content/timeline-card-content';
+import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import {
   TimelineContentContainer,
   TimelinePoint,
   TimelinePointWrapper,
   TimelineTitleContainer,
   Wrapper,
-} from "./timeline-card.styles";
+} from './timeline-card.styles';
 
 const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
   active,
@@ -29,7 +29,7 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
   theme,
   title,
   wrapperId,
-}) => {
+}: TimelineCardModel) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -52,7 +52,7 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
         const circleOffsetTop = circle.offsetLeft;
         const wrapperOffsetTop = wrapper.offsetTop;
 
-        if (mode === "HORIZONTAL") {
+        if (mode === 'HORIZONTAL') {
           autoScroll({
             timelinePointOffset: circleOffsetLeft + wrapperOffsetLeft,
             timelinePointWidth: circle.clientWidth,
@@ -72,17 +72,17 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
   const handleOnShowMore = () => {};
 
   const timelineContent = () => {
-    let className = "";
+    let className = '';
 
-    if (mode === "HORIZONTAL") {
-      className = `horizontal ${position === "top" ? "bottom" : "top"}`;
+    if (mode === 'HORIZONTAL') {
+      className = `horizontal ${position === 'top' ? 'bottom' : 'top'}`;
     } else {
-      className = "vertical";
+      className = 'vertical';
     }
 
     return (
       <TimelineContentContainer className={className} ref={contentRef}>
-        {mode === "VERTICAL" && (
+        {mode === 'VERTICAL' && (
           <TimelineTitleContainer
             data-testid="timeline-title"
             className={`${mode.toLowerCase()} ${position}`}
@@ -123,17 +123,17 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
       className={mode.toLowerCase()}
       data-testid="timeline-item"
     >
-      {mode === "HORIZONTAL" && active ? showTimelineContent() : null}
+      {mode === 'HORIZONTAL' && active ? showTimelineContent() : null}
       <TimelinePointWrapper>
         <TimelinePoint
-          className={`${mode.toLowerCase()} ${active ? "active" : "in-active"}`}
+          className={`${mode.toLowerCase()} ${active ? 'active' : 'in-active'}`}
           onClick={handleClick}
           ref={circleRef}
           data-testid="timeline-circle"
           theme={theme}
         ></TimelinePoint>
       </TimelinePointWrapper>
-      {mode === "HORIZONTAL" && (
+      {mode === 'HORIZONTAL' && (
         <TimelineTitleContainer
           className={`${mode.toLowerCase()} ${position}`}
           data-testid="timeline-title"
@@ -141,7 +141,7 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
           <TimelineItemTitle title={title} active={active} theme={theme} />
         </TimelineTitleContainer>
       )}
-      {mode === "VERTICAL" && timelineContent()}
+      {mode === 'VERTICAL' && timelineContent()}
     </Wrapper>
   );
 };

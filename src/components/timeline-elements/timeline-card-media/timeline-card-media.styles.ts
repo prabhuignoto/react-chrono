@@ -1,8 +1,14 @@
-import styled from "@emotion/styled";
-import { Theme } from "../../../models/Theme";
-import { TimelineMode } from "../../../models/TimelineModel";
+import styled from '@emotion/styled';
+import { Theme } from '../../../models/Theme';
+import { TimelineMode } from '../../../models/TimelineModel';
 
-export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: TimelineMode, dir?: string, slideShowActive?: boolean }>`
+export const MediaWrapper = styled.div<{
+  theme: Theme;
+  active?: boolean;
+  mode?: TimelineMode;
+  dir?: string;
+  slideShowActive?: boolean;
+}>`
   height: 100%;
   flex-direction: row;
   align-items: center;
@@ -10,18 +16,18 @@ export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: 
   align-self: center;
   padding: 0.5rem;
   position: relative;
-  background: ${p => p.active ? `rgba(${p.theme.secondary}, 0.35)` : ""};
+  background: ${(p) => (p.active ? `rgba(${p.theme.secondary}, 0.35)` : '')};
   border-radius: 4px;
-  pointer-events: ${p => !p.active && p.slideShowActive ? "none" : ""};
+  pointer-events: ${(p) => (!p.active && p.slideShowActive ? 'none' : '')};
   text-align: center;
 
-  ${p => {
-    if (p.mode === "HORIZONTAL") {
+  ${(p) => {
+    if (p.mode === 'HORIZONTAL') {
       return `
         justify-content: flex-start;
       `;
     } else {
-      if (p.dir === "left") {
+      if (p.dir === 'left') {
         return `
         justify-content: flex-start;
       `;
@@ -34,11 +40,16 @@ export const MediaWrapper = styled.div<{ theme: Theme, active?: boolean, mode?: 
   }}
 `;
 
-export const CardImage = styled.img<{ mode?: TimelineMode, visible?: boolean, active?: boolean, dir?: string }>`
+export const CardImage = styled.img<{
+  mode?: TimelineMode;
+  visible?: boolean;
+  active?: boolean;
+  dir?: string;
+}>`
   max-width: 100%;
   justify-self: center;
   flex: 4;
-  visibility: ${p => p.visible ? "visible" : "hidden"};
+  visibility: ${(p) => (p.visible ? 'visible' : 'hidden')};
   border-radius: 4px;
   margin-right: auto;
   object-fit: contain;
@@ -60,11 +71,14 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
   right: 0;
   /* margin-left: auto; */
   margin-right: auto;
-  width: ${p => {
+  width: ${(p) => {
     switch (p.mode) {
-      case "HORIZONTAL": return "100%";
-      case "VERTICAL": return "100%";
-      case "TREE": return "100%";
+      case 'HORIZONTAL':
+        return '100%';
+      case 'VERTICAL':
+        return '100%';
+      case 'TREE':
+        return '100%';
     }
   }};
   min-height: 100px;
@@ -76,7 +90,7 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
 `;
 
 export const ErrorMessage = styled.span`
-  position:absolute;
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
   left: 0;

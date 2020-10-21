@@ -1,6 +1,6 @@
-import { Theme } from "./Theme";
-import { TimelineCardModel } from "./TimelineItemModel";
-import { TimelineMode } from "./TimelineModel";
+import { Theme } from './Theme';
+import { TimelineCardModel } from './TimelineItemModel';
+import { TimelineMode } from './TimelineModel';
 
 export interface TimelineCollectionModel {
   autoScroll: (t: Partial<Scroll>) => void;

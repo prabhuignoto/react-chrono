@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { TimelineMode } from "../../models/TimelineModel";
+import { TimelineMode } from '../../models/TimelineModel';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -9,9 +9,8 @@ export const Wrapper = styled.div`
   height: 100%;
   user-select: none;
   outline: 0;
-  
-  &.horizontal {
 
+  &.horizontal {
     &.top {
       justify-content: flex-start;
     }
@@ -20,11 +19,12 @@ export const Wrapper = styled.div`
       justify-content: flex-end;
     }
   }
-  
-  &.vertical, &.tree {
+
+  &.vertical,
+  &.tree {
     height: 100%;
   }
-  `;
+`;
 
 export const TimelineMainWrapper = styled.div`
   align-items: center;
@@ -38,7 +38,7 @@ export const TimelineMainWrapper = styled.div`
   width: 100%;
 
   &::-webkit-scrollbar {
-    width: 0;    
+    width: 0;
   }
   scrollbar-width: none;
 
@@ -49,7 +49,7 @@ export const TimelineMainWrapper = styled.div`
   &.vertical {
     height: 100%;
   }
- `;
+`;
 
 export const TimelineMain = styled.div`
   align-items: center;
@@ -62,14 +62,14 @@ export const TimelineMain = styled.div`
   &.tree {
     height: 100%;
   }
-  
+
   &.vertical {
     align-items: flex-start;
     height: 100%;
     justify-content: flex-start;
     width: 100%;
   }
-  `;
+`;
 
 export const Outline = styled.div<{ color?: string }>`
   background: ${(p) => p.color};
@@ -80,16 +80,19 @@ export const Outline = styled.div<{ color?: string }>`
   position: absolute;
   right: 0;
   width: 100%;
-  `;
+`;
 
-export const TimelineControlContainer = styled.div<{ mode?: TimelineMode, active?: boolean }>`
+export const TimelineControlContainer = styled.div<{
+  mode?: TimelineMode;
+  active?: boolean;
+}>`
   align-items: center;
   display: flex;
   justify-content: center;
   /* margin-top: auto;
   margin-bottom: auto; */
-  
-  filter: ${p => {
+
+  filter: ${(p) => {
     if (p.active) {
       return `opacity(1);`;
     } else {

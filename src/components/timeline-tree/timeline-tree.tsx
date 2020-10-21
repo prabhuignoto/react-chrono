@@ -1,7 +1,7 @@
-import React, { useCallback } from "react";
-import { TimelineTreeModel } from "../../models/TimelineTreeModel";
-import TreeBranch from "./timeline-tree-branch";
-import { TimelineTreeWrapper } from "./timeline-tree.styles";
+import React, { useCallback } from 'react';
+import { TimelineTreeModel } from '../../models/TimelineTreeModel';
+import TreeBranch from './timeline-tree-branch';
+import { TimelineTreeWrapper } from './timeline-tree.styles';
 
 // This component is used to render both tree and vertical modes
 const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
@@ -15,7 +15,7 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   cardHeight,
   slideItemDuration,
   onElapsed,
-}) => {
+}: TimelineTreeModel) => {
   // check if the timeline that has become active is visible.
   // if not auto scroll the content and bring it to the view.
   const handleOnActive = useCallback(
@@ -26,7 +26,7 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
         timelineContentOffset: wrapperOffset,
       });
     },
-    [autoScroll]
+    [autoScroll],
   );
 
   // todo remove this
@@ -35,13 +35,13 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   return (
     <TimelineTreeWrapper data-testid="tree-main">
       {items.map((item, index) => {
-        let className = "";
+        let className = '';
 
         // in tree mode alternate cards position
         if (alternateCards) {
-          className = index % 2 === 0 ? "left" : "right";
+          className = index % 2 === 0 ? 'left' : 'right';
         } else {
-          className = "right";
+          className = 'right';
         }
 
         return (

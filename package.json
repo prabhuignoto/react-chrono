@@ -15,12 +15,15 @@
     "type": "git"
   },
   "scripts": {
-    "start": "snowpack dev --polyfill-node",
     "build": "snowpack build",
-    "test": "web-test-runner \"src/**/*.test.tsx\"",
+    "eslint": "eslint ./src/**/*.tsx",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
-    "rollup": "rimraf ./dist && rollup -c"
+    "lint:css": "stylelint ./src/**/*style.ts",
+    "rollup": "rimraf ./dist && rollup -c",
+    "start": "snowpack dev --polyfill-node",
+    "test": "web-test-runner \"src/**/*.test.tsx\"",
+    "lint:all": "yarn run eslint && yarn run lint:css && yarn run lint"
   },
   "dependencies": {
     "@emotion/core": "^10.0.35",
@@ -34,6 +37,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-optional-chaining": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-react": "^7.10.4",
@@ -57,12 +61,18 @@
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.0",
     "@types/snowpack-env": "^2.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
     "@web/test-runner": "^0.9.0",
     "chai": "^4.2.0",
     "cssnano": "^4.1.10",
+    "eslint": "^7.11.0",
+    "eslint-plugin-react": "^7.21.5",
+    "husky": "^4.3.0",
     "jest": "^26.6.0",
+    "lint-staged": "^10.4.2",
     "prettier": "^2.0.5",
-    "rollup": "^2.32.0",
+    "rollup": "^2.32.1",
     "rollup-plugin-postcss": "^3.1.8",
     "rollup-plugin-typescript2": "^0.28.0",
     "snowpack": "^2.15.0",
@@ -84,6 +94,19 @@
   "files": [
     "dist"
   ],
+  "lint-staged": {
+    "src/components/**/*.{ts,tsx}": [
+      "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
+      "stylelint ./src/**/*style.ts",
+      "eslint ./src/**/*.tsx",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "main": "dist/react-chrono.js",
   "module": "dist/react-chrono.esm.js",
   "umd": "dist/react-chrono.umd.js"

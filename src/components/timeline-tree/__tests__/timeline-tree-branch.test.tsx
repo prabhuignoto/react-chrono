@@ -1,6 +1,6 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import React from "react";
-import Branch from "../timeline-tree-branch";
+import { render, screen, fireEvent } from '@testing-library/react';
+import React from 'react';
+import Branch from '../timeline-tree-branch';
 
 const onClick = jest.fn();
 const onActive = jest.fn();
@@ -14,42 +14,41 @@ const View = (
     title="branch title"
     id="223344"
     active
-    onClick={() => onClick("zz22ww")}
+    onClick={() => onClick('zz22ww')}
     onActive={onActive}
     onShowMore={showMore}
   />
 );
 
-test("Test tree branch render", () => {
+test('Test tree branch render', () => {
   render(View);
-  const element = screen.getByTestId("branch-main");
+  const element = screen.getByTestId('branch-main');
   expect(element).toBeInTheDocument();
   expect(element).toMatchSnapshot();
 });
 
-test("Test tree branch class styles", () => {
+test('Test tree branch class styles', () => {
   render(View);
-  const element = screen.getByTestId("branch-main");
-  expect(element).toHaveClass("test-class");
+  const element = screen.getByTestId('branch-main');
+  expect(element).toHaveClass('test-class');
 
-  Array.from(element.children).forEach((child, index) =>  {
-    expect(child).toHaveClass("test-class");
+  Array.from(element.children).forEach((child, index) => {
+    expect(child).toHaveClass('test-class');
 
-    if(index < 2) {
-      expect(child.children[0]).toHaveClass("active");
+    if (index < 2) {
+      expect(child.children[0]).toHaveClass('active');
     }
-  })
+  });
 });
 
-test("Test tree branch render", () => {
+test('Test tree branch render', () => {
   render(View);
-  const element = screen.getByTestId("tree-leaf-click");
+  const element = screen.getByTestId('tree-leaf-click');
 
   expect(element).toBeInTheDocument();
   fireEvent.click(element);
 
   expect(onClick).toBeCalled();
   expect(onActive).toBeCalled();
-  expect(onClick).toBeCalledWith("zz22ww");
-  
+  expect(onClick).toBeCalledWith('zz22ww');
 });

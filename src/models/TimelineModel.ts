@@ -1,4 +1,4 @@
-import { TimelineItemModel } from "./TimelineItemModel";
+import { TimelineItemModel } from './TimelineItemModel';
 
 /**
  * model internally used by the component
@@ -8,7 +8,6 @@ import { TimelineItemModel } from "./TimelineItemModel";
  * @extends {TimelineProps}
  */
 export interface TimelineModel extends TimelineProps {
-
   /**
    * active timeline item
    *
@@ -102,8 +101,8 @@ export interface TimelineProps {
    * @type {("TOP" | "BOTTOM" | "ALTERNATE")}
    * @memberof TimelineProps
    */
-  titlePosition?: "TOP" | "BOTTOM" | "ALTERNATE";
-  
+  titlePosition?: 'TOP' | 'BOTTOM' | 'ALTERNATE';
+
   /**
    * sets the theme
    *
@@ -116,7 +115,7 @@ export interface TimelineProps {
   theme?: {
     primary: string;
     secondary: string;
-  },
+  };
   /**
    * Minimum height of the card
    *
@@ -128,4 +127,4 @@ export interface TimelineProps {
   hideControls?: boolean;
 }
 
-export type TimelineMode = "VERTICAL" | "HORIZONTAL" | "TREE";
+export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'TREE';

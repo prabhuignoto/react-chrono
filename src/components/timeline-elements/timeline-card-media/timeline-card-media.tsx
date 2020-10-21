@@ -1,13 +1,17 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { CardMediaModel } from "../../../models/TimelineMediaModel";
-import { MemoContentText, MemoTitle } from "../memoized";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { CardMediaModel } from '../../../models/TimelineMediaModel';
+import { MemoContentText, MemoTitle } from '../memoized';
 import {
   CardImage,
   CardVideo,
   ErrorMessage,
   MediaDetailsWrapper,
   MediaWrapper,
-} from "./timeline-card-media.styles";
+} from './timeline-card-media.styles';
+
+interface ErrorMessageModel {
+  message: string;
+}
 
 const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   active,
@@ -19,7 +23,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   content,
   media,
   slideshowActive,
-}) => {
+}: CardMediaModel) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);
 
@@ -52,9 +56,11 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     });
   }, []);
 
-  const ErrorMessageMem: React.FunctionComponent<{
-    message: string;
-  }> = React.memo(({ message }) => <ErrorMessage>{message}</ErrorMessage>);
+  const ErrorMessageMem: React.FunctionComponent<ErrorMessageModel> = React.memo(
+    ({ message }: ErrorMessageModel) => <ErrorMessage>{message}</ErrorMessage>,
+  );
+
+  ErrorMessageMem.displayName = 'Error Message';
 
   return (
     <MediaWrapper
@@ -63,7 +69,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
       mode={mode}
       slideShowActive={slideshowActive}
     >
-      {media.type === "VIDEO" &&
+      {media.type === 'VIDEO' &&
         (!loadFailed ? (
           <CardVideo
             controls
@@ -98,7 +104,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         ) : (
           <ErrorMessageMem message="Failed to load the video" />
         ))}
-      {media.type === "IMAGE" &&
+      {media.type === 'IMAGE' &&
         (!loadFailed ? (
           <CardImage
             src={media.source.url}
