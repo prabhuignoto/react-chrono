@@ -1,10 +1,5 @@
 <div align="center">
   <img src="./readme-assets/social-logo-small.png" />
-</div>
-<br />
-<br />
-
-<p>
 
   [![Build Status](https://dev.azure.com/prabhummurthy/react-chrono/_apis/build/status/prabhuignoto.react-chrono?branchName=master)](https://dev.azure.com/prabhummurthy/react-chrono/_build/latest?definitionId=7&branchName=master)
   [![DeepScan grade](https://deepscan.io/api/teams/10074/projects/13644/branches/234929/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10074&pid=13644&bid=234929)
@@ -13,12 +8,6 @@
   [![Depfu](https://badges.depfu.com/badges/48a23a6a830309649b7e516467cd9a48/overview.svg)](https://depfu.com/github/prabhuignoto/react-chrono?project_id=15325)
   ![https://badgen.net/bundlephobia/min/react](https://badgen.net/bundlephobia/min/react)
   
-</p>
-
-
-</br>
-
-<div align="center">
   <img src="./readme-assets/demo3.gif" />
 </div>
 
@@ -32,7 +21,7 @@
 - 🌲&nbsp; Use the [Tree](#tree-view) mode to layout the timeline cards vertically in a tree like fashion.
 - 📺&nbsp; Auto play the timeline with the [slideshow](#slideshow-mode) mode.
 - 🖼️&nbsp; [Display Images & Videos](#media) in the timeline with ease.
-- ⌨&nbsp; [Keyboard accessible](#keyboard-navigation--disabling-it).
+- ⌨&nbsp; [Keyboard accessible](#keyboard-navigation).
 - ⚡&nbsp; Data driven API.
 - 🔧&nbsp; Optimized to render images & videos efficiently on (Tree & Vertical mode).
 - 🎨&nbsp; [Customize](#theme) colors with ease.
@@ -44,7 +33,7 @@
 - [⚡ Installation](#-installation)
 - [🚀 Getting Started](#-getting-started)
   - [Vertical Mode](#vertical-mode)
-  - [Tree View](#tree-view)
+  - [Tree](#tree)
   - [Slideshow](#slideshow)
 - [Props](#props)
   - [Mode](#mode)
@@ -53,12 +42,12 @@
   - [Media](#media)
   - [Slideshow mode](#slideshow-mode)
   - [Item Width](#item-width)
-  - [🎨 Theme](#-theme)
+  - [Theme](#theme)
 - [📦 CodeSandbox Examples](#-codesandbox-examples)
 - [📦 Build Setup](#-build-setup)
 - [🔨 Contributing](#-contributing)
 - [🧱 Built with](#-built-with)
-- [🔭 What's coming next](#-whats-coming-next)
+- [🎯 What's coming next](#-whats-coming-next)
 - [Meta](#meta)
 
 ## ⚡ Installation
@@ -115,7 +104,7 @@ To render the timeline vertically use the `VERTICAL` mode
 
 ![vertical-basic](./readme-assets/vertical-basic.png)
 
-### Tree View
+### Tree
 
 In `Tree` mode the timeline is rendered vertically with cards alternating between left and right side.
 
@@ -263,6 +252,8 @@ Videos start playing automatically when active and will be automatically paused 
 
 Slideshow can be enabled by setting the `slideShow` prop to true. You can also set an optional `slideItemDuration` that sets the time delay between cards.
 
+setting this prop enables the play button in the timeline control panel.
+
 ```sh
 <chrono items={items} slideShow slideItemDuration={4500} />
 ```
@@ -271,7 +262,7 @@ Slideshow can be enabled by setting the `slideShow` prop to true. You can also s
 
 The `itemWidth` prop can be used to set the width of each individual timeline sections. This setting is applicable only for the `HORIZONTAL` mode.
 
-### 🎨 Theme
+### Theme
 
 Customize colors with `theme` prop.
 
@@ -299,6 +290,12 @@ yarn run start
 # run css linting
 yarn run lint:css
 
+# eslint
+yarn run eslint
+
+# prettier
+yarn run lint
+
 # package lib
 yarn run rollup
 ```
@@ -313,10 +310,11 @@ yarn run rollup
 
 ## 🧱 Built with
 
-- The Component is written in React and [Typescript](typescript).
+- [Typescript](typescript).
 - Styled with [emotion](emotion).
+- Powered by [snowpack](snowpack)
 
-## 🔭 What's coming next
+## 🎯 What's coming next
 
 - Support for Mobile devices & Tablets (responsive).
 
@@ -333,3 +331,4 @@ Distributed under the MIT license. See `LICENSE` for more information.
 [react]: https://reactjs.org
 [typescript]: https://typescriptlang.org
 [emotion]: https://emotion.sh/
+[snowpack]: https://www.snowpack.dev/

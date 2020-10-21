@@ -70,7 +70,8 @@ export const VerticalBasic: FunctionComponent<{
         items={items}
         mode="VERTICAL"
         slideShow
-        slideItemDuration={1500}
+        slideItemDuration={2500}
+        hideControls
       />
     </ComponentContainerTree>
   </Vertical>

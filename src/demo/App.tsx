@@ -45,12 +45,12 @@ const NewDemo: React.FunctionComponent = () => {
         )} */}
 
         {/* Vertical with no Media */}
-        {/* {items.length > 0 && (
+        {items.length > 0 && (
             <VerticalBasic type={"big-screen"} items={items} />
-          )} */}
+          )}
 
         {/* Tree Mode */}
-        {items.length > 0 && <VerticalTree type={'big-screen'} items={items} />}
+        {/* {items.length > 0 && <VerticalTree type={'big-screen'} items={items} />} */}
 
         {/* mixed mode */}
         {/* {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} */}
