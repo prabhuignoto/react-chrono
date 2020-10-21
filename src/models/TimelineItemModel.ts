@@ -28,5 +28,5 @@ export interface TimelineCardModel extends TimelineItemModel {
   wrapperId: string;
   cardHeight?: number;
   slideItemDuration?: number;
-  onElapsed: (id?: string) => void;
+  onElapsed?: (id?: string) => void;
 }

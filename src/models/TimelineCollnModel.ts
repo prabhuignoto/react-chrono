@@ -12,7 +12,7 @@ export interface TimelineCollectionModel {
   theme?: Theme;
   wrapperId: string;
   cardHeight?: number;
-  onElapsed: (id?: string) => void;
+  onElapsed?: (id?: string) => void;
   slideItemDuration?: number;
 }
 

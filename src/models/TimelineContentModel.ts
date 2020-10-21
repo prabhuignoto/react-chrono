@@ -12,7 +12,7 @@ export interface TimelineContentModel {
   mode?: TimelineMode;
   onClick?: (id: string) => void;
   onShowMore: () => void;
-  onElapsed: (id?: string) => void;
+  onElapsed?: (id?: string) => void;
   slideShowActive?: boolean;
   slideItemDuration?: number;
   theme?: Theme;

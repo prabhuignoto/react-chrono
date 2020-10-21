@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import {
   TimelineItemModel,
-  TimelineItemViewModel,
+  TimelineCardModel,
 } from "../../../models/TimelineItemModel";
 import Collection from "../timeline-horizontal";
 
@@ -40,37 +40,34 @@ const items: TimelineItemModel[] = [
 
 const Horizontal = (
   <Collection
-    items={items as TimelineItemViewModel[]}
+    items={items as TimelineCardModel[]}
     itemWidth={250}
     mode="HORIZONTAL"
     handleItemClick={onClick}
     autoScroll={autoScroll}
     wrapperId={id}
-    onMediaStateChange={() => {}}
   />
 );
 
 const Vertical = (
   <Collection
-    items={items as TimelineItemViewModel[]}
+    items={items as TimelineCardModel[]}
     itemWidth={250}
     mode="VERTICAL"
     handleItemClick={onClick}
     autoScroll={autoScroll}
     wrapperId={id}
-    onMediaStateChange={() => {}}
   />
 );
 
 const Tree = (
   <Collection
-    items={items as TimelineItemViewModel[]}
+    items={items as TimelineCardModel[]}
     itemWidth={250}
     mode="TREE"
     handleItemClick={onClick}
     autoScroll={autoScroll}
     wrapperId={id}
-    onMediaStateChange={() => {}}
   />
 );
 

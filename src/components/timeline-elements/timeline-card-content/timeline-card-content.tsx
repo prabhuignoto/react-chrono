@@ -86,7 +86,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       setPaused(true);
       setStartWidth(0);
       setRemainInterval(slideItemDuration);
-      id && onElapsed(id);
+      id && onElapsed && onElapsed(id);
     }, interval);
   };
 
@@ -143,7 +143,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       if (state.playing) {
         tryHandlePauseSlideshow();
       } else if (state.paused) {
-        if (paused && id) {
+        if (paused && id && onElapsed) {
           onElapsed(id);
         }
       }
