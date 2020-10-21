@@ -7,8 +7,11 @@
   ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/prabhuignoto/react-chrono?style=flat)
   [![Depfu](https://badges.depfu.com/badges/48a23a6a830309649b7e516467cd9a48/overview.svg)](https://depfu.com/github/prabhuignoto/react-chrono?project_id=15325)
   ![https://badgen.net/bundlephobia/min/react](https://badgen.net/bundlephobia/min/react)
-  
-  <img src="./readme-assets/demo3.gif" />
+
+  <div>
+    <img src="./readme-assets/demo3.gif" />
+  </div>
+
 </div>
 
 <!-- **Try it on CodeSandbox!**

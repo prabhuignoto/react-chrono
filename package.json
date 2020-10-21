@@ -96,7 +96,7 @@
   ],
   "lint-staged": {
     "src/components/**/*.{ts,tsx}": [
-      "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
+      "prettier --format \"src/**/*.{js,jsx,ts,tsx}\"",
       "stylelint ./src/**/*style.ts",
       "eslint ./src/**/*.tsx",
       "git add"
