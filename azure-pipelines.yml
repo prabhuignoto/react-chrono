@@ -1,0 +1,35 @@
+# Node.js with React
+# Build a Node.js project that uses React.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    yarn install
+    yarn add react
+    yarn add react-dom
+    yarn run rollup
+  displayName: 'Running Rollup'
+
+- script: |
+    yarn run lint:css
+  displayName: 'Running Style Lint.'
+
+- script: |
+    yarn run coverage
+  displayName: 'Running Tests and Generate coverage reports.'
+
+- script: |
+    bash <(curl -s https://codecov.io/bash)
+  displayName: 'Upload to codecov.io'

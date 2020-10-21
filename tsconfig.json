@@ -1,21 +1,24 @@
 {
-  "include": ["src", "types"],
   "compilerOptions": {
-    "module": "esnext",
     "target": "esnext",
-    "moduleResolution": "node",
-    "jsx": "preserve",
-    "baseUrl": "./",
-    /* paths - If you configure Snowpack import aliases, add them here. */
-    "paths": {},
-    /* noEmit - Snowpack builds (emits) files, not tsc. */
-    "noEmit": true,
-    /* Additional Options */
-    "strict": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "importsNotUsedAsValues": "error"
-  }
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "noEmit": true,
+    "rootDir": "src",
+    "declaration": true,
+    "declarationDir": "dist"
+  },
+  "include": ["src/components", "src/models"],
+  "exclude": ["src/**/*.test.tsx", "node_modules", "dist", "rollup.config.js"],
+  "files": ["src/react-chrono.ts"]
 }
