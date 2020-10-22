@@ -1538,7 +1538,7 @@
     "@babel/core" "^7.10.5"
     workerpool "^6.0.0"
 
-"@snowpack/plugin-build-script@^2.0.11":
+"@snowpack/plugin-build-script@^2.0.10":
   version "2.0.11"
   resolved "https://registry.yarnpkg.com/@snowpack/plugin-build-script/-/plugin-build-script-2.0.11.tgz#50eb2b6127c8863cbbc6a3105042713e16818869"
   integrity sha512-bLi7W0ry5OAhCEGuBL3PdLchWU+WaXa2aJYSJapt4FsfhUiNwi+ua1qiZ0syaXXfRq/2jx9eEkx4G7TGB8Kvsg==
@@ -1563,7 +1563,7 @@
     "@babel/plugin-syntax-class-properties" "^7.10.0"
     react-refresh "^0.8.3"
 
-"@snowpack/plugin-run-script@^2.1.7":
+"@snowpack/plugin-run-script@^2.1.6":
   version "2.1.7"
   resolved "https://registry.yarnpkg.com/@snowpack/plugin-run-script/-/plugin-run-script-2.1.7.tgz#30f50cc76251f9c857ccaa6b725bfa509765d9dd"
   integrity sha512-+gwR03tsXDJf3OU0LJ40nZVZXVUu2nr8V5C3rLOHjlJ3U1vYY0WCcS9IvhrO3eYakOg5Git8JDZIakJ1wczvBA==
@@ -4231,10 +4231,10 @@ escodegen@^1.14.1:
   optionalDependencies:
     source-map "~0.6.1"
 
-esinstall@^0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/esinstall/-/esinstall-0.3.4.tgz#3040e23af29a6b0c5eff8533e4fbb933d4a31532"
-  integrity sha512-UKlx03ARe6NiZ8IVsWZA4vZiSWBBG/JK7sH7+MiI3uXobY8eMd6tU7j5xjUaQoJ7wpaBq449Zm3Z6LL2BbyV7w==
+esinstall@^0.3.3:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/esinstall/-/esinstall-0.3.5.tgz#86d364bca149868dcfd4b1d9cdaaf38075dd9af4"
+  integrity sha512-dAz60PnafifmuKGByuONPaFPLuTfhqpzAxgKgxMOaHhOb3zZxoP+TsiGolLEPDliYdHBtZIp7fEFOycUMKlGLg==
   dependencies:
     "@rollup/plugin-alias" "^3.0.1"
     "@rollup/plugin-commonjs" "^15.0.0"
@@ -9127,13 +9127,13 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-snowpack@^2.15.0:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-2.15.0.tgz#3937aecb12c657df629c410ea0767916affe5ca5"
-  integrity sha512-2T9pqIYc/1RXWQzrkLqyJx9QtQnI1UfkKfJfrnn8qd6u0446Jw6l5+47VcEUQqRoH4TasVsra8tJO4Zw2BKZrg==
+snowpack@^2.15.0-pre.6:
+  version "2.15.0-pre.6"
+  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-2.15.0-pre.6.tgz#d13d19448ddcd3fa5636fb5d5bc3bbdb98220dbd"
+  integrity sha512-wD74EXTZ8+OciZ/VrabUBw8iWHhWCv6ahW9na0M2fcvo2P1z4BRiHcYF0EtIYUKaX8nNBEvBO7SEBZyqJ2CaFg==
   dependencies:
-    "@snowpack/plugin-build-script" "^2.0.11"
-    "@snowpack/plugin-run-script" "^2.1.7"
+    "@snowpack/plugin-build-script" "^2.0.10"
+    "@snowpack/plugin-run-script" "^2.1.6"
     cacache "^15.0.0"
     cachedir "^2.3.0"
     chokidar "^3.4.0"
@@ -9144,7 +9144,7 @@ snowpack@^2.15.0:
     detect-port "^1.3.0"
     es-module-lexer "^0.3.24"
     esbuild "^0.7.0"
-    esinstall "^0.3.4"
+    esinstall "^0.3.3"
     etag "^1.8.1"
     execa "^4.0.3"
     find-cache-dir "^3.3.1"

@@ -82,7 +82,8 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-width: 0.35em;
+  scrollbar-color: ${(p) => p.theme.primary} default;
+  scrollbar-width: thin;
   transition: max-height 0.2s linear;
   width: 100%;
 

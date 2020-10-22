@@ -27,11 +27,13 @@ export const TimelineNavButton = styled.button<{
   cursor: pointer;
   display: flex;
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.25));
-  height: 2rem;
+  height: 1.75rem;
   justify-content: center;
   margin: 0 0.2rem;
   outline: 0;
-  width: 2rem;
+  width: 1.75rem;
+  padding: 0;
+  transition: all 0.2s ease-in;
 
   transform: ${(p) => {
     if (p.mode !== 'HORIZONTAL') {
@@ -39,9 +41,14 @@ export const TimelineNavButton = styled.button<{
     }
   }};
 
+  &:active {
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.25));
+    transform: rotate(90deg) scale(0.85);
+  }
+
   svg {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
   }
 `;
 
@@ -60,15 +67,15 @@ export const ControlButton = styled.div<{ theme?: Theme }>`
   border-radius: 50%;
   cursor: pointer;
   display: flex;
-  height: 2rem;
+  height: 1.75rem;
   justify-content: center;
   margin-left: 0.5rem;
-  width: 2rem;
+  width: 1.75rem;
 
   svg {
     color: #fff;
-    width: 60%;
-    height: 60%;
+    width: 80%;
+    height: 80%;
   }
 `;
 

@@ -71,7 +71,6 @@ export const VerticalBasic: FunctionComponent<{
         mode="VERTICAL"
         slideShow
         slideItemDuration={2500}
-        hideControls
       />
     </ComponentContainerTree>
   </Vertical>
@@ -106,8 +105,8 @@ export const VerticalTree: FunctionComponent<{
         items={items}
         mode="TREE"
         slideShow
-        slideItemDuration={1350}
-        theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
+        slideItemDuration={2350}
+        // theme={{ primary: '#4a4e69', secondary: '#c9ada7' }}
       />
     </ComponentContainerTree>
   </Vertical>

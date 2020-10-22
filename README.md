@@ -1,5 +1,7 @@
 <div align="center">
   <img src="./readme-assets/social-logo-small.png" />
+  
+  <br/>
 
   [![Build Status](https://dev.azure.com/prabhummurthy/react-chrono/_apis/build/status/prabhuignoto.react-chrono?branchName=master)](https://dev.azure.com/prabhummurthy/react-chrono/_build/latest?definitionId=7&branchName=master)
   [![DeepScan grade](https://deepscan.io/api/teams/10074/projects/13644/branches/234929/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10074&pid=13644&bid=234929)
@@ -20,8 +22,8 @@
 
 <h2>Features</h2>
 
-- 🚥 Render timelines in three different modes ([Horizontal](#-getting-started), [Vertical](#vertical-mode), [Tree](#tree-view)).
-- 🌲&nbsp; Use the [Tree](#tree-view) mode to layout the timeline cards vertically in a tree like fashion.
+- 🚥 Render timelines in three different modes ([Horizontal](#-getting-started), [Vertical](#vertical-mode), [Tree](#tree)).
+- 🌲&nbsp; Use the [Tree](#tree) mode to layout the timeline cards vertically in a tree like fashion.
 - 📺&nbsp; Auto play the timeline with the [slideshow](#slideshow-mode) mode.
 - 🖼️&nbsp; [Display Images & Videos](#media) in the timeline with ease.
 - ⌨&nbsp; [Keyboard accessible](#keyboard-navigation).
@@ -34,7 +36,7 @@
 <h2>Table of Contents</h2>
 
 - [⚡ Installation](#-installation)
-- [🚀 Getting Started](#-getting-started)
+- [Getting Started](#getting-started)
   - [Vertical Mode](#vertical-mode)
   - [Tree](#tree)
   - [Slideshow](#slideshow)
@@ -43,7 +45,6 @@
   - [Timeline item Model](#timeline-item-model)
   - [Keyboard Navigation](#keyboard-navigation)
   - [Media](#media)
-  - [Slideshow mode](#slideshow-mode)
   - [Item Width](#item-width)
   - [Theme](#theme)
 - [📦 CodeSandbox Examples](#-codesandbox-examples)
@@ -59,7 +60,7 @@
 yarn install react-chrono
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 Please make sure you wrap the component in a container that has a `width` and `height`.
 
@@ -251,7 +252,7 @@ Videos start playing automatically when active and will be automatically paused 
 }
 ```
 
-### Slideshow mode
+f### Slideshow mode
 
 Slideshow can be enabled by setting the `slideShow` prop to true. You can also set an optional `slideItemDuration` that sets the time delay between cards.
 

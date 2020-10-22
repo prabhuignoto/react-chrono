@@ -75,7 +75,7 @@
     "rollup": "^2.32.1",
     "rollup-plugin-postcss": "^3.1.8",
     "rollup-plugin-typescript2": "^0.28.0",
-    "snowpack": "^2.15.0",
+    "snowpack": "^2.15.0-pre.6",
     "stylelint": "^13.7.2",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-styled-components": "^0.1.1",

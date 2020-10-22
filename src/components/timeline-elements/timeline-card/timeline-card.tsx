@@ -124,6 +124,7 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
       data-testid="timeline-item"
     >
       {mode === 'HORIZONTAL' && active ? showTimelineContent() : null}
+
       <TimelinePointWrapper>
         <TimelinePoint
           className={`${mode.toLowerCase()} ${active ? 'active' : 'in-active'}`}
@@ -133,6 +134,7 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
           theme={theme}
         ></TimelinePoint>
       </TimelinePointWrapper>
+
       {mode === 'HORIZONTAL' && (
         <TimelineTitleContainer
           className={`${mode.toLowerCase()} ${position}`}
