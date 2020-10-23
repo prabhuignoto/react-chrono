@@ -252,7 +252,7 @@ Videos start playing automatically when active and will be automatically paused 
 }
 ```
 
-f### Slideshow mode
+### Slideshow mode
 
 Slideshow can be enabled by setting the `slideShow` prop to true. You can also set an optional `slideItemDuration` that sets the time delay between cards.
 
