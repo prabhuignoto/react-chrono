@@ -314,9 +314,9 @@ yarn run rollup
 
 ## 🧱 Built with
 
-- [Typescript](typescript).
-- Styled with [emotion](emotion).
-- Powered by [snowpack](snowpack)
+- [Typescript](https://www.typescriptlang.org/).
+- Styled with [emotion](https://emotion.sh/).
+- Powered by [snowpack](https://www.snowpack.dev/)
 
 ## 🎯 What's coming next
 

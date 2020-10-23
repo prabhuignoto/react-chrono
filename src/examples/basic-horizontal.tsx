@@ -1,4 +1,4 @@
-import { Chrono } from 'react-chrono';
+import Chrono from '../components/index';
 import timelineData from './data';
 import React from 'react';
 
