@@ -306,7 +306,7 @@ yarn run rollup
 
 ## 🔨 Contributing
 
-1. Fork it ( [https://github.com/prabhuignoto/react-chrono/fork](https://github.com/prabhuignoto/react-chrono/fork) )
+1. [Fork it](https://github.com/prabhuignoto/react-chrono/fork)
 2. Create your feature branch (`git checkout -b new-feature`)
 3. Commit your changes (`git commit -am 'Add feature'`)
 4. Push to the branch (`git push origin new-feature`)
