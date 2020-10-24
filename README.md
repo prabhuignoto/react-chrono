@@ -252,7 +252,7 @@ Videos start playing automatically when active and will be automatically paused 
 }
 ```
 
-f### Slideshow mode
+### Slideshow mode
 
 Slideshow can be enabled by setting the `slideShow` prop to true. You can also set an optional `slideItemDuration` that sets the time delay between cards.
 
@@ -306,7 +306,7 @@ yarn run rollup
 
 ## 🔨 Contributing
 
-1. Fork it ( [https://github.com/prabhuignoto/react-chrono/fork](https://github.com/prabhuignoto/react-chrono/fork) )
+1. [Fork it](https://github.com/prabhuignoto/react-chrono/fork)
 2. Create your feature branch (`git checkout -b new-feature`)
 3. Commit your changes (`git commit -am 'Add feature'`)
 4. Push to the branch (`git push origin new-feature`)
