@@ -10,7 +10,7 @@ export const TimelineItemContentWrapper = styled.div<{
   mode?: TimelineMode;
 }>`
   align-items: flex-start;
-  border-radius: 7px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -77,14 +77,14 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   display: flex;
   flex-direction: column;
   font-size: 0.8rem;
-  margin-top: auto;
   max-height: 200px;
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-color: ${(p) => p.theme.primary} default;
   scrollbar-width: thin;
-  transition: max-height 0.2s linear;
+  transition: max-height 0.1s linear;
   width: 100%;
+  margin-bottom: 0.5rem;
 
   &.show-less {
     max-height: 50px;
@@ -110,14 +110,28 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   }
 `;
 
-export const ShowMore = styled.span<{ show?: boolean }>`
+export const ShowMore = styled.span<{ show?: boolean, theme?: Theme }>`
   cursor: pointer;
   font-size: 0.75rem;
-  margin-top: auto;
+  /* margin-top: 1rem; */
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
   visibility: ${(p) => (p.show ? 'visible' : 'hidden')};
-  height: ${(p) => (!p.show ? '0' : '')};
+  /* height: ${(p) => (!p.show ? '0' : '')}; */
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 4px;
+  padding: 0.1rem 0.5rem;
+  align-self: flex-end;
+  justify-self: flex-end;
+  margin-right: 0.5rem;
+  margin-top: auto;
+
+  &:hover {
+    background: ${p => p.theme.primary};
+    color: #fff;
+  }
 `;
 
 const slideAnimation = (start?: number, end?: number) => keyframes`
@@ -160,6 +174,24 @@ export const SlideShowProgressBar = styled.span<{
     position: absolute;
     left: 0;
     top: 0;
+    width: 100%;
+  }
+`;
+
+export const ChevronIconWrapper = styled.span<{ collapsed?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.2rem;
+  margin-top: 0.2rem;
+  ${p => p.collapsed ? `
+      transform: rotate(90deg);
+  ` : `transform: rotate(-90deg)`};
+
+  svg {
+    height: 100%;
     width: 100%;
   }
 `;

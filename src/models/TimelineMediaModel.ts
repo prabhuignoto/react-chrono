@@ -30,4 +30,5 @@ export interface CardMediaModel {
   title?: string;
   content: string;
   slideshowActive?: boolean;
+  hideMedia: boolean;
 }

@@ -1,6 +1,5 @@
 import { nanoid } from 'nanoid';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { useDebouncedCallback } from 'use-debounce';
 import { Scroll } from '../../models/TimelineCollnModel';
 import { TimelineCardModel } from '../../models/TimelineItemModel';
 import { TimelineModel } from '../../models/TimelineModel';
@@ -16,11 +15,6 @@ import {
   TimelineMainWrapper,
   Wrapper,
 } from './timeline.style';
-
-const handleWinWheel = (evt: WheelEvent) => {
-  evt.preventDefault();
-  // window.scrollTo(window.pageXOffset, window.pageYOffset);
-};
 
 const Timeline: React.FunctionComponent<TimelineModel> = (
   props: TimelineModel,
@@ -44,7 +38,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     slideShowEnabled,
     slideItemDuration,
     hideControls,
-    scrollable
+    scrollable,
   } = props;
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -54,8 +48,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const timelineMainRef = useRef<HTMLDivElement>(null);
 
   const canScrollTimeline = useMemo(() => {
-    return scrollable && !slideShowRunning
-  }, [slideShowRunning, scrollable])
+    return scrollable && !slideShowRunning;
+  }, [slideShowRunning, scrollable]);
 
   // generate a unique id for the timeline content
   const id = useRef(nanoid());
@@ -117,17 +111,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     [setNewOffset],
   );
 
-  const handleMouseWheel = useDebouncedCallback((event: React.WheelEvent) => {
-    if (event.deltaY > 0) {
-      handleNext();
-    } else if (event.deltaY < 0) {
-      handlePrevious();
-    }
-    event.preventDefault();
-    event.stopPropagation();
-    return false;
-  }, 70);
-
   useEffect(() => {
     const ele = timelineMainRef.current;
     if (!ele) {
@@ -160,9 +143,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         (entries) => {
           // helper functions to hide image/videos
           const hide = (ele: HTMLImageElement | HTMLVideoElement) =>
-            (ele.style.display = 'none');
+            (ele.style.visibility = 'hidden');
           const show = (ele: HTMLImageElement | HTMLVideoElement) =>
-            (ele.style.display = 'block');
+            (ele.style.visibility = 'visible');
 
           entries.forEach((entry) => {
             const element = entry.target as HTMLDivElement;
@@ -210,14 +193,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       onKeyDown={(evt: React.KeyboardEvent<HTMLDivElement>) =>
         !disableNavOnKey && !slideShowRunning ? handleKeySelection(evt) : null
       }
-      // className={`${mode.toLowerCase()} ${titlePosition.toLowerCase()}`}
       className={`${mode.toLowerCase()}`}
-      // onMouseEnter={() =>
-      //   document.addEventListener('wheel', handleWinWheel, { passive: false })
-      // }
-      // onMouseLeave={(evt) => {
-      //   document.removeEventListener('wheel', handleWinWheel);
-      // }}
     >
       <TimelineMainWrapper
         ref={timelineMainRef}
@@ -226,7 +202,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         // onWheel={(evt) => handleMouseWheel.callback(evt)}
         theme={theme}
       >
-        {/* TREE */}
+        {/* VERTICAL ALTERNATING */}
         {mode === 'VERTICAL_ALTERNATING' ? (
           <TimelineTree
             items={items as TimelineCardModel[]}
@@ -279,8 +255,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           />
         ) : null}
       </TimelineMainWrapper>
+
       {/* placeholder to render timeline content for horizontal mode */}
       <TimelineContentRender id={id.current} />
+
       {/* Timeline Controls */}
       {!hideControls && (
         <TimelineControlContainer mode={mode}>

@@ -4,7 +4,8 @@ import {
   HorizontalBasic,
   VerticalBasic,
   VerticalTree,
-  VerticalTreeMixed
+  VerticalTreeMixed,
+  VerticalTreeSlideshow
 } from './app-samples';
 import './App.css';
 import {
@@ -38,15 +39,15 @@ const NewDemo: React.FunctionComponent = () => {
         )} */}
 
         {/* Vertical with no Media */}
-        {items.length > 0 && (
+        {/* {items.length > 0 && (
             <VerticalBasic type={"big-screen"} items={items} />
-          )}
+          )} */}
 
         {/* Tree Mode */}
         {/* {items.length > 0 && <VerticalTree type={'big-screen'} items={items} />} */}
 
         {/* mixed mode */}
-        {/* {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} */}
+        {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />}
 
         {/* Horizontal Slideshow */}
         {/* {<HorizontalSlideshow type={"big-screen"} />} */}

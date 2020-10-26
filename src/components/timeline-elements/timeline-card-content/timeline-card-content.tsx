@@ -7,9 +7,11 @@ import React, {
 } from 'react';
 import { TimelineContentModel } from '../../../models/TimelineContentModel';
 import { MediaState } from '../../../models/TimelineMediaModel';
+import ChevronIcon from '../../icons/chev-right';
 import { MemoContentText, MemoTitle } from '../memoized';
 import CardMedia from '../timeline-card-media/timeline-card-media';
 import {
+  ChevronIconWrapper,
   ShowMore,
   SlideShowProgressBar,
   TimelineContentDetails,
@@ -36,21 +38,30 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const containerWidth = useRef<number>(0);
   const progressRef = useRef<HTMLDivElement>(null);
-  const canShowMore = useRef(!!detailedText);
+
+  const containerWidth = useRef<number>(0);
   const slideShowElapsed = useRef(0);
   const timerRef = useRef(0);
-  const [paused, setPaused] = useState(false);
   const startTime = useRef<Date>();
+  const [paused, setPaused] = useState(false);
 
   // const [elapsed, setElapsed] = useState(0);
   const [remainInterval, setRemainInterval] = useState(0);
   const [startWidth, setStartWidth] = useState(0);
 
   const canShowProgressBar = useMemo(() => {
-    return active && slideShowActive && media && media.type !== 'VIDEO';
+    const canShow = active && slideShowActive;
+    if (media) {
+      return canShow && media.type !== 'VIDEO';
+    } else {
+      return canShow;
+    }
   }, [active, slideShowActive]);
+
+  const canShowMore = useMemo(() => {
+    return !!detailedText;
+  }, [detailedText]);
 
   useEffect(() => {
     const detailsEle = detailsRef.current;
@@ -67,15 +78,6 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
         setStartWidth(containerWidth.current);
       }
     }, 100);
-    if (detailsRef.current) {
-      detailsRef.current.addEventListener(
-        'wheel',
-        (evt) => {
-          evt.stopPropagation();
-        },
-        { passive: false },
-      );
-    }
   }, []);
 
   const setupTimer = (interval: number) => {
@@ -194,6 +196,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           active={active}
           theme={theme}
           slideshowActive={slideShowActive}
+          hideMedia={showMore}
         />
       )}
 
@@ -202,14 +205,8 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
         ref={detailsRef}
         className={!showMore ? 'show-less' : ''}
         theme={theme}
-        onScroll={(evt) => {
-          if (!showMore) {
-            evt.stopPropagation();
-            evt.preventDefault();
-          }
-        }}
       >
-        {detailedText && !media && (
+        {detailedText && (
           <TimelineContentDetails
             className={showMore ? 'active' : ''}
             ref={detailsRef}
@@ -220,7 +217,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       </TimelineContentDetailsWrapper>
 
       {/* display the show more button for textual content */}
-      {!media && (
+      {
         <ShowMore
           role="button"
           onClick={() => {
@@ -230,11 +227,15 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
             }
           }}
           className="show-more"
-          show={canShowMore.current}
+          show={canShowMore}
+          theme={theme}
         >
-          {active ? (showMore ? 'show less' : 'show more') : '...'}
+          {<span>{showMore ? 'show less' : 'show more'}</span>}
+          <ChevronIconWrapper collapsed={!showMore}>
+            <ChevronIcon />
+          </ChevronIconWrapper>
         </ShowMore>
-      )}
+      }
 
       {canShowProgressBar && (
         <SlideShowProgressBar

@@ -23,6 +23,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   content,
   media,
   slideshowActive,
+  hideMedia = false
 }: CardMediaModel) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);
@@ -76,6 +77,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             autoPlay={active}
             ref={videoRef}
             onLoadedData={handleMediaLoaded}
+            hide={hideMedia}
             onPlay={() =>
               onMediaStateChange({
                 id,
@@ -113,6 +115,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             onError={handleError}
             visible={mediaLoaded}
             active={active}
+            hide={hideMedia}
           />
         ) : (
           <ErrorMessageMem message="Failed to load the image." />

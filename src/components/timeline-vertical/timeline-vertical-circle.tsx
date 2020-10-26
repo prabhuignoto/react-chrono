@@ -45,6 +45,7 @@ const VerticalCircle: React.FunctionComponent<TreeLeafModel> = (
           }
         }}
         ref={circleRef}
+        role="button"
         data-testid="tree-leaf-click"
       >
         <TimelinePoint

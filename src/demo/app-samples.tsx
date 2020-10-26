@@ -142,7 +142,8 @@ export const VerticalTreeMixed: FunctionComponent<{
         items={dataMixed}
         mode="VERTICAL_ALTERNATING"
         cardHeight={cardHeight}
-        theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
+        scrollable
+        // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
     </ComponentContainerTree>
   </Vertical>
@@ -170,6 +171,7 @@ export const HorizontalSlideshow: FunctionComponent<{
         slideShow
         slideItemDuration={1500}
         cardHeight={450}
+        scrollable
       />
       {/* <SandBox>
         <a href="https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?fontsize=14&hidenavigation=1&theme=dark">
@@ -200,8 +202,9 @@ export const VerticalTreeSlideshow: FunctionComponent<{
       <Chrono
         items={data}
         mode="VERTICAL_ALTERNATING"
-        cardHeight={cardHeight}
-        theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
+        cardHeight={200}
+        scrollable
+        // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
       {/* <SandBox>
         <a href="https://codesandbox.io/s/react-chrono-tree-demo-zksyo?fontsize=14&hidenavigation=1&theme=dark">

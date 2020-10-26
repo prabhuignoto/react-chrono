@@ -15,7 +15,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     primary: '#0f52ba',
     secondary: '#ffdf00',
   },
-  cardHeight = 250,
+  cardHeight = 200,
   hideControls = false,
   scrollable = false
 }: Partial<TimelineProps>) => {
