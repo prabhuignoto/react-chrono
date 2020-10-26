@@ -1,16 +1,16 @@
 import React, { useRef } from 'react';
-import { TreeBranchModel } from '../../models/TimelineTreeModel';
+import { VerticalItemModel } from '../../models/TimelineTreeModel';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
-import TreeLeaf from './timeline-tree-leaf';
+import VerticalCircle from './timeline-vertical-circle';
 import {
-  Branch,
+  VerticalItemWrapper,
   TimelineCardContentWrapper,
-  TimelineTreeTitleWrapper,
-} from './timeline-tree.styles';
+  TimelineTitleWrapper,
+} from './timeline-vertical.styles';
 
-const TreeBranch: React.FunctionComponent<TreeBranchModel> = (
-  props: TreeBranchModel,
+const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
+  props: VerticalItemModel,
 ) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -44,7 +44,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (
   };
 
   return (
-    <Branch
+    <VerticalItemWrapper
       className={`${className} ${visible ? 'visible' : ''} branch-main`}
       key={index}
       ref={contentRef}
@@ -52,12 +52,12 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (
       alternateCards={alternateCards}
     >
       {/* title */}
-      <TimelineTreeTitleWrapper
+      <TimelineTitleWrapper
         className={className}
         alternateCards={alternateCards}
       >
         <TimelineItemTitle title={title} active={active} theme={theme} />
-      </TimelineTreeTitleWrapper>
+      </TimelineTitleWrapper>
 
       {/* content section */}
       <TimelineCardContentWrapper
@@ -88,7 +88,7 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (
       </TimelineCardContentWrapper>
 
       {/* leaf */}
-      <TreeLeaf
+      <VerticalCircle
         className={className}
         id={id}
         active={active}
@@ -98,8 +98,8 @@ const TreeBranch: React.FunctionComponent<TreeBranchModel> = (
         alternateCards={alternateCards}
         slideShowRunning={slideShowRunning}
       />
-    </Branch>
+    </VerticalItemWrapper>
   );
 };
 
-export default TreeBranch;
+export default VerticalItem;

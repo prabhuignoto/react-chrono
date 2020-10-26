@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Theme } from '../../models/Theme';
 import { TimelineMode } from '../../models/TimelineModel';
 
 export const Wrapper = styled.div`
@@ -9,15 +10,16 @@ export const Wrapper = styled.div`
   height: 100%;
   user-select: none;
   outline: 0;
+  overflow: hidden;
 
   &.horizontal {
-    &.top {
-      justify-content: flex-start;
+    justify-content: flex-start;
+    /* &.top {
     }
 
     &.bottom {
       justify-content: flex-end;
-    }
+    } */
   }
 
   &.vertical,
@@ -26,21 +28,32 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const TimelineMainWrapper = styled.div`
+export const TimelineMainWrapper = styled.div<{ theme?: Theme, scrollable?: boolean }>`
   align-items: center;
   display: flex;
   justify-content: center;
-  overflow: hidden;
-  overscroll-behavior: none;
-  padding: 1rem 0;
+  overflow-x: hidden;
+  overflow-y: ${p => p.scrollable ? "auto" : "hidden"};
+  overscroll-behavior: contain;
+  padding: ${p => p.scrollable ? "1rem 2rem 1rem 0" : "1rem 0"};
   position: relative;
   scroll-behavior: smooth;
+  scrollbar-color: ${(p) => p.theme.primary} default;
+  scrollbar-width: thin;
   width: 100%;
 
   &::-webkit-scrollbar {
-    width: 0;
+    width: .5em;
   }
-  scrollbar-width: none;
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${(p) => p.theme.primary};
+    outline: 1px solid ${(p) => p.theme.primary};
+  }
 
   &.horizontal {
     height: 3rem;

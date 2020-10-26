@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { TreeLeafModel } from '../../models/TimelineTreeModel';
 import { TimelinePoint } from '../timeline-elements/timeline-card/timeline-card.styles';
-import { TreeTrunkWrapper, TrunkPointWrapper } from './timeline-tree.styles';
+import {
+  TreeTrunkWrapper,
+  TrunkPointWrapper,
+} from './timeline-vertical.styles';
 
-const TreeLeaf: React.FunctionComponent<TreeLeafModel> = (
+const VerticalCircle: React.FunctionComponent<TreeLeafModel> = (
   props: TreeLeafModel,
 ) => {
   const {
@@ -30,8 +33,9 @@ const TreeLeaf: React.FunctionComponent<TreeLeafModel> = (
     <TreeTrunkWrapper
       className={className}
       data-testid="tree-leaf"
-      bg={theme?.primary}
+      bg={theme && theme.primary}
       alternateCards={alternateCards}
+      role="button"
     >
       <TrunkPointWrapper
         className={className}
@@ -52,4 +56,4 @@ const TreeLeaf: React.FunctionComponent<TreeLeafModel> = (
   );
 };
 
-export default TreeLeaf;
+export default VerticalCircle;

@@ -25,3 +25,5 @@ yarn-error.log*
 /dist
 
 storybook-static
+
+debug

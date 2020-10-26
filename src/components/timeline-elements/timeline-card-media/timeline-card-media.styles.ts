@@ -77,7 +77,7 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
         return '100%';
       case 'VERTICAL':
         return '100%';
-      case 'TREE':
+      case 'VERTICAL_ALTERNATING':
         return '100%';
     }
   }};

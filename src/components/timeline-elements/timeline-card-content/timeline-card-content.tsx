@@ -49,7 +49,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   const [startWidth, setStartWidth] = useState(0);
 
   const canShowProgressBar = useMemo(() => {
-    return active && slideShowActive && media?.type !== 'VIDEO';
+    return active && slideShowActive && media && media.type !== 'VIDEO';
   }, [active, slideShowActive]);
 
   useEffect(() => {
@@ -67,6 +67,15 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
         setStartWidth(containerWidth.current);
       }
     }, 100);
+    if (detailsRef.current) {
+      detailsRef.current.addEventListener(
+        'wheel',
+        (evt) => {
+          evt.stopPropagation();
+        },
+        { passive: false },
+      );
+    }
   }, []);
 
   const setupTimer = (interval: number) => {
@@ -193,9 +202,18 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
         ref={detailsRef}
         className={!showMore ? 'show-less' : ''}
         theme={theme}
+        onScroll={(evt) => {
+          if (!showMore) {
+            evt.stopPropagation();
+            evt.preventDefault();
+          }
+        }}
       >
         {detailedText && !media && (
-          <TimelineContentDetails className={showMore ? 'active' : ''}>
+          <TimelineContentDetails
+            className={showMore ? 'active' : ''}
+            ref={detailsRef}
+          >
             {detailedText}
           </TimelineContentDetails>
         )}
@@ -224,7 +242,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           paused={paused}
           duration={remainInterval}
           ref={progressRef}
-          color={theme?.primary}
+          color={theme && theme.primary}
         ></SlideShowProgressBar>
       )}
     </TimelineItemContentWrapper>

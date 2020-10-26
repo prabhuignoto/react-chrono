@@ -78,7 +78,7 @@ export interface TreeLeafModel extends CommonBranchAndLeafModel {
   onActive: (timelinePointOffset: number) => void;
 }
 
-export interface TreeBranchModel extends CommonBranchAndLeafModel {
+export interface VerticalItemModel extends CommonBranchAndLeafModel {
   contentDetailedText?: string;
   contentText: string;
   contentTitle?: string;

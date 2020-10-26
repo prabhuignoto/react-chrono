@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 const ModeWrapper = styled.div`
-  width: 850px;
+  width: 950px;
   position: relative;
   margin-bottom: 3rem;
   border-radius: 10px;

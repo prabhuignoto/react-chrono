@@ -8,7 +8,7 @@ import {
   DescriptionContent,
   DescriptionHeader,
   Horizontal,
-  Vertical,
+  Vertical
 } from './App.styles';
 import data from './data';
 import dataMixed from './data-mixed';
@@ -71,6 +71,7 @@ export const VerticalBasic: FunctionComponent<{
         mode="VERTICAL"
         slideShow
         slideItemDuration={2500}
+        scrollable
       />
     </ComponentContainerTree>
   </Vertical>
@@ -103,9 +104,10 @@ export const VerticalTree: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         items={items}
-        mode="TREE"
+        mode="VERTICAL_ALTERNATING"
         slideShow
         slideItemDuration={2350}
+        scrollable
         // theme={{ primary: '#4a4e69', secondary: '#c9ada7' }}
       />
     </ComponentContainerTree>
@@ -138,7 +140,7 @@ export const VerticalTreeMixed: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         items={dataMixed}
-        mode="TREE"
+        mode="VERTICAL_ALTERNATING"
         cardHeight={cardHeight}
         theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
@@ -197,7 +199,7 @@ export const VerticalTreeSlideshow: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         items={data}
-        mode="TREE"
+        mode="VERTICAL_ALTERNATING"
         cardHeight={cardHeight}
         theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />

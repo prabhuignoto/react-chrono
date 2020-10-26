@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Chrono from '../components';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
   HorizontalBasic,
-  HorizontalSlideshow,
   VerticalBasic,
   VerticalTree,
-  VerticalTreeMixed,
-  VerticalTreeSlideshow,
+  VerticalTreeMixed
 } from './app-samples';
 import './App.css';
 import {
-  ComponentContainer,
-  Description,
-  DescriptionContent,
-  DescriptionHeader,
-  Horizontal,
-  Wrapper,
+  Wrapper
 } from './App.styles';
 import data from './data';
 
@@ -46,12 +38,12 @@ const NewDemo: React.FunctionComponent = () => {
         )} */}
 
         {/* Vertical with no Media */}
-        {/* {items.length > 0 && (
+        {items.length > 0 && (
             <VerticalBasic type={"big-screen"} items={items} />
-          )} */}
+          )}
 
         {/* Tree Mode */}
-        {items.length > 0 && <VerticalTree type={'big-screen'} items={items} />}
+        {/* {items.length > 0 && <VerticalTree type={'big-screen'} items={items} />} */}
 
         {/* mixed mode */}
         {/* {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} */}

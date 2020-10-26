@@ -34,10 +34,10 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
 
     if (active) {
       // play the video when active
-      videoRef.current?.play();
+      videoRef.current && videoRef.current.play();
     } else {
       // pause the video when not active
-      videoRef.current?.pause();
+      videoRef.current && videoRef.current.pause();
     }
   }, [active]);
 

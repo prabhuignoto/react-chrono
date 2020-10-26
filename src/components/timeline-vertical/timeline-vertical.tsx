@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { TimelineTreeModel } from '../../models/TimelineTreeModel';
-import TreeBranch from './timeline-tree-branch';
-import { TimelineTreeWrapper } from './timeline-tree.styles';
+import TreeBranch from './timeline-vertical-item';
+import { TimelineVerticalWrapper } from './timeline-vertical.styles';
 
 // This component is used to render both tree and vertical modes
 const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
@@ -33,7 +33,7 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   const handleOnShowMore = useCallback(() => {}, []);
 
   return (
-    <TimelineTreeWrapper data-testid="tree-main">
+    <TimelineVerticalWrapper data-testid="tree-main">
       {items.map((item, index) => {
         let className = '';
 
@@ -70,7 +70,7 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
           />
         );
       })}
-    </TimelineTreeWrapper>
+    </TimelineVerticalWrapper>
   );
 };
 

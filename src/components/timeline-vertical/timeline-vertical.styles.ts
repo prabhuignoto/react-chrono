@@ -1,7 +1,7 @@
 import { keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
 
-export const TimelineTreeWrapper = styled.div`
+export const TimelineVerticalWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -20,7 +20,7 @@ const animateVisible = keyframes`
   }
 `;
 
-export const Branch = styled.div<{ alternateCards?: boolean }>`
+export const VerticalItemWrapper = styled.div<{ alternateCards?: boolean }>`
   align-items: center;
   display: flex;
   position: relative;
@@ -99,7 +99,7 @@ export const TrunkPointWrapper = styled.div`
   z-index: 1;
 `;
 
-export const TimelineTreeTitleWrapper = styled.div<{
+export const TimelineTitleWrapper = styled.div<{
   alternateCards?: boolean;
 }>`
   align-items: center;

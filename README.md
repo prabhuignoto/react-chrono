@@ -116,7 +116,7 @@ In `Tree` mode the timeline is rendered vertically with cards alternating betwee
   <div style={{ width: "500px", height: "950px" }}>
     <chrono
       items={items}
-      mode="TREE"
+      mode="VERTICAL_ALTERNATING"
     />
   </div>
 ```
@@ -132,7 +132,7 @@ Play the timeline automatically with the `slideShow` mode.
     <chrono
       items={items}
       slideShow
-      mode="TREE"
+      mode="VERTICAL_ALTERNATING"
     />
   </div>
 ```
@@ -166,7 +166,7 @@ Play the timeline automatically with the `slideShow` mode.
 ```
 
 ```sh
-  <chrono items={items} mode="TREE" />
+  <chrono items={items} mode="VERTICAL_ALTERNATING" />
 ```
 
 ### Timeline item Model
@@ -271,7 +271,7 @@ The `itemWidth` prop can be used to set the width of each individual timeline se
 Customize colors with `theme` prop.
 
 ```sh
-<chrono items={items}  titlePosition="BOTTOM" theme={{primary: "red", secondary: "blue" }} />
+<chrono items={items}  theme={{primary: "red", secondary: "blue" }} />
 ```
 
 ## 📦 CodeSandbox Examples

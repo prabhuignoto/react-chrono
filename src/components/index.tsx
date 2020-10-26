@@ -7,7 +7,6 @@ import Timeline from './timeline/timeline';
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   items,
   itemWidth = 300,
-  titlePosition = 'TOP',
   mode = 'HORIZONTAL',
   disableNavOnKey = false,
   slideShow = false,
@@ -18,6 +17,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   },
   cardHeight = 250,
   hideControls = false,
+  scrollable = false
 }: Partial<TimelineProps>) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
@@ -28,7 +28,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     items
       ? items.map((item, index) => {
           return Object.assign({}, item, {
-            position: titlePosition.toLowerCase(),
             id: nanoid(),
             visible: true,
             active: index === 0,
@@ -126,10 +125,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       slideShowRunning={slideShowActive}
       slideShowEnabled={slideShow}
       theme={theme}
-      titlePosition={titlePosition}
       slideShow={slideShow}
       cardHeight={cardHeight}
       hideControls={hideControls}
+      scrollable={scrollable}
     />
   );
 };

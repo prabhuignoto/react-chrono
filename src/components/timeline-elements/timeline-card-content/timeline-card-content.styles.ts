@@ -15,7 +15,7 @@ export const TimelineItemContentWrapper = styled.div<{
   flex-direction: column;
   justify-content: flex-start;
   line-height: 1.5rem;
-  margin: 1rem 0;
+  margin: ${p => p.mode !== "VERTICAL_ALTERNATING" ? "1rem 0" : ""};
   min-height: ${(p) => (!p.noMedia ? p.minHeight : '150')}px;
   position: relative;
   text-align: left;
@@ -81,7 +81,6 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   max-height: 200px;
   overflow-x: hidden;
   overflow-y: auto;
-  overscroll-behavior: contain;
   scrollbar-color: ${(p) => p.theme.primary} default;
   scrollbar-width: thin;
   transition: max-height 0.2s linear;
@@ -89,11 +88,16 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
 
   &.show-less {
     max-height: 50px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
     overflow: hidden;
   }
 
   &::-webkit-scrollbar {
-    width: 0.35em;
+    width: 0.25em;
   }
 
   &::-webkit-scrollbar-track {

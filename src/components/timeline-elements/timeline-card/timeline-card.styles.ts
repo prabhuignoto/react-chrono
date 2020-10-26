@@ -97,12 +97,7 @@ export const TimelineTitleContainer = styled.div`
 
   &.horizontal {
     position: absolute;
-    &.top {
-      bottom: 2rem;
-    }
-    &.bottom {
-      top: 1rem;
-    }
+    bottom: 2rem;
   }
 `;
 
@@ -111,10 +106,7 @@ export const TimelineContentContainer = styled.div<{ position?: string }>`
   animation: ${show} 0.25s ease-in;
 
   &.horizontal {
-    /* position: absolute; */
     min-width: 400px;
-    /* max-width: 70%; */
-    /* z-index: 9999; */
   }
 
   &.vertical {
@@ -122,14 +114,5 @@ export const TimelineContentContainer = styled.div<{ position?: string }>`
     margin-left: auto;
     flex-direction: column;
     height: 100%;
-  }
-
-  &.top {
-    /* bottom: 0rem; */
-  }
-
-  &.bottom {
-    top: 6rem;
-    /* left: 0; */
   }
 `;
