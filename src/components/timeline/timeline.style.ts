@@ -28,14 +28,17 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const TimelineMainWrapper = styled.div<{ theme?: Theme, scrollable?: boolean }>`
+export const TimelineMainWrapper = styled.div<{
+  theme?: Theme;
+  scrollable?: boolean;
+}>`
   align-items: center;
   display: flex;
   justify-content: center;
   overflow-x: hidden;
-  overflow-y: ${p => p.scrollable ? "auto" : "hidden"};
+  overflow-y: ${(p) => (p.scrollable ? 'auto' : 'hidden')};
   overscroll-behavior: contain;
-  padding: ${p => p.scrollable ? "1rem 2rem 1rem 0" : "1rem 0"};
+  padding: ${(p) => (p.scrollable ? '1rem 2rem 1rem 0' : '1rem 0')};
   position: relative;
   scroll-behavior: smooth;
   scrollbar-color: ${(p) => p.theme.primary} default;
@@ -43,7 +46,7 @@ export const TimelineMainWrapper = styled.div<{ theme?: Theme, scrollable?: bool
   width: 100%;
 
   &::-webkit-scrollbar {
-    width: .5em;
+    width: 0.5em;
   }
 
   &::-webkit-scrollbar-track {

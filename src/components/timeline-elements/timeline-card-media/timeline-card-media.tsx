@@ -23,7 +23,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   content,
   media,
   slideshowActive,
-  hideMedia = false
+  hideMedia = false,
 }: CardMediaModel) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);

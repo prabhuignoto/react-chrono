@@ -17,7 +17,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   },
   cardHeight = 200,
   hideControls = false,
-  scrollable = true
+  scrollable = true,
 }: Partial<TimelineProps>) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();

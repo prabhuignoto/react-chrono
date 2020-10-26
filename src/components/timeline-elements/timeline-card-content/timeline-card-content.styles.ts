@@ -15,7 +15,7 @@ export const TimelineItemContentWrapper = styled.div<{
   flex-direction: column;
   justify-content: flex-start;
   line-height: 1.5rem;
-  margin: ${p => p.mode !== "VERTICAL_ALTERNATING" ? "1rem 0" : ""};
+  margin: ${(p) => (p.mode !== 'VERTICAL_ALTERNATING' ? '1rem 0' : '')};
   min-height: ${(p) => (!p.noMedia ? p.minHeight : '150')}px;
   position: relative;
   text-align: left;
@@ -110,7 +110,7 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   }
 `;
 
-export const ShowMore = styled.span<{ show?: boolean, theme?: Theme }>`
+export const ShowMore = styled.span<{ show?: boolean; theme?: Theme }>`
   cursor: pointer;
   font-size: 0.75rem;
   /* margin-top: 1rem; */
@@ -129,7 +129,7 @@ export const ShowMore = styled.span<{ show?: boolean, theme?: Theme }>`
   margin-top: auto;
 
   &:hover {
-    background: ${p => p.theme.primary};
+    background: ${(p) => p.theme.primary};
     color: #fff;
   }
 `;
@@ -186,9 +186,12 @@ export const ChevronIconWrapper = styled.span<{ collapsed?: boolean }>`
   height: 1rem;
   margin-left: 0.2rem;
   margin-top: 0.2rem;
-  ${p => p.collapsed ? `
+  ${(p) =>
+    p.collapsed
+      ? `
       transform: rotate(90deg);
-  ` : `transform: rotate(-90deg)`};
+  `
+      : `transform: rotate(-90deg)`};
 
   svg {
     height: 100%;
