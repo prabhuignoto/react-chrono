@@ -230,7 +230,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           show={canShowMore}
           theme={theme}
         >
-          {<span>{showMore ? 'show less' : 'show more'}</span>}
+          {<span>{showMore ? 'read less' : 'read more'}</span>}
           <ChevronIconWrapper collapsed={!showMore}>
             <ChevronIcon />
           </ChevronIconWrapper>
