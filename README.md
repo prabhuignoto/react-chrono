@@ -151,7 +151,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | itemWidth         | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
 | hideControls      | hides the navigation controls.                                                        | 300          |
 | cardHeight        | sets the minimum height of the timeline card.                                         | 250          |
-| scrollable        | makes the timeline scrollable.                                                        | true         |
+| scrollable        | makes the timeline scrollable (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).   | true         |
 | theme             | prop to customize the colors.                                                         |              |
 
 ### Mode
