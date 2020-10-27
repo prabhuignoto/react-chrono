@@ -4,8 +4,7 @@ import {
   HorizontalBasic,
   VerticalBasic,
   VerticalTree,
-  VerticalTreeMixed,
-  VerticalTreeSlideshow
+  VerticalTreeMixed
 } from './app-samples';
 import './App.css';
 import {
@@ -34,9 +33,9 @@ const NewDemo: React.FunctionComponent = () => {
       <h3>Timeline of World War 2</h3>
       <>
         {/* Horizontal with Media */}
-        {/* {items.length > 0 && (
+        {items.length > 0 && (
           <HorizontalBasic items={items} type="big-screen" />
-        )} */}
+        )}
 
         {/* Vertical with no Media */}
         {items.length > 0 && (

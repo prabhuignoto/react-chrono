@@ -23,7 +23,8 @@
     "rollup": "rimraf ./dist && rollup -c",
     "start": "snowpack dev --polyfill-node",
     "test": "web-test-runner \"src/**/*.test.tsx\"",
-    "lint:all": "yarn run eslint && yarn run lint:css && yarn run lint"
+    "lint:all": "yarn run eslint && yarn run lint:css && yarn run lint",
+    "cypress": "cypress open"
   },
   "dependencies": {
     "@emotion/core": "^10.0.35",
@@ -63,6 +64,7 @@
     "@typescript-eslint/parser": "^4.6.0",
     "babel-loader": "^8.1.0",
     "cssnano": "^4.1.10",
+    "cypress": "^5.5.0",
     "eslint": "^7.12.1",
     "eslint-plugin-react": "^7.21.5",
     "husky": "^4.3.0",

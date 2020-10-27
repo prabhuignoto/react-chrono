@@ -86,7 +86,7 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
 
     return (
       <div style={{ width: "500px", height: "400px" }}>
-        <Chrono items={items} cardHeight={300} />
+        <Chrono items={items} />
       </div>
     )
   }
@@ -330,7 +330,7 @@ Prabhu Murthy – [@prabhumurthy2](https://twitter.com/prabhumurthy2) – prabhu
 
 Distributed under the MIT license. See `LICENSE` for more information.
 
-[https://github.com/prabhuingoto/](https://github.com/prabhuingoto/)
+[https://github.com/prabhuignoto](https://github.com/prabhuignoto)
 
 <!-- Markdown link & img dfn's -->
 
