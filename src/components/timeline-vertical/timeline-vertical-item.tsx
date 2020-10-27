@@ -50,6 +50,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       ref={contentRef}
       data-testid="branch-main"
       alternateCards={alternateCards}
+      cardHeight={cardHeight}
     >
       {/* title */}
       <TimelineTitleWrapper

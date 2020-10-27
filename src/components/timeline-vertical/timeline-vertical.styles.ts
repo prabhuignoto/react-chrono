@@ -20,12 +20,19 @@ const animateVisible = keyframes`
   }
 `;
 
-export const VerticalItemWrapper = styled.div<{ alternateCards?: boolean }>`
-  align-items: center;
+export const VerticalItemWrapper = styled.div<{
+  cardHeight?: number;
+  alternateCards?: boolean;
+}>`
+  /* align-items: center; */
   display: flex;
   position: relative;
   visibility: hidden;
   width: 100%;
+  align-items: stretch;
+  /* min-height: ${(p) => p.cardHeight}px; */
+  /* max-height: 1200px; */
+  /* height: 0; */
 
   &.left {
     margin-right: auto;
@@ -45,7 +52,6 @@ export const TreeTrunkWrapper = styled.div<{
 }>`
   align-items: center;
   display: flex;
-  height: 100%;
   justify-content: center;
   position: relative;
   width: 10%;
@@ -77,7 +83,7 @@ export const TimelineCardContentWrapper = styled.div<{
   alternateCards?: boolean;
 }>`
   visibility: hidden;
-  ${(p) => (p.alternateCards ? 'width: 45%;' : 'width: 75%; height: 85%')};
+  ${(p) => (p.alternateCards ? 'width: 45%;' : 'width: 75%; height: auto;')};
   /* padding: 1rem 0; */
 
   &.left {

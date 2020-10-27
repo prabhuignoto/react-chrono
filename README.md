@@ -45,6 +45,7 @@
   - [Timeline item Model](#timeline-item-model)
   - [Keyboard Navigation](#keyboard-navigation)
   - [Media](#media)
+  - [Slideshow mode](#slideshow-mode)
   - [Item Width](#item-width)
   - [Theme](#theme)
 - [📦 CodeSandbox Examples](#-codesandbox-examples)
@@ -151,6 +152,7 @@ Play the timeline automatically with the `slideShow` mode.
 | itemWidth         | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
 | hideControls      | hides the navigation controls.                                                        | 300          |
 | cardHeight        | sets the minimum height of the timeline card.                                         | 250          |
+| scrollable        | makes the timeline scrollable.                                                        | true         |
 | theme             | prop to customize the colors.                                                         |              |
 
 ### Mode

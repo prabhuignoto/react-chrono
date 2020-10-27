@@ -51,7 +51,7 @@ export const ComponentContainer = styled.div<{ type?: string }>`
 
 export const ComponentContainerTree = styled.div<{ type?: string }>`
   border-radius: 4px;
-  height: 800px;
+  /* height: 800px; */
   margin: 0 auto;
   margin-top: 1rem;
   padding: 1rem 0;

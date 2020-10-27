@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   position: relative;
   width: 100%;
+  /* cannot remove this */
   height: 100%;
   user-select: none;
   outline: 0;
@@ -24,7 +25,7 @@ export const Wrapper = styled.div`
 
   &.vertical,
   &.tree {
-    height: 100%;
+    /* height: 100%; */
   }
 `;
 
@@ -32,7 +33,7 @@ export const TimelineMainWrapper = styled.div<{
   theme?: Theme;
   scrollable?: boolean;
 }>`
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   justify-content: center;
   overflow-x: hidden;
@@ -61,10 +62,6 @@ export const TimelineMainWrapper = styled.div<{
   &.horizontal {
     height: 3rem;
   }
-
-  &.vertical {
-    height: 100%;
-  }
 `;
 
 export const TimelineMain = styled.div`
@@ -76,7 +73,7 @@ export const TimelineMain = styled.div`
   transition: all 0.2s ease;
 
   &.tree {
-    height: 100%;
+    /* height: 100%; */
   }
 
   &.vertical {
@@ -105,6 +102,7 @@ export const TimelineControlContainer = styled.div<{
   align-items: center;
   display: flex;
   justify-content: center;
+  min-height: 3rem;
   /* margin-top: auto;
   margin-bottom: auto; */
 

@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 
   &.vertical {
     justify-content: flex-start;
-    height: 100%;
+    /* height: 100%; */
   }
 `;
 
@@ -49,7 +49,7 @@ export const TimelinePointWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  /* height: 100%; */
   flex-direction: column;
 `;
 
@@ -104,6 +104,7 @@ export const TimelineTitleContainer = styled.div`
 export const TimelineContentContainer = styled.div<{ position?: string }>`
   align-items: flex-start;
   animation: ${show} 0.25s ease-in;
+  border: 1px solid red;
 
   &.horizontal {
     min-width: 400px;
@@ -113,6 +114,6 @@ export const TimelineContentContainer = styled.div<{ position?: string }>`
     width: calc(100% - 5rem);
     margin-left: auto;
     flex-direction: column;
-    height: 100%;
+    /* height: 100%; */
   }
 `;
