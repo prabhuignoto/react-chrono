@@ -1,12 +1,12 @@
 import { nanoid } from 'nanoid';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { Scroll } from '../../models/TimelineCollnModel';
 import { TimelineCardModel } from '../../models/TimelineItemModel';
 import { TimelineModel } from '../../models/TimelineModel';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import TimelineCollection from '../timeline-horizontal/timeline-horizontal';
-import TimelineTree from '../timeline-tree/timeline-tree';
+import TimelineTree from '../timeline-vertical/timeline-vertical';
 import {
   Outline,
   TimelineContentRender,
@@ -33,12 +33,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onLast,
     onFirst,
     theme,
-    titlePosition = 'TOP',
     onRestartSlideshow,
     cardHeight,
     slideShowEnabled,
     slideItemDuration,
     hideControls,
+    scrollable,
   } = props;
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -46,6 +46,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // reference to the timeline
   const timelineMainRef = useRef<HTMLDivElement>(null);
+
+  const canScrollTimeline = useMemo(() => {
+    return scrollable && !slideShowRunning;
+  }, [slideShowRunning, scrollable]);
 
   // generate a unique id for the timeline content
   const id = useRef(nanoid());
@@ -65,12 +69,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
     if (
       (mode === 'HORIZONTAL' && keyCode === 39) ||
-      ((mode === 'VERTICAL' || mode === 'TREE') && keyCode === 40)
+      ((mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
+        keyCode === 40)
     ) {
       handleNext();
     } else if (
       (mode === 'HORIZONTAL' && keyCode === 37) ||
-      ((mode === 'VERTICAL' || mode === 'TREE') && keyCode === 38)
+      ((mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
+        keyCode === 38)
     ) {
       handlePrevious();
     } else if (keyCode === 36) {
@@ -137,9 +143,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         (entries) => {
           // helper functions to hide image/videos
           const hide = (ele: HTMLImageElement | HTMLVideoElement) =>
-            (ele.style.display = 'none');
+            (ele.style.visibility = 'hidden');
           const show = (ele: HTMLImageElement | HTMLVideoElement) =>
-            (ele.style.display = 'block');
+            (ele.style.visibility = 'visible');
 
           entries.forEach((entry) => {
             const element = entry.target as HTMLDivElement;
@@ -187,11 +193,17 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       onKeyDown={(evt: React.KeyboardEvent<HTMLDivElement>) =>
         !disableNavOnKey && !slideShowRunning ? handleKeySelection(evt) : null
       }
-      className={`${mode.toLowerCase()} ${titlePosition?.toLowerCase()}`}
+      className={`${mode.toLowerCase()}`}
     >
-      <TimelineMainWrapper ref={timelineMainRef} className={mode.toLowerCase()}>
-        {/* TREE */}
-        {mode === 'TREE' ? (
+      <TimelineMainWrapper
+        ref={timelineMainRef}
+        scrollable={canScrollTimeline}
+        className={mode.toLowerCase()}
+        // onWheel={(evt) => handleMouseWheel.callback(evt)}
+        theme={theme}
+      >
+        {/* VERTICAL ALTERNATING */}
+        {mode === 'VERTICAL_ALTERNATING' ? (
           <TimelineTree
             items={items as TimelineCardModel[]}
             onClick={handleTimelineItemClick}
@@ -209,7 +221,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         {/* HORIZONTAL */}
         {mode === 'HORIZONTAL' ? (
           <TimelineMain className={mode.toLowerCase()}>
-            <Outline color={theme?.primary} />
+            <Outline color={theme && theme.primary} />
             <TimelineCollection
               items={items as TimelineCardModel[]}
               itemWidth={itemWidth}
@@ -243,8 +255,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           />
         ) : null}
       </TimelineMainWrapper>
+
       {/* placeholder to render timeline content for horizontal mode */}
       <TimelineContentRender id={id.current} />
+
       {/* Timeline Controls */}
       {!hideControls && (
         <TimelineControlContainer mode={mode}>

@@ -1,6 +1,7 @@
 import { Theme } from './Theme';
 import { Scroll } from './TimelineCollnModel';
 import { Media } from './TimelineMediaModel';
+import { TimelineMode } from './TimelineModel';
 /**
  *
  *
@@ -26,7 +27,7 @@ export interface TimelineCardModel extends TimelineItemModel {
     timelinePointHeight,
     timelineContentHeight,
   }: Partial<Scroll>) => void;
-  mode: 'HORIZONTAL' | 'VERTICAL' | 'TREE';
+  mode: TimelineMode;
   onClick: (id?: string) => void;
   slideShowRunning?: boolean;
   theme?: Theme;

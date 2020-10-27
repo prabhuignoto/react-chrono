@@ -64,7 +64,7 @@ const Tree = (
   <Collection
     items={items as TimelineCardModel[]}
     itemWidth={250}
-    mode="TREE"
+    mode="VERTICAL_ALTERNATING"
     handleItemClick={onClick}
     autoScroll={autoScroll}
     wrapperId={id}

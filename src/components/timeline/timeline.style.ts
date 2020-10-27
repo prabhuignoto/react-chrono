@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Theme } from '../../models/Theme';
 import { TimelineMode } from '../../models/TimelineModel';
 
 export const Wrapper = styled.div`
@@ -6,48 +7,60 @@ export const Wrapper = styled.div`
   flex-direction: column;
   position: relative;
   width: 100%;
+  /* cannot remove this */
   height: 100%;
   user-select: none;
   outline: 0;
+  overflow: hidden;
 
   &.horizontal {
-    &.top {
-      justify-content: flex-start;
+    justify-content: flex-start;
+    /* &.top {
     }
 
     &.bottom {
       justify-content: flex-end;
-    }
+    } */
   }
 
   &.vertical,
   &.tree {
-    height: 100%;
+    /* height: 100%; */
   }
 `;
 
-export const TimelineMainWrapper = styled.div`
-  align-items: center;
+export const TimelineMainWrapper = styled.div<{
+  theme?: Theme;
+  scrollable?: boolean;
+}>`
+  align-items: flex-start;
   display: flex;
   justify-content: center;
-  overflow: hidden;
-  overscroll-behavior: none;
-  padding: 1rem 0;
+  overflow-x: hidden;
+  overflow-y: ${(p) => (p.scrollable ? 'auto' : 'hidden')};
+  overscroll-behavior: contain;
+  padding: ${(p) => (p.scrollable ? '1rem 2rem 1rem 0' : '1rem 0')};
   position: relative;
   scroll-behavior: smooth;
+  scrollbar-color: ${(p) => p.theme.primary} default;
+  scrollbar-width: thin;
   width: 100%;
 
   &::-webkit-scrollbar {
-    width: 0;
+    width: 0.5em;
   }
-  scrollbar-width: none;
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${(p) => p.theme.primary};
+    outline: 1px solid ${(p) => p.theme.primary};
+  }
 
   &.horizontal {
     height: 3rem;
-  }
-
-  &.vertical {
-    height: 100%;
   }
 `;
 
@@ -60,7 +73,7 @@ export const TimelineMain = styled.div`
   transition: all 0.2s ease;
 
   &.tree {
-    height: 100%;
+    /* height: 100%; */
   }
 
   &.vertical {
@@ -89,6 +102,7 @@ export const TimelineControlContainer = styled.div<{
   align-items: center;
   display: flex;
   justify-content: center;
+  min-height: 3rem;
   /* margin-top: auto;
   margin-bottom: auto; */
 

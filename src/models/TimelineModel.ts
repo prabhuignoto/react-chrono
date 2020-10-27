@@ -96,14 +96,6 @@ export interface TimelineProps {
   slideShow?: boolean;
 
   /**
-   * sets the position of the title.
-   *
-   * @type {("TOP" | "BOTTOM" | "ALTERNATE")}
-   * @memberof TimelineProps
-   */
-  titlePosition?: 'TOP' | 'BOTTOM' | 'ALTERNATE';
-
-  /**
    * sets the theme
    *
    * @type {{
@@ -123,8 +115,18 @@ export interface TimelineProps {
    * @memberof TimelineModel
    */
   cardHeight?: number;
+
   onRestartSlideshow?: () => void;
+
+  /**
+   * hides the navigation controls
+   *
+   * @type {boolean}
+   * @memberof TimelineProps
+   */
   hideControls?: boolean;
+
+  scrollable?: boolean;
 }
 
-export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'TREE';
+export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';

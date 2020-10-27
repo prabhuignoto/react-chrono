@@ -50,7 +50,6 @@ export const CardImage = styled.img<{
   justify-self: center;
   flex: 4;
   visibility: ${(p) => (p.visible ? 'visible' : 'hidden')};
-  border-radius: 4px;
   margin-right: auto;
   object-fit: contain;
   max-height: 70%;
@@ -77,11 +76,11 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
         return '100%';
       case 'VERTICAL':
         return '100%';
-      case 'TREE':
+      case 'VERTICAL_ALTERNATING':
         return '100%';
     }
   }};
-  min-height: 100px;
+  /* min-height: 100px; */
   display: flex;
   flex-direction: column;
   flex: 1;

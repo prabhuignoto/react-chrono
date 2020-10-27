@@ -61,7 +61,7 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
           autoScroll({
             timelinePointOffset: circleOffsetTop + wrapperOffsetTop,
             timelinePointHeight: circle.clientHeight,
-            timelineContentHeight: content?.clientHeight,
+            timelineContentHeight: content ? content.clientHeight : 0,
             timelineContentOffset: wrapperOffsetTop,
           });
         }

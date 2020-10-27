@@ -7,9 +7,11 @@ import React, {
 } from 'react';
 import { TimelineContentModel } from '../../../models/TimelineContentModel';
 import { MediaState } from '../../../models/TimelineMediaModel';
+import ChevronIcon from '../../icons/chev-right';
 import { MemoContentText, MemoTitle } from '../memoized';
 import CardMedia from '../timeline-card-media/timeline-card-media';
 import {
+  ChevronIconWrapper,
   ShowMore,
   SlideShowProgressBar,
   TimelineContentDetails,
@@ -36,21 +38,30 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const containerWidth = useRef<number>(0);
   const progressRef = useRef<HTMLDivElement>(null);
-  const canShowMore = useRef(!!detailedText);
+
+  const containerWidth = useRef<number>(0);
   const slideShowElapsed = useRef(0);
   const timerRef = useRef(0);
-  const [paused, setPaused] = useState(false);
   const startTime = useRef<Date>();
+  const [paused, setPaused] = useState(false);
 
   // const [elapsed, setElapsed] = useState(0);
   const [remainInterval, setRemainInterval] = useState(0);
   const [startWidth, setStartWidth] = useState(0);
 
   const canShowProgressBar = useMemo(() => {
-    return active && slideShowActive && media?.type !== 'VIDEO';
+    const canShow = active && slideShowActive;
+    if (media) {
+      return canShow && media.type !== 'VIDEO';
+    } else {
+      return canShow;
+    }
   }, [active, slideShowActive]);
+
+  const canShowMore = useMemo(() => {
+    return !!detailedText;
+  }, [detailedText]);
 
   useEffect(() => {
     const detailsEle = detailsRef.current;
@@ -185,6 +196,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           active={active}
           theme={theme}
           slideshowActive={slideShowActive}
+          hideMedia={showMore}
         />
       )}
 
@@ -194,15 +206,18 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
         className={!showMore ? 'show-less' : ''}
         theme={theme}
       >
-        {detailedText && !media && (
-          <TimelineContentDetails className={showMore ? 'active' : ''}>
+        {detailedText && (
+          <TimelineContentDetails
+            className={showMore ? 'active' : ''}
+            ref={detailsRef}
+          >
             {detailedText}
           </TimelineContentDetails>
         )}
       </TimelineContentDetailsWrapper>
 
       {/* display the show more button for textual content */}
-      {!media && (
+      {
         <ShowMore
           role="button"
           onClick={() => {
@@ -212,11 +227,15 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
             }
           }}
           className="show-more"
-          show={canShowMore.current}
+          show={canShowMore}
+          theme={theme}
         >
-          {active ? (showMore ? 'show less' : 'show more') : '...'}
+          {<span>{showMore ? 'read less' : 'read more'}</span>}
+          <ChevronIconWrapper collapsed={!showMore}>
+            <ChevronIcon />
+          </ChevronIconWrapper>
         </ShowMore>
-      )}
+      }
 
       {canShowProgressBar && (
         <SlideShowProgressBar
@@ -224,7 +243,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           paused={paused}
           duration={remainInterval}
           ref={progressRef}
-          color={theme?.primary}
+          color={theme && theme.primary}
         ></SlideShowProgressBar>
       )}
     </TimelineItemContentWrapper>

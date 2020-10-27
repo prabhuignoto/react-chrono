@@ -2,6 +2,7 @@
   <img src="./readme-assets/social-logo-small.png" />
   
   <br/>
+  <br/>
 
   [![Build Status](https://dev.azure.com/prabhummurthy/react-chrono/_apis/build/status/prabhuignoto.react-chrono?branchName=master)](https://dev.azure.com/prabhummurthy/react-chrono/_build/latest?definitionId=7&branchName=master)
   [![DeepScan grade](https://deepscan.io/api/teams/10074/projects/13644/branches/234929/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10074&pid=13644&bid=234929)
@@ -45,6 +46,7 @@
   - [Timeline item Model](#timeline-item-model)
   - [Keyboard Navigation](#keyboard-navigation)
   - [Media](#media)
+  - [Slideshow mode](#slideshow-mode)
   - [Item Width](#item-width)
   - [Theme](#theme)
 - [📦 CodeSandbox Examples](#-codesandbox-examples)
@@ -85,7 +87,7 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
 
     return (
       <div style={{ width: "500px", height: "400px" }}>
-        <Chrono items={items} cardHeight={300} />
+        <Chrono items={items} />
       </div>
     )
   }
@@ -116,7 +118,7 @@ In `Tree` mode the timeline is rendered vertically with cards alternating betwee
   <div style={{ width: "500px", height: "950px" }}>
     <chrono
       items={items}
-      mode="TREE"
+      mode="VERTICAL_ALTERNATING"
     />
   </div>
 ```
@@ -132,7 +134,7 @@ Play the timeline automatically with the `slideShow` mode.
     <chrono
       items={items}
       slideShow
-      mode="TREE"
+      mode="VERTICAL_ALTERNATING"
     />
   </div>
 ```
@@ -151,6 +153,7 @@ Play the timeline automatically with the `slideShow` mode.
 | itemWidth         | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
 | hideControls      | hides the navigation controls.                                                        | 300          |
 | cardHeight        | sets the minimum height of the timeline card.                                         | 250          |
+| scrollable        | makes the timeline scrollable.                                                        | true         |
 | theme             | prop to customize the colors.                                                         |              |
 
 ### Mode
@@ -166,7 +169,7 @@ Play the timeline automatically with the `slideShow` mode.
 ```
 
 ```sh
-  <chrono items={items} mode="TREE" />
+  <chrono items={items} mode="VERTICAL_ALTERNATING" />
 ```
 
 ### Timeline item Model
@@ -271,7 +274,7 @@ The `itemWidth` prop can be used to set the width of each individual timeline se
 Customize colors with `theme` prop.
 
 ```sh
-<chrono items={items}  titlePosition="BOTTOM" theme={{primary: "red", secondary: "blue" }} />
+<chrono items={items}  theme={{primary: "red", secondary: "blue" }} />
 ```
 
 ## 📦 CodeSandbox Examples
@@ -328,7 +331,7 @@ Prabhu Murthy – [@prabhumurthy2](https://twitter.com/prabhumurthy2) – prabhu
 
 Distributed under the MIT license. See `LICENSE` for more information.
 
-[https://github.com/prabhuingoto/](https://github.com/prabhuingoto/)
+[https://github.com/prabhuignoto](https://github.com/prabhuignoto)
 
 <!-- Markdown link & img dfn's -->
 
