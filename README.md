@@ -23,13 +23,11 @@
 
 <h2>Features</h2>
 
-- 🚥 Render timelines in three different modes ([Horizontal](#-getting-started), [Vertical](#vertical-mode), [Tree](#tree)).
-- 🌲&nbsp; Use the [Tree](#tree) mode to layout the timeline cards vertically in a tree like fashion.
+- 🚥 Render timelines in three different modes ([Horizontal](#-getting-started), [Vertical](#vertical-mode), [Vertical-Alternating](#vertical-alternating)).
 - 📺&nbsp; Auto play the timeline with the [slideshow](#slideshow-mode) mode.
 - 🖼️&nbsp; [Display Images & Videos](#media) in the timeline with ease.
 - ⌨&nbsp; [Keyboard accessible](#keyboard-navigation).
 - ⚡&nbsp; Data driven API.
-- 🔧&nbsp; Optimized to render images & videos efficiently on (Tree & Vertical mode).
 - 🎨&nbsp; [Customize](#theme) colors with ease.
 - 💪&nbsp; Built with [Typescript](https://www.typescriptlang.org/).
 - 🎨&nbsp; Styled with [emotion](https://emotion.sh).
@@ -39,7 +37,7 @@
 - [⚡ Installation](#-installation)
 - [Getting Started](#getting-started)
   - [Vertical Mode](#vertical-mode)
-  - [Tree](#tree)
+  - [Vertical Alternating](#vertical-alternating)
   - [Slideshow](#slideshow)
 - [Props](#props)
   - [Mode](#mode)
@@ -110,9 +108,9 @@ To render the timeline vertically use the `VERTICAL` mode
 
 ![vertical-basic](./readme-assets/vertical-basic.png)
 
-### Tree
+### Vertical Alternating
 
-In `Tree` mode the timeline is rendered vertically with cards alternating between left and right side.
+In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards alternating between left and right side.
 
 ```sh
   <div style={{ width: "500px", height: "950px" }}>
@@ -127,7 +125,7 @@ In `Tree` mode the timeline is rendered vertically with cards alternating betwee
 
 ### Slideshow
 
-Play the timeline automatically with the `slideShow` mode.
+Play the timeline automatically with the `slideShow` mode. This prop enables the play button on the ui controls.
 
 ```sh
   <div style={{ width: "500px", height: "950px" }}>
@@ -158,7 +156,7 @@ Play the timeline automatically with the `slideShow` mode.
 
 ### Mode
 
-`react-chrono` supports three modes `HORIZONTAL`, `VERTICAL` and `TREE`. No additional setting is required.
+`react-chrono` supports three modes `HORIZONTAL`, `VERTICAL` and `VERTICAL_ALTERNATING`. No additional setting is required.
 
 ```sh
   <chrono items={items} mode="HORIZONTAL" />
@@ -203,7 +201,7 @@ Play the timeline automatically with the `slideShow` mode.
 The timeline can be navigated via keyboard.
 
 - For `HORIZONTAL` mode use your <kbd>LEFT</kbd> <kbd>RIGHT</kbd> arrow keys for navigation.
-- For `VERTICAL` or `TREE` mode, the timeline can be navigated via the <kbd>UP</kbd> <kbd>DOWN</kbd> arrow keys.
+- For `VERTICAL` or `VERTICAL_ALTERNATING` mode, the timeline can be navigated via the <kbd>UP</kbd> <kbd>DOWN</kbd> arrow keys.
 - To easily jump to the first item or the last item in the timeline, use <kbd>HOME</kbd> or <kbd>END</kbd> keys.
 
 To disable keyboard navigation set `disableNavOnKey` to true.
@@ -280,8 +278,8 @@ Customize colors with `theme` prop.
 ## 📦 CodeSandbox Examples
 
 - [Horizontal Basic](https://codesandbox.io/s/condescending-swirles-xodxo?file=/src/App.js)
-- [Tree](https://codesandbox.io/s/react-chrono-tree-text-xtksq)
-- [Tree with Images](https://codesandbox.io/s/react-chrono-tree-image-uh2nz)
+- [Vertical Alternating](https://codesandbox.io/s/react-chrono-tree-text-xtksq)
+- [Vertical Alternating with Images](https://codesandbox.io/s/react-chrono-tree-image-uh2nz)
 - [Vertical basic](https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?file=/src/App.js)
 - [Vertical mode with Mixed content](https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3)
 
@@ -324,6 +322,7 @@ yarn run rollup
 ## 🎯 What's coming next
 
 - Support for Mobile devices & Tablets (responsive).
+- Accessibility support.
 
 ## Meta
 
