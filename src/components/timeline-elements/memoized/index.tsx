@@ -37,7 +37,11 @@ MemoTitle.displayName = 'Timeline Title';
 const MemoContentText = React.memo<Content>(
   ({ content, color, dir }: Content) =>
     content ? (
-      <TimelineContentText style={{ color }} dir={dir} className="card-sub-title">
+      <TimelineContentText
+        style={{ color }}
+        dir={dir}
+        className="card-sub-title"
+      >
         {content}
       </TimelineContentText>
     ) : null,

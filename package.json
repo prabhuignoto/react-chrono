@@ -22,7 +22,6 @@
     "lint:css": "stylelint ./src/**/*style.ts",
     "rollup": "rimraf ./dist && rollup -c",
     "start": "snowpack dev --polyfill-node",
-    "test": "web-test-runner \"src/**/*.test.tsx\"",
     "lint:all": "yarn run eslint && yarn run lint:css && yarn run lint",
     "cypress": "cypress open",
     "cypress:test": "start-server-and-test start http://localhost:8080 cypress",
@@ -105,7 +104,7 @@
   ],
   "lint-staged": {
     "src/components/**/*.{ts,tsx}": [
-      "prettier --format \"src/**/*.{js,jsx,ts,tsx}\"",
+      "prettier --write",
       "stylelint ./src/**/*style.ts",
       "eslint ./src/**/*.tsx",
       "git add"
