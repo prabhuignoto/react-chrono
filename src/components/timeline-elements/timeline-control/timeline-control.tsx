@@ -29,7 +29,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
   }: TimelineControlModel) => {
     return (
       <TimelineControlContainer slideShowActive={slideShowRunning}>
-        <TimelineNavWrapper>
+        <TimelineNavWrapper className="timeline-controls">
           {/* jump to first */}
           <TimelineNavItem disable={disableLeft}>
             <TimelineNavButton

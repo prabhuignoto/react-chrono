@@ -69,6 +69,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
       active={active}
       mode={mode}
       slideShowActive={slideshowActive}
+      className="card-media-wrapper"
     >
       {media.type === 'VIDEO' &&
         (!loadFailed ? (
