@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
-  HorizontalBasic,
   VerticalBasic,
   VerticalTree,
   VerticalTreeMixed
@@ -11,7 +11,6 @@ import {
   Wrapper
 } from './App.styles';
 import data from './data';
-import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
@@ -40,11 +39,16 @@ const NewDemo: React.FunctionComponent = () => {
               <VerticalBasic type={"big-screen"} items={items} />
             )}
           </Route>
-          <Route path="/vertical-basic-mixed">
+          <Route path="/vertical-alternating-mixed">
             {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} 
           </Route>
-          <Route path="vertical-basic-images">
-
+          <Route path="/vertical-alternating">
+            {items.length > 0 && <VerticalTree type={'big-screen'} items={items} />}
+          </Route>
+          <Route path="/">
+              {items.length > 0 && (
+                  <VerticalBasic type={"big-screen"} items={items} />
+                )}
           </Route>
         </Switch>
       </BrowserRouter>
@@ -56,7 +60,6 @@ const NewDemo: React.FunctionComponent = () => {
 
 
         {/* Tree Mode */}
-        {/* {items.length > 0 && <VerticalTree type={'big-screen'} items={items} />} */}
 
         {/* mixed mode */}
 
