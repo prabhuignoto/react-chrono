@@ -144,7 +144,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 
 | name              | description                                                                           | default      |
 | ----------------- | ------------------------------------------------------------------------------------- | ------------ |
-| mode              | sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `TREE` | `VERTICAL_ALTERNATING`             |
+| mode              | sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING` | `HORIZONTAL`             |
 | items             | collection of [Timeline Item Model](#timeline-item-model).                            | []           |
 | disableNavOnKey   | Disables keyboard navigation.                                                         | false        |
 | slideShow         | Enables slideshow control.                                                            | false        |
