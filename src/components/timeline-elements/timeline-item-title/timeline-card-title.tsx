@@ -13,7 +13,11 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
   active,
   theme,
 }: TitleModel) => (
-  <TitleWrapper className={active ? 'active' : ''} title={title} theme={theme}>
+  <TitleWrapper
+    className={active ? 'timeline-item-title active' : 'timeline-item-title'}
+    title={title}
+    theme={theme}
+  >
     {title}
   </TitleWrapper>
 );

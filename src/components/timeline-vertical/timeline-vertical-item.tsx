@@ -62,7 +62,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
 
       {/* content section */}
       <TimelineCardContentWrapper
-        className={`${className} ${visible ? 'visible' : ''}`}
+        className={`${className} card-content-wrapper ${visible ? 'visible' : ''}`}
         alternateCards={alternateCards}
       >
         <TimelineCard

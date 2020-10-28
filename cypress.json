@@ -1,1 +1,4 @@
-{}
+{
+  "projectId": "8zb5a5",
+  "ignoreTestFiles": "**/examples/*.js"
+}

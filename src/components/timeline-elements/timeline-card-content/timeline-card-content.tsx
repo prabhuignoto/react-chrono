@@ -164,7 +164,9 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
 
   return (
     <TimelineItemContentWrapper
-      className={active ? 'active' : ''}
+      className={
+        active ? 'timeline-card-content active' : 'timeline-card-content '
+      }
       theme={theme}
       noMedia={!media}
       minHeight={cardHeight}
@@ -180,10 +182,8 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
     >
       {/* main title */}
       {!media && <MemoTitle title={title} theme={theme} />}
-
       {/* main timeline text */}
       {!media && <MemoContentText content={content} />}
-
       {/* render media video or image */}
       {media && (
         <CardMedia
@@ -203,7 +203,9 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       {/* detailed text */}
       <TimelineContentDetailsWrapper
         ref={detailsRef}
-        className={!showMore ? 'show-less' : ''}
+        className={
+          !showMore ? 'show-less card-description' : 'card-description'
+        }
         theme={theme}
       >
         {detailedText && (
@@ -215,7 +217,6 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           </TimelineContentDetails>
         )}
       </TimelineContentDetailsWrapper>
-
       {/* display the show more button for textual content */}
       {
         <ShowMore
@@ -236,7 +237,6 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           </ChevronIconWrapper>
         </ShowMore>
       }
-
       {canShowProgressBar && (
         <SlideShowProgressBar
           startWidth={startWidth}

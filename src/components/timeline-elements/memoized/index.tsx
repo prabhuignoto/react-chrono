@@ -22,7 +22,7 @@ interface Content {
 const MemoTitle = React.memo(({ title, theme, color, dir, active }: Title) =>
   title && theme ? (
     <TimelineContentTitle
-      className={active ? 'active' : ''}
+      className={active ? 'active card-title' : 'card-title'}
       theme={theme}
       style={{ color }}
       dir={dir}
@@ -37,7 +37,7 @@ MemoTitle.displayName = 'Timeline Title';
 const MemoContentText = React.memo<Content>(
   ({ content, color, dir }: Content) =>
     content ? (
-      <TimelineContentText style={{ color }} dir={dir}>
+      <TimelineContentText style={{ color }} dir={dir} className="card-sub-title">
         {content}
       </TimelineContentText>
     ) : null,
