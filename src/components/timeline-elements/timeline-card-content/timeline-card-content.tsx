@@ -197,6 +197,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           theme={theme}
           slideshowActive={slideShowActive}
           hideMedia={showMore}
+          cardHeight={cardHeight}
         />
       )}
 

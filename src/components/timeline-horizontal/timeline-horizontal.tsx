@@ -21,14 +21,16 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
 }: TimelineCollectionModel) => {
   return (
     <TimelineCollectionWrapper
-      className={mode.toLowerCase()}
+      className={`${mode.toLowerCase()} timeline-horz-container`}
       data-testid="timeline-collection"
     >
       {items.map((item) => (
         <TimelineItemWrapper
           key={item.id}
           width={itemWidth}
-          className={`${mode.toLowerCase()} ${item.visible ? 'visible' : ''}`}
+          className={`${
+            item.visible ? 'visible' : ''
+          } timeline-horz-item-container`}
         >
           <TimelineItem
             {...item}

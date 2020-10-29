@@ -16,16 +16,9 @@ export const TimelineItemContentWrapper = styled.div<{
   justify-content: flex-start;
   line-height: 1.5rem;
   margin: ${(p) => (p.mode !== 'VERTICAL_ALTERNATING' ? '1rem 0' : '')};
-  min-height: ${(p) => (!p.noMedia ? p.minHeight : '150')}px;
   position: relative;
   text-align: left;
   width: 100%;
-
-  height: ${(p) => {
-    if (!p.noMedia && p.mode === 'HORIZONTAL') {
-      return 0;
-    }
-  }};
 
   ${(p) =>
     p.noMedia

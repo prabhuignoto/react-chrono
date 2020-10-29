@@ -81,7 +81,10 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
     }
 
     return (
-      <TimelineContentContainer className={className} ref={contentRef}>
+      <TimelineContentContainer
+        className={`${className} timeline-horz-card-wrapper`}
+        ref={contentRef}
+      >
         {mode === 'VERTICAL' && (
           <TimelineTitleContainer
             data-testid="timeline-title"
@@ -127,7 +130,9 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
 
       <TimelinePointWrapper>
         <TimelinePoint
-          className={`${mode.toLowerCase()} ${active ? 'active' : 'in-active'}`}
+          className={`timeline-circle ${mode.toLowerCase()} ${
+            active ? 'active' : 'in-active'
+          }`}
           onClick={handleClick}
           ref={circleRef}
           data-testid="timeline-circle"

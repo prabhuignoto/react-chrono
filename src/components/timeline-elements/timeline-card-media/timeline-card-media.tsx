@@ -24,6 +24,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   media,
   slideshowActive,
   hideMedia = false,
+  cardHeight,
 }: CardMediaModel) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);
@@ -64,66 +65,69 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   ErrorMessageMem.displayName = 'Error Message';
 
   return (
-    <MediaWrapper
-      theme={theme}
-      active={active}
-      mode={mode}
-      slideShowActive={slideshowActive}
-      className="card-media-wrapper"
-    >
-      {media.type === 'VIDEO' &&
-        (!loadFailed ? (
-          <CardVideo
-            controls
-            autoPlay={active}
-            ref={videoRef}
-            onLoadedData={handleMediaLoaded}
-            onPlay={() =>
-              onMediaStateChange({
-                id,
-                paused: false,
-                playing: true,
-              })
-            }
-            onPause={() =>
-              onMediaStateChange({
-                id,
-                paused: true,
-                playing: false,
-              })
-            }
-            onEnded={() =>
-              onMediaStateChange({
-                id,
-                paused: false,
-                playing: false,
-              })
-            }
-            onError={handleError}
-          >
-            <source src={media.source.url}></source>
-          </CardVideo>
-        ) : (
-          <ErrorMessageMem message="Failed to load the video" />
-        ))}
-      {media.type === 'IMAGE' &&
-        (!loadFailed ? (
-          <CardImage
-            src={media.source.url}
-            mode={mode}
-            onLoad={handleMediaLoaded}
-            onError={handleError}
-            visible={mediaLoaded}
-            active={active}
-          />
-        ) : (
-          <ErrorMessageMem message="Failed to load the image." />
-        ))}
+    <>
+      <MediaWrapper
+        theme={theme}
+        active={active}
+        mode={mode}
+        slideShowActive={slideshowActive}
+        className="card-media-wrapper"
+        cardHeight={cardHeight}
+      >
+        {media.type === 'VIDEO' &&
+          (!loadFailed ? (
+            <CardVideo
+              controls
+              autoPlay={active}
+              ref={videoRef}
+              onLoadedData={handleMediaLoaded}
+              onPlay={() =>
+                onMediaStateChange({
+                  id,
+                  paused: false,
+                  playing: true,
+                })
+              }
+              onPause={() =>
+                onMediaStateChange({
+                  id,
+                  paused: true,
+                  playing: false,
+                })
+              }
+              onEnded={() =>
+                onMediaStateChange({
+                  id,
+                  paused: false,
+                  playing: false,
+                })
+              }
+              onError={handleError}
+            >
+              <source src={media.source.url}></source>
+            </CardVideo>
+          ) : (
+            <ErrorMessageMem message="Failed to load the video" />
+          ))}
+        {media.type === 'IMAGE' &&
+          (!loadFailed ? (
+            <CardImage
+              src={media.source.url}
+              mode={mode}
+              onLoad={handleMediaLoaded}
+              onError={handleError}
+              visible={mediaLoaded}
+              active={active}
+            />
+          ) : (
+            <ErrorMessageMem message="Failed to load the image." />
+          ))}
+      </MediaWrapper>
       <MediaDetailsWrapper mode={mode}>
         <MemoTitle title={title} theme={theme} active={active} />
         <MemoContentText content={content} />
       </MediaDetailsWrapper>
-    </MediaWrapper>
+    </>
   );
 };
 
