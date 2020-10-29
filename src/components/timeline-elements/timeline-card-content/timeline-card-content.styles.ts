@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
 
-export const TimelineItemContentWrapper = styled.div<{
+export const TimelineItemContentWrapper = styled.section<{
   theme: Theme;
   noMedia?: boolean;
   minHeight?: number;
@@ -32,29 +32,36 @@ export const TimelineItemContentWrapper = styled.div<{
   }
 `;
 
-export const TimelineContentText = styled.span<{ dir?: string }>`
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding-left: 0.5rem;
-  width: 95%;
-  text-align: left;
+export const TimelineCardHeader = styled.header`
+  width: 100%;
 `;
 
-export const TimelineContentTitle = styled.span<{ theme: Theme; dir?: string }>`
+export const TimelineContentSubTitle = styled.p<{ dir?: string }>`
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding-left: 0.5rem;
+  width: 97%;
+  text-align: left;
+  margin: 0;
+`;
+
+export const TimelineContentTitle = styled.p<{ theme: Theme; dir?: string }>`
   color: #323232;
   font-size: 1rem;
   font-weight: 600;
+  margin: 0;
   margin-top: 0.5rem;
   padding-left: 0.5rem;
   &.active {
     color: ${(p) => p.theme.primary};
   }
   text-align: left;
+  width: 97%;
 `;
 
 export const TimelineContentDetails = styled.p`
-  color: #666666;
-  font-size: 0.8rem;
+  color: #191919;
+  font-size: 0.85rem;
   font-weight: 400;
   margin: 0;
   touch-action: none;

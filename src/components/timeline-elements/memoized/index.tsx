@@ -1,7 +1,7 @@
 import React from 'react';
 import { Theme } from '../../../models/Theme';
 import {
-  TimelineContentText,
+  TimelineContentSubTitle,
   TimelineContentTitle,
 } from '../timeline-card-content/timeline-card-content.styles';
 
@@ -34,19 +34,18 @@ const MemoTitle = React.memo(({ title, theme, color, dir, active }: Title) =>
 
 MemoTitle.displayName = 'Timeline Title';
 
-const MemoContentText = React.memo<Content>(
-  ({ content, color, dir }: Content) =>
-    content ? (
-      <TimelineContentText
-        style={{ color }}
-        dir={dir}
-        className="card-sub-title"
-      >
-        {content}
-      </TimelineContentText>
-    ) : null,
+const MemoSubTitle = React.memo<Content>(({ content, color, dir }: Content) =>
+  content ? (
+    <TimelineContentSubTitle
+      style={{ color }}
+      dir={dir}
+      className="card-sub-title"
+    >
+      {content}
+    </TimelineContentSubTitle>
+  ) : null,
 );
 
-MemoContentText.displayName = 'Timeline Content';
+MemoSubTitle.displayName = 'Timeline Content';
 
-export { MemoTitle, MemoContentText };
+export { MemoTitle, MemoSubTitle };

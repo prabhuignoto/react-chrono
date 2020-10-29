@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { CardMediaModel } from '../../../models/TimelineMediaModel';
-import { MemoContentText, MemoTitle } from '../memoized';
+import { MemoSubTitle, MemoTitle } from '../memoized';
 import {
   CardImage,
   CardVideo,
@@ -125,7 +125,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
       </MediaWrapper>
       <MediaDetailsWrapper mode={mode}>
         <MemoTitle title={title} theme={theme} active={active} />
-        <MemoContentText content={content} />
+        <MemoSubTitle content={content} />
       </MediaDetailsWrapper>
     </>
   );

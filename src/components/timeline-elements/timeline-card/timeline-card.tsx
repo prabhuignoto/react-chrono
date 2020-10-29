@@ -137,6 +137,8 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
           ref={circleRef}
           data-testid="timeline-circle"
           theme={theme}
+          tabIndex={0}
+          aria-label={title}
         ></Circle>
       </CircleWrapper>
 

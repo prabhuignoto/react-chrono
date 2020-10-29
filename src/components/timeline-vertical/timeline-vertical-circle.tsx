@@ -47,6 +47,7 @@ const VerticalCircle: React.FunctionComponent<TreeLeafModel> = (
         ref={circleRef}
         role="button"
         data-testid="tree-leaf-click"
+        aria-label="select timeline"
       >
         <Circle className={active ? 'active' : 'in-active'} theme={theme} />
       </VerticalCircleContainer>

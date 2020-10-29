@@ -62,8 +62,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
+    // event.preventDefault();
+    // event.stopPropagation();
 
     const { keyCode } = event;
 

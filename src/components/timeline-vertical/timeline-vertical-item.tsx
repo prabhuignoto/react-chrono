@@ -51,6 +51,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       data-testid="branch-main"
       alternateCards={alternateCards}
       cardHeight={cardHeight}
+      role="listitem"
     >
       {/* title */}
       <TimelineTitleWrapper
