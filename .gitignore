@@ -27,3 +27,4 @@ yarn-error.log*
 storybook-static
 
 debug
+.vscode

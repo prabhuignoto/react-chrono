@@ -44,7 +44,7 @@ const show = keyframes`
   }
 `;
 
-export const TimelinePointWrapper = styled.div`
+export const CircleWrapper = styled.div`
   width: 5rem;
   display: flex;
   align-items: center;
@@ -53,7 +53,7 @@ export const TimelinePointWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const TimelinePoint = styled.div<{ theme: Theme }>`
+export const Circle = styled.div<{ theme: Theme }>`
   background: ${(p) => p.theme.primary};
   border-radius: 50%;
   cursor: pointer;

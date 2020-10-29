@@ -33,7 +33,7 @@ export const TimelineNavButton = styled.button<{
   outline: 0;
   width: 1.75rem;
   padding: 0;
-  transition: all 0.2s ease-in;
+  transition: all 0.1s ease-in;
 
   transform: ${(p) => {
     if (p.mode !== 'HORIZONTAL') {
@@ -43,7 +43,8 @@ export const TimelineNavButton = styled.button<{
 
   &:active {
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.25));
-    transform: rotate(90deg) scale(0.85);
+    transform: ${(p) => (p.mode !== 'HORIZONTAL' ? 'rotate(90deg)' : '')}
+      scale(0.85);
   }
 
   svg {

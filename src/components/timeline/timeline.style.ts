@@ -15,17 +15,6 @@ export const Wrapper = styled.div`
 
   &.horizontal {
     justify-content: flex-start;
-    /* &.top {
-    }
-
-    &.bottom {
-      justify-content: flex-end;
-    } */
-  }
-
-  &.vertical,
-  &.tree {
-    /* height: 100%; */
   }
 `;
 

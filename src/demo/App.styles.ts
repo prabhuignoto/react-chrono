@@ -61,7 +61,7 @@ export const ComponentContainerTree = styled.div<{ type?: string }>`
       case 'desktop':
         return `height: 600px; width: 75%;`;
       case 'big-screen':
-        return `height: 850px; width: 85%;`;
+        return `height: 850px; width: 100%;`;
       case 'tablet':
         return `height: 850px; width: 100%;`;
       case 'mobile':
@@ -166,3 +166,10 @@ export const SandBox = styled.div`
   justify-content: flex-start;
   margin-left: auto;
 `;
+
+export const ComponentLinks = styled.ul`
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+`

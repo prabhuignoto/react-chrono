@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
   HorizontalBasic,
@@ -9,10 +9,10 @@ import {
 } from './app-samples';
 import './App.css';
 import {
+  ComponentLinks,
   Wrapper
 } from './App.styles';
 import data from './data';
-import mixed from "./data-mixed";
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
@@ -34,6 +34,23 @@ const NewDemo: React.FunctionComponent = () => {
     <Wrapper>
       <h3>Timeline of World War 2</h3>
       <BrowserRouter>
+      <header>
+        <ComponentLinks>
+          <li>
+            <Link to="/vertical-basic">Vertical Basic</Link>
+          </li>
+          <li>
+            <Link to="/vertical-alternating">Vertical Alternating</Link>
+          </li>
+          <li>
+            <Link to="/vertical-alternating-mixed">Vertical Alternating Mixed Data</Link>
+          </li>
+          <li>
+            <Link to="/horizontal">Horizontal Basic</Link>
+          </li>
+        </ComponentLinks>
+      </header>
+      <section>
         <Switch>
           <Route path="/vertical-basic">
           {/* Vertical with no Media */}
@@ -49,7 +66,7 @@ const NewDemo: React.FunctionComponent = () => {
           </Route>
           <Route path="/horizontal">
             {items.length > 0 && (
-              <HorizontalBasic items={mixed} type="big-screen" />
+              <HorizontalBasic items={items} type="big-screen" />
             )}
           </Route>
           <Route path="/">
@@ -58,29 +75,8 @@ const NewDemo: React.FunctionComponent = () => {
               )}
           </Route>
         </Switch>
+      </section>
       </BrowserRouter>
-      <>
-        {/* Horizontal with Media */}
-        {/* {items.length > 0 && (
-          <HorizontalBasic items={items} type="big-screen" />
-        )} */}
-
-
-        {/* Tree Mode */}
-
-        {/* mixed mode */}
-
-        {/* Horizontal Slideshow */}
-        {/* {<HorizontalSlideshow type={"big-screen"} />} */}
-
-        {/* Tree Slideshow */}
-        {/* {items.length > 0 && (
-          <VerticalTreeSlideshow
-            type={'big-screen'}
-            cardHeight={250}
-          />
-        )} */}
-      </>
     </Wrapper>
   );
 };

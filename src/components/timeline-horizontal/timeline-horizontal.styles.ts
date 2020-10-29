@@ -20,7 +20,6 @@ export const TimelineItemWrapper = styled.li<{ width: number }>`
 
   &.vertical {
     margin-bottom: 2rem;
-    /* min-height: 100px; */
     width: 100%;
   }
 

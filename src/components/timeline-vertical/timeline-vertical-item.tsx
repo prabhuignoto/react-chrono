@@ -90,7 +90,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         />
       </TimelineCardContentWrapper>
 
-      {/* leaf */}
+      {/* Circle */}
       <VerticalCircle
         className={className}
         id={id}

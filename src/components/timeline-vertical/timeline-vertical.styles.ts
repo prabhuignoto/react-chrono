@@ -46,7 +46,7 @@ export const VerticalItemWrapper = styled.div<{
   }
 `;
 
-export const TreeTrunkWrapper = styled.div<{
+export const VerticalCircleWrapper = styled.div<{
   bg?: string;
   alternateCards?: boolean;
 }>`
@@ -100,7 +100,7 @@ export const TimelineCardContentWrapper = styled.div<{
   }
 `;
 
-export const TrunkPointWrapper = styled.div`
+export const VerticalCircleContainer = styled.div`
   position: relative;
   z-index: 1;
 `;

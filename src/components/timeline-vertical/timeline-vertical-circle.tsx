@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { TreeLeafModel } from '../../models/TimelineTreeModel';
-import { TimelinePoint } from '../timeline-elements/timeline-card/timeline-card.styles';
+import { Circle } from '../timeline-elements/timeline-card/timeline-card.styles';
 import {
-  TreeTrunkWrapper,
-  TrunkPointWrapper,
+  VerticalCircleWrapper,
+  VerticalCircleContainer,
 } from './timeline-vertical.styles';
 
 const VerticalCircle: React.FunctionComponent<TreeLeafModel> = (
@@ -30,14 +30,14 @@ const VerticalCircle: React.FunctionComponent<TreeLeafModel> = (
   }, [active, onActive]);
 
   return (
-    <TreeTrunkWrapper
+    <VerticalCircleWrapper
       className={className}
       data-testid="tree-leaf"
       bg={theme && theme.primary}
       alternateCards={alternateCards}
       role="button"
     >
-      <TrunkPointWrapper
+      <VerticalCircleContainer
         className={className}
         onClick={() => {
           if (id && onClick && !slideShowRunning) {
@@ -48,12 +48,9 @@ const VerticalCircle: React.FunctionComponent<TreeLeafModel> = (
         role="button"
         data-testid="tree-leaf-click"
       >
-        <TimelinePoint
-          className={active ? 'active' : 'in-active'}
-          theme={theme}
-        />
-      </TrunkPointWrapper>
-    </TreeTrunkWrapper>
+        <Circle className={active ? 'active' : 'in-active'} theme={theme} />
+      </VerticalCircleContainer>
+    </VerticalCircleWrapper>
   );
 };
 

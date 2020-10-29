@@ -199,7 +199,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         ref={timelineMainRef}
         scrollable={canScrollTimeline}
         className={`${mode.toLowerCase()} timeline-main-wrapper`}
-        // onWheel={(evt) => handleMouseWheel.callback(evt)}
         theme={theme}
       >
         {/* VERTICAL ALTERNATING */}

@@ -5,8 +5,8 @@ import TimelineItemContent from '../timeline-card-content/timeline-card-content'
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import {
   TimelineContentContainer,
-  TimelinePoint,
-  TimelinePointWrapper,
+  Circle,
+  CircleWrapper,
   TimelineTitleContainer,
   Wrapper,
 } from './timeline-card.styles';
@@ -128,8 +128,8 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
     >
       {mode === 'HORIZONTAL' && active ? showTimelineContent() : null}
 
-      <TimelinePointWrapper>
-        <TimelinePoint
+      <CircleWrapper>
+        <Circle
           className={`timeline-circle ${mode.toLowerCase()} ${
             active ? 'active' : 'in-active'
           }`}
@@ -137,8 +137,8 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
           ref={circleRef}
           data-testid="timeline-circle"
           theme={theme}
-        ></TimelinePoint>
-      </TimelinePointWrapper>
+        ></Circle>
+      </CircleWrapper>
 
       {mode === 'HORIZONTAL' && (
         <TimelineTitleContainer
