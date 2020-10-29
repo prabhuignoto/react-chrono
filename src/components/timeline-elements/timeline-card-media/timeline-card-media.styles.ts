@@ -8,8 +8,9 @@ export const MediaWrapper = styled.div<{
   mode?: TimelineMode;
   dir?: string;
   slideShowActive?: boolean;
+  cardHeight?: number;
 }>`
-  height: 100%;
+  height: 0;
   flex-direction: row;
   align-items: center;
   width: 100%;
@@ -20,6 +21,7 @@ export const MediaWrapper = styled.div<{
   border-radius: 4px;
   pointer-events: ${(p) => (!p.active && p.slideShowActive ? 'none' : '')};
   text-align: center;
+  ${(p) => (p.cardHeight ? `min-height: ${p.cardHeight}px;` : '')}
 
   ${(p) => {
     if (p.mode === 'HORIZONTAL') {
@@ -52,11 +54,11 @@ export const CardImage = styled.img<{
   visibility: ${(p) => (p.visible ? 'visible' : 'hidden')};
   margin-right: auto;
   object-fit: contain;
-  max-height: 70%;
+  max-height: 100%;
   margin-left: auto;
 `;
 
-export const CardVideo = styled.video`
+export const CardVideo = styled.video<{ height?: number }>`
   max-width: 100%;
   max-height: 100%;
   margin-left: auto;

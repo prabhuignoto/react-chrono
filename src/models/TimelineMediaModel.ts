@@ -31,4 +31,5 @@ export interface CardMediaModel {
   content: string;
   slideshowActive?: boolean;
   hideMedia: boolean;
+  cardHeight?: number;
 }

@@ -22,7 +22,7 @@ context('Chrono.Vertical.Alternating.Mixed', () => {
       .eq(3)
       .find('.timeline-card-content')
       .children()
-      .should('have.length', 3);
+      .should('have.length', 4);
   });
 
   it('check card title', () => {

@@ -36,7 +36,6 @@ export const TimelineMainWrapper = styled.div<{
   align-items: flex-start;
   display: flex;
   justify-content: center;
-  overflow-x: hidden;
   overflow-y: ${(p) => (p.scrollable ? 'auto' : 'hidden')};
   overscroll-behavior: contain;
   padding: ${(p) => (p.scrollable ? '1rem 2rem 1rem 0' : '1rem 0')};
@@ -48,6 +47,7 @@ export const TimelineMainWrapper = styled.div<{
 
   &::-webkit-scrollbar {
     width: 0.5em;
+    height: 0;
   }
 
   &::-webkit-scrollbar-track {
