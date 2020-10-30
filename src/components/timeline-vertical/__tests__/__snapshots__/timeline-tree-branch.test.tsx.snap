@@ -2,8 +2,8 @@
 
 exports[`Test tree branch render 1`] = `
 <div
-  class="test-class  branch-main css-1uu8hqk"
-  data-testid="branch-main"
+  class="test-class  vertical-item-row css-1uu8hqk"
+  data-testid="vertical-item-row"
 >
   <div
     class="test-class css-1sgx6fg"

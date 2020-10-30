@@ -2,28 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
-  HorizontalBasic,
-  VerticalBasic,
-  VerticalTree,
-  VerticalTreeMixed
+    HorizontalBasic,
+    VerticalBasic,
+    VerticalTree,
+    VerticalTreeMixed
 } from './app-samples';
 import './App.css';
 import {
-  ComponentLinks,
-  Wrapper
+    ComponentLinks,
+    Wrapper
 } from './App.styles';
 import data from './data';
+import dataMixed from './data-mixed';
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
 
   useEffect(() => {
     const newItems = data.map(
-      ({ title, contentTitle, contentText, contentDetailedText, id }) => ({
+      ({ title, cardTitle, cardSubtitle, cardDetailedText, id }) => ({
         title,
-        contentTitle,
-        contentText,
-        contentDetailedText,
+        cardTitle,
+        cardSubtitle,
+        cardDetailedText,
         id,
       }),
     );
@@ -55,7 +56,7 @@ const NewDemo: React.FunctionComponent = () => {
           <Route path="/vertical-basic">
           {/* Vertical with no Media */}
           {items.length > 0 && (
-              <VerticalBasic type={"big-screen"} items={items} />
+              <VerticalBasic type={"big-screen"} items={dataMixed} />
             )}
           </Route>
           <Route path="/vertical-alternating-mixed">

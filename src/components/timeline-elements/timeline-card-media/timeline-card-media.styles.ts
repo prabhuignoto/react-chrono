@@ -21,7 +21,7 @@ export const MediaWrapper = styled.div<{
   border-radius: 4px;
   pointer-events: ${(p) => (!p.active && p.slideShowActive ? 'none' : '')};
   text-align: center;
-  ${(p) => (p.cardHeight ? `min-height: ${p.cardHeight}px;` : '')}
+  ${(p) => (p.cardHeight ? `min-height: ${p.cardHeight}px;` : '')};
 
   ${(p) => {
     if (p.mode === 'HORIZONTAL') {

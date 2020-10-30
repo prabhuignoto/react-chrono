@@ -4,20 +4,20 @@ import { TimelineCardModel } from '../../../models/TimelineItemModel';
 import TimelineItemContent from '../timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import {
-  TimelineContentContainer,
   Circle,
   CircleWrapper,
+  TimelineContentContainer,
   TimelineTitleContainer,
   Wrapper,
 } from './timeline-card.styles';
 
-const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
+const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   active,
   autoScroll,
   cardHeight,
-  contentDetailedText,
-  contentText,
-  contentTitle,
+  cardDetailedText,
+  cardSubtitle,
+  cardTitle,
   id,
   media,
   mode,
@@ -94,10 +94,10 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
           </TimelineTitleContainer>
         )}
         <TimelineItemContent
-          content={contentText}
+          content={cardSubtitle}
           active={active}
-          title={contentTitle}
-          detailedText={contentDetailedText}
+          title={cardTitle}
+          detailedText={cardDetailedText}
           onShowMore={handleOnShowMore}
           theme={theme}
           slideShowActive={slideShowRunning}
@@ -155,4 +155,4 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
   );
 };
 
-export default TimelineItem;
+export default TimelineCard;

@@ -2,7 +2,9 @@ import styled from '@emotion/styled';
 import { Theme } from '../../models/Theme';
 import { TimelineMode } from '../../models/TimelineModel';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{
+  cardPositionHorizontal?: 'TOP' | 'BOTTOM';
+}>`
   display: flex;
   flex-direction: column;
   position: relative;
@@ -12,6 +14,21 @@ export const Wrapper = styled.div`
   user-select: none;
   outline: 0;
   overflow: hidden;
+
+  ${(p) =>
+    p.cardPositionHorizontal === 'TOP'
+      ? `
+    & > div:nth-child(1) {
+      order: 2;
+    }
+    & > div:nth-child(2) {
+      order: 1; 
+    }
+    & > div:nth-child(3) {
+      order: 3;
+    }
+  `
+      : ''};
 
   &.horizontal {
     justify-content: flex-start;

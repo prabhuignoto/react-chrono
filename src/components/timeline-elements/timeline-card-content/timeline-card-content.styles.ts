@@ -19,13 +19,9 @@ export const TimelineItemContentWrapper = styled.section<{
   position: relative;
   text-align: left;
   width: 100%;
-
-  ${(p) =>
-    p.noMedia
-      ? `
-    background: #fff;
-    filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));`
-      : null};
+  outline: 0;
+  background: #fff;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
 
   &.active {
     color: ${(p) => p.theme.primary};
@@ -45,7 +41,7 @@ export const TimelineContentSubTitle = styled.p<{ dir?: string }>`
   margin: 0;
 `;
 
-export const TimelineContentTitle = styled.p<{ theme: Theme; dir?: string }>`
+export const TimelinecardTitle = styled.p<{ theme: Theme; dir?: string }>`
   color: #323232;
   font-size: 1rem;
   font-weight: 600;
@@ -116,9 +112,10 @@ export const ShowMore = styled.span<{ show?: boolean; theme?: Theme }>`
   /* margin-top: 1rem; */
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
-  visibility: ${(p) => (p.show ? 'visible' : 'hidden')};
+  /* visibility: ${(p) => (p.show ? 'visible' : 'hidden')}; */
+  display: ${(p) => (p.show ? 'flex' : 'none')};
   /* height: ${(p) => (!p.show ? '0' : '')}; */
-  display: flex;
+  /* display: flex; */
   align-items: center;
   background: #f5f5f5;
   border-radius: 4px;

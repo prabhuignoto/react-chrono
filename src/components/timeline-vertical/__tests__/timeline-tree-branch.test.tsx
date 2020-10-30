@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import Branch from '../timeline-tree-branch';
 
@@ -10,7 +10,7 @@ const View = (
   <Branch
     className="test-class"
     index={2}
-    contentText="Tree branch test"
+    cardSubtitle="Tree branch test"
     title="branch title"
     id="223344"
     active
@@ -22,14 +22,14 @@ const View = (
 
 test('Test tree branch render', () => {
   render(View);
-  const element = screen.getByTestId('branch-main');
+  const element = screen.getByTestId('vertical-item-row');
   expect(element).toBeInTheDocument();
   expect(element).toMatchSnapshot();
 });
 
 test('Test tree branch class styles', () => {
   render(View);
-  const element = screen.getByTestId('branch-main');
+  const element = screen.getByTestId('vertical-item-row');
   expect(element).toHaveClass('test-class');
 
   Array.from(element.children).forEach((child, index) => {

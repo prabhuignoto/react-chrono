@@ -10,9 +10,9 @@ import { TimelineMode } from './TimelineModel';
  */
 export interface TimelineItemModel {
   active?: boolean;
-  contentDetailedText?: string;
-  contentText: string;
-  contentTitle?: string;
+  cardDetailedText?: string;
+  cardSubtitle: string;
+  cardTitle?: string;
   id?: string;
   media?: Media;
   position?: string;

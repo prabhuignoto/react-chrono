@@ -39,6 +39,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     slideItemDuration,
     hideControls,
     scrollable,
+    cardPositionHorizontal,
   } = props;
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -129,7 +130,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       const element = timelineMainRef.current;
 
       if (element) {
-        const childElements = element.querySelectorAll('.branch-main');
+        const childElements = element.querySelectorAll('.vertical-item-row');
         Array.from(childElements).forEach((elem) => {
           if (observer.current) {
             observer.current.observe(elem);
@@ -194,6 +195,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         !disableNavOnKey && !slideShowRunning ? handleKeySelection(evt) : null
       }
       className={`${mode.toLowerCase()}`}
+      cardPositionHorizontal={cardPositionHorizontal}
     >
       <TimelineMainWrapper
         ref={timelineMainRef}

@@ -127,6 +127,8 @@ export interface TimelineProps {
   hideControls?: boolean;
 
   scrollable?: boolean;
+
+  cardPositionHorizontal?: 'TOP' | 'BOTTOM';
 }
 
 export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';

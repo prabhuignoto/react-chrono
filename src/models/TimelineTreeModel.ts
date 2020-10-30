@@ -79,9 +79,9 @@ export interface TreeLeafModel extends CommonBranchAndLeafModel {
 }
 
 export interface VerticalItemModel extends CommonBranchAndLeafModel {
-  contentDetailedText?: string;
-  contentText: string;
-  contentTitle?: string;
+  cardDetailedText?: string;
+  cardSubtitle: string;
+  cardTitle?: string;
   index: number;
   media?: Media;
   onShowMore?: () => void;

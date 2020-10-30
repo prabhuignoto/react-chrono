@@ -9,10 +9,6 @@ context('Chrono.Vertical.Basic', () => {
     cy.get('.timeline-horz-item-container').should("have.length", 13);
   })
 
-  it('check card contents', () => {
-    cy.get(".timeline-card-content").children().should("have.length", 4)
-  });
-
   it("check timeline controls", () => {
     cy.get(".timeline-controls").children().should("have.length", 5)
   });

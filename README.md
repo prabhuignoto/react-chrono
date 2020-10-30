@@ -74,8 +74,8 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
   const Home = () => {
     const items = [{
       title: "May 1940",
-      contentTitle: "Dunkirk",
-      contentText:"Men of the British Expeditionary Force (BEF) wade out to..",
+      cardTitle: "Dunkirk",
+      cardSubtitle:"Men of the British Expeditionary Force (BEF) wade out to..",
       media: {
         type: "IMAGE",
         source: {
@@ -176,15 +176,15 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | name                 | description                                  | type   |
 |----------------------|----------------------------------------------|--------|
 | title                | title of the timeline item                   | String |
-| contentTitle         | title that is displayed on the timeline card | String |
-| contentText          | text displayed in the timeline card          | String |
-| contentDetailedText  | detailed text displayed in the timeline card | String |
+| cardTitle         | title that is displayed on the timeline card | String |
+| cardSubtitle          | text displayed in the timeline card          | String |
+| cardDetailedText  | detailed text displayed in the timeline card | String |
 | media                | media object to set image or video.          | Object |
 
 ```sh
 {
   title: "May 1940",
-  contentTitle: "Dunkirk",
+  cardTitle: "Dunkirk",
   media: {
     name: "dunkirk beach",
     source: {
@@ -192,7 +192,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
     },
     type: "IMAGE"
   },
-  contentText:
+  cardSubtitle:
     "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk."
 }
 ```
@@ -222,7 +222,7 @@ Both images and videos can be embedded in the timeline. Just add the `media` att
 ```sh
 {
   title: "May 1940",
-  contentTitle: "Dunkirk",
+  cardTitle: "Dunkirk",
   media: {
     name: "dunkirk beach",
     source: {
@@ -242,7 +242,7 @@ Videos start playing automatically when active and will be automatically paused 
 ```sh
 {
   title: "7 December 1941",
-  contentTitle: "Pearl Harbor",
+  cardTitle: "Pearl Harbor",
   media: {
     source: {
       url: "/pearl-harbor.mp4",

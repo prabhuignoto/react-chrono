@@ -22,14 +22,14 @@ export interface MediaState {
 
 export interface CardMediaModel {
   active?: boolean;
-  media: Media;
+  cardHeight?: number;
+  content: string;
+  hideMedia: boolean;
   id?: string;
+  media: Media;
   mode?: TimelineMode;
   onMediaStateChange: (state: MediaState) => void;
+  slideshowActive?: boolean;
   theme?: Theme;
   title?: string;
-  content: string;
-  slideshowActive?: boolean;
-  hideMedia: boolean;
-  cardHeight?: number;
 }

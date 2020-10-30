@@ -118,6 +118,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
               onError={handleError}
               visible={mediaLoaded}
               active={active}
+              alt={media.name}
             />
           ) : (
             <ErrorMessageMem message="Failed to load the image." />

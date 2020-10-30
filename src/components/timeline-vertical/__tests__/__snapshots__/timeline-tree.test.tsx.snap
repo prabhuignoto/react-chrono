@@ -6,8 +6,8 @@ exports[`Test Tree render 1`] = `
   data-testid="tree-main"
 >
   <div
-    class="left  branch-main css-1uu8hqk"
-    data-testid="branch-main"
+    class="left  vertical-item-row css-1uu8hqk"
+    data-testid="vertical-item-row"
   >
     <div
       class="left css-2zvd49"
@@ -56,8 +56,8 @@ exports[`Test Tree render 1`] = `
     </div>
   </div>
   <div
-    class="right  branch-main css-1uu8hqk"
-    data-testid="branch-main"
+    class="right  vertical-item-row css-1uu8hqk"
+    data-testid="vertical-item-row"
   >
     <div
       class="right css-2zvd49"
@@ -106,8 +106,8 @@ exports[`Test Tree render 1`] = `
     </div>
   </div>
   <div
-    class="left  branch-main css-1uu8hqk"
-    data-testid="branch-main"
+    class="left  vertical-item-row css-1uu8hqk"
+    data-testid="vertical-item-row"
   >
     <div
       class="left css-2zvd49"
@@ -158,8 +158,8 @@ exports[`Test Tree render 1`] = `
     </div>
   </div>
   <div
-    class="right  branch-main css-1uu8hqk"
-    data-testid="branch-main"
+    class="right  vertical-item-row css-1uu8hqk"
+    data-testid="vertical-item-row"
   >
     <div
       class="right css-2zvd49"

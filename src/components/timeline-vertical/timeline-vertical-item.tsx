@@ -4,9 +4,9 @@ import TimelineCard from '../timeline-elements/timeline-card-content/timeline-ca
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
 import VerticalCircle from './timeline-vertical-circle';
 import {
-  VerticalItemWrapper,
   TimelineCardContentWrapper,
   TimelineTitleWrapper,
+  VerticalItemWrapper,
 } from './timeline-vertical.styles';
 
 const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
@@ -19,9 +19,9 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     alternateCards,
     cardHeight,
     className,
-    contentDetailedText,
-    contentText,
-    contentTitle,
+    cardDetailedText,
+    cardSubtitle,
+    cardTitle,
     id,
     index,
     media,
@@ -45,10 +45,10 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
 
   return (
     <VerticalItemWrapper
-      className={`${className} ${visible ? 'visible' : ''} branch-main`}
+      className={`${className} ${visible ? 'visible' : ''} vertical-item-row`}
       key={index}
       ref={contentRef}
-      data-testid="branch-main"
+      data-testid="vertical-item-row"
       alternateCards={alternateCards}
       cardHeight={cardHeight}
       role="listitem"
@@ -71,15 +71,15 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         <TimelineCard
           active={active}
           cardHeight={cardHeight}
-          content={contentText}
-          detailedText={contentDetailedText}
+          content={cardSubtitle}
+          detailedText={cardDetailedText}
           id={id}
           media={media}
           mode={mode}
           onClick={onClick}
           slideShowActive={slideShowRunning}
           theme={theme}
-          title={contentTitle}
+          title={cardTitle}
           onShowMore={() =>
             setTimeout(() => {
               handleOnActive(0);
