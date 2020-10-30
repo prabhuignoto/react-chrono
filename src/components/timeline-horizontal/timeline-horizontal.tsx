@@ -1,5 +1,5 @@
 import React from 'react';
-import { TimelineHorizontalModel } from '../../models/TimelineCollnModel';
+import { TimelineHorizontalModel } from '../../models/TimelineHorizontalModel';
 import TimelineItem from '../timeline-elements/timeline-card/timeline-card';
 import {
   TimelineHorizontalWrapper,

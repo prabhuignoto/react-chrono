@@ -37,14 +37,17 @@ export const Wrapper = styled.div<{
 
 export const TimelineMainWrapper = styled.div<{
   theme?: Theme;
-  scrollable?: boolean;
+  scrollable?: boolean | { scrollbar: boolean };
 }>`
   align-items: flex-start;
   display: flex;
   justify-content: center;
   overflow-y: ${(p) => (p.scrollable ? 'auto' : 'hidden')};
   overscroll-behavior: contain;
-  padding: ${(p) => (p.scrollable ? '1rem 2rem 1rem 0' : '1rem 0')};
+  padding: ${(p) =>
+    p.scrollable === true || !(p.scrollable as { scrollbar: boolean }).scrollbar
+      ? '1rem 2rem 1rem 0'
+      : ''};
   position: relative;
   scroll-behavior: smooth;
   scrollbar-color: ${(p) => p.theme.primary} default;

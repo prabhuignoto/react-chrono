@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { Scroll } from '../../models/TimelineCollnModel';
+import { Scroll } from '../../models/TimelineHorizontalModel';
 import { TimelineCardModel } from '../../models/TimelineItemModel';
 import { TimelineModel } from '../../models/TimelineModel';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
@@ -49,7 +49,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const timelineMainRef = useRef<HTMLDivElement>(null);
 
   const canScrollTimeline = useMemo(() => {
-    return scrollable && !slideShowRunning;
+    if (!slideShowRunning) {
+      return scrollable;
+    }
   }, [slideShowRunning, scrollable]);
 
   // generate a unique id for the timeline content

@@ -107,7 +107,7 @@ export const VerticalTree: FunctionComponent<{
         mode="VERTICAL_ALTERNATING"
         slideShow
         slideItemDuration={2350}
-        scrollable
+        scrollable={{scrollbar: false}}
         // theme={{ primary: '#4a4e69', secondary: '#c9ada7' }}
       />
     </ComponentContainerTree>

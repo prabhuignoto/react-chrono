@@ -126,7 +126,7 @@ export interface TimelineProps {
    */
   hideControls?: boolean;
 
-  scrollable?: boolean;
+  scrollable?: boolean | { scrollbar: boolean };
 
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
 }

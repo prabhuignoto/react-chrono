@@ -1,5 +1,5 @@
 import { Theme } from './Theme';
-import { Scroll } from './TimelineCollnModel';
+import { Scroll } from './TimelineHorizontalModel';
 import { Media } from './TimelineMediaModel';
 import { TimelineMode } from './TimelineModel';
 /**
