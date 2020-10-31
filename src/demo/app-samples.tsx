@@ -35,6 +35,8 @@ export const HorizontalBasic: React.FunctionComponent<{
           cardHeight={300}
           slideShow
           slideItemDuration={2550}
+          cardPositionHorizontal="TOP"
+          itemWidth={200}
         />
       </ComponentContainer>
     </Horizontal>

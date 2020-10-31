@@ -19,9 +19,3 @@ test('Test Timeline Item Content Snapshot', () => {
   const contentElement = getByText(/test/i);
   expect(contentElement).toMatchSnapshot();
 });
-
-test('Test Timeline Item Content Snapshot', () => {
-  render(<Content content="This is a test" active onShowMore={fn} />);
-  const element = screen.getByText(/this is a test/i);
-  expect(element.parentElement).toHaveClass('active');
-});

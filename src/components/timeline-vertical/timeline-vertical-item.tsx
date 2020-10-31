@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { VerticalItemModel } from '../../models/TimelineTreeModel';
+import { VerticalItemModel } from '../../models/TimelineVerticalModel';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
 import VerticalCircle from './timeline-vertical-circle';

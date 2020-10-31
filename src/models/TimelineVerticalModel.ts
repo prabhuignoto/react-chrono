@@ -74,7 +74,7 @@ interface CommonBranchAndLeafModel extends CommonPropsModel {
   id?: string;
 }
 
-export interface TreeLeafModel extends CommonBranchAndLeafModel {
+export interface VerticalCircleModel extends CommonBranchAndLeafModel {
   onActive: (timelinePointOffset: number) => void;
 }
 
@@ -94,7 +94,7 @@ export interface VerticalItemModel extends CommonBranchAndLeafModel {
   ) => void;
 }
 
-export interface TimelineTreeModel extends CommonPropsModel {
+export interface TimelineVerticalModel extends CommonPropsModel {
   activeTimelineItem: number;
   autoScroll: (s: Partial<Scroll>) => void;
   items: TimelineCardModel[];

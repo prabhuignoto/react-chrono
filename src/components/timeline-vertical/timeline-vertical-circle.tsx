@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import { TreeLeafModel } from '../../models/TimelineTreeModel';
+import { VerticalCircleModel } from '../../models/TimelineVerticalModel';
 import { Circle } from '../timeline-elements/timeline-card/timeline-card.styles';
 import {
   VerticalCircleWrapper,
   VerticalCircleContainer,
 } from './timeline-vertical.styles';
 
-const VerticalCircle: React.FunctionComponent<TreeLeafModel> = (
-  props: TreeLeafModel,
+const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
+  props: VerticalCircleModel,
 ) => {
   const {
     className,

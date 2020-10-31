@@ -45,7 +45,8 @@ export const TimelineMainWrapper = styled.div<{
   overflow-y: ${(p) => (p.scrollable ? 'auto' : 'hidden')};
   overscroll-behavior: contain;
   padding: ${(p) =>
-    p.scrollable === true || !(p.scrollable as { scrollbar: boolean }).scrollbar
+    (p.scrollable instanceof Boolean && p.scrollable === true) ||
+    !(p.scrollable as { scrollbar: boolean }).scrollbar
       ? '1rem 2rem 1rem 0'
       : ''};
   position: relative;
@@ -80,10 +81,6 @@ export const TimelineMain = styled.div`
   bottom: 0;
   position: absolute;
   transition: all 0.2s ease;
-
-  &.tree {
-    /* height: 100%; */
-  }
 
   &.vertical {
     align-items: flex-start;

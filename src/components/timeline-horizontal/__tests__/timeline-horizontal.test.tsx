@@ -94,7 +94,7 @@ test('Test Collection Tree render', () => {
 
   expect(element).toBeInTheDocument();
   expect(element).toMatchSnapshot();
-  expect(element).toHaveClass('tree');
+  expect(element).toHaveClass('timeline-horz-container');
 });
 
 test('Test Collection Items length', () => {

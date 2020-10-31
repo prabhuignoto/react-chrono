@@ -2,15 +2,18 @@
 
 exports[`Check Timeline Leaf snapshot 1`] = `
 <div
-  class="random-class css-ey985k"
+  class="random-class css-n24itb"
   data-testid="tree-leaf"
+  role="button"
 >
   <div
+    aria-label="select timeline"
     class="random-class css-kooiip"
     data-testid="tree-leaf-click"
+    role="button"
   >
     <div
-      class="in-active css-1yzc5y5"
+      class="in-active css-10jefxi"
     />
   </div>
 </div>

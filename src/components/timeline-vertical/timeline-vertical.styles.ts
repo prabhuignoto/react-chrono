@@ -7,6 +7,7 @@ export const TimelineVerticalWrapper = styled.div`
   height: 100%;
   width: 100%;
   padding: 1rem;
+  outline: 0;
 `;
 
 const animateVisible = keyframes`
@@ -54,7 +55,7 @@ export const VerticalCircleWrapper = styled.div<{
   display: flex;
   justify-content: center;
   position: relative;
-  width: 10%;
+  width: 8%;
 
   &.left {
     order: 2;
@@ -83,7 +84,7 @@ export const TimelineCardContentWrapper = styled.div<{
   alternateCards?: boolean;
 }>`
   visibility: hidden;
-  ${(p) => (p.alternateCards ? 'width: 45%;' : 'width: 75%; height: auto;')};
+  ${(p) => (p.alternateCards ? 'width: 50%;' : 'width: 70%; height: auto;')};
   /* padding: 1rem 0; */
 
   &.left {
@@ -110,7 +111,7 @@ export const TimelineTitleWrapper = styled.div<{
 }>`
   align-items: center;
   display: flex;
-  ${(p) => (p.alternateCards ? 'width: 45%' : 'width: 10%')};
+  ${(p) => (p.alternateCards ? 'width: 50%' : 'width: 10%')};
 
   &.left {
     justify-content: flex-start;

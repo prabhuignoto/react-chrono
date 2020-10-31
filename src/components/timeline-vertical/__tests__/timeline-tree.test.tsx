@@ -3,7 +3,7 @@ import React from 'react';
 import {
     TimelineCardModel, TimelineItemModel
 } from '../../../models/TimelineItemModel';
-import Tree from '../timeline-tree';
+import Tree from '../timeline-vertical';
 
 const onClick = jest.fn();
 const autoScroll = jest.fn();

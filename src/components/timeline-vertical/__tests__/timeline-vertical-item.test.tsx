@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import Branch from '../timeline-tree-branch';
+import Branch from '../timeline-vertical-item';
 
 const onClick = jest.fn();
 const onActive = jest.fn();

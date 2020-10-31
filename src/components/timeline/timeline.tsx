@@ -6,7 +6,7 @@ import { TimelineModel } from '../../models/TimelineModel';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import TimelineCollection from '../timeline-horizontal/timeline-horizontal';
-import TimelineTree from '../timeline-vertical/timeline-vertical';
+import TimelineVertical from '../timeline-vertical/timeline-vertical';
 import {
   Outline,
   TimelineContentRender,
@@ -207,7 +207,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       >
         {/* VERTICAL ALTERNATING */}
         {mode === 'VERTICAL_ALTERNATING' ? (
-          <TimelineTree
+          <TimelineVertical
             items={items as TimelineCardModel[]}
             onClick={handleTimelineItemClick}
             activeTimelineItem={activeTimelineItem}
@@ -243,7 +243,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
         {/* VERTICAL */}
         {mode === 'VERTICAL' ? (
-          <TimelineTree
+          <TimelineVertical
             items={items as TimelineCardModel[]}
             onClick={handleTimelineItemClick}
             activeTimelineItem={activeTimelineItem}
