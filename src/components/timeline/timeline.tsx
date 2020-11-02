@@ -15,6 +15,7 @@ import {
   TimelineMainWrapper,
   Wrapper,
 } from './timeline.style';
+import 'focus-visible';
 
 const Timeline: React.FunctionComponent<TimelineModel> = (
   props: TimelineModel,
@@ -156,22 +157,22 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               // show img and video when visible.
               element.querySelectorAll('img').forEach(show);
               element.querySelectorAll('video').forEach(show);
-              element
-                .querySelectorAll(':scope > div')
-                .forEach(
-                  (ele) =>
-                    ((ele as HTMLDivElement).style.visibility = 'visible'),
-                );
+              // element
+              //   .querySelectorAll(':scope > div')
+              //   .forEach(
+              //     (ele) =>
+              //       ((ele as HTMLDivElement).style.visibility = 'visible'),
+              //   );
             } else {
               // hide img and video when not visible.
               element.querySelectorAll('img').forEach(hide);
               element.querySelectorAll('video').forEach(hide);
-              element
-                .querySelectorAll(':scope > div')
-                .forEach(
-                  (ele) =>
-                    ((ele as HTMLDivElement).style.visibility = 'hidden'),
-                );
+              // element
+              //   .querySelectorAll(':scope > div')
+              //   .forEach(
+              //     (ele) =>
+              //       ((ele as HTMLDivElement).style.visibility = 'hidden'),
+              //   );
             }
           });
         },
@@ -192,17 +193,17 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   return (
     <Wrapper
-      tabIndex={0}
       onKeyDown={(evt: React.KeyboardEvent<HTMLDivElement>) =>
         !disableNavOnKey && !slideShowRunning ? handleKeySelection(evt) : null
       }
-      className={`${mode.toLowerCase()}`}
+      className={`${mode.toLowerCase()} js-focus-visible focus-visible`}
       cardPositionHorizontal={cardPositionHorizontal}
     >
       <TimelineMainWrapper
         ref={timelineMainRef}
         scrollable={canScrollTimeline}
         className={`${mode.toLowerCase()} timeline-main-wrapper`}
+        id="timeline-main-wrapper"
         theme={theme}
       >
         {/* VERTICAL ALTERNATING */}

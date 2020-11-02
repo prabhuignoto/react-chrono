@@ -20,7 +20,7 @@ import {
   TimelineItemContentWrapper,
 } from './timeline-card-content.styles';
 
-const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
+const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
   active,
   cardHeight,
   content,
@@ -217,6 +217,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           !showMore ? 'show-less card-description' : 'card-description'
         }
         theme={theme}
+        aria-expanded={showMore}
       >
         {detailedText && (
           <TimelineContentDetails
@@ -269,4 +270,4 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   );
 };
 
-export default TimelineItemContent;
+export default TimelineCardContent;

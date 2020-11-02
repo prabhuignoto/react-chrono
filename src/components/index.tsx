@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import { TimelineProps } from '../models/TimelineModel';
 import Timeline from './timeline/timeline';
+import 'focus-visible';
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   items,

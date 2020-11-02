@@ -7,24 +7,24 @@ export const Wrapper = styled.div<{
 }>`
   display: flex;
   flex-direction: column;
-  position: relative;
-  width: 100%;
   /* cannot remove this */
   height: 100%;
-  user-select: none;
   outline: 0;
   overflow: hidden;
+  position: relative;
+  user-select: none;
+  width: 100%;
 
   ${(p) =>
     p.cardPositionHorizontal === 'TOP'
       ? `
-    & > div:nth-child(1) {
+    & > div:nth-of-type(1) {
       order: 2;
     }
-    & > div:nth-child(2) {
+    & > div:nth-of-type(2) {
       order: 1; 
     }
-    & > div:nth-child(3) {
+    & > div:nth-of-type(3) {
       order: 3;
     }
   `
@@ -32,6 +32,14 @@ export const Wrapper = styled.div<{
 
   &.horizontal {
     justify-content: flex-start;
+  }
+
+  &.js-focus-visible :focus:not(.focus-visible) {
+    outline: none;
+  }
+
+  &.js-focus-visible .focus-visible {
+    outline: 2px solid #528deb;
   }
 `;
 
@@ -44,16 +52,16 @@ export const TimelineMainWrapper = styled.div<{
   justify-content: center;
   overflow-y: ${(p) => (p.scrollable ? 'auto' : 'hidden')};
   overscroll-behavior: contain;
-  padding: ${(p) =>
-    (p.scrollable instanceof Boolean && p.scrollable === true) ||
-    !(p.scrollable as { scrollbar: boolean }).scrollbar
-      ? '1rem 2rem 1rem 0'
-      : ''};
   position: relative;
   scroll-behavior: smooth;
   scrollbar-color: ${(p) => p.theme.primary} default;
   scrollbar-width: thin;
   width: 100%;
+  padding: ${(p) =>
+    (p.scrollable instanceof Boolean && p.scrollable === true) ||
+    !(p.scrollable as { scrollbar: boolean }).scrollbar
+      ? '1rem 2rem 1rem 0'
+      : ''};
 
   &::-webkit-scrollbar {
     width: 0.5em;
@@ -76,9 +84,9 @@ export const TimelineMainWrapper = styled.div<{
 
 export const TimelineMain = styled.div`
   align-items: center;
+  bottom: 0;
   display: flex;
   left: 0;
-  bottom: 0;
   position: absolute;
   transition: all 0.2s ease;
 
@@ -130,12 +138,8 @@ export const TimelineControlContainer = styled.div<{
 `;
 
 export const TimelineContentRender = styled.div`
-  /* left: 0; */
   margin-left: auto;
   margin-right: auto;
-  /* position: absolute; */
-  /* right: 0; */
-  /* top: 3rem; */
   width: 98%;
   display: flex;
   align-items: center;

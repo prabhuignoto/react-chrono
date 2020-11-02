@@ -10,18 +10,18 @@ export const MediaWrapper = styled.div<{
   slideShowActive?: boolean;
   cardHeight?: number;
 }>`
-  height: 0;
-  flex-direction: row;
+  ${(p) => (p.cardHeight ? `min-height: ${p.cardHeight}px;` : '')};
   align-items: center;
-  width: 100%;
   align-self: center;
-  padding: 0.5rem;
-  position: relative;
   background: ${(p) => (p.active ? `rgba(${p.theme.secondary}, 0.35)` : '')};
   border-radius: 4px;
+  flex-direction: row;
+  height: 0;
+  padding: 0.5rem;
   pointer-events: ${(p) => (!p.active && p.slideShowActive ? 'none' : '')};
+  position: relative;
   text-align: center;
-  ${(p) => (p.cardHeight ? `min-height: ${p.cardHeight}px;` : '')};
+  width: 100%;
 
   ${(p) => {
     if (p.mode === 'HORIZONTAL') {
@@ -48,14 +48,14 @@ export const CardImage = styled.img<{
   active?: boolean;
   dir?: string;
 }>`
-  max-width: 100%;
-  justify-self: center;
   flex: 4;
-  visibility: ${(p) => (p.visible ? 'visible' : 'hidden')};
-  margin-right: auto;
-  object-fit: contain;
-  max-height: 100%;
+  justify-self: center;
   margin-left: auto;
+  margin-right: auto;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  visibility: ${(p) => (p.visible ? 'visible' : 'hidden')};
 `;
 
 export const CardVideo = styled.video<{ height?: number }>`
@@ -91,13 +91,13 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
 `;
 
 export const ErrorMessage = styled.span`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  color: #a3a3a3;
   left: 0;
-  right: 0;
   margin-left: auto;
   margin-right: auto;
-  color: #a3a3a3;
+  position: absolute;
+  right: 0;
   text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
 `;

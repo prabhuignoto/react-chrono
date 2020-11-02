@@ -1,6 +1,6 @@
 import React from 'react';
 import { TimelineHorizontalModel } from '../../models/TimelineHorizontalModel';
-import TimelineItem from '../timeline-elements/timeline-card/timeline-card';
+import TimelineCard from '../timeline-elements/timeline-card/timeline-card';
 import {
   TimelineHorizontalWrapper,
   TimelineItemWrapper,
@@ -32,7 +32,7 @@ const TimelineCollection: React.FunctionComponent<TimelineHorizontalModel> = ({
             item.visible ? 'visible' : ''
           } timeline-horz-item-container`}
         >
-          <TimelineItem
+          <TimelineCard
             {...item}
             onClick={handleItemClick}
             autoScroll={autoScroll}

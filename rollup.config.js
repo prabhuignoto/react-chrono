@@ -6,6 +6,7 @@ import typescript from "rollup-plugin-typescript2";
 import cssnano from "cssnano";
 import postcss from "rollup-plugin-postcss"
 import pkg from "./package.json";
+import terser from "rollup-plugin-terser"
 
 const banner = `/*
  * ${pkg.name}

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { TimelineCardModel } from '../../../models/TimelineItemModel';
-import TimelineItemContent from '../timeline-card-content/timeline-card-content';
+import TimelineCardContent from '../timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import {
   Circle,
@@ -93,7 +93,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
             <TimelineItemTitle title={title} active={active} theme={theme} />
           </TimelineTitleContainer>
         )}
-        <TimelineItemContent
+        <TimelineCardContent
           content={cardSubtitle}
           active={active}
           title={cardTitle}
@@ -137,7 +137,6 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           ref={circleRef}
           data-testid="timeline-circle"
           theme={theme}
-          tabIndex={0}
           aria-label={title}
         ></Circle>
       </CircleWrapper>

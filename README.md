@@ -44,12 +44,14 @@
   - [Mode](#mode)
   - [Timeline item Model](#timeline-item-model)
   - [Keyboard Navigation](#keyboard-navigation)
+  - [Scrollable](#scrollable)
   - [Media](#media)
   - [Slideshow mode](#slideshow-mode)
   - [Item Width](#item-width)
   - [Theme](#theme)
 - [📦 CodeSandbox Examples](#-codesandbox-examples)
 - [📦 Build Setup](#-build-setup)
+- [Tests](#tests)
 - [🔨 Contributing](#-contributing)
 - [🧱 Built with](#-built-with)
 - [🎯 What's coming next](#-whats-coming-next)
@@ -152,7 +154,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | itemWidth         | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
 | hideControls      | hides the navigation controls.                                                        | 300          |
 | cardHeight        | sets the minimum height of the timeline card.                                         | 250          |
-| scrollable        | makes the timeline scrollable (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).   | true         |
+| scrollable        | makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).   | true         |
 | theme             | prop to customize the colors.                                                         |              |
 
 ### Mode
@@ -211,6 +213,20 @@ To disable keyboard navigation set `disableNavOnKey` to true.
 <chrono items={items} disableNavOnKey />
 ```
 
+### Scrollable
+
+With the scrollable prop, you can enable scrolling on both `VERTICAL` and `VERTICAL_ALTERNATING` modes.
+
+```sh
+  <chrono items={items} scrollable />
+```
+
+The scrollbar is not shown by default. To enable the scrollbar, pass an object with prop `scrollbar` to `scrollable` prop.
+
+```sh
+  <chrono items={items} scrollable={{scrollbar: true}} />
+```
+
 ### Media
 
 Both images and videos can be embedded in the timeline. Just add the `media` attribute to the [Timeline Item model](#timeline-item-model) and the component will take care of the rest.
@@ -253,6 +269,8 @@ Videos start playing automatically when active and will be automatically paused 
   }
 }
 ```
+
+![media](./readme-assets/media.png)
 
 ### Slideshow mode
 
@@ -304,6 +322,14 @@ yarn run lint
 
 # package lib
 yarn run rollup
+```
+
+## Tests
+
+```sh
+  yarn run test
+
+  yarn run cypress:test
 ```
 
 ## 🔨 Contributing

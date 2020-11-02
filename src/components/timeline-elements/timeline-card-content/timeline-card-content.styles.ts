@@ -10,8 +10,10 @@ export const TimelineItemContentWrapper = styled.section<{
   mode?: TimelineMode;
 }>`
   align-items: flex-start;
+  background: #fff;
   border-radius: 5px;
   display: flex;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
   flex-direction: column;
   justify-content: flex-start;
   line-height: 1.5rem;
@@ -19,12 +21,13 @@ export const TimelineItemContentWrapper = styled.section<{
   position: relative;
   text-align: left;
   width: 100%;
-  outline: 0;
-  background: #fff;
-  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
 
   &.active {
     color: ${(p) => p.theme.primary};
+  }
+
+  &:focus {
+    outline: 1px solid ${(p) => p.theme.primary};
   }
 `;
 
@@ -35,10 +38,10 @@ export const TimelineCardHeader = styled.header`
 export const TimelineContentSubTitle = styled.p<{ dir?: string }>`
   font-size: 0.85rem;
   font-weight: 600;
-  padding-left: 0.5rem;
-  width: 97%;
-  text-align: left;
   margin: 0;
+  padding-left: 0.5rem;
+  text-align: left;
+  width: 97%;
 `;
 
 export const TimelinecardTitle = styled.p<{ theme: Theme; dir?: string }>`
@@ -107,23 +110,19 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
 `;
 
 export const ShowMore = styled.span<{ show?: boolean; theme?: Theme }>`
-  cursor: pointer;
-  font-size: 0.75rem;
-  /* margin-top: 1rem; */
-  margin-bottom: 0.5rem;
-  margin-left: 0.5rem;
-  /* visibility: ${(p) => (p.show ? 'visible' : 'hidden')}; */
-  display: ${(p) => (p.show ? 'flex' : 'none')};
-  /* height: ${(p) => (!p.show ? '0' : '')}; */
-  /* display: flex; */
   align-items: center;
+  align-self: flex-end;
   background: #f5f5f5;
   border-radius: 4px;
-  padding: 0.1rem 0.5rem;
-  align-self: flex-end;
+  cursor: pointer;
+  display: ${(p) => (p.show ? 'flex' : 'none')};
+  font-size: 0.75rem;
   justify-self: flex-end;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
   margin-right: 0.5rem;
   margin-top: auto;
+  padding: 0.1rem 0.5rem;
 
   &:hover {
     background: ${(p) => p.theme.primary};
@@ -176,13 +175,13 @@ export const SlideShowProgressBar = styled.span<{
 `;
 
 export const ChevronIconWrapper = styled.span<{ collapsed?: boolean }>`
-  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 1rem;
+  display: flex;
   height: 1rem;
+  justify-content: center;
   margin-left: 0.2rem;
   margin-top: 0.2rem;
+  width: 1rem;
   ${(p) =>
     p.collapsed
       ? `

@@ -33,7 +33,7 @@ const TimelineTree: React.FunctionComponent<TimelineVerticalModel> = ({
   const handleOnShowMore = useCallback(() => {}, []);
 
   return (
-    <TimelineVerticalWrapper data-testid="tree-main" role="list" tabIndex={0}>
+    <TimelineVerticalWrapper data-testid="tree-main" role="list">
       {items.map((item, index) => {
         let className = '';
 

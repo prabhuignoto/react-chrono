@@ -38,7 +38,9 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
               onClick={onFirst}
               title="Go to First"
               aria-label="first"
-              tabIndex={0}
+              aria-disabled={disableLeft}
+              aria-controls="timeline-main-wrapper"
+              tabIndex={!disableLeft ? 0 : -1}
             >
               <ChevronsLeftIcon />
             </TimelineNavButton>
@@ -52,7 +54,9 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
               onClick={onPrevious}
               title="Previous"
               aria-label="previous"
-              tabIndex={0}
+              aria-disabled={disableLeft}
+              aria-controls="timeline-main-wrapper"
+              tabIndex={!disableLeft ? 0 : -1}
             >
               <ChevronLeft />
             </TimelineNavButton>
@@ -66,7 +70,9 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
               onClick={onNext}
               title="Next"
               aria-label="next"
-              tabIndex={0}
+              aria-disabled={disableRight}
+              aria-controls="timeline-main-wrapper"
+              tabIndex={!disableRight ? 0 : -1}
             >
               <ChevronRightIcon />
             </TimelineNavButton>
@@ -80,7 +86,9 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
               onClick={onLast}
               title="Go to Last"
               aria-label="last"
-              tabIndex={0}
+              aria-disabled={disableRight}
+              aria-controls="timeline-main-wrapper"
+              tabIndex={!disableRight ? 0 : -1}
             >
               <ChevronsRightIcon />
             </TimelineNavButton>
@@ -94,6 +102,8 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
                 onClick={onReplay}
                 title="Play Slideshow"
                 tabIndex={0}
+                aria-controls="timeline-main-wrapper"
+                aria-label="Play Slideshow"
               >
                 <ReplayIcon />
               </ReplayWrapper>
