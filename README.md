@@ -50,9 +50,9 @@
   - [Item Width](#item-width)
   - [Theme](#theme)
 - [📦 CodeSandbox Examples](#-codesandbox-examples)
-- [📦 Build Setup](#-build-setup)
-- [Tests](#tests)
-- [🔨 Contributing](#-contributing)
+- [🔨 Build Setup](#-build-setup)
+- [🧪 Tests](#-tests)
+- [🤝 Contributing](#-contributing)
 - [🧱 Built with](#-built-with)
 - [🎯 What's coming next](#-whats-coming-next)
 - [Meta](#meta)
@@ -144,18 +144,19 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 
 ## Props
 
-| name              | description                                                                           | default      |
-| ----------------- | ------------------------------------------------------------------------------------- | ------------ |
-| mode              | sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING` | `HORIZONTAL`             |
-| items             | collection of [Timeline Item Model](#timeline-item-model).                            | []           |
-| disableNavOnKey   | Disables keyboard navigation.                                                         | false        |
-| slideShow         | Enables slideshow control.                                                            | false        |
-| slideItemDuration | Duration in ms for each Timeline card for `slideshow`                                 | 5000         |
-| itemWidth         | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
-| hideControls      | hides the navigation controls.                                                        | 300          |
-| cardHeight        | sets the minimum height of the timeline card.                                         | 250          |
-| scrollable        | makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).   | true         |
-| theme             | prop to customize the colors.                                                         |              |
+| name                    | description                                                                           | default      |
+| -----------------       | ------------------------------------------------------------------------------------- | ------------ |
+| mode                    | sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING` | `HORIZONTAL`             |
+| items                   | collection of [Timeline Item Model](#timeline-item-model).                            | []           |
+| disableNavOnKey         | disables the keyboard navigation.                                                     | false        |
+| slideShow               | enables the slideshow control.                                                        | false        |
+| slideItemDuration       | duration (in ms), the timeline card is active during  a `slideshow`.                  | 5000         |
+| itemWidth               | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
+| hideControls            | hides the navigation controls.                                                        | 300          |
+| cardHeight              | sets the minimum height of the timeline card.                                         | 250          |
+| scrollable              | makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).   | true         |
+| cardPositionHorizontal  | positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`              |              |
+| theme                   | prop to customize the colors.                                                         |              |
 
 ### Mode
 
@@ -302,7 +303,7 @@ Customize colors with `theme` prop.
 - [Vertical basic](https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?file=/src/App.js)
 - [Vertical mode with Mixed content](https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3)
 
-## 📦 Build Setup
+## 🔨 Build Setup
 
 ``` bash
 # install dependencies
@@ -324,15 +325,17 @@ yarn run lint
 yarn run rollup
 ```
 
-## Tests
+## 🧪 Tests
 
 ```sh
+  # run unit tests
   yarn run test
 
+  # run cypress tests
   yarn run cypress:test
 ```
 
-## 🔨 Contributing
+## 🤝 Contributing
 
 1. [Fork it](https://github.com/prabhuignoto/react-chrono/fork)
 2. Create your feature branch (`git checkout -b new-feature`)
@@ -349,7 +352,7 @@ yarn run rollup
 ## 🎯 What's coming next
 
 - Support for Mobile devices & Tablets (responsive).
-- Accessibility support.
+- Rendering custom content in timeline cards.
 
 ## Meta
 
