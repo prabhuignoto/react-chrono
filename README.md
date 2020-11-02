@@ -297,11 +297,11 @@ Customize colors with `theme` prop.
 
 ## 📦 CodeSandbox Examples
 
-- [Horizontal Basic](https://codesandbox.io/s/condescending-swirles-xodxo?file=/src/App.js)
-- [Vertical Alternating](https://codesandbox.io/s/react-chrono-tree-text-xtksq)
-- [Vertical Alternating with Images](https://codesandbox.io/s/react-chrono-tree-image-uh2nz)
-- [Vertical basic](https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?file=/src/App.js)
-- [Vertical mode with Mixed content](https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3)
+- [Horizontal Basic](https://codesandbox.io/s/keen-shannon-gtjwn?file=/src/data.js)
+- [Vertical basic](https://codesandbox.io/s/react-chrono-vertical-basic-0rm1o?file=/src/App.js)
+- [Vertical Alternating](https://codesandbox.io/s/react-chrono-tree-text-1fcs3?file=/src/App.js)
+- [Vertical All Images](https://codesandbox.io/s/react-chrono-tree-vertical-images-b5zri?file=/src/App.js)
+- [Vertical with Mixed content](https://codesandbox.io/s/react-chrono-tree-image-wn50r?file=/src/App.js)
 
 ## 🔨 Build Setup
 
