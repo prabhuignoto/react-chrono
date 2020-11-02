@@ -10,7 +10,7 @@ const id = 'test_azsxcs1212_test';
 const Horizontal = (
   <Item
     active
-    contentText="This is a test content"
+    cardSubtitle="This is a test content"
     id="34edc"
     mode="HORIZONTAL"
     onClick={() => onClick('CC22CC')}
@@ -24,7 +24,7 @@ const Horizontal = (
 const Vertical = (
   <Item
     active
-    contentText="This is a test content"
+    cardSubtitle="This is a test content"
     id="34ed9c"
     mode="VERTICAL"
     onClick={onClick}

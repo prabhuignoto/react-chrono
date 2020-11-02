@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const TimelineCollectionWrapper = styled.ul`
+export const TimelineHorizontalWrapper = styled.ul`
   display: flex;
   list-style: none;
   margin: 0;
@@ -20,7 +20,6 @@ export const TimelineItemWrapper = styled.li<{ width: number }>`
 
   &.vertical {
     margin-bottom: 2rem;
-    /* min-height: 100px; */
     width: 100%;
   }
 

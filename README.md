@@ -44,13 +44,15 @@
   - [Mode](#mode)
   - [Timeline item Model](#timeline-item-model)
   - [Keyboard Navigation](#keyboard-navigation)
+  - [Scrollable](#scrollable)
   - [Media](#media)
   - [Slideshow mode](#slideshow-mode)
   - [Item Width](#item-width)
   - [Theme](#theme)
 - [📦 CodeSandbox Examples](#-codesandbox-examples)
-- [📦 Build Setup](#-build-setup)
-- [🔨 Contributing](#-contributing)
+- [🔨 Build Setup](#-build-setup)
+- [🧪 Tests](#-tests)
+- [🤝 Contributing](#-contributing)
 - [🧱 Built with](#-built-with)
 - [🎯 What's coming next](#-whats-coming-next)
 - [Meta](#meta)
@@ -74,8 +76,8 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
   const Home = () => {
     const items = [{
       title: "May 1940",
-      contentTitle: "Dunkirk",
-      contentText:"Men of the British Expeditionary Force (BEF) wade out to..",
+      cardTitle: "Dunkirk",
+      cardSubtitle:"Men of the British Expeditionary Force (BEF) wade out to..",
       media: {
         type: "IMAGE",
         source: {
@@ -142,18 +144,19 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 
 ## Props
 
-| name              | description                                                                           | default      |
-| ----------------- | ------------------------------------------------------------------------------------- | ------------ |
-| mode              | sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING` | `HORIZONTAL`             |
-| items             | collection of [Timeline Item Model](#timeline-item-model).                            | []           |
-| disableNavOnKey   | Disables keyboard navigation.                                                         | false        |
-| slideShow         | Enables slideshow control.                                                            | false        |
-| slideItemDuration | Duration in ms for each Timeline card for `slideshow`                                 | 5000         |
-| itemWidth         | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
-| hideControls      | hides the navigation controls.                                                        | 300          |
-| cardHeight        | sets the minimum height of the timeline card.                                         | 250          |
-| scrollable        | makes the timeline scrollable (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).   | true         |
-| theme             | prop to customize the colors.                                                         |              |
+| name                    | description                                                                           | default      |
+| -----------------       | ------------------------------------------------------------------------------------- | ------------ |
+| mode                    | sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING` | `HORIZONTAL`             |
+| items                   | collection of [Timeline Item Model](#timeline-item-model).                            | []           |
+| disableNavOnKey         | disables the keyboard navigation.                                                     | false        |
+| slideShow               | enables the slideshow control.                                                        | false        |
+| slideItemDuration       | duration (in ms), the timeline card is active during  a `slideshow`.                  | 5000         |
+| itemWidth               | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
+| hideControls            | hides the navigation controls.                                                        | 300          |
+| cardHeight              | sets the minimum height of the timeline card.                                         | 250          |
+| scrollable              | makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).   | true         |
+| cardPositionHorizontal  | positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`              |              |
+| theme                   | prop to customize the colors.                                                         |              |
 
 ### Mode
 
@@ -176,15 +179,15 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | name                 | description                                  | type   |
 |----------------------|----------------------------------------------|--------|
 | title                | title of the timeline item                   | String |
-| contentTitle         | title that is displayed on the timeline card | String |
-| contentText          | text displayed in the timeline card          | String |
-| contentDetailedText  | detailed text displayed in the timeline card | String |
+| cardTitle         | title that is displayed on the timeline card | String |
+| cardSubtitle          | text displayed in the timeline card          | String |
+| cardDetailedText  | detailed text displayed in the timeline card | String |
 | media                | media object to set image or video.          | Object |
 
 ```sh
 {
   title: "May 1940",
-  contentTitle: "Dunkirk",
+  cardTitle: "Dunkirk",
   media: {
     name: "dunkirk beach",
     source: {
@@ -192,7 +195,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
     },
     type: "IMAGE"
   },
-  contentText:
+  cardSubtitle:
     "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk."
 }
 ```
@@ -211,6 +214,20 @@ To disable keyboard navigation set `disableNavOnKey` to true.
 <chrono items={items} disableNavOnKey />
 ```
 
+### Scrollable
+
+With the scrollable prop, you can enable scrolling on both `VERTICAL` and `VERTICAL_ALTERNATING` modes.
+
+```sh
+  <chrono items={items} scrollable />
+```
+
+The scrollbar is not shown by default. To enable the scrollbar, pass an object with prop `scrollbar` to `scrollable` prop.
+
+```sh
+  <chrono items={items} scrollable={{scrollbar: true}} />
+```
+
 ### Media
 
 Both images and videos can be embedded in the timeline. Just add the `media` attribute to the [Timeline Item model](#timeline-item-model) and the component will take care of the rest.
@@ -222,7 +239,7 @@ Both images and videos can be embedded in the timeline. Just add the `media` att
 ```sh
 {
   title: "May 1940",
-  contentTitle: "Dunkirk",
+  cardTitle: "Dunkirk",
   media: {
     name: "dunkirk beach",
     source: {
@@ -242,7 +259,7 @@ Videos start playing automatically when active and will be automatically paused 
 ```sh
 {
   title: "7 December 1941",
-  contentTitle: "Pearl Harbor",
+  cardTitle: "Pearl Harbor",
   media: {
     source: {
       url: "/pearl-harbor.mp4",
@@ -253,6 +270,8 @@ Videos start playing automatically when active and will be automatically paused 
   }
 }
 ```
+
+![media](./readme-assets/media.png)
 
 ### Slideshow mode
 
@@ -284,7 +303,7 @@ Customize colors with `theme` prop.
 - [Vertical basic](https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?file=/src/App.js)
 - [Vertical mode with Mixed content](https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3)
 
-## 📦 Build Setup
+## 🔨 Build Setup
 
 ``` bash
 # install dependencies
@@ -306,7 +325,17 @@ yarn run lint
 yarn run rollup
 ```
 
-## 🔨 Contributing
+## 🧪 Tests
+
+```sh
+  # run unit tests
+  yarn run test
+
+  # run cypress tests
+  yarn run cypress:test
+```
+
+## 🤝 Contributing
 
 1. [Fork it](https://github.com/prabhuignoto/react-chrono/fork)
 2. Create your feature branch (`git checkout -b new-feature`)
@@ -323,7 +352,7 @@ yarn run rollup
 ## 🎯 What's coming next
 
 - Support for Mobile devices & Tablets (responsive).
-- Accessibility support.
+- Rendering custom content in timeline cards.
 
 ## Meta
 

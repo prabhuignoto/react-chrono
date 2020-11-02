@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import Content from '../timeline-card-content';
 
@@ -18,10 +18,4 @@ test('Test Timeline Item Content Snapshot', () => {
   );
   const contentElement = getByText(/test/i);
   expect(contentElement).toMatchSnapshot();
-});
-
-test('Test Timeline Item Content Snapshot', () => {
-  render(<Content content="This is a test" active onShowMore={fn} />);
-  const element = screen.getByText(/this is a test/i);
-  expect(element.parentElement).toHaveClass('active');
 });

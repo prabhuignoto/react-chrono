@@ -3,11 +3,11 @@ import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
 
 export const TimelineNavWrapper = styled.ul<{ theme?: Theme }>`
+  background: rgba(229, 229, 229, 0.85);
   border-radius: 25px;
   display: flex;
   list-style: none;
   padding: 0.25rem 0.25rem;
-  background: rgba(229, 229, 229, 0.85);
 `;
 
 export const TimelineNavItem = styled.li<{ disable?: boolean }>`
@@ -30,10 +30,9 @@ export const TimelineNavButton = styled.button<{
   height: 1.75rem;
   justify-content: center;
   margin: 0 0.2rem;
-  outline: 0;
-  width: 1.75rem;
   padding: 0;
-  transition: all 0.2s ease-in;
+  transition: all 0.1s ease-in;
+  width: 1.75rem;
 
   transform: ${(p) => {
     if (p.mode !== 'HORIZONTAL') {
@@ -43,7 +42,8 @@ export const TimelineNavButton = styled.button<{
 
   &:active {
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.25));
-    transform: rotate(90deg) scale(0.85);
+    transform: ${(p) => (p.mode !== 'HORIZONTAL' ? 'rotate(90deg)' : '')}
+      scale(0.9);
   }
 
   svg {
@@ -55,8 +55,8 @@ export const TimelineNavButton = styled.button<{
 export const TimelineControlContainer = styled.div<{
   slideShowActive?: boolean;
 }>`
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
   visibility: ${(p) => (p.slideShowActive ? 'hidden' : 'visible')};
 `;
@@ -71,9 +71,10 @@ export const ControlButton = styled.div<{ theme?: Theme }>`
   justify-content: center;
   margin-left: 0.5rem;
   width: 1.75rem;
+  outline: 0;
+  color: #fff;
 
   svg {
-    color: #fff;
     width: 80%;
     height: 80%;
   }

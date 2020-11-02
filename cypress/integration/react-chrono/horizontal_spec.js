@@ -5,57 +5,53 @@ context('Chrono.Vertical.Basic', () => {
     cy.visit('http://localhost:8080/horizontal');
   });
 
-  // it('check length', () => {
-  //   cy.get('.timeline-horz-item-container').should("have.length", 13);
-  // })
+  it('check length', () => {
+    cy.get('.timeline-horz-item-container').should("have.length", 13);
+  })
 
-  // it('check card contents', () => {
-  //   cy.get(".timeline-card-content").children().should("have.length", 4)
-  // });
+  it("check timeline controls", () => {
+    cy.get(".timeline-controls").children().should("have.length", 5)
+  });
 
-  // it("check timeline controls", () => {
-  //   cy.get(".timeline-controls").children().should("have.length", 5)
-  // });
+  it('check read more', () => {
+    cy.get('.timeline-card-content').within(() => {
+      cy.get('.card-description').should('have.class', 'show-less');
+      cy.get('.show-more').click();
+      cy.wait(400);
+      cy.get('.card-description').should('not.have.class', 'show-less');
+    });
+  });
 
-  // it('check read more', () => {
-  //   cy.get('.timeline-card-content').within(() => {
-  //     cy.get('.card-description').should('have.class', 'show-less');
-  //     cy.get('.show-more').click();
-  //     cy.wait(400);
-  //     cy.get('.card-description').should('not.have.class', 'show-less');
-  //   });
-  // });
+  it('interact with timeline point', () => {
+    const pick = 12;
+    cy.get('.timeline-main-wrapper').scrollTo('right');
+    cy.wait(1500);
 
-  // it('interact with timeline point', () => {
-  //   const pick = 12;
-  //   cy.get('.timeline-main-wrapper').scrollTo('right');
-  //   cy.wait(1500);
+    cy.get('.timeline-horz-item-container')
+      .eq(pick)
+      .find('.timeline-circle')
+      .click();
+    cy.wait(400);
 
-  //   cy.get('.timeline-horz-item-container')
-  //     .eq(pick)
-  //     .find('.timeline-circle')
-  //     .click();
-  //   cy.wait(400);
+    cy.get('.timeline-card-content').within(() => {
+      cy.get('.card-title').should('contain', 'Nagasaki');
+      cy.get('.card-sub-title').should(
+        'contain',
+        'Atomic bomb mushroom cloud over the Japanese city of Nagasaki',
+      );
+    });
 
-  //   cy.get('.timeline-card-content').within(() => {
-  //     cy.get('.card-title').should('contain', 'Nagasaki');
-  //     cy.get('.card-sub-title').should(
-  //       'contain',
-  //       'Atomic bomb mushroom cloud over the Japanese city of Nagasaki',
-  //     );
-  //   });
-
-  //   cy.get('.timeline-main-wrapper').scrollTo('left');
-  //   cy.wait(1500);
-  //   cy.get('.timeline-horz-item-container')
-  //     .eq(0)
-  //     .find('.timeline-circle')
-  //     .click();
-  //   cy.wait(400);
-  //   cy.get('.timeline-card-content').within(() => {
-  //     cy.get('.card-title').should('contain', 'Dunkirk');
-  //   });
-  // });
+    cy.get('.timeline-main-wrapper').scrollTo('left');
+    cy.wait(1500);
+    cy.get('.timeline-horz-item-container')
+      .eq(0)
+      .find('.timeline-circle')
+      .click();
+    cy.wait(400);
+    cy.get('.timeline-card-content').within(() => {
+      cy.get('.card-title').should('contain', 'Dunkirk');
+    });
+  });
 
   it('check navigation controls', () => {
     cy.get('.timeline-controls').within(() => {

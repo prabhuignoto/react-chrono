@@ -1,5 +1,5 @@
 import { Theme } from './Theme';
-import { Scroll } from './TimelineCollnModel';
+import { Scroll } from './TimelineHorizontalModel';
 import { TimelineCardModel } from './TimelineItemModel';
 import { Media } from './TimelineMediaModel';
 import { TimelineMode } from './TimelineModel';
@@ -74,14 +74,14 @@ interface CommonBranchAndLeafModel extends CommonPropsModel {
   id?: string;
 }
 
-export interface TreeLeafModel extends CommonBranchAndLeafModel {
+export interface VerticalCircleModel extends CommonBranchAndLeafModel {
   onActive: (timelinePointOffset: number) => void;
 }
 
 export interface VerticalItemModel extends CommonBranchAndLeafModel {
-  contentDetailedText?: string;
-  contentText: string;
-  contentTitle?: string;
+  cardDetailedText?: string;
+  cardSubtitle: string;
+  cardTitle?: string;
   index: number;
   media?: Media;
   onShowMore?: () => void;
@@ -94,7 +94,7 @@ export interface VerticalItemModel extends CommonBranchAndLeafModel {
   ) => void;
 }
 
-export interface TimelineTreeModel extends CommonPropsModel {
+export interface TimelineVerticalModel extends CommonPropsModel {
   activeTimelineItem: number;
   autoScroll: (s: Partial<Scroll>) => void;
   items: TimelineCardModel[];

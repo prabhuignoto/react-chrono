@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import { TimelineProps } from '../models/TimelineModel';
 import Timeline from './timeline/timeline';
+import 'focus-visible';
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   items,
@@ -18,6 +19,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   cardHeight = 200,
   hideControls = false,
   scrollable = true,
+  cardPositionHorizontal = 'BOTTOM',
 }: Partial<TimelineProps>) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
@@ -129,6 +131,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       cardHeight={cardHeight}
       hideControls={hideControls}
       scrollable={scrollable}
+      cardPositionHorizontal={cardPositionHorizontal}
     />
   );
 };

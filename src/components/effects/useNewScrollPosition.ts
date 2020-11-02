@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Scroll } from '../../models/TimelineCollnModel';
+import { Scroll } from '../../models/TimelineHorizontalModel';
 import { TimelineMode } from '../../models/TimelineModel';
 
 let useNewScrollPosition: (

@@ -1,64 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test Timeline Item render - Horizontal 1`] = `
+exports[`Test tree branch render 1`] = `
 <div
-  class="horizontal css-s6d62l"
-  data-testid="timeline-item"
+  class="test-class  vertical-item-row css-1e6jkft"
+  data-testid="vertical-item-row"
+  role="listitem"
 >
   <div
-    class="css-1ue7ww8"
-  >
-    <div
-      aria-label="test title"
-      class="timeline-circle horizontal active css-10jefxi"
-      data-testid="timeline-circle"
-      tabindex="0"
-    />
-  </div>
-  <div
-    class="horizontal top css-17i3qvw"
-    data-testid="timeline-title"
+    class="test-class css-14hjzcx"
   >
     <div
       class="timeline-item-title active css-1i2f2mb"
     >
-      test title
+      branch title
     </div>
   </div>
-</div>
-`;
-
-exports[`Test Timeline Item render - Vertical 1`] = `
-<div
-  class="vertical css-s6d62l"
-  data-testid="timeline-item"
->
   <div
-    class="css-1ue7ww8"
+    class="test-class card-content-wrapper  css-1g8c3yv"
   >
-    <div
-      aria-label="test title"
-      class="timeline-circle vertical active css-10jefxi"
-      data-testid="timeline-circle"
-      tabindex="0"
-    />
-  </div>
-  <div
-    class="vertical timeline-horz-card-wrapper css-455vfh"
-  >
-    <div
-      class="vertical bottom css-17i3qvw"
-      data-testid="timeline-title"
-    >
-      <div
-        class="timeline-item-title active css-1i2f2mb"
-      >
-        test title
-      </div>
-    </div>
     <section
       class="timeline-card-content active css-sx2voi"
-      mode="VERTICAL"
       tabindex="0"
     >
       <header
@@ -67,7 +28,7 @@ exports[`Test Timeline Item render - Vertical 1`] = `
         <p
           class="card-sub-title css-4qf4pr"
         >
-          This is a test content
+          Tree branch test
         </p>
       </header>
       <div
@@ -103,6 +64,22 @@ exports[`Test Timeline Item render - Vertical 1`] = `
         </span>
       </span>
     </section>
+  </div>
+  <div
+    class="test-class css-n24itb"
+    data-testid="tree-leaf"
+    role="button"
+  >
+    <div
+      aria-label="select timeline"
+      class="test-class css-kooiip"
+      data-testid="tree-leaf-click"
+      role="button"
+    >
+      <div
+        class="active css-10jefxi"
+      />
+    </div>
   </div>
 </div>
 `;

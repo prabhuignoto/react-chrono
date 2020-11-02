@@ -2,8 +2,7 @@
 
 exports[`Check Timeline Item Title Snapshot 1`] = `
 <div
-  class="active css-1i2f2mb"
-  title="Test"
+  class="timeline-item-title active css-1i2f2mb"
 >
   Test
 </div>

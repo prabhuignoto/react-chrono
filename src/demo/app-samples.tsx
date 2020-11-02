@@ -35,6 +35,8 @@ export const HorizontalBasic: React.FunctionComponent<{
           cardHeight={300}
           slideShow
           slideItemDuration={2550}
+          cardPositionHorizontal="TOP"
+          itemWidth={200}
         />
       </ComponentContainer>
     </Horizontal>
@@ -107,7 +109,7 @@ export const VerticalTree: FunctionComponent<{
         mode="VERTICAL_ALTERNATING"
         slideShow
         slideItemDuration={2350}
-        scrollable
+        scrollable={{scrollbar: false}}
         // theme={{ primary: '#4a4e69', secondary: '#c9ada7' }}
       />
     </ComponentContainerTree>

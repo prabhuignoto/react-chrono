@@ -8,18 +8,19 @@ import React, {
 import { TimelineContentModel } from '../../../models/TimelineContentModel';
 import { MediaState } from '../../../models/TimelineMediaModel';
 import ChevronIcon from '../../icons/chev-right';
-import { MemoContentText, MemoTitle } from '../memoized';
+import { MemoSubTitle, MemoTitle } from '../memoized';
 import CardMedia from '../timeline-card-media/timeline-card-media';
 import {
   ChevronIconWrapper,
   ShowMore,
   SlideShowProgressBar,
+  TimelineCardHeader,
   TimelineContentDetails,
   TimelineContentDetailsWrapper,
   TimelineItemContentWrapper,
 } from './timeline-card-content.styles';
 
-const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
+const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
   active,
   cardHeight,
   content,
@@ -144,6 +145,10 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       setStartWidth(containerWidth.current);
       setupTimer(slideItemDuration);
     }
+
+    if (active) {
+      containerRef.current && containerRef.current.focus();
+    }
   }, [active, slideShowActive]);
 
   const handleMediaState = useCallback(
@@ -179,11 +184,15 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
       onMouseEnter={tryHandlePauseSlideshow}
       onMouseLeave={tryHandleResumeSlideshow}
       ref={containerRef}
+      tabIndex={0}
     >
-      {/* main title */}
-      {!media && <MemoTitle title={title} theme={theme} />}
-      {/* main timeline text */}
-      {!media && <MemoContentText content={content} />}
+      <TimelineCardHeader>
+        {/* main title */}
+        {!media && <MemoTitle title={title} theme={theme} />}
+        {/* main timeline text */}
+        {!media && <MemoSubTitle content={content} />}
+      </TimelineCardHeader>
+
       {/* render media video or image */}
       {media && (
         <CardMedia
@@ -208,6 +217,7 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
           !showMore ? 'show-less card-description' : 'card-description'
         }
         theme={theme}
+        aria-expanded={showMore}
       >
         {detailedText && (
           <TimelineContentDetails
@@ -228,9 +238,18 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
               onShowMore();
             }
           }}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              if ((active && paused) || !slideShowActive) {
+                setShowMore(!showMore);
+                onShowMore();
+              }
+            }
+          }}
           className="show-more"
           show={canShowMore}
           theme={theme}
+          tabIndex={0}
         >
           {<span>{showMore ? 'read less' : 'read more'}</span>}
           <ChevronIconWrapper collapsed={!showMore}>
@@ -251,4 +270,4 @@ const TimelineItemContent: React.FunctionComponent<TimelineContentModel> = ({
   );
 };
 
-export default TimelineItemContent;
+export default TimelineCardContent;

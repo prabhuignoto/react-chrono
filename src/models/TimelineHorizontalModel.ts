@@ -2,7 +2,7 @@ import { Theme } from './Theme';
 import { TimelineCardModel } from './TimelineItemModel';
 import { TimelineMode } from './TimelineModel';
 
-export interface TimelineCollectionModel {
+export interface TimelineHorizontalModel {
   autoScroll: (t: Partial<Scroll>) => void;
   handleItemClick: (id?: string) => void;
   itemWidth: number;

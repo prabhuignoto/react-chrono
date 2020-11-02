@@ -15,7 +15,6 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
 }: TitleModel) => (
   <TitleWrapper
     className={active ? 'timeline-item-title active' : 'timeline-item-title'}
-    title={title}
     theme={theme}
   >
     {title}

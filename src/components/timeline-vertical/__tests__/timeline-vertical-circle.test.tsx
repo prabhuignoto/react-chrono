@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import Leaf from '../timeline-tree-leaf';
+import Leaf from '../timeline-vertical-circle';
 
 test('Check Timeline Leaf render', () => {
   const onClick = jest.fn();

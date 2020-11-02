@@ -1,12 +1,12 @@
 import React from 'react';
-import { TimelineCollectionModel } from '../../models/TimelineCollnModel';
-import TimelineItem from '../timeline-elements/timeline-card/timeline-card';
+import { TimelineHorizontalModel } from '../../models/TimelineHorizontalModel';
+import TimelineCard from '../timeline-elements/timeline-card/timeline-card';
 import {
-  TimelineCollectionWrapper,
+  TimelineHorizontalWrapper,
   TimelineItemWrapper,
 } from './timeline-horizontal.styles';
 
-const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
+const TimelineCollection: React.FunctionComponent<TimelineHorizontalModel> = ({
   items,
   itemWidth,
   handleItemClick,
@@ -18,9 +18,9 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
   cardHeight,
   slideItemDuration,
   onElapsed,
-}: TimelineCollectionModel) => {
+}: TimelineHorizontalModel) => {
   return (
-    <TimelineCollectionWrapper
+    <TimelineHorizontalWrapper
       className={`${mode.toLowerCase()} timeline-horz-container`}
       data-testid="timeline-collection"
     >
@@ -32,7 +32,7 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
             item.visible ? 'visible' : ''
           } timeline-horz-item-container`}
         >
-          <TimelineItem
+          <TimelineCard
             {...item}
             onClick={handleItemClick}
             autoScroll={autoScroll}
@@ -46,7 +46,7 @@ const TimelineCollection: React.FunctionComponent<TimelineCollectionModel> = ({
           />
         </TimelineItemWrapper>
       ))}
-    </TimelineCollectionWrapper>
+    </TimelineHorizontalWrapper>
   );
 };
 

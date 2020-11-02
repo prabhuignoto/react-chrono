@@ -11,7 +11,6 @@ export const Wrapper = styled.div`
 
   &.vertical {
     justify-content: flex-start;
-    /* height: 100%; */
   }
 `;
 
@@ -44,16 +43,16 @@ const show = keyframes`
   }
 `;
 
-export const TimelinePointWrapper = styled.div`
-  width: 5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+export const CircleWrapper = styled.div`
   /* height: 100%; */
+  align-items: center;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  width: 5rem;
 `;
 
-export const TimelinePoint = styled.div<{ theme: Theme }>`
+export const Circle = styled.div<{ theme: Theme }>`
   background: ${(p) => p.theme.primary};
   border-radius: 50%;
   cursor: pointer;
@@ -70,11 +69,11 @@ export const TimelinePoint = styled.div<{ theme: Theme }>`
       content: '';
       display: block;
       height: 0.75rem;
+      left: 50%;
       position: absolute;
       right: 0;
       top: 50%;
       transform: translateY(-50%) translateX(-50%);
-      left: 50%;
       width: 0.75rem;
       z-index: -1;
     }
@@ -113,6 +112,5 @@ export const TimelineContentContainer = styled.div<{ position?: string }>`
     width: calc(100% - 5rem);
     margin-left: auto;
     flex-direction: column;
-    /* height: 100%; */
   }
 `;

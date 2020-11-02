@@ -1,12 +1,12 @@
 import { nanoid } from 'nanoid';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { Scroll } from '../../models/TimelineCollnModel';
+import { Scroll } from '../../models/TimelineHorizontalModel';
 import { TimelineCardModel } from '../../models/TimelineItemModel';
 import { TimelineModel } from '../../models/TimelineModel';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import TimelineCollection from '../timeline-horizontal/timeline-horizontal';
-import TimelineTree from '../timeline-vertical/timeline-vertical';
+import TimelineVertical from '../timeline-vertical/timeline-vertical';
 import {
   Outline,
   TimelineContentRender,
@@ -15,6 +15,7 @@ import {
   TimelineMainWrapper,
   Wrapper,
 } from './timeline.style';
+import 'focus-visible';
 
 const Timeline: React.FunctionComponent<TimelineModel> = (
   props: TimelineModel,
@@ -39,6 +40,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     slideItemDuration,
     hideControls,
     scrollable,
+    cardPositionHorizontal,
   } = props;
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -48,7 +50,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const timelineMainRef = useRef<HTMLDivElement>(null);
 
   const canScrollTimeline = useMemo(() => {
-    return scrollable && !slideShowRunning;
+    if (!slideShowRunning) {
+      return scrollable;
+    }
   }, [slideShowRunning, scrollable]);
 
   // generate a unique id for the timeline content
@@ -62,8 +66,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
+    // event.preventDefault();
+    // event.stopPropagation();
 
     const { keyCode } = event;
 
@@ -129,7 +133,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       const element = timelineMainRef.current;
 
       if (element) {
-        const childElements = element.querySelectorAll('.branch-main');
+        const childElements = element.querySelectorAll('.vertical-item-row');
         Array.from(childElements).forEach((elem) => {
           if (observer.current) {
             observer.current.observe(elem);
@@ -153,22 +157,22 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               // show img and video when visible.
               element.querySelectorAll('img').forEach(show);
               element.querySelectorAll('video').forEach(show);
-              element
-                .querySelectorAll(':scope > div')
-                .forEach(
-                  (ele) =>
-                    ((ele as HTMLDivElement).style.visibility = 'visible'),
-                );
+              // element
+              //   .querySelectorAll(':scope > div')
+              //   .forEach(
+              //     (ele) =>
+              //       ((ele as HTMLDivElement).style.visibility = 'visible'),
+              //   );
             } else {
               // hide img and video when not visible.
               element.querySelectorAll('img').forEach(hide);
               element.querySelectorAll('video').forEach(hide);
-              element
-                .querySelectorAll(':scope > div')
-                .forEach(
-                  (ele) =>
-                    ((ele as HTMLDivElement).style.visibility = 'hidden'),
-                );
+              // element
+              //   .querySelectorAll(':scope > div')
+              //   .forEach(
+              //     (ele) =>
+              //       ((ele as HTMLDivElement).style.visibility = 'hidden'),
+              //   );
             }
           });
         },
@@ -189,22 +193,22 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   return (
     <Wrapper
-      tabIndex={0}
       onKeyDown={(evt: React.KeyboardEvent<HTMLDivElement>) =>
         !disableNavOnKey && !slideShowRunning ? handleKeySelection(evt) : null
       }
-      className={`${mode.toLowerCase()}`}
+      className={`${mode.toLowerCase()} js-focus-visible focus-visible`}
+      cardPositionHorizontal={cardPositionHorizontal}
     >
       <TimelineMainWrapper
         ref={timelineMainRef}
         scrollable={canScrollTimeline}
         className={`${mode.toLowerCase()} timeline-main-wrapper`}
-        // onWheel={(evt) => handleMouseWheel.callback(evt)}
+        id="timeline-main-wrapper"
         theme={theme}
       >
         {/* VERTICAL ALTERNATING */}
         {mode === 'VERTICAL_ALTERNATING' ? (
-          <TimelineTree
+          <TimelineVertical
             items={items as TimelineCardModel[]}
             onClick={handleTimelineItemClick}
             activeTimelineItem={activeTimelineItem}
@@ -240,7 +244,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
         {/* VERTICAL */}
         {mode === 'VERTICAL' ? (
-          <TimelineTree
+          <TimelineVertical
             items={items as TimelineCardModel[]}
             onClick={handleTimelineItemClick}
             activeTimelineItem={activeTimelineItem}

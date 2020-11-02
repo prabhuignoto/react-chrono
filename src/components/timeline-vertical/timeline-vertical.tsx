@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
-import { TimelineTreeModel } from '../../models/TimelineTreeModel';
+import { TimelineVerticalModel } from '../../models/TimelineVerticalModel';
 import TreeBranch from './timeline-vertical-item';
 import { TimelineVerticalWrapper } from './timeline-vertical.styles';
 
 // This component is used to render both tree and vertical modes
-const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
+const TimelineTree: React.FunctionComponent<TimelineVerticalModel> = ({
   items,
   onClick,
   autoScroll,
@@ -15,7 +15,7 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   cardHeight,
   slideItemDuration,
   onElapsed,
-}: TimelineTreeModel) => {
+}: TimelineVerticalModel) => {
   // check if the timeline that has become active is visible.
   // if not auto scroll the content and bring it to the view.
   const handleOnActive = useCallback(
@@ -33,7 +33,7 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
   const handleOnShowMore = useCallback(() => {}, []);
 
   return (
-    <TimelineVerticalWrapper data-testid="tree-main">
+    <TimelineVerticalWrapper data-testid="tree-main" role="list">
       {items.map((item, index) => {
         let className = '';
 
@@ -50,14 +50,14 @@ const TimelineTree: React.FunctionComponent<TimelineTreeModel> = ({
             id={item.id}
             index={index}
             onClick={onClick}
-            contentText={item.contentText}
+            cardSubtitle={item.cardSubtitle}
             active={item.active}
             onActive={handleOnActive}
             key={item.id}
             title={item.title}
             visible={item.visible}
-            contentTitle={item.contentTitle}
-            contentDetailedText={item.contentDetailedText}
+            cardTitle={item.cardTitle}
+            cardDetailedText={item.cardDetailedText}
             theme={theme}
             onShowMore={handleOnShowMore}
             alternateCards={alternateCards}

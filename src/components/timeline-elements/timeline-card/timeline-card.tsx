@@ -1,23 +1,23 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { TimelineCardModel } from '../../../models/TimelineItemModel';
-import TimelineItemContent from '../timeline-card-content/timeline-card-content';
+import TimelineCardContent from '../timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import {
+  Circle,
+  CircleWrapper,
   TimelineContentContainer,
-  TimelinePoint,
-  TimelinePointWrapper,
   TimelineTitleContainer,
   Wrapper,
 } from './timeline-card.styles';
 
-const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
+const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   active,
   autoScroll,
   cardHeight,
-  contentDetailedText,
-  contentText,
-  contentTitle,
+  cardDetailedText,
+  cardSubtitle,
+  cardTitle,
   id,
   media,
   mode,
@@ -93,11 +93,11 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
             <TimelineItemTitle title={title} active={active} theme={theme} />
           </TimelineTitleContainer>
         )}
-        <TimelineItemContent
-          content={contentText}
+        <TimelineCardContent
+          content={cardSubtitle}
           active={active}
-          title={contentTitle}
-          detailedText={contentDetailedText}
+          title={cardTitle}
+          detailedText={cardDetailedText}
           onShowMore={handleOnShowMore}
           theme={theme}
           slideShowActive={slideShowRunning}
@@ -128,8 +128,8 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
     >
       {mode === 'HORIZONTAL' && active ? showTimelineContent() : null}
 
-      <TimelinePointWrapper>
-        <TimelinePoint
+      <CircleWrapper>
+        <Circle
           className={`timeline-circle ${mode.toLowerCase()} ${
             active ? 'active' : 'in-active'
           }`}
@@ -137,8 +137,9 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
           ref={circleRef}
           data-testid="timeline-circle"
           theme={theme}
-        ></TimelinePoint>
-      </TimelinePointWrapper>
+          aria-label={title}
+        ></Circle>
+      </CircleWrapper>
 
       {mode === 'HORIZONTAL' && (
         <TimelineTitleContainer
@@ -153,4 +154,4 @@ const TimelineItem: React.FunctionComponent<TimelineCardModel> = ({
   );
 };
 
-export default TimelineItem;
+export default TimelineCard;
