@@ -11,9 +11,9 @@ export const TimelineItemContentWrapper = styled.section<{
 }>`
   align-items: flex-start;
   background: #fff;
-  border-radius: 5px;
+  border-radius: 4px;
   display: flex;
-  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
   flex-direction: column;
   justify-content: flex-start;
   line-height: 1.5rem;
@@ -21,10 +21,6 @@ export const TimelineItemContentWrapper = styled.section<{
   position: relative;
   text-align: left;
   width: 100%;
-
-  &.active {
-    color: ${(p) => p.theme.primary};
-  }
 
   &:focus {
     outline: 1px solid ${(p) => p.theme.primary};
@@ -35,13 +31,17 @@ export const TimelineCardHeader = styled.header`
   width: 100%;
 `;
 
-export const TimelineContentSubTitle = styled.p<{ dir?: string }>`
+export const TimelineContentSubTitle = styled.p<{
+  dir?: string;
+  theme?: Theme;
+}>`
   font-size: 0.85rem;
   font-weight: 600;
   margin: 0;
   padding-left: 0.5rem;
   text-align: left;
   width: 97%;
+  color: ${(p) => p.theme.primary};
 `;
 
 export const TimelinecardTitle = styled.p<{ theme: Theme; dir?: string }>`
@@ -55,7 +55,7 @@ export const TimelinecardTitle = styled.p<{ theme: Theme; dir?: string }>`
     color: ${(p) => p.theme.primary};
   }
   text-align: left;
-  width: 97%;
+  width: 95%;
 `;
 
 export const TimelineContentDetails = styled.p`
@@ -64,26 +64,27 @@ export const TimelineContentDetails = styled.p`
   font-weight: 400;
   margin: 0;
   touch-action: none;
-  width: 97%;
-
-  &.active {
-    background: #f9f9f9;
-  }
+  width: 100%;
 `;
 
-export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
+export const TimelineContentDetailsWrapper = styled.div<{
+  theme: Theme;
+  customContent?: boolean;
+}>`
   align-items: center;
   display: flex;
   flex-direction: column;
   font-size: 0.8rem;
+  margin: 0 auto;
   margin-bottom: 0.5rem;
-  max-height: 200px;
+  ${(p) => (!p.customContent ? 'max-height: 200px;' : '')}
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-color: ${(p) => p.theme.primary} default;
   scrollbar-width: thin;
   transition: max-height 0.1s linear;
-  width: 100%;
+  width: 97%;
+  padding: 0.2rem 0.2rem;
 
   &.show-less {
     max-height: 50px;
@@ -96,7 +97,7 @@ export const TimelineContentDetailsWrapper = styled.div<{ theme: Theme }>`
   }
 
   &::-webkit-scrollbar {
-    width: 0.25em;
+    width: 0.3em;
   }
 
   &::-webkit-scrollbar-track {

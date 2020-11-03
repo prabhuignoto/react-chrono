@@ -34,6 +34,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     title,
     visible,
     onElapsed,
+    contentDetailsChildren,
   } = props;
 
   const handleOnActive = (offset: number) => {
@@ -83,10 +84,11 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
           onShowMore={() =>
             setTimeout(() => {
               handleOnActive(0);
-            }, 200)
+            }, 100)
           }
           branchDir={className}
           slideItemDuration={slideItemDuration}
+          customContent={contentDetailsChildren}
           onElapsed={onElapsed || function () {}}
         />
       </TimelineCardContentWrapper>

@@ -57,11 +57,14 @@ export const TimelineMainWrapper = styled.div<{
   scrollbar-color: ${(p) => p.theme.primary} default;
   scrollbar-width: thin;
   width: 100%;
-  padding: ${(p) =>
-    (p.scrollable instanceof Boolean && p.scrollable === true) ||
-    !(p.scrollable as { scrollbar: boolean }).scrollbar
-      ? '1rem 2rem 1rem 0'
-      : ''};
+  padding: ${(p) => {
+    if (p.scrollable) {
+      return (p.scrollable instanceof Boolean && p.scrollable) ||
+        (p.scrollable as { scrollbar: boolean }).scrollbar
+        ? ''
+        : '0 1rem 0';
+    }
+  }};
 
   &::-webkit-scrollbar {
     width: 0.5em;

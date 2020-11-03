@@ -12,13 +12,16 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
   title,
   active,
   theme,
-}: TitleModel) => (
-  <TitleWrapper
-    className={active ? 'timeline-item-title active' : 'timeline-item-title'}
-    theme={theme}
-  >
-    {title}
-  </TitleWrapper>
-);
+}: TitleModel) => {
+  return (
+    <TitleWrapper
+      className={active ? 'timeline-item-title active' : 'timeline-item-title'}
+      theme={theme}
+      hide={!title}
+    >
+      {title}
+    </TitleWrapper>
+  );
+};
 
 export default TimelineItemTitle;

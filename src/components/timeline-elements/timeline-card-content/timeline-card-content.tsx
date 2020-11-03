@@ -35,6 +35,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
   theme,
   title,
   onClick,
+  customContent,
 }: TimelineContentModel) => {
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
@@ -190,7 +191,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
         {/* main title */}
         {!media && <MemoTitle title={title} theme={theme} />}
         {/* main timeline text */}
-        {!media && <MemoSubTitle content={content} />}
+        {!media && <MemoSubTitle content={content} theme={theme} />}
       </TimelineCardHeader>
 
       {/* render media video or image */}
@@ -214,12 +215,17 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
       <TimelineContentDetailsWrapper
         ref={detailsRef}
         className={
-          !showMore ? 'show-less card-description' : 'card-description'
+          !showMore && !customContent
+            ? 'show-less card-description'
+            : 'card-description'
         }
         theme={theme}
         aria-expanded={showMore}
+        customContent={!!customContent}
       >
-        {detailedText && (
+        {customContent ? (
+          <>{customContent}</>
+        ) : (
           <TimelineContentDetails
             className={showMore ? 'active' : ''}
             ref={detailsRef}
@@ -228,6 +234,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
           </TimelineContentDetails>
         )}
       </TimelineContentDetailsWrapper>
+
       {/* display the show more button for textual content */}
       {
         <ShowMore
@@ -257,6 +264,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
           </ChevronIconWrapper>
         </ShowMore>
       }
+
       {canShowProgressBar && (
         <SlideShowProgressBar
           startWidth={startWidth}

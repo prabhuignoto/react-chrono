@@ -187,6 +187,7 @@ export const HorizontalSlideshow: FunctionComponent<{
   </Horizontal>
 );
 
+
 export const VerticalTreeSlideshow: FunctionComponent<{
   type: string;
   cardHeight: number;
@@ -216,6 +217,51 @@ export const VerticalTreeSlideshow: FunctionComponent<{
           />
         </a>
       </SandBox> */}
+    </ComponentContainerTree>
+  </Vertical>
+);
+
+export const VerticalCustomContent: FunctionComponent<{
+  type: string;
+  cardHeight?: number;
+}> = ({ type, cardHeight }) => (
+  <Vertical>
+    <Description>
+      <span>
+        <DescriptionHeader># Slideshow with Tree</DescriptionHeader>
+      </span>
+      <DescriptionContent>
+        SlideShow is supported in all 3 modes.
+      </DescriptionContent>
+    </Description>
+    <ComponentContainerTree type={type}>
+      <Chrono
+        mode="VERTICAL_ALTERNATING"
+        cardHeight={200}
+        scrollable
+      >
+        <div>
+          <img style={{maxWidth:  "100%", maxHeight:  "100%"}}  src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif"/>
+        </div>
+        <div>
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+          </ul>
+        </div>
+        <div>
+          <p>
+            The Battle of Dunkirk (French: Bataille de Dunkerque) was fought in Dunkirk (Dunkerque), France, during the Second World War, between the Allies and Nazi Germany.
+            As the Allies were losing the Battle of France on the Western Front, the Battle of Dunkirk was the defence and evacuation to Britain of British and other Allied forces in Europe from 26 May to 4 June 1940.
+          </p>
+          <p>
+            After the Phoney War, the Battle of France began in earnest on 10 May 1940. To the east, the German Army Group B invaded the Netherlands and advanced westward. In response, the Supreme Allied Commander—French General Maurice Gamelin—initiated "Plan D" and entered Belgium to engage the Germans in the Netherlands. The plan relied heavily on the Maginot Line fortifications along the German–French border, but German forces had already crossed through most of the Netherlands before the French forces arrived.
+            Gamelin instead committed the forces under his command, three mechanised armies, the French First and Seventh Armies and the British Expeditionary Force (BEF), to the River Dyle.
+          </p>
+        </div>
+      </Chrono>
     </ComponentContainerTree>
   </Vertical>
 );

@@ -25,15 +25,11 @@ export const VerticalItemWrapper = styled.div<{
   cardHeight?: number;
   alternateCards?: boolean;
 }>`
-  /* align-items: center; */
   display: flex;
   position: relative;
   visibility: hidden;
   width: 100%;
   align-items: stretch;
-  /* min-height: ${(p) => p.cardHeight}px; */
-  /* max-height: 1200px; */
-  /* height: 0; */
 
   &.left {
     margin-right: auto;
@@ -55,7 +51,7 @@ export const VerticalCircleWrapper = styled.div<{
   display: flex;
   justify-content: center;
   position: relative;
-  width: 8%;
+  width: 10%;
 
   &.left {
     order: 2;
@@ -84,7 +80,7 @@ export const TimelineCardContentWrapper = styled.div<{
   alternateCards?: boolean;
 }>`
   visibility: hidden;
-  ${(p) => (p.alternateCards ? 'width: 50%;' : 'width: 70%; height: auto;')};
+  ${(p) => (p.alternateCards ? 'width: 50%;' : 'width: 75%; height: auto;')};
   /* padding: 1rem 0; */
 
   &.left {
@@ -111,7 +107,7 @@ export const TimelineTitleWrapper = styled.div<{
 }>`
   align-items: center;
   display: flex;
-  ${(p) => (p.alternateCards ? 'width: 50%' : 'width: 10%')};
+  ${(p) => (p.alternateCards ? 'width: 50%' : 'width: 15%')};
 
   &.left {
     justify-content: flex-start;

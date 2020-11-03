@@ -1,9 +1,15 @@
+import 'focus-visible';
 import { nanoid } from 'nanoid';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import { TimelineProps } from '../models/TimelineModel';
 import Timeline from './timeline/timeline';
-import 'focus-visible';
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   items,
@@ -20,6 +26,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   hideControls = false,
   scrollable = true,
   cardPositionHorizontal = 'BOTTOM',
+  children,
 }: Partial<TimelineProps>) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
@@ -27,7 +34,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
 
   const initItems = () =>
-    items
+    items && items.length
       ? items.map((item, index) => {
           return Object.assign({}, item, {
             id: nanoid(),
@@ -35,18 +42,13 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
             active: index === 0,
           });
         })
-      : [];
-
-  useEffect(() => {
-    if (!items) {
-      return;
-    }
-
-    if (slideShowActive && slideShow) {
-      // setupSlideShow();
-    }
-    // eslint-disable-next-line
-  }, [slideShowActive]);
+      : Array.from({ length: (children as ReactNode[]).length }).map<
+          Partial<TimelineItemModel>
+        >((item, index) => ({
+          id: nanoid(),
+          visible: true,
+          active: index === 0,
+        }));
 
   useEffect(() => {
     const items = initItems();
@@ -64,8 +66,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     );
     setActiveTimelineItem(actvTimelineIndex);
 
-    if (items) {
-      if (items.length - 1 === actvTimelineIndex) {
+    if (timeLineItems) {
+      if (timeLineItems.length - 1 === actvTimelineIndex) {
         setSlideshowActive(false);
       }
     }
@@ -77,10 +79,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   }, []);
 
   const handleOnNext = () => {
-    if (!items) {
+    if (!timeLineItems.length) {
       return;
     }
-    if (activeTimelineItem < items.length - 1) {
+    if (activeTimelineItem < timeLineItems.length - 1) {
       const newTimeLineItem = activeTimelineItem + 1;
 
       handleTimelineUpdate(newTimeLineItem);
@@ -132,6 +134,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       hideControls={hideControls}
       scrollable={scrollable}
       cardPositionHorizontal={cardPositionHorizontal}
+      contentDetailsChildren={children}
     />
   );
 };

@@ -25,7 +25,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     activeTimelineItem,
     disableNavOnKey,
     itemWidth = 200,
-    items,
+    items = [],
     mode = 'HORIZONTAL',
     onNext,
     onPrevious,
@@ -41,6 +41,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     hideControls,
     scrollable,
     cardPositionHorizontal,
+    contentDetailsChildren,
   } = props;
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -66,9 +67,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    // event.preventDefault();
-    // event.stopPropagation();
-
     const { keyCode } = event;
 
     if (
@@ -218,6 +216,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             mode={mode}
             cardHeight={cardHeight}
             slideItemDuration={slideItemDuration}
+            contentDetailsChildren={contentDetailsChildren}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
           />
         ) : null}
@@ -255,6 +254,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             mode={mode}
             cardHeight={cardHeight}
             slideItemDuration={slideItemDuration}
+            contentDetailsChildren={contentDetailsChildren}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
           />
         ) : null}

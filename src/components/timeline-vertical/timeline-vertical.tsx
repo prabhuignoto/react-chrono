@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import { TimelineVerticalModel } from '../../models/TimelineVerticalModel';
-import TreeBranch from './timeline-vertical-item';
+import TimelineVerticalItem from './timeline-vertical-item';
 import { TimelineVerticalWrapper } from './timeline-vertical.styles';
 
 // This component is used to render both tree and vertical modes
-const TimelineTree: React.FunctionComponent<TimelineVerticalModel> = ({
+const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
   items,
   onClick,
   autoScroll,
@@ -15,6 +15,7 @@ const TimelineTree: React.FunctionComponent<TimelineVerticalModel> = ({
   cardHeight,
   slideItemDuration,
   onElapsed,
+  contentDetailsChildren,
 }: TimelineVerticalModel) => {
   // check if the timeline that has become active is visible.
   // if not auto scroll the content and bring it to the view.
@@ -44,29 +45,28 @@ const TimelineTree: React.FunctionComponent<TimelineVerticalModel> = ({
           className = 'right';
         }
 
+        const contentDetails =
+          (contentDetailsChildren &&
+            (contentDetailsChildren as React.ReactNode[])[index]) ||
+          null;
+
         return (
-          <TreeBranch
+          <TimelineVerticalItem
+            {...item}
             className={className}
-            id={item.id}
             index={index}
-            onClick={onClick}
-            cardSubtitle={item.cardSubtitle}
-            active={item.active}
-            onActive={handleOnActive}
             key={item.id}
-            title={item.title}
-            visible={item.visible}
-            cardTitle={item.cardTitle}
-            cardDetailedText={item.cardDetailedText}
             theme={theme}
-            onShowMore={handleOnShowMore}
             alternateCards={alternateCards}
             slideShowRunning={slideShowRunning}
-            media={item.media}
             mode={mode}
             cardHeight={cardHeight}
             slideItemDuration={slideItemDuration}
+            onShowMore={handleOnShowMore}
+            onActive={handleOnActive}
+            onClick={onClick}
             onElapsed={onElapsed}
+            contentDetailsChildren={contentDetails}
           />
         );
       })}
@@ -74,4 +74,4 @@ const TimelineTree: React.FunctionComponent<TimelineVerticalModel> = ({
   );
 };
 
-export default TimelineTree;
+export default TimelineVertical;
