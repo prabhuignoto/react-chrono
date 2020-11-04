@@ -402,7 +402,7 @@ Distributed under the MIT license. See `LICENSE` for more information.
 Prabhu Murthy – [@prabhumurthy2](https://twitter.com/prabhumurthy2) – prabhu.m.murthy@gmail.com
 [https://github.com/prabhuignoto](https://github.com/prabhuignoto)
 
-<a href="https://www.buymeacoffee.com/prabhuignoto" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/prabhuignoto" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 100px !important;" ></a>
 
 <!-- Markdown link & img dfn's -->
 
