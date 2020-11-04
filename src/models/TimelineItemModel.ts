@@ -35,4 +35,5 @@ export interface TimelineCardModel extends TimelineItemModel {
   cardHeight?: number;
   slideItemDuration?: number;
   onElapsed?: (id?: string) => void;
+  customContent?: React.ReactNode | React.ReactNode[];
 }

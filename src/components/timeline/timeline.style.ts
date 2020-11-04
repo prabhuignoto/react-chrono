@@ -81,7 +81,7 @@ export const TimelineMainWrapper = styled.div<{
   }
 
   &.horizontal {
-    height: 3rem;
+    height: 6rem;
   }
 `;
 

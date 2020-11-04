@@ -1,0 +1,35 @@
+{
+    "auth": {
+        "username": "prabhu40",
+        "access_key": "kdhsu2aDyBguV7cTCqZ4"
+    },
+    "browsers": [
+        {
+            "browser": "chrome",
+            "os": "Windows 10",
+            "versions": [
+                "latest",
+                "latest-1"
+            ]
+        }
+    ],
+    "run_settings": {
+        "cypress_config_file": "./cypress.json",
+        "project_name": "project-name",
+        "build_name": "build-name",
+        "exclude": [],
+        "parallels": "5",
+        "npm_dependencies": {
+            "@babel/plugin-proposal-optional-chaining": "^7.12.1",
+            "@babel/core": "^7.12.3",
+            "@babel/preset-react": "^7.10.4",
+            "@babel/preset-typescript": "^7.10.4"
+        },
+        "package_config_options": {}
+    },
+    "connection_settings": {
+        "local": true,
+        "local_identifier": null
+    },
+    "disable_usage_reporting": false
+}

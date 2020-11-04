@@ -55,19 +55,24 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       role="listitem"
     >
       {/* title */}
-      <TimelineTitleWrapper
-        className={className}
-        alternateCards={alternateCards}
-      >
-        <TimelineItemTitle title={title} active={active} theme={theme} />
-      </TimelineTitleWrapper>
+      {
+        <TimelineTitleWrapper
+          className={className}
+          alternateCards={alternateCards}
+          mode={mode}
+          hide={!title}
+        >
+          <TimelineItemTitle title={title} active={active} theme={theme} />
+        </TimelineTitleWrapper>
+      }
 
-      {/* content section */}
+      {/* card section */}
       <TimelineCardContentWrapper
         className={`${className} card-content-wrapper ${
           visible ? 'visible' : ''
         }`}
         alternateCards={alternateCards}
+        noTitle={!title}
       >
         <TimelineCard
           active={active}
@@ -103,6 +108,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         theme={theme}
         alternateCards={alternateCards}
         slideShowRunning={slideShowRunning}
+        mode={mode}
       />
     </VerticalItemWrapper>
   );

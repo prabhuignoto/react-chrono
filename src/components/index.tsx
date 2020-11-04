@@ -66,8 +66,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     );
     setActiveTimelineItem(actvTimelineIndex);
 
-    if (timeLineItems) {
-      if (timeLineItems.length - 1 === actvTimelineIndex) {
+    if (items) {
+      if (items.length - 1 === actvTimelineIndex) {
         setSlideshowActive(false);
       }
     }

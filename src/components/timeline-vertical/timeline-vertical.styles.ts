@@ -1,10 +1,10 @@
 import { keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
+import { TimelineMode } from '../../models/TimelineModel';
 
 export const TimelineVerticalWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 100%;
   padding: 1rem;
   outline: 0;
@@ -78,10 +78,19 @@ export const VerticalCircleWrapper = styled.div<{
 
 export const TimelineCardContentWrapper = styled.div<{
   alternateCards?: boolean;
+  noTitle?: boolean;
 }>`
   visibility: hidden;
-  ${(p) => (p.alternateCards ? 'width: 50%;' : 'width: 75%; height: auto;')};
-  /* padding: 1rem 0; */
+
+  ${(p) => {
+    if (p.alternateCards) {
+      return `width: 50%;`;
+    } else if (p.noTitle) {
+      return `width: 90%;`;
+    } else {
+      return `width: 75%;`;
+    }
+  }}
 
   &.left {
     order: 1;
@@ -104,9 +113,11 @@ export const VerticalCircleContainer = styled.div`
 
 export const TimelineTitleWrapper = styled.div<{
   alternateCards?: boolean;
+  mode?: TimelineMode;
+  hide?: boolean;
 }>`
   align-items: center;
-  display: flex;
+  display: ${(p) => (p.hide && p.mode === 'VERTICAL' ? 'none' : 'flex')};
   ${(p) => (p.alternateCards ? 'width: 50%' : 'width: 15%')};
 
   &.left {

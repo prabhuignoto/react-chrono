@@ -27,7 +27,7 @@ interface CommonPropsModel {
    * @type {TimelineMode}
    * @memberof CommonPropsModel
    */
-  mode?: TimelineMode;
+  mode: TimelineMode;
 
   /**
    * handles the click on the timeline card
