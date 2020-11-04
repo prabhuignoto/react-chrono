@@ -11,12 +11,12 @@ import { TimelineMode } from './TimelineModel';
 export interface TimelineItemModel {
   active?: boolean;
   cardDetailedText?: string;
-  cardSubtitle: string;
+  cardSubtitle?: string;
   cardTitle?: string;
   id?: string;
   media?: Media;
   position?: string;
-  title: string;
+  title?: string;
   visible?: boolean;
 }
 
@@ -35,4 +35,5 @@ export interface TimelineCardModel extends TimelineItemModel {
   cardHeight?: number;
   slideItemDuration?: number;
   onElapsed?: (id?: string) => void;
+  customContent?: React.ReactNode | React.ReactNode[];
 }

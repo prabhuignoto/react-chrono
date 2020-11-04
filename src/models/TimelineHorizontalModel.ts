@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Theme } from './Theme';
 import { TimelineCardModel } from './TimelineItemModel';
 import { TimelineMode } from './TimelineModel';
@@ -14,6 +15,7 @@ export interface TimelineHorizontalModel {
   cardHeight?: number;
   onElapsed?: (id?: string) => void;
   slideItemDuration?: number;
+  contentDetailsChildren?: ReactNode | ReactNode[];
 }
 
 export interface Scroll {

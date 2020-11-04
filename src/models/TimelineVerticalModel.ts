@@ -27,7 +27,7 @@ interface CommonPropsModel {
    * @type {TimelineMode}
    * @memberof CommonPropsModel
    */
-  mode?: TimelineMode;
+  mode: TimelineMode;
 
   /**
    * handles the click on the timeline card
@@ -80,13 +80,14 @@ export interface VerticalCircleModel extends CommonBranchAndLeafModel {
 
 export interface VerticalItemModel extends CommonBranchAndLeafModel {
   cardDetailedText?: string;
-  cardSubtitle: string;
+  cardSubtitle?: string;
   cardTitle?: string;
   index: number;
   media?: Media;
   onShowMore?: () => void;
-  title: string;
+  title?: string;
   visible?: boolean;
+  contentDetailsChildren?: React.ReactNode;
   onActive: (
     timelinePointOffset: number,
     timelineContentHeight: number,
@@ -98,4 +99,6 @@ export interface TimelineVerticalModel extends CommonPropsModel {
   activeTimelineItem: number;
   autoScroll: (s: Partial<Scroll>) => void;
   items: TimelineCardModel[];
+  contentDetailsChildren?: React.ReactNode;
+  childrenNode?: React.ReactNode;
 }

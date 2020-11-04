@@ -28,6 +28,7 @@
 - 📺&nbsp; Auto play the timeline with the [slideshow](#slideshow-mode) mode.
 - 🖼️&nbsp; [Display Images & Videos](#media) in the timeline with ease.
 - ⌨&nbsp; [Keyboard accessible](#keyboard-navigation).
+- 🔧&nbsp; [Render](#rendering-custom-content) custom content easily.
 - ⚡&nbsp; Data driven API.
 - 🎨&nbsp; [Customize](#theme) colors with ease.
 - 💪&nbsp; Built with [Typescript](https://www.typescriptlang.org/).
@@ -46,6 +47,7 @@
   - [Keyboard Navigation](#keyboard-navigation)
   - [Scrollable](#scrollable)
   - [Media](#media)
+  - [Rendering custom content](#rendering-custom-content)
   - [Slideshow mode](#slideshow-mode)
   - [Item Width](#item-width)
   - [Theme](#theme)
@@ -273,6 +275,44 @@ Videos start playing automatically when active and will be automatically paused 
 
 ![media](./readme-assets/media.png)
 
+### Rendering custom content
+
+The component also supports embedding custom content in the `Timeline` cards.
+
+To insert custom content, just pass the blocked elements between the `Chrono` tags.
+
+For e.g the below snippet will create 2 timeline items. Each `div` element is automatically converted into a timeline item and inserted into the timeline card.
+The [items](#timeline-item-model) collection is completely optional and custom rendering is supported on all 3 [modes](#mode).
+
+```sh
+  <Chrono mode="VERTICAL">
+    <div>
+      <p>Lorem Ipsum. Lorem Ipsum. Lorem Ipsum</p>
+    </div>
+    <div>
+      <img src="<url to  a nice image" />
+    </div>
+  </Chrono>
+```
+
+The items collection will also work nicely with any custom content that is passed. The following snippet sets the the `title` and `cardTitle` for the custom contents.
+
+```sh
+  const items = [
+    {title: "Timeline title 1", cardTitle:  "Card Title 1"},
+    {title: "Timeline title 2", cardTitle:  "Card Title 2"}
+  ];
+
+  <Chrono mode="VERTICAL" items={items}>
+    <div>
+      <p>Lorem Ipsum. Lorem Ipsum. Lorem Ipsum</p>
+    </div>
+    <div>
+      <img src="<url to  a nice image" />
+    </div>
+  </Chrono>
+```
+
 ### Slideshow mode
 
 Slideshow can be enabled by setting the `slideShow` prop to true. You can also set an optional `slideItemDuration` that sets the time delay between cards.
@@ -297,11 +337,10 @@ Customize colors with `theme` prop.
 
 ## 📦 CodeSandbox Examples
 
-- [Horizontal Basic](https://codesandbox.io/s/keen-shannon-gtjwn?file=/src/data.js)
+- [Horizontal Basic](https://codesandbox.io/s/keen-shannon-gtjwn?file=/src/App.js)
 - [Vertical basic](https://codesandbox.io/s/react-chrono-vertical-basic-0rm1o?file=/src/App.js)
 - [Vertical Alternating](https://codesandbox.io/s/react-chrono-tree-text-1fcs3?file=/src/App.js)
 - [Vertical All Images](https://codesandbox.io/s/react-chrono-tree-vertical-images-b5zri?file=/src/App.js)
-- [Vertical with Mixed content](https://codesandbox.io/s/react-chrono-tree-image-wn50r?file=/src/App.js)
 
 ## 🔨 Build Setup
 
@@ -356,10 +395,11 @@ yarn run rollup
 
 ## Meta
 
-Prabhu Murthy – [@prabhumurthy2](https://twitter.com/prabhumurthy2) – prabhu.m.murthy@gmail.com
+Huge thanks to [BrowserStack](https://www.browserstack.com/) for the Open Source License!
 
 Distributed under the MIT license. See `LICENSE` for more information.
 
+Prabhu Murthy – [@prabhumurthy2](https://twitter.com/prabhumurthy2) – prabhu.m.murthy@gmail.com
 [https://github.com/prabhuignoto](https://github.com/prabhuignoto)
 
 <!-- Markdown link & img dfn's -->

@@ -55,7 +55,10 @@ export interface TimelineModel extends TimelineProps {
   slideShowRunning?: boolean;
 
   slideShowEnabled?: boolean;
+
   slideItemDuration?: number;
+
+  contentDetailsChildren?: React.ReactNode | React.ReactNode[];
 }
 
 /**
@@ -75,7 +78,7 @@ export interface TimelineProps {
 
   itemWidth?: number;
 
-  items: TimelineItemModel[];
+  items?: TimelineItemModel[];
 
   /**
    * sets the mode of timeline
@@ -129,6 +132,8 @@ export interface TimelineProps {
   scrollable?: boolean | { scrollbar: boolean };
 
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
+
+  children?: React.ReactNode | React.ReactNode[];
 }
 
 export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';

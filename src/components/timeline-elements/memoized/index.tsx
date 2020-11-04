@@ -14,9 +14,10 @@ interface Title {
 }
 
 interface Content {
-  content: string;
+  content?: string;
   color?: string;
   dir?: string;
+  theme?: Theme;
 }
 
 const MemoTitle = React.memo(
@@ -37,11 +38,12 @@ const MemoTitle = React.memo(
 MemoTitle.displayName = 'Timeline Title';
 
 const MemoSubTitle = React.memo<Content>(
-  ({ content, color, dir }: Content) =>
+  ({ content, color, dir, theme }: Content) =>
     content ? (
       <TimelineContentSubTitle
         style={{ color }}
         dir={dir}
+        theme={theme}
         className="card-sub-title"
       >
         {content}

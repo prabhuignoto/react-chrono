@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import cls from 'classnames';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { TimelineCardModel } from '../../../models/TimelineItemModel';
 import TimelineCardContent from '../timeline-card-content/timeline-card-content';
@@ -29,6 +30,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   theme,
   title,
   wrapperId,
+  customContent,
 }: TimelineCardModel) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -69,30 +71,30 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     }
   }, [active, autoScroll, mode]);
 
-  const handleOnShowMore = () => {};
+  const handleOnShowMore = useCallback(() => {}, []);
+
+  const modeLower = useMemo(() => mode?.toLowerCase(), [mode]);
+
+  const containerClass = useMemo(
+    () =>
+      cls(
+        'timeline-horz-card-wrapper',
+        modeLower,
+        position === 'top' ? 'bottom' : 'top',
+      ),
+    [mode, position],
+  );
+
+  const titleClass = useMemo(() => cls(modeLower, position), []);
+
+  const circleClass = useMemo(
+    () => cls('timeline-circle', modeLower, active ? 'active' : 'in-active'),
+    [active],
+  );
 
   const timelineContent = () => {
-    let className = '';
-
-    if (mode === 'HORIZONTAL') {
-      className = `horizontal ${position === 'top' ? 'bottom' : 'top'}`;
-    } else {
-      className = 'vertical';
-    }
-
     return (
-      <TimelineContentContainer
-        className={`${className} timeline-horz-card-wrapper`}
-        ref={contentRef}
-      >
-        {mode === 'VERTICAL' && (
-          <TimelineTitleContainer
-            data-testid="timeline-title"
-            className={`${mode.toLowerCase()} ${position}`}
-          >
-            <TimelineItemTitle title={title} active={active} theme={theme} />
-          </TimelineTitleContainer>
-        )}
+      <TimelineContentContainer className={containerClass} ref={contentRef}>
         <TimelineCardContent
           content={cardSubtitle}
           active={active}
@@ -107,6 +109,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           slideItemDuration={slideItemDuration}
           onElapsed={onElapsed}
           id={id}
+          customContent={customContent}
         />
       </TimelineContentContainer>
     );
@@ -121,18 +124,12 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   };
 
   return (
-    <Wrapper
-      ref={wrapperRef}
-      className={mode.toLowerCase()}
-      data-testid="timeline-item"
-    >
-      {mode === 'HORIZONTAL' && active ? showTimelineContent() : null}
+    <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
+      {active ? showTimelineContent() : null}
 
       <CircleWrapper>
         <Circle
-          className={`timeline-circle ${mode.toLowerCase()} ${
-            active ? 'active' : 'in-active'
-          }`}
+          className={circleClass}
           onClick={handleClick}
           ref={circleRef}
           data-testid="timeline-circle"
@@ -141,15 +138,12 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         ></Circle>
       </CircleWrapper>
 
-      {mode === 'HORIZONTAL' && (
-        <TimelineTitleContainer
-          className={`${mode.toLowerCase()} ${position}`}
-          data-testid="timeline-title"
-        >
-          <TimelineItemTitle title={title} active={active} theme={theme} />
-        </TimelineTitleContainer>
-      )}
-      {mode === 'VERTICAL' && timelineContent()}
+      <TimelineTitleContainer
+        className={titleClass}
+        data-testid="timeline-title"
+      >
+        <TimelineItemTitle title={title} active={active} theme={theme} />
+      </TimelineTitleContainer>
     </Wrapper>
   );
 };

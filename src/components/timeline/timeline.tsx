@@ -1,3 +1,4 @@
+import 'focus-visible';
 import { nanoid } from 'nanoid';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { Scroll } from '../../models/TimelineHorizontalModel';
@@ -5,7 +6,7 @@ import { TimelineCardModel } from '../../models/TimelineItemModel';
 import { TimelineModel } from '../../models/TimelineModel';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
-import TimelineCollection from '../timeline-horizontal/timeline-horizontal';
+import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
 import {
   Outline,
@@ -15,7 +16,6 @@ import {
   TimelineMainWrapper,
   Wrapper,
 } from './timeline.style';
-import 'focus-visible';
 
 const Timeline: React.FunctionComponent<TimelineModel> = (
   props: TimelineModel,
@@ -25,7 +25,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     activeTimelineItem,
     disableNavOnKey,
     itemWidth = 200,
-    items,
+    items = [],
     mode = 'HORIZONTAL',
     onNext,
     onPrevious,
@@ -41,6 +41,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     hideControls,
     scrollable,
     cardPositionHorizontal,
+    contentDetailsChildren,
   } = props;
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -66,9 +67,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    // event.preventDefault();
-    // event.stopPropagation();
-
     const { keyCode } = event;
 
     if (
@@ -218,6 +216,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             mode={mode}
             cardHeight={cardHeight}
             slideItemDuration={slideItemDuration}
+            contentDetailsChildren={contentDetailsChildren}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
           />
         ) : null}
@@ -226,7 +225,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         {mode === 'HORIZONTAL' ? (
           <TimelineMain className={mode.toLowerCase()}>
             <Outline color={theme && theme.primary} />
-            <TimelineCollection
+            <TimelineHorizontal
               items={items as TimelineCardModel[]}
               itemWidth={itemWidth}
               handleItemClick={handleTimelineItemClick}
@@ -238,6 +237,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               cardHeight={cardHeight}
               slideItemDuration={slideItemDuration}
               onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+              contentDetailsChildren={contentDetailsChildren}
             />
           </TimelineMain>
         ) : null}
@@ -255,6 +255,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             mode={mode}
             cardHeight={cardHeight}
             slideItemDuration={slideItemDuration}
+            contentDetailsChildren={contentDetailsChildren}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
           />
         ) : null}

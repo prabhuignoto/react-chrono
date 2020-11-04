@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
-    HorizontalBasic,
-    VerticalBasic,
-    VerticalTree,
-    VerticalTreeMixed
+  HorizontalBasic,
+  VerticalBasic,
+  VerticalCustomContent,
+  VerticalTree,
+  VerticalTreeMixed
 } from './app-samples';
 import './App.css';
 import {
-    ComponentLinks,
-    Wrapper
+  ComponentLinks,
+  Wrapper
 } from './App.styles';
 import data from './data';
-import dataMixed from './data-mixed';
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
@@ -49,6 +49,9 @@ const NewDemo: React.FunctionComponent = () => {
           <li>
             <Link to="/horizontal">Horizontal Basic</Link>
           </li>
+          <li>
+            <Link to="/vertical-custom">Vertical  Custom contents</Link>
+          </li>
         </ComponentLinks>
       </header>
       <section>
@@ -56,7 +59,7 @@ const NewDemo: React.FunctionComponent = () => {
           <Route path="/vertical-basic">
           {/* Vertical with no Media */}
           {items.length > 0 && (
-              <VerticalBasic type={"big-screen"} items={dataMixed} />
+              <VerticalBasic type={"big-screen"} items={items} />
             )}
           </Route>
           <Route path="/vertical-alternating-mixed">
@@ -69,6 +72,9 @@ const NewDemo: React.FunctionComponent = () => {
             {items.length > 0 && (
               <HorizontalBasic items={items} type="big-screen" />
             )}
+          </Route>
+          <Route path="/vertical-custom">
+              {items.length  > 0 && <VerticalCustomContent  type="big-screen" />}
           </Route>
           <Route path="/">
             {items.length > 0 && (

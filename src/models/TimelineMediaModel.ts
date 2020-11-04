@@ -23,7 +23,7 @@ export interface MediaState {
 export interface CardMediaModel {
   active?: boolean;
   cardHeight?: number;
-  content: string;
+  content?: string;
   hideMedia: boolean;
   id?: string;
   media: Media;

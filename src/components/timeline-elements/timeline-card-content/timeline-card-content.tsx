@@ -1,3 +1,4 @@
+import cls from 'classnames';
 import React, {
   useCallback,
   useEffect,
@@ -35,6 +36,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
   theme,
   title,
   onClick,
+  customContent,
 }: TimelineContentModel) => {
   const [showMore, setShowMore] = useState(false);
   const detailsRef = useRef<HTMLDivElement>(null);
@@ -167,11 +169,25 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
     [paused, slideShowActive],
   );
 
+  const contentClass = useMemo(
+    () =>
+      cls(active ? 'timeline-card-content active' : 'timeline-card-content '),
+    [active],
+  );
+
+  const contentDetailsClass = useMemo(
+    () =>
+      cls(
+        !showMore && !customContent
+          ? 'show-less card-description'
+          : 'card-description',
+      ),
+    [showMore, customContent],
+  );
+
   return (
     <TimelineItemContentWrapper
-      className={
-        active ? 'timeline-card-content active' : 'timeline-card-content '
-      }
+      className={contentClass}
       theme={theme}
       noMedia={!media}
       minHeight={cardHeight}
@@ -190,7 +206,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
         {/* main title */}
         {!media && <MemoTitle title={title} theme={theme} />}
         {/* main timeline text */}
-        {!media && <MemoSubTitle content={content} />}
+        {!media && <MemoSubTitle content={content} theme={theme} />}
       </TimelineCardHeader>
 
       {/* render media video or image */}
@@ -213,13 +229,14 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
       {/* detailed text */}
       <TimelineContentDetailsWrapper
         ref={detailsRef}
-        className={
-          !showMore ? 'show-less card-description' : 'card-description'
-        }
+        className={contentDetailsClass}
         theme={theme}
         aria-expanded={showMore}
+        customContent={!!customContent}
       >
-        {detailedText && (
+        {customContent ? (
+          <>{customContent}</>
+        ) : (
           <TimelineContentDetails
             className={showMore ? 'active' : ''}
             ref={detailsRef}
@@ -228,8 +245,9 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
           </TimelineContentDetails>
         )}
       </TimelineContentDetailsWrapper>
+
       {/* display the show more button for textual content */}
-      {
+      {detailedText && !customContent && (
         <ShowMore
           role="button"
           onClick={() => {
@@ -256,7 +274,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
             <ChevronIcon />
           </ChevronIconWrapper>
         </ShowMore>
-      }
+      )}
+
       {canShowProgressBar && (
         <SlideShowProgressBar
           startWidth={startWidth}

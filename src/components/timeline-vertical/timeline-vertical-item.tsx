@@ -34,6 +34,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     title,
     visible,
     onElapsed,
+    contentDetailsChildren,
   } = props;
 
   const handleOnActive = (offset: number) => {
@@ -54,19 +55,24 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       role="listitem"
     >
       {/* title */}
-      <TimelineTitleWrapper
-        className={className}
-        alternateCards={alternateCards}
-      >
-        <TimelineItemTitle title={title} active={active} theme={theme} />
-      </TimelineTitleWrapper>
+      {
+        <TimelineTitleWrapper
+          className={className}
+          alternateCards={alternateCards}
+          mode={mode}
+          hide={!title}
+        >
+          <TimelineItemTitle title={title} active={active} theme={theme} />
+        </TimelineTitleWrapper>
+      }
 
-      {/* content section */}
+      {/* card section */}
       <TimelineCardContentWrapper
         className={`${className} card-content-wrapper ${
           visible ? 'visible' : ''
         }`}
         alternateCards={alternateCards}
+        noTitle={!title}
       >
         <TimelineCard
           active={active}
@@ -83,10 +89,11 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
           onShowMore={() =>
             setTimeout(() => {
               handleOnActive(0);
-            }, 200)
+            }, 100)
           }
           branchDir={className}
           slideItemDuration={slideItemDuration}
+          customContent={contentDetailsChildren}
           onElapsed={onElapsed || function () {}}
         />
       </TimelineCardContentWrapper>
@@ -101,6 +108,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         theme={theme}
         alternateCards={alternateCards}
         slideShowRunning={slideShowRunning}
+        mode={mode}
       />
     </VerticalItemWrapper>
   );

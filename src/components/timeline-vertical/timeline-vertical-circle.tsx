@@ -38,7 +38,7 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
       role="button"
     >
       <VerticalCircleContainer
-        className={className}
+        className={`${className} timeline-vertical-circle`}
         onClick={() => {
           if (id && onClick && !slideShowRunning) {
             onClick(id);
