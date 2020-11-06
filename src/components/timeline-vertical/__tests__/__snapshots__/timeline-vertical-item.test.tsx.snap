@@ -2,82 +2,58 @@
 
 exports[`Test tree branch render 1`] = `
 <div
-  class="test-class  vertical-item-row css-1e6jkft"
+  class="test-class  vertical-item-row css-43ivcr"
   data-testid="vertical-item-row"
   role="listitem"
 >
   <div
-    class="test-class css-14hjzcx"
+    class="test-class css-1nwuoxl"
   >
     <div
-      class="timeline-item-title active css-1i2f2mb"
+      class="timeline-item-title active css-am6i6v"
     >
       branch title
     </div>
   </div>
   <div
-    class="test-class card-content-wrapper  css-1g8c3yv"
+    class="test-class card-content-wrapper  css-z17d9y"
   >
     <section
-      class="timeline-card-content active css-sx2voi"
+      class="timeline-card-content active css-1yluw9g"
       tabindex="0"
     >
       <header
         class="css-1ago99h"
       >
         <p
-          class="card-sub-title css-4qf4pr"
+          class="card-sub-title css-1pdes2h"
         >
           Tree branch test
         </p>
       </header>
       <div
-        class="show-less card-description css-1ikiehq"
-      />
-      <span
-        class="show-more css-1x1ed2e"
-        role="button"
-        tabindex="0"
+        aria-expanded="false"
+        class="show-less card-description css-uerp6t"
       >
-        <span>
-          read more
-        </span>
-        <span
-          class="css-22j6j0"
-        >
-          <svg
-            class="feather feather-chevron-right"
-            fill="none"
-            height="24"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline
-              points="9 18 15 12 9 6"
-            />
-          </svg>
-        </span>
-      </span>
+        <p
+          class=" css-1jsxpv8"
+        />
+      </div>
     </section>
   </div>
   <div
-    class="test-class css-n24itb"
+    class="test-class css-vn8ri6"
     data-testid="tree-leaf"
     role="button"
   >
     <div
       aria-label="select timeline"
-      class="test-class css-kooiip"
+      class="test-class timeline-vertical-circle css-kooiip"
       data-testid="tree-leaf-click"
       role="button"
     >
       <div
-        class="active css-10jefxi"
+        class="active css-gp0zpt"
       />
     </div>
   </div>

@@ -31,7 +31,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
   const [slideShowActive, setSlideshowActive] = useState(false);
-  const [activeTimelineItem, setActiveTimelineItem] = useState(0);
+  const [activeTimelineItem, setActiveTimelineItem] = useState(-1);
 
   const initItems = () =>
     items && items.length
@@ -39,7 +39,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
           return Object.assign({}, item, {
             id: nanoid(),
             visible: true,
-            active: index === 0,
           });
         })
       : Array.from({ length: (children as ReactNode[]).length }).map<
@@ -47,7 +46,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
         >((item, index) => ({
           id: nanoid(),
           visible: true,
-          active: index === 0,
         }));
 
   useEffect(() => {

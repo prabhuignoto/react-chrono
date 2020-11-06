@@ -250,7 +250,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = ({
       {detailedText && !customContent && (
         <ShowMore
           role="button"
-          onClick={() => {
+          onClick={(ev) => {
+            ev.stopPropagation();
             if ((active && paused) || !slideShowActive) {
               setShowMore(!showMore);
               onShowMore();
