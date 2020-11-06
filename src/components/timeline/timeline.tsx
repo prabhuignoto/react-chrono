@@ -1,6 +1,12 @@
 import 'focus-visible';
 import { nanoid } from 'nanoid';
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { Scroll } from '../../models/TimelineHorizontalModel';
 import { TimelineCardModel } from '../../models/TimelineItemModel';
 import { TimelineModel } from '../../models/TimelineModel';
@@ -46,6 +52,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
+  const [hasFocus, setHasFocus] = useState(false);
 
   // reference to the timeline
   const timelineMainRef = useRef<HTMLDivElement>(null);
@@ -60,10 +67,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const id = useRef(nanoid());
 
   // handlers for navigation
-  const handleNext = () => onNext();
-  const handlePrevious = () => onPrevious();
-  const handleFirst = () => onFirst();
-  const handleLast = () => onLast();
+  const handleNext = () => hasFocus && onNext();
+  const handlePrevious = () => hasFocus && onPrevious();
+  const handleFirst = () => hasFocus && onFirst();
+  const handleLast = () => hasFocus && onLast();
 
   // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -106,6 +113,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const handleScroll = useCallback(
     (scroll: Partial<Scroll>) => {
       const element = timelineMainRef.current;
+      debugger;
       if (element) {
         setNewOffset(element, scroll);
       }
@@ -121,6 +129,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     if (mode === 'HORIZONTAL') {
       ele.scrollLeft = newOffSet;
     } else {
+      debugger;
       ele.scrollTop = newOffSet;
     }
   }, [newOffSet, mode]);
@@ -155,22 +164,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               // show img and video when visible.
               element.querySelectorAll('img').forEach(show);
               element.querySelectorAll('video').forEach(show);
-              // element
-              //   .querySelectorAll(':scope > div')
-              //   .forEach(
-              //     (ele) =>
-              //       ((ele as HTMLDivElement).style.visibility = 'visible'),
-              //   );
             } else {
               // hide img and video when not visible.
               element.querySelectorAll('img').forEach(hide);
               element.querySelectorAll('video').forEach(hide);
-              // element
-              //   .querySelectorAll(':scope > div')
-              //   .forEach(
-              //     (ele) =>
-              //       ((ele as HTMLDivElement).style.visibility = 'hidden'),
-              //   );
             }
           });
         },
@@ -196,6 +193,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       }
       className={`${mode.toLowerCase()} js-focus-visible focus-visible`}
       cardPositionHorizontal={cardPositionHorizontal}
+      onClickCapture={() => {
+        setHasFocus(true);
+      }}
     >
       <TimelineMainWrapper
         ref={timelineMainRef}
@@ -207,17 +207,18 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         {/* VERTICAL ALTERNATING */}
         {mode === 'VERTICAL_ALTERNATING' ? (
           <TimelineVertical
-            items={items as TimelineCardModel[]}
-            onClick={handleTimelineItemClick}
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
-            theme={theme}
-            slideShowRunning={slideShowRunning}
-            mode={mode}
             cardHeight={cardHeight}
-            slideItemDuration={slideItemDuration}
             contentDetailsChildren={contentDetailsChildren}
+            hasFocus={hasFocus}
+            items={items as TimelineCardModel[]}
+            mode={mode}
+            onClick={handleTimelineItemClick}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+            slideItemDuration={slideItemDuration}
+            slideShowRunning={slideShowRunning}
+            theme={theme}
           />
         ) : null}
 
@@ -226,18 +227,19 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           <TimelineMain className={mode.toLowerCase()}>
             <Outline color={theme && theme.primary} />
             <TimelineHorizontal
-              items={items as TimelineCardModel[]}
-              itemWidth={itemWidth}
-              handleItemClick={handleTimelineItemClick}
               autoScroll={handleScroll}
-              mode={mode}
-              wrapperId={id.current}
-              theme={theme}
-              slideShowRunning={slideShowRunning}
               cardHeight={cardHeight}
-              slideItemDuration={slideItemDuration}
-              onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
               contentDetailsChildren={contentDetailsChildren}
+              handleItemClick={handleTimelineItemClick}
+              hasFocus={hasFocus}
+              itemWidth={itemWidth}
+              items={items as TimelineCardModel[]}
+              mode={mode}
+              onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+              slideItemDuration={slideItemDuration}
+              slideShowRunning={slideShowRunning}
+              theme={theme}
+              wrapperId={id.current}
             />
           </TimelineMain>
         ) : null}
@@ -245,18 +247,19 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         {/* VERTICAL */}
         {mode === 'VERTICAL' ? (
           <TimelineVertical
-            items={items as TimelineCardModel[]}
-            onClick={handleTimelineItemClick}
             activeTimelineItem={activeTimelineItem}
-            autoScroll={handleScroll}
-            theme={theme}
             alternateCards={false}
-            slideShowRunning={slideShowRunning}
-            mode={mode}
+            autoScroll={handleScroll}
             cardHeight={cardHeight}
-            slideItemDuration={slideItemDuration}
             contentDetailsChildren={contentDetailsChildren}
+            hasFocus={hasFocus}
+            items={items as TimelineCardModel[]}
+            mode={mode}
+            onClick={handleTimelineItemClick}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+            slideItemDuration={slideItemDuration}
+            slideShowRunning={slideShowRunning}
+            theme={theme}
           />
         ) : null}
       </TimelineMainWrapper>

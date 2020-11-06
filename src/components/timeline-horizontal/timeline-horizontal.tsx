@@ -1,7 +1,7 @@
 import cls from 'classnames';
 import React, { ReactNode, useMemo } from 'react';
 import { TimelineHorizontalModel } from '../../models/TimelineHorizontalModel';
-import TimelineCard from '../timeline-elements/timeline-card/timeline-card';
+import TimelineCard from '../timeline-elements/timeline-card/timeline-horizontal-card';
 import {
   TimelineHorizontalWrapper,
   TimelineItemWrapper,
@@ -20,6 +20,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   slideItemDuration,
   onElapsed,
   contentDetailsChildren: children,
+  hasFocus,
 }: TimelineHorizontalModel) => {
   const wrapperClass = useMemo(
     () => cls(mode.toLowerCase(), 'timeline-horz-container'),
@@ -51,6 +52,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
             slideItemDuration={slideItemDuration}
             onElapsed={onElapsed}
             customContent={children ? (children as ReactNode[])[index] : null}
+            hasFocus={hasFocus}
           />
         </TimelineItemWrapper>
       ))}

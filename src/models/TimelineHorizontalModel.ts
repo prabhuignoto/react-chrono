@@ -16,6 +16,7 @@ export interface TimelineHorizontalModel {
   onElapsed?: (id?: string) => void;
   slideItemDuration?: number;
   contentDetailsChildren?: ReactNode | ReactNode[];
+  hasFocus?: boolean;
 }
 
 export interface Scroll {

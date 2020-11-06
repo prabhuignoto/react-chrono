@@ -121,8 +121,6 @@ export const TimelineControlContainer = styled.div<{
   display: flex;
   justify-content: center;
   min-height: 3rem;
-  /* margin-top: auto;
-  margin-bottom: auto; */
 
   filter: ${(p) => {
     if (p.active) {

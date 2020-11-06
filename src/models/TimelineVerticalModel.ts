@@ -66,6 +66,8 @@ interface CommonPropsModel {
    * @memberof CommonPropsModel
    */
   theme?: Theme;
+
+  hasFocus?: boolean;
 }
 
 interface CommonBranchAndLeafModel extends CommonPropsModel {
