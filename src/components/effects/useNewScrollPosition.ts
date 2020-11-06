@@ -44,7 +44,6 @@ useNewScrollPosition = function (mode: TimelineMode, itemWidth?: number) {
           setNewOffset(timelinePointOffset - itemWidth);
         }
       } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
-        debugger;
         if (!timelineContentOffset || !timelineContentHeight) {
           return;
         }

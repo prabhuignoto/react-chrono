@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { VerticalItemModel } from '../../models/TimelineVerticalModel';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
@@ -58,6 +58,12 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     );
   }, [active]);
 
+  const handleShowMore = useCallback(() => {
+    setTimeout(() => {
+      handleOnActive(0);
+    }, 100);
+  }, []);
+
   const Content = useMemo(() => {
     return (
       <TimelineCardContentWrapper
@@ -84,11 +90,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
           theme={theme}
           title={cardTitle}
           hasFocus={hasFocus}
-          onShowMore={() =>
-            setTimeout(() => {
-              handleOnActive(0);
-            }, 100)
-          }
+          onShowMore={handleShowMore}
         />
       </TimelineCardContentWrapper>
     );

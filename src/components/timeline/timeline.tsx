@@ -113,7 +113,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const handleScroll = useCallback(
     (scroll: Partial<Scroll>) => {
       const element = timelineMainRef.current;
-      debugger;
       if (element) {
         setNewOffset(element, scroll);
       }
@@ -129,7 +128,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     if (mode === 'HORIZONTAL') {
       ele.scrollLeft = newOffSet;
     } else {
-      debugger;
       ele.scrollTop = newOffSet;
     }
   }, [newOffSet, mode]);
