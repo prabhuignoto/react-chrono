@@ -22,37 +22,6 @@ context('Chrono.Vertical.Basic', () => {
     });
   });
 
-  it('interact with timeline point', () => {
-    const pick = 12;
-    cy.get('.timeline-main-wrapper').scrollTo('right');
-    cy.wait(1500);
-
-    cy.get('.timeline-horz-item-container')
-      .eq(pick)
-      .find('.timeline-circle')
-      .click();
-    cy.wait(400);
-
-    cy.get('.timeline-card-content').within(() => {
-      cy.get('.card-title').should('contain', 'Nagasaki');
-      cy.get('.card-sub-title').should(
-        'contain',
-        'Atomic bomb mushroom cloud over the Japanese city of Nagasaki',
-      );
-    });
-
-    cy.get('.timeline-main-wrapper').scrollTo('left');
-    cy.wait(1500);
-    cy.get('.timeline-horz-item-container')
-      .eq(0)
-      .find('.timeline-circle')
-      .click();
-    cy.wait(400);
-    cy.get('.timeline-card-content').within(() => {
-      cy.get('.card-title').should('contain', 'Dunkirk');
-    });
-  });
-
   it('check navigation controls', () => {
     cy.get('.timeline-controls').within(() => {
       cy.get('li').eq(3).click();

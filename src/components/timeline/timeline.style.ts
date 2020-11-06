@@ -51,6 +51,7 @@ export const TimelineMainWrapper = styled.div<{
   display: flex;
   justify-content: center;
   overflow-y: ${(p) => (p.scrollable ? 'auto' : 'hidden')};
+  overflow-x: hidden;
   overscroll-behavior: contain;
   position: relative;
   scroll-behavior: smooth;
@@ -120,8 +121,6 @@ export const TimelineControlContainer = styled.div<{
   display: flex;
   justify-content: center;
   min-height: 3rem;
-  /* margin-top: auto;
-  margin-bottom: auto; */
 
   filter: ${(p) => {
     if (p.active) {

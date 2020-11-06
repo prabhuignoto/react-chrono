@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { VerticalCircleModel } from '../../models/TimelineVerticalModel';
-import { Circle } from '../timeline-elements/timeline-card/timeline-card.styles';
+import { Circle } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
 import {
   VerticalCircleWrapper,
   VerticalCircleContainer,
@@ -27,7 +27,7 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
 
       circle && onActive(circle.offsetTop);
     }
-  }, [active, onActive]);
+  }, [active]);
 
   return (
     <VerticalCircleWrapper
@@ -39,7 +39,8 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
     >
       <VerticalCircleContainer
         className={`${className} timeline-vertical-circle`}
-        onClick={() => {
+        onClick={(ev) => {
+          ev.stopPropagation();
           if (id && onClick && !slideShowRunning) {
             onClick(id);
           }

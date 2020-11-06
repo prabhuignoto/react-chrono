@@ -100,7 +100,10 @@ export const TimelineTitleContainer = styled.div`
   }
 `;
 
-export const TimelineContentContainer = styled.div<{ position?: string }>`
+export const TimelineContentContainer = styled.div<{
+  position?: string;
+  active?: boolean;
+}>`
   align-items: flex-start;
   animation: ${show} 0.25s ease-in;
 

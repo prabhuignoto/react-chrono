@@ -19,4 +19,5 @@ export interface TimelineContentModel {
   title?: string;
   branchDir?: string;
   customContent?: React.ReactNode;
+  hasFocus?: boolean;
 }

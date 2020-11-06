@@ -10,7 +10,7 @@ import {
   TimelineContentContainer,
   TimelineTitleContainer,
   Wrapper,
-} from './timeline-card.styles';
+} from './timeline-horizontal-card.styles';
 
 const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   active,
@@ -31,6 +31,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   title,
   wrapperId,
   customContent,
+  hasFocus,
 }: TimelineCardModel) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -46,27 +47,15 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     if (active) {
       const circle = circleRef.current;
       const wrapper = wrapperRef.current;
-      const content = contentRef.current;
 
       if (circle && wrapper) {
         const circleOffsetLeft = circle.offsetLeft;
         const wrapperOffsetLeft = wrapper.offsetLeft;
-        const circleOffsetTop = circle.offsetLeft;
-        const wrapperOffsetTop = wrapper.offsetTop;
 
-        if (mode === 'HORIZONTAL') {
-          autoScroll({
-            timelinePointOffset: circleOffsetLeft + wrapperOffsetLeft,
-            timelinePointWidth: circle.clientWidth,
-          });
-        } else {
-          autoScroll({
-            timelinePointOffset: circleOffsetTop + wrapperOffsetTop,
-            timelinePointHeight: circle.clientHeight,
-            timelineContentHeight: content ? content.clientHeight : 0,
-            timelineContentOffset: wrapperOffsetTop,
-          });
-        }
+        autoScroll({
+          timelinePointOffset: circleOffsetLeft + wrapperOffsetLeft,
+          timelinePointWidth: circle.clientWidth,
+        });
       }
     }
   }, [active, autoScroll, mode]);
@@ -92,7 +81,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     [active],
   );
 
-  const timelineContent = () => {
+  const timelineContent = useMemo(() => {
     return (
       <TimelineContentContainer className={containerClass} ref={contentRef}>
         <TimelineCardContent
@@ -110,22 +99,23 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           onElapsed={onElapsed}
           id={id}
           customContent={customContent}
+          hasFocus={hasFocus}
         />
       </TimelineContentContainer>
     );
-  };
+  }, [active]);
 
   const showTimelineContent = () => {
     const ele = document.getElementById(wrapperId);
 
     if (ele) {
-      return ReactDOM.createPortal(timelineContent(), ele);
+      return ReactDOM.createPortal(timelineContent, ele);
     }
   };
 
   return (
     <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
-      {active ? showTimelineContent() : null}
+      {active && showTimelineContent()}
 
       <CircleWrapper>
         <Circle

@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { CardMediaModel } from '../../../models/TimelineMediaModel';
 import { MemoSubTitle, MemoTitle } from '../memoized';
 import {
@@ -62,6 +68,55 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     ({ message }: ErrorMessageModel) => <ErrorMessage>{message}</ErrorMessage>,
   );
 
+  const Video = useMemo(() => {
+    return (
+      <CardVideo
+        controls
+        autoPlay={active}
+        ref={videoRef}
+        onLoadedData={handleMediaLoaded}
+        onPlay={() =>
+          onMediaStateChange({
+            id,
+            paused: false,
+            playing: true,
+          })
+        }
+        onPause={() =>
+          onMediaStateChange({
+            id,
+            paused: true,
+            playing: false,
+          })
+        }
+        onEnded={() =>
+          onMediaStateChange({
+            id,
+            paused: false,
+            playing: false,
+          })
+        }
+        onError={handleError}
+      >
+        <source src={media.source.url}></source>
+      </CardVideo>
+    );
+  }, [active]);
+
+  const Image = useMemo(() => {
+    return (
+      <CardImage
+        src={media.source.url}
+        mode={mode}
+        onLoad={handleMediaLoaded}
+        onError={handleError}
+        visible={mediaLoaded}
+        active={active}
+        alt={media.name}
+      />
+    );
+  }, [active]);
+
   ErrorMessageMem.displayName = 'Error Message';
 
   return (
@@ -76,50 +131,13 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
       >
         {media.type === 'VIDEO' &&
           (!loadFailed ? (
-            <CardVideo
-              controls
-              autoPlay={active}
-              ref={videoRef}
-              onLoadedData={handleMediaLoaded}
-              onPlay={() =>
-                onMediaStateChange({
-                  id,
-                  paused: false,
-                  playing: true,
-                })
-              }
-              onPause={() =>
-                onMediaStateChange({
-                  id,
-                  paused: true,
-                  playing: false,
-                })
-              }
-              onEnded={() =>
-                onMediaStateChange({
-                  id,
-                  paused: false,
-                  playing: false,
-                })
-              }
-              onError={handleError}
-            >
-              <source src={media.source.url}></source>
-            </CardVideo>
+            Video
           ) : (
             <ErrorMessageMem message="Failed to load the video" />
           ))}
         {media.type === 'IMAGE' &&
           (!loadFailed ? (
-            <CardImage
-              src={media.source.url}
-              mode={mode}
-              onLoad={handleMediaLoaded}
-              onError={handleError}
-              visible={mediaLoaded}
-              active={active}
-              alt={media.name}
-            />
+            Image
           ) : (
             <ErrorMessageMem message="Failed to load the image." />
           ))}

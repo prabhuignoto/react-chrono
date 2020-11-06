@@ -2,13 +2,12 @@
 
 exports[`Test Tree render 1`] = `
 <div
-  class="css-10bn9bx"
+  class="css-13ikcni"
   data-testid="tree-main"
   role="list"
-  tabindex="0"
 >
   <div
-    class="left  vertical-item-row css-1e6jkft"
+    class="left  vertical-item-row css-43ivcr"
     data-testid="vertical-item-row"
     role="listitem"
   >
@@ -16,80 +15,56 @@ exports[`Test Tree render 1`] = `
       class="left css-1uwvots"
     >
       <div
-        class="timeline-item-title css-1i2f2mb"
+        class="timeline-item-title css-am6i6v"
       >
         June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
       </div>
     </div>
     <div
-      class="left card-content-wrapper  css-31vp99"
+      class="left card-content-wrapper  css-1qaldoj"
     >
       <section
-        class="timeline-card-content  css-sx2voi"
+        class="timeline-card-content  css-1yluw9g"
         tabindex="0"
       >
         <header
           class="css-1ago99h"
         >
           <p
-            class="card-sub-title css-4qf4pr"
+            class="card-sub-title css-1pdes2h"
           >
             Archduke Franz Ferdinand of Austria and his wife, Sophie, are assassinated by a Bosnian Serb nationalist in Sarajevo.
           </p>
         </header>
         <div
-          class="show-less card-description css-1ikiehq"
-        />
-        <span
-          class="show-more css-1x1ed2e"
-          role="button"
-          tabindex="0"
+          aria-expanded="false"
+          class="show-less card-description css-uerp6t"
         >
-          <span>
-            read more
-          </span>
-          <span
-            class="css-22j6j0"
-          >
-            <svg
-              class="feather feather-chevron-right"
-              fill="none"
-              height="24"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              width="24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <polyline
-                points="9 18 15 12 9 6"
-              />
-            </svg>
-          </span>
-        </span>
+          <p
+            class=" css-1jsxpv8"
+          />
+        </div>
       </section>
     </div>
     <div
-      class="left css-n24itb"
+      class="left css-vn8ri6"
       data-testid="tree-leaf"
       role="button"
     >
       <div
         aria-label="select timeline"
-        class="left css-kooiip"
+        class="left timeline-vertical-circle css-kooiip"
         data-testid="tree-leaf-click"
         role="button"
       >
         <div
-          class="in-active css-10jefxi"
+          class="in-active css-gp0zpt"
         />
       </div>
     </div>
   </div>
   <div
-    class="right  vertical-item-row css-1e6jkft"
+    class="right  vertical-item-row css-43ivcr"
     data-testid="vertical-item-row"
     role="listitem"
   >
@@ -97,80 +72,56 @@ exports[`Test Tree render 1`] = `
       class="right css-1uwvots"
     >
       <div
-        class="timeline-item-title css-1i2f2mb"
+        class="timeline-item-title css-am6i6v"
       >
         July 28, 1914
       </div>
     </div>
     <div
-      class="right card-content-wrapper  css-31vp99"
+      class="right card-content-wrapper  css-1qaldoj"
     >
       <section
-        class="timeline-card-content  css-sx2voi"
+        class="timeline-card-content  css-1yluw9g"
         tabindex="0"
       >
         <header
           class="css-1ago99h"
         >
           <p
-            class="card-sub-title css-4qf4pr"
+            class="card-sub-title css-1pdes2h"
           >
             World War I begins when Austria-Hungary declares war on Serbia.
           </p>
         </header>
         <div
-          class="show-less card-description css-1ikiehq"
-        />
-        <span
-          class="show-more css-1x1ed2e"
-          role="button"
-          tabindex="0"
+          aria-expanded="false"
+          class="show-less card-description css-uerp6t"
         >
-          <span>
-            read more
-          </span>
-          <span
-            class="css-22j6j0"
-          >
-            <svg
-              class="feather feather-chevron-right"
-              fill="none"
-              height="24"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              width="24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <polyline
-                points="9 18 15 12 9 6"
-              />
-            </svg>
-          </span>
-        </span>
+          <p
+            class=" css-1jsxpv8"
+          />
+        </div>
       </section>
     </div>
     <div
-      class="right css-n24itb"
+      class="right css-vn8ri6"
       data-testid="tree-leaf"
       role="button"
     >
       <div
         aria-label="select timeline"
-        class="right css-kooiip"
+        class="right timeline-vertical-circle css-kooiip"
         data-testid="tree-leaf-click"
         role="button"
       >
         <div
-          class="in-active css-10jefxi"
+          class="in-active css-gp0zpt"
         />
       </div>
     </div>
   </div>
   <div
-    class="left  vertical-item-row css-1e6jkft"
+    class="left  vertical-item-row css-43ivcr"
     data-testid="vertical-item-row"
     role="listitem"
   >
@@ -178,23 +129,23 @@ exports[`Test Tree render 1`] = `
       class="left css-1uwvots"
     >
       <div
-        class="timeline-item-title css-1i2f2mb"
+        class="timeline-item-title css-am6i6v"
       >
         August 1–28, 1914
       </div>
     </div>
     <div
-      class="left card-content-wrapper  css-31vp99"
+      class="left card-content-wrapper  css-1qaldoj"
     >
       <section
-        class="timeline-card-content  css-sx2voi"
+        class="timeline-card-content  css-1yluw9g"
         tabindex="0"
       >
         <header
           class="css-1ago99h"
         >
           <p
-            class="card-sub-title css-4qf4pr"
+            class="card-sub-title css-1pdes2h"
           >
             Germany declares war on Russia, France, and Belgium. Britain declares war on Germany.
     Austria declares war on Russia. Montenegro declares war on Austria. France declares war on Austria.
@@ -202,58 +153,34 @@ exports[`Test Tree render 1`] = `
           </p>
         </header>
         <div
-          class="show-less card-description css-1ikiehq"
-        />
-        <span
-          class="show-more css-1x1ed2e"
-          role="button"
-          tabindex="0"
+          aria-expanded="false"
+          class="show-less card-description css-uerp6t"
         >
-          <span>
-            read more
-          </span>
-          <span
-            class="css-22j6j0"
-          >
-            <svg
-              class="feather feather-chevron-right"
-              fill="none"
-              height="24"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              width="24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <polyline
-                points="9 18 15 12 9 6"
-              />
-            </svg>
-          </span>
-        </span>
+          <p
+            class=" css-1jsxpv8"
+          />
+        </div>
       </section>
     </div>
     <div
-      class="left css-n24itb"
+      class="left css-vn8ri6"
       data-testid="tree-leaf"
       role="button"
     >
       <div
         aria-label="select timeline"
-        class="left css-kooiip"
+        class="left timeline-vertical-circle css-kooiip"
         data-testid="tree-leaf-click"
         role="button"
       >
         <div
-          class="in-active css-10jefxi"
+          class="in-active css-gp0zpt"
         />
       </div>
     </div>
   </div>
   <div
-    class="right  vertical-item-row css-1e6jkft"
+    class="right  vertical-item-row css-43ivcr"
     data-testid="vertical-item-row"
     role="listitem"
   >
@@ -261,75 +188,51 @@ exports[`Test Tree render 1`] = `
       class="right css-1uwvots"
     >
       <div
-        class="timeline-item-title css-1i2f2mb"
+        class="timeline-item-title css-am6i6v"
       >
         September 6, 1914
       </div>
     </div>
     <div
-      class="right card-content-wrapper  css-31vp99"
+      class="right card-content-wrapper  css-1qaldoj"
     >
       <section
-        class="timeline-card-content  css-sx2voi"
+        class="timeline-card-content  css-1yluw9g"
         tabindex="0"
       >
         <header
           class="css-1ago99h"
         >
           <p
-            class="card-sub-title css-4qf4pr"
+            class="card-sub-title css-1pdes2h"
           >
             First Battle of the Marne begins. The Germans had advanced to within 30 miles of Paris, but over the next two days, the French are reinforced by 6,000 infantrymen who are transported to the front by hundreds of taxis.
       The Germans dig in north of the Aisne River, and the trench warfare that is to typify the Western Front for the next four years begins.
           </p>
         </header>
         <div
-          class="show-less card-description css-1ikiehq"
-        />
-        <span
-          class="show-more css-1x1ed2e"
-          role="button"
-          tabindex="0"
+          aria-expanded="false"
+          class="show-less card-description css-uerp6t"
         >
-          <span>
-            read more
-          </span>
-          <span
-            class="css-22j6j0"
-          >
-            <svg
-              class="feather feather-chevron-right"
-              fill="none"
-              height="24"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              width="24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <polyline
-                points="9 18 15 12 9 6"
-              />
-            </svg>
-          </span>
-        </span>
+          <p
+            class=" css-1jsxpv8"
+          />
+        </div>
       </section>
     </div>
     <div
-      class="right css-n24itb"
+      class="right css-vn8ri6"
       data-testid="tree-leaf"
       role="button"
     >
       <div
         aria-label="select timeline"
-        class="right css-kooiip"
+        class="right timeline-vertical-circle css-kooiip"
         data-testid="tree-leaf-click"
         role="button"
       >
         <div
-          class="in-active css-10jefxi"
+          class="in-active css-gp0zpt"
         />
       </div>
     </div>

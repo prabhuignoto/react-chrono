@@ -16,6 +16,7 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
   slideItemDuration,
   onElapsed,
   contentDetailsChildren,
+  hasFocus,
 }: TimelineVerticalModel) => {
   // check if the timeline that has become active is visible.
   // if not auto scroll the content and bring it to the view.
@@ -27,7 +28,7 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
         timelineContentOffset: wrapperOffset,
       });
     },
-    [autoScroll],
+    [],
   );
 
   // todo remove this
@@ -67,6 +68,7 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
             onClick={onClick}
             onElapsed={onElapsed}
             contentDetailsChildren={contentDetails}
+            hasFocus={hasFocus}
           />
         );
       })}

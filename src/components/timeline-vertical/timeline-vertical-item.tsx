@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { VerticalItemModel } from '../../models/TimelineVerticalModel';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
@@ -35,6 +35,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     visible,
     onElapsed,
     contentDetailsChildren,
+    hasFocus,
   } = props;
 
   const handleOnActive = (offset: number) => {
@@ -43,6 +44,73 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       onActive(offsetTop + offset, offsetTop, clientHeight);
     }
   };
+
+  const Title = useMemo(() => {
+    return (
+      <TimelineTitleWrapper
+        className={className}
+        alternateCards={alternateCards}
+        mode={mode}
+        hide={!title}
+      >
+        <TimelineItemTitle title={title} active={active} theme={theme} />
+      </TimelineTitleWrapper>
+    );
+  }, [active]);
+
+  const handleShowMore = useCallback(() => {
+    setTimeout(() => {
+      handleOnActive(0);
+    }, 100);
+  }, []);
+
+  const Content = useMemo(() => {
+    return (
+      <TimelineCardContentWrapper
+        className={`${className} card-content-wrapper ${
+          visible ? 'visible' : ''
+        }`}
+        alternateCards={alternateCards}
+        noTitle={!title}
+      >
+        <TimelineCard
+          active={active}
+          branchDir={className}
+          cardHeight={cardHeight}
+          content={cardSubtitle}
+          customContent={contentDetailsChildren}
+          detailedText={cardDetailedText}
+          id={id}
+          media={media}
+          mode={mode}
+          onClick={onClick}
+          onElapsed={onElapsed || function () {}}
+          slideItemDuration={slideItemDuration}
+          slideShowActive={slideShowRunning}
+          theme={theme}
+          title={cardTitle}
+          hasFocus={hasFocus}
+          onShowMore={handleShowMore}
+        />
+      </TimelineCardContentWrapper>
+    );
+  }, [hasFocus, slideShowRunning, active]);
+
+  const Circle = useMemo(() => {
+    return (
+      <VerticalCircle
+        active={active}
+        alternateCards={alternateCards}
+        className={className}
+        id={id}
+        mode={mode}
+        onActive={handleOnActive}
+        onClick={onClick}
+        slideShowRunning={slideShowRunning}
+        theme={theme}
+      />
+    );
+  }, [slideShowRunning, active]);
 
   return (
     <VerticalItemWrapper
@@ -55,61 +123,13 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       role="listitem"
     >
       {/* title */}
-      {
-        <TimelineTitleWrapper
-          className={className}
-          alternateCards={alternateCards}
-          mode={mode}
-          hide={!title}
-        >
-          <TimelineItemTitle title={title} active={active} theme={theme} />
-        </TimelineTitleWrapper>
-      }
+      {Title}
 
       {/* card section */}
-      <TimelineCardContentWrapper
-        className={`${className} card-content-wrapper ${
-          visible ? 'visible' : ''
-        }`}
-        alternateCards={alternateCards}
-        noTitle={!title}
-      >
-        <TimelineCard
-          active={active}
-          cardHeight={cardHeight}
-          content={cardSubtitle}
-          detailedText={cardDetailedText}
-          id={id}
-          media={media}
-          mode={mode}
-          onClick={onClick}
-          slideShowActive={slideShowRunning}
-          theme={theme}
-          title={cardTitle}
-          onShowMore={() =>
-            setTimeout(() => {
-              handleOnActive(0);
-            }, 100)
-          }
-          branchDir={className}
-          slideItemDuration={slideItemDuration}
-          customContent={contentDetailsChildren}
-          onElapsed={onElapsed || function () {}}
-        />
-      </TimelineCardContentWrapper>
+      {Content}
 
       {/* Circle */}
-      <VerticalCircle
-        className={className}
-        id={id}
-        active={active}
-        onClick={onClick}
-        onActive={handleOnActive}
-        theme={theme}
-        alternateCards={alternateCards}
-        slideShowRunning={slideShowRunning}
-        mode={mode}
-      />
+      {Circle}
     </VerticalItemWrapper>
   );
 };
