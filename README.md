@@ -391,7 +391,6 @@ yarn run rollup
 ## 🎯 What's coming next
 
 - Support for Mobile devices & Tablets (responsive).
-- Rendering custom content in timeline cards.
 
 ## Meta
 
