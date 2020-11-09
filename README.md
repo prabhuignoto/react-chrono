@@ -157,7 +157,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | hideControls            | hides the navigation controls.                                                        | 300          |
 | cardHeight              | sets the minimum height of the timeline card.                                         | 250          |
 | scrollable              | makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).   | true         |
-| flipLayut               | flips the layout (RTL). applicable only to `VERTICAL` and `VERTICAL_ALTERNATING`      | true         |
+| flipLayout               | flips the layout (RTL). applicable only to `VERTICAL` and `VERTICAL_ALTERNATING`      | true         |
 | cardPositionHorizontal  | positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`              |              |
 | theme                   | prop to customize the colors.                                                         |              |
 
