@@ -68,19 +68,21 @@ interface CommonPropsModel {
   theme?: Theme;
 
   hasFocus?: boolean;
+
+  flipLayout?: boolean;
 }
 
-interface CommonBranchAndLeafModel extends CommonPropsModel {
+interface CommonVerticalModel extends CommonPropsModel {
   active?: boolean;
   className: string;
   id?: string;
 }
 
-export interface VerticalCircleModel extends CommonBranchAndLeafModel {
+export interface VerticalCircleModel extends CommonVerticalModel {
   onActive: (timelinePointOffset: number) => void;
 }
 
-export interface VerticalItemModel extends CommonBranchAndLeafModel {
+export interface VerticalItemModel extends CommonVerticalModel {
   cardDetailedText?: string;
   cardSubtitle?: string;
   cardTitle?: string;

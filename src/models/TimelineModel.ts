@@ -129,9 +129,29 @@ export interface TimelineProps {
    */
   hideControls?: boolean;
 
+  /**
+   * Makes the timeline scrollable
+   *
+   * @type {(boolean | { scrollbar: boolean })}
+   * @memberof TimelineProps
+   */
   scrollable?: boolean | { scrollbar: boolean };
 
+  /**
+   * positions the card in Horizontal mode
+   *
+   * @type {('TOP' | 'BOTTOM')}
+   * @memberof TimelineProps
+   */
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
+
+  /**
+   *
+   *
+   * @type {boolean}
+   * @memberof TimelineProps
+   */
+  flipLayout?: boolean;
 
   children?: React.ReactNode | React.ReactNode[];
 }

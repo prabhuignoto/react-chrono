@@ -27,6 +27,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   scrollable = true,
   cardPositionHorizontal = 'BOTTOM',
   children,
+  flipLayout,
 }: Partial<TimelineProps>) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
@@ -115,7 +116,11 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   return (
     <Timeline
       activeTimelineItem={activeTimelineItem}
+      cardHeight={cardHeight}
+      cardPositionHorizontal={cardPositionHorizontal}
+      contentDetailsChildren={children}
       disableNavOnKey={disableNavOnKey}
+      hideControls={hideControls}
       itemWidth={itemWidth}
       items={timeLineItems}
       mode={mode}
@@ -125,16 +130,13 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       onPrevious={handleOnPrevious}
       onRestartSlideshow={restartSlideShow}
       onTimelineUpdated={useCallback(handleTimelineUpdate, [])}
-      slideItemDuration={slideItemDuration}
-      slideShowRunning={slideShowActive}
-      slideShowEnabled={slideShow}
-      theme={theme}
-      slideShow={slideShow}
-      cardHeight={cardHeight}
-      hideControls={hideControls}
       scrollable={scrollable}
-      cardPositionHorizontal={cardPositionHorizontal}
-      contentDetailsChildren={children}
+      slideItemDuration={slideItemDuration}
+      slideShow={slideShow}
+      slideShowEnabled={slideShow}
+      slideShowRunning={slideShowActive}
+      theme={theme}
+      flipLayout={flipLayout}
     />
   );
 };

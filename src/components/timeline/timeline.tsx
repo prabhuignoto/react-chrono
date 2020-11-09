@@ -48,6 +48,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     scrollable,
     cardPositionHorizontal,
     contentDetailsChildren,
+    flipLayout,
   } = props;
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -217,6 +218,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             slideItemDuration={slideItemDuration}
             slideShowRunning={slideShowRunning}
             theme={theme}
+            flipLayout={flipLayout}
           />
         ) : null}
 
@@ -258,6 +260,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             slideItemDuration={slideItemDuration}
             slideShowRunning={slideShowRunning}
             theme={theme}
+            flipLayout={flipLayout}
           />
         ) : null}
       </TimelineMainWrapper>

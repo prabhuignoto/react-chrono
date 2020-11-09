@@ -85,7 +85,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
       }, 100);
     }, []);
 
-    const setupTimer = (interval: number) => {
+    const setupTimer = useCallback((interval: number) => {
       if (!slideItemDuration) {
         return;
       }
@@ -104,7 +104,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
         setRemainInterval(slideItemDuration);
         id && onElapsed && onElapsed(id);
       }, interval);
-    };
+    }, []);
 
     // pause the slide show
     const tryHandlePauseSlideshow = useCallback(() => {
@@ -260,20 +260,20 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
         {detailedText && !customContent && (
           <ShowMore
             role="button"
-            onClick={() => {
+            onClick={useCallback(() => {
               if ((active && paused) || !slideShowActive) {
                 setShowMore(!showMore);
                 onShowMore();
               }
-            }}
-            onKeyPress={(event) => {
+            }, [])}
+            onKeyPress={useCallback((event) => {
               if (event.key === 'Enter') {
                 if ((active && paused) || !slideShowActive) {
                   setShowMore(!showMore);
                   onShowMore();
                 }
               }
-            }}
+            }, [])}
             className="show-more"
             show={canShowMore}
             theme={theme}

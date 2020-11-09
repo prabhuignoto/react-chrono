@@ -79,6 +79,7 @@ export const VerticalCircleWrapper = styled.div<{
 export const TimelineCardContentWrapper = styled.div<{
   alternateCards?: boolean;
   noTitle?: boolean;
+  flip?: boolean;
 }>`
   visibility: hidden;
 
@@ -92,13 +93,29 @@ export const TimelineCardContentWrapper = styled.div<{
     }
   }}
 
-  &.left {
-    order: 1;
-  }
+  ${(p) => {
+    if (!p.flip) {
+      return `
+        &.left {
+          order: 1;
+        }
+        &.right {
+          order: 3;
+        }
+      `;
+    } else {
+      return `
+        &.left {
+          order: 3;
+        }
+        &.right {
+          order: 1;
+        }
+      `;
+    }
+  }}
 
-  &.right {
-    order: 2;
-  }
+  
 
   &.visible {
     visibility: visible;
@@ -115,18 +132,24 @@ export const TimelineTitleWrapper = styled.div<{
   alternateCards?: boolean;
   mode?: TimelineMode;
   hide?: boolean;
+  flip?: boolean;
 }>`
   align-items: center;
   display: ${(p) => (p.hide && p.mode === 'VERTICAL' ? 'none' : 'flex')};
   ${(p) => (p.alternateCards ? 'width: 50%' : 'width: 15%')};
 
   &.left {
-    justify-content: flex-start;
-    order: 3;
+    justify-content: ${(p) => (p.flip ? 'flex-end' : 'flex-start')};
+    order: ${(p) => (p.flip && p.mode === 'VERTICAL_ALTERNATING' ? '1' : '3')};
   }
 
   &.right {
-    justify-content: flex-end;
-    order: 1;
+    ${(p) =>
+      p.flip
+        ? `
+      order: 3;
+      justify-content: flex-start;`
+        : `order: 1;
+    justify-content: flex-end;`};
   }
 `;
