@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { TimelineControlModel } from '../../../models/TimelineControlModel';
 import ChevronLeft from '../../icons/chev-left';
 import ChevronRightIcon from '../../icons/chev-right';
@@ -6,7 +6,6 @@ import ChevronsLeftIcon from '../../icons/chevs-left';
 import ChevronsRightIcon from '../../icons/chevs-right';
 import ReplayIcon from '../../icons/replay-icon';
 import {
-  ReplayWrapper,
   TimelineControlContainer,
   TimelineNavButton,
   TimelineNavItem,
@@ -27,6 +26,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
     slideShowEnabled,
     mode,
   }: TimelineControlModel) => {
+    const rotate = useMemo(() => mode !== 'HORIZONTAL', [mode]);
     return (
       <TimelineControlContainer slideShowActive={slideShowRunning}>
         <TimelineNavWrapper className="timeline-controls">
@@ -41,6 +41,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
               aria-disabled={disableLeft}
               aria-controls="timeline-main-wrapper"
               tabIndex={!disableLeft ? 0 : -1}
+              rotate={rotate}
             >
               <ChevronsLeftIcon />
             </TimelineNavButton>
@@ -57,6 +58,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
               aria-disabled={disableLeft}
               aria-controls="timeline-main-wrapper"
               tabIndex={!disableLeft ? 0 : -1}
+              rotate={rotate}
             >
               <ChevronLeft />
             </TimelineNavButton>
@@ -72,6 +74,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
               aria-label="next"
               aria-disabled={disableRight}
               aria-controls="timeline-main-wrapper"
+              rotate={rotate}
               tabIndex={!disableRight ? 0 : -1}
             >
               <ChevronRightIcon />
@@ -89,6 +92,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
               aria-disabled={disableRight}
               aria-controls="timeline-main-wrapper"
               tabIndex={!disableRight ? 0 : -1}
+              rotate={rotate}
             >
               <ChevronsRightIcon />
             </TimelineNavButton>
@@ -97,7 +101,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
           {/* slideshow button */}
           <TimelineNavItem>
             {slideShowEnabled && (
-              <ReplayWrapper
+              <TimelineNavButton
                 theme={theme}
                 onClick={onReplay}
                 title="Play Slideshow"
@@ -106,7 +110,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
                 aria-label="Play Slideshow"
               >
                 <ReplayIcon />
-              </ReplayWrapper>
+              </TimelineNavButton>
             )}
           </TimelineNavItem>
         </TimelineNavWrapper>

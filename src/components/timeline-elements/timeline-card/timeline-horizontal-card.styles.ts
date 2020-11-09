@@ -49,15 +49,15 @@ export const CircleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 5rem;
+  width: 5em;
 `;
 
 export const Circle = styled.div<{ theme: Theme }>`
   background: ${(p) => p.theme.primary};
   border-radius: 50%;
   cursor: pointer;
-  height: 1rem;
-  width: 1rem;
+  height: 1em;
+  width: 1em;
 
   &.active {
     animation: ${scaleUp} 0.1s ease-in;
@@ -68,13 +68,13 @@ export const Circle = styled.div<{ theme: Theme }>`
       border-radius: 50%;
       content: '';
       display: block;
-      height: 0.75rem;
+      height: 0.75em;
       left: 50%;
       position: absolute;
       right: 0;
       top: 50%;
       transform: translateY(-50%) translateX(-50%);
-      width: 0.75rem;
+      width: 0.75em;
       z-index: -1;
     }
   }
@@ -91,12 +91,12 @@ export const TimelineTitleContainer = styled.div`
   justify-content: flex-start;
 
   &.vertical {
-    margin-bottom: 1rem;
+    margin-bottom: 1em;
   }
 
   &.horizontal {
     position: absolute;
-    bottom: 2rem;
+    bottom: 2em;
   }
 `;
 
@@ -112,7 +112,7 @@ export const TimelineContentContainer = styled.div<{
   }
 
   &.vertical {
-    width: calc(100% - 5rem);
+    width: calc(100% - 5em);
     margin-left: auto;
     flex-direction: column;
   }

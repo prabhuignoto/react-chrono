@@ -7,17 +7,21 @@ export const TimelineNavWrapper = styled.ul<{ theme?: Theme }>`
   border-radius: 25px;
   display: flex;
   list-style: none;
-  padding: 0.25rem 0.25rem;
+  padding: 0.25em 0.25em;
 `;
 
 export const TimelineNavItem = styled.li<{ disable?: boolean }>`
-  padding: 0.1rem;
+  padding: 0.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   ${(p) => (p.disable ? 'pointer-events: none; filter: opacity(0.7)' : '')};
 `;
 
 export const TimelineNavButton = styled.button<{
   theme?: Theme;
   mode?: TimelineMode;
+  rotate?: boolean;
 }>`
   align-items: center;
   background: ${(p) => p.theme.primary};
@@ -27,23 +31,22 @@ export const TimelineNavButton = styled.button<{
   cursor: pointer;
   display: flex;
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.25));
-  height: 1.75rem;
+  height: 2em;
   justify-content: center;
-  margin: 0 0.2rem;
+  margin: 0 0.2em;
   padding: 0;
   transition: all 0.1s ease-in;
-  width: 1.75rem;
+  width: 2em;
 
   transform: ${(p) => {
-    if (p.mode !== 'HORIZONTAL') {
+    if (p.rotate) {
       return `rotate(90deg)`;
     }
   }};
 
   &:active {
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.25));
-    transform: ${(p) => (p.mode !== 'HORIZONTAL' ? 'rotate(90deg)' : '')}
-      scale(0.9);
+    transform: ${(p) => (p.rotate ? 'rotate(90deg)' : '')} scale(0.9);
   }
 
   svg {
@@ -61,16 +64,16 @@ export const TimelineControlContainer = styled.div<{
   visibility: ${(p) => (p.slideShowActive ? 'hidden' : 'visible')};
 `;
 
-export const ControlButton = styled.div<{ theme?: Theme }>`
+export const ControlButton = styled.button<{ theme?: Theme }>`
   align-items: center;
   background: ${(p) => p.theme.primary};
   border-radius: 50%;
   cursor: pointer;
   display: flex;
-  height: 1.75rem;
+  height: 2em;
   justify-content: center;
-  margin-left: 0.5rem;
-  width: 1.75rem;
+  margin-left: 0.5em;
+  width: 2em;
   outline: 0;
   color: #fff;
 

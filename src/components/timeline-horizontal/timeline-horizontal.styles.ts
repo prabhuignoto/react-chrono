@@ -4,7 +4,7 @@ export const TimelineHorizontalWrapper = styled.ul`
   display: flex;
   list-style: none;
   margin: 0;
-  padding: 1rem;
+  padding: 1em;
   width: 100%;
   &.vertical {
     flex-direction: column;

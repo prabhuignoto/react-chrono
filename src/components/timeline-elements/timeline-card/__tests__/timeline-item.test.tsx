@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import Item from '../timeline-card';
+import Item from '../timeline-horizontal-card';
 
 const onClick = jest.fn();
 const autoScroll = jest.fn();

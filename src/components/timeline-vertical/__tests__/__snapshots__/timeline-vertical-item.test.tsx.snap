@@ -19,7 +19,7 @@ exports[`Test tree branch render 1`] = `
     class="test-class card-content-wrapper  css-z17d9y"
   >
     <section
-      class="timeline-card-content active css-1yluw9g"
+      class="timeline-card-content active css-x11i70"
       tabindex="0"
     >
       <header
@@ -33,7 +33,7 @@ exports[`Test tree branch render 1`] = `
       </header>
       <div
         aria-expanded="false"
-        class="show-less card-description css-uerp6t"
+        class="show-less card-description css-1bnuad"
       >
         <p
           class=" css-1jsxpv8"
@@ -53,7 +53,7 @@ exports[`Test tree branch render 1`] = `
       role="button"
     >
       <div
-        class="active css-gp0zpt"
+        class="active css-zys4v9"
       />
     </div>
   </div>

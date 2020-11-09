@@ -17,7 +17,7 @@ export const MediaWrapper = styled.div<{
   border-radius: 4px;
   flex-direction: row;
   height: 0;
-  padding: 0.5rem;
+  padding: 0.5em;
   pointer-events: ${(p) => (!p.active && p.slideShowActive ? 'none' : '')};
   position: relative;
   text-align: center;
@@ -67,7 +67,7 @@ export const CardVideo = styled.video<{ height?: number }>`
 
 export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
   /* position: absolute; */
-  bottom: -1rem;
+  bottom: -1em;
   left: 0;
   right: 0;
   /* margin-left: auto; */
@@ -87,7 +87,7 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
   flex-direction: column;
   flex: 1;
   border-radius: 6px;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.5em;
 `;
 
 export const ErrorMessage = styled.span`

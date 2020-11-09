@@ -1,4 +1,5 @@
-import React from 'react';
+import cls from 'classnames';
+import React, { useMemo } from 'react';
 import { Theme } from '../../../models/Theme';
 import { TitleWrapper } from './timeline-card-title.styles';
 
@@ -13,12 +14,12 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
   active,
   theme,
 }: TitleModel) => {
+  const titleClass = useMemo(
+    () => cls('timeline-item-title', active ? 'active' : ''),
+    [active],
+  );
   return (
-    <TitleWrapper
-      className={active ? 'timeline-item-title active' : 'timeline-item-title'}
-      theme={theme}
-      hide={!title}
-    >
+    <TitleWrapper className={titleClass} theme={theme} hide={!title}>
       {title}
     </TitleWrapper>
   );

@@ -2,7 +2,7 @@
 
 exports[`Test Tree render 1`] = `
 <div
-  class="css-13ikcni"
+  class="css-v5yjdi"
   data-testid="tree-main"
   role="list"
 >
@@ -24,7 +24,7 @@ exports[`Test Tree render 1`] = `
       class="left card-content-wrapper  css-1qaldoj"
     >
       <section
-        class="timeline-card-content  css-1yluw9g"
+        class="timeline-card-content  css-x11i70"
         tabindex="0"
       >
         <header
@@ -38,7 +38,7 @@ exports[`Test Tree render 1`] = `
         </header>
         <div
           aria-expanded="false"
-          class="show-less card-description css-uerp6t"
+          class="show-less card-description css-1bnuad"
         >
           <p
             class=" css-1jsxpv8"
@@ -58,7 +58,7 @@ exports[`Test Tree render 1`] = `
         role="button"
       >
         <div
-          class="in-active css-gp0zpt"
+          class="in-active css-zys4v9"
         />
       </div>
     </div>
@@ -81,7 +81,7 @@ exports[`Test Tree render 1`] = `
       class="right card-content-wrapper  css-1qaldoj"
     >
       <section
-        class="timeline-card-content  css-1yluw9g"
+        class="timeline-card-content  css-x11i70"
         tabindex="0"
       >
         <header
@@ -95,7 +95,7 @@ exports[`Test Tree render 1`] = `
         </header>
         <div
           aria-expanded="false"
-          class="show-less card-description css-uerp6t"
+          class="show-less card-description css-1bnuad"
         >
           <p
             class=" css-1jsxpv8"
@@ -115,7 +115,7 @@ exports[`Test Tree render 1`] = `
         role="button"
       >
         <div
-          class="in-active css-gp0zpt"
+          class="in-active css-zys4v9"
         />
       </div>
     </div>
@@ -138,7 +138,7 @@ exports[`Test Tree render 1`] = `
       class="left card-content-wrapper  css-1qaldoj"
     >
       <section
-        class="timeline-card-content  css-1yluw9g"
+        class="timeline-card-content  css-x11i70"
         tabindex="0"
       >
         <header
@@ -154,7 +154,7 @@ exports[`Test Tree render 1`] = `
         </header>
         <div
           aria-expanded="false"
-          class="show-less card-description css-uerp6t"
+          class="show-less card-description css-1bnuad"
         >
           <p
             class=" css-1jsxpv8"
@@ -174,7 +174,7 @@ exports[`Test Tree render 1`] = `
         role="button"
       >
         <div
-          class="in-active css-gp0zpt"
+          class="in-active css-zys4v9"
         />
       </div>
     </div>
@@ -197,7 +197,7 @@ exports[`Test Tree render 1`] = `
       class="right card-content-wrapper  css-1qaldoj"
     >
       <section
-        class="timeline-card-content  css-1yluw9g"
+        class="timeline-card-content  css-x11i70"
         tabindex="0"
       >
         <header
@@ -212,7 +212,7 @@ exports[`Test Tree render 1`] = `
         </header>
         <div
           aria-expanded="false"
-          class="show-less card-description css-uerp6t"
+          class="show-less card-description css-1bnuad"
         >
           <p
             class=" css-1jsxpv8"
@@ -232,7 +232,7 @@ exports[`Test Tree render 1`] = `
         role="button"
       >
         <div
-          class="in-active css-gp0zpt"
+          class="in-active css-zys4v9"
         />
       </div>
     </div>
