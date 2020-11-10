@@ -37,11 +37,15 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   const initItems = () =>
     items && items.length
       ? items.map((item, index) => {
-          return Object.assign({}, item, {
-            id: nanoid(),
-            visible: true,
-            active: index === 0,
-          });
+          return Object.assign(
+            {},
+            {
+              id: nanoid(),
+              visible: true,
+              active: index === 0,
+            },
+            item,
+          );
         })
       : Array.from({ length: (children as ReactNode[]).length }).map<
           Partial<TimelineItemModel>
