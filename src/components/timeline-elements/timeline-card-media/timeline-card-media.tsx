@@ -115,7 +115,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         alt={media.name}
       />
     );
-  }, [active]);
+  }, [active, mediaLoaded]);
 
   ErrorMessageMem.displayName = 'Error Message';
 
