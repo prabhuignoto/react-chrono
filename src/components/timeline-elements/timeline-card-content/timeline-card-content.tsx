@@ -194,6 +194,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
       [showMore, customContent],
     );
 
+    const handleExpandDetails = useCallback(() => {
+      if ((active && paused) || !slideShowActive) {
+        setShowMore(!showMore);
+        onShowMore();
+      }
+    }, [active, paused, slideShowActive, showMore]);
+
     return (
       <TimelineItemContentWrapper
         className={contentClass}
@@ -260,20 +267,15 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
         {detailedText && !customContent && (
           <ShowMore
             role="button"
-            onClick={useCallback(() => {
-              if ((active && paused) || !slideShowActive) {
-                setShowMore(!showMore);
-                onShowMore();
-              }
-            }, [])}
-            onKeyPress={useCallback((event) => {
-              if (event.key === 'Enter') {
-                if ((active && paused) || !slideShowActive) {
-                  setShowMore(!showMore);
-                  onShowMore();
+            onClick={handleExpandDetails}
+            onKeyPress={useCallback(
+              (event) => {
+                if (event.key === 'Enter') {
+                  handleExpandDetails();
                 }
-              }
-            }, [])}
+              },
+              [active, paused, slideShowActive, showMore],
+            )}
             className="show-more"
             show={canShowMore}
             theme={theme}
