@@ -73,7 +73,8 @@ export const VerticalBasic: FunctionComponent<{
         mode="VERTICAL"
         slideShow
         slideItemDuration={2500}
-        scrollable
+        scrollable={{scrollbar:   false}}
+        flipLayout
       />
     </ComponentContainerTree>
   </Vertical>

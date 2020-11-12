@@ -41,7 +41,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
               aria-disabled={disableLeft}
               aria-controls="timeline-main-wrapper"
               tabIndex={!disableLeft ? 0 : -1}
-              rotate={rotate}
+              rotate={rotate ? 'TRUE' : 'FALSE'}
             >
               <ChevronsLeftIcon />
             </TimelineNavButton>
@@ -58,7 +58,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
               aria-disabled={disableLeft}
               aria-controls="timeline-main-wrapper"
               tabIndex={!disableLeft ? 0 : -1}
-              rotate={rotate}
+              rotate={rotate ? 'TRUE' : 'FALSE'}
             >
               <ChevronLeft />
             </TimelineNavButton>
@@ -74,7 +74,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
               aria-label="next"
               aria-disabled={disableRight}
               aria-controls="timeline-main-wrapper"
-              rotate={rotate}
+              rotate={rotate ? 'TRUE' : 'FALSE'}
               tabIndex={!disableRight ? 0 : -1}
             >
               <ChevronRightIcon />
@@ -92,7 +92,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
               aria-disabled={disableRight}
               aria-controls="timeline-main-wrapper"
               tabIndex={!disableRight ? 0 : -1}
-              rotate={rotate}
+              rotate={rotate ? 'TRUE' : 'FALSE'}
             >
               <ChevronsRightIcon />
             </TimelineNavButton>

@@ -47,6 +47,14 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     }
   };
 
+  // handler for read more
+  const handleShowMore = useCallback(() => {
+    setTimeout(() => {
+      handleOnActive(0);
+    }, 100);
+  }, []);
+
+  // timeline title
   const Title = useMemo(() => {
     return (
       <TimelineTitleWrapper
@@ -56,17 +64,23 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         hide={!title}
         flip={flipLayout}
       >
-        <TimelineItemTitle title={title} active={active} theme={theme} />
+        <TimelineItemTitle
+          title={title}
+          active={active}
+          theme={theme}
+          align={flipLayout ? 'left' : 'right'}
+        />
       </TimelineTitleWrapper>
     );
   }, [active]);
 
-  const handleShowMore = useCallback(() => {
-    setTimeout(() => {
-      handleOnActive(0);
-    }, 100);
-  }, []);
+  const verticalItemClass = useMemo(
+    () =>
+      cls({ [className]: true }, 'vertical-item-row', visible ? 'visible' : ''),
+    [],
+  );
 
+  // timeline card content
   const Content = useMemo(() => {
     const contentClass = cls('card-content-wrapper', visible ? 'visible' : '', {
       [className]: true,
@@ -101,6 +115,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     );
   }, [hasFocus, slideShowRunning, active]);
 
+  // timeline circle
   const Circle = useMemo(() => {
     return (
       <VerticalCircle
@@ -116,12 +131,6 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       />
     );
   }, [slideShowRunning, active]);
-
-  const verticalItemClass = useMemo(
-    () =>
-      cls({ [className]: true }, 'vertical-item-row', visible ? 'visible' : ''),
-    [],
-  );
 
   return (
     <VerticalItemWrapper

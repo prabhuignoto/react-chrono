@@ -21,7 +21,7 @@ export const TimelineNavItem = styled.li<{ disable?: boolean }>`
 export const TimelineNavButton = styled.button<{
   theme?: Theme;
   mode?: TimelineMode;
-  rotate?: boolean;
+  rotate?: 'TRUE' | 'FALSE';
 }>`
   align-items: center;
   background: ${(p) => p.theme.primary};
@@ -39,14 +39,14 @@ export const TimelineNavButton = styled.button<{
   width: 2em;
 
   transform: ${(p) => {
-    if (p.rotate) {
+    if (p.rotate === 'TRUE') {
       return `rotate(90deg)`;
     }
   }};
 
   &:active {
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.25));
-    transform: ${(p) => (p.rotate ? 'rotate(90deg)' : '')} scale(0.9);
+    transform: ${(p) => (p.rotate === 'TRUE' ? 'rotate(90deg)' : '')} scale(0.9);
   }
 
   svg {

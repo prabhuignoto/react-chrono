@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Scroll } from '../../models/TimelineHorizontalModel';
 import { TimelineMode } from '../../models/TimelineModel';
 
@@ -10,8 +10,8 @@ let useNewScrollPosition: (
 useNewScrollPosition = function (mode: TimelineMode, itemWidth?: number) {
   const [newOffset, setNewOffset] = useState(0);
 
-  const computeNewOffset = useCallback(
-    (parent: HTMLElement, scroll: Partial<Scroll>) => {
+  const computeNewOffset = useMemo(
+    () => (parent: HTMLElement, scroll: Partial<Scroll>) => {
       const { clientWidth, scrollLeft, scrollTop, clientHeight } = parent;
       const {
         timelinePointOffset,
@@ -56,13 +56,13 @@ useNewScrollPosition = function (mode: TimelineMode, itemWidth?: number) {
           (timelineContentOffset < scrollTop && circBottom > scrollTop) ||
           (circBottom > contrBottom && timelineContentOffset < contrBottom);
 
-        const newOffset = timelineContentOffset - timelineContentHeight;
+        const nOffset = timelineContentOffset - timelineContentHeight;
         const notVisible = !isVisible || isPartiallyVisible;
 
-        if (notVisible && newOffset + timelineContentHeight < contrBottom) {
-          setNewOffset(newOffset + Math.round(timelineContentHeight / 2));
+        if (notVisible && nOffset + timelineContentHeight < contrBottom) {
+          setNewOffset(nOffset + Math.round(timelineContentHeight / 2));
         } else if (notVisible) {
-          setNewOffset(newOffset);
+          setNewOffset(nOffset);
         }
       }
     },

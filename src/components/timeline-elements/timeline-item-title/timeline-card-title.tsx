@@ -7,19 +7,26 @@ interface TitleModel {
   title?: string;
   active?: boolean;
   theme?: Theme;
+  align?: 'left' | 'right';
 }
 
 const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
   title,
   active,
   theme,
+  align,
 }: TitleModel) => {
   const titleClass = useMemo(
     () => cls('timeline-item-title', active ? 'active' : ''),
     [active],
   );
   return (
-    <TitleWrapper className={titleClass} theme={theme} hide={!title}>
+    <TitleWrapper
+      className={titleClass}
+      theme={theme}
+      hide={!title}
+      align={align}
+    >
       {title}
     </TitleWrapper>
   );

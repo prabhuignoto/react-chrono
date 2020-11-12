@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import React, {
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -131,9 +132,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     } else {
       ele.scrollTop = newOffSet;
     }
-  }, [newOffSet, mode]);
+  }, [newOffSet]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // setup observer for the timeline elements
     setTimeout(() => {
       const element = timelineMainRef.current;
