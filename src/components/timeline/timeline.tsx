@@ -76,23 +76,23 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    const { keyCode } = event;
+    const { key } = event;
 
     if (
-      (mode === 'HORIZONTAL' && keyCode === 39) ||
+      (mode === 'HORIZONTAL' && key === 'ArrowRight') ||
       ((mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
-        keyCode === 40)
+        key === 'ArrowDown')
     ) {
       handleNext();
     } else if (
-      (mode === 'HORIZONTAL' && keyCode === 37) ||
+      (mode === 'HORIZONTAL' && key === 'ArrowLeft') ||
       ((mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
-        keyCode === 38)
+        key === 'ArrowUp')
     ) {
       handlePrevious();
-    } else if (keyCode === 36) {
+    } else if (key === 'Home') {
       handleFirst();
-    } else if (keyCode === 35) {
+    } else if (key === 'End') {
       handleLast();
     }
   };
@@ -266,9 +266,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         ) : null}
       </TimelineMainWrapper>
 
-      {/* placeholder to render timeline content for horizontal mode */}
-      <TimelineContentRender id={id.current} />
-
       {/* Timeline Controls */}
       {!hideControls && (
         <TimelineControlContainer mode={mode}>
@@ -288,6 +285,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           />
         </TimelineControlContainer>
       )}
+
+      {/* placeholder to render timeline content for horizontal mode */}
+      <TimelineContentRender id={id.current} />
     </Wrapper>
   );
 };

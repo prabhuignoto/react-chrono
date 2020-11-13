@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Theme } from '../../../models/Theme';
 
 export const TitleWrapper = styled.div<{
-  theme: Theme;
+  theme?: Theme;
   hide?: boolean;
   align?: string;
 }>`
@@ -15,7 +15,7 @@ export const TitleWrapper = styled.div<{
   text-align: ${(p) => p.align};
 
   &.active {
-    background: ${(p) => p.theme.secondary};
-    color: ${(p) => p.theme.primary};
+    background: ${(p) => p.theme?.secondary};
+    color: ${(p) => p.theme?.primary};
   }
 `;

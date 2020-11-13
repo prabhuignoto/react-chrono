@@ -208,7 +208,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
         noMedia={!media}
         minHeight={cardHeight}
         mode={mode}
-        onClick={(ev) => {
+        onClick={(ev: React.MouseEvent) => {
           ev.stopPropagation();
           if (!slideShowActive && onClick && id) {
             onClick(id);

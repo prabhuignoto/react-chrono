@@ -1,10 +1,10 @@
-import { css, keyframes } from '@emotion/core';
+import { css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
 
 export const TimelineItemContentWrapper = styled.section<{
-  theme: Theme;
+  theme?: Theme;
   noMedia?: boolean;
   minHeight?: number;
   mode?: TimelineMode;
@@ -23,7 +23,7 @@ export const TimelineItemContentWrapper = styled.section<{
   width: 100%;
 
   &:focus {
-    outline: 1px solid ${(p) => p.theme.primary};
+    outline: 1px solid ${(p) => p.theme?.primary};
   }
 `;
 
@@ -68,7 +68,7 @@ export const TimelineContentDetails = styled.p`
 `;
 
 export const TimelineContentDetailsWrapper = styled.div<{
-  theme: Theme;
+  theme?: Theme;
   customContent?: boolean;
 }>`
   align-items: center;
@@ -80,9 +80,9 @@ export const TimelineContentDetailsWrapper = styled.div<{
   ${(p) => (!p.customContent ? 'max-height: 200px;' : '')}
   overflow-x: hidden;
   overflow-y: auto;
-  scrollbar-color: ${(p) => p.theme.primary} default;
+  scrollbar-color: ${(p) => p.theme?.primary} default;
   scrollbar-width: thin;
-  transition: max-height 0.2s linear;
+  transition: max-height 150ms linear;
   width: 97%;
   padding: 0.2em 0.2em;
 
@@ -105,8 +105,8 @@ export const TimelineContentDetailsWrapper = styled.div<{
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${(p) => p.theme.primary};
-    outline: 1px solid ${(p) => p.theme.primary};
+    background-color: ${(p) => p.theme?.primary};
+    outline: 1px solid ${(p) => p.theme?.primary};
   }
 `;
 

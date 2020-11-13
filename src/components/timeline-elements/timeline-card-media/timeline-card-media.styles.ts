@@ -3,7 +3,7 @@ import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
 
 export const MediaWrapper = styled.div<{
-  theme: Theme;
+  theme?: Theme;
   active?: boolean;
   mode?: TimelineMode;
   dir?: string;
@@ -13,7 +13,7 @@ export const MediaWrapper = styled.div<{
   ${(p) => (p.cardHeight ? `min-height: ${p.cardHeight}px;` : '')};
   align-items: center;
   align-self: center;
-  background: ${(p) => (p.active ? `rgba(${p.theme.secondary}, 0.35)` : '')};
+  background: ${(p) => (p.active ? `rgba(${p.theme?.secondary}, 0.35)` : '')};
   border-radius: 4px;
   flex-direction: row;
   height: 0;

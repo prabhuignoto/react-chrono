@@ -1,4 +1,4 @@
-import { keyframes } from '@emotion/core';
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Theme } from '../../../models/Theme';
 
@@ -52,8 +52,12 @@ export const CircleWrapper = styled.div`
   width: 5em;
 `;
 
-export const Circle = styled.div<{ theme: Theme }>`
-  background: ${(p) => p.theme.primary};
+interface CircleModel {
+  theme?: Theme;
+}
+
+export const Circle = styled.div<CircleModel>`
+  background: ${(p: CircleModel) => p.theme?.primary};
   border-radius: 50%;
   cursor: pointer;
   height: 1em;
