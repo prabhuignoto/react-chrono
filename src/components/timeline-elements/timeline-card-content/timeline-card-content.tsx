@@ -257,6 +257,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
             <TimelineContentDetails
               className={showMore ? 'active' : ''}
               ref={detailsRef}
+              theme={theme}
             >
               {detailedText}
             </TimelineContentDetails>

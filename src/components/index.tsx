@@ -18,10 +18,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   disableNavOnKey = false,
   slideShow = false,
   slideItemDuration = 5000,
-  theme = {
-    primary: '#0f52ba',
-    secondary: '#ffdf00',
-  },
+  theme,
   cardHeight = 200,
   hideControls = false,
   scrollable = true,
@@ -33,6 +30,16 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
   const [slideShowActive, setSlideshowActive] = useState(false);
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
+
+  const customTheme = Object.assign(
+    {
+      primary: '#0f52ba',
+      secondary: '#ffdf00',
+      cardBgColor: '#fff',
+      cardForeColor: '#000',
+    },
+    theme,
+  );
 
   const initItems = () =>
     items && items.length
@@ -135,7 +142,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       slideShow={slideShow}
       slideShowEnabled={slideShow}
       slideShowRunning={slideShowActive}
-      theme={theme}
+      theme={customTheme}
       flipLayout={flipLayout}
     />
   );

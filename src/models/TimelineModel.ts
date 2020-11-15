@@ -1,3 +1,4 @@
+import { Theme } from './Theme';
 import { TimelineItemModel } from './TimelineItemModel';
 
 /**
@@ -107,10 +108,7 @@ export interface TimelineProps {
    *   }}
    * @memberof TimelineProps
    */
-  theme?: {
-    primary: string;
-    secondary: string;
-  };
+  theme?: Theme;
   /**
    * Minimum height of the card
    *

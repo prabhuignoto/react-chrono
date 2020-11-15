@@ -75,6 +75,7 @@ export const VerticalBasic: FunctionComponent<{
         slideItemDuration={2500}
         scrollable={{scrollbar:   false}}
         flipLayout
+        theme={{cardBgColor:  "#D6EAF8",  cardForeColor:  "blue"}}
       />
     </ComponentContainerTree>
   </Vertical>

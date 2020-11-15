@@ -10,7 +10,7 @@ export const TimelineItemContentWrapper = styled.section<{
   mode?: TimelineMode;
 }>`
   align-items: flex-start;
-  background: #fff;
+  background: ${(p) => p.theme.cardBgColor};
   border-radius: 4px;
   display: flex;
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
@@ -45,7 +45,7 @@ export const TimelineContentSubTitle = styled.p<{
 `;
 
 export const TimelinecardTitle = styled.p<{ theme: Theme; dir?: string }>`
-  color: #323232;
+  color: ${(p) => p.theme.cardForeColor};
   font-size: 1rem;
   font-weight: 600;
   margin: 0;
@@ -58,8 +58,8 @@ export const TimelinecardTitle = styled.p<{ theme: Theme; dir?: string }>`
   width: 95%;
 `;
 
-export const TimelineContentDetails = styled.p`
-  color: #191919;
+export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
+  color: ${(p) => p.theme.cardForeColor};
   font-size: 0.85rem;
   font-weight: 400;
   margin: 0;
