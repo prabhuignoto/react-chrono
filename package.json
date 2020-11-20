@@ -35,7 +35,7 @@
     "@emotion/styled": "^11.0.0-next.19",
     "classnames": "^2.2.6",
     "focus-visible": "^5.2.0",
-    "nanoid": "^3.1.16"
+    "nanoid": "^3.1.17"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -58,12 +58,12 @@
     "@snowpack/plugin-typescript": "^1.1.0",
     "@snowpack/web-test-runner-plugin": "^0.1.4",
     "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.1.2",
+    "@testing-library/react": "^11.2.1",
     "@testing-library/user-event": "^12.2.2",
     "@types/classnames": "^2.2.11",
     "@types/jest": "^26.0.15",
     "@types/nanoid": "^2.1.0",
-    "@types/node": "^14.14.8",
+    "@types/node": "^14.14.9",
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
     "@types/react-router-dom": "^5.1.6",
@@ -95,7 +95,7 @@
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.10.0",
     "ts-jest": "^26.4.4",
-    "typescript": "^4.0.5"
+    "typescript": "^4.1.2"
   },
   "peerDependencies": {
     "react": "^16.13.1",

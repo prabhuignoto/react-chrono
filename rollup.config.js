@@ -42,7 +42,7 @@ export default {
       strict: true,
       banner,
       sourcemap: true,
-      name: "ReactCrono",
+      name: "ReactChrono",
       globals: {
         nanoid: "nanoid",
         react: "React",
