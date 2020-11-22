@@ -1,5 +1,4 @@
 import 'focus-visible';
-import { nanoid } from 'nanoid';
 import React, {
   useCallback,
   useEffect,
@@ -66,7 +65,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   }, [slideShowRunning, scrollable]);
 
   // generate a unique id for the timeline content
-  const id = useRef(nanoid());
+  const id = useRef(Math.random().toString(16).slice(2));
 
   // handlers for navigation
   const handleNext = () => hasFocus && onNext();

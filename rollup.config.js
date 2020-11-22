@@ -44,7 +44,6 @@ export default {
       sourcemap: true,
       name: "ReactChrono",
       globals: {
-        nanoid: "nanoid",
         react: "React",
         "react-dom": "ReactDOM"
       },
@@ -78,7 +77,6 @@ export default {
   external: [
     "react",
     "react-dom",
-    "nanoid",
     "@babel/runtime",
   ],
 };

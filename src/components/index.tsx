@@ -1,5 +1,4 @@
 import 'focus-visible';
-import { nanoid } from 'nanoid';
 import React, {
   ReactNode,
   useCallback,
@@ -45,7 +44,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     items && items.length
       ? items.map((item, index) => {
           return Object.assign({}, item, {
-            id: nanoid(),
+            id: Math.random().toString(16).slice(2),
             visible: true,
             active: index === 0,
           });
@@ -53,7 +52,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       : Array.from({ length: (children as ReactNode[]).length }).map<
           Partial<TimelineItemModel>
         >((item, index) => ({
-          id: nanoid(),
+          id: Math.random().toString(16).slice(2),
           visible: true,
           active: index === 0,
         }));
