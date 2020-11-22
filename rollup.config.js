@@ -25,7 +25,6 @@ export default {
       exports: "named",
       strict: true,
       banner,
-      sourcemap: true
     },
     {
       file: pkg.module,
@@ -33,7 +32,6 @@ export default {
       exports: "named",
       strict: true,
       banner,
-      sourcemap: true,
     },
     {
       file: pkg.umd,
@@ -41,7 +39,6 @@ export default {
       exports: "named",
       strict: true,
       banner,
-      sourcemap: true,
       name: "ReactChrono",
       globals: {
         react: "React",
