@@ -11,19 +11,20 @@ import { TimelineProps } from '../models/TimelineModel';
 import Timeline from './timeline/timeline';
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
-  items,
-  itemWidth = 300,
-  mode = 'HORIZONTAL',
-  disableNavOnKey = false,
-  slideShow = false,
-  slideItemDuration = 5000,
-  theme,
+  allowDynamicUpdate = false,
   cardHeight = 200,
-  hideControls = false,
-  scrollable = true,
   cardPositionHorizontal = 'BOTTOM',
   children,
+  disableNavOnKey = false,
   flipLayout,
+  hideControls = false,
+  itemWidth = 300,
+  items,
+  mode = 'HORIZONTAL',
+  scrollable = true,
+  slideItemDuration = 5000,
+  slideShow = false,
+  theme,
 }: Partial<TimelineProps>) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
@@ -61,7 +62,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     const items = initItems();
     timeLineItemsRef.current = items;
     setItems(items);
-  }, []);
+  }, [JSON.stringify(allowDynamicUpdate ? items : null)]);
 
   const handleTimelineUpdate = useCallback((actvTimelineIndex: number) => {
     setItems((items) =>

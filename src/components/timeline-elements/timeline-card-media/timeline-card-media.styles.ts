@@ -101,3 +101,9 @@ export const ErrorMessage = styled.span`
   top: 50%;
   transform: translateY(-50%);
 `;
+
+export const IFrameVideo = styled.iframe`
+  position: relative;
+  height: 100%;
+  width: 100%;
+`;

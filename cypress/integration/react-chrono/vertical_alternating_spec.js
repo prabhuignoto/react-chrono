@@ -78,8 +78,8 @@ context('Chrono.Vertical.Alternating.Mixed', () => {
   it('check video', () => {
     cy.get('.vertical-item-row')
       .eq(2)
-      .find('video>source')
-      .should('have.attr', 'src', '/operation-barbarasso.mp4');
+      .find('iframe')
+      .should('have.attr', 'src', 'https://www.youtube.com/embed/gPMgYC0sXos');
   });
 
   it('check video', () => {

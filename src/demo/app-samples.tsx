@@ -112,6 +112,7 @@ export const VerticalTree: FunctionComponent<{
         slideShow
         slideItemDuration={2350}
         scrollable={{scrollbar: false}}
+        allowDynamicUpdate
         // theme={{ primary: '#4a4e69', secondary: '#c9ada7' }}
       />
     </ComponentContainerTree>
@@ -238,7 +239,7 @@ export const VerticalCustomContent: FunctionComponent<{
     </Description>
     <ComponentContainerTree type={type}>
       <Chrono
-        mode="HORIZONTAL" 
+        mode="VERTICAL" 
         cardHeight={200}
         scrollable
       >

@@ -157,6 +157,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | slideItemDuration       | duration (in ms), the timeline card is active during  a `slideshow`.                  | 5000         |
 | itemWidth               | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
 | hideControls            | hides the navigation controls.                                                        | 300          |
+| allowDynamicUpdate      | allows timeline items to be updated dynamically.                                      | false        |
 | cardHeight              | sets the minimum height of the timeline card.                                         | 250          |
 | scrollable              | makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).   | true         |
 | flipLayout               | flips the layout (RTL). applicable only to `VERTICAL` and `VERTICAL_ALTERNATING`      | false         |
@@ -268,6 +269,23 @@ Videos start playing automatically when active and will be automatically paused 
   media: {
     source: {
       url: "/pearl-harbor.mp4",
+      type: "mp4"
+    },
+    type: "VIDEO",
+    name: "Pearl Harbor"
+  }
+}
+```
+
+To embed YouTube videos, use the right embed url.
+
+```sh
+{
+  title: "7 December 1941",
+  cardTitle: "Pearl Harbor",
+  media: {
+    source: {
+      url: "https://www.youtube.com/embed/f6cz9gtMTeI",
       type: "mp4"
     },
     type: "VIDEO",

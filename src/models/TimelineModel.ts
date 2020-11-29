@@ -152,6 +152,8 @@ export interface TimelineProps {
   flipLayout?: boolean;
 
   children?: React.ReactNode | React.ReactNode[];
+
+  allowDynamicUpdate?: boolean;
 }
 
 export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';

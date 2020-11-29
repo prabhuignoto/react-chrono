@@ -29,8 +29,7 @@ const items: TimelineItemModel[] = [
     cardTitle: 'Operation Barbarossa',
     media: {
       source: {
-        url: '/operation-barbarasso.mp4',
-        type: 'mp4',
+        url: 'https://www.youtube.com/embed/gPMgYC0sXos',
       },
       type: 'VIDEO',
     },

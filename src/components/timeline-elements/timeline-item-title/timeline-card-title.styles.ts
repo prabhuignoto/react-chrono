@@ -12,7 +12,7 @@ export const TitleWrapper = styled.div<{
   overflow: hidden;
   padding: 0.25rem;
   visibility: ${(p) => (p.hide ? 'hidden' : 'visible')};
-  text-align: ${(p) => p.align};
+  text-align: ${(p) => (p.align ? p.align : '')};
 
   &.active {
     background: ${(p) => p.theme?.secondary};

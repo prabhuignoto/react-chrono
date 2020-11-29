@@ -14,6 +14,7 @@ import {
   Wrapper
 } from './App.styles';
 import data from './data';
+import mixed from './data-mixed';
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
@@ -31,6 +32,8 @@ const NewDemo: React.FunctionComponent = () => {
     setItems(newItems);
   }, []);
 
+  const [state, setState]  = useState(0);
+  
   return (
     <Wrapper>
       <h3>Timeline of World War 2</h3>
@@ -66,7 +69,8 @@ const NewDemo: React.FunctionComponent = () => {
             {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} 
           </Route>
           <Route path="/vertical-alternating">
-            {items.length > 0 && <VerticalTree type={'big-screen'} items={items} />}
+            <button onClick={() => setState(1 - state)}>change</button>
+            {items.length > 0 && <VerticalTree type={'big-screen'} items={state ? items : mixed} />}
           </Route>
           <Route path="/horizontal">
             {items.length > 0 && (
