@@ -1,5 +1,11 @@
 version = 1
 
+exclude_patterns = [
+  "**/node_modules/",
+  "dist/**",
+  "src/examples/**"
+]
+
 [[analyzers]]
 name = "javascript"
 enabled = true
@@ -9,9 +15,3 @@ enabled = true
   plugins = ["react"]
   style_guide = "standard"
   dialect = "typescript"
-
-exclude_patterns = [
-  "**/node_modules/",
-  "dist/**",
-  "src/examples/**"
-]
