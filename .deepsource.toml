@@ -4,6 +4,7 @@ exclude_patterns = [
   "**/node_modules/",
   "dist/**",
   "src/examples/**"
+  "src/demo/**"
 ]
 
 [[analyzers]]
