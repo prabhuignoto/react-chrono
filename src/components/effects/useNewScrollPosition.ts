@@ -5,21 +5,14 @@ import { TimelineMode } from '../../models/TimelineModel';
 let useNewScrollPosition: (
   mode: TimelineMode,
   itemWidth?: number,
-) => [number, (e: HTMLElement, s: Partial<Scroll>) => void, boolean];
+) => [number, (e: HTMLElement, s: Partial<Scroll>) => void];
 
 useNewScrollPosition = function (mode: TimelineMode, itemWidth?: number) {
   const [newOffset, setOffset] = useState(0);
-  const [scrollEnd, setScrollEnd] = useState(false);
 
   const computeNewOffset = useMemo(
     () => (parent: HTMLElement, scroll: Partial<Scroll>) => {
-      const {
-        clientWidth,
-        scrollLeft,
-        scrollTop,
-        clientHeight,
-        scrollHeight,
-      } = parent;
+      const { clientWidth, scrollLeft, scrollTop, clientHeight } = parent;
       const { pointOffset, pointWidth, contentHeight, contentOffset } = scroll;
 
       if (!pointOffset) {
@@ -66,16 +59,12 @@ useNewScrollPosition = function (mode: TimelineMode, itemWidth?: number) {
         } else if (notVisible) {
           setOffset(nOffset);
         }
-
-        if (contrBottom === scrollHeight) {
-          setScrollEnd(true);
-        }
       }
     },
     [mode, itemWidth],
   );
 
-  return [newOffset, computeNewOffset, scrollEnd];
+  return [newOffset, computeNewOffset];
 };
 
 export default useNewScrollPosition;
