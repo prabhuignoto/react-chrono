@@ -52,10 +52,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onScrollEnd,
   } = props;
 
-  const [newOffSet, setNewOffset, scrollEnd] = useNewScrollPosition(
-    mode,
-    itemWidth,
-  );
+  const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
   const [hasFocus, setHasFocus] = useState(false);
 
