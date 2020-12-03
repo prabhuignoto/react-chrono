@@ -8,61 +8,56 @@ let useNewScrollPosition: (
 ) => [number, (e: HTMLElement, s: Partial<Scroll>) => void];
 
 useNewScrollPosition = function (mode: TimelineMode, itemWidth?: number) {
-  const [newOffset, setNewOffset] = useState(0);
+  const [newOffset, setOffset] = useState(0);
 
   const computeNewOffset = useMemo(
     () => (parent: HTMLElement, scroll: Partial<Scroll>) => {
       const { clientWidth, scrollLeft, scrollTop, clientHeight } = parent;
-      const {
-        timelinePointOffset,
-        timelinePointWidth,
-        timelineContentHeight,
-        timelineContentOffset,
-      } = scroll;
+      const { pointOffset, pointWidth, contentHeight, contentOffset } = scroll;
 
-      if (!timelinePointOffset) {
+      if (!pointOffset) {
         return;
       }
 
-      if (mode === 'HORIZONTAL' && itemWidth && timelinePointWidth) {
+      if (mode === 'HORIZONTAL' && itemWidth && pointWidth) {
         let contrRight = scrollLeft + clientWidth;
-        let circRight = timelinePointOffset + timelinePointWidth;
-        let isVisible =
-          timelinePointOffset >= scrollLeft && circRight <= contrRight;
-        let isPartiallyVisible =
-          (timelinePointOffset < scrollLeft && circRight > scrollLeft) ||
-          (circRight > contrRight && timelinePointOffset < contrRight);
+        let circRight = pointOffset + pointWidth;
+        let isVisible = pointOffset >= scrollLeft && circRight <= contrRight;
 
-        const leftGap = timelinePointOffset - scrollLeft;
-        const rightGap = contrRight - timelinePointOffset;
+        let isPartiallyVisible =
+          (pointOffset < scrollLeft && circRight > scrollLeft) ||
+          (circRight > contrRight && pointOffset < contrRight);
+
+        const leftGap = pointOffset - scrollLeft;
+        const rightGap = contrRight - pointOffset;
 
         if (!(isVisible || isPartiallyVisible)) {
-          setNewOffset(timelinePointOffset - itemWidth);
+          setOffset(pointOffset - itemWidth);
         } else if (leftGap <= itemWidth && leftGap >= 0) {
-          setNewOffset(timelinePointOffset - itemWidth);
+          setOffset(pointOffset - itemWidth);
         } else if (rightGap <= itemWidth && rightGap >= 0) {
-          setNewOffset(timelinePointOffset - itemWidth);
+          setOffset(pointOffset - itemWidth);
         }
       } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
-        if (!timelineContentOffset || !timelineContentHeight) {
+        if (!contentOffset || !contentHeight) {
           return;
         }
+
         let contrBottom = scrollTop + clientHeight;
-        let circBottom = timelineContentOffset + timelineContentHeight;
-        let isVisible =
-          timelineContentOffset >= scrollTop && circBottom <= contrBottom;
+        let circBottom = contentOffset + contentHeight;
+        let isVisible = contentOffset >= scrollTop && circBottom <= contrBottom;
 
         let isPartiallyVisible =
-          (timelineContentOffset < scrollTop && circBottom > scrollTop) ||
-          (circBottom > contrBottom && timelineContentOffset < contrBottom);
+          (contentOffset < scrollTop && circBottom > scrollTop) ||
+          (circBottom > contrBottom && contentOffset < contrBottom);
 
-        const nOffset = timelineContentOffset - timelineContentHeight;
+        const nOffset = contentOffset - contentHeight;
         const notVisible = !isVisible || isPartiallyVisible;
 
-        if (notVisible && nOffset + timelineContentHeight < contrBottom) {
-          setNewOffset(nOffset + Math.round(timelineContentHeight / 2));
+        if (notVisible && nOffset + contentHeight < contrBottom) {
+          setOffset(nOffset + Math.round(contentHeight / 2));
         } else if (notVisible) {
-          setNewOffset(nOffset);
+          setOffset(nOffset);
         }
       }
     },

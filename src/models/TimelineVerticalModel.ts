@@ -79,7 +79,7 @@ interface CommonVerticalModel extends CommonPropsModel {
 }
 
 export interface VerticalCircleModel extends CommonVerticalModel {
-  onActive: (timelinePointOffset: number) => void;
+  onActive: (pointOffset: number) => void;
 }
 
 export interface VerticalItemModel extends CommonVerticalModel {
@@ -93,9 +93,9 @@ export interface VerticalItemModel extends CommonVerticalModel {
   visible?: boolean;
   contentDetailsChildren?: React.ReactNode;
   onActive: (
-    timelinePointOffset: number,
-    timelineContentHeight: number,
-    timelineContentOffset: number,
+    pointOffset: number,
+    contentHeight: number,
+    contentOffset: number,
   ) => void;
 }
 

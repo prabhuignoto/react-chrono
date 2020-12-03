@@ -22,10 +22,10 @@ export interface TimelineItemModel {
 
 export interface TimelineCardModel extends TimelineItemModel {
   autoScroll: ({
-    timelinePointOffset,
-    timelinePointWidth,
+    pointOffset,
+    pointWidth,
     timelinePointHeight,
-    timelineContentHeight,
+    contentHeight,
   }: Partial<Scroll>) => void;
   mode: TimelineMode;
   onClick: (id?: string) => void;

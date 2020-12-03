@@ -161,9 +161,10 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | allowDynamicUpdate      | allows timeline items to be updated dynamically.                                      | false        |
 | cardHeight              | sets the minimum height of the timeline card.                                         | 250          |
 | scrollable              | makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).   | true         |
-| flipLayout               | flips the layout (RTL). applicable only to `VERTICAL` and `VERTICAL_ALTERNATING`      | false         |
+| flipLayout              | flips the layout (RTL). applicable only to `VERTICAL` and `VERTICAL_ALTERNATING`      | false         |
 | cardPositionHorizontal  | positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`              |              |
 | theme                   | prop to customize the colors.                                                         |              |
+| onScrollEnd             | use the `onScrollEnd` to detect the end of the timeline.                              |              |
 
 ### Mode
 

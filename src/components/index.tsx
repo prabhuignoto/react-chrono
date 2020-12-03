@@ -21,6 +21,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   itemWidth = 300,
   items,
   mode = 'HORIZONTAL',
+  onScrollEnd,
   scrollable = true,
   slideItemDuration = 5000,
   slideShow = false,
@@ -144,6 +145,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
       slideShowRunning={slideShowActive}
       theme={customTheme}
       flipLayout={flipLayout}
+      onScrollEnd={onScrollEnd}
     />
   );
 };
