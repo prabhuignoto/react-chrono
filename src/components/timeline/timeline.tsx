@@ -49,9 +49,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     cardPositionHorizontal,
     contentDetailsChildren,
     flipLayout,
+    onScrollEnd,
   } = props;
 
-  const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
+  const [newOffSet, setNewOffset, scrollEnd] = useNewScrollPosition(
+    mode,
+    itemWidth,
+  );
   const observer = useRef<IntersectionObserver | null>(null);
   const [hasFocus, setHasFocus] = useState(false);
 
@@ -202,6 +206,24 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         className={`${mode.toLowerCase()} timeline-main-wrapper`}
         id="timeline-main-wrapper"
         theme={theme}
+        onScroll={(ev) => {
+          const target = ev.target as HTMLElement;
+          let scrolled = 0;
+
+          if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
+            scrolled = target.scrollTop + target.clientHeight;
+
+            if (target.scrollHeight === scrolled) {
+              onScrollEnd && onScrollEnd();
+            }
+          } else {
+            scrolled = target.scrollLeft + target.offsetWidth;
+
+            if (target.scrollWidth === scrolled) {
+              onScrollEnd && onScrollEnd();
+            }
+          }
+        }}
       >
         {/* VERTICAL ALTERNATING */}
         {mode === 'VERTICAL_ALTERNATING' ? (

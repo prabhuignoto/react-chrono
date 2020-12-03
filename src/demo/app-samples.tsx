@@ -113,7 +113,7 @@ export const VerticalTree: FunctionComponent<{
         slideItemDuration={2350}
         scrollable={{scrollbar: false}}
         allowDynamicUpdate
-        // theme={{ primary: '#4a4e69', secondary: '#c9ada7' }}
+        onScrollEnd={() => console.log('end reached')}
       />
     </ComponentContainerTree>
   </Vertical>

@@ -53,8 +53,8 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         const wrapperOffsetLeft = wrapper.offsetLeft;
 
         autoScroll({
-          timelinePointOffset: circleOffsetLeft + wrapperOffsetLeft,
-          timelinePointWidth: circle.clientWidth,
+          pointOffset: circleOffsetLeft + wrapperOffsetLeft,
+          pointWidth: circle.clientWidth,
         });
       }
     }

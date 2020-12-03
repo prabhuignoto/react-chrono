@@ -154,6 +154,8 @@ export interface TimelineProps {
   children?: React.ReactNode | React.ReactNode[];
 
   allowDynamicUpdate?: boolean;
+
+  onScrollEnd?: () => void;
 }
 
 export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';

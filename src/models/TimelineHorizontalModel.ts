@@ -26,7 +26,7 @@ export interface Scroll {
    * @type {number}
    * @memberof Scroll
    */
-  timelineContentHeight: number;
+  contentHeight: number;
 
   /**
    * Offset of the Content card
@@ -34,7 +34,7 @@ export interface Scroll {
    * @type {number}
    * @memberof Scroll
    */
-  timelineContentOffset: number;
+  contentOffset: number;
 
   /**
    * Height of the timeline point
@@ -50,7 +50,7 @@ export interface Scroll {
    * @type {number}
    * @memberof Scroll
    */
-  timelinePointOffset: number;
+  pointOffset: number;
 
   /**
    * Width of the timeline point
@@ -58,5 +58,5 @@ export interface Scroll {
    * @type {number}
    * @memberof Scroll
    */
-  timelinePointWidth: number;
+  pointWidth: number;
 }
