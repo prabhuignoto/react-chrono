@@ -420,10 +420,6 @@ yarn run rollup
 - Styled with [emotion](https://emotion.sh/).
 - Powered by [snowpack](https://www.snowpack.dev/)
 
-## 🎯 What's coming next
-
-- Support for Mobile devices & Tablets (responsive).
-
 ## Meta
 
 Huge thanks to [BrowserStack](https://www.browserstack.com/) for the Open Source License!
