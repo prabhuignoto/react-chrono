@@ -65,7 +65,7 @@
 ## ⚡ Installation
 
 ```sh
-yarn install react-chrono
+yarn add react-chrono
 ```
 
 ## Getting Started
