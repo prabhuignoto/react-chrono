@@ -59,7 +59,6 @@
 - [🧪 Tests](#-tests)
 - [🤝 Contributing](#-contributing)
 - [🧱 Built with](#-built-with)
-- [🎯 What's coming next](#-whats-coming-next)
 - [Meta](#meta)
 
 ## ⚡ Installation
