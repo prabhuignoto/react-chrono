@@ -17,43 +17,50 @@ const banner = `/*
 `;
 
 export default {
-  input: "src/react-chrono.ts",
+  input: 'src/react-chrono.ts',
   output: [
     {
       file: pkg.main,
-      format: "cjs",
-      exports: "named",
+      format: 'cjs',
+      exports: 'named',
       strict: true,
       banner,
     },
     {
       file: pkg.module,
-      format: "es",
-      exports: "named",
+      format: 'es',
+      exports: 'named',
       strict: true,
       banner,
     },
     {
       file: pkg.umd,
-      format: "umd",
-      exports: "named",
+      format: 'umd',
+      exports: 'named',
       strict: true,
       banner,
-      name: "ReactChrono",
+      name: 'ReactChrono',
       globals: {
-        react: "React",
-        "react-dom": "ReactDOM"
+        react: 'React',
+        'react-dom': 'ReactDOM',
       },
     },
   ],
   plugins: [
     typescript(),
     babel({
-      extensions: ["tsx", "ts"],
-      babelHelpers: "runtime",
+      extensions: ['tsx', 'ts'],
+      babelHelpers: 'runtime',
       plugins: [
-        "@babel/plugin-transform-runtime",
-        "@babel/plugin-proposal-optional-chaining",
+        '@babel/plugin-transform-runtime',
+        '@babel/plugin-proposal-optional-chaining',
+        [
+          '@emotion',
+          {
+            // sourceMap is on by default but source maps are dead code eliminated in production
+            sourceMap: false,
+          },
+        ],
       ],
     }),
     buble({
@@ -63,17 +70,23 @@ export default {
       },
     }),
     postcss({
-      plugins: [cssnano({
-        preset: 'default'
-      })]
+      plugins: [
+        cssnano({
+          preset: 'default',
+        }),
+      ],
     }),
     common(),
     resolve(),
-    terser()
+    terser({
+      compress: {
+        drop_debugger: true,
+        drop_console: true,
+      },
+      format: {
+        comments: false,
+      }
+    }),
   ],
-  external: [
-    "react",
-    "react-dom",
-    "@babel/runtime",
-  ],
+  external: ['react', 'react-dom', '@babel/runtime'],
 };
