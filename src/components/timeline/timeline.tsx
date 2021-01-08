@@ -65,8 +65,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   }, [slideShowRunning, scrollable]);
 
-  // generate a unique id for the timeline content
-  const id = useRef(Math.random().toString(16).slice(2));
+  const id = useRef('react-chrono-timeline');
 
   // handlers for navigation
   const handleNext = () => hasFocus && onNext();
