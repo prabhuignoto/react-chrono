@@ -32,7 +32,7 @@ export const HorizontalBasic: React.FunctionComponent<{
         <Chrono
           items={items}
           mode="HORIZONTAL"
-          cardHeight={300}
+          cardHeight={200}
           slideShow
           slideItemDuration={2550}
           cardPositionHorizontal="BOTTOM"
@@ -75,7 +75,6 @@ export const VerticalBasic: FunctionComponent<{
         slideItemDuration={2500}
         scrollable={{scrollbar:   false}}
         flipLayout
-        cardHeight={300}
         theme={{cardBgColor:  "#fff",  cardForeColor:  "blue"}}
       />
     </ComponentContainerTree>
