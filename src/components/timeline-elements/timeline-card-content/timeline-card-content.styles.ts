@@ -45,7 +45,7 @@ export const TimelineContentSubTitle = styled.p<{
   color: ${(p) => p.theme.primary};
 `;
 
-export const TimelinecardTitle = styled.p<{ theme: Theme; dir?: string }>`
+export const TimelineCardTitle = styled.p<{ theme: Theme; dir?: string }>`
   color: ${(p) => p.theme.cardForeColor};
   font-size: 1rem;
   font-weight: 600;
@@ -77,25 +77,16 @@ export const TimelineContentDetailsWrapper = styled.div<{
   flex-direction: column;
   font-size: 0.8rem;
   margin: 0 auto;
+  margin-top: 0.5em;
   margin-bottom: 0.5em;
-  ${(p) => (!p.customContent ? 'max-height: 200px;' : '')}
+  ${(p) => (!p.customContent ? 'max-height: 150px;' : '')}
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-color: ${(p) => p.theme?.primary} default;
   scrollbar-width: thin;
-  transition: max-height 150ms linear;
-  width: 97%;
-  padding: 0.2em 0.2em;
-
-  &.show-less {
-    max-height: 50px;
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-      width: 0;
-    }
-    overflow: hidden;
-  }
+  transition: max-height 100ms linear;
+  width: 95%;
+  padding: 0.25em 0.5em;
 
   &::-webkit-scrollbar {
     width: 0.3em;
@@ -109,12 +100,22 @@ export const TimelineContentDetailsWrapper = styled.div<{
     background-color: ${(p) => p.theme?.primary};
     outline: 1px solid ${(p) => p.theme?.primary};
   }
+
+  &.show-less {
+    max-height: 50px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+    overflow: hidden;
+  }
 `;
 
 export const ShowMore = styled.span<{ show?: boolean; theme?: Theme }>`
   align-items: center;
   align-self: flex-end;
-  background: #f5f5f5;
+  /* background: #f5f5f5; */
   border-radius: 4px;
   cursor: pointer;
   display: ${(p) => (p.show ? 'flex' : 'none')};
@@ -124,11 +125,11 @@ export const ShowMore = styled.span<{ show?: boolean; theme?: Theme }>`
   margin-left: 0.5em;
   margin-right: 0.5em;
   margin-top: auto;
-  padding: 0.1em 0.5em;
+  padding: 0.25em;
 
   &:hover {
-    background: ${(p) => p.theme.primary};
-    color: #fff;
+    /* background: ${(p) => p.theme.primary}; */
+    color: ${(p) => p.theme.primary};
   }
 `;
 
@@ -179,11 +180,11 @@ export const SlideShowProgressBar = styled.span<{
 export const ChevronIconWrapper = styled.span<{ collapsed?: boolean }>`
   align-items: center;
   display: flex;
-  height: 1em;
+  height: 1.25em;
   justify-content: center;
   margin-left: 0.2em;
   margin-top: 0.2em;
-  width: 1em;
+  width: 1.25em;
   ${(p) =>
     p.collapsed
       ? `

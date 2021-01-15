@@ -12,7 +12,7 @@ import Timeline from './timeline/timeline';
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   allowDynamicUpdate = false,
-  cardHeight = 200,
+  cardHeight = 150,
   cardPositionHorizontal = 'BOTTOM',
   children,
   disableNavOnKey = false,

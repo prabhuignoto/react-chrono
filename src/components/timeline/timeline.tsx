@@ -152,8 +152,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       observer.current = new IntersectionObserver(
         (entries) => {
           // helper functions to hide image/videos
-          const hide = (ele: HTMLImageElement | HTMLVideoElement) =>
-            (ele.style.visibility = 'hidden');
+          const hide = (ele: HTMLImageElement | HTMLVideoElement) => {
+            ele.style.visibility = 'hidden';
+          };
           const show = (ele: HTMLImageElement | HTMLVideoElement) =>
             (ele.style.visibility = 'visible');
 
@@ -167,6 +168,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               // hide img and video when not visible.
               element.querySelectorAll('img').forEach(hide);
               element.querySelectorAll('video').forEach(hide);
+
+              // pause YouTube embeds
+              element.querySelectorAll('iframe').forEach((element) => {
+                element.contentWindow?.postMessage(
+                  '{"event":"command","func":"stopVideo","args":""}',
+                  '*',
+                );
+              });
             }
           });
         },
