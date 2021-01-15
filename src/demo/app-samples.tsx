@@ -74,7 +74,6 @@ export const VerticalBasic: FunctionComponent<{
         slideShow
         slideItemDuration={2500}
         scrollable={{scrollbar:   false}}
-        flipLayout
         theme={{cardBgColor:  "#fff",  cardForeColor:  "blue"}}
       />
     </ComponentContainerTree>
@@ -146,7 +145,7 @@ export const VerticalTreeMixed: FunctionComponent<{
       <Chrono
         items={dataMixed}
         mode="VERTICAL_ALTERNATING"
-        cardHeight={cardHeight}
+        cardHeight={250}
         scrollable
         // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />

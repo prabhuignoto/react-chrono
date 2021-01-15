@@ -1,7 +1,7 @@
 import React from 'react';
 import { Theme } from '../../../models/Theme';
 import {
-  TimelinecardTitle,
+  TimelineCardTitle,
   TimelineContentSubTitle,
 } from '../timeline-card-content/timeline-card-content.styles';
 
@@ -23,14 +23,14 @@ interface Content {
 const MemoTitle = React.memo(
   ({ title, theme, color, dir, active }: Title) =>
     title && theme ? (
-      <TimelinecardTitle
+      <TimelineCardTitle
         className={active ? 'active card-title' : 'card-title'}
         theme={theme}
         style={{ color }}
         dir={dir}
       >
         {title}
-      </TimelinecardTitle>
+      </TimelineCardTitle>
     ) : null,
   () => true,
 );
