@@ -263,9 +263,11 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
               theme={theme}
             >
               {Array.isArray(detailedText)
-                ? detailedText.map((text) => (
+                ? detailedText.map((text, index) => (
                     <>
-                      <TimelineSubContent>{text}</TimelineSubContent>
+                      <TimelineSubContent key={index}>
+                        {text}
+                      </TimelineSubContent>
                     </>
                   ))
                 : detailedText}
