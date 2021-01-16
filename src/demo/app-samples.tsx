@@ -243,6 +243,9 @@ export const VerticalCustomContent: FunctionComponent<{
         scrollable
       >
         <div>
+          <span className="icon">
+            <img src="github.svg" />
+          </span>
           <div style={{width: "250px", height: "250px"}}>
             <img style={{maxWidth:  "100%", maxHeight:  "100%"}}  src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif"/>
           </div>
@@ -267,7 +270,7 @@ export const VerticalCustomContent: FunctionComponent<{
             Gamelin instead committed the forces under his command, three mechanised armies, the French First and Seventh Armies and the British Expeditionary Force (BEF), to the River Dyle.
           </p>
         </div>
-        <div style={{margin: "1rem"}}>
+        {/* <div style={{margin: "1rem"}}>
           <h3>Table</h3>
           <table>
             <thead>
@@ -293,7 +296,8 @@ export const VerticalCustomContent: FunctionComponent<{
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> */}
+        <div className="chrono-icons">test</div>
       </Chrono>
     </ComponentContainerTree>
   </Vertical>

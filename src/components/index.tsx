@@ -1,36 +1,35 @@
 import 'focus-visible';
-import React, {
-  ReactNode,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import { TimelineProps } from '../models/TimelineModel';
+import GlobalContextProvider from './GlobalContext';
 import Timeline from './timeline/timeline';
 
-const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
-  allowDynamicUpdate = false,
-  cardHeight = 150,
-  cardPositionHorizontal = 'BOTTOM',
-  children,
-  disableNavOnKey = false,
-  flipLayout,
-  hideControls = false,
-  itemWidth = 300,
-  items,
-  mode = 'HORIZONTAL',
-  onScrollEnd,
-  scrollable = true,
-  slideItemDuration = 5000,
-  slideShow = false,
-  theme,
-}: Partial<TimelineProps>) => {
+const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
+  props: Partial<TimelineProps>,
+) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
   const [slideShowActive, setSlideshowActive] = useState(false);
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
+
+  const {
+    allowDynamicUpdate = false,
+    cardHeight = 150,
+    cardPositionHorizontal = 'BOTTOM',
+    children,
+    disableNavOnKey = false,
+    flipLayout,
+    hideControls = false,
+    itemWidth = 300,
+    items,
+    mode = 'HORIZONTAL',
+    onScrollEnd,
+    scrollable = true,
+    slideItemDuration = 5000,
+    slideShow = false,
+    theme,
+  } = props;
 
   const customTheme = Object.assign(
     {
@@ -51,9 +50,11 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
             active: index === 0,
           });
         })
-      : Array.from({ length: (children as ReactNode[]).length }).map<
-          Partial<TimelineItemModel>
-        >((item, index) => ({
+      : Array.from({
+          length: React.Children.toArray(children).filter(
+            (item) => (item as any).props.className !== 'chrono-icons',
+          ).length,
+        }).map<Partial<TimelineItemModel>>((item, index) => ({
           id: Math.random().toString(16).slice(2),
           visible: true,
           active: index === 0,
@@ -122,31 +123,35 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
   };
 
   return (
-    <Timeline
-      activeTimelineItem={activeTimelineItem}
-      cardHeight={cardHeight}
-      cardPositionHorizontal={cardPositionHorizontal}
-      contentDetailsChildren={children}
-      disableNavOnKey={disableNavOnKey}
-      hideControls={hideControls}
-      itemWidth={itemWidth}
-      items={timeLineItems}
-      mode={mode}
-      onFirst={handleFirst}
-      onLast={handleLast}
-      onNext={handleOnNext}
-      onPrevious={handleOnPrevious}
-      onRestartSlideshow={restartSlideShow}
-      onTimelineUpdated={useCallback(handleTimelineUpdate, [])}
-      scrollable={scrollable}
-      slideItemDuration={slideItemDuration}
-      slideShow={slideShow}
-      slideShowEnabled={slideShow}
-      slideShowRunning={slideShowActive}
-      theme={customTheme}
-      flipLayout={flipLayout}
-      onScrollEnd={onScrollEnd}
-    />
+    <GlobalContextProvider {...props}>
+      <Timeline
+        activeTimelineItem={activeTimelineItem}
+        cardHeight={cardHeight}
+        cardPositionHorizontal={cardPositionHorizontal}
+        contentDetailsChildren={React.Children.toArray(children).filter(
+          (item) => (item as any).props.className !== 'chrono-icons',
+        )}
+        disableNavOnKey={disableNavOnKey}
+        hideControls={hideControls}
+        itemWidth={itemWidth}
+        items={timeLineItems}
+        mode={mode}
+        onFirst={handleFirst}
+        onLast={handleLast}
+        onNext={handleOnNext}
+        onPrevious={handleOnPrevious}
+        onRestartSlideshow={restartSlideShow}
+        onTimelineUpdated={useCallback(handleTimelineUpdate, [])}
+        scrollable={scrollable}
+        slideItemDuration={slideItemDuration}
+        slideShow={slideShow}
+        slideShowEnabled={slideShow}
+        slideShowRunning={slideShowActive}
+        theme={customTheme}
+        flipLayout={flipLayout}
+        onScrollEnd={onScrollEnd}
+      />
+    </GlobalContextProvider>
   );
 };
 

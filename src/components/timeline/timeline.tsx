@@ -1,8 +1,8 @@
 import 'focus-visible';
 import React, {
   useCallback,
+  useContext,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -11,6 +11,7 @@ import { Scroll } from '../../models/TimelineHorizontalModel';
 import { TimelineCardModel } from '../../models/TimelineItemModel';
 import { TimelineModel } from '../../models/TimelineModel';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
+import { GlobalContext } from '../GlobalContext';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
@@ -29,10 +30,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   // de-structure the props
   const {
     activeTimelineItem,
-    disableNavOnKey,
-    itemWidth = 200,
     items = [],
-    mode = 'HORIZONTAL',
     onNext,
     onPrevious,
     onTimelineUpdated,
@@ -41,17 +39,19 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onFirst,
     theme,
     onRestartSlideshow,
-    cardHeight,
     slideShowEnabled,
-    slideItemDuration,
-    hideControls,
-    scrollable,
-    cardPositionHorizontal,
     contentDetailsChildren,
-    flipLayout,
-    onScrollEnd,
   } = props;
 
+  const {
+    scrollable,
+    mode = 'HORIZONTAL',
+    hideControls,
+    itemWidth = 200,
+    disableNavOnKey,
+    cardPositionHorizontal,
+    onScrollEnd,
+  } = useContext(GlobalContext);
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
   const [hasFocus, setHasFocus] = useState(false);
@@ -133,7 +133,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   }, [newOffSet]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // setup observer for the timeline elements
     setTimeout(() => {
       const element = timelineMainRef.current;
@@ -235,17 +235,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           <TimelineVertical
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
-            cardHeight={cardHeight}
             contentDetailsChildren={contentDetailsChildren}
             hasFocus={hasFocus}
             items={items as TimelineCardModel[]}
-            mode={mode}
             onClick={handleTimelineItemClick}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
-            slideItemDuration={slideItemDuration}
             slideShowRunning={slideShowRunning}
             theme={theme}
-            flipLayout={flipLayout}
           />
         ) : null}
 
@@ -255,15 +251,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             <Outline color={theme && theme.primary} />
             <TimelineHorizontal
               autoScroll={handleScroll}
-              cardHeight={cardHeight}
               contentDetailsChildren={contentDetailsChildren}
               handleItemClick={handleTimelineItemClick}
               hasFocus={hasFocus}
-              itemWidth={itemWidth}
               items={items as TimelineCardModel[]}
-              mode={mode}
               onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
-              slideItemDuration={slideItemDuration}
               slideShowRunning={slideShowRunning}
               theme={theme}
               wrapperId={id.current}
@@ -277,17 +269,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             activeTimelineItem={activeTimelineItem}
             alternateCards={false}
             autoScroll={handleScroll}
-            cardHeight={cardHeight}
             contentDetailsChildren={contentDetailsChildren}
             hasFocus={hasFocus}
             items={items as TimelineCardModel[]}
-            mode={mode}
             onClick={handleTimelineItemClick}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
-            slideItemDuration={slideItemDuration}
             slideShowRunning={slideShowRunning}
             theme={theme}
-            flipLayout={flipLayout}
           />
         ) : null}
       </TimelineMainWrapper>
@@ -302,7 +290,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             onLast={handleLast}
             disableLeft={activeTimelineItem === 0}
             disableRight={activeTimelineItem === items.length - 1}
-            mode={mode}
             theme={theme}
             onReplay={onRestartSlideshow}
             slideShowRunning={slideShowRunning}

@@ -27,7 +27,6 @@ export interface CardMediaModel {
   hideMedia: boolean;
   id?: string;
   media: Media;
-  mode?: TimelineMode;
   onMediaStateChange: (state: MediaState) => void;
   slideshowActive?: boolean;
   theme?: Theme;

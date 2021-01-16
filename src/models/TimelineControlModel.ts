@@ -8,7 +8,6 @@ export interface TimelineControlModel {
   onPrevious: () => void;
   onFirst: () => void;
   onLast: () => void;
-  mode?: TimelineMode;
   theme?: Theme;
   slideShowEnabled?: boolean;
   slideShowRunning?: boolean;
