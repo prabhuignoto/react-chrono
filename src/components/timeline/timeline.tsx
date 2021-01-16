@@ -151,23 +151,24 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     if (mode !== 'HORIZONTAL') {
       observer.current = new IntersectionObserver(
         (entries) => {
-          // helper functions to hide image/videos
-          const hide = (ele: HTMLImageElement | HTMLVideoElement) => {
-            ele.style.visibility = 'hidden';
-          };
-          const show = (ele: HTMLImageElement | HTMLVideoElement) =>
-            (ele.style.visibility = 'visible');
-
           entries.forEach((entry) => {
             const element = entry.target as HTMLDivElement;
             if (entry.isIntersecting) {
               // show img and video when visible.
-              element.querySelectorAll('img').forEach(show);
-              element.querySelectorAll('video').forEach(show);
+              element
+                .querySelectorAll('img,video')
+                .forEach(
+                  (element) =>
+                    ((element as HTMLElement).style.visibility = 'visible'),
+                );
             } else {
               // hide img and video when not visible.
-              element.querySelectorAll('img').forEach(hide);
-              element.querySelectorAll('video').forEach(hide);
+              element
+                .querySelectorAll('img,video')
+                .forEach(
+                  (element) =>
+                    ((element as HTMLElement).style.visibility = 'hidden'),
+                );
 
               // pause YouTube embeds
               element.querySelectorAll('iframe').forEach((element) => {

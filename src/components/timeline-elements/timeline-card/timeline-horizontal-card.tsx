@@ -1,7 +1,14 @@
 import cls from 'classnames';
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import ReactDOM from 'react-dom';
 import { TimelineCardModel } from '../../../models/TimelineItemModel';
+import { GlobalContext } from '../../GlobalContext';
 import TimelineCardContent from '../timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import {
@@ -15,17 +22,13 @@ import {
 const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   active,
   autoScroll,
-  cardHeight,
   cardDetailedText,
   cardSubtitle,
   cardTitle,
   id,
   media,
-  mode,
   onClick,
   onElapsed,
-  position,
-  slideItemDuration,
   slideShowRunning,
   theme,
   title,
@@ -36,6 +39,8 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const { mode, cardPositionHorizontal: position } = useContext(GlobalContext);
 
   const handleClick = () => {
     if (onClick && !slideShowRunning) {
@@ -69,7 +74,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       cls(
         'timeline-horz-card-wrapper',
         modeLower,
-        position === 'top' ? 'bottom' : 'top',
+        position === 'TOP' ? 'bottom' : 'top',
       ),
     [mode, position],
   );

@@ -15,18 +15,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   const {
     allowDynamicUpdate = false,
-    cardHeight = 150,
-    cardPositionHorizontal = 'BOTTOM',
     children,
-    disableNavOnKey = false,
-    flipLayout,
-    hideControls = false,
-    itemWidth = 300,
     items,
-    mode = 'HORIZONTAL',
     onScrollEnd,
-    scrollable = true,
-    slideItemDuration = 5000,
     slideShow = false,
     theme,
   } = props;
@@ -41,24 +32,27 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     theme,
   );
 
-  const initItems = () =>
-    items && items.length
-      ? items.map((item, index) => {
-          return Object.assign({}, item, {
+  const initItems = useCallback(
+    () =>
+      items && items.length
+        ? items.map((item, index) => {
+            return Object.assign({}, item, {
+              id: Math.random().toString(16).slice(2),
+              visible: true,
+              active: index === 0,
+            });
+          })
+        : Array.from({
+            length: React.Children.toArray(children).filter(
+              (item) => (item as any).props.className !== 'chrono-icons',
+            ).length,
+          }).map<Partial<TimelineItemModel>>((item, index) => ({
             id: Math.random().toString(16).slice(2),
             visible: true,
             active: index === 0,
-          });
-        })
-      : Array.from({
-          length: React.Children.toArray(children).filter(
-            (item) => (item as any).props.className !== 'chrono-icons',
-          ).length,
-        }).map<Partial<TimelineItemModel>>((item, index) => ({
-          id: Math.random().toString(16).slice(2),
-          visible: true,
-          active: index === 0,
-        }));
+          })),
+    [],
+  );
 
   useEffect(() => {
     const items = initItems();
@@ -126,29 +120,20 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     <GlobalContextProvider {...props}>
       <Timeline
         activeTimelineItem={activeTimelineItem}
-        cardHeight={cardHeight}
-        cardPositionHorizontal={cardPositionHorizontal}
         contentDetailsChildren={React.Children.toArray(children).filter(
           (item) => (item as any).props.className !== 'chrono-icons',
         )}
-        disableNavOnKey={disableNavOnKey}
-        hideControls={hideControls}
-        itemWidth={itemWidth}
         items={timeLineItems}
-        mode={mode}
         onFirst={handleFirst}
         onLast={handleLast}
         onNext={handleOnNext}
         onPrevious={handleOnPrevious}
         onRestartSlideshow={restartSlideShow}
         onTimelineUpdated={useCallback(handleTimelineUpdate, [])}
-        scrollable={scrollable}
-        slideItemDuration={slideItemDuration}
         slideShow={slideShow}
         slideShowEnabled={slideShow}
         slideShowRunning={slideShowActive}
         theme={customTheme}
-        flipLayout={flipLayout}
         onScrollEnd={onScrollEnd}
       />
     </GlobalContextProvider>

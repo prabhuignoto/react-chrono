@@ -1,6 +1,5 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback } from 'react';
 import { TimelineVerticalModel } from '../../models/TimelineVerticalModel';
-import { GlobalContext } from '../GlobalContext';
 import TimelineVerticalItem from './timeline-vertical-item';
 import { TimelineVerticalWrapper } from './timeline-vertical.styles';
 
