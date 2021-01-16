@@ -21,6 +21,7 @@ import {
   TimelineContentDetails,
   TimelineContentDetailsWrapper,
   TimelineItemContentWrapper,
+  TimelineSubContent,
 } from './timeline-card-content.styles';
 
 const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React.memo(
@@ -261,7 +262,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
               ref={detailsRef}
               theme={theme}
             >
-              {detailedText}
+              {Array.isArray(detailedText)
+                ? detailedText.map((text) => (
+                    <>
+                      <TimelineSubContent>{text}</TimelineSubContent>
+                    </>
+                  ))
+                : detailedText}
             </TimelineContentDetails>
           )}
         </TimelineContentDetailsWrapper>

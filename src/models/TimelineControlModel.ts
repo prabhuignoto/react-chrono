@@ -1,6 +1,4 @@
 import { Theme } from './Theme';
-import { TimelineMode } from './TimelineModel';
-
 export interface TimelineControlModel {
   disableLeft: boolean;
   disableRight: boolean;

@@ -83,7 +83,7 @@ export interface VerticalCircleModel extends CommonVerticalModel {
 }
 
 export interface VerticalItemModel extends CommonVerticalModel {
-  cardDetailedText?: string;
+  cardDetailedText?: string | string[];
   cardSubtitle?: string;
   cardTitle?: string;
   index: number;

@@ -244,7 +244,7 @@ export const VerticalCustomContent: FunctionComponent<{
       >
         <div>
           <span className="icon">
-            <img src="github.svg" />
+            <img src="github.svg" alt="github" />
           </span>
           <div style={{width: "250px", height: "250px"}}>
             <img style={{maxWidth:  "100%", maxHeight:  "100%"}}  src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif"/>

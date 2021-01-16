@@ -151,7 +151,7 @@ export interface TimelineProps {
    */
   flipLayout?: boolean;
 
-  children?: React.ReactChild;
+  children?: React.ReactElement | React.ReactElement[];
 
   allowDynamicUpdate?: boolean;
 
