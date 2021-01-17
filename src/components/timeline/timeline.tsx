@@ -69,10 +69,22 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const id = useRef('react-chrono-timeline');
 
   // handlers for navigation
-  const handleNext = () => hasFocus && onNext();
-  const handlePrevious = () => hasFocus && onPrevious();
-  const handleFirst = () => hasFocus && onFirst();
-  const handleLast = () => hasFocus && onLast();
+  const handleNext = useCallback(() => hasFocus && onNext(), [
+    hasFocus,
+    onNext,
+  ]);
+  const handlePrevious = useCallback(() => hasFocus && onPrevious(), [
+    hasFocus,
+    onPrevious,
+  ]);
+  const handleFirst = useCallback(() => hasFocus && onFirst(), [
+    hasFocus,
+    onFirst,
+  ]);
+  const handleLast = useCallback(() => hasFocus && onLast(), [
+    hasFocus,
+    onLast,
+  ]);
 
   // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {

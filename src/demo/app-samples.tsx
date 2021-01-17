@@ -113,7 +113,23 @@ export const VerticalTree: FunctionComponent<{
         scrollable={{scrollbar: false}}
         allowDynamicUpdate
         onScrollEnd={() => console.log('end reached')}
-      />
+      >
+        <div className="chrono-icons">
+          <img src="color-circle.svg"  alt="github" />
+          <img src="color-circle.svg"  alt="github" />
+          <img src="color-circle.svg" alt="github" />
+          <img src="color-circle.svg" alt="github" />
+          <img src="color-circle.svg" alt="github" />
+          <img src="color-circle.svg" alt="github" />
+          <img src="color-circle.svg" alt="github" />
+          <img src="color-circle.svg" alt="github" />
+          <img src="color-circle.svg" alt="github" />
+          <img src="color-circle.svg" alt="github" />
+          <img src="color-circle.svg" alt="github" />
+          <img src="color-circle.svg" alt="github" />
+          <img src="color-circle.svg" alt="github" />
+        </div>
+      </Chrono>
     </ComponentContainerTree>
   </Vertical>
 );
@@ -316,6 +332,7 @@ export const VerticalCustomContent2: FunctionComponent<{
         mode="VERTICAL" 
         cardHeight={200}
         scrollable
+        flipLayout
       >
         <div>
           <div style={{width: "250px", height: "250px"}}>
@@ -370,10 +387,10 @@ export const VerticalCustomContent2: FunctionComponent<{
           </table>
         </div>
         <div className="chrono-icons">
-          <img src="github.svg" alt="github" />
-          <img src="grid.svg" alt="github" />
-          <img src="zap.svg" alt="github" />
-          <img src="list.svg" alt="github" />
+          <img src="satellite-dish.svg" alt="github" />
+          <img src="notification-bell.svg" alt="github" />
+          <img src="camera.svg" alt="github" />
+          <img src="rss.svg" alt="github" />
         </div>
       </Chrono>
     </ComponentContainerTree>
