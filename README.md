@@ -41,8 +41,8 @@
 
 - [⚡ Installation](#-installation)
 - [Getting Started](#getting-started)
-  - [Vertical Mode](#vertical-mode)
-  - [Vertical Alternating](#vertical-alternating)
+  - [🚥 Vertical Mode](#-vertical-mode)
+  - [🚥 Vertical Alternating](#-vertical-alternating)
   - [📺 Slideshow](#-slideshow)
 - [Props](#props)
   - [Mode](#mode)
@@ -84,6 +84,7 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
       title: "May 1940",
       cardTitle: "Dunkirk",
       cardSubtitle:"Men of the British Expeditionary Force (BEF) wade out to..",
+      cardDetailedText: "Men of the British Expeditionary Force (BEF) wade out to.."
       media: {
         type: "IMAGE",
         source: {
@@ -102,7 +103,7 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
 
 ![app-home](./readme-assets/app-home.png)
 
-### Vertical Mode
+### 🚥 Vertical Mode
 
 To render the timeline vertically use the `VERTICAL` mode
 
@@ -117,7 +118,7 @@ To render the timeline vertically use the `VERTICAL` mode
 
 ![vertical-basic](./readme-assets/vertical-basic.png)
 
-### Vertical Alternating
+### 🚥 Vertical Alternating
 
 In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards alternating between left and right side.
 
@@ -197,17 +198,15 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 {
   title: "May 1940",
   cardTitle: "Dunkirk",
-  media: {
-    name: "dunkirk beach",
-    source: {
-      url: "http://someurl/image.jpg"
-    },
-    type: "IMAGE"
-  },
   cardSubtitle:
     "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk."
+  cardDetailedText: ["paragraph1", "paragraph2"]
 }
 ```
+
+if you have a large text to display(via `cardDetailedText`) and want to split the text into paragraphs, you can pass an `array` of strings.
+
+each array entry will be created as a paragraph inside the timeline card.
 
 ### ⌨ Keyboard Navigation
 
@@ -239,7 +238,9 @@ The scrollbar is not shown by default. To enable the scrollbar, pass an object w
 
 ### 📺 Media
 
-Both images and videos can be embedded in the timeline. Just add the `media` attribute to the [Timeline Item model](#timeline-item-model) and the component will take care of the rest.
+>Both images and videos can be embedded in the timeline.
+
+Just add the `media` attribute to the [Timeline Item model](#timeline-item-model) and the component will take care of the rest.
 
 <h5>
   To embed a image
@@ -263,7 +264,9 @@ Both images and videos can be embedded in the timeline. Just add the `media` att
   To embed a video
 </h5>
 
-Videos start playing automatically when active and will be automatically paused when not active. Like images, videos are also automatically hidden when not in the visible viewport of the container.
+> Videos start playing automatically when active and will be automatically paused when not active.
+
+Like images, videos are also automatically hidden when not in the visible viewport of the container.
 
 ```sh
 {
@@ -319,7 +322,9 @@ The [items](#timeline-item-model) collection is completely optional and custom r
   </Chrono>
 ```
 
-The items collection will also work nicely with any custom content that is passed. The following snippet sets the the `title` and `cardTitle` for the custom contents.
+>The items collection will also work nicely with any custom content that is passed.
+
+The following snippet sets the the `title` and `cardTitle` for the custom contents.
 
 ```sh
   const items = [
@@ -339,8 +344,11 @@ The items collection will also work nicely with any custom content that is passe
 
 ### 🎭 Custom icons for the Timeline
 
-To use custom icons in the timeline, pass in the collection of images. The icons are sequentially set (i.e) the first image you pass will be used as the icon for the first timeline item and so on.
-Please make sure to pass in the image collection inside a container with a special className `chrono-icons`. This convention is mandatory as the component uses this class name to pick the images.
+To use custom icons in the timeline, pass in the collection of images between the `chrono` tags wrapped in a container.
+
+The icons are sequentially set (i.e) the first image you pass will be used as the icon for the first timeline item and so on.
+
+Please make sure to pass in the image collection inside a container with a special className `chrono-icons`. This convention is mandatory as the component uses this `class name` to pick the images.
 
  ```sh
   <chrono items={items} mode="VERTICAL_ALTERNATING">
@@ -351,7 +359,7 @@ Please make sure to pass in the image collection inside a container with a speci
   </chrono>
  ```
 
-custom icons also works if you are [rendering custom content](#rendering-custom-content) inside the cards.
+>custom icons also works if you are [rendering custom content](#rendering-custom-content) inside the cards.
 
 ```sh
   <Chrono mode="VERTICAL" items={items}>
@@ -384,7 +392,7 @@ The `itemWidth` prop can be used to set the width of each individual timeline se
 
 ### 🎨 Theme
 
-Customize colors with `theme` prop.
+Customize colors with the `theme` prop.
 
 ```sh
 <chrono items={items}  theme={{primary: "red", secondary: "blue", cardBgColor: "yellow", cardForeColor: "violet" }} />
