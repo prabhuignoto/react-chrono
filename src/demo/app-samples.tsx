@@ -37,7 +37,15 @@ export const HorizontalBasic: React.FunctionComponent<{
           slideItemDuration={2550}
           cardPositionHorizontal="BOTTOM"
           itemWidth={200}
-        />
+        >
+          <div className="chrono-icons">
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+          </div>
+        </Chrono>
       </ComponentContainer>
     </Horizontal>
   );
@@ -83,20 +91,13 @@ export const VerticalBasic: FunctionComponent<{
 export const VerticalTree: FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
-}> = ({ type, items }) => (
-  <Vertical id="tree">
+}> = ({ type, items }) => {
+  
+  return <Vertical id="tree">
     <Description>
       <span>
         <DescriptionHeader>
           <span># Tree</span>
-          {/* <SandBox>
-            <a href="https://codesandbox.io/s/react-chrono-tree-text-xtksq?fontsize=14&hidenavigation=1&theme=dark">
-              <img
-                alt="Edit react-chrono-tree-text"
-                src="https://codesandbox.io/static/img/play-codesandbox.svg"
-              />
-            </a>
-          </SandBox> */}
         </DescriptionHeader>
       </span>
       <DescriptionContent>
@@ -112,11 +113,12 @@ export const VerticalTree: FunctionComponent<{
         slideItemDuration={2350}
         scrollable={{scrollbar: false}}
         allowDynamicUpdate
+        cardHeight={200}
         onScrollEnd={() => console.log('end reached')}
       >
         <div className="chrono-icons">
-          <img src="color-circle.svg"  alt="github" />
-          <img src="color-circle.svg"  alt="github" />
+          <img src="color-circle.svg" alt="github" />
+          <img src="color-circle.svg" alt="github" />
           <img src="color-circle.svg" alt="github" />
           <img src="color-circle.svg" alt="github" />
           <img src="color-circle.svg" alt="github" />
@@ -131,8 +133,8 @@ export const VerticalTree: FunctionComponent<{
         </div>
       </Chrono>
     </ComponentContainerTree>
-  </Vertical>
-);
+  </Vertical>}
+  ;
 
 export const VerticalTreeMixed: FunctionComponent<{
   type: string;

@@ -35,6 +35,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   wrapperId,
   customContent,
   hasFocus,
+  iconChild,
 }: TimelineCardModel) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -82,7 +83,13 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   const titleClass = useMemo(() => cls(modeLower, position), []);
 
   const circleClass = useMemo(
-    () => cls('timeline-circle', modeLower, active ? 'active' : 'in-active'),
+    () =>
+      cls(
+        'timeline-circle',
+        { 'using-icon': !!iconChild },
+        modeLower,
+        active ? 'active' : 'in-active',
+      ),
     [active],
   );
 
@@ -127,7 +134,9 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           data-testid="timeline-circle"
           theme={theme}
           aria-label={title}
-        ></Circle>
+        >
+          {iconChild ? iconChild : null}
+        </Circle>
       </CircleWrapper>
 
       <TimelineTitleContainer

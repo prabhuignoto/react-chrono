@@ -37,4 +37,5 @@ export interface TimelineCardModel extends TimelineItemModel {
   onElapsed?: (id?: string) => void;
   customContent?: React.ReactNode | React.ReactNode[];
   hasFocus?: boolean;
+  iconChild?: React.ReactNode;
 }

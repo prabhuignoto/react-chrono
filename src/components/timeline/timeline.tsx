@@ -273,6 +273,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               slideShowRunning={slideShowRunning}
               theme={theme}
               wrapperId={id.current}
+              iconChildren={iconChildren}
             />
           </TimelineMain>
         ) : null}

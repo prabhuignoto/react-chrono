@@ -14,6 +14,7 @@ export interface TimelineHorizontalModel {
   wrapperId: string;
   onElapsed?: (id?: string) => void;
   contentDetailsChildren?: ReactNode | ReactNode[];
+  iconChildren: ReactNode;
   hasFocus?: boolean;
 }
 

@@ -35,7 +35,7 @@ const NewDemo: React.FunctionComponent = () => {
   }, []);
 
   const [state, setState]  = useState(0);
-  
+
   return (
     <Wrapper>
       <h3>Timeline of World War 2</h3>
@@ -74,8 +74,10 @@ const NewDemo: React.FunctionComponent = () => {
             {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} 
           </Route>
           <Route path="/vertical-alternating">
-            <button onClick={() => setState(1 - state)}>change</button>
-            {items.length > 0 && <VerticalTree type={'big-screen'} items={state ? items : mixed} />}
+            <button onClick={() => {
+              setState(1 - state)
+            }}>change</button>
+            {<VerticalTree type={'big-screen'} items={state > 0 ? items : mixed} >{state}</VerticalTree>}
           </Route>
           <Route path="/horizontal">
             {items.length > 0 && (

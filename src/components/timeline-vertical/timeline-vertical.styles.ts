@@ -71,7 +71,7 @@ export const VerticalCircleWrapper = styled.div<{
     margin-right: auto;
     position: absolute;
     right: 0;
-    width: 3px;
+    width: 4px;
     z-index: 0;
   }
 `;

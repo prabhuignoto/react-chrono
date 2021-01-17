@@ -1,13 +1,5 @@
 import 'focus-visible';
-import React, {
-  ReactChild,
-  ReactChildren,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import { TimelineProps } from '../models/TimelineModel';
 import GlobalContextProvider from './GlobalContext';
@@ -41,27 +33,26 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     theme,
   );
 
-  const initItems = useCallback(
-    () =>
-      items && items.length
-        ? items.map((item, index) => {
-            return Object.assign({}, item, {
-              id: Math.random().toString(16).slice(2),
-              visible: true,
-              active: index === 0,
-            });
-          })
-        : Array.from({
-            length: React.Children.toArray(children).filter(
-              (item) => (item as any).props.className !== 'chrono-icons',
-            ).length,
-          }).map<Partial<TimelineItemModel>>((item, index) => ({
+  const initItems = () => {
+    debugger;
+    return items && items.length
+      ? items.map((item, index) => {
+          return Object.assign({}, item, {
             id: Math.random().toString(16).slice(2),
             visible: true,
             active: index === 0,
-          })),
-    [],
-  );
+          });
+        })
+      : Array.from({
+          length: React.Children.toArray(children).filter(
+            (item) => (item as any).props.className !== 'chrono-icons',
+          ).length,
+        }).map<Partial<TimelineItemModel>>((item, index) => ({
+          id: Math.random().toString(16).slice(2),
+          visible: true,
+          active: index === 0,
+        }));
+  };
 
   useEffect(() => {
     const items = initItems();

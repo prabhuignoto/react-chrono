@@ -18,6 +18,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   onElapsed,
   contentDetailsChildren: children,
   hasFocus,
+  iconChildren,
 }: TimelineHorizontalModel) => {
   const { mode = 'HORIZONTAL', itemWidth = 200, cardHeight } = useContext(
     GlobalContext,
@@ -26,6 +27,9 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     () => cls(mode.toLowerCase(), 'timeline-horz-container'),
     [mode],
   );
+
+  const iconChildColln = React.Children.toArray(iconChildren);
+
   return (
     <TimelineHorizontalWrapper
       className={wrapperClass}
@@ -52,6 +56,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
             onElapsed={onElapsed}
             customContent={children ? (children as ReactNode[])[index] : null}
             hasFocus={hasFocus}
+            iconChild={iconChildColln[index]}
           />
         </TimelineItemWrapper>
       ))}
