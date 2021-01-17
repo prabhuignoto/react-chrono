@@ -36,13 +36,24 @@ context('Chrono.Vertical.Basic', () => {
       .should('contain', 'Dunkirk');
   });
 
+  it('check card description items count(string array)', () => {
+    cy.get('.vertical-item-row')
+      .eq(0)
+      .find('.card-description span')
+      .should(
+        'have.length',
+        2,
+      );
+  });
+
   it('check card description', () => {
     cy.get('.vertical-item-row')
       .eq(0)
-      .find('.card-description>p')
+      .find('.card-description span')
+      .eq(0)
       .should(
         'contain',
-        'On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France. Holland capitulated after only five days of fighting, and the Belgians surrendered on 28 May. With the success of the German ‘Blitzkrieg’, the British Expeditionary Force and French troops were in danger of being cut off and destroyed.',
+        'On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France.',
       );
   });
 

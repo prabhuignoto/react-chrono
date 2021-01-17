@@ -67,6 +67,7 @@ context('Chrono.Vertical.Alternating.Mixed', () => {
       .eq(1)
       .find('.card-description')
       .should('have.class', 'show-less');
+    cy.scrollTo(500);
     cy.get('.vertical-item-row').eq(1).find('.show-more').click();
     cy.wait(500);
     cy.get('.vertical-item-row')
@@ -79,7 +80,11 @@ context('Chrono.Vertical.Alternating.Mixed', () => {
     cy.get('.vertical-item-row')
       .eq(2)
       .find('iframe')
-      .should('have.attr', 'src', 'https://www.youtube.com/embed/gPMgYC0sXos');
+      .should(
+        'have.attr',
+        'src',
+        'https://www.youtube.com/embed/gPMgYC0sXos?enablejsapi=1',
+      );
   });
 
   it('check video', () => {

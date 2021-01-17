@@ -163,7 +163,7 @@ export const VerticalTreeMixed: FunctionComponent<{
       <Chrono
         items={dataMixed}
         mode="VERTICAL_ALTERNATING"
-        cardHeight={250}
+        cardHeight={200}
         scrollable
         // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
