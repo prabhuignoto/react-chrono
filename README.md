@@ -33,6 +33,7 @@
 - 🔧&nbsp; [Render](#rendering-custom-content) custom content easily.
 - ⚡&nbsp; Data driven API.
 - 🎨&nbsp; [Customize](#theme) colors with ease.
+- 🎭&nbsp; Use [custom icons](#-custom-icons-for-the-timeline) in the timeline.
 - 💪&nbsp; Built with [Typescript](https://www.typescriptlang.org/).
 - 🎨&nbsp; Styled with [emotion](https://emotion.sh).
 
@@ -42,18 +43,18 @@
 - [Getting Started](#getting-started)
   - [Vertical Mode](#vertical-mode)
   - [Vertical Alternating](#vertical-alternating)
-  - [Slideshow](#slideshow)
+  - [📺 Slideshow](#-slideshow)
 - [Props](#props)
   - [Mode](#mode)
   - [Timeline item Model](#timeline-item-model)
-  - [Keyboard Navigation](#keyboard-navigation)
+  - [⌨ Keyboard Navigation](#-keyboard-navigation)
   - [Scrollable](#scrollable)
-  - [Media](#media)
-  - [Rendering custom content](#rendering-custom-content)
-  - [Custom icons for the Timeline](#custom-icons-for-the-timeline)
+  - [📺 Media](#-media)
+  - [🛠 Rendering custom content](#-rendering-custom-content)
+  - [🎭 Custom icons for the Timeline](#-custom-icons-for-the-timeline)
   - [Slideshow mode](#slideshow-mode)
   - [Item Width](#item-width)
-  - [Theme](#theme)
+  - [🎨 Theme](#-theme)
 - [📦 CodeSandbox Examples](#-codesandbox-examples)
 - [📚 Storybook](#-storybook)
 - [🔨 Build Setup](#-build-setup)
@@ -131,7 +132,7 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 
 ![app-tree](./readme-assets/app-tree.png)
 
-### Slideshow
+### 📺 Slideshow
 
 Play the timeline automatically with the `slideShow` mode. This prop enables the play button on the ui controls.
 
@@ -208,7 +209,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 }
 ```
 
-### Keyboard Navigation
+### ⌨ Keyboard Navigation
 
 The timeline can be navigated via keyboard.
 
@@ -236,7 +237,7 @@ The scrollbar is not shown by default. To enable the scrollbar, pass an object w
   <chrono items={items} scrollable={{scrollbar: true}} />
 ```
 
-### Media
+### 📺 Media
 
 Both images and videos can be embedded in the timeline. Just add the `media` attribute to the [Timeline Item model](#timeline-item-model) and the component will take care of the rest.
 
@@ -298,7 +299,7 @@ To embed YouTube videos, use the right embed url.
 
 ![media](./readme-assets/media.png)
 
-### Rendering custom content
+### 🛠 Rendering custom content
 
 The component also supports embedding custom content in the `Timeline` cards.
 
@@ -336,7 +337,7 @@ The items collection will also work nicely with any custom content that is passe
   </Chrono>
 ```
 
-### Custom icons for the Timeline
+### 🎭 Custom icons for the Timeline
 
 To use custom icons in the timeline, pass in the collection of images. The icons are sequentially set (i.e) the first image you pass will be used as the icon for the first timeline item and so on.
 Please make sure to pass in the image collection inside a container with a special className `chrono-icons`. This convention is mandatory as the component uses this class name to pick the images.
@@ -381,7 +382,7 @@ setting this prop enables the play button in the timeline control panel.
 
 The `itemWidth` prop can be used to set the width of each individual timeline sections. This setting is applicable only for the `HORIZONTAL` mode.
 
-### Theme
+### 🎨 Theme
 
 Customize colors with `theme` prop.
 
