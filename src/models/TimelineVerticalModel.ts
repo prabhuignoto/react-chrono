@@ -80,10 +80,11 @@ interface CommonVerticalModel extends CommonPropsModel {
 
 export interface VerticalCircleModel extends CommonVerticalModel {
   onActive: (pointOffset: number) => void;
+  iconChild?: React.ReactNode;
 }
 
 export interface VerticalItemModel extends CommonVerticalModel {
-  cardDetailedText?: string;
+  cardDetailedText?: string | string[];
   cardSubtitle?: string;
   cardTitle?: string;
   index: number;
@@ -92,6 +93,7 @@ export interface VerticalItemModel extends CommonVerticalModel {
   title?: string;
   visible?: boolean;
   contentDetailsChildren?: React.ReactNode;
+  iconChild?: React.ReactNode;
   onActive: (
     pointOffset: number,
     contentHeight: number,
@@ -104,5 +106,6 @@ export interface TimelineVerticalModel extends CommonPropsModel {
   autoScroll: (s: Partial<Scroll>) => void;
   items: TimelineCardModel[];
   contentDetailsChildren?: React.ReactNode;
+  iconChildren?: React.ReactNode;
   childrenNode?: React.ReactNode;
 }

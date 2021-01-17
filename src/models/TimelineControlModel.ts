@@ -1,6 +1,4 @@
 import { Theme } from './Theme';
-import { TimelineMode } from './TimelineModel';
-
 export interface TimelineControlModel {
   disableLeft: boolean;
   disableRight: boolean;
@@ -8,7 +6,6 @@ export interface TimelineControlModel {
   onPrevious: () => void;
   onFirst: () => void;
   onLast: () => void;
-  mode?: TimelineMode;
   theme?: Theme;
   slideShowEnabled?: boolean;
   slideShowRunning?: boolean;

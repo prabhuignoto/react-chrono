@@ -1,36 +1,27 @@
 import 'focus-visible';
-import React, {
-  ReactNode,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import { TimelineProps } from '../models/TimelineModel';
+import GlobalContextProvider from './GlobalContext';
 import Timeline from './timeline/timeline';
+const toReactArray = React.Children.toArray;
 
-const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
-  allowDynamicUpdate = false,
-  cardHeight = 150,
-  cardPositionHorizontal = 'BOTTOM',
-  children,
-  disableNavOnKey = false,
-  flipLayout,
-  hideControls = false,
-  itemWidth = 300,
-  items,
-  mode = 'HORIZONTAL',
-  onScrollEnd,
-  scrollable = true,
-  slideItemDuration = 5000,
-  slideShow = false,
-  theme,
-}: Partial<TimelineProps>) => {
+const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
+  props: Partial<TimelineProps>,
+) => {
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>();
   const [slideShowActive, setSlideshowActive] = useState(false);
   const [activeTimelineItem, setActiveTimelineItem] = useState(0);
+
+  const {
+    allowDynamicUpdate = false,
+    children,
+    items,
+    onScrollEnd,
+    slideShow = false,
+    theme,
+  } = props;
 
   const customTheme = Object.assign(
     {
@@ -42,8 +33,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     theme,
   );
 
-  const initItems = () =>
-    items && items.length
+  const initItems = () => {
+    debugger;
+    return items && items.length
       ? items.map((item, index) => {
           return Object.assign({}, item, {
             id: Math.random().toString(16).slice(2),
@@ -51,13 +43,16 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
             active: index === 0,
           });
         })
-      : Array.from({ length: (children as ReactNode[]).length }).map<
-          Partial<TimelineItemModel>
-        >((item, index) => ({
+      : Array.from({
+          length: React.Children.toArray(children).filter(
+            (item) => (item as any).props.className !== 'chrono-icons',
+          ).length,
+        }).map<Partial<TimelineItemModel>>((item, index) => ({
           id: Math.random().toString(16).slice(2),
           visible: true,
           active: index === 0,
         }));
+  };
 
   useEffect(() => {
     const items = initItems();
@@ -121,32 +116,36 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = ({
     }
   };
 
+  let iconChildren = toReactArray(children).filter(
+    (item) => (item as any).props.className === 'chrono-icons',
+  );
+
+  if (iconChildren.length) {
+    iconChildren = (iconChildren[0] as any).props.children;
+  }
+
   return (
-    <Timeline
-      activeTimelineItem={activeTimelineItem}
-      cardHeight={cardHeight}
-      cardPositionHorizontal={cardPositionHorizontal}
-      contentDetailsChildren={children}
-      disableNavOnKey={disableNavOnKey}
-      hideControls={hideControls}
-      itemWidth={itemWidth}
-      items={timeLineItems}
-      mode={mode}
-      onFirst={handleFirst}
-      onLast={handleLast}
-      onNext={handleOnNext}
-      onPrevious={handleOnPrevious}
-      onRestartSlideshow={restartSlideShow}
-      onTimelineUpdated={useCallback(handleTimelineUpdate, [])}
-      scrollable={scrollable}
-      slideItemDuration={slideItemDuration}
-      slideShow={slideShow}
-      slideShowEnabled={slideShow}
-      slideShowRunning={slideShowActive}
-      theme={customTheme}
-      flipLayout={flipLayout}
-      onScrollEnd={onScrollEnd}
-    />
+    <GlobalContextProvider {...props}>
+      <Timeline
+        activeTimelineItem={activeTimelineItem}
+        contentDetailsChildren={toReactArray(children).filter(
+          (item) => (item as any).props.className !== 'chrono-icons',
+        )}
+        iconChildren={iconChildren}
+        items={timeLineItems}
+        onFirst={handleFirst}
+        onLast={handleLast}
+        onNext={handleOnNext}
+        onPrevious={handleOnPrevious}
+        onRestartSlideshow={restartSlideShow}
+        onTimelineUpdated={useCallback(handleTimelineUpdate, [])}
+        slideShow={slideShow}
+        slideShowEnabled={slideShow}
+        slideShowRunning={slideShowActive}
+        theme={customTheme}
+        onScrollEnd={onScrollEnd}
+      />
+    </GlobalContextProvider>
   );
 };
 

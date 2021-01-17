@@ -10,7 +10,7 @@ import { TimelineMode } from './TimelineModel';
  */
 export interface TimelineItemModel {
   active?: boolean;
-  cardDetailedText?: string;
+  cardDetailedText?: string | string[];
   cardSubtitle?: string;
   cardTitle?: string;
   id?: string;
@@ -37,4 +37,5 @@ export interface TimelineCardModel extends TimelineItemModel {
   onElapsed?: (id?: string) => void;
   customContent?: React.ReactNode | React.ReactNode[];
   hasFocus?: boolean;
+  iconChild?: React.ReactNode;
 }

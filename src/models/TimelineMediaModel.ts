@@ -1,8 +1,6 @@
 import { Theme } from './Theme';
-import { TimelineMode } from './TimelineModel';
 
 export type MediaType = 'VIDEO' | 'IMAGE';
-
 export interface MediaSource {
   url: string;
   type?: string;
@@ -27,7 +25,6 @@ export interface CardMediaModel {
   hideMedia: boolean;
   id?: string;
   media: Media;
-  mode?: TimelineMode;
   onMediaStateChange: (state: MediaState) => void;
   slideshowActive?: boolean;
   theme?: Theme;

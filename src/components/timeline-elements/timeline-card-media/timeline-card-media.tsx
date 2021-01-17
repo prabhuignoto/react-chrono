@@ -1,11 +1,13 @@
 import React, {
   useCallback,
+  useContext,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from 'react';
 import { CardMediaModel } from '../../../models/TimelineMediaModel';
+import { GlobalContext } from '../../GlobalContext';
 import { MemoSubTitle, MemoTitle } from '../memoized';
 import {
   CardImage,
@@ -23,7 +25,6 @@ interface ErrorMessageModel {
 const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   active,
   id,
-  mode,
   onMediaStateChange,
   theme,
   title,
@@ -35,6 +36,8 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
 }: CardMediaModel) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);
+
+  const { mode } = useContext(GlobalContext);
 
   useEffect(() => {
     if (!videoRef) {

@@ -1,8 +1,8 @@
 import 'focus-visible';
 import React, {
   useCallback,
+  useContext,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -11,6 +11,7 @@ import { Scroll } from '../../models/TimelineHorizontalModel';
 import { TimelineCardModel } from '../../models/TimelineItemModel';
 import { TimelineModel } from '../../models/TimelineModel';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
+import { GlobalContext } from '../GlobalContext';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
@@ -29,29 +30,29 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   // de-structure the props
   const {
     activeTimelineItem,
-    disableNavOnKey,
-    itemWidth = 200,
+    contentDetailsChildren,
+    iconChildren,
     items = [],
-    mode = 'HORIZONTAL',
+    onFirst,
+    onLast,
     onNext,
     onPrevious,
-    onTimelineUpdated,
-    slideShowRunning,
-    onLast,
-    onFirst,
-    theme,
     onRestartSlideshow,
-    cardHeight,
+    onTimelineUpdated,
     slideShowEnabled,
-    slideItemDuration,
-    hideControls,
-    scrollable,
-    cardPositionHorizontal,
-    contentDetailsChildren,
-    flipLayout,
-    onScrollEnd,
+    slideShowRunning,
+    theme,
   } = props;
 
+  const {
+    scrollable,
+    mode = 'HORIZONTAL',
+    hideControls,
+    itemWidth = 200,
+    disableNavOnKey,
+    cardPositionHorizontal,
+    onScrollEnd,
+  } = useContext(GlobalContext);
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
   const [hasFocus, setHasFocus] = useState(false);
@@ -68,10 +69,22 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const id = useRef('react-chrono-timeline');
 
   // handlers for navigation
-  const handleNext = () => hasFocus && onNext();
-  const handlePrevious = () => hasFocus && onPrevious();
-  const handleFirst = () => hasFocus && onFirst();
-  const handleLast = () => hasFocus && onLast();
+  const handleNext = useCallback(() => hasFocus && onNext(), [
+    hasFocus,
+    onNext,
+  ]);
+  const handlePrevious = useCallback(() => hasFocus && onPrevious(), [
+    hasFocus,
+    onPrevious,
+  ]);
+  const handleFirst = useCallback(() => hasFocus && onFirst(), [
+    hasFocus,
+    onFirst,
+  ]);
+  const handleLast = useCallback(() => hasFocus && onLast(), [
+    hasFocus,
+    onLast,
+  ]);
 
   // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -133,7 +146,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   }, [newOffSet]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // setup observer for the timeline elements
     setTimeout(() => {
       const element = timelineMainRef.current;
@@ -148,27 +161,27 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       }
     }, 0);
 
+    const toggleMedia = (elem: HTMLElement, state: string) => {
+      elem
+        .querySelectorAll('img,video')
+        .forEach(
+          (ele) =>
+            ((ele as HTMLElement).style.visibility =
+              state === 'hide' ? 'hidden' : 'visible'),
+        );
+    };
+
     if (mode !== 'HORIZONTAL') {
       observer.current = new IntersectionObserver(
         (entries) => {
-          // helper functions to hide image/videos
-          const hide = (ele: HTMLImageElement | HTMLVideoElement) => {
-            ele.style.visibility = 'hidden';
-          };
-          const show = (ele: HTMLImageElement | HTMLVideoElement) =>
-            (ele.style.visibility = 'visible');
-
           entries.forEach((entry) => {
             const element = entry.target as HTMLDivElement;
             if (entry.isIntersecting) {
               // show img and video when visible.
-              element.querySelectorAll('img').forEach(show);
-              element.querySelectorAll('video').forEach(show);
+              toggleMedia(element, 'show');
             } else {
               // hide img and video when not visible.
-              element.querySelectorAll('img').forEach(hide);
-              element.querySelectorAll('video').forEach(hide);
-
+              toggleMedia(element, 'hide');
               // pause YouTube embeds
               element.querySelectorAll('iframe').forEach((element) => {
                 element.contentWindow?.postMessage(
@@ -235,17 +248,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           <TimelineVertical
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
-            cardHeight={cardHeight}
             contentDetailsChildren={contentDetailsChildren}
+            iconChildren={iconChildren}
             hasFocus={hasFocus}
             items={items as TimelineCardModel[]}
-            mode={mode}
             onClick={handleTimelineItemClick}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
-            slideItemDuration={slideItemDuration}
             slideShowRunning={slideShowRunning}
             theme={theme}
-            flipLayout={flipLayout}
           />
         ) : null}
 
@@ -255,18 +265,15 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             <Outline color={theme && theme.primary} />
             <TimelineHorizontal
               autoScroll={handleScroll}
-              cardHeight={cardHeight}
               contentDetailsChildren={contentDetailsChildren}
               handleItemClick={handleTimelineItemClick}
               hasFocus={hasFocus}
-              itemWidth={itemWidth}
               items={items as TimelineCardModel[]}
-              mode={mode}
               onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
-              slideItemDuration={slideItemDuration}
               slideShowRunning={slideShowRunning}
               theme={theme}
               wrapperId={id.current}
+              iconChildren={iconChildren}
             />
           </TimelineMain>
         ) : null}
@@ -277,17 +284,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             activeTimelineItem={activeTimelineItem}
             alternateCards={false}
             autoScroll={handleScroll}
-            cardHeight={cardHeight}
             contentDetailsChildren={contentDetailsChildren}
+            iconChildren={iconChildren}
             hasFocus={hasFocus}
             items={items as TimelineCardModel[]}
-            mode={mode}
             onClick={handleTimelineItemClick}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
-            slideItemDuration={slideItemDuration}
             slideShowRunning={slideShowRunning}
             theme={theme}
-            flipLayout={flipLayout}
           />
         ) : null}
       </TimelineMainWrapper>
@@ -296,18 +300,17 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       {!hideControls && (
         <TimelineControlContainer mode={mode}>
           <TimelineControl
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-            onFirst={handleFirst}
-            onLast={handleLast}
             disableLeft={activeTimelineItem === 0}
             disableRight={activeTimelineItem === items.length - 1}
-            mode={mode}
-            theme={theme}
-            onReplay={onRestartSlideshow}
-            slideShowRunning={slideShowRunning}
-            slideShowEnabled={slideShowEnabled}
             id={id.current}
+            onFirst={handleFirst}
+            onLast={handleLast}
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+            onReplay={onRestartSlideshow}
+            slideShowEnabled={slideShowEnabled}
+            slideShowRunning={slideShowRunning}
+            theme={theme}
           />
         </TimelineControlContainer>
       )}

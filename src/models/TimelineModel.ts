@@ -60,6 +60,8 @@ export interface TimelineModel extends TimelineProps {
   slideItemDuration?: number;
 
   contentDetailsChildren?: React.ReactNode | React.ReactNode[];
+
+  iconChildren?: React.ReactNode | React.ReactNode[];
 }
 
 /**
@@ -151,7 +153,7 @@ export interface TimelineProps {
    */
   flipLayout?: boolean;
 
-  children?: React.ReactNode | React.ReactNode[];
+  children?: React.ReactElement | React.ReactElement[];
 
   allowDynamicUpdate?: boolean;
 

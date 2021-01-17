@@ -5,7 +5,9 @@ import {
   HorizontalBasic,
   VerticalBasic,
   VerticalCustomContent,
-  VerticalTree,
+
+
+  VerticalCustomContent2, VerticalTree,
   VerticalTreeMixed
 } from './app-samples';
 import './App.css';
@@ -33,7 +35,7 @@ const NewDemo: React.FunctionComponent = () => {
   }, []);
 
   const [state, setState]  = useState(0);
-  
+
   return (
     <Wrapper>
       <h3>Timeline of World War 2</h3>
@@ -55,6 +57,9 @@ const NewDemo: React.FunctionComponent = () => {
           <li>
             <Link to="/vertical-custom">Vertical  Custom contents</Link>
           </li>
+          <li>
+            <Link to="/vertical-custom-icon">Vertical  Custom Icons</Link>
+          </li>
         </ComponentLinks>
       </header>
       <section>
@@ -69,8 +74,10 @@ const NewDemo: React.FunctionComponent = () => {
             {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} 
           </Route>
           <Route path="/vertical-alternating">
-            <button onClick={() => setState(1 - state)}>change</button>
-            {items.length > 0 && <VerticalTree type={'big-screen'} items={state ? items : mixed} />}
+            <button onClick={() => {
+              setState(1 - state)
+            }}>change</button>
+            {<VerticalTree type={'big-screen'} items={state > 0 ? items : mixed} >{state}</VerticalTree>}
           </Route>
           <Route path="/horizontal">
             {items.length > 0 && (
@@ -79,6 +86,9 @@ const NewDemo: React.FunctionComponent = () => {
           </Route>
           <Route path="/vertical-custom">
               {items.length  > 0 && <VerticalCustomContent  type="big-screen" />}
+          </Route>
+          <Route path="/vertical-custom-icon">
+              {items.length  > 0 && <VerticalCustomContent2  type="big-screen" />}
           </Route>
           <Route path="/">
             {items.length > 0 && (

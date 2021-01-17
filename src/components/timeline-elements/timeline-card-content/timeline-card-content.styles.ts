@@ -68,6 +68,11 @@ export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
   width: 100%;
 `;
 
+export const TimelineSubContent = styled.span`
+  margin-bottom: 0.5rem;
+  display: block;
+`;
+
 export const TimelineContentDetailsWrapper = styled.div<{
   theme?: Theme;
   customContent?: boolean;

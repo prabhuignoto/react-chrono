@@ -1,6 +1,7 @@
 import cls from 'classnames';
 import React, {
   useCallback,
+  useContext,
   useEffect,
   useMemo,
   useRef,
@@ -8,6 +9,7 @@ import React, {
 } from 'react';
 import { TimelineContentModel } from '../../../models/TimelineContentModel';
 import { MediaState } from '../../../models/TimelineMediaModel';
+import { GlobalContext } from '../../GlobalContext';
 import ChevronIcon from '../../icons/chev-right';
 import { MemoSubTitle, MemoTitle } from '../memoized';
 import CardMedia from '../timeline-card-media/timeline-card-media';
@@ -19,20 +21,18 @@ import {
   TimelineContentDetails,
   TimelineContentDetailsWrapper,
   TimelineItemContentWrapper,
+  TimelineSubContent,
 } from './timeline-card-content.styles';
 
 const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React.memo(
   ({
     active,
-    cardHeight,
     content,
     detailedText,
     id,
     media,
-    mode,
     onShowMore,
     slideShowActive,
-    slideItemDuration,
     onElapsed,
     theme,
     title,
@@ -54,6 +54,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
     // const [elapsed, setElapsed] = useState(0);
     const [remainInterval, setRemainInterval] = useState(0);
     const [startWidth, setStartWidth] = useState(0);
+
+    const { mode, cardHeight, slideItemDuration = 2000 } = useContext(
+      GlobalContext,
+    );
 
     const canShowProgressBar = useMemo(() => {
       const canShow = active && slideShowActive;
@@ -232,7 +236,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
             media={media}
             content={content}
             title={title}
-            mode={mode}
             onMediaStateChange={handleMediaState}
             id={id}
             active={active}
@@ -259,7 +262,11 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
               ref={detailsRef}
               theme={theme}
             >
-              {detailedText}
+              {Array.isArray(detailedText)
+                ? detailedText.map((text, index) => (
+                    <TimelineSubContent key={index}>{text}</TimelineSubContent>
+                  ))
+                : detailedText}
             </TimelineContentDetails>
           )}
         </TimelineContentDetailsWrapper>

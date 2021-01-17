@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { TimelineControlModel } from '../../../models/TimelineControlModel';
+import { GlobalContext } from '../../GlobalContext';
 import ChevronLeft from '../../icons/chev-left';
 import ChevronRightIcon from '../../icons/chev-right';
 import ChevronsLeftIcon from '../../icons/chevs-left';
@@ -24,8 +25,8 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = React.mem
     slideShowRunning,
     onReplay,
     slideShowEnabled,
-    mode,
   }: TimelineControlModel) => {
+    const { mode } = useContext(GlobalContext);
     const rotate = useMemo(() => mode !== 'HORIZONTAL', [mode]);
     return (
       <TimelineControlContainer slideShowActive={slideShowRunning}>

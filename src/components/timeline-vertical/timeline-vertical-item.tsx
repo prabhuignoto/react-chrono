@@ -1,6 +1,7 @@
 import cls from 'classnames';
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, { useCallback, useContext, useMemo, useRef } from 'react';
 import { VerticalItemModel } from '../../models/TimelineVerticalModel';
+import { GlobalContext } from '../GlobalContext';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
 import VerticalCircle from './timeline-vertical-circle';
@@ -19,25 +20,22 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     active,
     alternateCards,
     cardDetailedText,
-    cardHeight,
     cardSubtitle,
     cardTitle,
     className,
     contentDetailsChildren,
+    iconChild,
     hasFocus,
     id,
     index,
     media,
-    mode,
     onActive,
     onClick,
     onElapsed,
-    slideItemDuration,
     slideShowRunning,
     theme,
     title,
     visible,
-    flipLayout,
   } = props;
 
   const handleOnActive = (offset: number) => {
@@ -46,6 +44,8 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       onActive(offsetTop + offset, offsetTop, clientHeight);
     }
   };
+
+  const { cardHeight, mode, flipLayout } = useContext(GlobalContext);
 
   // handler for read more
   const handleShowMore = useCallback(() => {
@@ -95,18 +95,15 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         <TimelineCard
           active={active}
           branchDir={className}
-          cardHeight={cardHeight}
           content={cardSubtitle}
           customContent={contentDetailsChildren}
           detailedText={cardDetailedText}
           hasFocus={hasFocus}
           id={id}
           media={media}
-          mode={mode}
           onClick={onClick}
           onElapsed={onElapsed}
           onShowMore={handleShowMore}
-          slideItemDuration={slideItemDuration}
           slideShowActive={slideShowRunning}
           theme={theme}
           title={cardTitle}
@@ -127,6 +124,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         onActive={handleOnActive}
         onClick={onClick}
         slideShowRunning={slideShowRunning}
+        iconChild={iconChild}
         theme={theme}
       />
     );

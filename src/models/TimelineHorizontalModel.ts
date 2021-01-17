@@ -6,16 +6,15 @@ import { TimelineMode } from './TimelineModel';
 export interface TimelineHorizontalModel {
   autoScroll: (t: Partial<Scroll>) => void;
   handleItemClick: (id?: string) => void;
-  itemWidth: number;
+  itemWidth?: number;
   items: TimelineCardModel[];
-  mode: TimelineMode;
+  mode?: TimelineMode;
   slideShowRunning?: boolean;
   theme?: Theme;
   wrapperId: string;
-  cardHeight?: number;
   onElapsed?: (id?: string) => void;
-  slideItemDuration?: number;
   contentDetailsChildren?: ReactNode | ReactNode[];
+  iconChildren: ReactNode;
   hasFocus?: boolean;
 }
 

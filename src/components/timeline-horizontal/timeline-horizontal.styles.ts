@@ -17,6 +17,9 @@ export const TimelineHorizontalWrapper = styled.ul`
 export const TimelineItemWrapper = styled.li<{ width: number }>`
   width: ${(p) => p.width}px;
   visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &.vertical {
     margin-bottom: 2rem;

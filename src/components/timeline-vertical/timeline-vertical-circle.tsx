@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { VerticalCircleModel } from '../../models/TimelineVerticalModel';
 import { Circle } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
 import {
-  VerticalCircleWrapper,
   VerticalCircleContainer,
+  VerticalCircleWrapper,
 } from './timeline-vertical.styles';
+import cls from 'classnames';
 
 const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
   props: VerticalCircleModel,
@@ -18,6 +19,7 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
     theme,
     alternateCards,
     slideShowRunning,
+    iconChild,
   } = props;
   const circleRef = useRef<HTMLDivElement>(null);
 
@@ -29,12 +31,21 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
     }
   }, [active]);
 
+  const circleClass = useMemo(
+    () =>
+      cls({
+        active,
+        'using-icon': !!iconChild,
+      }),
+    [active, iconChild],
+  );
+
   return (
     <VerticalCircleWrapper
+      alternateCards={alternateCards}
+      bg={theme && theme.primary}
       className={className}
       data-testid="tree-leaf"
-      bg={theme && theme.primary}
-      alternateCards={alternateCards}
       role="button"
     >
       <VerticalCircleContainer
@@ -50,7 +61,9 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
         data-testid="tree-leaf-click"
         aria-label="select timeline"
       >
-        <Circle className={active ? 'active' : 'in-active'} theme={theme} />
+        <Circle className={circleClass} theme={theme}>
+          {iconChild ? iconChild : null}
+        </Circle>
       </VerticalCircleContainer>
     </VerticalCircleWrapper>
   );

@@ -1,7 +1,14 @@
 import cls from 'classnames';
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import ReactDOM from 'react-dom';
 import { TimelineCardModel } from '../../../models/TimelineItemModel';
+import { GlobalContext } from '../../GlobalContext';
 import TimelineCardContent from '../timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import {
@@ -15,27 +22,26 @@ import {
 const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   active,
   autoScroll,
-  cardHeight,
   cardDetailedText,
   cardSubtitle,
   cardTitle,
   id,
   media,
-  mode,
   onClick,
   onElapsed,
-  position,
-  slideItemDuration,
   slideShowRunning,
   theme,
   title,
   wrapperId,
   customContent,
   hasFocus,
+  iconChild,
 }: TimelineCardModel) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const { mode, cardPositionHorizontal: position } = useContext(GlobalContext);
 
   const handleClick = () => {
     if (onClick && !slideShowRunning) {
@@ -69,7 +75,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       cls(
         'timeline-horz-card-wrapper',
         modeLower,
-        position === 'top' ? 'bottom' : 'top',
+        position === 'TOP' ? 'bottom' : 'top',
       ),
     [mode, position],
   );
@@ -77,7 +83,13 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   const titleClass = useMemo(() => cls(modeLower, position), []);
 
   const circleClass = useMemo(
-    () => cls('timeline-circle', modeLower, active ? 'active' : 'in-active'),
+    () =>
+      cls(
+        'timeline-circle',
+        { 'using-icon': !!iconChild },
+        modeLower,
+        active ? 'active' : 'in-active',
+      ),
     [active],
   );
 
@@ -93,9 +105,6 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           theme={theme}
           slideShowActive={slideShowRunning}
           media={media}
-          mode={mode}
-          cardHeight={cardHeight}
-          slideItemDuration={slideItemDuration}
           onElapsed={onElapsed}
           id={id}
           customContent={customContent}
@@ -125,7 +134,9 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           data-testid="timeline-circle"
           theme={theme}
           aria-label={title}
-        ></Circle>
+        >
+          {iconChild ? iconChild : null}
+        </Circle>
       </CircleWrapper>
 
       <TimelineTitleContainer

@@ -1,6 +1,7 @@
 import cls from 'classnames';
-import React, { ReactNode, useMemo } from 'react';
+import React, { ReactNode, useContext, useMemo } from 'react';
 import { TimelineHorizontalModel } from '../../models/TimelineHorizontalModel';
+import { GlobalContext } from '../GlobalContext';
 import TimelineCard from '../timeline-elements/timeline-card/timeline-horizontal-card';
 import {
   TimelineHorizontalWrapper,
@@ -9,23 +10,26 @@ import {
 
 const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   items,
-  itemWidth,
   handleItemClick,
   autoScroll,
-  mode,
   wrapperId,
   theme,
   slideShowRunning,
-  cardHeight,
-  slideItemDuration,
   onElapsed,
   contentDetailsChildren: children,
   hasFocus,
+  iconChildren,
 }: TimelineHorizontalModel) => {
+  const { mode = 'HORIZONTAL', itemWidth = 200, cardHeight } = useContext(
+    GlobalContext,
+  );
   const wrapperClass = useMemo(
     () => cls(mode.toLowerCase(), 'timeline-horz-container'),
     [mode],
   );
+
+  const iconChildColln = React.Children.toArray(iconChildren);
+
   return (
     <TimelineHorizontalWrapper
       className={wrapperClass}
@@ -49,10 +53,10 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
             theme={theme}
             slideShowRunning={slideShowRunning}
             cardHeight={cardHeight}
-            slideItemDuration={slideItemDuration}
             onElapsed={onElapsed}
             customContent={children ? (children as ReactNode[])[index] : null}
             hasFocus={hasFocus}
+            iconChild={iconChildColln[index]}
           />
         </TimelineItemWrapper>
       ))}
