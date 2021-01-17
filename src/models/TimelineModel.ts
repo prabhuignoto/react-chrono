@@ -60,6 +60,8 @@ export interface TimelineModel extends TimelineProps {
   slideItemDuration?: number;
 
   contentDetailsChildren?: React.ReactNode | React.ReactNode[];
+
+  iconChildren?: React.ReactNode | React.ReactNode[];
 }
 
 /**

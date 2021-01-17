@@ -1,9 +1,18 @@
 import 'focus-visible';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  ReactChild,
+  ReactChildren,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import { TimelineProps } from '../models/TimelineModel';
 import GlobalContextProvider from './GlobalContext';
 import Timeline from './timeline/timeline';
+const toReactArray = React.Children.toArray;
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   props: Partial<TimelineProps>,
@@ -116,13 +125,22 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }
   };
 
+  let iconChildren = toReactArray(children).filter(
+    (item) => (item as any).props.className === 'chrono-icons',
+  );
+
+  if (iconChildren.length) {
+    iconChildren = (iconChildren[0] as any).props.children;
+  }
+
   return (
     <GlobalContextProvider {...props}>
       <Timeline
         activeTimelineItem={activeTimelineItem}
-        contentDetailsChildren={React.Children.toArray(children).filter(
+        contentDetailsChildren={toReactArray(children).filter(
           (item) => (item as any).props.className !== 'chrono-icons',
         )}
+        iconChildren={iconChildren}
         items={timeLineItems}
         onFirst={handleFirst}
         onLast={handleLast}

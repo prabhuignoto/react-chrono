@@ -5,7 +5,9 @@ import {
   HorizontalBasic,
   VerticalBasic,
   VerticalCustomContent,
-  VerticalTree,
+
+
+  VerticalCustomContent2, VerticalTree,
   VerticalTreeMixed
 } from './app-samples';
 import './App.css';
@@ -55,6 +57,9 @@ const NewDemo: React.FunctionComponent = () => {
           <li>
             <Link to="/vertical-custom">Vertical  Custom contents</Link>
           </li>
+          <li>
+            <Link to="/vertical-custom-icon">Vertical  Custom Icons</Link>
+          </li>
         </ComponentLinks>
       </header>
       <section>
@@ -79,6 +84,9 @@ const NewDemo: React.FunctionComponent = () => {
           </Route>
           <Route path="/vertical-custom">
               {items.length  > 0 && <VerticalCustomContent  type="big-screen" />}
+          </Route>
+          <Route path="/vertical-custom-icon">
+              {items.length  > 0 && <VerticalCustomContent2  type="big-screen" />}
           </Route>
           <Route path="/">
             {items.length > 0 && (

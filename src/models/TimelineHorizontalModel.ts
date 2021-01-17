@@ -12,9 +12,7 @@ export interface TimelineHorizontalModel {
   slideShowRunning?: boolean;
   theme?: Theme;
   wrapperId: string;
-  cardHeight?: number;
   onElapsed?: (id?: string) => void;
-  slideItemDuration?: number;
   contentDetailsChildren?: ReactNode | ReactNode[];
   hasFocus?: boolean;
 }

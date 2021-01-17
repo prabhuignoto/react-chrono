@@ -57,18 +57,36 @@ interface CircleModel {
 }
 
 export const Circle = styled.div<CircleModel>`
-  background: ${(p: CircleModel) => p.theme?.primary};
   border-radius: 50%;
   cursor: pointer;
   height: 1em;
   width: 1em;
+  &:not(.using-icon) {
+    background: ${(p: CircleModel) => p.theme?.primary};
+  }
+  &.using-icon {
+    background: #fff;
+    height: 2em;
+    width: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
+
+    img {
+      max-width: 70%;
+      max-height: 70%;
+    }
+  }
 
   &.active {
     animation: ${scaleUp} 0.1s ease-in;
     transform: scale(1.4);
 
     &::after {
-      background: ${(p) => p.theme.secondary};
+      &:not(.using-icon) {
+        background: ${(p) => p.theme.secondary};
+      }
       border-radius: 50%;
       content: '';
       display: block;

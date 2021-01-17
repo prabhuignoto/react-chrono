@@ -264,11 +264,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
             >
               {Array.isArray(detailedText)
                 ? detailedText.map((text, index) => (
-                    <>
-                      <TimelineSubContent key={index}>
-                        {text}
-                      </TimelineSubContent>
-                    </>
+                    <TimelineSubContent key={index}>{text}</TimelineSubContent>
                   ))
                 : detailedText}
             </TimelineContentDetails>

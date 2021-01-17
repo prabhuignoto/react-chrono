@@ -5,15 +5,16 @@ import { TimelineVerticalWrapper } from './timeline-vertical.styles';
 
 // This component is used to render both tree and vertical modes
 const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
-  items,
-  onClick,
-  autoScroll,
-  theme,
   alternateCards = true,
-  slideShowRunning,
-  onElapsed,
+  autoScroll,
   contentDetailsChildren,
   hasFocus,
+  iconChildren,
+  items,
+  onClick,
+  onElapsed,
+  slideShowRunning,
+  theme,
 }: TimelineVerticalModel) => {
   // check if the timeline that has become active is visible.
   // if not auto scroll the content and bring it to the view.
@@ -47,22 +48,25 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
           (contentDetailsChildren &&
             (contentDetailsChildren as React.ReactNode[])[index]) ||
           null;
+        const customIcon =
+          (iconChildren && (iconChildren as React.ReactNode[])[index]) || null;
 
         return (
           <TimelineVerticalItem
             {...item}
+            alternateCards={alternateCards}
             className={className}
+            contentDetailsChildren={contentDetails}
+            iconChild={customIcon}
+            hasFocus={hasFocus}
             index={index}
             key={item.id}
-            theme={theme}
-            alternateCards={alternateCards}
-            slideShowRunning={slideShowRunning}
-            onShowMore={handleOnShowMore}
             onActive={handleOnActive}
             onClick={onClick}
             onElapsed={onElapsed}
-            contentDetailsChildren={contentDetails}
-            hasFocus={hasFocus}
+            onShowMore={handleOnShowMore}
+            slideShowRunning={slideShowRunning}
+            theme={theme}
           />
         );
       })}

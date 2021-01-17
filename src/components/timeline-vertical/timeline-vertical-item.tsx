@@ -24,6 +24,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     cardTitle,
     className,
     contentDetailsChildren,
+    iconChild,
     hasFocus,
     id,
     index,
@@ -123,6 +124,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         onActive={handleOnActive}
         onClick={onClick}
         slideShowRunning={slideShowRunning}
+        iconChild={iconChild}
         theme={theme}
       />
     );

@@ -30,17 +30,18 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   // de-structure the props
   const {
     activeTimelineItem,
+    contentDetailsChildren,
+    iconChildren,
     items = [],
+    onFirst,
+    onLast,
     onNext,
     onPrevious,
-    onTimelineUpdated,
-    slideShowRunning,
-    onLast,
-    onFirst,
-    theme,
     onRestartSlideshow,
+    onTimelineUpdated,
     slideShowEnabled,
-    contentDetailsChildren,
+    slideShowRunning,
+    theme,
   } = props;
 
   const {
@@ -148,6 +149,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       }
     }, 0);
 
+    const toggleMedia = (elem: HTMLElement, state: string) => {
+      elem
+        .querySelectorAll('img,video')
+        .forEach(
+          (ele) =>
+            ((ele as HTMLElement).style.visibility =
+              state === 'hide' ? 'hidden' : 'visible'),
+        );
+    };
+
     if (mode !== 'HORIZONTAL') {
       observer.current = new IntersectionObserver(
         (entries) => {
@@ -155,21 +166,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             const element = entry.target as HTMLDivElement;
             if (entry.isIntersecting) {
               // show img and video when visible.
-              element
-                .querySelectorAll('img,video')
-                .forEach(
-                  (element) =>
-                    ((element as HTMLElement).style.visibility = 'visible'),
-                );
+              toggleMedia(element, 'show');
             } else {
               // hide img and video when not visible.
-              element
-                .querySelectorAll('img,video')
-                .forEach(
-                  (element) =>
-                    ((element as HTMLElement).style.visibility = 'hidden'),
-                );
-
+              toggleMedia(element, 'hide');
               // pause YouTube embeds
               element.querySelectorAll('iframe').forEach((element) => {
                 element.contentWindow?.postMessage(
@@ -237,6 +237,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
             contentDetailsChildren={contentDetailsChildren}
+            iconChildren={iconChildren}
             hasFocus={hasFocus}
             items={items as TimelineCardModel[]}
             onClick={handleTimelineItemClick}
@@ -271,6 +272,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             alternateCards={false}
             autoScroll={handleScroll}
             contentDetailsChildren={contentDetailsChildren}
+            iconChildren={iconChildren}
             hasFocus={hasFocus}
             items={items as TimelineCardModel[]}
             onClick={handleTimelineItemClick}
@@ -285,17 +287,17 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       {!hideControls && (
         <TimelineControlContainer mode={mode}>
           <TimelineControl
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-            onFirst={handleFirst}
-            onLast={handleLast}
             disableLeft={activeTimelineItem === 0}
             disableRight={activeTimelineItem === items.length - 1}
-            theme={theme}
-            onReplay={onRestartSlideshow}
-            slideShowRunning={slideShowRunning}
-            slideShowEnabled={slideShowEnabled}
             id={id.current}
+            onFirst={handleFirst}
+            onLast={handleLast}
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+            onReplay={onRestartSlideshow}
+            slideShowEnabled={slideShowEnabled}
+            slideShowRunning={slideShowRunning}
+            theme={theme}
           />
         </TimelineControlContainer>
       )}
