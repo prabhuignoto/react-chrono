@@ -50,6 +50,7 @@
   - [Scrollable](#scrollable)
   - [Media](#media)
   - [Rendering custom content](#rendering-custom-content)
+  - [Custom icons for the Timeline](#custom-icons-for-the-timeline)
   - [Slideshow mode](#slideshow-mode)
   - [Item Width](#item-width)
   - [Theme](#theme)
@@ -188,7 +189,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | title                | title of the timeline item                   | String |
 | cardTitle         | title that is displayed on the timeline card | String |
 | cardSubtitle          | text displayed in the timeline card          | String |
-| cardDetailedText  | detailed text displayed in the timeline card | String |
+| cardDetailedText  | detailed text displayed in the timeline card | String or String[] |
 | media                | media object to set image or video.          | Object |
 
 ```sh
@@ -331,6 +332,37 @@ The items collection will also work nicely with any custom content that is passe
     </div>
     <div>
       <img src="<url to  a nice image" />
+    </div>
+  </Chrono>
+```
+
+### Custom icons for the Timeline
+
+To use custom icons in the timeline, pass in the collection of images. The icons are sequentially set (i.e) the first image you pass will be used as the icon for the first timeline item and so on.
+Please make sure to pass in the image collection inside a container with a special className `chrono-icons`. This convention is mandatory as the component uses this class name to pick the images.
+
+ ```sh
+  <chrono items={items} mode="VERTICAL_ALTERNATING">
+    <div className="chrono-icons">
+      <img src="image1.svg" />
+      <img src="image2.svg" />
+    </div>
+  </chrono>
+ ```
+
+custom icons also works if you are [rendering custom content](#rendering-custom-content) inside the cards.
+
+```sh
+  <Chrono mode="VERTICAL" items={items}>
+    <div>
+      <p>Lorem Ipsum. Lorem Ipsum. Lorem Ipsum</p>
+    </div>
+    <div>
+      <img src="<url to  a nice image" />
+    </div>
+    <div className="chrono-icons">
+      <img src="image1.svg" />
+      <img src="image2.svg" />
     </div>
   </Chrono>
 ```
