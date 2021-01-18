@@ -117,19 +117,19 @@ export const VerticalTree: FunctionComponent<{
         onScrollEnd={() => console.log('end reached')}
       >
         <div className="chrono-icons">
-          <img src="color-circle.svg" alt="github" />
-          <img src="color-circle.svg" alt="github" />
-          <img src="color-circle.svg" alt="github" />
-          <img src="color-circle.svg" alt="github" />
-          <img src="color-circle.svg" alt="github" />
-          <img src="color-circle.svg" alt="github" />
-          <img src="color-circle.svg" alt="github" />
-          <img src="color-circle.svg" alt="github" />
-          <img src="color-circle.svg" alt="github" />
-          <img src="color-circle.svg" alt="github" />
-          <img src="color-circle.svg" alt="github" />
-          <img src="color-circle.svg" alt="github" />
-          <img src="color-circle.svg" alt="github" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/twitter.png" alt="twitter"/>
+          <img src="https://img.icons8.com/ios-filled/100/000000/about.png" alt="twitter"/>
+          <img src="https://img.icons8.com/ios-filled/100/000000/contacts.png" alt="twitter"/>
+          <img src="https://img.icons8.com/ios-filled/100/000000/briefcase.png" alt="twitter"/>
+          <img src="https://img.icons8.com/ios-filled/100/000000/idea.png" alt="twitter"/>
+          <img src="https://img.icons8.com/ios-filled/100/000000/sun.png" alt="twitter"/>
+          <img src="https://img.icons8.com/ios-filled/100/000000/info.png" alt="twitter"/>
+          <img src="https://img.icons8.com/ios-filled/100/000000/calendar.png" alt="twitter"/>
+          <img src="https://img.icons8.com/ios-filled/50/000000/mailbox-closed-flag-down.png"/>
+          <img src="https://img.icons8.com/ios-filled/50/000000/pinterest.png" alt="pinterest"/>
+          <img src="https://img.icons8.com/ios-filled/100/000000/reddit.png" alt="reddit"/>
+          <img src="https://img.icons8.com/ios-filled/100/000000/facebook.png" alt="reddit"/>
+          <img src="https://img.icons8.com/ios-filled/100/000000/stumbleupon.png" alt="reddit"/>
         </div>
       </Chrono>
     </ComponentContainerTree>

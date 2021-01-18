@@ -7,24 +7,24 @@ exports[`Test Tree render 1`] = `
   role="list"
 >
   <div
-    class="left  vertical-item-row css-43ivcr"
+    class="left vertical-item-row css-43ivcr"
     data-testid="vertical-item-row"
     role="listitem"
   >
     <div
-      class="left css-1uwvots"
+      class="left css-3o7orc"
     >
       <div
-        class="timeline-item-title css-am6i6v"
+        class="timeline-item-title css-2rtnsh"
       >
         June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
       </div>
     </div>
     <div
-      class="left card-content-wrapper  css-1qaldoj"
+      class="card-content-wrapper left css-t3p44t"
     >
       <section
-        class="timeline-card-content  css-x11i70"
+        class="timeline-card-content  css-sej5n2"
         tabindex="0"
       >
         <header
@@ -38,16 +38,16 @@ exports[`Test Tree render 1`] = `
         </header>
         <div
           aria-expanded="false"
-          class="show-less card-description css-1bnuad"
+          class="show-less card-description css-22xojc"
         >
           <p
-            class=" css-1jsxpv8"
+            class=" css-1gq4ywb"
           />
         </div>
       </section>
     </div>
     <div
-      class="left css-vn8ri6"
+      class="left css-zp8e37"
       data-testid="tree-leaf"
       role="button"
     >
@@ -58,30 +58,30 @@ exports[`Test Tree render 1`] = `
         role="button"
       >
         <div
-          class="in-active css-zys4v9"
+          class=" css-1hf8j5"
         />
       </div>
     </div>
   </div>
   <div
-    class="right  vertical-item-row css-43ivcr"
+    class="right vertical-item-row css-43ivcr"
     data-testid="vertical-item-row"
     role="listitem"
   >
     <div
-      class="right css-1uwvots"
+      class="right css-3o7orc"
     >
       <div
-        class="timeline-item-title css-am6i6v"
+        class="timeline-item-title css-2rtnsh"
       >
         July 28, 1914
       </div>
     </div>
     <div
-      class="right card-content-wrapper  css-1qaldoj"
+      class="card-content-wrapper right css-t3p44t"
     >
       <section
-        class="timeline-card-content  css-x11i70"
+        class="timeline-card-content  css-sej5n2"
         tabindex="0"
       >
         <header
@@ -95,16 +95,16 @@ exports[`Test Tree render 1`] = `
         </header>
         <div
           aria-expanded="false"
-          class="show-less card-description css-1bnuad"
+          class="show-less card-description css-22xojc"
         >
           <p
-            class=" css-1jsxpv8"
+            class=" css-1gq4ywb"
           />
         </div>
       </section>
     </div>
     <div
-      class="right css-vn8ri6"
+      class="right css-zp8e37"
       data-testid="tree-leaf"
       role="button"
     >
@@ -115,30 +115,30 @@ exports[`Test Tree render 1`] = `
         role="button"
       >
         <div
-          class="in-active css-zys4v9"
+          class=" css-1hf8j5"
         />
       </div>
     </div>
   </div>
   <div
-    class="left  vertical-item-row css-43ivcr"
+    class="left vertical-item-row css-43ivcr"
     data-testid="vertical-item-row"
     role="listitem"
   >
     <div
-      class="left css-1uwvots"
+      class="left css-3o7orc"
     >
       <div
-        class="timeline-item-title css-am6i6v"
+        class="timeline-item-title css-2rtnsh"
       >
         August 1–28, 1914
       </div>
     </div>
     <div
-      class="left card-content-wrapper  css-1qaldoj"
+      class="card-content-wrapper left css-t3p44t"
     >
       <section
-        class="timeline-card-content  css-x11i70"
+        class="timeline-card-content  css-sej5n2"
         tabindex="0"
       >
         <header
@@ -154,16 +154,16 @@ exports[`Test Tree render 1`] = `
         </header>
         <div
           aria-expanded="false"
-          class="show-less card-description css-1bnuad"
+          class="show-less card-description css-22xojc"
         >
           <p
-            class=" css-1jsxpv8"
+            class=" css-1gq4ywb"
           />
         </div>
       </section>
     </div>
     <div
-      class="left css-vn8ri6"
+      class="left css-zp8e37"
       data-testid="tree-leaf"
       role="button"
     >
@@ -174,30 +174,30 @@ exports[`Test Tree render 1`] = `
         role="button"
       >
         <div
-          class="in-active css-zys4v9"
+          class=" css-1hf8j5"
         />
       </div>
     </div>
   </div>
   <div
-    class="right  vertical-item-row css-43ivcr"
+    class="right vertical-item-row css-43ivcr"
     data-testid="vertical-item-row"
     role="listitem"
   >
     <div
-      class="right css-1uwvots"
+      class="right css-3o7orc"
     >
       <div
-        class="timeline-item-title css-am6i6v"
+        class="timeline-item-title css-2rtnsh"
       >
         September 6, 1914
       </div>
     </div>
     <div
-      class="right card-content-wrapper  css-1qaldoj"
+      class="card-content-wrapper right css-t3p44t"
     >
       <section
-        class="timeline-card-content  css-x11i70"
+        class="timeline-card-content  css-sej5n2"
         tabindex="0"
       >
         <header
@@ -212,16 +212,16 @@ exports[`Test Tree render 1`] = `
         </header>
         <div
           aria-expanded="false"
-          class="show-less card-description css-1bnuad"
+          class="show-less card-description css-22xojc"
         >
           <p
-            class=" css-1jsxpv8"
+            class=" css-1gq4ywb"
           />
         </div>
       </section>
     </div>
     <div
-      class="right css-vn8ri6"
+      class="right css-zp8e37"
       data-testid="tree-leaf"
       role="button"
     >
@@ -232,7 +232,7 @@ exports[`Test Tree render 1`] = `
         role="button"
       >
         <div
-          class="in-active css-zys4v9"
+          class=" css-1hf8j5"
         />
       </div>
     </div>

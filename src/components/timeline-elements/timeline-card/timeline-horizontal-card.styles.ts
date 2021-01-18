@@ -63,37 +63,16 @@ export const Circle = styled.div<CircleModel>`
   height: 1.25rem;
   width: 1.25rem;
 
-  &:not(.using-icon) {
-    background: ${(p: CircleModel) => p.theme?.primary};
-  }
-
-  &.using-icon {
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
-    transform: scale(1.25);
-
-    img {
-      max-width: 90%;
-      max-height: 90%;
-    }
-  }
-
   &.active {
-    animation: ${scaleUp} 0.1s ease-in;
-    transform-origin: center;
-
     &.using-icon {
-      transform: scale(1.5);
+      /* transform: scale(1.75); */
     }
     &:not(.using-icon) {
+      animation: ${scaleUp} 0.1s ease-in;
       transform: scale(1.25);
     }
 
     &::after {
-      background: ${(p) => p.theme.secondary};
       border-radius: 50%;
       content: '';
       display: block;
@@ -108,8 +87,32 @@ export const Circle = styled.div<CircleModel>`
     }
   }
 
+  &:not(.using-icon) {
+    background: ${(p: CircleModel) => p.theme?.primary};
+
+    &.active {
+      &::after {
+        background: ${(p) => p.theme.secondary};
+      }
+    }
+  }
+
+  &.using-icon {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1.5);
+
+    img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+  }
+
   &.in-active {
     animation: ${scaleDown} 0.1s ease-in;
+    transform: scale(0);
   }
 `;
 

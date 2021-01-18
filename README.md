@@ -353,8 +353,8 @@ Please make sure to pass in the image collection inside a container with a speci
  ```sh
   <chrono items={items} mode="VERTICAL_ALTERNATING">
     <div className="chrono-icons">
-      <img src="image1.svg" />
-      <img src="image2.svg" />
+      <img src="image1.svg" alt="image1" />
+      <img src="image2.svg" alt="image2" />
     </div>
   </chrono>
  ```
@@ -370,8 +370,8 @@ Please make sure to pass in the image collection inside a container with a speci
       <img src="<url to  a nice image" />
     </div>
     <div className="chrono-icons">
-      <img src="image1.svg" />
-      <img src="image2.svg" />
+      <img src="image1.svg" alt="image1" />
+      <img src="image2.svg" alt="image2" />
     </div>
   </Chrono>
 ```

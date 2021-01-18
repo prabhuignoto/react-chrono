@@ -2,25 +2,24 @@
 
 exports[`Test Timeline Item render - Horizontal 1`] = `
 <div
-  class="horizontal css-s6d62l"
+  class="css-u5v0fr"
   data-testid="timeline-item"
 >
   <div
-    class="css-1ue7ww8"
+    class="css-1teztjd"
   >
     <div
       aria-label="test title"
-      class="timeline-circle horizontal active css-10jefxi"
+      class="timeline-circle active css-1hf8j5"
       data-testid="timeline-circle"
-      tabindex="0"
     />
   </div>
   <div
-    class="horizontal top css-17i3qvw"
+    class=" css-1v2vum0"
     data-testid="timeline-title"
   >
     <div
-      class="timeline-item-title active css-1i2f2mb"
+      class="timeline-item-title active css-1fveydr"
     >
       test title
     </div>
@@ -30,79 +29,27 @@ exports[`Test Timeline Item render - Horizontal 1`] = `
 
 exports[`Test Timeline Item render - Vertical 1`] = `
 <div
-  class="vertical css-s6d62l"
+  class="css-u5v0fr"
   data-testid="timeline-item"
 >
   <div
-    class="css-1ue7ww8"
+    class="css-1teztjd"
   >
     <div
       aria-label="test title"
-      class="timeline-circle vertical active css-10jefxi"
+      class="timeline-circle active css-1hf8j5"
       data-testid="timeline-circle"
-      tabindex="0"
     />
   </div>
   <div
-    class="vertical timeline-horz-card-wrapper css-455vfh"
+    class=" css-1v2vum0"
+    data-testid="timeline-title"
   >
     <div
-      class="vertical bottom css-17i3qvw"
-      data-testid="timeline-title"
+      class="timeline-item-title active css-1fveydr"
     >
-      <div
-        class="timeline-item-title active css-1i2f2mb"
-      >
-        test title
-      </div>
+      test title
     </div>
-    <section
-      class="timeline-card-content active css-sx2voi"
-      mode="VERTICAL"
-      tabindex="0"
-    >
-      <header
-        class="css-1ago99h"
-      >
-        <p
-          class="card-sub-title css-4qf4pr"
-        >
-          This is a test content
-        </p>
-      </header>
-      <div
-        class="show-less card-description css-1ikiehq"
-      />
-      <span
-        class="show-more css-1x1ed2e"
-        role="button"
-        tabindex="0"
-      >
-        <span>
-          read more
-        </span>
-        <span
-          class="css-22j6j0"
-        >
-          <svg
-            class="feather feather-chevron-right"
-            fill="none"
-            height="24"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline
-              points="9 18 15 12 9 6"
-            />
-          </svg>
-        </span>
-      </span>
-    </section>
   </div>
 </div>
 `;
