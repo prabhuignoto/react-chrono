@@ -125,7 +125,7 @@ export const VerticalTree: FunctionComponent<{
           <img src="https://img.icons8.com/ios-filled/100/000000/sun.png" alt="twitter"/>
           <img src="https://img.icons8.com/ios-filled/100/000000/info.png" alt="twitter"/>
           <img src="https://img.icons8.com/ios-filled/100/000000/calendar.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/50/000000/mailbox-closed-flag-down.png"/>
+          <img src="https://img.icons8.com/ios-filled/50/000000/mailbox-closed-flag-down.png" alt="mail-box" />
           <img src="https://img.icons8.com/ios-filled/50/000000/pinterest.png" alt="pinterest"/>
           <img src="https://img.icons8.com/ios-filled/100/000000/reddit.png" alt="reddit"/>
           <img src="https://img.icons8.com/ios-filled/100/000000/facebook.png" alt="reddit"/>
