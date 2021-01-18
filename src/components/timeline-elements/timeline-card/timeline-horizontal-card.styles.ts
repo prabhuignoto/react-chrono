@@ -112,7 +112,6 @@ export const Circle = styled.div<CircleModel>`
 
   &.in-active {
     animation: ${scaleDown} 0.1s ease-in;
-    transform: scale(0);
   }
 `;
 
