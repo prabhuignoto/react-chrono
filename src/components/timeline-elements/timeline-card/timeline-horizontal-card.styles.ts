@@ -95,6 +95,10 @@ export const Circle = styled.div<CircleModel>`
         background: ${(p) => p.theme.secondary};
       }
     }
+
+    &.in-active {
+      animation: ${scaleDown} 0.1s ease-in;
+    }
   }
 
   &.using-icon {
@@ -108,10 +112,6 @@ export const Circle = styled.div<CircleModel>`
       max-width: 90%;
       max-height: 90%;
     }
-  }
-
-  &.in-active {
-    animation: ${scaleDown} 0.1s ease-in;
   }
 `;
 
