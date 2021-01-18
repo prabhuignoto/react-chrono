@@ -2,7 +2,7 @@
 
 exports[`Check Timeline Leaf snapshot 1`] = `
 <div
-  class="random-class css-vn8ri6"
+  class="random-class css-zp8e37"
   data-testid="tree-leaf"
   role="button"
 >
@@ -13,7 +13,7 @@ exports[`Check Timeline Leaf snapshot 1`] = `
     role="button"
   >
     <div
-      class="in-active css-zys4v9"
+      class=" css-1hf8j5"
     />
   </div>
 </div>

@@ -2,24 +2,24 @@
 
 exports[`Test tree branch render 1`] = `
 <div
-  class="test-class  vertical-item-row css-43ivcr"
+  class="test-class vertical-item-row css-43ivcr"
   data-testid="vertical-item-row"
   role="listitem"
 >
   <div
-    class="test-class css-1nwuoxl"
+    class="test-class css-1koh574"
   >
     <div
-      class="timeline-item-title active css-am6i6v"
+      class="timeline-item-title active css-2rtnsh"
     >
       branch title
     </div>
   </div>
   <div
-    class="test-class card-content-wrapper  css-z17d9y"
+    class="card-content-wrapper test-class css-12jicd8"
   >
     <section
-      class="timeline-card-content active css-x11i70"
+      class="timeline-card-content active css-sej5n2"
       tabindex="0"
     >
       <header
@@ -33,16 +33,16 @@ exports[`Test tree branch render 1`] = `
       </header>
       <div
         aria-expanded="false"
-        class="show-less card-description css-1bnuad"
+        class="show-less card-description css-22xojc"
       >
         <p
-          class=" css-1jsxpv8"
+          class=" css-1gq4ywb"
         />
       </div>
     </section>
   </div>
   <div
-    class="test-class css-vn8ri6"
+    class="test-class css-zp8e37"
     data-testid="tree-leaf"
     role="button"
   >
@@ -53,7 +53,7 @@ exports[`Test tree branch render 1`] = `
       role="button"
     >
       <div
-        class="active css-zys4v9"
+        class="active css-1hf8j5"
       />
     </div>
   </div>

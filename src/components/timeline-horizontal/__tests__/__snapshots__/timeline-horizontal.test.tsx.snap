@@ -2,33 +2,32 @@
 
 exports[`Test Collection Horizontal render 1`] = `
 <ul
-  class="horizontal timeline-horz-container css-1e5kp6i"
+  class="horizontal timeline-horz-container css-8j3kj5"
   data-testid="timeline-collection"
 >
   <li
-    class=" timeline-horz-item-container css-fuf82j"
-    width="250"
+    class="timeline-horz-item-container css-gaxs3r"
+    width="200"
   >
     <div
-      class="horizontal css-s6d62l"
+      class="css-u5v0fr"
       data-testid="timeline-item"
     >
       <div
-        class="css-1ue7ww8"
+        class="css-1teztjd"
       >
         <div
           aria-label="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
-          class="timeline-circle horizontal in-active css-10jefxi"
+          class="timeline-circle in-active css-1hf8j5"
           data-testid="timeline-circle"
-          tabindex="0"
         />
       </div>
       <div
-        class="horizontal undefined css-17i3qvw"
+        class=" css-1v2vum0"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1i2f2mb"
+          class="timeline-item-title css-1fveydr"
         >
           June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
         </div>
@@ -36,29 +35,28 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class=" timeline-horz-item-container css-fuf82j"
-    width="250"
+    class="timeline-horz-item-container css-gaxs3r"
+    width="200"
   >
     <div
-      class="horizontal css-s6d62l"
+      class="css-u5v0fr"
       data-testid="timeline-item"
     >
       <div
-        class="css-1ue7ww8"
+        class="css-1teztjd"
       >
         <div
           aria-label="July 28, 1914"
-          class="timeline-circle horizontal in-active css-10jefxi"
+          class="timeline-circle in-active css-1hf8j5"
           data-testid="timeline-circle"
-          tabindex="0"
         />
       </div>
       <div
-        class="horizontal undefined css-17i3qvw"
+        class=" css-1v2vum0"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1i2f2mb"
+          class="timeline-item-title css-1fveydr"
         >
           July 28, 1914
         </div>
@@ -66,29 +64,28 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class=" timeline-horz-item-container css-fuf82j"
-    width="250"
+    class="timeline-horz-item-container css-gaxs3r"
+    width="200"
   >
     <div
-      class="horizontal css-s6d62l"
+      class="css-u5v0fr"
       data-testid="timeline-item"
     >
       <div
-        class="css-1ue7ww8"
+        class="css-1teztjd"
       >
         <div
           aria-label="August 1–28, 1914"
-          class="timeline-circle horizontal in-active css-10jefxi"
+          class="timeline-circle in-active css-1hf8j5"
           data-testid="timeline-circle"
-          tabindex="0"
         />
       </div>
       <div
-        class="horizontal undefined css-17i3qvw"
+        class=" css-1v2vum0"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1i2f2mb"
+          class="timeline-item-title css-1fveydr"
         >
           August 1–28, 1914
         </div>
@@ -96,29 +93,28 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class=" timeline-horz-item-container css-fuf82j"
-    width="250"
+    class="timeline-horz-item-container css-gaxs3r"
+    width="200"
   >
     <div
-      class="horizontal css-s6d62l"
+      class="css-u5v0fr"
       data-testid="timeline-item"
     >
       <div
-        class="css-1ue7ww8"
+        class="css-1teztjd"
       >
         <div
           aria-label="September 6, 1914"
-          class="timeline-circle horizontal in-active css-10jefxi"
+          class="timeline-circle in-active css-1hf8j5"
           data-testid="timeline-circle"
-          tabindex="0"
         />
       </div>
       <div
-        class="horizontal undefined css-17i3qvw"
+        class=" css-1v2vum0"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1i2f2mb"
+          class="timeline-item-title css-1fveydr"
         >
           September 6, 1914
         </div>
@@ -130,86 +126,122 @@ exports[`Test Collection Horizontal render 1`] = `
 
 exports[`Test Collection Tree render 1`] = `
 <ul
-  class="vertical_alternating timeline-horz-container css-1e5kp6i"
+  class="horizontal timeline-horz-container css-8j3kj5"
   data-testid="timeline-collection"
 >
   <li
-    class=" timeline-horz-item-container css-fuf82j"
-    width="250"
+    class="timeline-horz-item-container css-gaxs3r"
+    width="200"
   >
     <div
-      class="vertical_alternating css-s6d62l"
+      class="css-u5v0fr"
       data-testid="timeline-item"
     >
       <div
-        class="css-1ue7ww8"
+        class="css-1teztjd"
       >
         <div
           aria-label="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
-          class="timeline-circle vertical_alternating in-active css-10jefxi"
+          class="timeline-circle in-active css-1hf8j5"
           data-testid="timeline-circle"
-          tabindex="0"
         />
+      </div>
+      <div
+        class=" css-1v2vum0"
+        data-testid="timeline-title"
+      >
+        <div
+          class="timeline-item-title css-1fveydr"
+        >
+          June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
+        </div>
       </div>
     </div>
   </li>
   <li
-    class=" timeline-horz-item-container css-fuf82j"
-    width="250"
+    class="timeline-horz-item-container css-gaxs3r"
+    width="200"
   >
     <div
-      class="vertical_alternating css-s6d62l"
+      class="css-u5v0fr"
       data-testid="timeline-item"
     >
       <div
-        class="css-1ue7ww8"
+        class="css-1teztjd"
       >
         <div
           aria-label="July 28, 1914"
-          class="timeline-circle vertical_alternating in-active css-10jefxi"
+          class="timeline-circle in-active css-1hf8j5"
           data-testid="timeline-circle"
-          tabindex="0"
         />
+      </div>
+      <div
+        class=" css-1v2vum0"
+        data-testid="timeline-title"
+      >
+        <div
+          class="timeline-item-title css-1fveydr"
+        >
+          July 28, 1914
+        </div>
       </div>
     </div>
   </li>
   <li
-    class=" timeline-horz-item-container css-fuf82j"
-    width="250"
+    class="timeline-horz-item-container css-gaxs3r"
+    width="200"
   >
     <div
-      class="vertical_alternating css-s6d62l"
+      class="css-u5v0fr"
       data-testid="timeline-item"
     >
       <div
-        class="css-1ue7ww8"
+        class="css-1teztjd"
       >
         <div
           aria-label="August 1–28, 1914"
-          class="timeline-circle vertical_alternating in-active css-10jefxi"
+          class="timeline-circle in-active css-1hf8j5"
           data-testid="timeline-circle"
-          tabindex="0"
         />
+      </div>
+      <div
+        class=" css-1v2vum0"
+        data-testid="timeline-title"
+      >
+        <div
+          class="timeline-item-title css-1fveydr"
+        >
+          August 1–28, 1914
+        </div>
       </div>
     </div>
   </li>
   <li
-    class=" timeline-horz-item-container css-fuf82j"
-    width="250"
+    class="timeline-horz-item-container css-gaxs3r"
+    width="200"
   >
     <div
-      class="vertical_alternating css-s6d62l"
+      class="css-u5v0fr"
       data-testid="timeline-item"
     >
       <div
-        class="css-1ue7ww8"
+        class="css-1teztjd"
       >
         <div
           aria-label="September 6, 1914"
-          class="timeline-circle vertical_alternating in-active css-10jefxi"
+          class="timeline-circle in-active css-1hf8j5"
           data-testid="timeline-circle"
-          tabindex="0"
         />
+      </div>
+      <div
+        class=" css-1v2vum0"
+        data-testid="timeline-title"
+      >
+        <div
+          class="timeline-item-title css-1fveydr"
+        >
+          September 6, 1914
+        </div>
       </div>
     </div>
   </li>
@@ -218,333 +250,122 @@ exports[`Test Collection Tree render 1`] = `
 
 exports[`Test Collection Vertical render 1`] = `
 <ul
-  class="vertical timeline-horz-container css-1e5kp6i"
+  class="horizontal timeline-horz-container css-8j3kj5"
   data-testid="timeline-collection"
 >
   <li
-    class=" timeline-horz-item-container css-fuf82j"
-    width="250"
+    class="timeline-horz-item-container css-gaxs3r"
+    width="200"
   >
     <div
-      class="vertical css-s6d62l"
+      class="css-u5v0fr"
       data-testid="timeline-item"
     >
       <div
-        class="css-1ue7ww8"
+        class="css-1teztjd"
       >
         <div
           aria-label="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
-          class="timeline-circle vertical in-active css-10jefxi"
+          class="timeline-circle in-active css-1hf8j5"
           data-testid="timeline-circle"
-          tabindex="0"
         />
       </div>
       <div
-        class="vertical timeline-horz-card-wrapper css-455vfh"
+        class=" css-1v2vum0"
+        data-testid="timeline-title"
       >
         <div
-          class="vertical undefined css-17i3qvw"
-          data-testid="timeline-title"
+          class="timeline-item-title css-1fveydr"
         >
-          <div
-            class="timeline-item-title css-1i2f2mb"
-          >
-            June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
-          </div>
+          June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
         </div>
-        <section
-          class="timeline-card-content  css-sx2voi"
-          mode="VERTICAL"
-          tabindex="0"
-        >
-          <header
-            class="css-1ago99h"
-          >
-            <p
-              class="card-sub-title css-4qf4pr"
-            >
-              Archduke Franz Ferdinand of Austria and his wife, Sophie, are assassinated by a Bosnian Serb nationalist in Sarajevo.
-            </p>
-          </header>
-          <div
-            class="show-less card-description css-1ikiehq"
-          />
-          <span
-            class="show-more css-1x1ed2e"
-            role="button"
-            tabindex="0"
-          >
-            <span>
-              read more
-            </span>
-            <span
-              class="css-22j6j0"
-            >
-              <svg
-                class="feather feather-chevron-right"
-                fill="none"
-                height="24"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                width="24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <polyline
-                  points="9 18 15 12 9 6"
-                />
-              </svg>
-            </span>
-          </span>
-        </section>
       </div>
     </div>
   </li>
   <li
-    class=" timeline-horz-item-container css-fuf82j"
-    width="250"
+    class="timeline-horz-item-container css-gaxs3r"
+    width="200"
   >
     <div
-      class="vertical css-s6d62l"
+      class="css-u5v0fr"
       data-testid="timeline-item"
     >
       <div
-        class="css-1ue7ww8"
+        class="css-1teztjd"
       >
         <div
           aria-label="July 28, 1914"
-          class="timeline-circle vertical in-active css-10jefxi"
+          class="timeline-circle in-active css-1hf8j5"
           data-testid="timeline-circle"
-          tabindex="0"
         />
       </div>
       <div
-        class="vertical timeline-horz-card-wrapper css-455vfh"
+        class=" css-1v2vum0"
+        data-testid="timeline-title"
       >
         <div
-          class="vertical undefined css-17i3qvw"
-          data-testid="timeline-title"
+          class="timeline-item-title css-1fveydr"
         >
-          <div
-            class="timeline-item-title css-1i2f2mb"
-          >
-            July 28, 1914
-          </div>
+          July 28, 1914
         </div>
-        <section
-          class="timeline-card-content  css-sx2voi"
-          mode="VERTICAL"
-          tabindex="0"
-        >
-          <header
-            class="css-1ago99h"
-          >
-            <p
-              class="card-sub-title css-4qf4pr"
-            >
-              World War I begins when Austria-Hungary declares war on Serbia.
-            </p>
-          </header>
-          <div
-            class="show-less card-description css-1ikiehq"
-          />
-          <span
-            class="show-more css-1x1ed2e"
-            role="button"
-            tabindex="0"
-          >
-            <span>
-              read more
-            </span>
-            <span
-              class="css-22j6j0"
-            >
-              <svg
-                class="feather feather-chevron-right"
-                fill="none"
-                height="24"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                width="24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <polyline
-                  points="9 18 15 12 9 6"
-                />
-              </svg>
-            </span>
-          </span>
-        </section>
       </div>
     </div>
   </li>
   <li
-    class=" timeline-horz-item-container css-fuf82j"
-    width="250"
+    class="timeline-horz-item-container css-gaxs3r"
+    width="200"
   >
     <div
-      class="vertical css-s6d62l"
+      class="css-u5v0fr"
       data-testid="timeline-item"
     >
       <div
-        class="css-1ue7ww8"
+        class="css-1teztjd"
       >
         <div
           aria-label="August 1–28, 1914"
-          class="timeline-circle vertical in-active css-10jefxi"
+          class="timeline-circle in-active css-1hf8j5"
           data-testid="timeline-circle"
-          tabindex="0"
         />
       </div>
       <div
-        class="vertical timeline-horz-card-wrapper css-455vfh"
+        class=" css-1v2vum0"
+        data-testid="timeline-title"
       >
         <div
-          class="vertical undefined css-17i3qvw"
-          data-testid="timeline-title"
+          class="timeline-item-title css-1fveydr"
         >
-          <div
-            class="timeline-item-title css-1i2f2mb"
-          >
-            August 1–28, 1914
-          </div>
+          August 1–28, 1914
         </div>
-        <section
-          class="timeline-card-content  css-sx2voi"
-          mode="VERTICAL"
-          tabindex="0"
-        >
-          <header
-            class="css-1ago99h"
-          >
-            <p
-              class="card-sub-title css-4qf4pr"
-            >
-              Germany declares war on Russia, France, and Belgium. Britain declares war on Germany.
-    Austria declares war on Russia. Montenegro declares war on Austria. France declares war on Austria.
-    Britain declares war on Austria. Montenegro declares war on Germany. Japan declares war on Germany. Austria declares war on Belgium.
-            </p>
-          </header>
-          <div
-            class="show-less card-description css-1ikiehq"
-          />
-          <span
-            class="show-more css-1x1ed2e"
-            role="button"
-            tabindex="0"
-          >
-            <span>
-              read more
-            </span>
-            <span
-              class="css-22j6j0"
-            >
-              <svg
-                class="feather feather-chevron-right"
-                fill="none"
-                height="24"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                width="24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <polyline
-                  points="9 18 15 12 9 6"
-                />
-              </svg>
-            </span>
-          </span>
-        </section>
       </div>
     </div>
   </li>
   <li
-    class=" timeline-horz-item-container css-fuf82j"
-    width="250"
+    class="timeline-horz-item-container css-gaxs3r"
+    width="200"
   >
     <div
-      class="vertical css-s6d62l"
+      class="css-u5v0fr"
       data-testid="timeline-item"
     >
       <div
-        class="css-1ue7ww8"
+        class="css-1teztjd"
       >
         <div
           aria-label="September 6, 1914"
-          class="timeline-circle vertical in-active css-10jefxi"
+          class="timeline-circle in-active css-1hf8j5"
           data-testid="timeline-circle"
-          tabindex="0"
         />
       </div>
       <div
-        class="vertical timeline-horz-card-wrapper css-455vfh"
+        class=" css-1v2vum0"
+        data-testid="timeline-title"
       >
         <div
-          class="vertical undefined css-17i3qvw"
-          data-testid="timeline-title"
+          class="timeline-item-title css-1fveydr"
         >
-          <div
-            class="timeline-item-title css-1i2f2mb"
-          >
-            September 6, 1914
-          </div>
+          September 6, 1914
         </div>
-        <section
-          class="timeline-card-content  css-sx2voi"
-          mode="VERTICAL"
-          tabindex="0"
-        >
-          <header
-            class="css-1ago99h"
-          >
-            <p
-              class="card-sub-title css-4qf4pr"
-            >
-              First Battle of the Marne begins. The Germans had advanced to within 30 miles of Paris, but over the next two days, the French are reinforced by 6,000 infantrymen who are transported to the front by hundreds of taxis.
-      The Germans dig in north of the Aisne River, and the trench warfare that is to typify the Western Front for the next four years begins.
-            </p>
-          </header>
-          <div
-            class="show-less card-description css-1ikiehq"
-          />
-          <span
-            class="show-more css-1x1ed2e"
-            role="button"
-            tabindex="0"
-          >
-            <span>
-              read more
-            </span>
-            <span
-              class="css-22j6j0"
-            >
-              <svg
-                class="feather feather-chevron-right"
-                fill="none"
-                height="24"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                width="24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <polyline
-                  points="9 18 15 12 9 6"
-                />
-              </svg>
-            </span>
-          </span>
-        </section>
       </div>
     </div>
   </li>

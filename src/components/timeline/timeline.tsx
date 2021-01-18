@@ -45,7 +45,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   } = props;
 
   const {
-    scrollable,
+    scrollable = true,
     mode = 'HORIZONTAL',
     hideControls,
     itemWidth = 200,
