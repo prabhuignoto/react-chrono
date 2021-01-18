@@ -13,7 +13,6 @@ export const TitleWrapper = styled.div<{
   padding: 0.25rem;
   visibility: ${(p) => (p.hide ? 'hidden' : 'visible')};
   text-align: ${(p) => (p.align ? p.align : '')};
-  white-space: nowrap;
 
   &.active {
     background: ${(p) => p.theme?.secondary};
