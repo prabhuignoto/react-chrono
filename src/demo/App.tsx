@@ -4,6 +4,7 @@ import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
   HorizontalBasic,
   VerticalBasic,
+  VerticalBasicNavigation,
   VerticalCustomContent,
 
 
@@ -45,6 +46,9 @@ const NewDemo: React.FunctionComponent = () => {
           <li>
             <Link to="/vertical-basic">Vertical Basic</Link>
           </li>
+                      <li>
+                          <Link to="/vertical-basic-navigation">Vertical Basic navigation</Link>
+                      </li>
           <li>
             <Link to="/vertical-alternating">Vertical Alternating</Link>
           </li>
@@ -70,6 +74,12 @@ const NewDemo: React.FunctionComponent = () => {
               <VerticalBasic type={"big-screen"} items={items} />
             )}
           </Route>
+                      <Route path="/vertical-basic-navigation">
+                          {/* Vertical with no Media */}
+                          {items.length > 0 && (
+                              <VerticalBasicNavigation type={"big-screen"} items={items} />
+                          )}
+                      </Route>
           <Route path="/vertical-alternating-mixed">
             {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} 
           </Route>

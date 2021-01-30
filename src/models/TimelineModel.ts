@@ -157,7 +157,14 @@ export interface TimelineProps {
 
   allowDynamicUpdate?: boolean;
 
-  onScrollEnd?: () => void;
+    onScrollEnd?: () => void;
+
+    initialActiveTimelineItem?: number;
 }
 
 export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';
+
+
+export type TTimelineAPI = {
+    readonly navigateTo: (index: number) => void;
+}
