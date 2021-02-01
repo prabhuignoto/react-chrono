@@ -12,7 +12,7 @@
   ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/prabhuignoto/react-chrono?style=flat)
   [![Depfu](https://badges.depfu.com/badges/48a23a6a830309649b7e516467cd9a48/overview.svg)](https://depfu.com/github/prabhuignoto/react-chrono?project_id=15325)
   ![https://badgen.net/bundlephobia/min/react](https://badgen.net/bundlephobia/min/react)
-  <a href="https://5f985eb478dcb00022cfd60e-rndeselvms.chromatic.com/?path=/story/example-vertical--vertical-basic" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
+  <a href="https://5f985eb478dcb00022cfd60e-ywtootfinv.chromatic.com/?path=/story/example-vertical--vertical-basic" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
 
   <div>
     <img src="./readme-assets/demo3.gif" />
@@ -412,8 +412,8 @@ Customize colors with the `theme` prop.
 
 Deep dive into wide variety of examples hosted as a Storybook.
 
-- [Horizontal Collection](https://5f985eb478dcb00022cfd60e-rndeselvms.chromatic.com/?path=/story/example-horizontal--horizontal-timeline)
-- [Vertical Collection](https://5f985eb478dcb00022cfd60e-rndeselvms.chromatic.com/?path=/story/example-vertical--vertical-basic)
+- [Horizontal Collection](https://5f985eb478dcb00022cfd60e-ywtootfinv.chromatic.com/?path=/story/example-horizontal--horizontal-timeline)
+- [Vertical Collection](https://5f985eb478dcb00022cfd60e-ywtootfinv.chromatic.com/?path=/story/example-vertical--vertical-basic)
 
 ## 🔨Build Setup
 
