@@ -28,3 +28,4 @@ storybook-static
 
 debug
 .vscode
+.husky
