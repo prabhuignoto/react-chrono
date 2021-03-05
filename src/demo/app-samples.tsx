@@ -30,7 +30,7 @@ export const HorizontalBasic: React.FunctionComponent<{
       </Description>
       <ComponentContainer type={'big-screen'}>
         <Chrono
-          items={items}
+          items={dataMixed}
           mode="HORIZONTAL"
           cardHeight={200}
           slideShow
@@ -174,6 +174,7 @@ export const VerticalTreeMixed: FunctionComponent<{
 export const HorizontalSlideshow: FunctionComponent<{
   type: string;
   cardHeight?: number;
+  items: TimelineItemModel[];
 }> = ({ type, cardHeight }) => (
   <Horizontal id="slideshow">
     <Description>
