@@ -34,7 +34,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   );
 
   const initItems = () => {
-    debugger;
     return items && items.length
       ? items.map((item, index) => {
           return Object.assign({}, item, {
