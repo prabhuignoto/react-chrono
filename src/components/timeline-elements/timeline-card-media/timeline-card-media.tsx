@@ -139,6 +139,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         visible={mediaLoaded}
         active={active}
         alt={media.name}
+        loading={"lazy"}
       />
     );
   }, [active, mediaLoaded]);
