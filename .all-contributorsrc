@@ -6,6 +6,15 @@
   "commit": false,
   "contributors": [
     {
+      "login": "aloisdg",
+      "name": "Alois",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3449303?v=4",
+      "profile": "http://aloisdg.github.io/",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
       "login": "koji",
       "name": "Koji",
       "avatar_url": "https://avatars.githubusercontent.com/u/474225?v=4",
