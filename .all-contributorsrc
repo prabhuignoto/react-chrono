@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "aloisdg",
+      "name": "Alois",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3449303?v=4",
+      "profile": "http://aloisdg.github.io/",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "react-chrono",
+  "projectOwner": "prabhuignoto",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
