@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "koji",
+      "name": "Koji",
+      "avatar_url": "https://avatars.githubusercontent.com/u/474225?v=4",
+      "profile": "https://kojikoji.ga",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "react-chrono",
+  "projectOwner": "prabhuignoto",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
