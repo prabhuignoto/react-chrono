@@ -85,7 +85,7 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
       title: "May 1940",
       cardTitle: "Dunkirk",
       cardSubtitle:"Men of the British Expeditionary Force (BEF) wade out to..",
-      cardDetailedText: "Men of the British Expeditionary Force (BEF) wade out to.."
+      cardDetailedText: "Men of the British Expeditionary Force (BEF) wade out to..",
       media: {
         type: "IMAGE",
         source: {
@@ -110,7 +110,7 @@ To render the timeline vertically use the `VERTICAL` mode
 
 ```sh
   <div style={{ width: "500px", height: "950px" }}>
-    <chrono
+    <Chrono
       items={items}
       mode="VERTICAL"
     />
@@ -125,7 +125,7 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 
 ```sh
   <div style={{ width: "500px", height: "950px" }}>
-    <chrono
+    <Chrono
       items={items}
       mode="VERTICAL_ALTERNATING"
     />
@@ -140,7 +140,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 
 ```sh
   <div style={{ width: "500px", height: "950px" }}>
-    <chrono
+    <Chrono
       items={items}
       slideShow
       mode="VERTICAL_ALTERNATING"
@@ -174,15 +174,15 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 `react-chrono` supports three modes `HORIZONTAL`, `VERTICAL` and `VERTICAL_ALTERNATING`. No additional setting is required.
 
 ```sh
-  <chrono items={items} mode="HORIZONTAL" />
+  <Chrono items={items} mode="HORIZONTAL" />
 ```
 
 ```sh
-  <chrono items={items} mode="VERTICAL" />
+  <Chrono items={items} mode="VERTICAL" />
 ```
 
 ```sh
-  <chrono items={items} mode="VERTICAL_ALTERNATING" />
+  <Chrono items={items} mode="VERTICAL_ALTERNATING" />
 ```
 
 ### Timeline item Model
@@ -200,8 +200,8 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
   title: "May 1940",
   cardTitle: "Dunkirk",
   cardSubtitle:
-    "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk."
-  cardDetailedText: ["paragraph1", "paragraph2"]
+    "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.",
+  cardDetailedText: ["paragraph1", "paragraph2"],
 }
 ```
 
@@ -220,7 +220,7 @@ The timeline can be navigated via keyboard.
 To disable keyboard navigation set `disableNavOnKey` to true.
 
 ```sh
-<chrono items={items} disableNavOnKey />
+<Chrono items={items} disableNavOnKey />
 ```
 
 ### Scrollable
@@ -228,13 +228,13 @@ To disable keyboard navigation set `disableNavOnKey` to true.
 With the scrollable prop, you can enable scrolling on both `VERTICAL` and `VERTICAL_ALTERNATING` modes.
 
 ```sh
-  <chrono items={items} scrollable />
+  <Chrono items={items} scrollable />
 ```
 
 The scrollbar is not shown by default. To enable the scrollbar, pass an object with prop `scrollbar` to `scrollable` prop.
 
 ```sh
-  <chrono items={items} scrollable={{scrollbar: true}} />
+  <Chrono items={items} scrollable={{scrollbar: true}} />
 ```
 
 ### 📺Media
@@ -352,12 +352,12 @@ The icons are sequentially set (i.e) the first image you pass will be used as th
 Please make sure to pass in the image collection inside a container with a special className `chrono-icons`. This convention is mandatory as the component uses this `class name` to pick the images.
 
  ```sh
-  <chrono items={items} mode="VERTICAL_ALTERNATING">
+  <Chrono items={items} mode="VERTICAL_ALTERNATING">
     <div className="chrono-icons">
       <img src="image1.svg" alt="image1" />
       <img src="image2.svg" alt="image2" />
     </div>
-  </chrono>
+  </Chrono>
  ```
 
 >custom icons also works if you are [rendering custom content](#rendering-custom-content) inside the cards.
@@ -384,7 +384,7 @@ Slideshow can be enabled by setting the `slideShow` prop to true. You can also s
 setting this prop enables the play button in the timeline control panel.
 
 ```sh
-<chrono items={items} slideShow slideItemDuration={4500} />
+<Chrono items={items} slideShow slideItemDuration={4500} />
 ```
 
 ### Item Width
@@ -396,7 +396,7 @@ The `itemWidth` prop can be used to set the width of each individual timeline se
 Customize colors with the `theme` prop.
 
 ```sh
-<chrono items={items}  theme={{primary: "red", secondary: "blue", cardBgColor: "yellow", cardForeColor: "violet" }} />
+<Chrono items={items}  theme={{primary: "red", secondary: "blue", cardBgColor: "yellow", cardForeColor: "violet" }} />
 ```
 
 ## 📦CodeSandbox Examples
