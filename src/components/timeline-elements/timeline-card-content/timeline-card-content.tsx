@@ -55,9 +55,12 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
     const [remainInterval, setRemainInterval] = useState(0);
     const [startWidth, setStartWidth] = useState(0);
 
-    const { mode, cardHeight, slideItemDuration = 2000 } = useContext(
-      GlobalContext,
-    );
+    const {
+      mode,
+      cardHeight,
+      slideItemDuration = 2000,
+      useReadMore,
+    } = useContext(GlobalContext);
 
     const canShowProgressBar = useMemo(() => {
       const canShow = active && slideShowActive;
@@ -191,7 +194,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
     const contentDetailsClass = useMemo(
       () =>
         cls(
-          !showMore && !customContent
+          !showMore && !customContent && useReadMore
             ? 'show-less card-description'
             : 'card-description',
         ),
@@ -253,6 +256,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
           theme={theme}
           aria-expanded={showMore}
           customContent={!!customContent}
+          useReadMore={useReadMore}
         >
           {customContent ? (
             <>{customContent}</>
@@ -272,7 +276,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
         </TimelineContentDetailsWrapper>
 
         {/* display the show more button for textual content */}
-        {detailedText && !customContent && (
+        {useReadMore && detailedText && !customContent && (
           <ShowMore
             role="button"
             onClick={handleExpandDetails}

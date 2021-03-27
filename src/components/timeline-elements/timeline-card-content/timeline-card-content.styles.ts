@@ -76,6 +76,7 @@ export const TimelineSubContent = styled.span`
 export const TimelineContentDetailsWrapper = styled.div<{
   theme?: Theme;
   customContent?: boolean;
+  useReadMore?: boolean;
 }>`
   align-items: center;
   display: flex;
@@ -84,7 +85,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
   margin: 0 auto;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  ${(p) => (!p.customContent ? 'max-height: 150px;' : '')}
+  ${(p) => (p.useReadMore && !p.customContent ? 'max-height: 150px;' : '')}
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-color: ${(p) => p.theme?.primary} default;
