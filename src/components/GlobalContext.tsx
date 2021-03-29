@@ -7,11 +7,7 @@ const GlobalContext = React.createContext<PropsModel>({});
 const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
   props,
 ) => {
-  const defaultProps = Object.assign<
-    PropsModel,
-    PropsModel,
-    PropsModel
-  >(
+  const defaultProps = Object.assign<PropsModel, PropsModel, PropsModel>(
     {},
     {
       cardHeight: 200,
@@ -19,9 +15,10 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
     },
     props,
   );
+  const { children } = props;
   return (
     <GlobalContext.Provider value={defaultProps}>
-      {props.children}
+      {children}
     </GlobalContext.Provider>
   );
 };

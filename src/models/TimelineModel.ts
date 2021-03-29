@@ -158,7 +158,7 @@ export interface TimelineProps {
   allowDynamicUpdate?: boolean;
 
   onScrollEnd?: () => void;
-  
+
   // this prop decides whether readmore is enabled or not
   useReadMore?: boolean;
 }
