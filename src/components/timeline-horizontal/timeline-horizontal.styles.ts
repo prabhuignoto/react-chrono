@@ -4,7 +4,6 @@ export const TimelineHorizontalWrapper = styled.ul`
   display: flex;
   list-style: none;
   margin: 0;
-  padding: 1em;
   width: 100%;
   &.vertical {
     flex-direction: column;
@@ -20,6 +19,8 @@ export const TimelineItemWrapper = styled.li<{ width: number }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100px;
+  flex-direction: column;
 
   &.vertical {
     margin-bottom: 2rem;

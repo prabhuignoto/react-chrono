@@ -30,12 +30,11 @@ export const HorizontalBasic: React.FunctionComponent<{
       </Description>
       <ComponentContainer type={'big-screen'}>
         <Chrono
-          items={dataMixed}
+          items={data}
           mode="HORIZONTAL"
           cardHeight={200}
           slideShow
           slideItemDuration={2550}
-          cardPositionHorizontal="BOTTOM"
           itemWidth={200}
         >
           <div className="chrono-icons">
@@ -46,6 +45,12 @@ export const HorizontalBasic: React.FunctionComponent<{
             <img src="color-circle.svg" alt="github" />
           </div>
         </Chrono>
+        {/* <Chrono
+          items={data}
+          mode="HORIZONTAL"
+          cardHeight={200}
+        >
+        </Chrono> */}
       </ComponentContainer>
     </Horizontal>
   );
