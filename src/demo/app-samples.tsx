@@ -170,6 +170,7 @@ export const VerticalTreeMixed: FunctionComponent<{
         items={dataMixed}
         mode="VERTICAL_ALTERNATING"
         cardHeight={200}
+        cardWidth={450}
         scrollable
         // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />

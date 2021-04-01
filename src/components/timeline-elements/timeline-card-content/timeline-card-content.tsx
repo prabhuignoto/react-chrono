@@ -60,6 +60,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
       cardHeight,
       slideItemDuration = 2000,
       useReadMore,
+      cardWidth
     } = useContext(GlobalContext);
 
     const canShowProgressBar = useMemo(() => {
@@ -212,6 +213,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
       <TimelineItemContentWrapper
         className={contentClass}
         minHeight={cardHeight}
+        maxWidth={cardWidth}
         mode={mode}
         noMedia={!media}
         onClick={(ev: React.MouseEvent) => {

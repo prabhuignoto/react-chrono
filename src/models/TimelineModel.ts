@@ -119,6 +119,8 @@ export interface TimelineProps {
    */
   cardHeight?: number;
 
+  cardWidth?: number;
+
   onRestartSlideshow?: () => void;
 
   /**
