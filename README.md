@@ -163,7 +163,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | hideControls            | hides the navigation controls.                                                        | 300          |
 | allowDynamicUpdate      | allows timeline items to be updated dynamically.                                      | false        |
 | cardHeight              | sets the minimum height of the timeline card.                                         | 200          |
-| cardWidth               | sets the maximum width of the timeline card.                                          | 200          |
+| cardWidth               | sets the maximum width of the timeline card.                                          |              |
 | scrollable              | makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).   | true         |
 | flipLayout              | flips the layout (RTL). applicable only to `VERTICAL` and `VERTICAL_ALTERNATING`      | false         |
 | cardPositionHorizontal  | positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`              |              |
