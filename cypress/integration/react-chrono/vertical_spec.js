@@ -72,18 +72,18 @@ context('Chrono.Vertical.Basic', () => {
       .should('have.class', 'active');
   });
 
-  it('check read more action', () => {
-    cy.get('.vertical-item-row')
-      .eq(1)
-      .find('.card-description')
-      .should('have.class', 'show-less');
-    cy.get('.vertical-item-row').eq(1).find('.show-more').click();
-    cy.wait(500);
-    cy.get('.vertical-item-row')
-      .eq(1)
-      .find('.card-description')
-      .should('not.have.class', 'show-less');
-  });
+  // it('check read more action', () => {
+  //   cy.get('.vertical-item-row')
+  //     .eq(1)
+  //     .find('.card-description')
+  //     .should('have.class', 'show-less');
+  //   cy.get('.vertical-item-row').eq(1).find('.show-more').click();
+  //   cy.wait(500);
+  //   cy.get('.vertical-item-row')
+  //     .eq(1)
+  //     .find('.card-description')
+  //     .should('not.have.class', 'show-less');
+  // });
 
   it('check scroll', () => {
     cy.get('.timeline-main-wrapper').scrollTo('bottom');

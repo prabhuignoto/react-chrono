@@ -5,8 +5,6 @@ import {
   HorizontalBasic,
   VerticalBasic,
   VerticalCustomContent,
-
-
   VerticalCustomContent2, VerticalTree,
   VerticalTreeMixed
 } from './app-samples';
@@ -17,6 +15,7 @@ import {
 } from './App.styles';
 import data from './data';
 import mixed from './data-mixed';
+import DynamicLoad from "./dynamic-load";
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
@@ -60,6 +59,9 @@ const NewDemo: React.FunctionComponent = () => {
           <li>
             <Link to="/vertical-custom-icon">Vertical  Custom Icons</Link>
           </li>
+          <li>
+            <Link to="/dynamic-load">Dynamic data load</Link>
+          </li>
         </ComponentLinks>
       </header>
       <section>
@@ -89,6 +91,9 @@ const NewDemo: React.FunctionComponent = () => {
           </Route>
           <Route path="/vertical-custom-icon">
               {items.length  > 0 && <VerticalCustomContent2  type="big-screen" />}
+          </Route>
+          <Route path="/dynamic-load">
+              {items.length  > 0 && <DynamicLoad />}
           </Route>
           <Route path="/">
             {items.length > 0 && (

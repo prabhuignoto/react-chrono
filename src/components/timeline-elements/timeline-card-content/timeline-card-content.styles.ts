@@ -7,6 +7,7 @@ export const TimelineItemContentWrapper = styled.section<{
   theme?: Theme;
   noMedia?: boolean;
   minHeight?: number;
+  maxWidth?: number;
   mode?: TimelineMode;
 }>`
   align-items: flex-start;
@@ -17,11 +18,12 @@ export const TimelineItemContentWrapper = styled.section<{
   flex-direction: column;
   justify-content: flex-start;
   line-height: 1.5em;
-  margin: ${(p) => (p.mode !== 'VERTICAL_ALTERNATING' ? '1em 0' : '')};
+  margin: ${(p) => (p.mode !== 'VERTICAL_ALTERNATING' ? '1em 0' : '0 auto')};
   position: relative;
   text-align: left;
   width: 100%;
   min-height: ${(p) => p.minHeight}px;
+  max-width: ${(p) => p.maxWidth}px;
 
   &:focus {
     outline: 1px solid ${(p) => p.theme?.primary};
@@ -76,6 +78,7 @@ export const TimelineSubContent = styled.span`
 export const TimelineContentDetailsWrapper = styled.div<{
   theme?: Theme;
   customContent?: boolean;
+  useReadMore?: boolean;
 }>`
   align-items: center;
   display: flex;
@@ -84,7 +87,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
   margin: 0 auto;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  ${(p) => (!p.customContent ? 'max-height: 150px;' : '')}
+  ${(p) => (p.useReadMore && !p.customContent ? 'max-height: 150px;' : '')}
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-color: ${(p) => p.theme?.primary} default;

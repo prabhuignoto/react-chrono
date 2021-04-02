@@ -119,6 +119,8 @@ export interface TimelineProps {
    */
   cardHeight?: number;
 
+  cardWidth?: number;
+
   onRestartSlideshow?: () => void;
 
   /**
@@ -158,6 +160,9 @@ export interface TimelineProps {
   allowDynamicUpdate?: boolean;
 
   onScrollEnd?: () => void;
+
+  // this prop decides whether readmore is enabled or not
+  useReadMore?: boolean;
 }
 
 export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';

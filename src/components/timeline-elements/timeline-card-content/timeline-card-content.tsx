@@ -55,9 +55,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
     const [remainInterval, setRemainInterval] = useState(0);
     const [startWidth, setStartWidth] = useState(0);
 
-    const { mode, cardHeight, slideItemDuration = 2000 } = useContext(
-      GlobalContext,
-    );
+    const {
+      mode,
+      cardHeight,
+      slideItemDuration = 2000,
+      useReadMore,
+      cardWidth,
+    } = useContext(GlobalContext);
 
     const canShowProgressBar = useMemo(() => {
       const canShow = active && slideShowActive;
@@ -191,7 +195,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
     const contentDetailsClass = useMemo(
       () =>
         cls(
-          !showMore && !customContent
+          !showMore && !customContent && useReadMore
             ? 'show-less card-description'
             : 'card-description',
         ),
@@ -208,10 +212,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
     return (
       <TimelineItemContentWrapper
         className={contentClass}
-        theme={theme}
-        noMedia={!media}
         minHeight={cardHeight}
+        maxWidth={cardWidth}
         mode={mode}
+        noMedia={!media}
         onClick={(ev: React.MouseEvent) => {
           ev.stopPropagation();
           if (!slideShowActive && onClick && id) {
@@ -222,6 +226,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
         onMouseLeave={tryHandleResumeSlideshow}
         ref={containerRef}
         tabIndex={0}
+        theme={theme}
       >
         <TimelineCardHeader>
           {/* main title */}
@@ -233,26 +238,27 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
         {/* render media video or image */}
         {media && (
           <CardMedia
-            media={media}
-            content={content}
-            title={title}
-            onMediaStateChange={handleMediaState}
-            id={id}
             active={active}
-            theme={theme}
-            slideshowActive={slideShowActive}
-            hideMedia={showMore}
             cardHeight={cardHeight}
+            content={content}
+            hideMedia={showMore}
+            id={id}
+            media={media}
+            onMediaStateChange={handleMediaState}
+            slideshowActive={slideShowActive}
+            theme={theme}
+            title={title}
           />
         )}
 
         {/* detailed text */}
         <TimelineContentDetailsWrapper
-          ref={detailsRef}
-          className={contentDetailsClass}
-          theme={theme}
           aria-expanded={showMore}
+          className={contentDetailsClass}
           customContent={!!customContent}
+          ref={detailsRef}
+          theme={theme}
+          useReadMore={useReadMore}
         >
           {customContent ? (
             <>{customContent}</>
@@ -272,9 +278,9 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
         </TimelineContentDetailsWrapper>
 
         {/* display the show more button for textual content */}
-        {detailedText && !customContent && (
+        {useReadMore && detailedText && !customContent && (
           <ShowMore
-            role="button"
+            className="show-more"
             onClick={handleExpandDetails}
             onKeyPress={useCallback(
               (event) => {
@@ -284,7 +290,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
               },
               [active, paused, slideShowActive, showMore],
             )}
-            className="show-more"
+            role="button"
             show={canShowMore}
             theme={theme}
             tabIndex={0}
@@ -298,11 +304,11 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
 
         {canShowProgressBar && (
           <SlideShowProgressBar
-            startWidth={startWidth}
-            paused={paused}
-            duration={remainInterval}
-            ref={progressRef}
             color={theme && theme.primary}
+            duration={remainInterval}
+            paused={paused}
+            ref={progressRef}
+            startWidth={startWidth}
           ></SlideShowProgressBar>
         )}
       </TimelineItemContentWrapper>

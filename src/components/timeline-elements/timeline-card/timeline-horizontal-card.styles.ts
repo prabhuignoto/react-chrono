@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   position: relative;
   width: 100%;
+  height: 100%;
 
   &.vertical {
     justify-content: flex-start;
@@ -126,7 +127,7 @@ export const TimelineTitleContainer = styled.div`
 
   &.horizontal {
     position: absolute;
-    bottom: 2em;
+    top: 0;
   }
 `;
 
