@@ -33,7 +33,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     theme,
   );
 
-  const initItems = (items: TimelineItemModel[]) => {
+  const initItems = (items?: TimelineItemModel[]) => {
     return items && items.length
       ? items.map((item, index) => {
           return Object.assign({}, item, {
@@ -66,18 +66,24 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
           active: index === 0,
         }));
 
-      return timeLineItems.concat(newItems);
+      const updatedLineItems = timeLineItems.map((item) => ({
+        ...item,
+        active: false,
+      }));
+
+      return updatedLineItems.concat(newItems);
     } else {
       return [];
     }
   };
 
   useEffect(() => {
-    debugger;
     const _items = items?.filter((item) => item);
     let newItems: TimelineItemModel[] = [];
 
     if (!_items?.length) {
+      const items = initItems();
+      setItems(items);
       return;
     }
 
