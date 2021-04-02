@@ -136,7 +136,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       cardHeight={cardHeight}
       className={verticalItemClass}
       data-testid="vertical-item-row"
-      key={index}
+      key={id}
       ref={contentRef}
       role="listitem"
     >

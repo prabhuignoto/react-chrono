@@ -33,7 +33,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     theme,
   );
 
-  const initItems = () => {
+  const initItems = (items: TimelineItemModel[]) => {
     return items && items.length
       ? items.map((item, index) => {
           return Object.assign({}, item, {
@@ -53,10 +53,44 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         }));
   };
 
+  const updateItems = (items: TimelineItemModel[]) => {
+    if (items) {
+      const newStartingPosition = items?.length - timeLineItems.length;
+
+      const newItems = items
+        .slice(newStartingPosition + 1)
+        .map((item, index) => ({
+          ...item,
+          id: Math.random().toString(16).slice(2),
+          visible: true,
+          active: index === 0,
+        }));
+
+      return timeLineItems.concat(newItems);
+    } else {
+      return [];
+    }
+  };
+
   useEffect(() => {
-    const items = initItems();
-    timeLineItemsRef.current = items;
-    setItems(items);
+    debugger;
+    const _items = items?.filter((item) => item);
+    let newItems: TimelineItemModel[] = [];
+
+    if (!_items?.length) {
+      return;
+    }
+
+    if (timeLineItems.length && _items.length > timeLineItems.length) {
+      newItems = updateItems(_items);
+    } else if (_items.length) {
+      newItems = initItems(_items);
+    }
+
+    if (newItems.length) {
+      timeLineItemsRef.current = newItems;
+      setItems(newItems);
+    }
   }, [JSON.stringify(allowDynamicUpdate ? items : null)]);
 
   const handleTimelineUpdate = useCallback((actvTimelineIndex: number) => {
