@@ -55,7 +55,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   const updateItems = (items: TimelineItemModel[]) => {
     if (items) {
-      const newStartingPosition = items?.length - timeLineItems.length;
+      const newStartingPosition = items.length - timeLineItems.length;
 
       const newItems = items
         .slice(newStartingPosition + 1)

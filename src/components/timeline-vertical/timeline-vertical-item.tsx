@@ -27,7 +27,6 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     iconChild,
     hasFocus,
     id,
-    index,
     media,
     onActive,
     onClick,
