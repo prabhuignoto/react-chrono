@@ -37,6 +37,7 @@
     "focus-visible": "^5.2.0"
   },
   "publishConfig": {
+    "cache": "cache/.npm",
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
