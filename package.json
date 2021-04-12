@@ -85,7 +85,7 @@
     "react-is": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.45.0",
+    "rollup": "^2.45.1",
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.30.0",
