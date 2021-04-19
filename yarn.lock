@@ -10030,10 +10030,10 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-snowpack@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-3.3.1.tgz#f8a700e604719be0982dcf6cc2a10fa642ebcb10"
-  integrity sha512-93utJcqKkvQ9StnliIKqDp02laf+7MnPVULacuvNEVg8nHdmON0jKVuG5ezGAMtFRUGBfeQ+kO417tifG1lQUw==
+snowpack@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-3.3.3.tgz#016f815cf9bb3fa1dc152212ca0fa1ecb785cee4"
+  integrity sha512-ASPyveGfzAbhyp1k5XmLtZoS0J6PpY8jArGm6JLM8ztuB4AWA2z1Qg/QiTOIguOhZN0QKKUe6slkYfSWteIzFA==
   dependencies:
     cli-spinners "^2.5.0"
     default-browser-id "^2.0.0"
