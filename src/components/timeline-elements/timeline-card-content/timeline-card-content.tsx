@@ -36,6 +36,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
     onElapsed,
     theme,
     title,
+    url,
     onClick,
     customContent,
     hasFocus,
@@ -230,11 +231,12 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
       >
         <TimelineCardHeader>
           {/* main title */}
-          {!media && <MemoTitle title={title} theme={theme} />}
+          {!media &&
+            <MemoTitle title={title} url={url} theme={theme} />
+          }
           {/* main timeline text */}
           {!media && <MemoSubTitle content={content} theme={theme} />}
         </TimelineCardHeader>
-
         {/* render media video or image */}
         {media && (
           <CardMedia
@@ -250,7 +252,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
             title={title}
           />
         )}
-
         {/* detailed text */}
         <TimelineContentDetailsWrapper
           aria-expanded={showMore}
@@ -270,8 +271,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React
             >
               {Array.isArray(detailedText)
                 ? detailedText.map((text, index) => (
-                    <TimelineSubContent key={index}>{text}</TimelineSubContent>
-                  ))
+                  <TimelineSubContent key={index}>{text}</TimelineSubContent>
+                ))
                 : detailedText}
             </TimelineContentDetails>
           )}

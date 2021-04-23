@@ -1,6 +1,7 @@
 const items2 = [
   {
     title: "May 1940",
+    url: 'http://www.google.com',
     cardTitle: "Ohrid",
     cardSubtitle:
       "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.",

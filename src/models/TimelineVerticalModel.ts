@@ -91,6 +91,7 @@ export interface VerticalItemModel extends CommonVerticalModel {
   media?: Media;
   onShowMore?: () => void;
   title?: string;
+  url?: string;
   visible?: boolean;
   contentDetailsChildren?: React.ReactNode;
   iconChild?: React.ReactNode;

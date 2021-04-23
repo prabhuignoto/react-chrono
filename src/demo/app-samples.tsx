@@ -59,13 +59,14 @@ export const HorizontalBasic: React.FunctionComponent<{
 export const VerticalBasic: FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
-}> = ({ type, items }) => (
-  <Vertical id="vertical">
-    <Description>
-      <span>
-        <DescriptionHeader>
-          <span># Vertical</span>
-          {/* <SandBox>
+}> = ({ type, items }) => {
+  return (
+    <Vertical id="vertical">
+      <Description>
+        <span>
+          <DescriptionHeader>
+            <span># Vertical</span>
+            {/* <SandBox>
             <a href="https://codesandbox.io/s/react-chrono-tree-horizontal-wdqk3?fontsize=14&hidenavigation=1&theme=dark">
               <img
                 alt="Edit react-chrono-tree-horizontal"
@@ -73,32 +74,33 @@ export const VerticalBasic: FunctionComponent<{
               />
             </a>
           </SandBox> */}
-        </DescriptionHeader>
-      </span>
-      <DescriptionContent>
-        Use the <strong>VERTICAL</strong> mode to render the timelines
+          </DescriptionHeader>
+        </span>
+        <DescriptionContent>
+          Use the <strong>VERTICAL</strong> mode to render the timelines
         vertically.
       </DescriptionContent>
-    </Description>
-    <ComponentContainerTree type={type}>
-      <Chrono
-        items={items}
-        mode="VERTICAL"
-        slideShow
-        slideItemDuration={2500}
-        scrollable={{scrollbar:   false}}
-        theme={{cardBgColor:  "#fff",  cardForeColor:  "blue"}}
-        useReadMore={false}
-      />
-    </ComponentContainerTree>
-  </Vertical>
-);
+      </Description>
+      <ComponentContainerTree type={type}>
+        <Chrono
+          items={items}
+          mode="VERTICAL"
+          slideShow
+          slideItemDuration={2500}
+          scrollable={{ scrollbar: false }}
+          theme={{ cardBgColor: "#fff", cardForeColor: "blue" }}
+          useReadMore={false}
+        />
+      </ComponentContainerTree>
+    </Vertical>
+  )
+};
 
 export const VerticalTree: FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
 }> = ({ type, items }) => {
-  
+
   return <Vertical id="tree">
     <Description>
       <span>
@@ -117,29 +119,30 @@ export const VerticalTree: FunctionComponent<{
         mode="VERTICAL_ALTERNATING"
         slideShow
         slideItemDuration={2350}
-        scrollable={{scrollbar: false}}
+        scrollable={{ scrollbar: false }}
         allowDynamicUpdate
         cardHeight={200}
         onScrollEnd={() => console.log('end reached')}
       >
         <div className="chrono-icons">
-          <img src="https://img.icons8.com/ios-filled/100/000000/twitter.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/about.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/contacts.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/briefcase.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/idea.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/sun.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/info.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/calendar.png" alt="twitter"/>
+          <img src="https://img.icons8.com/ios-filled/100/000000/twitter.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/about.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/contacts.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/briefcase.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/idea.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/sun.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/info.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/calendar.png" alt="twitter" />
           <img src="https://img.icons8.com/ios-filled/50/000000/mailbox-closed-flag-down.png" alt="mail-box" />
-          <img src="https://img.icons8.com/ios-filled/50/000000/pinterest.png" alt="pinterest"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/reddit.png" alt="reddit"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/facebook.png" alt="reddit"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/stumbleupon.png" alt="reddit"/>
+          <img src="https://img.icons8.com/ios-filled/50/000000/pinterest.png" alt="pinterest" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/reddit.png" alt="reddit" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/facebook.png" alt="reddit" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/stumbleupon.png" alt="reddit" />
         </div>
       </Chrono>
     </ComponentContainerTree>
-  </Vertical>}
+  </Vertical>
+}
   ;
 
 export const VerticalTreeMixed: FunctionComponent<{
@@ -172,7 +175,7 @@ export const VerticalTreeMixed: FunctionComponent<{
         cardHeight={200}
         cardWidth={450}
         scrollable
-        // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
+      // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
     </ComponentContainerTree>
   </Vertical>
@@ -235,7 +238,7 @@ export const VerticalTreeSlideshow: FunctionComponent<{
         mode="VERTICAL_ALTERNATING"
         cardHeight={200}
         scrollable
-        // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
+      // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
       {/* <SandBox>
         <a href="https://codesandbox.io/s/react-chrono-tree-demo-zksyo?fontsize=14&hidenavigation=1&theme=dark">
@@ -264,13 +267,13 @@ export const VerticalCustomContent: FunctionComponent<{
     </Description>
     <ComponentContainerTree type={type}>
       <Chrono
-        mode="VERTICAL" 
+        mode="VERTICAL"
         cardHeight={200}
         scrollable
       >
         <div>
-          <div style={{width: "250px", height: "250px"}}>
-            <img style={{maxWidth:  "100%", maxHeight:  "100%"}}  src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif"/>
+          <div style={{ width: "250px", height: "250px" }}>
+            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif" />
           </div>
         </div>
         <div>
@@ -293,7 +296,7 @@ export const VerticalCustomContent: FunctionComponent<{
             Gamelin instead committed the forces under his command, three mechanised armies, the French First and Seventh Armies and the British Expeditionary Force (BEF), to the River Dyle.
           </p>
         </div>
-        <div style={{margin: "1rem"}}>
+        <div style={{ margin: "1rem" }}>
           <h3>Table</h3>
           <table>
             <thead>
@@ -339,14 +342,14 @@ export const VerticalCustomContent2: FunctionComponent<{
     </Description>
     <ComponentContainerTree type={type}>
       <Chrono
-        mode="VERTICAL" 
+        mode="VERTICAL"
         cardHeight={200}
         scrollable
         flipLayout
       >
         <div>
-          <div style={{width: "250px", height: "250px"}}>
-            <img style={{maxWidth:  "100%", maxHeight:  "100%"}}  src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif"/>
+          <div style={{ width: "250px", height: "250px" }}>
+            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif" />
           </div>
         </div>
         <div>
@@ -369,7 +372,7 @@ export const VerticalCustomContent2: FunctionComponent<{
             Gamelin instead committed the forces under his command, three mechanised armies, the French First and Seventh Armies and the British Expeditionary Force (BEF), to the River Dyle.
           </p>
         </div>
-        <div style={{margin: "1rem"}}>
+        <div style={{ margin: "1rem" }}>
           <h3>Table</h3>
           <table>
             <thead>

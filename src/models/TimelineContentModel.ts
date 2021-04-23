@@ -13,6 +13,7 @@ export interface TimelineContentModel {
   slideShowActive?: boolean;
   theme?: Theme;
   title?: string;
+  url?: string;
   branchDir?: string;
   customContent?: React.ReactNode;
   hasFocus?: boolean;

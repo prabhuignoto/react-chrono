@@ -13,6 +13,7 @@ export interface TimelineItemModel {
   cardDetailedText?: string | string[];
   cardSubtitle?: string;
   cardTitle?: string;
+  url?: string;
   id?: string;
   media?: Media;
   position?: string;

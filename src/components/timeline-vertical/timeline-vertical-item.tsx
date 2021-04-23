@@ -22,6 +22,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     cardDetailedText,
     cardSubtitle,
     cardTitle,
+    url,
     className,
     contentDetailsChildren,
     iconChild,
@@ -84,6 +85,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     const contentClass = cls('card-content-wrapper', visible ? 'visible' : '', {
       [className]: true,
     });
+
     return (
       <TimelineCardContentWrapper
         className={contentClass}
@@ -106,6 +108,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
           slideShowActive={slideShowRunning}
           theme={theme}
           title={cardTitle}
+          url={url}
         />
       </TimelineCardContentWrapper>
     );

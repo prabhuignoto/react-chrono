@@ -86,9 +86,8 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-        src={`${media.source.url}${
-          active ? '?autoplay=1&enablejsapi=1' : '?enablejsapi=1'
-        }`}
+        src={`${media.source.url}${active ? '?autoplay=1&enablejsapi=1' : '?enablejsapi=1'
+          }`}
       />
     ),
     [active],

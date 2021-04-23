@@ -30,7 +30,7 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
   );
 
   // todo remove this
-  const handleOnShowMore = useCallback(() => {}, []);
+  const handleOnShowMore = useCallback(() => { }, []);
 
   return (
     <TimelineVerticalWrapper data-testid="tree-main" role="list">
