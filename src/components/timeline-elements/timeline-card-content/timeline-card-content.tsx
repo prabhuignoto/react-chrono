@@ -24,297 +24,303 @@ import {
   TimelineSubContent,
 } from './timeline-card-content.styles';
 
-const TimelineCardContent: React.FunctionComponent<TimelineContentModel> = React.memo(
-  ({
-    active,
-    content,
-    detailedText,
-    id,
-    media,
-    onShowMore,
-    slideShowActive,
-    onElapsed,
-    theme,
-    title,
-    onClick,
-    customContent,
-    hasFocus,
-  }: TimelineContentModel) => {
-    const [showMore, setShowMore] = useState(false);
-    const detailsRef = useRef<HTMLDivElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const progressRef = useRef<HTMLDivElement>(null);
+const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
+  React.memo(
+    ({
+      active,
+      content,
+      detailedText,
+      id,
+      media,
+      onShowMore,
+      slideShowActive,
+      onElapsed,
+      theme,
+      title,
+      onClick,
+      customContent,
+      hasFocus,
+    }: TimelineContentModel) => {
+      const [showMore, setShowMore] = useState(false);
+      const detailsRef = useRef<HTMLDivElement>(null);
+      const containerRef = useRef<HTMLDivElement>(null);
+      const progressRef = useRef<HTMLDivElement>(null);
 
-    const containerWidth = useRef<number>(0);
-    const slideShowElapsed = useRef(0);
-    const timerRef = useRef(0);
-    const startTime = useRef<Date>();
-    const [paused, setPaused] = useState(false);
+      const containerWidth = useRef<number>(0);
+      const slideShowElapsed = useRef(0);
+      const timerRef = useRef(0);
+      const startTime = useRef<Date>();
+      const [paused, setPaused] = useState(false);
 
-    // const [elapsed, setElapsed] = useState(0);
-    const [remainInterval, setRemainInterval] = useState(0);
-    const [startWidth, setStartWidth] = useState(0);
+      // const [elapsed, setElapsed] = useState(0);
+      const [remainInterval, setRemainInterval] = useState(0);
+      const [startWidth, setStartWidth] = useState(0);
 
-    const {
-      mode,
-      cardHeight,
-      slideItemDuration = 2000,
-      useReadMore,
-      cardWidth,
-    } = useContext(GlobalContext);
+      const {
+        mode,
+        cardHeight,
+        slideItemDuration = 2000,
+        useReadMore,
+        cardWidth,
+      } = useContext(GlobalContext);
 
-    const canShowProgressBar = useMemo(() => {
-      const canShow = active && slideShowActive;
-      if (media) {
-        return canShow && media.type !== 'VIDEO';
-      } else {
-        return canShow;
-      }
-    }, [active, slideShowActive]);
-
-    const canShowMore = useMemo(() => {
-      return !!detailedText;
-    }, [detailedText]);
-
-    useEffect(() => {
-      const detailsEle = detailsRef.current;
-
-      if (detailsEle) {
-        detailsEle.scrollTop = 0;
-      }
-    }, [showMore]);
-
-    useEffect(() => {
-      setTimeout(() => {
-        if (containerRef.current) {
-          containerWidth.current = containerRef.current.clientWidth;
-          setStartWidth(containerWidth.current);
+      const canShowProgressBar = useMemo(() => {
+        const canShow = active && slideShowActive;
+        if (media) {
+          return canShow && media.type !== 'VIDEO';
+        } else {
+          return canShow;
         }
-      }, 100);
-    }, []);
+      }, [active, slideShowActive]);
 
-    const setupTimer = useCallback((interval: number) => {
-      if (!slideItemDuration) {
-        return;
-      }
+      const canShowMore = useMemo(() => {
+        return !!detailedText;
+      }, [detailedText]);
 
-      setRemainInterval(interval);
+      useEffect(() => {
+        const detailsEle = detailsRef.current;
 
-      startTime.current = new Date();
-
-      setPaused(false);
-
-      timerRef.current = window.setTimeout(() => {
-        // clear the timer and move to the next card
-        window.clearTimeout(timerRef.current);
-        setPaused(true);
-        setStartWidth(0);
-        setRemainInterval(slideItemDuration);
-        id && onElapsed && onElapsed(id);
-      }, interval);
-    }, []);
-
-    // pause the slide show
-    const tryHandlePauseSlideshow = useCallback(() => {
-      if (active && slideShowActive) {
-        window.clearTimeout(timerRef.current);
-        setPaused(true);
-
-        if (startTime.current) {
-          const elapsed: any = +new Date() - +startTime.current;
-          slideShowElapsed.current = elapsed;
+        if (detailsEle) {
+          detailsEle.scrollTop = 0;
         }
+      }, [showMore]);
 
-        if (progressRef.current) {
-          setStartWidth(progressRef.current.clientWidth);
-        }
-      }
-    }, [active, slideShowActive]);
+      useEffect(() => {
+        setTimeout(() => {
+          if (containerRef.current) {
+            containerWidth.current = containerRef.current.clientWidth;
+            setStartWidth(containerWidth.current);
+          }
+        }, 100);
+      }, []);
 
-    // resumes the slide show
-    const tryHandleResumeSlideshow = useCallback(() => {
-      if (active && slideShowActive) {
+      const setupTimer = useCallback((interval: number) => {
         if (!slideItemDuration) {
           return;
         }
-        const remainingInterval = slideItemDuration - slideShowElapsed.current;
 
-        // setRemainInterval(remainingInterval);
+        setRemainInterval(interval);
+
+        startTime.current = new Date();
+
         setPaused(false);
 
-        if (remainingInterval > 0) {
-          setupTimer(remainingInterval);
+        timerRef.current = window.setTimeout(() => {
+          // clear the timer and move to the next card
+          window.clearTimeout(timerRef.current);
+          setPaused(true);
+          setStartWidth(0);
+          setRemainInterval(slideItemDuration);
+          id && onElapsed && onElapsed(id);
+        }, interval);
+      }, []);
+
+      // pause the slide show
+      const tryHandlePauseSlideshow = useCallback(() => {
+        if (active && slideShowActive) {
+          window.clearTimeout(timerRef.current);
+          setPaused(true);
+
+          if (startTime.current) {
+            const elapsed: any = +new Date() - +startTime.current;
+            slideShowElapsed.current = elapsed;
+          }
+
+          if (progressRef.current) {
+            setStartWidth(progressRef.current.clientWidth);
+          }
         }
-      }
-    }, [active, slideShowActive, slideItemDuration]);
+      }, [active, slideShowActive]);
 
-    useEffect(() => {
-      if (!slideItemDuration) {
-        return;
-      }
-      // setup the timer
-      if (active && slideShowActive) {
-        setStartWidth(containerWidth.current);
-        setupTimer(slideItemDuration);
-      }
+      // resumes the slide show
+      const tryHandleResumeSlideshow = useCallback(() => {
+        if (active && slideShowActive) {
+          if (!slideItemDuration) {
+            return;
+          }
+          const remainingInterval =
+            slideItemDuration - slideShowElapsed.current;
 
-      // disabled autofocus on active
-      if (active && hasFocus) {
-        containerRef.current && containerRef.current.focus();
-      }
-    }, [active, slideShowActive]);
+          // setRemainInterval(remainingInterval);
+          setPaused(false);
 
-    useEffect(() => {
-      if (hasFocus && active) {
-        containerRef.current && containerRef.current.focus();
-      }
-    }, [hasFocus, active]);
+          if (remainingInterval > 0) {
+            setupTimer(remainingInterval);
+          }
+        }
+      }, [active, slideShowActive, slideItemDuration]);
 
-    const handleMediaState = useCallback(
-      (state: MediaState) => {
-        if (!slideShowActive) {
+      useEffect(() => {
+        if (!slideItemDuration) {
           return;
         }
-        if (state.playing) {
-          tryHandlePauseSlideshow();
-        } else if (state.paused) {
-          if (paused && id && onElapsed) {
-            onElapsed(id);
-          }
+        // setup the timer
+        if (active && slideShowActive) {
+          setStartWidth(containerWidth.current);
+          setupTimer(slideItemDuration);
         }
-      },
-      [paused, slideShowActive],
-    );
 
-    const contentClass = useMemo(
-      () =>
-        cls(active ? 'timeline-card-content active' : 'timeline-card-content '),
-      [active],
-    );
+        // disabled autofocus on active
+        if (active && hasFocus) {
+          containerRef.current && containerRef.current.focus();
+        }
+      }, [active, slideShowActive]);
 
-    const contentDetailsClass = useMemo(
-      () =>
-        cls(
-          !showMore && !customContent && useReadMore
-            ? 'show-less card-description'
-            : 'card-description',
-        ),
-      [showMore, customContent],
-    );
+      useEffect(() => {
+        if (hasFocus && active) {
+          containerRef.current && containerRef.current.focus();
+        }
+      }, [hasFocus, active]);
 
-    const handleExpandDetails = useCallback(() => {
-      if ((active && paused) || !slideShowActive) {
-        setShowMore(!showMore);
-        onShowMore();
-      }
-    }, [active, paused, slideShowActive, showMore]);
-
-    return (
-      <TimelineItemContentWrapper
-        className={contentClass}
-        minHeight={cardHeight}
-        maxWidth={cardWidth}
-        mode={mode}
-        noMedia={!media}
-        onClick={(ev: React.MouseEvent) => {
-          ev.stopPropagation();
-          if (!slideShowActive && onClick && id) {
-            onClick(id);
+      const handleMediaState = useCallback(
+        (state: MediaState) => {
+          if (!slideShowActive) {
+            return;
           }
-        }}
-        onMouseEnter={tryHandlePauseSlideshow}
-        onMouseLeave={tryHandleResumeSlideshow}
-        ref={containerRef}
-        tabIndex={0}
-        theme={theme}
-      >
-        <TimelineCardHeader>
-          {/* main title */}
-          {!media && <MemoTitle title={title} theme={theme} />}
-          {/* main timeline text */}
-          {!media && <MemoSubTitle content={content} theme={theme} />}
-        </TimelineCardHeader>
+          if (state.playing) {
+            tryHandlePauseSlideshow();
+          } else if (state.paused) {
+            if (paused && id && onElapsed) {
+              onElapsed(id);
+            }
+          }
+        },
+        [paused, slideShowActive],
+      );
 
-        {/* render media video or image */}
-        {media && (
-          <CardMedia
-            active={active}
-            cardHeight={cardHeight}
-            content={content}
-            hideMedia={showMore}
-            id={id}
-            media={media}
-            onMediaStateChange={handleMediaState}
-            slideshowActive={slideShowActive}
-            theme={theme}
-            title={title}
-          />
-        )}
+      const contentClass = useMemo(
+        () =>
+          cls(
+            active ? 'timeline-card-content active' : 'timeline-card-content ',
+          ),
+        [active],
+      );
 
-        {/* detailed text */}
-        <TimelineContentDetailsWrapper
-          aria-expanded={showMore}
-          className={contentDetailsClass}
-          customContent={!!customContent}
-          ref={detailsRef}
+      const contentDetailsClass = useMemo(
+        () =>
+          cls(
+            !showMore && !customContent && useReadMore
+              ? 'show-less card-description'
+              : 'card-description',
+          ),
+        [showMore, customContent],
+      );
+
+      const handleExpandDetails = useCallback(() => {
+        if ((active && paused) || !slideShowActive) {
+          setShowMore(!showMore);
+          onShowMore();
+        }
+      }, [active, paused, slideShowActive, showMore]);
+
+      return (
+        <TimelineItemContentWrapper
+          className={contentClass}
+          minHeight={cardHeight}
+          maxWidth={cardWidth}
+          mode={mode}
+          noMedia={!media}
+          onClick={(ev: React.MouseEvent) => {
+            ev.stopPropagation();
+            if (!slideShowActive && onClick && id) {
+              onClick(id);
+            }
+          }}
+          onMouseEnter={tryHandlePauseSlideshow}
+          onMouseLeave={tryHandleResumeSlideshow}
+          ref={containerRef}
+          tabIndex={0}
           theme={theme}
-          useReadMore={useReadMore}
         >
-          {customContent ? (
-            <>{customContent}</>
-          ) : (
-            <TimelineContentDetails
-              className={showMore ? 'active' : ''}
-              ref={detailsRef}
+          <TimelineCardHeader>
+            {/* main title */}
+            {!media && <MemoTitle title={title} theme={theme} />}
+            {/* main timeline text */}
+            {!media && <MemoSubTitle content={content} theme={theme} />}
+          </TimelineCardHeader>
+
+          {/* render media video or image */}
+          {media && (
+            <CardMedia
+              active={active}
+              cardHeight={cardHeight}
+              content={content}
+              hideMedia={showMore}
+              id={id}
+              media={media}
+              onMediaStateChange={handleMediaState}
+              slideshowActive={slideShowActive}
               theme={theme}
-            >
-              {Array.isArray(detailedText)
-                ? detailedText.map((text, index) => (
-                    <TimelineSubContent key={index}>{text}</TimelineSubContent>
-                  ))
-                : detailedText}
-            </TimelineContentDetails>
+              title={title}
+            />
           )}
-        </TimelineContentDetailsWrapper>
 
-        {/* display the show more button for textual content */}
-        {useReadMore && detailedText && !customContent && (
-          <ShowMore
-            className="show-more"
-            onClick={handleExpandDetails}
-            onKeyPress={useCallback(
-              (event) => {
-                if (event.key === 'Enter') {
-                  handleExpandDetails();
-                }
-              },
-              [active, paused, slideShowActive, showMore],
-            )}
-            role="button"
-            show={canShowMore}
+          {/* detailed text */}
+          <TimelineContentDetailsWrapper
+            aria-expanded={showMore}
+            className={contentDetailsClass}
+            customContent={!!customContent}
+            ref={detailsRef}
             theme={theme}
-            tabIndex={0}
+            useReadMore={useReadMore}
           >
-            {<span>{showMore ? 'read less' : 'read more'}</span>}
-            <ChevronIconWrapper collapsed={!showMore}>
-              <ChevronIcon />
-            </ChevronIconWrapper>
-          </ShowMore>
-        )}
+            {customContent ? (
+              <>{customContent}</>
+            ) : (
+              <TimelineContentDetails
+                className={showMore ? 'active' : ''}
+                ref={detailsRef}
+                theme={theme}
+              >
+                {Array.isArray(detailedText)
+                  ? detailedText.map((text, index) => (
+                      <TimelineSubContent key={index}>
+                        {text}
+                      </TimelineSubContent>
+                    ))
+                  : detailedText}
+              </TimelineContentDetails>
+            )}
+          </TimelineContentDetailsWrapper>
 
-        {canShowProgressBar && (
-          <SlideShowProgressBar
-            color={theme && theme.primary}
-            duration={remainInterval}
-            paused={paused}
-            ref={progressRef}
-            startWidth={startWidth}
-          ></SlideShowProgressBar>
-        )}
-      </TimelineItemContentWrapper>
-    );
-  },
-);
+          {/* display the show more button for textual content */}
+          {useReadMore && detailedText && !customContent && (
+            <ShowMore
+              className="show-more"
+              onClick={handleExpandDetails}
+              onKeyPress={useCallback(
+                (event) => {
+                  if (event.key === 'Enter') {
+                    handleExpandDetails();
+                  }
+                },
+                [active, paused, slideShowActive, showMore],
+              )}
+              role="button"
+              show={canShowMore}
+              theme={theme}
+              tabIndex={0}
+            >
+              {<span>{showMore ? 'read less' : 'read more'}</span>}
+              <ChevronIconWrapper collapsed={!showMore}>
+                <ChevronIcon />
+              </ChevronIconWrapper>
+            </ShowMore>
+          )}
+
+          {canShowProgressBar && (
+            <SlideShowProgressBar
+              color={theme && theme.primary}
+              duration={remainInterval}
+              paused={paused}
+              ref={progressRef}
+              startWidth={startWidth}
+            ></SlideShowProgressBar>
+          )}
+        </TimelineItemContentWrapper>
+      );
+    },
+  );
 
 TimelineCardContent.displayName = 'TimelineCardContent';
 

@@ -68,9 +68,10 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     });
   }, []);
 
-  const ErrorMessageMem: React.FunctionComponent<ErrorMessageModel> = React.memo(
-    ({ message }: ErrorMessageModel) => <ErrorMessage>{message}</ErrorMessage>,
-  );
+  const ErrorMessageMem: React.FunctionComponent<ErrorMessageModel> =
+    React.memo(({ message }: ErrorMessageModel) => (
+      <ErrorMessage>{message}</ErrorMessage>
+    ));
 
   const isYouTube = useMemo(
     () =>
