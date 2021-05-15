@@ -68,9 +68,10 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     });
   }, []);
 
-  const ErrorMessageMem: React.FunctionComponent<ErrorMessageModel> = React.memo(
-    ({ message }: ErrorMessageModel) => <ErrorMessage>{message}</ErrorMessage>,
-  );
+  const ErrorMessageMem: React.FunctionComponent<ErrorMessageModel> =
+    React.memo(({ message }: ErrorMessageModel) => (
+      <ErrorMessage>{message}</ErrorMessage>
+    ));
 
   const isYouTube = useMemo(
     () =>
@@ -86,8 +87,9 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-        src={`${media.source.url}${active ? '?autoplay=1&enablejsapi=1' : '?enablejsapi=1'
-          }`}
+        src={`${media.source.url}${
+          active ? '?autoplay=1&enablejsapi=1' : '?enablejsapi=1'
+        }`}
       />
     ),
     [active],

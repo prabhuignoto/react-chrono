@@ -67,7 +67,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     }
   }, [active, autoScroll, mode]);
 
-  const handleOnShowMore = useCallback(() => { }, []);
+  const handleOnShowMore = useCallback(() => {}, []);
 
   const modeLower = useMemo(() => mode?.toLowerCase(), [mode]);
 

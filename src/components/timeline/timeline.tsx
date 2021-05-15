@@ -69,22 +69,22 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const id = useRef('react-chrono-timeline');
 
   // handlers for navigation
-  const handleNext = useCallback(() => hasFocus && onNext(), [
-    hasFocus,
-    onNext,
-  ]);
-  const handlePrevious = useCallback(() => hasFocus && onPrevious(), [
-    hasFocus,
-    onPrevious,
-  ]);
-  const handleFirst = useCallback(() => hasFocus && onFirst(), [
-    hasFocus,
-    onFirst,
-  ]);
-  const handleLast = useCallback(() => hasFocus && onLast(), [
-    hasFocus,
-    onLast,
-  ]);
+  const handleNext = useCallback(
+    () => hasFocus && onNext(),
+    [hasFocus, onNext],
+  );
+  const handlePrevious = useCallback(
+    () => hasFocus && onPrevious(),
+    [hasFocus, onPrevious],
+  );
+  const handleFirst = useCallback(
+    () => hasFocus && onFirst(),
+    [hasFocus, onFirst],
+  );
+  const handleLast = useCallback(
+    () => hasFocus && onLast(),
+    [hasFocus, onLast],
+  );
 
   // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -166,8 +166,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         .querySelectorAll('img,video')
         .forEach(
           (ele) =>
-          ((ele as HTMLElement).style.visibility =
-            state === 'hide' ? 'hidden' : 'visible'),
+            ((ele as HTMLElement).style.visibility =
+              state === 'hide' ? 'hidden' : 'visible'),
         );
     };
 
@@ -231,7 +231,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
             scrolled = target.scrollTop + target.clientHeight;
 
-            if ((target.scrollHeight - scrolled) < 1) {
+            if (target.scrollHeight - scrolled < 1) {
               onScrollEnd && onScrollEnd();
             }
           } else {

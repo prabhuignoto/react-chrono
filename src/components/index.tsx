@@ -36,21 +36,21 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   const initItems = (items?: TimelineItemModel[]) => {
     return items && items.length
       ? items.map((item, index) => {
-        return Object.assign({}, item, {
+          return Object.assign({}, item, {
+            id: Math.random().toString(16).slice(2),
+            visible: true,
+            active: index === 0,
+          });
+        })
+      : Array.from({
+          length: React.Children.toArray(children).filter(
+            (item) => (item as any).props.className !== 'chrono-icons',
+          ).length,
+        }).map<Partial<TimelineItemModel>>((item, index) => ({
           id: Math.random().toString(16).slice(2),
           visible: true,
           active: index === 0,
-        });
-      })
-      : Array.from({
-        length: React.Children.toArray(children).filter(
-          (item) => (item as any).props.className !== 'chrono-icons',
-        ).length,
-      }).map<Partial<TimelineItemModel>>((item, index) => ({
-        id: Math.random().toString(16).slice(2),
-        visible: true,
-        active: index === 0,
-      }));
+        }));
   };
 
   const updateItems = (items: TimelineItemModel[]) => {

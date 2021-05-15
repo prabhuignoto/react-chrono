@@ -20,9 +20,11 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   hasFocus,
   iconChildren,
 }: TimelineHorizontalModel) => {
-  const { mode = 'HORIZONTAL', itemWidth = 200, cardHeight } = useContext(
-    GlobalContext,
-  );
+  const {
+    mode = 'HORIZONTAL',
+    itemWidth = 200,
+    cardHeight,
+  } = useContext(GlobalContext);
   const wrapperClass = useMemo(
     () => cls(mode.toLowerCase(), 'timeline-horz-container'),
     [mode],
