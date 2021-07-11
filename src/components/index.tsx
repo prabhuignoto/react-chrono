@@ -29,7 +29,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       secondary: '#ffdf00',
       cardBgColor: '#fff',
       cardForeColor: '#000',
-      titleColor: '#0f52ba'
+      titleColor: '#0f52ba',
     },
     theme,
   );
