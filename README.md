@@ -397,7 +397,16 @@ The `itemWidth` prop can be used to set the width of each individual timeline se
 Customize colors with the `theme` prop.
 
 ```sh
-<Chrono items={items}  theme={{primary: "red", secondary: "blue", cardBgColor: "yellow", cardForeColor: "violet" }} />
+<Chrono
+  items={items}
+  theme={{ 
+    primary: "red",
+    secondary: "blue",
+    cardBgColor: "yellow",
+    cardForeColor: "violet",
+    titleColor: "red"
+  }}
+/>
 ```
 
 ## 📦CodeSandbox Examples

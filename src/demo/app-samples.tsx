@@ -87,7 +87,7 @@ export const VerticalBasic: FunctionComponent<{
         slideShow
         slideItemDuration={2500}
         scrollable={{scrollbar:   false}}
-        theme={{cardBgColor:  "#fff",  cardForeColor:  "blue"}}
+        theme={{cardBgColor:  "#fff",  cardForeColor:  "blue", titleColor: "red"}}
         useReadMore={false}
       />
     </ComponentContainerTree>
