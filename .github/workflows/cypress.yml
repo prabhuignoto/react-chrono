@@ -13,22 +13,3 @@ jobs:
         with:
           start: npm start
           browser: chrome
-  firefox:
-    runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:node12.16.1-chrome80-ff73
-      options: --user 1001
-    steps:
-      - uses: actions/checkout@v2
-      - uses: cypress-io/github-action@v2
-        with:
-          start: npm start
-          browser: firefox
-  edge:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: cypress-io/github-action@v2
-        with:
-          start: npm start
-          browser: edge
