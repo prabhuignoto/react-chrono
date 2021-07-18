@@ -9,10 +9,9 @@ jobs:
     name: E2E on Chrome
     steps:
       - uses: actions/checkout@v2
-        with:
-          start: npm start
-          wait-on: 'http://localhost:8080'
-          wait-on-timeout: 120
       - uses: cypress-io/github-action@v2
         with:
+          start: npm start
+          wait-on: 'http://localhost:3050'
+          wait-on-timeout: 120
           browser: chrome
