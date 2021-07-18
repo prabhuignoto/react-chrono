@@ -1,4 +1,6 @@
 {
   "projectId": "8zb5a5",
-  "ignoreTestFiles": "**/examples/*.js"
+  "ignoreTestFiles": "**/examples/*.js",
+  "baseUrl": "http://localhost:8080",
+  "watchForFileChanges": false
 }
