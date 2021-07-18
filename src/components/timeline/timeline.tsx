@@ -39,6 +39,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onPrevious,
     onRestartSlideshow,
     onTimelineUpdated,
+    onItemSelected,
     slideShowEnabled,
     slideShowRunning,
     theme,
@@ -120,6 +121,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           }
           break;
         }
+      }
+
+      const selectedItem = items.find((item) => item.id === id);
+
+      if (selectedItem) {
+        onItemSelected && onItemSelected(selectedItem);
       }
     }
   };

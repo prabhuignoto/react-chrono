@@ -168,6 +168,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | cardPositionHorizontal  | positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`              |              |
 | theme                   | prop to customize the colors.                                                         |              |
 | onScrollEnd             | use the `onScrollEnd` to detect the end of the timeline.                              |              |
+| onItemSelected          | callback invoked on a item selection. passes all of the data pertinent to the item.    |              |
 | useReadMore             | enables or disables the read more button. when disabled the card will auto expand to fit the content|    true          |
 
 ### Mode
