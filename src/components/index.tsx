@@ -21,7 +21,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     onScrollEnd,
     slideShow = false,
     theme,
-    onItemSelected
+    onItemSelected,
   } = props;
 
   const customTheme = Object.assign(
