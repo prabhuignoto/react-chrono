@@ -15,3 +15,16 @@ jobs:
           wait-on: 'http://localhost:8080'
           wait-on-timeout: 120
           browser: chrome
+  firefox:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node12.16.1-chrome80-ff73
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v2
+        with:
+          start: npm start
+          wait-on: 'http://localhost:8080'
+          wait-on-timeout: 120
+          browser: firefox
