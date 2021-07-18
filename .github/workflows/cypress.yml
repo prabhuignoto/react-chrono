@@ -21,6 +21,9 @@ jobs:
       image: cypress/browsers:node12.16.1-chrome80-ff73
       options: --user 1001
     steps:
+      - name: Install tools
+        run: apt-get install -y libgbm-dev
+      - name: test_ff
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
         with:
