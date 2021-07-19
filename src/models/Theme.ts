@@ -4,4 +4,5 @@ export interface Theme {
   textColor?: string;
   cardBgColor?: string;
   cardForeColor?: string;
+  titleColor?: string;
 }

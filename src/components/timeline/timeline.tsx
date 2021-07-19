@@ -39,6 +39,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onPrevious,
     onRestartSlideshow,
     onTimelineUpdated,
+    onItemSelected,
     slideShowEnabled,
     slideShowRunning,
     theme,
@@ -69,22 +70,22 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const id = useRef('react-chrono-timeline');
 
   // handlers for navigation
-  const handleNext = useCallback(() => hasFocus && onNext(), [
-    hasFocus,
-    onNext,
-  ]);
-  const handlePrevious = useCallback(() => hasFocus && onPrevious(), [
-    hasFocus,
-    onPrevious,
-  ]);
-  const handleFirst = useCallback(() => hasFocus && onFirst(), [
-    hasFocus,
-    onFirst,
-  ]);
-  const handleLast = useCallback(() => hasFocus && onLast(), [
-    hasFocus,
-    onLast,
-  ]);
+  const handleNext = useCallback(
+    () => hasFocus && onNext(),
+    [hasFocus, onNext],
+  );
+  const handlePrevious = useCallback(
+    () => hasFocus && onPrevious(),
+    [hasFocus, onPrevious],
+  );
+  const handleFirst = useCallback(
+    () => hasFocus && onFirst(),
+    [hasFocus, onFirst],
+  );
+  const handleLast = useCallback(
+    () => hasFocus && onLast(),
+    [hasFocus, onLast],
+  );
 
   // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -120,6 +121,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           }
           break;
         }
+      }
+
+      const selectedItem = items.find((item) => item.id === id);
+
+      if (selectedItem) {
+        onItemSelected && onItemSelected(selectedItem);
       }
     }
   };

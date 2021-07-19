@@ -161,6 +161,8 @@ export interface TimelineProps {
 
   onScrollEnd?: () => void;
 
+  onItemSelected?: (data: TimelineItemModel) => void;
+
   // this prop decides whether readmore is enabled or not
   useReadMore?: boolean;
 }

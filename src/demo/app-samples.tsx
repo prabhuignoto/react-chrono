@@ -80,21 +80,21 @@ export const VerticalBasic: FunctionComponent<{
           Use the <strong>VERTICAL</strong> mode to render the timelines
         vertically.
       </DescriptionContent>
-      </Description>
-      <ComponentContainerTree type={type}>
-        <Chrono
-          items={items}
-          mode="VERTICAL"
-          slideShow
-          slideItemDuration={2500}
-          scrollable={{ scrollbar: false }}
-          theme={{ cardBgColor: "#fff", cardForeColor: "blue" }}
-          useReadMore={false}
-        />
-      </ComponentContainerTree>
-    </Vertical>
-  )
-};
+    </Description>
+    <ComponentContainerTree type={type}>
+      <Chrono
+        items={items}
+        mode="VERTICAL"
+        slideShow
+        slideItemDuration={2500}
+        scrollable={{scrollbar:   false}}
+        theme={{cardBgColor:  "#fff",  cardForeColor:  "blue", titleColor: "red"}}
+        useReadMore={false}
+        onItemSelected={(selected) => console.log(selected.cardTitle)}
+      />
+    </ComponentContainerTree>
+  </Vertical>
+);
 
 export const VerticalTree: FunctionComponent<{
   type: string;
@@ -122,6 +122,7 @@ export const VerticalTree: FunctionComponent<{
         scrollable={{ scrollbar: false }}
         allowDynamicUpdate
         cardHeight={200}
+        onItemSelected={(selected) => console.log(selected.cardTitle)}
         onScrollEnd={() => console.log('end reached')}
       >
         <div className="chrono-icons">

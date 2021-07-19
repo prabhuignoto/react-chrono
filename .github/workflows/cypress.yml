@@ -1,0 +1,17 @@
+name: Cypress Tests using Cypress Docker Image
+
+on: [push]
+
+jobs:
+  chrome:
+    runs-on: ubuntu-20.04
+    # let's make sure our tests pass on Chrome browser
+    name: E2E on Chrome
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v2
+        with:
+          start: npm start
+          wait-on: 'http://localhost:8080'
+          wait-on-timeout: 120
+          browser: chrome

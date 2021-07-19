@@ -16,6 +16,7 @@ export const TitleWrapper = styled.div<{
 
   &.active {
     background: ${(p) => p.theme?.secondary};
-    color: ${(p) => p.theme?.primary};
+    color: ${(p) =>
+      p.theme?.titleColor ? p.theme?.titleColor : p.theme?.primary};
   }
 `;
