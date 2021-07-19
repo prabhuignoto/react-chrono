@@ -94,7 +94,7 @@ export const VerticalBasic: FunctionComponent<{
       />
     </ComponentContainerTree>
   </Vertical>
-);
+)};
 
 export const VerticalTree: FunctionComponent<{
   type: string;
