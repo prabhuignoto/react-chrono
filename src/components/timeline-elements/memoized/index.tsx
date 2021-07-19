@@ -30,7 +30,7 @@ const MemoTitle = React.memo(
         style={{ color }}
         dir={dir}
       >
-        <a href={url} target="_blank">
+        <a href={url} target="_blank" rel="noreferrer">
           {title}
         </a>
       </TimelineCardTitle>
