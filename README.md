@@ -159,7 +159,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | slideShow               | enables the slideshow control.                                                        | false        |
 | slideItemDuration       | duration (in ms), the timeline card is active during  a `slideshow`.                  | 5000         |
 | itemWidth               | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
-| hideControls            | hides the navigation controls.                                                        | 300          |
+| hideControls            | hides the navigation controls.                                                        | false        |
 | allowDynamicUpdate      | allows timeline items to be updated dynamically.                                      | false        |
 | cardHeight              | sets the minimum height of the timeline card.                                         | 200          |
 | cardWidth               | sets the maximum width of the timeline card.                                          |              |
