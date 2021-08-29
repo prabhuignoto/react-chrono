@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useRef } from 'react';
 import { TimelineControlModel } from '../../../models/TimelineControlModel';
 import { GlobalContext } from '../../GlobalContext';
 import ChevronLeft from '../../icons/chev-left';
@@ -12,6 +12,8 @@ import {
   TimelineNavItem,
   TimelineNavWrapper,
 } from './timeline-control.styles';
+
+
 
 const TimelineControl: React.FunctionComponent<TimelineControlModel> =
   React.memo(

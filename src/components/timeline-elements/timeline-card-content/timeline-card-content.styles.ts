@@ -19,11 +19,12 @@ export const TimelineItemContentWrapper = styled.section<{
   justify-content: flex-start;
   line-height: 1.5em;
   margin: ${(p) => (p.mode !== 'VERTICAL_ALTERNATING' ? '1em 0' : '0 auto')};
+  max-width: ${(p) => p.maxWidth}px;
+  min-height: ${(p) => p.minHeight}px;
   position: relative;
   text-align: left;
   width: 100%;
-  min-height: ${(p) => p.minHeight}px;
-  max-width: ${(p) => p.maxWidth}px;
+  z-index: 0;
 
   &:focus {
     outline: 1px solid ${(p) => p.theme?.primary};
@@ -38,22 +39,23 @@ export const TimelineContentSubTitle = styled.p<{
   dir?: string;
   theme?: Theme;
 }>`
+  color: ${(p) => p.theme.primary};
   font-size: 0.85rem;
   font-weight: 600;
   margin: 0;
   padding-left: 0.5rem;
   text-align: left;
   width: 97%;
-  color: ${(p) => p.theme.primary};
 `;
 
 export const TimelineCardTitle = styled.p<{ theme: Theme; dir?: string }>`
   color: ${(p) => p.theme.cardForeColor};
   font-size: 1rem;
   font-weight: 600;
-  margin: 0;
   margin-top: 0.5em;
+  margin: 0;
   padding-left: 0.5em;
+  padding-top: 0.25em;
   &.active {
     color: ${(p) => p.theme.primary};
   }
@@ -123,7 +125,6 @@ export const TimelineContentDetailsWrapper = styled.div<{
 export const ShowMore = styled.span<{ show?: boolean; theme?: Theme }>`
   align-items: center;
   align-self: flex-end;
-  /* background: #f5f5f5; */
   border-radius: 4px;
   cursor: pointer;
   display: ${(p) => (p.show ? 'flex' : 'none')};
@@ -204,4 +205,25 @@ export const ChevronIconWrapper = styled.span<{ collapsed?: boolean }>`
     height: 100%;
     width: 100%;
   }
+`;
+
+export const TriangleIconWrapper = styled.span<{ dir?: string }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: 50%;
+  background: #ffffff;
+  transform: translateY(-50%) rotate(225deg);
+  z-index: -1;
+
+  & svg {
+    width: 100%;
+    height: 100%;
+    fill: #fff;
+  }
+
+  ${p => p.dir === 'left' ? `right: -8px;` : `left: -8px;`};
 `;

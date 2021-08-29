@@ -82,6 +82,7 @@ export const TimelineCardContentWrapper = styled.div<{
   flip?: boolean;
 }>`
   visibility: hidden;
+  position: relative;
 
   ${(p) => {
     if (p.alternateCards) {
@@ -115,8 +116,6 @@ export const TimelineCardContentWrapper = styled.div<{
     }
   }}
 
-  
-
   &.visible {
     visibility: visible;
     animation: ${animateVisible} 0.25s ease-in;
@@ -145,11 +144,11 @@ export const TimelineTitleWrapper = styled.div<{
 
   &.right {
     ${(p) =>
-      p.flip
-        ? `
+    p.flip
+      ? `
       order: 3;
       justify-content: flex-start;`
-        : `order: 1;
+      : `order: 1;
     justify-content: flex-end;`};
   }
 `;
