@@ -12,7 +12,6 @@ import { MediaState } from '../../../models/TimelineMediaModel';
 import { TimelineMode } from '../../../models/TimelineModel';
 import { GlobalContext } from '../../GlobalContext';
 import ChevronIcon from '../../icons/chev-right';
-import TriangleIcon from '../../icons/triangle-right';
 import { MemoSubTitle, MemoTitle } from '../memoized';
 import CardMedia from '../timeline-card-media/timeline-card-media';
 import {

@@ -18,15 +18,6 @@ export const Wrapper = styled.div`
 
 export const Item = styled.div``;
 
-const scaleUp = keyframes`
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.4);
-  }
-`;
-
 const scaleDown = keyframes`
   from {
     transform: scale(1.4);

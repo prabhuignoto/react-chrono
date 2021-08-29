@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useRef } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { TimelineControlModel } from '../../../models/TimelineControlModel';
 import { GlobalContext } from '../../GlobalContext';
 import ChevronLeft from '../../icons/chev-left';

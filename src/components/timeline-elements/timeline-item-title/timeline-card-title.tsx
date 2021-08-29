@@ -1,6 +1,5 @@
 import cls from 'classnames';
 import React, { useMemo } from 'react';
-import { Theme } from '../../../models/Theme';
 import { TitleModel } from '../../../models/TimelineCardTitleModel';
 import { TitleWrapper } from './timeline-card-title.styles';
 
