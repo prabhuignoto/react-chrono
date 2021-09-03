@@ -40,6 +40,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onRestartSlideshow,
     onTimelineUpdated,
     onItemSelected,
+    onOutlineSelection,
     slideShowEnabled,
     slideShowRunning,
     theme,
@@ -256,11 +257,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
             contentDetailsChildren={contentDetailsChildren}
-            iconChildren={iconChildren}
             hasFocus={hasFocus}
+            iconChildren={iconChildren}
             items={items as TimelineCardModel[]}
+            mode={mode}
             onClick={handleTimelineItemClick}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+            onOutlineSelection={onOutlineSelection}
             slideShowRunning={slideShowRunning}
             theme={theme}
           />
@@ -275,12 +278,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               contentDetailsChildren={contentDetailsChildren}
               handleItemClick={handleTimelineItemClick}
               hasFocus={hasFocus}
+              iconChildren={iconChildren}
               items={items as TimelineCardModel[]}
+              mode={mode}
               onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
               slideShowRunning={slideShowRunning}
               theme={theme}
               wrapperId={id.current}
-              iconChildren={iconChildren}
             />
           </TimelineMain>
         ) : null}
@@ -292,11 +296,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             alternateCards={false}
             autoScroll={handleScroll}
             contentDetailsChildren={contentDetailsChildren}
-            iconChildren={iconChildren}
             hasFocus={hasFocus}
+            iconChildren={iconChildren}
             items={items as TimelineCardModel[]}
+            mode={mode}
             onClick={handleTimelineItemClick}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+            onOutlineSelection={onOutlineSelection}
             slideShowRunning={slideShowRunning}
             theme={theme}
           />

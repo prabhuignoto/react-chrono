@@ -108,4 +108,5 @@ export interface TimelineVerticalModel extends CommonPropsModel {
   contentDetailsChildren?: React.ReactNode;
   iconChildren?: React.ReactNode;
   childrenNode?: React.ReactNode;
+  onOutlineSelection?: (index: number) => void;
 }
