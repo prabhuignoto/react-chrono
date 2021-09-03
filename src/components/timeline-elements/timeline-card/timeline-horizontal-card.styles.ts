@@ -52,8 +52,8 @@ interface CircleModel {
 export const Circle = styled.div<CircleModel>`
   border-radius: 50%;
   cursor: pointer;
-  height:20px;
-  width:20px;
+  height: 20px;
+  width: 20px;
 
   &.active {
     &.using-icon {
@@ -64,7 +64,7 @@ export const Circle = styled.div<CircleModel>`
     }
 
     &::after {
-     border-radius: 50%;
+      border-radius: 50%;
       content: '';
       display: block;
       height: 15px;

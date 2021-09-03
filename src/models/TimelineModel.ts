@@ -49,7 +49,6 @@ export interface TimelineModel extends TimelineProps {
 
   onTimelineUpdated: (id: number) => void;
 
-
   /**
    * indicates if a slideshow is activated
    *

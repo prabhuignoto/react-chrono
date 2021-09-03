@@ -13,8 +13,6 @@ import {
   TimelineNavWrapper,
 } from './timeline-control.styles';
 
-
-
 const TimelineControl: React.FunctionComponent<TimelineControlModel> =
   React.memo(
     ({

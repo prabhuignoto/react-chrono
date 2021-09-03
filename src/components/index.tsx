@@ -159,7 +159,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   const handleOutlineSelection = useCallback(
     (index: number) => {
-      if(index >= 0) {
+      if (index >= 0) {
         setActiveTimelineItem(index);
         handleTimelineUpdate(index);
       }

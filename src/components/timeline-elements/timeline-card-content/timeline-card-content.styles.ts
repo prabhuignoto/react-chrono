@@ -225,5 +225,5 @@ export const TriangleIconWrapper = styled.span<{ dir?: string }>`
     fill: #fff;
   }
 
-  ${p => p.dir === 'left' ? `right: -8px;` : `left: -8px;`};
+  ${(p) => (p.dir === 'left' ? `right: -8px;` : `left: -8px;`)};
 `;

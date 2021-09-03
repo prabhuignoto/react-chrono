@@ -144,11 +144,11 @@ export const TimelineTitleWrapper = styled.div<{
 
   &.right {
     ${(p) =>
-    p.flip
-      ? `
+      p.flip
+        ? `
       order: 3;
       justify-content: flex-start;`
-      : `order: 1;
+        : `order: 1;
     justify-content: flex-end;`};
   }
 `;
