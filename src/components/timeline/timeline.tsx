@@ -232,6 +232,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         className={`${mode.toLowerCase()} timeline-main-wrapper`}
         id="timeline-main-wrapper"
         theme={theme}
+        mode={mode}
         onScroll={(ev) => {
           const target = ev.target as HTMLElement;
           let scrolled = 0;
