@@ -54,6 +54,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     disableNavOnKey,
     cardPositionHorizontal,
     onScrollEnd,
+    enableOutline,
   } = useContext(GlobalContext);
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
@@ -267,6 +268,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             onOutlineSelection={onOutlineSelection}
             slideShowRunning={slideShowRunning}
             theme={theme}
+            enableOutline={enableOutline}
           />
         ) : null}
 
@@ -306,6 +308,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             onOutlineSelection={onOutlineSelection}
             slideShowRunning={slideShowRunning}
             theme={theme}
+            enableOutline={enableOutline}
           />
         ) : null}
       </TimelineMainWrapper>

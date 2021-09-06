@@ -9,15 +9,16 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
   alternateCards = true,
   autoScroll,
   contentDetailsChildren,
+  enableOutline,
   hasFocus,
   iconChildren,
   items,
+  mode,
   onClick,
   onElapsed,
+  onOutlineSelection,
   slideShowRunning,
   theme,
-  mode,
-  onOutlineSelection,
 }: TimelineVerticalModel) => {
   // check if the timeline that has become active is visible.
   // if not auto scroll the content and bring it to the view.
@@ -46,12 +47,14 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
 
   return (
     <TimelineVerticalWrapper data-testid="tree-main" role="list">
-      <TimelineOutline
-        theme={theme}
-        mode={mode}
-        items={outlineItems}
-        onSelect={onOutlineSelection}
-      />
+      {enableOutline && (
+        <TimelineOutline
+          theme={theme}
+          mode={mode}
+          items={outlineItems}
+          onSelect={onOutlineSelection}
+        />
+      )}
       {items.map((item, index) => {
         let className = '';
 

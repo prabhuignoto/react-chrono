@@ -90,6 +90,7 @@ export const VerticalBasic: FunctionComponent<{
         theme={{cardBgColor:  "#fff",  cardForeColor:  "blue", titleColor: "red"}}
         useReadMore={false}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
+        enableOutline
       />
     </ComponentContainerTree>
   </Vertical>
