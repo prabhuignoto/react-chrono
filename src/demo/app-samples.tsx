@@ -128,6 +128,7 @@ export const VerticalTree: FunctionComponent<{
         cardHeight={200}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         onScrollEnd={() => console.log('end reached')}
+        enableOutline
       >
         <div className="chrono-icons">
           <img src="https://img.icons8.com/ios-filled/100/000000/twitter.png" alt="twitter"/>

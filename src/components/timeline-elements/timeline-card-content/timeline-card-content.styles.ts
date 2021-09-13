@@ -207,7 +207,7 @@ export const ChevronIconWrapper = styled.span<{ collapsed?: boolean }>`
   }
 `;
 
-export const TriangleIconWrapper = styled.span<{ dir?: string, theme?: Theme }>`
+export const TriangleIconWrapper = styled.span<{ dir?: string; theme?: Theme }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -215,7 +215,7 @@ export const TriangleIconWrapper = styled.span<{ dir?: string, theme?: Theme }>`
   height: 1.5rem;
   position: absolute;
   top: 50%;
-  background: ${p => p.theme.cardBgColor};
+  background: ${(p) => p.theme.cardBgColor};
   transform: translateY(-50%) rotate(225deg);
   z-index: -1;
 

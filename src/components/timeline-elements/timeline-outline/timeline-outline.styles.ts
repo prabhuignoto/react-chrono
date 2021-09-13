@@ -130,6 +130,7 @@ export const ListItem = styled.li`
 export const ListItemName = styled.span<{ theme?: Theme; selected?: boolean }>`
   font-size: 0.75rem;
   color: ${(p) => (p.selected ? p.theme.primary : '')};
+  padding-left: 0.25rem;
 
   &:hover {
     color: ${(p) => p.theme.primary};
@@ -150,8 +151,8 @@ export const ListItemBullet = styled.span<{
     content: '';
     display: block;
     position: absolute;
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: ${(p) =>
       p.selected ? `${p.theme.secondary}` : `${p.theme.primary}`};
@@ -159,7 +160,7 @@ export const ListItemBullet = styled.span<{
     margin: 0 auto;
     border: ${(p) =>
       p.selected
-        ? `2px solid ${p.theme.primary}`
-        : `1px solid ${p.theme.primary}`};
+        ? `2px solid ${p.theme.secondary}`
+        : `2px solid ${p.theme.primary}`};
   }
 `;
