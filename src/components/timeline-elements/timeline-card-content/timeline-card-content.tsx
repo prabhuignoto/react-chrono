@@ -340,7 +340,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           )}
 
           {canShowTriangleIcon && (
-            <TriangleIconWrapper dir={triangleDir}></TriangleIconWrapper>
+            <TriangleIconWrapper
+              dir={triangleDir}
+              theme={theme}
+            ></TriangleIconWrapper>
           )}
         </TimelineItemContentWrapper>
       );

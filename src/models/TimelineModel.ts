@@ -36,6 +36,7 @@ export interface TimelineProps {
   cardWidth?: number;
   children?: React.ReactElement | React.ReactElement[];
   disableNavOnKey?: boolean;
+  enableOutline?: boolean;
   flipLayout?: boolean;
   hideControls?: boolean;
   itemWidth?: number;
@@ -49,7 +50,6 @@ export interface TimelineProps {
   slideShow?: boolean;
   theme?: Theme;
   useReadMore?: boolean;
-  enableOutline?: boolean;
 }
 
 export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';

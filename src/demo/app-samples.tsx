@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import Chrono from '../components';
+import { Theme } from '../models/Theme';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
   ComponentContainer,
@@ -98,9 +99,10 @@ export const VerticalBasic: FunctionComponent<{
 );
 
 export const VerticalTree: FunctionComponent<{
-  type: string;
-  items: TimelineItemModel[];
-}> = ({ type, items }) => {
+  type: string,
+  items: TimelineItemModel[],
+  theme: Theme
+}> = ({ type, items, theme }) => {
   
   return <Vertical id="tree">
     <Description>
@@ -118,6 +120,7 @@ export const VerticalTree: FunctionComponent<{
       <Chrono
         items={items}
         mode="VERTICAL_ALTERNATING"
+        theme={theme}
         slideShow
         slideItemDuration={2350}
         scrollable={{scrollbar: false}}
