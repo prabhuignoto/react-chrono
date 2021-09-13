@@ -36,6 +36,7 @@ export const HorizontalBasic: React.FunctionComponent<{
           slideShow
           slideItemDuration={2550}
           itemWidth={200}
+          onItemSelected={selected => console.log(selected)}
         >
           <div className="chrono-icons">
             <img src="color-circle.svg" alt="github" />

@@ -133,6 +133,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   };
 
+  useEffect(() => {
+    if (items.length && items[activeTimelineItem]) {
+      onItemSelected && onItemSelected(items[activeTimelineItem]);
+    }
+  }, [activeTimelineItem]);
+
   const handleScroll = useCallback(
     (scroll: Partial<Scroll>) => {
       const element = timelineMainRef.current;
