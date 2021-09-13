@@ -33,13 +33,14 @@ const NewDemo: React.FunctionComponent = () => {
       setCustomTheme({
          cardBgColor: "#efefef",
          primary: "#000",
-         secondary: "red"
+        secondary: "#FFA500"
        })
     } else {
       setCustomTheme({
         cardBgColor: "#C0C0C0",
         primary: "#000",
-        secondary: "#FFA500"
+        secondary: "#FFA500",
+        titleColor: "#000"
       })
     }
   }, [state]);

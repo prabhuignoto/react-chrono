@@ -52,6 +52,7 @@
   - [🛠Rendering custom content](#rendering-custom-content)
   - [🎭Custom icons for the Timeline](#custom-icons-for-the-timeline)
   - [Slideshow mode](#slideshow-mode)
+  - [Outline](#outline)
   - [Item Width](#item-width)
   - [🎨Theme](#theme)
 - [📦CodeSandbox Examples](#codesandbox-examples)
@@ -389,6 +390,17 @@ setting this prop enables the play button in the timeline control panel.
 ```sh
 <Chrono items={items} slideShow slideItemDuration={4500} />
 ```
+
+### Outline
+
+With `enableOutline` prop you can enable outline on the timelines and quickly jump to a specific timeline item.
+The outlines are only supported on `VERTICAL` and `VERTICAL_ALTERNATING` modes.
+
+```sh
+<Chrono items={items} enableOutline />
+```
+
+![media](./readme-assets/outline.png)
 
 ### Item Width
 
