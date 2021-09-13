@@ -50,6 +50,7 @@ export interface TimelineProps {
   slideShow?: boolean;
   theme?: Theme;
   useReadMore?: boolean;
+  borderLessCards?: boolean;
 }
 
 export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';

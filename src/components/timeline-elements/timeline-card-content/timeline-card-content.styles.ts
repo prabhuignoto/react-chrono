@@ -9,12 +9,14 @@ export const TimelineItemContentWrapper = styled.section<{
   minHeight?: number;
   maxWidth?: number;
   mode?: TimelineMode;
+  borderLess?: boolean;
 }>`
   align-items: flex-start;
   background: ${(p) => p.theme.cardBgColor};
   border-radius: 4px;
   display: flex;
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
+  ${(p) =>
+    !p.borderLess ? `filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2))` : 'none'};
   flex-direction: column;
   justify-content: flex-start;
   line-height: 1.5em;
@@ -81,6 +83,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
   theme?: Theme;
   customContent?: boolean;
   useReadMore?: boolean;
+  borderLess?: boolean;
 }>`
   align-items: center;
   display: flex;
@@ -95,7 +98,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
   scrollbar-color: ${(p) => p.theme?.primary} default;
   scrollbar-width: thin;
   transition: max-height 100ms linear;
-  width: 95%;
+  width: ${(p) => (p.borderLess ? '100%' : '95%')};
   padding: 0.25em 0.5em;
 
   &::-webkit-scrollbar {

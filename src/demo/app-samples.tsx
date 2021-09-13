@@ -93,6 +93,7 @@ export const VerticalBasic: FunctionComponent<{
         useReadMore={false}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
+        borderLessCards
       />
     </ComponentContainerTree>
   </Vertical>

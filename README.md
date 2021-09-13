@@ -172,6 +172,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | onItemSelected          | callback invoked on a item selection. passes all of the data pertinent to the item.    |              |
 | useReadMore             | enables or disables the read more button. when disabled the card will auto expand to fit the content|    true          |
 | enableOutline           | enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.             |    false         |
+| borderLessCards         | removes the border & shadow from the timeline item cards.                           |    false         |
 
 ### Mode
 
