@@ -157,6 +157,16 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }
   };
 
+  const handleOutlineSelection = useCallback(
+    (index: number) => {
+      if (index >= 0) {
+        setActiveTimelineItem(index);
+        handleTimelineUpdate(index);
+      }
+    },
+    [timeLineItems.length],
+  );
+
   let iconChildren = toReactArray(children).filter(
     (item) => (item as any).props.className === 'chrono-icons',
   );
@@ -179,13 +189,14 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         onNext={handleOnNext}
         onPrevious={handleOnPrevious}
         onRestartSlideshow={restartSlideShow}
-        onTimelineUpdated={useCallback(handleTimelineUpdate, [])}
+        onTimelineUpdated={handleTimelineUpdate}
         slideShow={slideShow}
         slideShowEnabled={slideShow}
         slideShowRunning={slideShowActive}
         theme={customTheme}
         onScrollEnd={onScrollEnd}
         onItemSelected={onItemSelected}
+        onOutlineSelection={handleOutlineSelection}
       />
     </GlobalContextProvider>
   );

@@ -46,6 +46,7 @@ export const Wrapper = styled.div<{
 export const TimelineMainWrapper = styled.div<{
   theme?: Theme;
   scrollable?: boolean | { scrollbar: boolean };
+  mode?: TimelineMode;
 }>`
   align-items: flex-start;
   display: flex;
@@ -53,7 +54,7 @@ export const TimelineMainWrapper = styled.div<{
   overflow-y: ${(p) => (p.scrollable ? 'auto' : 'hidden')};
   overflow-x: hidden;
   overscroll-behavior: contain;
-  position: relative;
+  ${(p) => (p.mode === 'HORIZONTAL' ? 'position: relative' : '')};
   scroll-behavior: smooth;
   scrollbar-color: ${(p) => p.theme.primary} default;
   scrollbar-width: thin;

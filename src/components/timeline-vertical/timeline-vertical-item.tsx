@@ -106,6 +106,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
           slideShowActive={slideShowRunning}
           theme={theme}
           title={cardTitle}
+          flip={flipLayout}
         />
       </TimelineCardContentWrapper>
     );

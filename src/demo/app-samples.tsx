@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import Chrono from '../components';
+import { Theme } from '../models/Theme';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
   ComponentContainer,
@@ -36,6 +37,7 @@ export const HorizontalBasic: React.FunctionComponent<{
           slideShow
           slideItemDuration={2550}
           itemWidth={200}
+          onItemSelected={selected => console.log(selected)}
         >
           <div className="chrono-icons">
             <img src="color-circle.svg" alt="github" />
@@ -90,15 +92,18 @@ export const VerticalBasic: FunctionComponent<{
         theme={{cardBgColor:  "#fff",  cardForeColor:  "blue", titleColor: "red"}}
         useReadMore={false}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
+        enableOutline
+        borderLessCards
       />
     </ComponentContainerTree>
   </Vertical>
 );
 
 export const VerticalTree: FunctionComponent<{
-  type: string;
-  items: TimelineItemModel[];
-}> = ({ type, items }) => {
+  type: string,
+  items: TimelineItemModel[],
+  theme: Theme
+}> = ({ type, items, theme }) => {
   
   return <Vertical id="tree">
     <Description>
@@ -116,6 +121,7 @@ export const VerticalTree: FunctionComponent<{
       <Chrono
         items={items}
         mode="VERTICAL_ALTERNATING"
+        theme={theme}
         slideShow
         slideItemDuration={2350}
         scrollable={{scrollbar: false}}
@@ -123,6 +129,7 @@ export const VerticalTree: FunctionComponent<{
         cardHeight={200}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         onScrollEnd={() => console.log('end reached')}
+        enableOutline
       >
         <div className="chrono-icons">
           <img src="https://img.icons8.com/ios-filled/100/000000/twitter.png" alt="twitter"/>

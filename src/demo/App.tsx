@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
+import { Theme } from '../models/Theme';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
   HorizontalBasic,
@@ -19,6 +20,30 @@ import DynamicLoad from "./dynamic-load";
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
+  const [state, setState]  = useState(0);
+
+  const [customTheme, setCustomTheme] = useState<Theme>({
+    cardBgColor: "#C0C0C0",
+    primary: "#000",
+    secondary: "#FFA500"
+  });
+
+  useEffect(() => {
+    if(state > 0) {
+      setCustomTheme({
+         cardBgColor: "#efefef",
+         primary: "#000",
+        secondary: "#FFA500"
+       })
+    } else {
+      setCustomTheme({
+        cardBgColor: "#C0C0C0",
+        primary: "#000",
+        secondary: "#FFA500",
+        titleColor: "#000"
+      })
+    }
+  }, [state]);
 
   useEffect(() => {
     const newItems = data.map(
@@ -33,7 +58,7 @@ const NewDemo: React.FunctionComponent = () => {
     setItems(newItems);
   }, []);
 
-  const [state, setState]  = useState(0);
+
 
   return (
     <Wrapper>
@@ -77,9 +102,9 @@ const NewDemo: React.FunctionComponent = () => {
           </Route>
           <Route path="/vertical-alternating">
             <button onClick={() => {
-              setState(1 - state)
+              setState(1 - state);
             }}>change</button>
-            {<VerticalTree type={'big-screen'} items={state > 0 ? items : mixed} >{state}</VerticalTree>}
+            {<VerticalTree type={'big-screen'} items={state > 0 ? items : mixed} theme={customTheme} >{state}</VerticalTree>}
           </Route>
           <Route path="/horizontal">
             {items.length > 0 && (

@@ -52,6 +52,7 @@
   - [🛠Rendering custom content](#rendering-custom-content)
   - [🎭Custom icons for the Timeline](#custom-icons-for-the-timeline)
   - [Slideshow mode](#slideshow-mode)
+  - [Outline](#outline)
   - [Item Width](#item-width)
   - [🎨Theme](#theme)
 - [📦CodeSandbox Examples](#codesandbox-examples)
@@ -170,6 +171,8 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | onScrollEnd             | use the `onScrollEnd` to detect the end of the timeline.                              |              |
 | onItemSelected          | callback invoked on a item selection. passes all of the data pertinent to the item.    |              |
 | useReadMore             | enables or disables the read more button. when disabled the card will auto expand to fit the content|    true          |
+| enableOutline           | enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.             |    false         |
+| borderLessCards         | removes the border & shadow from the timeline item cards.                           |    false         |
 
 ### Mode
 
@@ -388,6 +391,17 @@ setting this prop enables the play button in the timeline control panel.
 ```sh
 <Chrono items={items} slideShow slideItemDuration={4500} />
 ```
+
+### Outline
+
+With `enableOutline` prop you can enable outline on the timelines and quickly jump to a specific timeline item.
+The outlines are only supported on `VERTICAL` and `VERTICAL_ALTERNATING` modes.
+
+```sh
+<Chrono items={items} enableOutline />
+```
+
+![media](./readme-assets/outline.png)
 
 ### Item Width
 

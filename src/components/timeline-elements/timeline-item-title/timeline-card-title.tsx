@@ -1,14 +1,7 @@
 import cls from 'classnames';
 import React, { useMemo } from 'react';
-import { Theme } from '../../../models/Theme';
+import { TitleModel } from '../../../models/TimelineCardTitleModel';
 import { TitleWrapper } from './timeline-card-title.styles';
-
-interface TitleModel {
-  title?: string;
-  active?: boolean;
-  theme?: Theme;
-  align?: 'left' | 'right';
-}
 
 const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
   title,

@@ -82,6 +82,7 @@ export const TimelineCardContentWrapper = styled.div<{
   flip?: boolean;
 }>`
   visibility: hidden;
+  position: relative;
 
   ${(p) => {
     if (p.alternateCards) {
@@ -114,8 +115,6 @@ export const TimelineCardContentWrapper = styled.div<{
       `;
     }
   }}
-
-  
 
   &.visible {
     visibility: visible;

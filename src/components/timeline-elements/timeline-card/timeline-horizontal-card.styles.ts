@@ -18,15 +18,6 @@ export const Wrapper = styled.div`
 
 export const Item = styled.div``;
 
-const scaleUp = keyframes`
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.4);
-  }
-`;
-
 const scaleDown = keyframes`
   from {
     transform: scale(1.4);
@@ -61,15 +52,14 @@ interface CircleModel {
 export const Circle = styled.div<CircleModel>`
   border-radius: 50%;
   cursor: pointer;
-  height: 1.25rem;
-  width: 1.25rem;
+  height: 20px;
+  width: 20px;
 
   &.active {
     &.using-icon {
       /* transform: scale(1.75); */
     }
     &:not(.using-icon) {
-      animation: ${scaleUp} 0.1s ease-in;
       transform: scale(1.25);
     }
 
@@ -77,13 +67,15 @@ export const Circle = styled.div<CircleModel>`
       border-radius: 50%;
       content: '';
       display: block;
-      height: 1em;
-      left: 50%;
+      height: 15px;
+      left: 0;
       position: absolute;
       right: 0;
+      margin-left: auto;
+      margin-right: auto;
       top: 50%;
-      transform: translateY(-50%) translateX(-50%);
-      width: 1em;
+      transform: translateY(-50%);
+      width: 15px;
       z-index: -1;
     }
   }
@@ -107,7 +99,7 @@ export const Circle = styled.div<CircleModel>`
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: scale(1.5);
+    transform: scale(1.25);
 
     img {
       max-width: 90%;
