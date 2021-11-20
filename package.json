@@ -107,7 +107,9 @@
   },
   "resolutions": {
     "**/@typescript-eslint/eslint-plugin": "^4.11.0",
-    "**/@typescript-eslint/parser": "^4.11.0"
+    "**/@typescript-eslint/parser": "^4.11.0",
+    "ansi-regex": "5.0.1",
+    "json-schema": "0.4.0"
   },
   "files": [
     "dist"
