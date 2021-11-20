@@ -1,11 +1,9 @@
 import styled from '@emotion/styled';
 
 const ModeWrapper = styled.div`
-  width: 950px;
+  width: 90%;
   position: relative;
-  margin-bottom: 3rem;
   border-radius: 10px;
-  padding: 1.5rem 0;
   background: #fff;
   display: flex;
   flex-direction: column;
@@ -16,13 +14,12 @@ export const Horizontal = styled(ModeWrapper)``;
 export const Vertical = styled(ModeWrapper)``;
 
 export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-items: center;
   margin: 0 auto;
-  width: 100%;
+  width: 95vw;
   background: #fff;
+  display: grid;
+  grid-template-columns: 30% 70%;
 `;
 
 export const ComponentContainer = styled.div<{ type?: string }>`
@@ -51,19 +48,17 @@ export const ComponentContainer = styled.div<{ type?: string }>`
 
 export const ComponentContainerTree = styled.div<{ type?: string }>`
   border-radius: 4px;
-  /* height: 800px; */
+  height: 500px;
   margin: 0 auto;
-  margin-top: 1rem;
-  padding: 1rem 0;
 
   ${(p) => {
     switch (p.type) {
       case 'desktop':
         return `height: 600px; width: 75%;`;
       case 'big-screen':
-        return `height: 850px; width: 100%;`;
+        return `height: 650px; width: 100%;`;
       case 'tablet':
-        return `height: 850px; width: 100%;`;
+        return `height: 650px; width: 100%;`;
       case 'mobile':
         return `height: 650px; width: 100%;`;
       default:
@@ -170,6 +165,20 @@ export const SandBox = styled.div`
 export const ComponentLinks = styled.ul`
   list-style: none;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
-`
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin: 1rem 0;
+  }
+`;
+
+export const AppArea = styled.div`
+  padding: 1rem;
+  width: 100%;
+`;
