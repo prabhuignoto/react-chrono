@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { Theme } from '../models/Theme';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
   HorizontalBasic,
-  VerticalBasic,
-  VerticalCustomContent,
-  VerticalCustomContent2, VerticalTree,
-  VerticalTreeMixed
+  VerticalBasic, VerticalCustomContent, VerticalCustomContent2, VerticalTree, VerticalTreeMixed
 } from './app-samples';
 import './App.css';
 import {
+  AppArea,
   ComponentLinks,
   Wrapper
 } from './App.styles';
 import data from './data';
-import mixed from './data-mixed';
+import mixed from "./data-mixed";
 import DynamicLoad from "./dynamic-load";
 
 const NewDemo: React.FunctionComponent = () => {
@@ -62,9 +60,8 @@ const NewDemo: React.FunctionComponent = () => {
 
   return (
     <Wrapper>
-      <h3>Timeline of World War 2</h3>
       <BrowserRouter>
-      <header>
+      <aside className="app-links">
         <ComponentLinks>
           <li>
             <Link to="/vertical-basic">Vertical Basic</Link>
@@ -88,45 +85,39 @@ const NewDemo: React.FunctionComponent = () => {
             <Link to="/dynamic-load">Dynamic data load</Link>
           </li>
         </ComponentLinks>
-      </header>
-      <section>
-        <Switch>
-          <Route path="/vertical-basic">
-          {/* Vertical with no Media */}
-          {items.length > 0 && (
-              <VerticalBasic type={"big-screen"} items={items} />
-            )}
+      </aside>
+      <AppArea>
+        <Routes>
+          <Route path="/vertical-basic" element={items.length && <VerticalBasic type={"big-screen"} items={items} />}>
           </Route>
-          <Route path="/vertical-alternating-mixed">
-            {items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} 
+          <Route path="/vertical-alternating-mixed" element={items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} >
+          
           </Route>
-          <Route path="/vertical-alternating">
+          <Route path="/vertical-alternating" element={<>
             <button onClick={() => {
               setState(1 - state);
             }}>change</button>
             {<VerticalTree type={'big-screen'} items={state > 0 ? items : mixed} theme={customTheme} >{state}</VerticalTree>}
+          
+          </>}>
           </Route>
-          <Route path="/horizontal">
-            {items.length > 0 && (
+          <Route path="/horizontal" element={items.length > 0 && (
               <HorizontalBasic items={items} type="big-screen" />
-            )}
+            )}>
+            
           </Route>
-          <Route path="/vertical-custom">
-              {items.length  > 0 && <VerticalCustomContent  type="big-screen" />}
+          <Route path="/vertical-custom" element={items.length  > 0 && <VerticalCustomContent  type="big-screen" />}>
           </Route>
-          <Route path="/vertical-custom-icon">
-              {items.length  > 0 && <VerticalCustomContent2  type="big-screen" />}
+          <Route path="/vertical-custom-icon" element={items.length  > 0 && <VerticalCustomContent2  type="big-screen" />}>
           </Route>
-          <Route path="/dynamic-load">
-              {items.length  > 0 && <DynamicLoad />}
+          <Route path="/dynamic-load" element={items.length  > 0 && <DynamicLoad />}>
           </Route>
-          <Route path="/">
-            {items.length > 0 && (
+          <Route path="/" element={items.length > 0 && (
                 <VerticalBasic type={"big-screen"} items={items} />
-              )}
+              )}>
           </Route>
-        </Switch>
-      </section>
+        </Routes>
+      </AppArea>
       </BrowserRouter>
     </Wrapper>
   );
