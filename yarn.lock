@@ -10848,6 +10848,11 @@ snowpack@^3.8.8:
   optionalDependencies:
     fsevents "^2.3.2"
 
+snyk@^1.766.0:
+  version "1.766.0"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.766.0.tgz#8e34bb50f0259186300b65919756cd84d603c8f6"
+  integrity sha512-U2seAlpFOw4CUdNjCUaQQ1H9LGErEUeH2JiK3TOEG29TC/HX15bORSYlHNT5y4t/6pa0O4eSC87oN2ngAmttOg==
+
 socks-proxy-agent@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/socks-proxy-agent/-/socks-proxy-agent-5.0.0.tgz#7c0f364e7b1cf4a7a437e71253bed72e9004be60"

@@ -27,7 +27,7 @@
     "cypress:test": "start-server-and-test start http://localhost:8080 cypress",
     "cypress:record": "cypress run --record --key 0a753295-339a-4351-bf1d-6b91d4bcb937",
     "cypress:runner": "start-server-and-test start http://localhost:8080 cypress:record",
-    "test": "jest -u"
+    "snyk": "snyk test"
   },
   "dependencies": {
     "@emotion/core": "^11.0.0-next.10",
@@ -92,6 +92,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.0",
     "snowpack": "^3.8.8",
+    "snyk": "^1.766.0",
     "start-server-and-test": "^1.14.0",
     "stylelint": "^14.1.0",
     "stylelint-config-recommended": "^6.0.0",
