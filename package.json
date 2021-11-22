@@ -34,7 +34,6 @@
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
     "classnames": "^2.3.1",
-    "cypress": "^9.0.0",
     "focus-visible": "^5.2.0"
   },
   "publishConfig": {
@@ -42,6 +41,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
+    "cypress": "^9.0.0",
     "@babel/core": "^7.16.0",
     "@babel/plugin-proposal-optional-chaining": "^7.16.0",
     "@babel/plugin-transform-runtime": "^7.16.4",
