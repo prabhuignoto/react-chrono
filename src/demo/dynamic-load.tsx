@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <div style={{ width: "700px", height: "650px" }}>
+      <div style={{ width: "650px", height: "650px" }}>
         <Chrono
           items={items}
           mode="VERTICAL_ALTERNATING"
