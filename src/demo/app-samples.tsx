@@ -55,7 +55,7 @@ export const VerticalBasic: FunctionComponent<{
         items={items}
         mode="VERTICAL"
         slideShow
-        cardWidth={650}
+        cardWidth={700}
         slideItemDuration={2500}
         scrollable={{scrollbar:   false}}
         theme={{cardBgColor:  "#fff",  cardForeColor:  "blue", titleColor: "red"}}
