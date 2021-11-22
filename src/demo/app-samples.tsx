@@ -185,7 +185,7 @@ export const VerticalCustomContent: FunctionComponent<{
       >
         <div>
           <div style={{ width: "250px", height: "250px" }}>
-            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif" />
+            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif" alt="github" />
           </div>
         </div>
         <div>
@@ -253,7 +253,7 @@ export const VerticalCustomContent2: FunctionComponent<{
       >
         <div>
           <div style={{ width: "250px", height: "250px" }}>
-            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif" />
+            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif" alt="github"/>
           </div>
         </div>
         <div>
