@@ -67,7 +67,7 @@ context('Chrono.Vertical.Alternating.Mixed', () => {
       .eq(1)
       .find('.card-description')
       .should('have.class', 'show-less');
-    cy.scrollTo(500);
+    // cy.scrollTo(700);
     cy.get('.vertical-item-row').eq(1).find('.show-more').click();
     cy.wait(500);
     cy.get('.vertical-item-row')
