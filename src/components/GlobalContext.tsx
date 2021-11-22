@@ -12,6 +12,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
     {
       cardHeight: 200,
       useReadMore: true,
+      borderLessCards: false,
     },
     props,
   );

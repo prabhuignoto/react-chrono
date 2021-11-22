@@ -47,3 +47,10 @@
   justify-items: center;
   min-height: 100vh;
 }
+
+.app-links {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}

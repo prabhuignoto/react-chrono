@@ -109,6 +109,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
           theme={theme}
           title={cardTitle}
           url={url}
+          flip={flipLayout}
         />
       </TimelineCardContentWrapper>
     );

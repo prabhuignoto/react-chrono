@@ -40,6 +40,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onRestartSlideshow,
     onTimelineUpdated,
     onItemSelected,
+    onOutlineSelection,
     slideShowEnabled,
     slideShowRunning,
     theme,
@@ -53,6 +54,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     disableNavOnKey,
     cardPositionHorizontal,
     onScrollEnd,
+    enableOutline,
   } = useContext(GlobalContext);
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
@@ -130,6 +132,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       }
     }
   };
+
+  useEffect(() => {
+    if (items.length && items[activeTimelineItem]) {
+      onItemSelected && onItemSelected(items[activeTimelineItem]);
+    }
+  }, [activeTimelineItem]);
 
   const handleScroll = useCallback(
     (scroll: Partial<Scroll>) => {
@@ -231,6 +239,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         className={`${mode.toLowerCase()} timeline-main-wrapper`}
         id="timeline-main-wrapper"
         theme={theme}
+        mode={mode}
         onScroll={(ev) => {
           const target = ev.target as HTMLElement;
           let scrolled = 0;
@@ -256,13 +265,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
             contentDetailsChildren={contentDetailsChildren}
-            iconChildren={iconChildren}
             hasFocus={hasFocus}
+            iconChildren={iconChildren}
             items={items as TimelineCardModel[]}
+            mode={mode}
             onClick={handleTimelineItemClick}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+            onOutlineSelection={onOutlineSelection}
             slideShowRunning={slideShowRunning}
             theme={theme}
+            enableOutline={enableOutline}
           />
         ) : null}
 
@@ -275,12 +287,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               contentDetailsChildren={contentDetailsChildren}
               handleItemClick={handleTimelineItemClick}
               hasFocus={hasFocus}
+              iconChildren={iconChildren}
               items={items as TimelineCardModel[]}
+              mode={mode}
               onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
               slideShowRunning={slideShowRunning}
               theme={theme}
               wrapperId={id.current}
-              iconChildren={iconChildren}
             />
           </TimelineMain>
         ) : null}
@@ -292,13 +305,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             alternateCards={false}
             autoScroll={handleScroll}
             contentDetailsChildren={contentDetailsChildren}
-            iconChildren={iconChildren}
             hasFocus={hasFocus}
+            iconChildren={iconChildren}
             items={items as TimelineCardModel[]}
+            mode={mode}
             onClick={handleTimelineItemClick}
             onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+            onOutlineSelection={onOutlineSelection}
             slideShowRunning={slideShowRunning}
             theme={theme}
+            enableOutline={enableOutline}
           />
         ) : null}
       </TimelineMainWrapper>

@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { TimelineVerticalModel } from '../../models/TimelineVerticalModel';
+import { TimelineOutline } from '../timeline-elements/timeline-outline/timeline-outline';
 import TimelineVerticalItem from './timeline-vertical-item';
 import { TimelineVerticalWrapper } from './timeline-vertical.styles';
 
@@ -8,11 +9,14 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
   alternateCards = true,
   autoScroll,
   contentDetailsChildren,
+  enableOutline,
   hasFocus,
   iconChildren,
   items,
+  mode,
   onClick,
   onElapsed,
+  onOutlineSelection,
   slideShowRunning,
   theme,
 }: TimelineVerticalModel) => {
@@ -32,8 +36,25 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
   // todo remove this
   const handleOnShowMore = useCallback(() => {}, []);
 
+  const outlineItems = useMemo(
+    () =>
+      items.map((item) => ({
+        id: Math.random().toString(16).slice(2),
+        name: item.title,
+      })),
+    [items.length],
+  );
+
   return (
     <TimelineVerticalWrapper data-testid="tree-main" role="list">
+      {enableOutline && (
+        <TimelineOutline
+          theme={theme}
+          mode={mode}
+          items={outlineItems}
+          onSelect={onOutlineSelection}
+        />
+      )}
       {items.map((item, index) => {
         let className = '';
 

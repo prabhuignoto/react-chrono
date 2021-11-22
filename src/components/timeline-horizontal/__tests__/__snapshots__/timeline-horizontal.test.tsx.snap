@@ -2,15 +2,15 @@
 
 exports[`Test Collection Horizontal render 1`] = `
 <ul
-  class="horizontal timeline-horz-container css-8j3kj5"
+  class="horizontal timeline-horz-container css-1su7dnn"
   data-testid="timeline-collection"
 >
   <li
-    class="timeline-horz-item-container css-gaxs3r"
+    class="timeline-horz-item-container css-1is0751"
     width="200"
   >
     <div
-      class="css-u5v0fr"
+      class="css-1sriuo2"
       data-testid="timeline-item"
     >
       <div
@@ -18,16 +18,16 @@ exports[`Test Collection Horizontal render 1`] = `
       >
         <div
           aria-label="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
-          class="timeline-circle in-active css-1hf8j5"
+          class="timeline-circle in-active css-1kmt0kk"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class=" css-1v2vum0"
+        class=" css-1x6zwos"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1fveydr"
+          class="timeline-item-title css-ia3lzu"
         >
           June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
         </div>
@@ -35,11 +35,11 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="timeline-horz-item-container css-gaxs3r"
+    class="timeline-horz-item-container css-1is0751"
     width="200"
   >
     <div
-      class="css-u5v0fr"
+      class="css-1sriuo2"
       data-testid="timeline-item"
     >
       <div
@@ -47,16 +47,16 @@ exports[`Test Collection Horizontal render 1`] = `
       >
         <div
           aria-label="July 28, 1914"
-          class="timeline-circle in-active css-1hf8j5"
+          class="timeline-circle in-active css-1kmt0kk"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class=" css-1v2vum0"
+        class=" css-1x6zwos"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1fveydr"
+          class="timeline-item-title css-ia3lzu"
         >
           July 28, 1914
         </div>
@@ -64,11 +64,11 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="timeline-horz-item-container css-gaxs3r"
+    class="timeline-horz-item-container css-1is0751"
     width="200"
   >
     <div
-      class="css-u5v0fr"
+      class="css-1sriuo2"
       data-testid="timeline-item"
     >
       <div
@@ -76,16 +76,16 @@ exports[`Test Collection Horizontal render 1`] = `
       >
         <div
           aria-label="August 1–28, 1914"
-          class="timeline-circle in-active css-1hf8j5"
+          class="timeline-circle in-active css-1kmt0kk"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class=" css-1v2vum0"
+        class=" css-1x6zwos"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1fveydr"
+          class="timeline-item-title css-ia3lzu"
         >
           August 1–28, 1914
         </div>
@@ -93,11 +93,11 @@ exports[`Test Collection Horizontal render 1`] = `
     </div>
   </li>
   <li
-    class="timeline-horz-item-container css-gaxs3r"
+    class="timeline-horz-item-container css-1is0751"
     width="200"
   >
     <div
-      class="css-u5v0fr"
+      class="css-1sriuo2"
       data-testid="timeline-item"
     >
       <div
@@ -105,16 +105,16 @@ exports[`Test Collection Horizontal render 1`] = `
       >
         <div
           aria-label="September 6, 1914"
-          class="timeline-circle in-active css-1hf8j5"
+          class="timeline-circle in-active css-1kmt0kk"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class=" css-1v2vum0"
+        class=" css-1x6zwos"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1fveydr"
+          class="timeline-item-title css-ia3lzu"
         >
           September 6, 1914
         </div>
@@ -126,15 +126,15 @@ exports[`Test Collection Horizontal render 1`] = `
 
 exports[`Test Collection Tree render 1`] = `
 <ul
-  class="horizontal timeline-horz-container css-8j3kj5"
+  class="horizontal timeline-horz-container css-1su7dnn"
   data-testid="timeline-collection"
 >
   <li
-    class="timeline-horz-item-container css-gaxs3r"
+    class="timeline-horz-item-container css-1is0751"
     width="200"
   >
     <div
-      class="css-u5v0fr"
+      class="css-1sriuo2"
       data-testid="timeline-item"
     >
       <div
@@ -142,16 +142,16 @@ exports[`Test Collection Tree render 1`] = `
       >
         <div
           aria-label="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
-          class="timeline-circle in-active css-1hf8j5"
+          class="timeline-circle in-active css-1kmt0kk"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class=" css-1v2vum0"
+        class=" css-1x6zwos"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1fveydr"
+          class="timeline-item-title css-ia3lzu"
         >
           June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
         </div>
@@ -159,11 +159,11 @@ exports[`Test Collection Tree render 1`] = `
     </div>
   </li>
   <li
-    class="timeline-horz-item-container css-gaxs3r"
+    class="timeline-horz-item-container css-1is0751"
     width="200"
   >
     <div
-      class="css-u5v0fr"
+      class="css-1sriuo2"
       data-testid="timeline-item"
     >
       <div
@@ -171,16 +171,16 @@ exports[`Test Collection Tree render 1`] = `
       >
         <div
           aria-label="July 28, 1914"
-          class="timeline-circle in-active css-1hf8j5"
+          class="timeline-circle in-active css-1kmt0kk"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class=" css-1v2vum0"
+        class=" css-1x6zwos"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1fveydr"
+          class="timeline-item-title css-ia3lzu"
         >
           July 28, 1914
         </div>
@@ -188,11 +188,11 @@ exports[`Test Collection Tree render 1`] = `
     </div>
   </li>
   <li
-    class="timeline-horz-item-container css-gaxs3r"
+    class="timeline-horz-item-container css-1is0751"
     width="200"
   >
     <div
-      class="css-u5v0fr"
+      class="css-1sriuo2"
       data-testid="timeline-item"
     >
       <div
@@ -200,16 +200,16 @@ exports[`Test Collection Tree render 1`] = `
       >
         <div
           aria-label="August 1–28, 1914"
-          class="timeline-circle in-active css-1hf8j5"
+          class="timeline-circle in-active css-1kmt0kk"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class=" css-1v2vum0"
+        class=" css-1x6zwos"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1fveydr"
+          class="timeline-item-title css-ia3lzu"
         >
           August 1–28, 1914
         </div>
@@ -217,11 +217,11 @@ exports[`Test Collection Tree render 1`] = `
     </div>
   </li>
   <li
-    class="timeline-horz-item-container css-gaxs3r"
+    class="timeline-horz-item-container css-1is0751"
     width="200"
   >
     <div
-      class="css-u5v0fr"
+      class="css-1sriuo2"
       data-testid="timeline-item"
     >
       <div
@@ -229,16 +229,16 @@ exports[`Test Collection Tree render 1`] = `
       >
         <div
           aria-label="September 6, 1914"
-          class="timeline-circle in-active css-1hf8j5"
+          class="timeline-circle in-active css-1kmt0kk"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class=" css-1v2vum0"
+        class=" css-1x6zwos"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1fveydr"
+          class="timeline-item-title css-ia3lzu"
         >
           September 6, 1914
         </div>
@@ -250,15 +250,15 @@ exports[`Test Collection Tree render 1`] = `
 
 exports[`Test Collection Vertical render 1`] = `
 <ul
-  class="horizontal timeline-horz-container css-8j3kj5"
+  class="horizontal timeline-horz-container css-1su7dnn"
   data-testid="timeline-collection"
 >
   <li
-    class="timeline-horz-item-container css-gaxs3r"
+    class="timeline-horz-item-container css-1is0751"
     width="200"
   >
     <div
-      class="css-u5v0fr"
+      class="css-1sriuo2"
       data-testid="timeline-item"
     >
       <div
@@ -266,16 +266,16 @@ exports[`Test Collection Vertical render 1`] = `
       >
         <div
           aria-label="June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914"
-          class="timeline-circle in-active css-1hf8j5"
+          class="timeline-circle in-active css-1kmt0kk"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class=" css-1v2vum0"
+        class=" css-1x6zwos"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1fveydr"
+          class="timeline-item-title css-ia3lzu"
         >
           June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914
         </div>
@@ -283,11 +283,11 @@ exports[`Test Collection Vertical render 1`] = `
     </div>
   </li>
   <li
-    class="timeline-horz-item-container css-gaxs3r"
+    class="timeline-horz-item-container css-1is0751"
     width="200"
   >
     <div
-      class="css-u5v0fr"
+      class="css-1sriuo2"
       data-testid="timeline-item"
     >
       <div
@@ -295,16 +295,16 @@ exports[`Test Collection Vertical render 1`] = `
       >
         <div
           aria-label="July 28, 1914"
-          class="timeline-circle in-active css-1hf8j5"
+          class="timeline-circle in-active css-1kmt0kk"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class=" css-1v2vum0"
+        class=" css-1x6zwos"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1fveydr"
+          class="timeline-item-title css-ia3lzu"
         >
           July 28, 1914
         </div>
@@ -312,11 +312,11 @@ exports[`Test Collection Vertical render 1`] = `
     </div>
   </li>
   <li
-    class="timeline-horz-item-container css-gaxs3r"
+    class="timeline-horz-item-container css-1is0751"
     width="200"
   >
     <div
-      class="css-u5v0fr"
+      class="css-1sriuo2"
       data-testid="timeline-item"
     >
       <div
@@ -324,16 +324,16 @@ exports[`Test Collection Vertical render 1`] = `
       >
         <div
           aria-label="August 1–28, 1914"
-          class="timeline-circle in-active css-1hf8j5"
+          class="timeline-circle in-active css-1kmt0kk"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class=" css-1v2vum0"
+        class=" css-1x6zwos"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1fveydr"
+          class="timeline-item-title css-ia3lzu"
         >
           August 1–28, 1914
         </div>
@@ -341,11 +341,11 @@ exports[`Test Collection Vertical render 1`] = `
     </div>
   </li>
   <li
-    class="timeline-horz-item-container css-gaxs3r"
+    class="timeline-horz-item-container css-1is0751"
     width="200"
   >
     <div
-      class="css-u5v0fr"
+      class="css-1sriuo2"
       data-testid="timeline-item"
     >
       <div
@@ -353,16 +353,16 @@ exports[`Test Collection Vertical render 1`] = `
       >
         <div
           aria-label="September 6, 1914"
-          class="timeline-circle in-active css-1hf8j5"
+          class="timeline-circle in-active css-1kmt0kk"
           data-testid="timeline-circle"
         />
       </div>
       <div
-        class=" css-1v2vum0"
+        class=" css-1x6zwos"
         data-testid="timeline-title"
       >
         <div
-          class="timeline-item-title css-1fveydr"
+          class="timeline-item-title css-ia3lzu"
         >
           September 6, 1914
         </div>

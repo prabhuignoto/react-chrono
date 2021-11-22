@@ -2,7 +2,7 @@
 
 exports[`Test Timeline Item render - Horizontal 1`] = `
 <div
-  class="css-u5v0fr"
+  class="css-1sriuo2"
   data-testid="timeline-item"
 >
   <div
@@ -10,16 +10,16 @@ exports[`Test Timeline Item render - Horizontal 1`] = `
   >
     <div
       aria-label="test title"
-      class="timeline-circle active css-1hf8j5"
+      class="timeline-circle active css-1kmt0kk"
       data-testid="timeline-circle"
     />
   </div>
   <div
-    class=" css-1v2vum0"
+    class=" css-1x6zwos"
     data-testid="timeline-title"
   >
     <div
-      class="timeline-item-title active css-1fveydr"
+      class="timeline-item-title active css-ia3lzu"
     >
       test title
     </div>
@@ -29,7 +29,7 @@ exports[`Test Timeline Item render - Horizontal 1`] = `
 
 exports[`Test Timeline Item render - Vertical 1`] = `
 <div
-  class="css-u5v0fr"
+  class="css-1sriuo2"
   data-testid="timeline-item"
 >
   <div
@@ -37,16 +37,16 @@ exports[`Test Timeline Item render - Vertical 1`] = `
   >
     <div
       aria-label="test title"
-      class="timeline-circle active css-1hf8j5"
+      class="timeline-circle active css-1kmt0kk"
       data-testid="timeline-circle"
     />
   </div>
   <div
-    class=" css-1v2vum0"
+    class=" css-1x6zwos"
     data-testid="timeline-title"
   >
     <div
-      class="timeline-item-title active css-1fveydr"
+      class="timeline-item-title active css-ia3lzu"
     >
       test title
     </div>

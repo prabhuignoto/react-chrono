@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import { TimelineContentModel } from '../../../models/TimelineContentModel';
 import { MediaState } from '../../../models/TimelineMediaModel';
+import { TimelineMode } from '../../../models/TimelineModel';
 import { GlobalContext } from '../../GlobalContext';
 import ChevronIcon from '../../icons/chev-right';
 import { MemoSubTitle, MemoTitle } from '../memoized';
@@ -22,6 +23,7 @@ import {
   TimelineContentDetailsWrapper,
   TimelineItemContentWrapper,
   TimelineSubContent,
+  TriangleIconWrapper,
 } from './timeline-card-content.styles';
 
 const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
@@ -29,17 +31,19 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
     ({
       active,
       content,
-      customContent,
       detailedText,
-      hasFocus,
       id,
       media,
-      onClick,
-      onElapsed,
       onShowMore,
       slideShowActive,
+      onElapsed,
       theme,
       title,
+      onClick,
+      customContent,
+      hasFocus,
+      flip,
+      branchDir,
       url,
     }: TimelineContentModel) => {
       const [showMore, setShowMore] = useState(false);
@@ -63,6 +67,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         slideItemDuration = 2000,
         useReadMore,
         cardWidth,
+        borderLessCards,
       } = useContext(GlobalContext);
 
       const canShowProgressBar = useMemo(() => {
@@ -214,6 +219,23 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
       }, [active, paused, slideShowActive, showMore]);
 
+      const triangleDir = useMemo(() => {
+        if (flip) {
+          if (branchDir === 'right') {
+            return 'left';
+          } else {
+            return 'right';
+          }
+        }
+        return branchDir;
+      }, [branchDir, flip]);
+
+      const canShowTriangleIcon = useMemo(() => {
+        return (['VERTICAL', 'VERTICAL_ALTERNATING'] as TimelineMode[]).some(
+          (m) => m === mode,
+        );
+      }, [mode]);
+
       return (
         <TimelineItemContentWrapper
           className={contentClass}
@@ -264,6 +286,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             ref={detailsRef}
             theme={theme}
             useReadMore={useReadMore}
+            borderLess={borderLessCards}
           >
             {customContent ? (
               <>{customContent}</>
@@ -317,6 +340,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               ref={progressRef}
               startWidth={startWidth}
             ></SlideShowProgressBar>
+          )}
+
+          {canShowTriangleIcon && (
+            <TriangleIconWrapper
+              dir={triangleDir}
+              theme={theme}
+            ></TriangleIconWrapper>
           )}
         </TimelineItemContentWrapper>
       );
