@@ -83,6 +83,8 @@ export const TimelineCardContentWrapper = styled.div<{
 }>`
   visibility: hidden;
   position: relative;
+  display: flex;
+  align-items: center;
 
   ${(p) => {
     if (p.alternateCards) {
@@ -99,9 +101,11 @@ export const TimelineCardContentWrapper = styled.div<{
       return `
         &.left {
           order: 1;
+          justify-content: flex-end;
         }
         &.right {
           order: 3;
+          justify-content: flex-start;
         }
       `;
     } else {
