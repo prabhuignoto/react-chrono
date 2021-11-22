@@ -56,7 +56,7 @@ export const ComponentContainerTree = styled.div<{ type?: string }>`
       case 'desktop':
         return `height: 600px; width: 75%;`;
       case 'big-screen':
-        return `height: 650px; width: 100%;`;
+        return `height: 90vh; width: 100%;`;
       case 'tablet':
         return `height: 650px; width: 100%;`;
       case 'mobile':
