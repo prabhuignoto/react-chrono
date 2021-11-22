@@ -80,15 +80,12 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       return;
     }
 
-    // console.log('useEffect', _items, timeLineItems)
-
     if (timeLineItems.length && _items.length > timeLineItems.length) {
       console.log('updateItems => before', _items);
       newItems = updateItems(_items);
       console.log('updateItems => after', newItems);
     } else if (_items.length) {
       newItems = initItems(_items);
-      // console.log('initItems', newItems);
     }
 
     if (newItems.length) {

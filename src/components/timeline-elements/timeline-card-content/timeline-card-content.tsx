@@ -254,6 +254,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           ref={containerRef}
           tabIndex={0}
           theme={theme}
+          borderLess={borderLessCards}
         >
           <TimelineCardHeader>
             {/* main title */}

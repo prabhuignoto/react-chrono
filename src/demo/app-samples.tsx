@@ -55,6 +55,7 @@ export const VerticalBasic: FunctionComponent<{
         items={items}
         mode="VERTICAL"
         slideShow
+        cardWidth={650}
         slideItemDuration={2500}
         scrollable={{scrollbar:   false}}
         theme={{cardBgColor:  "#fff",  cardForeColor:  "blue", titleColor: "red"}}
@@ -84,6 +85,7 @@ export const VerticalTree: FunctionComponent<{
         scrollable={{ scrollbar: false }}
         allowDynamicUpdate
         cardHeight={200}
+        cardWidth={450}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         onScrollEnd={() => console.log('end reached')}
         enableOutline
@@ -181,6 +183,7 @@ export const VerticalCustomContent: FunctionComponent<{
       <Chrono
         mode="VERTICAL"
         cardHeight={200}
+        cardWidth={650}
         scrollable
       >
         <div>
@@ -248,6 +251,7 @@ export const VerticalCustomContent2: FunctionComponent<{
       <Chrono
         mode="VERTICAL"
         cardHeight={200}
+        cardWidth={650}
         scrollable
         flipLayout
       >
