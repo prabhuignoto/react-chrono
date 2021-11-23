@@ -20,7 +20,7 @@ export const HorizontalBasic: React.FunctionComponent<{
         <Chrono
           items={data}
           mode="HORIZONTAL"
-          cardHeight={200}
+          cardHeight={150}
           slideShow
           slideItemDuration={2550}
           itemWidth={200}
