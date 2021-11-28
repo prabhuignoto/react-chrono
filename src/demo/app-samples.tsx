@@ -34,13 +34,26 @@ export const HorizontalBasic: React.FunctionComponent<{
             <img src="color-circle.svg" alt="github" />
           </div>
         </Chrono>
-        {/* <Chrono
+      </ComponentContainer>
+      {/* <ComponentContainer type={'big-screen'}>
+        <Chrono
           items={data}
           mode="HORIZONTAL"
-          cardHeight={200}
+          cardHeight={150}
+          slideShow
+          slideItemDuration={2550}
+          itemWidth={200}
+          onItemSelected={selected => console.log(selected)}
         >
-        </Chrono> */}
-      </ComponentContainer>
+          <div className="chrono-icons">
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+          </div>
+        </Chrono>
+      </ComponentContainer> */}
     </Horizontal>
   );
 };
