@@ -59,8 +59,6 @@ test('Test Timeline Item render - Horizontal Class', () => {
   const element = screen.getByTestId('timeline-item');
   const titleElement = screen.getByTestId('timeline-title');
 
-  console.log(element.className);
-
   expect(element).toHaveClass('horizontal');
   expect(titleElement).toHaveClass('horizontal top');
 });

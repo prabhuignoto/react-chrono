@@ -247,7 +247,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
             scrolled = target.scrollTop + target.clientHeight;
 
-            if (target.scrollHeight === scrolled) {
+            if (target.scrollHeight - scrolled < 1) {
               onScrollEnd && onScrollEnd();
             }
           } else {

@@ -20,7 +20,7 @@ export const HorizontalBasic: React.FunctionComponent<{
         <Chrono
           items={data}
           mode="HORIZONTAL"
-          cardHeight={200}
+          cardHeight={150}
           slideShow
           slideItemDuration={2550}
           itemWidth={200}
@@ -34,13 +34,26 @@ export const HorizontalBasic: React.FunctionComponent<{
             <img src="color-circle.svg" alt="github" />
           </div>
         </Chrono>
-        {/* <Chrono
+      </ComponentContainer>
+      {/* <ComponentContainer type={'big-screen'}>
+        <Chrono
           items={data}
           mode="HORIZONTAL"
-          cardHeight={200}
+          cardHeight={150}
+          slideShow
+          slideItemDuration={2550}
+          itemWidth={200}
+          onItemSelected={selected => console.log(selected)}
         >
-        </Chrono> */}
-      </ComponentContainer>
+          <div className="chrono-icons">
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+          </div>
+        </Chrono>
+      </ComponentContainer> */}
     </Horizontal>
   );
 };
@@ -55,6 +68,7 @@ export const VerticalBasic: FunctionComponent<{
         items={items}
         mode="VERTICAL"
         slideShow
+        cardWidth={700}
         slideItemDuration={2500}
         scrollable={{scrollbar:   false}}
         theme={{cardBgColor:  "#fff",  cardForeColor:  "blue", titleColor: "red"}}
@@ -81,31 +95,33 @@ export const VerticalTree: FunctionComponent<{
         theme={theme}
         slideShow
         slideItemDuration={2350}
-        scrollable={{scrollbar: false}}
+        scrollable={{ scrollbar: false }}
         allowDynamicUpdate
         cardHeight={200}
+        cardWidth={450}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         onScrollEnd={() => console.log('end reached')}
         enableOutline
       >
         <div className="chrono-icons">
-          <img src="https://img.icons8.com/ios-filled/100/000000/twitter.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/about.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/contacts.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/briefcase.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/idea.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/sun.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/info.png" alt="twitter"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/calendar.png" alt="twitter"/>
+          <img src="https://img.icons8.com/ios-filled/100/000000/twitter.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/about.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/contacts.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/briefcase.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/idea.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/sun.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/info.png" alt="twitter" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/calendar.png" alt="twitter" />
           <img src="https://img.icons8.com/ios-filled/50/000000/mailbox-closed-flag-down.png" alt="mail-box" />
-          <img src="https://img.icons8.com/ios-filled/50/000000/pinterest.png" alt="pinterest"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/reddit.png" alt="reddit"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/facebook.png" alt="reddit"/>
-          <img src="https://img.icons8.com/ios-filled/100/000000/stumbleupon.png" alt="reddit"/>
+          <img src="https://img.icons8.com/ios-filled/50/000000/pinterest.png" alt="pinterest" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/reddit.png" alt="reddit" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/facebook.png" alt="reddit" />
+          <img src="https://img.icons8.com/ios-filled/100/000000/stumbleupon.png" alt="reddit" />
         </div>
       </Chrono>
     </ComponentContainerTree>
-  </Vertical>}
+  </Vertical>
+}
   ;
 
 export const VerticalTreeMixed: FunctionComponent<{
@@ -120,7 +136,7 @@ export const VerticalTreeMixed: FunctionComponent<{
         cardHeight={200}
         cardWidth={450}
         scrollable
-        // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
+      // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
     </ComponentContainerTree>
   </Vertical>
@@ -165,7 +181,7 @@ export const VerticalTreeSlideshow: FunctionComponent<{
         mode="VERTICAL_ALTERNATING"
         cardHeight={200}
         scrollable
-        // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
+      // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
     </ComponentContainerTree>
   </Vertical>
@@ -178,13 +194,14 @@ export const VerticalCustomContent: FunctionComponent<{
   <Vertical>
     <ComponentContainerTree type={type}>
       <Chrono
-        mode="VERTICAL" 
+        mode="VERTICAL"
         cardHeight={200}
+        cardWidth={650}
         scrollable
       >
         <div>
-          <div style={{width: "250px", height: "250px"}}>
-            <img style={{maxWidth:  "100%", maxHeight:  "100%"}}  src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif"/>
+          <div style={{ width: "250px", height: "250px" }}>
+            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif" alt="github" />
           </div>
         </div>
         <div>
@@ -207,7 +224,7 @@ export const VerticalCustomContent: FunctionComponent<{
             Gamelin instead committed the forces under his command, three mechanised armies, the French First and Seventh Armies and the British Expeditionary Force (BEF), to the River Dyle.
           </p>
         </div>
-        <div style={{margin: "1rem"}}>
+        <div style={{ margin: "1rem" }}>
           <h3>Table</h3>
           <table>
             <thead>
@@ -245,14 +262,15 @@ export const VerticalCustomContent2: FunctionComponent<{
   <Vertical>
     <ComponentContainerTree type={type}>
       <Chrono
-        mode="VERTICAL" 
+        mode="VERTICAL"
         cardHeight={200}
+        cardWidth={650}
         scrollable
         flipLayout
       >
         <div>
-          <div style={{width: "250px", height: "250px"}}>
-            <img style={{maxWidth:  "100%", maxHeight:  "100%"}}  src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif"/>
+          <div style={{ width: "250px", height: "250px" }}>
+            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif" alt="github"/>
           </div>
         </div>
         <div>
@@ -275,7 +293,7 @@ export const VerticalCustomContent2: FunctionComponent<{
             Gamelin instead committed the forces under his command, three mechanised armies, the French First and Seventh Armies and the British Expeditionary Force (BEF), to the River Dyle.
           </p>
         </div>
-        <div style={{margin: "1rem"}}>
+        <div style={{ margin: "1rem" }}>
           <h3>Table</h3>
           <table>
             <thead>

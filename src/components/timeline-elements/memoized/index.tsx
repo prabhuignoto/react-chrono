@@ -7,6 +7,7 @@ import {
 
 interface Title {
   title?: string;
+  url?: string;
   theme?: Theme;
   color?: string;
   dir?: string;
@@ -21,7 +22,7 @@ interface Content {
 }
 
 const MemoTitle = React.memo(
-  ({ title, theme, color, dir, active }: Title) =>
+  ({ title, url, theme, color, dir, active }: Title) =>
     title && theme ? (
       <TimelineCardTitle
         className={active ? 'active card-title' : 'card-title'}
@@ -29,7 +30,9 @@ const MemoTitle = React.memo(
         style={{ color }}
         dir={dir}
       >
-        {title}
+        <a href={url} target="_blank" rel="noreferrer">
+          {title}
+        </a>
       </TimelineCardTitle>
     ) : null,
   () => true,

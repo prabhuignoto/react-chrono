@@ -44,6 +44,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       hasFocus,
       flip,
       branchDir,
+      url,
     }: TimelineContentModel) => {
       const [showMore, setShowMore] = useState(false);
       const detailsRef = useRef<HTMLDivElement>(null);
@@ -257,7 +258,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         >
           <TimelineCardHeader>
             {/* main title */}
-            {!media && <MemoTitle title={title} theme={theme} />}
+            {!media && <MemoTitle title={title} theme={theme} url={url} />}
             {/* main timeline text */}
             {!media && <MemoSubTitle content={content} theme={theme} />}
           </TimelineCardHeader>

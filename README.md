@@ -84,6 +84,7 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
     const items = [{
       title: "May 1940",
       cardTitle: "Dunkirk",
+      url: "http://www.history.com
       cardSubtitle:"Men of the British Expeditionary Force (BEF) wade out to..",
       cardDetailedText: "Men of the British Expeditionary Force (BEF) wade out to..",
       media: {
@@ -199,6 +200,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | cardSubtitle          | text displayed in the timeline card          | String |
 | cardDetailedText  | detailed text displayed in the timeline card | String or String[] |
 | media                | media object to set image or video.          | Object |
+| url                | url to be used in the title.          | String |
 
 ```sh
 {

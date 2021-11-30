@@ -39,6 +39,7 @@ export interface VerticalItemModel extends CommonVerticalModel {
   media?: Media;
   onShowMore?: () => void;
   title?: string;
+  url?: string;
   visible?: boolean;
   onActive: (
     pointOffset: number,

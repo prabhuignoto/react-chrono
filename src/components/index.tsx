@@ -57,23 +57,14 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   const updateItems = (items: TimelineItemModel[]) => {
     if (items) {
-      const newStartingPosition = items.length - timeLineItems.length;
+      const pos = timeLineItems.length;
 
-      const newItems = items
-        .slice(newStartingPosition + 1)
-        .map((item, index) => ({
-          ...item,
-          id: Math.random().toString(16).slice(2),
-          visible: true,
-          active: index === 0,
-        }));
-
-      const updatedLineItems = timeLineItems.map((item) => ({
+      return items.map((item, index) => ({
         ...item,
-        active: false,
+        id: Math.random().toString(16).slice(2),
+        visible: true,
+        active: index === pos,
       }));
-
-      return updatedLineItems.concat(newItems);
     } else {
       return [];
     }
@@ -90,7 +81,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }
 
     if (timeLineItems.length && _items.length > timeLineItems.length) {
+      console.log('updateItems => before', _items);
       newItems = updateItems(_items);
+      console.log('updateItems => after', newItems);
     } else if (_items.length) {
       newItems = initItems(_items);
     }

@@ -25,6 +25,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   cardDetailedText,
   cardSubtitle,
   cardTitle,
+  url,
   id,
   media,
   onClick,
@@ -100,6 +101,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           content={cardSubtitle}
           active={active}
           title={cardTitle}
+          url={url}
           detailedText={cardDetailedText}
           onShowMore={handleOnShowMore}
           theme={theme}
