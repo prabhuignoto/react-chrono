@@ -58,11 +58,41 @@ export const HorizontalBasic: React.FunctionComponent<{
   );
 };
 
+export const HorizontalInitalSelectedItem: React.FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({ items }) => {
+  return (
+    <Horizontal id="horizontal">
+      <ComponentContainer type={'big-screen'}>
+        <Chrono
+          items={data}
+          activeItemIndex={2}
+          mode="HORIZONTAL"
+          cardHeight={150}
+          slideShow
+          slideItemDuration={2550}
+          itemWidth={200}
+          onItemSelected={selected => console.log(selected)}
+        >
+          <div className="chrono-icons">
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+          </div>
+        </Chrono>
+      </ComponentContainer>
+    </Horizontal>
+  );
+};
+
 export const VerticalBasic: FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
 }> = ({ type, items }) => (
-  <Vertical id="vertical">  
+  <Vertical id="vertical">
     <ComponentContainerTree type={type}>
       <Chrono
         items={items}
@@ -70,8 +100,8 @@ export const VerticalBasic: FunctionComponent<{
         slideShow
         cardWidth={700}
         slideItemDuration={2500}
-        scrollable={{scrollbar:   false}}
-        theme={{cardBgColor:  "#fff",  cardForeColor:  "blue", titleColor: "red"}}
+        scrollable={{ scrollbar: false }}
+        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
         useReadMore={false}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
@@ -86,7 +116,7 @@ export const VerticalTree: FunctionComponent<{
   items: TimelineItemModel[],
   theme: Theme
 }> = ({ type, items, theme }) => {
-  
+
   return <Vertical id="tree">
     <ComponentContainerTree type={type}>
       <Chrono
@@ -270,7 +300,7 @@ export const VerticalCustomContent2: FunctionComponent<{
       >
         <div>
           <div style={{ width: "250px", height: "250px" }}>
-            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif" alt="github"/>
+            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src="https://cdn.tutsplus.com/net/uploads/2013/08/github-collab-retina-preview.gif" alt="github" />
           </div>
         </div>
         <div>

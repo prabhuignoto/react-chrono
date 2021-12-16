@@ -9,11 +9,6 @@ const toReactArray = React.Children.toArray;
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   props: Partial<TimelineProps>,
 ) => {
-  const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
-  const timeLineItemsRef = useRef<TimelineItemModel[]>();
-  const [slideShowActive, setSlideshowActive] = useState(false);
-  const [activeTimelineItem, setActiveTimelineItem] = useState(0);
-
   const {
     allowDynamicUpdate = false,
     children,
@@ -22,7 +17,13 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     slideShow = false,
     theme,
     onItemSelected,
+    activeItemIndex = 0,
   } = props;
+
+  const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
+  const timeLineItemsRef = useRef<TimelineItemModel[]>();
+  const [slideShowActive, setSlideshowActive] = useState(false);
+  const [activeTimelineItem, setActiveTimelineItem] = useState(activeItemIndex);
 
   const customTheme = Object.assign(
     {
@@ -38,21 +39,21 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   const initItems = (items?: TimelineItemModel[]) => {
     return items && items.length
       ? items.map((item, index) => {
-          return Object.assign({}, item, {
-            id: Math.random().toString(16).slice(2),
-            visible: true,
-            active: index === 0,
-          });
-        })
-      : Array.from({
-          length: React.Children.toArray(children).filter(
-            (item) => (item as any).props.className !== 'chrono-icons',
-          ).length,
-        }).map<Partial<TimelineItemModel>>((item, index) => ({
+        return Object.assign({}, item, {
           id: Math.random().toString(16).slice(2),
           visible: true,
-          active: index === 0,
-        }));
+          active: index === activeItemIndex,
+        });
+      })
+      : Array.from({
+        length: React.Children.toArray(children).filter(
+          (item) => (item as any).props.className !== 'chrono-icons',
+        ).length,
+      }).map<Partial<TimelineItemModel>>((item, index) => ({
+        id: Math.random().toString(16).slice(2),
+        visible: true,
+        active: index === activeItemIndex,
+      }));
   };
 
   const updateItems = (items: TimelineItemModel[]) => {
