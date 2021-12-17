@@ -450,30 +450,30 @@ Deep dive into wide variety of examples hosted as a Storybook.
 # install dependencies
 yarn install
 
-# start dev setup
-yarn run start
+# start dev
+yarn dev
 
 # run css linting
-yarn run lint:css
+yarn lint:css
 
 # eslint
-yarn run eslint
+yarn eslint
 
 # prettier
-yarn run lint
+yarn lint
 
 # package lib
-yarn run rollup
+yarn rollup
 ```
 
 ## 🧪Tests
 
 ```sh
   # run unit tests
-  yarn run test
+  yarn test
 
   # run cypress tests
-  yarn run cypress:test
+  yarn cypress:test
 ```
 
 ## 🤝Contributing
