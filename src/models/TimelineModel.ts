@@ -30,6 +30,7 @@ export interface TimelineModel extends TimelineProps {
  * @interface TimelineProps
  */
 export interface TimelineProps {
+  activeItemIndex?: number;
   allowDynamicUpdate?: boolean;
   cardHeight?: number;
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';

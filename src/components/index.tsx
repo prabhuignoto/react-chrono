@@ -9,11 +9,6 @@ const toReactArray = React.Children.toArray;
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   props: Partial<TimelineProps>,
 ) => {
-  const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
-  const timeLineItemsRef = useRef<TimelineItemModel[]>();
-  const [slideShowActive, setSlideshowActive] = useState(false);
-  const [activeTimelineItem, setActiveTimelineItem] = useState(0);
-
   const {
     allowDynamicUpdate = false,
     children,
@@ -22,7 +17,13 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     slideShow = false,
     theme,
     onItemSelected,
+    activeItemIndex = 0,
   } = props;
+
+  const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
+  const timeLineItemsRef = useRef<TimelineItemModel[]>();
+  const [slideShowActive, setSlideshowActive] = useState(false);
+  const [activeTimelineItem, setActiveTimelineItem] = useState(activeItemIndex);
 
   const customTheme = Object.assign(
     {
@@ -41,7 +42,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
           return Object.assign({}, item, {
             id: Math.random().toString(16).slice(2),
             visible: true,
-            active: index === 0,
+            active: index === activeItemIndex,
           });
         })
       : Array.from({
@@ -51,7 +52,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         }).map<Partial<TimelineItemModel>>((item, index) => ({
           id: Math.random().toString(16).slice(2),
           visible: true,
-          active: index === 0,
+          active: index === activeItemIndex,
         }));
   };
 
@@ -81,9 +82,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }
 
     if (timeLineItems.length && _items.length > timeLineItems.length) {
-      console.log('updateItems => before', _items);
       newItems = updateItems(_items);
-      console.log('updateItems => after', newItems);
     } else if (_items.length) {
       newItems = initItems(_items);
     }
