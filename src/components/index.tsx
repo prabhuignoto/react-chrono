@@ -82,9 +82,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }
 
     if (timeLineItems.length && _items.length > timeLineItems.length) {
-      console.log('updateItems => before', _items);
       newItems = updateItems(_items);
-      console.log('updateItems => after', newItems);
     } else if (_items.length) {
       newItems = initItems(_items);
     }

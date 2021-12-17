@@ -35,25 +35,6 @@ export const HorizontalBasic: React.FunctionComponent<{
           </div>
         </Chrono>
       </ComponentContainer>
-      {/* <ComponentContainer type={'big-screen'}>
-        <Chrono
-          items={data}
-          mode="HORIZONTAL"
-          cardHeight={150}
-          slideShow
-          slideItemDuration={2550}
-          itemWidth={200}
-          onItemSelected={selected => console.log(selected)}
-        >
-          <div className="chrono-icons">
-            <img src="color-circle.svg" alt="github" />
-            <img src="color-circle.svg" alt="github" />
-            <img src="color-circle.svg" alt="github" />
-            <img src="color-circle.svg" alt="github" />
-            <img src="color-circle.svg" alt="github" />
-          </div>
-        </Chrono>
-      </ComponentContainer> */}
     </Horizontal>
   );
 };
@@ -187,14 +168,6 @@ export const HorizontalSlideshow: FunctionComponent<{
         cardHeight={450}
         scrollable
       />
-      {/* <SandBox>
-        <a href="https://codesandbox.io/s/react-chrono-tree-text-slide-zytpi?fontsize=14&hidenavigation=1&theme=dark">
-          <img
-            alt="Edit react-chrono-tree-text-slide"
-            src="https://codesandbox.io/static/img/play-codesandbox.svg"
-          />
-        </a>
-      </SandBox> */}
     </ComponentContainer>
   </Horizontal>
 );
