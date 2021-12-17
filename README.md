@@ -155,7 +155,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 
 | name                    | description                                                                           | default      |
 | -----------------       | ------------------------------------------------------------------------------------- | ------------ |
-| activeItemIndex         | selects the active timeline item on load.                                              | false        |
+| activeItemIndex         | selects the active timeline item on load.                                              | 0        |
 | allowDynamicUpdate      | allows timeline items to be updated dynamically.                                      | false        |
 | borderLessCards         | removes the border & shadow from the timeline item cards.                           |    false         |
 | cardHeight              | sets the minimum height of the timeline card.                                         | 200          |
