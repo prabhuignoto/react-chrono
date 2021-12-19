@@ -41,6 +41,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onTimelineUpdated,
     onItemSelected,
     onOutlineSelection,
+    showAllCards,
     slideShowEnabled,
     slideShowRunning,
     theme,
@@ -288,6 +289,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               handleItemClick={handleTimelineItemClick}
               hasFocus={hasFocus}
               iconChildren={iconChildren}
+              showAllCards={showAllCards}
               items={items as TimelineCardModel[]}
               mode={mode}
               onElapsed={(id?: string) => handleTimelineItemClick(id, true)}

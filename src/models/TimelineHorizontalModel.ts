@@ -11,6 +11,7 @@ export interface TimelineHorizontalModel {
   mode?: TimelineMode;
   slideShowRunning?: boolean;
   theme?: Theme;
+  showAllCards?: boolean;
   wrapperId: string;
   onElapsed?: (id?: string) => void;
   contentDetailsChildren?: ReactNode | ReactNode[];

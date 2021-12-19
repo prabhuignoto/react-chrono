@@ -15,6 +15,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   wrapperId,
   theme,
   slideShowRunning,
+  showAllCards,
   onElapsed,
   contentDetailsChildren: children,
   hasFocus,
@@ -48,6 +49,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
       data-testid="timeline-collection"
     >
       {items.map((item, index) => (
+       showAllCards || item.active || (items[index-1]? items[index-1].active : false) ||(items[index+1]? items[index+1].active :false ) ?
         <TimelineItemWrapper
           key={item.id}
           width={itemWidth}
@@ -66,12 +68,14 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
             slideShowRunning={slideShowRunning}
             cardHeight={cardHeight}
             onElapsed={onElapsed}
+            showOnlyCircle={!showAllCards && ((items[index-1]? items[index-1].active : false) ||(items[index+1]? items[index+1].active :false ))}
             customContent={children ? (children as ReactNode[])[index] : null}
             onActive={handleOnActive}
             hasFocus={hasFocus}
             iconChild={iconChildColln[index]}
           />
         </TimelineItemWrapper>
+        : null
       ))}
     </TimelineHorizontalWrapper>
   );

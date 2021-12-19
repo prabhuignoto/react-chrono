@@ -21,6 +21,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     onScrollEnd,
     slideShow = false,
     theme,
+    showAllCards,
     onItemSelected,
   } = props;
 
@@ -177,6 +178,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         )}
         iconChildren={iconChildren}
         items={timeLineItems}
+        showAllCards={showAllCards}
         onFirst={handleFirst}
         onLast={handleLast}
         onNext={handleOnNext}

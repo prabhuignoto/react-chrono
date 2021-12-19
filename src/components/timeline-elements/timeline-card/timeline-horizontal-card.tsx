@@ -29,6 +29,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   onClick,
   onActive,
   onElapsed,
+  showOnlyCircle,
   slideShowRunning,
   theme,
   title,
@@ -103,7 +104,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         />
       </TimelineContentContainer>
     );
-  }, [active]);
+  }, [active, showOnlyCircle]);
 
   /*const showTimelineContent = () => {
     const ele = document.getElementById(wrapperId);
@@ -142,7 +143,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       >
         <TimelineItemTitle title={title} active={active} theme={theme} />
       </TimelineTitleContainer>
-      {timelineContent}
+      {!showOnlyCircle?timelineContent : null}
     </Wrapper>
   );
 };
