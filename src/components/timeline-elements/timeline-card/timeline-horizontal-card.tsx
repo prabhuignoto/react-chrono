@@ -104,7 +104,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         />
       </TimelineContentContainer>
     );
-  }, [active, showOnlyCircle]);
+  }, [active]);
 
   /*const showTimelineContent = () => {
     const ele = document.getElementById(wrapperId);

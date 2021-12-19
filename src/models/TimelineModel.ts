@@ -18,7 +18,6 @@ export interface TimelineModel extends TimelineProps {
   onOutlineSelection: (index: number) => void;
   onPrevious: () => void;
   onTimelineUpdated: (id: number) => void;
-  showAllCards?: boolean;
   slideItemDuration?: number;
   slideShowEnabled?: boolean;
   slideShowRunning?: boolean;
