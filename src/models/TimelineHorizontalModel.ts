@@ -6,7 +6,6 @@ import { TimelineMode } from './TimelineModel';
 export interface TimelineHorizontalModel {
   autoScroll: (t: Partial<Scroll>) => void;
   handleItemClick: (id?: string) => void;
-  activeTimelineItem: number;
   itemWidth?: number;
   items: TimelineCardModel[];
   mode?: TimelineMode;

@@ -96,7 +96,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       <TimelineContentContainer className={containerClass} ref={contentRef}>
         <TimelineCardContent
           content={cardSubtitle}
-          active={true}
+          active={active}
           title={cardTitle}
           url={url}
           onClick={onClick}
