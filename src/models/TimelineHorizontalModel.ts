@@ -6,6 +6,7 @@ import { TimelineMode } from './TimelineModel';
 export interface TimelineHorizontalModel {
   autoScroll: (t: Partial<Scroll>) => void;
   handleItemClick: (id?: string) => void;
+  activeTimelineItem: number;
   itemWidth?: number;
   items: TimelineCardModel[];
   mode?: TimelineMode;
@@ -16,6 +17,16 @@ export interface TimelineHorizontalModel {
   contentDetailsChildren?: ReactNode | ReactNode[];
   iconChildren?: ReactNode;
   hasFocus?: boolean;
+}
+
+export interface HorizontalCircleModel {
+  active?: boolean;
+  slideShowRunning?: boolean;
+  theme?: Theme;
+  id?: string;
+  onClick: (id?: string) => void;
+  onActive: (pointOffset: number) => void;
+  iconChild?: React.ReactNode;
 }
 
 export interface Scroll {

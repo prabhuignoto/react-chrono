@@ -113,6 +113,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   };
 
   const handleTimelineItemClick = (id?: string, isSlideShow?: boolean) => {
+    console.log('hadnling clicking');
     if (id) {
       for (let idx = 0; idx < items.length; idx++) {
         if (items[idx].id === id) {
@@ -141,6 +142,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   const handleScroll = useCallback(
     (scroll: Partial<Scroll>) => {
+      console.log('scrolling');
       const element = timelineMainRef.current;
       if (element) {
         setNewOffset(element, scroll);
@@ -283,6 +285,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           <TimelineMain className={mode.toLowerCase()}>
             <Outline color={theme && theme.primary} />
             <TimelineHorizontal
+              activeTimelineItem={activeTimelineItem}
               autoScroll={handleScroll}
               contentDetailsChildren={contentDetailsChildren}
               handleItemClick={handleTimelineItemClick}

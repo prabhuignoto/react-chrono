@@ -32,6 +32,7 @@ export const Wrapper = styled.div<{
 
   &.horizontal {
     justify-content: flex-start;
+    overflow: auto;
   }
 
   &.js-focus-visible :focus:not(.focus-visible) {
@@ -54,7 +55,7 @@ export const TimelineMainWrapper = styled.div<{
   overflow-y: ${(p) => (p.scrollable ? 'auto' : 'hidden')};
   overflow-x: hidden;
   overscroll-behavior: contain;
-  ${(p) => (p.mode === 'HORIZONTAL' ? 'position: relative' : '')};
+  ${(p) => (p.mode === 'HORIZONTAL' ? '' : '')};
   scroll-behavior: smooth;
   scrollbar-color: ${(p) => p.theme.primary} default;
   scrollbar-width: thin;
@@ -83,7 +84,7 @@ export const TimelineMainWrapper = styled.div<{
   }
 
   &.horizontal {
-    height: 6rem;
+    height: 100%;
   }
 `;
 
@@ -92,7 +93,7 @@ export const TimelineMain = styled.div`
   bottom: 0;
   display: flex;
   left: 0;
-  position: absolute;
+  overflow-x: auto;
   transition: all 0.2s ease;
 
   &.vertical {
@@ -110,6 +111,7 @@ export const Outline = styled.div<{ color?: string }>`
   margin-left: auto;
   margin-right: auto;
   position: absolute;
+  top: 10px;
   right: 0;
   width: 100%;
 `;

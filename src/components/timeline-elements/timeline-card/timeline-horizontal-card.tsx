@@ -11,6 +11,7 @@ import { TimelineCardModel } from '../../../models/TimelineItemModel';
 import { GlobalContext } from '../../GlobalContext';
 import TimelineCardContent from '../timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
+import HorizontalCircle from '../../timeline-horizontal/timeline-horizontal-cricle';
 import {
   Circle,
   CircleWrapper,
@@ -29,6 +30,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   id,
   media,
   onClick,
+  onActive,
   onElapsed,
   slideShowRunning,
   theme,
@@ -50,6 +52,12 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     }
   };
 
+  const handleOnActive = (offset: number) => {
+    if (contentRef.current) {
+      const { offsetLeft, clientWidth } = contentRef.current;
+      onActive(offsetLeft + offset, offsetLeft, clientWidth);
+    }
+  };
   useEffect(() => {
     if (active) {
       const circle = circleRef.current;
@@ -83,25 +91,15 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
 
   const titleClass = useMemo(() => cls(modeLower, position), []);
 
-  const circleClass = useMemo(
-    () =>
-      cls(
-        'timeline-circle',
-        { 'using-icon': !!iconChild },
-        modeLower,
-        active ? 'active' : 'in-active',
-      ),
-    [active],
-  );
-
   const timelineContent = useMemo(() => {
     return (
       <TimelineContentContainer className={containerClass} ref={contentRef}>
         <TimelineCardContent
           content={cardSubtitle}
-          active={active}
+          active={true}
           title={cardTitle}
           url={url}
+          onClick={onClick}
           detailedText={cardDetailedText}
           onShowMore={handleOnShowMore}
           theme={theme}
@@ -116,37 +114,44 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     );
   }, [active]);
 
-  const showTimelineContent = () => {
+  /*const showTimelineContent = () => {
     const ele = document.getElementById(wrapperId);
 
+
+    console.log(wrapperId);
     if (ele) {
       return ReactDOM.createPortal(timelineContent, ele);
     }
-  };
+  };*/
+  const Circle = useMemo(() => {
+    return (
+      <HorizontalCircle
+        active={active}
+        id={id}
+        onActive={handleOnActive}
+        onClick={onClick}
+        slideShowRunning={slideShowRunning}
+        iconChild={iconChild}
+        theme={theme}
+      />
+    );
+  }, [slideShowRunning, active]);
 
   return (
-    <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
-      {active && showTimelineContent()}
-
-      <CircleWrapper>
-        <Circle
-          className={circleClass}
-          onClick={handleClick}
-          ref={circleRef}
-          data-testid="timeline-circle"
-          theme={theme}
-          aria-label={title}
-        >
-          {iconChild ? iconChild : null}
-        </Circle>
-      </CircleWrapper>
-
+    <Wrapper
+      ref={wrapperRef}
+      className={modeLower}
+      data-testid="timeline-item"
+      style={{ display: 'flex', flexDirection: 'column' }}
+    >
+      {Circle}
       <TimelineTitleContainer
         className={titleClass}
         data-testid="timeline-title"
       >
         <TimelineItemTitle title={title} active={active} theme={theme} />
       </TimelineTitleContainer>
+      {timelineContent}
     </Wrapper>
   );
 };

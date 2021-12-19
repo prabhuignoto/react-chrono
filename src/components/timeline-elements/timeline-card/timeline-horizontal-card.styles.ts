@@ -118,7 +118,6 @@ export const TimelineTitleContainer = styled.div`
   }
 
   &.horizontal {
-    position: absolute;
     top: 0;
   }
 `;
@@ -129,10 +128,6 @@ export const TimelineContentContainer = styled.div<{
 }>`
   align-items: flex-start;
   animation: ${show} 0.25s ease-in;
-
-  &.horizontal {
-    min-width: 400px;
-  }
 
   &.vertical {
     width: calc(100% - 5em);

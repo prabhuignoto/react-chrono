@@ -30,6 +30,11 @@ export interface TimelineCardModel extends TimelineItemModel {
   }: Partial<Scroll>) => void;
   mode: TimelineMode;
   onClick: (id?: string) => void;
+  onActive: (
+    pointOffset: number,
+    contentHeight: number,
+    contentOffset: number,
+  ) => void;
   slideShowRunning?: boolean;
   theme?: Theme;
   wrapperId: string;
