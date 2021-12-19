@@ -55,7 +55,6 @@ export const TimelineMainWrapper = styled.div<{
   overflow-y: ${(p) => (p.scrollable ? 'auto' : 'hidden')};
   overflow-x: hidden;
   overscroll-behavior: contain;
-  ${(p) => (p.mode === 'HORIZONTAL' ? '' : '')};
   scroll-behavior: smooth;
   scrollbar-color: ${(p) => p.theme.primary} default;
   scrollbar-width: thin;

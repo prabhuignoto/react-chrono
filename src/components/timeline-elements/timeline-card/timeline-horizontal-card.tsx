@@ -6,15 +6,12 @@ import React, {
   useMemo,
   useRef,
 } from 'react';
-import ReactDOM from 'react-dom';
 import { TimelineCardModel } from '../../../models/TimelineItemModel';
 import { GlobalContext } from '../../GlobalContext';
 import TimelineCardContent from '../timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import HorizontalCircle from '../../timeline-horizontal/timeline-horizontal-cricle';
 import {
-  Circle,
-  CircleWrapper,
   TimelineContentContainer,
   TimelineTitleContainer,
   Wrapper,
@@ -45,12 +42,6 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   const contentRef = useRef<HTMLDivElement>(null);
 
   const { mode, cardPositionHorizontal: position } = useContext(GlobalContext);
-
-  const handleClick = () => {
-    if (onClick && !slideShowRunning) {
-      onClick(id);
-    }
-  };
 
   const handleOnActive = (offset: number) => {
     if (contentRef.current) {
