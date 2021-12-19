@@ -48,35 +48,42 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
       className={wrapperClass}
       data-testid="timeline-collection"
     >
-      {items.map((item, index) => (
-       showAllCards || item.active || (items[index-1]? items[index-1].active : false) ||(items[index+1]? items[index+1].active :false ) ?
-        <TimelineItemWrapper
-          key={item.id}
-          width={itemWidth}
-          className={cls(
-            item.visible ? 'visible' : '',
-            'timeline-horz-item-container',
-          )}
-        >
-          <TimelineCard
-            {...item}
-            onClick={handleItemClick}
-            autoScroll={autoScroll}
-            mode={mode}
-            wrapperId={wrapperId}
-            theme={theme}
-            slideShowRunning={slideShowRunning}
-            cardHeight={cardHeight}
-            onElapsed={onElapsed}
-            showOnlyCircle={!showAllCards && ((items[index-1]? items[index-1].active : false) ||(items[index+1]? items[index+1].active :false ))}
-            customContent={children ? (children as ReactNode[])[index] : null}
-            onActive={handleOnActive}
-            hasFocus={hasFocus}
-            iconChild={iconChildColln[index]}
-          />
-        </TimelineItemWrapper>
-        : null
-      ))}
+      {items.map((item, index) =>
+        showAllCards ||
+        item.active ||
+        (items[index - 1] ? items[index - 1].active : false) ||
+        (items[index + 1] ? items[index + 1].active : false) ? (
+          <TimelineItemWrapper
+            key={item.id}
+            width={itemWidth}
+            className={cls(
+              item.visible ? 'visible' : '',
+              'timeline-horz-item-container',
+            )}
+          >
+            <TimelineCard
+              {...item}
+              onClick={handleItemClick}
+              autoScroll={autoScroll}
+              mode={mode}
+              wrapperId={wrapperId}
+              theme={theme}
+              slideShowRunning={slideShowRunning}
+              cardHeight={cardHeight}
+              onElapsed={onElapsed}
+              showOnlyCircle={
+                !showAllCards &&
+                ((items[index - 1] ? items[index - 1].active : false) ||
+                  (items[index + 1] ? items[index + 1].active : false))
+              }
+              customContent={children ? (children as ReactNode[])[index] : null}
+              onActive={handleOnActive}
+              hasFocus={hasFocus}
+              iconChild={iconChildColln[index]}
+            />
+          </TimelineItemWrapper>
+        ) : null,
+      )}
     </TimelineHorizontalWrapper>
   );
 };

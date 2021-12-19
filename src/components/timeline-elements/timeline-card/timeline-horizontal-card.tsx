@@ -143,7 +143,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       >
         <TimelineItemTitle title={title} active={active} theme={theme} />
       </TimelineTitleContainer>
-      {!showOnlyCircle?timelineContent : null}
+      {!showOnlyCircle ? timelineContent : null}
     </Wrapper>
   );
 };
