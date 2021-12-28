@@ -111,6 +111,7 @@ export const TimelineCardContentWrapper = styled.div<{
       `;
     } else {
       return `
+        justify-content: flex-end;
         &.left {
           order: 3;
         }

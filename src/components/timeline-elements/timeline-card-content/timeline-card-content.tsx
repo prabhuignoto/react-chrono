@@ -47,9 +47,9 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       url,
     }: TimelineContentModel) => {
       const [showMore, setShowMore] = useState(false);
-      const detailsRef = useRef<HTMLDivElement>(null);
-      const containerRef = useRef<HTMLDivElement>(null);
-      const progressRef = useRef<HTMLDivElement>(null);
+      const detailsRef = useRef<HTMLDivElement | null>(null);
+      const containerRef = useRef<HTMLDivElement | null>(null);
+      const progressRef = useRef<HTMLDivElement | null>(null);
 
       const containerWidth = useRef<number>(0);
       const slideShowElapsed = useRef(0);
@@ -60,6 +60,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       // const [elapsed, setElapsed] = useState(0);
       const [remainInterval, setRemainInterval] = useState(0);
       const [startWidth, setStartWidth] = useState(0);
+      const [textContentLarge, setTextContentLarge] = useState(false);
 
       const {
         mode,
@@ -91,14 +92,18 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
       }, [showMore]);
 
-      useEffect(() => {
-        setTimeout(() => {
-          if (containerRef.current) {
-            containerWidth.current = containerRef.current.clientWidth;
+      const onContainerRef = useCallback(
+        (node) => {
+          const detailsEle = detailsRef.current;
+          if (node && detailsEle) {
+            const { scrollHeight, offsetTop } = detailsEle;
+            containerWidth.current = node.clientWidth;
             setStartWidth(containerWidth.current);
+            setTextContentLarge(scrollHeight + offsetTop > node.clientHeight);
           }
-        }, 100);
-      }, []);
+        },
+        [detailsRef.current],
+      );
 
       const setupTimer = useCallback((interval: number) => {
         if (!slideItemDuration) {
@@ -178,6 +183,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
       }, [hasFocus, active]);
 
+      const canShowReadMore = useMemo(() => {
+        return useReadMore && detailedText && !customContent;
+      }, []);
+
       const handleMediaState = useCallback(
         (state: MediaState) => {
           if (!slideShowActive) {
@@ -251,7 +260,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           }}
           onMouseEnter={tryHandlePauseSlideshow}
           onMouseLeave={tryHandleResumeSlideshow}
-          ref={containerRef}
+          ref={onContainerRef}
           tabIndex={0}
           theme={theme}
           borderLess={borderLessCards}
@@ -309,18 +318,15 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           </TimelineContentDetailsWrapper>
 
           {/* display the show more button for textual content */}
-          {useReadMore && detailedText && !customContent && (
+          {canShowReadMore && textContentLarge ? (
             <ShowMore
               className="show-more"
               onClick={handleExpandDetails}
-              onKeyPress={useCallback(
-                (event) => {
-                  if (event.key === 'Enter') {
-                    handleExpandDetails();
-                  }
-                },
-                [active, paused, slideShowActive, showMore],
-              )}
+              onKeyPress={(event) => {
+                if (event.key === 'Enter') {
+                  handleExpandDetails();
+                }
+              }}
               role="button"
               show={canShowMore}
               theme={theme}
@@ -331,7 +337,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
                 <ChevronIcon />
               </ChevronIconWrapper>
             </ShowMore>
-          )}
+          ) : null}
 
           {canShowProgressBar && (
             <SlideShowProgressBar

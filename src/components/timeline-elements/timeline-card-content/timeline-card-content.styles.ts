@@ -30,7 +30,7 @@ export const TimelineItemContentWrapper = styled.section<{
   min-height: ${(p) => p.minHeight}px;
   position: relative;
   text-align: left;
-  width: 100%;
+  width: 98%;
   z-index: 0;
 
   &:focus {

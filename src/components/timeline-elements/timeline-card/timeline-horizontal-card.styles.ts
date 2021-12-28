@@ -68,8 +68,8 @@ export const Circle = styled.div<CircleModel>`
       border-radius: 50%;
       content: '';
       display: block;
-      height: ${(p) => (p.dimension ? Math.round(p.dimension * 0.5) : 20)}px;
-      width: ${(p) => (p.dimension ? Math.round(p.dimension * 0.5) : 20)}px;
+      height: ${(p) => (p.dimension ? Math.round(p.dimension * 0.75) : 20)}px;
+      width: ${(p) => (p.dimension ? Math.round(p.dimension * 0.75) : 20)}px;
       left: 0;
       position: absolute;
       right: 0;
