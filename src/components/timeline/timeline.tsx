@@ -55,6 +55,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     cardPositionHorizontal,
     onScrollEnd,
     enableOutline,
+    lineWidth,
   } = useContext(GlobalContext);
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
@@ -281,7 +282,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         {/* HORIZONTAL */}
         {mode === 'HORIZONTAL' ? (
           <TimelineMain className={mode.toLowerCase()}>
-            <Outline color={theme && theme.primary} />
+            <Outline color={theme && theme.primary} height={lineWidth} />
             <TimelineHorizontal
               autoScroll={handleScroll}
               contentDetailsChildren={contentDetailsChildren}

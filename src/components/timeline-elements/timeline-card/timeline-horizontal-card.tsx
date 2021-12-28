@@ -4,7 +4,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
-  useRef,
+  useRef
 } from 'react';
 import ReactDOM from 'react-dom';
 import { TimelineCardModel } from '../../../models/TimelineItemModel';
@@ -16,7 +16,7 @@ import {
   CircleWrapper,
   TimelineContentContainer,
   TimelineTitleContainer,
-  Wrapper,
+  Wrapper
 } from './timeline-horizontal-card.styles';
 
 const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
@@ -42,10 +42,15 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const { mode, cardPositionHorizontal: position } = useContext(GlobalContext);
+  const {
+    mode,
+    cardPositionHorizontal: position,
+    timelineCircleDimension,
+    disableClickOnCircle,
+  } = useContext(GlobalContext);
 
   const handleClick = () => {
-    if (onClick && !slideShowRunning) {
+    if (!disableClickOnCircle && onClick && !slideShowRunning) {
       onClick(id);
     }
   };
@@ -136,6 +141,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           data-testid="timeline-circle"
           theme={theme}
           aria-label={title}
+          dimension={timelineCircleDimension}
         >
           {iconChild ? iconChild : null}
         </Circle>

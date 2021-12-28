@@ -31,6 +31,7 @@ export interface TimelineModel extends TimelineProps {
  */
 export interface TimelineProps {
   allowDynamicUpdate?: boolean;
+  borderLessCards?: boolean;
   cardHeight?: number;
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
   cardWidth?: number;
@@ -50,7 +51,9 @@ export interface TimelineProps {
   slideShow?: boolean;
   theme?: Theme;
   useReadMore?: boolean;
-  borderLessCards?: boolean;
+  timelineCircleDimension?: number;
+  lineWidth?: number;
+  disableClickOnCircle?: boolean;
 }
 
 export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';

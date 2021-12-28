@@ -47,13 +47,14 @@ export const CircleWrapper = styled.div`
 
 interface CircleModel {
   theme?: Theme;
+  dimension?: number;
 }
 
 export const Circle = styled.div<CircleModel>`
   border-radius: 50%;
   cursor: pointer;
-  height: 20px;
-  width: 20px;
+  height: ${p => p.dimension}px;
+  width: ${p => p.dimension}px;
 
   &.active {
     &.using-icon {
@@ -67,7 +68,8 @@ export const Circle = styled.div<CircleModel>`
       border-radius: 50%;
       content: '';
       display: block;
-      height: 15px;
+      height: ${p => p.dimension ? Math.round(p.dimension * 0.5) : 20}px;
+      width: ${p => p.dimension ? Math.round(p.dimension * 0.5) : 20}px;
       left: 0;
       position: absolute;
       right: 0;
@@ -75,7 +77,6 @@ export const Circle = styled.div<CircleModel>`
       margin-right: auto;
       top: 50%;
       transform: translateY(-50%);
-      width: 15px;
       z-index: -1;
     }
   }
@@ -85,7 +86,7 @@ export const Circle = styled.div<CircleModel>`
 
     &.active {
       &::after {
-        background: ${(p) => p.theme.secondary};
+        background: ${p => p.theme.secondary};
       }
     }
 

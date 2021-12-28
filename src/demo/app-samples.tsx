@@ -25,6 +25,7 @@ export const HorizontalBasic: React.FunctionComponent<{
           slideItemDuration={2550}
           itemWidth={200}
           onItemSelected={selected => console.log(selected)}
+          timelineCircleDimension={20}
         >
           <div className="chrono-icons">
             <img src="color-circle.svg" alt="github" />
@@ -75,6 +76,7 @@ export const VerticalBasic: FunctionComponent<{
         useReadMore={false}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
+        timelineCircleDimension={20}
         borderLessCards
       />
     </ComponentContainerTree>

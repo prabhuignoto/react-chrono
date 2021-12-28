@@ -8,7 +8,7 @@ import VerticalCircle from './timeline-vertical-circle';
 import {
   TimelineCardContentWrapper,
   TimelineTitleWrapper,
-  VerticalItemWrapper,
+  VerticalItemWrapper
 } from './timeline-vertical.styles';
 
 const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
@@ -45,7 +45,14 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     }
   };
 
-  const { cardHeight, mode, flipLayout } = useContext(GlobalContext);
+  const {
+    cardHeight,
+    mode,
+    flipLayout,
+    timelineCircleDimension,
+    lineWidth,
+    disableClickOnCircle,
+  } = useContext(GlobalContext);
 
   // handler for read more
   const handleShowMore = useCallback(() => {
@@ -129,6 +136,9 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         slideShowRunning={slideShowRunning}
         iconChild={iconChild}
         theme={theme}
+        timelineCircleDimension={timelineCircleDimension}
+        lineWidth={lineWidth}
+        disableClickOnCircle={disableClickOnCircle}
       />
     );
   }, [slideShowRunning, active]);

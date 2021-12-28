@@ -46,6 +46,7 @@ export const VerticalItemWrapper = styled.div<{
 export const VerticalCircleWrapper = styled.div<{
   bg?: string;
   alternateCards?: boolean;
+  width?: number;
 }>`
   align-items: center;
   display: flex;
@@ -71,7 +72,7 @@ export const VerticalCircleWrapper = styled.div<{
     margin-right: auto;
     position: absolute;
     right: 0;
-    width: 4px;
+    width: ${p => p.width ? `${p.width}px` : '4px'};
     z-index: 0;
   }
 `;
@@ -148,11 +149,11 @@ export const TimelineTitleWrapper = styled.div<{
 
   &.right {
     ${(p) =>
-      p.flip
-        ? `
+    p.flip
+      ? `
       order: 3;
       justify-content: flex-start;`
-        : `order: 1;
+      : `order: 1;
     justify-content: flex-end;`};
   }
 `;
