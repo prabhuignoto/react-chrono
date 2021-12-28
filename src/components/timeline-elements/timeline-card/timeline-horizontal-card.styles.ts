@@ -70,13 +70,10 @@ export const Circle = styled.div<CircleModel>`
       display: block;
       height: ${(p) => (p.dimension ? Math.round(p.dimension * 0.75) : 20)}px;
       width: ${(p) => (p.dimension ? Math.round(p.dimension * 0.75) : 20)}px;
-      left: 0;
+      left: 50%;
       position: absolute;
-      right: 0;
-      margin-left: auto;
-      margin-right: auto;
       top: 50%;
-      transform: translateY(-50%);
+      transform: translateY(-50%) translateX(-50%);
       z-index: -1;
     }
   }
