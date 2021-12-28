@@ -1,6 +1,6 @@
 {
   "name": "react-chrono",
-  "version": "1.12.4",
+  "version": "1.12.5",
   "license": "MIT",
   "description": "A Modern Timeline component for React",
   "keywords": [
@@ -15,19 +15,18 @@
     "type": "git"
   },
   "scripts": {
-    "build": "snowpack build",
+    "cypress": "cypress open",
+    "cypress:record": "cypress run --record --key 0a753295-339a-4351-bf1d-6b91d4bcb937",
+    "cypress:runner": "start-server-and-test start http://localhost:8080 cypress:record",
+    "cypress:test": "start-server-and-test start http://localhost:8080 cypress",
     "eslint": "eslint ./src/**/*.tsx",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint:all": "yarn run eslint && yarn run lint:css && yarn run lint",
     "lint:css": "stylelint ./src/**/*style.ts",
     "rollup": "rimraf ./dist && rollup -c",
-    "start": "snowpack dev --polyfill-node",
-    "lint:all": "yarn run eslint && yarn run lint:css && yarn run lint",
-    "cypress": "cypress open",
-    "cypress:test": "start-server-and-test start http://localhost:8080 cypress",
-    "cypress:record": "cypress run --record --key 0a753295-339a-4351-bf1d-6b91d4bcb937",
-    "cypress:runner": "start-server-and-test start http://localhost:8080 cypress:record",
-    "snyk": "snyk test"
+    "snyk": "snyk test",
+    "dev": "snowpack dev --polyfill-node"
   },
   "dependencies": {
     "@emotion/core": "^11.0.0-next.10",

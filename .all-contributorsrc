@@ -2,7 +2,7 @@
   "files": [
     "README.md"
   ],
-  "imageSize": 100,
+  "imageSize": 60,
   "commit": false,
   "contributors": [
     {
@@ -39,6 +39,24 @@
       "profile": "https://github.com/Ryuyxx",
       "contributions": [
         "doc"
+      ]
+    },
+    {
+      "login": "taqi457",
+      "name": "Taqi Abbas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2155219?v=4",
+      "profile": "https://github.com/taqi457",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "megasoft78",
+      "name": "megasoft78",
+      "avatar_url": "https://avatars.githubusercontent.com/u/514958?v=4",
+      "profile": "https://github.com/megasoft78",
+      "contributions": [
+        "code"
       ]
     }
   ],

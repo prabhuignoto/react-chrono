@@ -3,7 +3,7 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { Theme } from '../models/Theme';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
-  HorizontalBasic,
+  HorizontalBasic, HorizontalInitalSelectedItem,
   VerticalBasic, VerticalCustomContent, VerticalCustomContent2, VerticalTree, VerticalTreeMixed
 } from './app-samples';
 import './App.css';
@@ -18,7 +18,7 @@ import DynamicLoad from "./dynamic-load";
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
-  const [state, setState]  = useState(0);
+  const [state, setState] = useState(0);
 
   const [customTheme, setCustomTheme] = useState<Theme>({
     cardBgColor: "#C0C0C0",
@@ -27,12 +27,12 @@ const NewDemo: React.FunctionComponent = () => {
   });
 
   useEffect(() => {
-    if(state > 0) {
+    if (state > 0) {
       setCustomTheme({
-         cardBgColor: "#efefef",
-         primary: "#000",
+        cardBgColor: "#efefef",
+        primary: "#000",
         secondary: "#FFA500"
-       })
+      })
     } else {
       setCustomTheme({
         cardBgColor: "#C0C0C0",
@@ -61,63 +61,70 @@ const NewDemo: React.FunctionComponent = () => {
   return (
     <Wrapper>
       <BrowserRouter>
-      <aside className="app-links">
-        <ComponentLinks>
-          <li>
-            <Link to="/vertical-basic">Vertical Basic</Link>
-          </li>
-          <li>
-            <Link to="/vertical-alternating">Vertical Alternating</Link>
-          </li>
-          <li>
-            <Link to="/vertical-alternating-mixed">Vertical Alternating Mixed Data</Link>
-          </li>
-          <li>
-            <Link to="/horizontal">Horizontal Basic</Link>
-          </li>
-          <li>
-            <Link to="/vertical-custom">Vertical  Custom contents</Link>
-          </li>
-          <li>
-            <Link to="/vertical-custom-icon">Vertical  Custom Icons</Link>
-          </li>
-          <li>
-            <Link to="/dynamic-load">Dynamic data load</Link>
-          </li>
-        </ComponentLinks>
-      </aside>
-      <AppArea>
-        <Routes>
-          <Route path="/vertical-basic" element={items.length && <VerticalBasic type={"big-screen"} items={items} />}>
-          </Route>
-          <Route path="/vertical-alternating-mixed" element={items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} >
-          
-          </Route>
-          <Route path="/vertical-alternating" element={<>
-            <button onClick={() => {
-              setState(1 - state);
-            }}>change</button>
-            {<VerticalTree type={'big-screen'} items={state > 0 ? items : mixed} theme={customTheme} >{state}</VerticalTree>}
-          
-          </>}>
-          </Route>
-          <Route path="/horizontal" element={items.length > 0 && (
+        <aside className="app-links">
+          <ComponentLinks>
+            <li>
+              <Link to="/vertical-basic">Vertical Basic</Link>
+            </li>
+            <li>
+              <Link to="/vertical-alternating">Vertical Alternating</Link>
+            </li>
+            <li>
+              <Link to="/vertical-alternating-mixed">Vertical Alternating Mixed Data</Link>
+            </li>
+            <li>
+              <Link to="/horizontal">Horizontal Basic</Link>
+            </li>
+            <li>
+              <Link to="/horizontal-initial-select">Horizontal Basic with initial selected item</Link>
+            </li>
+            <li>
+              <Link to="/vertical-custom">Vertical  Custom contents</Link>
+            </li>
+            <li>
+              <Link to="/vertical-custom-icon">Vertical  Custom Icons</Link>
+            </li>
+            <li>
+              <Link to="/dynamic-load">Dynamic data load</Link>
+            </li>
+          </ComponentLinks>
+        </aside>
+        <AppArea>
+          <Routes>
+            <Route path="/vertical-basic" element={items.length && <VerticalBasic type={"big-screen"} items={items} />}>
+            </Route>
+            <Route path="/vertical-alternating-mixed" element={items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} >
+
+            </Route>
+            <Route path="/vertical-alternating" element={<>
+              <button onClick={() => {
+                setState(1 - state);
+              }}>change</button>
+              {<VerticalTree type={'big-screen'} items={state > 0 ? items : mixed} theme={customTheme} >{state}</VerticalTree>}
+
+            </>}>
+            </Route>
+            <Route path="/horizontal" element={items.length > 0 && (
               <HorizontalBasic items={items} type="big-screen" />
             )}>
-            
-          </Route>
-          <Route path="/vertical-custom" element={items.length  > 0 && <VerticalCustomContent  type="big-screen" />}>
-          </Route>
-          <Route path="/vertical-custom-icon" element={items.length  > 0 && <VerticalCustomContent2  type="big-screen" />}>
-          </Route>
-          <Route path="/dynamic-load" element={items.length  > 0 && <DynamicLoad />}>
-          </Route>
-          <Route path="/" element={items.length > 0 && (
-                <VerticalBasic type={"big-screen"} items={items} />
-              )}>
-          </Route>
-        </Routes>
-      </AppArea>
+
+            </Route>
+            <Route path="/horizontal-initial-select" element={items.length > 0 && (
+              <HorizontalInitalSelectedItem items={items} type="big-screen" />
+            )}>
+            </Route>
+            <Route path="/vertical-custom" element={items.length > 0 && <VerticalCustomContent type="big-screen" />}>
+            </Route>
+            <Route path="/vertical-custom-icon" element={items.length > 0 && <VerticalCustomContent2 type="big-screen" />}>
+            </Route>
+            <Route path="/dynamic-load" element={items.length > 0 && <DynamicLoad />}>
+            </Route>
+            <Route path="/" element={items.length > 0 && (
+              <VerticalBasic type={"big-screen"} items={items} />
+            )}>
+            </Route>
+          </Routes>
+        </AppArea>
       </BrowserRouter>
     </Wrapper>
   );
