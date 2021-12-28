@@ -8,7 +8,7 @@ import VerticalCircle from './timeline-vertical-circle';
 import {
   TimelineCardContentWrapper,
   TimelineTitleWrapper,
-  VerticalItemWrapper
+  VerticalItemWrapper,
 } from './timeline-vertical.styles';
 
 const VerticalItem: React.FunctionComponent<VerticalItemModel> = (

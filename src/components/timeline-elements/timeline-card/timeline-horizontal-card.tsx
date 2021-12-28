@@ -4,7 +4,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
-  useRef
+  useRef,
 } from 'react';
 import ReactDOM from 'react-dom';
 import { TimelineCardModel } from '../../../models/TimelineItemModel';
@@ -16,7 +16,7 @@ import {
   CircleWrapper,
   TimelineContentContainer,
   TimelineTitleContainer,
-  Wrapper
+  Wrapper,
 } from './timeline-horizontal-card.styles';
 
 const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({

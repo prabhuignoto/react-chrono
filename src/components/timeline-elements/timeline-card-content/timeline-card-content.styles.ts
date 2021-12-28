@@ -20,7 +20,12 @@ export const TimelineItemContentWrapper = styled.section<{
   flex-direction: column;
   justify-content: flex-start;
   line-height: 1.5em;
-  margin: ${(p) => (p.mode === "HORIZONTAL" ? "0 auto" : p.mode !== 'VERTICAL_ALTERNATING' ? '1em 0' : '')};
+  margin: ${(p) =>
+    p.mode === 'HORIZONTAL'
+      ? '0 auto'
+      : p.mode !== 'VERTICAL_ALTERNATING'
+      ? '1em 0'
+      : ''};
   max-width: ${(p) => p.maxWidth}px;
   min-height: ${(p) => p.minHeight}px;
   position: relative;
@@ -42,7 +47,7 @@ export const TimelineContentSubTitle = styled.p<{
   theme?: Theme;
 }>`
   color: ${(p) => p.theme.primary};
-  font-size: 0.85rem; 
+  font-size: 0.85rem;
   font-weight: 600;
   margin: 0;
   padding-left: 0.5rem;

@@ -103,9 +103,9 @@ export const TimelineMain = styled.div`
   }
 `;
 
-export const Outline = styled.div<{ color?: string, height?: number }>`
+export const Outline = styled.div<{ color?: string; height?: number }>`
   background: ${(p) => p.color};
-  height: ${p => `${p.height}px`};
+  height: ${(p) => `${p.height}px`};
   left: 0;
   margin-left: auto;
   margin-right: auto;
