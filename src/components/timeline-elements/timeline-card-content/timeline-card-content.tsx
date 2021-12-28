@@ -69,6 +69,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         useReadMore,
         cardWidth,
         borderLessCards,
+        disableAutoScrollOnClick,
       } = useContext(GlobalContext);
 
       const canShowProgressBar = useMemo(() => {
@@ -254,7 +255,12 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           noMedia={!media}
           onClick={(ev: React.MouseEvent) => {
             ev.stopPropagation();
-            if (!slideShowActive && onClick && id) {
+            if (
+              !slideShowActive &&
+              onClick &&
+              id &&
+              !disableAutoScrollOnClick
+            ) {
               onClick(id);
             }
           }}

@@ -55,6 +55,7 @@ export interface TimelineProps {
   timelineCircleDimension?: number;
   lineWidth?: number;
   disableClickOnCircle?: boolean;
+  disableAutoScrollOnClick?: boolean;
 }
 
 export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';

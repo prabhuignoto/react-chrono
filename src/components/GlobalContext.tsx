@@ -16,6 +16,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       timelineCircleDimension: 16,
       lineWidth: 3,
       disableClickOnCircle: false,
+      disableAutoScrollOnClick: false,
     },
     props,
   );
