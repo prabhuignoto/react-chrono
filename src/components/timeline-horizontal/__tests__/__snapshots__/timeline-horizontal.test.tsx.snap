@@ -2,7 +2,7 @@
 
 exports[`Test Collection Horizontal render 1`] = `
 <ul
-  class="horizontal timeline-horz-container css-1su7dnn"
+  class="horizontal timeline-horizontal-container css-1su7dnn"
   data-testid="timeline-collection"
 >
   <li
@@ -126,7 +126,7 @@ exports[`Test Collection Horizontal render 1`] = `
 
 exports[`Test Collection Tree render 1`] = `
 <ul
-  class="horizontal timeline-horz-container css-1su7dnn"
+  class="horizontal timeline-horizontal-container css-1su7dnn"
   data-testid="timeline-collection"
 >
   <li
@@ -250,7 +250,7 @@ exports[`Test Collection Tree render 1`] = `
 
 exports[`Test Collection Vertical render 1`] = `
 <ul
-  class="horizontal timeline-horz-container css-1su7dnn"
+  class="horizontal timeline-horizontal-container css-1su7dnn"
   data-testid="timeline-collection"
 >
   <li

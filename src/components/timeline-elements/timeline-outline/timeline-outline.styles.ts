@@ -11,14 +11,14 @@ const open = keyframes`
   
   to: {
     width: 200px;
-    height: 70%;
+    height: 50%;
   }
   `;
 
 const close = keyframes`
   from {
     width: 200px;
-    height: 70%;
+    height: 50%;
   }
   
   to: {
@@ -36,7 +36,7 @@ export const OutlineWrapper = styled.div<{
   animation-timing-function: ease-in;
   background: rgba(255, 255, 255, 0.98);
   border: 1px solid ${(p) => (p.open ? '#f5f5f5' : 'none')};
-  height: 70%;
+  height: 50%;
   position: absolute;
   top: 1rem;
   width: 100%;
@@ -47,7 +47,7 @@ export const OutlineWrapper = styled.div<{
     p.open
       ? `
     width: 200px;
-    height: 70%;
+    height: 50%;
     box-shadow: 0 5px 10px 2px rgba(0,0,0,0.2);
     overflow-y: auto;`
       : `width: 30px; height: 30px;`};

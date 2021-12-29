@@ -8822,10 +8822,10 @@ snowpack@^3.8.8:
   optionalDependencies:
     fsevents "^2.3.2"
 
-snyk@^1.809.0:
-  version "1.809.0"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.809.0.tgz#3e495deb15ae509ebc28612c56450a864c535ca3"
-  integrity sha512-iydRCBZev1P0Kf9dSW5AhA6EuVEGYMjm39VRA/NMm0/drxqvFWDkLm2pUuC6wtOSg1r4RuFXJTa3umoOnZ/V3A==
+snyk@^1.811.0:
+  version "1.811.0"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.811.0.tgz#184c746c0fedcdf068963595e28cb66b03c28372"
+  integrity sha512-CAnNgC/+T8+Cv8YBJ3npKgLDw2/mWP/gCJ/5QiN6FyZc+2wjLbLH/D1nLp8JsxHL/Wyk0CynIJ9Mma2wiwM/fw==
 
 socks-proxy-agent@^6.0.0:
   version "6.1.1"

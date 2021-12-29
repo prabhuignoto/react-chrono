@@ -9,7 +9,11 @@ export const Wrapper = styled.div<{
   flex-direction: column;
   /* cannot remove this */
   height: 100%;
-  outline: 0;
+
+  &:focus {
+    outline: 0;
+  }
+
   overflow: hidden;
   position: relative;
   user-select: none;
@@ -35,7 +39,7 @@ export const Wrapper = styled.div<{
   }
 
   &.js-focus-visible :focus:not(.focus-visible) {
-    outline: none;
+    // outline: 0;
   }
 
   &.js-focus-visible .focus-visible {
