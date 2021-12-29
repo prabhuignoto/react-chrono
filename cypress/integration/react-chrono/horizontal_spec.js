@@ -13,14 +13,14 @@ context('Chrono.Vertical.Basic', () => {
     cy.get(".timeline-controls").children().should("have.length", 5)
   });
 
-  it('check read more', () => {
-    cy.get('.timeline-card-content').within(() => {
-      cy.get('.card-description').should('have.class', 'show-less');
-      cy.get('.show-more').click();
-      cy.wait(400);
-      cy.get('.card-description').should('not.have.class', 'show-less');
-    });
-  });
+  // it('check read more', () => {
+  //   cy.get('.timeline-card-content').within(() => {
+  //     cy.get('.card-description').should('have.class', 'show-less');
+  //     cy.get('.show-more').click();
+  //     cy.wait(400);
+  //     cy.get('.card-description').should('not.have.class', 'show-less');
+  //   });
+  // });
 
   it('check navigation controls', () => {
     cy.get('.timeline-controls').within(() => {

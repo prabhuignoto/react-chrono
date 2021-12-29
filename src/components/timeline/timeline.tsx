@@ -55,6 +55,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     cardPositionHorizontal,
     onScrollEnd,
     enableOutline,
+    lineWidth,
   } = useContext(GlobalContext);
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
@@ -92,18 +93,21 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const { key } = event;
+    console.log(key);
 
     if (
       (mode === 'HORIZONTAL' && key === 'ArrowRight') ||
       ((mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
         key === 'ArrowDown')
     ) {
+      debugger;
       handleNext();
     } else if (
       (mode === 'HORIZONTAL' && key === 'ArrowLeft') ||
       ((mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
         key === 'ArrowUp')
     ) {
+      debugger;
       handlePrevious();
     } else if (key === 'Home') {
       handleFirst();
@@ -224,12 +228,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   return (
     <Wrapper
-      onKeyDown={(evt: React.KeyboardEvent<HTMLDivElement>) =>
-        !disableNavOnKey && !slideShowRunning ? handleKeySelection(evt) : null
-      }
+      tabIndex={0}
+      onKeyDown={(evt: React.KeyboardEvent<HTMLDivElement>) => {
+        !disableNavOnKey && !slideShowRunning ? handleKeySelection(evt) : null;
+      }}
       className={`${mode.toLowerCase()} js-focus-visible focus-visible`}
       cardPositionHorizontal={cardPositionHorizontal}
-      onClickCapture={() => {
+      onMouseDownCapture={() => {
         setHasFocus(true);
       }}
     >
@@ -281,7 +286,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         {/* HORIZONTAL */}
         {mode === 'HORIZONTAL' ? (
           <TimelineMain className={mode.toLowerCase()}>
-            <Outline color={theme && theme.primary} />
+            <Outline color={theme && theme.primary} height={lineWidth} />
             <TimelineHorizontal
               autoScroll={handleScroll}
               contentDetailsChildren={contentDetailsChildren}

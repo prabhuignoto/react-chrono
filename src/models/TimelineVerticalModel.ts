@@ -16,6 +16,9 @@ interface CommonPropsModel {
   slideShowRunning?: boolean;
   theme?: Theme;
   enableOutline?: boolean;
+  timelineCircleDimension?: number;
+  lineWidth?: number;
+  disableClickOnCircle?: boolean;
 }
 
 interface CommonVerticalModel extends CommonPropsModel {

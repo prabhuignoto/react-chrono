@@ -13,6 +13,10 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       cardHeight: 200,
       useReadMore: true,
       borderLessCards: false,
+      timelineCircleDimension: 16,
+      lineWidth: 3,
+      disableClickOnCircle: false,
+      disableAutoScrollOnClick: false,
     },
     props,
   );

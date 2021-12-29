@@ -20,11 +20,13 @@ export const HorizontalBasic: React.FunctionComponent<{
         <Chrono
           items={data}
           mode="HORIZONTAL"
-          cardHeight={150}
+          cardHeight={250}
+          cardWidth={450}
           slideShow
           slideItemDuration={2550}
           itemWidth={200}
           onItemSelected={selected => console.log(selected)}
+          timelineCircleDimension={20}
         >
           <div className="chrono-icons">
             <img src="color-circle.svg" alt="github" />
@@ -83,10 +85,9 @@ export const VerticalBasic: FunctionComponent<{
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
         theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
-        useReadMore={false}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
-        borderLessCards
+        timelineCircleDimension={20}
       />
     </ComponentContainerTree>
   </Vertical>

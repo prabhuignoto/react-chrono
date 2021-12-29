@@ -46,6 +46,7 @@ export const VerticalItemWrapper = styled.div<{
 export const VerticalCircleWrapper = styled.div<{
   bg?: string;
   alternateCards?: boolean;
+  width?: number;
 }>`
   align-items: center;
   display: flex;
@@ -71,7 +72,7 @@ export const VerticalCircleWrapper = styled.div<{
     margin-right: auto;
     position: absolute;
     right: 0;
-    width: 4px;
+    width: ${(p) => (p.width ? `${p.width}px` : '4px')};
     z-index: 0;
   }
 `;
@@ -110,6 +111,7 @@ export const TimelineCardContentWrapper = styled.div<{
       `;
     } else {
       return `
+        justify-content: flex-end;
         &.left {
           order: 3;
         }

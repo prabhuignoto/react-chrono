@@ -1,3 +1,4 @@
+import cls from 'classnames';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { VerticalCircleModel } from '../../models/TimelineVerticalModel';
 import { Circle } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
@@ -5,7 +6,6 @@ import {
   VerticalCircleContainer,
   VerticalCircleWrapper,
 } from './timeline-vertical.styles';
-import cls from 'classnames';
 
 const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
   props: VerticalCircleModel,
@@ -20,6 +20,9 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
     alternateCards,
     slideShowRunning,
     iconChild,
+    timelineCircleDimension,
+    lineWidth,
+    disableClickOnCircle,
   } = props;
   const circleRef = useRef<HTMLDivElement>(null);
 
@@ -40,8 +43,22 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
     [active, iconChild],
   );
 
+  const clickHandlerProps = useMemo(
+    () =>
+      !disableClickOnCircle && {
+        onClick: (ev: React.MouseEvent) => {
+          ev.stopPropagation();
+          if (id && onClick && !slideShowRunning) {
+            onClick(id);
+          }
+        },
+      },
+    [],
+  );
+
   return (
     <VerticalCircleWrapper
+      width={lineWidth}
       alternateCards={alternateCards}
       bg={theme && theme.primary}
       className={className}
@@ -50,18 +67,17 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
     >
       <VerticalCircleContainer
         className={`${className} timeline-vertical-circle`}
-        onClick={(ev) => {
-          ev.stopPropagation();
-          if (id && onClick && !slideShowRunning) {
-            onClick(id);
-          }
-        }}
+        {...clickHandlerProps}
         ref={circleRef}
         role="button"
         data-testid="tree-leaf-click"
         aria-label="select timeline"
       >
-        <Circle className={circleClass} theme={theme}>
+        <Circle
+          className={circleClass}
+          theme={theme}
+          dimension={timelineCircleDimension}
+        >
           {iconChild ? iconChild : null}
         </Circle>
       </VerticalCircleContainer>

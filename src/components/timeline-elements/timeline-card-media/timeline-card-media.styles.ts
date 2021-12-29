@@ -92,14 +92,11 @@ export const MediaDetailsWrapper = styled.div<{ mode?: TimelineMode }>`
 
 export const ErrorMessage = styled.span`
   color: #a3a3a3;
-  left: 0;
-  margin-left: auto;
-  margin-right: auto;
+  left: 50%;
   position: absolute;
-  right: 0;
   text-align: center;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateX(-50%);
 `;
 
 export const IFrameVideo = styled.iframe`

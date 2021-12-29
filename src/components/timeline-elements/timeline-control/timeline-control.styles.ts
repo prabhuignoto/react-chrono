@@ -31,12 +31,12 @@ export const TimelineNavButton = styled.button<{
   cursor: pointer;
   display: flex;
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.25));
-  height: 30px;
+  height: 20px;
   justify-content: center;
   margin: 0 0.2em;
   padding: 0;
   transition: all 0.1s ease-in;
-  width: 30px;
+  width: 20px;
 
   transform: ${(p) => {
     if (p.rotate === 'TRUE') {

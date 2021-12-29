@@ -26,7 +26,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     cardHeight,
   } = useContext(GlobalContext);
   const wrapperClass = useMemo(
-    () => cls(mode.toLowerCase(), 'timeline-horz-container'),
+    () => cls(mode.toLowerCase(), 'timeline-horizontal-container'),
     [mode],
   );
 

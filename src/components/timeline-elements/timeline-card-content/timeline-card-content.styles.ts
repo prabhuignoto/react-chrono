@@ -20,12 +20,17 @@ export const TimelineItemContentWrapper = styled.section<{
   flex-direction: column;
   justify-content: flex-start;
   line-height: 1.5em;
-  margin: ${(p) => (p.mode !== 'VERTICAL_ALTERNATING' ? '1em 0' : '')};
+  margin: ${(p) =>
+    p.mode === 'HORIZONTAL'
+      ? '0 auto'
+      : p.mode !== 'VERTICAL_ALTERNATING'
+      ? '1em 0'
+      : ''};
   max-width: ${(p) => p.maxWidth}px;
   min-height: ${(p) => p.minHeight}px;
   position: relative;
   text-align: left;
-  width: 100%;
+  width: 98%;
   z-index: 0;
 
   &:focus {

@@ -42,7 +42,7 @@ context('Chrono.Vertical.Basic', () => {
       .find('.card-description span')
       .should(
         'have.length',
-        2,
+        1,
       );
   });
 
