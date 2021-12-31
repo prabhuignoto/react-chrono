@@ -84,7 +84,7 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
     const items = [{
       title: "May 1940",
       cardTitle: "Dunkirk",
-      url: "http://www.history.com
+      url: "http://www.history.com",
       cardSubtitle:"Men of the British Expeditionary Force (BEF) wade out to..",
       cardDetailedText: "Men of the British Expeditionary Force (BEF) wade out to..",
       media: {
@@ -153,27 +153,32 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 
 ## Props
 
-| name                    | description                                                                           | default      |
-| -----------------       | ------------------------------------------------------------------------------------- | ------------ |
-| mode                    | sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING` | `HORIZONTAL`             |
-| items                   | collection of [Timeline Item Model](#timeline-item-model).                            | []           |
-| disableNavOnKey         | disables the keyboard navigation.                                                     | false        |
-| slideShow               | enables the slideshow control.                                                        | false        |
-| slideItemDuration       | duration (in ms), the timeline card is active during  a `slideshow`.                  | 5000         |
-| itemWidth               | width of the timeline section in `HORIZONTAL` mode.                                   | 300          |
-| hideControls            | hides the navigation controls.                                                        | false        |
-| allowDynamicUpdate      | allows timeline items to be updated dynamically.                                      | false        |
-| cardHeight              | sets the minimum height of the timeline card.                                         | 200          |
-| cardWidth               | sets the maximum width of the timeline card.                                          |              |
-| scrollable              | makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).   | true         |
-| flipLayout              | flips the layout (RTL). applicable only to `VERTICAL` and `VERTICAL_ALTERNATING`      | false         |
-| cardPositionHorizontal  | positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`              |              |
-| theme                   | prop to customize the colors.                                                         |              |
-| onScrollEnd             | use the `onScrollEnd` to detect the end of the timeline.                              |              |
-| onItemSelected          | callback invoked on a item selection. passes all of the data pertinent to the item.    |              |
-| useReadMore             | enables or disables the read more button. when disabled the card will auto expand to fit the content|    true          |
-| enableOutline           | enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.             |    false         |
-| borderLessCards         | removes the border & shadow from the timeline item cards.                           |    false         |
+| name                     | description                                                                                                                                                              | default      |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| activeItemIndex          | selects the active timeline item on load.                                                                                                                                | 0            |
+| allowDynamicUpdate       | allows timeline items to be updated dynamically.                                                                                                                         | false        |
+| borderLessCards          | removes the border & shadow from the timeline item cards.                                                                                                                | false        |
+| cardHeight               | sets the minimum height of the timeline card.                                                                                                                            | 200          |
+| cardPositionHorizontal   | positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`.                                                                                                |              |
+| cardWidth                | sets the maximum width of the timeline card.                                                                                                                             |              |
+| disableAutoScrollOnClick | disables the timeline from auto scrolling on clicking a timeline item.                                                                                                   | false        |
+| disableClickOnCircle     | disables click action on the timeline circle points.                                                                                                                     | false        |
+| disableNavOnKey          | disables the keyboard navigation.                                                                                                                                        | false        |
+| enableOutline            | enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.                                                                                                  | false        |
+| flipLayout               | flips the layout (RTL). applicable only to `VERTICAL` and `VERTICAL_ALTERNATING`.                                                                                        | false        |
+| hideControls             | hides the navigation controls.                                                                                                                                           | false        |
+| itemWidth                | width of the timeline section in `HORIZONTAL` mode.                                                                                                                      | 300          |
+| items                    | collection of [Timeline Item Model](#timeline-item-model).                                                                                                               | []           |
+| lineWidth                | prop to customize the width of the timeline track line.                                                                                                                  | 3px          |
+| mode                     | sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING`.                                                                               | `HORIZONTAL` |
+| onItemSelected           | callback invoked on a item selection. passes all of the data pertinent to the item.                                                                                      |              |
+| onScrollEnd              | use the `onScrollEnd` to detect the end of the timeline.                                                                                                                 |              |
+| scrollable               | makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).                                                                       | true         |
+| slideItemDuration        | duration (in ms), the timeline card is active during  a `slideshow`.                                                                                                     | 5000         |
+| slideShow                | enables the slideshow control.                                                                                                                                           | false        |
+| theme                    | prop to customize the colors.                                                                                                                                            |              |
+| timelineCircleDimension  | dimension of the timeline circular points.                                                                                                                               | false        |
+| useReadMore              | enables or disables the read more button.The read more function is enabled only when the height <br /> of the text content exceeds the overall height of the card itself | true         |
 
 ### Mode
 
@@ -193,14 +198,14 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 
 ### Timeline item Model
 
-| name                 | description                                  | type   |
-|----------------------|----------------------------------------------|--------|
-| title                | title of the timeline item                   | String |
-| cardTitle         | title that is displayed on the timeline card | String |
-| cardSubtitle          | text displayed in the timeline card          | String |
-| cardDetailedText  | detailed text displayed in the timeline card | String or String[] |
-| media                | media object to set image or video.          | Object |
-| url                | url to be used in the title.          | String |
+| name             | description                                  | type               |
+| ---------------- | -------------------------------------------- | ------------------ |
+| title            | title of the timeline item                   | String             |
+| cardTitle        | title that is displayed on the timeline card | String             |
+| cardSubtitle     | text displayed in the timeline card          | String             |
+| cardDetailedText | detailed text displayed in the timeline card | String or String[] |
+| media            | media object to set image or video.          | Object             |
+| url              | url to be used in the title.                 | String             |
 
 ```sh
 {
@@ -449,30 +454,30 @@ Deep dive into wide variety of examples hosted as a Storybook.
 # install dependencies
 yarn install
 
-# start dev setup
-yarn run start
+# start dev
+yarn dev
 
 # run css linting
-yarn run lint:css
+yarn lint:css
 
 # eslint
-yarn run eslint
+yarn eslint
 
 # prettier
-yarn run lint
+yarn lint
 
 # package lib
-yarn run rollup
+yarn rollup
 ```
 
 ## 🧪Tests
 
 ```sh
   # run unit tests
-  yarn run test
+  yarn test
 
   # run cypress tests
-  yarn run cypress:test
+  yarn cypress:test
 ```
 
 ## 🤝Contributing
@@ -516,10 +521,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://aloisdg.github.io/"><img src="https://avatars.githubusercontent.com/u/3449303?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alois</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=aloisdg" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://kojikoji.ga"><img src="https://avatars.githubusercontent.com/u/474225?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Koji</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=koji" title="Documentation">📖</a></td>
-    <td align="center"><a href="http://alexgirard.com"><img src="https://avatars.githubusercontent.com/u/373?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alexandre Girard</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=alx" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/Ryuyxx"><img src="https://avatars.githubusercontent.com/u/69892552?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ryuya</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=Ryuyxx" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://aloisdg.github.io/"><img src="https://avatars.githubusercontent.com/u/3449303?v=4?s=60" width="60px;" alt=""/><br /><sub><b>Alois</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=aloisdg" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://kojikoji.ga"><img src="https://avatars.githubusercontent.com/u/474225?v=4?s=60" width="60px;" alt=""/><br /><sub><b>Koji</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=koji" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://alexgirard.com"><img src="https://avatars.githubusercontent.com/u/373?v=4?s=60" width="60px;" alt=""/><br /><sub><b>Alexandre Girard</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=alx" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Ryuyxx"><img src="https://avatars.githubusercontent.com/u/69892552?v=4?s=60" width="60px;" alt=""/><br /><sub><b>Ryuya</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=Ryuyxx" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/taqi457"><img src="https://avatars.githubusercontent.com/u/2155219?v=4?s=60" width="60px;" alt=""/><br /><sub><b>Taqi Abbas</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=taqi457" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/megasoft78"><img src="https://avatars.githubusercontent.com/u/514958?v=4?s=60" width="60px;" alt=""/><br /><sub><b>megasoft78</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=megasoft78" title="Code">💻</a></td>
   </tr>
 </table>
 

@@ -40,12 +40,18 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
 }: TimelineCardModel) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const { mode, cardPositionHorizontal: position } = useContext(GlobalContext);
+  const {
+    mode,
+    cardPositionHorizontal: position,
+    timelineCircleDimension,
+    disableClickOnCircle,
+  } = useContext(GlobalContext);
 
   const handleOnActive = (offset: number) => {
     if (contentRef.current) {
       const { offsetLeft, clientWidth } = contentRef.current;
       onActive(offsetLeft + offset, offsetLeft, clientWidth);
+
     }
   };
 
@@ -112,6 +118,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       role="listitem"
     >
       {Circle}
+
       <TimelineTitleContainer
         className={titleClass}
         data-testid="timeline-title"

@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
         with:
-          start: npm start
+          start: npm run dev
           wait-on: 'http://localhost:8080'
           wait-on-timeout: 120
           browser: chrome

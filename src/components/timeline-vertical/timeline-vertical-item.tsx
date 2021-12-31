@@ -45,7 +45,14 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     }
   };
 
-  const { cardHeight, mode, flipLayout } = useContext(GlobalContext);
+  const {
+    cardHeight,
+    mode,
+    flipLayout,
+    timelineCircleDimension,
+    lineWidth,
+    disableClickOnCircle,
+  } = useContext(GlobalContext);
 
   // handler for read more
   const handleShowMore = useCallback(() => {
@@ -129,6 +136,9 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         slideShowRunning={slideShowRunning}
         iconChild={iconChild}
         theme={theme}
+        timelineCircleDimension={timelineCircleDimension}
+        lineWidth={lineWidth}
+        disableClickOnCircle={disableClickOnCircle}
       />
     );
   }, [slideShowRunning, active]);
