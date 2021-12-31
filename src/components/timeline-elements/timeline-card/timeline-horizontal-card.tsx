@@ -38,8 +38,6 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   hasFocus,
   iconChild,
 }: TimelineCardModel) => {
-  const circleRef = useRef<HTMLDivElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const { mode, cardPositionHorizontal: position } = useContext(GlobalContext);
@@ -50,22 +48,6 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       onActive(offsetLeft + offset, offsetLeft, clientWidth);
     }
   };
-  useEffect(() => {
-    if (active) {
-      const circle = circleRef.current;
-      const wrapper = wrapperRef.current;
-
-      if (circle && wrapper) {
-        const circleOffsetLeft = circle.offsetLeft;
-        const wrapperOffsetLeft = wrapper.offsetLeft;
-
-        autoScroll({
-          pointOffset: circleOffsetLeft + wrapperOffsetLeft,
-          pointWidth: circle.clientWidth,
-        });
-      }
-    }
-  }, [active, autoScroll, mode]);
 
   const handleOnShowMore = useCallback(() => {}, []);
 
@@ -85,7 +67,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
 
   const timelineContent = useMemo(() => {
     return (
-      <TimelineContentContainer className={containerClass} ref={contentRef}>
+      <TimelineContentContainer className={containerClass}>
         <TimelineCardContent
           content={cardSubtitle}
           active={active}
@@ -104,17 +86,8 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         />
       </TimelineContentContainer>
     );
-  }, [active]);
+  }, [hasFocus, slideShowRunning, active]);
 
-  /*const showTimelineContent = () => {
-    const ele = document.getElementById(wrapperId);
-
-
-    console.log(wrapperId);
-    if (ele) {
-      return ReactDOM.createPortal(timelineContent, ele);
-    }
-  };*/
   const Circle = useMemo(() => {
     return (
       <HorizontalCircle
@@ -131,10 +104,12 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
 
   return (
     <Wrapper
-      ref={wrapperRef}
       className={modeLower}
       data-testid="timeline-item"
       style={{ display: 'flex', flexDirection: 'column' }}
+      ref={contentRef}
+      key={id}
+      role="listitem"
     >
       {Circle}
       <TimelineTitleContainer

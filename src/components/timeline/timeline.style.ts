@@ -87,7 +87,9 @@ export const TimelineMainWrapper = styled.div<{
   }
 `;
 
-export const TimelineMain = styled.div`
+export const TimelineMain = styled.div<{
+  scrollable?: boolean | { scrollbar: boolean };
+}>`
   align-items: center;
   bottom: 0;
   display: flex;

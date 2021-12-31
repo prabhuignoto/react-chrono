@@ -187,33 +187,31 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         );
     };
 
-    if (mode !== 'HORIZONTAL') {
-      observer.current = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            const element = entry.target as HTMLDivElement;
-            if (entry.isIntersecting) {
-              // show img and video when visible.
-              toggleMedia(element, 'show');
-            } else {
-              // hide img and video when not visible.
-              toggleMedia(element, 'hide');
-              // pause YouTube embeds
-              element.querySelectorAll('iframe').forEach((element) => {
-                element.contentWindow?.postMessage(
-                  '{"event":"command","func":"stopVideo","args":""}',
-                  '*',
-                );
-              });
-            }
-          });
-        },
-        {
-          root: timelineMainRef.current,
-          threshold: 0,
-        },
-      );
-    }
+    observer.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const element = entry.target as HTMLDivElement;
+          if (entry.isIntersecting) {
+            // show img and video when visible.
+            toggleMedia(element, 'show');
+          } else {
+            // hide img and video when not visible.
+            toggleMedia(element, 'hide');
+            // pause YouTube embeds
+            element.querySelectorAll('iframe').forEach((element) => {
+              element.contentWindow?.postMessage(
+                '{"event":"command","func":"stopVideo","args":""}',
+                '*',
+              );
+            });
+          }
+        });
+      },
+      {
+        root: timelineMainRef.current,
+        threshold: 0,
+      },
+    );
 
     return () => {
       if (observer.current) {
@@ -234,93 +232,96 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         setHasFocus(true);
       }}
     >
-      <TimelineMainWrapper
-        ref={timelineMainRef}
-        scrollable={canScrollTimeline}
-        className={`${mode.toLowerCase()} timeline-main-wrapper`}
-        id="timeline-main-wrapper"
-        theme={theme}
-        mode={mode}
-        onScroll={(ev) => {
-          const target = ev.target as HTMLElement;
-          let scrolled = 0;
-
-          if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
+      {/* HORIZONTAL */}
+      {mode === 'HORIZONTAL' ? (
+        <TimelineMain
+          className={mode.toLowerCase()}
+          id="timeline-main-wrapper"
+          scrollable={canScrollTimeline}
+          ref={timelineMainRef}
+          onScroll={(ev) => {
+            const target = ev.target as HTMLElement;
+            let scrolled = 0;
+            scrolled = target.scrollLeft + target.offsetWidth;
+            if (target.scrollWidth === scrolled) {
+              onScrollEnd && onScrollEnd();
+            }
+          }}
+        >
+          <Outline color={theme && theme.primary} />
+          <TimelineHorizontal
+            autoScroll={handleScroll}
+            contentDetailsChildren={contentDetailsChildren}
+            handleItemClick={handleTimelineItemClick}
+            hasFocus={hasFocus}
+            iconChildren={iconChildren}
+            showAllCards={showAllCards}
+            items={items as TimelineCardModel[]}
+            mode={mode}
+            onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+            slideShowRunning={slideShowRunning}
+            theme={theme}
+            wrapperId={id.current}
+          />
+        </TimelineMain>
+      ) : (
+        <TimelineMainWrapper
+          scrollable={canScrollTimeline}
+          className={`${mode.toLowerCase()} timeline-main-wrapper`}
+          id="timeline-main-wrapper"
+          ref={timelineMainRef}
+          theme={theme}
+          mode={mode}
+          onScroll={(ev) => {
+            const target = ev.target as HTMLElement;
+            let scrolled = 0;
             scrolled = target.scrollTop + target.clientHeight;
 
             if (target.scrollHeight - scrolled < 1) {
               onScrollEnd && onScrollEnd();
             }
-          } else {
-            scrolled = target.scrollLeft + target.offsetWidth;
-
-            if (target.scrollWidth === scrolled) {
-              onScrollEnd && onScrollEnd();
-            }
-          }
-        }}
-      >
-        {/* VERTICAL ALTERNATING */}
-        {mode === 'VERTICAL_ALTERNATING' ? (
-          <TimelineVertical
-            activeTimelineItem={activeTimelineItem}
-            autoScroll={handleScroll}
-            contentDetailsChildren={contentDetailsChildren}
-            hasFocus={hasFocus}
-            iconChildren={iconChildren}
-            items={items as TimelineCardModel[]}
-            mode={mode}
-            onClick={handleTimelineItemClick}
-            onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
-            onOutlineSelection={onOutlineSelection}
-            slideShowRunning={slideShowRunning}
-            theme={theme}
-            enableOutline={enableOutline}
-          />
-        ) : null}
-
-        {/* HORIZONTAL */}
-        {mode === 'HORIZONTAL' ? (
-          <TimelineMain className={mode.toLowerCase()}>
-            <Outline color={theme && theme.primary} />
-            <TimelineHorizontal
+          }}
+        >
+          {/* VERTICAL ALTERNATING */}
+          {mode === 'VERTICAL_ALTERNATING' ? (
+            <TimelineVertical
+              activeTimelineItem={activeTimelineItem}
               autoScroll={handleScroll}
               contentDetailsChildren={contentDetailsChildren}
-              handleItemClick={handleTimelineItemClick}
               hasFocus={hasFocus}
               iconChildren={iconChildren}
-              showAllCards={showAllCards}
               items={items as TimelineCardModel[]}
               mode={mode}
+              onClick={handleTimelineItemClick}
               onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+              onOutlineSelection={onOutlineSelection}
               slideShowRunning={slideShowRunning}
               theme={theme}
-              wrapperId={id.current}
+              enableOutline={enableOutline}
             />
-          </TimelineMain>
-        ) : null}
+          ) : null}
 
-        {/* VERTICAL */}
-        {mode === 'VERTICAL' ? (
-          <TimelineVertical
-            activeTimelineItem={activeTimelineItem}
-            alternateCards={false}
-            autoScroll={handleScroll}
-            contentDetailsChildren={contentDetailsChildren}
-            hasFocus={hasFocus}
-            iconChildren={iconChildren}
-            items={items as TimelineCardModel[]}
-            mode={mode}
-            onClick={handleTimelineItemClick}
-            onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
-            onOutlineSelection={onOutlineSelection}
-            slideShowRunning={slideShowRunning}
-            theme={theme}
-            enableOutline={enableOutline}
-          />
-        ) : null}
-      </TimelineMainWrapper>
-
+          {/* VERTICAL */}
+          {mode === 'VERTICAL' ? (
+            <TimelineVertical
+              activeTimelineItem={activeTimelineItem}
+              alternateCards={false}
+              autoScroll={handleScroll}
+              contentDetailsChildren={contentDetailsChildren}
+              hasFocus={hasFocus}
+              iconChildren={iconChildren}
+              items={items as TimelineCardModel[]}
+              mode={mode}
+              onClick={handleTimelineItemClick}
+              onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+              onOutlineSelection={onOutlineSelection}
+              slideShowRunning={slideShowRunning}
+              theme={theme}
+              enableOutline={enableOutline}
+            />
+          ) : null}
+        </TimelineMainWrapper>
+      )}
       {/* Timeline Controls */}
       {!hideControls && (
         <TimelineControlContainer mode={mode}>

@@ -15,7 +15,7 @@ useNewScrollPosition = function (mode: TimelineMode, itemWidth?: number) {
       const { clientWidth, scrollLeft, scrollTop, clientHeight } = parent;
       const { pointOffset, pointWidth, contentHeight, contentOffset } = scroll;
 
-      if (!pointOffset) {
+      if (!pointOffset || !contentOffset) {
         return;
       }
 
@@ -23,7 +23,6 @@ useNewScrollPosition = function (mode: TimelineMode, itemWidth?: number) {
         let contrRight = scrollLeft + clientWidth;
         let circRight = pointOffset + pointWidth;
         let isVisible = pointOffset >= scrollLeft && circRight <= contrRight;
-
         let isPartiallyVisible =
           (pointOffset < scrollLeft && circRight > scrollLeft) ||
           (circRight > contrRight && pointOffset < contrRight);
@@ -31,12 +30,12 @@ useNewScrollPosition = function (mode: TimelineMode, itemWidth?: number) {
         const leftGap = pointOffset - scrollLeft;
         const rightGap = contrRight - pointOffset;
 
-        if (!(isVisible || isPartiallyVisible)) {
-          setOffset(pointOffset - itemWidth);
+        if (!isVisible || isPartiallyVisible) {
+          setOffset(contentOffset - itemWidth);
         } else if (leftGap <= itemWidth && leftGap >= 0) {
-          setOffset(pointOffset - itemWidth);
+          setOffset(contentOffset - itemWidth);
         } else if (rightGap <= itemWidth && rightGap >= 0) {
-          setOffset(pointOffset - itemWidth);
+          setOffset(contentOffset - itemWidth);
         }
       } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
         if (!contentOffset || !contentHeight) {
@@ -46,11 +45,9 @@ useNewScrollPosition = function (mode: TimelineMode, itemWidth?: number) {
         let contrBottom = scrollTop + clientHeight;
         let circBottom = contentOffset + contentHeight;
         let isVisible = contentOffset >= scrollTop && circBottom <= contrBottom;
-
         let isPartiallyVisible =
           (contentOffset < scrollTop && circBottom > scrollTop) ||
           (circBottom > contrBottom && contentOffset < contrBottom);
-
         const nOffset = contentOffset - contentHeight;
         const notVisible = !isVisible || isPartiallyVisible;
 
