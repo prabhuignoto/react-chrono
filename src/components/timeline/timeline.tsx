@@ -252,7 +252,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             }
           }}
         >
-          <Outline color={theme && theme.primary} />
+          <Outline color={theme && theme.primary} height={3}/>
           <TimelineHorizontal
             autoScroll={handleScroll}
             contentDetailsChildren={contentDetailsChildren}

@@ -40,6 +40,7 @@ const HorizontalCircle: React.FunctionComponent<HorizontalCircleModel> = (
             onClick(id);
           }
         }}
+        dimension={20}
         ref={circleRef}
         data-testid="timeline-circle"
         theme={theme}
