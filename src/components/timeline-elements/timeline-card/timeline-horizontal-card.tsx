@@ -51,7 +51,6 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     if (contentRef.current) {
       const { offsetLeft, clientWidth } = contentRef.current;
       onActive(offsetLeft + offset, offsetLeft, clientWidth);
-
     }
   };
 

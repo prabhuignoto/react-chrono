@@ -55,6 +55,7 @@ export const Circle = styled.div<CircleModel>`
   cursor: pointer;
   height: ${(p) => p.dimension}px;
   width: ${(p) => p.dimension}px;
+  margin: 2px;
 
   &.active {
     &.using-icon {
