@@ -41,6 +41,8 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   const {
     mode,
     cardPositionHorizontal: position,
+    timelineCircleDimension,
+    disableClickOnCircle,
   } = useContext(GlobalContext);
 
   const handleOnActive = (offset: number) => {
