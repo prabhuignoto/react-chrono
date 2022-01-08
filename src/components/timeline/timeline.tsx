@@ -56,7 +56,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     cardPositionHorizontal,
     onScrollEnd,
     enableOutline,
-    lineWidth,
   } = useContext(GlobalContext);
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);

@@ -24,7 +24,7 @@ export const HorizontalBasic: React.FunctionComponent<{
           cardWidth={250}
           slideShow
           slideItemDuration={2550}
-          showAllCards={true}
+          // to show all cards: showAllCards={true}
           itemWidth={200}
           onItemSelected={selected => console.log(selected)}
           timelineCircleDimension={20}

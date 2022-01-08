@@ -2,7 +2,6 @@ import cls from 'classnames';
 import React, {
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useRef,
 } from 'react';
@@ -33,7 +32,6 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   slideShowRunning,
   theme,
   title,
-  wrapperId,
   customContent,
   hasFocus,
   iconChild,
@@ -43,8 +41,6 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   const {
     mode,
     cardPositionHorizontal: position,
-    timelineCircleDimension,
-    disableClickOnCircle,
   } = useContext(GlobalContext);
 
   const handleOnActive = (offset: number) => {
