@@ -1,10 +1,5 @@
 import cls from 'classnames';
-import React, {
-  useCallback,
-  useContext,
-  useMemo,
-  useRef,
-} from 'react';
+import React, { useCallback, useContext, useMemo, useRef } from 'react';
 import { TimelineCardModel } from '../../../models/TimelineItemModel';
 import { GlobalContext } from '../../GlobalContext';
 import TimelineCardContent from '../timeline-card-content/timeline-card-content';
@@ -38,12 +33,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
 }: TimelineCardModel) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const {
-    mode,
-    cardPositionHorizontal: position,
-    timelineCircleDimension,
-    disableClickOnCircle,
-  } = useContext(GlobalContext);
+  const { mode, cardPositionHorizontal: position } = useContext(GlobalContext);
 
   const handleOnActive = (offset: number) => {
     if (contentRef.current) {
