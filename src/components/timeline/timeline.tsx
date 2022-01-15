@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState
+  useState,
 } from 'react';
 import { Scroll } from '../../models/TimelineHorizontalModel';
 import { TimelineCardModel } from '../../models/TimelineItemModel';
@@ -21,7 +21,7 @@ import {
   TimelineControlContainer,
   TimelineMain,
   TimelineMainWrapper,
-  Wrapper
+  Wrapper,
 } from './timeline.style';
 
 const Timeline: React.FunctionComponent<TimelineModel> = (
@@ -66,11 +66,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   const canScrollTimeline = useMemo(() => {
     if (!slideShowRunning) {
-      if(typeof scrollable === 'boolean') {
+      if (typeof scrollable === 'boolean') {
         return scrollable;
       }
 
-      if(typeof scrollable === "object" && scrollable.scrollbar) {
+      if (typeof scrollable === 'object' && scrollable.scrollbar) {
         return scrollable.scrollbar;
       }
     }
