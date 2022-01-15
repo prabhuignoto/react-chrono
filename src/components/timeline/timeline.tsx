@@ -65,6 +65,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const timelineMainRef = useRef<HTMLDivElement>(null);
 
   const canScrollTimeline = useMemo(() => {
+    debugger;
     if (!slideShowRunning) {
       if (typeof scrollable === 'boolean') {
         return scrollable;

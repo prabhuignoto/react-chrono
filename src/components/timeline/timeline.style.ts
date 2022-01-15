@@ -55,7 +55,7 @@ export const TimelineMainWrapper = styled.div<{
   align-items: flex-start;
   display: flex;
   justify-content: center;
-  overflow-y: ${(p) => (p.scrollable ? 'auto' : 'hidden')};
+  overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
   ${(p) => (p.mode === 'HORIZONTAL' ? 'position: relative' : '')};
