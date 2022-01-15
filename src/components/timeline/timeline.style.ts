@@ -55,7 +55,7 @@ export const TimelineMainWrapper = styled.div<{
   align-items: flex-start;
   display: flex;
   justify-content: center;
-  overflow-y: ${(p) => (p.scrollable ? 'auto' : 'hidden')};
+  overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
   ${(p) => (p.mode === 'HORIZONTAL' ? 'position: relative' : '')};
@@ -63,14 +63,6 @@ export const TimelineMainWrapper = styled.div<{
   scrollbar-color: ${(p) => p.theme.primary} default;
   scrollbar-width: thin;
   width: 100%;
-  padding: ${(p) => {
-    if (p.scrollable) {
-      return (p.scrollable instanceof Boolean && p.scrollable) ||
-        (p.scrollable as { scrollbar: boolean }).scrollbar
-        ? ''
-        : '0 1rem 0';
-    }
-  }};
 
   &::-webkit-scrollbar {
     width: 0.5em;
@@ -89,6 +81,8 @@ export const TimelineMainWrapper = styled.div<{
   &.horizontal {
     height: 6rem;
   }
+
+  padding: ${(p) => (!p.scrollable ? '0 1rem 0' : '')};
 `;
 
 export const TimelineMain = styled.div`

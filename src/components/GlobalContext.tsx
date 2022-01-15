@@ -17,6 +17,9 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       lineWidth: 3,
       disableClickOnCircle: false,
       disableAutoScrollOnClick: false,
+      scrollable: {
+        scrollbar: false,
+      },
     },
     props,
   );
