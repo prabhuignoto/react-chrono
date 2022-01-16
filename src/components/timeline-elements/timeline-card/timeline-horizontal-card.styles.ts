@@ -126,6 +126,7 @@ export const TimelineContentContainer = styled.div<{
   active?: boolean;
 }>`
   align-items: flex-start;
+  margin-top: 5px;
   animation: ${show} 0.25s ease-in;
 
   &.vertical {

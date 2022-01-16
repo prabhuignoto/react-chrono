@@ -104,14 +104,13 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       key={id}
       role="listitem"
     >
-      {Circle}
-
       <TimelineTitleContainer
         className={titleClass}
         data-testid="timeline-title"
       >
         <TimelineItemTitle title={title} active={active} theme={theme} />
       </TimelineTitleContainer>
+      {Circle}
       {!showOnlyCircle ? timelineContent : null}
     </Wrapper>
   );
