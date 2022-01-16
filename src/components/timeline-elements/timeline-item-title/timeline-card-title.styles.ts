@@ -7,6 +7,7 @@ export const TitleWrapper = styled.div<{
   align?: string;
 }>`
   border-radius: 0.2rem;
+  margin-bottom: 0.2rem;
   font-size: 0.9rem;
   font-weight: 600;
   overflow: hidden;
