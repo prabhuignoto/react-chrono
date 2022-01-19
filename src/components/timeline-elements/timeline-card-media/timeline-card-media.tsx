@@ -33,6 +33,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   slideshowActive,
   hideMedia = false,
   cardHeight,
+  url,
 }: CardMediaModel) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);
@@ -173,7 +174,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
           ))}
       </MediaWrapper>
       <MediaDetailsWrapper mode={mode}>
-        <MemoTitle title={title} theme={theme} active={active} />
+        <MemoTitle title={title} theme={theme} active={active} url={url} />
         <MemoSubTitle content={content} />
       </MediaDetailsWrapper>
     </>
