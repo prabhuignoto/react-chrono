@@ -29,4 +29,5 @@ export interface CardMediaModel {
   slideshowActive?: boolean;
   theme?: Theme;
   title?: string;
+  url?: string;
 }

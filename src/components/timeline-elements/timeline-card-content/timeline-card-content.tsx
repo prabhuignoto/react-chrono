@@ -291,6 +291,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               slideshowActive={slideShowActive}
               theme={theme}
               title={title}
+              url={url}
             />
           )}
 
