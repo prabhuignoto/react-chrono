@@ -48,9 +48,9 @@ export const Wrapper = styled.div<{
 `;
 
 export const TimelineMainWrapper = styled.div<{
-  theme?: Theme;
-  scrollable?: boolean | { scrollbar: boolean };
   mode?: TimelineMode;
+  scrollable?: boolean | { scrollbar: boolean };
+  theme?: Theme;
 }>`
   align-items: flex-start;
   display: flex;
@@ -113,8 +113,8 @@ export const Outline = styled.div<{ color?: string; height?: number }>`
 `;
 
 export const TimelineControlContainer = styled.div<{
-  mode?: TimelineMode;
   active?: boolean;
+  mode?: TimelineMode;
 }>`
   align-items: center;
   display: flex;

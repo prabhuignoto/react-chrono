@@ -2,13 +2,13 @@ import { Theme } from './Theme';
 export interface TimelineControlModel {
   disableLeft: boolean;
   disableRight: boolean;
-  onNext: () => void;
-  onPrevious: () => void;
+  id?: string;
   onFirst: () => void;
   onLast: () => void;
-  theme?: Theme;
+  onNext: () => void;
+  onPrevious: () => void;
+  onReplay?: () => void;
   slideShowEnabled?: boolean;
   slideShowRunning?: boolean;
-  onReplay?: () => void;
-  id?: string;
+  theme?: Theme;
 }

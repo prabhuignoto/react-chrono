@@ -19,16 +19,16 @@ export enum OutlinePosition {
 }
 
 export interface TimelineOutlineItem {
-  name?: string;
   id?: string;
+  name?: string;
   selected?: boolean;
 }
 
 export interface TimelineOutlineModel {
   items?: TimelineOutlineItem[];
+  mode?: TimelineMode;
   onSelect?: (index: number) => void;
   theme?: Theme;
-  mode?: TimelineMode;
 }
 
 const TimelineOutline: React.FunctionComponent<TimelineOutlineModel> = ({

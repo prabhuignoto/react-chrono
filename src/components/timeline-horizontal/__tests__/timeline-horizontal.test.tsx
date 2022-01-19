@@ -11,29 +11,29 @@ const id = 'test_sdccs_test';
 
 const items: TimelineItemModel[] = [
   {
-    id: '1',
-    title: 'June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914',
     cardSubtitle:
       'Archduke Franz Ferdinand of Austria and his wife, Sophie, are assassinated by a Bosnian Serb nationalist in Sarajevo.',
+    id: '1',
+    title: 'June 28, 1914 June 28, 1914 June 28, 1914June 28, 1914',
   },
   {
-    id: '2',
-    title: 'July 28, 1914',
     cardSubtitle:
       'World War I begins when Austria-Hungary declares war on Serbia.',
+    id: '2',
+    title: 'July 28, 1914',
   },
   {
-    id: '3',
-    title: 'August 1–28, 1914',
     cardSubtitle: `Germany declares war on Russia, France, and Belgium. Britain declares war on Germany.
     Austria declares war on Russia. Montenegro declares war on Austria. France declares war on Austria.
     Britain declares war on Austria. Montenegro declares war on Germany. Japan declares war on Germany. Austria declares war on Belgium.`,
+    id: '3',
+    title: 'August 1–28, 1914',
   },
   {
-    id: '4',
-    title: 'September 6, 1914',
     cardSubtitle: `First Battle of the Marne begins. The Germans had advanced to within 30 miles of Paris, but over the next two days, the French are reinforced by 6,000 infantrymen who are transported to the front by hundreds of taxis.
       The Germans dig in north of the Aisne River, and the trench warfare that is to typify the Western Front for the next four years begins.`,
+    id: '4',
+    title: 'September 6, 1914',
   },
 ];
 

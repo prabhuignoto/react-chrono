@@ -13,11 +13,11 @@ export interface TimelineItemModel {
   cardDetailedText?: string | string[];
   cardSubtitle?: string;
   cardTitle?: string;
-  url?: string;
   id?: string;
   media?: Media;
   position?: string;
   title?: string;
+  url?: string;
   visible?: boolean;
 }
 
@@ -28,15 +28,15 @@ export interface TimelineCardModel extends TimelineItemModel {
     timelinePointHeight,
     contentHeight,
   }: Partial<Scroll>) => void;
-  mode: TimelineMode;
-  onClick: (id?: string) => void;
-  slideShowRunning?: boolean;
-  theme?: Theme;
-  wrapperId: string;
   cardHeight?: number;
-  slideItemDuration?: number;
-  onElapsed?: (id?: string) => void;
   customContent?: React.ReactNode | React.ReactNode[];
   hasFocus?: boolean;
   iconChild?: React.ReactNode;
+  mode: TimelineMode;
+  onClick: (id?: string) => void;
+  onElapsed?: (id?: string) => void;
+  slideItemDuration?: number;
+  slideShowRunning?: boolean;
+  theme?: Theme;
+  wrapperId: string;
 }

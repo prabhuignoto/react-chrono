@@ -46,8 +46,8 @@ export const CircleWrapper = styled.div`
 `;
 
 interface CircleModel {
-  theme?: Theme;
   dimension?: number;
+  theme?: Theme;
 }
 
 export const Circle = styled.div<CircleModel>`
@@ -122,8 +122,8 @@ export const TimelineTitleContainer = styled.div`
 `;
 
 export const TimelineContentContainer = styled.div<{
-  position?: string;
   active?: boolean;
+  position?: string;
 }>`
   align-items: flex-start;
   animation: ${show} 0.25s ease-in;

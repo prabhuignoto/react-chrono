@@ -19,9 +19,9 @@ export const TimelineNavItem = styled.li<{ disable?: boolean }>`
 `;
 
 export const TimelineNavButton = styled.button<{
-  theme?: Theme;
   mode?: TimelineMode;
   rotate?: 'TRUE' | 'FALSE';
+  theme?: Theme;
 }>`
   align-items: center;
   background: ${(p) => p.theme.primary};

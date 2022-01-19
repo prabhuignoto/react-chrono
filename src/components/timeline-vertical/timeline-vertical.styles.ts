@@ -22,8 +22,8 @@ const animateVisible = keyframes`
 `;
 
 export const VerticalItemWrapper = styled.div<{
-  cardHeight?: number;
   alternateCards?: boolean;
+  cardHeight?: number;
 }>`
   display: flex;
   position: relative;
@@ -44,8 +44,8 @@ export const VerticalItemWrapper = styled.div<{
 `;
 
 export const VerticalCircleWrapper = styled.div<{
-  bg?: string;
   alternateCards?: boolean;
+  bg?: string;
   width?: number;
 }>`
   align-items: center;
@@ -79,8 +79,8 @@ export const VerticalCircleWrapper = styled.div<{
 
 export const TimelineCardContentWrapper = styled.div<{
   alternateCards?: boolean;
-  noTitle?: boolean;
   flip?: boolean;
+  noTitle?: boolean;
 }>`
   visibility: hidden;
   position: relative;
@@ -135,9 +135,9 @@ export const VerticalCircleContainer = styled.div`
 
 export const TimelineTitleWrapper = styled.div<{
   alternateCards?: boolean;
-  mode?: TimelineMode;
-  hide?: boolean;
   flip?: boolean;
+  hide?: boolean;
+  mode?: TimelineMode;
 }>`
   align-items: center;
   display: ${(p) => (p.hide && p.mode === 'VERTICAL' ? 'none' : 'flex')};

@@ -5,17 +5,17 @@ import { TimelineMode } from './TimelineModel';
 
 export interface TimelineHorizontalModel {
   autoScroll: (t: Partial<Scroll>) => void;
+  contentDetailsChildren?: ReactNode | ReactNode[];
   handleItemClick: (id?: string) => void;
+  hasFocus?: boolean;
+  iconChildren?: ReactNode;
   itemWidth?: number;
   items: TimelineCardModel[];
   mode?: TimelineMode;
+  onElapsed?: (id?: string) => void;
   slideShowRunning?: boolean;
   theme?: Theme;
   wrapperId: string;
-  onElapsed?: (id?: string) => void;
-  contentDetailsChildren?: ReactNode | ReactNode[];
-  iconChildren?: ReactNode;
-  hasFocus?: boolean;
 }
 
 export interface Scroll {
@@ -36,14 +36,6 @@ export interface Scroll {
   contentOffset: number;
 
   /**
-   * Height of the timeline point
-   *
-   * @type {number}
-   * @memberof Scroll
-   */
-  timelinePointHeight: number;
-
-  /**
    * Offset of the timeline point
    *
    * @type {number}
@@ -58,4 +50,12 @@ export interface Scroll {
    * @memberof Scroll
    */
   pointWidth: number;
+
+  /**
+   * Height of the timeline point
+   *
+   * @type {number}
+   * @memberof Scroll
+   */
+  timelinePointHeight: number;
 }

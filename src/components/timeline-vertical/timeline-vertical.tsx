@@ -25,9 +25,9 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
   const handleOnActive = useCallback(
     (offset: number, wrapperOffset: number, height: number) => {
       autoScroll({
-        pointOffset: offset,
         contentHeight: height,
         contentOffset: wrapperOffset,
+        pointOffset: offset,
       });
     },
     [],
