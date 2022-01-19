@@ -10,16 +10,16 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
   const defaultProps = Object.assign<PropsModel, PropsModel, PropsModel>(
     {},
     {
-      cardHeight: 200,
-      useReadMore: true,
       borderLessCards: false,
-      timelineCircleDimension: 16,
-      lineWidth: 3,
-      disableClickOnCircle: false,
+      cardHeight: 200,
       disableAutoScrollOnClick: false,
+      disableClickOnCircle: false,
+      lineWidth: 3,
       scrollable: {
         scrollbar: false,
       },
+      timelineCircleDimension: 16,
+      useReadMore: true,
     },
     props,
   );

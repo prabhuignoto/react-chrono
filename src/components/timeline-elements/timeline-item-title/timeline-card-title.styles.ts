@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 import { Theme } from '../../../models/Theme';
 
 export const TitleWrapper = styled.div<{
-  theme?: Theme;
-  hide?: boolean;
   align?: string;
+  hide?: boolean;
+  theme?: Theme;
 }>`
   border-radius: 0.2rem;
   font-size: 0.9rem;

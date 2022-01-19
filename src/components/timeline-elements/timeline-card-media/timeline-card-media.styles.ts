@@ -3,12 +3,12 @@ import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
 
 export const MediaWrapper = styled.div<{
-  theme?: Theme;
   active?: boolean;
-  mode?: TimelineMode;
-  dir?: string;
-  slideShowActive?: boolean;
   cardHeight?: number;
+  dir?: string;
+  mode?: TimelineMode;
+  slideShowActive?: boolean;
+  theme?: Theme;
 }>`
   ${(p) => (p.cardHeight ? `min-height: ${p.cardHeight}px;` : '')};
   align-items: center;
@@ -43,10 +43,10 @@ export const MediaWrapper = styled.div<{
 `;
 
 export const CardImage = styled.img<{
-  mode?: TimelineMode;
-  visible?: boolean;
   active?: boolean;
   dir?: string;
+  mode?: TimelineMode;
+  visible?: boolean;
 }>`
   flex: 4;
   justify-self: center;

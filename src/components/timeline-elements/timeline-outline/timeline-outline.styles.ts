@@ -28,8 +28,8 @@ const close = keyframes`
 `;
 
 export const OutlineWrapper = styled.div<{
-  position?: OutlinePosition;
   open?: boolean;
+  position?: OutlinePosition;
 }>`
   animation: ${(p) => (p.open ? open : close)};
   animation-duration: 0.2s;
@@ -61,9 +61,9 @@ export const OutlinePane = styled.aside<{ open?: boolean }>`
 `;
 
 export const OutlineButton = styled.button<{
-  theme?: Theme;
   open?: boolean;
   position?: OutlinePosition;
+  theme?: Theme;
 }>`
   align-items: center;
   align-self: flex-end;
@@ -127,7 +127,7 @@ export const ListItem = styled.li`
   }
 `;
 
-export const ListItemName = styled.span<{ theme?: Theme; selected?: boolean }>`
+export const ListItemName = styled.span<{ selected?: boolean; theme?: Theme }>`
   font-size: 0.75rem;
   color: ${(p) => (p.selected ? p.theme.primary : '')};
   padding-left: 0.25rem;
@@ -138,8 +138,8 @@ export const ListItemName = styled.span<{ theme?: Theme; selected?: boolean }>`
 `;
 
 export const ListItemBullet = styled.span<{
-  theme?: Theme;
   selected?: boolean;
+  theme?: Theme;
 }>`
   align-items: center;
   display: flex;
