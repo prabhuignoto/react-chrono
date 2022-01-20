@@ -14,19 +14,19 @@ export interface TimelineHorizontalModel {
   mode?: TimelineMode;
   onElapsed?: (id?: string) => void;
   slideShowRunning?: boolean;
-  theme?: Theme;
   showAllCards?: boolean;
+  theme?: Theme;
   wrapperId: string;
 }
 
 export interface HorizontalCircleModel {
   active?: boolean;
+  iconChild?: React.ReactNode;
+  id?: string;
+  onActive: (pointOffset: number) => void;
+  onClick: (id?: string) => void;
   slideShowRunning?: boolean;
   theme?: Theme;
-  id?: string;
-  onClick: (id?: string) => void;
-  onActive: (pointOffset: number) => void;
-  iconChild?: React.ReactNode;
 }
 
 export interface Scroll {

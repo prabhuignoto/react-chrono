@@ -43,9 +43,9 @@ export interface TimelineProps {
   enableOutline?: boolean;
   flipLayout?: boolean;
   hideControls?: boolean;
-  showAllCards?: boolean;
-  itemWidth?: number;
   items?: TimelineItemModel[];
+  itemWidth?: number;
+  showAllCards?: boolean;
   lineWidth?: number;
   mode?: TimelineMode;
   onItemSelected?: (data: TimelineItemModel) => void;

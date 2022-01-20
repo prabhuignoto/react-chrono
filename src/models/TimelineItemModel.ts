@@ -33,20 +33,16 @@ export interface TimelineCardModel extends TimelineItemModel {
   hasFocus?: boolean;
   iconChild?: React.ReactNode;
   mode: TimelineMode;
-  onClick: (id?: string) => void;
   onActive: (
     pointOffset: number,
     contentHeight: number,
     contentOffset: number,
   ) => void;
+  onClick: (id?: string) => void;
+  onElapsed?: (id?: string) => void;
+  showOnlyCircle?: boolean;
+  slideItemDuration?: number;
   slideShowRunning?: boolean;
   theme?: Theme;
   wrapperId: string;
-  showOnlyCircle?: boolean;
-  cardHeight?: number;
-  slideItemDuration?: number;
-  onElapsed?: (id?: string) => void;
-  customContent?: React.ReactNode | React.ReactNode[];
-  hasFocus?: boolean;
-  iconChild?: React.ReactNode;
 }

@@ -35,9 +35,9 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   const handleOnActive = useCallback(
     (offset: number, wrapperOffset: number, width: number) => {
       autoScroll({
+        contentOffset: wrapperOffset,
         pointOffset: wrapperOffset,
         pointWidth: width,
-        contentOffset: wrapperOffset,
       });
     },
     [],
