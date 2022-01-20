@@ -46,12 +46,12 @@ export interface TimelineProps {
   itemWidth?: number;
   items?: TimelineItemModel[];
   lineWidth?: number;
-  showAllCards?: boolean;
   mode?: TimelineMode;
   onItemSelected?: (data: TimelineItemModel) => void;
   onRestartSlideshow?: () => void;
   onScrollEnd?: () => void;
   scrollable?: boolean | { scrollbar: boolean };
+  showAllCards?: boolean;
   slideItemDuration?: number;
   slideShow?: boolean;
   theme?: Theme;
