@@ -13,8 +13,8 @@ export interface TimelineHorizontalModel {
   items: TimelineCardModel[];
   mode?: TimelineMode;
   onElapsed?: (id?: string) => void;
-  slideShowRunning?: boolean;
   showAllCards?: boolean;
+  slideShowRunning?: boolean;
   theme?: Theme;
   wrapperId: string;
 }

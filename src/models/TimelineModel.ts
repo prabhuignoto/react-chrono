@@ -43,10 +43,10 @@ export interface TimelineProps {
   enableOutline?: boolean;
   flipLayout?: boolean;
   hideControls?: boolean;
-  items?: TimelineItemModel[];
   itemWidth?: number;
-  showAllCards?: boolean;
+  items?: TimelineItemModel[];
   lineWidth?: number;
+  showAllCards?: boolean;
   mode?: TimelineMode;
   onItemSelected?: (data: TimelineItemModel) => void;
   onRestartSlideshow?: () => void;
