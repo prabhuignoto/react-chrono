@@ -58,7 +58,7 @@ export const HorizontalInitalSelectedItem: React.FunctionComponent<{
           slideItemDuration={2550}
           itemWidth={200}
           onItemSelected={selected => console.log(selected)}
-        >
+          >
           <div className="chrono-icons">
             <img src="color-circle.svg" alt="github" />
             <img src="color-circle.svg" alt="github" />
@@ -84,7 +84,7 @@ export const VerticalBasic: FunctionComponent<{
         slideShow
         cardWidth={700}
         slideItemDuration={2500}
-        scrollable={{ scrollbar: false }}
+        scrollable={{ scrollbar: false}}
         theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
@@ -108,7 +108,6 @@ export const VerticalTree: FunctionComponent<{
         theme={theme}
         slideShow
         slideItemDuration={2350}
-        scrollable={{ scrollbar: false }}
         allowDynamicUpdate
         cardHeight={200}
         cardWidth={450}

@@ -13,11 +13,11 @@ export interface TimelineItemModel {
   cardDetailedText?: string | string[];
   cardSubtitle?: string;
   cardTitle?: string;
-  url?: string;
   id?: string;
   media?: Media;
   position?: string;
   title?: string;
+  url?: string;
   visible?: boolean;
 }
 
@@ -28,6 +28,10 @@ export interface TimelineCardModel extends TimelineItemModel {
     timelinePointHeight,
     contentHeight,
   }: Partial<Scroll>) => void;
+  cardHeight?: number;
+  customContent?: React.ReactNode | React.ReactNode[];
+  hasFocus?: boolean;
+  iconChild?: React.ReactNode;
   mode: TimelineMode;
   onClick: (id?: string) => void;
   onActive: (

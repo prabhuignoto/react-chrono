@@ -37,6 +37,8 @@ export interface TimelineProps {
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
   cardWidth?: number;
   children?: React.ReactElement | React.ReactElement[];
+  disableAutoScrollOnClick?: boolean;
+  disableClickOnCircle?: boolean;
   disableNavOnKey?: boolean;
   enableOutline?: boolean;
   flipLayout?: boolean;
@@ -44,6 +46,7 @@ export interface TimelineProps {
   showAllCards?: boolean;
   itemWidth?: number;
   items?: TimelineItemModel[];
+  lineWidth?: number;
   mode?: TimelineMode;
   onItemSelected?: (data: TimelineItemModel) => void;
   onRestartSlideshow?: () => void;
@@ -52,11 +55,8 @@ export interface TimelineProps {
   slideItemDuration?: number;
   slideShow?: boolean;
   theme?: Theme;
-  useReadMore?: boolean;
   timelineCircleDimension?: number;
-  lineWidth?: number;
-  disableClickOnCircle?: boolean;
-  disableAutoScrollOnClick?: boolean;
+  useReadMore?: boolean;
 }
 
 export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';

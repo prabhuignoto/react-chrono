@@ -49,28 +49,20 @@ export const Wrapper = styled.div<{
 `;
 
 export const TimelineMainWrapper = styled.div<{
-  theme?: Theme;
-  scrollable?: boolean | { scrollbar: boolean };
   mode?: TimelineMode;
+  scrollable?: boolean | { scrollbar: boolean };
+  theme?: Theme;
 }>`
   align-items: flex-start;
   display: flex;
   justify-content: center;
-  overflow-y: ${(p) => (p.scrollable ? 'auto' : 'hidden')};
+  overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
   scroll-behavior: smooth;
   scrollbar-color: ${(p) => p.theme.primary} default;
   scrollbar-width: thin;
   width: 100%;
-  padding: ${(p) => {
-    if (p.scrollable) {
-      return (p.scrollable instanceof Boolean && p.scrollable) ||
-        (p.scrollable as { scrollbar: boolean }).scrollbar
-        ? ''
-        : '0 1rem 0';
-    }
-  }};
 
   &::-webkit-scrollbar {
     width: 0.5em;
@@ -89,6 +81,8 @@ export const TimelineMainWrapper = styled.div<{
   &.horizontal {
     height: 100%;
   }
+
+  padding: ${(p) => (!p.scrollable ? '0 1rem 0' : '')};
 `;
 
 export const TimelineMain = styled.div<{
@@ -122,8 +116,8 @@ export const Outline = styled.div<{ color?: string; height?: number }>`
 `;
 
 export const TimelineControlContainer = styled.div<{
-  mode?: TimelineMode;
   active?: boolean;
+  mode?: TimelineMode;
 }>`
   align-items: center;
   display: flex;

@@ -4,12 +4,12 @@ import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
 
 export const TimelineItemContentWrapper = styled.section<{
-  theme?: Theme;
-  noMedia?: boolean;
-  minHeight?: number;
-  maxWidth?: number;
-  mode?: TimelineMode;
   borderLess?: boolean;
+  maxWidth?: number;
+  minHeight?: number;
+  mode?: TimelineMode;
+  noMedia?: boolean;
+  theme?: Theme;
 }>`
   align-items: flex-start;
   background: ${(p) => p.theme.cardBgColor};
@@ -55,7 +55,7 @@ export const TimelineContentSubTitle = styled.p<{
   width: 97%;
 `;
 
-export const TimelineCardTitle = styled.p<{ theme: Theme; dir?: string }>`
+export const TimelineCardTitle = styled.p<{ dir?: string; theme: Theme }>`
   color: ${(p) => p.theme.cardForeColor};
   font-size: 1rem;
   font-weight: 600;
@@ -85,10 +85,10 @@ export const TimelineSubContent = styled.span`
 `;
 
 export const TimelineContentDetailsWrapper = styled.div<{
-  theme?: Theme;
-  customContent?: boolean;
-  useReadMore?: boolean;
   borderLess?: boolean;
+  customContent?: boolean;
+  theme?: Theme;
+  useReadMore?: boolean;
 }>`
   align-items: center;
   display: flex;
@@ -160,10 +160,10 @@ const slideAnimation = (start?: number, end?: number) => keyframes`
 `;
 
 export const SlideShowProgressBar = styled.span<{
-  startWidth?: number;
-  paused?: boolean;
-  duration?: number;
   color?: string;
+  duration?: number;
+  paused?: boolean;
+  startWidth?: number;
 }>`
   background: ${(p) => p.color};
   bottom: -0.75em;

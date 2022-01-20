@@ -7,18 +7,18 @@ import { TimelineMode } from './TimelineModel';
 interface CommonPropsModel {
   alternateCards?: boolean;
   cardHeight?: number;
+  disableClickOnCircle?: boolean;
+  enableOutline?: boolean;
   flipLayout?: boolean;
   hasFocus?: boolean;
+  lineWidth?: number;
   mode?: TimelineMode;
   onClick: (id?: string) => void;
   onElapsed?: (id?: string) => void;
   slideItemDuration?: number;
   slideShowRunning?: boolean;
   theme?: Theme;
-  enableOutline?: boolean;
   timelineCircleDimension?: number;
-  lineWidth?: number;
-  disableClickOnCircle?: boolean;
 }
 
 interface CommonVerticalModel extends CommonPropsModel {
@@ -28,8 +28,8 @@ interface CommonVerticalModel extends CommonPropsModel {
 }
 
 export interface VerticalCircleModel extends CommonVerticalModel {
-  onActive: (pointOffset: number) => void;
   iconChild?: React.ReactNode;
+  onActive: (pointOffset: number) => void;
 }
 
 export interface VerticalItemModel extends CommonVerticalModel {
@@ -40,15 +40,15 @@ export interface VerticalItemModel extends CommonVerticalModel {
   iconChild?: React.ReactNode;
   index: number;
   media?: Media;
-  onShowMore?: () => void;
-  title?: string;
-  url?: string;
-  visible?: boolean;
   onActive: (
     pointOffset: number,
     contentHeight: number,
     contentOffset: number,
   ) => void;
+  onShowMore?: () => void;
+  title?: string;
+  url?: string;
+  visible?: boolean;
 }
 
 export interface TimelineVerticalModel extends CommonPropsModel {

@@ -6,17 +6,17 @@ import {
 } from '../timeline-card-content/timeline-card-content.styles';
 
 interface Title {
-  title?: string;
-  url?: string;
-  theme?: Theme;
+  active?: boolean;
   color?: string;
   dir?: string;
-  active?: boolean;
+  theme?: Theme;
+  title?: string;
+  url?: string;
 }
 
 interface Content {
-  content?: string;
   color?: string;
+  content?: string;
   dir?: string;
   theme?: Theme;
 }

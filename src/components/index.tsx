@@ -28,10 +28,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   const customTheme = Object.assign(
     {
-      primary: '#0f52ba',
-      secondary: '#ffdf00',
       cardBgColor: '#fff',
       cardForeColor: '#000',
+      primary: '#0f52ba',
+      secondary: '#ffdf00',
       titleColor: '#0f52ba',
     },
     theme,
@@ -41,9 +41,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     return items && items.length
       ? items.map((item, index) => {
           return Object.assign({}, item, {
+            active: index === activeItemIndex,
             id: Math.random().toString(16).slice(2),
             visible: true,
-            active: index === activeItemIndex,
           });
         })
       : Array.from({
@@ -51,9 +51,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
             (item) => (item as any).props.className !== 'chrono-icons',
           ).length,
         }).map<Partial<TimelineItemModel>>((item, index) => ({
+          active: index === activeItemIndex,
           id: Math.random().toString(16).slice(2),
           visible: true,
-          active: index === activeItemIndex,
         }));
   };
 
@@ -63,9 +63,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
       return items.map((item, index) => ({
         ...item,
+        active: index === pos,
         id: Math.random().toString(16).slice(2),
         visible: true,
-        active: index === pos,
       }));
     } else {
       return [];
