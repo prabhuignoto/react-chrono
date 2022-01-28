@@ -17,8 +17,8 @@
   "scripts": {
     "cypress": "cypress open",
     "cypress:record": "cypress run --record --key 0a753295-339a-4351-bf1d-6b91d4bcb937",
-    "cypress:runner": "start-server-and-test start http://localhost:8080 cypress:record",
-    "cypress:test": "start-server-and-test start http://localhost:8080 cypress",
+    "cypress:runner": "start-server-and-test start http://localhost:3000 cypress:record",
+    "cypress:test": "start-server-and-test start http://localhost:3000 cypress",
     "eslint": "eslint src/**/*.{tsx,ts}",
     "fix-js": "eslint src/**/*.{tsx,ts} --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",

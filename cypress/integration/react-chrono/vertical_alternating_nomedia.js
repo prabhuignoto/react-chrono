@@ -2,7 +2,7 @@
 
 context('Chrono.Vertical.Alternating', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:8080/vertical-alternating');
+    cy.visit('http://localhost:3000/vertical-alternating');
   });
 
   it('check length', () => {

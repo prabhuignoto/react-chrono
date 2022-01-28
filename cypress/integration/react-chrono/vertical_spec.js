@@ -2,7 +2,7 @@
 
 context('Chrono.Vertical.Basic', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:8080/vertical-basic');
+    cy.visit('http://localhost:3000/vertical-basic');
   });
 
   it('check length', () => {
@@ -20,13 +20,14 @@ context('Chrono.Vertical.Basic', () => {
   it('check timeline card contents', () => {
     cy.get('.vertical-item-row')
       .eq(3)
-      .find('.timeline-card-content').within(() => {
+      .find('.timeline-card-content')
+      .within(() => {
         cy.get('.card-title').should('contain', 'Pearl Harbor');
         cy.get('.card-sub-title').should(
           'contain',
           'The destroyer USS Shaw explodes in dry dock after being hit by Japanese aircraft',
         );
-      })
+      });
   });
 
   it('check card title', () => {
@@ -40,10 +41,7 @@ context('Chrono.Vertical.Basic', () => {
     cy.get('.vertical-item-row')
       .eq(0)
       .find('.card-description span')
-      .should(
-        'have.length',
-        1,
-      );
+      .should('have.length', 1);
   });
 
   it('check card description', () => {
