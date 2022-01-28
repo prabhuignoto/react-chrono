@@ -65,7 +65,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const timelineMainRef = useRef<HTMLDivElement>(null);
 
   const canScrollTimeline = useMemo(() => {
-    debugger;
     if (!slideShowRunning) {
       if (typeof scrollable === 'boolean') {
         return scrollable;
@@ -100,21 +99,18 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   // handler for keyboard navigation
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const { key } = event;
-    console.log(key);
 
     if (
       (mode === 'HORIZONTAL' && key === 'ArrowRight') ||
       ((mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
         key === 'ArrowDown')
     ) {
-      debugger;
       handleNext();
     } else if (
       (mode === 'HORIZONTAL' && key === 'ArrowLeft') ||
       ((mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
         key === 'ArrowUp')
     ) {
-      debugger;
       handlePrevious();
     } else if (key === 'Home') {
       handleFirst();
