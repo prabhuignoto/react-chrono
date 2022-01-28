@@ -1,6 +1,6 @@
 name: Cypress Tests using Cypress Docker Image
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   chrome:
