@@ -492,7 +492,6 @@ yarn rollup
 
 - [Typescript](https://www.typescriptlang.org/).
 - Styled with [emotion](https://emotion.sh/).
-- Powered by [snowpack](https://www.snowpack.dev/)
 
 ## Meta
 
@@ -510,7 +509,6 @@ Prabhu Murthy – [@prabhumurthy2](https://twitter.com/prabhumurthy2) – prabhu
 [react]: https://reactjs.org
 [typescript]: https://typescriptlang.org
 [emotion]: https://emotion.sh/
-[snowpack]: https://www.snowpack.dev/
 
 ## Contributors ✨
 

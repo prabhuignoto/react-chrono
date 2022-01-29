@@ -1,6 +1,6 @@
 name: Cypress Tests using Cypress Docker Image
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   chrome:
@@ -12,6 +12,6 @@ jobs:
       - uses: cypress-io/github-action@v2
         with:
           start: npm run dev
-          wait-on: 'http://localhost:8080'
+          wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
           browser: chrome

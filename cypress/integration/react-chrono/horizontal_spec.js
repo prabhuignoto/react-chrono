@@ -2,15 +2,15 @@
 
 context('Chrono.Vertical.Basic', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:8080/horizontal');
+    cy.visit('http://localhost:3000/horizontal');
   });
 
   it('check length', () => {
-    cy.get('.timeline-horz-item-container').should("have.length", 13);
-  })
+    cy.get('.timeline-horz-item-container').should('have.length', 13);
+  });
 
-  it("check timeline controls", () => {
-    cy.get(".timeline-controls").children().should("have.length", 5)
+  it('check timeline controls', () => {
+    cy.get('.timeline-controls').children().should('have.length', 5);
   });
 
   // it('check read more', () => {

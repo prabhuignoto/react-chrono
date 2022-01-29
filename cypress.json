@@ -1,7 +1,7 @@
 {
   "projectId": "8zb5a5",
   "ignoreTestFiles": "**/examples/*.js",
-  "baseUrl": "http://localhost:8080",
+  "baseUrl": "http://localhost:3000",
   "watchForFileChanges": false,
   "defaultCommandTimeout": 10000
 }
