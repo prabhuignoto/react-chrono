@@ -75,7 +75,6 @@ export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
   font-size: 0.85rem;
   font-weight: 400;
   margin: 0;
-  touch-action: none;
   width: 100%;
 `;
 
