@@ -24,7 +24,10 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     mode = 'HORIZONTAL',
     itemWidth = 200,
     cardHeight,
+    cardLess,
+    flipLayout,
   } = useContext(GlobalContext);
+
   const wrapperClass = useMemo(
     () => cls(mode.toLowerCase(), 'timeline-horizontal-container'),
     [mode],
@@ -35,6 +38,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   return (
     <TimelineHorizontalWrapper
       className={wrapperClass}
+      flipLayout={flipLayout}
       data-testid="timeline-collection"
     >
       {items.map((item, index) => (

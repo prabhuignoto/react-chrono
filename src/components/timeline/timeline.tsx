@@ -56,6 +56,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onScrollEnd,
     enableOutline,
     lineWidth,
+    flipLayout,
   } = useContext(GlobalContext);
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
@@ -100,16 +101,19 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const handleKeySelection = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const { key } = event;
 
-    if (
-      (mode === 'HORIZONTAL' && key === 'ArrowRight') ||
-      ((mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
-        key === 'ArrowDown')
+    if (mode === 'HORIZONTAL' && key === 'ArrowRight') {
+      debugger;
+      flipLayout ? handlePrevious() : handleNext();
+    } else if (mode === 'HORIZONTAL' && key === 'ArrowLeft') {
+      flipLayout ? handleNext() : handlePrevious();
+    } else if (
+      (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
+      key === 'ArrowDown'
     ) {
       handleNext();
     } else if (
-      (mode === 'HORIZONTAL' && key === 'ArrowLeft') ||
-      ((mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
-        key === 'ArrowUp')
+      (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
+      key === 'ArrowUp'
     ) {
       handlePrevious();
     } else if (key === 'Home') {
@@ -331,8 +335,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       {!hideControls && (
         <TimelineControlContainer mode={mode}>
           <TimelineControl
-            disableLeft={activeTimelineItem === 0}
-            disableRight={activeTimelineItem === items.length - 1}
+            disableLeft={
+              flipLayout
+                ? activeTimelineItem === items.length - 1
+                : activeTimelineItem === 0
+            }
+            disableRight={
+              flipLayout
+                ? activeTimelineItem === 0
+                : activeTimelineItem === items.length - 1
+            }
             id={id.current}
             onFirst={handleFirst}
             onLast={handleLast}

@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
 
-export const TimelineHorizontalWrapper = styled.ul`
+export const TimelineHorizontalWrapper = styled.ul<{ flipLayout?: boolean }>`
   display: flex;
   list-style: none;
   margin: 0;
   width: 100%;
+  direction: ${(p) => (p.flipLayout ? 'rtl' : 'ltr')};
+
   &.vertical {
     flex-direction: column;
   }

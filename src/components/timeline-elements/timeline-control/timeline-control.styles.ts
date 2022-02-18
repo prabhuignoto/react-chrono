@@ -56,11 +56,13 @@ export const TimelineNavButton = styled.button<{
 `;
 
 export const TimelineControlContainer = styled.div<{
+  flip?: boolean;
   slideShowActive?: boolean;
 }>`
   align-items: center;
   display: flex;
   justify-content: center;
+  // direction: ${(p) => (p.flip ? 'rtl' : 'ltr')};
   visibility: ${(p) => (p.slideShowActive ? 'hidden' : 'visible')};
 `;
 

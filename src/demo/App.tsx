@@ -89,7 +89,10 @@ const NewDemo: React.FunctionComponent = () => {
               <Link to="/dynamic-load">Dynamic data load</Link>
             </li>
             <li>
-              <Link to="/timeline-without-cards">Timeline Cardless</Link>
+              <Link to="/timeline-without-cards">Timeline Card less</Link>
+            </li>
+            <li>
+              <Link to="/timeline-without-cards-horizontal">Timeline Card less (Horizontal)</Link>
             </li>
           </ComponentLinks>
         </aside>
@@ -124,6 +127,8 @@ const NewDemo: React.FunctionComponent = () => {
             <Route path="/dynamic-load" element={items.length > 0 && <DynamicLoad />}>
             </Route>
             <Route path="/timeline-without-cards" element={items.length > 0 && <VerticalBasicCardLess type='big-screen' items={items} />}>
+            </Route>
+            <Route path="/timeline-without-cards-horizontal" element={items.length > 0 && <VerticalBasicCardLess type='big-screen' items={items} />}>
             </Route>
             <Route path="/" element={items.length > 0 && (
               <VerticalBasic type={"big-screen"} items={items} />

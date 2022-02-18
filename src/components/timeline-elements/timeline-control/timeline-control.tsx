@@ -27,17 +27,26 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> =
       onReplay,
       slideShowEnabled,
     }: TimelineControlModel) => {
-      const { mode } = useContext(GlobalContext);
+      const { mode, flipLayout } = useContext(GlobalContext);
+
       const rotate = useMemo(() => mode !== 'HORIZONTAL', [mode]);
+
+      const flippedHorizontally = useMemo(
+        () => flipLayout && mode === 'HORIZONTAL',
+        [],
+      );
       return (
-        <TimelineControlContainer slideShowActive={slideShowRunning}>
+        <TimelineControlContainer
+          slideShowActive={slideShowRunning}
+          flip={flippedHorizontally}
+        >
           <TimelineNavWrapper className="timeline-controls">
             {/* jump to first */}
             <TimelineNavItem disable={disableLeft}>
               <TimelineNavButton
                 mode={mode}
                 theme={theme}
-                onClick={onFirst}
+                onClick={flippedHorizontally ? onLast : onFirst}
                 title="Go to First"
                 aria-label="first"
                 aria-disabled={disableLeft}
@@ -54,7 +63,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> =
               <TimelineNavButton
                 mode={mode}
                 theme={theme}
-                onClick={onPrevious}
+                onClick={flippedHorizontally ? onNext : onPrevious}
                 title="Previous"
                 aria-label="previous"
                 aria-disabled={disableLeft}
@@ -71,7 +80,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> =
               <TimelineNavButton
                 mode={mode}
                 theme={theme}
-                onClick={onNext}
+                onClick={flippedHorizontally ? onPrevious : onNext}
                 title="Next"
                 aria-label="next"
                 aria-disabled={disableRight}
@@ -88,7 +97,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> =
               <TimelineNavButton
                 mode={mode}
                 theme={theme}
-                onClick={onLast}
+                onClick={flippedHorizontally ? onFirst : onLast}
                 title="Go to Last"
                 aria-label="last"
                 aria-disabled={disableRight}
