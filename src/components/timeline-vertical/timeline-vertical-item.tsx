@@ -52,6 +52,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     timelineCircleDimension,
     lineWidth,
     disableClickOnCircle,
+    cardLess,
   } = useContext(GlobalContext);
 
   // handler for read more
@@ -99,28 +100,31 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         alternateCards={alternateCards}
         noTitle={!title}
         flip={flipLayout}
+        height={cardHeight}
       >
-        <TimelineCard
-          active={active}
-          branchDir={className}
-          content={cardSubtitle}
-          customContent={contentDetailsChildren}
-          detailedText={cardDetailedText}
-          hasFocus={hasFocus}
-          id={id}
-          media={media}
-          onClick={onClick}
-          onElapsed={onElapsed}
-          onShowMore={handleShowMore}
-          slideShowActive={slideShowRunning}
-          theme={theme}
-          title={cardTitle}
-          url={url}
-          flip={flipLayout}
-        />
+        {!cardLess && (
+          <TimelineCard
+            active={active}
+            branchDir={className}
+            content={cardSubtitle}
+            customContent={contentDetailsChildren}
+            detailedText={cardDetailedText}
+            hasFocus={hasFocus}
+            id={id}
+            media={media}
+            onClick={onClick}
+            onElapsed={onElapsed}
+            onShowMore={handleShowMore}
+            slideShowActive={slideShowRunning}
+            theme={theme}
+            title={cardTitle}
+            url={url}
+            flip={flipLayout}
+          />
+        )}
       </TimelineCardContentWrapper>
     );
-  }, [hasFocus, slideShowRunning, active]);
+  }, [hasFocus, slideShowRunning, active, visible]);
 
   // timeline circle
   const Circle = useMemo(() => {
@@ -151,6 +155,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       data-testid="vertical-item-row"
       key={id}
       ref={contentRef}
+      cardLess={cardLess}
       role="listitem"
     >
       {/* title */}

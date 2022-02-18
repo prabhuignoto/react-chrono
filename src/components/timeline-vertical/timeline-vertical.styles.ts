@@ -24,6 +24,7 @@ const animateVisible = keyframes`
 export const VerticalItemWrapper = styled.div<{
   alternateCards?: boolean;
   cardHeight?: number;
+  cardLess?: boolean;
 }>`
   display: flex;
   position: relative;
@@ -41,6 +42,8 @@ export const VerticalItemWrapper = styled.div<{
   &.visible {
     visibility: visible;
   }
+
+  min-height: ${(p) => p.cardHeight}px;
 `;
 
 export const VerticalCircleWrapper = styled.div<{
@@ -79,14 +82,16 @@ export const VerticalCircleWrapper = styled.div<{
 
 export const TimelineCardContentWrapper = styled.div<{
   alternateCards?: boolean;
+  cardLess?: boolean;
   flip?: boolean;
+  height?: number;
   noTitle?: boolean;
 }>`
   visibility: hidden;
   position: relative;
   display: flex;
   align-items: center;
-
+  min-height: ${(p) => (p.height ? `${p.height}px` : '80px')};
   ${(p) => {
     if (p.alternateCards) {
       return `width: 50%;`;
@@ -96,7 +101,6 @@ export const TimelineCardContentWrapper = styled.div<{
       return `width: 75%;`;
     }
   }}
-
   ${(p) => {
     if (!p.flip) {
       return `
@@ -121,8 +125,7 @@ export const TimelineCardContentWrapper = styled.div<{
       `;
     }
   }}
-
-  &.visible {
+    &.visible {
     visibility: visible;
     animation: ${animateVisible} 0.25s ease-in;
   }

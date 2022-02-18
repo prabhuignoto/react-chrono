@@ -4,7 +4,7 @@ import { TimelineCardModel } from './TimelineItemModel';
 import { Media } from './TimelineMediaModel';
 import { TimelineMode } from './TimelineModel';
 
-interface CommonPropsModel {
+interface Props {
   alternateCards?: boolean;
   cardHeight?: number;
   disableClickOnCircle?: boolean;
@@ -21,18 +21,30 @@ interface CommonPropsModel {
   timelineCircleDimension?: number;
 }
 
-interface CommonVerticalModel extends CommonPropsModel {
+type VerticalModel = Pick<
+  Props,
+  | 'alternateCards'
+  | 'hasFocus'
+  | 'onClick'
+  | 'onElapsed'
+  | 'slideShowRunning'
+  | 'theme'
+  | 'mode'
+  | 'timelineCircleDimension'
+  | 'lineWidth'
+  | 'disableClickOnCircle'
+> & {
   active?: boolean;
   className: string;
   id?: string;
-}
+};
 
-export interface VerticalCircleModel extends CommonVerticalModel {
+export interface VerticalCircleModel extends VerticalModel {
   iconChild?: React.ReactNode;
   onActive: (pointOffset: number) => void;
 }
 
-export interface VerticalItemModel extends CommonVerticalModel {
+export interface VerticalItemModel extends VerticalModel {
   cardDetailedText?: string | string[];
   cardSubtitle?: string;
   cardTitle?: string;
@@ -51,7 +63,17 @@ export interface VerticalItemModel extends CommonVerticalModel {
   visible?: boolean;
 }
 
-export interface TimelineVerticalModel extends CommonPropsModel {
+export type TimelineVerticalModel = Pick<
+  Props,
+  | 'alternateCards'
+  | 'enableOutline'
+  | 'mode'
+  | 'onClick'
+  | 'onElapsed'
+  | 'slideShowRunning'
+  | 'theme'
+  | 'hasFocus'
+> & {
   activeTimelineItem: number;
   autoScroll: (s: Partial<Scroll>) => void;
   childrenNode?: React.ReactNode;
@@ -59,4 +81,4 @@ export interface TimelineVerticalModel extends CommonPropsModel {
   iconChildren?: React.ReactNode;
   items: TimelineCardModel[];
   onOutlineSelection?: (index: number) => void;
-}
+};

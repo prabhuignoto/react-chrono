@@ -108,11 +108,11 @@ export const VerticalTree: FunctionComponent<{
         slideShow
         slideItemDuration={2350}
         allowDynamicUpdate
-        cardHeight={200}
+        // cardHeight={100}
+        cardLess
         cardWidth={450}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         onScrollEnd={() => console.log('end reached')}
-        enableOutline
       >
         <div className="chrono-icons">
           <img src="https://img.icons8.com/ios-filled/100/000000/twitter.png" alt="twitter" />
@@ -144,9 +144,10 @@ export const VerticalTreeMixed: FunctionComponent<{
       <Chrono
         items={dataMixed}
         mode="VERTICAL_ALTERNATING"
-        cardHeight={200}
+        cardHeight={300}
         cardWidth={450}
         scrollable
+        cardLess
       // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
     </ComponentContainerTree>

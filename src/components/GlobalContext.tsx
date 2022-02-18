@@ -7,11 +7,12 @@ const GlobalContext = React.createContext<PropsModel>({});
 const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
   props,
 ) => {
-  const defaultProps = Object.assign<PropsModel, PropsModel, PropsModel>(
+  const { cardHeight, cardLess = false } = props;
+  const defaultProps = Object.assign(
     {},
     {
       borderLessCards: false,
-      cardHeight: 200,
+      cardLess,
       disableAutoScrollOnClick: false,
       disableClickOnCircle: false,
       lineWidth: 3,
@@ -21,9 +22,14 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       timelineCircleDimension: 16,
       useReadMore: true,
     },
-    props,
+    {
+      ...props,
+      cardHeight: cardLess ? (cardHeight ? cardHeight : 80) : cardHeight,
+    },
   );
   const { children } = props;
+
+  console.log(defaultProps);
   return (
     <GlobalContext.Provider value={defaultProps}>
       {children}
