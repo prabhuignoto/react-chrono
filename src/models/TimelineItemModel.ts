@@ -21,7 +21,18 @@ export interface TimelineItemModel {
   visible?: boolean;
 }
 
-export interface TimelineCardModel extends TimelineItemModel {
+export type TimelineCardModel = Pick<
+  TimelineItemModel,
+  | 'id'
+  | 'visible'
+  | 'title'
+  | 'active'
+  | 'cardDetailedText'
+  | 'cardSubtitle'
+  | 'cardTitle'
+  | 'media'
+  | 'url'
+> & {
   autoScroll: ({
     pointOffset,
     pointWidth,
@@ -39,4 +50,4 @@ export interface TimelineCardModel extends TimelineItemModel {
   slideShowRunning?: boolean;
   theme?: Theme;
   wrapperId: string;
-}
+};

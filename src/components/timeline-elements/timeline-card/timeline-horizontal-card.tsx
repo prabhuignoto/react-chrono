@@ -47,6 +47,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     cardPositionHorizontal: position,
     timelineCircleDimension,
     disableClickOnCircle,
+    cardLess,
   } = useContext(GlobalContext);
 
   const handleClick = () => {
@@ -131,7 +132,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
 
   return (
     <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
-      {active && showTimelineContent()}
+      {active && !cardLess && showTimelineContent()}
 
       <CircleWrapper>
         <Circle

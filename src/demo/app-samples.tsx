@@ -56,6 +56,7 @@ export const HorizontalInitalSelectedItem: React.FunctionComponent<{
           slideShow
           slideItemDuration={2550}
           itemWidth={200}
+          cardLess
           onItemSelected={selected => console.log(selected)}
           >
           <div className="chrono-icons">
@@ -93,6 +94,41 @@ export const VerticalBasic: FunctionComponent<{
   </Vertical>
 );
 
+export const VerticalBasicCardLess: FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({ type, items }) => (
+  <Vertical id="vertical">
+    <ComponentContainerTree type={type}>
+      <Chrono
+        items={items}
+        mode="HORIZONTAL"
+        cardLess
+        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
+        onItemSelected={(selected) => console.log(selected.cardTitle)}
+      />
+    </ComponentContainerTree>
+  </Vertical>
+);
+
+export const HorizontalBasicCardLess: FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({ type, items }) => (
+  <Vertical id="vertical">
+    <ComponentContainerTree type={type}>
+      <Chrono
+        items={items}
+        mode="VERTICAL_ALTERNATING"
+        cardLess
+        flipLayout
+        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
+        onItemSelected={(selected) => console.log(selected.cardTitle)}
+      />
+    </ComponentContainerTree>
+  </Vertical>
+);
+
 export const VerticalTree: FunctionComponent<{
   type: string,
   items: TimelineItemModel[],
@@ -108,11 +144,10 @@ export const VerticalTree: FunctionComponent<{
         slideShow
         slideItemDuration={2350}
         allowDynamicUpdate
-        cardHeight={200}
+        // cardHeight={100}
         cardWidth={450}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         onScrollEnd={() => console.log('end reached')}
-        enableOutline
       >
         <div className="chrono-icons">
           <img src="https://img.icons8.com/ios-filled/100/000000/twitter.png" alt="twitter" />
@@ -144,7 +179,7 @@ export const VerticalTreeMixed: FunctionComponent<{
       <Chrono
         items={dataMixed}
         mode="VERTICAL_ALTERNATING"
-        cardHeight={200}
+        cardHeight={300}
         cardWidth={450}
         scrollable
       // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}

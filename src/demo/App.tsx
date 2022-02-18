@@ -4,7 +4,7 @@ import { Theme } from '../models/Theme';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
   HorizontalBasic, HorizontalInitalSelectedItem,
-  VerticalBasic, VerticalCustomContent, VerticalCustomContent2, VerticalTree, VerticalTreeMixed
+  VerticalBasic, VerticalBasicCardLess, VerticalCustomContent, VerticalCustomContent2, VerticalTree, VerticalTreeMixed
 } from './app-samples';
 import './App.css';
 import {
@@ -88,6 +88,12 @@ const NewDemo: React.FunctionComponent = () => {
             <li>
               <Link to="/dynamic-load">Dynamic data load</Link>
             </li>
+            <li>
+              <Link to="/timeline-without-cards">Timeline Card less</Link>
+            </li>
+            <li>
+              <Link to="/timeline-without-cards-horizontal">Timeline Card less (Horizontal)</Link>
+            </li>
           </ComponentLinks>
         </aside>
         <AppArea>
@@ -119,6 +125,10 @@ const NewDemo: React.FunctionComponent = () => {
             <Route path="/vertical-custom-icon" element={items.length > 0 && <VerticalCustomContent2 type="big-screen" />}>
             </Route>
             <Route path="/dynamic-load" element={items.length > 0 && <DynamicLoad />}>
+            </Route>
+            <Route path="/timeline-without-cards" element={items.length > 0 && <VerticalBasicCardLess type='big-screen' items={items} />}>
+            </Route>
+            <Route path="/timeline-without-cards-horizontal" element={items.length > 0 && <VerticalBasicCardLess type='big-screen' items={items} />}>
             </Route>
             <Route path="/" element={items.length > 0 && (
               <VerticalBasic type={"big-screen"} items={items} />

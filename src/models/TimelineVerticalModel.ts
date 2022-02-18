@@ -2,37 +2,54 @@ import { Theme } from './Theme';
 import { Scroll } from './TimelineHorizontalModel';
 import { TimelineCardModel } from './TimelineItemModel';
 import { Media } from './TimelineMediaModel';
-import { TimelineMode } from './TimelineModel';
+import { TimelineProps } from './TimelineModel';
 
-interface CommonPropsModel {
+export type Props = Pick<
+  TimelineProps,
+  | 'flipLayout'
+  | 'theme'
+  | 'mode'
+  | 'timelineCircleDimension'
+  | 'lineWidth'
+  | 'cardHeight'
+  | 'enableOutline'
+  | 'disableClickOnCircle'
+  | 'cardLess'
+> & {
   alternateCards?: boolean;
-  cardHeight?: number;
-  disableClickOnCircle?: boolean;
-  enableOutline?: boolean;
-  flipLayout?: boolean;
   hasFocus?: boolean;
-  lineWidth?: number;
-  mode?: TimelineMode;
   onClick: (id?: string) => void;
   onElapsed?: (id?: string) => void;
   slideItemDuration?: number;
   slideShowRunning?: boolean;
   theme?: Theme;
-  timelineCircleDimension?: number;
-}
+};
 
-interface CommonVerticalModel extends CommonPropsModel {
+type VerticalModel = Pick<
+  Props,
+  | 'alternateCards'
+  | 'hasFocus'
+  | 'onClick'
+  | 'onElapsed'
+  | 'slideShowRunning'
+  | 'theme'
+  | 'mode'
+  | 'timelineCircleDimension'
+  | 'lineWidth'
+  | 'disableClickOnCircle'
+  | 'cardLess'
+> & {
   active?: boolean;
   className: string;
   id?: string;
-}
+};
 
-export interface VerticalCircleModel extends CommonVerticalModel {
+export interface VerticalCircleModel extends VerticalModel {
   iconChild?: React.ReactNode;
   onActive: (pointOffset: number) => void;
 }
 
-export interface VerticalItemModel extends CommonVerticalModel {
+export interface VerticalItemModel extends VerticalModel {
   cardDetailedText?: string | string[];
   cardSubtitle?: string;
   cardTitle?: string;
@@ -51,7 +68,18 @@ export interface VerticalItemModel extends CommonVerticalModel {
   visible?: boolean;
 }
 
-export interface TimelineVerticalModel extends CommonPropsModel {
+export type TimelineVerticalModel = Pick<
+  Props,
+  | 'alternateCards'
+  | 'enableOutline'
+  | 'mode'
+  | 'onClick'
+  | 'onElapsed'
+  | 'slideShowRunning'
+  | 'theme'
+  | 'hasFocus'
+  | 'cardLess'
+> & {
   activeTimelineItem: number;
   autoScroll: (s: Partial<Scroll>) => void;
   childrenNode?: React.ReactNode;
@@ -59,4 +87,4 @@ export interface TimelineVerticalModel extends CommonPropsModel {
   iconChildren?: React.ReactNode;
   items: TimelineCardModel[];
   onOutlineSelection?: (index: number) => void;
-}
+};

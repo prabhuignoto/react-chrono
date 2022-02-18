@@ -1,5 +1,6 @@
 import { Theme } from './Theme';
 export interface TimelineControlModel {
+  activeTimelineItem?: number;
   disableLeft: boolean;
   disableRight: boolean;
   id?: string;
