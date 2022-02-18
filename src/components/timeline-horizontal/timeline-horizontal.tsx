@@ -24,7 +24,6 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     mode = 'HORIZONTAL',
     itemWidth = 200,
     cardHeight,
-    cardLess,
     flipLayout,
   } = useContext(GlobalContext);
 
