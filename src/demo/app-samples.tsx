@@ -93,6 +93,24 @@ export const VerticalBasic: FunctionComponent<{
   </Vertical>
 );
 
+export const VerticalBasicCardLess: FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({ type, items }) => (
+  <Vertical id="vertical">
+    <ComponentContainerTree type={type}>
+      <Chrono
+        items={items}
+        mode="VERTICAL_ALTERNATING"
+        cardLess
+        hideControls
+        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
+        onItemSelected={(selected) => console.log(selected.cardTitle)}
+      />
+    </ComponentContainerTree>
+  </Vertical>
+);
+
 export const VerticalTree: FunctionComponent<{
   type: string,
   items: TimelineItemModel[],
@@ -109,7 +127,6 @@ export const VerticalTree: FunctionComponent<{
         slideItemDuration={2350}
         allowDynamicUpdate
         // cardHeight={100}
-        cardLess
         cardWidth={450}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         onScrollEnd={() => console.log('end reached')}
@@ -147,7 +164,6 @@ export const VerticalTreeMixed: FunctionComponent<{
         cardHeight={300}
         cardWidth={450}
         scrollable
-        cardLess
       // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
     </ComponentContainerTree>
