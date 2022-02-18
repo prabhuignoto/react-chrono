@@ -23,6 +23,7 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
     timelineCircleDimension,
     lineWidth,
     disableClickOnCircle,
+    cardLess,
   } = props;
   const circleRef = useRef<HTMLDivElement>(null);
 
@@ -64,6 +65,7 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
       className={className}
       data-testid="tree-leaf"
       role="button"
+      cardLess={cardLess}
     >
       <VerticalCircleContainer
         className={`${className} timeline-vertical-circle`}

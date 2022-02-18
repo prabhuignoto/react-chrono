@@ -19,6 +19,7 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
   onOutlineSelection,
   slideShowRunning,
   theme,
+  cardLess,
 }: TimelineVerticalModel) => {
   // check if the timeline that has become active is visible.
   // if not auto scroll the content and bring it to the view.
@@ -88,6 +89,7 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
             onShowMore={handleOnShowMore}
             slideShowRunning={slideShowRunning}
             theme={theme}
+            cardLess={cardLess}
           />
         );
       })}

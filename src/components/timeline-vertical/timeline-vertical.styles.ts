@@ -49,13 +49,14 @@ export const VerticalItemWrapper = styled.div<{
 export const VerticalCircleWrapper = styled.div<{
   alternateCards?: boolean;
   bg?: string;
+  cardLess?: boolean;
   width?: number;
 }>`
   align-items: center;
   display: flex;
   justify-content: center;
   position: relative;
-  width: 10%;
+  width: ${(p) => (p.cardLess ? '5%' : '10%')};
 
   &.left {
     order: 2;

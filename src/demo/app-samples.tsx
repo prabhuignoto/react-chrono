@@ -103,7 +103,6 @@ export const VerticalBasicCardLess: FunctionComponent<{
         items={items}
         mode="VERTICAL_ALTERNATING"
         cardLess
-        hideControls
         theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
       />

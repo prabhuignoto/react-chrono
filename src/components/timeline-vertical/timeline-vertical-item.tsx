@@ -55,6 +55,8 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     cardLess,
   } = useContext(GlobalContext);
 
+  debugger;
+
   // handler for read more
   const handleShowMore = useCallback(() => {
     setTimeout(() => {
@@ -143,6 +145,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         timelineCircleDimension={timelineCircleDimension}
         lineWidth={lineWidth}
         disableClickOnCircle={disableClickOnCircle}
+        cardLess={cardLess}
       />
     );
   }, [slideShowRunning, active]);

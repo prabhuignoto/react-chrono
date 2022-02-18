@@ -2,24 +2,28 @@ import { Theme } from './Theme';
 import { Scroll } from './TimelineHorizontalModel';
 import { TimelineCardModel } from './TimelineItemModel';
 import { Media } from './TimelineMediaModel';
-import { TimelineMode } from './TimelineModel';
+import { TimelineProps } from './TimelineModel';
 
-interface Props {
+export type Props = Pick<
+  TimelineProps,
+  | 'flipLayout'
+  | 'theme'
+  | 'mode'
+  | 'timelineCircleDimension'
+  | 'lineWidth'
+  | 'cardHeight'
+  | 'enableOutline'
+  | 'disableClickOnCircle'
+  | 'cardLess'
+> & {
   alternateCards?: boolean;
-  cardHeight?: number;
-  disableClickOnCircle?: boolean;
-  enableOutline?: boolean;
-  flipLayout?: boolean;
   hasFocus?: boolean;
-  lineWidth?: number;
-  mode?: TimelineMode;
   onClick: (id?: string) => void;
   onElapsed?: (id?: string) => void;
   slideItemDuration?: number;
   slideShowRunning?: boolean;
   theme?: Theme;
-  timelineCircleDimension?: number;
-}
+};
 
 type VerticalModel = Pick<
   Props,
@@ -33,6 +37,7 @@ type VerticalModel = Pick<
   | 'timelineCircleDimension'
   | 'lineWidth'
   | 'disableClickOnCircle'
+  | 'cardLess'
 > & {
   active?: boolean;
   className: string;
@@ -73,6 +78,7 @@ export type TimelineVerticalModel = Pick<
   | 'slideShowRunning'
   | 'theme'
   | 'hasFocus'
+  | 'cardLess'
 > & {
   activeTimelineItem: number;
   autoScroll: (s: Partial<Scroll>) => void;

@@ -37,7 +37,7 @@ export type TimelineModel = Pick<
  * @export
  * @interface TimelineProps
  */
-export interface TimelineProps {
+export type TimelineProps = {
   activeItemIndex?: number;
   allowDynamicUpdate?: boolean;
   borderLessCards?: boolean;
@@ -65,6 +65,6 @@ export interface TimelineProps {
   theme?: Theme;
   timelineCircleDimension?: number;
   useReadMore?: boolean;
-}
+};
 
 export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';
