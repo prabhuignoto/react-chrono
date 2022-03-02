@@ -182,6 +182,8 @@ export const VerticalTreeMixed: FunctionComponent<{
         cardHeight={300}
         cardWidth={450}
         scrollable
+        onNext={(id)=> console.log("pasa el next", id)}
+        onPrevious={(id) => console.log("onPrevious", id)}
       // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
     </ComponentContainerTree>
