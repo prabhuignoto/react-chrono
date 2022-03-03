@@ -24,8 +24,11 @@ export const HorizontalBasic: React.FunctionComponent<{
           cardWidth={450}
           slideShow
           slideItemDuration={2550}
-          itemWidth={200}
+          itemWidth={150}
+          scrollable={{scrollbar: true}}
           onItemSelected={selected => console.log(selected)}
+          onNext={(id)=> console.log("pasa el next", id)}
+          onPrevious={(id) => console.log("onPrevious", id)}
           timelineCircleDimension={20}
         >
           <div className="chrono-icons">

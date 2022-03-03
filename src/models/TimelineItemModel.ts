@@ -50,4 +50,5 @@ export type TimelineCardModel = Pick<
   slideShowRunning?: boolean;
   theme?: Theme;
   wrapperId: string;
+  index: number;
 };

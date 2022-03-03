@@ -117,7 +117,8 @@ export const TimelineTitleContainer = styled.div`
 
   &.horizontal {
     position: absolute;
-    top: 0;
+    ${props => (props.index % 2 === 0) ? 'bottom' : 'top'}: 0;
+
   }
 `;
 

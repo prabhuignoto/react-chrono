@@ -59,6 +59,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
             slideShowRunning={slideShowRunning}
             cardHeight={cardHeight}
             onElapsed={onElapsed}
+            index={index}
             customContent={children ? (children as ReactNode[])[index] : null}
             hasFocus={hasFocus}
             iconChild={iconChildColln[index]}
