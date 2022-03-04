@@ -106,7 +106,9 @@ export const Circle = styled.div<CircleModel>`
   }
 `;
 
-export const TimelineTitleContainer = styled.div`
+export const TimelineTitleContainer = styled.div<{
+    index?: any;
+}>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -117,7 +119,7 @@ export const TimelineTitleContainer = styled.div`
 
   &.horizontal {
     position: absolute;
-    ${props => (props.index % 2 === 0) ? 'bottom' : 'top'}: 0;
+    ${({index}) => index % 2 === 0 ? 'bottom' : 'top'}: 0;
 
   }
 `;

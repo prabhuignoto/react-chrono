@@ -153,7 +153,6 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         className={titleClass}
         data-testid="timeline-title"
         index={index}
-        mode={mode}
       >
         <TimelineItemTitle title={title} active={active} theme={theme} />
       </TimelineTitleContainer>
