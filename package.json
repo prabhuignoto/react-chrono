@@ -1,6 +1,6 @@
 {
   "name": "react-chrono",
-  "version": "1.14.6",
+  "version": "1.14.7",
   "license": "MIT",
   "description": "A Modern Timeline component for React",
   "keywords": [
@@ -10,12 +10,7 @@
     "vertical-timeline"
   ],
   "author": "Prabhu Murthy",
-  "repository": {
-    "url": "https://github.com/prabhuignoto/react-chrono",
-    "type": "git"
-  },
   "scripts": {
-    "rollup": "rimraf ./dist && rollup -c",
     "dev": "vite --config vite.config.ts"
   },
   "dependencies": {
@@ -96,16 +91,11 @@
     "ansi-regex": "5.0.1",
     "json-schema": "0.4.0"
   },
-  "files": [
-    "dist"
-  ],
   "browserslist": [
     "last 3 versions",
     "not ie <= 11",
     "not dead",
     "> 5%"
   ],
-  "main": "dist/react-chrono.js",
-  "module": "dist/react-chrono.esm.js",
-  "umd": "dist/react-chrono.umd.js"
+  "main": "src/react-chrono.ts"
 }
