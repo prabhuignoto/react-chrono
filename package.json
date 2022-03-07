@@ -10,10 +10,6 @@
     "vertical-timeline"
   ],
   "author": "Prabhu Murthy",
-  "repository": {
-    "url": "https://github.com/prabhuignoto/react-chrono",
-    "type": "git"
-  },
   "scripts": {
     "rollup": "rimraf ./dist && rollup -c",
     "dev": "vite --config vite.config.ts"
