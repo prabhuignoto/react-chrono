@@ -6777,9 +6777,9 @@ randombytes@^2.1.0:
   dependencies:
     safe-buffer "^5.1.0"
 
-"react-chrono@https://github.com/avianez-onkologikoa/react-chrono.git#1.14.4":
-  version "1.14.2"
-  resolved "https://github.com/avianez-onkologikoa/react-chrono.git#0119ebe70fd1af2384b07504b20cb1a96a6175ae"
+"react-chrono@https://github.com/avianez-onkologikoa/react-chrono.git#1.14.5":
+  version "1.14.5"
+  resolved "https://github.com/avianez-onkologikoa/react-chrono.git#98e940646785c1bddbf997037d5d9e9324796ac4"
   dependencies:
     "@emotion/core" "^11.0.0-next.10"
     "@emotion/react" "^11.7.1"

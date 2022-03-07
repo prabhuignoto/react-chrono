@@ -15,19 +15,7 @@
     "type": "git"
   },
   "scripts": {
-    "cypress": "cypress open",
-    "cypress:record": "cypress run --record --key 0a753295-339a-4351-bf1d-6b91d4bcb937",
-    "cypress:runner": "start-server-and-test start http://localhost:3000 cypress:record",
-    "cypress:test": "start-server-and-test start http://localhost:3000 cypress",
-    "eslint": "eslint src/**/*.{tsx,ts}",
-    "fix-js": "eslint src/**/*.{tsx,ts} --fix",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
-    "lint:all": "yarn run eslint && yarn run lint:css && yarn run lint",
-    "lint:css": "stylelint src/**/*style.ts --custom-syntax @stylelint/postcss-css-in-js",
     "rollup": "rimraf ./dist && rollup -c",
-    "snyk": "snyk test",
-    "prepare": "husky install",
     "dev": "vite --config vite.config.ts"
   },
   "dependencies": {
@@ -36,10 +24,6 @@
     "@emotion/styled": "^11.6.0",
     "classnames": "^2.3.1",
     "focus-visible": "^5.2.0"
-  },
-  "publishConfig": {
-    "cache": "cache/.npm",
-    "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
@@ -78,7 +62,6 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
-    "husky": "^7.0.4",
     "jest": "^27.5.1",
     "lint-staged": "^12.3.4",
     "postcss": "^8.4.6",
@@ -116,25 +99,12 @@
   "files": [
     "dist"
   ],
-  "lint-staged": {
-    "src/components/**/*.{ts,tsx}": [
-      "prettier --write",
-      "stylelint ./src/**/*style.ts",
-      "eslint ./src/**/*.tsx",
-      "git add"
-    ]
-  },
   "browserslist": [
     "last 3 versions",
     "not ie <= 11",
     "not dead",
     "> 5%"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
   "main": "dist/react-chrono.js",
   "module": "dist/react-chrono.esm.js",
   "umd": "dist/react-chrono.umd.js"
