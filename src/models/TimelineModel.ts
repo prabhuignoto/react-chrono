@@ -16,15 +16,17 @@ export type TimelineModel = Pick<
   | 'theme'
   | 'slideShow'
   | 'onScrollEnd'
+    | 'onNext'
+    | 'onPrevious'
 > & {
   activeTimelineItem: number;
   contentDetailsChildren?: React.ReactNode | React.ReactNode[];
   iconChildren?: React.ReactNode | React.ReactNode[];
   onFirst: () => void;
   onLast: () => void;
-  onNext: () => void;
+  onNext: (id: number) => void;
   onOutlineSelection: (index: number) => void;
-  onPrevious: () => void;
+  onPrevious: (id: number) => void;
   onTimelineUpdated: (id: number) => void;
   slideItemDuration?: number;
   slideShowEnabled?: boolean;
@@ -59,6 +61,8 @@ export type TimelineProps = {
   onItemSelected?: (data: TimelineItemModel) => void;
   onRestartSlideshow?: () => void;
   onScrollEnd?: () => void;
+  onNext?: (id: number) => void;
+  onPrevious?: (id: number) => void;
   scrollable?: boolean | { scrollbar: boolean };
   slideItemDuration?: number;
   slideShow?: boolean;

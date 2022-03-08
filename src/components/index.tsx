@@ -18,6 +18,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     theme,
     onItemSelected,
     activeItemIndex = 0,
+    onNext,
+    onPrevious
   } = props;
 
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
@@ -125,6 +127,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
       handleTimelineUpdate(newTimeLineItem);
       setActiveTimelineItem(newTimeLineItem);
+        if (onPrevious) {
+            onPrevious(newTimeLineItem);
+        }
     }
   };
 
@@ -135,6 +140,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
       handleTimelineUpdate(newTimeLineItem);
       setActiveTimelineItem(newTimeLineItem);
+        if (onNext) {
+            onNext(newTimeLineItem);
+        }
     }
   };
 

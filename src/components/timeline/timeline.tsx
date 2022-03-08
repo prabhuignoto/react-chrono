@@ -80,12 +80,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const id = useRef('react-chrono-timeline');
 
   // handlers for navigation
-  const handleNext = useCallback(
-    () => hasFocus && onNext(),
+    const handleNext = useCallback(
+    () => {
+        return hasFocus && onNext(Number(id));
+    },
     [hasFocus, onNext],
   );
-  const handlePrevious = useCallback(
-    () => hasFocus && onPrevious(),
+    const handlePrevious = useCallback(
+    () => {
+        return hasFocus && onPrevious(Number(id.current));
+    },
     [hasFocus, onPrevious],
   );
   const handleFirst = useCallback(
