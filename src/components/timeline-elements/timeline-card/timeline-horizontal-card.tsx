@@ -132,28 +132,30 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
 
   return (
     <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
-      {active && !cardLess && showTimelineContent()}
+      <>
+        {active && !cardLess && showTimelineContent()}
 
-      <CircleWrapper>
-        <Circle
-          className={circleClass}
-          onClick={handleClick}
-          ref={circleRef}
-          data-testid="timeline-circle"
-          theme={theme}
-          aria-label={title}
-          dimension={timelineCircleDimension}
+        <CircleWrapper>
+          <Circle
+            className={circleClass}
+            onClick={handleClick}
+            ref={circleRef}
+            data-testid="timeline-circle"
+            theme={theme}
+            aria-label={title}
+            dimension={timelineCircleDimension}
+          >
+            {iconChild ? iconChild : null}
+          </Circle>
+        </CircleWrapper>
+
+        <TimelineTitleContainer
+          className={titleClass}
+          data-testid="timeline-title"
         >
-          {iconChild ? iconChild : null}
-        </Circle>
-      </CircleWrapper>
-
-      <TimelineTitleContainer
-        className={titleClass}
-        data-testid="timeline-title"
-      >
-        <TimelineItemTitle title={title} active={active} theme={theme} />
-      </TimelineTitleContainer>
+          <TimelineItemTitle title={title} active={active} theme={theme} />
+        </TimelineTitleContainer>
+      </>
     </Wrapper>
   );
 };

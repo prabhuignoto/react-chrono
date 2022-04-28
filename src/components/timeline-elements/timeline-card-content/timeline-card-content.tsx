@@ -94,7 +94,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [showMore]);
 
       const onContainerRef = useCallback(
-        (node) => {
+        (node: HTMLElement) => {
           const detailsEle = detailsRef.current;
           if (node && detailsEle) {
             const { scrollHeight, offsetTop } = detailsEle;
