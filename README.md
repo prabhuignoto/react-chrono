@@ -144,35 +144,35 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 
 ## Props
 
-| name                     | description                                                                                                                                                              | default      |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
-| activeItemIndex          | Selects the active timeline item on load.                                                                                                                                | 0            |
-| allowDynamicUpdate       | Allows timeline items to be updated dynamically.                                                                                                                         | false        |
-| borderLessCards          | Removes the border & shadow from the timeline cards.                                                                                                                     | false        |
-| cardHeight               | Sets the minimum height of the timeline card.                                                                                                                            | 200          |
-| cardLess                 | Disables timeline cards on both horizontal and vertical modes.                                                                                                           | false        |
-| cardPositionHorizontal   | Positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`.                                                                                                |              |
-| cardWidth                | Sets the maximum width of the timeline card.                                                                                                                             |              |
-| disableAutoScrollOnClick | Disables the timeline from auto scrolling on clicking a timeline item.                                                                                                   | false        |
-| disableClickOnCircle     | Disables click action on the timeline circle points.                                                                                                                     | false        |
-| disableNavOnKey          | Disables the keyboard navigation.                                                                                                                                        | false        |
-| enableOutline            | Enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.                                                                                                  | false        |
-| flipLayout               | Flips the layout (RTL).                                                                                                                                                  | false        |
-| hideControls             | Hides the navigation controls.                                                                                                                                           | false        |
-| itemWidth                | Width of the timeline section in `HORIZONTAL` mode.                                                                                                                      | 300          |
-| items                    | Collection of [Timeline Item Model](#timeline-item-model).                                                                                                               | []           |
-| lineWidth                | Prop to customize the width of the timeline track line.                                                                                                                  | 3px          |
-| mode                     | Sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING`.                                                                               | `HORIZONTAL` |
-| onItemSelected           | Callback invoked on a item selection. passes all of the data pertinent to the item.                                                                                      |              |
-| onScrollEnd              | Use the `onScrollEnd` to detect the end of the timeline.                                                                                                                 |              |
-| scrollable               | Makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).                                                                       | true         |
-| showAllCardsHorizontal   | In horizontal mode only the active card is displayed. With this prop you can display all the cards                                                                       | false        |
-| slideItemDuration        | Duration (in ms), the timeline card is active during a `slideshow`.                                                                                                      | 5000         |
-| slideShow                | Enables the slideshow control.                                                                                                                                           | false        |
-| theme                    | Prop to customize the colors.                                                                                                                                            |              |
-| timelineCircleDimension  | Dimension of the timeline circular points.                                                                                                                               | false        |
-| useReadMore              | Enables or disables the read more button.The read more function is enabled only when the height <br /> of the text content exceeds the overall height of the card itself | true         |
-| fontSizes                | Prop to customize the Title, Subtitle, and Text of the card.                                                                                                             | true         |
+| name                     | description                                                                                                                                          | default      |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| activeItemIndex          | Selects the active timeline item on load.                                                                                                            | 0            |
+| allowDynamicUpdate       | Allows timeline items to be updated dynamically.                                                                                                     | false        |
+| borderLessCards          | Removes the border & shadow from the timeline cards.                                                                                                 | false        |
+| cardHeight               | Sets the minimum height of the timeline card.                                                                                                        | 200          |
+| cardLess                 | Disables timeline cards on both horizontal and vertical modes.                                                                                       | false        |
+| cardPositionHorizontal   | Positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`.                                                                            |              |
+| cardWidth                | Sets the maximum width of the timeline card.                                                                                                         |              |
+| disableAutoScrollOnClick | Disables the timeline from auto scrolling on clicking a timeline item.                                                                               | false        |
+| disableClickOnCircle     | Disables click action on the timeline circle points.                                                                                                 | false        |
+| disableNavOnKey          | Disables the keyboard navigation.                                                                                                                    | false        |
+| enableOutline            | Enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.                                                                              | false        |
+| flipLayout               | Flips the layout (RTL).                                                                                                                              | false        |
+| hideControls             | Hides the navigation controls.                                                                                                                       | false        |
+| itemWidth                | Width of the timeline section in `HORIZONTAL` mode.                                                                                                  | 300          |
+| items                    | Collection of [Timeline Item Model](#timeline-item-model).                                                                                           | []           |
+| lineWidth                | Prop to customize the width of the timeline track line.                                                                                              | 3px          |
+| mode                     | Sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING`.                                                           | `HORIZONTAL` |
+| onItemSelected           | Callback invoked on a item selection. passes all of the data pertinent to the item.                                                                  |              |
+| onScrollEnd              | Use the `onScrollEnd` to detect the end of the timeline.                                                                                             |              |
+| scrollable               | Makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).                                                   | true         |
+| showAllCardsHorizontal   | In horizontal mode, only the active card is displayed. With this prop, you can display all the cards.                                                | false        |
+| slideItemDuration        | Duration (in ms), the timeline card is active during a `slideshow`.                                                                                  | 5000         |
+| slideShow                | Enables the slideshow control.                                                                                                                       | false        |
+| theme                    | Prop to customize the colors.                                                                                                                        |              |
+| timelineCircleDimension  | Dimensions of the circular points on the timeline                                                                                                    | false        |
+| useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself. | true         |
+| fontSizes                | property to change the font size of the card's title, subtitle, and text.                                                                            | true         |
 
 ### Mode
 
