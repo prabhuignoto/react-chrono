@@ -51,6 +51,11 @@ export type TimelineProps = {
   disableNavOnKey?: boolean;
   enableOutline?: boolean;
   flipLayout?: boolean;
+  fontSizes?: {
+    cardSubtitle?: string;
+    cardText?: string;
+    cardTitle?: string;
+  };
   hideControls?: boolean;
   itemWidth?: number;
   items?: TimelineItemModel[];

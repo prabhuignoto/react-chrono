@@ -134,7 +134,7 @@ export const VerticalBasicCardLess: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         items={items}
-        mode="HORIZONTAL"
+        mode="VERTICAL"
         cardLess
         theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
@@ -151,9 +151,8 @@ export const HorizontalBasicCardLess: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         items={items}
-        mode="VERTICAL_ALTERNATING"
+        mode="HORIZONTAL"
         cardLess
-        flipLayout
         theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
       />
