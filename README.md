@@ -153,9 +153,9 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | cardLess                 | Disables timeline cards on both horizontal and vertical modes.                                                                                       | false        |
 | cardPositionHorizontal   | Positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`.                                                                            |              |
 | cardWidth                | Sets the maximum width of the timeline card.                                                                                                         |              |
-| disableAutoScrollOnClick | Disables the timeline from auto scrolling on clicking a timeline item.                                                                               | false        |
-| disableClickOnCircle     | Disables click action on the timeline circle points.                                                                                                 | false        |
-| disableNavOnKey          | Disables the keyboard navigation.                                                                                                                    | false        |
+| disableAutoScrollOnClick | Disables the timeline from auto-scrolling when a timeline card is clicked.                                                                           | false        |
+| disableClickOnCircle     | Disables click action on the circular points.                                                                                                        | false        |
+| disableNavOnKey          | Disables keyboard navigation.                                                                                                                        | false        |
 | enableOutline            | Enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.                                                                              | false        |
 | flipLayout               | Flips the layout (RTL).                                                                                                                              | false        |
 | hideControls             | Hides the navigation controls.                                                                                                                       | false        |
