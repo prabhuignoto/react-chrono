@@ -133,9 +133,7 @@ export const TimelineContentContainer = styled.div<{
   outline: 2px solid
     ${(p) => (p.highlight && p.active ? p.theme?.primary : 'transparent')};
 
-  &.show-all {
-    margin: 1rem;
-  }
+  margin: 1rem;
 
   &.horizontal {
     min-width: 400px;
