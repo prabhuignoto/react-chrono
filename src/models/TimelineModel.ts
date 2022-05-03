@@ -60,6 +60,7 @@ export type TimelineProps = {
   onRestartSlideshow?: () => void;
   onScrollEnd?: () => void;
   scrollable?: boolean | { scrollbar: boolean };
+  showAllCardsHorizontal?: boolean;
   slideItemDuration?: number;
   slideShow?: boolean;
   theme?: Theme;

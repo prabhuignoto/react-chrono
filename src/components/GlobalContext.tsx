@@ -20,6 +20,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       scrollable: {
         scrollbar: false,
       },
+      showAllCardsHorizontal: false,
       timelineCircleDimension: 16,
       useReadMore: true,
     },

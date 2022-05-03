@@ -27,6 +27,7 @@ export const HorizontalBasic: React.FunctionComponent<{
           itemWidth={200}
           onItemSelected={selected => console.log(selected)}
           timelineCircleDimension={20}
+          showAllCardsHorizontal
         >
           <div className="chrono-icons">
             <img src="color-circle.svg" alt="github" />

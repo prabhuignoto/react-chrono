@@ -57,10 +57,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     enableOutline,
     lineWidth,
     flipLayout,
+    showAllCardsHorizontal,
   } = useContext(GlobalContext);
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
   const [hasFocus, setHasFocus] = useState(false);
+  const horizontalContentRef = useRef<HTMLDivElement>(null);
 
   // reference to the timeline
   const timelineMainRef = useRef<HTMLDivElement>(null);
@@ -146,7 +148,18 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   useEffect(() => {
     if (items.length && items[activeTimelineItem]) {
+      const item = items[activeTimelineItem];
       onItemSelected && onItemSelected(items[activeTimelineItem]);
+
+      if (mode === 'HORIZONTAL') {
+        const card = horizontalContentRef.current?.querySelector(
+          `#timeline-card-${item.id}`,
+        );
+
+        setTimeout(() => {
+          card?.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        }, 100);
+      }
     }
   }, [activeTimelineItem]);
 
@@ -260,13 +273,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             scrolled = target.scrollTop + target.clientHeight;
 
             if (target.scrollHeight - scrolled < 1) {
-              onScrollEnd && onScrollEnd();
+              onScrollEnd?.();
             }
           } else {
             scrolled = target.scrollLeft + target.offsetWidth;
 
             if (target.scrollWidth === scrolled) {
-              onScrollEnd && onScrollEnd();
+              onScrollEnd?.();
             }
           }
         }}
@@ -359,7 +372,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       )}
 
       {/* placeholder to render timeline content for horizontal mode */}
-      <TimelineContentRender id={id.current} />
+      <TimelineContentRender
+        id={id.current}
+        showAllCards={showAllCardsHorizontal}
+        ref={horizontalContentRef}
+      />
     </Wrapper>
   );
 };
