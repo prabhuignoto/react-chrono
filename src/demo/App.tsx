@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { Theme } from '../models/Theme';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
+  HorizontalAll,
   HorizontalBasic, HorizontalInitalSelectedItem,
   VerticalBasic, VerticalBasicCardLess, VerticalCustomContent, VerticalCustomContent2, VerticalTree, VerticalTreeMixed
 } from './app-samples';
@@ -77,6 +78,9 @@ const NewDemo: React.FunctionComponent = () => {
               <Link to="/horizontal">Horizontal Basic</Link>
             </li>
             <li>
+              <Link to="/horizontal-all">Horizontal All Cards</Link>
+            </li>
+            <li>
               <Link to="/horizontal-initial-select">Horizontal Basic with initial selected item</Link>
             </li>
             <li>
@@ -114,8 +118,10 @@ const NewDemo: React.FunctionComponent = () => {
             <Route path="/horizontal" element={items.length > 0 && (
               <HorizontalBasic items={items} type="big-screen" />
             )}>
-
             </Route>
+            <Route path="/horizontal-all" element={items.length > 0 && (
+              <HorizontalAll items={items} type="big-screen" />
+            )}></Route>
             <Route path="/horizontal-initial-select" element={items.length > 0 && (
               <HorizontalInitalSelectedItem items={items} type="big-screen" />
             )}>

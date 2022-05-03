@@ -27,6 +27,37 @@ export const HorizontalBasic: React.FunctionComponent<{
           itemWidth={200}
           onItemSelected={selected => console.log(selected)}
           timelineCircleDimension={20}
+        >
+          <div className="chrono-icons">
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+          </div>
+        </Chrono>
+      </ComponentContainer>
+    </Horizontal>
+  );
+};
+
+export const HorizontalAll: React.FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({ items }) => {
+  return (
+    <Horizontal id="horizontal">
+      <ComponentContainer type={'big-screen'}>
+        <Chrono
+          items={data}
+          mode="HORIZONTAL"
+          cardHeight={250}
+          cardWidth={450}
+          slideShow
+          slideItemDuration={2550}
+          itemWidth={200}
+          onItemSelected={selected => console.log(selected)}
+          timelineCircleDimension={20}
           showAllCardsHorizontal
         >
           <div className="chrono-icons">
