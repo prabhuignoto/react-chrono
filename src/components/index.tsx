@@ -116,7 +116,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   }, []);
 
   const handleOnNext = () => {
-    console.log('next');
     if (!timeLineItems.length) {
       return;
     }

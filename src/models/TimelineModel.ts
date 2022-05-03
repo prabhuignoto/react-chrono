@@ -51,6 +51,11 @@ export type TimelineProps = {
   disableNavOnKey?: boolean;
   enableOutline?: boolean;
   flipLayout?: boolean;
+  fontSizes?: {
+    cardSubtitle?: string;
+    cardText?: string;
+    cardTitle?: string;
+  };
   hideControls?: boolean;
   itemWidth?: number;
   items?: TimelineItemModel[];
@@ -60,6 +65,7 @@ export type TimelineProps = {
   onRestartSlideshow?: () => void;
   onScrollEnd?: () => void;
   scrollable?: boolean | { scrollbar: boolean };
+  showAllCardsHorizontal?: boolean;
   slideItemDuration?: number;
   slideShow?: boolean;
   theme?: Theme;

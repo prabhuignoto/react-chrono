@@ -41,6 +41,38 @@ export const HorizontalBasic: React.FunctionComponent<{
   );
 };
 
+export const HorizontalAll: React.FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({ items }) => {
+  return (
+    <Horizontal id="horizontal">
+      <ComponentContainer type={'big-screen'}>
+        <Chrono
+          items={data}
+          mode="HORIZONTAL"
+          cardHeight={250}
+          cardWidth={450}
+          slideShow
+          slideItemDuration={2550}
+          itemWidth={200}
+          onItemSelected={selected => console.log(selected)}
+          timelineCircleDimension={20}
+          showAllCardsHorizontal
+        >
+          <div className="chrono-icons">
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+            <img src="color-circle.svg" alt="github" />
+          </div>
+        </Chrono>
+      </ComponentContainer>
+    </Horizontal>
+  );
+};
+
 export const HorizontalInitalSelectedItem: React.FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
@@ -102,7 +134,7 @@ export const VerticalBasicCardLess: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         items={items}
-        mode="HORIZONTAL"
+        mode="VERTICAL"
         cardLess
         theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
@@ -119,9 +151,8 @@ export const HorizontalBasicCardLess: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         items={items}
-        mode="VERTICAL_ALTERNATING"
+        mode="HORIZONTAL"
         cardLess
-        flipLayout
         theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
       />

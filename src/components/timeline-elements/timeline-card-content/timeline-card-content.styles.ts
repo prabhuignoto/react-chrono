@@ -44,10 +44,11 @@ export const TimelineCardHeader = styled.header`
 
 export const TimelineContentSubTitle = styled.p<{
   dir?: string;
+  fontSize?: string;
   theme?: Theme;
 }>`
   color: ${(p) => p.theme.primary};
-  font-size: 0.85rem;
+  font-size: ${(p) => p.fontSize};
   font-weight: 600;
   margin: 0;
   padding-left: 0.5rem;
@@ -55,9 +56,13 @@ export const TimelineContentSubTitle = styled.p<{
   width: 97%;
 `;
 
-export const TimelineCardTitle = styled.p<{ dir?: string; theme: Theme }>`
+export const TimelineCardTitle = styled.p<{
+  dir?: string;
+  fontSize: string;
+  theme: Theme;
+}>`
   color: ${(p) => p.theme.cardForeColor};
-  font-size: 1rem;
+  font-size: ${(p) => p.fontSize};
   font-weight: 600;
   margin-top: 0.5em;
   margin: 0;
@@ -78,9 +83,10 @@ export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
   width: 100%;
 `;
 
-export const TimelineSubContent = styled.span`
+export const TimelineSubContent = styled.span<{ fontSize?: string }>`
   margin-bottom: 0.5rem;
   display: block;
+  font-size: ${(p) => p.fontSize};
 `;
 
 export const TimelineContentDetailsWrapper = styled.div<{
@@ -92,7 +98,6 @@ export const TimelineContentDetailsWrapper = styled.div<{
   align-items: center;
   display: flex;
   flex-direction: column;
-  font-size: 0.8rem;
   margin: 0 auto;
   margin-top: 0.5em;
   margin-bottom: 0.5em;

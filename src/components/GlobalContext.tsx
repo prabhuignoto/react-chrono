@@ -7,7 +7,7 @@ const GlobalContext = React.createContext<PropsModel>({});
 const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
   props,
 ) => {
-  const { cardHeight, cardLess = false, flipLayout, items = [] } = props;
+  const { cardHeight = 200, cardLess = false, flipLayout, items = [] } = props;
   const defaultProps = Object.assign<PropsModel, PropsModel, PropsModel>(
     {},
     {
@@ -15,11 +15,17 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       cardLess: false,
       disableAutoScrollOnClick: false,
       disableClickOnCircle: false,
+      fontSizes: {
+        cardSubtitle: '0.85rem',
+        cardText: '0.8rem',
+        cardTitle: '1rem',
+      },
       lineWidth: 3,
       mode: 'VERTICAL_ALTERNATING',
       scrollable: {
         scrollbar: false,
       },
+      showAllCardsHorizontal: false,
       timelineCircleDimension: 16,
       useReadMore: true,
     },

@@ -25,11 +25,17 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     itemWidth = 200,
     cardHeight,
     flipLayout,
+    showAllCardsHorizontal,
   } = useContext(GlobalContext);
 
   const wrapperClass = useMemo(
-    () => cls(mode.toLowerCase(), 'timeline-horizontal-container'),
-    [mode],
+    () =>
+      cls(
+        mode.toLowerCase(),
+        'timeline-horizontal-container',
+        showAllCardsHorizontal ? 'show-all-cards-horizontal' : '',
+      ),
+    [mode, showAllCardsHorizontal],
   );
 
   const iconChildColln = React.Children.toArray(iconChildren);
@@ -62,6 +68,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
             customContent={children ? (children as ReactNode[])[index] : null}
             hasFocus={hasFocus}
             iconChild={iconChildColln[index]}
+            active={item.active}
           />
         </TimelineItemWrapper>
       ))}

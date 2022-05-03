@@ -48,6 +48,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     timelineCircleDimension,
     disableClickOnCircle,
     cardLess,
+    showAllCardsHorizontal,
   } = useContext(GlobalContext);
 
   const handleClick = () => {
@@ -83,6 +84,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         'timeline-horz-card-wrapper',
         modeLower,
         position === 'TOP' ? 'bottom' : 'top',
+        showAllCardsHorizontal ? 'show-all' : '',
       ),
     [mode, position],
   );
@@ -102,7 +104,15 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
 
   const timelineContent = useMemo(() => {
     return (
-      <TimelineContentContainer className={containerClass} ref={contentRef}>
+      <TimelineContentContainer
+        className={containerClass}
+        ref={contentRef}
+        id={`timeline-card-${id}`}
+        theme={theme}
+        active={active}
+        highlight={showAllCardsHorizontal}
+        tabIndex={0}
+      >
         <TimelineCardContent
           content={cardSubtitle}
           active={active}
@@ -117,10 +127,11 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           id={id}
           customContent={customContent}
           hasFocus={hasFocus}
+          onClick={onClick}
         />
       </TimelineContentContainer>
     );
-  }, [active]);
+  }, [active, slideShowRunning]);
 
   const showTimelineContent = () => {
     const ele = document.getElementById(wrapperId);
@@ -130,9 +141,14 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     }
   };
 
+  const canShowTimelineContent = useMemo(
+    () => (active && !cardLess) || showAllCardsHorizontal,
+    [active, cardLess, showAllCardsHorizontal],
+  );
+
   return (
     <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
-      {active && !cardLess && showTimelineContent()}
+      {canShowTimelineContent && showTimelineContent()}
 
       <CircleWrapper>
         <Circle

@@ -123,10 +123,17 @@ export const TimelineTitleContainer = styled.div`
 
 export const TimelineContentContainer = styled.div<{
   active?: boolean;
+  highlight?: boolean;
   position?: string;
+  theme?: Theme;
 }>`
   align-items: flex-start;
   animation: ${show} 0.25s ease-in;
+
+  outline: 2px solid
+    ${(p) => (p.highlight && p.active ? p.theme?.primary : 'transparent')};
+
+  margin: 1rem;
 
   &.horizontal {
     min-width: 400px;

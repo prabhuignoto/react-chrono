@@ -138,11 +138,12 @@ export const TimelineControlContainer = styled.div<{
   }
 `;
 
-export const TimelineContentRender = styled.div`
+export const TimelineContentRender = styled.div<{ showAllCards?: boolean }>`
   margin-left: auto;
   margin-right: auto;
   width: 98%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: ${(p) => (p.showAllCards ? 'flex-start' : 'center')};
+  overflow-x: hidden;
 `;

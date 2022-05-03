@@ -55,8 +55,6 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     cardLess,
   } = useContext(GlobalContext);
 
-  debugger;
-
   // handler for read more
   const handleShowMore = useCallback(() => {
     setTimeout(() => {

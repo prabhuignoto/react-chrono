@@ -70,6 +70,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         cardWidth,
         borderLessCards,
         disableAutoScrollOnClick,
+        fontSizes,
       } = useContext(GlobalContext);
 
       const canShowProgressBar = useMemo(() => {
@@ -94,7 +95,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [showMore]);
 
       const onContainerRef = useCallback(
-        (node) => {
+        (node: HTMLElement) => {
           const detailsEle = detailsRef.current;
           if (node && detailsEle) {
             const { scrollHeight, offsetTop } = detailsEle;
@@ -273,7 +274,14 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         >
           <TimelineCardHeader>
             {/* main title */}
-            {!media && <MemoTitle title={title} theme={theme} url={url} />}
+            {!media && (
+              <MemoTitle
+                title={title}
+                theme={theme}
+                url={url}
+                fontSize={fontSizes?.cardTitle}
+              />
+            )}
             {/* main timeline text */}
             {!media && <MemoSubTitle content={content} theme={theme} />}
           </TimelineCardHeader>
@@ -315,7 +323,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               >
                 {Array.isArray(detailedText)
                   ? detailedText.map((text, index) => (
-                      <TimelineSubContent key={index}>
+                      <TimelineSubContent
+                        key={index}
+                        fontSize={fontSizes?.cardText}
+                      >
                         {text}
                       </TimelineSubContent>
                     ))

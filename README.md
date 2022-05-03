@@ -55,6 +55,7 @@
   - [Outline](#outline)
   - [Item Width](#item-width)
   - [🎨Theme](#theme)
+  - [Customize Font sizes](#customize-font-sizes)
 - [📦CodeSandbox Examples](#codesandbox-examples)
 - [📚Storybook](#storybook)
 - [🔨Build Setup](#build-setup)
@@ -66,7 +67,7 @@
 
 ## ⚡ Installation
 
-```sh
+```jsx
 yarn add react-chrono
 ```
 
@@ -76,7 +77,7 @@ Please make sure you wrap the component in a container that has a `width` and `h
 
 When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please check [props](#props) for all the available options.
 
-```sh
+```jsx
   import React from "react"
   import { Chrono } from "react-chrono";
 
@@ -109,13 +110,10 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
 
 To render the timeline vertically use the `VERTICAL` mode
 
-```sh
-  <div style={{ width: "500px", height: "950px" }}>
-    <Chrono
-      items={items}
-      mode="VERTICAL"
-    />
-  </div>
+```jsx
+<div style={{ width: '500px', height: '950px' }}>
+  <Chrono items={items} mode="VERTICAL" />
+</div>
 ```
 
 ![vertical-basic](./readme-assets/vertical-basic.png)
@@ -124,13 +122,10 @@ To render the timeline vertically use the `VERTICAL` mode
 
 In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards alternating between left and right side.
 
-```sh
-  <div style={{ width: "500px", height: "950px" }}>
-    <Chrono
-      items={items}
-      mode="VERTICAL_ALTERNATING"
-    />
-  </div>
+```jsx
+<div style={{ width: '500px', height: '950px' }}>
+  <Chrono items={items} mode="VERTICAL_ALTERNATING" />
+</div>
 ```
 
 ![app-tree](./readme-assets/app-tree.png)
@@ -139,62 +134,60 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 
 Play the timeline automatically with the `slideShow` mode. This prop enables the play button on the ui controls.
 
-```sh
-  <div style={{ width: "500px", height: "950px" }}>
-    <Chrono
-      items={items}
-      slideShow
-      mode="VERTICAL_ALTERNATING"
-    />
-  </div>
+```jsx
+<div style={{ width: '500px', height: '950px' }}>
+  <Chrono items={items} slideShow mode="VERTICAL_ALTERNATING" />
+</div>
 ```
 
 <!-- ![tree-slideshow](./readme-assets/vertical_slideshow.gif) -->
 
 ## Props
 
-| name                     | description                                                                                                                                                              | default      |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
-| activeItemIndex          | Selects the active timeline item on load.                                                                                                                                | 0            |
-| allowDynamicUpdate       | Allows timeline items to be updated dynamically.                                                                                                                         | false        |
-| borderLessCards          | Removes the border & shadow from the timeline cards.                                                                                                                     | false        |
-| cardHeight               | Sets the minimum height of the timeline card.                                                                                                                            | 200          |
-| cardLess                 | Disables timeline cards on both horizontal and vertical modes.                                                                                                           | false        |
-| cardPositionHorizontal   | Positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`.                                                                                                |              |
-| cardWidth                | Sets the maximum width of the timeline card.                                                                                                                             |              |
-| disableAutoScrollOnClick | Disables the timeline from auto scrolling on clicking a timeline item.                                                                                                   | false        |
-| disableClickOnCircle     | Disables click action on the timeline circle points.                                                                                                                     | false        |
-| disableNavOnKey          | Disables the keyboard navigation.                                                                                                                                        | false        |
-| enableOutline            | Enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.                                                                                                  | false        |
-| flipLayout               | Flips the layout (RTL).                                                                                                                                                  | false        |
-| hideControls             | Hides the navigation controls.                                                                                                                                           | false        |
-| itemWidth                | Width of the timeline section in `HORIZONTAL` mode.                                                                                                                      | 300          |
-| items                    | Collection of [Timeline Item Model](#timeline-item-model).                                                                                                               | []           |
-| lineWidth                | Prop to customize the width of the timeline track line.                                                                                                                  | 3px          |
-| mode                     | Sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING`.                                                                               | `HORIZONTAL` |
-| onItemSelected           | Callback invoked on a item selection. passes all of the data pertinent to the item.                                                                                      |              |
-| onScrollEnd              | Use the `onScrollEnd` to detect the end of the timeline.                                                                                                                 |              |
-| scrollable               | Makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).                                                                       | true         |
-| slideItemDuration        | Duration (in ms), the timeline card is active during a `slideshow`.                                                                                                      | 5000         |
-| slideShow                | Enables the slideshow control.                                                                                                                                           | false        |
-| theme                    | Prop to customize the colors.                                                                                                                                            |              |
-| timelineCircleDimension  | Dimension of the timeline circular points.                                                                                                                               | false        |
-| useReadMore              | Enables or disables the read more button.The read more function is enabled only when the height <br /> of the text content exceeds the overall height of the card itself | true         |
+| name                     | description                                                                                                                                          | default      |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| activeItemIndex          | Selects the active timeline item on load.                                                                                                            | 0            |
+| allowDynamicUpdate       | Allows timeline items to be updated dynamically.                                                                                                     | false        |
+| borderLessCards          | Removes the border & shadow from the timeline cards.                                                                                                 | false        |
+| cardHeight               | Sets the minimum height of the timeline card.                                                                                                        | 200          |
+| cardLess                 | Disables timeline cards on both horizontal and vertical modes.                                                                                       | false        |
+| cardPositionHorizontal   | Positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`.                                                                            |              |
+| cardWidth                | Sets the maximum width of the timeline card.                                                                                                         |              |
+| disableAutoScrollOnClick | Disables the timeline from auto-scrolling when a timeline card is clicked.                                                                           | false        |
+| disableClickOnCircle     | Disables click action on the circular points.                                                                                                        | false        |
+| disableNavOnKey          | Disables keyboard navigation.                                                                                                                        | false        |
+| enableOutline            | Enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.                                                                              | false        |
+| flipLayout               | Flips the layout (RTL).                                                                                                                              | false        |
+| hideControls             | Hides the navigation controls.                                                                                                                       | false        |
+| itemWidth                | Width of the timeline section in `HORIZONTAL` mode.                                                                                                  | 300          |
+| items                    | Collection of [Timeline Item Model](#timeline-item-model).                                                                                           | []           |
+| lineWidth                | Prop to customize the width of the timeline track line.                                                                                              | 3px          |
+| mode                     | Sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING`.                                                           | `HORIZONTAL` |
+| onItemSelected           | Callback invoked on a item selection. passes all of the data pertinent to the item.                                                                  |              |
+| onScrollEnd              | Use the `onScrollEnd` to detect the end of the timeline.                                                                                             |              |
+| scrollable               | Makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).                                                   | true         |
+| showAllCardsHorizontal   | In horizontal mode, only the active card is displayed. With this prop, you can display all the cards.                                                | false        |
+| slideItemDuration        | Duration (in ms), the timeline card is active during a `slideshow`.                                                                                  | 5000         |
+| slideShow                | Enables the slideshow control.                                                                                                                       | false        |
+| theme                    | Prop to customize the colors.                                                                                                                        |              |
+| timelineCircleDimension  | Dimensions of the circular points on the timeline                                                                                                    | false        |
+| useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself. | true         |
+| fontSizes                | property to change the font size of the card's title, subtitle, and text.                                                                            | true         |
 
 ### Mode
 
 `react-chrono` supports three modes `HORIZONTAL`, `VERTICAL` and `VERTICAL_ALTERNATING`. No additional setting is required.
 
-```sh
-  <Chrono items={items} mode="HORIZONTAL" />
+```jsx
+<Chrono items={items} mode="HORIZONTAL" />
 ```
 
-```sh
-  <Chrono items={items} mode="VERTICAL" />
+```jsx
+<Chrono items={items} mode="VERTICAL" />
 ```
 
-```sh
-  <Chrono items={items} mode="VERTICAL_ALTERNATING" />
+```jsx
+<Chrono items={items} mode="VERTICAL_ALTERNATING" />
 ```
 
 ### Timeline item Model
@@ -208,7 +201,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | media            | media object to set image or video.          | Object             |
 | url              | url to be used in the title.                 | String             |
 
-```sh
+```jsx
 {
   title: "May 1940",
   cardTitle: "Dunkirk",
@@ -232,7 +225,7 @@ The timeline can be navigated via keyboard.
 
 To disable keyboard navigation set `disableNavOnKey` to true.
 
-```sh
+```jsx
 <Chrono items={items} disableNavOnKey />
 ```
 
@@ -240,14 +233,14 @@ To disable keyboard navigation set `disableNavOnKey` to true.
 
 With the scrollable prop, you can enable scrolling on both `VERTICAL` and `VERTICAL_ALTERNATING` modes.
 
-```sh
-  <Chrono items={items} scrollable />
+```jsx
+<Chrono items={items} scrollable />
 ```
 
 The scrollbar is not shown by default. To enable the scrollbar, pass an object with prop `scrollbar` to `scrollable` prop.
 
-```sh
-  <Chrono items={items} scrollable={{scrollbar: true}} />
+```jsx
+<Chrono items={items} scrollable={{ scrollbar: true }} />
 ```
 
 ### 📺Media
@@ -260,7 +253,7 @@ Just add the `media` attribute to the [Timeline Item model](#timeline-item-model
   To embed a image
 </h5>
 
-```sh
+```jsx
 {
   title: "May 1940",
   cardTitle: "Dunkirk",
@@ -282,7 +275,7 @@ Just add the `media` attribute to the [Timeline Item model](#timeline-item-model
 
 Like images, videos are also automatically hidden when not in the visible viewport of the container.
 
-```sh
+```jsx
 {
   title: "7 December 1941",
   cardTitle: "Pearl Harbor",
@@ -299,7 +292,7 @@ Like images, videos are also automatically hidden when not in the visible viewpo
 
 To embed YouTube videos, use the right embed url.
 
-```sh
+```jsx
 {
   title: "7 December 1941",
   cardTitle: "Pearl Harbor",
@@ -325,35 +318,35 @@ To insert custom content, just pass the blocked elements between the `Chrono` ta
 For e.g the below snippet will create 2 timeline items. Each `div` element is automatically converted into a timeline item and inserted into the timeline card.
 The [items](#timeline-item-model) collection is completely optional and custom rendering is supported on all 3 [modes](#mode).
 
-```sh
-  <Chrono mode="VERTICAL">
-    <div>
-      <p>Lorem Ipsum. Lorem Ipsum. Lorem Ipsum</p>
-    </div>
-    <div>
-      <img src="<url to  a nice image" />
-    </div>
-  </Chrono>
+```jsx
+<Chrono mode="VERTICAL">
+  <div>
+    <p>Lorem Ipsum. Lorem Ipsum. Lorem Ipsum</p>
+  </div>
+  <div>
+    <img src="<url to  a nice image" />
+  </div>
+</Chrono>
 ```
 
 > The items collection will also work nicely with any custom content that is passed.
 
 The following snippet sets the the `title` and `cardTitle` for the custom contents.
 
-```sh
-  const items = [
-    {title: "Timeline title 1", cardTitle:  "Card Title 1"},
-    {title: "Timeline title 2", cardTitle:  "Card Title 2"}
-  ];
+```jsx
+const items = [
+  { title: 'Timeline title 1', cardTitle: 'Card Title 1' },
+  { title: 'Timeline title 2', cardTitle: 'Card Title 2' },
+];
 
-  <Chrono mode="VERTICAL" items={items}>
-    <div>
-      <p>Lorem Ipsum. Lorem Ipsum. Lorem Ipsum</p>
-    </div>
-    <div>
-      <img src="<url to  a nice image" />
-    </div>
-  </Chrono>
+<Chrono mode="VERTICAL" items={items}>
+  <div>
+    <p>Lorem Ipsum. Lorem Ipsum. Lorem Ipsum</p>
+  </div>
+  <div>
+    <img src="<url to  a nice image" />
+  </div>
+</Chrono>;
 ```
 
 ### 🎭Custom icons for the Timeline
@@ -364,30 +357,30 @@ The icons are sequentially set (i.e) the first image you pass will be used as th
 
 Please make sure to pass in the image collection inside a container with a special className `chrono-icons`. This convention is mandatory as the component uses this `class name` to pick the images.
 
-```sh
- <Chrono items={items} mode="VERTICAL_ALTERNATING">
-   <div className="chrono-icons">
-     <img src="image1.svg" alt="image1" />
-     <img src="image2.svg" alt="image2" />
-   </div>
- </Chrono>
+```jsx
+<Chrono items={items} mode="VERTICAL_ALTERNATING">
+  <div className="chrono-icons">
+    <img src="image1.svg" alt="image1" />
+    <img src="image2.svg" alt="image2" />
+  </div>
+</Chrono>
 ```
 
 > custom icons also works if you are [rendering custom content](#rendering-custom-content) inside the cards.
 
-```sh
-  <Chrono mode="VERTICAL" items={items}>
-    <div>
-      <p>Lorem Ipsum. Lorem Ipsum. Lorem Ipsum</p>
-    </div>
-    <div>
-      <img src="<url to  a nice image" />
-    </div>
-    <div className="chrono-icons">
-      <img src="image1.svg" alt="image1" />
-      <img src="image2.svg" alt="image2" />
-    </div>
-  </Chrono>
+```jsx
+<Chrono mode="VERTICAL" items={items}>
+  <div>
+    <p>Lorem Ipsum. Lorem Ipsum. Lorem Ipsum</p>
+  </div>
+  <div>
+    <img src="<url to  a nice image" />
+  </div>
+  <div className="chrono-icons">
+    <img src="image1.svg" alt="image1" />
+    <img src="image2.svg" alt="image2" />
+  </div>
+</Chrono>
 ```
 
 ### Slideshow mode
@@ -396,7 +389,7 @@ Slideshow can be enabled by setting the `slideShow` prop to true. You can also s
 
 setting this prop enables the play button in the timeline control panel.
 
-```sh
+```jsx
 <Chrono items={items} slideShow slideItemDuration={4500} />
 ```
 
@@ -405,7 +398,7 @@ setting this prop enables the play button in the timeline control panel.
 With `enableOutline` prop you can enable outline on the timelines and quickly jump to a specific timeline item.
 The outlines are only supported on `VERTICAL` and `VERTICAL_ALTERNATING` modes.
 
-```sh
+```jsx
 <Chrono items={items} enableOutline />
 ```
 
@@ -419,17 +412,33 @@ The `itemWidth` prop can be used to set the width of each individual timeline se
 
 Customize colors with the `theme` prop.
 
-```sh
+```jsx
 <Chrono
   items={items}
   theme={{
-    primary: "red",
-    secondary: "blue",
-    cardBgColor: "yellow",
-    cardForeColor: "violet",
-    titleColor: "red"
+    primary: 'red',
+    secondary: 'blue',
+    cardBgColor: 'yellow',
+    cardForeColor: 'violet',
+    titleColor: 'red',
   }}
 />
+```
+
+### Customize Font sizes
+
+Use the `fontSizes` prop to customize the font sizes of the timeline card.
+
+```jsx
+<Chrono
+  items={data}
+  mode="HORIZONTAL"
+  fontSizes={{
+    cardSubtitle: '0.85rem',
+    cardText: '0.8rem',
+    cardTitle: '1rem',
+  }}
+></Chrono>
 ```
 
 ## 📦CodeSandbox Examples
@@ -473,7 +482,7 @@ yarn rollup
 
 ## 🧪Tests
 
-```sh
+```jsx
   # run unit tests
   yarn test
 
