@@ -18,6 +18,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     theme,
     onItemSelected,
     activeItemIndex = 0,
+    lessText,
+    moreText,
   } = props;
 
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
@@ -190,6 +192,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         onScrollEnd={onScrollEnd}
         onItemSelected={onItemSelected}
         onOutlineSelection={handleOutlineSelection}
+        lessText={lessText}
+        moreText={moreText}
       />
     </GlobalContextProvider>
   );

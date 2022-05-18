@@ -45,6 +45,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       flip,
       branchDir,
       url,
+      moreText,
+      lessText,
     }: TimelineContentModel) => {
       const [showMore, setShowMore] = useState(false);
       const detailsRef = useRef<HTMLDivElement | null>(null);
@@ -247,6 +249,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         );
       }, [mode]);
 
+      const getMoreButtonText = useMemo(() => {
+        if (showMore) {
+          return lessText || 'show less';
+        }
+        return moreText || 'show more';
+      }, [showMore, moreText, lessText]);
+
       return (
         <TimelineItemContentWrapper
           className={contentClass}
@@ -350,7 +359,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               theme={theme}
               tabIndex={0}
             >
-              {<span>{showMore ? 'read less' : 'read more'}</span>}
+              {<span>{getMoreButtonText}</span>}
               <ChevronIconWrapper collapsed={!showMore}>
                 <ChevronIcon />
               </ChevronIconWrapper>

@@ -16,6 +16,8 @@ export type TimelineModel = Pick<
   | 'theme'
   | 'slideShow'
   | 'onScrollEnd'
+  | 'lessText'
+  | 'moreText'
 > & {
   activeTimelineItem: number;
   contentDetailsChildren?: React.ReactNode | React.ReactNode[];
@@ -59,8 +61,10 @@ export type TimelineProps = {
   hideControls?: boolean;
   itemWidth?: number;
   items?: TimelineItemModel[];
+  lessText?: string;
   lineWidth?: number;
   mode?: TimelineMode;
+  moreText?: string;
   onItemSelected?: (data: TimelineItemModel) => void;
   onRestartSlideshow?: () => void;
   onScrollEnd?: () => void;

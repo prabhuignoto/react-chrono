@@ -37,6 +37,8 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   customContent,
   hasFocus,
   iconChild,
+  lessText,
+  moreText,
 }: TimelineCardModel) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -128,6 +130,8 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           customContent={customContent}
           hasFocus={hasFocus}
           onClick={onClick}
+          lessText={lessText}
+          moreText={moreText}
         />
       </TimelineContentContainer>
     );

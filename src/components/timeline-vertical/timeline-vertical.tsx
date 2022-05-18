@@ -13,7 +13,9 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
   hasFocus,
   iconChildren,
   items,
+  lessText,
   mode,
+  moreText,
   onClick,
   onElapsed,
   onOutlineSelection,
@@ -90,6 +92,8 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
             slideShowRunning={slideShowRunning}
             theme={theme}
             cardLess={cardLess}
+            lessText={lessText}
+            moreText={moreText}
           />
         );
       })}

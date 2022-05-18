@@ -161,8 +161,10 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | hideControls             | Hides the navigation controls.                                                                                                                       | false        |
 | itemWidth                | Width of the timeline section in `HORIZONTAL` mode.                                                                                                  | 300          |
 | items                    | Collection of [Timeline Item Model](#timeline-item-model).                                                                                           | []           |
+| lessText                 | Overwrites the default text `read less` with a string                                                                                                | `read less`  |
 | lineWidth                | Prop to customize the width of the timeline track line.                                                                                              | 3px          |
 | mode                     | Sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING`.                                                           | `HORIZONTAL` |
+| moreText                 | Overwrites the default text `read more` with a string                                                                                                | `read more`  |
 | onItemSelected           | Callback invoked on a item selection. passes all of the data pertinent to the item.                                                                  |              |
 | onScrollEnd              | Use the `onScrollEnd` to detect the end of the timeline.                                                                                             |              |
 | scrollable               | Makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).                                                   | true         |

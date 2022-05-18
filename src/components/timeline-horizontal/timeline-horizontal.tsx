@@ -19,6 +19,8 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   contentDetailsChildren: children,
   hasFocus,
   iconChildren,
+  lessText,
+  moreText,
 }: TimelineHorizontalModel) => {
   const {
     mode = 'HORIZONTAL',
@@ -69,6 +71,8 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
             hasFocus={hasFocus}
             iconChild={iconChildColln[index]}
             active={item.active}
+            lessText={lessText}
+            moreText={moreText}
           />
         </TimelineItemWrapper>
       ))}

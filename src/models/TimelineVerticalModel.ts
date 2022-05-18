@@ -15,6 +15,8 @@ export type Props = Pick<
   | 'enableOutline'
   | 'disableClickOnCircle'
   | 'cardLess'
+  | 'lessText'
+  | 'moreText'
 > & {
   alternateCards?: boolean;
   hasFocus?: boolean;
@@ -38,6 +40,8 @@ type VerticalModel = Pick<
   | 'lineWidth'
   | 'disableClickOnCircle'
   | 'cardLess'
+  | 'lessText'
+  | 'moreText'
 > & {
   active?: boolean;
   className: string;
@@ -79,6 +83,8 @@ export type TimelineVerticalModel = Pick<
   | 'theme'
   | 'hasFocus'
   | 'cardLess'
+  | 'lessText'
+  | 'moreText'
 > & {
   activeTimelineItem: number;
   autoScroll: (s: Partial<Scroll>) => void;
