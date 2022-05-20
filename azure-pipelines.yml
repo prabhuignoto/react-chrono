@@ -4,28 +4,27 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+  - master
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '12.x'
-  displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
 
-- script: |
-    yarn install
-    yarn add react
-    yarn add react-dom
-    yarn run rollup
-  displayName: 'Running Rollup'
+  - script: |
+      yarn install
+      yarn add react
+      yarn add react-dom
+      yarn run rollup
+    displayName: 'Running Rollup'
 
-- script: |
-    yarn run lint:all
-  displayName: 'Linting Code and Styles.'
-
+  - script: |
+      yarn run lint:all
+    displayName: 'Linting Code and Styles.'
 # - script: |
 #     yarn run coverage
 #   displayName: 'Running Tests and Generate coverage reports.'
