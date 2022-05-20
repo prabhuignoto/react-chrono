@@ -1,12 +1,13 @@
-import babel from "@rollup/plugin-babel";
-import buble from "@rollup/plugin-buble";
-import common from "@rollup/plugin-commonjs";
-import resolve from "@rollup/plugin-node-resolve";
-import typescript from "rollup-plugin-typescript2";
-import cssnano from "cssnano";
-import postcss from "rollup-plugin-postcss"
-import pkg from "./package.json";
-import { terser } from "rollup-plugin-terser";
+import babel from '@rollup/plugin-babel';
+import buble from '@rollup/plugin-buble';
+import common from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import cssnano from 'cssnano';
+import del from 'rollup-plugin-delete';
+import postcss from 'rollup-plugin-postcss';
+import { terser } from 'rollup-plugin-terser';
+import typescript from 'rollup-plugin-typescript2';
+import pkg from './package.json';
 
 const banner = `/*
  * ${pkg.name}
@@ -17,40 +18,42 @@ const banner = `/*
 `;
 
 export default {
+  external: ['react', 'react-dom', '@babel/runtime'],
   input: 'src/react-chrono.ts',
   output: [
     {
+      banner,
+      exports: 'named',
       file: pkg.main,
       format: 'cjs',
-      exports: 'named',
       strict: true,
-      banner,
     },
     {
+      banner,
+      exports: 'named',
       file: pkg.module,
       format: 'es',
-      exports: 'named',
       strict: true,
-      banner,
     },
     {
+      banner,
+      exports: 'named',
       file: pkg.umd,
       format: 'umd',
-      exports: 'named',
-      strict: true,
-      banner,
-      name: 'ReactChrono',
       globals: {
         react: 'React',
         'react-dom': 'ReactDOM',
       },
+      name: 'ReactChrono',
+      strict: true,
     },
   ],
   plugins: [
+    del({ targets: 'dist/*' }),
     typescript(),
     babel({
-      extensions: ['tsx', 'ts'],
       babelHelpers: 'runtime',
+      extensions: ['tsx', 'ts'],
       plugins: [
         '@babel/plugin-transform-runtime',
         '@babel/plugin-proposal-optional-chaining',
@@ -80,13 +83,12 @@ export default {
     resolve(),
     terser({
       compress: {
-        drop_debugger: true,
         drop_console: true,
+        drop_debugger: true,
       },
       format: {
         comments: false,
-      }
+      },
     }),
   ],
-  external: ['react', 'react-dom', '@babel/runtime'],
 };
