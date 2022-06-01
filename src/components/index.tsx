@@ -15,7 +15,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     items,
     onScrollEnd,
     slideShow = false,
-    theme,
     onItemSelected,
     activeItemIndex = 0,
   } = props;
