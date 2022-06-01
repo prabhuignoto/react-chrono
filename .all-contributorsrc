@@ -58,6 +58,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "cbuchwald",
+      "name": "Christian Buchwald",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4342337?v=4",
+      "profile": "https://github.com/cbuchwald",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

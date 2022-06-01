@@ -44,6 +44,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     slideShowEnabled,
     slideShowRunning,
     theme,
+    lessText,
+    moreText,
   } = props;
 
   const {
@@ -300,6 +302,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             slideShowRunning={slideShowRunning}
             theme={theme}
             enableOutline={enableOutline}
+            lessText={lessText}
+            moreText={moreText}
           />
         ) : null}
 
@@ -319,6 +323,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               slideShowRunning={slideShowRunning}
               theme={theme}
               wrapperId={id.current}
+              lessText={lessText}
+              moreText={moreText}
             />
           </TimelineMain>
         ) : null}
@@ -340,6 +346,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             slideShowRunning={slideShowRunning}
             theme={theme}
             enableOutline={enableOutline}
+            lessText={lessText}
+            moreText={moreText}
           />
         ) : null}
       </TimelineMainWrapper>

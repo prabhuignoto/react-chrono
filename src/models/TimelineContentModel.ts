@@ -10,7 +10,9 @@ export interface TimelineContentModel {
   flip?: boolean;
   hasFocus?: boolean;
   id?: string;
+  lessText?: string;
   media?: Media;
+  moreText?: string;
   onClick?: (id: string) => void;
   onElapsed?: (id?: string) => void;
   onShowMore: () => void;

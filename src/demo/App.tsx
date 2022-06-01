@@ -5,7 +5,7 @@ import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
   HorizontalAll,
   HorizontalBasic, HorizontalInitalSelectedItem,
-  VerticalBasic, VerticalBasicCardLess, VerticalCustomContent, VerticalCustomContent2, VerticalTree, VerticalTreeMixed
+  VerticalBasic, VerticalBasicCardLess, VerticalCustomContent, VerticalCustomContent2, VerticalRenamedMoreButton, VerticalTree, VerticalTreeMixed
 } from './app-samples';
 import './App.css';
 import {
@@ -69,6 +69,9 @@ const NewDemo: React.FunctionComponent = () => {
               <Link to="/vertical-basic">Vertical Basic</Link>
             </li>
             <li>
+              <Link to="/vertical-basic-renamed-more-button">Vertical Basic with renamed 'more' buttons</Link>
+            </li>
+            <li>
               <Link to="/vertical-alternating">Vertical Alternating</Link>
             </li>
             <li>
@@ -103,6 +106,8 @@ const NewDemo: React.FunctionComponent = () => {
         <AppArea>
           <Routes>
             <Route path="/vertical-basic" element={items.length && <VerticalBasic type={"big-screen"} items={items} />}>
+            </Route>
+            <Route path="/vertical-basic-renamed-more-button" element={items.length && < VerticalRenamedMoreButton type={"big-screen"} items={items} />}>
             </Route>
             <Route path="/vertical-alternating-mixed" element={items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} >
 

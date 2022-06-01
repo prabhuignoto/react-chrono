@@ -126,6 +126,30 @@ export const VerticalBasic: FunctionComponent<{
   </Vertical>
 );
 
+export const VerticalRenamedMoreButton: FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({ type, items }) => (
+  <Vertical id="vertical">
+    <ComponentContainerTree type={type}>
+      <Chrono
+        items={items}
+        mode="VERTICAL"
+        slideShow
+        cardWidth={700}
+        slideItemDuration={2500}
+        scrollable={{ scrollbar: false}}
+        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
+        onItemSelected={(selected) => console.log(selected.cardTitle)}
+        enableOutline
+        timelineCircleDimension={20}
+        moreText="show me more"
+        lessText="show me less"
+      />
+    </ComponentContainerTree>
+  </Vertical>
+);
+
 export const VerticalBasicCardLess: FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
