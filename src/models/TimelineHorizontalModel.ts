@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Theme } from './Theme';
+// import { Theme } from './Theme';
 import { TimelineCardModel } from './TimelineItemModel';
 import { TimelineMode } from './TimelineModel';
 
