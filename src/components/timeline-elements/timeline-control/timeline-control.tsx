@@ -22,12 +22,12 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> =
       onLast,
       disableLeft,
       disableRight,
-      theme,
+      // theme,
       slideShowRunning,
       onReplay,
       slideShowEnabled,
     }: TimelineControlModel) => {
-      const { mode, flipLayout } = useContext(GlobalContext);
+      const { mode, flipLayout, theme } = useContext(GlobalContext);
 
       const rotate = useMemo(() => mode !== 'HORIZONTAL', [mode]);
 

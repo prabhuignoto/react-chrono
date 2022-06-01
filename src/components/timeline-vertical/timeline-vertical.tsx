@@ -88,7 +88,7 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
             onElapsed={onElapsed}
             onShowMore={handleOnShowMore}
             slideShowRunning={slideShowRunning}
-            theme={theme}
+            // theme={theme}
             cardLess={cardLess}
           />
         );

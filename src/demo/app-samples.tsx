@@ -117,7 +117,7 @@ export const VerticalBasic: FunctionComponent<{
         cardWidth={700}
         slideItemDuration={2500}
         scrollable={{ scrollbar: false}}
-        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
+        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "#6495ed" }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
         timelineCircleDimension={20}

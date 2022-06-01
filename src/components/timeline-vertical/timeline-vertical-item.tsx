@@ -33,7 +33,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     onClick,
     onElapsed,
     slideShowRunning,
-    theme,
+    // theme,
     title,
     visible,
   } = props;
@@ -53,6 +53,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     lineWidth,
     disableClickOnCircle,
     cardLess,
+    theme,
   } = useContext(GlobalContext);
 
   // handler for read more
@@ -139,7 +140,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         onClick={onClick}
         slideShowRunning={slideShowRunning}
         iconChild={iconChild}
-        theme={theme}
+        // theme={theme}
         timelineCircleDimension={timelineCircleDimension}
         lineWidth={lineWidth}
         disableClickOnCircle={disableClickOnCircle}

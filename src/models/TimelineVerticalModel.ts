@@ -32,7 +32,7 @@ type VerticalModel = Pick<
   | 'onClick'
   | 'onElapsed'
   | 'slideShowRunning'
-  | 'theme'
+  // | 'theme'
   | 'mode'
   | 'timelineCircleDimension'
   | 'lineWidth'

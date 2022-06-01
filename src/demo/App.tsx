@@ -4,7 +4,7 @@ import { Theme } from '../models/Theme';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
   HorizontalAll,
-  HorizontalBasic, HorizontalInitalSelectedItem,
+  HorizontalBasic, HorizontalBasicCardLess, HorizontalInitalSelectedItem,
   VerticalBasic, VerticalBasicCardLess, VerticalCustomContent, VerticalCustomContent2, VerticalTree, VerticalTreeMixed
 } from './app-samples';
 import './App.css';
@@ -134,7 +134,7 @@ const NewDemo: React.FunctionComponent = () => {
             </Route>
             <Route path="/timeline-without-cards" element={items.length > 0 && <VerticalBasicCardLess type='big-screen' items={items} />}>
             </Route>
-            <Route path="/timeline-without-cards-horizontal" element={items.length > 0 && <VerticalBasicCardLess type='big-screen' items={items} />}>
+            <Route path="/timeline-without-cards-horizontal" element={items.length > 0 && <HorizontalBasicCardLess type='big-screen' items={items} />}>
             </Route>
             <Route path="/" element={items.length > 0 && (
               <VerticalBasic type={"big-screen"} items={items} />

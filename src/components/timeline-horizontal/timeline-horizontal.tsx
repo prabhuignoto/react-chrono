@@ -13,7 +13,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   handleItemClick,
   autoScroll,
   wrapperId,
-  theme,
+  // theme,
   slideShowRunning,
   onElapsed,
   contentDetailsChildren: children,
@@ -26,6 +26,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     cardHeight,
     flipLayout,
     showAllCardsHorizontal,
+    theme,
   } = useContext(GlobalContext);
 
   const wrapperClass = useMemo(
