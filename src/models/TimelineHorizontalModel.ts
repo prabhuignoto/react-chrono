@@ -14,7 +14,6 @@ export interface TimelineHorizontalModel {
   mode?: TimelineMode;
   onElapsed?: (id?: string) => void;
   slideShowRunning?: boolean;
-  // theme?: Theme;
   wrapperId: string;
 }
 

@@ -22,7 +22,6 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> =
       onLast,
       disableLeft,
       disableRight,
-      // theme,
       slideShowRunning,
       onReplay,
       slideShowEnabled,

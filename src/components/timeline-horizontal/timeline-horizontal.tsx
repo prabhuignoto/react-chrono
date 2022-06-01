@@ -13,7 +13,6 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   handleItemClick,
   autoScroll,
   wrapperId,
-  // theme,
   slideShowRunning,
   onElapsed,
   contentDetailsChildren: children,

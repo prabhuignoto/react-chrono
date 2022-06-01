@@ -213,7 +213,6 @@ export const VerticalTreeMixed: FunctionComponent<{
         cardHeight={300}
         cardWidth={450}
         scrollable
-      // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
     </ComponentContainerTree>
   </Vertical>

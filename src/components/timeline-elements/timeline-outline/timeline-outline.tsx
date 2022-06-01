@@ -41,7 +41,6 @@ export interface TimelineOutlineModel {
 const TimelineOutline: React.FunctionComponent<TimelineOutlineModel> = ({
   items = [],
   onSelect,
-  // theme,
   mode,
 }: TimelineOutlineModel) => {
   const [openPane, setOpenPane] = useState(false);

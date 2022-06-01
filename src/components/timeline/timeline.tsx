@@ -43,7 +43,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onOutlineSelection,
     slideShowEnabled,
     slideShowRunning,
-    // theme,
   } = props;
 
   const {
@@ -319,7 +318,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               mode={mode}
               onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
               slideShowRunning={slideShowRunning}
-              // theme={theme}
               wrapperId={id.current}
             />
           </TimelineMain>
@@ -368,7 +366,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             onReplay={onRestartSlideshow}
             slideShowEnabled={slideShowEnabled}
             slideShowRunning={slideShowRunning}
-            // theme={theme}
           />
         </TimelineControlContainer>
       )}

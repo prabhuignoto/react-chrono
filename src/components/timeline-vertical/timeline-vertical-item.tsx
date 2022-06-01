@@ -33,7 +33,6 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     onClick,
     onElapsed,
     slideShowRunning,
-    // theme,
     title,
     visible,
   } = props;
@@ -140,7 +139,6 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         onClick={onClick}
         slideShowRunning={slideShowRunning}
         iconChild={iconChild}
-        // theme={theme}
         timelineCircleDimension={timelineCircleDimension}
         lineWidth={lineWidth}
         disableClickOnCircle={disableClickOnCircle}

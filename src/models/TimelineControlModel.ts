@@ -10,5 +10,4 @@ export interface TimelineControlModel {
   onReplay?: () => void;
   slideShowEnabled?: boolean;
   slideShowRunning?: boolean;
-  // theme?: Theme;
 }

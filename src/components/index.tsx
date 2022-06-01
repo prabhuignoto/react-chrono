@@ -24,17 +24,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   const [slideShowActive, setSlideshowActive] = useState(false);
   const [activeTimelineItem, setActiveTimelineItem] = useState(activeItemIndex);
 
-  // const customTheme = Object.assign(
-  //   {
-  //     cardBgColor: '#fff',
-  //     cardForeColor: '#000',
-  //     primary: '#0f52ba',
-  //     secondary: '#ffdf00',
-  //     titleColor: '#0f52ba',
-  //   },
-  //   theme,
-  // );
-
   const initItems = (items?: TimelineItemModel[]) => {
     return items && items.length
       ? items.map((item, index) => {
@@ -185,7 +174,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         slideShow={slideShow}
         slideShowEnabled={slideShow}
         slideShowRunning={slideShowActive}
-        // theme={customTheme}
         onScrollEnd={onScrollEnd}
         onItemSelected={onItemSelected}
         onOutlineSelection={handleOutlineSelection}

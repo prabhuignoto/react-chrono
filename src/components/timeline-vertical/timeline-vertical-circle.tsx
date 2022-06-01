@@ -17,7 +17,6 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
     onClick,
     active,
     onActive,
-    // theme,
     alternateCards,
     slideShowRunning,
     iconChild,
