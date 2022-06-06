@@ -39,7 +39,7 @@ const NewDemo: React.FunctionComponent = () => {
         cardBgColor: "#C0C0C0",
         primary: "#000",
         secondary: "#FFA500",
-        titleColor: "#000"
+        titleColorActive: "#000"
       })
     }
   }, [state]);
@@ -112,7 +112,6 @@ const NewDemo: React.FunctionComponent = () => {
                 setState(1 - state);
               }}>change</button>
               {<VerticalTree type={'big-screen'} items={state > 0 ? items : mixed} theme={customTheme} >{state}</VerticalTree>}
-
             </>}>
             </Route>
             <Route path="/horizontal" element={items.length > 0 && (

@@ -13,10 +13,11 @@ export const TitleWrapper = styled.div<{
   padding: 0.25rem;
   visibility: ${(p) => (p.hide ? 'hidden' : 'visible')};
   text-align: ${(p) => (p.align ? p.align : '')};
+  color: ${(p) => (p.theme ? p.theme.titleColor : '')};
 
   &.active {
     background: ${(p) => p.theme?.secondary};
     color: ${(p) =>
-      p.theme?.titleColor ? p.theme?.titleColor : p.theme?.primary};
+      p.theme?.titleColorActive ? p.theme?.titleColorActive : p.theme?.primary};
   }
 `;

@@ -283,7 +283,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               />
             )}
             {/* main timeline text */}
-            {!media && <MemoSubTitle content={content} theme={theme} />}
+            {!media && (
+              <MemoSubTitle
+                content={content}
+                theme={theme}
+                fontSize={fontSizes?.cardSubtitle}
+              />
+            )}
           </TimelineCardHeader>
 
           {/* render media video or image */}

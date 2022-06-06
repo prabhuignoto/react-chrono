@@ -420,7 +420,7 @@ Customize colors with the `theme` prop.
     secondary: 'blue',
     cardBgColor: 'yellow',
     cardForeColor: 'violet',
-    titleColor: 'red',
+    titleColorActive: 'red',
   }}
 />
 ```

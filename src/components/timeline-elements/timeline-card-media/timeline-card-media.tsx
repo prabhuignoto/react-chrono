@@ -38,7 +38,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);
 
-  const { mode } = useContext(GlobalContext);
+  const { mode, fontSizes } = useContext(GlobalContext);
 
   useEffect(() => {
     if (!videoRef) {
@@ -174,8 +174,14 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
           ))}
       </MediaWrapper>
       <MediaDetailsWrapper mode={mode}>
-        <MemoTitle title={title} theme={theme} active={active} url={url} />
-        <MemoSubTitle content={content} />
+        <MemoTitle
+          title={title}
+          theme={theme}
+          active={active}
+          url={url}
+          fontSize={fontSizes?.cardTitle}
+        />
+        <MemoSubTitle content={content} fontSize={fontSizes?.cardSubtitle} />
       </MediaDetailsWrapper>
     </>
   );
