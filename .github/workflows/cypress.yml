@@ -9,7 +9,7 @@ jobs:
     name: E2E on Chrome
     steps:
       - uses: actions/checkout@v2
-      - uses: cypress-io/github-action@v2
+      - uses: cypress-io/github-action@v4
         with:
           start: npm run dev
           wait-on: 'http://localhost:3000'
