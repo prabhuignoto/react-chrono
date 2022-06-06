@@ -1,6 +1,14 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
+import { GlobalContext } from '../../GlobalContext';
+import CloseIcon from '../../icons/close';
 import MenuIcon from '../../icons/menu';
 import {
   List,
@@ -11,7 +19,6 @@ import {
   OutlinePane,
   OutlineWrapper,
 } from './timeline-outline.styles';
-import CloseIcon from '../../icons/close';
 
 export enum OutlinePosition {
   'left',
@@ -34,7 +41,6 @@ export interface TimelineOutlineModel {
 const TimelineOutline: React.FunctionComponent<TimelineOutlineModel> = ({
   items = [],
   onSelect,
-  theme,
   mode,
 }: TimelineOutlineModel) => {
   const [openPane, setOpenPane] = useState(false);
@@ -42,6 +48,8 @@ const TimelineOutline: React.FunctionComponent<TimelineOutlineModel> = ({
 
   const togglePane = useCallback(() => setOpenPane((prev) => !prev), []);
   const [showList, setShowList] = useState(false);
+
+  const { theme } = useContext(GlobalContext);
 
   const position = useMemo(() => {
     if (mode === 'VERTICAL') {

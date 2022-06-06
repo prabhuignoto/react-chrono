@@ -4,7 +4,7 @@ import { Theme } from '../models/Theme';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
   HorizontalAll,
-  HorizontalBasic, HorizontalInitalSelectedItem,
+  HorizontalBasic, HorizontalBasicCardLess, HorizontalInitalSelectedItem,
   VerticalBasic, VerticalBasicCardLess, VerticalCustomContent, VerticalCustomContent2, VerticalTree, VerticalTreeMixed
 } from './app-samples';
 import './App.css';
@@ -39,7 +39,7 @@ const NewDemo: React.FunctionComponent = () => {
         cardBgColor: "#C0C0C0",
         primary: "#000",
         secondary: "#FFA500",
-        titleColor: "#000"
+        titleColorActive: "#000"
       })
     }
   }, [state]);
@@ -112,7 +112,6 @@ const NewDemo: React.FunctionComponent = () => {
                 setState(1 - state);
               }}>change</button>
               {<VerticalTree type={'big-screen'} items={state > 0 ? items : mixed} theme={customTheme} >{state}</VerticalTree>}
-
             </>}>
             </Route>
             <Route path="/horizontal" element={items.length > 0 && (
@@ -134,7 +133,7 @@ const NewDemo: React.FunctionComponent = () => {
             </Route>
             <Route path="/timeline-without-cards" element={items.length > 0 && <VerticalBasicCardLess type='big-screen' items={items} />}>
             </Route>
-            <Route path="/timeline-without-cards-horizontal" element={items.length > 0 && <VerticalBasicCardLess type='big-screen' items={items} />}>
+            <Route path="/timeline-without-cards-horizontal" element={items.length > 0 && <HorizontalBasicCardLess type='big-screen' items={items} />}>
             </Route>
             <Route path="/" element={items.length > 0 && (
               <VerticalBasic type={"big-screen"} items={items} />

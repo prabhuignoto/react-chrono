@@ -109,39 +109,4 @@ context('Chrono.Vertical.Alternating.Mixed', () => {
       .find('.card-content-wrapper')
       .should('have.class', 'visible');
   });
-
-  it('use nav controls', () => {
-    cy.get('.timeline-controls>li').eq(3).click();
-    cy.wait(700);
-    cy.get('.vertical-item-row')
-      .last()
-      .find('.timeline-card-content')
-      .should('have.class', 'active');
-
-    cy.get('.timeline-controls>li').eq(0).click();
-    cy.wait(700);
-    cy.get('.vertical-item-row')
-      .first()
-      .find('.timeline-card-content')
-      .should('have.class', 'active');
-
-    cy.get('.timeline-controls>li').eq(2).click();
-    cy.wait(250);
-    cy.get('.timeline-controls>li').eq(2).click();
-    cy.wait(250);
-    cy.get('.timeline-controls>li').eq(2).click();
-    cy.wait(250);
-    cy.get('.timeline-controls>li').eq(2).click();
-    cy.wait(250);
-    cy.get('.vertical-item-row')
-      .eq(4)
-      .find('.timeline-card-content')
-      .should('have.class', 'active');
-
-    cy.get('.timeline-controls>li').eq(1).click();
-    cy.get('.vertical-item-row')
-      .eq(3)
-      .find('.timeline-card-content')
-      .should('have.class', 'active');
-  });
 });

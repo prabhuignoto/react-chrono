@@ -172,7 +172,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | theme                    | Prop to customize the colors.                                                                                                                        |              |
 | timelineCircleDimension  | Dimensions of the circular points on the timeline                                                                                                    | false        |
 | useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself. | true         |
-| fontSizes                | property to change the font size of the card's title, subtitle, and text.                                                                            | true         |
+| fontSizes                | property to customize the font sizes                                                                                                                 |              |
 
 ### Mode
 
@@ -420,7 +420,8 @@ Customize colors with the `theme` prop.
     secondary: 'blue',
     cardBgColor: 'yellow',
     cardForeColor: 'violet',
-    titleColor: 'red',
+    titleColor: 'black',
+    titleColorActive: 'red',
   }}
 />
 ```
@@ -437,6 +438,7 @@ Use the `fontSizes` prop to customize the font sizes of the timeline card.
     cardSubtitle: '0.85rem',
     cardText: '0.8rem',
     cardTitle: '1rem',
+    title: '1rem',
   }}
 ></Chrono>
 ```

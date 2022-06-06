@@ -1,6 +1,7 @@
 import cls from 'classnames';
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
 import { VerticalCircleModel } from '../../models/TimelineVerticalModel';
+import { GlobalContext } from '../GlobalContext';
 import { Circle } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
 import {
   VerticalCircleContainer,
@@ -16,7 +17,6 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
     onClick,
     active,
     onActive,
-    theme,
     alternateCards,
     slideShowRunning,
     iconChild,
@@ -26,6 +26,7 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
     cardLess,
   } = props;
   const circleRef = useRef<HTMLDivElement>(null);
+  const { theme } = useContext(GlobalContext);
 
   useEffect(() => {
     if (active) {

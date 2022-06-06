@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
 
-context('Chrono.Vertical.Basic', () => {
+context('Chrono.Vertical.Alternating', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/vertical-basic');
+    cy.visit('http://localhost:3000/vertical-alternating');
   });
 
   it('check length', () => {
@@ -37,21 +37,13 @@ context('Chrono.Vertical.Basic', () => {
       .should('contain', 'Dunkirk');
   });
 
-  it('check card description items count(string array)', () => {
-    cy.get('.vertical-item-row')
-      .eq(0)
-      .find('.card-description span')
-      .should('have.length', 1);
-  });
-
   it('check card description', () => {
     cy.get('.vertical-item-row')
       .eq(0)
-      .find('.card-description span')
-      .eq(0)
+      .find('.card-description>p')
       .should(
         'contain',
-        'On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France.',
+        'On 10 May 1940, Hitler began his long-awaited offensive in the west',
       );
   });
 
@@ -70,18 +62,18 @@ context('Chrono.Vertical.Basic', () => {
       .should('have.class', 'active');
   });
 
-  // it('check read more action', () => {
-  //   cy.get('.vertical-item-row')
-  //     .eq(1)
-  //     .find('.card-description')
-  //     .should('have.class', 'show-less');
-  //   cy.get('.vertical-item-row').eq(1).find('.show-more').click();
-  //   cy.wait(500);
-  //   cy.get('.vertical-item-row')
-  //     .eq(1)
-  //     .find('.card-description')
-  //     .should('not.have.class', 'show-less');
-  // });
+  it('check read more action', () => {
+    cy.get('.vertical-item-row')
+      .eq(1)
+      .find('.card-description')
+      .should('have.class', 'show-less');
+    cy.get('.vertical-item-row').eq(1).find('.show-more').click();
+    cy.wait(500);
+    cy.get('.vertical-item-row')
+      .eq(1)
+      .find('.card-description')
+      .should('not.have.class', 'show-less');
+  });
 
   it('check scroll', () => {
     cy.get('.timeline-main-wrapper').scrollTo('bottom');
@@ -97,40 +89,5 @@ context('Chrono.Vertical.Basic', () => {
       .first()
       .find('.card-content-wrapper')
       .should('have.class', 'visible');
-  });
-
-  it('use nav controls', () => {
-    cy.get('.timeline-controls>li').eq(3).click();
-    cy.wait(700);
-    cy.get('.vertical-item-row')
-      .last()
-      .find('.timeline-card-content')
-      .should('have.class', 'active');
-
-    cy.get('.timeline-controls>li').eq(0).click();
-    cy.wait(700);
-    cy.get('.vertical-item-row')
-      .first()
-      .find('.timeline-card-content')
-      .should('have.class', 'active');
-
-    cy.get('.timeline-controls>li').eq(2).click();
-    cy.wait(250);
-    cy.get('.timeline-controls>li').eq(2).click();
-    cy.wait(250);
-    cy.get('.timeline-controls>li').eq(2).click();
-    cy.wait(250);
-    cy.get('.timeline-controls>li').eq(2).click();
-    cy.wait(250);
-    cy.get('.vertical-item-row')
-      .eq(4)
-      .find('.timeline-card-content')
-      .should('have.class', 'active');
-
-    cy.get('.timeline-controls>li').eq(1).click();
-    cy.get('.vertical-item-row')
-      .eq(3)
-      .find('.timeline-card-content')
-      .should('have.class', 'active');
   });
 });

@@ -5,4 +5,5 @@ export interface Theme {
   secondary?: string;
   textColor?: string;
   titleColor?: string;
+  titleColorActive?: string;
 }

@@ -43,22 +43,23 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onOutlineSelection,
     slideShowEnabled,
     slideShowRunning,
-    theme,
   } = props;
 
   const {
-    scrollable = true,
-    mode = 'HORIZONTAL',
+    cardPositionHorizontal,
+    disableNavOnKey,
+    enableOutline,
+    flipLayout,
     hideControls,
     itemWidth = 200,
-    disableNavOnKey,
-    cardPositionHorizontal,
-    onScrollEnd,
-    enableOutline,
     lineWidth,
-    flipLayout,
+    mode = 'HORIZONTAL',
+    onScrollEnd,
+    scrollable = true,
     showAllCardsHorizontal,
+    theme,
   } = useContext(GlobalContext);
+
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
   const [hasFocus, setHasFocus] = useState(false);
@@ -317,7 +318,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               mode={mode}
               onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
               slideShowRunning={slideShowRunning}
-              theme={theme}
               wrapperId={id.current}
             />
           </TimelineMain>
@@ -366,7 +366,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             onReplay={onRestartSlideshow}
             slideShowEnabled={slideShowEnabled}
             slideShowRunning={slideShowRunning}
-            theme={theme}
           />
         </TimelineControlContainer>
       )}

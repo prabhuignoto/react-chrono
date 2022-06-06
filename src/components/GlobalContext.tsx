@@ -7,7 +7,13 @@ const GlobalContext = React.createContext<PropsModel>({});
 const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
   props,
 ) => {
-  const { cardHeight = 200, cardLess = false, flipLayout, items = [] } = props;
+  const {
+    cardHeight = 200,
+    cardLess = false,
+    flipLayout,
+    items = [],
+    theme,
+  } = props;
   const defaultProps = Object.assign<PropsModel, PropsModel, PropsModel>(
     {},
     {
@@ -19,6 +25,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         cardSubtitle: '0.85rem',
         cardText: '0.8rem',
         cardTitle: '1rem',
+        title: '1rem',
       },
       lineWidth: 3,
       mode: 'VERTICAL_ALTERNATING',
@@ -33,6 +40,17 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       ...props,
       activeItemIndex: flipLayout ? items?.length - 1 : 0,
       cardHeight: cardLess ? (cardHeight ? cardHeight : 80) : cardHeight,
+      theme: Object.assign(
+        {
+          cardBgColor: '#fff',
+          cardForeColor: '#000',
+          primary: '#0f52ba',
+          secondary: '#ffdf00',
+          titleColor: '#000',
+          titleColorActive: '#0f52ba',
+        },
+        theme,
+      ),
     },
   );
 

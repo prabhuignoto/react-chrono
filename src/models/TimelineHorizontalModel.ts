@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Theme } from './Theme';
+// import { Theme } from './Theme';
 import { TimelineCardModel } from './TimelineItemModel';
 import { TimelineMode } from './TimelineModel';
 
@@ -14,7 +14,6 @@ export interface TimelineHorizontalModel {
   mode?: TimelineMode;
   onElapsed?: (id?: string) => void;
   slideShowRunning?: boolean;
-  theme?: Theme;
   wrapperId: string;
 }
 

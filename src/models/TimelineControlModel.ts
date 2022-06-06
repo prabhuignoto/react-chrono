@@ -1,4 +1,3 @@
-import { Theme } from './Theme';
 export interface TimelineControlModel {
   activeTimelineItem?: number;
   disableLeft: boolean;
@@ -11,5 +10,4 @@ export interface TimelineControlModel {
   onReplay?: () => void;
   slideShowEnabled?: boolean;
   slideShowRunning?: boolean;
-  theme?: Theme;
 }

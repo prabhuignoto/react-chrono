@@ -117,9 +117,12 @@ export const VerticalBasic: FunctionComponent<{
         cardWidth={700}
         slideItemDuration={2500}
         scrollable={{ scrollbar: false}}
-        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
+        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColorActive: "#6495ed", titleColor: "#922724" }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
+        fontSizes={{
+          title: '1.2rem',
+        }}
         timelineCircleDimension={20}
       />
     </ComponentContainerTree>
@@ -136,7 +139,7 @@ export const VerticalBasicCardLess: FunctionComponent<{
         items={items}
         mode="VERTICAL"
         cardLess
-        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
+        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColorActive: "red" }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
       />
     </ComponentContainerTree>
@@ -153,7 +156,7 @@ export const HorizontalBasicCardLess: FunctionComponent<{
         items={items}
         mode="HORIZONTAL"
         cardLess
-        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColor: "red" }}
+        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColorActive: "red" }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
       />
     </ComponentContainerTree>
@@ -213,7 +216,6 @@ export const VerticalTreeMixed: FunctionComponent<{
         cardHeight={300}
         cardWidth={450}
         scrollable
-      // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
     </ComponentContainerTree>
   </Vertical>
