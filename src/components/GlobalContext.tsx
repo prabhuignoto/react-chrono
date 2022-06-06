@@ -25,6 +25,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         cardSubtitle: '0.85rem',
         cardText: '0.8rem',
         cardTitle: '1rem',
+        title: '1rem',
       },
       lineWidth: 3,
       mode: 'VERTICAL_ALTERNATING',

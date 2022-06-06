@@ -55,6 +55,7 @@ export type TimelineProps = {
     cardSubtitle?: string;
     cardText?: string;
     cardTitle?: string;
+    title?: string;
   };
   hideControls?: boolean;
   itemWidth?: number;

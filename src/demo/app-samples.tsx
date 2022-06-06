@@ -120,6 +120,9 @@ export const VerticalBasic: FunctionComponent<{
         theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColorActive: "#6495ed", titleColor: "#922724" }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
+        fontSizes={{
+          title: '1.2rem',
+        }}
         timelineCircleDimension={20}
       />
     </ComponentContainerTree>
