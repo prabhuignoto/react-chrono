@@ -1,5 +1,4 @@
-import { keyframes } from '@emotion/react';
-import styled from '@emotion/styled';
+import styled, { keyframes } from 'styled-components';
 import { Theme } from '../../../models/Theme';
 
 export const Wrapper = styled.div`

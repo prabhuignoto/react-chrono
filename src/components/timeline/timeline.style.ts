@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import { Theme } from '../../models/Theme';
 import { TimelineMode } from '../../models/TimelineModel';
 
