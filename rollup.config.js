@@ -57,13 +57,13 @@ export default {
       plugins: [
         '@babel/plugin-transform-runtime',
         '@babel/plugin-proposal-optional-chaining',
-        [
-          '@emotion',
-          {
-            // sourceMap is on by default but source maps are dead code eliminated in production
-            sourceMap: false,
-          },
-        ],
+        // [
+        //   '@emotion',
+        //   {
+        //     // sourceMap is on by default but source maps are dead code eliminated in production
+        //     sourceMap: false,
+        //   },
+        // ],
       ],
     }),
     buble({

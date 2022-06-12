@@ -31,11 +31,9 @@
     "dev": "vite --config vite.config.ts"
   },
   "dependencies": {
-    "@emotion/core": "^11.0.0-next.10",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
     "classnames": "^2.3.1",
-    "focus-visible": "^5.2.0"
+    "focus-visible": "^5.2.0",
+    "styled-components": "^5.3.5"
   },
   "publishConfig": {
     "cache": "cache/.npm",
@@ -65,12 +63,13 @@
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.25",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
     "@vitejs/plugin-react": "^1.3.2",
     "babel-loader": "^8.2.5",
     "cssnano": "^5.1.11",
-    "cypress": "10.0.3",
+    "cypress": "10.1.0",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
@@ -95,10 +94,10 @@
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.32.1",
-    "snyk": "^1.946.0",
+    "snyk": "^1.947.0",
     "start-server-and-test": "^1.14.0",
     "stylelint": "^14.8.5",
-    "stylelint-config-recommended": "^7.0.0",
+    "stylelint-config-recommended": "^8.0.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-order": "^5.0.0",
     "stylelint-processor-styled-components": "^1.10.0",

@@ -1,5 +1,4 @@
-import { css, keyframes } from '@emotion/react';
-import styled from '@emotion/styled';
+import styled, { css, keyframes } from 'styled-components';
 import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
 
