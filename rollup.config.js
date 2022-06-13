@@ -3,7 +3,9 @@ import buble from '@rollup/plugin-buble';
 import common from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import cssnano from 'cssnano';
+import analyze from 'rollup-plugin-analyzer';
 import del from 'rollup-plugin-delete';
+import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
@@ -18,7 +20,6 @@ const banner = `/*
 `;
 
 export default {
-  external: ['react', 'react-dom', '@babel/runtime'],
   input: 'src/react-chrono.ts',
   output: [
     {
@@ -49,6 +50,7 @@ export default {
     },
   ],
   plugins: [
+    PeerDepsExternalPlugin(),
     del({ targets: 'dist/*' }),
     typescript(),
     babel({
@@ -57,6 +59,7 @@ export default {
       plugins: [
         '@babel/plugin-transform-runtime',
         '@babel/plugin-proposal-optional-chaining',
+        'babel-plugin-styled-components',
         // [
         //   '@emotion',
         //   {
@@ -89,6 +92,9 @@ export default {
       format: {
         comments: false,
       },
+    }),
+    analyze({
+      summaryOnly: true,
     }),
   ],
 };
