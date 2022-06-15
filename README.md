@@ -56,6 +56,7 @@
   - [Item Width](#item-width)
   - [🎨Theme](#theme)
   - [Customize Font sizes](#customize-font-sizes)
+  - [Customize alt text for buttons](#customize-alt-text-for-buttons)
 - [📦CodeSandbox Examples](#codesandbox-examples)
 - [📚Storybook](#storybook)
 - [🔨Build Setup](#build-setup)
@@ -173,6 +174,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | timelineCircleDimension  | Dimensions of the circular points on the timeline                                                                                                    | false        |
 | useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself. | true         |
 | fontSizes                | property to customize the font sizes                                                                                                                 |              |
+| buttonTexts              | Customize the alt text for all buttons                                                                                                               |              |
 
 ### Mode
 
@@ -442,6 +444,33 @@ Use the `fontSizes` prop to customize the font sizes of the timeline card.
   }}
 ></Chrono>
 ```
+
+### Customize alt text for buttons
+
+With the `buttonTexts` prop, you can change the button's alt text.
+
+```jsx
+<Chrono
+  items={data}
+  mode="HORIZONTAL"
+  buttonTexts={{
+    first: 'Jump to First',
+    last: 'Jump to Last',
+    next: 'Next',
+    previous: 'Previous',
+  }}
+></Chrono>
+```
+
+Defaults
+
+| Property   | Value            |
+| :--------- | :--------------- |
+| `first`    | 'Go to First'    |
+| `last`     | 'Go to Last'     |
+| `next`     | 'Next'           |
+| `play`     | 'Play Slideshow' |
+| `previous` | 'Previous'       |
 
 ## 📦CodeSandbox Examples
 

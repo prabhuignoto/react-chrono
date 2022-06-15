@@ -27,6 +27,12 @@ export const HorizontalBasic: React.FunctionComponent<{
           itemWidth={200}
           onItemSelected={selected => console.log(selected)}
           timelineCircleDimension={20}
+          buttonTexts={{
+            first: 'Jump to First',
+            last: 'Jump to Last',
+            next: 'Next',
+            previous: 'Previous',
+          }}
         >
           <div className="chrono-icons">
             <img src="color-circle.svg" alt="github" />

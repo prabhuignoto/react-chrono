@@ -13,6 +13,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
     flipLayout,
     items = [],
     theme,
+    buttonTexts,
   } = props;
   const defaultProps = Object.assign<PropsModel, PropsModel, PropsModel>(
     {},
@@ -39,6 +40,14 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
     {
       ...props,
       activeItemIndex: flipLayout ? items?.length - 1 : 0,
+      buttonTexts: {
+        first: 'Go to First',
+        last: 'Go to Last',
+        next: 'Next',
+        play: 'Play Slideshow',
+        previous: 'Previous',
+        ...buttonTexts,
+      },
       cardHeight: cardLess ? (cardHeight ? cardHeight : 80) : cardHeight,
       theme: Object.assign(
         {
