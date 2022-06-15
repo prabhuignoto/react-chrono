@@ -447,7 +447,7 @@ Use the `fontSizes` prop to customize the font sizes of the timeline card.
 
 ### Customize alt text for buttons
 
-With the 'buttonTexts' prop, you can change the button's alt text.
+With the `buttonTexts` prop, you can change the button's alt text.
 
 ```jsx
 <Chrono
@@ -461,6 +461,16 @@ With the 'buttonTexts' prop, you can change the button's alt text.
   }}
 ></Chrono>
 ```
+
+Defaults
+
+| Property   | Value            |
+| :--------- | :--------------- |
+| `first`    | 'Go to First'    |
+| `last`     | 'Go to Last'     |
+| `next`     | 'Next'           |
+| `play`     | 'Play Slideshow' |
+| `previous` | 'Previous'       |
 
 ## 📦CodeSandbox Examples
 
