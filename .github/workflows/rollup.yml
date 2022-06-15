@@ -1,4 +1,4 @@
-name: Test and Lint
+name: Build with Webpack
 
 on:
   push:
@@ -22,8 +22,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install
-        run: npm install
-
-      - name: Rollup
-        run: npm run rollup
+      - name: Build
+        run: |
+          npm install
+          npm run rollup
