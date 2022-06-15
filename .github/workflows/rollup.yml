@@ -22,6 +22,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Rollup
+      - name: Install
       - run: npm install
+
+      - name: Rollup
       - run: npm run rollup
