@@ -41,6 +41,13 @@ export type TimelineProps = {
   activeItemIndex?: number;
   allowDynamicUpdate?: boolean;
   borderLessCards?: boolean;
+  buttonTexts?: {
+    first: string;
+    last: string;
+    next?: string;
+    play?: string;
+    previous?: string;
+  };
   cardHeight?: number;
   cardLess?: boolean;
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';

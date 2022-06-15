@@ -24,7 +24,9 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   onReplay,
   slideShowEnabled,
 }: TimelineControlModel) => {
-  const { mode, flipLayout, theme } = useContext(GlobalContext);
+  const { mode, flipLayout, theme, buttonTexts } = useContext(GlobalContext);
+
+  console.log(buttonTexts);
 
   const rotate = useMemo(() => mode !== 'HORIZONTAL', [mode]);
 
@@ -44,8 +46,8 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
             mode={mode}
             theme={theme}
             onClick={flippedHorizontally ? onLast : onFirst}
-            title="Go to First"
-            aria-label="first"
+            title={flipLayout ? buttonTexts?.last : buttonTexts?.first}
+            aria-label={flipLayout ? buttonTexts?.last : buttonTexts?.first}
             aria-disabled={disableLeft}
             aria-controls="timeline-main-wrapper"
             tabIndex={!disableLeft ? 0 : -1}
@@ -61,8 +63,8 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
             mode={mode}
             theme={theme}
             onClick={flippedHorizontally ? onNext : onPrevious}
-            title="Previous"
-            aria-label="previous"
+            title={flipLayout ? buttonTexts?.next : buttonTexts?.previous}
+            aria-label={flipLayout ? buttonTexts?.next : buttonTexts?.previous}
             aria-disabled={disableLeft}
             aria-controls="timeline-main-wrapper"
             tabIndex={!disableLeft ? 0 : -1}
@@ -78,8 +80,8 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
             mode={mode}
             theme={theme}
             onClick={flippedHorizontally ? onPrevious : onNext}
-            title="Next"
-            aria-label="next"
+            title={flipLayout ? buttonTexts?.previous : buttonTexts?.next}
+            aria-label={flipLayout ? buttonTexts?.previous : buttonTexts?.next}
             aria-disabled={disableRight}
             aria-controls="timeline-main-wrapper"
             rotate={rotate ? 'TRUE' : 'FALSE'}
@@ -95,8 +97,8 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
             mode={mode}
             theme={theme}
             onClick={flippedHorizontally ? onFirst : onLast}
-            title="Go to Last"
-            aria-label="last"
+            title={flipLayout ? buttonTexts?.first : buttonTexts?.last}
+            aria-label={flipLayout ? buttonTexts?.first : buttonTexts?.last}
             aria-disabled={disableRight}
             aria-controls="timeline-main-wrapper"
             tabIndex={!disableRight ? 0 : -1}
@@ -112,10 +114,10 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
             <TimelineNavButton
               theme={theme}
               onClick={onReplay}
-              title="Play Slideshow"
+              title={buttonTexts?.play}
               tabIndex={0}
               aria-controls="timeline-main-wrapper"
-              aria-label="Play Slideshow"
+              aria-label={buttonTexts?.play}
             >
               <ReplayIcon />
             </TimelineNavButton>
