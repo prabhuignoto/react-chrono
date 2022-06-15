@@ -1,4 +1,4 @@
-name: Build with Webpack
+name: Build with Rollup
 
 on:
   push:
