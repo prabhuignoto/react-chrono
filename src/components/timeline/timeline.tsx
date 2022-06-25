@@ -162,7 +162,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         }, 100);
       }
     }
-  }, [activeTimelineItem]);
+  }, [activeTimelineItem, items.length]);
 
   const handleScroll = useCallback(
     (scroll: Partial<Scroll>) => {
