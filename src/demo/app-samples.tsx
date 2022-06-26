@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import Chrono from '../components';
 import { Theme } from '../models/Theme';
 import { TimelineItemModel } from '../models/TimelineItemModel';
@@ -268,8 +268,13 @@ export const VerticalTreeSlideshow: FunctionComponent<{
 export const VerticalCustomContent: FunctionComponent<{
   type: string;
   cardHeight?: number;
-}> = ({ type, cardHeight }) => (
-  <Vertical>
+}> = ({ type, cardHeight }) => {
+  const [counter, setCounter] = useState(0);
+
+  const increment = () => setCounter(prev => prev + 1);
+  const decrement = () => setCounter(prev => prev - 1);
+
+  return <Vertical>
     <ComponentContainerTree type={type}>
       <Chrono
         mode="VERTICAL"
@@ -284,12 +289,15 @@ export const VerticalCustomContent: FunctionComponent<{
         </div>
         <div>
           <h3>This is a List</h3>
-          <ul>
+          {/* <ul>
             <li>Item 1</li>
             <li>Item 2</li>
             <li>Item 3</li>
             <li>Item 4</li>
-          </ul>
+          </ul> */}
+          {counter}
+          <button onClick={increment}>increment</button>
+          <button onClick={decrement}>decrement</button>
         </div>
         <div>
           <h3>Dunkirk</h3>
@@ -332,7 +340,7 @@ export const VerticalCustomContent: FunctionComponent<{
       </Chrono>
     </ComponentContainerTree>
   </Vertical>
-);
+};
 export const VerticalCustomContent2: FunctionComponent<{
   type: string;
   cardHeight?: number;
