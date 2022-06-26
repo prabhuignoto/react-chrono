@@ -88,43 +88,9 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     [],
   );
 
-  // timeline card content
-  const Content = useMemo(() => {
-    const contentClass = cls('card-content-wrapper', visible ? 'visible' : '', {
-      [className]: true,
-    });
-
-    return (
-      <TimelineCardContentWrapper
-        className={contentClass}
-        alternateCards={alternateCards}
-        noTitle={!title}
-        flip={flipLayout}
-        height={cardHeight}
-      >
-        {!cardLess && (
-          <TimelineCard
-            active={active}
-            branchDir={className}
-            content={cardSubtitle}
-            customContent={contentDetailsChildren}
-            detailedText={cardDetailedText}
-            hasFocus={hasFocus}
-            id={id}
-            media={media}
-            onClick={onClick}
-            onElapsed={onElapsed}
-            onShowMore={handleShowMore}
-            slideShowActive={slideShowRunning}
-            theme={theme}
-            title={cardTitle}
-            url={url}
-            flip={flipLayout}
-          />
-        )}
-      </TimelineCardContentWrapper>
-    );
-  }, [hasFocus, slideShowRunning, active, visible]);
+  const contentClass = cls('card-content-wrapper', visible ? 'visible' : '', {
+    [className]: true,
+  });
 
   // timeline circle
   const Circle = useMemo(() => {
@@ -162,7 +128,35 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       {Title}
 
       {/* card section */}
-      {Content}
+      <TimelineCardContentWrapper
+        className={contentClass}
+        alternateCards={alternateCards}
+        noTitle={!title}
+        flip={flipLayout}
+        height={cardHeight}
+      >
+        {!cardLess && (
+          <TimelineCard
+            active={active}
+            branchDir={className}
+            content={cardSubtitle}
+            customContent={contentDetailsChildren}
+            detailedText={cardDetailedText}
+            hasFocus={hasFocus}
+            id={id}
+            media={media}
+            onClick={onClick}
+            onElapsed={onElapsed}
+            onShowMore={handleShowMore}
+            slideShowActive={slideShowRunning}
+            theme={theme}
+            title={cardTitle}
+            url={url}
+            flip={flipLayout}
+          />
+        )}
+      </TimelineCardContentWrapper>
+      {/* <Content /> */}
 
       {/* Circle */}
       {Circle}
