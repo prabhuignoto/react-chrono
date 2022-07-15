@@ -31,3 +31,5 @@ debug
 .husky
 cache
 .dccache
+
+cypress/videos
