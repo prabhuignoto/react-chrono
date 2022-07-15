@@ -2,7 +2,7 @@
 
 context('Chrono.Vertical.Alternating.Mixed', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/vertical-alternating-mixed');
+    cy.visit('http://localhost:5173/vertical-alternating-mixed');
   });
 
   it('check length', () => {
