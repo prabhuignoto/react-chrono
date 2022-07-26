@@ -7,6 +7,12 @@ on:
     branches: [master]
 
 jobs:
+  install_pnpm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 6.0.2
   build:
     runs-on: ubuntu-latest
 
@@ -24,5 +30,5 @@ jobs:
 
       - name: Build
         run: |
-          npm install
-          npm run rollup
+          pnpm install
+          pnpm rollup

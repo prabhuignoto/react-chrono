@@ -3,15 +3,21 @@ name: Cypress Tests using Cypress Docker Image
 on: [push, pull_request]
 
 jobs:
+  install_pnpm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 6.0.2
   chrome:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     # let's make sure our tests pass on Chrome browser
     name: E2E on Chrome
     steps:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v4
         with:
-          start: npm run dev
+          start: pnpm dev
           wait-on: 'http://localhost:5173'
           wait-on-timeout: 120
           browser: chrome
