@@ -7,18 +7,17 @@ on:
     branches: [master]
 
 jobs:
-  install_pnpm:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: pnpm/action-setup@v2.2.2
-        with:
-          version: 6.0.2
   chrome:
     runs-on: ubuntu-latest
     # let's make sure our tests pass on Chrome browser
     name: E2E on Chrome
     steps:
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 6.0.2
+
       - uses: actions/checkout@v2
+
       - uses: cypress-io/github-action@v4
         with:
           start: pnpm dev
