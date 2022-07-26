@@ -33,6 +33,7 @@ jobs:
 
       - uses: cypress-io/github-action@v4
         with:
+          install: false
           start: pnpm dev
           wait-on: 'http://localhost:5173'
           wait-on-timeout: 120
