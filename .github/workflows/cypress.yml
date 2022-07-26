@@ -18,6 +18,9 @@ jobs:
 
       - uses: actions/checkout@v2
 
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
       - uses: cypress-io/github-action@v4
         with:
           start: pnpm dev
