@@ -69,7 +69,7 @@
 ## ⚡ Installation
 
 ```jsx
-yarn add react-chrono
+pnpm add react-chrono
 ```
 
 ## Getting Started
@@ -494,32 +494,32 @@ Deep dive into wide variety of examples hosted as a Storybook.
 
 ```bash
 # install dependencies
-yarn install
+pnpm install
 
 # start dev
-yarn dev
+pnpm dev
 
 # run css linting
-yarn lint:css
+pnpm lint:css
 
 # eslint
-yarn eslint
+pnpm eslint
 
 # prettier
-yarn lint
+pnpm lint
 
 # package lib
-yarn rollup
+pnpm rollup
 ```
 
 ## 🧪Tests
 
 ```jsx
   # run unit tests
-  yarn test
+  pnpm test
 
   # run cypress tests
-  yarn cypress:test
+  pnpm cypress:test
 ```
 
 ## 🤝Contributing

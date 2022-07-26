@@ -11,7 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     # let's make sure our tests pass on Chrome browser
     name: E2E on Chrome
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
     steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
       - uses: pnpm/action-setup@v2.2.2
         with:
           version: 6.0.2
