@@ -1,17 +1,41 @@
-name: Cypress Tests using Cypress Docker Image
+name: Cypress Tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
-  chrome:
-    runs-on: ubuntu-20.04
-    # let's make sure our tests pass on Chrome browser
-    name: E2E on Chrome
+  cypress-run:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: cypress-io/github-action@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.2
         with:
-          start: npm run dev
+          version: 6.0.2
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Chrome
+        uses: cypress-io/github-action@v4
+        with:
+          install: false
+          start: pnpm dev
           wait-on: 'http://localhost:5173'
           wait-on-timeout: 120
           browser: chrome
+
+      - name: Edge
+        uses: cypress-io/github-action@v4
+        with:
+          install: false
+          start: pnpm dev
+          wait-on: 'http://localhost:5173'
+          wait-on-timeout: 120
+          browser: edge

@@ -12,9 +12,13 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
 
     steps:
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 6.0.2
+
       - uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -24,5 +28,5 @@ jobs:
 
       - name: Build
         run: |
-          npm install
-          npm run rollup
+          pnpm install
+          pnpm rollup
