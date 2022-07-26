@@ -28,10 +28,11 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: Install
-        run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install
 
-      - uses: cypress-io/github-action@v4
+      - name: Chrome
+        uses: cypress-io/github-action@v4
         with:
           install: false
           start: pnpm dev
