@@ -126,10 +126,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   };
 
-  const handleTimelineItemClick = (id?: string, isSlideShow?: boolean) => {
-    if (id) {
+  const handleTimelineItemClick = (itemId?: string, isSlideShow?: boolean) => {
+    if (itemId) {
       for (let idx = 0; idx < items.length; idx++) {
-        if (items[idx].id === id) {
+        if (items[idx].id === itemId) {
           if (isSlideShow && idx < items.length - 1) {
             onTimelineUpdated(idx + 1);
           } else {
@@ -139,7 +139,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         }
       }
 
-      const selectedItem = items.find((item) => item.id === id);
+      const selectedItem = items.find((item) => item.id === itemId);
 
       if (selectedItem) {
         onItemSelected && onItemSelected(selectedItem);
@@ -247,17 +247,25 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     // eslint-disable-next-line
   }, []);
 
+  const handleKeyDown = useCallback(
+    (evt: React.KeyboardEvent<HTMLDivElement>) => {
+      if (!disableNavOnKey && !slideShowRunning) {
+        handleKeySelection(evt);
+      }
+    },
+    [disableNavOnKey, slideShowRunning],
+  );
+
   return (
     <Wrapper
       tabIndex={0}
-      onKeyDown={(evt: React.KeyboardEvent<HTMLDivElement>) => {
-        !disableNavOnKey && !slideShowRunning ? handleKeySelection(evt) : null;
-      }}
+      onKeyDown={handleKeyDown}
       className={`${mode.toLowerCase()} js-focus-visible focus-visible`}
       cardPositionHorizontal={cardPositionHorizontal}
       onMouseDownCapture={() => {
         setHasFocus(true);
       }}
+      hideControls={hideControls}
     >
       <TimelineMainWrapper
         ref={timelineMainRef}
@@ -296,7 +304,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             items={items as TimelineCardModel[]}
             mode={mode}
             onClick={handleTimelineItemClick}
-            onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+            onElapsed={(itemId?: string) =>
+              handleTimelineItemClick(itemId, true)
+            }
             onOutlineSelection={onOutlineSelection}
             slideShowRunning={slideShowRunning}
             theme={theme}
@@ -316,7 +326,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               iconChildren={iconChildren}
               items={items as TimelineCardModel[]}
               mode={mode}
-              onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+              onElapsed={(itemId?: string) =>
+                handleTimelineItemClick(itemId, true)
+              }
               slideShowRunning={slideShowRunning}
               wrapperId={id.current}
             />
@@ -335,7 +347,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             items={items as TimelineCardModel[]}
             mode={mode}
             onClick={handleTimelineItemClick}
-            onElapsed={(id?: string) => handleTimelineItemClick(id, true)}
+            onElapsed={(itemId?: string) =>
+              handleTimelineItemClick(itemId, true)
+            }
             onOutlineSelection={onOutlineSelection}
             slideShowRunning={slideShowRunning}
             theme={theme}

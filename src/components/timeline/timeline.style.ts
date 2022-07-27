@@ -4,6 +4,7 @@ import { TimelineMode } from '../../models/TimelineModel';
 
 export const Wrapper = styled.div<{
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
+  hideControls?: boolean;
 }>`
   display: flex;
   flex-direction: column;
@@ -20,16 +21,28 @@ export const Wrapper = styled.div<{
   width: 100%;
 
   ${(p) =>
-    p.cardPositionHorizontal === 'TOP'
+    p.cardPositionHorizontal === 'TOP' && !p.hideControls
+      ? `
+    & > div:nth-of-type(1) {
+      order: 2;
+    }
+    & > div:nth-of-type(2) {
+      order: 3; 
+    }
+    & > div:nth-of-type(3) {
+      order: 1;
+    }
+  `
+      : ''};
+
+  ${(p) =>
+    p.cardPositionHorizontal === 'TOP' && p.hideControls
       ? `
     & > div:nth-of-type(1) {
       order: 2;
     }
     & > div:nth-of-type(2) {
       order: 1; 
-    }
-    & > div:nth-of-type(3) {
-      order: 3;
     }
   `
       : ''};

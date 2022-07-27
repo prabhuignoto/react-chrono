@@ -96,7 +96,7 @@
     "react-is": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.77.1",
+    "rollup": "^2.77.2",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
