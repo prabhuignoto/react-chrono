@@ -69,7 +69,11 @@
 ## ⚡ Installation
 
 ```jsx
-pnpm add react-chrono
+// install with yarn
+yarn add react-chrono
+
+// or with npm
+npm install react-chrono
 ```
 
 ## Getting Started
