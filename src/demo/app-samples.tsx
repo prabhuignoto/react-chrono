@@ -24,12 +24,9 @@ export const HorizontalBasic: React.FunctionComponent<{
           cardWidth={450}
           slideShow
           slideItemDuration={2550}
-          showAllCardsHorizontal
           itemWidth={200}
           onItemSelected={selected => console.log(selected)}
           timelineCircleDimension={20}
-          cardPositionHorizontal="TOP"
-          hideControls={true}
           buttonTexts={{
             first: 'Jump to First',
             last: 'Jump to Last',
