@@ -154,6 +154,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | activeItemIndex          | Selects the active timeline item on load.                                                                                                            | 0                      |
 | allowDynamicUpdate       | Allows timeline items to be updated dynamically.                                                                                                     | false                  |
 | borderLessCards          | Removes the border & shadow from the timeline cards.                                                                                                 | false                  |
+| buttonTexts              | Customize the alt text for all buttons                                                                                                               |                        |
 | cardHeight               | Sets the minimum height of the timeline card.                                                                                                        | 200                    |
 | cardLess                 | Disables timeline cards on both horizontal and vertical modes.                                                                                       | false                  |
 | cardPositionHorizontal   | Positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`.                                                                            |                        |
@@ -163,7 +164,9 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | disableNavOnKey          | Disables keyboard navigation.                                                                                                                        | false                  |
 | enableOutline            | Enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.                                                                              | false                  |
 | flipLayout               | Flips the layout (RTL).                                                                                                                              | false                  |
-| hideControls             | Hides the navigation controls.                                                                                                                       | false                  |
+| focusActiveItemOnLoad    | Setting this to `true` automatically scrolls and focuses the `activeItemIndex` on load                                                               | false                  |
+| fontSizes                | property to customize the font sizes                                                                                                                 |                        |
+| hideControls             | Hides the navigation controls.                                                                                                                       | false \*\*\*\*         |
 | itemWidth                | Width of the timeline section in `HORIZONTAL` mode.                                                                                                  | 300                    |
 | items                    | Collection of [Timeline Item Model](#timeline-item-model).                                                                                           | []                     |
 | lineWidth                | Prop to customize the width of the timeline track line.                                                                                              | 3px                    |
@@ -177,8 +180,6 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | theme                    | Prop to customize the colors.                                                                                                                        |                        |
 | timelineCircleDimension  | Dimensions of the circular points on the timeline                                                                                                    | false                  |
 | useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself. | true                   |
-| fontSizes                | property to customize the font sizes                                                                                                                 |                        |
-| buttonTexts              | Customize the alt text for all buttons                                                                                                               |                        |
 
 ### Mode
 
