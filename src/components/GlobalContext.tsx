@@ -22,6 +22,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       cardLess: false,
       disableAutoScrollOnClick: false,
       disableClickOnCircle: false,
+      focusActiveItemOnLoad: false,
       fontSizes: {
         cardSubtitle: '0.85rem',
         cardText: '0.8rem',
@@ -48,7 +49,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         previous: 'Previous',
         ...buttonTexts,
       },
-      cardHeight: cardLess ? (cardHeight ? cardHeight : 80) : cardHeight,
+      cardHeight: cardLess ? cardHeight || 80 : cardHeight,
       theme: Object.assign(
         {
           cardBgColor: '#fff',

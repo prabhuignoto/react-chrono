@@ -62,6 +62,7 @@ export const HorizontalAll: React.FunctionComponent<{
           slideShow
           slideItemDuration={2550}
           itemWidth={200}
+          focusActiveItemOnLoad
           onItemSelected={selected => console.log(selected)}
           timelineCircleDimension={20}
           showAllCardsHorizontal
@@ -123,6 +124,8 @@ export const VerticalBasic: FunctionComponent<{
         slideShow
         cardWidth={700}
         slideItemDuration={2500}
+        activeItemIndex={5}
+        focusActiveItemOnLoad
         scrollable={{ scrollbar: false}}
         theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColorActive: "#6495ed", titleColor: "#922724" }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}

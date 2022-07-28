@@ -26,15 +26,24 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
     cardLess,
   } = props;
   const circleRef = useRef<HTMLDivElement>(null);
-  const { theme } = useContext(GlobalContext);
+  const { theme, focusActiveItemOnLoad } = useContext(GlobalContext);
+
+  const isFirstRender = useRef(true);
+  const canInvokeOnActive = useMemo(
+    () =>
+      active && focusActiveItemOnLoad
+        ? isFirstRender.current
+        : !isFirstRender.current,
+    [active],
+  );
 
   useEffect(() => {
-    if (active) {
+    if (canInvokeOnActive) {
       const circle = circleRef.current;
 
       circle && onActive(circle.offsetTop);
     }
-  }, [active]);
+  }, [canInvokeOnActive]);
 
   const circleClass = useMemo(
     () =>
@@ -57,6 +66,12 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = (
       },
     [],
   );
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+    }
+  }, []);
 
   return (
     <VerticalCircleWrapper

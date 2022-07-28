@@ -58,6 +58,7 @@ export type TimelineProps = {
   disableNavOnKey?: boolean;
   enableOutline?: boolean;
   flipLayout?: boolean;
+  focusActiveItemOnLoad?: boolean;
   fontSizes?: {
     cardSubtitle?: string;
     cardText?: string;
