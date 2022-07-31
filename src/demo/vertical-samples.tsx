@@ -85,6 +85,8 @@ export const VerticalBasic: FunctionComponent<{
         fontSizes={{
           title: '1.2rem',
         }}
+        focusActiveItemOnLoad
+        activeItemIndex={9}
         timelineCircleDimension={20}
       />
     </ComponentContainerTree>
