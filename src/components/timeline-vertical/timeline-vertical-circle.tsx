@@ -23,7 +23,6 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = memo(
       lineWidth,
       disableClickOnCircle,
       cardLess,
-      title,
     } = props;
     const circleRef = useRef<HTMLDivElement>(null);
     const { theme, focusActiveItemOnLoad } = useContext(GlobalContext);
@@ -33,8 +32,7 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = memo(
       if (focusActiveItemOnLoad) {
         return active;
       } else {
-        console.log(title, isFirstRender.current);
-        return active && !isFirstRender.current;
+        return active && isFirstRender.current;
       }
     }, [active]);
 

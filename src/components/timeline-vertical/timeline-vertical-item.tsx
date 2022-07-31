@@ -111,7 +111,6 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
         lineWidth={lineWidth}
         disableClickOnCircle={disableClickOnCircle}
         cardLess={cardLess}
-        title={title}
       />
     );
 
@@ -128,7 +127,6 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
       >
         {/* title */}
         {Title}
-
         {/* card section */}
         <TimelineCardContentWrapper
           className={contentClass}
@@ -158,10 +156,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
             />
           )}
         </TimelineCardContentWrapper>
-        {/* <Content /> */}
-
-        {/* Circle */}
-        <Circle />
+        g <Circle />
       </VerticalItemWrapper>
     );
   },
