@@ -24,9 +24,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   const [slideShowActive, setSlideshowActive] = useState(false);
   const [activeTimelineItem, setActiveTimelineItem] = useState(activeItemIndex);
 
-  const initItems = (items?: TimelineItemModel[]) => {
-    return items && items.length
-      ? items.map((item, index) => {
+  const initItems = (lineItems?: TimelineItemModel[]) => {
+    return lineItems && lineItems.length
+      ? lineItems.map((item, index) => {
           return Object.assign({}, item, {
             active: index === activeItemIndex,
             id: Math.random().toString(16).slice(2),
@@ -44,11 +44,11 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         }));
   };
 
-  const updateItems = (items: TimelineItemModel[]) => {
-    if (items) {
+  const updateItems = (lineItems: TimelineItemModel[]) => {
+    if (lineItems) {
       const pos = timeLineItems.length;
 
-      return items.map((item, index) => ({
+      return lineItems.map((item, index) => ({
         ...item,
         active: index === pos,
         id: Math.random().toString(16).slice(2),
@@ -64,8 +64,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     let newItems: TimelineItemModel[] = [];
 
     if (!_items?.length) {
-      const items = initItems();
-      setItems(items);
+      const lineItems = initItems();
+      setItems(lineItems);
       return;
     }
 
@@ -82,8 +82,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   }, [JSON.stringify(allowDynamicUpdate ? items : null)]);
 
   const handleTimelineUpdate = useCallback((actvTimelineIndex: number) => {
-    setItems((items) =>
-      items.map((item, index) =>
+    setItems((lineItems) =>
+      lineItems.map((item, index) =>
         Object.assign({}, item, {
           active: index === actvTimelineIndex,
         }),
@@ -109,6 +109,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }
     if (activeTimelineItem < timeLineItems.length - 1) {
       const newTimeLineItem = activeTimelineItem + 1;
+      console.log(newTimeLineItem);
 
       handleTimelineUpdate(newTimeLineItem);
       setActiveTimelineItem(newTimeLineItem);
@@ -116,7 +117,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   };
 
   const handleOnPrevious = () => {
-    console.log('previous');
     if (activeTimelineItem > 0) {
       const newTimeLineItem = activeTimelineItem - 1;
 

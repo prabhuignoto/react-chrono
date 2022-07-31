@@ -26,8 +26,6 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
 }: TimelineControlModel) => {
   const { mode, flipLayout, theme, buttonTexts } = useContext(GlobalContext);
 
-  console.log(buttonTexts);
-
   const rotate = useMemo(() => mode !== 'HORIZONTAL', [mode]);
 
   const flippedHorizontally = useMemo(

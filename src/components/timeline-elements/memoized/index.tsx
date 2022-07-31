@@ -1,29 +1,11 @@
-import React from 'react';
-import { Theme } from '../../../models/Theme';
+import React, { memo } from 'react';
 import {
   TimelineCardTitle,
   TimelineContentSubTitle,
 } from '../timeline-card-content/timeline-card-content.styles';
+import { Content, Title } from './memoized-model';
 
-interface Title {
-  active?: boolean;
-  color?: string;
-  dir?: string;
-  fontSize?: string;
-  theme?: Theme;
-  title?: string;
-  url?: string;
-}
-
-interface Content {
-  color?: string;
-  content?: string;
-  dir?: string;
-  fontSize?: string;
-  theme?: Theme;
-}
-
-const MemoTitle = React.memo(
+const MemoTitle = memo(
   ({ title, url, theme, color, dir, active, fontSize = '1rem' }: Title) =>
     title && theme ? (
       <TimelineCardTitle
