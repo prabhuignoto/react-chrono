@@ -2,11 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { Theme } from '../models/Theme';
 import { TimelineItemModel } from '../models/TimelineItemModel';
-import {
-  HorizontalAll,
-  HorizontalBasic, HorizontalBasicCardLess, HorizontalInitalSelectedItem,
-  VerticalBasic, VerticalBasicCardLess, VerticalCustomContent, VerticalCustomContent2, VerticalTree, VerticalTreeMixed
-} from './app-samples';
 import './App.css';
 import {
   AppArea,
@@ -16,6 +11,8 @@ import {
 import data from './data';
 import mixed from "./data-mixed";
 import DynamicLoad from "./dynamic-load";
+import { HorizontalAll, HorizontalBasic, HorizontalBasicCardLess, HorizontalInitialSelectedItem } from './horizontal-samples';
+import { VerticalBasic, VerticalBasicCardLess, VerticalCustomContent, VerticalCustomContent2, VerticalTree, VerticalTreeMixed } from './vertical-samples';
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
@@ -122,7 +119,7 @@ const NewDemo: React.FunctionComponent = () => {
               <HorizontalAll items={items} type="big-screen" />
             )}></Route>
             <Route path="/horizontal-initial-select" element={items.length > 0 && (
-              <HorizontalInitalSelectedItem items={items} type="big-screen" />
+              <HorizontalInitialSelectedItem items={items} type="big-screen" />
             )}>
             </Route>
             <Route path="/vertical-custom" element={items.length > 0 && <VerticalCustomContent type="big-screen" />}>
