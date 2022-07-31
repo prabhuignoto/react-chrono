@@ -96,4 +96,6 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
   );
 };
 
+TimelineVertical.displayName = 'TimelineVertical';
+
 export default TimelineVertical;

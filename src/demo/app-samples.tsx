@@ -124,8 +124,6 @@ export const VerticalBasic: FunctionComponent<{
         slideShow
         cardWidth={700}
         slideItemDuration={2500}
-        activeItemIndex={5}
-        focusActiveItemOnLoad
         scrollable={{ scrollbar: false}}
         theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColorActive: "#6495ed", titleColor: "#922724" }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
@@ -189,6 +187,8 @@ export const VerticalTree: FunctionComponent<{
         slideItemDuration={2350}
         allowDynamicUpdate
         // cardHeight={100}
+        focusActiveItemOnLoad
+        activeItemIndex={4}
         cardWidth={450}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         onScrollEnd={() => console.log('end reached')}

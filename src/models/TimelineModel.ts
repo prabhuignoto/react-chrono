@@ -79,6 +79,7 @@ export type TimelineProps = {
   slideShow?: boolean;
   theme?: Theme;
   timelineCircleDimension?: number;
+  title?: string;
   useReadMore?: boolean;
 };
 

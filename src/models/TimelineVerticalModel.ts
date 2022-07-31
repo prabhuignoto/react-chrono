@@ -45,6 +45,7 @@ type VerticalModel = Pick<
 
 export interface VerticalCircleModel extends VerticalModel {
   iconChild?: React.ReactNode;
+  // title: string;
   onActive: (pointOffset: number) => void;
 }
 
