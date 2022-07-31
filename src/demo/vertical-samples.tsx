@@ -86,8 +86,6 @@ export const VerticalBasic: FunctionComponent<{
           title: '1.2rem',
         }}
         timelineCircleDimension={20}
-        focusActiveItemOnLoad
-        activeItemIndex={5}
       />
     </ComponentContainerTree>
   </Vertical>

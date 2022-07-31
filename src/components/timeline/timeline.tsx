@@ -103,7 +103,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = memo(
     const handleKeySelection = useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
         const { key } = event;
-        debugger;
 
         if (mode === 'HORIZONTAL' && key === 'ArrowRight') {
           flipLayout ? handlePrevious() : handleNext();
@@ -147,7 +146,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = memo(
         const selectedItem = items.find((item) => item.id === itemId);
 
         if (selectedItem) {
-          onItemSelected && onItemSelected(selectedItem);
+          onItemSelected?.(selectedItem);
         }
       }
     };
@@ -155,7 +154,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = memo(
     useEffect(() => {
       if (items.length && items[activeTimelineItem]) {
         const item = items[activeTimelineItem];
-        onItemSelected && onItemSelected(items[activeTimelineItem]);
+        onItemSelected?.(items[activeTimelineItem]);
 
         if (mode === 'HORIZONTAL') {
           const card = horizontalContentRef.current?.querySelector(
