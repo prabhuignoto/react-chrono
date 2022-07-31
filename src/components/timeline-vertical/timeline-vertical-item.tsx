@@ -156,7 +156,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
             />
           )}
         </TimelineCardContentWrapper>
-        g <Circle />
+        <Circle />
       </VerticalItemWrapper>
     );
   },
