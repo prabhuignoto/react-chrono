@@ -31,5 +31,6 @@ debug
 .husky
 cache
 .dccache
+.idea
 
 cypress/videos
