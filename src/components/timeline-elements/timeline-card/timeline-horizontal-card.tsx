@@ -49,6 +49,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     disableClickOnCircle,
     cardLess,
     showAllCardsHorizontal,
+    classNames,
   } = useContext(GlobalContext);
 
   const handleClick = () => {
@@ -168,7 +169,12 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         className={titleClass}
         data-testid="timeline-title"
       >
-        <TimelineItemTitle title={title} active={active} theme={theme} />
+        <TimelineItemTitle
+          title={title}
+          active={active}
+          theme={theme}
+          classString={classNames?.title}
+        />
       </TimelineTitleContainer>
     </Wrapper>
   );

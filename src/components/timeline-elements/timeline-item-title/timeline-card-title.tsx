@@ -9,9 +9,10 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
   active,
   theme,
   align,
+  classString,
 }: TitleModel) => {
   const titleClass = useMemo(
-    () => cls('timeline-item-title', active ? 'active' : ''),
+    () => cls('timeline-item-title', active ? 'active' : '', classString),
     [active],
   );
 

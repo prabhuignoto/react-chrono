@@ -87,7 +87,11 @@ export const VerticalBasic: FunctionComponent<{
         }}
         focusActiveItemOnLoad
         activeItemIndex={9}
+        cardHeight={300}
         timelineCircleDimension={20}
+        classNames={{
+          cardText: 'custom-text',
+        }}
       />
     </ComponentContainerTree>
   </Vertical>

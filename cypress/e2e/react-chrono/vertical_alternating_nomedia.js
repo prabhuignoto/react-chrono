@@ -22,8 +22,8 @@ context('Chrono.Vertical.Alternating', () => {
       .eq(3)
       .find('.timeline-card-content')
       .within(() => {
-        cy.get('.card-title').should('contain', 'Pearl Harbor');
-        cy.get('.card-sub-title').should(
+        cy.get('.rc-card-title').should('contain', 'Pearl Harbor');
+        cy.get('.rc-card-subtitle').should(
           'contain',
           'The destroyer USS Shaw explodes in dry dock after being hit by Japanese aircraft',
         );
@@ -33,7 +33,7 @@ context('Chrono.Vertical.Alternating', () => {
   it('check card title', () => {
     cy.get('.vertical-item-row')
       .eq(0)
-      .find('.card-title')
+      .find('.rc-card-title')
       .should('contain', 'Dunkirk');
   });
 
@@ -50,7 +50,7 @@ context('Chrono.Vertical.Alternating', () => {
   it('check card sub title', () => {
     cy.get('.vertical-item-row')
       .eq(1)
-      .find('.card-sub-title')
+      .find('.rc-card-subtitle')
       .should('contain', 'RAF Spitfire pilots scramble for their planes');
   });
 

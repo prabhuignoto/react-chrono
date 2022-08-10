@@ -57,7 +57,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       const startTime = useRef<Date>();
       const [paused, setPaused] = useState(false);
 
-      // const [elapsed, setElapsed] = useState(0);
       const [remainInterval, setRemainInterval] = useState(0);
       const [startWidth, setStartWidth] = useState(0);
       const [textContentLarge, setTextContentLarge] = useState(false);
@@ -71,6 +70,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         borderLessCards,
         disableAutoScrollOnClick,
         fontSizes,
+        classNames,
       } = useContext(GlobalContext);
 
       const canShowProgressBar = useMemo(() => {
@@ -154,7 +154,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           const remainingInterval =
             slideItemDuration - slideShowElapsed.current;
 
-          // setRemainInterval(remainingInterval);
           setPaused(false);
 
           if (remainingInterval > 0) {
@@ -209,6 +208,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         () =>
           cls(
             active ? 'timeline-card-content active' : 'timeline-card-content ',
+            classNames?.card,
           ),
         [active],
       );
@@ -219,6 +219,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             !showMore && !customContent && useReadMore
               ? 'show-less card-description'
               : 'card-description',
+            classNames?.cardText,
           ),
         [showMore, customContent],
       );
@@ -280,6 +281,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
                 theme={theme}
                 url={url}
                 fontSize={fontSizes?.cardTitle}
+                classString={classNames?.cardTitle}
               />
             )}
             {/* main timeline text */}
@@ -288,6 +290,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
                 content={content}
                 theme={theme}
                 fontSize={fontSizes?.cardSubtitle}
+                classString={classNames?.cardSubTitle}
               />
             )}
           </TimelineCardHeader>
@@ -332,6 +335,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
                       <TimelineSubContent
                         key={index}
                         fontSize={fontSizes?.cardText}
+                        className={classNames?.cardText}
                       >
                         {text}
                       </TimelineSubContent>

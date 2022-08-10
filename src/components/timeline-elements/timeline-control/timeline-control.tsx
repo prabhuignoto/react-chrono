@@ -1,3 +1,4 @@
+import cls from 'classnames';
 import React, { useContext, useMemo } from 'react';
 import { TimelineControlModel } from '../../../models/TimelineControlModel';
 import { GlobalContext } from '../../GlobalContext';
@@ -24,7 +25,8 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   onReplay,
   slideShowEnabled,
 }: TimelineControlModel) => {
-  const { mode, flipLayout, theme, buttonTexts } = useContext(GlobalContext);
+  const { mode, flipLayout, theme, buttonTexts, classNames } =
+    useContext(GlobalContext);
 
   const rotate = useMemo(() => mode !== 'HORIZONTAL', [mode]);
 
@@ -37,7 +39,9 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
       slideShowActive={slideShowRunning}
       flip={flippedHorizontally}
     >
-      <TimelineNavWrapper className="timeline-controls">
+      <TimelineNavWrapper
+        className={cls('timeline-controls', classNames?.controls)}
+      >
         {/* jump to first */}
         <TimelineNavItem disable={disableLeft}>
           <TimelineNavButton

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-context('Chrono.Vertical.Basic', () => {
+context('Chrono.Horizontal.Basic', () => {
   beforeEach(() => {
     cy.visit('http://localhost:5173/horizontal');
   });
