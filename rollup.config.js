@@ -4,6 +4,7 @@ import common from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import cssnano from 'cssnano';
 import analyze from 'rollup-plugin-analyzer';
+import copy from 'rollup-plugin-copy';
 import del from 'rollup-plugin-delete';
 import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
@@ -95,6 +96,9 @@ export default {
     }),
     analyze({
       summaryOnly: true,
+    }),
+    copy({
+      targets: [{ dest: 'dist', src: 'README.md' }],
     }),
   ],
 };
