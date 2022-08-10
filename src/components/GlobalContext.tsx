@@ -31,7 +31,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         title: '1rem',
       },
       lineWidth: 3,
-      mediaHeight: 300,
+      mediaHeight: 200,
       mode: 'VERTICAL_ALTERNATING',
       scrollable: {
         scrollbar: false,
