@@ -53,6 +53,15 @@ export type TimelineProps = {
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
   cardWidth?: number;
   children?: React.ReactElement | React.ReactElement[];
+  classNames?: {
+    card?: string;
+    cardMedia?: string;
+    cardSubTitle?: string;
+    cardText?: string;
+    cardTitle?: string;
+    controls?: string;
+    title?: string;
+  };
   disableAutoScrollOnClick?: boolean;
   disableClickOnCircle?: boolean;
   disableNavOnKey?: boolean;
@@ -69,6 +78,7 @@ export type TimelineProps = {
   itemWidth?: number;
   items?: TimelineItemModel[];
   lineWidth?: number;
+  mediaHeight?: number;
   mode?: TimelineMode;
   onItemSelected?: (data: TimelineItemModel) => void;
   onRestartSlideshow?: () => void;

@@ -165,8 +165,8 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | enableOutline            | Enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.                                                                              | false                  |
 | flipLayout               | Flips the layout (RTL).                                                                                                                              | false                  |
 | focusActiveItemOnLoad    | Setting this to `true` automatically scrolls and focuses the `activeItemIndex` on load                                                               | false                  |
-| fontSizes                | property to customize the font sizes                                                                                                                 |                        |
-| hideControls             | Hides the navigation controls.                                                                                                                       | false \*\*\*\*         |
+| fontSizes                | Property to customize the font sizes                                                                                                                 |                        |
+| hideControls             | Hides the navigation controls.                                                                                                                       | false                  |
 | itemWidth                | Width of the timeline section in `HORIZONTAL` mode.                                                                                                  | 300                    |
 | items                    | Collection of [Timeline Item Model](#timeline-item-model).                                                                                           | []                     |
 | lineWidth                | Prop to customize the width of the timeline track line.                                                                                              | 3px                    |
@@ -180,6 +180,8 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | theme                    | Prop to customize the colors.                                                                                                                        |                        |
 | timelineCircleDimension  | Dimensions of the circular points on the timeline                                                                                                    | false                  |
 | useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself. | true                   |
+| mediaHeight              | Sets the minimum height of the media element. Applicable only when a image or a video is embedded in the card                                        | 200                    |
+| classNames               | Prop to apply custom class names for the different card elements                                                                                     |                        |
 
 ### Mode
 

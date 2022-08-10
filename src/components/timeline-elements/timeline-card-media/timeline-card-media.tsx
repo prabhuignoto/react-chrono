@@ -1,3 +1,4 @@
+import cls from 'classnames';
 import React, {
   useCallback,
   useContext,
@@ -17,7 +18,6 @@ import {
   MediaDetailsWrapper,
   MediaWrapper,
 } from './timeline-card-media.styles';
-
 interface ErrorMessageModel {
   message: string;
 }
@@ -31,14 +31,13 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   content,
   media,
   slideshowActive,
-  hideMedia = false,
-  cardHeight,
   url,
 }: CardMediaModel) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);
 
-  const { mode, fontSizes } = useContext(GlobalContext);
+  const { mode, fontSizes, classNames, mediaHeight } =
+    useContext(GlobalContext);
 
   useEffect(() => {
     if (!videoRef) {
@@ -155,8 +154,8 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         active={active}
         mode={mode}
         slideShowActive={slideshowActive}
-        className="card-media-wrapper"
-        cardHeight={cardHeight}
+        className={cls('card-media-wrapper', classNames?.cardMedia)}
+        cardHeight={mediaHeight}
       >
         {media.type === 'VIDEO' &&
           !isYouTube &&
@@ -180,8 +179,13 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
           active={active}
           url={url}
           fontSize={fontSizes?.cardTitle}
+          classString={classNames?.cardTitle}
         />
-        <MemoSubTitle content={content} fontSize={fontSizes?.cardSubtitle} />
+        <MemoSubTitle
+          content={content}
+          fontSize={fontSizes?.cardSubtitle}
+          classString={classNames?.cardSubTitle}
+        />
       </MediaDetailsWrapper>
     </>
   );

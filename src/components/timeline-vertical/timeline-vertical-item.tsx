@@ -52,6 +52,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
       disableClickOnCircle,
       cardLess,
       theme,
+      classNames,
     } = useContext(GlobalContext);
 
     // handler for read more
@@ -76,6 +77,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
             active={active}
             theme={theme}
             align={flipLayout ? 'left' : 'right'}
+            classString={classNames?.title}
           />
         </TimelineTitleWrapper>
       );

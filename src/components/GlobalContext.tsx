@@ -14,6 +14,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
     items = [],
     theme,
     buttonTexts,
+    classNames,
   } = props;
   const defaultProps = Object.assign<PropsModel, PropsModel, PropsModel>(
     {},
@@ -30,6 +31,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         title: '1rem',
       },
       lineWidth: 3,
+      mediaHeight: 200,
       mode: 'VERTICAL_ALTERNATING',
       scrollable: {
         scrollbar: false,
@@ -50,6 +52,16 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         ...buttonTexts,
       },
       cardHeight: cardLess ? cardHeight || 80 : cardHeight,
+      classNames: {
+        card: 'rc-card',
+        cardMedia: 'rc-card-media',
+        cardSubTitle: 'rc-card-subtitle',
+        cardText: 'rc-card-text',
+        cardTitle: 'rc-card-title',
+        controls: 'rc-controls',
+        title: 'rc-title',
+        ...classNames,
+      },
       theme: Object.assign(
         {
           cardBgColor: '#fff',

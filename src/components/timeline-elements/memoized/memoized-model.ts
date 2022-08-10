@@ -2,6 +2,7 @@ import { Theme } from '../../../models/Theme';
 
 export interface Title {
   active?: boolean;
+  classString?: string;
   color?: string;
   dir?: string;
   fontSize?: string;
@@ -11,6 +12,7 @@ export interface Title {
 }
 
 export interface Content {
+  classString?: string;
   color?: string;
   content?: string;
   dir?: string;
