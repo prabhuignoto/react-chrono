@@ -575,6 +575,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/Ryuyxx"><img src="https://avatars.githubusercontent.com/u/69892552?v=4?s=60" width="60px;" alt=""/><br /><sub><b>Ryuya</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=Ryuyxx" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/taqi457"><img src="https://avatars.githubusercontent.com/u/2155219?v=4?s=60" width="60px;" alt=""/><br /><sub><b>Taqi Abbas</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=taqi457" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/megasoft78"><img src="https://avatars.githubusercontent.com/u/514958?v=4?s=60" width="60px;" alt=""/><br /><sub><b>megasoft78</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=megasoft78" title="Code">💻</a></td>
+    <td align="center"><a href="https://dev.bigdreamer.cc"><img src="https://avatars.githubusercontent.com/u/39019913?v=4?s=60" width="60px;" alt=""/><br /><sub><b>Eric（书生）</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=bigbigDreamer" title="Code">💻</a></td>
   </tr>
 </table>
 
