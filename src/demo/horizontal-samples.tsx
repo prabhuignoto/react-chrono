@@ -63,7 +63,7 @@ export const HorizontalAll: React.FunctionComponent<{
           onItemSelected={selected => console.log(selected)}
           timelineCircleDimension={20}
           showAllCardsHorizontal
-          activeItemIndex={5}
+          activeItemIndex={8}
         >
           <div className="chrono-icons">
             <img src="color-circle.svg" alt="github" />

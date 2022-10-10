@@ -98,6 +98,8 @@ const NewDemo: React.FunctionComponent = () => {
           </ComponentLinks>
         </aside>
         <AppArea>
+          {/* <div style={{height: "2200px", border: "1px solid red"}}>
+          </div> */}
           <Routes>
             <Route path="/vertical-basic" element={items.length && <VerticalBasic type={"big-screen"} items={items} />}>
             </Route>

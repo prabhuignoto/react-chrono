@@ -63,7 +63,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
   const [hasFocus, setHasFocus] = useState(false);
-  const horizontalContentRef = useRef<HTMLDivElement>(null);
+  const horizontalContentRef = useRef<HTMLDivElement | null>(null);
+  // const activeItemIndex = useRef<number>(activeTimelineItem);
 
   // reference to the timeline
   const timelineMainRef = useRef<HTMLDivElement>(null);
@@ -158,9 +159,20 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           `#timeline-card-${item.id}`,
         );
 
-        setTimeout(() => {
-          card?.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-        }, 100);
+        const cardRect = card?.getBoundingClientRect();
+        const contentRect =
+          horizontalContentRef.current?.getBoundingClientRect();
+
+        if (cardRect && contentRect) {
+          const { width: cardWidth, left: cardLeft } = cardRect;
+          const { width: contentWidth, left: contentLeft } = contentRect;
+          setTimeout(() => {
+            const ele = horizontalContentRef.current as HTMLElement;
+            ele.style.scrollBehavior = 'smooth';
+            ele.scrollLeft +=
+              cardLeft - contentLeft + cardWidth / 2 - contentWidth / 2;
+          }, 100);
+        }
       }
     }
   }, [activeTimelineItem, items.length]);
