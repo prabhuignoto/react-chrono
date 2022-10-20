@@ -26,7 +26,7 @@
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:all": "pnpm eslint && pnpm lint:css && pnpm lint",
     "lint:css": "stylelint src/**/*style.ts --custom-syntax @stylelint/postcss-css-in-js",
-    "rollup": "rollup -c",
+    "rollup": "rollup -c rollup.config.mjs",
     "snyk": "snyk test",
     "prepare": "husky install",
     "dev": "vite --config vite.config.ts"
