@@ -494,8 +494,8 @@ Defaults
 
 Deep dive into wide variety of examples hosted as a Storybook.
 
-- [Horizontal Collection](https://5f985eb478dcb00022cfd60e-uiaufmxbhf.chromatic.com/?path=/story/example-horizontal--horizontal-timeline)
-- [Vertical Collection](https://5f985eb478dcb00022cfd60e-uiaufmxbhf.chromatic.com/?path=/story/example-vertical--vertical-basic)
+- [Horizontal Collection](https://5f985eb478dcb00022cfd60e-wfennyutax.chromatic.com/?path=/story/example-horizontal--horizontal-timeline)
+- [Vertical Collection](https://5f985eb478dcb00022cfd60e-wfennyutax.chromatic.com/?path=/story/example-vertical--vertical-basic)
 -
 
 ## 🔨Build Setup
