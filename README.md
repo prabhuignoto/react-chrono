@@ -1,6 +1,6 @@
 <div align="center">
   <img src="./readme-assets/social-logo-small.png" />
-  
+
   <br/>
   <br/>
 
@@ -491,16 +491,15 @@ The following example shows how to use custom class names on different elements.
   className="my-timeline"
   items={items}
   classNames={{
-    card: "my-card",
-    cardMedia: "my-card-media",
-    cardSubTitle: "my-card-subtitle",
-    cardText: "my-card-text",
-    cardTitle: "my-card-title",
-    controls: "my-controls",
-    title: "my-title",
+    card: 'my-card',
+    cardMedia: 'my-card-media',
+    cardSubTitle: 'my-card-subtitle',
+    cardText: 'my-card-text',
+    cardTitle: 'my-card-title',
+    controls: 'my-controls',
+    title: 'my-title',
   }}
-/>;
-
+/>
 ```
 
 ## 📦CodeSandbox Examples
