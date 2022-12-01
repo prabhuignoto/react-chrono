@@ -1,6 +1,6 @@
 <div align="center">
   <img src="./readme-assets/social-logo-small.png" />
-  
+
   <br/>
   <br/>
 
