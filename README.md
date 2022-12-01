@@ -1,6 +1,6 @@
 <div align="center">
   <img src="./readme-assets/social-logo-small.png" />
-  
+
   <br/>
   <br/>
 
@@ -57,6 +57,7 @@
   - [🎨Theme](#theme)
   - [Customize Font sizes](#customize-font-sizes)
   - [Customize alt text for buttons](#customize-alt-text-for-buttons)
+- [Using custom class names](#using-custom-class-names)
 - [📦CodeSandbox Examples](#codesandbox-examples)
 - [📚Storybook](#storybook)
 - [🔨Build Setup](#build-setup)
@@ -478,6 +479,28 @@ Defaults
 | `next`     | 'Next'           |
 | `play`     | 'Play Slideshow' |
 | `previous` | 'Previous'       |
+
+## Using custom class names
+
+If you want to use your own class names, you can do so with the `classNames` prop.
+
+The following example shows how to use custom class names on different elements.
+
+```jsx
+<Chrono
+  className="my-timeline"
+  items={items}
+  classNames={{
+    card: 'my-card',
+    cardMedia: 'my-card-media',
+    cardSubTitle: 'my-card-subtitle',
+    cardText: 'my-card-text',
+    cardTitle: 'my-card-title',
+    controls: 'my-controls',
+    title: 'my-title',
+  }}
+/>
+```
 
 ## 📦CodeSandbox Examples
 
