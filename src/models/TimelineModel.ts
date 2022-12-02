@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Theme } from './Theme';
 import { TimelineItemModel } from './TimelineItemModel';
 

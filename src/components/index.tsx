@@ -109,7 +109,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }
     if (activeTimelineItem < timeLineItems.length - 1) {
       const newTimeLineItem = activeTimelineItem + 1;
-      console.log(newTimeLineItem);
 
       handleTimelineUpdate(newTimeLineItem);
       setActiveTimelineItem(newTimeLineItem);

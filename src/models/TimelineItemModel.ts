@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Theme } from './Theme';
 import { Scroll } from './TimelineHorizontalModel';
 import { Media } from './TimelineMediaModel';
@@ -13,9 +14,11 @@ export interface TimelineItemModel {
   cardDetailedText?: string | string[];
   cardSubtitle?: string;
   cardTitle?: string;
+  content?: ReactNode | ReactNode[];
   id?: string;
   media?: Media;
   position?: string;
+  timelineContent?: ReactNode;
   title?: string;
   url?: string;
   visible?: boolean;
@@ -32,6 +35,7 @@ export type TimelineCardModel = Pick<
   | 'cardTitle'
   | 'media'
   | 'url'
+  | 'timelineContent'
 > & {
   autoScroll: ({
     pointOffset,

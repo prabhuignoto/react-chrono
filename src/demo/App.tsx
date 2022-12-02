@@ -43,14 +43,15 @@ const NewDemo: React.FunctionComponent = () => {
 
   useEffect(() => {
     const newItems = data.map(
-      ({ title, url, cardTitle, cardSubtitle, cardDetailedText, id, media }) => ({
+      ({ title, url, cardTitle, cardSubtitle, cardDetailedText, id, media, timelineContent }) => ({
         title,
         url,
         cardTitle,
         cardSubtitle,
         cardDetailedText,
         id,
-        media
+        media,
+        timelineContent
       }),
     );
     setItems(newItems);

@@ -34,6 +34,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
       slideShowRunning,
       title,
       visible,
+      timelineContent,
     } = props;
 
     const handleOnActive = (offset: number) => {
@@ -155,6 +156,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
               title={cardTitle}
               url={url}
               flip={flipLayout}
+              timelineContent={timelineContent}
             />
           )}
         </TimelineCardContentWrapper>

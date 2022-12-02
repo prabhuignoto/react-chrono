@@ -45,6 +45,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       flip,
       branchDir,
       url,
+      timelineContent,
     }: TimelineContentModel) => {
       const [showMore, setShowMore] = useState(false);
       const detailsRef = useRef<HTMLDivElement | null>(null);
@@ -248,6 +249,28 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         );
       }, [mode]);
 
+      const getTextOrContent = useMemo(() => {
+        const isTextArray = Array.isArray(detailedText);
+
+        if (timelineContent) {
+          return timelineContent;
+        }
+
+        if (isTextArray) {
+          return detailedText.map((text, index) => (
+            <TimelineSubContent
+              key={index}
+              fontSize={fontSizes?.cardText}
+              className={classNames?.cardText}
+            >
+              {text}
+            </TimelineSubContent>
+          ));
+        } else {
+          return detailedText;
+        }
+      }, [timelineContent]);
+
       return (
         <TimelineItemContentWrapper
           className={contentClass}
@@ -330,7 +353,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
                 ref={detailsRef}
                 theme={theme}
               >
-                {Array.isArray(detailedText)
+                {/* {Array.isArray(detailedText)
                   ? detailedText.map((text, index) => (
                       <TimelineSubContent
                         key={index}
@@ -340,7 +363,9 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
                         {text}
                       </TimelineSubContent>
                     ))
-                  : detailedText}
+                  : detailedText} */}
+
+                {getTextOrContent}
               </TimelineContentDetails>
             )}
           </TimelineContentDetailsWrapper>
