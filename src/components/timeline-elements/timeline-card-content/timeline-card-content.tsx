@@ -340,44 +340,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             {customContent ? customContent : getTextOrContent}
           </TimelineContentDetailsWrapper>
 
-          {/* display the show more button for textual content */}
-          {/* {canShowReadMore && textContentLarge ? (
-            <ShowMore
-              className="show-more"
-              onClick={handleExpandDetails}
-              onKeyPress={(event) => {
-                if (event.key === 'Enter') {
-                  handleExpandDetails();
-                }
-              }}
-              role="button"
-              show={canShowMore}
-              theme={theme}
-              tabIndex={0}
-            >
-              {<span>{showMore ? 'read less' : 'read more'}</span>}
-              <ChevronIconWrapper collapsed={!showMore}>
-                <ChevronIcon />
-              </ChevronIconWrapper>
-            </ShowMore>
-          ) : null}
-
-          {canShowProgressBar && (
-            <SlideShowProgressBar
-              color={theme && theme.primary}
-              duration={remainInterval}
-              paused={paused}
-              ref={progressRef}
-              startWidth={startWidth}
-            ></SlideShowProgressBar>
-          )}
-
-          {canShowTriangleIcon && (
-            <TriangleIconWrapper
-              dir={triangleDir}
-              theme={theme}
-            ></TriangleIconWrapper>
-          )} */}
           <ContentFooter
             theme={theme}
             showTriangleIcon={canShowTriangleIcon}
