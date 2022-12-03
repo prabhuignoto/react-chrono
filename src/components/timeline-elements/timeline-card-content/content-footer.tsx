@@ -37,7 +37,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   paused,
   startWidth,
   canShow,
-  ref,
+  progressRef,
 }) => {
   return (
     <>
