@@ -12,7 +12,7 @@ export type ContentFooterProps = {
   canShow: boolean;
   onExpand: () => void;
   paused: boolean;
-  ref: RefObject<HTMLDivElement>;
+  progressRef: RefObject<HTMLDivElement>;
   remainInterval: number;
   showMore: boolean;
   showProgressBar?: boolean;
@@ -67,7 +67,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           color={theme?.primary}
           duration={remainInterval}
           paused={paused}
-          ref={ref}
+          ref={progressRef}
           startWidth={startWidth}
         ></SlideShowProgressBar>
       )}
