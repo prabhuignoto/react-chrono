@@ -343,7 +343,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           <ContentFooter
             theme={theme}
             showTriangleIcon={canShowTriangleIcon}
-            ref={progressRef}
+            progressRef={progressRef}
             startWidth={startWidth}
             textContentIsLarge={textContentLarge}
             remainInterval={remainInterval}
