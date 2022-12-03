@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, RefObject } from 'react';
 import { Theme } from '../../../models/Theme';
 import ChevronIcon from '../../icons/chev-right';
 import {
@@ -12,7 +12,7 @@ export type ContentFooterProps = {
   canShow: boolean;
   onExpand: () => void;
   paused: boolean;
-  ref: any;
+  ref: RefObject<HTMLDivElement>;
   remainInterval: number;
   showMore: boolean;
   showProgressBar?: boolean;
