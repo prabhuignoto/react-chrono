@@ -1,4 +1,9 @@
-import React, { FunctionComponent, RefObject, useContext, useMemo } from 'react';
+import React, {
+  FunctionComponent,
+  RefObject,
+  useContext,
+  useMemo,
+} from 'react';
 import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
 import { GlobalContext } from '../../GlobalContext';
