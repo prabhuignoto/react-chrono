@@ -238,12 +238,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         return branchDir;
       }, [branchDir, flip]);
 
-      const canShowTriangleIcon = useMemo(() => {
-        return (['VERTICAL', 'VERTICAL_ALTERNATING'] as TimelineMode[]).some(
-          (m) => m === mode,
-        );
-      }, [mode]);
-
       const getTextOrContent = useMemo(() => {
         const isTextArray = Array.isArray(detailedText);
 
@@ -342,7 +336,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
           <ContentFooter
             theme={theme}
-            showTriangleIcon={canShowTriangleIcon}
             progressRef={progressRef}
             startWidth={startWidth}
             textContentIsLarge={textContentLarge}

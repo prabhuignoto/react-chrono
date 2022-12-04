@@ -1,5 +1,7 @@
-import React, { FunctionComponent, RefObject } from 'react';
+import React, { FunctionComponent, RefObject, useContext, useMemo } from 'react';
 import { Theme } from '../../../models/Theme';
+import { TimelineMode } from '../../../models/TimelineModel';
+import { GlobalContext } from '../../GlobalContext';
 import ChevronIcon from '../../icons/chev-right';
 import {
   ChevronIconWrapper,
@@ -17,7 +19,6 @@ export type ContentFooterProps = {
   showMore: boolean;
   showProgressBar?: boolean;
   showReadMore?: boolean | '';
-  showTriangleIcon: boolean;
   startWidth: number;
   textContentIsLarge: boolean;
   theme?: Theme;
@@ -27,7 +28,6 @@ export type ContentFooterProps = {
 const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   theme,
   showProgressBar,
-  showTriangleIcon,
   onExpand,
   triangleDir,
   showMore,
@@ -39,6 +39,14 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   canShow,
   progressRef,
 }) => {
+  const { mode } = useContext(GlobalContext);
+
+  const canShowTriangleIcon = useMemo(() => {
+    return (['VERTICAL', 'VERTICAL_ALTERNATING'] as TimelineMode[]).some(
+      (m) => m === mode,
+    );
+  }, [mode]);
+
   return (
     <>
       {showReadMore && textContentIsLarge ? (
@@ -72,7 +80,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
         ></SlideShowProgressBar>
       )}
 
-      {showTriangleIcon && (
+      {canShowTriangleIcon && (
         <TriangleIconWrapper
           dir={triangleDir}
           theme={theme}
