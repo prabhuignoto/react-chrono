@@ -9,21 +9,15 @@ import React, {
 } from 'react';
 import { TimelineContentModel } from '../../../models/TimelineContentModel';
 import { MediaState } from '../../../models/TimelineMediaModel';
-import { TimelineMode } from '../../../models/TimelineModel';
 import { GlobalContext } from '../../GlobalContext';
-import ChevronIcon from '../../icons/chev-right';
-import { MemoSubTitle, MemoTitle } from '../memoized';
 import CardMedia from '../timeline-card-media/timeline-card-media';
+import { ContentFooter } from './content-footer';
+import { ContentHeader } from './content-header';
 import {
-  ChevronIconWrapper,
-  ShowMore,
-  SlideShowProgressBar,
-  TimelineCardHeader,
   TimelineContentDetails,
   TimelineContentDetailsWrapper,
   TimelineItemContentWrapper,
   TimelineSubContent,
-  TriangleIconWrapper,
 } from './timeline-card-content.styles';
 
 const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
@@ -45,6 +39,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       flip,
       branchDir,
       url,
+      timelineContent,
     }: TimelineContentModel) => {
       const [showMore, setShowMore] = useState(false);
       const detailsRef = useRef<HTMLDivElement | null>(null);
@@ -242,11 +237,38 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         return branchDir;
       }, [branchDir, flip]);
 
-      const canShowTriangleIcon = useMemo(() => {
-        return (['VERTICAL', 'VERTICAL_ALTERNATING'] as TimelineMode[]).some(
-          (m) => m === mode,
-        );
-      }, [mode]);
+      const getTextOrContent = useMemo(() => {
+        const isTextArray = Array.isArray(detailedText);
+
+        if (timelineContent) {
+          return <div ref={detailsRef}>{timelineContent}</div>;
+        } else {
+          let textContent = null;
+          if (isTextArray) {
+            textContent = detailedText.map((text, index) => (
+              <TimelineSubContent
+                key={index}
+                fontSize={fontSizes?.cardText}
+                className={classNames?.cardText}
+              >
+                {text}
+              </TimelineSubContent>
+            ));
+          } else {
+            textContent = detailedText;
+          }
+
+          return (
+            <TimelineContentDetails
+              className={showMore ? 'active' : ''}
+              ref={detailsRef}
+              theme={theme}
+            >
+              {textContent}
+            </TimelineContentDetails>
+          );
+        }
+      }, [timelineContent, showMore]);
 
       return (
         <TimelineItemContentWrapper
@@ -273,27 +295,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           theme={theme}
           borderLess={borderLessCards}
         >
-          <TimelineCardHeader>
-            {/* main title */}
-            {!media && (
-              <MemoTitle
-                title={title}
-                theme={theme}
-                url={url}
-                fontSize={fontSizes?.cardTitle}
-                classString={classNames?.cardTitle}
-              />
-            )}
-            {/* main timeline text */}
-            {!media && (
-              <MemoSubTitle
-                content={content}
-                theme={theme}
-                fontSize={fontSizes?.cardSubtitle}
-                classString={classNames?.cardSubTitle}
-              />
-            )}
-          </TimelineCardHeader>
+          <ContentHeader
+            title={title}
+            theme={theme}
+            url={url}
+            media={media}
+            content={content}
+          />
 
           {/* render media video or image */}
           {media && (
@@ -322,67 +330,23 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             useReadMore={useReadMore}
             borderLess={borderLessCards}
           >
-            {customContent ? (
-              <>{customContent}</>
-            ) : (
-              <TimelineContentDetails
-                className={showMore ? 'active' : ''}
-                ref={detailsRef}
-                theme={theme}
-              >
-                {Array.isArray(detailedText)
-                  ? detailedText.map((text, index) => (
-                      <TimelineSubContent
-                        key={index}
-                        fontSize={fontSizes?.cardText}
-                        className={classNames?.cardText}
-                      >
-                        {text}
-                      </TimelineSubContent>
-                    ))
-                  : detailedText}
-              </TimelineContentDetails>
-            )}
+            {customContent ? customContent : getTextOrContent}
           </TimelineContentDetailsWrapper>
 
-          {/* display the show more button for textual content */}
-          {canShowReadMore && textContentLarge ? (
-            <ShowMore
-              className="show-more"
-              onClick={handleExpandDetails}
-              onKeyPress={(event) => {
-                if (event.key === 'Enter') {
-                  handleExpandDetails();
-                }
-              }}
-              role="button"
-              show={canShowMore}
-              theme={theme}
-              tabIndex={0}
-            >
-              {<span>{showMore ? 'read less' : 'read more'}</span>}
-              <ChevronIconWrapper collapsed={!showMore}>
-                <ChevronIcon />
-              </ChevronIconWrapper>
-            </ShowMore>
-          ) : null}
-
-          {canShowProgressBar && (
-            <SlideShowProgressBar
-              color={theme && theme.primary}
-              duration={remainInterval}
-              paused={paused}
-              ref={progressRef}
-              startWidth={startWidth}
-            ></SlideShowProgressBar>
-          )}
-
-          {canShowTriangleIcon && (
-            <TriangleIconWrapper
-              dir={triangleDir}
-              theme={theme}
-            ></TriangleIconWrapper>
-          )}
+          <ContentFooter
+            theme={theme}
+            progressRef={progressRef}
+            startWidth={startWidth}
+            textContentIsLarge={textContentLarge}
+            remainInterval={remainInterval}
+            paused={paused}
+            triangleDir={triangleDir}
+            showProgressBar={canShowProgressBar}
+            showReadMore={canShowReadMore}
+            onExpand={handleExpandDetails}
+            canShow={canShowMore}
+            showMore={showMore}
+          />
         </TimelineItemContentWrapper>
       );
     },

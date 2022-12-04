@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Theme } from '../../../models/Theme';
 
 export interface Title {
@@ -14,7 +15,7 @@ export interface Title {
 export interface Content {
   classString?: string;
   color?: string;
-  content?: string;
+  content?: string | ReactNode;
   dir?: string;
   fontSize?: string;
   theme?: Theme;

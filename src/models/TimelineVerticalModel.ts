@@ -1,6 +1,6 @@
 import { Theme } from './Theme';
 import { Scroll } from './TimelineHorizontalModel';
-import { TimelineCardModel } from './TimelineItemModel';
+import { TimelineCardModel, TimelineItemModel } from './TimelineItemModel';
 import { Media } from './TimelineMediaModel';
 import { TimelineProps } from './TimelineModel';
 
@@ -37,21 +37,26 @@ type VerticalModel = Pick<
   | 'lineWidth'
   | 'disableClickOnCircle'
   | 'cardLess'
-> & {
-  active?: boolean;
-  className: string;
-  id?: string;
-};
+> &
+  Pick<
+    TimelineItemModel,
+    | 'cardDetailedText'
+    | 'cardSubtitle'
+    | 'cardTitle'
+    | 'title'
+    | 'url'
+    | 'timelineContent'
+  > & { active?: boolean; className: string; id?: string };
 
-export interface VerticalCircleModel extends VerticalModel {
+export type VerticalCircleModel = Omit<VerticalModel, 'timelineContent'> & {
   iconChild?: React.ReactNode;
   onActive: (pointOffset: number) => void;
-}
+};
 
 export interface VerticalItemModel extends VerticalModel {
-  cardDetailedText?: string | string[];
-  cardSubtitle?: string;
-  cardTitle?: string;
+  // cardDetailedText?: string | string[];
+  // cardSubtitle?: string;
+  // cardTitle?: string;
   contentDetailsChildren?: React.ReactNode;
   iconChild?: React.ReactNode;
   index: number;
@@ -62,8 +67,8 @@ export interface VerticalItemModel extends VerticalModel {
     contentOffset: number,
   ) => void;
   onShowMore?: () => void;
-  title?: string;
-  url?: string;
+  // title?: string;
+  // url?: string;
   visible?: boolean;
 }
 

@@ -1,8 +1,9 @@
+import * as React from 'react';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 
 const items: TimelineItemModel[] = [
   {
-    title: 'May 1940',
+    title: 'May 1945',
     cardTitle: 'Dunkirk',
     url: 'http://www.history.com',
     media: {
@@ -19,8 +20,8 @@ const items: TimelineItemModel[] = [
     cardDetailedText: [`On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France.`],
   },
   {
-    title: '25 July 1940',
-    cardTitle: 'The Battle of Britain',
+    title: '25 July 1941',
+    cardTitle: 'The Battle of Britian',
     url: 'http://www.google.com',
     media: {
       name: 'Battle of britain',
@@ -31,6 +32,10 @@ const items: TimelineItemModel[] = [
       type: 'IMAGE',
     },
     cardSubtitle: `RAF Spitfire pilots scramble for their planes`,
+    timelineContent: <span>
+      After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`, `The first phase of the battle began on 10 July with Luftwaffe attacks on shipping in the Channel.
+    </span>,
+    // cardSubtitle: `RAF Spitfire pilots scramble for their planes`,
     cardDetailedText: [`After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`, `The first phase of the battle began on 10 July with Luftwaffe attacks on shipping in the Channel.
       The following month, RAF Fighter Command airfields and aircraft factories came under attack.`, `Under the dynamic direction of Lord Beaverbrook, production of Spitfire and Hurricane fighters increased, and despite its losses in pilots and planes, the RAF was never as seriously weakened as the Germans supposed.`],
   },

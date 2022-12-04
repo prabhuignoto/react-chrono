@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Theme } from './Theme';
 
 export type MediaType = 'VIDEO' | 'IMAGE';
@@ -21,7 +22,7 @@ export interface MediaState {
 export interface CardMediaModel {
   active?: boolean;
   cardHeight?: number;
-  content?: string;
+  content?: string | ReactNode;
   hideMedia: boolean;
   id?: string;
   media: Media;
