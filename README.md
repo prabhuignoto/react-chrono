@@ -202,14 +202,15 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 
 ### Timeline item Model
 
-| name             | description                                  | type               |
-| ---------------- | -------------------------------------------- | ------------------ |
-| title            | title of the timeline item                   | String             |
-| cardTitle        | title that is displayed on the timeline card | String             |
-| cardSubtitle     | text displayed in the timeline card          | String             |
-| cardDetailedText | detailed text displayed in the timeline card | String or String[] |
-| media            | media object to set image or video.          | Object             |
-| url              | url to be used in the title.                 | String             |
+| name             | description                                                                                   | type               |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------------------ |
+| cardDetailedText | detailed text displayed in the timeline card                                                  | String or String[] |
+| cardSubtitle     | text displayed in the timeline card                                                           | String             |
+| cardTitle        | title that is displayed on the timeline card                                                  | String             |
+| media            | media object to set image or video.                                                           | Object             |
+| timelineContent  | render custom content instead of text.This prop has higher precedence over `cardDetailedText` | ReactNode          |
+| title            | title of the timeline item                                                                    | String             |
+| url              | url to be used in the title.                                                                  | String             |
 
 ```jsx
 {
@@ -218,6 +219,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
   cardSubtitle:
     "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.",
   cardDetailedText: ["paragraph1", "paragraph2"],
+  timelineContent: <div>Custom content</div>,
 }
 ```
 
