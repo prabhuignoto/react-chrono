@@ -1,49 +1,57 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Theme } from '../models/Theme';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import './App.css';
-import {
-  AppArea,
-  ComponentLinks,
-  Wrapper
-} from './App.styles';
 import data from './data';
-import mixed from "./data-mixed";
-import DynamicLoad from "./dynamic-load";
-import { HorizontalAll, HorizontalBasic, HorizontalBasicCardLess, HorizontalInitialSelectedItem } from './horizontal-samples';
-import { VerticalBasic, VerticalBasicCardLess, VerticalCustomContent, VerticalCustomContent2, VerticalTree, VerticalTreeMixed } from './vertical-samples';
+import mixed from './data-mixed';
+import DynamicLoad from './dynamic-load';
+import {
+  HorizontalAll,
+  HorizontalBasic,
+  HorizontalBasicCardLess,
+  HorizontalInitialSelectedItem,
+} from './horizontal-samples';
+import { Layout } from './layout';
+import {
+  VerticalBasic,
+  VerticalBasicCardLess,
+  VerticalCustomContent,
+  VerticalCustomContent2,
+  VerticalTree,
+  VerticalTreeMixed,
+} from './vertical-samples';
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
   const [state, setState] = useState(0);
 
   const [customTheme, setCustomTheme] = useState<Theme>({
-    cardBgColor: "#C0C0C0",
-    primary: "#000",
-    secondary: "#FFA500"
+    cardBgColor: '#C0C0C0',
+    primary: '#000',
+    secondary: '#FFA500',
   });
 
   useEffect(() => {
     if (state > 0) {
       setCustomTheme({
-        cardBgColor: "#efefef",
-        primary: "#000",
-        secondary: "#FFA500"
-      })
+        cardBgColor: '#efefef',
+        primary: '#000',
+        secondary: '#FFA500',
+      });
     } else {
       setCustomTheme({
-        cardBgColor: "#C0C0C0",
-        primary: "#000",
-        secondary: "#FFA500",
-        titleColorActive: "#000"
-      })
+        cardBgColor: '#C0C0C0',
+        primary: '#000',
+        secondary: '#FFA500',
+        titleColorActive: '#000',
+      });
     }
   }, [state]);
 
   useEffect(() => {
     const newItems = data.map(
-      ({ title, url, cardTitle, cardSubtitle, cardDetailedText, id, media, timelineContent }) => ({
+      ({
         title,
         url,
         cardTitle,
@@ -51,99 +59,118 @@ const NewDemo: React.FunctionComponent = () => {
         cardDetailedText,
         id,
         media,
-        timelineContent
+        timelineContent,
+      }) => ({
+        title,
+        url,
+        cardTitle,
+        cardSubtitle,
+        cardDetailedText,
+        id,
+        media,
+        timelineContent,
       }),
     );
     setItems(newItems);
   }, []);
 
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout />,
+      children: [
+        {
+          path: '/vertical-basic',
+          element: items.length ? (
+            <VerticalBasic type={'big-screen'} items={items} />
+          ) : null,
+        },
+        {
+          path: '/vertical-alternating-mixed',
+          element: items.length > 0 && (
+            <VerticalTreeMixed type={'big-screen'} />
+          ),
+        },
+        {
+          path: '/vertical-alternating',
+          element: (
+            <>
+              <button
+                onClick={() => {
+                  setState(1 - state);
+                }}
+              >
+                change
+              </button>
+              {
+                <VerticalTree
+                  type={'big-screen'}
+                  items={state > 0 ? items : mixed}
+                  theme={customTheme}
+                >
+                  {state}
+                </VerticalTree>
+              }
+            </>
+          ),
+        },
+        {
+          path: '/horizontal',
+          element: items.length > 0 && (
+            <HorizontalBasic items={items} type="big-screen" />
+          ),
+        },
+        {
+          path: '/horizontal-all',
+          element: items.length > 0 && (
+            <HorizontalAll items={items} type="big-screen" />
+          ),
+        },
+        {
+          path: '/horizontal-initial-select',
+          element: items.length > 0 && (
+            <HorizontalInitialSelectedItem items={items} type="big-screen" />
+          ),
+        },
+        {
+          path: '/vertical-custom',
+          element: items.length > 0 && (
+            <VerticalCustomContent type="big-screen" />
+          ),
+        },
+        {
+          path: '/vertical-custom-icon',
+          element: items.length > 0 && (
+            <VerticalCustomContent2 type="big-screen" />
+          ),
+        },
+        {
+          path: '/dynamic-load',
+          element: items.length > 0 && <DynamicLoad />,
+        },
+        {
+          path: '/timeline-without-cards',
+          element: items.length > 0 && (
+            <VerticalBasicCardLess type="big-screen" items={items} />
+          ),
+        },
+        {
+          path: '/timeline-without-cards-horizontal',
+          element: items.length > 0 && (
+            <HorizontalBasicCardLess type="big-screen" items={items} />
+          ),
+        },
+        {
+          path: '/timeline-without-cards-horizontal',
+          element: items.length > 0 && (
+            <HorizontalBasicCardLess type="big-screen" items={items} />
+          ),
+        },
+      ],
+    },
+  ]);
 
-  return (
-    <Wrapper>
-      <BrowserRouter>
-        <aside className="app-links">
-          <ComponentLinks>
-            <li>
-              <Link to="/vertical-basic">Vertical Basic</Link>
-            </li>
-            <li>
-              <Link to="/vertical-alternating">Vertical Alternating</Link>
-            </li>
-            <li>
-              <Link to="/vertical-alternating-mixed">Vertical Alternating Mixed Data</Link>
-            </li>
-            <li>
-              <Link to="/horizontal">Horizontal Basic</Link>
-            </li>
-            <li>
-              <Link to="/horizontal-all">Horizontal All Cards</Link>
-            </li>
-            <li>
-              <Link to="/horizontal-initial-select">Horizontal Basic with initial selected item</Link>
-            </li>
-            <li>
-              <Link to="/vertical-custom">Vertical  Custom contents</Link>
-            </li>
-            <li>
-              <Link to="/vertical-custom-icon">Vertical  Custom Icons</Link>
-            </li>
-            <li>
-              <Link to="/dynamic-load">Dynamic data load</Link>
-            </li>
-            <li>
-              <Link to="/timeline-without-cards">Timeline Card less</Link>
-            </li>
-            <li>
-              <Link to="/timeline-without-cards-horizontal">Timeline Card less (Horizontal)</Link>
-            </li>
-          </ComponentLinks>
-        </aside>
-        <AppArea>
-          {/* <div style={{height: "2200px", border: "1px solid red"}}>
-          </div> */}
-          <Routes>
-            <Route path="/vertical-basic" element={items.length && <VerticalBasic type={"big-screen"} items={items} />}>
-            </Route>
-            <Route path="/vertical-alternating-mixed" element={items.length > 0 && <VerticalTreeMixed type={"big-screen"} />} >
-
-            </Route>
-            <Route path="/vertical-alternating" element={<>
-              <button onClick={() => {
-                setState(1 - state);
-              }}>change</button>
-              {<VerticalTree type={'big-screen'} items={state > 0 ? items : mixed} theme={customTheme} >{state}</VerticalTree>}
-            </>}>
-            </Route>
-            <Route path="/horizontal" element={items.length > 0 && (
-              <HorizontalBasic items={items} type="big-screen" />
-            )}>
-            </Route>
-            <Route path="/horizontal-all" element={items.length > 0 && (
-              <HorizontalAll items={items} type="big-screen" />
-            )}></Route>
-            <Route path="/horizontal-initial-select" element={items.length > 0 && (
-              <HorizontalInitialSelectedItem items={items} type="big-screen" />
-            )}>
-            </Route>
-            <Route path="/vertical-custom" element={items.length > 0 && <VerticalCustomContent type="big-screen" />}>
-            </Route>
-            <Route path="/vertical-custom-icon" element={items.length > 0 && <VerticalCustomContent2 type="big-screen" />}>
-            </Route>
-            <Route path="/dynamic-load" element={items.length > 0 && <DynamicLoad />}>
-            </Route>
-            <Route path="/timeline-without-cards" element={items.length > 0 && <VerticalBasicCardLess type='big-screen' items={items} />}>
-            </Route>
-            <Route path="/timeline-without-cards-horizontal" element={items.length > 0 && <HorizontalBasicCardLess type='big-screen' items={items} />}>
-            </Route>
-            <Route path="/" element={items.length > 0 && (
-              <VerticalBasic type={"big-screen"} items={items} />
-            )}>
-            </Route>
-          </Routes>
-        </AppArea>
-      </BrowserRouter>
-    </Wrapper>
-  );
+  return <RouterProvider router={router}></RouterProvider>;
 };
 
 export default NewDemo;

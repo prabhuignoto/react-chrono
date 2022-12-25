@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
-import Chrono from "../components";
-import data from "./data";
+import React, { useCallback, useEffect, useState } from 'react';
+import Chrono from '../components';
+import data from './data';
 
 export default function App() {
   const [pageIndex, setPageIndex] = useState(0);
@@ -53,7 +53,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <div style={{ width: "650px", height: "650px" }}>
+      <div style={{ width: '650px', height: '650px' }}>
         <Chrono
           items={items}
           mode="VERTICAL_ALTERNATING"

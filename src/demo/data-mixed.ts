@@ -8,8 +8,7 @@ const items: TimelineItemModel[] = [
     media: {
       name: 'dunkirk beach',
       source: {
-        url:
-          'https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg',
+        url: 'https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg',
         // url: "/dunkirk.mp4"
       },
       type: 'IMAGE',
@@ -60,8 +59,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url:
-          'https://upload.wikimedia.org/wikipedia/commons/a/a6/Surrender_Singapore.jpg',
+        url: 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Surrender_Singapore.jpg',
       },
       name: 'Fall of singapore',
     },
@@ -86,8 +84,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url:
-          'https://i.dailymail.co.uk/i/newpix/2018/03/08/11/49FEAE2A00000578-5477117-image-a-79_1520509429888.jpg',
+        url: 'https://i.dailymail.co.uk/i/newpix/2018/03/08/11/49FEAE2A00000578-5477117-image-a-79_1520509429888.jpg',
       },
     },
     cardDetailedText: `The North African campaign began in September1940, and for the next two years the fighting was marked by a succession of Allied and Axis advances and retreats. In the summer of 1942, the Axis forces under ‘Desert Fox’ field marshal, Erwin Rommel, looked poised to take Cairo and advance on the Suez Canal.
@@ -143,8 +140,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url:
-          'https://ic.c4assets.com/brands/ve-day-in-colour-britains-biggest-party/d708c2d9-8fec-4592-a90f-ddfe3513c914.jpg?interpolation=progressive-bicubic&output-quality=90',
+        url: 'https://ic.c4assets.com/brands/ve-day-in-colour-britains-biggest-party/d708c2d9-8fec-4592-a90f-ddfe3513c914.jpg?interpolation=progressive-bicubic&output-quality=90',
       },
     },
     cardSubtitle: `millions of people rejoice in the news that Germany has surrendered – the war in Europe was finally over`,
