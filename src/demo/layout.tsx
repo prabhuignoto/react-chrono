@@ -4,7 +4,9 @@ import styles from './layout.module.scss';
 const Layout = () => {
   return (
     <div className={styles.wrapper}>
-      <div className={styles.header}></div>
+      <div className={styles.header}>
+        <h2>React-Chrono</h2>
+      </div>
       <div className={styles.container}>
         <div className={styles.aside}>
           <NavLink to={'/vertical-basic'}>Vertical Basic</NavLink>

@@ -36,7 +36,6 @@
 .aside {
   @extend .center-column;
   width: 300px;
-  border: 1px solid #ccc;
   min-height: 500px;
 
   a {
@@ -46,7 +45,7 @@
 
 .content {
   @extend .center;
-  border: 1px solid #ccc;
+  border-left: 1px solid #ccc;
   width: calc(100% - 300px);
   align-items: flex-start;
   padding: 1rem;
