@@ -19,7 +19,7 @@
     "declarationDir": "dist",
     "types": ["cypress"]
   },
-  "include": ["src/components", "src/models", "src/demo/layout.tsx"],
+  "include": ["src/components", "src/models"],
   "exclude": ["src/**/*.test.tsx", "node_modules", "dist", "rollup.config.mjs"],
   "files": ["src/react-chrono.ts"]
 }
