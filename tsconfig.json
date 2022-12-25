@@ -12,14 +12,14 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "noEmit": true,
     "rootDir": "src",
     "declaration": true,
     "declarationDir": "dist",
     "types": ["cypress"]
   },
-  "include": ["src/components", "src/models"],
+  "include": ["src/components", "src/models", "src/demo/layout.tsx"],
   "exclude": ["src/**/*.test.tsx", "node_modules", "dist", "rollup.config.mjs"],
   "files": ["src/react-chrono.ts"]
 }

@@ -2,7 +2,10 @@ import React, { FunctionComponent } from 'react';
 import Chrono from '../components';
 import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
-  ComponentContainer, ComponentContainerTree, Horizontal, Vertical
+  ComponentContainer,
+  ComponentContainerTree,
+  Horizontal,
+  Vertical,
 } from './App.styles';
 import data from './data';
 
@@ -21,7 +24,7 @@ export const HorizontalBasic: React.FunctionComponent<{
           slideShow
           slideItemDuration={2550}
           itemWidth={200}
-          onItemSelected={selected => console.log(selected)}
+          onItemSelected={(selected) => console.log(selected)}
           timelineCircleDimension={20}
           cardPositionHorizontal="BOTTOM"
           buttonTexts={{
@@ -60,7 +63,7 @@ export const HorizontalAll: React.FunctionComponent<{
           slideItemDuration={2550}
           itemWidth={200}
           focusActiveItemOnLoad
-          onItemSelected={selected => console.log(selected)}
+          onItemSelected={(selected) => console.log(selected)}
           timelineCircleDimension={20}
           showAllCardsHorizontal
           activeItemIndex={8}
@@ -94,8 +97,8 @@ export const HorizontalInitialSelectedItem: React.FunctionComponent<{
           slideItemDuration={2550}
           itemWidth={200}
           cardLess
-          onItemSelected={selected => console.log(selected)}
-          >
+          onItemSelected={(selected) => console.log(selected)}
+        >
           <div className="chrono-icons">
             <img src="color-circle.svg" alt="github" />
             <img src="color-circle.svg" alt="github" />
@@ -119,7 +122,11 @@ export const HorizontalBasicCardLess: FunctionComponent<{
         items={items}
         mode="HORIZONTAL"
         cardLess
-        theme={{ cardBgColor: "#fff", cardForeColor: "blue", titleColorActive: "red" }}
+        theme={{
+          cardBgColor: '#fff',
+          cardForeColor: 'blue',
+          titleColorActive: 'red',
+        }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
       />
     </ComponentContainerTree>

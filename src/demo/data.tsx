@@ -9,15 +9,16 @@ const items: TimelineItemModel[] = [
     media: {
       name: 'dunkirk beach',
       source: {
-        url:
-          'https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg',
+        url: 'https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg',
       },
       type: 'IMAGE',
     },
     cardSubtitle:
       'Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.',
     // cardDetailedText: [`On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France.`, `Holland capitulated after only five days of fighting, and the Belgians surrendered on 28 May. With the success of the German ‘Blitzkrieg’, the British Expeditionary Force and French troops were in danger of being cut off and destroyed.`],
-    cardDetailedText: [`On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France.`],
+    cardDetailedText: [
+      `On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France.`,
+    ],
   },
   {
     title: '25 July 1941',
@@ -26,18 +27,27 @@ const items: TimelineItemModel[] = [
     media: {
       name: 'Battle of britain',
       source: {
-        url:
-          'https://thumbs-prod.si-cdn.com/NbOmrVrVAO-uSo0O8kVNdpqVyCk=/800x600/filters:no_upscale()/https://public-media.si-cdn.com/filer/c6/b0/c6b0f904-ae9c-47e5-86a9-493dfaefd43c/spitfire_1.jpg',
+        url: 'https://thumbs-prod.si-cdn.com/NbOmrVrVAO-uSo0O8kVNdpqVyCk=/800x600/filters:no_upscale()/https://public-media.si-cdn.com/filer/c6/b0/c6b0f904-ae9c-47e5-86a9-493dfaefd43c/spitfire_1.jpg',
       },
       type: 'IMAGE',
     },
     cardSubtitle: `RAF Spitfire pilots scramble for their planes`,
-    timelineContent: <span>
-      After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`, `The first phase of the battle began on 10 July with Luftwaffe attacks on shipping in the Channel.
-    </span>,
+    timelineContent: (
+      <span>
+        After France’s surrender in June 1940, Churchill told the British
+        people, “Hitler knows that he will have to break us in this island or
+        lose the war”. To mount a successful invasion, the Germans had to gain
+        air superiority.`, `The first phase of the battle began on 10 July with
+        Luftwaffe attacks on shipping in the Channel.
+      </span>
+    ),
     // cardSubtitle: `RAF Spitfire pilots scramble for their planes`,
-    cardDetailedText: [`After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`, `The first phase of the battle began on 10 July with Luftwaffe attacks on shipping in the Channel.
-      The following month, RAF Fighter Command airfields and aircraft factories came under attack.`, `Under the dynamic direction of Lord Beaverbrook, production of Spitfire and Hurricane fighters increased, and despite its losses in pilots and planes, the RAF was never as seriously weakened as the Germans supposed.`],
+    cardDetailedText: [
+      `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+      `The first phase of the battle began on 10 July with Luftwaffe attacks on shipping in the Channel.
+      The following month, RAF Fighter Command airfields and aircraft factories came under attack.`,
+      `Under the dynamic direction of Lord Beaverbrook, production of Spitfire and Hurricane fighters increased, and despite its losses in pilots and planes, the RAF was never as seriously weakened as the Germans supposed.`,
+    ],
   },
   {
     title: 'June 1941',
@@ -45,8 +55,7 @@ const items: TimelineItemModel[] = [
     media: {
       name: 'Operation Barbarossa',
       source: {
-        url:
-          'https://cdn.britannica.com/01/150101-050-810CE9A9/soldiers-German-part-Soviet-Union-Operation-Barbarossa-1941.jpg',
+        url: 'https://cdn.britannica.com/01/150101-050-810CE9A9/soldiers-German-part-Soviet-Union-Operation-Barbarossa-1941.jpg',
       },
       type: 'IMAGE',
     },
@@ -61,8 +70,7 @@ const items: TimelineItemModel[] = [
     cardSubtitle: `The destroyer USS Shaw explodes in dry dock after being hit by Japanese aircraft`,
     media: {
       source: {
-        url:
-          'https://pearlharborwarbirds.com/wp-content/uploads/2016/09/Awesome-Color-Photos-of-the-Attack-on-Pearl-Harbor-1.jpg',
+        url: 'https://pearlharborwarbirds.com/wp-content/uploads/2016/09/Awesome-Color-Photos-of-the-Attack-on-Pearl-Harbor-1.jpg',
       },
       type: 'IMAGE',
       name: 'Pearl Harbor',
@@ -76,8 +84,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url:
-          'https://upload.wikimedia.org/wikipedia/commons/a/a6/Surrender_Singapore.jpg',
+        url: 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Surrender_Singapore.jpg',
       },
       name: 'Fall of singapore',
     },
@@ -93,8 +100,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url:
-          'https://dlbztvn8kichw.cloudfront.net/wp-content/uploads/2018/10/03131301/The-Battle-Of-Midway.jpg',
+        url: 'https://dlbztvn8kichw.cloudfront.net/wp-content/uploads/2018/10/03131301/The-Battle-Of-Midway.jpg',
       },
     },
     cardSubtitle: `The American aircraft carrier USS Yorktown under Japanese attack during the battle of Midway`,
@@ -109,8 +115,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url:
-          'https://i.dailymail.co.uk/i/newpix/2018/03/08/11/49FEAE2A00000578-5477117-image-a-79_1520509429888.jpg',
+        url: 'https://i.dailymail.co.uk/i/newpix/2018/03/08/11/49FEAE2A00000578-5477117-image-a-79_1520509429888.jpg',
       },
     },
     cardDetailedText: `The North African campaign began in September1940, and for the next two years the fighting was marked by a succession of Allied and Axis advances and retreats. In the summer of 1942, the Axis forces under ‘Desert Fox’ field marshal, Erwin Rommel, looked poised to take Cairo and advance on the Suez Canal.
@@ -125,8 +130,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url:
-          'https://www.thesun.co.uk/wp-content/uploads/2018/02/nintchdbpict000382291893.jpg',
+        url: 'https://www.thesun.co.uk/wp-content/uploads/2018/02/nintchdbpict000382291893.jpg',
       },
     },
     cardDetailedText: `Throughout September and October, under General Vassili Chuikov, the city’s defenders contested every yard of ground of the devastated city.
@@ -141,8 +145,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url:
-          'https://www.britishpoles.uk/wp-content/uploads/2019/06/D-Day-landings-1.jpg',
+        url: 'https://www.britishpoles.uk/wp-content/uploads/2019/06/D-Day-landings-1.jpg',
       },
     },
     cardDetailedText: `Operation Overlord, the invasion and liberation of north-west Europe, began on D-Day, 6 June 1944.
@@ -157,8 +160,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url:
-          'https://1.bp.blogspot.com/-GGJh_zNQ5IQ/XQvEH7JYOlI/AAAAAAAADJA/TO-j7KLr5q0zUaPhpl2KvoxihXVwBesjwCLcBGAs/s1600/Yalta_Conference_%2528Churchill%252C_Roosevelt%252C_Stalin%2529.jpg',
+        url: 'https://1.bp.blogspot.com/-GGJh_zNQ5IQ/XQvEH7JYOlI/AAAAAAAADJA/TO-j7KLr5q0zUaPhpl2KvoxihXVwBesjwCLcBGAs/s1600/Yalta_Conference_%2528Churchill%252C_Roosevelt%252C_Stalin%2529.jpg',
       },
     },
     cardDetailedText: `Between June 1940 and June 1941, Britain stood alone against Hitler. But then, after the German invasion of Russia and the Japanese attack on Pearl Harbor, she gained two powerful allies.
@@ -172,8 +174,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url:
-          'https://i.pinimg.com/originals/7f/13/57/7f1357ae886a0cfd317c2abbc232e637.jpg',
+        url: 'https://i.pinimg.com/originals/7f/13/57/7f1357ae886a0cfd317c2abbc232e637.jpg',
       },
     },
     cardDetailedText: `At Yalta, an Allied plan to bomb the hitherto untouched city of Dresden was discussed. The reason for attacking the city was due principally to its strategic importance as a communications centre in the rear of the German retreat that followed the Soviet winter offensive of January 1945. It was also believed that Dresden might be used as an alternative to Berlin as the Reich capital.
@@ -186,8 +187,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url:
-          'https://ic.c4assets.com/brands/ve-day-in-colour-britains-biggest-party/d708c2d9-8fec-4592-a90f-ddfe3513c914.jpg?interpolation=progressive-bicubic&output-quality=90',
+        url: 'https://ic.c4assets.com/brands/ve-day-in-colour-britains-biggest-party/d708c2d9-8fec-4592-a90f-ddfe3513c914.jpg?interpolation=progressive-bicubic&output-quality=90',
       },
     },
     cardSubtitle: `millions of people rejoice in the news that Germany has surrendered – the war in Europe was finally over`,
@@ -202,8 +202,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url:
-          'https://upload.wikimedia.org/wikipedia/commons/5/54/Atomic_bombing_of_Japan.jpg',
+        url: 'https://upload.wikimedia.org/wikipedia/commons/5/54/Atomic_bombing_of_Japan.jpg',
       },
     },
     cardDetailedText: `The Second World War began at dawn on Friday 1 September 1939, when Adolf Hitler launched his invasion of Poland.
