@@ -98,6 +98,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }
   }, []);
 
+  useEffect(() => {
+    handleTimelineUpdate(activeItemIndex);
+  }, [activeItemIndex]);
+
   const restartSlideShow = useCallback(() => {
     setSlideshowActive(true);
     handleTimelineUpdate(0);
