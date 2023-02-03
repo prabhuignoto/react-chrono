@@ -37,6 +37,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   customContent,
   hasFocus,
   iconChild,
+  timelineContent,
 }: TimelineCardModel) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -103,7 +104,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     [active],
   );
 
-  const timelineContent = useMemo(() => {
+  const Content = useMemo(() => {
     return (
       <TimelineContentContainer
         className={containerClass}
@@ -129,6 +130,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           customContent={customContent}
           hasFocus={hasFocus}
           onClick={onClick}
+          timelineContent={timelineContent}
         />
       </TimelineContentContainer>
     );
@@ -138,7 +140,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     const ele = document.getElementById(wrapperId);
 
     if (ele) {
-      return ReactDOM.createPortal(timelineContent, ele);
+      return ReactDOM.createPortal(Content, ele);
     }
   };
 
