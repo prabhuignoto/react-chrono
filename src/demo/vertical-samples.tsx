@@ -25,8 +25,7 @@ export const VerticalTree: FunctionComponent<{
           focusActiveItemOnLoad
           activeItemIndex={4}
           cardWidth={450}
-          onItemSelected={() => alert('red')}
-          // onItemSelected={(selected) => console.log(selected.cardTitle)}
+          onItemSelected={(selected) => console.log(selected.cardTitle)}
           onScrollEnd={() => console.log('end reached')}
         >
           <div className="chrono-icons">
