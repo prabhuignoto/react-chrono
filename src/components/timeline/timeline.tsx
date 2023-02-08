@@ -141,11 +141,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         }
       }
 
-      const selectedItem = items.find((item) => item.id === itemId);
+      // const selectedItem = items.find((item) => item.id === itemId);
 
-      if (selectedItem) {
-        onItemSelected?.(selectedItem);
-      }
+      // if (selectedItem) {
+      //   onItemSelected?.(selectedItem);
+      // }
     }
   };
 
