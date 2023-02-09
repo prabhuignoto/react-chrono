@@ -70,8 +70,12 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
           (contentDetailsChildren &&
             (contentDetailsChildren as React.ReactNode[])[index]) ||
           null;
-        const customIcon =
-          (iconChildren && (iconChildren as React.ReactNode[])[index]) || null;
+
+          const customIcon = Array.isArray(iconChildren)
+          ? iconChildren[index]
+          : index === 0
+          ? iconChildren
+          : null;
 
         return (
           <TimelineVerticalItem
