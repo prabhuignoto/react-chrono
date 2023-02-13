@@ -15,6 +15,7 @@ import { GlobalContext } from '../GlobalContext';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
+import { uniqueID } from './../../utils/index';
 import {
   Outline,
   TimelineContentRender,
@@ -81,7 +82,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   }, [slideShowRunning, scrollable]);
 
-  const id = useRef('react-chrono-timeline');
+  const id = useRef(`react-chrono-timeline-${uniqueID()}`);
 
   // handlers for navigation
   const handleNext = useCallback(() => {
