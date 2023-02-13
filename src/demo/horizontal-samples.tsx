@@ -42,32 +42,6 @@ export const HorizontalBasic: React.FunctionComponent<{
             <img src="color-circle.svg" alt="github" />
           </div>
         </Chrono>
-        <Chrono
-          items={data}
-          mode="HORIZONTAL"
-          cardHeight={250}
-          cardWidth={450}
-          slideShow
-          slideItemDuration={2550}
-          itemWidth={200}
-          onItemSelected={(selected) => console.log(selected)}
-          timelineCircleDimension={20}
-          cardPositionHorizontal="BOTTOM"
-          buttonTexts={{
-            first: 'Jump to First',
-            last: 'Jump to Last',
-            next: 'Next',
-            previous: 'Previous',
-          }}
-        >
-          <div className="chrono-icons">
-            <img src="color-circle.svg" alt="github" />
-            <img src="color-circle.svg" alt="github" />
-            <img src="color-circle.svg" alt="github" />
-            <img src="color-circle.svg" alt="github" />
-            <img src="color-circle.svg" alt="github" />
-          </div>
-        </Chrono>
       </ComponentContainer>
     </Horizontal>
   );
