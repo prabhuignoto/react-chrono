@@ -184,7 +184,7 @@ const slideAnimation = (start?: number, end?: number) => keyframes`
   }
   100% {
     width: ${end}px;
-  }  
+  }
 `;
 
 const expandAnimation = keyframes`
