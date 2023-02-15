@@ -56,6 +56,9 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       const [startWidth, setStartWidth] = useState(0);
       const [textContentLarge, setTextContentLarge] = useState(false);
 
+      const [cardActualHeight, setCardActualHeight] = useState(0);
+      const [detailsHeight, setDetailsHeight] = useState(0);
+
       const {
         mode,
         cardHeight,
@@ -66,6 +69,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         disableAutoScrollOnClick,
         fontSizes,
         classNames,
+        contentDetailsHeight,
       } = useContext(GlobalContext);
 
       const canShowProgressBar = useMemo(() => {
@@ -96,6 +100,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             const { scrollHeight, offsetTop } = detailsEle;
             containerWidth.current = node.clientWidth;
             setStartWidth(containerWidth.current);
+            setCardActualHeight(scrollHeight);
+            setDetailsHeight(detailsEle.offsetHeight);
             setTextContentLarge(scrollHeight + offsetTop > node.clientHeight);
           }
         },
@@ -329,6 +335,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             theme={theme}
             useReadMore={useReadMore}
             borderLess={borderLessCards}
+            showMore={showMore}
+            cardHeight={cardActualHeight}
+            contentHeight={detailsHeight}
+            height={contentDetailsHeight}
           >
             {customContent ? customContent : getTextOrContent}
           </TimelineContentDetailsWrapper>

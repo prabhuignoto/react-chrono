@@ -89,7 +89,11 @@ export const TimelineSubContent = styled.span<{ fontSize?: string }>`
 
 export const TimelineContentDetailsWrapper = styled.div<{
   borderLess?: boolean;
+  cardHeight?: number;
+  contentHeight?: number;
   customContent?: boolean;
+  height?: number;
+  showMore?: boolean;
   theme?: Theme;
   useReadMore?: boolean;
 }>`
@@ -99,14 +103,41 @@ export const TimelineContentDetailsWrapper = styled.div<{
   margin: 0 auto;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  ${(p) => (p.useReadMore && !p.customContent ? 'max-height: 150px;' : '')}
+  ${({ useReadMore, customContent, showMore, height = 0 }) =>
+    useReadMore && !customContent && !showMore
+      ? `max-height: ${height}px;`
+      : ''}
+  ${({ cardHeight = 0, contentHeight = 0, height = 0, showMore }) =>
+    showMore
+      ? `max-height: ${(cardHeight || 0) + (contentHeight || 0) - height}px;`
+      : ''}
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-color: ${(p) => p.theme?.primary} default;
   scrollbar-width: thin;
-  transition: max-height 100ms linear;
+  transition: max-height 0.25s ease-in-out;
   width: ${(p) => (p.borderLess ? '100%' : '95%')};
   padding: 0.25em 0.5em;
+
+  ${({
+    height = 0,
+    cardHeight = 0,
+    contentHeight = 0,
+    showMore,
+    useReadMore,
+  }) =>
+    showMore && useReadMore
+      ? css`
+          animation: ${keyframes`
+            0% {
+              max-height: ${height}px;
+            }
+            100% {
+             max-height: ${cardHeight + contentHeight - height}px;
+            }
+          `} 0.25s ease-in-out;
+        `
+      : ''}
 
   &::-webkit-scrollbar {
     width: 0.3em;
@@ -122,7 +153,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
   }
 
   &.show-less {
-    max-height: 50px;
+    // max-height: 50px;
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
@@ -158,7 +189,7 @@ const slideAnimation = (start?: number, end?: number) => keyframes`
   }
   100% {
     width: ${end}px;
-  }  
+  }
 `;
 
 export const SlideShowProgressBar = styled.span<{

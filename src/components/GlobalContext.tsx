@@ -21,6 +21,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
     {
       borderLessCards: false,
       cardLess: false,
+      contentDetailsHeight: 150,
       disableAutoScrollOnClick: false,
       disableClickOnCircle: false,
       focusActiveItemOnLoad: false,

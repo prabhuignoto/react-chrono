@@ -115,7 +115,7 @@ export const VerticalBasic: FunctionComponent<{
         items={items}
         mode="VERTICAL"
         slideShow
-        cardWidth={700}
+        cardWidth={650}
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
         theme={{
@@ -131,7 +131,8 @@ export const VerticalBasic: FunctionComponent<{
         }}
         focusActiveItemOnLoad
         activeItemIndex={9}
-        cardHeight={300}
+        cardHeight={400}
+        contentDetailsHeight={100}
         timelineCircleDimension={20}
         classNames={{
           cardText: 'custom-text',
@@ -170,7 +171,7 @@ export const VerticalCustomContent2: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         mode="VERTICAL"
-        cardHeight={200}
+        cardHeight={300}
         cardWidth={650}
         scrollable
         flipLayout

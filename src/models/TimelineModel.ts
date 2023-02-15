@@ -62,6 +62,7 @@ export type TimelineProps = {
     controls?: string;
     title?: string;
   };
+  contentDetailsHeight?: number;
   disableAutoScrollOnClick?: boolean;
   disableClickOnCircle?: boolean;
   disableNavOnKey?: boolean;

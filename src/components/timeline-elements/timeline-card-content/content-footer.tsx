@@ -1,5 +1,6 @@
-import React, {
+import {
   FunctionComponent,
+  PointerEvent,
   RefObject,
   useContext,
   useMemo,
@@ -52,12 +53,18 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
     );
   }, [mode]);
 
+  const handleClick = (ev: PointerEvent) => {
+    ev.stopPropagation();
+    ev.preventDefault();
+    onExpand();
+  };
+
   return (
     <>
       {showReadMore && textContentIsLarge ? (
         <ShowMore
           className="show-more"
-          onClick={onExpand}
+          onPointerDown={handleClick}
           onKeyPress={(event) => {
             if (event.key === 'Enter') {
               onExpand();
