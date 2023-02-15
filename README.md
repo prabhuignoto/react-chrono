@@ -37,7 +37,7 @@
 - 🎨&nbsp; Styled with [emotion](https://emotion.sh).
 
 <h2>Table of Contents</h2>
-****
+
 - [⚡ Installation](#-installation)
 - [Getting Started](#getting-started)
   - [🚥Vertical Mode](#vertical-mode)
