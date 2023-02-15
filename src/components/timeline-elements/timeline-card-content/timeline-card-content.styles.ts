@@ -89,7 +89,10 @@ export const TimelineSubContent = styled.span<{ fontSize?: string }>`
 
 export const TimelineContentDetailsWrapper = styled.div<{
   borderLess?: boolean;
+  cardHeight?: number;
+  contentHeight?: number;
   customContent?: boolean;
+  showMore?: boolean;
   theme?: Theme;
   useReadMore?: boolean;
 }>`
@@ -99,14 +102,37 @@ export const TimelineContentDetailsWrapper = styled.div<{
   margin: 0 auto;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  ${(p) => (p.useReadMore && !p.customContent ? 'max-height: 150px;' : '')}
+  ${(p) =>
+    p.useReadMore && !p.customContent && !p.showMore
+      ? 'max-height: 150px;'
+      : ''}
+  ${(p) =>
+    p.showMore
+      ? `max-height: ${(p.cardHeight || 0) + (p.contentHeight || 0) - 150}px;`
+      : ''}
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-color: ${(p) => p.theme?.primary} default;
   scrollbar-width: thin;
-  transition: max-height 100ms linear;
+  transition: max-height 0.25s ease-in-out;
   width: ${(p) => (p.borderLess ? '100%' : '95%')};
   padding: 0.25em 0.5em;
+
+  ${(p) =>
+    p.showMore && p.useReadMore
+      ? css`
+          animation: ${keyframes`
+            0% {
+              max-height: 150px;
+            }
+            100% {
+             max-height: ${
+               (p.cardHeight || 0) + (p.contentHeight || 0) - 150
+             }px;
+            }
+          `} 0.25s ease-in-out;
+        `
+      : ''}
 
   &::-webkit-scrollbar {
     width: 0.3em;
@@ -122,7 +148,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
   }
 
   &.show-less {
-    max-height: 50px;
+    // max-height: 50px;
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
@@ -159,6 +185,15 @@ const slideAnimation = (start?: number, end?: number) => keyframes`
   100% {
     width: ${end}px;
   }  
+`;
+
+const expandAnimation = keyframes`
+  0% {
+    max-height: 150px;
+  }
+  100% {
+    height: 1200px;
+  }
 `;
 
 export const SlideShowProgressBar = styled.span<{
