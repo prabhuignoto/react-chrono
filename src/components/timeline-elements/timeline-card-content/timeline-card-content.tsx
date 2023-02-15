@@ -69,6 +69,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         disableAutoScrollOnClick,
         fontSizes,
         classNames,
+        contentDetailsHeight,
       } = useContext(GlobalContext);
 
       const canShowProgressBar = useMemo(() => {
@@ -337,6 +338,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             showMore={showMore}
             cardHeight={cardActualHeight}
             contentHeight={detailsHeight}
+            height={contentDetailsHeight}
           >
             {customContent ? customContent : getTextOrContent}
           </TimelineContentDetailsWrapper>

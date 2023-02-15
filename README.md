@@ -37,7 +37,7 @@
 - 🎨&nbsp; Styled with [emotion](https://emotion.sh).
 
 <h2>Table of Contents</h2>
-
+****
 - [⚡ Installation](#-installation)
 - [Getting Started](#getting-started)
   - [🚥Vertical Mode](#vertical-mode)
@@ -160,6 +160,8 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | cardLess                 | Disables timeline cards on both horizontal and vertical modes.                                                                                       | false                  |
 | cardPositionHorizontal   | Positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`.                                                                            |                        |
 | cardWidth                | Sets the maximum width of the timeline card.                                                                                                         |                        |
+| classNames               | Prop to apply custom class names for the different card elements                                                                                     |                        |
+| contentDetailsHeight     | Prop to control the height of the details section                                                                                                    | 150                    |
 | disableAutoScrollOnClick | Disables the timeline from auto-scrolling when a timeline card is clicked.                                                                           | false                  |
 | disableClickOnCircle     | Disables click action on the circular points.                                                                                                        | false                  |
 | disableNavOnKey          | Disables keyboard navigation.                                                                                                                        | false                  |
@@ -171,6 +173,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | itemWidth                | Width of the timeline section in `HORIZONTAL` mode.                                                                                                  | 300                    |
 | items                    | Collection of [Timeline Item Model](#timeline-item-model).                                                                                           | []                     |
 | lineWidth                | Prop to customize the width of the timeline track line.                                                                                              | 3px                    |
+| mediaHeight              | Sets the minimum height of the media element. Applicable only when a image or a video is embedded in the card                                        | 200                    |
 | mode                     | Sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING`.                                                           | `VERTICAL_ALTERNATING` |
 | onItemSelected           | Callback invoked on a item selection. passes all of the data pertinent to the item.                                                                  |                        |
 | onScrollEnd              | Use the `onScrollEnd` to detect the end of the timeline.                                                                                             |                        |
@@ -181,8 +184,6 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | theme                    | Prop to customize the colors.                                                                                                                        |                        |
 | timelineCircleDimension  | Dimensions of the circular points on the timeline                                                                                                    | false                  |
 | useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself. | true                   |
-| mediaHeight              | Sets the minimum height of the media element. Applicable only when a image or a video is embedded in the card                                        | 200                    |
-| classNames               | Prop to apply custom class names for the different card elements                                                                                     |                        |
 
 ### Mode
 

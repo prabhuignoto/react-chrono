@@ -92,6 +92,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
   cardHeight?: number;
   contentHeight?: number;
   customContent?: boolean;
+  height?: number;
   showMore?: boolean;
   theme?: Theme;
   useReadMore?: boolean;
@@ -102,13 +103,13 @@ export const TimelineContentDetailsWrapper = styled.div<{
   margin: 0 auto;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  ${(p) =>
-    p.useReadMore && !p.customContent && !p.showMore
-      ? 'max-height: 150px;'
+  ${({ useReadMore, customContent, showMore, height = 0 }) =>
+    useReadMore && !customContent && !showMore
+      ? `max-height: ${height}px;`
       : ''}
-  ${(p) =>
-    p.showMore
-      ? `max-height: ${(p.cardHeight || 0) + (p.contentHeight || 0) - 150}px;`
+  ${({ cardHeight = 0, contentHeight = 0, height = 0, showMore }) =>
+    showMore
+      ? `max-height: ${(cardHeight || 0) + (contentHeight || 0) - height}px;`
       : ''}
   overflow-x: hidden;
   overflow-y: auto;
@@ -118,17 +119,21 @@ export const TimelineContentDetailsWrapper = styled.div<{
   width: ${(p) => (p.borderLess ? '100%' : '95%')};
   padding: 0.25em 0.5em;
 
-  ${(p) =>
-    p.showMore && p.useReadMore
+  ${({
+    height = 0,
+    cardHeight = 0,
+    contentHeight = 0,
+    showMore,
+    useReadMore,
+  }) =>
+    showMore && useReadMore
       ? css`
           animation: ${keyframes`
             0% {
-              max-height: 150px;
+              max-height: ${height}px;
             }
             100% {
-             max-height: ${
-               (p.cardHeight || 0) + (p.contentHeight || 0) - 150
-             }px;
+             max-height: ${cardHeight + contentHeight - height}px;
             }
           `} 0.25s ease-in-out;
         `
