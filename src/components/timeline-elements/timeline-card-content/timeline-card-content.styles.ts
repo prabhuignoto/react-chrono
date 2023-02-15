@@ -187,15 +187,6 @@ const slideAnimation = (start?: number, end?: number) => keyframes`
   }  
 `;
 
-const expandAnimation = keyframes`
-  0% {
-    max-height: 150px;
-  }
-  100% {
-    height: 1200px;
-  }
-`;
-
 export const SlideShowProgressBar = styled.span<{
   color?: string;
   duration?: number;
