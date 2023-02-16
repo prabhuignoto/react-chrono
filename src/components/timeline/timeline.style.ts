@@ -27,7 +27,7 @@ export const Wrapper = styled.div<{
       order: 2;
     }
     & > div:nth-of-type(2) {
-      order: 3; 
+      order: 3;
     }
     & > div:nth-of-type(3) {
       order: 1;
@@ -42,7 +42,7 @@ export const Wrapper = styled.div<{
       order: 2;
     }
     & > div:nth-of-type(2) {
-      order: 1; 
+      order: 1;
     }
   `
       : ''};
@@ -95,7 +95,7 @@ export const TimelineMainWrapper = styled.div<{
     height: 6rem;
   }
 
-  padding: ${(p) => (!p.scrollable ? '0 1rem 0' : '')};
+  padding: ${({ scrollable }) => (!scrollable ? '0 1rem 0' : '')};
 `;
 
 export const TimelineMain = styled.div`
