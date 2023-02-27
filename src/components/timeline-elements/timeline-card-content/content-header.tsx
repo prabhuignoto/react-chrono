@@ -1,4 +1,4 @@
-import { default as React, FunctionComponent, useContext } from 'react';
+import { FunctionComponent, useContext } from 'react';
 import { TimelineContentModel } from '../../../models/TimelineContentModel';
 import { GlobalContext } from '../../GlobalContext';
 import { MemoSubTitle, MemoTitle } from '../memoized';

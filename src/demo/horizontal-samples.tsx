@@ -20,7 +20,7 @@ export const HorizontalBasic: React.FunctionComponent<{
           items={data}
           mode="HORIZONTAL"
           cardHeight={250}
-          cardWidth={450}
+          cardWidth={650}
           slideShow
           slideItemDuration={2550}
           itemWidth={200}

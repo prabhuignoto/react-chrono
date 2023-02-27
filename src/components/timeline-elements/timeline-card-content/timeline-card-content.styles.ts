@@ -63,9 +63,10 @@ export const TimelineCardTitle = styled.p<{
   color: ${(p) => p.theme.cardForeColor};
   font-size: ${(p) => p.fontSize};
   font-weight: 600;
-  margin: 0.5rem 0;
+  margin: 0;
+  padding: 0;
   padding-left: 0.5em;
-  padding-top: 0.25em;
+
   &.active {
     color: ${(p) => p.theme.primary};
   }

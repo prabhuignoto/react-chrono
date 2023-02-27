@@ -159,6 +159,8 @@ export type TimelineProps = {
   // title for the timeline
   title?: string;
 
+  titleDateFormat?: string;
+
   // enables the read more button
   useReadMore?: boolean;
 };

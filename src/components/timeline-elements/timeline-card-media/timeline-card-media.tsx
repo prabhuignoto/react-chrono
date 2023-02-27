@@ -11,6 +11,8 @@ import { CardMediaModel } from '../../../models/TimelineMediaModel';
 import { GlobalContext } from '../../GlobalContext';
 import MaximizeIcon from '../../icons/maximize';
 import MinimizeIcon from '../../icons/minimize';
+import MinusIcon from '../../icons/minus';
+import PlusIcon from '../../icons/plus';
 import { MemoSubTitle, MemoTitle } from '../memoized';
 import {
   CardImage,
@@ -21,7 +23,9 @@ import {
   IFrameVideo,
   MediaDetailsWrapper,
   MediaWrapper,
+  ShowHideTextButton,
 } from './timeline-card-media.styles';
+
 interface ErrorMessageModel {
   message: string;
 }
@@ -41,6 +45,10 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);
   const moreRef = useRef(null);
+  const [detailsHeight, setDetailsHeight] = useState(0);
+  const [expandDetails, setExpandDetails] = useState(false);
+  const [showText, setShowText] = useState(true);
+  const [mediaLoaded, setMediaLoaded] = useState(false);
 
   const {
     mode,
@@ -66,14 +74,9 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     }
   }, [active]);
 
-  const [mediaLoaded, setMediaLoaded] = useState(false);
-
   const handleMediaLoaded = useCallback(() => {
     setMediaLoaded(true);
   }, []);
-
-  const [detailsHeight, setDetailsHeight] = useState(0);
-  const [expandDetails, setExpandDetails] = useState(false);
 
   const handleError = useCallback(() => {
     setLoadFailed(true);
@@ -177,17 +180,29 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         height={expandDetails ? detailsHeight : 0}
         expandFull={expandDetails}
         theme={theme}
+        show={showText}
       >
         {detailsText}
       </DetailsTextWrapper>
     ) : null;
-  }, [detailsHeight, expandDetails, textInsideMedia]);
+  }, [detailsHeight, expandDetails, textInsideMedia, showText]);
 
   const toggleExpand = useCallback(
     (ev: React.PointerEvent | React.KeyboardEvent) => {
       ev.preventDefault();
       ev.stopPropagation();
       setExpandDetails((prev) => !prev);
+      setShowText(true);
+    },
+    [],
+  );
+
+  const toggleText = useCallback(
+    (ev: React.PointerEvent | React.KeyboardEvent) => {
+      ev.preventDefault();
+      ev.stopPropagation();
+      setExpandDetails(false);
+      setShowText((prev) => !prev);
     },
     [],
   );
@@ -206,6 +221,19 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     ) : null;
   }, [expandDetails]);
 
+  const ShowOrHideTextButtonMemo = useMemo(() => {
+    return textInsideMedia ? (
+      <ShowHideTextButton
+        onPointerDown={toggleText}
+        theme={theme}
+        tabIndex={0}
+        onKeyDown={(ev) => ev.key === 'Enter' && toggleText(ev)}
+      >
+        {showText ? <MinusIcon /> : <PlusIcon />}
+      </ShowHideTextButton>
+    ) : null;
+  }, [showText]);
+
   const TextContent = useMemo(() => {
     return (
       <MediaDetailsWrapper
@@ -215,6 +243,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         ref={moreRef}
         theme={theme}
         expandFull={expandDetails}
+        showText={showText}
       >
         <MemoTitle
           title={title}
@@ -224,16 +253,19 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
           fontSize={fontSizes?.cardTitle}
           classString={classNames?.cardTitle}
         />
-        <MemoSubTitle
-          content={content}
-          fontSize={fontSizes?.cardSubtitle}
-          classString={classNames?.cardSubTitle}
-        />
+        {showText && (
+          <MemoSubTitle
+            content={content}
+            fontSize={fontSizes?.cardSubtitle}
+            classString={classNames?.cardSubTitle}
+          />
+        )}
+        {ShowOrHideTextButtonMemo}
         {ExpandButtonMemo}
         {DetailsTextMemo}
       </MediaDetailsWrapper>
     );
-  }, [DetailsTextMemo]);
+  }, [DetailsTextMemo, showText]);
 
   return (
     <>

@@ -27,7 +27,7 @@ const NewDemo: React.FunctionComponent = () => {
   const [state, setState] = useState(0);
 
   const [customTheme, setCustomTheme] = useState<Theme>({
-    cardBgColor: '#C0C0C0',
+    cardBgColor: '#f5f5f5',
     primary: '#000',
     secondary: '#FFA500',
   });
@@ -41,7 +41,7 @@ const NewDemo: React.FunctionComponent = () => {
       });
     } else {
       setCustomTheme({
-        cardBgColor: '#C0C0C0',
+        cardBgColor: '#f5f5f5',
         primary: '#000',
         secondary: '#FFA500',
         titleColorActive: '#000',

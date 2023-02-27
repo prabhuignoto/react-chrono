@@ -74,6 +74,7 @@ export const MediaDetailsWrapper = styled.div<{
   borderLessCard?: boolean;
   expandFull?: boolean;
   mode?: TimelineMode;
+  showText?: boolean;
   textInMedia?: boolean;
   theme?: Theme;
 }>`
@@ -100,6 +101,12 @@ export const MediaDetailsWrapper = styled.div<{
       `;
     }
 
+    if (!p.showText) {
+      return `
+        height: 10%;
+      `;
+    }
+
     if (p.textInMedia) {
       return `
         height: 50%;
@@ -116,8 +123,7 @@ export const MediaDetailsWrapper = styled.div<{
     background: rgba(255,255,255,0.95);
     backdrop-filter: blur(1px);
     padding: 0.25rem;
-    overflow: auto;
-    
+    ${p.showText ? `overflow: auto;` : `overflow: hidden;`}
     transition: height 0.25s ease;
   `
       : ``}
@@ -146,6 +152,7 @@ export const IFrameVideo = styled.iframe`
 export const DetailsTextWrapper = styled.div<{
   expandFull?: boolean;
   height?: number;
+  show?: boolean;
   theme?: Theme;
 }>`
   align-self: center;
@@ -179,31 +186,55 @@ export const DetailsTextWrapper = styled.div<{
       `;
     }
   }}
+
+  ${(p) =>
+    p.show
+      ? `
+    height: 100%;`
+      : `
+    height: 0;
+  `}
 `;
 
-export const ExpandButton = styled.button<{
-  expandFull?: boolean;
-  theme: Theme;
-}>`
-  position: absolute;
-  right: 0.5rem;
-  top: 0.5rem;
-  background: none;
-  border: none;
-  display: flex;
+const Button = styled.button`
   align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  padding: 0;
-  cursor: pointer;
-  border-radius: 50%;
+  background: none;
   background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  height: 1.5rem;
+  justify-content: center;
+  padding: 0;
+  position: absolute;
+  width: 1.5rem;
+  z-index: 10px;
 
   svg {
     width: 70%;
     height: 70%;
   }
+`;
+
+export const ExpandButton = styled(Button)<{
+  expandFull?: boolean;
+  theme: Theme;
+}>`
+  right: 0.5rem;
+  top: 0.5rem;
+
+  &:hover {
+    color: ${(p) => p.theme?.primary};
+  }
+`;
+
+export const ShowHideTextButton = styled(Button)<{
+  showText?: boolean;
+  theme: Theme;
+}>`
+  top: 0.5rem;
+  right: 2.5rem;
 
   &:hover {
     color: ${(p) => p.theme?.primary};

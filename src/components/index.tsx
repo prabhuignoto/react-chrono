@@ -18,6 +18,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     slideShow = false,
     onItemSelected,
     activeItemIndex = 0,
+    titleDateFormat = 'MMM DD, YYYY',
   } = props;
 
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
@@ -32,6 +33,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
             _dayjs: dayjs(item.date),
             active: index === activeItemIndex,
             id: Math.random().toString(16).slice(2),
+            title: item.date
+              ? dayjs(item.date).format(titleDateFormat)
+              : item.title,
             visible: true,
           });
         })

@@ -42,6 +42,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       showAllCardsHorizontal: false,
       textInsideMedia: false,
       timelineCircleDimension: 16,
+      titleDateFormat: 'MMM DD, YYYY',
       useReadMore: true,
     },
     {
