@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import 'focus-visible';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { TimelineItemModel } from '../models/TimelineItemModel';
@@ -28,6 +29,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     return lineItems && lineItems.length
       ? lineItems.map((item, index) => {
           return Object.assign({}, item, {
+            _dayjs: dayjs(item.date),
             active: index === activeItemIndex,
             id: Math.random().toString(16).slice(2),
             visible: true,
@@ -37,7 +39,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
           length: React.Children.toArray(children).filter(
             (item) => (item as any).props.className !== 'chrono-icons',
           ).length,
-        }).map<Partial<TimelineItemModel>>((item, index) => ({
+        }).map<TimelineItemModel>((item, index) => ({
           active: index === activeItemIndex,
           id: Math.random().toString(16).slice(2),
           visible: true,

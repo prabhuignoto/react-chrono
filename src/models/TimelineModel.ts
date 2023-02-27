@@ -38,9 +38,18 @@ export type TimelineModel = Pick<
  * @interface TimelineProps
  */
 export type TimelineProps = {
+  // active item index
   activeItemIndex?: number;
+
+  alignMedia?: 'left' | 'right' | 'center';
+
+  // allow dynamic update of the timeline items
   allowDynamicUpdate?: boolean;
+
+  // removes the borders from the cards
   borderLessCards?: boolean;
+
+  // custom button texts
   buttonTexts?: {
     first: string;
     last: string;
@@ -48,11 +57,22 @@ export type TimelineProps = {
     play?: string;
     previous?: string;
   };
+
+  // minimum height of the card
   cardHeight?: number;
+
+  // remove/hide cards
   cardLess?: boolean;
+
+  // position of the card in horizontal mode
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
+
+  // minimum width of the card
   cardWidth?: number;
+
   children?: React.ReactElement | React.ReactElement[];
+
+  // custom class names for the different elements
   classNames?: {
     card?: string;
     cardMedia?: string;
@@ -62,35 +82,84 @@ export type TimelineProps = {
     controls?: string;
     title?: string;
   };
+
+  // height of the details text
   contentDetailsHeight?: number;
+
+  // disables the auto scroll on click
   disableAutoScrollOnClick?: boolean;
+  // disables the click on the circle
   disableClickOnCircle?: boolean;
+
   disableNavOnKey?: boolean;
+
+  // enables the outline view
   enableOutline?: boolean;
+
+  // flips the layout, useful for RTL
   flipLayout?: boolean;
+
+  // focus the active item on load
   focusActiveItemOnLoad?: boolean;
+
+  // custom font sizes
   fontSizes?: {
     cardSubtitle?: string;
     cardText?: string;
     cardTitle?: string;
     title?: string;
   };
+
+  // hides the ui controls
   hideControls?: boolean;
+
   itemWidth?: number;
+
+  // collection of timeline items
   items?: TimelineItemModel[];
+
+  // width of the timeline line
   lineWidth?: number;
+
+  // minimum height of the media element
   mediaHeight?: number;
+
+  // mode of the timeline. VERTICAL, HORIZONTAL, VERTICAL_ALTERNATING
   mode?: TimelineMode;
+
+  // callback when an item is selected
   onItemSelected?: (data: TimelineItemModel) => void;
+
+  // callback when the slideshow is restarted
   onRestartSlideshow?: () => void;
+
+  // callback when the scroll ends
   onScrollEnd?: () => void;
+
+  // option to enable scrollbar
   scrollable?: boolean | { scrollbar: boolean };
+
+  // show all cards in horizontal mode
   showAllCardsHorizontal?: boolean;
+
+  // duration each slide is shown
   slideItemDuration?: number;
+
+  // enables the slideshow
   slideShow?: boolean;
+
+  textInsideMedia?: boolean;
+
+  // custom theme
   theme?: Theme;
+
+  // width of the timeline circle
   timelineCircleDimension?: number;
+
+  // title for the timeline
   title?: string;
+
+  // enables the read more button
   useReadMore?: boolean;
 };
 

@@ -32,12 +32,20 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   media,
   slideshowActive,
   url,
+  detailsText,
 }: CardMediaModel) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);
 
-  const { mode, fontSizes, classNames, mediaHeight } =
-    useContext(GlobalContext);
+  const {
+    mode,
+    fontSizes,
+    classNames,
+    mediaHeight,
+    alignMedia,
+    borderLessCards,
+    textInsideMedia,
+  } = useContext(GlobalContext);
 
   useEffect(() => {
     if (!videoRef) {
@@ -141,11 +149,33 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         active={active}
         alt={media.name}
         loading={'lazy'}
+        enableBorderRadius={borderLessCards}
       />
     );
-  }, [active, mediaLoaded]);
+  }, [active, mediaLoaded, borderLessCards]);
 
   ErrorMessageMem.displayName = 'Error Message';
+
+  const TextContent = useMemo(() => {
+    return (
+      <MediaDetailsWrapper mode={mode} absolutePosition={textInsideMedia}>
+        <MemoTitle
+          title={title}
+          theme={theme}
+          active={active}
+          url={url}
+          fontSize={fontSizes?.cardTitle}
+          classString={classNames?.cardTitle}
+        />
+        <MemoSubTitle
+          content={content}
+          fontSize={fontSizes?.cardSubtitle}
+          classString={classNames?.cardSubTitle}
+        />
+        {textInsideMedia ? detailsText : null}
+      </MediaDetailsWrapper>
+    );
+  }, []);
 
   return (
     <>
@@ -156,6 +186,8 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         slideShowActive={slideshowActive}
         className={cls('card-media-wrapper', classNames?.cardMedia)}
         cardHeight={mediaHeight}
+        align={alignMedia}
+        fullHeight={textInsideMedia}
       >
         {media.type === 'VIDEO' &&
           !isYouTube &&
@@ -172,21 +204,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             <ErrorMessageMem message="Failed to load the image." />
           ))}
       </MediaWrapper>
-      <MediaDetailsWrapper mode={mode}>
-        <MemoTitle
-          title={title}
-          theme={theme}
-          active={active}
-          url={url}
-          fontSize={fontSizes?.cardTitle}
-          classString={classNames?.cardTitle}
-        />
-        <MemoSubTitle
-          content={content}
-          fontSize={fontSizes?.cardSubtitle}
-          classString={classNames?.cardSubTitle}
-        />
-      </MediaDetailsWrapper>
+      {TextContent}
     </>
   );
 };

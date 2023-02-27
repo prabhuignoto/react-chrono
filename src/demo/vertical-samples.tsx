@@ -118,6 +118,7 @@ export const VerticalBasic: FunctionComponent<{
         cardWidth={650}
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
+        borderLessCards
         theme={{
           cardBgColor: '#fff',
           cardForeColor: 'blue',
@@ -137,6 +138,7 @@ export const VerticalBasic: FunctionComponent<{
         classNames={{
           cardText: 'custom-text',
         }}
+        textInsideMedia
       />
     </ComponentContainerTree>
   </Vertical>
@@ -175,6 +177,7 @@ export const VerticalCustomContent2: FunctionComponent<{
         cardWidth={650}
         scrollable
         flipLayout
+        timelineCircleDimension={30}
       >
         <div>
           <div style={{ width: '250px', height: '250px' }}>

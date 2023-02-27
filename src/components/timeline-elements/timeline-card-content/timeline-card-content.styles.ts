@@ -94,6 +94,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
   customContent?: boolean;
   height?: number;
   showMore?: boolean;
+  textInsideMedia?: boolean;
   theme?: Theme;
   useReadMore?: boolean;
 }>`
@@ -103,12 +104,18 @@ export const TimelineContentDetailsWrapper = styled.div<{
   margin: 0 auto;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  ${({ useReadMore, customContent, showMore, height = 0 }) =>
-    useReadMore && !customContent && !showMore
+  ${({ useReadMore, customContent, showMore, height = 0, textInsideMedia }) =>
+    useReadMore && !customContent && !showMore && !textInsideMedia
       ? `max-height: ${height}px;`
       : ''}
-  ${({ cardHeight = 0, contentHeight = 0, height = 0, showMore }) =>
-    showMore
+  ${({
+    cardHeight = 0,
+    contentHeight = 0,
+    height = 0,
+    showMore,
+    textInsideMedia,
+  }) =>
+    showMore && !textInsideMedia
       ? `max-height: ${(cardHeight || 0) + (contentHeight || 0) - height}px;`
       : ''}
   overflow-x: hidden;
@@ -176,10 +183,10 @@ export const ShowMore = styled.span<{ show?: boolean; theme?: Theme }>`
   margin-right: 0.5em;
   margin-top: auto;
   padding: 0.25em;
+  color: ${(p) => p.theme.primary};
 
   &:hover {
-    /* background: ${(p) => p.theme.primary}; */
-    color: ${(p) => p.theme.primary};
+    text-decoration: underline;
   }
 `;
 

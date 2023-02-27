@@ -23,6 +23,7 @@ export interface CardMediaModel {
   active?: boolean;
   cardHeight?: number;
   content?: string | ReactNode;
+  detailsText?: ReactNode;
   hideMedia: boolean;
   id?: string;
   media: Media;

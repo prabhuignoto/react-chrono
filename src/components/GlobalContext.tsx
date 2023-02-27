@@ -15,10 +15,12 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
     theme,
     buttonTexts,
     classNames,
+    mode,
   } = props;
   const defaultProps = Object.assign<PropsModel, PropsModel, PropsModel>(
     {},
     {
+      alignMedia: mode === 'VERTICAL' ? 'left' : 'center',
       borderLessCards: false,
       cardLess: false,
       contentDetailsHeight: 150,
@@ -38,6 +40,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         scrollbar: false,
       },
       showAllCardsHorizontal: false,
+      textInsideMedia: false,
       timelineCircleDimension: 16,
       useReadMore: true,
     },

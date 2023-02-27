@@ -70,6 +70,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         fontSizes,
         classNames,
         contentDetailsHeight,
+        textInsideMedia,
       } = useContext(GlobalContext);
 
       const canShowProgressBar = useMemo(() => {
@@ -276,6 +277,30 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
       }, [timelineContent, showMore]);
 
+      const DetailsText = useMemo(() => {
+        return (
+          <>
+            {/* detailed text */}
+            <TimelineContentDetailsWrapper
+              aria-expanded={showMore}
+              className={contentDetailsClass}
+              customContent={!!customContent}
+              ref={detailsRef}
+              theme={theme}
+              useReadMore={useReadMore}
+              borderLess={borderLessCards}
+              showMore={showMore}
+              cardHeight={cardActualHeight}
+              contentHeight={detailsHeight}
+              height={contentDetailsHeight}
+              textInsideMedia={textInsideMedia}
+            >
+              {customContent ? customContent : getTextOrContent}
+            </TimelineContentDetailsWrapper>
+          </>
+        );
+      }, [showMore, cardActualHeight, contentDetailsHeight, detailsHeight]);
+
       return (
         <TimelineItemContentWrapper
           className={contentClass}
@@ -308,7 +333,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             media={media}
             content={content}
           />
-
           {/* render media video or image */}
           {media && (
             <CardMedia
@@ -323,40 +347,26 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               theme={theme}
               title={title}
               url={url}
+              detailsText={DetailsText}
             />
           )}
-
-          {/* detailed text */}
-          <TimelineContentDetailsWrapper
-            aria-expanded={showMore}
-            className={contentDetailsClass}
-            customContent={!!customContent}
-            ref={detailsRef}
-            theme={theme}
-            useReadMore={useReadMore}
-            borderLess={borderLessCards}
-            showMore={showMore}
-            cardHeight={cardActualHeight}
-            contentHeight={detailsHeight}
-            height={contentDetailsHeight}
-          >
-            {customContent ? customContent : getTextOrContent}
-          </TimelineContentDetailsWrapper>
-
-          <ContentFooter
-            theme={theme}
-            progressRef={progressRef}
-            startWidth={startWidth}
-            textContentIsLarge={textContentLarge}
-            remainInterval={remainInterval}
-            paused={paused}
-            triangleDir={triangleDir}
-            showProgressBar={canShowProgressBar}
-            showReadMore={canShowReadMore}
-            onExpand={handleExpandDetails}
-            canShow={canShowMore}
-            showMore={showMore}
-          />
+          {!textInsideMedia && DetailsText}
+          {!textInsideMedia && (
+            <ContentFooter
+              theme={theme}
+              progressRef={progressRef}
+              startWidth={startWidth}
+              textContentIsLarge={textContentLarge}
+              remainInterval={remainInterval}
+              paused={paused}
+              triangleDir={triangleDir}
+              showProgressBar={canShowProgressBar}
+              showReadMore={canShowReadMore}
+              onExpand={handleExpandDetails}
+              canShow={canShowMore}
+              showMore={showMore}
+            />
+          )}
         </TimelineItemContentWrapper>
       );
     },

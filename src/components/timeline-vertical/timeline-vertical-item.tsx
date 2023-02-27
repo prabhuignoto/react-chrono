@@ -138,7 +138,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
           flip={flipLayout}
           height={cardHeight}
         >
-          {!cardLess && (
+          {!cardLess ? (
             <TimelineCard
               active={active}
               branchDir={className}
@@ -158,7 +158,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
               flip={flipLayout}
               timelineContent={timelineContent}
             />
-          )}
+          ) : null}
         </TimelineCardContentWrapper>
         <Circle />
       </VerticalItemWrapper>

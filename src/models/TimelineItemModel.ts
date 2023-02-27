@@ -10,11 +10,13 @@ import { TimelineMode } from './TimelineModel';
  * @interface TimelineItemModel
  */
 export interface TimelineItemModel {
+  _dayjs?: any;
   active?: boolean;
   cardDetailedText?: string | string[];
   cardSubtitle?: string;
   cardTitle?: string;
   content?: ReactNode | ReactNode[];
+  date?: number | string | Date;
   id?: string;
   media?: Media;
   position?: string;
