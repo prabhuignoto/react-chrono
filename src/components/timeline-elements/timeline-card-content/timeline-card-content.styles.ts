@@ -49,7 +49,7 @@ export const TimelineContentSubTitle = styled.p<{
   color: ${(p) => p.theme.primary};
   font-size: ${(p) => p.fontSize};
   font-weight: 600;
-  margin: 0;
+  margin: 0.5rem 0;
   padding-left: 0.5rem;
   text-align: left;
   width: 97%;
