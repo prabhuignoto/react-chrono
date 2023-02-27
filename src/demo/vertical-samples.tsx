@@ -22,6 +22,9 @@ export const VerticalTree: FunctionComponent<{
           slideItemDuration={2350}
           allowDynamicUpdate
           // cardHeight={100}
+          cardHeight={200}
+          textInsideMedia
+          mediaHeight={400}
           focusActiveItemOnLoad
           activeItemIndex={4}
           cardWidth={450}
@@ -113,12 +116,12 @@ export const VerticalBasic: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         items={items}
-        mode="VERTICAL"
+        mode="VERTICAL_ALTERNATING"
         slideShow
-        cardWidth={650}
+        cardWidth={450}
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
-        borderLessCards
+        // borderLessCards
         theme={{
           cardBgColor: '#fff',
           cardForeColor: 'blue',
@@ -130,15 +133,14 @@ export const VerticalBasic: FunctionComponent<{
         fontSizes={{
           title: '1.2rem',
         }}
-        focusActiveItemOnLoad
-        activeItemIndex={9}
+        // focusActiveItemOnLoad
+        // activeItemIndex={9}
         cardHeight={400}
         contentDetailsHeight={100}
         timelineCircleDimension={20}
         classNames={{
           cardText: 'custom-text',
         }}
-        textInsideMedia
       />
     </ComponentContainerTree>
   </Vertical>

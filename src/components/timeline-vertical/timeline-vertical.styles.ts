@@ -30,6 +30,7 @@ export const VerticalItemWrapper = styled.div<{
   visibility: hidden;
   width: 100%;
   align-items: stretch;
+  margin: 1rem 0;
 
   &.left {
     margin-right: auto;
@@ -65,6 +66,21 @@ export const VerticalCircleWrapper = styled.div<{
     order: 1;
   }
 
+  &::before {
+    background: ${(p) => p.bg};
+    width: ${(p) => (p.width ? `${p.width}px` : '4px')};
+    height: 2rem;
+    position: absolute;
+    content: '';
+    display: block;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: -1rem;
+    right: 0;
+    transform: translateY(-50%);
+  }
+
   &::after {
     background: ${(p) => p.bg};
     content: '';
@@ -91,7 +107,6 @@ export const TimelineCardContentWrapper = styled.div<{
   position: relative;
   display: flex;
   align-items: center;
-  min-height: ${(p) => (p.height ? `${p.height}px` : '80px')};
   ${(p) => {
     if (p.alternateCards) {
       return `width: 50%;`;

@@ -71,6 +71,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         classNames,
         contentDetailsHeight,
         textInsideMedia,
+        mediaHeight,
       } = useContext(GlobalContext);
 
       const canShowProgressBar = useMemo(() => {
@@ -290,7 +291,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               useReadMore={useReadMore}
               borderLess={borderLessCards}
               showMore={showMore}
-              cardHeight={cardActualHeight}
+              cardHeight={!textInsideMedia ? cardActualHeight : null}
               contentHeight={detailsHeight}
               height={contentDetailsHeight}
               textInsideMedia={textInsideMedia}
@@ -299,12 +300,18 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             </TimelineContentDetailsWrapper>
           </>
         );
-      }, [showMore, cardActualHeight, contentDetailsHeight, detailsHeight]);
+      }, [
+        showMore,
+        cardActualHeight,
+        contentDetailsHeight,
+        detailsHeight,
+        textInsideMedia,
+      ]);
 
       return (
         <TimelineItemContentWrapper
           className={contentClass}
-          minHeight={cardHeight}
+          minHeight={textInsideMedia && media ? mediaHeight : cardHeight}
           maxWidth={cardWidth}
           mode={mode}
           noMedia={!media}
@@ -347,7 +354,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               theme={theme}
               title={title}
               url={url}
-              detailsText={DetailsText}
+              detailsText={getTextOrContent}
             />
           )}
           {!textInsideMedia && DetailsText}

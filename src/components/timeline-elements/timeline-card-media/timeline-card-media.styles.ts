@@ -7,9 +7,9 @@ export const MediaWrapper = styled.div<{
   align?: 'left' | 'right' | 'center';
   cardHeight?: number;
   dir?: string;
-  fullHeight?: boolean;
   mode?: TimelineMode;
   slideShowActive?: boolean;
+  textInsideMedia?: boolean;
   theme?: Theme;
 }>`
   ${(p) => (p.cardHeight ? `min-height: ${p.cardHeight}px;` : '')};
@@ -18,12 +18,12 @@ export const MediaWrapper = styled.div<{
   background: ${(p) => (p.active ? `rgba(${p.theme?.secondary}, 0.35)` : '')};
   border-radius: 4px;
   flex-direction: row;
+  height: ${(p) => (p.textInsideMedia ? 'calc(100% - 1em)' : '0')};
   padding: 0.5em;
   pointer-events: ${(p) => (!p.active && p.slideShowActive ? 'none' : '')};
   position: relative;
   text-align: ${(p) => p.align};
   width: calc(100% - 1em);
-  height: ${(p) => (p.fullHeight ? 'calc(100% - 1em)' : '0')};
 
   ${(p) => {
     if (p.mode === 'HORIZONTAL') {
@@ -71,7 +71,11 @@ export const CardVideo = styled.video<{ height?: number }>`
 
 export const MediaDetailsWrapper = styled.div<{
   absolutePosition?: boolean;
+  borderLessCard?: boolean;
+  expandFull?: boolean;
   mode?: TimelineMode;
+  textInMedia?: boolean;
+  theme?: Theme;
 }>`
   bottom: 0;
   left: 0;
@@ -80,29 +84,47 @@ export const MediaDetailsWrapper = styled.div<{
   width: ${(p) => {
     switch (p.mode) {
       case 'HORIZONTAL':
-        return '100%';
       case 'VERTICAL':
-        return '100%';
       case 'VERTICAL_ALTERNATING':
-        return '100%';
+        return `calc(100% - 0rem)`;
     }
   }};
   display: flex;
   flex-direction: column;
   flex: 1;
-  border-radius: 6px;
-  // padding-bottom: 0.5em;
+  overflow: hidden;
+  ${(p) => {
+    if (p.textInMedia && p.expandFull) {
+      return `
+        height: 100%;
+      `;
+    }
+
+    if (p.textInMedia) {
+      return `
+        height: 50%;
+      `;
+    }
+  }}
   position: ${(p) => (p.absolutePosition ? 'absolute' : 'relative')};
-  background: ${(p) =>
-    p.absolutePosition ? 'rgba(255,255,255,0.9)' : 'transparent'};
   ${(p) =>
     p.absolutePosition
       ? `
     left: 50%;
-    bottom: 0;
+    bottom: 0%;
     transform: translateX(-50%);
-    padding: 0.5rem;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(1px);
+    padding: 0.25rem;
+    overflow: auto;
+    
+    transition: height 0.25s ease;
   `
+      : ``}
+
+  ${({ borderLessCard }) =>
+    borderLessCard
+      ? `border-radius: 6px; box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);`
       : ``}
 `;
 
@@ -119,4 +141,71 @@ export const IFrameVideo = styled.iframe`
   position: relative;
   height: 100%;
   width: 100%;
+`;
+
+export const DetailsTextWrapper = styled.div<{
+  expandFull?: boolean;
+  height?: number;
+  theme?: Theme;
+}>`
+  align-self: center;
+  display: flex;
+  transition: height 0.5s ease;
+
+  scrollbar-color: ${(p) => p.theme?.primary} default;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 0.3em;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${(p) => p.theme?.primary};
+    outline: 1px solid ${(p) => p.theme?.primary};
+  }
+
+  ${(p) => {
+    if (p.expandFull) {
+      return `
+        overflow: auto;
+      `;
+    } else {
+      return `
+        overflow: hidden;
+      `;
+    }
+  }}
+`;
+
+export const ExpandButton = styled.button<{
+  expandFull?: boolean;
+  theme: Theme;
+}>`
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+
+  svg {
+    width: 70%;
+    height: 70%;
+  }
+
+  &:hover {
+    color: ${(p) => p.theme?.primary};
+  }
 `;

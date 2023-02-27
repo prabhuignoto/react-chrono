@@ -23,7 +23,7 @@ export const TimelineItemContentWrapper = styled.section<{
     p.mode === 'HORIZONTAL'
       ? '0 auto'
       : p.mode !== 'VERTICAL_ALTERNATING'
-      ? '1em 0'
+      ? ''
       : ''};
   max-width: ${(p) => p.maxWidth}px;
   min-height: ${(p) => p.minHeight}px;
@@ -89,7 +89,7 @@ export const TimelineSubContent = styled.span<{ fontSize?: string }>`
 
 export const TimelineContentDetailsWrapper = styled.div<{
   borderLess?: boolean;
-  cardHeight?: number;
+  cardHeight?: number | null;
   contentHeight?: number;
   customContent?: boolean;
   height?: number;
@@ -123,7 +123,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
   scrollbar-color: ${(p) => p.theme?.primary} default;
   scrollbar-width: thin;
   transition: max-height 0.25s ease-in-out;
-  width: ${(p) => (p.borderLess ? '100%' : '95%')};
+  width: ${(p) => (p.borderLess ? 'calc(100% - 1em)' : 'calc(95% - 1em)')};
   padding: 0.25em 0.5em;
 
   ${({
@@ -133,7 +133,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
     showMore,
     useReadMore,
   }) =>
-    showMore && useReadMore
+    showMore && useReadMore && cardHeight
       ? css`
           animation: ${keyframes`
             0% {
