@@ -355,23 +355,31 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               title={title}
               url={url}
               detailsText={getTextOrContent}
+              startWidth={startWidth}
+              paused={paused}
+              remainInterval={remainInterval}
+              showProgressBar={canShowProgressBar}
             />
           )}
+
           {!textInsideMedia && DetailsText}
-          <ContentFooter
-            theme={theme}
-            progressRef={progressRef}
-            startWidth={startWidth}
-            textContentIsLarge={textContentLarge}
-            remainInterval={remainInterval}
-            paused={paused}
-            triangleDir={triangleDir}
-            showProgressBar={canShowProgressBar}
-            showReadMore={canShowReadMore}
-            onExpand={handleExpandDetails}
-            canShow={canShowMore}
-            showMore={showMore}
-          />
+
+          {(!textInsideMedia || !media) && (
+            <ContentFooter
+              theme={theme}
+              progressRef={progressRef}
+              startWidth={startWidth}
+              textContentIsLarge={textContentLarge}
+              remainInterval={remainInterval}
+              paused={paused}
+              triangleDir={triangleDir}
+              showProgressBar={canShowProgressBar}
+              showReadMore={canShowReadMore}
+              onExpand={handleExpandDetails}
+              canShow={canShowMore}
+              showMore={showMore}
+            />
+          )}
         </TimelineItemContentWrapper>
       );
     },

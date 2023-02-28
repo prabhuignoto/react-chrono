@@ -15,6 +15,7 @@ import {
   MemoTitle,
   ShowOrHideTextButtonMemo,
 } from '../memoized';
+import { SlideShowProgressBar } from '../timeline-card-content/timeline-card-content.styles';
 import {
   CardImage,
   CardVideo,
@@ -40,6 +41,10 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   slideshowActive,
   url,
   detailsText,
+  showProgressBar,
+  remainInterval,
+  startWidth,
+  paused,
 }: CardMediaModel) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);
@@ -48,6 +53,9 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   const [expandDetails, setExpandDetails] = useState(false);
   const [showText, setShowText] = useState(true);
   const [mediaLoaded, setMediaLoaded] = useState(false);
+  const progressRef = useRef<HTMLDivElement>(null);
+
+  console.log(showProgressBar, remainInterval, startWidth);
 
   const {
     mode,
@@ -232,18 +240,22 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             classString={classNames?.cardSubTitle}
           />
         )}
-        <ShowOrHideTextButtonMemo
-          onToggle={toggleText}
-          show={showText}
-          textInsideMedia
-          theme={theme}
-        />
-        <ExpandButtonMemo
-          theme={theme}
-          expanded={expandDetails}
-          onExpand={toggleExpand}
-          textInsideMedia
-        />
+        {textInsideMedia ? (
+          <>
+            <ShowOrHideTextButtonMemo
+              onToggle={toggleText}
+              show={showText}
+              textInsideMedia
+              theme={theme}
+            />
+            <ExpandButtonMemo
+              theme={theme}
+              expanded={expandDetails}
+              onExpand={toggleExpand}
+              textInsideMedia
+            />
+          </>
+        ) : null}
         {DetailsTextMemo}
       </MediaDetailsWrapper>
     );
@@ -275,6 +287,16 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
           ) : (
             <ErrorMessageMem message="Failed to load the image." />
           ))}
+
+        {showProgressBar && textInsideMedia && (
+          <SlideShowProgressBar
+            color={theme?.primary}
+            duration={remainInterval}
+            paused={paused}
+            ref={progressRef}
+            startWidth={startWidth}
+          ></SlideShowProgressBar>
+        )}
       </MediaWrapper>
       {TextContent}
     </>

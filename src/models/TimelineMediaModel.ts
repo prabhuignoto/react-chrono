@@ -28,7 +28,11 @@ export interface CardMediaModel {
   id?: string;
   media: Media;
   onMediaStateChange: (state: MediaState) => void;
+  paused?: boolean;
+  remainInterval?: number;
+  showProgressBar?: boolean;
   slideshowActive?: boolean;
+  startWidth?: number;
   theme?: Theme;
   title?: string;
   url?: string;

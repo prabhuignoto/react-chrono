@@ -19,14 +19,12 @@ export const VerticalTree: FunctionComponent<{
           mode="VERTICAL_ALTERNATING"
           theme={theme}
           slideShow
-          slideItemDuration={2350}
+          slideItemDuration={22350}
           allowDynamicUpdate
-          // cardHeight={100}
           cardHeight={200}
           textInsideMedia
           mediaHeight={400}
           focusActiveItemOnLoad
-          activeItemIndex={4}
           cardWidth={450}
           onItemSelected={(selected) => console.log(selected.cardTitle)}
           onScrollEnd={() => console.log('end reached')}
