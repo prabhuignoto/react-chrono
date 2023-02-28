@@ -9,21 +9,20 @@ import React, {
 } from 'react';
 import { CardMediaModel } from '../../../models/TimelineMediaModel';
 import { GlobalContext } from '../../GlobalContext';
-import MaximizeIcon from '../../icons/maximize';
-import MinimizeIcon from '../../icons/minimize';
-import MinusIcon from '../../icons/minus';
-import PlusIcon from '../../icons/plus';
-import { MemoSubTitle, MemoTitle } from '../memoized';
+import {
+  ExpandButtonMemo,
+  MemoSubTitle,
+  MemoTitle,
+  ShowOrHideTextButtonMemo,
+} from '../memoized';
 import {
   CardImage,
   CardVideo,
   DetailsTextWrapper,
   ErrorMessage,
-  ExpandButton,
   IFrameVideo,
   MediaDetailsWrapper,
   MediaWrapper,
-  ShowHideTextButton,
 } from './timeline-card-media.styles';
 
 interface ErrorMessageModel {
@@ -207,33 +206,6 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     [],
   );
 
-  const ExpandButtonMemo = useMemo(() => {
-    return textInsideMedia ? (
-      <ExpandButton
-        onPointerDown={toggleExpand}
-        onKeyDown={(ev) => ev.key === 'Enter' && toggleExpand(ev)}
-        theme={theme}
-        aria-expanded={expandDetails}
-        tabIndex={0}
-      >
-        {expandDetails ? <MinimizeIcon /> : <MaximizeIcon />}
-      </ExpandButton>
-    ) : null;
-  }, [expandDetails]);
-
-  const ShowOrHideTextButtonMemo = useMemo(() => {
-    return textInsideMedia ? (
-      <ShowHideTextButton
-        onPointerDown={toggleText}
-        theme={theme}
-        tabIndex={0}
-        onKeyDown={(ev) => ev.key === 'Enter' && toggleText(ev)}
-      >
-        {showText ? <MinusIcon /> : <PlusIcon />}
-      </ShowHideTextButton>
-    ) : null;
-  }, [showText]);
-
   const TextContent = useMemo(() => {
     return (
       <MediaDetailsWrapper
@@ -260,8 +232,18 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             classString={classNames?.cardSubTitle}
           />
         )}
-        {ShowOrHideTextButtonMemo}
-        {ExpandButtonMemo}
+        <ShowOrHideTextButtonMemo
+          onToggle={toggleText}
+          show={showText}
+          textInsideMedia
+          theme={theme}
+        />
+        <ExpandButtonMemo
+          theme={theme}
+          expanded={expandDetails}
+          onExpand={toggleExpand}
+          textInsideMedia
+        />
         {DetailsTextMemo}
       </MediaDetailsWrapper>
     );

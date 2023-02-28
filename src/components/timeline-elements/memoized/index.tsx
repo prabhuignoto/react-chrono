@@ -1,10 +1,18 @@
 import cls from 'classnames';
-import React from 'react';
+import React, { memo } from 'react';
+import { MaximizeIcon, MinimizeIcon, MinusIcon, PlusIcon } from '../../icons';
 import {
   TimelineCardTitle,
   TimelineContentSubTitle,
 } from '../timeline-card-content/timeline-card-content.styles';
-import { Content, Title } from './memoized-model';
+import { ExpandButton } from '../timeline-card-media/timeline-card-media.styles';
+import { ShowHideTextButton } from './../timeline-card-media/timeline-card-media.styles';
+import {
+  Content,
+  ExpandButtonModel,
+  ShowHideTextButtonModel,
+  Title,
+} from './memoized-model';
 
 const MemoTitle = ({
   title,
@@ -51,5 +59,41 @@ const MemoSubTitle = React.memo<Content>(
 );
 
 MemoSubTitle.displayName = 'Timeline Content';
+
+export const ExpandButtonMemo = memo<ExpandButtonModel>(
+  ({ theme, expanded, onExpand, textInsideMedia }: ExpandButtonModel) => {
+    return textInsideMedia ? (
+      <ExpandButton
+        onPointerDown={onExpand}
+        onKeyDown={(ev) => ev.key === 'Enter' && onExpand?.(ev)}
+        theme={theme}
+        aria-expanded={expanded}
+        tabIndex={0}
+      >
+        {expanded ? <MinimizeIcon /> : <MaximizeIcon />}
+      </ExpandButton>
+    ) : null;
+  },
+  (prev, next) => prev.expanded === next.expanded,
+);
+
+ExpandButtonMemo.displayName = 'Expand Button';
+
+export const ShowOrHideTextButtonMemo = memo<ShowHideTextButtonModel>(
+  ({ textInsideMedia, onToggle, theme, show }: ShowHideTextButtonModel) => {
+    return textInsideMedia ? (
+      <ShowHideTextButton
+        onPointerDown={onToggle}
+        theme={theme}
+        tabIndex={0}
+        onKeyDown={(ev) => ev.key === 'Enter' && onToggle?.(ev)}
+      >
+        {show ? <MinusIcon /> : <PlusIcon />}
+      </ShowHideTextButton>
+    ) : null;
+  },
+);
+
+ShowOrHideTextButtonMemo.displayName = 'Show Hide Text Button';
 
 export { MemoTitle, MemoSubTitle };
