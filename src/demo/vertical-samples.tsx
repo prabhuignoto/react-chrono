@@ -114,7 +114,7 @@ export const VerticalBasic: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         items={items}
-        mode="VERTICAL_ALTERNATING"
+        mode="VERTICAL"
         slideShow
         cardWidth={450}
         slideItemDuration={2500}

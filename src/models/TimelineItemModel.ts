@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { Theme } from './Theme';
 import { Scroll } from './TimelineHorizontalModel';
 import { Media } from './TimelineMediaModel';
-import { TimelineMode } from './TimelineModel';
+import { TimelineMode, TimelineProps } from './TimelineModel';
 /**
  *
  *
@@ -45,7 +45,6 @@ export type TimelineCardModel = Pick<
     timelinePointHeight,
     contentHeight,
   }: Partial<Scroll>) => void;
-  cardHeight?: number;
   customContent?: React.ReactNode | React.ReactNode[];
   hasFocus?: boolean;
   iconChild?: React.ReactNode;
@@ -56,4 +55,4 @@ export type TimelineCardModel = Pick<
   slideShowRunning?: boolean;
   theme?: Theme;
   wrapperId: string;
-};
+} & Pick<TimelineProps, 'cardHeight' | 'cardWidth'>;

@@ -122,6 +122,7 @@ export const TimelineTitleContainer = styled.div`
 
 export const TimelineContentContainer = styled.div<{
   active?: boolean;
+  cardWidth?: number;
   highlight?: boolean;
   position?: string;
   theme?: Theme;
@@ -135,7 +136,7 @@ export const TimelineContentContainer = styled.div<{
   margin: 1rem;
 
   &.horizontal {
-    min-width: 400px;
+    min-width: ${(p) => p.cardWidth}px;
   }
 
   &.vertical {

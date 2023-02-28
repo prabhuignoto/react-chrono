@@ -26,6 +26,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     flipLayout,
     showAllCardsHorizontal,
     theme,
+    cardWidth,
   } = useContext(GlobalContext);
 
   const wrapperClass = useMemo(
@@ -69,6 +70,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
             hasFocus={hasFocus}
             iconChild={iconChildColln[index]}
             active={item.active}
+            cardWidth={cardWidth}
           />
         </TimelineItemWrapper>
       ))}

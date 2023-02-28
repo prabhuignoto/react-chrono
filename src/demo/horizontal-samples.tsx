@@ -58,10 +58,10 @@ export const HorizontalAll: React.FunctionComponent<{
           items={data}
           mode="HORIZONTAL"
           cardHeight={250}
-          cardWidth={450}
-          slideShow
+          cardWidth={650}
+          // slideShow
           slideItemDuration={2550}
-          itemWidth={200}
+          itemWidth={400}
           focusActiveItemOnLoad
           onItemSelected={(selected) => console.log(selected)}
           timelineCircleDimension={20}

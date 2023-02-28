@@ -38,6 +38,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   hasFocus,
   iconChild,
   timelineContent,
+  cardWidth
 }: TimelineCardModel) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -114,6 +115,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         active={active}
         highlight={showAllCardsHorizontal}
         tabIndex={0}
+        cardWidth={cardWidth}
       >
         <TimelineCardContent
           content={cardSubtitle}
