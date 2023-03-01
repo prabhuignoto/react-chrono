@@ -180,20 +180,6 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     }
   }, []);
 
-  // const DetailsTextMemo = useMemo(() => {
-  //   return textInsideMedia ? (
-  //     <DetailsTextWrapper
-  //       ref={onDetailsTextRef}
-  //       height={expandDetails ? detailsHeight : 0}
-  //       expandFull={expandDetails}
-  //       theme={theme}
-  //       show={showText}
-  //     >
-  //       {detailsText}
-  //     </DetailsTextWrapper>
-  //   ) : null;
-  // }, [detailsHeight, expandDetails, textInsideMedia, showText]);
-
   const toggleExpand = useCallback(
     (ev: React.PointerEvent | React.KeyboardEvent) => {
       ev.preventDefault();
@@ -262,7 +248,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
           expand={expandDetails}
           text={detailsText}
           onRender={onDetailsTextRef}
-          textInsideMedia
+          textInsideMedia={textInsideMedia}
         />
       </MediaDetailsWrapper>
     );
