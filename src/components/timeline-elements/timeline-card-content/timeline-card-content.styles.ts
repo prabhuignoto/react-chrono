@@ -19,12 +19,7 @@ export const TimelineItemContentWrapper = styled.section<{
   flex-direction: column;
   justify-content: flex-start;
   line-height: 1.5em;
-  margin: ${(p) =>
-    p.mode === 'HORIZONTAL'
-      ? '0 auto'
-      : p.mode !== 'VERTICAL_ALTERNATING'
-      ? ''
-      : ''};
+  margin: ${(p) => (p.mode === 'HORIZONTAL' ? '0 auto' : '')};
   max-width: ${(p) => p.maxWidth}px;
   min-height: ${(p) => p.minHeight}px;
   position: relative;
