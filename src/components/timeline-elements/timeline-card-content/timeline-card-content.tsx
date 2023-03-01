@@ -332,6 +332,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           tabIndex={0}
           theme={theme}
           borderLess={borderLessCards}
+          textInsideMedia={textInsideMedia}
         >
           <ContentHeader
             title={title}

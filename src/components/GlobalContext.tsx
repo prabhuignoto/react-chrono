@@ -16,23 +16,20 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
     buttonTexts,
     classNames,
     mode,
+    fontSizes,
+    textInsideMedia,
   } = props;
   const defaultProps = Object.assign<PropsModel, PropsModel, PropsModel>(
     {},
     {
-      alignMedia: mode === 'VERTICAL' ? 'left' : 'center',
+      alignMedia: mode === 'VERTICAL' && !textInsideMedia ? 'left' : 'center',
       borderLessCards: false,
       cardLess: false,
       contentDetailsHeight: 150,
       disableAutoScrollOnClick: false,
       disableClickOnCircle: false,
       focusActiveItemOnLoad: false,
-      fontSizes: {
-        cardSubtitle: '0.85rem',
-        cardText: '0.8rem',
-        cardTitle: '1rem',
-        title: '1rem',
-      },
+
       lineWidth: 3,
       mediaHeight: 200,
       mode: 'VERTICAL_ALTERNATING',
@@ -67,17 +64,27 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         title: 'rc-title',
         ...classNames,
       },
-      theme: Object.assign(
-        {
-          cardBgColor: '#fff',
-          cardForeColor: '#000',
-          primary: '#0f52ba',
-          secondary: '#ffdf00',
-          titleColor: '#000',
-          titleColorActive: '#0f52ba',
-        },
-        theme,
-      ),
+      fontSizes: {
+        cardSubtitle: '0.85rem',
+        cardText: '1rem',
+        cardTitle: '1.2rem',
+        title: '1.5rem',
+        ...fontSizes,
+      },
+      theme: {
+        cardBgColor: '#fff',
+        cardDetailsBackGround: '#0f52ba',
+        cardDetailsColor: '#fff',
+        cardForeColor: '#000',
+        cardSubtitleColor: '#000',
+        cardTitleColor: '#000',
+        detailsColor: '#000',
+        primary: '#0f52ba',
+        secondary: '#ffdf00',
+        titleColor: '#000',
+        titleColorActive: '#0f52ba',
+        ...theme,
+      },
     },
   );
 

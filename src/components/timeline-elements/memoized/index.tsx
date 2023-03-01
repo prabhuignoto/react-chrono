@@ -1,15 +1,16 @@
 import cls from 'classnames';
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
+import { hexToRGBA } from '../../../utils';
 import { MaximizeIcon, MinimizeIcon, MinusIcon, PlusIcon } from '../../icons';
 import {
-  TimelineCardTitle,
-  TimelineContentSubTitle,
+  CardSubTitle,
+  CardTitle,
 } from '../timeline-card-content/timeline-card-content.styles';
-import { ExpandButton } from '../timeline-card-media/timeline-card-media.styles';
 import {
-  DetailsTextWrapper,
+  ExpandButton,
   ShowHideTextButton,
-} from './../timeline-card-media/timeline-card-media.styles';
+} from '../timeline-card-media/timeline-card-media-buttons';
+import { DetailsTextWrapper } from './../timeline-card-media/timeline-card-media.styles';
 import {
   Content,
   DetailsTextMemoModel,
@@ -18,7 +19,7 @@ import {
   Title,
 } from './memoized-model';
 
-const MemoTitle = ({
+const TitleMemo = ({
   title,
   url,
   theme,
@@ -29,7 +30,7 @@ const MemoTitle = ({
   classString = '',
 }: Title) => {
   return title && theme ? (
-    <TimelineCardTitle
+    <CardTitle
       className={cls(active ? 'active' : '', { [classString]: true })}
       theme={theme}
       style={{ color }}
@@ -40,16 +41,16 @@ const MemoTitle = ({
       <a href={url} target="_blank" rel="noreferrer">
         {title}
       </a>
-    </TimelineCardTitle>
+    </CardTitle>
   ) : null;
 };
 
-MemoTitle.displayName = 'Timeline Title';
+TitleMemo.displayName = 'Timeline Title';
 
-const MemoSubTitle = React.memo<Content>(
+const SubTitleMemo = React.memo<Content>(
   ({ content, color, dir, theme, fontSize, classString }: Content) =>
     content ? (
-      <TimelineContentSubTitle
+      <CardSubTitle
         style={{ color }}
         dir={dir}
         theme={theme}
@@ -57,12 +58,12 @@ const MemoSubTitle = React.memo<Content>(
         className={cls('card-sub-title', classString)}
       >
         {content}
-      </TimelineContentSubTitle>
+      </CardSubTitle>
     ) : null,
   () => true,
 );
 
-MemoSubTitle.displayName = 'Timeline Content';
+SubTitleMemo.displayName = 'Timeline Content';
 
 export const ExpandButtonMemo = memo<ExpandButtonModel>(
   ({ theme, expanded, onExpand, textInsideMedia }: ExpandButtonModel) => {
@@ -116,6 +117,15 @@ const DetailsTextMemo = memo<DetailsTextMemoModel>(
       }
     }, []);
 
+    const background = useMemo(() => {
+      const bg = theme?.cardDetailsBackGround || '';
+      if (bg) {
+        return hexToRGBA(bg, 0.8);
+      } else {
+        return bg;
+      }
+    }, [theme?.cardDetailsBackGround]);
+
     return textInsideMedia ? (
       <DetailsTextWrapper
         ref={onTextRef}
@@ -123,6 +133,7 @@ const DetailsTextMemo = memo<DetailsTextMemoModel>(
         expandFull={expand}
         theme={theme}
         show={show}
+        background={background}
       >
         {text}
       </DetailsTextWrapper>
@@ -136,4 +147,4 @@ const DetailsTextMemo = memo<DetailsTextMemoModel>(
 
 DetailsTextMemo.displayName = 'Details Text';
 
-export { MemoTitle, MemoSubTitle, DetailsTextMemo };
+export { TitleMemo, SubTitleMemo, DetailsTextMemo };

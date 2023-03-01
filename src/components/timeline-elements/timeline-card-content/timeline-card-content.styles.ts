@@ -8,14 +8,15 @@ export const TimelineItemContentWrapper = styled.section<{
   minHeight?: number;
   mode?: TimelineMode;
   noMedia?: boolean;
+  textInsideMedia?: boolean;
   theme?: Theme;
 }>`
   align-items: flex-start;
   background: ${(p) => p.theme.cardBgColor};
   border-radius: 4px;
   display: flex;
-  ${(p) =>
-    !p.borderLess ? `filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2))` : 'none'};
+  ${({ borderLess }) =>
+    !borderLess ? `filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.3))` : 'none'};
   flex-direction: column;
   justify-content: flex-start;
   line-height: 1.5em;
@@ -27,6 +28,8 @@ export const TimelineItemContentWrapper = styled.section<{
   width: 98%;
   z-index: 0;
 
+  height: ${(p) => (p.textInsideMedia ? '0' : '')};
+
   &:focus {
     outline: 1px solid ${(p) => p.theme?.primary};
   }
@@ -36,12 +39,12 @@ export const TimelineCardHeader = styled.header`
   width: 100%;
 `;
 
-export const TimelineContentSubTitle = styled.p<{
+export const CardSubTitle = styled.h2<{
   dir?: string;
   fontSize?: string;
   theme?: Theme;
 }>`
-  color: ${(p) => p.theme.primary};
+  color: ${(p) => p.theme.cardSubtitleColor};
   font-size: ${(p) => p.fontSize};
   font-weight: 600;
   margin: 0.5rem 0;
@@ -50,17 +53,16 @@ export const TimelineContentSubTitle = styled.p<{
   width: 97%;
 `;
 
-export const TimelineCardTitle = styled.p<{
+export const CardTitle = styled.h1<{
   dir?: string;
   fontSize: string;
   theme: Theme;
 }>`
-  color: ${(p) => p.theme.cardForeColor};
+  color: ${(p) => p.theme.cardTitleColor};
   font-size: ${(p) => p.fontSize};
   font-weight: 600;
   margin: 0;
-  padding: 0;
-  padding-left: 0.5em;
+  padding: 0.25em 0 0.25rem 0.5rem;
 
   &.active {
     color: ${(p) => p.theme.primary};
@@ -70,7 +72,8 @@ export const TimelineCardTitle = styled.p<{
 `;
 
 export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
-  color: ${(p) => p.theme.cardForeColor};
+  // color: ${(p) => p.theme.cardForeColor};
+  color: '#fff';
   font-size: 0.85rem;
   font-weight: 400;
   margin: 0;

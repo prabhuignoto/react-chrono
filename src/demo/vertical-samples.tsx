@@ -119,21 +119,25 @@ export const VerticalBasic: FunctionComponent<{
         cardWidth={650}
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
+        textInsideMedia
         // borderLessCards
         theme={{
           cardBgColor: '#fff',
-          cardForeColor: 'blue',
+          cardForeColor: '#fff',
           titleColorActive: '#6495ed',
           titleColor: '#922724',
+          cardDetailsBackground: '#e8e8e8',
         }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
         fontSizes={{
-          title: '1.2rem',
+          title: '2rem',
         }}
         // focusActiveItemOnLoad
         // activeItemIndex={9}
-        cardHeight={400}
+        mediaHeight={400}
+        // cardHeight={400}
+        // cardHeight={350}
         contentDetailsHeight={100}
         timelineCircleDimension={20}
         classNames={{

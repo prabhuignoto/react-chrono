@@ -14,9 +14,9 @@ import { GlobalContext } from '../../GlobalContext';
 import {
   DetailsTextMemo,
   ExpandButtonMemo,
-  MemoSubTitle,
-  MemoTitle,
   ShowOrHideTextButtonMemo,
+  SubTitleMemo,
+  TitleMemo,
 } from '../memoized';
 import { SlideShowProgressBar } from '../timeline-card-content/timeline-card-content.styles';
 import {
@@ -211,7 +211,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         expandFull={expandDetails}
         showText={showText}
       >
-        <MemoTitle
+        <TitleMemo
           title={title}
           theme={theme}
           active={active}
@@ -220,7 +220,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
           classString={classNames?.cardTitle}
         />
         {showText && (
-          <MemoSubTitle
+          <SubTitleMemo
             content={content}
             fontSize={fontSizes?.cardSubtitle}
             classString={classNames?.cardSubTitle}
@@ -242,14 +242,16 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             />
           </>
         ) : null}
-        <DetailsTextMemo
-          theme={theme}
-          show={showText}
-          expand={expandDetails}
-          text={detailsText}
-          onRender={onDetailsTextRef}
-          textInsideMedia={textInsideMedia}
-        />
+        {showText ? (
+          <DetailsTextMemo
+            theme={theme}
+            show={showText}
+            expand={expandDetails}
+            text={detailsText}
+            onRender={onDetailsTextRef}
+            textInsideMedia={textInsideMedia}
+          />
+        ) : null}
       </MediaDetailsWrapper>
     );
   }, [showText, expandDetails]);

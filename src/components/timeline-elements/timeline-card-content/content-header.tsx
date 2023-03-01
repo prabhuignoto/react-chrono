@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext } from 'react';
 import { TimelineContentModel } from '../../../models/TimelineContentModel';
 import { GlobalContext } from '../../GlobalContext';
-import { MemoSubTitle, MemoTitle } from '../memoized';
+import { SubTitleMemo, TitleMemo } from '../memoized';
 import { TimelineCardHeader } from './timeline-card-content.styles';
 
 export type ContentHeaderProps = Pick<
@@ -22,7 +22,7 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = ({
     <TimelineCardHeader>
       {/* main title */}
       {!media && (
-        <MemoTitle
+        <TitleMemo
           title={title}
           theme={theme}
           url={url}
@@ -32,7 +32,7 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = ({
       )}
       {/* main timeline text */}
       {!media && (
-        <MemoSubTitle
+        <SubTitleMemo
           content={content}
           theme={theme}
           fontSize={fontSizes?.cardSubtitle}
