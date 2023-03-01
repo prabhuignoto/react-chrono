@@ -1,5 +1,7 @@
 import cls from 'classnames';
 import React, {
+  FunctionComponent,
+  memo,
   useCallback,
   useContext,
   useEffect,
@@ -10,6 +12,7 @@ import React, {
 import { CardMediaModel } from '../../../models/TimelineMediaModel';
 import { GlobalContext } from '../../GlobalContext';
 import {
+  DetailsTextMemo,
   ExpandButtonMemo,
   MemoSubTitle,
   MemoTitle,
@@ -19,7 +22,6 @@ import { SlideShowProgressBar } from '../timeline-card-content/timeline-card-con
 import {
   CardImage,
   CardVideo,
-  DetailsTextWrapper,
   ErrorMessage,
   IFrameVideo,
   MediaDetailsWrapper,
@@ -54,8 +56,6 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   const [showText, setShowText] = useState(true);
   const [mediaLoaded, setMediaLoaded] = useState(false);
   const progressRef = useRef<HTMLDivElement>(null);
-
-  console.log(showProgressBar, remainInterval, startWidth);
 
   const {
     mode,
@@ -94,10 +94,9 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     });
   }, []);
 
-  const ErrorMessageMem: React.FunctionComponent<ErrorMessageModel> =
-    React.memo(({ message }: ErrorMessageModel) => (
-      <ErrorMessage>{message}</ErrorMessage>
-    ));
+  const ErrorMessageMem: FunctionComponent<ErrorMessageModel> = memo(
+    ({ message }: ErrorMessageModel) => <ErrorMessage>{message}</ErrorMessage>,
+  );
 
   const isYouTube = useMemo(
     () =>
@@ -174,25 +173,26 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
 
   ErrorMessageMem.displayName = 'Error Message';
 
-  const onDetailsTextRef = useCallback((ev: HTMLDivElement) => {
-    if (ev?.clientHeight) {
-      setDetailsHeight(ev.clientHeight);
+  const onDetailsTextRef = useCallback((height?: number) => {
+    debugger;
+    if (height) {
+      setDetailsHeight(height);
     }
   }, []);
 
-  const DetailsTextMemo = useMemo(() => {
-    return textInsideMedia ? (
-      <DetailsTextWrapper
-        ref={onDetailsTextRef}
-        height={expandDetails ? detailsHeight : 0}
-        expandFull={expandDetails}
-        theme={theme}
-        show={showText}
-      >
-        {detailsText}
-      </DetailsTextWrapper>
-    ) : null;
-  }, [detailsHeight, expandDetails, textInsideMedia, showText]);
+  // const DetailsTextMemo = useMemo(() => {
+  //   return textInsideMedia ? (
+  //     <DetailsTextWrapper
+  //       ref={onDetailsTextRef}
+  //       height={expandDetails ? detailsHeight : 0}
+  //       expandFull={expandDetails}
+  //       theme={theme}
+  //       show={showText}
+  //     >
+  //       {detailsText}
+  //     </DetailsTextWrapper>
+  //   ) : null;
+  // }, [detailsHeight, expandDetails, textInsideMedia, showText]);
 
   const toggleExpand = useCallback(
     (ev: React.PointerEvent | React.KeyboardEvent) => {
@@ -256,10 +256,17 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             />
           </>
         ) : null}
-        {DetailsTextMemo}
+        <DetailsTextMemo
+          theme={theme}
+          show={showText}
+          expand={expandDetails}
+          text={detailsText}
+          onRender={onDetailsTextRef}
+          textInsideMedia
+        />
       </MediaDetailsWrapper>
     );
-  }, [DetailsTextMemo, showText]);
+  }, [showText, expandDetails]);
 
   return (
     <>

@@ -1,14 +1,18 @@
 import cls from 'classnames';
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { MaximizeIcon, MinimizeIcon, MinusIcon, PlusIcon } from '../../icons';
 import {
   TimelineCardTitle,
   TimelineContentSubTitle,
 } from '../timeline-card-content/timeline-card-content.styles';
 import { ExpandButton } from '../timeline-card-media/timeline-card-media.styles';
-import { ShowHideTextButton } from './../timeline-card-media/timeline-card-media.styles';
+import {
+  DetailsTextWrapper,
+  ShowHideTextButton,
+} from './../timeline-card-media/timeline-card-media.styles';
 import {
   Content,
+  DetailsTextMemoModel,
   ExpandButtonModel,
   ShowHideTextButtonModel,
   Title,
@@ -96,4 +100,40 @@ export const ShowOrHideTextButtonMemo = memo<ShowHideTextButtonModel>(
 
 ShowOrHideTextButtonMemo.displayName = 'Show Hide Text Button';
 
-export { MemoTitle, MemoSubTitle };
+const DetailsTextMemo = memo<DetailsTextMemoModel>(
+  ({
+    theme,
+    show,
+    expand,
+    textInsideMedia,
+    text,
+    height,
+    onRender,
+  }: DetailsTextMemoModel) => {
+    const onTextRef = useCallback((node: HTMLDivElement) => {
+      if (node) {
+        onRender?.(node.clientHeight);
+      }
+    }, []);
+
+    return textInsideMedia ? (
+      <DetailsTextWrapper
+        ref={onTextRef}
+        height={expand ? height : 0}
+        expandFull={expand}
+        theme={theme}
+        show={show}
+      >
+        {text}
+      </DetailsTextWrapper>
+    ) : null;
+  },
+  (prev, next) =>
+    prev.height === next.height &&
+    prev.show === next.show &&
+    prev.expand === next.expand,
+);
+
+DetailsTextMemo.displayName = 'Details Text';
+
+export { MemoTitle, MemoSubTitle, DetailsTextMemo };

@@ -30,3 +30,19 @@ export type ShowHideTextButtonModel = {
   show?: boolean;
   textInsideMedia?: boolean;
 } & Pick<common, 'theme'>;
+
+export type DetailsTextMemoModel = {
+  expand?: boolean;
+  height?: number;
+  onRender?: (height?: number) => void;
+  show?: boolean;
+  text: ReactNode;
+  textInsideMedia?: boolean;
+  theme?: Theme;
+};
+
+export type TextContentMemoModel = Title &
+  Content &
+  ExpandButtonModel &
+  ShowHideTextButtonModel &
+  DetailsTextMemoModel;

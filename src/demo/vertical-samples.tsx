@@ -116,7 +116,7 @@ export const VerticalBasic: FunctionComponent<{
         items={items}
         mode="VERTICAL"
         slideShow
-        cardWidth={450}
+        cardWidth={650}
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
         // borderLessCards
