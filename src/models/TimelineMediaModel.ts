@@ -35,5 +35,6 @@ export interface CardMediaModel {
   startWidth?: number;
   theme?: Theme;
   title?: string;
+  triangleDir?: string;
   url?: string;
 }

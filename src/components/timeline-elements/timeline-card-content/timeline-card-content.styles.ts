@@ -62,7 +62,7 @@ export const CardTitle = styled.h1<{
   font-size: ${(p) => p.fontSize};
   font-weight: 600;
   margin: 0;
-  padding: 0.25em 0 0.25rem 0.5rem;
+  padding: 0.5em 0 0.5rem 0.5rem;
 
   &.active {
     color: ${(p) => p.theme.primary};

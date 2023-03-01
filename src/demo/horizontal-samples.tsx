@@ -60,6 +60,8 @@ export const HorizontalAll: React.FunctionComponent<{
           cardHeight={250}
           cardWidth={650}
           // slideShow
+          textInsideMedia
+          mediaHeight={450}
           slideItemDuration={2550}
           itemWidth={400}
           focusActiveItemOnLoad

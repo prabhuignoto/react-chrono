@@ -360,6 +360,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               paused={paused}
               remainInterval={remainInterval}
               showProgressBar={canShowProgressBar}
+              triangleDir={triangleDir}
             />
           )}
 

@@ -18,7 +18,10 @@ import {
   SubTitleMemo,
   TitleMemo,
 } from '../memoized';
-import { SlideShowProgressBar } from '../timeline-card-content/timeline-card-content.styles';
+import {
+  SlideShowProgressBar,
+  TriangleIconWrapper,
+} from '../timeline-card-content/timeline-card-content.styles';
 import {
   CardImage,
   CardVideo,
@@ -47,6 +50,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   remainInterval,
   startWidth,
   paused,
+  triangleDir,
 }: CardMediaModel) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loadFailed, setLoadFailed] = useState(false);
@@ -292,6 +296,10 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             startWidth={startWidth}
           ></SlideShowProgressBar>
         )}
+        <TriangleIconWrapper
+          dir={triangleDir}
+          theme={theme}
+        ></TriangleIconWrapper>
       </MediaWrapper>
       {TextContent}
     </>

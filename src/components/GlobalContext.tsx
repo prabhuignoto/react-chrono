@@ -67,7 +67,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       fontSizes: {
         cardSubtitle: '0.85rem',
         cardText: '1rem',
-        cardTitle: '1.2rem',
+        cardTitle: '1.25rem',
         title: '1.5rem',
         ...fontSizes,
       },
@@ -81,7 +81,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         detailsColor: '#000',
         primary: '#0f52ba',
         secondary: '#ffdf00',
-        titleColor: '#000',
+        titleColor: '#0f52ba',
         titleColorActive: '#0f52ba',
         ...theme,
       },
