@@ -29,7 +29,6 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       disableAutoScrollOnClick: false,
       disableClickOnCircle: false,
       focusActiveItemOnLoad: false,
-
       lineWidth: 3,
       mediaHeight: 200,
       mode: 'VERTICAL_ALTERNATING',
@@ -39,6 +38,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       showAllCardsHorizontal: false,
       textInsideMedia: false,
       timelineCircleDimension: 16,
+      timelinePointShape: 'circle',
       titleDateFormat: 'MMM DD, YYYY',
       useReadMore: true,
     },

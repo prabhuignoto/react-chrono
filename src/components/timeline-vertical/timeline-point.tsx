@@ -1,15 +1,15 @@
 import cls from 'classnames';
 import React, { memo, useContext, useEffect, useMemo, useRef } from 'react';
-import { VerticalCircleModel } from '../../models/TimelineVerticalModel';
+import { VerticalPointModel } from '../../models/TimelineVerticalModel';
 import { GlobalContext } from '../GlobalContext';
 import { Circle } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
 import {
-  VerticalCircleContainer,
-  VerticalCircleWrapper,
-} from './timeline-vertical.styles';
+  VerticalPointContainer,
+  VerticalPointWrapper,
+} from './timeline-vertical-shape.styles';
 
-const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = memo(
-  (props: VerticalCircleModel) => {
+const VerticalPoint: React.FunctionComponent<VerticalPointModel> = memo(
+  (props: VerticalPointModel) => {
     const {
       className,
       id,
@@ -73,7 +73,7 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = memo(
     }, []);
 
     return (
-      <VerticalCircleWrapper
+      <VerticalPointWrapper
         width={lineWidth}
         alternateCards={alternateCards}
         bg={theme && theme.primary}
@@ -82,7 +82,7 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = memo(
         role="button"
         cardLess={cardLess}
       >
-        <VerticalCircleContainer
+        <VerticalPointContainer
           className={`${className} timeline-vertical-circle`}
           {...clickHandlerProps}
           ref={circleRef}
@@ -97,13 +97,13 @@ const VerticalCircle: React.FunctionComponent<VerticalCircleModel> = memo(
           >
             {iconChild ? iconChild : null}
           </Circle>
-        </VerticalCircleContainer>
-      </VerticalCircleWrapper>
+        </VerticalPointContainer>
+      </VerticalPointWrapper>
     );
   },
   (prev, next) => prev.active === next.active,
 );
 
-VerticalCircle.displayName = 'VerticalCircle';
+VerticalPoint.displayName = 'VerticalPoint';
 
-export default VerticalCircle;
+export { VerticalPoint };

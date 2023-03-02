@@ -4,7 +4,7 @@ import { VerticalItemModel } from '../../models/TimelineVerticalModel';
 import { GlobalContext } from '../GlobalContext';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
-import VerticalCircle from './timeline-vertical-circle';
+import { VerticalPoint } from './timeline-point';
 import {
   TimelineCardContentWrapper,
   TimelineTitleWrapper,
@@ -101,22 +101,25 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
     });
 
     // timeline circle
-    const Circle = () => (
-      <VerticalCircle
-        active={active}
-        alternateCards={alternateCards}
-        className={className}
-        id={id}
-        mode={mode}
-        onActive={handleOnActive}
-        onClick={onClick}
-        slideShowRunning={slideShowRunning}
-        iconChild={iconChild}
-        timelineCircleDimension={timelineCircleDimension}
-        lineWidth={lineWidth}
-        disableClickOnCircle={disableClickOnCircle}
-        cardLess={cardLess}
-      />
+    const VerticalPointMemo = useMemo(
+      () => (
+        <VerticalPoint
+          active={active}
+          alternateCards={alternateCards}
+          className={className}
+          id={id}
+          mode={mode}
+          onActive={handleOnActive}
+          onClick={onClick}
+          slideShowRunning={slideShowRunning}
+          iconChild={iconChild}
+          timelineCircleDimension={timelineCircleDimension}
+          lineWidth={lineWidth}
+          disableClickOnCircle={disableClickOnCircle}
+          cardLess={cardLess}
+        />
+      ),
+      [slideShowRunning, active],
     );
 
     return (
@@ -162,7 +165,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
             />
           ) : null}
         </TimelineCardContentWrapper>
-        <Circle />
+        {VerticalPointMemo}
       </VerticalItemWrapper>
     );
   },

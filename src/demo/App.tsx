@@ -12,12 +12,14 @@ import {
   HorizontalBasicCardLess,
   HorizontalInitialSelectedItem,
 } from './horizontal-samples';
+import { items2 as worldHistory } from './human-history';
 import { Layout } from './layout';
 import {
   VerticalBasic,
   VerticalBasicCardLess,
   VerticalCustomContent,
   VerticalCustomContent2,
+  VerticalNewMedia,
   VerticalTree,
   VerticalTreeMixed,
 } from './vertical-samples';
@@ -121,6 +123,10 @@ const NewDemo: React.FunctionComponent = () => {
           element: items.length > 0 && (
             <HorizontalBasic items={items} type="big-screen" />
           ),
+        },
+        {
+          path: '/vertical-world-history',
+          element: <VerticalNewMedia items={worldHistory} type="big-screen" />,
         },
         {
           path: '/horizontal-all',

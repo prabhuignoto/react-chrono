@@ -148,6 +148,49 @@ export const VerticalBasic: FunctionComponent<{
   </Vertical>
 );
 
+export const VerticalNewMedia: FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({ type, items }) => (
+  <Vertical id="vertical">
+    <ComponentContainerTree type={type}>
+      <Chrono
+        items={items}
+        mode="VERTICAL_ALTERNATING"
+        slideShow
+        cardWidth={450}
+        slideItemDuration={2500}
+        scrollable={{ scrollbar: false }}
+        textInsideMedia
+        // borderLessCards
+        theme={{
+          cardBgColor: '#fff',
+          cardForeColor: '#fff',
+          titleColorActive: '#6495ed',
+          titleColor: '#922724',
+          cardDetailsBackGround: '#e8e8e8',
+          cardDetailsColor: '#000',
+        }}
+        onItemSelected={(selected) => console.log(selected.cardTitle)}
+        enableOutline
+        fontSizes={{
+          title: '1.5rem',
+        }}
+        // focusActiveItemOnLoad
+        // activeItemIndex={9}
+        mediaHeight={400}
+        // cardHeight={250}
+        // cardHeight={350}
+        contentDetailsHeight={100}
+        timelineCircleDimension={20}
+        classNames={{
+          cardText: 'custom-text',
+        }}
+      />
+    </ComponentContainerTree>
+  </Vertical>
+);
+
 export const VerticalBasicCardLess: FunctionComponent<{
   type: string;
   items: TimelineItemModel[];

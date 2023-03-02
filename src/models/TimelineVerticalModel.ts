@@ -48,7 +48,7 @@ type VerticalModel = Pick<
     | 'timelineContent'
   > & { active?: boolean; className: string; id?: string };
 
-export type VerticalCircleModel = Omit<VerticalModel, 'timelineContent'> & {
+export type VerticalPointModel = Omit<VerticalModel, 'timelineContent'> & {
   iconChild?: React.ReactNode;
   onActive: (pointOffset: number) => void;
 };

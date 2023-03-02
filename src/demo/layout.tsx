@@ -10,6 +10,9 @@ const Layout = () => {
       <div className={styles.container}>
         <div className={styles.aside}>
           <NavLink to={'/vertical-basic'}>Vertical Basic</NavLink>
+          <NavLink to={'/vertical-world-history'}>
+            Vertical World History
+          </NavLink>
           <NavLink to={'/vertical-alternating-mixed'}>
             Vertical Alternating Mixed
           </NavLink>

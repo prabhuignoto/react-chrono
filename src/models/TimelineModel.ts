@@ -156,6 +156,8 @@ export type TimelineProps = {
   // width of the timeline circle
   timelineCircleDimension?: number;
 
+  timelinePointShape?: 'circle' | 'square' | 'diamond';
+
   // title for the timeline
   title?: string;
 
