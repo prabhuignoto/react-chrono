@@ -203,6 +203,20 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     [],
   );
 
+  const canShowArrow = useMemo(
+    () =>
+      (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
+      textInsideMedia,
+    [],
+  );
+
+  const canShowTextMemo = useMemo(
+    () => showText && !!detailsText,
+    [showText, detailsText],
+  );
+
+  console.log(canShowTextMemo);
+
   const TextContent = useMemo(() => {
     return (
       <MediaDetailsWrapper
@@ -245,7 +259,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             />
           </>
         ) : null}
-        {showText ? (
+        {canShowTextMemo ? (
           <DetailsTextMemo
             theme={theme}
             show={showText}
@@ -257,7 +271,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         ) : null}
       </MediaDetailsWrapper>
     );
-  }, [showText, expandDetails]);
+  }, [showText, expandDetails, canShowTextMemo]);
 
   return (
     <>
@@ -295,10 +309,13 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             startWidth={startWidth}
           ></SlideShowProgressBar>
         )}
-        <TriangleIconWrapper
-          dir={triangleDir}
-          theme={theme}
-        ></TriangleIconWrapper>
+        {canShowArrow ? (
+          <TriangleIconWrapper
+            dir={triangleDir}
+            theme={theme}
+            offset={-15}
+          ></TriangleIconWrapper>
+        ) : null}
       </MediaWrapper>
       {TextContent}
     </>

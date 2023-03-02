@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
 
@@ -153,6 +153,22 @@ export const IFrameVideo = styled.iframe`
   width: 100%;
 `;
 
+export const linearGradient = css`
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2rem;
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+`;
+
 export const DetailsTextWrapper = styled.div<{
   background: string;
   expandFull?: boolean;
@@ -169,6 +185,7 @@ export const DetailsTextWrapper = styled.div<{
   padding: 0.5rem;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  position: relative;
 
   scrollbar-color: ${(p) => p.theme?.primary} default;
   scrollbar-width: thin;
@@ -209,4 +226,6 @@ export const DetailsTextWrapper = styled.div<{
       : `
     height: 0;
   `}
+
+  ${(p) => !p.expandFull && linearGradient}
 `;

@@ -266,7 +266,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             textContent = detailedText;
           }
 
-          return (
+          return textContent ? (
             <TimelineContentDetails
               className={showMore ? 'active' : ''}
               ref={detailsRef}
@@ -274,7 +274,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             >
               {textContent}
             </TimelineContentDetails>
-          );
+          ) : null;
         }
       }, [timelineContent, showMore]);
 

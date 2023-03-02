@@ -254,7 +254,11 @@ export const ChevronIconWrapper = styled.span<{ collapsed?: boolean }>`
   }
 `;
 
-export const TriangleIconWrapper = styled.span<{ dir?: string; theme?: Theme }>`
+export const TriangleIconWrapper = styled.span<{
+  dir?: string;
+  offset?: number;
+  theme?: Theme;
+}>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -272,5 +276,6 @@ export const TriangleIconWrapper = styled.span<{ dir?: string; theme?: Theme }>`
     fill: #fff;
   }
 
-  ${(p) => (p.dir === 'left' ? `right: -8px;` : `left: -8px;`)};
+  ${(p) =>
+    p.dir === 'left' ? `right: ${p.offset}px;` : `left: ${p.offset}px;`};
 `;

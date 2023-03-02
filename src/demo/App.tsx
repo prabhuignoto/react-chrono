@@ -26,6 +26,7 @@ import {
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
+  const [historyItems, setHistoryItems] = useState<TimelineItemModel[]>([]);
   const [state, setState] = useState(0);
 
   const [customTheme, setCustomTheme] = useState<Theme>({
@@ -76,6 +77,18 @@ const NewDemo: React.FunctionComponent = () => {
       }),
     );
     setItems(newItems);
+    setHistoryItems(
+      worldHistory.map(
+        ({ cardTitle, cardSubtitle, cardDetailedText, media, url, title }) => ({
+          cardTitle,
+          // cardSubtitle,
+          cardDetailedText,
+          media,
+          url,
+          title,
+        }),
+      ),
+    );
   }, []);
 
   const router = createBrowserRouter([
@@ -126,7 +139,9 @@ const NewDemo: React.FunctionComponent = () => {
         },
         {
           path: '/vertical-world-history',
-          element: <VerticalNewMedia items={worldHistory} type="big-screen" />,
+          element: historyItems.length ? (
+            <VerticalNewMedia items={historyItems} type="big-screen" />
+          ) : null,
         },
         {
           path: '/horizontal-all',

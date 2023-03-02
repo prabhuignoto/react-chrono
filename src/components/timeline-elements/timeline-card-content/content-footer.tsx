@@ -96,6 +96,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
         <TriangleIconWrapper
           dir={triangleDir}
           theme={theme}
+          offset={-8}
         ></TriangleIconWrapper>
       )}
     </>

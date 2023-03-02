@@ -67,6 +67,10 @@ SubTitleMemo.displayName = 'Timeline Content';
 
 export const ExpandButtonMemo = memo<ExpandButtonModel>(
   ({ theme, expanded, onExpand, textInsideMedia }: ExpandButtonModel) => {
+    const label = useMemo(() => {
+      return expanded ? 'Minimize' : 'Maximize';
+    }, [expanded]);
+
     return textInsideMedia ? (
       <ExpandButton
         onPointerDown={onExpand}
@@ -74,6 +78,8 @@ export const ExpandButtonMemo = memo<ExpandButtonModel>(
         theme={theme}
         aria-expanded={expanded}
         tabIndex={0}
+        aria-label={label}
+        title={label}
       >
         {expanded ? <MinimizeIcon /> : <MaximizeIcon />}
       </ExpandButton>
@@ -86,12 +92,18 @@ ExpandButtonMemo.displayName = 'Expand Button';
 
 export const ShowOrHideTextButtonMemo = memo<ShowHideTextButtonModel>(
   ({ textInsideMedia, onToggle, theme, show }: ShowHideTextButtonModel) => {
+    const label = useMemo(() => {
+      return show ? 'Hide Text' : 'Show Text';
+    }, [show]);
+
     return textInsideMedia ? (
       <ShowHideTextButton
         onPointerDown={onToggle}
         theme={theme}
         tabIndex={0}
         onKeyDown={(ev) => ev.key === 'Enter' && onToggle?.(ev)}
+        aria-label={label}
+        title={label}
       >
         {show ? <MinusIcon /> : <PlusIcon />}
       </ShowHideTextButton>
