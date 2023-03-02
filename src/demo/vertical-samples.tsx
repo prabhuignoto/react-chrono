@@ -133,8 +133,8 @@ export const VerticalBasic: FunctionComponent<{
         fontSizes={{
           title: '1.5rem',
         }}
-        // focusActiveItemOnLoad
-        // activeItemIndex={9}
+        focusActiveItemOnLoad
+        activeItemIndex={9}
         // mediaHeight={300}
         cardHeight={250}
         // cardHeight={350}
@@ -176,6 +176,7 @@ export const VerticalNewMedia: FunctionComponent<{
         fontSizes={{
           title: '1.5rem',
         }}
+        timelinePointShape="diamond"
         // focusActiveItemOnLoad
         // activeItemIndex={9}
         mediaHeight={400}

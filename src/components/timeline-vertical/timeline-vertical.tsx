@@ -25,6 +25,7 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
   // if not auto scroll the content and bring it to the view.
   const handleOnActive = useCallback(
     (offset: number, wrapperOffset: number, height: number) => {
+      debugger;
       autoScroll({
         contentHeight: height,
         contentOffset: wrapperOffset,

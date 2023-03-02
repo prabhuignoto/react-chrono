@@ -2,7 +2,7 @@ import cls from 'classnames';
 import React, { memo, useContext, useEffect, useMemo, useRef } from 'react';
 import { VerticalPointModel } from '../../models/TimelineVerticalModel';
 import { GlobalContext } from '../GlobalContext';
-import { Circle } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
+import { Shape } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
 import {
   VerticalPointContainer,
   VerticalPointWrapper,
@@ -25,14 +25,15 @@ const VerticalPoint: React.FunctionComponent<VerticalPointModel> = memo(
       cardLess,
     } = props;
     const circleRef = useRef<HTMLDivElement>(null);
-    const { theme, focusActiveItemOnLoad } = useContext(GlobalContext);
+    const { theme, focusActiveItemOnLoad, timelinePointShape } =
+      useContext(GlobalContext);
 
     const isFirstRender = useRef(true);
     const canInvokeOnActive = useMemo(() => {
       if (focusActiveItemOnLoad) {
         return active;
       } else {
-        return active && isFirstRender.current;
+        return active && !isFirstRender.current;
       }
     }, [active]);
 
@@ -90,13 +91,14 @@ const VerticalPoint: React.FunctionComponent<VerticalPointModel> = memo(
           data-testid="tree-leaf-click"
           aria-label="select timeline"
         >
-          <Circle
+          <Shape
             className={circleClass}
             theme={theme}
             dimension={timelineCircleDimension}
+            timelinePointShape={timelinePointShape}
           >
             {iconChild ? iconChild : null}
-          </Circle>
+          </Shape>
         </VerticalPointContainer>
       </VerticalPointWrapper>
     );

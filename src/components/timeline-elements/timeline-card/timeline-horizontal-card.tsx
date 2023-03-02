@@ -12,8 +12,8 @@ import { GlobalContext } from '../../GlobalContext';
 import TimelineCardContent from '../timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import {
-  Circle,
-  CircleWrapper,
+  Shape,
+  ShapeWrapper,
   TimelineContentContainer,
   TimelineTitleContainer,
   Wrapper,
@@ -155,8 +155,8 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
       {canShowTimelineContent && showTimelineContent()}
 
-      <CircleWrapper>
-        <Circle
+      <ShapeWrapper>
+        <Shape
           className={circleClass}
           onClick={handleClick}
           ref={circleRef}
@@ -166,8 +166,8 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           dimension={timelineCircleDimension}
         >
           {iconChild ? iconChild : null}
-        </Circle>
-      </CircleWrapper>
+        </Shape>
+      </ShapeWrapper>
 
       <TimelineTitleContainer
         className={titleClass}

@@ -178,7 +178,6 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   ErrorMessageMem.displayName = 'Error Message';
 
   const onDetailsTextRef = useCallback((height?: number) => {
-    debugger;
     if (height) {
       setDetailsHeight(height);
     }
