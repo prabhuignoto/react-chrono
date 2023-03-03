@@ -11,6 +11,7 @@ type common = {
 
 export interface Title extends common {
   active?: boolean;
+  padding?: boolean;
   title?: string;
   url?: string;
 }
@@ -46,3 +47,5 @@ export type TextContentMemoModel = Title &
   ExpandButtonModel &
   ShowHideTextButtonModel &
   DetailsTextMemoModel;
+
+export type CardMediaHeaderMemoModel = Title & Content;

@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
+import { ScrollBar } from '../../common/styles';
 
 export const MediaWrapper = styled.div<{
   active?: boolean;
@@ -73,6 +74,7 @@ export const MediaDetailsWrapper = styled.div<{
   absolutePosition?: boolean;
   borderLessCard?: boolean;
   expandFull?: boolean;
+  expandable?: boolean;
   mode?: TimelineMode;
   showText?: boolean;
   textInMedia?: boolean;
@@ -109,7 +111,7 @@ export const MediaDetailsWrapper = styled.div<{
         `;
     }
 
-    if (p.textInMedia) {
+    if (p.textInMedia && p.expandable) {
       return `
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
         border-radius: 10px;
@@ -187,25 +189,7 @@ export const DetailsTextWrapper = styled.div<{
   border-bottom-right-radius: 8px;
   position: relative;
 
-  scrollbar-color: ${(p) => p.theme?.primary} default;
-  scrollbar-width: thin;
-
-  &::-webkit-scrollbar {
-    width: 0.3em;
-  }
-
-  &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: ${(p) => p.theme?.primary};
-    outline: 1px solid ${(p) => p.theme?.primary};
-  }
-
-  & > :first-child {
-    // color: ${(p) => p.theme?.primary};
-  }
+  ${ScrollBar}
 
   ${(p) => {
     if (p.expandFull) {
@@ -228,4 +212,11 @@ export const DetailsTextWrapper = styled.div<{
   `}
 
   ${(p) => !p.expandFull && linearGradient}
+`;
+
+export const CardMediaHeader = styled.div`
+  padding: 0.5em 0 0.5rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

@@ -28,6 +28,7 @@ const TitleMemo = ({
   active,
   fontSize = '1rem',
   classString = '',
+  padding = false,
 }: Title) => {
   return title && theme ? (
     <CardTitle
@@ -37,6 +38,7 @@ const TitleMemo = ({
       dir={dir}
       fontSize={fontSize}
       data-class={classString}
+      padding={padding}
     >
       <a href={url} target="_blank" rel="noreferrer">
         {title}
@@ -158,5 +160,9 @@ const DetailsTextMemo = memo<DetailsTextMemoModel>(
 );
 
 DetailsTextMemo.displayName = 'Details Text';
+
+// const CardHeaderMediaMemo = memo(() => {
+
+// })
 
 export { TitleMemo, SubTitleMemo, DetailsTextMemo };

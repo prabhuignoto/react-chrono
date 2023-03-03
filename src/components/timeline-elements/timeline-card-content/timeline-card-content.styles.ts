@@ -37,6 +37,7 @@ export const TimelineItemContentWrapper = styled.section<{
 
 export const TimelineCardHeader = styled.header`
   width: 100%;
+  padding: 0.5rem 0.5rem 0 0.5rem;
 `;
 
 export const CardSubTitle = styled.h2<{
@@ -48,7 +49,6 @@ export const CardSubTitle = styled.h2<{
   font-size: ${(p) => p.fontSize};
   font-weight: 600;
   margin: 0.5rem 0;
-  padding-left: 0.5rem;
   text-align: left;
   width: 97%;
 `;
@@ -56,19 +56,18 @@ export const CardSubTitle = styled.h2<{
 export const CardTitle = styled.h1<{
   dir?: string;
   fontSize: string;
+  padding?: boolean;
   theme: Theme;
 }>`
   color: ${(p) => p.theme.cardTitleColor};
   font-size: ${(p) => p.fontSize};
   font-weight: 600;
   margin: 0;
-  padding: 0.5em 0 0.5rem 0.5rem;
-
-  &.active {
-    color: ${(p) => p.theme.primary};
-  }
   text-align: left;
   width: 95%;
+  padding: ${(p) => (p.padding ? '0.5rem 0 0.5rem 0.5rem;' : '')} &.active {
+    color: ${(p) => p.theme.primary};
+  }
 `;
 
 export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
@@ -122,8 +121,9 @@ export const TimelineContentDetailsWrapper = styled.div<{
   scrollbar-color: ${(p) => p.theme?.primary} default;
   scrollbar-width: thin;
   transition: max-height 0.25s ease-in-out;
-  width: ${(p) => (p.borderLess ? 'calc(100% - 1em)' : 'calc(95% - 1em)')};
-  padding: 0.25em 0.5em;
+  width: ${(p) =>
+    p.borderLess ? 'calc(100% - 0.5rem)' : 'calc(95% - 0.5rem)'};
+  padding: 0.25rem 0.25rem;
 
   ${({
     height = 0,

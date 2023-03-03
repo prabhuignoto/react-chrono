@@ -1,13 +1,15 @@
 import { FunctionComponent, useContext } from 'react';
-import { TimelineContentModel } from '../../../models/TimelineContentModel';
 import { GlobalContext } from '../../GlobalContext';
 import { SubTitleMemo, TitleMemo } from '../memoized';
+import { ContentHeaderProps } from './header-footer.model';
 import { TimelineCardHeader } from './timeline-card-content.styles';
 
-export type ContentHeaderProps = Pick<
-  TimelineContentModel,
-  'theme' | 'url' | 'title' | 'media' | 'content'
->;
+/*
+ * This component is used to render the header of the timeline card.
+ * It renders the title and subtitle of the card.
+ * If the card has media, it will not render the title and subtitle.
+ * The title and subtitle are memoized to prevent unnecessary re-renders.
+ */
 
 const ContentHeader: FunctionComponent<ContentHeaderProps> = ({
   title,

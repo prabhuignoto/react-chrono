@@ -81,7 +81,7 @@ const NewDemo: React.FunctionComponent = () => {
       worldHistory.map(
         ({ cardTitle, cardSubtitle, cardDetailedText, media, url, title }) => ({
           cardTitle,
-          // cardSubtitle,
+          cardSubtitle,
           cardDetailedText,
           media,
           url,

@@ -22,8 +22,10 @@ import {
   SlideShowProgressBar,
   TriangleIconWrapper,
 } from '../timeline-card-content/timeline-card-content.styles';
+import { ButtonWrapper } from './timeline-card-media-buttons';
 import {
   CardImage,
+  CardMediaHeader,
   CardVideo,
   ErrorMessage,
   IFrameVideo,
@@ -203,6 +205,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     [],
   );
 
+  // checks if the arrow should be shown
   const canShowArrow = useMemo(
     () =>
       (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
@@ -210,12 +213,22 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     [],
   );
 
+  // checks if we can display the detailed text
   const canShowTextMemo = useMemo(
     () => showText && !!detailsText,
     [showText, detailsText],
   );
 
-  console.log(canShowTextMemo);
+  // checks if the text content should be shown
+  const canShowTextContent = useMemo(
+    () => title || content || detailsText,
+    [title, content, detailsText],
+  );
+
+  const canExpand = useMemo(
+    () => textInsideMedia && !!detailsText,
+    [content, detailsText],
+  );
 
   const TextContent = useMemo(() => {
     return (
@@ -227,15 +240,34 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         theme={theme}
         expandFull={expandDetails}
         showText={showText}
+        expandable={canExpand}
       >
-        <TitleMemo
-          title={title}
-          theme={theme}
-          active={active}
-          url={url}
-          fontSize={fontSizes?.cardTitle}
-          classString={classNames?.cardTitle}
-        />
+        <CardMediaHeader>
+          <TitleMemo
+            title={title}
+            theme={theme}
+            active={active}
+            url={url}
+            fontSize={fontSizes?.cardTitle}
+            classString={classNames?.cardTitle}
+          />
+          {canExpand ? (
+            <ButtonWrapper>
+              <ShowOrHideTextButtonMemo
+                onToggle={toggleText}
+                show={showText}
+                textInsideMedia
+                theme={theme}
+              />
+              <ExpandButtonMemo
+                theme={theme}
+                expanded={expandDetails}
+                onExpand={toggleExpand}
+                textInsideMedia
+              />
+            </ButtonWrapper>
+          ) : null}
+        </CardMediaHeader>
         {showText && (
           <SubTitleMemo
             content={content}
@@ -243,22 +275,6 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             classString={classNames?.cardSubTitle}
           />
         )}
-        {textInsideMedia ? (
-          <>
-            <ShowOrHideTextButtonMemo
-              onToggle={toggleText}
-              show={showText}
-              textInsideMedia
-              theme={theme}
-            />
-            <ExpandButtonMemo
-              theme={theme}
-              expanded={expandDetails}
-              onExpand={toggleExpand}
-              textInsideMedia
-            />
-          </>
-        ) : null}
         {canShowTextMemo ? (
           <DetailsTextMemo
             theme={theme}
@@ -317,7 +333,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
           ></TriangleIconWrapper>
         ) : null}
       </MediaWrapper>
-      {TextContent}
+      {canShowTextContent ? TextContent : null}
     </>
   );
 };

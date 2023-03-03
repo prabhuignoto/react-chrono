@@ -176,7 +176,7 @@ export const VerticalNewMedia: FunctionComponent<{
         fontSizes={{
           title: '1.5rem',
         }}
-        timelinePointShape="diamond"
+        timelinePointShape="square"
         // focusActiveItemOnLoad
         // activeItemIndex={9}
         mediaHeight={400}

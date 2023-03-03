@@ -12,9 +12,8 @@ const Button = styled.button`
   height: 1.5rem;
   justify-content: center;
   padding: 0;
-  position: absolute;
   width: 1.5rem;
-  z-index: 10px;
+  margin: 0 0.25rem;
 
   svg {
     width: 70%;
@@ -26,9 +25,6 @@ export const ExpandButton = styled(Button)<{
   expandFull?: boolean;
   theme: Theme;
 }>`
-  right: 0.5rem;
-  top: 0.5rem;
-
   &:hover {
     color: ${(p) => p.theme?.primary};
   }
@@ -38,10 +34,17 @@ export const ShowHideTextButton = styled(Button)<{
   showText?: boolean;
   theme: Theme;
 }>`
-  top: 0.5rem;
-  right: 2.5rem;
-
   &:hover {
     color: ${(p) => p.theme?.primary};
   }
+`;
+
+export const ButtonWrapper = styled.ul`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-left: auto;
 `;
