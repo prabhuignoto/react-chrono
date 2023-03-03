@@ -152,10 +152,6 @@ export const VerticalNewMedia: FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
 }> = ({ type, items }) => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  <button onClick={(prev) => setDarkMode(!prev)}>toggle dark</button>;
-
   return (
     <>
       <Vertical id="vertical">
