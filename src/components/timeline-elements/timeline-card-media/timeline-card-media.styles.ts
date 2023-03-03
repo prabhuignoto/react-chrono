@@ -27,7 +27,7 @@ export const MediaWrapper = styled.div<{
   dir?: string;
   mode?: TimelineMode;
   slideShowActive?: boolean;
-  textInsideMedia?: boolean;
+  textOverlay?: boolean;
   theme?: Theme;
 }>`
   align-items: center;
@@ -35,7 +35,7 @@ export const MediaWrapper = styled.div<{
   background: ${(p) => (p.active ? `rgba(${p.theme?.cardBg}, 0.35)` : '')};
   border-radius: 4px;
   flex-direction: row;
-  height: ${(p) => (p.textInsideMedia ? 'calc(100% - 1em)' : '0')};
+  height: ${(p) => (p.textOverlay ? 'calc(100% - 1em)' : '0')};
   padding: 0.5em;
   pointer-events: ${(p) => (!p.active && p.slideShowActive ? 'none' : '')};
   position: relative;
@@ -144,12 +144,13 @@ export const MediaDetailsWrapper = styled.div<{
     left: 50%;
     bottom: ${p.expandFull ? '0%' : ' 5%'};
     transform: translateX(-50%);
-    // background: rgba(255,255,255,0.99);
-    background: ${p.theme?.cardDetailsBackGround};
+    background: ${
+      p.showText ? p.theme?.cardDetailsBackGround : p.theme?.cardBg
+    };
     backdrop-filter: blur(1px);
     padding: 0.25rem;
     ${p.showText ? `overflow: auto;` : `overflow: hidden;`}
-    transition: height 0.25s ease-out, width 0.25s ease-out, bottom 0.25s ease-out;
+    transition: height 0.25s ease-out, width 0.25s ease-out, bottom 0.25s ease-out, background 0.25s ease-out;
   `
       : ``}
 
@@ -158,7 +159,7 @@ export const MediaDetailsWrapper = styled.div<{
       ? `border-radius: 6px; box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);`
       : ``}
   --rc-gradient-color: ${(p) => p.gradientColor};
-  ${linearGradient}
+  ${(p) => (p.gradientColor ? linearGradient : null)}
 `;
 
 export const ErrorMessage = styled.span`

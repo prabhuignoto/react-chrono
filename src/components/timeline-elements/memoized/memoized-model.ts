@@ -24,13 +24,13 @@ export interface Content extends common {
 export type ExpandButtonModel = {
   expanded?: boolean;
   onExpand?: (ev: React.PointerEvent | React.KeyboardEvent) => void;
-  textInsideMedia?: boolean;
+  textOverlay?: boolean;
 } & Pick<common, 'theme'>;
 
 export type ShowHideTextButtonModel = {
   onToggle: (ev: React.PointerEvent | React.KeyboardEvent) => void;
   show?: boolean;
-  textInsideMedia?: boolean;
+  textOverlay?: boolean;
 } & Pick<common, 'theme'>;
 
 export type DetailsTextMemoModel = {
@@ -39,7 +39,7 @@ export type DetailsTextMemoModel = {
   onRender?: (height?: number) => void;
   show?: boolean;
   text: ReactNode;
-  textInsideMedia?: boolean;
+  textOverlay?: boolean;
   theme?: Theme;
 };
 

@@ -54,7 +54,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
       cardLess,
       theme,
       classNames,
-      textInsideMedia,
+      textOverlay,
       mediaHeight,
     } = useContext(GlobalContext);
 
@@ -141,7 +141,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
           alternateCards={alternateCards}
           noTitle={!title}
           flip={flipLayout}
-          height={textInsideMedia ? mediaHeight : cardHeight}
+          height={textOverlay ? mediaHeight : cardHeight}
         >
           {!cardLess ? (
             <TimelineCard

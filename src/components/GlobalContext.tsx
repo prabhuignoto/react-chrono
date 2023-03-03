@@ -22,13 +22,13 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
     classNames,
     mode,
     fontSizes,
-    textInsideMedia,
+    textOverlay,
     darkMode,
   } = props;
   const defaultProps = Object.assign<PropsModel, PropsModel, PropsModel>(
     {},
     {
-      alignMedia: mode === 'VERTICAL' && !textInsideMedia ? 'left' : 'center',
+      alignMedia: mode === 'VERTICAL' && !textOverlay ? 'left' : 'center',
       borderLessCards: false,
       cardLess: false,
       contentDetailsHeight: 150,
@@ -43,7 +43,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         scrollbar: false,
       },
       showAllCardsHorizontal: false,
-      textInsideMedia: false,
+      textOverlay: false,
       timelineCircleDimension: 16,
       timelinePointShape: 'circle',
       titleDateFormat: 'MMM DD, YYYY',

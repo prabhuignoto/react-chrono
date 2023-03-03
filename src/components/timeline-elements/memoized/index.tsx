@@ -70,12 +70,12 @@ const SubTitleMemo = React.memo<Content>(
 SubTitleMemo.displayName = 'Timeline Content';
 
 export const ExpandButtonMemo = memo<ExpandButtonModel>(
-  ({ theme, expanded, onExpand, textInsideMedia }: ExpandButtonModel) => {
+  ({ theme, expanded, onExpand, textOverlay }: ExpandButtonModel) => {
     const label = useMemo(() => {
       return expanded ? 'Minimize' : 'Maximize';
     }, [expanded]);
 
-    return textInsideMedia ? (
+    return textOverlay ? (
       <ExpandButton
         onPointerDown={onExpand}
         onKeyDown={(ev) => ev.key === 'Enter' && onExpand?.(ev)}
@@ -95,12 +95,12 @@ export const ExpandButtonMemo = memo<ExpandButtonModel>(
 ExpandButtonMemo.displayName = 'Expand Button';
 
 export const ShowOrHideTextButtonMemo = memo<ShowHideTextButtonModel>(
-  ({ textInsideMedia, onToggle, theme, show }: ShowHideTextButtonModel) => {
+  ({ textOverlay, onToggle, theme, show }: ShowHideTextButtonModel) => {
     const label = useMemo(() => {
       return show ? 'Hide Text' : 'Show Text';
     }, [show]);
 
-    return textInsideMedia ? (
+    return textOverlay ? (
       <ShowHideTextButton
         onPointerDown={onToggle}
         theme={theme}
@@ -122,7 +122,7 @@ const DetailsTextMemo = memo<DetailsTextMemoModel>(
     theme,
     show,
     expand,
-    textInsideMedia,
+    textOverlay,
     text,
     height,
     onRender,
@@ -142,7 +142,7 @@ const DetailsTextMemo = memo<DetailsTextMemoModel>(
       }
     }, [theme?.cardDetailsBackGround]);
 
-    return textInsideMedia ? (
+    return textOverlay ? (
       <DetailsTextWrapper
         ref={onTextRef}
         height={expand ? height : 0}

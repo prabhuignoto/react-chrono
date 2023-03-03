@@ -8,7 +8,7 @@ export const TimelineItemContentWrapper = styled.section<{
   minHeight?: number;
   mode?: TimelineMode;
   noMedia?: boolean;
-  textInsideMedia?: boolean;
+  textOverlay?: boolean;
   theme?: Theme;
 }>`
   align-items: flex-start;
@@ -28,7 +28,7 @@ export const TimelineItemContentWrapper = styled.section<{
   width: 98%;
   z-index: 0;
 
-  height: ${(p) => (p.textInsideMedia ? '0' : '')};
+  height: ${(p) => (p.textOverlay ? '0' : '')};
 
   &:focus {
     outline: 1px solid ${(p) => p.theme?.primary};
@@ -103,7 +103,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
   customContent?: boolean;
   height?: number;
   showMore?: boolean;
-  textInsideMedia?: boolean;
+  textOverlay?: boolean;
   theme?: Theme;
   useReadMore?: boolean;
 }>`
@@ -113,8 +113,8 @@ export const TimelineContentDetailsWrapper = styled.div<{
   margin: 0 auto;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-  ${({ useReadMore, customContent, showMore, height = 0, textInsideMedia }) =>
-    useReadMore && !customContent && !showMore && !textInsideMedia
+  ${({ useReadMore, customContent, showMore, height = 0, textOverlay }) =>
+    useReadMore && !customContent && !showMore && !textOverlay
       ? `max-height: ${height}px;`
       : ''}
   ${({
@@ -122,9 +122,9 @@ export const TimelineContentDetailsWrapper = styled.div<{
     contentHeight = 0,
     height = 0,
     showMore,
-    textInsideMedia,
+    textOverlay,
   }) =>
-    showMore && !textInsideMedia
+    showMore && !textOverlay
       ? `max-height: ${(cardHeight || 0) + (contentHeight || 0) - height}px;`
       : ''}
   overflow-x: hidden;

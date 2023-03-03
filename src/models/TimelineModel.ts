@@ -150,7 +150,7 @@ export type TimelineProps = {
   // enables the slideshow
   slideShow?: boolean;
 
-  textInsideMedia?: boolean;
+  textOverlay?: boolean;
 
   // custom theme
   theme?: Theme;

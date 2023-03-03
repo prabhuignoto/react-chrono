@@ -70,7 +70,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         fontSizes,
         classNames,
         contentDetailsHeight,
-        textInsideMedia,
+        textOverlay,
         mediaHeight,
       } = useContext(GlobalContext);
 
@@ -291,10 +291,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               useReadMore={useReadMore}
               borderLess={borderLessCards}
               showMore={showMore}
-              cardHeight={!textInsideMedia ? cardActualHeight : null}
+              cardHeight={!textOverlay ? cardActualHeight : null}
               contentHeight={detailsHeight}
               height={contentDetailsHeight}
-              textInsideMedia={textInsideMedia}
+              textOverlay={textOverlay}
             >
               {customContent ? customContent : getTextOrContent}
             </TimelineContentDetailsWrapper>
@@ -305,13 +305,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         cardActualHeight,
         contentDetailsHeight,
         detailsHeight,
-        textInsideMedia,
+        textOverlay,
       ]);
 
       return (
         <TimelineItemContentWrapper
           className={contentClass}
-          minHeight={textInsideMedia && media ? mediaHeight : cardHeight}
+          minHeight={textOverlay && media ? mediaHeight : cardHeight}
           maxWidth={cardWidth}
           mode={mode}
           noMedia={!media}
@@ -332,7 +332,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           tabIndex={0}
           theme={theme}
           borderLess={borderLessCards}
-          textInsideMedia={textInsideMedia}
+          textOverlay={textOverlay}
         >
           {title ? (
             <ContentHeader
@@ -366,9 +366,9 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             />
           )}
 
-          {!textInsideMedia && DetailsText}
+          {!textOverlay && DetailsText}
 
-          {(!textInsideMedia || !media) && (
+          {(!textOverlay || !media) && (
             <ContentFooter
               theme={theme}
               progressRef={progressRef}
