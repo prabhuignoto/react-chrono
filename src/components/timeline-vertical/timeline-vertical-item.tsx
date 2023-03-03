@@ -119,7 +119,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
           cardLess={cardLess}
         />
       ),
-      [slideShowRunning, active, handleOnActive],
+      [slideShowRunning, active],
     );
 
     return (
