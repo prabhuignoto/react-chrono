@@ -6,6 +6,7 @@ type common = {
   color?: string;
   dir?: string;
   fontSize?: string;
+  padding?: boolean;
   theme?: Theme;
 };
 

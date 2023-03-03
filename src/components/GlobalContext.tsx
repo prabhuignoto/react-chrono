@@ -1,6 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { TimelineProps as PropsModel } from '../models/TimelineModel';
+import {
+  getDefaultButtonTexts,
+  getDefaultClassNames,
+  getDefaultThemeOrDark,
+} from '../utils/index';
 
 const GlobalContext = React.createContext<PropsModel>({});
 
@@ -18,6 +23,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
     mode,
     fontSizes,
     textInsideMedia,
+    darkMode,
   } = props;
   const defaultProps = Object.assign<PropsModel, PropsModel, PropsModel>(
     {},
@@ -26,6 +32,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       borderLessCards: false,
       cardLess: false,
       contentDetailsHeight: 150,
+      darkMode: false,
       disableAutoScrollOnClick: false,
       disableClickOnCircle: false,
       focusActiveItemOnLoad: false,
@@ -46,22 +53,12 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       ...props,
       activeItemIndex: flipLayout ? items?.length - 1 : 0,
       buttonTexts: {
-        first: 'Go to First',
-        last: 'Go to Last',
-        next: 'Next',
-        play: 'Play Slideshow',
-        previous: 'Previous',
+        ...getDefaultButtonTexts(),
         ...buttonTexts,
       },
       cardHeight: cardLess ? cardHeight || 80 : cardHeight,
       classNames: {
-        card: 'rc-card',
-        cardMedia: 'rc-card-media',
-        cardSubTitle: 'rc-card-subtitle',
-        cardText: 'rc-card-text',
-        cardTitle: 'rc-card-title',
-        controls: 'rc-controls',
-        title: 'rc-title',
+        ...getDefaultClassNames(),
         ...classNames,
       },
       fontSizes: {
@@ -72,17 +69,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         ...fontSizes,
       },
       theme: {
-        cardBgColor: '#fff',
-        cardDetailsBackGround: '#0f52ba',
-        cardDetailsColor: '#fff',
-        cardForeColor: '#000',
-        cardSubtitleColor: '#000',
-        cardTitleColor: '#000',
-        detailsColor: '#000',
-        primary: '#0f52ba',
-        secondary: '#ffdf00',
-        titleColor: '#0f52ba',
-        titleColorActive: '#0f52ba',
+        ...getDefaultThemeOrDark(darkMode),
         ...theme,
       },
     },

@@ -334,13 +334,15 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           borderLess={borderLessCards}
           textInsideMedia={textInsideMedia}
         >
-          <ContentHeader
-            title={title}
-            theme={theme}
-            url={url}
-            media={media}
-            content={content}
-          />
+          {title ? (
+            <ContentHeader
+              title={title}
+              theme={theme}
+              url={url}
+              media={media}
+              content={content}
+            />
+          ) : null}
           {/* render media video or image */}
           {media && (
             <CardMedia

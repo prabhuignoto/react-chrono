@@ -43,14 +43,17 @@ export const TimelineCardHeader = styled.header`
 export const CardSubTitle = styled.h2<{
   dir?: string;
   fontSize?: string;
+  padding?: boolean;
   theme?: Theme;
 }>`
   color: ${(p) => p.theme.cardSubtitleColor};
   font-size: ${(p) => p.fontSize};
   font-weight: 600;
-  margin: 0.5rem 0;
+  margin: 0;
+  // margin: 0.5rem 0;
   text-align: left;
   width: 97%;
+  padding: ${(p) => (p.padding ? '0.5rem 0 0.5rem 0.5rem;' : '')};
 `;
 
 export const CardTitle = styled.h1<{
@@ -65,8 +68,16 @@ export const CardTitle = styled.h1<{
   margin: 0;
   text-align: left;
   width: 95%;
-  padding: ${(p) => (p.padding ? '0.5rem 0 0.5rem 0.5rem;' : '')} &.active {
+  padding: ${(p) => (p.padding ? '0.25rem 0 0.25rem 0.5rem;' : '')} &.active {
     color: ${(p) => p.theme.primary};
+  }
+`;
+
+export const CardTitleAnchor = styled.a`
+  color: inherit;
+
+  &:active {
+    color: inherit;
   }
 `;
 
@@ -265,7 +276,7 @@ export const TriangleIconWrapper = styled.span<{
   width: 1.5rem;
   height: 1.5rem;
   position: absolute;
-  top: 50%;
+  top: calc(50%);
   background: ${(p) => p.theme.cardBgColor};
   transform: translateY(-50%) rotate(225deg);
   z-index: -1;

@@ -3,6 +3,23 @@ import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
 import { ScrollBar } from '../../common/styles';
 
+export const linearGradient = css`
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2rem;
+    background: linear-gradient(
+      0deg,
+      var(--rc-gradient-color) 0%,
+      var(--rc-gradient-color) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+`;
+
 export const MediaWrapper = styled.div<{
   active?: boolean;
   align?: 'left' | 'right' | 'center';
@@ -15,7 +32,7 @@ export const MediaWrapper = styled.div<{
 }>`
   align-items: center;
   align-self: center;
-  background: ${(p) => (p.active ? `rgba(${p.theme?.secondary}, 0.35)` : '')};
+  background: ${(p) => (p.active ? `rgba(${p.theme?.cardBg}, 0.35)` : '')};
   border-radius: 4px;
   flex-direction: row;
   height: ${(p) => (p.textInsideMedia ? 'calc(100% - 1em)' : '0')};
@@ -75,6 +92,7 @@ export const MediaDetailsWrapper = styled.div<{
   borderLessCard?: boolean;
   expandFull?: boolean;
   expandable?: boolean;
+  gradientColor?: string | null;
   mode?: TimelineMode;
   showText?: boolean;
   textInMedia?: boolean;
@@ -126,7 +144,8 @@ export const MediaDetailsWrapper = styled.div<{
     left: 50%;
     bottom: ${p.expandFull ? '0%' : ' 5%'};
     transform: translateX(-50%);
-    background: rgba(255,255,255,0.99);
+    // background: rgba(255,255,255,0.99);
+    background: ${p.theme?.cardDetailsBackGround};
     backdrop-filter: blur(1px);
     padding: 0.25rem;
     ${p.showText ? `overflow: auto;` : `overflow: hidden;`}
@@ -138,6 +157,8 @@ export const MediaDetailsWrapper = styled.div<{
     borderLessCard
       ? `border-radius: 6px; box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);`
       : ``}
+  --rc-gradient-color: ${(p) => p.gradientColor};
+  ${linearGradient}
 `;
 
 export const ErrorMessage = styled.span`
@@ -155,25 +176,10 @@ export const IFrameVideo = styled.iframe`
   width: 100%;
 `;
 
-export const linearGradient = css`
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2rem;
-    background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
-  }
-`;
-
 export const DetailsTextWrapper = styled.div<{
   background: string;
   expandFull?: boolean;
+  gradientColor?: string;
   height?: number;
   show?: boolean;
   theme?: Theme;
@@ -215,7 +221,7 @@ export const DetailsTextWrapper = styled.div<{
 `;
 
 export const CardMediaHeader = styled.div`
-  padding: 0.5em 0 0.5rem 0.5rem;
+  padding: 0.5rem 0 0.5rem 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;

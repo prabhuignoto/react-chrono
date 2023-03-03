@@ -86,8 +86,10 @@ export type TimelineProps = {
   // height of the details text
   contentDetailsHeight?: number;
 
+  darkMode?: boolean;
   // disables the auto scroll on click
   disableAutoScrollOnClick?: boolean;
+
   // disables the click on the circle
   disableClickOnCircle?: boolean;
 

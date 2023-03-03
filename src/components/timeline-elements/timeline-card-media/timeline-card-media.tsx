@@ -10,6 +10,7 @@ import React, {
   useState,
 } from 'react';
 import { CardMediaModel } from '../../../models/TimelineMediaModel';
+import { hexToRGBA } from '../../../utils';
 import { GlobalContext } from '../../GlobalContext';
 import {
   DetailsTextMemo,
@@ -230,6 +231,11 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     [content, detailsText],
   );
 
+  const gradientColor = useMemo(
+    () => hexToRGBA(theme?.cardDetailsBackGround || '', 0.8),
+    [],
+  );
+
   const TextContent = useMemo(() => {
     return (
       <MediaDetailsWrapper
@@ -241,6 +247,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         expandFull={expandDetails}
         showText={showText}
         expandable={canExpand}
+        gradientColor={!expandDetails ? gradientColor : null}
       >
         <CardMediaHeader>
           <TitleMemo
@@ -273,6 +280,8 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             content={content}
             fontSize={fontSizes?.cardSubtitle}
             classString={classNames?.cardSubTitle}
+            padding
+            theme={theme}
           />
         )}
         {canShowTextMemo ? (
@@ -287,7 +296,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         ) : null}
       </MediaDetailsWrapper>
     );
-  }, [showText, expandDetails, canShowTextMemo]);
+  }, [showText, expandDetails, canShowTextMemo, gradientColor]);
 
   return (
     <>

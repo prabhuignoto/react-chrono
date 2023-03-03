@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Theme } from '../../../models/Theme';
 
-const Button = styled.button`
+const Button = css`
   align-items: center;
   background: none;
-  background: rgba(0, 0, 0, 0.1);
+  // background: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -14,6 +14,8 @@ const Button = styled.button`
   padding: 0;
   width: 1.5rem;
   margin: 0 0.25rem;
+  background: ${(p) => p.theme?.primary};
+  color: #fff;
 
   svg {
     width: 70%;
@@ -21,22 +23,18 @@ const Button = styled.button`
   }
 `;
 
-export const ExpandButton = styled(Button)<{
+export const ExpandButton = styled.button<{
   expandFull?: boolean;
   theme: Theme;
 }>`
-  &:hover {
-    color: ${(p) => p.theme?.primary};
-  }
+  ${Button}
 `;
 
-export const ShowHideTextButton = styled(Button)<{
+export const ShowHideTextButton = styled.button<{
   showText?: boolean;
   theme: Theme;
 }>`
-  &:hover {
-    color: ${(p) => p.theme?.primary};
-  }
+  ${Button}
 `;
 
 export const ButtonWrapper = styled.ul`

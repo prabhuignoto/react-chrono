@@ -5,6 +5,7 @@ import { MaximizeIcon, MinimizeIcon, MinusIcon, PlusIcon } from '../../icons';
 import {
   CardSubTitle,
   CardTitle,
+  CardTitleAnchor,
 } from '../timeline-card-content/timeline-card-content.styles';
 import {
   ExpandButton,
@@ -40,9 +41,9 @@ const TitleMemo = ({
       data-class={classString}
       padding={padding}
     >
-      <a href={url} target="_blank" rel="noreferrer">
+      <CardTitleAnchor href={url} target="_blank" rel="noreferrer">
         {title}
-      </a>
+      </CardTitleAnchor>
     </CardTitle>
   ) : null;
 };
@@ -50,7 +51,7 @@ const TitleMemo = ({
 TitleMemo.displayName = 'Timeline Title';
 
 const SubTitleMemo = React.memo<Content>(
-  ({ content, color, dir, theme, fontSize, classString }: Content) =>
+  ({ content, color, dir, theme, fontSize, classString, padding }: Content) =>
     content ? (
       <CardSubTitle
         style={{ color }}
@@ -58,6 +59,7 @@ const SubTitleMemo = React.memo<Content>(
         theme={theme}
         fontSize={fontSize}
         className={cls('card-sub-title', classString)}
+        padding={padding}
       >
         {content}
       </CardSubTitle>
@@ -160,9 +162,5 @@ const DetailsTextMemo = memo<DetailsTextMemoModel>(
 );
 
 DetailsTextMemo.displayName = 'Details Text';
-
-// const CardHeaderMediaMemo = memo(() => {
-
-// })
 
 export { TitleMemo, SubTitleMemo, DetailsTextMemo };

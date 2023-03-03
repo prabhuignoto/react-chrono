@@ -133,6 +133,7 @@ export const VerticalBasic: FunctionComponent<{
         fontSizes={{
           title: '1.5rem',
         }}
+        flipLayout
         focusActiveItemOnLoad
         activeItemIndex={9}
         // mediaHeight={300}
@@ -163,14 +164,15 @@ export const VerticalNewMedia: FunctionComponent<{
         scrollable={{ scrollbar: false }}
         textInsideMedia
         // borderLessCards
-        theme={{
-          cardBgColor: '#fff',
-          cardForeColor: '#fff',
-          titleColorActive: '#6495ed',
-          titleColor: '#922724',
-          cardDetailsBackGround: '#e8e8e8',
-          cardDetailsColor: '#000',
-        }}
+        // theme={{
+        //   cardBgColor: '#fff',
+        //   cardForeColor: '#fff',
+        //   titleColorActive: '#6495ed',
+        //   titleColor: '#922724',
+        //   cardDetailsBackGround: '#e8e8e8',
+        //   cardDetailsColor: '#000',
+        // }}
+        // darkMode
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
         fontSizes={{
