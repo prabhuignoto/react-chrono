@@ -120,13 +120,13 @@ export const VerticalBasic: FunctionComponent<{
         scrollable={{ scrollbar: false }}
         // textOverlay
         // borderLessCards
-        theme={{
-          cardBgColor: '#fff',
-          cardForeColor: '#fff',
-          titleColorActive: '#6495ed',
-          titleColor: '#922724',
-          cardDetailsBackGround: '#e8e8e8',
-        }}
+        // theme={{
+        //   cardBgColor: '#fff',
+        //   cardForeColor: '#fff',
+        //   titleColorActive: '#6495ed',
+        //   titleColor: '#922724',
+        //   cardDetailsBackGround: '#e8e8e8',
+        // }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
         fontSizes={{

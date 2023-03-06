@@ -1,6 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
 import { Theme } from '../../../models/Theme';
 import { TimelineMode } from '../../../models/TimelineModel';
+import { linearGradient } from '../timeline-card-media/timeline-card-media.styles';
 
 export const TimelineItemContentWrapper = styled.section<{
   borderLess?: boolean;
@@ -101,6 +102,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
   cardHeight?: number | null;
   contentHeight?: number;
   customContent?: boolean;
+  gradientColor?: string | null;
   height?: number;
   showMore?: boolean;
   textOverlay?: boolean;
@@ -113,6 +115,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
   margin: 0 auto;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
+  position: relative;
   ${({ useReadMore, customContent, showMore, height = 0, textOverlay }) =>
     useReadMore && !customContent && !showMore && !textOverlay
       ? `max-height: ${height}px;`
@@ -178,6 +181,9 @@ export const TimelineContentDetailsWrapper = styled.div<{
     }
     overflow: hidden;
   }
+
+  --rc-gradient-color: ${(p) => p.gradientColor};
+  ${linearGradient}
 `;
 
 export const ShowMore = styled.span<{ show?: boolean; theme?: Theme }>`

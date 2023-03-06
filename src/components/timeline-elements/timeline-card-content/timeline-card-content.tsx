@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import { TimelineContentModel } from '../../../models/TimelineContentModel';
 import { MediaState } from '../../../models/TimelineMediaModel';
+import { hexToRGBA } from '../../../utils';
 import { GlobalContext } from '../../GlobalContext';
 import CardMedia from '../timeline-card-media/timeline-card-media';
 import { ContentFooter } from './content-footer';
@@ -278,6 +279,12 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
       }, [timelineContent, showMore]);
 
+      const gradientColor = useMemo(() => {
+        return !showMore && textContentLarge
+          ? hexToRGBA(theme?.cardDetailsBackGround || '#ffffff', 0.8)
+          : null;
+      }, [showMore, textContentLarge]);
+
       const DetailsText = useMemo(() => {
         return (
           <>
@@ -295,6 +302,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               contentHeight={detailsHeight}
               height={contentDetailsHeight}
               textOverlay={textOverlay}
+              gradientColor={gradientColor}
             >
               {customContent ? customContent : getTextOrContent}
             </TimelineContentDetailsWrapper>
@@ -306,6 +314,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         contentDetailsHeight,
         detailsHeight,
         textOverlay,
+        gradientColor,
       ]);
 
       return (

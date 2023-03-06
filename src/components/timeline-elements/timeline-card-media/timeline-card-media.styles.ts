@@ -14,7 +14,6 @@ export const linearGradient = css`
     background: linear-gradient(
       0deg,
       var(--rc-gradient-color) 0%,
-      var(--rc-gradient-color) 50%,
       rgba(255, 255, 255, 0) 100%
     );
   }
