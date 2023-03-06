@@ -19,7 +19,8 @@ export const VerticalTree: FunctionComponent<{
           mode="VERTICAL_ALTERNATING"
           theme={theme}
           slideShow
-          slideItemDuration={22350}
+          slideItemDuration={1350}
+          slideShowType="reveal"
           allowDynamicUpdate
           cardHeight={300}
           // textOverlay

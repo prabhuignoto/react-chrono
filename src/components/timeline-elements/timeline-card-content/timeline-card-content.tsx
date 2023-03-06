@@ -73,15 +73,16 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         contentDetailsHeight,
         textOverlay,
         mediaHeight,
+        slideShowType,
       } = useContext(GlobalContext);
 
       const canShowProgressBar = useMemo(() => {
-        const canShow = active && slideShowActive;
-        if (media) {
-          return canShow && media.type !== 'VIDEO';
-        } else {
-          return canShow;
-        }
+        return (
+          active &&
+          slideShowActive &&
+          media?.type !== 'VIDEO' &&
+          slideShowType === 'progress_bar'
+        );
       }, [active, slideShowActive]);
 
       const canShowMore = useMemo(() => {
@@ -98,15 +99,19 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       const onContainerRef = useCallback(
         (node: HTMLElement) => {
-          const detailsEle = detailsRef.current;
-          if (node && detailsEle) {
-            const { scrollHeight, offsetTop } = detailsEle;
-            containerWidth.current = node.clientWidth;
-            setStartWidth(containerWidth.current);
-            setCardActualHeight(scrollHeight);
-            setDetailsHeight(detailsEle.offsetHeight);
-            setTextContentLarge(scrollHeight + offsetTop > node.clientHeight);
+          if (node === null) {
+            return;
           }
+          const detailsEle = detailsRef.current;
+          if (!detailsEle) {
+            return;
+          }
+          const { scrollHeight, offsetTop } = detailsEle;
+          containerWidth.current = node.clientWidth;
+          setStartWidth(containerWidth.current);
+          setCardActualHeight(scrollHeight);
+          setDetailsHeight(detailsEle.offsetHeight);
+          setTextContentLarge(scrollHeight + offsetTop > node.clientHeight);
         },
         [detailsRef.current],
       );
@@ -134,7 +139,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       // pause the slide show
       const tryHandlePauseSlideshow = useCallback(() => {
-        if (active && slideShowActive) {
+        if (active && slideShowActive && slideShowType === 'progress_bar') {
           window.clearTimeout(timerRef.current);
           setPaused(true);
 
@@ -151,7 +156,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       // resumes the slide show
       const tryHandleResumeSlideshow = useCallback(() => {
-        if (active && slideShowActive) {
+        if (active && slideShowActive && slideShowType === 'progress_bar') {
           if (!slideItemDuration) {
             return;
           }
@@ -280,10 +285,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [timelineContent, showMore]);
 
       const gradientColor = useMemo(() => {
-        return !showMore && textContentLarge
+        return textContentLarge
           ? hexToRGBA(theme?.cardDetailsBackGround || '#ffffff', 0.8)
           : null;
-      }, [showMore, textContentLarge]);
+      }, [textContentLarge]);
 
       const DetailsText = useMemo(() => {
         return (
@@ -340,8 +345,12 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           ref={onContainerRef}
           tabIndex={0}
           theme={theme}
-          borderLess={borderLessCards}
+          borderLessCards={borderLessCards}
           textOverlay={textOverlay}
+          active={active}
+          slideShowType={slideShowType}
+          slideShowActive={slideShowActive}
+          branchDir={branchDir}
         >
           {title ? (
             <ContentHeader

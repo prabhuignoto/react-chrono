@@ -1,23 +1,39 @@
 import styled, { css, keyframes } from 'styled-components';
 import { Theme } from '../../../models/Theme';
-import { TimelineMode } from '../../../models/TimelineModel';
+import { TimelineProps } from '../../../models/TimelineModel';
 import { linearGradient } from '../timeline-card-media/timeline-card-media.styles';
+import {
+  reveal,
+  slideFromRight,
+  slideInFromLeft,
+  slideInFromTop,
+} from './card-animations.styles';
 
-export const TimelineItemContentWrapper = styled.section<{
-  borderLess?: boolean;
-  maxWidth?: number;
-  minHeight?: number;
-  mode?: TimelineMode;
-  noMedia?: boolean;
-  textOverlay?: boolean;
-  theme?: Theme;
-}>`
+type ContentT = Pick<
+  TimelineProps,
+  'theme' | 'slideShow' | 'mode' | 'borderLessCards' | 'slideShowType'
+>;
+
+export const TimelineItemContentWrapper = styled.section<
+  {
+    active?: boolean;
+    branchDir?: string;
+    maxWidth?: number;
+    minHeight?: number;
+    noMedia?: boolean;
+    slideShowActive?: boolean;
+    textOverlay?: boolean;
+  } & ContentT
+>`
   align-items: flex-start;
   background: ${(p) => p.theme.cardBgColor};
   border-radius: 4px;
   display: flex;
-  ${({ borderLess }) =>
-    !borderLess ? `filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.3))` : 'none'};
+  position: absolute;
+  ${({ borderLessCards }) =>
+    !borderLessCards
+      ? `filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.3))`
+      : 'none'};
   flex-direction: column;
   justify-content: flex-start;
   line-height: 1.5em;
@@ -34,6 +50,50 @@ export const TimelineItemContentWrapper = styled.section<{
   &:focus {
     outline: 1px solid ${(p) => p.theme?.primary};
   }
+
+  ${(p) => {
+    if (p.slideShowActive && p.active) {
+      if (p.slideShowType === 'slide_in') {
+        return css`
+          animation: ${slideInFromTop} 0.5s ease-in-out;
+        `;
+      } else if (
+        p.slideShowType === 'slide_from_sides' &&
+        p.branchDir === 'left'
+      ) {
+        return css`
+          animation: ${slideInFromLeft} 0.5s ease-in-out;
+        `;
+      } else if (
+        p.slideShowType === 'slide_from_sides' &&
+        p.branchDir === 'right'
+      ) {
+        return css`
+          animation: ${slideFromRight} 0.5s ease-in-out;
+        `;
+      } else {
+        return css`
+          animation: ${reveal} 0.5s ease-in-out;
+        `;
+      }
+    }
+  }}
+
+  ${(p) => {
+    if (p.slideShowActive && p.active) {
+      return css`
+        opacity: 1;
+        animation-timing-function: ease-in-out;
+        animation-duration: 0.5s;
+      `;
+    }
+
+    if (p.slideShowActive && !p.active) {
+      return css`
+        opacity: 0;
+      `;
+    }
+  }}
 `;
 
 export const TimelineCardHeader = styled.header`
@@ -99,6 +159,7 @@ export const TimelineSubContent = styled.span<{ fontSize?: string }>`
 
 export const TimelineContentDetailsWrapper = styled.div<{
   borderLess?: boolean;
+  branchDir?: string;
   cardHeight?: number | null;
   contentHeight?: number;
   customContent?: boolean;
@@ -173,7 +234,6 @@ export const TimelineContentDetailsWrapper = styled.div<{
   }
 
   &.show-less {
-    // max-height: 50px;
     scrollbar-width: none;
 
     &::-webkit-scrollbar {

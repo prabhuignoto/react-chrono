@@ -2,7 +2,7 @@ import { Theme } from '../../../models/Theme';
 
 export const defaultTheme: Theme = {
   cardBgColor: '#fff',
-  cardDetailsBackGround: '#ffffff',
+  cardDetailsBackGround: '#f5f5f5',
   cardDetailsColor: '#000',
   cardForeColor: '#000',
   cardSubtitleColor: '#000',

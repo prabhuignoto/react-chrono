@@ -150,6 +150,8 @@ export type TimelineProps = {
   // enables the slideshow
   slideShow?: boolean;
 
+  slideShowType?: 'reveal' | 'progress_bar' | 'slide_in' | 'slide_from_sides';
+
   textOverlay?: boolean;
 
   // custom theme
