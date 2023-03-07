@@ -111,7 +111,6 @@ export const CardSubTitle = styled.h2<{
   font-size: ${(p) => p.fontSize};
   font-weight: 600;
   margin: 0;
-  // margin: 0.5rem 0;
   text-align: left;
   width: 97%;
   padding: ${(p) => (p.padding ? '0.5rem 0 0.5rem 0.5rem;' : '')};
@@ -149,12 +148,17 @@ export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
   font-weight: 400;
   margin: 0;
   width: 100%;
+  color: ${(p) => p.theme.cardForeColor};
 `;
 
-export const TimelineSubContent = styled.span<{ fontSize?: string }>`
+export const TimelineSubContent = styled.span<{
+  fontSize?: string;
+  theme?: Theme;
+}>`
   margin-bottom: 0.5rem;
   display: block;
   font-size: ${(p) => p.fontSize};
+  color: ${(p) => p.theme.cardForeColor};
 `;
 
 export const TimelineContentDetailsWrapper = styled.div<{

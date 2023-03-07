@@ -64,7 +64,8 @@ const SubTitleMemo = React.memo<Content>(
         {content}
       </CardSubTitle>
     ) : null,
-  () => true,
+  (prev, next) =>
+    prev.theme?.cardSubtitleColor === next.theme?.cardSubtitleColor,
 );
 
 SubTitleMemo.displayName = 'Timeline Content';

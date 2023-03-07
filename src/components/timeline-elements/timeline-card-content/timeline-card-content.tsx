@@ -75,6 +75,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         textOverlay,
         mediaHeight,
         slideShowType,
+        showProgressOnSlideshow,
       } = useContext(GlobalContext);
 
       const canShowProgressBar = useMemo(() => {
@@ -82,7 +83,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           active &&
           slideShowActive &&
           media?.type !== 'VIDEO' &&
-          slideShowType === 'progress_bar'
+          showProgressOnSlideshow
         );
       }, [active, slideShowActive]);
 
@@ -146,7 +147,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       // pause the slide show
       const tryHandlePauseSlideshow = useCallback(() => {
-        if (active && slideShowActive && slideShowType === 'progress_bar') {
+        if (active && slideShowActive) {
           window.clearTimeout(timerRef.current);
           setPaused(true);
 
@@ -163,7 +164,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       // resumes the slide show
       const tryHandleResumeSlideshow = useCallback(() => {
-        if (active && slideShowActive && slideShowType === 'progress_bar') {
+        if (active && slideShowActive) {
           if (!slideItemDuration) {
             return;
           }
@@ -275,6 +276,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
                 key={index}
                 fontSize={fontSizes?.cardText}
                 className={classNames?.cardText}
+                theme={theme}
               >
                 {text}
               </TimelineSubContent>
@@ -293,13 +295,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             </TimelineContentDetails>
           ) : null;
         }
-      }, [timelineContent, showMore]);
+      }, [timelineContent, showMore, JSON.stringify(theme)]);
 
       const gradientColor = useMemo(() => {
         return !showMore && textContentLarge
           ? hexToRGBA(theme?.cardDetailsBackGround || '#ffffff', 0.8)
           : null;
-      }, [textContentLarge, showMore]);
+      }, [textContentLarge, showMore, theme?.cardDetailsBackGround]);
 
       const DetailsText = useMemo(() => {
         return (
@@ -331,6 +333,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         detailsHeight,
         textOverlay,
         gradientColor,
+        theme,
       ]);
 
       return (
@@ -340,7 +343,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           maxWidth={cardWidth}
           mode={mode}
           noMedia={!media}
-          onClick={(ev: React.MouseEvent) => {
+          onPointerDown={(ev: React.PointerEvent) => {
             ev.stopPropagation();
             if (
               !slideShowActive &&

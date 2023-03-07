@@ -253,7 +253,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
 
   const gradientColor = useMemo(
     () => hexToRGBA(theme?.cardDetailsBackGround || '', 0.8),
-    [],
+    [theme?.cardDetailsBackGround],
   );
 
   const canShowGradient = useMemo(

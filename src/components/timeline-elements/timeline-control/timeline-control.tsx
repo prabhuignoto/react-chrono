@@ -2,6 +2,7 @@ import cls from 'classnames';
 import React, { useContext, useMemo } from 'react';
 import { TimelineControlModel } from '../../../models/TimelineControlModel';
 import { GlobalContext } from '../../GlobalContext';
+import { MoonIcon, SunIcon } from '../../icons';
 import ChevronLeft from '../../icons/chev-left';
 import ChevronRightIcon from '../../icons/chev-right';
 import ChevronsLeftIcon from '../../icons/chevs-left';
@@ -24,8 +25,10 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   slideShowRunning,
   onReplay,
   slideShowEnabled,
+  onToggleDarkMode,
+  isDark,
 }: TimelineControlModel) => {
-  const { mode, flipLayout, theme, buttonTexts, classNames } =
+  const { mode, flipLayout, theme, buttonTexts, classNames, enableDarkToggle } =
     useContext(GlobalContext);
 
   const rotate = useMemo(() => mode !== 'HORIZONTAL', [mode]);
@@ -34,6 +37,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
     () => flipLayout && mode === 'HORIZONTAL',
     [],
   );
+
   return (
     <TimelineControlContainer
       slideShowActive={slideShowRunning}
@@ -125,6 +129,24 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
             </TimelineNavButton>
           )}
         </TimelineNavItem>
+
+        {/* dark toggle button */}
+        {enableDarkToggle ? (
+          <TimelineNavItem>
+            {slideShowEnabled && (
+              <TimelineNavButton
+                theme={theme}
+                onClick={onToggleDarkMode}
+                title={buttonTexts?.play}
+                tabIndex={0}
+                aria-controls="timeline-main-wrapper"
+                aria-label={buttonTexts?.play}
+              >
+                {isDark ? <SunIcon /> : <MoonIcon />}
+              </TimelineNavButton>
+            )}
+          </TimelineNavItem>
+        ) : null}
       </TimelineNavWrapper>
     </TimelineControlContainer>
   );

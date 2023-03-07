@@ -144,7 +144,7 @@ export const VerticalBasic: FunctionComponent<{
         classNames={{
           cardText: 'custom-text',
         }}
-        slideShowType="progress_bar"
+        enableDarkToggle
       />
     </ComponentContainerTree>
   </Vertical>

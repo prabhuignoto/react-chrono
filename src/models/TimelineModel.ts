@@ -95,6 +95,8 @@ export type TimelineProps = {
 
   disableNavOnKey?: boolean;
 
+  enableDarkToggle?: boolean;
+
   // enables the outline view
   enableOutline?: boolean;
 
@@ -138,11 +140,15 @@ export type TimelineProps = {
   // callback when the scroll ends
   onScrollEnd?: () => void;
 
+  onThemeChange?: () => void;
+
   // option to enable scrollbar
   scrollable?: boolean | { scrollbar: boolean };
 
   // show all cards in horizontal mode
   showAllCardsHorizontal?: boolean;
+
+  showProgressOnSlideshow?: boolean;
 
   // duration each slide is shown
   slideItemDuration?: number;
@@ -150,7 +156,7 @@ export type TimelineProps = {
   // enables the slideshow
   slideShow?: boolean;
 
-  slideShowType?: 'reveal' | 'progress_bar' | 'slide_in' | 'slide_from_sides';
+  slideShowType?: 'reveal' | 'slide_in' | 'slide_from_sides';
 
   textOverlay?: boolean;
 

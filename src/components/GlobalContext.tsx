@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import { createContext, FunctionComponent, useCallback, useState } from 'react';
 import { TimelineProps as PropsModel } from '../models/TimelineModel';
 import {
   getDefaultButtonTexts,
@@ -7,9 +7,11 @@ import {
   getDefaultThemeOrDark,
 } from '../utils/index';
 
-const GlobalContext = React.createContext<PropsModel>({});
+const GlobalContext = createContext<
+  PropsModel & { toggleDarkMode?: () => void }
+>({});
 
-const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
+const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
   props,
 ) => {
   const {
@@ -24,7 +26,12 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
     fontSizes,
     textOverlay,
     darkMode,
+    slideShow,
+    onThemeChange,
   } = props;
+
+  const [isDarkMode, setIsDarkMode] = useState(darkMode);
+
   const defaultProps = Object.assign<PropsModel, PropsModel, PropsModel>(
     {},
     {
@@ -32,9 +39,9 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
       borderLessCards: false,
       cardLess: false,
       contentDetailsHeight: 150,
-      darkMode: false,
       disableAutoScrollOnClick: false,
       disableClickOnCircle: false,
+      enableDarkToggle: false,
       focusActiveItemOnLoad: false,
       lineWidth: 3,
       mediaHeight: 200,
@@ -43,6 +50,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         scrollbar: false,
       },
       showAllCardsHorizontal: false,
+      showProgressOnSlideshow: slideShow,
       slideItemDuration: 2000,
       slideShowType: 'reveal',
       textOverlay: false,
@@ -71,7 +79,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         ...fontSizes,
       },
       theme: {
-        ...getDefaultThemeOrDark(darkMode),
+        ...getDefaultThemeOrDark(isDarkMode),
         ...theme,
       },
     },
@@ -79,8 +87,15 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
 
   const { children } = props;
 
+  const toggleDarkMode = useCallback(() => {
+    setIsDarkMode(!isDarkMode);
+    onThemeChange?.();
+  }, [isDarkMode]);
+
   return (
-    <GlobalContext.Provider value={defaultProps}>
+    <GlobalContext.Provider
+      value={{ ...defaultProps, darkMode: isDarkMode, toggleDarkMode }}
+    >
       {children}
     </GlobalContext.Provider>
   );

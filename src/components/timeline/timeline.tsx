@@ -59,12 +59,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     scrollable = true,
     showAllCardsHorizontal,
     theme,
+    darkMode,
+    toggleDarkMode,
+    enableDarkToggle
   } = useContext(GlobalContext);
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
   const [hasFocus, setHasFocus] = useState(false);
   const horizontalContentRef = useRef<HTMLDivElement | null>(null);
+
   // const activeItemIndex = useRef<number>(activeTimelineItem);
 
   // reference to the timeline
@@ -392,6 +396,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             onReplay={onRestartSlideshow}
             slideShowEnabled={slideShowEnabled}
             slideShowRunning={slideShowRunning}
+            isDark={darkMode}
+            onToggleDarkMode={toggleDarkMode}
           />
         </TimelineControlContainer>
       )}
