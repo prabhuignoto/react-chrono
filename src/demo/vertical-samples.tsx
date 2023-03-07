@@ -20,7 +20,7 @@ export const VerticalTree: FunctionComponent<{
           theme={theme}
           slideShow
           slideItemDuration={1350}
-          slideShowType="reveal"
+          slideShowType="slide_from_sides"
           allowDynamicUpdate
           cardHeight={300}
           // textOverlay
@@ -133,7 +133,7 @@ export const VerticalBasic: FunctionComponent<{
         fontSizes={{
           title: '1.5rem',
         }}
-        flipLayout
+        // flipLayout
         focusActiveItemOnLoad
         activeItemIndex={9}
         // mediaHeight={300}
@@ -144,6 +144,7 @@ export const VerticalBasic: FunctionComponent<{
         classNames={{
           cardText: 'custom-text',
         }}
+        slideShowType="progress_bar"
       />
     </ComponentContainerTree>
   </Vertical>
@@ -162,7 +163,7 @@ export const VerticalNewMedia: FunctionComponent<{
             mode="VERTICAL_ALTERNATING"
             slideShow
             cardWidth={450}
-            slideItemDuration={2500}
+            slideItemDuration={2000}
             scrollable={{ scrollbar: false }}
             textOverlay
             // borderLessCards

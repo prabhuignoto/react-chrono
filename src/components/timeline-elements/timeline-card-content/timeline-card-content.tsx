@@ -59,6 +59,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       const [cardActualHeight, setCardActualHeight] = useState(0);
       const [detailsHeight, setDetailsHeight] = useState(0);
+      const [hasBeenActivated, setHasBeenActivated] = useState(false);
 
       const {
         mode,
@@ -96,6 +97,12 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           detailsEle.scrollTop = 0;
         }
       }, [showMore]);
+
+      useEffect(() => {
+        if (active) {
+          setHasBeenActivated(true);
+        }
+      }, [active]);
 
       const onContainerRef = useCallback(
         (node: HTMLElement) => {
@@ -184,6 +191,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         // disabled autofocus on active
         if (active && hasFocus) {
           containerRef.current && containerRef.current.focus();
+        }
+
+        if (!slideShowActive) {
+          setHasBeenActivated(false);
         }
       }, [active, slideShowActive]);
 
@@ -285,10 +296,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [timelineContent, showMore]);
 
       const gradientColor = useMemo(() => {
-        return textContentLarge
+        return !showMore && textContentLarge
           ? hexToRGBA(theme?.cardDetailsBackGround || '#ffffff', 0.8)
           : null;
-      }, [textContentLarge]);
+      }, [textContentLarge, showMore]);
 
       const DetailsText = useMemo(() => {
         return (
@@ -347,7 +358,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           theme={theme}
           borderLessCards={borderLessCards}
           textOverlay={textOverlay}
-          active={active}
+          active={hasBeenActivated}
           slideShowType={slideShowType}
           slideShowActive={slideShowActive}
           branchDir={branchDir}

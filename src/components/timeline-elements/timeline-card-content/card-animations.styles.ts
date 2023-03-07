@@ -14,7 +14,7 @@ export const reveal = keyframes`
 export const slideInFromTop = keyframes`
   0% {
     opacity: 0;
-    transform: translateY(-30%);
+    transform: translateY(-50%);
   }
   100% {
     opacity: 1;
@@ -25,7 +25,7 @@ export const slideInFromTop = keyframes`
 export const slideInFromLeft = keyframes`
   0% {
     opacity: 0;
-    transform: translateX(-30%);
+    transform: translateX(-50%);
   }
   100% {
     opacity: 1;
@@ -36,7 +36,7 @@ export const slideInFromLeft = keyframes`
 export const slideFromRight = keyframes`
   0% {
     opacity: 0;
-    transform: translateX(30%);
+    transform: translateX(50%);
   } 
   100% {
     opacity: 1;

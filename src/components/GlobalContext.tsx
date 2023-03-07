@@ -43,6 +43,7 @@ const GlobalContextProvider: React.FunctionComponent<Partial<PropsModel>> = (
         scrollbar: false,
       },
       showAllCardsHorizontal: false,
+      slideItemDuration: 2000,
       slideShowType: 'reveal',
       textOverlay: false,
       timelineCircleDimension: 16,
