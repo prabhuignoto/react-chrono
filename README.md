@@ -182,7 +182,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | slideItemDuration        | Duration (in ms), the timeline card is active during a `slideshow`.                                                                                                          | 5000                   |
 | slideShow                | Enables the slideshow control.                                                                                                                                               | false                  |
 | theme                    | Prop to customize the colors.                                                                                                                                                |                        |
-| timelineCircleDimension  | Dimensions of the circular points on the timeline                                                                                                                            | false                  |
+| timelinePointDimension   | Dimensions of the circular points on the timeline                                                                                                                            | false                  |
 | useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself.                         | true                   |
 
 ### Mode

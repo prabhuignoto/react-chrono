@@ -19,7 +19,7 @@ const VerticalPoint: React.FunctionComponent<VerticalPointModel> = memo(
       alternateCards,
       slideShowRunning,
       iconChild,
-      timelineCircleDimension,
+      timelinePointDimension,
       lineWidth,
       disableClickOnCircle,
       cardLess,
@@ -94,7 +94,7 @@ const VerticalPoint: React.FunctionComponent<VerticalPointModel> = memo(
           <Shape
             className={circleClass}
             theme={theme}
-            dimension={timelineCircleDimension}
+            dimension={timelinePointDimension}
             timelinePointShape={timelinePointShape}
           >
             {iconChild ? iconChild : null}

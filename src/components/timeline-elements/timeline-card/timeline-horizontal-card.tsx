@@ -47,7 +47,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   const {
     mode,
     cardPositionHorizontal: position,
-    timelineCircleDimension,
+    timelinePointDimension,
     disableClickOnCircle,
     cardLess,
     showAllCardsHorizontal,
@@ -163,7 +163,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           data-testid="timeline-circle"
           theme={theme}
           aria-label={title}
-          dimension={timelineCircleDimension}
+          dimension={timelinePointDimension}
         >
           {iconChild ? iconChild : null}
         </Shape>

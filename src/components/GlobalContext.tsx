@@ -54,7 +54,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
       slideItemDuration: 2000,
       slideShowType: 'reveal',
       textOverlay: false,
-      timelineCircleDimension: 16,
+      timelinePointDimension: 16,
       timelinePointShape: 'circle',
       titleDateFormat: 'MMM DD, YYYY',
       useReadMore: true,

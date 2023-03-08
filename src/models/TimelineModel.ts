@@ -164,7 +164,7 @@ export type TimelineProps = {
   theme?: Theme;
 
   // width of the timeline circle
-  timelineCircleDimension?: number;
+  timelinePointDimension?: number;
 
   timelinePointShape?: 'circle' | 'square' | 'diamond';
 

@@ -140,7 +140,8 @@ export const VerticalBasic: FunctionComponent<{
         cardHeight={250}
         // cardHeight={350}
         contentDetailsHeight={100}
-        timelineCircleDimension={20}
+        timelinePointDimension={20}
+        timelinePointShape="diamond"
         classNames={{
           cardText: 'custom-text',
         }}
@@ -166,6 +167,7 @@ export const VerticalNewMedia: FunctionComponent<{
             slideItemDuration={2000}
             scrollable={{ scrollbar: false }}
             textOverlay
+            slideShowType="slide_from_sides"
             // borderLessCards
             // theme={{
             //   cardBgColor: '#fff',
@@ -188,7 +190,7 @@ export const VerticalNewMedia: FunctionComponent<{
             // cardHeight={250}
             // cardHeight={350}
             contentDetailsHeight={100}
-            timelineCircleDimension={20}
+            timelinePointDimension={20}
             classNames={{
               cardText: 'custom-text',
             }}
@@ -232,7 +234,7 @@ export const VerticalCustomContent2: FunctionComponent<{
         cardWidth={650}
         scrollable
         flipLayout
-        timelineCircleDimension={30}
+        timelinePointDimension={30}
       >
         <div>
           <div style={{ width: '250px', height: '250px' }}>

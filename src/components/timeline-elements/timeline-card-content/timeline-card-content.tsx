@@ -419,7 +419,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         </TimelineItemContentWrapper>
       );
     },
-    (prev, next) => prev.active === next.active,
   );
 
 TimelineCardContent.displayName = 'TimelineCardContent';

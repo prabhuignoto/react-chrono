@@ -25,7 +25,7 @@ export const HorizontalBasic: React.FunctionComponent<{
           slideItemDuration={2550}
           itemWidth={200}
           onItemSelected={(selected) => console.log(selected)}
-          timelineCircleDimension={20}
+          timelinePointDimension={20}
           cardPositionHorizontal="BOTTOM"
           buttonTexts={{
             first: 'Jump to First',
@@ -66,7 +66,7 @@ export const HorizontalAll: React.FunctionComponent<{
           itemWidth={400}
           focusActiveItemOnLoad
           onItemSelected={(selected) => console.log(selected)}
-          timelineCircleDimension={20}
+          timelinePointDimension={20}
           showAllCardsHorizontal
           activeItemIndex={8}
         >
