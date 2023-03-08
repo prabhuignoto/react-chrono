@@ -61,7 +61,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     theme,
     darkMode,
     toggleDarkMode,
-    enableDarkToggle
+    enableDarkToggle,
   } = useContext(GlobalContext);
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);

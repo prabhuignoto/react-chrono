@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from 'react';
+import { FunctionComponent, memo, useContext } from 'react';
 import { GlobalContext } from '../../GlobalContext';
 import { SubTitleMemo, TitleMemo } from '../memoized';
 import { ContentHeaderProps } from './header-footer.model';
@@ -11,38 +11,36 @@ import { TimelineCardHeader } from './timeline-card-content.styles';
  * The title and subtitle are memoized to prevent unnecessary re-renders.
  */
 
-const ContentHeader: FunctionComponent<ContentHeaderProps> = ({
-  title,
-  theme,
-  url,
-  media,
-  content,
-}) => {
-  const { fontSizes, classNames } = useContext(GlobalContext);
+const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
+  ({ title, theme, url, media, content }: ContentHeaderProps) => {
+    const { fontSizes, classNames } = useContext(GlobalContext);
 
-  return (
-    <TimelineCardHeader>
-      {/* main title */}
-      {!media && (
-        <TitleMemo
-          title={title}
-          theme={theme}
-          url={url}
-          fontSize={fontSizes?.cardTitle}
-          classString={classNames?.cardTitle}
-        />
-      )}
-      {/* main timeline text */}
-      {!media && (
-        <SubTitleMemo
-          content={content}
-          theme={theme}
-          fontSize={fontSizes?.cardSubtitle}
-          classString={classNames?.cardSubTitle}
-        />
-      )}
-    </TimelineCardHeader>
-  );
-};
+    return (
+      <TimelineCardHeader>
+        {/* main title */}
+        {!media && (
+          <TitleMemo
+            title={title}
+            theme={theme}
+            url={url}
+            fontSize={fontSizes?.cardTitle}
+            classString={classNames?.cardTitle}
+          />
+        )}
+        {/* main timeline text */}
+        {!media && (
+          <SubTitleMemo
+            content={content}
+            theme={theme}
+            fontSize={fontSizes?.cardSubtitle}
+            classString={classNames?.cardSubTitle}
+          />
+        )}
+      </TimelineCardHeader>
+    );
+  },
+);
+
+ContentHeader.displayName = 'ContentHeader';
 
 export { ContentHeader };

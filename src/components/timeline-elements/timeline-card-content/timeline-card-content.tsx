@@ -354,8 +354,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               onClick(id);
             }
           }}
-          onMouseEnter={tryHandlePauseSlideshow}
-          onMouseLeave={tryHandleResumeSlideshow}
+          onPointerEnter={tryHandlePauseSlideshow}
+          onPointerLeave={tryHandleResumeSlideshow}
           ref={onContainerRef}
           tabIndex={0}
           theme={theme}
@@ -419,6 +419,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         </TimelineItemContentWrapper>
       );
     },
+    (prev, next) => prev.active === next.active,
   );
 
 TimelineCardContent.displayName = 'TimelineCardContent';

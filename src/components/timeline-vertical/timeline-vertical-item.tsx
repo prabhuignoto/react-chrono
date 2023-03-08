@@ -169,6 +169,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = memo(
       </VerticalItemWrapper>
     );
   },
+  (prev, next) => prev.active === next.active,
 );
 
 VerticalItem.displayName = 'VerticalItem';

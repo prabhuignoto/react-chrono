@@ -89,12 +89,12 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   const handleTimelineUpdate = useCallback((actvTimelineIndex: number) => {
     setItems((lineItems) =>
-      lineItems.map((item, index) =>
-        Object.assign({}, item, {
-          active: index === actvTimelineIndex,
-        }),
-      ),
+      lineItems.map((item, index) => ({
+        ...item,
+        active: index === actvTimelineIndex,
+      })),
     );
+
     setActiveTimelineItem(actvTimelineIndex);
 
     if (items) {
