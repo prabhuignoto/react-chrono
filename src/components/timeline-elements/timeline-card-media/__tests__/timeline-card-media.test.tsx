@@ -162,7 +162,7 @@ describe('Timeline Card media', () => {
 
   // should render detailsText as expected IN HORIZONTAL MODE
   it('should render detailsText as expected', () => {
-    const { getByText } = customRender(
+    const { getByText, getByRole } = customRender(
       <TimelineCardMedia
         media={{
           name: 'Image',
@@ -182,7 +182,8 @@ describe('Timeline Card media', () => {
       { providerProps: { ...providerProps, mode: 'HORIZONTAL' } },
     );
 
-    expect(getByText('This is a test')).toBeInTheDocument();
+    expect(getByRole('heading', { level: 1 })).toBeInTheDocument();
+    expect(getByText('Image title')).toBeInTheDocument(); 
   });
 
   // should render the arrow (triangleDir) as expected

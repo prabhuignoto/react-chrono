@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Timeline item title > should match the snapshot 1`] = `
+<div>
+  <div
+    class="sc-beySbM fJeJyg timeline-item-title"
+    font-size="1.5rem"
+  >
+    title
+  </div>
+</div>
+`;

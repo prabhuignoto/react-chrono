@@ -7,6 +7,15 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   plugins: [react()],
   test: {
+    coverage: {
+      cleanOnRerun: true,
+      enabled: true,
+      exclude: ['./src/components/**/*.test.tsx'],
+      excludeNodeModules: true,
+      include: ['./src/components/**/*.tsx'],
+      provider: 'c8',
+      reporter: ['text', 'html', 'lcov', 'json'],
+    },
     environment: 'jsdom',
     globals: true,
     include: ['./src/components/**/*.test.tsx'],
