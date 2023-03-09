@@ -18,7 +18,6 @@ import {
  */
 
 const ContentFooter: FunctionComponent<ContentFooterProps> = ({
-  theme,
   showProgressBar,
   onExpand,
   triangleDir,
@@ -31,7 +30,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   canShow,
   progressRef,
 }) => {
-  const { mode } = useContext(GlobalContext);
+  const { mode, theme } = useContext(GlobalContext);
 
   const canShowTriangleIcon = useMemo(() => {
     return (['VERTICAL', 'VERTICAL_ALTERNATING'] as TimelineMode[]).some(
@@ -79,6 +78,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           paused={paused}
           ref={progressRef}
           startWidth={startWidth}
+          role="progressbar"
         ></SlideShowProgressBar>
       )}
 

@@ -12,8 +12,8 @@ import { TimelineCardHeader } from './timeline-card-content.styles';
  */
 
 const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
-  ({ title, theme, url, media, content }: ContentHeaderProps) => {
-    const { fontSizes, classNames } = useContext(GlobalContext);
+  ({ title, url, media, content }: ContentHeaderProps) => {
+    const { fontSizes, classNames, theme } = useContext(GlobalContext);
 
     return (
       <TimelineCardHeader>
