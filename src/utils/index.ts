@@ -36,6 +36,7 @@ export const getDefaultClassNames = () => ({
 });
 
 export const getDefaultButtonTexts = () => ({
+  darkToggle: 'Toggle Dark Mode',
   first: 'Go to First',
   last: 'Go to Last',
   next: 'Next',

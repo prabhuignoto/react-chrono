@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es2019",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -17,9 +21,23 @@
     "rootDir": "src",
     "declaration": true,
     "declarationDir": "dist",
-    "types": ["cypress"]
+    "types": [
+      "node",
+      "@types/testing-library__jest-dom",
+    ]
   },
-  "include": ["src/components", "src/models"],
-  "exclude": ["src/**/*.test.tsx", "node_modules", "dist", "rollup.config.mjs"],
-  "files": ["src/react-chrono.ts"]
+  "include": [
+    "src/components",
+    "src/models"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "rollup.config.mjs",
+    "cypress",
+    "cypress.config.ts"
+  ],
+  "files": [
+    "src/react-chrono.ts"
+  ]
 }

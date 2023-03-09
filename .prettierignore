@@ -1,5 +1,5 @@
 src/examples
 test
 env
-__tests__
+# __tests__
 icons

@@ -133,18 +133,16 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
         {/* dark toggle button */}
         {enableDarkToggle ? (
           <TimelineNavItem>
-            {slideShowEnabled && (
-              <TimelineNavButton
-                theme={theme}
-                onPointerDown={onToggleDarkMode}
-                title={buttonTexts?.play}
-                tabIndex={0}
-                aria-controls="timeline-main-wrapper"
-                aria-label={buttonTexts?.play}
-              >
-                {isDark ? <SunIcon /> : <MoonIcon />}
-              </TimelineNavButton>
-            )}
+            <TimelineNavButton
+              theme={theme}
+              onPointerDown={onToggleDarkMode}
+              title={buttonTexts?.play}
+              tabIndex={0}
+              aria-controls="timeline-main-wrapper"
+              aria-label={buttonTexts?.darkToggle}
+            >
+              {isDark ? <SunIcon /> : <MoonIcon />}
+            </TimelineNavButton>
           </TimelineNavItem>
         ) : null}
       </TimelineNavWrapper>
