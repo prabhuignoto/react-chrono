@@ -31,7 +31,6 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   onClick,
   onElapsed,
   slideShowRunning,
-  theme,
   title,
   wrapperId,
   customContent,
@@ -52,6 +51,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     cardLess,
     showAllCardsHorizontal,
     classNames,
+    theme,
   } = useContext(GlobalContext);
 
   const handleClick = () => {
@@ -69,7 +69,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         const circleOffsetLeft = circle.offsetLeft;
         const wrapperOffsetLeft = wrapper.offsetLeft;
 
-        autoScroll({
+        autoScroll?.({
           pointOffset: circleOffsetLeft + wrapperOffsetLeft,
           pointWidth: circle.clientWidth,
         });

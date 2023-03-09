@@ -5,7 +5,7 @@ const items: TimelineItemModel[] = [
   {
     title: 'May 1945',
     cardTitle: 'Dunkirk',
-    // url: 'http://www.history.com',
+    url: 'http://www.history.com',
     media: {
       name: 'dunkirk beach',
       source: {

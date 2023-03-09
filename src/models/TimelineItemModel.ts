@@ -39,7 +39,7 @@ export type TimelineCardModel = Pick<
   | 'url'
   | 'timelineContent'
 > & {
-  autoScroll: ({
+  autoScroll?: ({
     pointOffset,
     pointWidth,
     timelinePointHeight,
@@ -48,8 +48,8 @@ export type TimelineCardModel = Pick<
   customContent?: React.ReactNode | React.ReactNode[];
   hasFocus?: boolean;
   iconChild?: React.ReactNode;
-  mode: TimelineMode;
-  onClick: (id?: string) => void;
+  // mode: TimelineMode;
+  onClick?: (id?: string) => void;
   onElapsed?: (id?: string) => void;
   slideItemDuration?: number;
   slideShowRunning?: boolean;
