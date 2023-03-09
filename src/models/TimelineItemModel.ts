@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { Theme } from './Theme';
 import { Scroll } from './TimelineHorizontalModel';
 import { Media } from './TimelineMediaModel';
-import { TimelineMode, TimelineProps } from './TimelineModel';
+import { TimelineProps } from './TimelineModel';
 /**
  *
  *
