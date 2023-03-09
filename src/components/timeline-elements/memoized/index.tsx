@@ -41,9 +41,13 @@ const TitleMemo = ({
       data-class={classString}
       padding={padding}
     >
-      <CardTitleAnchor href={url} target="_blank" rel="noreferrer">
-        {title}
-      </CardTitleAnchor>
+      {url ? (
+        <CardTitleAnchor href={url} target="_blank" rel="noreferrer">
+          {title}
+        </CardTitleAnchor>
+      ) : (
+        title
+      )}
     </CardTitle>
   ) : null;
 };

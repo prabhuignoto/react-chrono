@@ -43,7 +43,6 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
     active,
     id,
     onMediaStateChange,
-    theme,
     title,
     content,
     media,
@@ -73,6 +72,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
       alignMedia,
       borderLessCards,
       textOverlay,
+      theme,
     } = useContext(GlobalContext);
 
     useEffect(() => {
@@ -138,6 +138,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
           src={`${media.source.url}${
             active ? '?autoplay=1&enablejsapi=1' : '?enablejsapi=1'
           }`}
+          title={media.name}
         />
       );
 
@@ -152,6 +153,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
           autoPlay={active}
           ref={videoRef}
           onLoadedData={handleMediaLoaded}
+          data-testid="rc-video"
           onPlay={() =>
             onMediaStateChange({
               id,
@@ -192,6 +194,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
           alt={media.name}
           loading={'lazy'}
           enableBorderRadius={borderLessCards}
+          role="img"
         />
       );
     }, [active, mediaLoaded, borderLessCards]);
@@ -324,7 +327,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
           ) : null}
         </MediaDetailsWrapper>
       );
-    }, [showText, expandDetails, canShowTextMemo, gradientColor]);
+    }, [showText, expandDetails, canShowTextMemo, gradientColor, title]);
 
     const canShowProgressBar = useMemo(
       () => showProgressBar && textOverlay,
@@ -373,6 +376,8 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
               dir={triangleDir}
               theme={theme}
               offset={-15}
+              role="img"
+              data-testid="arrow-icon"
             ></TriangleIconWrapper>
           ) : null}
         </MediaWrapper>

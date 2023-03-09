@@ -1,72 +1,7 @@
-import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
-import { TimelineProps } from '../../../../models/TimelineModel';
-import { GlobalContext } from '../../../GlobalContext';
+import { commonProps, customRender, providerProps } from '../../../common/test';
 import TimelineControl from '../timeline-control';
-
-const commonProps = {
-  disableLeft: false,
-  disableRight: false,
-  onFirst: () => {},
-  onLast: () => {},
-  onNext: () => {},
-  onPrevious: () => {},
-  onReplay: () => {},
-  onToggleDarkMode: () => {},
-  slideShowEnabled: false,
-  slideShowRunning: false,
-};
-
-const providerProps: TimelineProps = {
-  buttonTexts: {
-    darkToggle: 'dark-toggle',
-    first: 'first',
-    last: 'last',
-    next: 'next',
-    play: 'play',
-    previous: 'previous',
-  },
-  classNames: {
-    card: 'card',
-    cardMedia: 'card-media',
-    cardSubTitle: 'card-subtitle',
-    cardText: 'card-text',
-    cardTitle: 'card-title',
-    controls: 'controls',
-    title: 'title',
-  },
-  darkMode: false,
-  enableDarkToggle: true,
-  fontSizes: {
-    cardSubtitle: '0.85rem',
-    cardText: '1rem',
-    cardTitle: '1.25rem',
-    title: '1.5rem',
-  },
-  // complete the rest of the props with some default values
-  mediaHeight: 200,
-  mode: 'VERTICAL_ALTERNATING',
-  scrollable: {
-    scrollbar: false,
-  },
-  showAllCardsHorizontal: false,
-  showProgressOnSlideshow: false,
-  slideItemDuration: 2000,
-  slideShowType: 'reveal',
-  textOverlay: false,
-  timelinePointDimension: 16,
-  timelinePointShape: 'circle',
-  titleDateFormat: 'MMM DD, YYYY',
-  useReadMore: true,
-};
-
-const customRender = (ui: any, { providerProps, ...renderOptions }: any) => {
-  return render(
-    <GlobalContext.Provider value={providerProps}>{ui}</GlobalContext.Provider>,
-    renderOptions,
-  );
-};
 
 describe('TimelineControl', () => {
   it('should render', () => {
