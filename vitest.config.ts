@@ -8,13 +8,10 @@ export default defineConfig({
   plugins: [react()],
   test: {
     coverage: {
-      cleanOnRerun: true,
+      clean: true,
       enabled: true,
-      exclude: ['./src/components/**/*.test.tsx'],
-      excludeNodeModules: true,
-      include: ['./src/components/**/*.tsx'],
-      provider: 'c8',
-      reporter: ['text', 'html', 'lcov', 'json'],
+      reporter: ['html', 'lcov', 'clover', 'cobertura'],
+      reportsDirectory: './coverage',
     },
     environment: 'jsdom',
     globals: true,

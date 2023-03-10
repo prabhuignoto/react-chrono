@@ -4,7 +4,7 @@ import { VerticalItemModel } from '../../models/TimelineVerticalModel';
 import { GlobalContext } from '../GlobalContext';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
-import { VerticalPoint } from './timeline-point';
+import { TimelinePoint } from './timeline-point';
 import {
   TimelineCardContentWrapper,
   TimelineTitleWrapper,
@@ -98,9 +98,9 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
   });
 
   // timeline circle
-  const VerticalPointMemo = useMemo(
+  const TimelinePointMemo = useMemo(
     () => (
-      <VerticalPoint
+      <TimelinePoint
         active={active}
         alternateCards={alternateCards}
         className={className}
@@ -162,7 +162,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
           />
         ) : null}
       </TimelineCardContentWrapper>
-      {VerticalPointMemo}
+      {TimelinePointMemo}
     </VerticalItemWrapper>
   );
 };

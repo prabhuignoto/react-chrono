@@ -1,15 +1,15 @@
 import cls from 'classnames';
 import React, { memo, useContext, useEffect, useMemo, useRef } from 'react';
-import { VerticalPointModel } from '../../models/TimelineVerticalModel';
+import { TimelinePointModel } from '../../models/TimelineVerticalModel';
 import { GlobalContext } from '../GlobalContext';
 import { Shape } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
 import {
-  VerticalPointContainer,
-  VerticalPointWrapper,
+  TimelinePointContainer,
+  TimelinePointWrapper,
 } from './timeline-vertical-shape.styles';
 
-const VerticalPoint: React.FunctionComponent<VerticalPointModel> = memo(
-  (props: VerticalPointModel) => {
+const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
+  (props: TimelinePointModel) => {
     const {
       className,
       id,
@@ -74,7 +74,7 @@ const VerticalPoint: React.FunctionComponent<VerticalPointModel> = memo(
     }, []);
 
     return (
-      <VerticalPointWrapper
+      <TimelinePointWrapper
         width={lineWidth}
         alternateCards={alternateCards}
         bg={theme && theme.primary}
@@ -83,7 +83,7 @@ const VerticalPoint: React.FunctionComponent<VerticalPointModel> = memo(
         role="button"
         cardLess={cardLess}
       >
-        <VerticalPointContainer
+        <TimelinePointContainer
           className={`${className} timeline-vertical-circle`}
           {...clickHandlerProps}
           ref={circleRef}
@@ -99,13 +99,13 @@ const VerticalPoint: React.FunctionComponent<VerticalPointModel> = memo(
           >
             {iconChild ? iconChild : null}
           </Shape>
-        </VerticalPointContainer>
-      </VerticalPointWrapper>
+        </TimelinePointContainer>
+      </TimelinePointWrapper>
     );
   },
   (prev, next) => prev.active === next.active,
 );
 
-VerticalPoint.displayName = 'VerticalPoint';
+TimelinePoint.displayName = 'TimelinePoint';
 
-export { VerticalPoint };
+export { TimelinePoint };

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const VerticalPointWrapper = styled.div<{
+export const TimelinePointWrapper = styled.div<{
   alternateCards?: boolean;
   bg?: string;
   cardLess?: boolean;
@@ -50,7 +50,7 @@ export const VerticalPointWrapper = styled.div<{
   }
 `;
 
-export const VerticalPointContainer = styled.div`
+export const TimelinePointContainer = styled.div`
   position: relative;
   z-index: 1;
 `;

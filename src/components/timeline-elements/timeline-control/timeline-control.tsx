@@ -51,7 +51,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
           <TimelineNavButton
             mode={mode}
             theme={theme}
-            onPointerDown={flippedHorizontally ? onLast : onFirst}
+            onClick={flippedHorizontally ? onLast : onFirst}
             title={flipLayout ? buttonTexts?.last : buttonTexts?.first}
             aria-label={flipLayout ? buttonTexts?.last : buttonTexts?.first}
             aria-disabled={disableLeft}
@@ -68,7 +68,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
           <TimelineNavButton
             mode={mode}
             theme={theme}
-            onPointerDown={flippedHorizontally ? onNext : onPrevious}
+            onClick={flippedHorizontally ? onNext : onPrevious}
             title={flipLayout ? buttonTexts?.next : buttonTexts?.previous}
             aria-label={flipLayout ? buttonTexts?.next : buttonTexts?.previous}
             aria-disabled={disableLeft}
@@ -85,7 +85,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
           <TimelineNavButton
             mode={mode}
             theme={theme}
-            onPointerDown={flippedHorizontally ? onPrevious : onNext}
+            onClick={flippedHorizontally ? onPrevious : onNext}
             title={flipLayout ? buttonTexts?.previous : buttonTexts?.next}
             aria-label={flipLayout ? buttonTexts?.previous : buttonTexts?.next}
             aria-disabled={disableRight}
@@ -102,7 +102,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
           <TimelineNavButton
             mode={mode}
             theme={theme}
-            onPointerDown={flippedHorizontally ? onFirst : onLast}
+            onClick={flippedHorizontally ? onFirst : onLast}
             title={flipLayout ? buttonTexts?.first : buttonTexts?.last}
             aria-label={flipLayout ? buttonTexts?.first : buttonTexts?.last}
             aria-disabled={disableRight}
@@ -119,7 +119,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
           {slideShowEnabled && (
             <TimelineNavButton
               theme={theme}
-              onPointerDown={onReplay}
+              onClick={onReplay}
               title={buttonTexts?.play}
               tabIndex={0}
               aria-controls="timeline-main-wrapper"
@@ -135,7 +135,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
           <TimelineNavItem>
             <TimelineNavButton
               theme={theme}
-              onPointerDown={onToggleDarkMode}
+              onClick={onToggleDarkMode}
               title={buttonTexts?.play}
               tabIndex={0}
               aria-controls="timeline-main-wrapper"

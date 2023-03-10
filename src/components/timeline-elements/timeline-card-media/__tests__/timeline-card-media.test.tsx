@@ -183,7 +183,7 @@ describe('Timeline Card media', () => {
     );
 
     expect(getByRole('heading', { level: 1 })).toBeInTheDocument();
-    expect(getByText('Image title')).toBeInTheDocument(); 
+    expect(getByText('Image title')).toBeInTheDocument();
   });
 
   // should render the arrow (triangleDir) as expected

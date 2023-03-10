@@ -120,7 +120,6 @@
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-order": "^6.0.2",
     "stylelint-processor-styled-components": "^1.10.0",
-    "ts-jest": "^29.0.5",
     "typescript": "^4.9.5",
     "vite": "^4.1.4",
     "vitest": "^0.29.2",
