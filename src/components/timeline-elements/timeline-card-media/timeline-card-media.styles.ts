@@ -180,7 +180,6 @@ export const DetailsTextWrapper = styled.div<{
   background: string;
   expandFull?: boolean;
   gradientColor?: string;
-  height?: number;
   show?: boolean;
   theme?: Theme;
 }>`

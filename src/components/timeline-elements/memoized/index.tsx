@@ -31,7 +31,7 @@ const TitleMemo = ({
   classString = '',
   padding = false,
 }: Title) => {
-  return title && theme ? (
+  return title ? (
     <CardTitle
       className={cls(active ? 'active' : '', { [classString]: true })}
       theme={theme}
@@ -150,7 +150,7 @@ const DetailsTextMemo = memo<DetailsTextMemoModel>(
     return textOverlay ? (
       <DetailsTextWrapper
         ref={onTextRef}
-        height={expand ? height : 0}
+        // height={expand ? height : 0}
         expandFull={expand}
         theme={theme}
         show={show}
