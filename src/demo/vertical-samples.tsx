@@ -135,9 +135,10 @@ export const VerticalBasic: FunctionComponent<{
         }}
         // flipLayout
         focusActiveItemOnLoad
-        activeItemIndex={9}
+        activeItemIndex={2}
         // mediaHeight={300}
         cardHeight={250}
+        nestedCardHeight={100}
         // cardHeight={350}
         contentDetailsHeight={100}
         timelinePointDimension={20}

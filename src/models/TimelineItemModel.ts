@@ -18,6 +18,8 @@ export interface TimelineItemModel {
   content?: ReactNode | ReactNode[];
   date?: number | string | Date;
   id?: string;
+  isNested?: boolean;
+  items?: TimelineItemModel[];
   media?: Media;
   position?: string;
   timelineContent?: ReactNode;
@@ -38,6 +40,7 @@ export type TimelineCardModel = Pick<
   | 'media'
   | 'url'
   | 'timelineContent'
+  | 'isNested'
 > & {
   autoScroll?: ({
     pointOffset,
@@ -55,4 +58,4 @@ export type TimelineCardModel = Pick<
   slideShowRunning?: boolean;
   theme?: Theme;
   wrapperId: string;
-} & Pick<TimelineProps, 'cardHeight' | 'cardWidth'>;
+} & Pick<TimelineProps, 'cardHeight' | 'cardWidth' | 'nestedCardHeight'>;

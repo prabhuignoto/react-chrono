@@ -32,6 +32,23 @@ const items: TimelineItemModel[] = [
       },
       type: 'IMAGE',
     },
+    items: [
+      {
+        cardTitle: 'The Battle of Britian Yaar',
+        url: 'http://www.google.com',
+        cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+      },
+      {
+        cardTitle: 'The Battle of Britian Yaar',
+        url: 'http://www.google.com',
+        cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+      },
+      {
+        cardTitle: 'The Battle of Britian Yaar',
+        url: 'http://www.google.com',
+        cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+      },
+    ],
     date: '1941-07-25',
     cardSubtitle: `RAF Spitfire pilots scramble for their planes`,
     timelineContent: (

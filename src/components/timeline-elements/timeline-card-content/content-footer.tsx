@@ -29,14 +29,18 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   startWidth,
   canShow,
   progressRef,
+  isNested,
 }) => {
   const { mode, theme } = useContext(GlobalContext);
 
   const canShowTriangleIcon = useMemo(() => {
-    return (['VERTICAL', 'VERTICAL_ALTERNATING'] as TimelineMode[]).some(
-      (m) => m === mode,
+    return (
+      !isNested &&
+      (['VERTICAL', 'VERTICAL_ALTERNATING'] as TimelineMode[]).some(
+        (m) => m === mode,
+      )
     );
-  }, [mode]);
+  }, [mode, isNested]);
 
   const handleClick = (ev: PointerEvent) => {
     ev.stopPropagation();

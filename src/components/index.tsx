@@ -19,6 +19,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     onItemSelected,
     activeItemIndex = 0,
     titleDateFormat = 'MMM DD, YYYY',
+    mode,
+    enableOutline,
+    hideControls,
   } = props;
 
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
@@ -33,6 +36,13 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
             _dayjs: dayjs(item.date),
             active: index === activeItemIndex,
             id: Math.random().toString(16).slice(2),
+            items: item.items?.map((subItem) => ({
+              ...subItem,
+              _dayjs: dayjs(subItem.date),
+              id: Math.random().toString(16).slice(2),
+              isNested: true,
+              visible: true,
+            })),
             title: item.date
               ? dayjs(item.date).format(titleDateFormat)
               : item.title,
@@ -186,6 +196,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         onScrollEnd={onScrollEnd}
         onItemSelected={onItemSelected}
         onOutlineSelection={handleOutlineSelection}
+        mode={mode}
+        enableOutline={enableOutline}
+        hideControls={hideControls}
       />
     </GlobalContextProvider>
   );

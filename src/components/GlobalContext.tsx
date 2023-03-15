@@ -46,6 +46,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
       lineWidth: 3,
       mediaHeight: 200,
       mode: 'VERTICAL_ALTERNATING',
+      nestedCardHeight: 150,
       scrollable: {
         scrollbar: false,
       },

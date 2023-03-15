@@ -18,6 +18,8 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   contentDetailsChildren: children,
   hasFocus,
   iconChildren,
+  nestedCardHeight,
+  isNested,
 }: TimelineHorizontalModel) => {
   const {
     mode = 'HORIZONTAL',
@@ -70,6 +72,8 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
             iconChild={iconChildColln[index]}
             active={item.active}
             cardWidth={cardWidth}
+            isNested={isNested}
+            nestedCardHeight={nestedCardHeight}
           />
         </TimelineItemWrapper>
       ))}

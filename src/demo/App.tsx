@@ -64,6 +64,7 @@ const NewDemo: React.FunctionComponent = () => {
         media,
         timelineContent,
         date,
+        items,
       }) => ({
         title,
         url,
@@ -74,6 +75,7 @@ const NewDemo: React.FunctionComponent = () => {
         // media,
         timelineContent,
         date,
+        items,
       }),
     );
     setItems(newItems);

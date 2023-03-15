@@ -30,6 +30,7 @@ export const VerticalItemWrapper = styled.div<{
   visibility: hidden;
   width: 100%;
   align-items: stretch;
+  justify-content: center;
   margin: 1rem 0;
 
   &.left {
@@ -61,7 +62,7 @@ export const TimelineCardContentWrapper = styled.div<{
     if (p.alternateCards) {
       return `width: 50%;`;
     } else if (p.noTitle) {
-      return `width: 90%;`;
+      return `width: 95%;`;
     } else {
       return `width: 75%;`;
     }

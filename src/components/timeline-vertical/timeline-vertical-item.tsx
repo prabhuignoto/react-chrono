@@ -36,6 +36,9 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     title,
     visible,
     timelineContent,
+    items,
+    isNested,
+    nestedCardHeight,
   } = props;
 
   const handleOnActive = (offset: number) => {
@@ -122,7 +125,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
   return (
     <VerticalItemWrapper
       alternateCards={alternateCards}
-      cardHeight={cardHeight}
+      cardHeight={isNested ? nestedCardHeight : cardHeight}
       className={verticalItemClass}
       data-testid="vertical-item-row"
       key={id}
@@ -131,7 +134,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       role="listitem"
     >
       {/* title */}
-      {Title}
+      {!isNested ? Title : null}
       {/* card section */}
       <TimelineCardContentWrapper
         className={contentClass}
@@ -141,6 +144,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         height={textOverlay ? mediaHeight : cardHeight}
       >
         {!cardLess ? (
+          // <span></span>
           <TimelineCard
             active={active}
             branchDir={className}
@@ -159,10 +163,13 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
             url={url}
             flip={flipLayout}
             timelineContent={timelineContent}
+            items={items}
+            isNested={isNested}
+            nestedCardHeight={nestedCardHeight}
           />
         ) : null}
       </TimelineCardContentWrapper>
-      {TimelinePointMemo}
+      {!isNested ? TimelinePointMemo : null}
     </VerticalItemWrapper>
   );
 };

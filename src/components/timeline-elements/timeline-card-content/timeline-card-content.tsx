@@ -11,6 +11,7 @@ import { TimelineContentModel } from '../../../models/TimelineContentModel';
 import { MediaState } from '../../../models/TimelineMediaModel';
 import { hexToRGBA } from '../../../utils';
 import { GlobalContext } from '../../GlobalContext';
+import Timeline from '../../timeline/timeline';
 import CardMedia from '../timeline-card-media/timeline-card-media';
 import { ContentFooter } from './content-footer';
 import { ContentHeader } from './content-header';
@@ -41,6 +42,9 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       branchDir,
       url,
       timelineContent,
+      items,
+      isNested,
+      nestedCardHeight,
     }: TimelineContentModel) => {
       const [showMore, setShowMore] = useState(false);
       const detailsRef = useRef<HTMLDivElement | null>(null);
@@ -303,6 +307,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           : null;
       }, [textContentLarge, showMore, theme?.cardDetailsBackGround]);
 
+      const canShowDetailsText = useMemo(() => {
+        return !textOverlay && !items?.length;
+      }, [items?.length]);
+
       const DetailsText = useMemo(() => {
         return (
           <>
@@ -339,7 +347,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       return (
         <TimelineItemContentWrapper
           className={contentClass}
-          minHeight={textOverlay && media ? mediaHeight : cardHeight}
+          minHeight={
+            textOverlay && media
+              ? mediaHeight
+              : !isNested
+              ? cardHeight
+              : nestedCardHeight
+          }
           maxWidth={cardWidth}
           mode={mode}
           noMedia={!media}
@@ -398,7 +412,18 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             />
           )}
 
-          {!textOverlay && DetailsText}
+          {canShowDetailsText ? (
+            DetailsText
+          ) : (
+            <Timeline
+              items={items}
+              mode={'VERTICAL'}
+              enableOutline={false}
+              hideControls
+              nestedCardHeight={nestedCardHeight}
+              isChild
+            />
+          )}
 
           {(!textOverlay || !media) && (
             <ContentFooter
@@ -414,6 +439,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               onExpand={handleExpandDetails}
               canShow={canShowMore}
               showMore={showMore}
+              isNested={isNested}
             />
           )}
         </TimelineItemContentWrapper>

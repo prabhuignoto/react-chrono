@@ -16,16 +16,22 @@ export type TimelineModel = Pick<
   | 'theme'
   | 'slideShow'
   | 'onScrollEnd'
+  | 'mode'
+  | 'enableOutline'
+  | 'hideControls'
+  | 'timelinePointDimension'
+  | 'nestedCardHeight'
 > & {
-  activeTimelineItem: number;
+  activeTimelineItem?: number;
   contentDetailsChildren?: React.ReactNode | React.ReactNode[];
   iconChildren?: React.ReactNode | React.ReactNode[];
-  onFirst: () => void;
-  onLast: () => void;
-  onNext: () => void;
-  onOutlineSelection: (index: number) => void;
-  onPrevious: () => void;
-  onTimelineUpdated: (id: number) => void;
+  isChild?: boolean;
+  onFirst?: () => void;
+  onLast?: () => void;
+  onNext?: () => void;
+  onOutlineSelection?: (index: number) => void;
+  onPrevious?: () => void;
+  onTimelineUpdated?: (id: number) => void;
   slideItemDuration?: number;
   slideShowEnabled?: boolean;
   slideShowRunning?: boolean;
@@ -131,6 +137,8 @@ export type TimelineProps = {
 
   // mode of the timeline. VERTICAL, HORIZONTAL, VERTICAL_ALTERNATING
   mode?: TimelineMode;
+
+  nestedCardHeight?: number;
 
   // callback when an item is selected
   onItemSelected?: (data: TimelineItemModel) => void;
