@@ -302,10 +302,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [timelineContent, showMore, JSON.stringify(theme)]);
 
       const gradientColor = useMemo(() => {
+        const bgToUse = !isNested
+          ? theme?.cardDetailsBackGround
+          : theme?.nestedCardDetailsBackGround;
         return !showMore && textContentLarge
-          ? hexToRGBA(theme?.cardDetailsBackGround || '#ffffff', 0.8)
+          ? hexToRGBA(bgToUse || '#ffffff', 0.8)
           : null;
-      }, [textContentLarge, showMore, theme?.cardDetailsBackGround]);
+      }, [textContentLarge, showMore, theme?.cardDetailsBackGround, isNested]);
 
       const canShowDetailsText = useMemo(() => {
         return !textOverlay && !items?.length;
@@ -379,6 +382,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           slideShowType={slideShowType}
           slideShowActive={slideShowActive}
           branchDir={branchDir}
+          isNested={isNested}
         >
           {title ? (
             <ContentHeader

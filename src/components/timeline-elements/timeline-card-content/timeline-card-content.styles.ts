@@ -18,6 +18,7 @@ export const TimelineItemContentWrapper = styled.section<
   {
     active?: boolean;
     branchDir?: string;
+    isNested?: boolean;
     maxWidth?: number;
     minHeight?: number;
     noMedia?: boolean;
@@ -44,6 +45,14 @@ export const TimelineItemContentWrapper = styled.section<
   text-align: left;
   width: 98%;
   z-index: 0;
+
+  ${(p) =>
+    p.isNested
+      ? css`
+          background: ${p.theme.nestedCardBgColor};
+          box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+        `
+      : css``}
 
   height: ${(p) => (p.textOverlay ? '0' : '')};
 
