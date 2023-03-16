@@ -11,6 +11,8 @@ export interface Theme {
   // card foreground color
   cardForeColor?: string;
 
+  cardMediaBgColor?: string;
+
   // card subtitle color
   cardSubtitleColor?: string;
 

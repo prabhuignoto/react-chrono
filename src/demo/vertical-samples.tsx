@@ -117,10 +117,10 @@ export const VerticalBasic: FunctionComponent<{
         items={items}
         mode="VERTICAL"
         slideShow
-        cardWidth={650}
+        cardWidth={500}
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
-        // textOverlay
+        textOverlay
         // borderLessCards
         // theme={{
         //   cardBgColor: '#fff',
@@ -137,11 +137,10 @@ export const VerticalBasic: FunctionComponent<{
         // flipLayout
         focusActiveItemOnLoad
         activeItemIndex={2}
-        // mediaHeight={300}
-        cardHeight={250}
+        mediaHeight={400}
         nestedCardHeight={100}
-        // cardHeight={350}
-        contentDetailsHeight={100}
+        cardHeight={400}
+        // contentDetailsHeight={300}
         timelinePointDimension={20}
         timelinePointShape="diamond"
         classNames={{
@@ -185,6 +184,7 @@ export const VerticalNewMedia: FunctionComponent<{
             fontSizes={{
               title: '1.5rem',
             }}
+            cardHeight={450}
             timelinePointShape="square"
             // focusActiveItemOnLoad
             // activeItemIndex={9}

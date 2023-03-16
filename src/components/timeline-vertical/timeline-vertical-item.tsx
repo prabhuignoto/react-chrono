@@ -135,6 +135,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     >
       {/* title */}
       {!isNested ? Title : null}
+
       {/* card section */}
       <TimelineCardContentWrapper
         className={contentClass}

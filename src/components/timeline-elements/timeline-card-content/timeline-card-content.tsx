@@ -254,7 +254,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       const cardMinHeight = useMemo(() => {
         if (textOverlay && media) {
-          return mediaHeight;
+          return cardHeight;
         } else if (!isNested) {
           return cardHeight;
         } else {
@@ -397,7 +397,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           branchDir={branchDir}
           isNested={isNested}
         >
-          {title ? (
+          {title && !textOverlay ? (
             <ContentHeader
               title={title}
               theme={theme}
@@ -406,6 +406,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               content={content}
             />
           ) : null}
+
           {/* render media video or image */}
           {media && (
             <CardMedia

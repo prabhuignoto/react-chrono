@@ -29,9 +29,13 @@ export const MediaWrapper = styled.div<{
   textOverlay?: boolean;
   theme?: Theme;
 }>`
-  align-items: center;
+  align-items: flex-start;
   align-self: center;
-  background: ${(p) => (p.active ? `rgba(${p.theme?.cardBg}, 0.35)` : '')};
+  // justify-content: center;
+  // display: flex;
+  background: ${(p) => p.theme?.cardMediaBgColor};
+  // background: ${(p) =>
+    p.active ? `rgba(${p.theme?.cardBgColor}, 0.35)` : ''};
   border-radius: 4px;
   flex-direction: row;
   height: ${(p) => (p.textOverlay ? 'calc(100% - 1em)' : '0')};
@@ -72,9 +76,10 @@ export const CardImage = styled.img<{
   justify-self: center;
   margin-left: auto;
   margin-right: auto;
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
   visibility: ${(p) => (p.visible ? 'visible' : 'hidden')};
   border-radius: ${(p) => (p.enableBorderRadius ? '6px' : '0')};
 `;
@@ -124,7 +129,7 @@ export const MediaDetailsWrapper = styled.div<{
 
     if (!p.showText) {
       return `
-        height: 10%;
+        height: 15%;
         `;
     }
 
@@ -144,7 +149,7 @@ export const MediaDetailsWrapper = styled.div<{
     bottom: ${p.expandFull ? '0%' : ' 5%'};
     transform: translateX(-50%);
     background: ${
-      p.showText ? p.theme?.cardDetailsBackGround : p.theme?.cardBg
+      p.showText ? p.theme?.cardDetailsBackGround : p.theme?.cardBgColor
     };
     backdrop-filter: blur(1px);
     padding: 0.25rem;
@@ -187,13 +192,14 @@ export const DetailsTextWrapper = styled.div<{
   display: flex;
   transition: height 0.5s ease;
   width: calc(100%);
-  // background: ${(p) => p.background};
-  // color: ${(p) => p.theme?.cardDetailsColor};
-  color: red;
+  background: ${(p) => p.background};
+  color: ${(p) => p.theme?.cardDetailsColor};
   padding: 0.5rem;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   position: relative;
+  align-items: flex-start;
+  justify-content: center;
 
   ${ScrollBar}
 
@@ -225,4 +231,11 @@ export const CardMediaHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const ImageWrapper = styled.div<{ height?: number }>`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 6px;
 `;

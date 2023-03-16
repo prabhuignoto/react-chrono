@@ -165,6 +165,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | disableAutoScrollOnClick | Disables the timeline from auto-scrolling when a timeline card is clicked.                                                                                                   | false                  |
 | disableClickOnCircle     | Disables click action on the circular points.                                                                                                                                | false                  |
 | disableNavOnKey          | Disables keyboard navigation.                                                                                                                                                | false                  |
+| enableDarkToggle         | Enables the toggle switch for dark mode.                                                                                                                                     | false                  |
 | enableOutline            | Enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.                                                                                                      | false                  |
 | flipLayout               | Flips the layout (RTL).                                                                                                                                                      | false                  |
 | focusActiveItemOnLoad    | Setting this to `true` automatically scrolls and focuses the `activeItemIndex` on load                                                                                       | false                  |
@@ -181,8 +182,11 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | showAllCardsHorizontal   | In horizontal mode, only the active card is displayed. With this prop, you can display all the cards.                                                                        | false                  |
 | slideItemDuration        | Duration (in ms), the timeline card is active during a `slideshow`.                                                                                                          | 5000                   |
 | slideShow                | Enables the slideshow control.                                                                                                                                               | false                  |
+| slideShowType            | Sets the type of slideshow to use. can be `reveal`, `slide_in`,`slide_from_sides`                                                                                            | `reveal`               |
+| textOverlay              | Displays text as a overlay on top of media elements                                                                                                                          | false                  |
 | theme                    | Prop to customize the colors.                                                                                                                                                |                        |
 | timelinePointDimension   | Dimensions of the circular points on the timeline                                                                                                                            | false                  |
+| timelinePointShape       | Prop to configure the shape of the timeline points. can be `circle`, `square`, `diamond`                                                                                     | `circle`               |
 | useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself.                         | true                   |
 
 ### Mode

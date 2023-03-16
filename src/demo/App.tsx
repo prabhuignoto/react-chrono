@@ -72,7 +72,7 @@ const NewDemo: React.FunctionComponent = () => {
         cardSubtitle,
         cardDetailedText,
         id,
-        // media,
+        media,
         timelineContent,
         date,
         items,

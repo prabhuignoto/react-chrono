@@ -30,6 +30,7 @@ import {
   CardVideo,
   ErrorMessage,
   IFrameVideo,
+  ImageWrapper,
   MediaDetailsWrapper,
   MediaWrapper,
 } from './timeline-card-media.styles';
@@ -73,6 +74,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
       borderLessCards,
       textOverlay,
       theme,
+      cardHeight,
     } = useContext(GlobalContext);
 
     useEffect(() => {
@@ -349,7 +351,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
           mode={mode}
           slideShowActive={slideshowActive}
           className={cls('card-media-wrapper', classNames?.cardMedia)}
-          cardHeight={mediaHeight}
+          cardHeight={cardHeight}
           align={alignMedia}
           textOverlay={textOverlay}
         >
@@ -363,7 +365,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
           {media.type === 'VIDEO' && isYouTube && IFrameYouTube}
           {media.type === 'IMAGE' &&
             (!loadFailed ? (
-              Image
+              <ImageWrapper height={mediaHeight}>{Image}</ImageWrapper>
             ) : (
               <ErrorMessageMem message="Failed to load the image." />
             ))}
