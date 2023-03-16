@@ -151,8 +151,8 @@ export const CardTitleAnchor = styled.a`
 `;
 
 export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
-  // color: ${(p) => p.theme.cardForeColor};
-  color: '#fff';
+  color: ${(p) => p.theme.cardForeColor};
+  // color: '#fff';
   font-size: 0.85rem;
   font-weight: 400;
   margin: 0;

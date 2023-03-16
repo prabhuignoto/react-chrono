@@ -187,8 +187,9 @@ export const DetailsTextWrapper = styled.div<{
   display: flex;
   transition: height 0.5s ease;
   width: calc(100%);
-  background: ${(p) => p.background};
-  color: ${(p) => p.theme?.cardDetailsColor};
+  // background: ${(p) => p.background};
+  // color: ${(p) => p.theme?.cardDetailsColor};
+  color: red;
   padding: 0.5rem;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;

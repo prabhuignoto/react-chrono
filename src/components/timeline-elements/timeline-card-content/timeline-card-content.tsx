@@ -209,6 +209,9 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
       }, [hasFocus, active]);
 
+      // This code is used to determine whether the read more button should be shown.
+      // It is only shown if the useReadMore prop is true, the detailedText is non-null,
+      // and the customContent prop is false.
       const canShowReadMore = useMemo(() => {
         return useReadMore && detailedText && !customContent;
       }, []);
@@ -248,6 +251,16 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           ),
         [showMore, customContent],
       );
+
+      const cardMinHeight = useMemo(() => {
+        if (textOverlay && media) {
+          return mediaHeight;
+        } else if (!isNested) {
+          return cardHeight;
+        } else {
+          return nestedCardHeight;
+        }
+      }, []);
 
       const handleExpandDetails = useCallback(() => {
         if ((active && paused) || !slideShowActive) {
@@ -301,6 +314,11 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
       }, [timelineContent, showMore, JSON.stringify(theme)]);
 
+      // Get the background color for the gradient, which is either the
+      // cardDetailsBackGround or nestedCardDetailsBackGround theme variable,
+      // based on whether the card is nested or not. If we are showing more
+      // content, the background color should be null, so that there is no
+      // gradient.
       const gradientColor = useMemo(() => {
         const bgToUse = !isNested
           ? theme?.cardDetailsBackGround
@@ -310,6 +328,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           : null;
       }, [textContentLarge, showMore, theme?.cardDetailsBackGround, isNested]);
 
+      // This code checks whether the textOverlay and items props are truthy. If so, then it returns false. Otherwise, it returns true.
       const canShowDetailsText = useMemo(() => {
         return !textOverlay && !items?.length;
       }, [items?.length]);
@@ -350,13 +369,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       return (
         <TimelineItemContentWrapper
           className={contentClass}
-          minHeight={
-            textOverlay && media
-              ? mediaHeight
-              : !isNested
-              ? cardHeight
-              : nestedCardHeight
-          }
+          minHeight={cardMinHeight}
           maxWidth={cardWidth}
           mode={mode}
           noMedia={!media}

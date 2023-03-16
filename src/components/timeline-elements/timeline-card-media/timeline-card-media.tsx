@@ -327,7 +327,14 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
           ) : null}
         </MediaDetailsWrapper>
       );
-    }, [showText, expandDetails, canShowTextMemo, gradientColor, title]);
+    }, [
+      showText,
+      expandDetails,
+      canShowTextMemo,
+      gradientColor,
+      title,
+      JSON.stringify(theme),
+    ]);
 
     const canShowProgressBar = useMemo(
       () => showProgressBar && textOverlay,

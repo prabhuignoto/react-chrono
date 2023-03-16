@@ -1,4 +1,4 @@
-import { TimelineItemModel } from '../../dist/models/TimelineItemModel';
+import { TimelineItemModel } from '../models/TimelineItemModel';
 
 export const items2: TimelineItemModel[] = [
   {
@@ -12,6 +12,23 @@ export const items2: TimelineItemModel[] = [
         url: 'https://cdn.britannica.com/32/197632-050-C3FB90BC/Sumerian-cuneiform-tablet-Erech-Mesopotamia-New-York-2900-bce.jpg',
       },
     },
+    items: [
+      {
+        cardTitle: 'The Battle of Britian Yaar',
+        url: 'http://www.google.com',
+        cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+      },
+      {
+        cardTitle: 'The Battle of Britian Yaar',
+        url: 'http://www.google.com',
+        cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+      },
+      {
+        cardTitle: 'The Battle of Britian Yaar',
+        url: 'http://www.google.com',
+        cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+      },
+    ],
     cardDetailedText: [
       `Mesopotamia is known as the birthplace of writing. The people of ancient Mesopotamia developed the first form of writing known as cuneiform around 3500 BCE. Cuneiform was created by pressing a stylus into a soft clay tablet, making wedge-shaped marks that represented words or symbols`,
       `Cuneiform was used for a wide variety of purposes, including record-keeping, trade, literature, and even religion. The earliest forms of cuneiform were pictograms, which represented objects or concepts, but it later evolved into a more complex system of phonetic signs that represented syllables or individual sounds.`,

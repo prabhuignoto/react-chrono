@@ -19,13 +19,14 @@ export const VerticalTree: FunctionComponent<{
           mode="VERTICAL_ALTERNATING"
           theme={theme}
           slideShow
-          slideItemDuration={1350}
+          slideItemDuration={2050}
           slideShowType="slide_from_sides"
           allowDynamicUpdate
           cardHeight={300}
           // textOverlay
           focusActiveItemOnLoad
-          cardWidth={450}
+          enableDarkToggle
+          cardWidth={550}
           onItemSelected={(selected) => console.log(selected.cardTitle)}
           onScrollEnd={() => console.log('end reached')}
         >
@@ -190,6 +191,7 @@ export const VerticalNewMedia: FunctionComponent<{
             mediaHeight={400}
             // cardHeight={250}
             // cardHeight={350}
+            enableDarkToggle
             contentDetailsHeight={100}
             timelinePointDimension={20}
             classNames={{
