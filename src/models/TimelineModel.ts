@@ -47,7 +47,7 @@ export type TimelineProps = {
   // active item index
   activeItemIndex?: number;
 
-  alignMedia?: 'left' | 'right' | 'center';
+  // alignMedia?: 'left' | 'right' | 'center';
 
   // allow dynamic update of the timeline items
   allowDynamicUpdate?: boolean;
@@ -136,6 +136,7 @@ export type TimelineProps = {
   mediaHeight?: number;
 
   mediaSettings?: {
+    align?: 'left' | 'right' | 'center';
     imageFit?: 'cover' | 'contain' | 'fill' | 'none';
   };
 

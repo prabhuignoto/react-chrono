@@ -318,6 +318,7 @@ export const VerticalBasicNested: FunctionComponent<{
           cardText: 'custom-text',
         }}
         enableDarkToggle
+        mediaSettings={{ align: 'center' }}
       />
     </ComponentContainerTree>
   </Vertical>

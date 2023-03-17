@@ -21,39 +21,39 @@ const items: TimelineItemModel[] = [
     title: '25 July 1940',
     cardTitle: 'The Battle of Britain',
     items: [
-      {
-        cardTitle: 'May 10, 1940',
-        cardDetailedText:
-          'Germany invades France, Belgium, and the Netherlands',
-        url: 'http://www.google.com',
-        // media: {
-        //   name: 'dunkirk beach',
-        //   source: {
-        //     url: 'https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg',
-        //     // url: "/dunkirk.mp4"
-        //   },
-        //   type: 'IMAGE',
-        // },
-      },
+      // {
+      //   cardTitle: 'May 10, 1940',
+      //   cardDetailedText:
+      //     'Germany invades France, Belgium, and the Netherlands',
+      //   url: 'http://www.google.com',
+      //   // media: {
+      //   //   name: 'dunkirk beach',
+      //   //   source: {
+      //   //     url: 'https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg',
+      //   //     // url: "/dunkirk.mp4"
+      //   //   },
+      //   //   type: 'IMAGE',
+      //   // },
+      // },
       {
         cardTitle: 'June 18, 1940',
         url: 'http://www.google.com',
-        cardDetailedText: `Winston Churchill delivers his famous "Finest Hour" speech to the House of Commons, rallying the British people to prepare for the Battle of Britain.`,
+        cardDetailedText: `Winston Churchill delivers his famous "Finest Hour" speech to the House of Commons, rallying the British people to prepare for the Battle of Britain. The speech emphasizes the importance of standing up to Nazi aggression and defending the country at all costs.`,
       },
       {
         cardTitle: 'August 8, 1940',
         cardDetailedText:
-          'The Germans launch "Adler Tag" (Eagle Day), a massive assault on British airfields and radar stations',
+          'The Germans launch "Adler Tag" (Eagle Day), a massive assault on British airfields and radar stations. The Luftwaffe hopes to achieve a decisive victory and gain control of the skies over Britain, but the RAF is able to mount a strong defense and inflict heavy losses on the Germans',
         url: 'http://www.google.com',
       },
       {
         cardTitle: 'August 15, 1940',
-        cardDetailedText: `The Luftwaffe mistakenly bombs London, prompting Churchill to order retaliatory attacks on Berlin`,
+        cardDetailedText: `The Luftwaffe mistakenly bombs London, prompting Churchill to order retaliatory attacks on Berlin. The bombing of London marks a significant shift in the German strategy, as the focus shifts from attacking airfields to targeting cities and civilian populations`,
         url: 'http://www.google.com',
       },
       {
         cardTitle: 'August 24, 1940',
-        cardDetailedText: `The Germans launch a second wave of attacks on British airfields, known as "The Hardest Day`,
+        cardDetailedText: ` The Germans launch a second wave of attacks on British airfields, known as "The Hardest Day." The attacks result in the heaviest losses of the battle for the RAF, but the Germans also suffer significant losses.`,
         url: 'http://www.google.com',
       },
     ],

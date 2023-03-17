@@ -31,11 +31,7 @@ export const MediaWrapper = styled.div<{
 }>`
   align-items: flex-start;
   align-self: center;
-  // justify-content: center;
-  // display: flex;
-  background: ${(p) => p.theme?.cardMediaBgColor};
-  // background: ${(p) =>
-    p.active ? `rgba(${p.theme?.cardBgColor}, 0.35)` : ''};
+  background: ${(p) => (!p.textOverlay ? p.theme?.cardMediaBgColor : 'none')};
   border-radius: 4px;
   flex-direction: row;
   height: ${(p) => (p.textOverlay ? 'calc(100% - 1em)' : '0')};

@@ -36,7 +36,6 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
   const defaultProps = Object.assign<PropsModel, PropsModel, PropsModel>(
     {},
     {
-      alignMedia: mode === 'VERTICAL' && !textOverlay ? 'left' : 'center',
       borderLessCards: false,
       cardLess: false,
       contentDetailsHeight: 150,
@@ -81,6 +80,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
         ...fontSizes,
       },
       mediaSettings: {
+        align: mode === 'VERTICAL' && !textOverlay ? 'left' : 'center',
         imageFit: 'cover',
         ...mediaSettings,
       },

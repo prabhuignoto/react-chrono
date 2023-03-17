@@ -321,7 +321,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       // gradient.
       const gradientColor = useMemo(() => {
         const bgToUse = !isNested
-          ? theme?.cardDetailsBackGround
+          ? theme?.cardBgColor
           : theme?.nestedCardDetailsBackGround;
         return !showMore && textContentLarge
           ? hexToRGBA(bgToUse || '#ffffff', 0.8)

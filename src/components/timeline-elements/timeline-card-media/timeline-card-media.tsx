@@ -70,7 +70,6 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
       fontSizes,
       classNames,
       mediaHeight,
-      alignMedia,
       borderLessCards,
       textOverlay,
       theme,
@@ -362,7 +361,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
           slideShowActive={slideshowActive}
           className={cls('card-media-wrapper', classNames?.cardMedia)}
           cardHeight={getCardHeight}
-          align={alignMedia}
+          align={mediaSettings?.align}
           textOverlay={textOverlay}
         >
           {media.type === 'VIDEO' &&
