@@ -269,6 +269,14 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
       [expandDetails, showText],
     );
 
+    const getCardHeight = useMemo(() => {
+      if (textOverlay) {
+        return cardHeight;
+      } else {
+        return mediaHeight;
+      }
+    }, []);
+
     const TextContent = useMemo(() => {
       return (
         <MediaDetailsWrapper
@@ -351,7 +359,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
           mode={mode}
           slideShowActive={slideshowActive}
           className={cls('card-media-wrapper', classNames?.cardMedia)}
-          cardHeight={cardHeight}
+          cardHeight={getCardHeight}
           align={alignMedia}
           textOverlay={textOverlay}
         >

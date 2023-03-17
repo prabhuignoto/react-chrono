@@ -5,6 +5,7 @@ import { TimelineItemModel } from '../models/TimelineItemModel';
 import './App.css';
 import data from './data';
 import mixed from './data-mixed';
+import dataNested from './data-nested';
 import DynamicLoad from './dynamic-load';
 import {
   HorizontalAll,
@@ -15,8 +16,10 @@ import {
 import { items2 as worldHistory } from './human-history';
 import { Layout } from './layout';
 import {
+  VerticalAlternatingNested,
   VerticalBasic,
   VerticalBasicCardLess,
+  VerticalBasicNested,
   VerticalCustomContent,
   VerticalCustomContent2,
   VerticalNewMedia,
@@ -26,6 +29,7 @@ import {
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
+  const [nestedItems, setNestedItems] = useState<TimelineItemModel[]>([]);
   const [historyItems, setHistoryItems] = useState<TimelineItemModel[]>([]);
   const [state, setState] = useState(0);
 
@@ -91,6 +95,26 @@ const NewDemo: React.FunctionComponent = () => {
         }),
       ),
     );
+    setNestedItems(
+      dataNested.map(
+        ({
+          cardTitle,
+          cardSubtitle,
+          cardDetailedText,
+          media,
+          url,
+          title,
+          items,
+        }) => ({
+          cardTitle,
+          cardSubtitle,
+          cardDetailedText,
+          url,
+          title,
+          items,
+        }),
+      ),
+    );
   }, []);
 
   const router = createBrowserRouter([
@@ -105,7 +129,28 @@ const NewDemo: React.FunctionComponent = () => {
           ) : null,
         },
         {
+          path: '/vertical-basic-nested',
+          element: items.length ? (
+            <VerticalBasicNested type={'big-screen'} items={dataNested} />
+          ) : null,
+        },
+        {
           path: '/vertical-alternating-mixed',
+          element: items.length > 0 && (
+            <VerticalTreeMixed type={'big-screen'} />
+          ),
+        },
+        {
+          path: '/vertical-alternating-nested',
+          element: items.length > 0 && (
+            <VerticalAlternatingNested
+              type={'big-screen'}
+              items={nestedItems}
+            />
+          ),
+        },
+        {
+          path: '/vertical-alternating-nested',
           element: items.length > 0 && (
             <VerticalTreeMixed type={'big-screen'} />
           ),

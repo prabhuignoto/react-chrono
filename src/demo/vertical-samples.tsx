@@ -137,9 +137,9 @@ export const VerticalBasic: FunctionComponent<{
         // flipLayout
         focusActiveItemOnLoad
         activeItemIndex={2}
-        mediaHeight={400}
+        mediaHeight={200}
         nestedCardHeight={100}
-        cardHeight={400}
+        cardHeight={200}
         // contentDetailsHeight={300}
         timelinePointDimension={20}
         timelinePointShape="diamond"
@@ -203,6 +203,56 @@ export const VerticalNewMedia: FunctionComponent<{
     </>
   );
 };
+export const VerticalAlternatingNested: FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({ type, items }) => {
+  return (
+    <>
+      <Vertical id="vertical">
+        <ComponentContainerTree type={type}>
+          <Chrono
+            items={items}
+            mode="VERTICAL_ALTERNATING"
+            slideShow
+            cardWidth={600}
+            slideItemDuration={2000}
+            scrollable={{ scrollbar: false }}
+            slideShowType="slide_from_sides"
+            // borderLessCards
+            // theme={{
+            //   cardBgColor: '#fff',
+            //   cardForeColor: '#fff',
+            //   titleColorActive: '#6495ed',
+            //   titleColor: '#922724',
+            //   cardDetailsBackGround: '#e8e8e8',
+            //   cardDetailsColor: '#000',
+            // }}
+            // darkMode
+            onItemSelected={(selected) => console.log(selected.cardTitle)}
+            // enableOutline
+            fontSizes={{
+              title: '1.5rem',
+            }}
+            cardHeight={250}
+            timelinePointShape="square"
+            // focusActiveItemOnLoad
+            // activeItemIndex={9}
+            // cardHeight={250}
+            // cardHeight={350}
+            mediaHeight={200}
+            enableDarkToggle
+            contentDetailsHeight={100}
+            timelinePointDimension={20}
+            classNames={{
+              cardText: 'custom-text',
+            }}
+          />
+        </ComponentContainerTree>
+      </Vertical>
+    </>
+  );
+};
 
 export const VerticalBasicCardLess: FunctionComponent<{
   type: string;
@@ -220,6 +270,51 @@ export const VerticalBasicCardLess: FunctionComponent<{
           titleColorActive: 'red',
         }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
+      />
+    </ComponentContainerTree>
+  </Vertical>
+);
+
+export const VerticalBasicNested: FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({ type, items }) => (
+  <Vertical id="vertical">
+    <ComponentContainerTree type={type}>
+      <Chrono
+        items={items}
+        mode="VERTICAL"
+        slideShow
+        cardWidth={500}
+        slideItemDuration={2500}
+        scrollable={{ scrollbar: false }}
+        // textOverlay
+        // borderLessCards
+        // theme={{
+        //   cardBgColor: '#fff',
+        //   cardForeColor: '#fff',
+        //   titleColorActive: '#6495ed',
+        //   titleColor: '#922724',
+        //   cardDetailsBackGround: '#e8e8e8',
+        // }}
+        onItemSelected={(selected) => console.log(selected.cardTitle)}
+        enableOutline
+        fontSizes={{
+          title: '1.5rem',
+        }}
+        // flipLayout
+        focusActiveItemOnLoad
+        activeItemIndex={2}
+        mediaHeight={200}
+        nestedCardHeight={100}
+        cardHeight={300}
+        // contentDetailsHeight={300}
+        timelinePointDimension={20}
+        timelinePointShape="diamond"
+        classNames={{
+          cardText: 'custom-text',
+        }}
+        enableDarkToggle
       />
     </ComponentContainerTree>
   </Vertical>
