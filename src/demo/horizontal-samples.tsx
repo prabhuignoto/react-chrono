@@ -33,6 +33,7 @@ export const HorizontalBasic: React.FunctionComponent<{
             next: 'Next',
             previous: 'Previous',
           }}
+          enableDarkToggle
         >
           <div className="chrono-icons">
             <img src="color-circle.svg" alt="github" />

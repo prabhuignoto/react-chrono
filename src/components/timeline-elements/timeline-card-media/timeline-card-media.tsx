@@ -75,6 +75,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
       textOverlay,
       theme,
       cardHeight,
+      mediaSettings,
     } = useContext(GlobalContext);
 
     useEffect(() => {
@@ -197,6 +198,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = React.memo(
           loading={'lazy'}
           enableBorderRadius={borderLessCards}
           role="img"
+          fit={mediaSettings?.imageFit}
         />
       );
     }, [active, mediaLoaded, borderLessCards]);

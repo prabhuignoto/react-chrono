@@ -28,6 +28,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
     darkMode,
     slideShow,
     onThemeChange,
+    mediaSettings,
   } = props;
 
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
@@ -78,6 +79,10 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
         cardTitle: '1.25rem',
         title: '1.5rem',
         ...fontSizes,
+      },
+      mediaSettings: {
+        imageFit: 'cover',
+        ...mediaSettings,
       },
       theme: {
         ...getDefaultThemeOrDark(isDarkMode),

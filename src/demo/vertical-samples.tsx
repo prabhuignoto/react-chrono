@@ -219,6 +219,9 @@ export const VerticalAlternatingNested: FunctionComponent<{
             slideItemDuration={2000}
             scrollable={{ scrollbar: false }}
             slideShowType="slide_from_sides"
+            mediaSettings={{
+              imageFit: 'contain',
+            }}
             // borderLessCards
             // theme={{
             //   cardBgColor: '#fff',

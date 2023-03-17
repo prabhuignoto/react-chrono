@@ -132,6 +132,8 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       ref={contentRef}
       cardLess={cardLess}
       role="listitem"
+      isNested={isNested}
+      theme={theme}
     >
       {/* title */}
       {!isNested ? Title : null}

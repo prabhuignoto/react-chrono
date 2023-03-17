@@ -69,6 +69,7 @@ export const CardImage = styled.img<{
   active?: boolean;
   dir?: string;
   enableBorderRadius?: boolean;
+  fit?: string;
   mode?: TimelineMode;
   visible?: boolean;
 }>`
@@ -78,7 +79,7 @@ export const CardImage = styled.img<{
   margin-right: auto;
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: ${(p) => p.fit || 'cover'};
   object-position: center;
   visibility: ${(p) => (p.visible ? 'visible' : 'hidden')};
   border-radius: ${(p) => (p.enableBorderRadius ? '6px' : '0')};

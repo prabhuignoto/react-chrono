@@ -135,6 +135,10 @@ export type TimelineProps = {
   // minimum height of the media element
   mediaHeight?: number;
 
+  mediaSettings?: {
+    imageFit?: 'cover' | 'contain' | 'fill' | 'none';
+  };
+
   // mode of the timeline. VERTICAL, HORIZONTAL, VERTICAL_ALTERNATING
   mode?: TimelineMode;
 

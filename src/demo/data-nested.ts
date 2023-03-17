@@ -22,27 +22,39 @@ const items: TimelineItemModel[] = [
     cardTitle: 'The Battle of Britain',
     items: [
       {
-        cardTitle: 'The Battle of Britian Yaar',
+        cardTitle: 'May 10, 1940',
+        cardDetailedText:
+          'Germany invades France, Belgium, and the Netherlands',
         url: 'http://www.google.com',
-        media: {
-          name: 'dunkirk beach',
-          source: {
-            url: 'https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg',
-            // url: "/dunkirk.mp4"
-          },
-          type: 'IMAGE',
-        },
-        cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+        // media: {
+        //   name: 'dunkirk beach',
+        //   source: {
+        //     url: 'https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg',
+        //     // url: "/dunkirk.mp4"
+        //   },
+        //   type: 'IMAGE',
+        // },
       },
       {
-        cardTitle: 'The Battle of Britian Yaar',
+        cardTitle: 'June 18, 1940',
         url: 'http://www.google.com',
-        cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+        cardDetailedText: `Winston Churchill delivers his famous "Finest Hour" speech to the House of Commons, rallying the British people to prepare for the Battle of Britain.`,
       },
       {
-        cardTitle: 'The Battle of Britian Yaar',
+        cardTitle: 'August 8, 1940',
+        cardDetailedText:
+          'The Germans launch "Adler Tag" (Eagle Day), a massive assault on British airfields and radar stations',
         url: 'http://www.google.com',
-        cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+      },
+      {
+        cardTitle: 'August 15, 1940',
+        cardDetailedText: `The Luftwaffe mistakenly bombs London, prompting Churchill to order retaliatory attacks on Berlin`,
+        url: 'http://www.google.com',
+      },
+      {
+        cardTitle: 'August 24, 1940',
+        cardDetailedText: `The Germans launch a second wave of attacks on British airfields, known as "The Hardest Day`,
+        url: 'http://www.google.com',
       },
     ],
     cardSubtitle: `RAF Spitfire pilots scramble for their planes`,

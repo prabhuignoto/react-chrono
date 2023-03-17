@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+import { Theme } from '../../../dist/models/Theme';
 import { TimelineMode } from '../../models/TimelineModel';
 
 export const TimelineVerticalWrapper = styled.div`
@@ -24,6 +25,8 @@ export const VerticalItemWrapper = styled.div<{
   alternateCards?: boolean;
   cardHeight?: number;
   cardLess?: boolean;
+  isNested?: boolean;
+  theme?: Theme;
 }>`
   display: flex;
   position: relative;
@@ -44,7 +47,23 @@ export const VerticalItemWrapper = styled.div<{
     visibility: visible;
   }
 
-  min-height: ${(p) => p.cardHeight}px;
+  ${(p) =>
+    p.isNested
+      ? css`
+          position: relative;
+
+          &:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 2rem;
+            background: ${(p) => p.theme.primary};
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -2rem;
+          }
+        `
+      : css``}
 `;
 
 export const TimelineCardContentWrapper = styled.div<{
