@@ -19,8 +19,9 @@ export const HorizontalBasic: React.FunctionComponent<{
         <Chrono
           items={data}
           mode="HORIZONTAL"
-          cardHeight={250}
-          cardWidth={650}
+          cardHeight={450}
+          cardWidth={550}
+          mediaHeight={300}
           slideShow
           slideItemDuration={2550}
           itemWidth={200}
@@ -34,6 +35,9 @@ export const HorizontalBasic: React.FunctionComponent<{
             previous: 'Previous',
           }}
           enableDarkToggle
+          mediaSettings={{
+            imageFit: 'cover',
+          }}
         >
           <div className="chrono-icons">
             <img src="color-circle.svg" alt="github" />

@@ -136,10 +136,10 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
             <TimelineNavButton
               theme={theme}
               onClick={onToggleDarkMode}
-              title={buttonTexts?.play}
+              title={isDark ? buttonTexts?.light : buttonTexts?.dark}
               tabIndex={0}
               aria-controls="timeline-main-wrapper"
-              aria-label={buttonTexts?.darkToggle}
+              aria-label={isDark ? buttonTexts?.light : buttonTexts?.dark}
             >
               {isDark ? <SunIcon /> : <MoonIcon />}
             </TimelineNavButton>

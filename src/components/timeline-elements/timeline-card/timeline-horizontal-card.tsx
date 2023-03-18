@@ -140,7 +140,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         />
       </TimelineContentContainer>
     );
-  }, [active, slideShowRunning]);
+  }, [active, slideShowRunning, JSON.stringify(theme)]);
 
   const showTimelineContent = () => {
     const ele = document.getElementById(wrapperId);

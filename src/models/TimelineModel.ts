@@ -57,9 +57,10 @@ export type TimelineProps = {
 
   // custom button texts
   buttonTexts?: {
-    darkToggle?: string;
+    dark?: string;
     first: string;
     last: string;
+    light?: string;
     next?: string;
     play?: string;
     previous?: string;

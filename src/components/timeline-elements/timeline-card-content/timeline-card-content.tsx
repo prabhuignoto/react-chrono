@@ -77,7 +77,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         classNames,
         contentDetailsHeight,
         textOverlay,
-        mediaHeight,
         slideShowType,
         showProgressOnSlideshow,
       } = useContext(GlobalContext);
