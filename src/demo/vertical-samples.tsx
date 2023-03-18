@@ -117,8 +117,9 @@ export const VerticalBasic: FunctionComponent<{
         items={items}
         mode="VERTICAL"
         slideShow
-        cardWidth={500}
+        cardWidth={650}
         slideItemDuration={2500}
+        cardHeight={300}
         scrollable={{ scrollbar: false }}
         // textOverlay
         // borderLessCards
@@ -137,14 +138,16 @@ export const VerticalBasic: FunctionComponent<{
         // flipLayout
         focusActiveItemOnLoad
         activeItemIndex={2}
-        mediaHeight={200}
+        // mediaHeight={300}
         nestedCardHeight={100}
-        cardHeight={200}
-        // contentDetailsHeight={300}
+        // cardHeight={450}
+        // contentDetailsHeight={200}
         timelinePointDimension={20}
-        timelinePointShape="diamond"
         classNames={{
           cardText: 'custom-text',
+        }}
+        mediaSettings={{
+          imageFit: 'cover',
         }}
         enableDarkToggle
       />
@@ -164,7 +167,7 @@ export const VerticalNewMedia: FunctionComponent<{
             items={items}
             mode="VERTICAL_ALTERNATING"
             slideShow
-            cardWidth={450}
+            cardWidth={500}
             slideItemDuration={2000}
             scrollable={{ scrollbar: false }}
             textOverlay

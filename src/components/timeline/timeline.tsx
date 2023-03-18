@@ -50,6 +50,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     hideControls = false,
     nestedCardHeight,
     isChild = false,
+    onPaused,
   } = props;
 
   const {
@@ -94,14 +95,17 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const handleNext = useCallback(() => {
     hasFocus && onNext?.();
   }, [hasFocus, onNext]);
+
   const handlePrevious = useCallback(
     () => hasFocus && onPrevious?.(),
     [hasFocus, onPrevious],
   );
+
   const handleFirst = useCallback(
     () => hasFocus && onFirst?.(),
     [hasFocus, onFirst],
   );
+
   const handleLast = useCallback(
     () => hasFocus && onLast?.(),
     [hasFocus, onLast],
@@ -291,6 +295,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         setHasFocus(true);
       }}
       hideControls={hideControls}
+      onKeyUp={(evt) => {
+        if (evt.key === 'Escape') {
+          onPaused?.();
+        }
+      }}
     >
       <TimelineMainWrapper
         ref={timelineMainRef}
@@ -410,6 +419,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             slideShowRunning={slideShowRunning}
             isDark={darkMode}
             onToggleDarkMode={toggleDarkMode}
+            onPaused={onPaused}
           />
         </TimelineControlContainer>
       )}

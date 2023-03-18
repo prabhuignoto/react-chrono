@@ -7,6 +7,7 @@ export interface TimelineControlModel {
   onFirst: () => void;
   onLast: () => void;
   onNext: () => void;
+  onPaused?: () => void;
   onPrevious: () => void;
   onReplay?: () => void;
   onToggleDarkMode?: () => void;

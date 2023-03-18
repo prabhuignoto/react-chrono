@@ -81,15 +81,17 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         showProgressOnSlideshow,
       } = useContext(GlobalContext);
 
+      // If the media is a video, we don't show the progress bar.
+      // If the media is an image, we show the progress bar if the
+      // showProgressOnSlideshow flag is set.
       const canShowProgressBar = useMemo(() => {
-        return (
-          active &&
-          slideShowActive &&
-          media?.type !== 'VIDEO' &&
-          showProgressOnSlideshow
-        );
+        console.log(active, slideShowActive, showProgressOnSlideshow, title);
+        return active && slideShowActive && showProgressOnSlideshow;
       }, [active, slideShowActive]);
 
+      // This function returns a boolean value that indicates whether the user
+      // can see more information about the item. The detailed text is only
+      // available if the user has expanded the row.
       const canShowMore = useMemo(() => {
         return !!detailedText;
       }, [detailedText]);
@@ -215,6 +217,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         return useReadMore && detailedText && !customContent;
       }, []);
 
+      // decorate the comments
+      // This function is triggered when the media state changes. If the slideshow is
+      // active, and the media state changes to paused, this function will call
+      // tryHandlePauseSlideshow(), which will pause the slideshow.
       const handleMediaState = useCallback(
         (state: MediaState) => {
           if (!slideShowActive) {
@@ -251,6 +257,12 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         [showMore, customContent],
       );
 
+      /**
+       * Calculate the minimum height of the card. If the card has a text overlay and
+       * media, the minimum height is equal to the card height. If the card is not
+       * nested, the minimum height is equal to the card height. If the card is nested,
+       * the minimum height is equal to the nested card height.
+       */
       const cardMinHeight = useMemo(() => {
         if (textOverlay && media) {
           return cardHeight;

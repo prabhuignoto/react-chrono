@@ -30,6 +30,7 @@ export type TimelineModel = Pick<
   onLast?: () => void;
   onNext?: () => void;
   onOutlineSelection?: (index: number) => void;
+  onPaused?: () => void;
   onPrevious?: () => void;
   onTimelineUpdated?: (id: number) => void;
   slideItemDuration?: number;
@@ -62,6 +63,7 @@ export type TimelineProps = {
     last: string;
     light?: string;
     next?: string;
+    pause?: string;
     play?: string;
     previous?: string;
   };

@@ -15,7 +15,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
   props,
 ) => {
   const {
-    cardHeight = 200,
+    cardHeight = 350,
     cardLess = false,
     flipLayout,
     items = [],
@@ -29,6 +29,8 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
     slideShow,
     onThemeChange,
     mediaSettings,
+    mediaHeight = 200,
+    contentDetailsHeight,
   } = props;
 
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
@@ -37,6 +39,10 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
     {},
     {
       borderLessCards: false,
+      cardHeight: Math.max(
+        contentDetailsHeight || 0 + mediaHeight || 0,
+        cardHeight,
+      ),
       cardLess: false,
       contentDetailsHeight: 150,
       disableAutoScrollOnClick: false,

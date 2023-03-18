@@ -1,8 +1,8 @@
 import cls from 'classnames';
-import React, { useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { TimelineControlModel } from '../../../models/TimelineControlModel';
 import { GlobalContext } from '../../GlobalContext';
-import { MoonIcon, SunIcon } from '../../icons';
+import { MoonIcon, StopIcon, SunIcon } from '../../icons';
 import ChevronLeft from '../../icons/chev-left';
 import ChevronRightIcon from '../../icons/chev-right';
 import ChevronsLeftIcon from '../../icons/chevs-left';
@@ -27,6 +27,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   slideShowEnabled,
   onToggleDarkMode,
   isDark,
+  onPaused,
 }: TimelineControlModel) => {
   const { mode, flipLayout, theme, buttonTexts, classNames, enableDarkToggle } =
     useContext(GlobalContext);
@@ -38,6 +39,39 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
     [],
   );
 
+  const canDisableLeft = useMemo(
+    () => disableLeft || slideShowRunning,
+    [disableLeft, slideShowRunning],
+  );
+
+  const canDisableRight = useMemo(
+    () => disableRight || slideShowRunning,
+    [disableRight, slideShowRunning],
+  );
+
+  const handlePlayOrPause = useCallback(() => {
+    if (slideShowRunning) {
+      onPaused?.();
+    } else {
+      onReplay?.();
+    }
+  }, [slideShowRunning]);
+
+  const previousTitle = useMemo(
+    () => (flipLayout ? buttonTexts?.next : buttonTexts?.previous),
+    [flipLayout],
+  );
+
+  const nextTitle = useMemo(
+    () => (flipLayout ? buttonTexts?.previous : buttonTexts?.next),
+    [flipLayout],
+  );
+
+  const playOrPauseTile = useMemo(
+    () => (slideShowRunning ? buttonTexts?.pause : buttonTexts?.play),
+    [slideShowRunning],
+  );
+
   return (
     <TimelineControlContainer
       slideShowActive={slideShowRunning}
@@ -47,7 +81,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
         className={cls('timeline-controls', classNames?.controls)}
       >
         {/* jump to first */}
-        <TimelineNavItem disable={disableLeft}>
+        <TimelineNavItem disable={canDisableLeft}>
           <TimelineNavButton
             mode={mode}
             theme={theme}
@@ -64,13 +98,13 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
         </TimelineNavItem>
 
         {/* previous */}
-        <TimelineNavItem disable={disableLeft}>
+        <TimelineNavItem disable={canDisableLeft}>
           <TimelineNavButton
             mode={mode}
             theme={theme}
             onClick={flippedHorizontally ? onNext : onPrevious}
-            title={flipLayout ? buttonTexts?.next : buttonTexts?.previous}
-            aria-label={flipLayout ? buttonTexts?.next : buttonTexts?.previous}
+            title={previousTitle}
+            aria-label={previousTitle}
             aria-disabled={disableLeft}
             aria-controls="timeline-main-wrapper"
             tabIndex={!disableLeft ? 0 : -1}
@@ -81,13 +115,13 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
         </TimelineNavItem>
 
         {/* next */}
-        <TimelineNavItem disable={disableRight}>
+        <TimelineNavItem disable={canDisableRight}>
           <TimelineNavButton
             mode={mode}
             theme={theme}
             onClick={flippedHorizontally ? onPrevious : onNext}
-            title={flipLayout ? buttonTexts?.previous : buttonTexts?.next}
-            aria-label={flipLayout ? buttonTexts?.previous : buttonTexts?.next}
+            title={nextTitle}
+            aria-label={nextTitle}
             aria-disabled={disableRight}
             aria-controls="timeline-main-wrapper"
             rotate={rotate ? 'TRUE' : 'FALSE'}
@@ -98,7 +132,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
         </TimelineNavItem>
 
         {/* jump to last */}
-        <TimelineNavItem disable={disableRight}>
+        <TimelineNavItem disable={canDisableRight}>
           <TimelineNavButton
             mode={mode}
             theme={theme}
@@ -119,20 +153,20 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
           {slideShowEnabled && (
             <TimelineNavButton
               theme={theme}
-              onClick={onReplay}
-              title={buttonTexts?.play}
+              onClick={handlePlayOrPause}
+              title={playOrPauseTile}
               tabIndex={0}
               aria-controls="timeline-main-wrapper"
-              aria-label={buttonTexts?.play}
+              aria-label={playOrPauseTile}
             >
-              <ReplayIcon />
+              {slideShowRunning ? <StopIcon /> : <ReplayIcon />}
             </TimelineNavButton>
           )}
         </TimelineNavItem>
 
         {/* dark toggle button */}
         {enableDarkToggle ? (
-          <TimelineNavItem>
+          <TimelineNavItem disable={slideShowRunning}>
             <TimelineNavButton
               theme={theme}
               onClick={onToggleDarkMode}

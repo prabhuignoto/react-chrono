@@ -167,6 +167,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     [timeLineItems.length],
   );
 
+  const onPaused = useCallback(() => {
+    setSlideshowActive(false);
+  }, []);
+
   let iconChildren = toReactArray(children).filter(
     (item) => (item as any).props.className === 'chrono-icons',
   );
@@ -199,6 +203,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         mode={mode}
         enableOutline={enableOutline}
         hideControls={hideControls}
+        onPaused={onPaused}
       />
     </GlobalContextProvider>
   );

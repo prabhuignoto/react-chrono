@@ -63,7 +63,7 @@ export const TimelineControlContainer = styled.div<{
   display: flex;
   justify-content: center;
   // direction: ${(p) => (p.flip ? 'rtl' : 'ltr')};
-  visibility: ${(p) => (p.slideShowActive ? 'hidden' : 'visible')};
+  // visibility: ${(p) => (p.slideShowActive ? 'hidden' : 'visible')};
 `;
 
 export const ControlButton = styled.button<{ theme?: Theme }>`
