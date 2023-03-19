@@ -23,8 +23,8 @@ export const defaultTheme: Theme = {
 
 export const darkTheme: Theme = {
   cardBgColor: '#191919',
-  cardDetailsBackGround: '#444444',
-  cardDetailsColor: '#ffffff',
+  cardDetailsBackGround: '#191919',
+  cardDetailsColor: '#ffff0f',
   cardForeColor: '#ffffff',
   cardMediaBgColor: '#2f2f2f',
   cardSubtitleColor: '#ffffff',

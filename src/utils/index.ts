@@ -1,4 +1,5 @@
 import { darkTheme, defaultTheme } from '../components/common/themes';
+import { SlideShowType, TimelineMode } from '../models/TimelineModel';
 
 export const uniqueID = () => {
   const chars =
@@ -45,3 +46,22 @@ export const getDefaultButtonTexts = () => ({
   play: 'Play Slideshow',
   previous: 'Previous',
 });
+
+//get slidehow type based on mode
+
+export const getSlideShowType: (mode: TimelineMode) => SlideShowType = (
+  mode,
+) => {
+  if (mode === 'HORIZONTAL') {
+    return 'reveal';
+  }
+  if (mode === 'VERTICAL') {
+    return 'reveal';
+  }
+
+  if (mode === 'VERTICAL_ALTERNATING') {
+    return 'slide_from_sides';
+  }
+
+  return 'reveal';
+};

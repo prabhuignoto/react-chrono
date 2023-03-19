@@ -24,10 +24,10 @@ export const HorizontalBasic: React.FunctionComponent<{
           mediaHeight={300}
           slideShow
           slideItemDuration={2550}
-          itemWidth={200}
+          itemWidth={300}
           onItemSelected={(selected) => console.log(selected)}
           timelinePointDimension={20}
-          cardPositionHorizontal="BOTTOM"
+          // cardPositionHorizontal="TOP"
           buttonTexts={{
             first: 'Jump to First',
             last: 'Jump to Last',
@@ -62,13 +62,13 @@ export const HorizontalAll: React.FunctionComponent<{
         <Chrono
           items={data}
           mode="HORIZONTAL"
-          cardHeight={450}
+          cardHeight={400}
           cardWidth={650}
           enableDarkToggle
           slideShow
           // slideShow
           textOverlay
-          mediaHeight={450}
+          mediaHeight={250}
           slideItemDuration={2550}
           itemWidth={400}
           focusActiveItemOnLoad

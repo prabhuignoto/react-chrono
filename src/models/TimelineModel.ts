@@ -173,7 +173,7 @@ export type TimelineProps = {
   // enables the slideshow
   slideShow?: boolean;
 
-  slideShowType?: 'reveal' | 'slide_in' | 'slide_from_sides';
+  slideShowType?: SlideShowType;
 
   textOverlay?: boolean;
 
@@ -193,5 +193,7 @@ export type TimelineProps = {
   // enables the read more button
   useReadMore?: boolean;
 };
+
+export type SlideShowType = 'reveal' | 'slide_in' | 'slide_from_sides';
 
 export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';

@@ -5,6 +5,7 @@ import {
   getDefaultButtonTexts,
   getDefaultClassNames,
   getDefaultThemeOrDark,
+  getSlideShowType,
 } from '../utils/index';
 
 const GlobalContext = createContext<
@@ -22,7 +23,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
     theme,
     buttonTexts,
     classNames,
-    mode,
+    mode = 'VERTICAL_ALTERNATING',
     fontSizes,
     textOverlay,
     darkMode,
@@ -51,7 +52,6 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
       focusActiveItemOnLoad: false,
       lineWidth: 3,
       mediaHeight: 200,
-      mode: 'VERTICAL_ALTERNATING',
       nestedCardHeight: 150,
       scrollable: {
         scrollbar: false,
@@ -59,7 +59,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
       showAllCardsHorizontal: false,
       showProgressOnSlideshow: slideShow,
       slideItemDuration: 2000,
-      slideShowType: 'reveal',
+      slideShowType: getSlideShowType(mode),
       textOverlay: false,
       timelinePointDimension: 16,
       timelinePointShape: 'circle',

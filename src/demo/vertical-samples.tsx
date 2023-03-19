@@ -173,7 +173,7 @@ export const VerticalNewMedia: FunctionComponent<{
             slideItemDuration={2000}
             scrollable={{ scrollbar: false }}
             textOverlay
-            slideShowType="slide_from_sides"
+            // slideShowType="reveal"
             // borderLessCards
             // theme={{
             //   cardBgColor: '#fff',
@@ -189,11 +189,11 @@ export const VerticalNewMedia: FunctionComponent<{
             fontSizes={{
               title: '1.5rem',
             }}
-            cardHeight={450}
+            // cardHeight={450}
             timelinePointShape="square"
-            // focusActiveItemOnLoad
-            // activeItemIndex={9}
-            mediaHeight={400}
+            focusActiveItemOnLoad
+            activeItemIndex={9}
+            mediaHeight={200}
             // cardHeight={250}
             // cardHeight={350}
             enableDarkToggle

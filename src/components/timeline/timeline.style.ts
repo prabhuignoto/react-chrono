@@ -79,7 +79,8 @@ export const TimelineMainWrapper = styled.div<{
   ${ScrollBar}
 
   &.horizontal {
-    height: 6rem;
+    // height: 6rem;
+    min-height: 150px;
   }
 
   padding: ${({ scrollable }) => (!scrollable ? '0 1rem 0' : '')};
@@ -87,11 +88,12 @@ export const TimelineMainWrapper = styled.div<{
 
 export const TimelineMain = styled.div`
   align-items: center;
-  bottom: 0;
   display: flex;
   left: 0;
+  top: 50%;
   position: absolute;
   transition: all 0.2s ease;
+  transform: translate(0, -50%);
 
   &.vertical {
     align-items: flex-start;

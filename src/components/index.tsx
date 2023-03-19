@@ -102,6 +102,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       lineItems.map((item, index) => ({
         ...item,
         active: index === actvTimelineIndex,
+        visible: actvTimelineIndex >= 0,
       })),
     );
 
@@ -124,7 +125,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     setTimeout(() => {
       setSlideshowActive(true);
       handleTimelineUpdate(0);
-    }, 100);
+    }, 0);
   }, []);
 
   const handleOnNext = () => {
