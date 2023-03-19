@@ -382,6 +382,26 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         theme,
       ]);
 
+      const handlers = useMemo(() => {
+        if (!isNested) {
+          return {
+            onPointerDown: (ev: React.PointerEvent) => {
+              ev.stopPropagation();
+              if (
+                !slideShowActive &&
+                onClick &&
+                id &&
+                !disableAutoScrollOnClick
+              ) {
+                onClick(id);
+              }
+            },
+            tryHandlePauseSlideshow,
+            tryHandleResumeSlideshow,
+          };
+        }
+      }, []);
+
       return (
         <TimelineItemContentWrapper
           className={contentClass}
@@ -389,19 +409,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           maxWidth={cardWidth}
           mode={mode}
           noMedia={!media}
-          onPointerDown={(ev: React.PointerEvent) => {
-            ev.stopPropagation();
-            if (
-              !slideShowActive &&
-              onClick &&
-              id &&
-              !disableAutoScrollOnClick
-            ) {
-              onClick(id);
-            }
-          }}
-          onPointerEnter={tryHandlePauseSlideshow}
-          onPointerLeave={tryHandleResumeSlideshow}
+          {...handlers}
           ref={onContainerRef}
           tabIndex={!isNested ? 0 : -1}
           theme={theme}
