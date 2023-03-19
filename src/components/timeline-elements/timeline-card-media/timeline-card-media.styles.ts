@@ -117,7 +117,7 @@ export const MediaDetailsWrapper = styled.div<{
   overflow: hidden;
   ${(p) => {
     if (p.textInMedia && p.expandFull) {
-      return `
+      return css`
         height: 100%;
         width: 100%;
         border: 0;
@@ -125,13 +125,15 @@ export const MediaDetailsWrapper = styled.div<{
     }
 
     if (!p.showText) {
-      return `
+      return css`
         height: 15%;
-        `;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+      `;
     }
 
     if (p.textInMedia && p.expandable) {
-      return `
+      return css`
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
         border-radius: 10px;
         height: 50%;

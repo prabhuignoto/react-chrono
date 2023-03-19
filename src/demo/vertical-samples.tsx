@@ -102,6 +102,8 @@ export const VerticalTreeMixed: FunctionComponent<{
         cardHeight={300}
         cardWidth={450}
         scrollable
+        slideShow
+        enableDarkToggle
       />
     </ComponentContainerTree>
   </Vertical>
@@ -199,6 +201,9 @@ export const VerticalNewMedia: FunctionComponent<{
             timelinePointDimension={20}
             classNames={{
               cardText: 'custom-text',
+            }}
+            mediaSettings={{
+              imageFit: 'cover',
             }}
           />
         </ComponentContainerTree>
@@ -433,6 +438,7 @@ export const VerticalTreeSlideshow: FunctionComponent<{
         mode="VERTICAL_ALTERNATING"
         cardHeight={200}
         scrollable
+        slideShow
         // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
     </ComponentContainerTree>

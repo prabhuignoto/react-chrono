@@ -62,8 +62,10 @@ export const HorizontalAll: React.FunctionComponent<{
         <Chrono
           items={data}
           mode="HORIZONTAL"
-          cardHeight={250}
+          cardHeight={450}
           cardWidth={650}
+          enableDarkToggle
+          slideShow
           // slideShow
           textOverlay
           mediaHeight={450}

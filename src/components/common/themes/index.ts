@@ -7,7 +7,7 @@ export const defaultTheme: Theme = {
   cardForeColor: '#000',
   cardMediaBgColor: '#f5f5f5',
   cardSubtitleColor: '#000',
-  cardTitleColor: '#000',
+  cardTitleColor: '#007FFF',
   detailsColor: '#000',
   nestedCardBgColor: '#f5f5f5',
   nestedCardDetailsBackGround: '#f5f5f5',
@@ -15,10 +15,10 @@ export const defaultTheme: Theme = {
   nestedCardForeColor: '#000',
   nestedCardSubtitleColor: '#000',
   nestedCardTitleColor: '#000',
-  primary: '#0f52ba',
+  primary: '#007FFF',
   secondary: '#ffdf00',
-  titleColor: '#0f52ba',
-  titleColorActive: '#0f52ba',
+  titleColor: '#007FFF',
+  titleColorActive: '#007FFF',
 };
 
 export const darkTheme: Theme = {
@@ -28,7 +28,7 @@ export const darkTheme: Theme = {
   cardForeColor: '#ffffff',
   cardMediaBgColor: '#2f2f2f',
   cardSubtitleColor: '#ffffff',
-  cardTitleColor: '#ffffff',
+  cardTitleColor: '#007FFF',
   detailsColor: '#ffffff',
   nestedCardBgColor: '#333333',
   nestedCardDetailsBackGround: '#333333',
@@ -36,8 +36,8 @@ export const darkTheme: Theme = {
   nestedCardForeColor: '#ffffff',
   nestedCardSubtitleColor: '#ffffff',
   nestedCardTitleColor: '#ffffff',
-  primary: '#0f52ba',
+  primary: '#007FFF',
   secondary: '#ffdf00',
-  titleColor: '#0f52ba',
-  titleColorActive: '#0f52ba',
+  titleColor: '#007FFF',
+  titleColorActive: '#007FFF',
 };

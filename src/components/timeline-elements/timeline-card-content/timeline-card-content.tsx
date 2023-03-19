@@ -85,7 +85,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       // If the media is an image, we show the progress bar if the
       // showProgressOnSlideshow flag is set.
       const canShowProgressBar = useMemo(() => {
-        console.log(active, slideShowActive, showProgressOnSlideshow, title);
         return active && slideShowActive && showProgressOnSlideshow;
       }, [active, slideShowActive]);
 
@@ -149,6 +148,12 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           id && onElapsed && onElapsed(id);
         }, interval);
       }, []);
+
+      useEffect(() => {
+        if (timerRef.current && !slideShowActive) {
+          window.clearTimeout(timerRef.current);
+        }
+      }, [slideShowActive]);
 
       // pause the slide show
       const tryHandlePauseSlideshow = useCallback(() => {

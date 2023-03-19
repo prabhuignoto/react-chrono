@@ -72,6 +72,16 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
     [slideShowRunning],
   );
 
+  const jumpToLastTitle = useMemo(
+    () => (flipLayout ? buttonTexts?.first : buttonTexts?.last),
+    [flipLayout],
+  );
+
+  const jumpToFirstTitle = useMemo(
+    () => (flipLayout ? buttonTexts?.last : buttonTexts?.first),
+    [flipLayout],
+  );
+
   return (
     <TimelineControlContainer
       slideShowActive={slideShowRunning}
@@ -86,8 +96,8 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
             mode={mode}
             theme={theme}
             onClick={flippedHorizontally ? onLast : onFirst}
-            title={flipLayout ? buttonTexts?.last : buttonTexts?.first}
-            aria-label={flipLayout ? buttonTexts?.last : buttonTexts?.first}
+            title={jumpToFirstTitle}
+            aria-label={jumpToFirstTitle}
             aria-disabled={disableLeft}
             aria-controls="timeline-main-wrapper"
             tabIndex={!disableLeft ? 0 : -1}
@@ -137,8 +147,8 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
             mode={mode}
             theme={theme}
             onClick={flippedHorizontally ? onFirst : onLast}
-            title={flipLayout ? buttonTexts?.first : buttonTexts?.last}
-            aria-label={flipLayout ? buttonTexts?.first : buttonTexts?.last}
+            title={jumpToLastTitle}
+            aria-label={jumpToLastTitle}
             aria-disabled={disableRight}
             aria-controls="timeline-main-wrapper"
             tabIndex={!disableRight ? 0 : -1}
