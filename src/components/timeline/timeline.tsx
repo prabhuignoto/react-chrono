@@ -167,7 +167,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       onItemSelected?.(activeItem);
 
       if (mode === 'HORIZONTAL') {
-        debugger;
         const card = horizontalContentRef.current?.querySelector(
           `#timeline-card-${activeItem.id}`,
         );

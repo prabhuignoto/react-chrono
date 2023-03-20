@@ -1,4 +1,12 @@
-import { FunctionComponent, PointerEvent, useContext, useMemo } from 'react';
+import {
+  FunctionComponent,
+  PointerEvent,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { TimelineMode } from '../../../models/TimelineModel';
 import { GlobalContext } from '../../GlobalContext';
 import ChevronIcon from '../../icons/chev-right';
@@ -31,7 +39,10 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   progressRef,
   isNested,
 }) => {
-  const { mode, theme } = useContext(GlobalContext);
+  const { mode, theme, slideItemDuration } = useContext(GlobalContext);
+  const isFirstRender = useRef(true);
+  const [isResuming, setIsResuming] = useState(false);
+  const [progressWidth, setProgressWidth] = useState(startWidth);
 
   const canShowTriangleIcon = useMemo(() => {
     return (
@@ -51,6 +62,20 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   const canShowMore = useMemo(() => {
     return showReadMore && textContentIsLarge;
   }, [showReadMore, textContentIsLarge]);
+
+  useEffect(() => {
+    if (!paused && !isFirstRender.current) {
+      setIsResuming(true);
+    }
+  }, [paused, startWidth]);
+
+  useEffect(() => {
+    setProgressWidth(startWidth);
+  }, [startWidth]);
+
+  useEffect(() => {
+    isFirstRender.current = false;
+  }, []);
 
   return (
     <>
@@ -83,6 +108,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           ref={progressRef}
           startWidth={startWidth}
           role="progressbar"
+          resuming={isResuming}
         ></SlideShowProgressBar>
       )}
 
