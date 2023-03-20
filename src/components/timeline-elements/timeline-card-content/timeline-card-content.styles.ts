@@ -279,12 +279,18 @@ export const ShowMore = styled.span<{ show?: boolean; theme?: Theme }>`
   }
 `;
 
-const slideAnimation = (start?: number, end?: number) => keyframes`
+const slideAnimation = (
+  start?: number,
+  end?: number,
+  theme?: Theme,
+) => keyframes`
   0% {
     width: ${start}px;
+    left: 0;
   }
   100% {
     width: ${end}px;
+    left: 50%;
   }
 `;
 
@@ -297,14 +303,25 @@ export const SlideShowProgressBar = styled.span<{
   background: ${(p) => p.color};
   bottom: -0.75em;
   display: block;
-  height: 3px;
+  height: 4px;
   left: 0;
   position: absolute;
+  border-radius: 2px;
+
+  ${(p) => {
+    if (p.paused) {
+      return css`
+        left: 50%;
+        transform: translateX(-50%);
+      `;
+    }
+  }}
 
   ${(p) => {
     if (!p.paused && p.startWidth && p.startWidth > 0) {
       return css`
-        animation: ${slideAnimation(p.startWidth, 0)} ${p.duration}ms ease-in;
+        animation: ${slideAnimation(p.startWidth, 0, p.theme)} ${p.duration}ms
+          ease-in;
         animation-play-state: running;
       `;
     } else {

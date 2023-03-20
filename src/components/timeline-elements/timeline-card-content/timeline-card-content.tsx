@@ -396,11 +396,11 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
                 onClick(id);
               }
             },
-            tryHandlePauseSlideshow,
-            tryHandleResumeSlideshow,
+            onPointerEnter: tryHandlePauseSlideshow,
+            onPointerLeave: tryHandleResumeSlideshow,
           };
         }
-      }, []);
+      }, [tryHandlePauseSlideshow, tryHandleResumeSlideshow]);
 
       return (
         <TimelineItemContentWrapper

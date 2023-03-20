@@ -63,9 +63,9 @@ export type TimelineProps = {
     last: string;
     light?: string;
     next?: string;
-    pause?: string;
     play?: string;
     previous?: string;
+    stop?: string;
   };
 
   // minimum height of the card

@@ -79,7 +79,6 @@ export const TimelineMainWrapper = styled.div<{
   ${ScrollBar}
 
   &.horizontal {
-    // height: 6rem;
     min-height: 150px;
   }
 

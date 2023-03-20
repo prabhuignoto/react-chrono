@@ -28,7 +28,7 @@ const items: TimelineItemModel[] = [
     media: {
       name: 'Battle of britain',
       source: {
-        url: 'https://thumbs-prod.si-cdn.com/NbOmrVrVAO-uSo0O8kVNdpqVyCk=/800x600/filters:no_upscale()/https://public-media.si-cdn.com/filer/c6/b0/c6b0f904-ae9c-47e5-86a9-493dfaefd43c/spitfire_1.jpg',
+        url: 'https://cdn.britannica.com/84/142184-050-9814C416/aircraft-spotter-skies-London-1940.jpg',
       },
       type: 'IMAGE',
     },
@@ -105,7 +105,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url: 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Surrender_Singapore.jpg',
+        url: 'https://insidestory.org.au/wp-content/uploads/surrender.jpg',
       },
       name: 'Fall of singapore',
     },
@@ -122,7 +122,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url: 'https://dlbztvn8kichw.cloudfront.net/wp-content/uploads/2018/10/03131301/The-Battle-Of-Midway.jpg',
+        url: 'https://hagadone.media.clients.ellingtoncms.com/img/photos/2021/09/14/0919_History_Corner2_t1170.jpg?5cc718665ab672dba93d511ab4c682bb370e5f86',
       },
     },
     date: '1942-06-04',
@@ -154,7 +154,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url: 'https://www.thesun.co.uk/wp-content/uploads/2018/02/nintchdbpict000382291893.jpg',
+        url: 'https://static.enlisted.net/upload/image/2022/03/art_stalingrad_1920x1080_d734ceae06e3aab39a296ad9eeacce8c.jpg',
       },
     },
     date: '1943-02-01',

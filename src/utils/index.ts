@@ -42,9 +42,9 @@ export const getDefaultButtonTexts = () => ({
   last: 'Go to Last',
   light: 'Switch to Light Mode',
   next: 'Next',
-  pause: 'Pause Slideshow',
   play: 'Play Slideshow',
   previous: 'Previous',
+  stop: 'Stop Slideshow',
 });
 
 //get slidehow type based on mode

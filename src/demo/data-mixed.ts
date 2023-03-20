@@ -84,7 +84,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url: 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Surrender_Singapore.jpg',
+        url: 'https://insidestory.org.au/wp-content/uploads/surrender.jpg',
       },
       name: 'Fall of singapore',
     },

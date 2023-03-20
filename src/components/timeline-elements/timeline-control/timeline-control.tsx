@@ -68,7 +68,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   );
 
   const playOrPauseTile = useMemo(
-    () => (slideShowRunning ? buttonTexts?.pause : buttonTexts?.play),
+    () => (slideShowRunning ? buttonTexts?.stop : buttonTexts?.play),
     [slideShowRunning],
   );
 

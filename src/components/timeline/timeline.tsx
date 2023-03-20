@@ -101,10 +101,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     [hasFocus, onPrevious],
   );
 
-  const handleFirst = useCallback(
-    () => hasFocus && onFirst?.(),
-    [hasFocus, onFirst],
-  );
+  const handleFirst = useCallback(() => {
+    hasFocus && onFirst?.();
+  }, [hasFocus, onFirst]);
 
   const handleLast = useCallback(
     () => hasFocus && onLast?.(),
@@ -161,13 +160,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   };
 
   useEffect(() => {
-    if (items.length && activeTimelineItem && items[activeTimelineItem]) {
-      const item = items[activeTimelineItem];
-      onItemSelected?.(items[activeTimelineItem]);
+    const activeItem = items[activeTimelineItem || 0];
+
+    if (items.length && activeItem) {
+      // const item = items[activeItem];
+      onItemSelected?.(activeItem);
 
       if (mode === 'HORIZONTAL') {
+        debugger;
         const card = horizontalContentRef.current?.querySelector(
-          `#timeline-card-${item.id}`,
+          `#timeline-card-${activeItem.id}`,
         );
 
         const cardRect = card?.getBoundingClientRect();
@@ -201,7 +203,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       return;
     }
     if (mode === 'HORIZONTAL') {
-      ele.scrollLeft = newOffSet;
+      ele.scrollLeft = Math.max(newOffSet, 0);
     } else {
       ele.scrollTop = newOffSet;
     }
