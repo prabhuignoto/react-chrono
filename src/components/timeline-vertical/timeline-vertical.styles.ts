@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
-import { Theme } from '../../../dist/models/Theme';
+import { Theme } from '../../models/Theme';
 import { TimelineMode } from '../../models/TimelineModel';
 
 export const TimelineVerticalWrapper = styled.div`

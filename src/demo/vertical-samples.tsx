@@ -121,7 +121,7 @@ export const VerticalBasic: FunctionComponent<{
         slideShow
         cardWidth={650}
         slideItemDuration={2500}
-        cardHeight={300}
+        cardHeight={200}
         scrollable={{ scrollbar: false }}
         // textOverlay
         // borderLessCards
@@ -140,10 +140,10 @@ export const VerticalBasic: FunctionComponent<{
         // flipLayout
         focusActiveItemOnLoad
         activeItemIndex={2}
-        mediaHeight={300}
+        mediaHeight={150}
         nestedCardHeight={100}
         // cardHeight={450}
-        // contentDetailsHeight={200}
+        contentDetailsHeight={100}
         timelinePointDimension={20}
         classNames={{
           cardText: 'custom-text',

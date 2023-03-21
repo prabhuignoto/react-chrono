@@ -49,8 +49,10 @@
   - [⌨Keyboard Navigation](#keyboard-navigation)
   - [Scrollable](#scrollable)
   - [📺Media](#media)
+  - [Text overlay mode](#text-overlay-mode)
   - [🛠Rendering custom content](#rendering-custom-content)
   - [🎭Custom icons for the Timeline](#custom-icons-for-the-timeline)
+  - [Nested Timelines](#nested-timelines)
   - [Slideshow mode](#slideshow-mode)
   - [Outline](#outline)
   - [Item Width](#item-width)
@@ -176,6 +178,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | lineWidth                | Prop to customize the width of the timeline track line.                                                                                                                      | 3px                    |
 | mediaHeight              | Sets the minimum height of the media element. Applicable only when a image or a video is embedded in the card                                                                | 200                    |
 | mode                     | Sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING`.                                                                                   | `VERTICAL_ALTERNATING` |
+| nestedCardHeight         | Sets the height of the nested timeline card                                                                                                                                  | 150                    |
 | onItemSelected           | Callback invoked on a item selection. passes all of the data pertinent to the item.                                                                                          |                        |
 | onScrollEnd              | Use the `onScrollEnd` to detect the end of the timeline.                                                                                                                     |                        |
 | scrollable               | Makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).                                                                           | true                   |
@@ -326,6 +329,40 @@ To embed YouTube videos, use the right embed url.
 
 ![media](./readme-assets/media.png)
 
+### Text overlay mode
+
+The `textOverlay` prop allows you to overlay text on top of a media element in a card.To enable the text overlay feature, simply add the text property to the items array in your Chrono timeline data. Here's an example:
+
+```jsx
+Copy code
+import { Chrono } from 'react-chrono';
+
+const items = [
+  {
+    title: 'First item',
+    media: {
+      type: 'IMAGE',
+      source: {
+        url: 'https://example.com/image.jpg',
+      },
+    },
+    text: 'This is the caption for the first item.',
+  },
+];
+
+function MyTimeline() {
+  return (
+    <Chrono items={items} textOverlay />
+  );
+}
+```
+
+The user can click on the `expand` button to expand the text and see more details. Here's what it looks like:
+
+![timeline_card_text_overlay](readme-assets/text-overlay.png)
+
+> With the textOverlay prop, you can give your timeline a modern and sleek look, and provide additional context or information about each item.
+
 ### 🛠Rendering custom content
 
 The component also supports embedding custom content in the `Timeline` cards.
@@ -368,11 +405,11 @@ const items = [
 
 ### 🎭Custom icons for the Timeline
 
-To use custom icons in the timeline, pass in the collection of images between the `chrono` tags wrapped in a container.
+To utilize personalized icons on the timeline, enclose a collection of images between the `chrono` tags, wrapped in a container.
 
-The icons are sequentially set (i.e) the first image you pass will be used as the icon for the first timeline item and so on.
+The icons are arranged sequentially; meaning, the first image that you pass in will be used as the icon for the first timeline item, and so on.
 
-Please make sure to pass in the image collection inside a container with a special className `chrono-icons`. This convention is mandatory as the component uses this `class name` to pick the images.
+It is important to note that the image collection must be passed in inside a container with the designated `chrono-icons` className. This is a required convention, as the component relies on this className to select the appropriate images.
 
 ```jsx
 <Chrono items={items} mode="VERTICAL_ALTERNATING">
@@ -400,11 +437,29 @@ Please make sure to pass in the image collection inside a container with a speci
 </Chrono>
 ```
 
+### Nested Timelines
+
+Nested timelines in React-Chrono allow you to display timelines within timeline cards. This feature is data-driven, which means that if a timeline item has an `items` array, the component will automatically attempt to render the nested timeline inside the timeline card.
+
+To use nested timelines, simply provide an array of items within the `items` property of a timeline item. The component will then take care of rendering the nested timeline for you.
+
+You can also adjust the height of the nested timeline card using the `nestedCardHeight` prop. This allows you to control the size of the card to fit your specific use case.
+
+```jsx
+const items = [
+  { title: 'Timeline title 1', cardTitle: 'Card Title 1', items: [{ cardTitle: "nested card title 1" }, { cardTitle: "nested card title 2" }] },
+  { title: 'Timeline title 2', cardTitle: 'Card Title 2' },
+];
+
+<Chrono mode="VERTICAL" items={items}>
+</Chrono>;
+```
+
 ### Slideshow mode
 
-Slideshow can be enabled by setting the `slideShow` prop to true. You can also set an optional `slideItemDuration` that sets the time delay between cards.
+Enabling the slideshow feature can be done by setting the `slideShow` prop to true. Additionally, an optional `slideItemDuration` prop can be set to determine the time delay between cards.
 
-setting this prop enables the play button in the timeline control panel.
+Enabling this prop will cause the play button to appear in the timeline control panel.
 
 ```jsx
 <Chrono items={items} slideShow slideItemDuration={4500} />
