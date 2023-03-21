@@ -2,7 +2,7 @@
 
 context('Chrono.Horizontal.Basic', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/horizontal');
+    cy.visit('http://localhost:4444/horizontal');
   });
 
   it('check length', () => {
@@ -10,7 +10,7 @@ context('Chrono.Horizontal.Basic', () => {
   });
 
   it('check timeline controls', () => {
-    cy.get('.timeline-controls').children().should('have.length', 5);
+    cy.get('.timeline-controls').children().should('have.length', 6);
   });
 
   // it('check read more', () => {

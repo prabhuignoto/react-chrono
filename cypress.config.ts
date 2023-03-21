@@ -11,7 +11,7 @@ export default defineConfig({
   defaultCommandTimeout: 10000,
 
   e2e: {
-    baseUrl: "http://localhost:5173",
+    baseUrl: "http://localhost:4444",
 
     excludeSpecPattern: "**/examples/*.js",
     // We've imported your old cypress plugins here.

@@ -2,7 +2,7 @@
 
 context('Chrono.Vertical.Basic', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/vertical-basic');
+    cy.visit('http://localhost:4444/vertical-basic');
   });
 
   it('check length', () => {
