@@ -27,7 +27,7 @@ jobs:
         with:
           install: false
           start: pnpm dev
-          wait-on: "http://[::1]:5173"
+          wait-on: "http://[::1]:4444"
           wait-on-timeout: 200
           browser: chrome
 
@@ -36,6 +36,6 @@ jobs:
         with:
           install: false
           start: pnpm dev
-          wait-on: "http://[::1]:5173"
+          wait-on: "http://[::1]:4444"
           wait-on-timeout: 200
           browser: edge
