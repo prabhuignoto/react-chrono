@@ -6,7 +6,6 @@ export default defineConfig({
   root: './',
   server: {
     port: 4444,
-    strictPort: true,
     watch: {
       ignored: [
         'node_modules',
@@ -19,7 +18,6 @@ export default defineConfig({
         'vite.config.ts',
         'yarn.lock',
       ],
-      usePolling: false,
     },
   },
 });
