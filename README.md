@@ -433,12 +433,18 @@ You can also adjust the height of the nested timeline card using the `nestedCard
 
 ```jsx
 const items = [
-  { title: 'Timeline title 1', cardTitle: 'Card Title 1', items: [{ cardTitle: "nested card title 1" }, { cardTitle: "nested card title 2" }] },
+  {
+    title: 'Timeline title 1',
+    cardTitle: 'Card Title 1',
+    items: [
+      { cardTitle: 'nested card title 1' },
+      { cardTitle: 'nested card title 2' },
+    ],
+  },
   { title: 'Timeline title 2', cardTitle: 'Card Title 2' },
 ];
 
-<Chrono mode="VERTICAL" items={items}>
-</Chrono>;
+<Chrono mode="VERTICAL" items={items}></Chrono>;
 ```
 
 ### Slideshow
@@ -454,7 +460,12 @@ Enabling this prop will cause the play button to appear in the timeline control 
 | HORIZONTAL           | `slide_in`             |
 
 ```jsx
-  <Chrono items={items} slideShow slideItemDuration={4500} slideShowType="reveal" />
+<Chrono
+  items={items}
+  slideShow
+  slideItemDuration={4500}
+  slideShowType="reveal"
+/>
 ```
 
 > The slideshow can be cancelled by clicking on the stop button in the control panel or by pressing the `ESC` key.
@@ -484,7 +495,7 @@ Use media settings to align the media or change how a image is displayed in the 
 | fit   | fits the image. can be cover or contain        | string | cover   |
 
 ```jsx
-  <Chrono items={items} mediaSettings={{ align: 'right', fit: 'contain' }} />
+<Chrono items={items} mediaSettings={{ align: 'right', fit: 'contain' }} />
 ```
 
 ### 🎨Theme
