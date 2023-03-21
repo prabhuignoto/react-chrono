@@ -167,12 +167,13 @@ export const VerticalNewMedia: FunctionComponent<{
         <ComponentContainerTree type={type}>
           <Chrono
             items={items}
-            mode="VERTICAL_ALTERNATING"
+            mode="HORIZONTAL"
             slideShow
-            cardWidth={500}
+            showAllCardsHorizontal
+            cardWidth={450}
             slideItemDuration={2000}
             scrollable={{ scrollbar: false }}
-            textOverlay
+            // textOverlay
             // slideShowType="reveal"
             // borderLessCards
             // theme={{
@@ -189,7 +190,7 @@ export const VerticalNewMedia: FunctionComponent<{
             fontSizes={{
               title: '1.5rem',
             }}
-            // cardHeight={450}
+            cardHeight={350}
             timelinePointShape="square"
             focusActiveItemOnLoad
             activeItemIndex={9}
@@ -245,6 +246,13 @@ export const VerticalAlternatingNested: FunctionComponent<{
             fontSizes={{
               title: '1.5rem',
             }}
+            theme={{
+              primary: '#191919',
+              secondary: '#FFA500',
+              titleColor: '#FFA500',
+              titleColorActive: '#000',
+              cardTitleColor: '#FFA500',
+            }}
             cardHeight={250}
             timelinePointShape="square"
             // focusActiveItemOnLoad
@@ -258,7 +266,62 @@ export const VerticalAlternatingNested: FunctionComponent<{
             classNames={{
               cardText: 'custom-text',
             }}
-          />
+          >
+            <div className="chrono-icons">
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/twitter.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/about.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/contacts.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/briefcase.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/idea.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/sun.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/info.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/calendar.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/50/000000/mailbox-closed-flag-down.png"
+                alt="mail-box"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/50/000000/pinterest.png"
+                alt="pinterest"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/reddit.png"
+                alt="reddit"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/facebook.png"
+                alt="reddit"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/stumbleupon.png"
+                alt="reddit"
+              />
+            </div>
+          </Chrono>
         </ComponentContainerTree>
       </Vertical>
     </>
@@ -321,7 +384,7 @@ export const VerticalBasicNested: FunctionComponent<{
         cardHeight={300}
         // contentDetailsHeight={300}
         timelinePointDimension={20}
-        timelinePointShape="diamond"
+        // timelinePointShape="diamond"
         classNames={{
           cardText: 'custom-text',
         }}

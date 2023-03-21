@@ -62,8 +62,8 @@ export const HorizontalAll: React.FunctionComponent<{
         <Chrono
           items={data}
           mode="HORIZONTAL"
-          cardHeight={400}
-          cardWidth={650}
+          cardHeight={350}
+          cardWidth={500}
           enableDarkToggle
           slideShow
           // slideShow
