@@ -39,10 +39,9 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   progressRef,
   isNested,
 }) => {
-  const { mode, theme, slideItemDuration } = useContext(GlobalContext);
+  const { mode, theme } = useContext(GlobalContext);
   const isFirstRender = useRef(true);
   const [isResuming, setIsResuming] = useState(false);
-  const [progressWidth, setProgressWidth] = useState(startWidth);
 
   const canShowTriangleIcon = useMemo(() => {
     return (
@@ -68,10 +67,6 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
       setIsResuming(true);
     }
   }, [paused, startWidth]);
-
-  useEffect(() => {
-    setProgressWidth(startWidth);
-  }, [startWidth]);
 
   useEffect(() => {
     isFirstRender.current = false;

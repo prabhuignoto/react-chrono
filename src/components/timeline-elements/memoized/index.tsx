@@ -164,7 +164,7 @@ const DetailsTextMemo = memo<DetailsTextMemoModel>(
     prev.height === next.height &&
     prev.show === next.show &&
     prev.expand === next.expand &&
-    JSON.stringify(prev?.theme) === JSON.stringify(next?.theme),
+    JSON.stringify(prev.theme) === JSON.stringify(next.theme),
 );
 
 DetailsTextMemo.displayName = 'Details Text';
