@@ -43,7 +43,6 @@ export const providerProps: TimelineProps = {
     cardBgColor: '#fff',
     cardDetailsBackGround: '#ffffff',
     cardDetailsColor: '#000',
-    cardForeColor: '#000',
     cardSubtitleColor: '#000',
     cardTitleColor: '#000',
     detailsColor: '#000',

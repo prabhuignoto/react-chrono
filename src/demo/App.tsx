@@ -211,7 +211,7 @@ const NewDemo: React.FunctionComponent = () => {
         {
           path: '/vertical-custom-icon',
           element: items.length > 0 && (
-            <VerticalCustomContent2 type="big-screen" />
+            <VerticalCustomContent2 type="big-screen" items={items} />
           ),
         },
         {

@@ -10,6 +10,7 @@ export type ContentHeaderProps = Pick<
 export type ContentFooterProps = {
   canShow: boolean;
   isNested?: boolean;
+  isResuming?: boolean;
   onExpand: () => void;
   paused: boolean;
   progressRef: RefObject<HTMLDivElement>;

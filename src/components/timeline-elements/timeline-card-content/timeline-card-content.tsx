@@ -56,6 +56,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       const timerRef = useRef(0);
       const startTime = useRef<Date>();
       const [paused, setPaused] = useState(false);
+      const isFirstRender = useRef(true);
 
       const [remainInterval, setRemainInterval] = useState(0);
       const [startWidth, setStartWidth] = useState(0);
@@ -64,6 +65,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       const [cardActualHeight, setCardActualHeight] = useState(0);
       const [detailsHeight, setDetailsHeight] = useState(0);
       const [hasBeenActivated, setHasBeenActivated] = useState(false);
+      const [isResuming, setIsResuming] = useState(false);
 
       const {
         mode,
@@ -214,6 +216,16 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           containerRef.current && containerRef.current.focus();
         }
       }, [hasFocus, active]);
+
+      useEffect(() => {
+        if (!paused && !isFirstRender.current) {
+          setIsResuming(true);
+        }
+      }, [paused, startWidth]);
+
+      useEffect(() => {
+        isFirstRender.current = false;
+      }, []);
 
       // This code is used to determine whether the read more button should be shown.
       // It is only shown if the useReadMore prop is true, the detailedText is non-null,
@@ -402,6 +414,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
       }, [tryHandlePauseSlideshow, tryHandleResumeSlideshow]);
 
+      console.log('root', startWidth);
+
       return (
         <TimelineItemContentWrapper
           className={contentClass}
@@ -451,6 +465,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               remainInterval={remainInterval}
               showProgressBar={canShowProgressBar}
               triangleDir={triangleDir}
+              resuming={isResuming}
+              progressRef={progressRef}
             />
           )}
 
@@ -482,6 +498,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               canShow={canShowMore}
               showMore={showMore}
               isNested={isNested}
+              isResuming={isResuming}
             />
           )}
         </TimelineItemContentWrapper>

@@ -127,7 +127,6 @@ export const VerticalBasic: FunctionComponent<{
         // borderLessCards
         // theme={{
         //   cardBgColor: '#fff',
-        //   cardForeColor: '#fff',
         //   titleColorActive: '#6495ed',
         //   titleColor: '#922724',
         //   cardDetailsBackGround: '#e8e8e8',
@@ -167,18 +166,17 @@ export const VerticalNewMedia: FunctionComponent<{
         <ComponentContainerTree type={type}>
           <Chrono
             items={items}
-            mode="HORIZONTAL"
+            mode="VERTICAL"
             slideShow
             showAllCardsHorizontal
-            cardWidth={450}
+            cardWidth={500}
             slideItemDuration={2000}
             scrollable={{ scrollbar: false }}
-            // textOverlay
+            textOverlay
             // slideShowType="reveal"
             // borderLessCards
             // theme={{
             //   cardBgColor: '#fff',
-            //   cardForeColor: '#fff',
             //   titleColorActive: '#6495ed',
             //   titleColor: '#922724',
             //   cardDetailsBackGround: '#e8e8e8',
@@ -234,7 +232,6 @@ export const VerticalAlternatingNested: FunctionComponent<{
             // borderLessCards
             // theme={{
             //   cardBgColor: '#fff',
-            //   cardForeColor: '#fff',
             //   titleColorActive: '#6495ed',
             //   titleColor: '#922724',
             //   cardDetailsBackGround: '#e8e8e8',
@@ -340,7 +337,6 @@ export const VerticalBasicCardLess: FunctionComponent<{
         cardLess
         theme={{
           cardBgColor: '#fff',
-          cardForeColor: 'blue',
           titleColorActive: 'red',
         }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
@@ -366,7 +362,6 @@ export const VerticalBasicNested: FunctionComponent<{
         // borderLessCards
         // theme={{
         //   cardBgColor: '#fff',
-        //   cardForeColor: '#fff',
         //   titleColorActive: '#6495ed',
         //   titleColor: '#922724',
         //   cardDetailsBackGround: '#e8e8e8',
@@ -398,7 +393,8 @@ export const VerticalBasicNested: FunctionComponent<{
 export const VerticalCustomContent2: FunctionComponent<{
   type: string;
   cardHeight?: number;
-}> = ({ type, cardHeight }) => (
+  items?: TimelineItemModel[];
+}> = ({ type, cardHeight, items }) => (
   <Vertical>
     <ComponentContainerTree type={type}>
       <Chrono
@@ -408,6 +404,7 @@ export const VerticalCustomContent2: FunctionComponent<{
         scrollable
         flipLayout
         timelinePointDimension={30}
+        items={items}
       >
         <div>
           <div style={{ width: '250px', height: '250px' }}>

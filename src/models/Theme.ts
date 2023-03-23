@@ -8,9 +8,6 @@ export interface Theme {
   // card details color
   cardDetailsColor?: string;
 
-  // card foreground color
-  cardForeColor?: string;
-
   cardMediaBgColor?: string;
 
   // card subtitle color
@@ -29,9 +26,6 @@ export interface Theme {
 
   // nested card details color
   nestedCardDetailsColor?: string;
-
-  // nested card foreground color
-  nestedCardForeColor?: string;
 
   // nested card subtitle color
   nestedCardSubtitleColor?: string;

@@ -38,10 +38,10 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   canShow,
   progressRef,
   isNested,
+  isResuming,
 }) => {
   const { mode, theme } = useContext(GlobalContext);
   const isFirstRender = useRef(true);
-  const [isResuming, setIsResuming] = useState(false);
 
   const canShowTriangleIcon = useMemo(() => {
     return (
@@ -61,16 +61,6 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   const canShowMore = useMemo(() => {
     return showReadMore && textContentIsLarge;
   }, [showReadMore, textContentIsLarge]);
-
-  useEffect(() => {
-    if (!paused && !isFirstRender.current) {
-      setIsResuming(true);
-    }
-  }, [paused, startWidth]);
-
-  useEffect(() => {
-    isFirstRender.current = false;
-  }, []);
 
   return (
     <>

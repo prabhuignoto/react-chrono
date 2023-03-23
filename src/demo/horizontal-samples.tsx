@@ -133,7 +133,6 @@ export const HorizontalBasicCardLess: FunctionComponent<{
         cardLess
         theme={{
           cardBgColor: '#fff',
-          cardForeColor: 'blue',
           titleColorActive: 'red',
         }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}

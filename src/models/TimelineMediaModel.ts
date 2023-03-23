@@ -29,7 +29,9 @@ export interface CardMediaModel {
   media: Media;
   onMediaStateChange: (state: MediaState) => void;
   paused?: boolean;
+  progressRef?: React.RefObject<HTMLDivElement>;
   remainInterval?: number;
+  resuming?: boolean;
   showProgressBar?: boolean;
   slideshowActive?: boolean;
   startWidth?: number;

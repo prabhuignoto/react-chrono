@@ -151,13 +151,11 @@ export const CardTitleAnchor = styled.a`
 `;
 
 export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
-  color: ${(p) => p.theme.cardForeColor};
-  // color: '#fff';
   font-size: 0.85rem;
   font-weight: 400;
   margin: 0;
   width: 100%;
-  color: ${(p) => p.theme.cardForeColor};
+  color: ${(p) => p.theme.detailsColor};
 `;
 
 export const TimelineSubContent = styled.span<{
@@ -167,7 +165,7 @@ export const TimelineSubContent = styled.span<{
   margin-bottom: 0.5rem;
   display: block;
   font-size: ${(p) => p.fontSize};
-  color: ${(p) => p.theme.cardForeColor};
+  color: ${(p) => p.theme.subTitleColor};
 `;
 
 export const TimelineContentDetailsWrapper = styled.div<{
