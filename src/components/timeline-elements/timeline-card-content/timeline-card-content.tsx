@@ -414,8 +414,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
       }, [tryHandlePauseSlideshow, tryHandleResumeSlideshow]);
 
-      console.log('root', startWidth);
-
       return (
         <TimelineItemContentWrapper
           className={contentClass}
