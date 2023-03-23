@@ -14,7 +14,7 @@
 <a href="https://5f985eb478dcb00022cfd60e-uiaufmxbhf.chromatic.com/?path=/story/example-vertical--vertical-basic" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
 
   <div>
-    <img src="./readme-assets/demo3.gif" />
+    <img src="./readme-assets/react_chrono_2.gif" />
   </div>
 
 </div>
@@ -42,18 +42,20 @@
 - [Getting Started](#getting-started)
   - [🚥Vertical Mode](#vertical-mode)
   - [🚥Vertical Alternating](#vertical-alternating)
-  - [📺Slideshow](#slideshow)
 - [Props](#props)
   - [Mode](#mode)
   - [Timeline item Model](#timeline-item-model)
   - [⌨Keyboard Navigation](#keyboard-navigation)
   - [Scrollable](#scrollable)
   - [📺Media](#media)
+  - [Text overlay mode](#text-overlay-mode)
   - [🛠Rendering custom content](#rendering-custom-content)
   - [🎭Custom icons for the Timeline](#custom-icons-for-the-timeline)
-  - [Slideshow mode](#slideshow-mode)
+  - [Nested Timelines](#nested-timelines)
+  - [Slideshow](#slideshow)
   - [Outline](#outline)
   - [Item Width](#item-width)
+  - [Media Settings](#media-settings)
   - [🎨Theme](#theme)
   - [Customize Font sizes](#customize-font-sizes)
   - [Customize alt text for buttons](#customize-alt-text-for-buttons)
@@ -110,7 +112,7 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
   }
 ```
 
-![app-home](./readme-assets/app-home.png)
+![horizontal-all](readme-assets/horizontal-all.png)
 
 ### 🚥Vertical Mode
 
@@ -134,19 +136,7 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 </div>
 ```
 
-![app-tree](./readme-assets/app-tree.png)
-
-### 📺Slideshow
-
-Play the timeline automatically with the `slideShow` mode. This prop enables the play button on the ui controls.
-
-```jsx
-<div style={{ width: '500px', height: '950px' }}>
-  <Chrono items={items} slideShow mode="VERTICAL_ALTERNATING" />
-</div>
-```
-
-<!-- ![tree-slideshow](./readme-assets/vertical_slideshow.gif) -->
+![vertical_alternating](./readme-assets/vertical-alternating.png)
 
 ## Props
 
@@ -165,6 +155,7 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | disableAutoScrollOnClick | Disables the timeline from auto-scrolling when a timeline card is clicked.                                                                                                   | false                  |
 | disableClickOnCircle     | Disables click action on the circular points.                                                                                                                                | false                  |
 | disableNavOnKey          | Disables keyboard navigation.                                                                                                                                                | false                  |
+| enableDarkToggle         | Enables the toggle switch for dark mode.                                                                                                                                     | false                  |
 | enableOutline            | Enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.                                                                                                      | false                  |
 | flipLayout               | Flips the layout (RTL).                                                                                                                                                      | false                  |
 | focusActiveItemOnLoad    | Setting this to `true` automatically scrolls and focuses the `activeItemIndex` on load                                                                                       | false                  |
@@ -174,15 +165,21 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 | items                    | Collection of [Timeline Item Model](#timeline-item-model).                                                                                                                   | []                     |
 | lineWidth                | Prop to customize the width of the timeline track line.                                                                                                                      | 3px                    |
 | mediaHeight              | Sets the minimum height of the media element. Applicable only when a image or a video is embedded in the card                                                                | 200                    |
+| mediaSettings            | Configures certain media specific layout settings. Refer [mediaSettings](#media-settings) for more info                                                                      |                        |
 | mode                     | Sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING`.                                                                                   | `VERTICAL_ALTERNATING` |
+| nestedCardHeight         | Sets the height of the nested timeline card                                                                                                                                  | 150                    |
 | onItemSelected           | Callback invoked on a item selection. passes all of the data pertinent to the item.                                                                                          |                        |
 | onScrollEnd              | Use the `onScrollEnd` to detect the end of the timeline.                                                                                                                     |                        |
+| onThemeChange            | Callback invoked when the theme is changed. Triggered via `enableDarkToggle`                                                                                                 |                        |
 | scrollable               | Makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).                                                                           | true                   |
 | showAllCardsHorizontal   | In horizontal mode, only the active card is displayed. With this prop, you can display all the cards.                                                                        | false                  |
 | slideItemDuration        | Duration (in ms), the timeline card is active during a `slideshow`.                                                                                                          | 5000                   |
 | slideShow                | Enables the slideshow control.                                                                                                                                               | false                  |
-| theme                    | Prop to customize the colors.                                                                                                                                                |                        |
-| timelineCircleDimension  | Dimensions of the circular points on the timeline                                                                                                                            | false                  |
+| textOverlay              | Displays text as a overlay on top of media elements. Refer [Text Overlay](#text-overlay-mode) for more info                                                                  | false                  |
+| theme                    | Prop to customize the colors. Refer [Theme](#theme) for more info                                                                                                            |                        |
+| timelinePointDimension   | Dimensions of the circular points on the timeline                                                                                                                            | false                  |
+| timelinePointShape       | Prop to configure the shape of the timeline points. can be `circle`, `square`, `diamond`                                                                                     | `circle`               |
+| titleDateFormat          | date format to be used when date is passed for each timeline item. supports all dayjs format.                                                                                | 'MMM DD, YYYY'         |
 | useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself.                         | true                   |
 
 ### Mode
@@ -203,15 +200,16 @@ Play the timeline automatically with the `slideShow` mode. This prop enables the
 
 ### Timeline item Model
 
-| name             | description                                                                                   | type               |
-| ---------------- | --------------------------------------------------------------------------------------------- | ------------------ |
-| cardDetailedText | detailed text displayed in the timeline card                                                  | String or String[] |
-| cardSubtitle     | text displayed in the timeline card                                                           | String             |
-| cardTitle        | title that is displayed on the timeline card                                                  | String             |
-| media            | media object to set image or video.                                                           | Object             |
-| timelineContent  | render custom content instead of text.This prop has higher precedence over `cardDetailedText` | ReactNode          |
-| title            | title of the timeline item                                                                    | String             |
-| url              | url to be used in the title.                                                                  | String             |
+| name               | description                                                                                   | type               |
+| ------------------ | --------------------------------------------------------------------------------------------- | ------------------ |
+| `cardDetailedText` | detailed text displayed in the timeline card                                                  | String or String[] |
+| `cardSubtitle`     | text displayed in the timeline card                                                           | String             |
+| `cardTitle`        | title that is displayed on the timeline card                                                  | String             |
+| `date`             | date to be used in the title. when used, this will override the title property                | Date               |
+| [`media`](#media)  | media object to set image or video                                                            | Object             |
+| `timelineContent`  | render custom content instead of text.This prop has higher precedence over `cardDetailedText` | ReactNode          |
+| `title`            | title of the timeline item                                                                    | String             |
+| `url`              | url to be used in the title                                                                   | String             |
 
 ```jsx
 {
@@ -322,16 +320,46 @@ To embed YouTube videos, use the right embed url.
 
 ![media](./readme-assets/media.png)
 
-### 🛠Rendering custom content
+### Text overlay mode
 
-The component also supports embedding custom content in the `Timeline` cards.
-
-To insert custom content, just pass the blocked elements between the `Chrono` tags.
-
-For e.g the below snippet will create 2 timeline items. Each `div` element is automatically converted into a timeline item and inserted into the timeline card.
-The [items](#timeline-item-model) collection is completely optional and custom rendering is supported on all 3 [modes](#mode).
+The `textOverlay` prop allows you to overlay text on top of a media element in a card.To enable the text overlay feature, simply add the text property to the items array in your Chrono timeline data. Here's an example:
 
 ```jsx
+Copy code
+import { Chrono } from 'react-chrono';
+
+const items = [
+  {
+    title: 'First item',
+    media: {
+      type: 'IMAGE',
+      source: {
+        url: 'https://example.com/image.jpg',
+      },
+    },
+    text: 'This is the caption for the first item.',
+  },
+];
+
+function MyTimeline() {
+  return (
+    <Chrono items={items} textOverlay />
+  );
+}
+```
+
+The user can click on the `expand` button to expand the text and see more details. Here's what it looks like:
+
+![timeline_card_text_overlay](readme-assets/text-overlay.png)
+
+> With the textOverlay prop, you can give your timeline a modern and sleek look, and provide additional context or information about each item.
+
+### 🛠Rendering custom content
+
+The Timeline cards of the component can also support embedded custom content. To insert custom content, pass the blocked elements between the Chrono tags. For instance, the below code snippet will generate two timeline items, where each div element will be automatically converted into a timeline item and inserted into the timeline card. The items collection mentioned in the code is completely optional, and custom rendering is supported on all three modes.
+
+```jsx
+Copy code
 <Chrono mode="VERTICAL">
   <div>
     <p>Lorem Ipsum. Lorem Ipsum. Lorem Ipsum</p>
@@ -342,11 +370,10 @@ The [items](#timeline-item-model) collection is completely optional and custom r
 </Chrono>
 ```
 
-> The items collection will also work nicely with any custom content that is passed.
-
-The following snippet sets the the `title` and `cardTitle` for the custom contents.
+> Note that the items collection will also work well with any custom content that is passed. In the following code snippet, the title and cardTitle are set for the custom contents.
 
 ```jsx
+Copy code
 const items = [
   { title: 'Timeline title 1', cardTitle: 'Card Title 1' },
   { title: 'Timeline title 2', cardTitle: 'Card Title 2' },
@@ -364,11 +391,11 @@ const items = [
 
 ### 🎭Custom icons for the Timeline
 
-To use custom icons in the timeline, pass in the collection of images between the `chrono` tags wrapped in a container.
+To utilize personalized icons on the timeline, enclose a collection of images between the `chrono` tags, wrapped in a container.
 
-The icons are sequentially set (i.e) the first image you pass will be used as the icon for the first timeline item and so on.
+The icons are arranged sequentially; meaning, the first image that you pass in will be used as the icon for the first timeline item, and so on.
 
-Please make sure to pass in the image collection inside a container with a special className `chrono-icons`. This convention is mandatory as the component uses this `class name` to pick the images.
+It is important to note that the image collection must be passed in inside a container with the designated `chrono-icons` className. This is a required convention, as the component relies on this className to select the appropriate images.
 
 ```jsx
 <Chrono items={items} mode="VERTICAL_ALTERNATING">
@@ -396,15 +423,52 @@ Please make sure to pass in the image collection inside a container with a speci
 </Chrono>
 ```
 
-### Slideshow mode
+### Nested Timelines
 
-Slideshow can be enabled by setting the `slideShow` prop to true. You can also set an optional `slideItemDuration` that sets the time delay between cards.
+Nested timelines in React-Chrono allow you to display timelines within timeline cards. This feature is data-driven, which means that if a timeline item has an `items` array, the component will automatically attempt to render the nested timeline inside the timeline card.
 
-setting this prop enables the play button in the timeline control panel.
+To use nested timelines, simply provide an array of items within the `items` property of a timeline item. The component will then take care of rendering the nested timeline for you.
+
+You can also adjust the height of the nested timeline card using the `nestedCardHeight` prop. This allows you to control the size of the card to fit your specific use case.
 
 ```jsx
-<Chrono items={items} slideShow slideItemDuration={4500} />
+const items = [
+  {
+    title: 'Timeline title 1',
+    cardTitle: 'Card Title 1',
+    items: [
+      { cardTitle: 'nested card title 1' },
+      { cardTitle: 'nested card title 2' },
+    ],
+  },
+  { title: 'Timeline title 2', cardTitle: 'Card Title 2' },
+];
+
+<Chrono mode="VERTICAL" items={items}></Chrono>;
 ```
+
+### Slideshow
+
+Enabling the slideshow feature can be done by setting the `slideShow` prop to true. Additionally, an optional `slideItemDuration` prop can be set to determine the time delay between cards.
+
+Enabling this prop will cause the play button to appear in the timeline control panel. Use the `slideShowType` prop to set the type of slideshow animation.
+
+| Mode                 | Default Slideshow Type |
+| :------------------- | :--------------------- |
+| VERTICAL             | `reveal`               |
+| VERTICAL_ALTERNATING | `slide_from_sides`     |
+| HORIZONTAL           | `slide_in`             |
+
+```jsx
+<Chrono
+  items={items}
+  slideShow
+  slideItemDuration={4500}
+  slideShowType="reveal"
+/>
+```
+
+> The slideshow can be cancelled by clicking on the stop button in the control panel or by pressing the `ESC` key.
 
 ### Outline
 
@@ -421,6 +485,19 @@ The outlines are only supported on `VERTICAL` and `VERTICAL_ALTERNATING` modes.
 
 The `itemWidth` prop can be used to set the width of each individual timeline sections. This setting is applicable only for the `HORIZONTAL` mode.
 
+### Media Settings
+
+Use media settings to align the media or change how a image is displayed in the card.
+
+| Name  | Description                                    | Type   | Default |
+| :---- | :--------------------------------------------- | :----- | :------ |
+| align | aligns the media. can be left, right or center | string | center  |
+| fit   | fits the image. can be cover or contain        | string | cover   |
+
+```jsx
+<Chrono items={items} mediaSettings={{ align: 'right', fit: 'contain' }} />
+```
+
 ### 🎨Theme
 
 Customize colors with the `theme` prop.
@@ -432,7 +509,6 @@ Customize colors with the `theme` prop.
     primary: 'red',
     secondary: 'blue',
     cardBgColor: 'yellow',
-    cardForeColor: 'violet',
     titleColor: 'black',
     titleColorActive: 'red',
   }}
@@ -485,9 +561,7 @@ Defaults
 
 ## Using custom class names
 
-If you want to use your own class names, you can do so with the `classNames` prop.
-
-The following example shows how to use custom class names on different elements.
+You can use the classNames prop to employ your own class names. The subsequent example illustrates how you can use custom class names on different elements.
 
 ```jsx
 <Chrono

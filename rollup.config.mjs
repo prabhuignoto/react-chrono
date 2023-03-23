@@ -2,7 +2,9 @@ import babel from '@rollup/plugin-babel';
 import buble from '@rollup/plugin-buble';
 import common from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
+import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
+import postCSSPreset from 'postcss-preset-env';
 import analyze from 'rollup-plugin-analyzer';
 import copy from 'rollup-plugin-copy';
 import del from 'rollup-plugin-delete';
@@ -21,6 +23,8 @@ const banner = `/*
 `;
 
 export default {
+  cache: true,
+  external: ['react', 'react-dom'],
   input: 'src/react-chrono.ts',
   output: [
     {
@@ -60,7 +64,14 @@ export default {
       plugins: [
         '@babel/plugin-transform-runtime',
         '@babel/plugin-proposal-optional-chaining',
-        'babel-plugin-styled-components',
+        [
+          'babel-plugin-styled-components',
+          {
+            fileName: false,
+            pure: true,
+            ssr: false,
+          },
+        ],
         // [
         //   '@emotion',
         //   {
@@ -78,6 +89,13 @@ export default {
     }),
     postcss({
       plugins: [
+        postCSSPreset({
+          features: {
+            'nesting-rules': true,
+          },
+          stage: 0,
+        }),
+        autoprefixer(),
         cssnano({
           preset: 'default',
         }),

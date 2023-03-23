@@ -88,7 +88,7 @@ const TimelineOutline: React.FunctionComponent<TimelineOutlineModel> = ({
   return (
     <OutlineWrapper position={position} open={openPane}>
       <OutlineButton
-        onClick={togglePane}
+        onPointerDown={togglePane}
         theme={theme}
         open={openPane}
         position={position}
@@ -101,7 +101,7 @@ const TimelineOutline: React.FunctionComponent<TimelineOutlineModel> = ({
             {outlineItems.map((item, index) => (
               <ListItem
                 key={item.id}
-                onClick={() => handleSelection(index, item.id)}
+                onPointerDown={() => handleSelection(index, item.id)}
               >
                 <ListItemBullet
                   theme={theme}

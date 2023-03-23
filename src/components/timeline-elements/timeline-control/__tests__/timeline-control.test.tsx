@@ -1,0 +1,67 @@
+import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
+import { commonProps, customRender, providerProps } from '../../../common/test';
+import TimelineControl from '../timeline-control';
+
+describe('TimelineControl', () => {
+  it('should render', () => {
+    const { container } = customRender(<TimelineControl {...commonProps} />, {
+      providerProps,
+    });
+    expect(container).toMatchSnapshot();
+  });
+
+  // check if all the buttons are rendered
+  it('should render all the buttons', () => {
+    const { getByLabelText } = customRender(
+      <TimelineControl {...commonProps} />,
+      { providerProps },
+    );
+    expect(getByLabelText('first')).toBeInTheDocument();
+    expect(getByLabelText('previous')).toBeInTheDocument();
+    expect(getByLabelText('next')).toBeInTheDocument();
+    expect(getByLabelText('last')).toBeInTheDocument();
+    expect(getByLabelText('dark-toggle')).toBeInTheDocument();
+  });
+
+  // should render the play button when slideShowEnabled is true
+  it('should render the play button when slideShowEnabled is true', () => {
+    const { getByLabelText } = customRender(
+      <TimelineControl {...commonProps} slideShowEnabled />,
+      { providerProps },
+    );
+    expect(getByLabelText('play')).toBeInTheDocument();
+  });
+
+  // check if all the callbacks are executed as expected
+  it('should execute the callbacks as expected', async () => {
+    const onFirst = vi.fn();
+    const onPrevious = vi.fn();
+    const onNext = vi.fn();
+    const onLast = vi.fn();
+    const onToggleDarkMode = vi.fn();
+    const user = userEvent.setup();
+
+    const { getByLabelText } = customRender(
+      <TimelineControl
+        {...commonProps}
+        onFirst={onFirst}
+        onPrevious={onPrevious}
+        onNext={onNext}
+        onLast={onLast}
+        onToggleDarkMode={onToggleDarkMode}
+      />,
+      { providerProps },
+    );
+    await user.click(getByLabelText('first'));
+    expect(onFirst).toHaveBeenCalled();
+    await user.click(getByLabelText('previous'));
+    expect(onPrevious).toHaveBeenCalled();
+    await user.click(getByLabelText('next'));
+    expect(onNext).toHaveBeenCalled();
+    await user.click(getByLabelText('last'));
+    expect(onLast).toHaveBeenCalled();
+    await user.click(getByLabelText('dark-toggle'));
+    expect(onToggleDarkMode).toHaveBeenCalled();
+  });
+});

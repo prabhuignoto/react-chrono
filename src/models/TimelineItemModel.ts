@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { Theme } from './Theme';
 import { Scroll } from './TimelineHorizontalModel';
 import { Media } from './TimelineMediaModel';
-import { TimelineMode } from './TimelineModel';
+import { TimelineProps } from './TimelineModel';
 /**
  *
  *
@@ -10,12 +10,16 @@ import { TimelineMode } from './TimelineModel';
  * @interface TimelineItemModel
  */
 export interface TimelineItemModel {
+  _dayjs?: any;
   active?: boolean;
   cardDetailedText?: string | string[];
   cardSubtitle?: string;
   cardTitle?: string;
   content?: ReactNode | ReactNode[];
+  date?: number | string | Date;
   id?: string;
+  isNested?: boolean;
+  items?: TimelineItemModel[];
   media?: Media;
   position?: string;
   timelineContent?: ReactNode;
@@ -36,22 +40,22 @@ export type TimelineCardModel = Pick<
   | 'media'
   | 'url'
   | 'timelineContent'
+  | 'isNested'
 > & {
-  autoScroll: ({
+  autoScroll?: ({
     pointOffset,
     pointWidth,
     timelinePointHeight,
     contentHeight,
   }: Partial<Scroll>) => void;
-  cardHeight?: number;
   customContent?: React.ReactNode | React.ReactNode[];
   hasFocus?: boolean;
   iconChild?: React.ReactNode;
-  mode: TimelineMode;
-  onClick: (id?: string) => void;
+  // mode: TimelineMode;
+  onClick?: (id?: string) => void;
   onElapsed?: (id?: string) => void;
   slideItemDuration?: number;
   slideShowRunning?: boolean;
   theme?: Theme;
   wrapperId: string;
-};
+} & Pick<TimelineProps, 'cardHeight' | 'cardWidth' | 'nestedCardHeight'>;

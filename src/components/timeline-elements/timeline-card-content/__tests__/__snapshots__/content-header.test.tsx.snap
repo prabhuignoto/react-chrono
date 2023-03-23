@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Content Header > should match the snapshot 1`] = `
+<div>
+  <header
+    class="sc-qZqnM idSell"
+  >
+    <h1
+      class="sc-kFCsca blhkjj card-title"
+      data-class="card-title"
+      font-size="1.25rem"
+    >
+      title
+    </h1>
+    <h2
+      class="sc-jsEegt edTPGk card-sub-title card-subtitle"
+      font-size="0.85rem"
+    >
+      content
+    </h2>
+  </header>
+</div>
+`;

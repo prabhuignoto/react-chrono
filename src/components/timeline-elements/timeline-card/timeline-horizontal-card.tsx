@@ -12,8 +12,8 @@ import { GlobalContext } from '../../GlobalContext';
 import TimelineCardContent from '../timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import {
-  Circle,
-  CircleWrapper,
+  Shape,
+  ShapeWrapper,
   TimelineContentContainer,
   TimelineTitleContainer,
   Wrapper,
@@ -31,13 +31,15 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   onClick,
   onElapsed,
   slideShowRunning,
-  theme,
   title,
   wrapperId,
   customContent,
   hasFocus,
   iconChild,
   timelineContent,
+  cardWidth,
+  isNested,
+  nestedCardHeight,
 }: TimelineCardModel) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -46,11 +48,12 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   const {
     mode,
     cardPositionHorizontal: position,
-    timelineCircleDimension,
+    timelinePointDimension,
     disableClickOnCircle,
     cardLess,
     showAllCardsHorizontal,
     classNames,
+    theme,
   } = useContext(GlobalContext);
 
   const handleClick = () => {
@@ -68,7 +71,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         const circleOffsetLeft = circle.offsetLeft;
         const wrapperOffsetLeft = wrapper.offsetLeft;
 
-        autoScroll({
+        autoScroll?.({
           pointOffset: circleOffsetLeft + wrapperOffsetLeft,
           pointWidth: circle.clientWidth,
         });
@@ -114,6 +117,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         active={active}
         highlight={showAllCardsHorizontal}
         tabIndex={0}
+        cardWidth={cardWidth}
       >
         <TimelineCardContent
           content={cardSubtitle}
@@ -131,10 +135,12 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           hasFocus={hasFocus}
           onClick={onClick}
           timelineContent={timelineContent}
+          isNested={isNested}
+          nestedCardHeight={nestedCardHeight}
         />
       </TimelineContentContainer>
     );
-  }, [active, slideShowRunning]);
+  }, [active, slideShowRunning, JSON.stringify(theme)]);
 
   const showTimelineContent = () => {
     const ele = document.getElementById(wrapperId);
@@ -153,19 +159,19 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
       {canShowTimelineContent && showTimelineContent()}
 
-      <CircleWrapper>
-        <Circle
+      <ShapeWrapper>
+        <Shape
           className={circleClass}
           onClick={handleClick}
           ref={circleRef}
           data-testid="timeline-circle"
           theme={theme}
           aria-label={title}
-          dimension={timelineCircleDimension}
+          dimension={timelinePointDimension}
         >
           {iconChild ? iconChild : null}
-        </Circle>
-      </CircleWrapper>
+        </Shape>
+      </ShapeWrapper>
 
       <TimelineTitleContainer
         className={titleClass}

@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Test Timeline Item Content Snapshot 1`] = `
-<p
-  class="card-sub-title css-1pdes2h"
->
-  This is a test
-</p>
-`;

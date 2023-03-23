@@ -1,14 +1,8 @@
-import {
-  FunctionComponent,
-  PointerEvent,
-  RefObject,
-  useContext,
-  useMemo,
-} from 'react';
-import { Theme } from '../../../models/Theme';
+import { FunctionComponent, PointerEvent, useContext, useMemo } from 'react';
 import { TimelineMode } from '../../../models/TimelineModel';
 import { GlobalContext } from '../../GlobalContext';
 import ChevronIcon from '../../icons/chev-right';
+import { ContentFooterProps } from './header-footer.model';
 import {
   ChevronIconWrapper,
   ShowMore,
@@ -16,23 +10,14 @@ import {
   TriangleIconWrapper,
 } from './timeline-card-content.styles';
 
-export type ContentFooterProps = {
-  canShow: boolean;
-  onExpand: () => void;
-  paused: boolean;
-  progressRef: RefObject<HTMLDivElement>;
-  remainInterval: number;
-  showMore: boolean;
-  showProgressBar?: boolean;
-  showReadMore?: boolean | '';
-  startWidth: number;
-  textContentIsLarge: boolean;
-  theme?: Theme;
-  triangleDir?: string;
-};
+/**
+ * This component is used to render the footer of the timeline card.
+ * It renders the read more/less button, progress bar and triangle icon.
+ * The read more/less button is only rendered if the content is large.
+ * The progress bar and triangle icon are only rendered if the card is in slideshow mode.
+ */
 
 const ContentFooter: FunctionComponent<ContentFooterProps> = ({
-  theme,
   showProgressBar,
   onExpand,
   triangleDir,
@@ -44,14 +29,19 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   startWidth,
   canShow,
   progressRef,
+  isNested,
+  isResuming,
 }) => {
-  const { mode } = useContext(GlobalContext);
+  const { mode, theme } = useContext(GlobalContext);
 
   const canShowTriangleIcon = useMemo(() => {
-    return (['VERTICAL', 'VERTICAL_ALTERNATING'] as TimelineMode[]).some(
-      (m) => m === mode,
+    return (
+      !isNested &&
+      (['VERTICAL', 'VERTICAL_ALTERNATING'] as TimelineMode[]).some(
+        (m) => m === mode,
+      )
     );
-  }, [mode]);
+  }, [mode, isNested]);
 
   const handleClick = (ev: PointerEvent) => {
     ev.stopPropagation();
@@ -59,9 +49,13 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
     onExpand();
   };
 
+  const canShowMore = useMemo(() => {
+    return showReadMore && textContentIsLarge;
+  }, [showReadMore, textContentIsLarge]);
+
   return (
     <>
-      {showReadMore && textContentIsLarge ? (
+      {canShowMore ? (
         <ShowMore
           className="show-more"
           onPointerDown={handleClick}
@@ -89,6 +83,8 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           paused={paused}
           ref={progressRef}
           startWidth={startWidth}
+          role="progressbar"
+          resuming={isResuming}
         ></SlideShowProgressBar>
       )}
 
@@ -96,6 +92,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
         <TriangleIconWrapper
           dir={triangleDir}
           theme={theme}
+          offset={-8}
         ></TriangleIconWrapper>
       )}
     </>

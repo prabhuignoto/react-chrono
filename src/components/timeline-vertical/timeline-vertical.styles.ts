@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+import { Theme } from '../../models/Theme';
 import { TimelineMode } from '../../models/TimelineModel';
 
 export const TimelineVerticalWrapper = styled.div`
@@ -24,12 +25,16 @@ export const VerticalItemWrapper = styled.div<{
   alternateCards?: boolean;
   cardHeight?: number;
   cardLess?: boolean;
+  isNested?: boolean;
+  theme?: Theme;
 }>`
   display: flex;
   position: relative;
   visibility: hidden;
   width: 100%;
   align-items: stretch;
+  justify-content: center;
+  margin: 1rem 0;
 
   &.left {
     margin-right: auto;
@@ -42,42 +47,23 @@ export const VerticalItemWrapper = styled.div<{
     visibility: visible;
   }
 
-  min-height: ${(p) => p.cardHeight}px;
-`;
+  ${(p) =>
+    p.isNested
+      ? css`
+          position: relative;
 
-export const VerticalCircleWrapper = styled.div<{
-  alternateCards?: boolean;
-  bg?: string;
-  cardLess?: boolean;
-  width?: number;
-}>`
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  width: ${(p) => (p.cardLess ? '5%' : '10%')};
-
-  &.left {
-    order: 2;
-  }
-
-  &.right {
-    order: 1;
-  }
-
-  &::after {
-    background: ${(p) => p.bg};
-    content: '';
-    display: block;
-    height: 100%;
-    left: 0;
-    margin-left: auto;
-    margin-right: auto;
-    position: absolute;
-    right: 0;
-    width: ${(p) => (p.width ? `${p.width}px` : '4px')};
-    z-index: 0;
-  }
+          &:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 2rem;
+            background: ${(p) => p.theme.primary};
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -2rem;
+          }
+        `
+      : css``}
 `;
 
 export const TimelineCardContentWrapper = styled.div<{
@@ -91,12 +77,11 @@ export const TimelineCardContentWrapper = styled.div<{
   position: relative;
   display: flex;
   align-items: center;
-  min-height: ${(p) => (p.height ? `${p.height}px` : '80px')};
   ${(p) => {
     if (p.alternateCards) {
       return `width: 50%;`;
     } else if (p.noTitle) {
-      return `width: 90%;`;
+      return `width: 95%;`;
     } else {
       return `width: 75%;`;
     }
@@ -129,11 +114,6 @@ export const TimelineCardContentWrapper = styled.div<{
     visibility: visible;
     animation: ${animateVisible} 0.25s ease-in;
   }
-`;
-
-export const VerticalCircleContainer = styled.div`
-  position: relative;
-  z-index: 1;
 `;
 
 export const TimelineTitleWrapper = styled.div<{

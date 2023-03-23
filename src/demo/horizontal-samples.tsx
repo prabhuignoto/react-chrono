@@ -19,19 +19,24 @@ export const HorizontalBasic: React.FunctionComponent<{
         <Chrono
           items={data}
           mode="HORIZONTAL"
-          cardHeight={250}
-          cardWidth={450}
+          cardHeight={450}
+          cardWidth={550}
+          mediaHeight={300}
           slideShow
           slideItemDuration={2550}
-          itemWidth={200}
+          itemWidth={300}
           onItemSelected={(selected) => console.log(selected)}
-          timelineCircleDimension={20}
-          cardPositionHorizontal="BOTTOM"
+          timelinePointDimension={20}
+          // cardPositionHorizontal="TOP"
           buttonTexts={{
             first: 'Jump to First',
             last: 'Jump to Last',
             next: 'Next',
             previous: 'Previous',
+          }}
+          enableDarkToggle
+          mediaSettings={{
+            imageFit: 'cover',
           }}
         >
           <div className="chrono-icons">
@@ -57,15 +62,19 @@ export const HorizontalAll: React.FunctionComponent<{
         <Chrono
           items={data}
           mode="HORIZONTAL"
-          cardHeight={250}
-          cardWidth={450}
+          cardHeight={350}
+          cardWidth={500}
+          enableDarkToggle
           slideShow
+          // slideShow
+          textOverlay
+          mediaHeight={250}
           slideItemDuration={2550}
-          itemWidth={200}
+          itemWidth={400}
           focusActiveItemOnLoad
           onItemSelected={(selected) => console.log(selected)}
-          timelineCircleDimension={20}
-          showAllCardsHorizontal
+          timelinePointDimension={20}
+          // showAllCardsHorizontal
           activeItemIndex={8}
         >
           <div className="chrono-icons">
@@ -124,7 +133,6 @@ export const HorizontalBasicCardLess: FunctionComponent<{
         cardLess
         theme={{
           cardBgColor: '#fff',
-          cardForeColor: 'blue',
           titleColorActive: 'red',
         }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}

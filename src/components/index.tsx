@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import 'focus-visible';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { TimelineItemModel } from '../models/TimelineItemModel';
@@ -17,6 +18,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     slideShow = false,
     onItemSelected,
     activeItemIndex = 0,
+    titleDateFormat = 'MMM DD, YYYY',
+    mode,
+    enableOutline,
+    hideControls,
   } = props;
 
   const [timeLineItems, setItems] = useState<TimelineItemModel[]>([]);
@@ -28,8 +33,19 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     return lineItems && lineItems.length
       ? lineItems.map((item, index) => {
           return Object.assign({}, item, {
+            _dayjs: dayjs(item.date),
             active: index === activeItemIndex,
             id: Math.random().toString(16).slice(2),
+            items: item.items?.map((subItem) => ({
+              ...subItem,
+              _dayjs: dayjs(subItem.date),
+              id: Math.random().toString(16).slice(2),
+              isNested: true,
+              visible: true,
+            })),
+            title: item.date
+              ? dayjs(item.date).format(titleDateFormat)
+              : item.title,
             visible: true,
           });
         })
@@ -37,7 +53,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
           length: React.Children.toArray(children).filter(
             (item) => (item as any).props.className !== 'chrono-icons',
           ).length,
-        }).map<Partial<TimelineItemModel>>((item, index) => ({
+        }).map<TimelineItemModel>((item, index) => ({
           active: index === activeItemIndex,
           id: Math.random().toString(16).slice(2),
           visible: true,
@@ -83,12 +99,13 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   const handleTimelineUpdate = useCallback((actvTimelineIndex: number) => {
     setItems((lineItems) =>
-      lineItems.map((item, index) =>
-        Object.assign({}, item, {
-          active: index === actvTimelineIndex,
-        }),
-      ),
+      lineItems.map((item, index) => ({
+        ...item,
+        active: index === actvTimelineIndex,
+        visible: actvTimelineIndex >= 0,
+      })),
     );
+
     setActiveTimelineItem(actvTimelineIndex);
 
     if (items) {
@@ -103,8 +120,12 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   }, [activeItemIndex]);
 
   const restartSlideShow = useCallback(() => {
-    setSlideshowActive(true);
-    handleTimelineUpdate(0);
+    handleTimelineUpdate(-1);
+
+    setTimeout(() => {
+      setSlideshowActive(true);
+      handleTimelineUpdate(0);
+    }, 0);
   }, []);
 
   const handleOnNext = () => {
@@ -151,6 +172,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     [timeLineItems.length],
   );
 
+  const onPaused = useCallback(() => {
+    setSlideshowActive(false);
+  }, []);
+
   let iconChildren = toReactArray(children).filter(
     (item) => (item as any).props.className === 'chrono-icons',
   );
@@ -180,6 +205,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         onScrollEnd={onScrollEnd}
         onItemSelected={onItemSelected}
         onOutlineSelection={handleOutlineSelection}
+        mode={mode}
+        enableOutline={enableOutline}
+        hideControls={hideControls}
+        onPaused={onPaused}
       />
     </GlobalContextProvider>
   );

@@ -20,6 +20,31 @@ const items: TimelineItemModel[] = [
   {
     title: '25 July 1940',
     cardTitle: 'The Battle of Britain',
+    // items: [
+    //   {
+    //     cardTitle: 'The Battle of Britian Yaar',
+    //     url: 'http://www.google.com',
+    //     media: {
+    //       name: 'dunkirk beach',
+    //       source: {
+    //         url: 'https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg',
+    //         // url: "/dunkirk.mp4"
+    //       },
+    //       type: 'IMAGE',
+    //     },
+    //     cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+    //   },
+    //   {
+    //     cardTitle: 'The Battle of Britian Yaar',
+    //     url: 'http://www.google.com',
+    //     cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+    //   },
+    //   {
+    //     cardTitle: 'The Battle of Britian Yaar',
+    //     url: 'http://www.google.com',
+    //     cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+    //   },
+    // ],
     cardSubtitle: `RAF Spitfire pilots scramble for their planes`,
     cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority. The first phase of the battle began on 10 July with Luftwaffe attacks on shipping in the Channel.
       The following month, RAF Fighter Command airfields and aircraft factories came under attack. Under the dynamic direction of Lord Beaverbrook, production of Spitfire and Hurricane fighters increased, and despite its losses in pilots and planes, the RAF was never as seriously weakened as the Germans supposed.`,
@@ -59,7 +84,7 @@ const items: TimelineItemModel[] = [
     media: {
       type: 'IMAGE',
       source: {
-        url: 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Surrender_Singapore.jpg',
+        url: 'https://insidestory.org.au/wp-content/uploads/surrender.jpg',
       },
       name: 'Fall of singapore',
     },

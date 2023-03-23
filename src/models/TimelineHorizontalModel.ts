@@ -9,9 +9,11 @@ export interface TimelineHorizontalModel {
   handleItemClick: (id?: string) => void;
   hasFocus?: boolean;
   iconChildren?: ReactNode;
+  isNested?: boolean;
   itemWidth?: number;
   items: TimelineCardModel[];
   mode?: TimelineMode;
+  nestedCardHeight?: number;
   onElapsed?: (id?: string) => void;
   slideShowRunning?: boolean;
   wrapperId: string;

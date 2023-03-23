@@ -9,12 +9,13 @@ export type Props = Pick<
   | 'flipLayout'
   | 'theme'
   | 'mode'
-  | 'timelineCircleDimension'
+  | 'timelinePointDimension'
   | 'lineWidth'
   | 'cardHeight'
   | 'enableOutline'
   | 'disableClickOnCircle'
   | 'cardLess'
+  | 'nestedCardHeight'
 > & {
   alternateCards?: boolean;
   hasFocus?: boolean;
@@ -33,10 +34,11 @@ type VerticalModel = Pick<
   | 'onElapsed'
   | 'slideShowRunning'
   | 'mode'
-  | 'timelineCircleDimension'
+  | 'timelinePointDimension'
   | 'lineWidth'
   | 'disableClickOnCircle'
   | 'cardLess'
+  | 'nestedCardHeight'
 > &
   Pick<
     TimelineItemModel,
@@ -46,20 +48,20 @@ type VerticalModel = Pick<
     | 'title'
     | 'url'
     | 'timelineContent'
+    | 'items'
+    | 'isNested'
   > & { active?: boolean; className: string; id?: string };
 
-export type VerticalCircleModel = Omit<VerticalModel, 'timelineContent'> & {
+export type TimelinePointModel = Omit<VerticalModel, 'timelineContent'> & {
   iconChild?: React.ReactNode;
   onActive: (pointOffset: number) => void;
 };
 
 export interface VerticalItemModel extends VerticalModel {
-  // cardDetailedText?: string | string[];
-  // cardSubtitle?: string;
-  // cardTitle?: string;
   contentDetailsChildren?: React.ReactNode;
   iconChild?: React.ReactNode;
   index: number;
+  items?: TimelineItemModel[];
   media?: Media;
   onActive: (
     pointOffset: number,
@@ -67,8 +69,6 @@ export interface VerticalItemModel extends VerticalModel {
     contentOffset: number,
   ) => void;
   onShowMore?: () => void;
-  // title?: string;
-  // url?: string;
   visible?: boolean;
 }
 
@@ -83,8 +83,9 @@ export type TimelineVerticalModel = Pick<
   | 'theme'
   | 'hasFocus'
   | 'cardLess'
+  | 'nestedCardHeight'
 > & {
-  activeTimelineItem: number;
+  activeTimelineItem?: number;
   autoScroll: (s: Partial<Scroll>) => void;
   childrenNode?: React.ReactNode;
   contentDetailsChildren?: React.ReactNode;

@@ -5,6 +5,7 @@ import { TimelineItemModel } from '../models/TimelineItemModel';
 import './App.css';
 import data from './data';
 import mixed from './data-mixed';
+import dataNested from './data-nested';
 import DynamicLoad from './dynamic-load';
 import {
   HorizontalAll,
@@ -12,22 +13,28 @@ import {
   HorizontalBasicCardLess,
   HorizontalInitialSelectedItem,
 } from './horizontal-samples';
+import { items2 as worldHistory } from './human-history';
 import { Layout } from './layout';
 import {
+  VerticalAlternatingNested,
   VerticalBasic,
   VerticalBasicCardLess,
+  VerticalBasicNested,
   VerticalCustomContent,
   VerticalCustomContent2,
+  VerticalNewMedia,
   VerticalTree,
   VerticalTreeMixed,
 } from './vertical-samples';
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
+  const [nestedItems, setNestedItems] = useState<TimelineItemModel[]>([]);
+  const [historyItems, setHistoryItems] = useState<TimelineItemModel[]>([]);
   const [state, setState] = useState(0);
 
   const [customTheme, setCustomTheme] = useState<Theme>({
-    cardBgColor: '#C0C0C0',
+    cardBgColor: '#f5f5f5',
     primary: '#000',
     secondary: '#FFA500',
   });
@@ -41,7 +48,7 @@ const NewDemo: React.FunctionComponent = () => {
       });
     } else {
       setCustomTheme({
-        cardBgColor: '#C0C0C0',
+        cardBgColor: '#f5f5f5',
         primary: '#000',
         secondary: '#FFA500',
         titleColorActive: '#000',
@@ -60,6 +67,8 @@ const NewDemo: React.FunctionComponent = () => {
         id,
         media,
         timelineContent,
+        date,
+        items,
       }) => ({
         title,
         url,
@@ -69,9 +78,43 @@ const NewDemo: React.FunctionComponent = () => {
         id,
         media,
         timelineContent,
+        date,
+        items,
       }),
     );
     setItems(newItems);
+    setHistoryItems(
+      worldHistory.map(
+        ({ cardTitle, cardSubtitle, cardDetailedText, media, url, title }) => ({
+          cardTitle,
+          cardSubtitle,
+          cardDetailedText,
+          media,
+          url,
+          title,
+        }),
+      ),
+    );
+    setNestedItems(
+      dataNested.map(
+        ({
+          cardTitle,
+          cardSubtitle,
+          cardDetailedText,
+          media,
+          url,
+          title,
+          items,
+        }) => ({
+          cardTitle,
+          cardSubtitle,
+          cardDetailedText,
+          url,
+          title,
+          items,
+        }),
+      ),
+    );
   }, []);
 
   const router = createBrowserRouter([
@@ -86,7 +129,28 @@ const NewDemo: React.FunctionComponent = () => {
           ) : null,
         },
         {
+          path: '/vertical-basic-nested',
+          element: items.length ? (
+            <VerticalBasicNested type={'big-screen'} items={dataNested} />
+          ) : null,
+        },
+        {
           path: '/vertical-alternating-mixed',
+          element: items.length > 0 && (
+            <VerticalTreeMixed type={'big-screen'} />
+          ),
+        },
+        {
+          path: '/vertical-alternating-nested',
+          element: items.length > 0 && (
+            <VerticalAlternatingNested
+              type={'big-screen'}
+              items={nestedItems}
+            />
+          ),
+        },
+        {
+          path: '/vertical-alternating-nested',
           element: items.length > 0 && (
             <VerticalTreeMixed type={'big-screen'} />
           ),
@@ -106,7 +170,7 @@ const NewDemo: React.FunctionComponent = () => {
                 <VerticalTree
                   type={'big-screen'}
                   items={state > 0 ? items : mixed}
-                  theme={customTheme}
+                  // theme={customTheme}
                 >
                   {state}
                 </VerticalTree>
@@ -119,6 +183,12 @@ const NewDemo: React.FunctionComponent = () => {
           element: items.length > 0 && (
             <HorizontalBasic items={items} type="big-screen" />
           ),
+        },
+        {
+          path: '/vertical-world-history',
+          element: historyItems.length ? (
+            <VerticalNewMedia items={historyItems} type="big-screen" />
+          ) : null,
         },
         {
           path: '/horizontal-all',
@@ -141,7 +211,7 @@ const NewDemo: React.FunctionComponent = () => {
         {
           path: '/vertical-custom-icon',
           element: items.length > 0 && (
-            <VerticalCustomContent2 type="big-screen" />
+            <VerticalCustomContent2 type="big-screen" items={items} />
           ),
         },
         {

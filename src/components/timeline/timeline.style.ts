@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Theme } from '../../models/Theme';
 import { TimelineMode } from '../../models/TimelineModel';
+import { ScrollBar } from '../common/styles';
 
 export const Wrapper = styled.div<{
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
@@ -73,26 +74,12 @@ export const TimelineMainWrapper = styled.div<{
   overscroll-behavior: contain;
   ${(p) => (p.mode === 'HORIZONTAL' ? 'position: relative' : '')};
   scroll-behavior: smooth;
-  scrollbar-color: ${(p) => p.theme.primary} default;
-  scrollbar-width: thin;
   width: 100%;
 
-  &::-webkit-scrollbar {
-    width: 0.5em;
-    height: 0;
-  }
-
-  &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: ${(p) => p.theme.primary};
-    outline: 1px solid ${(p) => p.theme.primary};
-  }
+  ${ScrollBar}
 
   &.horizontal {
-    height: 6rem;
+    min-height: 150px;
   }
 
   padding: ${({ scrollable }) => (!scrollable ? '0 1rem 0' : '')};
@@ -100,11 +87,12 @@ export const TimelineMainWrapper = styled.div<{
 
 export const TimelineMain = styled.div`
   align-items: center;
-  bottom: 0;
   display: flex;
   left: 0;
+  top: 50%;
   position: absolute;
   transition: all 0.2s ease;
+  transform: translate(0, -50%);
 
   &.vertical {
     align-items: flex-start;

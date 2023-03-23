@@ -23,19 +23,19 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Chrome
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
           install: false
           start: pnpm dev
-          wait-on: 'http://localhost:5173'
-          wait-on-timeout: 120
+          wait-on: "http://[::1]:4444"
+          wait-on-timeout: 200
           browser: chrome
 
       - name: Edge
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
           install: false
           start: pnpm dev
-          wait-on: 'http://localhost:5173'
-          wait-on-timeout: 120
+          wait-on: "http://[::1]:4444"
+          wait-on-timeout: 200
           browser: edge

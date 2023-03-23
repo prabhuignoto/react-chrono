@@ -1,0 +1,30 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
+<div>
+  <div
+    class="sc-dmXXqC cxbcss vertical_alternating"
+    data-testid="timeline-item"
+  >
+    <div
+      class="sc-fLsdZI hJrdyA"
+    >
+      <div
+        class="sc-bBkKQz jdQhbh timeline-circle using-icon vertical_alternating active"
+        data-testid="timeline-circle"
+      >
+        icon child
+      </div>
+    </div>
+    <div
+      class="sc-iuOPfm ibqXJm vertical_alternating"
+      data-testid="timeline-title"
+    >
+      <div
+        class="sc-hIPCAL iECils timeline-item-title active title"
+        font-size="1.5rem"
+      />
+    </div>
+  </div>
+</div>
+`;

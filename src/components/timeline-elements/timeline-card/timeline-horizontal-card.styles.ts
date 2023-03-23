@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { Theme } from '../../../models/Theme';
+import { TimelineProps } from '../../../models/TimelineModel';
 
 export const Wrapper = styled.div`
   align-items: center;
@@ -35,7 +36,7 @@ const show = keyframes`
   }
 `;
 
-export const CircleWrapper = styled.div`
+export const ShapeWrapper = styled.div`
   /* height: 100%; */
   align-items: center;
   display: flex;
@@ -44,27 +45,40 @@ export const CircleWrapper = styled.div`
   width: 5em;
 `;
 
-interface CircleModel {
+type ShapeModel = {
   dimension?: number;
   theme?: Theme;
-}
+} & Pick<TimelineProps, 'timelinePointShape'>;
 
-export const Circle = styled.div<CircleModel>`
-  border-radius: 50%;
+const ShapeBorderStyle = (p: Pick<ShapeModel, 'timelinePointShape'>) => {
+  if (p.timelinePointShape === 'circle') {
+    return 'border-radius: 50%;';
+  } else if (p.timelinePointShape === 'square') {
+    return 'border-radius: 2px;';
+  } else if (p.timelinePointShape === 'diamond') {
+    return `border-radius: 0;`;
+  }
+};
+
+export const Shape = styled.div<ShapeModel>`
+  ${ShapeBorderStyle}
   cursor: pointer;
   height: ${(p) => p.dimension}px;
   width: ${(p) => p.dimension}px;
+  transform: ${(p) =>
+    p.timelinePointShape === 'diamond' ? 'rotate(45deg)' : ''};
 
   &.active {
     &.using-icon {
       /* transform: scale(1.75); */
     }
     &:not(.using-icon) {
-      transform: scale(1.25);
+      transform: scale(1.25)
+        ${(p) => (p.timelinePointShape === 'diamond' ? 'rotate(45deg)' : '')};
     }
 
     &::after {
-      border-radius: 50%;
+      ${ShapeBorderStyle}
       content: '';
       display: block;
       height: ${(p) => (p.dimension ? Math.round(p.dimension * 0.75) : 20)}px;
@@ -78,7 +92,7 @@ export const Circle = styled.div<CircleModel>`
   }
 
   &:not(.using-icon) {
-    background: ${(p: CircleModel) => p.theme?.primary};
+    background: ${(p: ShapeModel) => p.theme?.primary};
 
     &.active {
       &::after {
@@ -122,6 +136,7 @@ export const TimelineTitleContainer = styled.div`
 
 export const TimelineContentContainer = styled.div<{
   active?: boolean;
+  cardWidth?: number;
   highlight?: boolean;
   position?: string;
   theme?: Theme;
@@ -135,7 +150,7 @@ export const TimelineContentContainer = styled.div<{
   margin: 1rem;
 
   &.horizontal {
-    min-width: 400px;
+    min-width: ${(p) => p.cardWidth}px;
   }
 
   &.vertical {

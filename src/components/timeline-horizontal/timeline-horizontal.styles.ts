@@ -21,7 +21,7 @@ export const TimelineItemWrapper = styled.li<{ width: number }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100px;
+  height: 150px;
   flex-direction: column;
 
   &.vertical {

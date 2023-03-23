@@ -18,6 +18,8 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   contentDetailsChildren: children,
   hasFocus,
   iconChildren,
+  nestedCardHeight,
+  isNested,
 }: TimelineHorizontalModel) => {
   const {
     mode = 'HORIZONTAL',
@@ -26,6 +28,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     flipLayout,
     showAllCardsHorizontal,
     theme,
+    cardWidth,
   } = useContext(GlobalContext);
 
   const wrapperClass = useMemo(
@@ -59,7 +62,6 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
             {...item}
             onClick={handleItemClick}
             autoScroll={autoScroll}
-            mode={mode}
             wrapperId={wrapperId}
             theme={theme}
             slideShowRunning={slideShowRunning}
@@ -69,6 +71,9 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
             hasFocus={hasFocus}
             iconChild={iconChildColln[index]}
             active={item.active}
+            cardWidth={cardWidth}
+            isNested={isNested}
+            nestedCardHeight={nestedCardHeight}
           />
         </TimelineItemWrapper>
       ))}

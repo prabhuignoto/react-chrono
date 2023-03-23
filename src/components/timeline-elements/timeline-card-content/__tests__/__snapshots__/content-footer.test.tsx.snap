@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ContentFooter > should match snapshot 1`] = `
+<div>
+  <span
+    class="sc-hABAzo kDMlNd"
+    color="#0f52ba"
+    role="progressbar"
+  />
+  <span
+    class="sc-fHekdT eSMokx"
+    dir="up"
+    offset="-8"
+  />
+</div>
+`;

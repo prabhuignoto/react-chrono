@@ -1,0 +1,172 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TimelineControl > should render 1`] = `
+<div>
+  <div
+    class="sc-hLQRIN bjprVz"
+  >
+    <ul
+      class="sc-beySbM fxTWPE timeline-controls controls"
+    >
+      <li
+        class="sc-guDLRT dYAwnb"
+      >
+        <button
+          aria-controls="timeline-main-wrapper"
+          aria-disabled="false"
+          aria-label="first"
+          class="sc-dmyDGi hRUikW"
+          mode="VERTICAL_ALTERNATING"
+          rotate="TRUE"
+          tabindex="0"
+          title="first"
+        >
+          <svg
+            class="feather feather-chevrons-left"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline
+              points="11 17 6 12 11 7"
+            />
+            <polyline
+              points="18 17 13 12 18 7"
+            />
+          </svg>
+        </button>
+      </li>
+      <li
+        class="sc-guDLRT dYAwnb"
+      >
+        <button
+          aria-controls="timeline-main-wrapper"
+          aria-disabled="false"
+          aria-label="previous"
+          class="sc-dmyDGi hRUikW"
+          mode="VERTICAL_ALTERNATING"
+          rotate="TRUE"
+          tabindex="0"
+          title="previous"
+        >
+          <svg
+            class="feather feather-chevron-left"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline
+              points="15 18 9 12 15 6"
+            />
+          </svg>
+        </button>
+      </li>
+      <li
+        class="sc-guDLRT dYAwnb"
+      >
+        <button
+          aria-controls="timeline-main-wrapper"
+          aria-disabled="false"
+          aria-label="next"
+          class="sc-dmyDGi hRUikW"
+          mode="VERTICAL_ALTERNATING"
+          rotate="TRUE"
+          tabindex="0"
+          title="next"
+        >
+          <svg
+            class="feather feather-chevron-right"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline
+              points="9 18 15 12 9 6"
+            />
+          </svg>
+        </button>
+      </li>
+      <li
+        class="sc-guDLRT dYAwnb"
+      >
+        <button
+          aria-controls="timeline-main-wrapper"
+          aria-disabled="false"
+          aria-label="last"
+          class="sc-dmyDGi hRUikW"
+          mode="VERTICAL_ALTERNATING"
+          rotate="TRUE"
+          tabindex="0"
+          title="last"
+        >
+          <svg
+            class="feather feather-chevrons-right"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline
+              points="13 17 18 12 13 7"
+            />
+            <polyline
+              points="6 17 11 12 6 7"
+            />
+          </svg>
+        </button>
+      </li>
+      <li
+        class="sc-guDLRT dYAwnb"
+      />
+      <li
+        class="sc-guDLRT dYAwnb"
+      >
+        <button
+          aria-controls="timeline-main-wrapper"
+          aria-label="dark-toggle"
+          class="sc-dmyDGi bGlHyO"
+          tabindex="0"
+          title="play"
+        >
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+            />
+          </svg>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

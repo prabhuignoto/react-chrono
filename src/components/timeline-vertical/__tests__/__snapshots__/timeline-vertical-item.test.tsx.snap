@@ -1,60 +1,69 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Test tree branch render 1`] = `
-<div
-  class="test-class vertical-item-row css-43ivcr"
-  data-testid="vertical-item-row"
-  role="listitem"
->
+exports[`Timeline vertical item > Should match snapshot 1`] = `
+<div>
   <div
-    class="test-class css-1koh574"
+    class="sc-eAKupa ijNeIS  vertical-item-row"
+    data-testid="vertical-item-row"
+    role="listitem"
   >
     <div
-      class="timeline-item-title active css-51fi5w"
+      class="sc-kMzDYw lhznBV"
+      mode="VERTICAL_ALTERNATING"
     >
-      branch title
-    </div>
-  </div>
-  <div
-    class="card-content-wrapper test-class css-12jicd8"
-  >
-    <section
-      class="timeline-card-content active css-oh0pyw"
-      tabindex="0"
-    >
-      <header
-        class="css-1ago99h"
-      >
-        <p
-          class="card-sub-title css-1pdes2h"
-        >
-          Tree branch test
-        </p>
-      </header>
       <div
-        aria-expanded="false"
-        class="card-description css-imym99"
+        class="sc-hIPCAL cmlSFE timeline-item-title title"
+        font-size="1.5rem"
       >
-        <p
-          class=" css-1gq4ywb"
-        />
+        vertical item title
       </div>
-    </section>
-  </div>
-  <div
-    class="test-class css-zp8e37"
-    data-testid="tree-leaf"
-    role="button"
-  >
+    </div>
     <div
-      aria-label="select timeline"
-      class="test-class timeline-vertical-circle css-kooiip"
-      data-testid="tree-leaf-click"
+      class="sc-bZHTEL cvrGOZ card-content-wrapper "
+    >
+      <section
+        class="sc-fsYeqs hvRTGa timeline-card-content  card"
+        mode="VERTICAL_ALTERNATING"
+        tabindex="0"
+      >
+        <div
+          class="sc-beySbM fGOdYO card-media-wrapper card-media"
+          mode="VERTICAL_ALTERNATING"
+        >
+          <img
+            class="sc-guDLRT enaNDy"
+            loading="lazy"
+            mode="VERTICAL_ALTERNATING"
+            role="img"
+            src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+          />
+        </div>
+        <div
+          aria-expanded="false"
+          class="sc-brSaZW hyzYar show-less card-description card-text"
+        />
+        <span
+          class="sc-fHekdT eSMokx"
+          dir=""
+          offset="-8"
+        />
+      </section>
+    </div>
+    <div
+      class="sc-lnskGP ehFZVb"
+      data-testid="tree-leaf"
       role="button"
     >
       <div
-        class="active css-1kmt0kk"
-      />
+        aria-label="select timeline"
+        class="sc-iKOlBE jFWpOF  timeline-vertical-circle"
+        data-testid="tree-leaf-click"
+        role="button"
+      >
+        <div
+          class="sc-bBkKQz ivivVp"
+        />
+      </div>
     </div>
   </div>
 </div>

@@ -1,54 +1,57 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import React from 'react';
-import Branch from '../timeline-vertical-item';
+import { describe, it } from 'vitest';
+import { VerticalItemModel } from '../../../models/TimelineVerticalModel';
+import { customRender } from '../../common/test';
+import { providerProps } from '../../common/test/index';
+import TimelineVerticalItem from '../timeline-vertical-item';
 
-const onClick = jest.fn();
-const onActive = jest.fn();
-const showMore = jest.fn();
+const commonProps: VerticalItemModel = {
+  // complete the rest of the properties
+  active: false,
+  alternateCards: false,
+  cardDetailedText: '',
+  cardSubtitle: '',
+  cardTitle: '',
+  className: '',
+  contentDetailsChildren: null,
+  hasFocus: false,
+  iconChild: null,
+  id: '',
+  index: 1,
+  media: {
+    source: {
+      type: 'IMAGE',
+      url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+    },
+    type: 'IMAGE',
+  },
+  onActive: () => {},
+  onClick: () => {},
+  onElapsed: () => {},
+  slideShowRunning: false,
+  timelineContent: null,
+  title: 'vertical item title',
+  url: '',
+  visible: false,
+};
 
-const View = (
-  <Branch
-    className="test-class"
-    index={2}
-    cardSubtitle="Tree branch test"
-    title="branch title"
-    id="223344"
-    active
-    onClick={() => onClick('zz22ww')}
-    onActive={onActive}
-    onShowMore={showMore}
-  />
-);
+describe('Timeline vertical item', () => {
+  it('Should match snapshot', () => {
+    const { container } = customRender(
+      <TimelineVerticalItem {...commonProps} />,
+      { providerProps },
+    );
 
-test('Test tree branch render', () => {
-  render(View);
-  const element = screen.getByTestId('vertical-item-row');
-  expect(element).toBeInTheDocument();
-  expect(element).toMatchSnapshot();
-});
-
-test('Test tree branch class styles', () => {
-  render(View);
-  const element = screen.getByTestId('vertical-item-row');
-  expect(element).toHaveClass('test-class');
-
-  Array.from(element.children).forEach((child, index) => {
-    expect(child).toHaveClass('test-class');
-
-    if (index < 2) {
-      expect(child.children[0]).toHaveClass('active');
-    }
+    expect(container).toMatchSnapshot();
   });
-});
 
-test('Test tree branch render', () => {
-  render(View);
-  const element = screen.getByTestId('tree-leaf-click');
+  //should render the title
 
-  expect(element).toBeInTheDocument();
-  fireEvent.click(element);
+  it('Should render the title', () => {
+    const { getByText } = customRender(
+      <TimelineVerticalItem {...commonProps} />,
+      { providerProps },
+    );
 
-  expect(onClick).toBeCalled();
-  expect(onActive).toBeCalled();
-  expect(onClick).toBeCalledWith('zz22ww');
+    expect(getByText('vertical item title')).toBeInTheDocument();
+  });
 });

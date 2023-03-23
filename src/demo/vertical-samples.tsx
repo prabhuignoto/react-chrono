@@ -19,12 +19,14 @@ export const VerticalTree: FunctionComponent<{
           mode="VERTICAL_ALTERNATING"
           theme={theme}
           slideShow
-          slideItemDuration={2350}
+          slideItemDuration={2050}
+          slideShowType="slide_from_sides"
           allowDynamicUpdate
-          // cardHeight={100}
+          cardHeight={300}
+          // textOverlay
           focusActiveItemOnLoad
-          activeItemIndex={4}
-          cardWidth={450}
+          enableDarkToggle
+          cardWidth={550}
           onItemSelected={(selected) => console.log(selected.cardTitle)}
           onScrollEnd={() => console.log('end reached')}
         >
@@ -100,6 +102,9 @@ export const VerticalTreeMixed: FunctionComponent<{
         cardHeight={300}
         cardWidth={450}
         scrollable
+        slideShow
+        slideItemDuration={1000}
+        enableDarkToggle
       />
     </ComponentContainerTree>
   </Vertical>
@@ -117,30 +122,209 @@ export const VerticalBasic: FunctionComponent<{
         slideShow
         cardWidth={650}
         slideItemDuration={2500}
+        cardHeight={200}
         scrollable={{ scrollbar: false }}
-        theme={{
-          cardBgColor: '#fff',
-          cardForeColor: 'blue',
-          titleColorActive: '#6495ed',
-          titleColor: '#922724',
-        }}
+        // textOverlay
+        // borderLessCards
+        // theme={{
+        //   cardBgColor: '#fff',
+        //   titleColorActive: '#6495ed',
+        //   titleColor: '#922724',
+        //   cardDetailsBackGround: '#e8e8e8',
+        // }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
         fontSizes={{
-          title: '1.2rem',
+          title: '1.5rem',
         }}
+        // flipLayout
         focusActiveItemOnLoad
-        activeItemIndex={9}
-        cardHeight={400}
+        activeItemIndex={2}
+        mediaHeight={150}
+        nestedCardHeight={100}
+        // cardHeight={450}
         contentDetailsHeight={100}
-        timelineCircleDimension={20}
+        timelinePointDimension={20}
         classNames={{
           cardText: 'custom-text',
         }}
+        mediaSettings={{
+          imageFit: 'cover',
+        }}
+        enableDarkToggle
       />
     </ComponentContainerTree>
   </Vertical>
 );
+
+export const VerticalNewMedia: FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({ type, items }) => {
+  return (
+    <>
+      <Vertical id="vertical">
+        <ComponentContainerTree type={type}>
+          <Chrono
+            items={items}
+            mode="VERTICAL"
+            slideShow
+            showAllCardsHorizontal
+            cardWidth={500}
+            slideItemDuration={2000}
+            scrollable={{ scrollbar: false }}
+            textOverlay
+            // slideShowType="reveal"
+            // borderLessCards
+            // theme={{
+            //   cardBgColor: '#fff',
+            //   titleColorActive: '#6495ed',
+            //   titleColor: '#922724',
+            //   cardDetailsBackGround: '#e8e8e8',
+            //   cardDetailsColor: '#000',
+            // }}
+            // darkMode
+            onItemSelected={(selected) => console.log(selected.cardTitle)}
+            // enableOutline
+            fontSizes={{
+              title: '1.5rem',
+            }}
+            cardHeight={350}
+            timelinePointShape="square"
+            focusActiveItemOnLoad
+            activeItemIndex={9}
+            mediaHeight={200}
+            // cardHeight={250}
+            // cardHeight={350}
+            enableDarkToggle
+            contentDetailsHeight={100}
+            timelinePointDimension={20}
+            classNames={{
+              cardText: 'custom-text',
+            }}
+            mediaSettings={{
+              imageFit: 'cover',
+            }}
+          />
+        </ComponentContainerTree>
+      </Vertical>
+    </>
+  );
+};
+export const VerticalAlternatingNested: FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({ type, items }) => {
+  return (
+    <>
+      <Vertical id="vertical">
+        <ComponentContainerTree type={type}>
+          <Chrono
+            items={items}
+            mode="VERTICAL_ALTERNATING"
+            slideShow
+            cardWidth={600}
+            slideItemDuration={2000}
+            scrollable={{ scrollbar: false }}
+            slideShowType="slide_from_sides"
+            mediaSettings={{
+              imageFit: 'contain',
+            }}
+            // borderLessCards
+            // theme={{
+            //   cardBgColor: '#fff',
+            //   titleColorActive: '#6495ed',
+            //   titleColor: '#922724',
+            //   cardDetailsBackGround: '#e8e8e8',
+            //   cardDetailsColor: '#000',
+            // }}
+            // darkMode
+            onItemSelected={(selected) => console.log(selected.cardTitle)}
+            // enableOutline
+            fontSizes={{
+              title: '1.5rem',
+            }}
+            theme={{
+              primary: '#191919',
+              secondary: '#FFA500',
+              titleColor: '#FFA500',
+              titleColorActive: '#000',
+              cardTitleColor: '#FFA500',
+            }}
+            cardHeight={250}
+            timelinePointShape="square"
+            // focusActiveItemOnLoad
+            // activeItemIndex={9}
+            // cardHeight={250}
+            // cardHeight={350}
+            mediaHeight={200}
+            enableDarkToggle
+            contentDetailsHeight={100}
+            timelinePointDimension={20}
+            classNames={{
+              cardText: 'custom-text',
+            }}
+          >
+            <div className="chrono-icons">
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/twitter.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/about.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/contacts.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/briefcase.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/idea.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/sun.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/info.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/calendar.png"
+                alt="twitter"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/50/000000/mailbox-closed-flag-down.png"
+                alt="mail-box"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/50/000000/pinterest.png"
+                alt="pinterest"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/reddit.png"
+                alt="reddit"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/facebook.png"
+                alt="reddit"
+              />
+              <img
+                src="https://img.icons8.com/ios-filled/100/000000/stumbleupon.png"
+                alt="reddit"
+              />
+            </div>
+          </Chrono>
+        </ComponentContainerTree>
+      </Vertical>
+    </>
+  );
+};
 
 export const VerticalBasicCardLess: FunctionComponent<{
   type: string;
@@ -154,7 +338,6 @@ export const VerticalBasicCardLess: FunctionComponent<{
         cardLess
         theme={{
           cardBgColor: '#fff',
-          cardForeColor: 'blue',
           titleColorActive: 'red',
         }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}
@@ -163,10 +346,56 @@ export const VerticalBasicCardLess: FunctionComponent<{
   </Vertical>
 );
 
+export const VerticalBasicNested: FunctionComponent<{
+  type: string;
+  items: TimelineItemModel[];
+}> = ({ type, items }) => (
+  <Vertical id="vertical">
+    <ComponentContainerTree type={type}>
+      <Chrono
+        items={items}
+        mode="VERTICAL"
+        slideShow
+        cardWidth={500}
+        slideItemDuration={2500}
+        scrollable={{ scrollbar: false }}
+        // textOverlay
+        // borderLessCards
+        // theme={{
+        //   cardBgColor: '#fff',
+        //   titleColorActive: '#6495ed',
+        //   titleColor: '#922724',
+        //   cardDetailsBackGround: '#e8e8e8',
+        // }}
+        onItemSelected={(selected) => console.log(selected.cardTitle)}
+        enableOutline
+        fontSizes={{
+          title: '1.5rem',
+        }}
+        // flipLayout
+        focusActiveItemOnLoad
+        activeItemIndex={2}
+        mediaHeight={200}
+        nestedCardHeight={100}
+        cardHeight={300}
+        // contentDetailsHeight={300}
+        timelinePointDimension={20}
+        // timelinePointShape="diamond"
+        classNames={{
+          cardText: 'custom-text',
+        }}
+        enableDarkToggle
+        mediaSettings={{ align: 'center' }}
+      />
+    </ComponentContainerTree>
+  </Vertical>
+);
+
 export const VerticalCustomContent2: FunctionComponent<{
   type: string;
   cardHeight?: number;
-}> = ({ type, cardHeight }) => (
+  items?: TimelineItemModel[];
+}> = ({ type, cardHeight, items }) => (
   <Vertical>
     <ComponentContainerTree type={type}>
       <Chrono
@@ -175,6 +404,8 @@ export const VerticalCustomContent2: FunctionComponent<{
         cardWidth={650}
         scrollable
         flipLayout
+        timelinePointDimension={30}
+        items={items}
       >
         <div>
           <div style={{ width: '250px', height: '250px' }}>
@@ -268,6 +499,7 @@ export const VerticalTreeSlideshow: FunctionComponent<{
         mode="VERTICAL_ALTERNATING"
         cardHeight={200}
         scrollable
+        slideShow
         // theme={{ primary: '#8675a9', secondary: '#ffd5cd' }}
       />
     </ComponentContainerTree>
