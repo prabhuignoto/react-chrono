@@ -31,7 +31,8 @@
     "prepare": "husky install",
     "dev": "vite --config vite.config.ts",
     "clean": "npx concurrently \"pnpm format\" \"pnpm lint:all\"",
-    "vitest:run": "vitest --config vitest.config.ts"
+    "vitest:run": "vitest --config vitest.config.ts",
+    "vite:build": "vite build --config vite.config.ts"
   },
   "dependencies": {
     "classnames": "^2.3.2",
