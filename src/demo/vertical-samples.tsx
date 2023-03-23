@@ -103,6 +103,7 @@ export const VerticalTreeMixed: FunctionComponent<{
         cardWidth={450}
         scrollable
         slideShow
+        slideItemDuration={1000}
         enableDarkToggle
       />
     </ComponentContainerTree>

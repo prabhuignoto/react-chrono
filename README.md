@@ -14,7 +14,7 @@
 <a href="https://5f985eb478dcb00022cfd60e-uiaufmxbhf.chromatic.com/?path=/story/example-vertical--vertical-basic" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
 
   <div>
-    <img src="./readme-assets/demo3.gif" />
+    <img src="./readme-assets/react-chrono.gif" />
   </div>
 
 </div>
