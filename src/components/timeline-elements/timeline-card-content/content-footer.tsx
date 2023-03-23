@@ -1,12 +1,4 @@
-import {
-  FunctionComponent,
-  PointerEvent,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { FunctionComponent, PointerEvent, useContext, useMemo } from 'react';
 import { TimelineMode } from '../../../models/TimelineModel';
 import { GlobalContext } from '../../GlobalContext';
 import ChevronIcon from '../../icons/chev-right';
@@ -41,7 +33,6 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   isResuming,
 }) => {
   const { mode, theme } = useContext(GlobalContext);
-  const isFirstRender = useRef(true);
 
   const canShowTriangleIcon = useMemo(() => {
     return (
