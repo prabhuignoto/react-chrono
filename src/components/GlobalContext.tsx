@@ -16,7 +16,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
   props,
 ) => {
   const {
-    cardHeight = 350,
+    cardHeight = 200,
     cardLess = false,
     flipLayout,
     items = [],

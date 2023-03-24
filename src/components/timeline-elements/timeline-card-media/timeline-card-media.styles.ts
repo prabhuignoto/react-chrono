@@ -150,7 +150,7 @@ export const MediaDetailsWrapper = styled.div<{
     background: ${
       p.showText ? p.theme?.cardDetailsBackGround : p.theme?.cardBgColor
     };
-    backdrop-filter: blur(1px);
+    // backdrop-filter: blur(1px);
     padding: 0.25rem;
     ${p.showText ? `overflow: auto;` : `overflow: hidden;`}
     transition: height 0.25s ease-out, width 0.25s ease-out, bottom 0.25s ease-out, background 0.25s ease-out;
