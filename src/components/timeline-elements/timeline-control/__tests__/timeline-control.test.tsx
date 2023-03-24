@@ -15,22 +15,26 @@ describe('TimelineControl', () => {
   it('should render all the buttons', () => {
     const { getByLabelText } = customRender(
       <TimelineControl {...commonProps} />,
-      { providerProps },
+      { providerProps: { ...providerProps, enableDarkToggle: true } },
     );
     expect(getByLabelText('first')).toBeInTheDocument();
     expect(getByLabelText('previous')).toBeInTheDocument();
     expect(getByLabelText('next')).toBeInTheDocument();
     expect(getByLabelText('last')).toBeInTheDocument();
-    expect(getByLabelText('dark-toggle')).toBeInTheDocument();
+    expect(getByLabelText('dark')).toBeInTheDocument();
   });
 
   // should render the play button when slideShowEnabled is true
   it('should render the play button when slideShowEnabled is true', () => {
     const { getByLabelText } = customRender(
-      <TimelineControl {...commonProps} slideShowEnabled />,
+      <TimelineControl
+        {...commonProps}
+        slideShowEnabled
+        slideShowRunning={false}
+      />,
       { providerProps },
     );
-    expect(getByLabelText('play')).toBeInTheDocument();
+    expect(getByLabelText('start slideshow')).toBeInTheDocument();
   });
 
   // check if all the callbacks are executed as expected
@@ -51,7 +55,7 @@ describe('TimelineControl', () => {
         onLast={onLast}
         onToggleDarkMode={onToggleDarkMode}
       />,
-      { providerProps },
+      { providerProps: { ...providerProps, enableDarkToggle: true } },
     );
     await user.click(getByLabelText('first'));
     expect(onFirst).toHaveBeenCalled();
@@ -61,7 +65,7 @@ describe('TimelineControl', () => {
     expect(onNext).toHaveBeenCalled();
     await user.click(getByLabelText('last'));
     expect(onLast).toHaveBeenCalled();
-    await user.click(getByLabelText('dark-toggle'));
+    await user.click(getByLabelText('dark'));
     expect(onToggleDarkMode).toHaveBeenCalled();
   });
 });

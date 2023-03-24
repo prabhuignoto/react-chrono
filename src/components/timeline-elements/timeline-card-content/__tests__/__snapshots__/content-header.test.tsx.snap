@@ -3,17 +3,17 @@
 exports[`Content Header > should match the snapshot 1`] = `
 <div>
   <header
-    class="sc-qZqnM idSell"
+    class="sc-jsMahE eoEzBB"
   >
     <h1
-      class="sc-kFCsca blhkjj card-title"
+      class="sc-irTswW dcqkfB card-title"
       data-class="card-title"
       font-size="1.25rem"
     >
       title
     </h1>
     <h2
-      class="sc-jsEegt edTPGk card-sub-title card-subtitle"
+      class="sc-kFuwaP mspEh card-sub-title card-subtitle"
       font-size="0.85rem"
     >
       content

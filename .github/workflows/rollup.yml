@@ -1,4 +1,4 @@
-name: Build with Rollup
+name: Build and Test
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -19,14 +19,18 @@ jobs:
         with:
           version: 6.0.2
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install Dependencies
+        run: pnpm install
+
       - name: Build
-        run: |
-          pnpm install
-          pnpm rollup
+        run: pnpm rollup
+
+      - name: Unit Tests
+        run: pnpm vitest:run

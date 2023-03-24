@@ -3,65 +3,70 @@
 exports[`Timeline vertical item > Should match snapshot 1`] = `
 <div>
   <div
-    class="sc-eAKupa ijNeIS  vertical-item-row"
+    class="sc-dnwKUv jBiQiW  vertical-item-row"
     data-testid="vertical-item-row"
     role="listitem"
   >
     <div
-      class="sc-kMzDYw lhznBV"
+      class="sc-fLQRDB cpMBSd"
       mode="VERTICAL_ALTERNATING"
     >
       <div
-        class="sc-hIPCAL cmlSFE timeline-item-title title"
+        class="sc-iAEyYk ehSAtw timeline-item-title title"
         font-size="1.5rem"
       >
         vertical item title
       </div>
     </div>
     <div
-      class="sc-bZHTEL cvrGOZ card-content-wrapper "
+      class="sc-kgKVFY bYjqVL card-content-wrapper "
     >
       <section
-        class="sc-fsYeqs hvRTGa timeline-card-content  card"
+        class="sc-jegxcv bXREYn timeline-card-content  card"
         mode="VERTICAL_ALTERNATING"
         tabindex="0"
       >
         <div
-          class="sc-beySbM fGOdYO card-media-wrapper card-media"
+          class="sc-eACynP jTJJiI card-media-wrapper card-media"
           mode="VERTICAL_ALTERNATING"
         >
-          <img
-            class="sc-guDLRT enaNDy"
-            loading="lazy"
-            mode="VERTICAL_ALTERNATING"
-            role="img"
-            src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-          />
+          <div
+            class="sc-cjERFW hasYaA"
+            height="200"
+          >
+            <img
+              class="sc-bZPPFW dwXfbd"
+              loading="lazy"
+              mode="VERTICAL_ALTERNATING"
+              role="img"
+              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+            />
+          </div>
         </div>
         <div
           aria-expanded="false"
-          class="sc-brSaZW hyzYar show-less card-description card-text"
+          class="sc-dQelHR exXkiz show-less card-description card-text"
         />
         <span
-          class="sc-fHekdT eSMokx"
+          class="sc-kiLEMZ ehIRXU"
           dir=""
           offset="-8"
         />
       </section>
     </div>
     <div
-      class="sc-lnskGP ehFZVb"
+      class="sc-kZGvTt fbPhGb"
       data-testid="tree-leaf"
       role="button"
     >
       <div
         aria-label="select timeline"
-        class="sc-iKOlBE jFWpOF  timeline-vertical-circle"
+        class="sc-iMfspA dptdC  timeline-vertical-circle"
         data-testid="tree-leaf-click"
         role="button"
       >
         <div
-          class="sc-bBkKQz ivivVp"
+          class="sc-kFuwaP bYRbvl"
         />
       </div>
     </div>
