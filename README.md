@@ -30,7 +30,7 @@
 - 🖼️&nbsp; [Display Images & Videos](#media) in the timeline with ease.
 - ⌨&nbsp; [Keyboard accessible](#keyboard-navigation).
 - 🔧&nbsp; [Render](#rendering-custom-content) custom content easily.
-- 🔧&nbsp; [Nested timelines](#nested-timelines).
+- 🌿&nbsp; [Nested timelines](#nested-timelines).
 - ⚡&nbsp; Data driven API.
 - 🎨&nbsp; [Customize](#theme) colors with ease.
 - 🎭&nbsp; Use [custom icons](#custom-icons-for-the-timeline) in the timeline.
@@ -594,7 +594,7 @@ You can use the classNames prop to employ your own class names. The subsequent e
 
 ## Kitchen Sink
 
-- [Kitchen Sink](https://react-chrono-kitchen-sink.vercel.app/)
+- [Kitchen Sink](https://react-chrono-kitchen-sink.prabhumurthy.com/)
 
 ## 📚Storybook
 
