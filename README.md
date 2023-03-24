@@ -30,6 +30,7 @@
 - 🖼️&nbsp; [Display Images & Videos](#media) in the timeline with ease.
 - ⌨&nbsp; [Keyboard accessible](#keyboard-navigation).
 - 🔧&nbsp; [Render](#rendering-custom-content) custom content easily.
+- 🔧&nbsp; [Nested timelines](#nested-timelines).
 - ⚡&nbsp; Data driven API.
 - 🎨&nbsp; [Customize](#theme) colors with ease.
 - 🎭&nbsp; Use [custom icons](#custom-icons-for-the-timeline) in the timeline.
@@ -61,6 +62,7 @@
   - [Customize alt text for buttons](#customize-alt-text-for-buttons)
 - [Using custom class names](#using-custom-class-names)
 - [📦CodeSandbox Examples](#codesandbox-examples)
+- [Kitchen Sink](#kitchen-sink)
 - [📚Storybook](#storybook)
 - [🔨Build Setup](#build-setup)
 - [🧪Tests](#tests)
@@ -589,6 +591,10 @@ You can use the classNames prop to employ your own class names. The subsequent e
 - [Vertical Custom content](https://codesandbox.io/s/react-chrono-vertical-custom-qepnm?file=/src/App.js)
 - [Vertical Custom content with items collections](https://codesandbox.io/s/react-chrono-vertical-custom-2-uctcp?file=/src/App.js)
 - [Custom Icons](https://codesandbox.io/s/react-chrono-custom-icons-x9s2k?file=/src/App.js)
+
+## Kitchen Sink
+
+- [Kitchen Sink](https://react-chrono-kitchen-sink.vercel.app/)
 
 ## 📚Storybook
 

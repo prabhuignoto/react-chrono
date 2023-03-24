@@ -5,6 +5,14 @@
   height: 100%;
 }
 
+.column-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+}
+
 .center {
   display: flex;
   flex-direction: row;
@@ -21,10 +29,11 @@
 
 .wrapper {
   @extend .center-column;
-  width: 100%;
-  // background: #fff;
-  min-height: 90vh;
+  width: 99%;
+  min-height: 99vh;
   justify-content: flex-start;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .container {
@@ -34,9 +43,10 @@
 }
 
 .aside {
-  @extend .center-column;
+  @extend .column-left;
   width: 300px;
   min-height: 500px;
+  padding: 1rem;
 
   a {
     margin: 0.5rem 0;
@@ -44,10 +54,12 @@
 }
 
 .content {
-  @extend .center;
+  // @extend .center;
+  display: flex;
+  align-items: flex-start;
   border-left: 1px solid #ccc;
   width: calc(100% - 300px);
-  align-items: flex-start;
+  justify-content: flex-start;
   padding: 1rem;
 }
 
@@ -56,4 +68,5 @@
   @extend .center-left;
   border: 1px solid #ccc;
   width: 100%;
+  padding-left: 1rem;
 }

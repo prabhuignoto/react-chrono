@@ -123,6 +123,12 @@ const NewDemo: React.FunctionComponent = () => {
       element: <Layout />,
       children: [
         {
+          path: '/',
+          element: items.length ? (
+            <VerticalBasic type={'big-screen'} items={items} />
+          ) : null,
+        },
+        {
           path: '/vertical-basic',
           element: items.length ? (
             <VerticalBasic type={'big-screen'} items={items} />

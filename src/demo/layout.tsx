@@ -5,7 +5,7 @@ const Layout = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <h2>React-Chrono</h2>
+        <h2>React-Chrono (Kitchen Sink)</h2>
       </div>
       <div className={styles.container}>
         <div className={styles.aside}>
