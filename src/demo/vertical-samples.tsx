@@ -142,8 +142,8 @@ export const VerticalBasic: FunctionComponent<{
         activeItemIndex={2}
         // mediaHeight={150}
         // nestedCardHeight={100}
-        // cardHeight={450}
-        // contentDetailsHeight={100}
+        cardHeight={100}
+        contentDetailsHeight={100}
         timelinePointDimension={20}
         classNames={{
           cardText: 'custom-text',

@@ -51,7 +51,7 @@ const Layout = () => {
         </h2>
       </header>
       <div className={styles.container}>
-        <aside className={cls(styles.aside, ['bg-gray-100', 'p-4'])}>
+        <aside className={cls(styles.aside, ['bg-gray-100', 'p-4', 'sm:hide'])}>
           <ul className={cls(['list-none', 'list-inside'])}>
             {items.map((item, index) => (
               <li
