@@ -167,7 +167,7 @@ export const VerticalNewMedia: FunctionComponent<{
         <ComponentContainerTree type={type}>
           <Chrono
             items={items}
-            mode="VERTICAL"
+            mode="VERTICAL_ALTERNATING"
             slideShow
             showAllCardsHorizontal
             cardWidth={500}
@@ -189,22 +189,22 @@ export const VerticalNewMedia: FunctionComponent<{
             fontSizes={{
               title: '1.5rem',
             }}
-            cardHeight={350}
-            timelinePointShape="square"
+            cardHeight={300}
+            timelinePointShape="diamond"
             focusActiveItemOnLoad
             activeItemIndex={9}
-            mediaHeight={200}
+            // mediaHeight={200}
             // cardHeight={250}
             // cardHeight={350}
             enableDarkToggle
-            contentDetailsHeight={100}
+            contentDetailsHeight={200}
             timelinePointDimension={20}
             classNames={{
               cardText: 'custom-text',
             }}
-            mediaSettings={{
-              imageFit: 'cover',
-            }}
+            // mediaSettings={{
+            //   imageFit: 'cover',
+            // }}
           />
         </ComponentContainerTree>
       </Vertical>

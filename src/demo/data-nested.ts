@@ -46,16 +46,16 @@ const items: TimelineItemModel[] = [
           'The Germans launch "Adler Tag" (Eagle Day), a massive assault on British airfields and radar stations. The Luftwaffe hopes to achieve a decisive victory and gain control of the skies over Britain, but the RAF is able to mount a strong defense and inflict heavy losses on the Germans',
         url: 'http://www.google.com',
       },
-      {
-        cardTitle: 'August 15, 1940',
-        cardDetailedText: `The Luftwaffe mistakenly bombs London, prompting Churchill to order retaliatory attacks on Berlin. The bombing of London marks a significant shift in the German strategy, as the focus shifts from attacking airfields to targeting cities and civilian populations`,
-        url: 'http://www.google.com',
-      },
-      {
-        cardTitle: 'August 24, 1940',
-        cardDetailedText: ` The Germans launch a second wave of attacks on British airfields, known as "The Hardest Day." The attacks result in the heaviest losses of the battle for the RAF, but the Germans also suffer significant losses.`,
-        url: 'http://www.google.com',
-      },
+      // {
+      //   cardTitle: 'August 15, 1940',
+      //   cardDetailedText: `The Luftwaffe mistakenly bombs London, prompting Churchill to order retaliatory attacks on Berlin. The bombing of London marks a significant shift in the German strategy, as the focus shifts from attacking airfields to targeting cities and civilian populations`,
+      //   url: 'http://www.google.com',
+      // },
+      // {
+      //   cardTitle: 'August 24, 1940',
+      //   cardDetailedText: ` The Germans launch a second wave of attacks on British airfields, known as "The Hardest Day." The attacks result in the heaviest losses of the battle for the RAF, but the Germans also suffer significant losses.`,
+      //   url: 'http://www.google.com',
+      // },
     ],
     cardSubtitle: `RAF Spitfire pilots scramble for their planes`,
     cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority. The first phase of the battle began on 10 July with Luftwaffe attacks on shipping in the Channel.

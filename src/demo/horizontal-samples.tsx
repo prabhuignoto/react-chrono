@@ -60,7 +60,7 @@ export const HorizontalAll: React.FunctionComponent<{
     <Horizontal id="horizontal">
       <ComponentContainer type={'big-screen'}>
         <Chrono
-          items={data}
+          items={items}
           mode="HORIZONTAL"
           cardHeight={350}
           cardWidth={500}
@@ -74,7 +74,7 @@ export const HorizontalAll: React.FunctionComponent<{
           focusActiveItemOnLoad
           onItemSelected={(selected) => console.log(selected)}
           timelinePointDimension={20}
-          // showAllCardsHorizontal
+          showAllCardsHorizontal
           activeItemIndex={8}
         >
           <div className="chrono-icons">

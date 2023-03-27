@@ -5,14 +5,14 @@ import { GlobalContext } from '../../GlobalContext';
 
 export const providerProps: TimelineProps = {
   buttonTexts: {
-    dark: "dark",
+    dark: 'dark',
     first: 'first',
     last: 'last',
-    light: "light",
+    light: 'light',
     next: 'next',
     play: 'start slideshow',
     previous: 'previous',
-    stop: 'stop slideshow'
+    stop: 'stop slideshow',
   },
   classNames: {
     card: 'card',
