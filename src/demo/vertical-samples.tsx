@@ -140,7 +140,7 @@ export const VerticalBasic: FunctionComponent<{
         // flipLayout
         focusActiveItemOnLoad
         activeItemIndex={2}
-        mediaHeight={150}
+        // mediaHeight={150}
         // nestedCardHeight={100}
         // cardHeight={450}
         // contentDetailsHeight={100}
