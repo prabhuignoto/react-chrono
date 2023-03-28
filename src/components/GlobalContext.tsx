@@ -18,6 +18,10 @@ const GlobalContext = createContext<
   PropsModel & { toggleDarkMode?: () => void }
 >({});
 
+type ContextProps = PropsModel & {
+  toggleDarkMode?: () => void;
+};
+
 const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
   props,
 ) => {
@@ -37,7 +41,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
     onThemeChange,
     mediaSettings,
     mediaHeight = 200,
-    contentDetailsHeight = 100,
+    contentDetailsHeight = 10,
   } = props;
 
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
@@ -47,14 +51,21 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
     [],
   );
 
-  const newContentDetailsHeight = useMemo(
-    () => Math.max(contentDetailsHeight, Math.round(newCardHeight * 0.75)),
-    [newCardHeight],
-  );
+  const newContentDetailsHeight = useMemo(() => {
+    const detailsHeightApprox = Math.round(newCardHeight * 0.75);
+    return contentDetailsHeight > newCardHeight
+      ? Math.min(contentDetailsHeight, detailsHeightApprox)
+      : Math.max(contentDetailsHeight, detailsHeightApprox);
+  }, [newCardHeight]);
+
+  const toggleDarkMode = useCallback(() => {
+    setIsDarkMode(!isDarkMode);
+    onThemeChange?.();
+  }, [isDarkMode]);
 
   const defaultProps = useMemo(
     () =>
-      Object.assign<PropsModel, PropsModel, PropsModel>(
+      Object.assign<ContextProps, ContextProps, ContextProps>(
         {},
         {
           borderLessCards: false,
@@ -93,6 +104,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
             ...classNames,
           },
           contentDetailsHeight: newContentDetailsHeight,
+          darkMode: isDarkMode,
           fontSizes: {
             cardSubtitle: '0.85rem',
             cardText: '1rem',
@@ -109,19 +121,13 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
             ...getDefaultThemeOrDark(isDarkMode),
             ...theme,
           },
+          toggleDarkMode,
         },
       ),
-    [newContentDetailsHeight, newCardHeight],
+    [newContentDetailsHeight, newCardHeight, isDarkMode, toggleDarkMode],
   );
 
-  console.log(defaultProps);
-
   const { children } = props;
-
-  const toggleDarkMode = useCallback(() => {
-    setIsDarkMode(!isDarkMode);
-    onThemeChange?.();
-  }, [isDarkMode]);
 
   return (
     <GlobalContext.Provider
