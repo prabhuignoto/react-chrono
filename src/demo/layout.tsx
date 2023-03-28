@@ -56,14 +56,7 @@ const Layout = () => {
             {items.map((item, index) => (
               <li
                 key={index}
-                className={cls(
-                  'hover:bg-gray-600',
-                  'rounded',
-                  'm-2',
-                  'py-2',
-                  'pl-1',
-                  'hover:text-gray-200',
-                )}
+                className={cls('m-1', 'py-1', 'pl-1', 'hover:text-blue-800')}
               >
                 <NavLink to={item.path} style={{ height: '100%' }}>
                   {item.label}

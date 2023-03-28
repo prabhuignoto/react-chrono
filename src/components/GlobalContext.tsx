@@ -108,8 +108,8 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           fontSizes: {
             cardSubtitle: '0.85rem',
             cardText: '1rem',
-            cardTitle: '1.25rem',
-            title: '1.5rem',
+            cardTitle: '1rem',
+            title: '1rem',
             ...fontSizes,
           },
           mediaSettings: {

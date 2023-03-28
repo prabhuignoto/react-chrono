@@ -398,7 +398,7 @@ export const VerticalCustomContent2: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         mode="VERTICAL"
-        cardHeight={300}
+        cardHeight={200}
         cardWidth={650}
         scrollable
         flipLayout
