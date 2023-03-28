@@ -169,6 +169,7 @@ const NewDemo: React.FunctionComponent = () => {
                 onClick={() => {
                   setState(1 - state);
                 }}
+                className="rounded-full"
               >
                 change
               </button>

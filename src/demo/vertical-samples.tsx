@@ -122,7 +122,6 @@ export const VerticalBasic: FunctionComponent<{
         slideShow
         cardWidth={650}
         slideItemDuration={2500}
-        // cardHeight={200}
         scrollable={{ scrollbar: false }}
         // textOverlay
         // borderLessCards
@@ -142,8 +141,8 @@ export const VerticalBasic: FunctionComponent<{
         activeItemIndex={2}
         // mediaHeight={150}
         // nestedCardHeight={100}
-        // cardHeight={450}
-        // contentDetailsHeight={100}
+        cardHeight={200}
+        contentDetailsHeight={10}
         timelinePointDimension={20}
         classNames={{
           cardText: 'custom-text',
@@ -251,7 +250,7 @@ export const VerticalAlternatingNested: FunctionComponent<{
               titleColorActive: '#000',
               cardTitleColor: '#FFA500',
             }}
-            cardHeight={250}
+            cardHeight={150}
             timelinePointShape="square"
             // focusActiveItemOnLoad
             // activeItemIndex={9}
@@ -259,7 +258,6 @@ export const VerticalAlternatingNested: FunctionComponent<{
             // cardHeight={350}
             mediaHeight={200}
             enableDarkToggle
-            contentDetailsHeight={100}
             timelinePointDimension={20}
             classNames={{
               cardText: 'custom-text',
@@ -400,7 +398,7 @@ export const VerticalCustomContent2: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         mode="VERTICAL"
-        cardHeight={300}
+        cardHeight={200}
         cardWidth={650}
         scrollable
         flipLayout

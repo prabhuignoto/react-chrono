@@ -51,19 +51,12 @@ const Layout = () => {
         </h2>
       </header>
       <div className={styles.container}>
-        <aside className={cls(styles.aside, ['bg-gray-100', 'p-4'])}>
+        <aside className={cls(styles.aside, ['bg-gray-100', 'p-4', 'sm:hide'])}>
           <ul className={cls(['list-none', 'list-inside'])}>
             {items.map((item, index) => (
               <li
                 key={index}
-                className={cls(
-                  'hover:bg-gray-600',
-                  'rounded',
-                  'm-2',
-                  'py-2',
-                  'pl-1',
-                  'hover:text-gray-200',
-                )}
+                className={cls('m-1', 'py-1', 'pl-1', 'hover:text-blue-800')}
               >
                 <NavLink to={item.path} style={{ height: '100%' }}>
                   {item.label}
