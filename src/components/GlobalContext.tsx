@@ -90,6 +90,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           timelinePointShape: 'circle',
           titleDateFormat: 'MMM DD, YYYY',
           useReadMore: true,
+          verticalBreakPoint: 1028,
         },
         {
           ...props,

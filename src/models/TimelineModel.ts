@@ -192,6 +192,8 @@ export type TimelineProps = {
 
   // enables the read more button
   useReadMore?: boolean;
+
+  verticalBreakPoint?: number;
 };
 
 export type SlideShowType = 'reveal' | 'slide_in' | 'slide_from_sides';

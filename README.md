@@ -183,6 +183,7 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 | timelinePointShape       | Prop to configure the shape of the timeline points. can be `circle`, `square`, `diamond`                                                                                     | `circle`               |
 | titleDateFormat          | date format to be used when date is passed for each timeline item. supports all dayjs format.                                                                                | 'MMM DD, YYYY'         |
 | useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself.                         | true                   |
+| verticalBreakPoint       | break point in pixels below which the timeline will automatically switch to `VERTICAL` mode.                                                                                 | 768px                  |
 
 ### Mode
 

@@ -29,35 +29,40 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   const [slideShowActive, setSlideshowActive] = useState(false);
   const [activeTimelineItem, setActiveTimelineItem] = useState(activeItemIndex);
 
-  const initItems = (lineItems?: TimelineItemModel[]) => {
-    return lineItems && lineItems.length
-      ? lineItems.map((item, index) => {
-          return Object.assign({}, item, {
-            _dayjs: dayjs(item.date),
-            active: index === activeItemIndex,
-            id: Math.random().toString(16).slice(2),
-            items: item.items?.map((subItem) => ({
-              ...subItem,
-              _dayjs: dayjs(subItem.date),
-              id: Math.random().toString(16).slice(2),
-              isNested: true,
-              visible: true,
-            })),
-            title: item.date
-              ? dayjs(item.date).format(titleDateFormat)
-              : item.title,
-            visible: true,
-          });
-        })
-      : Array.from({
-          length: React.Children.toArray(children).filter(
-            (item) => (item as any).props.className !== 'chrono-icons',
-          ).length,
-        }).map<TimelineItemModel>((item, index) => ({
+  const initItems = (lineItems?: TimelineItemModel[]): TimelineItemModel[] => {
+    if (lineItems && lineItems.length) {
+      return lineItems.map((item, index) => {
+        const id = Math.random().toString(16).slice(2);
+
+        return {
+          ...item,
+          _dayjs: dayjs(item.date),
           active: index === activeItemIndex,
-          id: Math.random().toString(16).slice(2),
+          id,
+          items: item.items?.map((subItem) => ({
+            ...subItem,
+            _dayjs: dayjs(subItem.date),
+            id: Math.random().toString(16).slice(2),
+            isNested: true,
+            visible: true,
+          })),
+          title: item.date
+            ? dayjs(item.date).format(titleDateFormat)
+            : item.title,
           visible: true,
-        }));
+        };
+      });
+    }
+
+    const itemLength = React.Children.toArray(children).filter(
+      (item) => (item as React.ReactElement).props.className !== 'chrono-icons',
+    ).length;
+
+    return Array.from({ length: itemLength }).map((_, index) => ({
+      active: index === activeItemIndex,
+      id: Math.random().toString(16).slice(2),
+      visible: true,
+    }));
   };
 
   const updateItems = (lineItems: TimelineItemModel[]) => {

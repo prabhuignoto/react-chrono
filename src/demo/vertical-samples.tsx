@@ -29,6 +29,7 @@ export const VerticalTree: FunctionComponent<{
           cardWidth={550}
           onItemSelected={(selected) => console.log(selected.cardTitle)}
           onScrollEnd={() => console.log('end reached')}
+          verticalBreakPoint={1920}
         >
           <div className="chrono-icons">
             <img
