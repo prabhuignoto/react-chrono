@@ -1,4 +1,4 @@
-/** 
+/**
   The useMatchMedia hook takes a media query string, a callback function, and an enabled boolean.
   It returns a boolean indicating if the media query matches the current viewport and executes the callback if it does.
 **/

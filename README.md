@@ -186,7 +186,6 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 | useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself.                         | true                   |
 | verticalBreakPoint       | The number of pixels below which the timeline will automatically switch to vertical mode.                                                                                    | 768px                  |
 
-
 ### Mode
 
 `react-chrono` supports three modes `HORIZONTAL`, `VERTICAL` and `VERTICAL_ALTERNATING`. No additional setting is required.
