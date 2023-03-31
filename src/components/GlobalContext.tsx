@@ -73,6 +73,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           cardLess: false,
           disableAutoScrollOnClick: false,
           disableClickOnCircle: false,
+          enableBreakPoint: true,
           enableDarkToggle: false,
           focusActiveItemOnLoad: false,
           lineWidth: 3,

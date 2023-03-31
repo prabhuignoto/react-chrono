@@ -105,6 +105,8 @@ export type TimelineProps = {
 
   disableNavOnKey?: boolean;
 
+  enableBreakPoint?: boolean;
+
   enableDarkToggle?: boolean;
 
   // enables the outline view

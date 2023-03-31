@@ -67,6 +67,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     darkMode,
     toggleDarkMode,
     verticalBreakPoint = 768,
+    enableBreakPoint,
   } = useContext(GlobalContext);
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -101,11 +102,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         setTimelineMode('VERTICAL');
       }
     },
+    enableBreakPoint,
   );
 
-  useMatchMedia(`(min-width: ${verticalBreakPoint + 1}px)`, () => {
-    setTimelineMode(mode);
-  });
+  useMatchMedia(
+    `(min-width: ${verticalBreakPoint + 1}px)`,
+    () => {
+      setTimelineMode(mode);
+    },
+    enableBreakPoint,
+  );
 
   // handlers for navigation
   const handleNext = useCallback(() => {

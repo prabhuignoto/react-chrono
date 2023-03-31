@@ -157,6 +157,7 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 | disableAutoScrollOnClick | Disables the timeline from auto-scrolling when a timeline card is clicked.                                                                                                   | false                  |
 | disableClickOnCircle     | Disables click action on the circular points.                                                                                                                                | false                  |
 | disableNavOnKey          | Disables keyboard navigation.                                                                                                                                                | false                  |
+| enableBreakPoint         | Enables the timeline to automatically switch to vertical mode when the vertical breakpoint is reached.                                                                       | true                   |
 | enableDarkToggle         | Enables the toggle switch for dark mode.                                                                                                                                     | false                  |
 | enableOutline            | Enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.                                                                                                      | false                  |
 | flipLayout               | Flips the layout (RTL).                                                                                                                                                      | false                  |
@@ -183,7 +184,8 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 | timelinePointShape       | Prop to configure the shape of the timeline points. can be `circle`, `square`, `diamond`                                                                                     | `circle`               |
 | titleDateFormat          | date format to be used when date is passed for each timeline item. supports all dayjs format.                                                                                | 'MMM DD, YYYY'         |
 | useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself.                         | true                   |
-| verticalBreakPoint       | break point in pixels below which the timeline will automatically switch to `VERTICAL` mode.                                                                                 | 768px                  |
+| verticalBreakPoint       | The number of pixels below which the timeline will automatically switch to vertical mode.                                                                                    | 768px                  |
+
 
 ### Mode
 
