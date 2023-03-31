@@ -73,6 +73,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           cardLess: false,
           disableAutoScrollOnClick: false,
           disableClickOnCircle: false,
+          enableBreakPoint: true,
           enableDarkToggle: false,
           focusActiveItemOnLoad: false,
           lineWidth: 3,
@@ -90,6 +91,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           timelinePointShape: 'circle',
           titleDateFormat: 'MMM DD, YYYY',
           useReadMore: true,
+          verticalBreakPoint: 1028,
         },
         {
           ...props,

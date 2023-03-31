@@ -52,11 +52,12 @@
   - [Text overlay mode](#text-overlay-mode)
   - [🛠Rendering custom content](#rendering-custom-content)
   - [🎭Custom icons for the Timeline](#custom-icons-for-the-timeline)
-  - [Nested Timelines](#nested-timelines)
+  - [🌿Nested Timelines](#nested-timelines)
   - [Slideshow](#slideshow)
   - [Outline](#outline)
   - [Item Width](#item-width)
-  - [Media Settings](#media-settings)
+  - [🎥Media Settings](#media-settings)
+  - [Breakpoint](#breakpoint)
   - [🎨Theme](#theme)
   - [Customize Font sizes](#customize-font-sizes)
   - [Customize alt text for buttons](#customize-alt-text-for-buttons)
@@ -142,47 +143,49 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 
 ## Props
 
-| name                     | description                                                                                                                                                                  | default                |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| activeItemIndex          | Selects the active timeline item on load.                                                                                                                                    | 0                      |
-| allowDynamicUpdate       | Allows timeline items to be updated dynamically.                                                                                                                             | false                  |
-| borderLessCards          | Removes the border & shadow from the timeline cards.                                                                                                                         | false                  |
-| buttonTexts              | Customize the alt text for all buttons                                                                                                                                       |                        |
-| cardHeight               | Sets the minimum height of the timeline card.                                                                                                                                | 200                    |
-| cardLess                 | Disables timeline cards on both horizontal and vertical modes.                                                                                                               | false                  |
-| cardPositionHorizontal   | Positions the card in `HORIZONTAL` mode. can be either `TOP` or `BOTTOM`.                                                                                                    |                        |
-| cardWidth                | Sets the maximum width of the timeline card.                                                                                                                                 |                        |
-| classNames               | Prop to apply custom class names for the different card elements                                                                                                             |                        |
-| contentDetailsHeight     | Prop to control the height of the details section. This applies only if you are using the `cardDetailedText`. Refer [TimelineItem](#timeline-item-model) model for more info | 150                    |
-| disableAutoScrollOnClick | Disables the timeline from auto-scrolling when a timeline card is clicked.                                                                                                   | false                  |
-| disableClickOnCircle     | Disables click action on the circular points.                                                                                                                                | false                  |
-| disableNavOnKey          | Disables keyboard navigation.                                                                                                                                                | false                  |
-| enableDarkToggle         | Enables the toggle switch for dark mode.                                                                                                                                     | false                  |
-| enableOutline            | Enables the outline menu on `VERTICAL` and `VERTICAL_ALTERNATING` mode.                                                                                                      | false                  |
-| flipLayout               | Flips the layout (RTL).                                                                                                                                                      | false                  |
-| focusActiveItemOnLoad    | Setting this to `true` automatically scrolls and focuses the `activeItemIndex` on load                                                                                       | false                  |
-| fontSizes                | Property to customize the font sizes                                                                                                                                         |                        |
-| hideControls             | Hides the navigation controls.                                                                                                                                               | false                  |
-| itemWidth                | Width of the timeline section in `HORIZONTAL` mode.                                                                                                                          | 300                    |
-| items                    | Collection of [Timeline Item Model](#timeline-item-model).                                                                                                                   | []                     |
-| lineWidth                | Prop to customize the width of the timeline track line.                                                                                                                      | 3px                    |
-| mediaHeight              | Sets the minimum height of the media element. Applicable only when a image or a video is embedded in the card                                                                | 200                    |
-| mediaSettings            | Configures certain media specific layout settings. Refer [mediaSettings](#media-settings) for more info                                                                      |                        |
-| mode                     | Sets the mode of the component. can be `HORIZONTAL`, `VERTICAL` or `VERTICAL_ALTERNATING`.                                                                                   | `VERTICAL_ALTERNATING` |
-| nestedCardHeight         | Sets the height of the nested timeline card                                                                                                                                  | 150                    |
-| onItemSelected           | Callback invoked on a item selection. passes all of the data pertinent to the item.                                                                                          |                        |
-| onScrollEnd              | Use the `onScrollEnd` to detect the end of the timeline.                                                                                                                     |                        |
-| onThemeChange            | Callback invoked when the theme is changed. Triggered via `enableDarkToggle`                                                                                                 |                        |
-| scrollable               | Makes the timeline [scrollable](#scrollable) (applicable for `VERTICAL` & `VERTICAL_ALTERNATING`).                                                                           | true                   |
-| showAllCardsHorizontal   | In horizontal mode, only the active card is displayed. With this prop, you can display all the cards.                                                                        | false                  |
-| slideItemDuration        | Duration (in ms), the timeline card is active during a `slideshow`.                                                                                                          | 5000                   |
-| slideShow                | Enables the slideshow control.                                                                                                                                               | false                  |
-| textOverlay              | Displays text as a overlay on top of media elements. Refer [Text Overlay](#text-overlay-mode) for more info                                                                  | false                  |
-| theme                    | Prop to customize the colors. Refer [Theme](#theme) for more info                                                                                                            |                        |
-| timelinePointDimension   | Dimensions of the circular points on the timeline                                                                                                                            | false                  |
-| timelinePointShape       | Prop to configure the shape of the timeline points. can be `circle`, `square`, `diamond`                                                                                     | `circle`               |
-| titleDateFormat          | date format to be used when date is passed for each timeline item. supports all dayjs format.                                                                                | 'MMM DD, YYYY'         |
-| useReadMore              | Enables or disables the "read more" button. The "read more" button is only available if the text content on the card is taller than the card itself.                         | true                   |
+| Name                     | Default              | Description                                                                                                                      |
+| :----------------------- | :------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| activeItemIndex          | 0                    | Selects the active timeline item on load.                                                                                        |
+| allowDynamicUpdate       | false                | Allows dynamic updating of timeline items.                                                                                       |
+| borderLessCards          | false                | Removes border and shadow from timeline cards.                                                                                   |
+| buttonTexts              |                      | Customize the alt text for all buttons.                                                                                          |
+| cardHeight               | 200                  | Sets the minimum height of timeline cards.                                                                                       |
+| cardLess                 | false                | Disables timeline cards in both horizontal and vertical modes.                                                                   |
+| cardPositionHorizontal   |                      | Positions the card in horizontal mode. Can be `TOP` or `BOTTOM`.                                                                 |
+| cardWidth                |                      | Sets the maximum width of timeline cards.                                                                                        |
+| classNames               |                      | Applies custom class names for different card elements.                                                                          |
+| contentDetailsHeight     | 150                  | Controls height of details section if using cardDetailedText. Refer to [TimelineItem model](#timeline-item-model) for more info. |
+| disableAutoScrollOnClick | false                | Disables auto-scrolling when a timeline card is clicked.                                                                         |
+| disableClickOnCircle     | false                | Disables click action on circular points.                                                                                        |
+| disableNavOnKey          | false                | Disables keyboard navigation.                                                                                                    |
+| enableBreakPoint         | true                 | Enables automatic switch to vertical mode when vertical breakpoint is reached.                                                   |
+| enableDarkToggle         | false                | Enables toggle switch for dark mode.                                                                                             |
+| enableOutline            | false                | Enables outline menu on vertical and vertical alternating modes.                                                                 |
+| flipLayout               | false                | Flips the layout (RTL).                                                                                                          |
+| focusActiveItemOnLoad    | false                | Automatically scrolls and focuses on the `activeItemIndex` on load.                                                              |
+| fontSizes                |                      | Customizes font sizes.                                                                                                           |
+| hideControls             | false                | Hides navigation controls.                                                                                                       |
+| itemWidth                | 300                  | Sets width of timeline section in horizontal mode.                                                                               |
+| items                    | []                   | Collection of Timeline Item Models.                                                                                              |
+| lineWidth                | 3px                  | Customizes width of timeline track line.                                                                                         |
+| mediaHeight              | 200                  | Sets minimum height of media element if image or video is embedded in card.                                                      |
+| mediaSettings            |                      | Configures media-specific layout settings. Refer to [mediaSettings](#media-settings) for more info.                              |
+| mode                     | VERTICAL_ALTERNATING | Sets component mode. Can be `HORIZONTAL`, `VERTICAL`, or `VERTICAL_ALTERNATING`.                                                 |
+| nestedCardHeight         | 150                  | Sets height of nested timeline card.                                                                                             |
+| onItemSelected           |                      | Invokes callback on item selection and passes relevant data.                                                                     |
+| onScrollEnd              |                      | Detects end of timeline via `onScrollEnd`.                                                                                       |
+| onThemeChange            |                      | Invokes callback when theme is changed. Triggered via `enableDarkToggle`.                                                        |
+| scrollable               | true                 | Makes timeline scrollable in `VERTICAL` and `VERTICAL` alternating modes.                                                        |
+| showAllCardsHorizontal   | false                | Displays all cards in horizontal mode. By default, only active card is displayed.                                                |
+| slideItemDuration        | 5000                 | Duration in ms that timeline card is active during a slideshow.                                                                  |
+| slideShow                | false                | Enables slideshow control.                                                                                                       |
+| textOverlay              | false                | Displays text as overlay on media elements. Refer to [Text Overlay](#text-overlay-mode) for more info.                           |
+| theme                    |                      | Customizes colors. Refer to [Theme](#theme) for more info.                                                                       |
+| timelinePointDimension   |                      | Dimensions of circular points on timeline.                                                                                       |
+| timelinePointShape       | circle               | Configures shape of timeline points. Can be circle, square, or diamond.                                                          |
+| titleDateFormat          | 'MMM DD, YYYY'       | Date format used when date is passed for each timeline item. Supports all [dayjs](https://day.js.org/) formats.                  |
+| useReadMore              | true                 | Enables or disables "read more" button. Button only available if text content on card is taller than card itself.                |
+| verticalBreakPoint       | 768px                | Number of pixels below which timeline will automatically switch to `VERTICAL` mode.                                              |
 
 ### Mode
 
@@ -425,7 +428,7 @@ It is important to note that the image collection must be passed in inside a con
 </Chrono>
 ```
 
-### Nested Timelines
+### 🌿Nested Timelines
 
 Nested timelines in React-Chrono allow you to display timelines within timeline cards. This feature is data-driven, which means that if a timeline item has an `items` array, the component will automatically attempt to render the nested timeline inside the timeline card.
 
@@ -487,7 +490,7 @@ The outlines are only supported on `VERTICAL` and `VERTICAL_ALTERNATING` modes.
 
 The `itemWidth` prop can be used to set the width of each individual timeline sections. This setting is applicable only for the `HORIZONTAL` mode.
 
-### Media Settings
+### 🎥Media Settings
 
 Use media settings to align the media or change how a image is displayed in the card.
 
@@ -498,6 +501,14 @@ Use media settings to align the media or change how a image is displayed in the 
 
 ```jsx
 <Chrono items={items} mediaSettings={{ align: 'right', fit: 'contain' }} />
+```
+
+### Breakpoint
+
+Use the breakpoint feature to automatically switch the timeline to `VERTICAL` mode when there is not enough space for `VERTICAL_ALTERNATING` mode, such as on mobile devices. Set the auto switch to happen by enabling the `enableBreakPoint` prop and specifying the pixel limit with the `verticalBreakPoint` prop.
+
+```jsx
+<Chrono items={items} enableBreakPoint verticalBreakPoint={400} />
 ```
 
 ### 🎨Theme

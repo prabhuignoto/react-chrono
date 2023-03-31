@@ -26,9 +26,11 @@ export const VerticalTree: FunctionComponent<{
           // textOverlay
           focusActiveItemOnLoad
           enableDarkToggle
-          cardWidth={550}
+          cardWidth={450}
           onItemSelected={(selected) => console.log(selected.cardTitle)}
           onScrollEnd={() => console.log('end reached')}
+          verticalBreakPoint={1920}
+          enableBreakPoint
         >
           <div className="chrono-icons">
             <img

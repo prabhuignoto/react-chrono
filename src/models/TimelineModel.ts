@@ -105,6 +105,8 @@ export type TimelineProps = {
 
   disableNavOnKey?: boolean;
 
+  enableBreakPoint?: boolean;
+
   enableDarkToggle?: boolean;
 
   // enables the outline view
@@ -192,6 +194,8 @@ export type TimelineProps = {
 
   // enables the read more button
   useReadMore?: boolean;
+
+  verticalBreakPoint?: number;
 };
 
 export type SlideShowType = 'reveal' | 'slide_in' | 'slide_from_sides';

@@ -11,6 +11,7 @@ import React, {
 import { Scroll } from '../../models/TimelineHorizontalModel';
 import { TimelineCardModel } from '../../models/TimelineItemModel';
 import { TimelineModel } from '../../models/TimelineModel';
+import { useMatchMedia } from '../effects/useMatchMedia';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import { GlobalContext } from '../GlobalContext';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
@@ -65,12 +66,15 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     theme,
     darkMode,
     toggleDarkMode,
+    verticalBreakPoint = 768,
+    enableBreakPoint,
   } = useContext(GlobalContext);
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
   const [hasFocus, setHasFocus] = useState(false);
   const horizontalContentRef = useRef<HTMLDivElement | null>(null);
+  const [timelineMode, setTimelineMode] = useState(mode);
 
   // const activeItemIndex = useRef<number>(activeTimelineItem);
 
@@ -90,6 +94,24 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   }, [slideShowRunning, scrollable]);
 
   const id = useRef(`react-chrono-timeline-${uniqueID()}`);
+
+  useMatchMedia(
+    `(min-width: 100px) and (max-width: ${verticalBreakPoint}px)`,
+    () => {
+      if (mode === 'VERTICAL_ALTERNATING') {
+        setTimelineMode('VERTICAL');
+      }
+    },
+    enableBreakPoint,
+  );
+
+  useMatchMedia(
+    `(min-width: ${verticalBreakPoint + 1}px)`,
+    () => {
+      setTimelineMode(mode);
+    },
+    enableBreakPoint,
+  );
 
   // handlers for navigation
   const handleNext = useCallback(() => {
@@ -329,7 +351,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         }}
       >
         {/* VERTICAL ALTERNATING */}
-        {mode === 'VERTICAL_ALTERNATING' ? (
+        {timelineMode === 'VERTICAL_ALTERNATING' ? (
           <TimelineVertical
             activeTimelineItem={activeTimelineItem}
             autoScroll={handleScroll}
@@ -337,7 +359,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             hasFocus={hasFocus}
             iconChildren={iconChildren}
             items={items as TimelineCardModel[]}
-            mode={mode}
+            mode={timelineMode}
             onClick={handleTimelineItemClick}
             onElapsed={(itemId?: string) =>
               handleTimelineItemClick(itemId, true)
@@ -351,7 +373,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         ) : null}
 
         {/* HORIZONTAL */}
-        {mode === 'HORIZONTAL' ? (
+        {timelineMode === 'HORIZONTAL' ? (
           <TimelineMain className={mode.toLowerCase()}>
             <Outline color={theme && theme.primary} height={lineWidth} />
             <TimelineHorizontal
@@ -361,7 +383,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               hasFocus={hasFocus}
               iconChildren={iconChildren}
               items={items as TimelineCardModel[]}
-              mode={mode}
+              mode={timelineMode}
               onElapsed={(itemId?: string) =>
                 handleTimelineItemClick(itemId, true)
               }
@@ -373,7 +395,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         ) : null}
 
         {/* VERTICAL */}
-        {mode === 'VERTICAL' ? (
+        {timelineMode === 'VERTICAL' ? (
           <TimelineVertical
             activeTimelineItem={activeTimelineItem}
             alternateCards={false}
