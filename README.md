@@ -505,8 +505,7 @@ Use media settings to align the media or change how a image is displayed in the 
 
 ### Breakpoint
 
-The breakpoint feature can be useful for mobile devices that don't have enough space to display the timeline in `VERTICAL_ALTERNATING` mode.
-In such cases, the timeline will automatically switch to `VERTICAL` mode. This can be enabled with the `enableBreakPoint` prop, and the exact pixels below which you want the auto switch to happen can be set with the `verticalBreakPoint` prop.
+Use the breakpoint feature to automatically switch the timeline to `VERTICAL` mode when there is not enough space for `VERTICAL_ALTERNATING` mode, such as on mobile devices. Set the auto switch to happen by enabling the `enableBreakPoint` prop and specifying the pixel limit with the `verticalBreakPoint` prop.
 
 ```jsx
 <Chrono items={items} enableBreakPoint verticalBreakPoint={400} />
