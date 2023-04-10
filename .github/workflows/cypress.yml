@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x' # replace with the latest version of Node.js
+
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -27,7 +32,7 @@ jobs:
         with:
           install: false
           start: pnpm dev
-          wait-on: "http://[::1]:4444"
+          wait-on: 'http://[::1]:4444'
           wait-on-timeout: 200
           browser: chrome
 
@@ -36,6 +41,6 @@ jobs:
         with:
           install: false
           start: pnpm dev
-          wait-on: "http://[::1]:4444"
+          wait-on: 'http://[::1]:4444'
           wait-on-timeout: 200
           browser: edge
