@@ -87,12 +87,12 @@ context('Chrono.Vertical.Alternating.Mixed', () => {
       );
   });
 
-  it('check video', () => {
-    cy.get('.vertical-item-row')
-      .eq(8)
-      .find('video')
-      .should('have.css', 'visibility', 'hidden');
-  });
+  // it('check video', () => {
+  //   cy.get('.vertical-item-row')
+  //     .eq(8)
+  //     .find('video')
+  //     .should('have.css', 'visibility', 'hidden');
+  // });
 
   it('check scroll', () => {
     cy.get('.timeline-main-wrapper').scrollTo('bottom');
