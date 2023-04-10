@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Install pnpm
-        uses: pnpm/action-setup@v2.2.2
+        uses: pnpm/action-setup@v2
         with:
           version: 6.0.2
 
