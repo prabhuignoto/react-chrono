@@ -11,10 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2.2.2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          version: 6.0.2
+          node-version: '18.x' # replace with the latest version of Node.js
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8.1.0
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -23,19 +28,28 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Chrome
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v5.6.1
         with:
           install: false
           start: pnpm dev
-          wait-on: "http://[::1]:4444"
+          wait-on: 'http://[::1]:4444'
           wait-on-timeout: 200
           browser: chrome
 
       - name: Edge
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v5.6.1
         with:
           install: false
           start: pnpm dev
-          wait-on: "http://[::1]:4444"
+          wait-on: 'http://[::1]:4444'
           wait-on-timeout: 200
           browser: edge
+
+      - name: Firefox
+        uses: cypress-io/github-action@v5.6.1
+        with:
+          install: false
+          start: pnpm dev
+          wait-on: 'http://[::1]:4444'
+          wait-on-timeout: 200
+          browser: firefox

@@ -15,9 +15,9 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - uses: pnpm/action-setup@v2.2.2
+      - uses: pnpm/action-setup@v2
         with:
-          version: 6.0.2
+          version: 8.1.0
 
       - uses: actions/checkout@v2
 
