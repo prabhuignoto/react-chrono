@@ -27,12 +27,9 @@ export const TimelinePointWrapper = styled.div<{
     position: absolute;
     content: '';
     display: block;
-    left: 0;
-    margin-left: auto;
-    margin-right: auto;
+    left: 50%;
     top: -1rem;
-    right: 0;
-    transform: translateY(-50%);
+    transform: translateY(-50%) translateX(-50%);
   }
 
   &::after {
@@ -40,13 +37,11 @@ export const TimelinePointWrapper = styled.div<{
     content: '';
     display: block;
     height: 100%;
-    left: 0;
-    margin-left: auto;
-    margin-right: auto;
+    left: 50%;
     position: absolute;
-    right: 0;
     width: ${(p) => (p.width ? `${p.width}px` : '4px')};
     z-index: 0;
+    transform: translateX(-50%);
   }
 `;
 

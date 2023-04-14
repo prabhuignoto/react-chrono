@@ -18,15 +18,6 @@ export const Wrapper = styled.div`
 
 export const Item = styled.div``;
 
-const scaleDown = keyframes`
-  from {
-    transform: scale(1.4);
-  }
-  to {
-    transform: scale(1);
-  }
-`;
-
 const show = keyframes`
   from {
     opacity: 0;
@@ -73,8 +64,8 @@ export const Shape = styled.div<ShapeModel>`
       /* transform: scale(1.75); */
     }
     &:not(.using-icon) {
-      transform: scale(1.25)
-        ${(p) => (p.timelinePointShape === 'diamond' ? 'rotate(45deg)' : '')};
+      transform: ${(p) =>
+        p.timelinePointShape === 'diamond' ? 'rotate(45deg)' : ''};
     }
 
     &::after {
@@ -95,13 +86,12 @@ export const Shape = styled.div<ShapeModel>`
     background: ${(p: ShapeModel) => p.theme?.primary};
 
     &.active {
-      &::after {
-        background: ${(p) => p.theme.secondary};
-      }
+      background: ${(p: ShapeModel) => p.theme?.secondary};
+      border: ${(p) => (p.dimension ? Math.round(p.dimension * 0.2) : '3')}px
+        solid ${(p: ShapeModel) => p.theme?.primary};
     }
 
     &.in-active {
-      animation: ${scaleDown} 0.1s ease-in;
     }
   }
 
@@ -110,7 +100,6 @@ export const Shape = styled.div<ShapeModel>`
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: scale(1.25);
 
     img {
       max-width: 90%;
