@@ -10,8 +10,9 @@ export default defineConfig({
     coverage: {
       clean: true,
       enabled: true,
+      provider: "c8",
       reporter: ['html', 'lcov', 'clover', 'cobertura'],
-      reportsDirectory: './coverage',
+      reportsDirectory: './coverage'
     },
     environment: 'jsdom',
     globals: true,
