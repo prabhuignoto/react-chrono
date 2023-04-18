@@ -10,16 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.5.2
-      - name: Set up Node.js and pnpm
+        uses: actions/checkout@v2.4.2
+      - name: Set up pnpm
         uses: pnpm/action-setup@v2.2.4
         with:
-          version: '18.x'
+          version: latest
       - name: Install dependencies
         run: pnpm install
       - name: Run tests
-        run: pnpm run test
+        run: pnpm test
       - name: Upload coverage report
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_SECRET }}
-        run: pnpm coveralls
+        run: pnpm run coveralls
