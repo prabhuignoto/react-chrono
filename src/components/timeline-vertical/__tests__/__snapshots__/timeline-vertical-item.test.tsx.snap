@@ -55,7 +55,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
       </section>
     </div>
     <div
-      class="sc-kZGvTt fbPhGb"
+      class="sc-kZGvTt iiUlHY"
       data-testid="tree-leaf"
       role="button"
     >
@@ -66,7 +66,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
         role="button"
       >
         <div
-          class="sc-kFuwaP bYRbvl"
+          class="sc-kFuwaP naOQz"
         />
       </div>
     </div>

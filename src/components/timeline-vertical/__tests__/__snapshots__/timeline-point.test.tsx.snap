@@ -3,7 +3,7 @@
 exports[`Timeline point > Should match snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="sc-gLDzan cAiNKF test_class_name"
+    class="sc-gLDzan KfHIG test_class_name"
     data-testid="tree-leaf"
     role="button"
     width="3"
@@ -15,7 +15,7 @@ exports[`Timeline point > Should match snapshot 1`] = `
       role="button"
     >
       <div
-        class="sc-hLseeU dnoRAR"
+        class="sc-hLseeU iQJQbg"
       />
     </div>
   </div>
