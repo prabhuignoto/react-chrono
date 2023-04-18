@@ -1,0 +1,25 @@
+name: Coveralls
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Node.js and pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '18.x'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run tests
+        run: pnpm run test
+      - name: Upload coverage report
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_SECRET }}
+        run: pnpm coveralls

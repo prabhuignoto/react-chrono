@@ -32,7 +32,8 @@
     "dev": "vite --config vite.config.ts",
     "clean": "npx concurrently \"pnpm format\" \"pnpm lint:all\"",
     "test": "vitest --config vitest.config.ts",
-    "vite:build": "vite build --config vite.config.ts"
+    "vite:build": "vite build --config vite.config.ts",
+    "coveralls": "pnpx coveralls < coverage/lcov.info"
   },
   "dependencies": {
     "classnames": "^2.3.2",
@@ -82,6 +83,7 @@
     "autoprefixer": "^10.4.14",
     "babel-loader": "^9.1.2",
     "babel-plugin-styled-components": "^2.1.1",
+    "c8": "^7.13.0",
     "cssnano": "^6.0.0",
     "cypress": "12.10.0",
     "eslint": "^8.38.0",
