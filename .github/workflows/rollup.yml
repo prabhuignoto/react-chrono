@@ -33,4 +33,4 @@ jobs:
         run: pnpm rollup
 
       - name: Unit Tests
-        run: pnpm vitest:run
+        run: pnpm test
