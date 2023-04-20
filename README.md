@@ -670,6 +670,10 @@ Prabhu Murthy – [@prabhumurthy2](https://twitter.com/prabhumurthy2) – prabhu
 
 <a href="https://www.buymeacoffee.com/prabhuignoto" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" height="41" width="174" ></a>
 
+<a>
+  <img src="https://sonarcloud.io/images/project_badges/sonarcloud-white.svg" alt="sonar" />
+</a>
+
 <!-- Markdown link & img dfn's -->
 
 [react]: https://reactjs.org
