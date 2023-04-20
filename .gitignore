@@ -35,3 +35,6 @@ cache
 .idea
 
 cypress/videos
+
+.scannerwork
+sonar-project.properties
