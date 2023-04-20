@@ -54,6 +54,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     showAllCardsHorizontal,
     classNames,
     theme,
+    timelinePointShape,
   } = useContext(GlobalContext);
 
   const handleClick = () => {
@@ -168,6 +169,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           theme={theme}
           aria-label={title}
           dimension={timelinePointDimension}
+          timelinePointShape={timelinePointShape}
         >
           {iconChild ? iconChild : null}
         </Shape>
