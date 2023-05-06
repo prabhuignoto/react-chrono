@@ -354,7 +354,7 @@ export const VerticalBasicNested: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         items={items}
-        mode="VERTICAL"
+        mode="HORIZONTAL"
         slideShow
         cardWidth={500}
         slideItemDuration={2500}
@@ -370,7 +370,7 @@ export const VerticalBasicNested: FunctionComponent<{
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
         fontSizes={{
-          title: '1.5rem',
+          title: '1rem',
         }}
         // flipLayout
         focusActiveItemOnLoad

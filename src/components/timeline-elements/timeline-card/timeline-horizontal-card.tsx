@@ -40,6 +40,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   cardWidth,
   isNested,
   nestedCardHeight,
+  items,
 }: TimelineCardModel) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -138,6 +139,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           timelineContent={timelineContent}
           isNested={isNested}
           nestedCardHeight={nestedCardHeight}
+          items={items}
         />
       </TimelineContentContainer>
     );
