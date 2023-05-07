@@ -391,7 +391,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         detailsHeight,
         textOverlay,
         gradientColor,
-        theme,
+        JSON.stringify(theme),
       ]);
 
       const handlers = useMemo(() => {

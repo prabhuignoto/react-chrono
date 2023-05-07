@@ -138,6 +138,9 @@ export const VerticalBasic: FunctionComponent<{
         fontSizes={{
           title: '1.5rem',
         }}
+        theme={{
+          cardDetailsColor: '#555555',
+        }}
         // flipLayout
         focusActiveItemOnLoad
         activeItemIndex={2}
