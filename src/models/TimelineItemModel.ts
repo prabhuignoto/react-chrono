@@ -41,7 +41,7 @@ export type TimelineCardModel = Pick<
   | 'url'
   | 'timelineContent'
   | 'isNested'
-  | "items"
+  | 'items'
 > & {
   autoScroll?: ({
     pointOffset,

@@ -138,6 +138,9 @@ export const VerticalBasic: FunctionComponent<{
         fontSizes={{
           title: '1.5rem',
         }}
+        theme={{
+          cardDetailsColor: '#555555',
+        }}
         // flipLayout
         focusActiveItemOnLoad
         activeItemIndex={2}
@@ -189,6 +192,9 @@ export const VerticalNewMedia: FunctionComponent<{
             // enableOutline
             fontSizes={{
               title: '1.5rem',
+            }}
+            theme={{
+              cardDetailsColor: '#2f4f4f',
             }}
             cardHeight={350}
             // timelinePointShape="diamond"

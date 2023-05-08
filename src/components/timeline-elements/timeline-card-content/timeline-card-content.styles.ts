@@ -155,7 +155,7 @@ export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
   font-weight: 400;
   margin: 0;
   width: 100%;
-  color: ${(p) => p.theme.detailsColor};
+  color: ${(p) => p.theme.cardDetailsColor};
 `;
 
 export const TimelineSubContent = styled.span<{
@@ -165,7 +165,7 @@ export const TimelineSubContent = styled.span<{
   margin-bottom: 0.5rem;
   display: block;
   font-size: ${(p) => p.fontSize};
-  color: ${(p) => p.theme.subTitleColor};
+  color: ${(p) => p.theme.cardDetailsColor};
 `;
 
 export const TimelineContentDetailsWrapper = styled.div<{
