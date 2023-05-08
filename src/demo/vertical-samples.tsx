@@ -249,7 +249,7 @@ export const VerticalAlternatingNested: FunctionComponent<{
             onItemSelected={(selected) => console.log(selected.cardTitle)}
             // enableOutline
             fontSizes={{
-              title: '1.5rem',
+              title: '1rem',
             }}
             theme={{
               primary: '#191919',
@@ -257,6 +257,7 @@ export const VerticalAlternatingNested: FunctionComponent<{
               titleColor: '#FFA500',
               titleColorActive: '#000',
               cardTitleColor: '#FFA500',
+              iconBackgroundColor: '#fff',
             }}
             cardHeight={150}
             timelinePointShape="square"
@@ -266,7 +267,7 @@ export const VerticalAlternatingNested: FunctionComponent<{
             // cardHeight={350}
             mediaHeight={200}
             enableDarkToggle
-            timelinePointDimension={20}
+            timelinePointDimension={30}
             classNames={{
               cardText: 'custom-text',
             }}
