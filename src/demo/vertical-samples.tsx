@@ -193,6 +193,9 @@ export const VerticalNewMedia: FunctionComponent<{
             fontSizes={{
               title: '1.5rem',
             }}
+            theme={{
+              cardDetailsColor: '#2f4f4f',
+            }}
             cardHeight={350}
             // timelinePointShape="diamond"
             focusActiveItemOnLoad

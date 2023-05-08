@@ -72,7 +72,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       return lineItems.map((item, index) => ({
         ...item,
         active: index === pos,
-        id: Math.random().toString(16).slice(2),
+        // id: Math.random().toString(16).slice(2),
         visible: true,
       }));
     } else {
