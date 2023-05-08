@@ -20,7 +20,7 @@ export interface Theme {
   detailsColor?: string;
 
   // icon background color
-  iconBackGroundColor?: string;
+  iconBackgroundColor?: string;
 
   // nested card background color
   nestedCardBgColor?: string;

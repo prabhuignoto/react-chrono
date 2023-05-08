@@ -257,7 +257,7 @@ export const VerticalAlternatingNested: FunctionComponent<{
               titleColor: '#FFA500',
               titleColorActive: '#000',
               cardTitleColor: '#FFA500',
-              iconBackGroundColor: '#fff',
+              iconBackgroundColor: '#fff',
             }}
             cardHeight={150}
             timelinePointShape="square"

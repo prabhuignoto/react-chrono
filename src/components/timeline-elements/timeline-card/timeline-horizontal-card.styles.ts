@@ -96,7 +96,7 @@ export const Shape = styled.div<ShapeModel>`
   }
 
   &.using-icon {
-    background: ${(p) => p.theme?.iconBackGroundColor};
+    background: ${(p) => p.theme?.iconBackgroundColor};
     display: flex;
     align-items: center;
     justify-content: center;
