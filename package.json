@@ -39,7 +39,7 @@
     "classnames": "^2.3.2",
     "dayjs": "^1.11.7",
     "focus-visible": "^5.2.0",
-    "styled-components": "5.3.11"
+    "styled-components": "5.3.10"
   },
   "peerDependencies": {
     "react": "^18.1.0",
