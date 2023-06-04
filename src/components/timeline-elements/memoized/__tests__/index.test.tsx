@@ -31,13 +31,7 @@ describe('Title', () => {
   //should have the color and padding
   it('should have the color and padding', () => {
     const { getByText } = customRender(
-      <TitleMemo
-        title="title"
-        color="#ccc"
-        dir="rtl"
-        active={false}
-        padding
-      />,
+      <TitleMemo title="title" color="#ccc" dir="rtl" active={false} padding />,
       { providerProps },
     );
     expect(getByText('title')).toHaveStyle('color: #ccc');
