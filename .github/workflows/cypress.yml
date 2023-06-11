@@ -21,11 +21,27 @@ jobs:
         with:
           version: 8.1.0
 
+      - name: Cache PNPM dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Cache Cypress binary cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-binary
+          restore-keys: |
+            ${{ runner.os }}-cypress-
 
       - name: Chrome
         uses: cypress-io/github-action@v5.6.1

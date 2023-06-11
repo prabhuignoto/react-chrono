@@ -21,6 +21,14 @@ jobs:
 
       - uses: actions/checkout@v2
 
+      - name: Cache PNPM dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
@@ -28,6 +36,14 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install
+
+      - name: Cache build artifacts
+        uses: actions/cache@v3
+        with:
+          path: dist
+          key: ${{ runner.os }}-build-${{ matrix.node-version }}
+          restore-keys: |
+            ${{ runner.os }}-build-
 
       - name: Build
         run: pnpm rollup
