@@ -110,7 +110,7 @@
     "react-router-dom": "^6.12.1",
     "react-runner": "^1.0.3",
     "rimraf": "^5.0.1",
-    "rollup": "^3.24.1",
+    "rollup": "^3.25.1",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-delete": "^2.0.0",
