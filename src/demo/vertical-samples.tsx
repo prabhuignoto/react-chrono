@@ -1,7 +1,7 @@
+import { Theme } from '@models/Theme';
+import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent, useState } from 'react';
 import Chrono from '../components';
-import { Theme } from '../models/Theme';
-import { TimelineItemModel } from '../models/TimelineItemModel';
 import { ComponentContainerTree, Vertical } from './App.styles';
 import data from './data';
 import dataMixed from './data-mixed';

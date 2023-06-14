@@ -1,6 +1,6 @@
+import { Theme } from '@models/Theme';
+import { TimelineMode } from '@models/TimelineModel';
 import styled, { css } from 'styled-components';
-import { Theme } from '../../../models/Theme';
-import { TimelineMode } from '../../../models/TimelineModel';
 import { ScrollBar } from '../../common/styles';
 
 export const linearGradient = css`

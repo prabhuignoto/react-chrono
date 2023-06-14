@@ -1,3 +1,5 @@
+import { Theme } from '@models/Theme';
+import { TimelineMode } from '@models/TimelineModel';
 import React, {
   useCallback,
   useContext,
@@ -5,8 +7,6 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { Theme } from '../../../models/Theme';
-import { TimelineMode } from '../../../models/TimelineModel';
 import { GlobalContext } from '../../GlobalContext';
 import CloseIcon from '../../icons/close';
 import MenuIcon from '../../icons/menu';

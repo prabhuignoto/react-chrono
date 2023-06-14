@@ -1,5 +1,5 @@
+import { SlideShowType, TimelineMode } from '@models/TimelineModel';
 import { darkTheme, defaultTheme } from '../components/common/themes';
-import { SlideShowType, TimelineMode } from '../models/TimelineModel';
 
 export const uniqueID = () => {
   const chars =

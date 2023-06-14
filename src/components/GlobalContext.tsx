@@ -1,4 +1,11 @@
 /* eslint-disable react/prop-types */
+import { TimelineProps as PropsModel } from '@models/TimelineModel';
+import {
+  getDefaultButtonTexts,
+  getDefaultClassNames,
+  getDefaultThemeOrDark,
+  getSlideShowType,
+} from '@utils/index';
 import {
   createContext,
   FunctionComponent,
@@ -6,13 +13,6 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { TimelineProps as PropsModel } from '../models/TimelineModel';
-import {
-  getDefaultButtonTexts,
-  getDefaultClassNames,
-  getDefaultThemeOrDark,
-  getSlideShowType,
-} from '../utils/index';
 
 const GlobalContext = createContext<
   PropsModel & { toggleDarkMode?: () => void }

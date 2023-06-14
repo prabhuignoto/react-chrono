@@ -1,6 +1,6 @@
+import { TimelineProps } from '@models/TimelineModel';
 import { render, RenderResult } from '@testing-library/react';
 import { ReactElement } from 'react';
-import { TimelineProps } from '../../../models/TimelineModel';
 import { GlobalContext } from '../../GlobalContext';
 
 export const providerProps: TimelineProps = {

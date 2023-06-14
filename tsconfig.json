@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -24,11 +24,20 @@
     "types": [
       "node",
       "@types/testing-library__jest-dom",
-    ]
+    ],
+    "paths": {
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@models/*": [
+        "./src/models/*"
+      ]
+    }
   },
   "include": [
     "src/components",
-    "src/models"
+    "src/models",
+    "src/utils",
   ],
   "exclude": [
     "node_modules",

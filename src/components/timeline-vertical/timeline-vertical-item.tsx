@@ -1,6 +1,6 @@
+import { VerticalItemModel } from '@models/TimelineVerticalModel';
 import cls from 'classnames';
 import React, { useCallback, useContext, useMemo, useRef } from 'react';
-import { VerticalItemModel } from '../../models/TimelineVerticalModel';
 import { GlobalContext } from '../GlobalContext';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';

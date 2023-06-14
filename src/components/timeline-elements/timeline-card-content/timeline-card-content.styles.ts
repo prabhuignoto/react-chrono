@@ -1,6 +1,6 @@
+import { Theme } from '@models/Theme';
+import { TimelineProps } from '@models/TimelineModel';
 import styled, { css, keyframes } from 'styled-components';
-import { Theme } from '../../../models/Theme';
-import { TimelineProps } from '../../../models/TimelineModel';
 import { linearGradient } from '../timeline-card-media/timeline-card-media.styles';
 import {
   reveal,

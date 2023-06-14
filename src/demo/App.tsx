@@ -1,7 +1,7 @@
+import { Theme } from '@models/Theme';
+import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { useEffect, useState } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Theme } from '../models/Theme';
-import { TimelineItemModel } from '../models/TimelineItemModel';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import data from './data';
 import mixed from './data-mixed';

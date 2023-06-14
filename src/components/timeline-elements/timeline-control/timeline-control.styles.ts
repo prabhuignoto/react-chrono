@@ -1,6 +1,6 @@
+import { Theme } from '@models/Theme';
+import { TimelineMode } from '@models/TimelineModel';
 import styled from 'styled-components';
-import { Theme } from '../../../models/Theme';
-import { TimelineMode } from '../../../models/TimelineModel';
 
 export const TimelineNavWrapper = styled.ul<{ theme?: Theme }>`
   background: rgba(229, 229, 229, 0.85);

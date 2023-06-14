@@ -1,6 +1,6 @@
+import { TimelinePointModel } from '@models/TimelineVerticalModel';
 import cls from 'classnames';
 import React, { memo, useContext, useEffect, useMemo, useRef } from 'react';
-import { TimelinePointModel } from '../../models/TimelineVerticalModel';
 import { GlobalContext } from '../GlobalContext';
 import { Shape } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
 import {

@@ -1,6 +1,6 @@
+import { TimelineHorizontalModel } from '@models/TimelineHorizontalModel';
 import cls from 'classnames';
 import React, { ReactNode, useContext, useMemo } from 'react';
-import { TimelineHorizontalModel } from '../../models/TimelineHorizontalModel';
 import { GlobalContext } from '../GlobalContext';
 import TimelineCard from '../timeline-elements/timeline-card/timeline-horizontal-card';
 import {

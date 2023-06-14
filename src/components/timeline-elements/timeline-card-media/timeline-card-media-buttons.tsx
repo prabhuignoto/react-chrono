@@ -1,5 +1,5 @@
+import { Theme } from '@models/Theme';
 import styled, { css } from 'styled-components';
-import { Theme } from '../../../models/Theme';
 
 const Button = css`
   align-items: center;

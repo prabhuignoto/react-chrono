@@ -1,6 +1,6 @@
+import { Theme } from '@models/Theme';
+import { TimelineContentModel } from '@models/TimelineContentModel';
 import { RefObject } from 'react';
-import { Theme } from '../../../models/Theme';
-import { TimelineContentModel } from '../../../models/TimelineContentModel';
 
 export type ContentHeaderProps = Pick<
   TimelineContentModel,

@@ -1,4 +1,4 @@
-import { TimelineItemModel } from './../models/TimelineItemModel';
+import { TimelineItemModel } from './@models/TimelineItemModel';
 
 export default [
   {

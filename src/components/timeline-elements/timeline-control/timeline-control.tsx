@@ -1,6 +1,6 @@
+import { TimelineControlModel } from '@models/TimelineControlModel';
 import cls from 'classnames';
 import React, { useCallback, useContext, useMemo } from 'react';
-import { TimelineControlModel } from '../../../models/TimelineControlModel';
 import { GlobalContext } from '../../GlobalContext';
 import { MoonIcon, StopIcon, SunIcon } from '../../icons';
 import ChevronLeft from '../../icons/chev-left';
