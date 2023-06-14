@@ -1,6 +1,6 @@
+import { Scroll } from '@models/TimelineHorizontalModel';
+import { TimelineMode } from '@models/TimelineModel';
 import { useMemo, useState } from 'react';
-import { Scroll } from '../../models/TimelineHorizontalModel';
-import { TimelineMode } from '../../models/TimelineModel';
 
 let useNewScrollPosition: (
   mode: TimelineMode,

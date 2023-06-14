@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, vi } from 'vitest';
-import { TimelineCardModel } from '../../../../models/TimelineItemModel';
 import { customRender } from '../../../common/test';
 import { providerProps } from '../../../common/test/index';
+import { TimelineCardModel } from '../../../../models/TimelineItemModel';
 import TimelineCard from '../timeline-horizontal-card';
 
 const defaultProps: TimelineCardModel = {

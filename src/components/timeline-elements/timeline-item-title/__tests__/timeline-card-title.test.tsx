@@ -1,3 +1,4 @@
+import { waitFor } from '@testing-library/react';
 import { describe } from 'vitest';
 import { customRender } from '../../../common/test';
 import { providerProps } from '../../../common/test/index';
@@ -42,12 +43,16 @@ describe('Timeline item title', () => {
   });
 
   // should have a custom alignment
-  it('should have a custom alignment', () => {
+  it('should have a custom alignment', async () => {
     const { getByText } = customRender(
       <TimelineItemTitle title="title" align="left" />,
       { providerProps },
     );
     expect(getByText('title')).toBeInTheDocument();
-    expect(getByText('title')).toHaveStyle('text-align: left');
+
+    await waitFor(() => {
+      expect(getByText('title')).toHaveProperty('align');
+      expect(getByText('title').getAttribute('align')).toBe('left');
+    });
   });
 });

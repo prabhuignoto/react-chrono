@@ -1,8 +1,8 @@
+import { TimelineItemModel } from '@models/TimelineItemModel';
+import { TimelineProps } from '@models/TimelineModel';
 import dayjs from 'dayjs';
 import 'focus-visible';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { TimelineItemModel } from '../models/TimelineItemModel';
-import { TimelineProps } from '../models/TimelineModel';
 import GlobalContextProvider from './GlobalContext';
 import Timeline from './timeline/timeline';
 const toReactArray = React.Children.toArray;

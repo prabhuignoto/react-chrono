@@ -1,5 +1,5 @@
+import { TimelineMode } from '@models/TimelineModel';
 import { FunctionComponent, PointerEvent, useContext, useMemo } from 'react';
-import { TimelineMode } from '../../../models/TimelineModel';
 import { GlobalContext } from '../../GlobalContext';
 import ChevronIcon from '../../icons/chev-right';
 import { ContentFooterProps } from './header-footer.model';

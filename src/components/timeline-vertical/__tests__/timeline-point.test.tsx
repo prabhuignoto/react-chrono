@@ -1,5 +1,5 @@
+import { TimelinePointModel } from '@models/TimelineVerticalModel';
 import { describe, vi } from 'vitest';
-import { TimelinePointModel } from '../../../models/TimelineVerticalModel';
 import { customRender } from '../../common/test';
 import { providerProps } from '../../common/test/index';
 import { TimelinePoint } from '../timeline-point';

@@ -1,3 +1,6 @@
+import { TimelineContentModel } from '@models/TimelineContentModel';
+import { MediaState } from '@models/TimelineMediaModel';
+import { hexToRGBA } from '@utils/index';
 import cls from 'classnames';
 import React, {
   useCallback,
@@ -7,9 +10,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { TimelineContentModel } from '../../../models/TimelineContentModel';
-import { MediaState } from '../../../models/TimelineMediaModel';
-import { hexToRGBA } from '../../../utils';
 import { GlobalContext } from '../../GlobalContext';
 import Timeline from '../../timeline/timeline';
 import CardMedia from '../timeline-card-media/timeline-card-media';
@@ -316,7 +316,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         } else {
           let textContent = null;
           if (isTextArray) {
-            textContent = detailedText.map((text, index) => (
+            textContent = (detailedText as string[]).map((text, index) => (
               <TimelineSubContent
                 key={index}
                 fontSize={fontSizes?.cardText}

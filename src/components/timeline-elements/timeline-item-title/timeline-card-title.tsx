@@ -1,6 +1,6 @@
+import { TitleModel } from '@models/TimelineCardTitleModel';
 import cls from 'classnames';
 import React, { useContext, useMemo } from 'react';
-import { TitleModel } from '../../../models/TimelineCardTitleModel';
 import { GlobalContext } from '../../GlobalContext';
 import { TitleWrapper } from './timeline-card-title.styles';
 

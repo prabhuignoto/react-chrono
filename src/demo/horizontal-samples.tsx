@@ -1,6 +1,6 @@
+import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent } from 'react';
 import Chrono from '../components';
-import { TimelineItemModel } from '../models/TimelineItemModel';
 import {
   ComponentContainer,
   ComponentContainerTree,

@@ -1,3 +1,7 @@
+import { Scroll } from '@models/TimelineHorizontalModel';
+import { TimelineCardModel } from '@models/TimelineItemModel';
+import { TimelineModel } from '@models/TimelineModel';
+import { uniqueID } from '@utils/index';
 import cls from 'classnames';
 import 'focus-visible';
 import React, {
@@ -8,16 +12,12 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Scroll } from '../../models/TimelineHorizontalModel';
-import { TimelineCardModel } from '../../models/TimelineItemModel';
-import { TimelineModel } from '../../models/TimelineModel';
+import { GlobalContext } from '../GlobalContext';
 import { useMatchMedia } from '../effects/useMatchMedia';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
-import { GlobalContext } from '../GlobalContext';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
-import { uniqueID } from './../../utils/index';
 import {
   Outline,
   TimelineContentRender,

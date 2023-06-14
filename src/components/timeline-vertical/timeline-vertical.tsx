@@ -1,5 +1,5 @@
+import { TimelineVerticalModel } from '@models/TimelineVerticalModel';
 import React, { useCallback, useMemo } from 'react';
-import { TimelineVerticalModel } from '../../models/TimelineVerticalModel';
 import { TimelineOutline } from '../timeline-elements/timeline-outline/timeline-outline';
 import TimelineVerticalItem from './timeline-vertical-item';
 import { TimelineVerticalWrapper } from './timeline-vertical.styles';

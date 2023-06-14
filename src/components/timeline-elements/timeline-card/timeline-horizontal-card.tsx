@@ -1,3 +1,4 @@
+import { TimelineCardModel } from '@models/TimelineItemModel';
 import cls from 'classnames';
 import React, {
   useCallback,
@@ -7,7 +8,6 @@ import React, {
   useRef,
 } from 'react';
 import ReactDOM from 'react-dom';
-import { TimelineCardModel } from '../../../models/TimelineItemModel';
 import { GlobalContext } from '../../GlobalContext';
 import TimelineCardContent from '../timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';

@@ -1,4 +1,4 @@
-import { Theme } from '../../../models/Theme';
+import { Theme } from '@models/Theme';
 
 export const defaultTheme: Theme = {
   cardBgColor: '#ffffff',

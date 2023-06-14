@@ -1,5 +1,5 @@
+import { TimelineItemModel } from '@models/TimelineItemModel';
 import * as React from 'react';
-import { TimelineItemModel } from '../models/TimelineItemModel';
 
 const items: TimelineItemModel[] = [
   {

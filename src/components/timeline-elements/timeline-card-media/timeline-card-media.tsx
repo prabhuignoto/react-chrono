@@ -1,3 +1,5 @@
+import { CardMediaModel } from '@models/TimelineMediaModel';
+import { hexToRGBA } from '@utils/index';
 import cls from 'classnames';
 import React, {
   FunctionComponent,
@@ -9,8 +11,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { CardMediaModel } from '../../../models/TimelineMediaModel';
-import { hexToRGBA } from '../../../utils';
 import { GlobalContext } from '../../GlobalContext';
 import {
   DetailsTextMemo,

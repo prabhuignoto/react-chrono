@@ -1,5 +1,5 @@
+import { Theme } from '@models/Theme';
 import React, { ReactNode } from 'react';
-import { Theme } from '../../../models/Theme';
 
 type common = {
   classString?: string;

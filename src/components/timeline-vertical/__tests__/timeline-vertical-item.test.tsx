@@ -1,5 +1,5 @@
+import { VerticalItemModel } from '@models/TimelineVerticalModel';
 import { describe, it } from 'vitest';
-import { VerticalItemModel } from '../../../models/TimelineVerticalModel';
 import { customRender } from '../../common/test';
 import { providerProps } from '../../common/test/index';
 import TimelineVerticalItem from '../timeline-vertical-item';
