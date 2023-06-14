@@ -3,25 +3,27 @@
 exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
 <div>
   <div
-    class="sc-dLMFU gkoluV vertical_alternating"
+    class="sc-bubcaR kyBRbz vertical_alternating"
     data-testid="timeline-item"
   >
     <div
-      class="sc-eldPxv cMlbpt"
+      class="sc-hbwYeq dHryJr"
     >
       <div
-        class="sc-fPXMVe ymELm timeline-circle using-icon vertical_alternating active"
+        class="sc-cpKBeH bzkZLV timeline-circle using-icon vertical_alternating active"
         data-testid="timeline-circle"
+        dimension="16"
+        timelinepointshape="circle"
       >
         icon child
       </div>
     </div>
     <div
-      class="sc-gFqAkR kJqEQy vertical_alternating"
+      class="sc-ZHFQk kkNSxB vertical_alternating"
       data-testid="timeline-title"
     >
       <div
-        class="sc-cPiKLX cdZQfi timeline-item-title active title"
+        class="sc-ttuAC joUAlq timeline-item-title active title"
         font-size="1.5rem"
       />
     </div>
