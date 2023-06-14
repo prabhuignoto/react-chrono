@@ -7,7 +7,7 @@ const open = keyframes`
     width: 30px;
     height: 30px;
   }
-  
+
   to: {
     width: 200px;
     height: 50%;
@@ -19,7 +19,7 @@ const close = keyframes`
     width: 200px;
     height: 50%;
   }
-  
+
   to: {
     width: 30px;
     height: 30px;
