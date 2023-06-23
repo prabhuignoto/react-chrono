@@ -90,8 +90,9 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           timelinePointDimension: 16,
           timelinePointShape: 'circle',
           titleDateFormat: 'MMM DD, YYYY',
+          uniqueId: "react-chrono",
           useReadMore: true,
-          verticalBreakPoint: 1028,
+          verticalBreakPoint: 1028
         },
         {
           ...props,
