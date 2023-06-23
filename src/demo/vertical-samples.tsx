@@ -125,6 +125,8 @@ export const VerticalBasic: FunctionComponent<{
         cardWidth={650}
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
+        noUniqueId
+        uniqueID="vertical_basic_test"
         // textOverlay
         // borderLessCards
         // theme={{

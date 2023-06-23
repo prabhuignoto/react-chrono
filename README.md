@@ -176,6 +176,7 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 | mediaSettings            |                      | Configures media-specific layout settings. Refer to [mediaSettings](#media-settings) for more info.                              |
 | mode                     | VERTICAL_ALTERNATING | Sets component mode. Can be `HORIZONTAL`, `VERTICAL`, or `VERTICAL_ALTERNATING`.                                                 |
 | nestedCardHeight         | 150                  | Sets height of nested timeline card.                                                                                             |
+| noUniqueId               | false                | Disables generating a unique id for the table wrapper                                                                            |
 | onItemSelected           |                      | Invokes callback on item selection and passes relevant data.                                                                     |
 | onScrollEnd              |                      | Detects end of timeline via `onScrollEnd`.                                                                                       |
 | onThemeChange            |                      | Invokes callback when theme is changed. Triggered via `enableDarkToggle`.                                                        |
@@ -188,6 +189,7 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 | timelinePointDimension   |                      | Dimensions of circular points on timeline.                                                                                       |
 | timelinePointShape       | circle               | Configures shape of timeline points. Can be circle, square, or diamond.                                                          |
 | titleDateFormat          | 'MMM DD, YYYY'       | Date format used when date is passed for each timeline item. Supports all [dayjs](https://day.js.org/) formats.                  |
+| uniqueId                 |                      | This prop should be used in conjunction with `noUniqueId` to pass a custom uniqueId for the wrapper                              |
 | useReadMore              | true                 | Enables or disables "read more" button. Button only available if text content on card is taller than card itself.                |
 | verticalBreakPoint       | 768px                | Number of pixels below which timeline will automatically switch to `VERTICAL` mode.                                              |
 
