@@ -392,7 +392,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
                 handleTimelineItemClick(itemId, true)
               }
               slideShowRunning={slideShowRunning}
-              // wrapperId={id.current}
+              wrapperId={id.current}
               nestedCardHeight={nestedCardHeight}
             />
           </TimelineMain>
