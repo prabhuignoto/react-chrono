@@ -52,6 +52,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     nestedCardHeight,
     isChild = false,
     onPaused,
+    uniqueId,
+    noUniqueId,
   } = props;
 
   const {
@@ -93,7 +95,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   }, [slideShowRunning, scrollable]);
 
-  const id = useRef(`react-chrono-timeline-${uniqueID()}`);
+  const id = useRef(
+    `react-chrono-timeline-${noUniqueId ? uniqueID : uniqueID()}`,
+  );
 
   useMatchMedia(
     `(min-width: 100px) and (max-width: ${verticalBreakPoint}px)`,
@@ -388,7 +392,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
                 handleTimelineItemClick(itemId, true)
               }
               slideShowRunning={slideShowRunning}
-              wrapperId={id.current}
+              // wrapperId={id.current}
               nestedCardHeight={nestedCardHeight}
             />
           </TimelineMain>

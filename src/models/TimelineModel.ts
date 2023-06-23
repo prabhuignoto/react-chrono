@@ -21,6 +21,8 @@ export type TimelineModel = Pick<
   | 'hideControls'
   | 'timelinePointDimension'
   | 'nestedCardHeight'
+  | 'noUniqueId'
+  | 'uniqueId'
 > & {
   activeTimelineItem?: number;
   contentDetailsChildren?: React.ReactNode | React.ReactNode[];
@@ -150,6 +152,8 @@ export type TimelineProps = {
 
   nestedCardHeight?: number;
 
+  noUniqueId?: boolean;
+
   // callback when an item is selected
   onItemSelected?: (data: TimelineItemModel) => void;
 
@@ -191,6 +195,8 @@ export type TimelineProps = {
   title?: string;
 
   titleDateFormat?: string;
+
+  uniqueId?: string;
 
   // enables the read more button
   useReadMore?: boolean;
