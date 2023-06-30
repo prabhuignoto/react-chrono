@@ -336,7 +336,6 @@ To embed YouTube videos, use the right embed url.
 The `textOverlay` prop allows you to overlay text on top of a media element in a card.To enable the text overlay feature, simply add the text property to the items array in your Chrono timeline data. Here's an example:
 
 ```jsx
-Copy code
 import { Chrono } from 'react-chrono';
 
 const items = [
@@ -370,7 +369,6 @@ The user can click on the `expand` button to expand the text and see more detail
 The Timeline cards of the component can also support embedded custom content. To insert custom content, pass the blocked elements between the Chrono tags. For instance, the below code snippet will generate two timeline items, where each div element will be automatically converted into a timeline item and inserted into the timeline card. The items collection mentioned in the code is completely optional, and custom rendering is supported on all three modes.
 
 ```jsx
-Copy code
 <Chrono mode="VERTICAL">
   <div>
     <p>Lorem Ipsum. Lorem Ipsum. Lorem Ipsum</p>
@@ -384,7 +382,6 @@ Copy code
 > Note that the items collection will also work well with any custom content that is passed. In the following code snippet, the title and cardTitle are set for the custom contents.
 
 ```jsx
-Copy code
 const items = [
   { title: 'Timeline title 1', cardTitle: 'Card Title 1' },
   { title: 'Timeline title 2', cardTitle: 'Card Title 2' },
