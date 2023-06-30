@@ -116,10 +116,10 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         ref={contentRef}
         id={`timeline-card-${id}`}
         theme={theme}
-        active={active}
-        highlight={showAllCardsHorizontal}
+        $active={active}
+        $highlight={showAllCardsHorizontal}
         tabIndex={0}
-        cardWidth={cardWidth}
+        $cardWidth={cardWidth}
       >
         <TimelineCardContent
           content={cardSubtitle}
@@ -171,7 +171,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           theme={theme}
           aria-label={title}
           dimension={timelinePointDimension}
-          timelinePointShape={timelinePointShape}
+          $timelinePointShape={timelinePointShape}
         >
           {iconChild ? iconChild : null}
         </Shape>

@@ -11,19 +11,22 @@ import {
 
 type ContentT = Pick<
   TimelineProps,
-  'theme' | 'slideShow' | 'mode' | 'borderLessCards' | 'slideShowType'
+  'theme' | 'slideShow' | 'mode' | 'borderLessCards'
 >;
 
 export const TimelineItemContentWrapper = styled.section<
   {
-    active?: boolean;
-    branchDir?: string;
-    isNested?: boolean;
-    maxWidth?: number;
-    minHeight?: number;
-    noMedia?: boolean;
-    slideShowActive?: boolean;
-    textOverlay?: boolean;
+    $active?: boolean;
+    $borderLessCards?: TimelineProps['borderLessCards'];
+    $branchDir?: string;
+    $isNested?: boolean;
+    $maxWidth?: number;
+    $minHeight?: number;
+    $noMedia?: boolean;
+    $slideShow?: TimelineProps['slideShow'];
+    $slideShowActive?: boolean;
+    $slideShowType?: TimelineProps['slideShowType'];
+    $textOverlay?: boolean;
   } & ContentT
 >`
   align-items: flex-start;
@@ -39,43 +42,43 @@ export const TimelineItemContentWrapper = styled.section<
   justify-content: flex-start;
   line-height: 1.5em;
   margin: ${(p) => (p.mode === 'HORIZONTAL' ? '0 auto' : '')};
-  max-width: ${(p) => p.maxWidth}px;
-  min-height: ${(p) => p.minHeight}px;
+  max-width: ${(p) => p.$maxWidth}px;
+  min-height: ${(p) => p.$minHeight}px;
   position: relative;
   text-align: left;
   width: 98%;
   z-index: 0;
 
   ${(p) =>
-    p.isNested
+    p.$isNested
       ? css`
           background: ${p.theme.nestedCardBgColor};
           box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
         `
       : css``}
 
-  height: ${(p) => (p.textOverlay ? '0' : '')};
+  height: ${(p) => (p.$textOverlay ? '0' : '')};
 
   &:focus {
     outline: 1px solid ${(p) => p.theme?.primary};
   }
 
   ${(p) => {
-    if (p.slideShowActive && p.active) {
-      if (p.slideShowType === 'slide_in') {
+    if (p.$slideShowActive && p.$active) {
+      if (p.$slideShowType === 'slide_in') {
         return css`
           animation: ${slideInFromTop} 0.5s ease-in-out;
         `;
       } else if (
-        p.slideShowType === 'slide_from_sides' &&
-        p.branchDir === 'left'
+        p.$slideShowType === 'slide_from_sides' &&
+        p.$branchDir === 'left'
       ) {
         return css`
           animation: ${slideInFromLeft} 0.5s ease-in-out;
         `;
       } else if (
-        p.slideShowType === 'slide_from_sides' &&
-        p.branchDir === 'right'
+        p.$slideShowType === 'slide_from_sides' &&
+        p.$branchDir === 'right'
       ) {
         return css`
           animation: ${slideFromRight} 0.5s ease-in-out;
@@ -89,7 +92,7 @@ export const TimelineItemContentWrapper = styled.section<
   }}
 
   ${(p) => {
-    if (p.slideShowActive && p.active) {
+    if (p.$slideShowActive && p.$active) {
       return css`
         opacity: 1;
         animation-timing-function: ease-in-out;
@@ -97,7 +100,7 @@ export const TimelineItemContentWrapper = styled.section<
       `;
     }
 
-    if (p.slideShowActive && !p.active) {
+    if (p.$slideShowActive && !p.$active) {
       return css`
         opacity: 0;
       `;
@@ -111,33 +114,33 @@ export const TimelineCardHeader = styled.header`
 `;
 
 export const CardSubTitle = styled.h2<{
+  $fontSize?: string;
+  $padding?: boolean;
   dir?: string;
-  fontSize?: string;
-  padding?: boolean;
   theme?: Theme;
 }>`
   color: ${(p) => p.theme.cardSubtitleColor};
-  font-size: ${(p) => p.fontSize};
+  font-size: ${(p) => p.$fontSize};
   font-weight: 600;
   margin: 0;
   text-align: left;
   width: 97%;
-  padding: ${(p) => (p.padding ? '0.5rem 0 0.5rem 0.5rem;' : '')};
+  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem;' : '')};
 `;
 
 export const CardTitle = styled.h1<{
+  $fontSize: string;
+  $padding?: boolean;
   dir?: string;
-  fontSize: string;
-  padding?: boolean;
   theme: Theme;
 }>`
   color: ${(p) => p.theme.cardTitleColor};
-  font-size: ${(p) => p.fontSize};
+  font-size: ${(p) => p.$fontSize};
   font-weight: 600;
   margin: 0;
   text-align: left;
   width: 95%;
-  padding: ${(p) => (p.padding ? '0.25rem 0 0.25rem 0.5rem;' : '')} &.active {
+  padding: ${(p) => (p.$padding ? '0.25rem 0 0.25rem 0.5rem;' : '')} &.active {
     color: ${(p) => p.theme.primary};
   }
 `;
@@ -169,17 +172,17 @@ export const TimelineSubContent = styled.span<{
 `;
 
 export const TimelineContentDetailsWrapper = styled.div<{
-  borderLess?: boolean;
+  $borderLess?: boolean;
+  $cardHeight?: number | null;
+  $contentHeight?: number;
+  $customContent?: boolean;
+  $gradientColor?: string | null;
+  $showMore?: boolean;
+  $textOverlay?: boolean;
+  $useReadMore?: boolean;
   branchDir?: string;
-  cardHeight?: number | null;
-  contentHeight?: number;
-  customContent?: boolean;
-  gradientColor?: string | null;
   height?: number;
-  showMore?: boolean;
-  textOverlay?: boolean;
   theme?: Theme;
-  useReadMore?: boolean;
 }>`
   align-items: center;
   display: flex;
@@ -188,19 +191,19 @@ export const TimelineContentDetailsWrapper = styled.div<{
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   position: relative;
-  ${({ useReadMore, customContent, showMore, height = 0, textOverlay }) =>
-    useReadMore && !customContent && !showMore && !textOverlay
+  ${({ $useReadMore, $customContent, $showMore, height = 0, $textOverlay }) =>
+    $useReadMore && !$customContent && !$showMore && !$textOverlay
       ? `max-height: ${height}px;`
       : ''}
   ${({
-    cardHeight = 0,
-    contentHeight = 0,
+    $cardHeight = 0,
+    $contentHeight = 0,
     height = 0,
-    showMore,
-    textOverlay,
+    $showMore,
+    $textOverlay,
   }) =>
-    showMore && !textOverlay
-      ? `max-height: ${(cardHeight || 0) + (contentHeight || 0) - height}px;`
+    $showMore && !$textOverlay
+      ? `max-height: ${($cardHeight || 0) + ($contentHeight || 0) - height}px;`
       : ''}
   overflow-x: hidden;
   overflow-y: auto;
@@ -208,30 +211,29 @@ export const TimelineContentDetailsWrapper = styled.div<{
   scrollbar-width: thin;
   transition: max-height 0.25s ease-in-out;
   width: ${(p) =>
-    p.borderLess ? 'calc(100% - 0.5rem)' : 'calc(95% - 0.5rem)'};
+    p.$borderLess ? 'calc(100% - 0.5rem)' : 'calc(95% - 0.5rem)'};
   padding: 0.25rem 0.25rem;
 
-  ${({
-    height = 0,
-    cardHeight = 0,
-    contentHeight = 0,
-    showMore,
-    useReadMore,
-  }) =>
-    showMore && useReadMore && cardHeight
-      ? css`
-          animation: ${keyframes`
+  $${({
+      height = 0,
+      $cardHeight = 0,
+      $contentHeight = 0,
+      $showMore,
+      $useReadMore,
+    }) =>
+      $showMore && $useReadMore && $cardHeight
+        ? css`
+            animation: ${keyframes`
             0% {
               max-height: ${height}px;
             }
             100% {
-             max-height: ${cardHeight + contentHeight - height}px;
+             max-height: ${$cardHeight + $contentHeight - height}px;
             }
           `} 0.25s ease-in-out;
-        `
-      : ''}
-
-  &::-webkit-scrollbar {
+          `
+        : ''}
+    &::-webkit-scrollbar {
     width: 0.3em;
   }
 
@@ -253,16 +255,16 @@ export const TimelineContentDetailsWrapper = styled.div<{
     overflow: hidden;
   }
 
-  --rc-gradient-color: ${(p) => p.gradientColor};
+  --rc-gradient-color: ${(p) => p.$gradientColor};
   ${linearGradient}
 `;
 
-export const ShowMore = styled.span<{ show?: boolean; theme?: Theme }>`
+export const ShowMore = styled.span<{ show?: 'true' | 'false'; theme?: Theme }>`
   align-items: center;
   align-self: flex-end;
   border-radius: 4px;
   cursor: pointer;
-  display: ${(p) => (p.show ? 'flex' : 'none')};
+  display: ${(p) => (p.show === 'true' ? 'flex' : 'none')};
   font-size: 0.75rem;
   justify-self: flex-end;
   margin-bottom: 0.5em;
@@ -287,11 +289,11 @@ const slideAnimation = (start?: number, end?: number) => keyframes`
 `;
 
 export const SlideShowProgressBar = styled.span<{
-  color?: string;
-  duration?: number;
-  paused?: boolean;
-  resuming?: boolean;
-  startWidth?: number;
+  $color?: string;
+  $duration?: number;
+  $paused?: boolean;
+  $resuming?: boolean;
+  $startWidth?: number;
 }>`
   background: ${(p) => p.color};
   bottom: -0.75em;
@@ -303,7 +305,7 @@ export const SlideShowProgressBar = styled.span<{
   border-radius: 2px;
 
   ${(p) => {
-    if (p.paused) {
+    if (p.$paused) {
       return css`
         left: 50%;
         transform: translateX(-50%);
@@ -312,15 +314,15 @@ export const SlideShowProgressBar = styled.span<{
   }}
 
   ${(p) => {
-    if (!p.paused && p.startWidth && p.startWidth > 0) {
+    if (!p.$paused && p.$startWidth && p.$startWidth > 0) {
       return css`
-        animation: ${slideAnimation(p.startWidth, 0)} ${p.duration}ms ease-in;
+        animation: ${slideAnimation(p.$startWidth, 0)} ${p.$duration}ms ease-in;
         animation-play-state: running;
       `;
     } else {
       return css`
         animation-play-state: paused;
-        width: ${p.startWidth}px;
+        width: ${p.$startWidth}px;
       `;
     }
   }}
@@ -333,7 +335,7 @@ export const SlideShowProgressBar = styled.span<{
   }
 `;
 
-export const ChevronIconWrapper = styled.span<{ collapsed?: boolean }>`
+export const ChevronIconWrapper = styled.span<{ collapsed?: 'true' | 'false' }>`
   align-items: center;
   display: flex;
   height: 1.25em;
@@ -342,7 +344,7 @@ export const ChevronIconWrapper = styled.span<{ collapsed?: boolean }>`
   margin-top: 0.2em;
   width: 1.25em;
   ${(p) =>
-    p.collapsed
+    p.collapsed === 'false'
       ? `
       transform: rotate(90deg);
   `

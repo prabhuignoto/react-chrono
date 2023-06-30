@@ -22,9 +22,9 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
     <TitleWrapper
       className={titleClass}
       theme={theme}
-      hide={!title}
+      $hide={!title}
       align={align}
-      fontSize={fontSizes?.title}
+      $fontSize={fontSizes?.title}
     >
       {title}
     </TitleWrapper>
