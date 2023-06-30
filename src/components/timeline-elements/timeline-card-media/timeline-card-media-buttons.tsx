@@ -24,7 +24,7 @@ const Button = css`
 `;
 
 export const ExpandButton = styled.button<{
-  expandFull?: boolean;
+  // expandFull?: boolean;
   theme: Theme;
 }>`
   ${Button}

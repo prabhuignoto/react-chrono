@@ -20,28 +20,28 @@ export const linearGradient = css`
 `;
 
 export const MediaWrapper = styled.div<{
-  active?: boolean;
+  $active?: boolean;
+  $cardHeight?: number;
+  $slideShowActive?: boolean;
+  $textOverlay?: boolean;
   align?: 'left' | 'right' | 'center';
-  cardHeight?: number;
   dir?: string;
   mode?: TimelineMode;
-  slideShowActive?: boolean;
-  textOverlay?: boolean;
   theme?: Theme;
 }>`
   align-items: flex-start;
   align-self: center;
-  background: ${(p) => (!p.textOverlay ? p.theme?.cardMediaBgColor : 'none')};
+  background: ${(p) => (!p.$textOverlay ? p.theme?.cardMediaBgColor : 'none')};
   border-radius: 4px;
   flex-direction: row;
-  height: ${(p) => (p.textOverlay ? 'calc(100% - 1em)' : '0')};
+  height: ${(p) => (p.$textOverlay ? 'calc(100% - 1em)' : '0')};
   padding: 0.5em;
-  pointer-events: ${(p) => (!p.active && p.slideShowActive ? 'none' : '')};
+  pointer-events: ${(p) => (!p.$active && p.$slideShowActive ? 'none' : '')};
   position: relative;
   text-align: ${(p) => p.align};
   width: calc(100% - 1em);
 
-  ${(p) => (p.cardHeight ? `min-height: ${p.cardHeight}px;` : '')};
+  ${(p) => (p.$cardHeight ? `min-height: ${p.$cardHeight}px;` : '')};
   ${(p) => {
     if (p.mode === 'HORIZONTAL') {
       return `
@@ -62,12 +62,11 @@ export const MediaWrapper = styled.div<{
 `;
 
 export const CardImage = styled.img<{
-  active?: boolean;
+  $enableBorderRadius?: boolean;
+  $visible?: boolean;
   dir?: string;
-  enableBorderRadius?: boolean;
   fit?: string;
   mode?: TimelineMode;
-  visible?: boolean;
 }>`
   flex: 4;
   justify-self: center;
@@ -77,8 +76,8 @@ export const CardImage = styled.img<{
   width: 100%;
   object-fit: ${(p) => p.fit || 'cover'};
   object-position: center;
-  visibility: ${(p) => (p.visible ? 'visible' : 'hidden')};
-  border-radius: ${(p) => (p.enableBorderRadius ? '6px' : '0')};
+  visibility: ${(p) => (p.$visible ? 'visible' : 'hidden')};
+  border-radius: ${(p) => (p.$enableBorderRadius ? '6px' : '0')};
 `;
 
 export const CardVideo = styled.video<{ height?: number }>`
@@ -89,14 +88,14 @@ export const CardVideo = styled.video<{ height?: number }>`
 `;
 
 export const MediaDetailsWrapper = styled.div<{
-  absolutePosition?: boolean;
-  borderLessCard?: boolean;
-  expandFull?: boolean;
-  expandable?: boolean;
-  gradientColor?: string | null;
+  $absolutePosition?: boolean;
+  $borderLessCard?: boolean;
+  $expandFull?: boolean;
+  $expandable?: boolean;
+  $gradientColor?: string | null;
+  $showText?: boolean;
+  $textInMedia?: boolean;
   mode?: TimelineMode;
-  showText?: boolean;
-  textInMedia?: boolean;
   theme?: Theme;
 }>`
   bottom: 0;
@@ -116,7 +115,7 @@ export const MediaDetailsWrapper = styled.div<{
   flex: 1;
   overflow: hidden;
   ${(p) => {
-    if (p.textInMedia && p.expandFull) {
+    if (p.$textInMedia && p.$expandFull) {
       return css`
         height: 100%;
         width: 100%;
@@ -124,7 +123,7 @@ export const MediaDetailsWrapper = styled.div<{
       `;
     }
 
-    if (!p.showText) {
+    if (!p.$showText) {
       return css`
         height: 15%;
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
@@ -132,7 +131,7 @@ export const MediaDetailsWrapper = styled.div<{
       `;
     }
 
-    if (p.textInMedia && p.expandable) {
+    if (p.$textInMedia && p.$expandable) {
       return css`
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
         border-radius: 10px;
@@ -140,29 +139,29 @@ export const MediaDetailsWrapper = styled.div<{
       `;
     }
   }}
-  position: ${(p) => (p.absolutePosition ? 'absolute' : 'relative')};
+  position: ${(p) => (p.$absolutePosition ? 'absolute' : 'relative')};
   ${(p) =>
-    p.absolutePosition
+    p.$absolutePosition
       ? `
     left: 50%;
-    bottom: ${p.expandFull ? '0%' : ' 5%'};
+    bottom: ${p.$expandFull ? '0%' : ' 5%'};
     transform: translateX(-50%);
     background: ${
-      p.showText ? p.theme?.cardDetailsBackGround : p.theme?.cardBgColor
+      p.$showText ? p.theme?.cardDetailsBackGround : p.theme?.cardBgColor
     };
     // backdrop-filter: blur(1px);
     padding: 0.25rem;
-    ${p.showText ? `overflow: auto;` : `overflow: hidden;`}
+    ${p.$showText ? `overflow: auto;` : `overflow: hidden;`}
     transition: height 0.25s ease-out, width 0.25s ease-out, bottom 0.25s ease-out, background 0.25s ease-out;
   `
       : ``}
 
-  ${({ borderLessCard }) =>
-    borderLessCard
+  ${({ $borderLessCard }) =>
+    $borderLessCard
       ? `border-radius: 6px; box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);`
       : ``}
-  --rc-gradient-color: ${(p) => p.gradientColor};
-  ${(p) => (p.gradientColor ? linearGradient : null)}
+  --rc-gradient-color: ${(p) => p.$gradientColor};
+  ${(p) => (p.$gradientColor ? linearGradient : null)}
 `;
 
 export const ErrorMessage = styled.span`
@@ -181,10 +180,9 @@ export const IFrameVideo = styled.iframe`
 `;
 
 export const DetailsTextWrapper = styled.div<{
+  $expandFull?: boolean;
+  $show?: boolean;
   background: string;
-  expandFull?: boolean;
-  gradientColor?: string;
-  show?: boolean;
   theme?: Theme;
 }>`
   align-self: center;
@@ -203,7 +201,7 @@ export const DetailsTextWrapper = styled.div<{
   ${ScrollBar}
 
   ${(p) => {
-    if (p.expandFull) {
+    if (p.$expandFull) {
       return `
         overflow: auto;
       `;
@@ -215,14 +213,14 @@ export const DetailsTextWrapper = styled.div<{
   }}
 
   ${(p) =>
-    p.show
+    p.$show
       ? `
     height: 100%;`
       : `
     height: 0;
   `}
 
-  ${(p) => !p.expandFull && linearGradient}
+  ${(p) => !p.$expandFull && linearGradient}
 `;
 
 export const CardMediaHeader = styled.div`

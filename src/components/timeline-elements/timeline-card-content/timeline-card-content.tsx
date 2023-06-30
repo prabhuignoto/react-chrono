@@ -368,17 +368,17 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             <TimelineContentDetailsWrapper
               aria-expanded={showMore}
               className={contentDetailsClass}
-              customContent={!!customContent}
+              $customContent={!!customContent}
               ref={detailsRef}
               theme={theme}
-              useReadMore={useReadMore}
-              borderLess={borderLessCards}
-              showMore={showMore}
-              cardHeight={!textOverlay ? cardActualHeight : null}
-              contentHeight={detailsHeight}
+              $useReadMore={useReadMore}
+              $borderLess={borderLessCards}
+              $showMore={showMore}
+              $cardHeight={!textOverlay ? cardActualHeight : null}
+              $contentHeight={detailsHeight}
               height={contentDetailsHeight}
-              textOverlay={textOverlay}
-              gradientColor={gradientColor}
+              $textOverlay={textOverlay}
+              $gradientColor={gradientColor}
             >
               {customContent ? customContent : getTextOrContent}
             </TimelineContentDetailsWrapper>
@@ -417,21 +417,21 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       return (
         <TimelineItemContentWrapper
           className={contentClass}
-          minHeight={cardMinHeight}
-          maxWidth={cardWidth}
+          $minHeight={cardMinHeight}
+          $maxWidth={cardWidth}
           mode={mode}
-          noMedia={!media}
+          $noMedia={!media}
           {...handlers}
           ref={onContainerRef}
           tabIndex={!isNested ? 0 : -1}
           theme={theme}
-          borderLessCards={borderLessCards}
-          textOverlay={textOverlay}
-          active={hasBeenActivated}
-          slideShowType={slideShowType}
-          slideShowActive={slideShowActive}
-          branchDir={branchDir}
-          isNested={isNested}
+          $borderLessCards={borderLessCards}
+          $textOverlay={textOverlay}
+          $active={hasBeenActivated}
+          $slideShowType={slideShowType}
+          $slideShowActive={slideShowActive}
+          $branchDir={branchDir}
+          $isNested={isNested}
         >
           {title && !textOverlay ? (
             <ContentHeader

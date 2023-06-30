@@ -22,10 +22,10 @@ const animateVisible = keyframes`
 `;
 
 export const VerticalItemWrapper = styled.div<{
-  alternateCards?: boolean;
-  cardHeight?: number;
-  cardLess?: boolean;
-  isNested?: boolean;
+  $alternateCards?: boolean;
+  $cardHeight?: number;
+  $cardLess?: boolean;
+  $isNested?: boolean;
   theme?: Theme;
 }>`
   display: flex;
@@ -48,7 +48,7 @@ export const VerticalItemWrapper = styled.div<{
   }
 
   ${(p) =>
-    p.isNested
+    p.$isNested
       ? css`
           position: relative;
 
@@ -67,27 +67,27 @@ export const VerticalItemWrapper = styled.div<{
 `;
 
 export const TimelineCardContentWrapper = styled.div<{
-  alternateCards?: boolean;
-  cardLess?: boolean;
-  flip?: boolean;
+  $alternateCards?: boolean;
+  $cardLess?: boolean;
+  $flip?: boolean;
+  $noTitle?: boolean;
   height?: number;
-  noTitle?: boolean;
 }>`
   visibility: hidden;
   position: relative;
   display: flex;
   align-items: center;
   ${(p) => {
-    if (p.alternateCards) {
+    if (p.$alternateCards) {
       return `width: 50%;`;
-    } else if (p.noTitle) {
+    } else if (p.$noTitle) {
       return `width: 95%;`;
     } else {
       return `width: 75%;`;
     }
   }}
   ${(p) => {
-    if (!p.flip) {
+    if (!p.$flip) {
       return `
         &.left {
           order: 1;
@@ -117,23 +117,23 @@ export const TimelineCardContentWrapper = styled.div<{
 `;
 
 export const TimelineTitleWrapper = styled.div<{
-  alternateCards?: boolean;
-  flip?: boolean;
-  hide?: boolean;
+  $alternateCards?: boolean;
+  $flip?: boolean;
+  $hide?: boolean;
   mode?: TimelineMode;
 }>`
   align-items: center;
-  display: ${(p) => (p.hide && p.mode === 'VERTICAL' ? 'none' : 'flex')};
-  ${(p) => (p.alternateCards ? 'width: 50%' : 'width: 15%')};
+  display: ${(p) => (p.$hide && p.mode === 'VERTICAL' ? 'none' : 'flex')};
+  ${(p) => (p.$alternateCards ? 'width: 50%' : 'width: 15%')};
 
   &.left {
-    justify-content: ${(p) => (p.flip ? 'flex-end' : 'flex-start')};
-    order: ${(p) => (p.flip && p.mode === 'VERTICAL_ALTERNATING' ? '1' : '3')};
+    justify-content: ${(p) => (p.$flip ? 'flex-end' : 'flex-start')};
+    order: ${(p) => (p.$flip && p.mode === 'VERTICAL_ALTERNATING' ? '1' : '3')};
   }
 
   &.right {
     ${(p) =>
-      p.flip
+      p.$flip
         ? `
       order: 3;
       justify-content: flex-start;`

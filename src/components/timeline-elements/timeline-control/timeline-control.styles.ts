@@ -10,12 +10,12 @@ export const TimelineNavWrapper = styled.ul<{ theme?: Theme }>`
   padding: 0.25em 0.25em;
 `;
 
-export const TimelineNavItem = styled.li<{ disable?: boolean }>`
+export const TimelineNavItem = styled.li<{ $disable?: boolean }>`
   padding: 0.1em;
   display: flex;
   align-items: center;
   justify-content: center;
-  ${(p) => (p.disable ? 'pointer-events: none; filter: opacity(0.7)' : '')};
+  ${(p) => (p.$disable ? 'pointer-events: none; filter: opacity(0.7)' : '')};
 `;
 
 export const TimelineNavButton = styled.button<{
@@ -55,15 +55,10 @@ export const TimelineNavButton = styled.button<{
   }
 `;
 
-export const TimelineControlContainer = styled.div<{
-  flip?: boolean;
-  slideShowActive?: boolean;
-}>`
+export const TimelineControlContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  // direction: ${(p) => (p.flip ? 'rtl' : 'ltr')};
-  // visibility: ${(p) => (p.slideShowActive ? 'hidden' : 'visible')};
 `;
 
 export const ControlButton = styled.button<{ theme?: Theme }>`

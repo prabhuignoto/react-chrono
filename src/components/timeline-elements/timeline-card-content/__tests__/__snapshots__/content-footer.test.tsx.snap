@@ -3,14 +3,12 @@
 exports[`ContentFooter > should match snapshot 1`] = `
 <div>
   <span
-    class="sc-kbUMEY gsCUxU"
+    class="sc-hNbhPl jLHxYQ"
     color="#0f52ba"
-    duration="0"
     role="progressbar"
-    startwidth="300"
   />
   <span
-    class="sc-cpKBeH BiOvH"
+    class="sc-bBZcRO emKdNx"
     dir="up"
     offset="-8"
   />

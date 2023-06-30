@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { ScrollBar } from '../common/styles';
 
 export const Wrapper = styled.div<{
+  $hideControls?: boolean;
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
-  hideControls?: boolean;
 }>`
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@ export const Wrapper = styled.div<{
   width: 100%;
 
   ${(p) =>
-    p.cardPositionHorizontal === 'TOP' && !p.hideControls
+    p.cardPositionHorizontal === 'TOP' && !p.$hideControls
       ? `
     & > div:nth-of-type(1) {
       order: 2;
@@ -37,7 +37,7 @@ export const Wrapper = styled.div<{
       : ''};
 
   ${(p) =>
-    p.cardPositionHorizontal === 'TOP' && p.hideControls
+    p.cardPositionHorizontal === 'TOP' && p.$hideControls
       ? `
     & > div:nth-of-type(1) {
       order: 2;
@@ -62,8 +62,8 @@ export const Wrapper = styled.div<{
 `;
 
 export const TimelineMainWrapper = styled.div<{
+  $scrollable?: boolean | { scrollbar: boolean };
   mode?: TimelineMode;
-  scrollable?: boolean | { scrollbar: boolean };
   theme?: Theme;
 }>`
   align-items: flex-start;
@@ -82,7 +82,7 @@ export const TimelineMainWrapper = styled.div<{
     min-height: 150px;
   }
 
-  padding: ${({ scrollable }) => (!scrollable ? '0 1rem 0' : '')};
+  padding: ${({ $scrollable }) => (!$scrollable ? '0 1rem 0' : '')};
 `;
 
 export const TimelineMain = styled.div`
@@ -139,12 +139,12 @@ export const TimelineControlContainer = styled.div<{
   }
 `;
 
-export const TimelineContentRender = styled.div<{ showAllCards?: boolean }>`
+export const TimelineContentRender = styled.div<{ $showAllCards?: boolean }>`
   margin-left: auto;
   margin-right: auto;
   width: 98%;
   display: flex;
   align-items: flex-start;
-  justify-content: ${(p) => (p.showAllCards ? 'flex-start' : 'center')};
+  justify-content: ${(p) => (p.$showAllCards ? 'flex-start' : 'center')};
   overflow-x: hidden;
 `;

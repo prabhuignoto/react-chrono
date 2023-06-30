@@ -59,18 +59,18 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
         <ShowMore
           className="show-more"
           onPointerDown={handleClick}
-          onKeyPress={(event) => {
+          onKeyUp={(event) => {
             if (event.key === 'Enter') {
               onExpand();
             }
           }}
           role="button"
-          show={canShow}
+          show={canShow ? 'true' : 'false'}
           theme={theme}
           tabIndex={0}
         >
           {<span>{showMore ? 'read less' : 'read more'}</span>}
-          <ChevronIconWrapper collapsed={!showMore}>
+          <ChevronIconWrapper collapsed={showMore ? 'true' : 'false'}>
             <ChevronIcon />
           </ChevronIconWrapper>
         </ShowMore>
@@ -79,12 +79,12 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
       {showProgressBar && (
         <SlideShowProgressBar
           color={theme?.primary}
-          duration={remainInterval}
-          paused={paused}
+          $duration={remainInterval}
+          $paused={paused}
           ref={progressRef}
-          startWidth={startWidth}
+          $startWidth={startWidth}
           role="progressbar"
-          resuming={isResuming}
+          $resuming={isResuming}
         ></SlideShowProgressBar>
       )}
 

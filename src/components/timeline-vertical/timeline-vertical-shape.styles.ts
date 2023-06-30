@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 
 export const TimelinePointWrapper = styled.div<{
-  alternateCards?: boolean;
+  $cardLess?: boolean;
   bg?: string;
-  cardLess?: boolean;
   width?: number;
 }>`
   align-items: center;
   display: flex;
   justify-content: center;
   position: relative;
-  width: ${(p) => (p.cardLess ? '5%' : '10%')};
+  width: ${(p) => (p.$cardLess ? '5%' : '10%')};
 
   &.left {
     order: 2;
