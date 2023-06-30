@@ -69,7 +69,7 @@ export default {
           {
             fileName: false,
             pure: true,
-            ssr: false,
+            ssr: true,
           },
         ],
       ],

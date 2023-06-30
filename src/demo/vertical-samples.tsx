@@ -122,11 +122,10 @@ export const VerticalBasic: FunctionComponent<{
         items={items}
         mode="VERTICAL"
         slideShow
-        cardWidth={650}
+        cardWidth={550}
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
-        noUniqueId
-        uniqueID="vertical_basic_test"
+        // noUniqueId
         // textOverlay
         // borderLessCards
         // theme={{
@@ -138,7 +137,7 @@ export const VerticalBasic: FunctionComponent<{
         onItemSelected={(selected) => console.log(selected.cardTitle)}
         enableOutline
         fontSizes={{
-          title: '1.5rem',
+          title: '1rem',
         }}
         theme={{
           cardDetailsColor: '#555555',

@@ -52,8 +52,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     nestedCardHeight,
     isChild = false,
     onPaused,
-    uniqueId,
-    noUniqueId,
   } = props;
 
   const {
@@ -70,6 +68,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     toggleDarkMode,
     verticalBreakPoint = 768,
     enableBreakPoint,
+    uniqueId,
+    noUniqueId,
   } = useContext(GlobalContext);
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
