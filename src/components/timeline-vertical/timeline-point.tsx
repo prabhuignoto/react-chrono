@@ -16,7 +16,6 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
       onClick,
       active,
       onActive,
-      alternateCards,
       slideShowRunning,
       iconChild,
       timelinePointDimension,

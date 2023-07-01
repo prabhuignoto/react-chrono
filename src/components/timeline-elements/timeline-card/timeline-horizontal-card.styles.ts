@@ -1,5 +1,4 @@
 import { Theme } from '@models/Theme';
-import { TimelineProps } from '@models/TimelineModel';
 import styled, { keyframes } from 'styled-components';
 
 export const Wrapper = styled.div`
