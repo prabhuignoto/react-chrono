@@ -46,7 +46,7 @@ jobs:
             ${{ runner.os }}-build-
 
       - name: Build
-        run: pnpm rollup
+        run: pnpm build:lib
 
       - name: Unit Tests
         run: pnpm test

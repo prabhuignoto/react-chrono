@@ -38,7 +38,8 @@
     "coveralls": "npx coveralls < coverage/lcov.info",
     "build:esm": "npx webpack --config webpack.config-esm.mjs --env=esm",
     "build:cjs": "npx webpack --config webpack.config.mjs --env=cjs",
-    "build:lib": "npx rimraf ./dist && npx concurrently \"pnpm build:esm\" \"pnpm build:cjs\" --names esm,cjs --prefix-colors cyan,magenta --kill-others --success first --group"
+    "build:types": "tsc --emitDeclarationOnly --declaration --outDir dist",
+    "build:lib": "npx rimraf ./dist && npx concurrently \"pnpm build:esm\" \"pnpm build:cjs\" \"pnpm build:types\" --names esm,cjs --prefix-colors cyan,magenta,blue --kill-others --success first --group"
   },
   "dependencies": {
     "classnames": "^2.3.2",
