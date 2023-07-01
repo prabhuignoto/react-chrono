@@ -3,39 +3,38 @@
 exports[`Timeline vertical item > Should match snapshot 1`] = `
 <div>
   <div
-    class="sc-iJUBwy HyQoP  vertical-item-row"
+    class="sc-ePzlA-D eHgiJA  vertical-item-row"
     data-testid="vertical-item-row"
     role="listitem"
   >
     <div
-      class="sc-cuTEes fkoQZu"
+      class="sc-hjLWnZ fqZAcr"
       mode="VERTICAL_ALTERNATING"
     >
       <div
-        align="right"
-        class="sc-eSiaNt kCRFkM timeline-item-title title"
+        class="sc-kPTPQs gdToCb timeline-item-title title"
       >
         vertical item title
       </div>
     </div>
     <div
-      class="sc-jamjDV gIFiod card-content-wrapper "
+      class="sc-gjJAnY kuZPyM card-content-wrapper "
     >
       <section
-        class="sc-iaHSXm ffLhzv timeline-card-content  card"
+        class="sc-eSdRwT hNUPBF timeline-card-content  card"
         mode="VERTICAL_ALTERNATING"
         tabindex="0"
       >
         <div
-          class="sc-bmJOMO cBxkPG card-media-wrapper card-media"
+          class="sc-brSOsn gdRbVF card-media-wrapper card-media"
           mode="VERTICAL_ALTERNATING"
         >
           <div
-            class="sc-vBRaX JPOYV"
+            class="sc-dSbvwS kjqEOk"
             height="200"
           >
             <img
-              class="sc-eITcpv cytvkr"
+              class="sc-iCnXOK eeNSgw"
               loading="lazy"
               mode="VERTICAL_ALTERNATING"
               role="img"
@@ -45,30 +44,28 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
         </div>
         <div
           aria-expanded="false"
-          class="sc-kDvpvU jlCuo show-less card-description card-text"
+          class="sc-OKtSx dRLOeI show-less card-description card-text"
         />
         <span
-          class="sc-kARNNk ebGbra"
+          class="sc-hpGEOZ iJoDZn"
           dir=""
           offset="-8"
         />
       </section>
     </div>
     <div
-      bg="#0f52ba"
-      class="sc-hteNTw dOaUwx"
+      class="sc-ckPVkh kfA-DOt"
       data-testid="tree-leaf"
       role="button"
     >
       <div
         aria-label="select timeline"
-        class="sc-cRYwZ dQleMy  timeline-vertical-circle"
+        class="sc-gAigJI gUmmEJ  timeline-vertical-circle"
         data-testid="tree-leaf-click"
         role="button"
       >
         <div
-          class="sc-jxpjfq jtnhdI"
-          dimension="16"
+          class="sc-kuWgmH eqmaQc"
         />
       </div>
     </div>
