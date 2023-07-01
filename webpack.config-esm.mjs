@@ -25,6 +25,9 @@ const distPath = path.resolve(__dirname, 'dist');
 
 export default {
   entry: './src/react-chrono.ts',
+  experiments: {
+    outputModule: true,
+  },
   externals: {
     react: 'react',
     'react-dom': 'react-dom',
@@ -47,15 +50,25 @@ export default {
                   { displayName: false, fileName: false, ssr: true },
                 ],
               ],
+              presets: [
+                // '@babel/preset-env',
+                ['@babel/preset-react', { runtime: 'automatic' }],
+              ],
             },
           },
           {
-            loader: 'esbuild-loader',
+            loader: 'ts-loader',
             options: {
-              format: 'esm',
-              loader: 'tsx',
+              configFile: 'tsconfig.json',
             },
-          },
+          }
+          // {
+          //   loader: 'esbuild-loader',
+          //   options: {
+          //     format: 'esm',
+          //     loader: 'tsx',
+          //   },
+          // },
         ],
       },
       {
@@ -105,11 +118,13 @@ export default {
     ],
   },
   output: {
-    filename: `${pkg.name}.js`,
-    library: {
-      type: 'commonjs2',
+    environment: {
+      module: true,
     },
-    libraryTarget: 'commonjs2',
+    filename: `${pkg.name}.mjs`,
+    library: {
+      type: 'module',
+    },
     path: distPath,
   },
   performance: {

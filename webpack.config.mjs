@@ -25,9 +25,6 @@ const banner = `/*
 
 export default {
   entry: './src/react-chrono.ts',
-  experiments: {
-    outputModule: true,
-  },
   externals: {
     react: {
       amd: 'react',
@@ -62,14 +59,18 @@ export default {
                   { displayName: false, fileName: false, ssr: true },
                 ],
               ],
+              presets: [
+                '@babel/preset-env',
+                ['@babel/preset-react', { runtime: 'automatic' }],
+              ],
             },
           },
           {
             loader: 'esbuild-loader',
             options: {
-              format: 'esm',
+              format: 'cjs',
               loader: 'tsx',
-              target: 'esnext',
+              target: 'es6',
             },
           },
         ],
@@ -121,12 +122,9 @@ export default {
     ],
   },
   output: {
-    environment: {
-      module: true,
-    },
-    filename: `${pkg.name}.mjs`,
+    filename: `${pkg.name}.js`,
     library: {
-      type: 'module',
+      type: 'commonjs2',
     },
     path: distPath,
   },
