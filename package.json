@@ -34,8 +34,10 @@
     "clean": "npx concurrently \"pnpm format\" \"pnpm lint:all\"",
     "test": "vitest --config vitest.config.ts",
     "vite:build": "vite build --config vite.config.ts",
-    "coveralls": "pnpx coveralls < coverage/lcov.info",
-    "build:lib": "pnpx rimraf ./dist && "
+    "coveralls": "npx coveralls < coverage/lcov.info",
+    "build:esm": "npx webpack --config webpack.config.js --progress --env=esm",
+    "build:cjs": "npx webpack --config webpack.config.mjs --progress --env=cjs",
+    "build:lib": "npx rimraf ./dist && npx concurrently \"pnpm build:esm\" \"pnpm build:cjs\""
   },
   "dependencies": {
     "classnames": "^2.3.2",

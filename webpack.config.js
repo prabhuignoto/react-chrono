@@ -3,7 +3,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const pkg = require('./package.json');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const { webpack } = require('webpack');
+const webpack = require('webpack');
 
 const banner = `/*
  * ${pkg.name}
@@ -18,18 +18,8 @@ const distPath = path.resolve(__dirname, 'dist');
 module.exports = {
   entry: './src/react-chrono.ts',
   externals: {
-    react: {
-      amd: 'react',
-      commonjs: 'react',
-      commonjs2: 'react',
-      root: '_',
-    },
-    'react-dom': {
-      amd: 'react-dom',
-      commonjs: 'react-dom',
-      commonjs2: 'react-dom',
-      root: '_',
-    },
+    react: 'react',
+    'react-dom': 'react-dom',
   },
   mode: 'production',
   module: {
@@ -54,9 +44,9 @@ module.exports = {
           {
             loader: 'esbuild-loader',
             options: {
-              format: 'cjs',
+              format: 'esm',
               loader: 'tsx',
-              target: 'esnext',
+              tsconfigRaw: require('./tsconfig.cjs.json'),
             },
           },
         ],
@@ -112,6 +102,7 @@ module.exports = {
     library: {
       type: 'commonjs2',
     },
+    libraryTarget: 'commonjs2',
     path: distPath,
   },
   performance: {
