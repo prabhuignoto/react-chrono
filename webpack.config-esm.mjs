@@ -1,9 +1,12 @@
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const pkg = require('./package.json');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const webpack = require('webpack');
+import path from 'path';
+import CopyPlugin from 'copy-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
+import pkg from './package.json' assert { type: 'json' };
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import webpack from 'webpack';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import ora from 'ora';
 
 const banner = `/*
  * ${pkg.name}
@@ -13,9 +16,14 @@ const banner = `/*
  */
 `;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const spinner = ora('Loading unicorns').start();
+
 const distPath = path.resolve(__dirname, 'dist');
 
-module.exports = {
+export default {
   entry: './src/react-chrono.ts',
   externals: {
     react: 'react',
@@ -46,7 +54,6 @@ module.exports = {
             options: {
               format: 'esm',
               loader: 'tsx',
-              tsconfigRaw: require('./tsconfig.cjs.json'),
             },
           },
         ],
@@ -84,12 +91,12 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
+        extractComments: false,
         terserOptions: {
           compress: {
             drop_console: true,
             drop_debugger: true,
           },
-          // extractComments: false,
           format: {
             comments: false,
           },
@@ -116,6 +123,19 @@ module.exports = {
       banner,
       raw: true,
     }),
+    new webpack.ProgressPlugin({
+      activeModules: false,
+      entries: true,
+      handler: (percentage, message, ...args) => {
+        spinner.color = 'yellow';
+        spinner.text = `${Math.round(percentage)}% - ${message}...`;
+      },
+    }),
+    function () {
+      this.hooks.done.tap('BuildDoneCallback', () => {
+        spinner.succeed('Done!');
+      });
+    },
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],

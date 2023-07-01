@@ -6,9 +6,12 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import webpack from 'webpack';
+import ora from 'ora';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+const spinner = ora('Loading unicorns').start();
 
 const distPath = path.resolve(__dirname, 'dist');
 
@@ -104,12 +107,12 @@ export default {
     minimize: true,
     minimizer: [
       new TerserPlugin({
+        extractComments: false,
         terserOptions: {
           compress: {
             drop_console: true,
             drop_debugger: true,
           },
-          // extractComments: false,
           format: {
             comments: false,
           },
@@ -138,6 +141,19 @@ export default {
       banner,
       raw: false,
     }),
+    new webpack.ProgressPlugin({
+      activeModules: false,
+      entries: true,
+      handler: (percentage, message, ...args) => {
+        spinner.color = 'yellow';
+        spinner.text = `${Math.round(percentage)}% - ${message}...`;
+      },
+    }),
+    function () {
+      this.hooks.done.tap('BuildDoneCallback', () => {
+        spinner.succeed('Done!');
+      });
+    },
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],

@@ -3,6 +3,7 @@
   "version": "2.2.1",
   "license": "MIT",
   "description": "A Modern Timeline component for React",
+  "type": "module",
   "keywords": [
     "timeline",
     "react-timeline",
@@ -35,9 +36,9 @@
     "test": "vitest --config vitest.config.ts",
     "vite:build": "vite build --config vite.config.ts",
     "coveralls": "npx coveralls < coverage/lcov.info",
-    "build:esm": "npx webpack --config webpack.config.js --progress --env=esm",
-    "build:cjs": "npx webpack --config webpack.config.mjs --progress --env=cjs",
-    "build:lib": "npx rimraf ./dist && npx concurrently \"pnpm build:esm\" \"pnpm build:cjs\""
+    "build:esm": "npx webpack --config webpack.config-esm.mjs --env=esm",
+    "build:cjs": "npx webpack --config webpack.config.mjs --env=cjs",
+    "build:lib": "npx rimraf ./dist && npx concurrently \"pnpm build:esm\" \"pnpm build:cjs\" --names esm,cjs --prefix-colors cyan,magenta --kill-others --success first --group"
   },
   "dependencies": {
     "classnames": "^2.3.2",
@@ -106,6 +107,7 @@
     "jest": "^29.5.0",
     "jsdom": "^22.1.0",
     "lint-staged": "^13.2.3",
+    "ora": "^6.3.1",
     "postcss": "^8.4.24",
     "postcss-loader": "^7.3.3",
     "postcss-preset-env": "^8.5.1",
