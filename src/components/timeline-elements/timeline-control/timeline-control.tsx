@@ -83,15 +83,12 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   );
 
   return (
-    <TimelineControlContainer
-      slideShowActive={slideShowRunning}
-      flip={flippedHorizontally}
-    >
+    <TimelineControlContainer>
       <TimelineNavWrapper
         className={cls('timeline-controls', classNames?.controls)}
       >
         {/* jump to first */}
-        <TimelineNavItem disable={canDisableLeft}>
+        <TimelineNavItem $disable={canDisableLeft}>
           <TimelineNavButton
             mode={mode}
             theme={theme}
@@ -108,7 +105,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
         </TimelineNavItem>
 
         {/* previous */}
-        <TimelineNavItem disable={canDisableLeft}>
+        <TimelineNavItem $disable={canDisableLeft}>
           <TimelineNavButton
             mode={mode}
             theme={theme}
@@ -125,7 +122,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
         </TimelineNavItem>
 
         {/* next */}
-        <TimelineNavItem disable={canDisableRight}>
+        <TimelineNavItem $disable={canDisableRight}>
           <TimelineNavButton
             mode={mode}
             theme={theme}
@@ -142,7 +139,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
         </TimelineNavItem>
 
         {/* jump to last */}
-        <TimelineNavItem disable={canDisableRight}>
+        <TimelineNavItem $disable={canDisableRight}>
           <TimelineNavButton
             mode={mode}
             theme={theme}
@@ -176,7 +173,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
 
         {/* dark toggle button */}
         {enableDarkToggle ? (
-          <TimelineNavItem disable={slideShowRunning}>
+          <TimelineNavItem $disable={slideShowRunning}>
             <TimelineNavButton
               theme={theme}
               onClick={onToggleDarkMode}

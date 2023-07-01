@@ -37,9 +37,9 @@ const TitleMemo = ({
       theme={theme}
       style={{ color }}
       dir={dir}
-      fontSize={fontSize}
+      $fontSize={fontSize}
       data-class={classString}
-      padding={padding}
+      $padding={padding}
     >
       {url ? (
         <CardTitleAnchor href={url} target="_blank" rel="noreferrer">
@@ -61,9 +61,9 @@ const SubTitleMemo = React.memo<Content>(
         style={{ color }}
         dir={dir}
         theme={theme}
-        fontSize={fontSize}
+        $fontSize={fontSize}
         className={cls('card-sub-title', classString)}
-        padding={padding}
+        $padding={padding}
       >
         {content}
       </CardSubTitle>
@@ -151,9 +151,9 @@ const DetailsTextMemo = memo<DetailsTextMemoModel>(
       <DetailsTextWrapper
         ref={onTextRef}
         // height={expand ? height : 0}
-        expandFull={expand}
+        $expandFull={expand}
         theme={theme}
-        show={show}
+        $show={show}
         background={background}
       >
         {text}

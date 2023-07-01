@@ -1,5 +1,4 @@
 import { Theme } from '@models/Theme';
-import { TimelineProps } from '@models/TimelineModel';
 import styled, { keyframes } from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -37,16 +36,17 @@ export const ShapeWrapper = styled.div`
 `;
 
 type ShapeModel = {
+  $timelinePointShape?: 'circle' | 'square' | 'diamond';
   dimension?: number;
   theme?: Theme;
-} & Pick<TimelineProps, 'timelinePointShape'>;
+};
 
-const ShapeBorderStyle = (p: Pick<ShapeModel, 'timelinePointShape'>) => {
-  if (p.timelinePointShape === 'circle') {
+const ShapeBorderStyle = (p: Pick<ShapeModel, '$timelinePointShape'>) => {
+  if (p.$timelinePointShape === 'circle') {
     return 'border-radius: 50%;';
-  } else if (p.timelinePointShape === 'square') {
+  } else if (p.$timelinePointShape === 'square') {
     return 'border-radius: 2px;';
-  } else if (p.timelinePointShape === 'diamond') {
+  } else if (p.$timelinePointShape === 'diamond') {
     return `border-radius: 0;`;
   }
 };
@@ -57,7 +57,7 @@ export const Shape = styled.div<ShapeModel>`
   height: ${(p) => p.dimension}px;
   width: ${(p) => p.dimension}px;
   transform: ${(p) =>
-    p.timelinePointShape === 'diamond' ? 'rotate(45deg)' : ''};
+    p.$timelinePointShape === 'diamond' ? 'rotate(45deg)' : ''};
 
   &.active {
     &.using-icon {
@@ -65,7 +65,7 @@ export const Shape = styled.div<ShapeModel>`
     }
     &:not(.using-icon) {
       transform: ${(p) =>
-        p.timelinePointShape === 'diamond' ? 'rotate(45deg)' : ''};
+        p.$timelinePointShape === 'diamond' ? 'rotate(45deg)' : ''};
     }
 
     &::after {
@@ -124,9 +124,9 @@ export const TimelineTitleContainer = styled.div`
 `;
 
 export const TimelineContentContainer = styled.div<{
-  active?: boolean;
-  cardWidth?: number;
-  highlight?: boolean;
+  $active?: boolean;
+  $cardWidth?: number;
+  $highlight?: boolean;
   position?: string;
   theme?: Theme;
 }>`
@@ -134,12 +134,12 @@ export const TimelineContentContainer = styled.div<{
   animation: ${show} 0.25s ease-in;
 
   outline: 2px solid
-    ${(p) => (p.highlight && p.active ? p.theme?.primary : 'transparent')};
+    ${(p) => (p.$highlight && p.$active ? p.theme?.primary : 'transparent')};
 
   margin: 1rem;
 
   &.horizontal {
-    min-width: ${(p) => p.cardWidth}px;
+    min-width: ${(p) => p.$cardWidth}px;
   }
 
   &.vertical {

@@ -189,16 +189,15 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         mode={mode}
         onLoad={handleMediaLoaded}
         onError={handleError}
-        visible={mediaLoaded}
-        active={active}
+        $visible={mediaLoaded}
         alt={media.name}
         loading={'lazy'}
-        enableBorderRadius={borderLessCards}
+        $enableBorderRadius={borderLessCards}
         role="img"
         fit={mediaSettings?.imageFit}
       />
     );
-  }, [active, mediaLoaded, borderLessCards]);
+  }, [mediaLoaded, borderLessCards]);
 
   ErrorMessageMem.displayName = 'Error Message';
 
@@ -280,14 +279,14 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     return (
       <MediaDetailsWrapper
         mode={mode}
-        absolutePosition={textOverlay}
-        textInMedia={textOverlay}
+        $absolutePosition={textOverlay}
+        $textInMedia={textOverlay}
         ref={moreRef}
         theme={theme}
-        expandFull={expandDetails}
-        showText={showText}
-        expandable={canExpand}
-        gradientColor={canShowGradient ? gradientColor : null}
+        $expandFull={expandDetails}
+        $showText={showText}
+        $expandable={canExpand}
+        $gradientColor={canShowGradient ? gradientColor : null}
       >
         <CardMediaHeader>
           <TitleMemo
@@ -354,13 +353,13 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
     <>
       <MediaWrapper
         theme={theme}
-        active={active}
+        $active={active}
         mode={mode}
-        slideShowActive={slideshowActive}
+        $slideShowActive={slideshowActive}
         className={cls('card-media-wrapper', classNames?.cardMedia)}
-        cardHeight={getCardHeight}
+        $cardHeight={getCardHeight}
         align={mediaSettings?.align}
-        textOverlay={textOverlay}
+        $textOverlay={textOverlay}
       >
         {media.type === 'VIDEO' &&
           !isYouTube &&
@@ -380,12 +379,12 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         {canShowProgressBar ? (
           <SlideShowProgressBar
             color={theme?.primary}
-            duration={remainInterval}
-            paused={paused}
+            $duration={remainInterval}
+            $paused={paused}
             ref={progressRef}
-            startWidth={startWidth}
+            $startWidth={startWidth}
             role="progressbar"
-            resuming={resuming}
+            $resuming={resuming}
           ></SlideShowProgressBar>
         ) : null}
 

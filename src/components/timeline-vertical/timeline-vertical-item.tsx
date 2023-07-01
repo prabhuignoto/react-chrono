@@ -74,10 +74,10 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     return (
       <TimelineTitleWrapper
         className={className}
-        alternateCards={alternateCards}
+        $alternateCards={alternateCards}
         mode={mode}
-        hide={!title}
-        flip={flipLayout}
+        $hide={!title}
+        $flip={flipLayout}
       >
         <TimelineItemTitle
           title={title}
@@ -124,15 +124,15 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
 
   return (
     <VerticalItemWrapper
-      alternateCards={alternateCards}
-      cardHeight={isNested ? nestedCardHeight : cardHeight}
+      $alternateCards={alternateCards}
+      $cardHeight={isNested ? nestedCardHeight : cardHeight}
       className={verticalItemClass}
       data-testid="vertical-item-row"
       key={id}
       ref={contentRef}
-      cardLess={cardLess}
+      $cardLess={cardLess}
       role="listitem"
-      isNested={isNested}
+      $isNested={isNested}
       theme={theme}
     >
       {/* title */}
@@ -141,9 +141,9 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       {/* card section */}
       <TimelineCardContentWrapper
         className={contentClass}
-        alternateCards={alternateCards}
-        noTitle={!title}
-        flip={flipLayout}
+        $alternateCards={alternateCards}
+        $noTitle={!title}
+        $flip={flipLayout}
         height={textOverlay ? mediaHeight : cardHeight}
       >
         {!cardLess ? (

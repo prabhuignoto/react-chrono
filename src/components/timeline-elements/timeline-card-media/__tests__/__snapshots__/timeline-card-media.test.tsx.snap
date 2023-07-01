@@ -3,17 +3,16 @@
 exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
 <div>
   <div
-    cardheight="200"
-    class="sc-hfDuwB cqBMwB card-media-wrapper card-media"
+    class="sc-bgqQcB eKaMuE card-media-wrapper card-media"
     mode="VERTICAL_ALTERNATING"
   >
     <div
-      class="sc-laEPQd huiFpe"
+      class="sc-ispOId hMrjPH"
       height="200"
     >
       <img
         alt="Image"
-        class="sc-jCIOXC bNPzzH"
+        class="sc-gTRrQi fvRpJr"
         loading="lazy"
         mode="VERTICAL_ALTERNATING"
         role="img"
@@ -22,15 +21,14 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
     </div>
   </div>
   <div
-    class="sc-dBwcjI hpxZkh"
+    class="sc-fFGjHI kHvLaM"
     mode="VERTICAL_ALTERNATING"
   >
     <div
-      class="sc-dMnqAs boTVCq"
+      class="sc-kPTPQs iZPJSj"
     />
     <h2
-      class="sc-hdxXtv eQIKXg card-sub-title card-subtitle"
-      font-size="0.85rem"
+      class="sc-kuWgmH lnojIa card-sub-title card-subtitle"
     >
       This is another test
     </h2>
@@ -41,29 +39,27 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
 exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
 <div>
   <div
-    cardheight="200"
-    class="sc-hfDuwB cqBMwB card-media-wrapper card-media"
+    class="sc-bgqQcB eKaMuE card-media-wrapper card-media"
     mode="VERTICAL_ALTERNATING"
   >
     <iframe
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen=""
-      class="sc-bXxmBy lohIWo"
+      class="sc-iVCKna jrpgms"
       frameborder="0"
       src="https://www.youtube.com/watch?v=9bZkp7q19f0?enablejsapi=1"
       title="Video"
     />
   </div>
   <div
-    class="sc-dBwcjI hpxZkh"
+    class="sc-fFGjHI kHvLaM"
     mode="VERTICAL_ALTERNATING"
   >
     <div
-      class="sc-dMnqAs boTVCq"
+      class="sc-kPTPQs iZPJSj"
     />
     <h2
-      class="sc-hdxXtv eQIKXg card-sub-title card-subtitle"
-      font-size="0.85rem"
+      class="sc-kuWgmH lnojIa card-sub-title card-subtitle"
     >
       This is another test
     </h2>

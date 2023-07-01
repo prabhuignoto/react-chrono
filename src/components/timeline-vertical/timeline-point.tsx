@@ -16,7 +16,6 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
       onClick,
       active,
       onActive,
-      alternateCards,
       slideShowRunning,
       iconChild,
       timelinePointDimension,
@@ -76,12 +75,11 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
     return (
       <TimelinePointWrapper
         width={lineWidth}
-        alternateCards={alternateCards}
         bg={theme && theme.primary}
         className={className}
         data-testid="tree-leaf"
         role="button"
-        cardLess={cardLess}
+        $cardLess={cardLess}
       >
         <TimelinePointContainer
           className={`${className} timeline-vertical-circle`}
@@ -95,7 +93,7 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
             className={circleClass}
             theme={theme}
             dimension={timelinePointDimension}
-            timelinePointShape={timelinePointShape}
+            $timelinePointShape={timelinePointShape}
           >
             {iconChild ? iconChild : null}
           </Shape>

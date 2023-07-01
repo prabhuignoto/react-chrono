@@ -321,7 +321,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       onMouseDown={() => {
         setHasFocus(true);
       }}
-      hideControls={hideControls}
+      $hideControls={hideControls}
       onKeyUp={(evt) => {
         if (evt.key === 'Escape') {
           onPaused?.();
@@ -330,7 +330,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     >
       <TimelineMainWrapper
         ref={timelineMainRef}
-        scrollable={canScrollTimeline}
+        $scrollable={canScrollTimeline}
         className={`${mode.toLowerCase()} timeline-main-wrapper`}
         id="timeline-main-wrapper"
         theme={theme}
@@ -454,7 +454,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       {/* placeholder to render timeline content for horizontal mode */}
       <TimelineContentRender
         id={id.current}
-        showAllCards={showAllCardsHorizontal}
+        $showAllCards={showAllCardsHorizontal}
         ref={horizontalContentRef}
       />
     </Wrapper>
