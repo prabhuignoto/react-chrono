@@ -1,9 +1,16 @@
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const pkg = require('./package.json');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const { webpack } = require('webpack');
+import path from 'path';
+import CopyPlugin from 'copy-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
+import pkg from './package.json' assert { type: 'json' };
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import webpack from 'webpack';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const distPath = path.resolve(__dirname, 'dist');
 
 const banner = `/*
  * ${pkg.name}
@@ -13,21 +20,24 @@ const banner = `/*
  */
 `;
 
-const distPath = path.resolve(__dirname, 'dist');
-
-module.exports = {
+export default {
   entry: './src/react-chrono.ts',
+  experiments: {
+    outputModule: true,
+  },
   externals: {
     react: {
       amd: 'react',
       commonjs: 'react',
       commonjs2: 'react',
+      module: 'react',
       root: '_',
     },
     'react-dom': {
       amd: 'react-dom',
       commonjs: 'react-dom',
       commonjs2: 'react-dom',
+      module: 'react-dom',
       root: '_',
     },
   },
@@ -54,7 +64,7 @@ module.exports = {
           {
             loader: 'esbuild-loader',
             options: {
-              format: 'cjs',
+              format: 'esm',
               loader: 'tsx',
               target: 'esnext',
             },
@@ -108,9 +118,12 @@ module.exports = {
     ],
   },
   output: {
-    filename: `${pkg.name}.js`,
+    environment: {
+      module: true,
+    },
+    filename: `${pkg.name}.mjs`,
     library: {
-      type: 'commonjs2',
+      type: 'module',
     },
     path: distPath,
   },
@@ -123,7 +136,7 @@ module.exports = {
     }),
     new webpack.BannerPlugin({
       banner,
-      raw: true,
+      raw: false,
     }),
   ],
   resolve: {

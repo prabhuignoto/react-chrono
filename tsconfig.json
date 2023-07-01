@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2019",
+    "target": "esnext",
+    "module": "esnext",
     "lib": [
       "dom",
       "dom.iterable",
@@ -12,12 +13,11 @@
     "allowSyntheticDefaultImports": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "noEmit": true,
+    "noEmit": false,
     "rootDir": "src",
     "declaration": true,
     "declarationDir": "dist",
@@ -25,6 +25,7 @@
       "node",
       "@types/testing-library__jest-dom",
     ],
+    "baseUrl": ".",
     "paths": {
       "@utils/*": [
         "./src/utils/*"
@@ -49,4 +50,4 @@
   "files": [
     "src/react-chrono.ts"
   ]
-}
+} 
