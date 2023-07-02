@@ -10,7 +10,7 @@ import copy from 'rollup-plugin-copy';
 import del from 'rollup-plugin-delete';
 import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json' assert { type: 'json' };
 
@@ -68,8 +68,7 @@ export default {
           'babel-plugin-styled-components',
           {
             fileName: false,
-            pure: true,
-            ssr: false,
+            ssr: true,
           },
         ],
       ],

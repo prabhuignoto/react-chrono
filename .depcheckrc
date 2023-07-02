@@ -1,0 +1,28 @@
+{
+  "ignores": [
+    "eslint",
+    "babel-*",
+    "@rollup/*",
+    "react",
+    "react-dom",
+    "rollup-plugin-*"
+  ],
+  "skip-missing": true,
+  "ignore-bin-package": false,
+  "ignore-dirs": [
+    "dist",
+    "coverage"
+  ],
+  "ignore-path": ".eslintignore",
+  "parsers": {
+    "*.js": "es6",
+    "*.jsx": "jsx",
+    "*.ts": "typescript",
+    "*.tsx": "tsx"
+  },
+  "specials": [
+    "bin",
+    "eslint",
+    "mocha"
+  ]
+}
