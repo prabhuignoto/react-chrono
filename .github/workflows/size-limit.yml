@@ -1,4 +1,4 @@
-name: "size"
+name: 'size'
 on:
   pull_request:
     branches:
@@ -9,7 +9,20 @@ jobs:
     env:
       CI_JOB_NUMBER: 1
     steps:
-      - uses: actions/checkout@v1
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.1.0
+
+      - uses: actions/checkout@v2
+
+      - name: Cache PNPM dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
       - uses: andresz1/size-limit-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
