@@ -51,7 +51,7 @@ const NewDemo: React.FunctionComponent = () => {
         cardBgColor: '#f5f5f5',
         primary: '#000',
         secondary: '#FFA500',
-        titleColorActive: '#000',
+        titleColorActive: '#444',
       });
     }
   }, [state]);
