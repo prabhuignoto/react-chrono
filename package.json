@@ -34,7 +34,8 @@
     "test": "vitest --config vitest.config.ts",
     "vite:build": "vite build --config vite.config.ts",
     "coveralls": "pnpx coveralls < coverage/lcov.info",
-    "size": "npm run rollup && npm run size-limit"
+    "size": "npm run rollup && npm run size-limit",
+    "build": "pnpm rollup"
   },
   "dependencies": {
     "classnames": "^2.3.2",

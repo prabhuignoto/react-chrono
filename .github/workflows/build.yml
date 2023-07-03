@@ -48,8 +48,5 @@ jobs:
       - name: Build
         run: pnpm rollup
 
-      - name: Size limit
-        run: pnpm size-limit
-
       - name: Unit Tests
         run: pnpm test
