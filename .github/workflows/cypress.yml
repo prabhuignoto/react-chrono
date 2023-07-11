@@ -44,7 +44,7 @@ jobs:
             ${{ runner.os }}-cypress-
 
       - name: Chrome
-        uses: cypress-io/github-action@v5.6.1
+        uses: cypress-io/github-action@v5.8.3
         with:
           install: false
           start: pnpm dev
@@ -53,7 +53,7 @@ jobs:
           browser: chrome
 
       - name: Edge
-        uses: cypress-io/github-action@v5.6.1
+        uses: cypress-io/github-action@v5.8.3
         with:
           install: false
           start: pnpm dev
@@ -62,7 +62,7 @@ jobs:
           browser: edge
 
       - name: Firefox
-        uses: cypress-io/github-action@v5.6.1
+        uses: cypress-io/github-action@v5.8.3
         with:
           install: false
           start: pnpm dev
