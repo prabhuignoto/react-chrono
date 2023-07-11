@@ -3,7 +3,7 @@
 exports[`Timeline item title > should match the snapshot 1`] = `
 <div>
   <div
-    class="sc-bgqQcB bXNlBD timeline-item-title"
+    class="sc-bdvumH jcfNam timeline-item-title"
   >
     title
   </div>
