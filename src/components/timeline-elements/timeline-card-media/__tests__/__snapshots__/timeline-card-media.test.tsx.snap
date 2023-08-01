@@ -3,16 +3,16 @@
 exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
 <div>
   <div
-    class="sc-bdvumH jZTlyR card-media-wrapper card-media"
+    class="sc-bczSft bpukjt card-media-wrapper card-media"
     mode="VERTICAL_ALTERNATING"
   >
     <div
-      class="sc-furuVn kGMLSJ"
+      class="sc-ftvSNZ hWErIY"
       height="200"
     >
       <img
         alt="Image"
-        class="sc-gsDKeI jKDPzG"
+        class="sc-gsnScm jbkwKI"
         loading="lazy"
         mode="VERTICAL_ALTERNATING"
         role="img"
@@ -21,14 +21,14 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
     </div>
   </div>
   <div
-    class="sc-hKwBBi exUSSb"
+    class="sc-hKMtDE bKgugz"
     mode="VERTICAL_ALTERNATING"
   >
     <div
-      class="sc-iCfKOy jOJMEV"
+      class="sc-iBkiHk gSBUBE"
     />
     <h2
-      class="sc-kDTiHp gBrmxq card-sub-title card-subtitle"
+      class="sc-kDDqET fZQqHN card-sub-title card-subtitle"
     >
       This is another test
     </h2>
@@ -39,27 +39,27 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
 exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
 <div>
   <div
-    class="sc-bdvumH jZTlyR card-media-wrapper card-media"
+    class="sc-bczSft bpukjt card-media-wrapper card-media"
     mode="VERTICAL_ALTERNATING"
   >
     <iframe
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen=""
-      class="sc-jRQBzY jbpMTS"
+      class="sc-jSMdHm bhcUJp"
       frameborder="0"
       src="https://www.youtube.com/watch?v=9bZkp7q19f0?enablejsapi=1"
       title="Video"
     />
   </div>
   <div
-    class="sc-hKwBBi exUSSb"
+    class="sc-hKMtDE bKgugz"
     mode="VERTICAL_ALTERNATING"
   >
     <div
-      class="sc-iCfKOy jOJMEV"
+      class="sc-iBkiHk gSBUBE"
     />
     <h2
-      class="sc-kDTiHp gBrmxq card-sub-title card-subtitle"
+      class="sc-kDDqET fZQqHN card-sub-title card-subtitle"
     >
       This is another test
     </h2>

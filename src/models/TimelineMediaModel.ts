@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
+import { ForwardRefExoticComponent, ReactNode } from 'react';
 import { Theme } from './Theme';
+import { TextOrContentModel } from '../components/timeline-elements/timeline-card-content/text-or-content';
 
 export type MediaType = 'VIDEO' | 'IMAGE';
 export interface MediaSource {
@@ -23,7 +24,7 @@ export interface CardMediaModel {
   active?: boolean;
   cardHeight?: number;
   content?: string | ReactNode;
-  detailsText?: ReactNode;
+  detailsText?: ForwardRefExoticComponent<TextOrContentModel>;
   hideMedia: boolean;
   id?: string;
   media: Media;
