@@ -1,9 +1,16 @@
 import { describe } from 'vitest';
 import { customRender, providerProps } from '../../../common/test';
 import TimelineCardMedia from '../timeline-card-media';
+import { forwardRef } from 'react';
+import { TextOrContentModel } from '../../timeline-card-content/text-or-content';
 
 describe('Timeline Card media', () => {
   // should render the component with all the props
+  const refComponent = forwardRef<HTMLDivElement, TextOrContentModel>(
+    (props, ref) => <div ref={ref}>ref component</div>,
+  );
+
+  refComponent.displayName = 'ref component';
   it('should render the component with all the props', async () => {
     const { getByText, getByAltText, getByRole } = customRender(
       <TimelineCardMedia
@@ -15,7 +22,7 @@ describe('Timeline Card media', () => {
           },
           type: 'IMAGE',
         }}
-        detailsText="This is a test"
+        detailsText={refComponent}
         id="1"
         hideMedia={false}
         onMediaStateChange={() => {}}
@@ -45,7 +52,7 @@ describe('Timeline Card media', () => {
           },
           type: 'IMAGE',
         }}
-        detailsText="This is a test 1"
+        detailsText={refComponent}
         content="This is another test"
         id="1"
         hideMedia={false}
@@ -68,7 +75,7 @@ describe('Timeline Card media', () => {
           },
           type: 'VIDEO',
         }}
-        detailsText="This is a test"
+        detailsText={refComponent}
         content="This is another test"
         id="1"
         hideMedia={false}
@@ -91,7 +98,7 @@ describe('Timeline Card media', () => {
           },
           type: 'VIDEO',
         }}
-        detailsText="This is a test"
+        detailsText={refComponent}
         id="1"
         hideMedia={false}
         onMediaStateChange={() => {}}
@@ -118,7 +125,7 @@ describe('Timeline Card media', () => {
           },
           type: 'IMAGE',
         }}
-        detailsText="This is a test"
+        detailsText={refComponent}
         id="1"
         content="This is another test"
         title="Image title"
@@ -146,7 +153,7 @@ describe('Timeline Card media', () => {
           },
           type: 'IMAGE',
         }}
-        detailsText="This is a test"
+        detailsText={refComponent}
         id="1"
         hideMedia={false}
         onMediaStateChange={() => {}}
@@ -172,7 +179,7 @@ describe('Timeline Card media', () => {
           },
           type: 'IMAGE',
         }}
-        detailsText="This is a test"
+        detailsText={refComponent}
         id="1"
         hideMedia={false}
         onMediaStateChange={() => {}}
@@ -198,7 +205,7 @@ describe('Timeline Card media', () => {
           },
           type: 'IMAGE',
         }}
-        detailsText="This is a test"
+        detailsText={refComponent}
         id="1"
         hideMedia={false}
         onMediaStateChange={() => {}}
