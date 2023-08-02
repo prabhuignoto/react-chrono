@@ -15,12 +15,9 @@ import Timeline from '../../timeline/timeline';
 import CardMedia from '../timeline-card-media/timeline-card-media';
 import { ContentFooter } from './content-footer';
 import { ContentHeader } from './content-header';
-import {
-  TimelineContentDetails,
-  TimelineContentDetailsWrapper,
-  TimelineItemContentWrapper,
-  TimelineSubContent,
-} from './timeline-card-content.styles';
+import { TimelineItemContentWrapper } from './timeline-card-content.styles';
+import { getTextOrContent } from './text-or-content';
+import { DetailsText } from './details-text';
 
 const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
   React.memo(
@@ -75,9 +72,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         cardWidth,
         borderLessCards,
         disableAutoScrollOnClick,
-        fontSizes,
         classNames,
-        contentDetailsHeight,
         textOverlay,
         slideShowType,
         showProgressOnSlideshow,
@@ -308,40 +303,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         return branchDir;
       }, [branchDir, flip]);
 
-      const getTextOrContent = useMemo(() => {
-        const isTextArray = Array.isArray(detailedText);
-
-        if (timelineContent) {
-          return <div ref={detailsRef}>{timelineContent}</div>;
-        } else {
-          let textContent = null;
-          if (isTextArray) {
-            textContent = (detailedText as string[]).map((text, index) => (
-              <TimelineSubContent
-                key={index}
-                fontSize={fontSizes?.cardText}
-                className={classNames?.cardText}
-                theme={theme}
-              >
-                {text}
-              </TimelineSubContent>
-            ));
-          } else {
-            textContent = detailedText;
-          }
-
-          return textContent ? (
-            <TimelineContentDetails
-              className={showMore ? 'active' : ''}
-              ref={detailsRef}
-              theme={theme}
-            >
-              {textContent}
-            </TimelineContentDetails>
-          ) : null;
-        }
-      }, [timelineContent, showMore, JSON.stringify(theme)]);
-
       // Get the background color for the gradient, which is either the
       // cardDetailsBackGround or nestedCardDetailsBackGround theme variable,
       // based on whether the card is nested or not. If we are showing more
@@ -361,38 +322,14 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         return !textOverlay && !items?.length;
       }, [items?.length]);
 
-      const DetailsText = useMemo(() => {
-        return (
-          <>
-            {/* detailed text */}
-            <TimelineContentDetailsWrapper
-              aria-expanded={showMore}
-              className={contentDetailsClass}
-              $customContent={!!customContent}
-              ref={detailsRef}
-              theme={theme}
-              $useReadMore={useReadMore}
-              $borderLess={borderLessCards}
-              $showMore={showMore}
-              $cardHeight={!textOverlay ? cardActualHeight : null}
-              $contentHeight={detailsHeight}
-              height={contentDetailsHeight}
-              $textOverlay={textOverlay}
-              $gradientColor={gradientColor}
-            >
-              {customContent ? customContent : getTextOrContent}
-            </TimelineContentDetailsWrapper>
-          </>
-        );
-      }, [
-        showMore,
-        cardActualHeight,
-        contentDetailsHeight,
-        detailsHeight,
-        textOverlay,
-        gradientColor,
-        JSON.stringify(theme),
-      ]);
+      const TextOrContent = useMemo(() => {
+        return getTextOrContent({
+          detailedText,
+          showMore,
+          theme,
+          timelineContent,
+        });
+      }, [showMore, timelineContent, theme, detailedText]);
 
       const handlers = useMemo(() => {
         if (!isNested) {
@@ -457,8 +394,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               theme={theme}
               title={title}
               url={url}
-              detailsText={getTextOrContent}
               startWidth={startWidth}
+              detailsText={TextOrContent}
               paused={paused}
               remainInterval={remainInterval}
               showProgressBar={canShowProgressBar}
@@ -469,7 +406,17 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           )}
 
           {canShowDetailsText ? (
-            DetailsText
+            <DetailsText
+              showMore={showMore}
+              gradientColor={gradientColor}
+              detailedText={detailedText}
+              customContent={customContent}
+              timelineContent={timelineContent}
+              contentDetailsClass={contentDetailsClass}
+              cardActualHeight={cardActualHeight}
+              detailsHeight={detailsHeight}
+              ref={detailsRef}
+            />
           ) : (
             <Timeline
               items={items}

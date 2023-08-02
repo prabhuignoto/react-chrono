@@ -4,20 +4,26 @@ import { SubTitleMemo, TitleMemo } from '../memoized';
 import { ContentHeaderProps } from './header-footer.model';
 import { TimelineCardHeader } from './timeline-card-content.styles';
 
-/*
- * This component is used to render the header of the timeline card.
- * It renders the title and subtitle of the card.
- * If the card has media, it will not render the title and subtitle.
+/**
+ * ContentHeader component
+ * This component renders the header of the timeline card including the title and subtitle.
+ * It doesn't render the title and subtitle if the card has media.
  * The title and subtitle are memoized to prevent unnecessary re-renders.
+ *
+ * @property {string} title - The title of the card.
+ * @property {string} url - The URL of the card.
+ * @property {boolean} media - Indicates whether the card has media or not.
+ * @property {string} content - The main content of the card.
+ * @returns {JSX.Element} The ContentHeader component.
  */
-
 const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
   ({ title, url, media, content }: ContentHeaderProps) => {
+    // Using context to get global values
     const { fontSizes, classNames, theme } = useContext(GlobalContext);
 
     return (
       <TimelineCardHeader>
-        {/* main title */}
+        {/* Render title if there is no media */}
         {!media && (
           <TitleMemo
             title={title}
@@ -27,7 +33,7 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
             classString={classNames?.cardTitle}
           />
         )}
-        {/* main timeline text */}
+        {/* Render subtitle if there is no media */}
         {!media && (
           <SubTitleMemo
             content={content}
@@ -41,6 +47,7 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
   },
 );
 
+// Setting display name for easier debugging
 ContentHeader.displayName = 'ContentHeader';
 
 export { ContentHeader };

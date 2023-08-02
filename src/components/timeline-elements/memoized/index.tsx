@@ -138,6 +138,8 @@ const DetailsTextMemo = memo<DetailsTextMemoModel>(
       }
     }, []);
 
+    const Text = text;
+
     const background = useMemo(() => {
       const bg = theme?.cardDetailsBackGround || '';
       if (bg) {
@@ -156,7 +158,7 @@ const DetailsTextMemo = memo<DetailsTextMemoModel>(
         $show={show}
         background={background}
       >
-        {text}
+        <Text />
       </DetailsTextWrapper>
     ) : null;
   },

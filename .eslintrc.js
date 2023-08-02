@@ -18,6 +18,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
+    'import',
     'react',
     '@typescript-eslint',
     'jsx-a11y',
@@ -25,6 +26,12 @@ module.exports = {
     'sort-keys-fix',
   ],
   rules: {
+    'import/no-unused-modules': [
+      1,
+      {
+        unusedExports: true,
+      },
+    ],
     'sort-keys-fix/sort-keys-fix': 'error',
     'typescript-sort-keys/interface': 'error',
     'typescript-sort-keys/string-enum': 'error',

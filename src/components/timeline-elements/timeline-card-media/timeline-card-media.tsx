@@ -324,14 +324,16 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
           />
         )}
         {canShowTextMemo ? (
-          <DetailsTextMemo
-            theme={theme}
-            show={showText}
-            expand={expandDetails}
-            text={detailsText}
-            onRender={onDetailsTextRef}
-            textOverlay={textOverlay}
-          />
+          <>
+            <DetailsTextMemo
+              theme={theme}
+              show={showText}
+              expand={expandDetails}
+              text={detailsText}
+              onRender={onDetailsTextRef}
+              textOverlay={textOverlay}
+            />
+          </>
         ) : null}
       </MediaDetailsWrapper>
     );

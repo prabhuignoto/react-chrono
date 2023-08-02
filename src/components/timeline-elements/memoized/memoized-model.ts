@@ -1,5 +1,6 @@
 import { Theme } from '@models/Theme';
-import React, { ReactNode } from 'react';
+import React, { ForwardRefExoticComponent, ReactNode } from 'react';
+import { TextOrContentModel } from '../timeline-card-content/text-or-content';
 
 type common = {
   classString?: string;
@@ -38,7 +39,7 @@ export type DetailsTextMemoModel = {
   height?: number;
   onRender?: (height?: number) => void;
   show?: boolean;
-  text: ReactNode;
+  text: ForwardRefExoticComponent<TextOrContentModel>;
   textOverlay?: boolean;
   theme?: Theme;
 };

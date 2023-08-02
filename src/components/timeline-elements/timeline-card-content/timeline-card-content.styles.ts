@@ -259,7 +259,10 @@ export const TimelineContentDetailsWrapper = styled.div<{
   ${linearGradient}
 `;
 
-export const ShowMore = styled.span<{ show?: 'true' | 'false'; theme?: Theme }>`
+export const ShowMore = styled.button<{
+  show?: 'true' | 'false';
+  theme?: Theme;
+}>`
   align-items: center;
   align-self: flex-end;
   border-radius: 4px;
@@ -273,6 +276,8 @@ export const ShowMore = styled.span<{ show?: 'true' | 'false'; theme?: Theme }>`
   margin-top: auto;
   padding: 0.25em;
   color: ${(p) => p.theme.primary};
+  border: 0;
+  background: none;
 
   &:hover {
     text-decoration: underline;
