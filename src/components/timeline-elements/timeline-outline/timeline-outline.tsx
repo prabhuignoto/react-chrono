@@ -11,18 +11,22 @@ import { GlobalContext } from '../../GlobalContext';
 import CloseIcon from '../../icons/close';
 import MenuIcon from '../../icons/menu';
 import {
-  List,
-  ListItem,
-  ListItemBullet,
-  ListItemName,
   OutlineButton,
   OutlinePane,
   OutlineWrapper,
 } from './timeline-outline.styles';
+import { OutlineItemList } from './timeline-outline-item-list';
 
 export enum OutlinePosition {
   'left',
   'right',
+}
+
+interface TimelineOutlineModel {
+  items?: TimelineOutlineItem[];
+  mode?: TimelineMode;
+  onSelect?: (index: number) => void;
+  theme?: Theme;
 }
 
 export interface TimelineOutlineItem {
@@ -31,65 +35,60 @@ export interface TimelineOutlineItem {
   selected?: boolean;
 }
 
-export interface TimelineOutlineModel {
-  items?: TimelineOutlineItem[];
-  mode?: TimelineMode;
-  onSelect?: (index: number) => void;
-  theme?: Theme;
-}
-
-const TimelineOutline: React.FunctionComponent<TimelineOutlineModel> = ({
+/**
+ * TimelineOutline component
+ * This component renders the outline pane of a timeline, including a list of items and corresponding selection functionality.
+ * It provides an interface to toggle the outline pane and select items within the timeline.
+ * The component leverages memoization to prevent unnecessary re-renders and optimizes the rendering process.
+ *
+ * @property {TimelineOutlineItem[]} items - The items to be displayed in the outline.
+ * @property {TimelineMode} mode - The mode of the timeline which determines the outline position.
+ * @property {function} onSelect - The callback to be invoked when an item is selected.
+ * @property {Theme} theme - The theme object, used for styling.
+ * @returns {JSX.Element} The TimelineOutline component.
+ */
+const TimelineOutline: React.FC<TimelineOutlineModel> = ({
   items = [],
   onSelect,
   mode,
+  theme,
 }: TimelineOutlineModel) => {
   const [openPane, setOpenPane] = useState(false);
-  const [outlineItems, setOutlineItems] = useState<TimelineOutlineItem[]>([]);
-
-  const togglePane = useCallback(() => setOpenPane((prev) => !prev), []);
   const [showList, setShowList] = useState(false);
 
-  const { theme } = useContext(GlobalContext);
+  const { theme: globalTheme } = useContext(GlobalContext);
+  const mergedTheme = theme || globalTheme;
 
-  const position = useMemo(() => {
-    if (mode === 'VERTICAL') {
-      return OutlinePosition.left;
-    } else if (mode === 'VERTICAL_ALTERNATING') {
-      return OutlinePosition.right;
-    } else {
-      return OutlinePosition.left;
-    }
-  }, [mode]);
+  const togglePane = useCallback(() => setOpenPane((prev) => !prev), []);
 
-  useEffect(() => {
-    setOutlineItems(items.map((item) => ({ ...item, selected: false })));
-  }, [items.length]);
+  const position = useMemo(
+    () =>
+      mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING'
+        ? OutlinePosition.right
+        : OutlinePosition.left,
+    [mode],
+  );
 
   useEffect(() => {
     if (openPane) {
-      setTimeout(() => {
-        setShowList(openPane);
-      }, 300);
+      setShowList(true);
     } else {
-      setShowList(openPane);
+      setShowList(false);
     }
   }, [openPane]);
 
-  const handleSelection = useCallback((index: number, id?: string) => {
-    setOutlineItems((items) =>
-      items.map((item) => ({ ...item, selected: item.id === id })),
-    );
-
-    if (onSelect) {
-      onSelect(index);
-    }
-  }, []);
+  const handleSelection = useCallback(
+    (index: number, id?: string) => {
+      if (onSelect) onSelect(index);
+    },
+    [onSelect],
+  );
 
   return (
     <OutlineWrapper position={position} open={openPane}>
       <OutlineButton
         onPointerDown={togglePane}
-        theme={theme}
+        theme={mergedTheme}
         open={openPane}
         position={position}
       >
@@ -97,22 +96,11 @@ const TimelineOutline: React.FunctionComponent<TimelineOutlineModel> = ({
       </OutlineButton>
       <OutlinePane open={openPane}>
         {showList && (
-          <List>
-            {outlineItems.map((item, index) => (
-              <ListItem
-                key={item.id}
-                onPointerDown={() => handleSelection(index, item.id)}
-              >
-                <ListItemBullet
-                  theme={theme}
-                  selected={item.selected}
-                ></ListItemBullet>
-                <ListItemName theme={theme} selected={item.selected}>
-                  {item.name}
-                </ListItemName>
-              </ListItem>
-            ))}
-          </List>
+          <OutlineItemList
+            items={items}
+            handleSelection={handleSelection}
+            theme={mergedTheme}
+          />
         )}
       </OutlinePane>
     </OutlineWrapper>
