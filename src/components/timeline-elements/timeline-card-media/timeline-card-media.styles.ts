@@ -36,7 +36,7 @@ export const MediaWrapper = styled.div<{
   flex-direction: row;
   height: ${(p) => (p.$textOverlay ? 'calc(100% - 1em)' : '0')};
   padding: 0.5em;
-  pointer-events: ${(p) => (!p.$active && p.$slideShowActive ? 'none' : '')};
+  // pointer-events: ${(p) => (!p.$active && p.$slideShowActive ? 'none' : '')};
   position: relative;
   text-align: ${(p) => p.align};
   width: calc(100% - 1em);
