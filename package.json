@@ -69,6 +69,7 @@
     "@rollup/plugin-strip": "^3.0.2",
     "@rollup/plugin-terser": "^0.4.3",
     "@size-limit/preset-big-lib": "^8.2.6",
+    "@stylelint/postcss-css-in-js": "^0.38.0",
     "@testing-library/dom": "^9.3.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.0.0",
