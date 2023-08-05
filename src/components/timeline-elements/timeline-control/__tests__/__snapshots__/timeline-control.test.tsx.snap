@@ -3,19 +3,19 @@
 exports[`TimelineControl > should render 1`] = `
 <div>
   <div
-    class="sc-hKMtDE kgjikO"
+    class="sc-fFGjHI iNxbWt"
   >
     <ul
-      class="sc-bczSft fvaTaN timeline-controls controls"
+      class="sc-bgqQcB ifptST timeline-controls controls"
     >
       <li
-        class="sc-gsnScm eMOCjm"
+        class="sc-gTRrQi bztlct"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="first"
-          class="sc-dkzCjb cUcGhA"
+          class="sc-ewnqHT fSJVDw"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
           tabindex="0"
@@ -43,13 +43,13 @@ exports[`TimelineControl > should render 1`] = `
         </button>
       </li>
       <li
-        class="sc-gsnScm eMOCjm"
+        class="sc-gTRrQi bztlct"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="previous"
-          class="sc-dkzCjb cUcGhA"
+          class="sc-ewnqHT fSJVDw"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
           tabindex="0"
@@ -74,13 +74,13 @@ exports[`TimelineControl > should render 1`] = `
         </button>
       </li>
       <li
-        class="sc-gsnScm eMOCjm"
+        class="sc-gTRrQi bztlct"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="next"
-          class="sc-dkzCjb cUcGhA"
+          class="sc-ewnqHT fSJVDw"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
           tabindex="0"
@@ -105,13 +105,13 @@ exports[`TimelineControl > should render 1`] = `
         </button>
       </li>
       <li
-        class="sc-gsnScm eMOCjm"
+        class="sc-gTRrQi bztlct"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="last"
-          class="sc-dkzCjb cUcGhA"
+          class="sc-ewnqHT fSJVDw"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
           tabindex="0"
@@ -139,15 +139,15 @@ exports[`TimelineControl > should render 1`] = `
         </button>
       </li>
       <li
-        class="sc-gsnScm eMOCjm"
+        class="sc-gTRrQi bztlct"
       />
       <li
-        class="sc-gsnScm eMOCjm"
+        class="sc-gTRrQi bztlct"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-label="dark"
-          class="sc-dkzCjb cDGUHY"
+          class="sc-ewnqHT kVrJsY"
           tabindex="0"
           title="dark"
         >
