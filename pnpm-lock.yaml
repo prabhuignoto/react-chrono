@@ -72,6 +72,9 @@ devDependencies:
   '@size-limit/preset-big-lib':
     specifier: ^8.2.6
     version: 8.2.6(size-limit@8.2.6)
+  '@stylelint/postcss-css-in-js':
+    specifier: ^0.38.0
+    version: 0.38.0(postcss-syntax@0.36.2)(postcss@8.4.27)
   '@testing-library/dom':
     specifier: ^9.3.1
     version: 9.3.1
@@ -2751,6 +2754,20 @@ packages:
       - esbuild
       - uglify-js
       - webpack-cli
+    dev: true
+
+  /@stylelint/postcss-css-in-js@0.38.0(postcss-syntax@0.36.2)(postcss@8.4.27):
+    resolution: {integrity: sha512-XOz5CAe49kS95p5yRd+DAIWDojTjfmyAQ4bbDlXMdbZTQ5t0ThjSLvWI6JI2uiS7MFurVBkZ6zUqcimzcLTBoQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+    peerDependencies:
+      postcss: '>=7.0.0'
+      postcss-syntax: '>=0.36.2'
+    dependencies:
+      '@babel/core': 7.22.9
+      postcss: 8.4.27
+      postcss-syntax: 0.36.2(postcss@8.4.27)
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@testing-library/dom@9.3.1:

@@ -4,7 +4,25 @@ import { TimelineOutline } from '../timeline-elements/timeline-outline/timeline-
 import TimelineVerticalItem from './timeline-vertical-item';
 import { TimelineVerticalWrapper } from './timeline-vertical.styles';
 
-// This component is used to render both tree and vertical modes
+/**
+ * TimelineVertical
+ * @property {boolean} alternateCards - Whether to alternate cards.
+ * @property {() => void} autoScroll - Function to handle auto scroll.
+ * @property {React.ReactNode} contentDetailsChildren - The content details children nodes.
+ * @property {boolean} enableOutline - Whether to enable outline.
+ * @property {boolean} hasFocus - Whether the timeline has focus.
+ * @property {React.ReactNode} iconChildren - The icon children nodes.
+ * @property {Array} items - The items of the timeline.
+ * @property {string} mode - The mode of the timeline.
+ * @property {() => void} onClick - Function to handle click event.
+ * @property {() => void} onElapsed - Function to handle elapsed event.
+ * @property {() => void} onOutlineSelection - Function to handle outline selection.
+ * @property {boolean} slideShowRunning - Whether the slideshow is running.
+ * @property {Object} theme - The theme of the timeline.
+ * @property {boolean} cardLess - Whether the card is less.
+ * @property {number} nestedCardHeight - The height of the nested card.
+ * @returns {JSX.Element} The TimelineVertical component.
+ */
 const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
   alternateCards = true,
   autoScroll,
@@ -32,7 +50,7 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
         pointOffset: offset,
       });
     },
-    [],
+    [autoScroll],
   );
 
   // todo remove this
@@ -44,7 +62,7 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
         id: Math.random().toString(16).slice(2),
         name: item.title,
       })),
-    [items.length],
+    [items],
   );
 
   return (

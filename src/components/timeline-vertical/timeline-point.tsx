@@ -8,6 +8,21 @@ import {
   TimelinePointWrapper,
 } from './timeline-vertical-shape.styles';
 
+/**
+ * TimelinePoint
+ * @property {string} className - The class name for the component.
+ * @property {string} id - The id of the timeline point.
+ * @property {() => void} onClick - Function to handle click event.
+ * @property {boolean} active - Whether the timeline point is active.
+ * @property {() => void} onActive - Function to handle active event.
+ * @property {boolean} slideShowRunning - Whether the slideshow is running.
+ * @property {React.ReactNode} iconChild - The icon child nodes.
+ * @property {number} timelinePointDimension - The dimension of the timeline point.
+ * @property {number} lineWidth - The width of the line.
+ * @property {boolean} disableClickOnCircle - Whether the click on circle is disabled.
+ * @property {boolean} cardLess - Whether the card is less.
+ * @returns {JSX.Element} The TimelinePoint component.
+ */
 const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
   (props: TimelinePointModel) => {
     const {
@@ -23,11 +38,14 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
       disableClickOnCircle,
       cardLess,
     } = props;
+
     const circleRef = useRef<HTMLDivElement>(null);
     const { theme, focusActiveItemOnLoad, timelinePointShape } =
       useContext(GlobalContext);
 
     const isFirstRender = useRef(true);
+
+    // Determine if onActive can be invoked
     const canInvokeOnActive = useMemo(() => {
       if (focusActiveItemOnLoad) {
         return active;
@@ -36,6 +54,7 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
       }
     }, [active]);
 
+    // Invoke onActive if conditions are met
     useEffect(() => {
       if (canInvokeOnActive) {
         const circle = circleRef.current;
@@ -44,6 +63,7 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
       }
     }, [canInvokeOnActive, active]);
 
+    // Determine circle class
     const circleClass = useMemo(
       () =>
         cls({
@@ -53,6 +73,7 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
       [active, iconChild],
     );
 
+    // Determine click handler props
     const clickHandlerProps = useMemo(
       () =>
         !disableClickOnCircle && {
@@ -63,9 +84,10 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
             }
           },
         },
-      [],
+      [id, onClick, slideShowRunning, disableClickOnCircle],
     );
 
+    // Update isFirstRender flag after first render
     useEffect(() => {
       if (isFirstRender.current) {
         isFirstRender.current = false;
