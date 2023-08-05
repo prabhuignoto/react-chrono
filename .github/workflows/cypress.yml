@@ -9,6 +9,9 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chrome, edge, firefox] # Define the browsers you want to test on
 
     steps:
       - name: Set up Node.js
@@ -43,29 +46,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cypress-
 
-      - name: Chrome
+      - name: Run Cypress tests
         uses: cypress-io/github-action@v5.8.3
         with:
           install: false
           start: pnpm dev
           wait-on: 'http://[::1]:4444'
           wait-on-timeout: 200
-          browser: chrome
-
-      - name: Edge
-        uses: cypress-io/github-action@v5.8.3
-        with:
-          install: false
-          start: pnpm dev
-          wait-on: 'http://[::1]:4444'
-          wait-on-timeout: 200
-          browser: edge
-
-      - name: Firefox
-        uses: cypress-io/github-action@v5.8.3
-        with:
-          install: false
-          start: pnpm dev
-          wait-on: 'http://[::1]:4444'
-          wait-on-timeout: 200
-          browser: firefox
+          browser: ${{ matrix.browser }} # Use the browser from the matrix

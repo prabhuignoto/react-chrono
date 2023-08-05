@@ -16,6 +16,7 @@
   },
   "scripts": {
     "cypress": "cypress open",
+    "cypress:headless": "cypress run --headless",
     "cypress:record": "cypress run --record --key 0a753295-339a-4351-bf1d-6b91d4bcb937",
     "cypress:runner": "start-server-and-test start http://localhost:4444 cypress:record",
     "cypress:test": "start-server-and-test start http://localhost:4444 cypress",
