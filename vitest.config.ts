@@ -17,7 +17,10 @@ export default defineConfig({
     },
     environment: 'jsdom',
     globals: true,
-    include: ['./src/components/**/*.test.tsx'],
+    include: [
+      './src/components/**/*.test.{tsx,ts}',
+      './src/utils/**/*.test.{tsx,ts}',
+    ],
     maxThreads: 12,
     minThreads: 5,
     setupFiles: './src/test-setup.js',
