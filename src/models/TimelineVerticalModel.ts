@@ -43,6 +43,32 @@ export type Props = Pick<
   theme?: Theme;
 };
 
+type VerticalModel = Pick<
+  Props,
+  | 'alternateCards'
+  | 'hasFocus'
+  | 'onClick'
+  | 'onElapsed'
+  | 'slideShowRunning'
+  | 'mode'
+  | 'timelinePointDimension'
+  | 'lineWidth'
+  | 'disableClickOnCircle'
+  | 'cardLess'
+  | 'nestedCardHeight'
+> &
+  Pick<
+    TimelineItemModel,
+    | 'cardDetailedText'
+    | 'cardSubtitle'
+    | 'cardTitle'
+    | 'title'
+    | 'url'
+    | 'timelineContent'
+    | 'items'
+    | 'isNested'
+  > & { active?: boolean; className: string; id?: string };
+
 /**
  * Represents the model for a vertical timeline point.
  */
