@@ -1,6 +1,5 @@
-import { render, act } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { useMatchMedia } from '../useMatchMedia'; // Adjust the path to your hook
-import { useState } from 'react';
 
 import { describe, expect, it, vi } from 'vitest';
 
