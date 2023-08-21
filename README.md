@@ -15,7 +15,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://img.shields.io/npm/v/react-chrono.svg?style=flat)](https://www.npmjs.com/package/react-chrono)
 ![npm downloads](https://img.shields.io/npm/dm/react-chrono.svg?label=npm%20downloads&style=flat)
-<a href="https://5f985eb478dcb00022cfd60e-uiaufmxbhf.chromatic.com/?path=/story/example-vertical--vertical-basic" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
+<a href="https://5f985eb478dcb00022cfd60e-hqwgomhkqw.chromatic.com/?path=/story/example-vertical--vertical-basic" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
 [![Coverage Status](https://coveralls.io/repos/github/prabhuignoto/react-chrono/badge.svg?branch=master)](https://coveralls.io/github/prabhuignoto/react-chrono?branch=master)
 
   <div>
@@ -615,8 +615,9 @@ You can use the classNames prop to employ your own class names. The subsequent e
 
 Deep dive into wide variety of examples hosted as a Storybook.
 
-- [Horizontal Collection](https://5f985eb478dcb00022cfd60e-wfennyutax.chromatic.com/?path=/story/example-horizontal--horizontal-timeline)
-- [Vertical Collection](https://5f985eb478dcb00022cfd60e-wfennyutax.chromatic.com/?path=/story/example-vertical--vertical-basic)
+- [Horizontal Collection](https://5f985eb478dcb00022cfd60e-hqwgomhkqw.chromatic.com/?path=/story/example-horizontal--horizontal-timeline)
+- [Vertical Collection](https://5f985eb478dcb00022cfd60e-hqwgomhkqw.chromatic.com/?path=/story/example-vertical--vertical-basic)
+
 
 ## 🔨Build Setup
 
