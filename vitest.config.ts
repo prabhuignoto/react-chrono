@@ -12,7 +12,7 @@ export default defineConfig({
       clean: true,
       enabled: true,
       provider: 'v8',
-      reporter: ['html', 'lcov', 'clover', 'cobertura'],
+      reporter: ['lcov', 'clover'],
       reportsDirectory: './coverage',
     },
     environment: 'jsdom',

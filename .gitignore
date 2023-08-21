@@ -6,7 +6,7 @@
 .pnp.js
 
 # testing
-/coverage
+# /coverage
 
 # production
 /build
@@ -37,5 +37,5 @@ cache
 cypress/videos
 
 .scannerwork
-sonar-project.properties
+# sonar-project.properties
 react-app-tester
