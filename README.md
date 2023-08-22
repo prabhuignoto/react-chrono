@@ -196,7 +196,6 @@ Below are the available configuration options for the component:
 | useReadMore              | true                 | Enables or disables the "read more" button. Available if text content on the card is taller than the card itself.                        |
 | verticalBreakPoint       | 768px                | Sets the pixel count below which the timeline will switch to `VERTICAL` mode.                                                            |
 
-
 ### Mode
 
 `react-chrono` supports three modes `HORIZONTAL`, `VERTICAL` and `VERTICAL_ALTERNATING`. No additional setting is required.
@@ -356,9 +355,7 @@ const items = [
 ];
 
 function MyTimeline() {
-  return (
-    <Chrono items={items} textOverlay />
-  );
+  return <Chrono items={items} textOverlay />;
 }
 ```
 
@@ -620,7 +617,6 @@ Deep dive into wide variety of examples hosted as a Storybook.
 
 - [Horizontal Collection](https://5f985eb478dcb00022cfd60e-hqwgomhkqw.chromatic.com/?path=/story/example-horizontal--horizontal-timeline)
 - [Vertical Collection](https://5f985eb478dcb00022cfd60e-hqwgomhkqw.chromatic.com/?path=/story/example-vertical--vertical-basic)
-
 
 ## 🔨Build Setup
 
