@@ -23,30 +23,30 @@
         <div class='clearfix'>
 
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.58% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>31/48</span>
+                <span class='fraction'>49/49</span>
             </div>
 
 
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>3/3</span>
             </div>
 
 
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>2/2</span>
             </div>
 
 
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.58% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>31/48</span>
+                <span class='fraction'>49/49</span>
             </div>
 
 
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -111,7 +111,8 @@
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -139,23 +140,24 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -186,24 +188,25 @@ interface OutlineItemListModel {
  * @property {function} handleSelection - The callback to be invoked when an item is selected.
  * @returns {JSX.Element} The rendered OutlineItemList component.
  */
-const OutlineItemList: FunctionComponent&lt;OutlineItemListModel&gt; = <span class="fstat-no" title="function not covered" >({</span>
-<span class="cstat-no" title="statement not covered" >  items,</span>
-<span class="cstat-no" title="statement not covered" >  handleSelection,</span>
-<span class="cstat-no" title="statement not covered" >  theme,</span>
-<span class="cstat-no" title="statement not covered" >}) =&gt; (</span>
-<span class="cstat-no" title="statement not covered" >  &lt;List&gt;</span>
-<span class="cstat-no" title="statement not covered" >    {items.map((item, index) =&gt; (</span>
-<span class="cstat-no" title="statement not covered" >      &lt;ListItem</span>
-<span class="cstat-no" title="statement not covered" >        key={item.id}</span>
-<span class="cstat-no" title="statement not covered" >        onPointerDown={() =&gt; handleSelection(index, item.id)}</span>
-<span class="cstat-no" title="statement not covered" >      &gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;ListItemBullet theme={theme} selected={item.selected}&gt;&lt;/ListItemBullet&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;ListItemName theme={theme} selected={item.selected}&gt;</span>
-<span class="cstat-no" title="statement not covered" >          {item.name}</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/ListItemName&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;/ListItem&gt;</span>
-<span class="cstat-no" title="statement not covered" >    ))}</span>
-<span class="cstat-no" title="statement not covered" >  &lt;/List&gt;</span>
+const OutlineItemList: FunctionComponent&lt;OutlineItemListModel&gt; = ({
+  items,
+  handleSelection,
+  theme,
+}) =&gt; (
+  &lt;List role="list"&gt;
+    {items.map((item, index) =&gt; (
+      &lt;ListItem
+        key={item.id}
+        onPointerDown={() =&gt; handleSelection(index, item.id)}
+        role="listitem"
+      &gt;
+        &lt;ListItemBullet theme={theme} selected={item.selected}&gt;&lt;/ListItemBullet&gt;
+        &lt;ListItemName theme={theme} selected={item.selected}&gt;
+          {item.name}
+        &lt;/ListItemName&gt;
+      &lt;/ListItem&gt;
+    ))}
+  &lt;/List&gt;
 );
 &nbsp;
 export { OutlineItemList };
@@ -214,7 +217,7 @@ export { OutlineItemList };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-21T17:50:19.690Z
+                at 2023-08-26T19:11:42.310Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
