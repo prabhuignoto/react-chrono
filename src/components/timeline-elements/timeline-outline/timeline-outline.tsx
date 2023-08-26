@@ -22,7 +22,7 @@ export enum OutlinePosition {
   'right',
 }
 
-interface TimelineOutlineModel {
+export interface TimelineOutlineModel {
   items?: TimelineOutlineItem[];
   mode?: TimelineMode;
   onSelect?: (index: number) => void;

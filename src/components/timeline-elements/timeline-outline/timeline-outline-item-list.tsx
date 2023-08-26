@@ -30,11 +30,12 @@ const OutlineItemList: FunctionComponent<OutlineItemListModel> = ({
   handleSelection,
   theme,
 }) => (
-  <List>
+  <List role="list">
     {items.map((item, index) => (
       <ListItem
         key={item.id}
         onPointerDown={() => handleSelection(index, item.id)}
+        role="listitem"
       >
         <ListItemBullet theme={theme} selected={item.selected}></ListItemBullet>
         <ListItemName theme={theme} selected={item.selected}>

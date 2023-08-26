@@ -23,7 +23,10 @@
     "declarationDir": "dist",
     "types": [
       "node",
-      "@types/testing-library__jest-dom",
+      "@types/jest",
+      "@types/react",
+      "@types/react-dom",
+      "@testing-library/jest-dom"
     ],
     "paths": {
       "@utils/*": [
