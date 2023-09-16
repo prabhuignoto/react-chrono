@@ -78,7 +78,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const horizontalContentRef = useRef<HTMLDivElement | null>(null);
   const [timelineMode, setTimelineMode] = useState(mode);
 
-  // const activeItemIndex = useRef<number>(activeTimelineItem);
+  const activeItemIndex = useRef<number>(activeTimelineItem);
 
   // reference to the timeline
   const timelineMainRef = useRef<HTMLDivElement>(null);
@@ -168,6 +168,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     if (itemId) {
       for (let idx = 0; idx < items.length; idx++) {
         if (items[idx].id === itemId) {
+          activeItemIndex.current = idx;
           if (isSlideShow && idx < items.length - 1) {
             onTimelineUpdated?.(idx + 1);
           } else {
@@ -190,7 +191,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
     if (items.length && activeItem) {
       // const item = items[activeItem];
-      onItemSelected?.(activeItem);
+      const { title, cardTitle, cardSubtitle, cardDetailedText } = activeItem;
+      onItemSelected?.({
+        cardDetailedText,
+        cardSubtitle,
+        cardTitle,
+        index: activeItemIndex.current,
+        title,
+      });
 
       if (mode === 'HORIZONTAL') {
         const card = horizontalContentRef.current?.querySelector(

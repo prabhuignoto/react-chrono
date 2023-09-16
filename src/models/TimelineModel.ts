@@ -155,7 +155,12 @@ export type TimelineProps = {
   noUniqueId?: boolean;
 
   // callback when an item is selected
-  onItemSelected?: (data: TimelineItemModel) => void;
+  onItemSelected?: (
+    data: Pick<
+      TimelineItemModel,
+      'title' | 'cardDetailedText' | 'cardSubtitle' | 'cardTitle'
+    > & { index: number },
+  ) => void;
 
   // callback when the slideshow is restarted
   onRestartSlideshow?: () => void;
