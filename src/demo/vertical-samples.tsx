@@ -27,7 +27,7 @@ export const VerticalTree: FunctionComponent<{
           focusActiveItemOnLoad
           enableDarkToggle
           cardWidth={450}
-          onItemSelected={(selected) => console.log(selected.cardTitle)}
+          onItemSelected={(selected) => console.log(selected)}
           onScrollEnd={() => console.log('end reached')}
           verticalBreakPoint={1920}
           enableBreakPoint
