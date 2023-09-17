@@ -107,6 +107,8 @@ export type TimelineProps = {
 
   disableNavOnKey?: boolean;
 
+  disableTimelinePoint?: boolean;
+
   enableBreakPoint?: boolean;
 
   enableDarkToggle?: boolean;

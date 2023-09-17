@@ -40,7 +40,7 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
     } = props;
 
     const circleRef = useRef<HTMLDivElement>(null);
-    const { theme, focusActiveItemOnLoad, timelinePointShape } =
+    const { theme, focusActiveItemOnLoad, timelinePointShape, disableTimelinePoint } =
       useContext(GlobalContext);
 
     const isFirstRender = useRef(true);
@@ -103,7 +103,7 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
         role="button"
         $cardLess={cardLess}
       >
-        <TimelinePointContainer
+        {disableTimelinePoint ? <TimelinePointContainer
           className={`${className} timeline-vertical-circle`}
           {...clickHandlerProps}
           ref={circleRef}
@@ -119,7 +119,7 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
           >
             {iconChild ? iconChild : null}
           </Shape>
-        </TimelinePointContainer>
+        </TimelinePointContainer> : null}
       </TimelinePointWrapper>
     );
   },
