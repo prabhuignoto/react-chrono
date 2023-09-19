@@ -40,8 +40,12 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
     } = props;
 
     const circleRef = useRef<HTMLDivElement>(null);
-    const { theme, focusActiveItemOnLoad, timelinePointShape } =
-      useContext(GlobalContext);
+    const {
+      theme,
+      focusActiveItemOnLoad,
+      timelinePointShape,
+      disableTimelinePoint,
+    } = useContext(GlobalContext);
 
     const isFirstRender = useRef(true);
 
@@ -103,23 +107,25 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
         role="button"
         $cardLess={cardLess}
       >
-        <TimelinePointContainer
-          className={`${className} timeline-vertical-circle`}
-          {...clickHandlerProps}
-          ref={circleRef}
-          role="button"
-          data-testid="tree-leaf-click"
-          aria-label="select timeline"
-        >
-          <Shape
-            className={circleClass}
-            theme={theme}
-            dimension={timelinePointDimension}
-            $timelinePointShape={timelinePointShape}
+        {!disableTimelinePoint ? (
+          <TimelinePointContainer
+            className={`${className} timeline-vertical-circle`}
+            {...clickHandlerProps}
+            ref={circleRef}
+            role="button"
+            data-testid="tree-leaf-click"
+            aria-label="select timeline"
           >
-            {iconChild ? iconChild : null}
-          </Shape>
-        </TimelinePointContainer>
+            <Shape
+              className={circleClass}
+              theme={theme}
+              dimension={timelinePointDimension}
+              $timelinePointShape={timelinePointShape}
+            >
+              {iconChild ? iconChild : null}
+            </Shape>
+          </TimelinePointContainer>
+        ) : null}
       </TimelinePointWrapper>
     );
   },

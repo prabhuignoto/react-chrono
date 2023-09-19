@@ -195,6 +195,7 @@ Below are the available configuration options for the component:
 | uniqueId                 |                      | Used with `noUniqueId` to set a custom unique id for the wrapper.                                                                        |
 | useReadMore              | true                 | Enables or disables the "read more" button. Available if text content on the card is taller than the card itself.                        |
 | verticalBreakPoint       | 768px                | Sets the pixel count below which the timeline will switch to `VERTICAL` mode.                                                            |
+| disableTimelinePoint     | false                | Disables the timeline point in both `HORIZONTAL` and `VERTICAL` mode.                                                                    |
 
 ### Mode
 
@@ -669,7 +670,7 @@ Huge thanks to [BrowserStack](https://www.browserstack.com/) for the Open Source
 
 Distributed under the MIT license. See `LICENSE` for more information.
 
-Prabhu Murthy – [@prabhumurthy2](https://twitter.com/prabhumurthy2) – prabhu.m.murthy@gmail.com
+Prabhu Murthy – [@prabhumurthy2](https://twitter.com/prabhumurthy2) – <prabhu.m.murthy@gmail.com>
 [https://github.com/prabhuignoto](https://github.com/prabhuignoto)
 
 <a href="https://www.buymeacoffee.com/prabhuignoto" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" height="41" width="174" ></a>
@@ -679,10 +680,6 @@ Prabhu Murthy – [@prabhumurthy2](https://twitter.com/prabhumurthy2) – prabhu
 </a>
 
 <!-- Markdown link & img dfn's -->
-
-[react]: https://reactjs.org
-[typescript]: https://typescriptlang.org
-[emotion]: https://emotion.sh/
 
 ## Contributors ✨
 
