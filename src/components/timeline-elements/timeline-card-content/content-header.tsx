@@ -12,12 +12,13 @@ import { TimelineCardHeader } from './timeline-card-content.styles';
  *
  * @property {string} title - The title of the card.
  * @property {string} url - The URL of the card.
+ * @property {string} urlClassName - Class applied to title, if url present
  * @property {boolean} media - Indicates whether the card has media or not.
  * @property {string} content - The main content of the card.
  * @returns {JSX.Element} The ContentHeader component.
  */
 const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
-  ({ title, url, media, content }: ContentHeaderProps) => {
+  ({ title, url, urlClassName, media, content }: ContentHeaderProps) => {
     // Using context to get global values
     const { fontSizes, classNames, theme } = useContext(GlobalContext);
 
@@ -29,6 +30,7 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
             title={title}
             theme={theme}
             url={url}
+            urlClassName={urlClassName}
             fontSize={fontSizes?.cardTitle}
             classString={classNames?.cardTitle}
           />

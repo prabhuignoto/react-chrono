@@ -31,6 +31,7 @@ import {
  * @property {React.RefObject} progressRef - Ref to the progress bar.
  * @property {boolean} isNested - Determines if component is nested.
  * @property {boolean} isResuming - Determines if slideshow is resuming.
+ * @property {string | Function} url - Navigate user to URL
  *
  * @returns {JSX.Element} ContentFooter component.
  */
@@ -48,6 +49,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   progressRef,
   isNested,
   isResuming,
+  url
 }) => {
   const { mode, theme } = useContext(GlobalContext);
 
@@ -72,25 +74,39 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
 
   return (
     <>
-      {canShowMore ? (
-        <ShowMore
-          className="show-more"
-          onPointerDown={handleClick}
-          onKeyUp={(event) => {
-            if (event.key === 'Enter') {
-              onExpand();
-            }
-          }}
-          show={canShow ? 'true' : 'false'}
-          theme={theme}
-          tabIndex={0}
-        >
-          {<span>{showMore ? 'read less' : 'read more'}</span>}
-          <ChevronIconWrapper collapsed={showMore ? 'true' : 'false'}>
-            <ChevronIcon />
-          </ChevronIconWrapper>
-        </ShowMore>
-      ) : null}
+      <div style={{ width: '100%' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <button
+            style={{ margin: '0 6px 6px 0', padding: '3px' }}
+            onClick={typeof url === 'function' ? url : () => {}}
+          >
+            <span
+              style={{ fontSize: '12px', color: 'rgb(0, 127, 255)' }}
+            >
+              read in full
+            </span>
+          </button>
+          {canShowMore ? (
+            <ShowMore
+              className="show-more"
+              onPointerDown={handleClick}
+              onKeyUp={(event) => {
+                if (event.key === 'Enter') {
+                  onExpand();
+                }
+              }}
+              show={canShow ? 'true' : 'false'}
+              theme={theme}
+              tabIndex={0}
+            >
+              {<span>{showMore ? 'read less' : 'read more'}</span>}
+              <ChevronIconWrapper collapsed={showMore ? 'true' : 'false'}>
+                <ChevronIcon />
+              </ChevronIconWrapper>
+            </ShowMore>
+          ) : null}
+        </div>
+      </div>
 
       {showProgressBar && (
         <SlideShowProgressBar

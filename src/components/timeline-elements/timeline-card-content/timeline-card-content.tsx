@@ -38,6 +38,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       flip,
       branchDir,
       url,
+      urlClassName,
       timelineContent,
       items,
       isNested,
@@ -375,6 +376,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               title={title}
               theme={theme}
               url={url}
+              urlClassName={urlClassName}
               media={media}
               content={content}
             />
@@ -394,6 +396,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               theme={theme}
               title={title}
               url={url}
+              urlClassName={urlClassName}
               startWidth={startWidth}
               detailsText={TextOrContent}
               paused={paused}
@@ -444,6 +447,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               showMore={showMore}
               isNested={isNested}
               isResuming={isResuming}
+              url={url}
             />
           )}
         </TimelineItemContentWrapper>
