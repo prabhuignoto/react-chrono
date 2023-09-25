@@ -2,6 +2,7 @@ import babel from '@rollup/plugin-babel';
 import buble from '@rollup/plugin-buble';
 import common from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import postCSSPreset from 'postcss-preset-env';
@@ -10,9 +11,16 @@ import copy from 'rollup-plugin-copy';
 import del from 'rollup-plugin-delete';
 import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
-import terser from '@rollup/plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json' assert { type: 'json' };
+
+import createStyledComponentsTransformer from 'typescript-plugin-styled-components';
+
+// const styledComponentsTransformer = createStyledComponentsTransformer({
+//   displayName: true,
+//   minify: true,
+//   pure: true,
+// });
 
 const banner = `/*
  * ${pkg.name}
@@ -57,7 +65,13 @@ export default {
   plugins: [
     PeerDepsExternalPlugin(),
     del({ targets: 'dist/*' }),
-    typescript(),
+    typescript({
+      transformers: [
+        () => ({
+          before: [createStyledComponentsTransformer],
+        }),
+      ],
+    }),
     babel({
       babelHelpers: 'runtime',
       extensions: ['tsx', 'ts'],
