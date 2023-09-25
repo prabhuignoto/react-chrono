@@ -16,12 +16,6 @@ import pkg from './package.json' assert { type: 'json' };
 
 import createStyledComponentsTransformer from 'typescript-plugin-styled-components';
 
-// const styledComponentsTransformer = createStyledComponentsTransformer({
-//   displayName: true,
-//   minify: true,
-//   pure: true,
-// });
-
 const banner = `/*
  * ${pkg.name}
  * ${pkg.description}
@@ -108,7 +102,9 @@ export default {
       ],
     }),
     common(),
-    resolve(),
+    resolve({
+      browser: true,
+    }),
     terser({
       compress: {
         drop_console: true,
