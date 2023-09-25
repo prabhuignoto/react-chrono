@@ -39,3 +39,5 @@ cypress/videos
 .scannerwork
 # sonar-project.properties
 react-app-tester
+
+react-test-bed
