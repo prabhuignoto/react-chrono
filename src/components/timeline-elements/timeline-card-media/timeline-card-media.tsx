@@ -48,6 +48,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
   media,
   slideshowActive,
   url,
+  urlClassName,
   detailsText,
   showProgressBar,
   remainInterval,
@@ -294,6 +295,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             theme={theme}
             active={active}
             url={url}
+            urlClassName={urlClassName}
             fontSize={fontSizes?.cardTitle}
             classString={classNames?.cardTitle}
           />

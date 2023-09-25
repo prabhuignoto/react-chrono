@@ -23,6 +23,7 @@ import {
 const TitleMemo = ({
   title,
   url,
+  urlClassName,
   theme,
   color,
   dir,
@@ -40,13 +41,14 @@ const TitleMemo = ({
       $fontSize={fontSize}
       data-class={classString}
       $padding={padding}
+      onClick={typeof url === 'function' ? url : () => {}}
     >
-      {url ? (
+      {typeof url === 'string' ? (
         <CardTitleAnchor href={url} target="_blank" rel="noreferrer">
           {title}
         </CardTitleAnchor>
       ) : (
-        title
+        <span className={cls(url ? urlClassName : '')}>{title}</span>
       )}
     </CardTitle>
   ) : null;

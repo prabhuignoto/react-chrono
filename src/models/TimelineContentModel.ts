@@ -66,4 +66,7 @@ export type TimelineContentModel = {
 
   // URL associated with the timeline item.
   url?: string;
+
+  // Class applied to title, if title is URL
+  urlClassName: string
 };

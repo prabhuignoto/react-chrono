@@ -16,6 +16,7 @@ export interface Title extends common {
   padding?: boolean;
   title?: string;
   url?: string;
+  urlClassName?: string
 }
 
 export interface Content extends common {

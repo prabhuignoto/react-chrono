@@ -106,4 +106,7 @@ export interface CardMediaModel {
 
   // URL associated with the media.
   url?: string;
+
+  // Class applied to title, if url is present
+  urlClassName?: string
 }

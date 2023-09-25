@@ -67,7 +67,7 @@ type VerticalModel = Pick<
     | 'timelineContent'
     | 'items'
     | 'isNested'
-  > & { active?: boolean; className: string; id?: string };
+  > & { active?: boolean; className: string; id?: string, urlClassName?: string };
 
 /**
  * Represents the model for a vertical timeline point.

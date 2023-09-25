@@ -4,7 +4,7 @@ import { RefObject } from 'react';
 
 export type ContentHeaderProps = Pick<
   TimelineContentModel,
-  'theme' | 'url' | 'title' | 'media' | 'content'
+  'theme' | 'url' | 'title' | 'media' | 'content' | 'urlClassName'
 >;
 
 export type ContentFooterProps = {
@@ -22,4 +22,5 @@ export type ContentFooterProps = {
   textContentIsLarge: boolean;
   theme?: Theme;
   triangleDir?: string;
+  url?: string
 };

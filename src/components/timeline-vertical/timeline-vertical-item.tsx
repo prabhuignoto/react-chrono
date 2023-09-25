@@ -19,6 +19,7 @@ import {
  * @property {string} cardSubtitle - The subtitle of the card.
  * @property {string} cardTitle - The title of the card.
  * @property {string} url - The URL of the card.
+ * @property {string} urlClassName - Class applied to title, if title is url
  * @property {string} className - The class name for the component.
  * @property {React.ReactNode} contentDetailsChildren - The content details children nodes.
  * @property {React.ReactNode} iconChild - The icon child nodes.
@@ -49,6 +50,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     cardSubtitle,
     cardTitle,
     url,
+    urlClassName,
     className,
     contentDetailsChildren,
     iconChild,
@@ -217,6 +219,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
             theme={theme}
             title={cardTitle}
             url={url}
+            urlClassName={urlClassName}
             flip={flipLayout}
             timelineContent={timelineContent}
             items={items}
