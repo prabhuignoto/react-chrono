@@ -14,8 +14,6 @@ import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json' assert { type: 'json' };
 
-import createStyledComponentsTransformer from 'typescript-plugin-styled-components';
-
 const banner = `/*
  * ${pkg.name}
  * ${pkg.description}
@@ -59,13 +57,7 @@ export default {
   plugins: [
     PeerDepsExternalPlugin(),
     del({ targets: 'dist/*' }),
-    typescript({
-      transformers: [
-        () => ({
-          before: [createStyledComponentsTransformer],
-        }),
-      ],
-    }),
+    typescript(),
     babel({
       babelHelpers: 'runtime',
       extensions: ['tsx', 'ts'],
