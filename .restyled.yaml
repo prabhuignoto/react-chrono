@@ -1,3 +1,14 @@
+image: 'restyled/restyler-prettier:v3.0.3-2'
+command:
+  - prettier
+  - '--write'
+arguments: []
+include:
+  - '**/*.js'
+  - '**/*.ts'
+  - '**/*.jsx'
+  - '**/*.tsx'
+interpreters: []
 exclude:
   - "**/*.patch"
   - "**/node_modules/**/*"
