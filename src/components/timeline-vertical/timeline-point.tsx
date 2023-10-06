@@ -107,25 +107,26 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
         role="button"
         $cardLess={cardLess}
       >
-        {!disableTimelinePoint ? (
-          <TimelinePointContainer
-            className={`${className} timeline-vertical-circle`}
-            {...clickHandlerProps}
-            ref={circleRef}
-            role="button"
-            data-testid="tree-leaf-click"
-            aria-label="select timeline"
+        {/* {!disableTimelinePoint ? ( */}
+        <TimelinePointContainer
+          className={`${className} timeline-vertical-circle`}
+          {...clickHandlerProps}
+          ref={circleRef}
+          role="button"
+          data-testid="tree-leaf-click"
+          aria-label="select timeline"
+          $hide={disableTimelinePoint}
+        >
+          <Shape
+            className={circleClass}
+            theme={theme}
+            dimension={timelinePointDimension}
+            $timelinePointShape={timelinePointShape}
           >
-            <Shape
-              className={circleClass}
-              theme={theme}
-              dimension={timelinePointDimension}
-              $timelinePointShape={timelinePointShape}
-            >
-              {iconChild ? iconChild : null}
-            </Shape>
-          </TimelinePointContainer>
-        ) : null}
+            {iconChild ? iconChild : null}
+          </Shape>
+        </TimelinePointContainer>
+        {/* ) : null} */}
       </TimelinePointWrapper>
     );
   },

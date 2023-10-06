@@ -44,7 +44,8 @@ export const TimelinePointWrapper = styled.div<{
   }
 `;
 
-export const TimelinePointContainer = styled.div`
+export const TimelinePointContainer = styled.div<{ $hide?: boolean }>`
   position: relative;
   z-index: 1;
+  visibility: ${(p) => (p.$hide ? 'hidden' : 'visible')};
 `;
