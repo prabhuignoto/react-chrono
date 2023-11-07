@@ -3,14 +3,14 @@
 exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
 <div>
   <div
-    class="sc-hABBGs WSJMe vertical_alternating"
+    class="sc-hBMVwJ cblprq vertical_alternating"
     data-testid="timeline-item"
   >
     <div
-      class="sc-fHekAb glGUdB"
+      class="sc-fFSPgy iICOyG"
     >
       <div
-        class="sc-blmCWO kIZber timeline-circle using-icon vertical_alternating active"
+        class="sc-bkbjWr dNBbAS timeline-circle using-icon vertical_alternating active"
         data-testid="timeline-circle"
         dimension="16"
       >
@@ -18,11 +18,11 @@ exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-ifysJV mPlQH vertical_alternating"
+      class="sc-iemXqs iWMgrE vertical_alternating"
       data-testid="timeline-title"
     >
       <div
-        class="sc-ktwNLz gnJfSB timeline-item-title active title"
+        class="sc-ksltVi diUNSD timeline-item-title active title"
       />
     </div>
   </div>

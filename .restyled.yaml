@@ -6,4 +6,4 @@ exclude:
   - ".gitignore"
   - "pnpm-lock.yaml"
   - "**/tsconfig.json"
-  - coverage/**
+  - coverage/**/*
