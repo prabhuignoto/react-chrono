@@ -50,7 +50,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           install: false
-          start: pnpm dev
-          wait-on: 'http://localhost:4444'
-          wait-on-timeout: 400
+          start: pnpm dev --host
+          wait-on: 'npx --yes wait-on --timeout 60000 tcp:4444'
+          wait-on-timeout: 700
           browser: ${{ matrix.browser }} # Use the browser from the matrix

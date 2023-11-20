@@ -30,7 +30,7 @@
     "rollup": "rollup -c rollup.config.mjs",
     "snyk": "snyk test",
     "prepare": "husky install",
-    "dev": "vite --config vite.config.ts",
+    "dev": "vite --config vite.config.ts --host",
     "clean": "npx concurrently \"pnpm format\" \"pnpm lint:all\"",
     "test": "vitest --config vitest.config.ts",
     "vite:build": "vite build --config vite.config.ts",
