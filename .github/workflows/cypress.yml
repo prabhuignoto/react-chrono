@@ -51,6 +51,6 @@ jobs:
         with:
           install: false
           start: pnpm dev --host
-          wait-on: 'npx --yes wait-on --timeout 60000 tcp:4444'
+          wait-on: 'pnpx --yes wait-on --timeout 60000 tcp:4444'
           wait-on-timeout: 700
           browser: ${{ matrix.browser }} # Use the browser from the matrix
