@@ -47,10 +47,10 @@ jobs:
             ${{ runner.os }}-cypress-
 
       - name: Run Cypress tests
-        uses: cypress-io/github-action@v5.8.3
+        uses: cypress-io/github-action@v6
         with:
           install: false
-          start: pnpm dev
-          wait-on: 'http://[::1]:4444'
-          wait-on-timeout: 200
+          start: pnpm dev --host
+          wait-on: 'pnpx wait-on --timeout 60000 tcp:4444'
+          wait-on-timeout: 700
           browser: ${{ matrix.browser }} # Use the browser from the matrix
