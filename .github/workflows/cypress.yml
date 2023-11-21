@@ -22,7 +22,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8.1.0
+          version: 8.8.0
 
       - name: Cache PNPM dependencies
         uses: actions/cache@v3
