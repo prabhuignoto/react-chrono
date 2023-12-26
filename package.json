@@ -39,10 +39,10 @@
     "build": "pnpm rollup"
   },
   "dependencies": {
-    "classnames": "^2.3.2",
+    "classnames": "^2.3.3",
     "dayjs": "^1.11.10",
     "focus-visible": "^5.2.0",
-    "styled-components": "^6.1.2",
+    "styled-components": "^6.1.3",
     "stylis": "^4.3.0"
   },
   "peerDependencies": {
@@ -83,8 +83,8 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.34",
     "@types/testing-library__jest-dom": "^6.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
-    "@typescript-eslint/parser": "^6.15.0",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-v8": "^1.1.0",
     "autoprefixer": "^10.4.16",
@@ -125,7 +125,7 @@
     "size-limit": "^11.0.1",
     "snyk": "^1.1266.0",
     "start-server-and-test": "^2.0.3",
-    "stylelint": "^16.0.2",
+    "stylelint": "^16.1.0",
     "stylelint-config-recommended": "^14.0.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-order": "^6.0.4",
