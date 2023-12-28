@@ -50,4 +50,7 @@ export interface Theme {
 
   // title color for active tabs
   titleColorActive?: string;
+
+  // highlight color of the title
+  titleHighlightActive?: string;
 }

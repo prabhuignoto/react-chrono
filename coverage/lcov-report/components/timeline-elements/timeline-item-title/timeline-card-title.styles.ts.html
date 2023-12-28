@@ -130,7 +130,9 @@ export const TitleWrapper = styled.div&lt;{
   color: ${(p) =&gt; (p.theme ? p.theme.<span class="branch-0 cbranch-no" title="branch not covered" >titleColor : '')}</span>;
 &nbsp;
   &amp;.active {
-    background: ${(p) =&gt; p.theme?.secondary};
+    background: ${(p) =&gt; 
+        p.theme?.titleHighlightActive ? p.theme.titleHighlightActive : p.theme?.secondary
+    };
     color: ${(p) =&gt;
       p.theme?.titleColorActive ? p.theme?.titleColorActive : p.theme?.primary};
   }
