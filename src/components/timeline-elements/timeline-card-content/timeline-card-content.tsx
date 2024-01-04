@@ -15,9 +15,9 @@ import Timeline from '../../timeline/timeline';
 import CardMedia from '../timeline-card-media/timeline-card-media';
 import { ContentFooter } from './content-footer';
 import { ContentHeader } from './content-header';
-import { TimelineItemContentWrapper } from './timeline-card-content.styles';
-import { getTextOrContent } from './text-or-content';
 import { DetailsText } from './details-text';
+import { getTextOrContent } from './text-or-content';
+import { TimelineItemContentWrapper } from './timeline-card-content.styles';
 
 const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
   React.memo(
@@ -112,6 +112,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             return;
           }
           const detailsEle = detailsRef.current;
+          console.log('detailsEle', detailsEle, node);
           if (!detailsEle) {
             return;
           }

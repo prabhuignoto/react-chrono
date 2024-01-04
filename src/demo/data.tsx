@@ -23,6 +23,12 @@ const items: TimelineItemModel[] = [
       `<ul>
         <li>Holland capitulated after only five days of fighting, and the Belgians surrendered on 28 May.</li>
         <li>With the success of the German ‘Blitzkrieg’, the British Expeditionary Force and French troops were in danger of being cut off and destroyed.</li>
+        <li>
+        Germany’s armoured spearheads reached the Channel coast on 20 May, and the British began to evacuate their troops from Dunkirk.
+        </li>
+        <li>
+        The evacuation was codenamed ‘Operation Dynamo’ and was directed by Admiral Bertram Ramsay from his headquarters deep in the cliffs at Dover.
+        </li>
       </ul>
       `,
     ],
