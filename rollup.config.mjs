@@ -73,12 +73,15 @@ export default {
         ],
       ],
     }),
-    buble({
-      objectAssign: true,
-      transforms: {
-        templateString: false,
-      },
-    }),
+    // buble({
+    //   objectAssign: true,
+    //   transforms: {
+    //     dangerousForOf: false,
+    //     forOf: false,
+    //     generator: false,
+    //     templateString: false,
+    //   },
+    // }),
     postcss({
       plugins: [
         postCSSPreset({

@@ -7,6 +7,7 @@ import {
   slideInFromLeft,
   slideInFromTop,
 } from './card-animations.styles';
+import { Theme } from '@models/Theme';
 
 type ContentT = Pick<
   TimelineProps,
