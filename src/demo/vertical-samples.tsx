@@ -126,9 +126,9 @@ export const VerticalBasic: FunctionComponent<{
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
         noUniqueId
-        disableTimelinePoint
         uniqueID="vertical_basic_test"
         parseDetailsTextHTML
+        disableInteraction
         // textOverlay
         // borderLessCards
         // theme={{

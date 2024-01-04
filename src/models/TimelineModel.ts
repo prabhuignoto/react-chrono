@@ -105,6 +105,8 @@ export type TimelineProps = {
   // disables the click on the circle
   disableClickOnCircle?: boolean;
 
+  disableInteraction?: boolean;
+
   disableNavOnKey?: boolean;
 
   disableTimelinePoint?: boolean;

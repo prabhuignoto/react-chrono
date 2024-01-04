@@ -48,8 +48,15 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   isDark,
   onPaused,
 }: TimelineControlModel) => {
-  const { mode, flipLayout, theme, buttonTexts, classNames, enableDarkToggle } =
-    useContext(GlobalContext);
+  const {
+    mode,
+    flipLayout,
+    theme,
+    buttonTexts,
+    classNames,
+    enableDarkToggle,
+    disableInteraction,
+  } = useContext(GlobalContext);
 
   const rotate = useMemo(() => mode !== 'HORIZONTAL', [mode]);
 
@@ -107,72 +114,76 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
         className={cls('timeline-controls', classNames?.controls)}
       >
         {/* jump to first */}
-        <TimelineNavItem $disable={canDisableLeft}>
-          <TimelineNavButton
-            mode={mode}
-            theme={theme}
-            onClick={flippedHorizontally ? onLast : onFirst}
-            title={jumpToFirstTitle}
-            aria-label={jumpToFirstTitle}
-            aria-disabled={disableLeft}
-            aria-controls="timeline-main-wrapper"
-            tabIndex={!disableLeft ? 0 : -1}
-            rotate={rotate ? 'TRUE' : 'FALSE'}
-          >
-            <ChevronsLeftIcon />
-          </TimelineNavButton>
-        </TimelineNavItem>
+        {disableInteraction ? null : (
+          <>
+            <TimelineNavItem $disable={canDisableLeft}>
+              <TimelineNavButton
+                mode={mode}
+                theme={theme}
+                onClick={flippedHorizontally ? onLast : onFirst}
+                title={jumpToFirstTitle}
+                aria-label={jumpToFirstTitle}
+                aria-disabled={disableLeft}
+                aria-controls="timeline-main-wrapper"
+                tabIndex={!disableLeft ? 0 : -1}
+                rotate={rotate ? 'TRUE' : 'FALSE'}
+              >
+                <ChevronsLeftIcon />
+              </TimelineNavButton>
+            </TimelineNavItem>
 
-        {/* previous */}
-        <TimelineNavItem $disable={canDisableLeft}>
-          <TimelineNavButton
-            mode={mode}
-            theme={theme}
-            onClick={flippedHorizontally ? onNext : onPrevious}
-            title={previousTitle}
-            aria-label={previousTitle}
-            aria-disabled={disableLeft}
-            aria-controls="timeline-main-wrapper"
-            tabIndex={!disableLeft ? 0 : -1}
-            rotate={rotate ? 'TRUE' : 'FALSE'}
-          >
-            <ChevronLeft />
-          </TimelineNavButton>
-        </TimelineNavItem>
+            {/* previous */}
+            <TimelineNavItem $disable={canDisableLeft}>
+              <TimelineNavButton
+                mode={mode}
+                theme={theme}
+                onClick={flippedHorizontally ? onNext : onPrevious}
+                title={previousTitle}
+                aria-label={previousTitle}
+                aria-disabled={disableLeft}
+                aria-controls="timeline-main-wrapper"
+                tabIndex={!disableLeft ? 0 : -1}
+                rotate={rotate ? 'TRUE' : 'FALSE'}
+              >
+                <ChevronLeft />
+              </TimelineNavButton>
+            </TimelineNavItem>
 
-        {/* next */}
-        <TimelineNavItem $disable={canDisableRight}>
-          <TimelineNavButton
-            mode={mode}
-            theme={theme}
-            onClick={flippedHorizontally ? onPrevious : onNext}
-            title={nextTitle}
-            aria-label={nextTitle}
-            aria-disabled={disableRight}
-            aria-controls="timeline-main-wrapper"
-            rotate={rotate ? 'TRUE' : 'FALSE'}
-            tabIndex={!disableRight ? 0 : -1}
-          >
-            <ChevronRightIcon />
-          </TimelineNavButton>
-        </TimelineNavItem>
+            {/* next */}
+            <TimelineNavItem $disable={canDisableRight}>
+              <TimelineNavButton
+                mode={mode}
+                theme={theme}
+                onClick={flippedHorizontally ? onPrevious : onNext}
+                title={nextTitle}
+                aria-label={nextTitle}
+                aria-disabled={disableRight}
+                aria-controls="timeline-main-wrapper"
+                rotate={rotate ? 'TRUE' : 'FALSE'}
+                tabIndex={!disableRight ? 0 : -1}
+              >
+                <ChevronRightIcon />
+              </TimelineNavButton>
+            </TimelineNavItem>
 
-        {/* jump to last */}
-        <TimelineNavItem $disable={canDisableRight}>
-          <TimelineNavButton
-            mode={mode}
-            theme={theme}
-            onClick={flippedHorizontally ? onFirst : onLast}
-            title={jumpToLastTitle}
-            aria-label={jumpToLastTitle}
-            aria-disabled={disableRight}
-            aria-controls="timeline-main-wrapper"
-            tabIndex={!disableRight ? 0 : -1}
-            rotate={rotate ? 'TRUE' : 'FALSE'}
-          >
-            <ChevronsRightIcon />
-          </TimelineNavButton>
-        </TimelineNavItem>
+            {/* jump to last */}
+            <TimelineNavItem $disable={canDisableRight}>
+              <TimelineNavButton
+                mode={mode}
+                theme={theme}
+                onClick={flippedHorizontally ? onFirst : onLast}
+                title={jumpToLastTitle}
+                aria-label={jumpToLastTitle}
+                aria-disabled={disableRight}
+                aria-controls="timeline-main-wrapper"
+                tabIndex={!disableRight ? 0 : -1}
+                rotate={rotate ? 'TRUE' : 'FALSE'}
+              >
+                <ChevronsRightIcon />
+              </TimelineNavButton>
+            </TimelineNavItem>
+          </>
+        )}
 
         {/* slideshow button */}
         <TimelineNavItem>

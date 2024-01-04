@@ -22,8 +22,6 @@ export const Wrapper = styled.div`
   grid-template-columns: 30% 70%;
 `;
 
-
-
 export const ComponentContainer = styled.div<{ type?: string }>`
   border-radius: 4px;
   margin: 0 auto;

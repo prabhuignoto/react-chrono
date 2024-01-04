@@ -76,6 +76,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         textOverlay,
         slideShowType,
         showProgressOnSlideshow,
+        disableInteraction,
       } = useContext(GlobalContext);
 
       // If the media is a video, we don't show the progress bar.
@@ -112,7 +113,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             return;
           }
           const detailsEle = detailsRef.current;
-          console.log('detailsEle', detailsEle, node);
           if (!detailsEle) {
             return;
           }
@@ -333,7 +333,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [showMore, timelineContent, theme, detailedText]);
 
       const handlers = useMemo(() => {
-        if (!isNested) {
+        if (!isNested && !disableInteraction) {
+          console.log('reddit');
           return {
             onPointerDown: (ev: React.PointerEvent) => {
               ev.stopPropagation();
@@ -350,7 +351,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             onPointerLeave: tryHandleResumeSlideshow,
           };
         }
-      }, [tryHandlePauseSlideshow, tryHandleResumeSlideshow]);
+        // }, [tryHandlePauseSlideshow, tryHandleResumeSlideshow]);
+      }, []);
 
       return (
         <TimelineItemContentWrapper

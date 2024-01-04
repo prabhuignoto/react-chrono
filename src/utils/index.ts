@@ -69,11 +69,11 @@ export const getSlideShowType: (mode: TimelineMode) => SlideShowType = (
 
 export const isTextArray = (text: string | string[]): text is string[] => {
   return Array.isArray(text);
-}
+};
 
 export const sanitizeHtmlText = (text: string | string[]) => {
   if (isTextArray(text)) {
     return text.map((t) => santizeHtml(t));
   }
   return santizeHtml(text);
-}
+};

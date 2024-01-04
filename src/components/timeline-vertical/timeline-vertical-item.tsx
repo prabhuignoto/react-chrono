@@ -79,6 +79,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     classNames,
     textOverlay,
     mediaHeight,
+    disableInteraction,
   } = useContext(GlobalContext);
 
   // handler for onActive
@@ -111,7 +112,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       >
         <TimelineItemTitle
           title={title}
-          active={active}
+          active={active && !disableInteraction}
           theme={theme}
           align={flipLayout ? 'left' : 'right'}
           classString={classNames?.title}

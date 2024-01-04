@@ -24,7 +24,6 @@ const getTextOrContent: (
 }) => {
   const TextOrContent = forwardRef<HTMLParagraphElement, TextOrContentModel>(
     (prop, ref) => {
-      // const { timelineContent, theme, detailedText, showMore } = prop;
       const isTextArray = Array.isArray(detailedText);
 
       const { fontSizes, classNames, parseDetailsTextHTML } =
@@ -45,7 +44,6 @@ const getTextOrContent: (
                   },
                 }
               : null;
-            console.log(props);
             return (
               <TimelineSubContent
                 key={index}
@@ -53,11 +51,6 @@ const getTextOrContent: (
                 className={classNames?.cardText}
                 theme={theme}
                 {...props}
-                // dangerouslySetInnerHTML={{
-                //   __html: sanitizeHtml(text, {
-                //     parseStyleAttributes: true,
-                //   }),
-                // }}
               >
                 {parseDetailsTextHTML ? null : text}
               </TimelineSubContent>

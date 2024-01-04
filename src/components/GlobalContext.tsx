@@ -7,8 +7,8 @@ import {
   getSlideShowType,
 } from '@utils/index';
 import {
-  createContext,
   FunctionComponent,
+  createContext,
   useCallback,
   useMemo,
   useState,
@@ -71,9 +71,10 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           borderLessCards: false,
           cardHeight: newCardHeight,
           cardLess: false,
-          disableAutoScrollOnClick: false,
-          disableClickOnCircle: false,
-          disableTimelinePoint: false,
+          disableAutoScrollOnClick: false || props.disableInteraction,
+          disableClickOnCircle: false || props.disableInteraction,
+          disableInteraction: false,
+          disableTimelinePoint: false || props.disableInteraction,
           enableBreakPoint: true,
           enableDarkToggle: false,
           focusActiveItemOnLoad: false,
