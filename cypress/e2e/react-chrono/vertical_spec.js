@@ -41,7 +41,7 @@ context('Chrono.Vertical.Basic', () => {
     cy.get('.vertical-item-row')
       .eq(0)
       .find('.card-description span')
-      .should('have.length', 1);
+      .should('have.length', 2);
   });
 
   it('check card description', () => {

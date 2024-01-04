@@ -128,7 +128,6 @@ export const VerticalBasic: FunctionComponent<{
         noUniqueId
         uniqueID="vertical_basic_test"
         parseDetailsTextHTML
-        disableInteraction
         // textOverlay
         // borderLessCards
         // theme={{
