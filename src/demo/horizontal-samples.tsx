@@ -57,9 +57,11 @@ export const HorizontalAll: React.FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
 }> = ({ items }) => {
+  const [index, setIndex] = React.useState(-1);
   return (
     <Horizontal id="horizontal">
       <ComponentContainer type={'big-screen'}>
+        <span>{index}</span>
         <Chrono
           items={items}
           mode="HORIZONTAL"
@@ -73,7 +75,10 @@ export const HorizontalAll: React.FunctionComponent<{
           slideItemDuration={2550}
           itemWidth={400}
           focusActiveItemOnLoad
-          onItemSelected={(selected) => console.log(selected)}
+          onItemSelected={(selected) => {
+            console.log('moye', selected.index);
+            setIndex(selected.index);
+          }}
           timelinePointDimension={20}
           showAllCardsHorizontal
           activeItemIndex={8}
