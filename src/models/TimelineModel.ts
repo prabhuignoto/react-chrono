@@ -135,6 +135,8 @@ export type TimelineProps = {
   // hides the ui controls
   hideControls?: boolean;
 
+  highlightCardsOnHover?: boolean;
+
   itemWidth?: number;
 
   // collection of timeline items

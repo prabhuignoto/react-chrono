@@ -1,4 +1,3 @@
-import { Theme } from '@models/Theme';
 import { TimelineProps } from '@models/TimelineModel';
 import styled, { css, keyframes } from 'styled-components';
 import { linearGradient } from '../timeline-card-media/timeline-card-media.styles';
@@ -19,6 +18,7 @@ export const TimelineItemContentWrapper = styled.section<
     $active?: boolean;
     $borderLessCards?: TimelineProps['borderLessCards'];
     $branchDir?: string;
+    $highlight?: boolean;
     $isNested?: boolean;
     $maxWidth?: number;
     $minHeight?: number;
@@ -48,6 +48,27 @@ export const TimelineItemContentWrapper = styled.section<
   text-align: left;
   width: 98%;
   z-index: 0;
+
+  ${(p) =>
+    p.$highlight
+      ? css`
+          &:hover {
+            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3)) brightness(1.05);
+
+            &::before {
+              content: '';
+              height: 100%;
+              left: 0;
+              position: absolute;
+              top: 0;
+              width: 100%;
+              z-index: -1;
+              border: 2px solid ${p.theme.primary};
+              border-radius: 4px;
+            }
+          }
+        `
+      : css``}
 
   ${(p) =>
     p.$isNested

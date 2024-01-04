@@ -77,6 +77,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         slideShowType,
         showProgressOnSlideshow,
         disableInteraction,
+        highlightCardsOnHover,
       } = useContext(GlobalContext);
 
       // If the media is a video, we don't show the progress bar.
@@ -372,6 +373,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           $slideShowActive={slideShowActive}
           $branchDir={branchDir}
           $isNested={isNested}
+          $highlight={highlightCardsOnHover}
         >
           {title && !textOverlay ? (
             <ContentHeader

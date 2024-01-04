@@ -69,7 +69,6 @@ export const HorizontalAll: React.FunctionComponent<{
           cardWidth={500}
           enableDarkToggle
           slideShow
-          // slideShow
           textOverlay
           mediaHeight={250}
           slideItemDuration={2550}

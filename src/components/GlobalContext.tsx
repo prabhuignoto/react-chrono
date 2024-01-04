@@ -78,6 +78,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           enableBreakPoint: true,
           enableDarkToggle: false,
           focusActiveItemOnLoad: false,
+          highlightCardsOnHover: false,
           lineWidth: 3,
           mediaHeight: 200,
           nestedCardHeight: 150,

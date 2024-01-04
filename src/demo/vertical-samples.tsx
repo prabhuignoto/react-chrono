@@ -241,6 +241,7 @@ export const VerticalAlternatingNested: FunctionComponent<{
             mediaSettings={{
               imageFit: 'contain',
             }}
+            highlightCardsOnHover
             // borderLessCards
             // theme={{
             //   cardBgColor: '#fff',
