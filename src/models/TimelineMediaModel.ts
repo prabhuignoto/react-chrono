@@ -60,6 +60,7 @@ export interface CardMediaModel {
   content?: string | ReactNode;
 
   // Text details associated with the media.
+  // detailsText?: ForwardRefExoticComponent<TextOrContentModel>;
   detailsText?: ForwardRefExoticComponent<TextOrContentModel>;
 
   // Indicates if media should be hidden.

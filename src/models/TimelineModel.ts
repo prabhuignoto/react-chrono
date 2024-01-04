@@ -172,6 +172,8 @@ export type TimelineProps = {
 
   onThemeChange?: () => void;
 
+  parseDetailsTextHTML?: boolean;
+
   // option to enable scrollbar
   scrollable?: boolean | { scrollbar: boolean };
 

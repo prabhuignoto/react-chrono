@@ -18,8 +18,15 @@ const items: TimelineItemModel[] = [
       'Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.',
     // cardDetailedText: [`On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France.`, `Holland capitulated after only five days of fighting, and the Belgians surrendered on 28 May. With the success of the German ‘Blitzkrieg’, the British Expeditionary Force and French troops were in danger of being cut off and destroyed.`],
     cardDetailedText: [
-      `On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France.`,
+      `On 10 May 1940, <a href="http://www.google.com">Hitler</a> began his <strong>long-awaited</strong> offensive in the west by invading neutral Holland and Belgium and attacking northern France.
+      <br>`,
+      `<ul>
+        <li>Holland capitulated after only five days of fighting, and the Belgians surrendered on 28 May.</li>
+        <li>With the success of the German ‘Blitzkrieg’, the British Expeditionary Force and French troops were in danger of being cut off and destroyed.</li>
+      </ul>
+      `,
     ],
+    // cardDetailedText: `Holland capitulated <a href="www.google.com">the</a> after <b>only</b> five days of fighting, and the Belgians surrendered on 28 May.With the success of the German ‘Blitzkrieg’, the British Expeditionary Force and French troops were in danger of being cut off and destroyed.`,
   },
   {
     title: '25 July 1941',
@@ -32,6 +39,7 @@ const items: TimelineItemModel[] = [
       },
       type: 'IMAGE',
     },
+
     // items: [
     //   {
     //     cardTitle: 'The Battle of Britian Yaar',

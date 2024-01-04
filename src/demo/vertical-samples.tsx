@@ -128,6 +128,7 @@ export const VerticalBasic: FunctionComponent<{
         noUniqueId
         disableTimelinePoint
         uniqueID="vertical_basic_test"
+        parseDetailsTextHTML
         // textOverlay
         // borderLessCards
         // theme={{
