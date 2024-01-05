@@ -56,6 +56,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     classNames,
     theme,
     timelinePointShape,
+    disableInteraction,
   } = useContext(GlobalContext);
 
   const handleClick = () => {
@@ -116,7 +117,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         ref={contentRef}
         id={`timeline-card-${id}`}
         theme={theme}
-        $active={active}
+        $active={active && !disableInteraction}
         $highlight={showAllCardsHorizontal}
         tabIndex={0}
         $cardWidth={cardWidth}
@@ -183,7 +184,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       >
         <TimelineItemTitle
           title={title}
-          active={active}
+          active={active && !disableInteraction}
           theme={theme}
           classString={classNames?.title}
         />
