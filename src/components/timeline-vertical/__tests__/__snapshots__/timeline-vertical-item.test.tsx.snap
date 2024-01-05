@@ -23,6 +23,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     >
       <section
         class="sc-jcMgDF kathwN timeline-card-content  card"
+        data-testid="timeline-card-content"
         mode="VERTICAL_ALTERNATING"
         tabindex="0"
       >
@@ -36,6 +37,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
           >
             <img
               class="sc-bYMqJM iaEsaG"
+              data-testid="timeline-card-content-image"
               loading="lazy"
               mode="VERTICAL_ALTERNATING"
               role="img"

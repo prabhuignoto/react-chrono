@@ -13,6 +13,7 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
       <img
         alt="Image"
         class="sc-gswONk iahiWj"
+        data-testid="timeline-card-content-image"
         loading="lazy"
         mode="VERTICAL_ALTERNATING"
         role="img"
@@ -46,6 +47,7 @@ exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen=""
       class="sc-jSVask kCSYsI"
+      data-testid="timeline-card-content-video"
       frameborder="0"
       src="https://www.youtube.com/watch?v=9bZkp7q19f0?enablejsapi=1"
       title="Video"

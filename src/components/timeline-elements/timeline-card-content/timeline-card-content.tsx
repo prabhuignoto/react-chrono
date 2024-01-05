@@ -374,6 +374,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           $branchDir={branchDir}
           $isNested={isNested}
           $highlight={highlightCardsOnHover}
+          data-testid="timeline-card-content"
         >
           {title && !textOverlay ? (
             <ContentHeader

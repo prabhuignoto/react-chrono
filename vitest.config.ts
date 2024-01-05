@@ -21,10 +21,10 @@ export default defineConfig({
       './src/components/**/*.test.{tsx,ts}',
       './src/utils/**/*.test.{tsx,ts}',
     ],
-    // minThreads: 5,
+    maxWorkers: 5,
+    pool: 'threads',
     setupFiles: './src/test-setup.js',
     silent: true,
-    // threads: true,
     update: true,
   },
 });

@@ -139,6 +139,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
           active ? '?autoplay=1&enablejsapi=1' : '?enablejsapi=1'
         }`}
         title={media.name}
+        data-testid="timeline-card-content-video"
       />
     );
 
@@ -195,6 +196,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         $enableBorderRadius={borderLessCards}
         role="img"
         fit={mediaSettings?.imageFit}
+        data-testid="timeline-card-content-image"
       />
     );
   }, [mediaLoaded, borderLessCards]);

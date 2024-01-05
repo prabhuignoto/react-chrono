@@ -50,7 +50,7 @@ export type TimelineContentModel = {
   onElapsed?: (id?: string) => void;
 
   // Show more event handler for the timeline item.
-  onShowMore: () => void;
+  onShowMore?: () => void;
 
   // Indicates if slide show is active.
   slideShowActive?: boolean;
