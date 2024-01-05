@@ -108,5 +108,5 @@ describe('TimelineHorizontalCard', () => {
     expect(getByRole('link')).toHaveAttribute('href', 'http://www.google.com');
   });
 
-  
+
 });
