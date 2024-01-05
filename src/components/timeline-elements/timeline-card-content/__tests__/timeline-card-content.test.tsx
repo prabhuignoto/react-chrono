@@ -3,8 +3,6 @@ import { vi } from 'vitest';
 import { customRender, providerProps } from '../../../common/test';
 import TimelineCardContent from '../timeline-card-content';
 
-const callback = vi.fn();
-
 describe('TimelineCardContent', () => {
   afterEach(() => {
     vi.resetAllMocks();
