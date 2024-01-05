@@ -28,7 +28,7 @@ export const HorizontalBasic: React.FunctionComponent<{
           onItemSelected={(selected) => console.log(selected)}
           timelinePointDimension={20}
           timelinePointShape="square"
-          disableInteraction
+          // disableInteraction
           // cardPositionHorizontal="TOP"
           buttonTexts={{
             first: 'Jump to First',
