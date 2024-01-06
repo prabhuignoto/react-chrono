@@ -1,5 +1,5 @@
 import { TimelineModel } from '@models/TimelineModel';
-import { waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import { customRender, providerProps } from '../../common/test';
@@ -54,6 +54,13 @@ describe('Timeline', () => {
         id: '2',
         title: 'Item 2',
       },
+      {
+        cardDetailedText: 'Detailed text 3',
+        cardSubtitle: 'Subtitle 3',
+        cardTitle: 'Card 3',
+        id: '3',
+        title: 'Item 3',
+      },
     ],
     mode: 'HORIZONTAL',
     nestedCardHeight: 200,
@@ -87,6 +94,22 @@ describe('Timeline', () => {
     expect(item2).toBeInTheDocument();
   });
 
+  //shoulkd render the timeline items correctly when the mode is HORIZONTAL
+  it('should render the timeline items correctly when the mode is HORIZONTAL', () => {
+    const { getByText } = customRender(
+      <Timeline {...commonProps} mode="HORIZONTAL" />,
+      {
+        providerProps,
+      },
+    );
+
+    const item1 = getByText('Item 1');
+    const item2 = getByText('Item 2');
+
+    expect(item1).toBeInTheDocument();
+    expect(item2).toBeInTheDocument();
+  });
+
   it('should call onNext', async () => {
     const { getByLabelText } = customRender(
       <Timeline {...commonProps} mode="VERTICAL_ALTERNATING" />,
@@ -96,7 +119,6 @@ describe('Timeline', () => {
     );
 
     const nextButton = getByLabelText('next');
-    const previousButton = getByLabelText('previous');
 
     userEvent.click(nextButton);
 
@@ -171,7 +193,11 @@ describe('Timeline', () => {
   //should call onLast when last button is clicked
   it('should call onLast when last button is clicked', async () => {
     const { getByLabelText } = customRender(
-      <Timeline {...commonProps} mode="VERTICAL_ALTERNATING" activeTimelineItem={0}/>,
+      <Timeline
+        {...commonProps}
+        mode="VERTICAL_ALTERNATING"
+        activeTimelineItem={0}
+      />,
       {
         providerProps,
       },
@@ -208,4 +234,5 @@ describe('Timeline', () => {
       });
     });
   });
+
 });

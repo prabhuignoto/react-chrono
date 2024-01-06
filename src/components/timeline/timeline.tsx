@@ -354,6 +354,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         $scrollable={canScrollTimeline}
         className={`${mode.toLowerCase()} timeline-main-wrapper`}
         id="timeline-main-wrapper"
+        data-testid="timeline-main-wrapper"
         theme={theme}
         mode={mode}
         onScroll={(ev) => {
