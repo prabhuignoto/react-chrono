@@ -103,6 +103,7 @@
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-typescript-sort-keys": "^3.1.0",
     "husky": "^8.0.3",
+    "intersection-observer": "^0.12.2",
     "jsdom": "^23.0.1",
     "lint-staged": "^15.2.0",
     "postcss": "^8.4.33",
