@@ -1,6 +1,6 @@
 import { TimelineContentModel } from '@models/TimelineContentModel';
 import { ForwardRefExoticComponent, forwardRef, useContext } from 'react';
-import sanitizeHtml from 'sanitize-html';
+import xss from 'xss';
 import { GlobalContext } from '../../GlobalContext';
 import {
   TimelineContentDetails,
@@ -38,9 +38,7 @@ const getTextOrContent: (
             const props = parseDetailsTextHTML
               ? {
                   dangerouslySetInnerHTML: {
-                    __html: sanitizeHtml(text, {
-                      parseStyleAttributes: true,
-                    }),
+                    __html: xss(text),
                   },
                 }
               : null;
@@ -57,20 +55,14 @@ const getTextOrContent: (
             );
           });
         } else {
-          textContent = parseDetailsTextHTML
-            ? sanitizeHtml(detailedText, {
-                parseStyleAttributes: true,
-              })
-            : detailedText;
+          textContent = parseDetailsTextHTML ? xss(detailedText) : detailedText;
         }
 
         const textContentProps =
           parseDetailsTextHTML && !isTextArray
             ? {
                 dangerouslySetInnerHTML: {
-                  __html: sanitizeHtml(textContent, {
-                    parseStyleAttributes: true,
-                  }),
+                  __html: xss(textContent),
                 },
               }
             : {};

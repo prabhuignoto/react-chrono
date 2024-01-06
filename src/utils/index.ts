@@ -1,6 +1,6 @@
 import { SlideShowType, TimelineMode } from '@models/TimelineModel';
 import { darkTheme, defaultTheme } from '../components/common/themes';
-import santizeHtml from 'sanitize-html';
+import xss from 'xss';
 
 export const uniqueID = () => {
   const chars =
@@ -73,7 +73,7 @@ export const isTextArray = (text: string | string[]): text is string[] => {
 
 export const sanitizeHtmlText = (text: string | string[]) => {
   if (isTextArray(text)) {
-    return text.map((t) => santizeHtml(t));
+    return text.map((t) => xss(t));
   }
-  return santizeHtml(text);
+  return xss(text);
 };

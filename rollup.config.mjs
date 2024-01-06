@@ -12,6 +12,7 @@ import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json' assert { type: 'json' };
+import buble from '@rollup/plugin-buble';
 
 const banner = `/*
  * ${pkg.name}
@@ -72,15 +73,12 @@ export default {
         ],
       ],
     }),
-    // buble({
-    //   objectAssign: true,
-    //   transforms: {
-    //     dangerousForOf: false,
-    //     forOf: false,
-    //     generator: false,
-    //     templateString: false,
-    //   },
-    // }),
+    buble({
+      objectAssign: true,
+      transforms: {
+        templateString: false,
+      },
+    }),
     postcss({
       plugins: [
         postCSSPreset({
