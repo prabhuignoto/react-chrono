@@ -31,6 +31,7 @@ export const VerticalTree: FunctionComponent<{
           onScrollEnd={() => console.log('end reached')}
           verticalBreakPoint={1920}
           enableBreakPoint
+          highlightCardsOnHover
         >
           <div className="chrono-icons">
             <img
@@ -128,6 +129,7 @@ export const VerticalBasic: FunctionComponent<{
         noUniqueId
         uniqueID="vertical_basic_test"
         parseDetailsTextHTML
+        highlightCardsOnHover
         // textOverlay
         // borderLessCards
         // theme={{
