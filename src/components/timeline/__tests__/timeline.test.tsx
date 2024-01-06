@@ -1,5 +1,5 @@
 import { TimelineModel } from '@models/TimelineModel';
-import { fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import { customRender, providerProps } from '../../common/test';
@@ -234,5 +234,4 @@ describe('Timeline', () => {
       });
     });
   });
-
 });
