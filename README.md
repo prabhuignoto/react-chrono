@@ -164,7 +164,9 @@ Below are the available configuration options for the component:
 | contentDetailsHeight     | 150                  | Controls the height of the details section if using cardDetailedText. Refer to [TimelineItem model](#timeline-item-model) for more info. |
 | disableAutoScrollOnClick | false                | Prevents auto-scrolling when a timeline card is clicked.                                                                                 |
 | disableClickOnCircle     | false                | Disables the click action on circular points.                                                                                            |
+| disableInteraction       | false                | Disables all the interactions with the Timeline.                                                                                         |
 | disableNavOnKey          | false                | Turns off keyboard navigation.                                                                                                           |
+| disableTimelinePoint     | false                | Disables the timeline point in both `HORIZONTAL` and `VERTICAL` mode.                                                                    |
 | enableBreakPoint         | true                 | Automatically switches to vertical mode when the vertical breakpoint is reached.                                                         |
 | enableDarkToggle         | false                | Adds a toggle switch for dark mode.                                                                                                      |
 | enableOutline            | false                | Enables an outline menu in vertical and vertical alternating modes.                                                                      |
@@ -172,8 +174,9 @@ Below are the available configuration options for the component:
 | focusActiveItemOnLoad    | false                | Automatically scrolls to and focuses on the `activeItemIndex` when loading.                                                              |
 | fontSizes                |                      | Allows customization of font sizes.                                                                                                      |
 | hideControls             | false                | Hides navigation controls.                                                                                                               |
-| itemWidth                | 300                  | Sets the width of the timeline section in horizontal mode.                                                                               |
+| highlightCardsOnHover    | false                | Highlights the card on hover                                                                                                             |
 | items                    | []                   | A collection of Timeline Item Models.                                                                                                    |
+| itemWidth                | 300                  | Sets the width of the timeline section in horizontal mode.                                                                               |
 | lineWidth                | 3px                  | Adjusts the width of the timeline track line.                                                                                            |
 | mediaHeight              | 200                  | Sets the minimum height for media elements like images or videos in the card.                                                            |
 | mediaSettings            |                      | Configures settings specific to media layout. Refer to [mediaSettings](#media-settings) for more info.                                   |
@@ -183,6 +186,7 @@ Below are the available configuration options for the component:
 | onItemSelected           |                      | Invokes a callback on item selection, passing relevant data.                                                                             |
 | onScrollEnd              |                      | Detects the end of the timeline via `onScrollEnd`.                                                                                       |
 | onThemeChange            |                      | Invokes a callback when the theme changes, triggered via `enableDarkToggle`.                                                             |
+| parseDetailsAsHTML       | false                | Parses the `cardDetailedText` as HTML.                                                                                                   |
 | scrollable               | true                 | Makes the timeline scrollable in `VERTICAL` and `VERTICAL_ALTERNATING` modes.                                                            |
 | showAllCardsHorizontal   | false                | Displays all cards in horizontal mode. By default, only the active card is shown.                                                        |
 | slideItemDuration        | 5000                 | Sets the duration (in milliseconds) that a timeline card is active during a slideshow.                                                   |
@@ -195,7 +199,6 @@ Below are the available configuration options for the component:
 | uniqueId                 |                      | Used with `noUniqueId` to set a custom unique id for the wrapper.                                                                        |
 | useReadMore              | true                 | Enables or disables the "read more" button. Available if text content on the card is taller than the card itself.                        |
 | verticalBreakPoint       | 768px                | Sets the pixel count below which the timeline will switch to `VERTICAL` mode.                                                            |
-| disableTimelinePoint     | false                | Disables the timeline point in both `HORIZONTAL` and `VERTICAL` mode.                                                                    |
 
 ### Mode
 

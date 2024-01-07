@@ -39,11 +39,11 @@
     "build": "pnpm rollup"
   },
   "dependencies": {
-    "classnames": "^2.3.3",
+    "classnames": "^2.5.1",
     "dayjs": "^1.11.10",
     "focus-visible": "^5.2.0",
-    "styled-components": "^6.1.3",
-    "stylis": "^4.3.0"
+    "styled-components": "^6.1.6",
+    "xss": "^1.0.14"
   },
   "peerDependencies": {
     "react": "^18.1.0",
@@ -54,11 +54,11 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.6",
+    "@babel/core": "^7.23.7",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
-    "@babel/plugin-transform-runtime": "^7.23.6",
+    "@babel/plugin-transform-runtime": "^7.23.7",
     "@babel/plugin-transform-typescript": "^7.23.6",
-    "@babel/preset-env": "^7.23.6",
+    "@babel/preset-env": "^7.23.7",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
     "@emotion/babel-plugin": "^11.11.0",
@@ -72,27 +72,28 @@
     "@size-limit/preset-big-lib": "^11.0.1",
     "@stylelint/postcss-css-in-js": "^0.38.0",
     "@testing-library/dom": "^9.3.3",
-    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/jest-dom": "^6.2.0",
     "@testing-library/react": "^14.1.2",
     "@testing-library/react-hooks": "^8.0.1",
-    "@testing-library/user-event": "^14.5.1",
+    "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.11",
-    "@types/node": "^20.10.5",
-    "@types/react": "^18.2.45",
+    "@types/node": "^20.10.6",
+    "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "@types/react-router-dom": "^5.3.3",
+    "@types/sanitize-html": "^2.9.5",
     "@types/styled-components": "^5.1.34",
     "@types/testing-library__jest-dom": "^6.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.16.0",
-    "@typescript-eslint/parser": "^6.16.0",
+    "@typescript-eslint/eslint-plugin": "^6.18.0",
+    "@typescript-eslint/parser": "^6.18.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "@vitest/coverage-v8": "^1.1.0",
+    "@vitest/coverage-v8": "^1.1.3",
     "autoprefixer": "^10.4.16",
     "babel-loader": "^9.1.3",
     "babel-plugin-styled-components": "^2.1.4",
-    "c8": "^8.0.1",
-    "cssnano": "^6.0.2",
-    "cypress": "13.6.1",
+    "c8": "^9.0.0",
+    "cssnano": "^6.0.3",
+    "cypress": "13.6.2",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
@@ -101,9 +102,10 @@
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-typescript-sort-keys": "^3.1.0",
     "husky": "^8.0.3",
-    "jsdom": "^23.0.1",
+    "intersection-observer": "^0.12.2",
+    "jsdom": "^23.1.0",
     "lint-staged": "^15.2.0",
-    "postcss": "^8.4.32",
+    "postcss": "^8.4.33",
     "postcss-preset-env": "^9.3.0",
     "postcss-syntax": "^0.36.2",
     "prettier": "^3.1.1",
@@ -113,17 +115,17 @@
     "react-is": "^18.2.0",
     "react-router-dom": "^6.21.1",
     "rimraf": "^5.0.5",
-    "rollup": "^4.9.1",
+    "rollup": "^4.9.4",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
-    "sass": "^1.69.5",
+    "sass": "^1.69.7",
     "semver": "^7.5.4",
     "size-limit": "^11.0.1",
-    "snyk": "^1.1266.0",
+    "snyk": "^1.1267.0",
     "start-server-and-test": "^2.0.3",
     "stylelint": "^16.1.0",
     "stylelint-config-recommended": "^14.0.0",
@@ -132,9 +134,9 @@
     "stylelint-processor-styled-components": "^1.10.0",
     "typescript": "^5.3.3",
     "typescript-plugin-styled-components": "^3.0.0",
-    "vite": "^5.0.10",
-    "vite-tsconfig-paths": "^4.2.2",
-    "vitest": "^1.1.0"
+    "vite": "^5.0.11",
+    "vite-tsconfig-paths": "^4.2.3",
+    "vitest": "^1.1.3"
   },
   "resolutions": {
     "ansi-regex": "5.0.1",
@@ -147,15 +149,15 @@
   "size-limit": [
     {
       "path": "dist/react-chrono.js",
-      "limit": "50 KB"
+      "limit": "65 KB"
     },
     {
       "path": "dist/react-chrono.esm.js",
-      "limit": "50 KB"
+      "limit": "65 KB"
     },
     {
       "path": "dist/react-chrono.umd.js",
-      "limit": "50 KB"
+      "limit": "65 KB"
     }
   ],
   "lint-staged": {

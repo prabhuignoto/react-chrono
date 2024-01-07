@@ -1,9 +1,10 @@
 import { TimelineContentModel } from '@models/TimelineContentModel';
 import { ForwardRefExoticComponent, forwardRef, useContext } from 'react';
+import xss from 'xss';
 import { GlobalContext } from '../../GlobalContext';
 import {
-  TimelineSubContent,
   TimelineContentDetails,
+  TimelineSubContent,
 } from './timeline-card-content.styles';
 
 export type TextOrContentModel = Pick<
@@ -23,37 +24,57 @@ const getTextOrContent: (
 }) => {
   const TextOrContent = forwardRef<HTMLParagraphElement, TextOrContentModel>(
     (prop, ref) => {
-      // const { timelineContent, theme, detailedText, showMore } = prop;
       const isTextArray = Array.isArray(detailedText);
 
-      const { fontSizes, classNames } = useContext(GlobalContext);
+      const { fontSizes, classNames, parseDetailsAsHTML } =
+        useContext(GlobalContext);
 
       if (timelineContent) {
         return <div ref={ref}>{timelineContent}</div>;
       } else {
         let textContent = null;
         if (isTextArray) {
-          textContent = (detailedText as string[]).map((text, index) => (
-            <TimelineSubContent
-              key={index}
-              fontSize={fontSizes?.cardText}
-              className={classNames?.cardText}
-              theme={theme}
-            >
-              {text}
-            </TimelineSubContent>
-          ));
+          textContent = (detailedText as string[]).map((text, index) => {
+            const props = parseDetailsAsHTML
+              ? {
+                  dangerouslySetInnerHTML: {
+                    __html: xss(text),
+                  },
+                }
+              : null;
+            return (
+              <TimelineSubContent
+                key={index}
+                fontSize={fontSizes?.cardText}
+                className={classNames?.cardText}
+                theme={theme}
+                {...props}
+              >
+                {parseDetailsAsHTML ? null : text}
+              </TimelineSubContent>
+            );
+          });
         } else {
-          textContent = detailedText;
+          textContent = parseDetailsAsHTML ? xss(detailedText) : detailedText;
         }
+
+        const textContentProps =
+          parseDetailsAsHTML && !isTextArray
+            ? {
+                dangerouslySetInnerHTML: {
+                  __html: xss(textContent),
+                },
+              }
+            : {};
 
         return textContent ? (
           <TimelineContentDetails
             className={showMore ? 'active' : ''}
             ref={ref}
             theme={theme}
+            {...textContentProps}
           >
-            {textContent}
+            {parseDetailsAsHTML && !isTextArray ? null : textContent}
           </TimelineContentDetails>
         ) : null;
       }

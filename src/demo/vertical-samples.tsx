@@ -31,6 +31,7 @@ export const VerticalTree: FunctionComponent<{
           onScrollEnd={() => console.log('end reached')}
           verticalBreakPoint={1920}
           enableBreakPoint
+          highlightCardsOnHover
         >
           <div className="chrono-icons">
             <img
@@ -126,8 +127,9 @@ export const VerticalBasic: FunctionComponent<{
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
         noUniqueId
-        disableTimelinePoint
         uniqueID="vertical_basic_test"
+        parseDetailsAsHTML
+        highlightCardsOnHover
         // textOverlay
         // borderLessCards
         // theme={{
@@ -240,6 +242,7 @@ export const VerticalAlternatingNested: FunctionComponent<{
             mediaSettings={{
               imageFit: 'contain',
             }}
+            highlightCardsOnHover
             // borderLessCards
             // theme={{
             //   cardBgColor: '#fff',

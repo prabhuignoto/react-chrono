@@ -93,8 +93,8 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
         const customIcon = Array.isArray(iconChildren)
           ? iconChildren[index]
           : index === 0
-          ? iconChildren
-          : null;
+            ? iconChildren
+            : null;
 
         return (
           <TimelineVerticalItem

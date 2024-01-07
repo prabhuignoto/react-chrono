@@ -105,6 +105,8 @@ export type TimelineProps = {
   // disables the click on the circle
   disableClickOnCircle?: boolean;
 
+  disableInteraction?: boolean;
+
   disableNavOnKey?: boolean;
 
   disableTimelinePoint?: boolean;
@@ -132,6 +134,8 @@ export type TimelineProps = {
 
   // hides the ui controls
   hideControls?: boolean;
+
+  highlightCardsOnHover?: boolean;
 
   itemWidth?: number;
 
@@ -171,6 +175,8 @@ export type TimelineProps = {
   onScrollEnd?: () => void;
 
   onThemeChange?: () => void;
+
+  parseDetailsAsHTML?: boolean;
 
   // option to enable scrollbar
   scrollable?: boolean | { scrollbar: boolean };

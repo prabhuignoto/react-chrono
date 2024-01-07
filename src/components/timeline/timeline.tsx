@@ -119,22 +119,35 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // handlers for navigation
   const handleNext = useCallback(() => {
-    hasFocus && onNext?.();
+    if (hasFocus) {
+      activeItemIndex.current = Math.min(
+        activeItemIndex.current + 1,
+        items.length - 1,
+      );
+      onNext?.();
+    }
   }, [hasFocus, onNext]);
 
-  const handlePrevious = useCallback(
-    () => hasFocus && onPrevious?.(),
-    [hasFocus, onPrevious],
-  );
+  const handlePrevious = useCallback(() => {
+    if (hasFocus) {
+      activeItemIndex.current = Math.max(activeItemIndex.current - 1, 0);
+      onPrevious?.();
+    }
+  }, [hasFocus, onPrevious]);
 
   const handleFirst = useCallback(() => {
-    hasFocus && onFirst?.();
+    if (hasFocus) {
+      activeItemIndex.current = 0;
+      onFirst?.();
+    }
   }, [hasFocus, onFirst]);
 
-  const handleLast = useCallback(
-    () => hasFocus && onLast?.(),
-    [hasFocus, onLast],
-  );
+  const handleLast = useCallback(() => {
+    if (hasFocus) {
+      activeItemIndex.current = items.length - 1;
+      onLast?.();
+    }
+  }, [hasFocus, onLast]);
 
   // handler for keyboard navigation
   const handleKeySelection = useCallback(
@@ -341,6 +354,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         $scrollable={canScrollTimeline}
         className={`${mode.toLowerCase()} timeline-main-wrapper`}
         id="timeline-main-wrapper"
+        data-testid="timeline-main-wrapper"
         theme={theme}
         mode={mode}
         onScroll={(ev) => {

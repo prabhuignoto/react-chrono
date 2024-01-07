@@ -68,4 +68,16 @@ describe('TimelineControl', () => {
     await user.click(getByLabelText('dark'));
     expect(onToggleDarkMode).toHaveBeenCalled();
   });
+
+  // check if the navigation controls to be hidden / not shown when disableInteraction is set to true
+  it('should hide the navigation controls when disableInteraction is set to true', () => {
+    const { queryByLabelText } = customRender(
+      <TimelineControl {...commonProps} />,
+      { providerProps: { ...providerProps, disableInteraction: true } },
+    );
+    expect(queryByLabelText('first')).not.toBeInTheDocument();
+    expect(queryByLabelText('previous')).not.toBeInTheDocument();
+    expect(queryByLabelText('next')).not.toBeInTheDocument();
+    expect(queryByLabelText('last')).not.toBeInTheDocument();
+  });
 });

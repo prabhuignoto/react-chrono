@@ -15,9 +15,9 @@ import Timeline from '../../timeline/timeline';
 import CardMedia from '../timeline-card-media/timeline-card-media';
 import { ContentFooter } from './content-footer';
 import { ContentHeader } from './content-header';
-import { TimelineItemContentWrapper } from './timeline-card-content.styles';
-import { getTextOrContent } from './text-or-content';
 import { DetailsText } from './details-text';
+import { getTextOrContent } from './text-or-content';
+import { TimelineItemContentWrapper } from './timeline-card-content.styles';
 
 const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
   React.memo(
@@ -76,6 +76,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         textOverlay,
         slideShowType,
         showProgressOnSlideshow,
+        disableInteraction,
+        highlightCardsOnHover,
       } = useContext(GlobalContext);
 
       // If the media is a video, we don't show the progress bar.
@@ -332,7 +334,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [showMore, timelineContent, theme, detailedText]);
 
       const handlers = useMemo(() => {
-        if (!isNested) {
+        if (!isNested && !disableInteraction) {
+          console.log('reddit');
           return {
             onPointerDown: (ev: React.PointerEvent) => {
               ev.stopPropagation();
@@ -349,7 +352,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             onPointerLeave: tryHandleResumeSlideshow,
           };
         }
-      }, [tryHandlePauseSlideshow, tryHandleResumeSlideshow]);
+        // }, [tryHandlePauseSlideshow, tryHandleResumeSlideshow]);
+      }, []);
 
       return (
         <TimelineItemContentWrapper
@@ -369,6 +373,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           $slideShowActive={slideShowActive}
           $branchDir={branchDir}
           $isNested={isNested}
+          $highlight={highlightCardsOnHover}
+          data-testid="timeline-card-content"
         >
           {title && !textOverlay ? (
             <ContentHeader
