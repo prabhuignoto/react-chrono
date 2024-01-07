@@ -186,7 +186,7 @@ Below are the available configuration options for the component:
 | onItemSelected           |                      | Invokes a callback on item selection, passing relevant data.                                                                             |
 | onScrollEnd              |                      | Detects the end of the timeline via `onScrollEnd`.                                                                                       |
 | onThemeChange            |                      | Invokes a callback when the theme changes, triggered via `enableDarkToggle`.                                                             |
-| parseDetailsTextHTML     | false                | Parses the `cardDetailedText` as HTML.                                                                                                   |
+| parseDetailsAsHTML       | false                | Parses the `cardDetailedText` as HTML.                                                                                                   |
 | scrollable               | true                 | Makes the timeline scrollable in `VERTICAL` and `VERTICAL_ALTERNATING` modes.                                                            |
 | showAllCardsHorizontal   | false                | Displays all cards in horizontal mode. By default, only the active card is shown.                                                        |
 | slideItemDuration        | 5000                 | Sets the duration (in milliseconds) that a timeline card is active during a slideshow.                                                   |

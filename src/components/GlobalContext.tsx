@@ -82,7 +82,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           lineWidth: 3,
           mediaHeight: 200,
           nestedCardHeight: 150,
-          parseDetailsTextHTML: false,
+          parseDetailsAsHTML: false,
           scrollable: {
             scrollbar: false,
           },

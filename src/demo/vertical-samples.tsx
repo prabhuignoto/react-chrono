@@ -128,7 +128,7 @@ export const VerticalBasic: FunctionComponent<{
         scrollable={{ scrollbar: false }}
         noUniqueId
         uniqueID="vertical_basic_test"
-        parseDetailsTextHTML
+        parseDetailsAsHTML
         highlightCardsOnHover
         // textOverlay
         // borderLessCards

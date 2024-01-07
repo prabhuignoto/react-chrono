@@ -30,6 +30,7 @@ export const HorizontalBasic: React.FunctionComponent<{
           timelinePointShape="square"
           // disableInteraction
           // cardPositionHorizontal="TOP"
+          parseDetailsAsHTML
           buttonTexts={{
             first: 'Jump to First',
             last: 'Jump to Last',

@@ -26,7 +26,7 @@ const getTextOrContent: (
     (prop, ref) => {
       const isTextArray = Array.isArray(detailedText);
 
-      const { fontSizes, classNames, parseDetailsTextHTML } =
+      const { fontSizes, classNames, parseDetailsAsHTML } =
         useContext(GlobalContext);
 
       if (timelineContent) {
@@ -35,7 +35,7 @@ const getTextOrContent: (
         let textContent = null;
         if (isTextArray) {
           textContent = (detailedText as string[]).map((text, index) => {
-            const props = parseDetailsTextHTML
+            const props = parseDetailsAsHTML
               ? {
                   dangerouslySetInnerHTML: {
                     __html: xss(text),
@@ -50,16 +50,16 @@ const getTextOrContent: (
                 theme={theme}
                 {...props}
               >
-                {parseDetailsTextHTML ? null : text}
+                {parseDetailsAsHTML ? null : text}
               </TimelineSubContent>
             );
           });
         } else {
-          textContent = parseDetailsTextHTML ? xss(detailedText) : detailedText;
+          textContent = parseDetailsAsHTML ? xss(detailedText) : detailedText;
         }
 
         const textContentProps =
-          parseDetailsTextHTML && !isTextArray
+          parseDetailsAsHTML && !isTextArray
             ? {
                 dangerouslySetInnerHTML: {
                   __html: xss(textContent),
@@ -74,7 +74,7 @@ const getTextOrContent: (
             theme={theme}
             {...textContentProps}
           >
-            {parseDetailsTextHTML && !isTextArray ? null : textContent}
+            {parseDetailsAsHTML && !isTextArray ? null : textContent}
           </TimelineContentDetails>
         ) : null;
       }
