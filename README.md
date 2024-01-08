@@ -619,8 +619,8 @@ You can use the classNames prop to employ your own class names. The subsequent e
 
 Deep dive into wide variety of examples hosted as a Storybook.
 
-- [Horizontal Collection](https://5f985eb478dcb00022cfd60e-hqwgomhkqw.chromatic.com/?path=/story/example-horizontal--horizontal-timeline)
-- [Vertical Collection](https://5f985eb478dcb00022cfd60e-hqwgomhkqw.chromatic.com/?path=/story/example-vertical--vertical-basic)
+- [Horizontal Collection](https://5f985eb478dcb00022cfd60e-oihbvdsnij.chromatic.com/?path=/story/example-horizontal--horizontal-timeline)
+- [Vertical Collection](https://5f985eb478dcb00022cfd60e-oihbvdsnij.chromatic.com/?path=/story/example-vertical--vertical-basic)
 
 ## 🔨Build Setup
 
