@@ -315,7 +315,7 @@ const slideAnimation = (start?: number, end?: number) => keyframes`
   }
 `;
 
-export const SlideShowProgressBar = styled.span<{
+export const SlideShowProgressBar = styled.progress<{
   $color?: string;
   $duration?: number;
   $paused?: boolean;

@@ -39,7 +39,7 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
       cardLess,
     } = props;
 
-    const circleRef = useRef<HTMLDivElement>(null);
+    const circleRef = useRef<HTMLButtonElement>(null);
     const {
       theme,
       focusActiveItemOnLoad,
@@ -104,7 +104,6 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
         bg={theme && theme.primary}
         className={className}
         data-testid="tree-leaf"
-        role="button"
         $cardLess={cardLess}
       >
         {/* {!disableTimelinePoint ? ( */}
@@ -112,7 +111,6 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
           className={`${className} timeline-vertical-circle`}
           {...clickHandlerProps}
           ref={circleRef}
-          role="button"
           data-testid="tree-leaf-click"
           aria-label="select timeline"
           $hide={disableTimelinePoint}

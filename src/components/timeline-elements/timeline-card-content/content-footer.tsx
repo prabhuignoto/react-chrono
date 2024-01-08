@@ -99,7 +99,6 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           $paused={paused}
           ref={progressRef}
           $startWidth={startWidth}
-          role="progressbar"
           $resuming={isResuming}
         ></SlideShowProgressBar>
       )}

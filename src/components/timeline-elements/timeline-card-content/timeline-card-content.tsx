@@ -46,7 +46,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       const [showMore, setShowMore] = useState(false);
       const detailsRef = useRef<HTMLDivElement | null>(null);
       const containerRef = useRef<HTMLDivElement | null>(null);
-      const progressRef = useRef<HTMLDivElement | null>(null);
+      const progressRef = useRef<HTMLProgressElement | null>(null);
 
       const containerWidth = useRef<number>(0);
       const slideShowElapsed = useRef(0);

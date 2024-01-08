@@ -1,8 +1,8 @@
-import { ReactNode, forwardRef, useContext } from 'react';
-import { TimelineContentDetailsWrapper } from './timeline-card-content.styles';
-import { GlobalContext } from '../../GlobalContext';
 import { TimelineContentModel } from '@models/TimelineContentModel';
+import { ReactNode, forwardRef, useContext } from 'react';
+import { GlobalContext } from '../../GlobalContext';
 import { getTextOrContent } from './text-or-content';
+import { TimelineContentDetailsWrapper } from './timeline-card-content.styles';
 
 type DetailsTextProps = Pick<
   TimelineContentModel,
@@ -62,9 +62,7 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
           $textOverlay={textOverlay}
           $gradientColor={gradientColor}
         >
-          {customContent ? (
-            customContent
-          ) : (
+          {customContent || (
             <TextContent
               {...{ detailedText, showMore, theme, timelineContent }}
             />

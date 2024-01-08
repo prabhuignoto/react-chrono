@@ -13,7 +13,7 @@ export type ContentFooterProps = {
   isResuming?: boolean;
   onExpand: () => void;
   paused: boolean;
-  progressRef: RefObject<HTMLDivElement>;
+  progressRef: RefObject<HTMLProgressElement>;
   remainInterval: number;
   showMore: boolean;
   showProgressBar?: boolean;

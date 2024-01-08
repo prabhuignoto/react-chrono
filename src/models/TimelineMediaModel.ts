@@ -79,7 +79,7 @@ export interface CardMediaModel {
   paused?: boolean;
 
   // Reference to the progress bar element.
-  progressRef?: React.RefObject<HTMLDivElement>;
+  progressRef?: React.RefObject<HTMLProgressElement>;
 
   // Interval for remaining media playback.
   remainInterval?: number;
