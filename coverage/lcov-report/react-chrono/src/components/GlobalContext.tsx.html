@@ -430,9 +430,8 @@ const GlobalContextProvider: FunctionComponent&lt;Partial&lt;PropsModel&gt;&gt; 
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  const defaultProps = useMemo(</span>
 <span class="cstat-no" title="statement not covered" >    () =&gt;</span>
-<span class="cstat-no" title="statement not covered" >      Object.assign&lt;ContextProps, ContextProps, ContextProps&gt;(</span>
-<span class="cstat-no" title="statement not covered" >        {},</span>
-<span class="cstat-no" title="statement not covered" >        {</span>
+<span class="cstat-no" title="statement not covered" >      ({</span>
+<span class="cstat-no" title="statement not covered" >        ...{</span>
 <span class="cstat-no" title="statement not covered" >          borderLessCards: false,</span>
 <span class="cstat-no" title="statement not covered" >          cardHeight: newCardHeight,</span>
 <span class="cstat-no" title="statement not covered" >          cardLess: false,</span>
@@ -463,48 +462,49 @@ const GlobalContextProvider: FunctionComponent&lt;Partial&lt;PropsModel&gt;&gt; 
 <span class="cstat-no" title="statement not covered" >          useReadMore: true,</span>
 <span class="cstat-no" title="statement not covered" >          verticalBreakPoint: 1028,</span>
 <span class="cstat-no" title="statement not covered" >        },</span>
-<span class="cstat-no" title="statement not covered" >        {</span>
-<span class="cstat-no" title="statement not covered" >          ...props,</span>
-<span class="cstat-no" title="statement not covered" >          activeItemIndex: flipLayout ? items?.length - 1 : 0,</span>
-<span class="cstat-no" title="statement not covered" >          buttonTexts: {</span>
-<span class="cstat-no" title="statement not covered" >            ...getDefaultButtonTexts(),</span>
-<span class="cstat-no" title="statement not covered" >            ...buttonTexts,</span>
-<span class="cstat-no" title="statement not covered" >          },</span>
-<span class="cstat-no" title="statement not covered" >          cardHeight: cardLess ? cardHeight || 80 : cardHeight,</span>
-<span class="cstat-no" title="statement not covered" >          classNames: {</span>
-<span class="cstat-no" title="statement not covered" >            ...getDefaultClassNames(),</span>
-<span class="cstat-no" title="statement not covered" >            ...classNames,</span>
-<span class="cstat-no" title="statement not covered" >          },</span>
-<span class="cstat-no" title="statement not covered" >          contentDetailsHeight: newContentDetailsHeight,</span>
-<span class="cstat-no" title="statement not covered" >          darkMode: isDarkMode,</span>
-<span class="cstat-no" title="statement not covered" >          fontSizes: {</span>
-<span class="cstat-no" title="statement not covered" >            cardSubtitle: '0.85rem',</span>
-<span class="cstat-no" title="statement not covered" >            cardText: '1rem',</span>
-<span class="cstat-no" title="statement not covered" >            cardTitle: '1rem',</span>
-<span class="cstat-no" title="statement not covered" >            title: '1rem',</span>
-<span class="cstat-no" title="statement not covered" >            ...fontSizes,</span>
-<span class="cstat-no" title="statement not covered" >          },</span>
-<span class="cstat-no" title="statement not covered" >          mediaSettings: {</span>
-<span class="cstat-no" title="statement not covered" >            align: mode === 'VERTICAL' &amp;&amp; !textOverlay ? 'left' : 'center',</span>
-<span class="cstat-no" title="statement not covered" >            imageFit: 'cover',</span>
-<span class="cstat-no" title="statement not covered" >            ...mediaSettings,</span>
-<span class="cstat-no" title="statement not covered" >          },</span>
-<span class="cstat-no" title="statement not covered" >          theme: {</span>
-<span class="cstat-no" title="statement not covered" >            ...getDefaultThemeOrDark(isDarkMode),</span>
-<span class="cstat-no" title="statement not covered" >            ...theme,</span>
-<span class="cstat-no" title="statement not covered" >          },</span>
-<span class="cstat-no" title="statement not covered" >          toggleDarkMode,</span>
+<span class="cstat-no" title="statement not covered" >        ...props,</span>
+<span class="cstat-no" title="statement not covered" >        activeItemIndex: flipLayout ? items?.length - 1 : 0,</span>
+<span class="cstat-no" title="statement not covered" >        buttonTexts: {</span>
+<span class="cstat-no" title="statement not covered" >          ...getDefaultButtonTexts(),</span>
+<span class="cstat-no" title="statement not covered" >          ...buttonTexts,</span>
 <span class="cstat-no" title="statement not covered" >        },</span>
-<span class="cstat-no" title="statement not covered" >      ),</span>
+<span class="cstat-no" title="statement not covered" >        cardHeight: cardLess ? cardHeight || 80 : cardHeight,</span>
+<span class="cstat-no" title="statement not covered" >        classNames: {</span>
+<span class="cstat-no" title="statement not covered" >          ...getDefaultClassNames(),</span>
+<span class="cstat-no" title="statement not covered" >          ...classNames,</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >        contentDetailsHeight: newContentDetailsHeight,</span>
+<span class="cstat-no" title="statement not covered" >        darkMode: isDarkMode,</span>
+<span class="cstat-no" title="statement not covered" >        fontSizes: {</span>
+<span class="cstat-no" title="statement not covered" >          cardSubtitle: '0.85rem',</span>
+<span class="cstat-no" title="statement not covered" >          cardText: '1rem',</span>
+<span class="cstat-no" title="statement not covered" >          cardTitle: '1rem',</span>
+<span class="cstat-no" title="statement not covered" >          title: '1rem',</span>
+<span class="cstat-no" title="statement not covered" >          ...fontSizes,</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >        mediaSettings: {</span>
+<span class="cstat-no" title="statement not covered" >          align: mode === 'VERTICAL' &amp;&amp; !textOverlay ? 'left' : 'center',</span>
+<span class="cstat-no" title="statement not covered" >          imageFit: 'cover',</span>
+<span class="cstat-no" title="statement not covered" >          ...mediaSettings,</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >        theme: {</span>
+<span class="cstat-no" title="statement not covered" >          ...getDefaultThemeOrDark(isDarkMode),</span>
+<span class="cstat-no" title="statement not covered" >          ...theme,</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
+<span class="cstat-no" title="statement not covered" >        toggleDarkMode,</span>
+<span class="cstat-no" title="statement not covered" >      }) as ContextProps,</span>
 <span class="cstat-no" title="statement not covered" >    [newContentDetailsHeight, newCardHeight, isDarkMode, toggleDarkMode],</span>
+<span class="cstat-no" title="statement not covered" >  );</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  const providerValue = useMemo(</span>
+<span class="cstat-no" title="statement not covered" >    () =&gt; ({ ...defaultProps, darkMode: isDarkMode, toggleDarkMode }),</span>
+<span class="cstat-no" title="statement not covered" >    [defaultProps, isDarkMode],</span>
 <span class="cstat-no" title="statement not covered" >  );</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  const { children } = props;</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;GlobalContext.Provider</span>
-<span class="cstat-no" title="statement not covered" >      value={{ ...defaultProps, darkMode: isDarkMode, toggleDarkMode }}</span>
-<span class="cstat-no" title="statement not covered" >    &gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;GlobalContext.Provider value={providerValue}&gt;</span>
 <span class="cstat-no" title="statement not covered" >      {children}</span>
 <span class="cstat-no" title="statement not covered" >    &lt;/GlobalContext.Provider&gt;</span>
 <span class="cstat-no" title="statement not covered" >  );</span>
@@ -520,7 +520,7 @@ export { GlobalContext };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-01-08T18:39:27.766Z
+                at 2024-01-09T11:11:45.361Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

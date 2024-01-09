@@ -48,4 +48,6 @@ export const TimelinePointContainer = styled.button<{ $hide?: boolean }>`
   position: relative;
   z-index: 1;
   visibility: ${(p) => (p.$hide ? 'hidden' : 'visible')};
+  background: none;
+  border: 0;
 `;

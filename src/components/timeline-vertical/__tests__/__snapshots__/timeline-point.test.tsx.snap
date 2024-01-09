@@ -4,17 +4,17 @@ exports[`Timeline point > Should match snapshot 1`] = `
 <DocumentFragment>
   <div
     bg="#0f52ba"
-    class="sc-gKPSgB dkHQIx test_class_name"
+    class="sc-gLLuof igAZJu test_class_name"
     data-testid="tree-leaf"
     width="3"
   >
     <button
       aria-label="select timeline"
-      class="sc-iBYPxa cTgLOp test_class_name timeline-vertical-circle"
+      class="sc-iBdnpw jOoEEC test_class_name timeline-vertical-circle"
       data-testid="tree-leaf-click"
     >
       <div
-        class="sc-hLBatu INQcF"
+        class="sc-hLQSwg jvpXkb"
         dimension="20"
       />
     </button>
