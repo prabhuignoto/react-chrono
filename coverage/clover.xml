@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1704739168608" clover="3.2.0">
-  <project timestamp="1704739168608" name="All files">
-    <metrics statements="9284" coveredstatements="4787" conditionals="694" coveredconditionals="494" methods="183" coveredmethods="119" elements="10161" coveredelements="5400" complexity="0" loc="9284" ncloc="9284" packages="22" files="83" classes="83"/>
+<coverage generated="1704798705832" clover="3.2.0">
+  <project timestamp="1704798705833" name="All files">
+    <metrics statements="9286" coveredstatements="4789" conditionals="694" coveredconditionals="494" methods="183" coveredmethods="119" elements="10163" coveredelements="5402" complexity="0" loc="9286" ncloc="9286" packages="22" files="83" classes="83"/>
     <package name="react-chrono">
       <metrics statements="13" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="postcss.config.js" path="C:\Users\prabh\Github\react-chrono\postcss.config.js">
@@ -5206,7 +5206,7 @@
       </file>
     </package>
     <package name="react-chrono.src.components.timeline-vertical">
-      <metrics statements="691" coveredstatements="637" conditionals="71" coveredconditionals="45" methods="12" coveredmethods="11"/>
+      <metrics statements="693" coveredstatements="639" conditionals="71" coveredconditionals="45" methods="12" coveredmethods="11"/>
       <file name="timeline-point.tsx" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-vertical\timeline-point.tsx">
         <metrics statements="136" coveredstatements="126" conditionals="11" coveredconditionals="7" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -5586,7 +5586,7 @@
         <line num="236" count="1" type="stmt"/>
       </file>
       <file name="timeline-vertical-shape.styles.ts" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-vertical\timeline-vertical-shape.styles.ts">
-        <metrics statements="51" coveredstatements="51" conditionals="13" coveredconditionals="12" methods="4" coveredmethods="4"/>
+        <metrics statements="53" coveredstatements="53" conditionals="13" coveredconditionals="12" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -5638,6 +5638,8 @@
         <line num="49" count="1" type="stmt"/>
         <line num="50" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="51" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
       </file>
       <file name="timeline-vertical.styles.ts" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-vertical\timeline-vertical.styles.ts">
         <metrics statements="143" coveredstatements="122" conditionals="21" coveredconditionals="12" methods="5" coveredmethods="5"/>

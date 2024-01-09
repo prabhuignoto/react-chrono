@@ -533,13 +533,13 @@
 <span class="cstat-no" title="statement not covered" >    hideControls,</span>
 <span class="cstat-no" title="statement not covered" >  } = props;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const [timeLineItems, setItems] = useState&lt;TimelineItemModel[]&gt;([]);</span>
+<span class="cstat-no" title="statement not covered" >  const [timeLineItems, setTimeLineItems] = useState&lt;TimelineItemModel[]&gt;([]);</span>
 <span class="cstat-no" title="statement not covered" >  const timeLineItemsRef = useRef&lt;TimelineItemModel[]&gt;();</span>
-<span class="cstat-no" title="statement not covered" >  const [slideShowActive, setSlideshowActive] = useState(false);</span>
+<span class="cstat-no" title="statement not covered" >  const [slideShowActive, setSlideShowActive] = useState(false);</span>
 <span class="cstat-no" title="statement not covered" >  const [activeTimelineItem, setActiveTimelineItem] = useState(activeItemIndex);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  const initItems = (lineItems?: TimelineItemModel[]): TimelineItemModel[] =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (lineItems &amp;&amp; lineItems.length) {</span>
+<span class="cstat-no" title="statement not covered" >    if (lineItems?.length) {</span>
 <span class="cstat-no" title="statement not covered" >      return lineItems.map((item, index) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        const id = Math.random().toString(16).slice(2);</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -595,7 +595,7 @@
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    if (!_items?.length) {</span>
 <span class="cstat-no" title="statement not covered" >      const lineItems = initItems();</span>
-<span class="cstat-no" title="statement not covered" >      setItems(lineItems);</span>
+<span class="cstat-no" title="statement not covered" >      setTimeLineItems(lineItems);</span>
 <span class="cstat-no" title="statement not covered" >      return;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -607,12 +607,12 @@
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    if (newItems.length) {</span>
 <span class="cstat-no" title="statement not covered" >      timeLineItemsRef.current = newItems;</span>
-<span class="cstat-no" title="statement not covered" >      setItems(newItems);</span>
+<span class="cstat-no" title="statement not covered" >      setTimeLineItems(newItems);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  }, [JSON.stringify(allowDynamicUpdate ? items : null)]);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  const handleTimelineUpdate = useCallback((actvTimelineIndex: number) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setItems((lineItems) =&gt;</span>
+<span class="cstat-no" title="statement not covered" >    setTimeLineItems((lineItems) =&gt;</span>
 <span class="cstat-no" title="statement not covered" >      lineItems.map((item, index) =&gt; ({</span>
 <span class="cstat-no" title="statement not covered" >        ...item,</span>
 <span class="cstat-no" title="statement not covered" >        active: index === actvTimelineIndex,</span>
@@ -624,7 +624,7 @@
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    if (items) {</span>
 <span class="cstat-no" title="statement not covered" >      if (items.length - 1 === actvTimelineIndex) {</span>
-<span class="cstat-no" title="statement not covered" >        setSlideshowActive(false);</span>
+<span class="cstat-no" title="statement not covered" >        setSlideShowActive(false);</span>
 <span class="cstat-no" title="statement not covered" >      }</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  }, []);</span>
@@ -637,7 +637,7 @@
 <span class="cstat-no" title="statement not covered" >    handleTimelineUpdate(-1);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    setTimeout(() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      setSlideshowActive(true);</span>
+<span class="cstat-no" title="statement not covered" >      setSlideShowActive(true);</span>
 <span class="cstat-no" title="statement not covered" >      handleTimelineUpdate(0);</span>
 <span class="cstat-no" title="statement not covered" >    }, 0);</span>
 <span class="cstat-no" title="statement not covered" >  }, []);</span>
@@ -687,7 +687,7 @@
 <span class="cstat-no" title="statement not covered" >  );</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  const onPaused = useCallback(() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setSlideshowActive(false);</span>
+<span class="cstat-no" title="statement not covered" >    setSlideShowActive(false);</span>
 <span class="cstat-no" title="statement not covered" >  }, []);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  let iconChildren = toReactArray(children).filter(</span>
@@ -736,7 +736,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-01-08T18:39:27.766Z
+                at 2024-01-09T11:11:45.361Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

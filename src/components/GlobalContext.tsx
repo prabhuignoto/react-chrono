@@ -65,9 +65,8 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
 
   const defaultProps = useMemo(
     () =>
-      Object.assign<ContextProps, ContextProps, ContextProps>(
-        {},
-        {
+      ({
+        ...{
           borderLessCards: false,
           cardHeight: newCardHeight,
           cardLess: false,
@@ -98,48 +97,49 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           useReadMore: true,
           verticalBreakPoint: 1028,
         },
-        {
-          ...props,
-          activeItemIndex: flipLayout ? items?.length - 1 : 0,
-          buttonTexts: {
-            ...getDefaultButtonTexts(),
-            ...buttonTexts,
-          },
-          cardHeight: cardLess ? cardHeight || 80 : cardHeight,
-          classNames: {
-            ...getDefaultClassNames(),
-            ...classNames,
-          },
-          contentDetailsHeight: newContentDetailsHeight,
-          darkMode: isDarkMode,
-          fontSizes: {
-            cardSubtitle: '0.85rem',
-            cardText: '1rem',
-            cardTitle: '1rem',
-            title: '1rem',
-            ...fontSizes,
-          },
-          mediaSettings: {
-            align: mode === 'VERTICAL' && !textOverlay ? 'left' : 'center',
-            imageFit: 'cover',
-            ...mediaSettings,
-          },
-          theme: {
-            ...getDefaultThemeOrDark(isDarkMode),
-            ...theme,
-          },
-          toggleDarkMode,
+        ...props,
+        activeItemIndex: flipLayout ? items?.length - 1 : 0,
+        buttonTexts: {
+          ...getDefaultButtonTexts(),
+          ...buttonTexts,
         },
-      ),
+        cardHeight: cardLess ? cardHeight || 80 : cardHeight,
+        classNames: {
+          ...getDefaultClassNames(),
+          ...classNames,
+        },
+        contentDetailsHeight: newContentDetailsHeight,
+        darkMode: isDarkMode,
+        fontSizes: {
+          cardSubtitle: '0.85rem',
+          cardText: '1rem',
+          cardTitle: '1rem',
+          title: '1rem',
+          ...fontSizes,
+        },
+        mediaSettings: {
+          align: mode === 'VERTICAL' && !textOverlay ? 'left' : 'center',
+          imageFit: 'cover',
+          ...mediaSettings,
+        },
+        theme: {
+          ...getDefaultThemeOrDark(isDarkMode),
+          ...theme,
+        },
+        toggleDarkMode,
+      }) as ContextProps,
     [newContentDetailsHeight, newCardHeight, isDarkMode, toggleDarkMode],
+  );
+
+  const providerValue = useMemo(
+    () => ({ ...defaultProps, darkMode: isDarkMode, toggleDarkMode }),
+    [defaultProps, isDarkMode],
   );
 
   const { children } = props;
 
   return (
-    <GlobalContext.Provider
-      value={{ ...defaultProps, darkMode: isDarkMode, toggleDarkMode }}
-    >
+    <GlobalContext.Provider value={providerValue}>
       {children}
     </GlobalContext.Provider>
   );

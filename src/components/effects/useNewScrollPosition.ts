@@ -14,7 +14,7 @@ const useNewScrollPosition = (
   itemWidth?: number,
 ): [number, (e: HTMLElement, s: Partial<Scroll>) => void] => {
   // State to hold the new offset value
-  const [newOffset, setOffset] = useState(0);
+  const [newOffset, setNewOffset] = useState(0);
 
   // Memoized function to compute the new offset value
   const computeNewOffset = useMemo(
@@ -47,7 +47,7 @@ const useNewScrollPosition = (
           (leftGap <= itemWidth && leftGap >= 0) ||
           (rightGap <= itemWidth && rightGap >= 0)
         ) {
-          setOffset(pointOffset - itemWidth);
+          setNewOffset(pointOffset - itemWidth);
         }
       } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
         // Handling vertical modes
@@ -71,9 +71,9 @@ const useNewScrollPosition = (
 
           // Setting offset based on visibility conditions
           if (notVisible && nOffset + contentHeight < contrBottom) {
-            setOffset(nOffset + Math.round(contentHeight / 2));
+            setNewOffset(nOffset + Math.round(contentHeight / 2));
           } else if (notVisible) {
-            setOffset(nOffset);
+            setNewOffset(nOffset);
           }
         }
       }
