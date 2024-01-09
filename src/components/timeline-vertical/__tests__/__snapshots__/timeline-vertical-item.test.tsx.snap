@@ -2,10 +2,9 @@
 
 exports[`Timeline vertical item > Should match snapshot 1`] = `
 <div>
-  <div
-    class="sc-dmXWDj kWNppt vertical-item-row"
+  <li
+    class="sc-dmXWDj kLqMME vertical-item-row"
     data-testid="vertical-item-row"
-    role="listitem"
   >
     <div
       class="sc-fLseNd fREniZ"
@@ -40,7 +39,6 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
               data-testid="timeline-card-content-image"
               loading="lazy"
               mode="VERTICAL_ALTERNATING"
-              role="img"
               src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
             />
           </div>
@@ -80,6 +78,6 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
         />
       </button>
     </div>
-  </div>
+  </li>
 </div>
 `;

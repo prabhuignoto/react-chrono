@@ -16,7 +16,6 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
         data-testid="timeline-card-content-image"
         loading="lazy"
         mode="VERTICAL_ALTERNATING"
-        role="img"
         src="https://picsum.photos/200/300"
       />
     </div>

@@ -21,7 +21,7 @@ const animateVisible = keyframes`
   }
 `;
 
-export const VerticalItemWrapper = styled.div<{
+export const VerticalItemWrapper = styled.li<{
   $alternateCards?: boolean;
   $cardHeight?: number;
   $cardLess?: boolean;
@@ -35,6 +35,7 @@ export const VerticalItemWrapper = styled.div<{
   align-items: stretch;
   justify-content: center;
   margin: 1rem 0;
+  list-style: none;
 
   &.left {
     margin-right: auto;

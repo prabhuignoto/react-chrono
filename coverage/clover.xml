@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1704798705832" clover="3.2.0">
-  <project timestamp="1704798705833" name="All files">
-    <metrics statements="9286" coveredstatements="4789" conditionals="694" coveredconditionals="494" methods="183" coveredmethods="119" elements="10163" coveredelements="5402" complexity="0" loc="9286" ncloc="9286" packages="22" files="83" classes="83"/>
+<coverage generated="1704810766362" clover="3.2.0">
+  <project timestamp="1704810766362" name="All files">
+    <metrics statements="9296" coveredstatements="4791" conditionals="694" coveredconditionals="494" methods="184" coveredmethods="119" elements="10174" coveredelements="5404" complexity="0" loc="9296" ncloc="9296" packages="22" files="83" classes="83"/>
     <package name="react-chrono">
       <metrics statements="13" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="postcss.config.js" path="C:\Users\prabh\Github\react-chrono\postcss.config.js">
@@ -47,7 +47,7 @@
       </file>
     </package>
     <package name="react-chrono.src.components">
-      <metrics statements="372" coveredstatements="29" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="373" coveredstatements="29" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="GlobalContext.tsx" path="C:\Users\prabh\Github\react-chrono\src\components\GlobalContext.tsx">
         <metrics statements="150" coveredstatements="29" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -202,7 +202,7 @@
         <line num="150" count="1" type="stmt"/>
       </file>
       <file name="index.tsx" path="C:\Users\prabh\Github\react-chrono\src\components\index.tsx">
-        <metrics statements="222" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="223" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -425,6 +425,7 @@
         <line num="220" count="0" type="stmt"/>
         <line num="221" count="0" type="stmt"/>
         <line num="222" count="0" type="stmt"/>
+        <line num="223" count="0" type="stmt"/>
       </file>
     </package>
     <package name="react-chrono.src.components.common.styles">
@@ -2301,7 +2302,7 @@
       </file>
     </package>
     <package name="react-chrono.src.components.timeline-elements.timeline-card-content">
-      <metrics statements="1285" coveredstatements="1082" conditionals="179" coveredconditionals="127" methods="35" coveredmethods="32"/>
+      <metrics statements="1287" coveredstatements="1084" conditionals="179" coveredconditionals="127" methods="35" coveredmethods="32"/>
       <file name="card-animations.styles.ts" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-elements\timeline-card-content\card-animations.styles.ts">
         <metrics statements="45" coveredstatements="45" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -2636,7 +2637,7 @@
         <line num="25" count="0" type="stmt"/>
       </file>
       <file name="text-or-content.tsx" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-elements\timeline-card-content\text-or-content.tsx">
-        <metrics statements="95" coveredstatements="84" conditionals="20" coveredconditionals="9" methods="3" coveredmethods="3"/>
+        <metrics statements="96" coveredstatements="85" conditionals="20" coveredconditionals="9" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -2678,63 +2679,64 @@
         <line num="39" count="43" type="cond" truecount="0" falsecount="1"/>
         <line num="40" count="43" type="stmt"/>
         <line num="41" count="44" type="stmt"/>
-        <line num="42" count="44" type="cond" truecount="0" falsecount="2"/>
-        <line num="43" count="0" type="stmt"/>
+        <line num="42" count="44" type="stmt"/>
+        <line num="43" count="44" type="cond" truecount="0" falsecount="2"/>
         <line num="44" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
-        <line num="48" count="44" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
         <line num="49" count="44" type="stmt"/>
-        <line num="50" count="44" type="cond" truecount="1" falsecount="0"/>
-        <line num="51" count="38" type="stmt"/>
-        <line num="52" count="38" type="cond" truecount="0" falsecount="1"/>
-        <line num="53" count="38" type="stmt"/>
+        <line num="50" count="44" type="stmt"/>
+        <line num="51" count="44" type="cond" truecount="1" falsecount="0"/>
+        <line num="52" count="38" type="stmt"/>
+        <line num="53" count="38" type="cond" truecount="0" falsecount="1"/>
         <line num="54" count="38" type="stmt"/>
         <line num="55" count="38" type="stmt"/>
         <line num="56" count="38" type="stmt"/>
-        <line num="57" count="38" type="cond" truecount="0" falsecount="2"/>
-        <line num="58" count="38" type="cond" truecount="1" falsecount="0"/>
-        <line num="59" count="6" type="stmt"/>
-        <line num="60" count="44" type="stmt"/>
+        <line num="57" count="38" type="stmt"/>
+        <line num="58" count="38" type="cond" truecount="0" falsecount="2"/>
+        <line num="59" count="38" type="cond" truecount="1" falsecount="0"/>
+        <line num="60" count="6" type="stmt"/>
         <line num="61" count="44" type="stmt"/>
         <line num="62" count="44" type="stmt"/>
-        <line num="63" count="44" type="cond" truecount="1" falsecount="0"/>
-        <line num="64" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="65" count="2" type="cond" truecount="0" falsecount="1"/>
-        <line num="66" count="0" type="stmt"/>
+        <line num="63" count="44" type="stmt"/>
+        <line num="64" count="44" type="cond" truecount="1" falsecount="0"/>
+        <line num="65" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="66" count="2" type="cond" truecount="0" falsecount="1"/>
         <line num="67" count="0" type="stmt"/>
         <line num="68" count="0" type="stmt"/>
         <line num="69" count="0" type="stmt"/>
         <line num="70" count="0" type="stmt"/>
-        <line num="71" count="2" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
         <line num="72" count="2" type="stmt"/>
         <line num="73" count="2" type="stmt"/>
         <line num="74" count="2" type="stmt"/>
-        <line num="75" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="75" count="2" type="stmt"/>
         <line num="76" count="2" type="cond" truecount="0" falsecount="1"/>
-        <line num="77" count="2" type="stmt"/>
+        <line num="77" count="2" type="cond" truecount="0" falsecount="1"/>
         <line num="78" count="2" type="stmt"/>
         <line num="79" count="2" type="stmt"/>
-        <line num="80" count="2" type="cond" truecount="0" falsecount="1"/>
-        <line num="81" count="2" type="stmt"/>
+        <line num="80" count="2" type="stmt"/>
+        <line num="81" count="2" type="cond" truecount="0" falsecount="1"/>
         <line num="82" count="2" type="stmt"/>
-        <line num="83" count="1" type="stmt"/>
+        <line num="83" count="2" type="stmt"/>
         <line num="84" count="1" type="stmt"/>
-        <line num="85" count="44" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
         <line num="86" count="44" type="stmt"/>
         <line num="87" count="44" type="stmt"/>
-        <line num="88" count="79" type="stmt"/>
+        <line num="88" count="44" type="stmt"/>
         <line num="89" count="79" type="stmt"/>
         <line num="90" count="79" type="stmt"/>
         <line num="91" count="79" type="stmt"/>
         <line num="92" count="79" type="stmt"/>
         <line num="93" count="79" type="stmt"/>
-        <line num="94" count="1" type="stmt"/>
+        <line num="94" count="79" type="stmt"/>
         <line num="95" count="1" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
       </file>
       <file name="timeline-card-content.styles.ts" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-elements\timeline-card-content\timeline-card-content.styles.ts">
-        <metrics statements="410" coveredstatements="351" conditionals="73" coveredconditionals="55" methods="27" coveredmethods="27"/>
+        <metrics statements="411" coveredstatements="352" conditionals="73" coveredconditionals="55" methods="27" coveredmethods="27"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -3068,18 +3070,18 @@
         <line num="331" count="1" type="stmt"/>
         <line num="332" count="1" type="stmt"/>
         <line num="333" count="1" type="stmt"/>
-        <line num="334" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="335" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="336" count="1" type="stmt"/>
+        <line num="334" count="1" type="stmt"/>
+        <line num="335" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="336" count="2" type="cond" truecount="1" falsecount="0"/>
         <line num="337" count="1" type="stmt"/>
         <line num="338" count="1" type="stmt"/>
         <line num="339" count="1" type="stmt"/>
         <line num="340" count="1" type="stmt"/>
-        <line num="341" count="2" type="stmt"/>
-        <line num="342" count="1" type="stmt"/>
-        <line num="343" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="344" count="2" type="cond" truecount="3" falsecount="0"/>
-        <line num="345" count="1" type="stmt"/>
+        <line num="341" count="1" type="stmt"/>
+        <line num="342" count="2" type="stmt"/>
+        <line num="343" count="1" type="stmt"/>
+        <line num="344" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="345" count="2" type="cond" truecount="3" falsecount="0"/>
         <line num="346" count="1" type="stmt"/>
         <line num="347" count="1" type="stmt"/>
         <line num="348" count="1" type="stmt"/>
@@ -3089,8 +3091,8 @@
         <line num="352" count="1" type="stmt"/>
         <line num="353" count="1" type="stmt"/>
         <line num="354" count="1" type="stmt"/>
-        <line num="355" count="2" type="stmt"/>
-        <line num="356" count="1" type="stmt"/>
+        <line num="355" count="1" type="stmt"/>
+        <line num="356" count="2" type="stmt"/>
         <line num="357" count="1" type="stmt"/>
         <line num="358" count="1" type="stmt"/>
         <line num="359" count="1" type="stmt"/>
@@ -3107,10 +3109,10 @@
         <line num="370" count="1" type="stmt"/>
         <line num="371" count="1" type="stmt"/>
         <line num="372" count="1" type="stmt"/>
-        <line num="373" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="374" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="375" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="376" count="1" type="stmt"/>
+        <line num="373" count="1" type="stmt"/>
+        <line num="374" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="375" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="376" count="2" type="cond" truecount="1" falsecount="0"/>
         <line num="377" count="1" type="stmt"/>
         <line num="378" count="1" type="stmt"/>
         <line num="379" count="1" type="stmt"/>
@@ -3132,8 +3134,8 @@
         <line num="395" count="1" type="stmt"/>
         <line num="396" count="1" type="stmt"/>
         <line num="397" count="1" type="stmt"/>
-        <line num="398" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="399" count="1" type="stmt"/>
+        <line num="398" count="1" type="stmt"/>
+        <line num="399" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="400" count="1" type="stmt"/>
         <line num="401" count="1" type="stmt"/>
         <line num="402" count="1" type="stmt"/>
@@ -3142,9 +3144,10 @@
         <line num="405" count="1" type="stmt"/>
         <line num="406" count="1" type="stmt"/>
         <line num="407" count="1" type="stmt"/>
-        <line num="408" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="409" count="1" type="cond" truecount="2" falsecount="0"/>
-        <line num="410" count="1" type="stmt"/>
+        <line num="408" count="1" type="stmt"/>
+        <line num="409" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="410" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="411" count="1" type="stmt"/>
       </file>
       <file name="timeline-card-content.tsx" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-elements\timeline-card-content\timeline-card-content.tsx">
         <metrics statements="462" coveredstatements="358" conditionals="61" coveredconditionals="41" methods="1" coveredmethods="0"/>
@@ -3613,7 +3616,7 @@
       </file>
     </package>
     <package name="react-chrono.src.components.timeline-elements.timeline-card-media">
-      <metrics statements="698" coveredstatements="626" conditionals="105" coveredconditionals="81" methods="21" coveredmethods="18"/>
+      <metrics statements="696" coveredstatements="625" conditionals="105" coveredconditionals="81" methods="21" coveredmethods="18"/>
       <file name="timeline-card-media-buttons.tsx" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-elements\timeline-card-media\timeline-card-media-buttons.tsx">
         <metrics statements="48" coveredstatements="48" conditionals="1" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -3907,7 +3910,7 @@
         <line num="238" count="1" type="stmt"/>
       </file>
       <file name="timeline-card-media.tsx" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-elements\timeline-card-media\timeline-card-media.tsx">
-        <metrics statements="412" coveredstatements="358" conditionals="49" coveredconditionals="36" methods="4" coveredmethods="1"/>
+        <metrics statements="410" coveredstatements="357" conditionals="49" coveredconditionals="36" methods="4" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -4104,8 +4107,8 @@
         <line num="194" count="18" type="stmt"/>
         <line num="195" count="18" type="stmt"/>
         <line num="196" count="18" type="stmt"/>
-        <line num="197" count="18" type="stmt"/>
-        <line num="198" count="18" type="cond" truecount="0" falsecount="1"/>
+        <line num="197" count="18" type="cond" truecount="0" falsecount="1"/>
+        <line num="198" count="18" type="stmt"/>
         <line num="199" count="18" type="stmt"/>
         <line num="200" count="18" type="stmt"/>
         <line num="201" count="18" type="stmt"/>
@@ -4114,21 +4117,21 @@
         <line num="204" count="18" type="stmt"/>
         <line num="205" count="18" type="stmt"/>
         <line num="206" count="18" type="stmt"/>
-        <line num="207" count="18" type="stmt"/>
-        <line num="208" count="18" type="cond" truecount="1" falsecount="0"/>
-        <line num="209" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="207" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="208" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="209" count="0" type="stmt"/>
         <line num="210" count="0" type="stmt"/>
-        <line num="211" count="0" type="stmt"/>
+        <line num="211" count="18" type="stmt"/>
         <line num="212" count="18" type="stmt"/>
         <line num="213" count="18" type="stmt"/>
         <line num="214" count="18" type="stmt"/>
         <line num="215" count="18" type="stmt"/>
-        <line num="216" count="18" type="stmt"/>
+        <line num="216" count="0" type="stmt"/>
         <line num="217" count="0" type="stmt"/>
         <line num="218" count="0" type="stmt"/>
         <line num="219" count="0" type="stmt"/>
         <line num="220" count="0" type="stmt"/>
-        <line num="221" count="0" type="stmt"/>
+        <line num="221" count="18" type="stmt"/>
         <line num="222" count="18" type="stmt"/>
         <line num="223" count="18" type="stmt"/>
         <line num="224" count="18" type="stmt"/>
@@ -4136,58 +4139,58 @@
         <line num="226" count="18" type="stmt"/>
         <line num="227" count="18" type="stmt"/>
         <line num="228" count="18" type="stmt"/>
-        <line num="229" count="18" type="stmt"/>
+        <line num="229" count="0" type="stmt"/>
         <line num="230" count="0" type="stmt"/>
         <line num="231" count="0" type="stmt"/>
         <line num="232" count="0" type="stmt"/>
         <line num="233" count="0" type="stmt"/>
-        <line num="234" count="0" type="stmt"/>
+        <line num="234" count="18" type="stmt"/>
         <line num="235" count="18" type="stmt"/>
         <line num="236" count="18" type="stmt"/>
         <line num="237" count="18" type="stmt"/>
         <line num="238" count="18" type="stmt"/>
-        <line num="239" count="18" type="stmt"/>
+        <line num="239" count="18" type="cond" truecount="1" falsecount="0"/>
         <line num="240" count="18" type="cond" truecount="1" falsecount="0"/>
-        <line num="241" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="241" count="18" type="stmt"/>
         <line num="242" count="18" type="stmt"/>
         <line num="243" count="18" type="stmt"/>
         <line num="244" count="18" type="stmt"/>
         <line num="245" count="18" type="stmt"/>
-        <line num="246" count="18" type="stmt"/>
-        <line num="247" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="246" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="247" count="18" type="stmt"/>
         <line num="248" count="18" type="stmt"/>
         <line num="249" count="18" type="stmt"/>
         <line num="250" count="18" type="stmt"/>
         <line num="251" count="18" type="stmt"/>
-        <line num="252" count="18" type="stmt"/>
-        <line num="253" count="18" type="cond" truecount="3" falsecount="0"/>
+        <line num="252" count="18" type="cond" truecount="3" falsecount="0"/>
+        <line num="253" count="18" type="stmt"/>
         <line num="254" count="18" type="stmt"/>
         <line num="255" count="18" type="stmt"/>
         <line num="256" count="18" type="stmt"/>
-        <line num="257" count="18" type="stmt"/>
-        <line num="258" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="257" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="258" count="18" type="stmt"/>
         <line num="259" count="18" type="stmt"/>
         <line num="260" count="18" type="stmt"/>
         <line num="261" count="18" type="stmt"/>
-        <line num="262" count="18" type="stmt"/>
-        <line num="263" count="18" type="cond" truecount="1" falsecount="1"/>
+        <line num="262" count="18" type="cond" truecount="1" falsecount="1"/>
+        <line num="263" count="18" type="stmt"/>
         <line num="264" count="18" type="stmt"/>
         <line num="265" count="18" type="stmt"/>
         <line num="266" count="18" type="stmt"/>
-        <line num="267" count="18" type="stmt"/>
-        <line num="268" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="267" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="268" count="18" type="stmt"/>
         <line num="269" count="18" type="stmt"/>
         <line num="270" count="18" type="stmt"/>
-        <line num="271" count="18" type="stmt"/>
+        <line num="271" count="18" type="cond" truecount="1" falsecount="0"/>
         <line num="272" count="18" type="cond" truecount="1" falsecount="0"/>
-        <line num="273" count="18" type="cond" truecount="1" falsecount="0"/>
-        <line num="274" count="2" type="stmt"/>
-        <line num="275" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="273" count="2" type="stmt"/>
+        <line num="274" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="275" count="16" type="stmt"/>
         <line num="276" count="16" type="stmt"/>
-        <line num="277" count="16" type="stmt"/>
+        <line num="277" count="18" type="stmt"/>
         <line num="278" count="18" type="stmt"/>
-        <line num="279" count="18" type="stmt"/>
-        <line num="280" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="279" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="280" count="18" type="stmt"/>
         <line num="281" count="18" type="stmt"/>
         <line num="282" count="18" type="stmt"/>
         <line num="283" count="18" type="stmt"/>
@@ -4197,8 +4200,8 @@
         <line num="287" count="18" type="stmt"/>
         <line num="288" count="18" type="stmt"/>
         <line num="289" count="18" type="stmt"/>
-        <line num="290" count="18" type="stmt"/>
-        <line num="291" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="290" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="291" count="18" type="stmt"/>
         <line num="292" count="18" type="stmt"/>
         <line num="293" count="18" type="stmt"/>
         <line num="294" count="18" type="stmt"/>
@@ -4208,8 +4211,8 @@
         <line num="298" count="18" type="stmt"/>
         <line num="299" count="18" type="stmt"/>
         <line num="300" count="18" type="stmt"/>
-        <line num="301" count="18" type="stmt"/>
-        <line num="302" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="301" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="302" count="2" type="stmt"/>
         <line num="303" count="2" type="stmt"/>
         <line num="304" count="2" type="stmt"/>
         <line num="305" count="2" type="stmt"/>
@@ -4222,9 +4225,9 @@
         <line num="312" count="2" type="stmt"/>
         <line num="313" count="2" type="stmt"/>
         <line num="314" count="2" type="stmt"/>
-        <line num="315" count="2" type="stmt"/>
-        <line num="316" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="317" count="16" type="stmt"/>
+        <line num="315" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="316" count="16" type="stmt"/>
+        <line num="317" count="18" type="stmt"/>
         <line num="318" count="18" type="stmt"/>
         <line num="319" count="18" type="stmt"/>
         <line num="320" count="18" type="stmt"/>
@@ -4244,9 +4247,9 @@
         <line num="334" count="18" type="stmt"/>
         <line num="335" count="18" type="stmt"/>
         <line num="336" count="18" type="stmt"/>
-        <line num="337" count="18" type="stmt"/>
-        <line num="338" count="18" type="cond" truecount="0" falsecount="1"/>
-        <line num="339" count="0" type="stmt"/>
+        <line num="337" count="18" type="cond" truecount="0" falsecount="1"/>
+        <line num="338" count="0" type="stmt"/>
+        <line num="339" count="18" type="stmt"/>
         <line num="340" count="18" type="stmt"/>
         <line num="341" count="18" type="stmt"/>
         <line num="342" count="18" type="stmt"/>
@@ -4258,8 +4261,8 @@
         <line num="348" count="18" type="stmt"/>
         <line num="349" count="18" type="stmt"/>
         <line num="350" count="18" type="stmt"/>
-        <line num="351" count="18" type="stmt"/>
-        <line num="352" count="18" type="cond" truecount="1" falsecount="1"/>
+        <line num="351" count="18" type="cond" truecount="1" falsecount="1"/>
+        <line num="352" count="18" type="stmt"/>
         <line num="353" count="18" type="stmt"/>
         <line num="354" count="18" type="stmt"/>
         <line num="355" count="18" type="stmt"/>
@@ -4271,26 +4274,26 @@
         <line num="361" count="18" type="stmt"/>
         <line num="362" count="18" type="stmt"/>
         <line num="363" count="18" type="stmt"/>
-        <line num="364" count="18" type="stmt"/>
-        <line num="365" count="18" type="cond" truecount="0" falsecount="1"/>
+        <line num="364" count="18" type="cond" truecount="0" falsecount="1"/>
+        <line num="365" count="18" type="stmt"/>
         <line num="366" count="18" type="stmt"/>
-        <line num="367" count="18" type="stmt"/>
-        <line num="368" count="18" type="cond" truecount="1" falsecount="0"/>
-        <line num="369" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="367" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="368" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="369" count="0" type="stmt"/>
         <line num="370" count="0" type="stmt"/>
         <line num="371" count="0" type="stmt"/>
         <line num="372" count="0" type="stmt"/>
-        <line num="373" count="0" type="stmt"/>
-        <line num="374" count="18" type="stmt"/>
-        <line num="375" count="18" type="cond" truecount="2" falsecount="0"/>
-        <line num="376" count="18" type="cond" truecount="1" falsecount="0"/>
-        <line num="377" count="15" type="stmt"/>
-        <line num="378" count="15" type="cond" truecount="0" falsecount="1"/>
+        <line num="373" count="18" type="stmt"/>
+        <line num="374" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="375" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="376" count="15" type="stmt"/>
+        <line num="377" count="15" type="cond" truecount="0" falsecount="1"/>
+        <line num="378" count="0" type="stmt"/>
         <line num="379" count="0" type="stmt"/>
-        <line num="380" count="0" type="stmt"/>
+        <line num="380" count="18" type="stmt"/>
         <line num="381" count="18" type="stmt"/>
-        <line num="382" count="18" type="stmt"/>
-        <line num="383" count="18" type="cond" truecount="0" falsecount="1"/>
+        <line num="382" count="18" type="cond" truecount="0" falsecount="1"/>
+        <line num="383" count="0" type="stmt"/>
         <line num="384" count="0" type="stmt"/>
         <line num="385" count="0" type="stmt"/>
         <line num="386" count="0" type="stmt"/>
@@ -4298,28 +4301,26 @@
         <line num="388" count="0" type="stmt"/>
         <line num="389" count="0" type="stmt"/>
         <line num="390" count="0" type="stmt"/>
-        <line num="391" count="0" type="stmt"/>
-        <line num="392" count="0" type="stmt"/>
-        <line num="393" count="18" type="stmt"/>
-        <line num="394" count="18" type="stmt"/>
-        <line num="395" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="391" count="18" type="stmt"/>
+        <line num="392" count="18" type="stmt"/>
+        <line num="393" count="18" type="cond" truecount="1" falsecount="0"/>
+        <line num="394" count="2" type="stmt"/>
+        <line num="395" count="2" type="stmt"/>
         <line num="396" count="2" type="stmt"/>
         <line num="397" count="2" type="stmt"/>
         <line num="398" count="2" type="stmt"/>
         <line num="399" count="2" type="stmt"/>
-        <line num="400" count="2" type="stmt"/>
-        <line num="401" count="2" type="stmt"/>
-        <line num="402" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="403" count="16" type="stmt"/>
+        <line num="400" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="401" count="16" type="stmt"/>
+        <line num="402" count="18" type="stmt"/>
+        <line num="403" count="18" type="cond" truecount="0" falsecount="1"/>
         <line num="404" count="18" type="stmt"/>
-        <line num="405" count="18" type="cond" truecount="0" falsecount="1"/>
+        <line num="405" count="18" type="stmt"/>
         <line num="406" count="18" type="stmt"/>
-        <line num="407" count="18" type="stmt"/>
-        <line num="408" count="18" type="stmt"/>
+        <line num="407" count="1" type="stmt"/>
+        <line num="408" count="1" type="stmt"/>
         <line num="409" count="1" type="stmt"/>
         <line num="410" count="1" type="stmt"/>
-        <line num="411" count="1" type="stmt"/>
-        <line num="412" count="1" type="stmt"/>
       </file>
     </package>
     <package name="react-chrono.src.components.timeline-elements.timeline-control">
@@ -4725,9 +4726,9 @@
       </file>
     </package>
     <package name="react-chrono.src.components.timeline-elements.timeline-outline">
-      <metrics statements="324" coveredstatements="322" conditionals="45" coveredconditionals="40" methods="10" coveredmethods="10"/>
+      <metrics statements="323" coveredstatements="321" conditionals="45" coveredconditionals="40" methods="10" coveredmethods="10"/>
       <file name="timeline-outline-item-list.tsx" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-elements\timeline-outline\timeline-outline-item-list.tsx">
-        <metrics statements="49" coveredstatements="49" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <metrics statements="48" coveredstatements="48" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -4772,11 +4773,10 @@
         <line num="42" count="6" type="stmt"/>
         <line num="43" count="6" type="stmt"/>
         <line num="44" count="6" type="stmt"/>
-        <line num="45" count="6" type="stmt"/>
-        <line num="46" count="3" type="stmt"/>
+        <line num="45" count="3" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
         <line num="47" count="1" type="stmt"/>
         <line num="48" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
       </file>
       <file name="timeline-outline.styles.ts" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-elements\timeline-outline\timeline-outline.styles.ts">
         <metrics statements="165" coveredstatements="164" conditionals="27" coveredconditionals="25" methods="7" coveredmethods="7"/>
@@ -5347,7 +5347,7 @@
         <line num="136" count="1" type="stmt"/>
       </file>
       <file name="timeline-vertical-item.tsx" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-vertical\timeline-vertical-item.tsx">
-        <metrics statements="236" coveredstatements="227" conditionals="13" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <metrics statements="235" coveredstatements="226" conditionals="13" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -5539,16 +5539,16 @@
         <line num="189" count="32" type="stmt"/>
         <line num="190" count="32" type="stmt"/>
         <line num="191" count="32" type="stmt"/>
-        <line num="192" count="32" type="stmt"/>
-        <line num="193" count="32" type="cond" truecount="0" falsecount="1"/>
+        <line num="192" count="32" type="cond" truecount="0" falsecount="1"/>
+        <line num="193" count="32" type="stmt"/>
         <line num="194" count="32" type="stmt"/>
         <line num="195" count="32" type="stmt"/>
         <line num="196" count="32" type="stmt"/>
         <line num="197" count="32" type="stmt"/>
         <line num="198" count="32" type="stmt"/>
         <line num="199" count="32" type="stmt"/>
-        <line num="200" count="32" type="stmt"/>
-        <line num="201" count="32" type="cond" truecount="0" falsecount="1"/>
+        <line num="200" count="32" type="cond" truecount="0" falsecount="1"/>
+        <line num="201" count="32" type="stmt"/>
         <line num="202" count="32" type="stmt"/>
         <line num="203" count="32" type="stmt"/>
         <line num="204" count="32" type="stmt"/>
@@ -5572,18 +5572,17 @@
         <line num="222" count="32" type="stmt"/>
         <line num="223" count="32" type="stmt"/>
         <line num="224" count="32" type="stmt"/>
-        <line num="225" count="32" type="stmt"/>
-        <line num="226" count="32" type="cond" truecount="0" falsecount="1"/>
-        <line num="227" count="0" type="stmt"/>
-        <line num="228" count="32" type="stmt"/>
-        <line num="229" count="32" type="cond" truecount="0" falsecount="1"/>
+        <line num="225" count="32" type="cond" truecount="0" falsecount="1"/>
+        <line num="226" count="0" type="stmt"/>
+        <line num="227" count="32" type="stmt"/>
+        <line num="228" count="32" type="cond" truecount="0" falsecount="1"/>
+        <line num="229" count="32" type="stmt"/>
         <line num="230" count="32" type="stmt"/>
         <line num="231" count="32" type="stmt"/>
-        <line num="232" count="32" type="stmt"/>
+        <line num="232" count="1" type="stmt"/>
         <line num="233" count="1" type="stmt"/>
         <line num="234" count="1" type="stmt"/>
         <line num="235" count="1" type="stmt"/>
-        <line num="236" count="1" type="stmt"/>
       </file>
       <file name="timeline-vertical-shape.styles.ts" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-vertical\timeline-vertical-shape.styles.ts">
         <metrics statements="53" coveredstatements="53" conditionals="13" coveredconditionals="12" methods="4" coveredmethods="4"/>
@@ -5642,7 +5641,7 @@
         <line num="53" count="1" type="stmt"/>
       </file>
       <file name="timeline-vertical.styles.ts" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-vertical\timeline-vertical.styles.ts">
-        <metrics statements="143" coveredstatements="122" conditionals="21" coveredconditionals="12" methods="5" coveredmethods="5"/>
+        <metrics statements="144" coveredstatements="123" conditionals="21" coveredconditionals="12" methods="5" coveredmethods="5"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -5692,9 +5691,9 @@
         <line num="47" count="1" type="stmt"/>
         <line num="48" count="1" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
-        <line num="50" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="51" count="32" type="cond" truecount="0" falsecount="1"/>
-        <line num="52" count="0" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="51" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="52" count="32" type="cond" truecount="0" falsecount="1"/>
         <line num="53" count="0" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
         <line num="55" count="0" type="stmt"/>
@@ -5703,12 +5702,12 @@
         <line num="58" count="0" type="stmt"/>
         <line num="59" count="0" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
-        <line num="61" count="32" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
         <line num="62" count="32" type="stmt"/>
         <line num="63" count="32" type="stmt"/>
         <line num="64" count="32" type="stmt"/>
         <line num="65" count="32" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
+        <line num="66" count="32" type="stmt"/>
         <line num="67" count="1" type="stmt"/>
         <line num="68" count="1" type="stmt"/>
         <line num="69" count="1" type="stmt"/>
@@ -5722,17 +5721,17 @@
         <line num="77" count="1" type="stmt"/>
         <line num="78" count="1" type="stmt"/>
         <line num="79" count="1" type="stmt"/>
-        <line num="80" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="81" count="32" type="cond" truecount="1" falsecount="0"/>
-        <line num="82" count="24" type="stmt"/>
-        <line num="83" count="32" type="cond" truecount="1" falsecount="1"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="85" count="8" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="82" count="32" type="cond" truecount="1" falsecount="0"/>
+        <line num="83" count="24" type="stmt"/>
+        <line num="84" count="32" type="cond" truecount="1" falsecount="1"/>
+        <line num="85" count="0" type="stmt"/>
         <line num="86" count="8" type="stmt"/>
         <line num="87" count="8" type="stmt"/>
-        <line num="88" count="32" type="stmt"/>
-        <line num="89" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="90" count="32" type="stmt"/>
+        <line num="88" count="8" type="stmt"/>
+        <line num="89" count="32" type="stmt"/>
+        <line num="90" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="91" count="32" type="stmt"/>
         <line num="92" count="32" type="stmt"/>
         <line num="93" count="32" type="stmt"/>
@@ -5743,8 +5742,8 @@
         <line num="98" count="32" type="stmt"/>
         <line num="99" count="32" type="stmt"/>
         <line num="100" count="32" type="stmt"/>
-        <line num="101" count="32" type="cond" truecount="0" falsecount="1"/>
-        <line num="102" count="0" type="stmt"/>
+        <line num="101" count="32" type="stmt"/>
+        <line num="102" count="32" type="cond" truecount="0" falsecount="1"/>
         <line num="103" count="0" type="stmt"/>
         <line num="104" count="0" type="stmt"/>
         <line num="105" count="0" type="stmt"/>
@@ -5754,8 +5753,8 @@
         <line num="109" count="0" type="stmt"/>
         <line num="110" count="0" type="stmt"/>
         <line num="111" count="0" type="stmt"/>
-        <line num="112" count="32" type="stmt"/>
-        <line num="113" count="1" type="stmt"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="113" count="32" type="stmt"/>
         <line num="114" count="1" type="stmt"/>
         <line num="115" count="1" type="stmt"/>
         <line num="116" count="1" type="stmt"/>
@@ -5768,24 +5767,25 @@
         <line num="123" count="1" type="stmt"/>
         <line num="124" count="1" type="stmt"/>
         <line num="125" count="1" type="stmt"/>
-        <line num="126" count="1" type="cond" truecount="1" falsecount="2"/>
-        <line num="127" count="1" type="cond" truecount="3" falsecount="0"/>
-        <line num="128" count="1" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
+        <line num="127" count="1" type="cond" truecount="1" falsecount="2"/>
+        <line num="128" count="1" type="cond" truecount="3" falsecount="0"/>
         <line num="129" count="1" type="stmt"/>
-        <line num="130" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="131" count="1" type="cond" truecount="1" falsecount="2"/>
-        <line num="132" count="1" type="stmt"/>
+        <line num="130" count="1" type="stmt"/>
+        <line num="131" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="132" count="1" type="cond" truecount="1" falsecount="2"/>
         <line num="133" count="1" type="stmt"/>
         <line num="134" count="1" type="stmt"/>
-        <line num="135" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="136" count="23" type="cond" truecount="0" falsecount="1"/>
-        <line num="137" count="0" type="stmt"/>
-        <line num="138" count="23" type="stmt"/>
+        <line num="135" count="1" type="stmt"/>
+        <line num="136" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="137" count="23" type="cond" truecount="0" falsecount="1"/>
+        <line num="138" count="0" type="stmt"/>
         <line num="139" count="23" type="stmt"/>
         <line num="140" count="23" type="stmt"/>
-        <line num="141" count="1" type="stmt"/>
+        <line num="141" count="23" type="stmt"/>
         <line num="142" count="1" type="stmt"/>
         <line num="143" count="1" type="stmt"/>
+        <line num="144" count="1" type="stmt"/>
       </file>
       <file name="timeline-vertical.tsx" path="C:\Users\prabh\Github\react-chrono\src\components\timeline-vertical\timeline-vertical.tsx">
         <metrics statements="125" coveredstatements="111" conditionals="13" coveredconditionals="10" methods="1" coveredmethods="1"/>
@@ -9519,9 +9519,9 @@
       </file>
     </package>
     <package name="react-chrono.src.utils">
-      <metrics statements="79" coveredstatements="72" conditionals="14" coveredconditionals="14" methods="8" coveredmethods="6"/>
+      <metrics statements="89" coveredstatements="74" conditionals="14" coveredconditionals="14" methods="9" coveredmethods="6"/>
       <file name="index.ts" path="C:\Users\prabh\Github\react-chrono\src\utils\index.ts">
-        <metrics statements="79" coveredstatements="72" conditionals="14" coveredconditionals="14" methods="8" coveredmethods="6"/>
+        <metrics statements="89" coveredstatements="74" conditionals="14" coveredconditionals="14" methods="9" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -9601,6 +9601,16 @@
         <line num="77" count="0" type="stmt"/>
         <line num="78" count="0" type="stmt"/>
         <line num="79" count="0" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
       </file>
     </package>
   </project>

@@ -330,6 +330,7 @@ export const SlideShowProgressBar = styled.progress<{
   transform: translateX(-50%);
   position: absolute;
   border-radius: 2px;
+  border: 0;
 
   ${(p) => {
     if (p.$paused) {

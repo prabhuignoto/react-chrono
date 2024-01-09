@@ -39,13 +39,14 @@ const getTextOrContent: (
             textContent = parseDetailsAsHTML ? xss(detailedText) : detailedText;
           }
 
-          const textContentProps = parseDetailsAsHTML && !isTextArray
-            ? {
-                dangerouslySetInnerHTML: {
-                  __html: xss(textContent),
-                },
-              }
-            : {};
+          const textContentProps =
+            parseDetailsAsHTML && !isTextArray
+              ? {
+                  dangerouslySetInnerHTML: {
+                    __html: xss(textContent),
+                  },
+                }
+              : {};
 
           return textContent ? (
             <TimelineContentDetails

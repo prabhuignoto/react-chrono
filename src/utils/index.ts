@@ -1,6 +1,6 @@
 import { SlideShowType, TimelineMode } from '@models/TimelineModel';
-import { darkTheme, defaultTheme } from '../components/common/themes';
 import xss from 'xss';
+import { darkTheme, defaultTheme } from '../components/common/themes';
 
 export const uniqueID = () => {
   const chars =
@@ -76,4 +76,14 @@ export const sanitizeHtmlText = (text: string | string[]) => {
     return text.map((t) => xss(t));
   }
   return xss(text);
+};
+
+export const getUniqueID = () => {
+  const chars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let autoId = '';
+  for (let i = 0; i < 7; i++) {
+    autoId += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return autoId;
 };
