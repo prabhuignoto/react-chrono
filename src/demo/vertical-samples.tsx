@@ -108,6 +108,7 @@ export const VerticalTreeMixed: FunctionComponent<{
         slideShow
         slideItemDuration={2500}
         enableDarkToggle
+        parseDetailsAsHTML
       />
     </ComponentContainerTree>
   </Vertical>
@@ -183,6 +184,7 @@ export const VerticalNewMedia: FunctionComponent<{
             slideItemDuration={2000}
             scrollable={{ scrollbar: false }}
             textOverlay
+            parseDetailsAsHTML
             // slideShowType="reveal"
             // borderLessCards
             // theme={{
@@ -243,6 +245,7 @@ export const VerticalAlternatingNested: FunctionComponent<{
               imageFit: 'contain',
             }}
             highlightCardsOnHover
+            parseDetailsAsHTML
             // borderLessCards
             // theme={{
             //   cardBgColor: '#fff',
@@ -349,6 +352,7 @@ export const VerticalBasicCardLess: FunctionComponent<{
         items={items}
         mode="VERTICAL"
         cardLess
+        parseDetailsAsHTML
         theme={{
           cardBgColor: '#fff',
           titleColorActive: 'red',
@@ -397,6 +401,7 @@ export const VerticalBasicNested: FunctionComponent<{
         classNames={{
           cardText: 'custom-text',
         }}
+        parseDetailsAsHTML
         enableDarkToggle
         mediaSettings={{ align: 'center' }}
       />
