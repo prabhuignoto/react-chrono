@@ -33,6 +33,7 @@ debug
 cache
 .dccache
 .idea
+.tmp
 
 cypress/videos
 

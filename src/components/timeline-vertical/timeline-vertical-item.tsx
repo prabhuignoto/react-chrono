@@ -40,7 +40,7 @@ import {
 const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
   props: VerticalItemModel,
 ) => {
-  const contentRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLLIElement>(null);
 
   const {
     active,
@@ -185,7 +185,6 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       key={id}
       ref={contentRef}
       $cardLess={cardLess}
-      role="listitem"
       $isNested={isNested}
       theme={theme}
     >

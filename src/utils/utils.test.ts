@@ -1,5 +1,5 @@
 import {
-  uniqueID,
+  getUniqueID,
   hexToRGBA,
   getDefaultThemeOrDark,
   getDefaultClassNames,
@@ -12,7 +12,7 @@ import { describe, it } from 'vitest';
 
 describe('Utility Functions', () => {
   it('uniqueID should generate a unique ID of length 7', () => {
-    const id = uniqueID();
+    const id = getUniqueID();
     expect(id).toHaveLength(7);
   });
 

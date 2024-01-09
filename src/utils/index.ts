@@ -1,16 +1,6 @@
 import { SlideShowType, TimelineMode } from '@models/TimelineModel';
-import { darkTheme, defaultTheme } from '../components/common/themes';
 import xss from 'xss';
-
-export const uniqueID = () => {
-  const chars =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let autoId = '';
-  for (let i = 0; i < 7; i++) {
-    autoId += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return autoId;
-};
+import { darkTheme, defaultTheme } from '../components/common/themes';
 
 export const hexToRGBA = (hex: string, alpha: number): string => {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -76,4 +66,21 @@ export const sanitizeHtmlText = (text: string | string[]) => {
     return text.map((t) => xss(t));
   }
   return xss(text);
+};
+
+export const getUniqueID = () => {
+  const chars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  let autoId = '';
+
+  const randomValues = new Uint32Array(7);
+
+  window.crypto.getRandomValues(randomValues);
+
+  for (let i = 0; i < randomValues.length; i++) {
+    autoId += chars[randomValues[i] % chars.length];
+  }
+
+  return autoId;
 };

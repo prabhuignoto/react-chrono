@@ -194,7 +194,6 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
         alt={media.name}
         loading={'lazy'}
         $enableBorderRadius={borderLessCards}
-        role="img"
         fit={mediaSettings?.imageFit}
         data-testid="timeline-card-content-image"
       />
@@ -387,7 +386,6 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = ({
             $paused={paused}
             ref={progressRef}
             $startWidth={startWidth}
-            role="progressbar"
             $resuming={resuming}
           ></SlideShowProgressBar>
         ) : null}

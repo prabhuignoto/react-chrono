@@ -1,7 +1,7 @@
 import { Scroll } from '@models/TimelineHorizontalModel';
 import { TimelineCardModel } from '@models/TimelineItemModel';
 import { TimelineModel } from '@models/TimelineModel';
-import { uniqueID as genUniqueID } from '@utils/index';
+import { getUniqueID } from '@utils/index';
 import cls from 'classnames';
 import 'focus-visible';
 import React, {
@@ -96,7 +96,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   }, [slideShowRunning, scrollable]);
 
   const id = useRef(
-    `react-chrono-timeline-${noUniqueId ? uniqueId : genUniqueID()}`,
+    `react-chrono-timeline-${noUniqueId ? uniqueId : getUniqueID()}`,
   );
 
   useMatchMedia(

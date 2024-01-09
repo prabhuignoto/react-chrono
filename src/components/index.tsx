@@ -1,5 +1,6 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import { TimelineProps } from '@models/TimelineModel';
+import { getUniqueID } from '@utils/index';
 import dayjs from 'dayjs';
 import 'focus-visible';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
@@ -32,7 +33,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   const initItems = (lineItems?: TimelineItemModel[]): TimelineItemModel[] => {
     if (lineItems?.length) {
       return lineItems.map((item, index) => {
-        const id = Math.random().toString(16).slice(2);
+        const id = getUniqueID();
 
         return {
           ...item,
@@ -42,7 +43,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
           items: item.items?.map((subItem) => ({
             ...subItem,
             _dayjs: dayjs(subItem.date),
-            id: Math.random().toString(16).slice(2),
+            id: getUniqueID(),
             isNested: true,
             visible: true,
           })),
