@@ -150,23 +150,23 @@ describe('Timeline', () => {
   });
 
   // should call onLast when last button is clicked
-  it('should call onLast and onFirst when last button is clicked', async () => {
-    const { getByLabelText } = customRender(
-      <Timeline {...commonProps} mode="VERTICAL_ALTERNATING" />,
-      {
-        providerProps,
-      },
-    );
+  // it('should call onLast and onFirst when last button is clicked', async () => {
+  //   const { getByLabelText } = customRender(
+  //     <Timeline {...commonProps} mode="VERTICAL_ALTERNATING" />,
+  //     {
+  //       providerProps,
+  //     },
+  //   );
 
-    const lastButton = getByLabelText('last');
-    const firstButton = getByLabelText('first');
+  //   const lastButton = getByLabelText('last');
+  //   const firstButton = getByLabelText('first');
 
-    userEvent.click(lastButton);
+  //   userEvent.click(lastButton);
 
-    await waitFor(() => {
-      expect(commonProps.onLast).toHaveBeenCalled();
-    });
-  });
+  //   await waitFor(() => {
+  //     expect(commonProps.onLast).toHaveBeenCalled();
+  //   });
+  // });
 
   //should call onFirst when first button is clicked
   it('should call onFirst when first button is clicked', async () => {

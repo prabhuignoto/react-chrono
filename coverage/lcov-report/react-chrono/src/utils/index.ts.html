@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.14% </span>
+                <span class="strong">91.86% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>74/89</span>
+                <span class='fraction'>79/86</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/9</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.14% </span>
+                <span class="strong">91.86% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>74/89</span>
+                <span class='fraction'>79/86</span>
             </div>
         
             
@@ -149,22 +149,9 @@
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
 <a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a>
-<a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">84x</span>
-<span class="cline-any cline-yes">84x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">37x</span>
@@ -233,27 +220,24 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">77x</span>
+<span class="cline-any cline-yes">77x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { SlideShowType, TimelineMode } from '@models/TimelineModel';
 import xss from 'xss';
 import { darkTheme, defaultTheme } from '../components/common/themes';
-&nbsp;
-export const uniqueID = () =&gt; {
-  const chars =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let autoId = '';
-  for (let i = 0; i &lt; 7; i++) {
-    autoId += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return autoId;
-};
 &nbsp;
 export const hexToRGBA = (hex: string, alpha: number): string =&gt; {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -321,15 +305,22 @@ export const sanitizeHtmlText = <span class="fstat-no" title="function not cover
 <span class="cstat-no" title="statement not covered" >  return xss(text);</span>
 <span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
-export const getUniqueID = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const chars =</span>
-<span class="cstat-no" title="statement not covered" >    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';</span>
-<span class="cstat-no" title="statement not covered" >  let autoId = '';</span>
-<span class="cstat-no" title="statement not covered" >  for (let i = 0; i &lt; 7; i++) {</span>
-<span class="cstat-no" title="statement not covered" >    autoId += chars.charAt(Math.floor(Math.random() * chars.length));</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >  return autoId;</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+export const getUniqueID = () =&gt; {
+  const chars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+&nbsp;
+  let autoId = '';
+&nbsp;
+  const randomValues = new Uint32Array(7);
+&nbsp;
+  window.crypto.getRandomValues(randomValues);
+&nbsp;
+  for (let i = 0; i &lt; randomValues.length; i++) {
+    autoId += chars[randomValues[i] % chars.length];
+  }
+&nbsp;
+  return autoId;
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -337,7 +328,7 @@ export const getUniqueID = <span class="fstat-no" title="function not covered" >
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-01-09T14:32:45.761Z
+                at 2024-01-10T05:59:49.180Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
