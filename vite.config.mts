@@ -19,7 +19,7 @@ export default defineConfig({
         'package.json',
         'package-lock.json',
         'tsconfig.json',
-        'vite.config.ts',
+        'vite.config.mts',
         'yarn.lock',
       ],
     },
