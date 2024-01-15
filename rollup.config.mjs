@@ -1,4 +1,5 @@
 import babel from '@rollup/plugin-babel';
+import buble from '@rollup/plugin-buble';
 import common from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
@@ -12,7 +13,6 @@ import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json' assert { type: 'json' };
-import buble from '@rollup/plugin-buble';
 
 const banner = `/*
  * ${pkg.name}
@@ -57,7 +57,21 @@ export default {
   plugins: [
     PeerDepsExternalPlugin(),
     del({ targets: 'dist/*' }),
-    typescript(),
+    typescript({
+      tsconfigDefaults: {
+        compilerOptions: {
+          plugins: [
+            {
+              transform: 'typescript-transform-paths',
+            },
+            {
+              transform: 'typescript-transform-paths',
+              afterDeclarations: true,
+            },
+          ],
+        },
+      },
+    }),
     babel({
       babelHelpers: 'runtime',
       extensions: ['tsx', 'ts'],
