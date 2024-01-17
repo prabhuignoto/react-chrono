@@ -1,3 +1,4 @@
+import { Theme } from '@models/Theme';
 import { TimelineProps } from '@models/TimelineModel';
 import styled, { css, keyframes } from 'styled-components';
 import { linearGradient } from '../timeline-card-media/timeline-card-media.styles';
@@ -7,7 +8,6 @@ import {
   slideInFromLeft,
   slideInFromTop,
 } from './card-animations.styles';
-import { Theme } from '@models/Theme';
 
 type ContentT = Pick<
   TimelineProps,
@@ -28,6 +28,7 @@ export const TimelineItemContentWrapper = styled.section<
     $slideShowActive?: boolean;
     $slideShowType?: TimelineProps['slideShowType'];
     $textOverlay?: boolean;
+    $customContent?: boolean;
   } & ContentT
 >`
   align-items: flex-start;
@@ -44,7 +45,11 @@ export const TimelineItemContentWrapper = styled.section<
   line-height: 1.5em;
   margin: ${(p) => (p.mode === 'HORIZONTAL' ? '0 auto' : '')};
   max-width: ${(p) => p.$maxWidth}px;
-  min-height: ${(p) => p.$minHeight}px;
+  // min-height: ${(p) => p.$minHeight}px;
+  ${(p) =>
+    p.$customContent
+      ? `height: ${p.$minHeight}px;`
+      : `min-height: ${p.$minHeight};`}
   position: relative;
   text-align: left;
   width: 98%;
@@ -216,7 +221,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
   ${({ $useReadMore, $customContent, $showMore, height = 0, $textOverlay }) =>
     $useReadMore && !$customContent && !$showMore && !$textOverlay
       ? `max-height: ${height}px;`
-      : ''}
+      : 'height: 100%'}
   ${({
     $cardHeight = 0,
     $contentHeight = 0,
@@ -236,16 +241,18 @@ export const TimelineContentDetailsWrapper = styled.div<{
     p.$borderLess ? 'calc(100% - 0.5rem)' : 'calc(95% - 0.5rem)'};
   padding: 0.25rem 0.25rem;
 
+  ${(p) => (p.$customContent ? `height: 100%;` : '')}
+
   $${({
-      height = 0,
-      $cardHeight = 0,
-      $contentHeight = 0,
-      $showMore,
-      $useReadMore,
-    }) =>
-      $showMore && $useReadMore && $cardHeight
-        ? css`
-            animation: ${keyframes`
+    height = 0,
+    $cardHeight = 0,
+    $contentHeight = 0,
+    $showMore,
+    $useReadMore,
+  }) =>
+    $showMore && $useReadMore && $cardHeight
+      ? css`
+          animation: ${keyframes`
             0% {
               max-height: ${height}px;
             }
@@ -253,8 +260,8 @@ export const TimelineContentDetailsWrapper = styled.div<{
              max-height: ${$cardHeight + $contentHeight - height}px;
             }
           `} 0.25s ease-in-out;
-          `
-        : ''}
+        `
+      : ''}
     &::-webkit-scrollbar {
     width: 0.3em;
   }
