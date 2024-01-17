@@ -335,7 +335,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       const handlers = useMemo(() => {
         if (!isNested && !disableInteraction) {
-          console.log('reddit');
           return {
             onPointerDown: (ev: React.PointerEvent) => {
               ev.stopPropagation();
@@ -375,6 +374,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           $isNested={isNested}
           $highlight={highlightCardsOnHover}
           data-testid="timeline-card-content"
+          $customContent={!!customContent}
         >
           {title && !textOverlay ? (
             <ContentHeader
