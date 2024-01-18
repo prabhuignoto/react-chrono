@@ -9,7 +9,7 @@ export type ToolbarProps  = {
 
 const Toolbar: FunctionComponent<ToolbarProps> = (props) => {
     return <div>
-        
+
     </div>
 }
 
