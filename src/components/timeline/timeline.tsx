@@ -202,7 +202,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   useEffect(() => {
     const activeItem = items[activeTimelineItem || 0];
 
-
     if (items.length && activeItem) {
       // const item = items[activeItem];
       const { title, cardTitle, cardSubtitle, cardDetailedText } = activeItem;

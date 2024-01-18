@@ -1,17 +1,11 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent } from 'react';
 
-
-export type ToolbarProps  = {
-    children?: React.ReactNode | React.ReactNode[];
-}
-
-
+export type ToolbarProps = {
+  children?: React.ReactNode | React.ReactNode[];
+};
 
 const Toolbar: FunctionComponent<ToolbarProps> = (props) => {
-    return <div>
-
-    </div>
-}
-
+  return <div></div>;
+};
 
 export { Toolbar };
