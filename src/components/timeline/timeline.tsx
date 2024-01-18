@@ -202,6 +202,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   useEffect(() => {
     const activeItem = items[activeTimelineItem || 0];
 
+    if (slideShowRunning) {
+      activeItemIndex.current = activeTimelineItem;
+    }
+
     if (items.length && activeItem) {
       // const item = items[activeItem];
       const { title, cardTitle, cardSubtitle, cardDetailedText } = activeItem;
@@ -234,7 +238,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         }
       }
     }
-  }, [activeTimelineItem, items.length]);
+  }, [activeTimelineItem, items.length, slideShowRunning]);
 
   const handleScroll = (scroll: Partial<Scroll>) => {
     const element = timelineMainRef.current;
