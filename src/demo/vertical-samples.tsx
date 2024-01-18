@@ -10,6 +10,7 @@ export const VerticalTree: FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
   theme: Theme;
+  children: React.ReactNode | React.ReactNode[]
 }> = ({ type, items, theme }) => {
   return (
     <Vertical id="tree">
@@ -128,7 +129,7 @@ export const VerticalBasic: FunctionComponent<{
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
         noUniqueId
-        uniqueID="vertical_basic_test"
+        uniqueId="vertical_basic_test"
         parseDetailsAsHTML
         highlightCardsOnHover
         // textOverlay
@@ -139,7 +140,7 @@ export const VerticalBasic: FunctionComponent<{
         //   titleColor: '#922724',
         //   cardDetailsBackGround: '#e8e8e8',
         // }}
-        onItemSelected={(selected) => console.log(selected.cardTitle)}
+        onItemSelected={(selected) => console.log(selected.index)}
         enableOutline
         fontSizes={{
           title: '1.5rem',
@@ -195,7 +196,7 @@ export const VerticalNewMedia: FunctionComponent<{
             //   cardDetailsColor: '#000',
             // }}
             // darkMode
-            onItemSelected={(selected) => console.log(selected.cardTitle)}
+            onItemSelected={(selected) => console.log(selected.index)}
             // enableOutline
             fontSizes={{
               title: '1.5rem',
@@ -255,7 +256,7 @@ export const VerticalAlternatingNested: FunctionComponent<{
             //   cardDetailsColor: '#000',
             // }}
             // darkMode
-            onItemSelected={(selected) => console.log(selected.cardTitle)}
+            onItemSelected={(selected) => console.log(selected.index)}
             // enableOutline
             fontSizes={{
               title: '1rem',
@@ -357,7 +358,7 @@ export const VerticalBasicCardLess: FunctionComponent<{
           cardBgColor: '#fff',
           titleColorActive: 'red',
         }}
-        onItemSelected={(selected) => console.log(selected.cardTitle)}
+        onItemSelected={(selected) => console.log(selected.index)}
       />
     </ComponentContainerTree>
   </Vertical>
@@ -384,7 +385,7 @@ export const VerticalBasicNested: FunctionComponent<{
         //   titleColor: '#922724',
         //   cardDetailsBackGround: '#e8e8e8',
         // }}
-        onItemSelected={(selected) => console.log(selected.cardTitle)}
+        onItemSelected={(selected) => console.log(selected.index)}
         enableOutline
         fontSizes={{
           title: '1rem',
