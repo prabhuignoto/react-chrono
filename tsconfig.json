@@ -21,6 +21,7 @@
     "rootDir": "src",
     "declaration": true,
     "declarationDir": "dist",
+    "baseUrl": ".",
     "types": [
       "node",
       "@types/jest",
@@ -30,17 +31,23 @@
     ],
     "paths": {
       "@utils/*": [
-        "./src/utils/*"
+        "src/utils/*"
       ],
       "@models/*": [
-        "./src/models/*"
+        "src/models/*"
       ]
-    }
+    },
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
   },
   "include": [
     "src/components",
     "src/models",
     "src/utils",
+    "src/demo"
   ],
   "exclude": [
     "node_modules",

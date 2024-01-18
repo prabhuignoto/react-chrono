@@ -1,5 +1,5 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import Chrono from '../components';
 import {
   ComponentContainer,
@@ -13,8 +13,11 @@ export const HorizontalBasic: React.FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
 }> = ({ items }) => {
+  const [itemSelected, setItemSelected] = useState(0);
+
   return (
     <Horizontal id="horizontal">
+      <span>{itemSelected}</span>
       <ComponentContainer type={'big-screen'}>
         <Chrono
           items={data}
@@ -25,7 +28,7 @@ export const HorizontalBasic: React.FunctionComponent<{
           slideShow
           slideItemDuration={2550}
           itemWidth={300}
-          onItemSelected={(selected) => console.log(selected)}
+          onItemSelected={(selected) => setItemSelected(selected.index)}
           timelinePointDimension={20}
           timelinePointShape="square"
           // disableInteraction
@@ -77,7 +80,6 @@ export const HorizontalAll: React.FunctionComponent<{
           itemWidth={400}
           focusActiveItemOnLoad
           onItemSelected={(selected) => {
-            console.log('moye', selected.index);
             setIndex(selected.index);
           }}
           timelinePointDimension={20}

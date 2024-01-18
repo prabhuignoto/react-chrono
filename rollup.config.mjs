@@ -58,6 +58,11 @@ export default {
     PeerDepsExternalPlugin(),
     del({ targets: 'dist/*' }),
     typescript({
+      tsconfig: 'tsconfig.json',
+      tsconfigOverride: {
+        include: ['src/**/*.ts+(|x)', 'src/**/*.d.ts+(|x)'],
+        exclude: ['src/demo/**/*', 'src/examples/**/*'],
+      },
       tsconfigDefaults: {
         compilerOptions: {
           plugins: [

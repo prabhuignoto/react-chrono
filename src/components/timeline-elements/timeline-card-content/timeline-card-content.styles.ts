@@ -49,7 +49,7 @@ export const TimelineItemContentWrapper = styled.section<
   ${(p) =>
     p.$customContent
       ? `height: ${p.$minHeight}px;`
-      : `min-height: ${p.$minHeight};`}
+      : `min-height: ${p.$minHeight}px;`}
   position: relative;
   text-align: left;
   width: 98%;

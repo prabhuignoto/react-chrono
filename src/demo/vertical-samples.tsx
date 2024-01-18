@@ -10,6 +10,7 @@ export const VerticalTree: FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
   theme: Theme;
+  children: React.ReactNode | React.ReactNode[]
 }> = ({ type, items, theme }) => {
   return (
     <Vertical id="tree">
@@ -128,7 +129,7 @@ export const VerticalBasic: FunctionComponent<{
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
         noUniqueId
-        uniqueID="vertical_basic_test"
+        uniqueId="vertical_basic_test"
         parseDetailsAsHTML
         highlightCardsOnHover
         // textOverlay

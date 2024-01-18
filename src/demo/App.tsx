@@ -177,7 +177,7 @@ const NewDemo: React.FunctionComponent = () => {
                 <VerticalTree
                   type={'big-screen'}
                   items={state > 0 ? items : mixed}
-                  // theme={customTheme}
+                  theme={customTheme}
                 >
                   {state}
                 </VerticalTree>
