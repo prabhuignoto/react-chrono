@@ -88,16 +88,18 @@ export default {
           {
             fileName: false,
             ssr: true,
+            transpileTemplateLiterals: true,
+            minify: true,
           },
         ],
       ],
     }),
-    buble({
-      objectAssign: true,
-      transforms: {
-        templateString: false,
-      },
-    }),
+    // buble({
+    //   objectAssign: true,
+    //   transforms: {
+    //     templateString: false,
+    //   },
+    // }),
     postcss({
       plugins: [
         postCSSPreset({
