@@ -1,5 +1,5 @@
 import babel from '@rollup/plugin-babel';
-import buble from '@rollup/plugin-buble';
+// import buble from '@rollup/plugin-buble';
 import common from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
@@ -88,16 +88,18 @@ export default {
           {
             fileName: false,
             ssr: true,
+            transpileTemplateLiterals: true,
+            minify: true,
           },
         ],
       ],
     }),
-    buble({
-      objectAssign: true,
-      transforms: {
-        templateString: false,
-      },
-    }),
+    // buble({
+    //   objectAssign: true,
+    //   transforms: {
+    //     templateString: false,
+    //   },
+    // }),
     postcss({
       plugins: [
         postCSSPreset({
