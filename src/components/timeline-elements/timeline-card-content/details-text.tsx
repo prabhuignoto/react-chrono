@@ -4,10 +4,9 @@ import { GlobalContext } from '../../GlobalContext';
 import { getTextOrContent } from './text-or-content';
 import { TimelineContentDetailsWrapper } from './timeline-card-content.styles';
 
-type DetailsTextProps = Pick<
-  TimelineContentModel,
-  'detailedText' | 'timelineContent'
-> & {
+type DetailsTextProps = {
+  detailedText: TimelineContentModel['detailedText'];
+  timelineContent: TimelineContentModel['timelineContent'];
   cardActualHeight?: number;
   contentDetailsClass?: string;
   customContent?: ReactNode;

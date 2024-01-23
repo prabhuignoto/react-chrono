@@ -1,5 +1,11 @@
 import { TimelineContentModel } from '@models/TimelineContentModel';
-import { ForwardRefExoticComponent, forwardRef, useContext } from 'react';
+import { TimelineProps } from '@models/TimelineModel';
+import {
+  ForwardRefExoticComponent,
+  ReactNode,
+  forwardRef,
+  useContext,
+} from 'react';
 import xss from 'xss';
 import { GlobalContext } from '../../GlobalContext';
 import {
@@ -7,6 +13,7 @@ import {
   TimelineSubContent,
 } from './timeline-card-content.styles';
 
+// Define the type for the TextOrContentModel
 export type TextOrContentModel = Pick<
   TimelineContentModel,
   'timelineContent' | 'theme' | 'detailedText'
@@ -14,6 +21,42 @@ export type TextOrContentModel = Pick<
   showMore?: boolean;
 };
 
+// Function to render an array of text
+const renderTextArray: (
+  p: Pick<TimelineProps, 'parseDetailsAsHTML' | 'fontSizes' | 'theme'> & {
+    detailedText: string[];
+    cardTextClassName: string;
+  },
+) => ReactNode = ({
+  fontSizes,
+  parseDetailsAsHTML,
+  theme,
+  detailedText,
+  cardTextClassName,
+}) => {
+  return (detailedText as string[]).map((text, index) => {
+    const props = parseDetailsAsHTML
+      ? {
+          dangerouslySetInnerHTML: {
+            __html: xss(text),
+          },
+        }
+      : null;
+    return (
+      <TimelineSubContent
+        key={index}
+        fontSize={fontSizes?.cardText}
+        className={cardTextClassName}
+        theme={theme}
+        {...props}
+      >
+        {parseDetailsAsHTML ? null : text}
+      </TimelineSubContent>
+    );
+  });
+};
+
+// Function to get the TextOrContent component
 const getTextOrContent: (
   p: TextOrContentModel,
 ) => ForwardRefExoticComponent<TextOrContentModel> = ({
@@ -34,7 +77,13 @@ const getTextOrContent: (
         } else {
           let textContent = null;
           if (isTextArray) {
-            textContent = renderTextArray();
+            textContent = renderTextArray({
+              fontSizes,
+              parseDetailsAsHTML,
+              theme,
+              detailedText: detailedText as string[],
+              cardTextClassName: classNames?.cardText,
+            });
           } else {
             textContent = parseDetailsAsHTML ? xss(detailedText) : detailedText;
           }
@@ -59,29 +108,6 @@ const getTextOrContent: (
             </TimelineContentDetails>
           ) : null;
         }
-      };
-
-      const renderTextArray = () => {
-        return (detailedText as string[]).map((text, index) => {
-          const props = parseDetailsAsHTML
-            ? {
-                dangerouslySetInnerHTML: {
-                  __html: xss(text),
-                },
-              }
-            : null;
-          return (
-            <TimelineSubContent
-              key={index}
-              fontSize={fontSizes?.cardText}
-              className={classNames?.cardText}
-              theme={theme}
-              {...props}
-            >
-              {parseDetailsAsHTML ? null : text}
-            </TimelineSubContent>
-          );
-        });
       };
 
       return renderTimelineContent();
