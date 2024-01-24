@@ -24,8 +24,8 @@ export type TextOrContentModel = Pick<
 // Function to render an array of text
 const renderTextArray: (
   p: Pick<TimelineProps, 'parseDetailsAsHTML' | 'fontSizes' | 'theme'> & {
-    detailedText: string[];
     cardTextClassName: string;
+    detailedText: string[];
   },
 ) => ReactNode = ({
   fontSizes,
@@ -78,11 +78,11 @@ const getTextOrContent: (
           let textContent = null;
           if (isTextArray) {
             textContent = renderTextArray({
+              cardTextClassName: classNames?.cardText,
+              detailedText: detailedText as string[],
               fontSizes,
               parseDetailsAsHTML,
               theme,
-              detailedText: detailedText as string[],
-              cardTextClassName: classNames?.cardText,
             });
           } else {
             textContent = parseDetailsAsHTML ? xss(detailedText) : detailedText;

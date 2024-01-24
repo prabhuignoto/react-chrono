@@ -19,6 +19,7 @@ export const TimelineItemContentWrapper = styled.section<
     $active?: boolean;
     $borderLessCards?: TimelineProps['borderLessCards'];
     $branchDir?: string;
+    $customContent?: boolean;
     $highlight?: boolean;
     $isNested?: boolean;
     $maxWidth?: number;
@@ -28,7 +29,6 @@ export const TimelineItemContentWrapper = styled.section<
     $slideShowActive?: boolean;
     $slideShowType?: TimelineProps['slideShowType'];
     $textOverlay?: boolean;
-    $customContent?: boolean;
   } & ContentT
 >`
   align-items: flex-start;

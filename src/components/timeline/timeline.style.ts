@@ -85,39 +85,39 @@ export const TimelineMainWrapper = styled.div<{
 `;
 
 export const TimelineMain = styled.div`
-  align-items: center;
-  display: flex;
-  left: 0;
-  top: 50%;
   position: absolute;
+  top: 50%;
+  left: 0;
+  display: flex;
+  align-items: center;
   transition: all 0.2s ease;
   transform: translate(0, -50%);
 
   &.vertical {
     align-items: flex-start;
-    height: 100%;
     justify-content: flex-start;
     width: 100%;
+    height: 100%;
   }
 `;
 
 export const Outline = styled.div<{ color?: string; height?: number }>`
-  background: ${(p) => p.color};
-  height: ${(p) => `${p.height}px`};
-  left: 0;
-  margin-left: auto;
-  margin-right: auto;
   position: absolute;
   right: 0;
+  left: 0;
   width: 100%;
+  height: ${(p) => `${p.height}px`};
+  margin-right: auto;
+  margin-left: auto;
+  background: ${(p) => p.color};
 `;
 
 export const TimelineControlContainer = styled.div<{
   active?: boolean;
   mode?: TimelineMode;
 }>`
-  align-items: center;
   display: flex;
+  align-items: center;
   justify-content: center;
   min-height: 3rem;
 
@@ -139,11 +139,11 @@ export const TimelineControlContainer = styled.div<{
 `;
 
 export const TimelineContentRender = styled.div<{ $showAllCards?: boolean }>`
-  margin-left: auto;
-  margin-right: auto;
-  width: 98%;
   display: flex;
   align-items: flex-start;
   justify-content: ${(p) => (p.$showAllCards ? 'flex-start' : 'center')};
+  width: 98%;
+  margin-right: auto;
+  margin-left: auto;
   overflow-x: hidden;
 `;

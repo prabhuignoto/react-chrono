@@ -37,7 +37,8 @@
     "vite:build": "vite build --config vite.config.mts",
     "coveralls": "pnpx coveralls < coverage/lcov.info",
     "size-limit": "pnpm rollup && pnpm size-limit",
-    "build": "pnpm rollup"
+    "build": "pnpm rollup",
+    "fix-css": "stylelint src/**/*style.ts --custom-syntax @stylelint/postcss-css-in-js --fix"
   },
   "dependencies": {
     "classnames": "^2.5.1",
@@ -77,7 +78,7 @@
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.11",
-    "@types/node": "^20.11.5",
+    "@types/node": "^20.11.6",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@types/react-router-dom": "^5.3.3",
@@ -131,6 +132,8 @@
     "snyk": "^1.1274.0",
     "start-server-and-test": "^2.0.3",
     "stylelint": "^16.2.0",
+    "stylelint-config-prettier-scss": "^1.0.0",
+    "stylelint-config-recess-order": "^4.4.0",
     "stylelint-config-recommended": "^14.0.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-order": "^6.0.4",

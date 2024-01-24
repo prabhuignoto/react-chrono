@@ -8,12 +8,12 @@ import {
 } from './toolbar.styles';
 
 export type ToolbarItem = {
-  name: string;
-  id?: string;
-  icon: ReactNode;
-  onSelect: (id: string, name: string) => void;
   content?: ReactNode | ReactNode[];
+  icon: ReactNode;
+  id?: string;
   label?: string;
+  name: string;
+  onSelect: (id: string, name: string) => void;
 };
 
 export type ToolbarProps = {

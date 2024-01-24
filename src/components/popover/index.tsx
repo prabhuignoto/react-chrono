@@ -11,9 +11,9 @@ import {
 export type PopoverPosition = 'up' | 'down' | 'left' | 'right';
 
 export type PopOverModel = {
-  position: PopoverPosition;
   children: ReactNode | ReactNode[];
   placeholder?: string;
+  position: PopoverPosition;
 };
 
 const PopOver: FunctionComponent<PopOverModel> = ({

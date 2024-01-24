@@ -6,7 +6,7 @@
     "stylelint-order"
   ],
   "extends": [
-    "stylelint-config-recommended",
-    "stylelint-config-styled-components"
+    "stylelint-config-styled-components",
+    "stylelint-config-recess-order"
   ]
 }

@@ -5,14 +5,14 @@ import { getTextOrContent } from './text-or-content';
 import { TimelineContentDetailsWrapper } from './timeline-card-content.styles';
 
 type DetailsTextProps = {
-  detailedText: TimelineContentModel['detailedText'];
-  timelineContent: TimelineContentModel['timelineContent'];
   cardActualHeight?: number;
   contentDetailsClass?: string;
   customContent?: ReactNode;
+  detailedText: TimelineContentModel['detailedText'];
   detailsHeight?: number;
   gradientColor?: string;
   showMore?: boolean;
+  timelineContent: TimelineContentModel['timelineContent'];
 };
 
 const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
