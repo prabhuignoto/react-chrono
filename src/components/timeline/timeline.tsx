@@ -3,7 +3,6 @@ import { TimelineCardModel } from '@models/TimelineItemModel';
 import { TimelineModel } from '@models/TimelineModel';
 import { getUniqueID } from '@utils/index';
 import cls from 'classnames';
-import 'focus-visible';
 import React, {
   useCallback,
   useContext,

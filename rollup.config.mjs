@@ -1,5 +1,5 @@
 import babel from '@rollup/plugin-babel';
-import buble from '@rollup/plugin-buble';
+// import buble from '@rollup/plugin-buble';
 import common from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
@@ -9,9 +9,11 @@ import postCSSPreset from 'postcss-preset-env';
 import analyze from 'rollup-plugin-analyzer';
 import copy from 'rollup-plugin-copy';
 import del from 'rollup-plugin-delete';
+import filesize from 'rollup-plugin-filesize';
 import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
+import { visualizer } from 'rollup-plugin-visualizer';
 import pkg from './package.json' assert { type: 'json' };
 
 const banner = `/*
@@ -82,22 +84,24 @@ export default {
       extensions: ['tsx', 'ts'],
       plugins: [
         '@babel/plugin-transform-runtime',
-        '@babel/plugin-proposal-optional-chaining',
+        '@babel/plugin-transform-optional-chaining',
         [
           'babel-plugin-styled-components',
           {
             fileName: false,
             ssr: true,
+            transpileTemplateLiterals: true,
+            minify: true,
           },
         ],
       ],
     }),
-    buble({
-      objectAssign: true,
-      transforms: {
-        templateString: false,
-      },
-    }),
+    // buble({
+    //   objectAssign: true,
+    //   transforms: {
+    //     templateString: false,
+    //   },
+    // }),
     postcss({
       plugins: [
         postCSSPreset({
@@ -116,6 +120,15 @@ export default {
     resolve({
       browser: true,
     }),
+    filesize({
+      showBrotliSize: true,
+      showGzippedSize: true,
+      showMinifiedSize: true,
+    }),
+    visualizer({
+      emitFile: true,
+      filename: 'dist/stats.html',
+    }),
     terser({
       compress: {
         drop_console: true,
@@ -125,9 +138,9 @@ export default {
         comments: false,
       },
     }),
-    analyze({
-      summaryOnly: true,
-    }),
+    // analyze({
+    //   summaryOnly: true,
+    // }),
     copy({
       targets: [{ dest: 'dist', src: 'README.md' }],
     }),

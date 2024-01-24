@@ -2,7 +2,6 @@ import { TimelineItemModel } from '@models/TimelineItemModel';
 import { TimelineProps } from '@models/TimelineModel';
 import { getUniqueID } from '@utils/index';
 import dayjs from 'dayjs';
-import 'focus-visible';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import GlobalContextProvider from './GlobalContext';
 import Timeline from './timeline/timeline';
