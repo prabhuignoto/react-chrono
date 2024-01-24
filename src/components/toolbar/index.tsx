@@ -22,10 +22,10 @@ export type ToolbarProps = {
 
 const Toolbar: FunctionComponent<ToolbarProps> = ({ items }) => {
   const [_items, setItems] = useState<ToolbarItem[]>(
-    items.map((item) => ({
+    items?.map((item) => ({
       ...item,
       id: getUniqueID(),
-    })),
+    })) || [],
   );
 
   const handleSelection = (id: string, name: string) => {};
