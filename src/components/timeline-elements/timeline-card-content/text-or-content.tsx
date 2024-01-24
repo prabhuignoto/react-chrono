@@ -34,7 +34,7 @@ const renderTextArray: (
   detailedText,
   cardTextClassName,
 }) => {
-  return (detailedText as string[]).map((text, index) => {
+  return detailedText.map((text, index) => {
     const props = parseDetailsAsHTML
       ? {
           dangerouslySetInnerHTML: {
@@ -79,7 +79,7 @@ const getTextOrContent: (
           if (isTextArray) {
             textContent = renderTextArray({
               cardTextClassName: classNames?.cardText,
-              detailedText: detailedText as string[],
+              detailedText,
               fontSizes,
               parseDetailsAsHTML,
               theme,

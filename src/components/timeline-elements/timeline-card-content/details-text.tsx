@@ -1,19 +1,8 @@
-import { TimelineContentModel } from '@models/TimelineContentModel';
-import { ReactNode, forwardRef, useContext } from 'react';
+import { forwardRef, useContext } from 'react';
 import { GlobalContext } from '../../GlobalContext';
+import { DetailsTextProps } from './details-text.model';
 import { getTextOrContent } from './text-or-content';
 import { TimelineContentDetailsWrapper } from './timeline-card-content.styles';
-
-type DetailsTextProps = {
-  cardActualHeight?: number;
-  contentDetailsClass?: string;
-  customContent?: ReactNode;
-  detailedText: TimelineContentModel['detailedText'];
-  detailsHeight?: number;
-  gradientColor?: string;
-  showMore?: boolean;
-  timelineContent: TimelineContentModel['timelineContent'];
-};
 
 const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
   (prop, ref) => {

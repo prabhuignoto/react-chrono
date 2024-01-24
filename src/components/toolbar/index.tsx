@@ -21,7 +21,7 @@ export type ToolbarProps = {
 };
 
 const Toolbar: FunctionComponent<ToolbarProps> = ({ items }) => {
-  const [_items, setItems] = useState<ToolbarItem[]>(
+  const [toolbarItems, setToolbarItems] = useState<ToolbarItem[]>(
     items?.map((item) => ({
       ...item,
       id: getUniqueID(),
