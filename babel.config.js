@@ -5,7 +5,8 @@ module.exports = {
     [
       '@emotion',
       {
-        // sourceMap is on by default but source maps are dead code eliminated in production
+        // sourceMap is on by default but source maps are dead code
+        // eliminated in production
         sourceMap: false,
       },
     ],
