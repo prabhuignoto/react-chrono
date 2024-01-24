@@ -5,8 +5,8 @@ import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
+import fs from 'fs';
 import postCSSPreset from 'postcss-preset-env';
-import analyze from 'rollup-plugin-analyzer';
 import copy from 'rollup-plugin-copy';
 import del from 'rollup-plugin-delete';
 import filesize from 'rollup-plugin-filesize';
@@ -14,7 +14,8 @@ import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import { visualizer } from 'rollup-plugin-visualizer';
-import pkg from './package.json' assert { type: 'json' };
+
+const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
 const banner = `/*
  * ${pkg.name}
@@ -28,6 +29,10 @@ export default {
   cache: true,
   external: ['react', 'react-dom'],
   input: 'src/react-chrono.ts',
+  onwarn(warning) {
+    if (warning.code === 'EXPERIMENTAL_WARNING') return;
+    console.warn(warning);
+  },
   output: [
     {
       banner,
@@ -51,6 +56,7 @@ export default {
       globals: {
         react: 'React',
         'react-dom': 'ReactDOM',
+        'react/jsx-runtime': 'jsxRuntime'
       },
       name: 'ReactChrono',
       strict: true,

@@ -1,6 +1,6 @@
 import { Theme } from '@models/Theme';
 import styled, { keyframes } from 'styled-components';
-import { OutlinePosition } from './timeline-outline';
+import { OutlinePosition } from './timeline-outline.model';
 
 const open = keyframes`
   from {

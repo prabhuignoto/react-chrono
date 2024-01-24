@@ -1,5 +1,3 @@
-import { Theme } from '@models/Theme';
-import { TimelineMode } from '@models/TimelineModel';
 import React, {
   useCallback,
   useContext,
@@ -10,30 +8,16 @@ import React, {
 import { GlobalContext } from '../../GlobalContext';
 import CloseIcon from '../../icons/close';
 import MenuIcon from '../../icons/menu';
+import { OutlineItemList } from './timeline-outline-item-list';
+import {
+  OutlinePosition,
+  TimelineOutlineModel,
+} from './timeline-outline.model';
 import {
   OutlineButton,
   OutlinePane,
   OutlineWrapper,
 } from './timeline-outline.styles';
-import { OutlineItemList } from './timeline-outline-item-list';
-
-export enum OutlinePosition {
-  'left',
-  'right',
-}
-
-export interface TimelineOutlineModel {
-  items?: TimelineOutlineItem[];
-  mode?: TimelineMode;
-  onSelect?: (index: number) => void;
-  theme?: Theme;
-}
-
-export interface TimelineOutlineItem {
-  id?: string;
-  name?: string;
-  selected?: boolean;
-}
 
 /**
  * TimelineOutline component

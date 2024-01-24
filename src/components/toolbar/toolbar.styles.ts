@@ -6,21 +6,18 @@ export const ToolbarWrapper = styled.ul`
   margin: 0;
 `;
 
-
-
 export const ToolbarListItem = styled.li`
-    padding: 0;
+  padding: 0;
 `;
 
 export const IconWrapper = styled.span`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1rem;
-    height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
 `;
 
 export const ContentWrapper = styled.span`
-    display: flex;
-
+  display: flex;
 `;
