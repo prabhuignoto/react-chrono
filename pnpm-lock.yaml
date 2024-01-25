@@ -60,6 +60,9 @@ devDependencies:
   '@rollup/plugin-commonjs':
     specifier: ^25.0.7
     version: 25.0.7(rollup@4.9.6)
+  '@rollup/plugin-eslint':
+    specifier: ^9.0.5
+    version: 9.0.5(rollup@4.9.6)
   '@rollup/plugin-node-resolve':
     specifier: ^15.2.3
     version: 15.2.3(rollup@4.9.6)
@@ -2681,6 +2684,22 @@ packages:
       is-reference: 1.2.1
       magic-string: 0.30.5
       rollup: 4.9.6
+    dev: true
+
+  /@rollup/plugin-eslint@9.0.5(rollup@4.9.6):
+    resolution: {integrity: sha512-C4nh0sSeJuxVW5u5tDX+dCMjKcNfHm4hS+zeUVh1si7gttnhgGbrmPkUxIX7iZgYABwdEh/ewyMbZB+WXjSJdA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 5.0.5(rollup@4.9.6)
+      eslint: 8.56.0
+      rollup: 4.9.6
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@rollup/plugin-node-resolve@15.2.3(rollup@4.9.6):

@@ -14,6 +14,7 @@ import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import { visualizer } from 'rollup-plugin-visualizer';
+import eslint from '@rollup/plugin-eslint';
 
 const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
@@ -67,10 +68,6 @@ export default {
     del({ targets: 'dist/*' }),
     typescript({
       tsconfig: 'tsconfig.json',
-      tsconfigOverride: {
-        include: ['src/**/*.ts+(|x)', 'src/**/*.d.ts+(|x)'],
-        exclude: ['src/demo/**/*', 'src/examples/**/*'],
-      },
       tsconfigDefaults: {
         compilerOptions: {
           plugins: [
@@ -78,11 +75,15 @@ export default {
               transform: 'typescript-transform-paths',
             },
             {
-              transform: 'typescript-transform-paths',
               afterDeclarations: true,
+              transform: 'typescript-transform-paths',
             },
           ],
         },
+      },
+      tsconfigOverride: {
+        exclude: ['src/demo/**/*', 'src/examples/**/*'],
+        include: ['src/**/*.ts+(|x)', 'src/**/*.d.ts+(|x)'],
       },
     }),
     babel({
@@ -95,9 +96,9 @@ export default {
           'babel-plugin-styled-components',
           {
             fileName: false,
+            minify: true,
             ssr: true,
             transpileTemplateLiterals: true,
-            minify: true,
           },
         ],
       ],
@@ -144,6 +145,7 @@ export default {
         comments: false,
       },
     }),
+    eslint(),
     // analyze({
     //   summaryOnly: true,
     // }),
