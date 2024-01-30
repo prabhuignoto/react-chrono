@@ -67,10 +67,10 @@ export const ControlButton = styled.button<{ theme?: Theme }>`
   border-radius: 50%;
   cursor: pointer;
   display: flex;
-  height: 2em;
+  height: 3em;
   justify-content: center;
   margin-left: 0.5em;
-  width: 2em;
+  width: 3em;
   outline: 0;
   color: #fff;
 

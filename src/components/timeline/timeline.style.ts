@@ -150,17 +150,19 @@ export const TimelineContentRender = styled.div<{ $showAllCards?: boolean }>`
 
 export const ToolbarWrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  margin: 0.5rem 0;
-  background-color: #f2f2f2;
-  border-radius: 6px;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  padding: 8px 12px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
+  background-color: #f4f4f4; /* Light shade of white */
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s;
+  width: 100%;
+  margin-bottom: 20px;
 `;
