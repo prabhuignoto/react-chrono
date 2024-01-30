@@ -11,16 +11,21 @@ export const PopoverHolder = styled.div<{ position: PopoverPosition }>`
 export const Selecter = styled.div`
   padding: 0.1rem;
   display: flex;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 25px;
   align-items: center;
-  justfy-content: space-between;
-  border-radius: 4px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
 `;
 
 export const SelecterIcon = styled.span`
   display: flex;
   width: 1rem;
   height: 1rem;
+  justify-content: center;
+  align-items: center;
 
   & svg {
     width: 100%;

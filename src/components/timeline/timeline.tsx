@@ -14,6 +14,7 @@ import React, {
 import { GlobalContext } from '../GlobalContext';
 import { useMatchMedia } from '../effects/useMatchMedia';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
+import { PopOver } from '../popover';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
@@ -391,6 +392,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
                   onToggleDarkMode={toggleDarkMode}
                   onPaused={onPaused}
                 />
+              ),
+              onSelect: () => {},
+            },
+            {
+              name: 'test',
+              label: 'test',
+              content: (
+                <PopOver placeholder="Select a item" position="down">
+                  <span>prabhu</span>
+                </PopOver>
               ),
               onSelect: () => {},
             },

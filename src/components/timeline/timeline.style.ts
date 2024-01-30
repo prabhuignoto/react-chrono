@@ -157,7 +157,6 @@ export const ToolbarWrapper = styled.div`
   text-decoration: none;
   border: none;
   border-radius: 6px;
-  cursor: pointer;
   background-color: #f4f4f4; /* Light shade of white */
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
   transition:
