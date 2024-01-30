@@ -67,14 +67,14 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
 
   return (
     <TimelineVerticalWrapper data-testid="tree-main" role="list">
-      {enableOutline && (
+      {/* {enableOutline && (
         <TimelineOutline
           theme={theme}
           mode={mode}
           items={outlineItems}
           onSelect={onOutlineSelection}
         />
-      )}
+      )} */}
       {items.map((item, index) => {
         let className = '';
 

@@ -17,12 +17,13 @@ import useNewScrollPosition from '../effects/useNewScrollPosition';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
+import { Toolbar } from '../toolbar';
 import {
   Outline,
   TimelineContentRender,
-  TimelineControlContainer,
   TimelineMain,
   TimelineMainWrapper,
+  ToolbarWrapper,
   Wrapper,
 } from './timeline.style';
 
@@ -93,6 +94,15 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       }
     }
   }, [slideShowRunning, scrollable]);
+
+  const outlineItems = useMemo(
+    () =>
+      items.map((item) => ({
+        id: Math.random().toString(16).slice(2),
+        name: item.title,
+      })),
+    [items],
+  );
 
   const id = useRef(
     `react-chrono-timeline-${noUniqueId ? uniqueId : getUniqueID()}`,
@@ -351,6 +361,42 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         }
       }}
     >
+      <ToolbarWrapper>
+        <Toolbar
+          items={[
+            {
+              name: 'test2',
+              label: 'test2',
+              content: (
+                <TimelineControl
+                  disableLeft={
+                    flipLayout
+                      ? activeTimelineItem === items.length - 1
+                      : activeTimelineItem === 0
+                  }
+                  disableRight={
+                    flipLayout
+                      ? activeTimelineItem === 0
+                      : activeTimelineItem === items.length - 1
+                  }
+                  id={id.current}
+                  onFirst={handleFirst}
+                  onLast={handleLast}
+                  onNext={handleNext}
+                  onPrevious={handlePrevious}
+                  onReplay={onRestartSlideshow}
+                  slideShowEnabled={slideShowEnabled}
+                  slideShowRunning={slideShowRunning}
+                  isDark={darkMode}
+                  onToggleDarkMode={toggleDarkMode}
+                  onPaused={onPaused}
+                />
+              ),
+              onSelect: () => {},
+            },
+          ]}
+        />
+      </ToolbarWrapper>
       <TimelineMainWrapper
         ref={timelineMainRef}
         $scrollable={canScrollTimeline}
@@ -447,7 +493,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       </TimelineMainWrapper>
 
       {/* Timeline Controls */}
-      {!hideControls && (
+      {/* {!hideControls && (
         <TimelineControlContainer mode={mode}>
           <TimelineControl
             disableLeft={
@@ -473,7 +519,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             onPaused={onPaused}
           />
         </TimelineControlContainer>
-      )}
+      )} */}
 
       {/* placeholder to render timeline content for horizontal mode */}
       <TimelineContentRender

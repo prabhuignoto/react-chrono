@@ -9,7 +9,7 @@ import {
 
 export type ToolbarItem = {
   content?: ReactNode | ReactNode[];
-  icon: ReactNode;
+  icon?: ReactNode;
   id?: string;
   label?: string;
   name: string;
@@ -39,7 +39,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ items }) => {
             aria-label={label}
             key={id}
           >
-            <IconWrapper>{icon}</IconWrapper>
+            {icon ? <IconWrapper>{icon}</IconWrapper> : null}
             <ContentWrapper>{content}</ContentWrapper>
           </ToolbarListItem>
         );

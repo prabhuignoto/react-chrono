@@ -147,3 +147,20 @@ export const TimelineContentRender = styled.div<{ $showAllCards?: boolean }>`
   margin-left: auto;
   overflow-x: hidden;
 `;
+
+export const ToolbarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 0.5rem 0;
+  background-color: #f2f2f2;
+  border-radius: 6px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  padding: 8px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+`;
