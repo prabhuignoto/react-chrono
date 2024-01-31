@@ -20,8 +20,8 @@ const ListItem: FunctionComponent<ListItemProps> = ({
 }) => {
   return (
     <ListItemStyle key={id}>
-      <TitleStyle></TitleStyle>
-      <TitleDescriptionStyle></TitleDescriptionStyle>
+      <TitleStyle>{title}</TitleStyle>
+      <TitleDescriptionStyle>{description} </TitleDescriptionStyle>
     </ListItemStyle>
   );
 };

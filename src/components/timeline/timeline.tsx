@@ -14,12 +14,9 @@ import React, {
 import { GlobalContext } from '../GlobalContext';
 import { useMatchMedia } from '../effects/useMatchMedia';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
-import { List } from '../list/list';
-import { PopOver } from '../popover';
-import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
-import { Toolbar } from '../toolbar';
+import { TimelineToolbar } from './timeline-toolbar';
 import {
   Outline,
   TimelineContentRender,
@@ -364,11 +361,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       }}
     >
       <ToolbarWrapper>
-        <Toolbar
+        {/* <Toolbar
           items={[
             {
-              name: 'test2',
-              label: 'test2',
+              name: 'timeline_control',
+              label: 'Timeline Controls',
               content: (
                 <TimelineControl
                   disableLeft={
@@ -397,8 +394,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               onSelect: () => {},
             },
             {
-              name: 'test',
-              label: 'test',
+              name: 'popover',
+              label: 'timeline_popover',
               content: (
                 <PopOver placeholder="Select a item" position="down">
                   <List
@@ -425,6 +422,22 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               onSelect: () => {},
             },
           ]}
+        /> */}
+        <TimelineToolbar
+          activeTimelineItem={activeTimelineItem}
+          totalItems={items.length}
+          slideShowEnabled={slideShowEnabled}
+          slideShowRunning={slideShowRunning}
+          onFirst={handleFirst}
+          onLast={handleLast}
+          onNext={handleNext}
+          onPrevious={handlePrevious}
+          onRestartSlideshow={onRestartSlideshow}
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
+          onPaused={onPaused}
+          id={id.current}
+          flipLayout={flipLayout}
         />
       </ToolbarWrapper>
       <TimelineMainWrapper

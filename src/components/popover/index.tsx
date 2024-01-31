@@ -22,7 +22,6 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   placeholder,
 }) => {
   const [open, setOpen] = useState(false);
-
   const toggleOpen = () => setOpen(!open);
 
   return (

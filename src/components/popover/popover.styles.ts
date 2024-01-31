@@ -6,6 +6,13 @@ export const PopoverWrapper = styled.div``;
 export const PopoverHolder = styled.div<{ position: PopoverPosition }>`
   position: absolute;
   z-index: 100;
+  background: rgba(255, 255, 255, 1);
+  padding: 0.5rem;
+  box-shadow: 0px 5px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  top: 3rem;
+  max-height: 300px;
+  overflow-y: auto;
 `;
 
 export const Selecter = styled.div`
