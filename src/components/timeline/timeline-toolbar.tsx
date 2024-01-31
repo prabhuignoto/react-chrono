@@ -1,5 +1,6 @@
 import { TimelineModel, TimelineProps } from '@models/TimelineModel';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useContext } from 'react';
+import { GlobalContext } from '../GlobalContext';
 import { List } from '../list/list';
 import { PopOver } from '../popover';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
@@ -16,6 +17,7 @@ export type TimelineToolbarProps = Pick<
   | 'onPaused'
   | 'onFirst'
   | 'onLast'
+  | 'items'
 > & {
   toggleDarkMode: () => void;
   totalItems: number;
@@ -36,8 +38,10 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   onPrevious,
   onRestartSlideshow,
   totalItems,
+  items = [],
   id,
 }) => {
+  const { theme } = useContext(GlobalContext);
   return (
     <Toolbar
       items={[
@@ -77,23 +81,14 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           content: (
             <PopOver placeholder="Select a item" position="down">
               <List
-                items={[
-                  {
-                    id: '1',
-                    title: 'test1',
-                    description: 'test1',
-                  },
-                  {
-                    id: '2',
-                    title: 'test2',
-                    description: 'test2',
-                  },
-                  {
-                    id: '3',
-                    title: 'test3',
-                    description: 'test3',
-                  },
-                ]}
+                items={items.map((item) => ({
+                  id: item.id,
+                  label: item.title,
+                  onSelect: () => {},
+                  description: item.cardSubtitle,
+                  title: item.title,
+                }))}
+                theme={theme}
               />
             </PopOver>
           ),

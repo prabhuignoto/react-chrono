@@ -361,68 +361,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       }}
     >
       <ToolbarWrapper>
-        {/* <Toolbar
-          items={[
-            {
-              name: 'timeline_control',
-              label: 'Timeline Controls',
-              content: (
-                <TimelineControl
-                  disableLeft={
-                    flipLayout
-                      ? activeTimelineItem === items.length - 1
-                      : activeTimelineItem === 0
-                  }
-                  disableRight={
-                    flipLayout
-                      ? activeTimelineItem === 0
-                      : activeTimelineItem === items.length - 1
-                  }
-                  id={id.current}
-                  onFirst={handleFirst}
-                  onLast={handleLast}
-                  onNext={handleNext}
-                  onPrevious={handlePrevious}
-                  onReplay={onRestartSlideshow}
-                  slideShowEnabled={slideShowEnabled}
-                  slideShowRunning={slideShowRunning}
-                  isDark={darkMode}
-                  onToggleDarkMode={toggleDarkMode}
-                  onPaused={onPaused}
-                />
-              ),
-              onSelect: () => {},
-            },
-            {
-              name: 'popover',
-              label: 'timeline_popover',
-              content: (
-                <PopOver placeholder="Select a item" position="down">
-                  <List
-                    items={[
-                      {
-                        id: '1',
-                        title: 'test1',
-                        description: 'test1',
-                      },
-                      {
-                        id: '2',
-                        title: 'test2',
-                        description: 'test2',
-                      },
-                      {
-                        id: '3',
-                        title: 'test3',
-                        description: 'test3',
-                      },
-                    ]}
-                  />
-                </PopOver>
-              ),
-              onSelect: () => {},
-            },
-          ]}
-        /> */}
         <TimelineToolbar
           activeTimelineItem={activeTimelineItem}
           totalItems={items.length}
@@ -438,6 +376,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           onPaused={onPaused}
           id={id.current}
           flipLayout={flipLayout}
+          items={items}
         />
       </ToolbarWrapper>
       <TimelineMainWrapper
@@ -534,35 +473,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           />
         ) : null}
       </TimelineMainWrapper>
-
-      {/* Timeline Controls */}
-      {/* {!hideControls && (
-        <TimelineControlContainer mode={mode}>
-          <TimelineControl
-            disableLeft={
-              flipLayout
-                ? activeTimelineItem === items.length - 1
-                : activeTimelineItem === 0
-            }
-            disableRight={
-              flipLayout
-                ? activeTimelineItem === 0
-                : activeTimelineItem === items.length - 1
-            }
-            id={id.current}
-            onFirst={handleFirst}
-            onLast={handleLast}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-            onReplay={onRestartSlideshow}
-            slideShowEnabled={slideShowEnabled}
-            slideShowRunning={slideShowRunning}
-            isDark={darkMode}
-            onToggleDarkMode={toggleDarkMode}
-            onPaused={onPaused}
-          />
-        </TimelineControlContainer>
-      )} */}
 
       {/* placeholder to render timeline content for horizontal mode */}
       <TimelineContentRender

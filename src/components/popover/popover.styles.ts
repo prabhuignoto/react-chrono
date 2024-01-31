@@ -11,7 +11,7 @@ export const PopoverHolder = styled.div<{ position: PopoverPosition }>`
   box-shadow: 0px 5px 16px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   top: 3rem;
-  max-height: 300px;
+  max-height: 500px;
   overflow-y: auto;
 `;
 

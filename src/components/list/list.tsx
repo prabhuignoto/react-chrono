@@ -1,3 +1,4 @@
+import { TimelineModel } from '@models/TimelineModel';
 import { FunctionComponent } from 'react';
 import { ListModel } from './list.model';
 import {
@@ -7,31 +8,38 @@ import {
   TitleStyle,
 } from './list.styles';
 
-interface ListItemProps {
+type ListItemProps = {
   description: string;
   id: string;
   title: string;
-}
+} & Pick<TimelineModel, 'theme'>;
 
 const ListItem: FunctionComponent<ListItemProps> = ({
   title,
   id,
   description,
+  theme,
 }) => {
   return (
-    <ListItemStyle key={id}>
-      <TitleStyle>{title}</TitleStyle>
+    <ListItemStyle key={id} theme={theme}>
+      <TitleStyle theme={theme}>{title}</TitleStyle>
       <TitleDescriptionStyle>{description} </TitleDescriptionStyle>
     </ListItemStyle>
   );
 };
 
-const List: FunctionComponent<ListModel> = ({ items }) => {
+const List: FunctionComponent<ListModel> = ({ items, theme }) => {
   return (
     <ListStyle>
       {items?.map(({ title, id, description }) => {
         return (
-          <ListItem title={title} id={id} key={id} description={description} />
+          <ListItem
+            title={title}
+            id={id}
+            key={id}
+            description={description}
+            theme={theme}
+          />
         );
       })}
     </ListStyle>

@@ -80,8 +80,8 @@ export const ControlButton = styled.button<{ theme?: Theme }>`
   color: #fff;
 
   svg {
-    width: 80%;
-    height: 80%;
+    width: 70%;
+    height: 70%;
   }
 `;
 
