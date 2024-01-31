@@ -377,6 +377,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           id={id.current}
           flipLayout={flipLayout}
           items={items}
+          onActivateTimelineItem={handleTimelineItemClick}
         />
       </ToolbarWrapper>
       <TimelineMainWrapper

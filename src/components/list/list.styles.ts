@@ -13,7 +13,7 @@ export const ListStyle = styled.ul`
 
 export const ListItemStyle = styled.li<{ theme: Theme }>`
   margin: 0;
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;

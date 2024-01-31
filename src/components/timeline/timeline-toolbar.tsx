@@ -22,6 +22,7 @@ export type TimelineToolbarProps = Pick<
   toggleDarkMode: () => void;
   totalItems: number;
   id: string;
+  onActivateTimelineItem: (id: string) => void;
 } & Pick<TimelineProps, 'darkMode' | 'flipLayout'>;
 
 const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
@@ -40,6 +41,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   totalItems,
   items = [],
   id,
+  onActivateTimelineItem
 }) => {
   const { theme } = useContext(GlobalContext);
   return (
@@ -89,6 +91,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                   title: item.title,
                 }))}
                 theme={theme}
+                onClick={onActivateTimelineItem}
               />
             </PopOver>
           ),

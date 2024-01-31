@@ -12,6 +12,7 @@ type ListItemProps = {
   description: string;
   id: string;
   title: string;
+  onClick?: (id: string) => void;
 } & Pick<TimelineModel, 'theme'>;
 
 const ListItem: FunctionComponent<ListItemProps> = ({
@@ -19,16 +20,17 @@ const ListItem: FunctionComponent<ListItemProps> = ({
   id,
   description,
   theme,
+  onClick,
 }) => {
   return (
-    <ListItemStyle key={id} theme={theme}>
+    <ListItemStyle key={id} theme={theme} onClick={() => onClick(id)}>
       <TitleStyle theme={theme}>{title}</TitleStyle>
       <TitleDescriptionStyle>{description} </TitleDescriptionStyle>
     </ListItemStyle>
   );
 };
 
-const List: FunctionComponent<ListModel> = ({ items, theme }) => {
+const List: FunctionComponent<ListModel> = ({ items, theme, onClick }) => {
   return (
     <ListStyle>
       {items?.map(({ title, id, description }) => {
@@ -39,6 +41,7 @@ const List: FunctionComponent<ListModel> = ({ items, theme }) => {
             key={id}
             description={description}
             theme={theme}
+            onClick={onClick}
           />
         );
       })}
