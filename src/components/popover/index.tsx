@@ -31,7 +31,9 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         <SelecterIcon>{open ? <ChevronUp /> : <ChevronDown />}</SelecterIcon>
         <SelecterLabel>{placeholder}</SelecterLabel>
       </Selecter>
-      <PopoverHolder position={position}>{children}</PopoverHolder>
+      {open ? (
+        <PopoverHolder position={position}>{children}</PopoverHolder>
+      ) : null}
     </PopoverWrapper>
   );
 };

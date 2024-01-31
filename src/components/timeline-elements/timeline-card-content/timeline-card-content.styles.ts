@@ -33,7 +33,7 @@ export const TimelineItemContentWrapper = styled.section<
 >`
   align-items: flex-start;
   background: ${(p) => p.theme.cardBgColor};
-  border-radius: 4px;
+  border-radius: 8px;
   display: flex;
   position: absolute;
   ${({ borderLessCards }) =>

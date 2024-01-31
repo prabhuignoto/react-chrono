@@ -15,8 +15,8 @@ export const Selecter = styled.div`
   border-radius: 25px;
   align-items: center;
   justify-content: space-between;
-  padding: 0.25em 0.5em;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 0.5em 0.25em;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
   font-size: 14px;
 `;
 

@@ -3,11 +3,12 @@ import { TimelineMode } from '@models/TimelineModel';
 import styled from 'styled-components';
 
 export const TimelineNavWrapper = styled.ul<{ theme?: Theme }>`
-  background: rgba(229, 229, 229, 0.85);
+  background: rgba(255, 255, 255, 1);
   border-radius: 25px;
   display: flex;
   list-style: none;
   padding: 0.25em 0.25em;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 `;
 
 export const TimelineNavItem = styled.li<{ $disable?: boolean }>`
@@ -15,7 +16,10 @@ export const TimelineNavItem = styled.li<{ $disable?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${(p) => (p.$disable ? 'pointer-events: none; filter: opacity(0.7)' : '')};
+  ${(p) =>
+    p.$disable
+      ? 'pointer-events: none; filter: opacity(0.5) grayscale(95%);'
+      : ''};
 `;
 
 export const TimelineNavButton = styled.button<{
@@ -25,18 +29,19 @@ export const TimelineNavButton = styled.button<{
 }>`
   align-items: center;
   background: ${(p) => p.theme.primary};
+  filter: brightness(1.25);
   border-radius: 50%;
   border: 0;
   color: #fff;
   cursor: pointer;
   display: flex;
-  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.25));
-  height: 20px;
+  // filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.25));
+  height: 24px;
   justify-content: center;
   margin: 0 0.2em;
   padding: 0;
   transition: all 0.1s ease-in;
-  width: 20px;
+  width: 24px;
 
   transform: ${(p) => {
     if (p.rotate === 'TRUE') {

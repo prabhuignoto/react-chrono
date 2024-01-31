@@ -112,6 +112,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
     <TimelineControlContainer>
       <TimelineNavWrapper
         className={cls('timeline-controls', classNames?.controls)}
+        theme={theme}
       >
         {/* jump to first */}
         {disableInteraction ? null : (

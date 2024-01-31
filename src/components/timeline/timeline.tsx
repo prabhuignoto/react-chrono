@@ -14,6 +14,7 @@ import React, {
 import { GlobalContext } from '../GlobalContext';
 import { useMatchMedia } from '../effects/useMatchMedia';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
+import { List } from '../list/list';
 import { PopOver } from '../popover';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
@@ -400,7 +401,25 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               label: 'test',
               content: (
                 <PopOver placeholder="Select a item" position="down">
-                  <span>prabhu</span>
+                  <List
+                    items={[
+                      {
+                        id: '1',
+                        title: 'test1',
+                        description: 'test1',
+                      },
+                      {
+                        id: '2',
+                        title: 'test2',
+                        description: 'test2',
+                      },
+                      {
+                        id: '3',
+                        title: 'test3',
+                        description: 'test3',
+                      },
+                    ]}
+                  />
                 </PopOver>
               ),
               onSelect: () => {},
