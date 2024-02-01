@@ -13,6 +13,7 @@ type ListItemProps = {
   id: string;
   title: string;
   onClick?: (id: string) => void;
+  active?: boolean;
 } & Pick<TimelineModel, 'theme'>;
 
 const ListItem: FunctionComponent<ListItemProps> = ({
@@ -21,19 +22,30 @@ const ListItem: FunctionComponent<ListItemProps> = ({
   description,
   theme,
   onClick,
+  active,
 }) => {
   return (
-    <ListItemStyle key={id} theme={theme} onClick={() => onClick(id)}>
+    <ListItemStyle
+      key={id}
+      theme={theme}
+      onClick={() => onClick(id)}
+      active={active}
+    >
       <TitleStyle theme={theme}>{title}</TitleStyle>
       <TitleDescriptionStyle>{description} </TitleDescriptionStyle>
     </ListItemStyle>
   );
 };
 
-const List: FunctionComponent<ListModel> = ({ items, theme, onClick }) => {
+const List: FunctionComponent<ListModel> = ({
+  items,
+  theme,
+  onClick,
+  activeItemIndex,
+}) => {
   return (
     <ListStyle>
-      {items?.map(({ title, id, description }) => {
+      {items?.map(({ title, id, description }, index) => {
         return (
           <ListItem
             title={title}
@@ -42,6 +54,7 @@ const List: FunctionComponent<ListModel> = ({ items, theme, onClick }) => {
             description={description}
             theme={theme}
             onClick={onClick}
+            active={activeItemIndex === index}
           />
         );
       })}

@@ -4,6 +4,7 @@ export type ListModel = {
   items: ListItemModel[];
   onSelect?: (id?: string) => void;
   onClick?: (id?: string) => void;
+  activeItemIndex?: number;
 } & Pick<TimelineModel, 'theme'>;
 
 export type ListItemModel = {

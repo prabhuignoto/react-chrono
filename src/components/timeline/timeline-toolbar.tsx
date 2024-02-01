@@ -41,7 +41,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   totalItems,
   items = [],
   id,
-  onActivateTimelineItem
+  onActivateTimelineItem,
 }) => {
   const { theme } = useContext(GlobalContext);
   return (
@@ -83,12 +83,13 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           content: (
             <PopOver placeholder="Select a item" position="down">
               <List
-                items={items.map((item) => ({
+                items={items.map((item, index) => ({
                   id: item.id,
                   label: item.title,
                   onSelect: () => {},
                   description: item.cardSubtitle,
                   title: item.title,
+                  active: index === activeTimelineItem,
                 }))}
                 theme={theme}
                 onClick={onActivateTimelineItem}

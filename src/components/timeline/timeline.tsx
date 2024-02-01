@@ -94,15 +94,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   }, [slideShowRunning, scrollable]);
 
-  const outlineItems = useMemo(
-    () =>
-      items.map((item) => ({
-        id: Math.random().toString(16).slice(2),
-        name: item.title,
-      })),
-    [items],
-  );
-
   const id = useRef(
     `react-chrono-timeline-${noUniqueId ? uniqueId : getUniqueID()}`,
   );

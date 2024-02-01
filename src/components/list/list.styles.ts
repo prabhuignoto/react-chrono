@@ -11,7 +11,7 @@ export const ListStyle = styled.ul`
   max-width: 400px;
 `;
 
-export const ListItemStyle = styled.li<{ theme: Theme }>`
+export const ListItemStyle = styled.li<{ theme: Theme; active?: boolean }>`
   margin: 0;
   padding: 0.25rem 0.5rem;
   display: flex;
@@ -25,7 +25,8 @@ export const ListItemStyle = styled.li<{ theme: Theme }>`
   border-radius: 4px;
   background: #f5f5f5;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
-  border: 1px solid transparent;
+  border: ${(p) =>
+    p.active ? `1px solid ${p.theme.primary}` : '1px solid transparent'};
 
   &:hover {
     cursor: pointer;
