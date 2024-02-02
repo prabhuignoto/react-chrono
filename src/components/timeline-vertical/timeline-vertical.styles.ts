@@ -84,7 +84,7 @@ export const TimelineCardContentWrapper = styled.div<{
     } else if (p.$noTitle) {
       return `width: 95%;`;
     } else {
-      return `width: 75%;`;
+      return `width: 85%;`;
     }
   }}
   ${(p) => {
@@ -125,7 +125,7 @@ export const TimelineTitleWrapper = styled.div<{
 }>`
   align-items: center;
   display: ${(p) => (p.$hide && p.mode === 'VERTICAL' ? 'none' : 'flex')};
-  ${(p) => (p.$alternateCards ? 'width: 50%' : 'width: 15%')};
+  ${(p) => (p.$alternateCards ? 'width: 50%' : 'width: 10%')};
 
   &.left {
     justify-content: ${(p) => (p.$flip ? 'flex-end' : 'flex-start')};

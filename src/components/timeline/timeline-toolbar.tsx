@@ -19,10 +19,10 @@ export type TimelineToolbarProps = Pick<
   | 'onLast'
   | 'items'
 > & {
-  toggleDarkMode: () => void;
-  totalItems: number;
   id: string;
   onActivateTimelineItem: (id: string) => void;
+  toggleDarkMode: () => void;
+  totalItems: number;
 } & Pick<TimelineProps, 'darkMode' | 'flipLayout'>;
 
 const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
@@ -48,8 +48,6 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     <Toolbar
       items={[
         {
-          name: 'timeline_control',
-          label: 'Timeline Controls',
           content: (
             <TimelineControl
               disableLeft={
@@ -75,27 +73,33 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               onPaused={onPaused}
             />
           ),
+          label: 'Timeline Controls',
+          name: 'timeline_control',
           onSelect: () => {},
         },
         {
-          name: 'popover',
-          label: 'timeline_popover',
           content: (
-            <PopOver placeholder="Select a item" position="down">
+            <PopOver
+              placeholder="Quick jump to an item"
+              position="down"
+              theme={theme}
+            >
               <List
                 items={items.map((item, index) => ({
+                  active: index === activeTimelineItem,
+                  description: item.cardSubtitle,
                   id: item.id,
                   label: item.title,
                   onSelect: () => {},
-                  description: item.cardSubtitle,
                   title: item.title,
-                  active: index === activeTimelineItem,
                 }))}
                 theme={theme}
                 onClick={onActivateTimelineItem}
               />
             </PopOver>
           ),
+          label: 'timeline_popover',
+          name: 'popover',
           onSelect: () => {},
         },
       ]}

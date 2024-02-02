@@ -2,6 +2,7 @@ export { default as ChevronDown } from './chev-down';
 export { default as ChevronLeft } from './chev-left';
 export { default as ChevronRight } from './chev-right';
 export { default as ChevronUp } from './chev-up';
+export { default as CloseIcon } from './close';
 export { default as MaximizeIcon } from './maximize';
 export { default as MinimizeIcon } from './minimize';
 export { default as MinusIcon } from './minus';

@@ -351,26 +351,28 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         }
       }}
     >
-      <ToolbarWrapper>
-        <TimelineToolbar
-          activeTimelineItem={activeTimelineItem}
-          totalItems={items.length}
-          slideShowEnabled={slideShowEnabled}
-          slideShowRunning={slideShowRunning}
-          onFirst={handleFirst}
-          onLast={handleLast}
-          onNext={handleNext}
-          onPrevious={handlePrevious}
-          onRestartSlideshow={onRestartSlideshow}
-          darkMode={darkMode}
-          toggleDarkMode={toggleDarkMode}
-          onPaused={onPaused}
-          id={id.current}
-          flipLayout={flipLayout}
-          items={items}
-          onActivateTimelineItem={handleTimelineItemClick}
-        />
-      </ToolbarWrapper>
+      {!isChild ? (
+        <ToolbarWrapper>
+          <TimelineToolbar
+            activeTimelineItem={activeTimelineItem}
+            totalItems={items.length}
+            slideShowEnabled={slideShowEnabled}
+            slideShowRunning={slideShowRunning}
+            onFirst={handleFirst}
+            onLast={handleLast}
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+            onRestartSlideshow={onRestartSlideshow}
+            darkMode={darkMode}
+            toggleDarkMode={toggleDarkMode}
+            onPaused={onPaused}
+            id={id.current}
+            flipLayout={flipLayout}
+            items={items}
+            onActivateTimelineItem={handleTimelineItemClick}
+          />
+        </ToolbarWrapper>
+      ) : null}
       <TimelineMainWrapper
         ref={timelineMainRef}
         $scrollable={canScrollTimeline}

@@ -9,7 +9,7 @@ export const TimelinePointWrapper = styled.div<{
   display: flex;
   justify-content: center;
   position: relative;
-  width: ${(p) => (p.$cardLess ? '5%' : '10%')};
+  width: ${(p) => (p.$cardLess ? '5%' : '5%')};
 
   &.left {
     order: 2;

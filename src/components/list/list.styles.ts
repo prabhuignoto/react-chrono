@@ -9,16 +9,17 @@ export const ListStyle = styled.ul`
   flex-direction: column;
   align-items: center;
   max-width: 400px;
+  justify-content: flex-start;
 `;
 
-export const ListItemStyle = styled.li<{ theme: Theme; active?: boolean }>`
+export const ListItemStyle = styled.li<{ active?: boolean; theme: Theme }>`
   margin: 0;
   padding: 0.25rem 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 1rem;
-  width: 98%;
+  width: 100%;
   &:last-child {
     margin-bottom: 0;
   }

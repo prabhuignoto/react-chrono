@@ -9,11 +9,11 @@ import {
 } from './list.styles';
 
 type ListItemProps = {
+  active?: boolean;
   description: string;
   id: string;
-  title: string;
   onClick?: (id: string) => void;
-  active?: boolean;
+  title: string;
 } & Pick<TimelineModel, 'theme'>;
 
 const ListItem: FunctionComponent<ListItemProps> = ({
