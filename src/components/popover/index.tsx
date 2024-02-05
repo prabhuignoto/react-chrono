@@ -20,6 +20,7 @@ export type PopOverModel = {
   placeholder?: string;
   position: PopoverPosition;
   theme?: Theme;
+  width?: string | number;
 };
 
 const PopOver: FunctionComponent<PopOverModel> = ({
@@ -27,6 +28,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   position,
   placeholder,
   theme,
+  width = '300px',
 }) => {
   const [open, setOpen] = useState(false);
   const toggleOpen = () => setOpen(!open);
@@ -46,7 +48,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         <SelecterLabel>{placeholder}</SelecterLabel>
       </Selecter>
       {open ? (
-        <PopoverHolder position={position}>
+        <PopoverHolder position={position} style={{ width: `${width}` }}>
           <Header>
             <CloseButton theme={theme} onClick={closePopover}>
               <CloseIcon />

@@ -8,7 +8,7 @@ export const ListStyle = styled.ul`
   justify-content: flex-start;
   list-style: none;
   margin: 0;
-  max-width: 400px;
+  width: 100%;
   padding: 0;
 `;
 
@@ -24,7 +24,7 @@ export const ListItemStyle = styled.li<{
   border-radius: 4px;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: ${p => p.selectable ? "row" : "column"};
+  flex-direction: ${(p) => (p.selectable ? 'row' : 'column')};
   margin: 0;
   margin-bottom: 1rem;
   padding: 0.25rem 0.5rem;
@@ -43,11 +43,11 @@ export const ListItemStyle = styled.li<{
 
 export const TitleStyle = styled.h1<{ theme: Theme }>`
   color: ${(p) => p.theme.primary};
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: normal;
   margin: 0.2rem 0;
   text-align: left;
-  width: 100%;
+  white-space: nowrap;
 `;
 
 export const TitleDescriptionStyle = styled.p`
@@ -59,20 +59,36 @@ export const TitleDescriptionStyle = styled.p`
   width: 100%;
 `;
 
-export const CheckboxStyle = styled.span`
-  align-items: center;
-  background-color: white;
-  border: 1px solid #d3d3d3;
-  border-radius: 50%;
+export const CheckboxWrapper = styled.span`
+  width: 2rem;
   display: flex;
-  height: 1rem;
+  align-items: center;
   justify-content: center;
-  margin-left: auto;
-  margin-right: 0.5rem;
-  width: 1rem;
 `;
 
-export const StyleAndDescription = styled.div`
-  direction: column;
+export const CheckboxStyle = styled.span<{ selected?: boolean; theme: Theme }>`
+  align-items: center;
+  background-color: white;
+  ${(p) =>
+    !p.selected ? `box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);` : ''};
+  background: ${(p) => (p.selected ? p.theme.primary : '#fff')};
+  color: #fff;
+  border-radius: 50%;
   display: flex;
+  height: 1.25rem;
+  justify-content: center;
+  margin-right: 0.25rem;
+  margin-left: 0.1rem;
+  width: 1.25rem;
+
+  svg {
+    width: 80%;
+    height: 80%;
+  }
+`;
+
+export const StyleAndDescription = styled.div<{ selectable?: boolean }>`
+  flex-direction: column;
+  display: flex;
+  width: ${(p) => (p.selectable ? 'calc(100% - 2rem)' : '100%')};
 `;

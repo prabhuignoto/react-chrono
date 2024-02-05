@@ -1,10 +1,12 @@
 import { TimelineModel } from '@models/TimelineModel';
+import { getUniqueID } from '@utils/index';
 import cls from 'classnames';
 import { FunctionComponent, useState } from 'react';
 import { CheckIcon } from '../icons';
 import { ListModel } from './list.model';
 import {
   CheckboxStyle,
+  CheckboxWrapper,
   ListItemStyle,
   ListStyle,
   StyleAndDescription,
@@ -18,6 +20,7 @@ type ListItemProps = {
   id: string;
   onClick?: (id: string) => void;
   selectable?: boolean;
+  selected?: boolean;
   title: string;
 } & Pick<TimelineModel, 'theme'>;
 
@@ -28,21 +31,16 @@ const ListItem: FunctionComponent<ListItemProps> = ({
   theme,
   onClick,
   active,
+  selected = false,
   selectable = false,
 }) => {
-  const [on, setOn] = useState(false);
-
   const handleOnClick = (id: string) => {
-    if (selectable) {
-      setOn(!on);
-    }
-
     onClick?.(id);
   };
 
   const checkBoxClass = cls({
     checkbox: true,
-    'checkbox--checked': on,
+    'checkbox--checked': selected,
   });
 
   return (
@@ -55,11 +53,18 @@ const ListItem: FunctionComponent<ListItemProps> = ({
       selectable={selectable}
     >
       {selectable ? (
-        <CheckboxStyle role="checkbox" className={checkBoxClass}>
-          {on && <CheckIcon />}
-        </CheckboxStyle>
+        <CheckboxWrapper>
+          <CheckboxStyle
+            role="checkbox"
+            className={checkBoxClass}
+            selected={selected}
+            theme={theme}
+          >
+            {selected && <CheckIcon />}
+          </CheckboxStyle>
+        </CheckboxWrapper>
       ) : null}
-      <StyleAndDescription>
+      <StyleAndDescription selectable={selectable}>
         <TitleStyle theme={theme}>{title}</TitleStyle>
         <TitleDescriptionStyle>{description} </TitleDescriptionStyle>
       </StyleAndDescription>
@@ -73,10 +78,42 @@ const List: FunctionComponent<ListModel> = ({
   onClick,
   activeItemIndex,
   selectable = false,
+  multiSelectable = false,
 }) => {
+  const [listItems, setListItems] = useState(() =>
+    items.map((item) => ({
+      id: getUniqueID(),
+      ...item,
+      selected: false,
+    })),
+  );
+
+  const onSelect = (id: string) => {
+    const updatedItems = listItems.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          selected: true,
+        };
+      } else {
+        return {
+          ...item,
+          selected: false,
+        };
+      }
+    });
+
+    setListItems(updatedItems);
+  };
+
+  const handleClick = (id: string) => {
+    onSelect(id);
+    onClick?.(id);
+  };
+
   return (
     <ListStyle>
-      {items?.map(({ title, id, description }, index) => {
+      {listItems?.map(({ title, id, description, selected }, index) => {
         return (
           <ListItem
             title={title}
@@ -84,8 +121,9 @@ const List: FunctionComponent<ListModel> = ({
             key={id}
             description={description}
             theme={theme}
-            onClick={onClick}
+            onClick={handleClick}
             selectable={selectable}
+            selected={selected}
             active={activeItemIndex === index}
           />
         );

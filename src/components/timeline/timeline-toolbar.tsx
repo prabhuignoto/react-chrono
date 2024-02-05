@@ -83,6 +83,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               placeholder="Quick jump to an item"
               position="down"
               theme={theme}
+              width={'400px'}
             >
               <List
                 items={items.map((item, index) => ({
@@ -112,9 +113,19 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               <List
                 items={[
                   {
-                    id: 'flipLayout',
+                    id: 'verticalLayout',
                     onSelect: () => {},
-                    title: 'Flip Layout',
+                    title: 'Vertical Layout',
+                  },
+                  {
+                    id: 'verticalAlternateLayout',
+                    onSelect: () => {},
+                    title: 'Vertical Alternating Layout',
+                  },
+                  {
+                    id: 'horizontalLayout',
+                    onSelect: () => {},
+                    title: 'Horizontal Layout',
                   },
                 ]}
                 theme={theme}
