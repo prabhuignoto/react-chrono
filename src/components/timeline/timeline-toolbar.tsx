@@ -102,6 +102,31 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           name: 'popover',
           onSelect: () => {},
         },
+        {
+          content: (
+            <PopOver
+              placeholder="Change the layout"
+              position="down"
+              theme={theme}
+            >
+              <List
+                items={[
+                  {
+                    id: 'flipLayout',
+                    onSelect: () => {},
+                    title: 'Flip Layout',
+                  },
+                ]}
+                theme={theme}
+                onClick={toggleDarkMode}
+                selectable
+              />
+            </PopOver>
+          ),
+          label: 'layout_popover',
+          name: 'popover',
+          onSelect: () => {},
+        },
       ]}
     />
   );

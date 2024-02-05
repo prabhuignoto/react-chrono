@@ -1,9 +1,13 @@
 import { TimelineModel } from '@models/TimelineModel';
-import { FunctionComponent } from 'react';
+import cls from 'classnames';
+import { FunctionComponent, useState } from 'react';
+import { CheckIcon } from '../icons';
 import { ListModel } from './list.model';
 import {
+  CheckboxStyle,
   ListItemStyle,
   ListStyle,
+  StyleAndDescription,
   TitleDescriptionStyle,
   TitleStyle,
 } from './list.styles';
@@ -13,6 +17,7 @@ type ListItemProps = {
   description: string;
   id: string;
   onClick?: (id: string) => void;
+  selectable?: boolean;
   title: string;
 } & Pick<TimelineModel, 'theme'>;
 
@@ -23,16 +28,41 @@ const ListItem: FunctionComponent<ListItemProps> = ({
   theme,
   onClick,
   active,
+  selectable = false,
 }) => {
+  const [on, setOn] = useState(false);
+
+  const handleOnClick = (id: string) => {
+    if (selectable) {
+      setOn(!on);
+    }
+
+    onClick?.(id);
+  };
+
+  const checkBoxClass = cls({
+    checkbox: true,
+    'checkbox--checked': on,
+  });
+
   return (
     <ListItemStyle
       key={id}
       theme={theme}
-      onClick={() => onClick(id)}
+      onClick={() => handleOnClick?.(id)}
       active={active}
+      tabIndex={0}
+      selectable={selectable}
     >
-      <TitleStyle theme={theme}>{title}</TitleStyle>
-      <TitleDescriptionStyle>{description} </TitleDescriptionStyle>
+      {selectable ? (
+        <CheckboxStyle role="checkbox" className={checkBoxClass}>
+          {on && <CheckIcon />}
+        </CheckboxStyle>
+      ) : null}
+      <StyleAndDescription>
+        <TitleStyle theme={theme}>{title}</TitleStyle>
+        <TitleDescriptionStyle>{description} </TitleDescriptionStyle>
+      </StyleAndDescription>
     </ListItemStyle>
   );
 };
@@ -42,6 +72,7 @@ const List: FunctionComponent<ListModel> = ({
   theme,
   onClick,
   activeItemIndex,
+  selectable = false,
 }) => {
   return (
     <ListStyle>
@@ -54,6 +85,7 @@ const List: FunctionComponent<ListModel> = ({
             description={description}
             theme={theme}
             onClick={onClick}
+            selectable={selectable}
             active={activeItemIndex === index}
           />
         );

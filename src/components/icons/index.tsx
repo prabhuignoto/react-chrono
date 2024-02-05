@@ -10,3 +10,4 @@ export { default as MoonIcon } from './moon';
 export { default as PlusIcon } from './plus';
 export { default as StopIcon } from "./stop";
 export { default as SunIcon } from './sun';
+export { default as CheckIcon } from './check';

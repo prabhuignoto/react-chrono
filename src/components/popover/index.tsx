@@ -1,5 +1,6 @@
 import { Theme } from '@models/Theme';
-import { FunctionComponent, ReactNode, useState } from 'react';
+import { FunctionComponent, ReactNode, useRef, useState } from 'react';
+import useCloseClickOutside from '../effects/useCloseClickOutside';
 import { ChevronDown, ChevronUp, CloseIcon } from '../icons';
 import {
   CloseButton,
@@ -32,8 +33,12 @@ const PopOver: FunctionComponent<PopOverModel> = ({
 
   const closePopover = () => setOpen(false);
 
+  const ref = useRef<HTMLDivElement>(null);
+
+  useCloseClickOutside(ref, closePopover);
+
   return (
-    <PopoverWrapper>
+    <PopoverWrapper ref={ref}>
       <Selecter role="button" onClick={toggleOpen}>
         <SelecterIcon theme={theme}>
           {open ? <ChevronUp /> : <ChevronDown />}
