@@ -77,7 +77,6 @@ const List: FunctionComponent<ListModel> = ({
   theme,
   onClick,
   activeItemIndex,
-  selectable = false,
   multiSelectable = false,
 }) => {
   const [listItems, setListItems] = useState(() =>
@@ -88,7 +87,7 @@ const List: FunctionComponent<ListModel> = ({
     })),
   );
 
-  const onSelect = (id: string) => {
+  const onChecked = (id: string) => {
     const updatedItems = listItems.map((item) => {
       if (item.id === id) {
         return {
@@ -107,8 +106,17 @@ const List: FunctionComponent<ListModel> = ({
   };
 
   const handleClick = (id: string) => {
-    onSelect(id);
-    onClick?.(id);
+    onChecked(id);
+
+    if (multiSelectable) {
+      const item = listItems.find((item) => item.id === id);
+
+      if (item.onSelect) {
+        item.onSelect();
+      }
+    } else {
+      onClick?.(id);
+    }
   };
 
   return (
@@ -122,7 +130,7 @@ const List: FunctionComponent<ListModel> = ({
             description={description}
             theme={theme}
             onClick={handleClick}
-            selectable={selectable}
+            selectable={multiSelectable}
             selected={selected}
             active={activeItemIndex === index}
           />

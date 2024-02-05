@@ -18,7 +18,6 @@ import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
 import { TimelineToolbar } from './timeline-toolbar';
 import {
-  Outline,
   TimelineContentRender,
   TimelineMain,
   TimelineMainWrapper,
@@ -108,13 +107,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     enableBreakPoint,
   );
 
-  useMatchMedia(
-    `(min-width: ${verticalBreakPoint + 1}px)`,
-    () => {
-      setTimelineMode(mode);
-    },
-    enableBreakPoint,
-  );
+  // useMatchMedia(
+  //   `(min-width: ${verticalBreakPoint + 1}px)`,
+  //   () => {
+  //     setTimelineMode(mode);
+  //   },
+  //   enableBreakPoint,
+  // );
 
   // handlers for navigation
   const handleNext = useCallback(() => {
@@ -329,6 +328,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     [disableNavOnKey, slideShowRunning, handleKeySelection],
   );
 
+  const handleTimelineUpdate = useCallback((mode: string) => {
+    if (mode === 'VERTICAL') {
+      setTimelineMode('VERTICAL');
+    } else if (mode === 'HORIZONTAL') {
+      setTimelineMode('HORIZONTAL');
+    } else if (mode === 'VERTICAL_ALTERNATING') {
+      setTimelineMode('VERTICAL_ALTERNATING');
+    }
+  }, []);
+
   const wrapperClass = useMemo(() => {
     return cls(mode.toLocaleLowerCase(), {
       'focus-visible': !isChild,
@@ -370,6 +379,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             flipLayout={flipLayout}
             items={items}
             onActivateTimelineItem={handleTimelineItemClick}
+            onUpdateTimelineMode={handleTimelineUpdate}
           />
         </ToolbarWrapper>
       ) : null}
@@ -425,7 +435,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         {/* HORIZONTAL */}
         {timelineMode === 'HORIZONTAL' ? (
           <TimelineMain className={mode.toLowerCase()}>
-            <Outline color={theme && theme.primary} height={lineWidth} />
+            {/* <Outline color={theme && theme.primary} height={lineWidth} /> */}
             <TimelineHorizontal
               autoScroll={handleScroll}
               contentDetailsChildren={contentDetailsChildren}
