@@ -1,10 +1,9 @@
 import { TimelineModel, TimelineProps } from '@models/TimelineModel';
 import { FunctionComponent, useContext } from 'react';
 import { GlobalContext } from '../GlobalContext';
-import { List } from '../list/list';
-import { PopOver } from '../popover';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import { Toolbar } from '../toolbar';
+import { LayoutSwitcher, QuickJump } from './timeline-popover-elements';
 
 export type TimelineToolbarProps = Pick<
   TimelineModel,
@@ -45,7 +44,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   onActivateTimelineItem,
   onUpdateTimelineMode,
 }) => {
-  const { theme } = useContext(GlobalContext);
+  const { theme, enableLayoutSwitch } =
+    useContext<TimelineModel>(GlobalContext);
   return (
     <Toolbar
       items={[
@@ -80,62 +80,21 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           onSelect: () => {},
         },
         {
-          content: (
-            <PopOver
-              placeholder="Quick jump to an item"
-              position="down"
-              theme={theme}
-              width={'400px'}
-            >
-              <List
-                items={items.map((item, index) => ({
-                  active: index === activeTimelineItem,
-                  description: item.cardSubtitle,
-                  id: item.id,
-                  label: item.title,
-                  onSelect: () => {},
-                  title: item.title,
-                }))}
-                theme={theme}
-                onClick={onActivateTimelineItem}
-              />
-            </PopOver>
-          ),
+          content: QuickJump({
+            activeItem: activeTimelineItem,
+            items: items.map((item) => ({
+              ...item,
+              description: item.cardSubtitle,
+            })),
+            onActivateItem: onActivateTimelineItem,
+            theme: theme,
+          }),
           label: 'timeline_popover',
           name: 'popover',
           onSelect: () => {},
         },
         {
-          content: (
-            <PopOver
-              placeholder="Change the layout"
-              position="down"
-              theme={theme}
-            >
-              <List
-                items={[
-                  {
-                    id: 'VERTICAL',
-                    onSelect: () => onUpdateTimelineMode('VERTICAL'),
-                    title: 'Vertical Layout',
-                  },
-                  {
-                    id: 'VERTICAL_ALTERNATING',
-                    onSelect: () =>
-                      onUpdateTimelineMode('VERTICAL_ALTERNATING'),
-                    title: 'Vertical Alternating Layout',
-                  },
-                  {
-                    id: 'HORIZONTAL',
-                    onSelect: () => onUpdateTimelineMode('HORIZONTAL'),
-                    title: 'Horizontal Layout',
-                  },
-                ]}
-                theme={theme}
-                multiSelectable
-              />
-            </PopOver>
-          ),
+          content: LayoutSwitcher(theme, onUpdateTimelineMode),
           label: 'layout_popover',
           name: 'popover',
           onSelect: () => {},

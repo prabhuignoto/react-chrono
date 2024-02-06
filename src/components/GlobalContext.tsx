@@ -76,6 +76,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           disableTimelinePoint: !!props.disableInteraction,
           enableBreakPoint: true,
           enableDarkToggle: false,
+          enableLayoutSwitch: true,
           focusActiveItemOnLoad: false,
           highlightCardsOnHover: false,
           lineWidth: 3,

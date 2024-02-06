@@ -115,6 +115,8 @@ export type TimelineProps = {
 
   enableDarkToggle?: boolean;
 
+  enableLayoutSwitch?: boolean;
+
   // enables the outline view
   enableOutline?: boolean;
 
