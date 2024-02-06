@@ -10,10 +10,7 @@ export default defineConfig({
   test: {
     coverage: {
       // clean: true,
-      enabled: true,
-      provider: 'v8',
-      reporter: ['lcov', 'clover', 'html'],
-      reportsDirectory: './coverage',
+      enabled: false,
       exclude: [
         '**/*.d.ts',
         'src/components/index.tsx',
@@ -27,6 +24,9 @@ export default defineConfig({
         '**/*.config.js',
         'eslintrc.js',
       ],
+      provider: 'v8',
+      reporter: ['lcov', 'clover', 'html'],
+      reportsDirectory: './coverage',
     },
     environment: 'jsdom',
     globals: true,
