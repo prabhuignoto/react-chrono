@@ -1,5 +1,5 @@
 import { TimelineModel, TimelineProps } from '@models/TimelineModel';
-import { FunctionComponent, useContext } from 'react';
+import { FunctionComponent, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import { Toolbar } from '../toolbar';
@@ -17,6 +17,7 @@ export type TimelineToolbarProps = Pick<
   | 'onFirst'
   | 'onLast'
   | 'items'
+  | 'mode'
 > & {
   id: string;
   onActivateTimelineItem: (id: string) => void;
@@ -43,9 +44,18 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   id,
   onActivateTimelineItem,
   onUpdateTimelineMode,
+  mode,
 }) => {
-  const { theme, enableLayoutSwitch } =
+  const { theme, showAllCardsHorizontal } =
     useContext<TimelineModel>(GlobalContext);
+
+  const isVertical = useMemo(
+    () => mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING',
+    [],
+  );
+
+  const verticalOrHorizontal = isVertical ? 'VERTICAL' : 'HORIZONTAL';
+
   return (
     <Toolbar
       items={[
@@ -94,7 +104,12 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           onSelect: () => {},
         },
         {
-          content: LayoutSwitcher(theme, onUpdateTimelineMode),
+          content: LayoutSwitcher({
+            initialTimelineMode: showAllCardsHorizontal || mode,
+            mode: verticalOrHorizontal,
+            onUpdateTimelineMode,
+            theme,
+          }),
           label: 'layout_popover',
           name: 'popover',
           onSelect: () => {},

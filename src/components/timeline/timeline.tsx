@@ -68,6 +68,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     toggleDarkMode,
     verticalBreakPoint = 768,
     enableBreakPoint,
+    updateHorizontalAllCards,
   } = useContext(GlobalContext);
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -333,8 +334,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       setTimelineMode('VERTICAL');
     } else if (mode === 'HORIZONTAL') {
       setTimelineMode('HORIZONTAL');
+      updateHorizontalAllCards?.(false);
     } else if (mode === 'VERTICAL_ALTERNATING') {
       setTimelineMode('VERTICAL_ALTERNATING');
+    } else if (mode === 'HORIZONTAL_ALL') {
+      setTimelineMode('HORIZONTAL');
+      updateHorizontalAllCards?.(true);
     }
   }, []);
 
@@ -380,6 +385,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             items={items}
             onActivateTimelineItem={handleTimelineItemClick}
             onUpdateTimelineMode={handleTimelineUpdate}
+            mode={timelineMode}
           />
         </ToolbarWrapper>
       ) : null}

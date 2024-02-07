@@ -15,7 +15,6 @@ const List: FunctionComponent<ListModel> = ({
     items.map((item) => ({
       id: getUniqueID(),
       ...item,
-      selected: false,
     })),
   );
 

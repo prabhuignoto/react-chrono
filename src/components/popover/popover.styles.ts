@@ -65,7 +65,7 @@ export const Content = styled.div`
   height: calc(100% - 30px);
   overflow-y: auto;
   padding: 0.25rem;
-  width: calc(100% - 0.5rem);
+  width: calc(100% - 0rem);
 `;
 
 export const CloseButton = styled.button<{ theme: Theme }>`

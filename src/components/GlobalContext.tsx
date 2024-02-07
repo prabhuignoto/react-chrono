@@ -15,11 +15,15 @@ import {
 } from 'react';
 
 const GlobalContext = createContext<
-  PropsModel & { toggleDarkMode?: () => void }
+  PropsModel & {
+    toggleDarkMode?: () => void;
+    updateHorizontalAllCards?: (state: boolean) => void;
+  }
 >({});
 
 type ContextProps = PropsModel & {
   toggleDarkMode?: () => void;
+  updateHorizontalAllCards?: () => void;
 };
 
 const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
@@ -42,9 +46,13 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
     mediaSettings,
     mediaHeight = 200,
     contentDetailsHeight = 10,
+    showAllCardsHorizontal,
   } = props;
 
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
+  const [horizontalAll, setHorizontalAll] = useState(
+    showAllCardsHorizontal || false,
+  );
 
   const newCardHeight = useMemo(
     () => Math.max(contentDetailsHeight || 0 + mediaHeight || 0, cardHeight),
@@ -62,6 +70,13 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
     setIsDarkMode(!isDarkMode);
     onThemeChange?.();
   }, [isDarkMode]);
+
+  const updateHorizontalAllCards = useCallback(
+    (state) => {
+      setHorizontalAll(!state);
+    },
+    [horizontalAll],
+  );
 
   const defaultProps = useMemo(
     () =>
@@ -86,7 +101,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           scrollable: {
             scrollbar: false,
           },
-          showAllCardsHorizontal: false,
+          showAllCardsHorizontal: horizontalAll,
           showProgressOnSlideshow: slideShow,
           slideItemDuration: 2000,
           slideShowType: getSlideShowType(mode),
@@ -128,12 +143,24 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           ...theme,
         },
         toggleDarkMode,
+        updateHorizontalAllCards,
       }) as ContextProps,
-    [newContentDetailsHeight, newCardHeight, isDarkMode, toggleDarkMode],
+    [
+      newContentDetailsHeight,
+      newCardHeight,
+      isDarkMode,
+      toggleDarkMode,
+      updateHorizontalAllCards,
+    ],
   );
 
   const providerValue = useMemo(
-    () => ({ ...defaultProps, darkMode: isDarkMode, toggleDarkMode }),
+    () => ({
+      ...defaultProps,
+      darkMode: isDarkMode,
+      toggleDarkMode,
+      updateHorizontalAllCards,
+    }),
     [defaultProps, isDarkMode],
   );
 

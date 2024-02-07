@@ -1,36 +1,61 @@
 import { Theme } from '@models/Theme';
+import { TimelineMode } from '@models/TimelineModel';
 import { List } from '../list/list';
 import { ListItemModel } from '../list/list.model';
 import { PopOver } from '../popover';
 
-const LayoutSwitcher = (
-  theme: Theme,
-  onUpdateTimelineMode: (s: string) => void,
-) => (
-  <PopOver placeholder="Change the layout" position="down" theme={theme}>
-    <List
-      items={[
-        {
-          id: 'VERTICAL',
-          onSelect: () => onUpdateTimelineMode('VERTICAL'),
-          title: 'Vertical Layout',
-        },
-        {
-          id: 'VERTICAL_ALTERNATING',
-          onSelect: () => onUpdateTimelineMode('VERTICAL_ALTERNATING'),
-          title: 'Vertical Alternating Layout',
-        },
-        {
-          id: 'HORIZONTAL',
-          onSelect: () => onUpdateTimelineMode('HORIZONTAL'),
-          title: 'Horizontal Layout',
-        },
-      ]}
-      theme={theme}
-      multiSelectable
-    />
-  </PopOver>
-);
+type LayoutSwitcherProp = {
+  initialTimelineMode?: TimelineMode;
+  mode: 'VERTICAL' | 'HORIZONTAL';
+  onUpdateTimelineMode: (s: string) => void;
+  theme: Theme;
+};
+
+const LayoutSwitcher: (p: LayoutSwitcherProp) => any = ({
+  mode,
+  initialTimelineMode,
+  onUpdateTimelineMode,
+  theme,
+}: LayoutSwitcherProp) => {
+  const verticalItems = [
+    {
+      id: 'VERTICAL',
+      onSelect: () => onUpdateTimelineMode('VERTICAL'),
+      selected: initialTimelineMode === 'VERTICAL',
+      title: 'Vertical',
+    },
+    {
+      id: 'VERTICAL_ALTERNATING',
+      onSelect: () => onUpdateTimelineMode('VERTICAL_ALTERNATING'),
+      selected: initialTimelineMode === 'VERTICAL_ALTERNATING',
+      title: 'Vertical Alternating',
+    },
+  ];
+
+  const horizontalItems = [
+    {
+      id: 'HORIZONTAL',
+      onSelect: () => onUpdateTimelineMode('HORIZONTAL'),
+      selected: initialTimelineMode === 'HORIZONTAL',
+      title: 'Horizontal Layout',
+    },
+    {
+      id: 'HORIZONTAL_ALL',
+      onSelect: () => onUpdateTimelineMode('HORIZONTAL_ALL'),
+      title: 'Horizontal Show All',
+    },
+  ];
+
+  return (
+    <PopOver placeholder="Change layout" position="down" theme={theme}>
+      <List
+        items={mode === 'HORIZONTAL' ? horizontalItems : verticalItems}
+        theme={theme}
+        multiSelectable
+      />
+    </PopOver>
+  );
+};
 
 type QuickJumpProp = {
   activeItem: number;
@@ -47,7 +72,7 @@ const QuickJump: (prop: QuickJumpProp) => JSX.Element = ({
 }: QuickJumpProp) => {
   return (
     <PopOver
-      placeholder="Jump to"
+      placeholder="Jump to a date"
       position="down"
       theme={theme}
       width={'400px'}
