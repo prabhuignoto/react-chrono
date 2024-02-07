@@ -30,10 +30,9 @@ const ListItem: FunctionComponent<ListItemProps> = ({
   selected = false,
   selectable = false,
 }) => {
-
   const handleOnClick = useCallback((id: string) => {
     onClick?.(id);
-  } ,[]);
+  }, []);
 
   return (
     <ListItemStyle
@@ -46,11 +45,7 @@ const ListItem: FunctionComponent<ListItemProps> = ({
     >
       {selectable ? (
         <CheckboxWrapper>
-          <CheckboxStyle
-            role="checkbox"
-            selected={selected}
-            theme={theme}
-          >
+          <CheckboxStyle role="checkbox" selected={selected} theme={theme}>
             {selected && <CheckIcon />}
           </CheckboxStyle>
         </CheckboxWrapper>

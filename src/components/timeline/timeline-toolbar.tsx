@@ -46,17 +46,14 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   onUpdateTimelineMode,
   mode,
 }) => {
-  const { theme, showAllCardsHorizontal } =
-    useContext<TimelineModel>(GlobalContext);
+  const { theme } = useContext<TimelineModel>(GlobalContext);
 
   const isVertical = useMemo(
     () => mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING',
-    [],
+    [mode],
   );
 
-  const verticalOrHorizontal = isVertical ? 'VERTICAL' : 'HORIZONTAL';
-
-  console.log(showAllCardsHorizontal);
+  console.log('mode parent', mode);
 
   return (
     <Toolbar
@@ -116,12 +113,9 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           // }),
           content: (
             <LayoutSwitcher
-              mode={verticalOrHorizontal}
               theme={theme}
               onUpdateTimelineMode={onUpdateTimelineMode}
-              initialTimelineMode={
-                showAllCardsHorizontal ? 'HORIZONTAL_ALL' : mode
-              }
+              mode={mode}
             />
           ),
           label: 'layout_popover',

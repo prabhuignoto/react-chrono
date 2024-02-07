@@ -1,40 +1,47 @@
 import { Theme } from '@models/Theme';
 import { TimelineMode } from '@models/TimelineModel';
-import { useMemo } from 'react';
+import { FunctionComponent, useContext, useMemo } from 'react';
+import { GlobalContext } from '../GlobalContext';
 import { List } from '../list/list';
 import { ListItemModel } from '../list/list.model';
 import { PopOver } from '../popover';
 
 type LayoutSwitcherProp = {
   initialTimelineMode?: TimelineMode | 'HORIZONTAL_ALL';
-  mode: 'VERTICAL' | 'HORIZONTAL';
+  mode?: TimelineMode;
   onUpdateTimelineMode: (s: string) => void;
   theme: Theme;
 };
 
-const LayoutSwitcher: (p: LayoutSwitcherProp) => any = ({
-  initialTimelineMode,
-  mode,
+const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   onUpdateTimelineMode,
   theme,
+  mode,
 }: LayoutSwitcherProp) => {
-  // vertical list options when the mode is `VERTICAL`
+  const { showAllCardsHorizontal } = useContext(GlobalContext);
+
+  const activeTimelineMode = useMemo(
+    () => (showAllCardsHorizontal ? 'HORIZONTAL_ALL' : mode),
+    [showAllCardsHorizontal, mode],
+  );
+
+  // console.log(mode);
   const verticalItems = useMemo(
     () => [
       {
         id: 'VERTICAL',
         onSelect: () => onUpdateTimelineMode('VERTICAL'),
-        selected: initialTimelineMode === 'VERTICAL',
-        title: 'Vertical',
+        selected: activeTimelineMode === 'VERTICAL',
+        title: 'Default',
       },
       {
         id: 'VERTICAL_ALTERNATING',
         onSelect: () => onUpdateTimelineMode('VERTICAL_ALTERNATING'),
-        selected: initialTimelineMode === 'VERTICAL_ALTERNATING',
-        title: 'Vertical Alternating',
+        selected: activeTimelineMode === 'VERTICAL_ALTERNATING',
+        title: 'Alternating',
       },
     ],
-    [initialTimelineMode],
+    [activeTimelineMode],
   );
 
   // horizontal list OF options when the mode is `HORIZONTAL`
@@ -43,17 +50,17 @@ const LayoutSwitcher: (p: LayoutSwitcherProp) => any = ({
       {
         id: 'HORIZONTAL',
         onSelect: () => onUpdateTimelineMode('HORIZONTAL'),
-        selected: initialTimelineMode === 'HORIZONTAL',
-        title: 'Horizontal Layout',
+        selected: activeTimelineMode === 'HORIZONTAL',
+        title: 'Default',
       },
       {
         id: 'HORIZONTAL_ALL',
         onSelect: () => onUpdateTimelineMode('HORIZONTAL_ALL'),
-        selected: initialTimelineMode === 'HORIZONTAL_ALL',
-        title: 'Horizontal Show All',
+        selected: activeTimelineMode === 'HORIZONTAL_ALL',
+        title: 'Show all cards',
       },
     ],
-    [initialTimelineMode],
+    [activeTimelineMode],
   );
 
   return (
