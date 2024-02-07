@@ -28,7 +28,7 @@ export const Selecter = styled.div`
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   display: flex;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: normal;
   justify-content: space-between;
   padding: 0.1rem;
@@ -51,7 +51,7 @@ export const SelecterIcon = styled.span<{ theme: Theme }>`
 `;
 
 export const SelecterLabel = styled.span`
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-align: left;
   text-transform: capitalize;
 `;
