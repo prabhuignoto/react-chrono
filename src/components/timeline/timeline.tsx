@@ -18,6 +18,7 @@ import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
 import { TimelineToolbar } from './timeline-toolbar';
 import {
+  Outline,
   TimelineContentRender,
   TimelineMain,
   TimelineMainWrapper,
@@ -441,7 +442,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         {/* HORIZONTAL */}
         {timelineMode === 'HORIZONTAL' ? (
           <TimelineMain className={mode.toLowerCase()}>
-            {/* <Outline color={theme && theme.primary} height={lineWidth} /> */}
+            <Outline color={theme && theme.primary} height={lineWidth} />
             <TimelineHorizontal
               autoScroll={handleScroll}
               contentDetailsChildren={contentDetailsChildren}

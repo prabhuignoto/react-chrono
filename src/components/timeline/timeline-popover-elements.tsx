@@ -1,50 +1,60 @@
 import { Theme } from '@models/Theme';
 import { TimelineMode } from '@models/TimelineModel';
+import { useMemo } from 'react';
 import { List } from '../list/list';
 import { ListItemModel } from '../list/list.model';
 import { PopOver } from '../popover';
 
 type LayoutSwitcherProp = {
-  initialTimelineMode?: TimelineMode;
+  initialTimelineMode?: TimelineMode | 'HORIZONTAL_ALL';
   mode: 'VERTICAL' | 'HORIZONTAL';
   onUpdateTimelineMode: (s: string) => void;
   theme: Theme;
 };
 
 const LayoutSwitcher: (p: LayoutSwitcherProp) => any = ({
-  mode,
   initialTimelineMode,
+  mode,
   onUpdateTimelineMode,
   theme,
 }: LayoutSwitcherProp) => {
-  const verticalItems = [
-    {
-      id: 'VERTICAL',
-      onSelect: () => onUpdateTimelineMode('VERTICAL'),
-      selected: initialTimelineMode === 'VERTICAL',
-      title: 'Vertical',
-    },
-    {
-      id: 'VERTICAL_ALTERNATING',
-      onSelect: () => onUpdateTimelineMode('VERTICAL_ALTERNATING'),
-      selected: initialTimelineMode === 'VERTICAL_ALTERNATING',
-      title: 'Vertical Alternating',
-    },
-  ];
+  // vertical list options when the mode is `VERTICAL`
+  const verticalItems = useMemo(
+    () => [
+      {
+        id: 'VERTICAL',
+        onSelect: () => onUpdateTimelineMode('VERTICAL'),
+        selected: initialTimelineMode === 'VERTICAL',
+        title: 'Vertical',
+      },
+      {
+        id: 'VERTICAL_ALTERNATING',
+        onSelect: () => onUpdateTimelineMode('VERTICAL_ALTERNATING'),
+        selected: initialTimelineMode === 'VERTICAL_ALTERNATING',
+        title: 'Vertical Alternating',
+      },
+    ],
+    [initialTimelineMode],
+  );
 
-  const horizontalItems = [
-    {
-      id: 'HORIZONTAL',
-      onSelect: () => onUpdateTimelineMode('HORIZONTAL'),
-      selected: initialTimelineMode === 'HORIZONTAL',
-      title: 'Horizontal Layout',
-    },
-    {
-      id: 'HORIZONTAL_ALL',
-      onSelect: () => onUpdateTimelineMode('HORIZONTAL_ALL'),
-      title: 'Horizontal Show All',
-    },
-  ];
+  // horizontal list OF options when the mode is `HORIZONTAL`
+  const horizontalItems = useMemo(
+    () => [
+      {
+        id: 'HORIZONTAL',
+        onSelect: () => onUpdateTimelineMode('HORIZONTAL'),
+        selected: initialTimelineMode === 'HORIZONTAL',
+        title: 'Horizontal Layout',
+      },
+      {
+        id: 'HORIZONTAL_ALL',
+        onSelect: () => onUpdateTimelineMode('HORIZONTAL_ALL'),
+        selected: initialTimelineMode === 'HORIZONTAL_ALL',
+        title: 'Horizontal Show All',
+      },
+    ],
+    [initialTimelineMode],
+  );
 
   return (
     <PopOver placeholder="Change layout" position="down" theme={theme}>

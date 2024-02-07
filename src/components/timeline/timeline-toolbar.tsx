@@ -56,6 +56,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
 
   const verticalOrHorizontal = isVertical ? 'VERTICAL' : 'HORIZONTAL';
 
+  console.log(showAllCardsHorizontal);
+
   return (
     <Toolbar
       items={[
@@ -104,12 +106,24 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           onSelect: () => {},
         },
         {
-          content: LayoutSwitcher({
-            initialTimelineMode: showAllCardsHorizontal || mode,
-            mode: verticalOrHorizontal,
-            onUpdateTimelineMode,
-            theme,
-          }),
+          // content: LayoutSwitcher({
+          //   initialTimelineMode: showAllCardsHorizontal
+          //     ? 'HORIZONTAL_ALL'
+          //     : mode,
+          //   mode: verticalOrHorizontal,
+          //   onUpdateTimelineMode,
+          //   theme,
+          // }),
+          content: (
+            <LayoutSwitcher
+              mode={verticalOrHorizontal}
+              theme={theme}
+              onUpdateTimelineMode={onUpdateTimelineMode}
+              initialTimelineMode={
+                showAllCardsHorizontal ? 'HORIZONTAL_ALL' : mode
+              }
+            />
+          ),
           label: 'layout_popover',
           name: 'popover',
           onSelect: () => {},

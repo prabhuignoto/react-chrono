@@ -73,7 +73,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
 
   const updateHorizontalAllCards = useCallback(
     (state) => {
-      setHorizontalAll(!state);
+      setHorizontalAll(state);
     },
     [horizontalAll],
   );

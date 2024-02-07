@@ -1,6 +1,5 @@
 import { TimelineModel } from '@models/TimelineModel';
-import cls from 'classnames';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useCallback } from 'react';
 import { CheckIcon } from '../icons';
 import {
   CheckboxStyle,
@@ -31,14 +30,10 @@ const ListItem: FunctionComponent<ListItemProps> = ({
   selected = false,
   selectable = false,
 }) => {
-  const handleOnClick = (id: string) => {
-    onClick?.(id);
-  };
 
-  const checkBoxClass = cls({
-    checkbox: true,
-    'checkbox--checked': selected,
-  });
+  const handleOnClick = useCallback((id: string) => {
+    onClick?.(id);
+  } ,[]);
 
   return (
     <ListItemStyle
@@ -53,7 +48,6 @@ const ListItem: FunctionComponent<ListItemProps> = ({
         <CheckboxWrapper>
           <CheckboxStyle
             role="checkbox"
-            className={checkBoxClass}
             selected={selected}
             theme={theme}
           >

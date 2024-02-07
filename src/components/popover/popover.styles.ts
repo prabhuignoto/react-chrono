@@ -53,7 +53,6 @@ export const SelecterIcon = styled.span<{ theme: Theme }>`
 export const SelecterLabel = styled.span`
   font-size: 1rem;
   text-align: left;
-  text-transform: capitalize;
 `;
 
 export const Header = styled.div`
