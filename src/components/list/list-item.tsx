@@ -30,9 +30,7 @@ const ListItem: FunctionComponent<ListItemProps> = ({
   selected = false,
   selectable = false,
 }) => {
-  const handleOnClick = useCallback((id: string) => {
-    onClick?.(id);
-  }, []);
+  const handleOnClick = useCallback((id: string) => onClick?.(id), []);
 
   return (
     <ListItemStyle

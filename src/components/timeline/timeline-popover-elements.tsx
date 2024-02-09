@@ -81,7 +81,7 @@ type QuickJumpProp = {
   theme: Theme;
 };
 
-const QuickJump: (prop: QuickJumpProp) => JSX.Element = ({
+const QuickJump: FunctionComponent<QuickJumpProp> = ({
   activeItem,
   items,
   theme,

@@ -1,5 +1,4 @@
-import { getUniqueID } from '@utils/index';
-import { FunctionComponent, ReactNode, useState } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 import {
   ContentWrapper,
   IconWrapper,
@@ -8,7 +7,6 @@ import {
 } from './toolbar.styles';
 
 export type ToolbarItem = {
-  content?: ReactNode | ReactNode[];
   icon?: ReactNode;
   id?: string;
   label?: string;
@@ -17,30 +15,18 @@ export type ToolbarItem = {
 };
 
 export type ToolbarProps = {
+  children?: ReactNode | ReactNode[];
   items?: ToolbarItem[];
 };
 
-const Toolbar: FunctionComponent<ToolbarProps> = ({ items }) => {
-  const [toolbarItems, setToolbarItems] = useState<ToolbarItem[]>(
-    items?.map((item) => ({
-      ...item,
-      id: getUniqueID(),
-    })) || [],
-  );
-
-  const handleSelection = (id: string, name: string) => {};
-
+const Toolbar: FunctionComponent<ToolbarProps> = ({ items, children = [] }) => {
   return (
     <ToolbarWrapper>
-      {items?.map(({ label, id, icon, content }, index) => {
+      {items?.map(({ label, id, icon }, index) => {
         return (
-          <ToolbarListItem
-            onClick={() => handleSelection(id, label)}
-            aria-label={label}
-            key={id}
-          >
+          <ToolbarListItem aria-label={label} key={id}>
             {icon ? <IconWrapper>{icon}</IconWrapper> : null}
-            <ContentWrapper>{content}</ContentWrapper>
+            <ContentWrapper>{children[index]}</ContentWrapper>
           </ToolbarListItem>
         );
       })}

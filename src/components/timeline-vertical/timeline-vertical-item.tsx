@@ -108,7 +108,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         $alternateCards={alternateCards}
         mode={mode}
         $hide={!title}
-        $flip={flipLayout}
+        $flip={!alternateCards && flipLayout}
       >
         <TimelineItemTitle
           title={title}
@@ -196,7 +196,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         className={contentClass}
         $alternateCards={alternateCards}
         $noTitle={!title}
-        $flip={flipLayout}
+        $flip={!alternateCards && flipLayout}
         height={textOverlay ? mediaHeight : cardHeight}
       >
         {!cardLess ? (
@@ -217,7 +217,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
             theme={theme}
             title={cardTitle}
             url={url}
-            flip={flipLayout}
+            flip={!alternateCards && flipLayout}
             timelineContent={timelineContent}
             items={items}
             isNested={isNested}
