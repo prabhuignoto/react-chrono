@@ -1,9 +1,16 @@
+// Import necessary dependencies and utilities
 import { getUniqueID } from '@utils/index';
-import { FunctionComponent, useState } from 'react';
+import {
+  FunctionComponent,
+  startTransition,
+  useCallback,
+  useState,
+} from 'react';
 import { ListItem } from './list-item';
 import { ListModel } from './list.model';
 import { ListStyle } from './list.styles';
 
+// Define the List component
 const List: FunctionComponent<ListModel> = ({
   items,
   theme,
@@ -11,6 +18,7 @@ const List: FunctionComponent<ListModel> = ({
   activeItemIndex,
   multiSelectable = false,
 }) => {
+  // Initialize state for list items
   const [listItems, setListItems] = useState(() =>
     items.map((item) => ({
       id: getUniqueID(),
@@ -18,7 +26,8 @@ const List: FunctionComponent<ListModel> = ({
     })),
   );
 
-  const onChecked = (id: string) => {
+  // Callback function for handling checkbox selection
+  const onChecked = useCallback((id: string) => {
     const updatedItems = listItems.map((item) => {
       if (item.id === id) {
         return {
@@ -34,22 +43,26 @@ const List: FunctionComponent<ListModel> = ({
     });
 
     setListItems(updatedItems);
-  };
+  }, []);
 
-  const handleClick = (id: string) => {
+  // Callback function for handling item click
+  const handleClick = useCallback((id: string) => {
     onChecked(id);
 
     if (multiSelectable) {
       const item = listItems.find((item) => item.id === id);
 
       if (item.onSelect) {
-        item.onSelect();
+        startTransition(() => {
+          item.onSelect();
+        });
       }
     } else {
       onClick?.(id);
     }
-  };
+  }, []);
 
+  // Render the List component
   return (
     <ListStyle>
       {listItems?.map(({ title, id, description, selected }, index) => {
@@ -71,4 +84,5 @@ const List: FunctionComponent<ListModel> = ({
   );
 };
 
+// Export the List component
 export { List };

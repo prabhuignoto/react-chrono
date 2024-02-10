@@ -1,4 +1,3 @@
-import { TimelineModel } from '@models/TimelineModel';
 import { FunctionComponent, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
@@ -26,7 +25,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   onUpdateTimelineMode,
   mode,
 }) => {
-  const { theme } = useContext<TimelineModel>(GlobalContext);
+  const { theme, cardLess, enableQuickJump } = useContext(GlobalContext);
   const toolbarItems = useMemo(() => {
     return [
       {
@@ -76,20 +75,24 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
         onToggleDarkMode={toggleDarkMode}
         onPaused={onPaused}
       />
-      <QuickJump
-        activeItem={activeTimelineItem}
-        items={items.map((item) => ({
-          ...item,
-          description: item.cardSubtitle,
-        }))}
-        onActivateItem={onActivateTimelineItem}
-        theme={theme}
-      />
-      <LayoutSwitcher
-        theme={theme}
-        onUpdateTimelineMode={onUpdateTimelineMode}
-        mode={mode}
-      />
+      {enableQuickJump ? (
+        <QuickJump
+          activeItem={activeTimelineItem}
+          items={items.map((item) => ({
+            ...item,
+            description: item.cardSubtitle,
+          }))}
+          onActivateItem={onActivateTimelineItem}
+          theme={theme}
+        />
+      ) : null}
+      {!cardLess ? (
+        <LayoutSwitcher
+          theme={theme}
+          onUpdateTimelineMode={onUpdateTimelineMode}
+          mode={mode}
+        />
+      ) : null}
     </Toolbar>
   );
 };

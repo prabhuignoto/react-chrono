@@ -24,15 +24,15 @@ describe('List', () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-    it('should call onSelect when a list item is clicked and multiSelectable is true', () => {
-      const onSelectItem = vi.fn();
-      const itemsWithOnSelect = items.map((item, index) => ({
-        ...item,
-        onSelect: index === 0 ? onSelectItem : undefined,
-      }));
-      render(<List items={itemsWithOnSelect} multiSelectable />);
-      const listItem = screen.getByText('Item 1');
-      fireEvent.click(listItem);
-      expect(onSelectItem).toHaveBeenCalledTimes(1);
-    });
+  it('should call onSelect when a list item is clicked and multiSelectable is true', () => {
+    const onSelectItem = vi.fn();
+    const itemsWithOnSelect = items.map((item, index) => ({
+      ...item,
+      onSelect: index === 0 ? onSelectItem : undefined,
+    }));
+    render(<List items={itemsWithOnSelect} multiSelectable />);
+    const listItem = screen.getByText('Item 1');
+    fireEvent.click(listItem);
+    expect(onSelectItem).toHaveBeenCalledTimes(1);
+  });
 });

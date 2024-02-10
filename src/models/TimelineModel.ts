@@ -120,6 +120,8 @@ export type TimelineProps = {
   // enables the outline view
   enableOutline?: boolean;
 
+  enableQuickJump?: boolean;
+
   // flips the layout, useful for RTL
   flipLayout?: boolean;
 

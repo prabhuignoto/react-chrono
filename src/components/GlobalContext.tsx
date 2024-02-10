@@ -92,6 +92,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           enableBreakPoint: true,
           enableDarkToggle: false,
           enableLayoutSwitch: true,
+          enableQuickJump: true,
           focusActiveItemOnLoad: false,
           highlightCardsOnHover: false,
           lineWidth: 3,

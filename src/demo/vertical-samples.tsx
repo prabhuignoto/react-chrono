@@ -132,6 +132,7 @@ export const VerticalBasic: FunctionComponent<{
         uniqueId="vertical_basic_test"
         parseDetailsAsHTML
         highlightCardsOnHover
+        enableQuickJump={true}
         // textOverlay
         // borderLessCards
         // theme={{

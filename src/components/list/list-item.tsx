@@ -1,5 +1,5 @@
 import { TimelineModel } from '@models/TimelineModel';
-import { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent, memo, useCallback } from 'react';
 import { CheckIcon } from '../icons';
 import {
   CheckboxStyle,
@@ -20,40 +20,44 @@ type ListItemProps = {
   title: string;
 } & Pick<TimelineModel, 'theme'>;
 
-const ListItem: FunctionComponent<ListItemProps> = ({
-  title,
-  id,
-  description,
-  theme,
-  onClick,
-  active,
-  selected = false,
-  selectable = false,
-}) => {
-  const handleOnClick = useCallback((id: string) => onClick?.(id), []);
+const ListItem: FunctionComponent<ListItemProps> = memo(
+  ({
+    title,
+    id,
+    description,
+    theme,
+    onClick,
+    active,
+    selected = false,
+    selectable = false,
+  }: ListItemProps) => {
+    const handleOnClick = useCallback((id: string) => onClick?.(id), []);
 
-  return (
-    <ListItemStyle
-      key={id}
-      theme={theme}
-      onClick={() => handleOnClick?.(id)}
-      active={active}
-      tabIndex={0}
-      selectable={selectable}
-    >
-      {selectable ? (
-        <CheckboxWrapper>
-          <CheckboxStyle role="checkbox" selected={selected} theme={theme}>
-            {selected && <CheckIcon />}
-          </CheckboxStyle>
-        </CheckboxWrapper>
-      ) : null}
-      <StyleAndDescription selectable={selectable}>
-        <TitleStyle theme={theme}>{title}</TitleStyle>
-        <TitleDescriptionStyle>{description} </TitleDescriptionStyle>
-      </StyleAndDescription>
-    </ListItemStyle>
-  );
-};
+    return (
+      <ListItemStyle
+        key={id}
+        theme={theme}
+        onClick={() => handleOnClick?.(id)}
+        active={active}
+        tabIndex={0}
+        selectable={selectable}
+      >
+        {selectable ? (
+          <CheckboxWrapper>
+            <CheckboxStyle role="checkbox" selected={selected} theme={theme}>
+              {selected && <CheckIcon />}
+            </CheckboxStyle>
+          </CheckboxWrapper>
+        ) : null}
+        <StyleAndDescription selectable={selectable}>
+          <TitleStyle theme={theme}>{title}</TitleStyle>
+          <TitleDescriptionStyle>{description} </TitleDescriptionStyle>
+        </StyleAndDescription>
+      </ListItemStyle>
+    );
+  },
+);
+
+ListItem.displayName = 'ListItem';
 
 export { ListItem };
