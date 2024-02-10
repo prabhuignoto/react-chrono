@@ -1,11 +1,17 @@
+import { Theme } from '@models/Theme';
 import styled from 'styled-components';
 
-export const ToolbarWrapper = styled.ul`
+export const ToolbarWrapper = styled.ul<{ theme: Theme }>`
   list-style: none;
-  padding: 0;
   margin: 0;
   display: flex;
   align-items: center;
+  background-color: ${(p) => p.theme.toolbarBgColor};
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
+  padding: 10px 20px;
+  border-radius: 6px;
 `;
 
 export const ToolbarListItem = styled.li`

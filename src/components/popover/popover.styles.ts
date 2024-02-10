@@ -4,9 +4,13 @@ import { PopoverPosition } from '.';
 
 export const PopoverWrapper = styled.div``;
 
-export const PopoverHolder = styled.div<{ position: PopoverPosition }>`
+export const PopoverHolder = styled.div<{
+  position: PopoverPosition;
+  theme?: Theme;
+}>`
   align-items: flex-start;
-  background: rgba(255, 255, 255, 1);
+  background: ${({ theme }) => theme.toolbarBgColor};
+  background:;
   border-radius: 6px;
   box-shadow: 0px 5px 16px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -21,9 +25,10 @@ export const PopoverHolder = styled.div<{ position: PopoverPosition }>`
   z-index: 100;
 `;
 
-export const Selecter = styled.div`
+export const Selecter = styled.div<{ theme: Theme }>`
   align-items: center;
-  background: rgba(255, 255, 255, 1);
+  background: ${({ theme }) => theme.toolbarBtnBgColor};
+  color: ${({ theme }) => theme.toolbarTextColor};
   border-radius: 25px;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -31,14 +36,13 @@ export const Selecter = styled.div`
   font-size: 1rem;
   font-weight: normal;
   justify-content: space-between;
-  padding: 0.1rem;
-  padding: 0.5em 0.75em;
+  padding: 0.35rem 0.75rem 0.35rem 0.5rem;
   user-select: none;
 `;
 
 export const SelecterIcon = styled.span<{ theme: Theme }>`
   align-items: center;
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.toolbarTextColor};
   display: flex;
   height: 1.5rem;
   justify-content: center;

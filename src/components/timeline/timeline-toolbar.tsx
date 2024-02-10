@@ -26,6 +26,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   mode,
 }) => {
   const { theme, cardLess, enableQuickJump } = useContext(GlobalContext);
+
+  console.log(theme);
   const toolbarItems = useMemo(() => {
     return [
       {
@@ -59,7 +61,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   }, [flipLayout, activeTimelineItem, totalItems]);
 
   return (
-    <Toolbar items={toolbarItems}>
+    <Toolbar items={toolbarItems} theme={theme}>
       <TimelineControl
         disableLeft={disableLeft}
         disableRight={disableRight}

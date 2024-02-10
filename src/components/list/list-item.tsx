@@ -51,7 +51,9 @@ const ListItem: FunctionComponent<ListItemProps> = memo(
         ) : null}
         <StyleAndDescription selectable={selectable}>
           <TitleStyle theme={theme}>{title}</TitleStyle>
-          <TitleDescriptionStyle>{description} </TitleDescriptionStyle>
+          <TitleDescriptionStyle theme={theme}>
+            {description}{' '}
+          </TitleDescriptionStyle>
         </StyleAndDescription>
       </ListItemStyle>
     );

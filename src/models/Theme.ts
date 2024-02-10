@@ -50,4 +50,10 @@ export interface Theme {
 
   // title color for active tabs
   titleColorActive?: string;
+
+  toolbarBgColor?: string;
+
+  toolbarBtnBgColor?: string;
+
+  toolbarTextColor?: string;
 }

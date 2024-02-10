@@ -150,18 +150,10 @@ export const TimelineContentRender = styled.div<{ $showAllCards?: boolean }>`
 
 export const ToolbarWrapper = styled.div`
   display: flex;
-  padding: 10px 20px;
-  font-size: 16px;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
-  border: none;
   border-radius: 6px;
-  background-color: #f4f4f4; /* Light shade of white */
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
-  transition:
-    background-color 0.3s,
-    box-shadow 0.3s;
   width: 100%;
   margin-bottom: 20px;
 `;

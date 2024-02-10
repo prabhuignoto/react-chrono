@@ -5,6 +5,7 @@ import {
   ToolbarListItem,
   ToolbarWrapper,
 } from './toolbar.styles';
+import { Theme } from '@models/Theme';
 
 export type ToolbarItem = {
   icon?: ReactNode;
@@ -17,11 +18,16 @@ export type ToolbarItem = {
 export type ToolbarProps = {
   children?: ReactNode | ReactNode[];
   items?: ToolbarItem[];
+  theme: Theme;
 };
 
-const Toolbar: FunctionComponent<ToolbarProps> = ({ items, children = [] }) => {
+const Toolbar: FunctionComponent<ToolbarProps> = ({
+  items,
+  children = [],
+  theme,
+}) => {
   return (
-    <ToolbarWrapper>
+    <ToolbarWrapper theme={theme}>
       {items?.map(({ label, id, icon }, index) => {
         return (
           <ToolbarListItem aria-label={label} key={id}>

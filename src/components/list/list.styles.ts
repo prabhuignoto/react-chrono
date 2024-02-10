@@ -21,12 +21,7 @@ const commonStyles = `
     margin-bottom: 0;
   }
 
-  &:hover {
-    background-color: ${BACKGROUND_COLOR};
-    border: 1px solid ${(p: { theme: Theme }) => p.theme.primary};
-    cursor: pointer;
-  }
-`;
+  `;
 
 // List styles
 export const ListStyle = styled.ul`
@@ -49,6 +44,11 @@ export const ListItemStyle = styled.li<{
   border: ${(p) =>
     p.active ? `1px solid ${p.theme.primary}` : '1px solid transparent'};
   flex-direction: ${(p) => (p.selectable ? 'row' : 'column')};
+  background: ${(p) => p.theme.toolbarBtnBgColor};
+  &:hover {
+    border: 1px solid ${(p) => p.theme.primary};
+    cursor: pointer;
+  }
 `;
 
 // Title styles
@@ -62,13 +62,14 @@ export const TitleStyle = styled.h1<{ theme: Theme }>`
 `;
 
 // Title description styles
-export const TitleDescriptionStyle = styled.p`
+export const TitleDescriptionStyle = styled.p<{ theme: Theme }>`
   font-size: 0.8rem;
   font-weight: normal;
   margin: 0;
   padding: 0.1rem;
   text-align: left;
   width: 100%;
+  color: ${(p) => p.theme.cardSubtitleColor};
 `;
 
 // Checkbox wrapper styles
@@ -84,7 +85,7 @@ export const CheckboxStyle = styled.span<{ selected?: boolean; theme: Theme }>`
   align-items: center;
   background-color: white;
   ${(p) => !p.selected && `box-shadow: inset 0 0 0 1px ${BORDER_COLOR};`}
-  background: ${(p) => (p.selected ? p.theme.primary : '#fff')};
+  background: ${(p) => (p.selected ? p.theme.primary : p.theme.toolbarBgColor)};
   color: #fff;
   border-radius: 50%;
   display: flex;

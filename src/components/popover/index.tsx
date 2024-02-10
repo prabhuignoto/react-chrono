@@ -41,14 +41,18 @@ const PopOver: FunctionComponent<PopOverModel> = ({
 
   return (
     <PopoverWrapper ref={ref}>
-      <Selecter role="button" onClick={toggleOpen}>
+      <Selecter role="button" onClick={toggleOpen} theme={theme}>
         <SelecterIcon theme={theme}>
           {open ? <ChevronUp /> : <ChevronDown />}
         </SelecterIcon>
         <SelecterLabel>{placeholder}</SelecterLabel>
       </Selecter>
       {open ? (
-        <PopoverHolder position={position} style={{ width: `${width}` }}>
+        <PopoverHolder
+          position={position}
+          style={{ width: `${width}` }}
+          theme={theme}
+        >
           <Header>
             <CloseButton theme={theme} onClick={closePopover}>
               <CloseIcon />
