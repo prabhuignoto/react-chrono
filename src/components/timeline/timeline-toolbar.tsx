@@ -24,7 +24,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   onUpdateTimelineMode,
   mode,
 }) => {
-  const { theme, cardLess, enableQuickJump, darkMode } =
+  const { theme, cardLess, enableQuickJump, darkMode, toolbarPosition } =
     useContext(GlobalContext);
 
   const toolbarItems = useMemo(() => {
@@ -86,6 +86,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           }))}
           onActivateItem={onActivateTimelineItem}
           theme={theme}
+          position={toolbarPosition}
         />
       ) : null}
       {!cardLess ? (
@@ -94,6 +95,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           theme={theme}
           onUpdateTimelineMode={onUpdateTimelineMode}
           mode={mode}
+          position={toolbarPosition}
         />
       ) : null}
     </Toolbar>

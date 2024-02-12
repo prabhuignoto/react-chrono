@@ -11,6 +11,16 @@ type LayoutSwitcherProp = {
   isDarkMode: boolean;
   mode?: TimelineMode;
   onUpdateTimelineMode: (s: string) => void;
+  position: 'top' | 'bottom';
+  theme: Theme;
+};
+
+type QuickJumpProp = {
+  activeItem: number;
+  isDarkMode: boolean;
+  items: ListItemModel[];
+  onActivateItem: (id: string) => void;
+  position: 'top' | 'bottom';
   theme: Theme;
 };
 
@@ -19,6 +29,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   theme,
   mode,
   isDarkMode,
+  position,
 }: LayoutSwitcherProp) => {
   const { showAllCardsHorizontal } = useContext(GlobalContext);
 
@@ -68,7 +79,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   return (
     <PopOver
       placeholder="Change layout"
-      position="down"
+      position={position}
       theme={theme}
       isDarkMode={isDarkMode}
     >
@@ -81,25 +92,18 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   );
 };
 
-type QuickJumpProp = {
-  activeItem: number;
-  isDarkMode: boolean;
-  items: ListItemModel[];
-  onActivateItem: (id: string) => void;
-  theme: Theme;
-};
-
 const QuickJump: FunctionComponent<QuickJumpProp> = ({
   activeItem,
   items,
   theme,
   onActivateItem,
   isDarkMode,
+  position,
 }: QuickJumpProp) => {
   return (
     <PopOver
       placeholder="Jump to a date"
-      position="down"
+      position={position}
       theme={theme}
       width={'400px'}
       isDarkMode={isDarkMode}

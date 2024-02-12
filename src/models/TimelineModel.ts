@@ -213,6 +213,8 @@ export type TimelineProps = {
 
   titleDateFormat?: string;
 
+  toolbarPosition: "top" | "bottom";
+
   uniqueId?: string;
 
   // enables the read more button

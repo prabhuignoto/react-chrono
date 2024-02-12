@@ -133,6 +133,7 @@ export const VerticalBasic: FunctionComponent<{
         parseDetailsAsHTML
         highlightCardsOnHover
         enableQuickJump={true}
+        toolbarPosition='top'
         // textOverlay
         // borderLessCards
         // theme={{

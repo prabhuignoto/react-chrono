@@ -63,6 +63,7 @@ export const Wrapper = styled.div<{
 export const TimelineMainWrapper = styled.div<{
   $scrollable?: boolean | { scrollbar: boolean };
   mode?: TimelineMode;
+  position?: 'top' | 'bottom';
   theme?: Theme;
 }>`
   align-items: flex-start;
@@ -74,6 +75,7 @@ export const TimelineMainWrapper = styled.div<{
   ${(p) => (p.mode === 'HORIZONTAL' ? 'position: relative' : '')};
   scroll-behavior: smooth;
   width: 100%;
+  order: ${(p) => (p.position === 'top' ? 1 : 0)};
 
   ${ScrollBar}
 
@@ -148,12 +150,13 @@ export const TimelineContentRender = styled.div<{ $showAllCards?: boolean }>`
   overflow-x: hidden;
 `;
 
-export const ToolbarWrapper = styled.div`
+export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
   display: flex;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
   border-radius: 6px;
   width: 100%;
-  margin-bottom: 20px;
+  margin: ${(p) => (p.position === 'top' ? '0 0 20px 0' : '20px 0 0 0')};
+  order: ${(p) => (p.position === 'top' ? 0 : 1)};
 `;

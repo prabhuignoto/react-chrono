@@ -70,6 +70,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     verticalBreakPoint = 768,
     enableBreakPoint,
     updateHorizontalAllCards,
+    toolbarPosition
   } = useContext(GlobalContext);
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -367,7 +368,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       }}
     >
       {!isChild ? (
-        <ToolbarWrapper>
+        <ToolbarWrapper position={toolbarPosition}>
           <TimelineToolbar
             activeTimelineItem={activeTimelineItem}
             totalItems={items.length}
@@ -398,6 +399,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         data-testid="timeline-main-wrapper"
         theme={theme}
         mode={mode}
+        position={toolbarPosition}
         onScroll={(ev) => {
           const target = ev.target as HTMLElement;
           let scrolled = 0;

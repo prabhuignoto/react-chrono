@@ -1,11 +1,10 @@
 import { Theme } from '@models/Theme';
 import styled from 'styled-components';
-import { PopoverPosition } from './popover.model';
 
 export const PopoverWrapper = styled.div``;
 
 export const PopoverHolder = styled.div<{
-  position: PopoverPosition;
+  position?: 'top' | 'bottom';
   theme?: Theme;
   visible?: boolean;
 }>`
@@ -21,7 +20,7 @@ export const PopoverHolder = styled.div<{
   overflow-y: auto;
   padding: 0.5rem;
   position: absolute;
-  top: 3.5rem;
+  ${(p) => (p.position === 'bottom' ? `bottom: 3.5rem` : `top: 3.5rem`)};
   width: 100%;
   z-index: 100;
   opacity: ${({ visible }) => (visible ? 1 : 0)};

@@ -5,9 +5,7 @@ export type PopOverModel = {
   children: ReactNode | ReactNode[];
   isDarkMode?: boolean;
   placeholder?: string;
-  position: PopoverPosition;
+  position: 'top' | 'bottom';
   theme?: Theme;
   width?: string | number;
 };
-
-export type PopoverPosition = 'up' | 'down' | 'left' | 'right';
