@@ -34,11 +34,11 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   const { showAllCardsHorizontal } = useContext(GlobalContext);
 
   const activeTimelineMode = useMemo(
-    () => (showAllCardsHorizontal ? 'HORIZONTAL_ALL' : mode),
+    () => (mode === "HORIZONTAL" && showAllCardsHorizontal ? 'HORIZONTAL_ALL' : mode),
     [showAllCardsHorizontal, mode],
   );
 
-  // console.log(mode);
+  console.log(activeTimelineMode);
   const verticalItems = useMemo(
     () => [
       {
