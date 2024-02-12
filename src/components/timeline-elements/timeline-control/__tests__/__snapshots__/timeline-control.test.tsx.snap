@@ -6,7 +6,7 @@ exports[`TimelineControl > should render 1`] = `
     class="sc-hLQSwg hGvNdL"
   >
     <ul
-      class="sc-beySPh bdjoXO timeline-controls controls"
+      class="sc-beySPh ehyWQn timeline-controls controls"
     >
       <li
         class="sc-guDLey iDgMta"
@@ -15,7 +15,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="first"
-          class="sc-dmyCSP kvqOXu"
+          class="sc-dmyCSP jHRQDe"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
           tabindex="0"
@@ -49,7 +49,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="previous"
-          class="sc-dmyCSP kvqOXu"
+          class="sc-dmyCSP jHRQDe"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
           tabindex="0"
@@ -80,7 +80,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="next"
-          class="sc-dmyCSP kvqOXu"
+          class="sc-dmyCSP jHRQDe"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
           tabindex="0"
@@ -111,7 +111,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="last"
-          class="sc-dmyCSP kvqOXu"
+          class="sc-dmyCSP jHRQDe"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
           tabindex="0"
@@ -147,7 +147,7 @@ exports[`TimelineControl > should render 1`] = `
         <button
           aria-controls="timeline-main-wrapper"
           aria-label="dark"
-          class="sc-dmyCSP dtfsJm"
+          class="sc-dmyCSP cFGuoW"
           tabindex="0"
           title="dark"
         >

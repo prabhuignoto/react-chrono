@@ -70,14 +70,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     verticalBreakPoint = 768,
     enableBreakPoint,
     updateHorizontalAllCards,
-    toolbarPosition
+    toolbarPosition,
   } = useContext(GlobalContext);
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
   const [hasFocus, setHasFocus] = useState(false);
   const horizontalContentRef = useRef<HTMLDivElement | null>(null);
-  const [timelineMode, setTimelineMode] = useState(mode);
+  const [timelineMode, setTimelineMode] = useState(
+    mode === 'HORIZONTAL' && showAllCardsHorizontal ? 'HORIZONTAL_ALL' : mode,
+  );
 
   const activeItemIndex = useRef<number>(activeTimelineItem);
 
@@ -332,6 +334,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   );
 
   const handleTimelineUpdate = useCallback((mode: string) => {
+    // console.log(timelineMode);
     if (mode === 'VERTICAL') {
       setTimelineMode('VERTICAL');
     } else if (mode === 'HORIZONTAL') {
@@ -340,10 +343,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     } else if (mode === 'VERTICAL_ALTERNATING') {
       setTimelineMode('VERTICAL_ALTERNATING');
     } else if (mode === 'HORIZONTAL_ALL') {
-      setTimelineMode('HORIZONTAL');
+      setTimelineMode('HORIZONTAL_ALL');
       updateHorizontalAllCards?.(true);
     }
   }, []);
+
+  useEffect(() => {
+    console.log('this is error', showAllCardsHorizontal);
+  }, [showAllCardsHorizontal]);
 
   const wrapperClass = useMemo(() => {
     return cls(mode.toLocaleLowerCase(), {
@@ -442,7 +449,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         ) : null}
 
         {/* HORIZONTAL */}
-        {timelineMode === 'HORIZONTAL' ? (
+        {timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL' ? (
           <TimelineMain className={mode.toLowerCase()}>
             <Outline color={theme && theme.primary} height={lineWidth} />
             <TimelineHorizontal

@@ -102,7 +102,6 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           scrollable: {
             scrollbar: false,
           },
-          showAllCardsHorizontal: horizontalAll,
           showProgressOnSlideshow: slideShow,
           slideItemDuration: 2000,
           slideShowType: getSlideShowType(mode),
@@ -140,6 +139,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           imageFit: 'cover',
           ...mediaSettings,
         },
+        showAllCardsHorizontal: horizontalAll,
         theme: {
           ...getDefaultThemeOrDark(isDarkMode),
           ...theme,

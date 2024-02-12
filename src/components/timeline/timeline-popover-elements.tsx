@@ -34,11 +34,10 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   const { showAllCardsHorizontal } = useContext(GlobalContext);
 
   const activeTimelineMode = useMemo(
-    () => (mode === "HORIZONTAL" && showAllCardsHorizontal ? 'HORIZONTAL_ALL' : mode),
+    () => mode,
     [showAllCardsHorizontal, mode],
   );
 
-  console.log(activeTimelineMode);
   const verticalItems = useMemo(
     () => [
       {
@@ -62,13 +61,17 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
     () => [
       {
         id: 'HORIZONTAL',
-        onSelect: () => onUpdateTimelineMode('HORIZONTAL'),
+        onSelect: () => {
+          onUpdateTimelineMode('HORIZONTAL');
+        },
         selected: activeTimelineMode === 'HORIZONTAL',
         title: 'Default',
       },
       {
         id: 'HORIZONTAL_ALL',
-        onSelect: () => onUpdateTimelineMode('HORIZONTAL_ALL'),
+        onSelect: () => {
+          onUpdateTimelineMode('HORIZONTAL_ALL');
+        },
         selected: activeTimelineMode === 'HORIZONTAL_ALL',
         title: 'Show all cards',
       },
@@ -84,7 +87,11 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
       isDarkMode={isDarkMode}
     >
       <List
-        items={mode === 'HORIZONTAL' ? horizontalItems : verticalItems}
+        items={
+          mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL'
+            ? horizontalItems
+            : verticalItems
+        }
         theme={theme}
         multiSelectable
       />

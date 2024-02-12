@@ -213,7 +213,7 @@ export type TimelineProps = {
 
   titleDateFormat?: string;
 
-  toolbarPosition: "top" | "bottom";
+  toolbarPosition: 'top' | 'bottom';
 
   uniqueId?: string;
 
@@ -225,4 +225,8 @@ export type TimelineProps = {
 
 export type SlideShowType = 'reveal' | 'slide_in' | 'slide_from_sides';
 
-export type TimelineMode = 'VERTICAL' | 'HORIZONTAL' | 'VERTICAL_ALTERNATING';
+export type TimelineMode =
+  | 'VERTICAL'
+  | 'HORIZONTAL'
+  | 'VERTICAL_ALTERNATING'
+  | 'HORIZONTAL_ALL';
