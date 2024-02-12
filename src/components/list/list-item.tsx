@@ -1,5 +1,5 @@
 import { TimelineModel } from '@models/TimelineModel';
-import { FunctionComponent, memo, useCallback } from 'react';
+import { FunctionComponent, KeyboardEvent, memo, useCallback } from 'react';
 import { CheckIcon } from '../icons';
 import {
   CheckboxStyle,
@@ -33,6 +33,12 @@ const ListItem: FunctionComponent<ListItemProps> = memo(
   }: ListItemProps) => {
     const handleOnClick = useCallback((id: string) => onClick?.(id), []);
 
+    const handleKeyPress = useCallback((ev: KeyboardEvent, id: string) => {
+      if (ev.key === 'Enter') {
+        handleOnClick(id);
+      }
+    }, []);
+
     return (
       <ListItemStyle
         key={id}
@@ -41,6 +47,7 @@ const ListItem: FunctionComponent<ListItemProps> = memo(
         active={active}
         tabIndex={0}
         selectable={selectable}
+        onKeyUp={(ev) => handleKeyPress(ev, id)}
       >
         {selectable ? (
           <CheckboxWrapper>

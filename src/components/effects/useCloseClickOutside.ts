@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef } from 'react';
+import { RefObject, useCallback, useEffect, useRef } from 'react';
 
 export default function useCloseClickOutside(
   el: RefObject<HTMLDivElement>,
@@ -6,7 +6,7 @@ export default function useCloseClickOutside(
 ) {
   const htmlElement = useRef<HTMLElement>();
 
-  const handleClick = (e: MouseEvent) => {
+  const handleClick = useCallback((e: MouseEvent) => {
     const element = htmlElement.current;
 
     if (element) {
@@ -14,18 +14,32 @@ export default function useCloseClickOutside(
         callback();
       }
     }
-  };
+  }, []);
+
+  const handleEscape = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      callback();
+    }
+  }, []);
 
   useEffect(() => {
     const element = el.current;
 
     if (element) {
       htmlElement.current = element;
+
+      element.addEventListener('keyup', handleEscape);
     }
   }, [el, callback]);
 
   useEffect(() => {
     document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
+    return () => {
+      const element = htmlElement.current;
+      if (element) {
+        element.removeEventListener('keyup', handleEscape);
+      }
+      document.removeEventListener('click', handleClick);
+    };
   }, []);
 }

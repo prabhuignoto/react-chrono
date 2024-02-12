@@ -43,6 +43,7 @@
   "dependencies": {
     "classnames": "^2.5.1",
     "dayjs": "^1.11.10",
+    "focus-visible": "^5.2.0",
     "styled-components": "^6.1.8",
     "xss": "^1.0.14"
   },

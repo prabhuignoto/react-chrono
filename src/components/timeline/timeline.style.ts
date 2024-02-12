@@ -52,7 +52,7 @@ export const Wrapper = styled.div<{
   }
 
   &.js-focus-visible :focus:not(.focus-visible) {
-    outline: 0;
+    // outline: 0;
   }
 
   &.js-focus-visible .focus-visible {

@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useRef, useState } from 'react';
+import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
 import useCloseClickOutside from '../effects/useCloseClickOutside';
 import { ChevronDown, CloseIcon } from '../icons';
 import { PopOverModel } from './popover.model';
@@ -22,13 +22,18 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   isDarkMode = false,
 }) => {
   const [open, setOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
   const toggleOpen = () => setOpen(!open);
 
   const closePopover = () => setOpen(false);
 
-  const [isVisible, setIsVisible] = useState(false);
-
-  const ref = useRef<HTMLDivElement>(null);
+  const handleKeyPress = (ev: React.KeyboardEvent) => {
+    if (ev.key === 'Enter') {
+      toggleOpen();
+    }
+  };
 
   useCloseClickOutside(ref, closePopover);
 
@@ -50,6 +55,8 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         theme={theme}
         open={open}
         isDarkMode={isDarkMode}
+        tabIndex={0}
+        onKeyUp={handleKeyPress}
       >
         <SelecterIcon theme={theme} open={open}>
           <ChevronDown />

@@ -83,6 +83,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           items={items.map((item) => ({
             ...item,
             description: item.cardSubtitle,
+            title: item.title,
           }))}
           onActivateItem={onActivateTimelineItem}
           theme={theme}
