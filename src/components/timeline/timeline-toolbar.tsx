@@ -9,7 +9,6 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   activeTimelineItem,
   slideShowEnabled,
   slideShowRunning,
-  darkMode,
   flipLayout,
   toggleDarkMode,
   onPaused,
@@ -25,9 +24,9 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   onUpdateTimelineMode,
   mode,
 }) => {
-  const { theme, cardLess, enableQuickJump } = useContext(GlobalContext);
+  const { theme, cardLess, enableQuickJump, darkMode } =
+    useContext(GlobalContext);
 
-  console.log(theme);
   const toolbarItems = useMemo(() => {
     return [
       {
@@ -80,6 +79,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       {enableQuickJump ? (
         <QuickJump
           activeItem={activeTimelineItem}
+          isDarkMode={darkMode}
           items={items.map((item) => ({
             ...item,
             description: item.cardSubtitle,
@@ -90,6 +90,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       ) : null}
       {!cardLess ? (
         <LayoutSwitcher
+          isDarkMode={darkMode}
           theme={theme}
           onUpdateTimelineMode={onUpdateTimelineMode}
           mode={mode}

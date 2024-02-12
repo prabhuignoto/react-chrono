@@ -8,6 +8,7 @@ import { PopOver } from '../popover';
 
 type LayoutSwitcherProp = {
   initialTimelineMode?: TimelineMode | 'HORIZONTAL_ALL';
+  isDarkMode: boolean;
   mode?: TimelineMode;
   onUpdateTimelineMode: (s: string) => void;
   theme: Theme;
@@ -17,6 +18,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   onUpdateTimelineMode,
   theme,
   mode,
+  isDarkMode,
 }: LayoutSwitcherProp) => {
   const { showAllCardsHorizontal } = useContext(GlobalContext);
 
@@ -64,7 +66,12 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   );
 
   return (
-    <PopOver placeholder="Change layout" position="down" theme={theme}>
+    <PopOver
+      placeholder="Change layout"
+      position="down"
+      theme={theme}
+      isDarkMode={isDarkMode}
+    >
       <List
         items={mode === 'HORIZONTAL' ? horizontalItems : verticalItems}
         theme={theme}
@@ -76,6 +83,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
 
 type QuickJumpProp = {
   activeItem: number;
+  isDarkMode: boolean;
   items: ListItemModel[];
   onActivateItem: (id: string) => void;
   theme: Theme;
@@ -86,6 +94,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
   items,
   theme,
   onActivateItem,
+  isDarkMode,
 }: QuickJumpProp) => {
   return (
     <PopOver
@@ -93,6 +102,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
       position="down"
       theme={theme}
       width={'400px'}
+      isDarkMode={isDarkMode}
     >
       <List
         items={items.map((item, index) => ({

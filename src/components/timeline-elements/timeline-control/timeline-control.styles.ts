@@ -55,8 +55,8 @@ export const TimelineNavButton = styled.button<{
   }
 
   svg {
-    width: 80%;
-    height: 80%;
+    width: 60%;
+    height: 60%;
   }
 `;
 
@@ -80,8 +80,8 @@ export const ControlButton = styled.button<{ theme?: Theme }>`
   color: #fff;
 
   svg {
-    width: 70%;
-    height: 70%;
+    width: 80%;
+    height: 80%;
   }
 `;
 

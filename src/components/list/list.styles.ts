@@ -30,7 +30,7 @@ export const ListStyle = styled.ul`
   justify-content: flex-start;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0;popo
   width: 100%;
 `;
 
@@ -49,6 +49,7 @@ export const ListItemStyle = styled.li<{
     border: 1px solid ${(p) => p.theme.primary};
     cursor: pointer;
   }
+  user-select: none;
 `;
 
 // Title styles

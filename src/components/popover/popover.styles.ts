@@ -1,18 +1,19 @@
 import { Theme } from '@models/Theme';
 import styled from 'styled-components';
-import { PopoverPosition } from '.';
+import { PopoverPosition } from './popover.model';
 
 export const PopoverWrapper = styled.div``;
 
 export const PopoverHolder = styled.div<{
   position: PopoverPosition;
   theme?: Theme;
+  visible?: boolean;
 }>`
   align-items: flex-start;
   background: ${({ theme }) => theme.toolbarBgColor};
   background:;
   border-radius: 6px;
-  box-shadow: 0px 5px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 16px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -23,30 +24,40 @@ export const PopoverHolder = styled.div<{
   top: 3.5rem;
   width: 100%;
   z-index: 100;
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  transition: opacity 0.1s ease-in-out;
 `;
 
-export const Selecter = styled.div<{ theme: Theme }>`
+export const Selecter = styled.div<{
+  isDarkMode: boolean;
+  open?: boolean;
+  theme: Theme;
+}>`
   align-items: center;
   background: ${({ theme }) => theme.toolbarBtnBgColor};
   color: ${({ theme }) => theme.toolbarTextColor};
   border-radius: 25px;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: ${({ open, isDarkMode }) =>
+    !open
+      ? `0px 1px 1px rgba(0, 0, 0, ${isDarkMode ? '0.85' : '0.2'})`
+      : 'inset 0 0 1px 1px rgba(0, 0, 0, 0.2)'};
   cursor: pointer;
   display: flex;
-  font-size: 1rem;
   font-weight: normal;
   justify-content: space-between;
-  padding: 0.35rem 0.75rem 0.35rem 0.5rem;
+  padding: 0.4rem 0.75rem 0.4rem 0.5rem;
   user-select: none;
 `;
 
-export const SelecterIcon = styled.span<{ theme: Theme }>`
+export const SelecterIcon = styled.span<{ open: boolean; theme: Theme }>`
   align-items: center;
-  color: ${({ theme }) => theme.toolbarTextColor};
+  color: ${({ theme }) => theme.primary};
   display: flex;
-  height: 1.5rem;
+  height: 1.25rem;
   justify-content: center;
-  width: 1.5rem;
+  width: 1.25rem;
+  transform: ${({ open }) => (open ? 'rotate(180deg)' : 'rotate(0deg)')};
+  transition: transform 0.2s ease-in-out;
 
   & svg {
     height: 100%;
@@ -55,7 +66,7 @@ export const SelecterIcon = styled.span<{ theme: Theme }>`
 `;
 
 export const SelecterLabel = styled.span`
-  font-size: 1rem;
+  font-size: 0.9rem;
   text-align: left;
 `;
 
