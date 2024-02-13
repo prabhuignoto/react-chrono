@@ -31,7 +31,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   isDarkMode,
   position,
 }: LayoutSwitcherProp) => {
-  const { showAllCardsHorizontal } = useContext(GlobalContext);
+  const { showAllCardsHorizontal, buttonTexts } = useContext(GlobalContext);
 
   const activeTimelineMode = useMemo(
     () => mode,
@@ -81,7 +81,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
 
   return (
     <PopOver
-      placeholder="Change layout"
+      placeholder={buttonTexts.changeLayout}
       position={position}
       theme={theme}
       isDarkMode={isDarkMode}
@@ -107,9 +107,10 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
   isDarkMode,
   position,
 }: QuickJumpProp) => {
+  const {buttonTexts} = useContext(GlobalContext);
   return (
     <PopOver
-      placeholder="Jump to a date"
+      placeholder={buttonTexts.jumpTo}
       position={position}
       theme={theme}
       width={'400px'}

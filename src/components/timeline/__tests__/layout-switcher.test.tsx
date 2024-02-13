@@ -1,5 +1,6 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
-import { getDefaultThemeOrDark } from '@utils/index';
+import { getDefaultButtonTexts, getDefaultThemeOrDark } from '@utils/index';
+import GlobalContextProvider from 'src/components/GlobalContext';
 import { vi } from 'vitest';
 import { LayoutSwitcher, QuickJump } from '../timeline-popover-elements';
 
@@ -11,13 +12,18 @@ describe('LayoutSwitcher Component', () => {
 
   test('Renders correctly with vertical layout options', () => {
     const { getByText } = render(
-      <LayoutSwitcher
-        onUpdateTimelineMode={onUpdateTimelineMode}
+      <GlobalContextProvider
         theme={theme}
-        mode="VERTICAL"
-        isDarkMode={isDarkMode}
-        position={position}
-      />,
+        buttonTexts={getDefaultButtonTexts()}
+      >
+        <LayoutSwitcher
+          onUpdateTimelineMode={onUpdateTimelineMode}
+          theme={theme}
+          mode="VERTICAL"
+          isDarkMode={isDarkMode}
+          position={position}
+        />
+      </GlobalContextProvider>,
     );
 
     // Add your assertions here
@@ -31,13 +37,18 @@ describe('LayoutSwitcher Component', () => {
 
   test('Renders correctly with horizontal layout options', () => {
     const { getByText } = render(
-      <LayoutSwitcher
-        onUpdateTimelineMode={onUpdateTimelineMode}
+      <GlobalContextProvider
         theme={theme}
-        mode="HORIZONTAL"
-        isDarkMode={isDarkMode}
-        position={position}
-      />,
+        buttonTexts={getDefaultButtonTexts()}
+      >
+        <LayoutSwitcher
+          onUpdateTimelineMode={onUpdateTimelineMode}
+          theme={theme}
+          mode="HORIZONTAL"
+          isDarkMode={isDarkMode}
+          position={position}
+        />
+      </GlobalContextProvider>,
     );
 
     // Add your assertions here
@@ -51,13 +62,18 @@ describe('LayoutSwitcher Component', () => {
 
   test('Handles mode selection correctly', async () => {
     const { getByText } = render(
-      <LayoutSwitcher
-        onUpdateTimelineMode={onUpdateTimelineMode}
+      <GlobalContextProvider
         theme={theme}
-        mode="VERTICAL"
-        isDarkMode={isDarkMode}
-        position={position}
-      />,
+        buttonTexts={getDefaultButtonTexts()}
+      >
+        <LayoutSwitcher
+          onUpdateTimelineMode={onUpdateTimelineMode}
+          theme={theme}
+          mode="VERTICAL"
+          isDarkMode={isDarkMode}
+          position={position}
+        />
+      </GlobalContextProvider>,
     );
 
     expect(getByText('Change layout')).toBeInTheDocument();
@@ -87,21 +103,26 @@ describe('QuickJump Component', () => {
 
   test('Renders correctly with provided items', () => {
     const { getByText } = render(
-      <QuickJump
-        activeItem={0}
-        items={items}
+      <GlobalContextProvider
         theme={theme}
-        onActivateItem={onActivateItem}
-        isDarkMode={isDarkMode}
-        position={position}
-      />,
+        buttonTexts={getDefaultButtonTexts()}
+      >
+        <QuickJump
+          activeItem={0}
+          items={items}
+          theme={theme}
+          onActivateItem={onActivateItem}
+          isDarkMode={isDarkMode}
+          position={position}
+        />
+      </GlobalContextProvider>,
     );
 
     // Add your assertions here
 
-    expect(getByText('Jump to a date')).toBeInTheDocument();
+    expect(getByText('Jump to')).toBeInTheDocument();
 
-    fireEvent.click(getByText('Jump to a date'));
+    fireEvent.click(getByText('Jump to'));
 
     expect(getByText('Item 1')).toBeInTheDocument();
     expect(getByText('Item 2')).toBeInTheDocument();
@@ -109,19 +130,24 @@ describe('QuickJump Component', () => {
 
   test('Handles item activation correctly', () => {
     const { getByText } = render(
-      <QuickJump
-        activeItem={0}
-        items={items}
+      <GlobalContextProvider
         theme={theme}
-        onActivateItem={onActivateItem}
-        isDarkMode={isDarkMode}
-        position={position}
-      />,
+        buttonTexts={getDefaultButtonTexts()}
+      >
+        <QuickJump
+          activeItem={0}
+          items={items}
+          theme={theme}
+          onActivateItem={onActivateItem}
+          isDarkMode={isDarkMode}
+          position={position}
+        />
+      </GlobalContextProvider>,
     );
 
-    expect(getByText('Jump to a date')).toBeInTheDocument();
+    expect(getByText('Jump to')).toBeInTheDocument();
 
-    fireEvent.click(getByText('Jump to a date'));
+    fireEvent.click(getByText('Jump to'));
 
     // Simulate clicking on an item
     fireEvent.click(getByText('Item 1'));

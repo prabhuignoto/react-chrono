@@ -60,8 +60,10 @@ export type TimelineProps = {
 
   // custom button texts
   buttonTexts?: {
+    changeLayout?: string;
     dark?: string;
     first: string;
+    jumpTo?: string;
     last: string;
     light?: string;
     next?: string;

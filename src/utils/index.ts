@@ -28,8 +28,10 @@ export const getDefaultClassNames = () => ({
 });
 
 export const getDefaultButtonTexts = () => ({
+  changeLayout: 'Change layout',
   dark: 'Switch to Dark Mode',
   first: 'Go to First',
+  jumpTo: 'Jump to',
   last: 'Go to Last',
   light: 'Switch to Light Mode',
   next: 'Next',
