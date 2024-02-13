@@ -35,7 +35,6 @@ export const TimelineNavButton = styled.button<{
   color: #fff;
   cursor: pointer;
   display: flex;
-  // filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.25));
   height: 24px;
   justify-content: center;
   margin: 0 0.2em;
@@ -55,8 +54,8 @@ export const TimelineNavButton = styled.button<{
   }
 
   svg {
-    width: 60%;
-    height: 60%;
+    width: 65%;
+    height: 65%;
   }
 `;
 

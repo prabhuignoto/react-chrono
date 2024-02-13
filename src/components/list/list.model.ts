@@ -8,9 +8,11 @@ export type ListModel = {
 } & Pick<TimelineModel, 'theme'>;
 
 export type ListItemModel = {
-  description?: string;
-  id?: string;
-  onSelect?: (id?: string) => void;
+  active?: boolean;
+  description: string;
+  id: string;
+  onClick?: (id: string) => void;
+  selectable?: boolean;
   selected?: boolean;
   title: string;
-};
+} & Pick<TimelineModel, 'theme'>;

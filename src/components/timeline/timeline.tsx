@@ -112,14 +112,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     enableBreakPoint,
   );
 
-  // useMatchMedia(
-  //   `(min-width: ${verticalBreakPoint + 1}px)`,
-  //   () => {
-  //     setTimelineMode(mode);
-  //   },
-  //   enableBreakPoint,
-  // );
-
   // handlers for navigation
   const handleNext = useCallback(() => {
     if (hasFocus) {
@@ -193,12 +185,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           break;
         }
       }
-
-      // const selectedItem = items.find((item) => item.id === itemId);
-
-      // if (selectedItem) {
-      //   onItemSelected?.(selectedItem);
-      // }
     }
   };
 
@@ -334,7 +320,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   );
 
   const handleTimelineUpdate = useCallback((mode: string) => {
-    // console.log(timelineMode);
     if (mode === 'VERTICAL') {
       setTimelineMode('VERTICAL');
     } else if (mode === 'HORIZONTAL') {
@@ -347,10 +332,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       updateHorizontalAllCards?.(true);
     }
   }, []);
-
-  useEffect(() => {
-    console.log('this is error', showAllCardsHorizontal);
-  }, [showAllCardsHorizontal]);
 
   const wrapperClass = useMemo(() => {
     return cls(mode.toLocaleLowerCase(), {
