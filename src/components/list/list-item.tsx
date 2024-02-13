@@ -43,7 +43,7 @@ const ListItem: FunctionComponent<ListItemProps> = memo(
       <ListItemStyle
         key={id}
         theme={theme}
-        onClick={() => handleOnClick?.(id)}
+        onClick={() => handleOnClick(id)}
         active={active}
         tabIndex={0}
         selectable={selectable}
