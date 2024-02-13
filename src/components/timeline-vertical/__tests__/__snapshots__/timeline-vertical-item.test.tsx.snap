@@ -64,7 +64,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     </div>
     <div
       bg="#0f52ba"
-      class="sc-dxjrPO iiVOGa"
+      class="sc-dxjrPO cPtfAH"
       data-testid="tree-leaf"
     >
       <button

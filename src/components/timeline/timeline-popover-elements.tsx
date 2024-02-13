@@ -2,9 +2,9 @@ import { Theme } from '@models/Theme';
 import { TimelineMode } from '@models/TimelineModel';
 import { FunctionComponent, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
-import { List } from '../list/list';
-import { ListItemModel } from '../list/list.model';
-import { PopOver } from '../popover';
+import { List } from '../elements/list/list';
+import { ListItemModel } from '../elements/list/list.model';
+import { PopOver } from '../elements/popover';
 
 type LayoutSwitcherProp = {
   initialTimelineMode?: TimelineMode | 'HORIZONTAL_ALL';
