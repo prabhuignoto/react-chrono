@@ -10,7 +10,7 @@ export default defineConfig({
   test: {
     coverage: {
       // clean: true,
-      enabled: false,
+      enabled: true,
       exclude: [
         '**/*.d.ts',
         'src/components/index.tsx',
