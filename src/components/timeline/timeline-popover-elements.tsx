@@ -107,7 +107,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
   isDarkMode,
   position,
 }: QuickJumpProp) => {
-  const {buttonTexts} = useContext(GlobalContext);
+  const { buttonTexts } = useContext(GlobalContext);
   return (
     <PopOver
       placeholder={buttonTexts.jumpTo}

@@ -247,8 +247,8 @@ devDependencies:
     specifier: ^1.70.0
     version: 1.70.0
   semver:
-    specifier: 7.6.0
-    version: 7.6.0
+    specifier: 7.5.4
+    version: 7.5.4
   size-limit:
     specifier: ^11.0.2
     version: 11.0.2
@@ -11093,14 +11093,6 @@ packages:
 
   /semver@7.5.4:
     resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      lru-cache: 6.0.0
-    dev: true
-
-  /semver@7.6.0:
-    resolution: {integrity: sha512-EnwXhrlwXMk9gKu5/flx5sv/an57AkRplG3hTK68W7FRDN+k+OWBj65M7719OkA82XLBxrcX0KSHj+X5COhOVg==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:

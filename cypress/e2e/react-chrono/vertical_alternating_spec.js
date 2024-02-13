@@ -64,14 +64,14 @@ context('Chrono.Vertical.Alternating.Mixed', () => {
 
   it('check read more action', () => {
     cy.get('.vertical-item-row')
-      .eq(1)
+      .eq(2)
       .find('.card-description')
       .should('have.class', 'show-less');
     // cy.scrollTo(700);
-    cy.get('.vertical-item-row').eq(1).find('.show-more').click();
+    cy.get('.vertical-item-row').eq(2).find('.show-more').click();
     cy.wait(500);
     cy.get('.vertical-item-row')
-      .eq(1)
+      .eq(2)
       .find('.card-description')
       .should('not.have.class', 'show-less');
   });
