@@ -1,3 +1,4 @@
+// Import necessary dependencies
 import { FunctionComponent, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
@@ -5,6 +6,7 @@ import { Toolbar } from '../toolbar';
 import { LayoutSwitcher, QuickJump } from './timeline-popover-elements';
 import { TimelineToolbarProps } from './timeline-toolbar.model';
 
+// Define the TimelineToolbar component
 const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   activeTimelineItem,
   slideShowEnabled,
@@ -24,9 +26,11 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   onUpdateTimelineMode,
   mode,
 }) => {
+  // Access the global context
   const { theme, cardLess, enableQuickJump, darkMode, toolbarPosition } =
     useContext(GlobalContext);
 
+  // Define the toolbar items
   const toolbarItems = useMemo(() => {
     return [
       {
@@ -47,18 +51,21 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     ];
   }, []);
 
+  // Determine if the left arrow should be disabled
   const disableLeft = useMemo(() => {
     return flipLayout
       ? activeTimelineItem === totalItems - 1
       : activeTimelineItem === 0;
   }, [flipLayout, activeTimelineItem, totalItems]);
 
+  // Determine if the right arrow should be disabled
   const disableRight = useMemo(() => {
     return flipLayout
       ? activeTimelineItem === 0
       : activeTimelineItem === totalItems - 1;
   }, [flipLayout, activeTimelineItem, totalItems]);
 
+  // Render the TimelineToolbar component
   return (
     <Toolbar items={toolbarItems} theme={theme}>
       <TimelineControl
@@ -103,4 +110,5 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   );
 };
 
+// Export the TimelineToolbar component
 export { TimelineToolbar };
