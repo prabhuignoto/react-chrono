@@ -1,6 +1,7 @@
 // Import necessary dependencies
-import { FunctionComponent, useContext, useMemo } from 'react';
+import { FunctionComponent, useContext, useMemo, useState } from 'react';
 import { GlobalContext } from '../GlobalContext';
+import { useMatchMedia } from '../effects/useMatchMedia';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import { Toolbar } from '../toolbar';
 import {
@@ -9,6 +10,10 @@ import {
   QuickJump,
 } from './timeline-popover-elements';
 import { TimelineToolbarProps } from './timeline-toolbar.model';
+import {
+  ToolbarExtraControl,
+  ToolbarExtraControlChild,
+} from './timeline.style';
 
 // Define the TimelineToolbar component
 const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
@@ -28,11 +33,20 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   id,
   onActivateTimelineItem,
   onUpdateTimelineMode,
+  onUpdateTextContentDensity,
   mode,
 }) => {
   // Access the global context
-  const { theme, cardLess, enableQuickJump, darkMode, toolbarPosition } =
-    useContext(GlobalContext);
+  const {
+    theme,
+    cardLess,
+    enableQuickJump,
+    darkMode,
+    toolbarPosition,
+    textDensity,
+  } = useContext(GlobalContext);
+
+  const [isMobile, setIsMobile] = useState(false);
 
   // Define the toolbar items
   const toolbarItems = useMemo(() => {
@@ -59,6 +73,10 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       },
     ];
   }, []);
+
+  useMatchMedia('(max-width: 780px)', () => setIsMobile(true));
+
+  useMatchMedia('(min-width: 780px)', () => setIsMobile(false));
 
   // Determine if the left arrow should be disabled
   const disableLeft = useMemo(() => {
@@ -92,36 +110,47 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
         onToggleDarkMode={toggleDarkMode}
         onPaused={onPaused}
       />
-      {enableQuickJump ? (
-        <QuickJump
-          activeItem={activeTimelineItem}
-          isDarkMode={darkMode}
-          items={items.map((item) => ({
-            ...item,
-            description: item.cardSubtitle,
-            title: item.title,
-          }))}
-          onActivateItem={onActivateTimelineItem}
-          theme={theme}
-          position={toolbarPosition}
-        />
-      ) : null}
-      {!cardLess ? (
-        <LayoutSwitcher
-          isDarkMode={darkMode}
-          theme={theme}
-          onUpdateTimelineMode={onUpdateTimelineMode}
-          mode={mode}
-          position={toolbarPosition}
-        />
-      ) : null}
-      <ChangeDensity
-        isDarkMode={darkMode}
-        theme={theme}
-        onChange={() => {}}
-        position={toolbarPosition}
-        selectedDensity="LOW"
-      ></ChangeDensity>
+      <ToolbarExtraControl isMobile={isMobile}>
+        <ToolbarExtraControlChild>
+          {enableQuickJump ? (
+            <QuickJump
+              activeItem={activeTimelineItem}
+              isDarkMode={darkMode}
+              items={items.map((item) => ({
+                ...item,
+                description: item.cardSubtitle,
+                title: item.title,
+              }))}
+              onActivateItem={onActivateTimelineItem}
+              theme={theme}
+              position={toolbarPosition}
+              isMobile={isMobile}
+            />
+          ) : null}
+        </ToolbarExtraControlChild>
+        <ToolbarExtraControlChild>
+          {!cardLess ? (
+            <LayoutSwitcher
+              isDarkMode={darkMode}
+              theme={theme}
+              onUpdateTimelineMode={onUpdateTimelineMode}
+              mode={mode}
+              position={toolbarPosition}
+              isMobile={isMobile}
+            />
+          ) : null}
+        </ToolbarExtraControlChild>
+        <ToolbarExtraControlChild>
+          <ChangeDensity
+            isDarkMode={darkMode}
+            theme={theme}
+            onChange={onUpdateTextContentDensity}
+            position={toolbarPosition}
+            selectedDensity={textDensity}
+            isMobile={isMobile}
+          ></ChangeDensity>
+        </ToolbarExtraControlChild>
+      </ToolbarExtraControl>
     </Toolbar>
   );
 };

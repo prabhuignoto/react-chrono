@@ -1,6 +1,8 @@
 import { Theme } from './Theme';
 import { TimelineItemModel } from './TimelineItemModel';
 
+export type TextDensity = 'LOW' | 'HIGH';
+
 /**
  * model internally used by the component
  *
@@ -200,6 +202,8 @@ export type TimelineProps = {
   slideShow?: boolean;
 
   slideShowType?: SlideShowType;
+
+  textDensity?: TextDensity;
 
   textOverlay?: boolean;
 

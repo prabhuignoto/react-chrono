@@ -78,6 +78,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         showProgressOnSlideshow,
         disableInteraction,
         highlightCardsOnHover,
+        textDensity,
       } = useContext(GlobalContext);
 
       // If the media is a video, we don't show the progress bar.
@@ -228,8 +229,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       // It is only shown if the useReadMore prop is true, the detailedText is non-null,
       // and the customContent prop is false.
       const canShowReadMore = useMemo(() => {
-        return useReadMore && detailedText && !customContent;
-      }, []);
+        return (
+          useReadMore &&
+          detailedText &&
+          !customContent &&
+          textDensity === 'HIGH'
+        );
+      }, [textDensity]);
 
       // decorate the comments
       // This function is triggered when the media state changes. If the slideshow is
@@ -321,8 +327,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       // This code checks whether the textOverlay and items props are truthy. If so, then it returns false. Otherwise, it returns true.
       const canShowDetailsText = useMemo(() => {
-        return !textOverlay && !items?.length;
-      }, [items?.length]);
+        return !textOverlay && !items?.length && textDensity === 'HIGH';
+      }, [items?.length, textDensity]);
 
       const TextOrContent = useMemo(() => {
         return getTextOrContent({
@@ -375,6 +381,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           $highlight={highlightCardsOnHover}
           data-testid="timeline-card-content"
           $customContent={!!customContent}
+          $textDensity={textDensity}
         >
           {title && !textOverlay ? (
             <ContentHeader

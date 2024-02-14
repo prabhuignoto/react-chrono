@@ -160,3 +160,17 @@ export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
   margin: ${(p) => (p.position === 'top' ? '0 0 20px 0' : '20px 0 0 0')};
   order: ${(p) => (p.position === 'top' ? 0 : 1)};
 `;
+
+export const ToolbarExtraControl = styled.ul<{ isMobile: boolean }>`
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: ${(p) => (p.isMobile ? '1rem' : '0')};
+`;
+
+export const ToolbarExtraControlChild = styled.li`
+  display: flex;
+  margin-right: 0.5rem;
+`;

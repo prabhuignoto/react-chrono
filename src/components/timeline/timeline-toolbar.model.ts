@@ -1,4 +1,9 @@
-import { TimelineModel, TimelineProps } from '@models/TimelineModel';
+import {
+  TextDensity,
+  TimelineMode,
+  TimelineModel,
+  TimelineProps,
+} from '@models/TimelineModel';
 
 export type TimelineToolbarProps = Pick<
   TimelineModel,
@@ -16,7 +21,8 @@ export type TimelineToolbarProps = Pick<
 > & {
   id: string;
   onActivateTimelineItem: (id: string) => void;
-  onUpdateTimelineMode: (mode: string) => void;
+  onUpdateTextContentDensity: (value: TextDensity) => void;
+  onUpdateTimelineMode: (mode: TimelineMode) => void;
   toggleDarkMode: () => void;
   totalItems: number;
 } & Pick<TimelineProps, 'darkMode' | 'flipLayout'>;

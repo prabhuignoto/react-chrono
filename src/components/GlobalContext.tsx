@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
-import { TimelineProps as PropsModel } from '@models/TimelineModel';
+import {
+  TimelineProps as PropsModel,
+  TextDensity,
+} from '@models/TimelineModel';
 import {
   getDefaultButtonTexts,
   getDefaultClassNames,
@@ -18,12 +21,14 @@ const GlobalContext = createContext<
   PropsModel & {
     toggleDarkMode?: () => void;
     updateHorizontalAllCards?: (state: boolean) => void;
+    updateTextContentDensity?: (value: TextDensity) => void;
   }
 >({});
 
 type ContextProps = PropsModel & {
   toggleDarkMode?: () => void;
   updateHorizontalAllCards?: (state: boolean) => void;
+  updateTextContentDensity?: (value: TextDensity) => void;
 };
 
 const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
@@ -47,12 +52,16 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
     mediaHeight = 200,
     contentDetailsHeight = 10,
     showAllCardsHorizontal,
+    textDensity = 'HIGH',
   } = props;
 
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
   const [horizontalAll, setHorizontalAll] = useState(
     showAllCardsHorizontal || false,
   );
+
+  const [textContentDensity, setTextContentDensity] =
+    useState<TextDensity>(textDensity);
 
   const newCardHeight = useMemo(
     () => Math.max(contentDetailsHeight || 0 + mediaHeight || 0, cardHeight),
@@ -76,6 +85,13 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
       setHorizontalAll(state);
     },
     [horizontalAll],
+  );
+
+  const updateTextContentDensity = useCallback(
+    (value: TextDensity) => {
+      setTextContentDensity(value);
+    },
+    [textContentDensity],
   );
 
   const defaultProps = useMemo(
@@ -140,12 +156,14 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           ...mediaSettings,
         },
         showAllCardsHorizontal: horizontalAll,
+        textDensity: textContentDensity,
         theme: {
           ...getDefaultThemeOrDark(isDarkMode),
           ...theme,
         },
         toggleDarkMode,
         updateHorizontalAllCards,
+        updateTextContentDensity,
       }) as ContextProps,
     [
       newContentDetailsHeight,
@@ -153,6 +171,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
       isDarkMode,
       toggleDarkMode,
       updateHorizontalAllCards,
+      textContentDensity
     ],
   );
 

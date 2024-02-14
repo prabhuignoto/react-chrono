@@ -29,6 +29,7 @@ export const PopoverHolder = styled.div<{
 
 export const Selecter = styled.div<{
   isDarkMode: boolean;
+  isMobile?: boolean;
   open?: boolean;
   theme: Theme;
 }>`
@@ -44,7 +45,7 @@ export const Selecter = styled.div<{
   display: flex;
   font-weight: normal;
   justify-content: space-between;
-  padding: 0.4rem 0.75rem 0.4rem 0.5rem;
+  padding: ${p => p.isMobile ? '0.5rem' : `0.4rem 0.75rem 0.4rem 0.5rem`};
   user-select: none;
 `;
 
@@ -55,8 +56,9 @@ export const SelecterIcon = styled.span<{ open: boolean; theme: Theme }>`
   height: 1.25rem;
   justify-content: center;
   width: 1.25rem;
-  transform: ${({ open }) => (open ? 'rotate(180deg)' : 'rotate(0deg)')};
+  // transform: ${({ open }) => (open ? 'rotate(180deg)' : 'rotate(0deg)')};
   transition: transform 0.2s ease-in-out;
+  margin-right: 0.1rem;
 
   & svg {
     height: 100%;

@@ -71,6 +71,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     enableBreakPoint,
     updateHorizontalAllCards,
     toolbarPosition,
+    updateTextContentDensity,
+    textDensity
   } = useContext(GlobalContext);
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -375,6 +377,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             items={items}
             onActivateTimelineItem={handleTimelineItemClick}
             onUpdateTimelineMode={handleTimelineUpdate}
+            onUpdateTextContentDensity={updateTextContentDensity}
             mode={timelineMode}
           />
         </ToolbarWrapper>

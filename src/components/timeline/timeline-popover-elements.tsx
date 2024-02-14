@@ -1,13 +1,15 @@
 import { Theme } from '@models/Theme';
-import { TimelineMode } from '@models/TimelineModel';
+import { TextDensity, TimelineMode } from '@models/TimelineModel';
 import { FunctionComponent, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import { List } from '../elements/list/list';
 import { ListItemModel } from '../elements/list/list.model';
 import { PopOver } from '../elements/popover';
+import { ArrowDownIcon, LayoutIcon, TextIcon } from '../icons';
 
 type CommonProps = {
   isDarkMode: boolean;
+  isMobile: boolean;
   position: 'top' | 'bottom';
   theme: Theme;
 };
@@ -24,8 +26,6 @@ type QuickJumpProp = {
   onActivateItem: (id: string) => void;
 } & CommonProps;
 
-type TextDensity = 'LOW' | 'HIGH';
-
 type ChangeDensityProp = {
   onChange: (value: TextDensity) => void;
   selectedDensity: TextDensity;
@@ -37,8 +37,14 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   mode,
   isDarkMode,
   position,
+  isMobile,
 }: LayoutSwitcherProp) => {
   const { showAllCardsHorizontal, buttonTexts } = useContext(GlobalContext);
+
+  const placeHolder = useMemo(
+    () => (!isMobile ? buttonTexts.changeLayout : ''),
+    [buttonTexts, isMobile],
+  );
 
   const activeTimelineMode = useMemo(
     () => mode,
@@ -92,11 +98,12 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
 
   return (
     <PopOver
-      placeholder={buttonTexts.changeLayout}
+      placeholder={placeHolder}
       position={position}
       theme={theme}
       isDarkMode={isDarkMode}
-    >
+      icon={<LayoutIcon />}
+      isMobile={isMobile}>
       <List
         items={
           mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL'
@@ -117,15 +124,24 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
   onActivateItem,
   isDarkMode,
   position,
+  isMobile,
 }: QuickJumpProp) => {
   const { buttonTexts } = useContext(GlobalContext);
+
+  const placeHolder = useMemo(
+    () => (!isMobile ? buttonTexts.jumpTo : ''),
+    [buttonTexts, isMobile],
+  );
+
   return (
     <PopOver
-      placeholder={buttonTexts.jumpTo}
+      placeholder={placeHolder}
       position={position}
       theme={theme}
       width={'400px'}
       isDarkMode={isDarkMode}
+      isMobile={isMobile}
+      icon={<ArrowDownIcon />}
     >
       <List
         items={items.map((item, index) => ({
@@ -149,8 +165,14 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
   theme,
   isDarkMode,
   position,
+  isMobile,
 }) => {
   const { buttonTexts } = useContext(GlobalContext);
+
+  const placeHolder = useMemo(
+    () => (!isMobile ? buttonTexts.changeDensity : ''),
+    [buttonTexts, isMobile],
+  );
 
   const items = useMemo(
     () => [
@@ -174,10 +196,12 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
 
   return (
     <PopOver
-      placeholder={buttonTexts.changeDensity}
+      placeholder={placeHolder}
       theme={theme}
       isDarkMode={isDarkMode}
       position={position}
+      isMobile={isMobile}
+      icon={<TextIcon />}
     >
       <List items={items} theme={theme} multiSelectable />
     </PopOver>

@@ -1,6 +1,11 @@
 import { VerticalItemModel } from '@models/TimelineVerticalModel';
 import cls from 'classnames';
-import React, { useCallback, useContext, useMemo, useRef } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useMemo,
+  useRef
+} from 'react';
 import { GlobalContext } from '../GlobalContext';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
@@ -80,6 +85,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     textOverlay,
     mediaHeight,
     disableInteraction,
+    textDensity,
   } = useContext(GlobalContext);
 
   // handler for onActive

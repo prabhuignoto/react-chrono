@@ -1,5 +1,5 @@
 import { Theme } from '@models/Theme';
-import { TimelineProps } from '@models/TimelineModel';
+import { TextDensity, TimelineProps } from '@models/TimelineModel';
 import styled, { css, keyframes } from 'styled-components';
 import { linearGradient } from '../timeline-card-media/timeline-card-media.styles';
 import {
@@ -28,6 +28,7 @@ export const TimelineItemContentWrapper = styled.section<
     $slideShow?: TimelineProps['slideShow'];
     $slideShowActive?: boolean;
     $slideShowType?: TimelineProps['slideShowType'];
+    $textDensity?: TextDensity;
     $textOverlay?: boolean;
   } & ContentT
 >`
@@ -47,9 +48,11 @@ export const TimelineItemContentWrapper = styled.section<
   max-width: ${(p) => p.$maxWidth}px;
   // min-height: ${(p) => p.$minHeight}px;
   ${(p) =>
-    p.$customContent
+    p.$customContent && p.$textDensity === 'HIGH'
       ? `height: ${p.$minHeight}px;`
-      : `min-height: ${p.$minHeight}px;`}
+      : p.$textDensity === 'HIGH'
+        ? `min-height: ${p.$minHeight}px;`
+        : ''}
   position: relative;
   text-align: left;
   width: 98%;
