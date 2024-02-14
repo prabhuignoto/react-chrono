@@ -49,7 +49,7 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
         <StyleAndDescription selectable={selectable}>
           <TitleStyle theme={theme}>{title}</TitleStyle>
           <TitleDescriptionStyle theme={theme}>
-            {description}{' '}
+            {description}
           </TitleDescriptionStyle>
         </StyleAndDescription>
       </ListItemStyle>

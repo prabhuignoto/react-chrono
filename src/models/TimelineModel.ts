@@ -60,6 +60,7 @@ export type TimelineProps = {
 
   // custom button texts
   buttonTexts?: {
+    changeDensity?: string;
     changeLayout?: string;
     dark?: string;
     first: string;

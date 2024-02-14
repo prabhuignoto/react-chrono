@@ -28,6 +28,7 @@ export const getDefaultClassNames = () => ({
 });
 
 export const getDefaultButtonTexts = () => ({
+  changeDensity: 'Change Density',
   changeLayout: 'Change layout',
   dark: 'Switch to Dark Mode',
   first: 'Go to First',

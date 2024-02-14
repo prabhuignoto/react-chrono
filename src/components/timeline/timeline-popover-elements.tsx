@@ -6,23 +6,30 @@ import { List } from '../elements/list/list';
 import { ListItemModel } from '../elements/list/list.model';
 import { PopOver } from '../elements/popover';
 
-type LayoutSwitcherProp = {
-  initialTimelineMode?: TimelineMode | 'HORIZONTAL_ALL';
+type CommonProps = {
   isDarkMode: boolean;
-  mode?: TimelineMode;
-  onUpdateTimelineMode: (s: string) => void;
   position: 'top' | 'bottom';
   theme: Theme;
 };
 
+type LayoutSwitcherProp = {
+  initialTimelineMode?: TimelineMode | 'HORIZONTAL_ALL';
+  mode?: TimelineMode;
+  onUpdateTimelineMode: (s: string) => void;
+} & CommonProps;
+
 type QuickJumpProp = {
   activeItem: number;
-  isDarkMode: boolean;
   items: ListItemModel[];
   onActivateItem: (id: string) => void;
-  position: 'top' | 'bottom';
-  theme: Theme;
-};
+} & CommonProps;
+
+type TextDensity = 'LOW' | 'HIGH';
+
+type ChangeDensityProp = {
+  onChange: (value: TextDensity) => void;
+  selectedDensity: TextDensity;
+} & CommonProps;
 
 const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   onUpdateTimelineMode,
@@ -41,12 +48,14 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   const verticalItems = useMemo(
     () => [
       {
+        description: 'Show cards in a vertical layout',
         id: 'VERTICAL',
         onSelect: () => onUpdateTimelineMode('VERTICAL'),
         selected: activeTimelineMode === 'VERTICAL',
         title: 'Default',
       },
       {
+        description: 'Show cards in a vertical layout with alternating fashion',
         id: 'VERTICAL_ALTERNATING',
         onSelect: () => onUpdateTimelineMode('VERTICAL_ALTERNATING'),
         selected: activeTimelineMode === 'VERTICAL_ALTERNATING',
@@ -60,6 +69,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   const horizontalItems = useMemo(
     () => [
       {
+        description: 'Show cards in a horizontal layout',
         id: 'HORIZONTAL',
         onSelect: () => {
           onUpdateTimelineMode('HORIZONTAL');
@@ -68,6 +78,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
         title: 'Default',
       },
       {
+        description: 'Show all cards in a horizontal layout',
         id: 'HORIZONTAL_ALL',
         onSelect: () => {
           onUpdateTimelineMode('HORIZONTAL_ALL');
@@ -132,4 +143,45 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
   );
 };
 
-export { LayoutSwitcher, QuickJump };
+const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
+  onChange,
+  selectedDensity,
+  theme,
+  isDarkMode,
+  position,
+}) => {
+  const { buttonTexts } = useContext(GlobalContext);
+
+  const items = useMemo(
+    () => [
+      {
+        description: 'Show less text',
+        id: 'LOW',
+        onSelect: () => onChange('LOW'),
+        selected: selectedDensity === 'LOW',
+        title: 'Low',
+      },
+      {
+        description: 'Show more text',
+        id: 'HIGH',
+        onSelect: () => onChange('HIGH'),
+        selected: selectedDensity === 'HIGH',
+        title: 'High',
+      },
+    ],
+    [selectedDensity],
+  );
+
+  return (
+    <PopOver
+      placeholder={buttonTexts.changeDensity}
+      theme={theme}
+      isDarkMode={isDarkMode}
+      position={position}
+    >
+      <List items={items} theme={theme} multiSelectable />
+    </PopOver>
+  );
+};
+
+export { ChangeDensity, LayoutSwitcher, QuickJump };

@@ -23,7 +23,7 @@ const GlobalContext = createContext<
 
 type ContextProps = PropsModel & {
   toggleDarkMode?: () => void;
-  updateHorizontalAllCards?: () => void;
+  updateHorizontalAllCards?: (state: boolean) => void;
 };
 
 const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (

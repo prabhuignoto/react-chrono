@@ -3,7 +3,11 @@ import { FunctionComponent, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import { Toolbar } from '../toolbar';
-import { LayoutSwitcher, QuickJump } from './timeline-popover-elements';
+import {
+  ChangeDensity,
+  LayoutSwitcher,
+  QuickJump,
+} from './timeline-popover-elements';
 import { TimelineToolbarProps } from './timeline-toolbar.model';
 
 // Define the TimelineToolbar component
@@ -46,6 +50,11 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       {
         label: 'layout_popover',
         name: 'popover',
+        onSelect: () => {},
+      },
+      {
+        label: 'change_density',
+        name: 'changeDensity',
         onSelect: () => {},
       },
     ];
@@ -106,6 +115,13 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           position={toolbarPosition}
         />
       ) : null}
+      <ChangeDensity
+        isDarkMode={darkMode}
+        theme={theme}
+        onChange={() => {}}
+        position={toolbarPosition}
+        selectedDensity="LOW"
+      ></ChangeDensity>
     </Toolbar>
   );
 };
