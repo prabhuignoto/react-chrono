@@ -21,7 +21,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   width = '300px',
   isDarkMode = false,
   icon,
-  isMobile = false
+  isMobile = false,
 }) => {
   const [open, setOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);

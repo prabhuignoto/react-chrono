@@ -16,24 +16,18 @@ import {
   useMemo,
   useState,
 } from 'react';
-
-const GlobalContext = createContext<
-  PropsModel & {
-    toggleDarkMode?: () => void;
-    updateHorizontalAllCards?: (state: boolean) => void;
-    updateTextContentDensity?: (value: TextDensity) => void;
-  }
->({});
+import { useMatchMedia } from './effects/useMatchMedia';
 
 type ContextProps = PropsModel & {
+  isMobile?: boolean;
   toggleDarkMode?: () => void;
   updateHorizontalAllCards?: (state: boolean) => void;
   updateTextContentDensity?: (value: TextDensity) => void;
 };
 
-const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
-  props,
-) => {
+const GlobalContext = createContext<ContextProps>({} as ContextProps);
+
+const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
   const {
     cardHeight = 200,
     cardLess = false,
@@ -56,9 +50,12 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
   } = props;
 
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
+
   const [horizontalAll, setHorizontalAll] = useState(
     showAllCardsHorizontal || false,
   );
+
+  const [isMobileDetected, setIsMobileDetected] = useState(false);
 
   const [textContentDensity, setTextContentDensity] =
     useState<TextDensity>(textDensity);
@@ -93,6 +90,14 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
     },
     [textContentDensity],
   );
+
+  useMatchMedia('(max-width: 1023px)', () => setIsMobileDetected(true));
+
+  useMatchMedia('(min-width: 1024px)', () => setIsMobileDetected(false));
+
+  // useEffect(() => {
+  //   console.log('mobileDetected', isMobileDetected);
+  // }, [isMobileDetected]);
 
   const defaultProps = useMemo(
     () =>
@@ -150,6 +155,7 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           title: '1rem',
           ...fontSizes,
         },
+        isMobile: isMobileDetected,
         mediaSettings: {
           align: mode === 'VERTICAL' && !textOverlay ? 'left' : 'center',
           imageFit: 'cover',
@@ -171,7 +177,8 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
       isDarkMode,
       toggleDarkMode,
       updateHorizontalAllCards,
-      textContentDensity
+      textContentDensity,
+      isMobileDetected,
     ],
   );
 

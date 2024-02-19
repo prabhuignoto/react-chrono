@@ -45,7 +45,7 @@ export const Selecter = styled.div<{
   display: flex;
   font-weight: normal;
   justify-content: space-between;
-  padding: ${p => p.isMobile ? '0.5rem' : `0.4rem 0.75rem 0.4rem 0.5rem`};
+  padding: ${(p) => (p.isMobile ? '0.5rem' : `0.4rem 0.75rem 0.4rem 0.5rem`)};
   user-select: none;
 `;
 

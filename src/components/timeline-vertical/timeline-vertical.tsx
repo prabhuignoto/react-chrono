@@ -1,5 +1,6 @@
 import { TimelineVerticalModel } from '@models/TimelineVerticalModel';
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
+import { GlobalContext } from '../GlobalContext';
 import TimelineVerticalItem from './timeline-vertical-item';
 import { TimelineVerticalWrapper } from './timeline-vertical.styles';
 
@@ -54,6 +55,8 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
 
   // todo remove this
   const handleOnShowMore = useCallback(() => {}, []);
+
+  const { isMobile } = useContext(GlobalContext);
 
   return (
     <TimelineVerticalWrapper data-testid="tree-main" role="list">

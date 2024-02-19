@@ -1,7 +1,6 @@
 // Import necessary dependencies
-import { FunctionComponent, useContext, useMemo, useState } from 'react';
+import { FunctionComponent, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
-import { useMatchMedia } from '../effects/useMatchMedia';
 import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import { Toolbar } from '../toolbar';
 import {
@@ -44,9 +43,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     darkMode,
     toolbarPosition,
     textDensity,
+    isMobile,
   } = useContext(GlobalContext);
-
-  const [isMobile, setIsMobile] = useState(false);
 
   // Define the toolbar items
   const toolbarItems = useMemo(() => {
@@ -73,10 +71,6 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       },
     ];
   }, []);
-
-  useMatchMedia('(max-width: 780px)', () => setIsMobile(true));
-
-  useMatchMedia('(min-width: 780px)', () => setIsMobile(false));
 
   // Determine if the left arrow should be disabled
   const disableLeft = useMemo(() => {

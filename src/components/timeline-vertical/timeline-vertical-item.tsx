@@ -1,11 +1,6 @@
 import { VerticalItemModel } from '@models/TimelineVerticalModel';
 import cls from 'classnames';
-import React, {
-  useCallback,
-  useContext,
-  useMemo,
-  useRef
-} from 'react';
+import React, { useCallback, useContext, useMemo, useRef } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
@@ -85,7 +80,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     textOverlay,
     mediaHeight,
     disableInteraction,
-    textDensity,
+    isMobile,
   } = useContext(GlobalContext);
 
   // handler for onActive
@@ -163,6 +158,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         lineWidth={lineWidth}
         disableClickOnCircle={disableClickOnCircle}
         cardLess={cardLess}
+        isMobile={isMobile}
       />
     ),
     [
@@ -179,8 +175,18 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       lineWidth,
       disableClickOnCircle,
       cardLess,
+      isMobile,
     ],
   );
+
+  const canShowTitle = useMemo(
+    () => !isMobile && !isNested,
+    [isMobile, isNested],
+  );
+
+  // useEffect(() => {
+  //   console.log('This is a cool mobile', isMobile);
+  // }, [isMobile]);
 
   return (
     <VerticalItemWrapper
@@ -195,7 +201,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       theme={theme}
     >
       {/* title */}
-      {!isNested ? Title : null}
+      {canShowTitle ? Title : null}
 
       {/* card section */}
       <TimelineCardContentWrapper
@@ -204,6 +210,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         $noTitle={!title}
         $flip={!alternateCards && flipLayout}
         height={textOverlay ? mediaHeight : cardHeight}
+        $isMobile={isMobile}
       >
         {!cardLess ? (
           // <span></span>

@@ -76,6 +76,8 @@ export type TimelinePointModel = Omit<VerticalModel, 'timelineContent'> & {
   // Icon element associated with the timeline point.
   iconChild?: React.ReactNode;
 
+  isMobile?: boolean;
+
   // Event handler for activating the timeline point.
   onActive: (pointOffset: number) => void;
 };

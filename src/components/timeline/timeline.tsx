@@ -72,7 +72,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     updateHorizontalAllCards,
     toolbarPosition,
     updateTextContentDensity,
-    textDensity
+    textDensity,
   } = useContext(GlobalContext);
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);

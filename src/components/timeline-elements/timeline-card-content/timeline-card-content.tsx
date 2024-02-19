@@ -79,6 +79,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         disableInteraction,
         highlightCardsOnHover,
         textDensity,
+        isMobile,
       } = useContext(GlobalContext);
 
       // If the media is a video, we don't show the progress bar.
@@ -357,8 +358,11 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             onPointerLeave: tryHandleResumeSlideshow,
           };
         }
-        // }, [tryHandlePauseSlideshow, tryHandleResumeSlideshow]);
       }, []);
+
+      const canShowNestedTimeline = useMemo(() => {
+        return !canShowDetailsText && textDensity === 'HIGH';
+      }, [canShowDetailsText, textDensity]);
 
       return (
         <TimelineItemContentWrapper
@@ -418,7 +422,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             />
           )}
 
-          {canShowDetailsText ? (
+          {canShowDetailsText && (
             <DetailsText
               showMore={showMore}
               gradientColor={gradientColor}
@@ -430,7 +434,9 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               detailsHeight={detailsHeight}
               ref={detailsRef}
             />
-          ) : (
+          )}
+
+          {canShowNestedTimeline && (
             <Timeline
               items={items}
               mode={'VERTICAL'}

@@ -71,6 +71,7 @@ export const TimelineCardContentWrapper = styled.div<{
   $alternateCards?: boolean;
   $cardLess?: boolean;
   $flip?: boolean;
+  $isMobile?: boolean;
   $noTitle?: boolean;
   height?: number;
 }>`
@@ -84,7 +85,7 @@ export const TimelineCardContentWrapper = styled.div<{
     } else if (p.$noTitle) {
       return `width: 95%;`;
     } else {
-      return `width: 85%;`;
+      return `${p.$isMobile ? 'width: 75%;' : 'width: 85%;'}`;
     }
   }}
   ${(p) => {

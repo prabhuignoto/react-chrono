@@ -103,7 +103,8 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
       theme={theme}
       isDarkMode={isDarkMode}
       icon={<LayoutIcon />}
-      isMobile={isMobile}>
+      isMobile={isMobile}
+    >
       <List
         items={
           mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL'

@@ -37,6 +37,7 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
       lineWidth,
       disableClickOnCircle,
       cardLess,
+      isMobile,
     } = props;
 
     const circleRef = useRef<HTMLButtonElement>(null);
@@ -105,6 +106,7 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
         className={className}
         data-testid="tree-leaf"
         $cardLess={cardLess}
+        $isMobile={isMobile}
       >
         {/* {!disableTimelinePoint ? ( */}
         <TimelinePointContainer
@@ -128,7 +130,8 @@ const TimelinePoint: React.FunctionComponent<TimelinePointModel> = memo(
       </TimelinePointWrapper>
     );
   },
-  (prev, next) => prev.active === next.active,
+  (prev, next) =>
+    prev.active === next.active && prev.isMobile === next.isMobile,
 );
 
 TimelinePoint.displayName = 'TimelinePoint';
