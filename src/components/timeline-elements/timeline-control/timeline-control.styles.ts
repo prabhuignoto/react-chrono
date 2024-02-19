@@ -6,7 +6,7 @@ export const TimelineNavWrapper = styled.ul<{ theme?: Theme }>`
   border-radius: 25px;
   display: flex;
   list-style: none;
-  padding: 0.25em 0.25em;
+  padding: 0.25rem 0.25rem;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   background: ${(p) => p.theme.toolbarBtnBgColor};
 `;

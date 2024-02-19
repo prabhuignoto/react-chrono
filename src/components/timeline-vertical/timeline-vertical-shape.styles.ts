@@ -10,7 +10,7 @@ export const TimelinePointWrapper = styled.div<{
   display: flex;
   justify-content: center;
   position: relative;
-  width: ${(p) => (p.$isMobile ? '25%' : '5%')};
+  width: ${(p) => (p.$isMobile ? '25%' : '10%')};
 
   &.left {
     order: 2;
