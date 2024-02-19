@@ -47,8 +47,6 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     cardWidth,
   } = useContext(GlobalContext);
 
-  console.log('showing', showAllCardsHorizontal);
-
   // Memoize the wrapper class to avoid unnecessary re-renders
   const wrapperClass = useMemo(
     () =>

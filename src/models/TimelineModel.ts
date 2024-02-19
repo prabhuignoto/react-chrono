@@ -187,6 +187,8 @@ export type TimelineProps = {
 
   parseDetailsAsHTML?: boolean;
 
+  responsiveBreakPoint?: number;
+
   // option to enable scrollbar
   scrollable?: boolean | { scrollbar: boolean };
 

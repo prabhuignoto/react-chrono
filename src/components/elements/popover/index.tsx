@@ -21,7 +21,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   width = '300px',
   isDarkMode = false,
   icon,
-  isMobile = false,
+  $isMobile = false,
 }) => {
   const [open, setOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -59,7 +59,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         isDarkMode={isDarkMode}
         tabIndex={0}
         onKeyUp={handleKeyPress}
-        isMobile={isMobile}
+        isMobile={$isMobile}
       >
         <SelecterIcon theme={theme} open={open}>
           {icon ? icon : <ChevronDown />}

@@ -72,7 +72,7 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
         let className = '';
 
         // in tree mode alternate cards position
-        if (alternateCards) {
+        if (alternateCards && !isMobile) {
           className = index % 2 === 0 ? 'left' : 'right';
         } else {
           className = 'right';

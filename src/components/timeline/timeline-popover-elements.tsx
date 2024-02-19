@@ -5,7 +5,7 @@ import { GlobalContext } from '../GlobalContext';
 import { List } from '../elements/list/list';
 import { ListItemModel } from '../elements/list/list.model';
 import { PopOver } from '../elements/popover';
-import { ArrowDownIcon, LayoutIcon, TextIcon } from '../icons';
+import { ArrowDownIcon, LayoutIcon, ParaIcon } from '../icons';
 
 type CommonProps = {
   isDarkMode: boolean;
@@ -103,7 +103,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
       theme={theme}
       isDarkMode={isDarkMode}
       icon={<LayoutIcon />}
-      isMobile={isMobile}
+      $isMobile={isMobile}
     >
       <List
         items={
@@ -141,7 +141,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
       theme={theme}
       width={'400px'}
       isDarkMode={isDarkMode}
-      isMobile={isMobile}
+      $isMobile={isMobile}
       icon={<ArrowDownIcon />}
     >
       <List
@@ -201,8 +201,8 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
       theme={theme}
       isDarkMode={isDarkMode}
       position={position}
-      isMobile={isMobile}
-      icon={<TextIcon />}
+      $isMobile={isMobile}
+      icon={<ParaIcon />}
     >
       <List items={items} theme={theme} multiSelectable />
     </PopOver>

@@ -47,6 +47,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     contentDetailsHeight = 10,
     showAllCardsHorizontal,
     textDensity = 'HIGH',
+    responsiveBreakPoint = 1024,
   } = props;
 
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
@@ -91,13 +92,13 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     [textContentDensity],
   );
 
-  useMatchMedia('(max-width: 1023px)', () => setIsMobileDetected(true));
+  useMatchMedia(`(max-width: ${responsiveBreakPoint - 1}px)`, () =>
+    setIsMobileDetected(true),
+  );
 
-  useMatchMedia('(min-width: 1024px)', () => setIsMobileDetected(false));
-
-  // useEffect(() => {
-  //   console.log('mobileDetected', isMobileDetected);
-  // }, [isMobileDetected]);
+  useMatchMedia(`(min-width: ${responsiveBreakPoint}px)`, () =>
+    setIsMobileDetected(false),
+  );
 
   const defaultProps = useMemo(
     () =>

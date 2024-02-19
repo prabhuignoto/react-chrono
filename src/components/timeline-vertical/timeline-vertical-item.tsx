@@ -81,6 +81,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     mediaHeight,
     disableInteraction,
     isMobile,
+    enableBreakPoint,
   } = useContext(GlobalContext);
 
   // handler for onActive
@@ -179,14 +180,9 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     ],
   );
 
-  const canShowTitle = useMemo(
-    () => !isMobile && !isNested,
-    [isMobile, isNested],
-  );
-
-  // useEffect(() => {
-  //   console.log('This is a cool mobile', isMobile);
-  // }, [isMobile]);
+  const canShowTitle = useMemo(() => {
+    return !isNested && !isMobile;
+  }, [isNested, isMobile]);
 
   return (
     <VerticalItemWrapper
@@ -202,6 +198,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     >
       {/* title */}
       {canShowTitle ? Title : null}
+      {/* {Title} */}
 
       {/* card section */}
       <TimelineCardContentWrapper

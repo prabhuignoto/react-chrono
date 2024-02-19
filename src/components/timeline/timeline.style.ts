@@ -166,7 +166,7 @@ export const ToolbarExtraControl = styled.ul<{ isMobile: boolean }>`
   align-items: center;
   list-style: none;
   margin: 0;
-  padding: 1rem 0.5rem;
+  padding: 0.5rem;
   // margin-top: ${(p) => (p.isMobile ? '1rem' : '0')};
 `;
 
