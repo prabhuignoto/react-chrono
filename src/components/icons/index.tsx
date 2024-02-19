@@ -14,4 +14,3 @@ export { default as PlusIcon } from './plus';
 export { default as StopIcon } from "./stop";
 export { default as SunIcon } from './sun';
 export { default as TextIcon } from './text';
-
