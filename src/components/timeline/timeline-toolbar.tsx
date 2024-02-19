@@ -104,7 +104,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
         onToggleDarkMode={toggleDarkMode}
         onPaused={onPaused}
       />
-      <ToolbarExtraControl isMobile={isMobile}>
+      <ToolbarExtraControl $isMobile={isMobile}>
         <ToolbarExtraControlChild>
           {enableQuickJump ? (
             <QuickJump

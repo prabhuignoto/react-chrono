@@ -28,8 +28,8 @@ export const PopoverHolder = styled.div<{
 `;
 
 export const Selecter = styled.div<{
-  isDarkMode: boolean;
-  isMobile?: boolean;
+  $isDarkMode: boolean;
+  $isMobile?: boolean;
   open?: boolean;
   theme: Theme;
 }>`
@@ -37,7 +37,7 @@ export const Selecter = styled.div<{
   background: ${({ theme }) => theme.toolbarBtnBgColor};
   color: ${({ theme }) => theme.toolbarTextColor};
   border-radius: 25px;
-  box-shadow: ${({ open, isDarkMode }) =>
+  box-shadow: ${({ open, $isDarkMode: isDarkMode }) =>
     !open
       ? `0px 1px 1px rgba(0, 0, 0, ${isDarkMode ? '0.85' : '0.2'})`
       : 'inset 0 0 1px 1px rgba(0, 0, 0, 0.2)'};
@@ -45,7 +45,7 @@ export const Selecter = styled.div<{
   display: flex;
   font-weight: normal;
   justify-content: space-between;
-  padding: ${(p) => (p.isMobile ? '0.5rem' : `0.25rem 0.5rem 0.25rem 0.5rem`)};
+  padding: ${(p) => (p.$isMobile ? '0.4rem' : `0.4rem 0.4rem 0.4rem 0.4rem`)};
   user-select: none;
 `;
 

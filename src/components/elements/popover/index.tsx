@@ -56,10 +56,10 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         onClick={toggleOpen}
         theme={theme}
         open={open}
-        isDarkMode={isDarkMode}
+        $isDarkMode={isDarkMode}
         tabIndex={0}
         onKeyUp={handleKeyPress}
-        isMobile={$isMobile}
+        $isMobile={$isMobile}
       >
         <SelecterIcon theme={theme} open={open}>
           {icon ? icon : <ChevronDown />}
