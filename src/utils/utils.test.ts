@@ -44,6 +44,7 @@ describe('Utility Functions', () => {
 
   it('getDefaultButtonTexts should return default button texts', () => {
     expect(getDefaultButtonTexts()).toEqual({
+      changeDensity: 'Change density',
       changeLayout: 'Change layout',
       dark: 'Switch to Dark Mode',
       first: 'Go to First',

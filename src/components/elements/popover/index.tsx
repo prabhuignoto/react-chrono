@@ -1,4 +1,10 @@
-import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import useCloseClickOutside from 'src/components/effects/useCloseClickOutside';
 import { ChevronDown, CloseIcon } from 'src/components/icons';
 import { PopOverModel } from './popover.model';
@@ -18,7 +24,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   position,
   placeholder,
   theme,
-  width = '300px',
+  width = 350,
   isDarkMode = false,
   icon,
   $isMobile = false,
@@ -27,15 +33,15 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const toggleOpen = () => setOpen(!open);
+  const toggleOpen = useCallback(() => setOpen(!open), []);
 
-  const closePopover = () => setOpen(false);
+  const closePopover = useCallback(() => setOpen(false), []);
 
-  const handleKeyPress = (ev: React.KeyboardEvent) => {
+  const handleKeyPress = useCallback((ev: React.KeyboardEvent) => {
     if (ev.key === 'Enter') {
       toggleOpen();
     }
-  };
+  }, []);
 
   useCloseClickOutside(ref, closePopover);
 
@@ -54,24 +60,28 @@ const PopOver: FunctionComponent<PopOverModel> = ({
       <Selecter
         role="button"
         onClick={toggleOpen}
-        theme={theme}
-        open={open}
+        $theme={theme}
+        $open={open}
         $isDarkMode={isDarkMode}
         tabIndex={0}
         onKeyUp={handleKeyPress}
         $isMobile={$isMobile}
+        title={placeholder}
       >
         <SelecterIcon theme={theme} open={open}>
           {icon ? icon : <ChevronDown />}
         </SelecterIcon>
-        {placeholder ? <SelecterLabel>{placeholder}</SelecterLabel> : null}
+        {placeholder && !$isMobile ? (
+          <SelecterLabel>{placeholder}</SelecterLabel>
+        ) : null}
       </Selecter>
       {open ? (
         <PopoverHolder
-          position={position}
-          style={{ width: `${width}` }}
-          theme={theme}
-          visible={isVisible}
+          $position={position}
+          $width={width}
+          $theme={theme}
+          $isMobile={$isMobile}
+          $visible={isVisible}
         >
           <Header>
             <CloseButton theme={theme} onClick={closePopover}>

@@ -1,12 +1,16 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import userEvent from '@testing-library/user-event';
+import { getDefaultThemeOrDark } from '@utils/index';
+import { customRender, providerProps } from 'src/components/common/test';
 import { PopOver } from '../index';
 
 describe('PopOver', () => {
   const mockClosePopover = vi.fn();
   const mockToggleOpen = vi.fn();
+
+  const theme = getDefaultThemeOrDark();
 
   beforeEach(() => {
     mockClosePopover.mockReset();
@@ -15,10 +19,15 @@ describe('PopOver', () => {
 
   it('should render the placeholder text', () => {
     const placeholder = 'Select an option';
-    render(
-      <PopOver placeholder={placeholder} position="top">
+    customRender(
+      <PopOver placeholder={placeholder} position="top" theme={theme}>
         <span>test</span>
       </PopOver>,
+      {
+        providerProps: {
+          ...providerProps,
+        },
+      },
     );
 
     const selecterLabel = screen.getByText(placeholder);
@@ -27,10 +36,15 @@ describe('PopOver', () => {
 
   it('should toggle open state when clicking on the selecter', async () => {
     const placeholder = 'Select an option';
-    const { getByRole, getByText } = render(
-      <PopOver placeholder={placeholder} position="top">
+    const { getByRole, getByText } = customRender(
+      <PopOver placeholder={placeholder} position="top" theme={theme}>
         <span>test</span>
       </PopOver>,
+      {
+        providerProps: {
+          ...providerProps,
+        },
+      },
     );
 
     const selecter = getByRole('button');
@@ -43,10 +57,15 @@ describe('PopOver', () => {
 
   it('should close the popover when clicking outside', async () => {
     const placeholder = 'Select an option';
-    const { getByRole, queryByText } = render(
-      <PopOver placeholder={placeholder} position="top">
+    const { getByRole, queryByText } = customRender(
+      <PopOver placeholder={placeholder} position="top" theme={theme}>
         <span>test</span>
       </PopOver>,
+      {
+        providerProps: {
+          ...providerProps,
+        },
+      },
     );
 
     const selecter = getByRole('button');
@@ -62,10 +81,15 @@ describe('PopOver', () => {
   it('should close the popover when pressing the Escape key', async () => {
     const user = userEvent.setup();
     const placeholder = 'Select an option';
-    const { getByRole, queryByText, getByText } = render(
-      <PopOver placeholder={placeholder} position="top">
+    const { getByRole, queryByText, getByText } = customRender(
+      <PopOver placeholder={placeholder} position="top" theme={theme}>
         <span>test</span>
       </PopOver>,
+      {
+        providerProps: {
+          ...providerProps,
+        },
+      },
     );
 
     const selecter = getByRole('button');

@@ -105,7 +105,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
         onPaused={onPaused}
       />
       <ToolbarExtraControl $isMobile={isMobile}>
-        <ToolbarExtraControlChild>
+        <ToolbarExtraControlChild key="quick-jump">
           {enableQuickJump ? (
             <QuickJump
               activeItem={activeTimelineItem}
@@ -122,7 +122,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             />
           ) : null}
         </ToolbarExtraControlChild>
-        <ToolbarExtraControlChild>
+        <ToolbarExtraControlChild key="layout-switcher">
           {!cardLess ? (
             <LayoutSwitcher
               isDarkMode={darkMode}
@@ -134,7 +134,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             />
           ) : null}
         </ToolbarExtraControlChild>
-        <ToolbarExtraControlChild>
+        <ToolbarExtraControlChild key="change-density">
           <ChangeDensity
             isDarkMode={darkMode}
             theme={theme}

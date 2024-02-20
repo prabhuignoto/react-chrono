@@ -5,8 +5,11 @@ import { GlobalContext } from '../../GlobalContext';
 
 export const providerProps: TimelineProps = {
   buttonTexts: {
+    changeDensity: 'Change density',
+    changeLayout: 'Change layout',
     dark: 'dark',
     first: 'first',
+    jumpTo: 'Jump to',
     last: 'last',
     light: 'light',
     next: 'next',
@@ -40,22 +43,31 @@ export const providerProps: TimelineProps = {
   showProgressOnSlideshow: false,
   slideItemDuration: 2000,
   slideShowType: 'reveal',
+  textDensity: 'HIGH',
   textOverlay: false,
   theme: {
     cardBgColor: '#fff',
     cardDetailsBackGround: '#ffffff',
     cardDetailsColor: '#000',
+    cardMediaBgColor: '#ffffff',
     cardSubtitleColor: '#000',
     cardTitleColor: '#000',
     detailsColor: '#000',
+    iconBackgroundColor: '#ffffff',
+    nestedCardBgColor: '#ffffff',
     primary: '#0f52ba',
     secondary: '#ffdf00',
+    textColor: '#000',
     titleColor: '#0f52ba',
     titleColorActive: '#0f52ba',
+    toolbarBgColor: '#ffffff',
+    toolbarBtnBgColor: '#0f52ba',
+    toolbarTextColor: '#000',
   },
   timelinePointDimension: 16,
   timelinePointShape: 'circle',
   titleDateFormat: 'MMM DD, YYYY',
+  toolbarPosition: 'top',
   useReadMore: true,
 };
 

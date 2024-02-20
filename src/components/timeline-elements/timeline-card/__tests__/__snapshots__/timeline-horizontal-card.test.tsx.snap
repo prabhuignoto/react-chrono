@@ -10,7 +10,7 @@ exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
       class="sc-jTQCzO kvjRwK"
     >
       <div
-        class="sc-gLLuof jAygHF timeline-circle using-icon vertical_alternating active"
+        class="sc-gLLuof fGqLDC timeline-circle using-icon vertical_alternating active"
         data-testid="timeline-circle"
         dimension="16"
       >

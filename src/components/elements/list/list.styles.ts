@@ -35,14 +35,14 @@ export const ListStyle = styled.ul`
 
 // List item styles
 export const ListItemStyle = styled.li<{
+  $selectable?: boolean;
   active?: boolean;
-  selectable?: boolean;
   theme: Theme;
 }>`
   ${commonStyles}
   border: ${(p) =>
     p.active ? `1px solid ${p.theme.primary}` : '1px solid transparent'};
-  flex-direction: ${(p) => (p.selectable ? 'row' : 'column')};
+  flex-direction: ${(p) => (p.$selectable ? 'row' : 'column')};
   background: ${(p) => p.theme.toolbarBtnBgColor};
   &:hover {
     border: 1px solid ${(p) => p.theme.primary};
@@ -102,8 +102,8 @@ export const CheckboxStyle = styled.span<{ selected?: boolean; theme: Theme }>`
 `;
 
 // Style and description wrapper styles
-export const StyleAndDescription = styled.div<{ selectable?: boolean }>`
+export const StyleAndDescription = styled.div<{ $selectable?: boolean }>`
   flex-direction: column;
   display: flex;
-  width: ${(p) => (p.selectable ? 'calc(100% - 2rem)' : '100%')};
+  width: ${(p) => (p.$selectable ? 'calc(100% - 2rem)' : '100%')};
 `;

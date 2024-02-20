@@ -9,5 +9,5 @@ export type PopOverModel = {
   placeholder?: string;
   position: 'top' | 'bottom';
   theme?: Theme;
-  width?: string | number;
+  width?: number;
 };

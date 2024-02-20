@@ -36,7 +36,7 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
         onClick={() => handleOnClick(id)}
         active={active}
         tabIndex={0}
-        selectable={selectable}
+        $selectable={selectable}
         onKeyUp={(ev) => handleKeyPress(ev, id)}
       >
         {selectable ? (
@@ -46,7 +46,7 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
             </CheckboxStyle>
           </CheckboxWrapper>
         ) : null}
-        <StyleAndDescription selectable={selectable}>
+        <StyleAndDescription $selectable={selectable}>
           <TitleStyle theme={theme}>{title}</TitleStyle>
           <TitleDescriptionStyle theme={theme}>
             {description}

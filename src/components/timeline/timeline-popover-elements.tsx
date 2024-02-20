@@ -41,10 +41,10 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
 }: LayoutSwitcherProp) => {
   const { showAllCardsHorizontal, buttonTexts } = useContext(GlobalContext);
 
-  const placeHolder = useMemo(
-    () => (!isMobile ? buttonTexts.changeLayout : ''),
-    [buttonTexts, isMobile],
-  );
+  // const placeHolder = useMemo(
+  //   () => (!isMobile ? buttonTexts.changeLayout : ''),
+  //   [buttonTexts, isMobile],
+  // );
 
   const activeTimelineMode = useMemo(
     () => mode,
@@ -98,7 +98,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
 
   return (
     <PopOver
-      placeholder={placeHolder}
+      placeholder={buttonTexts.changeLayout}
       position={position}
       theme={theme}
       isDarkMode={isDarkMode}
@@ -129,17 +129,12 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
 }: QuickJumpProp) => {
   const { buttonTexts } = useContext(GlobalContext);
 
-  const placeHolder = useMemo(
-    () => (!isMobile ? buttonTexts.jumpTo : ''),
-    [buttonTexts, isMobile],
-  );
-
   return (
     <PopOver
-      placeholder={placeHolder}
+      placeholder={buttonTexts.jumpTo}
       position={position}
       theme={theme}
-      width={'400px'}
+      width={400}
       isDarkMode={isDarkMode}
       $isMobile={isMobile}
       icon={<ArrowDownIcon />}
@@ -170,11 +165,6 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
 }) => {
   const { buttonTexts } = useContext(GlobalContext);
 
-  const placeHolder = useMemo(
-    () => (!isMobile ? buttonTexts.changeDensity : ''),
-    [buttonTexts, isMobile],
-  );
-
   const items = useMemo(
     () => [
       {
@@ -197,11 +187,12 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
 
   return (
     <PopOver
-      placeholder={placeHolder}
+      placeholder={buttonTexts.changeDensity}
       theme={theme}
       isDarkMode={isDarkMode}
       position={position}
       $isMobile={isMobile}
+      width={300}
       icon={<ParaIcon />}
     >
       <List items={items} theme={theme} multiSelectable />

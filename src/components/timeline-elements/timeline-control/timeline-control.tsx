@@ -109,7 +109,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   );
 
   return (
-    <TimelineControlContainer>
+    <TimelineControlContainer key="control-wrapper">
       <TimelineNavWrapper
         className={cls('timeline-controls', classNames?.controls)}
         theme={theme}

@@ -4,12 +4,14 @@ import styled from 'styled-components';
 export const PopoverWrapper = styled.div``;
 
 export const PopoverHolder = styled.div<{
-  position?: 'top' | 'bottom';
-  theme?: Theme;
-  visible?: boolean;
+  $isMobile?: boolean;
+  $position?: 'top' | 'bottom';
+  $theme?: Theme;
+  $visible?: boolean;
+  $width: number;
 }>`
   align-items: flex-start;
-  background: ${({ theme }) => theme.toolbarBgColor};
+  background: ${({ $theme }) => $theme.toolbarBgColor};
   background:;
   border-radius: 6px;
   box-shadow: 0px 5px 16px rgba(0, 0, 0, 0.5);
@@ -20,32 +22,33 @@ export const PopoverHolder = styled.div<{
   overflow-y: auto;
   padding: 0.5rem;
   position: absolute;
-  ${(p) => (p.position === 'bottom' ? `bottom: 3.5rem` : `top: 3.5rem`)};
-  width: 100%;
+  ${(p) => (p.$position === 'bottom' ? `bottom: 3.5rem` : `top: 3.5rem`)};
+  width: ${({ $isMobile, $width }) => ($isMobile ? '90%' : `${$width}px`)};
   z-index: 100;
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transition: opacity 0.1s ease-in-out;
+  ${(p) => (p.$isMobile ? 'left: 4px;' : '')};
 `;
 
 export const Selecter = styled.div<{
   $isDarkMode: boolean;
   $isMobile?: boolean;
-  open?: boolean;
-  theme: Theme;
+  $open?: boolean;
+  $theme: Theme;
 }>`
   align-items: center;
-  background: ${({ theme }) => theme.toolbarBtnBgColor};
-  color: ${({ theme }) => theme.toolbarTextColor};
+  background: ${({ $theme }) => $theme.toolbarBtnBgColor};
+  color: ${({ $theme }) => $theme.toolbarTextColor};
   border-radius: 25px;
-  box-shadow: ${({ open, $isDarkMode: isDarkMode }) =>
-    !open
+  box-shadow: ${({ $open, $isDarkMode: isDarkMode }) =>
+    !$open
       ? `0px 1px 1px rgba(0, 0, 0, ${isDarkMode ? '0.85' : '0.2'})`
       : 'inset 0 0 1px 1px rgba(0, 0, 0, 0.2)'};
   cursor: pointer;
   display: flex;
   font-weight: normal;
   justify-content: space-between;
-  padding: ${(p) => (p.$isMobile ? '0.4rem' : `0.4rem 0.4rem 0.4rem 0.4rem`)};
+  padding: ${(p) => (p.$isMobile ? '0.4rem' : `0.4rem 0.5rem`)};
   user-select: none;
 `;
 
@@ -56,7 +59,6 @@ export const SelecterIcon = styled.span<{ open: boolean; theme: Theme }>`
   height: 1.25rem;
   justify-content: center;
   width: 1.25rem;
-  // transform: ${({ open }) => (open ? 'rotate(180deg)' : 'rotate(0deg)')};
   transition: transform 0.2s ease-in-out;
   margin-right: 0.1rem;
 

@@ -34,11 +34,12 @@ export const useMatchMedia = (
 
   useEffect(() => {
     const currentMedia = media.current;
-    const curMacthes = media.current.matches;
 
     if (!enabled || !currentMedia) {
       return;
     }
+
+    const curMacthes = currentMedia.matches;
 
     // Check initial match and update state if necessary
     if (curMacthes !== matches) {

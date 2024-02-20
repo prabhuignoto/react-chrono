@@ -1,9 +1,24 @@
 import { render, screen, waitFor } from '@testing-library/react';
+import GlobalContextProvider from 'src/components/GlobalContext';
 import { vi } from 'vitest';
 import { customRender, providerProps } from '../../../common/test';
 import TimelineCardContent from '../timeline-card-content';
 
 describe('TimelineCardContent', () => {
+  beforeAll(() => {
+    Object.defineProperty(window, 'matchMedia', {
+      value: vi.fn().mockImplementation((query) => ({
+        addEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+        matches: false,
+        media: query,
+        onchange: null,
+        removeEventListener: vi.fn(),
+      })),
+      writable: true,
+    });
+  });
+
   afterEach(() => {
     vi.resetAllMocks();
   });
@@ -26,7 +41,11 @@ describe('TimelineCardContent', () => {
 
   // should render the detailedText when a string is passed
   it('should render the detailedText when a string is passed', () => {
-    render(<TimelineCardContent detailedText="detailedText" />);
+    render(
+      <GlobalContextProvider toolbarPosition="bottom" textDensity="HIGH">
+        <TimelineCardContent detailedText="detailedText" />
+      </GlobalContextProvider>,
+    );
 
     expect(screen.getByText('detailedText')).toBeInTheDocument();
     expect(screen.getByText('detailedText')).toBeVisible();
@@ -34,7 +53,11 @@ describe('TimelineCardContent', () => {
 
   // should render the detailedText when a array of strings is passed
   it('should render the detailedText when a array of strings is passed', () => {
-    render(<TimelineCardContent detailedText={['detailedText', 'text 2']} />);
+    render(
+      <GlobalContextProvider toolbarPosition="bottom" textDensity="HIGH">
+        <TimelineCardContent detailedText={['detailedText', 'text 2']} />
+      </GlobalContextProvider>,
+    );
 
     expect(screen.getByText('detailedText')).toBeInTheDocument();
     expect(screen.getByText('text 2')).toBeInTheDocument();

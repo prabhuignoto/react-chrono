@@ -1,6 +1,6 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
-import { getDefaultButtonTexts, getDefaultThemeOrDark } from '@utils/index';
-import GlobalContextProvider from 'src/components/GlobalContext';
+import { fireEvent, waitFor } from '@testing-library/react';
+import { getDefaultThemeOrDark } from '@utils/index';
+import { customRender, providerProps } from 'src/components/common/test';
 import { vi } from 'vitest';
 import { LayoutSwitcher, QuickJump } from '../timeline-popover-elements';
 
@@ -11,19 +11,20 @@ describe('LayoutSwitcher Component', () => {
   const position = 'top';
 
   test('Renders correctly with vertical layout options', () => {
-    const { getByText } = render(
-      <GlobalContextProvider
+    const { getByText } = customRender(
+      <LayoutSwitcher
+        onUpdateTimelineMode={onUpdateTimelineMode}
         theme={theme}
-        buttonTexts={getDefaultButtonTexts()}
-      >
-        <LayoutSwitcher
-          onUpdateTimelineMode={onUpdateTimelineMode}
-          theme={theme}
-          mode="VERTICAL"
-          isDarkMode={isDarkMode}
-          position={position}
-        />
-      </GlobalContextProvider>,
+        mode="VERTICAL"
+        isDarkMode={isDarkMode}
+        position={position}
+        isMobile={false}
+      />,
+      {
+        providerProps: {
+          ...providerProps,
+        },
+      },
     );
 
     // Add your assertions here
@@ -36,19 +37,20 @@ describe('LayoutSwitcher Component', () => {
   });
 
   test('Renders correctly with horizontal layout options', () => {
-    const { getByText } = render(
-      <GlobalContextProvider
+    const { getByText } = customRender(
+      <LayoutSwitcher
+        onUpdateTimelineMode={onUpdateTimelineMode}
         theme={theme}
-        buttonTexts={getDefaultButtonTexts()}
-      >
-        <LayoutSwitcher
-          onUpdateTimelineMode={onUpdateTimelineMode}
-          theme={theme}
-          mode="HORIZONTAL"
-          isDarkMode={isDarkMode}
-          position={position}
-        />
-      </GlobalContextProvider>,
+        mode="HORIZONTAL"
+        isDarkMode={isDarkMode}
+        position={position}
+        isMobile={false}
+      />,
+      {
+        providerProps: {
+          ...providerProps,
+        },
+      },
     );
 
     // Add your assertions here
@@ -61,19 +63,20 @@ describe('LayoutSwitcher Component', () => {
   });
 
   test('Handles mode selection correctly', async () => {
-    const { getByText } = render(
-      <GlobalContextProvider
+    const { getByText } = customRender(
+      <LayoutSwitcher
+        onUpdateTimelineMode={onUpdateTimelineMode}
         theme={theme}
-        buttonTexts={getDefaultButtonTexts()}
-      >
-        <LayoutSwitcher
-          onUpdateTimelineMode={onUpdateTimelineMode}
-          theme={theme}
-          mode="VERTICAL"
-          isDarkMode={isDarkMode}
-          position={position}
-        />
-      </GlobalContextProvider>,
+        mode="VERTICAL"
+        isDarkMode={isDarkMode}
+        position={position}
+        isMobile={false}
+      />,
+      {
+        providerProps: {
+          ...providerProps,
+        },
+      },
     );
 
     expect(getByText('Change layout')).toBeInTheDocument();
@@ -102,20 +105,21 @@ describe('QuickJump Component', () => {
   ];
 
   test('Renders correctly with provided items', () => {
-    const { getByText } = render(
-      <GlobalContextProvider
+    const { getByText } = customRender(
+      <QuickJump
+        activeItem={0}
+        items={items}
         theme={theme}
-        buttonTexts={getDefaultButtonTexts()}
-      >
-        <QuickJump
-          activeItem={0}
-          items={items}
-          theme={theme}
-          onActivateItem={onActivateItem}
-          isDarkMode={isDarkMode}
-          position={position}
-        />
-      </GlobalContextProvider>,
+        onActivateItem={onActivateItem}
+        isDarkMode={isDarkMode}
+        position={position}
+        isMobile={false}
+      />,
+      {
+        providerProps: {
+          ...providerProps,
+        },
+      },
     );
 
     // Add your assertions here
@@ -129,20 +133,21 @@ describe('QuickJump Component', () => {
   });
 
   test('Handles item activation correctly', () => {
-    const { getByText } = render(
-      <GlobalContextProvider
+    const { getByText } = customRender(
+      <QuickJump
+        activeItem={0}
+        items={items}
         theme={theme}
-        buttonTexts={getDefaultButtonTexts()}
-      >
-        <QuickJump
-          activeItem={0}
-          items={items}
-          theme={theme}
-          onActivateItem={onActivateItem}
-          isDarkMode={isDarkMode}
-          position={position}
-        />
-      </GlobalContextProvider>,
+        onActivateItem={onActivateItem}
+        isDarkMode={isDarkMode}
+        position={position}
+        isMobile={false}
+      />,
+      {
+        providerProps: {
+          ...providerProps,
+        },
+      },
     );
 
     expect(getByText('Jump to')).toBeInTheDocument();
