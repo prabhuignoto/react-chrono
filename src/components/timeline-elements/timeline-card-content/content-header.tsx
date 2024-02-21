@@ -1,4 +1,4 @@
-import { FunctionComponent, memo, useContext } from 'react';
+import { FunctionComponent, memo, useContext, useMemo } from 'react';
 import { GlobalContext } from '../../GlobalContext';
 import { SubTitleMemo, TitleMemo } from '../memoized';
 import { ContentHeaderProps } from './header-footer.model';
@@ -21,10 +21,13 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
     // Using context to get global values
     const { fontSizes, classNames, theme } = useContext(GlobalContext);
 
+    const isNotMedia = useMemo(() => !media, [media]);
+
     return (
       <TimelineCardHeader>
         {/* Render title if there is no media */}
-        {!media && (
+
+        {isNotMedia ? (
           <TitleMemo
             title={title}
             theme={theme}
@@ -32,16 +35,18 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
             fontSize={fontSizes?.cardTitle}
             classString={classNames?.cardTitle}
           />
-        )}
+        ) : null}
+
         {/* Render subtitle if there is no media */}
-        {!media && (
+
+        {isNotMedia ? (
           <SubTitleMemo
             content={content}
             theme={theme}
             fontSize={fontSizes?.cardSubtitle}
             classString={classNames?.cardSubTitle}
           />
-        )}
+        ) : null}
       </TimelineCardHeader>
     );
   },

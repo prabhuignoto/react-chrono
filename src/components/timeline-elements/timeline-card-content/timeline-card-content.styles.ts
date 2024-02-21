@@ -47,14 +47,9 @@ export const TimelineItemContentWrapper = styled.section<
   margin: ${(p) => (p.mode === 'HORIZONTAL' ? '0 auto' : '')};
   max-width: ${(p) => p.$maxWidth}px;
   // min-height: ${(p) => p.$minHeight}px;
-  ${({ $textDensity, $customContent, $minHeight }) =>
-    $textDensity === 'HIGH'
-      ? css`
-          ${$customContent ? 'height' : 'min-height'}: ${$minHeight}px;
-        `
-      : css`
-          min-height: 100px;
-        `}
+  ${({ $textDensity, $customContent, $minHeight }) => css`
+    ${$customContent ? 'height' : 'min-height'}: ${$minHeight}px;
+  `}
   position: relative;
   text-align: left;
   width: 98%;

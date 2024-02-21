@@ -5,6 +5,7 @@ import {
   ReactNode,
   forwardRef,
   useContext,
+  useMemo,
 } from 'react';
 import xss from 'xss';
 import { GlobalContext } from '../../GlobalContext';
@@ -68,7 +69,7 @@ const getTextOrContent: (
   const TextOrContent = forwardRef<HTMLParagraphElement, TextOrContentModel>(
     (prop, ref) => {
       const isTextArray = Array.isArray(detailedText);
-      const { fontSizes, classNames, parseDetailsAsHTML } =
+      const { fontSizes, classNames, parseDetailsAsHTML, textDensity } =
         useContext(GlobalContext);
 
       const renderTimelineContent = () => {
@@ -97,6 +98,12 @@ const getTextOrContent: (
                 }
               : {};
 
+          const shouldNotShowText = useMemo(() => {
+            return (
+              (parseDetailsAsHTML && !isTextArray) || textDensity === 'LOW'
+            );
+          }, [isTextArray, textDensity]);
+
           return textContent ? (
             <TimelineContentDetails
               className={showMore ? 'active' : ''}
@@ -104,7 +111,7 @@ const getTextOrContent: (
               theme={theme}
               {...textContentProps}
             >
-              {parseDetailsAsHTML && !isTextArray ? null : textContent}
+              {shouldNotShowText ? null : textContent}
             </TimelineContentDetails>
           ) : null;
         }

@@ -21,7 +21,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
       class="sc-kFCroH kDetXN card-content-wrapper"
     >
       <section
-        class="sc-kZOsHZ ehiUwr timeline-card-content  card"
+        class="sc-kZOsHZ iTipIr timeline-card-content  card"
         data-testid="timeline-card-content"
         mode="VERTICAL_ALTERNATING"
         tabindex="0"
