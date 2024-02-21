@@ -161,12 +161,16 @@ export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
   order: ${(p) => (p.position === 'top' ? 0 : 1)};
 `;
 
-export const ToolbarExtraControl = styled.ul<{ $isMobile: boolean }>`
+export const ToolbarExtraControl = styled.ul<{
+  $isMobile: boolean;
+  $slideShowRunning: boolean;
+}>`
   display: flex;
   align-items: center;
   list-style: none;
   margin: 0;
   padding: 0.5rem;
+  visibility: ${(p) => (p.$slideShowRunning ? 'hidden' : 'visible')};
   // margin-top: ${(p) => (p.$isMobile ? '1rem' : '0')};
 `;
 
