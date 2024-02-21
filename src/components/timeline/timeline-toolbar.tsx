@@ -44,7 +44,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     toolbarPosition,
     textDensity,
     isMobile,
-    
+
   } = useContext(GlobalContext);
 
   // Define the toolbar items
