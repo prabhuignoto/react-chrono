@@ -214,7 +214,7 @@ export const VerticalNewMedia: FunctionComponent<{
             // cardHeight={250}
             // cardHeight={350}
             enableDarkToggle
-            contentDetailsHeight={200}
+            contentDetailsHeight={100}
             timelinePointDimension={20}
             classNames={{
               cardText: 'custom-text',
