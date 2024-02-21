@@ -66,11 +66,14 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
     );
   }, [mode, isNested]);
 
-  const handleClick = useCallback((ev: PointerEvent) => {
-    ev.stopPropagation();
-    ev.preventDefault();
-    onExpand();
-  }, []);
+  const handleClick = useCallback(
+    (ev: PointerEvent) => {
+      ev.stopPropagation();
+      ev.preventDefault();
+      onExpand();
+    },
+    [onExpand],
+  );
 
   const canShowMore = useMemo(
     () => showReadMore && textContentIsLarge,

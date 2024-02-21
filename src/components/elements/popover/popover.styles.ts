@@ -23,11 +23,11 @@ export const PopoverHolder = styled.div<{
   padding: 0.5rem;
   position: absolute;
   ${(p) => (p.$position === 'bottom' ? `bottom: 3.5rem` : `top: 3.5rem`)};
+  ${(p) => (p.$isMobile ? 'left: 4px;' : '')};
   width: ${({ $isMobile, $width }) => ($isMobile ? '90%' : `${$width}px`)};
   z-index: 100;
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transition: opacity 0.1s ease-in-out;
-  ${(p) => (p.$isMobile ? 'left: 4px;' : '')};
 `;
 
 export const Selecter = styled.div<{

@@ -23,7 +23,7 @@ export const VerticalTree: FunctionComponent<{
           slideItemDuration={2050}
           slideShowType="slide_from_sides"
           allowDynamicUpdate
-          cardHeight={300}
+          cardHeight={400}
           // textOverlay
           focusActiveItemOnLoad
           enableDarkToggle
@@ -33,6 +33,7 @@ export const VerticalTree: FunctionComponent<{
           verticalBreakPoint={1920}
           // enableBreakPoint
           highlightCardsOnHover
+          contentDetailsHeight={400}
         >
           <div className="chrono-icons">
             <img
@@ -214,7 +215,7 @@ export const VerticalNewMedia: FunctionComponent<{
             // cardHeight={250}
             // cardHeight={350}
             enableDarkToggle
-            contentDetailsHeight={100}
+            contentDetailsHeight={200}
             timelinePointDimension={20}
             classNames={{
               cardText: 'custom-text',
