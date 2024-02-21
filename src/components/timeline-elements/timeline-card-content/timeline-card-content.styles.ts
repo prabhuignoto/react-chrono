@@ -165,10 +165,10 @@ export const CardTitle = styled.h1<{
   color: ${(p) => p.theme.cardTitleColor};
   font-size: ${(p) => p.$fontSize};
   font-weight: 600;
-  margin: 0;
+  margin: 0.25rem 0 0.5rem 0;
   text-align: left;
   width: 95%;
-  padding: ${(p) => (p.$padding ? '0.25rem 0 0.25rem 0.5rem;' : '')} &.active {
+  padding: ${(p) => (p.$padding ? '0.2rem 0 0.25rem 0.5rem;' : '')} &.active {
     color: ${(p) => p.theme.primary};
   }
 `;

@@ -44,7 +44,6 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     toolbarPosition,
     textDensity,
     isMobile,
-    
   } = useContext(GlobalContext);
 
   // Define the toolbar items
@@ -105,7 +104,10 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
         onToggleDarkMode={toggleDarkMode}
         onPaused={onPaused}
       />
-      <ToolbarExtraControl $isMobile={isMobile} $slideShowRunning={slideShowRunning}>
+      <ToolbarExtraControl
+        $hide={isMobile || cardLess}
+        $slideShowRunning={slideShowRunning}
+      >
         <ToolbarExtraControlChild key="quick-jump">
           {enableQuickJump ? (
             <QuickJump

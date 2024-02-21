@@ -162,7 +162,7 @@ export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
 `;
 
 export const ToolbarExtraControl = styled.ul<{
-  $isMobile: boolean;
+  $hide: boolean;
   $slideShowRunning: boolean;
 }>`
   display: flex;
@@ -170,8 +170,7 @@ export const ToolbarExtraControl = styled.ul<{
   list-style: none;
   margin: 0;
   padding: 0.5rem;
-  visibility: ${(p) => (p.$slideShowRunning ? 'hidden' : 'visible')};
-  // margin-top: ${(p) => (p.$isMobile ? '1rem' : '0')};
+  visibility: ${(p) => (p.$hide ? 'hidden' : 'visible')};
 `;
 
 export const ToolbarExtraControlChild = styled.li`

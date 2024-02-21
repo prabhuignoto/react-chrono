@@ -31,7 +31,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       slideShowActive,
       onElapsed,
       theme,
-      title,
       onClick,
       customContent,
       hasFocus,
@@ -42,6 +41,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       items,
       isNested,
       nestedCardHeight,
+      title,
+      cardTitle,
     }: TimelineContentModel) => {
       const [showMore, setShowMore] = useState(false);
       const detailsRef = useRef<HTMLDivElement | null>(null);
@@ -394,6 +395,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               url={url}
               media={media}
               content={content}
+              cardTitle={cardTitle}
             />
           ) : null}
 

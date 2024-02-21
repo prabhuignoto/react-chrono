@@ -225,13 +225,14 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
             onShowMore={handleShowMore}
             slideShowActive={slideShowRunning}
             theme={theme}
-            title={cardTitle}
             url={url}
             flip={!alternateCards && flipLayout}
             timelineContent={timelineContent}
             items={items}
             isNested={isNested}
             nestedCardHeight={nestedCardHeight}
+            title={cardTitle}
+            cardTitle={title}
           />
         ) : null}
       </TimelineCardContentWrapper>

@@ -36,7 +36,7 @@ export const providerProps: TimelineProps = {
   },
   mediaHeight: 200,
   mode: 'VERTICAL_ALTERNATING',
-  
+
   scrollable: {
     scrollbar: false,
   },

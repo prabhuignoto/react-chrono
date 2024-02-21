@@ -63,6 +63,7 @@ export const TimelineControlContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
+  margin: 0.5rem 0;
 `;
 
 export const ControlButton = styled.button<{ theme?: Theme }>`
