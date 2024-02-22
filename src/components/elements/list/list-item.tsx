@@ -1,4 +1,5 @@
 import { FunctionComponent, KeyboardEvent, memo, useCallback } from 'react';
+import { CheckIcon } from 'src/components/icons';
 import { ListItemModel } from './list.model';
 import {
   CheckboxStyle,
@@ -8,7 +9,6 @@ import {
   TitleDescriptionStyle,
   TitleStyle,
 } from './list.styles';
-import { CheckIcon } from 'src/components/icons';
 
 const ListItem: FunctionComponent<ListItemModel> = memo(
   ({
@@ -32,9 +32,9 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
     return (
       <ListItemStyle
         key={id}
-        theme={theme}
+        $theme={theme}
         onClick={() => handleOnClick(id)}
-        active={active}
+        $active={active}
         tabIndex={0}
         $selectable={selectable}
         onKeyUp={(ev) => handleKeyPress(ev, id)}

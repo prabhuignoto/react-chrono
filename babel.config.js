@@ -2,6 +2,7 @@ module.exports = {
   plugins: [
     '@babel/plugin-transform-optional-chaining',
     '@babel/plugin-transform-typescript',
+    'babel-plugin-jsx-remove-data-test-id',
     [
       '@emotion',
       {

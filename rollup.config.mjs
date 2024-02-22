@@ -57,7 +57,7 @@ export default {
       globals: {
         react: 'React',
         'react-dom': 'ReactDOM',
-        'react/jsx-runtime': 'jsxRuntime'
+        'react/jsx-runtime': 'jsxRuntime',
       },
       name: 'ReactChrono',
       strict: true,
@@ -92,6 +92,7 @@ export default {
       plugins: [
         '@babel/plugin-transform-runtime',
         '@babel/plugin-transform-optional-chaining',
+        'babel-plugin-jsx-remove-data-test-id',
         [
           'babel-plugin-styled-components',
           {

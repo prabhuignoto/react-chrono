@@ -48,6 +48,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     showAllCardsHorizontal,
     textDensity = 'HIGH',
     responsiveBreakPoint = 1024,
+    toolbarPosition = 'top',
   } = props;
 
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
@@ -131,7 +132,6 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
           timelinePointDimension: 16,
           timelinePointShape: 'circle',
           titleDateFormat: 'MMM DD, YYYY',
-          toolbarPosition: 'top',
           uniqueId: 'react-chrono',
           useReadMore: true,
           verticalBreakPoint: 1028,

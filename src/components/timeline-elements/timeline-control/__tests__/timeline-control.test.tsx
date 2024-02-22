@@ -1,11 +1,11 @@
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import { commonProps, customRender, providerProps } from '../../../common/test';
-import TimelineControl from '../timeline-control';
+import Controls from '../timeline-control';
 
 describe('TimelineControl', () => {
   it('should render', () => {
-    const { container } = customRender(<TimelineControl {...commonProps} />, {
+    const { container } = customRender(<Controls {...commonProps} />, {
       providerProps,
     });
     expect(container).toMatchSnapshot();
@@ -13,10 +13,9 @@ describe('TimelineControl', () => {
 
   // check if all the buttons are rendered
   it('should render all the buttons', () => {
-    const { getByLabelText } = customRender(
-      <TimelineControl {...commonProps} />,
-      { providerProps: { ...providerProps, enableDarkToggle: true } },
-    );
+    const { getByLabelText } = customRender(<Controls {...commonProps} />, {
+      providerProps: { ...providerProps, enableDarkToggle: true },
+    });
     expect(getByLabelText('first')).toBeInTheDocument();
     expect(getByLabelText('previous')).toBeInTheDocument();
     expect(getByLabelText('next')).toBeInTheDocument();
@@ -27,11 +26,7 @@ describe('TimelineControl', () => {
   // should render the play button when slideShowEnabled is true
   it('should render the play button when slideShowEnabled is true', () => {
     const { getByLabelText } = customRender(
-      <TimelineControl
-        {...commonProps}
-        slideShowEnabled
-        slideShowRunning={false}
-      />,
+      <Controls {...commonProps} slideShowEnabled slideShowRunning={false} />,
       { providerProps },
     );
     expect(getByLabelText('start slideshow')).toBeInTheDocument();
@@ -47,7 +42,7 @@ describe('TimelineControl', () => {
     const user = userEvent.setup();
 
     const { getByLabelText } = customRender(
-      <TimelineControl
+      <Controls
         {...commonProps}
         onFirst={onFirst}
         onPrevious={onPrevious}
@@ -71,10 +66,9 @@ describe('TimelineControl', () => {
 
   // check if the navigation controls to be hidden / not shown when disableInteraction is set to true
   it('should hide the navigation controls when disableInteraction is set to true', () => {
-    const { queryByLabelText } = customRender(
-      <TimelineControl {...commonProps} />,
-      { providerProps: { ...providerProps, disableInteraction: true } },
-    );
+    const { queryByLabelText } = customRender(<Controls {...commonProps} />, {
+      providerProps: { ...providerProps, disableInteraction: true },
+    });
     expect(queryByLabelText('first')).not.toBeInTheDocument();
     expect(queryByLabelText('previous')).not.toBeInTheDocument();
     expect(queryByLabelText('next')).not.toBeInTheDocument();

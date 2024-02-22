@@ -222,7 +222,7 @@ export type TimelineProps = {
 
   titleDateFormat?: string;
 
-  toolbarPosition: 'top' | 'bottom';
+  toolbarPosition?: 'top' | 'bottom';
 
   uniqueId?: string;
 

@@ -161,7 +161,7 @@ export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
   order: ${(p) => (p.position === 'top' ? 0 : 1)};
 `;
 
-export const ToolbarExtraControl = styled.ul<{
+export const ExtraControls = styled.ul<{
   $hide: boolean;
   $slideShowRunning: boolean;
 }>`
@@ -173,7 +173,7 @@ export const ToolbarExtraControl = styled.ul<{
   visibility: ${(p) => (p.$hide ? 'hidden' : 'visible')};
 `;
 
-export const ToolbarExtraControlChild = styled.li`
+export const ExtraControlChild = styled.li`
   display: flex;
   margin-right: 0.5rem;
 `;

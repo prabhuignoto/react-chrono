@@ -1,7 +1,7 @@
 // Import necessary dependencies
 import { FunctionComponent, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
-import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
+import Controls from '../timeline-elements/timeline-control/timeline-control';
 import { Toolbar } from '../toolbar';
 import {
   ChangeDensity,
@@ -9,10 +9,7 @@ import {
   QuickJump,
 } from './timeline-popover-elements';
 import { TimelineToolbarProps } from './timeline-toolbar.model';
-import {
-  ToolbarExtraControl,
-  ToolbarExtraControlChild,
-} from './timeline.style';
+import { ExtraControlChild, ExtraControls } from './timeline.style';
 
 // Define the TimelineToolbar component
 const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
@@ -34,7 +31,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   onUpdateTimelineMode,
   onUpdateTextContentDensity,
   mode,
-}) => {
+}: TimelineToolbarProps) => {
   // Access the global context
   const {
     theme,
@@ -86,10 +83,14 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       : activeTimelineItem === totalItems - 1;
   }, [flipLayout, activeTimelineItem, totalItems]);
 
+  const hideExtraControls = useMemo(() => {
+    return cardLess || slideShowRunning;
+  }, [cardLess, slideShowRunning]);
+
   // Render the TimelineToolbar component
   return (
     <Toolbar items={toolbarItems} theme={theme}>
-      <TimelineControl
+      <Controls
         disableLeft={disableLeft}
         disableRight={disableRight}
         id={id}
@@ -104,11 +105,12 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
         onToggleDarkMode={toggleDarkMode}
         onPaused={onPaused}
       />
-      <ToolbarExtraControl
-        $hide={isMobile || cardLess}
+      <ExtraControls
+        $hide={hideExtraControls}
         $slideShowRunning={slideShowRunning}
+        key="timeline-extra-controls"
       >
-        <ToolbarExtraControlChild key="quick-jump">
+        <ExtraControlChild key="quick-jump">
           {enableQuickJump ? (
             <QuickJump
               activeItem={activeTimelineItem}
@@ -116,6 +118,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               items={items.map((item) => ({
                 ...item,
                 description: item.cardSubtitle,
+                id: item.id,
                 title: item.title,
               }))}
               onActivateItem={onActivateTimelineItem}
@@ -124,8 +127,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               isMobile={isMobile}
             />
           ) : null}
-        </ToolbarExtraControlChild>
-        <ToolbarExtraControlChild key="layout-switcher">
+        </ExtraControlChild>
+        <ExtraControlChild key="layout-switcher">
           {!cardLess ? (
             <LayoutSwitcher
               isDarkMode={darkMode}
@@ -136,8 +139,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               isMobile={isMobile}
             />
           ) : null}
-        </ToolbarExtraControlChild>
-        <ToolbarExtraControlChild key="change-density">
+        </ExtraControlChild>
+        <ExtraControlChild key="change-density">
           <ChangeDensity
             isDarkMode={darkMode}
             theme={theme}
@@ -146,8 +149,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             selectedDensity={textDensity}
             isMobile={isMobile}
           ></ChangeDensity>
-        </ToolbarExtraControlChild>
-      </ToolbarExtraControl>
+        </ExtraControlChild>
+      </ExtraControls>
     </Toolbar>
   );
 };

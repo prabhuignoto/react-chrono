@@ -8,7 +8,7 @@ import Timeline from './timeline/timeline';
 const toReactArray = React.Children.toArray;
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
-  props: Partial<TimelineProps>,
+  props: TimelineProps,
 ) => {
   const {
     allowDynamicUpdate = false,

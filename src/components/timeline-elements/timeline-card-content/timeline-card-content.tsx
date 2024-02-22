@@ -127,7 +127,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           setDetailsHeight(detailsEle.offsetHeight);
           setTextContentLarge(scrollHeight + offsetTop > node.clientHeight);
         },
-        [detailsRef.current],
+        [detailsRef.current, textDensity],
       );
 
       const setupTimer = useCallback((interval: number) => {

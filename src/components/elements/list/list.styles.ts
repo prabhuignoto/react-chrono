@@ -35,17 +35,17 @@ export const ListStyle = styled.ul`
 
 // List item styles
 export const ListItemStyle = styled.li<{
+  $active?: boolean;
   $selectable?: boolean;
-  active?: boolean;
-  theme: Theme;
+  $theme: Theme;
 }>`
   ${commonStyles}
   border: ${(p) =>
-    p.active ? `1px solid ${p.theme.primary}` : '1px solid transparent'};
+    p.$active ? `1px solid ${p.$theme.primary}` : '1px solid transparent'};
   flex-direction: ${(p) => (p.$selectable ? 'row' : 'column')};
-  background: ${(p) => p.theme.toolbarBtnBgColor};
+  background: ${(p) => p.$theme.toolbarBtnBgColor};
   &:hover {
-    border: 1px solid ${(p) => p.theme.primary};
+    border: 1px solid ${(p) => p.$theme.primary};
     cursor: pointer;
   }
   user-select: none;
