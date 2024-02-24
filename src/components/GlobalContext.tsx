@@ -132,6 +132,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
           timelinePointDimension: 16,
           timelinePointShape: 'circle',
           titleDateFormat: 'MMM DD, YYYY',
+          toolbarPosition: 'top',
           uniqueId: 'react-chrono',
           useReadMore: true,
           verticalBreakPoint: 1028,
