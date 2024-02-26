@@ -20,33 +20,6 @@ export const Wrapper = styled.div<{
   position: relative;
   width: 100%;
 
-  ${(p) =>
-    p.cardPositionHorizontal === 'TOP' && !p.$hideControls
-      ? `
-    & > div:nth-of-type(1) {
-      order: 2;
-    }
-    & > div:nth-of-type(2) {
-      order: 3;
-    }
-    & > div:nth-of-type(3) {
-      order: 1;
-    }
-  `
-      : ''};
-
-  ${(p) =>
-    p.cardPositionHorizontal === 'TOP' && p.$hideControls
-      ? `
-    & > div:nth-of-type(1) {
-      order: 2;
-    }
-    & > div:nth-of-type(2) {
-      order: 1;
-    }
-  `
-      : ''};
-
   &.horizontal {
     justify-content: flex-start;
   }
@@ -75,7 +48,7 @@ export const TimelineMainWrapper = styled.div<{
   ${(p) => (p.mode === 'HORIZONTAL' ? 'position: relative' : '')};
   scroll-behavior: smooth;
   width: 100%;
-  order: ${(p) => (p.position === 'top' ? 1 : 0)};
+  // order: ${(p) => (p.position === 'top' ? 1 : 0)};
 
   ${ScrollBar}
 

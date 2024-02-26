@@ -2,7 +2,6 @@ import { TimelineMode } from '@models/TimelineModel';
 import {
   FunctionComponent,
   PointerEvent,
-  memo,
   useCallback,
   useContext,
   useMemo,
@@ -41,107 +40,93 @@ import {
  *
  * @returns {JSX.Element} ContentFooter component.
  */
-const ContentFooter: FunctionComponent<ContentFooterProps> = memo(
-  ({
-    showProgressBar,
-    onExpand,
-    triangleDir,
-    showMore,
-    textContentIsLarge,
-    showReadMore,
-    remainInterval,
-    paused,
-    startWidth,
-    canShow,
-    progressRef,
-    isNested,
-    isResuming,
-  }: ContentFooterProps) => {
-    const { mode, theme } = useContext(GlobalContext);
+const ContentFooter: FunctionComponent<ContentFooterProps> = ({
+  showProgressBar,
+  onExpand,
+  triangleDir,
+  showMore,
+  textContentIsLarge,
+  showReadMore,
+  remainInterval,
+  paused,
+  startWidth,
+  canShow,
+  progressRef,
+  isNested,
+  isResuming,
+}: ContentFooterProps) => {
+  const { mode, theme } = useContext(GlobalContext);
 
-    const canShowTriangleIcon = useMemo(() => {
-      return (
-        !isNested &&
-        (['VERTICAL', 'VERTICAL_ALTERNATING'] as TimelineMode[]).some(
-          (m) => m === mode,
-        )
-      );
-    }, [mode, isNested]);
-
-    const handleClick = useCallback(
-      (ev: PointerEvent) => {
-        ev.stopPropagation();
-        ev.preventDefault();
-        onExpand();
-      },
-      [onExpand],
-    );
-
-    const canShowMore = useMemo(
-      () => showReadMore && textContentIsLarge,
-      [showReadMore, textContentIsLarge],
-    );
-
-    // useEffect(() => {
-    //   console.log('show more', showReadMore);
-    //   console.log('text content is large', textContentIsLarge);
-    // }, [showMore, canShowMore, canShow]);
-
+  const canShowTriangleIcon = useMemo(() => {
     return (
-      <>
-        {canShowMore ? (
-          <ShowMore
-            className="show-more"
-            onPointerDown={handleClick}
-            onKeyUp={(event) => {
-              if (event.key === 'Enter') {
-                onExpand();
-              }
-            }}
-            show={canShow ? 'true' : 'false'}
-            theme={theme}
-            tabIndex={0}
-          >
-            {<span>{showMore ? 'read less' : 'read more'}</span>}
-            <ChevronIconWrapper collapsed={showMore ? 'true' : 'false'}>
-              <ChevronIcon />
-            </ChevronIconWrapper>
-          </ShowMore>
-        ) : null}
-
-        {showProgressBar && (
-          <SlideShowProgressBar
-            color={theme?.primary}
-            $duration={remainInterval}
-            $paused={paused}
-            ref={progressRef}
-            $startWidth={startWidth}
-            $resuming={isResuming}
-          ></SlideShowProgressBar>
-        )}
-
-        {canShowTriangleIcon && (
-          <TriangleIconWrapper
-            dir={triangleDir}
-            theme={theme}
-            offset={-8}
-          ></TriangleIconWrapper>
-        )}
-      </>
+      !isNested &&
+      (['VERTICAL', 'VERTICAL_ALTERNATING'] as TimelineMode[]).some(
+        (m) => m === mode,
+      )
     );
-  },
-  (prev, next) => {
-    return (
-      prev.showMore === next.showMore &&
-      prev.textContentIsLarge === next.textContentIsLarge &&
-      prev.showReadMore === next.showReadMore &&
-      prev.remainInterval === next.remainInterval &&
-      prev.paused === next.paused &&
-      prev.isResuming === next.isResuming
-    );
-  },
-);
+  }, [mode, isNested]);
 
-ContentFooter.displayName = 'ContentFooter';
+  const handleClick = useCallback(
+    (ev: PointerEvent) => {
+      ev.stopPropagation();
+      ev.preventDefault();
+      onExpand();
+    },
+    [onExpand],
+  );
+
+  const canShowMore = useMemo(
+    () => showReadMore && textContentIsLarge,
+    [showReadMore, textContentIsLarge],
+  );
+
+  // useEffect(() => {
+  //   console.log('show more', showReadMore);
+  //   console.log('text content is large', textContentIsLarge);
+  // }, [showMore, canShowMore, canShow]);
+
+  return (
+    <>
+      {canShowMore ? (
+        <ShowMore
+          className="show-more"
+          onPointerDown={handleClick}
+          onKeyUp={(event) => {
+            if (event.key === 'Enter') {
+              onExpand();
+            }
+          }}
+          show={canShow ? 'true' : 'false'}
+          theme={theme}
+          tabIndex={0}
+        >
+          {<span>{showMore ? 'read less' : 'read more'}</span>}
+          <ChevronIconWrapper collapsed={showMore ? 'true' : 'false'}>
+            <ChevronIcon />
+          </ChevronIconWrapper>
+        </ShowMore>
+      ) : null}
+
+      {showProgressBar && (
+        <SlideShowProgressBar
+          color={theme?.primary}
+          $duration={remainInterval}
+          $paused={paused}
+          ref={progressRef}
+          $startWidth={startWidth}
+          $resuming={isResuming}
+        ></SlideShowProgressBar>
+      )}
+
+      {canShowTriangleIcon && (
+        <TriangleIconWrapper
+          dir={triangleDir}
+          theme={theme}
+          offset={-8}
+        ></TriangleIconWrapper>
+      )}
+    </>
+  );
+};
 
 export { ContentFooter };
