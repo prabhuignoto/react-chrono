@@ -129,6 +129,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             return;
           }
           const detailsEle = detailsRef.current;
+          // console.log('textDensity', textDensity);
           if (!detailsEle) {
             return;
           }
@@ -138,8 +139,9 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           setCardActualHeight(scrollHeight);
           setDetailsHeight(detailsEle.offsetHeight);
           setTextContentLarge(scrollHeight + offsetTop > node.clientHeight);
+          console.log('manchi', scrollHeight + offsetTop > node.clientHeight);
         },
-        [detailsRef.current, textDensity],
+        [detailsRef, textDensity],
       );
 
       useEffect(() => {
