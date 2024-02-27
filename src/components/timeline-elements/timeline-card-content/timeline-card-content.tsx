@@ -139,7 +139,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           setCardActualHeight(scrollHeight);
           setDetailsHeight(detailsEle.offsetHeight);
           setTextContentLarge(scrollHeight + offsetTop > node.clientHeight);
-          console.log('manchi', scrollHeight + offsetTop > node.clientHeight);
         },
         [detailsRef, textDensity],
       );

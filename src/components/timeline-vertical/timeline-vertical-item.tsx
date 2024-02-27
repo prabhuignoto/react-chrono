@@ -104,6 +104,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
 
   // timeline title
   const Title = useMemo(() => {
+    console.log(title);
     return (
       <TimelineTitleWrapper
         className={className}
@@ -118,7 +119,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
           theme={theme}
           align={flipLayout ? 'left' : 'right'}
           classString={classNames?.title}
-        />
+        />{' '}
       </TimelineTitleWrapper>
     );
   }, [
@@ -197,8 +198,8 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       theme={theme}
     >
       {/* title */}
-      {canShowTitle ? Title : null}
-      {/* {Title} */}
+      {/* {canShowTitle ? Title : null} */}
+      {Title}
 
       {/* card section */}
       <TimelineCardContentWrapper

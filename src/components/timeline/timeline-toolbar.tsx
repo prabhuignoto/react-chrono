@@ -87,6 +87,10 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     return cardLess || slideShowRunning;
   }, [cardLess, slideShowRunning]);
 
+  const canShowDensity = useMemo(() => {
+    return items.every((item) => item.cardDetailedText);
+  }, []);
+
   // Render the TimelineToolbar component
   return (
     <Toolbar items={toolbarItems} theme={theme}>
@@ -140,16 +144,18 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             />
           ) : null}
         </ExtraControlChild>
-        <ExtraControlChild key="change-density">
-          <ChangeDensity
-            isDarkMode={darkMode}
-            theme={theme}
-            onChange={onUpdateTextContentDensity}
-            position={toolbarPosition}
-            selectedDensity={textDensity}
-            isMobile={isMobile}
-          ></ChangeDensity>
-        </ExtraControlChild>
+        {canShowDensity ? (
+          <ExtraControlChild key="change-density">
+            <ChangeDensity
+              isDarkMode={darkMode}
+              theme={theme}
+              onChange={onUpdateTextContentDensity}
+              position={toolbarPosition}
+              selectedDensity={textDensity}
+              isMobile={isMobile}
+            ></ChangeDensity>
+          </ExtraControlChild>
+        ) : null}{' '}
       </ExtraControls>
     </Toolbar>
   );

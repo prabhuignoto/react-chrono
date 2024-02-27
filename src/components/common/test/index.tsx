@@ -6,7 +6,35 @@ import { GlobalContext } from '../../GlobalContext';
 export const providerProps: TimelineProps = {
   buttonTexts: {
     changeDensity: 'Change density',
+    changeDensityOptions: {
+      high: {
+        helpText: 'Show more items at once',
+        text: 'High',
+      },
+      low: {
+        helpText: 'Show fewer items at once',
+        text: 'Low',
+      },
+    },
     changeLayout: 'Change layout',
+    changeLayoutOptions: {
+      alternating: {
+        helpText: 'Show cards in a vertical layout with alternating fashion',
+        text: 'Alternating',
+      },
+      horizontal: {
+        helpText: 'Show cards in a horizontal layout',
+        text: 'Horizontal',
+      },
+      horizontal_all: {
+        helpText: 'Show all cards in a horizontal layout',
+        text: 'Show all cards',
+      },
+      vertical: {
+        helpText: 'Show cards in a vertical layout',
+        text: 'Vertical',
+      },
+    },
     dark: 'dark',
     first: 'first',
     jumpTo: 'Jump to',

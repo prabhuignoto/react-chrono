@@ -25,7 +25,7 @@ export type ContextProps = PropsModel & {
   updateTextContentDensity?: (value: TextDensity) => void;
 };
 
-const GlobalContext = createContext<ContextProps | null>(null);
+const GlobalContext = createContext<ContextProps>({});
 
 const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
   const {

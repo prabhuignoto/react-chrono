@@ -151,7 +151,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
           id: item.id,
           label: item.title,
           onSelect: () => {},
-          title: item.title,
+          title: item.title || `Item ${index + 1}`,
         }))}
         theme={theme}
         onClick={onActivateItem}
