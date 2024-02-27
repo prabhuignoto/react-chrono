@@ -18,14 +18,14 @@ import {
 } from 'react';
 import { useMatchMedia } from './effects/useMatchMedia';
 
-type ContextProps = PropsModel & {
+export type ContextProps = PropsModel & {
   isMobile?: boolean;
   toggleDarkMode?: () => void;
   updateHorizontalAllCards?: (state: boolean) => void;
   updateTextContentDensity?: (value: TextDensity) => void;
 };
 
-const GlobalContext = createContext<ContextProps>({} as ContextProps);
+const GlobalContext = createContext<ContextProps | null>(null);
 
 const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
   const {

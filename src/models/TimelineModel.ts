@@ -42,6 +42,39 @@ export type TimelineModel = Pick<
   slideShowRunning?: boolean;
 };
 
+type Option = {
+  helpText?: string;
+  text: string;
+};
+
+type ChangeDensityOptions = {
+  high?: Option;
+  low?: Option;
+};
+
+type ChangeLayoutOptions = {
+  alternating?: Option;
+  horizontal?: Option;
+  horizontal_all?: Option;
+  vertical?: Option;
+};
+
+export type ButtonTexts = {
+  changeDensity?: string;
+  changeDensityOptions?: ChangeDensityOptions;
+  changeLayout?: string;
+  changeLayoutOptions?: ChangeLayoutOptions;
+  dark?: string;
+  first: string;
+  jumpTo?: string;
+  last: string;
+  light?: string;
+  next?: string;
+  play?: string;
+  previous?: string;
+  stop?: string;
+};
+
 /**
  * Main props used by the host app.
  *
@@ -61,19 +94,7 @@ export type TimelineProps = {
   borderLessCards?: boolean;
 
   // custom button texts
-  buttonTexts?: {
-    changeDensity?: string;
-    changeLayout?: string;
-    dark?: string;
-    first: string;
-    jumpTo?: string;
-    last: string;
-    light?: string;
-    next?: string;
-    play?: string;
-    previous?: string;
-    stop?: string;
-  };
+  buttonTexts?: ButtonTexts;
 
   // minimum height of the card
   cardHeight?: number;

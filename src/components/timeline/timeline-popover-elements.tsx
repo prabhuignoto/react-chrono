@@ -41,31 +41,36 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
 }: LayoutSwitcherProp) => {
   const { showAllCardsHorizontal, buttonTexts } = useContext(GlobalContext);
 
-  // const placeHolder = useMemo(
-  //   () => (!isMobile ? buttonTexts.changeLayout : ''),
-  //   [buttonTexts, isMobile],
-  // );
-
   const activeTimelineMode = useMemo(
     () => mode,
     [showAllCardsHorizontal, mode],
   );
 
+  const layoutOptions = useMemo(
+    () => ({
+      alternating: buttonTexts.changeLayoutOptions.alternating,
+      horizontal: buttonTexts.changeLayoutOptions.horizontal,
+      horizontal_all: buttonTexts.changeLayoutOptions.horizontal_all,
+      vertical: buttonTexts.changeLayoutOptions.vertical,
+    }),
+    [],
+  );
+
   const verticalItems = useMemo(
     () => [
       {
-        description: 'Show cards in a vertical layout',
+        description: layoutOptions.vertical.helpText,
         id: 'VERTICAL',
         onSelect: () => onUpdateTimelineMode('VERTICAL'),
         selected: activeTimelineMode === 'VERTICAL',
-        title: 'Default',
+        title: layoutOptions.vertical.text,
       },
       {
-        description: 'Show cards in a vertical layout with alternating fashion',
+        description: layoutOptions.alternating.helpText,
         id: 'VERTICAL_ALTERNATING',
         onSelect: () => onUpdateTimelineMode('VERTICAL_ALTERNATING'),
         selected: activeTimelineMode === 'VERTICAL_ALTERNATING',
-        title: 'Alternating',
+        title: layoutOptions.alternating.text,
       },
     ],
     [activeTimelineMode],
@@ -75,22 +80,22 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   const horizontalItems = useMemo(
     () => [
       {
-        description: 'Show cards in a horizontal layout',
+        description: layoutOptions.horizontal.helpText,
         id: 'HORIZONTAL',
         onSelect: () => {
           onUpdateTimelineMode('HORIZONTAL');
         },
         selected: activeTimelineMode === 'HORIZONTAL',
-        title: 'Default',
+        title: layoutOptions.horizontal.text,
       },
       {
-        description: 'Show all cards in a horizontal layout',
+        description: layoutOptions.horizontal_all.helpText,
         id: 'HORIZONTAL_ALL',
         onSelect: () => {
           onUpdateTimelineMode('HORIZONTAL_ALL');
         },
         selected: activeTimelineMode === 'HORIZONTAL_ALL',
-        title: 'Show all cards',
+        title: layoutOptions.horizontal.text,
       },
     ],
     [activeTimelineMode],

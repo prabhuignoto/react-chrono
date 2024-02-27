@@ -140,7 +140,6 @@ export const TimelineItemContentWrapper = styled.section<
 
 export const TimelineCardHeader = styled.header`
   width: 100%;
-  // padding: 0.5rem 0.5rem 0 0.5rem;
   padding: 0.5rem;
 `;
 
@@ -340,7 +339,7 @@ export const SlideShowProgressBar = styled.progress<{
   left: 50%;
   transform: translateX(-50%);
   position: absolute;
-  border-radius: 2px;
+  border-radius: 2px;gggg
   border: 0;
 
   ${(p) => {
