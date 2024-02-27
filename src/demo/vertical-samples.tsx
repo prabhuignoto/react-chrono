@@ -33,7 +33,7 @@ export const VerticalTree: FunctionComponent<{
           verticalBreakPoint={1920}
           enableBreakPoint
           highlightCardsOnHover
-          contentDetailsHeight={600}
+          contentDetailsHeight={200}
         >
           <div className="chrono-icons">
             <img
