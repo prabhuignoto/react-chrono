@@ -48,7 +48,6 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     showAllCardsHorizontal,
     textDensity = 'HIGH',
     responsiveBreakPoint = 1024,
-    toolbarPosition = 'top',
   } = props;
 
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
