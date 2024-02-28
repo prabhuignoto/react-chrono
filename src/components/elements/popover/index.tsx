@@ -69,7 +69,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         title={placeholder}
       >
         <SelecterIcon theme={theme} open={open}>
-          {icon ? icon : <ChevronDown />}
+          {icon || <ChevronDown />}
         </SelecterIcon>
         {placeholder && !$isMobile ? (
           <SelecterLabel>{placeholder}</SelecterLabel>
