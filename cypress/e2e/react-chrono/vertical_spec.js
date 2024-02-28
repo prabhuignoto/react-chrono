@@ -44,8 +44,6 @@ context('Chrono.Vertical.Basic', () => {
       .should('have.length', 2);
   });
 
-  
-
   it('check card description', () => {
     cy.get('.vertical-item-row')
       .eq(0)
