@@ -12,7 +12,6 @@ import React, {
   useState,
 } from 'react';
 import { GlobalContext } from '../GlobalContext';
-import { useMatchMedia } from '../effects/useMatchMedia';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
@@ -67,12 +66,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     theme,
     darkMode,
     toggleDarkMode,
-    verticalBreakPoint = 768,
-    enableBreakPoint,
     updateHorizontalAllCards,
     toolbarPosition,
     updateTextContentDensity,
-    textDensity,
   } = useContext(GlobalContext);
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);

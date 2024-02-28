@@ -75,7 +75,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         disableInteraction,
         highlightCardsOnHover,
         textDensity,
-        isMobile,
       } = useContext(GlobalContext);
 
       const {

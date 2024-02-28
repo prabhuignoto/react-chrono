@@ -81,7 +81,6 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     mediaHeight,
     disableInteraction,
     isMobile,
-    enableBreakPoint,
   } = useContext(GlobalContext);
 
   // handler for onActive
@@ -198,8 +197,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       theme={theme}
     >
       {/* title */}
-      {/* {canShowTitle ? Title : null} */}
-      {Title}
+      {canShowTitle ? Title : null}
 
       {/* card section */}
       <TimelineCardContentWrapper
