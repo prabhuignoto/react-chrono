@@ -80,11 +80,6 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
     [showReadMore, textContentIsLarge],
   );
 
-  // useEffect(() => {
-  //   console.log('show more', showReadMore);
-  //   console.log('text content is large', textContentIsLarge);
-  // }, [showMore, canShowMore, canShow]);
-
   return (
     <>
       {canShowMore ? (

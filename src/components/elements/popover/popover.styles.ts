@@ -40,9 +40,9 @@ export const Selecter = styled.div<{
   background: ${({ $theme }) => $theme.toolbarBtnBgColor};
   color: ${({ $theme }) => $theme.toolbarTextColor};
   border-radius: 25px;
-  box-shadow: ${({ $open, $isDarkMode: isDarkMode }) =>
+  box-shadow: ${({ $open, $isDarkMode }) =>
     !$open
-      ? `0px 1px 1px rgba(0, 0, 0, ${isDarkMode ? '0.85' : '0.2'})`
+      ? `0px 1px 1px rgba(0, 0, 0, ${$isDarkMode ? '0.85' : '0.2'})`
       : 'inset 0 0 1px 1px rgba(0, 0, 0, 0.2)'};
   cursor: pointer;
   display: flex;

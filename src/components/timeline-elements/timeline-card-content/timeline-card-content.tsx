@@ -128,7 +128,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             return;
           }
           const detailsEle = detailsRef.current;
-          // console.log('textDensity', textDensity);
           if (!detailsEle) {
             return;
           }
