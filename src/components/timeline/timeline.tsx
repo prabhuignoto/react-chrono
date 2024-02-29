@@ -100,16 +100,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     `react-chrono-timeline-${noUniqueId ? uniqueId : getUniqueID()}`,
   );
 
-  // useMatchMedia(
-  //   `(min-width: 100px) and (max-width: ${verticalBreakPoint}px)`,
-  //   () => {
-  //     if (mode === 'VERTICAL_ALTERNATING') {
-  //       setTimelineMode('VERTICAL');
-  //     }
-  //   },
-  //   enableBreakPoint,
-  // );
-
   // handlers for navigation
   const handleNext = useCallback(() => {
     if (hasFocus) {
