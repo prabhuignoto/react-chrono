@@ -130,6 +130,7 @@ export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
   text-decoration: none;
   border-radius: 6px;
   width: 100%;
+  padding: 0;
   margin: ${(p) => (p.position === 'top' ? '0 0 20px 0' : '20px 0 0 0')};
   order: ${(p) => (p.position === 'top' ? 0 : 1)};
 `;
@@ -142,7 +143,7 @@ export const ExtraControls = styled.ul<{
   align-items: center;
   list-style: none;
   margin: 0;
-  padding: 0.5rem;
+  padding: 0.1rem;
   visibility: ${(p) => (p.$hide ? 'hidden' : 'visible')};
 `;
 

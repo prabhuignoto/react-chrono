@@ -12,7 +12,7 @@ export const ToolbarWrapper = styled.ul<{ theme: Theme }>`
   height: 100%;
   border-radius: 6px;
   flex-wrap: wrap;
-  padding: 0.5rem;
+  padding: 0.25rem;
 `;
 
 export const ToolbarListItem = styled.li`
