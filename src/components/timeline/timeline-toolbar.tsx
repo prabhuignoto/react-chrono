@@ -41,6 +41,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     toolbarPosition,
     textDensity,
     isMobile,
+    enableLayoutSwitch,
   } = useContext(GlobalContext);
 
   // Define the toolbar items
@@ -133,7 +134,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           ) : null}
         </ExtraControlChild>
         <ExtraControlChild key="layout-switcher">
-          {!cardLess ? (
+          {!cardLess && enableLayoutSwitch ? (
             <LayoutSwitcher
               isDarkMode={darkMode}
               theme={theme}

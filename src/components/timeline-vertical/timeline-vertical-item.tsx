@@ -103,7 +103,6 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
 
   // timeline title
   const Title = useMemo(() => {
-    console.log(title);
     return (
       <TimelineTitleWrapper
         className={className}

@@ -30,7 +30,6 @@ export const VerticalTree: FunctionComponent<{
           cardWidth={400}
           onItemSelected={(selected) => console.log(selected)}
           onScrollEnd={() => console.log('end reached')}
-          verticalBreakPoint={1920}
           enableBreakPoint
           highlightCardsOnHover
           contentDetailsHeight={200}
@@ -166,6 +165,8 @@ export const VerticalBasic: FunctionComponent<{
           imageFit: 'cover',
         }}
         enableDarkToggle
+        enableBreakPoint={true}
+        responsiveBreakPoint={768}
       />
     </ComponentContainerTree>
   </Vertical>

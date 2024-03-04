@@ -48,6 +48,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     showAllCardsHorizontal,
     textDensity = 'HIGH',
     responsiveBreakPoint = 1024,
+    enableBreakPoint,
   } = props;
 
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
@@ -92,13 +93,21 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     [textContentDensity],
   );
 
-  useMatchMedia(`(max-width: ${responsiveBreakPoint - 1}px)`, () =>
-    setIsMobileDetected(true),
+  useMatchMedia(
+    `(max-width: ${responsiveBreakPoint - 1}px)`,
+    () => setIsMobileDetected(true),
+    enableBreakPoint,
   );
 
-  useMatchMedia(`(min-width: ${responsiveBreakPoint}px)`, () =>
-    setIsMobileDetected(false),
+  useMatchMedia(
+    `(min-width: ${responsiveBreakPoint}px)`,
+    () => setIsMobileDetected(false),
+    enableBreakPoint,
   );
+
+  // useEffect(() => {
+  //   console.log('isMobile', isMobileDetected);
+  // }, [isMobileDetected]);
 
   const defaultProps = useMemo(
     () =>
@@ -134,7 +143,6 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
           toolbarPosition: 'top',
           uniqueId: 'react-chrono',
           useReadMore: true,
-          verticalBreakPoint: 1028,
         },
         ...props,
         activeItemIndex: flipLayout ? items?.length - 1 : 0,

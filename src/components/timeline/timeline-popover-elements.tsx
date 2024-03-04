@@ -48,10 +48,10 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
 
   const layoutOptions = useMemo(
     () => ({
-      alternating: buttonTexts.changeLayoutOptions.alternating,
-      horizontal: buttonTexts.changeLayoutOptions.horizontal,
-      horizontal_all: buttonTexts.changeLayoutOptions.horizontal_all,
-      vertical: buttonTexts.changeLayoutOptions.vertical,
+      alternating: buttonTexts?.changeLayoutOptions.alternating,
+      horizontal: buttonTexts?.changeLayoutOptions.horizontal,
+      horizontal_all: buttonTexts?.changeLayoutOptions.horizontal_all,
+      vertical: buttonTexts?.changeLayoutOptions.vertical,
     }),
     [],
   );
