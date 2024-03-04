@@ -55,6 +55,10 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     }
   }, [open]);
 
+  useEffect(() => {
+    console.log('$isMobile: ', theme);
+  }, [$isMobile]);
+
   return (
     <PopoverWrapper ref={ref}>
       <Selecter

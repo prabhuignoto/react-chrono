@@ -71,6 +71,7 @@ export const SelecterIcon = styled.span<{ open: boolean; theme: Theme }>`
 export const SelecterLabel = styled.span`
   font-size: 0.9rem;
   text-align: left;
+  white-space: nowrap;
 `;
 
 export const Header = styled.div`

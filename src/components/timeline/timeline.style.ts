@@ -148,5 +148,6 @@ export const ExtraControls = styled.ul<{
 
 export const ExtraControlChild = styled.li`
   display: flex;
+  margin: 0.5rem 0;
   margin-right: 0.5rem;
 `;

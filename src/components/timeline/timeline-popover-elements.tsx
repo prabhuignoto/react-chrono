@@ -1,35 +1,13 @@
-import { Theme } from '@models/Theme';
-import { TextDensity, TimelineMode } from '@models/TimelineModel';
 import { FunctionComponent, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import { List } from '../elements/list/list';
-import { ListItemModel } from '../elements/list/list.model';
 import { PopOver } from '../elements/popover';
 import { ArrowDownIcon, LayoutIcon, ParaIcon } from '../icons';
-
-type CommonProps = {
-  isDarkMode: boolean;
-  isMobile: boolean;
-  position: 'top' | 'bottom';
-  theme: Theme;
-};
-
-type LayoutSwitcherProp = {
-  initialTimelineMode?: TimelineMode | 'HORIZONTAL_ALL';
-  mode?: TimelineMode;
-  onUpdateTimelineMode: (s: string) => void;
-} & CommonProps;
-
-type QuickJumpProp = {
-  activeItem: number;
-  items: ListItemModel[];
-  onActivateItem: (id: string) => void;
-} & CommonProps;
-
-type ChangeDensityProp = {
-  onChange: (value: TextDensity) => void;
-  selectedDensity: TextDensity;
-} & CommonProps;
+import {
+  ChangeDensityProp,
+  LayoutSwitcherProp,
+  QuickJumpProp,
+} from './timeline-popover.model';
 
 const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   onUpdateTimelineMode,
