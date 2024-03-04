@@ -526,6 +526,8 @@ Use the breakpoint feature to automatically switch the timeline to `VERTICAL` mo
 
 Customize colors with the `theme` prop.
 
+> Checkout the documentation for the complete list of available theme properties.
+
 ```jsx
 <Chrono
   items={items}

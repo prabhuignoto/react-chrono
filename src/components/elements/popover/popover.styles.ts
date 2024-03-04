@@ -22,7 +22,7 @@ export const PopoverHolder = styled.div<{
   overflow-y: auto;
   padding: 0.5rem;
   position: absolute;
-  ${(p) => (p.$position === 'bottom' ? `bottom: 3.5rem` : `top: 3.5rem`)};
+  ${(p) => (p.$position === 'bottom' ? `bottom: 3.5rem` : `top: 4rem`)};
   ${(p) => (p.$isMobile ? 'left: 4px;' : '')};
   width: ${({ $isMobile, $width }) => ($isMobile ? '90%' : `${$width}px`)};
   z-index: 100;
