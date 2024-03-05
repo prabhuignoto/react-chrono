@@ -1,6 +1,6 @@
 import { Theme } from '@models/Theme';
 import styled, { keyframes } from 'styled-components';
-import { OutlinePosition } from './timeline-outline';
+import { OutlinePosition } from './timeline-outline.model';
 
 const open = keyframes`
   from {
@@ -36,10 +36,7 @@ export const OutlineWrapper = styled.div<{
   background: rgba(255, 255, 255, 0.98);
   border: 1px solid ${(p) => (p.open ? '#f5f5f5' : 'none')};
   height: 50%;
-  position: absolute;
-  top: 1rem;
   width: 100%;
-  z-index: 9000;
   ${(p) =>
     p.position === OutlinePosition.left ? `left: 1rem;` : `right: 3rem;`};
   ${(p) =>
@@ -47,7 +44,6 @@ export const OutlineWrapper = styled.div<{
       ? `
     width: 200px;
     height: 50%;
-    box-shadow: 0 5px 10px 2px rgba(0,0,0,0.2);
     overflow-y: auto;`
       : `width: 30px; height: 30px;`};
 `;
@@ -57,6 +53,10 @@ export const OutlinePane = styled.aside<{ open?: boolean }>`
   border-radius: 4px;
   display: flex;
   justify-content: center;
+  position: absolute;
+  z-index: 9000;
+  box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.2);
+  top: 1rem;
 `;
 
 export const OutlineButton = styled.button<{
@@ -69,7 +69,7 @@ export const OutlineButton = styled.button<{
   background: #fff;
   border-radius: 4px;
   border: 0;
-  box-shadow: ${(p) => (!p.open ? '0 0 10px 2px rgba(0,0,0,0.2)' : 'none')};
+  // box-shadow: ${(p) => (!p.open ? '0 0 10px 2px rgba(0,0,0,0.2)' : 'none')};
   cursor: pointer;
   display: flex;
   height: 30px;

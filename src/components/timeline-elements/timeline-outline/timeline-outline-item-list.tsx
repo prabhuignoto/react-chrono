@@ -6,7 +6,7 @@ import {
   ListItemName,
 } from './timeline-outline.styles';
 import { FunctionComponent } from 'react';
-import { TimelineOutlineItem } from './timeline-outline';
+import { TimelineOutlineItem } from './timeline-outline.model';
 
 interface OutlineItemListModel {
   handleSelection: (index: number, id?: string) => void;

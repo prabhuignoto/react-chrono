@@ -169,7 +169,9 @@ Below are the available configuration options for the component:
 | disableTimelinePoint     | false                | Disables the timeline point in both `HORIZONTAL` and `VERTICAL` mode.                                                                    |
 | enableBreakPoint         | true                 | Automatically switches to vertical mode when the vertical breakpoint is reached.                                                         |
 | enableDarkToggle         | false                | Adds a toggle switch for dark mode.                                                                                                      |
+| enableLayoutSwitch       | true                 | Switches the timeline layout                                                                                                             |
 | enableOutline            | false                | Enables an outline menu in vertical and vertical alternating modes.                                                                      |
+| enableQuickJump          | true                 | Allows to quickly jump to a timeline item                                                                                                |
 | flipLayout               | false                | Reverses the layout (Right to Left).                                                                                                     |
 | focusActiveItemOnLoad    | false                | Automatically scrolls to and focuses on the `activeItemIndex` when loading.                                                              |
 | fontSizes                |                      | Allows customization of font sizes.                                                                                                      |
@@ -198,7 +200,8 @@ Below are the available configuration options for the component:
 | titleDateFormat          | 'MMM DD, YYYY'       | Formats the date for each timeline item. Supports all [dayjs](https://day.js.org/) formats.                                              |
 | uniqueId                 |                      | Used with `noUniqueId` to set a custom unique id for the wrapper.                                                                        |
 | useReadMore              | true                 | Enables or disables the "read more" button. Available if text content on the card is taller than the card itself.                        |
-| verticalBreakPoint       | 768px                | Sets the pixel count below which the timeline will switch to `VERTICAL` mode.                                                            |
+| responsiveBreakPoint     | 1024px               | Break point at which the timeline changes to `VERTICAL` mode when `VERTICAL_ALTERNATING` is the default mode                             |
+| textDensity              | HIGH                 | Configures the amount of text to be displayed in each timeline card. Can be either `HIGH` or `LOW`                                       |
 
 ### Mode
 
@@ -522,6 +525,8 @@ Use the breakpoint feature to automatically switch the timeline to `VERTICAL` mo
 ### 🎨Theme
 
 Customize colors with the `theme` prop.
+
+> Checkout the documentation for the complete list of available theme properties.
 
 ```jsx
 <Chrono

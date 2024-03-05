@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, vi } from 'vitest';
+import { TimelineCardModel } from '../../../../models/TimelineItemModel';
 import { customRender } from '../../../common/test';
 import { providerProps } from '../../../common/test/index';
-import { TimelineCardModel } from '../../../../models/TimelineItemModel';
 import TimelineCard from '../timeline-horizontal-card';
 
 const defaultProps: TimelineCardModel = {
@@ -25,6 +25,20 @@ const defaultProps: TimelineCardModel = {
 };
 
 describe('TimelineHorizontalCard', () => {
+  beforeAll(() => {
+    Object.defineProperty(window, 'matchMedia', {
+      value: vi.fn().mockImplementation((query) => ({
+        addEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+        matches: false,
+        media: query,
+        onchange: null,
+        removeEventListener: vi.fn(),
+      })),
+      writable: true,
+    });
+  });
+
   beforeEach(() => {
     // create a div with id 'wrapper-id-12345' to render the component
     const root = document.createElement('div');

@@ -1,8 +1,8 @@
-import { FunctionComponent, memo, useContext } from 'react';
+import { FunctionComponent, memo, useContext, useMemo } from 'react';
 import { GlobalContext } from '../../GlobalContext';
 import { SubTitleMemo, TitleMemo } from '../memoized';
 import { ContentHeaderProps } from './header-footer.model';
-import { TimelineCardHeader } from './timeline-card-content.styles';
+import { CardTitle, TimelineCardHeader } from './timeline-card-content.styles';
 
 /**
  * ContentHeader component
@@ -17,14 +17,24 @@ import { TimelineCardHeader } from './timeline-card-content.styles';
  * @returns {JSX.Element} The ContentHeader component.
  */
 const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
-  ({ title, url, media, content }: ContentHeaderProps) => {
+  ({ title, url, media, content, cardTitle }: ContentHeaderProps) => {
     // Using context to get global values
-    const { fontSizes, classNames, theme } = useContext(GlobalContext);
+    const { fontSizes, classNames, theme, isMobile } =
+      useContext(GlobalContext);
+
+    const isNotMedia = useMemo(() => !media, [media]);
 
     return (
       <TimelineCardHeader>
         {/* Render title if there is no media */}
-        {!media && (
+
+        {isMobile ? (
+          <CardTitle $fontSize={'1.2rem'} theme={theme}>
+            {cardTitle}
+          </CardTitle>
+        ) : null}
+
+        {isNotMedia ? (
           <TitleMemo
             title={title}
             theme={theme}
@@ -32,16 +42,18 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
             fontSize={fontSizes?.cardTitle}
             classString={classNames?.cardTitle}
           />
-        )}
+        ) : null}
+
         {/* Render subtitle if there is no media */}
-        {!media && (
+
+        {isNotMedia ? (
           <SubTitleMemo
             content={content}
             theme={theme}
             fontSize={fontSizes?.cardSubtitle}
             classString={classNames?.cardSubTitle}
           />
-        )}
+        ) : null}
       </TimelineCardHeader>
     );
   },

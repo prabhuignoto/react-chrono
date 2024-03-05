@@ -1,6 +1,6 @@
 import { TimelineVerticalModel } from '@models/TimelineVerticalModel';
-import React, { useCallback, useMemo } from 'react';
-import { TimelineOutline } from '../timeline-elements/timeline-outline/timeline-outline';
+import React, { useCallback, useContext } from 'react';
+import { GlobalContext } from '../GlobalContext';
 import TimelineVerticalItem from './timeline-vertical-item';
 import { TimelineVerticalWrapper } from './timeline-vertical.styles';
 
@@ -56,30 +56,15 @@ const TimelineVertical: React.FunctionComponent<TimelineVerticalModel> = ({
   // todo remove this
   const handleOnShowMore = useCallback(() => {}, []);
 
-  const outlineItems = useMemo(
-    () =>
-      items.map((item) => ({
-        id: Math.random().toString(16).slice(2),
-        name: item.title,
-      })),
-    [items],
-  );
+  const { isMobile } = useContext(GlobalContext);
 
   return (
     <TimelineVerticalWrapper data-testid="tree-main" role="list">
-      {enableOutline && (
-        <TimelineOutline
-          theme={theme}
-          mode={mode}
-          items={outlineItems}
-          onSelect={onOutlineSelection}
-        />
-      )}
       {items.map((item, index) => {
         let className = '';
 
         // in tree mode alternate cards position
-        if (alternateCards) {
+        if (alternateCards && !isMobile) {
           className = index % 2 === 0 ? 'left' : 'right';
         } else {
           className = 'right';

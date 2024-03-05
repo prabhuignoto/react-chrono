@@ -5,14 +5,18 @@ import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
+import fs from 'fs';
 import postCSSPreset from 'postcss-preset-env';
-import analyze from 'rollup-plugin-analyzer';
 import copy from 'rollup-plugin-copy';
 import del from 'rollup-plugin-delete';
+import filesize from 'rollup-plugin-filesize';
 import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
-import pkg from './package.json' assert { type: 'json' };
+import { visualizer } from 'rollup-plugin-visualizer';
+import eslint from '@rollup/plugin-eslint';
+
+const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
 const banner = `/*
  * ${pkg.name}
@@ -26,6 +30,10 @@ export default {
   cache: true,
   external: ['react', 'react-dom'],
   input: 'src/react-chrono.ts',
+  onwarn(warning) {
+    if (warning.code === 'EXPERIMENTAL_WARNING') return;
+    console.warn(warning);
+  },
   output: [
     {
       banner,
@@ -49,6 +57,7 @@ export default {
       globals: {
         react: 'React',
         'react-dom': 'ReactDOM',
+        'react/jsx-runtime': 'jsxRuntime',
       },
       name: 'ReactChrono',
       strict: true,
@@ -59,10 +68,6 @@ export default {
     del({ targets: 'dist/*' }),
     typescript({
       tsconfig: 'tsconfig.json',
-      tsconfigOverride: {
-        include: ['src/**/*.ts+(|x)', 'src/**/*.d.ts+(|x)'],
-        exclude: ['src/demo/**/*', 'src/examples/**/*'],
-      },
       tsconfigDefaults: {
         compilerOptions: {
           plugins: [
@@ -70,11 +75,15 @@ export default {
               transform: 'typescript-transform-paths',
             },
             {
-              transform: 'typescript-transform-paths',
               afterDeclarations: true,
+              transform: 'typescript-transform-paths',
             },
           ],
         },
+      },
+      tsconfigOverride: {
+        exclude: ['src/demo/**/*', 'src/examples/**/*'],
+        include: ['src/**/*.ts+(|x)', 'src/**/*.d.ts+(|x)'],
       },
     }),
     babel({
@@ -82,14 +91,15 @@ export default {
       extensions: ['tsx', 'ts'],
       plugins: [
         '@babel/plugin-transform-runtime',
-        '@babel/plugin-proposal-optional-chaining',
+        '@babel/plugin-transform-optional-chaining',
+        'babel-plugin-jsx-remove-data-test-id',
         [
           'babel-plugin-styled-components',
           {
             fileName: false,
+            minify: true,
             ssr: true,
             transpileTemplateLiterals: true,
-            minify: true,
           },
         ],
       ],
@@ -118,6 +128,15 @@ export default {
     resolve({
       browser: true,
     }),
+    filesize({
+      showBrotliSize: true,
+      showGzippedSize: true,
+      showMinifiedSize: true,
+    }),
+    visualizer({
+      emitFile: true,
+      filename: 'dist/stats.html',
+    }),
     terser({
       compress: {
         drop_console: true,
@@ -127,9 +146,10 @@ export default {
         comments: false,
       },
     }),
-    analyze({
-      summaryOnly: true,
-    }),
+    eslint(),
+    // analyze({
+    //   summaryOnly: true,
+    // }),
     copy({
       targets: [{ dest: 'dist', src: 'README.md' }],
     }),

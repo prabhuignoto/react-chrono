@@ -4,7 +4,7 @@ import { RefObject } from 'react';
 
 export type ContentHeaderProps = Pick<
   TimelineContentModel,
-  'theme' | 'url' | 'title' | 'media' | 'content'
+  'theme' | 'url' | 'title' | 'media' | 'content' | 'cardTitle'
 >;
 
 export type ContentFooterProps = {

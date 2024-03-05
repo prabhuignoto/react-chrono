@@ -12,17 +12,16 @@ import React, {
   useState,
 } from 'react';
 import { GlobalContext } from '../GlobalContext';
-import { useMatchMedia } from '../effects/useMatchMedia';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
-import TimelineControl from '../timeline-elements/timeline-control/timeline-control';
 import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
+import { TimelineToolbar } from './timeline-toolbar';
 import {
   Outline,
   TimelineContentRender,
-  TimelineControlContainer,
   TimelineMain,
   TimelineMainWrapper,
+  ToolbarWrapper,
   Wrapper,
 } from './timeline.style';
 
@@ -67,15 +66,18 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     theme,
     darkMode,
     toggleDarkMode,
-    verticalBreakPoint = 768,
-    enableBreakPoint,
+    updateHorizontalAllCards,
+    toolbarPosition,
+    updateTextContentDensity,
   } = useContext(GlobalContext);
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const observer = useRef<IntersectionObserver | null>(null);
   const [hasFocus, setHasFocus] = useState(false);
   const horizontalContentRef = useRef<HTMLDivElement | null>(null);
-  const [timelineMode, setTimelineMode] = useState(mode);
+  const [timelineMode, setTimelineMode] = useState(
+    mode === 'HORIZONTAL' && showAllCardsHorizontal ? 'HORIZONTAL_ALL' : mode,
+  );
 
   const activeItemIndex = useRef<number>(activeTimelineItem);
 
@@ -96,24 +98,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   const id = useRef(
     `react-chrono-timeline-${noUniqueId ? uniqueId : getUniqueID()}`,
-  );
-
-  useMatchMedia(
-    `(min-width: 100px) and (max-width: ${verticalBreakPoint}px)`,
-    () => {
-      if (mode === 'VERTICAL_ALTERNATING') {
-        setTimelineMode('VERTICAL');
-      }
-    },
-    enableBreakPoint,
-  );
-
-  useMatchMedia(
-    `(min-width: ${verticalBreakPoint + 1}px)`,
-    () => {
-      setTimelineMode(mode);
-    },
-    enableBreakPoint,
   );
 
   // handlers for navigation
@@ -189,12 +173,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           break;
         }
       }
-
-      // const selectedItem = items.find((item) => item.id === itemId);
-
-      // if (selectedItem) {
-      //   onItemSelected?.(selectedItem);
-      // }
     }
   };
 
@@ -329,6 +307,20 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     [disableNavOnKey, slideShowRunning, handleKeySelection],
   );
 
+  const handleTimelineUpdate = useCallback((mode: string) => {
+    if (mode === 'VERTICAL') {
+      setTimelineMode('VERTICAL');
+    } else if (mode === 'HORIZONTAL') {
+      setTimelineMode('HORIZONTAL');
+      updateHorizontalAllCards?.(false);
+    } else if (mode === 'VERTICAL_ALTERNATING') {
+      setTimelineMode('VERTICAL_ALTERNATING');
+    } else if (mode === 'HORIZONTAL_ALL') {
+      setTimelineMode('HORIZONTAL_ALL');
+      updateHorizontalAllCards?.(true);
+    }
+  }, []);
+
   const wrapperClass = useMemo(() => {
     return cls(mode.toLocaleLowerCase(), {
       'focus-visible': !isChild,
@@ -351,6 +343,31 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         }
       }}
     >
+      {!isChild ? (
+        <ToolbarWrapper position={toolbarPosition}>
+          <TimelineToolbar
+            activeTimelineItem={activeTimelineItem}
+            totalItems={items.length}
+            slideShowEnabled={slideShowEnabled}
+            slideShowRunning={slideShowRunning}
+            onFirst={handleFirst}
+            onLast={handleLast}
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+            onRestartSlideshow={onRestartSlideshow}
+            darkMode={darkMode}
+            toggleDarkMode={toggleDarkMode}
+            onPaused={onPaused}
+            id={id.current}
+            flipLayout={flipLayout}
+            items={items}
+            onActivateTimelineItem={handleTimelineItemClick}
+            onUpdateTimelineMode={handleTimelineUpdate}
+            onUpdateTextContentDensity={updateTextContentDensity}
+            mode={timelineMode}
+          />
+        </ToolbarWrapper>
+      ) : null}
       <TimelineMainWrapper
         ref={timelineMainRef}
         $scrollable={canScrollTimeline}
@@ -359,6 +376,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         data-testid="timeline-main-wrapper"
         theme={theme}
         mode={mode}
+        position={toolbarPosition}
         onScroll={(ev) => {
           const target = ev.target as HTMLElement;
           let scrolled = 0;
@@ -401,7 +419,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         ) : null}
 
         {/* HORIZONTAL */}
-        {timelineMode === 'HORIZONTAL' ? (
+        {timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL' ? (
           <TimelineMain className={mode.toLowerCase()}>
             <Outline color={theme && theme.primary} height={lineWidth} />
             <TimelineHorizontal
@@ -445,35 +463,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           />
         ) : null}
       </TimelineMainWrapper>
-
-      {/* Timeline Controls */}
-      {!hideControls && (
-        <TimelineControlContainer mode={mode}>
-          <TimelineControl
-            disableLeft={
-              flipLayout
-                ? activeTimelineItem === items.length - 1
-                : activeTimelineItem === 0
-            }
-            disableRight={
-              flipLayout
-                ? activeTimelineItem === 0
-                : activeTimelineItem === items.length - 1
-            }
-            id={id.current}
-            onFirst={handleFirst}
-            onLast={handleLast}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-            onReplay={onRestartSlideshow}
-            slideShowEnabled={slideShowEnabled}
-            slideShowRunning={slideShowRunning}
-            isDark={darkMode}
-            onToggleDarkMode={toggleDarkMode}
-            onPaused={onPaused}
-          />
-        </TimelineControlContainer>
-      )}
 
       {/* placeholder to render timeline content for horizontal mode */}
       <TimelineContentRender

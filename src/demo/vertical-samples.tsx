@@ -23,16 +23,16 @@ export const VerticalTree: FunctionComponent<{
           slideItemDuration={2050}
           slideShowType="slide_from_sides"
           allowDynamicUpdate
-          cardHeight={300}
+          cardHeight={200}
           // textOverlay
           focusActiveItemOnLoad
           enableDarkToggle
-          cardWidth={450}
+          cardWidth={400}
           onItemSelected={(selected) => console.log(selected)}
           onScrollEnd={() => console.log('end reached')}
-          verticalBreakPoint={1920}
           enableBreakPoint
           highlightCardsOnHover
+          contentDetailsHeight={200}
         >
           <div className="chrono-icons">
             <img
@@ -103,7 +103,7 @@ export const VerticalTreeMixed: FunctionComponent<{
       <Chrono
         items={dataMixed}
         mode="VERTICAL_ALTERNATING"
-        cardHeight={300}
+        cardHeight={400}
         cardWidth={450}
         scrollable
         slideShow
@@ -132,6 +132,8 @@ export const VerticalBasic: FunctionComponent<{
         uniqueId="vertical_basic_test"
         parseDetailsAsHTML
         highlightCardsOnHover
+        enableQuickJump={true}
+        toolbarPosition='top'
         // textOverlay
         // borderLessCards
         // theme={{
@@ -163,6 +165,8 @@ export const VerticalBasic: FunctionComponent<{
           imageFit: 'cover',
         }}
         enableDarkToggle
+        enableBreakPoint={true}
+        responsiveBreakPoint={768}
       />
     </ComponentContainerTree>
   </Vertical>

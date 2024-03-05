@@ -1,13 +1,14 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es2023: true,
   },
   extends: [
     'plugin:import/typescript',
     'plugin:react/recommended',
     'prettier',
     'plugin:react/jsx-runtime',
+    // 'eslint:recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {

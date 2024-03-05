@@ -18,6 +18,9 @@ export const defaultTheme: Theme = {
   secondary: '#ffdf00',
   titleColor: '#007FFF',
   titleColorActive: '#007FFF',
+  toolbarBgColor: '#f5f5f5',
+  toolbarBtnBgColor: '#fff',
+  toolbarTextColor: '#000',
 };
 
 export const darkTheme: Theme = {
@@ -38,4 +41,7 @@ export const darkTheme: Theme = {
   secondary: '#ffdf00',
   titleColor: '#007FFF',
   titleColorActive: '#007FFF',
+  toolbarBgColor: '#555',
+  toolbarBtnBgColor: '#222',
+  toolbarTextColor: '#ffffff',
 };

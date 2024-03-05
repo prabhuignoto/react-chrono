@@ -34,7 +34,7 @@ import {
  * @property {function} onPaused - Function to pause the slideshow (if running).
  * @returns {JSX.Element} The TimelineControl component.
  */
-const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
+const Controls: React.FunctionComponent<TimelineControlModel> = ({
   onNext,
   onPrevious,
   onFirst,
@@ -109,9 +109,10 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   );
 
   return (
-    <TimelineControlContainer>
+    <TimelineControlContainer key="control-wrapper">
       <TimelineNavWrapper
         className={cls('timeline-controls', classNames?.controls)}
+        theme={theme}
       >
         {/* jump to first */}
         {disableInteraction ? null : (
@@ -127,6 +128,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
                 aria-controls="timeline-main-wrapper"
                 tabIndex={!disableLeft ? 0 : -1}
                 rotate={rotate ? 'TRUE' : 'FALSE'}
+                data-test-id="jump-to-first"
               >
                 <ChevronsLeftIcon />
               </TimelineNavButton>
@@ -144,6 +146,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
                 aria-controls="timeline-main-wrapper"
                 tabIndex={!disableLeft ? 0 : -1}
                 rotate={rotate ? 'TRUE' : 'FALSE'}
+                data-test-id="previous"
               >
                 <ChevronLeft />
               </TimelineNavButton>
@@ -161,6 +164,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
                 aria-controls="timeline-main-wrapper"
                 rotate={rotate ? 'TRUE' : 'FALSE'}
                 tabIndex={!disableRight ? 0 : -1}
+                data-test-id="next"
               >
                 <ChevronRightIcon />
               </TimelineNavButton>
@@ -178,6 +182,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
                 aria-controls="timeline-main-wrapper"
                 tabIndex={!disableRight ? 0 : -1}
                 rotate={rotate ? 'TRUE' : 'FALSE'}
+                data-test-id="jump-to-last"
               >
                 <ChevronsRightIcon />
               </TimelineNavButton>
@@ -195,6 +200,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
               tabIndex={0}
               aria-controls="timeline-main-wrapper"
               aria-label={playOrPauseTile}
+              data-test-id="play-pause"
             >
               {slideShowRunning ? <StopIcon /> : <ReplayIcon />}
             </TimelineNavButton>
@@ -211,6 +217,7 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
               tabIndex={0}
               aria-controls="timeline-main-wrapper"
               aria-label={isDark ? buttonTexts?.light : buttonTexts?.dark}
+              data-test-id="dark-toggle"
             >
               {isDark ? <SunIcon /> : <MoonIcon />}
             </TimelineNavButton>
@@ -221,6 +228,6 @@ const TimelineControl: React.FunctionComponent<TimelineControlModel> = ({
   );
 };
 
-TimelineControl.displayName = 'Timeline Control';
+Controls.displayName = 'Timeline Control';
 
-export default TimelineControl;
+export default Controls;

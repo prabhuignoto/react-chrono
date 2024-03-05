@@ -13,6 +13,8 @@ export type TimelineContentModel = {
   // Directory for branch-related content.
   branchDir?: string;
 
+  cardTitle?: string;
+
   // Main content of the timeline item.
   content?: string | ReactNode;
 

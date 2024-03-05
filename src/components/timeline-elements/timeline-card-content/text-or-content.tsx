@@ -1,5 +1,12 @@
 import { TimelineContentModel } from '@models/TimelineContentModel';
-import { ForwardRefExoticComponent, forwardRef, useContext } from 'react';
+import { TimelineProps } from '@models/TimelineModel';
+import {
+  ForwardRefExoticComponent,
+  ReactNode,
+  forwardRef,
+  useContext,
+  useMemo,
+} from 'react';
 import xss from 'xss';
 import { GlobalContext } from '../../GlobalContext';
 import {
@@ -7,6 +14,7 @@ import {
   TimelineSubContent,
 } from './timeline-card-content.styles';
 
+// Define the type for the TextOrContentModel
 export type TextOrContentModel = Pick<
   TimelineContentModel,
   'timelineContent' | 'theme' | 'detailedText'
@@ -14,6 +22,42 @@ export type TextOrContentModel = Pick<
   showMore?: boolean;
 };
 
+// Function to render an array of text
+const renderTextArray: (
+  p: Pick<TimelineProps, 'parseDetailsAsHTML' | 'fontSizes' | 'theme'> & {
+    cardTextClassName: string;
+    detailedText: string[];
+  },
+) => ReactNode = ({
+  fontSizes,
+  parseDetailsAsHTML,
+  theme,
+  detailedText,
+  cardTextClassName,
+}) => {
+  return detailedText.map((text, index) => {
+    const props = parseDetailsAsHTML
+      ? {
+          dangerouslySetInnerHTML: {
+            __html: xss(text),
+          },
+        }
+      : null;
+    return (
+      <TimelineSubContent
+        key={index}
+        fontSize={fontSizes?.cardText}
+        className={cardTextClassName}
+        theme={theme}
+        {...props}
+      >
+        {parseDetailsAsHTML ? null : text}
+      </TimelineSubContent>
+    );
+  });
+};
+
+// Function to get the TextOrContent component
 const getTextOrContent: (
   p: TextOrContentModel,
 ) => ForwardRefExoticComponent<TextOrContentModel> = ({
@@ -25,7 +69,7 @@ const getTextOrContent: (
   const TextOrContent = forwardRef<HTMLParagraphElement, TextOrContentModel>(
     (prop, ref) => {
       const isTextArray = Array.isArray(detailedText);
-      const { fontSizes, classNames, parseDetailsAsHTML } =
+      const { fontSizes, classNames, parseDetailsAsHTML, textDensity } =
         useContext(GlobalContext);
 
       const renderTimelineContent = () => {
@@ -34,7 +78,13 @@ const getTextOrContent: (
         } else {
           let textContent = null;
           if (isTextArray) {
-            textContent = renderTextArray();
+            textContent = renderTextArray({
+              cardTextClassName: classNames?.cardText,
+              detailedText,
+              fontSizes,
+              parseDetailsAsHTML,
+              theme,
+            });
           } else {
             textContent = parseDetailsAsHTML ? xss(detailedText) : detailedText;
           }
@@ -48,6 +98,12 @@ const getTextOrContent: (
                 }
               : {};
 
+          const shouldNotShowText = useMemo(() => {
+            return (
+              (parseDetailsAsHTML && !isTextArray) || textDensity === 'LOW'
+            );
+          }, [isTextArray, textDensity]);
+
           return textContent ? (
             <TimelineContentDetails
               className={showMore ? 'active' : ''}
@@ -55,33 +111,10 @@ const getTextOrContent: (
               theme={theme}
               {...textContentProps}
             >
-              {parseDetailsAsHTML && !isTextArray ? null : textContent}
+              {shouldNotShowText ? null : textContent}
             </TimelineContentDetails>
           ) : null;
         }
-      };
-
-      const renderTextArray = () => {
-        return (detailedText as string[]).map((text, index) => {
-          const props = parseDetailsAsHTML
-            ? {
-                dangerouslySetInnerHTML: {
-                  __html: xss(text),
-                },
-              }
-            : null;
-          return (
-            <TimelineSubContent
-              key={index}
-              fontSize={fontSizes?.cardText}
-              className={classNames?.cardText}
-              theme={theme}
-              {...props}
-            >
-              {parseDetailsAsHTML ? null : text}
-            </TimelineSubContent>
-          );
-        });
       };
 
       return renderTimelineContent();

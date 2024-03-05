@@ -3,10 +3,10 @@
 exports[`TimelineControl > should render 1`] = `
 <div>
   <div
-    class="sc-hLQSwg hGvNdL"
+    class="sc-hLQSwg RQUyL"
   >
     <ul
-      class="sc-beySPh iNcNae timeline-controls controls"
+      class="sc-beySPh jDWHGu timeline-controls controls"
     >
       <li
         class="sc-guDLey iDgMta"
@@ -15,7 +15,8 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="first"
-          class="sc-dmyCSP cFeosl"
+          class="sc-dmyCSP gJvEmF"
+          data-test-id="jump-to-first"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
           tabindex="0"
@@ -49,7 +50,8 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="previous"
-          class="sc-dmyCSP cFeosl"
+          class="sc-dmyCSP gJvEmF"
+          data-test-id="previous"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
           tabindex="0"
@@ -80,7 +82,8 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="next"
-          class="sc-dmyCSP cFeosl"
+          class="sc-dmyCSP gJvEmF"
+          data-test-id="next"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
           tabindex="0"
@@ -111,7 +114,8 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="last"
-          class="sc-dmyCSP cFeosl"
+          class="sc-dmyCSP gJvEmF"
+          data-test-id="jump-to-last"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
           tabindex="0"
@@ -147,7 +151,8 @@ exports[`TimelineControl > should render 1`] = `
         <button
           aria-controls="timeline-main-wrapper"
           aria-label="dark"
-          class="sc-dmyCSP cqVerF"
+          class="sc-dmyCSP goMsNJ"
+          data-test-id="dark-toggle"
           tabindex="0"
           title="dark"
         >

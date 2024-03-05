@@ -1,5 +1,5 @@
 import { Theme } from '@models/Theme';
-import { TimelineProps } from '@models/TimelineModel';
+import { TextDensity, TimelineProps } from '@models/TimelineModel';
 import styled, { css, keyframes } from 'styled-components';
 import { linearGradient } from '../timeline-card-media/timeline-card-media.styles';
 import {
@@ -19,6 +19,7 @@ export const TimelineItemContentWrapper = styled.section<
     $active?: boolean;
     $borderLessCards?: TimelineProps['borderLessCards'];
     $branchDir?: string;
+    $customContent?: boolean;
     $highlight?: boolean;
     $isNested?: boolean;
     $maxWidth?: number;
@@ -27,13 +28,13 @@ export const TimelineItemContentWrapper = styled.section<
     $slideShow?: TimelineProps['slideShow'];
     $slideShowActive?: boolean;
     $slideShowType?: TimelineProps['slideShowType'];
+    $textDensity?: TextDensity;
     $textOverlay?: boolean;
-    $customContent?: boolean;
   } & ContentT
 >`
   align-items: flex-start;
   background: ${(p) => p.theme.cardBgColor};
-  border-radius: 4px;
+  border-radius: 8px;
   display: flex;
   position: absolute;
   ${({ borderLessCards }) =>
@@ -46,10 +47,12 @@ export const TimelineItemContentWrapper = styled.section<
   margin: ${(p) => (p.mode === 'HORIZONTAL' ? '0 auto' : '')};
   max-width: ${(p) => p.$maxWidth}px;
   // min-height: ${(p) => p.$minHeight}px;
-  ${(p) =>
-    p.$customContent
-      ? `height: ${p.$minHeight}px;`
-      : `min-height: ${p.$minHeight}px;`}
+  ${({ $textDensity, $customContent, $minHeight }) => css`
+    ${$textDensity === 'HIGH'
+      ? `${$customContent ? 'height' : 'min-height'}: ${$minHeight}px`
+      : ''};
+  `}
+  ${(p) => (p.$textOverlay ? `min-height: ${p.$minHeight}px` : '')};
   position: relative;
   text-align: left;
   width: 98%;
@@ -137,7 +140,7 @@ export const TimelineItemContentWrapper = styled.section<
 
 export const TimelineCardHeader = styled.header`
   width: 100%;
-  padding: 0.5rem 0.5rem 0 0.5rem;
+  padding: 0.5rem;
 `;
 
 export const CardSubTitle = styled.h2<{
@@ -164,10 +167,10 @@ export const CardTitle = styled.h1<{
   color: ${(p) => p.theme.cardTitleColor};
   font-size: ${(p) => p.$fontSize};
   font-weight: 600;
-  margin: 0;
+  margin: 0.25rem 0 0.5rem 0;
   text-align: left;
   width: 95%;
-  padding: ${(p) => (p.$padding ? '0.25rem 0 0.25rem 0.5rem;' : '')} &.active {
+  padding: ${(p) => (p.$padding ? '0.2rem 0 0.25rem 0.5rem;' : '')} &.active {
     color: ${(p) => p.theme.primary};
   }
 `;
@@ -336,7 +339,7 @@ export const SlideShowProgressBar = styled.progress<{
   left: 50%;
   transform: translateX(-50%);
   position: absolute;
-  border-radius: 2px;
+  border-radius: 2px;gggg
   border: 0;
 
   ${(p) => {

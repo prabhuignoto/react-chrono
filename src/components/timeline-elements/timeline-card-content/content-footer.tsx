@@ -1,5 +1,11 @@
 import { TimelineMode } from '@models/TimelineModel';
-import { FunctionComponent, PointerEvent, useContext, useMemo } from 'react';
+import {
+  FunctionComponent,
+  PointerEvent,
+  useCallback,
+  useContext,
+  useMemo,
+} from 'react';
 import { GlobalContext } from '../../GlobalContext';
 import ChevronIcon from '../../icons/chev-right';
 import { ContentFooterProps } from './header-footer.model';
@@ -48,7 +54,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   progressRef,
   isNested,
   isResuming,
-}) => {
+}: ContentFooterProps) => {
   const { mode, theme } = useContext(GlobalContext);
 
   const canShowTriangleIcon = useMemo(() => {
@@ -60,15 +66,19 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
     );
   }, [mode, isNested]);
 
-  const handleClick = (ev: PointerEvent) => {
-    ev.stopPropagation();
-    ev.preventDefault();
-    onExpand();
-  };
+  const handleClick = useCallback(
+    (ev: PointerEvent) => {
+      ev.stopPropagation();
+      ev.preventDefault();
+      onExpand();
+    },
+    [onExpand],
+  );
 
-  const canShowMore = useMemo(() => {
-    return showReadMore && textContentIsLarge;
-  }, [showReadMore, textContentIsLarge]);
+  const canShowMore = useMemo(
+    () => showReadMore && textContentIsLarge,
+    [showReadMore, textContentIsLarge],
+  );
 
   return (
     <>

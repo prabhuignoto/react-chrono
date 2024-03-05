@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -30,12 +26,9 @@
       "@testing-library/jest-dom"
     ],
     "paths": {
-      "@utils/*": [
-        "src/utils/*"
-      ],
-      "@models/*": [
-        "src/models/*"
-      ]
+      "@utils/*": ["src/utils/*"],
+      "@models/*": ["src/models/*"],
+      "@effects/*": ["src/effects/*"]
     },
     "plugins": [
       {
@@ -43,12 +36,7 @@
       }
     ]
   },
-  "include": [
-    "src/components",
-    "src/models",
-    "src/utils",
-    "src/demo"
-  ],
+  "include": ["src/components", "src/models", "src/utils", "src/demo"],
   "exclude": [
     "node_modules",
     "dist",
@@ -56,7 +44,5 @@
     "cypress",
     "cypress.config.ts"
   ],
-  "files": [
-    "src/react-chrono.ts"
-  ]
+  "files": ["src/react-chrono.ts"]
 }

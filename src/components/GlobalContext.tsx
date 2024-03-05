@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
-import { TimelineProps as PropsModel } from '@models/TimelineModel';
+import {
+  TimelineProps as PropsModel,
+  TextDensity,
+} from '@models/TimelineModel';
 import {
   getDefaultButtonTexts,
   getDefaultClassNames,
@@ -13,18 +16,18 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { useMatchMedia } from './effects/useMatchMedia';
 
-const GlobalContext = createContext<
-  PropsModel & { toggleDarkMode?: () => void }
->({});
-
-type ContextProps = PropsModel & {
+export type ContextProps = PropsModel & {
+  isMobile?: boolean;
   toggleDarkMode?: () => void;
+  updateHorizontalAllCards?: (state: boolean) => void;
+  updateTextContentDensity?: (value: TextDensity) => void;
 };
 
-const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
-  props,
-) => {
+const GlobalContext = createContext<ContextProps>({});
+
+const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
   const {
     cardHeight = 200,
     cardLess = false,
@@ -42,9 +45,22 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
     mediaSettings,
     mediaHeight = 200,
     contentDetailsHeight = 10,
+    showAllCardsHorizontal,
+    textDensity = 'HIGH',
+    responsiveBreakPoint = 1024,
+    enableBreakPoint,
   } = props;
 
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
+
+  const [horizontalAll, setHorizontalAll] = useState(
+    showAllCardsHorizontal || false,
+  );
+
+  const [isMobileDetected, setIsMobileDetected] = useState(false);
+
+  const [textContentDensity, setTextContentDensity] =
+    useState<TextDensity>(textDensity);
 
   const newCardHeight = useMemo(
     () => Math.max(contentDetailsHeight || 0 + mediaHeight || 0, cardHeight),
@@ -63,6 +79,36 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
     onThemeChange?.();
   }, [isDarkMode]);
 
+  const updateHorizontalAllCards = useCallback(
+    (state) => {
+      setHorizontalAll(state);
+    },
+    [horizontalAll],
+  );
+
+  const updateTextContentDensity = useCallback(
+    (value: TextDensity) => {
+      setTextContentDensity(value);
+    },
+    [textContentDensity],
+  );
+
+  useMatchMedia(
+    `(max-width: ${responsiveBreakPoint - 1}px)`,
+    () => setIsMobileDetected(true),
+    enableBreakPoint,
+  );
+
+  useMatchMedia(
+    `(min-width: ${responsiveBreakPoint}px)`,
+    () => setIsMobileDetected(false),
+    enableBreakPoint,
+  );
+
+  // useEffect(() => {
+  //   console.log('isMobile', isMobileDetected);
+  // }, [isMobileDetected]);
+
   const defaultProps = useMemo(
     () =>
       ({
@@ -76,6 +122,8 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           disableTimelinePoint: !!props.disableInteraction,
           enableBreakPoint: true,
           enableDarkToggle: false,
+          enableLayoutSwitch: true,
+          enableQuickJump: true,
           focusActiveItemOnLoad: false,
           highlightCardsOnHover: false,
           lineWidth: 3,
@@ -85,7 +133,6 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           scrollable: {
             scrollbar: false,
           },
-          showAllCardsHorizontal: false,
           showProgressOnSlideshow: slideShow,
           slideItemDuration: 2000,
           slideShowType: getSlideShowType(mode),
@@ -93,9 +140,9 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           timelinePointDimension: 16,
           timelinePointShape: 'circle',
           titleDateFormat: 'MMM DD, YYYY',
+          toolbarPosition: 'top',
           uniqueId: 'react-chrono',
           useReadMore: true,
-          verticalBreakPoint: 1028,
         },
         ...props,
         activeItemIndex: flipLayout ? items?.length - 1 : 0,
@@ -117,22 +164,40 @@ const GlobalContextProvider: FunctionComponent<Partial<PropsModel>> = (
           title: '1rem',
           ...fontSizes,
         },
+        isMobile: isMobileDetected,
         mediaSettings: {
           align: mode === 'VERTICAL' && !textOverlay ? 'left' : 'center',
           imageFit: 'cover',
           ...mediaSettings,
         },
+        showAllCardsHorizontal: horizontalAll,
+        textDensity: textContentDensity,
         theme: {
           ...getDefaultThemeOrDark(isDarkMode),
           ...theme,
         },
         toggleDarkMode,
+        updateHorizontalAllCards,
+        updateTextContentDensity,
       }) as ContextProps,
-    [newContentDetailsHeight, newCardHeight, isDarkMode, toggleDarkMode],
+    [
+      newContentDetailsHeight,
+      newCardHeight,
+      isDarkMode,
+      toggleDarkMode,
+      updateHorizontalAllCards,
+      textContentDensity,
+      isMobileDetected,
+    ],
   );
 
   const providerValue = useMemo(
-    () => ({ ...defaultProps, darkMode: isDarkMode, toggleDarkMode }),
+    () => ({
+      ...defaultProps,
+      darkMode: isDarkMode,
+      toggleDarkMode,
+      updateHorizontalAllCards,
+    }),
     [defaultProps, isDarkMode],
   );
 

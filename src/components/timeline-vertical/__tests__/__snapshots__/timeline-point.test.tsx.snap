@@ -4,7 +4,7 @@ exports[`Timeline point > Should match snapshot 1`] = `
 <DocumentFragment>
   <div
     bg="#0f52ba"
-    class="sc-gLLuof igAZJu test_class_name"
+    class="sc-gLLuof dnHDBi test_class_name"
     data-testid="tree-leaf"
     width="3"
   >
@@ -14,7 +14,7 @@ exports[`Timeline point > Should match snapshot 1`] = `
       data-testid="tree-leaf-click"
     >
       <div
-        class="sc-hLQSwg jvpXkb"
+        class="sc-hLQSwg jYfuAY"
         dimension="20"
       />
     </button>

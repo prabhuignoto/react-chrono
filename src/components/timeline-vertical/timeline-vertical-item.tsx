@@ -80,6 +80,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
     textOverlay,
     mediaHeight,
     disableInteraction,
+    isMobile,
   } = useContext(GlobalContext);
 
   // handler for onActive
@@ -108,7 +109,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         $alternateCards={alternateCards}
         mode={mode}
         $hide={!title}
-        $flip={flipLayout}
+        $flip={!alternateCards && flipLayout}
       >
         <TimelineItemTitle
           title={title}
@@ -116,7 +117,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
           theme={theme}
           align={flipLayout ? 'left' : 'right'}
           classString={classNames?.title}
-        />
+        />{' '}
       </TimelineTitleWrapper>
     );
   }, [
@@ -157,6 +158,7 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
         lineWidth={lineWidth}
         disableClickOnCircle={disableClickOnCircle}
         cardLess={cardLess}
+        isMobile={isMobile}
       />
     ),
     [
@@ -173,8 +175,13 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       lineWidth,
       disableClickOnCircle,
       cardLess,
+      isMobile,
     ],
   );
+
+  const canShowTitle = useMemo(() => {
+    return !isNested && !isMobile;
+  }, [isNested, isMobile]);
 
   return (
     <VerticalItemWrapper
@@ -189,15 +196,16 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
       theme={theme}
     >
       {/* title */}
-      {!isNested ? Title : null}
+      {canShowTitle ? Title : null}
 
       {/* card section */}
       <TimelineCardContentWrapper
         className={contentClass}
         $alternateCards={alternateCards}
         $noTitle={!title}
-        $flip={flipLayout}
+        $flip={!alternateCards && flipLayout}
         height={textOverlay ? mediaHeight : cardHeight}
+        $isMobile={isMobile}
       >
         {!cardLess ? (
           // <span></span>
@@ -215,13 +223,14 @@ const VerticalItem: React.FunctionComponent<VerticalItemModel> = (
             onShowMore={handleShowMore}
             slideShowActive={slideShowRunning}
             theme={theme}
-            title={cardTitle}
             url={url}
-            flip={flipLayout}
+            flip={!alternateCards && flipLayout}
             timelineContent={timelineContent}
             items={items}
             isNested={isNested}
             nestedCardHeight={nestedCardHeight}
+            title={cardTitle}
+            cardTitle={title}
           />
         ) : null}
       </TimelineCardContentWrapper>

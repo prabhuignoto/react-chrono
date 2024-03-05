@@ -8,5 +8,9 @@
     "debounced actv timeline item",
     "item",
     "timeline"
-  ]
+  ],
+  "sonarlint.connectedMode.project": {
+    "connectionId": "prabhuignoto",
+    "projectKey": "prabhuignoto"
+  }
 }

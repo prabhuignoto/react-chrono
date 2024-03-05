@@ -1,14 +1,14 @@
+import { ButtonTexts, TimelineMode } from '@models/TimelineModel';
+import { describe, it } from 'vitest';
+import { darkTheme, defaultTheme } from '../components/common/themes';
 import {
+  getDefaultButtonTexts,
+  getDefaultClassNames,
+  getDefaultThemeOrDark,
+  getSlideShowType,
   getUniqueID,
   hexToRGBA,
-  getDefaultThemeOrDark,
-  getDefaultClassNames,
-  getDefaultButtonTexts,
-  getSlideShowType,
 } from './index'; // Update the path accordingly
-import { darkTheme, defaultTheme } from '../components/common/themes';
-import { TimelineMode } from '@models/TimelineModel';
-import { describe, it } from 'vitest';
 
 describe('Utility Functions', () => {
   it('uniqueID should generate a unique ID of length 7', () => {
@@ -44,15 +44,46 @@ describe('Utility Functions', () => {
 
   it('getDefaultButtonTexts should return default button texts', () => {
     expect(getDefaultButtonTexts()).toEqual({
+      changeDensity: 'Change density',
+      changeDensityOptions: {
+        high: {
+          helpText: 'Show more items at once',
+          text: 'High',
+        },
+        low: {
+          helpText: 'Show fewer items at once',
+          text: 'Low',
+        },
+      },
+      changeLayout: 'Change layout',
+      changeLayoutOptions: {
+        alternating: {
+          helpText: 'Show cards in a vertical layout with alternating fashion',
+          text: 'Alternating',
+        },
+        horizontal: {
+          helpText: 'Show cards in a horizontal layout',
+          text: 'Horizontal',
+        },
+        horizontal_all: {
+          helpText: 'Show all cards in a horizontal layout',
+          text: 'Show all cards',
+        },
+        vertical: {
+          helpText: 'Show cards in a vertical layout',
+          text: 'Vertical',
+        },
+      },
       dark: 'Switch to Dark Mode',
       first: 'Go to First',
+      jumpTo: 'Jump to',
       last: 'Go to Last',
       light: 'Switch to Light Mode',
       next: 'Next',
       play: 'Play Slideshow',
       previous: 'Previous',
       stop: 'Stop Slideshow',
-    });
+    } as ButtonTexts);
   });
 
   it('getSlideShowType should return reveal for HORIZONTAL and VERTICAL modes', () => {
