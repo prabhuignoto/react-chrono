@@ -645,6 +645,12 @@ pnpm rollup
 
   # run cypress tests
   pnpm cypress:test
+
+  # run cypress tests in headless mode
+  pnpm cypress:headless
+
+  # run cypress tests in quiet mode
+  pnpm cypress:quiet
 ```
 
 ## 🤝Contributing

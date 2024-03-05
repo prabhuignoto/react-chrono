@@ -1,9 +1,11 @@
+import { forwardRef } from 'react';
 import { vi } from 'vitest';
-import { DetailsTextMemo, SubTitleMemo, TitleMemo } from '../';
 import { customRender } from '../../../common/test';
 import { providerProps } from '../../../common/test/index';
-import { forwardRef } from 'react';
 import { TextOrContentModel } from '../../timeline-card-content/text-or-content';
+import { DetailsTextMemo } from '../details-text-memo';
+import { SubTitleMemo } from '../subtitle-memo';
+import { TitleMemo } from '../title-memo';
 
 describe('Title', () => {
   it('should render title', () => {

@@ -1,6 +1,7 @@
 import { FunctionComponent, memo, useContext, useMemo } from 'react';
 import { GlobalContext } from '../../GlobalContext';
-import { SubTitleMemo, TitleMemo } from '../memoized';
+import { SubTitleMemo } from '../memoized/subtitle-memo';
+import { TitleMemo } from '../memoized/title-memo';
 import { ContentHeaderProps } from './header-footer.model';
 import { CardTitle, TimelineCardHeader } from './timeline-card-content.styles';
 

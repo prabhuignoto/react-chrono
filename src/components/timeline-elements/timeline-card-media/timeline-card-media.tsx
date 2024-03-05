@@ -12,13 +12,11 @@ import React, {
   useState,
 } from 'react';
 import { GlobalContext } from '../../GlobalContext';
-import {
-  DetailsTextMemo,
-  ExpandButtonMemo,
-  ShowOrHideTextButtonMemo,
-  SubTitleMemo,
-  TitleMemo,
-} from '../memoized';
+import { DetailsTextMemo } from '../memoized/details-text-memo';
+import { ExpandButtonMemo } from '../memoized/expand-button-memo';
+import { ShowOrHideTextButtonMemo } from '../memoized/show-hide-button';
+import { SubTitleMemo } from '../memoized/subtitle-memo';
+import { TitleMemo } from '../memoized/title-memo';
 import {
   SlideShowProgressBar,
   TriangleIconWrapper,
