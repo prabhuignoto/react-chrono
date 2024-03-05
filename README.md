@@ -189,19 +189,20 @@ Below are the available configuration options for the component:
 | onScrollEnd              |                      | Detects the end of the timeline via `onScrollEnd`.                                                                                       |
 | onThemeChange            |                      | Invokes a callback when the theme changes, triggered via `enableDarkToggle`.                                                             |
 | parseDetailsAsHTML       | false                | Parses the `cardDetailedText` as HTML.                                                                                                   |
+| responsiveBreakPoint     | 1024px               | Break point at which the timeline changes to `VERTICAL` mode when `VERTICAL_ALTERNATING` is the default mode                             |
 | scrollable               | true                 | Makes the timeline scrollable in `VERTICAL` and `VERTICAL_ALTERNATING` modes.                                                            |
 | showAllCardsHorizontal   | false                | Displays all cards in horizontal mode. By default, only the active card is shown.                                                        |
 | slideItemDuration        | 5000                 | Sets the duration (in milliseconds) that a timeline card is active during a slideshow.                                                   |
 | slideShow                | false                | Enables slideshow control.                                                                                                               |
+| textDensity              | HIGH                 | Configures the amount of text to be displayed in each timeline card. Can be either `HIGH` or `LOW`                                       |
 | textOverlay              | false                | Displays text as an overlay on media elements. Refer to [Text Overlay](#text-overlay-mode) for more info.                                |
 | theme                    |                      | Customizes colors. Refer to [Theme](#theme) for more info.                                                                               |
 | timelinePointDimension   |                      | Defines the dimensions of circular points on the timeline.                                                                               |
 | timelinePointShape       | circle               | Configures the shape of timeline points. Options: circle, square, diamond.                                                               |
 | titleDateFormat          | 'MMM DD, YYYY'       | Formats the date for each timeline item. Supports all [dayjs](https://day.js.org/) formats.                                              |
+| toolbarPosition          | TOP                  | Configures the position of the toolbar. Can be `TOP` or `BOTTOM`                                                                         |
 | uniqueId                 |                      | Used with `noUniqueId` to set a custom unique id for the wrapper.                                                                        |
 | useReadMore              | true                 | Enables or disables the "read more" button. Available if text content on the card is taller than the card itself.                        |
-| responsiveBreakPoint     | 1024px               | Break point at which the timeline changes to `VERTICAL` mode when `VERTICAL_ALTERNATING` is the default mode                             |
-| textDensity              | HIGH                 | Configures the amount of text to be displayed in each timeline card. Can be either `HIGH` or `LOW`                                       |
 
 ### Mode
 

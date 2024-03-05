@@ -14,7 +14,7 @@ const commonStyles = `
   display: flex;
   margin: 0;
   margin-bottom: 0.5rem;
-  padding: 0.25rem 0.5rem;
+  // padding: 0.25rem 0.5rem;
   width: 100%;
 
   &:last-child {
@@ -26,11 +26,12 @@ const commonStyles = `
 export const ListStyle = styled.ul`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   list-style: none;
   margin: 0;
-  padding: 0;popo
+  padding: 0;
   width: 100%;
+  align-items: center;
 `;
 
 // List item styles
@@ -49,6 +50,8 @@ export const ListItemStyle = styled.li<{
     cursor: pointer;
   }
   user-select: none;
+  padding: 0.25rem;
+  width: calc(100% - 0.5rem);
 `;
 
 // Title styles
