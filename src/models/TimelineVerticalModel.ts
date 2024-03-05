@@ -16,7 +16,6 @@ export type Props = Pick<
   | 'timelinePointDimension'
   | 'lineWidth'
   | 'cardHeight'
-  | 'enableOutline'
   | 'disableClickOnCircle'
   | 'cardLess'
   | 'nestedCardHeight'
@@ -122,7 +121,6 @@ export type TimelineVerticalModel = Pick<
   Props,
   // List of properties inherited from Props:
   | 'alternateCards'
-  | 'enableOutline'
   | 'mode'
   | 'onClick'
   | 'onElapsed'

@@ -143,7 +143,6 @@ export const VerticalBasic: FunctionComponent<{
         //   cardDetailsBackGround: '#e8e8e8',
         // }}
         onItemSelected={(selected) => console.log(selected.index)}
-        enableOutline
         fontSizes={{
           title: '1.5rem',
         }}
@@ -201,7 +200,6 @@ export const VerticalNewMedia: FunctionComponent<{
             // }}
             // darkMode
             onItemSelected={(selected) => console.log(selected.index)}
-            // enableOutline
             fontSizes={{
               title: '1.5rem',
             }}
@@ -261,7 +259,6 @@ export const VerticalAlternatingNested: FunctionComponent<{
             // }}
             // darkMode
             onItemSelected={(selected) => console.log(selected.index)}
-            // enableOutline
             fontSizes={{
               title: '1rem',
             }}
@@ -390,7 +387,6 @@ export const VerticalBasicNested: FunctionComponent<{
         //   cardDetailsBackGround: '#e8e8e8',
         // }}
         onItemSelected={(selected) => console.log(selected.index)}
-        enableOutline
         fontSizes={{
           title: '1rem',
         }}

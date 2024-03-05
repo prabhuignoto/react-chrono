@@ -45,7 +45,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     slideShowEnabled,
     slideShowRunning,
     mode = 'HORIZONTAL',
-    enableOutline = false,
     hideControls = false,
     nestedCardHeight,
     isChild = false,
@@ -413,7 +412,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             onOutlineSelection={onOutlineSelection}
             slideShowRunning={slideShowRunning}
             theme={theme}
-            enableOutline={enableOutline}
             nestedCardHeight={nestedCardHeight}
           />
         ) : null}
@@ -458,7 +456,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             onOutlineSelection={onOutlineSelection}
             slideShowRunning={slideShowRunning}
             theme={theme}
-            enableOutline={enableOutline}
             nestedCardHeight={nestedCardHeight}
           />
         ) : null}

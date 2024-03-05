@@ -20,7 +20,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     activeItemIndex = 0,
     titleDateFormat = 'MMM DD, YYYY',
     mode,
-    enableOutline,
     hideControls,
   } = props;
 
@@ -211,7 +210,6 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         onItemSelected={onItemSelected}
         onOutlineSelection={handleOutlineSelection}
         mode={mode}
-        enableOutline={enableOutline}
         hideControls={hideControls}
         onPaused={onPaused}
       />

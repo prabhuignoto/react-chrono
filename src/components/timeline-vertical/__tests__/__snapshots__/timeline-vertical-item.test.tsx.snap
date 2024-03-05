@@ -16,7 +16,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
       >
         vertical item title
       </div>
-
+       
     </div>
     <div
       class="sc-kFCroH kDetXN card-content-wrapper"

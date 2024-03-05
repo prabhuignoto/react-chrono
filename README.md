@@ -19,7 +19,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/prabhuignoto/react-chrono/badge.svg?branch=master)](https://coveralls.io/github/prabhuignoto/react-chrono?branch=master)
 
   <div>
-    <img src="./readme-assets/react_chrono_2.gif" />
+    <img src="./readme-assets/new-image.png" />
   </div>
 
 </div>
@@ -59,7 +59,6 @@
   - [🎭Custom icons for the Timeline](#custom-icons-for-the-timeline)
   - [🌿Nested Timelines](#nested-timelines)
   - [Slideshow](#slideshow)
-  - [Outline](#outline)
   - [Item Width](#item-width)
   - [🎥Media Settings](#media-settings)
   - [Breakpoint](#breakpoint)
@@ -132,7 +131,7 @@ To render the timeline vertically use the `VERTICAL` mode
 </div>
 ```
 
-![vertical-basic](./readme-assets/vertical-basic.png)
+![vertical-basic](./readme-assets/vertical_basic.png)
 
 ### 🚥Vertical Alternating
 
@@ -145,7 +144,6 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 ```
 
 ![vertical_alternating](./readme-assets/vertical-alternating.png)
-
 ## Props
 
 Below are the available configuration options for the component:
@@ -170,7 +168,6 @@ Below are the available configuration options for the component:
 | enableBreakPoint         | true                 | Automatically switches to vertical mode when the vertical breakpoint is reached.                                                         |
 | enableDarkToggle         | false                | Adds a toggle switch for dark mode.                                                                                                      |
 | enableLayoutSwitch       | true                 | Switches the timeline layout                                                                                                             |
-| enableOutline            | false                | Enables an outline menu in vertical and vertical alternating modes.                                                                      |
 | enableQuickJump          | true                 | Allows to quickly jump to a timeline item                                                                                                |
 | flipLayout               | false                | Reverses the layout (Right to Left).                                                                                                     |
 | focusActiveItemOnLoad    | false                | Automatically scrolls to and focuses on the `activeItemIndex` when loading.                                                              |
@@ -486,17 +483,6 @@ Enabling this prop will cause the play button to appear in the timeline control 
 ```
 
 > The slideshow can be cancelled by clicking on the stop button in the control panel or by pressing the `ESC` key.
-
-### Outline
-
-With `enableOutline` prop you can enable outline on the timelines and quickly jump to a specific timeline item.
-The outlines are only supported on `VERTICAL` and `VERTICAL_ALTERNATING` modes.
-
-```jsx
-<Chrono items={items} enableOutline />
-```
-
-![media](./readme-assets/outline.png)
 
 ### Item Width
 
