@@ -144,6 +144,7 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 ```
 
 ![vertical_alternating](./readme-assets/vertical-alternating.png)
+
 ## Props
 
 Below are the available configuration options for the component:
@@ -186,7 +187,7 @@ Below are the available configuration options for the component:
 | onScrollEnd              |                      | Detects the end of the timeline via `onScrollEnd`.                                                                                       |
 | onThemeChange            |                      | Invokes a callback when the theme changes, triggered via `enableDarkToggle`.                                                             |
 | parseDetailsAsHTML       | false                | Parses the `cardDetailedText` as HTML.                                                                                                   |
-| responsiveBreakPoint     | 1024px               | Break point at which the timeline changes to `VERTICAL` mode when `VERTICAL_ALTERNATING` is the default mode                             |
+| responsiveBreakPoint     | 1024                 | Break point at which the timeline changes to `VERTICAL` mode when `VERTICAL_ALTERNATING` is the default mode                             |
 | scrollable               | true                 | Makes the timeline scrollable in `VERTICAL` and `VERTICAL_ALTERNATING` modes.                                                            |
 | showAllCardsHorizontal   | false                | Displays all cards in horizontal mode. By default, only the active card is shown.                                                        |
 | slideItemDuration        | 5000                 | Sets the duration (in milliseconds) that a timeline card is active during a slideshow.                                                   |
