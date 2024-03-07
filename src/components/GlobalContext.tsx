@@ -120,6 +120,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
           disableClickOnCircle: !!props.disableInteraction,
           disableInteraction: false,
           disableTimelinePoint: !!props.disableInteraction,
+          disableToolbar: false,
           enableBreakPoint: true,
           enableDarkToggle: false,
           enableLayoutSwitch: true,

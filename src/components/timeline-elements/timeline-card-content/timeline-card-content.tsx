@@ -392,7 +392,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             <Timeline
               items={items}
               mode={'VERTICAL'}
-              hideControls
               nestedCardHeight={nestedCardHeight}
               isChild
             />

@@ -19,7 +19,6 @@ export type TimelineModel = Pick<
   | 'slideShow'
   | 'onScrollEnd'
   | 'mode'
-  | 'hideControls'
   | 'timelinePointDimension'
   | 'nestedCardHeight'
   | 'noUniqueId'
@@ -136,6 +135,8 @@ export type TimelineProps = {
 
   disableTimelinePoint?: boolean;
 
+  disableToolbar?: boolean;
+
   enableBreakPoint?: boolean;
 
   enableDarkToggle?: boolean;
@@ -157,9 +158,6 @@ export type TimelineProps = {
     cardTitle?: string;
     title?: string;
   };
-
-  // hides the ui controls
-  hideControls?: boolean;
 
   highlightCardsOnHover?: boolean;
 

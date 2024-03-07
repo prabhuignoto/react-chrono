@@ -24,6 +24,7 @@ export const VerticalTree: FunctionComponent<{
           slideShowType="slide_from_sides"
           allowDynamicUpdate
           cardHeight={200}
+          disableToolbar
           // textOverlay
           focusActiveItemOnLoad
           enableDarkToggle
