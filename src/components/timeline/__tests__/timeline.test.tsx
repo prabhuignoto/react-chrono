@@ -35,7 +35,6 @@ describe('Timeline', () => {
   const commonProps: TimelineModel = {
     activeTimelineItem: 0,
     contentDetailsChildren: null,
-    hideControls: false,
     iconChildren: null,
     isChild: false,
     items: [

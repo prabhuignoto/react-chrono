@@ -45,7 +45,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     slideShowEnabled,
     slideShowRunning,
     mode = 'HORIZONTAL',
-    hideControls = false,
     nestedCardHeight,
     isChild = false,
     onPaused,
@@ -68,6 +67,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     updateHorizontalAllCards,
     toolbarPosition,
     updateTextContentDensity,
+    disableToolbar,
   } = useContext(GlobalContext);
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
@@ -327,6 +327,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     });
   }, [mode, isChild]);
 
+  const canShowToolbar = useMemo(() => {
+    return !disableToolbar && !isChild;
+  }, [isChild, disableToolbar]);
+
   return (
     <Wrapper
       onKeyDown={handleKeyDown}
@@ -335,14 +339,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       onMouseDown={() => {
         setHasFocus(true);
       }}
-      $hideControls={hideControls}
       onKeyUp={(evt) => {
         if (evt.key === 'Escape') {
           onPaused?.();
         }
       }}
     >
-      {!isChild ? (
+      {canShowToolbar ? (
         <ToolbarWrapper position={toolbarPosition}>
           <TimelineToolbar
             activeTimelineItem={activeTimelineItem}

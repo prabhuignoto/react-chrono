@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { ScrollBar } from '../common/styles';
 
 export const Wrapper = styled.div<{
-  $hideControls?: boolean;
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
 }>`
   display: flex;

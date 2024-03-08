@@ -173,7 +173,6 @@ Below are the available configuration options for the component:
 | flipLayout               | false                | Reverses the layout (Right to Left).                                                                                                     |
 | focusActiveItemOnLoad    | false                | Automatically scrolls to and focuses on the `activeItemIndex` when loading.                                                              |
 | fontSizes                |                      | Allows customization of font sizes.                                                                                                      |
-| hideControls             | false                | Hides navigation controls.                                                                                                               |
 | highlightCardsOnHover    | false                | Highlights the card on hover                                                                                                             |
 | items                    | []                   | A collection of Timeline Item Models.                                                                                                    |
 | itemWidth                | 300                  | Sets the width of the timeline section in horizontal mode.                                                                               |
@@ -201,6 +200,7 @@ Below are the available configuration options for the component:
 | toolbarPosition          | TOP                  | Configures the position of the toolbar. Can be `TOP` or `BOTTOM`                                                                         |
 | uniqueId                 |                      | Used with `noUniqueId` to set a custom unique id for the wrapper.                                                                        |
 | useReadMore              | true                 | Enables or disables the "read more" button. Available if text content on the card is taller than the card itself.                        |
+| disableToolbar           | false                | Disables and hides the toolbar                                                                                                           |
 
 ### Mode
 
