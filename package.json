@@ -99,7 +99,7 @@
     "babel-plugin-styled-components": "^2.1.4",
     "c8": "^9.1.0",
     "cssnano": "^6.1.1",
-    "cypress": "13.7.0",
+    "cypress": "13.6.4",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",

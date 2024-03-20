@@ -157,8 +157,8 @@ devDependencies:
     specifier: ^6.1.1
     version: 6.1.1(postcss@8.4.37)
   cypress:
-    specifier: 13.7.0
-    version: 13.7.0
+    specifier: 13.6.4
+    version: 13.6.4
   eslint:
     specifier: ^8.57.0
     version: 8.57.0
@@ -5418,8 +5418,8 @@ packages:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
     dev: true
 
-  /cypress@13.7.0:
-    resolution: {integrity: sha512-UimjRSJJYdTlvkChcdcfywKJ6tUYuwYuk/n1uMMglrvi+ZthNhoRYcxnWgTqUtkl17fXrPAsD5XT2rcQYN1xKA==}
+  /cypress@13.6.4:
+    resolution: {integrity: sha512-pYJjCfDYB+hoOoZuhysbbYhEmNW7DEDsqn+ToCLwuVowxUXppIWRr7qk4TVRIU471ksfzyZcH+mkoF0CQUKnpw==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
     requiresBuild: true
