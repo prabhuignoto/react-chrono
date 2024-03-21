@@ -48,21 +48,25 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   const toolbarItems = useMemo(() => {
     return [
       {
+        id: 'timeline-controls',
         label: 'Timeline Controls',
         name: 'timeline_control',
         onSelect: () => {},
       },
       {
+        id: 'timeline-popover',
         label: 'timeline_popover',
         name: 'popover',
         onSelect: () => {},
       },
       {
+        id: 'layout-popover',
         label: 'layout_popover',
         name: 'popover',
         onSelect: () => {},
       },
       {
+        id: 'change-density',
         label: 'change_density',
         name: 'changeDensity',
         onSelect: () => {},

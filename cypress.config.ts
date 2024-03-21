@@ -29,6 +29,13 @@ export default defineConfig({
           launchOptions.preferences.fullscreen = true;
           return launchOptions;
         }
+
+        if (browser.name === 'firefox') {
+          launchOptions.args.push('--start-fullscreen');
+          launchOptions.args.push('--headless');
+          launchOptions.args.push('--disable-gpu');
+          return launchOptions;
+        }
       });
       // return require('./cypress/plugins/index.js')(on, config);
     },

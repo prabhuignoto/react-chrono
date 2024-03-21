@@ -9,14 +9,14 @@ jobs:
     env:
       CI_JOB_NUMBER: 1
     steps:
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v3
         with:
           version: 8.1.0
 
       - uses: actions/checkout@v2
 
       - name: Cache PNPM dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.pnpm-store
           key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
