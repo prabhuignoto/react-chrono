@@ -99,7 +99,6 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   // Render the TimelineToolbar component
   return (
     <Toolbar items={toolbarItems} theme={theme}>
-      <span>prabhu</span>
       <Controls
         disableLeft={disableLeft}
         disableRight={disableRight}
