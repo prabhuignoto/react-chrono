@@ -253,8 +253,8 @@ devDependencies:
     specifier: ^1.77.2
     version: 1.77.2
   semver:
-    specifier: 7.6.2
-    version: 7.6.2
+    specifier: 7.5.4
+    version: 7.5.4
   size-limit:
     specifier: ^11.1.4
     version: 11.1.4
@@ -11277,12 +11277,6 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
-    dev: true
-
-  /semver@7.6.2:
-    resolution: {integrity: sha512-FNAIBWCx9qcRhoHcgcJ0gvU7SN1lYU2ZXuSfl04bSC5OpvDHFyJCjdNHomPXxjQlCBU67YW64PzY7/VIEH7F2w==}
-    engines: {node: '>=10'}
-    hasBin: true
     dev: true
 
   /serialize-error@7.0.1:
