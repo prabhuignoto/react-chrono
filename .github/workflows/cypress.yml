@@ -36,7 +36,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Cache Cypress binary cache
         uses: actions/cache@v4
