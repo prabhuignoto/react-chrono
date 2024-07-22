@@ -200,7 +200,7 @@ Below are the available configuration options for the component:
 | toolbarPosition          | TOP                  | Configures the position of the toolbar. Can be `TOP` or `BOTTOM`                                                                         |
 | uniqueId                 |                      | Used with `noUniqueId` to set a custom unique id for the wrapper.                                                                        |
 | useReadMore              | true                 | Enables or disables the "read more" button. Available if text content on the card is taller than the card itself.                        |
-| disableToolbar           | false                | Disables and hides the toolbar                                                                                                           |
+| disableToolbar           | false                | Hides the toolbar / control panel                                                                                                        |
 
 ### Mode
 

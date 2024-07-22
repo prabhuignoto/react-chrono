@@ -167,6 +167,7 @@ export const VerticalBasic: FunctionComponent<{
         enableDarkToggle
         enableBreakPoint={true}
         responsiveBreakPoint={768}
+        disableToolbar
       />
     </ComponentContainerTree>
   </Vertical>
