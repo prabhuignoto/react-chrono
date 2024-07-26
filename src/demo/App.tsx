@@ -69,6 +69,7 @@ const NewDemo: React.FunctionComponent = () => {
         timelineContent,
         date,
         items,
+        icon,
       }) => ({
         title,
         url,
@@ -80,6 +81,7 @@ const NewDemo: React.FunctionComponent = () => {
         timelineContent,
         date,
         items,
+        icon,
       }),
     );
     setItems(newItems);

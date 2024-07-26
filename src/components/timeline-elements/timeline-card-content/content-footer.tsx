@@ -55,7 +55,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   isNested,
   isResuming,
 }: ContentFooterProps) => {
-  const { mode, theme } = useContext(GlobalContext);
+  const { mode, theme, showMoreText } = useContext(GlobalContext);
 
   const canShowTriangleIcon = useMemo(() => {
     return (
@@ -95,7 +95,17 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           theme={theme}
           tabIndex={0}
         >
-          {<span>{showMore ? 'read less' : 'read more'}</span>}
+          {
+            <span>
+              {showMore
+                ? showMoreText
+                  ? showMoreText.expand
+                  : 'read less'
+                : showMoreText
+                  ? showMoreText.collapse
+                  : 'read more'}
+            </span>
+          }
           <ChevronIconWrapper collapsed={showMore ? 'true' : 'false'}>
             <ChevronIcon />
           </ChevronIconWrapper>

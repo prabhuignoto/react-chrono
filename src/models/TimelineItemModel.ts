@@ -55,6 +55,9 @@ export interface TimelineItemModel {
 
   // Indicates if the timeline item is visible.
   visible?: boolean;
+
+  // Optional prop for timeline icon.
+  icon?: ReactNode;
 }
 
 /**
@@ -74,6 +77,7 @@ export type TimelineCardModel = Pick<
   | 'timelineContent'
   | 'isNested'
   | 'items'
+  | 'icon'
 > & {
   // Function for auto-scrolling.
   autoScroll?: ({
