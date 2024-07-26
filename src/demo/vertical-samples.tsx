@@ -427,6 +427,7 @@ export const VerticalCustomContent2: FunctionComponent<{
         flipLayout
         timelinePointDimension={30}
         items={items}
+        showMoreText={{ expand: 'Expand', collapse: 'Collapse' }}
       >
         <div>
           <div style={{ width: '250px', height: '250px' }}>

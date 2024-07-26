@@ -35,6 +35,12 @@ const items: TimelineItemModel[] = [
       </ul>
       `,
     ],
+    icon: (
+      <img
+        src="https://img.icons8.com/ios-filled/100/000000/twitter.png"
+        alt="github"
+      />
+    ),
   },
   {
     title: '25 July 1941',

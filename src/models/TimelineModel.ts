@@ -23,6 +23,7 @@ export type TimelineModel = Pick<
   | 'nestedCardHeight'
   | 'noUniqueId'
   | 'uniqueId'
+  | 'showMoreText'
 > & {
   activeTimelineItem?: number;
   contentDetailsChildren?: React.ReactNode | React.ReactNode[];
@@ -243,6 +244,11 @@ export type TimelineProps = {
 
   // enables the read more button
   useReadMore?: boolean;
+
+  showMoreText?: {
+    expand?: string;
+    collapse?: string;
+  }
 };
 
 export type SlideShowType = 'reveal' | 'slide_in' | 'slide_from_sides';
