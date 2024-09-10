@@ -207,9 +207,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           const { width: contentWidth, left: contentLeft } = contentRect;
           setTimeout(() => {
             const ele = horizontalContentRef.current as HTMLElement;
-            ele.style.scrollBehavior = 'smooth';
-            ele.scrollLeft +=
-              cardLeft - contentLeft + cardWidth / 2 - contentWidth / 2;
+            if(ele){ 
+              ele.style.scrollBehavior = 'smooth';
+              ele.scrollLeft +=
+                cardLeft - contentLeft + cardWidth / 2 - contentWidth / 2;
+            }
           }, 100);
         }
       }
