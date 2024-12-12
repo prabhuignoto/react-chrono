@@ -12,4 +12,10 @@ module.exports = {
       },
     ],
   ],
+  // Adding presets for better compatibility and support
+  presets: [
+    '@babel/preset-env',
+    '@babel/preset-react',
+    '@babel/preset-typescript',
+  ],
 };
