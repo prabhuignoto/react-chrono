@@ -55,7 +55,6 @@ describe('ContentFooter', () => {
     expect(getByRole('progressbar')).toBeInTheDocument();
     expect(getByRole('progressbar')).toBeVisible();
 
-    console.log(getByRole('progressbar'));
     // expect(getByRole('progressbar')).toHaveStyle('width: 100px');
   });
 

@@ -36,4 +36,4 @@ export default defineConfig({
       '@utils': '/src/utils',
     },
   },
-});
+})
