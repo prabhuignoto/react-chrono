@@ -4,7 +4,7 @@ export default function useCloseClickOutside(
   el: RefObject<HTMLDivElement>,
   callback: () => void,
 ) {
-  const htmlElement = useRef<HTMLElement>();
+  const htmlElement = useRef<HTMLElement>(null);
 
   const handleClick = useCallback((e: MouseEvent) => {
     const element = htmlElement.current;
