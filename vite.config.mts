@@ -5,6 +5,8 @@ import tsconfig from 'vite-tsconfig-paths';
 export default defineConfig({
   build: {
     outDir: 'dist_site',
+    // Adding sourcemap for better debugging
+    sourcemap: true,
   },
   plugins: [react(), tsconfig()],
   root: './',
@@ -23,5 +25,15 @@ export default defineConfig({
         'yarn.lock',
       ],
     },
+    // Adding open option to automatically open the browser
+    open: true,
   },
-});
+  // Adding resolve.alias for better path management
+  resolve: {
+    alias: {
+      '@components': '/src/components',
+      '@models': '/src/models',
+      '@utils': '/src/utils',
+    },
+  },
+})

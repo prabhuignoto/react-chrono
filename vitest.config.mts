@@ -36,7 +36,8 @@ export default defineConfig({
     ],
     minWorkers: 2,
     setupFiles: './src/test-setup.js',
-    silent: true,
+    silent: false,
     update: true,
+    
   },
 });

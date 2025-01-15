@@ -8,7 +8,7 @@ const useSlideshow = (
   id: string,
   onElapsed?: (id: string) => void,
 ) => {
-  const startTime = useRef<Date>();
+  const startTime = useRef<Date | null>(null);
   const timerRef = useRef(0);
   const [startWidth, setStartWidth] = useState(0);
   const [paused, setPaused] = useState(false);
