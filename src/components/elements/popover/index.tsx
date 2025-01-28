@@ -1,10 +1,4 @@
-import React, {
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { FunctionComponent, useCallback, useRef, useReducer } from 'react';
 import useCloseClickOutside from 'src/components/effects/useCloseClickOutside';
 import { ChevronDown, CloseIcon } from 'src/components/icons';
 import { PopOverModel } from './popover.model';
@@ -29,31 +23,47 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   icon,
   $isMobile = false,
 }) => {
-  const [open, setOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const toggleOpen = useCallback(() => setOpen(!open), []);
+  // Use React's new useReducer for complex state
+  const [state, setState] = useReducer(
+    (
+      state: { open: boolean; isVisible: boolean },
+      newState: Partial<typeof state>,
+    ) => ({
+      ...state,
+      ...newState,
+    }),
+    { open: false, isVisible: false },
+  );
 
-  const closePopover = useCallback(() => setOpen(false), []);
+  const { open, isVisible } = state;
 
-  const handleKeyPress = useCallback((ev: React.KeyboardEvent) => {
-    if (ev.key === 'Enter') {
-      toggleOpen();
-    }
-  }, []);
-
-  useCloseClickOutside(ref, closePopover);
-
-  useEffect(() => {
-    if (open) {
-      setTimeout(() => {
-        setIsVisible(true);
-      }, 10);
+  const toggleOpen = useCallback(() => {
+    setState({ open: !open });
+    if (!open) {
+      // Use automatic batching in React 19
+      setTimeout(() => setState({ isVisible: true }), 10);
     } else {
-      setIsVisible(false);
+      setState({ isVisible: false });
     }
   }, [open]);
+
+  const closePopover = useCallback(() => {
+    setState({ open: false, isVisible: false });
+  }, []);
+
+  const handleKeyPress = useCallback(
+    (ev: React.KeyboardEvent) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        toggleOpen();
+        ev.preventDefault();
+      }
+    },
+    [toggleOpen],
+  );
+
+  useCloseClickOutside(ref, closePopover);
 
   return (
     <PopoverWrapper ref={ref}>
@@ -64,33 +74,40 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         $open={open}
         $isDarkMode={isDarkMode}
         tabIndex={0}
-        onKeyUp={handleKeyPress}
+        onKeyDown={handleKeyPress}
         $isMobile={$isMobile}
         title={placeholder}
+        aria-expanded={open}
+        aria-haspopup="true"
       >
         <SelecterIcon theme={theme} open={open}>
           {icon || <ChevronDown />}
         </SelecterIcon>
-        {placeholder && !$isMobile ? (
+        {placeholder && !$isMobile && (
           <SelecterLabel>{placeholder}</SelecterLabel>
-        ) : null}
+        )}
       </Selecter>
-      {open ? (
+      {open && (
         <PopoverHolder
           $position={position}
           $width={width}
           $theme={theme}
           $isMobile={$isMobile}
           $visible={isVisible}
+          role="dialog"
         >
           <Header>
-            <CloseButton theme={theme} onClick={closePopover}>
+            <CloseButton
+              theme={theme}
+              onClick={closePopover}
+              aria-label="Close popover"
+            >
               <CloseIcon />
             </CloseButton>
           </Header>
           <Content>{children}</Content>
         </PopoverHolder>
-      ) : null}
+      )}
     </PopoverWrapper>
   );
 };

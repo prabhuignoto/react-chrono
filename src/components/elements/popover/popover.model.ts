@@ -1,13 +1,15 @@
 import { Theme } from '@models/Theme';
 import { ReactNode } from 'react';
 
+export type PopoverPosition = 'top' | 'bottom';
+
 export type PopOverModel = {
-  $isMobile?: boolean;
+  $isMobile: boolean; // Made required
   children: ReactNode | ReactNode[];
   icon?: ReactNode;
-  isDarkMode?: boolean;
+  isDarkMode: boolean; // Made required for better props handling
   placeholder?: string;
-  position: 'top' | 'bottom';
+  position: PopoverPosition;
   theme?: Theme;
-  width?: number;
+  width: number; // Made required
 };

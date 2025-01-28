@@ -53,7 +53,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }
 
     const itemLength = React.Children.toArray(children).filter(
-      (item) => (item as React.ReactElement<any>).props.className !== 'chrono-icons',
+      (item) =>
+        (item as React.ReactElement<any>).props.className !== 'chrono-icons',
     ).length;
 
     return Array.from({ length: itemLength }).map((_, index) => ({

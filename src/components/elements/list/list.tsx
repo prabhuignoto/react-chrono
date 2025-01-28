@@ -28,39 +28,31 @@ const List: FunctionComponent<ListModel> = ({
 
   // Callback function for handling checkbox selection
   const onChecked = useCallback((id: string) => {
-    const updatedItems = listItems.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          selected: true,
-        };
-      } else {
-        return {
-          ...item,
-          selected: false,
-        };
-      }
-    });
-
-    setListItems(updatedItems);
+    setListItems((prev) =>
+      prev.map((item) => {
+        if (item.id === id) {
+          return { ...item, selected: true };
+        }
+        return { ...item, selected: false };
+      }),
+    );
   }, []);
 
   // Callback function for handling item click
-  const handleClick = useCallback((id: string) => {
-    onChecked(id);
-
-    if (multiSelectable) {
-      const item = listItems.find((item) => item.id === id);
-
-      if (item.onSelect) {
-        startTransition(() => {
-          item.onSelect();
-        });
+  const handleClick = useCallback(
+    (id: string) => {
+      onChecked(id);
+      if (multiSelectable) {
+        const item = listItems.find((item) => item.id === id);
+        if (item?.onSelect) {
+          startTransition(() => item.onSelect());
+        }
+      } else {
+        onClick?.(id);
       }
-    } else {
-      onClick?.(id);
-    }
-  }, []);
+    },
+    [onChecked, listItems, multiSelectable, onClick],
+  );
 
   // Render the List component
   return (
