@@ -23,10 +23,6 @@ export const Wrapper = styled.div<{
     justify-content: flex-start;
   }
 
-  &.js-focus-visible :focus:not(.focus-visible) {
-    // outline: 0;
-  }
-
   &.js-focus-visible .focus-visible {
     outline: 2px solid #528deb;
   }
@@ -38,16 +34,15 @@ export const TimelineMainWrapper = styled.div<{
   position?: 'top' | 'bottom';
   theme?: Theme;
 }>`
-  align-items: flex-start;
+align-items: flex-start;
   display: flex;
   justify-content: center;
-  overflow-y: auto;
   overflow-x: hidden;
+  overflow-y: auto;
   overscroll-behavior: contain;
   ${(p) => (p.mode === 'HORIZONTAL' ? 'position: relative' : '')};
   scroll-behavior: smooth;
   width: 100%;
-  // order: ${(p) => (p.position === 'top' ? 1 : 0)};
 
   ${ScrollBar}
 
@@ -59,39 +54,39 @@ export const TimelineMainWrapper = styled.div<{
 `;
 
 export const TimelineMain = styled.div`
+  align-items: center;
+  display: flex;
+  left: 0;
   position: absolute;
   top: 50%;
-  left: 0;
-  display: flex;
-  align-items: center;
-  transition: all 0.2s ease;
   transform: translate(0, -50%);
+  transition: all 0.2s ease;
 
   &.vertical {
     align-items: flex-start;
+    height: 100%;
     justify-content: flex-start;
     width: 100%;
-    height: 100%;
   }
 `;
 
 export const Outline = styled.div<{ color?: string; height?: number }>`
+  background: ${(p) => p.color};
+  height: ${(p) => `${p.height}px`};
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
   position: absolute;
   right: 0;
-  left: 0;
   width: 100%;
-  height: ${(p) => `${p.height}px`};
-  margin-right: auto;
-  margin-left: auto;
-  background: ${(p) => p.color};
 `;
 
 export const TimelineControlContainer = styled.div<{
   active?: boolean;
   mode?: TimelineMode;
 }>`
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
   min-height: 3rem;
 
@@ -113,33 +108,33 @@ export const TimelineControlContainer = styled.div<{
 `;
 
 export const TimelineContentRender = styled.div<{ $showAllCards?: boolean }>`
-  display: flex;
   align-items: flex-start;
+  display: flex;
   justify-content: ${(p) => (p.$showAllCards ? 'flex-start' : 'center')};
-  width: 98%;
-  margin-right: auto;
   margin-left: auto;
+  margin-right: auto;
   overflow-x: hidden;
+  width: 98%;
 `;
 
 export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
+  border-radius: 6px;
   display: flex;
   font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 6px;
-  width: 100%;
-  padding: 0;
   margin: ${(p) => (p.position === 'top' ? '0 0 20px 0' : '20px 0 0 0')};
   order: ${(p) => (p.position === 'top' ? 0 : 1)};
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
 `;
 
 export const ExtraControls = styled.ul<{
   $hide: boolean;
   $slideShowRunning: boolean;
 }>`
-  display: flex;
   align-items: center;
+  display: flex;
   list-style: none;
   margin: 0;
   padding: 0.1rem;

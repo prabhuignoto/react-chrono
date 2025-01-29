@@ -1,5 +1,8 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
+/**
+ * Custom hook that manages slideshow, pausing, and resuming logic.
+ */
 const useSlideshow = (
   ref: RefObject<HTMLElement>,
   active: boolean,
@@ -15,34 +18,47 @@ const useSlideshow = (
   const slideShowElapsed = useRef(0);
   const [remainInterval, setRemainInterval] = useState(0);
 
-  const setupTimer = useCallback((interval: number) => {
-    if (!slideItemDuration) {
-      return;
-    }
+  /**
+   * Handles timer completion and triggers onElapsed.
+   */
+  const handleTimerCompletion = useCallback(() => {
+    window.clearTimeout(timerRef.current);
+    setPaused(true);
+    setStartWidth(0);
+    setRemainInterval(slideItemDuration);
+    id && onElapsed?.(id);
+  }, [id, onElapsed, slideItemDuration]);
 
-    setRemainInterval(interval);
+  /**
+   * Sets up the slideshow timer.
+   */
+  const setupTimer = useCallback(
+    (interval: number) => {
+      if (!slideItemDuration) {
+        return;
+      }
 
-    startTime.current = new Date();
+      setRemainInterval(interval);
+      startTime.current = new Date();
+      setPaused(false);
 
-    setPaused(false);
+      timerRef.current = window.setTimeout(() => {
+        handleTimerCompletion();
+      }, interval);
+    },
+    [handleTimerCompletion, slideItemDuration],
+  );
 
-    timerRef.current = window.setTimeout(() => {
-      // clear the timer and move to the next card
-      window.clearTimeout(timerRef.current);
-      setPaused(true);
-      setStartWidth(0);
-      setRemainInterval(slideItemDuration);
-      id && onElapsed?.(id);
-    }, interval);
-  }, []);
-
+  /**
+   * Pauses the slideshow.
+   */
   const tryPause = useCallback(() => {
     if (active && slideShowActive) {
       window.clearTimeout(timerRef.current);
       setPaused(true);
 
       if (startTime.current) {
-        const elapsed: any = +new Date() - +startTime.current;
+        const elapsed = +new Date() - +startTime.current;
         slideShowElapsed.current = elapsed;
       }
 
@@ -52,7 +68,9 @@ const useSlideshow = (
     }
   }, [active, slideShowActive]);
 
-  // resumes the slide show
+  /**
+   * Resumes the slideshow.
+   */
   const tryResume = useCallback(() => {
     if (active && slideShowActive) {
       if (!slideItemDuration) {
@@ -60,14 +78,13 @@ const useSlideshow = (
       }
 
       const remainingInterval = slideItemDuration - slideShowElapsed.current;
-
       setPaused(false);
 
       if (remainingInterval > 0) {
         setupTimer(remainingInterval);
       }
     }
-  }, [active, slideShowActive, slideItemDuration]);
+  }, [active, slideShowActive, slideItemDuration, setupTimer]);
 
   useEffect(() => {
     if (timerRef.current && !slideShowActive) {

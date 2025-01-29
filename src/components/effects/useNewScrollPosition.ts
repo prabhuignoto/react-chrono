@@ -13,35 +13,31 @@ const useNewScrollPosition = (
   mode: TimelineMode,
   itemWidth?: number,
 ): [number, (e: HTMLElement, s: Partial<Scroll>) => void] => {
-  // State to hold the new offset value
   const [newOffset, setNewOffset] = useState(0);
 
-  // Memoized function to compute the new offset value
+  /**
+   * Computes the new offset value based on the mode and scroll properties.
+   */
   const computeNewOffset = useMemo(
     () => (parent: HTMLElement, scroll: Partial<Scroll>) => {
-      // Destructuring relevant properties from parent and scroll
       const { clientWidth, scrollLeft, scrollTop, clientHeight } = parent;
-      const { pointOffset = 0, pointWidth = 0, contentHeight = 0, contentOffset = 0 } = scroll;
+      const {
+        pointOffset = 0,
+        pointWidth = 0,
+        contentHeight = 0,
+        contentOffset = 0,
+      } = scroll;
 
-      // Handling horizontal mode
       if (mode === 'HORIZONTAL' && itemWidth) {
-        // Calculating right boundaries for container and circular element
         const contrRight = scrollLeft + clientWidth;
         const circRight = pointOffset + pointWidth;
-
-        // Checking if the element is fully visible
         const isVisible = pointOffset >= scrollLeft && circRight <= contrRight;
-
-        // Checking if the element is partially visible
         const isPartiallyVisible =
           (pointOffset < scrollLeft && circRight > scrollLeft) ||
           (circRight > contrRight && pointOffset < contrRight);
-
-        // Calculating gaps from left and right
         const leftGap = pointOffset - scrollLeft;
         const rightGap = contrRight - pointOffset;
 
-        // Setting offset based on visibility and gap conditions
         if (
           !(isVisible || isPartiallyVisible) ||
           (leftGap <= itemWidth && leftGap >= 0) ||
@@ -50,23 +46,16 @@ const useNewScrollPosition = (
           setNewOffset(pointOffset - itemWidth);
         }
       } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
-        // Handling vertical modes
         const contrBottom = scrollTop + clientHeight;
         const circBottom = contentOffset + contentHeight;
-
-        // Checking if the element is fully visible
-        const isVisible = contentOffset >= scrollTop && circBottom <= contrBottom;
-
-        // Checking if the element is partially visible
+        const isVisible =
+          contentOffset >= scrollTop && circBottom <= contrBottom;
         const isPartiallyVisible =
           (contentOffset < scrollTop && circBottom > scrollTop) ||
           (circBottom > contrBottom && contentOffset < contrBottom);
-
-        // Calculating new offset
         const nOffset = contentOffset - contentHeight;
         const notVisible = !isVisible || isPartiallyVisible;
 
-        // Setting offset based on visibility conditions
         if (notVisible && nOffset + contentHeight < contrBottom) {
           setNewOffset(nOffset + Math.round(contentHeight / 2));
         } else if (notVisible) {
@@ -74,10 +63,9 @@ const useNewScrollPosition = (
         }
       }
     },
-    [mode, itemWidth], // Dependencies for useMemo
+    [mode, itemWidth],
   );
 
-  // Returning the new offset and the function to compute it
   return [newOffset, computeNewOffset];
 };
 

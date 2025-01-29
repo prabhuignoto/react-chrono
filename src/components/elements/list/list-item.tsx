@@ -21,13 +21,16 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
     selected = false,
     selectable = false,
   }: ListItemModel) => {
-    const handleOnClick = useCallback((id: string) => onClick?.(id), []);
+    const handleOnClick = useCallback((id: string) => onClick?.(id), [onClick]);
 
-    const handleKeyPress = useCallback((ev: KeyboardEvent, id: string) => {
-      if (ev.key === 'Enter') {
-        handleOnClick(id);
-      }
-    }, []);
+    const handleKeyPress = useCallback(
+      (ev: KeyboardEvent, id: string) => {
+        if (ev.key === 'Enter') {
+          handleOnClick(id);
+        }
+      },
+      [handleOnClick],
+    );
 
     return (
       <ListItemStyle

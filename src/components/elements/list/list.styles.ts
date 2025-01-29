@@ -14,7 +14,6 @@ const commonStyles = `
   display: flex;
   margin: 0;
   margin-bottom: 0.5rem;
-  // padding: 0.25rem 0.5rem;
   width: 100%;
 
   &:last-child {
@@ -94,8 +93,7 @@ export const CheckboxStyle = styled.span<{ selected?: boolean; theme: Theme }>`
   display: flex;
   height: 1.25rem;
   justify-content: center;
-  margin-right: 0.25rem;
-  margin-left: 0.1rem;
+  margin: 0 0.25rem 0 0.1rem;
   width: 1.25rem;
 
   svg {
