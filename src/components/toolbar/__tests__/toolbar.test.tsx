@@ -3,18 +3,19 @@
 import { render } from '@testing-library/react';
 import { getDefaultThemeOrDark } from '@utils/index';
 import { ThemeProvider } from 'styled-components';
-import { Toolbar, ToolbarItem } from '../index';
+import { Toolbar } from '../index';
+import { ToolbarItem } from '@models/ToolbarItem';
 
 const items: ToolbarItem[] = [
-  { name: 'Item 1', onSelect: () => {} },
-  { name: 'Item 2', onSelect: () => {} },
+  { name: 'Item 1', onSelect: () => {}, id: '1' },
+  { name: 'Item 2', onSelect: () => {}, id: '2' },
 ];
 
 const theme = getDefaultThemeOrDark();
 
 describe('Toolbar', () => {
   it('renders toolbar items', () => {
-    const { getByText } = render(
+    const { getByText, baseElement } = render(
       <ThemeProvider theme={theme}>
         <Toolbar items={items} theme={theme}>
           {items.map((item, index) => (
@@ -24,6 +25,8 @@ describe('Toolbar', () => {
       </ThemeProvider>,
     );
 
+    console.log(baseElement.innerHTML);
+
     expect(getByText(/Item 1/i)).toBeInTheDocument();
     expect(getByText(/Item 2/i)).toBeInTheDocument();
   });
@@ -32,6 +35,7 @@ describe('Toolbar', () => {
     const itemWithIcon = {
       icon: <span>Icon</span>,
       name: 'Icon Item',
+      id: '3',
       onSelect: () => {},
     };
 

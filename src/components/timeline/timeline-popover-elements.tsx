@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import { List } from '../elements/list/list';
-import { PopOver } from '../elements/popover';
+import PopOver from '../elements/popover';
 import { ArrowDownIcon, LayoutIcon, ParaIcon } from '../icons';
 import {
   ChangeDensityProp,

@@ -1,45 +1,43 @@
 import { RefObject, useCallback, useEffect, useRef } from 'react';
 
+/**
+ * Custom hook that handles click outside and escape key events
+ * @param el - Reference to the DOM element to watch for outside clicks
+ * @param callback - Function to call when a click outside or escape key is detected
+ */
 export default function useCloseClickOutside(
-  el: RefObject<HTMLDivElement>,
+  el: RefObject<HTMLElement | null>,
   callback: () => void,
 ) {
-  const htmlElement = useRef<HTMLElement>(null);
+  const savedCallback = useRef(callback);
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
 
   const handleClick = useCallback((e: MouseEvent) => {
-    const element = htmlElement.current;
-
-    if (element) {
-      if (!element.contains(e.target as Node)) {
-        callback();
-      }
+    const element = el.current;
+    if (element && !element.contains(e.target as Node)) {
+      savedCallback.current();
     }
-  }, []);
+  }, [el]);
 
   const handleEscape = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') {
-      callback();
+      savedCallback.current();
     }
   }, []);
 
   useEffect(() => {
     const element = el.current;
+    if (!element) return;
 
-    if (element) {
-      htmlElement.current = element;
-
-      element.addEventListener('keyup', handleEscape);
-    }
-  }, [el, callback]);
-
-  useEffect(() => {
     document.addEventListener('click', handleClick);
+    element.addEventListener('keyup', handleEscape);
+
     return () => {
-      const element = htmlElement.current;
-      if (element) {
-        element.removeEventListener('keyup', handleEscape);
-      }
       document.removeEventListener('click', handleClick);
+      element.removeEventListener('keyup', handleEscape);
     };
-  }, []);
+  }, [el, handleClick, handleEscape]);
 }
