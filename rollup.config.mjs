@@ -146,7 +146,9 @@ export default {
         comments: false,
       },
     }),
-    eslint(),
+    // eslint({
+    //   overrideConfigFile: "./eslint.config.mjs"
+    // }),
     // analyze({
     //   summaryOnly: true,
     // }),
