@@ -63,16 +63,21 @@ const List: FunctionComponent<ListModel> = ({
    * @returns {JSX.Element} Rendered list item
    */
   const renderListItem = useCallback(
-    (item: EnhancedListItem, index: number) => (
-      <ListItem
+    (item: EnhancedListItem, index: number) => {
+      const handleClick = useCallback(
+        () => handleItemSelection(item.id, item),
+        [item, handleItemSelection]
+      );
+
+      return <ListItem
         key={item.id}
         {...item}
         theme={theme}
-        onClick={() => handleItemSelection(item.id, item)}
+        onClick={handleClick}
         selectable={multiSelectable}
         active={activeItemIndex === index}
       />
-    ),
+    },
     [theme, handleItemSelection, multiSelectable, activeItemIndex]
   );
 
