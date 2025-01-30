@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
-import { TimelineOutline, TimelineOutlineItem } from '../timeline-outline'; // Update import based on your actual file path
+import { TimelineOutline } from '../timeline-outline'; // Update import based on your actual file path
 import { Theme } from '@models/Theme';
 import { vi, Mock } from 'vitest';
+import { TimelineOutlineItem } from '../timeline-outline.model';
 
 // Mock GlobalContext and icons
 vi.mock('../../GlobalContext', () => ({
@@ -107,5 +108,32 @@ describe('<TimelineOutline />', () => {
     await waitFor(() => {
       expect(queryByText('Item 1')).not.toBeInTheDocument(); // No items should be displayed
     });
+  });
+
+  it('should show loading state', () => {
+    const { getByRole } = render(
+      <TimelineOutline
+        items={mockItems}
+        isLoading={true}
+        onSelect={mockOnSelect}
+        mode={'VERTICAL'}
+        theme={mockTheme}
+      />,
+    );
+    expect(getByRole('status')).toHaveTextContent('Loading outline...');
+  });
+
+  it('should show error state', () => {
+    const error = new Error('Test error');
+    const { getByRole } = render(
+      <TimelineOutline
+        items={mockItems}
+        error={error}
+        onSelect={mockOnSelect}
+        mode={'VERTICAL'}
+        theme={mockTheme}
+      />,
+    );
+    expect(getByRole('alert')).toHaveTextContent('Error: Test error');
   });
 });
