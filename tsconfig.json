@@ -20,7 +20,6 @@
     "baseUrl": ".",
     "types": [
       "node",
-      "@types/jest",
       "@types/react",
       "@types/react-dom",
       "@testing-library/jest-dom"

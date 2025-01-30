@@ -3,40 +3,40 @@
 exports[`Timeline vertical item > Should match snapshot 1`] = `
 <div>
   <li
-    class="sc-dstKZu evcZYl vertical-item-row"
+    class="sc-cGXZpB laLWLt vertical-item-row"
     data-testid="vertical-item-row"
   >
     <div
-      class="sc-dpBQxM fSAyCi"
+      class="sc-cZztgT htkDf"
       mode="VERTICAL_ALTERNATING"
     >
       <div
         align="right"
-        class="sc-blHHSb dclyBV timeline-item-title title"
+        class="sc-KXCwU brBixv timeline-item-title title"
       >
         vertical item title
       </div>
        
     </div>
     <div
-      class="sc-keTIit dexOwm card-content-wrapper"
+      class="sc-jZCRgm hlndPI card-content-wrapper"
     >
       <section
-        class="sc-hGZxvd dqcbIh timeline-card-content  card"
+        class="sc-hXGFlK kHgJoj timeline-card-content  card"
         data-testid="timeline-card-content"
         mode="VERTICAL_ALTERNATING"
         tabindex="0"
       >
         <div
-          class="sc-giBObj cBFFws card-media-wrapper card-media"
+          class="sc-gdPHyQ cxwfRz card-media-wrapper card-media"
           mode="VERTICAL_ALTERNATING"
         >
           <div
-            class="sc-CNKsk btqmlf"
+            class="sc-mLnbr dyLEwp"
             height="200"
           >
             <img
-              class="sc-UblHX gSPbB"
+              class="sc-bkdIYQ gVsFbB"
               data-testid="timeline-card-content-image"
               loading="lazy"
               mode="VERTICAL_ALTERNATING"
@@ -45,19 +45,19 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-Rjrgp hKDewc"
+          class="sc-bCFcQi kSEtQe"
           mode="VERTICAL_ALTERNATING"
         >
           <div
-            class="sc-hsfCcR gfTacH"
+            class="sc-hmOLaK fewJun"
           />
         </div>
         <div
           aria-expanded="false"
-          class="sc-hylbpc hIVHew show-less card-description card-text"
+          class="sc-itJKDv bTaHUl show-less card-description card-text"
         />
         <span
-          class="sc-gqYRWL gSyyyK"
+          class="sc-gHbpnE mrurF"
           dir=""
           offset="-8"
         />
@@ -65,16 +65,16 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     </div>
     <div
       bg="#0f52ba"
-      class="sc-cwJYja bdQWcr"
+      class="sc-cCaPlh jIMtYV"
       data-testid="tree-leaf"
     >
       <button
         aria-label="select timeline"
-        class="sc-kpAHqd klIhjl  timeline-vertical-circle"
+        class="sc-kkjQnW dHTTXj  timeline-vertical-circle"
         data-testid="tree-leaf-click"
       >
         <div
-          class="sc-dntaoT eWKMnX"
+          class="sc-dDvxFM jrQeud"
           dimension="16"
         />
       </button>

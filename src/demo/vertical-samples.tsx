@@ -119,8 +119,11 @@ export const VerticalTreeMixed: FunctionComponent<{
 export const VerticalBasic: FunctionComponent<{
   type: string;
   items: TimelineItemModel[];
-}> = ({ type, items }) => (
-  <Vertical id="vertical">
+}> = ({ type, items }) => {
+  console.log(type);
+  console.log("basic");
+  console.log(items);
+  return (<Vertical id="vertical">
     <ComponentContainerTree type={type}>
       <Chrono
         items={items}
@@ -170,8 +173,8 @@ export const VerticalBasic: FunctionComponent<{
         disableToolbar
       />
     </ComponentContainerTree>
-  </Vertical>
-);
+  </Vertical>)
+};
 
 export const VerticalNewMedia: FunctionComponent<{
   type: string;
