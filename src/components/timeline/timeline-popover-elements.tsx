@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import { List } from '../elements/list/list';
-import { PopOver } from '../elements/popover';
+import PopOver from '../elements/popover';
 import { ArrowDownIcon, LayoutIcon, ParaIcon } from '../icons';
 import {
   ChangeDensityProp,
@@ -18,6 +18,8 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   isMobile,
 }: LayoutSwitcherProp) => {
   const { showAllCardsHorizontal, buttonTexts } = useContext(GlobalContext);
+
+  const LayoutIconMemo = useMemo(() => <LayoutIcon />, []);
 
   const activeTimelineMode = useMemo(
     () => mode,
@@ -85,7 +87,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
       position={position}
       theme={theme}
       isDarkMode={isDarkMode}
-      icon={<LayoutIcon />}
+      icon={LayoutIconMemo}
       $isMobile={isMobile}
     >
       <List
@@ -112,6 +114,8 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
 }: QuickJumpProp) => {
   const { buttonTexts } = useContext(GlobalContext);
 
+  const ArrowDownIconMemo = useMemo(() => <ArrowDownIcon />, []);
+
   return (
     <PopOver
       placeholder={buttonTexts.jumpTo}
@@ -120,7 +124,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
       width={400}
       isDarkMode={isDarkMode}
       $isMobile={isMobile}
-      icon={<ArrowDownIcon />}
+      icon={ArrowDownIconMemo}
     >
       <List
         items={items.map((item, index) => ({
@@ -147,6 +151,8 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
   isMobile,
 }) => {
   const { buttonTexts } = useContext(GlobalContext);
+
+  const ParaIconMemo = useMemo(() => <ParaIcon />, []);
 
   const items = useMemo(
     () => [
@@ -176,7 +182,7 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
       position={position}
       $isMobile={isMobile}
       width={300}
-      icon={<ParaIcon />}
+      icon={ParaIconMemo}
     >
       <List items={items} theme={theme} multiSelectable />
     </PopOver>

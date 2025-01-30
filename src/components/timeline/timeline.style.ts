@@ -10,6 +10,7 @@ export const Wrapper = styled.div<{
   flex-direction: column;
   /* cannot remove this */
   height: 100%;
+  z-index: 0;
 
   &:focus {
     outline: 0;
@@ -132,6 +133,7 @@ export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
   padding: 0;
   margin: ${(p) => (p.position === 'top' ? '0 0 20px 0' : '20px 0 0 0')};
   order: ${(p) => (p.position === 'top' ? 0 : 1)};
+  z-index: 1;
 `;
 
 export const ExtraControls = styled.ul<{

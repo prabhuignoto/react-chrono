@@ -4,7 +4,7 @@ import { vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { getDefaultThemeOrDark } from '@utils/index';
 import { customRender, providerProps } from 'src/components/common/test';
-import { PopOver } from '../index';
+import PopOver from '../index';
 
 describe('PopOver', () => {
   const mockClosePopover = vi.fn();

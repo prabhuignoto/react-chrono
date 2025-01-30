@@ -1,57 +1,65 @@
 import { Theme } from '@models/Theme';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-// Style constants
-const BACKGROUND_COLOR = '#f5f5f5';
-const BORDER_COLOR = 'rgba(0, 0, 0, 0.1)';
+// Theme-specific constants
+const themeStyles = {
+  border: (theme: Theme) => `1px solid ${theme.primary}`,
+  transparent: '1px solid transparent'
+};
 
-// Common styles
-const commonStyles = `
-  align-items: center;
-  background: ${BACKGROUND_COLOR};
-  border-radius: 4px;
-  box-shadow: 0px 1px 1px ${BORDER_COLOR};
+// Reusable flex container mixin
+const flexContainer = css`
   display: flex;
+  align-items: center;
+`;
+
+// Base styles for list items and containers
+const baseStyles = css`
+  ${flexContainer}
   margin: 0;
-  margin-bottom: 0.5rem;
-  // padding: 0.25rem 0.5rem;
   width: 100%;
+`;
+
+// Common styles with improved typing
+const commonStyles = css`
+  ${baseStyles}
+  background: #f5f5f5;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5rem;
 
   &:last-child {
     margin-bottom: 0;
   }
 `;
 
-// List styles
+// Main list container
 export const ListStyle = styled.ul`
-  display: flex;
+  ${baseStyles}
   flex-direction: column;
   justify-content: center;
   list-style: none;
-  margin: 0;
   padding: 0;
-  width: 100%;
-  align-items: center;
 `;
 
-// List item styles
+// Interactive list item with theme support
 export const ListItemStyle = styled.li<{
   $active?: boolean;
   $selectable?: boolean;
   $theme: Theme;
 }>`
   ${commonStyles}
-  border: ${(p) =>
-    p.$active ? `1px solid ${p.$theme.primary}` : '1px solid transparent'};
-  flex-direction: ${(p) => (p.$selectable ? 'row' : 'column')};
+  border: ${(p) => p.$active ? themeStyles.border(p.$theme) : themeStyles.transparent};
+  flex-direction: ${(p) => p.$selectable ? 'row' : 'column'};
   background: ${(p) => p.$theme.toolbarBtnBgColor};
-  &:hover {
-    border: 1px solid ${(p) => p.$theme.primary};
-    cursor: pointer;
-  }
-  user-select: none;
   padding: 0.25rem;
   width: calc(100% - 0.5rem);
+  user-select: none;
+
+  &:hover {
+    border: ${(p) => themeStyles.border(p.$theme)};
+    cursor: pointer;
+  }
 `;
 
 // Title styles
@@ -62,6 +70,7 @@ export const TitleStyle = styled.h1<{ theme: Theme }>`
   margin: 0.2rem 0;
   text-align: left;
   white-space: nowrap;
+  align-self: flex-start;
 `;
 
 // Title description styles
@@ -75,28 +84,23 @@ export const TitleDescriptionStyle = styled.p<{ theme: Theme }>`
   color: ${(p) => p.theme.cardSubtitleColor};
 `;
 
-// Checkbox wrapper styles
+// Checkbox components with improved structure
 export const CheckboxWrapper = styled.span`
+  ${flexContainer}
   width: 2rem;
-  display: flex;
-  align-items: center;
   justify-content: center;
 `;
 
-// Checkbox styles
 export const CheckboxStyle = styled.span<{ selected?: boolean; theme: Theme }>`
-  align-items: center;
-  background-color: white;
-  ${(p) => !p.selected && `box-shadow: inset 0 0 0 1px ${BORDER_COLOR};`}
-  background: ${(p) => (p.selected ? p.theme.primary : p.theme.toolbarBgColor)};
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  height: 1.25rem;
+  ${flexContainer}
   justify-content: center;
-  margin-right: 0.25rem;
-  margin-left: 0.1rem;
   width: 1.25rem;
+  height: 1.25rem;
+  margin: 0 0.25rem 0 0.1rem;
+  border-radius: 50%;
+  background: ${(p) => p.selected ? p.theme.primary : p.theme.toolbarBgColor};
+  ${(p) => !p.selected && `box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1)`};
+  color: #fff;
 
   svg {
     width: 80%;
@@ -104,9 +108,9 @@ export const CheckboxStyle = styled.span<{ selected?: boolean; theme: Theme }>`
   }
 `;
 
-// Style and description wrapper styles
+// Content wrapper with conditional width
 export const StyleAndDescription = styled.div<{ $selectable?: boolean }>`
+  ${flexContainer}
   flex-direction: column;
-  display: flex;
-  width: ${(p) => (p.$selectable ? 'calc(100% - 2rem)' : '100%')};
+  width: ${(p) => p.$selectable ? 'calc(100% - 2rem)' : '100%'};
 `;

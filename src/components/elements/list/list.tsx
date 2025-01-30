@@ -1,16 +1,28 @@
-// Import necessary dependencies and utilities
 import { getUniqueID } from '@utils/index';
-import {
-  FunctionComponent,
-  startTransition,
-  useCallback,
-  useState,
-} from 'react';
+import { FunctionComponent, startTransition, useCallback, useMemo } from 'react';
 import { ListItem } from './list-item';
 import { ListModel } from './list.model';
 import { ListStyle } from './list.styles';
 
-// Define the List component
+/**
+ * Extends the base list item with a unique identifier
+ * @typedef {Object} EnhancedListItem
+ * @extends {ListModel['items'][0]}
+ * @property {string} id - Unique identifier for the list item
+ */
+type EnhancedListItem = ListModel['items'][0] & { id: string };
+
+/**
+ * List component that renders selectable items with optional multi-select capability
+ * @component
+ * @param {Object} props - Component props
+ * @param {Array<ListModel['items'][0]>} props.items - Array of items to render in the list
+ * @param {string} props.theme - Theme configuration for styling
+ * @param {(id: string) => void} [props.onClick] - Callback function when an item is clicked
+ * @param {number} [props.activeItemIndex] - Index of the currently active item
+ * @param {boolean} [props.multiSelectable=false] - Enable multi-select functionality
+ * @returns {JSX.Element} Rendered list component
+ */
 const List: FunctionComponent<ListModel> = ({
   items,
   theme,
@@ -18,71 +30,62 @@ const List: FunctionComponent<ListModel> = ({
   activeItemIndex,
   multiSelectable = false,
 }) => {
-  // Initialize state for list items
-  const [listItems, setListItems] = useState(() =>
-    items.map((item) => ({
-      id: getUniqueID(),
-      ...item,
-    })),
+  /**
+   * Memoized list items with generated unique IDs
+   */
+  const listItems = useMemo(
+    () => items.map((item) => ({ id: getUniqueID(), ...item })),
+    [items]
   );
 
-  // Callback function for handling checkbox selection
-  const onChecked = useCallback((id: string) => {
-    const updatedItems = listItems.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          selected: true,
-        };
-      } else {
-        return {
-          ...item,
-          selected: false,
-        };
-      }
-    });
-
-    setListItems(updatedItems);
-  }, []);
-
-  // Callback function for handling item click
-  const handleClick = useCallback((id: string) => {
-    onChecked(id);
-
-    if (multiSelectable) {
-      const item = listItems.find((item) => item.id === id);
-
-      if (item.onSelect) {
+  /**
+   * Handles item selection and triggers appropriate callbacks
+   * @param {string} id - Item identifier
+   * @param {EnhancedListItem} item - Selected list item
+   */
+  const handleItemSelection = useCallback(
+    (id: string, item: EnhancedListItem) => {
+      if (multiSelectable && item.onSelect) {
         startTransition(() => {
           item.onSelect();
         });
+      } else {
+        onClick?.(id);
       }
-    } else {
-      onClick?.(id);
-    }
-  }, []);
+    },
+    [multiSelectable, onClick]
+  );
 
-  // Render the List component
+  /**
+   * Renders individual list items with proper props
+   * @param {EnhancedListItem} item - Item to render
+   * @param {number} index - Item index in the list
+   * @returns {JSX.Element} Rendered list item
+   */
+  const renderListItem = useCallback(
+    (item: EnhancedListItem, index: number) => {
+      const handleClick = useCallback(
+        () => handleItemSelection(item.id, item),
+        [item, handleItemSelection]
+      );
+
+      return <ListItem
+        key={item.id}
+        {...item}
+        theme={theme}
+        onClick={handleClick}
+        selectable={multiSelectable}
+        active={activeItemIndex === index}
+      />
+    },
+    [theme, handleItemSelection, multiSelectable, activeItemIndex]
+  );
+
   return (
     <ListStyle>
-      {listItems?.map(({ title, id, description, selected }, index) => {
-        return (
-          <ListItem
-            title={title}
-            id={id}
-            key={id}
-            description={description}
-            theme={theme}
-            onClick={handleClick}
-            selectable={multiSelectable}
-            selected={selected}
-            active={activeItemIndex === index}
-          />
-        );
-      })}
+      {listItems.map(renderListItem)}
     </ListStyle>
   );
 };
 
-// Export the List component
 export { List };

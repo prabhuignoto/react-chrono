@@ -14,7 +14,7 @@ import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import { visualizer } from 'rollup-plugin-visualizer';
-import eslint from '@rollup/plugin-eslint';
+// import eslint from '@rollup/plugin-eslint';
 
 const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
@@ -146,7 +146,9 @@ export default {
         comments: false,
       },
     }),
-    eslint(),
+    // eslint({
+    //   overrideConfigFile: "./eslint.config.mjs"
+    // }),
     // analyze({
     //   summaryOnly: true,
     // }),

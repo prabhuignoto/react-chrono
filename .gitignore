@@ -47,3 +47,7 @@ react-test-bed
 
 # Ignore Gradle build output directory
 build
+
+## Panda
+styled-system
+styled-system-studio
