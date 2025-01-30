@@ -1,5 +1,5 @@
 import { ButtonTexts, TimelineMode } from '@models/TimelineModel';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { darkTheme, defaultTheme } from '../components/common/themes';
 import {
   getDefaultButtonTexts,
