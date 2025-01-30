@@ -123,6 +123,7 @@
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
     "rollup-plugin-visualizer": "^5.14.0",
+    "sass-embedded": "^1.83.4",
     "semver": "7.7.0",
     "size-limit": "^11.1.6",
     "snyk": "^1.1295.2",
