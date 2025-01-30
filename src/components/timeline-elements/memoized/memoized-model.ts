@@ -1,6 +1,5 @@
 import { Theme } from '../../../models/Theme';
-import React, { ForwardRefExoticComponent, ReactNode } from 'react';
-import { TextOrContentModel } from '../timeline-card-content/text-or-content';
+import React, { ReactNode } from 'react';
 
 /**
  * Common properties shared by multiple interfaces.
