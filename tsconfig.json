@@ -22,7 +22,8 @@
       "node",
       "@types/react",
       "@types/react-dom",
-      "@testing-library/jest-dom"
+      "@testing-library/jest-dom",
+      "react-router-dom",
     ],
     "paths": {
       "@utils/*": ["src/utils/*"],
