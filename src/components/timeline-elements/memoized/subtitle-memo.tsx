@@ -3,6 +3,11 @@ import React from 'react';
 import { CardSubTitle } from '../timeline-card-content/timeline-card-content.styles';
 import { Content } from './memoized-model';
 
+/**
+ * Renders the subtitle content for the timeline card.
+ * @param {Content} props - Subtitle properties
+ * @returns {JSX.Element | null} The rendered subtitle
+ */
 const SubTitleMemo = React.memo<Content>(
   ({ content, color, dir, theme, fontSize, classString, padding }: Content) =>
     content ? (

@@ -117,3 +117,40 @@ describe('Details Text', () => {
     expect(onRender).toHaveBeenCalled();
   });
 });
+
+describe('ShowOrHideTextButtonMemo', () => {
+  it('should not render if textOverlay is false', () => {
+    const TextComponent = forwardRef<HTMLSpanElement, TextOrContentModel>(() => (
+      <span>details text</span>
+    ));
+    const { queryByRole } = customRender(
+      <DetailsTextMemo
+        show
+        expand
+        text={TextComponent}
+        height={100}
+        onRender={vi.fn()}
+        textOverlay={false}
+      ></DetailsTextMemo>,
+      { providerProps },
+    );
+    expect(queryByRole('button')).toBeNull();
+  });
+});
+
+describe('ExpandButtonMemo', () => {
+  it('should not render if textOverlay is false', () => {
+    const { queryByRole } = customRender(
+      <DetailsTextMemo
+        show
+        expand
+        text={forwardRef(() => <span>details text</span>)}
+        height={100}
+        onRender={vi.fn()}
+        textOverlay={false}
+      ></DetailsTextMemo>,
+      { providerProps },
+    );
+    expect(queryByRole('button')).toBeNull();
+  });
+});

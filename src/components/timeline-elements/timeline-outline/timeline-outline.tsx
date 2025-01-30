@@ -1,23 +1,20 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState, PropsWithChildren } from 'react';
 import { GlobalContext } from '../../GlobalContext';
 import CloseIcon from '../../icons/close';
 import MenuIcon from '../../icons/menu';
 import { OutlineItemList } from './timeline-outline-item-list';
-import {
-  OutlinePosition,
-  TimelineOutlineModel,
-} from './timeline-outline.model';
-import {
-  OutlineButton,
-  OutlinePane,
-  OutlineWrapper,
-} from './timeline-outline.styles';
+import { OutlinePosition, TimelineOutlineModel } from './timeline-outline.model';
+import { OutlineButton, OutlinePane, OutlineWrapper } from './timeline-outline.styles';
+
+class TimelineOutlineError extends React.Component<PropsWithChildren<{ onError?: (error: Error) => void }>> {
+  componentDidCatch(error: Error) {
+    this.props.onError?.(error);
+  }
+  
+  render() {
+    return this.props.children;
+  }
+}
 
 /**
  * TimelineOutline component
@@ -36,6 +33,9 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
   onSelect,
   mode,
   theme,
+  isLoading,
+  error,
+  onError,
 }: TimelineOutlineModel) => {
   const [openPane, setOpenPane] = useState(false);
   const [showList, setShowList] = useState(false);
@@ -68,26 +68,41 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
     [onSelect],
   );
 
+  if (error) {
+    return <div role="alert">Error: {error.message}</div>;
+  }
+
+  if (isLoading) {
+    return <div role="status">Loading outline...</div>;
+  }
+
   return (
-    <OutlineWrapper position={position} open={openPane}>
-      <OutlineButton
-        onPointerDown={togglePane}
-        theme={mergedTheme}
+    <TimelineOutlineError onError={onError}>
+      <OutlineWrapper 
+        position={position} 
         open={openPane}
-        position={position}
+        aria-expanded={openPane}
+        role="complementary"
       >
-        {openPane ? <CloseIcon /> : <MenuIcon />}
-      </OutlineButton>
-      <OutlinePane open={openPane}>
-        {showList && (
-          <OutlineItemList
-            items={items}
-            handleSelection={handleSelection}
-            theme={mergedTheme}
-          />
-        )}
-      </OutlinePane>
-    </OutlineWrapper>
+        <OutlineButton
+          onPointerDown={togglePane}
+          theme={mergedTheme}
+          open={openPane}
+          position={position}
+        >
+          {openPane ? <CloseIcon /> : <MenuIcon />}
+        </OutlineButton>
+        <OutlinePane open={openPane}>
+          {showList && (
+            <OutlineItemList
+              items={items}
+              handleSelection={handleSelection}
+              theme={mergedTheme}
+            />
+          )}
+        </OutlinePane>
+      </OutlineWrapper>
+    </TimelineOutlineError>
   );
 };
 
