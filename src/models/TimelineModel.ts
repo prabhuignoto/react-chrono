@@ -1,6 +1,11 @@
 import { Theme } from './Theme';
 import { TimelineItemModel } from './TimelineItemModel';
 
+/**
+ * Represents the text density options for timeline content
+ * LOW - Regular spacing between text elements
+ * HIGH - Compact spacing between text elements
+ */
 export type TextDensity = 'LOW' | 'HIGH';
 
 /**
@@ -247,6 +252,9 @@ export type TimelineProps = {
 
 export type SlideShowType = 'reveal' | 'slide_in' | 'slide_from_sides';
 
+/**
+ * Represents the available timeline display modes
+ */
 export type TimelineMode =
   | 'VERTICAL'
   | 'HORIZONTAL'

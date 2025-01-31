@@ -8,7 +8,10 @@ import { TimelineProps } from './TimelineModel';
  * Represents the model for a timeline item.
  */
 export interface TimelineItemModel {
-  // Internal property for handling date.
+  /**
+   * Internal dayjs instance for date handling
+   * @internal
+   */
   _dayjs?: any;
 
   // Indicates if the timeline item is active.
@@ -41,7 +44,9 @@ export interface TimelineItemModel {
   // Media associated with the timeline item.
   media?: Media;
 
-  // Position of the timeline item.
+  /**
+   * Position of the timeline item ('left' | 'right' | 'alternate')
+   */
   position?: string;
 
   // Custom content for the timeline content.
