@@ -10,15 +10,15 @@ import { TimelineProps } from './TimelineModel';
 export type Props = Pick<
   TimelineProps,
   // List of properties inherited from TimelineProps:
-  | 'flipLayout'
-  | 'theme'
-  | 'mode'
-  | 'timelinePointDimension'
-  | 'lineWidth'
   | 'cardHeight'
-  | 'disableClickOnCircle'
   | 'cardLess'
+  | 'disableClickOnCircle'
+  | 'flipLayout'
+  | 'lineWidth'
+  | 'mode'
   | 'nestedCardHeight'
+  | 'theme'
+  | 'timelinePointDimension'
 > & {
   // Indicates whether to show alternate cards.
   alternateCards?: boolean;
@@ -91,7 +91,9 @@ export interface VerticalItemModel extends VerticalModel {
   // Icon element associated with the timeline item.
   iconChild?: React.ReactNode;
 
-  // Index of the timeline item.
+  /**
+   * Zero-based index of the timeline item
+   */
   index: number;
 
   // Nested timeline items.

@@ -93,7 +93,9 @@ export interface CardMediaModel {
   // Indicates if slideshow mode is active.
   slideshowActive?: boolean;
 
-  // Initial width for the media element.
+  /**
+   * Initial width for the media element in pixels
+   */
   startWidth?: number;
 
   // Theme to be applied to the media card.
@@ -102,7 +104,9 @@ export interface CardMediaModel {
   // Title of the media card.
   title?: string;
 
-  // Direction of the triangle indicator.
+  /**
+   * Direction of the triangle indicator ('left' | 'right')
+   */
   triangleDir?: string;
 
   // URL associated with the media.
