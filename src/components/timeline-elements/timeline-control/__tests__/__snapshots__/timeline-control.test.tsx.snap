@@ -3,19 +3,19 @@
 exports[`TimelineControl > should render 1`] = `
 <div>
   <div
-    class="sc-gaZyOd eslDWq"
+    class="sc-fLDLck dsAteL"
   >
     <ul
-      class="sc-KXCwU fZTdvQ timeline-controls controls"
+      class="sc-FEMpB jXXdQz timeline-controls controls"
     >
       <li
-        class="sc-gyycJP fxdlUX"
+        class="sc-gjcoXW cAiTVS"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="first"
-          class="sc-eaUbBy FNyiQ"
+          class="sc-dVBluf iHSnFq"
           data-test-id="jump-to-first"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -44,13 +44,13 @@ exports[`TimelineControl > should render 1`] = `
         </button>
       </li>
       <li
-        class="sc-gyycJP fxdlUX"
+        class="sc-gjcoXW cAiTVS"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="previous"
-          class="sc-eaUbBy FNyiQ"
+          class="sc-dVBluf iHSnFq"
           data-test-id="previous"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -76,13 +76,13 @@ exports[`TimelineControl > should render 1`] = `
         </button>
       </li>
       <li
-        class="sc-gyycJP fxdlUX"
+        class="sc-gjcoXW cAiTVS"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="next"
-          class="sc-eaUbBy FNyiQ"
+          class="sc-dVBluf iHSnFq"
           data-test-id="next"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -108,13 +108,13 @@ exports[`TimelineControl > should render 1`] = `
         </button>
       </li>
       <li
-        class="sc-gyycJP fxdlUX"
+        class="sc-gjcoXW cAiTVS"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="last"
-          class="sc-eaUbBy FNyiQ"
+          class="sc-dVBluf iHSnFq"
           data-test-id="jump-to-last"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -143,15 +143,15 @@ exports[`TimelineControl > should render 1`] = `
         </button>
       </li>
       <li
-        class="sc-gyycJP fxdlUX"
+        class="sc-gjcoXW cAiTVS"
       />
       <li
-        class="sc-gyycJP fxdlUX"
+        class="sc-gjcoXW cAiTVS"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-label="dark"
-          class="sc-eaUbBy fullVo"
+          class="sc-dVBluf cLpDda"
           data-test-id="dark-toggle"
           tabindex="0"
           title="dark"
