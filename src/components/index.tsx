@@ -23,7 +23,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   } = props;
 
   const [timeLineItems, setTimeLineItems] = useState<TimelineItemModel[]>([]);
-  const timeLineItemsRef = useRef<TimelineItemModel[]>();
+  const timeLineItemsRef = useRef<TimelineItemModel[]>([]);
   const [slideShowActive, setSlideShowActive] = useState(false);
   const [activeTimelineItem, setActiveTimelineItem] = useState(activeItemIndex);
 
@@ -53,7 +53,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }
 
     const itemLength = React.Children.toArray(children).filter(
-      (item) => (item as React.ReactElement).props.className !== 'chrono-icons',
+      (item) => (item as React.ReactElement<any>).props.className !== 'chrono-icons',
     ).length;
 
     return Array.from({ length: itemLength }).map((_, index) => ({

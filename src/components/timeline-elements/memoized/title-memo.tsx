@@ -4,8 +4,14 @@ import {
   CardTitleAnchor,
 } from '../timeline-card-content/timeline-card-content.styles';
 import { Title } from './memoized-model';
+import React from 'react';
 
-const TitleMemo = ({
+/**
+ * Renders the timeline’s title with optional link.
+ * @param {Title} props - Title properties
+ * @returns {JSX.Element | null} The rendered title
+ */
+const TitleMemoComponent = ({
   title,
   url,
   theme,
@@ -37,6 +43,6 @@ const TitleMemo = ({
   ) : null;
 };
 
-TitleMemo.displayName = 'Timeline Title';
+export const TitleMemo = React.memo(TitleMemoComponent);
 
-export { TitleMemo };
+TitleMemo.displayName = 'Timeline Title';

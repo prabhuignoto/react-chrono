@@ -95,19 +95,19 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
 
   useMatchMedia(
     `(max-width: ${responsiveBreakPoint - 1}px)`,
-    () => setIsMobileDetected(true),
-    enableBreakPoint,
+    {
+      onMatch: () => setIsMobileDetected(true),
+      enabled: enableBreakPoint,
+    }
   );
 
   useMatchMedia(
     `(min-width: ${responsiveBreakPoint}px)`,
-    () => setIsMobileDetected(false),
-    enableBreakPoint,
+    {
+      onMatch: () => setIsMobileDetected(false),
+      enabled: enableBreakPoint,
+    }
   );
-
-  // useEffect(() => {
-  //   console.log('isMobile', isMobileDetected);
-  // }, [isMobileDetected]);
 
   const defaultProps = useMemo(
     () =>

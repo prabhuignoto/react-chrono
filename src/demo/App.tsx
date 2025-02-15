@@ -117,137 +117,137 @@ const NewDemo: React.FunctionComponent = () => {
     );
   }, []);
 
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Layout />,
-      children: [
+  const router = items.length
+    ? createBrowserRouter([
         {
           path: '/',
-          element: items.length ? (
-            <VerticalBasic type={'big-screen'} items={items} />
-          ) : null,
-        },
-        {
-          path: '/vertical-basic',
-          element: items.length ? (
-            <VerticalBasic type={'big-screen'} items={items} />
-          ) : null,
-        },
-        {
-          path: '/vertical-basic-nested',
-          element: items.length ? (
-            <VerticalBasicNested type={'big-screen'} items={dataNested} />
-          ) : null,
-        },
-        {
-          path: '/vertical-alternating-mixed',
-          element: items.length > 0 && (
-            <VerticalTreeMixed type={'big-screen'} />
-          ),
-        },
-        {
-          path: '/vertical-alternating-nested',
-          element: items.length > 0 && (
-            <VerticalAlternatingNested
-              type={'big-screen'}
-              items={nestedItems}
-            />
-          ),
-        },
-        {
-          path: '/vertical-alternating-nested',
-          element: items.length > 0 && (
-            <VerticalTreeMixed type={'big-screen'} />
-          ),
-        },
-        {
-          path: '/vertical-alternating',
-          element: (
-            <>
-              <button
-                onClick={() => {
-                  setState(1 - state);
-                }}
-                className="rounded-full"
-              >
-                change
-              </button>
-              {
-                <VerticalTree
+          element: <Layout />,
+          children: [
+            {
+              path: '/',
+              element: <VerticalBasic type={'big-screen'} items={items} />,
+            },
+            {
+              path: '/vertical-basic',
+              element: items.length ? (
+                <VerticalBasic type={'big-screen'} items={items} />
+              ) : null,
+            },
+            {
+              path: '/vertical-basic-nested',
+              element: items.length ? (
+                <VerticalBasicNested type={'big-screen'} items={dataNested} />
+              ) : null,
+            },
+            {
+              path: '/vertical-alternating-mixed',
+              element: items.length > 0 && (
+                <VerticalTreeMixed type={'big-screen'} />
+              ),
+            },
+            {
+              path: '/vertical-alternating-nested',
+              element: items.length > 0 && (
+                <VerticalAlternatingNested
                   type={'big-screen'}
-                  items={state > 0 ? items : mixed}
-                  theme={customTheme}
-                >
-                  {state}
-                </VerticalTree>
-              }
-            </>
-          ),
+                  items={nestedItems}
+                />
+              ),
+            },
+            {
+              path: '/vertical-alternating-nested',
+              element: items.length > 0 && (
+                <VerticalTreeMixed type={'big-screen'} />
+              ),
+            },
+            {
+              path: '/vertical-alternating',
+              element: (
+                <>
+                  <button
+                    onClick={() => {
+                      setState(1 - state);
+                    }}
+                    className="rounded-full"
+                  >
+                    change
+                  </button>
+                  {
+                    <VerticalTree
+                      type={'big-screen'}
+                      items={state > 0 ? items : mixed}
+                      theme={customTheme}
+                    >
+                      {state}
+                    </VerticalTree>
+                  }
+                </>
+              ),
+            },
+            {
+              path: '/horizontal',
+              element: items.length > 0 && (
+                <HorizontalBasic items={items} type="big-screen" />
+              ),
+            },
+            {
+              path: '/vertical-world-history',
+              element: historyItems.length ? (
+                <VerticalNewMedia items={historyItems} type="big-screen" />
+              ) : null,
+            },
+            {
+              path: '/horizontal-all',
+              element: items.length > 0 && (
+                <HorizontalAll items={historyItems} type="big-screen" />
+              ),
+            },
+            {
+              path: '/horizontal-initial-select',
+              element: items.length > 0 && (
+                <HorizontalInitialSelectedItem items={items} type="big-screen" />
+              ),
+            },
+            {
+              path: '/vertical-custom',
+              element: items.length > 0 && (
+                <VerticalCustomContent type="big-screen" />
+              ),
+            },
+            {
+              path: '/vertical-custom-icon',
+              element: items.length > 0 && (
+                <VerticalCustomContent2 type="big-screen" items={items} />
+              ),
+            },
+            {
+              path: '/dynamic-load',
+              element: items.length > 0 && <DynamicLoad />,
+            },
+            {
+              path: '/timeline-without-cards',
+              element: items.length > 0 && (
+                <VerticalBasicCardLess type="big-screen" items={items} />
+              ),
+            },
+            {
+              path: '/timeline-without-cards-horizontal',
+              element: items.length > 0 && (
+                <HorizontalBasicCardLess type="big-screen" items={items} />
+              ),
+            },
+            {
+              path: '/timeline-without-cards-horizontal',
+              element: items.length > 0 && (
+                <HorizontalBasicCardLess type="big-screen" items={items} />
+              ),
+            },
+          ],
         },
-        {
-          path: '/horizontal',
-          element: items.length > 0 && (
-            <HorizontalBasic items={items} type="big-screen" />
-          ),
-        },
-        {
-          path: '/vertical-world-history',
-          element: historyItems.length ? (
-            <VerticalNewMedia items={historyItems} type="big-screen" />
-          ) : null,
-        },
-        {
-          path: '/horizontal-all',
-          element: items.length > 0 && (
-            <HorizontalAll items={historyItems} type="big-screen" />
-          ),
-        },
-        {
-          path: '/horizontal-initial-select',
-          element: items.length > 0 && (
-            <HorizontalInitialSelectedItem items={items} type="big-screen" />
-          ),
-        },
-        {
-          path: '/vertical-custom',
-          element: items.length > 0 && (
-            <VerticalCustomContent type="big-screen" />
-          ),
-        },
-        {
-          path: '/vertical-custom-icon',
-          element: items.length > 0 && (
-            <VerticalCustomContent2 type="big-screen" items={items} />
-          ),
-        },
-        {
-          path: '/dynamic-load',
-          element: items.length > 0 && <DynamicLoad />,
-        },
-        {
-          path: '/timeline-without-cards',
-          element: items.length > 0 && (
-            <VerticalBasicCardLess type="big-screen" items={items} />
-          ),
-        },
-        {
-          path: '/timeline-without-cards-horizontal',
-          element: items.length > 0 && (
-            <HorizontalBasicCardLess type="big-screen" items={items} />
-          ),
-        },
-        {
-          path: '/timeline-without-cards-horizontal',
-          element: items.length > 0 && (
-            <HorizontalBasicCardLess type="big-screen" items={items} />
-          ),
-        },
-      ],
-    },
-  ]);
+      ])
+    : null;
 
-  return <RouterProvider router={router}></RouterProvider>;
+  return router ? <RouterProvider router={router}></RouterProvider> : null;
 };
 
 export default NewDemo;

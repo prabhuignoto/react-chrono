@@ -1,33 +1,43 @@
 import { Theme } from '@models/Theme';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const ToolbarWrapper = styled.ul<{ theme: Theme }>`
-  list-style: none;
-  margin: 0;
+// Base styles for flex containers - using memo to prevent recreation
+const flexContainer = css`
   display: flex;
   align-items: center;
-  background-color: ${(p) => p.theme.toolbarBgColor};
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+`;
+
+// Use transform instead of box-shadow for better performance
+export const ToolbarWrapper = styled.ul<{ theme: Theme }>`
+  ${flexContainer};
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem;
+  background-color: ${({ theme }) => theme.toolbarBgColor};
+  transform: translateY(0);
+  filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.1));
   width: 100%;
   height: 100%;
   border-radius: 6px;
   flex-wrap: wrap;
-  padding: 0.25rem;
+  will-change: transform;
 `;
 
+// Toolbar list item styles
 export const ToolbarListItem = styled.li`
   padding: 0;
   margin: 0 0.5rem;
 `;
 
+// Icon wrapper styles
 export const IconWrapper = styled.span`
-  display: flex;
-  align-items: center;
+  ${flexContainer};
   justify-content: center;
   width: 1rem;
   height: 1rem;
 `;
 
+// Content wrapper styles
 export const ContentWrapper = styled.span`
-  display: flex;
+  ${flexContainer};
 `;

@@ -222,8 +222,6 @@ describe('Timeline', () => {
 
     const lastButton = getByLabelText('last');
 
-    console.log(lastButton);
-
     expect(lastButton).toBeInTheDocument();
 
     userEvent.click(lastButton);

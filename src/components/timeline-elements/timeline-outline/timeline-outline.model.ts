@@ -11,10 +11,15 @@ export interface TimelineOutlineModel {
   mode?: TimelineMode;
   onSelect?: (index: number) => void;
   theme?: Theme;
+  isLoading?: boolean;
+  error?: Error | null;
+  onError?: (error: Error) => void;
 }
 
 export interface TimelineOutlineItem {
   id?: string;
   name?: string;
   selected?: boolean;
+  disabled?: boolean;
+  ariaLabel?: string;
 }

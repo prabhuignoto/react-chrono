@@ -1,5 +1,4 @@
 import babel from '@rollup/plugin-babel';
-// import buble from '@rollup/plugin-buble';
 import common from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
@@ -14,7 +13,6 @@ import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import { visualizer } from 'rollup-plugin-visualizer';
-import eslint from '@rollup/plugin-eslint';
 
 const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
@@ -104,12 +102,6 @@ export default {
         ],
       ],
     }),
-    // buble({
-    //   objectAssign: true,
-    //   transforms: {
-    //     templateString: false,
-    //   },
-    // }),
     postcss({
       plugins: [
         postCSSPreset({
@@ -146,10 +138,6 @@ export default {
         comments: false,
       },
     }),
-    eslint(),
-    // analyze({
-    //   summaryOnly: true,
-    // }),
     copy({
       targets: [{ dest: 'dist', src: 'README.md' }],
     }),
