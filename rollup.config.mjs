@@ -3,6 +3,7 @@ import common from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import autoprefixer from 'autoprefixer';
+import { dir } from 'console';
 import cssnano from 'cssnano';
 import fs from 'fs';
 import postCSSPreset from 'postcss-preset-env';
