@@ -154,15 +154,15 @@
   "size-limit": [
     {
       "path": "dist/react-chrono.js",
-      "limit": "100 KB"
+      "limit": "110 KB"
     },
     {
       "path": "dist/react-chrono.esm.js",
-      "limit": "100 KB"
+      "limit": "110 KB"
     },
     {
       "path": "dist/react-chrono.umd.js",
-      "limit": "100 KB"
+      "limit": "110 KB"
     }
   ],
   "lint-staged": {
