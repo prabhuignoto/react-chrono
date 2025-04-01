@@ -14,9 +14,11 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
         alt="Image"
         class="sc-gjcoXW leawZG"
         data-testid="timeline-card-content-image"
+        height="auto"
         loading="lazy"
         mode="VERTICAL_ALTERNATING"
         src="https://picsum.photos/200/300"
+        width="100%"
       />
     </div>
   </div>
@@ -48,6 +50,7 @@ exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
       class="sc-jbAkgO gHLTau"
       data-testid="timeline-card-content-video"
       frameborder="0"
+      loading="lazy"
       src="https://www.youtube.com/watch?v=9bZkp7q19f0?enablejsapi=1"
       title="Video"
     />

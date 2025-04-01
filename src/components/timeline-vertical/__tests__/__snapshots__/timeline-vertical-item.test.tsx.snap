@@ -38,9 +38,11 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
             <img
               class="sc-beKSRx evdJKN"
               data-testid="timeline-card-content-image"
+              height="auto"
               loading="lazy"
               mode="VERTICAL_ALTERNATING"
               src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+              width="100%"
             />
           </div>
         </div>
