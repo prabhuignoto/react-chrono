@@ -3,11 +3,11 @@
 exports[`Timeline vertical item > Should match snapshot 1`] = `
 <div>
   <li
-    class="sc-cMqPwU jwVEpd vertical-item-row"
+    class="sc-cMqPwU eVXjLD vertical-item-row"
     data-testid="vertical-item-row"
   >
     <div
-      class="sc-deSjom iQFrvI"
+      class="sc-deSjom gLvTFy"
       mode="VERTICAL_ALTERNATING"
     >
       <div
@@ -16,10 +16,9 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
       >
         vertical item title
       </div>
-       
     </div>
     <div
-      class="sc-jUkaYT eAXTFy card-content-wrapper"
+      class="sc-jUkaYT cBVweA card-content-wrapper"
     >
       <section
         class="sc-incsXD hliFPP timeline-card-content  card"
@@ -38,9 +37,11 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
             <img
               class="sc-beKSRx evdJKN"
               data-testid="timeline-card-content-image"
+              height="auto"
               loading="lazy"
               mode="VERTICAL_ALTERNATING"
               src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+              width="100%"
             />
           </div>
         </div>
@@ -65,12 +66,12 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     </div>
     <div
       bg="#0f52ba"
-      class="sc-cHtFsA fFIeYq"
+      class="sc-cHtFsA cloST"
       data-testid="tree-leaf"
     >
       <button
-        aria-label="select timeline"
-        class="sc-keRagD dAgXgO  timeline-vertical-circle"
+        aria-label="Timeline Point"
+        class="sc-keRagD bksbDM  timeline-vertical-circle"
         data-testid="tree-leaf-click"
       >
         <div

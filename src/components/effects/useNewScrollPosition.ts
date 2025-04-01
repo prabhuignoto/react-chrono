@@ -16,62 +16,87 @@ const useNewScrollPosition = (
   // State to hold the new offset value
   const [newOffset, setNewOffset] = useState(0);
 
+  const computeHorizontalOffset = (
+    scrollLeft: number,
+    clientWidth: number,
+    pointOffset: number,
+    pointWidth: number,
+    itemWidth: number,
+    setNewOffset: (offset: number) => void,
+  ) => {
+    const contrRight = scrollLeft + clientWidth;
+    const circRight = pointOffset + pointWidth;
+
+    const isVisible = pointOffset >= scrollLeft && circRight <= contrRight;
+    const isPartiallyVisible =
+      (pointOffset < scrollLeft && circRight > scrollLeft) ||
+      (circRight > contrRight && pointOffset < contrRight);
+
+    const leftGap = pointOffset - scrollLeft;
+    const rightGap = contrRight - pointOffset;
+
+    if (
+      !(isVisible || isPartiallyVisible) ||
+      (leftGap <= itemWidth && leftGap >= 0) ||
+      (rightGap <= itemWidth && rightGap >= 0)
+    ) {
+      setNewOffset(pointOffset - itemWidth);
+    }
+  };
+
+  const computeVerticalOffset = (
+    scrollTop: number,
+    clientHeight: number,
+    contentOffset: number,
+    contentHeight: number,
+    setNewOffset: (offset: number) => void,
+  ) => {
+    const contrBottom = scrollTop + clientHeight;
+    const circBottom = contentOffset + contentHeight;
+
+    const isVisible = contentOffset >= scrollTop && circBottom <= contrBottom;
+    const isPartiallyVisible =
+      (contentOffset < scrollTop && circBottom > scrollTop) ||
+      (circBottom > contrBottom && contentOffset < contrBottom);
+
+    const nOffset = contentOffset - contentHeight;
+    const notVisible = !isVisible || isPartiallyVisible;
+
+    if (notVisible && nOffset + contentHeight < contrBottom) {
+      setNewOffset(nOffset + Math.round(contentHeight / 2));
+    } else if (notVisible) {
+      setNewOffset(nOffset);
+    }
+  };
+
   // Memoized function to compute the new offset value
   const computeNewOffset = useMemo(
     () => (parent: HTMLElement, scroll: Partial<Scroll>) => {
-      // Destructuring relevant properties from parent and scroll
       const { clientWidth, scrollLeft, scrollTop, clientHeight } = parent;
-      const { pointOffset = 0, pointWidth = 0, contentHeight = 0, contentOffset = 0 } = scroll;
+      const {
+        pointOffset = 0,
+        pointWidth = 0,
+        contentHeight = 0,
+        contentOffset = 0,
+      } = scroll;
 
-      // Handling horizontal mode
       if (mode === 'HORIZONTAL' && itemWidth) {
-        // Calculating right boundaries for container and circular element
-        const contrRight = scrollLeft + clientWidth;
-        const circRight = pointOffset + pointWidth;
-
-        // Checking if the element is fully visible
-        const isVisible = pointOffset >= scrollLeft && circRight <= contrRight;
-
-        // Checking if the element is partially visible
-        const isPartiallyVisible =
-          (pointOffset < scrollLeft && circRight > scrollLeft) ||
-          (circRight > contrRight && pointOffset < contrRight);
-
-        // Calculating gaps from left and right
-        const leftGap = pointOffset - scrollLeft;
-        const rightGap = contrRight - pointOffset;
-
-        // Setting offset based on visibility and gap conditions
-        if (
-          !(isVisible || isPartiallyVisible) ||
-          (leftGap <= itemWidth && leftGap >= 0) ||
-          (rightGap <= itemWidth && rightGap >= 0)
-        ) {
-          setNewOffset(pointOffset - itemWidth);
-        }
+        computeHorizontalOffset(
+          scrollLeft,
+          clientWidth,
+          pointOffset,
+          pointWidth,
+          itemWidth,
+          setNewOffset,
+        );
       } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
-        // Handling vertical modes
-        const contrBottom = scrollTop + clientHeight;
-        const circBottom = contentOffset + contentHeight;
-
-        // Checking if the element is fully visible
-        const isVisible = contentOffset >= scrollTop && circBottom <= contrBottom;
-
-        // Checking if the element is partially visible
-        const isPartiallyVisible =
-          (contentOffset < scrollTop && circBottom > scrollTop) ||
-          (circBottom > contrBottom && contentOffset < contrBottom);
-
-        // Calculating new offset
-        const nOffset = contentOffset - contentHeight;
-        const notVisible = !isVisible || isPartiallyVisible;
-
-        // Setting offset based on visibility conditions
-        if (notVisible && nOffset + contentHeight < contrBottom) {
-          setNewOffset(nOffset + Math.round(contentHeight / 2));
-        } else if (notVisible) {
-          setNewOffset(nOffset);
-        }
+        computeVerticalOffset(
+          scrollTop,
+          clientHeight,
+          contentOffset,
+          contentHeight,
+          setNewOffset,
+        );
       }
     },
     [mode, itemWidth], // Dependencies for useMemo

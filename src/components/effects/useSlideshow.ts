@@ -28,7 +28,7 @@ const useSlideshow = (
   id: string,
   onElapsed?: (id: string) => void,
 ): SlideshowHookReturn => {
-  const startTime = useRef<Date | null>(null);
+  const startTime = useRef<number | null>(null);
   const timerRef = useRef<number>(0);
   const [startWidth, setStartWidth] = useState<number>(0);
   const [paused, setPaused] = useState<boolean>(false);
@@ -49,26 +49,29 @@ const useSlideshow = (
    * Sets up a new timer for the slideshow
    * @param interval - Duration in milliseconds for the timer
    */
-  const setupTimer = useCallback((interval: number) => {
-    if (!slideItemDuration || interval <= 0) {
-      return;
-    }
-
-    cleanupTimer();
-    setRemainInterval(interval);
-    startTime.current = new Date();
-    setPaused(false);
-
-    timerRef.current = window.setTimeout(() => {
-      cleanupTimer();
-      setPaused(true);
-      setStartWidth(0);
-      setRemainInterval(slideItemDuration);
-      if (id && onElapsed) {
-        onElapsed(id);
+  const setupTimer = useCallback(
+    (interval: number) => {
+      if (!slideItemDuration || interval <= 0) {
+        return;
       }
-    }, interval);
-  }, [slideItemDuration, id, onElapsed, cleanupTimer]);
+
+      cleanupTimer();
+      setRemainInterval(interval);
+      startTime.current = performance.now();
+      setPaused(false);
+
+      timerRef.current = window.setTimeout(() => {
+        cleanupTimer();
+        setPaused(true);
+        setStartWidth(0);
+        setRemainInterval(slideItemDuration);
+        if (id && onElapsed) {
+          onElapsed(id);
+        }
+      }, interval);
+    },
+    [slideItemDuration, id, onElapsed, cleanupTimer],
+  );
 
   /**
    * Pauses the current slideshow if conditions are met
@@ -81,8 +84,8 @@ const useSlideshow = (
     cleanupTimer();
     setPaused(true);
 
-    if (startTime.current) {
-      const elapsed = Date.now() - startTime.current.getTime();
+    if (startTime.current !== null) {
+      const elapsed = performance.now() - startTime.current;
       slideShowElapsed.current = elapsed;
     }
 

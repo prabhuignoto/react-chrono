@@ -1,6 +1,6 @@
 // Test setup
 import { act, renderHook } from '@testing-library/react';
-import { vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { useSlideshow } from '../useSlideshow';
 
 const slideItemDuration = 5000;

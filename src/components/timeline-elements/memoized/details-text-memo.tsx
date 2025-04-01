@@ -16,19 +16,30 @@ const useBackgroundColor = (cardDetailsBackGround?: string): Background => {
 
 // Extract height measurement logic
 const useMeasureHeight = (onRender?: (height: number) => void) => {
-  return useCallback((node: HTMLDivElement | null) => {
-    if (node && onRender) {
-      onRender(node.clientHeight);
-    }
-  }, [onRender]);
+  return useCallback(
+    (node: HTMLDivElement | null) => {
+      if (node && onRender) {
+        // Use requestAnimationFrame to measure after paint to ensure accurate height
+        requestAnimationFrame(() => {
+          onRender(node.clientHeight);
+        });
+      }
+    },
+    [onRender],
+  );
 };
 
 // Add prop types equality check function
-const arePropsEqual = (prev: DetailsTextMemoModel, next: DetailsTextMemoModel): boolean => {
-  return prev.height === next.height &&
+const arePropsEqual = (
+  prev: DetailsTextMemoModel,
+  next: DetailsTextMemoModel,
+): boolean => {
+  return (
+    prev.height === next.height &&
     prev.show === next.show &&
     prev.expand === next.expand &&
-    prev.theme?.cardDetailsBackGround === next.theme?.cardDetailsBackGround;
+    prev.theme?.cardDetailsBackGround === next.theme?.cardDetailsBackGround
+  );
 };
 
 /**
@@ -36,32 +47,35 @@ const arePropsEqual = (prev: DetailsTextMemoModel, next: DetailsTextMemoModel): 
  * @param {DetailsTextMemoModel} props - The details text model
  * @returns {JSX.Element | null} The details text overlay
  */
-const DetailsTextMemo = memo<DetailsTextMemoModel>(({
-  theme,
-  show,
-  expand,
-  textOverlay,
-  text: Text,
-  height,
-  onRender,
-}: DetailsTextMemoModel) => {
-  const background = useBackgroundColor(theme?.cardDetailsBackGround);
-  const measureRef = useMeasureHeight(onRender);
+const DetailsTextMemo = memo<DetailsTextMemoModel>(
+  ({
+    theme,
+    show,
+    expand,
+    textOverlay,
+    text: Text,
+    height,
+    onRender,
+  }: DetailsTextMemoModel) => {
+    const background = useBackgroundColor(theme?.cardDetailsBackGround);
+    const measureRef = useMeasureHeight(onRender);
 
-  if (!textOverlay) return null;
+    if (!textOverlay) return null;
 
-  return (
-    <DetailsTextWrapper
-      ref={measureRef}
-      $expandFull={expand}
-      theme={theme}
-      $show={show}
-      background={background}
-    >
-      <Text />
-    </DetailsTextWrapper>
-  );
-}, arePropsEqual);
+    return (
+      <DetailsTextWrapper
+        ref={measureRef}
+        $expandFull={expand}
+        theme={theme}
+        $show={show}
+        background={background}
+      >
+        <Text />
+      </DetailsTextWrapper>
+    );
+  },
+  arePropsEqual,
+);
 
 DetailsTextMemo.displayName = 'DetailsText';
 
