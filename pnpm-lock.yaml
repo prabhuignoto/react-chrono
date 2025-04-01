@@ -246,8 +246,8 @@ importers:
         specifier: ^1.86.1
         version: 1.86.1
       semver:
-        specifier: 7.7.1
-        version: 7.7.1
+        specifier: 7.5.4
+        version: 7.5.4
       size-limit:
         specifier: ^11.2.0
         version: 11.2.0
@@ -5796,11 +5796,6 @@ packages:
 
   semver@7.5.4:
     resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==}
-    engines: {node: '>=10'}
-    hasBin: true
-
-  semver@7.7.1:
-    resolution: {integrity: sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -13020,8 +13015,6 @@ snapshots:
   semver@7.5.4:
     dependencies:
       lru-cache: 6.0.0
-
-  semver@7.7.1: {}
 
   serialize-error@7.0.1:
     dependencies:
