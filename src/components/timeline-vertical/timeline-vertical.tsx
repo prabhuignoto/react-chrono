@@ -1,5 +1,5 @@
 import { TimelineVerticalModel, VerticalItemModel } from '@models/TimelineVerticalModel'; // Assuming model paths
-import React, {
+import {
   useCallback,
   useContext,
   FunctionComponent, // Explicit import

@@ -1,6 +1,6 @@
 import { TimelinePointModel } from '@models/TimelineVerticalModel'; // Assuming model path
 import cls from 'classnames'; // Utility for conditionally joining classNames
-import React, {
+import {
   memo, // Import memo for component optimization
   useContext,
   useEffect,
@@ -181,4 +181,3 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
 TimelinePoint.displayName = 'TimelinePoint';
 
 export { TimelinePoint }; // Export the component
-

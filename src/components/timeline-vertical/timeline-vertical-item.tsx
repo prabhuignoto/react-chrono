@@ -1,6 +1,6 @@
 import { VerticalItemModel } from '@models/TimelineVerticalModel'; // Assuming model path
 import cls from 'classnames'; // Utility for conditionally joining classNames
-import React, {
+import {
   useCallback,
   useContext,
   useMemo,
@@ -289,4 +289,3 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
 VerticalItem.displayName = 'VerticalItem';
 
 export default VerticalItem;
-
