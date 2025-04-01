@@ -1,4 +1,6 @@
-import { RefObject, useCallback, useEffect, useRef } from 'react';
+import { RefObject } from 'react';
+import useOutsideClick from '../../hooks/useOutsideClick';
+import useEscapeKey from '../../hooks/useEscapeKey';
 
 /**
  * Custom hook that handles click outside and escape key events
@@ -9,35 +11,6 @@ export default function useCloseClickOutside(
   el: RefObject<HTMLElement | null>,
   callback: () => void,
 ) {
-  const savedCallback = useRef(callback);
-
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  const handleClick = useCallback((e: MouseEvent) => {
-    const element = el.current;
-    if (element && !element.contains(e.target as Node)) {
-      savedCallback.current();
-    }
-  }, [el]);
-
-  const handleEscape = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      savedCallback.current();
-    }
-  }, []);
-
-  useEffect(() => {
-    const element = el.current;
-    if (!element) return;
-
-    document.addEventListener('click', handleClick);
-    element.addEventListener('keyup', handleEscape);
-
-    return () => {
-      document.removeEventListener('click', handleClick);
-      element.removeEventListener('keyup', handleEscape);
-    };
-  }, [el, handleClick, handleEscape]);
+  useOutsideClick(el, callback);
+  useEscapeKey(callback);
 }

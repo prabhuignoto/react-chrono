@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
+import {
+  createMediaQuery,
+  addMediaListeners,
+  removeMediaListeners,
+} from '../../utils/mediaQueryUtils';
 
 /**
  * Configuration options for the useMatchMedia hook
@@ -15,11 +20,11 @@ interface MatchMediaOptions {
 
 /**
  * Custom hook that tracks if a media query matches and executes a callback on matches
- * 
+ *
  * @param query - The media query string to match against
  * @param options - Configuration options
  * @returns Boolean indicating if the media query currently matches
- * 
+ *
  * @example
  * ```tsx
  * const isMobile = useMatchMedia('(max-width: 768px)', {
@@ -30,44 +35,30 @@ interface MatchMediaOptions {
  */
 export const useMatchMedia = (
   query: string,
-  {
-    onMatch,
-    enabled = true,
-    debounceDelay = 100
-  }: MatchMediaOptions = {}
+  { onMatch, enabled = true, debounceDelay = 100 }: MatchMediaOptions = {},
 ): boolean => {
   const [matches, setMatches] = useState<boolean>(false);
   const mediaQuery = useRef<MediaQueryList | null>(null);
-
-  /**
-   * Creates and returns a MediaQueryList object
-   */
-  const createMediaQuery = useCallback((): MediaQueryList | null => {
-    if (typeof window === 'undefined') return null;
-    
-    try {
-      return window.matchMedia(query);
-    } catch (error) {
-      console.error('Error creating media query:', error);
-      return null;
-    }
-  }, [query]);
 
   const handleMediaChange = useCallback(
     (event: MediaQueryListEvent | MediaQueryList) => {
       setMatches(event.matches);
     },
-    []
+    [],
   );
 
-  const handleResize = useDebouncedCallback(() => {
-    if (!mediaQuery.current) return;
-    
-    const currentMatches = mediaQuery.current.matches;
-    if (currentMatches !== matches) {
-      setMatches(currentMatches);
-    }
-  }, debounceDelay, { maxWait: 1000 }); // Add maxWait for better performance
+  const handleResize = useDebouncedCallback(
+    () => {
+      if (!mediaQuery.current) return;
+
+      const currentMatches = mediaQuery.current.matches;
+      if (currentMatches !== matches) {
+        setMatches(currentMatches);
+      }
+    },
+    debounceDelay,
+    { maxWait: 1000 },
+  ); // Add maxWait for better performance
 
   // Setup media query listener
   useEffect(() => {
@@ -77,10 +68,10 @@ export const useMatchMedia = (
 
     // Cleanup previous mediaQuery if it exists
     if (mediaQuery.current) {
-      mediaQuery.current.removeEventListener('change', handleMediaChange);
+      removeMediaListeners(mediaQuery.current, handleMediaChange, handleResize);
     }
 
-    mediaQuery.current = createMediaQuery();
+    mediaQuery.current = createMediaQuery(query);
     const currentMedia = mediaQuery.current;
 
     if (!currentMedia) {
@@ -91,15 +82,11 @@ export const useMatchMedia = (
     handleMediaChange(currentMedia);
 
     // Add event listeners
-    currentMedia.addEventListener('change', handleMediaChange);
-    window.addEventListener('resize', handleResize);
+    addMediaListeners(currentMedia, handleMediaChange, handleResize);
 
     // Cleanup
     return () => {
-      if (currentMedia) {
-        currentMedia.removeEventListener('change', handleMediaChange);
-      }
-      window.removeEventListener('resize', handleResize);
+      removeMediaListeners(currentMedia, handleMediaChange, handleResize);
       handleResize.cancel(); // Cancel any pending debounced calls
       mediaQuery.current = null; // Clear the ref
     };
