@@ -10,7 +10,6 @@ import React, {
   useMemo,
   useRef,
   useState,
-  lazy,
   Suspense,
 } from 'react';
 import { GlobalContext } from '../../GlobalContext';

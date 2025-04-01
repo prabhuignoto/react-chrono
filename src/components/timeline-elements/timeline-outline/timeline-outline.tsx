@@ -2,7 +2,6 @@ import React, {
   useCallback,
   useContext,
   useEffect,
-  useMemo,
   useState,
   PropsWithChildren,
   memo,
@@ -12,7 +11,6 @@ import CloseIcon from '../../icons/close';
 import MenuIcon from '../../icons/menu';
 import { OutlineItemList } from './timeline-outline-item-list';
 import {
-  OutlinePosition,
   TimelineOutlineModel,
 } from './timeline-outline.model';
 import {
