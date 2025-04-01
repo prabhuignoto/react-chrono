@@ -6,7 +6,6 @@ import {
   useMemo,
   useRef,
   FunctionComponent, // Explicit import
-  ReactNode,
   JSX, // Explicit import for clarity
 } from 'react';
 import { GlobalContext } from '../GlobalContext'; // Context for global theme/settings

@@ -1,4 +1,4 @@
-import { TimelineVerticalModel, VerticalItemModel } from '@models/TimelineVerticalModel'; // Assuming model paths
+import { TimelineVerticalModel } from '@models/TimelineVerticalModel'; // Assuming model paths
 import {
   useCallback,
   useContext,
@@ -127,4 +127,3 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = ({
 TimelineVertical.displayName = 'TimelineVertical';
 
 export default TimelineVertical;
-
