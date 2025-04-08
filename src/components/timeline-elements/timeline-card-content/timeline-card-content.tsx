@@ -11,6 +11,7 @@ import React, {
   useState,
 } from 'react';
 import { useSlideshow } from 'src/components/effects/useSlideshow';
+import { useCardSize } from '../../../hooks/useCardSize';
 import { GlobalContext } from '../../GlobalContext';
 import Timeline from '../../timeline/timeline';
 import CardMedia from '../timeline-card-media/timeline-card-media';
@@ -49,14 +50,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       const detailsRef = useRef<HTMLDivElement | null>(null);
       const containerRef = useRef<HTMLDivElement | null>(null);
       const progressRef = useRef<HTMLProgressElement | null>(null);
-
-      const containerWidth = useRef<number>(0);
       const isFirstRender = useRef(true);
 
-      const [textContentLarge, setTextContentLarge] = useState(false);
-
-      const [cardActualHeight, setCardActualHeight] = useState(0);
-      const [detailsHeight, setDetailsHeight] = useState(0);
       const [hasBeenActivated, setHasBeenActivated] = useState(false);
       const [isResuming, setIsResuming] = useState(false);
 
@@ -94,16 +89,21 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         onElapsed,
       );
 
-      // If the media is a video, we don't show the progress bar.
-      // If the media is an image, we show the progress bar if the
-      // showProgressOnSlideshow flag is set.
+      const {
+        cardActualHeight,
+        detailsHeight,
+        textContentLarge,
+        updateCardSize,
+      } = useCardSize({
+        containerRef,
+        detailsRef,
+        setStartWidth,
+      });
+
       const canShowProgressBar = useMemo(() => {
         return active && slideShowActive && showProgressOnSlideshow;
       }, [active, slideShowActive]);
 
-      // This function returns a boolean value that indicates whether the user
-      // can see more information about the item. The detailed text is only
-      // available if the user has expanded the row.
       const canShowMore = useMemo(() => {
         return !!detailedText;
       }, [detailedText]);
@@ -122,36 +122,14 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
       }, [active]);
 
-      const onContainerRef = useCallback(
-        (node: HTMLElement) => {
-          if (node === null) {
-            return;
-          }
-          const detailsEle = detailsRef.current;
-          if (!detailsEle) {
-            return;
-          }
-          const { scrollHeight, offsetTop } = detailsEle;
-          containerWidth.current = node.clientWidth;
-          setStartWidth(containerWidth.current);
-          setCardActualHeight(scrollHeight);
-          setDetailsHeight(detailsEle.offsetHeight);
-          setTextContentLarge(scrollHeight + offsetTop > node.clientHeight);
-        },
-        [detailsRef, textDensity],
-      );
-
       useEffect(() => {
         if (!slideItemDuration) {
           return;
         }
-        // setup the timer
         if (active && slideShowActive) {
-          setStartWidth(containerWidth.current);
           setupTimer(slideItemDuration);
         }
 
-        // disabled autofocus on active
         if (active && hasFocus) {
           containerRef.current && containerRef.current.focus();
         }
@@ -177,9 +155,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         isFirstRender.current = false;
       }, []);
 
-      // This code is used to determine whether the read more button should be shown.
-      // It is only shown if the useReadMore prop is true, the detailedText is non-null,
-      // and the customContent prop is false.
       const canShowReadMore = useMemo(() => {
         return (
           useReadMore &&
@@ -189,10 +164,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         );
       }, [textDensity]);
 
-      // decorate the comments
-      // This function is triggered when the media state changes. If the slideshow is
-      // active, and the media state changes to paused, this function will call
-      // tryHandlePauseSlideshow(), which will pause the slideshow.
       const handleMediaState = useCallback(
         (state: MediaState) => {
           if (!slideShowActive) {
@@ -229,12 +200,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         [showMore, customContent],
       );
 
-      /**
-       * Calculate the minimum height of the card. If the card has a text overlay and
-       * media, the minimum height is equal to the card height. If the card is not
-       * nested, the minimum height is equal to the card height. If the card is nested,
-       * the minimum height is equal to the nested card height.
-       */
       const cardMinHeight = useMemo(() => {
         if (textOverlay && media) {
           return cardHeight;
@@ -263,11 +228,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         return branchDir;
       }, [branchDir, flip]);
 
-      // Get the background color for the gradient, which is either the
-      // cardDetailsBackGround or nestedCardDetailsBackGround theme variable,
-      // based on whether the card is nested or not. If we are showing more
-      // content, the background color should be null, so that there is no
-      // gradient.
       const gradientColor = useMemo(() => {
         const bgToUse = !isNested
           ? theme?.cardBgColor
@@ -277,7 +237,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           : null;
       }, [textContentLarge, showMore, theme?.cardDetailsBackGround, isNested]);
 
-      // This code checks whether the textOverlay and items props are truthy. If so, then it returns false. Otherwise, it returns true.
       const canShowDetailsText = useMemo(() => {
         return !textOverlay && !items?.length && textDensity === 'HIGH';
       }, [items?.length, textDensity]);
@@ -323,7 +282,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           mode={mode}
           $noMedia={!media}
           {...handlers}
-          ref={onContainerRef}
+          ref={updateCardSize}
           tabIndex={!isNested ? 0 : -1}
           theme={theme}
           $borderLessCards={borderLessCards}
@@ -349,7 +308,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             />
           ) : null}
 
-          {/* render media video or image */}
           {media && (
             <CardMedia
               active={active}

@@ -1,8 +1,15 @@
 import { VerticalItemModel } from '@models/TimelineVerticalModel';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { customRender } from '../../common/test';
 import { providerProps } from '../../common/test/index';
 import TimelineVerticalItem from '../timeline-vertical-item';
+
+// Mock ResizeObserver
+global.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
 
 const commonProps: VerticalItemModel = {
   // complete the rest of the properties

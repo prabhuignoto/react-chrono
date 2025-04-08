@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, vi } from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { TimelineCardModel } from '../../../../models/TimelineItemModel';
 import { customRender } from '../../../common/test';
 import { providerProps } from '../../../common/test/index';
@@ -37,6 +37,18 @@ describe('TimelineHorizontalCard', () => {
       })),
       writable: true,
     });
+
+    // Add ResizeObserver mock
+    class ResizeObserverMock {
+      callback: any;
+      constructor(callback: any) {
+        this.callback = callback;
+      }
+      observe = vi.fn();
+      unobserve = vi.fn();
+      disconnect = vi.fn();
+    }
+    global.ResizeObserver = ResizeObserverMock;
   });
 
   beforeEach(() => {

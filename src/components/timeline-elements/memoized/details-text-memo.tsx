@@ -1,35 +1,19 @@
-import { memo, useCallback, useMemo } from 'react';
-import { hexToRGBA } from '../../../utils';
-import { DetailsTextWrapper } from './../timeline-card-media/timeline-card-media.styles';
+import { memo, useCallback } from 'react';
+import { useBackground } from '../../../hooks/useBackground';
+import { DetailsTextWrapper } from '../timeline-card-media/timeline-card-media.styles';
 import { DetailsTextMemoModel } from './memoized-model';
 
-// Add type for background calculation result
-type Background = string;
-
-// Extract background calculation to a custom hook
-const useBackgroundColor = (cardDetailsBackGround?: string): Background => {
-  return useMemo(() => {
-    if (!cardDetailsBackGround) return '';
-    return hexToRGBA(cardDetailsBackGround, 0.8);
-  }, [cardDetailsBackGround]);
-};
-
-// Extract height measurement logic
 const useMeasureHeight = (onRender?: (height: number) => void) => {
   return useCallback(
     (node: HTMLDivElement | null) => {
       if (node && onRender) {
-        // Use requestAnimationFrame to measure after paint to ensure accurate height
-        requestAnimationFrame(() => {
-          onRender(node.clientHeight);
-        });
+        requestAnimationFrame(() => onRender(node.clientHeight));
       }
     },
     [onRender],
   );
 };
 
-// Add prop types equality check function
 const arePropsEqual = (
   prev: DetailsTextMemoModel,
   next: DetailsTextMemoModel,
@@ -42,22 +26,9 @@ const arePropsEqual = (
   );
 };
 
-/**
- * Renders additional text details overlay for timeline cards.
- * @param {DetailsTextMemoModel} props - The details text model
- * @returns {JSX.Element | null} The details text overlay
- */
 const DetailsTextMemo = memo<DetailsTextMemoModel>(
-  ({
-    theme,
-    show,
-    expand,
-    textOverlay,
-    text: Text,
-    height,
-    onRender,
-  }: DetailsTextMemoModel) => {
-    const background = useBackgroundColor(theme?.cardDetailsBackGround);
+  ({ theme, show, expand, textOverlay, text: Text, onRender }) => {
+    const background = useBackground(theme?.cardDetailsBackGround);
     const measureRef = useMeasureHeight(onRender);
 
     if (!textOverlay) return null;

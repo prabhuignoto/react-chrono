@@ -1,7 +1,7 @@
 import { TimelineModel } from '@models/TimelineModel';
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { customRender, providerProps } from '../../common/test';
 import Timeline from '../timeline';
 
