@@ -1,5 +1,4 @@
 import {
-  MutableRefObject,
   RefObject,
   useCallback,
   useEffect,
@@ -55,7 +54,7 @@ export const useCardSize = ({
       if (!node || !detailsRef.current) return;
 
       const detailsEle = detailsRef.current;
-      const { scrollHeight, offsetTop } = detailsEle;
+      const { scrollHeight } = detailsEle;
 
       containerRef.current = node;
       setStartWidth(node.clientWidth);
