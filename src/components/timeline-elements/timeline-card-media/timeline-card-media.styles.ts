@@ -182,7 +182,7 @@ export const IFrameVideo = styled.iframe`
 export const DetailsTextWrapper = styled.div<{
   $expandFull?: boolean;
   $show?: boolean;
-  background: string;
+  background?: string;
   theme?: Theme;
 }>`
   align-self: center;
