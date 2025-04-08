@@ -1,12 +1,19 @@
 import { RefObject, useEffect, useCallback, useRef } from 'react';
 
+interface UseOutsideClickOptions {
+  eventType?: 'click' | 'mousedown' | 'touchstart';
+  enabled?: boolean;
+}
+
 /**
  * Hook that triggers callback when clicking outside a referenced element
  */
 export default function useOutsideClick(
   el: RefObject<HTMLElement | null>,
   callback: () => void,
+  options: UseOutsideClickOptions = {},
 ) {
+  const { eventType = 'click', enabled = true } = options;
   const savedCallback = useRef(callback);
 
   useEffect(() => {
@@ -14,19 +21,23 @@ export default function useOutsideClick(
   }, [callback]);
 
   const handleClick = useCallback(
-    (e: MouseEvent) => {
+    (e: MouseEvent | TouchEvent) => {
+      if (!enabled) return;
+      
       const element = el.current;
       if (element && !element.contains(e.target as Node)) {
         savedCallback.current();
       }
     },
-    [el],
+    [el, enabled],
   );
 
   useEffect(() => {
-    document.addEventListener('click', handleClick);
+    if (!enabled) return;
+
+    document.addEventListener(eventType, handleClick);
     return () => {
-      document.removeEventListener('click', handleClick);
+      document.removeEventListener(eventType, handleClick);
     };
-  }, [handleClick]);
+  }, [eventType, handleClick, enabled]);
 }

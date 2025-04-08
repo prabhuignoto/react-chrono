@@ -19,12 +19,28 @@ interface UseCardSizeReturn {
   updateCardSize: (node: HTMLElement | null) => void;
 }
 
+interface CardDimensions {
+  cardHeight: number;
+  detailsHeight: number;
+  containerWidth: number;
+}
+
+const calculateTextContentSize = (
+  cardHeight: number,
+  detailsRef: RefObject<HTMLElement | null>,
+  containerRef: RefObject<HTMLElement | null>,
+): boolean => {
+  const detailsOffsetTop = detailsRef.current?.offsetTop || 0;
+  const containerHeight = containerRef.current?.clientHeight || 0;
+  return cardHeight + detailsOffsetTop > containerHeight;
+};
+
 export const useCardSize = ({
   containerRef,
   detailsRef,
   setStartWidth,
 }: UseCardSizeProps): UseCardSizeReturn => {
-  const [dimensions, setDimensions] = useState({
+  const [dimensions, setDimensions] = useState<CardDimensions>({
     cardHeight: 0,
     detailsHeight: 0,
     containerWidth: 0,
@@ -64,18 +80,20 @@ export const useCardSize = ({
         containerWidth: node.clientWidth,
       });
     },
-    [detailsRef, setStartWidth],
+    [detailsRef, setStartWidth, containerRef],
   );
 
   const { cardActualHeight, detailsHeight, textContentLarge } = useMemo(
     () => ({
       cardActualHeight: dimensions.cardHeight,
       detailsHeight: dimensions.detailsHeight,
-      textContentLarge:
-        dimensions.cardHeight + (detailsRef.current?.offsetTop || 0) >
-        (containerRef.current?.clientHeight || 0),
+      textContentLarge: calculateTextContentSize(
+        dimensions.cardHeight,
+        detailsRef,
+        containerRef,
+      ),
     }),
-    [dimensions, detailsRef],
+    [dimensions, detailsRef, containerRef],
   );
 
   return {

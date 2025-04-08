@@ -8,12 +8,18 @@ interface UseMediaStateProps {
   onElapsed?: (id: string) => void;
 }
 
+interface UseMediaStateReturn {
+  isPlaying: boolean;
+  handleMediaState: (state: MediaState) => void;
+  cleanup: () => void;
+}
+
 export const useMediaState = ({
   slideShowActive,
   paused,
   id,
   onElapsed,
-}: UseMediaStateProps) => {
+}: UseMediaStateProps): UseMediaStateReturn => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handleMediaState = useCallback(
@@ -29,12 +35,17 @@ export const useMediaState = ({
     [slideShowActive, paused, id, onElapsed],
   );
 
-  useEffect(() => {
-    return () => setIsPlaying(false);
+  const cleanup = useCallback(() => {
+    setIsPlaying(false);
   }, []);
+
+  useEffect(() => {
+    return cleanup;
+  }, [cleanup]);
 
   return {
     isPlaying,
     handleMediaState,
+    cleanup,
   };
 };
