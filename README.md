@@ -88,7 +88,7 @@ npm install react-chrono
 
 ## Getting Started
 
-Please make sure you wrap the component in a container that has a `width` and `height`.
+Please ensure you wrap the component in a container with specified `width` and `height` dimensions.
 
 When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please check [props](#props) for all the available options.
 
@@ -440,7 +440,7 @@ It is important to note that the image collection must be passed in inside a con
 
 ### 🌿Nested Timelines
 
-Nested timelines in React-Chrono allow you to display timelines within timeline cards. This feature is data-driven, which means that if a timeline item has an `items` array, the component will automatically attempt to render the nested timeline inside the timeline card.
+Nested timelines in React-Chrono allow you to display timelines within timeline cards. This feature is data-driven - if a timeline item has an `items` array, the component will automatically render the nested timeline inside the timeline card.
 
 To use nested timelines, simply provide an array of items within the `items` property of a timeline item. The component will then take care of rendering the nested timeline for you.
 
@@ -464,7 +464,7 @@ const items = [
 
 ### Slideshow
 
-Enabling the slideshow feature can be done by setting the `slideShow` prop to true. Additionally, an optional `slideItemDuration` prop can be set to determine the time delay between cards.
+You can enable the slideshow feature by setting the `slideShow` prop to true. Additionally, an optional `slideItemDuration` prop can be set to determine the time delay between cards.
 
 Enabling this prop will cause the play button to appear in the timeline control panel. Use the `slideShowType` prop to set the type of slideshow animation.
 
@@ -491,7 +491,7 @@ The `itemWidth` prop can be used to set the width of each individual timeline se
 
 ### 🎥Media Settings
 
-Use media settings to align the media or change how a image is displayed in the card.
+Use media settings to align the media or change how an image is displayed in the card.
 
 | Name  | Description                                    | Type   | Default |
 | :---- | :--------------------------------------------- | :----- | :------ |
@@ -504,7 +504,7 @@ Use media settings to align the media or change how a image is displayed in the 
 
 ### Breakpoint
 
-Use the breakpoint feature to automatically switch the timeline to `VERTICAL` mode when there is not enough space for `VERTICAL_ALTERNATING` mode, such as on mobile devices. Set the auto switch to happen by enabling the `enableBreakPoint` prop and specifying the pixel limit with the `verticalBreakPoint` prop.
+Use the breakpoint feature to automatically switch the timeline to `VERTICAL` mode when there isn't enough space for `VERTICAL_ALTERNATING` mode, such as on mobile devices. Set the auto switch to happen by enabling the `enableBreakPoint` prop and specifying the pixel limit with the `verticalBreakPoint` prop.
 
 ```jsx
 <Chrono items={items} enableBreakPoint verticalBreakPoint={400} />
@@ -575,7 +575,7 @@ Defaults
 
 ## Using custom class names
 
-You can use the classNames prop to employ your own class names. The subsequent example illustrates how you can use custom class names on different elements.
+You can use the classNames prop to apply your own class names. The following example shows how to use custom class names on different elements.
 
 ```jsx
 <Chrono

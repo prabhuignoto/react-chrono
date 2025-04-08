@@ -13,6 +13,10 @@ import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import typescript from 'rollup-plugin-typescript2';
 import { visualizer } from 'rollup-plugin-visualizer';
+import alias from '@rollup/plugin-alias';
+import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
+import replace from '@rollup/plugin-replace';
+import progress from 'rollup-plugin-progress';
 
 const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
@@ -23,6 +27,8 @@ const banner = `/*
  * ${pkg.license} License
  */
 `;
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 export default {
   cache: true,
@@ -39,6 +45,7 @@ export default {
       file: pkg.main,
       format: 'cjs',
       strict: true,
+      sourcemap: true,
     },
     {
       banner,
@@ -46,6 +53,7 @@ export default {
       file: pkg.module,
       format: 'es',
       strict: true,
+      sourcemap: true,
     },
     {
       banner,
@@ -59,11 +67,22 @@ export default {
       },
       name: 'ReactChrono',
       strict: true,
+      sourcemap: true,
     },
   ],
   plugins: [
+    progress({
+      clearLine: true,
+    }),
     PeerDepsExternalPlugin(),
     del({ targets: 'dist/*' }),
+    replace({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      preventAssignment: true,
+    }),
+    alias({
+      entries: [{ find: '@', replacement: './src' }],
+    }),
     typescript({
       tsconfig: 'tsconfig.json',
       tsconfigDefaults: {
@@ -98,6 +117,19 @@ export default {
             minify: true,
             ssr: true,
             transpileTemplateLiterals: true,
+            displayName: !isProduction,
+          },
+        ],
+      ],
+      presets: [
+        [
+          '@babel/preset-env',
+          {
+            targets: {
+              browsers: ['last 2 versions', 'not dead'],
+            },
+            useBuiltIns: 'usage',
+            corejs: 3,
           },
         ],
       ],
@@ -107,19 +139,30 @@ export default {
         postCSSPreset({
           features: {
             'nesting-rules': true,
+            'custom-media-queries': true,
+            'media-query-ranges': true,
           },
           stage: 0,
         }),
         autoprefixer(),
         cssnano({
-          preset: 'default',
+          preset: [
+            'default',
+            {
+              discardComments: { removeAll: true },
+            },
+          ],
         }),
       ],
+      minimize: isProduction,
+      sourceMap: true,
     }),
     common(),
     resolve({
       browser: true,
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
     }),
+    dynamicImportVars(),
     filesize({
       showBrotliSize: true,
       showGzippedSize: true,
@@ -128,11 +171,13 @@ export default {
     visualizer({
       emitFile: true,
       filename: 'dist/stats.html',
+      template: 'treemap',
     }),
     terser({
       compress: {
-        drop_console: true,
-        drop_debugger: true,
+        drop_console: isProduction,
+        drop_debugger: isProduction,
+        pure_funcs: ['console.log'],
       },
       format: {
         comments: false,
