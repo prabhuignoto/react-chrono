@@ -1,23 +1,14 @@
 import { TimelineCardModel } from '@models/TimelineItemModel';
-import cls from 'classnames';
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
-import ReactDOM from 'react-dom';
+import React, { useContext } from 'react';
 import { GlobalContext } from '../../GlobalContext';
-import TimelineCardContent from '../timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import {
-  Shape,
-  ShapeWrapper,
-  TimelineContentContainer,
   TimelineTitleContainer,
   Wrapper,
 } from './timeline-horizontal-card.styles';
+import { useTimelineCard } from './hooks/useTimelineCard';
+import TimelinePoint from './timeline-point/timeline-point';
+import TimelineCardPortal from './timeline-card-portal/timeline-card-portal';
 
 const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   active,
@@ -42,15 +33,10 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   nestedCardHeight,
   items,
 }: TimelineCardModel) => {
-  const circleRef = useRef<HTMLDivElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-
   const {
     mode,
     cardPositionHorizontal: position,
     timelinePointDimension,
-    disableClickOnCircle,
     cardLess,
     showAllCardsHorizontal,
     classNames,
@@ -59,81 +45,48 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     disableInteraction,
   } = useContext(GlobalContext);
 
-  const handleClick = () => {
-    if (!disableClickOnCircle && onClick && !slideShowRunning) {
-      onClick(id);
-    }
-  };
+  const {
+    circleRef,
+    wrapperRef,
+    contentRef,
+    handleClick,
+    modeLower,
+    containerClass,
+    titleClass,
+    circleClass,
+    canShowTimelineContent,
+  } = useTimelineCard({
+    active,
+    autoScroll,
+    slideShowRunning,
+    cardLess,
+    showAllCardsHorizontal,
+    id,
+    onClick,
+    mode,
+    position,
+    iconChild,
+  });
 
-  useEffect(() => {
-    if (active) {
-      const circle = circleRef.current;
-      const wrapper = wrapperRef.current;
-
-      if (circle && wrapper) {
-        const circleOffsetLeft = circle.offsetLeft;
-        const wrapperOffsetLeft = wrapper.offsetLeft;
-
-        autoScroll?.({
-          pointOffset: circleOffsetLeft + wrapperOffsetLeft,
-          pointWidth: circle.clientWidth,
-        });
-      }
-    }
-  }, [active, autoScroll, mode]);
-
-  const handleOnShowMore = useCallback(() => {}, []);
-
-  const modeLower = useMemo(() => mode?.toLowerCase(), [mode]);
-
-  const containerClass = useMemo(
-    () =>
-      cls(
-        'timeline-horz-card-wrapper',
-        modeLower,
-        position === 'TOP' ? 'bottom' : 'top',
-        showAllCardsHorizontal ? 'show-all' : '',
-      ),
-    [mode, position],
-  );
-
-  const titleClass = useMemo(() => cls(modeLower, position), []);
-
-  const circleClass = useMemo(
-    () =>
-      cls(
-        'timeline-circle',
-        { 'using-icon': !!iconChild },
-        modeLower,
-        active ? 'active' : 'in-active',
-      ),
-    [active],
-  );
-
-  const Content = useMemo(() => {
-    return (
-      <TimelineContentContainer
-        className={containerClass}
-        ref={contentRef}
-        id={`timeline-card-${id}`}
-        theme={theme}
-        $active={active && !disableInteraction}
-        $highlight={showAllCardsHorizontal}
-        tabIndex={0}
-        $cardWidth={cardWidth}
-      >
-        <TimelineCardContent
-          content={cardSubtitle}
-          active={active}
-          title={cardTitle}
-          url={url}
-          detailedText={cardDetailedText}
-          onShowMore={handleOnShowMore}
+  return (
+    <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
+      {canShowTimelineContent && (
+        <TimelineCardPortal
+          containerClass={containerClass}
+          contentRef={contentRef}
+          id={id}
           theme={theme}
-          slideShowActive={slideShowRunning}
+          active={active}
+          disableInteraction={disableInteraction}
+          showAllCardsHorizontal={showAllCardsHorizontal}
+          cardWidth={cardWidth}
+          cardSubtitle={cardSubtitle}
+          cardTitle={cardTitle}
+          url={url}
+          cardDetailedText={cardDetailedText}
+          slideShowRunning={slideShowRunning}
           media={media}
           onElapsed={onElapsed}
-          id={id}
           customContent={customContent}
           hasFocus={hasFocus}
           onClick={onClick}
@@ -141,42 +94,20 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           isNested={isNested}
           nestedCardHeight={nestedCardHeight}
           items={items}
+          wrapperId={wrapperId}
         />
-      </TimelineContentContainer>
-    );
-  }, [active, slideShowRunning, JSON.stringify(theme)]);
+      )}
 
-  const showTimelineContent = () => {
-    const ele = document.getElementById(wrapperId);
-
-    if (ele) {
-      return ReactDOM.createPortal(Content, ele);
-    }
-  };
-
-  const canShowTimelineContent = useMemo(
-    () => (active && !cardLess) || showAllCardsHorizontal,
-    [active, cardLess, showAllCardsHorizontal],
-  );
-
-  return (
-    <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
-      {canShowTimelineContent && showTimelineContent()}
-
-      <ShapeWrapper>
-        <Shape
-          className={circleClass}
-          onClick={handleClick}
-          ref={circleRef}
-          data-testid="timeline-circle"
-          theme={theme}
-          aria-label={title}
-          dimension={timelinePointDimension}
-          $timelinePointShape={timelinePointShape}
-        >
-          {iconChild ? iconChild : null}
-        </Shape>
-      </ShapeWrapper>
+      <TimelinePoint
+        circleClass={circleClass}
+        handleClick={handleClick}
+        circleRef={circleRef}
+        title={title}
+        theme={theme}
+        timelinePointDimension={timelinePointDimension}
+        timelinePointShape={timelinePointShape}
+        iconChild={iconChild}
+      />
 
       <TimelineTitleContainer
         className={titleClass}

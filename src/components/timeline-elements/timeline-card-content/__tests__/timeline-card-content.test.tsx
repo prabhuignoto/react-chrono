@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import GlobalContextProvider from 'src/components/GlobalContext';
-import { vi } from 'vitest';
+import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { customRender, providerProps } from '../../../common/test';
 import TimelineCardContent from '../timeline-card-content';
 
@@ -17,6 +17,18 @@ describe('TimelineCardContent', () => {
       })),
       writable: true,
     });
+
+    // Mock ResizeObserver with a proper class implementation
+    class ResizeObserverMock {
+      callback: any;
+      constructor(callback: any) {
+        this.callback = callback;
+      }
+      observe = vi.fn();
+      unobserve = vi.fn();
+      disconnect = vi.fn();
+    }
+    global.ResizeObserver = ResizeObserverMock;
   });
 
   afterEach(() => {

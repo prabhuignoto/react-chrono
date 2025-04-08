@@ -1,6 +1,7 @@
+import { Theme } from '@models/Theme';
 import { css } from 'styled-components';
 
-export const ScrollBar = css`
+export const ScrollBar = css<{theme: Theme}>`
   scrollbar-color: ${(p) => p.theme?.primary} default;
   scrollbar-width: thin;
 

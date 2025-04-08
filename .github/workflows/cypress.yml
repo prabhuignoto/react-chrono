@@ -20,7 +20,7 @@ jobs:
           node-version: '20.x' # replace with the latest version of Node.js
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: 8.8.0
 

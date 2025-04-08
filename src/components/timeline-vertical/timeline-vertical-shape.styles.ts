@@ -1,3 +1,4 @@
+import { Theme } from '@models/Theme';
 import styled from 'styled-components';
 
 /**
@@ -12,6 +13,8 @@ interface TimelinePointWrapperProps {
   bg?: string;
   /** Width of the timeline line. Defaults to 4px. */
   width?: number;
+
+  theme?: Theme;
 }
 
 /**
@@ -38,7 +41,8 @@ export const TimelinePointWrapper = styled.div<TimelinePointWrapperProps>`
 
   /* Top vertical line segment (connecting to the previous item) */
   &::before {
-    background: ${(p) => p.bg || p.theme?.primary}; /* Use theme primary as fallback */
+    background: ${(p) =>
+      p.bg || p.theme?.primary}; /* Use theme primary as fallback */
     width: ${(p) => (p.width ? `${p.width}px` : '4px')};
     height: 2rem; /* Fixed height for the connector */
     position: absolute;
@@ -51,7 +55,8 @@ export const TimelinePointWrapper = styled.div<TimelinePointWrapperProps>`
 
   /* Main vertical line segment (extending downwards) */
   &::after {
-    background: ${(p) => p.bg || p.theme?.primary}; /* Use theme primary as fallback */
+    background: ${(p) =>
+      p.bg || p.theme?.primary}; /* Use theme primary as fallback */
     content: '';
     display: block;
     height: 100%; /* Extend full height of the wrapper */
@@ -69,6 +74,7 @@ export const TimelinePointWrapper = styled.div<TimelinePointWrapperProps>`
 interface TimelinePointContainerProps {
   /** Hides the point visually if true. */
   $hide?: boolean;
+  theme?: Theme;
 }
 
 /**
@@ -78,7 +84,8 @@ interface TimelinePointContainerProps {
 export const TimelinePointContainer = styled.button<TimelinePointContainerProps>`
   position: relative; /* Ensure it's above the ::after pseudo-element */
   z-index: 1;
-  visibility: ${(p) => (p.$hide ? 'hidden' : 'visible')}; /* Control visibility */
+  visibility: ${(p) =>
+    p.$hide ? 'hidden' : 'visible'}; /* Control visibility */
 
   /* Reset button styles */
   background: none;

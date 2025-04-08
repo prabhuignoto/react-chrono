@@ -1,3 +1,10 @@
+// Mock ResizeObserver globally
+global.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+
 import { TimelineProps } from '@models/TimelineModel';
 import { render, RenderResult } from '@testing-library/react';
 import { ReactElement } from 'react';

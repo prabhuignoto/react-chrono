@@ -1,38 +1,69 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface WindowSize {
   width: number;
   height: number;
 }
 
+interface UseWindowSizeOptions {
+  debounceMs?: number;
+}
+
 /**
  * Hook that returns the current window dimensions
  * Useful for responsive calculations and virtualization
  */
-export const useWindowSize = (): WindowSize => {
+export const useWindowSize = (options: UseWindowSizeOptions = {}): WindowSize => {
+  const { debounceMs = 100 } = options;
   const [windowSize, setWindowSize] = useState<WindowSize>({
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
     height: typeof window !== 'undefined' ? window.innerHeight : 0,
   });
 
-  useEffect(() => {
-    // Handler to call on window resize
-    const handleResize = () => {
+  const handleResize = useCallback(() => {
+    let timeoutId: number | null = null;
+    let frameId: number | null = null;
+
+    const updateSize = () => {
       setWindowSize({
         width: window.innerWidth,
         height: window.innerHeight,
       });
     };
 
-    // Add event listener
-    window.addEventListener('resize', handleResize);
+    const debouncedUpdate = () => {
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
 
-    // Call handler right away so state gets updated with initial window size
+      timeoutId = window.setTimeout(() => {
+        frameId = window.requestAnimationFrame(updateSize);
+      }, debounceMs);
+    };
+
+    debouncedUpdate();
+
+    return () => {
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+    };
+  }, [debounceMs]);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
     handleResize();
 
-    // Remove event listener on cleanup
-    return () => window.removeEventListener('resize', handleResize);
-  }, []); // Empty array ensures effect runs only on mount and unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [handleResize]);
 
   return windowSize;
 };
