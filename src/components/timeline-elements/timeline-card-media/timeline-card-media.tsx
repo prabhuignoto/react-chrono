@@ -19,7 +19,8 @@ import VideoPlayer from './components/VideoPlayer';
 import ImageDisplay from './components/ImageDisplay';
 import MediaDetails from './components/MediaDetails';
 import {
-  getCardHeight,
+  getCardHeightWithTextOverlay,
+  getCardHeightWithoutTextOverlay,
   getGradientColor,
   shouldShowArrow,
   shouldShowText,
@@ -96,13 +97,14 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     }, []);
 
     const gradientColor = getGradientColor(theme);
-    const cardHeightValue = getCardHeight(textOverlay, cardHeight, mediaHeight);
+    const cardHeightValue = textOverlay
+      ? getCardHeightWithTextOverlay(cardHeight)
+      : getCardHeightWithoutTextOverlay(mediaHeight);
     const canShowArrow = shouldShowArrow(mode, textOverlay);
-    // const canShowTextMemo = shouldShowText(showText, detailsText);
     const canShowTextContent = shouldShowTextContent(
-      title?.toString() || '',
-      content?.toString() || '',
-      detailsText?.toString() || '',
+      title ?? '',
+      typeof content === 'string' ? content : '',
+      detailsText ?? '',
     );
     const canExpand = shouldExpand(textOverlay, detailsText);
     const canShowGradient = shouldShowGradient(
@@ -170,8 +172,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
               dir={triangleDir}
               theme={theme}
               offset={-15}
-              role="img"
-              data-testid="arrow-icon"
+              aria-label={triangleDir === 'left' ? 'Left arrow' : 'Right arrow'}
             />
           )}
         </MediaWrapper>

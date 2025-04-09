@@ -5,8 +5,8 @@ export const isYouTubeUrl = (url: string): boolean => {
 };
 
 export const getYouTubeEmbedUrl = (url: string, autoplay: boolean): string => {
-  const videoId = url.match(
-    /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/,
+  const videoId = /(?:youtube\.com\/.*[?&]v=|youtu\.be\/)([^"&?\/\s]{11})/.exec(
+    url,
   )?.[1];
   return `https://www.youtube.com/embed/${videoId}?${autoplay ? 'autoplay=1&' : ''}enablejsapi=1`;
 };
@@ -17,12 +17,14 @@ export const getGradientColor = (theme: Theme): string | null => {
     : null;
 };
 
-export const getCardHeight = (
-  textOverlay: boolean,
-  cardHeight: number,
+export const getCardHeightWithTextOverlay = (cardHeight: number): number => {
+  return cardHeight;
+};
+
+export const getCardHeightWithoutTextOverlay = (
   mediaHeight: number,
 ): number => {
-  return textOverlay ? cardHeight : mediaHeight;
+  return mediaHeight;
 };
 
 export const shouldShowArrow = (

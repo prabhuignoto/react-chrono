@@ -30,11 +30,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = memo(
     if (isYouTube) {
       return (
         <IFrameVideo
-          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           src={getYouTubeEmbedUrl(media.source.url, active)}
-          title={media.name || 'Video'}
+          title={media.name ?? 'Video'}
           data-testid="timeline-card-content-video"
           loading="lazy"
         />

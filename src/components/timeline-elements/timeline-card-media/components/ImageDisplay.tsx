@@ -37,7 +37,7 @@ const ImageDisplay: React.FC<ImageDisplayProps> = memo(
             onError(new Error('Image failed to load'));
           }}
           $visible={mediaLoaded}
-          alt={media.name || 'Image'}
+          alt={media.name ?? 'Image'}
           loading="lazy"
           $enableBorderRadius={borderLessCards}
           fit={mediaSettings?.imageFit}

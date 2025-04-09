@@ -71,7 +71,7 @@ const MediaDetails: React.FC<MediaDetailsProps> = memo(
       >
         <CardMediaHeader>
           <TitleMemo
-            title={title || ''}
+            title={title ?? ''}
             theme={theme}
             active={active}
             url={url}
