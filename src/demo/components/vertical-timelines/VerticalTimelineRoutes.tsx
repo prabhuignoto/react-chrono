@@ -34,10 +34,6 @@ export function VerticalTimelineRoutes({
 }: VerticalTimelineRoutesProps): RouteObject[] {
   return [
     {
-      path: '/',
-      element: <VerticalBasic type={'big-screen'} items={items} />
-    },
-    {
       path: '/vertical-basic',
       element: items.length ? <VerticalBasic type={'big-screen'} items={items} /> : null
     },
