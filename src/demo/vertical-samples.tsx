@@ -3,8 +3,8 @@ import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent, useState } from 'react';
 import Chrono from '../components';
 import { ComponentContainerTree, Vertical } from './App.styles';
-import data from './data';
-import dataMixed from './data-mixed';
+import data from './data/data';
+import dataMixed from './data/data-mixed';
 
 export const VerticalTree: FunctionComponent<{
   type: string;
@@ -144,7 +144,6 @@ export const VerticalBasic: FunctionComponent<{
         //   cardBgColor: '#fff',
         //   titleColorActive: '#6495ed',
         //   titleColor: '#922724',
-        //   cardDetailsBackGround: '#e8e8e8',
         // }}
         onItemSelected={(selected) => console.log(selected.index)}
         fontSizes={{

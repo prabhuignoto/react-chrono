@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Chrono from '../components';
-import data from './data';
+import data from './data/data';
 
 export default function App() {
   const [pageIndex, setPageIndex] = useState(0);

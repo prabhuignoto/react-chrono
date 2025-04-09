@@ -9,17 +9,19 @@ import React, {
   useMemo,
   useRef,
   useState,
+  lazy,
 } from 'react';
 import { useSlideshow } from 'src/components/effects/useSlideshow';
 import { useCardSize } from '../../../hooks/useCardSize';
 import { GlobalContext } from '../../GlobalContext';
-import Timeline from '../../timeline/timeline';
 import CardMedia from '../timeline-card-media/timeline-card-media';
 import { ContentFooter } from './content-footer';
 import { ContentHeader } from './content-header';
 import { DetailsText } from './details-text';
 import { getTextOrContent } from './text-or-content';
 import { TimelineItemContentWrapper } from './timeline-card-content.styles';
+
+const NestedTimeline = lazy(() => import('../../timeline/timeline'));
 
 const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
   React.memo(
@@ -347,12 +349,14 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           )}
 
           {canShowNestedTimeline && (
-            <Timeline
-              items={items}
-              mode={'VERTICAL'}
-              nestedCardHeight={nestedCardHeight}
-              isChild
-            />
+            <React.Suspense fallback={<div>Loading nested timeline...</div>}>
+              <NestedTimeline
+                items={items}
+                mode={'VERTICAL'}
+                nestedCardHeight={nestedCardHeight}
+                isChild
+              />
+            </React.Suspense>
           )}
 
           {(!textOverlay || !media) && (
