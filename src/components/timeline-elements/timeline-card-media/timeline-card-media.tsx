@@ -23,7 +23,6 @@ import {
   getCardHeightWithoutTextOverlay,
   getGradientColor,
   shouldShowArrow,
-  shouldShowText,
   shouldShowTextContent,
   shouldExpand,
   shouldShowGradient,
