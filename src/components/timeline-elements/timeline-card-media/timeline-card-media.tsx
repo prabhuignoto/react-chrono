@@ -98,7 +98,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     const gradientColor = getGradientColor(theme);
     const cardHeightValue = getCardHeight(textOverlay, cardHeight, mediaHeight);
     const canShowArrow = shouldShowArrow(mode, textOverlay);
-    const canShowTextMemo = shouldShowText(showText, detailsText);
+    // const canShowTextMemo = shouldShowText(showText, detailsText);
     const canShowTextContent = shouldShowTextContent(
       title?.toString() || '',
       content?.toString() || '',

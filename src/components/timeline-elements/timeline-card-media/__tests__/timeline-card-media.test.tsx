@@ -3,7 +3,7 @@ import { customRender, providerProps } from '../../../common/test';
 import TimelineCardMedia from '../timeline-card-media';
 import { forwardRef } from 'react';
 import { TextOrContentModel } from '../../timeline-card-content/text-or-content';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import { CardMediaModel } from '@models/TimelineMediaModel';
 
 describe('Timeline Card media', () => {
