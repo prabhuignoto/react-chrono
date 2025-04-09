@@ -8203,7 +8203,6 @@ snapshots:
     transitivePeerDependencies:
       - bare-buffer
       - supports-color
-
   '@rollup/plugin-alias@5.1.1(rollup@4.39.0)':
     optionalDependencies:
       rollup: 4.39.0
