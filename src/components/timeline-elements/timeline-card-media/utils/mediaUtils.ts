@@ -5,9 +5,10 @@ export const isYouTubeUrl = (url: string): boolean => {
 };
 
 export const getYouTubeEmbedUrl = (url: string, autoplay: boolean): string => {
-  const videoId = /(?:youtube\.com\/.*[?&]v=|youtu\.be\/)([^"&?\/\s]{11})/.exec(
-    url,
-  )?.[1];
+  const videoId =
+    /(?:youtube\.com\/(?:embed\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/.exec(
+      url,
+    )?.[1];
   return `https://www.youtube.com/embed/${videoId}?${autoplay ? 'autoplay=1&' : ''}enablejsapi=1`;
 };
 

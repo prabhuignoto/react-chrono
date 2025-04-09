@@ -172,6 +172,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
               theme={theme}
               offset={-15}
               aria-label={triangleDir === 'left' ? 'Left arrow' : 'Right arrow'}
+              data-testid="arrow-icon"
             />
           )}
         </MediaWrapper>

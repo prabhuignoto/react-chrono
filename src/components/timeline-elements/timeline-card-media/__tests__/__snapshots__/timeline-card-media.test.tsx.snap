@@ -56,7 +56,6 @@ exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
       allowfullscreen=""
       class="sc-iQQCXo hYjopf"
       data-testid="timeline-card-content-video"
-      frameborder="0"
       loading="lazy"
       src="https://www.youtube.com/embed/9bZkp7q19f0?autoplay=1&enablejsapi=1"
       title="Video"
