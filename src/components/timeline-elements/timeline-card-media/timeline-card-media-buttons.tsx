@@ -1,7 +1,7 @@
 import { Theme } from '@models/Theme';
 import styled, { css } from 'styled-components';
 
-const Button = css`
+const Button = css<{ theme: Theme }>`
   align-items: center;
   background: none;
   // background: rgba(0, 0, 0, 0.1);
