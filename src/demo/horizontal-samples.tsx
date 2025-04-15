@@ -7,7 +7,7 @@ import {
   Horizontal,
   Vertical,
 } from './App.styles';
-import data from './data';
+import data from './data/data';
 
 export const HorizontalBasic: React.FunctionComponent<{
   type: string;

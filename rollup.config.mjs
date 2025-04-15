@@ -64,6 +64,7 @@ export default {
         react: 'React',
         'react-dom': 'ReactDOM',
         'react/jsx-runtime': 'jsxRuntime',
+        'styled-components': 'styled',
       },
       name: 'ReactChrono',
       strict: true,
@@ -78,6 +79,7 @@ export default {
     del({ targets: 'dist/*' }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.VERSION': JSON.stringify(pkg.version),
       preventAssignment: true,
     }),
     alias({
@@ -177,7 +179,9 @@ export default {
       compress: {
         drop_console: isProduction,
         drop_debugger: isProduction,
-        pure_funcs: ['console.log'],
+        pure_funcs: ['console.log', 'console.info', 'console.warn'],
+        passes: 2,
+        unsafe: true,
       },
       format: {
         comments: false,
