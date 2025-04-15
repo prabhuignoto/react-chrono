@@ -5,6 +5,8 @@ import {
   FunctionComponent, // Explicit import
   ReactNode,
   JSX, // Explicit import
+  memo,
+  useMemo,
 } from 'react';
 import { GlobalContext } from '../GlobalContext'; // Context for global settings
 import TimelineVerticalItem from './timeline-vertical-item'; // The component for rendering each item
@@ -19,55 +21,51 @@ import { TimelineVerticalWrapper } from './timeline-vertical.styles'; // The mai
  * @param {TimelineVerticalModel} props - The properties for the TimelineVertical component.
  * @returns {JSX.Element} The rendered TimelineVertical component.
  */
-const TimelineVertical: FunctionComponent<TimelineVerticalModel> = ({
-  // Props with default values
-  alternateCards = true, // Default to alternating card layout on desktop
-  // Callbacks and data props
-  autoScroll, // Function to handle automatic scrolling when an item becomes active
-  contentDetailsChildren, // Optional array of custom nodes for each item's card details
-  hasFocus, // Does the timeline component itself have focus? (Passed down)
-  iconChildren, // Optional custom icon(s) for the timeline points
-  items, // Array of timeline item data objects
-  mode, // Timeline mode (e.g., VERTICAL, VERTICAL_ALTERNATING) - Used by children via context?
-  onClick, // Global click handler for items (passed down)
-  onElapsed, // Global handler for media elapsed events (passed down)
-  onOutlineSelection, // Handler for outline selection (potentially unused here, passed down?)
-  slideShowRunning, // Is a slideshow active? (Passed down)
-  theme, // Theme object (Used by children via context or styled-components)
-  cardLess, // Render without cards? (Passed down)
-  nestedCardHeight, // Specific height for nested cards (Passed down)
-}: TimelineVerticalModel): JSX.Element => {
-  // Access global context, specifically to check for mobile view
-  const { isMobile } = useContext(GlobalContext);
+const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
+  ({
+    // Props with default values
+    alternateCards = true, // Default to alternating card layout on desktop
+    // Callbacks and data props
+    autoScroll, // Function to handle automatic scrolling when an item becomes active
+    contentDetailsChildren, // Optional array of custom nodes for each item's card details
+    hasFocus, // Does the timeline component itself have focus? (Passed down)
+    iconChildren, // Optional custom icon(s) for the timeline points
+    items, // Array of timeline item data objects
+    mode, // Timeline mode (e.g., VERTICAL, VERTICAL_ALTERNATING) - Used by children via context?
+    onClick, // Global click handler for items (passed down)
+    onElapsed, // Global handler for media elapsed events (passed down)
+    onOutlineSelection, // Handler for outline selection (potentially unused here, passed down?)
+    slideShowRunning, // Is a slideshow active? (Passed down)
+    theme, // Theme object (Used by children via context or styled-components)
+    cardLess, // Render without cards? (Passed down)
+    nestedCardHeight, // Specific height for nested cards (Passed down)
+  }: TimelineVerticalModel): JSX.Element => {
+    // Access global context, specifically to check for mobile view
+    const { isMobile } = useContext(GlobalContext);
 
-  /**
-   * Callback handler passed to each TimelineVerticalItem's onActive.
-   * When an item becomes active (e.g., scrolls into view), this triggers the autoScroll function
-   * provided via props, allowing the parent component to scroll the timeline if needed.
-   * @param {number} offset - Vertical offset within the active item's point element.
-   * @param {number} wrapperOffset - The offsetTop of the active item's wrapper relative to the scroll parent.
-   * @param {number} height - The clientHeight of the active item's wrapper.
-   */
-  const handleOnActive = useCallback(
-    (offset: number, wrapperOffset: number, height: number) => {
-      // Call the autoScroll prop function if it exists
-      autoScroll?.({
-        contentHeight: height,
-        contentOffset: wrapperOffset,
-        pointOffset: offset,
-      });
-    },
-    [autoScroll], // Dependency: only recreate if autoScroll function changes
-  );
+    /**
+     * Callback handler passed to each TimelineVerticalItem's onActive.
+     * When an item becomes active (e.g., scrolls into view), this triggers the autoScroll function
+     * provided via props, allowing the parent component to scroll the timeline if needed.
+     * @param {number} offset - Vertical offset within the active item's point element.
+     * @param {number} wrapperOffset - The offsetTop of the active item's wrapper relative to the scroll parent.
+     * @param {number} height - The clientHeight of the active item's wrapper.
+     */
+    const handleOnActive = useCallback(
+      (offset: number, wrapperOffset: number, height: number) => {
+        // Call the autoScroll prop function if it exists
+        autoScroll?.({
+          contentHeight: height,
+          contentOffset: wrapperOffset,
+          pointOffset: offset,
+        });
+      },
+      [autoScroll], // Dependency: only recreate if autoScroll function changes
+    );
 
-  // Render the main timeline wrapper
-  return (
-    <TimelineVerticalWrapper
-      data-testid="tree-main" // Test ID
-      role="list" // Accessibility role
-    >
-      {/* Map over the items array to render each timeline entry */}
-      {items.map((item, index: number) => {
+    // Memoize the items rendering to avoid unnecessary recreations
+    const renderItems = useMemo(() => {
+      return items.map((item, index: number) => {
         let itemClassName = ''; // CSS class for layout ('left' or 'right')
 
         // Determine layout class based on mode and index
@@ -118,10 +116,33 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = ({
             nestedCardHeight={nestedCardHeight} // Pass down the nested card height
           />
         );
-      })}
-    </TimelineVerticalWrapper>
-  );
-};
+      });
+    }, [
+      items,
+      isMobile,
+      alternateCards,
+      contentDetailsChildren,
+      iconChildren,
+      hasFocus,
+      handleOnActive,
+      onClick,
+      onElapsed,
+      slideShowRunning,
+      cardLess,
+      nestedCardHeight,
+    ]);
+
+    // Render the main timeline wrapper
+    return (
+      <TimelineVerticalWrapper
+        data-testid="tree-main" // Test ID
+        role="list" // Accessibility role
+      >
+        {renderItems}
+      </TimelineVerticalWrapper>
+    );
+  },
+);
 
 // Set display name for React DevTools
 TimelineVertical.displayName = 'TimelineVertical';
