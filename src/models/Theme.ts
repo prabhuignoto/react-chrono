@@ -1,59 +1,106 @@
 export interface Theme {
-  // card background color
+  /**
+   * Background color for timeline cards.
+   */
   cardBgColor?: string;
 
-  // card details background color
+  /**
+   * Background color for card details section.
+   */
   cardDetailsBackGround?: string;
 
-  // card details color
+  /**
+   * Text color for card details.
+   */
   cardDetailsColor?: string;
 
+  /**
+   * Background color for card media section.
+   */
   cardMediaBgColor?: string;
 
-  // card subtitle color
+  /**
+   * Text color for card subtitles.
+   */
   cardSubtitleColor?: string;
 
-  // card title color
+  /**
+   * Text color for card titles.
+   */
   cardTitleColor?: string;
 
-  // details color
+  /**
+   * Color for detailed text content.
+   */
   detailsColor?: string;
 
-  // icon background color
+  /**
+   * Background color for timeline point icons.
+   */
   iconBackgroundColor?: string;
 
-  // nested card background color
+  /**
+   * Background color for nested timeline cards.
+   */
   nestedCardBgColor?: string;
 
+  /**
+   * Background color for nested card details section.
+   */
   nestedCardDetailsBackGround?: string;
 
-  // nested card details color
+  /**
+   * Text color for nested card details.
+   */
   nestedCardDetailsColor?: string;
 
-  // nested card subtitle color
+  /**
+   * Text color for nested card subtitles.
+   */
   nestedCardSubtitleColor?: string;
 
-  // nested card title color
+  /**
+   * Text color for nested card titles.
+   */
   nestedCardTitleColor?: string;
 
-  // primary color
+  /**
+   * Primary theme color.
+   */
   primary?: string;
 
-  // secondary color
+  /**
+   * Secondary theme color.
+   */
   secondary?: string;
 
-  // text color
+  /**
+   * Default text color.
+   */
   textColor?: string;
 
-  // title color
+  /**
+   * Color for timeline titles.
+   */
   titleColor?: string;
 
-  // title color for active tabs
+  /**
+   * Color for active timeline titles.
+   */
   titleColorActive?: string;
 
+  /**
+   * Background color for the toolbar.
+   */
   toolbarBgColor?: string;
 
+  /**
+   * Background color for toolbar buttons.
+   */
   toolbarBtnBgColor?: string;
 
+  /**
+   * Text color for toolbar items.
+   */
   toolbarTextColor?: string;
 }
