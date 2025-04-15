@@ -131,7 +131,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }, 0);
   }, []);
 
-  const handleOnNext = () => {
+  const handleOnNext = useCallback(() => {
     if (!timeLineItems.length) {
       return;
     }
@@ -141,29 +141,29 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       handleTimelineUpdate(newTimeLineItem);
       setActiveTimelineItem(newTimeLineItem);
     }
-  };
+  }, [timeLineItems.length, activeTimelineItem, handleTimelineUpdate]);
 
-  const handleOnPrevious = () => {
+  const handleOnPrevious = useCallback(() => {
     if (activeTimelineItem > 0) {
       const newTimeLineItem = activeTimelineItem - 1;
 
       handleTimelineUpdate(newTimeLineItem);
       setActiveTimelineItem(newTimeLineItem);
     }
-  };
+  }, [activeTimelineItem, handleTimelineUpdate]);
 
-  const handleFirst = () => {
+  const handleFirst = useCallback(() => {
     setActiveTimelineItem(0);
     handleTimelineUpdate(0);
-  };
+  }, [handleTimelineUpdate]);
 
-  const handleLast = () => {
+  const handleLast = useCallback(() => {
     if (timeLineItems.length) {
       const idx = timeLineItems.length - 1;
       setActiveTimelineItem(idx);
       handleTimelineUpdate(idx);
     }
-  };
+  }, [timeLineItems.length, handleTimelineUpdate]);
 
   const handleOutlineSelection = useCallback(
     (index: number) => {

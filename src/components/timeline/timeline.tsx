@@ -131,6 +131,31 @@ const Timeline: React.FunctionComponent<TimelineModel> = memo(
       }
     }, [hasFocus, onLast]);
 
+    const handleTimelineItemClick = useCallback(
+      (itemId?: string, isSlideShow?: boolean) => {
+        if (itemId) {
+          for (let idx = 0; idx < items.length; idx++) {
+            if (items[idx].id === itemId) {
+              activeItemIndex.current = idx;
+              if (isSlideShow && idx < items.length - 1) {
+                onTimelineUpdated?.(idx + 1);
+              } else {
+                onTimelineUpdated?.(idx);
+              }
+              break;
+            }
+          }
+        }
+      },
+      [items, onTimelineUpdated],
+    );
+
+    // Memoized handler for onElapsed to avoid recreating the function on every render
+    const handleElapsed = useCallback(
+      (itemId?: string) => handleTimelineItemClick(itemId, true),
+      [handleTimelineItemClick],
+    );
+
     // handler for keyboard navigation
     const handleKeySelection = useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -157,25 +182,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = memo(
         }
       },
       [handleNext, handlePrevious, handleLast],
-    );
-
-    const handleTimelineItemClick = useCallback(
-      (itemId?: string, isSlideShow?: boolean) => {
-        if (itemId) {
-          for (let idx = 0; idx < items.length; idx++) {
-            if (items[idx].id === itemId) {
-              activeItemIndex.current = idx;
-              if (isSlideShow && idx < items.length - 1) {
-                onTimelineUpdated?.(idx + 1);
-              } else {
-                onTimelineUpdated?.(idx);
-              }
-              break;
-            }
-          }
-        }
-      },
-      [items, onTimelineUpdated],
     );
 
     useEffect(() => {
@@ -219,12 +225,15 @@ const Timeline: React.FunctionComponent<TimelineModel> = memo(
       }
     }, [activeTimelineItem, items.length, slideShowRunning]);
 
-    const handleScroll = (scroll: Partial<Scroll>) => {
-      const element = timelineMainRef.current;
-      if (element) {
-        setNewOffset(element, scroll);
-      }
-    };
+    const handleScroll = useCallback(
+      (scroll: Partial<Scroll>) => {
+        const element = timelineMainRef.current;
+        if (element) {
+          setNewOffset(element, scroll);
+        }
+      },
+      [setNewOffset],
+    );
 
     useEffect(() => {
       const ele = timelineMainRef.current;
@@ -343,7 +352,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = memo(
           items={items as TimelineCardModel[]}
           mode={timelineMode}
           onClick={handleTimelineItemClick}
-          onElapsed={(itemId?: string) => handleTimelineItemClick(itemId, true)}
+          onElapsed={handleElapsed}
           onOutlineSelection={onOutlineSelection}
           slideShowRunning={slideShowRunning}
           theme={theme}
@@ -363,6 +372,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = memo(
       slideShowRunning,
       theme,
       nestedCardHeight,
+      handleElapsed,
     ]);
 
     const renderHorizontal = useMemo(() => {
@@ -380,9 +390,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = memo(
             iconChildren={iconChildren}
             items={items as TimelineCardModel[]}
             mode={timelineMode}
-            onElapsed={(itemId?: string) =>
-              handleTimelineItemClick(itemId, true)
-            }
+            onElapsed={handleElapsed}
             slideShowRunning={slideShowRunning}
             wrapperId={id.current}
             nestedCardHeight={nestedCardHeight}
@@ -403,6 +411,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = memo(
       slideShowRunning,
       id,
       nestedCardHeight,
+      handleElapsed,
     ]);
 
     const renderVertical = useMemo(() => {
@@ -419,7 +428,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = memo(
           items={items as TimelineCardModel[]}
           mode={mode}
           onClick={handleTimelineItemClick}
-          onElapsed={(itemId?: string) => handleTimelineItemClick(itemId, true)}
+          onElapsed={handleElapsed}
           onOutlineSelection={onOutlineSelection}
           slideShowRunning={slideShowRunning}
           theme={theme}
@@ -440,6 +449,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = memo(
       slideShowRunning,
       theme,
       nestedCardHeight,
+      handleElapsed,
     ]);
 
     return (
