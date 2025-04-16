@@ -35,12 +35,12 @@ export const TimelineNavButton = styled.button<{
   color: #fff;
   cursor: pointer;
   display: flex;
-  height: 24px;
+  height: 2rem;
   justify-content: center;
-  margin: 0 0.2em;
+  margin: 0 0.25rem;
   padding: 0;
-  transition: all 0.1s ease-in;
-  width: 24px;
+  transition: all 0.2s ease-in-out;
+  width: 2rem;
 
   transform: ${(p) => {
     if (p.rotate === 'TRUE') {
@@ -48,14 +48,18 @@ export const TimelineNavButton = styled.button<{
     }
   }};
 
+  &:hover {
+    filter: brightness(1.1);
+  }
+
   &:active {
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.25));
-    transform: ${(p) => (p.rotate === 'TRUE' ? 'rotate(90deg)' : '')} scale(0.9);
+    transform: ${(p) => (p.rotate === 'TRUE' ? 'rotate(90deg)' : '')}
+      scale(0.95);
   }
 
   svg {
-    width: 65%;
-    height: 65%;
+    width: 1rem;
+    height: 1rem;
   }
 `;
 
@@ -72,16 +76,25 @@ export const ControlButton = styled.button<{ theme?: Theme }>`
   border-radius: 50%;
   cursor: pointer;
   display: flex;
-  height: 3em;
+  height: 2rem;
   justify-content: center;
-  margin-left: 0.5em;
-  width: 3em;
+  margin-left: 0.5rem;
+  width: 2rem;
   outline: 0;
   color: #fff;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
 
   svg {
-    width: 80%;
-    height: 80%;
+    width: 1rem;
+    height: 1rem;
   }
 `;
 

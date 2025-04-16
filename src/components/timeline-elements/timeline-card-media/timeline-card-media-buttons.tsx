@@ -9,17 +9,26 @@ const Button = css<{ theme: Theme }>`
   border: none;
   cursor: pointer;
   display: flex;
-  height: 1.5rem;
+  height: 2rem;
   justify-content: center;
   padding: 0;
-  width: 1.5rem;
+  width: 2rem;
   margin: 0 0.25rem;
   background: ${(p) => p.theme?.primary};
   color: #fff;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
 
   svg {
-    width: 70%;
-    height: 70%;
+    width: 1rem;
+    height: 1rem;
   }
 `;
 

@@ -15,8 +15,7 @@ const boxShadow = (isDarkMode: boolean, open: boolean) =>
     : 'inset 0 0 1px 1px rgba(0, 0, 0, 0.2)';
 
 // Base wrapper for the popover component
-export const PopoverWrapper = styled.div`
-`;
+export const PopoverWrapper = styled.div``;
 
 // Main popover container with positioning and visibility controls
 export const PopoverHolder = styled.div<{
@@ -57,22 +56,32 @@ export const Selecter = styled.div<{
   ${flexCenter};
   background: ${({ $theme }) => $theme.toolbarBtnBgColor};
   color: ${({ $theme }) => $theme.toolbarTextColor};
-  border-radius: 25px;
+  border-radius: 6px;
   box-shadow: ${({ $open, $isDarkMode }) => boxShadow($isDarkMode, $open)};
   cursor: pointer;
   justify-content: space-between;
   padding: ${(p) => (p.$isMobile ? '0.4rem' : `0.4rem 0.5rem`)};
   user-select: none;
+  min-height: 2rem;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(0.95);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
 `;
 
 // Icon component within the selector with rotation animation
 export const SelecterIcon = styled.span<{ $open: boolean; $theme: Theme }>`
   ${flexCenter};
   color: ${({ $theme }) => $theme.primary};
-  height: 1.25rem;
-  width: 1.25rem;
+  height: 1rem;
+  width: 1rem;
   transition: transform 0.2s ease-in-out;
-  margin-right: 0.1rem;
+  margin-right: 0.25rem;
 
   & svg {
     height: 100%;
@@ -82,7 +91,7 @@ export const SelecterIcon = styled.span<{ $open: boolean; $theme: Theme }>`
 
 // Text label for the selector button
 export const SelecterLabel = styled.span`
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   text-align: left;
   white-space: nowrap;
 `;
@@ -109,4 +118,20 @@ export const CloseButton = styled.button<{ theme: Theme }>`
   cursor: pointer;
   margin-bottom: 0.5rem;
   margin-left: auto;
+  height: 2rem;
+  width: 2rem;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
 `;
