@@ -7,6 +7,8 @@ import {
   useRef,
   FunctionComponent, // Explicit import
   JSX, // Explicit import for clarity
+  memo, // Import memo
+  useEffect, // Import useEffect for measurement
 } from 'react';
 import { GlobalContext } from '../GlobalContext'; // Context for global theme/settings
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content'; // Card component
@@ -18,6 +20,13 @@ import {
   VerticalItemWrapper,
 } from './timeline-vertical.styles'; // Associated styled components
 
+// Add new prop type for measurement callback and visibility check
+interface VerticalItemProps extends VerticalItemModel {
+  onMeasureHeight: (index: number, height: number) => void;
+  index: number; // Ensure index is always required
+  isVisible: boolean; // Flag indicating if item is in the rendered range
+}
+
 /**
  * Represents a single item (row) in the vertical timeline.
  * It coordinates the display of the title, the central point/icon,
@@ -26,8 +35,8 @@ import {
  * @param {VerticalItemModel} props - The properties for the VerticalItem component.
  * @returns {JSX.Element} The rendered VerticalItem component.
  */
-const VerticalItem: FunctionComponent<VerticalItemModel> = (
-  props: VerticalItemModel,
+const VerticalItem: FunctionComponent<VerticalItemProps> = (
+  props: VerticalItemProps,
 ): JSX.Element => {
   // Ref to the main list item element for calculating position/dimensions
   const contentRef = useRef<HTMLLIElement>(null);
@@ -56,6 +65,9 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     items, // Data for nested items (if any)
     isNested, // Is this item part of a nested structure?
     nestedCardHeight, // Specific height for nested cards
+    onMeasureHeight, // New prop
+    index, // Explicitly use index from props
+    isVisible, // New prop
   } = props;
 
   // Access global settings and theme from context
@@ -84,11 +96,11 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     (offset: number) => {
       if (contentRef.current && onActive) {
         const { offsetTop, clientHeight } = contentRef.current;
-        // Call the parent's onActive with calculated position data
+        // Use props.index here if needed by parent, though offsetTop/clientHeight are direct measurements
         onActive(offsetTop + offset, offsetTop, clientHeight);
       }
     },
-    [onActive], // Dependency: only recreate if onActive changes
+    [onActive], // Removed props.index dependency as it's likely not needed for this specific calculation
   );
 
   /**
@@ -148,9 +160,9 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       cls(
         'vertical-item-row', // Base class
         { [className]: !!className }, // Add 'left' or 'right' if className is present
-        { visible: visible }, // Add 'visible' class if visible prop is true
+        { visible: isVisible }, // Use isVisible prop to control the 'visible' class for animation
       ),
-    [className, visible],
+    [className, isVisible], // Update dependencies
   );
 
   /**
@@ -217,6 +229,25 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     return !isNested && !isMobile;
   }, [isNested, isMobile]);
 
+  // Effect to measure height and report back
+  useEffect(() => {
+    const element = contentRef.current;
+    if (!element) return;
+
+    // Use ResizeObserver to handle dynamic height changes (e.g., image load, expand)
+    const resizeObserver = new ResizeObserver(() => {
+      onMeasureHeight(index, element.offsetHeight);
+    });
+
+    resizeObserver.observe(element);
+
+    // Initial measure
+    onMeasureHeight(index, element.offsetHeight);
+
+    // Cleanup observer on unmount
+    return () => resizeObserver.disconnect();
+  }, [onMeasureHeight, index]); // Rerun if callback or index changes
+
   // Render the complete timeline item structure
   return (
     <VerticalItemWrapper
@@ -227,7 +258,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       $cardLess={cardLess}
       $isNested={isNested}
       // --- Standard React props ---
-      className={verticalItemClass} // Apply memoized classes
+      className={verticalItemClass} // Apply memoized classes (including 'visible')
       data-testid="vertical-item-row"
       key={id} // Key for React list rendering
       ref={contentRef} // Attach ref for measurements
@@ -287,4 +318,5 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
 // Set display name for React DevTools
 VerticalItem.displayName = 'VerticalItem';
 
-export default VerticalItem;
+// Wrap component in React.memo for performance optimization
+export default memo(VerticalItem);

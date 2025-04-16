@@ -12,19 +12,20 @@ export const TimelineVerticalWrapper = styled.div`
   padding: 0.25rem; /* Small padding around the timeline */
   outline: 0; /* Remove default outline */
   position: relative; /* Establish positioning context */
+  contain: content; /* Performance optimization: isolate rendering */
 `;
 
 /**
  * Keyframes for the fade-in animation of timeline items.
  */
-const animateVisible = keyframes`
+const fadeIn = keyframes`
   from {
     opacity: 0;
-    visibility: hidden; /* Start hidden */
+    transform: translateY(15px); /* Slightly larger slide-up effect */
   }
   to {
     opacity: 1;
-    visibility: visible; /* Fade to visible */
+    transform: translateY(0);
   }
 `;
 
@@ -51,12 +52,24 @@ interface VerticalItemWrapperProps {
 export const VerticalItemWrapper = styled.li<VerticalItemWrapperProps>`
   display: flex;
   position: relative;
-  visibility: hidden; /* Initially hidden for animation */
+  /* Use opacity for smooth animation */
+  opacity: 0;
   width: 100%;
   align-items: stretch; /* Stretch children vertically */
   justify-content: center; /* Center items horizontally */
   margin: 1rem 0; /* Vertical spacing between items */
   list-style: none; /* Remove default list styling */
+  /* Improve performance with hardware acceleration hints */
+  will-change: opacity, transform;
+  transform: translateY(15px);
+  /* Smoother, slightly longer transitions */
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+  /* Use composite layers only when needed */
+  transform-style: flat;
+  backface-visibility: hidden;
+  contain: layout style; /* Optimize rendering cost */
 
   /* Alignment adjustments based on side (used in non-alternating modes) */
   &.left {
@@ -68,8 +81,8 @@ export const VerticalItemWrapper = styled.li<VerticalItemWrapperProps>`
 
   /* Class added when the item should become visible */
   &.visible {
-    visibility: visible;
-    /* Consider adding animation here if needed, though content animates */
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* Styling for nested timelines */
@@ -112,13 +125,13 @@ interface TimelineCardContentWrapperProps {
 
 /**
  * Wrapper for the main content card of a timeline item.
- * Handles width, alignment, order, and visibility animation based on props.
+ * Handles width, alignment, order based on props.
  */
 export const TimelineCardContentWrapper = styled.div<TimelineCardContentWrapperProps>`
-  visibility: hidden; /* Initially hidden for animation */
   position: relative;
   display: flex;
   align-items: center; /* Vertically center content */
+  contain: content layout style; /* Optimize rendering cost */
 
   /* --- Width Calculation --- */
   ${(p) => {
@@ -162,12 +175,6 @@ export const TimelineCardContentWrapper = styled.div<TimelineCardContentWrapperP
         order: 1; /* Content first */
       }
     `}
-
-  /* --- Visibility Animation --- */
-  &.visible {
-    visibility: visible;
-    animation: ${animateVisible} 0.25s ease-in; /* Apply fade-in animation */
-  }
 `;
 
 /**
@@ -212,7 +219,7 @@ export const TimelineTitleWrapper = styled.div<TimelineTitleWrapperProps>`
   &.right {
     /* Justification depends on whether layout is flipped */
     justify-content: ${(p) => (p.$flip ? 'flex-start' : 'flex-end')};
-     /* Order depends on flip status and mode */
+    /* Order depends on flip status and mode */
     order: ${(p) => (p.$flip && p.mode === 'VERTICAL_ALTERNATING' ? '3' : '1')};
   }
 `;
