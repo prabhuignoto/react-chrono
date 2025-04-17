@@ -3,6 +3,8 @@ import { MediaState } from '@models/TimelineMediaModel';
 import { hexToRGBA } from '@utils/index';
 import cls from 'classnames';
 import React, {
+  Suspense,
+  lazy,
   useCallback,
   useContext,
   useEffect,
@@ -13,13 +15,15 @@ import React, {
 import { useSlideshow } from 'src/components/effects/useSlideshow';
 import { useCardSize } from '../../../hooks/useCardSize';
 import { GlobalContext } from '../../GlobalContext';
-import Timeline from '../../timeline/timeline';
 import CardMedia from '../timeline-card-media/timeline-card-media';
 import { ContentFooter } from './content-footer';
 import { ContentHeader } from './content-header';
 import { DetailsText } from './details-text';
 import { getTextOrContent } from './text-or-content';
 import { TimelineItemContentWrapper } from './timeline-card-content.styles';
+
+// Dynamically import Timeline
+const Timeline = lazy(() => import('../../timeline/timeline'));
 
 const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
   React.memo(
@@ -274,6 +278,38 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         return !canShowDetailsText && textDensity === 'HIGH';
       }, [canShowDetailsText, textDensity]);
 
+      // Helper function to determine if pause handler is needed
+      const handlePause = () => {
+        if (active && slideShowActive) {
+          tryPause();
+        }
+      };
+
+      const NestedTimeline = useMemo(() => {
+        if (!items?.length) {
+          return null;
+        }
+
+        // Render the nested Timeline with minimal props, relying on context for others
+        return (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Timeline
+              items={items}
+              mode="VERTICAL"
+              // Remove props that are likely context-derived or incorrect for nested
+              // cardHeight={nestedCardHeight}
+              // slideShow={false}
+              // cardLess
+              // noUniqueId
+              // isChild
+              // uniqueId={id}
+              // disableNavOnKey={false}
+              // onPaused={onPaused}
+            />
+          </Suspense>
+        );
+      }, [items]); // Only depend on items
+
       return (
         <TimelineItemContentWrapper
           className={contentClass}
@@ -346,14 +382,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             />
           )}
 
-          {canShowNestedTimeline && (
-            <Timeline
-              items={items}
-              mode={'VERTICAL'}
-              nestedCardHeight={nestedCardHeight}
-              isChild
-            />
-          )}
+          {canShowNestedTimeline && NestedTimeline}
 
           {(!textOverlay || !media) && (
             <ContentFooter

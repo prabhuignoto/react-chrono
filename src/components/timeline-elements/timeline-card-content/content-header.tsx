@@ -36,24 +36,28 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
         ) : null}
 
         {isNotMedia ? (
-          <TitleMemo
-            title={title}
-            theme={theme}
-            url={url}
-            fontSize={fontSizes?.cardTitle}
-            classString={classNames?.cardTitle}
-          />
+          <div data-testid="timeline-card-title">
+            <TitleMemo
+              title={title}
+              theme={theme}
+              url={url}
+              fontSize={fontSizes?.cardTitle}
+              classString={classNames?.cardTitle}
+            />
+          </div>
         ) : null}
 
         {/* Render subtitle if there is no media */}
 
         {isNotMedia ? (
-          <SubTitleMemo
-            content={content}
-            theme={theme}
-            fontSize={fontSizes?.cardSubtitle}
-            classString={classNames?.cardSubTitle}
-          />
+          <div data-testid="timeline-card-subtitle">
+            <SubTitleMemo
+              content={content}
+              theme={theme}
+              fontSize={fontSizes?.cardSubtitle}
+              classString={classNames?.cardSubTitle}
+            />
+          </div>
         ) : null}
       </TimelineCardHeader>
     );

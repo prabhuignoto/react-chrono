@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { Theme } from '@models/Theme';
-import { ToolbarItem } from './ToolbarItem';
-import { SearchToolbarItem } from './SearchToolbarItem';
+import { SearchToolbarItem, ToolbarItem } from './ToolbarItem';
 
 export type ToolbarProps = {
   /**

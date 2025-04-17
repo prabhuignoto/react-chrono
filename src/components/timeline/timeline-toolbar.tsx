@@ -151,7 +151,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   return (
     <Toolbar
       items={toolbarItems}
-      searchItems={searchToolbarItems}
+      searchItems={searchToolbarItems as SearchToolbarItem[]}
       theme={theme}
     >
       <Controls

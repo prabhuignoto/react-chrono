@@ -28,10 +28,10 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
 
   const layoutOptions = useMemo(
     () => ({
-      alternating: buttonTexts?.changeLayoutOptions.alternating,
-      horizontal: buttonTexts?.changeLayoutOptions.horizontal,
-      horizontal_all: buttonTexts?.changeLayoutOptions.horizontal_all,
-      vertical: buttonTexts?.changeLayoutOptions.vertical,
+      alternating: buttonTexts?.changeLayoutOptions?.alternating,
+      horizontal: buttonTexts?.changeLayoutOptions?.horizontal,
+      horizontal_all: buttonTexts?.changeLayoutOptions?.horizontal_all,
+      vertical: buttonTexts?.changeLayoutOptions?.vertical,
     }),
     [],
   );
@@ -39,18 +39,18 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   const verticalItems = useMemo(
     () => [
       {
-        description: layoutOptions.vertical.helpText,
+        description: layoutOptions.vertical?.helpText,
         id: 'VERTICAL',
         onSelect: () => onUpdateTimelineMode('VERTICAL'),
         selected: activeTimelineMode === 'VERTICAL',
-        title: layoutOptions.vertical.text,
+        title: layoutOptions.vertical?.text,
       },
       {
-        description: layoutOptions.alternating.helpText,
+        description: layoutOptions.alternating?.helpText,
         id: 'VERTICAL_ALTERNATING',
         onSelect: () => onUpdateTimelineMode('VERTICAL_ALTERNATING'),
         selected: activeTimelineMode === 'VERTICAL_ALTERNATING',
-        title: layoutOptions.alternating.text,
+        title: layoutOptions.alternating?.text,
       },
     ],
     [activeTimelineMode],
@@ -60,22 +60,22 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   const horizontalItems = useMemo(
     () => [
       {
-        description: layoutOptions.horizontal.helpText,
+        description: layoutOptions.horizontal?.helpText,
         id: 'HORIZONTAL',
         onSelect: () => {
           onUpdateTimelineMode('HORIZONTAL');
         },
         selected: activeTimelineMode === 'HORIZONTAL',
-        title: layoutOptions.horizontal.text,
+        title: layoutOptions.horizontal?.text,
       },
       {
-        description: layoutOptions.horizontal_all.helpText,
+        description: layoutOptions.horizontal_all?.helpText,
         id: 'HORIZONTAL_ALL',
         onSelect: () => {
           onUpdateTimelineMode('HORIZONTAL_ALL');
         },
         selected: activeTimelineMode === 'HORIZONTAL_ALL',
-        title: layoutOptions.horizontal.text,
+        title: layoutOptions.horizontal_all?.text,
       },
     ],
     [activeTimelineMode],

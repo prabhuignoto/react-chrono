@@ -138,6 +138,7 @@ export const VerticalBasic: FunctionComponent<{
         highlightCardsOnHover
         enableQuickJump={true}
         toolbarPosition='top'
+
         // textOverlay
         // borderLessCards
         // theme={{
@@ -170,7 +171,6 @@ export const VerticalBasic: FunctionComponent<{
         enableDarkToggle
         enableBreakPoint={true}
         responsiveBreakPoint={768}
-        disableToolbar
       />
     </ComponentContainerTree>
   </Vertical>)

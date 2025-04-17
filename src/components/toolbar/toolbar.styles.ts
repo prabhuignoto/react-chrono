@@ -72,7 +72,7 @@ export const SearchInput = styled.input<{ theme: Theme }>`
   }
 `;
 
-export const SearchIcon = styled.span`
+export const SearchIcon = styled.span<{ theme: Theme }>`
   position: absolute;
   left: 0.5rem;
   top: 50%;

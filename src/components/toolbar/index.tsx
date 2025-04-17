@@ -80,6 +80,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
                 placeholder={placeholder || 'Search...'}
                 aria-label={label || 'Search'}
                 theme={theme}
+                data-testid="timeline-search-input"
               />
             </SearchBoxWrapper>
           );

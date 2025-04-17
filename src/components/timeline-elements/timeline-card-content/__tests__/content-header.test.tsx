@@ -1,4 +1,4 @@
-import { describe } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { customRender } from '../../../common/test';
 import { providerProps } from '../../../common/test/index';
 import { ContentHeader } from '../content-header';
