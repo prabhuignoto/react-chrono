@@ -14,6 +14,8 @@ import { GlobalContext } from '../GlobalContext'; // Context for global settings
 import TimelineVerticalItem from './timeline-vertical-item'; // The component for rendering each item
 import { TimelineVerticalWrapper } from './timeline-vertical.styles'; // The main styled wrapper
 import { useVirtualScroll } from '../hooks/useVirtualScroll'; // Import the hook
+import CustomScrollbar from './custom-scrollbar';
+import './timeline.css'; // Import the CSS file for scrollbar styling
 
 // Define estimated height (consider making this configurable via props or context)
 const ESTIMATED_ITEM_HEIGHT = 250; // px
@@ -219,111 +221,277 @@ const TimelineVertical: FunctionComponent<TimelineVerticalProps> = ({
     return style;
   }, [containerHeight, useGPUAcceleration]);
 
+  // Add state for scroll position
+  const [scrollTop, setScrollTop] = useState(0);
+  const [scrollContainerHeight, setScrollContainerHeight] = useState(0);
+
+  // Update container height on resize and track scroll position
+  useEffect(() => {
+    const updateHeight = () => {
+      if (scrollContainerRef.current) {
+        const newHeight = scrollContainerRef.current.clientHeight;
+        const newScrollTop = scrollContainerRef.current.scrollTop;
+
+        // Only update if values have changed
+        if (newHeight !== scrollContainerHeight) {
+          setScrollContainerHeight(newHeight);
+        }
+
+        if (newScrollTop !== scrollTop) {
+          setScrollTop(newScrollTop);
+        }
+
+        console.log('Container dimensions:', {
+          height: newHeight,
+          scrollTop: newScrollTop,
+          totalHeight,
+          scrollHeight: scrollContainerRef.current.scrollHeight,
+          firstChildHeight: scrollContainerRef.current.firstElementChild
+            ? scrollContainerRef.current.firstElementChild.scrollHeight
+            : 0,
+        });
+      }
+    };
+
+    const handleNativeScroll = () => {
+      if (scrollContainerRef.current) {
+        setScrollTop(scrollContainerRef.current.scrollTop);
+      }
+    };
+
+    // Initial update
+    updateHeight();
+
+    // Add listeners
+    window.addEventListener('resize', updateHeight);
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.addEventListener('scroll', handleNativeScroll);
+    }
+
+    // Get initial measurements
+    setTimeout(updateHeight, 100);
+
+    // Add a mutation observer to detect DOM changes that might affect layout
+    if (scrollContainerRef.current && 'MutationObserver' in window) {
+      const observer = new MutationObserver(updateHeight);
+      observer.observe(scrollContainerRef.current, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'class'],
+      });
+
+      return () => {
+        observer.disconnect();
+        window.removeEventListener('resize', updateHeight);
+        if (scrollContainerRef.current) {
+          scrollContainerRef.current.removeEventListener(
+            'scroll',
+            handleNativeScroll,
+          );
+        }
+      };
+    }
+
+    return () => {
+      window.removeEventListener('resize', updateHeight);
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.removeEventListener(
+          'scroll',
+          handleNativeScroll,
+        );
+      }
+    };
+  }, [scrollContainerHeight, scrollTop, totalHeight]);
+
+  // Get actual content height (may be different from calculated totalHeight)
+  const actualContentHeight = useMemo(() => {
+    // If the contentRef is not set or has no firstElementChild, use calculated totalHeight
+    if (
+      !scrollContainerRef.current ||
+      !scrollContainerRef.current.firstElementChild
+    ) {
+      return totalHeight;
+    }
+
+    return scrollContainerRef.current.firstElementChild.scrollHeight;
+  }, [totalHeight]);
+
+  // Track actual content height with logging
+  useEffect(() => {
+    console.log('Content height comparison:', {
+      calculatedTotalHeight: totalHeight,
+      actualContentHeight,
+    });
+  }, [totalHeight, actualContentHeight]);
+
+  // Handle scroll events from custom scrollbar
+  const handleScroll = useCallback((newScrollTop: number) => {
+    // Only update if the value has changed
+    if (
+      scrollContainerRef.current &&
+      Math.abs(scrollContainerRef.current.scrollTop - newScrollTop) > 1
+    ) {
+      scrollContainerRef.current.scrollTop = newScrollTop;
+      setScrollTop(newScrollTop);
+    }
+  }, []);
+
   // Render the main timeline wrapper
   return (
-    // Scrollable container with fixed height and overflow
     <div
-      ref={scrollContainerRef}
-      style={containerStyle}
-      data-testid="virtual-scroll-container"
+      className="timeline-vertical-container"
+      style={{
+        position: 'relative',
+        height:
+          typeof containerHeight === 'string'
+            ? containerHeight
+            : `${containerHeight}px`,
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+      }}
     >
-      {/* Inner container representing total height and applying top padding */}
-      <div style={{ height: `${totalHeight}px`, position: 'relative' }}>
-        {/* Invisible sentinel for the top of the visible area */}
-        {useIntersectionObserver && (
-          <div
-            ref={topSentinelRef}
-            data-index={startIndex}
-            style={{
-              height: '1px',
-              position: 'absolute',
-              top: paddingTop - 10,
-              width: '100%',
-            }}
-          />
-        )}
+      {/* The scrollable container */}
+      <div
+        ref={scrollContainerRef}
+        style={{
+          ...containerStyle,
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          overflow: 'auto',
+          position: 'relative',
+          height: '100%',
+          width: '100%',
+          flex: '1 1 auto',
+        }}
+        className="hide-scrollbar timeline-vertical-scroller"
+        onScroll={() => {
+          if (scrollContainerRef.current) {
+            setScrollTop(scrollContainerRef.current.scrollTop);
+          }
+        }}
+        data-testid="virtual-scroll-container"
+      >
+        <div style={{ height: `${totalHeight}px`, position: 'relative' }}>
+          {/* Invisible sentinel for the top of the visible area */}
+          {useIntersectionObserver && (
+            <div
+              ref={topSentinelRef}
+              data-index={startIndex}
+              style={{
+                height: '1px',
+                position: 'absolute',
+                top: paddingTop - 10,
+                width: '100%',
+              }}
+            />
+          )}
 
-        <TimelineVerticalWrapper
-          data-testid="tree-main" // Test ID
-          role="list" // Accessibility role
-        >
-          {/* Apply positioning transform to shift visible items down */}
-          <div style={innerContainerStyle}>
-            {/* Map over the VISIBLE items array to render each timeline entry */}
-            {visibleItems.map((item, index) => {
-              // IMPORTANT: Calculate the original index for props like key, handlers, etc.
-              const originalIndex = startIndex + index;
+          <TimelineVerticalWrapper
+            data-testid="tree-main" // Test ID
+            role="list" // Accessibility role
+          >
+            {/* Apply positioning transform to shift visible items down */}
+            <div style={innerContainerStyle}>
+              {/* Map over the VISIBLE items array to render each timeline entry */}
+              {visibleItems.map((item, index) => {
+                // IMPORTANT: Calculate the original index for props like key, handlers, etc.
+                const originalIndex = startIndex + index;
 
-              let itemClassName = ''; // CSS class for layout ('left' or 'right')
+                let itemClassName = ''; // CSS class for layout ('left' or 'right')
 
-              // Determine layout class based on mode and index
-              // In alternating mode on non-mobile views, alternate 'left' and 'right'
-              if (alternateCards && !isMobile) {
-                itemClassName = originalIndex % 2 === 0 ? 'left' : 'right';
-              }
-              // Otherwise (non-alternating or mobile), default to 'right'
-              else {
-                itemClassName = 'right';
-              }
+                // Determine layout class based on mode and index
+                // In alternating mode on non-mobile views, alternate 'left' and 'right'
+                if (alternateCards && !isMobile) {
+                  itemClassName = originalIndex % 2 === 0 ? 'left' : 'right';
+                }
+                // Otherwise (non-alternating or mobile), default to 'right'
+                else {
+                  itemClassName = 'right';
+                }
 
-              // Extract specific content details node for this item, if provided
-              const contentDetails: ReactNode | null =
-                (contentDetailsChildren &&
-                  Array.isArray(contentDetailsChildren) && // Ensure it's an array
-                  contentDetailsChildren[originalIndex]) || // Get node at the current index
-                null;
+                // Extract specific content details node for this item, if provided
+                const contentDetails: ReactNode | null =
+                  (contentDetailsChildren &&
+                    Array.isArray(contentDetailsChildren) && // Ensure it's an array
+                    contentDetailsChildren[originalIndex]) || // Get node at the current index
+                  null;
 
-              // Determine the custom icon for this item
-              let customIcon: ReactNode | null = null;
-              if (Array.isArray(iconChildren)) {
-                // If iconChildren is an array, map icon to item by index
-                customIcon = iconChildren[originalIndex] || null;
-              } else if (iconChildren) {
-                // If iconChildren is a single node, apply it to all items
-                customIcon = iconChildren;
-              }
+                // Determine the custom icon for this item
+                let customIcon: ReactNode | null = null;
+                if (Array.isArray(iconChildren)) {
+                  // If iconChildren is an array, map icon to item by index
+                  customIcon = iconChildren[originalIndex] || null;
+                } else if (iconChildren) {
+                  // If iconChildren is a single node, apply it to all items
+                  customIcon = iconChildren;
+                }
 
-              // Render the individual timeline item component
-              return (
-                <TimelineVerticalItem
-                  {...item} // Spread all properties from the item data object
-                  // --- Pass down calculated or specific props ---
-                  alternateCards={alternateCards} // Pass down the alternating mode flag
-                  className={itemClassName} // Pass down the calculated 'left'/'right' class
-                  contentDetailsChildren={contentDetails} // Pass down the specific content details node
-                  iconChild={customIcon} // Pass down the specific icon node
-                  hasFocus={hasFocus} // Pass down the focus state
-                  index={originalIndex} // Pass down the item's index
-                  key={item.id || `timeline-item-${originalIndex}`} // Unique key for React rendering
-                  onActive={handleOnActive} // Pass down the memoized active handler
-                  onClick={onClick} // Pass down the global click handler
-                  onElapsed={onElapsed} // Pass down the global elapsed handler
-                  slideShowRunning={slideShowRunning} // Pass down the slideshow state
-                  cardLess={cardLess} // Pass down the cardLess flag
-                  nestedCardHeight={nestedCardHeight} // Pass down the nested card height
-                  // Pass the measurement handler
-                  onMeasureHeight={handleMeasureHeight}
-                  // Pass the visibility flag
-                  isVisible={visibleIndices.has(originalIndex)}
-                />
-              );
-            })}
-          </div>
-        </TimelineVerticalWrapper>
+                // Render the individual timeline item component
+                return (
+                  <TimelineVerticalItem
+                    {...item} // Spread all properties from the item data object
+                    // --- Pass down calculated or specific props ---
+                    alternateCards={alternateCards} // Pass down the alternating mode flag
+                    className={itemClassName} // Pass down the calculated 'left'/'right' class
+                    contentDetailsChildren={contentDetails} // Pass down the specific content details node
+                    iconChild={customIcon} // Pass down the specific icon node
+                    hasFocus={hasFocus} // Pass down the focus state
+                    index={originalIndex} // Pass down the item's index
+                    key={item.id || `timeline-item-${originalIndex}`} // Unique key for React rendering
+                    onActive={handleOnActive} // Pass down the memoized active handler
+                    onClick={onClick} // Pass down the global click handler
+                    onElapsed={onElapsed} // Pass down the global elapsed handler
+                    slideShowRunning={slideShowRunning} // Pass down the slideshow state
+                    cardLess={cardLess} // Pass down the cardLess flag
+                    nestedCardHeight={nestedCardHeight} // Pass down the nested card height
+                    // Pass the measurement handler
+                    onMeasureHeight={handleMeasureHeight}
+                    // Pass the visibility flag
+                    isVisible={visibleIndices.has(originalIndex)}
+                  />
+                );
+              })}
+            </div>
+          </TimelineVerticalWrapper>
 
-        {/* Invisible sentinel for the bottom of the visible area */}
-        {useIntersectionObserver && (
-          <div
-            ref={bottomSentinelRef}
-            data-index={endIndex}
-            style={{
-              height: '1px',
-              position: 'absolute',
-              bottom: totalHeight - (paddingTop + endIndex * estimatedHeight),
-              width: '100%',
-            }}
-          />
-        )}
+          {/* Invisible sentinel for the bottom of the visible area */}
+          {useIntersectionObserver && (
+            <div
+              ref={bottomSentinelRef}
+              data-index={endIndex}
+              style={{
+                height: '1px',
+                position: 'absolute',
+                bottom: totalHeight - (paddingTop + endIndex * estimatedHeight),
+                width: '100%',
+              }}
+            />
+          )}
+        </div>
+      </div>
+
+      {/* Custom scrollbar as absolute positioned sibling */}
+      <div
+        className="scrollbar-container"
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          width: '12px',
+          pointerEvents: 'none',
+        }}
+      >
+        <CustomScrollbar
+          containerRef={scrollContainerRef}
+          totalHeight={actualContentHeight}
+          visibleHeight={scrollContainerHeight}
+          scrollTop={scrollTop}
+          onScroll={handleScroll}
+          theme={theme}
+        />
       </div>
     </div>
   );

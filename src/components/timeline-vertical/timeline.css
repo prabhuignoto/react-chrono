@@ -1,0 +1,78 @@
+/* Styles for the timeline components */
+
+/* Hide scrollbar for WebKit browsers (Chrome, Safari, etc.) */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+/* Hide scrollbar for Firefox */
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for IE/Edge */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+}
+
+/* Container styles */
+.timeline-vertical-container {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.timeline-vertical-scroller {
+  position: relative;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  flex: 1 1 auto;
+}
+
+/* The outer container for the scrollbar */
+.scrollbar-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 12px;
+  pointer-events: auto;
+  z-index: 10000;
+}
+
+/* Make sure the custom scrollbar is visible and properly positioned */
+.custom-scrollbar {
+  position: absolute !important;
+  right: 4px !important;
+  top: 4px !important;
+  bottom: 4px !important;
+  height: auto !important;
+  width: 8px !important;
+  z-index: 10000 !important;
+  opacity: 0.9 !important;
+  display: block !important;
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  pointer-events: auto !important;
+}
+
+.custom-scrollbar-thumb {
+  background-color: #007bff !important;
+  opacity: 1 !important;
+  border-radius: 4px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+  width: 8px !important;
+}
+
+/* Prevent text selection during scrollbar dragging */
+.scrollbar-dragging {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Increase visibility on hover */
+.hide-scrollbar:hover .custom-scrollbar {
+  opacity: 1 !important;
+} 
