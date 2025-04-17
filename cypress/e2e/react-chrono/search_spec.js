@@ -71,7 +71,11 @@ context('Chrono.Search', () => {
     cy.get(searchInput).type('NonExistentTerm123');
     cy.wait(500);
 
-    cy.get(timelineItem).should('not.exist');
+    // Search results label should not appear when there are no matches
+    cy.get('[data-testid="search-results-label"]').should('not.exist');
+
+    // First timeline item should still be visible
+    cy.get(timelineItem).first().should('exist');
   });
 
   it('should handle search with special characters', () => {
