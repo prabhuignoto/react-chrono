@@ -9,6 +9,8 @@ import {
 } from 'react';
 import xss from 'xss';
 import { GlobalContext } from '../../GlobalContext';
+import { useSearch } from '../../common/SearchContext';
+import TextHighlighter from '../../common/TextHighlighter';
 import {
   TimelineContentDetails,
   TimelineSubContent,
@@ -27,6 +29,7 @@ const renderTextArray: (
   p: Pick<TimelineProps, 'parseDetailsAsHTML' | 'fontSizes' | 'theme'> & {
     cardTextClassName: string;
     detailedText: string[];
+    searchTerm?: string;
   },
 ) => ReactNode = ({
   fontSizes,
@@ -34,24 +37,40 @@ const renderTextArray: (
   theme,
   detailedText,
   cardTextClassName,
+  searchTerm,
 }) => {
   return detailedText.map((text, index) => {
-    const props = parseDetailsAsHTML
-      ? {
-          dangerouslySetInnerHTML: {
-            __html: xss(text),
-          },
-        }
-      : null;
+    // If we need to parse HTML, we can't use the highlighter
+    if (parseDetailsAsHTML) {
+      const props = {
+        dangerouslySetInnerHTML: {
+          __html: xss(text),
+        },
+      };
+      return (
+        <TimelineSubContent
+          key={index}
+          fontSize={fontSizes?.cardText}
+          className={cardTextClassName}
+          theme={theme}
+          {...props}
+        />
+      );
+    }
+
+    // Otherwise, use the highlighter when we have a search term
     return (
       <TimelineSubContent
         key={index}
         fontSize={fontSizes?.cardText}
         className={cardTextClassName}
         theme={theme}
-        {...props}
       >
-        {parseDetailsAsHTML ? null : text}
+        {searchTerm ? (
+          <TextHighlighter text={text} searchTerm={searchTerm} theme={theme} />
+        ) : (
+          text
+        )}
       </TimelineSubContent>
     );
   });
@@ -71,6 +90,7 @@ const getTextOrContent: (
       const isTextArray = Array.isArray(detailedText);
       const { fontSizes, classNames, parseDetailsAsHTML, textDensity } =
         useContext(GlobalContext);
+      const { searchTerm } = useSearch();
 
       const renderTimelineContent = () => {
         if (timelineContent) {
@@ -84,9 +104,15 @@ const getTextOrContent: (
               fontSizes,
               parseDetailsAsHTML,
               theme,
+              searchTerm,
             });
           } else {
-            textContent = parseDetailsAsHTML ? xss(detailedText) : detailedText;
+            // For HTML parsing, we can't use the highlighter
+            if (parseDetailsAsHTML) {
+              textContent = xss(detailedText);
+            } else {
+              textContent = detailedText;
+            }
           }
 
           const textContentProps =
@@ -103,6 +129,28 @@ const getTextOrContent: (
               (parseDetailsAsHTML && !isTextArray) || textDensity === 'LOW'
             );
           }, [isTextArray, textDensity]);
+
+          // For non-parsed and non-array content, we can show the highlighter
+          if (
+            textContent &&
+            !parseDetailsAsHTML &&
+            !isTextArray &&
+            searchTerm
+          ) {
+            return (
+              <TimelineContentDetails
+                className={showMore ? 'active' : ''}
+                ref={ref}
+                theme={theme}
+              >
+                <TextHighlighter
+                  text={textContent}
+                  searchTerm={searchTerm}
+                  theme={theme}
+                />
+              </TimelineContentDetails>
+            );
+          }
 
           return textContent ? (
             <TimelineContentDetails

@@ -2,6 +2,8 @@ import { TitleModel } from '@models/TimelineCardTitleModel';
 import cls from 'classnames';
 import React, { useContext, useMemo } from 'react';
 import { GlobalContext } from '../../GlobalContext';
+import { useSearch } from '../../common/SearchContext';
+import TextHighlighter from '../../common/TextHighlighter';
 import { TitleWrapper } from './timeline-card-title.styles';
 
 /**
@@ -23,6 +25,7 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
   classString,
 }: TitleModel) => {
   const TITLE_CLASS = 'timeline-item-title'; // Base class name for the title
+  const { searchTerm } = useSearch();
 
   // Computed class name for the title, combining base class, active state, and additional classes
   const titleClass = useMemo(
@@ -41,7 +44,11 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
       align={align}
       $fontSize={fontSizes?.title}
     >
-      {title}
+      {searchTerm && title ? (
+        <TextHighlighter text={title} searchTerm={searchTerm} theme={theme} />
+      ) : (
+        title
+      )}
     </TitleWrapper>
   );
 };

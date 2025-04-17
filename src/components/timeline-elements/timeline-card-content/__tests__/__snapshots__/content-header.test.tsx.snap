@@ -5,17 +5,24 @@ exports[`Content Header > should match the snapshot 1`] = `
   <header
     class="sc-cXawGu fTmNGU"
   >
-    <h1
-      class="sc-cUiCeM VlWd card-title"
-      data-class="card-title"
+    <div
+      data-testid="timeline-card-title"
     >
-      title
-    </h1>
-    <h2
-      class="sc-jJAtPt fJFAxs card-sub-title card-subtitle"
+      <h1
+        class="sc-cUiCeM VlWd card-title card-title"
+      >
+        title
+      </h1>
+    </div>
+    <div
+      data-testid="timeline-card-subtitle"
     >
-      content
-    </h2>
+      <h2
+        class="sc-jJAtPt fJFAxs card-sub-title card-subtitle"
+      >
+        content
+      </h2>
+    </div>
   </header>
 </div>
 `;

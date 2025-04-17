@@ -1,48 +1,63 @@
 import cls from 'classnames';
-import {
-  CardTitle,
-  CardTitleAnchor,
-} from '../timeline-card-content/timeline-card-content.styles';
+import React, { useContext } from 'react';
+import { CardTitle } from '../timeline-card-content/timeline-card-content.styles';
 import { Title } from './memoized-model';
-import React from 'react';
+import TextHighlighter from '../../common/TextHighlighter';
+import { useSearch } from '../../common/SearchContext';
 
 /**
- * Renders the timeline’s title with optional link.
+ * Renders the title content for the timeline card.
  * @param {Title} props - Title properties
  * @returns {JSX.Element | null} The rendered title
  */
-const TitleMemoComponent = ({
-  title,
-  url,
-  theme,
-  color,
-  dir,
-  active,
-  fontSize = '1rem',
-  classString = '',
-  padding = false,
-}: Title) => {
-  return title ? (
-    <CardTitle
-      className={cls(active ? 'active' : '', { [classString]: true })}
-      theme={theme}
-      style={{ color }}
-      dir={dir}
-      $fontSize={fontSize}
-      data-class={classString}
-      $padding={padding}
-    >
-      {url ? (
-        <CardTitleAnchor href={url} target="_blank" rel="noreferrer">
-          {title}
-        </CardTitleAnchor>
-      ) : (
-        title
-      )}
-    </CardTitle>
-  ) : null;
-};
+const TitleMemo = React.memo<Title>(
+  ({
+    color,
+    dir,
+    fontSize,
+    classString,
+    padding,
+    theme,
+    title,
+    url,
+  }: Title) => {
+    const { searchTerm } = useSearch();
 
-export const TitleMemo = React.memo(TitleMemoComponent);
+    const titleContent = (
+      <CardTitle
+        color={color}
+        dir={dir}
+        $fontSize={fontSize}
+        className={cls('card-title', classString)}
+        $padding={padding}
+        theme={theme}
+      >
+        {searchTerm ? (
+          <TextHighlighter text={title} searchTerm={searchTerm} theme={theme} />
+        ) : (
+          title
+        )}
+      </CardTitle>
+    );
+
+    if (url) {
+      return (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: 'none' }}
+        >
+          {titleContent}
+        </a>
+      );
+    }
+
+    return titleContent;
+  },
+  (prev, next) => prev.theme?.cardTitleColor === next.theme?.cardTitleColor,
+);
 
 TitleMemo.displayName = 'Timeline Title';
+
+export { TitleMemo };

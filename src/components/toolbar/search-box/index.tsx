@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Theme } from '@models/Theme';
 import { useDebounce } from '../../../hooks/useDebounce';
 import {
@@ -10,6 +10,7 @@ import {
   SearchNavButton,
 } from './search-box.styles';
 import { TimelineItemModel } from '@models/TimelineItemModel';
+import { useSearch } from '../../common/SearchContext';
 
 export interface SearchBoxProps {
   /**
@@ -58,11 +59,15 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
   const [searchText, setSearchText] = useState('');
   const [searchMatches, setSearchMatches] = useState<string[]>([]);
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
+  const { setSearchTerm } = useSearch();
 
   // Handle search with debounce to avoid excessive searches
   const handleSearch = useCallback(
     (searchText: string) => {
       const searchTerm = searchText.toLowerCase().trim();
+
+      // Update the global search term for highlighting
+      setSearchTerm(searchTerm);
 
       // Reset search state if search is empty
       if (!searchTerm) {
@@ -98,7 +103,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
         onActivateItem(validMatches[0]);
       }
     },
-    [items, onActivateItem],
+    [items, onActivateItem, setSearchTerm],
   );
 
   // Debounce search for better performance
@@ -136,12 +141,20 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
     setSearchText('');
     setSearchMatches([]);
     setCurrentMatchIndex(0);
+    setSearchTerm('');
 
     // Activate first item to reset view
     if (items.length > 0 && items[0].id) {
       onActivateItem(items[0].id);
     }
-  }, [items, onActivateItem]);
+  }, [items, onActivateItem, setSearchTerm]);
+
+  // Clean up the search term when component unmounts
+  useEffect(() => {
+    return () => {
+      setSearchTerm('');
+    };
+  }, [setSearchTerm]);
 
   // Render search box
   return (

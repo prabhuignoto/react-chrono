@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import GlobalContextProvider from './GlobalContext';
 import Timeline from './timeline/timeline';
+import { SearchProvider } from './common/SearchContext';
 const toReactArray = React.Children.toArray;
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
@@ -53,7 +54,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }
 
     const itemLength = React.Children.toArray(children).filter(
-      (item) => (item as React.ReactElement<any>).props.className !== 'chrono-icons',
+      (item) =>
+        (item as React.ReactElement<any>).props.className !== 'chrono-icons',
     ).length;
 
     return Array.from({ length: itemLength }).map((_, index) => ({
@@ -189,28 +191,30 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   return (
     <GlobalContextProvider {...props}>
-      <Timeline
-        activeTimelineItem={activeTimelineItem}
-        contentDetailsChildren={toReactArray(children).filter(
-          (item) => (item as any).props.className !== 'chrono-icons',
-        )}
-        iconChildren={iconChildren}
-        items={timeLineItems}
-        onFirst={handleFirst}
-        onLast={handleLast}
-        onNext={handleOnNext}
-        onPrevious={handleOnPrevious}
-        onRestartSlideshow={restartSlideShow}
-        onTimelineUpdated={handleTimelineUpdate}
-        slideShow={slideShow}
-        slideShowEnabled={slideShow}
-        slideShowRunning={slideShowActive}
-        onScrollEnd={onScrollEnd}
-        onItemSelected={onItemSelected}
-        onOutlineSelection={handleOutlineSelection}
-        mode={mode}
-        onPaused={onPaused}
-      />
+      <SearchProvider>
+        <Timeline
+          activeTimelineItem={activeTimelineItem}
+          contentDetailsChildren={toReactArray(children).filter(
+            (item) => (item as any).props.className !== 'chrono-icons',
+          )}
+          iconChildren={iconChildren}
+          items={timeLineItems}
+          onFirst={handleFirst}
+          onLast={handleLast}
+          onNext={handleOnNext}
+          onPrevious={handleOnPrevious}
+          onRestartSlideshow={restartSlideShow}
+          onTimelineUpdated={handleTimelineUpdate}
+          slideShow={slideShow}
+          slideShowEnabled={slideShow}
+          slideShowRunning={slideShowActive}
+          onScrollEnd={onScrollEnd}
+          onItemSelected={onItemSelected}
+          onOutlineSelection={handleOutlineSelection}
+          mode={mode}
+          onPaused={onPaused}
+        />
+      </SearchProvider>
     </GlobalContextProvider>
   );
 };

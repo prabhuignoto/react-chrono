@@ -2,6 +2,8 @@ import cls from 'classnames';
 import React from 'react';
 import { CardSubTitle } from '../timeline-card-content/timeline-card-content.styles';
 import { Content } from './memoized-model';
+import TextHighlighter from '../../common/TextHighlighter';
+import { useSearch } from '../../common/SearchContext';
 
 /**
  * Renders the subtitle content for the timeline card.
@@ -9,8 +11,10 @@ import { Content } from './memoized-model';
  * @returns {JSX.Element | null} The rendered subtitle
  */
 const SubTitleMemo = React.memo<Content>(
-  ({ content, color, dir, theme, fontSize, classString, padding }: Content) =>
-    content ? (
+  ({ content, color, dir, theme, fontSize, classString, padding }: Content) => {
+    const { searchTerm } = useSearch();
+
+    return content ? (
       <CardSubTitle
         style={{ color }}
         dir={dir}
@@ -19,9 +23,18 @@ const SubTitleMemo = React.memo<Content>(
         className={cls('card-sub-title', classString)}
         $padding={padding}
       >
-        {content}
+        {searchTerm ? (
+          <TextHighlighter
+            text={content}
+            searchTerm={searchTerm}
+            theme={theme}
+          />
+        ) : (
+          content
+        )}
       </CardSubTitle>
-    ) : null,
+    ) : null;
+  },
   (prev, next) =>
     prev.theme?.cardSubtitleColor === next.theme?.cardSubtitleColor,
 );

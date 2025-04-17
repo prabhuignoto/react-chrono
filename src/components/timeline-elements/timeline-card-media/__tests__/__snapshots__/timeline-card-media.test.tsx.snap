@@ -28,7 +28,11 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
   >
     <div
       class="sc-kpOvIu NBiZG"
-    />
+    >
+      <h1
+        class="sc-jPkiSJ ecXWgU card-title card-title"
+      />
+    </div>
     <h2
       class="sc-dcKlJK cAsXsC card-sub-title card-subtitle"
     >
@@ -61,7 +65,11 @@ exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
   >
     <div
       class="sc-kpOvIu NBiZG"
-    />
+    >
+      <h1
+        class="sc-jPkiSJ ecXWgU card-title card-title"
+      />
+    </div>
     <h2
       class="sc-dcKlJK cAsXsC card-sub-title card-subtitle"
     >
