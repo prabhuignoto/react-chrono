@@ -52,6 +52,7 @@
   - [Mode](#mode)
   - [Timeline item Model](#timeline-item-model)
   - [⌨Keyboard Navigation](#keyboard-navigation)
+  - [🔍Search Functionality](#search-functionality)
   - [Scrollable](#scrollable)
   - [📺Media](#media)
   - [Text overlay mode](#text-overlay-mode)
@@ -259,6 +260,30 @@ To disable keyboard navigation set `disableNavOnKey` to true.
 ```jsx
 <Chrono items={items} disableNavOnKey />
 ```
+
+### 🔍Search Functionality
+
+The timeline includes a built-in search feature that allows you to search through timeline items. The search functionality:
+
+- Searches across titles, subtitles, and detailed text
+- Is case-insensitive
+- Supports partial matches
+- Highlights matching text in the results
+- Provides navigation between search results
+
+The search input is automatically included in the toolbar. Here's a simple example:
+
+```jsx
+<Chrono items={items} mode="VERTICAL" />
+```
+
+When you type in the search box, the timeline will:
+
+1. Filter and highlight matching items
+2. Automatically scroll to the first match
+3. Allow navigation between matches using the toolbar buttons
+
+The search is performed in real-time as you type, with a small debounce to optimize performance.
 
 ### Scrollable
 
