@@ -4,24 +4,25 @@ import { CardTitle } from '../timeline-card-content/timeline-card-content.styles
 import { Title } from './memoized-model';
 import TextHighlighter from '../../common/TextHighlighter';
 import { useSearch } from '../../common/SearchContext';
+import { GlobalContext } from '../../GlobalContext';
 
 /**
  * Renders the title content for the timeline card.
  * @param {Title} props - Title properties
  * @returns {JSX.Element | null} The rendered title
  */
-const TitleMemo = React.memo<Title>(
+const TitleMemo = React.memo<Omit<Title, 'theme'>>(
   ({
     color,
     dir,
     fontSize,
     classString,
     padding,
-    theme,
     title,
     url,
-  }: Title) => {
+  }: Omit<Title, 'theme'>) => {
     const { searchTerm } = useSearch();
+    const { theme } = useContext(GlobalContext);
 
     const titleContent = (
       <CardTitle
@@ -55,7 +56,7 @@ const TitleMemo = React.memo<Title>(
 
     return titleContent;
   },
-  (prev, next) => prev.theme?.cardTitleColor === next.theme?.cardTitleColor,
+  (prev, next) => prev.title === next.title && prev.url === next.url,
 );
 
 TitleMemo.displayName = 'Timeline Title';

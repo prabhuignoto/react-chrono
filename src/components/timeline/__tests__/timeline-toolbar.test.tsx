@@ -194,10 +194,14 @@ describe('TimelineToolbar Search Functionality', () => {
       expect(defaultProps.onActivateTimelineItem).toHaveBeenCalledWith('3');
     });
 
-    // Clear the search
-    fireEvent.change(searchInput, { target: { value: '' } });
+    vi.clearAllMocks();
+
+    // Find and click the clear button
+    const clearButton = screen.getByTestId('search-clear-button');
+    fireEvent.click(clearButton);
 
     await waitFor(() => {
+      // Should be called synchronously by handleClearSearch
       expect(defaultProps.onActivateTimelineItem).toHaveBeenCalledWith('1');
     });
   });

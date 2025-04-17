@@ -117,7 +117,7 @@ export const SearchNavButton = styled.button<{
   }
 `;
 
-export const SearchNavButtonGroup = styled.div`
+export const SearchNavButtonGroup = styled.div<{ theme: Theme }>`
   ${flexContainer};
   margin-left: 0.25rem;
   padding-left: 0.25rem;

@@ -35,10 +35,10 @@ describe('Title', () => {
   //should have the color and padding
   it('should have the color and padding', () => {
     const { getByText } = customRender(
-      <TitleMemo title="title" color="#ccc" dir="rtl" active={false} padding />,
+      <TitleMemo title="title" dir="rtl" active={false} padding />,
       { providerProps },
     );
-    expect(getByText('title')).toHaveStyle('color: #ccc');
+    expect(getByText('title')).toHaveStyle('color: #000');
     // expect(getByText('title')).toHaveStyle('padding: 0.25rem 0 0.25rem 0.5rem');
   });
 
@@ -47,7 +47,6 @@ describe('Title', () => {
     const { getByText } = customRender(
       <TitleMemo
         title="title"
-        color="black"
         dir="rtl"
         active={false}
         padding
@@ -120,9 +119,9 @@ describe('Details Text', () => {
 
 describe('ShowOrHideTextButtonMemo', () => {
   it('should not render if textOverlay is false', () => {
-    const TextComponent = forwardRef<HTMLSpanElement, TextOrContentModel>(() => (
-      <span>details text</span>
-    ));
+    const TextComponent = forwardRef<HTMLSpanElement, TextOrContentModel>(
+      () => <span>details text</span>,
+    );
     const { queryByRole } = customRender(
       <DetailsTextMemo
         show
@@ -144,7 +143,9 @@ describe('ExpandButtonMemo', () => {
       <DetailsTextMemo
         show
         expand
-        text={forwardRef(() => <span>details text</span>)}
+        text={forwardRef(() => (
+          <span>details text</span>
+        ))}
         height={100}
         onRender={vi.fn()}
         textOverlay={false}

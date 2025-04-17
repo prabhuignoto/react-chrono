@@ -301,7 +301,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               // slideShow={false}
               // cardLess
               // noUniqueId
-              // isChild
+              isChild
               // uniqueId={id}
               // disableNavOnKey={false}
               // onPaused={onPaused}

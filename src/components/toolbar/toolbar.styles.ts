@@ -81,14 +81,14 @@ export const SearchIcon = styled.span<{ theme: Theme }>`
   opacity: 0.6;
 `;
 
-export const SearchResultsLabel = styled.span`
+export const SearchResultsLabel = styled.span<{ theme: Theme }>`
   ${flexContainer};
   margin-left: 0.5rem;
   color: ${({ theme }) => theme.toolbarTextColor};
   opacity: 0.6;
 `;
 
-export const SearchNavButton = styled.button`
+export const SearchNavButton = styled.button<{ theme: Theme }>`
   ${flexContainer};
   background: none;
   border: none;

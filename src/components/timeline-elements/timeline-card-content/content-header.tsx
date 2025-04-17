@@ -39,7 +39,6 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
           <div data-testid="timeline-card-title">
             <TitleMemo
               title={title}
-              theme={theme}
               url={url}
               fontSize={fontSizes?.cardTitle}
               classString={classNames?.cardTitle}

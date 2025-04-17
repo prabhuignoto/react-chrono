@@ -186,6 +186,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
           onClick={handleClearSearch}
           theme={theme}
           aria-label="Clear search"
+          data-testid="search-clear-button"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

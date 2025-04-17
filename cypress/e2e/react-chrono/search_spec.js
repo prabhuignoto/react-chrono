@@ -66,4 +66,23 @@ context('Chrono.Search', () => {
 
     cy.get(timelineItem).first().find(cardTitle).should('contain', 'Dunkirk');
   });
+
+  it('should show no items for a non-matching search', () => {
+    cy.get(searchInput).type('NonExistentTerm123');
+    cy.wait(500);
+
+    cy.get(timelineItem).should('not.exist');
+  });
+
+  it('should handle search with special characters', () => {
+    cy.get(searchInput).type('Event & Time');
+    cy.wait(500);
+  });
+
+  it('should handle search with leading/trailing spaces', () => {
+    cy.get(searchInput).type('  Dunkirk  ');
+    cy.wait(500);
+
+    cy.get(timelineItem).first().find(cardTitle).should('contain', 'Dunkirk');
+  });
 });
