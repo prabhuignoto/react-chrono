@@ -24,3 +24,15 @@ export type ToolbarItem = {
    */
   onSelect: (id: string, name: string) => void;
 };
+
+export type SearchToolbarItem = {
+  /**
+   * Callback function to be called when search text changes
+   * @param searchText - The search text
+   */
+  onSearch: (searchText: string) => void;
+  /**
+   * Placeholder text for the search input
+   */
+  placeholder?: string;
+} & Omit<ToolbarItem, 'onSelect'>;

@@ -41,3 +41,42 @@ export const IconWrapper = styled.span`
 export const ContentWrapper = styled.span`
   ${flexContainer};
 `;
+
+export const SearchBoxWrapper = styled.div<{ theme: Theme }>`
+  ${flexContainer};
+  position: relative;
+  margin: 0 0.5rem;
+  min-width: 200px;
+`;
+
+export const SearchInput = styled.input<{ theme: Theme }>`
+  ${flexContainer};
+  background: ${({ theme }) => theme.toolbarBtnBgColor};
+  border: 1px solid ${({ theme }) => theme.toolbarBgColor};
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem 0.25rem 2rem;
+  color: ${({ theme }) => theme.toolbarTextColor};
+  font-size: 0.875rem;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.primary};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.primary}33;
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme.toolbarTextColor};
+    opacity: 0.6;
+  }
+`;
+
+export const SearchIcon = styled.span`
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: ${({ theme }) => theme.toolbarTextColor};
+  opacity: 0.6;
+`;

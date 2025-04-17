@@ -1,12 +1,17 @@
-import { FunctionComponent, memo } from 'react';
+import { FunctionComponent, memo, useState } from 'react';
 import { jsx as _jsx } from 'react/jsx-runtime';
 import {
   ContentWrapper,
   IconWrapper,
   ToolbarListItem,
   ToolbarWrapper,
+  SearchBoxWrapper,
+  SearchInput,
+  SearchIcon,
 } from './toolbar.styles';
 import { ToolbarProps } from '@models/ToolbarProps';
+import { useDebounce } from '../../hooks/useDebounce';
+import { SearchToolbarItem } from '@models/ToolbarItem';
 
 /**
  * @description A reusable toolbar component that renders a list of items with icons and content
@@ -27,8 +32,8 @@ import { ToolbarProps } from '@models/ToolbarProps';
  * ```
  */
 const Toolbar: FunctionComponent<ToolbarProps> = memo(
-  ({ items = [], children = [], theme }) => {
-    if (!items.length) {
+  ({ items = [], searchItems = [], children = [], theme }) => {
+    if (!items.length && !searchItems.length) {
       return null;
     }
 
@@ -52,6 +57,31 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
                 <ContentWrapper>{children[index]}</ContentWrapper>
               )}
             </ToolbarListItem>
+          );
+        })}
+
+        {searchItems.map(({ id, label, placeholder, onSearch }) => {
+          const [searchText, setSearchText] = useState('');
+          const debouncedSearch = useDebounce(onSearch, 300);
+
+          const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+            const value = e.target.value;
+            setSearchText(value);
+            debouncedSearch(value);
+          };
+
+          return (
+            <SearchBoxWrapper key={id} theme={theme}>
+              <SearchIcon>🔍</SearchIcon>
+              <SearchInput
+                type="text"
+                value={searchText}
+                onChange={handleChange}
+                placeholder={placeholder || 'Search...'}
+                aria-label={label || 'Search'}
+                theme={theme}
+              />
+            </SearchBoxWrapper>
           );
         })}
       </ToolbarWrapper>
