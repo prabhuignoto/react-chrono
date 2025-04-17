@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
-import { describe, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { customRender } from '../../../common/test';
 import { providerProps } from '../../../common/test/index';
 import { ContentFooter } from '../content-footer';

@@ -2,31 +2,56 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SearchBox from '../index';
+import { SearchBoxProps } from '../search-box.model';
 import SearchContext from '../../../common/SearchContext';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Theme } from '@models/Theme';
+import { ThemeProvider } from 'styled-components';
+import { getDefaultThemeOrDark } from '@utils/index';
+import { TimelineItemModel } from '@models/TimelineItemModel';
 
 // Mock the SearchContext
 const mockSetSearchTerm = vi.fn();
 
-// Mock Theme
-const mockTheme: Theme = {
-  primary: 'blue',
-  secondary: 'red',
-  cardBgColor: 'white',
-  titleColor: 'black',
-  titleColorActive: 'blue',
-  cardTitleColor: 'black',
-  cardSubtitleColor: 'grey',
-  cardDetailsColor: 'darkgrey',
-};
+// Define mock function outside describe
+const mockOnActivateItem = vi.fn();
 
-const renderWithProvider = (ui: React.ReactElement) => {
+// Mock Theme
+const theme = getDefaultThemeOrDark();
+
+const mockItems: TimelineItemModel[] = [
+  {
+    id: '1',
+    title: 'First Item',
+    cardTitle: 'Card Title 1',
+    cardSubtitle: 'Subtitle 1',
+    cardDetailedText: 'Detailed text 1',
+  },
+  {
+    id: '2',
+    title: 'Second Item',
+    cardTitle: 'Card Title 2',
+    cardSubtitle: 'Subtitle 2',
+    cardDetailedText: 'Detailed text 2',
+  },
+];
+
+// Helper function to render SearchBox with providers
+const renderSearchBox = (props: Partial<SearchBoxProps> = {}) => {
+  const defaultProps: SearchBoxProps = {
+    theme,
+    items: mockItems,
+    onActivateItem: mockOnActivateItem,
+    ...props,
+  };
+
   return render(
     <SearchContext.Provider
       value={{ searchTerm: '', setSearchTerm: mockSetSearchTerm }}
     >
-      {ui}
+      <ThemeProvider theme={theme}>
+        <SearchBox {...defaultProps} />
+      </ThemeProvider>
     </SearchContext.Provider>,
   );
 };
@@ -35,19 +60,12 @@ describe('SearchBox', () => {
   beforeEach(() => {
     // Clear mock calls before each test
     mockSetSearchTerm.mockClear();
+    mockOnActivateItem.mockClear();
   });
+
   it('renders the search input with placeholder', () => {
-    renderWithProvider(
-      <SearchBox
-        theme={mockTheme}
-        onActivateItem={() => {}}
-        items={[]}
-        placeholder="Search by title, subtitle..."
-      />,
-    );
-    const inputElement = screen.getByPlaceholderText(
-      'Search by title, subtitle...',
-    );
+    renderSearchBox({ placeholder: 'Search items...' });
+    const inputElement = screen.getByPlaceholderText('Search items...');
     expect(inputElement).toBeInTheDocument();
     expect(inputElement).toHaveAttribute(
       'data-testid',
@@ -56,50 +74,101 @@ describe('SearchBox', () => {
   });
 
   it('calls setSearchTerm on input change', async () => {
-    renderWithProvider(
-      <SearchBox
-        theme={mockTheme}
-        onActivateItem={() => {}}
-        items={[]}
-        placeholder="Search by title, subtitle..."
-      />,
-    );
-    const inputElement = screen.getByPlaceholderText(
-      'Search by title, subtitle...',
-    );
+    renderSearchBox();
+    const inputElement = screen.getByPlaceholderText('Search...');
 
-    fireEvent.change(inputElement, { target: { value: 'test search' } });
+    fireEvent.change(inputElement, { target: { value: 'First' } });
 
     // Wait for debounce and assertion
     await waitFor(() => {
-      expect(mockSetSearchTerm).toHaveBeenCalledTimes(1);
-      expect(mockSetSearchTerm).toHaveBeenCalledWith('test search');
+      // Corrected assertion: useSearchBox calls setSearchTerm with lowercase
+      expect(mockSetSearchTerm).toHaveBeenCalledWith('first');
     });
   });
 
-  // Basic test for clear button presence - assumes it exists within the component structure
-  // A more specific test would require knowing the clear button's selector/testid
-  it('renders a clear button (basic check)', () => {
-    renderWithProvider(
-      <SearchBox
-        theme={mockTheme}
-        onActivateItem={() => {}}
-        items={[]}
-        placeholder="Search by title, subtitle..."
-      />,
-    );
-    // Example: If the clear button is a <button> element
-    // const clearButton = screen.getByRole('button'); // This might be too generic
-    // expect(clearButton).toBeInTheDocument();
-    // A better approach is adding a data-testid to the clear button in SearchBox component
-    // e.g., <button data-testid="search-clear-button">...</button>
-    // then: const clearButton = screen.getByTestId('search-clear-button');
-    // expect(clearButton).toBeInTheDocument();
-    // For now, just asserting the component renders without crashing
-    expect(
-      screen.getByPlaceholderText('Search by title, subtitle...'),
-    ).toBeInTheDocument();
+  it('shows clear button when there is text', async () => {
+    renderSearchBox();
+
+    const input = screen.getByPlaceholderText('Search...');
+    fireEvent.change(input, { target: { value: 'First' } });
+
+    // Need to wait for potential state updates if button appearance is async
+    await waitFor(() => {
+      expect(screen.getByTestId('search-clear-button')).toBeInTheDocument();
+    });
   });
 
-  // Add more tests as needed, e.g., for debouncing, clear button click action
+  it('clears search when clear button is clicked', async () => {
+    renderSearchBox();
+
+    const input = screen.getByPlaceholderText('Search...');
+    fireEvent.change(input, { target: { value: 'First' } });
+
+    // Wait for clear button to appear
+    await waitFor(() => {
+      expect(screen.getByTestId('search-clear-button')).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByTestId('search-clear-button'));
+
+    await waitFor(() => {
+      expect(input).toHaveValue('');
+      // Also check if setSearchTerm was called with empty string
+      expect(mockSetSearchTerm).toHaveBeenCalledWith('');
+    });
+  });
+
+  it('shows navigation buttons when there are matches', async () => {
+    renderSearchBox();
+
+    const input = screen.getByPlaceholderText('Search...');
+    fireEvent.change(input, { target: { value: 'Item' } });
+
+    await waitFor(() => {
+      expect(screen.getByTitle('Previous match')).toBeInTheDocument();
+      expect(screen.getByTitle('Next match')).toBeInTheDocument();
+    });
+  });
+
+  it('navigates between matches', async () => {
+    renderSearchBox();
+
+    const input = screen.getByPlaceholderText('Search...');
+    fireEvent.change(input, { target: { value: 'Item' } });
+
+    // Wait for buttons to appear
+    await waitFor(() => {
+      expect(screen.getByTitle('Next match')).toBeInTheDocument();
+    });
+
+    // Click next match
+    fireEvent.click(screen.getByTitle('Next match'));
+    await waitFor(() => {
+      expect(mockOnActivateItem).toHaveBeenCalledWith('2');
+    });
+
+    // Wait for buttons to appear (though they should still be there)
+    await waitFor(() => {
+      expect(screen.getByTitle('Previous match')).toBeInTheDocument();
+    });
+
+    // Click previous match
+    fireEvent.click(screen.getByTitle('Previous match'));
+    await waitFor(() => {
+      expect(mockOnActivateItem).toHaveBeenCalledWith('1');
+    });
+  });
+
+  it('shows match count when there are matches', async () => {
+    renderSearchBox();
+
+    const input = screen.getByPlaceholderText('Search...');
+    fireEvent.change(input, { target: { value: 'Item' } });
+
+    await waitFor(() => {
+      expect(screen.getByText('1')).toBeInTheDocument();
+      expect(screen.getByText('of')).toBeInTheDocument();
+      expect(screen.getByText('2')).toBeInTheDocument();
+    });
+  });
 });

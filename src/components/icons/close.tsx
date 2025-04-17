@@ -1,22 +1,15 @@
-import * as React from "react"
+import React from 'react';
 
-function SvgComponent() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="prefix__feather prefix__feather-x"
-    >
-      <path d="M18 6L6 18M6 6l12 12" />
-    </svg>
-  )
-}
+const CloseIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    fill="currentColor"
+  >
+    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+  </svg>
+);
 
-export default SvgComponent
+export default CloseIcon;

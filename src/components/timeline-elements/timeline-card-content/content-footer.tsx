@@ -7,7 +7,6 @@ import {
   useMemo,
 } from 'react';
 import { GlobalContext } from '../../GlobalContext';
-import ChevronIcon from '../../icons/chev-right';
 import { ContentFooterProps } from './header-footer.model';
 import {
   ChevronIconWrapper,
@@ -15,6 +14,7 @@ import {
   SlideShowProgressBar,
   TriangleIconWrapper,
 } from './timeline-card-content.styles';
+import ChevRightIcon from '../../icons/chev-right';
 
 /**
  * ContentFooter
@@ -97,7 +97,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
         >
           {<span>{showMore ? 'read less' : 'read more'}</span>}
           <ChevronIconWrapper collapsed={showMore ? 'true' : 'false'}>
-            <ChevronIcon />
+            <ChevRightIcon />
           </ChevronIconWrapper>
         </ShowMore>
       ) : null}

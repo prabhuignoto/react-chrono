@@ -1,20 +1,15 @@
 import React from 'react';
 
-const ChevronLeft: React.FunctionComponent = () => (
+const ChevLeftIcon: React.FC<{ size?: number }> = ({ size = 16 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
     viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="feather feather-chevron-left"
+    width={size}
+    height={size}
+    fill="currentColor"
   >
-    <polyline points="15 18 9 12 15 6"></polyline>
+    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
   </svg>
 );
 
-export default ChevronLeft;
+export default ChevLeftIcon;
