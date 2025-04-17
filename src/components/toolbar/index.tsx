@@ -1,17 +1,12 @@
-import { FunctionComponent, memo, useState } from 'react';
+import React, { FunctionComponent, memo, ReactNode } from 'react';
 import { jsx as _jsx } from 'react/jsx-runtime';
 import {
   ContentWrapper,
   IconWrapper,
   ToolbarListItem,
   ToolbarWrapper,
-  SearchBoxWrapper,
-  SearchInput,
-  SearchIcon,
 } from './toolbar.styles';
 import { ToolbarProps } from '@models/ToolbarProps';
-import { useDebounce } from '../../hooks/useDebounce';
-import { SearchToolbarItem } from '@models/ToolbarItem';
 
 /**
  * @description A reusable toolbar component that renders a list of items with icons and content
@@ -32,8 +27,11 @@ import { SearchToolbarItem } from '@models/ToolbarItem';
  * ```
  */
 const Toolbar: FunctionComponent<ToolbarProps> = memo(
-  ({ items = [], searchItems = [], children = [], theme }) => {
-    if (!items.length && !searchItems.length) {
+  ({ items = [], children = [], theme }) => {
+    // Convert children to array to safely handle both single children and arrays
+    const childrenArray = React.Children.toArray(children);
+
+    if (!items.length && childrenArray.length === 0) {
       return null;
     }
 
@@ -53,38 +51,15 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
               tabIndex={0}
             >
               {icon && <IconWrapper>{icon}</IconWrapper>}
-              {children[index] && (
-                <ContentWrapper>{children[index]}</ContentWrapper>
+              {childrenArray[index] && (
+                <ContentWrapper>{childrenArray[index]}</ContentWrapper>
               )}
             </ToolbarListItem>
           );
         })}
 
-        {searchItems.map(({ id, label, placeholder, onSearch }) => {
-          const [searchText, setSearchText] = useState('');
-          const debouncedSearch = useDebounce(onSearch, 300);
-
-          const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            const value = e.target.value;
-            setSearchText(value);
-            debouncedSearch(value);
-          };
-
-          return (
-            <SearchBoxWrapper key={id} theme={theme}>
-              <SearchIcon>🔍</SearchIcon>
-              <SearchInput
-                type="text"
-                value={searchText}
-                onChange={handleChange}
-                placeholder={placeholder || 'Search...'}
-                aria-label={label || 'Search'}
-                theme={theme}
-                data-testid="timeline-search-input"
-              />
-            </SearchBoxWrapper>
-          );
-        })}
+        {/* Render any children after the mapped items */}
+        {childrenArray.slice(items.length)}
       </ToolbarWrapper>
     );
   },

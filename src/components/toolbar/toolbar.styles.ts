@@ -80,3 +80,30 @@ export const SearchIcon = styled.span<{ theme: Theme }>`
   color: ${({ theme }) => theme.toolbarTextColor};
   opacity: 0.6;
 `;
+
+export const SearchResultsLabel = styled.span`
+  ${flexContainer};
+  margin-left: 0.5rem;
+  color: ${({ theme }) => theme.toolbarTextColor};
+  opacity: 0.6;
+`;
+
+export const SearchNavButton = styled.button`
+  ${flexContainer};
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  color: ${({ theme }) => theme.toolbarTextColor};
+  opacity: 0.6;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const SearchNavButtonGroup = styled.div`
+  ${flexContainer};
+  margin-left: 0.5rem;
+`;

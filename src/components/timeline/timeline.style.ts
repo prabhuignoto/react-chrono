@@ -149,7 +149,12 @@ export const ExtraControls = styled.ul<{
 `;
 
 export const ExtraControlChild = styled.li`
+  margin: 0 0.5rem;
+  padding: 0;
+`;
+
+export const SearchBoxContainer = styled.div`
+  margin-left: auto;
   display: flex;
-  margin: 0.5rem 0;
-  margin-right: 0.5rem;
+  align-items: center;
 `;
