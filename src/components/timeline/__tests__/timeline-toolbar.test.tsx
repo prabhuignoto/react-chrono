@@ -22,6 +22,7 @@ const mockContextValue = {
   isMobile: false,
   enableLayoutSwitch: true,
   buttonTexts: { jumpTo: 'Jump To', first: 'First', last: 'Last' },
+  search: true,
 };
 
 // Create a wrapper component that provides the mock context
@@ -243,6 +244,187 @@ describe('TimelineToolbar Search Functionality', () => {
 
     await waitFor(() => {
       expect(defaultProps.onActivateTimelineItem).not.toHaveBeenCalled();
+    });
+  });
+});
+
+describe('TimelineToolbar Search Configuration', () => {
+  const mockItems = [
+    {
+      id: '1',
+      title: 'First Event',
+      cardTitle: 'First Event Title',
+      cardSubtitle: 'First Event Subtitle',
+      cardDetailedText: 'First Event Detailed Text',
+    },
+    {
+      id: '2',
+      title: 'Second Event',
+      cardTitle: 'Second Event Title',
+      cardSubtitle: 'Second Event Subtitle',
+      cardDetailedText: [
+        'Second Event Detailed Text 1',
+        'Second Event Detailed Text 2',
+      ],
+    },
+  ];
+
+  const defaultProps = {
+    activeTimelineItem: 0,
+    slideShowEnabled: false,
+    slideShowRunning: false,
+    flipLayout: false,
+    toggleDarkMode: vi.fn(),
+    onPaused: vi.fn(),
+    onFirst: vi.fn(),
+    onLast: vi.fn(),
+    onNext: vi.fn(),
+    onPrevious: vi.fn(),
+    onRestartSlideshow: vi.fn(),
+    totalItems: mockItems.length,
+    items: mockItems,
+    id: 'test-timeline',
+    onActivateTimelineItem: vi.fn(),
+    onUpdateTimelineMode: vi.fn(),
+    onUpdateTextContentDensity: vi.fn(),
+    mode: 'VERTICAL' as const,
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should not render search when search is disabled in context', () => {
+    const contextWithSearchDisabled = {
+      ...mockContextValue,
+      search: false,
+    };
+
+    render(
+      <GlobalContext.Provider value={contextWithSearchDisabled}>
+        <TimelineToolbar {...defaultProps} />
+      </GlobalContext.Provider>,
+    );
+
+    // Search input should not be in the document
+    expect(
+      screen.queryByPlaceholderText('Search by title, subtitle...'),
+    ).not.toBeInTheDocument();
+  });
+
+  it('should not render search when search.enabled is false in context', () => {
+    const contextWithSearchDisabled = {
+      ...mockContextValue,
+      search: { enabled: false },
+    };
+
+    render(
+      <GlobalContext.Provider value={contextWithSearchDisabled}>
+        <TimelineToolbar {...defaultProps} />
+      </GlobalContext.Provider>,
+    );
+
+    // Search input should not be in the document
+    expect(
+      screen.queryByPlaceholderText('Search by title, subtitle...'),
+    ).not.toBeInTheDocument();
+  });
+
+  it('should use custom placeholder from search configuration', () => {
+    const contextWithCustomSearch = {
+      ...mockContextValue,
+      search: {
+        enabled: true,
+        placeholder: 'Custom search placeholder...',
+      },
+    };
+
+    render(
+      <GlobalContext.Provider value={contextWithCustomSearch}>
+        <TimelineToolbar {...defaultProps} />
+      </GlobalContext.Provider>,
+    );
+
+    // Search input should have custom placeholder
+    expect(
+      screen.getByPlaceholderText('Custom search placeholder...'),
+    ).toBeInTheDocument();
+  });
+
+  it('should respect minimumSearchLength from search configuration', async () => {
+    const contextWithCustomSearch = {
+      ...mockContextValue,
+      search: {
+        enabled: true,
+        minimumSearchLength: 8, // Require 8 characters minimum
+      },
+    };
+
+    render(
+      <GlobalContext.Provider value={contextWithCustomSearch}>
+        <TimelineToolbar {...defaultProps} />
+      </GlobalContext.Provider>,
+    );
+
+    const searchInput = screen.getByPlaceholderText(
+      'Search by title, subtitle...',
+    );
+
+    // Type a short search term (7 chars)
+    fireEvent.change(searchInput, { target: { value: 'Second' } });
+
+    // Wait a bit to ensure any potential async behavior completes
+    await new Promise((resolve) => setTimeout(resolve, 350));
+
+    // Should not activate item due to minimum length requirement
+    expect(defaultProps.onActivateTimelineItem).not.toHaveBeenCalled();
+
+    // Type a long enough search term (8+ chars)
+    fireEvent.change(searchInput, { target: { value: 'First Event' } });
+
+    await waitFor(() => {
+      expect(defaultProps.onActivateTimelineItem).toHaveBeenCalledWith('1');
+    });
+  });
+
+  it('should respect searchKeys from search configuration', async () => {
+    const contextWithCustomSearch = {
+      ...mockContextValue,
+      search: {
+        enabled: true,
+        searchKeys: ['cardTitle'] as (
+          | 'title'
+          | 'cardTitle'
+          | 'cardSubtitle'
+          | 'cardDetailedText'
+        )[],
+      },
+    };
+
+    render(
+      <GlobalContext.Provider value={contextWithCustomSearch}>
+        <TimelineToolbar {...defaultProps} />
+      </GlobalContext.Provider>,
+    );
+
+    const searchInput = screen.getByPlaceholderText(
+      'Search by title, subtitle...',
+    );
+
+    // Search for term that's only in cardSubtitle
+    fireEvent.change(searchInput, { target: { value: 'Subtitle' } });
+
+    // Wait a bit to ensure any potential async behavior completes
+    await new Promise((resolve) => setTimeout(resolve, 350));
+
+    // Should not activate item since we're only searching cardTitle
+    expect(defaultProps.onActivateTimelineItem).not.toHaveBeenCalled();
+
+    // Search for term in cardTitle
+    fireEvent.change(searchInput, { target: { value: 'Title' } });
+
+    await waitFor(() => {
+      expect(defaultProps.onActivateTimelineItem).toHaveBeenCalled();
     });
   });
 });

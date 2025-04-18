@@ -171,4 +171,94 @@ describe('SearchBox', () => {
       expect(screen.getByText('2')).toBeInTheDocument();
     });
   });
+
+  it('respects minimumSearchLength and does not search with shorter terms', async () => {
+    renderSearchBox({ minimumSearchLength: 5 });
+
+    const input = screen.getByPlaceholderText('Search...');
+
+    // Type a 4-character search (should be ignored)
+    fireEvent.change(input, { target: { value: 'Card' } });
+
+    // Wait a bit to ensure any potential async behavior completes
+    await new Promise((resolve) => setTimeout(resolve, 350));
+
+    // Should not call onActivateItem due to min length requirement
+    expect(mockOnActivateItem).not.toHaveBeenCalled();
+
+    // Type a 5-character search (should trigger search)
+    fireEvent.change(input, { target: { value: 'First' } });
+
+    await waitFor(() => {
+      expect(mockOnActivateItem).toHaveBeenCalledWith('1');
+    });
+  });
+
+  it('respects searchKeys and only searches in specified fields', async () => {
+    renderSearchBox({
+      searchKeys: ['cardTitle'] as (
+        | 'title'
+        | 'cardTitle'
+        | 'cardSubtitle'
+        | 'cardDetailedText'
+      )[],
+    });
+
+    const input = screen.getByPlaceholderText('Search...');
+
+    // Search for 'Subtitle' which is only in cardSubtitle field (should not match)
+    fireEvent.change(input, { target: { value: 'Subtitle' } });
+
+    // Wait a bit to ensure any potential async behavior completes
+    await new Promise((resolve) => setTimeout(resolve, 350));
+
+    // Should not call onActivateItem because searchKeys limits to cardTitle
+    expect(mockOnActivateItem).not.toHaveBeenCalled();
+
+    // Search for 'Card Title' which is in cardTitle field (should match)
+    fireEvent.change(input, { target: { value: 'Card Title' } });
+
+    await waitFor(() => {
+      expect(mockOnActivateItem).toHaveBeenCalled();
+    });
+  });
+
+  it('does not show navigation controls when navigateResults is false', async () => {
+    renderSearchBox({ navigateResults: false });
+
+    const input = screen.getByPlaceholderText('Search...');
+    fireEvent.change(input, { target: { value: 'Item' } });
+
+    // Wait a bit to ensure any potential async behavior completes
+    await new Promise((resolve) => setTimeout(resolve, 350));
+
+    // Navigation controls should not be rendered
+    expect(screen.queryByTitle('Previous match')).not.toBeInTheDocument();
+    expect(screen.queryByTitle('Next match')).not.toBeInTheDocument();
+    expect(screen.queryByText('of')).not.toBeInTheDocument();
+  });
+
+  it('does not navigate on Enter key when navigateResults is false', async () => {
+    renderSearchBox({ navigateResults: false });
+
+    const input = screen.getByPlaceholderText('Search...');
+    fireEvent.change(input, { target: { value: 'Item' } });
+
+    // Wait for the initial search to complete
+    await waitFor(() => {
+      expect(mockOnActivateItem).toHaveBeenCalledTimes(1);
+    });
+
+    // Reset mock to clearly see next call
+    mockOnActivateItem.mockClear();
+
+    // Press Enter key
+    fireEvent.keyDown(input, { key: 'Enter' });
+
+    // Wait a bit to ensure any potential async behavior completes
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    // Should not trigger navigation
+    expect(mockOnActivateItem).not.toHaveBeenCalled();
+  });
 });

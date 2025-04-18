@@ -31,4 +31,29 @@ export interface SearchBoxProps {
    * Data test id for testing
    */
   dataTestId?: string;
+
+  /**
+   * Minimum number of characters required to trigger search
+   */
+  minimumSearchLength?: number;
+
+  /**
+   * Properties to search within each timeline item
+   */
+  searchKeys?: ('title' | 'cardTitle' | 'cardSubtitle' | 'cardDetailedText')[];
+
+  /**
+   * Time in milliseconds to wait before triggering search after typing
+   */
+  debounceTime?: number;
+
+  /**
+   * Whether to highlight matching text in search results
+   */
+  highlightResults?: boolean;
+
+  /**
+   * Whether to enable navigation between search results
+   */
+  navigateResults?: boolean;
 }

@@ -44,6 +44,7 @@ interface DefaultProps {
   nestedCardHeight: number;
   parseDetailsAsHTML: boolean;
   scrollable: { scrollbar: boolean };
+  search: boolean;
   showProgressOnSlideshow: boolean;
   slideItemDuration: number;
   slideShowType: SlideShowType;
@@ -143,6 +144,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     nestedCardHeight: 150,
     parseDetailsAsHTML: false,
     scrollable: { scrollbar: false },
+    search: true,
     showProgressOnSlideshow: slideShow,
     slideItemDuration: 2000,
     slideShowType: getSlideShowType(mode) as SlideShowType,
@@ -189,6 +191,25 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
       },
       showAllCardsHorizontal: horizontalAll,
       textDensity: textContentDensity,
+      search: {
+        enabled:
+          typeof props.search === 'boolean'
+            ? props.search
+            : (props.search?.enabled ?? true),
+        placeholder: 'Search by title, subtitle...',
+        ariaLabel: 'Search timeline items',
+        minimumSearchLength: 2,
+        searchKeys: [
+          'title',
+          'cardTitle',
+          'cardSubtitle',
+          'cardDetailedText',
+        ] as ('title' | 'cardTitle' | 'cardSubtitle' | 'cardDetailedText')[],
+        debounceTime: 300,
+        highlightResults: true,
+        navigateResults: true,
+        ...(typeof props.search === 'object' ? props.search : {}),
+      },
       theme: {
         ...getDefaultThemeOrDark(isDarkMode),
         ...theme,
@@ -219,6 +240,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
       toggleDarkMode,
       updateHorizontalAllCards,
       updateTextContentDensity,
+      props.search,
     ],
   );
 

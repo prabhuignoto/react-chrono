@@ -239,6 +239,25 @@ export type TimelineProps = {
 
   toolbarPosition?: 'top' | 'bottom';
 
+  // search configuration for the timeline
+  search?:
+    | boolean
+    | {
+        enabled: boolean;
+        placeholder?: string;
+        ariaLabel?: string;
+        minimumSearchLength?: number;
+        searchKeys?: (
+          | 'title'
+          | 'cardTitle'
+          | 'cardSubtitle'
+          | 'cardDetailedText'
+        )[];
+        debounceTime?: number;
+        highlightResults?: boolean;
+        navigateResults?: boolean;
+      };
+
   uniqueId?: string;
 
   // enables the read more button

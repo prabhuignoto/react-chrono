@@ -7,12 +7,22 @@ export interface UseSearchBoxProps {
   items: TimelineItemModel[];
   onActivateItem: (id: string) => void;
   inputRef?: RefObject<HTMLInputElement>;
+  minimumSearchLength?: number;
+  searchKeys?: ('title' | 'cardTitle' | 'cardSubtitle' | 'cardDetailedText')[];
+  debounceTime?: number;
+  highlightResults?: boolean;
+  navigateResults?: boolean;
 }
 
 export const useSearchBox = ({
   items,
   onActivateItem,
   inputRef,
+  minimumSearchLength = 2,
+  searchKeys = ['title', 'cardTitle', 'cardSubtitle', 'cardDetailedText'],
+  debounceTime = 300,
+  highlightResults = true,
+  navigateResults = true,
 }: UseSearchBoxProps) => {
   // State for search text and results
   const [searchText, setSearchText] = useState('');
@@ -25,11 +35,13 @@ export const useSearchBox = ({
     (searchText: string) => {
       const searchTerm = searchText.toLowerCase().trim();
 
-      // Update the global search term for highlighting
-      setSearchTerm(searchTerm);
+      // Update the global search term for highlighting if enabled
+      if (highlightResults) {
+        setSearchTerm(searchTerm);
+      }
 
-      // Reset search state if search is empty
-      if (!searchTerm) {
+      // Reset search state if search is empty or too short
+      if (!searchTerm || searchTerm.length < minimumSearchLength) {
         setSearchMatches([]);
         setCurrentMatchIndex(0);
         return;
@@ -37,18 +49,25 @@ export const useSearchBox = ({
 
       // Find ALL matching items
       const matches = items
-        .filter(item => {
-          const searchableContent = [
-            item.title,
-            item.cardTitle,
-            item.cardSubtitle,
-            typeof item.cardDetailedText === 'string' ? item.cardDetailedText : '',
-            Array.isArray(item.cardDetailedText) ? item.cardDetailedText.join(' ') : ''
-          ].join(' ').toLowerCase();
-          
+        .filter((item) => {
+          // Create a searchable content string based on configured searchKeys
+          const searchableContentParts = searchKeys.map((key) => {
+            if (key === 'cardDetailedText') {
+              return typeof item[key] === 'string'
+                ? (item[key] as string)
+                : Array.isArray(item[key])
+                  ? (item[key] as string[]).join(' ')
+                  : '';
+            }
+            return (item[key as keyof TimelineItemModel] as string) || '';
+          });
+
+          const searchableContent = searchableContentParts
+            .join(' ')
+            .toLowerCase();
           return searchableContent.includes(searchTerm);
         })
-        .map(item => item.id || '');
+        .map((item) => item.id || '');
 
       // Update matches and reset index
       const validMatches = matches.filter(Boolean); // Filter out empty IDs
@@ -67,11 +86,19 @@ export const useSearchBox = ({
         }, 0);
       }
     },
-    [items, onActivateItem, setSearchTerm, inputRef],
+    [
+      items,
+      onActivateItem,
+      setSearchTerm,
+      inputRef,
+      minimumSearchLength,
+      searchKeys,
+      highlightResults,
+    ],
   );
 
   // Debounce search for better performance
-  const debouncedSearch = useDebounce(handleSearch, 500);
+  const debouncedSearch = useDebounce(handleSearch, debounceTime);
 
   // Handle input change
   const handleChange = useCallback(
@@ -88,6 +115,8 @@ export const useSearchBox = ({
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Enter') {
         e.preventDefault(); // Prevent default form submission behavior
+
+        if (!navigateResults) return;
 
         // Flag to track if immediate search was triggered
         const isFirstSearch = searchMatches.length === 0 && searchText;
@@ -121,12 +150,13 @@ export const useSearchBox = ({
       onActivateItem,
       handleSearch,
       inputRef,
+      navigateResults,
     ],
   );
 
   // Navigate to next match
   const handleNextMatch = useCallback(() => {
-    if (searchMatches.length === 0) return;
+    if (!navigateResults || searchMatches.length === 0) return;
 
     const nextIndex = (currentMatchIndex + 1) % searchMatches.length;
     setCurrentMatchIndex(nextIndex);
@@ -136,11 +166,17 @@ export const useSearchBox = ({
     if (inputRef?.current) {
       inputRef.current.focus();
     }
-  }, [searchMatches, currentMatchIndex, onActivateItem, inputRef]);
+  }, [
+    searchMatches,
+    currentMatchIndex,
+    onActivateItem,
+    inputRef,
+    navigateResults,
+  ]);
 
   // Navigate to previous match
   const handlePrevMatch = useCallback(() => {
-    if (searchMatches.length === 0) return;
+    if (!navigateResults || searchMatches.length === 0) return;
 
     const prevIndex =
       currentMatchIndex === 0
@@ -153,7 +189,13 @@ export const useSearchBox = ({
     if (inputRef?.current) {
       inputRef.current.focus();
     }
-  }, [searchMatches, currentMatchIndex, onActivateItem, inputRef]);
+  }, [
+    searchMatches,
+    currentMatchIndex,
+    onActivateItem,
+    inputRef,
+    navigateResults,
+  ]);
 
   // Clear search
   const handleClearSearch = useCallback(() => {

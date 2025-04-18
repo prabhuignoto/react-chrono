@@ -47,6 +47,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     textDensity,
     isMobile,
     enableLayoutSwitch,
+    search,
   } = useContext(GlobalContext);
 
   // Define the toolbar items
@@ -167,16 +168,44 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           </ExtraControlChild>
         ) : null}{' '}
       </ExtraControls>
-      <SearchBoxContainer>
-        <SearchBox
-          placeholder="Search by title, subtitle..."
-          ariaLabel="Search timeline items"
-          theme={theme}
-          onActivateItem={onActivateTimelineItem}
-          items={items}
-          dataTestId="timeline-search-input"
-        />
-      </SearchBoxContainer>
+      {/* Render SearchBox only if search is enabled */}
+      {(typeof search === 'boolean' ? search : search?.enabled) && (
+        <SearchBoxContainer>
+          <SearchBox
+            placeholder={
+              typeof search === 'object'
+                ? search.placeholder || 'Search by title, subtitle...'
+                : 'Search by title, subtitle...'
+            }
+            ariaLabel={
+              typeof search === 'object'
+                ? search.ariaLabel || 'Search timeline items'
+                : 'Search timeline items'
+            }
+            theme={theme}
+            onActivateItem={onActivateTimelineItem}
+            items={items}
+            dataTestId="timeline-search-input"
+            minimumSearchLength={
+              typeof search === 'object'
+                ? search.minimumSearchLength
+                : undefined
+            }
+            searchKeys={
+              typeof search === 'object' ? search.searchKeys : undefined
+            }
+            debounceTime={
+              typeof search === 'object' ? search.debounceTime : undefined
+            }
+            highlightResults={
+              typeof search === 'object' ? search.highlightResults : undefined
+            }
+            navigateResults={
+              typeof search === 'object' ? search.navigateResults : undefined
+            }
+          />
+        </SearchBoxContainer>
+      )}
     </Toolbar>
   );
 };

@@ -26,6 +26,11 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
   onActivateItem,
   items,
   dataTestId = 'timeline-search-input',
+  minimumSearchLength = 2,
+  searchKeys,
+  debounceTime = 300,
+  highlightResults = true,
+  navigateResults = true,
 }) => {
   const { setSearchTerm } = useSearch();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -42,6 +47,11 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
     items,
     onActivateItem,
     inputRef,
+    minimumSearchLength,
+    searchKeys,
+    debounceTime,
+    highlightResults,
+    navigateResults,
   });
 
   // Clean up the search term when component unmounts
@@ -81,10 +91,10 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
         </SearchNavButton>
       )}
 
-      {/* Search results count and navigation - show only when there are matches */}
-      {searchMatches.length > 0 && (
+      {/* Search results count and navigation - show only when there are matches and navigation is enabled */}
+      {searchMatches.length > 0 && navigateResults && (
         <>
-          <SearchResultsLabel theme={theme}>
+          <SearchResultsLabel theme={theme} data-testid="search-results-label">
             <span>{currentMatchIndex + 1}</span>
             <span className="separator">of</span>
             <span>{searchMatches.length}</span>
