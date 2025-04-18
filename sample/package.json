@@ -1,0 +1,29 @@
+{
+  "name": "react-chrono-sample",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample app to test react-chrono",
+  "scripts": {
+    "start": "vite --host",
+    "build": "vite build",
+    "serve": "vite preview",
+    "dev": "cd .. && pnpm rollup && cd sample && pnpm start"
+  },
+  "dependencies": {
+    "classnames": "^2.5.1",
+    "dayjs": "^1.11.13",
+    "focus-visible": "^5.2.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "styled-components": "^6.1.17",
+    "xss": "^1.0.15"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@types/testing-library__jest-dom": "^6.0.0",
+    "@vitejs/plugin-react": "^4.4.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.1"
+  }
+}
