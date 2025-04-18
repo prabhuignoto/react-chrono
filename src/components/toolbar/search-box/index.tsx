@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Theme } from '@models/Theme';
 import {
   SearchBoxWrapper,
@@ -28,6 +28,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
   dataTestId = 'timeline-search-input',
 }) => {
   const { setSearchTerm } = useSearch();
+  const inputRef = useRef<HTMLInputElement>(null);
   const {
     searchText,
     searchMatches,
@@ -36,7 +37,12 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
     handleClearSearch,
     handleNextMatch,
     handlePrevMatch,
-  } = useSearchBox({ items, onActivateItem });
+    handleKeyDown,
+  } = useSearchBox({
+    items,
+    onActivateItem,
+    inputRef,
+  });
 
   // Clean up the search term when component unmounts
   useEffect(() => {
@@ -52,9 +58,11 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
         <SearchIconComponent />
       </SearchIcon>
       <SearchInput
+        ref={inputRef}
         type="text"
         value={searchText}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         placeholder={placeholder}
         aria-label={ariaLabel}
         theme={theme}

@@ -58,6 +58,27 @@ export const Shape = styled.div<ShapeModel>`
   width: ${(p) => p.dimension}px;
   transform: ${(p) =>
     p.$timelinePointShape === 'diamond' ? 'rotate(45deg)' : ''};
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+
+  &:hover {
+    transform: ${(p) =>
+      p.$timelinePointShape === 'diamond'
+        ? 'rotate(45deg) scale(1.05)'
+        : 'scale(1.05)'};
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow:
+      0 0 0 3px rgba(0, 123, 255, 0.25),
+      0 2px 5px rgba(0, 0, 0, 0.1);
+  }
 
   &.active {
     &.using-icon {
@@ -66,6 +87,14 @@ export const Shape = styled.div<ShapeModel>`
     &:not(.using-icon) {
       transform: ${(p) =>
         p.$timelinePointShape === 'diamond' ? 'rotate(45deg)' : ''};
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    &:hover {
+      transform: ${(p) =>
+        p.$timelinePointShape === 'diamond'
+          ? 'rotate(45deg) scale(1.05)'
+          : 'scale(1.05)'};
     }
 
     &::after {
@@ -104,6 +133,11 @@ export const Shape = styled.div<ShapeModel>`
     img {
       max-width: 90%;
       max-height: 90%;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.1);
     }
   }
 `;

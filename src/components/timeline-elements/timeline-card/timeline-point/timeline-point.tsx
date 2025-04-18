@@ -30,9 +30,17 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
         ref={circleRef}
         data-testid="timeline-circle"
         theme={theme}
-        aria-label={title}
+        aria-label={title || 'Timeline point'}
         dimension={timelinePointDimension}
         $timelinePointShape={timelinePointShape}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleClick();
+          }
+        }}
       >
         {iconChild ? iconChild : null}
       </Shape>

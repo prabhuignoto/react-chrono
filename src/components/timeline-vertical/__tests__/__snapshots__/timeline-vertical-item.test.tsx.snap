@@ -79,7 +79,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
         data-testid="tree-leaf-click"
       >
         <div
-          class="sc-brzPDJ jTkOgj"
+          class="sc-brzPDJ jLQEXp"
           dimension="16"
         />
       </button>

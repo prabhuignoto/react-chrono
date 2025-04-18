@@ -14,7 +14,7 @@ exports[`Timeline point > Should match snapshot 1`] = `
       data-testid="tree-leaf-click"
     >
       <div
-        class="sc-fWnslK eaHEej"
+        class="sc-fWnslK khWrlp"
         dimension="20"
       />
     </button>
