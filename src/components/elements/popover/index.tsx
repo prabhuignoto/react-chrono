@@ -20,7 +20,7 @@ import {
   SelecterLabel,
 } from './popover.styles';
 
-// Memoized Content component
+// Memoized Content component with improved padding
 const MemoizedContent = memo(({ children }: { children: React.ReactNode }) => (
   <Content>{children}</Content>
 ));
@@ -74,20 +74,29 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     dispatch({ type: 'CLOSE' });
   }, []);
 
-  const handleKeyPress = useCallback((ev: React.KeyboardEvent) => {
-    if (ev.key === 'Enter') {
-      dispatch({ type: 'TOGGLE' });
-    }
-  }, []);
+  const handleKeyPress = useCallback(
+    (ev: React.KeyboardEvent) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        dispatch({ type: 'TOGGLE' });
+      }
+      if (ev.key === 'Escape' && state.open) {
+        dispatch({ type: 'CLOSE' });
+      }
+    },
+    [state.open],
+  );
 
   useCloseClickOutside(ref, closePopover);
 
   // Use CSS transition instead of setTimeout
   useEffect(() => {
     if (state.open) {
-      requestAnimationFrame(() => {
+      // Small delay to ensure smooth animation
+      const timer = setTimeout(() => {
         dispatch({ type: 'SET_VISIBLE', payload: true });
-      });
+      }, 10);
+      return () => clearTimeout(timer);
     } else {
       dispatch({ type: 'SET_VISIBLE', payload: false });
     }
@@ -103,9 +112,11 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           $open={state.open}
           $isDarkMode={isDarkMode}
           tabIndex={0}
-          onKeyUp={handleKeyPress}
+          onKeyDown={handleKeyPress}
           $isMobile={$isMobile}
           title={placeholder}
+          aria-expanded={state.open}
+          aria-haspopup="true"
         >
           <SelecterIcon $theme={theme} $open={state.open}>
             {icon || <ChevronDown />}
@@ -122,9 +133,16 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           $theme={theme}
           $isMobile={$isMobile}
           $visible={state.isVisible}
+          role="dialog"
+          aria-modal="true"
         >
           <Header>
-            <CloseButton theme={theme} onClick={closePopover}>
+            <CloseButton
+              theme={theme}
+              onClick={closePopover}
+              aria-label="Close"
+              title="Close"
+            >
               <CloseIcon />
             </CloseButton>
           </Header>

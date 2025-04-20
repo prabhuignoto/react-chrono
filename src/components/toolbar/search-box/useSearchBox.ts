@@ -78,12 +78,12 @@ export const useSearchBox = ({
       if (validMatches.length > 0) {
         onActivateItem(validMatches[0]);
 
-        // Restore focus to input after activation
+        // Restore focus to input after activation with a slightly longer delay
         setTimeout(() => {
           if (inputRef?.current) {
             inputRef.current.focus();
           }
-        }, 0);
+        }, 50);
       }
     },
     [
@@ -209,10 +209,12 @@ export const useSearchBox = ({
       onActivateItem(items[0].id);
     }
 
-    // Maintain focus on the search input
-    if (inputRef?.current) {
-      inputRef.current.focus();
-    }
+    // Maintain focus on the search input with a small delay to ensure it works reliably
+    setTimeout(() => {
+      if (inputRef?.current) {
+        inputRef.current.focus();
+      }
+    }, 10);
   }, [items, onActivateItem, setSearchTerm, inputRef]);
 
   return {

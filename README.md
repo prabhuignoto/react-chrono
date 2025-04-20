@@ -263,13 +263,17 @@ To disable keyboard navigation set `disableNavOnKey` to true.
 
 ### 🔍Search Functionality
 
-The timeline includes a built-in search feature that allows you to search through timeline items. The search functionality:
+The timeline includes a powerful built-in search feature that allows you to search through timeline items. The search functionality:
 
 - Searches across titles, subtitles, and detailed text
 - Is case-insensitive
 - Supports partial matches
 - Highlights matching text in the results
 - Provides navigation between search results
+- Configurable minimum search length
+- Customizable search keys
+- Debounced search for performance
+- Customizable placeholder text and aria labels
 
 The search input is automatically included in the toolbar. Here's a simple example:
 
@@ -277,13 +281,33 @@ The search input is automatically included in the toolbar. Here's a simple examp
 <Chrono items={items} mode="VERTICAL" />
 ```
 
+You can customize the search behavior by passing a search configuration object:
+
+```jsx
+<Chrono
+  items={items}
+  search={{
+    enabled: true,
+    placeholder: 'Search timeline...',
+    ariaLabel: 'Search timeline items',
+    minimumSearchLength: 2,
+    searchKeys: ['title', 'cardTitle', 'cardSubtitle', 'cardDetailedText'],
+    debounceTime: 300,
+    highlightResults: true,
+    navigateResults: true,
+  }}
+/>
+```
+
 When you type in the search box, the timeline will:
 
 1. Filter and highlight matching items
 2. Automatically scroll to the first match
 3. Allow navigation between matches using the toolbar buttons
+4. Show a results counter
+5. Clear results when the search is empty
 
-The search is performed in real-time as you type, with a small debounce to optimize performance.
+The search is performed in real-time as you type, with a configurable debounce to optimize performance.
 
 ### Scrollable
 
