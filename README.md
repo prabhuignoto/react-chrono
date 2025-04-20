@@ -4,6 +4,7 @@
   <br/>
   <br/>
 
+
 [![Build Status](https://dev.azure.com/prabhummurthy/react-chrono/_apis/build/status/prabhuignoto.react-chrono?branchName=master)](https://dev.azure.com/prabhummurthy/react-chrono/_build/latest?definitionId=7&branchName=master)
 [![DeepScan grade](https://deepscan.io/api/teams/10074/projects/13644/branches/234929/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10074&pid=13644&bid=234929)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/f2e24a98defd4e4fa7f6f24d86b8dab5)](https://www.codacy.com/manual/prabhuignoto/react-chrono?utm_source=github.com&utm_medium=referral&utm_content=prabhuignoto/react-chrono&utm_campaign=Badge_Grade)
@@ -23,6 +24,10 @@
   </div>
 
 </div>
+
+<h1>Demo</h1>
+<a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=Chrono&libCreator=prabhuignoto">Full Demo - Try in your code editor</a>
+
 
 <!-- **Try it on CodeSandbox!**
 
@@ -88,6 +93,7 @@ npm install react-chrono
 
 ## Getting Started
 
+<a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=Chrono&libCreator=prabhuignoto"> Demo - try it in your editor</a>
 Please ensure you wrap the component in a container with specified `width` and `height` dimensions.
 
 When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please check [props](#props) for all the available options.
@@ -119,9 +125,8 @@ When no `mode` is specified, the component defaults to `HORIZONTAL` mode. Please
   }
 ```
 
-![horizontal-all](readme-assets/horizontal-all.png)
-
 ### 🚥Vertical Mode
+<a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoVertical&libCreator=prabhuignoto">Demo - vertical</a>
 
 To render the timeline vertically use the `VERTICAL` mode
 
@@ -135,6 +140,7 @@ To render the timeline vertically use the `VERTICAL` mode
 
 ### 🚥Vertical Alternating
 
+<a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoVerticalAlternating&libCreator=prabhuignoto">Demo - vertical alternating</a><br/>
 In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards alternating between left and right side.
 
 ```jsx
@@ -143,64 +149,62 @@ In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards al
 </div>
 ```
 
-![vertical_alternating](./readme-assets/vertical-alternating.png)
-
 ## Props
 
 Below are the available configuration options for the component:
 
 | Name                     | Default              | Description                                                                                                                              |
 | :----------------------- | :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
-| activeItemIndex          | 0                    | Selects the active timeline item when loading.                                                                                           |
-| allowDynamicUpdate       | false                | Enables or disables dynamic updates of timeline items.                                                                                   |
-| borderLessCards          | false                | Removes borders and shadows from the timeline cards.                                                                                     |
+| activeItemIndex <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoActiveItemIndex&libCreator=prabhuignoto">Demo</a>         | 0                    | Selects the active timeline item when loading.                                                                                           |
+| allowDynamicUpdate <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>      | false                | Enables or disables dynamic updates of timeline items.                                                                                   |
+| borderLessCards <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>         | false                | Removes borders and shadows from the timeline cards.                                                                                     |
 | buttonTexts              |                      | Customizes the alternative text for all buttons.                                                                                         |
-| cardHeight               | 200                  | Defines the minimum height of timeline cards.                                                                                            |
-| cardLess                 | false                | Disables timeline cards in both horizontal and vertical layouts.                                                                         |
+| cardHeight <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoNumbers&libCreator=prabhuignoto">Demo</a>              | 200                  | Defines the minimum height of timeline cards.                                                                                            |
+| cardLess <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>                | false                | Disables timeline cards in both horizontal and vertical layouts.                                                                         |
 | cardPositionHorizontal   |                      | Positions the card in horizontal mode. Options: `TOP` or `BOTTOM`.                                                                       |
 | cardWidth                |                      | Sets the maximum width of timeline cards.                                                                                                |
 | classNames               |                      | Applies custom class names to different card elements.                                                                                   |
-| contentDetailsHeight     | 150                  | Controls the height of the details section if using cardDetailedText. Refer to [TimelineItem model](#timeline-item-model) for more info. |
-| disableAutoScrollOnClick | false                | Prevents auto-scrolling when a timeline card is clicked.                                                                                 |
-| disableClickOnCircle     | false                | Disables the click action on circular points.                                                                                            |
-| disableInteraction       | false                | Disables all the interactions with the Timeline.                                                                                         |
-| disableNavOnKey          | false                | Turns off keyboard navigation.                                                                                                           |
-| disableTimelinePoint     | false                | Disables the timeline point in both `HORIZONTAL` and `VERTICAL` mode.                                                                    |
+| contentDetailsHeight <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoNumbers&libCreator=prabhuignoto">Demo</a>     | 150                  | Controls the height of the details section if using cardDetailedText. Refer to [TimelineItem model](#timeline-item-model) for more info. |
+| disableAutoScrollOnClick <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a> | false                | Prevents auto-scrolling when a timeline card is clicked.                                                                                 |
+| disableClickOnCircle <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>     | false                | Disables the click action on circular points.                                                                                            |
+| disableInteraction <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>      | false                | Disables all the interactions with the Timeline.                                                                                         |
+| disableNavOnKey <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>         | false                | Turns off keyboard navigation.                                                                                                           |
+| disableTimelinePoint <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>    | false                | Disables the timeline point in both `HORIZONTAL` and `VERTICAL` mode.                                                                    |
 | enableBreakPoint         | true                 | Automatically switches to vertical mode when the vertical breakpoint is reached.                                                         |
-| enableDarkToggle         | false                | Adds a toggle switch for dark mode.                                                                                                      |
-| enableLayoutSwitch       | true                 | Switches the timeline layout                                                                                                             |
-| enableQuickJump          | true                 | Allows to quickly jump to a timeline item                                                                                                |
-| flipLayout               | false                | Reverses the layout (Right to Left).                                                                                                     |
-| focusActiveItemOnLoad    | false                | Automatically scrolls to and focuses on the `activeItemIndex` when loading.                                                              |
+| enableDarkToggle <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>        | false                | Adds a toggle switch for dark mode.                                                                                                      |
+| enableLayoutSwitch <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>      | true                 | Switches the timeline layout                                                                                                             |
+| enableQuickJump <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>         | true                 | Allows to quickly jump to a timeline item                                                                                                |
+| flipLayout <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>              | false                | Reverses the layout (Right to Left).                                                                                                     |
+| focusActiveItemOnLoad <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>   | false                | Automatically scrolls to and focuses on the `activeItemIndex` when loading.                                                              |
 | fontSizes                |                      | Allows customization of font sizes.                                                                                                      |
-| highlightCardsOnHover    | false                | Highlights the card on hover                                                                                                             |
+| highlightCardsOnHover <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>   | false                | Highlights the card on hover                                                                                                             |
 | items                    | []                   | A collection of Timeline Item Models.                                                                                                    |
-| itemWidth                | 300                  | Sets the width of the timeline section in horizontal mode.                                                                               |
-| lineWidth                | 3px                  | Adjusts the width of the timeline track line.                                                                                            |
-| mediaHeight              | 200                  | Sets the minimum height for media elements like images or videos in the card.                                                            |
+| itemWidth <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoNumbers&libCreator=prabhuignoto">Demo</a>                | 300                  | Sets the width of the timeline section in horizontal mode.                                                                               |
+| lineWidth <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoNumbers&libCreator=prabhuignoto">Demo</a>                | 3px                  | Adjusts the width of the timeline track line.                                                                                            |
+| mediaHeight <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoNumbers&libCreator=prabhuignoto">Demo</a>              | 200                  | Sets the minimum height for media elements like images or videos in the card.                                                            |
 | mediaSettings            |                      | Configures settings specific to media layout. Refer to [mediaSettings](#media-settings) for more info.                                   |
 | mode                     | VERTICAL_ALTERNATING | Sets the component mode. Options: `HORIZONTAL`, `VERTICAL`, `VERTICAL_ALTERNATING`.                                                      |
-| nestedCardHeight         | 150                  | Defines the height of nested timeline cards.                                                                                             |
-| noUniqueId               | false                | Prevents generating a unique id for the table wrapper.                                                                                   |
+| nestedCardHeight <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoNumbers&libCreator=prabhuignoto">Demo</a>         | 150                  | Defines the height of nested timeline cards.                                                                                             |
+| noUniqueId <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>              | false                | Prevents generating a unique id for the table wrapper.                                                                                   |
 | onItemSelected           |                      | Invokes a callback on item selection, passing relevant data.                                                                             |
 | onScrollEnd              |                      | Detects the end of the timeline via `onScrollEnd`.                                                                                       |
 | onThemeChange            |                      | Invokes a callback when the theme changes, triggered via `enableDarkToggle`.                                                             |
-| parseDetailsAsHTML       | false                | Parses the `cardDetailedText` as HTML.                                                                                                   |
-| responsiveBreakPoint     | 1024                 | Break point at which the timeline changes to `VERTICAL` mode when `VERTICAL_ALTERNATING` is the default mode                             |
-| scrollable               | true                 | Makes the timeline scrollable in `VERTICAL` and `VERTICAL_ALTERNATING` modes.                                                            |
-| showAllCardsHorizontal   | false                | Displays all cards in horizontal mode. By default, only the active card is shown.                                                        |
-| slideItemDuration        | 5000                 | Sets the duration (in milliseconds) that a timeline card is active during a slideshow.                                                   |
-| slideShow                | false                | Enables slideshow control.                                                                                                               |
+| parseDetailsAsHTML <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>      | false                | Parses the `cardDetailedText` as HTML.                                                                                                   |
+| responsiveBreakPoint <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoNumbers&libCreator=prabhuignoto">Demo</a>     | 1024                 | Break point at which the timeline changes to `VERTICAL` mode when `VERTICAL_ALTERNATING` is the default mode                             |
+| scrollable <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>              | true                 | Makes the timeline scrollable in `VERTICAL` and `VERTICAL_ALTERNATING` modes.                                                            |
+| showAllCardsHorizontal <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>  | false                | Displays all cards in horizontal mode. By default, only the active card is shown.                                                        |
+| slideItemDuration <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoNumbers&libCreator=prabhuignoto">Demo</a>        | 5000                 | Sets the duration (in milliseconds) that a timeline card is active during a slideshow.                                                   |
+| slideShow <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>               | false                | Enables slideshow control.                                                                                                               |
 | textDensity              | HIGH                 | Configures the amount of text to be displayed in each timeline card. Can be either `HIGH` or `LOW`                                       |
-| textOverlay              | false                | Displays text as an overlay on media elements. Refer to [Text Overlay](#text-overlay-mode) for more info.                                |
+| textOverlay <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoVerticalAlternating&libCreator=prabhuignoto">demo<a>         | false                | Displays text as an overlay on media elements. Refer to [Text Overlay](#text-overlay-mode) for more info.                                |
 | theme                    |                      | Customizes colors. Refer to [Theme](#theme) for more info.                                                                               |
 | timelinePointDimension   |                      | Defines the dimensions of circular points on the timeline.                                                                               |
 | timelinePointShape       | circle               | Configures the shape of timeline points. Options: circle, square, diamond.                                                               |
 | titleDateFormat          | 'MMM DD, YYYY'       | Formats the date for each timeline item. Supports all [dayjs](https://day.js.org/) formats.                                              |
 | toolbarPosition          | TOP                  | Configures the position of the toolbar. Can be `TOP` or `BOTTOM`                                                                         |
 | uniqueId                 |                      | Used with `noUniqueId` to set a custom unique id for the wrapper.                                                                        |
-| useReadMore              | true                 | Enables or disables the "read more" button. Available if text content on the card is taller than the card itself.                        |
-| disableToolbar           | false                | Hides the toolbar / control panel                                                                                                        |
+| useReadMore <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>             | true                 | Enables or disables the "read more" button. Available if text content on the card is taller than the card itself.                        |
+| disableToolbar <a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoBooleans&libCreator=prabhuignoto">Demo</a>          | false                | Hides the toolbar / control panel                                                                                                        |
 
 ### Mode
 
@@ -219,6 +223,8 @@ Below are the available configuration options for the component:
 ```
 
 ### Timeline item Model
+
+<a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoCard&libCreator=prabhuignoto">Demo - card props</a>
 
 | name               | description                                                                                   | type               |
 | ------------------ | --------------------------------------------------------------------------------------------- | ------------------ |
@@ -262,6 +268,7 @@ To disable keyboard navigation set `disableNavOnKey` to true.
 
 ### Scrollable
 
+<a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoScrollable&libCreator=prabhuignoto">Demo - Scrollable</a>
 With the scrollable prop, you can enable scrolling on both `VERTICAL` and `VERTICAL_ALTERNATING` modes.
 
 ```jsx
@@ -341,6 +348,8 @@ To embed YouTube videos, use the right embed url.
 ![media](./readme-assets/media.png)
 
 ### Text overlay mode
+
+<a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoVerticalAlternating&libCreator=prabhuignoto">Demo<a>
 
 The `textOverlay` prop allows you to overlay text on top of a media element in a card.To enable the text overlay feature, simply add the text property to the items array in your Chrono timeline data. Here's an example:
 
@@ -531,6 +540,7 @@ Customize colors with the `theme` prop.
 
 ### Customize Font sizes
 
+<a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoFonts&libCreator=prabhuignoto">Demo - try different font sizes</a><br/>
 Use the `fontSizes` prop to customize the font sizes of the timeline card.
 
 ```jsx
@@ -665,7 +675,7 @@ pnpm rollup
 
 - [Typescript](https://www.typescriptlang.org/).
 - Styled with [emotion](https://emotion.sh/).
-
+- <a href="http://www.jinno.app/redirect?from=chenqingspring&redirect=vs&libName=react-lottie&componentName=ToggleLikeControl&libCreator=tanstack&userId=abc123">Jinno</a>
 ## Meta
 
 Huge thanks to [BrowserStack](https://www.browserstack.com/) for the Open Source License!
