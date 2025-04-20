@@ -140,7 +140,7 @@ To render the timeline vertically use the `VERTICAL` mode
 
 ### 🚥Vertical Alternating
 
-<a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoVerticalAlternating&libCreator=prabhuignoto">Demo - vertical alternating</a>
+<a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoVerticalAlternating&libCreator=prabhuignoto">Demo - vertical alternating</a><br/>
 In `VERTICAL_ALTERNATING` mode the timeline is rendered vertically with cards alternating between left and right side.
 
 ```jsx
@@ -540,7 +540,7 @@ Customize colors with the `theme` prop.
 
 ### Customize Font sizes
 
-<a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoFonts&libCreator=prabhuignoto">Demo - try different font sizes</a>
+<a href="https://www.jinno.app/redirect?from=prabhuignoto&redirect=libary&libName=react-chrono&componentName=ChronoFonts&libCreator=prabhuignoto">Demo - try different font sizes</a><br/>
 Use the `fontSizes` prop to customize the font sizes of the timeline card.
 
 ```jsx
