@@ -14,7 +14,7 @@ context('Chrono.Vertical.Alternating.Mixed', () => {
   });
 
   it('check timeline title for first item', () => {
-    cy.get('.vertical-item-row>div').eq(1).last().should('contain', 'May 1940');
+    cy.get('.vertical-item-row>div').eq(0).last().should('contain', 'May 1940');
   });
 
   it('check timeline card contents', () => {
