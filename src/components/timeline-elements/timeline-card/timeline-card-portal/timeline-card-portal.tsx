@@ -18,7 +18,7 @@ interface TimelineCardPortalProps {
   cardDetailedText?: string | string[];
   slideShowRunning?: boolean;
   media?: any;
-  onElapsed?: (id: string) => void;
+  onElapsed?: (id?: string) => void;
   customContent?: React.ReactNode;
   hasFocus?: boolean;
   onClick?: (id: string) => void;

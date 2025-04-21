@@ -22,7 +22,7 @@ const commonProps: VerticalItemModel = {
   contentDetailsChildren: null,
   hasFocus: false,
   iconChild: null,
-  id: '',
+  id: 'test-vertical-item',
   index: 1,
   media: {
     source: {
@@ -44,7 +44,10 @@ const commonProps: VerticalItemModel = {
 describe('Timeline vertical item', () => {
   it('Should match snapshot', () => {
     const { container } = customRender(
-      <TimelineVerticalItem {...commonProps} />,
+      <TimelineVerticalItem
+        {...commonProps}
+        data-testid="vertical-item-test-1"
+      />,
       { providerProps },
     );
 
@@ -54,11 +57,20 @@ describe('Timeline vertical item', () => {
   //should render the title
 
   it('Should render the title', () => {
-    const { getByText } = customRender(
-      <TimelineVerticalItem {...commonProps} />,
+    const { container } = customRender(
+      <TimelineVerticalItem
+        {...commonProps}
+        id="unique-test-id"
+        data-testid="vertical-item-test-2"
+      />,
       { providerProps },
     );
 
-    expect(getByText('vertical item title')).toBeInTheDocument();
+    // Find the title element by a more specific approach
+    const titleElement = container.querySelector(
+      '[data-testid="vertical-item-test-2"] .timeline-item-title',
+    );
+    expect(titleElement).toBeInTheDocument();
+    expect(titleElement).toHaveTextContent('vertical item title');
   });
 });

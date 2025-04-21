@@ -27,7 +27,7 @@ const SubTitleMemo = React.memo<Content>(
           <TextHighlighter
             text={content as string}
             searchTerm={searchTerm}
-            theme={theme}
+            theme={theme!}
           />
         ) : (
           content

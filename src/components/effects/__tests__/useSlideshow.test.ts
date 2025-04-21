@@ -6,7 +6,7 @@ import { useSlideshow } from '../useSlideshow';
 const slideItemDuration = 5000;
 const onElapsed = vi.fn();
 
-let container = null;
+let container: HTMLElement | null = null;
 
 beforeEach(() => {
   container = document.createElement('div');
@@ -14,7 +14,9 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  document.body.removeChild(container);
+  if (container) {
+    document.body.removeChild(container);
+  }
   vi.clearAllMocks();
 });
 
@@ -22,7 +24,7 @@ describe('useSlideshow', () => {
   it('should initialize properly', () => {
     const { result } = renderHook(() =>
       useSlideshow(
-        { current: container },
+        { current: container as HTMLElement },
         true,
         true,
         slideItemDuration,
@@ -39,13 +41,13 @@ describe('useSlideshow', () => {
   it('should set up timer correctly', async () => {
     const { result } = renderHook(() =>
       useSlideshow(
-        { current: container },
+        { current: container as HTMLElement },
         true,
         true,
         slideItemDuration,
         '1',
-        onElapsed,
-      ),
+          onElapsed,
+        ),
     );
 
     expect(result.current.tryPause).toBeDefined();
@@ -59,7 +61,7 @@ describe('useSlideshow', () => {
   it('should pause slideshow', () => {
     const { result } = renderHook(() =>
       useSlideshow(
-        { current: container },
+        { current: container as HTMLElement },
         true,
         true,
         slideItemDuration,

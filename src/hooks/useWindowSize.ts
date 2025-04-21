@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 interface WindowSize {
   width: number;
@@ -13,17 +13,19 @@ interface UseWindowSizeOptions {
  * Hook that returns the current window dimensions
  * Useful for responsive calculations and virtualization
  */
-export const useWindowSize = (options: UseWindowSizeOptions = {}): WindowSize => {
+export const useWindowSize = (
+  options: UseWindowSizeOptions = {},
+): WindowSize => {
   const { debounceMs = 100 } = options;
   const [windowSize, setWindowSize] = useState<WindowSize>({
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
     height: typeof window !== 'undefined' ? window.innerHeight : 0,
   });
 
-  const handleResize = useCallback(() => {
-    let timeoutId: number | null = null;
-    let frameId: number | null = null;
+  const timeoutRef = useRef<number | null>(null);
+  const frameRef = useRef<number | null>(null);
 
+  const handleResize = useCallback(() => {
     const updateSize = () => {
       setWindowSize({
         width: window.innerWidth,
@@ -32,28 +34,19 @@ export const useWindowSize = (options: UseWindowSizeOptions = {}): WindowSize =>
     };
 
     const debouncedUpdate = () => {
-      if (timeoutId) {
-        window.clearTimeout(timeoutId);
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
       }
-      if (frameId) {
-        window.cancelAnimationFrame(frameId);
+      if (frameRef.current) {
+        window.cancelAnimationFrame(frameRef.current);
       }
 
-      timeoutId = window.setTimeout(() => {
-        frameId = window.requestAnimationFrame(updateSize);
+      timeoutRef.current = window.setTimeout(() => {
+        frameRef.current = window.requestAnimationFrame(updateSize);
       }, debounceMs);
     };
 
     debouncedUpdate();
-
-    return () => {
-      if (timeoutId) {
-        window.clearTimeout(timeoutId);
-      }
-      if (frameId) {
-        window.cancelAnimationFrame(frameId);
-      }
-    };
   }, [debounceMs]);
 
   useEffect(() => {
@@ -62,6 +55,12 @@ export const useWindowSize = (options: UseWindowSizeOptions = {}): WindowSize =>
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+      }
+      if (frameRef.current) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
     };
   }, [handleResize]);
 

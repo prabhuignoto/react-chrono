@@ -1,5 +1,5 @@
 // Import necessary dependencies
-import { FunctionComponent, useContext, useMemo, useCallback } from 'react';
+import { FunctionComponent, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import Controls from '../timeline-elements/timeline-control/timeline-control';
 import { Toolbar } from '../toolbar';
@@ -15,19 +15,20 @@ import {
   ExtraControls,
   SearchBoxContainer,
 } from './timeline.style';
+import { TextDensity } from '@models/TimelineModel';
 
 // Define the TimelineToolbar component
 const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
-  activeTimelineItem,
-  slideShowEnabled,
-  slideShowRunning,
+  activeTimelineItem = 0,
+  slideShowEnabled = false,
+  slideShowRunning = false,
   flipLayout,
   toggleDarkMode,
-  onPaused,
-  onFirst,
-  onLast,
-  onNext,
-  onPrevious,
+  onPaused = () => {},
+  onFirst = () => {},
+  onLast = () => {},
+  onNext = () => {},
+  onPrevious = () => {},
   onRestartSlideshow,
   totalItems,
   items = [],
@@ -39,14 +40,14 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
 }: TimelineToolbarProps) => {
   // Access the global context
   const {
-    theme,
-    cardLess,
-    enableQuickJump,
-    darkMode,
-    toolbarPosition,
-    textDensity,
-    isMobile,
-    enableLayoutSwitch,
+    theme = {} as any,
+    cardLess = false,
+    enableQuickJump = false,
+    darkMode = false,
+    toolbarPosition = 'top',
+    textDensity = 'HIGH' as TextDensity,
+    isMobile = false,
+    enableLayoutSwitch = false,
     search,
   } = useContext(GlobalContext);
 
@@ -104,7 +105,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
 
   // Render the TimelineToolbar component
   return (
-    <Toolbar items={toolbarItems} theme={theme}>
+    <Toolbar items={toolbarItems} theme={theme as any}>
       <Controls
         disableLeft={disableLeft}
         disableRight={disableRight}
@@ -132,12 +133,12 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               isDarkMode={darkMode}
               items={items.map((item) => ({
                 ...item,
-                description: item.cardSubtitle,
-                id: item.id,
-                title: item.title,
+                description: item.cardSubtitle || '',
+                id: item.id || '',
+                title: item.title || '',
               }))}
               onActivateItem={onActivateTimelineItem}
-              theme={theme}
+              theme={theme as any}
               position={toolbarPosition}
               isMobile={isMobile}
             />
@@ -147,8 +148,10 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           {!cardLess && enableLayoutSwitch ? (
             <LayoutSwitcher
               isDarkMode={darkMode}
-              theme={theme}
-              onUpdateTimelineMode={onUpdateTimelineMode}
+              theme={theme as any}
+              onUpdateTimelineMode={(s: string) =>
+                onUpdateTimelineMode?.(s as any)
+              }
               mode={mode}
               position={toolbarPosition}
               isMobile={isMobile}
@@ -159,7 +162,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           <ExtraControlChild key="change-density">
             <ChangeDensity
               isDarkMode={darkMode}
-              theme={theme}
+              theme={theme as any}
               onChange={onUpdateTextContentDensity}
               position={toolbarPosition}
               selectedDensity={textDensity}

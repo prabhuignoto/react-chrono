@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { fireEvent } from '@testing-library/react';
 import { getDefaultThemeOrDark } from '@utils/index';
 import { customRender, providerProps } from 'src/components/common/test';
-import { vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { ListItem } from '../list-item';
 
 describe('ListItem', () => {
@@ -16,7 +16,11 @@ describe('ListItem', () => {
 
   it('renders the component with correct title and description', () => {
     const { getByText } = customRender(
-      <ListItem {...defaultProps} theme={theme} />,
+      <ListItem
+        {...defaultProps}
+        theme={theme}
+        data-testid="list-item-test-1"
+      />,
       {
         providerProps: {
           ...providerProps,
@@ -29,12 +33,13 @@ describe('ListItem', () => {
 
   it('calls onClick when the item is clicked', () => {
     const mockOnClick = vi.fn();
-    const { getByRole } = customRender(
+    const { getByTestId } = customRender(
       <ListItem
         {...defaultProps}
         onClick={mockOnClick}
         selectable
         theme={theme}
+        data-testid="list-item-test-2"
       />,
       {
         providerProps: {
@@ -42,43 +47,62 @@ describe('ListItem', () => {
         },
       },
     );
-    fireEvent.click(getByRole('listitem'));
+    fireEvent.click(getByTestId('list-item-test-2'));
     expect(mockOnClick).toHaveBeenCalledWith('test-id');
   });
 
   it('renders the checkbox when selectable is true', () => {
-    const { getByRole } = customRender(
-      <ListItem {...defaultProps} selectable theme={theme} />,
+    const { getByRole, getByTestId } = customRender(
+      <ListItem
+        {...defaultProps}
+        selectable
+        theme={theme}
+        data-testid="list-item-test-3"
+      />,
       {
         providerProps: {
           ...providerProps,
         },
       },
     );
-    expect(getByRole('checkbox')).toBeInTheDocument();
+    const listItem = getByTestId('list-item-test-3');
+    const checkbox = listItem.querySelector('[role="checkbox"]');
+    expect(checkbox).toBeInTheDocument();
   });
 
   it('does not render the checkbox when selectable is false', () => {
-    const { queryByRole } = customRender(
-      <ListItem {...defaultProps} selectable={false} theme={theme} />,
+    const { queryByRole, getByTestId } = customRender(
+      <ListItem
+        {...defaultProps}
+        selectable={false}
+        theme={theme}
+        data-testid="list-item-test-4"
+      />,
       {
         providerProps: {
           ...providerProps,
         },
       },
     );
-    expect(queryByRole('checkbox')).not.toBeInTheDocument();
+    const listItem = getByTestId('list-item-test-4');
+    const checkbox = listItem.querySelector('[role="checkbox"]');
+    expect(checkbox).not.toBeInTheDocument();
   });
 
   it('has the correct tab index when selectable is true', () => {
-    const { getByRole } = customRender(
-      <ListItem {...defaultProps} selectable theme={theme} />,
+    const { getByTestId } = customRender(
+      <ListItem
+        {...defaultProps}
+        selectable
+        theme={theme}
+        data-testid="list-item-test-5"
+      />,
       {
         providerProps: {
           ...providerProps,
         },
       },
     );
-    expect(getByRole('listitem')).toHaveAttribute('tabIndex', '0');
+    expect(getByTestId('list-item-test-5')).toHaveAttribute('tabIndex', '0');
   });
 });

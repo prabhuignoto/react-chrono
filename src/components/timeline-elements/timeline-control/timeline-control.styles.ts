@@ -46,6 +46,7 @@ export const TimelineNavButton = styled.button<{
     if (p.rotate === 'TRUE') {
       return `rotate(90deg)`;
     }
+    return 'none';
   }};
 
   &:active {

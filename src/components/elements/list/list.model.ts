@@ -5,6 +5,7 @@ export type ListModel = {
   items: ListItemModel[];
   multiSelectable?: boolean;
   onClick?: (id?: string) => void;
+  'data-testid'?: string;
 } & Pick<TimelineModel, 'theme'>;
 
 export type ListItemModel = {
@@ -16,4 +17,5 @@ export type ListItemModel = {
   selectable?: boolean;
   selected?: boolean;
   title: string;
+  'data-testid'?: string;
 } & Pick<TimelineModel, 'theme'>;

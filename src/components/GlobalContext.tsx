@@ -145,7 +145,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     parseDetailsAsHTML: false,
     scrollable: { scrollbar: false },
     search: true,
-    showProgressOnSlideshow: slideShow,
+    showProgressOnSlideshow: slideShow ?? false,
     slideItemDuration: 2000,
     slideShowType: getSlideShowType(mode) as SlideShowType,
     textOverlay: false,

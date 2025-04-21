@@ -16,7 +16,7 @@ describe('List', () => {
 
   it('should render the correct number of list items', () => {
     const { getAllByRole } = customRender(
-      <List items={items} theme={theme} />,
+      <List items={items} theme={theme} data-testid="list-test-1" />,
       {
         providerProps: {
           ...providerProps,
@@ -29,15 +29,29 @@ describe('List', () => {
 
   it('should call onClick when a list item is clicked', () => {
     const onClick = vi.fn();
-    const { getByText } = customRender(
-      <List items={items} onClick={onClick} theme={theme} />,
+    const { container } = customRender(
+      <List
+        items={items}
+        onClick={onClick}
+        theme={theme}
+        data-testid="list-test-2"
+      />,
       {
         providerProps: {
           ...providerProps,
         },
       },
     );
-    const listItem = getByText('Item 1');
+
+    // Find the list item by its title text
+    const firstItemTitle = container.querySelector('h1');
+    if (!firstItemTitle) throw new Error('Could not find list item title');
+
+    // Get the parent list item element
+    const listItem = firstItemTitle.closest('[data-testid^="list-item"]');
+    if (!listItem) throw new Error('Could not find list item element');
+
+    // Click the list item
     fireEvent.click(listItem);
     expect(onClick).toHaveBeenCalledTimes(1);
   });
@@ -48,8 +62,13 @@ describe('List', () => {
       ...item,
       onSelect: index === 0 ? onSelectItem : undefined,
     }));
-    const { getByText } = customRender(
-      <List items={itemsWithOnSelect} multiSelectable theme={theme} />,
+    const { container } = customRender(
+      <List
+        items={itemsWithOnSelect}
+        multiSelectable
+        theme={theme}
+        data-testid="list-test-3"
+      />,
       {
         providerProps: {
           ...providerProps,
@@ -57,7 +76,15 @@ describe('List', () => {
       },
     );
 
-    const listItem = getByText('Item 1');
+    // Find the list item by its title text
+    const firstItemTitle = container.querySelector('h1');
+    if (!firstItemTitle) throw new Error('Could not find list item title');
+
+    // Get the parent list item element
+    const listItem = firstItemTitle.closest('[data-testid^="list-item"]');
+    if (!listItem) throw new Error('Could not find list item element');
+
+    // Click the list item
     fireEvent.click(listItem);
     expect(onSelectItem).toHaveBeenCalledTimes(1);
   });

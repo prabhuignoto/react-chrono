@@ -2,10 +2,12 @@
 
 exports[`Timeline item title > should match the snapshot 1`] = `
 <div>
-  <div
-    class="sc-fYsHOw cElLwL timeline-item-title"
-  >
-    title
+  <div>
+    <div
+      class="sc-hZARmv GmAHx timeline-item-title"
+    >
+      title
+    </div>
   </div>
 </div>
 `;

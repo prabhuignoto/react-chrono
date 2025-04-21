@@ -29,6 +29,14 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({
 /**
  * Custom hook to use the search context
  */
-export const useSearch = () => useContext(SearchContext);
+export const useSearch = (): SearchContextType => {
+  const context = useContext(SearchContext);
+
+  if (context === undefined) {
+    throw new Error('useSearch must be used within a SearchProvider');
+  }
+
+  return context;
+};
 
 export default SearchContext;

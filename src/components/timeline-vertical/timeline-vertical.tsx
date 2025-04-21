@@ -28,12 +28,9 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = ({
   hasFocus, // Does the timeline component itself have focus? (Passed down)
   iconChildren, // Optional custom icon(s) for the timeline points
   items, // Array of timeline item data objects
-  mode, // Timeline mode (e.g., VERTICAL, VERTICAL_ALTERNATING) - Used by children via context?
   onClick, // Global click handler for items (passed down)
   onElapsed, // Global handler for media elapsed events (passed down)
-  onOutlineSelection, // Handler for outline selection (potentially unused here, passed down?)
   slideShowRunning, // Is a slideshow active? (Passed down)
-  theme, // Theme object (Used by children via context or styled-components)
   cardLess, // Render without cards? (Passed down)
   nestedCardHeight, // Specific height for nested cards (Passed down)
 }: TimelineVerticalModel): JSX.Element => {

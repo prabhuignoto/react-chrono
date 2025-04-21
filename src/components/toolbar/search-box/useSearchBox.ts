@@ -6,7 +6,7 @@ import { useSearch } from 'src/components/common/SearchContext';
 export interface UseSearchBoxProps {
   items: TimelineItemModel[];
   onActivateItem: (id: string) => void;
-  inputRef?: RefObject<HTMLInputElement>;
+  inputRef?: RefObject<HTMLInputElement | null>;
   minimumSearchLength?: number;
   searchKeys?: ('title' | 'cardTitle' | 'cardSubtitle' | 'cardDetailedText')[];
   debounceTime?: number;

@@ -7,10 +7,13 @@ import TimelineItemTitle from '../timeline-card-title';
 describe('Timeline item title', () => {
   //should render the title
   it('should render the title', () => {
-    const { getByText } = customRender(<TimelineItemTitle title="title" />, {
-      providerProps,
-    });
-    expect(getByText('title')).toBeInTheDocument();
+    const { getByTestId } = customRender(
+      <TimelineItemTitle title="title" data-testid="timeline-title-1" />,
+      { providerProps },
+    );
+    const titleElement = getByTestId('timeline-title-1');
+    expect(titleElement).toBeInTheDocument();
+    expect(titleElement.textContent).toBe('title');
   });
 
   // should match the snapshot
@@ -24,36 +27,48 @@ describe('Timeline item title', () => {
 
   // should render the title with active class
   it('should render the title with active class', () => {
-    const { getByText } = customRender(
-      <TimelineItemTitle title="title" active />,
+    const { getByTestId } = customRender(
+      <TimelineItemTitle title="title" active data-testid="timeline-title-2" />,
       { providerProps },
     );
-    expect(getByText('title')).toBeInTheDocument();
-    expect(getByText('title')).toHaveClass('active');
+    const titleElement = getByTestId('timeline-title-2');
+    expect(titleElement).toBeInTheDocument();
+    expect(titleElement.querySelector('.timeline-item-title')).toHaveClass(
+      'active',
+    );
   });
 
   // should render the title with custom class
   it('should render the title with custom class', () => {
-    const { getByText } = customRender(
-      <TimelineItemTitle title="title" classString="custom-class" />,
+    const { getByTestId } = customRender(
+      <TimelineItemTitle
+        title="title"
+        classString="custom-class"
+        data-testid="timeline-title-3"
+      />,
       { providerProps },
     );
-    expect(getByText('title')).toBeInTheDocument();
-    expect(getByText('title')).toHaveClass('custom-class');
+    const titleElement = getByTestId('timeline-title-3');
+    expect(titleElement).toBeInTheDocument();
+    expect(titleElement.querySelector('.timeline-item-title')).toHaveClass(
+      'custom-class',
+    );
   });
 
   // should have a custom alignment
-  it('should have a custom alignment', async () => {
-    const { getByText } = customRender(
-      <TimelineItemTitle title="title" align="left" />,
+  it('should have a custom alignment', () => {
+    const { getByTestId } = customRender(
+      <TimelineItemTitle
+        title="title"
+        align="left"
+        data-testid="timeline-title-4"
+      />,
       { providerProps },
     );
-    expect(getByText('title')).toBeInTheDocument();
+    const titleElement = getByTestId('timeline-title-4');
+    expect(titleElement).toBeInTheDocument();
 
-    await waitFor(() => {
-      expect(getByText('title')).toHaveProperty('align');
-      expect(getByText('title')).toHaveProperty('align', 'left');
-      // expect(getByText('title')).toHaveStyle('text-align: left');
-    });
+    const titleWrapper = titleElement.querySelector('.timeline-item-title');
+    expect(titleWrapper).toHaveAttribute('align', 'left');
   });
 });

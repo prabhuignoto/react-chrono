@@ -4,24 +4,43 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
 <div>
   <li
     class="sc-dZEakj dPHtNj vertical-item-row"
-    data-testid="vertical-item-row"
+    data-testid="vertical-item-test-1"
   >
     <div
       class="sc-cNFqVt fUSDCu"
       mode="VERTICAL_ALTERNATING"
     >
-      <div
-        align="right"
-        class="sc-gAqISa QQlxa timeline-item-title title"
-      >
-        vertical item title
+      <div>
+        <div
+          align="right"
+          class="sc-gAqISa QQlxa timeline-item-title title"
+        >
+          vertical item title
+        </div>
       </div>
     </div>
     <div
+      bg="#0f52ba"
+      class="sc-lpbaSe kHeabP"
+      data-testid="tree-leaf"
+    >
+      <button
+        aria-label="Timeline Point"
+        class="sc-bxjEGZ iwwbhs  timeline-vertical-circle"
+        data-testid="tree-leaf-click"
+      >
+        <div
+          class="sc-brzPDJ jLQEXp"
+          dimension="16"
+        />
+      </button>
+    </div>
+    <div
       class="sc-fpgwy fDgwOp card-content-wrapper"
+      mode="VERTICAL_ALTERNATING"
     >
       <section
-        class="sc-cUiCeM kuorYy timeline-card-content  card"
+        class="sc-jMsorb jdujNZ timeline-card-content  card"
         data-testid="timeline-card-content"
         mode="VERTICAL_ALTERNATING"
         tabindex="0"
@@ -53,36 +72,20 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
             class="sc-kpOvIu NBiZG"
           >
             <h1
-              class="sc-jPkiSJ ecXWgU card-title card-title"
+              class="sc-cUiCeM VlWd card-title card-title"
             />
           </div>
         </div>
         <div
           aria-expanded="false"
-          class="sc-dFaThA gnHGeq show-less card-description card-text"
+          class="sc-cZSric jsMgKC timeline-content-details show-less card-description card-text"
         />
         <span
-          class="sc-dKKIkQ iXnjn"
+          class="sc-fjUQFl iKUHrG"
           dir=""
           offset="-8"
         />
       </section>
-    </div>
-    <div
-      bg="#0f52ba"
-      class="sc-lpbaSe kHeabP"
-      data-testid="tree-leaf"
-    >
-      <button
-        aria-label="Timeline Point"
-        class="sc-bxjEGZ bSDbzQ  timeline-vertical-circle"
-        data-testid="tree-leaf-click"
-      >
-        <div
-          class="sc-brzPDJ jLQEXp"
-          dimension="16"
-        />
-      </button>
     </div>
   </li>
 </div>

@@ -29,7 +29,7 @@ export const PopoverHolder = styled.div<{
 }>`
   ${flexCenter};
   flex-direction: column;
-  background: ${({ $theme }) => $theme.toolbarBgColor};
+  background: ${({ $theme }) => $theme?.toolbarBgColor};
   border-radius: 8px;
   box-shadow: 0px 5px 16px rgba(0, 0, 0, 0.25);
   max-height: 500px;
@@ -59,7 +59,8 @@ export const Selecter = styled.div<{
   background: ${({ $theme }) => $theme.toolbarBtnBgColor};
   color: ${({ $theme }) => $theme.toolbarTextColor};
   border-radius: 6px;
-  box-shadow: ${({ $open, $isDarkMode }) => boxShadow($isDarkMode, $open)};
+  box-shadow: ${({ $open, $isDarkMode }) =>
+    boxShadow($isDarkMode ?? false, $open ?? false)};
   cursor: pointer;
   justify-content: space-between;
   padding: ${(p) => (p.$isMobile ? '0.5rem' : `0.6rem 0.8rem`)};

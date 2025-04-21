@@ -28,13 +28,17 @@ const TitleMemo = React.memo<Omit<Title, 'theme'>>(
       <CardTitle
         color={color}
         dir={dir}
-        $fontSize={fontSize}
+        $fontSize={fontSize || ''}
         className={cls('card-title', classString)}
         $padding={padding}
         theme={theme}
       >
         {searchTerm ? (
-          <TextHighlighter text={title} searchTerm={searchTerm} theme={theme} />
+          <TextHighlighter
+            text={title || ''}
+            searchTerm={searchTerm}
+            theme={theme!}
+          />
         ) : (
           title
         )}

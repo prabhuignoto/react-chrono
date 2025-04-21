@@ -141,7 +141,7 @@ exports[`TimelineControl > should render 1`] = `
         <button
           aria-controls="timeline-main-wrapper"
           aria-label="dark"
-          class="sc-dKREkF jSLrpy"
+          class="sc-dKREkF hPVuDA"
           data-test-id="dark-toggle"
           tabindex="0"
           title="dark"

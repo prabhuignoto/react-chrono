@@ -18,4 +18,7 @@ export interface TitleModel {
 
   // Text content of the title.
   title?: string;
+
+  // Test ID for testing purposes.
+  'data-testid'?: string;
 }

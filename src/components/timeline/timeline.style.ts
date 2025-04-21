@@ -1,7 +1,36 @@
 import { Theme } from '@models/Theme';
 import { TimelineMode } from '@models/TimelineModel';
-import styled from 'styled-components';
-import { ScrollBar } from '../common/styles';
+import styled, { css } from 'styled-components';
+
+// Default theme for components that require Theme
+const defaultTheme: Theme = {
+  primary: '#ccc',
+  secondary: '#666',
+};
+
+// Create custom scrollbar that works with optional theme
+const ScrollBarWithDefault = css`
+  scrollbar-color: ${(p: { theme?: { primary?: string } }) =>
+      p.theme?.primary || defaultTheme.primary}
+    default;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 0.3em;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${(p: { theme?: { primary?: string } }) =>
+      p.theme?.primary || defaultTheme.primary};
+    outline: 1px solid
+      ${(p: { theme?: { primary?: string } }) =>
+        p.theme?.primary || defaultTheme.primary};
+  }
+`;
 
 export const Wrapper = styled.div<{
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
@@ -50,7 +79,7 @@ export const TimelineMainWrapper = styled.div<{
   width: 100%;
   // order: ${(p) => (p.position === 'top' ? 1 : 0)};
 
-  ${ScrollBar}
+  ${ScrollBarWithDefault}
 
   &.horizontal {
     min-height: 150px;

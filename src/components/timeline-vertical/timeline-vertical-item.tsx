@@ -56,6 +56,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     items, // Data for nested items (if any)
     isNested, // Is this item part of a nested structure?
     nestedCardHeight, // Specific height for nested cards
+    'data-testid': testId, // Destructure the test ID
   } = props;
 
   // Access global settings and theme from context
@@ -209,77 +210,92 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   );
 
   /**
-   * Determines if the title section should be rendered.
-   * Titles are typically hidden for nested items or on mobile for space.
+   * Memoized Timeline Card component.
+   * Avoids re-rendering the card if its specific props haven't changed.
    */
-  const canShowTitle = useMemo(() => {
-    // Show title only if it's NOT nested AND NOT mobile view
-    return !isNested && !isMobile;
-  }, [isNested, isMobile]);
+  const TimelineCardMemo = useMemo(() => {
+    // Conditionally render the TimelineCard (only if not cardLess mode)
+    return !cardLess ? (
+      <TimelineCardContentWrapper
+        $alternateCards={alternateCards}
+        $flip={!alternateCards && flipLayout}
+        className={contentClass}
+      >
+        <TimelineCard
+          active={active}
+          branchDir={className}
+          content={cardSubtitle}
+          customContent={contentDetailsChildren}
+          detailedText={cardDetailedText}
+          hasFocus={hasFocus}
+          id={id}
+          media={media}
+          onClick={onClick}
+          onElapsed={onElapsed}
+          onShowMore={handleShowMore}
+          theme={theme}
+          url={url}
+          timelineContent={timelineContent}
+          items={items}
+          isNested={isNested}
+          nestedCardHeight={nestedCardHeight}
+          title={cardTitle}
+        />
+      </TimelineCardContentWrapper>
+    ) : null;
+  }, [
+    // Comprehensive dependency list
+    cardLess,
+    contentClass,
+    alternateCards,
+    mode,
+    flipLayout,
+    active,
+    className,
+    cardSubtitle,
+    contentDetailsChildren,
+    timelineContent,
+    cardDetailedText,
+    hasFocus,
+    id,
+    media,
+    onClick,
+    onElapsed,
+    handleShowMore,
+    theme,
+    cardTitle,
+    url,
+    nestedCardHeight,
+    cardHeight,
+    classNames,
+    textOverlay,
+    mediaHeight,
+    items,
+    isNested,
+  ]);
 
-  // Render the complete timeline item structure
   return (
     <VerticalItemWrapper
-      // --- Props passed to styled-component ---
-      $alternateCards={alternateCards}
-      // Use specific height for nested cards, otherwise default cardHeight from context
-      $cardHeight={isNested ? nestedCardHeight : cardHeight}
-      $cardLess={cardLess}
-      $isNested={isNested}
       // --- Standard React props ---
       className={verticalItemClass} // Apply memoized classes
-      data-testid="vertical-item-row"
+      data-testid={testId} // Pass the test ID here
       key={id} // Key for React list rendering
       ref={contentRef} // Attach ref for measurements
-      theme={theme} // Pass theme for potential use in styled-component fallbacks
     >
-      {/* Conditionally render the Title */}
-      {canShowTitle ? Title : null}
-
-      {/* Wrapper for the card content */}
-      <TimelineCardContentWrapper
-        // --- Props passed to styled-component ---
-        $alternateCards={alternateCards}
-        $noTitle={!title} // Adjust width if title is absent
-        // Flip content position only in non-alternating vertical mode
-        $flip={!alternateCards && flipLayout}
-        // Use media height if text overlay is active, otherwise card height
-        height={textOverlay ? mediaHeight : cardHeight}
-        $isMobile={isMobile}
-        // --- Standard React props ---
-        className={contentClass} // Apply memoized classes
-      >
-        {/* Conditionally render the TimelineCard (only if not cardLess mode) */}
-        {!cardLess ? (
-          <TimelineCard
-            active={active}
-            branchDir={className} // Pass 'left' or 'right'
-            content={cardSubtitle}
-            customContent={contentDetailsChildren}
-            detailedText={cardDetailedText}
-            hasFocus={hasFocus}
-            id={id}
-            media={media}
-            onClick={onClick}
-            onElapsed={onElapsed}
-            onShowMore={handleShowMore} // Pass down the memoized handler
-            slideShowActive={slideShowRunning}
-            theme={theme}
-            url={url}
-            // Flip card content only in non-alternating vertical mode
-            flip={!alternateCards && flipLayout}
-            timelineContent={timelineContent}
-            items={items} // Pass nested items data
-            isNested={isNested}
-            nestedCardHeight={nestedCardHeight}
-            title={cardTitle} // Card-specific title
-            cardTitle={title} // Item title (might be redundant if cardTitle is used)
-          />
-        ) : null}
-      </TimelineCardContentWrapper>
-
-      {/* Conditionally render the Timeline Point (hidden for nested items) */}
-      {!isNested ? TimelinePointMemo : null}
+      {/* Render title, point, and card based on layout settings */}
+      {flipLayout ? (
+        <>
+          {TimelineCardMemo}
+          {TimelinePointMemo}
+          {Title}
+        </>
+      ) : (
+        <>
+          {Title}
+          {TimelinePointMemo}
+          {TimelineCardMemo}
+        </>
+      )}
     </VerticalItemWrapper>
   );
 };

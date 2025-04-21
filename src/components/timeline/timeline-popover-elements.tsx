@@ -39,18 +39,18 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   const verticalItems = useMemo(
     () => [
       {
-        description: layoutOptions.vertical?.helpText,
+        description: layoutOptions.vertical?.helpText || '',
         id: 'VERTICAL',
         onSelect: () => onUpdateTimelineMode('VERTICAL'),
         selected: activeTimelineMode === 'VERTICAL',
-        title: layoutOptions.vertical?.text,
+        title: layoutOptions.vertical?.text || 'Vertical',
       },
       {
-        description: layoutOptions.alternating?.helpText,
+        description: layoutOptions.alternating?.helpText || '',
         id: 'VERTICAL_ALTERNATING',
         onSelect: () => onUpdateTimelineMode('VERTICAL_ALTERNATING'),
         selected: activeTimelineMode === 'VERTICAL_ALTERNATING',
-        title: layoutOptions.alternating?.text,
+        title: layoutOptions.alternating?.text || 'Alternating',
       },
     ],
     [activeTimelineMode],
@@ -60,22 +60,22 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   const horizontalItems = useMemo(
     () => [
       {
-        description: layoutOptions.horizontal?.helpText,
+        description: layoutOptions.horizontal?.helpText || '',
         id: 'HORIZONTAL',
         onSelect: () => {
           onUpdateTimelineMode('HORIZONTAL');
         },
         selected: activeTimelineMode === 'HORIZONTAL',
-        title: layoutOptions.horizontal?.text,
+        title: layoutOptions.horizontal?.text || 'Horizontal',
       },
       {
-        description: layoutOptions.horizontal_all?.helpText,
+        description: layoutOptions.horizontal_all?.helpText || '',
         id: 'HORIZONTAL_ALL',
         onSelect: () => {
           onUpdateTimelineMode('HORIZONTAL_ALL');
         },
         selected: activeTimelineMode === 'HORIZONTAL_ALL',
-        title: layoutOptions.horizontal_all?.text,
+        title: layoutOptions.horizontal_all?.text || 'Show All Cards',
       },
     ],
     [activeTimelineMode],
@@ -83,7 +83,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
 
   return (
     <PopOver
-      placeholder={buttonTexts.changeLayout}
+      placeholder={buttonTexts?.changeLayout}
       position={position}
       theme={theme}
       isDarkMode={isDarkMode}
@@ -118,7 +118,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
 
   return (
     <PopOver
-      placeholder={buttonTexts.jumpTo}
+      placeholder={buttonTexts?.jumpTo}
       position={position}
       theme={theme}
       width={400}
@@ -129,14 +129,14 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
       <List
         items={items.map((item, index) => ({
           active: index === activeItem,
-          description: item.description,
-          id: item.id,
+          description: item.description || '',
+          id: item.id || '',
           label: item.title,
           onSelect: () => {},
           title: item.title || `Item ${index + 1}`,
         }))}
         theme={theme}
-        onClick={onActivateItem}
+        onClick={(id) => id && onActivateItem(id)}
       />
     </PopOver>
   );
@@ -176,7 +176,7 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
 
   return (
     <PopOver
-      placeholder={buttonTexts.changeDensity}
+      placeholder={buttonTexts?.changeDensity}
       theme={theme}
       isDarkMode={isDarkMode}
       position={position}

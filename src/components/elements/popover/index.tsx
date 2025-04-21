@@ -19,6 +19,14 @@ import {
   SelecterIcon,
   SelecterLabel,
 } from './popover.styles';
+import { Theme } from '@models/Theme';
+
+// Default theme
+const defaultTheme: Theme = {
+  primary: '#000',
+  secondary: '#666',
+  textColor: '#333',
+};
 
 // Memoized Content component with improved padding
 const MemoizedContent = memo(({ children }: { children: React.ReactNode }) => (
@@ -54,7 +62,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   children,
   position,
   placeholder,
-  theme,
+  theme = defaultTheme,
   width = 350,
   isDarkMode = false,
   icon,
@@ -99,6 +107,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
       return () => clearTimeout(timer);
     } else {
       dispatch({ type: 'SET_VISIBLE', payload: false });
+      return undefined;
     }
   }, [state.open]);
 
@@ -138,7 +147,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         >
           <Header>
             <CloseButton
-              theme={theme}
+              theme={theme.primary}
               onClick={closePopover}
               aria-label="Close"
               title="Close"

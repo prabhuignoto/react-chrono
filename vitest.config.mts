@@ -31,13 +31,18 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     include: [
-      './src/components/**/*.test.{tsx,ts}',
-      './src/utils/**/*.test.{tsx,ts}',
+      './src/**/*.test.{tsx,ts}',
+      './src/**/__tests__/**/*.test.{tsx,ts}',
     ],
-    minWorkers: 2,
+    isolate: false,
+    watch: false,
     setupFiles: './src/test-setup.js',
     silent: false,
     update: true,
-    
+    testTimeout: 1000,
+    pool: 'forks',
+    environmentOptions: {
+      NODE_OPTIONS: '--max-old-space-size=4096',
+    },
   },
 });

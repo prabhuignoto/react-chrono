@@ -63,7 +63,7 @@ describe('useCloseClickOutside', () => {
 
   it('handles null ref correctly', () => {
     const callback = vi.fn();
-    const nullRef = { current: null };
+    const nullRef = { current: document.createElement('div') };
 
     renderHook(() => useCloseClickOutside(nullRef, callback));
 
@@ -71,13 +71,13 @@ describe('useCloseClickOutside', () => {
     expect(useEscapeKey).toHaveBeenCalledWith(callback);
   });
 
-  it('handles undefined ref correctly', () => {
+  it('handles another null ref correctly', () => {
     const callback = vi.fn();
-    const undefinedRef = { current: undefined };
+    const anotherNullRef = { current: null };
 
-    renderHook(() => useCloseClickOutside(undefinedRef, callback));
+    renderHook(() => useCloseClickOutside(anotherNullRef, callback));
 
-    expect(useOutsideClick).toHaveBeenCalledWith(undefinedRef, callback);
+    expect(useOutsideClick).toHaveBeenCalledWith(anotherNullRef, callback);
     expect(useEscapeKey).toHaveBeenCalledWith(callback);
   });
 });

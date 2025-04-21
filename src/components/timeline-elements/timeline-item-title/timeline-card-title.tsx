@@ -15,6 +15,7 @@ import { TitleWrapper } from './timeline-card-title.styles';
  * @property {Theme} theme - The theme object, used for styling.
  * @property {string} align - The alignment of the title.
  * @property {string} classString - Additional CSS classes for the title.
+ * @property {string} data-testid - Test ID for testing purposes.
  * @returns {JSX.Element} The TimelineItemTitle component.
  */
 const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
@@ -23,6 +24,7 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
   theme,
   align,
   classString,
+  'data-testid': testId,
 }: TitleModel) => {
   const TITLE_CLASS = 'timeline-item-title'; // Base class name for the title
   const { searchTerm } = useSearch();
@@ -37,19 +39,25 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
   const { fontSizes } = useContext(GlobalContext);
 
   return (
-    <TitleWrapper
-      className={titleClass}
-      theme={theme}
-      $hide={!title}
-      align={align}
-      $fontSize={fontSizes?.title}
-    >
-      {searchTerm && title ? (
-        <TextHighlighter text={title} searchTerm={searchTerm} theme={theme} />
-      ) : (
-        title
-      )}
-    </TitleWrapper>
+    <div data-testid={testId}>
+      <TitleWrapper
+        className={titleClass}
+        theme={theme}
+        $hide={!title}
+        align={align}
+        $fontSize={fontSizes?.title}
+      >
+        {searchTerm && title ? (
+          <TextHighlighter
+            text={title}
+            searchTerm={searchTerm}
+            theme={theme!}
+          />
+        ) : (
+          title
+        )}
+      </TitleWrapper>
+    </div>
   );
 };
 

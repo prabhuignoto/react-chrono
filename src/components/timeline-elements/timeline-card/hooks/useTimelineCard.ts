@@ -2,6 +2,19 @@ import { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
 import cls from 'classnames';
 import { GlobalContext } from '../../../GlobalContext';
 
+interface TimelineCardProps {
+  active: boolean;
+  autoScroll?: (data: { pointOffset: number; pointWidth: number }) => void;
+  slideShowRunning: boolean;
+  cardLess: boolean;
+  showAllCardsHorizontal: boolean;
+  id: string | number;
+  onClick?: ((id: string | number) => void) | undefined;
+  mode?: string;
+  position: 'TOP' | 'BOTTOM';
+  iconChild?: React.ReactNode;
+}
+
 export const useTimelineCard = ({
   active,
   autoScroll,
@@ -13,7 +26,7 @@ export const useTimelineCard = ({
   mode,
   position,
   iconChild,
-}) => {
+}: TimelineCardProps) => {
   const circleRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);

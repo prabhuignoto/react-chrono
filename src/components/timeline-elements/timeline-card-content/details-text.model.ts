@@ -10,4 +10,5 @@ export type DetailsTextProps = {
   gradientColor?: string;
   showMore?: boolean;
   timelineContent: TimelineContentModel['timelineContent'];
+  'data-testid'?: string;
 };

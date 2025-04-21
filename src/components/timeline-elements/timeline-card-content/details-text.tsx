@@ -15,6 +15,7 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
       timelineContent,
       detailedText,
       contentDetailsClass,
+      'data-testid': testId,
     } = prop;
 
     const {
@@ -37,7 +38,7 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
         {/* detailed text */}
         <TimelineContentDetailsWrapper
           aria-expanded={showMore}
-          className={contentDetailsClass}
+          className={`timeline-content-details ${contentDetailsClass || ''}`}
           $customContent={!!customContent}
           ref={ref}
           theme={theme}
@@ -49,6 +50,7 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
           height={contentDetailsHeight}
           $textOverlay={textOverlay}
           $gradientColor={gradientColor}
+          data-testid={testId}
         >
           {customContent || (
             <TextContent

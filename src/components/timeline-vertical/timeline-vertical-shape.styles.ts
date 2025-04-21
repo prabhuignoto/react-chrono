@@ -83,7 +83,7 @@ interface TimelinePointContainerProps {
  */
 export const TimelinePointContainer = styled.button<TimelinePointContainerProps>`
   position: relative; /* Ensure it's above the ::after pseudo-element */
-  z-index: 1;
+  // z-index: 1;
   visibility: ${(p) =>
     p.$hide ? 'hidden' : 'visible'}; /* Control visibility */
 

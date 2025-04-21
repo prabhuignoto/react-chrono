@@ -119,6 +119,7 @@ export const TimelineItemContentWrapper = styled.section<
         `;
       }
     }
+    return '';
   }}
 
   ${(p) => {
@@ -135,6 +136,7 @@ export const TimelineItemContentWrapper = styled.section<
         opacity: 0;
       `;
     }
+    return '';
   }}
 `;
 
@@ -189,6 +191,9 @@ export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
   margin: 0;
   width: 100%;
   color: ${(p) => p.theme.cardDetailsColor};
+  &.timeline-content-details {
+    width: calc(100% - 0.5rem);
+  }
 `;
 
 export const TimelineSubContent = styled.span<{
@@ -349,6 +354,7 @@ export const SlideShowProgressBar = styled.progress<{
         transform: translateX(-50%);
       `;
     }
+    return '';
   }}
 
   ${(p) => {

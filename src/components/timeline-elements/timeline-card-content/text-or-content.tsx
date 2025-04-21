@@ -67,7 +67,11 @@ const renderTextArray: (
         theme={theme}
       >
         {searchTerm ? (
-          <TextHighlighter text={text} searchTerm={searchTerm} theme={theme} />
+          <TextHighlighter
+            text={text}
+            searchTerm={searchTerm}
+            theme={theme ?? {}}
+          />
         ) : (
           text
         )}
@@ -86,7 +90,7 @@ const getTextOrContent: (
   showMore,
 }) => {
   const TextOrContent = forwardRef<HTMLParagraphElement, TextOrContentModel>(
-    (prop, ref) => {
+    (_, ref) => {
       const isTextArray = Array.isArray(detailedText);
       const { fontSizes, classNames, parseDetailsAsHTML, textDensity } =
         useContext(GlobalContext);
@@ -99,7 +103,7 @@ const getTextOrContent: (
           let textContent = null;
           if (isTextArray) {
             textContent = renderTextArray({
-              cardTextClassName: classNames?.cardText,
+              cardTextClassName: classNames?.cardText ?? '',
               detailedText,
               fontSizes,
               parseDetailsAsHTML,
@@ -109,7 +113,7 @@ const getTextOrContent: (
           } else {
             // For HTML parsing, we can't use the highlighter
             if (parseDetailsAsHTML) {
-              textContent = xss(detailedText);
+              textContent = xss(detailedText ?? '');
             } else {
               textContent = detailedText;
             }
@@ -119,7 +123,7 @@ const getTextOrContent: (
             parseDetailsAsHTML && !isTextArray
               ? {
                   dangerouslySetInnerHTML: {
-                    __html: xss(textContent),
+                    __html: xss(String(textContent ?? '')),
                   },
                 }
               : {};
@@ -139,14 +143,14 @@ const getTextOrContent: (
           ) {
             return (
               <TimelineContentDetails
-                className={showMore ? 'active' : ''}
+                className={`timeline-content-details ${showMore ? 'active' : ''}`}
                 ref={ref}
                 theme={theme}
               >
                 <TextHighlighter
-                  text={textContent}
+                  text={String(textContent ?? '')}
                   searchTerm={searchTerm}
-                  theme={theme}
+                  theme={theme ?? {}}
                 />
               </TimelineContentDetails>
             );
@@ -154,7 +158,7 @@ const getTextOrContent: (
 
           return textContent ? (
             <TimelineContentDetails
-              className={showMore ? 'active' : ''}
+              className={`timeline-content-details ${showMore ? 'active' : ''}`}
               ref={ref}
               theme={theme}
               {...textContentProps}

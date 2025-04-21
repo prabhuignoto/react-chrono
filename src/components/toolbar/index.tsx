@@ -1,4 +1,4 @@
-import React, { FunctionComponent, memo, ReactNode } from 'react';
+import React, { FunctionComponent, memo } from 'react';
 import { jsx as _jsx } from 'react/jsx-runtime';
 import {
   ContentWrapper,

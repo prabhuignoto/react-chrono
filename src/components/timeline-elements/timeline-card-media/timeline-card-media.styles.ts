@@ -1,7 +1,6 @@
 import { Theme } from '@models/Theme';
 import { TimelineMode } from '@models/TimelineModel';
 import styled, { css } from 'styled-components';
-import { ScrollBar } from '../../common/styles';
 
 export const linearGradient = css`
   &::after {
@@ -108,6 +107,8 @@ export const MediaDetailsWrapper = styled.div<{
       case 'VERTICAL':
       case 'VERTICAL_ALTERNATING':
         return `calc(90% - 0rem)`;
+      default:
+        return `calc(90% - 0rem)`;
     }
   }};
   display: flex;
@@ -138,6 +139,8 @@ export const MediaDetailsWrapper = styled.div<{
         height: 50%;
       `;
     }
+
+    return css``; // Default empty style if no conditions match
   }}
   position: ${(p) => (p.$absolutePosition ? 'absolute' : 'relative')};
   ${(p) =>
@@ -179,6 +182,25 @@ export const IFrameVideo = styled.iframe`
   width: 100%;
 `;
 
+// Create a ScrollBar version that works with optional theme
+const OptionalThemeScrollBar = css<{ theme?: Theme }>`
+  scrollbar-color: ${(p) => p.theme?.primary} default;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 0.3em;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${(p) => p.theme?.primary};
+    outline: 1px solid ${(p) => p.theme?.primary};
+  }
+`;
+
 export const DetailsTextWrapper = styled.div<{
   $expandFull?: boolean;
   $show?: boolean;
@@ -198,7 +220,7 @@ export const DetailsTextWrapper = styled.div<{
   align-items: flex-start;
   justify-content: center;
 
-  ${ScrollBar}
+  ${OptionalThemeScrollBar}
 
   ${(p) => {
     if (p.$expandFull) {

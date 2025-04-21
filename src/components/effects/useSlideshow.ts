@@ -43,6 +43,8 @@ const useSlideshow = (
       window.clearTimeout(timerRef.current);
       timerRef.current = 0;
     }
+    startTime.current = null;
+    slideShowElapsed.current = 0;
   }, []);
 
   /**
@@ -109,27 +111,14 @@ const useSlideshow = (
     }
   }, [active, slideShowActive, slideItemDuration, setupTimer]);
 
-  // Use existing state setters directly with conditional updates
-  const updateStartWidth = (width: number) => {
-    setStartWidth((prevWidth) => (prevWidth !== width ? width : prevWidth));
-  };
-
-  const updatePaused = (paused: boolean) => {
-    setPaused((prevPaused) => (prevPaused !== paused ? paused : prevPaused));
-  };
-
-  const updateRemainInterval = (interval: number) => {
-    setRemainInterval((prevInterval) =>
-      prevInterval !== interval ? interval : prevInterval,
-    );
-  };
-
   // Efficient cleanup
   useEffect(() => {
     if (!slideShowActive) {
       cleanupTimer();
     }
-    return cleanupTimer;
+    return () => {
+      cleanupTimer();
+    };
   }, [slideShowActive, cleanupTimer]);
 
   return {

@@ -30,7 +30,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 ) => {
   // de-structure the props
   const {
-    activeTimelineItem,
+    activeTimelineItem = 0,
     contentDetailsChildren,
     iconChildren,
     items = [],
@@ -65,7 +65,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     darkMode,
     toggleDarkMode,
     updateHorizontalAllCards,
-    toolbarPosition,
+    toolbarPosition = 'bottom',
     updateTextContentDensity,
     disableToolbar,
   } = useContext(GlobalContext);
@@ -93,6 +93,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         return scrollable.scrollbar;
       }
     }
+    return false; // Default return value when no other conditions are met
   }, [slideShowRunning, scrollable]);
 
   const id = useRef(
@@ -103,16 +104,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const handleNext = useCallback(() => {
     if (hasFocus) {
       activeItemIndex.current = Math.min(
-        activeItemIndex.current + 1,
+        (activeItemIndex.current ?? 0) + 1,
         items.length - 1,
       );
       onNext?.();
     }
-  }, [hasFocus, onNext]);
+  }, [hasFocus, onNext, items.length]);
 
   const handlePrevious = useCallback(() => {
     if (hasFocus) {
-      activeItemIndex.current = Math.max(activeItemIndex.current - 1, 0);
+      activeItemIndex.current = Math.max((activeItemIndex.current ?? 0) - 1, 0);
       onPrevious?.();
     }
   }, [hasFocus, onPrevious]);
@@ -129,7 +130,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       activeItemIndex.current = items.length - 1;
       onLast?.();
     }
-  }, [hasFocus, onLast]);
+  }, [hasFocus, onLast, items.length]);
 
   // handler for keyboard navigation
   const handleKeySelection = useCallback(
@@ -156,7 +157,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         handleLast();
       }
     },
-    [handleNext, handlePrevious, handleLast],
+    [handleNext, handlePrevious, handleLast, handleFirst, flipLayout, mode],
   );
 
   const handleTimelineItemClick = (itemId?: string, isSlideShow?: boolean) => {
@@ -189,7 +190,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         cardDetailedText,
         cardSubtitle,
         cardTitle,
-        index: activeItemIndex.current,
+        index: activeItemIndex.current ?? 0,
         title,
       });
 
@@ -214,7 +215,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         }
       }
     }
-  }, [activeTimelineItem, items.length, slideShowRunning]);
+  }, [activeTimelineItem, items.length, slideShowRunning, mode]);
 
   const handleScroll = (scroll: Partial<Scroll>) => {
     const element = timelineMainRef.current;
@@ -233,7 +234,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     } else {
       ele.scrollTop = newOffSet;
     }
-  }, [newOffSet]);
+  }, [newOffSet, mode]);
 
   useEffect(() => {
     // setup observer for the timeline elements
@@ -306,19 +307,22 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     [disableNavOnKey, slideShowRunning, handleKeySelection],
   );
 
-  const handleTimelineUpdate = useCallback((mode: string) => {
-    if (mode === 'VERTICAL') {
-      setTimelineMode('VERTICAL');
-    } else if (mode === 'HORIZONTAL') {
-      setTimelineMode('HORIZONTAL');
-      updateHorizontalAllCards?.(false);
-    } else if (mode === 'VERTICAL_ALTERNATING') {
-      setTimelineMode('VERTICAL_ALTERNATING');
-    } else if (mode === 'HORIZONTAL_ALL') {
-      setTimelineMode('HORIZONTAL_ALL');
-      updateHorizontalAllCards?.(true);
-    }
-  }, []);
+  const handleTimelineUpdate = useCallback(
+    (mode: string) => {
+      if (mode === 'VERTICAL') {
+        setTimelineMode('VERTICAL');
+      } else if (mode === 'HORIZONTAL') {
+        setTimelineMode('HORIZONTAL');
+        updateHorizontalAllCards?.(false);
+      } else if (mode === 'VERTICAL_ALTERNATING') {
+        setTimelineMode('VERTICAL_ALTERNATING');
+      } else if (mode === 'HORIZONTAL_ALL') {
+        setTimelineMode('HORIZONTAL_ALL');
+        updateHorizontalAllCards?.(true);
+      }
+    },
+    [updateHorizontalAllCards],
+  );
 
   const wrapperClass = useMemo(() => {
     return cls(mode.toLocaleLowerCase(), {
@@ -330,6 +334,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const canShowToolbar = useMemo(() => {
     return !disableToolbar && !isChild;
   }, [isChild, disableToolbar]);
+
+  // Create noop functions for optional callbacks
+  const emptyToggleDarkMode = () => {};
+  const emptyUpdateTextContentDensity = () => {};
 
   return (
     <Wrapper
@@ -358,14 +366,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             onPrevious={handlePrevious}
             onRestartSlideshow={onRestartSlideshow}
             darkMode={darkMode}
-            toggleDarkMode={toggleDarkMode}
+            toggleDarkMode={toggleDarkMode ?? emptyToggleDarkMode}
             onPaused={onPaused}
             id={id.current}
             flipLayout={flipLayout}
             items={items}
             onActivateTimelineItem={handleTimelineItemClick}
             onUpdateTimelineMode={handleTimelineUpdate}
-            onUpdateTextContentDensity={updateTextContentDensity}
+            onUpdateTextContentDensity={
+              updateTextContentDensity ?? emptyUpdateTextContentDensity
+            }
             mode={timelineMode}
           />
         </ToolbarWrapper>

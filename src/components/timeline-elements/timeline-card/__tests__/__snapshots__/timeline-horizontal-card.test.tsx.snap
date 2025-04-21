@@ -21,12 +21,14 @@ exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-gDpztx lpbnqk vertical_alternating"
+      class="sc-gDpztx lpbnqk vertical_alternating TOP"
       data-testid="timeline-title"
     >
-      <div
-        class="sc-fYsHOw gHtQOi timeline-item-title active title"
-      />
+      <div>
+        <div
+          class="sc-fYsHOw gHtQOi timeline-item-title active title"
+        />
+      </div>
     </div>
   </div>
 </div>

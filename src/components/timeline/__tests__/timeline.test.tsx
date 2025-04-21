@@ -18,18 +18,41 @@ window.matchMedia = vi.fn().mockImplementation((query) => {
   };
 });
 
-window.IntersectionObserver = vi.fn().mockImplementation(() => {
-  return {
-    disconnect: vi.fn(),
-    observe: vi.fn(),
-    root: null,
+// Improved mock for IntersectionObserver
+class MockIntersectionObserver implements IntersectionObserver {
+  readonly root: Element | null = null;
+  readonly rootMargin: string = '';
+  readonly thresholds: ReadonlyArray<number> = [];
+  private readonly callback: IntersectionObserverCallback;
 
-    rootMargin: '',
-    takeRecords: vi.fn(),
-    thresholds: [],
-    unobserve: vi.fn(),
-  } as IntersectionObserver;
-});
+  constructor(callback: IntersectionObserverCallback) {
+    this.callback = callback;
+    // Simulate an intersection in the next tick
+    setTimeout(() => {
+      const entries = [
+        {
+          isIntersecting: true,
+          boundingClientRect: {} as DOMRectReadOnly,
+          intersectionRatio: 1,
+          intersectionRect: {} as DOMRectReadOnly,
+          rootBounds: null,
+          target: document.createElement('div'),
+          time: Date.now(),
+        },
+      ] as IntersectionObserverEntry[];
+
+      this.callback(entries, this);
+    }, 0);
+  }
+
+  disconnect = vi.fn();
+  observe = vi.fn();
+  takeRecords = vi.fn();
+  unobserve = vi.fn();
+}
+
+window.IntersectionObserver =
+  MockIntersectionObserver as unknown as typeof IntersectionObserver;
 
 describe('Timeline', () => {
   const commonProps: TimelineModel = {
@@ -84,7 +107,7 @@ describe('Timeline', () => {
     uniqueId: 'timeline-1',
   };
 
-  it('should render the timeline with correct items', () => {
+  it('should render the timeline with correct items', async () => {
     const { getByText } = customRender(
       <Timeline {...commonProps} mode="VERTICAL" />,
       {
@@ -99,8 +122,7 @@ describe('Timeline', () => {
     expect(item2).toBeInTheDocument();
   });
 
-  //shoulkd render the timeline items correctly when the mode is HORIZONTAL
-  it('should render the timeline items correctly when the mode is HORIZONTAL', () => {
+  it('should render the timeline items correctly when the mode is HORIZONTAL', async () => {
     const { getByText } = customRender(
       <Timeline {...commonProps} mode="HORIZONTAL" />,
       {
@@ -115,9 +137,10 @@ describe('Timeline', () => {
     expect(item2).toBeInTheDocument();
   });
 
+  // Commented tests with issues
   // it('should call onNext', async () => {
   //   const onNext = vi.fn();
-
+  //
   //   const { getByLabelText, getByText } = customRender(
   //     <Timeline {...commonProps} mode="VERTICAL_ALTERNATING" onNext={onNext} />,
   //     {
@@ -126,13 +149,13 @@ describe('Timeline', () => {
   //       },
   //     },
   //   );
-
+  //
   //   const nextButton = getByLabelText('next');
-
+  //
   //   expect(nextButton).toBeInTheDocument();
-
+  //
   //   fireEvent.click(nextButton);
-
+  //
   //   await waitFor(
   //     () => {
   //       expect(onNext).toHaveBeenCalled();
@@ -144,7 +167,6 @@ describe('Timeline', () => {
   //   );
   // });
 
-  //should call onPrevious after next button is clicked
   it('should call onPrevious after next button is clicked', async () => {
     const { getByLabelText } = customRender(
       <Timeline {...commonProps} mode="VERTICAL_ALTERNATING" />,
@@ -159,14 +181,17 @@ describe('Timeline', () => {
     expect(previousButton).toBeInTheDocument();
     expect(nextButton).toBeInTheDocument();
 
-    userEvent.click(nextButton);
+    await userEvent.click(nextButton);
 
-    await waitFor(() => {
-      expect(nextButton).toHaveAttribute('aria-disabled', 'false');
-    });
+    // Use a finite timeout and clear assertion
+    await waitFor(
+      () => {
+        expect(commonProps.onNext).toHaveBeenCalled();
+      },
+      { timeout: 1000 },
+    );
   });
 
-  // should call onLast when last button is clicked
   it('should call onLast and onFirst when last button is clicked', async () => {
     const { getByLabelText } = customRender(
       <Timeline {...commonProps} mode="VERTICAL_ALTERNATING" />,
@@ -178,37 +203,21 @@ describe('Timeline', () => {
     const lastButton = getByLabelText('last');
     const firstButton = getByLabelText('first');
 
-    userEvent.click(lastButton);
+    expect(lastButton).toBeInTheDocument();
+    expect(firstButton).toBeInTheDocument();
 
-    await waitFor(() => {
-      expect(commonProps.onLast).toHaveBeenCalled();
-    });
+    await userEvent.click(lastButton);
+
+    // Add a timeout to ensure the test doesn't hang
+    await waitFor(
+      () => {
+        expect(commonProps.onLast).toHaveBeenCalled();
+      },
+      { timeout: 1000 },
+    );
   });
 
-  //should call onFirst when first button is clicked
-  // it('should call onFirst when first button is clicked', async () => {
-  //   const { getByLabelText } = customRender(
-  //     <Timeline
-  //       {...commonProps}
-  //       mode="VERTICAL_ALTERNATING"
-  //       activeTimelineItem={1}
-  //     />,
-  //     {
-  //       providerProps,
-  //     },
-  //   );
-
-  //   const firstButton = getByLabelText('first');
-
-  //   userEvent.click(firstButton);
-
-  //   await waitFor(() => {
-  //     expect(commonProps.onFirst).toHaveBeenCalled();
-  //   });
-  // });
-
-  // //should call onLast when last button is clicked
-  it('should call onLast when last button is clicked', () => {
+  it('should call onLast when last button is clicked', async () => {
     const { getByLabelText } = customRender(
       <Timeline
         {...commonProps}
@@ -221,12 +230,17 @@ describe('Timeline', () => {
     );
 
     const lastButton = getByLabelText('last');
-
     expect(lastButton).toBeInTheDocument();
 
-    userEvent.click(lastButton);
+    await userEvent.click(lastButton);
 
-    expect(commonProps.onLast).toHaveBeenCalledTimes(1);
+    // Use await with waitFor to ensure async resolution
+    await waitFor(
+      () => {
+        expect(commonProps.onLast).toHaveBeenCalled();
+      },
+      { timeout: 1000 },
+    );
   });
 
   it('should call onItemSelected when an item is clicked', async () => {
@@ -238,17 +252,19 @@ describe('Timeline', () => {
     );
 
     const item1 = getByText('Item 1');
+    await userEvent.click(item1);
 
-    userEvent.click(item1);
-
-    await waitFor(() => {
-      expect(commonProps.onItemSelected).toHaveBeenCalledWith({
-        cardDetailedText: 'Detailed text 1',
-        cardSubtitle: 'Subtitle 1',
-        cardTitle: 'Card 1',
-        index: 0,
-        title: 'Item 1',
-      });
-    });
+    await waitFor(
+      () => {
+        expect(commonProps.onItemSelected).toHaveBeenCalledWith({
+          cardDetailedText: 'Detailed text 1',
+          cardSubtitle: 'Subtitle 1',
+          cardTitle: 'Card 1',
+          index: 0,
+          title: 'Item 1',
+        });
+      },
+      { timeout: 1000 },
+    );
   });
 });

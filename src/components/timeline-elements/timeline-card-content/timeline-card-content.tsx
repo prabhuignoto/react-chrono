@@ -85,11 +85,11 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         setupTimer,
         setStartWidth,
       } = useSlideshow(
-        progressRef,
-        active,
-        slideShowActive,
+        progressRef as React.RefObject<HTMLProgressElement>,
+        !!active,
+        !!slideShowActive,
         slideItemDuration,
-        id,
+        id || '',
         onElapsed,
       );
 
@@ -217,7 +217,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       const handleExpandDetails = useCallback(() => {
         if ((active && paused) || !slideShowActive) {
           setShowMore(!showMore);
-          onShowMore();
+          onShowMore?.();
         }
       }, [active, paused, slideShowActive, showMore]);
 
@@ -238,7 +238,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           : theme?.nestedCardDetailsBackGround;
         return !showMore && textContentLarge
           ? hexToRGBA(bgToUse || '#ffffff', 0.8)
-          : null;
+          : undefined;
       }, [textContentLarge, showMore, theme?.cardDetailsBackGround, isNested]);
 
       const canShowDetailsText = useMemo(() => {
@@ -272,18 +272,12 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             onPointerLeave: tryResume,
           };
         }
+        return {};
       }, []);
 
       const canShowNestedTimeline = useMemo(() => {
         return !canShowDetailsText && textDensity === 'HIGH';
       }, [canShowDetailsText, textDensity]);
-
-      // Helper function to determine if pause handler is needed
-      const handlePause = () => {
-        if (active && slideShowActive) {
-          tryPause();
-        }
-      };
 
       const NestedTimeline = useMemo(() => {
         if (!items?.length) {
@@ -364,7 +358,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               showProgressBar={canShowProgressBar}
               triangleDir={triangleDir}
               resuming={isResuming}
-              progressRef={progressRef}
+              progressRef={progressRef as React.RefObject<HTMLProgressElement>}
             />
           )}
 
@@ -387,7 +381,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           {(!textOverlay || !media) && (
             <ContentFooter
               theme={theme}
-              progressRef={progressRef}
+              progressRef={progressRef as React.RefObject<HTMLProgressElement>}
               startWidth={startWidth}
               textContentIsLarge={textContentLarge}
               remainInterval={remainInterval}

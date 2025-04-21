@@ -56,15 +56,17 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     circleClass,
     canShowTimelineContent,
   } = useTimelineCard({
-    active,
+    active: active || false,
     autoScroll,
-    slideShowRunning,
-    cardLess,
-    showAllCardsHorizontal,
-    id,
-    onClick,
+    slideShowRunning: slideShowRunning || false,
+    cardLess: cardLess || false,
+    showAllCardsHorizontal: showAllCardsHorizontal || false,
+    id: id || '',
+    onClick: onClick
+      ? (idVal: string | number) => onClick(idVal.toString())
+      : undefined,
     mode,
-    position,
+    position: position || 'TOP',
     iconChild,
   });
 
@@ -73,12 +75,12 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       {canShowTimelineContent && (
         <TimelineCardPortal
           containerClass={containerClass}
-          contentRef={contentRef}
-          id={id}
+          contentRef={contentRef as React.RefObject<HTMLDivElement>}
+          id={id || ''}
           theme={theme}
-          active={active}
-          disableInteraction={disableInteraction}
-          showAllCardsHorizontal={showAllCardsHorizontal}
+          active={active || false}
+          disableInteraction={disableInteraction || false}
+          showAllCardsHorizontal={showAllCardsHorizontal || false}
           cardWidth={cardWidth}
           cardSubtitle={cardSubtitle}
           cardTitle={cardTitle}
@@ -101,7 +103,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       <TimelinePoint
         circleClass={circleClass}
         handleClick={handleClick}
-        circleRef={circleRef}
+        circleRef={circleRef as React.RefObject<HTMLDivElement>}
         title={title}
         theme={theme}
         timelinePointDimension={timelinePointDimension}

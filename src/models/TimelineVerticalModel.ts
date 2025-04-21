@@ -112,6 +112,9 @@ export interface VerticalItemModel extends VerticalModel {
 
   // Indicates if the timeline item is visible.
   visible?: boolean;
+
+  // Test ID for testing purposes.
+  'data-testid'?: string;
 }
 
 /**

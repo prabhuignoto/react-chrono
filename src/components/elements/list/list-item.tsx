@@ -22,6 +22,7 @@ import {
  * @param {boolean} props.active - Whether the item is in active state
  * @param {boolean} [props.selected=false] - Whether the item is selected (for checkbox mode)
  * @param {boolean} [props.selectable=false] - Whether the item shows a checkbox
+ * @param {string} [props.data-testid] - Test ID for testing purposes
  * @returns {JSX.Element} Rendered ListItem component
  */
 const ListItem: FunctionComponent<ListItemModel> = memo(
@@ -34,6 +35,7 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
     active,
     selected = false,
     selectable = false,
+    'data-testid': testId = 'list-item',
   }: ListItemModel) => {
     /**
      * Memoized click handler
@@ -54,9 +56,9 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
 
     return (
       <ListItemStyle
-        data-testid="list-item"
+        data-testid={testId}
         key={id}
-        $theme={theme}
+        $theme={theme!}
         onClick={() => handleOnClick(id)}
         $active={active}
         tabIndex={0}
@@ -65,10 +67,10 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
       >
         {selectable ? (
           <CheckboxWrapper>
-            <CheckboxStyle 
-              role="checkbox" 
+            <CheckboxStyle
+              role="checkbox"
               aria-checked={selected}
-              selected={selected} 
+              selected={selected}
               theme={theme}
             >
               {selected && <CheckIcon />}

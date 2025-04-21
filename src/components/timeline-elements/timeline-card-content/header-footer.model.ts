@@ -5,7 +5,9 @@ import { RefObject } from 'react';
 export type ContentHeaderProps = Pick<
   TimelineContentModel,
   'theme' | 'url' | 'title' | 'media' | 'content' | 'cardTitle'
->;
+> & {
+  'data-testid'?: string;
+};
 
 export type ContentFooterProps = {
   canShow: boolean;

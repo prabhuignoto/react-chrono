@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { Theme } from '@models/Theme';
 import {
   SearchBoxWrapper,
   SearchIcon,

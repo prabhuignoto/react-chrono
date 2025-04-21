@@ -81,7 +81,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
 
     // Use custom hooks to extract loading logic
     const { loadFailed, mediaLoaded, handleMediaLoaded, handleError } =
-      useMediaLoad(id, onMediaStateChange);
+      useMediaLoad(id || '', onMediaStateChange);
 
     const {
       mode,
@@ -124,7 +124,8 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     // Memoize all computed values
     const canShowArrow = useMemo(
       () =>
-        (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') && textOverlay,
+        (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') &&
+        !!textOverlay,
       [mode, textOverlay],
     );
 
@@ -139,7 +140,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     );
 
     const canExpand = useMemo(
-      () => textOverlay && !!detailsText,
+      () => !!textOverlay && !!detailsText,
       [textOverlay, detailsText],
     );
 
@@ -149,7 +150,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     );
 
     const canShowGradient = useMemo(
-      () => !expandDetails && showText && textOverlay,
+      () => !expandDetails && showText && !!textOverlay,
       [expandDetails, showText, textOverlay],
     );
 
@@ -159,7 +160,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     );
 
     const canShowProgressBar = useMemo(
-      () => showProgressBar && textOverlay,
+      () => showProgressBar && !!textOverlay,
       [showProgressBar, textOverlay],
     );
 
@@ -267,8 +268,8 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
       () => (
         <MediaDetailsWrapper
           mode={mode}
-          $absolutePosition={textOverlay}
-          $textInMedia={textOverlay}
+          $absolutePosition={!!textOverlay}
+          $textInMedia={!!textOverlay}
           ref={moreRef}
           theme={theme}
           $expandFull={expandDetails}
@@ -279,7 +280,6 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
           <CardMediaHeader>
             <TitleMemo
               title={title}
-              theme={theme}
               active={active}
               url={url}
               fontSize={fontSizes?.cardTitle}
@@ -290,14 +290,14 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
                 <ShowOrHideTextButtonMemo
                   onToggle={toggleText}
                   show={showText}
-                  textOverlay
+                  textOverlay={!!textOverlay}
                   theme={theme}
                 />
                 <ExpandButtonMemo
                   theme={theme}
                   expanded={expandDetails}
                   onExpand={toggleExpand}
-                  textOverlay
+                  textOverlay={!!textOverlay}
                 />
               </ButtonWrapper>
             )}
@@ -316,9 +316,9 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
               theme={theme}
               show={showText}
               expand={expandDetails}
-              text={detailsText}
+              text={detailsText as any}
               onRender={onDetailsTextRef}
-              textOverlay={textOverlay}
+              textOverlay={!!textOverlay}
             />
           )}
         </MediaDetailsWrapper>
@@ -358,7 +358,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
           className={cls('card-media-wrapper', classNames?.cardMedia)}
           $cardHeight={getCardHeight}
           align={mediaSettings?.align}
-          $textOverlay={textOverlay}
+          $textOverlay={!!textOverlay}
         >
           <Suspense fallback={<div>Loading media...</div>}>
             {media.type === 'VIDEO' &&

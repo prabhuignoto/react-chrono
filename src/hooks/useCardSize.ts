@@ -4,6 +4,7 @@ import {
   useEffect,
   useMemo,
   useState,
+  useRef,
 } from 'react';
 
 interface UseCardSizeProps {
@@ -46,8 +47,12 @@ export const useCardSize = ({
     containerWidth: 0,
   });
 
+  const observerRef = useRef<ResizeObserver | null>(null);
+
   useEffect(() => {
-    const observer = new ResizeObserver((entries) => {
+    if (!containerRef.current) return;
+
+    observerRef.current = new ResizeObserver((entries) => {
       for (const entry of entries) {
         if (entry.target === containerRef.current) {
           setDimensions((prev) => ({
@@ -58,11 +63,14 @@ export const useCardSize = ({
       }
     });
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
+    observerRef.current.observe(containerRef.current);
 
-    return () => observer.disconnect();
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
+      }
+    };
   }, [containerRef]);
 
   const updateCardSize = useCallback(

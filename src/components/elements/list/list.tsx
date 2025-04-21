@@ -1,5 +1,10 @@
 import { getUniqueID } from '@utils/index';
-import { FunctionComponent, startTransition, useCallback, useMemo } from 'react';
+import {
+  FunctionComponent,
+  startTransition,
+  useCallback,
+  useMemo,
+} from 'react';
 import { ListItem } from './list-item';
 import { ListModel } from './list.model';
 import { ListStyle } from './list.styles';
@@ -21,6 +26,7 @@ type EnhancedListItem = ListModel['items'][0] & { id: string };
  * @param {(id: string) => void} [props.onClick] - Callback function when an item is clicked
  * @param {number} [props.activeItemIndex] - Index of the currently active item
  * @param {boolean} [props.multiSelectable=false] - Enable multi-select functionality
+ * @param {string} [props.data-testid] - Test ID for testing purposes
  * @returns {JSX.Element} Rendered list component
  */
 const List: FunctionComponent<ListModel> = ({
@@ -29,13 +35,18 @@ const List: FunctionComponent<ListModel> = ({
   onClick,
   activeItemIndex,
   multiSelectable = false,
+  'data-testid': testId,
 }) => {
   /**
    * Memoized list items with generated unique IDs
    */
   const listItems = useMemo(
-    () => items.map((item) => ({ id: getUniqueID(), ...item })),
-    [items]
+    () =>
+      items.map((item) => {
+        // Preserve existing ID if present, generate new one if not
+        return { ...item, id: item.id || getUniqueID() };
+      }),
+    [items],
   );
 
   /**
@@ -45,15 +56,19 @@ const List: FunctionComponent<ListModel> = ({
    */
   const handleItemSelection = useCallback(
     (id: string, item: EnhancedListItem) => {
-      if (multiSelectable && item.onSelect) {
+      if (
+        multiSelectable &&
+        item.onSelect &&
+        typeof item.onSelect === 'function'
+      ) {
         startTransition(() => {
-          item.onSelect();
+          item.onSelect!();
         });
       } else {
         onClick?.(id);
       }
     },
-    [multiSelectable, onClick]
+    [multiSelectable, onClick],
   );
 
   /**
@@ -66,25 +81,26 @@ const List: FunctionComponent<ListModel> = ({
     (item: EnhancedListItem, index: number) => {
       const handleClick = useCallback(
         () => handleItemSelection(item.id, item),
-        [item, handleItemSelection]
+        [item, handleItemSelection],
       );
 
-      return <ListItem
-        key={item.id}
-        {...item}
-        theme={theme}
-        onClick={handleClick}
-        selectable={multiSelectable}
-        active={activeItemIndex === index}
-      />
+      return (
+        <ListItem
+          key={item.id}
+          {...item}
+          theme={theme}
+          onClick={handleClick}
+          selectable={multiSelectable}
+          active={activeItemIndex === index}
+          data-testid={`list-item-${item.id}`}
+        />
+      );
     },
-    [theme, handleItemSelection, multiSelectable, activeItemIndex]
+    [theme, handleItemSelection, multiSelectable, activeItemIndex],
   );
 
   return (
-    <ListStyle>
-      {listItems.map(renderListItem)}
-    </ListStyle>
+    <ListStyle data-testid={testId}>{listItems.map(renderListItem)}</ListStyle>
   );
 };
 

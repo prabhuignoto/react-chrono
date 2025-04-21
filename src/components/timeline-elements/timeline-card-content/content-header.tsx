@@ -15,10 +15,18 @@ import { CardTitle, TimelineCardHeader } from './timeline-card-content.styles';
  * @property {string} url - The URL of the card.
  * @property {boolean} media - Indicates whether the card has media or not.
  * @property {string} content - The main content of the card.
+ * @property {string} data-testid - Test ID for testing purposes.
  * @returns {JSX.Element} The ContentHeader component.
  */
 const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
-  ({ title, url, media, content, cardTitle }: ContentHeaderProps) => {
+  ({
+    title,
+    url,
+    media,
+    content,
+    cardTitle,
+    'data-testid': testId,
+  }: ContentHeaderProps) => {
     // Using context to get global values
     const { fontSizes, classNames, theme, isMobile } =
       useContext(GlobalContext);
@@ -26,7 +34,7 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
     const isNotMedia = useMemo(() => !media, [media]);
 
     return (
-      <TimelineCardHeader>
+      <TimelineCardHeader data-testid={testId}>
         {/* Render title if there is no media */}
 
         {isMobile ? (
