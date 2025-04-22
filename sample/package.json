@@ -19,11 +19,17 @@
     "xss": "^1.0.15"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.2.1",
+    "@testing-library/user-event": "^14.5.2",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@types/testing-library__jest-dom": "^6.0.0",
     "@vitejs/plugin-react": "^4.4.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "typescript": "^5.8.3",
-    "vite": "^6.3.1"
+    "vite": "^6.3.1",
+    "vite-plugin-test": "^0.1.0"
   }
 }

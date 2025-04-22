@@ -34,7 +34,7 @@ export default defineConfig({
       './src/**/*.test.{tsx,ts}',
       './src/**/__tests__/**/*.test.{tsx,ts}',
     ],
-    isolate: false,
+    isolate: true,
     watch: false,
     setupFiles: './src/test-setup.js',
     silent: false,

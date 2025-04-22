@@ -38,24 +38,43 @@ describe('ContentFooter', () => {
     expect(container).toMatchSnapshot();
   });
 
-  // should check if the progress bar is rendered with a with of 100
-  it('should check if the progress bar is rendered with a width of 100', () => {
-    const { getByRole } = customRender(
+  // should check if the progress bar is rendered
+  it('should render the progress bar when showProgressBar is true', () => {
+    const testRef = createRef<HTMLProgressElement>();
+
+    const { container } = customRender(
       <ContentFooter
         {...commonProps}
         showProgressBar
         startWidth={100}
         paused
+        progressRef={testRef}
       />,
       {
         providerProps,
       },
     );
 
-    expect(getByRole('progressbar')).toBeInTheDocument();
-    expect(getByRole('progressbar')).toBeVisible();
+    // Find the progress element
+    const progressBar = container.querySelector('progress');
+    expect(progressBar).toBeInTheDocument();
+    expect(progressBar).toBeVisible();
 
-    // expect(getByRole('progressbar')).toHaveStyle('width: 100px');
+    // Check that the right ref is attached
+    expect(testRef.current).toBe(progressBar);
+  });
+
+  // should not render progress bar when showProgressBar is false
+  it('should not render progress bar when showProgressBar is false', () => {
+    const { container } = customRender(
+      <ContentFooter {...commonProps} showProgressBar={false} />,
+      {
+        providerProps,
+      },
+    );
+
+    const progressBar = container.querySelector('progress');
+    expect(progressBar).not.toBeInTheDocument();
   });
 
   //should render read more button when text content is large

@@ -2,8 +2,11 @@ import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import { commonProps, customRender, providerProps } from '../../../common/test';
 import Controls from '../timeline-control';
+import { cleanup } from '@testing-library/react';
 
 describe('TimelineControl', () => {
+  afterEach(cleanup);
+
   it('should render', () => {
     const { container } = customRender(<Controls {...commonProps} />, {
       providerProps,

@@ -37,10 +37,9 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     </div>
     <div
       class="sc-fpgwy fDgwOp card-content-wrapper"
-      mode="VERTICAL_ALTERNATING"
     >
       <section
-        class="sc-jMsorb jdujNZ timeline-card-content  card"
+        class="sc-cUiCeM kuorYy timeline-card-content  card"
         data-testid="timeline-card-content"
         mode="VERTICAL_ALTERNATING"
         tabindex="0"
@@ -72,16 +71,16 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
             class="sc-kpOvIu NBiZG"
           >
             <h1
-              class="sc-cUiCeM VlWd card-title card-title"
+              class="sc-jPkiSJ ecXWgU card-title card-title"
             />
           </div>
         </div>
         <div
           aria-expanded="false"
-          class="sc-cZSric jsMgKC timeline-content-details show-less card-description card-text"
+          class="sc-dFaThA gnHGeq timeline-content-details show-less card-description card-text"
         />
         <span
-          class="sc-fjUQFl iKUHrG"
+          class="sc-dKKIkQ iXnjn"
           dir=""
           offset="-8"
         />

@@ -113,6 +113,7 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = ({
             slideShowRunning={slideShowRunning} // Pass down the slideshow state
             cardLess={cardLess} // Pass down the cardLess flag
             nestedCardHeight={nestedCardHeight} // Pass down the nested card height
+            data-testid={`vertical-item-row`}
           />
         );
       })}

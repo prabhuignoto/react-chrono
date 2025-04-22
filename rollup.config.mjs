@@ -110,7 +110,12 @@ export default {
       plugins: [
         '@babel/plugin-transform-runtime',
         '@babel/plugin-transform-optional-chaining',
-        'babel-plugin-jsx-remove-data-test-id',
+        [
+          'babel-plugin-jsx-remove-data-test-id',
+          {
+            attributes: ['data-test-id', 'data-testid'],
+          },
+        ],
         [
           'babel-plugin-styled-components',
           {
