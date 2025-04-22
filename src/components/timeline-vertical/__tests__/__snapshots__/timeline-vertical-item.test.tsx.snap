@@ -3,17 +3,17 @@
 exports[`Timeline vertical item > Should match snapshot 1`] = `
 <div>
   <li
-    class="sc-dZEakj dPHtNj vertical-item-row"
+    class="sc-iSqusk gZpFoW vertical-item-row"
     data-testid="vertical-item-test-1"
   >
     <div
-      class="sc-cNFqVt fUSDCu"
+      class="sc-fpgwy dwqrZN"
       mode="VERTICAL_ALTERNATING"
     >
       <div>
         <div
           align="right"
-          class="sc-gAqISa QQlxa timeline-item-title title"
+          class="sc-fpEFIB fqCgio timeline-item-title title"
         >
           vertical item title
         </div>
@@ -21,22 +21,22 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     </div>
     <div
       bg="#0f52ba"
-      class="sc-lpbaSe kHeabP"
+      class="sc-dTUlgT fLICyo"
       data-testid="tree-leaf"
     >
       <button
         aria-label="Timeline Point"
-        class="sc-bxjEGZ iwwbhs  timeline-vertical-circle"
+        class="sc-lpbaSe gqWaap  timeline-vertical-circle"
         data-testid="tree-leaf-click"
       >
         <div
-          class="sc-brzPDJ jLQEXp"
+          class="sc-gGarWV eZnqmv"
           dimension="16"
         />
       </button>
     </div>
     <div
-      class="sc-fpgwy fDgwOp card-content-wrapper"
+      class="sc-dZEakj gQDPzh card-content-wrapper"
     >
       <section
         class="sc-cUiCeM kuorYy timeline-card-content  card"
@@ -77,7 +77,8 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
         </div>
         <div
           aria-expanded="false"
-          class="sc-dFaThA gnHGeq timeline-content-details show-less card-description card-text"
+          class="sc-dFaThA gyihZc timeline-content-details show-less card-description card-text "
+          data-has-search="false"
         />
         <span
           class="sc-dKKIkQ iXnjn"

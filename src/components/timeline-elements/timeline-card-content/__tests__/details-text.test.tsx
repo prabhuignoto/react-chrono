@@ -1,11 +1,35 @@
 // test utils
 import { customRender, providerProps } from 'src/components/common/test';
 import { DetailsText } from '../details-text';
+import { render, screen } from '@testing-library/react';
+import { SearchProvider, useSearch } from 'src/components/common/SearchContext';
+import { vi } from 'vitest';
+
+// Mock the entire SearchContext module
+vi.mock('src/components/common/SearchContext', async (importOriginal) => {
+  const actual =
+    await importOriginal<
+      typeof import('src/components/common/SearchContext')
+    >();
+  return {
+    ...actual,
+    // Default mock implementation
+    useSearch: vi.fn(() => ({
+      searchTerm: '',
+      setSearchTerm: vi.fn(),
+    })),
+  };
+});
+
+// Cast the mocked hook to allow manipulation in tests
+const mockedUseSearch = useSearch as ReturnType<typeof vi.fn>;
 
 describe('DetailsText', () => {
   let props;
 
   beforeEach(() => {
+    // Reset mocks before each test
+    mockedUseSearch.mockReturnValue({ searchTerm: '', setSearchTerm: vi.fn() });
     props = {
       detailedText: 'Hello world',
     };
@@ -109,6 +133,64 @@ describe('DetailsText', () => {
         '.timeline-content-details',
       );
       expect(detailsWrapper).toHaveAttribute('aria-expanded', 'true');
+    });
+  });
+
+  describe('search highlighting', () => {
+    test('adds search highlighting class when search term is present', () => {
+      // Set the mock return value for this specific test
+      mockedUseSearch.mockReturnValueOnce({
+        searchTerm: 'world',
+        setSearchTerm: vi.fn(),
+      });
+
+      const { container } = customRender(
+        <DetailsText {...props} data-testid="details-text-search-1" />,
+        {
+          providerProps: {
+            ...providerProps,
+          },
+        },
+      );
+
+      const detailsWrapper = container.querySelector(
+        '.timeline-content-details',
+      );
+
+      expect(detailsWrapper).toHaveClass('has-search-highlighting');
+      expect(detailsWrapper).toHaveAttribute('data-has-search', 'true');
+    });
+
+    test('properly handles array of detailed text with search term', () => {
+      const arrayTextProps = {
+        detailedText: [
+          'First paragraph',
+          'Second paragraph with world',
+          'Third',
+        ],
+      };
+
+      // Set the mock return value for this specific test
+      mockedUseSearch.mockReturnValueOnce({
+        searchTerm: 'world',
+        setSearchTerm: vi.fn(),
+      });
+
+      const { container } = customRender(
+        <DetailsText {...arrayTextProps} data-testid="details-text-search-2" />,
+        {
+          providerProps: {
+            ...providerProps,
+          },
+        },
+      );
+
+      const detailsWrapper = container.querySelector(
+        '.timeline-content-details',
+      );
+
+      expect(detailsWrapper).toHaveClass('has-search-highlighting');
+      expect(detailsWrapper).toHaveAttribute('data-has-search', 'true');
     });
   });
 });

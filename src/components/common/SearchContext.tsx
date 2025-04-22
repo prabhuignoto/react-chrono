@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 interface SearchContextType {
   searchTerm: string;
@@ -18,6 +18,18 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
+
+  // Log when search term changes for debugging
+  useEffect(() => {
+    if (searchTerm) {
+      console.log('Search term changed in context:', searchTerm);
+    }
+  }, [searchTerm]);
+
+  // Force a console log to check when provider is created
+  useEffect(() => {
+    console.log('SearchProvider initialized');
+  }, []);
 
   return (
     <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>

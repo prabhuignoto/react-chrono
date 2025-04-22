@@ -1,4 +1,4 @@
-import { useState, useCallback, RefObject } from 'react';
+import { useState, useCallback, RefObject, useEffect } from 'react';
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import { useDebounce } from '../../../hooks/useDebounce';
 import { useSearch } from 'src/components/common/SearchContext';
@@ -28,16 +28,36 @@ export const useSearchBox = ({
   const [searchText, setSearchText] = useState('');
   const [searchMatches, setSearchMatches] = useState<string[]>([]);
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
-  const { setSearchTerm } = useSearch();
+  const { setSearchTerm, searchTerm } = useSearch();
+
+  // Debug search state
+  useEffect(() => {
+    if (searchText) {
+      console.log('Search box text:', searchText);
+      console.log('Global search term:', searchTerm);
+    }
+  }, [searchText, searchTerm]);
 
   // Handle search with debounce to avoid excessive searches
   const handleSearch = useCallback(
     (searchText: string) => {
       const searchTerm = searchText.toLowerCase().trim();
 
+      // Log the search term always
+      console.log('Searching for:', searchTerm);
+
       // Update the global search term for highlighting if enabled
       if (highlightResults) {
+        console.log('Setting global search term to:', searchTerm);
         setSearchTerm(searchTerm);
+
+        // Force a reapplication to make sure the term is set
+        setTimeout(() => {
+          if (searchTerm && searchTerm.length >= minimumSearchLength) {
+            console.log('Reapplying search term:', searchTerm);
+            setSearchTerm(searchTerm);
+          }
+        }, 100);
       }
 
       // Reset search state if search is empty or too short
@@ -47,30 +67,49 @@ export const useSearchBox = ({
         return;
       }
 
-      // Find ALL matching items
+      // Find ALL matching items, including those with matching detailed text
       const matches = items
         .filter((item) => {
-          // Create a searchable content string based on configured searchKeys
-          const searchableContentParts = searchKeys.map((key) => {
-            if (key === 'cardDetailedText') {
-              return typeof item[key] === 'string'
-                ? (item[key] as string)
-                : Array.isArray(item[key])
-                  ? (item[key] as string[]).join(' ')
-                  : '';
-            }
-            return (item[key as keyof TimelineItemModel] as string) || '';
-          });
-
-          const searchableContent = searchableContentParts
+          // Check title and subtitles first
+          const basicContent = [
+            item.title || '',
+            item.cardTitle || '',
+            item.cardSubtitle || '',
+          ]
             .join(' ')
             .toLowerCase();
-          return searchableContent.includes(searchTerm);
+
+          if (basicContent.includes(searchTerm)) {
+            return true;
+          }
+
+          // Check detailed text specifically
+          if (
+            searchKeys.includes('cardDetailedText') &&
+            item.cardDetailedText
+          ) {
+            // Handle different types of detailed text
+            let detailedTextContent = '';
+
+            if (typeof item.cardDetailedText === 'string') {
+              detailedTextContent = item.cardDetailedText;
+            } else if (Array.isArray(item.cardDetailedText)) {
+              detailedTextContent = item.cardDetailedText.join(' ');
+            }
+
+            if (detailedTextContent.toLowerCase().includes(searchTerm)) {
+              console.log('Found match in detailed text for item:', item.id);
+              return true;
+            }
+          }
+
+          return false;
         })
         .map((item) => item.id || '');
 
       // Update matches and reset index
       const validMatches = matches.filter(Boolean); // Filter out empty IDs
+      console.log('Found matches:', validMatches.length);
       setSearchMatches(validMatches);
       setCurrentMatchIndex(0);
 

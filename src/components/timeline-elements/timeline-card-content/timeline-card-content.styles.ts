@@ -191,8 +191,37 @@ export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
   margin: 0;
   width: 100%;
   color: ${(p) => p.theme.cardDetailsColor};
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  padding: 0 0.25rem;
+
   &.timeline-content-details {
     width: calc(100% - 0.5rem);
+  }
+
+  /* Ensure highlighted text is visible */
+  span,
+  mark {
+    display: inline !important;
+  }
+
+  /* Stronger styling for highlighted content */
+  &.has-search,
+  &.highlight-container {
+    mark {
+      display: inline !important;
+      background-color: ${(p) => p.theme.primary}99 !important;
+      color: #000000 !important;
+      font-weight: bold !important;
+      padding: 0 3px !important;
+      margin: 0 1px !important;
+      border-radius: 3px !important;
+      border: 1px solid ${(p) => p.theme.primary} !important;
+      box-shadow: 0 0 2px ${(p) => p.theme.primary} !important;
+      position: relative !important;
+      z-index: 5 !important;
+    }
   }
 `;
 
@@ -204,6 +233,32 @@ export const TimelineSubContent = styled.span<{
   display: block;
   font-size: ${(p) => p.fontSize};
   color: ${(p) => p.theme.cardDetailsColor};
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+
+  /* Ensure highlighted text is visible */
+  span,
+  mark {
+    display: inline !important;
+  }
+
+  /* Stronger styling for highlighted content */
+  &.highlight-container {
+    mark {
+      display: inline !important;
+      background-color: ${(p) => p.theme.primary}99 !important;
+      color: #000000 !important;
+      font-weight: bold !important;
+      padding: 0 3px !important;
+      margin: 0 1px !important;
+      border-radius: 3px !important;
+      border: 1px solid ${(p) => p.theme.primary} !important;
+      box-shadow: 0 0 2px ${(p) => p.theme.primary} !important;
+      position: relative !important;
+      z-index: 5 !important;
+    }
+  }
 `;
 
 export const TimelineContentDetailsWrapper = styled.div<{
@@ -251,16 +306,40 @@ export const TimelineContentDetailsWrapper = styled.div<{
 
   ${(p) => (p.$customContent ? `height: 100%;` : '')}
 
+  /* Special styling for containers with search highlighting */
+  &.has-search-highlighting {
+    mark {
+      display: inline !important;
+      background-color: ${(p) => p.theme?.primary}99 !important;
+      color: #000000 !important;
+      font-weight: bold !important;
+      padding: 0 3px !important;
+      margin: 0 1px !important;
+      border-radius: 3px !important;
+      border: 1px solid ${(p) => p.theme?.primary} !important;
+      box-shadow: 0 0 2px ${(p) => p.theme?.primary} !important;
+      position: relative !important;
+      z-index: 5 !important;
+    }
+
+    p,
+    span {
+      mark {
+        display: inline !important;
+      }
+    }
+  }
+
   $${({
-    height = 0,
-    $cardHeight = 0,
-    $contentHeight = 0,
-    $showMore,
-    $useReadMore,
-  }) =>
-    $showMore && $useReadMore && $cardHeight
-      ? css`
-          animation: ${keyframes`
+      height = 0,
+      $cardHeight = 0,
+      $contentHeight = 0,
+      $showMore,
+      $useReadMore,
+    }) =>
+      $showMore && $useReadMore && $cardHeight
+        ? css`
+            animation: ${keyframes`
             0% {
               max-height: ${height}px;
             }
@@ -268,8 +347,8 @@ export const TimelineContentDetailsWrapper = styled.div<{
              max-height: ${$cardHeight + $contentHeight - height}px;
             }
           `} 0.25s ease-in-out;
-        `
-      : ''}
+          `
+        : ''}
     &::-webkit-scrollbar {
     width: 0.3em;
   }

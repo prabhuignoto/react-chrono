@@ -10,22 +10,41 @@ describe('TextHighlighter', () => {
     // Add other theme properties as needed
   };
 
+  // Updated regex to match the exact structure with multi-line style attribute
+  const getMarkedContent = (html: string): string[] => {
+    const matches: string[] = [];
+    const regex = /<mark style="[^"]*">(.*?)<\/mark>/gs;
+    let match;
+
+    while ((match = regex.exec(html)) !== null) {
+      matches.push(match[1]);
+    }
+
+    return matches;
+  };
+
   it('renders text without highlighting when no search term is provided', () => {
     const text = 'This is a sample text';
 
-    render(<TextHighlighter text={text} searchTerm="" theme={mockTheme} />);
+    const { container } = render(
+      <TextHighlighter text={text} searchTerm="" theme={mockTheme} />,
+    );
 
     expect(screen.getByText(text)).toBeInTheDocument();
-    expect(document.querySelector('span')).not.toBeInTheDocument();
+    // Check the innerHTML of the container, it should not contain <mark>
+    expect(container.innerHTML).not.toContain('<mark');
   });
 
   it('renders text without highlighting when search term does not match', () => {
     const text = 'This is a sample text';
 
-    render(<TextHighlighter text={text} searchTerm="xyz" theme={mockTheme} />);
+    const { container } = render(
+      <TextHighlighter text={text} searchTerm="xyz" theme={mockTheme} />,
+    );
 
     expect(screen.getByText(text)).toBeInTheDocument();
-    expect(document.querySelector('span[class]')).not.toBeInTheDocument();
+    // Check the innerHTML of the container, it should not contain <mark>
+    expect(container.innerHTML).not.toContain('<mark');
   });
 
   it('highlights matching text correctly', () => {
@@ -36,13 +55,24 @@ describe('TextHighlighter', () => {
       <TextHighlighter text={text} searchTerm={searchTerm} theme={mockTheme} />,
     );
 
-    // The text should be split into three parts
-    expect(container.textContent).toBe(text);
+    // The component renders a span wrapper
+    const wrapperSpan = container.firstChild as HTMLElement;
+    expect(wrapperSpan.tagName).toBe('SPAN');
+    expect(wrapperSpan.textContent).toBe(text);
 
-    // There should be one highlighted span
-    const highlightedSpan = container.querySelector('span');
-    expect(highlightedSpan).toBeInTheDocument();
-    expect(highlightedSpan?.textContent).toBe(searchTerm);
+    // Check innerHTML for the mark tag
+    expect(wrapperSpan.innerHTML).toContain('<mark');
+    expect(wrapperSpan.innerHTML).toContain(searchTerm);
+
+    // Check the marked content using our helper function
+    const markedContent = getMarkedContent(wrapperSpan.innerHTML);
+    expect(markedContent.length).toBe(1);
+    expect(markedContent[0]).toBe(searchTerm);
+
+    // Check for key styles applied via inline style attribute
+    expect(wrapperSpan.innerHTML).toContain('style=');
+    expect(wrapperSpan.innerHTML).toContain('font-weight: bold');
+    expect(wrapperSpan.innerHTML).toContain('background-color');
   });
 
   it('highlights multiple occurrences of the search term', () => {
@@ -53,14 +83,17 @@ describe('TextHighlighter', () => {
       <TextHighlighter text={text} searchTerm={searchTerm} theme={mockTheme} />,
     );
 
-    // There should be two highlighted spans
-    const highlightedSpans = container.querySelectorAll('span');
-    expect(highlightedSpans.length).toBe(2);
+    const wrapperSpan = container.firstChild as HTMLElement;
+    expect(wrapperSpan.tagName).toBe('SPAN');
 
-    // Both spans should contain the search term
-    highlightedSpans.forEach((span) => {
-      expect(span.textContent).toBe(searchTerm);
-    });
+    // Count the number of <mark> tags in the innerHTML
+    const markCount = (wrapperSpan.innerHTML.match(/<mark/g) || []).length;
+    expect(markCount).toBe(2);
+
+    // Check the marked content using our helper function
+    const markedContent = getMarkedContent(wrapperSpan.innerHTML);
+    expect(markedContent.length).toBe(2);
+    expect(markedContent).toEqual(['test', 'test']);
   });
 
   it('handles case insensitive search', () => {
@@ -71,13 +104,18 @@ describe('TextHighlighter', () => {
       <TextHighlighter text={text} searchTerm={searchTerm} theme={mockTheme} />,
     );
 
-    // There should be two highlighted spans
-    const highlightedSpans = container.querySelectorAll('span');
-    expect(highlightedSpans.length).toBe(2);
+    const wrapperSpan = container.firstChild as HTMLElement;
+    expect(wrapperSpan.tagName).toBe('SPAN');
 
-    // Check the text content of each span
-    expect(highlightedSpans[0].textContent).toBe('TEST');
-    expect(highlightedSpans[1].textContent).toBe('test');
+    // Count the number of <mark> tags
+    const markCount = (wrapperSpan.innerHTML.match(/<mark/g) || []).length;
+    expect(markCount).toBe(2);
+
+    // Check the marked content using our helper function
+    const markedContent = getMarkedContent(wrapperSpan.innerHTML);
+    expect(markedContent.length).toBe(2);
+    expect(markedContent).toContain('TEST');
+    expect(markedContent).toContain('test');
   });
 
   it('properly escapes special regex characters in search term', () => {
@@ -88,15 +126,69 @@ describe('TextHighlighter', () => {
       <TextHighlighter text={text} searchTerm={searchTerm} theme={mockTheme} />,
     );
 
-    // There should be one highlighted span with the exact text including brackets
-    const highlightedSpan = container.querySelector('span');
-    expect(highlightedSpan).toBeInTheDocument();
-    expect(highlightedSpan?.textContent).toBe(searchTerm);
+    const wrapperSpan = container.firstChild as HTMLElement;
+    expect(wrapperSpan.tagName).toBe('SPAN');
+
+    // Check innerHTML for the highlighted special term
+    expect(wrapperSpan.innerHTML).toContain('<mark');
+    expect(wrapperSpan.innerHTML).toContain(searchTerm);
+
+    // Check the marked content using our helper function
+    const markedContent = getMarkedContent(wrapperSpan.innerHTML);
+    expect(markedContent.length).toBe(1);
+    expect(markedContent[0]).toBe(searchTerm);
   });
 
   it('returns text as is when text is empty', () => {
-    render(<TextHighlighter text="" searchTerm="test" theme={mockTheme} />);
+    const { container } = render(
+      <TextHighlighter text="" searchTerm="test" theme={mockTheme} />,
+    );
+    // It should render an empty fragment or similar, so container might be empty or have a placeholder
+    expect(container.textContent).toBe('');
+  });
 
-    expect(document.body.textContent).toBe('');
+  it('applies aggressive styling to the highlighted text', () => {
+    const text = 'This is a sample text';
+    const searchTerm = 'sample';
+
+    const { container } = render(
+      <TextHighlighter text={text} searchTerm={searchTerm} theme={mockTheme} />,
+    );
+
+    const wrapperSpan = container.firstChild as HTMLElement;
+    expect(wrapperSpan.tagName).toBe('SPAN');
+
+    // Check that important CSS properties are present in the inline style
+    expect(wrapperSpan.innerHTML).toContain('<mark');
+    expect(wrapperSpan.innerHTML).toContain('style=');
+    expect(wrapperSpan.innerHTML).toContain('display: inline !important');
+    expect(wrapperSpan.innerHTML).toContain('font-weight: bold !important');
+    expect(wrapperSpan.innerHTML).toContain('background-color:');
+    expect(wrapperSpan.innerHTML).toContain('color:');
+    expect(wrapperSpan.innerHTML).toContain('border-radius:');
+    expect(wrapperSpan.innerHTML).toContain('padding:');
+    expect(wrapperSpan.innerHTML).toContain('border:');
+    expect(wrapperSpan.innerHTML).toContain('box-shadow:');
+  });
+
+  it('handles search term with trimmed whitespace', () => {
+    const text = 'This is a sample text';
+    const searchTerm = '  sample  '; // with extra spaces
+
+    const { container } = render(
+      <TextHighlighter text={text} searchTerm={searchTerm} theme={mockTheme} />,
+    );
+
+    const wrapperSpan = container.firstChild as HTMLElement;
+    expect(wrapperSpan.tagName).toBe('SPAN');
+
+    // The highlighting should work even with whitespace in search term
+    expect(wrapperSpan.innerHTML).toContain('<mark');
+    expect(wrapperSpan.innerHTML).toContain('sample');
+
+    // Check the marked content using our helper function
+    const markedContent = getMarkedContent(wrapperSpan.innerHTML);
+    expect(markedContent.length).toBe(1);
+    expect(markedContent[0]).toBe('sample');
   });
 });
