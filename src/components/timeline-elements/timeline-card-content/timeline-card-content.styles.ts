@@ -34,13 +34,11 @@ export const TimelineItemContentWrapper = styled.section<
 >`
   align-items: flex-start;
   background: ${(p) => p.theme.cardBgColor};
-  border-radius: 8px;
+  border-radius: 12px;
   display: flex;
   position: absolute;
   ${({ borderLessCards }) =>
-    !borderLessCards
-      ? `filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.3))`
-      : 'none'};
+    !borderLessCards ? `box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);` : 'none'};
   flex-direction: column;
   justify-content: flex-start;
   line-height: 1.5em;
@@ -57,12 +55,24 @@ export const TimelineItemContentWrapper = styled.section<
   text-align: left;
   width: 98%;
   z-index: 0;
+  padding: ${(p) => (p.$textOverlay ? '0' : '1rem')};
+  transition: all 0.2s ease-in-out;
+  overflow: ${(p) => (p.$textOverlay ? 'hidden' : 'visible')};
+  ${(p) =>
+    p.$textOverlay && p.mode === 'HORIZONTAL'
+      ? `
+        display: flex;
+        flex-direction: column;
+        max-height: 100%;
+      `
+      : ''}
 
   ${(p) =>
     p.$highlight
       ? css`
           &:hover {
-            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3)) brightness(1.05);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
 
             &::before {
               content: '';
@@ -73,7 +83,7 @@ export const TimelineItemContentWrapper = styled.section<
               width: 100%;
               z-index: -1;
               border: 2px solid ${p.theme.primary};
-              border-radius: 4px;
+              border-radius: 12px;
             }
           }
         `
@@ -83,14 +93,25 @@ export const TimelineItemContentWrapper = styled.section<
     p.$isNested
       ? css`
           background: ${p.theme.nestedCardBgColor};
-          box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+          margin: 0.75rem 0;
+          border-radius: 10px;
+        `
+      : css``}
+
+  ${(p) =>
+    p.$active
+      ? css`
+          box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
         `
       : css``}
 
   height: ${(p) => (p.$textOverlay ? '0' : '')};
 
   &:focus {
-    outline: 1px solid ${(p) => p.theme?.primary};
+    outline: none;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+    border: 2px solid rgba(0, 123, 255, 0.3);
   }
 
   ${(p) => {
@@ -142,7 +163,9 @@ export const TimelineItemContentWrapper = styled.section<
 
 export const TimelineCardHeader = styled.header`
   width: 100%;
-  padding: 0.5rem;
+  padding: 0 0 0.75rem 0;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 `;
 
 export const CardSubTitle = styled.h2<{
@@ -153,11 +176,12 @@ export const CardSubTitle = styled.h2<{
 }>`
   color: ${(p) => p.theme.cardSubtitleColor};
   font-size: ${(p) => p.$fontSize};
-  font-weight: 600;
-  margin: 0;
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
   text-align: left;
-  width: 97%;
-  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem;' : '')};
+  width: 100%;
+  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0' : '0')};
+  line-height: 1.4;
 `;
 
 export const CardTitle = styled.h1<{
@@ -169,16 +193,25 @@ export const CardTitle = styled.h1<{
   color: ${(p) => p.theme.cardTitleColor};
   font-size: ${(p) => p.$fontSize};
   font-weight: 600;
-  margin: 0.25rem 0 0.5rem 0;
+  margin: 0 0 0.75rem 0;
   text-align: left;
-  width: 95%;
-  padding: ${(p) => (p.$padding ? '0.2rem 0 0.25rem 0.5rem;' : '')} &.active {
+  width: 100%;
+  padding: ${(p) => (p.$padding ? '0.2rem 0 0.25rem 0' : '0')};
+  line-height: 1.3;
+
+  &.active {
     color: ${(p) => p.theme.primary};
   }
 `;
 
 export const CardTitleAnchor = styled.a`
   color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #0275d8;
+  }
 
   &:active {
     color: inherit;
@@ -186,18 +219,18 @@ export const CardTitleAnchor = styled.a`
 `;
 
 export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 400;
-  margin: 0;
+  margin: 0 0 1rem 0;
   width: 100%;
   color: ${(p) => p.theme.cardDetailsColor};
   word-break: break-word;
   overflow-wrap: break-word;
-  line-height: 1.5;
-  padding: 0 0.25rem;
+  line-height: 1.6;
+  padding: 0;
 
   &.timeline-content-details {
-    width: calc(100% - 0.5rem);
+    width: 100%;
   }
 
   /* Ensure highlighted text is visible */
@@ -211,16 +244,6 @@ export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
   &.highlight-container {
     mark {
       display: inline !important;
-      background-color: ${(p) => p.theme.primary}99 !important;
-      color: #000000 !important;
-      font-weight: bold !important;
-      padding: 0 3px !important;
-      margin: 0 1px !important;
-      border-radius: 3px !important;
-      border: 1px solid ${(p) => p.theme.primary} !important;
-      box-shadow: 0 0 2px ${(p) => p.theme.primary} !important;
-      position: relative !important;
-      z-index: 5 !important;
     }
   }
 `;
@@ -229,13 +252,14 @@ export const TimelineSubContent = styled.span<{
   fontSize?: string;
   theme?: Theme;
 }>`
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   display: block;
-  font-size: ${(p) => p.fontSize};
+  font-size: ${(p) => p.fontSize || '0.9rem'};
   color: ${(p) => p.theme.cardDetailsColor};
   word-break: break-word;
   overflow-wrap: break-word;
-  line-height: 1.5;
+  line-height: 1.6;
+  padding: 0;
 
   /* Ensure highlighted text is visible */
   span,
@@ -247,14 +271,14 @@ export const TimelineSubContent = styled.span<{
   &.highlight-container {
     mark {
       display: inline !important;
-      background-color: ${(p) => p.theme.primary}99 !important;
+      background-color: ${(p) => p.theme && p.theme.primary}99 !important;
       color: #000000 !important;
       font-weight: bold !important;
       padding: 0 3px !important;
       margin: 0 1px !important;
       border-radius: 3px !important;
-      border: 1px solid ${(p) => p.theme.primary} !important;
-      box-shadow: 0 0 2px ${(p) => p.theme.primary} !important;
+      border: 1px solid ${(p) => p.theme && p.theme.primary} !important;
+      box-shadow: 0 0 2px ${(p) => p.theme && p.theme.primary} !important;
       position: relative !important;
       z-index: 5 !important;
     }
@@ -278,13 +302,15 @@ export const TimelineContentDetailsWrapper = styled.div<{
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin-top: ${(p) => (p.$textOverlay ? '0' : '0.5em')};
+  margin-bottom: ${(p) => (p.$textOverlay ? '0' : '0.5em')};
   position: relative;
   ${({ $useReadMore, $customContent, $showMore, height = 0, $textOverlay }) =>
     $useReadMore && !$customContent && !$showMore && !$textOverlay
       ? `max-height: ${height}px;`
-      : 'height: 100%'}
+      : $textOverlay
+        ? 'max-height: 100%; height: 100%;'
+        : 'height: 100%;'}
   ${({
     $cardHeight = 0,
     $contentHeight = 0,
@@ -296,13 +322,17 @@ export const TimelineContentDetailsWrapper = styled.div<{
       ? `max-height: ${($cardHeight || 0) + ($contentHeight || 0) - height}px;`
       : ''}
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: ${(p) => (p.$textOverlay ? 'auto' : 'auto')};
   scrollbar-color: ${(p) => p.theme?.primary} default;
   scrollbar-width: thin;
   transition: max-height 0.25s ease-in-out;
   width: ${(p) =>
-    p.$borderLess ? 'calc(100% - 0.5rem)' : 'calc(95% - 0.5rem)'};
-  padding: 0.25rem 0.25rem;
+    p.$textOverlay
+      ? '100%'
+      : p.$borderLess
+        ? 'calc(100% - 0.5rem)'
+        : 'calc(95% - 0.5rem)'};
+  padding: ${(p) => (p.$textOverlay ? '0.5rem 0.75rem' : '0.25rem 0.25rem')};
 
   ${(p) => (p.$customContent ? `height: 100%;` : '')}
 
@@ -483,6 +513,7 @@ export const TriangleIconWrapper = styled.span<{
   dir?: string;
   offset?: number;
   theme?: Theme;
+  flip?: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -492,8 +523,18 @@ export const TriangleIconWrapper = styled.span<{
   position: absolute;
   top: calc(50%);
   background: ${(p) => p.theme.cardBgColor};
-  transform: translateY(-50%) rotate(225deg);
-  z-index: -1;
+  transform: translateY(-50%)
+    rotate(
+      ${(p) => {
+        // When flip mode is enabled, we need to adjust the rotation
+        if (p.flip) {
+          return p.dir === 'left' ? '225deg' : '45deg';
+        }
+        // Default rotation
+        return p.dir === 'left' ? '225deg' : '45deg';
+      }}
+    );
+  z-index: 1; /* Ensure visibility */
 
   & svg {
     width: 100%;
@@ -501,6 +542,16 @@ export const TriangleIconWrapper = styled.span<{
     fill: #fff;
   }
 
-  ${(p) =>
-    p.dir === 'left' ? `right: ${p.offset}px;` : `left: ${p.offset}px;`};
+  ${(p) => {
+    // For flip mode, we need to swap the positioning logic
+    if (p.flip) {
+      return p.dir === 'right'
+        ? `right: ${p.offset || -8}px;`
+        : `left: ${p.offset || -8}px;`;
+    }
+    // Default positioning
+    return p.dir === 'left'
+      ? `right: ${p.offset || -8}px;`
+      : `left: ${p.offset || -8}px;`;
+  }}
 `;

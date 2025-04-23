@@ -3,14 +3,14 @@
 exports[`Content Header > should match the snapshot 1`] = `
 <div>
   <header
-    class="sc-cXawGu fTmNGU"
+    class="sc-cXawGu dZhqrL"
     data-testid="header-test-2"
   >
     <div
       data-testid="timeline-card-title"
     >
       <h1
-        class="sc-cUiCeM VlWd card-title card-title"
+        class="sc-cUiCeM HaFwY card-title card-title"
       >
         title
       </h1>
@@ -19,7 +19,7 @@ exports[`Content Header > should match the snapshot 1`] = `
       data-testid="timeline-card-subtitle"
     >
       <h2
-        class="sc-jJAtPt fJFAxs card-sub-title card-subtitle"
+        class="sc-jJAtPt hcdLip card-sub-title card-subtitle"
       >
         content
       </h2>

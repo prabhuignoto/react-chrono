@@ -3,11 +3,11 @@
 exports[`Timeline vertical item > Should match snapshot 1`] = `
 <div>
   <li
-    class="sc-iSqusk gZpFoW vertical-item-row"
+    class="sc-iSqusk gYVWSz vertical-item-row"
     data-testid="vertical-item-test-1"
   >
     <div
-      class="sc-fpgwy dwqrZN"
+      class="sc-fpgwy ecJOin"
       mode="VERTICAL_ALTERNATING"
     >
       <div>
@@ -26,26 +26,26 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     >
       <button
         aria-label="Timeline Point"
-        class="sc-lpbaSe gqWaap  timeline-vertical-circle"
+        class="sc-lpbaSe gvuEQR  timeline-vertical-circle"
         data-testid="tree-leaf-click"
       >
         <div
-          class="sc-gGarWV eZnqmv"
+          class="sc-gGarWV eJPgXw"
           dimension="16"
         />
       </button>
     </div>
     <div
-      class="sc-dZEakj gQDPzh card-content-wrapper"
+      class="sc-dZEakj bYZtaU card-content-wrapper"
     >
       <section
-        class="sc-cUiCeM kuorYy timeline-card-content  card"
+        class="sc-cUiCeM kIEuAU timeline-card-content  card"
         data-testid="timeline-card-content"
         mode="VERTICAL_ALTERNATING"
         tabindex="0"
       >
         <div
-          class="sc-Qotzb gPGhhl card-media-wrapper card-media"
+          class="sc-Qotzb gXPksA card-media-wrapper card-media"
           mode="VERTICAL_ALTERNATING"
         >
           <div
@@ -53,7 +53,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
             height="200"
           >
             <img
-              class="sc-fYsHOw qMwu"
+              class="sc-fYsHOw hilnmX"
               data-testid="timeline-card-content-image"
               height="auto"
               loading="lazy"
@@ -71,17 +71,17 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
             class="sc-kpOvIu NBiZG"
           >
             <h1
-              class="sc-jPkiSJ ecXWgU card-title card-title"
+              class="sc-jPkiSJ bTUYhJ card-title card-title"
             />
           </div>
         </div>
         <div
           aria-expanded="false"
-          class="sc-dFaThA gyihZc timeline-content-details show-less card-description card-text "
+          class="sc-dFaThA gxmMgT timeline-content-details show-less card-description card-text "
           data-has-search="false"
         />
         <span
-          class="sc-dKKIkQ iXnjn"
+          class="sc-dKKIkQ eTmtBe"
           dir=""
           offset="-8"
         />

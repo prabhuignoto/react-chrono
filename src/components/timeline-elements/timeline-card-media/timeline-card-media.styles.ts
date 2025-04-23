@@ -31,16 +31,21 @@ export const MediaWrapper = styled.div<{
   align-items: flex-start;
   align-self: center;
   background: ${(p) => (!p.$textOverlay ? p.theme?.cardMediaBgColor : 'none')};
-  border-radius: 4px;
+  border-radius: ${(p) => (p.$textOverlay ? '12px' : '4px')};
   flex-direction: row;
-  height: ${(p) => (p.$textOverlay ? 'calc(100% - 1em)' : '0')};
-  padding: 0.5em;
-  // pointer-events: ${(p) => (!p.$active && p.$slideShowActive ? 'none' : '')};
+  height: ${(p) => (p.$textOverlay ? 'calc(100% - 0.5em)' : '0')};
+  padding: ${(p) => (p.$textOverlay ? '0' : '0.5em')};
   position: relative;
   text-align: ${(p) => p.align};
-  width: calc(100% - 1em);
+  width: ${(p) => (p.$textOverlay ? '100%' : 'calc(100% - 1em)')};
+  overflow: ${(p) => (p.$textOverlay ? 'hidden' : 'visible')};
+  display: flex;
+  flex: ${(p) => (p.$textOverlay ? '1' : 'initial')};
 
-  ${(p) => (p.$cardHeight ? `min-height: ${p.$cardHeight}px;` : '')};
+  ${(p) =>
+    p.$cardHeight && !p.$textOverlay ? `min-height: ${p.$cardHeight}px;` : ''};
+  ${(p) =>
+    p.$textOverlay && p.mode === 'HORIZONTAL' ? `max-height: 100%;` : ''};
   ${(p) => {
     if (p.mode === 'HORIZONTAL') {
       return `
@@ -62,6 +67,7 @@ export const MediaWrapper = styled.div<{
 
 export const CardImage = styled.img<{
   $enableBorderRadius?: boolean;
+  $textOverlay?: boolean;
   $visible?: boolean;
   dir?: string;
   fit?: string;
@@ -76,7 +82,14 @@ export const CardImage = styled.img<{
   object-fit: ${(p) => p.fit || 'cover'};
   object-position: center;
   visibility: ${(p) => (p.$visible ? 'visible' : 'hidden')};
-  border-radius: ${(p) => (p.$enableBorderRadius ? '6px' : '0')};
+  border-radius: ${(p) =>
+    p.$textOverlay ? '12px 12px 0 0' : p.$enableBorderRadius ? '6px' : '0'};
+  ${(p) =>
+    p.$textOverlay && p.mode === 'HORIZONTAL'
+      ? `
+    max-height: 100%;
+  `
+      : ''}
 `;
 
 export const CardVideo = styled.video<{ height?: number }>`
@@ -104,6 +117,7 @@ export const MediaDetailsWrapper = styled.div<{
   width: ${(p) => {
     switch (p.mode) {
       case 'HORIZONTAL':
+        return p.$textInMedia ? `calc(95%)` : `calc(90% - 0rem)`;
       case 'VERTICAL':
       case 'VERTICAL_ALTERNATING':
         return `calc(90% - 0rem)`;
@@ -152,10 +166,19 @@ export const MediaDetailsWrapper = styled.div<{
     background: ${
       p.$showText ? p.theme?.cardDetailsBackGround : p.theme?.cardBgColor
     };
-    // backdrop-filter: blur(1px);
-    padding: 0.25rem;
+    width: ${p.mode === 'HORIZONTAL' ? '95%' : '90%'};
+    max-height: ${p.$expandFull ? '100%' : '60%'};
+    border-radius: ${p.$expandFull ? '0 0 12px 12px' : '10px'};
+    padding: 0.5rem;
     ${p.$showText ? `overflow: auto;` : `overflow: hidden;`}
     transition: height 0.25s ease-out, width 0.25s ease-out, bottom 0.25s ease-out, background 0.25s ease-out;
+    ${
+      p.mode === 'HORIZONTAL'
+        ? `
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    `
+        : ''
+    }
   `
       : ``}
 

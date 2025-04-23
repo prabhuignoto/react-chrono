@@ -66,21 +66,36 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   };
 
   const updateItems = (lineItems: TimelineItemModel[]) => {
-    if (lineItems) {
-      const pos = timeLineItems.length;
+    if (lineItems && lineItems.length) {
+      return lineItems.map((item) => {
+        const id = getUniqueID();
 
-      return lineItems.map((item, index) => ({
-        ...item,
-        active: index === pos,
-        visible: true,
-      }));
+        return {
+          ...item,
+          _dayjs: item.date ? dayjs(item.date) : undefined,
+          active: false,
+          id,
+          items: item.items?.map((subItem) => ({
+            ...subItem,
+            _dayjs: dayjs(subItem.date),
+            id: getUniqueID(),
+            isNested: true,
+            visible: true,
+          })),
+          title:
+            item.date && !item.title
+              ? dayjs(item.date).format(titleDateFormat)
+              : item.title,
+          visible: true,
+        };
+      });
     } else {
       return [];
     }
   };
 
   useEffect(() => {
-    const _items = items?.filter((item) => item);
+    const _items = items?.filter((item) => !!item);
     let newItems: TimelineItemModel[] = [];
 
     if (!_items?.length) {
@@ -89,18 +104,27 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       return;
     }
 
-    if (timeLineItems.length && _items.length > timeLineItems.length) {
-      newItems = updateItems(_items);
-    } else if (_items.length) {
-      newItems = initItems(_items);
-    }
+    if (allowDynamicUpdate) {
+      if (timeLineItems.length && _items.length > timeLineItems.length) {
+        const newItemsToAdd = _items.slice(timeLineItems.length);
+        newItems = [...timeLineItems, ...updateItems(newItemsToAdd)];
+      } else if (_items.length) {
+        newItems = initItems(_items);
+      }
 
-    if (newItems.length) {
-      timeLineItemsRef.current = newItems;
-      setTimeLineItems(newItems);
-      setActiveTimelineItem(0);
+      if (newItems.length) {
+        timeLineItemsRef.current = newItems;
+        setTimeLineItems(newItems);
+      }
+    } else {
+      newItems = initItems(_items);
+      if (newItems.length) {
+        timeLineItemsRef.current = newItems;
+        setTimeLineItems(newItems);
+        setActiveTimelineItem(0);
+      }
     }
-  }, [JSON.stringify(allowDynamicUpdate ? items : null)]);
+  }, [items, allowDynamicUpdate]);
 
   const handleTimelineUpdate = useCallback((actvTimelineIndex: number) => {
     setTimeLineItems((lineItems) =>

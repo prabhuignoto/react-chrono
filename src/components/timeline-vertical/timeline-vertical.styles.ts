@@ -12,6 +12,7 @@ export const TimelineVerticalWrapper = styled.div`
   padding: 0.25rem; /* Small padding around the timeline */
   outline: 0; /* Remove default outline */
   position: relative; /* Establish positioning context */
+  z-index: 0; /* Establish a stacking context for child elements */
 `;
 
 /**
@@ -57,6 +58,7 @@ export const VerticalItemWrapper = styled.li<VerticalItemWrapperProps>`
   justify-content: center; /* Center items horizontally */
   margin: 1rem 0; /* Vertical spacing between items */
   list-style: none; /* Remove default list styling */
+  z-index: 1; /* Ensure each item properly stacks */
 
   /* Alignment adjustments based on side (used in non-alternating modes) */
   &.left {
@@ -119,6 +121,7 @@ export const TimelineCardContentWrapper = styled.div<TimelineCardContentWrapperP
   position: relative;
   display: flex;
   align-items: center; /* Vertically center content */
+  z-index: 1; /* Ensure card content appears above the timeline line but below the points */
 
   /* --- Width Calculation --- */
   ${(p) => {
@@ -194,6 +197,8 @@ export const TimelineTitleWrapper = styled.div<TimelineTitleWrapperProps>`
     p.$hide && p.mode === 'VERTICAL'
       ? 'none'
       : 'flex'}; /* Hide only if $hide and mode is VERTICAL */
+  position: relative;
+  z-index: 1; /* Match the card content z-index for consistency */
 
   /* --- Width Calculation --- */
   width: ${(p) =>
@@ -212,7 +217,7 @@ export const TimelineTitleWrapper = styled.div<TimelineTitleWrapperProps>`
   &.right {
     /* Justification depends on whether layout is flipped */
     justify-content: ${(p) => (p.$flip ? 'flex-start' : 'flex-end')};
-     /* Order depends on flip status and mode */
+    /* Order depends on flip status and mode */
     order: ${(p) => (p.$flip && p.mode === 'VERTICAL_ALTERNATING' ? '3' : '1')};
   }
 `;

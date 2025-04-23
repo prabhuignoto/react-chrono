@@ -55,7 +55,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   isNested,
   isResuming,
 }: ContentFooterProps) => {
-  const { mode, theme } = useContext(GlobalContext);
+  const { mode, theme, flipLayout } = useContext(GlobalContext);
 
   const canShowTriangleIcon = useMemo(() => {
     return (
@@ -118,6 +118,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           dir={triangleDir}
           theme={theme}
           offset={-8}
+          flip={flipLayout}
         ></TriangleIconWrapper>
       )}
     </>

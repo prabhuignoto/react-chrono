@@ -1,26 +1,27 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Chrono from '../components';
 import data from './data';
+import { TimelineItemModel } from '@models/TimelineItemModel';
 
 export default function App() {
   const [pageIndex, setPageIndex] = useState(0);
-  const [allItems, setAllItems] = useState([null]);
-  const [items, setItems] = useState([null]);
+  const [allItems, setAllItems] = useState<TimelineItemModel[]>([]);
+  const [items, setItems] = useState<TimelineItemModel[]>([]);
   const [loading, setLoading] = useState(true);
 
   const handleAutoLoad = useCallback(() => {
     setLoading(false);
 
-    if (items.length < 2) {
+    if (items.length < 1 || pageIndex * 2 >= allItems.length) {
       return;
     }
 
-    const newItems = [...items, ...allItems.splice(pageIndex * 2, 2)];
-
-    console.log('handleAutoLoad', { pageIndex, newItems });
-
-    setItems(newItems);
-  }, [items.length, pageIndex]);
+    const newItemsToAdd = allItems.slice(pageIndex * 2, pageIndex * 2 + 2);
+    
+    console.log('handleAutoLoad', { pageIndex, newItemsToAdd });
+    
+    setItems(prevItems => [...prevItems, ...newItemsToAdd]);
+  }, [items.length, pageIndex, allItems]);
 
   useEffect(() => {
     const newAllItems = [...data];
@@ -29,7 +30,7 @@ export default function App() {
 
     setAllItems(newAllItems);
     setPageIndex(0);
-    setItems(newAllItems.splice(0, 2));
+    setItems(newAllItems.slice(0, 2));
   }, []);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export default function App() {
   }, [loading, handleAutoLoad]);
 
   const handleLoadMore = useCallback(() => {
-    if (items.length > 13) {
+    if (items.length > 13 || pageIndex * 2 + 2 >= allItems.length) {
       return;
     }
 
@@ -47,7 +48,7 @@ export default function App() {
 
     setPageIndex(pageIndex + 1);
     setLoading(true);
-  }, [items.length]);
+  }, [items.length, pageIndex, allItems.length]);
 
   // console.log('items', items);
 

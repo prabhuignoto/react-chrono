@@ -10,11 +10,11 @@ exports[`Timeline point > Should match snapshot 1`] = `
   >
     <button
       aria-label="Timeline Point"
-      class="sc-kpOvIu zDBve test_class_name timeline-vertical-circle"
+      class="sc-kpOvIu TRrNi test_class_name timeline-vertical-circle"
       data-testid="tree-leaf-click"
     >
       <div
-        class="sc-fWnslK khWrlp"
+        class="sc-fWnslK cvqNqe"
         dimension="20"
       />
     </button>

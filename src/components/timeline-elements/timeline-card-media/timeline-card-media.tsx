@@ -93,6 +93,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
       theme,
       cardHeight,
       mediaSettings,
+      flipLayout,
     } = useContext(GlobalContext);
 
     // Optimize video playback with an effect that only runs when active state changes
@@ -395,6 +396,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
               offset={-15}
               role="img"
               data-testid="arrow-icon"
+              flip={flipLayout}
             ></TriangleIconWrapper>
           )}
         </MediaWrapper>

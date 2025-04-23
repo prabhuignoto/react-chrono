@@ -391,18 +391,21 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         position={toolbarPosition}
         onScroll={(ev) => {
           const target = ev.target as HTMLElement;
-          let scrolled = 0;
 
           if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
-            scrolled = target.scrollTop + target.clientHeight;
+            const scrolled = target.scrollTop + target.clientHeight;
+            const threshold = 50; // pixels from bottom to trigger load
 
-            if (target.scrollHeight - scrolled < 1) {
+            // Check if we're near the bottom of the scroll container
+            if (target.scrollHeight - scrolled < threshold) {
               onScrollEnd?.();
             }
           } else {
-            scrolled = target.scrollLeft + target.offsetWidth;
+            const scrolled = target.scrollLeft + target.offsetWidth;
+            const threshold = 50; // pixels from right to trigger load
 
-            if (target.scrollWidth === scrolled) {
+            // Check if we're near the right edge of the scroll container
+            if (target.scrollWidth - scrolled < threshold) {
               onScrollEnd?.();
             }
           }

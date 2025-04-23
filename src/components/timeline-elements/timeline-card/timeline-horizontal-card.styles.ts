@@ -9,9 +9,16 @@ export const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  padding: 0.5rem 0;
+  transition: all 0.2s ease;
 
   &.vertical {
     justify-content: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  &:hover {
+    transform: scale(1.01);
   }
 `;
 
@@ -60,25 +67,25 @@ export const Shape = styled.div<ShapeModel>`
   transform: ${(p) =>
     p.$timelinePointShape === 'diamond' ? 'rotate(45deg)' : ''};
   position: relative;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background-color 0.2s ease;
+    transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
 
   &:hover {
     transform: ${(p) =>
       p.$timelinePointShape === 'diamond'
-        ? 'rotate(45deg) scale(1.05)'
-        : 'scale(1.05)'};
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        ? 'rotate(45deg) scale(1.08)'
+        : 'scale(1.08)'};
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   }
 
   &:focus {
     outline: none;
     box-shadow:
-      0 0 0 3px rgba(0, 123, 255, 0.25),
-      0 2px 5px rgba(0, 0, 0, 0.1);
+      0 0 0 3px rgba(0, 123, 255, 0.3),
+      0 4px 8px rgba(0, 0, 0, 0.15);
   }
 
   &.active {
@@ -88,14 +95,15 @@ export const Shape = styled.div<ShapeModel>`
     &:not(.using-icon) {
       transform: ${(p) =>
         p.$timelinePointShape === 'diamond' ? 'rotate(45deg)' : ''};
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
     }
 
     &:hover {
       transform: ${(p) =>
         p.$timelinePointShape === 'diamond'
-          ? 'rotate(45deg) scale(1.05)'
-          : 'scale(1.05)'};
+          ? 'rotate(45deg) scale(1.08)'
+          : 'scale(1.08)'};
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
     }
 
     &::after {
@@ -130,15 +138,26 @@ export const Shape = styled.div<ShapeModel>`
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition:
+      transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      box-shadow 0.25s ease,
+      background-color 0.25s ease,
+      border 0.25s ease;
 
     img {
-      max-width: 90%;
-      max-height: 90%;
-      transition: transform 0.2s ease;
+      max-width: 85%;
+      max-height: 85%;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      object-fit: cover;
     }
 
-    &:hover img {
-      transform: scale(1.1);
+    &:hover {
+      border: 2px solid ${(p) => p.theme?.primary};
+      img {
+        transform: scale(1.15);
+      }
     }
   }
 `;
@@ -147,14 +166,23 @@ export const TimelineTitleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  padding: 0.5rem 0;
+  transition: all 0.2s ease;
 
   &.vertical {
-    margin-bottom: 1em;
+    margin-bottom: 1.25em;
+    padding-left: 0.5rem;
   }
 
   &.horizontal {
     position: absolute;
     top: 0;
+    font-weight: 500;
+    padding-top: 0.75rem;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
   }
 `;
 
@@ -167,19 +195,27 @@ export const TimelineContentContainer = styled.div<{
 }>`
   align-items: flex-start;
   animation: ${show} 0.25s ease-in;
+  border-radius: 12px;
+  transition: all 0.2s ease;
 
-  outline: 2px solid
-    ${(p) => (p.$highlight && p.$active ? p.theme?.primary : 'transparent')};
+  outline: ${(p) =>
+    p.$highlight && p.$active
+      ? `2px solid ${p.theme?.primary}`
+      : '1px solid transparent'};
 
-  margin: 1rem;
+  margin: 1.25rem;
 
   &.horizontal {
     min-width: ${(p) => p.$cardWidth}px;
   }
 
   &.vertical {
-    width: calc(100% - 5em);
+    width: calc(100% - 5.5em);
     margin-left: auto;
     flex-direction: column;
+  }
+
+  &:hover {
+    transform: ${(p) => (p.$active ? 'translateY(-2px)' : 'none')};
   }
 `;

@@ -146,10 +146,11 @@ export const TimelineContentRender = styled.div<{ $showAllCards?: boolean }>`
   display: flex;
   align-items: flex-start;
   justify-content: ${(p) => (p.$showAllCards ? 'flex-start' : 'center')};
-  width: 98%;
-  margin-right: auto;
-  margin-left: auto;
+  width: 100%;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
   overflow-x: hidden;
+  gap: 1.5rem;
 `;
 
 export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
