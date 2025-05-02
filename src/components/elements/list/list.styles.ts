@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 // Theme-specific constants
 const themeStyles = {
   border: (theme: Theme) => `1px solid ${theme.primary}`,
-  transparent: '1px solid transparent'
+  transparent: '1px solid transparent',
 };
 
 // Reusable flex container mixin
@@ -49,8 +49,9 @@ export const ListItemStyle = styled.li<{
   $theme: Theme;
 }>`
   ${commonStyles}
-  border: ${(p) => p.$active ? themeStyles.border(p.$theme) : themeStyles.transparent};
-  flex-direction: ${(p) => p.$selectable ? 'row' : 'column'};
+  border: ${(p) =>
+    p.$active ? themeStyles.border(p.$theme) : themeStyles.transparent};
+  flex-direction: ${(p) => (p.$selectable ? 'row' : 'column')};
   background: ${(p) => p.$theme.toolbarBtnBgColor};
   padding: 0.25rem;
   width: calc(100% - 0.5rem);
@@ -98,7 +99,7 @@ export const CheckboxStyle = styled.span<{ selected?: boolean; theme: Theme }>`
   height: 1.25rem;
   margin: 0 0.25rem 0 0.1rem;
   border-radius: 50%;
-  background: ${(p) => p.selected ? p.theme.primary : p.theme.toolbarBgColor};
+  background: ${(p) => (p.selected ? p.theme.primary : p.theme.toolbarBgColor)};
   ${(p) => !p.selected && `box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1)`};
   color: #fff;
 
@@ -112,5 +113,5 @@ export const CheckboxStyle = styled.span<{ selected?: boolean; theme: Theme }>`
 export const StyleAndDescription = styled.div<{ $selectable?: boolean }>`
   ${flexContainer}
   flex-direction: column;
-  width: ${(p) => p.$selectable ? 'calc(100% - 2rem)' : '100%'};
+  width: ${(p) => (p.$selectable ? 'calc(100% - 2rem)' : '100%')};
 `;

@@ -218,6 +218,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
               aria-controls="timeline-main-wrapper"
               aria-label={isDark ? buttonTexts?.light : buttonTexts?.dark}
               data-test-id="dark-toggle"
+              $active={isDark}
             >
               {isDark ? <SunIcon /> : <MoonIcon />}
             </TimelineNavButton>

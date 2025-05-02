@@ -57,7 +57,7 @@ export const Selecter = styled.div<{
   ${flexCenter};
   background: ${({ $theme }) => $theme.toolbarBtnBgColor};
   color: ${({ $theme }) => $theme.toolbarTextColor};
-  border-radius: 25px;
+  border-radius: 6px;
   box-shadow: ${({ $open, $isDarkMode }) => boxShadow($isDarkMode, $open)};
   cursor: pointer;
   justify-content: space-between;
@@ -85,6 +85,7 @@ export const SelecterLabel = styled.span`
   font-size: 0.9rem;
   text-align: left;
   white-space: nowrap;
+  font-weight: 500;
 `;
 
 // Top section of the popover containing controls
