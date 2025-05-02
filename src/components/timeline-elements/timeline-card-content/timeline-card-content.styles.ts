@@ -35,18 +35,15 @@ export const TimelineItemContentWrapper = styled.section<
   align-items: flex-start;
   background: ${(p) => p.theme.cardBgColor};
   border-radius: 8px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 4px 10px rgba(0, 0, 0, 0.08);
   display: flex;
-  position: absolute;
-  ${({ borderLessCards }) =>
-    !borderLessCards
-      ? `filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.3))`
-      : 'none'};
   flex-direction: column;
   justify-content: flex-start;
-  line-height: 1.5em;
-  margin: ${(p) => (p.mode === 'HORIZONTAL' ? '0 auto' : '')};
+  line-height: 1.5;
+  margin: 0;
   max-width: ${(p) => p.$maxWidth}px;
-  // min-height: ${(p) => p.$minHeight}px;
   ${({ $textDensity, $customContent, $minHeight }) => css`
     ${$textDensity === 'HIGH'
       ? `${$customContent ? 'height' : 'min-height'}: ${$minHeight}px`
@@ -55,26 +52,21 @@ export const TimelineItemContentWrapper = styled.section<
   ${(p) => (p.$textOverlay ? `min-height: ${p.$minHeight}px` : '')};
   position: relative;
   text-align: left;
-  width: 98%;
+  width: 100%;
+  padding: 1rem;
   z-index: 0;
+  transition:
+    transform 0.2s ease-out,
+    box-shadow 0.2s ease-out;
 
   ${(p) =>
     p.$highlight
       ? css`
           &:hover {
-            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3)) brightness(1.05);
-
-            &::before {
-              content: '';
-              height: 100%;
-              left: 0;
-              position: absolute;
-              top: 0;
-              width: 100%;
-              z-index: -1;
-              border: 2px solid ${p.theme.primary};
-              border-radius: 4px;
-            }
+            transform: translateY(-2px);
+            box-shadow:
+              0 2px 5px rgba(0, 0, 0, 0.08),
+              0 8px 16px rgba(0, 0, 0, 0.1);
           }
         `
       : css``}
@@ -83,7 +75,7 @@ export const TimelineItemContentWrapper = styled.section<
     p.$isNested
       ? css`
           background: ${p.theme.nestedCardBgColor};
-          box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         `
       : css``}
 
@@ -140,37 +132,38 @@ export const TimelineItemContentWrapper = styled.section<
 
 export const TimelineCardHeader = styled.header`
   width: 100%;
-  padding: 0.5rem;
+  padding: 0;
+  margin-bottom: 0.5rem;
 `;
 
 export const CardSubTitle = styled.h2<{
   $fontSize?: string;
-  $padding?: boolean;
   dir?: string;
   theme?: Theme;
 }>`
   color: ${(p) => p.theme.cardSubtitleColor};
-  font-size: ${(p) => p.$fontSize};
-  font-weight: 600;
-  margin: 0;
+  font-size: ${(p) => p.$fontSize || '0.9rem'};
+  font-weight: 500;
+  margin: 0 0 0.25rem 0;
+  padding: 0;
   text-align: left;
-  width: 97%;
-  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem;' : '')};
+  width: 100%;
 `;
 
 export const CardTitle = styled.h1<{
   $fontSize: string;
-  $padding?: boolean;
   dir?: string;
   theme: Theme;
 }>`
   color: ${(p) => p.theme.cardTitleColor};
-  font-size: ${(p) => p.$fontSize};
+  font-size: ${(p) => p.$fontSize || '1.1rem'};
   font-weight: 600;
-  margin: 0.25rem 0 0.5rem 0;
+  margin: 0 0 0.5rem 0;
+  padding: 0;
   text-align: left;
-  width: 95%;
-  padding: ${(p) => (p.$padding ? '0.2rem 0 0.25rem 0.5rem;' : '')} &.active {
+  width: 100%;
+
+  &.active {
     color: ${(p) => p.theme.primary};
   }
 `;
@@ -189,6 +182,7 @@ export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
   margin: 0;
   width: 100%;
   color: ${(p) => p.theme.cardDetailsColor};
+  line-height: 1.5;
 `;
 
 export const TimelineSubContent = styled.span<{
@@ -197,7 +191,7 @@ export const TimelineSubContent = styled.span<{
 }>`
   margin-bottom: 0.5rem;
   display: block;
-  font-size: ${(p) => p.fontSize};
+  font-size: ${(p) => p.fontSize || '0.8rem'};
   color: ${(p) => p.theme.cardDetailsColor};
 `;
 
@@ -214,17 +208,15 @@ export const TimelineContentDetailsWrapper = styled.div<{
   height?: number;
   theme?: Theme;
 }>`
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin: 0;
   position: relative;
   ${({ $useReadMore, $customContent, $showMore, height = 0, $textOverlay }) =>
     $useReadMore && !$customContent && !$showMore && !$textOverlay
       ? `max-height: ${height}px;`
-      : 'height: 100%'}
+      : 'height: 100%'};
   ${({
     $cardHeight = 0,
     $contentHeight = 0,
@@ -237,12 +229,11 @@ export const TimelineContentDetailsWrapper = styled.div<{
       : ''}
   overflow-x: hidden;
   overflow-y: auto;
-  scrollbar-color: ${(p) => p.theme?.primary} default;
+  scrollbar-color: ${(p) => p.theme?.primary} ${(p) => p.theme?.cardBgColor};
   scrollbar-width: thin;
   transition: max-height 0.25s ease-in-out;
-  width: ${(p) =>
-    p.$borderLess ? 'calc(100% - 0.5rem)' : 'calc(95% - 0.5rem)'};
-  padding: 0.25rem 0.25rem;
+  width: 100%;
+  padding: 0;
 
   ${(p) => (p.$customContent ? `height: 100%;` : '')}
 
@@ -270,12 +261,12 @@ export const TimelineContentDetailsWrapper = styled.div<{
   }
 
   &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+    background-color: ${(p) => p.theme?.cardBgColor};
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: ${(p) => p.theme?.primary};
-    outline: 1px solid ${(p) => p.theme?.primary};
+    border-radius: 3px;
   }
 
   &.show-less {
@@ -339,7 +330,7 @@ export const SlideShowProgressBar = styled.progress<{
   left: 50%;
   transform: translateX(-50%);
   position: absolute;
-  border-radius: 2px;gggg
+  border-radius: 2px;
   border: 0;
 
   ${(p) => {
