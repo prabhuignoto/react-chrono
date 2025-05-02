@@ -24,6 +24,25 @@ import {
   ToolbarWrapper,
   Wrapper,
 } from './timeline.style';
+import { useDebouncedCallback } from 'use-debounce';
+
+// Function to safely extract searchable text from potentially ReactNode content
+const getSearchableText = (content: string | React.ReactNode | any): string => {
+  if (content === null || content === undefined) {
+    return '';
+  }
+  if (typeof content === 'string') {
+    return content;
+  }
+  if (Array.isArray(content)) {
+    return content
+      .map((item) => getSearchableText(item))
+      .filter(Boolean)
+      .join(' ');
+  }
+  // For React elements or other objects, we can't search them
+  return '';
+};
 
 const Timeline: React.FunctionComponent<TimelineModel> = (
   props: TimelineModel,
@@ -78,6 +97,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     mode === 'HORIZONTAL' && showAllCardsHorizontal ? 'HORIZONTAL_ALL' : mode,
   );
 
+  // Search State
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<number[]>([]);
+  const [currentMatchIndex, setCurrentMatchIndex] = useState(-1);
+
   const activeItemIndex = useRef<number>(activeTimelineItem);
 
   // reference to the timeline
@@ -98,6 +122,138 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const id = useRef(
     `react-chrono-timeline-${noUniqueId ? uniqueId : getUniqueID()}`,
   );
+
+  // --- Search Logic ---
+
+  const clearSearch = useCallback(() => {
+    setSearchQuery('');
+    setSearchResults([]);
+    setCurrentMatchIndex(-1);
+
+    // Always activate and scroll to the first item when clearing search
+    if (items.length > 0) {
+      // Set focus to first item
+      activeItemIndex.current = 0;
+      onTimelineUpdated?.(0);
+
+      // Explicitly scroll to first item
+      const firstItemId = items[0]?.id;
+      if (firstItemId) handleTimelineItemClick(firstItemId);
+    }
+  }, [items, onTimelineUpdated]);
+
+  const findMatches = useCallback(
+    (query: string) => {
+      if (!query) {
+        setSearchResults([]);
+        setCurrentMatchIndex(-1);
+        return;
+      }
+
+      const queryLower = query.toLowerCase();
+      const results: number[] = [];
+
+      items.forEach((item, index) => {
+        // Get searchable text from each field
+        const titleText = getSearchableText(item.title);
+        const cardTitleText = getSearchableText(item.cardTitle);
+        const cardSubtitleText = getSearchableText(item.cardSubtitle);
+
+        // Handle detailed text which might be a string or array
+        let detailedText = '';
+        if (Array.isArray(item.cardDetailedText)) {
+          detailedText = item.cardDetailedText
+            .map((text) => getSearchableText(text))
+            .join(' ');
+        } else {
+          detailedText = getSearchableText(item.cardDetailedText);
+        }
+
+        // Check if any text contains the search query
+        if (
+          titleText.toLowerCase().includes(queryLower) ||
+          cardTitleText.toLowerCase().includes(queryLower) ||
+          cardSubtitleText.toLowerCase().includes(queryLower) ||
+          detailedText.toLowerCase().includes(queryLower)
+        ) {
+          results.push(index);
+        }
+      });
+
+      setSearchResults(results);
+      setCurrentMatchIndex(results.length > 0 ? 0 : -1);
+
+      // Activate the first match immediately
+      if (results.length > 0) {
+        const firstMatchItemId = items[results[0]]?.id;
+        if (firstMatchItemId) {
+          activeItemIndex.current = results[0];
+          onTimelineUpdated?.(results[0]);
+          handleTimelineItemClick(firstMatchItemId);
+        }
+      }
+    },
+    [items, onTimelineUpdated],
+  );
+
+  // Debounced search handler
+  const debouncedSearch = useDebouncedCallback(findMatches, 300);
+
+  const handleSearchChange = useCallback(
+    (query: string) => {
+      setSearchQuery(query);
+      debouncedSearch(query);
+    },
+    [debouncedSearch],
+  );
+
+  // Navigate search results
+  const navigateMatches = useCallback(
+    (direction: 'next' | 'prev') => {
+      if (searchResults.length === 0) return;
+
+      let nextIndex = currentMatchIndex;
+      if (direction === 'next') {
+        nextIndex = (currentMatchIndex + 1) % searchResults.length;
+      } else {
+        nextIndex =
+          (currentMatchIndex - 1 + searchResults.length) % searchResults.length;
+      }
+
+      const newTimelineIndex = searchResults[nextIndex];
+      setCurrentMatchIndex(nextIndex);
+      activeItemIndex.current = newTimelineIndex;
+      onTimelineUpdated?.(newTimelineIndex);
+
+      // Scroll to the item
+      const itemId = items[newTimelineIndex]?.id;
+      if (itemId) handleTimelineItemClick(itemId); // Reuse existing click handler for activation/scroll
+    },
+    [searchResults, currentMatchIndex, items, onTimelineUpdated],
+  );
+
+  const handleNextMatch = useCallback(
+    () => navigateMatches('next'),
+    [navigateMatches],
+  );
+  const handlePreviousMatch = useCallback(
+    () => navigateMatches('prev'),
+    [navigateMatches],
+  );
+
+  // Handle keyboard events for search (Enter key)
+  const handleSearchKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' && searchResults.length > 0) {
+        e.preventDefault();
+        // Navigate to next match when Enter is pressed
+        handleNextMatch();
+      }
+    },
+    [searchResults.length, handleNextMatch],
+  );
+
+  // --- End Search Logic ---
 
   // handlers for navigation
   const handleNext = useCallback(() => {
@@ -161,15 +317,45 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   const handleTimelineItemClick = (itemId?: string, isSlideShow?: boolean) => {
     if (itemId) {
-      for (let idx = 0; idx < items.length; idx++) {
-        if (items[idx].id === itemId) {
-          activeItemIndex.current = idx;
-          if (isSlideShow && idx < items.length - 1) {
-            onTimelineUpdated?.(idx + 1);
-          } else {
-            onTimelineUpdated?.(idx);
+      const targetIndex = items.findIndex((item) => item.id === itemId);
+      if (targetIndex !== -1) {
+        activeItemIndex.current = targetIndex;
+        onTimelineUpdated?.(
+          isSlideShow && targetIndex < items.length - 1
+            ? targetIndex + 1
+            : targetIndex,
+        );
+
+        // Trigger scroll/focus - This logic might already exist or need refinement
+        // Based on existing code, this seems to rely on side effects from onTimelineUpdated/activeTimelineItem prop change
+        // Let's ensure the element scrolls into view
+        let elementId = `timeline-${timelineMode.toLowerCase()}-item-${itemId}`;
+        // Horizontal mode might have items rendered in a portal, check for that structure
+        let targetElement = document.getElementById(elementId);
+
+        if (
+          !targetElement &&
+          (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL')
+        ) {
+          // Check portal container
+          const portalContainer = document.getElementById(id.current); // id.current is the portal root ID
+          if (portalContainer) {
+            targetElement = portalContainer.querySelector(
+              `#timeline-card-${itemId}`,
+            );
           }
-          break;
+        }
+
+        targetElement?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center',
+        });
+
+        // Update search index if the clicked item is part of search results
+        const resultIndex = searchResults.indexOf(targetIndex);
+        if (resultIndex !== -1) {
+          setCurrentMatchIndex(resultIndex);
         }
       }
     }
@@ -367,6 +553,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             onUpdateTimelineMode={handleTimelineUpdate}
             onUpdateTextContentDensity={updateTextContentDensity}
             mode={timelineMode}
+            searchQuery={searchQuery}
+            onSearchChange={handleSearchChange}
+            onClearSearch={clearSearch}
+            onNextMatch={handleNextMatch}
+            onPreviousMatch={handlePreviousMatch}
+            totalMatches={searchResults.length}
+            currentMatchIndex={currentMatchIndex}
+            onSearchKeyDown={handleSearchKeyDown}
           />
         </ToolbarWrapper>
       ) : null}

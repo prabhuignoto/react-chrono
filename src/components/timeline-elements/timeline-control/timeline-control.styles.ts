@@ -36,7 +36,7 @@ export const TimelineNavButton = styled.button<{
   color: ${(p) => p.theme.toolbarTextColor || p.theme.secondary};
   cursor: pointer;
   display: flex;
-  height: 30px;
+  height: 28px;
   justify-content: center;
   margin: 0 0.2rem;
   padding: 0;
@@ -45,7 +45,7 @@ export const TimelineNavButton = styled.button<{
     transform 0.15s ease-out,
     box-shadow 0.2s ease-out,
     border-color 0.2s ease-out;
-  width: 30px;
+  width: 28px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
 
   transform: ${(p) => (p.rotate === 'TRUE' ? 'rotate(90deg)' : 'none')};
@@ -80,8 +80,8 @@ export const TimelineNavButton = styled.button<{
     `}
 
   svg {
-    width: 60%;
-    height: 60%;
+    width: 55%;
+    height: 55%;
     color: ${(p) => p.theme.primary};
     transition: color 0.2s ease-out;
   }

@@ -71,6 +71,11 @@ export const getDefaultButtonTexts: () => ButtonTexts = () => ({
   play: 'Play Slideshow',
   previous: 'Previous',
   stop: 'Stop Slideshow',
+  searchPlaceholder: 'Search Timeline',
+  searchAriaLabel: 'Search timeline content',
+  clearSearch: 'Clear Search',
+  previousMatch: 'Previous Match',
+  nextMatch: 'Next Match',
 });
 
 //get slidehow type based on mode

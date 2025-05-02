@@ -1,5 +1,5 @@
 import cls from 'classnames';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { CardSubTitle } from '../timeline-card-content/timeline-card-content.styles';
 import { Content } from './memoized-model';
 

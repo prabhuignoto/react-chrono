@@ -410,3 +410,28 @@ export const TriangleIconWrapper = styled.span<{
   ${(p) =>
     p.dir === 'left' ? `right: ${p.offset}px;` : `left: ${p.offset}px;`};
 `;
+
+// Enhanced Mark component for search highlighting
+export const Mark = styled.mark`
+  background-color: ${(p) =>
+    p.theme?.primary
+      ? `${p.theme.primary}30`
+      : 'rgba(255, 217, 0, 0.3)'}; // Use theme primary with transparency
+  color: inherit; // Keep text color consistent
+  font-weight: 600; // Make text slightly bolder
+  padding: 0.1em 0.25em;
+  margin: 0 -0.1em; // Adjusted margins
+  border-radius: 2px;
+  box-decoration-break: clone; // Handle highlights that span multiple lines
+  -webkit-box-decoration-break: clone;
+  transition:
+    background-color 0.2s ease-out,
+    box-shadow 0.15s ease-out;
+
+  // Subtle pulsing animation for current search result (needs to be applied conditionally)
+  &[data-current-match='true'] {
+    background-color: ${(p) =>
+      p.theme?.primary ? `${p.theme.primary}50` : 'rgba(255, 217, 0, 0.5)'};
+    box-shadow: 0 0 0 1px ${(p) => p.theme?.primary || 'rgba(255, 217, 0, 0.5)'};
+  }
+`;

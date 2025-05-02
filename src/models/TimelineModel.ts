@@ -71,6 +71,11 @@ export type ButtonTexts = {
   play?: string;
   previous?: string;
   stop?: string;
+  searchPlaceholder?: string;
+  searchAriaLabel?: string;
+  clearSearch?: string;
+  previousMatch?: string;
+  nextMatch?: string;
 };
 
 /**
