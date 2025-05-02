@@ -40,6 +40,7 @@ export const MediaWrapper = styled.div<{
   position: relative;
   text-align: ${(p) => p.align};
   width: calc(100% - 1em);
+  overflow: hidden; /* Ensure content doesn't overflow */
 
   ${(p) => (p.$cardHeight ? `min-height: ${p.$cardHeight}px;` : '')};
   ${(p) => {
@@ -61,6 +62,21 @@ export const MediaWrapper = styled.div<{
   }}
 `;
 
+export const ImageWrapper = styled.div<{ height?: number }>`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  position: relative;
+
+  /* Ensure the image is contained within the card boundaries */
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+`;
+
 export const CardImage = styled.img<{
   $enableBorderRadius?: boolean;
   $visible?: boolean;
@@ -78,6 +94,11 @@ export const CardImage = styled.img<{
   object-position: center;
   visibility: ${(p) => (p.$visible ? 'visible' : 'hidden')};
   border-radius: ${(p) => (p.$enableBorderRadius ? '6px' : '0')};
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 `;
 
 export const CardVideo = styled.video<{ height?: number }>`
@@ -228,11 +249,4 @@ export const CardMediaHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-export const ImageWrapper = styled.div<{ height?: number }>`
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 6px;
 `;

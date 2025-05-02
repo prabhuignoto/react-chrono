@@ -55,6 +55,7 @@ export const TimelineItemContentWrapper = styled.section<
   width: 100%;
   padding: 1rem;
   z-index: 0;
+  overflow: hidden;
   transition:
     transform 0.2s ease-out,
     box-shadow 0.2s ease-out;

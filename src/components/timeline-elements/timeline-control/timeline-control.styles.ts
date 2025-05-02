@@ -80,8 +80,8 @@ export const TimelineNavButton = styled.button<{
     `}
 
   svg {
-    width: 55%;
-    height: 55%;
+    width: 75%;
+    height: 75%;
     color: ${(p) => p.theme.primary};
     transition: color 0.2s ease-out;
   }
