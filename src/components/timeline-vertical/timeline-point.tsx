@@ -150,7 +150,6 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
         // --- Standard React props ---
         className={className} // 'left' or 'right'
         data-testid="tree-leaf" // Test ID for the wrapper
-        role="presentation" // Indicates this is presentational
       >
         {/* Container is a button for accessibility and click handling */}
         <TimelinePointContainer
@@ -162,10 +161,8 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
           ref={circleRef} // Attach ref for position measurement
           data-testid="tree-leaf-click" // Test ID for the clickable element
           aria-label={timelinePointLabel} // Accessibility label
-          aria-selected={active} // Indicate selection state
           aria-disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
           disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
-          role="button" // Explicitly set role as button
           tabIndex={disableClickOnCircle || disableTimelinePoint ? -1 : 0} // Manage tab order
         >
           {/* The visual shape (circle, square, or custom icon) */}
@@ -178,8 +175,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
             className={circleClass} // Apply 'active' and 'using-icon' classes
             aria-hidden="true" // Hide from screen readers as it's decorative
           >
-            {/* Render custom icon if provided, otherwise relies on Shape's default appearance */}
-            {iconChild ? iconChild : null}
+            {iconChild}
           </Shape>
         </TimelinePointContainer>
       </TimelinePointWrapper>

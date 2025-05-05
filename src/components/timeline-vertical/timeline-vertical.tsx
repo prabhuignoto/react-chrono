@@ -1,16 +1,16 @@
-import { TimelineVerticalModel } from '@models/TimelineVerticalModel'; // Assuming model paths
+import { TimelineVerticalModel } from '@models/TimelineVerticalModel';
 import {
   useCallback,
   useContext,
-  FunctionComponent, // Explicit import
+  FunctionComponent,
   ReactNode,
-  JSX, // Explicit import
   memo,
   useMemo,
+  ReactElement,
 } from 'react';
-import { GlobalContext } from '../GlobalContext'; // Context for global settings
-import TimelineVerticalItem from './timeline-vertical-item'; // The component for rendering each item
-import { TimelineVerticalWrapper } from './timeline-vertical.styles'; // The main styled wrapper
+import { GlobalContext } from '../GlobalContext';
+import TimelineVerticalItem from './timeline-vertical-item';
+import { TimelineVerticalWrapper } from './timeline-vertical.styles';
 
 /**
  * Renders the main vertical timeline structure.
@@ -39,7 +39,7 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
     theme, // Theme object (Used by children via context or styled-components)
     cardLess, // Render without cards? (Passed down)
     nestedCardHeight, // Specific height for nested cards (Passed down)
-  }: TimelineVerticalModel): JSX.Element => {
+  }: TimelineVerticalModel): ReactElement => {
     // Access global context, specifically to check for mobile view
     const { isMobile } = useContext(GlobalContext);
 
@@ -134,10 +134,7 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
 
     // Render the main timeline wrapper
     return (
-      <TimelineVerticalWrapper
-        data-testid="tree-main" // Test ID
-        role="list" // Accessibility role
-      >
+      <TimelineVerticalWrapper as="ul" data-testid="tree-main">
         {renderItems}
       </TimelineVerticalWrapper>
     );

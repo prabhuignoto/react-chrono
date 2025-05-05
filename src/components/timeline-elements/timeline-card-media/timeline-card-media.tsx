@@ -10,7 +10,6 @@ import React, {
   useMemo,
   useRef,
   useState,
-  Suspense,
 } from 'react';
 import { GlobalContext } from '../../GlobalContext';
 import { DetailsTextMemo } from '../memoized/details-text-memo';
@@ -18,10 +17,6 @@ import { ExpandButtonMemo } from '../memoized/expand-button-memo';
 import { ShowOrHideTextButtonMemo } from '../memoized/show-hide-button';
 import { SubTitleMemo } from '../memoized/subtitle-memo';
 import { TitleMemo } from '../memoized/title-memo';
-import {
-  SlideShowProgressBar,
-  TriangleIconWrapper,
-} from '../timeline-card-content/timeline-card-content.styles';
 import { ButtonWrapper } from './timeline-card-media-buttons';
 import {
   CardImage,
@@ -67,12 +62,6 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     url,
     detailsText,
     showProgressBar,
-    remainInterval,
-    startWidth,
-    paused,
-    triangleDir,
-    resuming,
-    progressRef,
   }: CardMediaModel) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const moreRef = useRef(null);
@@ -122,11 +111,6 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     }, []);
 
     // Memoize all computed values
-    const canShowArrow = useMemo(
-      () =>
-        (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') && textOverlay,
-      [mode, textOverlay],
-    );
 
     const canShowTextMemo = useMemo(
       () => showText && !!detailsText,
@@ -158,16 +142,11 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
       [textOverlay, cardHeight, mediaHeight],
     );
 
-    const canShowProgressBar = useMemo(
-      () => showProgressBar && textOverlay,
-      [showProgressBar, textOverlay],
-    );
-
     // Memoize detailed components
     const IFrameYouTube = useMemo(
       () => (
         <IFrameVideo
-          frameBorder="0"
+          style={{ border: 'none' }}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           src={`${media.source.url}${
@@ -360,43 +339,20 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
           align={mediaSettings?.align}
           $textOverlay={textOverlay}
         >
-          <Suspense fallback={<div>Loading media...</div>}>
-            {media.type === 'VIDEO' &&
-              !isYouTube &&
-              (!loadFailed ? (
-                Video
-              ) : (
-                <LazyErrorMessage message="Failed to load the video" />
-              ))}
-            {media.type === 'VIDEO' && isYouTube && IFrameYouTube}
-            {media.type === 'IMAGE' &&
-              (!loadFailed ? (
-                <ImageWrapper height={mediaHeight}>{Image}</ImageWrapper>
-              ) : (
-                <LazyErrorMessage message="Failed to load the image." />
-              ))}
-          </Suspense>
-
-          {canShowProgressBar && (
-            <SlideShowProgressBar
-              color={theme?.primary}
-              $duration={remainInterval}
-              $paused={paused}
-              ref={progressRef}
-              $startWidth={startWidth}
-              $resuming={resuming}
-            ></SlideShowProgressBar>
-          )}
-
-          {canShowArrow && (
-            <TriangleIconWrapper
-              dir={triangleDir}
-              theme={theme}
-              offset={-15}
-              role="img"
-              data-testid="arrow-icon"
-            ></TriangleIconWrapper>
-          )}
+          {media.type === 'VIDEO' &&
+            !isYouTube &&
+            (!loadFailed ? (
+              Video
+            ) : (
+              <LazyErrorMessage message="Failed to load the video" />
+            ))}
+          {media.type === 'VIDEO' && isYouTube && IFrameYouTube}
+          {media.type === 'IMAGE' &&
+            (!loadFailed ? (
+              <ImageWrapper height={mediaHeight}>{Image}</ImageWrapper>
+            ) : (
+              <LazyErrorMessage message="Failed to load the image." />
+            ))}
         </MediaWrapper>
         {canShowTextContent && TextContent}
       </>

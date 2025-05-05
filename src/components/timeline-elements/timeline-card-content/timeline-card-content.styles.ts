@@ -45,9 +45,8 @@ export const TimelineItemContentWrapper = styled.section<
   margin: 0;
   max-width: ${(p) => p.$maxWidth}px;
   ${({ $textDensity, $customContent, $minHeight }) => css`
-    ${$textDensity === 'HIGH'
-      ? `${$customContent ? 'height' : 'min-height'}: ${$minHeight}px`
-      : ''};
+    ${$textDensity === 'HIGH' &&
+    `${$customContent ? 'height' : 'min-height'}: ${$minHeight}px`};
   `}
   ${(p) => (p.$textOverlay ? `min-height: ${p.$minHeight}px` : '')};
   position: relative;

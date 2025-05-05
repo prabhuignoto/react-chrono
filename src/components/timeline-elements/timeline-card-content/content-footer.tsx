@@ -42,7 +42,6 @@ import {
 const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   showProgressBar,
   onExpand,
-  triangleDir,
   showMore,
   textContentIsLarge,
   showReadMore,
@@ -51,7 +50,6 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   startWidth,
   canShow,
   progressRef,
-  isNested,
   isResuming,
 }: ContentFooterProps) => {
   const { theme } = useContext(GlobalContext);

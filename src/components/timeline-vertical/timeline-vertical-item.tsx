@@ -1,22 +1,22 @@
-import { VerticalItemModel } from '@models/TimelineVerticalModel'; // Assuming model path
-import cls from 'classnames'; // Utility for conditionally joining classNames
+import { VerticalItemModel } from '@models/TimelineVerticalModel';
+import cls from 'classnames';
 import {
   useCallback,
   useContext,
   useMemo,
   useRef,
-  FunctionComponent, // Explicit import
-  JSX, // Explicit import for clarity
+  FunctionComponent,
+  ReactElement,
 } from 'react';
-import { GlobalContext } from '../GlobalContext'; // Context for global theme/settings
-import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content'; // Card component
-import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title'; // Title component
-import { TimelinePoint } from './timeline-point'; // Point component (dot/icon on the line)
+import { GlobalContext } from '../GlobalContext';
+import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
+import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
+import { TimelinePoint } from './timeline-point';
 import {
   TimelineCardContentWrapper,
   TimelineTitleWrapper,
   VerticalItemWrapper,
-} from './timeline-vertical.styles'; // Associated styled components
+} from './timeline-vertical.styles';
 
 /**
  * Represents a single item (row) in the vertical timeline.
@@ -28,7 +28,7 @@ import {
  */
 const VerticalItem: FunctionComponent<VerticalItemModel> = (
   props: VerticalItemModel,
-): JSX.Element => {
+): ReactElement => {
   // Ref to the main list item element for calculating position/dimensions
   const contentRef = useRef<HTMLLIElement>(null);
 
