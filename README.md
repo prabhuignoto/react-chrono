@@ -65,6 +65,7 @@
   - [🎨Theme](#theme)
   - [Customize Font sizes](#customize-font-sizes)
   - [Customize alt text for buttons](#customize-alt-text-for-buttons)
+  - [Search Functionality](#search-functionality)
 - [Using custom class names](#using-custom-class-names)
 - [📦CodeSandbox Examples](#codesandbox-examples)
 - [Kitchen Sink](#kitchen-sink)
@@ -201,6 +202,9 @@ Below are the available configuration options for the component:
 | uniqueId                 |                      | Used with `noUniqueId` to set a custom unique id for the wrapper.                                                                        |
 | useReadMore              | true                 | Enables or disables the "read more" button. Available if text content on the card is taller than the card itself.                        |
 | disableToolbar           | false                | Hides the toolbar / control panel                                                                                                        |
+| searchPlaceholder        | "Search..."          | Customizes the placeholder text for the search input.                                                                                    |
+| searchAriaLabel          | "Search timeline"    | Sets the aria-label for the search input for accessibility.                                                                              |
+| clearSearch              | "Clear search"       | Customizes the text for the clear search button.                                                                                         |
 
 ### Mode
 
@@ -572,6 +576,23 @@ Defaults
 | `next`     | 'Next'           |
 | `play`     | 'Play Slideshow' |
 | `previous` | 'Previous'       |
+
+### Search Functionality
+
+React-Chrono includes a powerful search feature that allows users to quickly find specific content within your timeline. The search functionality is included in the toolbar by default and can be customized with several props.
+
+The search feature scans through all text content in your timeline items, including titles, card titles, subtitles, and detailed text. When matches are found, users can navigate through the results, and the timeline will automatically focus on the matching items.
+
+```jsx
+<Chrono
+  items={data}
+  searchPlaceholder="Find in timeline..."
+  searchAriaLabel="Search through timeline events"
+  clearSearch="Reset search"
+/>
+```
+
+You can hide the search functionality (along with the rest of the toolbar) by setting the `disableToolbar` prop to `true`.
 
 ## Using custom class names
 
