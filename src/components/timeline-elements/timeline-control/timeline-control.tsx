@@ -78,13 +78,13 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
     [disableRight, slideShowRunning],
   );
 
-  const handlePlayOrPause = useCallback(() => {
-    if (slideShowRunning) {
-      onPaused?.();
-    } else {
-      onReplay?.();
-    }
-  }, [slideShowRunning]);
+  const handlePause = useCallback(() => {
+    onPaused?.();
+  }, [onPaused]);
+
+  const handlePlay = useCallback(() => {
+    onReplay?.();
+  }, [onReplay]);
 
   const previousTitle = useMemo(
     () => (flipLayout ? buttonTexts?.next : buttonTexts?.previous),
@@ -126,7 +126,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
   return (
     <TimelineControlContainer key="control-wrapper">
       {/* Visually hidden status information for screen readers */}
-      <ScreenReaderOnly aria-live="polite" role="status">
+      <ScreenReaderOnly as="output" aria-live="polite">
         {positionStatus}
         {slideshowStatus && ` ${slideshowStatus}`}
       </ScreenReaderOnly>
@@ -218,7 +218,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
           {slideShowEnabled && (
             <TimelineNavButton
               theme={theme}
-              onClick={handlePlayOrPause}
+              onClick={slideShowRunning ? handlePause : handlePlay}
               title={playOrPauseTile}
               tabIndex={0}
               aria-controls="timeline-main-wrapper"

@@ -1,4 +1,3 @@
-import { TimelineMode } from '@models/TimelineModel';
 import {
   FunctionComponent,
   PointerEvent,
