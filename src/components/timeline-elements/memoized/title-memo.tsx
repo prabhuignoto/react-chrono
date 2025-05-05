@@ -4,7 +4,7 @@ import {
   CardTitleAnchor,
 } from '../timeline-card-content/timeline-card-content.styles';
 import { Title } from './memoized-model';
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 /**
  * Renders the timeline's title with optional link.

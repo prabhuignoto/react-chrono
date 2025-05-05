@@ -20,7 +20,6 @@ import { ContentHeader } from './content-header';
 import { DetailsText } from './details-text';
 import { getTextOrContent } from './text-or-content';
 import { TimelineItemContentWrapper } from './timeline-card-content.styles';
-import Video from '../timeline-card-media/video';
 
 // Helper function to determine video MIME type based on extension
 const getVideoType = (url: string): string => {

@@ -13,7 +13,6 @@ import {
   ChevronIconWrapper,
   ShowMore,
   SlideShowProgressBar,
-  TriangleIconWrapper,
 } from './timeline-card-content.styles';
 
 /**

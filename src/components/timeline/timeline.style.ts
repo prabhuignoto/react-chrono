@@ -1,6 +1,6 @@
 import { Theme } from '@models/Theme';
 import { TimelineMode } from '@models/TimelineModel';
-import styled, { css, keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { ScrollBar } from '../common/styles';
 
 export const Wrapper = styled.div<{
