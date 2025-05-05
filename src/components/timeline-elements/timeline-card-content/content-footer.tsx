@@ -114,14 +114,6 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           $resuming={isResuming}
         ></SlideShowProgressBar>
       )}
-
-      {/* {canShowTriangleIcon && (
-        <TriangleIconWrapper
-          dir={triangleDir}
-          theme={theme}
-          offset={-8}
-        ></TriangleIconWrapper>
-      )} */}
     </>
   );
 };

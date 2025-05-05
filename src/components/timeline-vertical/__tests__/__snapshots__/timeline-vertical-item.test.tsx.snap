@@ -22,12 +22,11 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     <div
       class="sc-jUkaYT cBVweA card-content-wrapper"
     >
-      <section
+      <article
         aria-label="vertical item title"
         class="sc-cHQrJj kqTeju timeline-card-content  card"
         data-testid="timeline-card-content"
         mode="VERTICAL_ALTERNATING"
-        role="article"
         tabindex="-1"
       >
         <header
@@ -52,7 +51,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
             />
           </div>
         </div>
-      </section>
+      </article>
     </div>
     <div
       bg="#0f52ba"

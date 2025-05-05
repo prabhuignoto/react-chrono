@@ -369,7 +369,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
 
     if (items.length && activeItem) {
-      // const item = items[activeItem];
       const { title, cardTitle, cardSubtitle, cardDetailedText } = activeItem;
       onItemSelected?.({
         cardDetailedText,
@@ -459,9 +458,27 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               toggleMedia(element, 'hide');
               // pause YouTube embeds
               element.querySelectorAll('iframe').forEach((element) => {
+                // Check if it's a YouTube iframe
+                const src = element.getAttribute('src') || '';
+
+                // Determine appropriate target origin
+                let targetOrigin = '*';
+                if (src.includes('youtube.com')) {
+                  targetOrigin = 'https://www.youtube.com';
+                } else if (src.startsWith('https://')) {
+                  try {
+                    targetOrigin = new URL(src).origin;
+                  } catch (e) {
+                    // If URL parsing fails, log it and use default wildcard
+                    console.warn('Invalid iframe URL:', src, e);
+                    // Keep wildcard as fallback for invalid URLs
+                    targetOrigin = '*';
+                  }
+                }
+
                 element.contentWindow?.postMessage(
                   '{"event":"command","func":"stopVideo","args":""}',
-                  '*',
+                  targetOrigin,
                 );
               });
             }
@@ -616,7 +633,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         {/* HORIZONTAL */}
         {timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL' ? (
           <TimelineMain className={mode.toLowerCase()}>
-            <Outline color={theme && theme.primary} height={lineWidth} />
+            <Outline color={theme?.primary} height={lineWidth} />
             <TimelineHorizontal
               autoScroll={handleScroll}
               contentDetailsChildren={contentDetailsChildren}

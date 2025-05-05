@@ -1,15 +1,8 @@
 // Import necessary dependencies
-import React, {
-  FunctionComponent,
-  useContext,
-  useMemo,
-  useRef,
-} from 'react';
+import React, { FunctionComponent, useContext, useMemo, useRef } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import Controls from '../timeline-elements/timeline-control/timeline-control';
-import {
-  TimelineNavButton,
-} from '../timeline-elements/timeline-control/timeline-control.styles';
+import { TimelineNavButton } from '../timeline-elements/timeline-control/timeline-control.styles';
 import { ChevronLeft, ChevronRight, CloseIcon } from '../icons';
 import { Toolbar } from '../toolbar';
 import {
@@ -127,18 +120,20 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     ];
   }, []);
 
-  // Determine if the left arrow should be disabled
-  const disableLeft = useMemo(() => {
-    return flipLayout
-      ? activeTimelineItem === totalItems - 1
-      : activeTimelineItem === 0;
+  // Define methods to determine button state
+  const isLeftDisabled = useMemo(() => {
+    if (flipLayout) {
+      return activeTimelineItem === totalItems - 1;
+    }
+    return activeTimelineItem === 0;
   }, [flipLayout, activeTimelineItem, totalItems]);
 
   // Determine if the right arrow should be disabled
-  const disableRight = useMemo(() => {
-    return flipLayout
-      ? activeTimelineItem === 0
-      : activeTimelineItem === totalItems - 1;
+  const isRightDisabled = useMemo(() => {
+    if (flipLayout) {
+      return activeTimelineItem === 0;
+    }
+    return activeTimelineItem === totalItems - 1;
   }, [flipLayout, activeTimelineItem, totalItems]);
 
   const hideExtraControls = useMemo(() => {
@@ -195,8 +190,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   return (
     <Toolbar items={toolbarItems} theme={theme}>
       <Controls
-        disableLeft={disableLeft}
-        disableRight={disableRight}
+        disableLeft={isLeftDisabled}
+        disableRight={isRightDisabled}
         id={id}
         onFirst={onFirst}
         onLast={onLast}

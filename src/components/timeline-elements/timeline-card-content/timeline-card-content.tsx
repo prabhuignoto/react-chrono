@@ -23,11 +23,11 @@ import { TimelineItemContentWrapper } from './timeline-card-content.styles';
 
 // Helper function to determine video MIME type based on extension
 const getVideoType = (url: string): string => {
-  if (url.match(/\.(mp4)$/) !== null) {
+  if (/\.(mp4)$/.exec(url) !== null) {
     return 'video/mp4';
-  } else if (url.match(/\.(ogg)$/) !== null) {
+  } else if (/\.(ogg)$/.exec(url) !== null) {
     return 'video/ogg';
-  } else if (url.match(/\.(webm)$/) !== null) {
+  } else if (/\.(webm)$/.exec(url) !== null) {
     return 'video/webm';
   }
   return 'video/mp4'; // Default
@@ -125,7 +125,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         remainInterval,
         startWidth,
         tryPause,
-        tryResume,
         setupTimer,
         setStartWidth,
       } = useSlideshow(
@@ -137,16 +136,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         onElapsed,
       );
 
-      const {
-        cardActualHeight,
-        detailsHeight,
-        textContentLarge,
-        updateCardSize,
-      } = useCardSize({
-        containerRef,
-        detailsRef,
-        setStartWidth,
-      });
+      const { cardActualHeight, detailsHeight, textContentLarge } = useCardSize(
+        {
+          containerRef,
+          detailsRef,
+          setStartWidth,
+        },
+      );
 
       // Memoize all calculated values to prevent re-renders
       const canShowProgressBar = useMemo(() => {
@@ -337,6 +333,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       return (
         <TimelineItemContentWrapper
+          as="article"
           aria-label={accessibleLabel}
           ref={containerRef}
           onClick={handleCardClick}
@@ -350,7 +347,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           $slideShowType={slideShowType}
           tabIndex={active ? 0 : -1}
           onDoubleClick={toggleShowMore}
-          role="article"
           $minHeight={cardMinHeight}
           $maxWidth={cardWidth}
           mode={mode}
