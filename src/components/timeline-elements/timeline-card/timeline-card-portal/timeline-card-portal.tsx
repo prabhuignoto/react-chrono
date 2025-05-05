@@ -90,17 +90,40 @@ const TimelineCardPortal: React.FC<TimelineCardPortalProps> = ({
         />
       </TimelineContentContainer>
     );
-  }, [active, slideShowRunning, JSON.stringify(theme), cardWidth, items]);
+  }, [
+    containerClass,
+    contentRef,
+    id,
+    active,
+    disableInteraction,
+    showAllCardsHorizontal,
+    cardWidth,
+    cardSubtitle,
+    cardTitle,
+    url,
+    cardDetailedText,
+    slideShowRunning,
+    theme,
+    media,
+    onElapsed,
+    customContent,
+    hasFocus,
+    onClick,
+    timelineContent,
+    isNested,
+    nestedCardHeight,
+    items,
+  ]);
 
-  const renderPortal = () => {
+  const renderedPortal = useMemo(() => {
     const ele = document.getElementById(wrapperId);
     if (ele) {
       return ReactDOM.createPortal(Content, ele);
     }
     return null;
-  };
+  }, [Content, wrapperId]);
 
-  return <>{renderPortal()}</>;
+  return <>{renderedPortal}</>;
 };
 
 export default TimelineCardPortal;

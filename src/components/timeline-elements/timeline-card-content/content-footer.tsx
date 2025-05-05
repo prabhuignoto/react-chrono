@@ -75,10 +75,13 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
     [onExpand],
   );
 
-  const canShowMore = useMemo(
-    () => showReadMore && textContentIsLarge,
-    [showReadMore, textContentIsLarge],
-  );
+  const canShowMore = useMemo(() => {
+    // Only show read more when:
+    // 1. The feature is enabled (showReadMore)
+    // 2. The text is actually large enough to need expansion (textContentIsLarge)
+    // 3. The parent says it's valid to show (canShow) - this might indicate we have detailedText
+    return showReadMore && textContentIsLarge && canShow;
+  }, [showReadMore, textContentIsLarge, canShow]);
 
   return (
     <>

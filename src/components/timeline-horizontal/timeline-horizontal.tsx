@@ -60,6 +60,56 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
 
   const iconChildColln = React.Children.toArray(iconChildren);
 
+  // Memoize the timeline items to prevent unnecessary re-renders
+  const timelineItems = useMemo(() => {
+    return items.map((item, index) => (
+      <TimelineItemWrapper
+        key={item.id}
+        width={itemWidth}
+        className={cls(
+          item.visible ? 'visible' : '',
+          'timeline-horz-item-container',
+        )}
+        role="listitem"
+        aria-current={item.active ? 'true' : undefined}
+      >
+        <TimelineCard
+          {...item}
+          onClick={handleItemClick}
+          autoScroll={autoScroll}
+          wrapperId={wrapperId}
+          theme={theme}
+          slideShowRunning={slideShowRunning}
+          cardHeight={cardHeight}
+          onElapsed={onElapsed}
+          customContent={children ? (children as ReactNode[])[index] : null}
+          hasFocus={hasFocus}
+          iconChild={iconChildColln[index]}
+          active={item.active}
+          cardWidth={cardWidth}
+          isNested={isNested}
+          nestedCardHeight={nestedCardHeight}
+        />
+      </TimelineItemWrapper>
+    ));
+  }, [
+    items,
+    itemWidth,
+    handleItemClick,
+    autoScroll,
+    wrapperId,
+    theme,
+    slideShowRunning,
+    cardHeight,
+    onElapsed,
+    children,
+    hasFocus,
+    iconChildColln,
+    cardWidth,
+    isNested,
+    nestedCardHeight,
+  ]);
+
   return (
     <TimelineHorizontalWrapper
       className={wrapperClass}
@@ -68,36 +118,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
       role="list"
       aria-label="Timeline"
     >
-      {items.map((item, index) => (
-        <TimelineItemWrapper
-          key={item.id}
-          width={itemWidth}
-          className={cls(
-            item.visible ? 'visible' : '',
-            'timeline-horz-item-container',
-          )}
-          role="listitem"
-          aria-current={item.active ? 'true' : undefined}
-        >
-          <TimelineCard
-            {...item}
-            onClick={handleItemClick}
-            autoScroll={autoScroll}
-            wrapperId={wrapperId}
-            theme={theme}
-            slideShowRunning={slideShowRunning}
-            cardHeight={cardHeight}
-            onElapsed={onElapsed}
-            customContent={children ? (children as ReactNode[])[index] : null}
-            hasFocus={hasFocus}
-            iconChild={iconChildColln[index]}
-            active={item.active}
-            cardWidth={cardWidth}
-            isNested={isNested}
-            nestedCardHeight={nestedCardHeight}
-          />
-        </TimelineItemWrapper>
-      ))}
+      {timelineItems}
     </TimelineHorizontalWrapper>
   );
 };

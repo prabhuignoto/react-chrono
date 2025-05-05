@@ -12,6 +12,7 @@ type SlideshowHookReturn = {
 
 /**
  * Custom hook to manage slideshow functionality with pause/resume capabilities
+ * Uses requestAnimationFrame for smoother animation performance
  * @param ref - Reference to the HTML element containing the slideshow
  * @param active - Whether the current slide is active
  * @param slideShowActive - Whether the slideshow functionality is enabled
@@ -30,28 +31,39 @@ const useSlideshow = (
 ): SlideshowHookReturn => {
   const startTime = useRef<number | null>(null);
   const timerRef = useRef<number>(0);
+  const rafRef = useRef<number>(0);
   const [startWidth, setStartWidth] = useState<number>(0);
   const [paused, setPaused] = useState<boolean>(false);
   const slideShowElapsed = useRef<number>(0);
   const [remainInterval, setRemainInterval] = useState<number>(0);
+  const isRunning = useRef<boolean>(false);
 
   /**
-   * Cleans up the current timer
+   * Cleans up timers and animation frames
    */
   const cleanupTimer = useCallback(() => {
+    // Clear timeout if exists
     if (timerRef.current) {
       window.clearTimeout(timerRef.current);
       timerRef.current = 0;
     }
+
+    // Cancel animation frame if exists
+    if (rafRef.current) {
+      window.cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
+    }
+
+    isRunning.current = false;
   }, []);
 
   /**
-   * Sets up a new timer for the slideshow
+   * Sets up a new timer for the slideshow using requestAnimationFrame for smoother animations
    * @param interval - Duration in milliseconds for the timer
    */
   const setupTimer = useCallback(
     (interval: number) => {
-      if (!slideItemDuration || interval <= 0) {
+      if (!slideItemDuration || interval <= 0 || !active || !slideShowActive) {
         return;
       }
 
@@ -59,19 +71,48 @@ const useSlideshow = (
       setRemainInterval(interval);
       startTime.current = performance.now();
       setPaused(false);
+      isRunning.current = true;
 
-      timerRef.current = window.setTimeout(() => {
-        cleanupTimer();
-        setPaused(true);
-        setStartWidth(0);
-        setRemainInterval(slideItemDuration);
-        if (id && onElapsed) {
-          onElapsed(id);
+      // For very short durations, use setTimeout as fallback
+      if (interval < 50) {
+        timerRef.current = window.setTimeout(() => {
+          handleTimerComplete();
+        }, interval);
+        return;
+      }
+
+      // Use requestAnimationFrame for smoother animation
+      const endTime = startTime.current + interval;
+
+      const animationStep = (timestamp: number) => {
+        if (!isRunning.current) return;
+
+        if (timestamp >= endTime) {
+          handleTimerComplete();
+          return;
         }
-      }, interval);
+
+        // Continue animation loop
+        rafRef.current = window.requestAnimationFrame(animationStep);
+      };
+
+      rafRef.current = window.requestAnimationFrame(animationStep);
     },
-    [slideItemDuration, id, onElapsed, cleanupTimer],
+    [slideItemDuration, active, slideShowActive],
   );
+
+  /**
+   * Handles timer completion
+   */
+  const handleTimerComplete = useCallback(() => {
+    cleanupTimer();
+    setPaused(true);
+    setStartWidth(0);
+    setRemainInterval(slideItemDuration);
+    if (id && onElapsed) {
+      onElapsed(id);
+    }
+  }, [id, onElapsed, slideItemDuration, cleanupTimer]);
 
   /**
    * Pauses the current slideshow if conditions are met
@@ -109,13 +150,24 @@ const useSlideshow = (
     }
   }, [active, slideShowActive, slideItemDuration, setupTimer]);
 
-  // Cleanup effect
+  // Cleanup effect when slideShowActive changes or component unmounts
   useEffect(() => {
     if (!slideShowActive) {
       cleanupTimer();
     }
     return cleanupTimer;
   }, [slideShowActive, cleanupTimer]);
+
+  // Cleanup effect when active state changes
+  useEffect(() => {
+    if (!active) {
+      cleanupTimer();
+    }
+    return () => {
+      // Cleanup when component unmounts or dependencies change
+      cleanupTimer();
+    };
+  }, [active, cleanupTimer]);
 
   return {
     paused,
