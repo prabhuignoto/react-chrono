@@ -139,6 +139,7 @@ export const TimelineCardHeader = styled.header`
 
 export const CardSubTitle = styled.h2<{
   $fontSize?: string;
+  $padding?: boolean;
   dir?: string;
   theme?: Theme;
 }>`
@@ -146,13 +147,14 @@ export const CardSubTitle = styled.h2<{
   font-size: ${(p) => p.$fontSize || '0.9rem'};
   font-weight: 500;
   margin: 0 0 0.25rem 0;
-  padding: 0;
+  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
   text-align: left;
   width: 100%;
 `;
 
 export const CardTitle = styled.h1<{
   $fontSize: string;
+  $padding?: boolean;
   dir?: string;
   theme: Theme;
 }>`
@@ -160,7 +162,7 @@ export const CardTitle = styled.h1<{
   font-size: ${(p) => p.$fontSize || '1.1rem'};
   font-weight: 600;
   margin: 0 0 0.5rem 0;
-  padding: 0;
+  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
   text-align: left;
   width: 100%;
 

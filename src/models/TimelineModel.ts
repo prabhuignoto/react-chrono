@@ -76,6 +76,7 @@ export type ButtonTexts = {
   clearSearch?: string;
   previousMatch?: string;
   nextMatch?: string;
+  timelinePoint?: string;
 };
 
 /**

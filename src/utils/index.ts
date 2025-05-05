@@ -76,6 +76,7 @@ export const getDefaultButtonTexts: () => ButtonTexts = () => ({
   clearSearch: 'Clear Search',
   previousMatch: 'Previous Match',
   nextMatch: 'Next Match',
+  timelinePoint: 'Timeline point',
 });
 
 //get slidehow type based on mode

@@ -20,7 +20,6 @@ const TitleMemoComponent = ({
   active,
   fontSize = '1rem',
   classString = '',
-  padding = false,
 }: Title) => {
   return title ? (
     <CardTitle
@@ -30,7 +29,6 @@ const TitleMemoComponent = ({
       dir={dir}
       $fontSize={fontSize}
       data-class={classString}
-      $padding={padding}
     >
       {url ? (
         <CardTitleAnchor href={url} target="_blank" rel="noreferrer">

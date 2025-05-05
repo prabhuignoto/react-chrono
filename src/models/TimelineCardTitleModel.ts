@@ -1,4 +1,5 @@
 import { Theme } from './Theme';
+import { ReactNode } from 'react';
 
 /**
  * Represents the model for a title element.
@@ -17,5 +18,5 @@ export interface TitleModel {
   theme?: Theme;
 
   // Text content of the title.
-  title?: string;
+  title?: string | ReactNode;
 }

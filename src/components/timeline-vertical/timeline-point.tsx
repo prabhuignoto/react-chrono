@@ -137,7 +137,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
         buttonTexts?.timelinePoint ||
         (active ? 'Active timeline point' : 'Timeline point')
       );
-    }, [active, buttonTexts?.timelinePoint]);
+    }, [active, buttonTexts]);
 
     // Render the timeline point structure
     return (

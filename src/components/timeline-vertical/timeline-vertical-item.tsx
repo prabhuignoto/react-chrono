@@ -118,7 +118,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
         $flip={!alternateCards && flipLayout}
       >
         <TimelineItemTitle
-          title={title}
+          title={title as string}
           active={active && !disableInteraction} // Highlight if active and interaction enabled
           theme={theme}
           // Align text based on layout mode
@@ -270,7 +270,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
             branchDir={className} // Pass 'left' or 'right'
             content={cardSubtitle}
             customContent={contentDetailsChildren}
-            detailedText={cardDetailedText}
+            detailedText={cardDetailedText as string | string[]}
             hasFocus={hasFocus}
             id={id}
             media={media}
@@ -286,8 +286,8 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
             items={items} // Pass nested items data
             isNested={isNested}
             nestedCardHeight={nestedCardHeight}
-            title={cardTitle} // Card-specific title
-            cardTitle={title} // Item title (might be redundant if cardTitle is used)
+            title={cardTitle as string} // Card-specific title
+            cardTitle={title as string} // Item title (might be redundant if cardTitle is used)
           />
         ) : null}
       </TimelineCardContentWrapper>

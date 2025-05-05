@@ -295,11 +295,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         if (typeof media === 'string') {
           if (media.match(/\.(jpeg|jpg|gif|png)$/) !== null) {
             return (
-              <img
-                src={media}
-                alt={media.alt || 'Timeline event image'}
-                loading="lazy"
-              />
+              <img src={media} alt={'Timeline event image'} loading="lazy" />
             );
           } else if (media.match(/\.(mp4|ogg|webm)$/) !== null) {
             return (
@@ -410,7 +406,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               onMediaStateChange={handleMediaState}
               slideshowActive={slideShowActive}
               theme={theme}
-              title={title}
+              title={title as string}
               url={url}
               startWidth={startWidth}
               detailsText={TextOrContent}

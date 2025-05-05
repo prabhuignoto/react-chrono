@@ -13,7 +13,7 @@ export type TimelineContentModel = {
   // Directory for branch-related content.
   branchDir?: string;
 
-  cardTitle?: string;
+  cardTitle?: string | ReactNode;
 
   // Main content of the timeline item.
   content?: string | ReactNode;
@@ -22,7 +22,7 @@ export type TimelineContentModel = {
   customContent?: React.ReactNode;
 
   // Detailed text for the timeline item.
-  detailedText?: string | string[];
+  detailedText?: string | string[] | ReactNode | ReactNode[];
 
   // Indicates if the timeline item should be flipped.
   flip?: boolean;
@@ -64,7 +64,7 @@ export type TimelineContentModel = {
   timelineContent?: React.ReactNode;
 
   // Title of the timeline item.
-  title?: string;
+  title?: string | ReactNode;
 
   // URL associated with the timeline item.
   url?: string;
