@@ -2,7 +2,19 @@ import { Theme } from '@models/Theme';
 import { TimelineMode } from '@models/TimelineModel';
 import styled, { css } from 'styled-components';
 
-export const TimelineNavWrapper = styled.ul<{ theme?: Theme }>`
+export const ScreenReaderOnly = styled.div`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+`;
+
+export const TimelineNavWrapper = styled.div<{ theme?: Theme }>`
   border-radius: 8px;
   display: flex;
   list-style: none;
@@ -10,6 +22,19 @@ export const TimelineNavWrapper = styled.ul<{ theme?: Theme }>`
   // box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   background: ${(p) => p.theme.toolbarBgColor};
   // border: 1px solid ${(p) => p.theme.toolbarBtnBgColor};
+
+  .nav-item {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &.disabled {
+      pointer-events: none;
+      filter: opacity(0.4);
+    }
+  }
 `;
 
 export const TimelineNavItem = styled.li<{ $disable?: boolean }>`

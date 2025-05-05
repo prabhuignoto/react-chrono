@@ -52,6 +52,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
       focusActiveItemOnLoad, // Should the initially active item trigger 'onActive' immediately?
       timelinePointShape, // Shape of the point (e.g., 'circle', 'square')
       disableTimelinePoint, // Globally disable/hide all timeline points?
+      buttonTexts, // Custom button text labels
     } = useContext(GlobalContext);
 
     // Ref to track if this is the component's first render cycle
@@ -130,6 +131,14 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
       }
     }, []); // Empty dependency array ensures it runs only once
 
+    // Create an accessible label for the timeline point
+    const timelinePointLabel = useMemo(() => {
+      return (
+        buttonTexts?.timelinePoint ||
+        (active ? 'Active timeline point' : 'Timeline point')
+      );
+    }, [active, buttonTexts?.timelinePoint]);
+
     // Render the timeline point structure
     return (
       <TimelinePointWrapper
@@ -141,6 +150,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
         // --- Standard React props ---
         className={className} // 'left' or 'right'
         data-testid="tree-leaf" // Test ID for the wrapper
+        role="presentation" // Indicates this is presentational
       >
         {/* Container is a button for accessibility and click handling */}
         <TimelinePointContainer
@@ -151,8 +161,12 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
           {...clickHandlerProps} // Spread the memoized click handler props
           ref={circleRef} // Attach ref for position measurement
           data-testid="tree-leaf-click" // Test ID for the clickable element
-          aria-label="Timeline Point" // Accessibility label
+          aria-label={timelinePointLabel} // Accessibility label
+          aria-selected={active} // Indicate selection state
+          aria-disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
           disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
+          role="button" // Explicitly set role as button
+          tabIndex={disableClickOnCircle || disableTimelinePoint ? -1 : 0} // Manage tab order
         >
           {/* The visual shape (circle, square, or custom icon) */}
           <Shape
@@ -162,6 +176,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
             $timelinePointShape={timelinePointShape} // Controls the shape ('circle', 'square')
             // --- Standard React props ---
             className={circleClass} // Apply 'active' and 'using-icon' classes
+            aria-hidden="true" // Hide from screen readers as it's decorative
           >
             {/* Render custom icon if provided, otherwise relies on Shape's default appearance */}
             {iconChild ? iconChild : null}

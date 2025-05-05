@@ -20,6 +20,19 @@ import { ContentHeader } from './content-header';
 import { DetailsText } from './details-text';
 import { getTextOrContent } from './text-or-content';
 import { TimelineItemContentWrapper } from './timeline-card-content.styles';
+import Video from '../timeline-card-media/video';
+
+// Helper function to determine video MIME type based on extension
+const getVideoType = (url: string): string => {
+  if (url.match(/\.(mp4)$/) !== null) {
+    return 'video/mp4';
+  } else if (url.match(/\.(ogg)$/) !== null) {
+    return 'video/ogg';
+  } else if (url.match(/\.(webm)$/) !== null) {
+    return 'video/webm';
+  }
+  return 'video/mp4'; // Default
+};
 
 const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
   React.memo(
@@ -273,6 +286,84 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       const canShowNestedTimeline = useMemo(() => {
         return !canShowDetailsText && textDensity === 'HIGH';
       }, [canShowDetailsText, textDensity]);
+
+      const renderMedia = (media: any, onElapsed?: Function) => {
+        if (!media) {
+          return null;
+        }
+
+        if (typeof media === 'string') {
+          if (media.match(/\.(jpeg|jpg|gif|png)$/) !== null) {
+            return (
+              <img
+                src={media}
+                alt={media.alt || 'Timeline event image'}
+                loading="lazy"
+              />
+            );
+          } else if (media.match(/\.(mp4|ogg|webm)$/) !== null) {
+            return (
+              <Video
+                muted
+                autoPlay
+                controls
+                onEnded={() => {
+                  onElapsed?.();
+                }}
+              >
+                <source src={media} type={getVideoType(media)} />
+                Your browser does not support the video tag.
+              </Video>
+            );
+          }
+        } else if (typeof media === 'object') {
+          if (media.type === 'video' && media.source) {
+            return (
+              <Video
+                muted
+                autoPlay
+                controls
+                onEnded={() => {
+                  onElapsed?.();
+                }}
+              >
+                <source
+                  src={media.source.url}
+                  type={getVideoType(media.source.url)}
+                />
+                {media.source.caption ||
+                  'Your browser does not support the video tag.'}
+              </Video>
+            );
+          } else if (media.type === 'image' && media.source) {
+            return (
+              <img
+                src={media.source.url}
+                alt={
+                  media.source.alt ||
+                  media.source.caption ||
+                  'Timeline event image'
+                }
+                loading="lazy"
+              />
+            );
+          } else if (media.source && media.source.url) {
+            return (
+              <img
+                src={media.source.url}
+                alt={
+                  media.source.alt ||
+                  media.source.caption ||
+                  'Timeline event image'
+                }
+                loading="lazy"
+              />
+            );
+          }
+        }
+
+        return null;
+      };
 
       return (
         <TimelineItemContentWrapper

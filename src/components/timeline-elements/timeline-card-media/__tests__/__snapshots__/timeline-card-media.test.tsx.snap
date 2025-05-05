@@ -3,16 +3,16 @@
 exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
 <div>
   <div
-    class="sc-Qotzb gPGhhl card-media-wrapper card-media"
+    class="sc-FEMpB kzLjij card-media-wrapper card-media"
     mode="VERTICAL_ALTERNATING"
   >
     <div
-      class="sc-icnseD gOZSNH"
+      class="sc-gjcoXW iqcdKS"
       height="200"
     >
       <img
         alt="Image"
-        class="sc-fYsHOw qMwu"
+        class="sc-dVBluf eOqOIF"
         data-testid="timeline-card-content-image"
         height="auto"
         loading="lazy"
@@ -23,14 +23,14 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
     </div>
   </div>
   <div
-    class="sc-fWnslK idIbcW"
+    class="sc-dycHyt iJaVVE"
     mode="VERTICAL_ALTERNATING"
   >
     <div
-      class="sc-kpOvIu NBiZG"
+      class="sc-hRDKVd vHQLd"
     />
     <h2
-      class="sc-dcKlJK cAsXsC card-sub-title card-subtitle"
+      class="sc-cSaEAk hlEszv card-sub-title card-subtitle"
     >
       This is another test
     </h2>
@@ -41,13 +41,13 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
 exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
 <div>
   <div
-    class="sc-Qotzb gPGhhl card-media-wrapper card-media"
+    class="sc-FEMpB kzLjij card-media-wrapper card-media"
     mode="VERTICAL_ALTERNATING"
   >
     <iframe
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen=""
-      class="sc-iQQCXo hYjopf"
+      class="sc-gNZgCX gnpFOr"
       data-testid="timeline-card-content-video"
       frameborder="0"
       loading="lazy"
@@ -56,14 +56,14 @@ exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
     />
   </div>
   <div
-    class="sc-fWnslK idIbcW"
+    class="sc-dycHyt iJaVVE"
     mode="VERTICAL_ALTERNATING"
   >
     <div
-      class="sc-kpOvIu NBiZG"
+      class="sc-hRDKVd vHQLd"
     />
     <h2
-      class="sc-dcKlJK cAsXsC card-sub-title card-subtitle"
+      class="sc-cSaEAk hlEszv card-sub-title card-subtitle"
     >
       This is another test
     </h2>

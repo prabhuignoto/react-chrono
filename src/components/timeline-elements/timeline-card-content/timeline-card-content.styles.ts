@@ -230,10 +230,10 @@ export const TimelineContentDetailsWrapper = styled.div<{
       : ''}
   overflow-x: hidden;
   overflow-y: auto;
-  scrollbar-color: ${(p) => p.theme?.primary} ${(p) => p.theme?.cardBgColor};
+  scrollbar-color: ${(p) => p.theme?.primary} default;
   scrollbar-width: thin;
   transition: max-height 0.25s ease-in-out;
-  width: 100%;
+  width: ${(p) => (p.$borderLess ? 'calc(100% - 0.5rem)' : '100%')};
   padding: 0;
 
   ${(p) => (p.$customContent ? `height: 100%;` : '')}

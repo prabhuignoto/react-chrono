@@ -217,6 +217,17 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     return !isNested && !isMobile;
   }, [isNested, isMobile]);
 
+  // Get a readable title for screen readers
+  const accessibleTitle = useMemo(() => {
+    if (typeof title === 'string') {
+      return title;
+    } else if (typeof cardTitle === 'string') {
+      return cardTitle;
+    } else {
+      return 'Timeline item';
+    }
+  }, [title, cardTitle]);
+
   // Render the complete timeline item structure
   return (
     <VerticalItemWrapper
@@ -232,6 +243,9 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       key={id} // Key for React list rendering
       ref={contentRef} // Attach ref for measurements
       theme={theme} // Pass theme for potential use in styled-component fallbacks
+      role="listitem" // Indicate this is a list item
+      aria-current={active ? 'true' : undefined} // Indicate if this is the current item
+      aria-label={accessibleTitle} // Provide accessible name
     >
       {/* Conditionally render the Title */}
       {canShowTitle ? Title : null}

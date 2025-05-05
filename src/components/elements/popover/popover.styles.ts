@@ -63,6 +63,7 @@ export const Selecter = styled.div<{
   justify-content: space-between;
   padding: ${(p) => (p.$isMobile ? '0.4rem' : `0.4rem 0.5rem`)};
   user-select: none;
+  margin-right: 0.5rem;
 `;
 
 // Icon component within the selector with rotation animation

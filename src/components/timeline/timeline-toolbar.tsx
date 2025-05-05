@@ -213,6 +213,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
         isDark={darkMode}
         onToggleDarkMode={toggleDarkMode}
         onPaused={onPaused}
+        activeTimelineItem={activeTimelineItem}
+        totalItems={totalItems}
       />
       <SearchWrapper theme={theme}>
         <SearchInput
@@ -245,37 +247,41 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             {`${currentMatchIndex + 1} / ${totalMatches}`}
           </SearchInfo>
         )}
-        <TimelineNavItem $disable={disableSearchNav}>
-          <TimelineNavButton
-            onClick={onPreviousMatch}
-            title={buttonTexts?.previousMatch || 'Previous Match'}
-            aria-label={buttonTexts?.previousMatch || 'Previous Match'}
-            disabled={disableSearchNav}
-            theme={theme}
-            style={{ height: '24px', width: '24px' }}
-          >
-            <ChevronLeft />
-          </TimelineNavButton>
-        </TimelineNavItem>
-        <TimelineNavItem $disable={disableSearchNav}>
-          <TimelineNavButton
-            onClick={onNextMatch}
-            title={buttonTexts?.nextMatch || 'Next Match'}
-            aria-label={buttonTexts?.nextMatch || 'Next Match'}
-            disabled={disableSearchNav}
-            theme={theme}
-            style={{ height: '24px', width: '24px' }}
-          >
-            <ChevronRight />
-          </TimelineNavButton>
-        </TimelineNavItem>
+        {searchQuery && (
+          <>
+            <div className="timeline-nav-wrapper">
+              <TimelineNavButton
+                onClick={onPreviousMatch}
+                title={buttonTexts?.previousMatch || 'Previous Match'}
+                aria-label={buttonTexts?.previousMatch || 'Previous Match'}
+                disabled={disableSearchNav}
+                theme={theme}
+                style={{ height: '24px', width: '24px' }}
+              >
+                <ChevronLeft />
+              </TimelineNavButton>
+            </div>
+            <div className="timeline-nav-wrapper">
+              <TimelineNavButton
+                onClick={onNextMatch}
+                title={buttonTexts?.nextMatch || 'Next Match'}
+                aria-label={buttonTexts?.nextMatch || 'Next Match'}
+                disabled={disableSearchNav}
+                theme={theme}
+                style={{ height: '24px', width: '24px' }}
+              >
+                <ChevronRight />
+              </TimelineNavButton>
+            </div>
+          </>
+        )}
       </SearchWrapper>
       <ExtraControls
         $hide={hideExtraControls}
         $slideShowRunning={slideShowRunning}
         key="timeline-extra-controls"
       >
-        <ExtraControlChild key="quick-jump">
+        <div className="control-wrapper" key="quick-jump">
           {enableQuickJump ? (
             <QuickJump
               activeItem={activeTimelineItem}
@@ -287,8 +293,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               isMobile={isMobile}
             />
           ) : null}
-        </ExtraControlChild>
-        <ExtraControlChild key="layout-switcher">
+        </div>
+        <div className="control-wrapper" key="layout-switcher">
           {!cardLess && enableLayoutSwitch ? (
             <LayoutSwitcher
               isDarkMode={darkMode}
@@ -299,9 +305,9 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               isMobile={isMobile}
             />
           ) : null}
-        </ExtraControlChild>
+        </div>
         {canShowDensity ? (
-          <ExtraControlChild key="change-density">
+          <div className="control-wrapper" key="change-density">
             <ChangeDensity
               isDarkMode={darkMode}
               theme={theme}
@@ -310,7 +316,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               selectedDensity={textDensity}
               isMobile={isMobile}
             ></ChangeDensity>
-          </ExtraControlChild>
+          </div>
         ) : null}{' '}
       </ExtraControls>
     </Toolbar>

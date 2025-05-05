@@ -8,7 +8,7 @@ const flexContainer = css`
 `;
 
 // Use transform instead of box-shadow for better performance
-export const ToolbarWrapper = styled.ul<{ theme: Theme }>`
+export const ToolbarWrapper = styled.div<{ theme: Theme }>`
   ${flexContainer};
   list-style: none;
   margin: 0;
@@ -24,7 +24,7 @@ export const ToolbarWrapper = styled.ul<{ theme: Theme }>`
 `;
 
 // Toolbar list item styles
-export const ToolbarListItem = styled.li`
+export const ToolbarListItem = styled.div`
   padding: 0;
   margin: 0 0.5rem;
 `;

@@ -27,6 +27,23 @@ export type ContextProps = PropsModel & {
 
 const GlobalContext = createContext<ContextProps>({});
 
+export interface ButtonTexts {
+  first?: string;
+  last?: string;
+  play?: string;
+  stop?: string;
+  previous?: string;
+  next?: string;
+  dark?: string;
+  light?: string;
+  timelinePoint?: string;
+  searchPlaceholder?: string;
+  searchAriaLabel?: string;
+  clearSearch?: string;
+  nextMatch?: string;
+  previousMatch?: string;
+}
+
 const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
   const {
     cardHeight = 200,
@@ -93,21 +110,15 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     [textContentDensity],
   );
 
-  useMatchMedia(
-    `(max-width: ${responsiveBreakPoint - 1}px)`,
-    {
-      onMatch: () => setIsMobileDetected(true),
-      enabled: enableBreakPoint,
-    }
-  );
+  useMatchMedia(`(max-width: ${responsiveBreakPoint - 1}px)`, {
+    onMatch: () => setIsMobileDetected(true),
+    enabled: enableBreakPoint,
+  });
 
-  useMatchMedia(
-    `(min-width: ${responsiveBreakPoint}px)`,
-    {
-      onMatch: () => setIsMobileDetected(false),
-      enabled: enableBreakPoint,
-    }
-  );
+  useMatchMedia(`(min-width: ${responsiveBreakPoint}px)`, {
+    onMatch: () => setIsMobileDetected(false),
+    enabled: enableBreakPoint,
+  });
 
   const defaultProps = useMemo(
     () =>
