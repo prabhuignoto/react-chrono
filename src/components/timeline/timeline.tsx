@@ -212,7 +212,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     (direction: 'next' | 'prev') => {
       if (searchResults.length === 0) return;
 
-      let nextIndex = currentMatchIndex;
+      let nextIndex;
       if (direction === 'next') {
         nextIndex = (currentMatchIndex + 1) % searchResults.length;
       } else {
@@ -315,49 +315,64 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     [handleNext, handlePrevious, handleLast],
   );
 
-  const handleTimelineItemClick = (itemId?: string, isSlideShow?: boolean) => {
-    if (itemId) {
-      const targetIndex = items.findIndex((item) => item.id === itemId);
-      if (targetIndex !== -1) {
-        activeItemIndex.current = targetIndex;
-        onTimelineUpdated?.(
-          isSlideShow && targetIndex < items.length - 1
-            ? targetIndex + 1
-            : targetIndex,
+  // Helper function to find target element
+  const findTargetElement = (itemId: string) => {
+    let elementId = `timeline-${timelineMode.toLowerCase()}-item-${itemId}`;
+    let targetElement = document.getElementById(elementId);
+
+    // Check in portal for horizontal modes
+    if (
+      !targetElement &&
+      (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL')
+    ) {
+      const portalContainer = document.getElementById(id.current);
+      if (portalContainer) {
+        targetElement = portalContainer.querySelector(
+          `#timeline-card-${itemId}`,
         );
-
-        // Trigger scroll/focus - This logic might already exist or need refinement
-        // Based on existing code, this seems to rely on side effects from onTimelineUpdated/activeTimelineItem prop change
-        // Let's ensure the element scrolls into view
-        let elementId = `timeline-${timelineMode.toLowerCase()}-item-${itemId}`;
-        // Horizontal mode might have items rendered in a portal, check for that structure
-        let targetElement = document.getElementById(elementId);
-
-        if (
-          !targetElement &&
-          (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL')
-        ) {
-          // Check portal container
-          const portalContainer = document.getElementById(id.current); // id.current is the portal root ID
-          if (portalContainer) {
-            targetElement = portalContainer.querySelector(
-              `#timeline-card-${itemId}`,
-            );
-          }
-        }
-
-        targetElement?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center',
-        });
-
-        // Update search index if the clicked item is part of search results
-        const resultIndex = searchResults.indexOf(targetIndex);
-        if (resultIndex !== -1) {
-          setCurrentMatchIndex(resultIndex);
-        }
       }
+    }
+
+    return targetElement;
+  };
+
+  // Helper function to update the timeline
+  const updateTimelinePosition = (
+    targetIndex: number,
+    isSlideShow?: boolean,
+  ) => {
+    activeItemIndex.current = targetIndex;
+
+    // Calculate the index to update to
+    const updateIndex =
+      isSlideShow && targetIndex < items.length - 1
+        ? targetIndex + 1
+        : targetIndex;
+
+    onTimelineUpdated?.(updateIndex);
+  };
+
+  const handleTimelineItemClick = (itemId?: string, isSlideShow?: boolean) => {
+    if (!itemId) return;
+
+    const targetIndex = items.findIndex((item) => item.id === itemId);
+    if (targetIndex === -1) return;
+
+    // Update timeline position
+    updateTimelinePosition(targetIndex, isSlideShow);
+
+    // Find and scroll to target element
+    const targetElement = findTargetElement(itemId);
+    targetElement?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    });
+
+    // Update search match index if applicable
+    const resultIndex = searchResults.indexOf(targetIndex);
+    if (resultIndex !== -1) {
+      setCurrentMatchIndex(resultIndex);
     }
   };
 

@@ -21,18 +21,6 @@ import { DetailsText } from './details-text';
 import { getTextOrContent } from './text-or-content';
 import { TimelineItemContentWrapper } from './timeline-card-content.styles';
 
-// Helper function to determine video MIME type based on extension
-const getVideoType = (url: string): string => {
-  if (/\.(mp4)$/.exec(url) !== null) {
-    return 'video/mp4';
-  } else if (/\.(ogg)$/.exec(url) !== null) {
-    return 'video/ogg';
-  } else if (/\.(webm)$/.exec(url) !== null) {
-    return 'video/webm';
-  }
-  return 'video/mp4'; // Default
-};
-
 // Custom equality function for React.memo to prevent unnecessary re-renders
 const arePropsEqual = (
   prevProps: TimelineContentModel,
