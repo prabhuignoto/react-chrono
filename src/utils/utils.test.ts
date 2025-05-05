@@ -88,6 +88,7 @@ describe('Utility Functions', () => {
       clearSearch: 'Clear Search',
       previousMatch: 'Previous Match',
       nextMatch: 'Next Match',
+      timelinePoint: 'Timeline point',
     } as ButtonTexts);
   });
 

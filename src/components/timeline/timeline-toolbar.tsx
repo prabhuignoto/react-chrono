@@ -3,16 +3,12 @@ import React, {
   FunctionComponent,
   useContext,
   useMemo,
-  useCallback,
   useRef,
-  useEffect,
 } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import Controls from '../timeline-elements/timeline-control/timeline-control';
 import {
   TimelineNavButton,
-  TimelineNavItem,
-  TimelineNavWrapper,
 } from '../timeline-elements/timeline-control/timeline-control.styles';
 import { ChevronLeft, ChevronRight, CloseIcon } from '../icons';
 import { Toolbar } from '../toolbar';
@@ -23,7 +19,6 @@ import {
 } from './timeline-popover-elements';
 import { TimelineToolbarProps } from './timeline-toolbar.model';
 import {
-  ExtraControlChild,
   ExtraControls,
   SearchInput,
   SearchWrapper,
