@@ -54,16 +54,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   isNested,
   isResuming,
 }: ContentFooterProps) => {
-  const { mode, theme } = useContext(GlobalContext);
-
-  const canShowTriangleIcon = useMemo(() => {
-    return (
-      !isNested &&
-      (['VERTICAL', 'VERTICAL_ALTERNATING'] as TimelineMode[]).some(
-        (m) => m === mode,
-      )
-    );
-  }, [mode, isNested]);
+  const { theme } = useContext(GlobalContext);
 
   const handleClick = useCallback(
     (ev: PointerEvent) => {
