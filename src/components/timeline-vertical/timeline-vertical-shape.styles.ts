@@ -92,14 +92,26 @@ export const TimelinePointContainer = styled.button<TimelinePointContainerProps>
   border: 0;
   padding: 0; /* Remove default padding */
   cursor: pointer; /* Indicate interactivity */
+  transition: transform 0.2s ease-in-out; /* Smooth transitions */
+
+  /* Add subtle hover transform */
+  &:hover:not(:disabled) {
+    transform: scale(1.05);
+  }
+
+  /* Add press effect */
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
 
   /* Add focus styles for accessibility */
-  &:focus {
-    outline: 2px solid ${(p) => p.theme?.primary || '#007bff'}; /* Example focus ring */
-    outline-offset: 2px;
+  &:focus-visible {
+    outline: 3px solid ${(p) => p.theme?.primary ?? '#007bff'}; /* Focus ring */
+    outline-offset: 3px;
   }
 
   &:disabled {
     cursor: default; /* Indicate non-interactive state */
+    opacity: 0.6; /* Visually show disabled state */
   }
 `;

@@ -83,6 +83,12 @@ describe('Utility Functions', () => {
       play: 'Play Slideshow',
       previous: 'Previous',
       stop: 'Stop Slideshow',
+      searchPlaceholder: 'Search Timeline',
+      searchAriaLabel: 'Search timeline content',
+      clearSearch: 'Clear Search',
+      previousMatch: 'Previous Match',
+      nextMatch: 'Next Match',
+      timelinePoint: 'Timeline point',
     } as ButtonTexts);
   });
 

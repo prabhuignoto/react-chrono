@@ -27,6 +27,23 @@ export type ContextProps = PropsModel & {
 
 const GlobalContext = createContext<ContextProps>({});
 
+export interface ButtonTexts {
+  first?: string;
+  last?: string;
+  play?: string;
+  stop?: string;
+  previous?: string;
+  next?: string;
+  dark?: string;
+  light?: string;
+  timelinePoint?: string;
+  searchPlaceholder?: string;
+  searchAriaLabel?: string;
+  clearSearch?: string;
+  nextMatch?: string;
+  previousMatch?: string;
+}
+
 const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
   const {
     cardHeight = 200,
@@ -54,7 +71,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
 
   const [horizontalAll, setHorizontalAll] = useState(
-    showAllCardsHorizontal || false,
+    showAllCardsHorizontal ?? false,
   );
 
   const [isMobileDetected, setIsMobileDetected] = useState(false);
@@ -63,7 +80,8 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     useState<TextDensity>(textDensity);
 
   const newCardHeight = useMemo(
-    () => Math.max(contentDetailsHeight || 0 + mediaHeight || 0, cardHeight),
+    () =>
+      Math.max((contentDetailsHeight ?? 0) + (mediaHeight ?? 0), cardHeight),
     [],
   );
 
@@ -93,28 +111,22 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     [textContentDensity],
   );
 
-  useMatchMedia(
-    `(max-width: ${responsiveBreakPoint - 1}px)`,
-    {
-      onMatch: () => setIsMobileDetected(true),
-      enabled: enableBreakPoint,
-    }
-  );
+  useMatchMedia(`(max-width: ${responsiveBreakPoint - 1}px)`, {
+    onMatch: () => setIsMobileDetected(true),
+    enabled: enableBreakPoint,
+  });
 
-  useMatchMedia(
-    `(min-width: ${responsiveBreakPoint}px)`,
-    {
-      onMatch: () => setIsMobileDetected(false),
-      enabled: enableBreakPoint,
-    }
-  );
+  useMatchMedia(`(min-width: ${responsiveBreakPoint}px)`, {
+    onMatch: () => setIsMobileDetected(false),
+    enabled: enableBreakPoint,
+  });
 
   const defaultProps = useMemo(
     () =>
       ({
         ...{
           borderLessCards: false,
-          cardHeight: newCardHeight,
+          cardHeight: cardLess ? (cardHeight ?? 80) : cardHeight,
           cardLess: false,
           disableAutoScrollOnClick: !!props.disableInteraction,
           disableClickOnCircle: !!props.disableInteraction,
@@ -151,7 +163,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
           ...getDefaultButtonTexts(),
           ...buttonTexts,
         },
-        cardHeight: cardLess ? cardHeight || 80 : cardHeight,
+        cardHeight: cardLess ? (cardHeight ?? 80) : cardHeight,
         classNames: {
           ...getDefaultClassNames(),
           ...classNames,

@@ -3,39 +3,45 @@
 exports[`Timeline vertical item > Should match snapshot 1`] = `
 <div>
   <li
-    class="sc-cMqPwU eVXjLD vertical-item-row"
+    aria-label="vertical item title"
+    class="sc-beKSRx jWqzlD vertical-item-row"
     data-testid="vertical-item-row"
   >
     <div
-      class="sc-deSjom gLvTFy"
+      class="sc-bxmmIP ihpTNX"
       mode="VERTICAL_ALTERNATING"
     >
       <div
         align="right"
-        class="sc-FEMpB bYdRfA timeline-item-title title"
+        class="sc-dslWvo isbYgV timeline-item-title title"
       >
         vertical item title
       </div>
     </div>
     <div
-      class="sc-jUkaYT cBVweA card-content-wrapper"
+      class="sc-fEOKFM bjWvjA card-content-wrapper"
     >
-      <section
-        class="sc-incsXD hliFPP timeline-card-content  card"
+      <article
+        aria-label="vertical item title"
+        class="sc-jcvhOc iTEpxN timeline-card-content  card"
         data-testid="timeline-card-content"
         mode="VERTICAL_ALTERNATING"
-        tabindex="0"
+        tabindex="-1"
       >
+        <header
+          class="sc-kHpflN iZnlCZ"
+        />
         <div
-          class="sc-gtlvkJ StnpJ card-media-wrapper card-media"
+          class="sc-fXqexe knKYTU card-media-wrapper card-media"
           mode="VERTICAL_ALTERNATING"
         >
           <div
-            class="sc-sediK bcrNJD"
+            class="sc-gOUBbZ kqEibX"
             height="200"
           >
             <img
-              class="sc-beKSRx evdJKN"
+              alt=""
+              class="sc-loYsQo kGoWBd"
               data-testid="timeline-card-content-image"
               height="auto"
               loading="lazy"
@@ -45,37 +51,22 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
             />
           </div>
         </div>
-        <div
-          class="sc-bxmmIP cpcro"
-          mode="VERTICAL_ALTERNATING"
-        >
-          <div
-            class="sc-hhvUTr jDRGTb"
-          />
-        </div>
-        <div
-          aria-expanded="false"
-          class="sc-ienWRC ikidru show-less card-description card-text"
-        />
-        <span
-          class="sc-gBIzgl ehtLCz"
-          dir=""
-          offset="-8"
-        />
-      </section>
+      </article>
     </div>
     <div
       bg="#0f52ba"
-      class="sc-cHtFsA cloST"
+      class="sc-fQMTnL kWNbng"
       data-testid="tree-leaf"
     >
       <button
-        aria-label="Timeline Point"
-        class="sc-keRagD bksbDM  timeline-vertical-circle"
+        aria-label="Timeline point"
+        class="sc-bWxZAa cRTSpi  timeline-vertical-circle"
         data-testid="tree-leaf-click"
+        tabindex="0"
       >
         <div
-          class="sc-dycHyt bFKXBa"
+          aria-hidden="true"
+          class="sc-jcvEFQ fyGLYv"
           dimension="16"
         />
       </button>

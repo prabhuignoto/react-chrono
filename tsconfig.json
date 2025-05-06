@@ -36,7 +36,7 @@
       }
     ]
   },
-  "include": ["src/components", "src/models", "src/utils", "src/demo"],
+  "include": ["src/components", "src/models", "src/utils", "src/demo", "src/types"],
   "exclude": [
     "node_modules",
     "dist",

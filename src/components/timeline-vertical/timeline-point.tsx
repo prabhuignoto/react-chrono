@@ -1,6 +1,6 @@
 import { TimelinePointModel } from '@models/TimelineVerticalModel'; // Assuming model path
 import cls from 'classnames'; // Utility for conditionally joining classNames
-import {
+import React, {
   memo, // Import memo for component optimization
   useContext,
   useEffect,
@@ -8,7 +8,6 @@ import {
   useRef,
   FunctionComponent, // Explicit import
   MouseEvent,
-  JSX, // Explicit import for event type
 } from 'react';
 import { GlobalContext } from '../GlobalContext'; // Context for global theme/settings
 // Shape seems to be a shared styled component, potentially defined elsewhere
@@ -25,10 +24,10 @@ import {
  * performance optimization.
  *
  * @param {TimelinePointModel} props - The properties for the TimelinePoint component.
- * @returns {JSX.Element} The rendered TimelinePoint component.
+ * @returns {React.ReactElement} The rendered TimelinePoint component.
  */
 const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
-  (props: TimelinePointModel): JSX.Element => {
+  (props: TimelinePointModel) => {
     const {
       className, // 'left' or 'right' - passed to styled components
       id, // Unique ID of the timeline item
@@ -52,6 +51,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
       focusActiveItemOnLoad, // Should the initially active item trigger 'onActive' immediately?
       timelinePointShape, // Shape of the point (e.g., 'circle', 'square')
       disableTimelinePoint, // Globally disable/hide all timeline points?
+      buttonTexts, // Custom button text labels
     } = useContext(GlobalContext);
 
     // Ref to track if this is the component's first render cycle
@@ -130,6 +130,14 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
       }
     }, []); // Empty dependency array ensures it runs only once
 
+    // Create an accessible label for the timeline point
+    const timelinePointLabel = useMemo(() => {
+      return (
+        buttonTexts?.timelinePoint ??
+        (active ? 'Active timeline point' : 'Timeline point')
+      );
+    }, [active, buttonTexts]);
+
     // Render the timeline point structure
     return (
       <TimelinePointWrapper
@@ -151,8 +159,10 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
           {...clickHandlerProps} // Spread the memoized click handler props
           ref={circleRef} // Attach ref for position measurement
           data-testid="tree-leaf-click" // Test ID for the clickable element
-          aria-label="Timeline Point" // Accessibility label
+          aria-label={timelinePointLabel} // Accessibility label
+          aria-disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
           disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
+          tabIndex={disableClickOnCircle || disableTimelinePoint ? -1 : 0} // Manage tab order
         >
           {/* The visual shape (circle, square, or custom icon) */}
           <Shape
@@ -162,13 +172,13 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
             $timelinePointShape={timelinePointShape} // Controls the shape ('circle', 'square')
             // --- Standard React props ---
             className={circleClass} // Apply 'active' and 'using-icon' classes
+            aria-hidden="true" // Hide from screen readers as it's decorative
           >
-            {/* Render custom icon if provided, otherwise relies on Shape's default appearance */}
-            {iconChild ? iconChild : null}
+            {iconChild}
           </Shape>
         </TimelinePointContainer>
       </TimelinePointWrapper>
-    );
+    ) as React.ReactElement;
   },
   // Use default shallow comparison for memoization.
   // The previous custom comparison (prev.active === next.active && prev.isMobile === next.isMobile)

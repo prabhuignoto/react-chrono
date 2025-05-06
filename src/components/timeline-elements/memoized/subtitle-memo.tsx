@@ -17,7 +17,6 @@ const SubTitleMemo = React.memo<Content>(
         theme={theme}
         $fontSize={fontSize}
         className={cls('card-sub-title', classString)}
-        $padding={padding}
       >
         {content}
       </CardSubTitle>

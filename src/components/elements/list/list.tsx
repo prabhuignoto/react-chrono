@@ -1,5 +1,10 @@
 import { getUniqueID } from '@utils/index';
-import { FunctionComponent, startTransition, useCallback, useMemo } from 'react';
+import {
+  FunctionComponent,
+  startTransition,
+  useCallback,
+  useMemo,
+} from 'react';
 import { ListItem } from './list-item';
 import { ListModel } from './list.model';
 import { ListStyle } from './list.styles';
@@ -35,7 +40,7 @@ const List: FunctionComponent<ListModel> = ({
    */
   const listItems = useMemo(
     () => items.map((item) => ({ id: getUniqueID(), ...item })),
-    [items]
+    [items],
   );
 
   /**
@@ -53,7 +58,7 @@ const List: FunctionComponent<ListModel> = ({
         onClick?.(id);
       }
     },
-    [multiSelectable, onClick]
+    [multiSelectable, onClick],
   );
 
   /**
@@ -66,26 +71,24 @@ const List: FunctionComponent<ListModel> = ({
     (item: EnhancedListItem, index: number) => {
       const handleClick = useCallback(
         () => handleItemSelection(item.id, item),
-        [item, handleItemSelection]
+        [item, handleItemSelection],
       );
 
-      return <ListItem
-        key={item.id}
-        {...item}
-        theme={theme}
-        onClick={handleClick}
-        selectable={multiSelectable}
-        active={activeItemIndex === index}
-      />
+      return (
+        <ListItem
+          key={item.id}
+          {...item}
+          theme={theme}
+          onClick={handleClick}
+          selectable={multiSelectable}
+          active={activeItemIndex === index}
+        />
+      );
     },
-    [theme, handleItemSelection, multiSelectable, activeItemIndex]
+    [theme, handleItemSelection, multiSelectable, activeItemIndex],
   );
 
-  return (
-    <ListStyle>
-      {listItems.map(renderListItem)}
-    </ListStyle>
-  );
+  return <ListStyle>{listItems.map(renderListItem)}</ListStyle>;
 };
 
 export { List };

@@ -21,6 +21,42 @@ import { DetailsText } from './details-text';
 import { getTextOrContent } from './text-or-content';
 import { TimelineItemContentWrapper } from './timeline-card-content.styles';
 
+// Custom equality function for React.memo to prevent unnecessary re-renders
+const arePropsEqual = (
+  prevProps: TimelineContentModel,
+  nextProps: TimelineContentModel,
+): boolean => {
+  // Always re-render if active state changes
+  if (prevProps.active !== nextProps.active) return false;
+
+  // Re-render if slideshow state changes
+  if (prevProps.slideShowActive !== nextProps.slideShowActive) return false;
+
+  // Re-render if hasFocus changes
+  if (prevProps.hasFocus !== nextProps.hasFocus) return false;
+
+  // Only re-render content-related props if they actually change
+  if (prevProps.content !== nextProps.content) return false;
+  if (prevProps.detailedText !== nextProps.detailedText) return false;
+  if (prevProps.title !== nextProps.title) return false;
+  if (prevProps.cardTitle !== nextProps.cardTitle) return false;
+
+  // Skip re-render if media props stay the same
+  if (JSON.stringify(prevProps.media) !== JSON.stringify(nextProps.media))
+    return false;
+
+  // Skip re-render if theme stays the same
+  if (JSON.stringify(prevProps.theme) !== JSON.stringify(nextProps.theme))
+    return false;
+
+  // Skip re-render if items (for nested timeline) stay the same
+  if (JSON.stringify(prevProps.items) !== JSON.stringify(nextProps.items))
+    return false;
+
+  // Default to true - don't re-render
+  return true;
+};
+
 const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
   React.memo(
     ({
@@ -77,7 +113,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         remainInterval,
         startWidth,
         tryPause,
-        tryResume,
         setupTimer,
         setStartWidth,
       } = useSlideshow(
@@ -89,71 +124,22 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         onElapsed,
       );
 
-      const {
-        cardActualHeight,
-        detailsHeight,
-        textContentLarge,
-        updateCardSize,
-      } = useCardSize({
-        containerRef,
-        detailsRef,
-        setStartWidth,
-      });
+      const { cardActualHeight, detailsHeight, textContentLarge } = useCardSize(
+        {
+          containerRef,
+          detailsRef,
+          setStartWidth,
+        },
+      );
 
+      // Memoize all calculated values to prevent re-renders
       const canShowProgressBar = useMemo(() => {
         return active && slideShowActive && showProgressOnSlideshow;
-      }, [active, slideShowActive]);
+      }, [active, slideShowActive, showProgressOnSlideshow]);
 
       const canShowMore = useMemo(() => {
         return !!detailedText;
       }, [detailedText]);
-
-      useEffect(() => {
-        const detailsEle = detailsRef.current;
-
-        if (detailsEle) {
-          detailsEle.scrollTop = 0;
-        }
-      }, [showMore]);
-
-      useEffect(() => {
-        if (active) {
-          setHasBeenActivated(true);
-        }
-      }, [active]);
-
-      useEffect(() => {
-        if (!slideItemDuration) {
-          return;
-        }
-        if (active && slideShowActive) {
-          setupTimer(slideItemDuration);
-        }
-
-        if (active && hasFocus) {
-          containerRef.current && containerRef.current.focus();
-        }
-
-        if (!slideShowActive) {
-          setHasBeenActivated(false);
-        }
-      }, [active, slideShowActive]);
-
-      useEffect(() => {
-        if (hasFocus && active) {
-          containerRef.current && containerRef.current.focus();
-        }
-      }, [hasFocus, active]);
-
-      useEffect(() => {
-        if (!paused && !isFirstRender.current) {
-          setIsResuming(true);
-        }
-      }, [paused, startWidth]);
-
-      useEffect(() => {
-        isFirstRender.current = false;
-      }, []);
 
       const canShowReadMore = useMemo(() => {
         return (
@@ -162,8 +148,79 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           !customContent &&
           textDensity === 'HIGH'
         );
-      }, [textDensity]);
+      }, [useReadMore, detailedText, customContent, textDensity]);
 
+      const canShowNestedTimeline = useMemo(() => {
+        return isNested && items && items.length > 0;
+      }, [isNested, items]);
+
+      const canShowDetailsText = useMemo(() => {
+        // Hide details when using text overlay with media, otherwise show if content exists
+        return (
+          (detailedText ?? customContent ?? timelineContent) &&
+          !(textOverlay && media)
+        );
+      }, [detailedText, customContent, timelineContent, textOverlay, media]);
+
+      // Reset details scroll position when toggling details
+      useEffect(() => {
+        const detailsEle = detailsRef.current;
+        if (detailsEle) {
+          detailsEle.scrollTop = 0;
+        }
+      }, [showMore]);
+
+      // Handle card activation
+      useEffect(() => {
+        if (active && !hasBeenActivated) {
+          setHasBeenActivated(true);
+        }
+      }, [active, hasBeenActivated]);
+
+      // Setup timer when card becomes active
+      useEffect(() => {
+        if (!slideItemDuration) {
+          return;
+        }
+
+        if (active && slideShowActive) {
+          setupTimer(slideItemDuration);
+        }
+
+        if (active && hasFocus && containerRef.current) {
+          containerRef.current.focus();
+        }
+
+        if (!slideShowActive) {
+          setHasBeenActivated(false);
+        }
+      }, [active, slideShowActive, slideItemDuration, hasFocus, setupTimer]);
+
+      // Set focus when needed
+      useEffect(() => {
+        if (hasFocus && active && containerRef.current) {
+          containerRef.current.focus();
+        }
+      }, [hasFocus, active]);
+
+      // Detect when resuming from pause
+      useEffect(() => {
+        if (!paused && !isFirstRender.current) {
+          setIsResuming(true);
+        }
+      }, [paused]);
+
+      // Track first render
+      useEffect(() => {
+        isFirstRender.current = false;
+
+        // Cleanup function
+        return () => {
+          isFirstRender.current = true;
+        };
+      }, []);
+
+      // Memoize handler functions
       const handleMediaState = useCallback(
         (state: MediaState) => {
           if (!slideShowActive) {
@@ -177,29 +234,81 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             }
           }
         },
-        [paused, slideShowActive],
+        [slideShowActive, tryPause, paused, id, onElapsed],
       );
 
-      const contentClass = useMemo(
-        () =>
-          cls(
-            active ? 'timeline-card-content active' : 'timeline-card-content ',
-            classNames?.card,
-          ),
-        [active],
-      );
+      const handleCardClick = useCallback(() => {
+        if (onClick && !disableInteraction && !disableAutoScrollOnClick) {
+          onClick(id);
+        }
+      }, [onClick, id, disableInteraction, disableAutoScrollOnClick]);
 
-      const contentDetailsClass = useMemo(
-        () =>
-          cls(
-            !showMore && !customContent && useReadMore
-              ? 'show-less card-description'
-              : 'card-description',
-            classNames?.cardText,
-          ),
-        [showMore, customContent],
-      );
+      const toggleShowMore = useCallback(() => {
+        if ((active && paused) || !slideShowActive) {
+          setShowMore((prev) => !prev);
+          onShowMore?.();
+          // Use setTimeout to ensure the DOM has updated before focusing
+          setTimeout(() => {
+            if (containerRef.current) {
+              containerRef.current.focus();
+              // Force focus styles to be visible
+              containerRef.current.classList.add('focus-visible');
+            }
+          }, 0);
+        }
+      }, [active, paused, slideShowActive, onShowMore]);
 
+      // Memoize computed values to prevent re-renders
+      const triangleDir = useMemo(() => {
+        if (mode === 'VERTICAL_ALTERNATING') {
+          return flip ? 'right' : 'left';
+        }
+        return null;
+      }, [mode, flip]);
+
+      const gradientColor = useMemo(() => {
+        return hexToRGBA(theme?.cardBgColor ?? '#fff', 0.4);
+      }, [theme?.cardBgColor]);
+
+      const contentDetailsClass = useMemo(() => {
+        return cls(
+          'card-description',
+          classNames?.cardText ?? '',
+          borderLessCards ? 'no-border' : '',
+        );
+      }, [classNames?.cardText, borderLessCards]);
+
+      // Get the accessible label for the card
+      const accessibleLabel = useMemo(() => {
+        return (
+          (typeof cardTitle === 'string' ? cardTitle : null) ??
+          (typeof title === 'string' ? title : null) ??
+          'Timeline card'
+        );
+      }, [cardTitle, title]);
+
+      // Create the detailsText component for text overlay mode using the proper function
+      const detailsTextComponent = useMemo(() => {
+        // Only create the component if we need it for text overlay mode
+        if (textOverlay && (detailedText ?? customContent ?? timelineContent)) {
+          return getTextOrContent({
+            timelineContent,
+            theme,
+            detailedText,
+            showMore,
+          });
+        }
+        return null;
+      }, [
+        textOverlay,
+        detailedText,
+        customContent,
+        timelineContent,
+        theme,
+        showMore,
+      ]);
+
+      // The card's minimum height
       const cardMinHeight = useMemo(() => {
         if (textOverlay && media) {
           return cardHeight;
@@ -208,105 +317,46 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         } else {
           return nestedCardHeight;
         }
-      }, []);
-
-      const handleExpandDetails = useCallback(() => {
-        if ((active && paused) || !slideShowActive) {
-          setShowMore(!showMore);
-          onShowMore();
-        }
-      }, [active, paused, slideShowActive, showMore]);
-
-      const triangleDir = useMemo(() => {
-        if (flip) {
-          if (branchDir === 'right') {
-            return 'left';
-          } else {
-            return 'right';
-          }
-        }
-        return branchDir;
-      }, [branchDir, flip]);
-
-      const gradientColor = useMemo(() => {
-        const bgToUse = !isNested
-          ? theme?.cardBgColor
-          : theme?.nestedCardDetailsBackGround;
-        return !showMore && textContentLarge
-          ? hexToRGBA(bgToUse || '#ffffff', 0.8)
-          : null;
-      }, [textContentLarge, showMore, theme?.cardDetailsBackGround, isNested]);
-
-      const canShowDetailsText = useMemo(() => {
-        return !textOverlay && !items?.length && textDensity === 'HIGH';
-      }, [items?.length, textDensity]);
-
-      const TextOrContent = useMemo(() => {
-        return getTextOrContent({
-          detailedText,
-          showMore,
-          theme,
-          timelineContent,
-        });
-      }, [showMore, timelineContent, theme, detailedText]);
-
-      const handlers = useMemo(() => {
-        if (!isNested && !disableInteraction) {
-          return {
-            onPointerDown: (ev: React.PointerEvent) => {
-              ev.stopPropagation();
-              if (
-                !slideShowActive &&
-                onClick &&
-                id &&
-                !disableAutoScrollOnClick
-              ) {
-                onClick(id);
-              }
-            },
-            onPointerEnter: tryPause,
-            onPointerLeave: tryResume,
-          };
-        }
-      }, []);
-
-      const canShowNestedTimeline = useMemo(() => {
-        return !canShowDetailsText && textDensity === 'HIGH';
-      }, [canShowDetailsText, textDensity]);
+      }, [textOverlay, media, isNested, cardHeight, nestedCardHeight]);
 
       return (
         <TimelineItemContentWrapper
-          className={contentClass}
+          as="article"
+          aria-label={accessibleLabel}
+          ref={containerRef}
+          onClick={handleCardClick}
+          className={`timeline-card-content ${active ? 'active' : ''} ${
+            classNames?.card ?? ''
+          }`}
+          data-testid="timeline-card-content"
+          $active={active}
+          $branchDir={branchDir}
+          $slideShowActive={slideShowActive}
+          $slideShowType={slideShowType}
+          tabIndex={active ? 0 : -1}
+          onDoubleClick={toggleShowMore}
           $minHeight={cardMinHeight}
           $maxWidth={cardWidth}
           mode={mode}
           $noMedia={!media}
-          {...handlers}
-          ref={updateCardSize}
-          tabIndex={!isNested ? 0 : -1}
-          theme={theme}
-          $borderLessCards={borderLessCards}
           $textOverlay={textOverlay}
-          $active={hasBeenActivated}
-          $slideShowType={slideShowType}
-          $slideShowActive={slideShowActive}
-          $branchDir={branchDir}
           $isNested={isNested}
           $highlight={highlightCardsOnHover}
-          data-testid="timeline-card-content"
-          $customContent={!!customContent}
+          $borderLessCards={borderLessCards}
           $textDensity={textDensity}
+          $customContent={!!customContent}
         >
-          {title && !textOverlay ? (
+          {/* Only show the content header if we're not using text overlay mode with media */}
+          {(!textOverlay || !media) && (
             <ContentHeader
               title={title}
-              theme={theme}
               url={url}
               media={media}
               content={content}
               cardTitle={cardTitle}
+              theme={theme}
             />
-          ) : null}
+          )}
 
           {media && (
             <CardMedia
@@ -319,10 +369,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               onMediaStateChange={handleMediaState}
               slideshowActive={slideShowActive}
               theme={theme}
-              title={title}
+              title={typeof title === 'string' ? title : ''}
               url={url}
               startWidth={startWidth}
-              detailsText={TextOrContent}
+              detailsText={detailsTextComponent}
               paused={paused}
               remainInterval={remainInterval}
               showProgressBar={canShowProgressBar}
@@ -355,29 +405,28 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             />
           )}
 
-          {(!textOverlay || !media) && (
+          {canShowReadMore && canShowMore && !textOverlay && (
             <ContentFooter
-              theme={theme}
-              progressRef={progressRef}
-              startWidth={startWidth}
+              showProgressBar={canShowProgressBar}
+              onExpand={toggleShowMore}
+              triangleDir={triangleDir}
+              showMore={showMore}
               textContentIsLarge={textContentLarge}
+              showReadMore={canShowReadMore}
               remainInterval={remainInterval}
               paused={paused}
-              triangleDir={triangleDir}
-              showProgressBar={canShowProgressBar}
-              showReadMore={canShowReadMore}
-              onExpand={handleExpandDetails}
-              canShow={canShowMore}
-              showMore={showMore}
+              startWidth={startWidth}
+              canShow={!!detailedText && !showMore}
+              progressRef={progressRef}
               isNested={isNested}
               isResuming={isResuming}
+              theme={theme}
             />
           )}
         </TimelineItemContentWrapper>
       );
     },
+    arePropsEqual,
   );
-
-TimelineCardContent.displayName = 'TimelineCardContent';
 
 export default TimelineCardContent;

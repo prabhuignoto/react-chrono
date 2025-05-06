@@ -1,4 +1,12 @@
-import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from 'vitest';
 import { TimelineCardModel } from '../../../../models/TimelineItemModel';
 import { customRender } from '../../../common/test';
 import { providerProps } from '../../../common/test/index';

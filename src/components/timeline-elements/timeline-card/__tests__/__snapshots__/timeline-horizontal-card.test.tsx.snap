@@ -9,13 +9,18 @@ exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
     <div
       class="sc-fLDLck gtVpfp"
     >
-      <div
-        class="sc-dycHyt bFKXBa timeline-circle using-icon vertical_alternating active"
+      <button
+        aria-disabled="false"
+        aria-label=""
+        aria-selected="false"
+        class="sc-dycHyt kQaHSB timeline-circle using-icon vertical_alternating active"
         data-testid="timeline-circle"
         dimension="16"
+        tabindex="0"
+        type="button"
       >
         icon child
-      </div>
+      </button>
     </div>
     <div
       class="sc-jbAkgO umsEF vertical_alternating"

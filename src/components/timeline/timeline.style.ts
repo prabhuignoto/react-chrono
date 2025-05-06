@@ -25,7 +25,7 @@ export const Wrapper = styled.div<{
   }
 
   &.js-focus-visible :focus:not(.focus-visible) {
-    // outline: 0;
+    /* outline: 0; */
   }
 
   &.js-focus-visible .focus-visible {
@@ -48,7 +48,7 @@ export const TimelineMainWrapper = styled.div<{
   ${(p) => (p.mode === 'HORIZONTAL' ? 'position: relative' : '')};
   scroll-behavior: smooth;
   width: 100%;
-  // order: ${(p) => (p.position === 'top' ? 1 : 0)};
+  /* order: ${(p) => (p.position === 'top' ? 1 : 0)}; */
 
   ${ScrollBar}
 
@@ -134,6 +134,9 @@ export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
   margin: ${(p) => (p.position === 'top' ? '0 0 20px 0' : '20px 0 0 0')};
   order: ${(p) => (p.position === 'top' ? 0 : 1)};
   z-index: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 `;
 
 export const ExtraControls = styled.ul<{
@@ -146,10 +149,65 @@ export const ExtraControls = styled.ul<{
   margin: 0;
   padding: 0.1rem;
   visibility: ${(p) => (p.$hide ? 'hidden' : 'visible')};
+  flex-shrink: 0;
 `;
 
 export const ExtraControlChild = styled.li`
   display: flex;
   margin: 0.5rem 0;
   margin-right: 0.5rem;
+`;
+
+export const SearchWrapper = styled.div<{ theme?: Theme }>`
+  display: flex;
+  align-items: center;
+  background-color: ${(p) => p.theme?.cardBgColor};
+  padding: 0.1rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid ${(p) => p.theme?.toolbarBtnBgColor};
+  flex-grow: 1;
+  max-width: 400px;
+  margin: 0 1rem;
+`;
+
+export const SearchInput = styled.input<{ theme?: Theme }>`
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: ${(p) => p.theme?.toolbarTextColor};
+  font-size: 0.9rem;
+  padding: 0.4rem 0.5rem;
+
+  &::placeholder {
+    color: ${(p) => p.theme?.toolbarTextColor};
+    opacity: 0.6;
+  }
+
+  &::-webkit-search-cancel-button {
+    appearance: none;
+    height: 10px;
+    width: 10px;
+    margin-left: 0.2rem;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" fill="%23${(
+      p,
+    ) =>
+      p.theme?.toolbarTextColor?.substring(
+        1,
+      )}"><path d=\"M.7.7l8.6 8.6M9.3.7L.7 9.3\" stroke=\"%23${(p) =>
+      p.theme?.toolbarTextColor?.substring(1)}\" stroke-width=\"1.5\"/></svg>');
+    cursor: pointer;
+    opacity: 0.6;
+    &:hover {
+      opacity: 1;
+    }
+  }
+`;
+
+export const SearchInfo = styled.span<{ theme?: Theme }>`
+  font-size: 0.8rem;
+  color: ${(p) => p.theme?.toolbarTextColor};
+  opacity: 0.8;
+  margin: 0 0.5rem;
+  white-space: nowrap;
 `;

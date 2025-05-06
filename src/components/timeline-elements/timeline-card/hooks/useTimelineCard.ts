@@ -14,7 +14,7 @@ export const useTimelineCard = ({
   position,
   iconChild,
 }) => {
-  const circleRef = useRef<HTMLDivElement>(null);
+  const circleRef = useRef<HTMLButtonElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 

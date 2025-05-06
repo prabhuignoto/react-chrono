@@ -1,6 +1,6 @@
 import { TimelineHorizontalModel } from '@models/TimelineHorizontalModel';
 import cls from 'classnames';
-import React, { ReactNode, useContext, useMemo, memo } from 'react';
+import React, { ReactNode, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import TimelineCard from '../timeline-elements/timeline-card/timeline-horizontal-card';
 import {
@@ -24,89 +24,106 @@ import {
  * @returns {JSX.Element} The TimelineHorizontal component.
  */
 
-const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> =
-  memo(
-    ({
-      items,
-      handleItemClick,
-      autoScroll,
-      wrapperId,
-      slideShowRunning,
-      onElapsed,
-      contentDetailsChildren: children,
-      hasFocus,
-      iconChildren,
-      nestedCardHeight,
-      isNested,
-    }: TimelineHorizontalModel) => {
-      const {
-        mode = 'HORIZONTAL',
-        itemWidth = 200,
-        cardHeight,
-        flipLayout,
-        showAllCardsHorizontal,
-        theme,
-        cardWidth,
-      } = useContext(GlobalContext);
+const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
+  items,
+  handleItemClick,
+  autoScroll,
+  wrapperId,
+  slideShowRunning,
+  onElapsed,
+  contentDetailsChildren: children,
+  hasFocus,
+  iconChildren,
+  nestedCardHeight,
+  isNested,
+}: TimelineHorizontalModel) => {
+  const {
+    mode = 'HORIZONTAL',
+    itemWidth = 200,
+    cardHeight,
+    flipLayout,
+    showAllCardsHorizontal,
+    theme,
+    cardWidth,
+  } = useContext(GlobalContext);
 
-      // Memoize the wrapper class to avoid unnecessary re-renders
-      const wrapperClass = useMemo(
-        () =>
-          cls(
-            mode.toLowerCase(),
-            'timeline-horizontal-container',
-            showAllCardsHorizontal ? 'show-all-cards-horizontal' : '',
-          ),
-        [mode, showAllCardsHorizontal],
-      );
-
-      // Memoize the iconChildColln array to avoid recreation on every render
-      const iconChildColln = useMemo(
-        () => React.Children.toArray(iconChildren),
-        [iconChildren],
-      );
-
-      return (
-        <TimelineHorizontalWrapper
-          className={wrapperClass}
-          flipLayout={flipLayout}
-          data-testid="timeline-collection"
-        >
-          {items.map((item, index) => (
-            <TimelineItemWrapper
-              key={item.id}
-              width={itemWidth}
-              className={cls(
-                item.visible ? 'visible' : '',
-                'timeline-horz-item-container',
-              )}
-            >
-              <TimelineCard
-                {...item}
-                onClick={handleItemClick}
-                autoScroll={autoScroll}
-                wrapperId={wrapperId}
-                theme={theme}
-                slideShowRunning={slideShowRunning}
-                cardHeight={cardHeight}
-                onElapsed={onElapsed}
-                customContent={
-                  children ? (children as ReactNode[])[index] : null
-                }
-                hasFocus={hasFocus}
-                iconChild={iconChildColln[index]}
-                active={item.active}
-                cardWidth={cardWidth}
-                isNested={isNested}
-                nestedCardHeight={nestedCardHeight}
-              />
-            </TimelineItemWrapper>
-          ))}
-        </TimelineHorizontalWrapper>
-      );
-    },
+  // Memoize the wrapper class to avoid unnecessary re-renders
+  const wrapperClass = useMemo(
+    () =>
+      cls(
+        mode.toLowerCase(),
+        'timeline-horizontal-container',
+        showAllCardsHorizontal ? 'show-all-cards-horizontal' : '',
+      ),
+    [mode, showAllCardsHorizontal],
   );
 
-TimelineHorizontal.displayName = 'TimelineHorizontal';
+  const iconChildColln = useMemo(
+    () => React.Children.toArray(iconChildren),
+    [iconChildren],
+  );
+
+  // Memoize the timeline items to prevent unnecessary re-renders
+  const timelineItems = useMemo(() => {
+    return items.map((item, index) => (
+      <TimelineItemWrapper
+        key={item.id}
+        width={itemWidth}
+        className={cls(
+          item.visible ? 'visible' : '',
+          'timeline-horz-item-container',
+        )}
+        as="li"
+        aria-current={item.active ? 'true' : undefined}
+      >
+        <TimelineCard
+          {...item}
+          onClick={handleItemClick}
+          autoScroll={autoScroll}
+          wrapperId={wrapperId}
+          theme={theme}
+          slideShowRunning={slideShowRunning}
+          cardHeight={cardHeight}
+          onElapsed={onElapsed}
+          customContent={children ? (children as ReactNode[])[index] : null}
+          hasFocus={hasFocus}
+          iconChild={iconChildColln[index]}
+          active={item.active}
+          cardWidth={cardWidth}
+          isNested={isNested}
+          nestedCardHeight={nestedCardHeight}
+        />
+      </TimelineItemWrapper>
+    ));
+  }, [
+    items,
+    itemWidth,
+    handleItemClick,
+    autoScroll,
+    wrapperId,
+    theme,
+    slideShowRunning,
+    cardHeight,
+    onElapsed,
+    children,
+    hasFocus,
+    iconChildren,
+    cardWidth,
+    isNested,
+    nestedCardHeight,
+  ]);
+
+  return (
+    <TimelineHorizontalWrapper
+      className={wrapperClass}
+      flipLayout={flipLayout}
+      data-testid="timeline-collection"
+      as="ul"
+      aria-label="Timeline"
+    >
+      {timelineItems}
+    </TimelineHorizontalWrapper>
+  );
+};
 
 export default TimelineHorizontal;

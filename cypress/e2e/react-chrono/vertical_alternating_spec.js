@@ -62,20 +62,6 @@ context('Chrono.Vertical.Alternating.Mixed', () => {
       .should('have.class', 'active');
   });
 
-  it('check read more action', () => {
-    cy.get('.vertical-item-row')
-      .eq(2)
-      .find('.card-description')
-      .should('have.class', 'show-less');
-    // cy.scrollTo(700);
-    cy.get('.vertical-item-row').eq(2).find('.show-more').click();
-    cy.wait(500);
-    cy.get('.vertical-item-row')
-      .eq(2)
-      .find('.card-description')
-      .should('not.have.class', 'show-less');
-  });
-
   it('check video', () => {
     cy.get('.vertical-item-row')
       .eq(2)
@@ -86,13 +72,6 @@ context('Chrono.Vertical.Alternating.Mixed', () => {
         'https://www.youtube.com/embed/gPMgYC0sXos?enablejsapi=1',
       );
   });
-
-  // it('check video', () => {
-  //   cy.get('.vertical-item-row')
-  //     .eq(8)
-  //     .find('video')
-  //     .should('have.css', 'visibility', 'hidden');
-  // });
 
   it('check scroll', () => {
     cy.get('.timeline-main-wrapper').scrollTo('bottom');

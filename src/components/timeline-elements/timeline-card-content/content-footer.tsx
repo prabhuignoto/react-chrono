@@ -1,4 +1,3 @@
-import { TimelineMode } from '@models/TimelineModel';
 import {
   FunctionComponent,
   PointerEvent,
@@ -13,7 +12,6 @@ import {
   ChevronIconWrapper,
   ShowMore,
   SlideShowProgressBar,
-  TriangleIconWrapper,
 } from './timeline-card-content.styles';
 
 /**
@@ -43,7 +41,6 @@ import {
 const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   showProgressBar,
   onExpand,
-  triangleDir,
   showMore,
   textContentIsLarge,
   showReadMore,
@@ -52,19 +49,9 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   startWidth,
   canShow,
   progressRef,
-  isNested,
   isResuming,
 }: ContentFooterProps) => {
-  const { mode, theme } = useContext(GlobalContext);
-
-  const canShowTriangleIcon = useMemo(() => {
-    return (
-      !isNested &&
-      (['VERTICAL', 'VERTICAL_ALTERNATING'] as TimelineMode[]).some(
-        (m) => m === mode,
-      )
-    );
-  }, [mode, isNested]);
+  const { theme } = useContext(GlobalContext);
 
   const handleClick = useCallback(
     (ev: PointerEvent) => {
@@ -75,10 +62,13 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
     [onExpand],
   );
 
-  const canShowMore = useMemo(
-    () => showReadMore && textContentIsLarge,
-    [showReadMore, textContentIsLarge],
-  );
+  const canShowMore = useMemo(() => {
+    // Only show read more when:
+    // 1. The feature is enabled (showReadMore)
+    // 2. The text is actually large enough to need expansion (textContentIsLarge)
+    // 3. The parent says it's valid to show (canShow) - this might indicate we have detailedText
+    return showReadMore && textContentIsLarge && canShow;
+  }, [showReadMore, textContentIsLarge, canShow]);
 
   return (
     <>
@@ -111,14 +101,6 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           $startWidth={startWidth}
           $resuming={isResuming}
         ></SlideShowProgressBar>
-      )}
-
-      {canShowTriangleIcon && (
-        <TriangleIconWrapper
-          dir={triangleDir}
-          theme={theme}
-          offset={-8}
-        ></TriangleIconWrapper>
       )}
     </>
   );

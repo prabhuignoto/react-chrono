@@ -1,61 +1,114 @@
 import { Theme } from '@models/Theme';
 import { TimelineMode } from '@models/TimelineModel';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const TimelineNavWrapper = styled.ul<{ theme?: Theme }>`
-  border-radius: 25px;
+export const ScreenReaderOnly = styled.div`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+`;
+
+export const TimelineNavWrapper = styled.div<{ theme?: Theme }>`
+  border-radius: 8px;
   display: flex;
   list-style: none;
-  padding: 0.25rem 0.25rem;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  background: ${(p) => p.theme.toolbarBtnBgColor};
+  padding: 0.25rem;
+  // box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  background: ${(p) => p.theme.toolbarBgColor};
+  // border: 1px solid ${(p) => p.theme.toolbarBtnBgColor};
+
+  .nav-item {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &.disabled {
+      pointer-events: none;
+      filter: opacity(0.4);
+    }
+  }
 `;
 
 export const TimelineNavItem = styled.li<{ $disable?: boolean }>`
-  padding: 0.1em;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   ${(p) =>
     p.$disable
-      ? 'pointer-events: none; filter: opacity(0.5) grayscale(95%);'
-      : ''};
+      ? 'pointer-events: none; filter: opacity(0.4);'
+      : 'cursor: pointer;'};
 `;
 
 export const TimelineNavButton = styled.button<{
   mode?: TimelineMode;
   rotate?: 'TRUE' | 'FALSE';
   theme?: Theme;
+  $active?: boolean;
 }>`
   align-items: center;
-  background: ${(p) => p.theme.primary};
-  filter: brightness(1.25);
-  border-radius: 50%;
-  border: 0;
-  color: #fff;
+  background: ${(p) => p.theme.toolbarBtnBgColor};
+  border-radius: 6px;
+  border: 1px solid transparent;
+  color: ${(p) => p.theme.toolbarTextColor ?? p.theme.secondary};
   cursor: pointer;
   display: flex;
-  height: 24px;
+  height: 28px;
   justify-content: center;
-  margin: 0 0.2em;
+  margin: 0 0.2rem;
   padding: 0;
-  transition: all 0.1s ease-in;
-  width: 24px;
+  transition:
+    background-color 0.2s ease-out,
+    transform 0.15s ease-out,
+    box-shadow 0.2s ease-out,
+    border-color 0.2s ease-out;
+  width: 28px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
 
-  transform: ${(p) => {
-    if (p.rotate === 'TRUE') {
-      return `rotate(90deg)`;
-    }
-  }};
+  transform: ${(p) => (p.rotate === 'TRUE' ? 'rotate(90deg)' : 'none')};
 
-  &:active {
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.25));
-    transform: ${(p) => (p.rotate === 'TRUE' ? 'rotate(90deg)' : '')} scale(0.9);
+  &:hover {
+    background: ${(p) => p.theme.toolbarBtnBgColor};
+    border-color: ${(p) => p.theme.primary};
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
   }
 
+  &:active {
+    transform: ${(p) => (p.rotate === 'TRUE' ? 'rotate(90deg)' : 'none')}
+      scale(0.95);
+    background: ${(p) => p.theme.toolbarBtnBgColor};
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+  }
+
+  ${(p) =>
+    p.$active &&
+    css`
+      background: ${p.theme.secondary};
+      border-color: ${p.theme.primary};
+      &:hover {
+        background: ${p.theme.secondary};
+        opacity: 0.9;
+        box-shadow: 0 1px 2px rgba(22, 20, 20, 0.12);
+      }
+      svg {
+        // color: ${p.theme.secondary};
+        color: red;
+      }
+    `}
+
   svg {
-    width: 65%;
-    height: 65%;
+    width: 75%;
+    height: 75%;
+    color: ${(p) => p.theme.primary};
+    transition: color 0.2s ease-out;
   }
 `;
 

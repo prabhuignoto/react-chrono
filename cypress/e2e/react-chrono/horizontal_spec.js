@@ -12,13 +12,4 @@ context('Chrono.Horizontal.Basic', () => {
   it('check timeline controls', () => {
     cy.get('.timeline-controls').children().should('have.length', 6);
   });
-
-  // it('check read more', () => {
-  //   cy.get('.timeline-card-content').within(() => {
-  //     cy.get('.card-description').should('have.class', 'show-less');
-  //     cy.get('.show-more').click();
-  //     cy.wait(400);
-  //     cy.get('.card-description').should('not.have.class', 'show-less');
-  //   });
-  // });
 });

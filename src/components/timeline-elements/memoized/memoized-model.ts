@@ -9,7 +9,7 @@ type common = {
   color?: string; // Color value
   dir?: string; // Text direction
   fontSize?: string; // Font size
-  padding?: boolean; // Whether to apply padding
+  $padding?: boolean; // Whether to apply padding
   theme?: Theme; // Theme object
 };
 
@@ -18,8 +18,7 @@ type common = {
  */
 export interface Title extends common {
   active?: boolean; // Whether the title is active
-  padding?: boolean; // Whether to apply padding
-  title?: string; // Title text
+  title?: string | ReactNode; // Title text or ReactNode
   url?: string; // URL for the title
 }
 
@@ -28,6 +27,7 @@ export interface Title extends common {
  */
 export interface Content extends common {
   content?: string | ReactNode; // Content text or ReactNode
+  padding?: boolean; // For backward compatibility
 }
 
 /**

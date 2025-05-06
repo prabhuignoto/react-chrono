@@ -45,7 +45,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
               aria-label={label}
               key={id}
               role="button"
-              tabIndex={0}
+              // tabIndex={0}
             >
               {icon && <IconWrapper>{icon}</IconWrapper>}
               {children[index] && (

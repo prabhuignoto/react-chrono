@@ -14,26 +14,29 @@ export default function useEscapeKey(
   callback: () => void,
   options: UseEscapeKeyOptions = {},
 ) {
-  const { 
+  const {
     enabled = true,
     key = 'Escape',
     keyCode = 27,
-    eventType = 'keyup'
+    eventType = 'keyup',
   } = options;
-  
+
   const savedCallback = useRef(callback);
 
   useEffect(() => {
     savedCallback.current = callback;
   }, [callback]);
 
-  const handleKey = useCallback((e: KeyboardEvent) => {
-    if (!enabled) return;
-    
-    if (e.key === key || e.keyCode === keyCode) {
-      savedCallback.current();
-    }
-  }, [enabled, key, keyCode]);
+  const handleKey = useCallback(
+    (e: KeyboardEvent) => {
+      if (!enabled) return;
+
+      if (e.key === key || e.keyCode === keyCode) {
+        savedCallback.current();
+      }
+    },
+    [enabled, key, keyCode],
+  );
 
   useEffect(() => {
     if (!enabled) return;

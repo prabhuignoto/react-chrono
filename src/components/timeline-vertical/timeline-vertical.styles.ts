@@ -212,7 +212,7 @@ export const TimelineTitleWrapper = styled.div<TimelineTitleWrapperProps>`
   &.right {
     /* Justification depends on whether layout is flipped */
     justify-content: ${(p) => (p.$flip ? 'flex-start' : 'flex-end')};
-     /* Order depends on flip status and mode */
+    /* Order depends on flip status and mode */
     order: ${(p) => (p.$flip && p.mode === 'VERTICAL_ALTERNATING' ? '3' : '1')};
   }
 `;

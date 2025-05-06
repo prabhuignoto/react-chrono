@@ -15,13 +15,13 @@ export interface TimelineItemModel {
   active?: boolean;
 
   // Detailed text for the timeline card.
-  cardDetailedText?: string | string[];
+  cardDetailedText?: string | string[] | ReactNode | ReactNode[];
 
   // Subtitle for the timeline card.
-  cardSubtitle?: string;
+  cardSubtitle?: string | ReactNode;
 
   // Title for the timeline card.
-  cardTitle?: string;
+  cardTitle?: string | ReactNode;
 
   // Main content of the timeline item.
   content?: ReactNode | ReactNode[];
@@ -48,7 +48,7 @@ export interface TimelineItemModel {
   timelineContent?: ReactNode;
 
   // Title of the timeline item.
-  title?: string;
+  title?: string | ReactNode;
 
   // URL associated with the timeline item.
   url?: string;

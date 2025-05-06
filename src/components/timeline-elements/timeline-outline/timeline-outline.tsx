@@ -10,9 +10,7 @@ import { GlobalContext } from '../../GlobalContext';
 import CloseIcon from '../../icons/close';
 import MenuIcon from '../../icons/menu';
 import { OutlineItemList } from './timeline-outline-item-list';
-import {
-  TimelineOutlineModel,
-} from './timeline-outline.model';
+import { TimelineOutlineModel } from './timeline-outline.model';
 import {
   OutlineButton,
   OutlinePane,

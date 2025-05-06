@@ -3,19 +3,25 @@
 exports[`TimelineControl > should render 1`] = `
 <div>
   <div
-    class="sc-fLDLck dsAteL"
+    class="sc-dycHyt kdXyGu"
   >
-    <ul
-      class="sc-FEMpB jXXdQz timeline-controls controls"
+    <output
+      aria-live="polite"
+      class="sc-FEMpB bBYaPh"
+    />
+    <div
+      aria-label="Timeline Navigation"
+      class="sc-gjcoXW jIMDid timeline-controls controls"
+      role="toolbar"
     >
-      <li
-        class="sc-gjcoXW cAiTVS"
+      <div
+        class="nav-item "
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="first"
-          class="sc-dVBluf iHSnFq"
+          class="sc-fLDLck eqxeQG"
           data-test-id="jump-to-first"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -42,15 +48,15 @@ exports[`TimelineControl > should render 1`] = `
             />
           </svg>
         </button>
-      </li>
-      <li
-        class="sc-gjcoXW cAiTVS"
+      </div>
+      <div
+        class="nav-item "
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="previous"
-          class="sc-dVBluf iHSnFq"
+          class="sc-fLDLck eqxeQG"
           data-test-id="previous"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -74,15 +80,15 @@ exports[`TimelineControl > should render 1`] = `
             />
           </svg>
         </button>
-      </li>
-      <li
-        class="sc-gjcoXW cAiTVS"
+      </div>
+      <div
+        class="nav-item "
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="next"
-          class="sc-dVBluf iHSnFq"
+          class="sc-fLDLck eqxeQG"
           data-test-id="next"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -106,15 +112,15 @@ exports[`TimelineControl > should render 1`] = `
             />
           </svg>
         </button>
-      </li>
-      <li
-        class="sc-gjcoXW cAiTVS"
+      </div>
+      <div
+        class="nav-item "
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="last"
-          class="sc-dVBluf iHSnFq"
+          class="sc-fLDLck eqxeQG"
           data-test-id="jump-to-last"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -141,17 +147,18 @@ exports[`TimelineControl > should render 1`] = `
             />
           </svg>
         </button>
-      </li>
-      <li
-        class="sc-gjcoXW cAiTVS"
+      </div>
+      <div
+        class="nav-item"
       />
-      <li
-        class="sc-gjcoXW cAiTVS"
+      <div
+        class="nav-item "
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-label="dark"
-          class="sc-dVBluf cLpDda"
+          aria-pressed="false"
+          class="sc-fLDLck jmHQiO"
           data-test-id="dark-toggle"
           tabindex="0"
           title="dark"
@@ -170,8 +177,8 @@ exports[`TimelineControl > should render 1`] = `
             />
           </svg>
         </button>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </div>
 `;

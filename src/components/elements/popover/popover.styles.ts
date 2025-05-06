@@ -15,8 +15,7 @@ const boxShadow = (isDarkMode: boolean, open: boolean) =>
     : 'inset 0 0 1px 1px rgba(0, 0, 0, 0.2)';
 
 // Base wrapper for the popover component
-export const PopoverWrapper = styled.div`
-`;
+export const PopoverWrapper = styled.div``;
 
 // Main popover container with positioning and visibility controls
 export const PopoverHolder = styled.div<{
@@ -57,12 +56,13 @@ export const Selecter = styled.div<{
   ${flexCenter};
   background: ${({ $theme }) => $theme.toolbarBtnBgColor};
   color: ${({ $theme }) => $theme.toolbarTextColor};
-  border-radius: 25px;
+  border-radius: 6px;
   box-shadow: ${({ $open, $isDarkMode }) => boxShadow($isDarkMode, $open)};
   cursor: pointer;
   justify-content: space-between;
   padding: ${(p) => (p.$isMobile ? '0.4rem' : `0.4rem 0.5rem`)};
   user-select: none;
+  margin-right: 0.5rem;
 `;
 
 // Icon component within the selector with rotation animation
@@ -85,6 +85,7 @@ export const SelecterLabel = styled.span`
   font-size: 0.9rem;
   text-align: left;
   white-space: nowrap;
+  font-weight: 500;
 `;
 
 // Top section of the popover containing controls
