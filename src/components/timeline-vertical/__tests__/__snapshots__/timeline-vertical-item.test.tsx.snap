@@ -23,13 +23,13 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     >
       <article
         aria-label="vertical item title"
-        class="sc-cHQrJj fpGtrm timeline-card-content  card"
+        class="sc-jcvhOc iTEpxN timeline-card-content  card"
         data-testid="timeline-card-content"
         mode="VERTICAL_ALTERNATING"
         tabindex="-1"
       >
         <header
-          class="sc-dxjgzI emIync"
+          class="sc-kHpflN iZnlCZ"
         />
         <div
           class="sc-fXqexe knKYTU card-media-wrapper card-media"
@@ -40,6 +40,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
             height="200"
           >
             <img
+              alt=""
               class="sc-loYsQo kGoWBd"
               data-testid="timeline-card-content-image"
               height="auto"

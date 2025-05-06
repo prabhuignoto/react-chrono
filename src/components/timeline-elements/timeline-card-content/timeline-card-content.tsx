@@ -253,6 +253,14 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         if ((active && paused) || !slideShowActive) {
           setShowMore((prev) => !prev);
           onShowMore?.();
+          // Use setTimeout to ensure the DOM has updated before focusing
+          setTimeout(() => {
+            if (containerRef.current) {
+              containerRef.current.focus();
+              // Force focus styles to be visible
+              containerRef.current.classList.add('focus-visible');
+            }
+          }, 0);
         }
       }, [active, paused, slideShowActive, onShowMore]);
 
