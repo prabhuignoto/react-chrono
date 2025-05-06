@@ -1,5 +1,4 @@
 import { CardMediaModel } from '@models/TimelineMediaModel';
-import { TimelineMode } from '@models/TimelineModel';
 import cls from 'classnames';
 import React, { memo, useCallback, useContext } from 'react';
 import { GlobalContext } from '../../GlobalContext';

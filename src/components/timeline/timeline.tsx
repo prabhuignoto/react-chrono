@@ -282,24 +282,34 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     (event: React.KeyboardEvent<HTMLDivElement>) => {
       const { key } = event;
 
-      if (mode === 'HORIZONTAL') {
-        if (key === 'ArrowRight') {
-          flipLayout ? handlePrevious() : handleNext();
-        } else if (key === 'ArrowLeft') {
-          flipLayout ? handleNext() : handlePrevious();
-        }
-      } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
-        if (key === 'ArrowDown') {
-          handleNext();
-        } else if (key === 'ArrowUp') {
-          handlePrevious();
-        }
-      }
-
+      // Common handlers
       if (key === 'Home') {
         handleFirst();
-      } else if (key === 'End') {
+        return;
+      }
+      if (key === 'End') {
         handleLast();
+        return;
+      }
+
+      // Mode-specific handlers
+      switch (mode) {
+        case 'HORIZONTAL':
+          if (key === 'ArrowRight') {
+            flipLayout ? handlePrevious() : handleNext();
+          } else if (key === 'ArrowLeft') {
+            flipLayout ? handleNext() : handlePrevious();
+          }
+          break;
+
+        case 'VERTICAL':
+        case 'VERTICAL_ALTERNATING':
+          if (key === 'ArrowDown') {
+            handleNext();
+          } else if (key === 'ArrowUp') {
+            handlePrevious();
+          }
+          break;
       }
     },
     [mode, flipLayout, handleNext, handlePrevious, handleFirst, handleLast],

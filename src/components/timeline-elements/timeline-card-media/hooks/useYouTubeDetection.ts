@@ -7,7 +7,7 @@ import { useMemo } from 'react';
  */
 export const useYouTubeDetection = (url: string) => {
   return useMemo(
-    () => /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/.test(url),
+    () => /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/.test(url),
     [url],
   );
 };

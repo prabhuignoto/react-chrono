@@ -1,4 +1,4 @@
-import React, { memo, useRef, ReactNode } from 'react';
+import React, { useRef, ReactNode } from 'react';
 import {
   CardMediaHeader,
   MediaDetailsWrapper,

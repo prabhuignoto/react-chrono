@@ -3,9 +3,7 @@ import React from 'react';
 /**
  * Safely extracts searchable text from potentially React node content
  */
-export const getSearchableText = (
-  content: string | React.ReactNode | any,
-): string => {
+export const getSearchableText = (content: React.ReactNode): string => {
   if (content === null || content === undefined) {
     return '';
   }

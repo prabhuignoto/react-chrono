@@ -133,7 +133,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
     // Create an accessible label for the timeline point
     const timelinePointLabel = useMemo(() => {
       return (
-        buttonTexts?.timelinePoint ||
+        buttonTexts?.timelinePoint ??
         (active ? 'Active timeline point' : 'Timeline point')
       );
     }, [active, buttonTexts]);
