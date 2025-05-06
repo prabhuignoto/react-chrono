@@ -1,7 +1,5 @@
-import { ReactNode } from 'react';
-import { useMemo } from 'react';
+import { ReactNode, useMemo, ForwardRefExoticComponent } from 'react';
 import { hexToRGBA } from '@utils/index';
-import { ForwardRefExoticComponent } from 'react';
 import { TextOrContentModel } from '../../timeline-card-content/text-or-content';
 
 interface UseViewOptionsParams {
