@@ -183,23 +183,17 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           return;
         }
 
-        let mounted = true;
-
-        if (active && slideShowActive && mounted) {
+        if (active && slideShowActive) {
           setupTimer(slideItemDuration);
         }
 
-        if (active && hasFocus && mounted && containerRef.current) {
+        if (active && hasFocus && containerRef.current) {
           containerRef.current.focus();
         }
 
-        if (!slideShowActive && mounted) {
+        if (!slideShowActive) {
           setHasBeenActivated(false);
         }
-
-        return () => {
-          mounted = false;
-        };
       }, [active, slideShowActive, slideItemDuration, hasFocus, setupTimer]);
 
       // Set focus when needed

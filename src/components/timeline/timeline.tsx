@@ -375,6 +375,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     [items, updateTimelinePosition, findTargetElement, searchResults],
   );
 
+  // Memoize the onElapsed handler to prevent creating a new function on every render
+  const handleTimelineItemElapsed = useCallback(
+    (itemId?: string) => handleTimelineItemClick(itemId, true),
+    [handleTimelineItemClick],
+  );
+
   // Handle scrolling
   const handleScroll = useCallback(
     (scroll: Partial<Scroll>) => {
@@ -539,7 +545,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         items={items as TimelineCardModel[]}
         mode={timelineMode}
         onClick={handleTimelineItemClick}
-        onElapsed={(itemId?: string) => handleTimelineItemClick(itemId, true)}
+        onElapsed={handleTimelineItemElapsed}
         onOutlineSelection={onOutlineSelection}
         slideShowRunning={slideShowRunning}
         theme={theme}
@@ -559,6 +565,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     slideShowRunning,
     theme,
     nestedCardHeight,
+    handleTimelineItemElapsed,
   ]);
 
   const HorizontalTimeline = useMemo(() => {
@@ -576,7 +583,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           iconChildren={iconChildren}
           items={items as TimelineCardModel[]}
           mode={timelineMode}
-          onElapsed={(itemId?: string) => handleTimelineItemClick(itemId, true)}
+          onElapsed={handleTimelineItemElapsed}
           slideShowRunning={slideShowRunning}
           wrapperId={id}
           nestedCardHeight={nestedCardHeight}
@@ -597,6 +604,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     slideShowRunning,
     id,
     nestedCardHeight,
+    handleTimelineItemElapsed,
   ]);
 
   const VerticalTimeline = useMemo(() => {
@@ -613,7 +621,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         items={items as TimelineCardModel[]}
         mode={mode}
         onClick={handleTimelineItemClick}
-        onElapsed={(itemId?: string) => handleTimelineItemClick(itemId, true)}
+        onElapsed={handleTimelineItemElapsed}
         onOutlineSelection={onOutlineSelection}
         slideShowRunning={slideShowRunning}
         theme={theme}
@@ -634,6 +642,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     slideShowRunning,
     theme,
     nestedCardHeight,
+    handleTimelineItemElapsed,
   ]);
 
   // Memoize toolbar component to prevent re-renders
