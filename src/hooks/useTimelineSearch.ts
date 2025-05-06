@@ -66,9 +66,7 @@ export const useTimelineSearch = ({
           handleTimelineItemClick(firstMatchItemId);
 
           // Ensure the search query persists
-          if (currentQuery) {
-            setSearchQuery(currentQuery);
-          }
+          setSearchQuery(currentQuery);
 
           // Return focus to search input after the search completes and navigation happens
           setTimeout(() => {
