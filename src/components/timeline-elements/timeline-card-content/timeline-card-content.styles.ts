@@ -22,7 +22,7 @@ const baseFontStyles = css`
   text-align: left;
 `;
 
-const baseCardStyles = css`
+const baseCardStyles = css<{ theme: Theme }>`
   background: ${(p) => p.theme.cardBgColor};
   border-radius: 8px;
   box-shadow:
@@ -33,7 +33,7 @@ const baseCardStyles = css`
     box-shadow 0.2s ease-out;
 `;
 
-const scrollbarStyles = css`
+const scrollbarStyles = css<{ theme: Theme }>`
   scrollbar-color: ${(p) => p.theme?.primary} default;
   scrollbar-width: thin;
 
@@ -434,7 +434,7 @@ export const TriangleIconWrapper = styled.span<{
 `;
 
 // Search highlighting
-export const Mark = styled.mark`
+export const Mark = styled.mark<{ theme: Theme }>`
   background-color: ${(p) =>
     p.theme?.primary ? `${p.theme.primary}30` : 'rgba(255, 217, 0, 0.3)'};
   color: inherit;
