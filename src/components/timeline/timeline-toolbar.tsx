@@ -1,5 +1,5 @@
 // Import necessary dependencies
-import React, { FunctionComponent, useContext, useMemo, useRef } from 'react';
+import React, { FunctionComponent, useContext, useMemo } from 'react';
 import { GlobalContext } from '../GlobalContext';
 import Controls from '../timeline-elements/timeline-control/timeline-control';
 import { TimelineNavButton } from '../timeline-elements/timeline-control/timeline-control.styles';
@@ -63,10 +63,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   totalMatches,
   currentMatchIndex,
   onSearchKeyDown,
+  searchInputRef,
 }: TimelineToolbarProps) => {
-  // Create a ref for the search input
-  const searchInputRef = useRef<HTMLInputElement>(null);
-
   // Access the global context
   const {
     theme,
@@ -153,7 +151,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     onClearSearch();
     // Focus the search input after clearing
     setTimeout(() => {
-      searchInputRef.current?.focus();
+      searchInputRef?.current?.focus();
     }, 0);
   };
 
@@ -163,6 +161,9 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   ) => {
     if (event.key === 'Enter' && totalMatches > 0) {
       event.preventDefault(); // Prevent potential form submission
+
+      // Save the current search query before navigation
+      const currentQuery = searchQuery;
 
       // Navigate to next match
       if (onSearchKeyDown) {
@@ -175,8 +176,21 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       // Re-focus the search input after a short delay
       // This allows the navigation to complete first
       setTimeout(() => {
-        searchInputRef.current?.focus();
-      }, 10);
+        if (searchInputRef?.current) {
+          searchInputRef.current.focus();
+
+          // If the value has been cleared, restore it
+          if (searchInputRef.current.value === '' && currentQuery) {
+            // This is a backup to ensure the search query persists
+            // The main handling should be in the parent component
+            onSearchChange(currentQuery);
+          }
+
+          // Ensure the cursor is at the end of the text
+          const length = searchInputRef.current.value.length;
+          searchInputRef.current.setSelectionRange(length, length);
+        }
+      }, 50);
     }
   };
 

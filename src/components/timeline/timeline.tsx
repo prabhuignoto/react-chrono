@@ -127,6 +127,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     [isChild, disableToolbar],
   );
 
+  // Add a ref for the search input
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
   // --- Search Logic ---
   // Optimize findMatches to reduce iterations and memory allocations
   const findMatches = useCallback(
@@ -166,12 +169,42 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         setCurrentMatchIndex(0);
         const firstMatchItemId = items[results[0]]?.id;
         if (firstMatchItemId) {
+          // Store the current search query before navigation
+          const currentQuery = query;
+
           activeItemIndex.current = results[0];
           onTimelineUpdated?.(results[0]);
           handleTimelineItemClick(firstMatchItemId);
+
+          // Ensure the search query persists
+          if (currentQuery) {
+            setSearchQuery(currentQuery);
+          }
+
+          // Return focus to search input after the search completes and navigation happens
+          setTimeout(() => {
+            if (searchInputRef.current) {
+              searchInputRef.current.focus();
+
+              // Ensure the cursor is at the end of the text
+              const length = searchInputRef.current.value.length;
+              searchInputRef.current.setSelectionRange(length, length);
+            }
+          }, 50);
         }
       } else {
         setCurrentMatchIndex(-1);
+
+        // Return focus to search input even when no results are found
+        setTimeout(() => {
+          if (searchInputRef.current) {
+            searchInputRef.current.focus();
+
+            // Ensure the cursor is at the end of the text
+            const length = searchInputRef.current.value.length;
+            searchInputRef.current.setSelectionRange(length, length);
+          }
+        }, 50);
       }
     },
     [items, onTimelineUpdated],
@@ -219,9 +252,31 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       onTimelineUpdated?.(newTimelineIndex);
 
       const itemId = items[newTimelineIndex]?.id;
-      if (itemId) handleTimelineItemClick(itemId);
+      if (itemId) {
+        // Store the current search query before navigation
+        const currentQuery = searchQuery;
+
+        handleTimelineItemClick(itemId);
+
+        // Ensure the search query persists
+        if (currentQuery) {
+          setSearchQuery(currentQuery);
+        }
+      }
+
+      // Set focus back to the search input after navigation completes
+      // Use a longer timeout to ensure state updates have completed
+      setTimeout(() => {
+        if (searchInputRef.current) {
+          searchInputRef.current.focus();
+
+          // Ensure the cursor is at the end of the text
+          const length = searchInputRef.current.value.length;
+          searchInputRef.current.setSelectionRange(length, length);
+        }
+      }, 50);
     },
-    [searchResults, currentMatchIndex, items, onTimelineUpdated],
+    [searchResults, currentMatchIndex, items, onTimelineUpdated, searchQuery],
   );
 
   const handleNextMatch = useCallback(
@@ -679,6 +734,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           totalMatches={searchResults.length}
           currentMatchIndex={currentMatchIndex}
           onSearchKeyDown={handleSearchKeyDown}
+          searchInputRef={searchInputRef}
         />
       </ToolbarWrapper>
     );
@@ -712,6 +768,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     searchResults.length,
     currentMatchIndex,
     handleSearchKeyDown,
+    searchInputRef,
   ]);
 
   return (

@@ -4,6 +4,7 @@ import {
   TimelineModel,
   TimelineProps,
 } from '@models/TimelineModel';
+import { RefObject } from 'react';
 
 export type TimelineToolbarProps = Pick<
   TimelineModel,
@@ -35,4 +36,5 @@ export type TimelineToolbarProps = Pick<
   totalMatches: number;
   currentMatchIndex: number; // 0-based index
   onSearchKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  searchInputRef?: RefObject<HTMLInputElement>; // Ref for the search input
 } & Pick<TimelineProps, 'darkMode' | 'flipLayout'>;
