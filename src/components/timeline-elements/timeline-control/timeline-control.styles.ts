@@ -91,16 +91,16 @@ export const TimelineNavButton = styled.button<{
   ${(p) =>
     p.$active &&
     css`
-      background: ${p.theme.primary};
-      color: ${p.theme.secondary};
+      background: ${p.theme.secondary};
       border-color: ${p.theme.primary};
       &:hover {
-        background: ${p.theme.primary};
+        background: ${p.theme.secondary};
         opacity: 0.9;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 1px 2px rgba(22, 20, 20, 0.12);
       }
       svg {
-        color: ${p.theme.secondary};
+        // color: ${p.theme.secondary};
+        color: red;
       }
     `}
 
