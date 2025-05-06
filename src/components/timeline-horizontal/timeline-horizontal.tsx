@@ -58,7 +58,10 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     [mode, showAllCardsHorizontal],
   );
 
-  const iconChildColln = React.Children.toArray(iconChildren);
+  const iconChildColln = useMemo(
+    () => React.Children.toArray(iconChildren),
+    [iconChildren],
+  );
 
   // Memoize the timeline items to prevent unnecessary re-renders
   const timelineItems = useMemo(() => {
@@ -104,7 +107,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     onElapsed,
     children,
     hasFocus,
-    iconChildColln,
+    iconChildren,
     cardWidth,
     isNested,
     nestedCardHeight,
