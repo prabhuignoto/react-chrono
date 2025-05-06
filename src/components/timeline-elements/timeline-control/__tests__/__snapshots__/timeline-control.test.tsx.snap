@@ -5,10 +5,9 @@ exports[`TimelineControl > should render 1`] = `
   <div
     class="sc-dycHyt kdXyGu"
   >
-    <div
+    <output
       aria-live="polite"
       class="sc-FEMpB bBYaPh"
-      role="status"
     />
     <div
       aria-label="Timeline Navigation"

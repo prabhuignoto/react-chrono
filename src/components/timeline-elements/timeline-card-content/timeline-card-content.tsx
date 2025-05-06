@@ -156,7 +156,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       const canShowDetailsText = useMemo(() => {
         // Hide details when using text overlay with media, otherwise show if content exists
-        return (detailedText || customContent || timelineContent) && !(textOverlay && media);
+        return (
+          (detailedText ?? customContent ?? timelineContent) &&
+          !(textOverlay && media)
+        );
       }, [detailedText, customContent, timelineContent, textOverlay, media]);
 
       // Reset details scroll position when toggling details
@@ -262,13 +265,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [mode, flip]);
 
       const gradientColor = useMemo(() => {
-        return hexToRGBA(theme?.cardBgColor || '#fff', 0.4);
+        return hexToRGBA(theme?.cardBgColor ?? '#fff', 0.4);
       }, [theme?.cardBgColor]);
 
       const contentDetailsClass = useMemo(() => {
         return cls(
           'card-description',
-          classNames?.cardText || '',
+          classNames?.cardText ?? '',
           borderLessCards ? 'no-border' : '',
         );
       }, [classNames?.cardText, borderLessCards]);
@@ -287,7 +290,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       // Create the detailsText component for text overlay mode using the proper function
       const detailsTextComponent = useMemo(() => {
         // Only create the component if we need it for text overlay mode
-        if (textOverlay && (detailedText || customContent || timelineContent)) {
+        if (textOverlay && (detailedText ?? customContent ?? timelineContent)) {
           return getTextOrContent({
             timelineContent,
             theme,
@@ -323,7 +326,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           ref={containerRef}
           onClick={handleCardClick}
           className={`timeline-card-content ${active ? 'active' : ''} ${
-            classNames?.card || ''
+            classNames?.card ?? ''
           }`}
           data-testid="timeline-card-content"
           $active={active}

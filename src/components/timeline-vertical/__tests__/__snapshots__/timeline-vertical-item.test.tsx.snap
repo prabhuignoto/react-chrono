@@ -57,14 +57,11 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
       bg="#0f52ba"
       class="sc-fQMTnL kWNbng"
       data-testid="tree-leaf"
-      role="presentation"
     >
       <button
         aria-label="Timeline point"
-        aria-selected="false"
         class="sc-bWxZAa cRTSpi  timeline-vertical-circle"
         data-testid="tree-leaf-click"
-        role="button"
         tabindex="0"
       >
         <div

@@ -71,7 +71,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
 
   const [horizontalAll, setHorizontalAll] = useState(
-    showAllCardsHorizontal || false,
+    showAllCardsHorizontal ?? false,
   );
 
   const [isMobileDetected, setIsMobileDetected] = useState(false);
@@ -80,7 +80,8 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     useState<TextDensity>(textDensity);
 
   const newCardHeight = useMemo(
-    () => Math.max(contentDetailsHeight || 0 + mediaHeight || 0, cardHeight),
+    () =>
+      Math.max((contentDetailsHeight ?? 0) + (mediaHeight ?? 0), cardHeight),
     [],
   );
 
@@ -125,7 +126,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
       ({
         ...{
           borderLessCards: false,
-          cardHeight: newCardHeight,
+          cardHeight: cardLess ? (cardHeight ?? 80) : cardHeight,
           cardLess: false,
           disableAutoScrollOnClick: !!props.disableInteraction,
           disableClickOnCircle: !!props.disableInteraction,
@@ -162,7 +163,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
           ...getDefaultButtonTexts(),
           ...buttonTexts,
         },
-        cardHeight: cardLess ? cardHeight || 80 : cardHeight,
+        cardHeight: cardLess ? (cardHeight ?? 80) : cardHeight,
         classNames: {
           ...getDefaultClassNames(),
           ...classNames,

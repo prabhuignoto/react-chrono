@@ -83,7 +83,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   // Prepare QuickJump items with proper string conversions
   const quickJumpItems = useMemo(() => {
     return items.map((item) => ({
-      id: item.id || '',
+      id: item.id ?? '',
       title: getTextFromNode(item.title),
       description: getTextFromNode(item.cardSubtitle),
       active: item.active,
@@ -210,18 +210,18 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
         <SearchInput
           ref={searchInputRef}
           type="search"
-          placeholder={buttonTexts?.searchPlaceholder || 'Search Timeline'}
+          placeholder={buttonTexts?.searchPlaceholder ?? 'Search Timeline'}
           value={searchQuery}
           onChange={handleInputChange}
           onKeyDown={handleSearchKeyDown}
-          aria-label={buttonTexts?.searchAriaLabel || 'Search timeline content'}
+          aria-label={buttonTexts?.searchAriaLabel ?? 'Search timeline content'}
           disabled={slideShowRunning}
         />
         {searchQuery && (
           <TimelineNavButton
             onClick={handleClearSearch}
-            title={buttonTexts?.clearSearch || 'Clear Search'}
-            aria-label={buttonTexts?.clearSearch || 'Clear Search'}
+            title={buttonTexts?.clearSearch ?? 'Clear Search'}
+            aria-label={buttonTexts?.clearSearch ?? 'Clear Search'}
             theme={theme}
             style={{
               height: '24px',
@@ -242,8 +242,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             <div className="timeline-nav-wrapper">
               <TimelineNavButton
                 onClick={onPreviousMatch}
-                title={buttonTexts?.previousMatch || 'Previous Match'}
-                aria-label={buttonTexts?.previousMatch || 'Previous Match'}
+                title={buttonTexts?.previousMatch ?? 'Previous Match'}
+                aria-label={buttonTexts?.previousMatch ?? 'Previous Match'}
                 disabled={disableSearchNav}
                 theme={theme}
                 style={{ height: '24px', width: '24px' }}
@@ -254,8 +254,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             <div className="timeline-nav-wrapper">
               <TimelineNavButton
                 onClick={onNextMatch}
-                title={buttonTexts?.nextMatch || 'Next Match'}
-                aria-label={buttonTexts?.nextMatch || 'Next Match'}
+                title={buttonTexts?.nextMatch ?? 'Next Match'}
+                aria-label={buttonTexts?.nextMatch ?? 'Next Match'}
                 disabled={disableSearchNav}
                 theme={theme}
                 style={{ height: '24px', width: '24px' }}

@@ -26,10 +26,10 @@ const calculateTextContentSize = (
 ): boolean => {
   if (!detailsRef.current || !containerRef.current) return false;
 
-  const detailsOffsetTop = detailsRef.current.offsetTop || 0;
-  const containerHeight = containerRef.current.clientHeight || 0;
-  const detailsScrollHeight = detailsRef.current.scrollHeight || 0;
-  const detailsClientHeight = detailsRef.current.clientHeight || 0;
+  const detailsOffsetTop = detailsRef.current.offsetTop ?? 0;
+  const containerHeight = containerRef.current.clientHeight ?? 0;
+  const detailsScrollHeight = detailsRef.current.scrollHeight ?? 0;
+  const detailsClientHeight = detailsRef.current.clientHeight ?? 0;
 
   // Check if content is actually hidden or truncated
   // Only return true if there's significant overflow (more than 20px)

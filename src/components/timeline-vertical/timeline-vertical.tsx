@@ -82,14 +82,14 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
         const contentDetails: ReactNode | null =
           (contentDetailsChildren &&
             Array.isArray(contentDetailsChildren) && // Ensure it's an array
-            contentDetailsChildren[index]) || // Get node at the current index
+            contentDetailsChildren[index]) ?? // Get node at the current index
           null;
 
         // Determine the custom icon for this item
         let customIcon: ReactNode | null = null;
         if (Array.isArray(iconChildren)) {
           // If iconChildren is an array, map icon to item by index
-          customIcon = iconChildren[index] || null;
+          customIcon = iconChildren[index] ?? null;
         } else if (iconChildren) {
           // If iconChildren is a single node, apply it to all items
           customIcon = iconChildren;
@@ -106,7 +106,7 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
             iconChild={customIcon} // Pass down the specific icon node
             hasFocus={hasFocus} // Pass down the focus state
             index={index} // Pass down the item's index
-            key={item.id || `timeline-item-${index}`} // Unique key for React rendering
+            key={item.id ?? `timeline-item-${index}`} // Unique key for React rendering
             onActive={handleOnActive} // Pass down the memoized active handler
             onClick={onClick} // Pass down the global click handler
             onElapsed={onElapsed} // Pass down the global elapsed handler

@@ -118,7 +118,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     );
 
     const canShowTextContent = useMemo(
-      () => title || content || detailsText,
+      () => title ?? content ?? detailsText,
       [title, content, detailsText],
     );
 
@@ -128,7 +128,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     );
 
     const gradientColor = useMemo(
-      () => hexToRGBA(theme?.cardDetailsBackGround || '', 0.8),
+      () => hexToRGBA(theme?.cardDetailsBackGround ?? '', 0.8),
       [theme?.cardDetailsBackGround],
     );
 

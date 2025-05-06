@@ -29,11 +29,11 @@ const OutlineItem = memo(
 
     return (
       <ListItem
-        key={item.id}
+        key={item.id ?? index}
         onPointerDown={onClick}
         aria-disabled={item.disabled}
         aria-selected={item.selected}
-        aria-label={item.ariaLabel || item.name}
+        aria-label={item.ariaLabel ?? item.name}
       >
         <ListItemBullet theme={theme} selected={item.selected}></ListItemBullet>
         <ListItemName theme={theme} selected={item.selected}>
@@ -79,7 +79,7 @@ const OutlineItemList: FunctionComponent<OutlineItemListModel> = memo(
       <List>
         {visibleItems.map((item, index) => (
           <OutlineItem
-            key={item.id || index}
+            key={item.id ?? index}
             item={item}
             index={index}
             handleSelection={handleSelection}
