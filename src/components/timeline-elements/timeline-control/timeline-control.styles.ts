@@ -58,7 +58,7 @@ export const TimelineNavButton = styled.button<{
   background: ${(p) => p.theme.toolbarBtnBgColor};
   border-radius: 6px;
   border: 1px solid transparent;
-  color: ${(p) => p.theme.toolbarTextColor || p.theme.secondary};
+  color: ${(p) => p.theme.toolbarTextColor ?? p.theme.secondary};
   cursor: pointer;
   display: flex;
   height: 28px;

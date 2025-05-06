@@ -278,13 +278,11 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       // Get the accessible label for the card
       const accessibleLabel = useMemo(() => {
-        if (typeof cardTitle === 'string') {
-          return cardTitle;
-        }
-        if (typeof title === 'string') {
-          return title;
-        }
-        return 'Timeline card';
+        return (
+          (typeof cardTitle === 'string' ? cardTitle : null) ??
+          (typeof title === 'string' ? title : null) ??
+          'Timeline card'
+        );
       }, [cardTitle, title]);
 
       // Create the detailsText component for text overlay mode using the proper function

@@ -11,7 +11,6 @@ import ReplayIcon from '../../icons/replay-icon';
 import {
   TimelineControlContainer,
   TimelineNavButton,
-  TimelineNavItem,
   TimelineNavWrapper,
   ScreenReaderOnly,
 } from './timeline-control.styles';

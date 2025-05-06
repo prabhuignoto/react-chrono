@@ -6,7 +6,6 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     aria-label="vertical item title"
     class="sc-cMqPwU eVXjLD vertical-item-row"
     data-testid="vertical-item-row"
-    role="listitem"
   >
     <div
       class="sc-deSjom gLvTFy"
@@ -24,7 +23,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     >
       <article
         aria-label="vertical item title"
-        class="sc-cHQrJj kqTeju timeline-card-content  card"
+        class="sc-cHQrJj fpGtrm timeline-card-content  card"
         data-testid="timeline-card-content"
         mode="VERTICAL_ALTERNATING"
         tabindex="-1"

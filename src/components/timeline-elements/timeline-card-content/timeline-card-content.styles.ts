@@ -9,11 +9,109 @@ import {
   slideInFromTop,
 } from './card-animations.styles';
 
+// Common types
 type ContentT = Pick<
   TimelineProps,
   'theme' | 'slideShow' | 'mode' | 'borderLessCards'
 >;
 
+// Reusable styles
+const baseFontStyles = css`
+  margin: 0;
+  width: 100%;
+  text-align: left;
+`;
+
+const baseCardStyles = css`
+  background: ${(p) => p.theme.cardBgColor};
+  border-radius: 8px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 4px 10px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.2s ease-out,
+    box-shadow 0.2s ease-out;
+`;
+
+const scrollbarStyles = css`
+  scrollbar-color: ${(p) => p.theme?.primary} default;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 0.3em;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: ${(p) => p.theme?.cardBgColor};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${(p) => p.theme?.primary};
+    border-radius: 3px;
+  }
+`;
+
+// Animation helpers
+const getSlideShowAnimation = (props) => {
+  const { $slideShowActive, $active, $slideShowType, $branchDir } = props;
+
+  if (!$slideShowActive || !$active) return '';
+
+  if ($slideShowType === 'slide_in') {
+    return css`
+      animation: ${slideInFromTop} 0.5s ease-in-out;
+    `;
+  }
+
+  if ($slideShowType === 'slide_from_sides') {
+    if ($branchDir === 'left') {
+      return css`
+        animation: ${slideInFromLeft} 0.5s ease-in-out;
+      `;
+    }
+    if ($branchDir === 'right') {
+      return css`
+        animation: ${slideFromRight} 0.5s ease-in-out;
+      `;
+    }
+  }
+
+  return css`
+    animation: ${reveal} 0.5s ease-in-out;
+  `;
+};
+
+const getSlideShowVisibility = (props) => {
+  const { $slideShowActive, $active } = props;
+
+  if ($slideShowActive && $active) {
+    return css`
+      opacity: 1;
+      animation-timing-function: ease-in-out;
+      animation-duration: 0.5s;
+    `;
+  }
+
+  if ($slideShowActive && !$active) {
+    return css`
+      opacity: 0;
+    `;
+  }
+
+  return '';
+};
+
+// Slide animation for progress bar
+const slideAnimation = (start?: number, end?: number) => keyframes`
+  0% {
+    width: ${start}px;
+  }
+  100% {
+    width: ${end}px;
+  }
+`;
+
+// Card Components
 export const TimelineItemContentWrapper = styled.section<
   {
     $active?: boolean;
@@ -32,123 +130,63 @@ export const TimelineItemContentWrapper = styled.section<
     $textOverlay?: boolean;
   } & ContentT
 >`
+  ${baseCardStyles}
   align-items: flex-start;
-  background: ${(p) => p.theme.cardBgColor};
-  border-radius: 8px;
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.06),
-    0 4px 10px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   line-height: 1.5;
   margin: 0;
   max-width: ${(p) => p.$maxWidth}px;
-  ${({ $textDensity, $customContent, $minHeight }) => css`
-    ${$textDensity === 'HIGH' &&
-    `${$customContent ? 'height' : 'min-height'}: ${$minHeight}px`};
-  `}
-  ${(p) => (p.$textOverlay ? `min-height: ${p.$minHeight}px` : '')};
   position: relative;
-  text-align: left;
-  width: 100%;
   padding: 1rem;
   z-index: 0;
   overflow: hidden;
-  transition:
-    transform 0.2s ease-out,
-    box-shadow 0.2s ease-out;
+  width: 100%;
 
-  ${(p) =>
-    p.$highlight
-      ? css`
-          &:hover {
-            transform: translateY(-2px);
-            box-shadow:
-              0 2px 5px rgba(0, 0, 0, 0.08),
-              0 8px 16px rgba(0, 0, 0, 0.1);
-          }
-        `
-      : css``}
+  // Handle text density and height
+  ${({ $textDensity, $customContent, $minHeight }) =>
+    $textDensity === 'HIGH' &&
+    `${$customContent ? 'height' : 'min-height'}: ${$minHeight}px`};
 
-  ${(p) =>
-    p.$isNested
-      ? css`
-          background: ${p.theme.nestedCardBgColor};
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        `
-      : css``}
+  ${(p) => (p.$textOverlay ? `min-height: ${p.$minHeight}px` : '')};
+  ${(p) => (p.$textOverlay ? 'height: 0' : '')};
 
-  height: ${(p) => (p.$textOverlay ? '0' : '')};
-
+  // Focus state
   &:focus {
     outline: 1px solid ${(p) => p.theme?.primary};
   }
 
-  ${(p) => {
-    if (p.$slideShowActive && p.$active) {
-      if (p.$slideShowType === 'slide_in') {
-        return css`
-          animation: ${slideInFromTop} 0.5s ease-in-out;
-        `;
-      } else if (
-        p.$slideShowType === 'slide_from_sides' &&
-        p.$branchDir === 'left'
-      ) {
-        return css`
-          animation: ${slideInFromLeft} 0.5s ease-in-out;
-        `;
-      } else if (
-        p.$slideShowType === 'slide_from_sides' &&
-        p.$branchDir === 'right'
-      ) {
-        return css`
-          animation: ${slideFromRight} 0.5s ease-in-out;
-        `;
-      } else {
-        return css`
-          animation: ${reveal} 0.5s ease-in-out;
-        `;
+  // Highlight effect
+  ${(p) =>
+    p.$highlight &&
+    css`
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 2px 5px rgba(0, 0, 0, 0.08),
+          0 8px 16px rgba(0, 0, 0, 0.1);
       }
-    }
-  }}
+    `}
 
-  ${(p) => {
-    if (p.$slideShowActive && p.$active) {
-      return css`
-        opacity: 1;
-        animation-timing-function: ease-in-out;
-        animation-duration: 0.5s;
-      `;
-    }
+  // Nested card styling
+  ${(p) =>
+    p.$isNested &&
+    css`
+      background: ${p.theme.nestedCardBgColor};
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    `}
 
-    if (p.$slideShowActive && !p.$active) {
-      return css`
-        opacity: 0;
-      `;
-    }
-  }}
+  // Animations
+  ${getSlideShowAnimation}
+  ${getSlideShowVisibility}
 `;
 
+// Header Components
 export const TimelineCardHeader = styled.header`
   width: 100%;
   padding: 0;
   margin-bottom: 0.5rem;
-`;
-
-export const CardSubTitle = styled.h2<{
-  $fontSize?: string;
-  $padding?: boolean;
-  dir?: string;
-  theme?: Theme;
-}>`
-  color: ${(p) => p.theme.cardSubtitleColor};
-  font-size: ${(p) => p.$fontSize || '0.9rem'};
-  font-weight: 500;
-  margin: 0 0 0.25rem 0;
-  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
-  text-align: left;
-  width: 100%;
 `;
 
 export const CardTitle = styled.h1<{
@@ -157,17 +195,30 @@ export const CardTitle = styled.h1<{
   dir?: string;
   theme: Theme;
 }>`
+  ${baseFontStyles}
   color: ${(p) => p.theme.cardTitleColor};
-  font-size: ${(p) => p.$fontSize || '1.1rem'};
+  font-size: ${(p) => p.$fontSize && '1.1rem'};
   font-weight: 600;
-  margin: 0 0 0.5rem 0;
+  margin-bottom: 0.5rem;
   padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
-  text-align: left;
-  width: 100%;
 
   &.active {
     color: ${(p) => p.theme.primary};
   }
+`;
+
+export const CardSubTitle = styled.h2<{
+  $fontSize?: string;
+  $padding?: boolean;
+  dir?: string;
+  theme?: Theme;
+}>`
+  ${baseFontStyles}
+  color: ${(p) => p.theme.cardSubtitleColor};
+  font-size: ${(p) => p.$fontSize && '0.9rem'};
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
 `;
 
 export const CardTitleAnchor = styled.a`
@@ -178,6 +229,7 @@ export const CardTitleAnchor = styled.a`
   }
 `;
 
+// Content Components
 export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
   font-size: 0.85rem;
   font-weight: 400;
@@ -193,7 +245,7 @@ export const TimelineSubContent = styled.span<{
 }>`
   margin-bottom: 0.5rem;
   display: block;
-  font-size: ${(p) => p.fontSize || '0.8rem'};
+  font-size: ${(p) => p.fontSize && '0.8rem'};
   color: ${(p) => p.theme.cardDetailsColor};
 `;
 
@@ -210,15 +262,24 @@ export const TimelineContentDetailsWrapper = styled.div<{
   height?: number;
   theme?: Theme;
 }>`
+  ${scrollbarStyles}
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   margin: 0;
   position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: max-height 0.25s ease-in-out;
+  width: ${(p) => (p.$borderLess ? 'calc(100% - 0.5rem)' : '100%')};
+  padding: 0;
+
+  // Height handling based on different conditions
   ${({ $useReadMore, $customContent, $showMore, height = 0, $textOverlay }) =>
     $useReadMore && !$customContent && !$showMore && !$textOverlay
       ? `max-height: ${height}px;`
       : 'height: 100%'};
+
   ${({
     $cardHeight = 0,
     $contentHeight = 0,
@@ -227,19 +288,13 @@ export const TimelineContentDetailsWrapper = styled.div<{
     $textOverlay,
   }) =>
     $showMore && !$textOverlay
-      ? `max-height: ${($cardHeight || 0) + ($contentHeight || 0) - height}px;`
+      ? `max-height: ${($cardHeight ?? 0) + ($contentHeight ?? 0) - height}px;`
       : ''}
-  overflow-x: hidden;
-  overflow-y: auto;
-  scrollbar-color: ${(p) => p.theme?.primary} default;
-  scrollbar-width: thin;
-  transition: max-height 0.25s ease-in-out;
-  width: ${(p) => (p.$borderLess ? 'calc(100% - 0.5rem)' : '100%')};
-  padding: 0;
 
   ${(p) => (p.$customContent ? `height: 100%;` : '')}
 
-  $${({
+  // Animation for show more
+  ${({
     height = 0,
     $cardHeight = 0,
     $contentHeight = 0,
@@ -258,32 +313,21 @@ export const TimelineContentDetailsWrapper = styled.div<{
           `} 0.25s ease-in-out;
         `
       : ''}
-    &::-webkit-scrollbar {
-    width: 0.3em;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: ${(p) => p.theme?.cardBgColor};
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: ${(p) => p.theme?.primary};
-    border-radius: 3px;
-  }
-
+      
   &.show-less {
     scrollbar-width: none;
-
     &::-webkit-scrollbar {
       width: 0;
     }
     overflow: hidden;
   }
 
+  // Gradient for "show more" functionality
   --rc-gradient-color: ${(p) => p.$gradientColor};
   ${linearGradient}
 `;
 
+// Interactive Elements
 export const ShowMore = styled.button<{
   show?: 'true' | 'false';
   theme?: Theme;
@@ -295,10 +339,7 @@ export const ShowMore = styled.button<{
   display: ${(p) => (p.show === 'true' ? 'flex' : 'none')};
   font-size: 0.75rem;
   justify-self: flex-end;
-  margin-bottom: 0.5em;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
-  margin-top: auto;
+  margin: auto 0.5em 0.5em auto;
   padding: 0.25em;
   color: ${(p) => p.theme.primary};
   border: 0;
@@ -306,15 +347,6 @@ export const ShowMore = styled.button<{
 
   &:hover {
     text-decoration: underline;
-  }
-`;
-
-const slideAnimation = (start?: number, end?: number) => keyframes`
-  0% {
-    width: ${start}px;
-  }
-  100% {
-    width: ${end}px;
   }
 `;
 
@@ -335,15 +367,7 @@ export const SlideShowProgressBar = styled.progress<{
   border-radius: 2px;
   border: 0;
 
-  ${(p) => {
-    if (p.$paused) {
-      return css`
-        left: 50%;
-        transform: translateX(-50%);
-      `;
-    }
-  }}
-
+  // Animation control
   ${(p) => {
     if (!p.$paused && p.$startWidth && p.$startWidth > 0) {
       return css`
@@ -366,6 +390,7 @@ export const SlideShowProgressBar = styled.progress<{
   }
 `;
 
+// Icon Wrappers
 export const ChevronIconWrapper = styled.span<{ collapsed?: 'true' | 'false' }>`
   align-items: center;
   display: flex;
@@ -374,12 +399,8 @@ export const ChevronIconWrapper = styled.span<{ collapsed?: 'true' | 'false' }>`
   margin-left: 0.2em;
   margin-top: 0.2em;
   width: 1.25em;
-  ${(p) =>
-    p.collapsed === 'false'
-      ? `
-      transform: rotate(90deg);
-  `
-      : `transform: rotate(-90deg)`};
+  transform: ${(p) =>
+    p.collapsed === 'false' ? 'rotate(90deg)' : 'rotate(-90deg)'};
 
   svg {
     height: 100%;
@@ -402,38 +423,34 @@ export const TriangleIconWrapper = styled.span<{
   background: ${(p) => p.theme.cardBgColor};
   transform: translateY(-50%) rotate(225deg);
   z-index: -1;
+  ${(p) =>
+    p.dir === 'left' ? `right: ${p.offset}px;` : `left: ${p.offset}px;`}
 
   & svg {
     width: 100%;
     height: 100%;
     fill: #fff;
   }
-
-  ${(p) =>
-    p.dir === 'left' ? `right: ${p.offset}px;` : `left: ${p.offset}px;`};
 `;
 
-// Enhanced Mark component for search highlighting
+// Search highlighting
 export const Mark = styled.mark`
   background-color: ${(p) =>
-    p.theme?.primary
-      ? `${p.theme.primary}30`
-      : 'rgba(255, 217, 0, 0.3)'}; // Use theme primary with transparency
-  color: inherit; // Keep text color consistent
-  font-weight: 600; // Make text slightly bolder
+    p.theme?.primary ? `${p.theme.primary}30` : 'rgba(255, 217, 0, 0.3)'};
+  color: inherit;
+  font-weight: 600;
   padding: 0.1em 0.25em;
-  margin: 0 -0.1em; // Adjusted margins
+  margin: 0 -0.1em;
   border-radius: 2px;
-  box-decoration-break: clone; // Handle highlights that span multiple lines
+  box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   transition:
     background-color 0.2s ease-out,
     box-shadow 0.15s ease-out;
 
-  // Subtle pulsing animation for current search result (needs to be applied conditionally)
   &[data-current-match='true'] {
     background-color: ${(p) =>
       p.theme?.primary ? `${p.theme.primary}50` : 'rgba(255, 217, 0, 0.5)'};
-    box-shadow: 0 0 0 1px ${(p) => p.theme?.primary || 'rgba(255, 217, 0, 0.5)'};
+    box-shadow: 0 0 0 1px ${(p) => p.theme?.primary ?? 'rgba(255, 217, 0, 0.5)'};
   }
 `;

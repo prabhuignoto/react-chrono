@@ -231,21 +231,18 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   // Render the complete timeline item structure
   return (
     <VerticalItemWrapper
-      // --- Props passed to styled-component ---
+      as="li"
       $alternateCards={alternateCards}
-      // Use specific height for nested cards, otherwise default cardHeight from context
       $cardHeight={isNested ? nestedCardHeight : cardHeight}
       $cardLess={cardLess}
       $isNested={isNested}
-      // --- Standard React props ---
-      className={verticalItemClass} // Apply memoized classes
+      className={verticalItemClass}
       data-testid="vertical-item-row"
-      key={id} // Key for React list rendering
-      ref={contentRef} // Attach ref for measurements
-      theme={theme} // Pass theme for potential use in styled-component fallbacks
-      role="listitem" // Indicate this is a list item
-      aria-current={active ? 'true' : undefined} // Indicate if this is the current item
-      aria-label={accessibleTitle} // Provide accessible name
+      key={id}
+      ref={contentRef}
+      theme={theme}
+      aria-current={active ? 'true' : undefined}
+      aria-label={accessibleTitle}
     >
       {/* Conditionally render the Title */}
       {canShowTitle ? Title : null}

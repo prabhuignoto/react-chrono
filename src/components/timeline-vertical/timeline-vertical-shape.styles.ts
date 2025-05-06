@@ -106,7 +106,7 @@ export const TimelinePointContainer = styled.button<TimelinePointContainerProps>
 
   /* Add focus styles for accessibility */
   &:focus-visible {
-    outline: 3px solid ${(p) => p.theme?.primary || '#007bff'}; /* Focus ring */
+    outline: 3px solid ${(p) => p.theme?.primary ?? '#007bff'}; /* Focus ring */
     outline-offset: 3px;
   }
 
