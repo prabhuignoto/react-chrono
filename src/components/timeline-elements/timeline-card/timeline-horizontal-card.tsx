@@ -68,6 +68,21 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     iconChild,
   });
 
+  // Convert cardDetailedText to the expected string or string[] format
+  const formatDetailedText = () => {
+    if (Array.isArray(cardDetailedText)) {
+      return cardDetailedText.map((text) =>
+        typeof text === 'string' ? text : String(text ?? ''),
+      );
+    }
+
+    if (typeof cardDetailedText === 'string') {
+      return cardDetailedText;
+    }
+
+    return cardDetailedText ? String(cardDetailedText) : undefined;
+  };
+
   return (
     <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
       {canShowTimelineContent && (
@@ -80,10 +95,16 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           disableInteraction={disableInteraction}
           showAllCardsHorizontal={showAllCardsHorizontal}
           cardWidth={cardWidth}
-          cardSubtitle={cardSubtitle}
-          cardTitle={cardTitle}
+          cardSubtitle={
+            typeof cardSubtitle === 'string'
+              ? cardSubtitle
+              : String(cardSubtitle ?? '')
+          }
+          cardTitle={
+            typeof cardTitle === 'string' ? cardTitle : String(cardTitle ?? '')
+          }
           url={url}
-          cardDetailedText={cardDetailedText}
+          cardDetailedText={formatDetailedText()}
           slideShowRunning={slideShowRunning}
           media={media}
           onElapsed={onElapsed}
@@ -102,7 +123,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         circleClass={circleClass}
         handleClick={handleClick}
         circleRef={circleRef}
-        title={title}
+        title={typeof title === 'string' ? title : String(title ?? '')}
         theme={theme}
         timelinePointDimension={timelinePointDimension}
         timelinePointShape={timelinePointShape}

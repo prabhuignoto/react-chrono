@@ -13,7 +13,9 @@ interface UseWindowSizeOptions {
  * Hook that returns the current window dimensions
  * Useful for responsive calculations and virtualization
  */
-export const useWindowSize = (options: UseWindowSizeOptions = {}): WindowSize => {
+export const useWindowSize = (
+  options: UseWindowSizeOptions = {},
+): WindowSize => {
   const { debounceMs = 100 } = options;
   const [windowSize, setWindowSize] = useState<WindowSize>({
     width: typeof window !== 'undefined' ? window.innerWidth : 0,

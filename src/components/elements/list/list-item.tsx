@@ -65,10 +65,10 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
       >
         {selectable ? (
           <CheckboxWrapper>
-            <CheckboxStyle 
-              role="checkbox" 
+            <CheckboxStyle
+              role="checkbox"
               aria-checked={selected}
-              selected={selected} 
+              selected={selected}
               theme={theme}
             >
               {selected && <CheckIcon />}

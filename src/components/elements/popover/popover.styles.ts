@@ -15,8 +15,7 @@ const boxShadow = (isDarkMode: boolean, open: boolean) =>
     : 'inset 0 0 1px 1px rgba(0, 0, 0, 0.2)';
 
 // Base wrapper for the popover component
-export const PopoverWrapper = styled.div`
-`;
+export const PopoverWrapper = styled.div``;
 
 // Main popover container with positioning and visibility controls
 export const PopoverHolder = styled.div<{

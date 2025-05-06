@@ -23,7 +23,7 @@ export default function useOutsideClick(
   const handleClick = useCallback(
     (e: MouseEvent | TouchEvent) => {
       if (!enabled) return;
-      
+
       const element = el.current;
       if (element && !element.contains(e.target as Node)) {
         savedCallback.current();

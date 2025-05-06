@@ -6,9 +6,11 @@ export interface UIStateHook<T> {
   setState: (value: T) => void;
 }
 
-export const useUIState = <T extends boolean>(initialState: T): UIStateHook<T> => {
+export const useUIState = <T extends boolean>(
+  initialState: T,
+): UIStateHook<T> => {
   const [state, setState] = useState<T>(initialState);
-  
+
   const toggle = useCallback(() => {
     setState((prev) => !prev as T);
   }, []);

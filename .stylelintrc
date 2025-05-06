@@ -1,12 +1,5 @@
 {
-  "processors": [
-    "stylelint-processor-styled-components"
-  ],
-  "plugins": [
-    "stylelint-order"
-  ],
-  "extends": [
-    "stylelint-config-styled-components",
-    "stylelint-config-recess-order"
-  ]
+  "customSyntax": "postcss-styled-syntax",
+  "rules": {},
+  "ignoreFiles": ["node_modules/**/*", "dist/**/*"]
 }

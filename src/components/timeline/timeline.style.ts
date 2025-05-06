@@ -25,7 +25,7 @@ export const Wrapper = styled.div<{
   }
 
   &.js-focus-visible :focus:not(.focus-visible) {
-    // outline: 0;
+    /* outline: 0; */
   }
 
   &.js-focus-visible .focus-visible {
@@ -48,7 +48,7 @@ export const TimelineMainWrapper = styled.div<{
   ${(p) => (p.mode === 'HORIZONTAL' ? 'position: relative' : '')};
   scroll-behavior: smooth;
   width: 100%;
-  // order: ${(p) => (p.position === 'top' ? 1 : 0)};
+  /* order: ${(p) => (p.position === 'top' ? 1 : 0)}; */
 
   ${ScrollBar}
 
