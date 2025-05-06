@@ -113,7 +113,7 @@ export const Shape = styled.div<ShapeModel>`
 
   /* Improve focus styles for accessibility */
   &:focus-visible {
-    outline: 3px solid ${(p) => p.theme?.primary || '#007bff'};
+    outline: 3px solid ${(p) => p.theme?.primary ?? '#007bff'};
     outline-offset: 2px;
   }
 

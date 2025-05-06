@@ -11,7 +11,7 @@ exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
     >
       <button
         aria-disabled="false"
-        aria-label="Timeline point"
+        aria-label=""
         aria-selected="false"
         class="sc-dycHyt kQaHSB timeline-circle using-icon vertical_alternating active"
         data-testid="timeline-circle"

@@ -1,6 +1,6 @@
 import { TimelinePointModel } from '@models/TimelineVerticalModel'; // Assuming model path
 import cls from 'classnames'; // Utility for conditionally joining classNames
-import {
+import React, {
   memo, // Import memo for component optimization
   useContext,
   useEffect,
@@ -8,7 +8,6 @@ import {
   useRef,
   FunctionComponent, // Explicit import
   MouseEvent,
-  JSX, // Explicit import for event type
 } from 'react';
 import { GlobalContext } from '../GlobalContext'; // Context for global theme/settings
 // Shape seems to be a shared styled component, potentially defined elsewhere
@@ -25,10 +24,10 @@ import {
  * performance optimization.
  *
  * @param {TimelinePointModel} props - The properties for the TimelinePoint component.
- * @returns {JSX.Element} The rendered TimelinePoint component.
+ * @returns {React.ReactElement} The rendered TimelinePoint component.
  */
 const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
-  (props: TimelinePointModel): JSX.Element => {
+  (props: TimelinePointModel) => {
     const {
       className, // 'left' or 'right' - passed to styled components
       id, // Unique ID of the timeline item
@@ -179,7 +178,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
           </Shape>
         </TimelinePointContainer>
       </TimelinePointWrapper>
-    );
+    ) as React.ReactElement;
   },
   // Use default shallow comparison for memoization.
   // The previous custom comparison (prev.active === next.active && prev.isMobile === next.isMobile)

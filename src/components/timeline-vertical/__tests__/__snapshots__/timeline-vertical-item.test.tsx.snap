@@ -8,7 +8,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     data-testid="vertical-item-row"
   >
     <div
-      class="sc-deSjom gLvTFy"
+      class="sc-deSjom ghocSe"
       mode="VERTICAL_ALTERNATING"
     >
       <div

@@ -11,7 +11,7 @@ import { SubTitleMemo } from '../../memoized/subtitle-memo';
 import { DetailsTextMemo } from '../../memoized/details-text-memo';
 import { TimelineMode } from '@models/TimelineModel';
 
-interface ContentDisplayProps {
+export interface ContentDisplayProps {
   readonly mode: TimelineMode;
   readonly textOverlay: boolean;
   readonly theme: any;
@@ -33,7 +33,9 @@ interface ContentDisplayProps {
   readonly onDetailsTextRef: (height?: number) => void;
 }
 
-function ContentDisplayComponent(props: ContentDisplayProps) {
+const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
+  props,
+) => {
   const {
     mode,
     textOverlay,
@@ -116,8 +118,11 @@ function ContentDisplayComponent(props: ContentDisplayProps) {
         />
       )}
     </MediaDetailsWrapper>
-  );
-}
+  ) as React.ReactElement;
+};
 
-// Using `any` type assertion to bypass React 19 type issues
-export const ContentDisplay = memo(ContentDisplayComponent as any);
+// Export the memoized component
+export const ContentDisplay = ContentDisplayComponent;
+
+// Add display name for DevTools
+ContentDisplay.displayName = 'ContentDisplay';

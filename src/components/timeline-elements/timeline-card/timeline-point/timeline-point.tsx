@@ -35,7 +35,7 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
         ref={circleRef}
         data-testid="timeline-circle"
         theme={theme}
-        aria-label={title || 'Timeline point'}
+        aria-label={title ?? 'Timeline point'}
         aria-selected={active}
         aria-disabled={disabled}
         disabled={disabled}
@@ -44,10 +44,10 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
         tabIndex={disabled ? -1 : 0}
         type="button"
       >
-        {iconChild ? iconChild : null}
+        {iconChild ?? null}
       </Shape>
     </ShapeWrapper>
-  );
+  ) as React.ReactElement;
 };
 
 export default TimelinePoint;

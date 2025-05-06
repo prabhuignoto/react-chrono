@@ -67,7 +67,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     });
 
     // Cast mode to TimelineMode
-    const timelineMode = mode as TimelineMode;
+    const timelineMode = mode;
 
     // Details text callback
     const onDetailsTextRef = useCallback((height?: number) => {
@@ -129,7 +129,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
           />
         )}
       </>
-    );
+    ) as React.ReactElement;
   },
   (prevProps, nextProps) => {
     // Custom comparison function to avoid unnecessary re-renders
