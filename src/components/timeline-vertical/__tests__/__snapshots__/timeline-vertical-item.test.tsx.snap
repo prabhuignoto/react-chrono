@@ -4,22 +4,22 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
 <div>
   <li
     aria-label="vertical item title"
-    class="sc-cMqPwU eVXjLD vertical-item-row"
+    class="sc-beKSRx jWqzlD vertical-item-row"
     data-testid="vertical-item-row"
   >
     <div
-      class="sc-deSjom ghocSe"
+      class="sc-bxmmIP ihpTNX"
       mode="VERTICAL_ALTERNATING"
     >
       <div
         align="right"
-        class="sc-FEMpB bYdRfA timeline-item-title title"
+        class="sc-dslWvo isbYgV timeline-item-title title"
       >
         vertical item title
       </div>
     </div>
     <div
-      class="sc-jUkaYT cBVweA card-content-wrapper"
+      class="sc-fEOKFM bjWvjA card-content-wrapper"
     >
       <article
         aria-label="vertical item title"
@@ -66,7 +66,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
       >
         <div
           aria-hidden="true"
-          class="sc-dycHyt kQaHSB"
+          class="sc-jcvEFQ fyGLYv"
           dimension="16"
         />
       </button>
