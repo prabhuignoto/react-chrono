@@ -82,7 +82,7 @@ React Chrono is a modern timeline component for React that offers a variety of f
 -   🎨 **Theming**: Customize colors and appearance with ease.
 -   🎭 **Custom Icons**: Use your own icons for timeline points.
 -   💪 **TypeScript**: Built with TypeScript for robust development.
--   💅 **Styled with Emotion**: Leverages Emotion for flexible styling.
+-   💅 **Styled with Styled Component**: Leverages Styled Component for flexible styling.
 
 ## 💾 Installation
 
@@ -152,7 +152,7 @@ For a layout where cards alternate sides, use `VERTICAL_ALTERNATING`.
   <Chrono items={items} mode="VERTICAL_ALTERNATING" />
 </div>
 ```
-![Vertical Alternating Timeline Example](./readme-assets/vertical-alternating.jpg)
+![Vertical Alternating Timeline Example](./readme-assets/vertical_alternating.jpg)
 
 ## ⚙️ Props
 
