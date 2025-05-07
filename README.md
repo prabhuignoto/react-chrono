@@ -24,10 +24,6 @@
 
 </div>
 
-<div align="center">
-  <img src="./readme-assets/new-image.png" alt="React Chrono Showcase" style="width: 100%; max-width: 800px; margin-top: 20px;"/>
-</div>
-
 <!-- **Try it on CodeSandbox!**
 [![Edit react-chrono](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-chrono-bg56e?fontsize=14&hidenavigation=1&theme=dark) -->
 
