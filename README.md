@@ -321,7 +321,7 @@ const items = [
 ];
 <Chrono items={items} textOverlay />;
 ```
-![Text Overlay Example](./readme-assets/text-overlay.png)
+![Text Overlay Example](./readme-assets/text_overlay.jpg)
 
 ### Theming & Styling
 
