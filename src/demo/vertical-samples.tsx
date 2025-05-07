@@ -103,9 +103,9 @@ export const VerticalTreeMixed: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         items={dataMixed}
-        mode="VERTICAL_ALTERNATING"
-        cardHeight={400}
-        cardWidth={450}
+        mode="VERTICAL"
+        cardHeight={300}
+        cardWidth={550}
         scrollable
         slideShow
         slideItemDuration={2500}
