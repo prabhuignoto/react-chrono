@@ -146,7 +146,6 @@ export const TimelineItemContentWrapper = styled.section<
 
   // Handle text density and height
   ${({ $textDensity, $customContent, $minHeight }) =>
-    $textDensity === 'HIGH' &&
     `${$customContent ? 'height' : 'min-height'}: ${$minHeight}px`};
 
   ${(p) => (p.$textOverlay ? `min-height: ${p.$minHeight}px` : '')};

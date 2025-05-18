@@ -155,12 +155,20 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [isNested, items]);
 
       const canShowDetailsText = useMemo(() => {
-        // Hide details when using text overlay with media, otherwise show if content exists
+        // Hide details when using text overlay with media, when density is LOW, otherwise show if content exists
         return (
           (detailedText ?? customContent ?? timelineContent) &&
-          !(textOverlay && media)
+          !(textOverlay && media) &&
+          textDensity !== 'LOW'
         );
-      }, [detailedText, customContent, timelineContent, textOverlay, media]);
+      }, [
+        detailedText,
+        customContent,
+        timelineContent,
+        textOverlay,
+        media,
+        textDensity,
+      ]);
 
       // Reset details scroll position when toggling details
       useEffect(() => {
