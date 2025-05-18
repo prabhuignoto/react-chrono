@@ -3,15 +3,15 @@
 exports[`TimelineControl > should render 1`] = `
 <div>
   <div
-    class="sc-dycHyt kdXyGu"
+    class="sc-dYOLZc ThcBP"
   >
     <output
       aria-live="polite"
-      class="sc-FEMpB bBYaPh"
+      class="sc-bXdtCk gFwzoa"
     />
     <div
       aria-label="Timeline Navigation"
-      class="sc-gjcoXW jIMDid timeline-controls controls"
+      class="sc-hKDTPf gsGxcD timeline-controls controls"
       role="toolbar"
     >
       <div
@@ -21,7 +21,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="first"
-          class="sc-fLDLck eqxeQG"
+          class="sc-gwsNht iFtFBY"
           data-test-id="jump-to-first"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -56,7 +56,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="previous"
-          class="sc-fLDLck eqxeQG"
+          class="sc-gwsNht iFtFBY"
           data-test-id="previous"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -88,7 +88,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="next"
-          class="sc-fLDLck eqxeQG"
+          class="sc-gwsNht iFtFBY"
           data-test-id="next"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -120,7 +120,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="last"
-          class="sc-fLDLck eqxeQG"
+          class="sc-gwsNht iFtFBY"
           data-test-id="jump-to-last"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -158,7 +158,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-label="dark"
           aria-pressed="false"
-          class="sc-fLDLck jmHQiO"
+          class="sc-gwsNht hlXVio"
           data-test-id="dark-toggle"
           tabindex="0"
           title="dark"

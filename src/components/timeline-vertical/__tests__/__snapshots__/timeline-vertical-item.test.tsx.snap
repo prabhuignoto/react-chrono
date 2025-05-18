@@ -4,44 +4,44 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
 <div>
   <li
     aria-label="vertical item title"
-    class="sc-beKSRx jWqzlD vertical-item-row"
+    class="sc-bFwXsg ldGSQM vertical-item-row"
     data-testid="vertical-item-row"
   >
     <div
-      class="sc-bxmmIP ihpTNX"
+      class="sc-bXYrjy bZOYur"
       mode="VERTICAL_ALTERNATING"
     >
       <div
         align="right"
-        class="sc-dslWvo isbYgV timeline-item-title title"
+        class="sc-edaYAx iLkEJJ timeline-item-title title"
       >
         vertical item title
       </div>
     </div>
     <div
-      class="sc-fEOKFM bjWvjA card-content-wrapper"
+      class="sc-fUPiRJ eNVTKn card-content-wrapper"
     >
       <article
         aria-label="vertical item title"
-        class="sc-jcvhOc iTEpxN timeline-card-content  card"
+        class="sc-jNkjTl Jenkq timeline-card-content  card"
         data-testid="timeline-card-content"
         mode="VERTICAL_ALTERNATING"
         tabindex="-1"
       >
         <header
-          class="sc-kHpflN iZnlCZ"
+          class="sc-kNmFTk hxZvvK"
         />
         <div
-          class="sc-fXqexe knKYTU card-media-wrapper card-media"
+          class="sc-gnqCJb dHWGnx card-media-wrapper card-media"
           mode="VERTICAL_ALTERNATING"
         >
           <div
-            class="sc-gOUBbZ kqEibX"
+            class="sc-igtioI bliyvw"
             height="200"
           >
             <img
               alt=""
-              class="sc-loYsQo kGoWBd"
+              class="sc-bgpKpp eFSNYd"
               data-testid="timeline-card-content-image"
               height="auto"
               loading="lazy"
@@ -55,18 +55,18 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     </div>
     <div
       bg="#0f52ba"
-      class="sc-fQMTnL kWNbng"
+      class="sc-eJZSpO foPZhg"
       data-testid="tree-leaf"
     >
       <button
         aria-label="Timeline point"
-        class="sc-bWxZAa cRTSpi  timeline-vertical-circle"
+        class="sc-EZsnr gLApcg  timeline-vertical-circle"
         data-testid="tree-leaf-click"
         tabindex="0"
       >
         <div
           aria-hidden="true"
-          class="sc-jcvEFQ fyGLYv"
+          class="sc-kDXjwZ emnCwL"
           dimension="16"
         />
       </button>
