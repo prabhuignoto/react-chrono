@@ -10,7 +10,7 @@ export default defineConfig({
   test: {
     coverage: {
       clean: true,
-      enabled: true,
+      enabled: false,
       exclude: [
         // Type definitions and configuration files
         '**/*.d.ts',
