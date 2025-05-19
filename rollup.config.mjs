@@ -64,6 +64,7 @@ export default {
         react: 'React',
         'react-dom': 'ReactDOM',
         'react/jsx-runtime': 'jsxRuntime',
+        'styled-components': 'styled',
       },
       name: 'ReactChrono',
       strict: true,

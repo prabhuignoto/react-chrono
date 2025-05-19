@@ -13,13 +13,15 @@ import React, {
 import { useSlideshow } from 'src/components/effects/useSlideshow';
 import { useCardSize } from '../../../hooks/useCardSize';
 import { GlobalContext } from '../../GlobalContext';
-import Timeline from '../../timeline/timeline';
+// Remove the Timeline import to break the circular dependency
+// import Timeline from '../../timeline/timeline';
 import CardMedia from '../timeline-card-media/timeline-card-media';
 import { ContentFooter } from './content-footer';
 import { ContentHeader } from './content-header';
 import { DetailsText } from './details-text';
 import { getTextOrContent } from './text-or-content';
 import { TimelineItemContentWrapper } from './timeline-card-content.styles';
+import NestedTimelineRenderer from '../nested-timeline-renderer/nested-timeline-renderer';
 
 // Custom equality function for React.memo to prevent unnecessary re-renders
 const arePropsEqual = (
@@ -405,11 +407,11 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           )}
 
           {canShowNestedTimeline && (
-            <Timeline
+            <NestedTimelineRenderer
               items={items}
               mode={'VERTICAL'}
               nestedCardHeight={nestedCardHeight}
-              isChild
+              isChild={true}
             />
           )}
 
