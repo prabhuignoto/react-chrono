@@ -6,51 +6,8 @@ import {
 import xss from 'xss';
 import { darkTheme, defaultTheme } from '../components/common/themes';
 
-/**
- * Converts hex color to RGBA format
- * @param hex - Hex color code (e.g. #FFFFFF)
- * @param alpha - Opacity value between 0 and 1
- * @returns RGBA color string
- */
-export const hexToRGBA = (hex: string, alpha: number): string => {
-  if (!hex || !hex.startsWith('#') || hex.length !== 7) {
-    console.warn('Invalid hex color provided:', hex);
-    return `rgba(0, 0, 0, ${alpha})`;
-  }
-
-  try {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-
-    if (isNaN(r) || isNaN(g) || isNaN(b)) {
-      return `rgba(0, 0, 0, ${alpha})`;
-    }
-
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  } catch (error) {
-    console.error('Error converting hex to RGBA:', error);
-    return `rgba(0, 0, 0, ${alpha})`;
-  }
-};
-
-/**
- * Returns the appropriate theme based on dark mode preference
- * @param isDark - Whether dark mode is enabled
- * @returns Theme object
- */
-export const getDefaultThemeOrDark = (isDark?: boolean) => {
-  if (isDark) {
-    return darkTheme;
-  }
-  return defaultTheme;
-};
-
-/**
- * Returns default class names for timeline components
- * @returns Object of default CSS class names
- */
-export const getDefaultClassNames = () => ({
+// Constants to avoid creating new objects on every function call
+const DEFAULT_CLASS_NAMES = Object.freeze({
   card: 'rc-card',
   cardMedia: 'rc-card-media',
   cardSubTitle: 'rc-card-subtitle',
@@ -58,43 +15,39 @@ export const getDefaultClassNames = () => ({
   cardTitle: 'rc-card-title',
   controls: 'rc-controls',
   title: 'rc-title',
-});
+} as const);
 
-/**
- * Returns default button text translations
- * @returns Object containing all button text strings
- */
-export const getDefaultButtonTexts: () => ButtonTexts = () => ({
+const DEFAULT_BUTTON_TEXTS: Readonly<ButtonTexts> = Object.freeze({
   changeDensity: 'Change density',
-  changeDensityOptions: {
-    high: {
+  changeDensityOptions: Object.freeze({
+    high: Object.freeze({
       helpText: 'Show more items at once',
       text: 'High',
-    },
-    low: {
+    }),
+    low: Object.freeze({
       helpText: 'Show fewer items at once',
       text: 'Low',
-    },
-  },
+    }),
+  }),
   changeLayout: 'Change layout',
-  changeLayoutOptions: {
-    alternating: {
+  changeLayoutOptions: Object.freeze({
+    alternating: Object.freeze({
       helpText: 'Show cards in a vertical layout with alternating fashion',
       text: 'Alternating',
-    },
-    horizontal: {
+    }),
+    horizontal: Object.freeze({
       helpText: 'Show cards in a horizontal layout',
       text: 'Horizontal',
-    },
-    horizontal_all: {
+    }),
+    horizontal_all: Object.freeze({
       helpText: 'Show all cards in a horizontal layout',
       text: 'Show all cards',
-    },
-    vertical: {
+    }),
+    vertical: Object.freeze({
       helpText: 'Show cards in a vertical layout',
       text: 'Vertical',
-    },
-  },
+    }),
+  }),
   dark: 'Switch to Dark Mode',
   first: 'Go to First',
   jumpTo: 'Jump to',
@@ -112,25 +65,78 @@ export const getDefaultButtonTexts: () => ButtonTexts = () => ({
   timelinePoint: 'Timeline point',
 });
 
+// Pre-compiled regex for hex validation
+const HEX_COLOR_REGEX = /^#[0-9a-fA-F]{6}$/;
+
+// Character set for ID generation
+const ID_CHARS =
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const ID_LENGTH = 7;
+
+/**
+ * Converts hex color to RGBA format
+ * @param hex - Hex color code (e.g. #FFFFFF)
+ * @param alpha - Opacity value between 0 and 1
+ * @returns RGBA color string
+ */
+export const hexToRGBA = (hex: string, alpha: number): string => {
+  // Input validation
+  if (typeof hex !== 'string' || typeof alpha !== 'number') {
+    return `rgba(0, 0, 0, ${Math.max(0, Math.min(1, alpha || 0))})`;
+  }
+
+  // Validate hex format using regex (more efficient than manual checks)
+  if (!HEX_COLOR_REGEX.test(hex)) {
+    console.warn('Invalid hex color provided:', hex);
+    return `rgba(0, 0, 0, ${Math.max(0, Math.min(1, alpha))})`;
+  }
+
+  // Extract RGB values directly with bit shifting (more efficient)
+  const hexValue = parseInt(hex.slice(1), 16);
+  const r = (hexValue >> 16) & 255;
+  const g = (hexValue >> 8) & 255;
+  const b = hexValue & 255;
+
+  // Clamp alpha value between 0 and 1
+  const clampedAlpha = Math.max(0, Math.min(1, alpha));
+
+  return `rgba(${r}, ${g}, ${b}, ${clampedAlpha})`;
+};
+
+/**
+ * Returns the appropriate theme based on dark mode preference
+ * @param isDark - Whether dark mode is enabled
+ * @returns Theme object
+ */
+export const getDefaultThemeOrDark = (isDark?: boolean) =>
+  isDark ? darkTheme : defaultTheme;
+
+/**
+ * Returns default class names for timeline components
+ * @returns Object of default CSS class names
+ */
+export const getDefaultClassNames = () => DEFAULT_CLASS_NAMES;
+
+/**
+ * Returns default button text translations
+ * @returns Object containing all button text strings
+ */
+export const getDefaultButtonTexts = (): ButtonTexts => DEFAULT_BUTTON_TEXTS;
+
 /**
  * Determines slideshow type based on timeline mode
  * @param mode - Timeline display mode
  * @returns Appropriate slideshow animation type
  */
 export const getSlideShowType = (mode: TimelineMode): SlideShowType => {
-  if (!mode) {
-    return 'reveal';
+  switch (mode) {
+    case 'VERTICAL_ALTERNATING':
+      return 'slide_from_sides';
+    case 'HORIZONTAL':
+    case 'VERTICAL':
+    default:
+      return 'reveal';
   }
-
-  if (mode === 'HORIZONTAL' || mode === 'VERTICAL') {
-    return 'reveal';
-  }
-
-  if (mode === 'VERTICAL_ALTERNATING') {
-    return 'slide_from_sides';
-  }
-
-  return 'reveal';
 };
 
 /**
@@ -138,26 +144,24 @@ export const getSlideShowType = (mode: TimelineMode): SlideShowType => {
  * @param text - Text string or array of strings
  * @returns Boolean indicating if input is string array
  */
-export const isTextArray = (text: string | string[]): text is string[] => {
-  return Array.isArray(text);
-};
+export const isTextArray = (text: string | string[]): text is string[] =>
+  Array.isArray(text);
 
 /**
  * Sanitizes HTML text to prevent XSS attacks
  * @param text - Text string or array of strings to sanitize
  * @returns Sanitized text string or array
  */
-export const sanitizeHtmlText = (text: string | string[]) => {
+export const sanitizeHtmlText = (
+  text: string | string[],
+): string | string[] => {
   if (!text) return '';
 
   try {
-    if (isTextArray(text)) {
-      return text.map((t) => xss(t || ''));
-    }
-    return xss(text);
+    return isTextArray(text) ? text.map((t) => xss(t || '')) : xss(text);
   } catch (error) {
     console.error('Error sanitizing HTML text:', error);
-    return '';
+    return isTextArray(text) ? [] : '';
   }
 };
 
@@ -166,27 +170,22 @@ export const sanitizeHtmlText = (text: string | string[]) => {
  * @returns Unique string ID
  */
 export const getUniqueID = (): string => {
-  if (typeof window === 'undefined' || !window.crypto) {
+  // Check for crypto API availability
+  if (typeof window === 'undefined' || !window.crypto?.getRandomValues) {
     console.warn('Crypto API not available, using fallback ID method');
-    return `id-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    return `id-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
   }
 
   try {
-    const chars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-    let autoId = '';
-    const randomValues = new Uint32Array(7);
-
+    const randomValues = new Uint8Array(ID_LENGTH);
     window.crypto.getRandomValues(randomValues);
 
-    for (let i = 0; i < randomValues.length; i++) {
-      autoId += chars[randomValues[i] % chars.length];
-    }
-
-    return autoId;
+    return Array.from(
+      randomValues,
+      (byte) => ID_CHARS[byte % ID_CHARS.length],
+    ).join('');
   } catch (error) {
     console.error('Error generating unique ID:', error);
-    return `id-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    return `id-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
   }
 };
