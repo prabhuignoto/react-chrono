@@ -34,6 +34,47 @@ export const getSearchableText = (content: React.ReactNode): string => {
 };
 
 /**
+ * Safely validates if a URL belongs to a trusted video platform
+ * @param url - URL to validate
+ * @returns Object with validation result and platform info
+ */
+const validateVideoUrl = (
+  url: string,
+): { isValid: boolean; platform?: string; origin?: string } => {
+  try {
+    const parsedUrl = new URL(url);
+    const hostname = parsedUrl.hostname.toLowerCase();
+
+    // YouTube domains
+    if (
+      hostname === 'www.youtube.com' ||
+      hostname === 'youtube.com' ||
+      hostname === 'youtu.be'
+    ) {
+      return {
+        isValid: true,
+        platform: 'youtube',
+        origin: 'https://www.youtube.com',
+      };
+    }
+
+    // Vimeo domains
+    if (hostname === 'vimeo.com' || hostname === 'player.vimeo.com') {
+      return { isValid: true, platform: 'vimeo', origin: 'https://vimeo.com' };
+    }
+
+    // For other HTTPS origins, return the actual origin
+    if (parsedUrl.protocol === 'https:') {
+      return { isValid: true, platform: 'other', origin: parsedUrl.origin };
+    }
+
+    return { isValid: false };
+  } catch {
+    return { isValid: false };
+  }
+};
+
+/**
  * Pauses video embeds (primarily YouTube) within an element
  * @param element - HTML element containing video iframes to pause
  */
@@ -46,23 +87,24 @@ export const pauseVideoEmbeds = (element: HTMLElement | null): void => {
       const src = iframe.getAttribute('src') || '';
       if (!src || !iframe.contentWindow) return;
 
-      // Determine appropriate target origin
-      let targetOrigin = '*';
-      if (src.includes('youtube.com')) {
-        targetOrigin = 'https://www.youtube.com';
-      } else if (src.startsWith('https://')) {
-        try {
-          targetOrigin = new URL(src).origin;
-        } catch {
-          targetOrigin = '*';
-        }
-      }
+      const validation = validateVideoUrl(src);
+      if (!validation.isValid) return;
+
+      const targetOrigin = validation.origin || '*';
 
       try {
-        iframe.contentWindow.postMessage(
-          '{"event":"command","func":"stopVideo","args":""}',
-          targetOrigin,
-        );
+        // Send appropriate pause command based on platform
+        let message = '';
+        if (validation.platform === 'youtube') {
+          message = '{"event":"command","func":"stopVideo","args":""}';
+        } else if (validation.platform === 'vimeo') {
+          message = '{"method":"pause"}';
+        } else {
+          // Generic pause attempt for other platforms
+          message = '{"event":"command","func":"pause","args":""}';
+        }
+
+        iframe.contentWindow.postMessage(message, targetOrigin);
       } catch (error) {
         console.error('Error sending message to iframe:', error);
       }
