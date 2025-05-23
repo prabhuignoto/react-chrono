@@ -6,14 +6,39 @@ import {
 import xss from 'xss';
 import { darkTheme, defaultTheme } from '../components/common/themes';
 
+/**
+ * Converts hex color to RGBA format
+ * @param hex - Hex color code (e.g. #FFFFFF)
+ * @param alpha - Opacity value between 0 and 1
+ * @returns RGBA color string
+ */
 export const hexToRGBA = (hex: string, alpha: number): string => {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
+  if (!hex || !hex.startsWith('#') || hex.length !== 7) {
+    console.warn('Invalid hex color provided:', hex);
+    return `rgba(0, 0, 0, ${alpha})`;
+  }
 
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  try {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+
+    if (isNaN(r) || isNaN(g) || isNaN(b)) {
+      return `rgba(0, 0, 0, ${alpha})`;
+    }
+
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  } catch (error) {
+    console.error('Error converting hex to RGBA:', error);
+    return `rgba(0, 0, 0, ${alpha})`;
+  }
 };
 
+/**
+ * Returns the appropriate theme based on dark mode preference
+ * @param isDark - Whether dark mode is enabled
+ * @returns Theme object
+ */
 export const getDefaultThemeOrDark = (isDark?: boolean) => {
   if (isDark) {
     return darkTheme;
@@ -21,6 +46,10 @@ export const getDefaultThemeOrDark = (isDark?: boolean) => {
   return defaultTheme;
 };
 
+/**
+ * Returns default class names for timeline components
+ * @returns Object of default CSS class names
+ */
 export const getDefaultClassNames = () => ({
   card: 'rc-card',
   cardMedia: 'rc-card-media',
@@ -31,6 +60,10 @@ export const getDefaultClassNames = () => ({
   title: 'rc-title',
 });
 
+/**
+ * Returns default button text translations
+ * @returns Object containing all button text strings
+ */
 export const getDefaultButtonTexts: () => ButtonTexts = () => ({
   changeDensity: 'Change density',
   changeDensityOptions: {
@@ -79,15 +112,17 @@ export const getDefaultButtonTexts: () => ButtonTexts = () => ({
   timelinePoint: 'Timeline point',
 });
 
-//get slidehow type based on mode
-
-export const getSlideShowType: (mode: TimelineMode) => SlideShowType = (
-  mode,
-) => {
-  if (mode === 'HORIZONTAL') {
+/**
+ * Determines slideshow type based on timeline mode
+ * @param mode - Timeline display mode
+ * @returns Appropriate slideshow animation type
+ */
+export const getSlideShowType = (mode: TimelineMode): SlideShowType => {
+  if (!mode) {
     return 'reveal';
   }
-  if (mode === 'VERTICAL') {
+
+  if (mode === 'HORIZONTAL' || mode === 'VERTICAL') {
     return 'reveal';
   }
 
@@ -98,30 +133,60 @@ export const getSlideShowType: (mode: TimelineMode) => SlideShowType = (
   return 'reveal';
 };
 
+/**
+ * Type guard to check if text is an array of strings
+ * @param text - Text string or array of strings
+ * @returns Boolean indicating if input is string array
+ */
 export const isTextArray = (text: string | string[]): text is string[] => {
   return Array.isArray(text);
 };
 
+/**
+ * Sanitizes HTML text to prevent XSS attacks
+ * @param text - Text string or array of strings to sanitize
+ * @returns Sanitized text string or array
+ */
 export const sanitizeHtmlText = (text: string | string[]) => {
-  if (isTextArray(text)) {
-    return text.map((t) => xss(t));
+  if (!text) return '';
+
+  try {
+    if (isTextArray(text)) {
+      return text.map((t) => xss(t || ''));
+    }
+    return xss(text);
+  } catch (error) {
+    console.error('Error sanitizing HTML text:', error);
+    return '';
   }
-  return xss(text);
 };
 
-export const getUniqueID = () => {
-  const chars =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-  let autoId = '';
-
-  const randomValues = new Uint32Array(7);
-
-  window.crypto.getRandomValues(randomValues);
-
-  for (let i = 0; i < randomValues.length; i++) {
-    autoId += chars[randomValues[i] % chars.length];
+/**
+ * Generates a cryptographically secure random ID
+ * @returns Unique string ID
+ */
+export const getUniqueID = (): string => {
+  if (typeof window === 'undefined' || !window.crypto) {
+    console.warn('Crypto API not available, using fallback ID method');
+    return `id-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   }
 
-  return autoId;
+  try {
+    const chars =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    let autoId = '';
+    const randomValues = new Uint32Array(7);
+
+    window.crypto.getRandomValues(randomValues);
+
+    for (let i = 0; i < randomValues.length; i++) {
+      autoId += chars[randomValues[i] % chars.length];
+    }
+
+    return autoId;
+  } catch (error) {
+    console.error('Error generating unique ID:', error);
+    return `id-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  }
 };

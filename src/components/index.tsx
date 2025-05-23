@@ -2,7 +2,13 @@ import { TimelineItemModel } from '@models/TimelineItemModel';
 import { TimelineProps } from '@models/TimelineModel';
 import { getUniqueID } from '@utils/index';
 import dayjs from 'dayjs';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useMemo,
+} from 'react';
 import GlobalContextProvider from './GlobalContext';
 import Timeline from './timeline/timeline';
 const toReactArray = React.Children.toArray;
@@ -27,56 +33,82 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   const [slideShowActive, setSlideShowActive] = useState(false);
   const [activeTimelineItem, setActiveTimelineItem] = useState(activeItemIndex);
 
-  const initItems = (lineItems?: TimelineItemModel[]): TimelineItemModel[] => {
-    if (lineItems?.length) {
-      return lineItems.map((item, index) => {
-        const id = getUniqueID();
+  // Cache the last processed items to avoid unnecessary reprocessing
+  const itemsHashRef = useRef<string>('');
+  const processedItemsCache = useRef<TimelineItemModel[]>([]);
 
-        return {
-          ...item,
-          _dayjs: dayjs(item.date),
-          active: index === activeItemIndex,
-          id,
-          items: item.items?.map((subItem) => ({
-            ...subItem,
-            _dayjs: dayjs(subItem.date),
-            id: getUniqueID(),
-            isNested: true,
+  // Memoize the initItems function
+  const initItems = useCallback(
+    (lineItems?: TimelineItemModel[]): TimelineItemModel[] => {
+      if (lineItems?.length) {
+        return lineItems.map((item, index) => {
+          const id = getUniqueID();
+
+          return {
+            ...item,
+            _dayjs: dayjs(item.date),
+            active: index === activeItemIndex,
+            id,
+            items: item.items?.map((subItem) => ({
+              ...subItem,
+              _dayjs: dayjs(subItem.date),
+              id: getUniqueID(),
+              isNested: true,
+              visible: true,
+            })),
+            title: item.date
+              ? dayjs(item.date).format(titleDateFormat)
+              : item.title,
             visible: true,
-          })),
-          title: item.date
-            ? dayjs(item.date).format(titleDateFormat)
-            : item.title,
-          visible: true,
-        };
-      });
-    }
+          };
+        });
+      }
 
-    const itemLength = React.Children.toArray(children).filter(
-      (item) =>
-        (item as React.ReactElement<any>).props.className !== 'chrono-icons',
-    ).length;
+      const itemLength = React.Children.toArray(children).filter(
+        (item) =>
+          (item as React.ReactElement<any>).props.className !== 'chrono-icons',
+      ).length;
 
-    return Array.from({ length: itemLength }).map((_, index) => ({
-      active: index === activeItemIndex,
-      id: getUniqueID(),
-      visible: true,
-    }));
-  };
-
-  const updateItems = (lineItems: TimelineItemModel[]) => {
-    if (lineItems) {
-      const pos = timeLineItems.length;
-
-      return lineItems.map((item, index) => ({
-        ...item,
-        active: index === pos,
+      return Array.from({ length: itemLength }).map((_, index) => ({
+        active: index === activeItemIndex,
+        id: getUniqueID(),
         visible: true,
       }));
-    } else {
-      return [];
-    }
-  };
+    },
+    [activeItemIndex, titleDateFormat, children],
+  );
+
+  // Optimize updateItems function
+  const updateItems = useCallback(
+    (lineItems: TimelineItemModel[]) => {
+      if (lineItems) {
+        const pos = timeLineItems.length;
+
+        return lineItems.map((item, index) => ({
+          ...item,
+          active: index === pos,
+          visible: true,
+        }));
+      } else {
+        return [];
+      }
+    },
+    [timeLineItems.length],
+  );
+
+  // Create a stable hash for items comparison
+  const createItemsHash = useCallback((items: any[]) => {
+    if (!items?.length) return '';
+    return items
+      .map((item) => ({
+        id: item.id,
+        date: item.date,
+        title: item.title,
+        cardTitle: item.cardTitle,
+      }))
+      .map((item) => JSON.stringify(item))
+      .join('|');
+  }, []);
 
   useEffect(() => {
     const _items = items?.filter((item) => item);
@@ -88,6 +120,15 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       return;
     }
 
+    // Use efficient comparison instead of JSON.stringify on entire array
+    const currentHash = createItemsHash(_items);
+
+    if (!allowDynamicUpdate && currentHash === itemsHashRef.current) {
+      return; // No changes, skip processing
+    }
+
+    itemsHashRef.current = currentHash;
+
     if (timeLineItems.length && _items.length > timeLineItems.length) {
       newItems = updateItems(_items);
     } else if (_items.length) {
@@ -98,30 +139,41 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       timeLineItemsRef.current = newItems;
       setTimeLineItems(newItems);
       setActiveTimelineItem(0);
+      processedItemsCache.current = newItems;
     }
-  }, [JSON.stringify(allowDynamicUpdate ? items : null)]);
+  }, [
+    items,
+    allowDynamicUpdate,
+    timeLineItems.length,
+    initItems,
+    updateItems,
+    createItemsHash,
+  ]);
 
-  const handleTimelineUpdate = useCallback((actvTimelineIndex: number) => {
-    setTimeLineItems((lineItems) =>
-      lineItems.map((item, index) => ({
-        ...item,
-        active: index === actvTimelineIndex,
-        visible: actvTimelineIndex >= 0,
-      })),
-    );
+  const handleTimelineUpdate = useCallback(
+    (actvTimelineIndex: number) => {
+      setTimeLineItems((lineItems) =>
+        lineItems.map((item, index) => ({
+          ...item,
+          active: index === actvTimelineIndex,
+          visible: actvTimelineIndex >= 0,
+        })),
+      );
 
-    setActiveTimelineItem(actvTimelineIndex);
+      setActiveTimelineItem(actvTimelineIndex);
 
-    if (items) {
-      if (items.length - 1 === actvTimelineIndex) {
-        setSlideShowActive(false);
+      if (items) {
+        if (items.length - 1 === actvTimelineIndex) {
+          setSlideShowActive(false);
+        }
       }
-    }
-  }, []);
+    },
+    [items],
+  );
 
   useEffect(() => {
     handleTimelineUpdate(activeItemIndex);
-  }, [activeItemIndex]);
+  }, [activeItemIndex, handleTimelineUpdate]);
 
   const restartSlideShow = useCallback(() => {
     handleTimelineUpdate(-1);
@@ -130,7 +182,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       setSlideShowActive(true);
       handleTimelineUpdate(0);
     }, 0);
-  }, []);
+  }, [handleTimelineUpdate]);
 
   const handleOnNext = useCallback(() => {
     if (!timeLineItems.length) {
@@ -173,28 +225,37 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         handleTimelineUpdate(index);
       }
     },
-    [timeLineItems.length],
+    [handleTimelineUpdate],
   );
 
   const onPaused = useCallback(() => {
     setSlideShowActive(false);
   }, []);
 
-  let iconChildren = toReactArray(children).filter(
-    (item) => (item as any).props.className === 'chrono-icons',
-  );
+  // Memoize icon children processing
+  const iconChildren = useMemo(() => {
+    let iconChildArray = toReactArray(children).filter(
+      (item) => (item as any).props.className === 'chrono-icons',
+    );
 
-  if (iconChildren.length) {
-    iconChildren = (iconChildren[0] as any).props.children;
-  }
+    if (iconChildArray.length) {
+      return (iconChildArray[0] as any).props.children;
+    }
+    return iconChildArray;
+  }, [children]);
+
+  // Memoize content details children
+  const contentDetailsChildren = useMemo(() => {
+    return toReactArray(children).filter(
+      (item) => (item as any).props.className !== 'chrono-icons',
+    );
+  }, [children]);
 
   return (
     <GlobalContextProvider {...props}>
       <Timeline
         activeTimelineItem={activeTimelineItem}
-        contentDetailsChildren={toReactArray(children).filter(
-          (item) => (item as any).props.className !== 'chrono-icons',
-        )}
+        contentDetailsChildren={contentDetailsChildren}
         iconChildren={iconChildren}
         items={timeLineItems}
         onFirst={handleFirst}
@@ -216,4 +277,4 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   );
 };
 
-export default Chrono;
+export default React.memo(Chrono);
