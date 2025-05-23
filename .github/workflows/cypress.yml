@@ -51,6 +51,20 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Cache Cypress binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-cypress-
+
+      - name: Install Cypress binary
+        run: pnpm exec cypress install
+
+      - name: Verify Cypress
+        run: pnpm exec cypress verify
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6.9.2
         with:
