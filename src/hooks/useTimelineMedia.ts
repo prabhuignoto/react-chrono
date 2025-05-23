@@ -1,5 +1,8 @@
 import { useRef, useEffect } from 'react';
-import { toggleMediaVisibility, pauseVideoEmbeds } from '../utils/timelineUtils';
+import {
+  toggleMediaVisibility,
+  pauseVideoEmbeds,
+} from '../utils/timelineUtils';
 
 interface UseTimelineMediaProps {
   mode: string;

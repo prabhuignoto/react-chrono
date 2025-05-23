@@ -39,9 +39,12 @@ export const useMatchMedia = (
 ): boolean => {
   const [matches, setMatches] = useState<boolean>(false);
   const mediaQuery = useRef<MediaQueryList | null>(null);
+  const isCleanedUp = useRef<boolean>(false);
 
+  // Stable callback references to prevent unnecessary effect re-runs
   const handleMediaChange = useCallback(
     (event: MediaQueryListEvent | MediaQueryList) => {
+      if (isCleanedUp.current) return;
       setMatches(event.matches);
     },
     [],
@@ -49,22 +52,22 @@ export const useMatchMedia = (
 
   const handleResize = useDebouncedCallback(
     () => {
-      if (!mediaQuery.current) return;
+      if (!mediaQuery.current || isCleanedUp.current) return;
 
       const currentMatches = mediaQuery.current.matches;
-      if (currentMatches !== matches) {
-        setMatches(currentMatches);
-      }
+      setMatches(currentMatches);
     },
     debounceDelay,
     { maxWait: 1000 },
-  ); // Add maxWait for better performance
+  );
 
   // Setup media query listener
   useEffect(() => {
     if (!enabled || typeof window === 'undefined') {
       return;
     }
+
+    isCleanedUp.current = false;
 
     // Cleanup previous mediaQuery if it exists
     if (mediaQuery.current) {
@@ -86,18 +89,24 @@ export const useMatchMedia = (
 
     // Cleanup
     return () => {
-      removeMediaListeners(currentMedia, handleMediaChange, handleResize);
+      isCleanedUp.current = true;
+      if (currentMedia) {
+        removeMediaListeners(currentMedia, handleMediaChange, handleResize);
+      }
       handleResize.cancel(); // Cancel any pending debounced calls
       mediaQuery.current = null; // Clear the ref
     };
-  }, [query, enabled, createMediaQuery, handleMediaChange, handleResize]); // Added query dependency
+  }, [query, enabled, handleMediaChange, handleResize]); // Removed createMediaQuery dependency to avoid infinite loops
 
-  // Execute callback when matches changes
+  // Execute callback when matches changes - use ref to avoid stale closure
+  const onMatchRef = useRef(onMatch);
+  onMatchRef.current = onMatch;
+
   useEffect(() => {
-    if (matches && onMatch) {
-      onMatch();
+    if (matches && onMatchRef.current) {
+      onMatchRef.current();
     }
-  }, [matches, onMatch]);
+  }, [matches]);
 
   return matches;
 };

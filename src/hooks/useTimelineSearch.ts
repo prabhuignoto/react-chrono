@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef } from 'react';
+import { useCallback, useState, useRef, useMemo } from 'react';
 import { TimelineCardModel } from '@models/TimelineItemModel';
 import { getSearchableText } from '../utils/timelineUtils';
 import { useDebouncedCallback } from 'use-debounce';
@@ -20,34 +20,51 @@ export const useTimelineSearch = ({
   const searchInputRef = useRef<HTMLInputElement>(null);
   const activeItemIndex = useRef<number>(0);
 
-  // Find matches based on search query
+  // Memoize searchable content to avoid recalculating on every search
+  const searchableContent = useMemo(() => {
+    return items.map((item) => {
+      const content = [
+        getSearchableText(item.title),
+        getSearchableText(item.cardTitle),
+        getSearchableText(item.cardSubtitle),
+        Array.isArray(item.cardDetailedText)
+          ? item.cardDetailedText.map(getSearchableText).join(' ')
+          : getSearchableText(item.cardDetailedText),
+      ]
+        .filter(Boolean) // Remove empty strings
+        .join(' ')
+        .toLowerCase();
+
+      return content;
+    });
+  }, [items]);
+
+  // Focus helper function to reduce code duplication
+  const focusSearchInput = useCallback(() => {
+    setTimeout(() => {
+      if (searchInputRef.current) {
+        searchInputRef.current.focus();
+        const length = searchInputRef.current.value.length;
+        searchInputRef.current.setSelectionRange(length, length);
+      }
+    }, 50);
+  }, []);
+
+  // Find matches based on search query - optimized version
   const findMatches = useCallback(
     (query: string) => {
-      if (!query) {
+      if (!query.trim()) {
         setSearchResults([]);
         setCurrentMatchIndex(-1);
         return;
       }
 
-      const queryLower = query.toLowerCase();
+      const queryLower = query.toLowerCase().trim();
       const results: number[] = [];
 
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-
-        // Combine all searchable text into one operation
-        const searchableContent = [
-          getSearchableText(item.title),
-          getSearchableText(item.cardTitle),
-          getSearchableText(item.cardSubtitle),
-          Array.isArray(item.cardDetailedText)
-            ? item.cardDetailedText.map(getSearchableText).join(' ')
-            : getSearchableText(item.cardDetailedText),
-        ]
-          .join(' ')
-          .toLowerCase();
-
-        if (searchableContent.includes(queryLower)) {
+      // Use the pre-computed searchable content for faster search
+      for (let i = 0; i < searchableContent.length; i++) {
+        if (searchableContent[i].includes(queryLower)) {
           results.push(i);
         }
       }
@@ -58,47 +75,29 @@ export const useTimelineSearch = ({
         setCurrentMatchIndex(0);
         const firstMatchItemId = items[results[0]]?.id;
         if (firstMatchItemId) {
-          // Store the current search query before navigation
-          const currentQuery = query;
-
           activeItemIndex.current = results[0];
           onTimelineUpdated?.(results[0]);
           handleTimelineItemClick(firstMatchItemId);
-
-          // Ensure the search query persists
-          setSearchQuery(currentQuery);
-
-          // Return focus to search input after the search completes and navigation happens
-          setTimeout(() => {
-            if (searchInputRef.current) {
-              searchInputRef.current.focus();
-
-              // Ensure the cursor is at the end of the text
-              const length = searchInputRef.current.value.length;
-              searchInputRef.current.setSelectionRange(length, length);
-            }
-          }, 50);
+          focusSearchInput();
         }
       } else {
         setCurrentMatchIndex(-1);
-
-        // Return focus to search input even when no results are found
-        setTimeout(() => {
-          if (searchInputRef.current) {
-            searchInputRef.current.focus();
-
-            // Ensure the cursor is at the end of the text
-            const length = searchInputRef.current.value.length;
-            searchInputRef.current.setSelectionRange(length, length);
-          }
-        }, 50);
+        focusSearchInput();
       }
     },
-    [items, onTimelineUpdated, handleTimelineItemClick],
+    [
+      searchableContent,
+      items,
+      onTimelineUpdated,
+      handleTimelineItemClick,
+      focusSearchInput,
+    ],
   );
 
-  // Debounced search handler to avoid excessive processing during typing
-  const debouncedSearch = useDebouncedCallback(findMatches, 300);
+  // Reduced debounce delay for better responsiveness while still preventing excessive processing
+  const debouncedSearch = useDebouncedCallback(findMatches, 200, {
+    maxWait: 1000, // Ensure search executes within reasonable time
+  });
 
   const handleSearchChange = useCallback(
     (query: string) => {
@@ -112,6 +111,7 @@ export const useTimelineSearch = ({
     setSearchQuery('');
     setSearchResults([]);
     setCurrentMatchIndex(-1);
+    debouncedSearch.cancel(); // Cancel any pending searches
 
     if (items.length > 0) {
       activeItemIndex.current = 0;
@@ -120,9 +120,9 @@ export const useTimelineSearch = ({
       const firstItemId = items[0]?.id;
       if (firstItemId) handleTimelineItemClick(firstItemId);
     }
-  }, [items, onTimelineUpdated, handleTimelineItemClick]);
+  }, [items, onTimelineUpdated, handleTimelineItemClick, debouncedSearch]);
 
-  // Navigate between search matches
+  // Navigate between search matches - optimized version
   const navigateMatches = useCallback(
     (direction: 'next' | 'prev') => {
       if (searchResults.length === 0) return;
@@ -140,33 +140,17 @@ export const useTimelineSearch = ({
 
       const itemId = items[newTimelineIndex]?.id;
       if (itemId) {
-        // Store the current search query before navigation
-        const currentQuery = searchQuery;
-
         handleTimelineItemClick(itemId);
-
-        // Ensure the search query persists
-        if (currentQuery) {
-          setSearchQuery(currentQuery);
-        }
+        focusSearchInput();
       }
-
-      // Set focus back to the search input after navigation completes
-      setTimeout(() => {
-        if (searchInputRef.current) {
-          searchInputRef.current.focus();
-          const length = searchInputRef.current.value.length;
-          searchInputRef.current.setSelectionRange(length, length);
-        }
-      }, 50);
     },
     [
       searchResults,
       currentMatchIndex,
       items,
       onTimelineUpdated,
-      searchQuery,
       handleTimelineItemClick,
+      focusSearchInput,
     ],
   );
 
@@ -185,9 +169,12 @@ export const useTimelineSearch = ({
       if (e.key === 'Enter' && searchResults.length > 0) {
         e.preventDefault();
         handleNextMatch();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        clearSearch();
       }
     },
-    [searchResults.length, handleNextMatch],
+    [searchResults.length, handleNextMatch, clearSearch],
   );
 
   return {

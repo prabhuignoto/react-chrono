@@ -7,19 +7,30 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+// Modern custom command example using cy.intercept()
+// Cypress.Commands.add('interceptApiCall', (method, url, alias) => {
+//   cy.intercept(method, url).as(alias);
+// });
+
+// Example of a custom command for testing React components
+// Cypress.Commands.add('getByDataTestId', (testId) => {
+//   return cy.get(`[data-testid="${testId}"]`);
+// });
+
+// Example of a custom command for accessibility testing
+// Cypress.Commands.add('checkA11y', (context, options) => {
+//   cy.injectAxe();
+//   cy.checkA11y(context, options);
+// });
+
+// TypeScript support for custom commands
+// declare global {
+//   namespace Cypress {
+//     interface Chainable {
+//       interceptApiCall(method: string, url: string, alias: string): Chainable<Element>;
+//       getByDataTestId(testId: string): Chainable<Element>;
+//       checkA11y(context?: any, options?: any): Chainable<Element>;
+//     }
+//   }
+// }
