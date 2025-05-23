@@ -126,7 +126,7 @@ class PerformanceMonitor {
   generateReport(): string {
     const report = ['=== React Chrono Performance Report ===\n'];
 
-    for (const [componentName, times] of this.renderTimes.entries()) {
+    for (const [componentName] of this.renderTimes.entries()) {
       const stats = this.getStats(componentName);
       if (stats) {
         report.push(
@@ -159,7 +159,6 @@ export const performanceMonitor = PerformanceMonitor.getInstance();
  */
 export const usePerformanceMonitor = (
   componentName: string,
-  props?: Record<string, any>,
 ) => {
   const endTimingRef = useRef<(() => void) | null>(null);
 
