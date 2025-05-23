@@ -188,10 +188,23 @@ export const getUniqueID = (): string => {
   // Fallback for environments without crypto API
   // Using a combination of timestamp and a more robust random generation
   const timestamp = Date.now().toString(36);
-  const randomPart = Array.from(
-    { length: 8 },
-    () => ID_CHARS[Math.floor(Math.random() * ID_CHARS.length)],
-  ).join('');
+
+  // Use performance.now() for additional entropy if available
+  const performanceTime =
+    typeof performance !== 'undefined' && performance.now
+      ? performance.now().toString().replace('.', '')
+      : Date.now().toString();
+
+  // Generate random part using timestamp-based seed for better distribution
+  const seed = parseInt(performanceTime.slice(-6), 10);
+  const randomPart = Array.from({ length: 8 }, (_, index) => {
+    // Simple LCG algorithm for better distribution than Math.random
+    const a = 1664525;
+    const c = 1013904223;
+    const m = Math.pow(2, 32);
+    const value = (a * (seed + index) + c) % m;
+    return ID_CHARS[value % ID_CHARS.length];
+  }).join('');
 
   return `id-${timestamp}-${randomPart}`;
 };
