@@ -87,9 +87,10 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
 
   const newContentDetailsHeight = useMemo(() => {
     const detailsHeightApprox = Math.round(newCardHeight * 0.75);
-    return contentDetailsHeight > newCardHeight
-      ? Math.min(contentDetailsHeight, detailsHeightApprox)
-      : Math.max(contentDetailsHeight, detailsHeightApprox);
+    const actualContentDetailsHeight = contentDetailsHeight ?? 0;
+    return actualContentDetailsHeight > newCardHeight
+      ? Math.min(actualContentDetailsHeight, detailsHeightApprox)
+      : Math.max(actualContentDetailsHeight, detailsHeightApprox);
   }, [newCardHeight, contentDetailsHeight]);
 
   const toggleDarkMode = useCallback(() => {
@@ -208,6 +209,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     () =>
       ({
         ...staticDefaults,
+        mode: 'VERTICAL_ALTERNATING',
         ...props,
         activeItemIndex: computedActiveItemIndex,
         buttonTexts: memoizedButtonTexts,
