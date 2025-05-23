@@ -15,7 +15,7 @@ interface PerformanceEntry {
 class PerformanceMonitor {
   private static instance: PerformanceMonitor;
   private entries: PerformanceEntry[] = [];
-  private renderTimes = new Map<string, number[]>();
+  private readonly renderTimes = new Map<string, number[]>();
   private isEnabled = process.env.NODE_ENV === 'development';
 
   static getInstance(): PerformanceMonitor {
@@ -68,7 +68,7 @@ class PerformanceMonitor {
       this.renderTimes.set(componentName, []);
     }
 
-    const times = this.renderTimes.get(componentName)!;
+    const times = this.renderTimes.get(componentName) ?? [];
     times.push(renderTime);
 
     // Keep only last 20 render times per component
@@ -191,9 +191,9 @@ export function withPerformanceMonitoring<P extends Record<string, any>>(
   componentName?: string,
 ): React.FC<P> {
   const displayName =
-    componentName ||
-    WrappedComponent.displayName ||
-    WrappedComponent.name ||
+    componentName ??
+    WrappedComponent.displayName ??
+    WrappedComponent.name ??
     'Component';
 
   const MemoizedComponent: React.FC<P> = React.memo((props: P) => {
