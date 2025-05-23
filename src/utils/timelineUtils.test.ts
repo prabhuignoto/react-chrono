@@ -28,8 +28,8 @@ describe('getSearchableText', () => {
   it('extracts text from nested React elements', () => {
     const el = React.createElement('div', null, [
       'a',
-      React.createElement('span', null, 'b'),
-      ['c', React.createElement('em', null, 'd')],
+      React.createElement('span', { key: 'span' }, 'b'),
+      ['c', React.createElement('em', { key: 'em' }, 'd')],
     ]);
     expect(getSearchableText(el)).toBe('a b c d');
   });

@@ -1,5 +1,5 @@
 import { render, screen, act } from '@testing-library/react';
-import { useContext, ReactNode } from 'react';
+import { useContext } from 'react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import GlobalContextProvider, {
   GlobalContext,
