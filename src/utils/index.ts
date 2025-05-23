@@ -170,22 +170,28 @@ export const sanitizeHtmlText = (
  * @returns Unique string ID
  */
 export const getUniqueID = (): string => {
-  // Check for crypto API availability
-  if (typeof window === 'undefined' || !window.crypto?.getRandomValues) {
-    console.warn('Crypto API not available, using fallback ID method');
-    return `id-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
+  // Use crypto API if available (modern browsers)
+  if (typeof window !== 'undefined' && window.crypto?.getRandomValues) {
+    try {
+      const randomValues = new Uint8Array(ID_LENGTH);
+      window.crypto.getRandomValues(randomValues);
+
+      return Array.from(
+        randomValues,
+        (byte) => ID_CHARS[byte % ID_CHARS.length],
+      ).join('');
+    } catch (error) {
+      console.error('Error generating unique ID:', error);
+    }
   }
 
-  try {
-    const randomValues = new Uint8Array(ID_LENGTH);
-    window.crypto.getRandomValues(randomValues);
+  // Fallback for environments without crypto API
+  // Using a combination of timestamp and a more robust random generation
+  const timestamp = Date.now().toString(36);
+  const randomPart = Array.from(
+    { length: 8 },
+    () => ID_CHARS[Math.floor(Math.random() * ID_CHARS.length)],
+  ).join('');
 
-    return Array.from(
-      randomValues,
-      (byte) => ID_CHARS[byte % ID_CHARS.length],
-    ).join('');
-  } catch (error) {
-    console.error('Error generating unique ID:', error);
-    return `id-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
-  }
+  return `id-${timestamp}-${randomPart}`;
 };
