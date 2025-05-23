@@ -197,7 +197,7 @@ export function withPerformanceMonitoring<P extends Record<string, any>>(
 
   const MemoizedComponent: React.FC<P> = React.memo((props: P) => {
     // Use the performance monitoring hook
-    usePerformanceMonitor(displayName, props);
+    usePerformanceMonitor(displayName);
 
     return React.createElement(WrappedComponent, props);
   });
