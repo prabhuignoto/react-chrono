@@ -47,7 +47,7 @@ jobs:
             ${{ runner.os }}-cypress-
 
       - name: Run Cypress tests
-        uses: cypress-io/github-action@v6.6.1
+        uses: cypress-io/github-action@v6.9.2
         with:
           install: false
           start: pnpm dev --host
