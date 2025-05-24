@@ -256,7 +256,7 @@ export const CardSubTitleSemantic = styled.span.withConfig({
 }>`
   ${baseFontStyles}
   color: ${(p) => p.theme.cardSubtitleColor};
-  font-size: ${(p) => p.$fontSize && '0.9rem'};
+  font-size: ${(p) => p.$fontSize || '0.9rem'};
   font-weight: 500;
   margin-bottom: 0.25rem;
   padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
