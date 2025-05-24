@@ -233,7 +233,7 @@ export const CardTitleSemantic = styled.h1.withConfig({
 }>`
   ${baseFontStyles}
   color: ${(p) => p.theme.cardTitleColor};
-  font-size: ${(p) => p.$fontSize && '1.1rem'};
+  font-size: ${(p) => p.$fontSize || '1.1rem'};
   font-weight: 600;
   margin-bottom: 0.5rem;
   padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
