@@ -31,9 +31,9 @@ export default defineConfig({
 
         // Firefox
         if (browser.name === 'firefox') {
-          launchOptions.args.push('--start-fullscreen');
-          launchOptions.args.push('--width=1920');
-          launchOptions.args.push('--height=1080');
+          // launchOptions.args.push('--start-fullscreen');
+          // launchOptions.args.push('--width=1920');
+          // launchOptions.args.push('--height=1080');
           return launchOptions;
         }
 
