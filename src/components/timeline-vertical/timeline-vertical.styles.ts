@@ -84,7 +84,7 @@ export const VerticalItemWrapper = styled.li<VerticalItemWrapperProps>`
         position: absolute;
         width: 2px; /* Line width */
         height: 2rem; /* Connector height */
-        background: ${p.theme?.primary || '#007bff'}; /* Use theme color */
+        background: ${p.theme?.primary ?? '#007bff'}; /* Use theme color */
         left: 50%;
         transform: translateX(-50%);
         bottom: -2rem; /* Position below the item */

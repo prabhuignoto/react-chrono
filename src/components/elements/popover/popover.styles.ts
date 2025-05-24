@@ -9,10 +9,12 @@ const flexCenter = css`
 `;
 
 // Dynamic box shadow generator based on dark mode and open state
-const boxShadow = (isDarkMode: boolean, open: boolean) =>
-  !open
-    ? `0px 1px 1px rgba(0, 0, 0, ${isDarkMode ? '0.85' : '0.2'})`
-    : 'inset 0 0 1px 1px rgba(0, 0, 0, 0.2)';
+const boxShadow = (isDarkMode: boolean, open: boolean) => {
+  if (!open) {
+    return `0px 1px 1px rgba(0, 0, 0, ${isDarkMode ? '0.85' : '0.2'})`;
+  }
+  return 'inset 0 0 1px 1px rgba(0, 0, 0, 0.2)';
+};
 
 // Base wrapper for the popover component
 export const PopoverWrapper = styled.div``;

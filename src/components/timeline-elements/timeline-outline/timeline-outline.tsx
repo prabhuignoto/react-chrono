@@ -31,7 +31,7 @@ class TimelineOutlineError extends React.Component<
 }
 
 // Separate loading and error components to improve code organization
-const OutlineLoading = memo(() => <div role="status">Loading outline...</div>);
+const OutlineLoading = memo(() => <output>Loading outline...</output>);
 const OutlineError = memo(({ error }: { error: Error }) => (
   <div role="alert">Error: {error.message}</div>
 ));
@@ -55,7 +55,7 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
   const [showList, setShowList] = useState(false);
 
   const { theme: globalTheme } = useContext(GlobalContext);
-  const mergedTheme = theme || globalTheme;
+  const mergedTheme = theme ?? globalTheme;
 
   // Extract position logic to a custom hook
   const position = useOutlinePosition(mode);
@@ -97,16 +97,18 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
   return (
     <TimelineOutlineError onError={onError}>
       <OutlineWrapper
+        as="aside"
         position={position}
         open={openPane}
+        aria-label="Timeline outline"
         aria-expanded={openPane}
-        role="complementary"
       >
         <OutlineButton
           onPointerDown={togglePane}
           theme={mergedTheme}
           open={openPane}
           position={position}
+          aria-label={openPane ? 'Close outline' : 'Open outline'}
         >
           {openPane ? <CloseIcon /> : <MenuIcon />}
         </OutlineButton>

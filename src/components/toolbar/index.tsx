@@ -1,5 +1,4 @@
 import { FunctionComponent, memo } from 'react';
-import { jsx as _jsx } from 'react/jsx-runtime';
 import {
   ContentWrapper,
   IconWrapper,
@@ -42,10 +41,10 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
 
           return (
             <ToolbarListItem
+              as="button"
               aria-label={label}
               key={id}
-              role="button"
-              // tabIndex={0}
+              type="button"
             >
               {icon && <IconWrapper>{icon}</IconWrapper>}
               {children[index] && (

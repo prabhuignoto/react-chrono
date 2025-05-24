@@ -11,7 +11,7 @@ export interface ToggleButtonProps {
 
 const ToggleButton: FunctionComponent<ToggleButtonProps> = memo(
   ({ offIcon, onIcon, state, onChange }) => {
-    const { state: on, toggle } = useUIState(state || false);
+    const { state: on, toggle } = useUIState(state ?? false);
 
     const handleToggle = () => {
       toggle();

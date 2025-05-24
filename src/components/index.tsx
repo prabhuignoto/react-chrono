@@ -234,21 +234,31 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   // Memoize icon children processing
   const iconChildren = useMemo(() => {
-    let iconChildArray = toReactArray(children).filter(
-      (item) => (item as any).props.className === 'chrono-icons',
-    );
+    const iconChildArray = toReactArray(children).filter((item) => {
+      if (!React.isValidElement(item)) return false;
+      const props = item.props as {
+        className?: string;
+        children?: React.ReactNode;
+      };
+      return props?.className === 'chrono-icons';
+    });
 
     if (iconChildArray.length) {
-      return (iconChildArray[0] as any).props.children;
+      const firstIcon = iconChildArray[0] as React.ReactElement<{
+        children?: React.ReactNode;
+      }>;
+      return firstIcon.props.children || null;
     }
     return iconChildArray;
   }, [children]);
 
   // Memoize content details children
   const contentDetailsChildren = useMemo(() => {
-    return toReactArray(children).filter(
-      (item) => (item as any).props.className !== 'chrono-icons',
-    );
+    return toReactArray(children).filter((item) => {
+      if (!React.isValidElement(item)) return true;
+      const props = item.props as { className?: string };
+      return props?.className !== 'chrono-icons';
+    });
   }, [children]);
 
   return (

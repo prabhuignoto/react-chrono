@@ -44,7 +44,7 @@ export interface ButtonTexts {
   previousMatch?: string;
 }
 
-const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
+const GlobalContextProvider: FunctionComponent<PropsModel> = (props) => {
   const {
     cardHeight = 200,
     cardLess = false,
