@@ -31,7 +31,9 @@ describe('Timeline Card media', () => {
         cardHeight={300}
         active
       />,
-      { providerProps },
+      {
+        providerProps: { ...providerProps, semanticTags: { cardTitle: 'h1' } },
+      },
     );
 
     expect(getByText('Image title')).toBeInTheDocument();
@@ -113,6 +115,7 @@ describe('Timeline Card media', () => {
     const customProviderProps = {
       ...providerProps,
       textOverlay: true,
+      semanticTags: { cardTitle: 'h1' },
     };
 
     const { getByRole, getByText, getByAltText } = customRender(
@@ -186,7 +189,13 @@ describe('Timeline Card media', () => {
         title="Image title"
         content="This is another test"
       />,
-      { providerProps: { ...providerProps, mode: 'HORIZONTAL' } },
+      {
+        providerProps: {
+          ...providerProps,
+          mode: 'HORIZONTAL',
+          semanticTags: { cardTitle: 'h1' },
+        },
+      },
     );
 
     expect(getByRole('heading', { level: 1 })).toBeInTheDocument();

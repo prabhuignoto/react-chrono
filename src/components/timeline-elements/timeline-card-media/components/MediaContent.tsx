@@ -84,7 +84,7 @@ export const MediaContent = memo(
           mediaLoaded={mediaLoaded}
           borderLessCards={borderLessCards}
           mediaHeight={mediaHeight}
-          imageFit={mediaSettings?.imageFit}
+          imageFit={mediaSettings?.fit}
           handleMediaLoaded={handleMediaLoaded}
           handleError={handleError}
         />

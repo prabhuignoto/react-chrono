@@ -180,7 +180,7 @@ export type TimelineProps = {
 
   mediaSettings?: {
     align?: 'left' | 'right' | 'center';
-    imageFit?: 'cover' | 'contain' | 'fill' | 'none';
+    fit?: 'cover' | 'contain' | 'fill' | 'none';
   };
 
   // mode of the timeline. VERTICAL, HORIZONTAL, VERTICAL_ALTERNATING
@@ -249,6 +249,12 @@ export type TimelineProps = {
 
   // enables the read more button
   useReadMore?: boolean;
+
+  // semantic configuration for card elements
+  semanticTags?: {
+    cardTitle?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
+    cardSubtitle?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
+  };
 };
 
 export type SlideShowType = 'reveal' | 'slide_in' | 'slide_from_sides';

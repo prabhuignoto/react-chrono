@@ -569,7 +569,7 @@ describe('GlobalContext', () => {
     });
 
     it('should merge media settings with computed defaults', () => {
-      const customMediaSettings = { imageFit: 'contain' as const };
+      const customMediaSettings = { fit: 'contain' as const };
       const { getContext } = renderWithContext({
         mode: 'HORIZONTAL',
         mediaSettings: customMediaSettings,
@@ -577,7 +577,7 @@ describe('GlobalContext', () => {
 
       expect(getContext().mediaSettings).toEqual({
         align: 'center',
-        imageFit: 'contain',
+        fit: 'contain',
       });
     });
   });
