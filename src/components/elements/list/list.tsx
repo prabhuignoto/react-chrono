@@ -44,51 +44,58 @@ const List: FunctionComponent<ListModel> = ({
   );
 
   /**
-   * Handles item selection and triggers appropriate callbacks
+   * Handles single item selection
    * @param {string} id - Item identifier
-   * @param {EnhancedListItem} item - Selected list item
    */
-  const handleItemSelection = useCallback(
-    (id: string, item: EnhancedListItem) => {
-      if (multiSelectable && item.onSelect) {
-        startTransition(() => {
-          item.onSelect();
-        });
-      } else {
-        onClick?.(id);
-      }
+  const handleSingleSelection = useCallback(
+    (id: string) => {
+      onClick?.(id);
     },
-    [multiSelectable, onClick],
+    [onClick],
   );
 
   /**
-   * Renders individual list items with proper props
-   * @param {EnhancedListItem} item - Item to render
-   * @param {number} index - Item index in the list
-   * @returns {JSX.Element} Rendered list item
+   * Handles multi-item selection
+   * @param {EnhancedListItem} item - Selected list item
    */
-  const renderListItem = useCallback(
-    (item: EnhancedListItem, index: number) => {
-      const handleClick = useCallback(
-        () => handleItemSelection(item.id, item),
-        [item, handleItemSelection],
-      );
+  const handleMultiSelection = useCallback((item: EnhancedListItem) => {
+    if (item.onSelect) {
+      startTransition(() => {
+        item.onSelect();
+      });
+    }
+  }, []);
 
-      return (
+  /**
+   * Creates a click handler for a specific item
+   * @param {EnhancedListItem} item - Item to create handler for
+   * @returns {() => void} Click handler function
+   */
+  const createItemClickHandler = useCallback(
+    (item: EnhancedListItem) => () => {
+      if (multiSelectable) {
+        handleMultiSelection(item);
+      } else {
+        handleSingleSelection(item.id);
+      }
+    },
+    [multiSelectable, handleMultiSelection, handleSingleSelection],
+  );
+
+  return (
+    <ListStyle>
+      {listItems.map((item, index) => (
         <ListItem
           key={item.id}
           {...item}
           theme={theme}
-          onClick={handleClick}
+          onClick={createItemClickHandler(item)}
           selectable={multiSelectable}
           active={activeItemIndex === index}
         />
-      );
-    },
-    [theme, handleItemSelection, multiSelectable, activeItemIndex],
+      ))}
+    </ListStyle>
   );
-
-  return <ListStyle>{listItems.map(renderListItem)}</ListStyle>;
 };
 
 export { List };

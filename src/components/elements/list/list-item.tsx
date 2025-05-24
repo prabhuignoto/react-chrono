@@ -65,9 +65,23 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
       >
         {selectable ? (
           <CheckboxWrapper>
+            <input
+              type="checkbox"
+              id={`checkbox-${id}`}
+              checked={selected}
+              onChange={() => handleOnClick(id)}
+              aria-label={`Select ${title}`}
+              style={{
+                position: 'absolute',
+                opacity: 0,
+                width: '100%',
+                height: '100%',
+                cursor: 'pointer',
+              }}
+            />
             <CheckboxStyle
-              role="checkbox"
-              aria-checked={selected}
+              as="label"
+              htmlFor={`checkbox-${id}`}
               selected={selected}
               theme={theme}
             >

@@ -17,9 +17,12 @@ export default function useEscapeKey(
   const {
     enabled = true,
     key = 'Escape',
-    keyCode = 27,
+    keyCode,
     eventType = 'keyup',
   } = options;
+
+  // Track if key was explicitly provided
+  const keyExplicitlyProvided = 'key' in options;
 
   const savedCallback = useRef(callback);
 
@@ -31,11 +34,31 @@ export default function useEscapeKey(
     (e: KeyboardEvent) => {
       if (!enabled) return;
 
-      if (e.key === key || e.keyCode === keyCode) {
+      // Prefer e.key if available, otherwise use e.code (less specific but better than keyCode)
+      const pressedKey = e.key || e.code;
+
+      const keyMatches = pressedKey === key;
+      const keyCodeMatches = keyCode !== undefined && e.keyCode === keyCode; // Keep for legacy keyCode prop if provided
+
+      // Determine if we should trigger based on what options are provided
+      let shouldTrigger = false;
+
+      if (keyCode !== undefined && !keyExplicitlyProvided) {
+        // Only keyCode provided (legacy), use keyCode match
+        shouldTrigger = keyCodeMatches;
+      } else if (keyCode !== undefined && keyExplicitlyProvided) {
+        // Both key and keyCode provided, key takes precedence, keyCode as fallback
+        shouldTrigger = keyMatches || keyCodeMatches;
+      } else {
+        // Only key provided (or default), use key match
+        shouldTrigger = keyMatches;
+      }
+
+      if (shouldTrigger) {
         savedCallback.current();
       }
     },
-    [enabled, key, keyCode],
+    [enabled, key, keyCode, keyExplicitlyProvided],
   );
 
   useEffect(() => {

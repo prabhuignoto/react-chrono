@@ -97,7 +97,8 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     <>
       <PopoverWrapper ref={ref}>
         <Selecter
-          role="button"
+          as="button"
+          type="button"
           onClick={toggleOpen}
           $theme={theme}
           $open={state.open}
@@ -106,9 +107,11 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           onKeyUp={handleKeyPress}
           $isMobile={$isMobile}
           title={placeholder}
+          aria-expanded={state.open}
+          aria-haspopup="dialog"
         >
           <SelecterIcon $theme={theme} $open={state.open}>
-            {icon || <ChevronDown />}
+            {icon ?? <ChevronDown />}
           </SelecterIcon>
           {placeholder && !$isMobile ? (
             <SelecterLabel>{placeholder}</SelecterLabel>

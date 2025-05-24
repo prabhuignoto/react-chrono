@@ -48,17 +48,17 @@ export const MediaWrapper = styled.div<{
       return `
         justify-content: flex-start;
       `;
-    } else {
-      if (p.dir === 'left') {
-        return `
+    }
+
+    if (p.dir === 'left') {
+      return `
         justify-content: flex-start;
       `;
-      } else {
-        return `
-        justify-content: flex-end;
-      `;
-      }
     }
+
+    return `
+      justify-content: flex-end;
+    `;
   }}
 `;
 
@@ -90,7 +90,7 @@ export const CardImage = styled.img<{
   margin-right: auto;
   height: 100%;
   width: 100%;
-  object-fit: ${(p) => p.fit || 'cover'};
+  object-fit: ${(p) => p.fit ?? 'cover'};
   object-position: center;
   visibility: ${(p) => (p.$visible ? 'visible' : 'hidden')};
   border-radius: ${(p) => (p.$enableBorderRadius ? '6px' : '0')};
@@ -161,21 +161,28 @@ export const MediaDetailsWrapper = styled.div<{
     }
   }}
   position: ${(p) => (p.$absolutePosition ? 'absolute' : 'relative')};
-  ${(p) =>
-    p.$absolutePosition
-      ? `
-    left: 50%;
-    bottom: ${p.$expandFull ? '0%' : ' 5%'};
-    transform: translateX(-50%);
-    background: ${
-      p.$showText ? p.theme?.cardDetailsBackGround : p.theme?.cardBgColor
-    };
-    // backdrop-filter: blur(1px);
-    padding: 0.25rem;
-    ${p.$showText ? `overflow: auto;` : `overflow: hidden;`}
-    transition: height 0.25s ease-out, width 0.25s ease-out, bottom 0.25s ease-out, background 0.25s ease-out;
-  `
-      : ``}
+  ${(p) => {
+    if (!p.$absolutePosition) {
+      return '';
+    }
+
+    const bottomPosition = p.$expandFull ? '0%' : ' 5%';
+    const backgroundValue = p.$showText
+      ? p.theme?.cardDetailsBackGround
+      : p.theme?.cardBgColor;
+    const overflowValue = p.$showText ? 'auto' : 'hidden';
+
+    return `
+      left: 50%;
+      bottom: ${bottomPosition};
+      transform: translateX(-50%);
+      background: ${backgroundValue};
+      // backdrop-filter: blur(1px);
+      padding: 0.25rem;
+      overflow: ${overflowValue};
+      transition: height 0.25s ease-out, width 0.25s ease-out, bottom 0.25s ease-out, background 0.25s ease-out;
+    `;
+  }}
 
   ${({ $borderLessCard }) =>
     $borderLessCard

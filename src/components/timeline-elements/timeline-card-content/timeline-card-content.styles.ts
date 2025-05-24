@@ -118,7 +118,7 @@ const sharedSemanticStyles = css<{
   theme: Theme;
 }>`
   ${baseFontStyles}
-  font-size: ${(p) => p.$fontSize || '1.1rem'};
+  font-size: ${(p) => p.$fontSize ?? '1.1rem'};
   font-weight: 600;
   margin-bottom: 0.5rem;
   padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
@@ -266,7 +266,7 @@ export const CardSubTitleSemantic = styled.span.withConfig({
 }>`
   ${sharedSemanticStyles}
   color: ${(p) => p.theme.cardSubtitleColor};
-  font-size: ${(p) => p.$fontSize || '0.9rem'};
+  font-size: ${(p) => p.$fontSize ?? '0.9rem'};
 `;
 
 export const CardTitleAnchor = styled.a`

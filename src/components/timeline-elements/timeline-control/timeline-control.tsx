@@ -1,4 +1,6 @@
 import { TimelineControlModel } from '@models/TimelineControlModel';
+import { Theme } from '@models/Theme';
+import { TimelineMode } from '@models/TimelineModel';
 import cls from 'classnames';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { GlobalContext } from '../../GlobalContext';
@@ -14,6 +16,51 @@ import {
   TimelineNavWrapper,
   ScreenReaderOnly,
 } from './timeline-control.styles';
+
+// Helper component for standard navigation buttons
+interface StandardNavButtonProps {
+  mode: TimelineMode;
+  theme: Theme;
+  onClick: () => void;
+  title?: string;
+  ariaLabel?: string;
+  isDisabled: boolean;
+  rotate: boolean;
+  testId: string;
+  IconComponent: React.ElementType;
+}
+
+const StandardNavButtonComponent: React.FC<StandardNavButtonProps> = React.memo(
+  ({
+    mode,
+    theme,
+    onClick,
+    title,
+    ariaLabel,
+    isDisabled,
+    rotate,
+    testId,
+    IconComponent,
+  }) => (
+    <div className={`nav-item ${isDisabled ? 'disabled' : ''}`}>
+      <TimelineNavButton
+        mode={mode}
+        theme={theme}
+        onClick={isDisabled ? undefined : onClick} // Prevent click if truly disabled
+        title={title}
+        aria-label={ariaLabel}
+        aria-disabled={isDisabled}
+        aria-controls="timeline-main-wrapper"
+        tabIndex={!isDisabled ? 0 : -1}
+        rotate={rotate ? 'TRUE' : 'FALSE'}
+        data-test-id={testId}
+      >
+        <IconComponent />
+      </TimelineNavButton>
+    </div>
+  ),
+);
+StandardNavButtonComponent.displayName = 'StandardNavButton';
 
 /**
  * TimelineControl component
@@ -136,79 +183,53 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
         aria-label="Timeline Navigation"
         role="toolbar"
       >
-        {/* jump to first */}
+        {/* jump to first, previous, next, jump to last */}
         {disableInteraction ? null : (
           <>
-            <div className={`nav-item ${canDisableLeft ? 'disabled' : ''}`}>
-              <TimelineNavButton
-                mode={mode}
-                theme={theme}
-                onClick={flippedHorizontally ? onLast : onFirst}
-                title={jumpToFirstTitle}
-                aria-label={jumpToFirstTitle}
-                aria-disabled={disableLeft}
-                aria-controls="timeline-main-wrapper"
-                tabIndex={!disableLeft ? 0 : -1}
-                rotate={rotate ? 'TRUE' : 'FALSE'}
-                data-test-id="jump-to-first"
-              >
-                <ChevronsLeftIcon />
-              </TimelineNavButton>
-            </div>
-
-            {/* previous */}
-            <div className={`nav-item ${canDisableLeft ? 'disabled' : ''}`}>
-              <TimelineNavButton
-                mode={mode}
-                theme={theme}
-                onClick={flippedHorizontally ? onNext : onPrevious}
-                title={previousTitle}
-                aria-label={previousTitle}
-                aria-disabled={disableLeft}
-                aria-controls="timeline-main-wrapper"
-                tabIndex={!disableLeft ? 0 : -1}
-                rotate={rotate ? 'TRUE' : 'FALSE'}
-                data-test-id="previous"
-              >
-                <ChevronLeft />
-              </TimelineNavButton>
-            </div>
-
-            {/* next */}
-            <div className={`nav-item ${canDisableRight ? 'disabled' : ''}`}>
-              <TimelineNavButton
-                mode={mode}
-                theme={theme}
-                onClick={flippedHorizontally ? onPrevious : onNext}
-                title={nextTitle}
-                aria-label={nextTitle}
-                aria-disabled={disableRight}
-                aria-controls="timeline-main-wrapper"
-                rotate={rotate ? 'TRUE' : 'FALSE'}
-                tabIndex={!disableRight ? 0 : -1}
-                data-test-id="next"
-              >
-                <ChevronRightIcon />
-              </TimelineNavButton>
-            </div>
-
-            {/* jump to last */}
-            <div className={`nav-item ${canDisableRight ? 'disabled' : ''}`}>
-              <TimelineNavButton
-                mode={mode}
-                theme={theme}
-                onClick={flippedHorizontally ? onFirst : onLast}
-                title={jumpToLastTitle}
-                aria-label={jumpToLastTitle}
-                aria-disabled={disableRight}
-                aria-controls="timeline-main-wrapper"
-                tabIndex={!disableRight ? 0 : -1}
-                rotate={rotate ? 'TRUE' : 'FALSE'}
-                data-test-id="jump-to-last"
-              >
-                <ChevronsRightIcon />
-              </TimelineNavButton>
-            </div>
+            <StandardNavButtonComponent
+              mode={mode}
+              theme={theme}
+              onClick={flippedHorizontally ? onLast : onFirst}
+              title={jumpToFirstTitle}
+              ariaLabel={jumpToFirstTitle}
+              isDisabled={canDisableLeft}
+              rotate={rotate}
+              testId="jump-to-first"
+              IconComponent={ChevronsLeftIcon}
+            />
+            <StandardNavButtonComponent
+              mode={mode}
+              theme={theme}
+              onClick={flippedHorizontally ? onNext : onPrevious}
+              title={previousTitle}
+              ariaLabel={previousTitle}
+              isDisabled={canDisableLeft}
+              rotate={rotate}
+              testId="previous"
+              IconComponent={ChevronLeft}
+            />
+            <StandardNavButtonComponent
+              mode={mode}
+              theme={theme}
+              onClick={flippedHorizontally ? onPrevious : onNext}
+              title={nextTitle}
+              ariaLabel={nextTitle}
+              isDisabled={canDisableRight}
+              rotate={rotate}
+              testId="next"
+              IconComponent={ChevronRightIcon}
+            />
+            <StandardNavButtonComponent
+              mode={mode}
+              theme={theme}
+              onClick={flippedHorizontally ? onFirst : onLast}
+              title={jumpToLastTitle}
+              ariaLabel={jumpToLastTitle}
+              isDisabled={canDisableRight}
+              rotate={rotate}
+              testId="jump-to-last"
+              IconComponent={ChevronsRightIcon}
+            />
           </>
         )}
 
