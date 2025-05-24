@@ -1,0 +1,573 @@
+[
+  {
+    "createdAt": "2025-05-16T20:45:46Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ],
+    "number": 531,
+    "title": "[BUG] Nested Timeline does not render",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/531"
+  },
+  {
+    "createdAt": "2025-05-07T13:38:04Z",
+    "labels": [],
+    "number": 530,
+    "title": "`index.d.ts` is no longer generated",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/530"
+  },
+  {
+    "createdAt": "2025-02-24T15:12:30Z",
+    "labels": [],
+    "number": 520,
+    "title": "Allow custom elements in left content",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/520"
+  },
+  {
+    "createdAt": "2025-01-24T15:20:28Z",
+    "labels": [],
+    "number": 513,
+    "title": "The first example in Codesandbox Examples requires login to see",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/513"
+  },
+  {
+    "createdAt": "2024-09-04T10:37:38Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 507,
+    "title": "Card titles should avoid using h1, h2 or make it configurable",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/507"
+  },
+  {
+    "createdAt": "2024-08-08T16:02:35Z",
+    "labels": [],
+    "number": 506,
+    "title": "The documentation for mediaSettings contains an incorrect property name.",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/506"
+  },
+  {
+    "createdAt": "2024-07-19T08:09:59Z",
+    "labels": [],
+    "number": 501,
+    "title": "Issue while dynamic update",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/501"
+  },
+  {
+    "createdAt": "2024-07-07T13:42:22Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ],
+    "number": 500,
+    "title": " `hideControls` property does not work.",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/500"
+  },
+  {
+    "createdAt": "2024-05-27T11:44:05Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ],
+    "number": 498,
+    "title": "How to make the cardHeight dynamic?",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/498"
+  },
+  {
+    "createdAt": "2024-04-17T19:58:50Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEy",
+        "name": "help wanted",
+        "description": "Extra attention is needed",
+        "color": "008672"
+      }
+    ],
+    "number": 490,
+    "title": "Javascript actions",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/490"
+  },
+  {
+    "createdAt": "2024-04-08T06:13:04Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      },
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEy",
+        "name": "help wanted",
+        "description": "Extra attention is needed",
+        "color": "008672"
+      }
+    ],
+    "number": 489,
+    "title": "Custom toolbar function enable or not",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/489"
+  },
+  {
+    "createdAt": "2024-04-02T18:10:29Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 487,
+    "title": "How to set space between timeline and title?",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/487"
+  },
+  {
+    "createdAt": "2024-03-12T09:33:41Z",
+    "labels": [],
+    "number": 481,
+    "title": "textDensity prop is not reactive",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/481"
+  },
+  {
+    "createdAt": "2024-03-10T22:02:56Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 480,
+    "title": "Additional control over timelinePoint",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/480"
+  },
+  {
+    "createdAt": "2024-02-01T11:33:31Z",
+    "labels": [],
+    "number": 467,
+    "title": "Horizontal timeline overflow",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/467"
+  },
+  {
+    "createdAt": "2024-01-23T18:40:13Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ],
+    "number": 463,
+    "title": "Application Error: Converting circular structure to JSON when using timelineContent",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/463"
+  },
+  {
+    "createdAt": "2024-01-20T08:29:54Z",
+    "labels": [],
+    "number": 461,
+    "title": "ReferenceError: window is not defined",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/461"
+  },
+  {
+    "createdAt": "2024-01-16T18:29:05Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 456,
+    "title": "Base Line Style update on basis of events",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/456"
+  },
+  {
+    "createdAt": "2023-11-03T10:19:32Z",
+    "labels": [],
+    "number": 434,
+    "title": "When use the control panel to change the selected item from timeline",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/434"
+  },
+  {
+    "createdAt": "2023-10-31T19:32:34Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ],
+    "number": 433,
+    "title": "TypeScript checking for props of <Chrono> doesn't work due to path aliases in typing files",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/433"
+  },
+  {
+    "createdAt": "2023-10-25T02:28:41Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ],
+    "number": 432,
+    "title": "Slide Navigation Button doesn't work.",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/432"
+  },
+  {
+    "createdAt": "2023-10-17T10:21:34Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ],
+    "number": 431,
+    "title": "Can't align timelineContent",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/431"
+  },
+  {
+    "createdAt": "2023-06-16T19:38:48Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 382,
+    "title": "Scroll in horizontal mode",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/382"
+  },
+  {
+    "createdAt": "2023-06-01T20:29:07Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ],
+    "number": 376,
+    "title": "Dynamic timeline is not rendered properly",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/376"
+  },
+  {
+    "createdAt": "2023-02-09T13:11:03Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      },
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 329,
+    "title": "Dynamic `timelineContent` which involves updating the state, isn't rendering the content.",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/329"
+  },
+  {
+    "createdAt": "2022-11-29T15:58:31Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzI1",
+        "name": "question",
+        "description": "Further information is requested",
+        "color": "d876e3"
+      }
+    ],
+    "number": 302,
+    "title": "Getting \"Warning: Invalid hook call.\" when using locally in App due to double React",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/302"
+  },
+  {
+    "createdAt": "2022-11-17T15:02:07Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 300,
+    "title": "Changing active item after timeline was initialized (controlled)",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/300"
+  },
+  {
+    "createdAt": "2022-09-30T13:15:57Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ],
+    "number": 291,
+    "title": "Update in Map Array",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/291"
+  },
+  {
+    "createdAt": "2022-08-06T16:08:13Z",
+    "labels": [],
+    "number": 280,
+    "title": "The expected type comes from property 'items' which is declared here on type 'IntrinsicAttributes & Partial<TimelineProps>'",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/280"
+  },
+  {
+    "createdAt": "2022-05-27T03:49:46Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 252,
+    "title": "[Feat Request] Length between items proportional to time interval",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/252"
+  },
+  {
+    "createdAt": "2022-02-19T01:26:31Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 232,
+    "title": "Be able to modify autoscroll behaviour when item added",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/232"
+  },
+  {
+    "createdAt": "2022-01-22T11:42:07Z",
+    "labels": [],
+    "number": 223,
+    "title": "server side Pagination",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/223"
+  },
+  {
+    "createdAt": "2021-11-23T17:04:30Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 192,
+    "title": "Slide Show controls",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/192"
+  },
+  {
+    "createdAt": "2021-11-05T15:01:51Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ],
+    "number": 180,
+    "title": "Timeline doesn't update when adding custom components dynamically",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/180"
+  },
+  {
+    "createdAt": "2021-08-17T22:52:10Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ],
+    "number": 161,
+    "title": "Dynamically Timeline Update ",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/161"
+  },
+  {
+    "createdAt": "2021-08-05T06:45:55Z",
+    "labels": [],
+    "number": 153,
+    "title": "Adding title and card Alignment  has top, now is center",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/153"
+  },
+  {
+    "createdAt": "2021-05-23T14:45:22Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      },
+      {
+        "id": "MDU6TGFiZWwyNjQyMzQxMDA2",
+        "name": "resolved",
+        "description": "resolved but open for confirmation",
+        "color": "f9d0c4"
+      }
+    ],
+    "number": 143,
+    "title": "Re-render color props on state change",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/143"
+  },
+  {
+    "createdAt": "2021-05-01T06:33:42Z",
+    "labels": [],
+    "number": 139,
+    "title": "Dynamic Update doesn't work on multiple pages",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/139"
+  },
+  {
+    "createdAt": "2021-04-25T21:06:34Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 138,
+    "title": "Internationalization",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/138"
+  },
+  {
+    "createdAt": "2021-04-21T16:12:51Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzAy",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ],
+    "number": 135,
+    "title": "Dynamic load can fail to render all items provided",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/135"
+  },
+  {
+    "createdAt": "2021-04-21T08:42:29Z",
+    "labels": [],
+    "number": 133,
+    "title": "allowDynamicUpdate doesn't seems to be working from the demo project",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/133"
+  },
+  {
+    "createdAt": "2021-03-24T08:39:37Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 120,
+    "title": "The autoScroll property of the TimelineCard component",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/120"
+  },
+  {
+    "createdAt": "2021-03-21T08:39:56Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 117,
+    "title": "Scrolling within timeline element description is unreliable",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/117"
+  },
+  {
+    "createdAt": "2020-12-23T14:01:50Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 87,
+    "title": "Zoom in/out",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/87"
+  },
+  {
+    "createdAt": "2020-11-11T04:17:17Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 75,
+    "title": "Support progress tracking",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/75"
+  },
+  {
+    "createdAt": "2020-10-26T06:15:14Z",
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjg0OTk3MzEw",
+        "name": "enhancement",
+        "description": "New feature or request",
+        "color": "a2eeef"
+      }
+    ],
+    "number": 56,
+    "title": "Ability to autoplay the slideshow on load",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/56"
+  },
+  {
+    "createdAt": "2020-10-26T05:46:07Z",
+    "labels": [],
+    "number": 55,
+    "title": "How do I set autoplay when I first enter the page",
+    "url": "https://github.com/prabhuignoto/react-chrono/issues/55"
+  }
+]

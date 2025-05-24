@@ -30,7 +30,7 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
       class="sc-hBDmJg jTlGOJ"
     />
     <span
-      class="sc-dibcMh ipJwI card-sub-title card-subtitle"
+      class="sc-dibcMh hJnNTO card-sub-title card-subtitle"
     >
       This is another test
     </span>
@@ -62,7 +62,7 @@ exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
       class="sc-hBDmJg jTlGOJ"
     />
     <span
-      class="sc-dibcMh ipJwI card-sub-title card-subtitle"
+      class="sc-dibcMh hJnNTO card-sub-title card-subtitle"
     >
       This is another test
     </span>

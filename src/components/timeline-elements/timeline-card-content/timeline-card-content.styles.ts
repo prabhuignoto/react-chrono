@@ -111,6 +111,20 @@ const slideAnimation = (start?: number, end?: number) => keyframes`
   }
 `;
 
+// Extract shared styles into a utility function
+const sharedSemanticStyles = css<{
+  $fontSize?: string;
+  $padding?: boolean;
+  theme: Theme;
+}>`
+  ${baseFontStyles}
+  font-size: ${(p) => p.$fontSize || '1.1rem'};
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
+  display: block;
+`;
+
 // Card Components
 export const TimelineItemContentWrapper = styled.section<
   {
@@ -220,7 +234,7 @@ export const CardSubTitle = styled.h2<{
   padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
 `;
 
-// Semantic configurable components - Better for SEO compliance
+// Refactor CardTitleSemantic to use shared styles
 export const CardTitleSemantic = styled.h1.withConfig({
   shouldForwardProp: (prop) =>
     !['$fontSize', '$padding', 'theme'].includes(prop),
@@ -231,19 +245,15 @@ export const CardTitleSemantic = styled.h1.withConfig({
   theme: Theme;
   as?: string;
 }>`
-  ${baseFontStyles}
+  ${sharedSemanticStyles}
   color: ${(p) => p.theme.cardTitleColor};
-  font-size: ${(p) => p.$fontSize || '1.1rem'};
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
-  display: block;
 
   &.active {
     color: ${(p) => p.theme.primary};
   }
 `;
 
+// Refactor CardSubTitleSemantic to use shared styles
 export const CardSubTitleSemantic = styled.span.withConfig({
   shouldForwardProp: (prop) =>
     !['$fontSize', '$padding', 'theme'].includes(prop),
@@ -254,13 +264,9 @@ export const CardSubTitleSemantic = styled.span.withConfig({
   theme?: Theme;
   as?: string;
 }>`
-  ${baseFontStyles}
+  ${sharedSemanticStyles}
   color: ${(p) => p.theme.cardSubtitleColor};
   font-size: ${(p) => p.$fontSize || '0.9rem'};
-  font-weight: 500;
-  margin-bottom: 0.25rem;
-  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
-  display: block;
 `;
 
 export const CardTitleAnchor = styled.a`
