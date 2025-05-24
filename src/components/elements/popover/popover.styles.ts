@@ -65,6 +65,7 @@ export const Selecter = styled.div<{
   padding: ${(p) => (p.$isMobile ? '0.4rem' : `0.4rem 0.5rem`)};
   user-select: none;
   margin-right: 0.5rem;
+  border: 1px solid transparent;
 `;
 
 // Icon component within the selector with rotation animation

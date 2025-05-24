@@ -27,6 +27,8 @@ export const ToolbarWrapper = styled.div<{ theme: Theme }>`
 export const ToolbarListItem = styled.div`
   padding: 0;
   margin: 0 0.5rem;
+  border: 1px solid transparent;
+  background: none;
 `;
 
 // Icon wrapper styles
