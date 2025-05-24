@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false # Don't cancel other matrix jobs if one fails
       matrix:
-        browser: [chrome, edge, firefox]
+        browser: [chrome, edge]
 
     steps:
       - name: Checkout

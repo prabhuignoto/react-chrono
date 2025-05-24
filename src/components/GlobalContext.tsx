@@ -66,6 +66,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
     textDensity = 'HIGH',
     responsiveBreakPoint = 1024,
     enableBreakPoint,
+    semanticTags,
   } = props;
 
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
@@ -191,10 +192,19 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
   const memoizedMediaSettings = useMemo(
     () => ({
       align: computedMediaAlign,
-      imageFit: 'cover' as const,
+      fit: 'cover' as const,
       ...mediaSettings,
     }),
     [computedMediaAlign, mediaSettings],
+  );
+
+  const memoizedSemanticTags = useMemo(
+    () => ({
+      cardTitle: 'span' as const,
+      cardSubtitle: 'span' as const,
+      ...semanticTags,
+    }),
+    [semanticTags],
   );
 
   const memoizedTheme = useMemo(
@@ -233,6 +243,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
         toggleDarkMode,
         updateHorizontalAllCards,
         updateTextContentDensity,
+        semanticTags: memoizedSemanticTags,
       }) as ContextProps,
     [
       staticDefaults,
@@ -254,6 +265,7 @@ const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
       toggleDarkMode,
       updateHorizontalAllCards,
       updateTextContentDensity,
+      memoizedSemanticTags,
     ],
   );
 

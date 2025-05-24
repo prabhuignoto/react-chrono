@@ -180,7 +180,7 @@ export type TimelineProps = {
 
   mediaSettings?: {
     align?: 'left' | 'right' | 'center';
-    imageFit?: 'cover' | 'contain' | 'fill' | 'none';
+    fit?: 'cover' | 'contain' | 'fill' | 'none';
   };
 
   // mode of the timeline. VERTICAL, HORIZONTAL, VERTICAL_ALTERNATING
@@ -249,6 +249,23 @@ export type TimelineProps = {
 
   // enables the read more button
   useReadMore?: boolean;
+
+  /**
+   * Semantic configuration for card elements.
+   * 
+   * This property allows you to specify the semantic HTML tags to be used for
+   * the card title and subtitle. It is useful for improving accessibility and
+   * aligning with the semantic structure of your application.
+   * 
+   * @property {('h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div')} [cardTitle]
+   *   The HTML tag to use for the card title. Defaults to 'h3' if not specified.
+   * @property {('h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div')} [cardSubtitle]
+   *   The HTML tag to use for the card subtitle. Defaults to 'h4' if not specified.
+   */
+  semanticTags?: {
+    cardTitle?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
+    cardSubtitle?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
+  };
 };
 
 export type SlideShowType = 'reveal' | 'slide_in' | 'slide_from_sides';
