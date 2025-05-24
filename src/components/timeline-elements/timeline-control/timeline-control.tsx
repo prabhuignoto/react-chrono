@@ -1,5 +1,6 @@
 import { TimelineControlModel } from '@models/TimelineControlModel';
 import { Theme } from '@models/Theme';
+import { TimelineMode } from '@models/TimelineModel';
 import cls from 'classnames';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { GlobalContext } from '../../GlobalContext';
@@ -16,12 +17,9 @@ import {
   ScreenReaderOnly,
 } from './timeline-control.styles';
 
-// Define TimelineMode if it's a specific type, for now, using string from context
-// import { TimelineMode } from '@models/TimelineModel';
-
 // Helper component for standard navigation buttons
 interface StandardNavButtonProps {
-  mode: string; // TimelineMode from context is string
+  mode: TimelineMode;
   theme: Theme;
   onClick: () => void;
   title?: string;
