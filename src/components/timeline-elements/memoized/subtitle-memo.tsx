@@ -1,9 +1,6 @@
 import cls from 'classnames';
 import React, { useContext } from 'react';
-import {
-  CardSubTitle,
-  CardSubTitleSemantic,
-} from '../timeline-card-content/timeline-card-content.styles';
+import { CardSubTitleSemantic } from '../timeline-card-content/timeline-card-content.styles';
 import { Content } from './memoized-model';
 import { GlobalContext } from '../../GlobalContext';
 
@@ -18,7 +15,7 @@ const SubTitleMemo = React.memo<Content>(
 
     return content ? (
       <CardSubTitleSemantic
-        as={semanticTags?.cardSubtitle || 'span'}
+        as={semanticTags?.cardSubtitle ?? 'span'}
         style={{ color }}
         dir={dir}
         theme={theme}

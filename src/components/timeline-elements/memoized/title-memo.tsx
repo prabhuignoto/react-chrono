@@ -1,6 +1,5 @@
 import cls from 'classnames';
 import {
-  CardTitle,
   CardTitleAnchor,
   CardTitleSemantic,
 } from '../timeline-card-content/timeline-card-content.styles';
@@ -27,7 +26,7 @@ const TitleMemoComponent = ({
 
   return title ? (
     <CardTitleSemantic
-      as={semanticTags?.cardTitle || 'span'}
+      as={semanticTags?.cardTitle ?? 'span'}
       className={cls(active ? 'active' : '', { [classString]: true })}
       theme={theme}
       style={{ color }}

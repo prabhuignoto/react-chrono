@@ -4,7 +4,6 @@ import { SubTitleMemo } from '../memoized/subtitle-memo';
 import { TitleMemo } from '../memoized/title-memo';
 import { ContentHeaderProps } from './header-footer.model';
 import {
-  CardTitle,
   CardTitleSemantic,
   TimelineCardHeader,
 } from './timeline-card-content.styles';
@@ -35,7 +34,7 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
 
         {isMobile ? (
           <CardTitleSemantic
-            as={semanticTags?.cardTitle || 'span'}
+            as={semanticTags?.cardTitle ?? 'span'}
             $fontSize={'1.2rem'}
             theme={theme}
           >
