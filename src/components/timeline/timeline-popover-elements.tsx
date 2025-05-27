@@ -132,7 +132,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
           description: item.description,
           id: item.id,
           label: item.title,
-          onSelect: () => {},
+          onSelect: () => { },
           title: item.title || `Item ${index + 1}`,
         }))}
         theme={theme}
@@ -157,18 +157,18 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
   const items = useMemo(
     () => [
       {
-        description: 'Show less text',
+        description: buttonTexts.changeDensityOptions.low.helpText,
         id: 'LOW',
         onSelect: () => onChange('LOW'),
         selected: selectedDensity === 'LOW',
-        title: 'Low',
+        title: buttonTexts.changeDensityOptions.low.text,
       },
       {
-        description: 'Show more text',
+        description: buttonTexts.changeDensityOptions.high.helpText,
         id: 'HIGH',
         onSelect: () => onChange('HIGH'),
         selected: selectedDensity === 'HIGH',
-        title: 'High',
+        title: buttonTexts.changeDensityOptions.high.text,
       },
     ],
     [selectedDensity],
