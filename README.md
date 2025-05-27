@@ -221,7 +221,7 @@ Each object in the `items` array can have the following properties:
 | `disableAutoScrollOnClick` | `boolean`  | `false` | Prevents auto-scrolling to the active card when a timeline card or point is clicked.                                        |
 | `onItemSelected`           | `function` |         | Callback function invoked when a timeline item is selected. Passes item data and index.                                     |
 | `onScrollEnd`              | `function` |         | Callback function invoked when the end of the timeline is reached during scrolling.                                         |
-| `focusActiveItemOnLoad`    | `boolean`  | `true`  | Automatically scrolls to and focuses on the `activeItemIndex` when the timeline loads.                                      |
+| `focusActiveItemOnLoad`    | `boolean`  | `false` | Automatically scrolls to and focuses on the `activeItemIndex` when the timeline loads.                                      |
 | `disableInteraction`       | `boolean`  | `false` | Disables all user interactions with the timeline (clicks, keyboard navigation).                                             |
 | `enableQuickJump`          | `boolean`  | `true`  | Allows quick jumping to a timeline item via controls (if toolbar is enabled).                                               |
 | `useReadMore`              | `boolean`  | `true`  | Enables a "read more" button if card content exceeds available space. Set to `false` to always show all text.               |
@@ -239,7 +239,7 @@ Each object in the `items` array can have the following properties:
 | :----------------------- | :------------------------------------ | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `cardHeight`             | `number`                              | `200`      | Minimum height (in pixels) of timeline cards.                                                                                                   |
 | `cardWidth`              | `number`                              | `450`      | Maximum width (in pixels) of timeline cards.                                                                                                    |
-| `itemWidth`              | `number`                              | `300`      | Width (in pixels) of each timeline section in `HORIZONTAL` mode.                                                                                |
+| `itemWidth`              | `number`                              | `200`      | Width (in pixels) of each timeline section in `HORIZONTAL` mode.                                                                                |
 | `contentDetailsHeight`   | `number`                              | `150`      | Height (in pixels) of the detailed content area within a card if `cardDetailedText` is used.                                                    |
 | `lineWidth`              | `number`                              | `3`        | Width (in pixels) of the main timeline track line.                                                                                              |
 | `timelinePointDimension` | `number`                              | `16`       | Diameter (in pixels) of the circular points on the timeline.                                                                                    |
