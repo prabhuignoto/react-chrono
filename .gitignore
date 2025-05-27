@@ -51,3 +51,8 @@ build
 ## Panda
 styled-system
 styled-system-studio
+
+venv
+extract_sonar_issues.py
+sonarqube_issues.csv
+requirements.txt
