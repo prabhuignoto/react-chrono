@@ -82,7 +82,7 @@ export const providerProps: TimelineProps = {
   textDensity: 'HIGH',
   textOverlay: false,
   theme: {
-    cardBgColor: '#fff',
+    cardBgColor: '#ffffff',
     cardDetailsBackGround: '#ffffff',
     cardDetailsColor: '#000',
     cardMediaBgColor: '#ffffff',
@@ -101,7 +101,7 @@ export const providerProps: TimelineProps = {
     titleColor: '#0f52ba',
     titleColorActive: '#0f52ba',
     toolbarBgColor: '#ffffff',
-    toolbarBtnBgColor: '#0f52ba',
+    toolbarBtnBgColor: '#ffffff',
     toolbarTextColor: '#000',
   },
   timelinePointDimension: 16,

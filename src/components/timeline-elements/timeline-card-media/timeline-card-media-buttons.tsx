@@ -15,7 +15,7 @@ const Button = css<{ theme: Theme }>`
   width: 1.5rem;
   margin: 0 0.25rem;
   background: ${(p) => p.theme?.primary};
-  color: #fff;
+  color: #ffffff;
 
   svg {
     width: 70%;

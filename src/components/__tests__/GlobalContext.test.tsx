@@ -118,7 +118,7 @@ const createMockClassNames = () => ({
 const createMockTheme = (): Theme => ({
   primary: '#0f52ba',
   secondary: '#ffdf00',
-  cardBgColor: '#fff',
+  cardBgColor: '#ffffff',
   cardDetailsBackGround: '#ffffff',
   cardDetailsColor: '#000',
   cardMediaBgColor: '#ffffff',

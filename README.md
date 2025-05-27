@@ -13,6 +13,7 @@
 [![styled with Prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://prettier.io/)
 
 <!-- Build & Quality Badges -->
+
 [![Build Status](https://dev.azure.com/prabhummurthy/react-chrono/_apis/build/status/prabhuignoto.react-chrono?branchName=master)](https://dev.azure.com/prabhummurthy/react-chrono/_build/latest?definitionId=7&branchName=master)
 [![DeepScan grade](https://deepscan.io/api/teams/10074/projects/13644/branches/234929/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10074&pid=13644&bid=234929)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/f2e24a98defd4e4fa7f6f24d86b8dab5)](https://www.codacy.com/manual/prabhuignoto/react-chrono?utm_source=github.com&utm_medium=referral&utm_content=prabhuignoto/react-chrono&utm_campaign=Badge_Grade)
@@ -54,7 +55,7 @@ React Chrono is a modern timeline component for React that offers a variety of f
   - [Nested Timelines](#nested-timelines-1)
   - [Custom Class Names](#custom-class-names)
   - [Custom Font Sizes](#custom-font-sizes)
-  - [Custom Button Alt Text](#custom-button-alt-text)
+  - [Internationalization](#internationalization)
 - [📦 Examples & Demos](#-examples--demos)
   - [CodeSandbox Examples](#codesandbox-examples)
   - [Kitchen Sink Demo](#kitchen-sink-demo)
@@ -68,17 +69,17 @@ React Chrono is a modern timeline component for React that offers a variety of f
 
 ## ✨ Features
 
--   🚥 **Multiple Modes**: Render timelines in Horizontal, Vertical, or Vertical-Alternating layouts.
--   📺 **Slideshow**: Auto-play the timeline with slideshow functionality.
--   🖼️ **Media Support**: Easily display images and videos within timeline cards.
--   ⌨️ **Keyboard Accessible**: Navigate the timeline using keyboard controls.
--   🔧 **Custom Content**: Render custom React components within timeline cards.
--   🌿 **Nested Timelines**: Display timelines within timeline cards for complex narratives.
--   ⚡ **Data-Driven API**: Configure the timeline dynamically using a simple data structure.
--   🎨 **Theming**: Customize colors and appearance with ease.
--   🎭 **Custom Icons**: Use your own icons for timeline points.
--   💪 **TypeScript**: Built with TypeScript for robust development.
--   💅 **Styled with Styled Component**: Leverages Styled Component for flexible styling.
+- 🚥 **Multiple Modes**: Render timelines in Horizontal, Vertical, or Vertical-Alternating layouts.
+- 📺 **Slideshow**: Auto-play the timeline with slideshow functionality.
+- 🖼️ **Media Support**: Easily display images and videos within timeline cards.
+- ⌨️ **Keyboard Accessible**: Navigate the timeline using keyboard controls.
+- 🔧 **Custom Content**: Render custom React components within timeline cards.
+- 🌿 **Nested Timelines**: Display timelines within timeline cards for complex narratives.
+- ⚡ **Data-Driven API**: Configure the timeline dynamically using a simple data structure.
+- 🎨 **Theming**: Customize colors and appearance with ease.
+- 🎭 **Custom Icons**: Use your own icons for timeline points.
+- 💪 **TypeScript**: Built with TypeScript for robust development.
+- 💅 **Styled with Styled Component**: Leverages Styled Component for flexible styling.
 
 ## 💾 Installation
 
@@ -95,32 +96,35 @@ npm install react-chrono
 Ensure you wrap the `Chrono` component in a container with a specified `width` and `height`.
 
 ### Basic Horizontal Mode
+
 By default, if no `mode` is specified, the component renders in `HORIZONTAL` mode.
 
 ```jsx
-import React from "react";
-import { Chrono } from "react-chrono";
+import React from 'react';
+import { Chrono } from 'react-chrono';
 
 const App = () => {
   const items = [
     {
-      title: "May 1940",
-      cardTitle: "Dunkirk",
-      url: "http://www.history.com",
-      cardSubtitle: "Men of the British Expeditionary Force (BEF) wade out to a destroyer...",
-      cardDetailedText: "Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.",
+      title: 'May 1940',
+      cardTitle: 'Dunkirk',
+      url: 'http://www.history.com',
+      cardSubtitle:
+        'Men of the British Expeditionary Force (BEF) wade out to a destroyer...',
+      cardDetailedText:
+        'Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.',
       media: {
-        type: "IMAGE",
+        type: 'IMAGE',
         source: {
-          url: "http://someurl/image.jpg"
-        }
-      }
+          url: 'http://someurl/image.jpg',
+        },
+      },
     },
     // ... more items
   ];
 
   return (
-    <div style={{ width: "800px", height: "400px" }}>
+    <div style={{ width: '800px', height: '400px' }}>
       <Chrono items={items} />
     </div>
   );
@@ -128,9 +132,11 @@ const App = () => {
 
 export default App;
 ```
+
 ![Horizontal Timeline Example](./readme-assets/horizontal_all.jpg)
 
 ### Vertical Mode
+
 To render the timeline vertically, set the `mode` prop to `VERTICAL`.
 
 ```jsx
@@ -138,9 +144,11 @@ To render the timeline vertically, set the `mode` prop to `VERTICAL`.
   <Chrono items={items} mode="VERTICAL" />
 </div>
 ```
+
 ![Vertical Timeline Example](./readme-assets/vertical_basic.jpg)
 
 ### Vertical Alternating Mode
+
 For a layout where cards alternate sides, use `VERTICAL_ALTERNATING`.
 
 ```jsx
@@ -148,6 +156,7 @@ For a layout where cards alternate sides, use `VERTICAL_ALTERNATING`.
   <Chrono items={items} mode="VERTICAL_ALTERNATING" />
 </div>
 ```
+
 ![Vertical Alternating Timeline Example](./readme-assets/vertical_alternating.jpg)
 
 ## ⚙️ Props
@@ -156,33 +165,33 @@ React Chrono offers a wide range of props for customization.
 
 ### Core Props
 
-| Name        | Type                                           | Default              | Description                                                                                                |
-| :---------- | :--------------------------------------------- | :------------------- | :--------------------------------------------------------------------------------------------------------- |
-| `items`     | `TimelineItemModel[]`                          | `[]`                 | An array of [Timeline Item objects](#timeline-item-model) to display.                                      |
-| `mode`      | `'HORIZONTAL'`, `'VERTICAL'`, `'VERTICAL_ALTERNATING'` | `'HORIZONTAL'`       | Sets the layout mode of the timeline. Changed to `HORIZONTAL` from `VERTICAL_ALTERNATING` for new projects. |
-| `theme`     | `Theme`                                        | `{...}`              | Customizes colors. See [Theming & Styling](#theming--styling) for details.                                 |
+| Name    | Type                                                   | Default        | Description                                                                                                 |
+| :------ | :----------------------------------------------------- | :------------- | :---------------------------------------------------------------------------------------------------------- |
+| `items` | `TimelineItemModel[]`                                  | `[]`           | An array of [Timeline Item objects](#timeline-item-model) to display.                                       |
+| `mode`  | `'HORIZONTAL'`, `'VERTICAL'`, `'VERTICAL_ALTERNATING'` | `'HORIZONTAL'` | Sets the layout mode of the timeline. Changed to `HORIZONTAL` from `VERTICAL_ALTERNATING` for new projects. |
+| `theme` | `Theme`                                                | `{...}`        | Customizes colors. See [Theming & Styling](#theming--styling) for details.                                  |
 
 ### Timeline Item Model
 
 Each object in the `items` array can have the following properties:
 
-| Property           | Type               | Description                                                                                                |
-| :----------------- | :----------------- | :--------------------------------------------------------------------------------------------------------- |
-| `title`            | `string`           | Title of the timeline item (often a date or short label).                                                  |
-| `cardTitle`        | `string`           | Title displayed on the timeline card.                                                                      |
-| `cardSubtitle`     | `string`           | Subtitle text displayed on the timeline card.                                                              |
-| `cardDetailedText` | `string` or `string[]` | Detailed text for the card. An array of strings will render each string as a separate paragraph.         |
-| `media`            | `TimelineMediaModel` | Object to configure image or video display. See [Media Handling](#media-handling).                         |
-| `url`              | `string`           | URL associated with the timeline item's title. Clicking the title will navigate to this URL.               |
-| `date`             | `Date` or `string` | Date to be used in the title. If provided, this will override the `title` property for display purposes. |
-| `timelineContent`  | `ReactNode`        | Custom React content to render inside the card. Overrides `cardDetailedText`. See [Rendering Custom Content](#rendering-custom-content-1). |
-| `items`            | `TimelineItemModel[]` | Array of timeline items for creating [Nested Timelines](#nested-timelines-1).                            |
-| `active`           | `boolean`          | If true, this item will be initially active (only for the first matching item).                            |
-| `id`               | `string`           | A unique identifier for the timeline item.                                                                 |
-| `visible`          | `boolean`          | Controls the visibility of the timeline item.                                                              |
-
+| Property           | Type                   | Description                                                                                                                                |
+| :----------------- | :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`            | `string`               | Title of the timeline item (often a date or short label).                                                                                  |
+| `cardTitle`        | `string`               | Title displayed on the timeline card.                                                                                                      |
+| `cardSubtitle`     | `string`               | Subtitle text displayed on the timeline card.                                                                                              |
+| `cardDetailedText` | `string` or `string[]` | Detailed text for the card. An array of strings will render each string as a separate paragraph.                                           |
+| `media`            | `TimelineMediaModel`   | Object to configure image or video display. See [Media Handling](#media-handling).                                                         |
+| `url`              | `string`               | URL associated with the timeline item's title. Clicking the title will navigate to this URL.                                               |
+| `date`             | `Date` or `string`     | Date to be used in the title. If provided, this will override the `title` property for display purposes.                                   |
+| `timelineContent`  | `ReactNode`            | Custom React content to render inside the card. Overrides `cardDetailedText`. See [Rendering Custom Content](#rendering-custom-content-1). |
+| `items`            | `TimelineItemModel[]`  | Array of timeline items for creating [Nested Timelines](#nested-timelines-1).                                                              |
+| `active`           | `boolean`              | If true, this item will be initially active (only for the first matching item).                                                            |
+| `id`               | `string`               | A unique identifier for the timeline item.                                                                                                 |
+| `visible`          | `boolean`              | Controls the visibility of the timeline item.                                                                                              |
 
 **Example `TimelineItemModel`:**
+
 ```js
 {
   title: "May 1940",
@@ -204,58 +213,59 @@ Each object in the `items` array can have the following properties:
 
 ### Navigation & Interaction
 
-| Name                       | Type        | Default   | Description                                                                                             |
-| :------------------------- | :---------- | :-------- | :------------------------------------------------------------------------------------------------------ |
-| `activeItemIndex`          | `number`    | `0`       | Index of the timeline item to be active on load.                                                        |
-| `disableNavOnKey`          | `boolean`   | `false`   | Disables keyboard navigation (<kbd>LEFT</kbd>/<kbd>RIGHT</kbd> for Horizontal, <kbd>UP</kbd>/<kbd>DOWN</kbd> for Vertical). |
-| `disableClickOnCircle`     | `boolean`   | `false`   | Disables click action on timeline points/circles.                                                       |
-| `disableAutoScrollOnClick` | `boolean`   | `false`   | Prevents auto-scrolling to the active card when a timeline card or point is clicked.                    |
-| `onItemSelected`           | `function`  |           | Callback function invoked when a timeline item is selected. Passes item data and index.                 |
-| `onScrollEnd`              | `function`  |           | Callback function invoked when the end of the timeline is reached during scrolling.                     |
-| `focusActiveItemOnLoad`    | `boolean`   | `true`    | Automatically scrolls to and focuses on the `activeItemIndex` when the timeline loads.                  |
-| `disableInteraction`       | `boolean`   | `false`   | Disables all user interactions with the timeline (clicks, keyboard navigation).                         |
-| `enableQuickJump`          | `boolean`   | `true`    | Allows quick jumping to a timeline item via controls (if toolbar is enabled).                           |
-| `useReadMore`              | `boolean`   | `true`    | Enables a "read more" button if card content exceeds available space. Set to `false` to always show all text. |
+| Name                       | Type       | Default | Description                                                                                                                 |
+| :------------------------- | :--------- | :------ | :-------------------------------------------------------------------------------------------------------------------------- |
+| `activeItemIndex`          | `number`   | `0`     | Index of the timeline item to be active on load.                                                                            |
+| `disableNavOnKey`          | `boolean`  | `false` | Disables keyboard navigation (<kbd>LEFT</kbd>/<kbd>RIGHT</kbd> for Horizontal, <kbd>UP</kbd>/<kbd>DOWN</kbd> for Vertical). |
+| `disableClickOnCircle`     | `boolean`  | `false` | Disables click action on timeline points/circles.                                                                           |
+| `disableAutoScrollOnClick` | `boolean`  | `false` | Prevents auto-scrolling to the active card when a timeline card or point is clicked.                                        |
+| `onItemSelected`           | `function` |         | Callback function invoked when a timeline item is selected. Passes item data and index.                                     |
+| `onScrollEnd`              | `function` |         | Callback function invoked when the end of the timeline is reached during scrolling.                                         |
+| `focusActiveItemOnLoad`    | `boolean`  | `false` | Automatically scrolls to and focuses on the `activeItemIndex` when the timeline loads.                                      |
+| `disableInteraction`       | `boolean`  | `false` | Disables all user interactions with the timeline (clicks, keyboard navigation).                                             |
+| `enableQuickJump`          | `boolean`  | `true`  | Allows quick jumping to a timeline item via controls (if toolbar is enabled).                                               |
+| `useReadMore`              | `boolean`  | `true`  | Enables a "read more" button if card content exceeds available space. Set to `false` to always show all text.               |
 
 **Keyboard Navigation:**
--   **Horizontal Mode**: Use <kbd>LEFT</kbd> and <kbd>RIGHT</kbd> arrow keys.
--   **Vertical/Vertical Alternating Mode**: Use <kbd>UP</kbd> and <kbd>DOWN</kbd> arrow keys.
--   <kbd>HOME</kbd>: Jump to the first item.
--   <kbd>END</kbd>: Jump to the last item.
+
+- **Horizontal Mode**: Use <kbd>LEFT</kbd> and <kbd>RIGHT</kbd> arrow keys.
+- **Vertical/Vertical Alternating Mode**: Use <kbd>UP</kbd> and <kbd>DOWN</kbd> arrow keys.
+- <kbd>HOME</kbd>: Jump to the first item.
+- <kbd>END</kbd>: Jump to the last item.
 
 ### Layout & Sizing
 
-| Name                     | Type                               | Default          | Description                                                                                                                               |
-| :----------------------- | :--------------------------------- | :--------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
-| `cardHeight`             | `number`                           | `200`            | Minimum height (in pixels) of timeline cards.                                                                                             |
-| `cardWidth`              | `number`                           | `450`            | Maximum width (in pixels) of timeline cards.                                                                                              |
-| `itemWidth`              | `number`                           | `300`            | Width (in pixels) of each timeline section in `HORIZONTAL` mode.                                                                          |
-| `contentDetailsHeight`   | `number`                           | `150`            | Height (in pixels) of the detailed content area within a card if `cardDetailedText` is used.                                              |
-| `lineWidth`              | `number`                           | `3`              | Width (in pixels) of the main timeline track line.                                                                                        |
-| `timelinePointDimension` | `number`                           | `16`             | Diameter (in pixels) of the circular points on the timeline.                                                                              |
-| `nestedCardHeight`       | `number`                           | `150`            | Height (in pixels) of cards within a [nested timeline](#nested-timelines-1).                                                              |
-| `scrollable`             | `boolean` or `{ scrollbar: boolean }` | `true`           | Makes `VERTICAL` and `VERTICAL_ALTERNATING` modes scrollable. Set to `{ scrollbar: true }` to show the scrollbar.                         |
-| `enableBreakPoint`       | `boolean`                          | `true`           | If true, `VERTICAL_ALTERNATING` mode automatically switches to `VERTICAL` mode when `responsiveBreakPoint` is reached.                     |
-| `responsiveBreakPoint`   | `number`                           | `768`            | Viewport width (in pixels) at which `VERTICAL_ALTERNATING` mode switches to `VERTICAL` if `enableBreakPoint` is true. Default changed to `768`. |
-| `cardPositionHorizontal` | `'TOP'` or `'BOTTOM'`              | `'BOTTOM'`       | Positions the card above or below the timeline in `HORIZONTAL` mode. Default changed to `'BOTTOM'`.                                       |
-| `flipLayout`             | `boolean`                          | `false`          | Reverses the layout direction (e.g., Right-to-Left for horizontal, or swaps sides for vertical alternating).                              |
-| `showAllCardsHorizontal` | `boolean`                          | `false`          | In `HORIZONTAL` mode, displays all cards simultaneously instead of only the active one.                                                   |
+| Name                     | Type                                  | Default    | Description                                                                                                                                     |
+| :----------------------- | :------------------------------------ | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cardHeight`             | `number`                              | `200`      | Minimum height (in pixels) of timeline cards.                                                                                                   |
+| `cardWidth`              | `number`                              | `450`      | Maximum width (in pixels) of timeline cards.                                                                                                    |
+| `itemWidth`              | `number`                              | `200`      | Width (in pixels) of each timeline section in `HORIZONTAL` mode.                                                                                |
+| `contentDetailsHeight`   | `number`                              | `150`      | Height (in pixels) of the detailed content area within a card if `cardDetailedText` is used.                                                    |
+| `lineWidth`              | `number`                              | `3`        | Width (in pixels) of the main timeline track line.                                                                                              |
+| `timelinePointDimension` | `number`                              | `16`       | Diameter (in pixels) of the circular points on the timeline.                                                                                    |
+| `nestedCardHeight`       | `number`                              | `150`      | Height (in pixels) of cards within a [nested timeline](#nested-timelines-1).                                                                    |
+| `scrollable`             | `boolean` or `{ scrollbar: boolean }` | `true`     | Makes `VERTICAL` and `VERTICAL_ALTERNATING` modes scrollable. Set to `{ scrollbar: true }` to show the scrollbar.                               |
+| `enableBreakPoint`       | `boolean`                             | `true`     | If true, `VERTICAL_ALTERNATING` mode automatically switches to `VERTICAL` mode when `responsiveBreakPoint` is reached.                          |
+| `responsiveBreakPoint`   | `number`                              | `768`      | Viewport width (in pixels) at which `VERTICAL_ALTERNATING` mode switches to `VERTICAL` if `enableBreakPoint` is true. Default changed to `768`. |
+| `cardPositionHorizontal` | `'TOP'` or `'BOTTOM'`                 | `'BOTTOM'` | Positions the card above or below the timeline in `HORIZONTAL` mode. Default changed to `'BOTTOM'`.                                             |
+| `flipLayout`             | `boolean`                             | `false`    | Reverses the layout direction (e.g., Right-to-Left for horizontal, or swaps sides for vertical alternating).                                    |
+| `showAllCardsHorizontal` | `boolean`                             | `false`    | In `HORIZONTAL` mode, displays all cards simultaneously instead of only the active one.                                                         |
 
 ### Media Handling
 
 The `media` object within a [Timeline Item](#timeline-item-model) configures images or videos.
 
-| `media` Property | Type                               | Description                                                                                             |
-| :--------------- | :--------------------------------- | :------------------------------------------------------------------------------------------------------ |
-| `type`           | `'IMAGE'` or `'VIDEO'`             | Specifies the type of media.                                                                            |
-| `source`         | `{ url: string, type?: string }`   | `url`: URL of the image or video. `type` (for video): e.g., `'mp4'`, `'webm'`.                          |
-| `name`           | `string`                           | Alt text for images or a descriptive name for videos.                                                   |
-| `active`         | `boolean`                          | (Video only) If true, video will attempt to play when its card becomes active.                          |
-| `id`             | `string`                           | A unique ID for the media element.                                                                      |
-| `videoOptions`   | `HTMLVideoElement attributes`      | (Video only) An object containing standard HTML5 video attributes like `loop`, `muted`, `autoPlay`, etc. |
-
+| `media` Property | Type                             | Description                                                                                              |
+| :--------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| `type`           | `'IMAGE'` or `'VIDEO'`           | Specifies the type of media.                                                                             |
+| `source`         | `{ url: string, type?: string }` | `url`: URL of the image or video. `type` (for video): e.g., `'mp4'`, `'webm'`.                           |
+| `name`           | `string`                         | Alt text for images or a descriptive name for videos.                                                    |
+| `active`         | `boolean`                        | (Video only) If true, video will attempt to play when its card becomes active.                           |
+| `id`             | `string`                         | A unique ID for the media element.                                                                       |
+| `videoOptions`   | `HTMLVideoElement attributes`    | (Video only) An object containing standard HTML5 video attributes like `loop`, `muted`, `autoPlay`, etc. |
 
 **Image Example:**
+
 ```js
 media: {
   type: "IMAGE",
@@ -267,6 +277,7 @@ media: {
 ```
 
 **Video Example (auto-plays when active, muted):**
+
 ```js
 media: {
   type: "VIDEO",
@@ -278,15 +289,16 @@ media: {
   videoOptions: { autoPlay: true, muted: true }
 }
 ```
+
 ![Timeline with Media](./readme-assets/media.png)
 
 **Media Settings Prop (`mediaSettings`):**
 This top-level prop on `<Chrono>` controls global media display:
 
-| Name    | Type                          | Default  | Description                                                                 |
-| :------ | :---------------------------- | :------- | :-------------------------------------------------------------------------- |
-| `align` | `'left'`, `'right'`, `'center'` | `'left'` | Alignment of media within the card. Default changed to `'left'`.            |
-| `fit`   | `'cover'`, `'contain'`, `'fill'`, `'none'`, `'scale-down'` | `'cover'`  | CSS `object-fit` property for images.                                       |
+| Name    | Type                                                       | Default   | Description                                                      |
+| :------ | :--------------------------------------------------------- | :-------- | :--------------------------------------------------------------- |
+| `align` | `'left'`, `'right'`, `'center'`                            | `'left'`  | Alignment of media within the card. Default changed to `'left'`. |
+| `fit`   | `'cover'`, `'contain'`, `'fill'`, `'none'`, `'scale-down'` | `'cover'` | CSS `object-fit` property for images.                            |
 
 ```jsx
 <Chrono items={items} mediaSettings={{ align: 'right', fit: 'contain' }} />
@@ -294,99 +306,102 @@ This top-level prop on `<Chrono>` controls global media display:
 
 ### Content & Display
 
-| Name                   | Type        | Default        | Description                                                                                                                            |
-| :--------------------- | :---------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
-| `borderLessCards`      | `boolean`   | `false`        | Removes borders and shadows from timeline cards for a flatter look.                                                                    |
-| `cardLess`             | `boolean`   | `false`        | Hides timeline cards, showing only titles/points. Useful for a very compact timeline.                                                  |
-| `disableTimelinePoint` | `boolean`   | `false`        | Hides the circular points on the timeline track.                                                                                       |
-| `timelinePointShape`   | `'circle'`, `'square'`, `'diamond'` | `'circle'`     | Configures the shape of the points on the timeline.                                                                    |
-| `textOverlay`          | `boolean`   | `false`        | Displays text content as an overlay on top of media elements. Requires `text` property in timeline items.                              |
-| `parseDetailsAsHTML`   | `boolean`   | `false`        | If true, `cardDetailedText` will be parsed as HTML. Use with caution due to XSS risks if content is user-supplied.                     |
-| `titleDateFormat`      | `string`    | `'MMM DD, YYYY'` | Date format for item titles when using the `date` property in items. Supports all [day.js](https://day.js.org/) formats.             |
-| `textDensity`          | `'LOW'` or `'HIGH'` | `'HIGH'`       | Configures the amount of text displayed in cards. `'LOW'` might truncate more aggressively.                                        |
+| Name                   | Type                                | Default          | Description                                                                                                              |
+| :--------------------- | :---------------------------------- | :--------------- | :----------------------------------------------------------------------------------------------------------------------- |
+| `borderLessCards`      | `boolean`                           | `false`          | Removes borders and shadows from timeline cards for a flatter look.                                                      |
+| `cardLess`             | `boolean`                           | `false`          | Hides timeline cards, showing only titles/points. Useful for a very compact timeline.                                    |
+| `disableTimelinePoint` | `boolean`                           | `false`          | Hides the circular points on the timeline track.                                                                         |
+| `timelinePointShape`   | `'circle'`, `'square'`, `'diamond'` | `'circle'`       | Configures the shape of the points on the timeline.                                                                      |
+| `textOverlay`          | `boolean`                           | `false`          | Displays text content as an overlay on top of media elements. Requires `text` property in timeline items.                |
+| `parseDetailsAsHTML`   | `boolean`                           | `false`          | If true, `cardDetailedText` will be parsed as HTML. Use with caution due to XSS risks if content is user-supplied.       |
+| `titleDateFormat`      | `string`                            | `'MMM DD, YYYY'` | Date format for item titles when using the `date` property in items. Supports all [day.js](https://day.js.org/) formats. |
+| `textDensity`          | `'LOW'` or `'HIGH'`                 | `'HIGH'`         | Configures the amount of text displayed in cards. `'LOW'` might truncate more aggressively.                              |
 
 **Text Overlay Mode:**
 Enable `textOverlay` and provide a `text` property in your `items`.
+
 ```jsx
 const items = [
   {
     title: 'First item',
-    media: { type: 'IMAGE', source: { url: 'https://example.com/image.jpg' }},
-    text: 'This is the caption for the first item, appearing over the image.'
-  }
+    media: { type: 'IMAGE', source: { url: 'https://example.com/image.jpg' } },
+    text: 'This is the caption for the first item, appearing over the image.',
+  },
 ];
 <Chrono items={items} textOverlay />;
 ```
+
 ![Text Overlay Example](./readme-assets/text_overlay.jpg)
 
 ### Theming & Styling
 
 Use the `theme` prop to customize colors:
+
 ```jsx
 <Chrono
   items={items}
   theme={{
-    primary: 'red',          // Main timeline color (points, lines)
-    secondary: 'blue',       // Background color for timeline cards or other elements depending on mode
-    cardBgColor: 'yellow',   // Background color of the timeline cards
-    cardForeColor: 'black',  // Text color within timeline cards
-    titleColor: 'black',     // Color of the timeline item titles (e.g., dates)
+    primary: 'red', // Main timeline color (points, lines)
+    secondary: 'blue', // Background color for timeline cards or other elements depending on mode
+    cardBgColor: 'yellow', // Background color of the timeline cards
+    cardForeColor: 'black', // Text color within timeline cards
+    titleColor: 'black', // Color of the timeline item titles (e.g., dates)
     titleColorActive: 'red', // Color of the active timeline item title
   }}
 />
 ```
+
 > For a complete list of themeable properties, please refer to the `Theme` type definition in the source code or Storybook examples.
 
 **Dark Mode Toggle:**
-| Name               | Type       | Default | Description                                                                                                |
+| Name | Type | Default | Description |
 | :----------------- | :--------- | :------ | :--------------------------------------------------------------------------------------------------------- |
-| `enableDarkToggle` | `boolean`  | `false` | Adds a toggle switch to the toolbar for enabling dark mode (if dark theme is configured).                  |
-| `onThemeChange`    | `function` |         | Callback invoked when the theme changes, e.g., via the dark mode toggle. Passes the new theme object.        |
-
+| `enableDarkToggle` | `boolean` | `false` | Adds a toggle switch to the toolbar for enabling dark mode (if dark theme is configured). |
+| `onThemeChange` | `function` | | Callback invoked when the theme changes, e.g., via the dark mode toggle. Passes the new theme object. |
 
 ### Slideshow
 
-| Name                | Type                                     | Default            | Description                                                                                                                            |
-| :------------------ | :--------------------------------------- | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
-| `slideShow`         | `boolean`                                | `false`            | Enables slideshow mode and shows play/pause controls in the toolbar.                                                                   |
-| `slideItemDuration` | `number`                                 | `2000`             | Duration (in milliseconds) each timeline item remains active during a slideshow. Default changed to `2000`.                            |
+| Name                | Type                                           | Default          | Description                                                                                                                                                    |
+| :------------------ | :--------------------------------------------- | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slideShow`         | `boolean`                                      | `false`          | Enables slideshow mode and shows play/pause controls in the toolbar.                                                                                           |
+| `slideItemDuration` | `number`                                       | `2000`           | Duration (in milliseconds) each timeline item remains active during a slideshow. Default changed to `2000`.                                                    |
 | `slideShowType`     | `'reveal'`, `'slide_from_sides'`, `'slide_in'` | Varies by `mode` | Type of animation for slideshow transitions. Defaults: `VERTICAL` -> `'reveal'`, `VERTICAL_ALTERNATING` -> `'slide_from_sides'`, `HORIZONTAL` -> `'slide_in'`. |
 
 ```jsx
 <Chrono items={items} slideShow slideItemDuration={3000} />
 ```
+
 > Slideshow can be stopped by clicking the stop button or pressing <kbd>ESC</kbd>.
 
 ### Search
 
-| Name                | Type      | Default             | Description                                                                                                |
-| :------------------ | :-------- | :------------------ | :--------------------------------------------------------------------------------------------------------- |
-| `searchPlaceholder` | `string`  | `"Search..."`       | Placeholder text for the search input in the toolbar.                                                      |
-| `searchAriaLabel`   | `string`  | `"Search timeline"` | ARIA label for the search input for accessibility.                                                         |
-| `clearSearch`       | `string`  | `"Clear search"`    | Text/ARIA label for the clear search button.                                                               |
+| Name                | Type     | Default             | Description                                           |
+| :------------------ | :------- | :------------------ | :---------------------------------------------------- |
+| `searchPlaceholder` | `string` | `"Search..."`       | Placeholder text for the search input in the toolbar. |
+| `searchAriaLabel`   | `string` | `"Search timeline"` | ARIA label for the search input for accessibility.    |
+| `clearSearch`       | `string` | `"Clear search"`    | Text/ARIA label for the clear search button.          |
 
 ```jsx
-<Chrono
-  items={data}
-  searchPlaceholder="Find in timeline..."
-/>
+<Chrono items={data} searchPlaceholder="Find in timeline..." />
 ```
+
 > Search functionality is part of the toolbar. To hide search (and the toolbar), set `disableToolbar={true}`.
 
 ### Miscellaneous
 
-| Name                     | Type        | Default   | Description                                                                                                                               |
-| :----------------------- | :---------- | :-------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
-| `allowDynamicUpdate`     | `boolean`   | `false`   | Enables dynamic updates of timeline items. If true, changes to the `items` prop will re-render the timeline.                              |
-| `noUniqueId`             | `boolean`   | `false`   | Prevents generating a unique ID for the timeline wrapper. Use with `uniqueId` if you need to set a specific ID.                             |
-| `uniqueId`               | `string`    |           | Sets a custom unique ID for the timeline wrapper. Useful with `noUniqueId={true}`.                                                        |
-| `disableToolbar`         | `boolean`   | `false`   | Hides the entire toolbar/control panel.                                                                                                   |
-| `toolbarPosition`        | `'TOP'` or `'BOTTOM'` | `'TOP'`   | Positions the toolbar at the top or bottom of the timeline.                                                                       |
-| `highlightCardsOnHover`  | `boolean`   | `false`   | Highlights timeline cards on mouse hover.                                                                                                 |
+| Name                    | Type                  | Default | Description                                                                                                     |
+| :---------------------- | :-------------------- | :------ | :-------------------------------------------------------------------------------------------------------------- |
+| `allowDynamicUpdate`    | `boolean`             | `false` | Enables dynamic updates of timeline items. If true, changes to the `items` prop will re-render the timeline.    |
+| `noUniqueId`            | `boolean`             | `false` | Prevents generating a unique ID for the timeline wrapper. Use with `uniqueId` if you need to set a specific ID. |
+| `uniqueId`              | `string`              |         | Sets a custom unique ID for the timeline wrapper. Useful with `noUniqueId={true}`.                              |
+| `disableToolbar`        | `boolean`             | `false` | Hides the entire toolbar/control panel.                                                                         |
+| `toolbarPosition`       | `'TOP'` or `'BOTTOM'` | `'TOP'` | Positions the toolbar at the top or bottom of the timeline.                                                     |
+| `highlightCardsOnHover` | `boolean`             | `false` | Highlights timeline cards on mouse hover.                                                                       |
 
 ## 🎨 Customization
 
 ### Rendering Custom Content
+
 Pass React elements as children to `<Chrono>`. Each child will be rendered into a timeline card. This can be combined with the `items` prop to provide titles or other metadata.
 
 ```jsx
@@ -401,13 +416,14 @@ const customItems = [
     <p>This is fully custom JSX rendered in the first card.</p>
   </div>
   <div>
-    <img src="<url_to_image>" alt="Custom Image" style={{width: "100%"}} />
+    <img src="<url_to_image>" alt="Custom Image" style={{ width: '100%' }} />
     <p>An image in the second card.</p>
   </div>
-</Chrono>
+</Chrono>;
 ```
 
 ### Custom Icons
+
 Provide images for timeline points by wrapping them in a `div` with `className="chrono-icons"` as a child of `<Chrono>`. Icons are applied sequentially.
 
 ```jsx
@@ -426,25 +442,33 @@ Provide images for timeline points by wrapping them in a `div` with `className="
 ```
 
 ### Nested Timelines
+
 Create timelines within timeline cards by providing an `items` array within a parent timeline item.
+
 ```jsx
 const itemsWithNested = [
   {
     title: 'Main Event 1',
     cardTitle: 'Chapter 1',
-    items: [ // Nested timeline
+    items: [
+      // Nested timeline
       { cardTitle: 'Sub-event 1.1', cardSubtitle: 'Details for 1.1' },
-      { cardTitle: 'Sub-event 1.2', media: { type: "IMAGE", source: { url: '...' } } },
+      {
+        cardTitle: 'Sub-event 1.2',
+        media: { type: 'IMAGE', source: { url: '...' } },
+      },
     ],
   },
   { title: 'Main Event 2', cardTitle: 'Chapter 2' },
 ];
 
-<Chrono mode="VERTICAL" items={itemsWithNested} nestedCardHeight={120} />
+<Chrono mode="VERTICAL" items={itemsWithNested} nestedCardHeight={120} />;
 ```
 
 ### Custom Class Names
+
 Apply your own CSS classes to various parts of the timeline using the `classNames` prop.
+
 ```jsx
 <Chrono
   items={items}
@@ -455,7 +479,7 @@ Apply your own CSS classes to various parts of the timeline using the `className
     cardText: 'my-card-text',
     cardTitle: 'my-card-title',
     controls: 'my-timeline-controls', // Class for the toolbar
-    title: 'my-timeline-title',      // Class for the item titles (e.g., dates)
+    title: 'my-timeline-title', // Class for the item titles (e.g., dates)
     timelinePoint: 'my-timeline-point',
     timelineTrack: 'my-timeline-track',
   }}
@@ -463,7 +487,9 @@ Apply your own CSS classes to various parts of the timeline using the `className
 ```
 
 ### Custom Font Sizes
+
 Adjust font sizes for card elements using the `fontSizes` prop.
+
 ```jsx
 <Chrono
   items={data}
@@ -476,55 +502,130 @@ Adjust font sizes for card elements using the `fontSizes` prop.
 />
 ```
 
-### Custom Button Alt Text
-Customize the `alt` text for toolbar navigation buttons via `buttonTexts`.
+### Internationalization
+
+Customize all text displayed in the timeline interface using the `buttonTexts` prop. This enables full internationalization support.
+
 ```jsx
 <Chrono
   items={data}
   buttonTexts={{
-    first: 'Jump to First Item',
-    last: 'Jump to Last Item',
-    next: 'View Next Item',
-    previous: 'View Previous Item',
-    play: 'Start Slideshow',
-    stop: 'Stop Slideshow', // Added for completeness
-    jumpTo: 'Jump to specific item' // Added for completeness
+    // Navigation buttons
+    first: 'Go to First',
+    last: 'Go to Last',
+    next: 'Next',
+    previous: 'Previous',
+
+    // Slideshow controls
+    play: 'Play Slideshow',
+    stop: 'Stop Slideshow',
+
+    // Layout and density controls
+    changeLayout: 'Change layout',
+    changeDensity: 'Change density',
+    jumpTo: 'Jump to',
+
+    // Search functionality
+    searchPlaceholder: 'Search Timeline',
+    searchAriaLabel: 'Search timeline content',
+    clearSearch: 'Clear Search',
+    previousMatch: 'Previous Match',
+    nextMatch: 'Next Match',
+
+    // Accessibility labels
+    timelinePoint: 'Timeline point',
+    timelineNavigation: 'Timeline Navigation',
+    timeline: 'Timeline',
+    timelineOutline: 'Timeline outline',
+    timelineMedia: 'Timeline media',
+    openOutline: 'Open outline',
+    closeOutline: 'Close outline',
+
+    // Density options
+    densityLow: 'Low',
+    densityHigh: 'High',
+    densityLowDescription: 'Show less text',
+    densityHighDescription: 'Show more text',
+
+    // Error messages and loading states
+    videoLoadError: 'Failed to load the video',
+    imageLoadError: 'Failed to load the image.',
+    loadingNestedTimeline: 'Loading nested timeline...',
+    loadingOutline: 'Loading outline...',
+
+    // Fallback text
+    itemFallback: 'Item', // Used for "Item 1", "Item 2", etc.
+
+    // Theme toggle
+    dark: 'Switch to Dark Mode',
+    light: 'Switch to Light Mode',
   }}
 />
 ```
-**Default `buttonTexts` values:**
-| Property   | Value            |
-| :--------- | :--------------- |
-| `first`    | 'Go to First'    |
-| `last`     | 'Go to Last'     |
-| `next`     | 'Next'           |
-| `previous` | 'Previous'       |
-| `play`     | 'Play Slideshow' |
-| `stop`     | 'Stop Slideshow' |
-| `jumpTo`   | 'Jump to'        |
 
+**Complete `buttonTexts` Properties:**
+| Property | Default Value | Description |
+| :------- | :------------ | :---------- |
+| `first` | 'Go to First' | First item navigation button |
+| `last` | 'Go to Last' | Last item navigation button |
+| `next` | 'Next' | Next item navigation button |
+| `previous` | 'Previous' | Previous item navigation button |
+| `play` | 'Play Slideshow' | Start slideshow button |
+| `stop` | 'Stop Slideshow' | Stop slideshow button |
+| `jumpTo` | 'Jump to' | Quick jump dropdown placeholder |
+| `changeLayout` | 'Change layout' | Layout switcher button |
+| `changeDensity` | 'Change density' | Text density button |
+| `searchPlaceholder` | 'Search Timeline' | Search input placeholder |
+| `searchAriaLabel` | 'Search timeline content' | Search input accessibility label |
+| `clearSearch` | 'Clear Search' | Clear search button |
+| `previousMatch` | 'Previous Match' | Previous search result button |
+| `nextMatch` | 'Next Match' | Next search result button |
+| `timelinePoint` | 'Timeline point' | Timeline point accessibility label |
+| `timelineNavigation` | 'Timeline Navigation' | Navigation controls accessibility label |
+| `timeline` | 'Timeline' | Main timeline accessibility label |
+| `timelineOutline` | 'Timeline outline' | Outline panel accessibility label |
+| `timelineMedia` | 'Timeline media' | Media elements accessibility label |
+| `openOutline` | 'Open outline' | Open outline button |
+| `closeOutline` | 'Close outline' | Close outline button |
+| `densityLow` | 'Low' | Low text density option |
+| `densityHigh` | 'High' | High text density option |
+| `densityLowDescription` | 'Show less text' | Low density description |
+| `densityHighDescription` | 'Show more text' | High density description |
+| `videoLoadError` | 'Failed to load the video' | Video loading error message |
+| `imageLoadError` | 'Failed to load the image.' | Image loading error message |
+| `loadingNestedTimeline` | 'Loading nested timeline...' | Nested timeline loading message |
+| `loadingOutline` | 'Loading outline...' | Outline loading message |
+| `itemFallback` | 'Item' | Fallback text for unnamed items |
+| `dark` | 'Switch to Dark Mode' | Dark mode toggle button |
+| `light` | 'Switch to Light Mode' | Light mode toggle button |
 
 ## 📦 Examples & Demos
 
 ### CodeSandbox Examples
+
 Explore various configurations of React Chrono:
--   [Horizontal Basic](https://codesandbox.io/s/keen-shannon-gtjwn?file=/src/App.js)
--   [Horizontal - Show all cards](https://codesandbox.io/s/show-all-cards-5vuf2x?file=/src/App.js)
--   [Vertical Basic](https://codesandbox.io/s/react-chrono-vertical-basic-0rm1o?file=/src/App.js)
--   [Vertical Alternating](https://codesandbox.io/s/react-chrono-tree-text-1fcs3?file=/src/App.js)
--   [Vertical with All Images](https://codesandbox.io/s/react-chrono-tree-vertical-images-b5zri?file=/src/App.js)
--   [Vertical with Custom Content](https://codesandbox.io/s/react-chrono-vertical-custom-qepnm?file=/src/App.js)
--   [Vertical Custom Content with `items` prop](https://codesandbox.io/s/react-chrono-vertical-custom-2-uctcp?file=/src/App.js)
--   [Custom Icons Example](https://codesandbox.io/s/react-chrono-custom-icons-x9s2k?file=/src/App.js)
+
+- [Horizontal Basic](https://codesandbox.io/s/keen-shannon-gtjwn?file=/src/App.js)
+- [Horizontal - Show all cards](https://codesandbox.io/s/show-all-cards-5vuf2x?file=/src/App.js)
+- [Vertical Basic](https://codesandbox.io/s/react-chrono-vertical-basic-0rm1o?file=/src/App.js)
+- [Vertical Alternating](https://codesandbox.io/s/react-chrono-tree-text-1fcs3?file=/src/App.js)
+- [Vertical with All Images](https://codesandbox.io/s/react-chrono-tree-vertical-images-b5zri?file=/src/App.js)
+- [Vertical with Custom Content](https://codesandbox.io/s/react-chrono-vertical-custom-qepnm?file=/src/App.js)
+- [Vertical Custom Content with `items` prop](https://codesandbox.io/s/react-chrono-vertical-custom-2-uctcp?file=/src/App.js)
+- [Custom Icons Example](https://codesandbox.io/s/react-chrono-custom-icons-x9s2k?file=/src/App.js)
 
 ### Kitchen Sink Demo
+
 See a comprehensive demo showcasing many features:
--   [React Chrono Kitchen Sink](https://react-chrono-kitchen-sink.prabhumurthy.com/)
+
+- [React Chrono Kitchen Sink](https://react-chrono-kitchen-sink.prabhumurthy.com/)
 
 ### Storybook
+
 Dive into a wide variety of examples hosted on Storybook:
--   [Horizontal Collection](https://5f985eb478dcb00022cfd60e-axcjutcmmg.chromatic.com/?path=/story/example-horizontal--horizontal-timeline)
--   [Vertical Collection](https://5f985eb478dcb00022cfd60e-axcjutcmmg.chromatic.com/?path=/story/example-vertical--vertical-basic)
+
+- [Horizontal Collection](https://5f985eb478dcb00022cfd60e-axcjutcmmg.chromatic.com/?path=/story/example-horizontal--horizontal-timeline)
+- [Vertical Collection](https://5f985eb478dcb00022cfd60e-axcjutcmmg.chromatic.com/?path=/story/example-vertical--vertical-basic)
 
 ## 🛠️ Build Setup
 
@@ -567,6 +668,7 @@ pnpm cypress:quiet
 ## 🤝 Contributing
 
 Contributions are welcome! Please follow these steps:
+
 1.  [Fork the repository](https://github.com/prabhuignoto/react-chrono/fork).
 2.  Create your feature branch (`git checkout -b new-feature`).
 3.  Commit your changes (`git commit -am 'Add: New amazing feature'`).
@@ -577,8 +679,8 @@ Please read `CONTRIBUTING.md` for more details on the process and `CODE_OF_CONDU
 
 ## 🧱 Built With
 
--   [TypeScript](https://www.typescriptlang.org/)
--   Styled with [Emotion](https://emotion.sh/)
+- [TypeScript](https://www.typescriptlang.org/)
+- Styled with [Emotion](https://emotion.sh/)
 
 ## 💖 Support & Meta
 
@@ -592,7 +694,6 @@ GitHub: [https://github.com/prabhuignoto](https://github.com/prabhuignoto)
 <a href="https://www.buymeacoffee.com/prabhuignoto" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" height="41" width="174" ></a>
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/project/overview?id=prabhuignoto_react-chrono)
-
 
 ## ✨ Contributors
 

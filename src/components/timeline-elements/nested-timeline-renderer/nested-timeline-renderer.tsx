@@ -1,5 +1,6 @@
 import React from 'react';
 import { TimelineModel } from '@models/TimelineModel';
+import { GlobalContext } from '../../GlobalContext';
 
 interface NestedTimelineRendererProps {
   items: any[];
@@ -19,6 +20,8 @@ const NestedTimelineRenderer: React.FC<NestedTimelineRendererProps> = ({
   const [TimelineComponent, setTimelineComponent] =
     React.useState<React.ComponentType<TimelineModel> | null>(null);
 
+  const { buttonTexts } = React.useContext(GlobalContext);
+
   // Dynamically import the Timeline component only when needed
   React.useEffect(() => {
     import('../../timeline/timeline').then((module) => {
@@ -27,7 +30,11 @@ const NestedTimelineRenderer: React.FC<NestedTimelineRendererProps> = ({
   }, []);
 
   if (!TimelineComponent) {
-    return <div>Loading nested timeline...</div>;
+    return (
+      <div>
+        {buttonTexts?.loadingNestedTimeline ?? 'Loading nested timeline...'}
+      </div>
+    );
   }
 
   return (

@@ -135,7 +135,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   }, [flipLayout, activeTimelineItem, totalItems]);
 
   const hideExtraControls = useMemo(() => {
-    return cardLess || slideShowRunning;
+    return cardLess ?? slideShowRunning;
   }, [cardLess, slideShowRunning]);
 
   const canShowDensity = useMemo(() => {
@@ -255,10 +255,10 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           <>
             <div className="timeline-nav-wrapper">
               <TimelineNavButton
-                onClick={onPreviousMatch}
+                onClick={disableSearchNav ? undefined : onPreviousMatch}
                 title={buttonTexts?.previousMatch ?? 'Previous Match'}
                 aria-label={buttonTexts?.previousMatch ?? 'Previous Match'}
-                disabled={disableSearchNav}
+                aria-disabled={disableSearchNav}
                 theme={theme}
                 style={{ height: '24px', width: '24px' }}
               >
@@ -267,10 +267,10 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             </div>
             <div className="timeline-nav-wrapper">
               <TimelineNavButton
-                onClick={onNextMatch}
+                onClick={disableSearchNav ? undefined : onNextMatch}
                 title={buttonTexts?.nextMatch ?? 'Next Match'}
                 aria-label={buttonTexts?.nextMatch ?? 'Next Match'}
-                disabled={disableSearchNav}
+                aria-disabled={disableSearchNav}
                 theme={theme}
                 style={{ height: '24px', width: '24px' }}
               >

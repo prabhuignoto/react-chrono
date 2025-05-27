@@ -157,9 +157,7 @@ export const performanceMonitor = PerformanceMonitor.getInstance();
  * React hook for performance monitoring
  * Use this hook to time component renders
  */
-export const usePerformanceMonitor = (
-  componentName: string,
-) => {
+export const usePerformanceMonitor = (componentName: string) => {
   const endTimingRef = useRef<(() => void) | null>(null);
 
   // Start timing on mount and re-renders

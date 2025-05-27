@@ -66,7 +66,7 @@ export const OutlineButton = styled.button<{
 }>`
   align-items: center;
   align-self: flex-end;
-  background: #fff;
+  background: #ffffff;
   border-radius: 4px;
   border: 0;
   // box-shadow: ${(p) => (!p.open ? '0 0 10px 2px rgba(0,0,0,0.2)' : 'none')};

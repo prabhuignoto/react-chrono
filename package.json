@@ -1,6 +1,6 @@
 {
   "name": "react-chrono",
-  "version": "2.8.1",
+  "version": "2.8.2",
   "license": "MIT",
   "description": "A Modern Timeline component for React",
   "keywords": [
@@ -45,7 +45,8 @@
     "size-limit": "pnpm rollup && pnpm size-limit",
     "build": "rollup -c",
     "build:analyze": "ANALYZE=true rollup -c",
-    "fix-css": "stylelint src/**/*style.ts --fix"
+    "fix-css": "stylelint src/**/*style.ts --fix",
+    "validate": "pnpm format && pnpm concurrently -k --no-warnings \"pnpm lint:all\" \"pnpm test\" \"pnpm build\""
   },
   "dependencies": {
     "classnames": "^2.5.1",
@@ -106,6 +107,7 @@
     "babel-plugin-jsx-remove-data-test-id": "^3.0.0",
     "babel-plugin-styled-components": "^2.1.4",
     "c8": "^10.1.3",
+    "concurrently": "^8.2.2",
     "cssnano": "^7.0.7",
     "cypress": "14.4.0",
     "eslint": "^9.27.0",

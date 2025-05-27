@@ -89,6 +89,21 @@ describe('Utility Functions', () => {
       previousMatch: 'Previous Match',
       nextMatch: 'Next Match',
       timelinePoint: 'Timeline point',
+      densityLow: 'Low',
+      densityHigh: 'High',
+      densityLowDescription: 'Show less text',
+      densityHighDescription: 'Show more text',
+      loadingNestedTimeline: 'Loading nested timeline...',
+      loadingOutline: 'Loading outline...',
+      videoLoadError: 'Failed to load the video',
+      imageLoadError: 'Failed to load the image.',
+      timelineNavigation: 'Timeline Navigation',
+      timelineMedia: 'Timeline media',
+      timeline: 'Timeline',
+      timelineOutline: 'Timeline outline',
+      openOutline: 'Open outline',
+      closeOutline: 'Close outline',
+      itemFallback: 'Item',
     } as ButtonTexts);
   });
 

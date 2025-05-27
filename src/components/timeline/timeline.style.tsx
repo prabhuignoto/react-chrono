@@ -10,7 +10,7 @@ export const Wrapper = styled.div<{
 
   // Enhanced focus styles for keyboard navigation
   &:focus-visible {
-    outline: 2px solid ${(p) => p.theme?.primary || '#0066cc'};
+    outline: 2px solid ${(p) => p.theme?.primary ?? '#0066cc'};
     outline-offset: 2px;
   }
 
@@ -18,7 +18,7 @@ export const Wrapper = styled.div<{
   button:focus-visible,
   a:focus-visible,
   input:focus-visible {
-    outline: 2px solid ${(p) => p.theme?.primary || '#0066cc'};
+    outline: 2px solid ${(p) => p.theme?.primary ?? '#0066cc'};
     outline-offset: 2px;
     box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.2);
   }

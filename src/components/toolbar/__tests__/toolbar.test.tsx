@@ -5,6 +5,7 @@ import { getDefaultThemeOrDark } from '@utils/index';
 import { ThemeProvider } from 'styled-components';
 import { Toolbar } from '../index';
 import { ToolbarItem } from '@models/ToolbarItem';
+import { describe, expect, it } from 'vitest';
 
 const items: ToolbarItem[] = [
   { name: 'Item 1', onSelect: () => {}, id: '1' },
@@ -24,8 +25,6 @@ describe('Toolbar', () => {
         </Toolbar>
       </ThemeProvider>,
     );
-
-    console.log(baseElement.innerHTML);
 
     expect(getByText(/Item 1/i)).toBeInTheDocument();
     expect(getByText(/Item 2/i)).toBeInTheDocument();
