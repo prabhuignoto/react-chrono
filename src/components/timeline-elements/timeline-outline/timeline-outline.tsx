@@ -31,7 +31,9 @@ class TimelineOutlineError extends React.Component<
 }
 
 // Separate loading and error components to improve code organization
-const OutlineLoading = memo(() => <output>Loading outline...</output>);
+const OutlineLoading = memo(({ buttonTexts }: { buttonTexts: any }) => (
+  <output>{buttonTexts?.loadingOutline ?? 'Loading outline...'}</output>
+));
 const OutlineError = memo(({ error }: { error: Error }) => (
   <div role="alert">Error: {error.message}</div>
 ));
@@ -54,7 +56,7 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
   const [openPane, setOpenPane] = useState(false);
   const [showList, setShowList] = useState(false);
 
-  const { theme: globalTheme } = useContext(GlobalContext);
+  const { theme: globalTheme, buttonTexts } = useContext(GlobalContext);
   const mergedTheme = theme ?? globalTheme;
 
   // Extract position logic to a custom hook
@@ -91,7 +93,7 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
   }
 
   if (isLoading) {
-    return <OutlineLoading />;
+    return <OutlineLoading buttonTexts={buttonTexts} />;
   }
 
   return (
@@ -100,7 +102,7 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
         as="aside"
         position={position}
         open={openPane}
-        aria-label="Timeline outline"
+        aria-label={buttonTexts?.timelineOutline ?? 'Timeline outline'}
         aria-expanded={openPane}
       >
         <OutlineButton
@@ -108,7 +110,11 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
           theme={mergedTheme}
           open={openPane}
           position={position}
-          aria-label={openPane ? 'Close outline' : 'Open outline'}
+          aria-label={
+            openPane
+              ? (buttonTexts?.closeOutline ?? 'Close outline')
+              : (buttonTexts?.openOutline ?? 'Open outline')
+          }
         >
           {openPane ? <CloseIcon /> : <MenuIcon />}
         </OutlineButton>

@@ -1,6 +1,7 @@
 import { MediaState } from '@models/TimelineMediaModel';
 import { TimelineMode } from '@models/TimelineModel';
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
+import { GlobalContext } from '../../../GlobalContext';
 import { LazyErrorMessage } from './ErrorMessage';
 import { VideoPlayer } from './VideoPlayer';
 import { YoutubePlayer } from './YoutubePlayer';
@@ -47,25 +48,29 @@ export const MediaContent = memo(
     handleError,
     onMediaStateChange,
   }: MediaContentProps) => {
+    const { buttonTexts } = useContext(GlobalContext);
+
     if (media.type === 'VIDEO') {
       if (isYouTube) {
         return (
           <YoutubePlayer
             url={media.source.url}
             active={active}
-            name={media.name || ''}
+            name={media.name ?? ''}
           />
         );
       }
 
       return loadFailed ? (
-        <LazyErrorMessage message="Failed to load the video" />
+        <LazyErrorMessage
+          message={buttonTexts?.videoLoadError ?? 'Failed to load the video'}
+        />
       ) : (
         <VideoPlayer
           url={media.source.url}
           active={active}
           id={id}
-          name={media.name || ''}
+          name={media.name ?? ''}
           onMediaStateChange={onMediaStateChange}
           handleMediaLoaded={handleMediaLoaded}
           handleError={handleError}
@@ -75,11 +80,13 @@ export const MediaContent = memo(
 
     if (media.type === 'IMAGE') {
       return loadFailed ? (
-        <LazyErrorMessage message="Failed to load the image." />
+        <LazyErrorMessage
+          message={buttonTexts?.imageLoadError ?? 'Failed to load the image.'}
+        />
       ) : (
         <ImageDisplay
           url={media.source.url}
-          name={media.name || ''}
+          name={media.name ?? ''}
           mode={mode}
           mediaLoaded={mediaLoaded}
           borderLessCards={borderLessCards}

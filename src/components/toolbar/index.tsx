@@ -2,7 +2,6 @@ import { FunctionComponent, memo } from 'react';
 import {
   ContentWrapper,
   IconWrapper,
-  ToolbarListItem,
   ToolbarWrapper,
 } from './toolbar.styles';
 import { ToolbarProps } from '@models/ToolbarProps';
@@ -40,17 +39,22 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
           }
 
           return (
-            <ToolbarListItem
-              as="button"
+            <button
+              tabIndex={0}
               aria-label={label}
               key={id}
-              type="button"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  e.currentTarget.click();
+                }
+              }}
             >
               {icon && <IconWrapper>{icon}</IconWrapper>}
               {children[index] && (
                 <ContentWrapper>{children[index]}</ContentWrapper>
               )}
-            </ToolbarListItem>
+            </button>
           );
         })}
       </ToolbarWrapper>

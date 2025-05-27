@@ -11,142 +11,126 @@ exports[`TimelineControl > should render 1`] = `
     />
     <div
       aria-label="Timeline Navigation"
-      class="sc-hKDTPf gsGxcD timeline-controls controls"
+      class="sc-hKDTPf jxRNkp timeline-controls controls"
       role="toolbar"
     >
       <div
-        class="nav-item "
+        aria-disabled="false"
+        aria-label="first"
+        class="sc-gwsNht hhbwid"
+        data-test-id="jump-to-first"
+        mode="VERTICAL_ALTERNATING"
+        role="button"
+        rotate="TRUE"
+        tabindex="0"
+        title="first"
       >
-        <button
-          aria-controls="timeline-main-wrapper"
-          aria-disabled="false"
-          aria-label="first"
-          class="sc-gwsNht iFtFBY"
-          data-test-id="jump-to-first"
-          mode="VERTICAL_ALTERNATING"
-          rotate="TRUE"
-          tabindex="0"
-          title="first"
+        <svg
+          class="feather feather-chevrons-left"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            class="feather feather-chevrons-left"
-            fill="none"
-            height="24"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline
-              points="11 17 6 12 11 7"
-            />
-            <polyline
-              points="18 17 13 12 18 7"
-            />
-          </svg>
-        </button>
+          <polyline
+            points="11 17 6 12 11 7"
+          />
+          <polyline
+            points="18 17 13 12 18 7"
+          />
+        </svg>
       </div>
       <div
-        class="nav-item "
+        aria-disabled="false"
+        aria-label="previous"
+        class="sc-gwsNht hhbwid"
+        data-test-id="previous"
+        mode="VERTICAL_ALTERNATING"
+        role="button"
+        rotate="TRUE"
+        tabindex="0"
+        title="previous"
       >
-        <button
-          aria-controls="timeline-main-wrapper"
-          aria-disabled="false"
-          aria-label="previous"
-          class="sc-gwsNht iFtFBY"
-          data-test-id="previous"
-          mode="VERTICAL_ALTERNATING"
-          rotate="TRUE"
-          tabindex="0"
-          title="previous"
+        <svg
+          class="feather feather-chevron-left"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            class="feather feather-chevron-left"
-            fill="none"
-            height="24"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline
-              points="15 18 9 12 15 6"
-            />
-          </svg>
-        </button>
+          <polyline
+            points="15 18 9 12 15 6"
+          />
+        </svg>
       </div>
       <div
-        class="nav-item "
+        aria-disabled="false"
+        aria-label="next"
+        class="sc-gwsNht hhbwid"
+        data-test-id="next"
+        mode="VERTICAL_ALTERNATING"
+        role="button"
+        rotate="TRUE"
+        tabindex="0"
+        title="next"
       >
-        <button
-          aria-controls="timeline-main-wrapper"
-          aria-disabled="false"
-          aria-label="next"
-          class="sc-gwsNht iFtFBY"
-          data-test-id="next"
-          mode="VERTICAL_ALTERNATING"
-          rotate="TRUE"
-          tabindex="0"
-          title="next"
+        <svg
+          class="feather feather-chevron-right"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            class="feather feather-chevron-right"
-            fill="none"
-            height="24"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline
-              points="9 18 15 12 9 6"
-            />
-          </svg>
-        </button>
+          <polyline
+            points="9 18 15 12 9 6"
+          />
+        </svg>
       </div>
       <div
-        class="nav-item "
+        aria-disabled="false"
+        aria-label="last"
+        class="sc-gwsNht hhbwid"
+        data-test-id="jump-to-last"
+        mode="VERTICAL_ALTERNATING"
+        role="button"
+        rotate="TRUE"
+        tabindex="0"
+        title="last"
       >
-        <button
-          aria-controls="timeline-main-wrapper"
-          aria-disabled="false"
-          aria-label="last"
-          class="sc-gwsNht iFtFBY"
-          data-test-id="jump-to-last"
-          mode="VERTICAL_ALTERNATING"
-          rotate="TRUE"
-          tabindex="0"
-          title="last"
+        <svg
+          class="feather feather-chevrons-right"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            class="feather feather-chevrons-right"
-            fill="none"
-            height="24"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline
-              points="13 17 18 12 13 7"
-            />
-            <polyline
-              points="6 17 11 12 6 7"
-            />
-          </svg>
-        </button>
+          <polyline
+            points="13 17 18 12 13 7"
+          />
+          <polyline
+            points="6 17 11 12 6 7"
+          />
+        </svg>
       </div>
       <div
         class="nav-item"
@@ -154,12 +138,14 @@ exports[`TimelineControl > should render 1`] = `
       <div
         class="nav-item "
       >
-        <button
-          aria-controls="timeline-main-wrapper"
+        <div
+          aria-disabled="false"
           aria-label="dark"
-          aria-pressed="false"
-          class="sc-gwsNht hlXVio"
+          class="sc-gwsNht hhbwid"
           data-test-id="dark-toggle"
+          mode="VERTICAL_ALTERNATING"
+          role="button"
+          rotate="TRUE"
           tabindex="0"
           title="dark"
         >
@@ -176,7 +162,7 @@ exports[`TimelineControl > should render 1`] = `
               d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
             />
           </svg>
-        </button>
+        </div>
       </div>
     </div>
   </div>

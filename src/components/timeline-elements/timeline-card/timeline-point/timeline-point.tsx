@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { GlobalContext } from '../../../GlobalContext';
 import { Shape, ShapeWrapper } from '../timeline-horizontal-card.styles';
 
 interface TimelinePointProps {
@@ -26,6 +27,8 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
   active = false,
   disabled = false,
 }) => {
+  const { buttonTexts } = useContext(GlobalContext);
+
   return (
     <ShapeWrapper>
       <Shape
@@ -35,7 +38,7 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
         ref={circleRef}
         data-testid="timeline-circle"
         theme={theme}
-        aria-label={title ?? 'Timeline point'}
+        aria-label={title ?? buttonTexts?.timelinePoint ?? 'Timeline point'}
         aria-selected={active}
         aria-disabled={disabled}
         disabled={disabled}

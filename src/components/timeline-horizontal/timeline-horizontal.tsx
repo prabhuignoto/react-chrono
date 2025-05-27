@@ -45,6 +45,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     showAllCardsHorizontal,
     theme,
     cardWidth,
+    buttonTexts,
   } = useContext(GlobalContext);
 
   // Memoize the wrapper class to avoid unnecessary re-renders
@@ -119,7 +120,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
       flipLayout={flipLayout}
       data-testid="timeline-collection"
       as="ul"
-      aria-label="Timeline"
+      aria-label={buttonTexts?.timeline ?? 'Timeline'}
     >
       {timelineItems}
     </TimelineHorizontalWrapper>

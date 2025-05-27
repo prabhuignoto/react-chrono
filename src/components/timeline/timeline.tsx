@@ -174,10 +174,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // Update active item information
   useEffect(() => {
-    const activeItem = items[activeTimelineItem || 0];
+    const activeItem = items[activeTimelineItem ?? 0];
 
     if (slideShowRunning) {
-      activeItemIndex.current = activeTimelineItem || 0;
+      activeItemIndex.current = activeTimelineItem ?? 0;
     }
 
     if (!items.length || !activeItem) return;

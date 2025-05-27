@@ -19,7 +19,7 @@ export const defaultTheme: Theme = {
   titleColor: '#007FFF',
   titleColorActive: '#007FFF',
   toolbarBgColor: '#f5f5f5',
-  toolbarBtnBgColor: '#fff',
+  toolbarBtnBgColor: '#ffffff',
   toolbarTextColor: '#000',
 };
 
