@@ -17,7 +17,7 @@ exports[`TimelineControl > should render 1`] = `
       <div
         aria-disabled="false"
         aria-label="first"
-        class="sc-gwsNht cgLCQN"
+        class="sc-gwsNht hhbwid"
         data-test-id="jump-to-first"
         mode="VERTICAL_ALTERNATING"
         role="button"
@@ -48,7 +48,7 @@ exports[`TimelineControl > should render 1`] = `
       <div
         aria-disabled="false"
         aria-label="previous"
-        class="sc-gwsNht cgLCQN"
+        class="sc-gwsNht hhbwid"
         data-test-id="previous"
         mode="VERTICAL_ALTERNATING"
         role="button"
@@ -76,7 +76,7 @@ exports[`TimelineControl > should render 1`] = `
       <div
         aria-disabled="false"
         aria-label="next"
-        class="sc-gwsNht cgLCQN"
+        class="sc-gwsNht hhbwid"
         data-test-id="next"
         mode="VERTICAL_ALTERNATING"
         role="button"
@@ -104,7 +104,7 @@ exports[`TimelineControl > should render 1`] = `
       <div
         aria-disabled="false"
         aria-label="last"
-        class="sc-gwsNht cgLCQN"
+        class="sc-gwsNht hhbwid"
         data-test-id="jump-to-last"
         mode="VERTICAL_ALTERNATING"
         role="button"
@@ -141,7 +141,7 @@ exports[`TimelineControl > should render 1`] = `
         <div
           aria-disabled="false"
           aria-label="dark"
-          class="sc-gwsNht cgLCQN"
+          class="sc-gwsNht hhbwid"
           data-test-id="dark-toggle"
           mode="VERTICAL_ALTERNATING"
           role="button"
