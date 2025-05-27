@@ -277,7 +277,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [mode, flip]);
 
       const gradientColor = useMemo(() => {
-        return hexToRGBA(theme?.cardBgColor ?? '#fff', 0.4);
+        return hexToRGBA(theme?.cardBgColor ?? '#ffffff', 0.4);
       }, [theme?.cardBgColor]);
 
       const contentDetailsClass = useMemo(() => {

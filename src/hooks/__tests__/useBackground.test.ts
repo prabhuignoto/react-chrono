@@ -38,8 +38,8 @@ describe('useBackground', () => {
 
   it('calls hexToRGBA and returns its value for valid hex', () => {
     vi.mocked(hexToRGBA).mockReturnValue('rgba(255,255,255,0.8)');
-    const { result } = renderHook(() => useBackground('#fff'));
-    expect(hexToRGBA).toHaveBeenCalledWith('#fff', 0.8);
+    const { result } = renderHook(() => useBackground('#ffffff'));
+    expect(hexToRGBA).toHaveBeenCalledWith('#ffffff', 0.8);
     expect(result.current).toBe('rgba(255,255,255,0.8)');
   });
 

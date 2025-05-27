@@ -32,7 +32,7 @@ class TimelineOutlineError extends React.Component<
 
 // Separate loading and error components to improve code organization
 const OutlineLoading = memo(({ buttonTexts }: { buttonTexts: any }) => (
-  <div role="status">{buttonTexts?.loadingOutline || 'Loading outline...'}</div>
+  <output>{buttonTexts?.loadingOutline ?? 'Loading outline...'}</output>
 ));
 const OutlineError = memo(({ error }: { error: Error }) => (
   <div role="alert">Error: {error.message}</div>
@@ -102,7 +102,7 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
         as="aside"
         position={position}
         open={openPane}
-        aria-label={buttonTexts?.timelineOutline || 'Timeline outline'}
+        aria-label={buttonTexts?.timelineOutline ?? 'Timeline outline'}
         aria-expanded={openPane}
       >
         <OutlineButton
@@ -112,8 +112,8 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
           position={position}
           aria-label={
             openPane
-              ? buttonTexts?.closeOutline || 'Close outline'
-              : buttonTexts?.openOutline || 'Open outline'
+              ? (buttonTexts?.closeOutline ?? 'Close outline')
+              : (buttonTexts?.openOutline ?? 'Open outline')
           }
         >
           {openPane ? <CloseIcon /> : <MenuIcon />}

@@ -4,7 +4,7 @@ const ModeWrapper = styled.div`
   width: 90%;
   position: relative;
   border-radius: 10px;
-  background: #fff;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
 `;
@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   justify-items: center;
   margin: 0 auto;
   width: 95vw;
-  background: #fff;
+  background: #ffffff;
   display: grid;
   grid-template-columns: 30% 70%;
 `;

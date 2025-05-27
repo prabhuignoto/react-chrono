@@ -273,7 +273,7 @@ export const VerticalAlternatingNested: FunctionComponent<{
               titleColor: '#FFA500',
               titleColorActive: '#000',
               cardTitleColor: '#FFA500',
-              iconBackgroundColor: '#fff',
+              iconBackgroundColor: '#ffffff',
             }}
             cardHeight={150}
             timelinePointShape="square"
@@ -361,7 +361,7 @@ export const VerticalBasicCardLess: FunctionComponent<{
         cardLess
         parseDetailsAsHTML
         theme={{
-          cardBgColor: '#fff',
+          cardBgColor: '#ffffff',
           titleColorActive: 'red',
         }}
         onItemSelected={(selected) => console.log(selected.index)}

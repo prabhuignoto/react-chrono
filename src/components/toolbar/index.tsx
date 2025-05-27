@@ -41,10 +41,16 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
 
           return (
             <ToolbarListItem
-              as="button"
+              role="button"
+              tabIndex={0}
               aria-label={label}
               key={id}
-              type="button"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  e.currentTarget.click();
+                }
+              }}
             >
               {icon && <IconWrapper>{icon}</IconWrapper>}
               {children[index] && (
