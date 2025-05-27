@@ -12,7 +12,6 @@ import ChevronsRightIcon from '../../icons/chevs-right';
 import ReplayIcon from '../../icons/replay-icon';
 import {
   TimelineControlContainer,
-  TimelineNavButton,
   TimelineNavWrapper,
   ScreenReaderOnly,
 } from './timeline-control.styles';

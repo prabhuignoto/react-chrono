@@ -2,7 +2,6 @@ import { FunctionComponent, memo } from 'react';
 import {
   ContentWrapper,
   IconWrapper,
-  ToolbarListItem,
   ToolbarWrapper,
 } from './toolbar.styles';
 import { ToolbarProps } from '@models/ToolbarProps';
