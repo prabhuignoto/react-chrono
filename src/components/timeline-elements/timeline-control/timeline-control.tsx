@@ -27,7 +27,6 @@ interface StandardNavButtonProps {
   isDisabled: boolean;
   rotate: boolean;
   testId: string;
-  IconComponent: React.ElementType;
   active: boolean;
   children: React.ReactNode;
 }
@@ -52,13 +51,8 @@ const StandardNavButton: React.FC<StandardNavButtonProps> = ({
   };
 
   return (
-    <TimelineNavButton
-      mode={mode}
-      theme={theme}
+    <button
       onClick={isDisabled ? undefined : onClick}
-      rotate={rotate ? 'TRUE' : 'FALSE'}
-      $active={active}
-      role="button"
       tabIndex={!isDisabled ? 0 : -1}
       onKeyDown={handleKeyDown}
       aria-disabled={isDisabled}
@@ -67,7 +61,7 @@ const StandardNavButton: React.FC<StandardNavButtonProps> = ({
       data-test-id={testId}
     >
       {children}
-    </TimelineNavButton>
+    </button>
   );
 };
 
@@ -124,12 +118,12 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
   );
 
   const canDisableLeft = useMemo(
-    () => disableLeft || slideShowRunning,
+    () => disableLeft ?? slideShowRunning,
     [disableLeft, slideShowRunning],
   );
 
   const canDisableRight = useMemo(
-    () => disableRight || slideShowRunning,
+    () => disableRight ?? slideShowRunning,
     [disableRight, slideShowRunning],
   );
 
@@ -189,7 +183,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
       <TimelineNavWrapper
         className={cls('timeline-controls', classNames?.controls)}
         theme={theme}
-        aria-label={buttonTexts?.timelineNavigation || 'Timeline Navigation'}
+        aria-label={buttonTexts?.timelineNavigation ?? 'Timeline Navigation'}
         role="toolbar"
       >
         {/* jump to first, previous, next, jump to last */}
@@ -204,7 +198,6 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
               isDisabled={canDisableLeft}
               rotate={rotate}
               testId="jump-to-first"
-              IconComponent={ChevronsLeftIcon}
               active={!canDisableLeft}
             >
               <ChevronsLeftIcon />
@@ -218,7 +211,6 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
               isDisabled={canDisableLeft}
               rotate={rotate}
               testId="previous"
-              IconComponent={ChevronLeft}
               active={!canDisableLeft}
             >
               <ChevronLeft />
@@ -232,7 +224,6 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
               isDisabled={canDisableRight}
               rotate={rotate}
               testId="next"
-              IconComponent={ChevronRightIcon}
               active={!canDisableRight}
             >
               <ChevronRightIcon />
@@ -246,7 +237,6 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
               isDisabled={canDisableRight}
               rotate={rotate}
               testId="jump-to-last"
-              IconComponent={ChevronsRightIcon}
               active={!canDisableRight}
             >
               <ChevronsRightIcon />
@@ -266,7 +256,6 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
               isDisabled={false}
               rotate={rotate}
               testId="play-pause"
-              IconComponent={StopIcon}
               active={true}
             >
               {slideShowRunning ? <StopIcon /> : <ReplayIcon />}
@@ -286,7 +275,6 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
               isDisabled={false}
               rotate={rotate}
               testId="dark-toggle"
-              IconComponent={isDark ? SunIcon : MoonIcon}
               active={!slideShowRunning}
             >
               {isDark ? <SunIcon /> : <MoonIcon />}

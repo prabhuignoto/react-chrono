@@ -160,9 +160,9 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
           ref={circleRef} // Attach ref for position measurement
           data-testid="tree-leaf-click" // Test ID for the clickable element
           aria-label={timelinePointLabel} // Accessibility label
-          aria-disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
-          disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
-          tabIndex={disableClickOnCircle || disableTimelinePoint ? -1 : 0} // Manage tab order
+          aria-disabled={disableClickOnCircle ?? disableTimelinePoint} // Disable button if needed
+          disabled={disableClickOnCircle ?? disableTimelinePoint} // Disable button if needed
+          tabIndex={(disableClickOnCircle ?? disableTimelinePoint) ? -1 : 0} // Manage tab order
         >
           {/* The visual shape (circle, square, or custom icon) */}
           <Shape

@@ -32,7 +32,7 @@ const NestedTimelineRenderer: React.FC<NestedTimelineRendererProps> = ({
   if (!TimelineComponent) {
     return (
       <div>
-        {buttonTexts?.loadingNestedTimeline || 'Loading nested timeline...'}
+        {buttonTexts?.loadingNestedTimeline ?? 'Loading nested timeline...'}
       </div>
     );
   }

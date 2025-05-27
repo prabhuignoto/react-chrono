@@ -40,8 +40,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
           }
 
           return (
-            <ToolbarListItem
-              role="button"
+            <button
               tabIndex={0}
               aria-label={label}
               key={id}
@@ -56,7 +55,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
               {children[index] && (
                 <ContentWrapper>{children[index]}</ContentWrapper>
               )}
-            </ToolbarListItem>
+            </button>
           );
         })}
       </ToolbarWrapper>

@@ -135,7 +135,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   }, [flipLayout, activeTimelineItem, totalItems]);
 
   const hideExtraControls = useMemo(() => {
-    return cardLess || slideShowRunning;
+    return cardLess ?? slideShowRunning;
   }, [cardLess, slideShowRunning]);
 
   const canShowDensity = useMemo(() => {
