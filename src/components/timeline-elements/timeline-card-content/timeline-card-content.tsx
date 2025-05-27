@@ -254,7 +254,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [onClick, id, disableInteraction, disableAutoScrollOnClick]);
 
       const toggleShowMore = useCallback(() => {
-        if ((active && paused) ?? !slideShowActive) {
+        if ((active && paused) || !slideShowActive) {
           setShowMore((prev) => !prev);
           onShowMore?.();
           // Use setTimeout to ensure the DOM has updated before focusing
@@ -277,7 +277,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [mode, flip]);
 
       const gradientColor = useMemo(() => {
-        return hexToRGBA(theme?.cardBgColor ?? '#ffffff', 0.4);
+        return hexToRGBA(theme?.cardBgColor ?? '#fff', 0.4);
       }, [theme?.cardBgColor]);
 
       const contentDetailsClass = useMemo(() => {

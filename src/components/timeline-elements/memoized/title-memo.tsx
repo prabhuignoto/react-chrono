@@ -1,14 +1,13 @@
 import cls from 'classnames';
 import {
+  CardTitle,
   CardTitleAnchor,
-  CardTitleSemantic,
 } from '../timeline-card-content/timeline-card-content.styles';
 import { Title } from './memoized-model';
-import React, { useContext } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import React from 'react';
 
 /**
- * Renders the timeline's title with optional link using configurable semantic tags.
+ * Renders the timeline's title with optional link.
  * @param {Title} props - Title properties
  * @returns {JSX.Element | null} The rendered title
  */
@@ -22,11 +21,8 @@ const TitleMemoComponent = ({
   fontSize = '1rem',
   classString = '',
 }: Title) => {
-  const { semanticTags } = useContext(GlobalContext);
-
   return title ? (
-    <CardTitleSemantic
-      as={semanticTags?.cardTitle ?? 'span'}
+    <CardTitle
       className={cls(active ? 'active' : '', { [classString]: true })}
       theme={theme}
       style={{ color }}
@@ -41,7 +37,7 @@ const TitleMemoComponent = ({
       ) : (
         title
       )}
-    </CardTitleSemantic>
+    </CardTitle>
   ) : null;
 };
 

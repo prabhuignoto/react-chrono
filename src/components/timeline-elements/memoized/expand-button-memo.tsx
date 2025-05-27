@@ -10,31 +10,14 @@ import { ExpandButtonModel } from './memoized-model';
  */
 const ExpandButtonMemo = memo<ExpandButtonModel>(
   ({ theme, expanded, onExpand, textOverlay }: ExpandButtonModel) => {
-    const { label, action } = useMemo(() => {
-      if (expanded) {
-        return {
-          label: 'Minimize',
-          action: () => onExpand?.(null),
-        };
-      }
-      return {
-        label: 'Maximize',
-        action: () => onExpand?.(null),
-      };
-    }, [expanded, onExpand]);
-
-    const handleKeyDown = useMemo(() => {
-      return (ev: React.KeyboardEvent) => {
-        if (ev.key === 'Enter') {
-          action();
-        }
-      };
-    }, [action]);
+    const label = useMemo(() => {
+      return expanded ? 'Minimize' : 'Maximize';
+    }, [expanded]);
 
     return textOverlay ? (
       <ExpandButton
-        onPointerDown={action}
-        onKeyDown={handleKeyDown}
+        onPointerDown={onExpand}
+        onKeyDown={(ev) => ev.key === 'Enter' && onExpand?.(ev)}
         theme={theme}
         aria-expanded={expanded}
         tabIndex={0}

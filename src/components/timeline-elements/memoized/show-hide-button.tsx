@@ -10,41 +10,16 @@ import { ShowHideTextButtonModel } from './memoized-model';
  */
 const ShowOrHideTextButtonMemo = memo<ShowHideTextButtonModel>(
   ({ textOverlay, onToggle, theme, show }: ShowHideTextButtonModel) => {
-    const { label, action } = useMemo(() => {
-      if (show) {
-        return {
-          label: 'Hide Text',
-          action: (ev: React.PointerEvent | React.KeyboardEvent) =>
-            onToggle?.(ev),
-        };
-      }
-      return {
-        label: 'Show Text',
-        action: (ev: React.PointerEvent | React.KeyboardEvent) =>
-          onToggle?.(ev),
-      };
-    }, [show, onToggle]);
-
-    const handleKeyDown = useMemo(() => {
-      return (ev: React.KeyboardEvent) => {
-        if (ev.key === 'Enter') {
-          action(ev);
-        }
-      };
-    }, [action]);
-
-    const handlePointerDown = useMemo(() => {
-      return (ev: React.PointerEvent) => {
-        action(ev);
-      };
-    }, [action]);
+    const label = useMemo(() => {
+      return show ? 'Hide Text' : 'Show Text';
+    }, [show]);
 
     return textOverlay ? (
       <ShowHideTextButton
-        onPointerDown={handlePointerDown}
+        onPointerDown={onToggle}
         theme={theme}
         tabIndex={0}
-        onKeyDown={handleKeyDown}
+        onKeyDown={(ev) => ev.key === 'Enter' && onToggle?.(ev)}
         aria-label={label}
         title={label}
       >

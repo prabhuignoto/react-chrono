@@ -1,7 +1,9 @@
 import { FunctionComponent, memo } from 'react';
+import { jsx as _jsx } from 'react/jsx-runtime';
 import {
   ContentWrapper,
   IconWrapper,
+  ToolbarListItem,
   ToolbarWrapper,
 } from './toolbar.styles';
 import { ToolbarProps } from '@models/ToolbarProps';
@@ -39,22 +41,17 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
           }
 
           return (
-            <button
-              tabIndex={0}
+            <ToolbarListItem
               aria-label={label}
               key={id}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  e.currentTarget.click();
-                }
-              }}
+              role="button"
+              // tabIndex={0}
             >
               {icon && <IconWrapper>{icon}</IconWrapper>}
               {children[index] && (
                 <ContentWrapper>{children[index]}</ContentWrapper>
               )}
-            </button>
+            </ToolbarListItem>
           );
         })}
       </ToolbarWrapper>

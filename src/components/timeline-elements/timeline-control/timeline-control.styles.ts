@@ -48,7 +48,7 @@ export const TimelineNavItem = styled.li<{ $disable?: boolean }>`
       : 'cursor: pointer;'};
 `;
 
-export const TimelineNavButton = styled.div<{
+export const TimelineNavButton = styled.button<{
   mode?: TimelineMode;
   rotate?: 'TRUE' | 'FALSE';
   theme?: Theme;
@@ -72,8 +72,6 @@ export const TimelineNavButton = styled.div<{
     border-color 0.2s ease-out;
   width: 28px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
-  user-select: none;
-  border: 0;
 
   transform: ${(p) => (p.rotate === 'TRUE' ? 'rotate(90deg)' : 'none')};
 
@@ -90,28 +88,19 @@ export const TimelineNavButton = styled.div<{
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
   }
 
-  &[aria-disabled='true'] {
-    opacity: 0.4;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-
   ${(p) =>
     p.$active &&
     css`
-      // background: ${p.theme.primary};
+      background: ${p.theme.secondary};
       border-color: ${p.theme.primary};
       &:hover {
+        background: ${p.theme.secondary};
         opacity: 0.9;
         box-shadow: 0 1px 2px rgba(22, 20, 20, 0.12);
-        background: ${p.theme.primary};
-
-        svg {
-          color: ${p.theme.cardBgColor};
-        }
       }
       svg {
-        color: ${p.theme.primary};
+        // color: ${p.theme.secondary};
+        color: red;
       }
     `}
 
@@ -141,7 +130,7 @@ export const ControlButton = styled.button<{ theme?: Theme }>`
   margin-left: 0.5em;
   width: 3em;
   outline: 0;
-  color: #ffffff;
+  color: #fff;
 
   svg {
     width: 80%;

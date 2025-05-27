@@ -111,20 +111,6 @@ const slideAnimation = (start?: number, end?: number) => keyframes`
   }
 `;
 
-// Extract shared styles into a utility function
-const sharedSemanticStyles = css<{
-  $fontSize?: string;
-  $padding?: boolean;
-  theme: Theme;
-}>`
-  ${baseFontStyles}
-  font-size: ${(p) => p.$fontSize ?? '1.1rem'};
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
-  display: block;
-`;
-
 // Card Components
 export const TimelineItemContentWrapper = styled.section<
   {
@@ -232,41 +218,6 @@ export const CardSubTitle = styled.h2<{
   font-weight: 500;
   margin-bottom: 0.25rem;
   padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
-`;
-
-// Refactor CardTitleSemantic to use shared styles
-export const CardTitleSemantic = styled.h1.withConfig({
-  shouldForwardProp: (prop) =>
-    !['$fontSize', '$padding', 'theme'].includes(prop),
-})<{
-  $fontSize: string;
-  $padding?: boolean;
-  dir?: string;
-  theme: Theme;
-  as?: string;
-}>`
-  ${sharedSemanticStyles}
-  color: ${(p) => p.theme.cardTitleColor};
-
-  &.active {
-    color: ${(p) => p.theme.primary};
-  }
-`;
-
-// Refactor CardSubTitleSemantic to use shared styles
-export const CardSubTitleSemantic = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    !['$fontSize', '$padding', 'theme'].includes(prop),
-})<{
-  $fontSize?: string;
-  $padding?: boolean;
-  dir?: string;
-  theme?: Theme;
-  as?: string;
-}>`
-  ${sharedSemanticStyles}
-  color: ${(p) => p.theme.cardSubtitleColor};
-  font-size: ${(p) => p.$fontSize ?? '0.9rem'};
 `;
 
 export const CardTitleAnchor = styled.a`
@@ -477,7 +428,7 @@ export const TriangleIconWrapper = styled.span<{
   & svg {
     width: 100%;
     height: 100%;
-    fill: #ffffff;
+    fill: #fff;
   }
 `;
 
