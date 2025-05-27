@@ -180,7 +180,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
       <TimelineNavWrapper
         className={cls('timeline-controls', classNames?.controls)}
         theme={theme}
-        aria-label="Timeline Navigation"
+        aria-label={buttonTexts?.timelineNavigation || 'Timeline Navigation'}
         role="toolbar"
       >
         {/* jump to first, previous, next, jump to last */}
