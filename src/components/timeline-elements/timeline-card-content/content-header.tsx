@@ -3,10 +3,7 @@ import { GlobalContext } from '../../GlobalContext';
 import { SubTitleMemo } from '../memoized/subtitle-memo';
 import { TitleMemo } from '../memoized/title-memo';
 import { ContentHeaderProps } from './header-footer.model';
-import {
-  CardTitleSemantic,
-  TimelineCardHeader,
-} from './timeline-card-content.styles';
+import { CardTitle, TimelineCardHeader } from './timeline-card-content.styles';
 
 /**
  * ContentHeader component
@@ -23,7 +20,7 @@ import {
 const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
   ({ title, url, media, content, cardTitle }: ContentHeaderProps) => {
     // Using context to get global values
-    const { fontSizes, classNames, theme, isMobile, semanticTags } =
+    const { fontSizes, classNames, theme, isMobile } =
       useContext(GlobalContext);
 
     const isNotMedia = useMemo(() => !media, [media]);
@@ -33,13 +30,9 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
         {/* Render title if there is no media */}
 
         {isMobile ? (
-          <CardTitleSemantic
-            as={semanticTags?.cardTitle ?? 'span'}
-            $fontSize={'1.2rem'}
-            theme={theme}
-          >
+          <CardTitle $fontSize={'1.2rem'} theme={theme}>
             {cardTitle}
-          </CardTitleSemantic>
+          </CardTitle>
         ) : null}
 
         {isNotMedia ? (

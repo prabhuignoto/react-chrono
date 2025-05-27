@@ -1,6 +1,5 @@
-import React, { useRef, useEffect, useContext } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { GlobalContext } from '../../GlobalContext';
 
 interface VideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
   children: React.ReactNode;
@@ -26,7 +25,6 @@ const Video: React.FC<VideoProps> = ({
   ...rest
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { buttonTexts } = useContext(GlobalContext);
 
   // Ensure video is properly muted when needed
   useEffect(() => {
@@ -44,7 +42,7 @@ const Video: React.FC<VideoProps> = ({
       onEnded={onEnded}
       playsInline={playsInline}
       preload="metadata"
-      aria-label={buttonTexts?.timelineMedia ?? 'Timeline media'}
+      aria-label="Timeline media"
       {...rest}
     >
       {children}
