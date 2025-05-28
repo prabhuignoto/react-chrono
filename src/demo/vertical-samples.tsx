@@ -144,7 +144,6 @@ export const VerticalBasic: FunctionComponent<{
         //   cardBgColor: '#fff',
         //   titleColorActive: '#6495ed',
         //   titleColor: '#922724',
-        //   cardDetailsBackGround: '#e8e8e8',
         // }}
         onItemSelected={(selected) => console.log(selected.index)}
         fontSizes={{
@@ -165,7 +164,7 @@ export const VerticalBasic: FunctionComponent<{
           cardText: 'custom-text',
         }}
         mediaSettings={{
-          imageFit: 'cover',
+          fit: 'cover',
         }}
         enableDarkToggle
         enableBreakPoint={true}
@@ -224,9 +223,9 @@ export const VerticalNewMedia: FunctionComponent<{
             classNames={{
               cardText: 'custom-text',
             }}
-            // mediaSettings={{
-            //   imageFit: 'cover',
-            // }}
+            mediaSettings={{
+              fit: 'cover',
+            }}
           />
         </ComponentContainerTree>
       </Vertical>
@@ -250,7 +249,7 @@ export const VerticalAlternatingNested: FunctionComponent<{
             scrollable={{ scrollbar: false }}
             slideShowType="slide_from_sides"
             mediaSettings={{
-              imageFit: 'contain',
+              fit: 'contain',
             }}
             highlightCardsOnHover
             parseDetailsAsHTML
@@ -409,7 +408,7 @@ export const VerticalBasicNested: FunctionComponent<{
         }}
         parseDetailsAsHTML
         enableDarkToggle
-        mediaSettings={{ align: 'center' }}
+        mediaSettings={{ fit: 'center' }}
       />
     </ComponentContainerTree>
   </Vertical>

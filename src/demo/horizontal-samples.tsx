@@ -42,7 +42,8 @@ export const HorizontalBasic: React.FunctionComponent<{
           }}
           enableDarkToggle
           mediaSettings={{
-            imageFit: 'cover',
+            align: 'center',
+            fit: 'cover',
           }}
         >
           <div className="chrono-icons">
