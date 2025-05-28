@@ -1,22 +1,22 @@
 /* eslint-disable react/prop-types */
+/**
+ * LEGACY GlobalContext - Maintained for backward compatibility
+ *
+ * This file now acts as a compatibility layer over the new optimized contexts.
+ * New code should use the optimized contexts directly from ./contexts/
+ *
+ * @deprecated Use OptimizedContextProvider and hooks from ./contexts/ instead
+ */
 import {
   TimelineProps as PropsModel,
   TextDensity,
 } from '@models/TimelineModel';
+import { FunctionComponent, createContext, useContext } from 'react';
 import {
-  getDefaultButtonTexts,
-  getDefaultClassNames,
-  getDefaultThemeOrDark,
-  getSlideShowType,
-} from '@utils/index';
-import {
-  FunctionComponent,
-  createContext,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react';
-import { useMatchMedia } from './effects/useMatchMedia';
+  OptimizedContextProvider,
+  useGlobalContext,
+  type ContextProps as NewContextProps,
+} from './contexts';
 
 export type ContextProps = PropsModel & {
   isMobile?: boolean;
@@ -24,8 +24,6 @@ export type ContextProps = PropsModel & {
   updateHorizontalAllCards?: (state: boolean) => void;
   updateTextContentDensity?: (value: TextDensity) => void;
 };
-
-const GlobalContext = createContext<ContextProps>({});
 
 export interface ButtonTexts {
   first?: string;
@@ -44,240 +42,104 @@ export interface ButtonTexts {
   previousMatch?: string;
 }
 
+// Legacy context for backward compatibility
+const GlobalContext = createContext<ContextProps>({});
+
+/**
+ * Legacy GlobalContextProvider - wraps the new optimized provider
+ * @deprecated Use OptimizedContextProvider directly
+ */
 const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
-  const {
-    cardHeight = 200,
-    cardLess = false,
-    flipLayout,
-    items = [],
-    theme,
-    buttonTexts,
-    classNames,
-    mode = 'VERTICAL_ALTERNATING',
-    fontSizes,
-    textOverlay,
-    darkMode,
-    slideShow,
-    onThemeChange,
-    mediaSettings,
-    mediaHeight = 200,
-    contentDetailsHeight = 10,
-    showAllCardsHorizontal,
-    textDensity = 'HIGH',
-    responsiveBreakPoint = 1024,
-    enableBreakPoint,
-    semanticTags,
-  } = props;
-
-  const [isDarkMode, setIsDarkMode] = useState(darkMode);
-
-  const [horizontalAll, setHorizontalAll] = useState(
-    showAllCardsHorizontal ?? false,
+  return (
+    <OptimizedContextProvider {...props}>
+      <LegacyContextBridge>{props.children}</LegacyContextBridge>
+    </OptimizedContextProvider>
   );
+};
 
-  const [isMobileDetected, setIsMobileDetected] = useState(false);
+/**
+ * Bridge component that provides the legacy context API
+ * using the new optimized contexts under the hood
+ */
+const LegacyContextBridge: FunctionComponent<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const combinedContext = useGlobalContext();
 
-  const [textContentDensity, setTextContentDensity] =
-    useState<TextDensity>(textDensity);
+  // Map new context properties to legacy interface
+  const legacyContext: ContextProps = {
+    ...combinedContext,
+    // Map property names from new contexts to legacy names
+    textDensity: combinedContext.textContentDensity,
+    theme: combinedContext.memoizedTheme,
+    buttonTexts: combinedContext.memoizedButtonTexts,
+    classNames: combinedContext.memoizedClassNames,
+    fontSizes: combinedContext.memoizedFontSizes,
+    mediaSettings: combinedContext.memoizedMediaSettings,
+    semanticTags: combinedContext.memoizedSemanticTags,
+    contentDetailsHeight: combinedContext.newContentDetailsHeight,
 
-  const newCardHeight = useMemo(
-    () =>
-      Math.max((contentDetailsHeight ?? 0) + (mediaHeight ?? 0), cardHeight),
-    [contentDetailsHeight, mediaHeight, cardHeight],
-  );
+    // Computed values
+    activeItemIndex: combinedContext.computedActiveItemIndex,
 
-  const newContentDetailsHeight = useMemo(() => {
-    const detailsHeightApprox = Math.round(newCardHeight * 0.75);
-    const actualContentDetailsHeight = contentDetailsHeight ?? 0;
-    return actualContentDetailsHeight > newCardHeight
-      ? Math.min(actualContentDetailsHeight, detailsHeightApprox)
-      : Math.max(actualContentDetailsHeight, detailsHeightApprox);
-  }, [newCardHeight, contentDetailsHeight]);
+    // Type conversion for backward compatibility
+    slideShowType: (combinedContext.slideShowType ||
+      combinedContext.computedSlideShowType) as any,
+    cardPositionHorizontal: combinedContext.cardPositionHorizontal as any,
 
-  const toggleDarkMode = useCallback(() => {
-    setIsDarkMode(!isDarkMode);
-    onThemeChange?.();
-  }, [isDarkMode, onThemeChange]);
+    // Dynamic state
+    isMobile: combinedContext.isMobile,
+    showAllCardsHorizontal: combinedContext.horizontalAll,
+    darkMode: combinedContext.isDarkMode,
 
-  const updateHorizontalAllCards = useCallback((state: boolean) => {
-    setHorizontalAll(state);
-  }, []);
+    // Static defaults mapped to top-level properties for legacy compatibility
+    borderLessCards: combinedContext.staticDefaults.borderLessCards,
+    cardLess: combinedContext.staticDefaults.cardLess,
+    disableToolbar: combinedContext.staticDefaults.disableToolbar,
+    enableBreakPoint: combinedContext.staticDefaults.enableBreakPoint,
+    enableDarkToggle: combinedContext.staticDefaults.enableDarkToggle,
+    enableLayoutSwitch: combinedContext.staticDefaults.enableLayoutSwitch,
+    enableQuickJump: combinedContext.staticDefaults.enableQuickJump,
+    focusActiveItemOnLoad: combinedContext.staticDefaults.focusActiveItemOnLoad,
+    highlightCardsOnHover: combinedContext.staticDefaults.highlightCardsOnHover,
+    lineWidth: combinedContext.staticDefaults.lineWidth,
+    mediaHeight: combinedContext.staticDefaults.mediaHeight,
+    nestedCardHeight: combinedContext.staticDefaults.nestedCardHeight,
+    parseDetailsAsHTML: combinedContext.staticDefaults.parseDetailsAsHTML,
+    scrollable: combinedContext.staticDefaults.scrollable,
+    timelinePointDimension:
+      combinedContext.staticDefaults.timelinePointDimension,
+    timelinePointShape: combinedContext.staticDefaults.timelinePointShape,
+    titleDateFormat: combinedContext.staticDefaults.titleDateFormat,
+    toolbarPosition: combinedContext.staticDefaults.toolbarPosition,
+    uniqueId: combinedContext.staticDefaults.uniqueId,
+    useReadMore: combinedContext.staticDefaults.useReadMore,
 
-  const updateTextContentDensity = useCallback((value: TextDensity) => {
-    setTextContentDensity(value);
-  }, []);
-
-  useMatchMedia(`(max-width: ${responsiveBreakPoint - 1}px)`, {
-    onMatch: () => setIsMobileDetected(true),
-    enabled: enableBreakPoint,
-  });
-
-  useMatchMedia(`(min-width: ${responsiveBreakPoint}px)`, {
-    onMatch: () => setIsMobileDetected(false),
-    enabled: enableBreakPoint,
-  });
-
-  const staticDefaults = useMemo(
-    () => ({
-      borderLessCards: false,
-      cardLess: false,
-      disableToolbar: false,
-      enableBreakPoint: true,
-      enableDarkToggle: false,
-      enableLayoutSwitch: true,
-      enableQuickJump: true,
-      focusActiveItemOnLoad: false,
-      highlightCardsOnHover: false,
-      lineWidth: 3,
-      mediaHeight: 200,
-      nestedCardHeight: 150,
-      parseDetailsAsHTML: false,
-      scrollable: {
-        scrollbar: false,
-      },
-      timelinePointDimension: 16,
-      timelinePointShape: 'circle' as const,
-      titleDateFormat: 'MMM DD, YYYY',
-      toolbarPosition: 'top' as const,
-      uniqueId: 'react-chrono',
-      useReadMore: true,
-    }),
-    [],
-  );
-
-  const computedCardHeight = useMemo(
-    () => (cardLess ? (cardHeight ?? 80) : cardHeight),
-    [cardLess, cardHeight],
-  );
-
-  const computedActiveItemIndex = useMemo(
-    () => (flipLayout ? items?.length - 1 : 0),
-    [flipLayout, items?.length],
-  );
-
-  const computedSlideShowType = useMemo(() => getSlideShowType(mode), [mode]);
-
-  const computedMediaAlign = useMemo(
-    () => (mode === 'VERTICAL' && !textOverlay ? 'left' : 'center'),
-    [mode, textOverlay],
-  );
-
-  const memoizedButtonTexts = useMemo(
-    () => ({
-      ...getDefaultButtonTexts(),
-      ...buttonTexts,
-    }),
-    [buttonTexts],
-  );
-
-  const memoizedClassNames = useMemo(
-    () => ({
-      ...getDefaultClassNames(),
-      ...classNames,
-    }),
-    [classNames],
-  );
-
-  const memoizedFontSizes = useMemo(
-    () => ({
-      cardSubtitle: '0.85rem',
-      cardText: '1rem',
-      cardTitle: '1rem',
-      title: '1rem',
-      ...fontSizes,
-    }),
-    [fontSizes],
-  );
-
-  const memoizedMediaSettings = useMemo(
-    () => ({
-      align: computedMediaAlign,
-      fit: 'cover' as const,
-      ...mediaSettings,
-    }),
-    [computedMediaAlign, mediaSettings],
-  );
-
-  const memoizedSemanticTags = useMemo(
-    () => ({
-      cardTitle: 'span' as const,
-      cardSubtitle: 'span' as const,
-      ...semanticTags,
-    }),
-    [semanticTags],
-  );
-
-  const memoizedTheme = useMemo(
-    () => ({
-      ...getDefaultThemeOrDark(isDarkMode),
-      ...theme,
-    }),
-    [isDarkMode, theme],
-  );
-
-  const defaultProps = useMemo(
-    () =>
-      ({
-        ...staticDefaults,
-        mode: 'VERTICAL_ALTERNATING',
-        ...props,
-        activeItemIndex: computedActiveItemIndex,
-        buttonTexts: memoizedButtonTexts,
-        cardHeight: computedCardHeight,
-        classNames: memoizedClassNames,
-        contentDetailsHeight: newContentDetailsHeight,
-        darkMode: isDarkMode,
-        disableAutoScrollOnClick: !!props.disableInteraction,
-        disableClickOnCircle: !!props.disableInteraction,
-        disableInteraction: false,
-        disableTimelinePoint: !!props.disableInteraction,
-        fontSizes: memoizedFontSizes,
-        isMobile: isMobileDetected,
-        mediaSettings: memoizedMediaSettings,
-        showAllCardsHorizontal: horizontalAll,
-        showProgressOnSlideshow: slideShow,
-        slideItemDuration: 2000,
-        slideShowType: computedSlideShowType,
-        textDensity: textContentDensity,
-        theme: memoizedTheme,
-        toggleDarkMode,
-        updateHorizontalAllCards,
-        updateTextContentDensity,
-        semanticTags: memoizedSemanticTags,
-      }) as ContextProps,
-    [
-      staticDefaults,
-      props,
-      computedActiveItemIndex,
-      memoizedButtonTexts,
-      computedCardHeight,
-      memoizedClassNames,
-      newContentDetailsHeight,
-      isDarkMode,
-      memoizedFontSizes,
-      isMobileDetected,
-      memoizedMediaSettings,
-      horizontalAll,
-      slideShow,
-      computedSlideShowType,
-      textContentDensity,
-      memoizedTheme,
-      toggleDarkMode,
-      updateHorizontalAllCards,
-      updateTextContentDensity,
-      memoizedSemanticTags,
-    ],
-  );
-
-  const providerValue = useMemo(() => defaultProps, [defaultProps]);
-
-  const { children } = props;
+    // Callbacks
+    toggleDarkMode: combinedContext.toggleDarkMode,
+    updateHorizontalAllCards: combinedContext.updateHorizontalAllCards,
+    updateTextContentDensity: combinedContext.updateTextContentDensity,
+  };
 
   return (
-    <GlobalContext.Provider value={providerValue}>
+    <GlobalContext.Provider value={legacyContext}>
       {children}
     </GlobalContext.Provider>
   );
+};
+
+/**
+ * Legacy hook to access the global context
+ * @deprecated Use useGlobalContext, useStableContext, or useDynamicContext from ./contexts/hooks
+ */
+export const useGlobalContextLegacy = () => {
+  const context = useContext(GlobalContext);
+  if (!context) {
+    throw new Error(
+      'useGlobalContextLegacy must be used within a GlobalContextProvider',
+    );
+  }
+  return context;
 };
 
 export default GlobalContextProvider;

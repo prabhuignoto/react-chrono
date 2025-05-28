@@ -1,8 +1,8 @@
 import { TimelineModel } from '@models/TimelineModel';
 import { getUniqueID } from '@utils/index';
 import cls from 'classnames';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { GlobalContext } from '../GlobalContext';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useStableContext, useDynamicContext } from '../contexts';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import {
   TimelineContentRender,
@@ -55,15 +55,18 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     lineWidth,
     onScrollEnd,
     scrollable = true,
-    showAllCardsHorizontal,
-    theme,
-    darkMode,
+    toolbarPosition,
+    disableToolbar,
+  } = useStableContext();
+
+  const {
+    horizontalAll: showAllCardsHorizontal,
+    memoizedTheme: theme,
+    isDarkMode: darkMode,
     toggleDarkMode,
     updateHorizontalAllCards,
-    toolbarPosition,
     updateTextContentDensity,
-    disableToolbar,
-  } = useContext(GlobalContext);
+  } = useDynamicContext();
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const [hasFocus, setHasFocus] = useState(false);

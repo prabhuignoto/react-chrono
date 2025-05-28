@@ -190,6 +190,9 @@ export type TimelineProps = {
 
   noUniqueId?: boolean;
 
+  // indicates if this timeline is a child of another timeline
+  isChild?: boolean;
+
   // callback when an item is selected
   onItemSelected?: (
     data: Pick<

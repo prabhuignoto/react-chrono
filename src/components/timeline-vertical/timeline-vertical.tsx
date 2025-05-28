@@ -1,14 +1,13 @@
 import { TimelineVerticalModel } from '@models/TimelineVerticalModel';
 import {
   useCallback,
-  useContext,
   FunctionComponent,
   ReactNode,
   memo,
   useMemo,
   ReactElement,
 } from 'react';
-import { GlobalContext } from '../GlobalContext';
+import { useDynamicContext } from '../contexts';
 import TimelineVerticalItem from './timeline-vertical-item';
 import { TimelineVerticalWrapper } from './timeline-vertical.styles';
 
@@ -40,8 +39,8 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
     cardLess, // Render without cards? (Passed down)
     nestedCardHeight, // Specific height for nested cards (Passed down)
   }: TimelineVerticalModel): ReactElement => {
-    // Access global context, specifically to check for mobile view
-    const { isMobile } = useContext(GlobalContext);
+    // Access dynamic context for mobile view detection
+    const { isMobile } = useDynamicContext();
 
     /**
      * Callback handler passed to each TimelineVerticalItem's onActive.

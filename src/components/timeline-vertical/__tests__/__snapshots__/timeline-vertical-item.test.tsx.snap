@@ -59,6 +59,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
       data-testid="tree-leaf"
     >
       <button
+        aria-disabled="false"
         aria-label="Timeline point"
         class="sc-epGxBs kyKpWL  timeline-vertical-circle"
         data-testid="tree-leaf-click"
