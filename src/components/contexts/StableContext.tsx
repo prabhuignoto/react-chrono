@@ -4,7 +4,6 @@
  */
 import { createContext } from 'react';
 import { TimelineProps, ButtonTexts } from '@models/TimelineModel';
-import { Theme } from '@models/Theme';
 
 export interface StableContextProps {
   // Configuration that rarely changes

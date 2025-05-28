@@ -15,7 +15,6 @@ import { FunctionComponent, createContext, useContext } from 'react';
 import {
   OptimizedContextProvider,
   useGlobalContext,
-  type ContextProps as NewContextProps,
 } from './contexts';
 
 export type ContextProps = PropsModel & {
