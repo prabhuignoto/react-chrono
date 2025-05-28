@@ -253,15 +253,6 @@ export const VerticalAlternatingNested: FunctionComponent<{
             }}
             highlightCardsOnHover
             parseDetailsAsHTML
-            // borderLessCards
-            // theme={{
-            //   cardBgColor: '#fff',
-            //   titleColorActive: '#6495ed',
-            //   titleColor: '#922724',
-            //   cardDetailsBackGround: '#e8e8e8',
-            //   cardDetailsColor: '#000',
-            // }}
-            // darkMode
             onItemSelected={(selected) => console.log(selected.index)}
             fontSizes={{
               title: '1rem',
@@ -274,14 +265,11 @@ export const VerticalAlternatingNested: FunctionComponent<{
               cardTitleColor: '#FFA500',
               iconBackgroundColor: '#fff',
             }}
-            cardHeight={150}
+            cardHeight={200}
             timelinePointShape="square"
-            // focusActiveItemOnLoad
-            // activeItemIndex={9}
-            // cardHeight={250}
-            // cardHeight={350}
             mediaHeight={200}
             enableDarkToggle
+            nestedCardHeight={120}
             timelinePointDimension={30}
             classNames={{
               cardText: 'custom-text',
@@ -377,7 +365,7 @@ export const VerticalBasicNested: FunctionComponent<{
     <ComponentContainerTree type={type}>
       <Chrono
         items={items}
-        mode="HORIZONTAL"
+        mode="VERTICAL"
         slideShow
         cardWidth={500}
         slideItemDuration={2500}
@@ -398,7 +386,7 @@ export const VerticalBasicNested: FunctionComponent<{
         focusActiveItemOnLoad
         activeItemIndex={2}
         mediaHeight={200}
-        nestedCardHeight={100}
+        nestedCardHeight={150}
         cardHeight={300}
         // contentDetailsHeight={300}
         timelinePointDimension={20}
@@ -408,7 +396,7 @@ export const VerticalBasicNested: FunctionComponent<{
         }}
         parseDetailsAsHTML
         enableDarkToggle
-        mediaSettings={{ fit: 'center' }}
+        mediaSettings={{ fit: 'contain' }}
       />
     </ComponentContainerTree>
   </Vertical>

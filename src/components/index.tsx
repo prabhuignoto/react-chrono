@@ -43,12 +43,14 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       if (lineItems?.length) {
         return lineItems.map((item, index) => {
           const id = getUniqueID();
+          const hasNestedItems = item.items && item.items.length > 0;
 
           return {
             ...item,
             _dayjs: dayjs(item.date),
             active: index === activeItemIndex,
             id,
+            hasNestedItems,
             items: item.items?.map((subItem) => ({
               ...subItem,
               _dayjs: dayjs(subItem.date),

@@ -12,10 +12,7 @@ import {
   TextDensity,
 } from '@models/TimelineModel';
 import { FunctionComponent, createContext, useContext } from 'react';
-import {
-  OptimizedContextProvider,
-  useGlobalContext,
-} from './contexts';
+import { OptimizedContextProvider, useGlobalContext } from './contexts';
 
 export type ContextProps = PropsModel & {
   isMobile?: boolean;

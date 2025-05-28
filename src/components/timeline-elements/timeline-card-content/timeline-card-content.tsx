@@ -153,8 +153,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [useReadMore, detailedText, customContent, textDensity]);
 
       const canShowNestedTimeline = useMemo(() => {
-        return isNested && items && items.length > 0;
-      }, [isNested, items]);
+        return items && items.length > 0;
+      }, [items]);
 
       const canShowDetailsText = useMemo(() => {
         // Hide details when using text overlay with media, when density is LOW, otherwise show if content exists
