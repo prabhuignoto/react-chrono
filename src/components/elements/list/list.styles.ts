@@ -20,10 +20,10 @@ const baseStyles = css`
   width: 100%;
 `;
 
-// Common styles with improved typing
-const commonStyles = css`
+// Common styles with improved typing - using theme-based background
+const commonStyles = css<{ theme: Theme }>`
   ${baseStyles}
-  background: #f5f5f5;
+  background: ${(p) => p.theme.toolbarBtnBgColor};
   border-radius: 4px;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.5rem;

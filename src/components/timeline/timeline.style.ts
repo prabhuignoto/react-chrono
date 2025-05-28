@@ -5,12 +5,14 @@ import { ScrollBar } from '../common/styles';
 
 export const Wrapper = styled.div<{
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
+  theme?: Theme;
 }>`
   display: flex;
   flex-direction: column;
   /* cannot remove this */
   height: 100%;
   z-index: 0;
+  background-color: ${(p) => p.theme?.cardBgColor || 'transparent'};
 
   &:focus {
     outline: 0;
@@ -48,6 +50,7 @@ export const TimelineMainWrapper = styled.div<{
   ${(p) => (p.mode === 'HORIZONTAL' ? 'position: relative' : '')};
   scroll-behavior: smooth;
   width: 100%;
+  background-color: ${(p) => p.theme?.cardBgColor || 'transparent'};
   /* order: ${(p) => (p.position === 'top' ? 1 : 0)}; */
 
   ${ScrollBar}

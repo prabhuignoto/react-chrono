@@ -244,6 +244,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       onKeyDown={handleKeyDown}
       className={wrapperClass}
       cardPositionHorizontal={cardPositionHorizontal}
+      theme={theme}
       onMouseDown={() => setHasFocus(true)}
       onKeyUp={(evt) => {
         if (evt.key === 'Escape') {
