@@ -21,11 +21,17 @@ const baseStyles = css`
 `;
 
 // Common styles with improved typing - using theme-based background
-const commonStyles = css<{ theme: Theme }>`
+const commonStyles = css<{ $theme: Theme }>`
   ${baseStyles}
-  background: ${(p) => p.theme.toolbarBtnBgColor};
+  background: ${(p) => p.$theme.toolbarBtnBgColor};
   border-radius: 4px;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 1px
+    rgba(
+      0,
+      0,
+      0,
+      ${(p) => (p.$theme.toolbarBgColor === '#4b5563' ? '0.3' : '0.1')}
+    );
   margin-bottom: 0.5rem;
 
   &:last-child {
@@ -65,7 +71,7 @@ export const ListItemStyle = styled.li<{
 
 // Title styles
 export const TitleStyle = styled.h1<{ theme: Theme }>`
-  color: ${(p) => p.theme.primary};
+  color: ${(p) => p.theme.iconColor || p.theme.primary};
   font-size: 1rem;
   font-weight: normal;
   margin: 0.2rem 0;

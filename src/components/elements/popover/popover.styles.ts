@@ -11,8 +11,8 @@ const flexCenter = css`
 // Dynamic box shadow generator based on dark mode and open state
 const boxShadow = (isDarkMode: boolean, open: boolean) =>
   !open
-    ? `0px 1px 1px rgba(0, 0, 0, ${isDarkMode ? '0.85' : '0.2'})`
-    : 'inset 0 0 1px 1px rgba(0, 0, 0, 0.2)';
+    ? `0px 1px 2px rgba(0, 0, 0, ${isDarkMode ? '0.4' : '0.2'})`
+    : `inset 0 0 1px 1px rgba(0, 0, 0, ${isDarkMode ? '0.3' : '0.2'})`;
 
 // Base wrapper for the popover component
 export const PopoverWrapper = styled.div``;
@@ -29,7 +29,12 @@ export const PopoverHolder = styled.div<{
   flex-direction: column;
   background: ${({ $theme }) => $theme.toolbarBgColor};
   border-radius: 6px;
-  box-shadow: 0px 5px 16px rgba(0, 0, 0, 0.5);
+  border: ${({ $theme }) =>
+    $theme.buttonBorderColor
+      ? `1px solid ${$theme.buttonBorderColor}`
+      : 'none'};
+  box-shadow: 0px 5px 16px
+    ${({ $theme }) => $theme.shadowColor || 'rgba(0, 0, 0, 0.5)'};
   max-height: 500px;
   overflow-y: auto;
   padding: 0.5rem;
@@ -57,18 +62,33 @@ export const Selecter = styled.div<{
   background: ${({ $theme }) => $theme.toolbarBtnBgColor};
   color: ${({ $theme }) => $theme.toolbarTextColor};
   border-radius: 6px;
-  box-shadow: ${({ $open, $isDarkMode }) => boxShadow($isDarkMode, $open)};
+  border: 1px solid ${({ $theme }) => $theme.buttonBorderColor || 'transparent'};
+  box-shadow: ${({ $open, $theme }) =>
+    !$open
+      ? $theme.shadowColor || 'rgba(0, 0, 0, 0.2)'
+      : `inset 0 0 1px 1px ${$theme.shadowColor || 'rgba(0, 0, 0, 0.2)'}`};
   cursor: pointer;
   justify-content: space-between;
   padding: ${(p) => (p.$isMobile ? '0.4rem' : `0.4rem 0.5rem`)};
   user-select: none;
   margin-right: 0.5rem;
+  transition:
+    background-color 0.2s ease-out,
+    border-color 0.2s ease-out,
+    box-shadow 0.2s ease-out;
+
+  &:hover {
+    background: ${({ $theme }) =>
+      $theme.buttonHoverBgColor || $theme.toolbarBtnBgColor};
+    border-color: ${({ $theme }) =>
+      $theme.buttonHoverBorderColor || $theme.primary};
+  }
 `;
 
 // Icon component within the selector with rotation animation
 export const SelecterIcon = styled.span<{ $open: boolean; $theme: Theme }>`
   ${flexCenter};
-  color: ${({ $theme }) => $theme.primary};
+  color: ${({ $theme }) => $theme.iconColor || $theme.primary};
   height: 1.25rem;
   width: 1.25rem;
   transition: transform 0.2s ease-in-out;
@@ -106,7 +126,7 @@ export const CloseButton = styled.button<{ theme: Theme }>`
   ${flexCenter};
   background: transparent;
   border: none;
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.iconColor || theme.primary};
   cursor: pointer;
   margin-bottom: 0.5rem;
   margin-left: auto;

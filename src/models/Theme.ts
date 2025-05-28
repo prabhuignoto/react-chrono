@@ -58,4 +58,32 @@ export interface Theme {
   toolbarTextColor?: string;
 
   timelineBgColor?: string;
+
+  // === New Dark Mode Configurable Properties ===
+
+  // Icon colors for better visibility in dark mode
+  iconColor?: string;
+
+  // Button hover and active states
+  buttonHoverBgColor?: string;
+  buttonActiveBgColor?: string;
+  buttonActiveIconColor?: string;
+
+  // Border colors for enhanced contrast
+  buttonBorderColor?: string;
+  buttonHoverBorderColor?: string;
+  buttonActiveBorderColor?: string;
+
+  // Shadow and glow effects
+  shadowColor?: string;
+  glowColor?: string;
+
+  // Search highlighting
+  searchHighlightColor?: string;
+
+  // Dark mode toggle specific styling
+  darkToggleActiveBgColor?: string;
+  darkToggleActiveIconColor?: string;
+  darkToggleActiveBorderColor?: string;
+  darkToggleGlowColor?: string;
 }

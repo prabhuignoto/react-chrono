@@ -12,7 +12,6 @@ export const Wrapper = styled.div<{
   /* cannot remove this */
   height: 100%;
   z-index: 0;
-  // background-color: ${(p) => p.theme?.cardBgColor || 'transparent'};
 
   &:focus {
     outline: 0;
@@ -53,10 +52,7 @@ export const TimelineMainWrapper = styled.div<{
   background-color: ${(p) => p.theme?.timelineBgColor || 'transparent'};
   /* order: ${(p) => (p.position === 'top' ? 1 : 0)}; */
   background: transparent;
-F
-  ${ScrollBar}
-
-  &.horizontal {
+  F ${ScrollBar} &.horizontal {
     min-height: 150px;
   }
 
@@ -165,7 +161,7 @@ export const ExtraControlChild = styled.li`
 export const SearchWrapper = styled.div<{ theme?: Theme }>`
   display: flex;
   align-items: center;
-  background-color: ${(p) => p.theme?.cardBgColor};
+  background-color: ${(p) => p.theme?.toolbarBtnBgColor};
   padding: 0.1rem 0.5rem;
   border-radius: 6px;
   border: 1px solid ${(p) => p.theme?.toolbarBtnBgColor};
