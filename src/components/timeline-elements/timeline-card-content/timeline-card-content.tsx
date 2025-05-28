@@ -355,6 +355,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           $borderLessCards={borderLessCards}
           $textDensity={textDensity}
           $customContent={!!customContent}
+          $theme={theme}
         >
           {/* Only show the content header if we're not using text overlay mode with media */}
           {(!textOverlay || !media) && (

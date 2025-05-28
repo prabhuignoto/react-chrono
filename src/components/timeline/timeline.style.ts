@@ -12,7 +12,7 @@ export const Wrapper = styled.div<{
   /* cannot remove this */
   height: 100%;
   z-index: 0;
-  background-color: ${(p) => p.theme?.cardBgColor || 'transparent'};
+  // background-color: ${(p) => p.theme?.cardBgColor || 'transparent'};
 
   &:focus {
     outline: 0;
@@ -50,9 +50,10 @@ export const TimelineMainWrapper = styled.div<{
   ${(p) => (p.mode === 'HORIZONTAL' ? 'position: relative' : '')};
   scroll-behavior: smooth;
   width: 100%;
-  background-color: ${(p) => p.theme?.cardBgColor || 'transparent'};
+  background-color: ${(p) => p.theme?.timelineBgColor || 'transparent'};
   /* order: ${(p) => (p.position === 'top' ? 1 : 0)}; */
-
+  background: transparent;
+F
   ${ScrollBar}
 
   &.horizontal {

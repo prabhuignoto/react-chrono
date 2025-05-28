@@ -56,4 +56,6 @@ export interface Theme {
   toolbarBtnBgColor?: string;
 
   toolbarTextColor?: string;
+
+  timelineBgColor?: string;
 }

@@ -21,6 +21,7 @@ export const defaultTheme: Theme = {
   toolbarBgColor: '#f5f5f5',
   toolbarBtnBgColor: '#fff',
   toolbarTextColor: '#000',
+  timelineBgColor: '#fff',
 };
 
 export const darkTheme: Theme = {
@@ -44,4 +45,5 @@ export const darkTheme: Theme = {
   toolbarBgColor: '#555',
   toolbarBtnBgColor: '#222',
   toolbarTextColor: '#ffffff',
+  timelineBgColor: '#555',
 };

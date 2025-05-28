@@ -142,6 +142,7 @@ export const TimelineItemContentWrapper = styled.section<
     $slideShowType?: TimelineProps['slideShowType'];
     $textDensity?: TextDensity;
     $textOverlay?: boolean;
+    $theme?: Theme;
   } & ContentT
 >`
   ${baseCardStyles}
@@ -164,6 +165,8 @@ export const TimelineItemContentWrapper = styled.section<
 
   ${(p) => (p.$textOverlay ? `min-height: ${p.$minHeight}px` : '')};
   ${(p) => (p.$textOverlay ? 'height: 0' : '')};
+
+  // background: ${(p) => p.$theme?.cardBgColor};
 
   // Focus state
   &:focus {
