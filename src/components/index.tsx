@@ -237,7 +237,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   // Memoize icon children processing
   const iconChildren = useMemo(() => {
     let iconChildArray = toReactArray(children).filter(
-      (item) => (item as any).props.className === 'chrono-icons',
+      (item) =>
+        item &&
+        (item as any).props &&
+        (item as any).props.className === 'chrono-icons',
     );
 
     if (iconChildArray.length) {
@@ -249,7 +252,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   // Memoize content details children
   const contentDetailsChildren = useMemo(() => {
     return toReactArray(children).filter(
-      (item) => (item as any).props.className !== 'chrono-icons',
+      (item) =>
+        item &&
+        (item as any).props &&
+        (item as any).props.className !== 'chrono-icons',
     );
   }, [children]);
 

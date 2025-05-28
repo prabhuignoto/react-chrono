@@ -7,4 +7,10 @@ declare global {
   }
 }
 
+// SCSS module declarations
+declare module '*.scss' {
+  const classes: { [key: string]: string };
+  export default classes;
+}
+
 export {};

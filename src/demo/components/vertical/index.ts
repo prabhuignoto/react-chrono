@@ -1,15 +1,20 @@
-// Vertical timeline demo components
-export { VerticalBasic } from './VerticalBasic';
-export { VerticalTree } from './VerticalTree';
+// Vertical timeline components
+export { BasicVertical } from './BasicVertical';
+export { AlternatingVertical } from './AlternatingVertical';
+export { MixedVertical } from './MixedVertical';
+export { NewMediaVertical } from './NewMediaVertical';
+export { NestedVertical } from './NestedVertical';
+export { AlternatingNestedVertical } from './AlternatingNestedVertical';
+export { CardlessVertical } from './CardlessVertical';
+export { CustomContentVertical } from './CustomContentVertical';
+export { CustomContentWithIconsVertical } from './CustomContentWithIconsVertical';
 
-// Legacy exports for compatibility - these will be migrated
-export {
-  VerticalTreeMixed,
-  VerticalNewMedia,
-  VerticalAlternatingNested,
-  VerticalBasicCardLess,
-  VerticalBasicNested,
-  VerticalCustomContent2,
-  VerticalTreeSlideshow,
-  VerticalCustomContent,
-} from '../../vertical-samples'; 
+export type { BasicVerticalProps } from './BasicVertical';
+export type { AlternatingVerticalProps } from './AlternatingVertical';
+export type { MixedVerticalProps } from './MixedVertical';
+export type { NewMediaVerticalProps } from './NewMediaVertical';
+export type { NestedVerticalProps } from './NestedVertical';
+export type { AlternatingNestedVerticalProps } from './AlternatingNestedVertical';
+export type { CardlessVerticalProps } from './CardlessVertical';
+export type { CustomContentVerticalProps } from './CustomContentVertical';
+export type { CustomContentWithIconsVerticalProps } from './CustomContentWithIconsVertical'; 

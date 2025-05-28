@@ -1,9 +1,10 @@
-// Horizontal timeline demo components
-export { HorizontalBasic } from './HorizontalBasic';
+// Horizontal timeline components
+export { BasicHorizontal } from './BasicHorizontal';
+export { AllHorizontal } from './AllHorizontal';
+export { CardlessHorizontal } from './CardlessHorizontal';
+export { InitialSelectedHorizontal } from './InitialSelectedHorizontal';
 
-// Legacy exports for compatibility - these will be migrated
-export {
-  HorizontalAll,
-  HorizontalBasicCardLess,
-  HorizontalInitialSelectedItem,
-} from '../../horizontal-samples'; 
+export type { BasicHorizontalProps } from './BasicHorizontal';
+export type { AllHorizontalProps } from './AllHorizontal';
+export type { CardlessHorizontalProps } from './CardlessHorizontal';
+export type { InitialSelectedHorizontalProps } from './InitialSelectedHorizontal'; 

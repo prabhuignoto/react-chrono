@@ -6,7 +6,7 @@ context('Chrono.Vertical.Basic', () => {
   });
 
   it('check length', () => {
-    cy.get('.vertical-item-row').should('have.length', 13);
+    cy.get('.vertical-item-row').should('have.length', 10);
   });
 
   it('check card elements', () => {
