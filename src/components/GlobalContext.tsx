@@ -11,35 +11,19 @@ import {
   TimelineProps as PropsModel,
   TextDensity,
 } from '@models/TimelineModel';
-import { FunctionComponent, createContext, useContext } from 'react';
+import { FunctionComponent, useContext } from 'react';
 import { OptimizedContextProvider, useGlobalContext } from './contexts';
+import {
+  LegacyGlobalContext,
+  type LegacyContextProps,
+  type ButtonTexts,
+} from './contexts/legacy-types';
 
-export type ContextProps = PropsModel & {
-  isMobile?: boolean;
-  toggleDarkMode?: () => void;
-  updateHorizontalAllCards?: (state: boolean) => void;
-  updateTextContentDensity?: (value: TextDensity) => void;
-};
+export type ContextProps = LegacyContextProps;
+export type { ButtonTexts };
 
-export interface ButtonTexts {
-  first?: string;
-  last?: string;
-  play?: string;
-  stop?: string;
-  previous?: string;
-  next?: string;
-  dark?: string;
-  light?: string;
-  timelinePoint?: string;
-  searchPlaceholder?: string;
-  searchAriaLabel?: string;
-  clearSearch?: string;
-  nextMatch?: string;
-  previousMatch?: string;
-}
-
-// Legacy context for backward compatibility
-const GlobalContext = createContext<ContextProps>({});
+// Re-export the legacy context for backward compatibility
+export const GlobalContext = LegacyGlobalContext;
 
 /**
  * Legacy GlobalContextProvider - wraps the new optimized provider
@@ -118,9 +102,9 @@ const LegacyContextBridge: FunctionComponent<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <GlobalContext.Provider value={legacyContext}>
+    <LegacyGlobalContext.Provider value={legacyContext}>
       {children}
-    </GlobalContext.Provider>
+    </LegacyGlobalContext.Provider>
   );
 };
 
@@ -129,7 +113,7 @@ const LegacyContextBridge: FunctionComponent<{ children: React.ReactNode }> = ({
  * @deprecated Use useGlobalContext, useStableContext, or useDynamicContext from ./contexts/hooks
  */
 export const useGlobalContextLegacy = () => {
-  const context = useContext(GlobalContext);
+  const context = useContext(LegacyGlobalContext);
   if (!context) {
     throw new Error(
       'useGlobalContextLegacy must be used within a GlobalContextProvider',
@@ -139,5 +123,3 @@ export const useGlobalContextLegacy = () => {
 };
 
 export default GlobalContextProvider;
-
-export { GlobalContext };

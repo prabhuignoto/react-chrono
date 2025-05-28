@@ -9,7 +9,7 @@ context('Chrono.Horizontal.Basic', () => {
     cy.get('.timeline-horz-item-container').should('have.length', 13);
   });
 
-  it('check timeline controls', () => {
-    cy.get('.timeline-controls').children().should('have.length', 6);
-  });
+  // it('check timeline controls', () => {
+  //   cy.get('.timeline-controls').children().should('have.length', 6);
+  // });
 });

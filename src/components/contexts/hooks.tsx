@@ -6,8 +6,8 @@ import { useContext } from 'react';
 import { StableContext, StableContextProps } from './StableContext';
 import { DynamicContext, DynamicContextProps } from './DynamicContext';
 
-// Import the legacy context for fallback
-import { GlobalContext } from '../GlobalContext';
+// Import the legacy context from the new file to avoid circular dependency
+import { LegacyGlobalContext } from './legacy-types';
 import { getDefaultButtonTexts, getDefaultClassNames } from '../../utils';
 
 // Combined context type for compatibility
@@ -17,7 +17,7 @@ export type CombinedContextProps = StableContextProps & DynamicContextProps;
  * Hook to access legacy global context for fallback scenarios
  */
 const useLegacyGlobalContext = () => {
-  return useContext(GlobalContext);
+  return useContext(LegacyGlobalContext);
 };
 
 /**
