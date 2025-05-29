@@ -1,13 +1,3 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`ContentFooter > should match snapshot 1`] = `
-<div>
-  <progress
-    aria-label="Card progress"
-    class="sc-groBii cimxTy"
-    color="#0f52ba"
-    max="100"
-    value="100"
-  />
-</div>
-`;
+exports[`ContentFooter > should match snapshot 1`] = `<div />`;
