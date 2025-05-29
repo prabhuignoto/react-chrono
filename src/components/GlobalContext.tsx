@@ -7,10 +7,6 @@
  *
  * @deprecated Use OptimizedContextProvider and hooks from ./contexts/ instead
  */
-import {
-  TimelineProps as PropsModel,
-  TextDensity,
-} from '@models/TimelineModel';
 import { FunctionComponent, useContext } from 'react';
 import { OptimizedContextProvider, useGlobalContext } from './contexts';
 import {
