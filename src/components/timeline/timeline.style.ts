@@ -164,10 +164,18 @@ export const SearchWrapper = styled.div<{ theme?: Theme }>`
   background-color: ${(p) => p.theme?.toolbarBtnBgColor};
   padding: 0.1rem 0.5rem;
   border-radius: 6px;
-  border: 1px solid ${(p) => p.theme?.toolbarBtnBgColor};
+  border: 1px solid ${(p) => p.theme?.buttonBorderColor};
   flex-grow: 1;
   max-width: 400px;
   margin: 0 1rem;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:focus-within {
+    border-color: ${(p) => p.theme?.primary};
+    box-shadow: 0 0 0 2px ${(p) => p.theme?.glowColor};
+  }
 `;
 
 export const SearchInput = styled.input<{ theme?: Theme }>`
