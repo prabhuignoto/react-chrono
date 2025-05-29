@@ -4,17 +4,12 @@ import cls from 'classnames';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useStableContext, useDynamicContext } from '../contexts';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
-import SlideshowProgress from '../timeline-elements/slideshow-progress';
 import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
 import {
   Wrapper,
   TimelineMainWrapper,
   TimelineContentRender,
   ToolbarWrapper,
-  ExtraControls,
-  SearchWrapper,
-  SearchInput,
-  SearchInfo,
 } from './timeline.style';
 import { TimelineToolbar } from './timeline-toolbar';
 import { useTimelineSearch } from '../../hooks/useTimelineSearch';

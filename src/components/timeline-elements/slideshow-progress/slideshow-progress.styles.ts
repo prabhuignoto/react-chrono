@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Theme } from '@models/Theme';
 
 // Wrapper for the entire progress bar component
