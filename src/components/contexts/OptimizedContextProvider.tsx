@@ -273,6 +273,8 @@ export const OptimizedContextProvider: FunctionComponent<
       disableAutoScrollOnClick: !!props.disableInteraction,
       classNames: memoizedClassNames,
       showProgressOnSlideshow: slideShow,
+      showOverallSlideshowProgress:
+        props.showOverallSlideshowProgress ?? slideShow,
       disableInteraction: false,
       highlightCardsOnHover: props.highlightCardsOnHover ?? false,
       disableClickOnCircle: !!props.disableInteraction,
@@ -319,6 +321,7 @@ export const OptimizedContextProvider: FunctionComponent<
       props.enableQuickJump,
       props.enableLayoutSwitch,
       props.useReadMore,
+      props.showOverallSlideshowProgress,
     ],
   );
 

@@ -25,6 +25,8 @@ export interface StableContextProps {
     noUniqueId: boolean;
     parseDetailsAsHTML: boolean;
     scrollable: boolean | { scrollbar: boolean };
+    showProgressOnSlideshow?: boolean;
+    showOverallSlideshowProgress?: boolean;
     timelinePointDimension: number;
     timelinePointShape: 'circle' | 'square' | 'diamond';
     titleDateFormat: string;
@@ -72,6 +74,7 @@ export interface StableContextProps {
   disableAutoScrollOnClick?: boolean;
   classNames?: Record<string, string>;
   showProgressOnSlideshow?: boolean;
+  showOverallSlideshowProgress?: boolean;
   disableInteraction?: boolean;
   highlightCardsOnHover?: boolean;
   disableClickOnCircle?: boolean;
@@ -101,6 +104,8 @@ export const StableContext = createContext<StableContextProps>({
     noUniqueId: false,
     parseDetailsAsHTML: false,
     scrollable: { scrollbar: false },
+    showProgressOnSlideshow: true,
+    showOverallSlideshowProgress: true,
     timelinePointDimension: 16,
     timelinePointShape: 'circle',
     titleDateFormat: 'MMM DD, YYYY',

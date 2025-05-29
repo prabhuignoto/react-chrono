@@ -3,8 +3,11 @@
 exports[`ContentFooter > should match snapshot 1`] = `
 <div>
   <progress
-    class="sc-groBii jCzXQG"
+    aria-label="Card progress"
+    class="sc-groBii izOcLp"
     color="#0f52ba"
+    max="100"
+    value="100"
   />
 </div>
 `;

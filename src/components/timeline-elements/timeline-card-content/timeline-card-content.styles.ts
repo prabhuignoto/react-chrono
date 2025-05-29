@@ -428,6 +428,23 @@ export const SlideShowProgressBar = styled.progress<{
   position: absolute;
   border-radius: 2px;
   border: 0;
+  outline: none; /* Remove the outline/border */
+
+  /* Remove the default styling from progress element */
+  &::-webkit-progress-bar {
+    background-color: transparent;
+    border: 0;
+  }
+
+  &::-webkit-progress-value {
+    background-color: ${(p) => p.color || '#007bff'};
+    border-radius: 2px;
+  }
+
+  &::-moz-progress-bar {
+    background-color: ${(p) => p.color || '#007bff'};
+    border-radius: 2px;
+  }
 
   // Animation control
   ${(p) => {

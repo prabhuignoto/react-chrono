@@ -221,6 +221,9 @@ export type TimelineProps = {
 
   showProgressOnSlideshow?: boolean;
 
+  // shows overall progress bar during slideshow
+  showOverallSlideshowProgress?: boolean;
+
   // duration each slide is shown
   slideItemDuration?: number;
 

@@ -90,6 +90,7 @@ const convertLegacyToStable = (legacyContext: any): StableContextProps => {
     disableAutoScrollOnClick: legacyContext?.disableAutoScrollOnClick,
     classNames: legacyContext?.classNames,
     showProgressOnSlideshow: legacyContext?.showProgressOnSlideshow,
+    showOverallSlideshowProgress: legacyContext?.showOverallSlideshowProgress,
     disableInteraction: legacyContext?.disableInteraction,
     highlightCardsOnHover: legacyContext?.highlightCardsOnHover,
     disableClickOnCircle: legacyContext?.disableClickOnCircle,

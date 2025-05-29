@@ -4,11 +4,17 @@ import cls from 'classnames';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useStableContext, useDynamicContext } from '../contexts';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
+import SlideshowProgress from '../timeline-elements/slideshow-progress';
+import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
 import {
-  TimelineContentRender,
-  TimelineMainWrapper,
-  ToolbarWrapper,
   Wrapper,
+  TimelineMainWrapper,
+  TimelineContentRender,
+  ToolbarWrapper,
+  ExtraControls,
+  SearchWrapper,
+  SearchInput,
+  SearchInfo,
 } from './timeline.style';
 import { TimelineToolbar } from './timeline-toolbar';
 import { useTimelineSearch } from '../../hooks/useTimelineSearch';
@@ -57,6 +63,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     scrollable = true,
     toolbarPosition,
     disableToolbar,
+    slideItemDuration = 2000,
+    showOverallSlideshowProgress,
   } = useStableContext();
 
   const {
@@ -131,6 +139,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     items: items.map((item) => ({ ...item, wrapperId: id })),
     onTimelineUpdated,
     handleTimelineItemClick,
+  });
+
+  // Overall slideshow progress hook
+  const { isPaused, pauseProgress, resumeProgress } = useSlideshowProgress({
+    slideShowRunning: slideShowRunning ?? false,
+    activeTimelineItem: activeTimelineItem ?? 0,
+    totalItems: items.length,
+    slideItemDuration,
   });
 
   useTimelineMedia({
@@ -239,6 +255,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   }, [newOffSet, mode, timelineMainRef]);
 
+  // Ensure all styled components are properly integrated
   return (
     <Wrapper
       onKeyDown={handleKeyDown}
@@ -287,6 +304,17 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         </ToolbarWrapper>
       )}
 
+      {/* Overall slideshow progress bar - positioned below toolbar */}
+      {slideShowRunning && showOverallSlideshowProgress && (
+        <SlideshowProgress
+          activeItemIndex={activeTimelineItem ?? 0}
+          totalItems={items.length}
+          isRunning={slideShowRunning}
+          slideItemDuration={slideItemDuration}
+          isPaused={isPaused}
+        />
+      )}
+
       <TimelineMainWrapper
         ref={timelineMainRef}
         $scrollable={canScrollTimeline}
@@ -298,7 +326,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         position={toolbarPosition}
         onScroll={handleMainScroll}
       >
-        {/* @ts-ignore - Ignoring type issues here as we're using a more flexible approach */}
         <TimelineView
           timelineMode={timelineMode}
           activeTimelineItem={activeTimelineItem}
@@ -318,7 +345,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         />
       </TimelineMainWrapper>
 
-      {/* placeholder to render timeline content for horizontal mode */}
       <TimelineContentRender
         id={id}
         $showAllCards={showAllCardsHorizontal}

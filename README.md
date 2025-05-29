@@ -437,17 +437,23 @@ const highContrastTheme = {
 
 ### Slideshow
 
-| Name                | Type                                           | Default          | Description                                                                                                                                                    |
-| :------------------ | :--------------------------------------------- | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `slideShow`         | `boolean`                                      | `false`          | Enables slideshow mode and shows play/pause controls in the toolbar.                                                                                           |
-| `slideItemDuration` | `number`                                       | `2000`           | Duration (in milliseconds) each timeline item remains active during a slideshow. Default changed to `2000`.                                                    |
-| `slideShowType`     | `'reveal'`, `'slide_from_sides'`, `'slide_in'` | Varies by `mode` | Type of animation for slideshow transitions. Defaults: `VERTICAL` -> `'reveal'`, `VERTICAL_ALTERNATING` -> `'slide_from_sides'`, `HORIZONTAL` -> `'slide_in'`. |
+| Name                           | Type                                           | Default                              | Description                                                                                                                                                    |
+| :----------------------------- | :--------------------------------------------- | :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slideShow`                    | `boolean`                                      | `false`                              | Enables slideshow mode and shows play/pause controls in the toolbar.                                                                                           |
+| `slideItemDuration`            | `number`                                       | `2000`                               | Duration (in milliseconds) each timeline item remains active during a slideshow. Default changed to `2000`.                                                    |
+| `slideShowType`                | `'reveal'`, `'slide_from_sides'`, `'slide_in'` | Varies by `mode`                     | Type of animation for slideshow transitions. Defaults: `VERTICAL` -> `'reveal'`, `VERTICAL_ALTERNATING` -> `'slide_from_sides'`, `HORIZONTAL` -> `'slide_in'`. |
+| `showOverallSlideshowProgress` | `boolean`                                      | `true` (when `slideShow` is enabled) | Shows a line-based progress bar at the top of the screen during slideshow mode, indicating overall progress across all timeline items.                         |
 
 ```jsx
-<Chrono items={items} slideShow slideItemDuration={3000} />
+<Chrono
+  items={items}
+  slideShow
+  slideItemDuration={3000}
+  showOverallSlideshowProgress={true}
+/>
 ```
 
-> Slideshow can be stopped by clicking the stop button or pressing <kbd>ESC</kbd>.
+> Slideshow can be stopped by clicking the stop button or pressing <kbd>ESC</kbd>. The overall progress bar shows the global progress across all timeline items and can be disabled by setting `showOverallSlideshowProgress={false}`.
 
 ### Search
 

@@ -100,6 +100,9 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           ref={progressRef}
           $startWidth={startWidth}
           $resuming={isResuming}
+          max={100}
+          value={100} /* Always set to 100 to show full progress */
+          aria-label="Card progress"
         ></SlideShowProgressBar>
       )}
     </>
