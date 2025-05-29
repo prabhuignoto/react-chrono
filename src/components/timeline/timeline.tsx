@@ -64,7 +64,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     toolbarPosition,
     disableToolbar,
     slideItemDuration = 2000,
-    showOverallSlideshowProgress,
   } = useStableContext();
 
   const {
@@ -142,7 +141,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   });
 
   // Overall slideshow progress hook
-  const { isPaused, pauseProgress, resumeProgress } = useSlideshowProgress({
+  useSlideshowProgress({
     slideShowRunning: slideShowRunning ?? false,
     activeTimelineItem: activeTimelineItem ?? 0,
     totalItems: items.length,

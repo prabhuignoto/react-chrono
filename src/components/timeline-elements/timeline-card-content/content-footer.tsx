@@ -8,11 +8,7 @@ import {
 import { GlobalContext } from '../../GlobalContext';
 import ChevronIcon from '../../icons/chev-right';
 import { ContentFooterProps } from './header-footer.model';
-import {
-  ChevronIconWrapper,
-  ShowMore,
-  SlideShowProgressBar,
-} from './timeline-card-content.styles';
+import { ChevronIconWrapper, ShowMore } from './timeline-card-content.styles';
 
 /**
  * ContentFooter
@@ -92,8 +88,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
         </ShowMore>
       ) : null}
 
-      
-        {/* <SlideShowProgressBar
+      {/* <SlideShowProgressBar
           color={theme?.primary}
           $duration={remainInterval}
           ref={progressRef}
@@ -103,7 +98,6 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           value={100} 
           aria-label='Card progress'
         ></SlideShowProgressBar> */}
-
     </>
   );
 };

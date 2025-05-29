@@ -42,7 +42,6 @@ const SlideshowProgress: React.FC<SlideshowProgressProps> = ({
   const [isAnimating, setIsAnimating] = useState(false);
   const animationRef = useRef<number | null>(null);
   const startTimeRef = useRef<number | null>(null);
-  const pausedProgressRef = useRef<number>(0);
 
   // Calculate the base progress for completed items
   const baseProgress =

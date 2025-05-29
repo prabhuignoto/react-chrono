@@ -1,16 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 import { Theme } from '@models/Theme';
 
-// Animation for smooth progress transitions
-const progressAnimation = (progressPercentage: number) => keyframes`
-  from {
-    width: 0%;
-  }
-  to {
-    width: ${progressPercentage}%;
-  }
-`;
-
 // Wrapper for the entire progress bar component
 export const SlideshowProgressWrapper = styled.div`
   width: 100%;
@@ -106,10 +96,6 @@ export const OverallProgressBar = styled.progress<{
 
   /* Animation control */
   ${(p) => {
-    const value = Number(p.value) || 0;
-    const max = Number(p.max) || 100;
-    const percentage = (value / max) * 100;
-
     if (!p.$paused && p.$duration && p.$duration > 0) {
       return css`
         animation-play-state: running;
