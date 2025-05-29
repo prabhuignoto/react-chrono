@@ -305,7 +305,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       )}
 
       {/* Overall slideshow progress bar - positioned below toolbar */}
-      {slideShowRunning && showOverallSlideshowProgress && (
+      {/* {slideShowRunning && showOverallSlideshowProgress && (
         <SlideshowProgress
           activeItemIndex={activeTimelineItem ?? 0}
           totalItems={items.length}
@@ -313,7 +313,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           slideItemDuration={slideItemDuration}
           isPaused={isPaused}
         />
-      )}
+      )} */}
 
       <TimelineMainWrapper
         ref={timelineMainRef}
