@@ -82,7 +82,7 @@ export const providerProps: TimelineProps = {
   textDensity: 'HIGH',
   textOverlay: false,
   theme: {
-    cardBgColor: '#fff',
+    cardBgColor: '#ffffff',
     cardDetailsBackGround: '#ffffff',
     cardDetailsColor: '#000',
     cardMediaBgColor: '#ffffff',

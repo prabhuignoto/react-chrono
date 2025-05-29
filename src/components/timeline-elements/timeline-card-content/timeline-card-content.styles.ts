@@ -274,7 +274,7 @@ export const CardSubTitleSemantic = styled.span.withConfig({
   $fontSize?: string;
   $padding?: boolean;
   dir?: string;
-  theme?: Theme;
+  theme: Theme;
   as?: string;
 }>`
   ${sharedSemanticStyles}
@@ -415,7 +415,6 @@ export const ShowMore = styled.button<{
 export const SlideShowProgressBar = styled.progress<{
   $color?: string;
   $duration?: number;
-  $paused?: boolean;
   $resuming?: boolean;
   $startWidth?: number;
 }>`
@@ -446,16 +445,15 @@ export const SlideShowProgressBar = styled.progress<{
     border-radius: 2px;
   }
 
-  // Animation control
+  // Animation control - simplified without pause
   ${(p) => {
-    if (!p.$paused && p.$startWidth && p.$startWidth > 0) {
+    if (p.$startWidth && p.$startWidth > 0) {
       return css`
         animation: ${slideAnimation(p.$startWidth, 0)} ${p.$duration}ms ease-in;
         animation-play-state: running;
       `;
     } else {
       return css`
-        animation-play-state: paused;
         width: ${p.$startWidth}px;
       `;
     }

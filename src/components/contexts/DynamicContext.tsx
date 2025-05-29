@@ -46,7 +46,7 @@ export const DynamicContext = createContext<DynamicContextProps>({
     titleColor: '#007FFF',
     titleColorActive: '#007FFF',
     toolbarBgColor: '#f5f5f5',
-    toolbarBtnBgColor: '#fff',
+    toolbarBtnBgColor: '#ffffff',
     toolbarTextColor: '#000',
     timelineBgColor: '#f5f5f5',
   },

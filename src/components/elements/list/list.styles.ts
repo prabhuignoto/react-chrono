@@ -107,7 +107,7 @@ export const CheckboxStyle = styled.span<{ selected?: boolean; theme: Theme }>`
   border-radius: 50%;
   background: ${(p) => (p.selected ? p.theme.primary : p.theme.toolbarBgColor)};
   ${(p) => !p.selected && `box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1)`};
-  color: #fff;
+  color: #ffffff;
 
   svg {
     width: 80%;
