@@ -63,7 +63,7 @@ const LegacyContextBridge: FunctionComponent<{ children: React.ReactNode }> = ({
     activeItemIndex: combinedContext.computedActiveItemIndex,
 
     // Type conversion for backward compatibility
-    slideShowType: (combinedContext.slideShowType ||
+    slideShowType: (combinedContext.slideShowType ??
       combinedContext.computedSlideShowType) as any,
     cardPositionHorizontal: combinedContext.cardPositionHorizontal as any,
 

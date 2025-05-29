@@ -50,7 +50,7 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
           $textOverlay={textOverlay}
           $gradientColor={gradientColor}
         >
-          {customContent || (
+          {customContent ?? (
             <TextContent
               {...{ detailedText, showMore, theme, timelineContent }}
             />

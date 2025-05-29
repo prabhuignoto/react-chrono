@@ -17,7 +17,7 @@ export const MixedVertical: FunctionComponent<MixedVerticalProps> = ({
       <Chrono
         items={mixedTimeline}
         mode="VERTICAL"
-        cardHeight={cardHeight || 300}
+        cardHeight={cardHeight ?? 300}
         cardWidth={550}
         scrollable
         slideShow
@@ -27,4 +27,4 @@ export const MixedVertical: FunctionComponent<MixedVerticalProps> = ({
       />
     </ComponentContainerTree>
   </Vertical>
-); 
+);

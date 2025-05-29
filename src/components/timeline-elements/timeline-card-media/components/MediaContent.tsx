@@ -53,7 +53,7 @@ export const MediaContent = memo(
           <YoutubePlayer
             url={media.source.url}
             active={active}
-            name={media.name || ''}
+            name={media.name ?? ''}
           />
         );
       }
@@ -65,7 +65,7 @@ export const MediaContent = memo(
           url={media.source.url}
           active={active}
           id={id}
-          name={media.name || ''}
+          name={media.name ?? ''}
           onMediaStateChange={onMediaStateChange}
           handleMediaLoaded={handleMediaLoaded}
           handleError={handleError}
@@ -79,7 +79,7 @@ export const MediaContent = memo(
       ) : (
         <ImageDisplay
           url={media.source.url}
-          name={media.name || ''}
+          name={media.name ?? ''}
           mode={mode}
           mediaLoaded={mediaLoaded}
           borderLessCards={borderLessCards}

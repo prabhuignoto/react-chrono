@@ -8,12 +8,12 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     data-testid="vertical-item-row"
   >
     <div
-      class="sc-edaYAx kzZNVh"
+      class="sc-edaYAx iQIRiA"
       mode="VERTICAL_ALTERNATING"
     >
       <div
         align="right"
-        class="sc-ffSBbn jeveqI timeline-item-title title"
+        class="sc-ffSBbn hBRWRr timeline-item-title title"
       >
         vertical item title
       </div>

@@ -57,7 +57,7 @@ export const TimelineNavButton = styled.button<{
   align-items: center;
   background: ${(p) => p.theme.toolbarBtnBgColor};
   border-radius: 6px;
-  border: 1px solid ${(p) => p.theme.buttonBorderColor || 'transparent'};
+  border: 1px solid ${(p) => p.theme.buttonBorderColor ?? 'transparent'};
   color: ${(p) => p.theme.toolbarTextColor ?? p.theme.secondary};
   cursor: pointer;
   display: flex;
@@ -71,15 +71,15 @@ export const TimelineNavButton = styled.button<{
     box-shadow 0.2s ease-out,
     border-color 0.2s ease-out;
   width: 28px;
-  box-shadow: 0 1px 1px ${(p) => p.theme.shadowColor || 'rgba(0, 0, 0, 0.08)'};
+  box-shadow: 0 1px 1px ${(p) => p.theme.shadowColor ?? 'rgba(0, 0, 0, 0.08)'};
 
   transform: ${(p) => (p.rotate === 'TRUE' ? 'rotate(90deg)' : 'none')};
 
   &:hover {
     background: ${(p) =>
-      p.theme.buttonHoverBgColor || p.theme.toolbarBtnBgColor};
-    border-color: ${(p) => p.theme.buttonHoverBorderColor || p.theme.primary};
-    box-shadow: 0 2px 4px ${(p) => p.theme.shadowColor || 'rgba(0, 0, 0, 0.12)'};
+      p.theme.buttonHoverBgColor ?? p.theme.toolbarBtnBgColor};
+    border-color: ${(p) => p.theme.buttonHoverBorderColor ?? p.theme.primary};
+    box-shadow: 0 2px 4px ${(p) => p.theme.shadowColor ?? 'rgba(0, 0, 0, 0.12)'};
     transform: ${(p) => (p.rotate === 'TRUE' ? 'rotate(90deg)' : 'none')}
       translateY(-1px);
   }
@@ -89,33 +89,33 @@ export const TimelineNavButton = styled.button<{
       scale(0.95);
     background: ${(p) => p.theme.toolbarBtnBgColor};
     box-shadow: inset 0 1px 1px
-      ${(p) => p.theme.shadowColor || 'rgba(0, 0, 0, 0.1)'};
+      ${(p) => p.theme.shadowColor ?? 'rgba(0, 0, 0, 0.1)'};
   }
 
   ${(p) =>
     p.$active &&
     css`
-      background: ${p.theme.darkToggleActiveBgColor || p.theme.secondary};
-      border-color: ${p.theme.darkToggleActiveBorderColor || p.theme.primary};
+      background: ${p.theme.darkToggleActiveBgColor ?? p.theme.secondary};
+      border-color: ${p.theme.darkToggleActiveBorderColor ?? p.theme.primary};
       box-shadow: 0 0 0 2px
-        ${p.theme.darkToggleGlowColor ||
-        p.theme.glowColor ||
+        ${p.theme.darkToggleGlowColor ??
+        p.theme.glowColor ??
         'rgba(59, 130, 246, 0.3)'};
 
       &:hover {
-        background: ${p.theme.buttonHoverBgColor || p.theme.secondary};
+        background: ${p.theme.buttonHoverBgColor ?? p.theme.secondary};
         opacity: 0.9;
         box-shadow:
-          0 2px 4px ${p.theme.shadowColor || 'rgba(0, 0, 0, 0.12)'},
+          0 2px 4px ${p.theme.shadowColor ?? 'rgba(0, 0, 0, 0.12)'},
           0 0 0 2px
-            ${p.theme.darkToggleGlowColor ||
-            p.theme.glowColor ||
+            ${p.theme.darkToggleGlowColor ??
+            p.theme.glowColor ??
             'rgba(59, 130, 246, 0.4)'};
       }
 
       svg {
-        color: ${p.theme.darkToggleActiveIconColor ||
-        p.theme.buttonActiveIconColor ||
+        color: ${p.theme.darkToggleActiveIconColor ??
+        p.theme.buttonActiveIconColor ??
         '#fff'};
       }
     `}
@@ -123,7 +123,7 @@ export const TimelineNavButton = styled.button<{
   svg {
     width: 75%;
     height: 75%;
-    color: ${(p) => p.theme.iconColor || p.theme.primary};
+    color: ${(p) => p.theme.iconColor ?? p.theme.primary};
     transition: color 0.2s ease-out;
   }
 `;

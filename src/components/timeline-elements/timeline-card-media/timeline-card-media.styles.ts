@@ -90,7 +90,7 @@ export const CardImage = styled.img<{
   margin-right: auto;
   height: 100%;
   width: 100%;
-  object-fit: ${(p) => p.fit || 'cover'};
+  object-fit: ${(p) => p.fit ?? 'cover'};
   object-position: center;
   visibility: ${(p) => (p.$visible ? 'visible' : 'hidden')};
   border-radius: ${(p) => (p.$enableBorderRadius ? '6px' : '0')};
