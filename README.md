@@ -223,7 +223,7 @@ Each object in the `items` array can have the following properties:
 | `disableAutoScrollOnClick` | `boolean`  | `false` | Prevents auto-scrolling to the active card when a timeline card or point is clicked.                                        |
 | `onItemSelected`           | `function` |         | Callback function invoked when a timeline item is selected. Passes item data and index.                                     |
 | `onScrollEnd`              | `function` |         | Callback function invoked when the end of the timeline is reached during scrolling.                                         |
-| `focusActiveItemOnLoad`    | `boolean`  | `true`  | Automatically scrolls to and focuses on the `activeItemIndex` when the timeline loads.                                      |
+| `focusActiveItemOnLoad`    | `boolean`  | `false` | Automatically scrolls to and focuses on the `activeItemIndex` when the timeline loads.                                      |
 | `disableInteraction`       | `boolean`  | `false` | Disables all user interactions with the timeline (clicks, keyboard navigation).                                             |
 | `enableQuickJump`          | `boolean`  | `true`  | Allows quick jumping to a timeline item via controls (if toolbar is enabled).                                               |
 | `useReadMore`              | `boolean`  | `true`  | Enables a "read more" button if card content exceeds available space. Set to `false` to always show all text.               |
@@ -237,34 +237,33 @@ Each object in the `items` array can have the following properties:
 
 ### Layout & Sizing
 
-| Name                     | Type                                  | Default    | Description                                                                                                                                     |
-| :----------------------- | :------------------------------------ | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cardHeight`             | `number`                              | `200`      | Minimum height (in pixels) of timeline cards.                                                                                                   |
-| `cardWidth`              | `number`                              | `450`      | Maximum width (in pixels) of timeline cards.                                                                                                    |
-| `itemWidth`              | `number`                              | `300`      | Width (in pixels) of each timeline section in `HORIZONTAL` mode.                                                                                |
-| `contentDetailsHeight`   | `number`                              | `150`      | Height (in pixels) of the detailed content area within a card if `cardDetailedText` is used.                                                    |
-| `lineWidth`              | `number`                              | `3`        | Width (in pixels) of the main timeline track line.                                                                                              |
-| `timelinePointDimension` | `number`                              | `16`       | Diameter (in pixels) of the circular points on the timeline.                                                                                    |
-| `nestedCardHeight`       | `number`                              | `150`      | Height (in pixels) of cards within a [nested timeline](#nested-timelines-1).                                                                    |
-| `scrollable`             | `boolean` or `{ scrollbar: boolean }` | `true`     | Makes `VERTICAL` and `VERTICAL_ALTERNATING` modes scrollable. Set to `{ scrollbar: true }` to show the scrollbar.                               |
-| `enableBreakPoint`       | `boolean`                             | `true`     | If true, `VERTICAL_ALTERNATING` mode automatically switches to `VERTICAL` mode when `responsiveBreakPoint` is reached.                          |
-| `responsiveBreakPoint`   | `number`                              | `768`      | Viewport width (in pixels) at which `VERTICAL_ALTERNATING` mode switches to `VERTICAL` if `enableBreakPoint` is true. Default changed to `768`. |
-| `cardPositionHorizontal` | `'TOP'` or `'BOTTOM'`                 | `'BOTTOM'` | Positions the card above or below the timeline in `HORIZONTAL` mode. Default changed to `'BOTTOM'`.                                             |
-| `flipLayout`             | `boolean`                             | `false`    | Reverses the layout direction (e.g., Right-to-Left for horizontal, or swaps sides for vertical alternating).                                    |
-| `showAllCardsHorizontal` | `boolean`                             | `false`    | In `HORIZONTAL` mode, displays all cards simultaneously instead of only the active one.                                                         |
+| Name                     | Type                                  | Default                | Description                                                                                                                                      |
+| :----------------------- | :------------------------------------ | :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cardHeight`             | `number`                              | `200`                  | Minimum height (in pixels) of timeline cards.                                                                                                    |
+| `cardWidth`              | `number`                              | `450`                  | Maximum width (in pixels) of timeline cards.                                                                                                     |
+| `itemWidth`              | `number`                              | `200`                  | Width (in pixels) of each timeline section in `HORIZONTAL` mode.                                                                                 |
+| `contentDetailsHeight`   | `number`                              | `150`                  | Height (in pixels) of the detailed content area within a card if `cardDetailedText` is used.                                                     |
+| `lineWidth`              | `number`                              | `3`                    | Width (in pixels) of the main timeline track line.                                                                                               |
+| `timelinePointDimension` | `number`                              | `16`                   | Diameter (in pixels) of the circular points on the timeline.                                                                                     |
+| `nestedCardHeight`       | `number`                              | `150`                  | Height (in pixels) of cards within a [nested timeline](#nested-timelines-1).                                                                     |
+| `scrollable`             | `boolean` or `{ scrollbar: boolean }` | `{ scrollbar: false }` | Makes `VERTICAL` and `VERTICAL_ALTERNATING` modes scrollable. Set to `{ scrollbar: true }` to show the scrollbar.                                |
+| `enableBreakPoint`       | `boolean`                             | `true`                 | If true, `VERTICAL_ALTERNATING` mode automatically switches to `VERTICAL` mode when `responsiveBreakPoint` is reached.                           |
+| `responsiveBreakPoint`   | `number`                              | `1024`                 | Viewport width (in pixels) at which `VERTICAL_ALTERNATING` mode switches to `VERTICAL` if `enableBreakPoint` is true. Default changed to `1024`. |
+| `cardPositionHorizontal` | `'TOP'` or `'BOTTOM'`                 |                        | Positions the card above or below the timeline in `HORIZONTAL` mode.                                                                             |
+| `flipLayout`             | `boolean`                             | `false`                | Reverses the layout direction (e.g., Right-to-Left for horizontal, or swaps sides for vertical alternating).                                     |
+| `showAllCardsHorizontal` | `boolean`                             | `false`                | In `HORIZONTAL` mode, displays all cards simultaneously instead of only the active one.                                                          |
 
 ### Media Handling
 
 The `media` object within a [Timeline Item](#timeline-item-model) configures images or videos.
 
-| `media` Property | Type                             | Description                                                                                              |
-| :--------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------- |
-| `type`           | `'IMAGE'` or `'VIDEO'`           | Specifies the type of media.                                                                             |
-| `source`         | `{ url: string, type?: string }` | `url`: URL of the image or video. `type` (for video): e.g., `'mp4'`, `'webm'`.                           |
-| `name`           | `string`                         | Alt text for images or a descriptive name for videos.                                                    |
-| `active`         | `boolean`                        | (Video only) If true, video will attempt to play when its card becomes active.                           |
-| `id`             | `string`                         | A unique ID for the media element.                                                                       |
-| `videoOptions`   | `HTMLVideoElement attributes`    | (Video only) An object containing standard HTML5 video attributes like `loop`, `muted`, `autoPlay`, etc. |
+| `media` Property | Type                             | Description                                                                    |
+| :--------------- | :------------------------------- | :----------------------------------------------------------------------------- |
+| `type`           | `'IMAGE'` or `'VIDEO'`           | Specifies the type of media.                                                   |
+| `source`         | `{ url: string, type?: string }` | `url`: URL of the image or video. `type` (for video): e.g., `'mp4'`, `'webm'`. |
+| `name`           | `string`                         | Alt text for images or a descriptive name for videos.                          |
+| `active`         | `boolean`                        | (Video only) If true, video will attempt to play when its card becomes active. |
+| `id`             | `string`                         | A unique ID for the media element.                                             |
 
 **Image Example:**
 
@@ -287,8 +286,7 @@ media: {
   source: {
     url: "/pearl-harbor.mp4", // or "https://www.youtube.com/embed/f6cz9gtMTeI"
     type: "mp4" // Optional for local files if extension is clear, useful for YouTube embeds
-  },
-  videoOptions: { autoPlay: true, muted: true }
+  }
 }
 ```
 
@@ -473,7 +471,7 @@ const highContrastTheme = {
 | `noUniqueId`            | `boolean`             | `false` | Prevents generating a unique ID for the timeline wrapper. Use with `uniqueId` if you need to set a specific ID. |
 | `uniqueId`              | `string`              |         | Sets a custom unique ID for the timeline wrapper. Useful with `noUniqueId={true}`.                              |
 | `disableToolbar`        | `boolean`             | `false` | Hides the entire toolbar/control panel.                                                                         |
-| `toolbarPosition`       | `'TOP'` or `'BOTTOM'` | `'TOP'` | Positions the toolbar at the top or bottom of the timeline.                                                     |
+| `toolbarPosition`       | `'top'` or `'bottom'` | `'top'` | Positions the toolbar at the top or bottom of the timeline.                                                     |
 | `highlightCardsOnHover` | `boolean`             | `false` | Highlights timeline cards on mouse hover.                                                                       |
 
 ## 🎨 Customization
@@ -568,6 +566,111 @@ Apply your own CSS classes to various parts of the timeline using the `className
 
 Adjust font sizes for card elements using the `fontSizes` prop.
 
+```jsx
+<Chrono
+  items={items}
+  fontSizes={{
+    cardSubtitle: '0.85rem',
+    cardText: '1rem',
+    cardTitle: '1.25rem',
+    title: '1.5rem',
+  }}
+/>
 ```
 
+### Custom Button Alt Text
+
+Customize button text and accessibility labels:
+
+```jsx
+<Chrono
+  items={items}
+  buttonTexts={{
+    first: 'Go to Beginning',
+    last: 'Go to End',
+    next: 'Next Event',
+    previous: 'Previous Event',
+    play: 'Start Auto-play',
+    stop: 'Stop Auto-play',
+  }}
+/>
 ```
+
+## 📦 Examples & Demos
+
+### CodeSandbox Examples
+
+[![Edit react-chrono](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-chrono-bg56e?fontsize=14&hidenavigation=1&theme=dark)
+
+### Kitchen Sink Demo
+
+[Explore all features](https://react-chrono.vercel.app/)
+
+### Storybook
+
+[Interactive component documentation](https://5f985eb478dcb00022cfd60e-axcjutcmmg.chromatic.com/)
+
+## 🛠️ Build Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/prabhuignoto/react-chrono.git
+cd react-chrono
+
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm run dev
+
+# Build for production
+pnpm run build
+
+# Run tests
+pnpm test
+```
+
+## 🧪 Tests
+
+The project uses Vitest for testing with comprehensive coverage:
+
+```bash
+# Run all tests
+pnpm test
+
+# Run tests in watch mode
+pnpm test:watch
+
+# Generate coverage report
+pnpm test:coverage
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](./CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## 🧱 Built With
+
+- [React](https://reactjs.org/) - The web framework used
+- [TypeScript](https://www.typescriptlang.org/) - For type safety
+- [Styled Components](https://styled-components.com/) - For styling
+- [FocusTrap](https://github.com/focus-trap/focus-trap) - For accessibility
+- [Rollup](https://rollupjs.org/) - For bundling
+
+## 💖 Support & Meta
+
+- **Star** this repo on [GitHub](https://github.com/prabhuignoto/react-chrono)
+- **Follow** the author on [Twitter](https://twitter.com/prabhumurthy2)
+- **Create issues** for bug reports and feature requests
+- **Contribute** to make this library better
+
+## ✨ Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
