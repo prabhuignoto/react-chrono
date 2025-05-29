@@ -119,7 +119,7 @@ export const ThemeShowcase: React.FC = () => {
             items={timelineItems}
             mode="VERTICAL"
             theme={modernMinimalTheme}
-            enableDarkToggle
+            enableDarkToggle={false}
             disableToolbar={false}
           />
         </div>
@@ -135,7 +135,7 @@ export const ThemeShowcase: React.FC = () => {
             items={timelineItems}
             mode="VERTICAL"
             theme={vibrantTheme}
-            enableDarkToggle
+            enableDarkToggle={false}
             disableToolbar={false}
           />
         </div>
@@ -151,7 +151,7 @@ export const ThemeShowcase: React.FC = () => {
             items={timelineItems}
             mode="VERTICAL"
             theme={natureTheme}
-            enableDarkToggle
+            enableDarkToggle={false}
             disableToolbar={false}
           />
         </div>
