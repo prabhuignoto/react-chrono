@@ -92,19 +92,18 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
         </ShowMore>
       ) : null}
 
-      {showProgressBar && (
-        <SlideShowProgressBar
+      
+        {/* <SlideShowProgressBar
           color={theme?.primary}
           $duration={remainInterval}
-          $paused={paused}
           ref={progressRef}
           $startWidth={startWidth}
           $resuming={isResuming}
           max={100}
-          value={100} /* Always set to 100 to show full progress */
-          aria-label="Card progress"
-        ></SlideShowProgressBar>
-      )}
+          value={100} 
+          aria-label='Card progress'
+        ></SlideShowProgressBar> */}
+
     </>
   );
 };
