@@ -4,6 +4,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import styles from './layout.module.scss';
 
 const items = [
+  { path: '/theme-showcase', label: 'Theme Showcase' },
   { path: '/vertical-basic', label: 'Vertical Basic' },
   {
     path: '/vertical-basic-nested',

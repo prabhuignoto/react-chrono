@@ -1,5 +1,5 @@
 import React from 'react';
-import { Chrono } from '../components';
+import Chrono from '../components';
 
 // Example 1: Custom Brand Colors Dark Theme
 const brandDarkTheme = {

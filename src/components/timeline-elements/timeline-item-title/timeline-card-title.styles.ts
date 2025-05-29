@@ -16,6 +16,12 @@ export const TitleWrapper = styled.div<{
   text-align: ${(p) => (p.align ? p.align : '')};
   color: ${(p) => (p.theme ? p.theme.titleColor : '')};
 
+  /* --- Prevent long text from affecting layout --- */
+  white-space: nowrap; /* Prevent text from wrapping to multiple lines */
+  text-overflow: ellipsis; /* Show ellipsis (...) for overflowing text */
+  min-width: 0; /* Allow the element to shrink below its content size */
+  max-width: 100%; /* Ensure it doesn't exceed its container */
+
   &.active {
     background: ${(p) => p.theme?.secondary};
     color: ${(p) =>

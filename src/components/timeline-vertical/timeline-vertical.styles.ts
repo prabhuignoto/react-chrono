@@ -201,6 +201,10 @@ export const TimelineTitleWrapper = styled.div<TimelineTitleWrapperProps>`
       ? '37.5%' /* Takes up space in alternating mode */
       : '10%'}; /* Smaller width in standard vertical mode */
 
+  /* --- Prevent text overflow from affecting layout --- */
+  min-width: 0; /* Allow flex items to shrink below their content size */
+  overflow: hidden; /* Hide overflowing content */
+
   /* --- Order and Justification --- */
   &.left {
     /* Justification depends on whether layout is flipped */

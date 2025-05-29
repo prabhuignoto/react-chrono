@@ -19,6 +19,7 @@ import {
   AllHorizontal,
   CardlessHorizontal,
   InitialSelectedHorizontal,
+  ThemeShowcase,
 } from './components';
 import {
   basicTimeline,
@@ -175,6 +176,10 @@ const NewDemo: React.FunctionComponent = () => {
               element: items.length > 0 && (
                 <CardlessHorizontal type="big-screen" items={items} />
               ),
+            },
+            {
+              path: '/theme-showcase',
+              element: <ThemeShowcase />,
             },
           ],
         },
