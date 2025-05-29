@@ -337,42 +337,49 @@ const items = [
 
 ### Theming & Styling
 
-React Chrono now offers **comprehensive theme customization** with full dark mode support. Use the `theme` prop to customize colors and appearance:
+| Name                          | Type     | Description                                      |
+| :---------------------------- | :------- | :----------------------------------------------- |
+| `cardBgColor`                 | `string` | Background color for timeline cards              |
+| `cardDetailsBackGround`       | `string` | Background color for card details section        |
+| `cardDetailsColor`            | `string` | Text color for card details                      |
+| `cardMediaBgColor`            | `string` | Background color for media section in cards      |
+| `cardSubtitleColor`           | `string` | Color for card subtitles                         |
+| `cardTitleColor`              | `string` | Color for card titles                            |
+| `detailsColor`                | `string` | Color for detailed text                          |
+| `iconBackgroundColor`         | `string` | Background color for timeline icons              |
+| `nestedCardBgColor`           | `string` | Background color for nested timeline cards       |
+| `nestedCardDetailsBackGround` | `string` | Background color for nested card details section |
+| `nestedCardDetailsColor`      | `string` | Text color for nested card details               |
+| `nestedCardSubtitleColor`     | `string` | Color for nested card subtitles                  |
+| `nestedCardTitleColor`        | `string` | Color for nested card titles                     |
+| `primary`                     | `string` | Primary color for the timeline                   |
+| `secondary`                   | `string` | Secondary color for the timeline                 |
+| `textColor`                   | `string` | Default text color                               |
+| `titleColor`                  | `string` | Color for timeline titles                        |
+| `titleColorActive`            | `string` | Color for active timeline titles                 |
+| `toolbarBgColor`              | `string` | Background color for the toolbar                 |
+| `toolbarBtnBgColor`           | `string` | Background color for toolbar buttons             |
+| `toolbarTextColor`            | `string` | Text color for toolbar elements                  |
+| `timelineBgColor`             | `string` | Background color for the timeline                |
 
-```jsx
-<Chrono
-  items={items}
-  theme={{
-    primary: 'red', // Main timeline color (points, lines)
-    secondary: 'blue', // Background color for timeline cards or other elements depending on mode
-    cardBgColor: 'yellow', // Background color of the timeline cards
-    cardForeColor: 'black', // Text color within timeline cards
-    titleColor: 'black', // Color of the timeline item titles (e.g., dates)
-    titleColorActive: 'red', // Color of the active timeline item title
-  }}
-/>
-```
+#### Dark Mode Properties
 
-#### **🌙 Theme Properties**
-
-The following **new configurable properties** provide complete control over the timeline appearance:
-
-| Property                      | Type     | Description                                  |
-| ----------------------------- | -------- | -------------------------------------------- |
-| `iconColor`                   | `string` | Color for all icons (buttons, controls)      |
-| `buttonHoverBgColor`          | `string` | Background color on button hover             |
-| `buttonActiveBgColor`         | `string` | Background color for active buttons          |
-| `buttonActiveIconColor`       | `string` | Icon color for active buttons                |
-| `buttonBorderColor`           | `string` | Border color for buttons                     |
-| `buttonHoverBorderColor`      | `string` | Border color on button hover                 |
-| `buttonActiveBorderColor`     | `string` | Border color for active buttons              |
-| `shadowColor`                 | `string` | Color for shadows and depth effects          |
-| `glowColor`                   | `string` | Color for glow effects and focus states      |
-| `searchHighlightColor`        | `string` | Color for search result highlighting         |
-| `darkToggleActiveBgColor`     | `string` | Background when dark mode toggle is active   |
-| `darkToggleActiveIconColor`   | `string` | Icon color when dark mode toggle is active   |
-| `darkToggleActiveBorderColor` | `string` | Border color when dark mode toggle is active |
-| `darkToggleGlowColor`         | `string` | Glow effect for dark mode toggle             |
+| Name                          | Type     | Description                                      |
+| :---------------------------- | :------- | :----------------------------------------------- |
+| `iconColor`                   | `string` | Color for icons in dark mode                     |
+| `buttonHoverBgColor`          | `string` | Background color for buttons on hover            |
+| `buttonActiveBgColor`         | `string` | Background color for active buttons              |
+| `buttonActiveIconColor`       | `string` | Icon color for active buttons                    |
+| `buttonBorderColor`           | `string` | Border color for buttons                         |
+| `buttonHoverBorderColor`      | `string` | Border color for buttons on hover                |
+| `buttonActiveBorderColor`     | `string` | Border color for active buttons                  |
+| `shadowColor`                 | `string` | Color for shadows and depth effects              |
+| `glowColor`                   | `string` | Color for glow effects and focus states          |
+| `searchHighlightColor`        | `string` | Color for search result highlighting             |
+| `darkToggleActiveBgColor`     | `string` | Background color when dark mode toggle is active |
+| `darkToggleActiveIconColor`   | `string` | Icon color when dark mode toggle is active       |
+| `darkToggleActiveBorderColor` | `string` | Border color when dark mode toggle is active     |
+| `darkToggleGlowColor`         | `string` | Glow effect color for dark mode toggle           |
 
 #### **🎨 Custom Theme Examples**
 
@@ -561,169 +568,6 @@ Apply your own CSS classes to various parts of the timeline using the `className
 
 Adjust font sizes for card elements using the `fontSizes` prop.
 
-```jsx
-<Chrono
-  items={data}
-  fontSizes={{
-    cardSubtitle: '0.85rem',
-    cardText: '0.8rem',
-    cardTitle: '1.1rem',
-    title: '0.9rem', // Font size for the main timeline titles (dates)
-  }}
-/>
 ```
 
-### Custom Button Alt Text
-
-Customize the `alt` text for toolbar navigation buttons via `buttonTexts`.
-
-```jsx
-<Chrono
-  items={data}
-  buttonTexts={{
-    first: 'Jump to First Item',
-    last: 'Jump to Last Item',
-    next: 'View Next Item',
-    previous: 'View Previous Item',
-    play: 'Start Slideshow',
-    stop: 'Stop Slideshow', // Added for completeness
-    jumpTo: 'Jump to specific item', // Added for completeness
-  }}
-/>
 ```
-
-**Default `buttonTexts` values:**
-| Property | Value |
-| :--------- | :--------------- |
-| `first` | 'Go to First' |
-| `last` | 'Go to Last' |
-| `next` | 'Next' |
-| `previous` | 'Previous' |
-| `play` | 'Play Slideshow' |
-| `stop` | 'Stop Slideshow' |
-| `jumpTo` | 'Jump to' |
-
-## 📦 Examples & Demos
-
-### CodeSandbox Examples
-
-Explore various configurations of React Chrono:
-
-- [Horizontal Basic](https://codesandbox.io/s/keen-shannon-gtjwn?file=/src/App.js)
-- [Horizontal - Show all cards](https://codesandbox.io/s/show-all-cards-5vuf2x?file=/src/App.js)
-- [Vertical Basic](https://codesandbox.io/s/react-chrono-vertical-basic-0rm1o?file=/src/App.js)
-- [Vertical Alternating](https://codesandbox.io/s/react-chrono-tree-text-1fcs3?file=/src/App.js)
-- [Vertical with All Images](https://codesandbox.io/s/react-chrono-tree-vertical-images-b5zri?file=/src/App.js)
-- [Vertical with Custom Content](https://codesandbox.io/s/react-chrono-vertical-custom-qepnm?file=/src/App.js)
-- [Vertical Custom Content with `items` prop](https://codesandbox.io/s/react-chrono-vertical-custom-2-uctcp?file=/src/App.js)
-- [Custom Icons Example](https://codesandbox.io/s/react-chrono-custom-icons-x9s2k?file=/src/App.js)
-
-### Kitchen Sink Demo
-
-See a comprehensive demo showcasing many features:
-
-- [React Chrono Kitchen Sink](https://react-chrono-kitchen-sink.prabhumurthy.com/)
-
-### Storybook
-
-Dive into a wide variety of examples hosted on Storybook:
-
-- [Horizontal Collection](https://5f985eb478dcb00022cfd60e-axcjutcmmg.chromatic.com/?path=/story/example-horizontal--horizontal-timeline)
-- [Vertical Collection](https://5f985eb478dcb00022cfd60e-axcjutcmmg.chromatic.com/?path=/story/example-vertical--vertical-basic)
-
-## 🛠️ Build Setup
-
-```bash
-# Install dependencies
-pnpm install
-
-# Start development server
-pnpm dev
-
-# Lint CSS
-pnpm lint:css
-
-# ESLint
-pnpm eslint
-
-# Prettier
-pnpm lint
-
-# Build library
-pnpm rollup
-```
-
-## 🧪 Tests
-
-```bash
-# Run unit tests
-pnpm test
-
-# Run Cypress tests (interactive)
-pnpm cypress:test # or pnpm cypress open
-
-# Run Cypress tests in headless mode
-pnpm cypress:headless
-
-# Run Cypress tests in quiet mode (headless, less output)
-pnpm cypress:quiet
-```
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1.  [Fork the repository](https://github.com/prabhuignoto/react-chrono/fork).
-2.  Create your feature branch (`git checkout -b new-feature`).
-3.  Commit your changes (`git commit -am 'Add: New amazing feature'`).
-4.  Push to the branch (`git push origin new-feature`).
-5.  Create a new Pull Request.
-
-Please read `CONTRIBUTING.md` for more details on the process and `CODE_OF_CONDUCT.md`.
-
-## 🧱 Built With
-
-- [TypeScript](https://www.typescriptlang.org/)
-- Styled with [Emotion](https://emotion.sh/)
-
-## 💖 Support & Meta
-
-Special thanks to [BrowserStack](https://www.browserstack.com/) for providing an Open Source License for testing.
-
-Distributed under the MIT license. See `LICENSE` for more information.
-
-Prabhu Murthy – [@prabhumurthy2](https://twitter.com/prabhumurthy2) – <prabhu.m.murthy@gmail.com>
-GitHub: [https://github.com/prabhuignoto](https://github.com/prabhuignoto)
-
-<a href="https://www.buymeacoffee.com/prabhuignoto" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" height="41" width="174" ></a>
-
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/project/overview?id=prabhuignoto_react-chrono)
-
-## ✨ Contributors
-
-Thanks to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="top" width="14.28%"><a href="http://aloisdg.github.io/"><img src="https://avatars.githubusercontent.com/u/3449303?v=4?s=60" width="60px;" alt="Alois"/><br /><sub><b>Alois</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=aloisdg" title="Documentation">📖</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://kojikoji.ga"><img src="https://avatars.githubusercontent.com/u/474225?v=4?s=60" width="60px;" alt="Koji"/><br /><sub><b>Koji</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=koji" title="Documentation">📖</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://alexgirard.com"><img src="https://avatars.githubusercontent.com/u/373?v=4?s=60" width="60px;" alt="Alexandre Girard"/><br /><sub><b>Alexandre Girard</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=alx" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ryuyxx"><img src="https://avatars.githubusercontent.com/u/69892552?v=4?s=60" width="60px;" alt="Ryuya"/><br /><sub><b>Ryuya</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=Ryuyxx" title="Documentation">📖</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/taqi457"><img src="https://avatars.githubusercontent.com/u/2155219?v=4?s=60" width="60px;" alt="Taqi Abbas"/><br /><sub><b>Taqi Abbas</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=taqi457" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/megasoft78"><img src="https://avatars.githubusercontent.com/u/514958?v=4?s=60" width="60px;" alt="megasoft78"/><br /><sub><b>megasoft78</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=megasoft78" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://dev.bigdreamer.cc"><img src="https://avatars.githubusercontent.com/u/39019913?v=4?s=60" width="60px;" alt="Eric（书生）"/><br /><sub><b>Eric（书生）</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=bigbigDreamer" title="Code">💻</a></td>
-    </tr>
-    <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/DrakeXorn"><img src="https://avatars.githubusercontent.com/u/3925261?v=4?s=60" width="60px;" alt="Christophe Bernard"/><br /><sub><b>Christophe Bernard</b></sub></a><br /><a href="https://github.com/prabhuignoto/react-chrono/commits?author=DrakeXorn" title="Code">💻</a></td>
-    </tr>
-  </tbody>
-</table>
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
