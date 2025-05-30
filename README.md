@@ -632,11 +632,7 @@ Customize button text and accessibility labels:
 
 ### CodeSandbox Examples
 
-[![Edit react-chrono](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-chrono-bg56e?fontsize=14&hidenavigation=1&theme=dark)
-
-### Kitchen Sink Demo
-
-[Explore all features](https://react-chrono.vercel.app/)
+[![Edit react-chrono](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/silly-wilbur-1fcs3?file=%2Fsrc%2FApp.js)
 
 ### Storybook
 
