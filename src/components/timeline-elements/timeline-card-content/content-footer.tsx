@@ -35,17 +35,11 @@ import { ChevronIconWrapper, ShowMore } from './timeline-card-content.styles';
  * @returns {JSX.Element} ContentFooter component.
  */
 const ContentFooter: FunctionComponent<ContentFooterProps> = ({
-  showProgressBar,
   onExpand,
   showMore,
   textContentIsLarge,
   showReadMore,
-  remainInterval,
-  paused,
-  startWidth,
   canShow,
-  progressRef,
-  isResuming,
 }: ContentFooterProps) => {
   const { theme } = useContext(GlobalContext);
 
@@ -87,17 +81,6 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           </ChevronIconWrapper>
         </ShowMore>
       ) : null}
-
-      {/* <SlideShowProgressBar
-          color={theme?.primary}
-          $duration={remainInterval}
-          ref={progressRef}
-          $startWidth={startWidth}
-          $resuming={isResuming}
-          max={100}
-          value={100} 
-          aria-label='Card progress'
-        ></SlideShowProgressBar> */}
     </>
   );
 };

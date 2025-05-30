@@ -10,13 +10,9 @@ export type ContentHeaderProps = Pick<
 export type ContentFooterProps = {
   canShow: boolean;
   isNested?: boolean;
-  isResuming?: boolean;
   onExpand: () => void;
-  paused: boolean;
-  progressRef: RefObject<HTMLProgressElement>;
   remainInterval: number;
   showMore: boolean;
-  showProgressBar?: boolean;
   showReadMore?: boolean | '';
   startWidth: number;
   textContentIsLarge: boolean;

@@ -50,4 +50,8 @@ export const DynamicContext = createContext<DynamicContextProps>({
     toolbarTextColor: '#000',
     timelineBgColor: '#f5f5f5',
   },
+  // Default no-op implementations to prevent fallback to legacy context
+  toggleDarkMode: () => {},
+  updateHorizontalAllCards: () => {},
+  updateTextContentDensity: () => {},
 });
