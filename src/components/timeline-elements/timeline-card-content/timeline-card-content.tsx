@@ -418,19 +418,15 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
           {canShowReadMore && canShowMore && !textOverlay && (
             <ContentFooter
-              showProgressBar={canShowProgressBar}
               onExpand={toggleShowMore}
               triangleDir={triangleDir}
               showMore={showMore}
               textContentIsLarge={textContentLarge}
               showReadMore={canShowReadMore}
               remainInterval={remainInterval}
-              paused={paused}
               startWidth={startWidth}
               canShow={!!detailedText && !showMore}
-              progressRef={progressRef}
               isNested={isNested}
-              isResuming={isResuming}
               theme={theme}
             />
           )}
