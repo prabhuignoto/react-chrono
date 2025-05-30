@@ -19,7 +19,7 @@ const getElevatedShadow = (theme: Theme) =>
 
 const getInteractiveShadow = (theme: Theme, isOpen?: boolean) =>
   !isOpen
-    ? theme.shadowColor || 'rgba(0, 0, 0, 0.2)'
+    ? `0px 1px 3px ${theme.shadowColor || 'rgba(0, 0, 0, 0.2)'}`
     : `inset 0 0 1px 1px ${theme.shadowColor || 'rgba(0, 0, 0, 0.2)'}`;
 
 const BORDER_RADIUS = '6px';
