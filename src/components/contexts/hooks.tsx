@@ -153,7 +153,7 @@ export const useDynamicContext = (): DynamicContextProps => {
   if (
     dynamicContext &&
     dynamicContext.toggleDarkMode &&
-    dynamicContext.toggleDarkMode !== (() => {})
+    typeof dynamicContext.toggleDarkMode === 'function'
   ) {
     return dynamicContext;
   }
