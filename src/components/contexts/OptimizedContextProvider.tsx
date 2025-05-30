@@ -257,7 +257,7 @@ export const OptimizedContextProvider: FunctionComponent<
       mediaSettings,
       responsiveBreakPoint,
       enableBreakPoint,
-      slideItemDuration: 2000,
+      slideItemDuration: props.slideItemDuration ?? 2000,
       slideShowType: computedSlideShowType,
       cardPositionHorizontal: props.cardPositionHorizontal,
       disableNavOnKey: props.disableNavOnKey,
