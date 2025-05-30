@@ -1,6 +1,6 @@
 // Import necessary dependencies
-import React, { FunctionComponent, useContext, useMemo } from 'react';
-import { GlobalContext } from '../GlobalContext';
+import React, { FunctionComponent, useMemo } from 'react';
+import { useStableContext, useDynamicContext } from '../contexts';
 import Controls from '../timeline-elements/timeline-control/timeline-control';
 import { TimelineNavButton } from '../timeline-elements/timeline-control/timeline-control.styles';
 import { ChevronLeft, ChevronRight, CloseIcon } from '../icons';
@@ -65,18 +65,21 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   onSearchKeyDown,
   searchInputRef,
 }: TimelineToolbarProps) => {
-  // Access the global context
+  // Access the stable and dynamic contexts
   const {
-    theme,
     cardLess,
     enableQuickJump,
-    darkMode,
     toolbarPosition,
-    textDensity,
-    isMobile,
     enableLayoutSwitch,
-    buttonTexts,
-  } = useContext(GlobalContext);
+    memoizedButtonTexts: buttonTexts,
+  } = useStableContext();
+
+  const {
+    memoizedTheme: theme,
+    isDarkMode: darkMode,
+    textContentDensity: textDensity,
+    isMobile,
+  } = useDynamicContext();
 
   // Prepare QuickJump items with proper string conversions
   const quickJumpItems = useMemo(() => {

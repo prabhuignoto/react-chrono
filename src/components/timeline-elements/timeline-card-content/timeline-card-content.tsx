@@ -153,8 +153,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [useReadMore, detailedText, customContent, textDensity]);
 
       const canShowNestedTimeline = useMemo(() => {
-        return isNested && items && items.length > 0;
-      }, [isNested, items]);
+        return items && items.length > 0;
+      }, [items]);
 
       const canShowDetailsText = useMemo(() => {
         // Hide details when using text overlay with media, when density is LOW, otherwise show if content exists
@@ -355,6 +355,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           $borderLessCards={borderLessCards}
           $textDensity={textDensity}
           $customContent={!!customContent}
+          $theme={theme}
         >
           {/* Only show the content header if we're not using text overlay mode with media */}
           {(!textOverlay || !media) && (
@@ -417,19 +418,15 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
           {canShowReadMore && canShowMore && !textOverlay && (
             <ContentFooter
-              showProgressBar={canShowProgressBar}
               onExpand={toggleShowMore}
               triangleDir={triangleDir}
               showMore={showMore}
               textContentIsLarge={textContentLarge}
               showReadMore={canShowReadMore}
               remainInterval={remainInterval}
-              paused={paused}
               startWidth={startWidth}
               canShow={!!detailedText && !showMore}
-              progressRef={progressRef}
               isNested={isNested}
-              isResuming={isResuming}
               theme={theme}
             />
           )}

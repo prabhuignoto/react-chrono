@@ -8,11 +8,7 @@ import {
 import { GlobalContext } from '../../GlobalContext';
 import ChevronIcon from '../../icons/chev-right';
 import { ContentFooterProps } from './header-footer.model';
-import {
-  ChevronIconWrapper,
-  ShowMore,
-  SlideShowProgressBar,
-} from './timeline-card-content.styles';
+import { ChevronIconWrapper, ShowMore } from './timeline-card-content.styles';
 
 /**
  * ContentFooter
@@ -39,17 +35,11 @@ import {
  * @returns {JSX.Element} ContentFooter component.
  */
 const ContentFooter: FunctionComponent<ContentFooterProps> = ({
-  showProgressBar,
   onExpand,
   showMore,
   textContentIsLarge,
   showReadMore,
-  remainInterval,
-  paused,
-  startWidth,
   canShow,
-  progressRef,
-  isResuming,
 }: ContentFooterProps) => {
   const { theme } = useContext(GlobalContext);
 
@@ -91,17 +81,6 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           </ChevronIconWrapper>
         </ShowMore>
       ) : null}
-
-      {showProgressBar && (
-        <SlideShowProgressBar
-          color={theme?.primary}
-          $duration={remainInterval}
-          $paused={paused}
-          ref={progressRef}
-          $startWidth={startWidth}
-          $resuming={isResuming}
-        ></SlideShowProgressBar>
-      )}
     </>
   );
 };

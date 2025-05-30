@@ -20,12 +20,12 @@ const baseStyles = css`
   width: 100%;
 `;
 
-// Common styles with improved typing
-const commonStyles = css`
+// Common styles with improved typing - using theme-based background
+const commonStyles = css<{ $theme: Theme }>`
   ${baseStyles}
-  background: #f5f5f5;
+  background: ${(p) => p.$theme.toolbarBtnBgColor};
   border-radius: 4px;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 1px ${(p) => p.$theme.shadowColor || 'rgba(0, 0, 0, 0.1)'};
   margin-bottom: 0.5rem;
 
   &:last-child {
@@ -65,7 +65,7 @@ export const ListItemStyle = styled.li<{
 
 // Title styles
 export const TitleStyle = styled.h1<{ theme: Theme }>`
-  color: ${(p) => p.theme.primary};
+  color: ${(p) => p.theme.iconColor || p.theme.primary};
   font-size: 1rem;
   font-weight: normal;
   margin: 0.2rem 0;
@@ -101,7 +101,7 @@ export const CheckboxStyle = styled.span<{ selected?: boolean; theme: Theme }>`
   border-radius: 50%;
   background: ${(p) => (p.selected ? p.theme.primary : p.theme.toolbarBgColor)};
   ${(p) => !p.selected && `box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1)`};
-  color: #fff;
+  color: #ffffff;
 
   svg {
     width: 80%;

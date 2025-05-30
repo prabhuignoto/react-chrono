@@ -1,14 +1,15 @@
 import { TimelineModel } from '@models/TimelineModel';
 import { getUniqueID } from '@utils/index';
 import cls from 'classnames';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { GlobalContext } from '../GlobalContext';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useStableContext, useDynamicContext } from '../contexts';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
+import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
 import {
-  TimelineContentRender,
-  TimelineMainWrapper,
-  ToolbarWrapper,
   Wrapper,
+  TimelineMainWrapper,
+  TimelineContentRender,
+  ToolbarWrapper,
 } from './timeline.style';
 import { TimelineToolbar } from './timeline-toolbar';
 import { useTimelineSearch } from '../../hooks/useTimelineSearch';
@@ -55,15 +56,19 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     lineWidth,
     onScrollEnd,
     scrollable = true,
-    showAllCardsHorizontal,
-    theme,
-    darkMode,
+    toolbarPosition,
+    disableToolbar,
+    slideItemDuration = 2000,
+  } = useStableContext();
+
+  const {
+    horizontalAll: showAllCardsHorizontal,
+    memoizedTheme: theme,
+    isDarkMode: darkMode,
     toggleDarkMode,
     updateHorizontalAllCards,
-    toolbarPosition,
     updateTextContentDensity,
-    disableToolbar,
-  } = useContext(GlobalContext);
+  } = useDynamicContext();
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const [hasFocus, setHasFocus] = useState(false);
@@ -130,6 +135,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     handleTimelineItemClick,
   });
 
+  // Overall slideshow progress hook
+  useSlideshowProgress({
+    slideShowRunning: slideShowRunning ?? false,
+    activeTimelineItem: activeTimelineItem ?? 0,
+    totalItems: items.length,
+    slideItemDuration,
+  });
+
   useTimelineMedia({
     mode,
     timelineMainRef,
@@ -174,10 +187,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // Update active item information
   useEffect(() => {
-    const activeItem = items[activeTimelineItem || 0];
+    const activeItem = items[activeTimelineItem ?? 0];
 
     if (slideShowRunning) {
-      activeItemIndex.current = activeTimelineItem || 0;
+      activeItemIndex.current = activeTimelineItem ?? 0;
     }
 
     if (!items.length || !activeItem) return;
@@ -236,11 +249,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   }, [newOffSet, mode, timelineMainRef]);
 
+  // Ensure all styled components are properly integrated
   return (
     <Wrapper
       onKeyDown={handleKeyDown}
       className={wrapperClass}
       cardPositionHorizontal={cardPositionHorizontal}
+      theme={theme}
       onMouseDown={() => setHasFocus(true)}
       onKeyUp={(evt) => {
         if (evt.key === 'Escape') {
@@ -283,6 +298,17 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         </ToolbarWrapper>
       )}
 
+      {/* Overall slideshow progress bar - positioned below toolbar */}
+      {/* {slideShowRunning && showOverallSlideshowProgress && (
+        <SlideshowProgress
+          activeItemIndex={activeTimelineItem ?? 0}
+          totalItems={items.length}
+          isRunning={slideShowRunning}
+          slideItemDuration={slideItemDuration}
+          isPaused={isPaused}
+        />
+      )} */}
+
       <TimelineMainWrapper
         ref={timelineMainRef}
         $scrollable={canScrollTimeline}
@@ -294,7 +320,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         position={toolbarPosition}
         onScroll={handleMainScroll}
       >
-        {/* @ts-ignore - Ignoring type issues here as we're using a more flexible approach */}
         <TimelineView
           timelineMode={timelineMode}
           activeTimelineItem={activeTimelineItem}
@@ -314,7 +339,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         />
       </TimelineMainWrapper>
 
-      {/* placeholder to render timeline content for horizontal mode */}
       <TimelineContentRender
         id={id}
         $showAllCards={showAllCardsHorizontal}

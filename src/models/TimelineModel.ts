@@ -190,6 +190,9 @@ export type TimelineProps = {
 
   noUniqueId?: boolean;
 
+  // indicates if this timeline is a child of another timeline
+  isChild?: boolean;
+
   // callback when an item is selected
   onItemSelected?: (
     data: Pick<
@@ -217,6 +220,9 @@ export type TimelineProps = {
   showAllCardsHorizontal?: boolean;
 
   showProgressOnSlideshow?: boolean;
+
+  // shows overall progress bar during slideshow
+  showOverallSlideshowProgress?: boolean;
 
   // duration each slide is shown
   slideItemDuration?: number;

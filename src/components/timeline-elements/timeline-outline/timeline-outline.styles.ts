@@ -48,14 +48,20 @@ export const OutlineWrapper = styled.div<{
       : `width: 30px; height: 30px;`};
 `;
 
-export const OutlinePane = styled.aside<{ open?: boolean }>`
+export const OutlinePane = styled.aside<{ open?: boolean; theme?: Theme }>`
   align-items: center;
   border-radius: 4px;
   display: flex;
   justify-content: center;
   position: absolute;
   z-index: 9000;
-  box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px 2px
+    rgba(
+      0,
+      0,
+      0,
+      ${({ theme }) => (theme?.toolbarBgColor === '#374151' ? '0.5' : '0.2')}
+    );
   top: 1rem;
 `;
 
@@ -88,7 +94,7 @@ export const OutlineButton = styled.button<{
   }
 
   & svg path {
-    color: ${(p) => p.theme.primary};
+    color: ${(p) => p.theme.iconColor || p.theme.primary};
   }
 `;
 
@@ -128,11 +134,11 @@ export const ListItem = styled.li`
 
 export const ListItemName = styled.span<{ selected?: boolean; theme?: Theme }>`
   font-size: 0.75rem;
-  color: ${(p) => (p.selected ? p.theme.primary : '')};
+  color: ${(p) => (p.selected ? p.theme.iconColor || p.theme.primary : '')};
   padding-left: 0.25rem;
 
   &:hover {
-    color: ${(p) => p.theme.primary};
+    color: ${(p) => p.theme.iconColor || p.theme.primary};
   }
 `;
 
@@ -154,12 +160,14 @@ export const ListItemBullet = styled.span<{
     height: 8px;
     border-radius: 50%;
     background: ${(p) =>
-      p.selected ? `${p.theme.secondary}` : `${p.theme.primary}`};
+      p.selected
+        ? `${p.theme.secondary}`
+        : p.theme.iconColor || `${p.theme.primary}`};
     left: 0;
     margin: 0 auto;
     border: ${(p) =>
       p.selected
         ? `2px solid ${p.theme.secondary}`
-        : `2px solid ${p.theme.primary}`};
+        : `2px solid ${p.theme.iconColor || p.theme.primary}`};
   }
 `;

@@ -84,7 +84,7 @@ export const VerticalItemWrapper = styled.li<VerticalItemWrapperProps>`
         position: absolute;
         width: 2px; /* Line width */
         height: 2rem; /* Connector height */
-        background: ${p.theme?.primary || '#007bff'}; /* Use theme color */
+        background: ${p.theme?.primary ?? '#007bff'};
         left: 50%;
         transform: translateX(-50%);
         bottom: -2rem; /* Position below the item */
@@ -200,6 +200,10 @@ export const TimelineTitleWrapper = styled.div<TimelineTitleWrapperProps>`
     p.$alternateCards
       ? '37.5%' /* Takes up space in alternating mode */
       : '10%'}; /* Smaller width in standard vertical mode */
+
+  /* --- Prevent text overflow from affecting layout --- */
+  min-width: 0; /* Allow flex items to shrink below their content size */
+  overflow: hidden; /* Hide overflowing content */
 
   /* --- Order and Justification --- */
   &.left {

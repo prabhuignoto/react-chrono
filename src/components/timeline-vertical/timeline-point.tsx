@@ -2,14 +2,13 @@ import { TimelinePointModel } from '@models/TimelineVerticalModel'; // Assuming 
 import cls from 'classnames'; // Utility for conditionally joining classNames
 import React, {
   memo, // Import memo for component optimization
-  useContext,
   useEffect,
   useMemo,
   useRef,
   FunctionComponent, // Explicit import
   MouseEvent,
 } from 'react';
-import { GlobalContext } from '../GlobalContext'; // Context for global theme/settings
+import { useStableContext, useDynamicContext } from '../contexts'; // Context for global theme/settings
 // Shape seems to be a shared styled component, potentially defined elsewhere
 import { Shape } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
 import {
@@ -45,14 +44,20 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
 
     // Ref to the button element representing the point
     const circleRef = useRef<HTMLButtonElement>(null);
-    // Access global settings from context
+
+    // Access context settings
     const {
-      theme, // Theme object (primary color, etc.)
-      focusActiveItemOnLoad, // Should the initially active item trigger 'onActive' immediately?
-      timelinePointShape, // Shape of the point (e.g., 'circle', 'square')
-      disableTimelinePoint, // Globally disable/hide all timeline points?
-      buttonTexts, // Custom button text labels
-    } = useContext(GlobalContext);
+      staticDefaults: {
+        focusActiveItemOnLoad,
+        timelinePointShape,
+        disableTimelinePoint,
+      },
+      memoizedButtonTexts: buttonTexts, // Custom button text labels
+    } = useStableContext();
+
+    const {
+      memoizedTheme: theme, // Theme object (primary color, etc.)
+    } = useDynamicContext();
 
     // Ref to track if this is the component's first render cycle
     const isFirstRender = useRef(true);
@@ -160,7 +165,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
           ref={circleRef} // Attach ref for position measurement
           data-testid="tree-leaf-click" // Test ID for the clickable element
           aria-label={timelinePointLabel} // Accessibility label
-          aria-disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
+          aria-disabled={disableClickOnCircle ?? disableTimelinePoint} // Disable button if needed
           disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
           tabIndex={disableClickOnCircle || disableTimelinePoint ? -1 : 0} // Manage tab order
         >

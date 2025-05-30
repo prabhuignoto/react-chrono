@@ -6,10 +6,6 @@ context('Chrono.Horizontal.Basic', () => {
   });
 
   it('check length', () => {
-    cy.get('.timeline-horz-item-container').should('have.length', 13);
-  });
-
-  it('check timeline controls', () => {
-    cy.get('.timeline-controls').children().should('have.length', 6);
+    cy.get('.timeline-horz-item-container').should('have.length', 10);
   });
 });

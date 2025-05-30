@@ -15,12 +15,16 @@ export const ToolbarWrapper = styled.div<{ theme: Theme }>`
   padding: 0.25rem;
   background-color: ${({ theme }) => theme.toolbarBgColor};
   transform: translateY(0);
-  filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(
+    0 2px 4px ${({ theme }) => theme.shadowColor || 'rgba(0, 0, 0, 0.1)'}
+  );
   width: 100%;
   height: 100%;
   border-radius: 6px;
   flex-wrap: wrap;
   will-change: transform;
+  border: ${({ theme }) =>
+    theme.buttonBorderColor ? `1px solid ${theme.buttonBorderColor}` : 'none'};
 `;
 
 // Toolbar list item styles

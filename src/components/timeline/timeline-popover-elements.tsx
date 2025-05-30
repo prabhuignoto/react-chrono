@@ -1,5 +1,5 @@
-import { FunctionComponent, useContext, useMemo } from 'react';
-import { GlobalContext } from '../GlobalContext';
+import { FunctionComponent, useMemo } from 'react';
+import { useStableContext, useDynamicContext } from '../contexts';
 import { List } from '../elements/list/list';
 import PopOver from '../elements/popover';
 import { ArrowDownIcon, LayoutIcon, ParaIcon } from '../icons';
@@ -17,7 +17,8 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   position,
   isMobile,
 }: LayoutSwitcherProp) => {
-  const { showAllCardsHorizontal, buttonTexts } = useContext(GlobalContext);
+  const { memoizedButtonTexts: buttonTexts } = useStableContext();
+  const { horizontalAll: showAllCardsHorizontal } = useDynamicContext();
 
   const LayoutIconMemo = useMemo(() => <LayoutIcon />, []);
 
@@ -112,7 +113,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
   position,
   isMobile,
 }: QuickJumpProp) => {
-  const { buttonTexts } = useContext(GlobalContext);
+  const { memoizedButtonTexts: buttonTexts } = useStableContext();
 
   const ArrowDownIconMemo = useMemo(() => <ArrowDownIcon />, []);
 
@@ -133,7 +134,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
           id: item.id,
           label: item.title,
           onSelect: () => {},
-          title: item.title || `Item ${index + 1}`,
+          title: item.title ?? `Item ${index + 1}`,
         }))}
         theme={theme}
         onClick={onActivateItem}
@@ -150,7 +151,7 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
   position,
   isMobile,
 }) => {
-  const { buttonTexts } = useContext(GlobalContext);
+  const { memoizedButtonTexts: buttonTexts } = useStableContext();
 
   const ParaIconMemo = useMemo(() => <ParaIcon />, []);
 

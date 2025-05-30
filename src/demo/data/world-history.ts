@@ -1,6 +1,6 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
 
-export const items2: TimelineItemModel[] = [
+export const worldHistoryTimeline: TimelineItemModel[] = [
   {
     title: '3500 BC',
     url: 'https://en.wikipedia.org/wiki/Writing_system#History_of_writing_systems',
@@ -16,17 +16,17 @@ export const items2: TimelineItemModel[] = [
       {
         cardTitle: 'The Battle of Britian Yaar',
         url: 'http://www.google.com',
-        cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+        cardDetailedText: `After France's surrender in June 1940, Churchill told the British people, "Hitler knows that he will have to break us in this island or lose the war". To mount a successful invasion, the Germans had to gain air superiority.After France's surrender in June 1940, Churchill told the British people, "Hitler knows that he will have to break us in this island or lose the war". To mount a successful invasion, the Germans had to gain air superiority.After France's surrender in June 1940, Churchill told the British people, "Hitler knows that he will have to break us in this island or lose the war". To mount a successful invasion, the Germans had to gain air superiority.After France's surrender in June 1940, Churchill told the British people, "Hitler knows that he will have to break us in this island or lose the war". To mount a successful invasion, the Germans had to gain air superiority.After France's surrender in June 1940, Churchill told the British people, "Hitler knows that he will have to break us in this island or lose the war". To mount a successful invasion, the Germans had to gain air superiority.After France's surrender in June 1940, Churchill told the British people, "Hitler knows that he will have to break us in this island or lose the war". To mount a successful invasion, the Germans had to gain air superiority.After France's surrender in June 1940, Churchill told the British people, "Hitler knows that he will have to break us in this island or lose the war". To mount a successful invasion, the Germans had to gain air superiority.`,
       },
       {
         cardTitle: 'The Battle of Britian Yaar',
         url: 'http://www.google.com',
-        cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+        cardDetailedText: `After France's surrender in June 1940, Churchill told the British people, "Hitler knows that he will have to break us in this island or lose the war". To mount a successful invasion, the Germans had to gain air superiority.`,
       },
       {
         cardTitle: 'The Battle of Britian Yaar',
         url: 'http://www.google.com',
-        cardDetailedText: `After France’s surrender in June 1940, Churchill told the British people, “Hitler knows that he will have to break us in this island or lose the war”. To mount a successful invasion, the Germans had to gain air superiority.`,
+        cardDetailedText: `After France's surrender in June 1940, Churchill told the British people, "Hitler knows that he will have to break us in this island or lose the war". To mount a successful invasion, the Germans had to gain air superiority.`,
       },
     ],
     cardDetailedText: [
@@ -241,7 +241,7 @@ export const items2: TimelineItemModel[] = [
         url: 'https://cdn.britannica.com/97/115497-050-7D8CC20E/Portrait-oil-panel-Martin-Luther-Lucas-Cranach.jpg?w=400&h=300&c=crop',
       },
     },
-    cardSubtitle: `Martin Luther’s Ninety-Five Theses sparks the Protestant Reformation in Europe`,
+    cardSubtitle: `Martin Luther's Ninety-Five Theses sparks the Protestant Reformation in Europe`,
     cardDetailedText: [
       'Martin Luther was a German monk and theologian who played a key role in the Protestant Reformation.',
       "Luther was born in Eisleben, Germany, in 1483. He became a monk and was ordained as a priest in the Catholic Church in 1507. He taught theology at the University of Wittenberg, where he became increasingly critical of the Catholic Church's teachings and practices.",
@@ -396,4 +396,4 @@ export const items2: TimelineItemModel[] = [
       'After the mission, the crew of Apollo 11 were celebrated as heroes and received ticker-tape parades in their honor.',
     ],
   },
-];
+]; 

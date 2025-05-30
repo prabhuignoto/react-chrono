@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Chrono from '../components';
-import data from './data';
+import { basicTimeline } from './data';
 
 export default function App() {
   const [pageIndex, setPageIndex] = useState(0);
@@ -23,7 +23,7 @@ export default function App() {
   }, [items.length, pageIndex]);
 
   useEffect(() => {
-    const newAllItems = [...data];
+    const newAllItems = [...basicTimeline];
 
     // console.log('newAllItems', newAllItems);
 

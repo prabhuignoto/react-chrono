@@ -29,6 +29,9 @@ export interface TimelineItemModel {
   // Date associated with the timeline item.
   date?: number | string | Date;
 
+  // Indicates if this timeline item contains nested sub-items.
+  hasNestedItems?: boolean;
+
   // Unique identifier for the timeline item.
   id?: string;
 
@@ -74,6 +77,7 @@ export type TimelineCardModel = Pick<
   | 'timelineContent'
   | 'isNested'
   | 'items'
+  | 'hasNestedItems'
 > & {
   // Function for auto-scrolling.
   autoScroll?: ({
