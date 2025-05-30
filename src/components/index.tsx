@@ -43,7 +43,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       if (lineItems?.length) {
         return lineItems.map((item, index) => {
           const id = getUniqueID();
-          const hasNestedItems = !!(item.items?.length);
+          const hasNestedItems = !!item.items?.length;
 
           return {
             ...item,

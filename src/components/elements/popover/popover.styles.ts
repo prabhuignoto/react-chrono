@@ -8,6 +8,22 @@ const flexCenter = css`
   justify-content: center;
 `;
 
+// Helper functions for shared styling logic
+const getBorderStyle = (theme: Theme) =>
+  theme.buttonBorderColor
+    ? `1px solid ${theme.buttonBorderColor}`
+    : '1px solid transparent';
+
+const getElevatedShadow = (theme: Theme) =>
+  `0px 5px 16px ${theme.shadowColor || 'rgba(0, 0, 0, 0.5)'}`;
+
+const getInteractiveShadow = (theme: Theme, isOpen?: boolean) =>
+  !isOpen
+    ? theme.shadowColor || 'rgba(0, 0, 0, 0.2)'
+    : `inset 0 0 1px 1px ${theme.shadowColor || 'rgba(0, 0, 0, 0.2)'}`;
+
+const BORDER_RADIUS = '6px';
+
 // Base wrapper for the popover component
 export const PopoverWrapper = styled.div``;
 
@@ -22,13 +38,9 @@ export const PopoverHolder = styled.div<{
   ${flexCenter};
   flex-direction: column;
   background: ${({ $theme }) => $theme.toolbarBgColor};
-  border-radius: 6px;
-  border: ${({ $theme }) =>
-    $theme.buttonBorderColor
-      ? `1px solid ${$theme.buttonBorderColor}`
-      : 'none'};
-  box-shadow: 0px 5px 16px
-    ${({ $theme }) => $theme.shadowColor || 'rgba(0, 0, 0, 0.5)'};
+  border-radius: ${BORDER_RADIUS};
+  border: ${({ $theme }) => getBorderStyle($theme)};
+  box-shadow: ${({ $theme }) => getElevatedShadow($theme)};
   max-height: 500px;
   overflow-y: auto;
   padding: 0.5rem;
@@ -55,12 +67,9 @@ export const Selecter = styled.div<{
   ${flexCenter};
   background: ${({ $theme }) => $theme.toolbarBtnBgColor};
   color: ${({ $theme }) => $theme.toolbarTextColor};
-  border-radius: 6px;
-  border: 1px solid ${({ $theme }) => $theme.buttonBorderColor || 'transparent'};
-  box-shadow: ${({ $open, $theme }) =>
-    !$open
-      ? $theme.shadowColor || 'rgba(0, 0, 0, 0.2)'
-      : `inset 0 0 1px 1px ${$theme.shadowColor || 'rgba(0, 0, 0, 0.2)'}`};
+  border-radius: ${BORDER_RADIUS};
+  border: ${({ $theme }) => getBorderStyle($theme)};
+  box-shadow: ${({ $open, $theme }) => getInteractiveShadow($theme, $open)};
   cursor: pointer;
   justify-content: space-between;
   padding: ${(p) => (p.$isMobile ? '0.4rem' : `0.4rem 0.5rem`)};

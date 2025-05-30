@@ -23,11 +23,7 @@ describe('ContentFooter', () => {
   //should match snapshot
   it('should match snapshot', () => {
     const { container } = customRender(
-      <ContentFooter
-        {...commonProps}
-        startWidth={300}
-        paused={false}
-      />,
+      <ContentFooter {...commonProps} startWidth={300} paused={false} />,
       {
         providerProps,
       },
