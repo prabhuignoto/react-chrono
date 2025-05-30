@@ -636,7 +636,7 @@ Customize button text and accessibility labels:
 
 ### Storybook
 
-[Interactive component documentation](https://5f985eb478dcb00022cfd60e-axcjutcmmg.chromatic.com/)
+[Interactive component documentation](https://5f985eb478dcb00022cfd60e-crlyulevwt.chromatic.com/)
 
 ## 🛠️ Build Setup
 
