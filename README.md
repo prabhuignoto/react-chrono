@@ -228,6 +228,32 @@ Each object in the `items` array can have the following properties:
 | `enableQuickJump`          | `boolean`  | `true`  | Allows quick jumping to a timeline item via controls (if toolbar is enabled).                                               |
 | `useReadMore`              | `boolean`  | `true`  | Enables a "read more" button if card content exceeds available space. Set to `false` to always show all text.               |
 
+**Semantic Tags Configuration:**
+| Name | Type | Default | Description |
+| :------------- | :-------------------- | :------ | :-------------------------------------------------------------------------------------------------------------------------- |
+| `semanticTags` | `SemanticTagsConfig` | | Configure semantic HTML tags for card elements to improve accessibility and SEO. |
+
+The `semanticTags` object allows you to specify HTML tags for card elements:
+
+```typescript
+interface SemanticTagsConfig {
+  cardTitle?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
+  cardSubtitle?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
+}
+```
+
+**Example:**
+
+```jsx
+<Chrono
+  items={items}
+  semanticTags={{
+    cardTitle: 'h2',
+    cardSubtitle: 'h3',
+  }}
+/>
+```
+
 **Keyboard Navigation:**
 
 - **Horizontal Mode**: Use <kbd>LEFT</kbd> and <kbd>RIGHT</kbd> arrow keys.
@@ -237,21 +263,21 @@ Each object in the `items` array can have the following properties:
 
 ### Layout & Sizing
 
-| Name                     | Type                                  | Default                | Description                                                                                                                                      |
-| :----------------------- | :------------------------------------ | :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cardHeight`             | `number`                              | `200`                  | Minimum height (in pixels) of timeline cards.                                                                                                    |
-| `cardWidth`              | `number`                              | `450`                  | Maximum width (in pixels) of timeline cards.                                                                                                     |
-| `itemWidth`              | `number`                              | `200`                  | Width (in pixels) of each timeline section in `HORIZONTAL` mode.                                                                                 |
-| `contentDetailsHeight`   | `number`                              | `150`                  | Height (in pixels) of the detailed content area within a card if `cardDetailedText` is used.                                                     |
-| `lineWidth`              | `number`                              | `3`                    | Width (in pixels) of the main timeline track line.                                                                                               |
-| `timelinePointDimension` | `number`                              | `16`                   | Diameter (in pixels) of the circular points on the timeline.                                                                                     |
-| `nestedCardHeight`       | `number`                              | `150`                  | Height (in pixels) of cards within a [nested timeline](#nested-timelines-1).                                                                     |
-| `scrollable`             | `boolean` or `{ scrollbar: boolean }` | `{ scrollbar: false }` | Makes `VERTICAL` and `VERTICAL_ALTERNATING` modes scrollable. Set to `{ scrollbar: true }` to show the scrollbar.                                |
-| `enableBreakPoint`       | `boolean`                             | `true`                 | If true, `VERTICAL_ALTERNATING` mode automatically switches to `VERTICAL` mode when `responsiveBreakPoint` is reached.                           |
-| `responsiveBreakPoint`   | `number`                              | `1024`                 | Viewport width (in pixels) at which `VERTICAL_ALTERNATING` mode switches to `VERTICAL` if `enableBreakPoint` is true. Default changed to `1024`. |
-| `cardPositionHorizontal` | `'TOP'` or `'BOTTOM'`                 |                        | Positions the card above or below the timeline in `HORIZONTAL` mode.                                                                             |
-| `flipLayout`             | `boolean`                             | `false`                | Reverses the layout direction (e.g., Right-to-Left for horizontal, or swaps sides for vertical alternating).                                     |
-| `showAllCardsHorizontal` | `boolean`                             | `false`                | In `HORIZONTAL` mode, displays all cards simultaneously instead of only the active one.                                                          |
+| Name                     | Type                                  | Default                | Description                                                                                                            |
+| :----------------------- | :------------------------------------ | :--------------------- | :--------------------------------------------------------------------------------------------------------------------- |
+| `cardHeight`             | `number`                              | `200`                  | Minimum height (in pixels) of timeline cards.                                                                          |
+| `cardWidth`              | `number`                              | `450`                  | Maximum width (in pixels) of timeline cards.                                                                           |
+| `itemWidth`              | `number`                              | `200`                  | Width (in pixels) of each timeline section in `HORIZONTAL` mode.                                                       |
+| `contentDetailsHeight`   | `number`                              | `150`                  | Height (in pixels) of the detailed content area within a card if `cardDetailedText` is used.                           |
+| `lineWidth`              | `number`                              | `3`                    | Width (in pixels) of the main timeline track line.                                                                     |
+| `timelinePointDimension` | `number`                              | `16`                   | Diameter (in pixels) of the circular points on the timeline.                                                           |
+| `nestedCardHeight`       | `number`                              | `150`                  | Height (in pixels) of cards within a [nested timeline](#nested-timelines-1).                                           |
+| `scrollable`             | `boolean` or `{ scrollbar: boolean }` | `{ scrollbar: false }` | Makes `VERTICAL` and `VERTICAL_ALTERNATING` modes scrollable. Set to `{ scrollbar: true }` to show the scrollbar.      |
+| `enableBreakPoint`       | `boolean`                             | `true`                 | If true, `VERTICAL_ALTERNATING` mode automatically switches to `VERTICAL` mode when `responsiveBreakPoint` is reached. |
+| `responsiveBreakPoint`   | `number`                              | `768`                  | Viewport width (in pixels) at which `VERTICAL_ALTERNATING` mode switches to `VERTICAL` if `enableBreakPoint` is true.  |
+| `cardPositionHorizontal` | `'TOP'` or `'BOTTOM'`                 |                        | Positions the card above or below the timeline in `HORIZONTAL` mode.                                                   |
+| `flipLayout`             | `boolean`                             | `false`                | Reverses the layout direction (e.g., Right-to-Left for horizontal, or swaps sides for vertical alternating).           |
+| `showAllCardsHorizontal` | `boolean`                             | `false`                | In `HORIZONTAL` mode, displays all cards simultaneously instead of only the active one.                                |
 
 ### Media Handling
 
@@ -295,10 +321,10 @@ media: {
 **Media Settings Prop (`mediaSettings`):**
 This top-level prop on `<Chrono>` controls global media display:
 
-| Name    | Type                                                       | Default   | Description                                                      |
-| :------ | :--------------------------------------------------------- | :-------- | :--------------------------------------------------------------- |
-| `align` | `'left'`, `'right'`, `'center'`                            | `'left'`  | Alignment of media within the card. Default changed to `'left'`. |
-| `fit`   | `'cover'`, `'contain'`, `'fill'`, `'none'`, `'scale-down'` | `'cover'` | CSS `object-fit` property for images.                            |
+| Name    | Type                                                       | Default   | Description                           |
+| :------ | :--------------------------------------------------------- | :-------- | :------------------------------------ |
+| `align` | `'left'`, `'right'`, `'center'`                            | `'left'`  | Alignment of media within the card.   |
+| `fit`   | `'cover'`, `'contain'`, `'fill'`, `'none'`, `'scale-down'` | `'cover'` | CSS `object-fit` property for images. |
 
 ```jsx
 <Chrono items={items} mediaSettings={{ align: 'right', fit: 'contain' }} />
@@ -440,7 +466,7 @@ const highContrastTheme = {
 | Name                           | Type                                           | Default                              | Description                                                                                                                                                    |
 | :----------------------------- | :--------------------------------------------- | :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `slideShow`                    | `boolean`                                      | `false`                              | Enables slideshow mode and shows play/pause controls in the toolbar.                                                                                           |
-| `slideItemDuration`            | `number`                                       | `2000`                               | Duration (in milliseconds) each timeline item remains active during a slideshow. Default changed to `2000`.                                                    |
+| `slideItemDuration`            | `number`                                       | `2500`                               | Duration (in milliseconds) each timeline item remains active during a slideshow.                                                                               |
 | `slideShowType`                | `'reveal'`, `'slide_from_sides'`, `'slide_in'` | Varies by `mode`                     | Type of animation for slideshow transitions. Defaults: `VERTICAL` -> `'reveal'`, `VERTICAL_ALTERNATING` -> `'slide_from_sides'`, `HORIZONTAL` -> `'slide_in'`. |
 | `showOverallSlideshowProgress` | `boolean`                                      | `true` (when `slideShow` is enabled) | Shows a line-based progress bar at the top of the screen during slideshow mode, indicating overall progress across all timeline items.                         |
 
