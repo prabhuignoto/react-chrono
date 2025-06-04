@@ -22,11 +22,15 @@ import { useWindowSize } from '../useWindowSize';
 
 // Helper function to execute the latest setTimeout callback
 const executeLatestTimeout = () => {
-  const timeoutCallback =
-    mockWindow.setTimeout.mock.calls[
-      mockWindow.setTimeout.mock.calls.length - 1
-    ][0];
-  timeoutCallback();
+  // Get the global setTimeout mock calls
+  const setTimeoutSpy = vi.spyOn(global, 'setTimeout');
+  const calls = setTimeoutSpy.mock.calls;
+  if (calls.length > 0) {
+    const timeoutCallback = calls[calls.length - 1][0];
+    if (typeof timeoutCallback === 'function') {
+      timeoutCallback();
+    }
+  }
 };
 
 describe('useWindowSize', () => {
@@ -72,15 +76,9 @@ describe('useWindowSize', () => {
       mockWindow.dispatchEvent(new Event('resize'));
     });
 
-    // Wait for debounce
+    // Wait for debounce and animation frame
     act(() => {
-      vi.advanceTimersByTime(100);
-      executeLatestTimeout();
-    });
-
-    // Wait for requestAnimationFrame
-    act(() => {
-      vi.runAllTimers();
+      vi.advanceTimersByTime(200); // Advance past debounce time
     });
 
     expect(result.current.width).toBe(800);
@@ -103,15 +101,9 @@ describe('useWindowSize', () => {
     // Should not update immediately
     expect(result.current.width).toBe(mockWindow.innerWidth);
 
-    // Wait for debounce
+    // Wait for debounce and animation frame
     act(() => {
-      vi.advanceTimersByTime(200);
-      executeLatestTimeout();
-    });
-
-    // Wait for requestAnimationFrame
-    act(() => {
-      vi.runAllTimers();
+      vi.advanceTimersByTime(250); // Advance past debounce time
     });
 
     expect(result.current.width).toBe(800);
@@ -149,15 +141,9 @@ describe('useWindowSize', () => {
       mockWindow.dispatchEvent(new Event('resize'));
     });
 
-    // Wait for debounce
+    // Wait for debounce and animation frame
     act(() => {
-      vi.advanceTimersByTime(100);
-      executeLatestTimeout();
-    });
-
-    // Wait for requestAnimationFrame
-    act(() => {
-      vi.runAllTimers();
+      vi.advanceTimersByTime(250); // Advance past debounce time
     });
 
     expect(result.current.width).toBe(1024);

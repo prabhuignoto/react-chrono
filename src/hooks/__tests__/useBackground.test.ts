@@ -30,10 +30,17 @@ describe('useBackground', () => {
   });
 
   it('returns empty string and warns if color is invalid hex', () => {
+    // Mock NODE_ENV to be development for console warning
+    const originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = 'development';
+    
     const { result } = renderHook(() => useBackground('not-a-hex'));
     expect(result.current).toBe('');
     expect(warnSpy).toHaveBeenCalledWith('Invalid hex color: not-a-hex');
     expect(hexToRGBA).not.toHaveBeenCalled();
+    
+    // Restore original NODE_ENV
+    process.env.NODE_ENV = originalEnv;
   });
 
   it('calls hexToRGBA and returns its value for valid hex', () => {

@@ -14,36 +14,55 @@ export const useTimelineScroll = ({
 }: UseTimelineScrollProps) => {
   const timelineMainRef = useRef<HTMLDivElement>(null);
   const horizontalContentRef = useRef<HTMLDivElement | null>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout>();
+  const setNewOffsetRef = useRef(setNewOffset);
+  const onScrollEndRef = useRef(onScrollEnd);
 
-  // Handle scrolling
+  // Keep refs updated without triggering re-renders
+  setNewOffsetRef.current = setNewOffset;
+  onScrollEndRef.current = onScrollEnd;
+
+  // Handle scrolling (optimized with stable reference)
   const handleScroll = useCallback(
     (scroll: Partial<Scroll>) => {
       const element = timelineMainRef.current;
-      if (element) {
-        setNewOffset(element, scroll);
+      if (element && setNewOffsetRef.current) {
+        setNewOffsetRef.current(element, scroll);
       }
     },
-    [setNewOffset],
+    [],
   );
 
-  // Scroll handler for detecting end
+  // Optimized scroll handler with throttling
   const handleMainScroll = useCallback(
     (ev: React.UIEvent<HTMLDivElement>) => {
       const target = ev.target as HTMLElement;
-
-      if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
-        const scrolled = target.scrollTop + target.clientHeight;
-        if (target.scrollHeight - scrolled < 1) {
-          onScrollEnd?.();
-        }
-      } else {
-        const scrolled = target.scrollLeft + target.offsetWidth;
-        if (target.scrollWidth === scrolled) {
-          onScrollEnd?.();
-        }
+      
+      // Throttle scroll end detection for better performance
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
       }
+
+      scrollTimeoutRef.current = setTimeout(() => {
+        if (!onScrollEndRef.current) return;
+
+        const isVertical = mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
+        
+        if (isVertical) {
+          const scrolled = target.scrollTop + target.clientHeight;
+          const threshold = target.scrollHeight - 1;
+          if (scrolled >= threshold) {
+            onScrollEndRef.current();
+          }
+        } else {
+          const scrolled = target.scrollLeft + target.offsetWidth;
+          if (target.scrollWidth <= scrolled) {
+            onScrollEndRef.current();
+          }
+        }
+      }, 100); // Throttle to 100ms
     },
-    [mode, onScrollEnd],
+    [mode],
   );
 
   return {

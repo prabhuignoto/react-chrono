@@ -47,7 +47,13 @@ describe('useEscapeKey', () => {
     renderHook(() => useEscapeKey(mockCallback, { keyCode: 13 }));
 
     act(() => {
-      const event = new KeyboardEvent('keyup', { key: 'Enter', keyCode: 13 });
+      // Create event with keyCode for fallback testing
+      const event = new KeyboardEvent('keyup', { 
+        key: 'Enter', 
+      });
+      // Manually set keyCode for testing fallback behavior
+      Object.defineProperty(event, 'keyCode', { value: 13 });
+      Object.defineProperty(event, 'key', { value: undefined });
       document.dispatchEvent(event);
     });
 

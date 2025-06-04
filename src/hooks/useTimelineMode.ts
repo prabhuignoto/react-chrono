@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { TimelineMode } from '@models/TimelineModel';
 
 type ExtendedTimelineMode = TimelineMode | 'HORIZONTAL_ALL';
@@ -8,6 +8,14 @@ interface UseTimelineModeProps {
   showAllCardsHorizontal?: boolean;
   updateHorizontalAllCards?: (showAll: boolean) => void;
 }
+
+// Optimized mode mapping for better performance
+const MODE_MAPPINGS: Record<string, ExtendedTimelineMode> = {
+  'VERTICAL': 'VERTICAL',
+  'HORIZONTAL': 'HORIZONTAL',
+  'VERTICAL_ALTERNATING': 'VERTICAL_ALTERNATING',
+  'HORIZONTAL_ALL': 'HORIZONTAL_ALL',
+} as const;
 
 export const useTimelineMode = ({
   initialMode,
@@ -19,27 +27,26 @@ export const useTimelineMode = ({
       ? 'HORIZONTAL_ALL'
       : initialMode,
   );
+  
+  const updateHorizontalAllCardsRef = useRef(updateHorizontalAllCards);
+
+  // Keep callback ref updated without triggering re-renders
+  updateHorizontalAllCardsRef.current = updateHorizontalAllCards;
 
   const handleTimelineUpdate = useCallback(
     (newMode: string) => {
-      switch (newMode) {
-        case 'VERTICAL':
-          setTimelineMode('VERTICAL');
-          break;
-        case 'HORIZONTAL':
-          setTimelineMode('HORIZONTAL');
-          updateHorizontalAllCards?.(false);
-          break;
-        case 'VERTICAL_ALTERNATING':
-          setTimelineMode('VERTICAL_ALTERNATING');
-          break;
-        case 'HORIZONTAL_ALL':
-          setTimelineMode('HORIZONTAL_ALL' as ExtendedTimelineMode);
-          updateHorizontalAllCards?.(true);
-          break;
+      const mappedMode = MODE_MAPPINGS[newMode];
+      if (!mappedMode || mappedMode === timelineMode) return;
+
+      setTimelineMode(mappedMode);
+
+      // Handle horizontal cards update with stable reference
+      if (updateHorizontalAllCardsRef.current) {
+        const shouldShowAll = mappedMode === 'HORIZONTAL_ALL';
+        updateHorizontalAllCardsRef.current(shouldShowAll);
       }
     },
-    [updateHorizontalAllCards],
+    [timelineMode],
   );
 
   return {

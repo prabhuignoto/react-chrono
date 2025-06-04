@@ -6,6 +6,9 @@ export interface UIStateHook<T> {
   setState: (value: T) => void;
 }
 
+/**
+ * Optimized UI state hook with better type safety and performance
+ */
 export const useUIState = <T extends boolean>(
   initialState: T,
 ): UIStateHook<T> => {
@@ -15,5 +18,10 @@ export const useUIState = <T extends boolean>(
     setState((prev) => !prev as T);
   }, []);
 
-  return { state, toggle, setState };
+  // Memoized setState to prevent unnecessary re-renders
+  const setStateCallback = useCallback((value: T) => {
+    setState(value);
+  }, []);
+
+  return { state, toggle, setState: setStateCallback };
 };

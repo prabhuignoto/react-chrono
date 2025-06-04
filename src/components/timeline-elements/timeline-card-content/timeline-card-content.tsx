@@ -206,12 +206,39 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
       }, [active, slideShowActive, slideItemDuration, hasFocus, setupTimer]);
 
-      // Set focus when needed
+      // Set focus when needed and ensure card is completely visible
       useEffect(() => {
         if (hasFocus && active && containerRef.current) {
           containerRef.current.focus();
+          
+          // Ensure the card is completely visible when it receives focus
+          setTimeout(() => {
+            if (containerRef.current) {
+              containerRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'nearest'
+              });
+            }
+          }, 0);
         }
       }, [hasFocus, active]);
+
+      // Ensure card alignment during slideshow, independent of hasFocus state
+      useEffect(() => {
+        if (active && slideShowActive && containerRef.current) {
+          // During slideshow, ensure the active card is properly aligned and visible
+          setTimeout(() => {
+            if (containerRef.current) {
+              containerRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'nearest'
+              });
+            }
+          }, 100); // Slightly longer delay for slideshow to ensure proper DOM updates
+        }
+      }, [active, slideShowActive]);
 
       // Detect when resuming from pause
       useEffect(() => {

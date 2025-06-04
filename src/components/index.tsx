@@ -193,19 +193,49 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     if (activeTimelineItem < timeLineItems.length - 1) {
       const newTimeLineItem = activeTimelineItem + 1;
 
-      handleTimelineUpdate(newTimeLineItem);
-      setActiveTimelineItem(newTimeLineItem);
+      // Skip timeline update (which triggers scrolling) in horizontal mode during slideshow
+      if (mode === 'HORIZONTAL' && slideShowActive) {
+        // Only update the timeline items state and active item, skip scroll triggering updates
+        setTimeLineItems((lineItems) =>
+          lineItems.map((item, index) => ({
+            ...item,
+            active: index === newTimeLineItem,
+            visible: newTimeLineItem >= 0,
+          })),
+        );
+        setActiveTimelineItem(newTimeLineItem);
+        
+        if (items && items.length - 1 === newTimeLineItem) {
+          setSlideShowActive(false);
+        }
+      } else {
+        handleTimelineUpdate(newTimeLineItem);
+        setActiveTimelineItem(newTimeLineItem);
+      }
     }
-  }, [timeLineItems.length, activeTimelineItem, handleTimelineUpdate]);
+  }, [timeLineItems.length, activeTimelineItem, handleTimelineUpdate, mode, slideShowActive, items]);
 
   const handleOnPrevious = useCallback(() => {
     if (activeTimelineItem > 0) {
       const newTimeLineItem = activeTimelineItem - 1;
 
-      handleTimelineUpdate(newTimeLineItem);
-      setActiveTimelineItem(newTimeLineItem);
+      // Skip timeline update (which triggers scrolling) in horizontal mode during slideshow
+      if (mode === 'HORIZONTAL' && slideShowActive) {
+        // Only update the timeline items state and active item, skip scroll triggering updates
+        setTimeLineItems((lineItems) =>
+          lineItems.map((item, index) => ({
+            ...item,
+            active: index === newTimeLineItem,
+            visible: newTimeLineItem >= 0,
+          })),
+        );
+        setActiveTimelineItem(newTimeLineItem);
+      } else {
+        handleTimelineUpdate(newTimeLineItem);
+        setActiveTimelineItem(newTimeLineItem);
+      }
     }
-  }, [activeTimelineItem, handleTimelineUpdate]);
+  }, [activeTimelineItem, handleTimelineUpdate, mode, slideShowActive]);
 
   const handleFirst = useCallback(() => {
     setActiveTimelineItem(0);
