@@ -110,26 +110,31 @@ export const useTimelineNavigation = ({
       requestAnimationFrame(() => {
         const isVerticalMode = mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
         
-        if (isVerticalMode) {
-          // For vertical modes, ensure we fully center the element in the viewport
-          element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center', // Always center vertically
-            inline: 'nearest' // Nearest horizontal positioning
-          });
-          
-          // Add a second scroll with a slight delay to ensure proper centering
-          // This addresses issues with complex layouts and varying element heights
-          setTimeout(() => {
+        // Check if scrollIntoView is available (it may not be in test environments like JSDOM)
+        if (typeof element.scrollIntoView === 'function') {
+          if (isVerticalMode) {
+            // For vertical modes, ensure we fully center the element in the viewport
             element.scrollIntoView({
               behavior: 'smooth',
-              block: 'center',
-              inline: 'nearest'
+              block: 'center', // Always center vertically
+              inline: 'nearest' // Nearest horizontal positioning
             });
-          }, 50);
-        } else {
-          // In horizontal mode, use horizontal centering
-          element.scrollIntoView(SCROLL_OPTIONS.HORIZONTAL);
+            
+            // Add a second scroll with a slight delay to ensure proper centering
+            // This addresses issues with complex layouts and varying element heights
+            setTimeout(() => {
+              if (typeof element.scrollIntoView === 'function') {
+                element.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'center',
+                  inline: 'nearest'
+                });
+              }
+            }, 50);
+          } else {
+            // In horizontal mode, use horizontal centering
+            element.scrollIntoView(SCROLL_OPTIONS.HORIZONTAL);
+          }
         }
       });
     },
