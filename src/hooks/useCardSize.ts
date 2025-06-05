@@ -22,7 +22,6 @@ interface CardDimensions {
 // Memoized calculation function to prevent unnecessary recalculations
 const calculateTextContentSize = (
   cardHeight: number,
-  detailsHeight: number,
   containerHeight: number,
   scrollHeight: number,
   clientHeight: number,
@@ -125,7 +124,6 @@ export const useCardSize = ({
           cache.containerHeight,
           cache.scrollHeight,
           cache.clientHeight,
-          cache.offsetTop,
         ),
       };
     },

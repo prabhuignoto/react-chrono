@@ -20,19 +20,6 @@ import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { useWindowSize } from '../useWindowSize';
 
-// Helper function to execute the latest setTimeout callback
-const executeLatestTimeout = () => {
-  // Get the global setTimeout mock calls
-  const setTimeoutSpy = vi.spyOn(global, 'setTimeout');
-  const calls = setTimeoutSpy.mock.calls;
-  if (calls.length > 0) {
-    const timeoutCallback = calls[calls.length - 1][0];
-    if (typeof timeoutCallback === 'function') {
-      timeoutCallback();
-    }
-  }
-};
-
 describe('useWindowSize', () => {
   const originalWindow = global.window;
 
