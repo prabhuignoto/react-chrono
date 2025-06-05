@@ -1,6 +1,7 @@
 import { Theme } from '@models/Theme';
 import { TextDensity, TimelineProps } from '@models/TimelineModel';
 import styled, { css, keyframes } from 'styled-components';
+import { zIndex } from '../../../styles/z-index';
 import { linearGradient } from '../timeline-card-media/timeline-card-media.styles';
 import {
   reveal,
@@ -167,7 +168,7 @@ export const TimelineItemContentWrapper = styled.section<
   max-width: ${(p) => p.$maxWidth}px;
   position: relative;
   padding: 1rem;
-  z-index: 0;
+  z-index: ${zIndex.timelineCard};
   overflow: hidden;
   width: 100%;
 
@@ -499,7 +500,7 @@ export const TriangleIconWrapper = styled.span<{
   top: calc(50%);
   background: ${(p) => p.theme.cardBgColor};
   transform: translateY(-50%) rotate(225deg);
-  z-index: -1;
+  z-index: ${zIndex.timelineCard - 3}; /* Arrow tip should be below the card */
   ${(p) =>
     p.dir === 'left' ? `right: ${p.offset}px;` : `left: ${p.offset}px;`}
 

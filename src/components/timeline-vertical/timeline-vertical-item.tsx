@@ -238,6 +238,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       $isNested={isNested}
       className={verticalItemClass}
       data-testid="vertical-item-row"
+      data-item-id={id}
       key={id}
       ref={contentRef}
       theme={theme}

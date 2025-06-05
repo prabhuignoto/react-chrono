@@ -76,18 +76,61 @@ export const useTimelineNavigation = ({
 
   // Find target element in the DOM (memoized)
   const findTargetElement = useCallback(
-    (itemId: string) => findTimelineElement(itemId, mode, timelineId),
+    (itemId: string) => {
+      if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
+        // For vertical modes, directly search for the vertical-item-row
+        // This is more reliable than using findTimelineElement and then looking for a parent
+        const verticalItemRow = document.querySelector(`[data-testid="vertical-item-row"][data-item-id="${itemId}"]`);
+        if (verticalItemRow) {
+          return verticalItemRow as HTMLElement;
+        }
+        
+        // Fallback: try to find the card content element and then get its parent row
+        const cardContent = document.querySelector(`.timeline-card-content[data-item-id="${itemId}"]`);
+        if (cardContent) {
+          const row = cardContent.closest('[data-testid="vertical-item-row"]');
+          if (row) {
+            return row as HTMLElement;
+          }
+        }
+      }
+      
+      // Default behavior for horizontal modes or fallback
+      return findTimelineElement(itemId, mode, timelineId);
+    },
     [mode, timelineId],
   );
 
-  // Optimized scroll function
+  // Optimized scroll function - matches timeline card content behavior
   const scrollToElement = useCallback(
     (element: HTMLElement, mode: string) => {
-      const options = mode === 'HORIZONTAL' ? SCROLL_OPTIONS.HORIZONTAL : SCROLL_OPTIONS.VERTICAL;
+      if (!element) return;
       
-      // Use requestAnimationFrame for smoother scrolling
+      // Ensure we handle the scroll in the next animation frame for smoother transitions
       requestAnimationFrame(() => {
-        element.scrollIntoView(options);
+        const isVerticalMode = mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
+        
+        if (isVerticalMode) {
+          // For vertical modes, ensure we fully center the element in the viewport
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center', // Always center vertically
+            inline: 'nearest' // Nearest horizontal positioning
+          });
+          
+          // Add a second scroll with a slight delay to ensure proper centering
+          // This addresses issues with complex layouts and varying element heights
+          setTimeout(() => {
+            element.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+              inline: 'nearest'
+            });
+          }, 50);
+        } else {
+          // In horizontal mode, use horizontal centering
+          element.scrollIntoView(SCROLL_OPTIONS.HORIZONTAL);
+        }
       });
     },
     [],
@@ -123,9 +166,14 @@ export const useTimelineNavigation = ({
       // Skip scrolling in horizontal mode when slideshow is running to prevent toolbar hiding
       if (mode === 'HORIZONTAL' && slideShowRunning) return;
 
-      // Optimized element finding and scrolling
-      if (mode === 'HORIZONTAL') {
-        // Try timeline point first for horizontal mode
+      // For vertical modes, directly find and scroll to the vertical item row
+      if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
+        const targetElement = findTargetElement(itemId);
+        if (targetElement) {
+          scrollToElement(targetElement, mode);
+        }
+      } else {
+        // For horizontal modes, use the original approach
         const timelinePointElement = document.getElementById(
           `timeline-${mode.toLowerCase()}-item-${itemId}`
         );
@@ -136,10 +184,6 @@ export const useTimelineNavigation = ({
           const targetElement = findTargetElement(itemId);
           if (targetElement) scrollToElement(targetElement, mode);
         }
-      } else {
-        // For vertical modes
-        const targetElement = findTargetElement(itemId);
-        if (targetElement) scrollToElement(targetElement, mode);
       }
     },
     [itemsMap, updateTimelinePosition, findTargetElement, mode, scrollToElement, slideShowRunning],
@@ -151,7 +195,7 @@ export const useTimelineNavigation = ({
     [handleTimelineItemClick],
   );
 
-  // Navigation handlers (optimized with bounds checking)
+  // Navigation handlers (optimized with bounds checking and focus behavior)
   const handleNext = useCallback(() => {
     if (!hasFocus) return;
     
@@ -159,8 +203,16 @@ export const useTimelineNavigation = ({
     if (newIndex !== activeItemIndex.current) {
       activeItemIndex.current = newIndex;
       callbacksRef.current.onNext?.();
+      
+      // Trigger the same focus behavior as clicking
+      const targetItem = items[newIndex];
+      if (targetItem?.id) {
+        // Find and scroll to the target element
+        const targetElement = findTargetElement(targetItem.id);
+        if (targetElement) scrollToElement(targetElement, mode);
+      }
     }
-  }, [hasFocus, items.length]);
+  }, [hasFocus, items, findTargetElement, mode, scrollToElement]);
 
   const handlePrevious = useCallback(() => {
     if (!hasFocus) return;
@@ -169,16 +221,32 @@ export const useTimelineNavigation = ({
     if (newIndex !== activeItemIndex.current) {
       activeItemIndex.current = newIndex;
       callbacksRef.current.onPrevious?.();
+      
+      // Trigger the same focus behavior as clicking
+      const targetItem = items[newIndex];
+      if (targetItem?.id) {
+        // Find and scroll to the target element
+        const targetElement = findTargetElement(targetItem.id);
+        if (targetElement) scrollToElement(targetElement, mode);
+      }
     }
-  }, [hasFocus]);
+  }, [hasFocus, items, findTargetElement, mode, scrollToElement]);
 
   const handleFirst = useCallback(() => {
     if (!hasFocus) return;
     if (activeItemIndex.current !== 0) {
       activeItemIndex.current = 0;
       callbacksRef.current.onFirst?.();
+      
+      // Trigger the same focus behavior as clicking
+      const targetItem = items[0];
+      if (targetItem?.id) {
+        // Find and scroll to the target element
+        const targetElement = findTargetElement(targetItem.id);
+        if (targetElement) scrollToElement(targetElement, mode);
+      }
     }
-  }, [hasFocus]);
+  }, [hasFocus, items, findTargetElement, mode, scrollToElement]);
 
   const handleLast = useCallback(() => {
     if (!hasFocus) return;
@@ -186,8 +254,16 @@ export const useTimelineNavigation = ({
     if (activeItemIndex.current !== lastIndex) {
       activeItemIndex.current = lastIndex;
       callbacksRef.current.onLast?.();
+      
+      // Trigger the same focus behavior as clicking
+      const targetItem = items[lastIndex];
+      if (targetItem?.id) {
+        // Find and scroll to the target element
+        const targetElement = findTargetElement(targetItem.id);
+        if (targetElement) scrollToElement(targetElement, mode);
+      }
     }
-  }, [hasFocus, items.length]);
+  }, [hasFocus, items, findTargetElement, mode, scrollToElement]);
 
   // Keyboard navigation (optimized with key mapping)
   const handleKeySelection = useCallback(

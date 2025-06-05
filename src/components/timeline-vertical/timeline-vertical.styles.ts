@@ -1,6 +1,7 @@
 import { Theme } from '@models/Theme'; // Assuming Theme model path
 import { TimelineMode } from '@models/TimelineModel'; // Assuming TimelineModel path
 import styled, { css, keyframes } from 'styled-components';
+import { zIndex } from '../../styles/z-index';
 
 /**
  * Main container for the entire vertical timeline component.
@@ -55,6 +56,7 @@ export const VerticalItemWrapper = styled.li<VerticalItemWrapperProps>`
   width: 100%;
   align-items: stretch; /* Stretch children vertically */
   justify-content: center; /* Center items horizontally */
+  z-index: ${zIndex.timelineCard - 1}; /* Just below the card but above the lines */
   margin: 1rem 0; /* Vertical spacing between items */
   list-style: none; /* Remove default list styling */
 

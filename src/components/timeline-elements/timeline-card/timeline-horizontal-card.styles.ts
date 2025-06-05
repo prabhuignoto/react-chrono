@@ -1,5 +1,6 @@
 import { Theme } from '@models/Theme';
 import styled, { keyframes } from 'styled-components';
+import { zIndex } from '../../../styles/z-index';
 
 export const Wrapper = styled.div`
   align-items: center;
@@ -103,7 +104,7 @@ export const Shape = styled.div<ShapeModel>`
     transform: scale(0) translate(-50%, -50%);
     transform-origin: top left;
     pointer-events: none;
-    z-index: 10;
+    z-index: ${zIndex.timelinePoint + 1}; /* Above the timeline point */
     opacity: 0;
   }
 
@@ -156,7 +157,7 @@ export const Shape = styled.div<ShapeModel>`
       position: absolute;
       top: 50%;
       transform: translateY(-50%) translateX(-50%);
-      z-index: -1;
+      z-index: ${zIndex.timelinePoint - 1}; /* Behind the timeline point */
       transition: all 0.3s ease-in-out;
     }
   }
