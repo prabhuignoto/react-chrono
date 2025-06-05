@@ -22,7 +22,7 @@ describe('useTimelineScroll', () => {
     expect(result.current.horizontalContentRef.current).toBeNull();
   });
 
-  it('should handle scroll in vertical mode', () => {
+  it('should handle scroll in vertical mode', async () => {
     const { result } = renderHook(() =>
       useTimelineScroll({
         mode: 'VERTICAL',
@@ -70,11 +70,16 @@ describe('useTimelineScroll', () => {
       } as unknown as React.UIEvent<HTMLDivElement>);
     });
 
+    // Wait for the throttled callback (100ms timeout)
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 150));
+    });
+
     // Verify onScrollEnd was called
     expect(mockOnScrollEnd).toHaveBeenCalledTimes(1);
   });
 
-  it('should handle scroll in horizontal mode', () => {
+  it('should handle scroll in horizontal mode', async () => {
     const { result } = renderHook(() =>
       useTimelineScroll({
         mode: 'HORIZONTAL',
@@ -142,6 +147,11 @@ describe('useTimelineScroll', () => {
         preventDefault: vi.fn(),
         persist: vi.fn(),
       } as unknown as React.UIEvent<HTMLDivElement>);
+    });
+
+    // Wait for the throttled callback (100ms timeout)
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 150));
     });
 
     // Should trigger onScrollEnd when reaching the end

@@ -112,6 +112,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     timelineId: id,
     hasFocus,
     flipLayout,
+    slideShowRunning,
     onTimelineUpdated,
     onNext,
     onPrevious,

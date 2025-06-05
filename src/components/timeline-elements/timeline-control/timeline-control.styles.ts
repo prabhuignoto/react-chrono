@@ -1,6 +1,7 @@
 import { Theme } from '@models/Theme';
 import { TimelineMode } from '@models/TimelineModel';
 import styled, { css } from 'styled-components';
+import { zIndex } from '../../../styles/z-index';
 
 export const ScreenReaderOnly = styled.div`
   position: absolute;
@@ -22,6 +23,8 @@ export const TimelineNavWrapper = styled.div<{ theme?: Theme }>`
   // box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   background: ${(p) => p.theme.toolbarBgColor};
   // border: 1px solid ${(p) => p.theme.toolbarBtnBgColor};
+  position: relative;
+  z-index: ${zIndex.controls};
 
   .nav-item {
     padding: 0;
@@ -133,6 +136,8 @@ export const TimelineControlContainer = styled.div`
   display: flex;
   justify-content: center;
   margin: 0.5rem 0;
+  position: relative;
+  z-index: ${zIndex.controls};
 `;
 
 export const ControlButton = styled.button<{ theme?: Theme }>`

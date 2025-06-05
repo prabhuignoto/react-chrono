@@ -22,10 +22,7 @@ interface SlideshowProgressState {
 
 /**
  * Custom hook to manage overall slideshow progress state
- * This hook tracks the global progress across all timeline items during slideshow mode
- *
- * @param props - Configuration object containing slideshow state
- * @returns Object with pause/resume controls and current state
+ * Optimized for performance with better timeout management
  */
 export const useSlideshowProgress = ({
   slideShowRunning,
@@ -35,47 +32,48 @@ export const useSlideshowProgress = ({
 }: UseSlideshowProgressProps): SlideshowProgressState => {
   const [isPaused, setIsPaused] = useState(false);
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastActiveItem = useRef(activeTimelineItem);
 
-  // Clean up timeout on unmount or when slideshow stops
+  // Efficient cleanup function
+  const clearTimeouts = useCallback(() => {
+    if (pauseTimeoutRef.current) {
+      clearTimeout(pauseTimeoutRef.current);
+      pauseTimeoutRef.current = null;
+    }
+  }, []);
+
+  // Clean up timeout when slideshow stops
   useEffect(() => {
     if (!slideShowRunning) {
       setIsPaused(false);
-      if (pauseTimeoutRef.current) {
-        clearTimeout(pauseTimeoutRef.current);
-        pauseTimeoutRef.current = null;
-      }
+      clearTimeouts();
     }
-  }, [slideShowRunning]);
+  }, [slideShowRunning, clearTimeouts]);
 
-  // Reset pause state when active item changes
+  // Reset pause state when active item changes (optimized)
   useEffect(() => {
-    if (slideShowRunning) {
-      setIsPaused(false);
+    if (slideShowRunning && lastActiveItem.current !== activeTimelineItem) {
+      lastActiveItem.current = activeTimelineItem;
+      if (isPaused) setIsPaused(false);
     }
-  }, [activeTimelineItem, slideShowRunning]);
+  }, [activeTimelineItem, slideShowRunning, isPaused]);
 
   // Pause the progress
   const pauseProgress = useCallback(() => {
-    if (slideShowRunning) {
+    if (slideShowRunning && !isPaused) {
       setIsPaused(true);
     }
-  }, [slideShowRunning]);
+  }, [slideShowRunning, isPaused]);
 
   // Resume the progress
   const resumeProgress = useCallback(() => {
-    if (slideShowRunning) {
+    if (slideShowRunning && isPaused) {
       setIsPaused(false);
     }
-  }, [slideShowRunning]);
+  }, [slideShowRunning, isPaused]);
 
   // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (pauseTimeoutRef.current) {
-        clearTimeout(pauseTimeoutRef.current);
-      }
-    };
-  }, []);
+  useEffect(() => clearTimeouts, [clearTimeouts]);
 
   return {
     isPaused,

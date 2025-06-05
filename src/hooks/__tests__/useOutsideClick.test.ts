@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook } from '@testing-library/react';
-import { createRef } from 'react';
+import { createRef, RefObject } from 'react';
 import useOutsideClick from '../useOutsideClick';
 
 describe('useOutsideClick', () => {
   let mockCallback: ReturnType<typeof vi.fn>;
-  let elementRef: ReturnType<typeof createRef>;
+  let elementRef: RefObject<HTMLDivElement | null>;
   let mockElement: HTMLDivElement;
   let mockOutsideElement: HTMLDivElement;
 
@@ -146,6 +146,7 @@ describe('useOutsideClick', () => {
     expect(addEventListenerSpy).toHaveBeenCalledWith(
       'click',
       expect.any(Function),
+      undefined, // The optimized hook passes undefined for click events
     );
 
     // Disable

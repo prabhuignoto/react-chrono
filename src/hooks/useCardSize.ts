@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
+import { RefObject, useCallback, useEffect, useMemo, useState, useRef } from 'react';
 
 interface UseCardSizeProps {
   containerRef: RefObject<HTMLElement | null>;
@@ -19,25 +19,16 @@ interface CardDimensions {
   containerWidth: number;
 }
 
+// Memoized calculation function to prevent unnecessary recalculations
 const calculateTextContentSize = (
   cardHeight: number,
-  detailsRef: RefObject<HTMLElement | null>,
-  containerRef: RefObject<HTMLElement | null>,
+  containerHeight: number,
+  scrollHeight: number,
+  clientHeight: number,
+  detailsOffsetTop: number,
 ): boolean => {
-  if (!detailsRef.current || !containerRef.current) return false;
-
-  const detailsOffsetTop = detailsRef.current.offsetTop ?? 0;
-  const containerHeight = containerRef.current.clientHeight ?? 0;
-  const detailsScrollHeight = detailsRef.current.scrollHeight ?? 0;
-  const detailsClientHeight = detailsRef.current.clientHeight ?? 0;
-
-  // Check if content is actually hidden or truncated
-  // Only return true if there's significant overflow (more than 20px)
-  const hasSignificantOverflow = detailsScrollHeight > detailsClientHeight + 20;
-
-  // Check if content needs expansion in either of these ways:
-  // 1. The total height (offset + actual height) significantly exceeds container height
-  // 2. The content's scroll height exceeds its visible height by a meaningful amount
+  // Use cached values instead of DOM queries
+  const hasSignificantOverflow = scrollHeight > clientHeight + 20;
   return (
     cardHeight + detailsOffsetTop > containerHeight + 20 ||
     hasSignificantOverflow
@@ -54,24 +45,43 @@ export const useCardSize = ({
     detailsHeight: 0,
     containerWidth: 0,
   });
+  
+  // Cache DOM measurements to avoid repeated calculations
+  const measurementsCache = useRef<{
+    scrollHeight: number;
+    clientHeight: number;
+    offsetTop: number;
+    containerHeight: number;
+  }>({ scrollHeight: 0, clientHeight: 0, offsetTop: 0, containerHeight: 0 });
 
+  // Throttled resize observer for better performance
   useEffect(() => {
+    let rafId: number;
+    
     const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        if (entry.target === containerRef.current) {
-          setDimensions((prev) => ({
-            ...prev,
-            containerWidth: entry.contentRect.width,
-          }));
+      // Use RAF to batch DOM updates
+      if (rafId) cancelAnimationFrame(rafId);
+      
+      rafId = requestAnimationFrame(() => {
+        for (const entry of entries) {
+          if (entry.target === containerRef.current) {
+            setDimensions((prev) => ({
+              ...prev,
+              containerWidth: entry.contentRect.width,
+            }));
+          }
         }
-      }
+      });
     });
 
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      observer.disconnect();
+    };
   }, [containerRef]);
 
   const updateCardSize = useCallback(
@@ -79,30 +89,45 @@ export const useCardSize = ({
       if (!node || !detailsRef.current) return;
 
       const detailsEle = detailsRef.current;
-      const { scrollHeight } = detailsEle;
+      const { scrollHeight, offsetHeight, offsetTop } = detailsEle;
+      const containerHeight = node.clientHeight;
+
+      // Cache measurements
+      measurementsCache.current = {
+        scrollHeight,
+        clientHeight: offsetHeight,
+        offsetTop,
+        containerHeight,
+      };
 
       containerRef.current = node;
       setStartWidth(node.clientWidth);
       setDimensions({
         cardHeight: scrollHeight,
-        detailsHeight: detailsEle.offsetHeight,
+        detailsHeight: offsetHeight,
         containerWidth: node.clientWidth,
       });
     },
     [detailsRef, setStartWidth, containerRef],
   );
 
+  // Optimized memoization with cached measurements
   const { cardActualHeight, detailsHeight, textContentLarge } = useMemo(
-    () => ({
-      cardActualHeight: dimensions.cardHeight,
-      detailsHeight: dimensions.detailsHeight,
-      textContentLarge: calculateTextContentSize(
-        dimensions.cardHeight,
-        detailsRef,
-        containerRef,
-      ),
-    }),
-    [dimensions, detailsRef, containerRef],
+    () => {
+      const cache = measurementsCache.current;
+      return {
+        cardActualHeight: dimensions.cardHeight,
+        detailsHeight: dimensions.detailsHeight,
+        textContentLarge: calculateTextContentSize(
+          dimensions.cardHeight,
+          dimensions.detailsHeight,
+          cache.containerHeight,
+          cache.scrollHeight,
+          cache.clientHeight,
+        ),
+      };
+    },
+    [dimensions],
   );
 
   return {

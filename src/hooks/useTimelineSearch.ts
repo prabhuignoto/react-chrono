@@ -19,52 +19,62 @@ export const useTimelineSearch = ({
   const [currentMatchIndex, setCurrentMatchIndex] = useState(-1);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const activeItemIndex = useRef<number>(0);
+  
+  // Cache callback refs to prevent unnecessary re-renders
+  const onTimelineUpdatedRef = useRef(onTimelineUpdated);
+  const handleTimelineItemClickRef = useRef(handleTimelineItemClick);
+  
+  onTimelineUpdatedRef.current = onTimelineUpdated;
+  handleTimelineItemClickRef.current = handleTimelineItemClick;
 
-  // Memoize searchable content to avoid recalculating on every search
+  // Memoize searchable content with better caching strategy
   const searchableContent = useMemo(() => {
-    return items.map((item) => {
-      const content = [
+    return items.map((item, index) => {
+      const textParts = [
         getSearchableText(item.title),
         getSearchableText(item.cardTitle),
         getSearchableText(item.cardSubtitle),
         Array.isArray(item.cardDetailedText)
           ? item.cardDetailedText.map(getSearchableText).join(' ')
           : getSearchableText(item.cardDetailedText),
-      ]
-        .filter(Boolean) // Remove empty strings
-        .join(' ')
-        .toLowerCase();
+      ];
 
-      return content;
+      return {
+        index,
+        content: textParts.filter(Boolean).join(' ').toLowerCase(),
+        id: item.id,
+      };
     });
   }, [items]);
 
-  // Focus helper function to reduce code duplication
+  // Optimized focus helper with reduced timeout
   const focusSearchInput = useCallback(() => {
-    setTimeout(() => {
+    // Use requestAnimationFrame for better performance
+    requestAnimationFrame(() => {
       if (searchInputRef.current) {
         searchInputRef.current.focus();
         const length = searchInputRef.current.value.length;
         searchInputRef.current.setSelectionRange(length, length);
       }
-    }, 50);
+    });
   }, []);
 
-  // Find matches based on search query - optimized version
+  // Enhanced search with better performance
   const findMatches = useCallback(
     (query: string) => {
-      if (!query.trim()) {
+      const trimmedQuery = query.trim();
+      if (!trimmedQuery) {
         setSearchResults([]);
         setCurrentMatchIndex(-1);
         return;
       }
 
-      const queryLower = query.toLowerCase().trim();
+      const queryLower = trimmedQuery.toLowerCase();
       const results: number[] = [];
 
-      // Use the pre-computed searchable content for faster search
+      // Use for-loop for better performance than array methods
       for (let i = 0; i < searchableContent.length; i++) {
-        if (searchableContent[i].includes(queryLower)) {
+        if (searchableContent[i].content.includes(queryLower)) {
           results.push(i);
         }
       }
@@ -73,11 +83,11 @@ export const useTimelineSearch = ({
 
       if (results.length > 0) {
         setCurrentMatchIndex(0);
-        const firstMatchItemId = items[results[0]]?.id;
-        if (firstMatchItemId) {
+        const firstMatchData = searchableContent[results[0]];
+        if (firstMatchData?.id) {
           activeItemIndex.current = results[0];
-          onTimelineUpdated?.(results[0]);
-          handleTimelineItemClick(firstMatchItemId);
+          onTimelineUpdatedRef.current?.(results[0]);
+          handleTimelineItemClickRef.current(firstMatchData.id);
           focusSearchInput();
         }
       } else {
@@ -85,18 +95,14 @@ export const useTimelineSearch = ({
         focusSearchInput();
       }
     },
-    [
-      searchableContent,
-      items,
-      onTimelineUpdated,
-      handleTimelineItemClick,
-      focusSearchInput,
-    ],
+    [searchableContent, focusSearchInput],
   );
 
-  // Reduced debounce delay for better responsiveness while still preventing excessive processing
-  const debouncedSearch = useDebouncedCallback(findMatches, 200, {
-    maxWait: 1000, // Ensure search executes within reasonable time
+  // Optimized debounced search with better performance
+  const debouncedSearch = useDebouncedCallback(findMatches, 150, {
+    maxWait: 500,
+    leading: false,
+    trailing: true,
   });
 
   const handleSearchChange = useCallback(
@@ -111,18 +117,20 @@ export const useTimelineSearch = ({
     setSearchQuery('');
     setSearchResults([]);
     setCurrentMatchIndex(-1);
-    debouncedSearch.cancel(); // Cancel any pending searches
+    debouncedSearch.cancel();
 
     if (items.length > 0) {
       activeItemIndex.current = 0;
-      onTimelineUpdated?.(0);
+      onTimelineUpdatedRef.current?.(0);
 
-      const firstItemId = items[0]?.id;
-      if (firstItemId) handleTimelineItemClick(firstItemId);
+      const firstItem = items[0];
+      if (firstItem?.id) {
+        handleTimelineItemClickRef.current(firstItem.id);
+      }
     }
-  }, [items, onTimelineUpdated, handleTimelineItemClick, debouncedSearch]);
+  }, [items, debouncedSearch]);
 
-  // Navigate between search matches - optimized version
+  // Optimized navigation with bounds checking
   const navigateMatches = useCallback(
     (direction: 'next' | 'prev') => {
       if (searchResults.length === 0) return;
@@ -130,28 +138,24 @@ export const useTimelineSearch = ({
       const nextIndex =
         direction === 'next'
           ? (currentMatchIndex + 1) % searchResults.length
-          : (currentMatchIndex - 1 + searchResults.length) %
-            searchResults.length;
+          : (currentMatchIndex - 1 + searchResults.length) % searchResults.length;
+
+      if (nextIndex === currentMatchIndex) return;
 
       const newTimelineIndex = searchResults[nextIndex];
+      const matchData = searchableContent[newTimelineIndex];
+      
       setCurrentMatchIndex(nextIndex);
       activeItemIndex.current = newTimelineIndex;
-      onTimelineUpdated?.(newTimelineIndex);
+      
+      onTimelineUpdatedRef.current?.(newTimelineIndex);
 
-      const itemId = items[newTimelineIndex]?.id;
-      if (itemId) {
-        handleTimelineItemClick(itemId);
+      if (matchData?.id) {
+        handleTimelineItemClickRef.current(matchData.id);
         focusSearchInput();
       }
     },
-    [
-      searchResults,
-      currentMatchIndex,
-      items,
-      onTimelineUpdated,
-      handleTimelineItemClick,
-      focusSearchInput,
-    ],
+    [searchResults, currentMatchIndex, searchableContent, focusSearchInput],
   );
 
   const handleNextMatch = useCallback(
@@ -166,12 +170,17 @@ export const useTimelineSearch = ({
 
   const handleSearchKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
-      if (e.key === 'Enter' && searchResults.length > 0) {
-        e.preventDefault();
-        handleNextMatch();
-      } else if (e.key === 'Escape') {
-        e.preventDefault();
-        clearSearch();
+      switch (e.key) {
+        case 'Enter':
+          if (searchResults.length > 0) {
+            e.preventDefault();
+            handleNextMatch();
+          }
+          break;
+        case 'Escape':
+          e.preventDefault();
+          clearSearch();
+          break;
       }
     },
     [searchResults.length, handleNextMatch, clearSearch],

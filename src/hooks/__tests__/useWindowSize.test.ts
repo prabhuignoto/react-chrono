@@ -20,15 +20,6 @@ import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { useWindowSize } from '../useWindowSize';
 
-// Helper function to execute the latest setTimeout callback
-const executeLatestTimeout = () => {
-  const timeoutCallback =
-    mockWindow.setTimeout.mock.calls[
-      mockWindow.setTimeout.mock.calls.length - 1
-    ][0];
-  timeoutCallback();
-};
-
 describe('useWindowSize', () => {
   const originalWindow = global.window;
 
@@ -72,15 +63,9 @@ describe('useWindowSize', () => {
       mockWindow.dispatchEvent(new Event('resize'));
     });
 
-    // Wait for debounce
+    // Wait for debounce and animation frame
     act(() => {
-      vi.advanceTimersByTime(100);
-      executeLatestTimeout();
-    });
-
-    // Wait for requestAnimationFrame
-    act(() => {
-      vi.runAllTimers();
+      vi.advanceTimersByTime(200); // Advance past debounce time
     });
 
     expect(result.current.width).toBe(800);
@@ -103,15 +88,9 @@ describe('useWindowSize', () => {
     // Should not update immediately
     expect(result.current.width).toBe(mockWindow.innerWidth);
 
-    // Wait for debounce
+    // Wait for debounce and animation frame
     act(() => {
-      vi.advanceTimersByTime(200);
-      executeLatestTimeout();
-    });
-
-    // Wait for requestAnimationFrame
-    act(() => {
-      vi.runAllTimers();
+      vi.advanceTimersByTime(250); // Advance past debounce time
     });
 
     expect(result.current.width).toBe(800);
@@ -149,15 +128,9 @@ describe('useWindowSize', () => {
       mockWindow.dispatchEvent(new Event('resize'));
     });
 
-    // Wait for debounce
+    // Wait for debounce and animation frame
     act(() => {
-      vi.advanceTimersByTime(100);
-      executeLatestTimeout();
-    });
-
-    // Wait for requestAnimationFrame
-    act(() => {
-      vi.runAllTimers();
+      vi.advanceTimersByTime(250); // Advance past debounce time
     });
 
     expect(result.current.width).toBe(1024);

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import { MediaState } from '../models/TimelineMediaModel';
 
 interface UseMediaStateProps {
@@ -21,27 +21,41 @@ export const useMediaState = ({
   onElapsed,
 }: UseMediaStateProps): UseMediaStateReturn => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const onElapsedRef = useRef(onElapsed);
+
+  // Keep callback ref updated without triggering re-renders
+  useEffect(() => {
+    onElapsedRef.current = onElapsed;
+  }, [onElapsed]);
 
   const handleMediaState = useCallback(
     (state: MediaState) => {
-      if (!slideShowActive) return;
+      // Early return for inactive slideshow
+      if (!slideShowActive) {
+        if (isPlaying) setIsPlaying(false);
+        return;
+      }
 
-      setIsPlaying(state.playing ?? false);
+      // Batch state updates when possible
+      const shouldSetPlaying = state.playing ?? false;
+      if (isPlaying !== shouldSetPlaying) {
+        setIsPlaying(shouldSetPlaying);
+      }
 
-      if (state.paused && paused && id && onElapsed) {
-        onElapsed(id);
+      // Handle elapsed callback with stable reference
+      if (state.paused && paused && id && onElapsedRef.current) {
+        onElapsedRef.current(id);
       }
     },
-    [slideShowActive, paused, id, onElapsed],
+    [slideShowActive, paused, id, isPlaying],
   );
 
   const cleanup = useCallback(() => {
     setIsPlaying(false);
   }, []);
 
-  useEffect(() => {
-    return cleanup;
-  }, [cleanup]);
+  // Clean up on unmount
+  useEffect(() => cleanup, [cleanup]);
 
   return {
     isPlaying,

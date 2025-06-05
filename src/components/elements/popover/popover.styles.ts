@@ -1,5 +1,6 @@
 import { Theme } from '@models/Theme';
 import styled, { css } from 'styled-components';
+import { zIndex } from '../../../styles/z-index';
 
 // Utility mixin for centering content using flexbox
 const flexCenter = css`
@@ -54,7 +55,7 @@ export const PopoverHolder = styled.div<{
     opacity 0.2s ease-in-out,
     transform 0.2s ease-in-out;
   transform: ${(p) => (p.$visible ? 'translateY(0)' : 'translateY(-10px)')};
-  z-index: 99999;
+  z-index: ${zIndex.popover}; /* Use standardized z-index for popovers */
 `;
 
 // Clickable selector button that triggers the popover

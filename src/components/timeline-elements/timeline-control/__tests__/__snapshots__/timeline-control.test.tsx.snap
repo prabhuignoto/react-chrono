@@ -3,7 +3,7 @@
 exports[`TimelineControl > should render 1`] = `
 <div>
   <div
-    class="sc-dYOLZc ThcBP"
+    class="sc-dYOLZc dcYjHC"
   >
     <output
       aria-live="polite"
@@ -11,7 +11,7 @@ exports[`TimelineControl > should render 1`] = `
     />
     <div
       aria-label="Timeline Navigation"
-      class="sc-hKDTPf fuPseK timeline-controls controls"
+      class="sc-hKDTPf hkrQIj timeline-controls controls"
       role="toolbar"
     >
       <div

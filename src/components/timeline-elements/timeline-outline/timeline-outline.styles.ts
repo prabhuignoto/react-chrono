@@ -1,5 +1,6 @@
 import { Theme } from '@models/Theme';
 import styled, { keyframes } from 'styled-components';
+import { zIndex } from '../../../styles/z-index';
 import { OutlinePosition } from './timeline-outline.model';
 
 const open = keyframes`
@@ -54,7 +55,7 @@ export const OutlinePane = styled.aside<{ open?: boolean; theme?: Theme }>`
   display: flex;
   justify-content: center;
   position: absolute;
-  z-index: 9000;
+  z-index: ${zIndex.modal}; /* Use standardized z-index for outline panel */
   box-shadow: 0 5px 10px 2px
     rgba(
       0,

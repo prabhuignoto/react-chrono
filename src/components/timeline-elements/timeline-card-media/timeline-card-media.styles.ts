@@ -1,6 +1,7 @@
 import { Theme } from '@models/Theme';
 import { TimelineMode } from '@models/TimelineModel';
 import styled, { css } from 'styled-components';
+import { zIndex } from '../../../styles/z-index';
 import { ScrollBar } from '../../common/styles';
 
 export const linearGradient = css`
@@ -41,6 +42,7 @@ export const MediaWrapper = styled.div<{
   text-align: ${(p) => p.align};
   width: calc(100% - 1em);
   overflow: hidden; /* Ensure content doesn't overflow */
+  z-index: ${zIndex.timelineCard + 1}; /* Place media above card content */
 
   ${(p) => (p.$cardHeight ? `min-height: ${p.$cardHeight}px;` : '')};
   ${(p) => {

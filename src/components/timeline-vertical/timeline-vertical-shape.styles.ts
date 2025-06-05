@@ -1,5 +1,6 @@
 import { Theme } from '@models/Theme';
 import styled from 'styled-components';
+import { zIndex } from '../../styles/z-index';
 
 /**
  * Props for the TimelinePointWrapper component.
@@ -63,7 +64,7 @@ export const TimelinePointWrapper = styled.div<TimelinePointWrapperProps>`
     left: 50%;
     position: absolute;
     width: ${(p) => (p.width ? `${p.width}px` : '4px')};
-    z-index: 0; /* Behind the point */
+    z-index: ${zIndex.timelineLine}; /* Timeline line is at bottom layer */
     transform: translateX(-50%); /* Center horizontally */
   }
 `;
@@ -83,7 +84,7 @@ interface TimelinePointContainerProps {
  */
 export const TimelinePointContainer = styled.button<TimelinePointContainerProps>`
   position: relative; /* Ensure it's above the ::after pseudo-element */
-  z-index: 1;
+  z-index: ${zIndex.timelinePoint}; /* Timeline point sits above the lines but below popovers */
   visibility: ${(p) =>
     p.$hide ? 'hidden' : 'visible'}; /* Control visibility */
 

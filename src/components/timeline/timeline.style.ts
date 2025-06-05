@@ -1,6 +1,7 @@
 import { Theme } from '@models/Theme';
 import { TimelineMode } from '@models/TimelineModel';
 import styled from 'styled-components';
+import { zIndex } from '../../styles/z-index';
 import { ScrollBar } from '../common/styles';
 
 export const Wrapper = styled.div<{
@@ -11,7 +12,7 @@ export const Wrapper = styled.div<{
   flex-direction: column;
   /* cannot remove this */
   height: 100%;
-  z-index: 0;
+  z-index: ${zIndex.timelineCard - 2}; /* Base z-index for timeline */
 
   &:focus {
     outline: 0;
@@ -133,7 +134,7 @@ export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
   padding: 0;
   margin: ${(p) => (p.position === 'top' ? '0 0 20px 0' : '20px 0 0 0')};
   order: ${(p) => (p.position === 'top' ? 0 : 1)};
-  z-index: 1;
+  z-index: ${zIndex.controls - 1}; /* Below controls but above base timeline */
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
