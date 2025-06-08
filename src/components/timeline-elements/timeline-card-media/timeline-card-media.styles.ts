@@ -169,6 +169,7 @@ export const MediaDetailsWrapper = styled.div<{
     left: 50%;
     bottom: ${p.$expandFull ? '0%' : ' 5%'};
     transform: translateX(-50%);
+    z-index: ${zIndex.timelineCard + 2};
     background: ${
       p.$showText ? p.theme?.cardDetailsBackGround : p.theme?.cardBgColor
     };
