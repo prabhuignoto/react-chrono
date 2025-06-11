@@ -1,5 +1,5 @@
 {
-  "name": "react-chrono",
+  "name": "react-chrono-ui",
   "version": "2.9.1",
   "license": "MIT",
   "description": "A Modern Timeline component for React",
@@ -165,15 +165,15 @@
   ],
   "size-limit": [
     {
-      "path": "dist/react-chrono.js",
+      "path": "dist/react-chrono-ui.js",
       "limit": "110 KB"
     },
     {
-      "path": "dist/react-chrono.esm.js",
+      "path": "dist/react-chrono-ui.esm.js",
       "limit": "110 KB"
     },
     {
-      "path": "dist/react-chrono.umd.js",
+      "path": "dist/react-chrono-ui.umd.js",
       "limit": "110 KB"
     }
   ],

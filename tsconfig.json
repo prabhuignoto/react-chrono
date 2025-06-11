@@ -44,5 +44,5 @@
     "cypress",
     "cypress.config.ts"
   ],
-  "files": ["src/react-chrono.ts"]
+  "files": ["src/react-chrono-ui.ts"]
 }
