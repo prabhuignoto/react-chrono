@@ -145,7 +145,7 @@
     "snyk": "^1.1297.1",
     "start-server-and-test": "^2.0.12",
     "stylelint": "^16.20.0",
-    "stylelint-config-recess-order": "^6.0.0",
+    "stylelint-config-recess-order": "^7.1.0",
     "stylelint-config-recommended": "^16.0.0",
     "stylelint-order": "^7.0.0",
     "typescript": "^5.8.3",
