@@ -72,6 +72,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     include: [
+      './src/**/*.test.{tsx,ts}',
       './src/components/**/*.test.{tsx,ts}',
       './src/utils/**/*.test.{tsx,ts}',
       './src/hooks/**/*.test.{tsx,ts}',
