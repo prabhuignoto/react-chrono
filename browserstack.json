@@ -15,8 +15,8 @@
     ],
     "run_settings": {
         "cypress_config_file": "./cypress.json",
-        "project_name": "project-name",
-        "build_name": "build-name",
+        "project_name": "react-chrono-ui",
+        "build_name": "react-chrono-ui-build",
         "exclude": [],
         "parallels": "5",
         "npm_dependencies": {

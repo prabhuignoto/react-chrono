@@ -1,13 +1,31 @@
 import { Theme } from '@models/Theme';
 import { TimelineMode } from '@models/TimelineModel';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { zIndex } from '../../styles/z-index';
 import { ScrollBar } from '../common/styles';
 
+// CSS transform and animation fallbacks
+const getTransform = (transform?: string) => transform || 'none';
+
+const transitionMixin = css`
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+`;
+
+// Timeline wrapper with improved cross-browser support
 export const Wrapper = styled.div<{
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
   theme?: Theme;
+  $translate?: string;
 }>`
+  -webkit-transform: ${props => getTransform(props.$translate)};
+  -moz-transform: ${props => getTransform(props.$translate)};
+  -ms-transform: ${props => getTransform(props.$translate)};
+  transform: ${props => getTransform(props.$translate)};
+  ${transitionMixin}
   display: flex;
   flex-direction: column;
   /* cannot remove this */

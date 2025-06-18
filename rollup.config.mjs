@@ -33,7 +33,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 export default {
   cache: true,
   external: ['react', 'react-dom'],
-  input: 'src/react-chrono.ts',
+  input: 'src/react-chrono-ui.ts',
   onwarn(warning) {
     if (warning.code === 'EXPERIMENTAL_WARNING') return;
     console.warn(warning);
@@ -66,7 +66,7 @@ export default {
         'react/jsx-runtime': 'jsxRuntime',
         'styled-components': 'styled',
       },
-      name: 'ReactChrono',
+      name: 'ReactChronoUI',
       strict: true,
       sourcemap: true,
     },

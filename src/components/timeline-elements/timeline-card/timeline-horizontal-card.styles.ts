@@ -237,3 +237,44 @@ export const TimelineContentContainer = styled.div<{
     flex-direction: column;
   }
 `;
+
+// Card container with improved cross-browser support
+export const CardContainer = styled.div<{ theme: Theme }>`
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 250px;
+  max-width: 350px;
+  margin: 0.5rem;
+  padding: 1rem;
+  background: ${(p) => p.theme.cardBgColor};
+  border-radius: 8px;
+  -webkit-box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 4px 10px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 4px 10px rgba(0, 0, 0, 0.08);
+  -webkit-transition: 
+    -webkit-transform 0.2s ease-out,
+    box-shadow 0.2s ease-out;
+  transition:
+    transform 0.2s ease-out,
+    box-shadow 0.2s ease-out;
+
+  &:hover {
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+    -webkit-box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.08),
+      0 6px 12px rgba(0, 0, 0, 0.12);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.08),
+      0 6px 12px rgba(0, 0, 0, 0.12);
+  }
+`;

@@ -1,6 +1,6 @@
-# React Chrono Demo
+# React Chrono UI Demo
 
-This directory contains the organized demo application for React Chrono, showcasing various timeline configurations and use cases.
+This directory contains the organized demo application for React Chrono UI, showcasing various timeline configurations and use cases.
 
 ## Directory Structure
 

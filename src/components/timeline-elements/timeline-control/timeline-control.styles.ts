@@ -131,6 +131,22 @@ export const TimelineNavButton = styled.button<{
   }
 `;
 
+// Control container with improved layout
+export const ControlContainer = styled.div<{ theme: Theme }>`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: ${(p) => p.theme.cardBgColor};
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+`;
+
 export const TimelineControlContainer = styled.div`
   align-items: center;
   display: flex;
