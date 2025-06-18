@@ -5,12 +5,7 @@ import { zIndex } from '../../styles/z-index';
 import { ScrollBar } from '../common/styles';
 
 // CSS transform and animation fallbacks
-const transformMixin = css<{ $translate?: string }>`
-  -webkit-transform: ${(p) => p.$translate || 'none'};
-  -moz-transform: ${(p) => p.$translate || 'none'};
-  -ms-transform: ${(p) => p.$translate || 'none'};
-  transform: ${(p) => p.$translate || 'none'};
-`;
+const getTransform = (transform?: string) => transform || 'none';
 
 const transitionMixin = css`
   -webkit-transition: all 0.2s ease;
@@ -24,8 +19,12 @@ const transitionMixin = css`
 export const Wrapper = styled.div<{
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
   theme?: Theme;
+  $translate?: string;
 }>`
-  ${transformMixin}
+  -webkit-transform: ${props => getTransform(props.$translate)};
+  -moz-transform: ${props => getTransform(props.$translate)};
+  -ms-transform: ${props => getTransform(props.$translate)};
+  transform: ${props => getTransform(props.$translate)};
   ${transitionMixin}
   display: flex;
   flex-direction: column;
