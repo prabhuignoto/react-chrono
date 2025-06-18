@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it} from 'vitest';
 import useNewScrollPosition from '../useNewScrollPosition';
 import { TimelineMode } from '../../../models/TimelineModel';
 import { Scroll } from '../../../models/TimelineHorizontalModel';
