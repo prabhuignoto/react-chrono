@@ -1,18 +1,8 @@
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import { useBackground } from '../../../hooks/useBackground';
+import { useMeasureHeight } from '../../../hooks/useMeasureHeight';
 import { DetailsTextWrapper } from '../timeline-card-media/timeline-card-media.styles';
 import { DetailsTextMemoModel } from './memoized-model';
-
-const useMeasureHeight = (onRender?: (height: number) => void) => {
-  return useCallback(
-    (node: HTMLDivElement | null) => {
-      if (node && onRender) {
-        requestAnimationFrame(() => onRender(node.clientHeight));
-      }
-    },
-    [onRender],
-  );
-};
 
 const arePropsEqual = (
   prev: DetailsTextMemoModel,

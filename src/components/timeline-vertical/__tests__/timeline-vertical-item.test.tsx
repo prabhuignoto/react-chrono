@@ -4,12 +4,7 @@ import { customRender } from '../../common/test';
 import { providerProps } from '../../common/test/index';
 import TimelineVerticalItem from '../timeline-vertical-item';
 
-// Mock ResizeObserver
-global.ResizeObserver = class ResizeObserver {
-  observe() {}
-  unobserve() {}
-  disconnect() {}
-};
+// ResizeObserver is already mocked globally in common/test/index.tsx
 
 const commonProps: VerticalItemModel = {
   // complete the rest of the properties
