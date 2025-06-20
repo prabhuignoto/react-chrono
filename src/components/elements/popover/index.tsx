@@ -7,6 +7,7 @@ import React, {
   memo,
 } from 'react';
 import useCloseClickOutside from 'src/components/effects/useCloseClickOutside';
+import { useFocusTrap } from 'src/hooks/useFocusTrap';
 import { ChevronDown, CloseIcon } from 'src/components/icons';
 import { PopOverModel } from './popover.model';
 import {
@@ -61,6 +62,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   $isMobile = false,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  
   const [state, dispatch] = useReducer(popoverReducer, {
     open: false,
     isVisible: false,
@@ -73,12 +75,18 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   const closePopover = useCallback(() => {
     dispatch({ type: 'CLOSE' });
   }, []);
+  
+  const focusTrapRef = useFocusTrap(state.open, closePopover);
 
   const handleKeyPress = useCallback((ev: React.KeyboardEvent) => {
-    if (ev.key === 'Enter') {
+    if (ev.key === 'Enter' || ev.key === ' ') {
+      ev.preventDefault();
       dispatch({ type: 'TOGGLE' });
+    } else if (ev.key === 'Escape' && state.open) {
+      ev.preventDefault();
+      dispatch({ type: 'CLOSE' });
     }
-  }, []);
+  }, [state.open]);
 
   useCloseClickOutside(ref, closePopover);
 
@@ -103,9 +111,13 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           $open={state.open}
           $isDarkMode={isDarkMode}
           tabIndex={0}
-          onKeyUp={handleKeyPress}
+          onKeyDown={handleKeyPress}
           $isMobile={$isMobile}
           title={placeholder}
+          aria-expanded={state.open}
+          aria-haspopup="menu"
+          aria-controls={state.open ? 'popover-content' : undefined}
+          id="popover-trigger"
         >
           <SelecterIcon $theme={theme} $open={state.open}>
             {icon || <ChevronDown />}
@@ -122,9 +134,18 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           $theme={theme}
           $isMobile={$isMobile}
           $visible={state.isVisible}
+          id="popover-content"
+          role="menu"
+          aria-labelledby={state.open ? 'popover-trigger' : undefined}
+          ref={focusTrapRef}
         >
           <Header>
-            <CloseButton theme={theme} onClick={closePopover}>
+            <CloseButton 
+              theme={theme} 
+              onClick={closePopover}
+              aria-label="Close popover"
+              title="Close popover"
+            >
               <CloseIcon />
             </CloseButton>
           </Header>

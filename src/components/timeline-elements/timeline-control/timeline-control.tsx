@@ -137,8 +137,9 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
       <TimelineNavWrapper
         className={cls('timeline-controls', classNames?.controls)}
         theme={theme}
-        aria-label="Timeline Navigation"
+        aria-label="Timeline Navigation Controls"
         role="toolbar"
+        aria-orientation="horizontal"
       >
         {/* jump to first */}
         {disableInteraction ? null : (

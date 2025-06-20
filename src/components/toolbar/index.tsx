@@ -33,7 +33,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
     }
 
     return (
-      <ToolbarWrapper theme={theme} role="toolbar">
+      <ToolbarWrapper theme={theme} role="toolbar" aria-orientation="horizontal">
         {items.map(({ label, id, icon }, index) => {
           if (!id) {
             console.warn('Toolbar item is missing required id property');
@@ -45,7 +45,13 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
               aria-label={label}
               key={id}
               role="button"
-              // tabIndex={0}
+              tabIndex={0}
+              onKeyDown={(ev) => {
+                if (ev.key === 'Enter' || ev.key === ' ') {
+                  ev.preventDefault();
+                  // Handle activation if needed
+                }
+              }}
             >
               {icon && <IconWrapper>{icon}</IconWrapper>}
               {children[index] && (

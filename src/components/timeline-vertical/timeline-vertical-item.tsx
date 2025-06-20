@@ -242,8 +242,9 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       key={id}
       ref={contentRef}
       theme={theme}
-      aria-current={active ? 'true' : undefined}
-      aria-label={accessibleTitle}
+      aria-current={active ? 'step' : undefined}
+      aria-label={`Timeline item: ${accessibleTitle}`}
+      role="listitem"
     >
       {/* Conditionally render the Title */}
       {canShowTitle ? Title : null}

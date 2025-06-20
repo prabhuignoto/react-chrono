@@ -270,4 +270,62 @@ describe('useTimelineSearch', () => {
     expect(mockOnTimelineUpdated).toHaveBeenCalledWith(1);
     expect(mockHandleTimelineItemClick).toHaveBeenCalledWith('2');
   });
+
+  it('should provide search input ref for focus management', () => {
+    const { result } = renderHook(() =>
+      useTimelineSearch({
+        items: mockItems,
+        onTimelineUpdated: mockOnTimelineUpdated,
+        handleTimelineItemClick: mockHandleTimelineItemClick,
+      }),
+    );
+
+    expect(result.current.searchInputRef).toBeDefined();
+    expect(result.current.searchInputRef.current).toBeNull(); // No DOM in test env
+  });
+
+  it('should focus search input when search is active', () => {
+    // Mock HTMLInputElement and its focus method
+    const mockFocus = vi.fn();
+    const mockSetSelectionRange = vi.fn();
+    const mockAddEventListener = vi.fn();
+    const mockRemoveEventListener = vi.fn();
+    const mockInputElement = {
+      focus: mockFocus,
+      setSelectionRange: mockSetSelectionRange,
+      addEventListener: mockAddEventListener,
+      removeEventListener: mockRemoveEventListener,
+      value: 'test query',
+    } as unknown as HTMLInputElement;
+
+    const { result } = renderHook(() =>
+      useTimelineSearch({
+        items: mockItems,
+        onTimelineUpdated: mockOnTimelineUpdated,
+        handleTimelineItemClick: mockHandleTimelineItemClick,
+      }),
+    );
+
+    // Set the mock input element
+    result.current.searchInputRef.current = mockInputElement;
+
+    // Perform a search
+    act(() => {
+      result.current.handleSearchChange('Title');
+    });
+
+    // Wait for debounce and focus scheduling
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+
+    // Advance timers for scheduled focus return
+    act(() => {
+      vi.advanceTimersByTime(300);
+    });
+
+    // The focus should be called multiple times due to our focus management
+    expect(mockFocus).toHaveBeenCalled();
+    expect(mockAddEventListener).toHaveBeenCalled();
+  });
 });

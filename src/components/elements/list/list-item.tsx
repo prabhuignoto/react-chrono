@@ -47,10 +47,11 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
      * @param {string} id - Item identifier
      */
     const handleKeyPress = useCallback((ev: KeyboardEvent, id: string) => {
-      if (ev.key === 'Enter') {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
         handleOnClick(id);
       }
-    }, []);
+    }, [handleOnClick]);
 
     return (
       <ListItemStyle
@@ -61,7 +62,10 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
         $active={active}
         tabIndex={0}
         $selectable={selectable}
-        onKeyUp={(ev) => handleKeyPress(ev, id)}
+        onKeyDown={(ev) => handleKeyPress(ev, id)}
+        role="listitem"
+        aria-selected={active}
+        aria-describedby={description ? `${id}-description` : undefined}
       >
         {selectable ? (
           <CheckboxWrapper>
@@ -77,9 +81,11 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
         ) : null}
         <StyleAndDescription $selectable={selectable}>
           <TitleStyle theme={theme}>{title}</TitleStyle>
-          <TitleDescriptionStyle theme={theme}>
-            {description}
-          </TitleDescriptionStyle>
+          {description && (
+            <TitleDescriptionStyle theme={theme} id={`${id}-description`}>
+              {description}
+            </TitleDescriptionStyle>
+          )}
         </StyleAndDescription>
       </ListItemStyle>
     );

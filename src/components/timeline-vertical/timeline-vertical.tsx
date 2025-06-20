@@ -133,7 +133,12 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
 
     // Render the main timeline wrapper
     return (
-      <TimelineVerticalWrapper as="ul" data-testid="tree-main">
+      <TimelineVerticalWrapper 
+        as="ul" 
+        data-testid="tree-main"
+        role="list"
+        aria-label="Timeline items"
+      >
         {renderItems}
       </TimelineVerticalWrapper>
     );

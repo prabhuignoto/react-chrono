@@ -225,9 +225,9 @@ describe('TimelineHorizontal', () => {
 
   it('should render as semantic list with proper ARIA labels', () => {
     renderWithContext();
-    const list = screen.getByRole('list', { name: 'Timeline' });
+    const list = screen.getByRole('list', { name: 'Timeline items' });
     expect(list).toBeInTheDocument();
-    expect(list).toHaveAttribute('aria-label', 'Timeline');
+    expect(list).toHaveAttribute('aria-label', 'Timeline items');
   });
 
   it('should handle empty items array', () => {

@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef, useMemo } from 'react';
+import { useCallback, useState, useRef, useMemo, useEffect } from 'react';
 import { TimelineCardModel } from '@models/TimelineItemModel';
 import { getSearchableText } from '../utils/timelineUtils';
 import { useDebouncedCallback } from 'use-debounce';
@@ -59,6 +59,134 @@ export const useTimelineSearch = ({
     });
   }, []);
 
+  // Return focus to search input after a delay when cards receive focus
+  const scheduleFocusReturn = useCallback(() => {
+    setTimeout(() => {
+      if (searchInputRef.current && searchQuery) {
+        focusSearchInput();
+      }
+    }, 300); // Wait for card focus to complete, then return to search
+  }, [focusSearchInput, searchQuery]);
+
+  // Track if user is actively typing to prevent focus interruption
+  const isTypingRef = useRef(false);
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Enhanced search input focus with initial focus setup
+  useEffect(() => {
+    // Ensure search input has initial focus when component mounts
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, []);
+
+  // Global focus protection - prevent any other element from stealing focus during search
+  useEffect(() => {
+    if (searchQuery && searchInputRef.current) {
+      let focusCheckInterval: NodeJS.Timeout;
+      
+      const protectSearchFocus = () => {
+        if (searchInputRef.current && 
+            document.activeElement !== searchInputRef.current && 
+            searchQuery && 
+            !isTypingRef.current) {
+          // Check if focus moved to a timeline element
+          const activeEl = document.activeElement as HTMLElement;
+          if (activeEl && (
+              activeEl.closest('.timeline-card-content') ||
+              activeEl.closest('[data-testid="timeline-circle"]') ||
+              activeEl.closest('.timeline-wrapper') ||
+              activeEl.closest('.timeline-vertical') ||
+              activeEl.closest('.timeline-horizontal')
+            )) {
+            // Focus was stolen by timeline element, restore it
+            setTimeout(() => {
+              if (searchInputRef.current && searchQuery) {
+                searchInputRef.current.focus();
+              }
+            }, 10);
+          }
+        }
+      };
+
+      // Check focus every 100ms when search is active
+      focusCheckInterval = setInterval(protectSearchFocus, 100);
+
+      return () => {
+        if (focusCheckInterval) {
+          clearInterval(focusCheckInterval);
+        }
+      };
+    }
+  }, [searchQuery]);
+
+  // Keep search input focused when typing - prevent focus loss during search
+  useEffect(() => {
+    if (searchQuery && searchInputRef.current) {
+      const inputElement = searchInputRef.current;
+      
+      // Only add event listeners if the element has the addEventListener method
+      if (typeof inputElement.addEventListener === 'function') {
+        // Track typing state to prevent focus stealing
+        const handleInput = () => {
+          isTypingRef.current = true;
+          if (typingTimeoutRef.current) {
+            clearTimeout(typingTimeoutRef.current);
+          }
+          typingTimeoutRef.current = setTimeout(() => {
+            isTypingRef.current = false;
+          }, 500); // User is considered "typing" for 500ms after last input
+        };
+
+        // Prevent focus loss during typing
+        const handleBlur = (event: FocusEvent) => {
+          if (isTypingRef.current || searchQuery) {
+            // If user is typing or there's a search query, immediately refocus
+            setTimeout(() => {
+              if (searchInputRef.current && (isTypingRef.current || searchQuery)) {
+                searchInputRef.current.focus();
+              }
+            }, 0);
+          }
+        };
+
+        // More aggressive focus retention
+        const handleFocusOut = (event: FocusEvent) => {
+          // Check if focus is moving to timeline elements
+          const relatedTarget = event.relatedTarget as HTMLElement;
+          if (relatedTarget && 
+              (relatedTarget.closest('.timeline-card-content') ||
+               relatedTarget.closest('[data-testid="timeline-circle"]') ||
+               relatedTarget.closest('.timeline-nav-wrapper')) &&
+              searchQuery) {
+            // Focus is moving to timeline elements during search, prevent it
+            event.preventDefault();
+            setTimeout(() => {
+              if (searchInputRef.current) {
+                searchInputRef.current.focus();
+              }
+            }, 0);
+          }
+        };
+
+        inputElement.addEventListener('input', handleInput);
+        inputElement.addEventListener('blur', handleBlur);
+        inputElement.addEventListener('focusout', handleFocusOut);
+
+        return () => {
+          if (typeof inputElement.removeEventListener === 'function') {
+            inputElement.removeEventListener('input', handleInput);
+            inputElement.removeEventListener('blur', handleBlur);
+            inputElement.removeEventListener('focusout', handleFocusOut);
+          }
+          if (typingTimeoutRef.current) {
+            clearTimeout(typingTimeoutRef.current);
+          }
+        };
+      }
+    }
+  }, [searchQuery]);
+
   // Enhanced search with better performance
   const findMatches = useCallback(
     (query: string) => {
@@ -89,13 +217,14 @@ export const useTimelineSearch = ({
           onTimelineUpdatedRef.current?.(results[0]);
           handleTimelineItemClickRef.current(firstMatchData.id);
           focusSearchInput();
+          scheduleFocusReturn(); // Schedule focus return after card receives focus
         }
       } else {
         setCurrentMatchIndex(-1);
         focusSearchInput();
       }
     },
-    [searchableContent, focusSearchInput],
+    [searchableContent, focusSearchInput, scheduleFocusReturn],
   );
 
   // Optimized debounced search with better performance
@@ -108,6 +237,23 @@ export const useTimelineSearch = ({
   const handleSearchChange = useCallback(
     (query: string) => {
       setSearchQuery(query);
+      
+      // Mark user as actively typing
+      isTypingRef.current = true;
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
+      typingTimeoutRef.current = setTimeout(() => {
+        isTypingRef.current = false;
+      }, 500);
+
+      // Ensure input stays focused during typing
+      setTimeout(() => {
+        if (searchInputRef.current && query) {
+          searchInputRef.current.focus();
+        }
+      }, 0);
+
       debouncedSearch(query);
     },
     [debouncedSearch],
@@ -153,9 +299,10 @@ export const useTimelineSearch = ({
       if (matchData?.id) {
         handleTimelineItemClickRef.current(matchData.id);
         focusSearchInput();
+        scheduleFocusReturn(); // Schedule focus return after card receives focus
       }
     },
-    [searchResults, currentMatchIndex, searchableContent, focusSearchInput],
+    [searchResults, currentMatchIndex, searchableContent, focusSearchInput, scheduleFocusReturn],
   );
 
   const handleNextMatch = useCallback(

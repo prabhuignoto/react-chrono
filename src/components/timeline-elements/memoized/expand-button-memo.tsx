@@ -17,12 +17,18 @@ const ExpandButtonMemo = memo<ExpandButtonModel>(
     return textOverlay ? (
       <ExpandButton
         onPointerDown={onExpand}
-        onKeyDown={(ev) => ev.key === 'Enter' && onExpand?.(ev)}
+        onKeyDown={(ev) => {
+          if (ev.key === 'Enter' || ev.key === ' ') {
+            ev.preventDefault();
+            onExpand?.(ev);
+          }
+        }}
         theme={theme}
         aria-expanded={expanded}
         tabIndex={0}
         aria-label={label}
         title={label}
+        role="button"
       >
         {expanded ? <MinimizeIcon /> : <MaximizeIcon />}
       </ExpandButton>

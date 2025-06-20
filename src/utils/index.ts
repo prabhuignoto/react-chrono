@@ -5,6 +5,7 @@ import {
 } from '@models/TimelineModel';
 import xss from 'xss';
 import { darkTheme, defaultTheme } from '../components/common/themes';
+import accessibilityUtils from './accessibility';
 
 // Constants to avoid creating new objects on every function call
 const DEFAULT_CLASS_NAMES = Object.freeze({
@@ -208,3 +209,5 @@ export const getUniqueID = (): string => {
 
   return `id-${timestamp}-${randomPart}`;
 };
+
+export { accessibilityUtils };

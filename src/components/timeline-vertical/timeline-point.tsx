@@ -113,13 +113,23 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
         return {};
       }
 
-      // Return props containing the onClick handler
+      // Return props containing the onClick handler and keyboard handler
       return {
         onClick: (ev: MouseEvent) => {
           ev.stopPropagation(); // Prevent event bubbling up
           // Call the provided onClick handler if it exists, passing the item ID
           if (id && onClick && !slideShowRunning) {
             onClick(id);
+          }
+        },
+        onKeyDown: (ev: React.KeyboardEvent) => {
+          if (ev.key === 'Enter' || ev.key === ' ') {
+            ev.preventDefault();
+            ev.stopPropagation();
+            // Call the provided onClick handler if it exists, passing the item ID
+            if (id && onClick && !slideShowRunning) {
+              onClick(id);
+            }
           }
         },
       };
@@ -166,8 +176,10 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
           data-testid="tree-leaf-click" // Test ID for the clickable element
           aria-label={timelinePointLabel} // Accessibility label
           aria-disabled={disableClickOnCircle ?? disableTimelinePoint} // Disable button if needed
+          aria-current={active ? 'step' : undefined} // Indicate current step in timeline
           disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
           tabIndex={disableClickOnCircle || disableTimelinePoint ? -1 : 0} // Manage tab order
+          role="button"
         >
           {/* The visual shape (circle, square, or custom icon) */}
           <Shape

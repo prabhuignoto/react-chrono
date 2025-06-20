@@ -119,7 +119,8 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
       flipLayout={flipLayout}
       data-testid="timeline-collection"
       as="ul"
-      aria-label="Timeline"
+      aria-label="Timeline items"
+      role="list"
     >
       {timelineItems}
     </TimelineHorizontalWrapper>
