@@ -209,7 +209,23 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       // Set focus when needed and ensure entire card row is completely visible
       useEffect(() => {
         if (hasFocus && active && containerRef.current) {
-          containerRef.current.focus();
+          // Check if there's an active search input on the page to avoid stealing focus
+          const activeElement = document.activeElement;
+          const isSearchInputFocused = activeElement && 
+            (activeElement instanceof HTMLInputElement && activeElement.type === 'search') ||
+            activeElement?.getAttribute('type') === 'search' ||
+            activeElement?.getAttribute('placeholder')?.toLowerCase().includes('search');
+
+          // Check if there's any search query in the page to be extra cautious
+          const searchInputs = document.querySelectorAll('input[type="search"], input[placeholder*="search" i]');
+          const hasActiveSearch = Array.from(searchInputs).some(input => 
+            input instanceof HTMLInputElement && input.value.trim() !== ''
+          );
+
+          // Only focus the card if search input is not active and no active search
+          if (!isSearchInputFocused && !hasActiveSearch) {
+            containerRef.current.focus();
+          }
           
           // Ensure the entire vertical item row is completely visible when it receives focus
           setTimeout(() => {
@@ -428,6 +444,9 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           $textDensity={textDensity}
           $customContent={!!customContent}
           $theme={theme}
+          aria-current={active ? 'step' : undefined}
+          aria-expanded={showMore ? 'true' : 'false'}
+          role="region"
         >
           {/* Only show the content header if we're not using text overlay mode with media */}
           {(!textOverlay || !media) && (

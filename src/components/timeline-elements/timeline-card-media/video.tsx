@@ -42,7 +42,8 @@ const Video: React.FC<VideoProps> = ({
       onEnded={onEnded}
       playsInline={playsInline}
       preload="metadata"
-      aria-label="Timeline media"
+      aria-label="Timeline video content"
+      title="Timeline video"
       {...rest}
     >
       {children}

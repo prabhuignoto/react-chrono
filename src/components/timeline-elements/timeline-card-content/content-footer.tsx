@@ -66,14 +66,18 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
         <ShowMore
           className="show-more"
           onPointerDown={handleClick}
-          onKeyUp={(event) => {
-            if (event.key === 'Enter') {
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
               onExpand();
             }
           }}
           show={canShow ? 'true' : 'false'}
           theme={theme}
           tabIndex={0}
+          role="button"
+          aria-expanded={showMore}
+          aria-label={showMore ? 'Show less content' : 'Show more content'}
         >
           {<span>{showMore ? 'read less' : 'read more'}</span>}
           <ChevronIconWrapper collapsed={showMore ? 'true' : 'false'}>

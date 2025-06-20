@@ -7,6 +7,7 @@ import React, {
   memo,
 } from 'react';
 import useCloseClickOutside from 'src/components/effects/useCloseClickOutside';
+import { useFocusTrap } from 'src/hooks/useFocusTrap';
 import { ChevronDown, CloseIcon } from 'src/components/icons';
 import { PopOverModel } from './popover.model';
 import {
@@ -52,7 +53,7 @@ const popoverReducer = (state: State, action: Action): State => {
  */
 const PopOver: FunctionComponent<PopOverModel> = ({
   children,
-  position,
+  position = 'bottom', // Default to bottom positioning
   placeholder,
   theme,
   width = 350,
@@ -61,6 +62,8 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   $isMobile = false,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
+  
   const [state, dispatch] = useReducer(popoverReducer, {
     open: false,
     isVisible: false,
@@ -73,12 +76,21 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   const closePopover = useCallback(() => {
     dispatch({ type: 'CLOSE' });
   }, []);
+  
+  const focusTrapRef = useFocusTrap(state.open, closePopover);
 
   const handleKeyPress = useCallback((ev: React.KeyboardEvent) => {
-    if (ev.key === 'Enter') {
+    if (ev.key === 'Enter' || ev.key === ' ') {
+      ev.preventDefault();
+      dispatch({ type: 'TOGGLE' });
+    } else if (ev.key === 'Escape' && state.open) {
+      ev.preventDefault();
+      dispatch({ type: 'CLOSE' });
+    } else if (ev.key === 'ArrowDown' && !state.open) {
+      ev.preventDefault();
       dispatch({ type: 'TOGGLE' });
     }
-  }, []);
+  }, [state.open]);
 
   useCloseClickOutside(ref, closePopover);
 
@@ -93,28 +105,38 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     }
   }, [state.open]);
 
+  // Return focus to trigger when popover closes
+  useEffect(() => {
+    if (!state.open && triggerRef.current) {
+      triggerRef.current.focus();
+    }
+  }, [state.open]);
+
   return (
-    <>
-      <PopoverWrapper ref={ref}>
-        <Selecter
-          role="button"
-          onClick={toggleOpen}
-          $theme={theme}
-          $open={state.open}
-          $isDarkMode={isDarkMode}
-          tabIndex={0}
-          onKeyUp={handleKeyPress}
-          $isMobile={$isMobile}
-          title={placeholder}
-        >
-          <SelecterIcon $theme={theme} $open={state.open}>
-            {icon || <ChevronDown />}
-          </SelecterIcon>
-          {placeholder && !$isMobile ? (
-            <SelecterLabel>{placeholder}</SelecterLabel>
-          ) : null}
-        </Selecter>
-      </PopoverWrapper>
+    <PopoverWrapper ref={ref}>
+      <Selecter
+        role="button"
+        onClick={toggleOpen}
+        $theme={theme}
+        $open={state.open}
+        $isDarkMode={isDarkMode}
+        tabIndex={0}
+        onKeyDown={handleKeyPress}
+        $isMobile={$isMobile}
+        title={placeholder}
+        aria-expanded={state.open}
+        aria-haspopup="menu"
+        aria-controls={state.open ? 'popover-content' : undefined}
+        id="popover-trigger"
+        ref={triggerRef}
+      >
+        <SelecterIcon $theme={theme} $open={state.open}>
+          {icon || <ChevronDown />}
+        </SelecterIcon>
+        {placeholder && !$isMobile ? (
+          <SelecterLabel>{placeholder}</SelecterLabel>
+        ) : null}
+      </Selecter>
       {state.open ? (
         <PopoverHolder
           $position={position}
@@ -122,16 +144,25 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           $theme={theme}
           $isMobile={$isMobile}
           $visible={state.isVisible}
+          id="popover-content"
+          role="menu"
+          aria-labelledby="popover-trigger"
+          ref={focusTrapRef}
         >
           <Header>
-            <CloseButton theme={theme} onClick={closePopover}>
+            <CloseButton 
+              theme={theme} 
+              onClick={closePopover}
+              aria-label="Close popover"
+              title="Close popover"
+            >
               <CloseIcon />
             </CloseButton>
           </Header>
           <MemoizedContent>{children}</MemoizedContent>
         </PopoverHolder>
       ) : null}
-    </>
+    </PopoverWrapper>
   );
 };
 

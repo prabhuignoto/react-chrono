@@ -26,7 +26,10 @@ const getInteractiveShadow = (theme: Theme, isOpen?: boolean) =>
 const BORDER_RADIUS = '6px';
 
 // Base wrapper for the popover component
-export const PopoverWrapper = styled.div``;
+export const PopoverWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+`;
 
 // Main popover container with positioning and visibility controls
 export const PopoverHolder = styled.div<{
@@ -44,18 +47,21 @@ export const PopoverHolder = styled.div<{
   box-shadow: ${({ $theme }) => getElevatedShadow($theme)};
   max-height: 500px;
   overflow-y: auto;
-  padding: 0.5rem;
+  padding: 0.75rem;
   position: absolute;
-  ${(p) => (p.$position === 'bottom' ? `bottom: 3.5rem` : `top: 4rem`)};
-  ${(p) => (p.$isMobile ? 'left: 4px;' : '')};
+  top: calc(100% + 8px);
+  bottom: auto;
+  left: 0;
+  z-index: ${zIndex.popover};
   width: ${({ $isMobile, $width = 300 }) =>
-    $isMobile ? '90%' : `${$width}px`};
+    $isMobile ? 'calc(100vw - 2rem)' : `${$width}px`};
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+  visibility: ${({ $visible }) => ($visible ? 'visible' : 'hidden')};
   transition:
     opacity 0.2s ease-in-out,
-    transform 0.2s ease-in-out;
-  transform: ${(p) => (p.$visible ? 'translateY(0)' : 'translateY(-10px)')};
-  z-index: ${zIndex.popover}; /* Use standardized z-index for popovers */
+    transform 0.2s ease-in-out,
+    visibility 0.2s ease-in-out;
+  transform: ${(p) => (p.$visible ? 'translateY(0)' : 'translateY(-8px)')};
 `;
 
 // Clickable selector button that triggers the popover
@@ -73,19 +79,25 @@ export const Selecter = styled.div<{
   box-shadow: ${({ $open, $theme }) => getInteractiveShadow($theme, $open)};
   cursor: pointer;
   justify-content: space-between;
-  padding: ${(p) => (p.$isMobile ? '0.4rem' : `0.4rem 0.5rem`)};
+  padding: ${(p) => (p.$isMobile ? '0.5rem 0.6rem' : `0.5rem 0.75rem`)};
   user-select: none;
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
+  min-height: 36px;
   transition:
-    background-color 0.2s ease-out,
-    border-color 0.2s ease-out,
-    box-shadow 0.2s ease-out;
+    background-color 0.15s ease-out,
+    border-color 0.15s ease-out,
+    box-shadow 0.15s ease-out;
 
   &:hover {
     background: ${({ $theme }) =>
       $theme.buttonHoverBgColor || $theme.toolbarBtnBgColor};
     border-color: ${({ $theme }) =>
       $theme.buttonHoverBorderColor || $theme.primary};
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ $theme }) => $theme.primary || '#0077ff'};
+    outline-offset: 2px;
   }
 `;
 
@@ -96,7 +108,8 @@ export const SelecterIcon = styled.span<{ $open: boolean; $theme: Theme }>`
   height: 1.25rem;
   width: 1.25rem;
   transition: transform 0.2s ease-in-out;
-  margin-right: 0.1rem;
+  margin-right: 0.5rem;
+  transform: ${({ $open }) => ($open ? 'rotate(180deg)' : 'rotate(0)')};
 
   & svg {
     height: 100%;
@@ -114,15 +127,32 @@ export const SelecterLabel = styled.span`
 
 // Top section of the popover containing controls
 export const Header = styled.div`
-  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   width: 100%;
+  padding-bottom: 0.5rem;
 `;
 
 // Scrollable content area of the popover
 export const Content = styled.div`
-  height: calc(100% - 30px);
-  overflow-y: auto;
   width: 100%;
+  overflow-y: auto;
+  max-height: 400px;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
 `;
 
 // Close button with icon for dismissing the popover
@@ -132,6 +162,19 @@ export const CloseButton = styled.button<{ theme: Theme }>`
   border: none;
   color: ${({ theme }) => theme.iconColor || theme.primary};
   cursor: pointer;
-  margin-bottom: 0.5rem;
-  margin-left: auto;
+  padding: 0.25rem;
+  margin: 0;
+  height: 28px;
+  width: 28px;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.primary || '#0077ff'};
+    outline-offset: 2px;
+  }
 `;

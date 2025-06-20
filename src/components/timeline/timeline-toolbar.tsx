@@ -146,7 +146,18 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   }, []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onSearchChange(event.target.value);
+    const newValue = event.target.value;
+    onSearchChange(newValue);
+    
+    // Ensure input maintains focus during typing
+    setTimeout(() => {
+      if (searchInputRef?.current && event.target === searchInputRef.current) {
+        searchInputRef.current.focus();
+        // Restore cursor position
+        const length = searchInputRef.current.value.length;
+        searchInputRef.current.setSelectionRange(length, length);
+      }
+    }, 0);
   };
 
   // Handle clear search and focus the input
@@ -193,7 +204,14 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           const length = searchInputRef.current.value.length;
           searchInputRef.current.setSelectionRange(length, length);
         }
-      }, 50);
+      }, 100); // Increased delay to ensure card focus completes first
+
+      // Schedule another focus return after card receives focus
+      setTimeout(() => {
+        if (searchInputRef?.current && searchQuery) {
+          searchInputRef.current.focus();
+        }
+      }, 400); // Return focus after card interaction completes
     }
   };
 
@@ -250,8 +268,13 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           </TimelineNavButton>
         )}
         {totalMatches > 0 && (
-          <SearchInfo theme={theme}>
-            {`${currentMatchIndex + 1} / ${totalMatches}`}
+          <SearchInfo 
+            theme={theme}
+            aria-live="polite"
+            aria-atomic="true"
+            role="status"
+          >
+            {`${currentMatchIndex + 1} of ${totalMatches} results`}
           </SearchInfo>
         )}
         {searchQuery && (

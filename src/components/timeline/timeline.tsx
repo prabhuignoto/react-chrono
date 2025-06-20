@@ -320,6 +320,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         mode={mode}
         position={toolbarPosition}
         onScroll={handleMainScroll}
+        role="main"
+        aria-label="Timeline content"
+        tabIndex={-1}
       >
         <TimelineView
           timelineMode={timelineMode}

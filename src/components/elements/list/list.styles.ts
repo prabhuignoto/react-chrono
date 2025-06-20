@@ -77,24 +77,40 @@ export const ListItemStyle = styled.li<{
     p.$active ? themeStyles.border(p.$theme) : themeStyles.transparent};
   flex-direction: ${(p) => (p.$selectable ? 'row' : 'column')};
   background: ${(p) => p.$theme.toolbarBtnBgColor};
-  padding: 0.25rem;
-  width: calc(100% - 0.5rem);
+  padding: 0.5rem;
+  width: calc(100% - 1rem);
   user-select: none;
+  border-radius: 4px;
+  transition: all 0.15s ease-out;
+  margin-bottom: 0.625rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   &:hover {
     border: ${(p) => themeStyles.border(p.$theme)};
     cursor: pointer;
+    background: ${(p) => p.$theme.buttonHoverBgColor || p.$theme.toolbarBtnBgColor};
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${(p) => p.$theme.primary || '#0077ff'};
+    outline-offset: 2px;
   }
 `;
 
 // Title styles
 export const TitleStyle = styled.h1<{ theme: Theme }>`
   color: ${(p) => p.theme.iconColor || p.theme.primary};
-  font-size: 1rem;
-  font-weight: normal;
-  margin: 0.2rem 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0 0 0.25rem 0;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
+  max-width: 100%;
   align-self: flex-start;
 `;
 
@@ -103,39 +119,46 @@ export const TitleDescriptionStyle = styled.p<{ theme: Theme }>`
   font-size: 0.8rem;
   font-weight: normal;
   margin: 0;
-  padding: 0.1rem;
+  padding: 0;
   text-align: left;
   width: 100%;
   color: ${(p) => p.theme.cardSubtitleColor};
+  line-height: 1.3;
 `;
 
 // Checkbox components with improved structure
 export const CheckboxWrapper = styled.span`
   ${flexContainer}
-  width: 2rem;
+  width: 1.75rem;
+  min-width: 1.75rem;
   justify-content: center;
+  align-items: center;
 `;
 
 export const CheckboxStyle = styled.span<{ selected?: boolean; theme: Theme }>`
   ${flexContainer}
   justify-content: center;
-  width: 1.25rem;
-  height: 1.25rem;
-  margin: 0 0.25rem 0 0.1rem;
-  border-radius: 50%;
-  background: ${(p) => (p.selected ? p.theme.primary : p.theme.toolbarBgColor)};
-  ${(p) => !p.selected && `box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1)`};
-  color: #ffffff;
+  align-items: center;
+  border: 1px solid ${(p) => p.theme.buttonBorderColor || p.theme.primary};
+  border-radius: 3px;
+  height: 18px;
+  width: 18px;
+  background: ${(p) => (p.selected ? p.theme.primary : 'transparent')};
+  color: white;
+  transition: all 0.15s ease-out;
 
-  svg {
-    width: 80%;
-    height: 80%;
+  & svg {
+    height: 12px;
+    width: 12px;
+    display: ${(p) => (p.selected ? 'block' : 'none')};
   }
 `;
 
-// Content wrapper with conditional width
+// Wrapper for title and description in selectable mode
 export const StyleAndDescription = styled.div<{ $selectable?: boolean }>`
-  ${flexContainer}
+  display: flex;
   flex-direction: column;
-  width: ${(p) => (p.$selectable ? 'calc(100% - 2rem)' : '100%')};
+  width: 100%;
+  overflow: hidden;
+  padding-left: ${(p) => (p.$selectable ? '0.5rem' : '0')};
 `;
