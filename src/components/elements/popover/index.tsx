@@ -53,7 +53,7 @@ const popoverReducer = (state: State, action: Action): State => {
  */
 const PopOver: FunctionComponent<PopOverModel> = ({
   children,
-  position,
+  position = 'bottom', // Default to bottom positioning
   placeholder,
   theme,
   width = 350,
@@ -62,6 +62,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   $isMobile = false,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
   
   const [state, dispatch] = useReducer(popoverReducer, {
     open: false,
@@ -85,6 +86,9 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     } else if (ev.key === 'Escape' && state.open) {
       ev.preventDefault();
       dispatch({ type: 'CLOSE' });
+    } else if (ev.key === 'ArrowDown' && !state.open) {
+      ev.preventDefault();
+      dispatch({ type: 'TOGGLE' });
     }
   }, [state.open]);
 
@@ -101,32 +105,38 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     }
   }, [state.open]);
 
+  // Return focus to trigger when popover closes
+  useEffect(() => {
+    if (!state.open && triggerRef.current) {
+      triggerRef.current.focus();
+    }
+  }, [state.open]);
+
   return (
-    <>
-      <PopoverWrapper ref={ref}>
-        <Selecter
-          role="button"
-          onClick={toggleOpen}
-          $theme={theme}
-          $open={state.open}
-          $isDarkMode={isDarkMode}
-          tabIndex={0}
-          onKeyDown={handleKeyPress}
-          $isMobile={$isMobile}
-          title={placeholder}
-          aria-expanded={state.open}
-          aria-haspopup="menu"
-          aria-controls={state.open ? 'popover-content' : undefined}
-          id="popover-trigger"
-        >
-          <SelecterIcon $theme={theme} $open={state.open}>
-            {icon || <ChevronDown />}
-          </SelecterIcon>
-          {placeholder && !$isMobile ? (
-            <SelecterLabel>{placeholder}</SelecterLabel>
-          ) : null}
-        </Selecter>
-      </PopoverWrapper>
+    <PopoverWrapper ref={ref}>
+      <Selecter
+        role="button"
+        onClick={toggleOpen}
+        $theme={theme}
+        $open={state.open}
+        $isDarkMode={isDarkMode}
+        tabIndex={0}
+        onKeyDown={handleKeyPress}
+        $isMobile={$isMobile}
+        title={placeholder}
+        aria-expanded={state.open}
+        aria-haspopup="menu"
+        aria-controls={state.open ? 'popover-content' : undefined}
+        id="popover-trigger"
+        ref={triggerRef}
+      >
+        <SelecterIcon $theme={theme} $open={state.open}>
+          {icon || <ChevronDown />}
+        </SelecterIcon>
+        {placeholder && !$isMobile ? (
+          <SelecterLabel>{placeholder}</SelecterLabel>
+        ) : null}
+      </Selecter>
       {state.open ? (
         <PopoverHolder
           $position={position}
@@ -136,7 +146,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           $visible={state.isVisible}
           id="popover-content"
           role="menu"
-          aria-labelledby={state.open ? 'popover-trigger' : undefined}
+          aria-labelledby="popover-trigger"
           ref={focusTrapRef}
         >
           <Header>
@@ -152,7 +162,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           <MemoizedContent>{children}</MemoizedContent>
         </PopoverHolder>
       ) : null}
-    </>
+    </PopoverWrapper>
   );
 };
 
