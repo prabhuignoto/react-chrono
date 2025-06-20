@@ -98,17 +98,20 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     [timeLineItems.length],
   );
 
-  // Create a stable hash for items comparison
+  // Create a stable hash for items comparison - optimized version
   const createItemsHash = useCallback((items: any[]) => {
     if (!items?.length) return '';
+    
+    // Only extract the needed properties and create a single string
     return items
-      .map((item) => ({
-        id: item.id,
-        date: item.date,
-        title: item.title,
-        cardTitle: item.cardTitle,
-      }))
-      .map((item) => JSON.stringify(item))
+      .map(item => {
+        // Use simple string concatenation which is more efficient than JSON.stringify
+        const id = item.id || '';
+        const date = item.date || '';
+        const title = item.title || '';
+        const cardTitle = item.cardTitle || '';
+        return `${id}:${date}:${title}:${cardTitle}`;
+      })
       .join('|');
   }, []);
 

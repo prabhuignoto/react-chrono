@@ -46,17 +46,7 @@ describe('TimelineHorizontalCard', () => {
       writable: true,
     });
 
-    // Add ResizeObserver mock
-    class ResizeObserverMock {
-      callback: any;
-      constructor(callback: any) {
-        this.callback = callback;
-      }
-      observe = vi.fn();
-      unobserve = vi.fn();
-      disconnect = vi.fn();
-    }
-    global.ResizeObserver = ResizeObserverMock;
+    // ResizeObserver is already mocked globally in common/test/index.tsx
   });
 
   beforeEach(() => {

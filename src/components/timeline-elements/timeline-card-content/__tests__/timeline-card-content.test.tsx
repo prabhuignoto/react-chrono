@@ -18,17 +18,7 @@ describe('TimelineCardContent', () => {
       writable: true,
     });
 
-    // Mock ResizeObserver with a proper class implementation
-    class ResizeObserverMock {
-      callback: any;
-      constructor(callback: any) {
-        this.callback = callback;
-      }
-      observe = vi.fn();
-      unobserve = vi.fn();
-      disconnect = vi.fn();
-    }
-    global.ResizeObserver = ResizeObserverMock;
+    // ResizeObserver is already mocked globally in common/test/index.tsx
   });
 
   afterEach(() => {
