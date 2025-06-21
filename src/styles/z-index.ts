@@ -1,5 +1,5 @@
 /**
- * Z-index hierarchy for react-chrono
+ * Z-index hierarchy for react-chrono-ui
  * 
  * This file defines a consistent z-index layering system to prevent
  * issues with component stacking and overlapping, such as timeline points
