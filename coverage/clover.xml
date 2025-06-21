@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1750239738028" clover="3.2.0">
-  <project timestamp="1750239738028" name="All files">
-    <metrics statements="11497" coveredstatements="10564" conditionals="2112" coveredconditionals="1783" methods="256" coveredmethods="195" elements="13865" coveredelements="12542" complexity="0" loc="11497" ncloc="11497" packages="46" files="145" classes="145"/>
-    <package name="src">
-      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="react-chrono-ui.ts" path="/Users/prabhu/code/react-chrono/src/react-chrono-ui.ts">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="src.__tests__">
+<coverage generated="1750534299839" clover="3.2.0">
+  <project timestamp="1750534299839" name="All files">
+    <metrics statements="11474" coveredstatements="10535" conditionals="2104" coveredconditionals="1776" methods="251" coveredmethods="190" elements="13829" coveredelements="12501" complexity="0" loc="11474" ncloc="11474" packages="45" files="146" classes="146"/>
+    <package name="__tests__">
       <metrics statements="126" coveredstatements="126" conditionals="9" coveredconditionals="9" methods="0" coveredmethods="0"/>
-      <file name="react-chrono-ui.test.ts" path="/Users/prabhu/code/react-chrono/src/__tests__/react-chrono-ui.test.ts">
+      <file name="react-chrono.test.ts" path="/Users/prabhu/code/react-chrono/src/__tests__/react-chrono.test.ts">
         <metrics statements="126" coveredstatements="126" conditionals="9" coveredconditionals="9" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -141,7 +134,7 @@
         <line num="149" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.__tests__">
+    <package name="components.__tests__">
       <metrics statements="553" coveredstatements="553" conditionals="84" coveredconditionals="83" methods="11" coveredmethods="11"/>
       <file name="GlobalContext.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/__tests__/GlobalContext.test.tsx">
         <metrics statements="553" coveredstatements="553" conditionals="84" coveredconditionals="83" methods="11" coveredmethods="11"/>
@@ -700,7 +693,7 @@
         <line num="735" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.common.styles">
+    <package name="components.common.styles">
       <metrics statements="5" coveredstatements="5" conditionals="3" coveredconditionals="3" methods="0" coveredmethods="0"/>
       <file name="index.ts" path="/Users/prabhu/code/react-chrono/src/components/common/styles/index.ts">
         <metrics statements="5" coveredstatements="5" conditionals="3" coveredconditionals="3" methods="0" coveredmethods="0"/>
@@ -711,7 +704,7 @@
         <line num="18" count="1" type="cond" truecount="1" falsecount="0"/>
       </file>
     </package>
-    <package name="src.components.common.themes">
+    <package name="components.common.themes">
       <metrics statements="74" coveredstatements="74" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="index.ts" path="/Users/prabhu/code/react-chrono/src/components/common/themes/index.ts">
         <metrics statements="74" coveredstatements="74" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -791,8 +784,8 @@
         <line num="81" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.contexts">
-      <metrics statements="526" coveredstatements="507" conditionals="62" coveredconditionals="44" methods="12" coveredmethods="8"/>
+    <package name="components.contexts">
+      <metrics statements="526" coveredstatements="507" conditionals="62" coveredconditionals="44" methods="13" coveredmethods="8"/>
       <file name="DynamicContext.tsx" path="/Users/prabhu/code/react-chrono/src/components/contexts/DynamicContext.tsx">
         <metrics statements="33" coveredstatements="33" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="5" count="1" type="stmt"/>
@@ -1191,7 +1184,7 @@
         <line num="141" count="1" type="stmt"/>
       </file>
       <file name="hooks.tsx" path="/Users/prabhu/code/react-chrono/src/components/contexts/hooks.tsx">
-        <metrics statements="132" coveredstatements="114" conditionals="17" coveredconditionals="5" methods="6" coveredmethods="5"/>
+        <metrics statements="132" coveredstatements="114" conditionals="17" coveredconditionals="5" methods="7" coveredmethods="5"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
@@ -1338,7 +1331,7 @@
         <line num="36" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.effects">
+    <package name="components.effects">
       <metrics statements="266" coveredstatements="213" conditionals="57" coveredconditionals="49" methods="7" coveredmethods="7"/>
       <file name="useCloseClickOutside.ts" path="/Users/prabhu/code/react-chrono/src/components/effects/useCloseClickOutside.ts">
         <metrics statements="9" coveredstatements="9" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -1619,7 +1612,7 @@
         <line num="181" count="52" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.effects.__tests__">
+    <package name="components.effects.__tests__">
       <metrics statements="545" coveredstatements="545" conditionals="99" coveredconditionals="99" methods="6" coveredmethods="6"/>
       <file name="useClickOutside.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/effects/__tests__/useClickOutside.test.tsx">
         <metrics statements="60" coveredstatements="60" conditionals="14" coveredconditionals="14" methods="2" coveredmethods="2"/>
@@ -2179,7 +2172,7 @@
         <line num="79" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.elements.list">
+    <package name="components.elements.list">
       <metrics statements="133" coveredstatements="130" conditionals="41" coveredconditionals="36" methods="5" coveredmethods="4"/>
       <file name="list-item.tsx" path="/Users/prabhu/code/react-chrono/src/components/elements/list/list-item.tsx">
         <metrics statements="51" coveredstatements="48" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="1"/>
@@ -2327,7 +2320,7 @@
         <line num="92" count="5" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.elements.list.__tests__">
+    <package name="components.elements.list.__tests__">
       <metrics statements="134" coveredstatements="134" conditionals="13" coveredconditionals="13" methods="0" coveredmethods="0"/>
       <file name="list-item.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/elements/list/__tests__/list-item.test.tsx">
         <metrics statements="77" coveredstatements="77" conditionals="6" coveredconditionals="6" methods="0" coveredmethods="0"/>
@@ -2470,7 +2463,7 @@
         <line num="64" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.elements.popover">
+    <package name="components.elements.popover">
       <metrics statements="143" coveredstatements="139" conditionals="58" coveredconditionals="46" methods="19" coveredmethods="19"/>
       <file name="index.tsx" path="/Users/prabhu/code/react-chrono/src/components/elements/popover/index.tsx">
         <metrics statements="94" coveredstatements="90" conditionals="20" coveredconditionals="17" methods="2" coveredmethods="2"/>
@@ -2523,7 +2516,7 @@
         <line num="86" count="35" type="cond" truecount="1" falsecount="0"/>
         <line num="87" count="19" type="cond" truecount="2" falsecount="0"/>
         <line num="88" count="5" type="cond" truecount="1" falsecount="0"/>
-        <line num="89" count="3" type="stmt"/>
+        <line num="89" count="2" type="stmt"/>
         <line num="90" count="5" type="stmt"/>
         <line num="91" count="17" type="cond" truecount="1" falsecount="0"/>
         <line num="92" count="14" type="stmt"/>
@@ -2625,7 +2618,7 @@
         <line num="133" count="1" type="cond" truecount="1" falsecount="1"/>
       </file>
     </package>
-    <package name="src.components.elements.popover.__tests__">
+    <package name="components.elements.popover.__tests__">
       <metrics statements="85" coveredstatements="85" conditionals="6" coveredconditionals="6" methods="0" coveredmethods="0"/>
       <file name="popover.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/elements/popover/__tests__/popover.test.tsx">
         <metrics statements="85" coveredstatements="85" conditionals="6" coveredconditionals="6" methods="0" coveredmethods="0"/>
@@ -2716,8 +2709,8 @@
         <line num="106" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline">
-      <metrics statements="884" coveredstatements="694" conditionals="104" coveredconditionals="67" methods="29" coveredmethods="13"/>
+    <package name="components.timeline">
+      <metrics statements="883" coveredstatements="693" conditionals="105" coveredconditionals="68" methods="29" coveredmethods="13"/>
       <file name="TimelineView.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline/TimelineView.tsx">
         <metrics statements="77" coveredstatements="77" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -3246,63 +3239,62 @@
         <line num="331" count="7" type="stmt"/>
       </file>
       <file name="timeline.style.ts" path="/Users/prabhu/code/react-chrono/src/components/timeline/timeline.style.ts">
-        <metrics statements="56" coveredstatements="50" conditionals="33" coveredconditionals="24" methods="4" coveredmethods="4"/>
+        <metrics statements="55" coveredstatements="49" conditionals="34" coveredconditionals="25" methods="4" coveredmethods="4"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="10" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="11" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="12" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
+        <line num="8" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="24" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="25" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="27" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="28" count="1" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
-        <line num="69" count="1" type="cond" truecount="3" falsecount="0"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="68" count="1" type="cond" truecount="3" falsecount="0"/>
+        <line num="71" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="72" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="73" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="75" count="1" type="stmt"/>
-        <line num="79" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="82" count="1" type="stmt"/>
-        <line num="99" count="1" type="stmt"/>
-        <line num="104" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="107" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="110" count="1" type="stmt"/>
-        <line num="119" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="78" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="98" count="1" type="stmt"/>
+        <line num="103" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="106" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="109" count="1" type="stmt"/>
+        <line num="118" count="1" type="stmt"/>
+        <line num="119" count="0" type="stmt"/>
         <line num="120" count="0" type="stmt"/>
         <line num="121" count="0" type="stmt"/>
         <line num="122" count="0" type="stmt"/>
         <line num="123" count="0" type="stmt"/>
         <line num="124" count="0" type="stmt"/>
-        <line num="125" count="0" type="stmt"/>
-        <line num="136" count="1" type="stmt"/>
-        <line num="139" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="146" count="1" type="stmt"/>
+        <line num="135" count="1" type="stmt"/>
+        <line num="138" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="145" count="1" type="stmt"/>
+        <line num="153" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="154" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="155" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="156" count="1" type="stmt"/>
-        <line num="162" count="1" type="stmt"/>
-        <line num="171" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="175" count="1" type="stmt"/>
-        <line num="181" count="1" type="stmt"/>
-        <line num="184" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="187" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="155" count="1" type="stmt"/>
+        <line num="161" count="1" type="stmt"/>
+        <line num="170" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="174" count="1" type="stmt"/>
+        <line num="180" count="1" type="stmt"/>
+        <line num="183" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="186" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="195" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="196" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="197" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="201" count="1" type="stmt"/>
-        <line num="206" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="211" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="220" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="221" count="7" type="stmt"/>
-        <line num="223" count="7" type="cond" truecount="0" falsecount="1"/>
-        <line num="224" count="7" type="stmt"/>
-        <line num="225" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="226" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="235" count="1" type="stmt"/>
-        <line num="237" count="1" type="stmt"/>
+        <line num="200" count="1" type="stmt"/>
+        <line num="205" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="210" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="219" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="220" count="7" type="stmt"/>
+        <line num="222" count="7" type="cond" truecount="0" falsecount="1"/>
+        <line num="223" count="7" type="stmt"/>
+        <line num="224" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="225" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="234" count="1" type="stmt"/>
+        <line num="236" count="1" type="stmt"/>
       </file>
       <file name="timeline.style.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline/timeline.style.tsx">
         <metrics statements="29" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -3627,51 +3619,42 @@
         <line num="354" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.memoized">
-      <metrics statements="145" coveredstatements="133" conditionals="33" coveredconditionals="27" methods="6" coveredmethods="3"/>
+    <package name="components.timeline-elements.memoized">
+      <metrics statements="136" coveredstatements="124" conditionals="28" coveredconditionals="22" methods="5" coveredmethods="2"/>
       <file name="details-text-memo.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/memoized/details-text-memo.tsx">
-        <metrics statements="41" coveredstatements="32" conditionals="9" coveredconditionals="9" methods="2" coveredmethods="1"/>
+        <metrics statements="32" coveredstatements="23" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
-        <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="7" count="11" type="stmt"/>
-        <line num="8" count="11" type="cond" truecount="1" falsecount="0"/>
-        <line num="9" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="10" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="11" count="3" type="stmt"/>
-        <line num="12" count="6" type="stmt"/>
-        <line num="13" count="11" type="stmt"/>
-        <line num="14" count="11" type="stmt"/>
-        <line num="15" count="11" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="30" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="31" count="11" type="cond" truecount="1" falsecount="0"/>
-        <line num="32" count="11" type="stmt"/>
-        <line num="34" count="11" type="cond" truecount="2" falsecount="0"/>
-        <line num="36" count="3" type="stmt"/>
-        <line num="37" count="3" type="stmt"/>
-        <line num="38" count="3" type="stmt"/>
-        <line num="39" count="3" type="stmt"/>
-        <line num="40" count="3" type="stmt"/>
-        <line num="41" count="3" type="stmt"/>
-        <line num="42" count="3" type="stmt"/>
-        <line num="44" count="3" type="stmt"/>
-        <line num="45" count="3" type="stmt"/>
-        <line num="47" count="11" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="21" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="22" count="11" type="stmt"/>
+        <line num="24" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="31" count="3" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
+        <line num="34" count="3" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="37" count="11" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
       </file>
       <file name="expand-button-memo.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/memoized/expand-button-memo.tsx">
         <metrics statements="24" coveredstatements="23" conditionals="5" coveredconditionals="2" methods="1" coveredmethods="0"/>
@@ -3793,7 +3776,7 @@
         <line num="50" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.memoized.__tests__">
+    <package name="components.timeline-elements.memoized.__tests__">
       <metrics statements="137" coveredstatements="136" conditionals="15" coveredconditionals="15" methods="0" coveredmethods="0"/>
       <file name="index.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/memoized/__tests__/index.test.tsx">
         <metrics statements="137" coveredstatements="136" conditionals="15" coveredconditionals="15" methods="0" coveredmethods="0"/>
@@ -3936,7 +3919,7 @@
         <line num="158" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.nested-timeline-renderer">
+    <package name="components.timeline-elements.nested-timeline-renderer">
       <metrics statements="26" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="nested-timeline-renderer.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/nested-timeline-renderer/nested-timeline-renderer.tsx">
         <metrics statements="26" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -3968,7 +3951,7 @@
         <line num="43" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-card">
+    <package name="components.timeline-elements.timeline-card">
       <metrics statements="189" coveredstatements="178" conditionals="54" coveredconditionals="39" methods="3" coveredmethods="3"/>
       <file name="timeline-horizontal-card.styles.ts" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card/timeline-horizontal-card.styles.ts">
         <metrics statements="60" coveredstatements="54" conditionals="42" coveredconditionals="32" methods="1" coveredmethods="1"/>
@@ -4166,8 +4149,8 @@
         <line num="148" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-card-content">
-      <metrics statements="839" coveredstatements="638" conditionals="213" coveredconditionals="163" methods="40" coveredmethods="30"/>
+    <package name="components.timeline-elements.timeline-card-content">
+      <metrics statements="839" coveredstatements="638" conditionals="212" coveredconditionals="162" methods="40" coveredmethods="30"/>
       <file name="card-animations.styles.ts" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card-content/card-animations.styles.ts">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -4332,7 +4315,7 @@
         <metrics statements="0" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       </file>
       <file name="text-or-content.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card-content/text-or-content.tsx">
-        <metrics statements="95" coveredstatements="88" conditionals="30" coveredconditionals="24" methods="6" coveredmethods="6"/>
+        <metrics statements="95" coveredstatements="88" conditionals="29" coveredconditionals="23" methods="6" coveredmethods="6"/>
         <line num="3" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
@@ -4381,7 +4364,7 @@
         <line num="78" count="42" type="cond" truecount="2" falsecount="0"/>
         <line num="79" count="42" type="stmt"/>
         <line num="82" count="42" type="cond" truecount="1" falsecount="0"/>
-        <line num="83" count="42" type="cond" truecount="2" falsecount="0"/>
+        <line num="83" count="42" type="cond" truecount="1" falsecount="0"/>
         <line num="84" count="40" type="cond" truecount="2" falsecount="0"/>
         <line num="85" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="86" count="39" type="stmt"/>
@@ -5035,8 +5018,8 @@
         <line num="511" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-card-content.__tests__">
-      <metrics statements="367" coveredstatements="361" conditionals="39" coveredconditionals="39" methods="5" coveredmethods="4"/>
+    <package name="components.timeline-elements.timeline-card-content.__tests__">
+      <metrics statements="357" coveredstatements="351" conditionals="37" coveredconditionals="37" methods="3" coveredmethods="2"/>
       <file name="content-footer.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card-content/__tests__/content-footer.test.tsx">
         <metrics statements="78" coveredstatements="78" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -5299,7 +5282,7 @@
         <line num="64" count="1" type="stmt"/>
       </file>
       <file name="timeline-card-content.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card-content/__tests__/timeline-card-content.test.tsx">
-        <metrics statements="118" coveredstatements="112" conditionals="13" coveredconditionals="13" methods="4" coveredmethods="4"/>
+        <metrics statements="108" coveredstatements="102" conditionals="11" coveredconditionals="11" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -5318,57 +5301,56 @@
         <line num="17" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
-        <line num="22" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="23" count="6" type="stmt"/>
-        <line num="24" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="25" count="6" type="stmt"/>
-        <line num="26" count="6" type="stmt"/>
-        <line num="27" count="6" type="stmt"/>
-        <line num="28" count="6" type="stmt"/>
-        <line num="29" count="6" type="stmt"/>
-        <line num="30" count="6" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="30" count="1" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
-        <line num="34" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="35" count="6" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="39" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="37" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="38" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="47" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="45" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
         <line num="48" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
         <line num="50" count="1" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
         <line num="52" count="1" type="stmt"/>
-        <line num="55" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="57" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="58" count="1" type="stmt"/>
         <line num="59" count="1" type="stmt"/>
         <line num="60" count="1" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
         <line num="62" count="1" type="stmt"/>
-        <line num="63" count="1" type="stmt"/>
         <line num="64" count="1" type="stmt"/>
-        <line num="67" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
         <line num="68" count="1" type="stmt"/>
-        <line num="69" count="1" type="stmt"/>
-        <line num="70" count="1" type="stmt"/>
-        <line num="71" count="1" type="stmt"/>
+        <line num="71" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="72" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
         <line num="74" count="1" type="stmt"/>
         <line num="75" count="1" type="stmt"/>
         <line num="76" count="1" type="stmt"/>
         <line num="77" count="1" type="stmt"/>
         <line num="78" count="1" type="stmt"/>
-        <line num="81" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
         <line num="82" count="1" type="stmt"/>
         <line num="83" count="1" type="stmt"/>
         <line num="84" count="1" type="stmt"/>
         <line num="85" count="1" type="stmt"/>
-        <line num="86" count="1" type="stmt"/>
         <line num="87" count="1" type="stmt"/>
-        <line num="88" count="1" type="stmt"/>
+        <line num="88" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="89" count="1" type="stmt"/>
         <line num="90" count="1" type="stmt"/>
         <line num="91" count="1" type="stmt"/>
@@ -5376,12 +5358,11 @@
         <line num="93" count="1" type="stmt"/>
         <line num="94" count="1" type="stmt"/>
         <line num="95" count="1" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
         <line num="97" count="1" type="stmt"/>
-        <line num="98" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="98" count="1" type="stmt"/>
         <line num="99" count="1" type="stmt"/>
-        <line num="100" count="1" type="stmt"/>
-        <line num="101" count="1" type="stmt"/>
-        <line num="102" count="1" type="stmt"/>
+        <line num="102" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="103" count="1" type="stmt"/>
         <line num="104" count="1" type="stmt"/>
         <line num="105" count="1" type="stmt"/>
@@ -5389,14 +5370,15 @@
         <line num="107" count="1" type="stmt"/>
         <line num="108" count="1" type="stmt"/>
         <line num="109" count="1" type="stmt"/>
-        <line num="112" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="110" count="1" type="stmt"/>
+        <line num="111" count="1" type="stmt"/>
+        <line num="112" count="1" type="stmt"/>
         <line num="113" count="1" type="stmt"/>
         <line num="114" count="1" type="stmt"/>
         <line num="115" count="1" type="stmt"/>
         <line num="116" count="1" type="stmt"/>
-        <line num="117" count="1" type="stmt"/>
         <line num="118" count="1" type="stmt"/>
-        <line num="119" count="1" type="stmt"/>
+        <line num="119" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="120" count="1" type="stmt"/>
         <line num="121" count="1" type="stmt"/>
         <line num="122" count="1" type="stmt"/>
@@ -5404,24 +5386,15 @@
         <line num="124" count="1" type="stmt"/>
         <line num="125" count="1" type="stmt"/>
         <line num="126" count="1" type="stmt"/>
+        <line num="127" count="1" type="stmt"/>
         <line num="128" count="1" type="stmt"/>
-        <line num="129" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="129" count="1" type="stmt"/>
         <line num="130" count="1" type="stmt"/>
         <line num="131" count="1" type="stmt"/>
-        <line num="132" count="1" type="stmt"/>
-        <line num="133" count="1" type="stmt"/>
-        <line num="134" count="1" type="stmt"/>
-        <line num="135" count="1" type="stmt"/>
-        <line num="136" count="1" type="stmt"/>
-        <line num="137" count="1" type="stmt"/>
-        <line num="138" count="1" type="stmt"/>
-        <line num="139" count="1" type="stmt"/>
-        <line num="140" count="1" type="stmt"/>
-        <line num="141" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-card-media">
-      <metrics statements="249" coveredstatements="200" conditionals="62" coveredconditionals="48" methods="10" coveredmethods="9"/>
+    <package name="components.timeline-elements.timeline-card-media">
+      <metrics statements="249" coveredstatements="199" conditionals="60" coveredconditionals="47" methods="10" coveredmethods="9"/>
       <file name="timeline-card-media-buttons.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card-media/timeline-card-media-buttons.tsx">
         <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="2" count="1" type="stmt"/>
@@ -5521,7 +5494,7 @@
         <line num="250" count="1" type="stmt"/>
       </file>
       <file name="timeline-card-media.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card-media/timeline-card-media.tsx">
-        <metrics statements="124" coveredstatements="115" conditionals="5" coveredconditionals="3" methods="0" coveredmethods="0"/>
+        <metrics statements="124" coveredstatements="114" conditionals="3" coveredconditionals="2" methods="0" coveredmethods="0"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -5579,8 +5552,8 @@
         <line num="65" count="18" type="stmt"/>
         <line num="66" count="18" type="stmt"/>
         <line num="69" count="18" type="stmt"/>
-        <line num="72" count="18" type="cond" truecount="1" falsecount="0"/>
-        <line num="73" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="72" count="18" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
         <line num="76" count="18" type="stmt"/>
         <line num="78" count="18" type="stmt"/>
@@ -5684,7 +5657,7 @@
         <line num="53" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-card-media.__tests__">
+    <package name="components.timeline-elements.timeline-card-media.__tests__">
       <metrics statements="201" coveredstatements="201" conditionals="10" coveredconditionals="10" methods="8" coveredmethods="0"/>
       <file name="timeline-card-media.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card-media/__tests__/timeline-card-media.test.tsx">
         <metrics statements="201" coveredstatements="201" conditionals="10" coveredconditionals="10" methods="8" coveredmethods="0"/>
@@ -5891,7 +5864,7 @@
         <line num="226" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-card-media.components">
+    <package name="components.timeline-elements.timeline-card-media.components">
       <metrics statements="253" coveredstatements="191" conditionals="19" coveredconditionals="13" methods="1" coveredmethods="1"/>
       <file name="ContentDisplay.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card-media/components/ContentDisplay.tsx">
         <metrics statements="90" coveredstatements="90" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
@@ -6165,7 +6138,7 @@
         <line num="25" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-card-media.hooks">
+    <package name="components.timeline-elements.timeline-card-media.hooks">
       <metrics statements="97" coveredstatements="86" conditionals="17" coveredconditionals="16" methods="4" coveredmethods="4"/>
       <file name="useMediaLoad.ts" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card-media/hooks/useMediaLoad.ts">
         <metrics statements="25" coveredstatements="18" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -6277,10 +6250,10 @@
         <line num="13" count="18" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-card.__tests__">
-      <metrics statements="109" coveredstatements="103" conditionals="12" coveredconditionals="12" methods="2" coveredmethods="2"/>
+    <package name="components.timeline-elements.timeline-card.__tests__">
+      <metrics statements="99" coveredstatements="93" conditionals="10" coveredconditionals="10" methods="0" coveredmethods="0"/>
       <file name="timeline-horizontal-card.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card/__tests__/timeline-horizontal-card.test.tsx">
-        <metrics statements="109" coveredstatements="103" conditionals="12" coveredconditionals="12" methods="2" coveredmethods="2"/>
+        <metrics statements="99" coveredstatements="93" conditionals="10" coveredconditionals="10" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
@@ -6317,82 +6290,72 @@
         <line num="45" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
         <line num="47" count="1" type="stmt"/>
-        <line num="50" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="51" count="6" type="stmt"/>
-        <line num="52" count="6" type="cond" truecount="1" falsecount="0"/>
-        <line num="53" count="6" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="52" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="54" count="6" type="stmt"/>
         <line num="55" count="6" type="stmt"/>
         <line num="56" count="6" type="stmt"/>
-        <line num="57" count="6" type="stmt"/>
-        <line num="58" count="6" type="stmt"/>
-        <line num="59" count="1" type="stmt"/>
-        <line num="60" count="1" type="stmt"/>
-        <line num="62" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="59" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="61" count="6" type="stmt"/>
+        <line num="62" count="6" type="stmt"/>
+        <line num="63" count="6" type="stmt"/>
         <line num="64" count="6" type="stmt"/>
-        <line num="65" count="6" type="stmt"/>
-        <line num="66" count="6" type="stmt"/>
-        <line num="67" count="1" type="stmt"/>
-        <line num="69" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="71" count="6" type="stmt"/>
-        <line num="72" count="6" type="stmt"/>
-        <line num="73" count="6" type="stmt"/>
-        <line num="74" count="6" type="stmt"/>
-        <line num="75" count="1" type="stmt"/>
-        <line num="78" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="68" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="77" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="78" count="1" type="stmt"/>
         <line num="79" count="1" type="stmt"/>
         <line num="80" count="1" type="stmt"/>
-        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
         <line num="83" count="1" type="stmt"/>
-        <line num="84" count="1" type="stmt"/>
-        <line num="87" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="86" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="87" count="1" type="stmt"/>
         <line num="88" count="1" type="stmt"/>
         <line num="89" count="1" type="stmt"/>
-        <line num="90" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
         <line num="92" count="1" type="stmt"/>
         <line num="93" count="1" type="stmt"/>
-        <line num="96" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="97" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="97" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="98" count="1" type="stmt"/>
         <line num="99" count="1" type="stmt"/>
+        <line num="100" count="1" type="stmt"/>
         <line num="101" count="1" type="stmt"/>
         <line num="102" count="1" type="stmt"/>
         <line num="103" count="1" type="stmt"/>
         <line num="104" count="1" type="stmt"/>
-        <line num="107" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="105" count="1" type="stmt"/>
+        <line num="106" count="1" type="stmt"/>
         <line num="108" count="1" type="stmt"/>
         <line num="109" count="1" type="stmt"/>
-        <line num="110" count="1" type="stmt"/>
-        <line num="111" count="1" type="stmt"/>
-        <line num="112" count="1" type="stmt"/>
+        <line num="112" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="113" count="1" type="stmt"/>
         <line num="114" count="1" type="stmt"/>
         <line num="115" count="1" type="stmt"/>
-        <line num="116" count="1" type="stmt"/>
+        <line num="117" count="1" type="stmt"/>
         <line num="118" count="1" type="stmt"/>
-        <line num="119" count="1" type="stmt"/>
-        <line num="122" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="121" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="122" count="1" type="stmt"/>
         <line num="123" count="1" type="stmt"/>
         <line num="124" count="1" type="stmt"/>
         <line num="125" count="1" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
         <line num="127" count="1" type="stmt"/>
-        <line num="128" count="1" type="stmt"/>
-        <line num="131" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="129" count="1" type="stmt"/>
+        <line num="130" count="1" type="stmt"/>
+        <line num="131" count="1" type="stmt"/>
         <line num="132" count="1" type="stmt"/>
         <line num="133" count="1" type="stmt"/>
         <line num="134" count="1" type="stmt"/>
-        <line num="135" count="1" type="stmt"/>
-        <line num="136" count="1" type="stmt"/>
-        <line num="137" count="1" type="stmt"/>
-        <line num="139" count="1" type="stmt"/>
-        <line num="140" count="1" type="stmt"/>
-        <line num="141" count="1" type="stmt"/>
-        <line num="142" count="1" type="stmt"/>
-        <line num="143" count="1" type="stmt"/>
-        <line num="144" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-card.hooks">
+    <package name="components.timeline-elements.timeline-card.hooks">
       <metrics statements="79" coveredstatements="76" conditionals="16" coveredconditionals="15" methods="1" coveredmethods="1"/>
       <file name="useTimelineCard.ts" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card/hooks/useTimelineCard.ts">
         <metrics statements="79" coveredstatements="76" conditionals="16" coveredconditionals="15" methods="1" coveredmethods="1"/>
@@ -6477,7 +6440,7 @@
         <line num="91" count="67" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-card.timeline-card-portal">
+    <package name="components.timeline-elements.timeline-card.timeline-card-portal">
       <metrics statements="96" coveredstatements="96" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
       <file name="timeline-card-portal.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card/timeline-card-portal/timeline-card-portal.tsx">
         <metrics statements="96" coveredstatements="96" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
@@ -6579,7 +6542,7 @@
         <line num="129" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-card.timeline-point">
+    <package name="components.timeline-elements.timeline-card.timeline-point">
       <metrics statements="35" coveredstatements="35" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
       <file name="timeline-point.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-card/timeline-point/timeline-point.tsx">
         <metrics statements="35" coveredstatements="35" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
@@ -6620,10 +6583,10 @@
         <line num="53" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-control">
-      <metrics statements="249" coveredstatements="228" conditionals="83" coveredconditionals="52" methods="2" coveredmethods="1"/>
+    <package name="components.timeline-elements.timeline-control">
+      <metrics statements="246" coveredstatements="225" conditionals="83" coveredconditionals="52" methods="2" coveredmethods="1"/>
       <file name="timeline-control.styles.ts" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-control/timeline-control.styles.ts">
-        <metrics statements="55" coveredstatements="39" conditionals="24" coveredconditionals="22" methods="0" coveredmethods="0"/>
+        <metrics statements="52" coveredstatements="36" conditionals="24" coveredconditionals="22" methods="0" coveredmethods="0"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
@@ -6669,16 +6632,13 @@
         <line num="124" count="1" type="stmt"/>
         <line num="129" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="135" count="1" type="stmt"/>
-        <line num="158" count="1" type="stmt"/>
+        <line num="144" count="1" type="stmt"/>
+        <line num="150" count="1" type="stmt"/>
+        <line num="156" count="1" type="stmt"/>
         <line num="159" count="1" type="stmt"/>
-        <line num="173" count="1" type="stmt"/>
-        <line num="182" count="1" type="stmt"/>
-        <line num="188" count="1" type="stmt"/>
-        <line num="194" count="1" type="stmt"/>
-        <line num="197" count="1" type="stmt"/>
-        <line num="199" count="1" type="stmt"/>
-        <line num="216" count="1" type="stmt"/>
-        <line num="218" count="1" type="stmt"/>
+        <line num="161" count="1" type="stmt"/>
+        <line num="178" count="1" type="stmt"/>
+        <line num="180" count="1" type="stmt"/>
       </file>
       <file name="timeline-control.styles.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-control/timeline-control.styles.tsx">
         <metrics statements="2" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -6881,7 +6841,7 @@
         <line num="262" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-control.__tests__">
+    <package name="components.timeline-elements.timeline-control.__tests__">
       <metrics statements="67" coveredstatements="67" conditionals="6" coveredconditionals="6" methods="0" coveredmethods="0"/>
       <file name="timeline-control.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-control/__tests__/timeline-control.test.tsx">
         <metrics statements="67" coveredstatements="67" conditionals="6" coveredconditionals="6" methods="0" coveredmethods="0"/>
@@ -6954,7 +6914,7 @@
         <line num="77" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-controls-wrapper">
+    <package name="components.timeline-elements.timeline-controls-wrapper">
       <metrics statements="8" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="timeline-controls-wrapper.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-controls-wrapper/timeline-controls-wrapper.tsx">
         <metrics statements="8" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -6968,7 +6928,7 @@
         <line num="25" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-item-title">
+    <package name="components.timeline-elements.timeline-item-title">
       <metrics statements="37" coveredstatements="37" conditionals="20" coveredconditionals="19" methods="1" coveredmethods="1"/>
       <file name="timeline-card-title.styles.ts" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-item-title/timeline-card-title.styles.ts">
         <metrics statements="9" coveredstatements="9" conditionals="15" coveredconditionals="14" methods="0" coveredmethods="0"/>
@@ -7014,7 +6974,7 @@
         <line num="49" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-item-title.__tests__">
+    <package name="components.timeline-elements.timeline-item-title.__tests__">
       <metrics statements="46" coveredstatements="46" conditionals="7" coveredconditionals="7" methods="0" coveredmethods="0"/>
       <file name="timeline-card-title.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-item-title/__tests__/timeline-card-title.test.tsx">
         <metrics statements="46" coveredstatements="46" conditionals="7" coveredconditionals="7" methods="0" coveredmethods="0"/>
@@ -7066,7 +7026,7 @@
         <line num="59" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-outline">
+    <package name="components.timeline-elements.timeline-outline">
       <metrics statements="189" coveredstatements="174" conditionals="60" coveredconditionals="51" methods="7" coveredmethods="5"/>
       <file name="animations.ts" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-outline/animations.ts">
         <metrics statements="3" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -7273,7 +7233,7 @@
         <line num="125" count="12" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-outline.__tests__">
+    <package name="components.timeline-elements.timeline-outline.__tests__">
       <metrics statements="113" coveredstatements="107" conditionals="13" coveredconditionals="13" methods="0" coveredmethods="0"/>
       <file name="timeline-outline.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-outline/__tests__/timeline-outline.test.tsx">
         <metrics statements="113" coveredstatements="107" conditionals="13" coveredconditionals="13" methods="0" coveredmethods="0"/>
@@ -7392,7 +7352,7 @@
         <line num="139" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-elements.timeline-outline.hooks">
+    <package name="components.timeline-elements.timeline-outline.hooks">
       <metrics statements="11" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
       <file name="useOutlinePosition.ts" path="/Users/prabhu/code/react-chrono/src/components/timeline-elements/timeline-outline/hooks/useOutlinePosition.ts">
         <metrics statements="11" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
@@ -7409,7 +7369,7 @@
         <line num="19" count="12" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-horizontal">
+    <package name="components.timeline-horizontal">
       <metrics statements="103" coveredstatements="103" conditionals="17" coveredconditionals="17" methods="1" coveredmethods="1"/>
       <file name="timeline-horizontal.styles.ts" path="/Users/prabhu/code/react-chrono/src/components/timeline-horizontal/timeline-horizontal.styles.ts">
         <metrics statements="5" coveredstatements="5" conditionals="4" coveredconditionals="4" methods="0" coveredmethods="0"/>
@@ -7521,14 +7481,16 @@
         <line num="129" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-horizontal.__tests__">
+    <package name="components.timeline-horizontal.__tests__">
       <metrics statements="236" coveredstatements="232" conditionals="25" coveredconditionals="23" methods="1" coveredmethods="1"/>
       <file name="timeline-horizontal.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-horizontal/__tests__/timeline-horizontal.test.tsx">
         <metrics statements="236" coveredstatements="232" conditionals="25" coveredconditionals="23" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
@@ -7559,8 +7521,8 @@
         <line num="36" count="1" type="stmt"/>
         <line num="37" count="1" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
         <line num="43" count="1" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
@@ -7572,8 +7534,8 @@
         <line num="50" count="1" type="stmt"/>
         <line num="51" count="1" type="stmt"/>
         <line num="52" count="1" type="stmt"/>
-        <line num="53" count="1" type="stmt"/>
         <line num="54" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
         <line num="56" count="1" type="stmt"/>
         <line num="57" count="1" type="stmt"/>
         <line num="58" count="1" type="stmt"/>
@@ -7588,9 +7550,9 @@
         <line num="67" count="1" type="stmt"/>
         <line num="68" count="1" type="stmt"/>
         <line num="69" count="1" type="stmt"/>
-        <line num="70" count="1" type="stmt"/>
-        <line num="71" count="1" type="stmt"/>
-        <line num="73" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="71" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="72" count="20" type="stmt"/>
+        <line num="73" count="20" type="stmt"/>
         <line num="74" count="20" type="stmt"/>
         <line num="75" count="20" type="stmt"/>
         <line num="76" count="20" type="stmt"/>
@@ -7598,172 +7560,170 @@
         <line num="78" count="20" type="stmt"/>
         <line num="79" count="20" type="stmt"/>
         <line num="80" count="20" type="stmt"/>
-        <line num="81" count="20" type="stmt"/>
-        <line num="82" count="20" type="stmt"/>
-        <line num="84" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="85" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="82" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="83" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
         <line num="86" count="1" type="stmt"/>
-        <line num="87" count="1" type="stmt"/>
-        <line num="88" count="1" type="stmt"/>
-        <line num="90" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="88" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="89" count="1" type="stmt"/>
         <line num="91" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
         <line num="93" count="1" type="stmt"/>
         <line num="94" count="1" type="stmt"/>
-        <line num="95" count="1" type="stmt"/>
-        <line num="96" count="1" type="stmt"/>
-        <line num="98" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="96" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="98" count="1" type="stmt"/>
         <line num="99" count="1" type="stmt"/>
         <line num="100" count="1" type="stmt"/>
         <line num="101" count="1" type="stmt"/>
-        <line num="102" count="1" type="stmt"/>
-        <line num="103" count="1" type="stmt"/>
-        <line num="105" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="103" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="104" count="1" type="stmt"/>
+        <line num="105" count="1" type="stmt"/>
         <line num="106" count="1" type="stmt"/>
         <line num="107" count="1" type="stmt"/>
         <line num="108" count="1" type="stmt"/>
         <line num="109" count="1" type="stmt"/>
         <line num="110" count="1" type="stmt"/>
         <line num="111" count="1" type="stmt"/>
-        <line num="112" count="1" type="stmt"/>
-        <line num="113" count="1" type="stmt"/>
-        <line num="115" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="113" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="114" count="1" type="stmt"/>
+        <line num="115" count="1" type="stmt"/>
         <line num="116" count="1" type="stmt"/>
         <line num="117" count="1" type="stmt"/>
         <line num="118" count="1" type="stmt"/>
         <line num="119" count="1" type="stmt"/>
         <line num="120" count="1" type="stmt"/>
         <line num="121" count="1" type="stmt"/>
-        <line num="122" count="1" type="stmt"/>
-        <line num="123" count="1" type="stmt"/>
-        <line num="125" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="126" count="1" type="stmt"/>
-        <line num="127" count="1" type="stmt"/>
-        <line num="131" count="1" type="stmt"/>
-        <line num="132" count="1" type="stmt"/>
-        <line num="134" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="135" count="1" type="stmt"/>
-        <line num="136" count="1" type="stmt"/>
-        <line num="139" count="1" type="stmt"/>
-        <line num="140" count="1" type="stmt"/>
-        <line num="142" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="143" count="0" type="stmt"/>
-        <line num="144" count="0" type="stmt"/>
-        <line num="145" count="1" type="stmt"/>
-        <line num="147" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="148" count="1" type="stmt"/>
-        <line num="149" count="1" type="stmt"/>
-        <line num="152" count="1" type="stmt"/>
-        <line num="153" count="1" type="stmt"/>
-        <line num="154" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="155" count="0" type="stmt"/>
-        <line num="156" count="0" type="stmt"/>
-        <line num="157" count="1" type="stmt"/>
-        <line num="159" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="123" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="124" count="1" type="stmt"/>
+        <line num="125" count="1" type="stmt"/>
+        <line num="129" count="1" type="stmt"/>
+        <line num="130" count="1" type="stmt"/>
+        <line num="132" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="133" count="1" type="stmt"/>
+        <line num="134" count="1" type="stmt"/>
+        <line num="137" count="1" type="stmt"/>
+        <line num="138" count="1" type="stmt"/>
+        <line num="140" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="141" count="0" type="stmt"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="143" count="1" type="stmt"/>
+        <line num="145" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="146" count="1" type="stmt"/>
+        <line num="147" count="1" type="stmt"/>
+        <line num="150" count="1" type="stmt"/>
+        <line num="151" count="1" type="stmt"/>
+        <line num="152" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="153" count="0" type="stmt"/>
+        <line num="154" count="0" type="stmt"/>
+        <line num="155" count="1" type="stmt"/>
+        <line num="157" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="158" count="1" type="stmt"/>
+        <line num="159" count="1" type="stmt"/>
         <line num="160" count="1" type="stmt"/>
         <line num="161" count="1" type="stmt"/>
         <line num="162" count="1" type="stmt"/>
         <line num="163" count="1" type="stmt"/>
         <line num="164" count="1" type="stmt"/>
-        <line num="165" count="1" type="stmt"/>
-        <line num="166" count="1" type="stmt"/>
-        <line num="169" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="170" count="2" type="stmt"/>
-        <line num="171" count="1" type="stmt"/>
-        <line num="172" count="1" type="stmt"/>
-        <line num="174" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="167" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="168" count="2" type="stmt"/>
+        <line num="169" count="1" type="stmt"/>
+        <line num="170" count="1" type="stmt"/>
+        <line num="172" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="173" count="1" type="stmt"/>
+        <line num="174" count="1" type="stmt"/>
         <line num="175" count="1" type="stmt"/>
         <line num="176" count="1" type="stmt"/>
         <line num="177" count="1" type="stmt"/>
         <line num="178" count="1" type="stmt"/>
         <line num="179" count="1" type="stmt"/>
-        <line num="180" count="1" type="stmt"/>
-        <line num="181" count="1" type="stmt"/>
-        <line num="183" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="181" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="182" count="1" type="stmt"/>
+        <line num="183" count="1" type="stmt"/>
         <line num="184" count="1" type="stmt"/>
         <line num="185" count="1" type="stmt"/>
         <line num="186" count="1" type="stmt"/>
         <line num="187" count="1" type="stmt"/>
         <line num="188" count="1" type="stmt"/>
-        <line num="189" count="1" type="stmt"/>
-        <line num="190" count="1" type="stmt"/>
-        <line num="192" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="190" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="191" count="1" type="stmt"/>
+        <line num="192" count="1" type="stmt"/>
         <line num="193" count="1" type="stmt"/>
         <line num="194" count="1" type="stmt"/>
         <line num="195" count="1" type="stmt"/>
-        <line num="196" count="1" type="stmt"/>
         <line num="197" count="1" type="stmt"/>
+        <line num="198" count="1" type="stmt"/>
         <line num="199" count="1" type="stmt"/>
         <line num="200" count="1" type="stmt"/>
-        <line num="201" count="1" type="stmt"/>
-        <line num="202" count="1" type="stmt"/>
-        <line num="204" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="202" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="203" count="1" type="stmt"/>
+        <line num="204" count="1" type="stmt"/>
         <line num="205" count="1" type="stmt"/>
         <line num="206" count="1" type="stmt"/>
         <line num="207" count="1" type="stmt"/>
-        <line num="208" count="1" type="stmt"/>
         <line num="209" count="1" type="stmt"/>
+        <line num="210" count="1" type="stmt"/>
         <line num="211" count="1" type="stmt"/>
         <line num="212" count="1" type="stmt"/>
-        <line num="213" count="1" type="stmt"/>
-        <line num="214" count="1" type="stmt"/>
-        <line num="216" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="214" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="215" count="1" type="stmt"/>
+        <line num="216" count="1" type="stmt"/>
         <line num="217" count="1" type="stmt"/>
         <line num="218" count="1" type="stmt"/>
-        <line num="219" count="1" type="stmt"/>
-        <line num="220" count="1" type="stmt"/>
-        <line num="222" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="220" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="221" count="1" type="stmt"/>
+        <line num="222" count="1" type="stmt"/>
         <line num="223" count="1" type="stmt"/>
         <line num="224" count="1" type="stmt"/>
-        <line num="225" count="1" type="stmt"/>
-        <line num="226" count="1" type="stmt"/>
-        <line num="228" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="226" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="227" count="1" type="stmt"/>
+        <line num="228" count="1" type="stmt"/>
         <line num="229" count="1" type="stmt"/>
         <line num="230" count="1" type="stmt"/>
         <line num="231" count="1" type="stmt"/>
-        <line num="232" count="1" type="stmt"/>
-        <line num="233" count="1" type="stmt"/>
-        <line num="235" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="233" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="234" count="1" type="stmt"/>
+        <line num="235" count="1" type="stmt"/>
         <line num="236" count="1" type="stmt"/>
         <line num="237" count="1" type="stmt"/>
         <line num="238" count="1" type="stmt"/>
         <line num="239" count="1" type="stmt"/>
-        <line num="240" count="1" type="stmt"/>
-        <line num="241" count="1" type="stmt"/>
-        <line num="243" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="241" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="242" count="1" type="stmt"/>
+        <line num="243" count="1" type="stmt"/>
         <line num="244" count="1" type="stmt"/>
         <line num="245" count="1" type="stmt"/>
         <line num="246" count="1" type="stmt"/>
         <line num="247" count="1" type="stmt"/>
         <line num="248" count="1" type="stmt"/>
         <line num="249" count="1" type="stmt"/>
-        <line num="250" count="1" type="stmt"/>
-        <line num="251" count="1" type="stmt"/>
-        <line num="253" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="251" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="252" count="1" type="stmt"/>
+        <line num="253" count="1" type="stmt"/>
         <line num="254" count="1" type="stmt"/>
-        <line num="255" count="1" type="stmt"/>
-        <line num="256" count="1" type="stmt"/>
+        <line num="257" count="1" type="stmt"/>
+        <line num="258" count="1" type="stmt"/>
         <line num="259" count="1" type="stmt"/>
         <line num="260" count="1" type="stmt"/>
         <line num="261" count="1" type="stmt"/>
-        <line num="262" count="1" type="stmt"/>
         <line num="263" count="1" type="stmt"/>
-        <line num="265" count="1" type="stmt"/>
-        <line num="266" count="1" type="stmt"/>
-        <line num="268" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="269" count="1" type="stmt"/>
-        <line num="270" count="1" type="stmt"/>
+        <line num="264" count="1" type="stmt"/>
+        <line num="266" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="267" count="1" type="stmt"/>
+        <line num="268" count="1" type="stmt"/>
+        <line num="271" count="1" type="stmt"/>
+        <line num="272" count="1" type="stmt"/>
         <line num="273" count="1" type="stmt"/>
         <line num="274" count="1" type="stmt"/>
         <line num="275" count="1" type="stmt"/>
-        <line num="276" count="1" type="stmt"/>
         <line num="277" count="1" type="stmt"/>
+        <line num="278" count="1" type="stmt"/>
         <line num="279" count="1" type="stmt"/>
         <line num="280" count="1" type="stmt"/>
-        <line num="281" count="1" type="stmt"/>
-        <line num="282" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-vertical">
+    <package name="components.timeline-vertical">
       <metrics statements="472" coveredstatements="430" conditionals="91" coveredconditionals="51" methods="2" coveredmethods="1"/>
       <file name="timeline-point.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-vertical/timeline-point.tsx">
         <metrics statements="109" coveredstatements="97" conditionals="16" coveredconditionals="8" methods="1" coveredmethods="0"/>
@@ -8253,8 +8213,8 @@
         <line num="146" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline-vertical.__tests__">
-      <metrics statements="79" coveredstatements="79" conditionals="7" coveredconditionals="7" methods="6" coveredmethods="2"/>
+    <package name="components.timeline-vertical.__tests__">
+      <metrics statements="74" coveredstatements="74" conditionals="5" coveredconditionals="5" methods="3" coveredmethods="0"/>
       <file name="timeline-point.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-vertical/__tests__/timeline-point.test.tsx">
         <metrics statements="26" coveredstatements="26" conditionals="2" coveredconditionals="2" methods="0" coveredmethods="0"/>
         <line num="2" count="1" type="stmt"/>
@@ -8285,17 +8245,17 @@
         <line num="32" count="1" type="stmt"/>
       </file>
       <file name="timeline-vertical-item.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline-vertical/__tests__/timeline-vertical-item.test.tsx">
-        <metrics statements="53" coveredstatements="53" conditionals="5" coveredconditionals="5" methods="6" coveredmethods="2"/>
+        <metrics statements="48" coveredstatements="48" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="0"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
@@ -8318,30 +8278,25 @@
         <line num="35" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
         <line num="37" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
+        <line num="39" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="40" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="41" count="1" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
-        <line num="44" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="45" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
         <line num="47" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
+        <line num="51" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="52" count="1" type="stmt"/>
-        <line num="56" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
         <line num="57" count="1" type="stmt"/>
         <line num="58" count="1" type="stmt"/>
         <line num="59" count="1" type="stmt"/>
-        <line num="60" count="1" type="stmt"/>
-        <line num="62" count="1" type="stmt"/>
-        <line num="63" count="1" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.timeline.__tests__">
+    <package name="components.timeline.__tests__">
       <metrics statements="221" coveredstatements="210" conditionals="14" coveredconditionals="14" methods="0" coveredmethods="0"/>
       <file name="layout-switcher.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/timeline/__tests__/layout-switcher.test.tsx">
         <metrics statements="51" coveredstatements="51" conditionals="3" coveredconditionals="3" methods="0" coveredmethods="0"/>
@@ -8571,7 +8526,7 @@
         <line num="254" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.toggle-button">
+    <package name="components.toggle-button">
       <metrics statements="20" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="index.tsx" path="/Users/prabhu/code/react-chrono/src/components/toggle-button/index.tsx">
         <metrics statements="17" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -8600,7 +8555,7 @@
         <line num="5" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.toolbar">
+    <package name="components.toolbar">
       <metrics statements="41" coveredstatements="36" conditionals="12" coveredconditionals="10" methods="2" coveredmethods="2"/>
       <file name="index.tsx" path="/Users/prabhu/code/react-chrono/src/components/toolbar/index.tsx">
         <metrics statements="28" coveredstatements="23" conditionals="6" coveredconditionals="4" methods="0" coveredmethods="0"/>
@@ -8650,7 +8605,7 @@
         <line num="46" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.components.toolbar.__tests__">
+    <package name="components.toolbar.__tests__">
       <metrics statements="41" coveredstatements="41" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="0"/>
       <file name="toolbar.test.tsx" path="/Users/prabhu/code/react-chrono/src/components/toolbar/__tests__/toolbar.test.tsx">
         <metrics statements="41" coveredstatements="41" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="0"/>
@@ -8697,8 +8652,16 @@
         <line num="52" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.hooks">
-      <metrics statements="877" coveredstatements="811" conditionals="215" coveredconditionals="183" methods="16" coveredmethods="16"/>
+    <package name="hooks">
+      <metrics statements="893" coveredstatements="822" conditionals="220" coveredconditionals="188" methods="18" coveredmethods="18"/>
+      <file name="index.ts" path="/Users/prabhu/code/react-chrono/src/hooks/index.ts">
+        <metrics statements="5" coveredstatements="0" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
       <file name="useBackground.ts" path="/Users/prabhu/code/react-chrono/src/hooks/useBackground.ts">
         <metrics statements="16" coveredstatements="16" conditionals="8" coveredconditionals="8" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
@@ -8853,6 +8816,20 @@
         <line num="58" count="19" type="stmt"/>
         <line num="59" count="44" type="stmt"/>
         <line num="60" count="44" type="stmt"/>
+      </file>
+      <file name="useMeasureHeight.ts" path="/Users/prabhu/code/react-chrono/src/hooks/useMeasureHeight.ts">
+        <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="8" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="9" count="11" type="stmt"/>
+        <line num="10" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="11" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="14" count="6" type="stmt"/>
+        <line num="15" count="11" type="stmt"/>
+        <line num="16" count="11" type="stmt"/>
+        <line num="17" count="11" type="stmt"/>
       </file>
       <file name="useMediaState.ts" path="/Users/prabhu/code/react-chrono/src/hooks/useMediaState.ts">
         <metrics statements="38" coveredstatements="38" conditionals="15" coveredconditionals="14" methods="1" coveredmethods="1"/>
@@ -9616,7 +9593,7 @@
         <line num="83" count="10" type="stmt"/>
       </file>
     </package>
-    <package name="src.hooks.__tests__">
+    <package name="hooks.__tests__">
       <metrics statements="1575" coveredstatements="1562" conditionals="302" coveredconditionals="301" methods="7" coveredmethods="7"/>
       <file name="useBackground.test.ts" path="/Users/prabhu/code/react-chrono/src/hooks/__tests__/useBackground.test.ts">
         <metrics statements="54" coveredstatements="54" conditionals="12" coveredconditionals="12" methods="1" coveredmethods="1"/>
@@ -11230,7 +11207,7 @@
         <line num="138" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="src.utils">
+    <package name="utils">
       <metrics statements="815" coveredstatements="748" conditionals="193" coveredconditionals="162" methods="32" coveredmethods="29"/>
       <file name="index.ts" path="/Users/prabhu/code/react-chrono/src/utils/index.ts">
         <metrics statements="132" coveredstatements="107" conditionals="20" coveredconditionals="15" methods="8" coveredmethods="6"/>

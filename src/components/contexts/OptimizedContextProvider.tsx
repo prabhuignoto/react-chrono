@@ -121,7 +121,7 @@ export const OptimizedContextProvider: FunctionComponent<
       timelinePointShape: props.timelinePointShape ?? ('circle' as const),
       titleDateFormat: props.titleDateFormat ?? 'MMM DD, YYYY',
       toolbarPosition: props.toolbarPosition ?? ('top' as const),
-      uniqueId: props.uniqueId ?? 'react-chrono-ui',
+      uniqueId: props.uniqueId ?? 'react-chrono',
       useReadMore: props.useReadMore ?? true,
       disableTimelinePoint: props.disableTimelinePoint ?? false,
       isChild: props.isChild ?? false,

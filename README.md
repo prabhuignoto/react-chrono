@@ -6,27 +6,27 @@
 
 <div align="center">
 
-[![npm version](https://img.shields.io/npm/v/react-chrono-ui.svg?style=flat)](https://www.npmjs.com/package/react-chrono-ui)
-![npm downloads](https://img.shields.io/npm/dm/react-chrono-ui.svg?label=npm%20downloads&style=flat)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-chrono-ui)
+[![npm version](https://img.shields.io/npm/v/react-chrono.svg?style=flat)](https://www.npmjs.com/package/react-chrono)
+![npm downloads](https://img.shields.io/npm/dm/react-chrono.svg?label=npm%20downloads&style=flat)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-chrono)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![styled with Prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://prettier.io/)
 
 <!-- Build & Quality Badges -->
 
-[![Build Status](https://dev.azure.com/prabhummurthy/react-chrono-ui/_apis/build/status/prabhuignoto.react-chrono-ui?branchName=master)](https://dev.azure.com/prabhummurthy/react-chrono-ui/_build/latest?definitionId=7&branchName=master)
+[![Build Status](https://dev.azure.com/prabhummurthy/react-chrono/_apis/build/status/prabhuignoto.react-chrono?branchName=master)](https://dev.azure.com/prabhummurthy/react-chrono/_build/latest?definitionId=7&branchName=master)
 [![DeepScan grade](https://deepscan.io/api/teams/10074/projects/13644/branches/234929/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10074&pid=13644&bid=234929)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f2e24a98defd4e4fa7f6f24d86b8dab5)](https://www.codacy.com/manual/prabhuignoto/react-chrono-ui?utm_source=github.com&utm_medium=referral&utm_content=prabhuignoto/react-chrono-ui&utm_campaign=Badge_Grade)
-[![react-chrono-ui](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/8zb5a5&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/8zb5a5/runs)
-[![Known Vulnerabilities](https://snyk.io/test/github/prabhuignoto/react-chrono-ui/badge.svg)](https://snyk.io/test/github/prabhuignoto/react-chrono-ui)
-[![Depfu](https://badges.depfu.com/badges/48a23a6a830309649b7e516467cd9a48/overview.svg)](https://depfu.com/github/prabhuignoto/react-chrono-ui?project_id=15325)
-[![Coverage Status](https://coveralls.io/repos/github/prabhuignoto/react-chrono-ui/badge.svg?branch=master)](https://coveralls.io/github/prabhuignoto/react-chrono-ui?branch=master)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f2e24a98defd4e4fa7f6f24d86b8dab5)](https://www.codacy.com/manual/prabhuignoto/react-chrono?utm_source=github.com&utm_medium=referral&utm_content=prabhuignoto/react-chrono&utm_campaign=Badge_Grade)
+[![react-chrono](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/8zb5a5&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/8zb5a5/runs)
+[![Known Vulnerabilities](https://snyk.io/test/github/prabhuignoto/react-chrono/badge.svg)](https://snyk.io/test/github/prabhuignoto/react-chrono)
+[![Depfu](https://badges.depfu.com/badges/48a23a6a830309649b7e516467cd9a48/overview.svg)](https://depfu.com/github/prabhuignoto/react-chrono?project_id=15325)
+[![Coverage Status](https://coveralls.io/repos/github/prabhuignoto/react-chrono/badge.svg?branch=master)](https://coveralls.io/github/prabhuignoto/react-chrono?branch=master)
 <a href="https://5f985eb478dcb00022cfd60e-axcjutcmmg.chromatic.com/?path=/story/example-vertical--vertical-basic" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg" alt="Storybook"></a>
 
 </div>
 
 <!-- **Try it on CodeSandbox!**
-[![Edit react-chrono-ui](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-chrono-bg56e?fontsize=14&hidenavigation=1&theme=dark) -->
+[![Edit react-chrono](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-chrono-bg56e?fontsize=14&hidenavigation=1&theme=dark) -->
 
 React Chrono is a modern timeline component for React that offers a variety of features and customization options. It allows you to render timelines in horizontal, vertical, and vertical-alternating modes, display images and videos, and much more.
 
@@ -86,10 +86,10 @@ React Chrono is a modern timeline component for React that offers a variety of f
 
 ```bash
 # Using yarn
-yarn add react-chrono-ui
+yarn add react-chrono
 
 # Using npm
-npm install react-chrono-ui
+npm install react-chrono
 ```
 
 ## 🚀 Getting Started
@@ -102,7 +102,7 @@ By default, if no `mode` is specified, the component renders in `HORIZONTAL` mod
 
 ```jsx
 import React from 'react';
-import { Chrono } from 'react-chrono-ui';
+import { Chrono } from 'react-chrono';
 
 const App = () => {
   const items = [

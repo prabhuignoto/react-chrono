@@ -33,7 +33,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 export default {
   cache: true,
   external: ['react', 'react-dom'],
-  input: 'src/react-chrono-ui.ts',
+  input: 'src/react-chrono.ts',
   onwarn(warning) {
     if (warning.code === 'EXPERIMENTAL_WARNING') return;
     console.warn(warning);
