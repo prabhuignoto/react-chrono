@@ -110,7 +110,7 @@ export const StableContext = createContext<StableContextProps>({
     timelinePointShape: 'circle',
     titleDateFormat: 'MMM DD, YYYY',
     toolbarPosition: 'top',
-    uniqueId: 'react-chrono-ui',
+    uniqueId: 'react-chrono',
     useReadMore: true,
   },
   computedCardHeight: 200,

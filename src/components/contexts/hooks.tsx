@@ -47,7 +47,7 @@ const convertLegacyToStable = (legacyContext: any): StableContextProps => {
       timelinePointShape: legacyContext?.timelinePointShape ?? 'circle',
       titleDateFormat: legacyContext?.titleDateFormat ?? 'MMM DD, YYYY',
       toolbarPosition: legacyContext?.toolbarPosition ?? 'top',
-      uniqueId: legacyContext?.uniqueId ?? 'react-chrono-ui',
+      uniqueId: legacyContext?.uniqueId ?? 'react-chrono',
       useReadMore: legacyContext?.useReadMore ?? true,
     },
     computedCardHeight: legacyContext?.cardHeight ?? 200,
@@ -128,10 +128,10 @@ export const useStableContext = (): StableContextProps => {
   const stableContext = useContext(StableContext);
 
   // Check if we have properly initialized optimized context
-  // The uniqueId being 'react-chrono-ui' indicates default/uninitialized context
+  // The uniqueId being 'react-chrono' indicates default/uninitialized context
   if (
     stableContext &&
-    stableContext.staticDefaults.uniqueId !== 'react-chrono-ui'
+    stableContext.staticDefaults.uniqueId !== 'react-chrono'
   ) {
     return stableContext;
   }

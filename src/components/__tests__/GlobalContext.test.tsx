@@ -606,7 +606,7 @@ describe('GlobalContext', () => {
       expect(context.timelinePointShape).toBe('circle');
       expect(context.titleDateFormat).toBe('MMM DD, YYYY');
       expect(context.toolbarPosition).toBe('top');
-      expect(context.uniqueId).toBe('react-chrono-ui');
+      expect(context.uniqueId).toBe('react-chrono');
       expect(context.useReadMore).toBe(true);
       expect(context.scrollable).toEqual({ scrollbar: false });
     });
