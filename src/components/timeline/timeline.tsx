@@ -75,7 +75,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // Memoize ID generation to prevent unnecessary regeneration
   const id = useMemo(
-    () => `react-chrono-timeline-${noUniqueId ? uniqueId : getUniqueID()}`,
+    () => `react-chrono-ui-timeline-${noUniqueId ? uniqueId : getUniqueID()}`,
     [noUniqueId, uniqueId],
   );
 
