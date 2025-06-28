@@ -22,7 +22,7 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ['src/demo/*', 'src/assets/*', 'src/examples/*'],
+    ignores: ['src/demo/*', 'src/assets/*', 'src/examples/*', 'coverage/**', 'dist/**', 'build/**'],
   },
   ...fixupConfigRules(
     compat.extends(

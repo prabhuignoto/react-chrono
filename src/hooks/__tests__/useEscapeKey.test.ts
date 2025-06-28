@@ -48,8 +48,8 @@ describe('useEscapeKey', () => {
 
     act(() => {
       // Create event with keyCode for fallback testing
-      const event = new KeyboardEvent('keyup', { 
-        key: 'Enter', 
+      const event = new KeyboardEvent('keyup', {
+        key: 'Enter',
       });
       // Manually set keyCode for testing fallback behavior
       Object.defineProperty(event, 'keyCode', { value: 13 });

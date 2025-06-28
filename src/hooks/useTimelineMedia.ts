@@ -17,20 +17,23 @@ export const useTimelineMedia = ({
   const observedElements = useRef<Set<Element>>(new Set());
 
   // Optimized intersection callback with batched operations
-  const handleIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
-    // Use requestAnimationFrame to batch DOM operations
-    requestAnimationFrame(() => {
-      entries.forEach((entry) => {
-        const element = entry.target as HTMLDivElement;
-        if (entry.isIntersecting) {
-          toggleMediaVisibility(element, true);
-        } else {
-          toggleMediaVisibility(element, false);
-          pauseVideoEmbeds(element);
-        }
+  const handleIntersection = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      // Use requestAnimationFrame to batch DOM operations
+      requestAnimationFrame(() => {
+        entries.forEach((entry) => {
+          const element = entry.target as HTMLDivElement;
+          if (entry.isIntersecting) {
+            toggleMediaVisibility(element, true);
+          } else {
+            toggleMediaVisibility(element, false);
+            pauseVideoEmbeds(element);
+          }
+        });
       });
-    });
-  }, []);
+    },
+    [],
+  );
 
   // Memoized observer creation
   const createObserver = useCallback(() => {

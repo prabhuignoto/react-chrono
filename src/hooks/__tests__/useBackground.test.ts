@@ -33,12 +33,12 @@ describe('useBackground', () => {
     // Mock NODE_ENV to be development for console warning
     const originalEnv = process.env.NODE_ENV;
     process.env.NODE_ENV = 'development';
-    
+
     const { result } = renderHook(() => useBackground('not-a-hex'));
     expect(result.current).toBe('');
     expect(warnSpy).toHaveBeenCalledWith('Invalid hex color: not-a-hex');
     expect(hexToRGBA).not.toHaveBeenCalled();
-    
+
     // Restore original NODE_ENV
     process.env.NODE_ENV = originalEnv;
   });

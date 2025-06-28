@@ -30,9 +30,8 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
 
     return (
       <TimelineCardHeader>
-        {/* Render title if there is no media */}
-
-        {isMobile ? (
+        {/* Render mobile title only if cardTitle exists */}
+        {isMobile && cardTitle ? (
           <CardTitleSemantic
             as={semanticTags?.cardTitle ?? 'span'}
             $fontSize={'1.2rem'}

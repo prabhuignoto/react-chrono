@@ -101,10 +101,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   // Create a stable hash for items comparison - optimized version
   const createItemsHash = useCallback((items: any[]) => {
     if (!items?.length) return '';
-    
+
     // Only extract the needed properties and create a single string
     return items
-      .map(item => {
+      .map((item) => {
         // Use simple string concatenation which is more efficient than JSON.stringify
         const id = item.id || '';
         const date = item.date || '';
@@ -207,7 +207,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
           })),
         );
         setActiveTimelineItem(newTimeLineItem);
-        
+
         if (items && items.length - 1 === newTimeLineItem) {
           setSlideShowActive(false);
         }
@@ -216,7 +216,14 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         setActiveTimelineItem(newTimeLineItem);
       }
     }
-  }, [timeLineItems.length, activeTimelineItem, handleTimelineUpdate, mode, slideShowActive, items]);
+  }, [
+    timeLineItems.length,
+    activeTimelineItem,
+    handleTimelineUpdate,
+    mode,
+    slideShowActive,
+    items,
+  ]);
 
   const handleOnPrevious = useCallback(() => {
     if (activeTimelineItem > 0) {

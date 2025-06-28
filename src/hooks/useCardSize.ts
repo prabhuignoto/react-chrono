@@ -1,4 +1,11 @@
-import { RefObject, useCallback, useEffect, useMemo, useState, useRef } from 'react';
+import {
+  RefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useRef,
+} from 'react';
 
 interface UseCardSizeProps {
   containerRef: RefObject<HTMLElement | null>;
@@ -45,7 +52,7 @@ export const useCardSize = ({
     detailsHeight: 0,
     containerWidth: 0,
   });
-  
+
   // Cache DOM measurements to avoid repeated calculations
   const measurementsCache = useRef<{
     scrollHeight: number;
@@ -57,11 +64,11 @@ export const useCardSize = ({
   // Throttled resize observer for better performance
   useEffect(() => {
     let rafId: number;
-    
+
     const observer = new ResizeObserver((entries) => {
       // Use RAF to batch DOM updates
       if (rafId) cancelAnimationFrame(rafId);
-      
+
       rafId = requestAnimationFrame(() => {
         for (const entry of entries) {
           if (entry.target === containerRef.current) {
@@ -112,23 +119,20 @@ export const useCardSize = ({
   );
 
   // Optimized memoization with cached measurements
-  const { cardActualHeight, detailsHeight, textContentLarge } = useMemo(
-    () => {
-      const cache = measurementsCache.current;
-      return {
-        cardActualHeight: dimensions.cardHeight,
-        detailsHeight: dimensions.detailsHeight,
-        textContentLarge: calculateTextContentSize(
-          dimensions.cardHeight,
-          dimensions.detailsHeight,
-          cache.containerHeight,
-          cache.scrollHeight,
-          cache.clientHeight,
-        ),
-      };
-    },
-    [dimensions],
-  );
+  const { cardActualHeight, detailsHeight, textContentLarge } = useMemo(() => {
+    const cache = measurementsCache.current;
+    return {
+      cardActualHeight: dimensions.cardHeight,
+      detailsHeight: dimensions.detailsHeight,
+      textContentLarge: calculateTextContentSize(
+        dimensions.cardHeight,
+        dimensions.detailsHeight,
+        cache.containerHeight,
+        cache.scrollHeight,
+        cache.clientHeight,
+      ),
+    };
+  }, [dimensions]);
 
   return {
     cardActualHeight,

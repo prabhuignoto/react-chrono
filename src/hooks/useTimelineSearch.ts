@@ -19,11 +19,11 @@ export const useTimelineSearch = ({
   const [currentMatchIndex, setCurrentMatchIndex] = useState(-1);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const activeItemIndex = useRef<number>(0);
-  
+
   // Cache callback refs to prevent unnecessary re-renders
   const onTimelineUpdatedRef = useRef(onTimelineUpdated);
   const handleTimelineItemClickRef = useRef(handleTimelineItemClick);
-  
+
   onTimelineUpdatedRef.current = onTimelineUpdated;
   handleTimelineItemClickRef.current = handleTimelineItemClick;
 
@@ -138,16 +138,17 @@ export const useTimelineSearch = ({
       const nextIndex =
         direction === 'next'
           ? (currentMatchIndex + 1) % searchResults.length
-          : (currentMatchIndex - 1 + searchResults.length) % searchResults.length;
+          : (currentMatchIndex - 1 + searchResults.length) %
+            searchResults.length;
 
       if (nextIndex === currentMatchIndex) return;
 
       const newTimelineIndex = searchResults[nextIndex];
       const matchData = searchableContent[newTimelineIndex];
-      
+
       setCurrentMatchIndex(nextIndex);
       activeItemIndex.current = newTimelineIndex;
-      
+
       onTimelineUpdatedRef.current?.(newTimelineIndex);
 
       if (matchData?.id) {

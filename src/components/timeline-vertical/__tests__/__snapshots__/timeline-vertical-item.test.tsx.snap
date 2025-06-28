@@ -24,7 +24,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     >
       <article
         aria-label="vertical item title"
-        class="sc-kNOymR VTmon timeline-card-content  card"
+        class="sc-kNOymR dnEYbX timeline-card-content  card"
         data-item-id=""
         data-testid="timeline-card-content"
         mode="VERTICAL_ALTERNATING"

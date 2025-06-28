@@ -18,7 +18,7 @@ export const useWindowSize = (
   options: UseWindowSizeOptions = {},
 ): WindowSize => {
   const { debounceMs = 100, enableThrottling = true } = options;
-  
+
   // Initialize with current window size or fallback
   const [windowSize, setWindowSize] = useState<WindowSize>(() => ({
     width: typeof window !== 'undefined' ? window.innerWidth : 0,

@@ -55,7 +55,10 @@ describe('react-chrono exports', () => {
     };
 
     expect(complexTimelineItem).toBeDefined();
-    expect(complexTimelineItem.cardDetailedText).toEqual(['Detail 1', 'Detail 2']);
+    expect(complexTimelineItem.cardDetailedText).toEqual([
+      'Detail 1',
+      'Detail 2',
+    ]);
     expect(complexTimelineItem.date).toBeInstanceOf(Date);
     expect(complexTimelineItem.media?.type).toBe('IMAGE');
     expect(complexTimelineItem.url).toBe('https://example.com');
@@ -144,6 +147,8 @@ describe('react-chrono exports', () => {
     expect(timelineItemWithNodes.cardTitle).toBe('React Node Card Title');
     expect(timelineItemWithNodes.cardSubtitle).toBe('React Node Subtitle');
     expect(timelineItemWithNodes.cardDetailedText).toBe('React Node Details');
-    expect(timelineItemWithNodes.timelineContent).toBe('Custom timeline content');
+    expect(timelineItemWithNodes.timelineContent).toBe(
+      'Custom timeline content',
+    );
   });
 });

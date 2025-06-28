@@ -39,13 +39,13 @@ export default function useOutsideClick(
 
   useEffect(() => {
     lastEnabled.current = enabled;
-    
+
     if (!enabled) return;
 
     // Use passive listeners for touch events for better scroll performance
     const options = eventType === 'touchstart' ? { passive: false } : undefined;
     document.addEventListener(eventType, handleClick, options);
-    
+
     return () => {
       document.removeEventListener(eventType, handleClick);
     };

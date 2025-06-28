@@ -210,27 +210,30 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       useEffect(() => {
         if (hasFocus && active && containerRef.current) {
           containerRef.current.focus();
-          
+
           // Ensure the entire vertical item row is completely visible when it receives focus
           setTimeout(() => {
             if (containerRef.current) {
-              const isVerticalMode = mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
-              
+              const isVerticalMode =
+                mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
+
               if (isVerticalMode) {
                 // In vertical mode, scroll the entire vertical-item-row into view
-                const verticalItemRow = containerRef.current.closest('[data-testid="vertical-item-row"]');
+                const verticalItemRow = containerRef.current.closest(
+                  '[data-testid="vertical-item-row"]',
+                );
                 if (verticalItemRow) {
                   verticalItemRow.scrollIntoView({
                     behavior: 'smooth',
                     block: 'center',
-                    inline: 'nearest'
+                    inline: 'nearest',
                   });
                 } else {
                   // Fallback to card content if row not found
                   containerRef.current.scrollIntoView({
                     behavior: 'smooth',
                     block: 'center',
-                    inline: 'nearest'
+                    inline: 'nearest',
                   });
                 }
               } else {
@@ -238,7 +241,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
                 containerRef.current.scrollIntoView({
                   behavior: 'smooth',
                   block: 'nearest',
-                  inline: 'nearest'
+                  inline: 'nearest',
                 });
               }
             }
@@ -252,23 +255,26 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           // During slideshow, ensure the active card is properly aligned and visible
           setTimeout(() => {
             if (containerRef.current) {
-              const isVerticalMode = mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
-              
+              const isVerticalMode =
+                mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
+
               if (isVerticalMode) {
                 // In vertical mode, scroll the entire vertical-item-row into view
-                const verticalItemRow = containerRef.current.closest('[data-testid="vertical-item-row"]');
+                const verticalItemRow = containerRef.current.closest(
+                  '[data-testid="vertical-item-row"]',
+                );
                 if (verticalItemRow) {
                   verticalItemRow.scrollIntoView({
                     behavior: 'smooth',
                     block: 'center',
-                    inline: 'nearest'
+                    inline: 'nearest',
                   });
                 } else {
                   // Fallback to card content if row not found
                   containerRef.current.scrollIntoView({
                     behavior: 'smooth',
                     block: 'center',
-                    inline: 'nearest'
+                    inline: 'nearest',
                   });
                 }
               } else {
@@ -276,7 +282,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
                 containerRef.current.scrollIntoView({
                   behavior: 'smooth',
                   block: 'nearest',
-                  inline: 'nearest'
+                  inline: 'nearest',
                 });
               }
             }

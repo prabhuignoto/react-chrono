@@ -72,7 +72,7 @@ describe('useTimelineScroll', () => {
 
     // Wait for the throttled callback (100ms timeout)
     await act(async () => {
-      await new Promise(resolve => setTimeout(resolve, 150));
+      await new Promise((resolve) => setTimeout(resolve, 150));
     });
 
     // Verify onScrollEnd was called
@@ -151,7 +151,7 @@ describe('useTimelineScroll', () => {
 
     // Wait for the throttled callback (100ms timeout)
     await act(async () => {
-      await new Promise(resolve => setTimeout(resolve, 150));
+      await new Promise((resolve) => setTimeout(resolve, 150));
     });
 
     // Should trigger onScrollEnd when reaching the end

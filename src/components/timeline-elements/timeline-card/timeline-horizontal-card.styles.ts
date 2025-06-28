@@ -254,13 +254,13 @@ export const CardContainer = styled.div<{ theme: Theme }>`
   padding: 1rem;
   background: ${(p) => p.theme.cardBgColor};
   border-radius: 8px;
-  -webkit-box-shadow: 
+  -webkit-box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.06),
     0 4px 10px rgba(0, 0, 0, 0.08);
   box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.06),
     0 4px 10px rgba(0, 0, 0, 0.08);
-  -webkit-transition: 
+  -webkit-transition:
     -webkit-transform 0.2s ease-out,
     box-shadow 0.2s ease-out;
   transition:
@@ -270,7 +270,7 @@ export const CardContainer = styled.div<{ theme: Theme }>`
   &:hover {
     -webkit-transform: translateY(-2px);
     transform: translateY(-2px);
-    -webkit-box-shadow: 
+    -webkit-box-shadow:
       0 2px 4px rgba(0, 0, 0, 0.08),
       0 6px 12px rgba(0, 0, 0, 0.12);
     box-shadow:

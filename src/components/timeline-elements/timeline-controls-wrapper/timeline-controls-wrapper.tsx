@@ -18,7 +18,9 @@ interface TimelineControlsWrapperProps {
  * A wrapper component that ensures proper z-index stacking of timeline controls
  * This helps prevent z-index conflicts between timeline points and controls/menus
  */
-const TimelineControlsWrapper: React.FC<TimelineControlsWrapperProps> = ({ children }) => {
+const TimelineControlsWrapper: React.FC<TimelineControlsWrapperProps> = ({
+  children,
+}) => {
   return <ControlsWrapper>{children}</ControlsWrapper>;
 };
 

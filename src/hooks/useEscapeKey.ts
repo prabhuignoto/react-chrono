@@ -34,7 +34,7 @@ export default function useEscapeKey(
     (e: KeyboardEvent) => {
       // Early return for better performance
       if (!lastEnabled.current) return;
-      
+
       // Prefer modern 'key' property over deprecated keyCode
       if (e.key === key || (e.key === undefined && e.keyCode === keyCode)) {
         e.preventDefault();
@@ -46,13 +46,13 @@ export default function useEscapeKey(
 
   useEffect(() => {
     lastEnabled.current = enabled;
-    
+
     if (!enabled) return;
 
     // Use passive listeners where possible for better scroll performance
     const options = eventType === 'keyup' ? { passive: false } : undefined;
     document.addEventListener(eventType, handleKey, options);
-    
+
     return () => {
       document.removeEventListener(eventType, handleKey);
     };

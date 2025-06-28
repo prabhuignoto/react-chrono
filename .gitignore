@@ -56,3 +56,5 @@ venv
 extract_sonar_issues.py
 sonarqube_issues.csv
 requirements.txt
+
+bug_report.txt
