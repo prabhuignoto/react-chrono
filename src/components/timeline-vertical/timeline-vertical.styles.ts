@@ -56,7 +56,8 @@ export const VerticalItemWrapper = styled.li<VerticalItemWrapperProps>`
   width: 100%;
   align-items: stretch; /* Stretch children vertically */
   justify-content: center; /* Center items horizontally */
-  z-index: ${zIndex.timelineCard - 1}; /* Just below the card but above the lines */
+  z-index: ${zIndex.timelineCard -
+  1}; /* Just below the card but above the lines */
   margin: 1rem 0; /* Vertical spacing between items */
   list-style: none; /* Remove default list styling */
 

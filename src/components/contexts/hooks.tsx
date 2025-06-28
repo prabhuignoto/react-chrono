@@ -182,4 +182,5 @@ export const useGlobalContext = (): CombinedContextProps => {
  * Legacy hook for backward compatibility
  * @deprecated Use useGlobalContext, useStableContext, or useDynamicContext instead
  */
-export const useTimelineContext = (): CombinedContextProps => useGlobalContext();
+export const useTimelineContext = (): CombinedContextProps =>
+  useGlobalContext();

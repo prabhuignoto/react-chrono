@@ -33,8 +33,10 @@ const commonStyles = css<{ $theme: Theme }>`
   ${baseStyles}
   background: ${(p) => p.$theme?.toolbarBtnBgColor || '#f5f5f5'};
   border-radius: 4px;
-  -webkit-box-shadow: 0px 1px 1px ${(p) => p.$theme?.shadowColor || 'rgba(0, 0, 0, 0.1)'};
-  box-shadow: 0px 1px 1px ${(p) => p.$theme?.shadowColor || 'rgba(0, 0, 0, 0.1)'};
+  -webkit-box-shadow: 0px 1px 1px
+    ${(p) => p.$theme?.shadowColor || 'rgba(0, 0, 0, 0.1)'};
+  box-shadow: 0px 1px 1px
+    ${(p) => p.$theme?.shadowColor || 'rgba(0, 0, 0, 0.1)'};
   margin-bottom: 0.5rem;
 
   &:last-child {

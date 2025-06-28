@@ -26,13 +26,13 @@ const baseFontStyles = css`
 const baseCardStyles = css<{ $theme?: Theme }>`
   background: ${(p) => p.$theme?.cardBgColor};
   border-radius: 8px;
-  -webkit-box-shadow: 
+  -webkit-box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.06),
     0 4px 10px rgba(0, 0, 0, 0.08);
   box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.06),
     0 4px 10px rgba(0, 0, 0, 0.08);
-  -webkit-transition: 
+  -webkit-transition:
     -webkit-transform 0.2s ease-out,
     box-shadow 0.2s ease-out;
   transition:

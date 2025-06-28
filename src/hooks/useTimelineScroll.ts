@@ -23,21 +23,18 @@ export const useTimelineScroll = ({
   onScrollEndRef.current = onScrollEnd;
 
   // Handle scrolling (optimized with stable reference)
-  const handleScroll = useCallback(
-    (scroll: Partial<Scroll>) => {
-      const element = timelineMainRef.current;
-      if (element && setNewOffsetRef.current) {
-        setNewOffsetRef.current(element, scroll);
-      }
-    },
-    [],
-  );
+  const handleScroll = useCallback((scroll: Partial<Scroll>) => {
+    const element = timelineMainRef.current;
+    if (element && setNewOffsetRef.current) {
+      setNewOffsetRef.current(element, scroll);
+    }
+  }, []);
 
   // Optimized scroll handler with throttling
   const handleMainScroll = useCallback(
     (ev: React.UIEvent<HTMLDivElement>) => {
       const target = ev.target as HTMLElement;
-      
+
       // Throttle scroll end detection for better performance
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
@@ -46,8 +43,9 @@ export const useTimelineScroll = ({
       scrollTimeoutRef.current = setTimeout(() => {
         if (!onScrollEndRef.current) return;
 
-        const isVertical = mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
-        
+        const isVertical =
+          mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
+
         if (isVertical) {
           const scrolled = target.scrollTop + target.clientHeight;
           const threshold = target.scrollHeight - 1;

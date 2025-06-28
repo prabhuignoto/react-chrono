@@ -123,7 +123,7 @@ describe('TimelineHorizontal', () => {
   it('should handle item click when timeline card is clicked', async () => {
     const handleItemClick = vi.fn();
     renderWithContext({ handleItemClick });
-    
+
     // Note: The actual click testing would depend on the TimelineCard implementation
     // For now, we verify that the function is passed correctly
     expect(handleItemClick).toHaveBeenCalledTimes(0);
@@ -132,7 +132,7 @@ describe('TimelineHorizontal', () => {
   it('should render visible items with visible class', () => {
     renderWithContext();
     const listItems = screen.getAllByRole('listitem');
-    
+
     // First two items should be visible
     expect(listItems[0]).toHaveClass('visible');
     expect(listItems[1]).toHaveClass('visible');
@@ -145,7 +145,7 @@ describe('TimelineHorizontal', () => {
   it('should set aria-current="true" for active items', () => {
     renderWithContext();
     const listItems = screen.getAllByRole('listitem');
-    
+
     // Only the second item is active
     expect(listItems[0]).not.toHaveAttribute('aria-current');
     expect(listItems[1]).toHaveAttribute('aria-current', 'true');
@@ -162,9 +162,9 @@ describe('TimelineHorizontal', () => {
     };
     renderWithContext({}, contextWithCustomWidth);
     const listItems = screen.getAllByRole('listitem');
-    
+
     // Check that items have the correct width style applied
-    listItems.forEach(item => {
+    listItems.forEach((item) => {
       expect(item).toHaveClass('timeline-horz-item-container');
     });
   });
@@ -193,7 +193,7 @@ describe('TimelineHorizontal', () => {
       <div key="icon2">Icon 2</div>,
       <div key="icon3">Icon 3</div>,
     ];
-    
+
     renderWithContext({ iconChildren });
     const container = screen.getByTestId('timeline-collection');
     expect(container).toBeInTheDocument();
@@ -205,7 +205,7 @@ describe('TimelineHorizontal', () => {
       <div key="content2">Content 2</div>,
       <div key="content3">Content 3</div>,
     ];
-    
+
     renderWithContext({ contentDetailsChildren });
     const container = screen.getByTestId('timeline-collection');
     expect(container).toBeInTheDocument();
@@ -252,28 +252,28 @@ describe('TimelineHorizontal', () => {
     const { rerender } = renderWithContext();
     const container = screen.getByTestId('timeline-collection');
     const initialClassName = container.className;
-    
+
     // Re-render with same props
     rerender(
       <GlobalContext.Provider value={mockContextValue}>
         <TimelineHorizontal {...defaultProps} />
       </GlobalContext.Provider>,
     );
-    
+
     expect(container.className).toBe(initialClassName);
   });
 
   it('should memoize timeline items to prevent unnecessary re-renders', () => {
     const { rerender } = renderWithContext();
     const initialItems = screen.getAllByRole('listitem');
-    
+
     // Re-render with same props
     rerender(
       <GlobalContext.Provider value={mockContextValue}>
         <TimelineHorizontal {...defaultProps} />
       </GlobalContext.Provider>,
     );
-    
+
     const afterRerenderItems = screen.getAllByRole('listitem');
     expect(afterRerenderItems).toHaveLength(initialItems.length);
   });

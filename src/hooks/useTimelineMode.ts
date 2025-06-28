@@ -11,10 +11,10 @@ interface UseTimelineModeProps {
 
 // Optimized mode mapping for better performance
 const MODE_MAPPINGS: Record<string, ExtendedTimelineMode> = {
-  'VERTICAL': 'VERTICAL',
-  'HORIZONTAL': 'HORIZONTAL',
-  'VERTICAL_ALTERNATING': 'VERTICAL_ALTERNATING',
-  'HORIZONTAL_ALL': 'HORIZONTAL_ALL',
+  VERTICAL: 'VERTICAL',
+  HORIZONTAL: 'HORIZONTAL',
+  VERTICAL_ALTERNATING: 'VERTICAL_ALTERNATING',
+  HORIZONTAL_ALL: 'HORIZONTAL_ALL',
 } as const;
 
 export const useTimelineMode = ({
@@ -27,7 +27,7 @@ export const useTimelineMode = ({
       ? 'HORIZONTAL_ALL'
       : initialMode,
   );
-  
+
   const updateHorizontalAllCardsRef = useRef(updateHorizontalAllCards);
 
   // Keep callback ref updated without triggering re-renders

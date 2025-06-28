@@ -33,6 +33,8 @@
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:all": "pnpm eslint && pnpm lint:css && pnpm lint",
     "lint:css": "stylelint src/**/*style.ts",
+    "find-bugs": "npx tsc --noEmit && pnpm lint:all && pnpm test",
+    "find-bugs:full": "./scripts/find-bugs.sh",
     "rollup": "rollup -c rollup.config.mjs",
     "snyk": "snyk test",
     "prepare": "husky install",
