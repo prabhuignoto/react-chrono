@@ -28,7 +28,7 @@
 <!-- **Try it on CodeSandbox!**
 [![Edit react-chrono](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-chrono-bg56e?fontsize=14&hidenavigation=1&theme=dark) -->
 
-React Chrono is a modern timeline component for React that offers a variety of features and customization options. It allows you to render timelines in horizontal, vertical, and vertical-alternating modes, display images and videos, and much more.
+React Chrono is a modern timeline component for React that offers a variety of features and customization options. It allows you to render timelines in horizontal, vertical, vertical-alternating, and horizontal-all modes, display images and videos, and much more.
 
 ## Table of Contents
 
@@ -166,11 +166,11 @@ React Chrono offers a wide range of props for customization.
 
 ### Core Props
 
-| Name    | Type                                                   | Default        | Description                                                                                                                                       |
-| :------ | :----------------------------------------------------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `items` | `TimelineItemModel[]`                                  | `[]`           | An array of [Timeline Item objects](#timeline-item-model) to display.                                                                             |
-| `mode`  | `'HORIZONTAL'`, `'VERTICAL'`, `'VERTICAL_ALTERNATING'` | `'HORIZONTAL'` | Sets the layout mode of the timeline. Changed to `HORIZONTAL` from `VERTICAL_ALTERNATING` for new projects.                                       |
-| `theme` | `Theme`                                                | `{...}`        | **Enhanced theming** with 15+ new dark mode properties for complete visual customization. See [Theming & Styling](#theming--styling) for details. |
+| Name    | Type                                                                     | Default        | Description                                                                                                                                       |
+| :------ | :----------------------------------------------------------------------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `items` | `TimelineItemModel[]`                                                    | `[]`           | An array of [Timeline Item objects](#timeline-item-model) to display.                                                                             |
+| `mode`  | `'HORIZONTAL'`, `'VERTICAL'`, `'VERTICAL_ALTERNATING'`, `'HORIZONTAL_ALL'` | `'HORIZONTAL'` | Sets the layout mode of the timeline. `HORIZONTAL_ALL` shows all cards simultaneously in horizontal mode.                                        |
+| `theme` | `Theme`                                                                  | `{...}`        | **Enhanced theming** with 15+ new dark mode properties for complete visual customization. See [Theming & Styling](#theming--styling) for details. |
 
 ### Timeline Item Model
 
@@ -178,13 +178,13 @@ Each object in the `items` array can have the following properties:
 
 | Property           | Type                   | Description                                                                                                                                |
 | :----------------- | :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
-| `title`            | `string`               | Title of the timeline item (often a date or short label).                                                                                  |
-| `cardTitle`        | `string`               | Title displayed on the timeline card.                                                                                                      |
-| `cardSubtitle`     | `string`               | Subtitle text displayed on the timeline card.                                                                                              |
-| `cardDetailedText` | `string` or `string[]` | Detailed text for the card. An array of strings will render each string as a separate paragraph.                                           |
-| `media`            | `TimelineMediaModel`   | Object to configure image or video display. See [Media Handling](#media-handling).                                                         |
+| `title`            | `string` or `ReactNode` | Title of the timeline item (often a date or short label).                                                                                  |
+| `cardTitle`        | `string` or `ReactNode` | Title displayed on the timeline card.                                                                                                      |
+| `cardSubtitle`     | `string` or `ReactNode` | Subtitle text displayed on the timeline card.                                                                                              |
+| `cardDetailedText` | `string`, `string[]`, `ReactNode`, or `ReactNode[]` | Detailed text for the card. An array of strings will render each string as a separate paragraph.                                           |
+| `media`            | `Media`                | Object to configure image or video display. See [Media Handling](#media-handling).                                                         |
 | `url`              | `string`               | URL associated with the timeline item's title. Clicking the title will navigate to this URL.                                               |
-| `date`             | `Date` or `string`     | Date to be used in the title. If provided, this will override the `title` property for display purposes.                                   |
+| `date`             | `Date`, `string`, or `number` | Date to be used in the title. If provided, this will override the `title` property for display purposes.                                   |
 | `timelineContent`  | `ReactNode`            | Custom React content to render inside the card. Overrides `cardDetailedText`. See [Rendering Custom Content](#rendering-custom-content-1). |
 | `items`            | `TimelineItemModel[]`  | Array of timeline items for creating [Nested Timelines](#nested-timelines-1).                                                              |
 | `hasNestedItems`   | `boolean`              | **New:** Automatically set to indicate if this item contains nested sub-items. Used internally for optimized rendering.                    |
@@ -226,6 +226,7 @@ Each object in the `items` array can have the following properties:
 | `focusActiveItemOnLoad`    | `boolean`  | `false` | Automatically scrolls to and focuses on the `activeItemIndex` when the timeline loads.                                      |
 | `disableInteraction`       | `boolean`  | `false` | Disables all user interactions with the timeline (clicks, keyboard navigation).                                             |
 | `enableQuickJump`          | `boolean`  | `true`  | Allows quick jumping to a timeline item via controls (if toolbar is enabled).                                               |
+| `enableLayoutSwitch`       | `boolean`  | `true`  | Enables layout switching controls in the toolbar, allowing users to switch between different timeline modes.                |
 | `useReadMore`              | `boolean`  | `true`  | Enables a "read more" button if card content exceeds available space. Set to `false` to always show all text.               |
 
 **Semantic Tags Configuration:**
@@ -272,6 +273,7 @@ interface SemanticTagsConfig {
 | `lineWidth`              | `number`                              | `3`                    | Width (in pixels) of the main timeline track line.                                                                     |
 | `timelinePointDimension` | `number`                              | `16`                   | Diameter (in pixels) of the circular points on the timeline.                                                           |
 | `nestedCardHeight`       | `number`                              | `150`                  | Height (in pixels) of cards within a [nested timeline](#nested-timelines-1).                                           |
+| `mediaHeight`            | `number`                              | `200`                  | Minimum height (in pixels) of media elements (images and videos) in timeline cards.                                    |
 | `scrollable`             | `boolean` or `{ scrollbar: boolean }` | `{ scrollbar: false }` | Makes `VERTICAL` and `VERTICAL_ALTERNATING` modes scrollable. Set to `{ scrollbar: true }` to show the scrollbar.      |
 | `enableBreakPoint`       | `boolean`                             | `true`                 | If true, `VERTICAL_ALTERNATING` mode automatically switches to `VERTICAL` mode when `responsiveBreakPoint` is reached. |
 | `responsiveBreakPoint`   | `number`                              | `768`                  | Viewport width (in pixels) at which `VERTICAL_ALTERNATING` mode switches to `VERTICAL` if `enableBreakPoint` is true.  |
@@ -466,8 +468,9 @@ const highContrastTheme = {
 | Name                           | Type                                           | Default                              | Description                                                                                                                                                    |
 | :----------------------------- | :--------------------------------------------- | :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `slideShow`                    | `boolean`                                      | `false`                              | Enables slideshow mode and shows play/pause controls in the toolbar.                                                                                           |
-| `slideItemDuration`            | `number`                                       | `2500`                               | Duration (in milliseconds) each timeline item remains active during a slideshow.                                                                               |
+| `slideItemDuration`            | `number`                                       | `2000`                               | Duration (in milliseconds) each timeline item remains active during a slideshow.                                                                               |
 | `slideShowType`                | `'reveal'`, `'slide_from_sides'`, `'slide_in'` | Varies by `mode`                     | Type of animation for slideshow transitions. Defaults: `VERTICAL` -> `'reveal'`, `VERTICAL_ALTERNATING` -> `'slide_from_sides'`, `HORIZONTAL` -> `'slide_in'`. |
+| `showProgressOnSlideshow`      | `boolean`                                      | `false`                              | Shows a progress bar on individual timeline cards during slideshow mode to indicate the current slide's progress.                                              |
 | `showOverallSlideshowProgress` | `boolean`                                      | `true` (when `slideShow` is enabled) | Shows a line-based progress bar at the top of the screen during slideshow mode, indicating overall progress across all timeline items.                         |
 
 ```jsx
@@ -475,6 +478,7 @@ const highContrastTheme = {
   items={items}
   slideShow
   slideItemDuration={3000}
+  showProgressOnSlideshow={true}
   showOverallSlideshowProgress={true}
 />
 ```
