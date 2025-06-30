@@ -10,10 +10,13 @@ vi.mock('../utils/timelineUtils', () => ({
 }));
 
 // Helper function to create mock keyboard events
-const createMockKeyboardEvent = (key: string): React.KeyboardEvent<HTMLDivElement> => ({
-  key,
-  preventDefault: vi.fn(),
-} as unknown as React.KeyboardEvent<HTMLDivElement>);
+const createMockKeyboardEvent = (
+  key: string,
+): React.KeyboardEvent<HTMLDivElement> =>
+  ({
+    key,
+    preventDefault: vi.fn(),
+  }) as unknown as React.KeyboardEvent<HTMLDivElement>;
 
 describe('useTimelineNavigation', () => {
   const mockItems = [
@@ -210,7 +213,7 @@ describe('useTimelineNavigation', () => {
     act(() => {
       result.current.handleKeySelection(createMockKeyboardEvent('ArrowDown'));
     });
-    
+
     act(() => {
       result.current.handleKeySelection(createMockKeyboardEvent('Home'));
     });
@@ -333,7 +336,7 @@ describe('useTimelineNavigation', () => {
 
   it('should disable card alignment scrolling in horizontal mode when slideshow is running', () => {
     const mockScrollIntoView = vi.fn();
-    
+
     // Mock document.getElementById to return an element with scrollIntoView method
     const originalGetElementById = document.getElementById;
     document.getElementById = vi.fn(() => ({
@@ -366,7 +369,7 @@ describe('useTimelineNavigation', () => {
 
   it('should allow card alignment scrolling in horizontal mode when slideshow is not running', async () => {
     const mockScrollIntoView = vi.fn();
-    
+
     // Mock document.getElementById to return an element with scrollIntoView method and closest method
     const originalGetElementById = document.getElementById;
     document.getElementById = vi.fn(() => ({
@@ -392,7 +395,7 @@ describe('useTimelineNavigation', () => {
 
     // Wait for requestAnimationFrame to complete
     await act(async () => {
-      await new Promise(resolve => requestAnimationFrame(resolve));
+      await new Promise((resolve) => requestAnimationFrame(resolve));
     });
 
     // Should update timeline position and call scrollIntoView when slideshow is not running

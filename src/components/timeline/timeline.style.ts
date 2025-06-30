@@ -21,10 +21,10 @@ export const Wrapper = styled.div<{
   theme?: Theme;
   $translate?: string;
 }>`
-  -webkit-transform: ${props => getTransform(props.$translate)};
-  -moz-transform: ${props => getTransform(props.$translate)};
-  -ms-transform: ${props => getTransform(props.$translate)};
-  transform: ${props => getTransform(props.$translate)};
+  -webkit-transform: ${(props) => getTransform(props.$translate)};
+  -moz-transform: ${(props) => getTransform(props.$translate)};
+  -ms-transform: ${(props) => getTransform(props.$translate)};
+  transform: ${(props) => getTransform(props.$translate)};
   ${transitionMixin}
   display: flex;
   flex-direction: column;

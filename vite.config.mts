@@ -27,6 +27,8 @@ export default defineConfig({
     },
     // Adding open option to automatically open the browser
     open: true,
+    // Set host to true to listen on all addresses
+    host: true,
   },
   // Adding resolve.alias for better path management
   resolve: {
