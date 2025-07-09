@@ -71,7 +71,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   // Convert cardDetailedText to the expected string or string[] format
   const formatDetailedText = () => {
     if (Array.isArray(cardDetailedText)) {
-      return cardDetailedText.map((text) =>
+      return cardDetailedText.map(text =>
         typeof text === 'string' ? text : String(text ?? ''),
       );
     }
@@ -84,7 +84,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   };
 
   return (
-    <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
+    <Wrapper ref={wrapperRef} className={modeLower} data-testid='timeline-item'>
       {canShowTimelineContent && (
         <TimelineCardPortal
           containerClass={containerClass}
@@ -132,7 +132,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
 
       <TimelineTitleContainer
         className={titleClass}
-        data-testid="timeline-title"
+        data-testid='timeline-title'
       >
         <TimelineItemTitle
           title={title}

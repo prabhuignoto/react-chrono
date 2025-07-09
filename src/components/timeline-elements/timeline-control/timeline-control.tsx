@@ -127,9 +127,9 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
   }, [slideShowRunning, slideShowEnabled]);
 
   return (
-    <TimelineControlContainer key="control-wrapper">
+    <TimelineControlContainer key='control-wrapper'>
       {/* Visually hidden status information for screen readers */}
-      <ScreenReaderOnly as="output" aria-live="polite">
+      <ScreenReaderOnly as='output' aria-live='polite'>
         {positionStatus}
         {slideshowStatus && ` ${slideshowStatus}`}
       </ScreenReaderOnly>
@@ -137,8 +137,8 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
       <TimelineNavWrapper
         className={cls('timeline-controls', classNames?.controls)}
         theme={theme}
-        aria-label="Timeline Navigation"
-        role="toolbar"
+        aria-label='Timeline Navigation'
+        role='toolbar'
       >
         {/* jump to first */}
         {disableInteraction ? null : (
@@ -151,10 +151,10 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 title={jumpToFirstTitle}
                 aria-label={jumpToFirstTitle}
                 aria-disabled={disableLeft}
-                aria-controls="timeline-main-wrapper"
+                aria-controls='timeline-main-wrapper'
                 tabIndex={!disableLeft ? 0 : -1}
                 rotate={rotate ? 'TRUE' : 'FALSE'}
-                data-test-id="jump-to-first"
+                data-test-id='jump-to-first'
               >
                 <ChevronsLeftIcon />
               </TimelineNavButton>
@@ -169,10 +169,10 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 title={previousTitle}
                 aria-label={previousTitle}
                 aria-disabled={disableLeft}
-                aria-controls="timeline-main-wrapper"
+                aria-controls='timeline-main-wrapper'
                 tabIndex={!disableLeft ? 0 : -1}
                 rotate={rotate ? 'TRUE' : 'FALSE'}
-                data-test-id="previous"
+                data-test-id='previous'
               >
                 <ChevronLeft />
               </TimelineNavButton>
@@ -187,10 +187,10 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 title={nextTitle}
                 aria-label={nextTitle}
                 aria-disabled={disableRight}
-                aria-controls="timeline-main-wrapper"
+                aria-controls='timeline-main-wrapper'
                 rotate={rotate ? 'TRUE' : 'FALSE'}
                 tabIndex={!disableRight ? 0 : -1}
-                data-test-id="next"
+                data-test-id='next'
               >
                 <ChevronRightIcon />
               </TimelineNavButton>
@@ -205,10 +205,10 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 title={jumpToLastTitle}
                 aria-label={jumpToLastTitle}
                 aria-disabled={disableRight}
-                aria-controls="timeline-main-wrapper"
+                aria-controls='timeline-main-wrapper'
                 tabIndex={!disableRight ? 0 : -1}
                 rotate={rotate ? 'TRUE' : 'FALSE'}
-                data-test-id="jump-to-last"
+                data-test-id='jump-to-last'
               >
                 <ChevronsRightIcon />
               </TimelineNavButton>
@@ -217,17 +217,17 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
         )}
 
         {/* slideshow button */}
-        <div className="nav-item">
+        <div className='nav-item'>
           {slideShowEnabled && (
             <TimelineNavButton
               theme={theme}
               onClick={slideShowRunning ? handlePause : handlePlay}
               title={playOrPauseTile}
               tabIndex={0}
-              aria-controls="timeline-main-wrapper"
+              aria-controls='timeline-main-wrapper'
               aria-label={playOrPauseTile}
               aria-pressed={slideShowRunning ? 'true' : 'false'}
-              data-test-id="play-pause"
+              data-test-id='play-pause'
             >
               {slideShowRunning ? <StopIcon /> : <ReplayIcon />}
             </TimelineNavButton>
@@ -242,10 +242,10 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
               onClick={onToggleDarkMode}
               title={isDark ? buttonTexts?.light : buttonTexts?.dark}
               tabIndex={0}
-              aria-controls="timeline-main-wrapper"
+              aria-controls='timeline-main-wrapper'
               aria-label={isDark ? buttonTexts?.light : buttonTexts?.dark}
               aria-pressed={isDark ? 'true' : 'false'}
-              data-test-id="dark-toggle"
+              data-test-id='dark-toggle'
               $active={isDark}
             >
               {isDark ? <SunIcon /> : <MoonIcon />}

@@ -15,7 +15,7 @@ describe('LayoutSwitcher Component', () => {
       <LayoutSwitcher
         onUpdateTimelineMode={onUpdateTimelineMode}
         theme={theme}
-        mode="VERTICAL"
+        mode='VERTICAL'
         isDarkMode={isDarkMode}
         position={position}
         isMobile={false}
@@ -41,7 +41,7 @@ describe('LayoutSwitcher Component', () => {
       <LayoutSwitcher
         onUpdateTimelineMode={onUpdateTimelineMode}
         theme={theme}
-        mode="HORIZONTAL"
+        mode='HORIZONTAL'
         isDarkMode={isDarkMode}
         position={position}
         isMobile={false}

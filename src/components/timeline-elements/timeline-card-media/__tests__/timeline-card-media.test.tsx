@@ -23,11 +23,11 @@ describe('Timeline Card media', () => {
           type: 'IMAGE',
         }}
         detailsText={refComponent}
-        id="1"
+        id='1'
         hideMedia={false}
         onMediaStateChange={() => {}}
-        title="Image title"
-        content="This is another test"
+        title='Image title'
+        content='This is another test'
         cardHeight={300}
         active
       />,
@@ -55,8 +55,8 @@ describe('Timeline Card media', () => {
           type: 'IMAGE',
         }}
         detailsText={refComponent}
-        content="This is another test"
-        id="1"
+        content='This is another test'
+        id='1'
         hideMedia={false}
         onMediaStateChange={() => {}}
       />,
@@ -78,8 +78,8 @@ describe('Timeline Card media', () => {
           type: 'VIDEO',
         }}
         detailsText={refComponent}
-        content="This is another test"
-        id="1"
+        content='This is another test'
+        id='1'
         hideMedia={false}
         onMediaStateChange={() => {}}
       />,
@@ -101,7 +101,7 @@ describe('Timeline Card media', () => {
           type: 'VIDEO',
         }}
         detailsText={refComponent}
-        id="1"
+        id='1'
         hideMedia={false}
         onMediaStateChange={() => {}}
       />,
@@ -129,9 +129,9 @@ describe('Timeline Card media', () => {
           type: 'IMAGE',
         }}
         detailsText={refComponent}
-        id="1"
-        content="This is another test"
-        title="Image title"
+        id='1'
+        content='This is another test'
+        title='Image title'
         hideMedia={false}
         onMediaStateChange={() => {}}
       />,
@@ -157,7 +157,7 @@ describe('Timeline Card media', () => {
           type: 'IMAGE',
         }}
         detailsText={refComponent}
-        id="1"
+        id='1'
         hideMedia={false}
         onMediaStateChange={() => {}}
         content={<div>Custom content</div>}
@@ -183,11 +183,11 @@ describe('Timeline Card media', () => {
           type: 'IMAGE',
         }}
         detailsText={refComponent}
-        id="1"
+        id='1'
         hideMedia={false}
         onMediaStateChange={() => {}}
-        title="Image title"
-        content="This is another test"
+        title='Image title'
+        content='This is another test'
       />,
       {
         providerProps: {
@@ -215,7 +215,7 @@ describe('Timeline Card media', () => {
           type: 'IMAGE',
         }}
         detailsText={refComponent}
-        id="1"
+        id='1'
         hideMedia={false}
         onMediaStateChange={() => {}}
       />,

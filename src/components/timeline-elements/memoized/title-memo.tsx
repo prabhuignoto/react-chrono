@@ -35,7 +35,7 @@ const TitleMemoComponent = ({
       data-class={classString}
     >
       {url ? (
-        <CardTitleAnchor href={url} target="_blank" rel="noreferrer">
+        <CardTitleAnchor href={url} target='_blank' rel='noreferrer'>
           {title}
         </CardTitleAnchor>
       ) : (

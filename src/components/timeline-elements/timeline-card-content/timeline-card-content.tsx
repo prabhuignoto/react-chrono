@@ -332,7 +332,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       const toggleShowMore = useCallback(() => {
         if ((active && paused) || !slideShowActive) {
-          setShowMore((prev) => !prev);
+          setShowMore(prev => !prev);
           onShowMore?.();
           // Use setTimeout to ensure the DOM has updated before focusing
           setTimeout(() => {
@@ -408,14 +408,14 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       return (
         <TimelineItemContentWrapper
-          as="article"
+          as='article'
           aria-label={accessibleLabel}
           ref={containerRef}
           onClick={handleCardClick}
           className={`timeline-card-content ${active ? 'active' : ''} ${
             classNames?.card ?? ''
           }`}
-          data-testid="timeline-card-content"
+          data-testid='timeline-card-content'
           data-item-id={id}
           $active={active}
           $branchDir={branchDir}

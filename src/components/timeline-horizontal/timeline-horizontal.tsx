@@ -73,7 +73,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
           item.visible ? 'visible' : '',
           'timeline-horz-item-container',
         )}
-        as="li"
+        as='li'
         aria-current={item.active ? 'true' : undefined}
       >
         <TimelineCard
@@ -117,9 +117,9 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     <TimelineHorizontalWrapper
       className={wrapperClass}
       flipLayout={flipLayout}
-      data-testid="timeline-collection"
-      as="ul"
-      aria-label="Timeline"
+      data-testid='timeline-collection'
+      as='ul'
+      aria-label='Timeline'
     >
       {timelineItems}
     </TimelineHorizontalWrapper>

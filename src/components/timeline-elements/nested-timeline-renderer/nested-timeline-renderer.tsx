@@ -21,7 +21,7 @@ const NestedTimelineRenderer: React.FC<NestedTimelineRendererProps> = ({
 
   // Dynamically import the Timeline component only when needed
   React.useEffect(() => {
-    import('../../timeline/timeline').then((module) => {
+    import('../../timeline/timeline').then(module => {
       setTimelineComponent(() => module.default);
     });
   }, []);

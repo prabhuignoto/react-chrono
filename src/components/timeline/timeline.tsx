@@ -131,7 +131,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     handlePreviousMatch,
     handleSearchKeyDown,
   } = useTimelineSearch({
-    items: items.map((item) => ({ ...item, wrapperId: id })),
+    items: items.map(item => ({ ...item, wrapperId: id })),
     onTimelineUpdated,
     handleTimelineItemClick,
   });
@@ -258,7 +258,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       cardPositionHorizontal={cardPositionHorizontal}
       theme={theme}
       onMouseDown={() => setHasFocus(true)}
-      onKeyUp={(evt) => {
+      onKeyUp={evt => {
         if (evt.key === 'Escape') {
           onPaused?.();
         }
@@ -314,8 +314,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         ref={timelineMainRef}
         $scrollable={canScrollTimeline}
         className={`${mode.toLowerCase()} timeline-main-wrapper`}
-        id="timeline-main-wrapper"
-        data-testid="timeline-main-wrapper"
+        id='timeline-main-wrapper'
+        data-testid='timeline-main-wrapper'
         theme={theme}
         mode={mode}
         position={toolbarPosition}

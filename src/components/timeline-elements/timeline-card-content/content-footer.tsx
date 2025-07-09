@@ -64,9 +64,9 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
     <>
       {canShowMore ? (
         <ShowMore
-          className="show-more"
+          className='show-more'
           onPointerDown={handleClick}
-          onKeyUp={(event) => {
+          onKeyUp={event => {
             if (event.key === 'Enter') {
               onExpand();
             }

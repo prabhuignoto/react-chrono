@@ -284,6 +284,9 @@ importers:
       stylelint-config-recommended:
         specifier: ^16.0.0
         version: 16.0.0(stylelint@16.21.0(typescript@5.8.3))
+      stylelint-config-styled-components:
+        specifier: ^0.1.1
+        version: 0.1.1
       stylelint-order:
         specifier: ^7.0.0
         version: 7.0.0(stylelint@16.21.0(typescript@5.8.3))
@@ -6127,6 +6130,9 @@ packages:
     engines: {node: '>=18.12.0'}
     peerDependencies:
       stylelint: ^16.16.0
+
+  stylelint-config-styled-components@0.1.1:
+    resolution: {integrity: sha512-z5Xz/9GmvxO6e/DLzBMwkB85zHxEEjN6K7Cj80Bi+o/9vR9eS3GX3E9VuMnX9WLFYulqbqLtTapGGY28JBiy9Q==}
 
   stylelint-order@7.0.0:
     resolution: {integrity: sha512-rSWxx0KscYfxU02wEskKXES9lkRzuuONMMNkZ7SUc6uiF3tDKm7e+sE0Ax/SBlG4TUf1sp1R6f3/SlsPGmzthg==}
@@ -13413,6 +13419,8 @@ snapshots:
   stylelint-config-recommended@16.0.0(stylelint@16.21.0(typescript@5.8.3)):
     dependencies:
       stylelint: 16.21.0(typescript@5.8.3)
+
+  stylelint-config-styled-components@0.1.1: {}
 
   stylelint-order@7.0.0(stylelint@16.21.0(typescript@5.8.3)):
     dependencies:

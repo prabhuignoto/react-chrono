@@ -29,10 +29,12 @@
     "cypress:ci": "cypress run --config video=false,screenshotOnRunFailure=true",
     "eslint": "eslint src/**/*.{tsx,ts} --no-warn-ignored",
     "fix-js": "eslint src/**/*.{tsx,ts} --fix --no-warn-ignored",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
+    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
     "lint:all": "pnpm eslint && pnpm lint:css && pnpm lint",
-    "lint:css": "stylelint src/**/*style.ts",
+    "lint:css": "stylelint \"src/**/*.{css,scss,ts}\"",
+    "fix-css": "stylelint \"src/**/*.{css,scss,ts}\" --fix",
+    "lint:fix": "pnpm fix-js && pnpm fix-css && pnpm format",
     "find-bugs": "npx tsc --noEmit && pnpm lint:all && pnpm test",
     "find-bugs:full": "./scripts/find-bugs.sh",
     "rollup": "rollup -c rollup.config.mjs",
@@ -46,8 +48,7 @@
     "coveralls": "pnpx coveralls < coverage/lcov.info",
     "size-limit": "pnpm rollup && pnpm size-limit",
     "build": "rollup -c",
-    "build:analyze": "ANALYZE=true rollup -c",
-    "fix-css": "stylelint src/**/*style.ts --fix"
+    "build:analyze": "ANALYZE=true rollup -c"
   },
   "dependencies": {
     "classnames": "^2.5.1",
@@ -149,6 +150,7 @@
     "stylelint": "^16.21.0",
     "stylelint-config-recess-order": "^7.1.0",
     "stylelint-config-recommended": "^16.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
     "stylelint-order": "^7.0.0",
     "typescript": "^5.8.3",
     "typescript-plugin-styled-components": "^3.0.0",
@@ -180,11 +182,15 @@
     }
   ],
   "lint-staged": {
-    "src/components/**/*.{ts,tsx}": [
+    "src/**/*.{js,jsx,ts,tsx}": [
       "prettier --write",
-      "stylelint ./src/**/*style.ts",
-      "eslint ./src/**/*.tsx",
-      "git add"
+      "eslint --fix"
+    ],
+    "src/**/*.{css,scss,ts}": [
+      "stylelint --fix"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
     ]
   },
   "browserslist": [

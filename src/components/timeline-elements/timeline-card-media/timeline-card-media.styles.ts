@@ -32,20 +32,21 @@ export const MediaWrapper = styled.div<{
 }>`
   align-items: flex-start;
   align-self: center;
-  background: ${(p) => (!p.$textOverlay ? p.theme?.cardMediaBgColor : 'none')};
+  background: ${p => (!p.$textOverlay ? p.theme?.cardMediaBgColor : 'none')};
   border-radius: 4px;
   flex-direction: row;
-  height: ${(p) => (p.$textOverlay ? 'calc(100% - 1em)' : '0')};
+  height: ${p => (p.$textOverlay ? 'calc(100% - 1em)' : '0')};
   padding: 0.5em;
-  // pointer-events: ${(p) => (!p.$active && p.$slideShowActive ? 'none' : '')};
+  /* pointer-events: ${p =>
+    !p.$active && p.$slideShowActive ? 'none' : ''}; */
   position: relative;
-  text-align: ${(p) => p.align};
+  text-align: ${p => p.align};
   width: calc(100% - 1em);
   overflow: hidden; /* Ensure content doesn't overflow */
   z-index: ${zIndex.timelineCard + 1}; /* Place media above card content */
 
-  ${(p) => (p.$cardHeight ? `min-height: ${p.$cardHeight}px;` : '')};
-  ${(p) => {
+  ${p => (p.$cardHeight ? `min-height: ${p.$cardHeight}px;` : '')};
+  ${p => {
     if (p.mode === 'HORIZONTAL') {
       return `
         justify-content: flex-start;
@@ -92,10 +93,10 @@ export const CardImage = styled.img<{
   margin-right: auto;
   height: 100%;
   width: 100%;
-  object-fit: ${(p) => p.fit ?? 'cover'};
+  object-fit: ${p => p.fit ?? 'cover'};
   object-position: center;
-  visibility: ${(p) => (p.$visible ? 'visible' : 'hidden')};
-  border-radius: ${(p) => (p.$enableBorderRadius ? '6px' : '0')};
+  visibility: ${p => (p.$visible ? 'visible' : 'hidden')};
+  border-radius: ${p => (p.$enableBorderRadius ? '6px' : '0')};
   position: absolute;
   top: 0;
   left: 0;
@@ -125,7 +126,7 @@ export const MediaDetailsWrapper = styled.div<{
   left: 0;
   right: 0;
   margin-right: auto;
-  width: ${(p) => {
+  width: ${p => {
     switch (p.mode) {
       case 'HORIZONTAL':
       case 'VERTICAL':
@@ -137,7 +138,7 @@ export const MediaDetailsWrapper = styled.div<{
   flex-direction: column;
   flex: 1;
   overflow: hidden;
-  ${(p) => {
+  ${p => {
     if (p.$textInMedia && p.$expandFull) {
       return css`
         height: 100%;
@@ -162,8 +163,8 @@ export const MediaDetailsWrapper = styled.div<{
       `;
     }
   }}
-  position: ${(p) => (p.$absolutePosition ? 'absolute' : 'relative')};
-  ${(p) =>
+  position: ${p => (p.$absolutePosition ? 'absolute' : 'relative')};
+  ${p =>
     p.$absolutePosition
       ? `
     left: 50%;
@@ -184,8 +185,8 @@ export const MediaDetailsWrapper = styled.div<{
     $borderLessCard
       ? `border-radius: 6px; box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);`
       : ``}
-  --rc-gradient-color: ${(p) => p.$gradientColor};
-  ${(p) => (p.$gradientColor ? linearGradient : null)}
+  --rc-gradient-color: ${p => p.$gradientColor};
+  ${p => (p.$gradientColor ? linearGradient : null)}
 `;
 
 export const ErrorMessage = styled.span`
@@ -213,8 +214,8 @@ export const DetailsTextWrapper = styled.div<{
   display: flex;
   transition: height 0.5s ease;
   width: calc(100%);
-  background: ${(p) => p.background};
-  color: ${(p) => p.theme?.cardDetailsColor};
+  background: ${p => p.background};
+  color: ${p => p.theme?.cardDetailsColor};
   padding: 0.5rem;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -224,7 +225,7 @@ export const DetailsTextWrapper = styled.div<{
 
   ${ScrollBar}
 
-  ${(p) => {
+  ${p => {
     if (p.$expandFull) {
       return `
         overflow: auto;
@@ -236,7 +237,7 @@ export const DetailsTextWrapper = styled.div<{
     }
   }}
 
-  ${(p) =>
+  ${p =>
     p.$show
       ? `
     height: 100%;`
@@ -244,7 +245,7 @@ export const DetailsTextWrapper = styled.div<{
     height: 0;
   `}
 
-  ${(p) => !p.$expandFull && linearGradient}
+  ${p => !p.$expandFull && linearGradient}
 `;
 
 export const CardMediaHeader = styled.div`

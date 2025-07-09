@@ -78,9 +78,9 @@ const ShapeBorderStyle = (p: Pick<ShapeModel, '$timelinePointShape'>) => {
 export const Shape = styled.div<ShapeModel>`
   ${ShapeBorderStyle}
   cursor: pointer;
-  height: ${(p) => p.dimension}px;
-  width: ${(p) => p.dimension}px;
-  transform: ${(p) =>
+  height: ${p => p.dimension}px;
+  width: ${p => p.dimension}px;
+  transform: ${p =>
     p.$timelinePointShape === 'diamond' ? 'rotate(45deg)' : ''};
   transition: all 0.2s ease-in-out;
   position: relative;
@@ -97,8 +97,8 @@ export const Shape = styled.div<ShapeModel>`
     position: absolute;
     top: 50%;
     left: 50%;
-    width: ${(p) => (p.dimension ? Math.round(p.dimension * 0.5) : 10)}px;
-    height: ${(p) => (p.dimension ? Math.round(p.dimension * 0.5) : 10)}px;
+    width: ${p => (p.dimension ? Math.round(p.dimension * 0.5) : 10)}px;
+    height: ${p => (p.dimension ? Math.round(p.dimension * 0.5) : 10)}px;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     transform: scale(0) translate(-50%, -50%);
@@ -114,13 +114,13 @@ export const Shape = styled.div<ShapeModel>`
 
   /* Improve focus styles for accessibility */
   &:focus-visible {
-    outline: 3px solid ${(p) => p.theme?.primary ?? '#007bff'};
+    outline: 3px solid ${p => p.theme?.primary ?? '#007bff'};
     outline-offset: 2px;
   }
 
   /* Add subtle hover effect */
   &:hover:not(:disabled) {
-    transform: ${(p) =>
+    transform: ${p =>
       p.$timelinePointShape === 'diamond'
         ? 'rotate(45deg) scale(1.08)'
         : 'scale(1.08)'};
@@ -128,7 +128,7 @@ export const Shape = styled.div<ShapeModel>`
   }
 
   &:active:not(:disabled) {
-    transform: ${(p) =>
+    transform: ${p =>
       p.$timelinePointShape === 'diamond'
         ? 'rotate(45deg) scale(0.95)'
         : 'scale(0.95)'};
@@ -136,14 +136,14 @@ export const Shape = styled.div<ShapeModel>`
 
   &.active {
     &.using-icon {
-      transform: ${(p) =>
+      transform: ${p =>
         p.$timelinePointShape === 'diamond'
           ? 'rotate(45deg) scale(1.1)'
           : 'scale(1.1)'};
       animation: ${pulse} 1.5s infinite;
     }
     &:not(.using-icon) {
-      transform: ${(p) =>
+      transform: ${p =>
         p.$timelinePointShape === 'diamond' ? 'rotate(45deg)' : ''};
     }
 
@@ -151,8 +151,8 @@ export const Shape = styled.div<ShapeModel>`
       ${ShapeBorderStyle}
       content: '';
       display: block;
-      height: ${(p) => (p.dimension ? Math.round(p.dimension * 0.75) : 20)}px;
-      width: ${(p) => (p.dimension ? Math.round(p.dimension * 0.75) : 20)}px;
+      height: ${p => (p.dimension ? Math.round(p.dimension * 0.75) : 20)}px;
+      width: ${p => (p.dimension ? Math.round(p.dimension * 0.75) : 20)}px;
       left: 50%;
       position: absolute;
       top: 50%;
@@ -167,7 +167,7 @@ export const Shape = styled.div<ShapeModel>`
 
     &.active {
       background: ${(p: ShapeModel) => p.theme?.secondary};
-      border: ${(p) => (p.dimension ? Math.round(p.dimension * 0.2) : '3')}px
+      border: ${p => (p.dimension ? Math.round(p.dimension * 0.2) : '3')}px
         solid ${(p: ShapeModel) => p.theme?.primary};
       box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
       animation: ${pulse} 1.5s infinite;
@@ -180,7 +180,7 @@ export const Shape = styled.div<ShapeModel>`
   }
 
   &.using-icon {
-    background: ${(p) => p.theme?.iconBackgroundColor};
+    background: ${p => p.theme?.iconBackgroundColor};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -223,12 +223,12 @@ export const TimelineContentContainer = styled.div<{
   animation: ${show} 0.25s ease-in;
 
   outline: 2px solid
-    ${(p) => (p.$highlight && p.$active ? p.theme?.primary : 'transparent')};
+    ${p => (p.$highlight && p.$active ? p.theme?.primary : 'transparent')};
 
   margin: 1rem;
 
   &.horizontal {
-    min-width: ${(p) => p.$cardWidth}px;
+    min-width: ${p => p.$cardWidth}px;
   }
 
   &.vertical {
@@ -252,7 +252,7 @@ export const CardContainer = styled.div<{ theme: Theme }>`
   max-width: 350px;
   margin: 0.5rem;
   padding: 1rem;
-  background: ${(p) => p.theme.cardBgColor};
+  background: ${p => p.theme.cardBgColor};
   border-radius: 8px;
   -webkit-box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.06),

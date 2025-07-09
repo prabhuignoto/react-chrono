@@ -19,7 +19,7 @@ const ShowOrHideTextButtonMemo = memo<ShowHideTextButtonModel>(
         onPointerDown={onToggle}
         theme={theme}
         tabIndex={0}
-        onKeyDown={(ev) => ev.key === 'Enter' && onToggle?.(ev)}
+        onKeyDown={ev => ev.key === 'Enter' && onToggle?.(ev)}
         aria-label={label}
         title={label}
       >

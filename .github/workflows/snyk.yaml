@@ -1,47 +1,28 @@
-name: Snyk Security Scan
+# Legacy Snyk Workflow - DEPRECATED
+# This workflow has been integrated into the modern CI pipeline and dependency management
+# Security scanning is now handled by ci.yml and dependency-management.yml
+
+name: Snyk Security Scan (Legacy)
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch:  # Manual trigger only
 
 jobs:
-  snyk-security-scan:
+  legacy-notice:
     runs-on: ubuntu-latest
-    name: Snyk Security Scan
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v4
-        with:
-          version: latest
-
-      - name: Cache PNPM dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Cache Snyk cache folder
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/snyk
-          key: ${{ runner.os }}-snyk-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-snyk-
-
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_SECRET }}
-        with:
-          args: --severity-threshold=high
+      - name: Migration Notice
+        run: |
+          echo "⚠️  This workflow has been integrated into the modern CI pipeline"
+          echo "🔄 Security scanning is now handled by:"
+          echo "   - CI Pipeline (ci.yml) - for PR and push security checks"
+          echo "   - Dependency Management (dependency-management.yml) - for comprehensive security audits"
+          echo ""
+          echo "📚 See GITHUB_ACTIONS_DOCUMENTATION.md for details"
+          echo ""
+          echo "Enhanced security features:"
+          echo "- Integrated with CI pipeline for faster feedback"
+          echo "- Weekly automated security audits"
+          echo "- Vulnerability reporting with PR comments"
+          echo "- License compliance checking"
+          echo "- Automated dependency updates with security fixes"

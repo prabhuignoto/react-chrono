@@ -1,5 +1,60 @@
 {
+  "extends": [
+    "stylelint-config-recommended"
+  ],
   "customSyntax": "postcss-styled-syntax",
-  "rules": {},
-  "ignoreFiles": ["node_modules/**/*", "dist/**/*"]
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "tailwind",
+          "apply",
+          "variants",
+          "responsive",
+          "screen",
+          "layer"
+        ]
+      }
+    ],
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": ["composes"]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["global"]
+      }
+    ],
+    "no-empty-source": null,
+    "no-descending-specificity": null,
+    "no-duplicate-selectors": null,
+    "declaration-block-no-duplicate-properties": [
+      true,
+      {
+        "ignore": ["consecutive-duplicates"]
+      }
+    ],
+    "declaration-block-no-shorthand-property-overrides": null,
+    "property-no-vendor-prefix": null,
+    "value-no-vendor-prefix": null,
+    "declaration-property-value-no-unknown": null
+  },
+  "ignoreFiles": [
+    "node_modules/**/*",
+    "dist/**/*",
+    "coverage/**/*",
+    "build/**/*",
+    "src/demo/**/*",
+    "src/examples/**/*"
+  ]
 }

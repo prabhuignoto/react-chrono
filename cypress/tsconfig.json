@@ -1,6 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    // Cypress-specific overrides
     "types": [
       "cypress",
       "node"
@@ -8,14 +9,28 @@
     "target": "ES2022",
     "lib": ["ES2022", "DOM"],
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "rootDir": ".."
+    
+    // Cypress-specific paths
+    "baseUrl": "..",
+    "paths": {
+      "@/*": ["../src/*"],
+      "@components/*": ["../src/components/*"],
+      "@models/*": ["../src/models/*"],
+      "@utils/*": ["../src/utils/*"],
+      "@hooks/*": ["../src/hooks/*"],
+      "@effects/*": ["../src/effects/*"],
+      "@styles/*": ["../src/styles/*"],
+      "@types/*": ["../src/types/*"],
+      "@demo/*": ["../src/demo/*"],
+      "@examples/*": ["../src/examples/*"]
+    }
   },
   "include": [
     "../node_modules/cypress",
@@ -27,6 +42,8 @@
   ],
   "exclude": [
     "../node_modules",
-    "../dist"
+    "../dist",
+    "../coverage",
+    "../build"
   ]
 }

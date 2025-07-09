@@ -395,7 +395,7 @@ describe('useTimelineNavigation', () => {
 
     // Wait for requestAnimationFrame to complete
     await act(async () => {
-      await new Promise((resolve) => requestAnimationFrame(resolve));
+      await new Promise(resolve => requestAnimationFrame(resolve));
     });
 
     // Should update timeline position and call scrollIntoView when slideshow is not running

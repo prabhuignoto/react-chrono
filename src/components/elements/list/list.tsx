@@ -39,7 +39,7 @@ const List: FunctionComponent<ListModel> = ({
    * Memoized list items with generated unique IDs
    */
   const listItems = useMemo(
-    () => items.map((item) => ({ id: getUniqueID(), ...item })),
+    () => items.map(item => ({ id: getUniqueID(), ...item })),
     [items],
   );
 

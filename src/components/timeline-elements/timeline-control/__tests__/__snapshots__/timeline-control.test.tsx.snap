@@ -3,15 +3,15 @@
 exports[`TimelineControl > should render 1`] = `
 <div>
   <div
-    class="sc-jwTyAe irHkHE"
+    class="timeline-controlstyles__TimelineControlContainer-sc-1apb8f9-5 uoJtg"
   >
     <output
       aria-live="polite"
-      class="sc-bRKDuR hvZuQl"
+      class="timeline-controlstyles__ScreenReaderOnly-sc-1apb8f9-0 ckULKw"
     />
     <div
       aria-label="Timeline Navigation"
-      class="sc-hvigdm dNLVFW timeline-controls controls"
+      class="timeline-controlstyles__TimelineNavWrapper-sc-1apb8f9-1 hpJRYg timeline-controls controls"
       role="toolbar"
     >
       <div
@@ -21,7 +21,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="first"
-          class="sc-ggWZvA iBZHQz"
+          class="timeline-controlstyles__TimelineNavButton-sc-1apb8f9-3 jhdwku"
           data-test-id="jump-to-first"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -56,7 +56,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="previous"
-          class="sc-ggWZvA iBZHQz"
+          class="timeline-controlstyles__TimelineNavButton-sc-1apb8f9-3 jhdwku"
           data-test-id="previous"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -88,7 +88,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="next"
-          class="sc-ggWZvA iBZHQz"
+          class="timeline-controlstyles__TimelineNavButton-sc-1apb8f9-3 jhdwku"
           data-test-id="next"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -120,7 +120,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="last"
-          class="sc-ggWZvA iBZHQz"
+          class="timeline-controlstyles__TimelineNavButton-sc-1apb8f9-3 jhdwku"
           data-test-id="jump-to-last"
           mode="VERTICAL_ALTERNATING"
           rotate="TRUE"
@@ -158,7 +158,7 @@ exports[`TimelineControl > should render 1`] = `
           aria-controls="timeline-main-wrapper"
           aria-label="dark"
           aria-pressed="false"
-          class="sc-ggWZvA ecZfBa"
+          class="timeline-controlstyles__TimelineNavButton-sc-1apb8f9-3 jfANAP"
           data-test-id="dark-toggle"
           tabindex="0"
           title="dark"

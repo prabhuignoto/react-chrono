@@ -231,13 +231,13 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   // Render the complete timeline item structure
   return (
     <VerticalItemWrapper
-      as="li"
+      as='li'
       $alternateCards={alternateCards}
       $cardHeight={isNested ? nestedCardHeight : cardHeight}
       $cardLess={cardLess}
       $isNested={isNested}
       className={verticalItemClass}
-      data-testid="vertical-item-row"
+      data-testid='vertical-item-row'
       data-item-id={id}
       key={id}
       ref={contentRef}

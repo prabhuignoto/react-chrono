@@ -87,3 +87,6 @@ export interface Theme {
   darkToggleActiveBorderColor?: string;
   darkToggleGlowColor?: string;
 }
+
+// Default export for module compatibility
+export default Theme; 

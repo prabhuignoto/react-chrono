@@ -153,7 +153,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
         $isMobile={isMobile} // Pass mobile state
         // --- Standard React props ---
         className={className} // 'left' or 'right'
-        data-testid="tree-leaf" // Test ID for the wrapper
+        data-testid='tree-leaf' // Test ID for the wrapper
       >
         {/* Container is a button for accessibility and click handling */}
         <TimelinePointContainer
@@ -163,7 +163,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
           className={`${className} timeline-vertical-circle`} // Combine classes
           {...clickHandlerProps} // Spread the memoized click handler props
           ref={circleRef} // Attach ref for position measurement
-          data-testid="tree-leaf-click" // Test ID for the clickable element
+          data-testid='tree-leaf-click' // Test ID for the clickable element
           aria-label={timelinePointLabel} // Accessibility label
           aria-disabled={disableClickOnCircle ?? disableTimelinePoint} // Disable button if needed
           disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
@@ -177,7 +177,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
             $timelinePointShape={timelinePointShape} // Controls the shape ('circle', 'square')
             // --- Standard React props ---
             className={circleClass} // Apply 'active' and 'using-icon' classes
-            aria-hidden="true" // Hide from screen readers as it's decorative
+            aria-hidden='true' // Hide from screen readers as it's decorative
           >
             {iconChild}
           </Shape>

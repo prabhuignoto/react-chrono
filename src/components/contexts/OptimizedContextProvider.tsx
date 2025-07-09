@@ -34,7 +34,7 @@ interface OptimizedContextProviderProps extends Omit<ContextProps, 'children'> {
 
 export const OptimizedContextProvider: FunctionComponent<
   OptimizedContextProviderProps
-> = (props) => {
+> = props => {
   const {
     cardHeight = 200,
     cardLess = false,

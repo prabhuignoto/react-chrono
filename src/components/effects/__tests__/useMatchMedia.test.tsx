@@ -16,7 +16,7 @@ function TestComponent({
 }) {
   const matches = useMatchMedia(query, options);
   return (
-    <div data-testid="result">{matches ? 'Matches' : 'Does not match'}</div>
+    <div data-testid='result'>{matches ? 'Matches' : 'Does not match'}</div>
   );
 }
 
@@ -29,7 +29,7 @@ describe('useMatchMedia', () => {
     addEventListenerSpy = vi.fn();
     removeEventListenerSpy = vi.fn();
 
-    matchMediaMock = vi.fn().mockImplementation((query) => ({
+    matchMediaMock = vi.fn().mockImplementation(query => ({
       matches: query === '(min-width: 800px)',
       addEventListener: addEventListenerSpy,
       removeEventListener: removeEventListenerSpy,
@@ -48,28 +48,28 @@ describe('useMatchMedia', () => {
 
   it('returns true if the query matches', () => {
     const { getByTestId } = render(
-      <TestComponent query="(min-width: 800px)" />,
+      <TestComponent query='(min-width: 800px)' />,
     );
     expect(getByTestId('result')).toHaveTextContent('Matches');
   });
 
   it('returns false if the query does not match', () => {
     const { getByTestId } = render(
-      <TestComponent query="(min-width: 1000px)" />,
+      <TestComponent query='(min-width: 1000px)' />,
     );
     expect(getByTestId('result')).toHaveTextContent('Does not match');
   });
 
   it('returns false if the hook is disabled', () => {
     const { getByTestId } = render(
-      <TestComponent query="(min-width: 800px)" options={{ enabled: false }} />,
+      <TestComponent query='(min-width: 800px)' options={{ enabled: false }} />,
     );
     expect(getByTestId('result')).toHaveTextContent('Does not match');
   });
 
   it('calls onMatch callback when query matches', () => {
     const onMatch = vi.fn();
-    render(<TestComponent query="(min-width: 800px)" options={{ onMatch }} />);
+    render(<TestComponent query='(min-width: 800px)' options={{ onMatch }} />);
     expect(onMatch).toHaveBeenCalledTimes(1);
   });
 
@@ -81,7 +81,7 @@ describe('useMatchMedia', () => {
     });
 
     const { getByTestId } = render(
-      <TestComponent query="(min-width: 800px)" />,
+      <TestComponent query='(min-width: 800px)' />,
     );
 
     act(() => {
@@ -96,7 +96,7 @@ describe('useMatchMedia', () => {
 
     const { getByTestId } = render(
       <TestComponent
-        query="(min-width: 800px)"
+        query='(min-width: 800px)'
         options={{ debounceDelay: 100 }}
       />,
     );
@@ -125,7 +125,7 @@ describe('useMatchMedia', () => {
     });
 
     const { getByTestId, unmount } = render(
-      <TestComponent query="(min-width: 800px)" />,
+      <TestComponent query='(min-width: 800px)' />,
     );
 
     expect(getByTestId('result')).toHaveTextContent('Does not match');
@@ -141,7 +141,7 @@ describe('useMatchMedia', () => {
 
     const { getByTestId } = render(
       <TestComponent
-        query="(min-width: 800px)"
+        query='(min-width: 800px)'
         options={{ debounceDelay: 2000 }} // Long delay to test maxWait
       />,
     );
@@ -161,9 +161,9 @@ describe('useMatchMedia', () => {
   });
 
   it('handles cleanup on query change', () => {
-    const { rerender } = render(<TestComponent query="(min-width: 800px)" />);
+    const { rerender } = render(<TestComponent query='(min-width: 800px)' />);
 
-    rerender(<TestComponent query="(min-width: 1000px)" />);
+    rerender(<TestComponent query='(min-width: 1000px)' />);
 
     expect(removeEventListenerSpy).toHaveBeenCalled();
   });

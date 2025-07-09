@@ -46,15 +46,15 @@ export const PopoverHolder = styled.div<{
   overflow-y: auto;
   padding: 0.5rem;
   position: absolute;
-  ${(p) => (p.$position === 'bottom' ? `bottom: 3.5rem` : `top: 4rem`)};
-  ${(p) => (p.$isMobile ? 'left: 4px;' : '')};
+  ${p => (p.$position === 'bottom' ? `bottom: 3.5rem` : `top: 4rem`)};
+  ${p => (p.$isMobile ? 'left: 4px;' : '')};
   width: ${({ $isMobile, $width = 300 }) =>
     $isMobile ? '90%' : `${$width}px`};
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transition:
     opacity 0.2s ease-in-out,
     transform 0.2s ease-in-out;
-  transform: ${(p) => (p.$visible ? 'translateY(0)' : 'translateY(-10px)')};
+  transform: ${p => (p.$visible ? 'translateY(0)' : 'translateY(-10px)')};
   z-index: ${zIndex.popover}; /* Use standardized z-index for popovers */
 `;
 
@@ -73,7 +73,7 @@ export const Selecter = styled.div<{
   box-shadow: ${({ $open, $theme }) => getInteractiveShadow($theme, $open)};
   cursor: pointer;
   justify-content: space-between;
-  padding: ${(p) => (p.$isMobile ? '0.4rem' : `0.4rem 0.5rem`)};
+  padding: ${p => (p.$isMobile ? '0.4rem' : `0.4rem 0.5rem`)};
   user-select: none;
   margin-right: 0.5rem;
   transition:

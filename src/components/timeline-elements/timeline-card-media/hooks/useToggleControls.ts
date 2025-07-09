@@ -9,13 +9,13 @@ export const useToggleControls = () => {
   const [showText, setShowText] = useState(true);
 
   const toggleExpand = useCallback(() => {
-    setExpandDetails((prev) => !prev);
+    setExpandDetails(prev => !prev);
     setShowText(true);
   }, []);
 
   const toggleText = useCallback(() => {
     setExpandDetails(false);
-    setShowText((prev) => !prev);
+    setShowText(prev => !prev);
   }, []);
 
   return {

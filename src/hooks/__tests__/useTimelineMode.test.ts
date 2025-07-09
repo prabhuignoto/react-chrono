@@ -116,7 +116,7 @@ describe('useTimelineMode', () => {
       'HORIZONTAL_ALL',
     ];
 
-    modes.forEach((mode) => {
+    modes.forEach(mode => {
       act(() => {
         result.current.handleTimelineUpdate(mode);
       });

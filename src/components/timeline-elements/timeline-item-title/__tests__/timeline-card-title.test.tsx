@@ -7,7 +7,7 @@ import TimelineItemTitle from '../timeline-card-title';
 describe('Timeline item title', () => {
   //should render the title
   it('should render the title', () => {
-    const { getByText } = customRender(<TimelineItemTitle title="title" />, {
+    const { getByText } = customRender(<TimelineItemTitle title='title' />, {
       providerProps,
     });
     expect(getByText('title')).toBeInTheDocument();
@@ -15,7 +15,7 @@ describe('Timeline item title', () => {
 
   // should match the snapshot
   it('should match the snapshot', () => {
-    const { container } = customRender(<TimelineItemTitle title="title" />, {
+    const { container } = customRender(<TimelineItemTitle title='title' />, {
       providerProps,
     });
 
@@ -25,7 +25,7 @@ describe('Timeline item title', () => {
   // should render the title with active class
   it('should render the title with active class', () => {
     const { getByText } = customRender(
-      <TimelineItemTitle title="title" active />,
+      <TimelineItemTitle title='title' active />,
       { providerProps },
     );
     expect(getByText('title')).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe('Timeline item title', () => {
   // should render the title with custom class
   it('should render the title with custom class', () => {
     const { getByText } = customRender(
-      <TimelineItemTitle title="title" classString="custom-class" />,
+      <TimelineItemTitle title='title' classString='custom-class' />,
       { providerProps },
     );
     expect(getByText('title')).toBeInTheDocument();
@@ -45,7 +45,7 @@ describe('Timeline item title', () => {
   // should have a custom alignment
   it('should have a custom alignment', async () => {
     const { getByText } = customRender(
-      <TimelineItemTitle title="title" align="left" />,
+      <TimelineItemTitle title='title' align='left' />,
       { providerProps },
     );
     expect(getByText('title')).toBeInTheDocument();

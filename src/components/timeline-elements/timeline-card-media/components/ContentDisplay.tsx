@@ -33,9 +33,9 @@ export interface ContentDisplayProps {
   readonly onDetailsTextRef: (height?: number) => void;
 }
 
-const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
-  props,
-) => {
+const ContentDisplayComponent: React.FunctionComponent<
+  ContentDisplayProps
+> = props => {
   const {
     mode,
     textOverlay,

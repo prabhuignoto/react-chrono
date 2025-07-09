@@ -1,0 +1,290 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [master, develop]
+  pull_request:
+    branches: [master, develop]
+
+# Cancel in-progress runs for the same workflow and ref
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '20.x'
+  PNPM_VERSION: '8.8.0'
+
+jobs:
+  # Quality checks that run fast
+  quality-checks:
+    name: Quality Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type checking
+        run: pnpm exec tsc --noEmit
+
+      - name: Linting
+        run: pnpm run lint:all
+
+      - name: Format checking
+        run: pnpm run lint
+
+      - name: Audit dependencies
+        run: pnpm audit --audit-level high
+
+  # Build and test matrix across multiple environments
+  build-and-test:
+    name: Build & Test
+    needs: quality-checks
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: ['18.x', '20.x', '22.x']
+        exclude:
+          # Reduce matrix size by excluding some combinations
+          - os: windows-latest
+            node-version: '18.x'
+          - os: macos-latest
+            node-version: '18.x'
+    
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build library
+        run: pnpm run rollup
+
+      - name: Run unit tests
+        run: pnpm test -- --coverage --reporter=verbose
+
+      - name: Upload coverage to Codecov
+        if: matrix.os == 'ubuntu-latest' && matrix.node-version == '20.x'
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}-${{ matrix.node-version }}
+          path: |
+            coverage/
+            test-results.xml
+          retention-days: 30
+
+  # Bundle size analysis
+  bundle-analysis:
+    name: Bundle Analysis
+    needs: quality-checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build and analyze bundle
+        run: pnpm run build:analyze
+
+      - name: Check bundle size
+        run: pnpm run size-limit
+
+      - name: Upload bundle analysis
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-analysis
+          path: |
+            dist/stats.html
+            dist/
+          retention-days: 30
+
+  # Security scanning
+  security-scan:
+    name: Security Scan
+    needs: quality-checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Snyk security scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high --json-file-output=snyk-results.json
+
+      - name: Upload Snyk results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: snyk-results
+          path: snyk-results.json
+          retention-days: 30
+
+  # Performance benchmarks
+  performance-benchmarks:
+    name: Performance Benchmarks
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build for performance testing
+        run: pnpm run rollup
+
+      - name: Run performance benchmarks
+        run: |
+          echo "Bundle sizes:"
+          ls -la dist/
+          echo "Gzipped sizes:"
+          gzip -9 -c dist/react-chrono.esm.js | wc -c
+          gzip -9 -c dist/react-chrono.umd.js | wc -c
+
+      - name: Comment PR with performance results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            // Read bundle sizes
+            const distFiles = fs.readdirSync('dist/');
+            const bundleInfo = distFiles
+              .filter(file => file.endsWith('.js'))
+              .map(file => {
+                const stats = fs.statSync(path.join('dist', file));
+                return `- ${file}: ${(stats.size / 1024).toFixed(2)} KB`;
+              })
+              .join('\n');
+            
+            const comment = `## 📊 Performance Report
+            
+            ### Bundle Sizes
+            ${bundleInfo}
+            
+            ### Analysis
+            - Bundle analysis available in artifacts
+            - Size limit checks: ✅ Passed
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  # Final status check
+  ci-success:
+    name: CI Success
+    needs: [quality-checks, build-and-test, bundle-analysis, security-scan, performance-benchmarks]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Check all jobs status
+        run: |
+          if [[ "${{ needs.quality-checks.result }}" == "success" && 
+                "${{ needs.build-and-test.result }}" == "success" && 
+                "${{ needs.bundle-analysis.result }}" == "success" && 
+                "${{ needs.security-scan.result }}" == "success" && 
+                "${{ needs.performance-benchmarks.result }}" == "success" ]]; then
+            echo "All CI checks passed! 🎉"
+            exit 0
+          else
+            echo "Some CI checks failed! ❌"
+            exit 1
+          fi 

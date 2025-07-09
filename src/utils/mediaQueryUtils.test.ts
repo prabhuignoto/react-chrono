@@ -16,7 +16,7 @@ describe('mediaQueryUtils', () => {
     originalAddEventListener = window.addEventListener;
     originalRemoveEventListener = window.removeEventListener;
     windowListeners = {};
-    window.matchMedia = vi.fn().mockImplementation((query) => ({
+    window.matchMedia = vi.fn().mockImplementation(query => ({
       media: query,
       matches: false,
       addEventListener: vi.fn((event, cb) => {
@@ -25,9 +25,7 @@ describe('mediaQueryUtils', () => {
       }),
       removeEventListener: vi.fn((event, cb) => {
         if (windowListeners[event]) {
-          windowListeners[event] = windowListeners[event].filter(
-            (f) => f !== cb,
-          );
+          windowListeners[event] = windowListeners[event].filter(f => f !== cb);
         }
       }),
     }));
@@ -37,7 +35,7 @@ describe('mediaQueryUtils', () => {
     });
     window.removeEventListener = vi.fn((event, cb) => {
       if (windowListeners[event]) {
-        windowListeners[event] = windowListeners[event].filter((f) => f !== cb);
+        windowListeners[event] = windowListeners[event].filter(f => f !== cb);
       }
     });
   });

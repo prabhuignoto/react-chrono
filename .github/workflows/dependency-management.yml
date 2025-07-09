@@ -1,0 +1,336 @@
+name: Dependency Management
+
+on:
+  schedule:
+    # Run every Monday at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+    inputs:
+      update_type:
+        description: 'Type of update to perform'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - all
+
+env:
+  NODE_VERSION: '20.x'
+  PNPM_VERSION: '8.8.0'
+
+jobs:
+  # Audit dependencies for vulnerabilities
+  security-audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run npm audit
+        run: |
+          echo "## NPM Audit Results" > audit-report.md
+          echo "\`\`\`" >> audit-report.md
+          pnpm audit --audit-level moderate || echo "Audit found issues" >> audit-report.md
+          echo "\`\`\`" >> audit-report.md
+
+      - name: Run Snyk audit
+        continue-on-error: true
+        run: |
+          echo "## Snyk Audit Results" >> audit-report.md
+          echo "\`\`\`" >> audit-report.md
+          pnpm exec snyk test --severity-threshold=high || echo "Snyk found issues" >> audit-report.md
+          echo "\`\`\`" >> audit-report.md
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Check for outdated dependencies
+        run: |
+          echo "## Outdated Dependencies" >> audit-report.md
+          echo "\`\`\`" >> audit-report.md
+          pnpm outdated || echo "Some dependencies are outdated" >> audit-report.md
+          echo "\`\`\`" >> audit-report.md
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-audit-report
+          path: audit-report.md
+          retention-days: 30
+
+  # Update dependencies automatically
+  auto-update:
+    name: Auto Update Dependencies
+    runs-on: ubuntu-latest
+    needs: security-audit
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Update dependencies
+        run: |
+          UPDATE_TYPE="${{ github.event.inputs.update_type || 'patch' }}"
+          
+          case $UPDATE_TYPE in
+            "patch")
+              pnpm update --latest --filter='!@types/*' --filter='!*@beta' --filter='!*@alpha'
+              ;;
+            "minor")
+              pnpm update --latest --filter='!@types/*' --filter='!*@beta' --filter='!*@alpha' --depth=1
+              ;;
+            "major")
+              pnpm update --latest --filter='!@types/*' --filter='!*@beta' --filter='!*@alpha' --depth=Infinity
+              ;;
+            "all")
+              pnpm update --latest
+              ;;
+          esac
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet package.json pnpm-lock.yaml; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run tests after update
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          pnpm install
+          pnpm test --run
+          pnpm run rollup
+
+      - name: Generate update summary
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          echo "## 📦 Dependency Updates" > update-summary.md
+          echo "" >> update-summary.md
+          echo "### Changed Dependencies" >> update-summary.md
+          echo "\`\`\`diff" >> update-summary.md
+          git diff package.json >> update-summary.md
+          echo "\`\`\`" >> update-summary.md
+          echo "" >> update-summary.md
+          echo "### Test Results" >> update-summary.md
+          echo "- ✅ Unit tests passed" >> update-summary.md
+          echo "- ✅ Build successful" >> update-summary.md
+          echo "" >> update-summary.md
+          echo "### Security Check" >> update-summary.md
+          pnpm audit --audit-level high > /dev/null 2>&1 && echo "- ✅ No high severity vulnerabilities" >> update-summary.md || echo "- ⚠️ Security issues found" >> update-summary.md
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update dependencies (${{ github.event.inputs.update_type || 'patch' }})"
+          title: "🔄 Automated dependency updates (${{ github.event.inputs.update_type || 'patch' }})"
+          body-path: update-summary.md
+          branch: dependency-updates/${{ github.event.inputs.update_type || 'patch' }}-${{ github.run_number }}
+          delete-branch: true
+          labels: |
+            dependencies
+            automated
+            ${{ github.event.inputs.update_type || 'patch' }}
+
+  # Check for known vulnerabilities
+  vulnerability-scan:
+    name: Vulnerability Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Snyk vulnerability scan
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=medium --json-file-output=snyk-report.json
+
+      - name: Upload Snyk report
+        uses: actions/upload-artifact@v4
+        with:
+          name: vulnerability-scan-report
+          path: snyk-report.json
+          retention-days: 30
+
+      - name: Check for critical vulnerabilities
+        run: |
+          if [ -f snyk-report.json ]; then
+            CRITICAL_COUNT=$(jq '.vulnerabilities | map(select(.severity == "critical")) | length' snyk-report.json)
+            HIGH_COUNT=$(jq '.vulnerabilities | map(select(.severity == "high")) | length' snyk-report.json)
+            
+            if [ "$CRITICAL_COUNT" -gt 0 ] || [ "$HIGH_COUNT" -gt 0 ]; then
+              echo "🚨 Critical or high severity vulnerabilities found!"
+              echo "Critical: $CRITICAL_COUNT, High: $HIGH_COUNT"
+              
+              # Create an issue for critical vulnerabilities
+              if [ "$CRITICAL_COUNT" -gt 0 ]; then
+                echo "Creating issue for critical vulnerabilities..."
+                exit 1
+              fi
+            fi
+          fi
+
+  # License compliance check
+  license-check:
+    name: License Compliance
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install license-checker
+        run: pnpm add -D license-checker
+
+      - name: Check licenses
+        run: |
+          echo "## License Compliance Report" > license-report.md
+          echo "" >> license-report.md
+          
+          # Check for problematic licenses
+          PROBLEMATIC_LICENSES="GPL-2.0,GPL-3.0,AGPL-1.0,AGPL-3.0,LGPL-2.1,LGPL-3.0"
+          
+          echo "### Checking for problematic licenses..." >> license-report.md
+          if pnpm exec license-checker --excludeLicenses "$PROBLEMATIC_LICENSES" --summary > /dev/null 2>&1; then
+            echo "✅ No problematic licenses found" >> license-report.md
+          else
+            echo "❌ Problematic licenses detected" >> license-report.md
+            pnpm exec license-checker --excludeLicenses "$PROBLEMATIC_LICENSES" --summary >> license-report.md
+          fi
+          
+          echo "" >> license-report.md
+          echo "### License Summary" >> license-report.md
+          echo "\`\`\`" >> license-report.md
+          pnpm exec license-checker --summary >> license-report.md
+          echo "\`\`\`" >> license-report.md
+
+      - name: Upload license report
+        uses: actions/upload-artifact@v4
+        with:
+          name: license-compliance-report
+          path: license-report.md
+          retention-days: 30
+
+  # Dependency size analysis
+  bundle-impact:
+    name: Bundle Impact Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Analyze bundle impact
+        run: |
+          echo "## Bundle Impact Analysis" > bundle-impact.md
+          echo "" >> bundle-impact.md
+          
+          # Build current bundle
+          pnpm run rollup
+          
+          # Get bundle sizes
+          echo "### Current Bundle Sizes" >> bundle-impact.md
+          echo "\`\`\`" >> bundle-impact.md
+          ls -lh dist/*.js | awk '{print $9 ": " $5}' >> bundle-impact.md
+          echo "\`\`\`" >> bundle-impact.md
+          
+          # Analyze dependency sizes
+          echo "### Largest Dependencies" >> bundle-impact.md
+          echo "\`\`\`" >> bundle-impact.md
+          pnpm exec bundlephobia --json $(node -p "Object.keys(require('./package.json').dependencies).join(' ')") | jq -r '.[] | "\(.name): \(.size)"' | sort -k2 -hr | head -10 >> bundle-impact.md || echo "Bundle analysis not available" >> bundle-impact.md
+          echo "\`\`\`" >> bundle-impact.md
+
+      - name: Upload bundle impact report
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-impact-report
+          path: bundle-impact.md
+          retention-days: 30 

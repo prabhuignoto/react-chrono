@@ -97,7 +97,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     <>
       <PopoverWrapper ref={ref}>
         <Selecter
-          role="button"
+          role='button'
           onClick={toggleOpen}
           $theme={theme}
           $open={state.open}

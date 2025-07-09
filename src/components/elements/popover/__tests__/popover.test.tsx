@@ -20,7 +20,7 @@ describe('PopOver', () => {
   it('should render the placeholder text', () => {
     const placeholder = 'Select an option';
     customRender(
-      <PopOver placeholder={placeholder} position="top" theme={theme}>
+      <PopOver placeholder={placeholder} position='top' theme={theme}>
         <span>test</span>
       </PopOver>,
       {
@@ -37,7 +37,7 @@ describe('PopOver', () => {
   it('should toggle open state when clicking on the selecter', async () => {
     const placeholder = 'Select an option';
     const { getByRole, getByText } = customRender(
-      <PopOver placeholder={placeholder} position="top" theme={theme}>
+      <PopOver placeholder={placeholder} position='top' theme={theme}>
         <span>test</span>
       </PopOver>,
       {
@@ -58,7 +58,7 @@ describe('PopOver', () => {
   it('should close the popover when clicking outside', async () => {
     const placeholder = 'Select an option';
     const { getByRole, queryByText } = customRender(
-      <PopOver placeholder={placeholder} position="top" theme={theme}>
+      <PopOver placeholder={placeholder} position='top' theme={theme}>
         <span>test</span>
       </PopOver>,
       {
@@ -82,7 +82,7 @@ describe('PopOver', () => {
     const user = userEvent.setup();
     const placeholder = 'Select an option';
     const { getByRole, queryByText, getByText } = customRender(
-      <PopOver placeholder={placeholder} position="top" theme={theme}>
+      <PopOver placeholder={placeholder} position='top' theme={theme}>
         <span>test</span>
       </PopOver>,
       {

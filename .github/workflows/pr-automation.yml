@@ -1,0 +1,326 @@
+name: PR Automation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  pull_request_review:
+    types: [submitted]
+  issue_comment:
+    types: [created]
+
+jobs:
+  # Auto-label PRs based on files changed
+  auto-label:
+    name: Auto Label PR
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Label PR based on files changed
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+
+            const labels = [];
+            const filePatterns = {
+              'dependencies': ['package.json', 'pnpm-lock.yaml', 'yarn.lock'],
+              'documentation': ['README.md', '*.md', 'docs/**'],
+              'tests': ['**/*.test.*', '**/*.spec.*', 'cypress/**', '__tests__/**'],
+              'ci/cd': ['.github/**', '*.yml', '*.yaml', 'rollup.config.*', 'vite.config.*'],
+              'components': ['src/components/**'],
+              'hooks': ['src/hooks/**'],
+              'styles': ['**/*.css', '**/*.scss', '**/*.styled.*'],
+              'types': ['**/*.d.ts', 'src/types/**', 'src/models/**'],
+              'demo': ['src/demo/**', 'src/examples/**'],
+              'build': ['rollup.config.*', 'vite.config.*', 'babel.config.*', 'tsconfig.*'],
+              'security': ['snyk.yaml', '.snyk', 'audit-*']
+            };
+
+            for (const [label, patterns] of Object.entries(filePatterns)) {
+              for (const file of files) {
+                for (const pattern of patterns) {
+                  const regex = new RegExp(pattern.replace(/\*\*/g, '.*').replace(/\*/g, '[^/]*'));
+                  if (regex.test(file.filename)) {
+                    labels.push(label);
+                    break;
+                  }
+                }
+                if (labels.includes(label)) break;
+              }
+            }
+
+            // Size-based labels
+            const totalChanges = files.reduce((sum, file) => sum + file.additions + file.deletions, 0);
+            if (totalChanges > 1000) labels.push('size/XL');
+            else if (totalChanges > 500) labels.push('size/L');
+            else if (totalChanges > 100) labels.push('size/M');
+            else if (totalChanges > 10) labels.push('size/S');
+            else labels.push('size/XS');
+
+            // Apply labels
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: [...new Set(labels)] // Remove duplicates
+              });
+            }
+
+  # Assign reviewers based on files changed
+  assign-reviewers:
+    name: Assign Reviewers
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.action == 'opened'
+    
+    steps:
+      - name: Assign reviewers
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+
+            // Define code owners (update with actual usernames)
+            const codeOwners = {
+              'src/components/**': ['prabhuignoto'],
+              'src/hooks/**': ['prabhuignoto'],
+              '.github/**': ['prabhuignoto'],
+              'cypress/**': ['prabhuignoto'],
+              'docs/**': ['prabhuignoto']
+            };
+
+            const reviewers = new Set();
+            for (const file of files) {
+              for (const [pattern, owners] of Object.entries(codeOwners)) {
+                const regex = new RegExp(pattern.replace(/\*\*/g, '.*').replace(/\*/g, '[^/]*'));
+                if (regex.test(file.filename)) {
+                  owners.forEach(owner => reviewers.add(owner));
+                }
+              }
+            }
+
+            // Remove PR author from reviewers
+            reviewers.delete(context.payload.pull_request.user.login);
+
+            if (reviewers.size > 0) {
+              await github.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                reviewers: Array.from(reviewers)
+              });
+            }
+
+  # Check PR requirements
+  pr-checks:
+    name: PR Requirements Check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check PR requirements
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const checks = [];
+
+            // Check if PR has description
+            if (!pr.body || pr.body.trim().length < 20) {
+              checks.push('❌ PR description is too short (minimum 20 characters)');
+            } else {
+              checks.push('✅ PR has adequate description');
+            }
+
+            // Check if PR title follows conventional commits
+            const conventionalCommitPattern = /^(feat|fix|docs|style|refactor|test|chore|perf|ci|build|revert)(\(.+\))?: .{1,50}/;
+            if (!conventionalCommitPattern.test(pr.title)) {
+              checks.push('❌ PR title should follow conventional commits format');
+            } else {
+              checks.push('✅ PR title follows conventional commits');
+            }
+
+            // Check if PR is not a draft
+            if (pr.draft) {
+              checks.push('⚠️ PR is in draft mode');
+            } else {
+              checks.push('✅ PR is ready for review');
+            }
+
+            // Check if PR has linked issues
+            const issuePattern = /(close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)\s+#\d+/i;
+            if (pr.body && issuePattern.test(pr.body)) {
+              checks.push('✅ PR links to an issue');
+            } else {
+              checks.push('⚠️ Consider linking to an issue if applicable');
+            }
+
+            const comment = `## 🔍 PR Requirements Check
+
+            ${checks.join('\n')}
+
+            ${checks.some(check => check.startsWith('❌')) ? 
+              '\n**Please address the issues above before merging.**' : 
+              '\n**All requirements met! 🎉**'
+            }
+
+            ---
+            *This comment is automatically generated and updated.*`;
+
+            // Find existing bot comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('PR Requirements Check')
+            );
+
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: comment
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            }
+
+  # Handle slash commands in PR comments
+  slash-commands:
+    name: Handle Slash Commands
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issue_comment' && github.event.issue.pull_request
+    
+    steps:
+      - name: Handle commands
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = context.payload.comment.body.trim();
+            const commenter = context.payload.comment.user.login;
+            
+            // Only allow maintainers to run commands
+            const { data: collaborators } = await github.rest.repos.listCollaborators({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            
+            const isMaintainer = collaborators.some(collab => 
+              collab.login === commenter && 
+              ['admin', 'write'].includes(collab.permissions.admin ? 'admin' : 'write')
+            );
+            
+            if (!isMaintainer) {
+              console.log('User is not a maintainer, ignoring command');
+              return;
+            }
+
+            if (comment.startsWith('/rerun-ci')) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: '🔄 Re-running CI workflows...'
+              });
+              
+              // Trigger CI workflow
+              await github.rest.actions.createWorkflowDispatch({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: 'ci.yml',
+                ref: context.payload.issue.pull_request.head.ref
+              });
+            }
+            
+            if (comment.startsWith('/assign-me')) {
+              await github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                assignees: [commenter]
+              });
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `✅ Assigned to @${commenter}`
+              });
+            }
+
+  # Welcome new contributors
+  welcome:
+    name: Welcome New Contributors
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.action == 'opened'
+    
+    steps:
+      - name: Welcome first-time contributors
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const author = context.payload.pull_request.user.login;
+            
+            // Check if this is the author's first PR
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'all',
+              creator: author
+            });
+            
+            if (prs.length === 1) {
+              const welcomeMessage = `## 🎉 Welcome to React Chrono!
+
+              Thank you for your first contribution to React Chrono! We're excited to have you as part of our community.
+
+              ### What happens next?
+              1. Your PR will be automatically checked by our CI pipeline
+              2. A maintainer will review your changes
+              3. We might suggest some improvements or ask questions
+              4. Once approved, your PR will be merged! 🚀
+
+              ### Resources
+              - [Contributing Guide](./CONTRIBUTING.md)
+              - [Code of Conduct](./CODE_OF_CONDUCT.md)
+              - [Development Setup](./README.md#-build-setup)
+
+              Feel free to ask questions in the comments if you need any help!
+
+              ---
+              *Welcome message from the React Chrono team* 🌟`;
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: welcomeMessage
+              });
+            } 

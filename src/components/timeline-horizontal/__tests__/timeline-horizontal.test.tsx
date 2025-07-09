@@ -164,7 +164,7 @@ describe('TimelineHorizontal', () => {
     const listItems = screen.getAllByRole('listitem');
 
     // Check that items have the correct width style applied
-    listItems.forEach((item) => {
+    listItems.forEach(item => {
       expect(item).toHaveClass('timeline-horz-item-container');
     });
   });
@@ -189,9 +189,9 @@ describe('TimelineHorizontal', () => {
 
   it('should pass icon children to timeline cards', () => {
     const iconChildren = [
-      <div key="icon1">Icon 1</div>,
-      <div key="icon2">Icon 2</div>,
-      <div key="icon3">Icon 3</div>,
+      <div key='icon1'>Icon 1</div>,
+      <div key='icon2'>Icon 2</div>,
+      <div key='icon3'>Icon 3</div>,
     ];
 
     renderWithContext({ iconChildren });
@@ -201,9 +201,9 @@ describe('TimelineHorizontal', () => {
 
   it('should pass content details children to timeline cards', () => {
     const contentDetailsChildren = [
-      <div key="content1">Content 1</div>,
-      <div key="content2">Content 2</div>,
-      <div key="content3">Content 3</div>,
+      <div key='content1'>Content 1</div>,
+      <div key='content2'>Content 2</div>,
+      <div key='content3'>Content 3</div>,
     ];
 
     renderWithContext({ contentDetailsChildren });

@@ -35,7 +35,7 @@ const defaultProps: TimelineCardModel = {
 describe('TimelineHorizontalCard', () => {
   beforeAll(() => {
     Object.defineProperty(window, 'matchMedia', {
-      value: vi.fn().mockImplementation((query) => ({
+      value: vi.fn().mockImplementation(query => ({
         addEventListener: vi.fn(),
         dispatchEvent: vi.fn(),
         matches: false,
@@ -98,7 +98,7 @@ describe('TimelineHorizontalCard', () => {
     const { getByText } = customRender(
       <TimelineCard
         {...defaultProps}
-        iconChild={<span role="img">icon</span>}
+        iconChild={<span role='img'>icon</span>}
       ></TimelineCard>,
       {
         providerProps,
@@ -120,7 +120,7 @@ describe('TimelineHorizontalCard', () => {
   // should render media (video) if provided
   it('should render media (video) if provided', () => {
     const { getByText, getByRole } = customRender(
-      <TimelineCard {...defaultProps} url="http://www.google.com" />,
+      <TimelineCard {...defaultProps} url='http://www.google.com' />,
       {
         providerProps,
       },

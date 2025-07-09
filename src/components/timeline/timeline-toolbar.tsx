@@ -83,7 +83,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
 
   // Prepare QuickJump items with proper string conversions
   const quickJumpItems = useMemo(() => {
-    return items.map((item) => ({
+    return items.map(item => ({
       id: item.id ?? '',
       title: getTextFromNode(item.title),
       description: getTextFromNode(item.cardSubtitle),
@@ -142,7 +142,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   }, [cardLess, slideShowRunning]);
 
   const canShowDensity = useMemo(() => {
-    return items.every((item) => item.cardDetailedText);
+    return items.every(item => item.cardDetailedText);
   }, []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -226,7 +226,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       <SearchWrapper theme={theme}>
         <SearchInput
           ref={searchInputRef}
-          type="search"
+          type='search'
           placeholder={buttonTexts?.searchPlaceholder ?? 'Search Timeline'}
           value={searchQuery}
           onChange={handleInputChange}
@@ -256,7 +256,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
         )}
         {searchQuery && (
           <>
-            <div className="timeline-nav-wrapper">
+            <div className='timeline-nav-wrapper'>
               <TimelineNavButton
                 onClick={onPreviousMatch}
                 title={buttonTexts?.previousMatch ?? 'Previous Match'}
@@ -268,7 +268,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                 <ChevronLeft />
               </TimelineNavButton>
             </div>
-            <div className="timeline-nav-wrapper">
+            <div className='timeline-nav-wrapper'>
               <TimelineNavButton
                 onClick={onNextMatch}
                 title={buttonTexts?.nextMatch ?? 'Next Match'}
@@ -286,9 +286,9 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       <ExtraControls
         $hide={hideExtraControls}
         $slideShowRunning={slideShowRunning}
-        key="timeline-extra-controls"
+        key='timeline-extra-controls'
       >
-        <div className="control-wrapper" key="quick-jump">
+        <div className='control-wrapper' key='quick-jump'>
           {enableQuickJump ? (
             <QuickJump
               activeItem={activeTimelineItem}
@@ -301,7 +301,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             />
           ) : null}
         </div>
-        <div className="control-wrapper" key="layout-switcher">
+        <div className='control-wrapper' key='layout-switcher'>
           {!cardLess && enableLayoutSwitch ? (
             <LayoutSwitcher
               isDarkMode={darkMode}
@@ -314,7 +314,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           ) : null}
         </div>
         {canShowDensity ? (
-          <div className="control-wrapper" key="change-density">
+          <div className='control-wrapper' key='change-density'>
             <ChangeDensity
               isDarkMode={darkMode}
               theme={theme}

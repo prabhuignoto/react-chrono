@@ -158,7 +158,7 @@ export const sanitizeHtmlText = (
   if (!text) return '';
 
   try {
-    return isTextArray(text) ? text.map((t) => xss(t || '')) : xss(text);
+    return isTextArray(text) ? text.map(t => xss(t || '')) : xss(text);
   } catch (error) {
     console.error('Error sanitizing HTML text:', error);
     return isTextArray(text) ? [] : '';
@@ -178,7 +178,7 @@ export const getUniqueID = (): string => {
 
       return Array.from(
         randomValues,
-        (byte) => ID_CHARS[byte % ID_CHARS.length],
+        byte => ID_CHARS[byte % ID_CHARS.length],
       ).join('');
     } catch (error) {
       console.error('Error generating unique ID:', error);
