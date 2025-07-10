@@ -159,10 +159,10 @@
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
   },
-  "resolutions": {
+  "overrides": {
     "ansi-regex": "5.0.1",
     "json-schema": "0.4.0",
-    "semver": "7.5.4"
+    "semver": "7.7.2"
   },
   "files": [
     "dist"
