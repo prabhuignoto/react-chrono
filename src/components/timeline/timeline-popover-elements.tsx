@@ -47,7 +47,8 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
         title: layoutOptions.vertical?.text || 'Vertical',
       },
       {
-        description: layoutOptions.alternating?.helpText || 'Alternating layout',
+        description:
+          layoutOptions.alternating?.helpText || 'Alternating layout',
         id: 'VERTICAL_ALTERNATING',
         onSelect: () => onUpdateTimelineMode('VERTICAL_ALTERNATING'),
         selected: activeTimelineMode === 'VERTICAL_ALTERNATING',
@@ -70,7 +71,9 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
         title: layoutOptions.horizontal?.text || 'Horizontal',
       },
       {
-        description: layoutOptions.horizontal_all?.helpText || 'Show all cards horizontally',
+        description:
+          layoutOptions.horizontal_all?.helpText ||
+          'Show all cards horizontally',
         id: 'HORIZONTAL_ALL',
         onSelect: () => {
           onUpdateTimelineMode('HORIZONTAL_ALL');

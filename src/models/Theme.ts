@@ -89,4 +89,4 @@ export interface Theme {
 }
 
 // Default export for module compatibility
-export default Theme; 
+export default Theme;

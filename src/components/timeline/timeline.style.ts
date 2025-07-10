@@ -71,7 +71,7 @@ export const TimelineMainWrapper = styled.div<{
   background-color: ${p => p.theme?.timelineBgColor || 'transparent'};
   /* order: ${p => (p.position === 'top' ? 1 : 0)}; */
   background: transparent;
-  
+
   &.horizontal {
     min-height: 150px;
   }

@@ -11,41 +11,49 @@ global.ResizeObserver = class ResizeObserver {
     this.callback = callback;
     this.observedElements = new Set();
   }
-  
+
   observe(element) {
     this.observedElements.add(element);
     // Mock implementation - call callback with mock data
     if (this.callback) {
-      this.callback([{
-        target: element,
-        contentRect: {
-          width: 100,
-          height: 100,
-          top: 0,
-          left: 0,
-          bottom: 100,
-          right: 100,
+      this.callback([
+        {
+          target: element,
+          contentRect: {
+            width: 100,
+            height: 100,
+            top: 0,
+            left: 0,
+            bottom: 100,
+            right: 100,
+          },
+          borderBoxSize: [
+            {
+              inlineSize: 100,
+              blockSize: 100,
+            },
+          ],
+          contentBoxSize: [
+            {
+              inlineSize: 100,
+              blockSize: 100,
+            },
+          ],
+          devicePixelContentBoxSize: [
+            {
+              inlineSize: 100,
+              blockSize: 100,
+            },
+          ],
         },
-        borderBoxSize: [{
-          inlineSize: 100,
-          blockSize: 100,
-        }],
-        contentBoxSize: [{
-          inlineSize: 100,
-          blockSize: 100,
-        }],
-        devicePixelContentBoxSize: [{
-          inlineSize: 100,
-          blockSize: 100,
-        }],
-      }]);
+      ]);
     }
   }
-  
+
   unobserve(element) {
     this.observedElements.delete(element);
   }
-  
+
   disconnect() {
     this.observedElements.clear();
   }
@@ -58,47 +66,49 @@ global.IntersectionObserver = class IntersectionObserver {
     this.options = options;
     this.observedElements = new Set();
   }
-  
+
   observe(element) {
     this.observedElements.add(element);
     // Mock implementation - call callback with mock data
     if (this.callback) {
-      this.callback([{
-        target: element,
-        isIntersecting: true,
-        intersectionRatio: 1,
-        boundingClientRect: {
-          width: 100,
-          height: 100,
-          top: 0,
-          left: 0,
-          bottom: 100,
-          right: 100,
+      this.callback([
+        {
+          target: element,
+          isIntersecting: true,
+          intersectionRatio: 1,
+          boundingClientRect: {
+            width: 100,
+            height: 100,
+            top: 0,
+            left: 0,
+            bottom: 100,
+            right: 100,
+          },
+          rootBounds: {
+            width: 800,
+            height: 600,
+            top: 0,
+            left: 0,
+            bottom: 600,
+            right: 800,
+          },
+          intersectionRect: {
+            width: 100,
+            height: 100,
+            top: 0,
+            left: 0,
+            bottom: 100,
+            right: 100,
+          },
         },
-        rootBounds: {
-          width: 800,
-          height: 600,
-          top: 0,
-          left: 0,
-          bottom: 600,
-          right: 800,
-        },
-        intersectionRect: {
-          width: 100,
-          height: 100,
-          top: 0,
-          left: 0,
-          bottom: 100,
-          right: 100,
-        },
-      }]);
+      ]);
     }
   }
-  
+
   unobserve(element) {
     this.observedElements.delete(element);
   }
-  
+
   disconnect() {
     this.observedElements.clear();
   }
