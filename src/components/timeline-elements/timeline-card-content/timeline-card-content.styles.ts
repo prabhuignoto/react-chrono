@@ -24,7 +24,7 @@ const baseFontStyles = css`
 `;
 
 const baseCardStyles = css<{ $theme?: Theme }>`
-  background: ${(p) => p.$theme?.cardBgColor};
+  background: ${p => p.$theme?.cardBgColor};
   border-radius: 8px;
   -webkit-box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.06),
@@ -41,7 +41,7 @@ const baseCardStyles = css<{ $theme?: Theme }>`
 `;
 
 const scrollbarStyles = css<{ theme?: Theme }>`
-  scrollbar-color: ${(p) => p.theme?.primary} default;
+  scrollbar-color: ${p => p.theme?.primary} default;
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
@@ -49,17 +49,17 @@ const scrollbarStyles = css<{ theme?: Theme }>`
   }
 
   &::-webkit-scrollbar-track {
-    background-color: ${(p) => p.theme?.cardBgColor};
+    background-color: ${p => p.theme?.cardBgColor};
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${(p) => p.theme?.primary};
+    background-color: ${p => p.theme?.primary};
     border-radius: 3px;
   }
 `;
 
 // Animation helpers
-const getSlideShowAnimation = (props) => {
+const getSlideShowAnimation = props => {
   const { $slideShowActive, $active, $slideShowType, $branchDir } = props;
 
   if (!$slideShowActive || !$active) return '';
@@ -88,7 +88,7 @@ const getSlideShowAnimation = (props) => {
   `;
 };
 
-const getSlideShowVisibility = (props) => {
+const getSlideShowVisibility = props => {
   const { $slideShowActive, $active } = props;
 
   if ($slideShowActive && $active) {
@@ -125,10 +125,10 @@ const sharedSemanticStyles = css<{
   theme: Theme;
 }>`
   ${baseFontStyles}
-  font-size: ${(p) => p.$fontSize || '1.1rem'};
+  font-size: ${p => p.$fontSize || '1.1rem'};
   font-weight: 600;
   margin-bottom: 0.5rem;
-  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
+  padding: ${p => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
   display: block;
 `;
 
@@ -159,27 +159,27 @@ export const TimelineItemContentWrapper = styled.section<
   justify-content: flex-start;
   line-height: 1.5;
   margin: 0;
-  max-width: ${(p) => p.$maxWidth}px;
+  max-width: ${p => p.$maxWidth}px;
   position: relative;
   padding: 1rem;
   z-index: ${zIndex.timelineCard};
   overflow: hidden;
   width: 100%;
 
-  // Handle text density and height
+  /* Handle text density and height */
   ${({ $textDensity, $customContent, $minHeight }) =>
     `${$customContent ? 'height' : 'min-height'}: ${$minHeight}px`};
 
-  ${(p) => (p.$textOverlay ? `min-height: ${p.$minHeight}px` : '')};
-  ${(p) => (p.$textOverlay ? 'height: 0' : '')};
+  ${p => (p.$textOverlay ? `min-height: ${p.$minHeight}px` : '')};
+  ${p => (p.$textOverlay ? 'height: 0' : '')};
 
-  // Focus state
+  /* Focus state */
   &:focus {
-    outline: 1px solid ${(p) => p.$theme?.primary};
+    outline: 1px solid ${p => p.$theme?.primary};
   }
 
-  // Highlight effect
-  ${(p) =>
+  /* Highlight effect */
+  ${p =>
     p.$highlight &&
     css`
       &:hover {
@@ -190,15 +190,15 @@ export const TimelineItemContentWrapper = styled.section<
       }
     `}
 
-  // Nested card styling
-  ${(p) =>
+  /* Nested card styling */
+  ${p =>
     p.$isNested &&
     css`
       background: ${p.$theme?.nestedCardBgColor};
       box-shadow: 0 1px 2px ${p.$theme?.shadowColor || 'rgba(0, 0, 0, 0.05)'};
     `}
 
-  // Animations
+  /* Animations */
   ${getSlideShowAnimation}
   ${getSlideShowVisibility}
 `;
@@ -217,14 +217,14 @@ export const CardTitle = styled.h1<{
   theme: Theme;
 }>`
   ${baseFontStyles}
-  color: ${(p) => p.theme.cardTitleColor};
-  font-size: ${(p) => p.$fontSize && '1.1rem'};
+  color: ${p => p.theme.cardTitleColor};
+  font-size: ${p => p.$fontSize && '1.1rem'};
   font-weight: 600;
   margin-bottom: 0.5rem;
-  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
+  padding: ${p => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
 
   &.active {
-    color: ${(p) => p.theme.primary};
+    color: ${p => p.theme.primary};
   }
 `;
 
@@ -235,17 +235,16 @@ export const CardSubTitle = styled.h2<{
   theme?: Theme;
 }>`
   ${baseFontStyles}
-  color: ${(p) => p.theme.cardSubtitleColor};
-  font-size: ${(p) => p.$fontSize && '0.9rem'};
+  color: ${p => p.theme.cardSubtitleColor};
+  font-size: ${p => p.$fontSize && '0.9rem'};
   font-weight: 500;
   margin-bottom: 0.25rem;
-  padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
+  padding: ${p => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
 `;
 
 // Refactor CardTitleSemantic to use shared styles
 export const CardTitleSemantic = styled.h1.withConfig({
-  shouldForwardProp: (prop) =>
-    !['$fontSize', '$padding', 'theme'].includes(prop),
+  shouldForwardProp: prop => !['$fontSize', '$padding', 'theme'].includes(prop),
 })<{
   $fontSize: string;
   $padding?: boolean;
@@ -254,17 +253,16 @@ export const CardTitleSemantic = styled.h1.withConfig({
   as?: string;
 }>`
   ${sharedSemanticStyles}
-  color: ${(p) => p.theme.cardTitleColor};
+  color: ${p => p.theme.cardTitleColor};
 
   &.active {
-    color: ${(p) => p.theme.primary};
+    color: ${p => p.theme.primary};
   }
 `;
 
 // Refactor CardSubTitleSemantic to use shared styles
 export const CardSubTitleSemantic = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    !['$fontSize', '$padding', 'theme'].includes(prop),
+  shouldForwardProp: prop => !['$fontSize', '$padding', 'theme'].includes(prop),
 })<{
   $fontSize?: string;
   $padding?: boolean;
@@ -273,8 +271,8 @@ export const CardSubTitleSemantic = styled.span.withConfig({
   as?: string;
 }>`
   ${sharedSemanticStyles}
-  color: ${(p) => p.theme.cardSubtitleColor};
-  font-size: ${(p) => p.$fontSize || '0.9rem'};
+  color: ${p => p.theme.cardSubtitleColor};
+  font-size: ${p => p.$fontSize || '0.9rem'};
 `;
 
 export const CardTitleAnchor = styled.a`
@@ -291,7 +289,7 @@ export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
   font-weight: 400;
   margin: 0;
   width: 100%;
-  color: ${(p) => p.theme.cardDetailsColor};
+  color: ${p => p.theme.cardDetailsColor};
   line-height: 1.5;
 `;
 
@@ -301,8 +299,8 @@ export const TimelineSubContent = styled.span<{
 }>`
   margin-bottom: 0.5rem;
   display: block;
-  font-size: ${(p) => p.fontSize && '0.8rem'};
-  color: ${(p) => p.theme.cardDetailsColor};
+  font-size: ${p => p.fontSize && '0.8rem'};
+  color: ${p => p.theme.cardDetailsColor};
 `;
 
 export const TimelineContentDetailsWrapper = styled.div<{
@@ -327,11 +325,11 @@ export const TimelineContentDetailsWrapper = styled.div<{
   overflow-x: hidden;
   overflow-y: auto;
   transition: max-height 0.25s ease-in-out;
-  width: ${(p) => (p.$borderLess ? 'calc(100% - 0.5rem)' : '100%')};
+  width: ${p => (p.$borderLess ? 'calc(100% - 0.5rem)' : '100%')};
   padding: 0;
-  background: ${(p) => p.theme?.cardDetailsBackGround || p.theme?.cardBgColor};
+  background: ${p => p.theme?.cardDetailsBackGround || p.theme?.cardBgColor};
 
-  // Height handling based on different conditions
+  /* Height handling based on different conditions */
   ${({ $useReadMore, $customContent, $showMore, height = 0, $textOverlay }) =>
     $useReadMore && !$customContent && !$showMore && !$textOverlay
       ? `max-height: ${height}px;`
@@ -348,9 +346,9 @@ export const TimelineContentDetailsWrapper = styled.div<{
       ? `max-height: ${($cardHeight ?? 0) + ($contentHeight ?? 0) - height}px;`
       : ''}
 
-  ${(p) => (p.$customContent ? `height: 100%;` : '')}
+  ${p => (p.$customContent ? `height: 100%;` : '')}
 
-  // Animation for show more
+  /* Animation for show more */
   ${({
     height = 0,
     $cardHeight = 0,
@@ -379,8 +377,8 @@ export const TimelineContentDetailsWrapper = styled.div<{
     overflow: hidden;
   }
 
-  // Gradient for "show more" functionality
-  --rc-gradient-color: ${(p) => p.$gradientColor};
+  /* Gradient for "show more" functionality */
+  --rc-gradient-color: ${p => p.$gradientColor};
   ${linearGradient}
 `;
 
@@ -393,12 +391,12 @@ export const ShowMore = styled.button<{
   align-self: flex-end;
   border-radius: 4px;
   cursor: pointer;
-  display: ${(p) => (p.show === 'true' ? 'flex' : 'none')};
+  display: ${p => (p.show === 'true' ? 'flex' : 'none')};
   font-size: 0.75rem;
   justify-self: flex-end;
   margin: auto 0.5em 0.5em auto;
   padding: 0.25em;
-  color: ${(p) => p.theme.primary};
+  color: ${p => p.theme.primary};
   border: 0;
   background: none;
 
@@ -413,7 +411,7 @@ export const SlideShowProgressBar = styled.progress<{
   $resuming?: boolean;
   $startWidth?: number;
 }>`
-  background: ${(p) => p.color};
+  background: ${p => p.color};
   bottom: -0.75em;
   display: block;
   height: 4px;
@@ -431,17 +429,17 @@ export const SlideShowProgressBar = styled.progress<{
   }
 
   &::-webkit-progress-value {
-    background-color: ${(p) => p.color || '#007bff'};
+    background-color: ${p => p.color || '#007bff'};
     border-radius: 2px;
   }
 
   &::-moz-progress-bar {
-    background-color: ${(p) => p.color || '#007bff'};
+    background-color: ${p => p.color || '#007bff'};
     border-radius: 2px;
   }
 
-  // Animation control - simplified without pause
-  ${(p) => {
+  /* Animation control - simplified without pause */
+  ${p => {
     if (p.$startWidth && p.$startWidth > 0) {
       return css`
         animation: ${slideAnimation(p.$startWidth, 0)} ${p.$duration}ms ease-in;
@@ -471,7 +469,7 @@ export const ChevronIconWrapper = styled.span<{ collapsed?: 'true' | 'false' }>`
   margin-left: 0.2em;
   margin-top: 0.2em;
   width: 1.25em;
-  transform: ${(p) =>
+  transform: ${p =>
     p.collapsed === 'false' ? 'rotate(90deg)' : 'rotate(-90deg)'};
 
   svg {
@@ -492,11 +490,10 @@ export const TriangleIconWrapper = styled.span<{
   height: 1.5rem;
   position: absolute;
   top: calc(50%);
-  background: ${(p) => p.theme.cardBgColor};
+  background: ${p => p.theme.cardBgColor};
   transform: translateY(-50%) rotate(225deg);
   z-index: ${zIndex.timelineCard - 3}; /* Arrow tip should be below the card */
-  ${(p) =>
-    p.dir === 'left' ? `right: ${p.offset}px;` : `left: ${p.offset}px;`}
+  ${p => (p.dir === 'left' ? `right: ${p.offset}px;` : `left: ${p.offset}px;`)}
 
   & svg {
     width: 100%;
@@ -507,7 +504,7 @@ export const TriangleIconWrapper = styled.span<{
 
 // Search highlighting
 export const Mark = styled.mark<{ theme: Theme }>`
-  background-color: ${(p) =>
+  background-color: ${p =>
     p.theme?.searchHighlightColor ||
     (p.theme?.primary ? `${p.theme.primary}30` : 'rgba(255, 217, 0, 0.3)')};
   color: inherit;
@@ -522,7 +519,7 @@ export const Mark = styled.mark<{ theme: Theme }>`
     box-shadow 0.15s ease-out;
 
   &[data-current-match='true'] {
-    background-color: ${(p) => {
+    background-color: ${p => {
       if (p.theme?.searchHighlightColor) {
         // If custom search highlight color is provided, make it more intense
         const color = p.theme.searchHighlightColor;
@@ -542,7 +539,7 @@ export const Mark = styled.mark<{ theme: Theme }>`
       return 'rgba(255, 217, 0, 0.5)';
     }};
     box-shadow: 0 0 0 1px
-      ${(p) => {
+      ${p => {
         if (p.theme?.iconColor) {
           return p.theme.iconColor;
         }

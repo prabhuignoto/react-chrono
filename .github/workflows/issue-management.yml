@@ -1,0 +1,302 @@
+name: Issue Management
+
+on:
+  issues:
+    types: [opened, edited, labeled, unlabeled]
+  issue_comment:
+    types: [created]
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  # Auto-label issues based on content
+  auto-label-issues:
+    name: Auto Label Issues
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issues' && github.event.action == 'opened'
+    
+    steps:
+      - name: Label issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const title = issue.title.toLowerCase();
+            const body = issue.body ? issue.body.toLowerCase() : '';
+            const labels = [];
+
+            // Bug detection
+            if (title.includes('bug') || title.includes('error') || title.includes('broken') || 
+                body.includes('error') || body.includes('exception') || body.includes('not working')) {
+              labels.push('type/bug');
+            }
+
+            // Feature request detection
+            if (title.includes('feature') || title.includes('request') || title.includes('enhancement') ||
+                body.includes('would like') || body.includes('could you') || body.includes('feature request')) {
+              labels.push('type/feature');
+            }
+
+            // Documentation detection
+            if (title.includes('doc') || title.includes('readme') || title.includes('documentation') ||
+                body.includes('documentation') || body.includes('docs')) {
+              labels.push('type/documentation');
+            }
+
+            // Performance detection
+            if (title.includes('performance') || title.includes('slow') || title.includes('speed') ||
+                body.includes('performance') || body.includes('optimization')) {
+              labels.push('type/performance');
+            }
+
+            // Security detection
+            if (title.includes('security') || title.includes('vulnerability') || title.includes('exploit') ||
+                body.includes('security') || body.includes('vulnerability')) {
+              labels.push('type/security');
+            }
+
+            // Question detection
+            if (title.includes('?') || title.includes('how to') || title.includes('question') ||
+                body.includes('how do i') || body.includes('question')) {
+              labels.push('question');
+            }
+
+            // Component-specific labels
+            if (body.includes('timeline') || body.includes('chrono')) {
+              labels.push('components');
+            }
+
+            // Browser-specific labels
+            if (body.includes('chrome')) labels.push('browser/chrome');
+            if (body.includes('firefox')) labels.push('browser/firefox');
+            if (body.includes('safari')) labels.push('browser/safari');
+            if (body.includes('edge')) labels.push('browser/edge');
+
+            // Good first issue detection
+            if (title.includes('good first issue') || body.includes('good first issue') ||
+                (title.includes('typo') || title.includes('small fix'))) {
+              labels.push('good first issue');
+            }
+
+            // Apply labels
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labels
+              });
+            }
+
+  # Welcome new issue creators
+  welcome-new-issues:
+    name: Welcome New Contributors
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issues' && github.event.action == 'opened'
+    
+    steps:
+      - name: Welcome first-time issue creators
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const author = context.payload.issue.user.login;
+            
+            // Check if this is the author's first issue
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              creator: author,
+              state: 'all'
+            });
+            
+            if (issues.length === 1) {
+              const welcomeMessage = `## 👋 Welcome to React Chrono!
+
+              Thank you for opening your first issue! We appreciate your contribution to making React Chrono better.
+
+              ### What happens next?
+              1. A maintainer will review your issue
+              2. We may ask for additional information or clarification
+              3. If it's a bug, we'll work on reproducing and fixing it
+              4. If it's a feature request, we'll discuss its feasibility
+
+              ### Guidelines
+              - Please provide as much detail as possible
+              - Include steps to reproduce for bugs
+              - Add screenshots or code examples if helpful
+              - Be patient - we're a small team but we care about every issue!
+
+              ### Resources
+              - [Contributing Guide](./CONTRIBUTING.md)
+              - [Code of Conduct](./CODE_OF_CONDUCT.md)
+              - [Documentation](./README.md)
+
+              Thanks again for helping improve React Chrono! 🚀`;
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: welcomeMessage
+              });
+            }
+
+  # Handle stale issues
+  stale-issues:
+    name: Handle Stale Issues
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+      - name: Mark stale issues
+        uses: actions/stale@v9
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-issue-message: |
+            ## 🤖 Stale Issue Notice
+
+            This issue has been automatically marked as stale because it has not had recent activity. 
+            It will be closed if no further activity occurs within 7 days.
+
+            If this issue is still relevant, please:
+            - Add a comment to keep it open
+            - Provide additional information if requested
+            - Update the issue with current status
+
+            Thank you for your contributions to React Chrono!
+          close-issue-message: |
+            ## 🤖 Issue Closed
+
+            This issue has been automatically closed due to inactivity. If you believe this issue is still relevant, please feel free to reopen it or create a new issue with updated information.
+
+            Thank you for your understanding!
+          stale-issue-label: 'status/stale'
+          close-issue-label: 'status/closed-stale'
+          days-before-stale: 30
+          days-before-close: 7
+          exempt-issue-labels: 'priority/high,priority/critical,status/blocked,good first issue'
+          exempt-pr-labels: 'status/blocked,status/work-in-progress'
+          stale-pr-message: |
+            ## 🤖 Stale PR Notice
+
+            This pull request has been automatically marked as stale because it has not had recent activity.
+            It will be closed if no further activity occurs within 7 days.
+
+            If this PR is still relevant, please:
+            - Rebase against the latest master branch
+            - Address any review comments
+            - Add a comment to keep it open
+
+            Thank you for your contributions!
+          close-pr-message: |
+            ## 🤖 PR Closed
+
+            This pull request has been automatically closed due to inactivity. If you would like to continue this work, please feel free to reopen it or create a new PR.
+
+            Thank you for your contributions!
+          days-before-pr-stale: 21
+          days-before-pr-close: 7
+
+  # Handle issue commands
+  issue-commands:
+    name: Handle Issue Commands
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issue_comment' && github.event.action == 'created'
+    
+    steps:
+      - name: Handle commands
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = context.payload.comment.body.trim();
+            const commenter = context.payload.comment.user.login;
+            
+            // Only allow maintainers to run commands
+            const { data: collaborators } = await github.rest.repos.listCollaborators({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            
+            const isMaintainer = collaborators.some(collab => 
+              collab.login === commenter && 
+              ['admin', 'write'].includes(collab.permissions.admin ? 'admin' : 'write')
+            );
+            
+            if (!isMaintainer) {
+              console.log('User is not a maintainer, ignoring command');
+              return;
+            }
+
+            // Close issue command
+            if (comment.startsWith('/close')) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                state: 'closed'
+              });
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `✅ Issue closed by @${commenter}`
+              });
+            }
+            
+            // Reopen issue command
+            if (comment.startsWith('/reopen')) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                state: 'open'
+              });
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `🔄 Issue reopened by @${commenter}`
+              });
+            }
+
+            // Label commands
+            if (comment.startsWith('/label ')) {
+              const labelName = comment.replace('/label ', '').trim();
+              
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: [labelName]
+              });
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `🏷️ Added label: \`${labelName}\``
+              });
+            }
+
+            // Assign command
+            if (comment.startsWith('/assign ')) {
+              const assignee = comment.replace('/assign ', '').trim().replace('@', '');
+              
+              await github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                assignees: [assignee]
+              });
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `👤 Assigned to @${assignee}`
+              });
+            } 

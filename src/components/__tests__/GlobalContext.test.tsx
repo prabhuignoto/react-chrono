@@ -49,7 +49,7 @@ interface TestContextConsumerProps {
 const TestContextConsumer = ({ onContextValue }: TestContextConsumerProps) => {
   const contextValue = useContext(GlobalContext);
   onContextValue(contextValue);
-  return <div data-testid="context-consumer">Context Consumer</div>;
+  return <div data-testid='context-consumer'>Context Consumer</div>;
 };
 
 interface TestWrapperProps {
@@ -164,7 +164,7 @@ describe('GlobalContext', () => {
     it('should render provider and children without errors', () => {
       render(
         <TestWrapper>
-          <div data-testid="test-child">Test Child</div>
+          <div data-testid='test-child'>Test Child</div>
         </TestWrapper>,
       );
 

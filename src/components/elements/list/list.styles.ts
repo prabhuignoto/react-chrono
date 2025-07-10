@@ -31,12 +31,11 @@ const baseStyles = css`
 // Common styles with improved typing and vendor prefixes
 const commonStyles = css<{ $theme: Theme }>`
   ${baseStyles}
-  background: ${(p) => p.$theme?.toolbarBtnBgColor || '#f5f5f5'};
+  background: ${p => p.$theme?.toolbarBtnBgColor || '#f5f5f5'};
   border-radius: 4px;
   -webkit-box-shadow: 0px 1px 1px
-    ${(p) => p.$theme?.shadowColor || 'rgba(0, 0, 0, 0.1)'};
-  box-shadow: 0px 1px 1px
-    ${(p) => p.$theme?.shadowColor || 'rgba(0, 0, 0, 0.1)'};
+    ${p => p.$theme?.shadowColor || 'rgba(0, 0, 0, 0.1)'};
+  box-shadow: 0px 1px 1px ${p => p.$theme?.shadowColor || 'rgba(0, 0, 0, 0.1)'};
   margin-bottom: 0.5rem;
 
   &:last-child {
@@ -75,23 +74,23 @@ export const ListItemStyle = styled.li<{
   $theme: Theme;
 }>`
   ${commonStyles}
-  border: ${(p) =>
+  border: ${p =>
     p.$active ? themeStyles.border(p.$theme) : themeStyles.transparent};
-  flex-direction: ${(p) => (p.$selectable ? 'row' : 'column')};
-  background: ${(p) => p.$theme.toolbarBtnBgColor};
+  flex-direction: ${p => (p.$selectable ? 'row' : 'column')};
+  background: ${p => p.$theme.toolbarBtnBgColor};
   padding: 0.25rem;
   width: calc(100% - 0.5rem);
   user-select: none;
 
   &:hover {
-    border: ${(p) => themeStyles.border(p.$theme)};
+    border: ${p => themeStyles.border(p.$theme)};
     cursor: pointer;
   }
 `;
 
 // Title styles
 export const TitleStyle = styled.h1<{ theme: Theme }>`
-  color: ${(p) => p.theme.iconColor || p.theme.primary};
+  color: ${p => p.theme.iconColor || p.theme.primary};
   font-size: 1rem;
   font-weight: normal;
   margin: 0.2rem 0;
@@ -108,7 +107,7 @@ export const TitleDescriptionStyle = styled.p<{ theme: Theme }>`
   padding: 0.1rem;
   text-align: left;
   width: 100%;
-  color: ${(p) => p.theme.cardSubtitleColor};
+  color: ${p => p.theme.cardSubtitleColor};
 `;
 
 // Checkbox components with improved structure
@@ -125,8 +124,8 @@ export const CheckboxStyle = styled.span<{ selected?: boolean; theme: Theme }>`
   height: 1.25rem;
   margin: 0 0.25rem 0 0.1rem;
   border-radius: 50%;
-  background: ${(p) => (p.selected ? p.theme.primary : p.theme.toolbarBgColor)};
-  ${(p) => !p.selected && `box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1)`};
+  background: ${p => (p.selected ? p.theme.primary : p.theme.toolbarBgColor)};
+  ${p => !p.selected && `box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1)`};
   color: #ffffff;
 
   svg {
@@ -139,5 +138,5 @@ export const CheckboxStyle = styled.span<{ selected?: boolean; theme: Theme }>`
 export const StyleAndDescription = styled.div<{ $selectable?: boolean }>`
   ${flexContainer}
   flex-direction: column;
-  width: ${(p) => (p.$selectable ? 'calc(100% - 2rem)' : '100%')};
+  width: ${p => (p.$selectable ? 'calc(100% - 2rem)' : '100%')};
 `;

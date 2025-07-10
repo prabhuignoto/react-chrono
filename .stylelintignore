@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Demo and examples
+src/demo/
+src/examples/
+
+# Generated files
+*.min.css
+*.bundle.css
+
+# Test coverage
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Environment files
+.env*
+
+# IDE and editor files
+.vscode/
+.idea/ 

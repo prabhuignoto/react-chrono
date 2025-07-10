@@ -14,12 +14,12 @@ export const YoutubePlayer = memo(
   ({ url, active, name }: YoutubePlayerProps) => (
     <IFrameVideo
       style={{ border: 'none' }}
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
       allowFullScreen
       src={`${url}${active ? '?autoplay=1&enablejsapi=1' : '?enablejsapi=1'}`}
       title={name}
-      data-testid="timeline-card-content-video"
-      loading="lazy"
+      data-testid='timeline-card-content-video'
+      loading='lazy'
     />
   ),
 );

@@ -18,7 +18,7 @@ export type LayoutSwitcherProp = {
 export type QuickJumpProp = {
   activeItem: number;
   items: ListItemModel[];
-  onActivateItem: (id: string) => void;
+  onActivateItem: (id?: string) => void;
 } & CommonProps;
 
 export type ChangeDensityProp = {

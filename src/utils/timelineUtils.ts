@@ -19,7 +19,7 @@ export const getSearchableText = (content: React.ReactNode): string => {
   }
   if (Array.isArray(content)) {
     return content
-      .map((item) => getSearchableText(item))
+      .map(item => getSearchableText(item))
       .filter(Boolean)
       .join(' ');
   }
@@ -83,7 +83,7 @@ export const pauseVideoEmbeds = (element: HTMLElement | null): void => {
 
   try {
     const iframes = element.querySelectorAll('iframe');
-    iframes.forEach((iframe) => {
+    iframes.forEach(iframe => {
       const src = iframe.getAttribute('src') || '';
       if (!src || !iframe.contentWindow) return;
 
@@ -127,7 +127,7 @@ export const toggleMediaVisibility = (
 
   try {
     const mediaElements = element.querySelectorAll('img,video');
-    mediaElements.forEach((ele) => {
+    mediaElements.forEach(ele => {
       if (ele instanceof HTMLElement) {
         ele.style.visibility = isVisible ? 'visible' : 'hidden';
       }

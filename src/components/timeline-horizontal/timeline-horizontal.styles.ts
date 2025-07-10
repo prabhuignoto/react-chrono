@@ -5,7 +5,7 @@ export const TimelineHorizontalWrapper = styled.ul<{ flipLayout?: boolean }>`
   list-style: none;
   margin: 0;
   width: 100%;
-  direction: ${(p) => (p.flipLayout ? 'rtl' : 'ltr')};
+  direction: ${p => (p.flipLayout ? 'rtl' : 'ltr')};
 
   &.vertical {
     flex-direction: column;
@@ -16,7 +16,7 @@ export const TimelineHorizontalWrapper = styled.ul<{ flipLayout?: boolean }>`
 `;
 
 export const TimelineItemWrapper = styled.li<{ width: number }>`
-  width: ${(p) => p.width}px;
+  width: ${p => p.width}px;
   visibility: hidden;
   display: flex;
   align-items: center;

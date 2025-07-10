@@ -71,7 +71,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   // Convert cardDetailedText to the expected string or string[] format
   const formatDetailedText = () => {
     if (Array.isArray(cardDetailedText)) {
-      return cardDetailedText.map((text) =>
+      return cardDetailedText.map(text =>
         typeof text === 'string' ? text : String(text ?? ''),
       );
     }
@@ -84,16 +84,16 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   };
 
   return (
-    <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
+    <Wrapper ref={wrapperRef} className={modeLower} data-testid='timeline-item'>
       {canShowTimelineContent && (
         <TimelineCardPortal
           containerClass={containerClass}
-          contentRef={contentRef}
-          id={id}
+          contentRef={contentRef as React.RefObject<HTMLDivElement>}
+          id={id!}
           theme={theme}
-          active={active}
-          disableInteraction={disableInteraction}
-          showAllCardsHorizontal={showAllCardsHorizontal}
+          active={active!}
+          disableInteraction={disableInteraction!}
+          showAllCardsHorizontal={showAllCardsHorizontal!}
           cardWidth={cardWidth}
           cardSubtitle={
             typeof cardSubtitle === 'string'
@@ -122,7 +122,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       <TimelinePoint
         circleClass={circleClass}
         handleClick={handleClick}
-        circleRef={circleRef}
+        circleRef={circleRef as React.RefObject<HTMLButtonElement>}
         title={typeof title === 'string' ? title : String(title ?? '')}
         theme={theme}
         timelinePointDimension={timelinePointDimension}
@@ -132,7 +132,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
 
       <TimelineTitleContainer
         className={titleClass}
-        data-testid="timeline-title"
+        data-testid='timeline-title'
       >
         <TimelineItemTitle
           title={title}

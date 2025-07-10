@@ -54,30 +54,30 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
 
     return (
       <ListItemStyle
-        data-testid="list-item"
+        data-testid='list-item'
         key={id}
-        $theme={theme}
+        $theme={theme!}
         onClick={() => handleOnClick(id)}
         $active={active}
         tabIndex={0}
         $selectable={selectable}
-        onKeyUp={(ev) => handleKeyPress(ev, id)}
+        onKeyUp={ev => handleKeyPress(ev, id)}
       >
         {selectable ? (
           <CheckboxWrapper>
             <CheckboxStyle
-              role="checkbox"
+              role='checkbox'
               aria-checked={selected}
               selected={selected}
-              theme={theme}
+              theme={theme!}
             >
               {selected && <CheckIcon />}
             </CheckboxStyle>
           </CheckboxWrapper>
         ) : null}
         <StyleAndDescription $selectable={selectable}>
-          <TitleStyle theme={theme}>{title}</TitleStyle>
-          <TitleDescriptionStyle theme={theme}>
+          <TitleStyle theme={theme!}>{title}</TitleStyle>
+          <TitleDescriptionStyle theme={theme!}>
             {description}
           </TitleDescriptionStyle>
         </StyleAndDescription>

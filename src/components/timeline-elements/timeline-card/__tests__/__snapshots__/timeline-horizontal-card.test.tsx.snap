@@ -3,17 +3,17 @@
 exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
 <div>
   <div
-    class="sc-hvigdm dGwijf vertical_alternating"
+    class="timeline-horizontal-cardstyles__Wrapper-sc-18iuiou-0 iwEULm vertical_alternating"
     data-testid="timeline-item"
   >
     <div
-      class="sc-ggWZvA LXovB"
+      class="timeline-horizontal-cardstyles__ShapeWrapper-sc-18iuiou-2 RLVHu"
     >
       <button
         aria-disabled="false"
         aria-label=""
         aria-selected="false"
-        class="sc-dTvVRJ fJGXiE timeline-circle using-icon vertical_alternating active"
+        class="timeline-horizontal-cardstyles__Shape-sc-18iuiou-3 kjVToh timeline-circle using-icon vertical_alternating active"
         data-testid="timeline-circle"
         dimension="16"
         tabindex="0"
@@ -23,11 +23,11 @@ exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
       </button>
     </div>
     <div
-      class="sc-jwTyAe jjiCuv vertical_alternating"
+      class="timeline-horizontal-cardstyles__TimelineTitleContainer-sc-18iuiou-4 hbhxBu vertical_alternating"
       data-testid="timeline-title"
     >
       <div
-        class="sc-bRKDuR ePJukf timeline-item-title active title"
+        class="timeline-card-titlestyles__TitleWrapper-sc-13izrht-0 eDtZUn timeline-item-title active title"
       />
     </div>
   </div>

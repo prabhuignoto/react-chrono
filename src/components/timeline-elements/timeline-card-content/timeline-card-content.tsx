@@ -118,11 +118,11 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         setupTimer,
         setStartWidth,
       } = useSlideshow(
-        progressRef,
-        active,
-        slideShowActive,
-        slideItemDuration,
-        id,
+        progressRef as React.RefObject<HTMLElement>,
+        active ?? false,
+        slideShowActive ?? false,
+        slideItemDuration ?? 0,
+        id ?? '',
         onElapsed,
       );
 
@@ -325,14 +325,14 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       );
 
       const handleCardClick = useCallback(() => {
-        if (onClick && !disableInteraction && !disableAutoScrollOnClick) {
+        if (onClick && id && !disableInteraction && !disableAutoScrollOnClick) {
           onClick(id);
         }
       }, [onClick, id, disableInteraction, disableAutoScrollOnClick]);
 
       const toggleShowMore = useCallback(() => {
         if ((active && paused) || !slideShowActive) {
-          setShowMore((prev) => !prev);
+          setShowMore(prev => !prev);
           onShowMore?.();
           // Use setTimeout to ensure the DOM has updated before focusing
           setTimeout(() => {
@@ -350,7 +350,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         if (mode === 'VERTICAL_ALTERNATING') {
           return flip ? 'right' : 'left';
         }
-        return null;
+        return undefined;
       }, [mode, flip]);
 
       const gradientColor = useMemo(() => {
@@ -385,7 +385,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             showMore,
           });
         }
-        return null;
+        return undefined;
       }, [
         textOverlay,
         detailedText,
@@ -408,14 +408,14 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       return (
         <TimelineItemContentWrapper
-          as="article"
+          as='article'
           aria-label={accessibleLabel}
           ref={containerRef}
           onClick={handleCardClick}
           className={`timeline-card-content ${active ? 'active' : ''} ${
             classNames?.card ?? ''
           }`}
-          data-testid="timeline-card-content"
+          data-testid='timeline-card-content'
           data-item-id={id}
           $active={active}
           $branchDir={branchDir}
@@ -467,7 +467,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               showProgressBar={canShowProgressBar}
               triangleDir={triangleDir}
               resuming={isResuming}
-              progressRef={progressRef}
+              progressRef={progressRef as React.RefObject<HTMLProgressElement>}
             />
           )}
 
@@ -485,7 +485,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             />
           )}
 
-          {canShowNestedTimeline && (
+          {canShowNestedTimeline && items && (
             <NestedTimelineRenderer
               items={items}
               mode={'VERTICAL'}

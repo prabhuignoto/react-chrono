@@ -76,7 +76,7 @@ export const VerticalItemWrapper = styled.li<VerticalItemWrapperProps>`
   }
 
   /* Styling for nested timelines */
-  ${(p) =>
+  ${p =>
     p.$isNested && // Apply only if $isNested is true
     css`
       position: relative;
@@ -124,7 +124,7 @@ export const TimelineCardContentWrapper = styled.div<TimelineCardContentWrapperP
   align-items: center; /* Vertically center content */
 
   /* --- Width Calculation --- */
-  ${(p) => {
+  ${p => {
     // Alternating mode: Takes up ~half the space minus the point/title areas
     if (p.$alternateCards) {
       return `width: ${p.$isMobile ? '75%;' : '37.5%;'}`;
@@ -140,7 +140,7 @@ export const TimelineCardContentWrapper = styled.div<TimelineCardContentWrapperP
   }}
 
   /* --- Order and Justification (Standard Layout) --- */
-  ${(p) =>
+  ${p =>
     !p.$flip && // Apply only if NOT flipped
     css`
       &.left {
@@ -154,7 +154,7 @@ export const TimelineCardContentWrapper = styled.div<TimelineCardContentWrapperP
     `}
 
   /* --- Order and Justification (Flipped Layout) --- */
-  ${(p) =>
+  ${p =>
     p.$flip && // Apply only if flipped
     css`
       justify-content: flex-end; /* Always align card content to the right */
@@ -193,13 +193,13 @@ interface TimelineTitleWrapperProps {
  */
 export const TimelineTitleWrapper = styled.div<TimelineTitleWrapperProps>`
   align-items: center; /* Vertically center title content */
-  display: ${(p) =>
+  display: ${p =>
     p.$hide && p.mode === 'VERTICAL'
       ? 'none'
       : 'flex'}; /* Hide only if $hide and mode is VERTICAL */
 
   /* --- Width Calculation --- */
-  width: ${(p) =>
+  width: ${p =>
     p.$alternateCards
       ? '37.5%' /* Takes up space in alternating mode */
       : '10%'}; /* Smaller width in standard vertical mode */
@@ -211,15 +211,15 @@ export const TimelineTitleWrapper = styled.div<TimelineTitleWrapperProps>`
   /* --- Order and Justification --- */
   &.left {
     /* Justification depends on whether layout is flipped */
-    justify-content: ${(p) => (p.$flip ? 'flex-end' : 'flex-start')};
+    justify-content: ${p => (p.$flip ? 'flex-end' : 'flex-start')};
     /* Order depends on flip status and mode */
-    order: ${(p) => (p.$flip && p.mode === 'VERTICAL_ALTERNATING' ? '1' : '3')};
+    order: ${p => (p.$flip && p.mode === 'VERTICAL_ALTERNATING' ? '1' : '3')};
   }
 
   &.right {
     /* Justification depends on whether layout is flipped */
-    justify-content: ${(p) => (p.$flip ? 'flex-start' : 'flex-end')};
+    justify-content: ${p => (p.$flip ? 'flex-start' : 'flex-end')};
     /* Order depends on flip status and mode */
-    order: ${(p) => (p.$flip && p.mode === 'VERTICAL_ALTERNATING' ? '3' : '1')};
+    order: ${p => (p.$flip && p.mode === 'VERTICAL_ALTERNATING' ? '3' : '1')};
   }
 `;

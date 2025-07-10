@@ -26,7 +26,7 @@ class MockIntersectionObserver {
 }
 
 // Mock requestAnimationFrame
-const rafSpy = vi.fn((cb) => cb());
+const rafSpy = vi.fn(cb => cb());
 
 describe('useTimelineMedia', () => {
   let originalIntersectionObserver: any;

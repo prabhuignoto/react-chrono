@@ -34,7 +34,7 @@ interface OptimizedContextProviderProps extends Omit<ContextProps, 'children'> {
 
 export const OptimizedContextProvider: FunctionComponent<
   OptimizedContextProviderProps
-> = (props) => {
+> = props => {
   const {
     cardHeight = 200,
     cardLess = false,
@@ -63,7 +63,7 @@ export const OptimizedContextProvider: FunctionComponent<
   // ==========================================
   // DYNAMIC STATE (changes frequently)
   // ==========================================
-  const [isDarkMode, setIsDarkMode] = useState(darkMode);
+  const [isDarkMode, setIsDarkMode] = useState(darkMode ?? false);
   const [horizontalAll, setHorizontalAll] = useState(
     showAllCardsHorizontal ?? false,
   );

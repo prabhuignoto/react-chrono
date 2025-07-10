@@ -1,5 +1,5 @@
 // Mock ResizeObserver before tests
-const mockResizeObserver = vi.fn().mockImplementation((callback) => ({
+const mockResizeObserver = vi.fn().mockImplementation(callback => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -184,7 +184,7 @@ describe('useCardSize', () => {
 
     // Mock ResizeObserver callback
     const resizeObserverCallback = vi.fn();
-    const mockResizeObserver = vi.fn().mockImplementation((callback) => {
+    const mockResizeObserver = vi.fn().mockImplementation(callback => {
       resizeObserverCallback.mockImplementation(callback);
       return {
         observe: vi.fn(),

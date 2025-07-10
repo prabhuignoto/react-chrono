@@ -87,7 +87,7 @@ const getTextOrContent: (
         }
 
         return renderTextArray({
-          cardTextClassName: classNames?.cardText,
+          cardTextClassName: classNames?.cardText || '',
           detailedText: detailedText as (string | ReactNode)[],
           fontSizes,
           parseDetailsAsHTML,
@@ -96,7 +96,7 @@ const getTextOrContent: (
       };
 
       // Create props for HTML content if needed
-      const getTextContentProps = (textContent) => {
+      const getTextContentProps = textContent => {
         if (parseDetailsAsHTML && !isTextArray) {
           return {
             dangerouslySetInnerHTML: {
@@ -107,7 +107,7 @@ const getTextOrContent: (
         return {};
       };
 
-      const renderDetailedContent = (textContent) => {
+      const renderDetailedContent = textContent => {
         const textContentProps = getTextContentProps(textContent);
 
         return (

@@ -29,7 +29,7 @@ describe('useWindowSize', () => {
     global.window = mockWindow as any;
     // Reset mock implementations
     mockWindow.setTimeout.mockImplementation(vi.fn());
-    mockWindow.requestAnimationFrame.mockImplementation((cb) => {
+    mockWindow.requestAnimationFrame.mockImplementation(cb => {
       cb();
       return 456;
     });

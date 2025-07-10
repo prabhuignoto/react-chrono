@@ -91,7 +91,7 @@ describe('createPerformantDebounce', () => {
     const debounced = createPerformantDebounce(fn, 10, 'debounceTest');
     debounced();
     debounced();
-    await new Promise((r) => setTimeout(r, 20));
+    await new Promise(r => setTimeout(r, 20));
     expect(fn).toHaveBeenCalledTimes(1);
   });
 });

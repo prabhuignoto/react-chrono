@@ -1,0 +1,251 @@
+name: 🚀 Release & Publish
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - '**.md'
+      - '.github/**'
+      - '!.github/workflows/release.yml'
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - prerelease
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # Pre-release validation
+  validate:
+    name: 🔍 Validate Release
+    runs-on: ubuntu-latest
+    outputs:
+      should_release: ${{ steps.check.outputs.should_release }}
+      current_version: ${{ steps.version.outputs.current_version }}
+      release_type: ${{ steps.release_type.outputs.release_type }}
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Check if release is needed
+        id: check
+        run: |
+          # Check for conventional commits since last release
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LAST_TAG" ]; then
+            echo "should_release=true" >> $GITHUB_OUTPUT
+            echo "First release detected"
+          else
+            # Check for feat/fix commits since last tag
+            COMMITS=$(git log $LAST_TAG..HEAD --oneline --grep="^feat\|^fix\|^BREAKING CHANGE" || echo "")
+            if [ -n "$COMMITS" ]; then
+              echo "should_release=true" >> $GITHUB_OUTPUT
+              echo "Release-worthy commits found since $LAST_TAG"
+            else
+              echo "should_release=false" >> $GITHUB_OUTPUT
+              echo "No release-worthy commits found since $LAST_TAG"
+            fi
+          fi
+
+      - name: 📋 Get current version
+        id: version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "current_version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: 🎯 Determine release type
+        id: release_type
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "release_type=${{ github.event.inputs.release_type }}" >> $GITHUB_OUTPUT
+          else
+            # Auto-determine from commit messages
+            LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+            if [ -z "$LAST_TAG" ]; then
+              echo "release_type=minor" >> $GITHUB_OUTPUT
+            else
+              # Check for breaking changes
+              BREAKING=$(git log $LAST_TAG..HEAD --oneline --grep="BREAKING CHANGE" || echo "")
+              if [ -n "$BREAKING" ]; then
+                echo "release_type=major" >> $GITHUB_OUTPUT
+              else
+                # Check for features
+                FEATURES=$(git log $LAST_TAG..HEAD --oneline --grep="^feat" || echo "")
+                if [ -n "$FEATURES" ]; then
+                  echo "release_type=minor" >> $GITHUB_OUTPUT
+                else
+                  echo "release_type=patch" >> $GITHUB_OUTPUT
+                fi
+              fi
+            fi
+          fi
+
+  # Run full CI pipeline before release
+  ci:
+    name: 🧪 Full CI Pipeline
+    needs: validate
+    if: needs.validate.outputs.should_release == 'true'
+    uses: ./.github/workflows/ci.yml
+    secrets: inherit
+
+  # Create release and publish
+  release:
+    name: 🚀 Release & Publish
+    needs: [validate, ci]
+    if: needs.validate.outputs.should_release == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+    environment: production
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🏗️ Build package
+        run: npm run rollup
+
+      - name: 🧪 Run tests
+        run: npm test
+
+      - name: 📊 Bundle size check
+        run: npm run size-limit
+
+      - name: 🔒 Security audit
+        run: npm audit --audit-level high
+
+      - name: 🏷️ Generate new version
+        id: version
+        run: |
+          RELEASE_TYPE="${{ needs.validate.outputs.release_type }}"
+          OLD_VERSION="${{ needs.validate.outputs.current_version }}"
+          
+          # Update version in package.json
+          npm version $RELEASE_TYPE --no-git-tag-version
+          
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "tag_name=v$NEW_VERSION" >> $GITHUB_OUTPUT
+          
+          echo "Version updated: $OLD_VERSION → $NEW_VERSION"
+
+      - name: 📝 Generate release notes
+        id: release_notes
+        run: |
+          TAG_NAME="v${{ steps.version.outputs.new_version }}"
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          
+          if [ -z "$LAST_TAG" ]; then
+            CHANGES=$(git log --oneline --pretty=format:"- %s" HEAD)
+          else
+            CHANGES=$(git log $LAST_TAG..HEAD --oneline --pretty=format:"- %s")
+          fi
+          
+          # Create release notes
+          cat > release_notes.md << EOF
+          ## 🚀 What's New in $TAG_NAME
+          
+          ### 📋 Changes
+          $CHANGES
+          
+          ### 📊 Package Information
+          - **Version**: ${{ steps.version.outputs.new_version }}
+          - **Release Type**: ${{ needs.validate.outputs.release_type }}
+          - **Build**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          
+          ### 📦 Installation
+          \`\`\`bash
+          npm install react-chrono@${{ steps.version.outputs.new_version }}
+          \`\`\`
+          
+          ### 🔗 Links
+          - [NPM Package](https://www.npmjs.com/package/react-chrono)
+          - [Documentation](https://github.com/prabhuignoto/react-chrono#readme)
+          - [Demo](https://react-chrono.vercel.app/)
+          EOF
+          
+          echo "Release notes generated for $TAG_NAME"
+
+      - name: 🏷️ Create Git tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git commit -m "chore: bump version to ${{ steps.version.outputs.new_version }}"
+          git tag ${{ steps.version.outputs.tag_name }}
+          git push origin master
+          git push origin ${{ steps.version.outputs.tag_name }}
+
+      - name: 📦 Publish to NPM
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: 🎉 Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.version.outputs.tag_name }}
+          release_name: ${{ steps.version.outputs.tag_name }}
+          body_path: release_notes.md
+          draft: false
+          prerelease: ${{ contains(steps.version.outputs.new_version, '-') }}
+
+      - name: 📢 Post-release notifications
+        run: |
+          echo "🎉 Successfully released react-chrono@${{ steps.version.outputs.new_version }}"
+          echo "📦 NPM: https://www.npmjs.com/package/react-chrono"
+          echo "🏷️ GitHub: https://github.com/prabhuignoto/react-chrono/releases/tag/${{ steps.version.outputs.tag_name }}"
+
+  # Cleanup on failure
+  cleanup:
+    name: 🧹 Cleanup on Failure
+    needs: [validate, ci, release]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🧹 Clean up failed release
+        run: |
+          echo "Release failed, cleaning up..."
+          # Add any cleanup logic here if needed
+          echo "Cleanup completed" 

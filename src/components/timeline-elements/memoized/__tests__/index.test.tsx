@@ -10,7 +10,7 @@ import { TitleMemo } from '../title-memo';
 describe('Title', () => {
   it('should render title', () => {
     const { getByText } = customRender(
-      <TitleMemo title="title" color="black" dir="rtl" active={false} />,
+      <TitleMemo title='title' color='black' dir='rtl' active={false} />,
       { providerProps },
     );
     expect(getByText('title')).toBeInTheDocument();
@@ -20,10 +20,10 @@ describe('Title', () => {
   it('should render title with url', () => {
     const { getByText, getByRole } = customRender(
       <TitleMemo
-        title="title"
-        url="https://www.google.com"
-        color="black"
-        dir="rtl"
+        title='title'
+        url='https://www.google.com'
+        color='black'
+        dir='rtl'
         active={false}
       />,
       { providerProps },
@@ -35,7 +35,7 @@ describe('Title', () => {
   //should have the color and padding
   it('should have the color and padding', () => {
     const { getByText } = customRender(
-      <TitleMemo title="title" color="#ccc" dir="rtl" active={false} padding />,
+      <TitleMemo title='title' color='#ccc' dir='rtl' active={false} padding />,
       { providerProps },
     );
     expect(getByText('title')).toHaveStyle('color: #ccc');
@@ -46,12 +46,12 @@ describe('Title', () => {
   it('should accept custom class name', () => {
     const { getByText } = customRender(
       <TitleMemo
-        title="title"
-        color="black"
-        dir="rtl"
+        title='title'
+        color='black'
+        dir='rtl'
         active={false}
         padding
-        classString="custom-class"
+        classString='custom-class'
       />,
       { providerProps },
     );
@@ -63,10 +63,10 @@ describe('subtitle', () => {
   it('should render CardSubTitle', () => {
     const { getByText } = customRender(
       <SubTitleMemo
-        color="red"
+        color='red'
         dir={'rtl'}
-        classString="card-sub-title"
-        content="card sub title"
+        classString='card-sub-title'
+        content='card sub title'
       ></SubTitleMemo>,
       { providerProps },
     );
@@ -77,10 +77,10 @@ describe('subtitle', () => {
   it('should render the color and padding correctly', () => {
     const { getByText } = customRender(
       <SubTitleMemo
-        color="#000"
+        color='#000'
         dir={'rtl'}
-        classString="card-sub-title"
-        content="card sub title"
+        classString='card-sub-title'
+        content='card sub title'
         padding
       ></SubTitleMemo>,
       { providerProps },

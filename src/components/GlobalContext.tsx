@@ -25,7 +25,7 @@ export const GlobalContext = LegacyGlobalContext;
  * Legacy GlobalContextProvider - wraps the new optimized provider
  * @deprecated Use OptimizedContextProvider directly
  */
-const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
+const GlobalContextProvider: FunctionComponent<ContextProps> = props => {
   return (
     <OptimizedContextProvider {...props}>
       <LegacyContextBridge>{props.children}</LegacyContextBridge>

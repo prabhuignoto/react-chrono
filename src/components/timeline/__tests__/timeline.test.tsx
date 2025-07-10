@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { customRender, providerProps } from '../../common/test';
 import Timeline from '../timeline';
 
-window.matchMedia = vi.fn().mockImplementation((query) => {
+window.matchMedia = vi.fn().mockImplementation(query => {
   return {
     addEventListener: vi.fn(),
     addListener: vi.fn(),
@@ -86,7 +86,7 @@ describe('Timeline', () => {
 
   it('should render the timeline with correct items', () => {
     const { getByText } = customRender(
-      <Timeline {...commonProps} mode="VERTICAL" />,
+      <Timeline {...commonProps} mode='VERTICAL' />,
       {
         providerProps,
       },
@@ -102,7 +102,7 @@ describe('Timeline', () => {
   //shoulkd render the timeline items correctly when the mode is HORIZONTAL
   it('should render the timeline items correctly when the mode is HORIZONTAL', () => {
     const { getByText } = customRender(
-      <Timeline {...commonProps} mode="HORIZONTAL" />,
+      <Timeline {...commonProps} mode='HORIZONTAL' />,
       {
         providerProps,
       },
@@ -147,7 +147,7 @@ describe('Timeline', () => {
   //should call onPrevious after next button is clicked
   it('should call onPrevious after next button is clicked', async () => {
     const { getByLabelText } = customRender(
-      <Timeline {...commonProps} mode="VERTICAL_ALTERNATING" />,
+      <Timeline {...commonProps} mode='VERTICAL_ALTERNATING' />,
       {
         providerProps,
       },
@@ -169,7 +169,7 @@ describe('Timeline', () => {
   // should call onLast when last button is clicked
   it('should call onLast and onFirst when last button is clicked', async () => {
     const { getByLabelText } = customRender(
-      <Timeline {...commonProps} mode="VERTICAL_ALTERNATING" />,
+      <Timeline {...commonProps} mode='VERTICAL_ALTERNATING' />,
       {
         providerProps,
       },
@@ -212,7 +212,7 @@ describe('Timeline', () => {
     const { getByLabelText } = customRender(
       <Timeline
         {...commonProps}
-        mode="VERTICAL_ALTERNATING"
+        mode='VERTICAL_ALTERNATING'
         activeTimelineItem={0}
       />,
       {
@@ -231,7 +231,7 @@ describe('Timeline', () => {
 
   it('should call onItemSelected when an item is clicked', async () => {
     const { getByText } = customRender(
-      <Timeline {...commonProps} mode="VERTICAL" />,
+      <Timeline {...commonProps} mode='VERTICAL' />,
       {
         providerProps,
       },

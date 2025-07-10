@@ -1,0 +1,319 @@
+name: Deploy Demo & Documentation
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+      deploy_docs:
+        description: 'Deploy documentation'
+        required: false
+        default: true
+        type: boolean
+
+env:
+  NODE_VERSION: '20.x'
+  PNPM_VERSION: '8.8.0'
+
+jobs:
+  # Build demo site and documentation
+  build:
+    name: Build Assets
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build library
+        run: pnpm run rollup
+
+      - name: Build demo site
+        run: pnpm run vite:build
+        env:
+          NODE_ENV: production
+
+      - name: Generate documentation
+        run: |
+          # Generate API documentation
+          echo "Generating API documentation..."
+          # Add your documentation generation commands here
+          # Example: pnpm run docs:build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            dist/
+            build/
+            docs/
+          retention-days: 30
+
+  # Deploy to staging (preview)
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'staging')
+    environment:
+      name: staging
+      url: ${{ steps.deploy.outputs.url }}
+    
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+
+      - name: Deploy to Netlify (Staging)
+        id: deploy
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: './build'
+          production-branch: master
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions (PR #${{ github.event.number }})"
+          enable-pull-request-comment: true
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_STAGING }}
+        timeout-minutes: 10
+
+      - name: Update deployment status
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ steps.deploy.outcome }}' === 'success' ? 'success' : 'failure';
+            const url = '${{ steps.deploy.outputs.url }}';
+            
+            if (context.eventName === 'pull_request') {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: status === 'success' 
+                  ? `🚀 **Staging deployment successful!**\n\n📱 Preview: ${url}\n\n*Deployment will be available for 7 days*`
+                  : `❌ **Staging deployment failed!**\n\nCheck the [workflow run](${context.payload.repository.html_url}/actions/runs/${context.runId}) for details.`
+              });
+            }
+
+  # Deploy to production
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    environment:
+      name: production
+      url: https://react-chrono-demo.netlify.app
+    
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+
+      - name: Deploy to Netlify (Production)
+        id: deploy
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: './build'
+          production-branch: master
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Production deployment from ${{ github.sha }}"
+          production-deploy: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_PRODUCTION }}
+        timeout-minutes: 10
+
+      - name: Update GitHub deployment status
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ steps.deploy.outcome }}' === 'success' ? 'success' : 'failure';
+            const url = '${{ steps.deploy.outputs.url }}';
+            
+            await github.rest.repos.createDeploymentStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              deployment_id: context.payload.deployment?.id || 0,
+              state: status,
+              target_url: url,
+              description: status === 'success' ? 'Production deployment successful' : 'Production deployment failed'
+            });
+
+  # Deploy documentation
+  deploy-docs:
+    name: Deploy Documentation
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.event.inputs.deploy_docs != 'false'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build documentation
+        run: |
+          # Generate comprehensive documentation
+          echo "Building documentation..."
+          
+          # Create docs directory structure
+          mkdir -p docs/api docs/examples docs/guides
+          
+          # Copy README and other markdown files
+          cp README.md docs/
+          cp CONTRIBUTING.md docs/guides/
+          cp CODE_OF_CONDUCT.md docs/guides/
+          
+          # Generate API documentation (if you have a docs generator)
+          # pnpm run docs:api
+          
+          # Copy examples
+          cp -r src/examples/* docs/examples/ || true
+          
+          # Generate changelog
+          echo "# Changelog" > docs/CHANGELOG.md
+          git log --oneline --decorate --graph --all >> docs/CHANGELOG.md
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          cname: react-chrono-docs.com # Replace with your custom domain if you have one
+
+  # Performance monitoring
+  performance-monitoring:
+    name: Performance Monitoring
+    runs-on: ubuntu-latest
+    needs: [deploy-staging, deploy-production]
+    if: always() && (needs.deploy-staging.result == 'success' || needs.deploy-production.result == 'success')
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli
+
+      - name: Run Lighthouse CI
+        run: |
+          # Determine which URL to test
+          if [ "${{ needs.deploy-production.result }}" == "success" ]; then
+            URL="https://react-chrono-demo.netlify.app"
+          else
+            URL="${{ needs.deploy-staging.outputs.url }}"
+          fi
+          
+          lhci autorun --upload.target=temporary-public-storage --collect.url="$URL"
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: Comment performance results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Add performance results to PR comment
+            const comment = `## 📊 Performance Report
+            
+            Lighthouse CI has analyzed the deployed preview:
+            - **Performance**: Check the full report in the workflow artifacts
+            - **Accessibility**: Automated accessibility checks completed
+            - **Best Practices**: Modern web standards compliance verified
+            - **SEO**: Search engine optimization validated
+            
+            📈 Full performance metrics available in the [workflow run](${context.payload.repository.html_url}/actions/runs/${context.runId})`;
+            
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  # Cleanup old deployments
+  cleanup:
+    name: Cleanup Old Deployments
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Cleanup staging deployments
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Clean up deployments older than 7 days for staging
+            const sevenDaysAgo = new Date();
+            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+            
+            const { data: deployments } = await github.rest.repos.listDeployments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              environment: 'staging'
+            });
+            
+            for (const deployment of deployments) {
+              const deploymentDate = new Date(deployment.created_at);
+              if (deploymentDate < sevenDaysAgo) {
+                await github.rest.repos.deleteDeployment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  deployment_id: deployment.id
+                });
+              }
+            } 

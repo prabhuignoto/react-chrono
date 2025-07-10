@@ -29,11 +29,11 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
   return (
     <ShapeWrapper>
       <Shape
-        as="button"
+        as='button'
         className={circleClass}
         onClick={handleClick}
         ref={circleRef}
-        data-testid="timeline-circle"
+        data-testid='timeline-circle'
         theme={theme}
         aria-label={title ?? 'Timeline point'}
         aria-selected={active}
@@ -42,7 +42,7 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
         dimension={timelinePointDimension}
         $timelinePointShape={timelinePointShape}
         tabIndex={disabled ? -1 : 0}
-        type="button"
+        type='button'
       >
         {iconChild ?? null}
       </Shape>

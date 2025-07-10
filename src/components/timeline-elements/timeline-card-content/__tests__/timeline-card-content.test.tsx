@@ -7,7 +7,7 @@ import TimelineCardContent from '../timeline-card-content';
 describe('TimelineCardContent', () => {
   beforeAll(() => {
     Object.defineProperty(window, 'matchMedia', {
-      value: vi.fn().mockImplementation((query) => ({
+      value: vi.fn().mockImplementation(query => ({
         addEventListener: vi.fn(),
         dispatchEvent: vi.fn(),
         matches: false,
@@ -35,7 +35,7 @@ describe('TimelineCardContent', () => {
 
   //should render the title
   it('should render the title', () => {
-    render(<TimelineCardContent title="title" />);
+    render(<TimelineCardContent title='title' />);
 
     expect(screen.getByText('title')).toBeInTheDocument();
     expect(screen.getByText('title')).toBeVisible();
@@ -44,8 +44,8 @@ describe('TimelineCardContent', () => {
   // should render the detailedText when a string is passed
   it('should render the detailedText when a string is passed', () => {
     render(
-      <GlobalContextProvider toolbarPosition="bottom" textDensity="HIGH">
-        <TimelineCardContent detailedText="detailedText" />
+      <GlobalContextProvider toolbarPosition='bottom' textDensity='HIGH'>
+        <TimelineCardContent detailedText='detailedText' />
       </GlobalContextProvider>,
     );
 
@@ -56,7 +56,7 @@ describe('TimelineCardContent', () => {
   // should render the detailedText when a array of strings is passed
   it('should render the detailedText when a array of strings is passed', () => {
     render(
-      <GlobalContextProvider toolbarPosition="bottom" textDensity="HIGH">
+      <GlobalContextProvider toolbarPosition='bottom' textDensity='HIGH'>
         <TimelineCardContent detailedText={['detailedText', 'text 2']} />
       </GlobalContextProvider>,
     );

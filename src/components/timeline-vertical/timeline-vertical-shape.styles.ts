@@ -30,7 +30,7 @@ export const TimelinePointWrapper = styled.div<TimelinePointWrapperProps>`
   position: relative;
 
   /* Adjust width based on mobile view */
-  width: ${(p) => (p.$isMobile ? '25%' : '10%')};
+  width: ${p => (p.$isMobile ? '25%' : '10%')};
 
   /* Control the horizontal order in VERTICAL_ALTERNATING mode */
   &.left {
@@ -42,9 +42,9 @@ export const TimelinePointWrapper = styled.div<TimelinePointWrapperProps>`
 
   /* Top vertical line segment (connecting to the previous item) */
   &::before {
-    background: ${(p) =>
+    background: ${p =>
       p.bg ?? p.theme?.primary}; /* Use theme primary as fallback */
-    width: ${(p) => (p.width ? `${p.width}px` : '4px')};
+    width: ${p => (p.width ? `${p.width}px` : '4px')};
     height: 2rem; /* Fixed height for the connector */
     position: absolute;
     content: '';
@@ -56,14 +56,14 @@ export const TimelinePointWrapper = styled.div<TimelinePointWrapperProps>`
 
   /* Main vertical line segment (extending downwards) */
   &::after {
-    background: ${(p) =>
+    background: ${p =>
       p.bg ?? p.theme?.primary}; /* Use theme primary as fallback */
     content: '';
     display: block;
     height: 100%; /* Extend full height of the wrapper */
     left: 50%;
     position: absolute;
-    width: ${(p) => (p.width ? `${p.width}px` : '4px')};
+    width: ${p => (p.width ? `${p.width}px` : '4px')};
     z-index: ${zIndex.timelineLine}; /* Timeline line is at bottom layer */
     transform: translateX(-50%); /* Center horizontally */
   }
@@ -85,8 +85,7 @@ interface TimelinePointContainerProps {
 export const TimelinePointContainer = styled.button<TimelinePointContainerProps>`
   position: relative; /* Ensure it's above the ::after pseudo-element */
   z-index: ${zIndex.timelinePoint}; /* Timeline point sits above the lines but below popovers */
-  visibility: ${(p) =>
-    p.$hide ? 'hidden' : 'visible'}; /* Control visibility */
+  visibility: ${p => (p.$hide ? 'hidden' : 'visible')}; /* Control visibility */
 
   /* Reset button styles */
   background: none;
@@ -107,7 +106,7 @@ export const TimelinePointContainer = styled.button<TimelinePointContainerProps>
 
   /* Add focus styles for accessibility */
   &:focus-visible {
-    outline: 3px solid ${(p) => p.theme?.primary ?? '#007bff'}; /* Focus ring */
+    outline: 3px solid ${p => p.theme?.primary ?? '#007bff'}; /* Focus ring */
     outline-offset: 3px;
   }
 

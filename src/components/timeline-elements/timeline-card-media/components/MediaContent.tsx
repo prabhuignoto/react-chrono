@@ -59,7 +59,7 @@ export const MediaContent = memo(
       }
 
       return loadFailed ? (
-        <LazyErrorMessage message="Failed to load the video" />
+        <LazyErrorMessage message='Failed to load the video' />
       ) : (
         <VideoPlayer
           url={media.source.url}
@@ -75,7 +75,7 @@ export const MediaContent = memo(
 
     if (media.type === 'IMAGE') {
       return loadFailed ? (
-        <LazyErrorMessage message="Failed to load the image." />
+        <LazyErrorMessage message='Failed to load the image.' />
       ) : (
         <ImageDisplay
           url={media.source.url}

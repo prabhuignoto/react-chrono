@@ -2,7 +2,7 @@ import { Theme } from '@models/Theme';
 import { css } from 'styled-components';
 
 export const ScrollBar = css<{ theme: Theme }>`
-  scrollbar-color: ${(p) => p.theme?.primary} default;
+  scrollbar-color: ${p => p.theme?.primary} default;
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
@@ -14,7 +14,7 @@ export const ScrollBar = css<{ theme: Theme }>`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${(p) => p.theme?.primary};
-    outline: 1px solid ${(p) => p.theme?.primary};
+    background-color: ${p => p.theme?.primary};
+    outline: 1px solid ${p => p.theme?.primary};
   }
 `;

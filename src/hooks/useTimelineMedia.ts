@@ -21,7 +21,7 @@ export const useTimelineMedia = ({
     (entries: IntersectionObserverEntry[]) => {
       // Use requestAnimationFrame to batch DOM operations
       requestAnimationFrame(() => {
-        entries.forEach((entry) => {
+        entries.forEach(entry => {
           const element = entry.target as HTMLDivElement;
           if (entry.isIntersecting) {
             toggleMediaVisibility(element, true);
@@ -72,7 +72,7 @@ export const useTimelineMedia = ({
       if (!element || !observerInstance) return;
 
       const childElements = element.querySelectorAll('.vertical-item-row');
-      childElements.forEach((elem) => {
+      childElements.forEach(elem => {
         if (!observedElements.current.has(elem)) {
           observerInstance.observe(elem);
           observedElements.current.add(elem);

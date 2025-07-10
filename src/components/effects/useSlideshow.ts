@@ -27,7 +27,7 @@ const useSlideshow = (
   slideShowActive: boolean,
   slideItemDuration: number,
   id: string,
-  onElapsed?: (id: string) => void,
+  onElapsed?: (id?: string) => void,
 ): SlideshowHookReturn => {
   const startTime = useRef<number | null>(null);
   const timerRef = useRef<number>(0);

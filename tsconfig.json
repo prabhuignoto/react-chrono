@@ -1,48 +1,95 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    // Modern JavaScript target
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "ES2022"],
+    
+    // Module system
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    
+    // JSX configuration for React 19
     "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    
+    // Strict type checking (ENABLED but with practical settings)
+    "strict": true,
+    "noImplicitAny": false, // Disabled for existing codebase compatibility
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": false, // Disabled to avoid too many warnings
+    "noUnusedParameters": false, // Disabled to avoid too many warnings
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": false, // Disabled for practical use
+    "noUncheckedIndexedAccess": false, // Disabled for practical use
+    
+    // Additional checks (practical settings)
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "noFallthroughCasesInSwitch": true,
+    
+    // Interop
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    
+    // Build configuration
     "noEmit": true,
-    "rootDir": "src",
     "declaration": true,
-    "declarationDir": "dist",
+    "declarationMap": true,
+    "sourceMap": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "incremental": true,
+    "tsBuildInfoFile": "./node_modules/.cache/.tsbuildinfo",
+    
+    // Path configuration
     "baseUrl": ".",
+    "outDir": "dist",
+    
+    // Type definitions
     "types": [
       "node",
-      "@types/react",
-      "@types/react-dom",
-      "@testing-library/jest-dom",
-      "react-router-dom",
+      "vitest/globals",
+      "@testing-library/jest-dom"
     ],
+    
+    // Path mapping (updated to match actual structure)
     "paths": {
-      "@utils/*": ["src/utils/*"],
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
       "@models/*": ["src/models/*"],
-      "@effects/*": ["src/effects/*"]
-    },
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules"
-      }
-    ]
+      "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@effects/*": ["src/effects/*"],
+      "@styles/*": ["src/styles/*"],
+      "@types/*": ["src/types/*"],
+      "@demo/*": ["src/demo/*"],
+      "@examples/*": ["src/examples/*"]
+    }
   },
-  "include": ["src/components", "src/models", "src/utils", "src/demo", "src/types", "types"],
+  "include": [
+    "src/**/*",
+    "types/**/*",
+    "vitest.config.mts",
+    "vite.config.mts"
+  ],
   "exclude": [
     "node_modules",
     "dist",
-    "rollup.config.mjs",
+    "coverage",
+    "build",
     "cypress",
-    "cypress.config.ts"
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
   ],
-  "files": ["src/react-chrono.ts"]
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  }
 }

@@ -37,12 +37,12 @@ export const ImageDisplay = memo(
         onError={handleError}
         $visible={mediaLoaded}
         alt={name}
-        loading="lazy"
+        loading='lazy'
         $enableBorderRadius={borderLessCards}
         fit={imageFit}
-        data-testid="timeline-card-content-image"
-        width="100%"
-        height="auto"
+        data-testid='timeline-card-content-image'
+        width='100%'
+        height='auto'
       />
     </ImageWrapper>
   ),

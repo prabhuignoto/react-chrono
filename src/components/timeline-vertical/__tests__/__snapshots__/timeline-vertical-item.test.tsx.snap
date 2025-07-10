@@ -4,46 +4,46 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
 <div>
   <li
     aria-label="vertical item title"
-    class="sc-jYczwO cFlZWy vertical-item-row"
+    class="timeline-verticalstyles__VerticalItemWrapper-sc-1427v1d-1 fqzlrY vertical-item-row"
     data-item-id=""
     data-testid="vertical-item-row"
   >
     <div
-      class="sc-fszimp criaYi"
+      class="timeline-verticalstyles__TimelineTitleWrapper-sc-1427v1d-3 kaetvq"
       mode="VERTICAL_ALTERNATING"
     >
       <div
         align="right"
-        class="sc-eQwNpu vsucr timeline-item-title title"
+        class="timeline-card-titlestyles__TitleWrapper-sc-13izrht-0 uPYub timeline-item-title title"
       >
         vertical item title
       </div>
     </div>
     <div
-      class="sc-dNFkOE xVabF card-content-wrapper"
+      class="timeline-verticalstyles__TimelineCardContentWrapper-sc-1427v1d-2 dzIbtz card-content-wrapper"
     >
       <article
         aria-label="vertical item title"
-        class="sc-kNOymR dnEYbX timeline-card-content  card"
+        class="timeline-card-contentstyles__TimelineItemContentWrapper-sc-d7qjm1-0 fgqsTm timeline-card-content  card"
         data-item-id=""
         data-testid="timeline-card-content"
         mode="VERTICAL_ALTERNATING"
         tabindex="-1"
       >
         <header
-          class="sc-dYwGCk jmCnZH"
+          class="timeline-card-contentstyles__TimelineCardHeader-sc-d7qjm1-1 WRRcN"
         />
         <div
-          class="sc-bRKDuR khFSwl card-media-wrapper card-media"
+          class="timeline-card-mediastyles__MediaWrapper-sc-1yk7mm5-0 dWqGmE card-media-wrapper card-media"
           mode="VERTICAL_ALTERNATING"
         >
           <div
-            class="sc-hvigdm iEEmax"
+            class="timeline-card-mediastyles__ImageWrapper-sc-1yk7mm5-1 jcBczc"
             height="200"
           >
             <img
               alt=""
-              class="sc-fhHczv kywTIv"
+              class="timeline-card-mediastyles__CardImage-sc-1yk7mm5-2 hRVRvx"
               data-testid="timeline-card-content-image"
               height="auto"
               loading="lazy"
@@ -57,19 +57,19 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     </div>
     <div
       bg="#007FFF"
-      class="sc-eknHtZ bdtwCJ"
+      class="timeline-vertical-shapestyles__TimelinePointWrapper-sc-12rz3g8-0 gnivBI"
       data-testid="tree-leaf"
     >
       <button
         aria-disabled="false"
         aria-label="Timeline point"
-        class="sc-pYNGo dyMaoC  timeline-vertical-circle"
+        class="timeline-vertical-shapestyles__TimelinePointContainer-sc-12rz3g8-1 cFqsWc  timeline-vertical-circle"
         data-testid="tree-leaf-click"
         tabindex="0"
       >
         <div
           aria-hidden="true"
-          class="sc-eVqvcJ ifMCtn"
+          class="timeline-horizontal-cardstyles__Shape-sc-18iuiou-3 krcpYL"
           dimension="16"
         />
       </button>

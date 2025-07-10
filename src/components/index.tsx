@@ -51,7 +51,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
             active: index === activeItemIndex,
             id,
             hasNestedItems,
-            items: item.items?.map((subItem) => ({
+            items: item.items?.map(subItem => ({
               ...subItem,
               _dayjs: dayjs(subItem.date),
               id: getUniqueID(),
@@ -67,7 +67,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       }
 
       const itemLength = React.Children.toArray(children).filter(
-        (item) =>
+        item =>
           (item as React.ReactElement<any>).props.className !== 'chrono-icons',
       ).length;
 
@@ -104,7 +104,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
     // Only extract the needed properties and create a single string
     return items
-      .map((item) => {
+      .map(item => {
         // Use simple string concatenation which is more efficient than JSON.stringify
         const id = item.id || '';
         const date = item.date || '';
@@ -116,7 +116,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   }, []);
 
   useEffect(() => {
-    const _items = items?.filter((item) => item);
+    const _items = items?.filter(item => item);
     let newItems: TimelineItemModel[] = [];
 
     if (!_items?.length) {
@@ -157,7 +157,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   const handleTimelineUpdate = useCallback(
     (actvTimelineIndex: number) => {
-      setTimeLineItems((lineItems) =>
+      setTimeLineItems(lineItems =>
         lineItems.map((item, index) => ({
           ...item,
           active: index === actvTimelineIndex,
@@ -199,7 +199,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       // Skip timeline update (which triggers scrolling) in horizontal mode during slideshow
       if (mode === 'HORIZONTAL' && slideShowActive) {
         // Only update the timeline items state and active item, skip scroll triggering updates
-        setTimeLineItems((lineItems) =>
+        setTimeLineItems(lineItems =>
           lineItems.map((item, index) => ({
             ...item,
             active: index === newTimeLineItem,
@@ -232,7 +232,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       // Skip timeline update (which triggers scrolling) in horizontal mode during slideshow
       if (mode === 'HORIZONTAL' && slideShowActive) {
         // Only update the timeline items state and active item, skip scroll triggering updates
-        setTimeLineItems((lineItems) =>
+        setTimeLineItems(lineItems =>
           lineItems.map((item, index) => ({
             ...item,
             active: index === newTimeLineItem,
@@ -277,7 +277,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   // Memoize icon children processing
   const iconChildren = useMemo(() => {
     let iconChildArray = toReactArray(children).filter(
-      (item) =>
+      item =>
         item &&
         (item as any).props &&
         (item as any).props.className === 'chrono-icons',
@@ -292,7 +292,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   // Memoize content details children
   const contentDetailsChildren = useMemo(() => {
     return toReactArray(children).filter(
-      (item) =>
+      item =>
         item &&
         (item as any).props &&
         (item as any).props.className !== 'chrono-icons',

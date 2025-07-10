@@ -45,7 +45,7 @@ export const VideoPlayer = memo(
         autoPlay={active}
         ref={videoRef}
         onLoadedData={handleMediaLoaded}
-        data-testid="rc-video"
+        data-testid='rc-video'
         onPlay={() =>
           onMediaStateChange({
             id,
@@ -68,7 +68,7 @@ export const VideoPlayer = memo(
           })
         }
         onError={handleError}
-        preload="metadata"
+        preload='metadata'
       >
         <source src={url}></source>
       </CardVideo>

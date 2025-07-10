@@ -21,7 +21,7 @@ export type TimelineToolbarProps = Pick<
   | 'mode'
 > & {
   id: string;
-  onActivateTimelineItem: (id: string) => void;
+  onActivateTimelineItem: (id?: string) => void;
   onUpdateTextContentDensity: (value: TextDensity) => void;
   onUpdateTimelineMode: (mode: TimelineMode) => void;
   toggleDarkMode: () => void;

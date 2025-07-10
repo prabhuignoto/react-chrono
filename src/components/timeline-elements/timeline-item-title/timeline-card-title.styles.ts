@@ -8,13 +8,13 @@ export const TitleWrapper = styled.div<{
   theme?: Theme;
 }>`
   border-radius: 0.2rem;
-  font-size: ${(p) => (p.$fontSize ? p.$fontSize : '1rem')};
+  font-size: ${p => (p.$fontSize ? p.$fontSize : '1rem')};
   font-weight: 600;
   overflow: hidden;
   padding: 0.25rem;
-  visibility: ${(p) => (p.$hide ? 'hidden' : 'visible')};
-  text-align: ${(p) => (p.align ? p.align : '')};
-  color: ${(p) => (p.theme ? p.theme.titleColor : '')};
+  visibility: ${p => (p.$hide ? 'hidden' : 'visible')};
+  text-align: ${p => (p.align ? p.align : '')};
+  color: ${p => (p.theme ? p.theme.titleColor : '')};
 
   /* --- Prevent long text from affecting layout --- */
   white-space: nowrap; /* Prevent text from wrapping to multiple lines */
@@ -23,8 +23,8 @@ export const TitleWrapper = styled.div<{
   max-width: 100%; /* Ensure it doesn't exceed its container */
 
   &.active {
-    background: ${(p) => p.theme?.secondary};
-    color: ${(p) =>
+    background: ${p => p.theme?.secondary};
+    color: ${p =>
       p.theme?.titleColorActive ? p.theme?.titleColorActive : p.theme?.primary};
   }
 `;

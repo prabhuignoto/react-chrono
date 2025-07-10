@@ -131,7 +131,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     handlePreviousMatch,
     handleSearchKeyDown,
   } = useTimelineSearch({
-    items: items.map((item) => ({ ...item, wrapperId: id })),
+    items: items.map(item => ({ ...item, wrapperId: id })),
     onTimelineUpdated,
     handleTimelineItemClick,
   });
@@ -146,7 +146,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   useTimelineMedia({
     mode,
-    timelineMainRef,
+    timelineMainRef: timelineMainRef as React.RefObject<HTMLDivElement>,
   });
 
   // Memoize classes and display flags
@@ -258,14 +258,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       cardPositionHorizontal={cardPositionHorizontal}
       theme={theme}
       onMouseDown={() => setHasFocus(true)}
-      onKeyUp={(evt) => {
+      onKeyUp={evt => {
         if (evt.key === 'Escape') {
           onPaused?.();
         }
       }}
     >
       {canShowToolbar && (
-        <ToolbarWrapper position={toolbarPosition}>
+        <ToolbarWrapper position={toolbarPosition || 'top'}>
           <TimelineToolbar
             activeTimelineItem={activeTimelineItem}
             totalItems={items.length}
@@ -277,14 +277,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             onPrevious={handlePrevious}
             onRestartSlideshow={onRestartSlideshow}
             darkMode={darkMode}
-            toggleDarkMode={toggleDarkMode}
+            toggleDarkMode={toggleDarkMode || (() => {})}
             onPaused={onPaused}
             id={id}
             flipLayout={flipLayout}
             items={items}
             onActivateTimelineItem={handleTimelineItemClick}
             onUpdateTimelineMode={handleTimelineUpdate}
-            onUpdateTextContentDensity={updateTextContentDensity}
+            onUpdateTextContentDensity={updateTextContentDensity || (() => {})}
             mode={timelineMode}
             searchQuery={searchQuery}
             onSearchChange={handleSearchChange}
@@ -294,7 +294,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             totalMatches={searchResults.length}
             currentMatchIndex={currentMatchIndex}
             onSearchKeyDown={handleSearchKeyDown}
-            searchInputRef={searchInputRef}
+            searchInputRef={searchInputRef as React.RefObject<HTMLInputElement>}
           />
         </ToolbarWrapper>
       )}
@@ -314,8 +314,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         ref={timelineMainRef}
         $scrollable={canScrollTimeline}
         className={`${mode.toLowerCase()} timeline-main-wrapper`}
-        id="timeline-main-wrapper"
-        data-testid="timeline-main-wrapper"
+        id='timeline-main-wrapper'
+        data-testid='timeline-main-wrapper'
         theme={theme}
         mode={mode}
         position={toolbarPosition}

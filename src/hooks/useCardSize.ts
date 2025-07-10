@@ -65,14 +65,14 @@ export const useCardSize = ({
   useEffect(() => {
     let rafId: number;
 
-    const observer = new ResizeObserver((entries) => {
+    const observer = new ResizeObserver(entries => {
       // Use RAF to batch DOM updates
       if (rafId) cancelAnimationFrame(rafId);
 
       rafId = requestAnimationFrame(() => {
         for (const entry of entries) {
           if (entry.target === containerRef.current) {
-            setDimensions((prev) => ({
+            setDimensions(prev => ({
               ...prev,
               containerWidth: entry.contentRect.width,
             }));

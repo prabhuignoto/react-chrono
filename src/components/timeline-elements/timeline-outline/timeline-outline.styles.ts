@@ -31,16 +31,16 @@ export const OutlineWrapper = styled.div<{
   open?: boolean;
   position?: OutlinePosition;
 }>`
-  animation: ${(p) => (p.open ? open : close)};
+  animation: ${p => (p.open ? open : close)};
   animation-duration: 0.2s;
   animation-timing-function: ease-in;
   background: rgba(255, 255, 255, 0.98);
-  border: 1px solid ${(p) => (p.open ? '#f5f5f5' : 'none')};
+  border: 1px solid ${p => (p.open ? '#f5f5f5' : 'none')};
   height: 50%;
   width: 100%;
-  ${(p) =>
+  ${p =>
     p.position === OutlinePosition.left ? `left: 1rem;` : `right: 3rem;`};
-  ${(p) =>
+  ${p =>
     p.open
       ? `
     width: 200px;
@@ -76,7 +76,7 @@ export const OutlineButton = styled.button<{
   background: #fff;
   border-radius: 4px;
   border: 0;
-  // box-shadow: ${(p) => (!p.open ? '0 0 10px 2px rgba(0,0,0,0.2)' : 'none')};
+  /* box-shadow: ${p => (!p.open ? '0 0 10px 2px rgba(0,0,0,0.2)' : 'none')}; */
   cursor: pointer;
   display: flex;
   height: 30px;
@@ -84,7 +84,7 @@ export const OutlineButton = styled.button<{
   padding: 0;
   width: 30px;
 
-  ${(p) =>
+  ${p =>
     p.position === OutlinePosition.left
       ? 'margin-right: auto;'
       : 'margin-left: auto;'};
@@ -95,7 +95,7 @@ export const OutlineButton = styled.button<{
   }
 
   & svg path {
-    color: ${(p) => p.theme.iconColor || p.theme.primary};
+    color: ${p => p.theme.iconColor || p.theme.primary};
   }
 `;
 
@@ -135,11 +135,11 @@ export const ListItem = styled.li`
 
 export const ListItemName = styled.span<{ selected?: boolean; theme?: Theme }>`
   font-size: 0.75rem;
-  color: ${(p) => (p.selected ? p.theme.iconColor || p.theme.primary : '')};
+  color: ${p => (p.selected ? p.theme.iconColor || p.theme.primary : '')};
   padding-left: 0.25rem;
 
   &:hover {
-    color: ${(p) => p.theme.iconColor || p.theme.primary};
+    color: ${p => p.theme.iconColor || p.theme.primary};
   }
 `;
 
@@ -160,13 +160,13 @@ export const ListItemBullet = styled.span<{
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: ${(p) =>
+    background: ${p =>
       p.selected
         ? `${p.theme.secondary}`
         : p.theme.iconColor || `${p.theme.primary}`};
     left: 0;
     margin: 0 auto;
-    border: ${(p) =>
+    border: ${p =>
       p.selected
         ? `2px solid ${p.theme.secondary}`
         : `2px solid ${p.theme.iconColor || p.theme.primary}`};

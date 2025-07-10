@@ -27,7 +27,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
   }: CardMediaModel) => {
     // Custom hooks for state management
     const { loadFailed, mediaLoaded, handleMediaLoaded, handleError } =
-      useMediaLoad(id, onMediaStateChange);
+      useMediaLoad(id ?? '', onMediaStateChange);
     const isYouTube = useYouTubeDetection(media.source.url);
     const { expandDetails, showText, toggleExpand, toggleText } =
       useToggleControls();
@@ -56,13 +56,13 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     } = useViewOptions({
       showText,
       expandDetails,
-      textOverlay,
+      textOverlay: textOverlay ?? false,
       detailsText,
       title,
       content,
       theme,
-      cardHeight,
-      mediaHeight,
+      cardHeight: cardHeight ?? 0,
+      mediaHeight: mediaHeight ?? 0,
     });
 
     // Cast mode to TimelineMode
@@ -92,11 +92,11 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
             isYouTube={isYouTube}
             loadFailed={loadFailed}
             mediaLoaded={mediaLoaded}
-            active={active}
-            id={id}
-            mediaHeight={mediaHeight}
-            mode={timelineMode}
-            borderLessCards={borderLessCards}
+            active={active ?? false}
+            id={id ?? ''}
+            mediaHeight={mediaHeight ?? 0}
+            mode={timelineMode ?? 'VERTICAL'}
+            borderLessCards={borderLessCards ?? false}
             mediaSettings={mediaSettings}
             handleMediaLoaded={handleMediaLoaded}
             handleError={handleError}
@@ -106,8 +106,8 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
 
         {canShowTextContent && (
           <ContentDisplay
-            mode={timelineMode}
-            textOverlay={textOverlay}
+            mode={timelineMode ?? 'VERTICAL'}
+            textOverlay={textOverlay ?? false}
             theme={theme}
             expandDetails={expandDetails}
             showText={showText}
@@ -115,7 +115,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
             canShowGradient={canShowGradient}
             gradientColor={gradientColor}
             title={title}
-            active={active}
+            active={active ?? false}
             url={url}
             fontSizes={fontSizes}
             classNames={classNames}

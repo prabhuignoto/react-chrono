@@ -7,7 +7,7 @@ describe('Content Header', () => {
   // should render the title and subtitle of the card
   it('should render the title and subtitle of the card', () => {
     const { getByText } = customRender(
-      <ContentHeader title="title" content="content" />,
+      <ContentHeader title='title' content='content' />,
       {
         providerProps: {
           ...providerProps,
@@ -23,7 +23,7 @@ describe('Content Header', () => {
   // should match the snapshot
   it('should match the snapshot', () => {
     const { container } = customRender(
-      <ContentHeader title="title" content="content" />,
+      <ContentHeader title='title' content='content' />,
       {
         providerProps,
       },
@@ -36,9 +36,9 @@ describe('Content Header', () => {
   it('should render the link if url is provided', () => {
     const { getByText, getByRole } = customRender(
       <ContentHeader
-        title="title"
-        content="content"
-        url="http://www.google.com"
+        title='title'
+        content='content'
+        url='http://www.google.com'
       />,
       {
         providerProps,
