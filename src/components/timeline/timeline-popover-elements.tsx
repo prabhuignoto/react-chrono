@@ -29,57 +29,57 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
 
   const layoutOptions = useMemo(
     () => ({
-      alternating: buttonTexts?.changeLayoutOptions.alternating,
-      horizontal: buttonTexts?.changeLayoutOptions.horizontal,
-      horizontal_all: buttonTexts?.changeLayoutOptions.horizontal_all,
-      vertical: buttonTexts?.changeLayoutOptions.vertical,
+      alternating: buttonTexts?.changeLayoutOptions?.alternating,
+      horizontal: buttonTexts?.changeLayoutOptions?.horizontal,
+      horizontal_all: buttonTexts?.changeLayoutOptions?.horizontal_all,
+      vertical: buttonTexts?.changeLayoutOptions?.vertical,
     }),
-    [],
+    [buttonTexts],
   );
 
   const verticalItems = useMemo(
     () => [
       {
-        description: layoutOptions.vertical.helpText,
+        description: layoutOptions.vertical?.helpText || 'Vertical layout',
         id: 'VERTICAL',
         onSelect: () => onUpdateTimelineMode('VERTICAL'),
         selected: activeTimelineMode === 'VERTICAL',
-        title: layoutOptions.vertical.text,
+        title: layoutOptions.vertical?.text || 'Vertical',
       },
       {
-        description: layoutOptions.alternating.helpText,
+        description: layoutOptions.alternating?.helpText || 'Alternating layout',
         id: 'VERTICAL_ALTERNATING',
         onSelect: () => onUpdateTimelineMode('VERTICAL_ALTERNATING'),
         selected: activeTimelineMode === 'VERTICAL_ALTERNATING',
-        title: layoutOptions.alternating.text,
+        title: layoutOptions.alternating?.text || 'Alternating',
       },
     ],
-    [activeTimelineMode],
+    [activeTimelineMode, layoutOptions],
   );
 
   // horizontal list OF options when the mode is `HORIZONTAL`
   const horizontalItems = useMemo(
     () => [
       {
-        description: layoutOptions.horizontal.helpText,
+        description: layoutOptions.horizontal?.helpText || 'Horizontal layout',
         id: 'HORIZONTAL',
         onSelect: () => {
           onUpdateTimelineMode('HORIZONTAL');
         },
         selected: activeTimelineMode === 'HORIZONTAL',
-        title: layoutOptions.horizontal.text,
+        title: layoutOptions.horizontal?.text || 'Horizontal',
       },
       {
-        description: layoutOptions.horizontal_all.helpText,
+        description: layoutOptions.horizontal_all?.helpText || 'Show all cards horizontally',
         id: 'HORIZONTAL_ALL',
         onSelect: () => {
           onUpdateTimelineMode('HORIZONTAL_ALL');
         },
         selected: activeTimelineMode === 'HORIZONTAL_ALL',
-        title: layoutOptions.horizontal.text,
+        title: layoutOptions.horizontal_all?.text || 'Show All',
       },
     ],
-    [activeTimelineMode],
+    [activeTimelineMode, layoutOptions],
   );
 
   return (
@@ -130,7 +130,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
       <List
         items={items.map((item, index) => ({
           active: index === activeItem,
-          description: item.description,
+          description: item.description || `Timeline item ${index + 1}`,
           id: item.id,
           label: item.title,
           onSelect: () => {},

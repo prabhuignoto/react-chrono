@@ -132,6 +132,8 @@ export const MediaDetailsWrapper = styled.div<{
       case 'VERTICAL':
       case 'VERTICAL_ALTERNATING':
         return `calc(90% - 0rem)`;
+      default:
+        return `calc(90% - 0rem)`;
     }
   }};
   display: flex;
@@ -162,6 +164,8 @@ export const MediaDetailsWrapper = styled.div<{
         height: 50%;
       `;
     }
+
+    return '';
   }}
   position: ${p => (p.$absolutePosition ? 'absolute' : 'relative')};
   ${p =>
@@ -223,7 +227,21 @@ export const DetailsTextWrapper = styled.div<{
   align-items: flex-start;
   justify-content: center;
 
-  ${ScrollBar}
+  scrollbar-color: ${p => p.theme?.primary || '#ccc'} default;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 0.3em;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${p => p.theme?.primary || '#ccc'};
+    outline: 1px solid ${p => p.theme?.primary || '#ccc'};
+  }
 
   ${p => {
     if (p.$expandFull) {

@@ -99,7 +99,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         <Selecter
           role='button'
           onClick={toggleOpen}
-          $theme={theme}
+          $theme={theme!}
           $open={state.open}
           $isDarkMode={isDarkMode}
           tabIndex={0}
@@ -107,7 +107,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           $isMobile={$isMobile}
           title={placeholder}
         >
-          <SelecterIcon $theme={theme} $open={state.open}>
+          <SelecterIcon $theme={theme!} $open={state.open}>
             {icon || <ChevronDown />}
           </SelecterIcon>
           {placeholder && !$isMobile ? (
@@ -119,12 +119,12 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         <PopoverHolder
           $position={position}
           $width={width}
-          $theme={theme}
+          $theme={theme!}
           $isMobile={$isMobile}
           $visible={state.isVisible}
         >
           <Header>
-            <CloseButton theme={theme} onClick={closePopover}>
+            <CloseButton theme={theme!} onClick={closePopover}>
               <CloseIcon />
             </CloseButton>
           </Header>

@@ -63,7 +63,7 @@ export const OptimizedContextProvider: FunctionComponent<
   // ==========================================
   // DYNAMIC STATE (changes frequently)
   // ==========================================
-  const [isDarkMode, setIsDarkMode] = useState(darkMode);
+  const [isDarkMode, setIsDarkMode] = useState(darkMode ?? false);
   const [horizontalAll, setHorizontalAll] = useState(
     showAllCardsHorizontal ?? false,
   );

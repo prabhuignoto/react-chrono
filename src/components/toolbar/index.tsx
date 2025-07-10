@@ -48,7 +48,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
               // tabIndex={0}
             >
               {icon && <IconWrapper>{icon}</IconWrapper>}
-              {children[index] && (
+              {children && children[index] && (
                 <ContentWrapper>{children[index]}</ContentWrapper>
               )}
             </ToolbarListItem>

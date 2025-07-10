@@ -87,7 +87,7 @@ const getTextOrContent: (
         }
 
         return renderTextArray({
-          cardTextClassName: classNames?.cardText,
+          cardTextClassName: classNames?.cardText || '',
           detailedText: detailedText as (string | ReactNode)[],
           fontSizes,
           parseDetailsAsHTML,

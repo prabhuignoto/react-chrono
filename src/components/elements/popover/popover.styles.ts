@@ -38,10 +38,10 @@ export const PopoverHolder = styled.div<{
 }>`
   ${flexCenter};
   flex-direction: column;
-  background: ${({ $theme }) => $theme.toolbarBgColor};
+  background: ${({ $theme }) => $theme!.toolbarBgColor};
   border-radius: ${BORDER_RADIUS};
-  border: ${({ $theme }) => getBorderStyle($theme)};
-  box-shadow: ${({ $theme }) => getElevatedShadow($theme)};
+  border: ${({ $theme }) => getBorderStyle($theme!)};
+  box-shadow: ${({ $theme }) => getElevatedShadow($theme!)};
   max-height: 500px;
   overflow-y: auto;
   padding: 0.5rem;

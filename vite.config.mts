@@ -154,9 +154,6 @@ export default defineConfig(({ command, mode }) => {
     plugins: [
       // React plugin with modern configuration
       react({
-        // Fast refresh configuration
-        fastRefresh: true,
-        
         // JSX runtime configuration
         jsxRuntime: 'automatic',
         
@@ -260,7 +257,7 @@ export default defineConfig(({ command, mode }) => {
     // Worker configuration
     worker: {
       // Worker plugins
-      plugins: [],
+      plugins: () => [],
       
       // Worker format
       format: 'es',

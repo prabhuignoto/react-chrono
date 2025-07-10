@@ -146,7 +146,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   useTimelineMedia({
     mode,
-    timelineMainRef,
+    timelineMainRef: timelineMainRef as React.RefObject<HTMLDivElement>,
   });
 
   // Memoize classes and display flags
@@ -265,7 +265,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       }}
     >
       {canShowToolbar && (
-        <ToolbarWrapper position={toolbarPosition}>
+        <ToolbarWrapper position={toolbarPosition || 'top'}>
           <TimelineToolbar
             activeTimelineItem={activeTimelineItem}
             totalItems={items.length}
@@ -277,14 +277,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             onPrevious={handlePrevious}
             onRestartSlideshow={onRestartSlideshow}
             darkMode={darkMode}
-            toggleDarkMode={toggleDarkMode}
+            toggleDarkMode={toggleDarkMode || (() => {})}
             onPaused={onPaused}
             id={id}
             flipLayout={flipLayout}
             items={items}
             onActivateTimelineItem={handleTimelineItemClick}
             onUpdateTimelineMode={handleTimelineUpdate}
-            onUpdateTextContentDensity={updateTextContentDensity}
+            onUpdateTextContentDensity={updateTextContentDensity || (() => {})}
             mode={timelineMode}
             searchQuery={searchQuery}
             onSearchChange={handleSearchChange}
@@ -294,7 +294,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             totalMatches={searchResults.length}
             currentMatchIndex={currentMatchIndex}
             onSearchKeyDown={handleSearchKeyDown}
-            searchInputRef={searchInputRef}
+            searchInputRef={searchInputRef as React.RefObject<HTMLInputElement>}
           />
         </ToolbarWrapper>
       )}

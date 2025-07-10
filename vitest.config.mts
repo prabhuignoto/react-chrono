@@ -9,9 +9,6 @@ import { resolve } from 'path';
 export default defineConfig({
   plugins: [
     react({
-      // Fast refresh for better development experience
-      fastRefresh: true,
-      
       // JSX runtime configuration
       jsxRuntime: 'automatic',
       
@@ -180,12 +177,7 @@ export default defineConfig({
     // Minimum number of workers
     minWorkers: 2,
     
-    // Worker threads
-    threads: {
-      enabled: true,
-      maxThreads: 4,
-      minThreads: 2,
-    },
+    // Worker threads - configuration moved to poolOptions
     
     // Silent mode
     silent: false,
@@ -194,14 +186,7 @@ export default defineConfig({
     update: false,
     
     // Watch mode configuration
-    watch: {
-      ignore: [
-        '**/node_modules/**',
-        '**/dist/**',
-        '**/build/**',
-        '**/coverage/**',
-      ],
-    },
+    watch: false,
     
     // Pool configuration
     pool: 'threads',
@@ -228,16 +213,14 @@ export default defineConfig({
     },
     
     // UI configuration
-    ui: {
-      enabled: false,
-    },
+    ui: false,
     
     // Browser configuration (if needed)
-    browser: {
-      enabled: false,
-      name: 'chrome',
-      headless: true,
-    },
+    // browser: {
+    //   enabled: false,
+    //   name: 'chrome',
+    //   headless: true,
+    // },
     
     // CSS configuration for testing
     css: {
@@ -252,8 +235,8 @@ export default defineConfig({
     },
     
     // Global setup and teardown
-    globalSetup: undefined,
-    globalTeardown: undefined,
+    // globalSetup: undefined,
+    // globalTeardown: undefined,
     
     // Test isolation
     isolate: true,
@@ -265,10 +248,10 @@ export default defineConfig({
     clearMocks: true,
     
     // Mock reset between tests
-    mockReset: true,
+    // mockReset: true,
     
     // Unmock between tests
-    unmock: true,
+    // unmock: true,
   },
   
   // Resolve configuration (inherited from Vite)

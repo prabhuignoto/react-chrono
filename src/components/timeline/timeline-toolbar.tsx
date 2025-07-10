@@ -284,19 +284,19 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
         )}
       </SearchWrapper>
       <ExtraControls
-        $hide={hideExtraControls}
-        $slideShowRunning={slideShowRunning}
+        $hide={hideExtraControls || false}
+        $slideShowRunning={slideShowRunning || false}
         key='timeline-extra-controls'
       >
         <div className='control-wrapper' key='quick-jump'>
           {enableQuickJump ? (
             <QuickJump
-              activeItem={activeTimelineItem}
+              activeItem={activeTimelineItem || 0}
               isDarkMode={darkMode}
               items={quickJumpItems}
               onActivateItem={onActivateTimelineItem}
               theme={theme}
-              position={toolbarPosition}
+              position={toolbarPosition || 'top'}
               isMobile={isMobile}
             />
           ) : null}
@@ -306,9 +306,9 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             <LayoutSwitcher
               isDarkMode={darkMode}
               theme={theme}
-              onUpdateTimelineMode={onUpdateTimelineMode}
-              mode={mode}
-              position={toolbarPosition}
+              onUpdateTimelineMode={(s: string) => onUpdateTimelineMode?.(s as any)}
+              mode={mode || 'VERTICAL'}
+              position={toolbarPosition || 'top'}
               isMobile={isMobile}
             />
           ) : null}
@@ -319,7 +319,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               isDarkMode={darkMode}
               theme={theme}
               onChange={onUpdateTextContentDensity}
-              position={toolbarPosition}
+              position={toolbarPosition || 'top'}
               selectedDensity={textDensity}
               isMobile={isMobile}
             ></ChangeDensity>

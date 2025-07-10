@@ -118,11 +118,11 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         setupTimer,
         setStartWidth,
       } = useSlideshow(
-        progressRef,
-        active,
-        slideShowActive,
-        slideItemDuration,
-        id,
+        progressRef as React.RefObject<HTMLElement>,
+        active ?? false,
+        slideShowActive ?? false,
+        slideItemDuration ?? 0,
+        id ?? '',
         onElapsed,
       );
 
@@ -325,7 +325,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       );
 
       const handleCardClick = useCallback(() => {
-        if (onClick && !disableInteraction && !disableAutoScrollOnClick) {
+        if (onClick && id && !disableInteraction && !disableAutoScrollOnClick) {
           onClick(id);
         }
       }, [onClick, id, disableInteraction, disableAutoScrollOnClick]);
@@ -350,7 +350,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         if (mode === 'VERTICAL_ALTERNATING') {
           return flip ? 'right' : 'left';
         }
-        return null;
+        return undefined;
       }, [mode, flip]);
 
       const gradientColor = useMemo(() => {
@@ -385,7 +385,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             showMore,
           });
         }
-        return null;
+        return undefined;
       }, [
         textOverlay,
         detailedText,
@@ -467,7 +467,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               showProgressBar={canShowProgressBar}
               triangleDir={triangleDir}
               resuming={isResuming}
-              progressRef={progressRef}
+              progressRef={progressRef as React.RefObject<HTMLProgressElement>}
             />
           )}
 
@@ -485,7 +485,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             />
           )}
 
-          {canShowNestedTimeline && (
+          {canShowNestedTimeline && items && (
             <NestedTimelineRenderer
               items={items}
               mode={'VERTICAL'}

@@ -5,7 +5,7 @@ interface UseMediaStateProps {
   slideShowActive: boolean;
   paused: boolean;
   id?: string;
-  onElapsed?: (id: string) => void;
+  onElapsed?: (id?: string) => void;
 }
 
 interface UseMediaStateReturn {

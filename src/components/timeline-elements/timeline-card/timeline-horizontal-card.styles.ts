@@ -73,6 +73,7 @@ const ShapeBorderStyle = (p: Pick<ShapeModel, '$timelinePointShape'>) => {
   } else if (p.$timelinePointShape === 'diamond') {
     return `border-radius: 0;`;
   }
+  return 'border-radius: 50%;'; // Default to circle
 };
 
 export const Shape = styled.div<ShapeModel>`
