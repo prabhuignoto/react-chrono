@@ -71,11 +71,17 @@ export const useTimelineSearch = ({
 
       const queryLower = trimmedQuery.toLowerCase();
       const results: number[] = [];
+      const maxResults = 100; // Limit results for performance
 
-      // Use for-loop for better performance than array methods
+      // Use for-loop with early break for better performance
       for (let i = 0; i < searchableContent.length; i++) {
         if (searchableContent[i].content.includes(queryLower)) {
           results.push(i);
+          
+          // Early break if we have enough results
+          if (results.length >= maxResults) {
+            break;
+          }
         }
       }
 

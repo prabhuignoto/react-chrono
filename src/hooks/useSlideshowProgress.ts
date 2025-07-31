@@ -5,10 +5,6 @@ interface UseSlideshowProgressProps {
   slideShowRunning: boolean;
   /** Current active timeline item index */
   activeTimelineItem: number;
-  /** Total number of timeline items */
-  totalItems: number;
-  /** Duration of each slide in milliseconds */
-  slideItemDuration: number;
 }
 
 interface SlideshowProgressState {
@@ -27,28 +23,16 @@ interface SlideshowProgressState {
 export const useSlideshowProgress = ({
   slideShowRunning,
   activeTimelineItem,
-  totalItems,
-  slideItemDuration,
 }: UseSlideshowProgressProps): SlideshowProgressState => {
   const [isPaused, setIsPaused] = useState(false);
-  const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastActiveItem = useRef(activeTimelineItem);
 
-  // Efficient cleanup function
-  const clearTimeouts = useCallback(() => {
-    if (pauseTimeoutRef.current) {
-      clearTimeout(pauseTimeoutRef.current);
-      pauseTimeoutRef.current = null;
-    }
-  }, []);
-
-  // Clean up timeout when slideshow stops
+  // Clean up when slideshow stops
   useEffect(() => {
     if (!slideShowRunning) {
       setIsPaused(false);
-      clearTimeouts();
     }
-  }, [slideShowRunning, clearTimeouts]);
+  }, [slideShowRunning]);
 
   // Reset pause state when active item changes (optimized)
   useEffect(() => {
@@ -72,8 +56,6 @@ export const useSlideshowProgress = ({
     }
   }, [slideShowRunning, isPaused]);
 
-  // Cleanup on unmount
-  useEffect(() => clearTimeouts, [clearTimeouts]);
 
   return {
     isPaused,

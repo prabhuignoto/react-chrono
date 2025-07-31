@@ -7,11 +7,17 @@ import {
 interface UseTimelineMediaProps {
   mode: string;
   timelineMainRef: React.RefObject<HTMLDivElement>;
+  itemSelector?: string;
+  observerOptions?: IntersectionObserverInit;
+  onIntersect?: (element: HTMLElement, isIntersecting: boolean) => void;
 }
 
 export const useTimelineMedia = ({
   mode,
   timelineMainRef,
+  itemSelector = '.vertical-item-row',
+  observerOptions,
+  onIntersect,
 }: UseTimelineMediaProps) => {
   const observer = useRef<IntersectionObserver | null>(null);
   const observedElements = useRef<Set<Element>>(new Set());
@@ -23,16 +29,23 @@ export const useTimelineMedia = ({
       requestAnimationFrame(() => {
         entries.forEach((entry) => {
           const element = entry.target as HTMLDivElement;
-          if (entry.isIntersecting) {
-            toggleMediaVisibility(element, true);
+          
+          if (onIntersect) {
+            // Custom intersection handler
+            onIntersect(element, entry.isIntersecting);
           } else {
-            toggleMediaVisibility(element, false);
-            pauseVideoEmbeds(element);
+            // Default behavior
+            if (entry.isIntersecting) {
+              toggleMediaVisibility(element, true);
+            } else {
+              toggleMediaVisibility(element, false);
+              pauseVideoEmbeds(element);
+            }
           }
         });
       });
     },
-    [],
+    [onIntersect],
   );
 
   // Memoized observer creation
@@ -42,11 +55,16 @@ export const useTimelineMedia = ({
       observedElements.current.clear();
     }
 
-    observer.current = new IntersectionObserver(handleIntersection, {
+    const defaultOptions: IntersectionObserverInit = {
       root: timelineMainRef.current,
       threshold: 0.1, // Slightly higher threshold for better performance
       rootMargin: '50px', // Preload content slightly before it becomes visible
-    });
+    };
+    
+    observer.current = new IntersectionObserver(
+      handleIntersection, 
+      observerOptions || defaultOptions
+    );
 
     return observer.current;
   }, [handleIntersection, timelineMainRef]);
@@ -71,7 +89,7 @@ export const useTimelineMedia = ({
       const element = timelineMainRef.current;
       if (!element || !observerInstance) return;
 
-      const childElements = element.querySelectorAll('.vertical-item-row');
+      const childElements = element.querySelectorAll(itemSelector);
       childElements.forEach((elem) => {
         if (!observedElements.current.has(elem)) {
           observerInstance.observe(elem);

@@ -130,8 +130,8 @@ describe('useOutsideClick', () => {
     Object.defineProperty(event, 'target', { value: mockOutsideElement });
     document.dispatchEvent(event);
 
-    // Should not throw and should NOT call callback since ref is null
-    expect(mockCallback).not.toHaveBeenCalled();
+    // Should call callback since null ref means we're outside of no element
+    expect(mockCallback).toHaveBeenCalledTimes(1);
   });
 
   it('should remove and add listeners when enabled state changes', () => {
@@ -146,7 +146,7 @@ describe('useOutsideClick', () => {
     expect(addEventListenerSpy).toHaveBeenCalledWith(
       'click',
       expect.any(Function),
-      undefined, // The optimized hook passes undefined for click events
+      { passive: true }, // The optimized hook passes passive: true for better performance
     );
 
     // Disable

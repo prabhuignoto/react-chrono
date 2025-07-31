@@ -63,13 +63,16 @@ export const useCardSize = ({
 
   // Throttled resize observer for better performance
   useEffect(() => {
-    let rafId: number;
+    let rafId: number | undefined;
+    let isUnmounted = false;
 
     const observer = new ResizeObserver((entries) => {
       // Use RAF to batch DOM updates
       if (rafId) cancelAnimationFrame(rafId);
 
       rafId = requestAnimationFrame(() => {
+        if (isUnmounted) return; // Prevent updates after unmount
+        
         for (const entry of entries) {
           if (entry.target === containerRef.current) {
             setDimensions((prev) => ({
@@ -78,6 +81,7 @@ export const useCardSize = ({
             }));
           }
         }
+        rafId = undefined;
       });
     });
 
@@ -86,6 +90,7 @@ export const useCardSize = ({
     }
 
     return () => {
+      isUnmounted = true;
       if (rafId) cancelAnimationFrame(rafId);
       observer.disconnect();
     };
@@ -126,10 +131,10 @@ export const useCardSize = ({
       detailsHeight: dimensions.detailsHeight,
       textContentLarge: calculateTextContentSize(
         dimensions.cardHeight,
-        dimensions.detailsHeight,
         cache.containerHeight,
         cache.scrollHeight,
         cache.clientHeight,
+        cache.offsetTop,
       ),
     };
   }, [dimensions]);

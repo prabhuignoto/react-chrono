@@ -3,11 +3,26 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 interface WindowSize {
   width: number;
   height: number;
+  innerWidth: number;
+  innerHeight: number;
+  outerWidth: number;
+  outerHeight: number;
+  scrollBarWidth: number;
+  scrollBarHeight: number;
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
+  orientation: 'portrait' | 'landscape';
 }
 
 interface UseWindowSizeOptions {
   debounceMs?: number;
   enableThrottling?: boolean;
+  includeScrollBar?: boolean;
+  breakpoints?: {
+    mobile?: number;
+    tablet?: number;
+  };
 }
 
 /**
@@ -17,33 +32,78 @@ interface UseWindowSizeOptions {
 export const useWindowSize = (
   options: UseWindowSizeOptions = {},
 ): WindowSize => {
-  const { debounceMs = 100, enableThrottling = true } = options;
+  const { 
+    debounceMs = 100, 
+    enableThrottling = true,
+    includeScrollBar = false,
+    breakpoints = { mobile: 768, tablet: 1024 }
+  } = options;
 
-  // Initialize with current window size or fallback
-  const [windowSize, setWindowSize] = useState<WindowSize>(() => ({
-    width: typeof window !== 'undefined' ? window.innerWidth : 0,
-    height: typeof window !== 'undefined' ? window.innerHeight : 0,
-  }));
+  // Helper to get full window info
+  const getWindowInfo = (): WindowSize => {
+    if (typeof window === 'undefined') {
+      return {
+        width: 0,
+        height: 0,
+        innerWidth: 0,
+        innerHeight: 0,
+        outerWidth: 0,
+        outerHeight: 0,
+        scrollBarWidth: 0,
+        scrollBarHeight: 0,
+        isMobile: false,
+        isTablet: false,
+        isDesktop: true,
+        orientation: 'landscape',
+      };
+    }
+
+    const width = includeScrollBar ? window.innerWidth : document.documentElement.clientWidth;
+    const height = includeScrollBar ? window.innerHeight : document.documentElement.clientHeight;
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+    const scrollBarHeight = window.innerHeight - document.documentElement.clientHeight;
+    
+    const isMobile = width < (breakpoints.mobile || 768);
+    const isTablet = width >= (breakpoints.mobile || 768) && width < (breakpoints.tablet || 1024);
+    const isDesktop = width >= (breakpoints.tablet || 1024);
+    const orientation = width > height ? 'landscape' : 'portrait';
+
+    return {
+      width,
+      height,
+      innerWidth: window.innerWidth,
+      innerHeight: window.innerHeight,
+      outerWidth: window.outerWidth,
+      outerHeight: window.outerHeight,
+      scrollBarWidth,
+      scrollBarHeight,
+      isMobile,
+      isTablet,
+      isDesktop,
+      orientation,
+    };
+  };
+
+  // Initialize with current window size
+  const [windowSize, setWindowSize] = useState<WindowSize>(getWindowInfo);
 
   const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const frameRef = useRef<number | undefined>(undefined);
   const lastSize = useRef<WindowSize>(windowSize);
 
   const updateSize = useCallback(() => {
-    const newSize = {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
+    const newSize = getWindowInfo();
 
     // Only update if size actually changed to prevent unnecessary re-renders
     if (
       newSize.width !== lastSize.current.width ||
-      newSize.height !== lastSize.current.height
+      newSize.height !== lastSize.current.height ||
+      newSize.orientation !== lastSize.current.orientation
     ) {
       lastSize.current = newSize;
       setWindowSize(newSize);
     }
-  }, []);
+  }, [includeScrollBar, breakpoints]);
 
   const handleResize = useCallback(() => {
     // Clear existing timeouts and frames
