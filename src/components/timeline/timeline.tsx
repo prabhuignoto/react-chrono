@@ -263,6 +263,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           onPaused?.();
         }
       }}
+      tabIndex={isChild ? -1 : 0}
     >
       {canShowToolbar && (
         <ToolbarWrapper position={toolbarPosition}>

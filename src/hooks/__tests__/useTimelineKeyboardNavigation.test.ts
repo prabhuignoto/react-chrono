@@ -47,17 +47,33 @@ describe('useTimelineKeyboardNavigation', () => {
       })
     );
 
-    const mockEvent = {
+    // Test ArrowRight
+    const rightEvent = {
       key: 'ArrowRight',
       preventDefault: vi.fn(),
     } as any;
 
     act(() => {
-      result.current.handleKeySelection(mockEvent);
+      result.current.handleKeySelection(rightEvent);
     });
 
-    expect(mockEvent.preventDefault).toHaveBeenCalled();
+    expect(rightEvent.preventDefault).toHaveBeenCalled();
     expect(mockHandlers.onNext).toHaveBeenCalled();
+
+    // Clear mocks and test ArrowLeft
+    vi.clearAllMocks();
+    
+    const leftEvent = {
+      key: 'ArrowLeft',
+      preventDefault: vi.fn(),
+    } as any;
+
+    act(() => {
+      result.current.handleKeySelection(leftEvent);
+    });
+
+    expect(leftEvent.preventDefault).toHaveBeenCalled();
+    expect(mockHandlers.onPrevious).toHaveBeenCalled();
   });
 
   it('should handle flip layout in horizontal mode', () => {
@@ -70,17 +86,33 @@ describe('useTimelineKeyboardNavigation', () => {
       })
     );
 
-    const mockEvent = {
+    // Test ArrowRight with flipLayout - should go to previous
+    const rightEvent = {
       key: 'ArrowRight',
       preventDefault: vi.fn(),
     } as any;
 
     act(() => {
-      result.current.handleKeySelection(mockEvent);
+      result.current.handleKeySelection(rightEvent);
     });
 
-    expect(mockEvent.preventDefault).toHaveBeenCalled();
+    expect(rightEvent.preventDefault).toHaveBeenCalled();
     expect(mockHandlers.onPrevious).toHaveBeenCalled();
+
+    // Clear mocks and test ArrowLeft with flipLayout - should go to next
+    vi.clearAllMocks();
+    
+    const leftEvent = {
+      key: 'ArrowLeft',
+      preventDefault: vi.fn(),
+    } as any;
+
+    act(() => {
+      result.current.handleKeySelection(leftEvent);
+    });
+
+    expect(leftEvent.preventDefault).toHaveBeenCalled();
+    expect(mockHandlers.onNext).toHaveBeenCalled();
   });
 
   it('should handle Home and End keys', () => {
@@ -118,6 +150,84 @@ describe('useTimelineKeyboardNavigation', () => {
 
     expect(endEvent.preventDefault).toHaveBeenCalled();
     expect(mockHandlers.onLast).toHaveBeenCalled();
+  });
+
+  it('should handle arrow keys in horizontal all mode', () => {
+    const { result } = renderHook(() =>
+      useTimelineKeyboardNavigation({
+        mode: 'HORIZONTAL_ALL',
+        hasFocus: true,
+        flipLayout: false,
+        ...mockHandlers,
+      })
+    );
+
+    // Test ArrowRight
+    const rightEvent = {
+      key: 'ArrowRight',
+      preventDefault: vi.fn(),
+    } as any;
+
+    act(() => {
+      result.current.handleKeySelection(rightEvent);
+    });
+
+    expect(rightEvent.preventDefault).toHaveBeenCalled();
+    expect(mockHandlers.onNext).toHaveBeenCalled();
+
+    // Clear mocks and test ArrowLeft
+    vi.clearAllMocks();
+    
+    const leftEvent = {
+      key: 'ArrowLeft',
+      preventDefault: vi.fn(),
+    } as any;
+
+    act(() => {
+      result.current.handleKeySelection(leftEvent);
+    });
+
+    expect(leftEvent.preventDefault).toHaveBeenCalled();
+    expect(mockHandlers.onPrevious).toHaveBeenCalled();
+  });
+
+  it('should handle arrow keys in vertical alternating mode', () => {
+    const { result } = renderHook(() =>
+      useTimelineKeyboardNavigation({
+        mode: 'VERTICAL_ALTERNATING',
+        hasFocus: true,
+        flipLayout: false,
+        ...mockHandlers,
+      })
+    );
+
+    // Test ArrowDown
+    const downEvent = {
+      key: 'ArrowDown',
+      preventDefault: vi.fn(),
+    } as any;
+
+    act(() => {
+      result.current.handleKeySelection(downEvent);
+    });
+
+    expect(downEvent.preventDefault).toHaveBeenCalled();
+    expect(mockHandlers.onNext).toHaveBeenCalled();
+
+    // Clear mocks and test ArrowUp
+    vi.clearAllMocks();
+    
+    const upEvent = {
+      key: 'ArrowUp',
+      preventDefault: vi.fn(),
+    } as any;
+
+    act(() => {
+      result.current.handleKeySelection(upEvent);
+    });
+
+    expect(upEvent.preventDefault).toHaveBeenCalled();
+    expect(mockHandlers.onPrevious).toHaveBeenCalled();
   });
 
   it('should not handle keys when not focused', () => {

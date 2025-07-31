@@ -16,6 +16,10 @@ import {
   SearchInput,
   SearchWrapper,
   SearchInfo,
+  SearchControls,
+  NavigationGroup,
+  SearchGroup,
+  ActionGroup,
 } from './timeline.style';
 
 // Helper function to convert ReactNode to string safely
@@ -112,12 +116,12 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
         name: 'popover',
         onSelect: () => {},
       },
-      {
-        id: 'change-density',
-        label: 'change_density',
-        name: 'changeDensity',
-        onSelect: () => {},
-      },
+      // {
+      //   id: 'change-density',
+      //   label: 'change_density',
+      //   name: 'changeDensity',
+      //   onSelect: () => {},
+      // },
     ];
   }, []);
 
@@ -206,24 +210,27 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   // Render the TimelineToolbar component
   return (
     <Toolbar items={toolbarItems} theme={theme}>
-      <Controls
-        disableLeft={isLeftDisabled}
-        disableRight={isRightDisabled}
-        id={id}
-        onFirst={onFirst}
-        onLast={onLast}
-        onNext={onNext}
-        onPrevious={onPrevious}
-        onReplay={onRestartSlideshow}
-        slideShowEnabled={slideShowEnabled}
-        slideShowRunning={slideShowRunning}
-        isDark={darkMode}
-        onToggleDarkMode={toggleDarkMode}
-        onPaused={onPaused}
-        activeTimelineItem={activeTimelineItem}
-        totalItems={totalItems}
-      />
-      <SearchWrapper theme={theme}>
+      <NavigationGroup $primary>
+        <Controls
+          disableLeft={isLeftDisabled}
+          disableRight={isRightDisabled}
+          id={id}
+          onFirst={onFirst}
+          onLast={onLast}
+          onNext={onNext}
+          onPrevious={onPrevious}
+          onReplay={onRestartSlideshow}
+          slideShowEnabled={slideShowEnabled}
+          slideShowRunning={slideShowRunning}
+          isDark={darkMode}
+          onToggleDarkMode={toggleDarkMode}
+          onPaused={onPaused}
+          activeTimelineItem={activeTimelineItem}
+          totalItems={totalItems}
+        />
+      </NavigationGroup>
+      <SearchGroup>
+        <SearchWrapper theme={theme}>
         <SearchInput
           ref={searchInputRef}
           type="search"
@@ -249,45 +256,49 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             <CloseIcon />
           </TimelineNavButton>
         )}
-        {totalMatches > 0 && (
-          <SearchInfo theme={theme}>
-            {`${currentMatchIndex + 1} / ${totalMatches}`}
-          </SearchInfo>
-        )}
-        {searchQuery && (
-          <>
-            <div className="timeline-nav-wrapper">
-              <TimelineNavButton
-                onClick={onPreviousMatch}
-                title={buttonTexts?.previousMatch ?? 'Previous Match'}
-                aria-label={buttonTexts?.previousMatch ?? 'Previous Match'}
-                disabled={disableSearchNav}
-                theme={theme}
-                style={{ height: '24px', width: '24px' }}
-              >
-                <ChevronLeft />
-              </TimelineNavButton>
-            </div>
-            <div className="timeline-nav-wrapper">
-              <TimelineNavButton
-                onClick={onNextMatch}
-                title={buttonTexts?.nextMatch ?? 'Next Match'}
-                aria-label={buttonTexts?.nextMatch ?? 'Next Match'}
-                disabled={disableSearchNav}
-                theme={theme}
-                style={{ height: '24px', width: '24px' }}
-              >
-                <ChevronRight />
-              </TimelineNavButton>
-            </div>
-          </>
-        )}
-      </SearchWrapper>
-      <ExtraControls
-        $hide={hideExtraControls}
-        $slideShowRunning={slideShowRunning}
-        key="timeline-extra-controls"
-      >
+        <SearchControls>
+          {totalMatches > 0 && (
+            <SearchInfo theme={theme}>
+              {`${currentMatchIndex + 1} / ${totalMatches}`}
+            </SearchInfo>
+          )}
+          {searchQuery && (
+            <>
+              <div className="timeline-nav-wrapper">
+                <TimelineNavButton
+                  onClick={onPreviousMatch}
+                  title={buttonTexts?.previousMatch ?? 'Previous Match'}
+                  aria-label={buttonTexts?.previousMatch ?? 'Previous Match'}
+                  disabled={disableSearchNav}
+                  theme={theme}
+                  style={{ height: '28px', width: '28px' }}
+                >
+                  <ChevronLeft />
+                </TimelineNavButton>
+              </div>
+              <div className="timeline-nav-wrapper">
+                <TimelineNavButton
+                  onClick={onNextMatch}
+                  title={buttonTexts?.nextMatch ?? 'Next Match'}
+                  aria-label={buttonTexts?.nextMatch ?? 'Next Match'}
+                  disabled={disableSearchNav}
+                  theme={theme}
+                  style={{ height: '28px', width: '28px' }}
+                >
+                  <ChevronRight />
+                </TimelineNavButton>
+              </div>
+            </>
+          )}
+        </SearchControls>
+        </SearchWrapper>
+      </SearchGroup>
+      <ActionGroup>
+        <ExtraControls
+          $hide={hideExtraControls}
+          $slideShowRunning={slideShowRunning}
+          key="timeline-extra-controls"
+        >
         <div className="control-wrapper" key="quick-jump">
           {enableQuickJump ? (
             <QuickJump
@@ -325,7 +336,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             ></ChangeDensity>
           </div>
         ) : null}{' '}
-      </ExtraControls>
+        </ExtraControls>
+      </ActionGroup>
     </Toolbar>
   );
 };

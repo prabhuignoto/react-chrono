@@ -41,7 +41,7 @@ export const useTimelineKeyboardNavigation = ({
       }
 
       // Mode-specific handlers
-      if (mode === 'HORIZONTAL') {
+      if (mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL') {
         if (key === 'ArrowRight') {
           event.preventDefault();
           flipLayout ? onPrevious() : onNext();

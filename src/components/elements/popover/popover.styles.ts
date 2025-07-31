@@ -58,7 +58,7 @@ export const PopoverHolder = styled.div<{
   z-index: ${zIndex.popover}; /* Use standardized z-index for popovers */
 `;
 
-// Clickable selector button that triggers the popover
+// Clickable selector button that triggers the popover - matches navigation button size
 export const Selecter = styled.div<{
   $isDarkMode: boolean;
   $isMobile?: boolean;
@@ -70,22 +70,53 @@ export const Selecter = styled.div<{
   color: ${({ $theme }) => $theme.toolbarTextColor};
   border-radius: ${BORDER_RADIUS};
   border: ${({ $theme }) => getBorderStyle($theme)};
-  box-shadow: ${({ $open, $theme }) => getInteractiveShadow($theme, $open)};
+  box-shadow: 0 1px 1px ${({ $theme }) => $theme.shadowColor ?? 'rgba(0, 0, 0, 0.08)'};
   cursor: pointer;
   justify-content: space-between;
-  padding: ${(p) => (p.$isMobile ? '0.4rem' : `0.4rem 0.5rem`)};
+  padding: 0;
   user-select: none;
   margin-right: 0.5rem;
+  height: 36px;
+  min-width: 36px;
+  width: auto;
+  padding: 0 0.5rem;
   transition:
     background-color 0.2s ease-out,
     border-color 0.2s ease-out,
-    box-shadow 0.2s ease-out;
+    box-shadow 0.2s ease-out,
+    transform 0.15s ease-out;
 
   &:hover {
     background: ${({ $theme }) =>
       $theme.buttonHoverBgColor || $theme.toolbarBtnBgColor};
     border-color: ${({ $theme }) =>
       $theme.buttonHoverBorderColor || $theme.primary};
+    box-shadow: 0 2px 4px ${({ $theme }) => $theme.shadowColor ?? 'rgba(0, 0, 0, 0.12)'};
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: scale(0.95);
+    box-shadow: inset 0 1px 1px ${({ $theme }) => $theme.shadowColor ?? 'rgba(0, 0, 0, 0.1)'};
+  }
+  
+  &:focus {
+    outline: 2px solid ${({ $theme }) => $theme.primary || '#007acc'};
+    outline-offset: 2px;
+  }
+  
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+  
+  /* Ensure crisp borders */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  @media (max-width: 480px) {
+    height: 40px;
+    min-width: 40px;
+    padding: 0 0.6rem;
   }
 `;
 
@@ -93,14 +124,25 @@ export const Selecter = styled.div<{
 export const SelecterIcon = styled.span<{ $open: boolean; $theme: Theme }>`
   ${flexCenter};
   color: ${({ $theme }) => $theme.iconColor || $theme.primary};
-  height: 1.25rem;
-  width: 1.25rem;
+  height: 20px;
+  width: 20px;
   transition: transform 0.2s ease-in-out;
-  margin-right: 0.1rem;
+  margin-right: 0.25rem;
+  flex-shrink: 0;
 
   & svg {
-    height: 100%;
-    width: 100%;
+    height: 20px;
+    width: 20px;
+  }
+  
+  @media (max-width: 480px) {
+    height: 22px;
+    width: 22px;
+    
+    & svg {
+      height: 22px;
+      width: 22px;
+    }
   }
 `;
 

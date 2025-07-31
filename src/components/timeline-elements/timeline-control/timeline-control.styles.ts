@@ -18,6 +18,7 @@ export const ScreenReaderOnly = styled.div`
 export const TimelineNavWrapper = styled.div<{ theme?: Theme }>`
   border-radius: 8px;
   display: flex;
+  align-items: center;
   list-style: none;
   padding: 0.25rem;
   // box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -25,6 +26,10 @@ export const TimelineNavWrapper = styled.div<{ theme?: Theme }>`
   // border: 1px solid ${(p) => p.theme.toolbarBtnBgColor};
   position: relative;
   z-index: ${zIndex.controls};
+  
+  &:hover {
+    background: ${(p) => p.theme.toolbarBgColor}; /* Prevent background color changes on hover */
+  }
 
   .nav-item {
     padding: 0;
@@ -64,17 +69,22 @@ export const TimelineNavButton = styled.button<{
   color: ${(p) => p.theme.toolbarTextColor ?? p.theme.secondary};
   cursor: pointer;
   display: flex;
-  height: 28px;
+  height: 36px;
   justify-content: center;
-  margin: 0 0.2rem;
+  align-self: center;
+  margin: 0 0.25rem;
   padding: 0;
   transition:
     background-color 0.2s ease-out,
     transform 0.15s ease-out,
     box-shadow 0.2s ease-out,
     border-color 0.2s ease-out;
-  width: 28px;
+  width: 36px;
   box-shadow: 0 1px 1px ${(p) => p.theme.shadowColor ?? 'rgba(0, 0, 0, 0.08)'};
+  
+  /* Ensure crisp borders */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   transform: ${(p) => (p.rotate === 'TRUE' ? 'rotate(90deg)' : 'none')};
 
@@ -93,6 +103,15 @@ export const TimelineNavButton = styled.button<{
     background: ${(p) => p.theme.toolbarBtnBgColor};
     box-shadow: inset 0 1px 1px
       ${(p) => p.theme.shadowColor ?? 'rgba(0, 0, 0, 0.1)'};
+  }
+  
+  &:focus {
+    outline: 2px solid ${(p) => p.theme.primary || '#007acc'};
+    outline-offset: 2px;
+  }
+  
+  &:focus:not(:focus-visible) {
+    outline: none;
   }
 
   ${(p) =>
@@ -124,10 +143,21 @@ export const TimelineNavButton = styled.button<{
     `}
 
   svg {
-    width: 75%;
-    height: 75%;
+    width: 20px;
+    height: 20px;
     color: ${(p) => p.theme.iconColor ?? p.theme.primary};
     transition: color 0.2s ease-out;
+  }
+  
+  @media (max-width: 480px) {
+    height: 40px;
+    width: 40px;
+    margin: 0 0.3rem;
+    
+    svg {
+      width: 22px;
+      height: 22px;
+    }
   }
 `;
 
