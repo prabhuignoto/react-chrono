@@ -153,13 +153,30 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     onSearchChange(event.target.value);
   };
 
+  // Prevent search input from losing focus when timeline elements are clicked
+  const handleSearchInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    // Check if the new focus target is a timeline card or navigation element
+    const relatedTarget = event.relatedTarget as HTMLElement;
+    
+    // If focus is moving to a timeline card or navigation, prevent blur
+    if (relatedTarget && (
+      relatedTarget.closest('[data-testid*="timeline"]') ||
+      relatedTarget.closest('.timeline-card') ||
+      relatedTarget.closest('.timeline-item')
+    )) {
+      // Restore focus to search input after a short delay
+      setTimeout(() => {
+        if (searchInputRef?.current) {
+          searchInputRef.current.focus();
+        }
+      }, 10);
+    }
+  };
+
   // Handle clear search and focus the input
   const handleClearSearch = () => {
     onClearSearch();
-    // Focus the search input after clearing
-    setTimeout(() => {
-      searchInputRef?.current?.focus();
-    }, 0);
+    // The focus restoration is now handled in the hook
   };
 
   // Add KeyDown handler for Enter key navigation
@@ -169,35 +186,12 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     if (event.key === 'Enter' && totalMatches > 0) {
       event.preventDefault(); // Prevent potential form submission
 
-      // Save the current search query before navigation
-      const currentQuery = searchQuery;
-
-      // Navigate to next match
+      // Navigate to next match - focus restoration is handled in the hook
       if (onSearchKeyDown) {
-        // Use the provided handler if available
         onSearchKeyDown(event);
       } else {
-        onNextMatch(); // Use default navigation
+        onNextMatch();
       }
-
-      // Re-focus the search input after a short delay
-      // This allows the navigation to complete first
-      setTimeout(() => {
-        if (searchInputRef?.current) {
-          searchInputRef.current.focus();
-
-          // If the value has been cleared, restore it
-          if (searchInputRef.current.value === '' && currentQuery) {
-            // This is a backup to ensure the search query persists
-            // The main handling should be in the parent component
-            onSearchChange(currentQuery);
-          }
-
-          // Ensure the cursor is at the end of the text
-          const length = searchInputRef.current.value.length;
-          searchInputRef.current.setSelectionRange(length, length);
-        }
-      }, 50);
     }
   };
 
@@ -238,6 +232,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           value={searchQuery}
           onChange={handleInputChange}
           onKeyDown={handleSearchKeyDown}
+          onBlur={handleSearchInputBlur}
           aria-label={buttonTexts?.searchAriaLabel ?? 'Search timeline content'}
           disabled={slideShowRunning}
         />

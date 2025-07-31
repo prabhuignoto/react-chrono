@@ -247,13 +247,37 @@ export const SearchInput = styled.input<{ theme?: Theme }>`
   border: none;
   outline: none;
   background: transparent;
-  color: ${(p) => p.theme?.toolbarTextColor || p.theme?.primary || '#000'};
+  color: ${(p) => {
+    // Primary: Use toolbarTextColor if available
+    if (p.theme?.toolbarTextColor) {
+      return p.theme.toolbarTextColor;
+    }
+    // Fallback: Determine based on toolbar background or textColor
+    if (p.theme?.textColor) {
+      return p.theme.textColor;
+    }
+    // Final fallback: Dark vs light mode detection
+    const isDarkMode = p.theme?.toolbarBgColor === '#111827' || p.theme?.primary === '#3b82f6';
+    return isDarkMode ? '#f3f4f6' : '#1e293b';
+  }};
   font-size: 0.9rem;
   padding: 0.4rem 0.2rem;
   min-height: 28px;
 
   &::placeholder {
-    color: ${(p) => p.theme?.toolbarTextColor || p.theme?.secondary || '#666'};
+    color: ${(p) => {
+      // Primary: Use toolbar text color with reduced opacity
+      if (p.theme?.toolbarTextColor) {
+        return p.theme.toolbarTextColor;
+      }
+      // Secondary: Use secondary color if available
+      if (p.theme?.secondary) {
+        return p.theme.secondary;
+      }
+      // Tertiary: Determine based on dark/light mode
+      const isDarkMode = p.theme?.toolbarBgColor === '#111827' || p.theme?.primary === '#3b82f6';
+      return isDarkMode ? '#d1d5db' : '#6b7280';
+    }};
     opacity: 0.8;
     font-weight: 400;
   }
@@ -267,8 +291,19 @@ export const SearchInput = styled.input<{ theme?: Theme }>`
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus {
-    -webkit-text-fill-color: ${(p) => p.theme?.toolbarTextColor || p.theme?.primary || '#000'};
+    -webkit-text-fill-color: ${(p) => {
+      // Use same logic as main color
+      if (p.theme?.toolbarTextColor) {
+        return p.theme.toolbarTextColor;
+      }
+      if (p.theme?.textColor) {
+        return p.theme.textColor;
+      }
+      const isDarkMode = p.theme?.toolbarBgColor === '#111827' || p.theme?.primary === '#3b82f6';
+      return isDarkMode ? '#f3f4f6' : '#1e293b';
+    }} !important;
     -webkit-box-shadow: 0 0 0px 1000px ${(p) => p.theme?.toolbarBtnBgColor || 'transparent'} inset;
+    transition: background-color 5000s ease-in-out 0s;
   }
 
   &::-webkit-search-cancel-button {

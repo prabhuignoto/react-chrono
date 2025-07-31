@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef, useMemo } from 'react';
+import { useCallback, useState, useRef, useMemo, useEffect } from 'react';
 import { TimelineCardModel } from '@models/TimelineItemModel';
 import { getSearchableText } from '../utils/timelineUtils';
 import { useDebouncedCallback } from 'use-debounce';
@@ -19,6 +19,8 @@ export const useTimelineSearch = ({
   const [currentMatchIndex, setCurrentMatchIndex] = useState(-1);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const activeItemIndex = useRef<number>(0);
+  const searchTimeoutRef = useRef<NodeJS.Timeout>();
+  const isFirstSearchRef = useRef<boolean>(true);
 
   // Cache callback refs to prevent unnecessary re-renders
   const onTimelineUpdatedRef = useRef(onTimelineUpdated);
@@ -47,11 +49,17 @@ export const useTimelineSearch = ({
     });
   }, [items]);
 
-  // Optimized focus helper with reduced timeout
-  const focusSearchInput = useCallback(() => {
+  // Optimized focus helper - only focus when needed, not during typing
+  const focusSearchInput = useCallback((forceRefocus = false) => {
+    // Only refocus if the search input is not currently focused or if forced
+    if (!forceRefocus && document.activeElement === searchInputRef.current) {
+      return;
+    }
+    
     // Use requestAnimationFrame for better performance
     requestAnimationFrame(() => {
-      if (searchInputRef.current) {
+      if (searchInputRef.current && 
+          (forceRefocus || document.activeElement !== searchInputRef.current)) {
         searchInputRef.current.focus();
         const length = searchInputRef.current.value.length;
         searchInputRef.current.setSelectionRange(length, length);
@@ -92,21 +100,31 @@ export const useTimelineSearch = ({
         const firstMatchData = searchableContent[results[0]];
         if (firstMatchData?.id) {
           activeItemIndex.current = results[0];
-          onTimelineUpdatedRef.current?.(results[0]);
-          handleTimelineItemClickRef.current(firstMatchData.id);
-          focusSearchInput();
+          
+          // Clear any existing timeout
+          if (searchTimeoutRef.current) {
+            clearTimeout(searchTimeoutRef.current);
+          }
+          
+          // On first search, focus immediately. On subsequent searches, use delay
+          const delay = isFirstSearchRef.current ? 100 : 400;
+          isFirstSearchRef.current = false;
+          
+          searchTimeoutRef.current = setTimeout(() => {
+            onTimelineUpdatedRef.current?.(results[0]);
+            handleTimelineItemClickRef.current(firstMatchData.id);
+          }, delay);
         }
       } else {
         setCurrentMatchIndex(-1);
-        focusSearchInput();
       }
     },
     [searchableContent, focusSearchInput],
   );
 
   // Optimized debounced search with better performance
-  const debouncedSearch = useDebouncedCallback(findMatches, 150, {
-    maxWait: 500,
+  const debouncedSearch = useDebouncedCallback(findMatches, 200, {
+    maxWait: 600,
     leading: false,
     trailing: true,
   });
@@ -124,6 +142,14 @@ export const useTimelineSearch = ({
     setSearchResults([]);
     setCurrentMatchIndex(-1);
     debouncedSearch.cancel();
+    
+    // Clear any pending auto-focus timeout
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+    
+    // Reset first search flag when clearing
+    isFirstSearchRef.current = true;
 
     if (items.length > 0) {
       activeItemIndex.current = 0;
@@ -134,7 +160,10 @@ export const useTimelineSearch = ({
         handleTimelineItemClickRef.current(firstItem.id);
       }
     }
-  }, [items, debouncedSearch]);
+    
+    // Force refocus after clearing
+    focusSearchInput(true);
+  }, [items, debouncedSearch, focusSearchInput]);
 
   // Optimized navigation with bounds checking
   const navigateMatches = useCallback(
@@ -159,7 +188,8 @@ export const useTimelineSearch = ({
 
       if (matchData?.id) {
         handleTimelineItemClickRef.current(matchData.id);
-        focusSearchInput();
+        // Force refocus after navigation
+        focusSearchInput(true);
       }
     },
     [searchResults, currentMatchIndex, searchableContent, focusSearchInput],
@@ -192,6 +222,15 @@ export const useTimelineSearch = ({
     },
     [searchResults.length, handleNextMatch, clearSearch],
   );
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return {
     searchQuery,
