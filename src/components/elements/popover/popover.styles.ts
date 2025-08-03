@@ -70,7 +70,8 @@ export const Selecter = styled.div<{
   color: ${({ $theme }) => $theme.toolbarTextColor};
   border-radius: ${BORDER_RADIUS};
   border: ${({ $theme }) => getBorderStyle($theme)};
-  box-shadow: 0 1px 1px ${({ $theme }) => $theme.shadowColor ?? 'rgba(0, 0, 0, 0.08)'};
+  box-shadow: 0 1px 1px
+    ${({ $theme }) => $theme.shadowColor ?? 'rgba(0, 0, 0, 0.08)'};
   cursor: pointer;
   justify-content: space-between;
   padding: 0;
@@ -91,28 +92,30 @@ export const Selecter = styled.div<{
       $theme.buttonHoverBgColor || $theme.toolbarBtnBgColor};
     border-color: ${({ $theme }) =>
       $theme.buttonHoverBorderColor || $theme.primary};
-    box-shadow: 0 2px 4px ${({ $theme }) => $theme.shadowColor ?? 'rgba(0, 0, 0, 0.12)'};
+    box-shadow: 0 2px 4px
+      ${({ $theme }) => $theme.shadowColor ?? 'rgba(0, 0, 0, 0.12)'};
     transform: translateY(-1px);
   }
 
   &:active {
     transform: scale(0.95);
-    box-shadow: inset 0 1px 1px ${({ $theme }) => $theme.shadowColor ?? 'rgba(0, 0, 0, 0.1)'};
+    box-shadow: inset 0 1px 1px
+      ${({ $theme }) => $theme.shadowColor ?? 'rgba(0, 0, 0, 0.1)'};
   }
-  
+
   &:focus {
     outline: 2px solid ${({ $theme }) => $theme.primary || '#007acc'};
     outline-offset: 2px;
   }
-  
+
   &:focus:not(:focus-visible) {
     outline: none;
   }
-  
+
   /* Ensure crisp borders */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+
   @media (max-width: 480px) {
     height: 40px;
     min-width: 40px;
@@ -134,11 +137,11 @@ export const SelecterIcon = styled.span<{ $open: boolean; $theme: Theme }>`
     height: 20px;
     width: 20px;
   }
-  
+
   @media (max-width: 480px) {
     height: 22px;
     width: 22px;
-    
+
     & svg {
       height: 22px;
       width: 22px;

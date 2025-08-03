@@ -57,7 +57,7 @@ export function useKeyHandler(
 
       // Check if the pressed key matches any of the target keys
       const keyMatch = keyArray.includes(e.key);
-      const keyCodeMatch = 
+      const keyCodeMatch =
         e.key === undefined && keyCodeArray.includes(e.keyCode);
 
       if (keyMatch || keyCodeMatch) {
@@ -85,11 +85,11 @@ export function useKeyHandler(
     if (!enabled) return;
 
     // Use passive listeners where possible for better scroll performance
-    const listenerOptions = 
-      preventDefault || stopPropagation 
-        ? { passive: false } 
+    const listenerOptions =
+      preventDefault || stopPropagation
+        ? { passive: false }
         : { passive: true };
-    
+
     document.addEventListener(eventType, handleKey, listenerOptions);
 
     return () => {

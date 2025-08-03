@@ -54,7 +54,9 @@ describe('useBackground', () => {
 
   it('calls hexToRGBA and returns its value for valid hex', () => {
     vi.mocked(hexToRGBA).mockReturnValue('rgba(255,255,255,0.8)');
-    const { result } = renderHook(() => useBackground('#ffffff', 0.8, { format: 'hex' }));
+    const { result } = renderHook(() =>
+      useBackground('#ffffff', 0.8, { format: 'hex' }),
+    );
     expect(hexToRGBA).toHaveBeenCalledWith('#ffffff', 0.8);
     expect(result.current).toBe('rgba(255,255,255,0.8)');
   });

@@ -24,7 +24,7 @@ interface UseBackgroundOptions {
 export const useBackground = (
   color?: string,
   opacity = 0.8,
-  options: UseBackgroundOptions = {}
+  options: UseBackgroundOptions = {},
 ): string => {
   const { format = 'auto' } = options;
 

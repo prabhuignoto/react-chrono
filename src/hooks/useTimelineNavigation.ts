@@ -84,7 +84,14 @@ export const useTimelineNavigation = ({
         if (targetElement) scrollToElement(targetElement, mode);
       }
     }
-  }, [hasFocus, items, findTargetElement, mode, scrollToElement, stableOnPrevious]);
+  }, [
+    hasFocus,
+    items,
+    findTargetElement,
+    mode,
+    scrollToElement,
+    stableOnPrevious,
+  ]);
 
   const handleFirst = useCallback(() => {
     if (!hasFocus) return;
@@ -98,7 +105,14 @@ export const useTimelineNavigation = ({
         if (targetElement) scrollToElement(targetElement, mode);
       }
     }
-  }, [hasFocus, items, findTargetElement, mode, scrollToElement, stableOnFirst]);
+  }, [
+    hasFocus,
+    items,
+    findTargetElement,
+    mode,
+    scrollToElement,
+    stableOnFirst,
+  ]);
 
   const handleLast = useCallback(() => {
     if (!hasFocus) return;

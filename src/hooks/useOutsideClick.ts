@@ -20,14 +20,14 @@ export default function useOutsideClick(
   callback: () => void,
   options: UseOutsideClickOptions = {},
 ) {
-  const { 
-    eventType = 'click', 
+  const {
+    eventType = 'click',
     enabled = true,
     preventDefault = false,
     stopPropagation = false,
-    excludeRefs = []
+    excludeRefs = [],
   } = options;
-  
+
   const stableCallback = useStableCallback(callback);
   const lastEnabled = useRef(enabled);
 
@@ -41,9 +41,9 @@ export default function useOutsideClick(
       if (!lastEnabled.current) return;
 
       const target = e.target as Node;
-      
+
       // Check if click is inside any of the refs
-      const isInsideAnyRef = allRefs.some(ref => {
+      const isInsideAnyRef = allRefs.some((ref) => {
         const element = ref.current;
         return element && element.contains(target);
       });
@@ -63,11 +63,11 @@ export default function useOutsideClick(
     if (!enabled) return;
 
     // Use passive listeners where possible for better scroll performance
-    const listenerOptions = 
+    const listenerOptions =
       preventDefault || stopPropagation || eventType === 'touchstart'
-        ? { passive: false } 
+        ? { passive: false }
         : { passive: true };
-    
+
     document.addEventListener(eventType, handleClick, listenerOptions);
 
     return () => {

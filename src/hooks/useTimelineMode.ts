@@ -42,7 +42,7 @@ export const useTimelineMode = ({
   );
 
   const stableUpdateHorizontalAllCards = useStableCallback(
-    updateHorizontalAllCards || (() => {})
+    updateHorizontalAllCards || (() => {}),
   );
 
   const handleTimelineUpdate = useCallback(
@@ -54,7 +54,8 @@ export const useTimelineMode = ({
 
       // Handle horizontal cards update with stable reference
       if (updateHorizontalAllCards) {
-        const shouldShowAll = mappedMode === ExtendedTimelineModeEnum.HORIZONTAL_ALL;
+        const shouldShowAll =
+          mappedMode === ExtendedTimelineModeEnum.HORIZONTAL_ALL;
         stableUpdateHorizontalAllCards(shouldShowAll);
       }
     },

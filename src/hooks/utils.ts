@@ -6,18 +6,15 @@ import { useCallback, useRef, useEffect, MutableRefObject } from 'react';
  * @returns A stable callback reference
  */
 export const useStableCallback = <T extends (...args: any[]) => any>(
-  callback: T
+  callback: T,
 ): T => {
   const ref = useRef(callback);
-  
+
   useEffect(() => {
     ref.current = callback;
   }, [callback]);
-  
-  return useCallback(
-    (...args: Parameters<T>) => ref.current(...args),
-    []
-  ) as T;
+
+  return useCallback((...args: Parameters<T>) => ref.current(...args), []) as T;
 };
 
 /**
@@ -27,11 +24,11 @@ export const useStableCallback = <T extends (...args: any[]) => any>(
  */
 export const useLatestRef = <T>(value: T): MutableRefObject<T> => {
   const ref = useRef(value);
-  
+
   useEffect(() => {
     ref.current = value;
   });
-  
+
   return ref;
 };
 
@@ -41,11 +38,11 @@ export const useLatestRef = <T>(value: T): MutableRefObject<T> => {
  */
 export const useUnmount = (cleanup: () => void): void => {
   const cleanupRef = useRef(cleanup);
-  
+
   useEffect(() => {
     cleanupRef.current = cleanup;
   }, [cleanup]);
-  
+
   useEffect(() => {
     return () => {
       cleanupRef.current();
@@ -59,21 +56,21 @@ export const useUnmount = (cleanup: () => void): void => {
  * @returns Throttled callback
  */
 export const useRAFThrottle = <T extends (...args: any[]) => void>(
-  callback: T
+  callback: T,
 ): T => {
   const frameRef = useRef<number>();
   const argsRef = useRef<any[]>();
   const callbackRef = useRef(callback);
-  
+
   useEffect(() => {
     callbackRef.current = callback;
   }, [callback]);
-  
+
   const throttled = useCallback((...args: Parameters<T>) => {
     argsRef.current = args;
-    
+
     if (frameRef.current) return;
-    
+
     frameRef.current = requestAnimationFrame(() => {
       if (argsRef.current) {
         callbackRef.current(...argsRef.current);
@@ -81,7 +78,7 @@ export const useRAFThrottle = <T extends (...args: any[]) => void>(
       frameRef.current = undefined;
     });
   }, []) as T;
-  
+
   useEffect(() => {
     return () => {
       if (frameRef.current) {
@@ -89,7 +86,7 @@ export const useRAFThrottle = <T extends (...args: any[]) => void>(
       }
     };
   }, []);
-  
+
   return throttled;
 };
 
@@ -98,9 +95,11 @@ export const useRAFThrottle = <T extends (...args: any[]) => void>(
  */
 export const HEX_COLOR_REGEX = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
 export const RGB_COLOR_REGEX = /^rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/;
-export const RGBA_COLOR_REGEX = /^rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)$/;
+export const RGBA_COLOR_REGEX =
+  /^rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)$/;
 export const HSL_COLOR_REGEX = /^hsl\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*\)$/;
-export const HSLA_COLOR_REGEX = /^hsla\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*,\s*([\d.]+)\s*\)$/;
+export const HSLA_COLOR_REGEX =
+  /^hsla\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*,\s*([\d.]+)\s*\)$/;
 
 export type ColorFormat = 'hex' | 'rgb' | 'rgba' | 'hsl' | 'hsla' | 'unknown';
 
@@ -119,7 +118,7 @@ export const detectColorFormat = (color: string): ColorFormat => {
 export const adjustRGBOpacity = (color: string, opacity: number): string => {
   const match = RGB_COLOR_REGEX.exec(color) || RGBA_COLOR_REGEX.exec(color);
   if (!match) return '';
-  
+
   const [, r, g, b] = match;
   return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 };
@@ -130,7 +129,7 @@ export const adjustRGBOpacity = (color: string, opacity: number): string => {
 export const adjustHSLOpacity = (color: string, opacity: number): string => {
   const match = HSL_COLOR_REGEX.exec(color) || HSLA_COLOR_REGEX.exec(color);
   if (!match) return '';
-  
+
   const [, h, s, l] = match;
   return `hsla(${h}, ${s}%, ${l}%, ${opacity})`;
 };

@@ -32,11 +32,11 @@ interface UseWindowSizeOptions {
 export const useWindowSize = (
   options: UseWindowSizeOptions = {},
 ): WindowSize => {
-  const { 
-    debounceMs = 100, 
+  const {
+    debounceMs = 100,
     enableThrottling = true,
     includeScrollBar = false,
-    breakpoints = { mobile: 768, tablet: 1024 }
+    breakpoints = { mobile: 768, tablet: 1024 },
   } = options;
 
   // Helper to get full window info
@@ -58,13 +58,21 @@ export const useWindowSize = (
       };
     }
 
-    const width = includeScrollBar ? window.innerWidth : document.documentElement.clientWidth;
-    const height = includeScrollBar ? window.innerHeight : document.documentElement.clientHeight;
-    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
-    const scrollBarHeight = window.innerHeight - document.documentElement.clientHeight;
-    
+    const width = includeScrollBar
+      ? window.innerWidth
+      : document.documentElement.clientWidth;
+    const height = includeScrollBar
+      ? window.innerHeight
+      : document.documentElement.clientHeight;
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    const scrollBarHeight =
+      window.innerHeight - document.documentElement.clientHeight;
+
     const isMobile = width < (breakpoints.mobile || 768);
-    const isTablet = width >= (breakpoints.mobile || 768) && width < (breakpoints.tablet || 1024);
+    const isTablet =
+      width >= (breakpoints.mobile || 768) &&
+      width < (breakpoints.tablet || 1024);
     const isDesktop = width >= (breakpoints.tablet || 1024);
     const orientation = width > height ? 'landscape' : 'portrait';
 

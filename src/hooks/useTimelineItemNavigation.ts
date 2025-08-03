@@ -23,7 +23,9 @@ export const useTimelineItemNavigation = ({
 }: UseTimelineItemNavigationProps) => {
   const activeItemIndex = useRef<number>(0);
   const { scrollToElement } = useTimelineScrolling();
-  const stableOnTimelineUpdated = useStableCallback(onTimelineUpdated || (() => {}));
+  const stableOnTimelineUpdated = useStableCallback(
+    onTimelineUpdated || (() => {}),
+  );
 
   // Memoize items lookup map for O(1) access
   const itemsMap = useMemo(() => {

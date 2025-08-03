@@ -21,7 +21,7 @@ describe('useTimelineKeyboardNavigation', () => {
         hasFocus: true,
         flipLayout: false,
         ...mockHandlers,
-      })
+      }),
     );
 
     const mockEvent = {
@@ -44,7 +44,7 @@ describe('useTimelineKeyboardNavigation', () => {
         hasFocus: true,
         flipLayout: false,
         ...mockHandlers,
-      })
+      }),
     );
 
     // Test ArrowRight
@@ -62,7 +62,7 @@ describe('useTimelineKeyboardNavigation', () => {
 
     // Clear mocks and test ArrowLeft
     vi.clearAllMocks();
-    
+
     const leftEvent = {
       key: 'ArrowLeft',
       preventDefault: vi.fn(),
@@ -83,7 +83,7 @@ describe('useTimelineKeyboardNavigation', () => {
         hasFocus: true,
         flipLayout: true,
         ...mockHandlers,
-      })
+      }),
     );
 
     // Test ArrowRight with flipLayout - should go to previous
@@ -101,7 +101,7 @@ describe('useTimelineKeyboardNavigation', () => {
 
     // Clear mocks and test ArrowLeft with flipLayout - should go to next
     vi.clearAllMocks();
-    
+
     const leftEvent = {
       key: 'ArrowLeft',
       preventDefault: vi.fn(),
@@ -122,7 +122,7 @@ describe('useTimelineKeyboardNavigation', () => {
         hasFocus: true,
         flipLayout: false,
         ...mockHandlers,
-      })
+      }),
     );
 
     // Test Home key
@@ -159,7 +159,7 @@ describe('useTimelineKeyboardNavigation', () => {
         hasFocus: true,
         flipLayout: false,
         ...mockHandlers,
-      })
+      }),
     );
 
     // Test ArrowRight
@@ -177,7 +177,7 @@ describe('useTimelineKeyboardNavigation', () => {
 
     // Clear mocks and test ArrowLeft
     vi.clearAllMocks();
-    
+
     const leftEvent = {
       key: 'ArrowLeft',
       preventDefault: vi.fn(),
@@ -198,7 +198,7 @@ describe('useTimelineKeyboardNavigation', () => {
         hasFocus: true,
         flipLayout: false,
         ...mockHandlers,
-      })
+      }),
     );
 
     // Test ArrowDown
@@ -216,7 +216,7 @@ describe('useTimelineKeyboardNavigation', () => {
 
     // Clear mocks and test ArrowUp
     vi.clearAllMocks();
-    
+
     const upEvent = {
       key: 'ArrowUp',
       preventDefault: vi.fn(),
@@ -237,7 +237,7 @@ describe('useTimelineKeyboardNavigation', () => {
         hasFocus: false,
         flipLayout: false,
         ...mockHandlers,
-      })
+      }),
     );
 
     const mockEvent = {

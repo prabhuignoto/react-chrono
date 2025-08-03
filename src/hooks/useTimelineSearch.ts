@@ -55,11 +55,13 @@ export const useTimelineSearch = ({
     if (!forceRefocus && document.activeElement === searchInputRef.current) {
       return;
     }
-    
+
     // Use requestAnimationFrame for better performance
     requestAnimationFrame(() => {
-      if (searchInputRef.current && 
-          (forceRefocus || document.activeElement !== searchInputRef.current)) {
+      if (
+        searchInputRef.current &&
+        (forceRefocus || document.activeElement !== searchInputRef.current)
+      ) {
         searchInputRef.current.focus();
         const length = searchInputRef.current.value.length;
         searchInputRef.current.setSelectionRange(length, length);
@@ -85,7 +87,7 @@ export const useTimelineSearch = ({
       for (let i = 0; i < searchableContent.length; i++) {
         if (searchableContent[i].content.includes(queryLower)) {
           results.push(i);
-          
+
           // Early break if we have enough results
           if (results.length >= maxResults) {
             break;
@@ -100,16 +102,16 @@ export const useTimelineSearch = ({
         const firstMatchData = searchableContent[results[0]];
         if (firstMatchData?.id) {
           activeItemIndex.current = results[0];
-          
+
           // Clear any existing timeout
           if (searchTimeoutRef.current) {
             clearTimeout(searchTimeoutRef.current);
           }
-          
+
           // On first search, focus immediately. On subsequent searches, use delay
           const delay = isFirstSearchRef.current ? 100 : 400;
           isFirstSearchRef.current = false;
-          
+
           searchTimeoutRef.current = setTimeout(() => {
             onTimelineUpdatedRef.current?.(results[0]);
             handleTimelineItemClickRef.current(firstMatchData.id);
@@ -142,12 +144,12 @@ export const useTimelineSearch = ({
     setSearchResults([]);
     setCurrentMatchIndex(-1);
     debouncedSearch.cancel();
-    
+
     // Clear any pending auto-focus timeout
     if (searchTimeoutRef.current) {
       clearTimeout(searchTimeoutRef.current);
     }
-    
+
     // Reset first search flag when clearing
     isFirstSearchRef.current = true;
 
@@ -160,7 +162,7 @@ export const useTimelineSearch = ({
         handleTimelineItemClickRef.current(firstItem.id);
       }
     }
-    
+
     // Force refocus after clearing
     focusSearchInput(true);
   }, [items, debouncedSearch, focusSearchInput]);

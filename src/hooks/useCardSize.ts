@@ -28,18 +28,13 @@ interface CardDimensions {
 
 // Memoized calculation function to prevent unnecessary recalculations
 const calculateTextContentSize = (
-  cardHeight: number,
-  containerHeight: number,
   scrollHeight: number,
   clientHeight: number,
-  detailsOffsetTop: number,
+  contentDetailsHeight: number = 150,
 ): boolean => {
-  // Use cached values instead of DOM queries
-  const hasSignificantOverflow = scrollHeight > clientHeight + 20;
-  return (
-    cardHeight + detailsOffsetTop > containerHeight + 20 ||
-    hasSignificantOverflow
-  );
+  // Content is considered "large" if it exceeds the configured height limit
+  // This provides a more predictable behavior than comparing with container
+  return scrollHeight > contentDetailsHeight;
 };
 
 export const useCardSize = ({
@@ -72,13 +67,26 @@ export const useCardSize = ({
 
       rafId = requestAnimationFrame(() => {
         if (isUnmounted) return; // Prevent updates after unmount
-        
+
         for (const entry of entries) {
-          if (entry.target === containerRef.current) {
-            setDimensions((prev) => ({
-              ...prev,
-              containerWidth: entry.contentRect.width,
-            }));
+          if (containerRef.current && detailsRef.current) {
+            const detailsEle = detailsRef.current;
+            const container = containerRef.current;
+
+            // Update measurements
+            measurementsCache.current = {
+              scrollHeight: detailsEle.scrollHeight,
+              clientHeight: detailsEle.offsetHeight,
+              offsetTop: detailsEle.offsetTop,
+              containerHeight: container.clientHeight,
+            };
+
+            // Update dimensions
+            setDimensions({
+              cardHeight: detailsEle.scrollHeight,
+              detailsHeight: detailsEle.offsetHeight,
+              containerWidth: container.clientWidth,
+            });
           }
         }
         rafId = undefined;
@@ -89,12 +97,17 @@ export const useCardSize = ({
       observer.observe(containerRef.current);
     }
 
+    // Also observe the details element for size changes
+    if (detailsRef.current) {
+      observer.observe(detailsRef.current);
+    }
+
     return () => {
       isUnmounted = true;
       if (rafId) cancelAnimationFrame(rafId);
       observer.disconnect();
     };
-  }, [containerRef]);
+  }, [containerRef, detailsRef]);
 
   const updateCardSize = useCallback(
     (node: HTMLElement | null) => {
@@ -130,11 +143,9 @@ export const useCardSize = ({
       cardActualHeight: dimensions.cardHeight,
       detailsHeight: dimensions.detailsHeight,
       textContentLarge: calculateTextContentSize(
-        dimensions.cardHeight,
-        cache.containerHeight,
         cache.scrollHeight,
         cache.clientHeight,
-        cache.offsetTop,
+        150, // Default content height threshold
       ),
     };
   }, [dimensions]);

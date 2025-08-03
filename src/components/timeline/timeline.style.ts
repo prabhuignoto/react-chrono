@@ -66,7 +66,7 @@ export const TimelineMainWrapper = styled.div<{
   overflow-x: visible; /* Allow toolbar to overflow horizontally if needed */
   overscroll-behavior: contain;
   ${(p) => (p.mode === 'HORIZONTAL' ? 'position: relative' : '')};
-  scroll-behavior: smooth;
+  /* Removed scroll-behavior to prevent conflicts with programmatic scrolling */
   width: 100%;
   background-color: ${(p) => p.theme?.timelineBgColor || 'transparent'};
   /* order: ${(p) => (p.position === 'top' ? 1 : 0)}; */
@@ -75,7 +75,8 @@ export const TimelineMainWrapper = styled.div<{
     min-height: 150px;
   }
 
-  padding: ${({ $scrollable }) => (!$scrollable ? '0 0.5rem 0' : '')}; /* Reduced horizontal padding */
+  padding: ${({ $scrollable }) =>
+    !$scrollable ? '0 0.5rem 0' : ''}; /* Reduced horizontal padding */
 `;
 
 export const TimelineMain = styled.div`
@@ -158,17 +159,17 @@ export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
   gap: 1rem;
   min-height: auto;
   flex-wrap: wrap; /* Allow wrapping when content overflows */
-  
+
   /* Ensure all direct children are vertically centered */
   > * {
     align-self: center;
   }
-  
+
   @media (max-width: 768px) {
     padding: 0.5rem 0.75rem;
     gap: 0.75rem;
   }
-  
+
   @media (max-width: 480px) {
     padding: 0.75rem 0.5rem;
     gap: 0.75rem;
@@ -190,19 +191,19 @@ export const ExtraControls = styled.ul<{
   flex-shrink: 0; /* Don't shrink, wrap instead */
   gap: 0.5rem;
   flex-wrap: wrap; /* Allow controls to wrap to next line */
-  
+
   .control-wrapper {
     display: flex;
     align-items: center;
     align-self: center;
     flex-shrink: 0;
   }
-  
+
   @media (max-width: 768px) {
     justify-content: center;
     gap: 0.5rem;
   }
-  
+
   @media (max-width: 480px) {
     width: 100%;
     justify-content: center;
@@ -234,7 +235,8 @@ export const SearchWrapper = styled.div<{ theme?: Theme }>`
   &:focus-within {
     border-color: ${(p) => p.theme?.primary};
     box-shadow: 0 0 0 2px ${(p) => p.theme?.glowColor};
-    background-color: ${(p) => p.theme?.toolbarBtnBgColor || 'rgba(255, 255, 255, 0.1)'};
+    background-color: ${(p) =>
+      p.theme?.toolbarBtnBgColor || 'rgba(255, 255, 255, 0.1)'};
   }
 
   &:hover {
@@ -257,7 +259,8 @@ export const SearchInput = styled.input<{ theme?: Theme }>`
       return p.theme.textColor;
     }
     // Final fallback: Dark vs light mode detection
-    const isDarkMode = p.theme?.toolbarBgColor === '#111827' || p.theme?.primary === '#3b82f6';
+    const isDarkMode =
+      p.theme?.toolbarBgColor === '#111827' || p.theme?.primary === '#3b82f6';
     return isDarkMode ? '#f3f4f6' : '#1e293b';
   }};
   font-size: 0.9rem;
@@ -275,18 +278,19 @@ export const SearchInput = styled.input<{ theme?: Theme }>`
         return p.theme.secondary;
       }
       // Tertiary: Determine based on dark/light mode
-      const isDarkMode = p.theme?.toolbarBgColor === '#111827' || p.theme?.primary === '#3b82f6';
+      const isDarkMode =
+        p.theme?.toolbarBgColor === '#111827' || p.theme?.primary === '#3b82f6';
       return isDarkMode ? '#d1d5db' : '#6b7280';
     }};
     opacity: 0.8;
     font-weight: 400;
   }
-  
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
-  
+
   /* Ensure good contrast in dark mode */
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
@@ -299,10 +303,12 @@ export const SearchInput = styled.input<{ theme?: Theme }>`
       if (p.theme?.textColor) {
         return p.theme.textColor;
       }
-      const isDarkMode = p.theme?.toolbarBgColor === '#111827' || p.theme?.primary === '#3b82f6';
+      const isDarkMode =
+        p.theme?.toolbarBgColor === '#111827' || p.theme?.primary === '#3b82f6';
       return isDarkMode ? '#f3f4f6' : '#1e293b';
     }} !important;
-    -webkit-box-shadow: 0 0 0px 1000px ${(p) => p.theme?.toolbarBtnBgColor || 'transparent'} inset;
+    -webkit-box-shadow: 0 0 0px 1000px
+      ${(p) => p.theme?.toolbarBtnBgColor || 'transparent'} inset;
     transition: background-color 5000s ease-in-out 0s;
   }
 
@@ -342,7 +348,7 @@ export const SearchControls = styled.div`
   gap: 0.25rem;
   flex-shrink: 0;
   margin-left: auto;
-  
+
   .timeline-nav-wrapper {
     display: flex;
     align-items: center;
@@ -355,17 +361,18 @@ export const ToolbarSection = styled.div<{ $primary?: boolean }>`
   align-items: center;
   gap: 0.5rem;
   flex-shrink: 0; /* Don't shrink individual sections */
-  
+
   /* Primary section (navigation controls) gets priority */
-  ${({ $primary }) => 
-    $primary && `
+  ${({ $primary }) =>
+    $primary &&
+    `
       order: -1; /* Always appear first */
     `}
-  
+
   @media (max-width: 768px) {
     gap: 0.4rem;
   }
-  
+
   @media (max-width: 480px) {
     justify-content: center;
   }
@@ -382,7 +389,7 @@ export const SearchGroup = styled(ToolbarSection)`
   flex: 1 1 300px; /* Allow search to grow and shrink */
   max-width: 600px;
   justify-content: center;
-  
+
   @media (max-width: 480px) {
     flex: 1 1 auto;
     order: -1; /* Move to top on mobile */
@@ -394,7 +401,7 @@ export const SearchGroup = styled(ToolbarSection)`
 export const ActionGroup = styled(ToolbarSection)`
   flex-wrap: wrap; /* Allow action buttons to wrap within their group */
   justify-content: flex-end;
-  
+
   @media (max-width: 768px) {
     justify-content: center;
   }

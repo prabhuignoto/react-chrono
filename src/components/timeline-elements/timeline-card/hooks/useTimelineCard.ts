@@ -18,13 +18,27 @@ export const useTimelineCard = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const { disableClickOnCircle } = useContext(GlobalContext);
+  const { disableClickOnCircle, disableInteraction, disableAutoScrollOnClick } =
+    useContext(GlobalContext);
 
   const handleClick = useCallback(() => {
-    if (!disableClickOnCircle && onClick && !slideShowRunning) {
+    if (
+      !disableClickOnCircle &&
+      !disableInteraction &&
+      !disableAutoScrollOnClick &&
+      onClick &&
+      !slideShowRunning
+    ) {
       onClick(id);
     }
-  }, [disableClickOnCircle, onClick, slideShowRunning, id]);
+  }, [
+    disableClickOnCircle,
+    disableInteraction,
+    disableAutoScrollOnClick,
+    onClick,
+    slideShowRunning,
+    id,
+  ]);
 
   useEffect(() => {
     if (active) {

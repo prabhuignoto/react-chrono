@@ -56,7 +56,6 @@ export const useSlideshowProgress = ({
     }
   }, [slideShowRunning, isPaused]);
 
-
   return {
     isPaused,
     pauseProgress,

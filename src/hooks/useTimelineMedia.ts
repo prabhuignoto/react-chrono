@@ -29,7 +29,7 @@ export const useTimelineMedia = ({
       requestAnimationFrame(() => {
         entries.forEach((entry) => {
           const element = entry.target as HTMLDivElement;
-          
+
           if (onIntersect) {
             // Custom intersection handler
             onIntersect(element, entry.isIntersecting);
@@ -60,10 +60,10 @@ export const useTimelineMedia = ({
       threshold: 0.1, // Slightly higher threshold for better performance
       rootMargin: '50px', // Preload content slightly before it becomes visible
     };
-    
+
     observer.current = new IntersectionObserver(
-      handleIntersection, 
-      observerOptions || defaultOptions
+      handleIntersection,
+      observerOptions || defaultOptions,
     );
 
     return observer.current;

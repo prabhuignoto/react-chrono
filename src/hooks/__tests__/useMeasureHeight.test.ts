@@ -39,8 +39,8 @@ describe('useMeasure', () => {
   });
 
   it('should measure different properties', () => {
-    const { result } = renderHook(() => 
-      useMeasure(mockCallback, { property: 'clientWidth' })
+    const { result } = renderHook(() =>
+      useMeasure(mockCallback, { property: 'clientWidth' }),
     );
 
     act(() => {
@@ -54,8 +54,8 @@ describe('useMeasure', () => {
   });
 
   it('should handle scroll dimensions', () => {
-    const { result } = renderHook(() => 
-      useMeasure(mockCallback, { property: 'scrollHeight' })
+    const { result } = renderHook(() =>
+      useMeasure(mockCallback, { property: 'scrollHeight' }),
     );
 
     act(() => {
@@ -69,8 +69,8 @@ describe('useMeasure', () => {
   });
 
   it('should handle offset dimensions', () => {
-    const { result } = renderHook(() => 
-      useMeasure(mockCallback, { property: 'offsetWidth' })
+    const { result } = renderHook(() =>
+      useMeasure(mockCallback, { property: 'offsetWidth' }),
     );
 
     act(() => {
@@ -106,9 +106,9 @@ describe('useMeasure', () => {
 
   it('should handle measurement with delay', async () => {
     vi.useFakeTimers();
-    
-    const { result } = renderHook(() => 
-      useMeasure(mockCallback, { delay: 10 })
+
+    const { result } = renderHook(() =>
+      useMeasure(mockCallback, { delay: 10 }),
     );
 
     act(() => {
@@ -127,7 +127,7 @@ describe('useMeasure', () => {
       value: 100,
       element: mockElement,
     });
-    
+
     vi.useRealTimers();
   });
 
@@ -136,11 +136,11 @@ describe('useMeasure', () => {
     const brokenElement = {
       get clientHeight() {
         throw new Error('Property access failed');
-      }
+      },
     } as HTMLElement;
 
-    const { result } = renderHook(() => 
-      useMeasure(mockCallback, { onError: errorCallback })
+    const { result } = renderHook(() =>
+      useMeasure(mockCallback, { onError: errorCallback }),
     );
 
     act(() => {
@@ -159,7 +159,7 @@ describe('useMeasure', () => {
     const brokenElement = {
       get clientHeight() {
         throw new Error('Property access failed');
-      }
+      },
     } as HTMLElement;
     const { result } = renderHook(() => useMeasure(mockCallback));
 
@@ -169,7 +169,7 @@ describe('useMeasure', () => {
 
     expect(consoleSpy).toHaveBeenCalledWith(
       'Failed to measure clientHeight:',
-      expect.any(Error)
+      expect.any(Error),
     );
 
     process.env.NODE_ENV = originalEnv;

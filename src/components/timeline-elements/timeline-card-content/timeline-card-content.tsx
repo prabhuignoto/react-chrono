@@ -126,13 +126,16 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         onElapsed,
       );
 
-      const { cardActualHeight, detailsHeight, textContentLarge } = useCardSize(
-        {
-          containerRef,
-          detailsRef,
-          setStartWidth,
-        },
-      );
+      const {
+        cardActualHeight,
+        detailsHeight,
+        textContentLarge,
+        updateCardSize,
+      } = useCardSize({
+        containerRef,
+        detailsRef,
+        setStartWidth,
+      });
 
       // Memoize all calculated values to prevent re-renders
       const canShowProgressBar = useMemo(() => {
@@ -148,7 +151,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           useReadMore &&
           detailedText &&
           !customContent &&
-          textDensity === 'HIGH'
+          textDensity !== 'LOW'
         );
       }, [useReadMore, detailedText, customContent, textDensity]);
 
@@ -171,6 +174,18 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         media,
         textDensity,
       ]);
+
+      // Initialize card size measurements when refs are ready
+      useEffect(() => {
+        // Use RAF to defer the initial measurement
+        const rafId = requestAnimationFrame(() => {
+          if (containerRef.current && detailsRef.current) {
+            updateCardSize(containerRef.current);
+          }
+        });
+
+        return () => cancelAnimationFrame(rafId);
+      }, [updateCardSize]);
 
       // Reset details scroll position when toggling details
       useEffect(() => {
@@ -198,7 +213,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
 
         if (active && hasFocus && containerRef.current) {
-          containerRef.current.focus();
+          containerRef.current.focus({ preventScroll: true });
         }
 
         if (!slideShowActive) {
@@ -206,89 +221,26 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
       }, [active, slideShowActive, slideItemDuration, hasFocus, setupTimer]);
 
-      // Set focus when needed and ensure entire card row is completely visible
+      // Set focus when needed without scrolling (scrolling is handled by parent)
       useEffect(() => {
         if (hasFocus && active && containerRef.current) {
-          containerRef.current.focus();
-
-          // Ensure the entire vertical item row is completely visible when it receives focus
-          setTimeout(() => {
-            if (containerRef.current) {
-              const isVerticalMode =
-                mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
-
-              if (isVerticalMode) {
-                // In vertical mode, scroll the entire vertical-item-row into view
-                const verticalItemRow = containerRef.current.closest(
-                  '[data-testid="vertical-item-row"]',
-                );
-                if (verticalItemRow) {
-                  verticalItemRow.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'nearest',
-                  });
-                } else {
-                  // Fallback to card content if row not found
-                  containerRef.current.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'nearest',
-                  });
-                }
-              } else {
-                // In horizontal mode, use 'nearest' for optimal positioning
-                containerRef.current.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'nearest',
-                  inline: 'nearest',
-                });
-              }
-            }
-          }, 0);
+          // Only set focus, don't scroll - let parent handle scrolling
+          containerRef.current.focus({ preventScroll: true });
+          
+          // Add focus-visible class for keyboard navigation
+          if (hasFocus && !containerRef.current.matches(':focus-visible')) {
+            containerRef.current.classList.add('focus-visible');
+          }
         }
-      }, [hasFocus, active, mode]);
+      }, [hasFocus, active]);
 
-      // Ensure card alignment during slideshow, independent of hasFocus state
+      // During slideshow, let parent handle scrolling to prevent conflicts
       useEffect(() => {
         if (active && slideShowActive && containerRef.current) {
-          // During slideshow, ensure the active card is properly aligned and visible
-          setTimeout(() => {
-            if (containerRef.current) {
-              const isVerticalMode =
-                mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
-
-              if (isVerticalMode) {
-                // In vertical mode, scroll the entire vertical-item-row into view
-                const verticalItemRow = containerRef.current.closest(
-                  '[data-testid="vertical-item-row"]',
-                );
-                if (verticalItemRow) {
-                  verticalItemRow.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'nearest',
-                  });
-                } else {
-                  // Fallback to card content if row not found
-                  containerRef.current.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'nearest',
-                  });
-                }
-              } else {
-                // In horizontal mode, use 'nearest' for optimal positioning
-                containerRef.current.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'nearest',
-                  inline: 'nearest',
-                });
-              }
-            }
-          }, 100); // Slightly longer delay for slideshow to ensure proper DOM updates
+          // Focus without scrolling during slideshow
+          containerRef.current.focus({ preventScroll: true });
         }
-      }, [active, slideShowActive, mode]);
+      }, [active, slideShowActive]);
 
       // Detect when resuming from pause
       useEffect(() => {
@@ -324,24 +276,39 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         [slideShowActive, tryPause, paused, id, onElapsed],
       );
 
-      const handleCardClick = useCallback(() => {
-        if (onClick && !disableInteraction && !disableAutoScrollOnClick) {
-          onClick(id);
-        }
-      }, [onClick, id, disableInteraction, disableAutoScrollOnClick]);
+      const handleCardClick = useCallback(
+        (event: React.MouseEvent) => {
+          event.stopPropagation(); // Prevent event bubbling to parent handlers
+          
+          // Don't handle clicks if we're in slideshow mode
+          if (slideShowActive) return;
+          
+          if (onClick && !disableInteraction) {
+            // Focus the card first
+            if (containerRef.current && !active) {
+              containerRef.current.focus({ preventScroll: true });
+            }
+            
+            // Then trigger the click handler which will handle scrolling
+            onClick(id);
+          }
+        },
+        [onClick, id, disableInteraction, slideShowActive, active],
+      );
 
       const toggleShowMore = useCallback(() => {
         if ((active && paused) || !slideShowActive) {
           setShowMore((prev) => !prev);
           onShowMore?.();
           // Use setTimeout to ensure the DOM has updated before focusing
-          setTimeout(() => {
+          // Focus immediately without delay
+          requestAnimationFrame(() => {
             if (containerRef.current) {
-              containerRef.current.focus();
+              containerRef.current.focus({ preventScroll: true });
               // Force focus styles to be visible
               containerRef.current.classList.add('focus-visible');
             }
-          }, 0);
+          });
         }
       }, [active, paused, slideShowActive, onShowMore]);
 
@@ -422,6 +389,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           $slideShowActive={slideShowActive}
           $slideShowType={slideShowType}
           tabIndex={active ? 0 : -1}
+          role="article"
+          aria-current={active ? 'true' : 'false'}
           onDoubleClick={toggleShowMore}
           $minHeight={cardMinHeight}
           $maxWidth={cardWidth}
@@ -503,7 +472,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               showReadMore={canShowReadMore}
               remainInterval={remainInterval}
               startWidth={startWidth}
-              canShow={!!detailedText && !showMore}
+              canShow={!!detailedText}
               isNested={isNested}
               theme={theme}
             />

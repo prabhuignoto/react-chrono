@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-type MeasurableProperty = 
+type MeasurableProperty =
   | 'clientHeight'
   | 'clientWidth'
   | 'scrollHeight'
@@ -27,13 +27,9 @@ interface UseMeasureOptions {
  */
 export const useMeasure = <T extends HTMLElement = HTMLDivElement>(
   onMeasure?: (result: MeasurementResult) => void,
-  options: UseMeasureOptions = {}
+  options: UseMeasureOptions = {},
 ) => {
-  const { 
-    property = 'clientHeight', 
-    delay = 0,
-    onError 
-  } = options;
+  const { property = 'clientHeight', delay = 0, onError } = options;
 
   return useCallback(
     (node: T | null) => {
@@ -71,6 +67,6 @@ export const useMeasure = <T extends HTMLElement = HTMLDivElement>(
 export const useMeasureHeight = (onRender?: (height: number) => void) => {
   return useMeasure<HTMLDivElement>(
     onRender ? (result) => onRender(result.value) : undefined,
-    { property: 'clientHeight' }
+    { property: 'clientHeight' },
   );
 };

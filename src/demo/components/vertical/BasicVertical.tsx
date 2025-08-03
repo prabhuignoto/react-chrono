@@ -49,6 +49,7 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
         enableDarkToggle
         enableBreakPoint={true}
         responsiveBreakPoint={768}
+        textDensity='HIGH'
       />
     </ComponentContainerTree>
   </Vertical>

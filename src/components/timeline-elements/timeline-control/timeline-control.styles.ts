@@ -26,9 +26,10 @@ export const TimelineNavWrapper = styled.div<{ theme?: Theme }>`
   // border: 1px solid ${(p) => p.theme.toolbarBtnBgColor};
   position: relative;
   z-index: ${zIndex.controls};
-  
+
   &:hover {
-    background: ${(p) => p.theme.toolbarBgColor}; /* Prevent background color changes on hover */
+    background: ${(p) =>
+      p.theme.toolbarBgColor}; /* Prevent background color changes on hover */
   }
 
   .nav-item {
@@ -81,7 +82,7 @@ export const TimelineNavButton = styled.button<{
     border-color 0.2s ease-out;
   width: 36px;
   box-shadow: 0 1px 1px ${(p) => p.theme.shadowColor ?? 'rgba(0, 0, 0, 0.08)'};
-  
+
   /* Ensure crisp borders */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -104,12 +105,12 @@ export const TimelineNavButton = styled.button<{
     box-shadow: inset 0 1px 1px
       ${(p) => p.theme.shadowColor ?? 'rgba(0, 0, 0, 0.1)'};
   }
-  
+
   &:focus {
     outline: 2px solid ${(p) => p.theme.primary || '#007acc'};
     outline-offset: 2px;
   }
-  
+
   &:focus:not(:focus-visible) {
     outline: none;
   }
@@ -148,12 +149,12 @@ export const TimelineNavButton = styled.button<{
     color: ${(p) => p.theme.iconColor ?? p.theme.primary};
     transition: color 0.2s ease-out;
   }
-  
+
   @media (max-width: 480px) {
     height: 40px;
     width: 40px;
     margin: 0 0.3rem;
-    
+
     svg {
       width: 22px;
       height: 22px;

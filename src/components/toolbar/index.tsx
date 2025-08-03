@@ -32,39 +32,54 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
       return null;
     }
 
-    const handleKeyDown = useCallback((event: React.KeyboardEvent, index: number) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        // Trigger click on the child element if it exists
-        const contentWrapper = event.currentTarget.querySelector('[role="button"]') as HTMLElement;
-        if (contentWrapper && contentWrapper.click) {
-          contentWrapper.click();
-        }
-      }
-      
-      // Arrow key navigation
-      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-        event.preventDefault();
-        const toolbar = event.currentTarget.parentElement;
-        const toolbarItems = toolbar?.querySelectorAll('[role="button"][tabindex="0"]');
-        
-        if (toolbarItems && toolbarItems.length > 1) {
-          const currentIndex = Array.from(toolbarItems).indexOf(event.currentTarget);
-          let nextIndex;
-          
-          if (event.key === 'ArrowLeft') {
-            nextIndex = currentIndex > 0 ? currentIndex - 1 : toolbarItems.length - 1;
-          } else {
-            nextIndex = currentIndex < toolbarItems.length - 1 ? currentIndex + 1 : 0;
+    const handleKeyDown = useCallback(
+      (event: React.KeyboardEvent, index: number) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          // Trigger click on the child element if it exists
+          const contentWrapper = event.currentTarget.querySelector(
+            '[role="button"]',
+          ) as HTMLElement;
+          if (contentWrapper && contentWrapper.click) {
+            contentWrapper.click();
           }
-          
-          (toolbarItems[nextIndex] as HTMLElement).focus();
         }
-      }
-    }, []);
+
+        // Arrow key navigation
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+          event.preventDefault();
+          const toolbar = event.currentTarget.parentElement;
+          const toolbarItems = toolbar?.querySelectorAll(
+            '[role="button"][tabindex="0"]',
+          );
+
+          if (toolbarItems && toolbarItems.length > 1) {
+            const currentIndex = Array.from(toolbarItems).indexOf(
+              event.currentTarget,
+            );
+            let nextIndex;
+
+            if (event.key === 'ArrowLeft') {
+              nextIndex =
+                currentIndex > 0 ? currentIndex - 1 : toolbarItems.length - 1;
+            } else {
+              nextIndex =
+                currentIndex < toolbarItems.length - 1 ? currentIndex + 1 : 0;
+            }
+
+            (toolbarItems[nextIndex] as HTMLElement).focus();
+          }
+        }
+      },
+      [],
+    );
 
     return (
-      <ToolbarWrapper theme={theme} role="toolbar" aria-label="Timeline toolbar">
+      <ToolbarWrapper
+        theme={theme}
+        role="toolbar"
+        aria-label="Timeline toolbar"
+      >
         {items.map(({ label, id, icon }, index) => {
           if (!id) {
             console.warn('Toolbar item is missing required id property');

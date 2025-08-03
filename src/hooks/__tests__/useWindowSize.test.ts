@@ -38,7 +38,7 @@ import { useWindowSize } from '../useWindowSize';
 describe('useWindowSize', () => {
   beforeEach(() => {
     vi.useFakeTimers();
-    
+
     // Reset mock values to defaults
     window.innerWidth = 1024;
     window.innerHeight = 768;
@@ -46,7 +46,7 @@ describe('useWindowSize', () => {
     window.outerHeight = 800;
     document.documentElement.clientWidth = 1024;
     document.documentElement.clientHeight = 768;
-    
+
     // Reset mock implementations
     vi.mocked(window.addEventListener).mockClear();
     vi.mocked(window.removeEventListener).mockClear();
@@ -107,7 +107,7 @@ describe('useWindowSize', () => {
     act(() => {
       window.innerWidth = 800;
       document.documentElement.clientWidth = 800;
-      
+
       // Trigger multiple resize events
       window.dispatchEvent(new Event('resize'));
       window.dispatchEvent(new Event('resize'));
@@ -169,9 +169,9 @@ describe('useWindowSize', () => {
   it('should detect mobile viewport', () => {
     window.innerWidth = 600;
     document.documentElement.clientWidth = 600;
-    
+
     const { result } = renderHook(() => useWindowSize());
-    
+
     expect(result.current.isMobile).toBe(true);
     expect(result.current.isTablet).toBe(false);
     expect(result.current.isDesktop).toBe(false);
@@ -180,9 +180,9 @@ describe('useWindowSize', () => {
   it('should detect tablet viewport', () => {
     window.innerWidth = 900;
     document.documentElement.clientWidth = 900;
-    
+
     const { result } = renderHook(() => useWindowSize());
-    
+
     expect(result.current.isMobile).toBe(false);
     expect(result.current.isTablet).toBe(true);
     expect(result.current.isDesktop).toBe(false);
@@ -193,9 +193,9 @@ describe('useWindowSize', () => {
     window.innerHeight = 800;
     document.documentElement.clientWidth = 600;
     document.documentElement.clientHeight = 800;
-    
+
     const { result } = renderHook(() => useWindowSize());
-    
+
     expect(result.current.orientation).toBe('portrait');
   });
 
@@ -204,9 +204,9 @@ describe('useWindowSize', () => {
     window.innerHeight = 800;
     document.documentElement.clientWidth = 1024;
     document.documentElement.clientHeight = 768;
-    
+
     const { result } = renderHook(() => useWindowSize());
-    
+
     expect(result.current.scrollBarWidth).toBe(16);
     expect(result.current.scrollBarHeight).toBe(32);
   });
@@ -214,30 +214,30 @@ describe('useWindowSize', () => {
   it('should respect custom breakpoints', () => {
     window.innerWidth = 500;
     document.documentElement.clientWidth = 500;
-    
-    const { result } = renderHook(() => 
-      useWindowSize({ 
-        breakpoints: { mobile: 600, tablet: 1200 } 
-      })
+
+    const { result } = renderHook(() =>
+      useWindowSize({
+        breakpoints: { mobile: 600, tablet: 1200 },
+      }),
     );
-    
+
     expect(result.current.isMobile).toBe(true);
     expect(result.current.isTablet).toBe(false);
     expect(result.current.isDesktop).toBe(false);
   });
 
   it('should include scroll bar in dimensions when requested', () => {
-    const { result } = renderHook(() => 
-      useWindowSize({ includeScrollBar: true })
+    const { result } = renderHook(() =>
+      useWindowSize({ includeScrollBar: true }),
     );
-    
+
     expect(result.current.width).toBe(window.innerWidth);
     expect(result.current.height).toBe(window.innerHeight);
   });
 
   it('should disable throttling when requested', () => {
-    const { result } = renderHook(() => 
-      useWindowSize({ enableThrottling: false })
+    const { result } = renderHook(() =>
+      useWindowSize({ enableThrottling: false }),
     );
 
     // Trigger resize event with new dimensions

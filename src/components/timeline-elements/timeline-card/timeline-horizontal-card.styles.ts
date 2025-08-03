@@ -40,10 +40,10 @@ const ripple = keyframes`
 
 const pulse = keyframes`
   0% {
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.6);
   }
   70% {
-    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+    box-shadow: 0 0 0 12px rgba(0, 123, 255, 0);
   }
   100% {
     box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
@@ -122,16 +122,17 @@ export const Shape = styled.div<ShapeModel>`
   &:hover:not(:disabled) {
     transform: ${(p) =>
       p.$timelinePointShape === 'diamond'
-        ? 'rotate(45deg) scale(1.08)'
-        : 'scale(1.08)'};
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        ? 'rotate(45deg) scale(1.12)'
+        : 'scale(1.12)'};
+    box-shadow: 0 0 0 4px ${(p) => p.theme?.primary}22;
   }
 
   &:active:not(:disabled) {
     transform: ${(p) =>
       p.$timelinePointShape === 'diamond'
-        ? 'rotate(45deg) scale(0.95)'
-        : 'scale(0.95)'};
+        ? 'rotate(45deg) scale(0.98)'
+        : 'scale(0.98)'};
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &.active {
@@ -224,6 +225,8 @@ export const TimelineContentContainer = styled.div<{
 
   outline: 2px solid
     ${(p) => (p.$highlight && p.$active ? p.theme?.primary : 'transparent')};
+  outline-offset: 2px;
+  border-radius: 12px;
 
   margin: 1rem;
 
@@ -235,6 +238,20 @@ export const TimelineContentContainer = styled.div<{
     width: calc(100% - 5em);
     margin-left: auto;
     flex-direction: column;
+  }
+  
+  @media (max-width: 768px) {
+    margin: 0.5rem;
+    outline-width: 1px;
+    
+    &.horizontal {
+      min-width: auto;
+      width: 100%;
+    }
+    
+    &.vertical {
+      width: calc(100% - 3.5em);
+    }
   }
 `;
 
@@ -251,30 +268,49 @@ export const CardContainer = styled.div<{ theme: Theme }>`
   min-width: 250px;
   max-width: 350px;
   margin: 0.5rem;
-  padding: 1rem;
+  padding: 1.5rem;
   background: ${(p) => p.theme.cardBgColor};
-  border-radius: 8px;
+  border-radius: 12px;
   -webkit-box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.06),
-    0 4px 10px rgba(0, 0, 0, 0.08);
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 4px 8px rgba(0, 0, 0, 0.06),
+    0 8px 16px rgba(0, 0, 0, 0.08);
   box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.06),
-    0 4px 10px rgba(0, 0, 0, 0.08);
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 4px 8px rgba(0, 0, 0, 0.06),
+    0 8px 16px rgba(0, 0, 0, 0.08);
   -webkit-transition:
-    -webkit-transform 0.2s ease-out,
-    box-shadow 0.2s ease-out;
+    -webkit-transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transition:
-    transform 0.2s ease-out,
-    box-shadow 0.2s ease-out;
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   &:hover {
-    -webkit-transform: translateY(-2px);
-    transform: translateY(-2px);
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
     -webkit-box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.08),
-      0 6px 12px rgba(0, 0, 0, 0.12);
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      0 12px 24px rgba(0, 0, 0, 0.12),
+      0 16px 32px rgba(0, 0, 0, 0.08);
     box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.08),
-      0 6px 12px rgba(0, 0, 0, 0.12);
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      0 12px 24px rgba(0, 0, 0, 0.12),
+      0 16px 32px rgba(0, 0, 0, 0.08);
+  }
+  
+  @media (max-width: 768px) {
+    min-width: 200px;
+    max-width: 100%;
+    margin: 0.25rem;
+    padding: 1rem;
+    border-radius: 8px;
+    
+    &:hover {
+      transform: none;
+      -webkit-transform: none;
+    }
   }
 `;

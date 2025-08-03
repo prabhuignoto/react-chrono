@@ -123,7 +123,9 @@ describe('useKeyHandler', () => {
   });
 
   it('should handle multiple keys', () => {
-    renderHook(() => useKeyHandler(mockCallback, { keys: ['Escape', 'Enter'] }));
+    renderHook(() =>
+      useKeyHandler(mockCallback, { keys: ['Escape', 'Enter'] }),
+    );
 
     act(() => {
       const escapeEvent = new KeyboardEvent('keyup', { key: 'Escape' });
@@ -139,11 +141,11 @@ describe('useKeyHandler', () => {
   });
 
   it('should handle modifier keys', () => {
-    renderHook(() => 
-      useKeyHandler(mockCallback, { 
-        keys: 'Enter', 
-        ctrlKey: true 
-      })
+    renderHook(() =>
+      useKeyHandler(mockCallback, {
+        keys: 'Enter',
+        ctrlKey: true,
+      }),
     );
 
     // Without ctrl key - should not trigger
@@ -156,9 +158,9 @@ describe('useKeyHandler', () => {
 
     // With ctrl key - should trigger
     act(() => {
-      const event = new KeyboardEvent('keyup', { 
-        key: 'Enter', 
-        ctrlKey: true 
+      const event = new KeyboardEvent('keyup', {
+        key: 'Enter',
+        ctrlKey: true,
       });
       document.dispatchEvent(event);
     });
@@ -168,12 +170,12 @@ describe('useKeyHandler', () => {
   });
 
   it('should handle preventDefault and stopPropagation options', () => {
-    renderHook(() => 
-      useKeyHandler(mockCallback, { 
+    renderHook(() =>
+      useKeyHandler(mockCallback, {
         keys: 'Escape',
         preventDefault: true,
-        stopPropagation: true
-      })
+        stopPropagation: true,
+      }),
     );
 
     const event = new KeyboardEvent('keyup', { key: 'Escape' });
@@ -190,11 +192,11 @@ describe('useKeyHandler', () => {
   });
 
   it('should work with keyCodes fallback', () => {
-    renderHook(() => 
-      useKeyHandler(mockCallback, { 
-        keys: 'Enter', 
-        keyCodes: 13 
-      })
+    renderHook(() =>
+      useKeyHandler(mockCallback, {
+        keys: 'Enter',
+        keyCodes: 13,
+      }),
     );
 
     act(() => {
@@ -212,11 +214,11 @@ describe('useKeyHandler', () => {
   });
 
   it('should handle disabled state', () => {
-    renderHook(() => 
-      useKeyHandler(mockCallback, { 
+    renderHook(() =>
+      useKeyHandler(mockCallback, {
         keys: 'Escape',
-        enabled: false
-      })
+        enabled: false,
+      }),
     );
 
     act(() => {

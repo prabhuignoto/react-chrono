@@ -22,7 +22,7 @@ describe('Hook Utilities', () => {
               callbackCallCount++;
             },
           },
-        }
+        },
       );
 
       const stableRef = result.current;
@@ -50,7 +50,7 @@ describe('Hook Utilities', () => {
     it('should keep ref updated without re-renders', () => {
       const { result, rerender } = renderHook(
         ({ value }) => useLatestRef(value),
-        { initialProps: { value: 'initial' } }
+        { initialProps: { value: 'initial' } },
       );
 
       expect(result.current.current).toBe('initial');
@@ -142,12 +142,18 @@ describe('Color Utilities', () => {
 
   describe('adjustRGBOpacity', () => {
     it('should adjust RGB opacity', () => {
-      expect(adjustRGBOpacity('rgb(255, 0, 0)', 0.5)).toBe('rgba(255, 0, 0, 0.5)');
-      expect(adjustRGBOpacity('rgb(255,0,0)', 0.8)).toBe('rgba(255, 0, 0, 0.8)');
+      expect(adjustRGBOpacity('rgb(255, 0, 0)', 0.5)).toBe(
+        'rgba(255, 0, 0, 0.5)',
+      );
+      expect(adjustRGBOpacity('rgb(255,0,0)', 0.8)).toBe(
+        'rgba(255, 0, 0, 0.8)',
+      );
     });
 
     it('should adjust RGBA opacity', () => {
-      expect(adjustRGBOpacity('rgba(255, 0, 0, 1)', 0.5)).toBe('rgba(255, 0, 0, 0.5)');
+      expect(adjustRGBOpacity('rgba(255, 0, 0, 1)', 0.5)).toBe(
+        'rgba(255, 0, 0, 0.5)',
+      );
     });
 
     it('should return empty string for invalid input', () => {
@@ -157,12 +163,18 @@ describe('Color Utilities', () => {
 
   describe('adjustHSLOpacity', () => {
     it('should adjust HSL opacity', () => {
-      expect(adjustHSLOpacity('hsl(0, 100%, 50%)', 0.5)).toBe('hsla(0, 100%, 50%, 0.5)');
-      expect(adjustHSLOpacity('hsl(0,100%,50%)', 0.8)).toBe('hsla(0, 100%, 50%, 0.8)');
+      expect(adjustHSLOpacity('hsl(0, 100%, 50%)', 0.5)).toBe(
+        'hsla(0, 100%, 50%, 0.5)',
+      );
+      expect(adjustHSLOpacity('hsl(0,100%,50%)', 0.8)).toBe(
+        'hsla(0, 100%, 50%, 0.8)',
+      );
     });
 
     it('should adjust HSLA opacity', () => {
-      expect(adjustHSLOpacity('hsla(0, 100%, 50%, 1)', 0.5)).toBe('hsla(0, 100%, 50%, 0.5)');
+      expect(adjustHSLOpacity('hsla(0, 100%, 50%, 1)', 0.5)).toBe(
+        'hsla(0, 100%, 50%, 0.5)',
+      );
     });
 
     it('should return empty string for invalid input', () => {
