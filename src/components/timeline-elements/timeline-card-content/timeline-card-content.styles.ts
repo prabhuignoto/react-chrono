@@ -465,41 +465,47 @@ export const ShowMore = styled.button<{
   show?: 'true' | 'false';
   theme?: Theme;
 }>`
-  align-items: center;
-  align-self: flex-end;
-  border-radius: 6px;
-  cursor: pointer;
-  display: ${(p) => (p.show === 'true' ? 'flex' : 'none')};
+  /* Reset button styles to look like a link */
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 1rem 0.5rem 0.5rem auto;
+
+  /* Link-like appearance */
+  color: ${(p) => p.theme.primary};
   font-size: 0.875rem;
   font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+
+  /* Layout */
+  align-items: center;
+  align-self: flex-end;
+  display: ${(p) => (p.show === 'true' ? 'flex' : 'none')};
   justify-self: flex-end;
-  margin: 1rem 0.5rem 0.5rem auto;
-  padding: 0.5rem 1rem;
-  color: ${(p) => p.theme.primary};
-  border: 1px solid ${(p) => p.theme.primary}22;
-  background: ${(p) => p.theme.primary}11;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Smooth transitions */
+  transition: all 0.2s ease;
 
   &:hover {
-    background: ${(p) => p.theme.primary}22;
-    border-color: ${(p) => p.theme.primary}44;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    color: ${(p) => p.theme.primary}CC;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
   }
 
   &:active {
-    transform: translateY(0);
-    box-shadow: none;
+    color: ${(p) => p.theme.primary}AA;
   }
 
   &:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px ${(p) => p.theme.primary}33;
+    outline: 2px solid ${(p) => p.theme.primary};
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 
   @media (max-width: 768px) {
     font-size: 0.8125rem;
-    padding: 0.375rem 0.75rem;
     margin: 0.75rem 0.25rem 0.25rem auto;
   }
 `;

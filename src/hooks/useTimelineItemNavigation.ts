@@ -95,8 +95,8 @@ export const useTimelineItemNavigation = ({
       // Update timeline position
       updateTimelinePosition(targetIndex, isSlideShow);
 
-      // Skip scrolling in horizontal mode when slideshow is running to prevent toolbar hiding
-      if (mode === 'HORIZONTAL' && slideShowRunning) return;
+      // Skip scrolling when slideshow is running - let timeline.tsx handle slideshow scrolling
+      if (slideShowRunning) return;
 
       // For vertical modes, directly find and scroll to the vertical item row
       if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {

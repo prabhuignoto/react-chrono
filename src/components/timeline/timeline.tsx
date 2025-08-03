@@ -263,6 +263,24 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             cardLeft - contentLeft + cardWidth / 2 - contentWidth / 2;
         });
       }
+    } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
+      // Handle vertical scrolling for slideshow mode
+      if (slideShowRunning) {
+        // Find the vertical item row for the active item
+        const verticalItemRow = document.querySelector(
+          `[data-testid="vertical-item-row"][data-item-id="${activeItem.id}"]`,
+        );
+        
+        if (verticalItemRow) {
+          // Scroll the item into view smoothly
+          requestAnimationFrame(() => {
+            (verticalItemRow as HTMLElement).scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+            });
+          });
+        }
+      }
     }
   }, [
     activeTimelineItem,
