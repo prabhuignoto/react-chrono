@@ -239,16 +239,16 @@ export const TimelineContentContainer = styled.div<{
     margin-left: auto;
     flex-direction: column;
   }
-  
+
   @media (max-width: 768px) {
     margin: 0.5rem;
     outline-width: 1px;
-    
+
     &.horizontal {
       min-width: auto;
       width: 100%;
     }
-    
+
     &.vertical {
       width: calc(100% - 3.5em);
     }
@@ -300,14 +300,14 @@ export const CardContainer = styled.div<{ theme: Theme }>`
       0 12px 24px rgba(0, 0, 0, 0.12),
       0 16px 32px rgba(0, 0, 0, 0.08);
   }
-  
+
   @media (max-width: 768px) {
     min-width: 200px;
     max-width: 100%;
     margin: 0.25rem;
     padding: 1rem;
     border-radius: 8px;
-    
+
     &:hover {
       transform: none;
       -webkit-transform: none;

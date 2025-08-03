@@ -130,7 +130,7 @@ export const SelecterIcon = styled.span<{ $open: boolean; $theme: Theme }>`
   height: 20px;
   width: 20px;
   transition: transform 0.2s ease-in-out;
-  margin-right: 0.25rem;
+  // margin-right: 0.25rem;
   flex-shrink: 0;
 
   & svg {

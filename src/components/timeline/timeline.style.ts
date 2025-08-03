@@ -20,6 +20,8 @@ export const Wrapper = styled.div<{
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
   theme?: Theme;
   $translate?: string;
+  $isDarkMode?: boolean;
+  $isFullscreen?: boolean;
 }>`
   -webkit-transform: ${(props) => getTransform(props.$translate)};
   -moz-transform: ${(props) => getTransform(props.$translate)};
@@ -51,6 +53,83 @@ export const Wrapper = styled.div<{
   &.js-focus-visible .focus-visible {
     outline: 2px solid #528deb;
   }
+
+  /* Fullscreen mode styles - comprehensive cross-browser support */
+  &:fullscreen,
+  &:-webkit-full-screen,
+  &:-moz-full-screen,
+  &:-ms-fullscreen,
+  &:fullscreen::backdrop,
+  &:-webkit-full-screen::backdrop,
+  &:-moz-full-screen::backdrop,
+  &:-ms-fullscreen::backdrop,
+  &[data-fullscreen='true'] {
+    background: ${(props) =>
+      props.theme?.timelineBgColor ||
+      (props.$isDarkMode ? '#000000' : '#ffffff')} !important;
+    padding: 2rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow-y: auto !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 999999 !important;
+
+    /* Cross-browser adjustments */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+
+    /* Ensure proper box-sizing across browsers */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    /* Prevent scrollbar issues in different browsers */
+    scrollbar-width: auto; /* Firefox */
+    -ms-overflow-style: auto; /* IE/Edge */
+
+    /* Ensure all children are properly centered and have max-width */
+    > * {
+      width: 100%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  /* Additional Safari-specific fullscreen handling */
+  &:-webkit-full-screen {
+    /* Ensure Safari maintains proper layout */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  /* Firefox-specific fullscreen adjustments */
+  &:-moz-full-screen {
+    /* Ensure Firefox maintains proper styling */
+    -moz-appearance: none;
+  }
+
+  /* Separate backdrop styling for browsers that support it */
+  &:fullscreen::backdrop,
+  &:-webkit-full-screen::backdrop,
+  &:-moz-full-screen::backdrop,
+  &:-ms-fullscreen::backdrop {
+    background: ${(props) =>
+      props.theme?.timelineBgColor ||
+      (props.$isDarkMode ? '#000000' : '#ffffff')} !important;
+  }
+
+  /* No need for special toolbar styling in wrapper fullscreen mode */
 `;
 
 export const TimelineMainWrapper = styled.div<{
@@ -77,6 +156,27 @@ export const TimelineMainWrapper = styled.div<{
 
   padding: ${({ $scrollable }) =>
     !$scrollable ? '0 0.5rem 0' : ''}; /* Reduced horizontal padding */
+
+  /* Fullscreen mode styles for main wrapper */
+  :fullscreen &,
+  :-webkit-full-screen &,
+  :-moz-full-screen &,
+  :-ms-fullscreen &,
+  [data-fullscreen='true'] & {
+    background: transparent !important;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    min-height: 0; /* Allow flex shrinking */
+  }
 `;
 
 export const TimelineMain = styled.div`
@@ -93,6 +193,35 @@ export const TimelineMain = styled.div`
     justify-content: flex-start;
     width: 100%;
     height: 100%;
+  }
+
+  /* Fullscreen mode styles for timeline main */
+  :fullscreen & {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  :fullscreen &.vertical,
+  :-webkit-full-screen &.vertical,
+  :-moz-full-screen &.vertical,
+  :-ms-fullscreen &.vertical,
+  [data-fullscreen='true'] &.vertical {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
   }
 `;
 
@@ -141,6 +270,20 @@ export const TimelineContentRender = styled.div<{ $showAllCards?: boolean }>`
   margin-right: auto;
   margin-left: auto;
   overflow-x: hidden;
+
+  /* Fullscreen mode styles for content render */
+  :fullscreen &,
+  :-webkit-full-screen &,
+  :-moz-full-screen &,
+  :-ms-fullscreen &,
+  [data-fullscreen='true'] & {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
 `;
 
 export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
@@ -174,6 +317,40 @@ export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
     padding: 0.75rem 0.5rem;
     gap: 0.75rem;
     justify-content: center;
+  }
+
+  /* Fullscreen mode styles for toolbar - use multiple selectors */
+  :fullscreen &,
+  :-webkit-full-screen &,
+  :-moz-full-screen &,
+  :-ms-fullscreen &,
+  [data-fullscreen='true'] & {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000001 !important;
+    background: ${(p) => {
+      // In fullscreen, ensure the toolbar has a visible background
+      if (p.theme?.toolbarBgColor) {
+        return p.theme.toolbarBgColor;
+      }
+      // Use a semi-transparent background as fallback
+      return p.theme?.primary
+        ? `${p.theme.primary}10`
+        : 'rgba(255, 255, 255, 0.95)';
+    }} !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    margin: 0 0 1rem 0 !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    height: auto !important;
+    overflow: visible !important;
   }
 `;
 

@@ -165,8 +165,8 @@ export const TimelineItemContentWrapper = styled.section<
   justify-content: flex-start;
   line-height: 1.5;
   margin: 0;
-  max-width: ${(p) => p.$maxWidth ? `${p.$maxWidth}px` : '100%'};
-  
+  max-width: ${(p) => (p.$maxWidth ? `${p.$maxWidth}px` : '100%')};
+
   @media (max-width: 768px) {
     padding: 1rem;
     border-radius: 8px;
@@ -190,7 +190,7 @@ export const TimelineItemContentWrapper = styled.section<
     box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     outline 0.15s ease-out,
     outline-offset 0.15s ease-out;
-    
+
   // Remove default outline for mouse clicks
   &:focus:not(:focus-visible):not(.focus-visible) {
     outline: none;
@@ -199,7 +199,7 @@ export const TimelineItemContentWrapper = styled.section<
       0 4px 8px rgba(0, 0, 0, 0.06),
       0 8px 16px rgba(0, 0, 0, 0.08);
   }
-  
+
   // Show outline for keyboard navigation
   &:focus-visible,
   &.focus-visible {
@@ -210,7 +210,7 @@ export const TimelineItemContentWrapper = styled.section<
       0 4px 8px rgba(0, 0, 0, 0.06),
       0 8px 16px rgba(0, 0, 0, 0.08);
   }
-  
+
   // Prevent layout shift on focus
   &:focus,
   &:focus-visible,
@@ -224,7 +224,7 @@ export const TimelineItemContentWrapper = styled.section<
     p.$highlight &&
     css`
       cursor: pointer;
-      
+
       &:hover {
         transform: translateY(-4px);
         box-shadow:
@@ -232,7 +232,7 @@ export const TimelineItemContentWrapper = styled.section<
           0 12px 24px rgba(0, 0, 0, 0.12),
           0 16px 32px rgba(0, 0, 0, 0.08);
       }
-      
+
       &:active {
         transform: translateY(-1px);
         transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
@@ -280,7 +280,7 @@ export const CardTitle = styled.h1<{
   &.active {
     color: ${(p) => p.theme.primary};
   }
-  
+
   @media (max-width: 768px) {
     font-size: ${(p) => p.$fontSize || '1.125rem'};
     margin-bottom: 0.5rem;
@@ -302,7 +302,7 @@ export const CardSubTitle = styled.h2<{
   letter-spacing: -0.01em;
   line-height: 1.4;
   opacity: 0.9;
-  
+
   @media (max-width: 768px) {
     font-size: ${(p) => p.$fontSize || '0.875rem'};
   }
@@ -360,11 +360,11 @@ export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
   color: ${(p) => p.theme.cardDetailsColor};
   line-height: 1.6;
   letter-spacing: -0.01em;
-  
+
   & + & {
     margin-top: 0.75rem;
   }
-  
+
   @media (max-width: 768px) {
     font-size: 0.875rem;
     line-height: 1.5;
@@ -410,19 +410,23 @@ export const TimelineContentDetailsWrapper = styled.div<{
   background: ${(p) => p.theme?.cardDetailsBackGround || p.theme?.cardBgColor};
 
   // Simplified height handling
-  ${({ $useReadMore, $customContent, $showMore, height = 150, $textOverlay }) => {
+  ${({
+    $useReadMore,
+    $customContent,
+    $showMore,
+    height = 150,
+    $textOverlay,
+  }) => {
     if ($customContent) return 'height: 100%;';
     if ($textOverlay) return '';
     if (!$useReadMore) return 'height: auto;';
-    
+
     // When collapsed, limit height; when expanded, allow full height
-    return $showMore 
-      ? 'max-height: 1000px;' 
-      : `max-height: ${height}px;`;
+    return $showMore ? 'max-height: 1000px;' : `max-height: ${height}px;`;
   }}
 
   // Show gradient overlay when content is collapsed
-  ${({ $useReadMore, $showMore, $gradientColor }) => 
+  ${({ $useReadMore, $showMore, $gradientColor }) =>
     $useReadMore && !$showMore && $gradientColor
       ? css`
           &::after {
@@ -442,8 +446,7 @@ export const TimelineContentDetailsWrapper = styled.div<{
             transition: opacity 0.3s ease;
           }
         `
-      : ''
-  }
+      : ''}
       
   &.show-less {
     scrollbar-width: none;
@@ -483,17 +486,17 @@ export const ShowMore = styled.button<{
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
   }
-  
+
   &:active {
     transform: translateY(0);
     box-shadow: none;
   }
-  
+
   &:focus-visible {
     outline: none;
     box-shadow: 0 0 0 3px ${(p) => p.theme.primary}33;
   }
-  
+
   @media (max-width: 768px) {
     font-size: 0.8125rem;
     padding: 0.375rem 0.75rem;
@@ -638,19 +641,20 @@ export const Mark = styled.mark<{ theme: Theme }>`
       return 'rgba(255, 217, 0, 0.5)';
     }};
     box-shadow:
-      0 0 0 2px ${(p) => {
-        if (p.theme?.iconColor) {
-          return p.theme.iconColor;
-        }
+      0 0 0 2px
+        ${(p) => {
+          if (p.theme?.iconColor) {
+            return p.theme.iconColor;
+          }
 
-        // Fallback logic
-        if (p.theme?.primary) {
-          return p.theme.cardBgColor === '#1f2937'
-            ? 'rgba(96, 165, 250, 0.8)'
-            : p.theme.primary;
-        }
-        return 'rgba(255, 217, 0, 0.5)';
-      }},
+          // Fallback logic
+          if (p.theme?.primary) {
+            return p.theme.cardBgColor === '#1f2937'
+              ? 'rgba(96, 165, 250, 0.8)'
+              : p.theme.primary;
+          }
+          return 'rgba(255, 217, 0, 0.5)';
+        }},
       0 2px 4px rgba(0, 0, 0, 0.1);
     transform: scale(1.05);
   }

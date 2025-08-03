@@ -1,7 +1,7 @@
 import { TimelineModel } from '@models/TimelineModel';
 import { getUniqueID } from '@utils/index';
 import cls from 'classnames';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { useStableContext, useDynamicContext } from '../contexts';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
@@ -72,6 +72,42 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const [hasFocus, setHasFocus] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // Listen to native fullscreen change events to keep state in sync
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      const isCurrentlyFullscreen = !!(
+        document.fullscreenElement ||
+        (document as any).webkitFullscreenElement ||
+        (document as any).mozFullScreenElement ||
+        (document as any).msFullscreenElement
+      );
+      setIsFullscreen(isCurrentlyFullscreen);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    document.addEventListener('msfullscreenchange', handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener(
+        'webkitfullscreenchange',
+        handleFullscreenChange,
+      );
+      document.removeEventListener(
+        'mozfullscreenchange',
+        handleFullscreenChange,
+      );
+      document.removeEventListener(
+        'msfullscreenchange',
+        handleFullscreenChange,
+      );
+    };
+  }, []);
 
   // Memoize ID generation to prevent unnecessary regeneration
   const id = useMemo(
@@ -253,10 +289,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   // Ensure all styled components are properly integrated
   return (
     <Wrapper
+      ref={wrapperRef}
       onKeyDown={handleKeyDown}
       className={wrapperClass}
       cardPositionHorizontal={cardPositionHorizontal}
       theme={theme}
+      $isDarkMode={darkMode}
+      $isFullscreen={isFullscreen}
+      data-fullscreen={isFullscreen}
       onMouseDown={() => setHasFocus(true)}
       onKeyUp={(evt) => {
         if (evt.key === 'Escape') {
@@ -296,6 +336,19 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             currentMatchIndex={currentMatchIndex}
             onSearchKeyDown={handleSearchKeyDown}
             searchInputRef={searchInputRef}
+            timelineRef={wrapperRef}
+            onEnterFullscreen={() => {
+              console.log('Entered fullscreen mode');
+              setIsFullscreen(true);
+            }}
+            onExitFullscreen={() => {
+              console.log('Exited fullscreen mode');
+              setIsFullscreen(false);
+            }}
+            onFullscreenError={(error: string) => {
+              console.error('Fullscreen error:', error);
+              setIsFullscreen(false);
+            }}
           />
         </ToolbarWrapper>
       )}

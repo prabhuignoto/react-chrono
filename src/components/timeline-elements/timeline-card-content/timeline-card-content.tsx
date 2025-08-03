@@ -148,10 +148,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       const canShowReadMore = useMemo(() => {
         return (
-          useReadMore &&
-          detailedText &&
-          !customContent &&
-          textDensity !== 'LOW'
+          useReadMore && detailedText && !customContent && textDensity !== 'LOW'
         );
       }, [useReadMore, detailedText, customContent, textDensity]);
 
@@ -226,7 +223,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         if (hasFocus && active && containerRef.current) {
           // Only set focus, don't scroll - let parent handle scrolling
           containerRef.current.focus({ preventScroll: true });
-          
+
           // Add focus-visible class for keyboard navigation
           if (hasFocus && !containerRef.current.matches(':focus-visible')) {
             containerRef.current.classList.add('focus-visible');
@@ -279,16 +276,16 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       const handleCardClick = useCallback(
         (event: React.MouseEvent) => {
           event.stopPropagation(); // Prevent event bubbling to parent handlers
-          
+
           // Don't handle clicks if we're in slideshow mode
           if (slideShowActive) return;
-          
+
           if (onClick && !disableInteraction) {
             // Focus the card first
             if (containerRef.current && !active) {
               containerRef.current.focus({ preventScroll: true });
             }
-            
+
             // Then trigger the click handler which will handle scrolling
             onClick(id);
           }

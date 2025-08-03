@@ -23,7 +23,7 @@ describe('useTimelineScrolling', () => {
   beforeEach(() => {
     // Mock document.querySelector to return null (no container found)
     global.document.querySelector = vi.fn(() => null);
-    
+
     mockContainer = {
       getBoundingClientRect: vi.fn(() => ({
         top: 0,
@@ -57,7 +57,7 @@ describe('useTimelineScrolling', () => {
     await act(async () => {
       result.current.scrollToElement(mockElement, 'VERTICAL');
       // Wait for RAF to be called
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
     });
 
     // Should fallback to native scrollIntoView when container not found
@@ -74,7 +74,7 @@ describe('useTimelineScrolling', () => {
     await act(async () => {
       result.current.scrollToElement(mockElement, 'HORIZONTAL');
       // Wait for RAF to be called
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
     });
 
     // Should fallback to native scrollIntoView when container not found
@@ -117,9 +117,9 @@ describe('useTimelineScrolling', () => {
 
     await act(async () => {
       result.current.scrollToElement(mockElement, 'VERTICAL');
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
     });
-    
+
     // Immediately call again without waiting for timeout to clear
     await act(async () => {
       result.current.scrollToElement(mockElement, 'VERTICAL');

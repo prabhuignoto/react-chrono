@@ -2,6 +2,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useStableContext, useDynamicContext } from '../contexts';
 import Controls from '../timeline-elements/timeline-control/timeline-control';
+import { FullscreenControl } from '../timeline-elements/fullscreen-control';
 import { TimelineNavButton } from '../timeline-elements/timeline-control/timeline-control.styles';
 import { ChevronLeft, ChevronRight, CloseIcon } from '../icons';
 import { Toolbar } from '../toolbar';
@@ -68,6 +69,10 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   currentMatchIndex,
   onSearchKeyDown,
   searchInputRef,
+  timelineRef,
+  onEnterFullscreen,
+  onExitFullscreen,
+  onFullscreenError,
 }: TimelineToolbarProps) => {
   // Access the stable and dynamic contexts
   const {
@@ -333,7 +338,18 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                 isMobile={isMobile}
               ></ChangeDensity>
             </div>
-          ) : null}{' '}
+          ) : null}
+          <div className="control-wrapper" key="fullscreen-control">
+            <FullscreenControl
+              targetRef={timelineRef}
+              theme={theme}
+              onEnterFullscreen={onEnterFullscreen}
+              onExitFullscreen={onExitFullscreen}
+              onError={onFullscreenError}
+              size="medium"
+              disabled={false}
+            />
+          </div>
         </ExtraControls>
       </ActionGroup>
     </Toolbar>

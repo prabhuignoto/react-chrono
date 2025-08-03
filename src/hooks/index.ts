@@ -27,6 +27,7 @@ export { useTimelineSearch } from './useTimelineSearch';
 export { useMediaState } from './useMediaState';
 export { useCardSize } from './useCardSize';
 export { useSlideshowProgress } from './useSlideshowProgress';
+export { useFullscreen } from './useFullscreen';
 
 // Shared utilities (for internal use)
 export {

@@ -33,9 +33,11 @@ const smoothScrollTo = (
   container: Element,
   targetPosition: number,
   duration: number,
-  isHorizontal: boolean = false
+  isHorizontal: boolean = false,
 ) => {
-  const startPosition = isHorizontal ? container.scrollLeft : container.scrollTop;
+  const startPosition = isHorizontal
+    ? container.scrollLeft
+    : container.scrollTop;
   const distance = targetPosition - startPosition;
   const startTime = performance.now();
 
@@ -87,18 +89,18 @@ export const useTimelineScrolling = () => {
     scrollTimeoutRef.current = requestAnimationFrame(() => {
       const isVerticalMode =
         mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
-      
+
       // Find the scrollable container - handle test environment gracefully
       let container: Element | null = null;
-      
+
       if (typeof element.closest === 'function') {
         container = element.closest('[data-testid="timeline-main-wrapper"]');
       }
-      
+
       if (!container) {
         container = element.parentElement?.parentElement || null;
       }
-      
+
       if (!container) {
         // Fallback to native scrollIntoView if available
         if (typeof element.scrollIntoView === 'function') {
@@ -114,32 +116,34 @@ export const useTimelineScrolling = () => {
       // Calculate target position to center the element
       const containerRect = container.getBoundingClientRect();
       const elementRect = element.getBoundingClientRect();
-      
+
       if (isVerticalMode) {
         // Center vertically
-        const targetScrollTop = container.scrollTop + 
-          (elementRect.top - containerRect.top) - 
-          (containerRect.height / 2) + 
-          (elementRect.height / 2);
-        
+        const targetScrollTop =
+          container.scrollTop +
+          (elementRect.top - containerRect.top) -
+          containerRect.height / 2 +
+          elementRect.height / 2;
+
         smoothScrollTo(container, targetScrollTop, 500, false);
       } else {
         // Center horizontally
-        const targetScrollLeft = container.scrollLeft + 
-          (elementRect.left - containerRect.left) - 
-          (containerRect.width / 2) + 
-          (elementRect.width / 2);
-        
+        const targetScrollLeft =
+          container.scrollLeft +
+          (elementRect.left - containerRect.left) -
+          containerRect.width / 2 +
+          elementRect.width / 2;
+
         smoothScrollTo(container, targetScrollLeft, 500, true);
       }
-      
+
       lastScrollTarget.current = element;
-      
+
       // Clear the target after scrolling completes
       setTimeout(() => {
         lastScrollTarget.current = null;
       }, 600);
-      
+
       scrollTimeoutRef.current = null;
     });
   }, []);
