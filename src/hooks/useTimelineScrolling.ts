@@ -88,17 +88,26 @@ export const useTimelineScrolling = () => {
       const isVerticalMode =
         mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
       
-      // Find the scrollable container
-      const container = element.closest('[data-testid="timeline-main-wrapper"]') || 
-                       element.parentElement?.parentElement;
+      // Find the scrollable container - handle test environment gracefully
+      let container: Element | null = null;
+      
+      if (typeof element.closest === 'function') {
+        container = element.closest('[data-testid="timeline-main-wrapper"]');
+      }
       
       if (!container) {
-        // Fallback to native scrollIntoView
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: isVerticalMode ? 'center' : 'nearest',
-          inline: isVerticalMode ? 'center' : 'center',
-        });
+        container = element.parentElement?.parentElement || null;
+      }
+      
+      if (!container) {
+        // Fallback to native scrollIntoView if available
+        if (typeof element.scrollIntoView === 'function') {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: isVerticalMode ? 'center' : 'nearest',
+            inline: isVerticalMode ? 'center' : 'center',
+          });
+        }
         return;
       }
 
