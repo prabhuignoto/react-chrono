@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export const TimelineHorizontalWrapper = styled.ul<{ flipLayout?: boolean }>`
+export const TimelineHorizontalWrapper = styled.ul<{ $flipLayout?: boolean }>`
   display: flex;
   list-style: none;
   margin: 0;
   width: 100%;
-  direction: ${(p) => (p.flipLayout ? 'rtl' : 'ltr')};
+  direction: ${(p) => (p.$flipLayout ? 'rtl' : 'ltr')};
 
   &.vertical {
     flex-direction: column;
