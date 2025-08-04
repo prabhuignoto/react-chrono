@@ -99,6 +99,50 @@ test.describe('Chrono.Horizontal.Basic', () => {
       if (await playButton.isVisible({ timeout: 3000 })) {
         await playButton.click();
         await page.waitForTimeout(1000);
+        
+        // Look for pause button
+        const pauseButton = page.locator('[aria-label*="Pause"], [aria-label*="pause"]').first();
+        if (await pauseButton.isVisible()) {
+          await pauseButton.click();
+        }
+      }
+      
+      // Check for other controls
+      const fullscreenButton = page.locator('[aria-label*="fullscreen"], [data-testid*="fullscreen"]').first();
+      if (await fullscreenButton.isVisible()) {
+        await fullscreenButton.click();
+        await page.waitForTimeout(500);
+      }
+    });
+  });
+
+  test('should display timeline with media content', async ({ page, testHelpers }) => {
+    await test.step('Navigate to horizontal timeline with media', async () => {
+      await testHelpers.navigateTo('/horizontal-all');
+      await page.waitForSelector('.timeline-horz-item-container', { timeout: 10000 });
+    });
+
+    await test.step('Verify media content', async () => {
+      // Look for media elements
+      const mediaElements = page.locator('img, video, iframe');
+      const count = await mediaElements.count();
+      
+      if (count > 0) {
+        await expect(mediaElements.first()).toBeVisible();
+      }
+    });
+
+    await test.step('Test slideshow functionality', async () => {
+      const playButton = page.locator('[aria-label*="play"], .play-button').first();
+      if (await playButton.isVisible()) {
+        await playButton.click();
+        await page.waitForTimeout(2000);
+        
+        const pauseButton = page.locator('[aria-label*="pause"], .pause-button').first();
+        if (await pauseButton.isVisible()) {
+          await pauseButton.click();
+          await page.waitForTimeout(1000);
+        }
       }
     });
 
