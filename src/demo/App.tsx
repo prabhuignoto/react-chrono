@@ -14,6 +14,7 @@ import {
   CardlessVertical,
   CustomContentVertical,
   CustomContentWithIconsVertical,
+  ComprehensiveVertical,
   // Horizontal components  
   BasicHorizontal,
   AllHorizontal,
@@ -26,6 +27,7 @@ import {
   mixedTimeline,
   nestedTimeline,
   worldHistoryTimeline,
+  technologyEvolutionTimeline,
 } from './data';
 import DynamicLoad from './dynamic-load';
 import { Layout } from './layout';
@@ -34,6 +36,7 @@ const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
   const [nestedItems, setNestedItems] = useState<TimelineItemModel[]>([]);
   const [historyItems, setHistoryItems] = useState<TimelineItemModel[]>([]);
+  const [techItems, setTechItems] = useState<TimelineItemModel[]>([]);
   const [state, setState] = useState(0);
 
   const [customTheme, setCustomTheme] = useState<Theme>({
@@ -64,6 +67,7 @@ const NewDemo: React.FunctionComponent = () => {
     setItems(basicTimeline);
     setHistoryItems(worldHistoryTimeline);
     setNestedItems(nestedTimeline);
+    setTechItems(technologyEvolutionTimeline);
   }, []);
 
   const router = items.length
@@ -180,6 +184,12 @@ const NewDemo: React.FunctionComponent = () => {
             {
               path: '/theme-showcase',
               element: <ThemeShowcase />,
+            },
+            {
+              path: '/vertical-comprehensive',
+              element: techItems.length > 0 && (
+                <ComprehensiveVertical type="big-screen" items={techItems} />
+              ),
             },
           ],
         },

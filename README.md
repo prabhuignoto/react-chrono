@@ -30,6 +30,13 @@
 
 React Chrono is a modern timeline component for React that offers a variety of features and customization options. It allows you to render timelines in horizontal, vertical, vertical-alternating, and horizontal-all modes, display images and videos, and much more.
 
+**🚀 Recent Enhancements:**
+- **Advanced Dark Mode**: 15+ new themeable properties for complete dark mode customization
+- **Enhanced Search**: Built-in search with keyboard navigation and match highlighting  
+- **Fullscreen Support**: Cross-browser fullscreen mode for immersive viewing
+- **Improved Accessibility**: Better focus management and ARIA support
+- **Enhanced Testing**: Comprehensive Playwright E2E and component testing suite
+
 ## Table of Contents
 
 - [✨ Features](#-features)
@@ -48,6 +55,7 @@ React Chrono is a modern timeline component for React that offers a variety of f
   - [Theming & Styling](#theming--styling)
   - [Slideshow](#slideshow)
   - [Search](#search)
+  - [Fullscreen](#fullscreen)
   - [Miscellaneous](#miscellaneous)
 - [🎨 Customization](#-customization)
   - [Rendering Custom Content](#rendering-custom-content-1)
@@ -58,10 +66,15 @@ React Chrono is a modern timeline component for React that offers a variety of f
   - [Custom Button Alt Text](#custom-button-alt-text)
 - [📦 Examples & Demos](#-examples--demos)
   - [CodeSandbox Examples](#codesandbox-examples)
-  - [Kitchen Sink Demo](#kitchen-sink-demo)
   - [Storybook](#storybook)
-- [🛠️ Build Setup](#️-build-setup)
-- [🧪 Tests](#-tests)
+- [🛠️ Development & Build Commands](#️-development--build-commands)
+  - [Initial Setup](#initial-setup)
+  - [Development Commands](#development-commands)
+  - [Testing Commands](#testing-commands)
+  - [Code Quality Commands](#code-quality-commands)
+  - [Bundle & Security Commands](#bundle--security-commands)
+  - [Most Used Development Workflow](#most-used-development-workflow)
+- [🧪 Testing Framework](#-testing-framework)
 - [🤝 Contributing](#-contributing)
 - [🧱 Built With](#-built-with)
 - [💖 Support & Meta](#-support--meta)
@@ -79,6 +92,11 @@ React Chrono is a modern timeline component for React that offers a variety of f
 - 🎨 **Enhanced Theming**: Comprehensive theme customization with **15+ new dark mode properties** for complete visual control.
 - 🌙 **Advanced Dark Mode**: Fully configurable dark mode with brand color integration and accessibility compliance.
 - 🎭 **Custom Icons**: Use your own icons for timeline points.
+- 🔍 **Advanced Search**: Built-in search functionality with keyboard navigation and match highlighting.
+- 📱 **Fullscreen Support**: Enter fullscreen mode for immersive timeline viewing with cross-browser compatibility.
+- 🎯 **Focus Management**: Improved focus states and keyboard navigation for accessibility.
+- ⚙️ **Flexible Layouts**: Dynamic layout switching between modes with responsive breakpoints.
+- 🎬 **Enhanced Slideshow**: Multiple animation types with overall progress tracking.
 - 💪 **TypeScript**: Built with TypeScript for robust development.
 - 💅 **Styled with Styled Component**: Leverages Styled Component for flexible styling.
 
@@ -460,7 +478,8 @@ const highContrastTheme = {
 **Dark Mode Toggle:**
 | Name | Type | Default | Description |
 | :----------------- | :--------- | :------ | :--------------------------------------------------------------------------------------------------------- |
-| `enableDarkToggle` | `boolean` | `false` | Adds a toggle switch to the toolbar for enabling dark mode (if dark theme is configured). |
+| `darkMode` | `boolean` | `false` | Enables dark mode styling with enhanced theming properties. |
+| `enableDarkToggle` | `boolean` | `false` | Adds a toggle switch to the toolbar for switching between light and dark modes. |
 | `onThemeChange` | `function` | | Callback invoked when the theme changes, e.g., via the dark mode toggle. Passes the new theme object. |
 
 ### Slideshow
@@ -498,6 +517,41 @@ const highContrastTheme = {
 ```
 
 > Search functionality is part of the toolbar. To hide search (and the toolbar), set `disableToolbar={true}`.
+
+### Fullscreen
+
+The timeline supports fullscreen mode for immersive viewing experiences with cross-browser compatibility.
+
+```jsx
+<Chrono items={items} />
+```
+
+Fullscreen functionality is automatically available through the toolbar (when not disabled). Users can:
+
+- **Enter fullscreen**: Click the fullscreen button in the toolbar
+- **Exit fullscreen**: Click the minimize button, press <kbd>ESC</kbd>, or use browser fullscreen controls
+- **Keyboard support**: <kbd>ESC</kbd> key exits fullscreen mode
+
+**Cross-browser Support:**
+- Modern browsers: Uses the standard `requestFullscreen()` API
+- Safari: Uses `webkitRequestFullscreen()` for compatibility
+- Firefox: Uses `mozRequestFullScreen()` for older versions
+- IE/Edge: Uses `msRequestFullscreen()` for legacy support
+
+**Example with fullscreen event handling:**
+
+```jsx
+const handleFullscreenChange = (isFullscreen) => {
+  console.log('Fullscreen mode:', isFullscreen ? 'enabled' : 'disabled');
+};
+
+<Chrono 
+  items={items} 
+  onFullscreenChange={handleFullscreenChange}
+/>
+```
+
+> **Note:** Fullscreen requests must be triggered by user interaction (button clicks) due to browser security policies. The fullscreen button is automatically integrated into the toolbar when available.
 
 ### Miscellaneous
 
@@ -642,7 +696,9 @@ Customize button text and accessibility labels:
 
 [Interactive component documentation](https://5f985eb478dcb00022cfd60e-crlyulevwt.chromatic.com/)
 
-## 🛠️ Build Setup
+## 🛠️ Development & Build Commands
+
+### Initial Setup
 
 ```bash
 # Clone the repository
@@ -651,31 +707,155 @@ cd react-chrono
 
 # Install dependencies
 pnpm install
+```
 
-# Start development server
+### Development Commands
+
+```bash
+# Start development server with hot reload
 pnpm run dev
 
 # Build for production
 pnpm run build
 
-# Run tests
-pnpm test
+# Build and analyze bundle size
+pnpm run build:analyze
 ```
 
-## 🧪 Tests
-
-The project uses Vitest for testing with comprehensive coverage:
+### Testing Commands
 
 ```bash
-# Run all tests
+# Run unit tests with Vitest
 pnpm test
 
-# Run tests in watch mode
-pnpm test:watch
+# Run tests with UI interface
+pnpm run test-ui
 
-# Generate coverage report
-pnpm test:coverage
+# Run E2E tests with Playwright
+pnpm run test:e2e
+
+# Run E2E tests with UI
+pnpm run test:e2e:ui
+
+# Run E2E tests in headed mode (visible browser)
+pnpm run test:e2e:headed
+
+# Run E2E tests for specific browsers
+pnpm run test:e2e:chrome
+pnpm run test:e2e:firefox
+pnpm run test:e2e:webkit
+
+# Run E2E tests for mobile devices
+pnpm run test:e2e:mobile
+
+# Component testing with Playwright
+pnpm run test:ct
+pnpm run test:ct:ui
+
+# Install Playwright browsers
+pnpm run test:install
+
+# Update test snapshots
+pnpm run test:update-snapshots
+
+# View test reports
+pnpm run test:report
+
+# Show test traces
+pnpm run test:trace
+
+# Generate test code
+pnpm run test:codegen
 ```
+
+### Code Quality Commands
+
+```bash
+# Lint TypeScript files
+pnpm run eslint
+
+# Fix linting issues automatically
+pnpm run fix-js
+
+# Format code with Prettier
+pnpm run format
+
+# Check code formatting
+pnpm run lint
+
+# Lint CSS-in-JS styles
+pnpm run lint:css
+
+# Fix CSS-in-JS styling issues
+pnpm run fix-css
+
+# Run all linting checks
+pnpm run lint:all
+
+# Comprehensive bug finding (TypeScript + linting + tests)
+pnpm run find-bugs
+
+# Full bug detection with extended checks
+pnpm run find-bugs:full
+
+# Format code and run all checks
+pnpm run clean
+```
+
+### Bundle & Security Commands
+
+```bash
+# Build with Rollup
+pnpm run rollup
+
+# Check bundle size limits
+pnpm run size-limit
+
+# Security vulnerability scanning
+pnpm run snyk
+
+# Coverage reporting
+pnpm run coveralls
+
+# Vite development build
+pnpm run vite:build
+```
+
+### Most Used Development Workflow
+
+For typical development, you'll primarily use:
+
+```bash
+# Start development
+pnpm run dev
+
+# Run tests during development
+pnpm test
+
+# Check code quality
+pnpm run clean
+
+# Build for production
+pnpm run build
+```
+
+## 🧪 Testing Framework
+
+React Chrono uses a comprehensive testing setup with multiple frameworks:
+
+- **Unit Tests**: Vitest with @testing-library/react for component testing
+- **E2E Tests**: Playwright for cross-browser end-to-end testing
+- **Component Tests**: Playwright Component Testing for isolated component behavior
+- **Coverage**: Comprehensive test coverage reporting with c8
+
+**Key Testing Features:**
+- Cross-browser testing (Chrome, Firefox, Safari, Edge)
+- Mobile device testing
+- Visual regression testing with Playwright
+- Accessibility testing
+- Performance testing
+
+See the [Development Commands](#-development--build-commands) section for all available testing commands.
 
 ## 🤝 Contributing
 
@@ -683,11 +863,15 @@ Contributions are welcome! Please read our [Contributing Guide](./CONTRIBUTING.m
 
 ## 🧱 Built With
 
-- [React](https://reactjs.org/) - The web framework used
-- [TypeScript](https://www.typescriptlang.org/) - For type safety
-- [Styled Components](https://styled-components.com/) - For styling
-- [FocusTrap](https://github.com/focus-trap/focus-trap) - For accessibility
-- [Rollup](https://rollupjs.org/) - For bundling
+- [React 19](https://reactjs.org/) - The web framework used
+- [TypeScript](https://www.typescriptlang.org/) - For type safety and robust development
+- [Styled Components](https://styled-components.com/) - For CSS-in-JS styling
+- [Day.js](https://day.js.org/) - For date formatting and manipulation
+- [Rollup](https://rollupjs.org/) - For efficient bundling
+- [Vite](https://vitejs.dev/) - For fast development builds
+- [Vitest](https://vitest.dev/) - For unit testing
+- [Playwright](https://playwright.dev/) - For E2E and component testing
+- [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/) - For code quality
 
 ## 💖 Support & Meta
 

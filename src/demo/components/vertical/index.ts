@@ -8,6 +8,7 @@ export { AlternatingNestedVertical } from './AlternatingNestedVertical';
 export { CardlessVertical } from './CardlessVertical';
 export { CustomContentVertical } from './CustomContentVertical';
 export { CustomContentWithIconsVertical } from './CustomContentWithIconsVertical';
+export { ComprehensiveVertical } from './ComprehensiveVertical';
 
 export type { BasicVerticalProps } from './BasicVertical';
 export type { AlternatingVerticalProps } from './AlternatingVertical';
@@ -17,4 +18,5 @@ export type { NestedVerticalProps } from './NestedVertical';
 export type { AlternatingNestedVerticalProps } from './AlternatingNestedVertical';
 export type { CardlessVerticalProps } from './CardlessVertical';
 export type { CustomContentVerticalProps } from './CustomContentVertical';
-export type { CustomContentWithIconsVerticalProps } from './CustomContentWithIconsVertical'; 
+export type { CustomContentWithIconsVerticalProps } from './CustomContentWithIconsVertical';
+export type { ComprehensiveVerticalProps } from './ComprehensiveVertical'; 
