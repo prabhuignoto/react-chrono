@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: pnpm/action-setup@v4.1.0
         with:
-          version: 8.8.0
+          version: latest
 
       - uses: actions/checkout@v4
 
