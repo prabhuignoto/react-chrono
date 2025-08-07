@@ -43,6 +43,7 @@ export const useTimelineNavigation = ({
     handleTimelineItemClick,
     handleTimelineItemElapsed,
     findTargetElement,
+    syncActiveItemIndex,
   } = useTimelineItemNavigation({
     items,
     mode,
@@ -53,32 +54,62 @@ export const useTimelineNavigation = ({
 
   const { scrollToElement } = useTimelineScrolling();
 
-  // Navigation handlers
+  // Navigation handlers with predictive centering to avoid jumps
   const handleNext = useCallback(() => {
     const newIndex = Math.min(activeItemIndex.current + 1, items.length - 1);
     if (newIndex !== activeItemIndex.current) {
-      activeItemIndex.current = newIndex;
-      stableOnNext();
-
       const targetItem = items[newIndex];
+      
+      // Predictive centering: Find and scroll to target BEFORE updating state
       if (targetItem?.id) {
         const targetElement = findTargetElement(targetItem.id);
-        if (targetElement) scrollToElement(targetElement, mode);
+        if (targetElement) {
+          // Start scrolling immediately to avoid jump
+          scrollToElement(targetElement, mode);
+          
+          // Ensure target element gets focus for keyboard navigation
+          setTimeout(() => {
+            if (hasFocus && targetElement.focus) {
+              targetElement.focus({ preventScroll: true });
+            }
+          }, 100);
+        }
       }
+      
+      // Update state after scrolling starts
+      setTimeout(() => {
+        activeItemIndex.current = newIndex;
+        stableOnNext();
+      }, 50); // Small delay to let scrolling start first
     }
-  }, [items, findTargetElement, mode, scrollToElement, stableOnNext]);
+  }, [items, findTargetElement, mode, scrollToElement, stableOnNext, hasFocus]);
 
   const handlePrevious = useCallback(() => {
     const newIndex = Math.max(activeItemIndex.current - 1, 0);
     if (newIndex !== activeItemIndex.current) {
-      activeItemIndex.current = newIndex;
-      stableOnPrevious();
-
       const targetItem = items[newIndex];
+      
+      // Predictive centering: Find and scroll to target BEFORE updating state
       if (targetItem?.id) {
         const targetElement = findTargetElement(targetItem.id);
-        if (targetElement) scrollToElement(targetElement, mode);
+        if (targetElement) {
+          // Start scrolling immediately to avoid jump
+          scrollToElement(targetElement, mode);
+          
+          // Ensure target element gets focus for keyboard navigation
+          setTimeout(() => {
+            if (hasFocus && targetElement.focus) {
+              targetElement.focus({ preventScroll: true });
+            }
+          }, 100);
+        }
       }
+      
+      // Update state after scrolling starts
+      setTimeout(() => {
+        activeItemIndex.current = newIndex;
+        stableOnPrevious();
+      }, 50); // Small delay to let scrolling start first
     }
   }, [
     items,
@@ -86,18 +117,34 @@ export const useTimelineNavigation = ({
     mode,
     scrollToElement,
     stableOnPrevious,
+    hasFocus,
   ]);
 
   const handleFirst = useCallback(() => {
     if (activeItemIndex.current !== 0) {
-      activeItemIndex.current = 0;
-      stableOnFirst();
-
       const targetItem = items[0];
+      
+      // Predictive centering: Find and scroll to target BEFORE updating state
       if (targetItem?.id) {
         const targetElement = findTargetElement(targetItem.id);
-        if (targetElement) scrollToElement(targetElement, mode);
+        if (targetElement) {
+          // Start scrolling immediately to avoid jump
+          scrollToElement(targetElement, mode);
+          
+          // Ensure target element gets focus for keyboard navigation
+          setTimeout(() => {
+            if (hasFocus && targetElement.focus) {
+              targetElement.focus({ preventScroll: true });
+            }
+          }, 100);
+        }
       }
+      
+      // Update state after scrolling starts
+      setTimeout(() => {
+        activeItemIndex.current = 0;
+        stableOnFirst();
+      }, 50); // Small delay to let scrolling start first
     }
   }, [
     items,
@@ -105,21 +152,37 @@ export const useTimelineNavigation = ({
     mode,
     scrollToElement,
     stableOnFirst,
+    hasFocus,
   ]);
 
   const handleLast = useCallback(() => {
     const lastIndex = items.length - 1;
     if (activeItemIndex.current !== lastIndex) {
-      activeItemIndex.current = lastIndex;
-      stableOnLast();
-
       const targetItem = items[lastIndex];
+      
+      // Predictive centering: Find and scroll to target BEFORE updating state
       if (targetItem?.id) {
         const targetElement = findTargetElement(targetItem.id);
-        if (targetElement) scrollToElement(targetElement, mode);
+        if (targetElement) {
+          // Start scrolling immediately to avoid jump
+          scrollToElement(targetElement, mode);
+          
+          // Ensure target element gets focus for keyboard navigation
+          setTimeout(() => {
+            if (hasFocus && targetElement.focus) {
+              targetElement.focus({ preventScroll: true });
+            }
+          }, 100);
+        }
       }
+      
+      // Update state after scrolling starts
+      setTimeout(() => {
+        activeItemIndex.current = lastIndex;
+        stableOnLast();
+      }, 50); // Small delay to let scrolling start first
     }
-  }, [items, findTargetElement, mode, scrollToElement, stableOnLast]);
+  }, [items, findTargetElement, mode, scrollToElement, stableOnLast, hasFocus]);
 
   // Use keyboard navigation hook
   const { handleKeySelection } = useTimelineKeyboardNavigation({
@@ -141,5 +204,6 @@ export const useTimelineNavigation = ({
     handleFirst,
     handleLast,
     handleKeySelection,
+    syncActiveItemIndex,
   };
 };

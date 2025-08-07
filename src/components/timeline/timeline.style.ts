@@ -8,11 +8,11 @@ import { ScrollBar } from '../common/styles';
 const getTransform = (transform?: string) => transform || 'none';
 
 const transitionMixin = css`
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
+  -webkit-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
 // Timeline wrapper with improved cross-browser support
@@ -47,11 +47,23 @@ export const Wrapper = styled.div<{
   }
 
   &.js-focus-visible :focus:not(.focus-visible) {
-    /* outline: 0; */
+    outline: 0;
   }
 
   &.js-focus-visible .focus-visible {
     outline: 2px solid #528deb;
+    outline-offset: 2px;
+  }
+
+  /* Hide focus outline for toolbar-triggered navigation */
+  &[data-toolbar-navigation="true"] :focus {
+    outline: 0 !important;
+  }
+
+  /* Ensure keyboard navigation focus is visible */
+  &[data-keyboard-focus="true"] :focus-visible {
+    outline: 2px solid #528deb;
+    outline-offset: 2px;
   }
 
   /* Fullscreen mode styles - comprehensive cross-browser support */
@@ -150,12 +162,15 @@ export const TimelineMainWrapper = styled.div<{
   background-color: ${(p) => p.theme?.timelineBgColor || 'transparent'};
   /* order: ${(p) => (p.position === 'top' ? 1 : 0)}; */
   background: transparent;
-  F ${ScrollBar} &.horizontal {
+  ${ScrollBar} &.horizontal {
     min-height: 150px;
   }
 
   padding: ${({ $scrollable }) =>
     !$scrollable ? '0 0.5rem 0' : ''}; /* Reduced horizontal padding */
+
+  /* Improved scroll behavior for smoother transitions */
+  scroll-behavior: auto; /* Let our custom scrolling handle the smooth behavior */
 
   /* Fullscreen mode styles for main wrapper */
   :fullscreen &,
@@ -185,7 +200,7 @@ export const TimelineMain = styled.div`
   left: 0;
   display: flex;
   align-items: center;
-  transition: all 0.2s ease;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translate(0, -50%);
 
   &.vertical {

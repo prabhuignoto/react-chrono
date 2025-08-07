@@ -20,14 +20,21 @@ const SCROLL_OPTIONS: Record<'HORIZONTAL' | 'VERTICAL', ScrollOptions> = {
 };
 
 /**
- * Smooth scroll with easing function
+ * Smooth scroll with improved easing function for more fluid motion
  */
 const easeInOutCubic = (t: number): number => {
-  return t < 0.5 ? 4 * t * t * t : 1 + 4 * (t - 1) * (t - 1) * (t - 1);
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 };
 
 /**
- * Custom smooth scroll implementation for better control
+ * Even smoother easing function for gradual movement
+ */
+const easeInOutQuart = (t: number): number => {
+  return t < 0.5 ? 8 * t * t * t * t : 1 - 8 * Math.pow(-t + 1, 4);
+};
+
+/**
+ * Custom smooth scroll implementation for better control and smoother animation
  */
 const smoothScrollTo = (
   container: Element,
@@ -44,7 +51,7 @@ const smoothScrollTo = (
   const animateScroll = (currentTime: number) => {
     const elapsed = currentTime - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    const easedProgress = easeInOutCubic(progress);
+    const easedProgress = easeInOutQuart(progress);
     const newPosition = startPosition + distance * easedProgress;
 
     if (isHorizontal) {
@@ -87,64 +94,67 @@ export const useTimelineScrolling = () => {
 
     // Schedule the scroll for the next animation frame
     scrollTimeoutRef.current = requestAnimationFrame(() => {
-      const isVerticalMode =
-        mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
+      // Start scrolling immediately since we're now doing predictive centering
+        const isVerticalMode =
+          mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
 
-      // Find the scrollable container - handle test environment gracefully
-      let container: Element | null = null;
+        // Find the scrollable container - handle test environment gracefully
+        let container: Element | null = null;
 
-      if (typeof element.closest === 'function') {
-        container = element.closest('[data-testid="timeline-main-wrapper"]');
-      }
-
-      if (!container) {
-        container = element.parentElement?.parentElement || null;
-      }
-
-      if (!container) {
-        // Fallback to native scrollIntoView if available
-        if (typeof element.scrollIntoView === 'function') {
-          element.scrollIntoView({
-            behavior: 'smooth',
-            block: isVerticalMode ? 'center' : 'nearest',
-            inline: isVerticalMode ? 'center' : 'center',
-          });
+        if (typeof element.closest === 'function') {
+          container = element.closest('[data-testid="timeline-main-wrapper"]');
         }
-        return;
-      }
 
-      // Calculate target position to center the element
-      const containerRect = container.getBoundingClientRect();
-      const elementRect = element.getBoundingClientRect();
+        if (!container) {
+          container = element.parentElement?.parentElement || null;
+        }
 
-      if (isVerticalMode) {
-        // Center vertically
-        const targetScrollTop =
-          container.scrollTop +
-          (elementRect.top - containerRect.top) -
-          containerRect.height / 2 +
-          elementRect.height / 2;
+        if (!container) {
+          // Fallback to native scrollIntoView if available
+          if (typeof element.scrollIntoView === 'function') {
+            element.scrollIntoView({
+              behavior: 'smooth',
+              block: isVerticalMode ? 'center' : 'nearest',
+              inline: isVerticalMode ? 'center' : 'center',
+            });
+          }
+          return;
+        }
 
-        smoothScrollTo(container, targetScrollTop, 500, false);
-      } else {
-        // Center horizontally
-        const targetScrollLeft =
-          container.scrollLeft +
-          (elementRect.left - containerRect.left) -
-          containerRect.width / 2 +
-          elementRect.width / 2;
+        // Calculate target position to center the element
+        const containerRect = container.getBoundingClientRect();
+        const elementRect = element.getBoundingClientRect();
 
-        smoothScrollTo(container, targetScrollLeft, 500, true);
-      }
+        if (isVerticalMode) {
+          // Center vertically with improved positioning
+          const targetScrollTop =
+            container.scrollTop +
+            (elementRect.top - containerRect.top) -
+            containerRect.height / 2 +
+            elementRect.height / 2;
 
-      lastScrollTarget.current = element;
+          // Use much longer duration for smoother vertical scrolling
+          smoothScrollTo(container, targetScrollTop, 1200, false);
+        } else {
+          // Center horizontally with improved positioning
+          const targetScrollLeft =
+            container.scrollLeft +
+            (elementRect.left - containerRect.left) -
+            containerRect.width / 2 +
+            elementRect.width / 2;
 
-      // Clear the target after scrolling completes
-      setTimeout(() => {
-        lastScrollTarget.current = null;
-      }, 600);
+          // Use much longer duration for smoother horizontal scrolling
+          smoothScrollTo(container, targetScrollLeft, 1200, true);
+        }
 
-      scrollTimeoutRef.current = null;
+        lastScrollTarget.current = element;
+
+        // Clear the target after scrolling completes
+        setTimeout(() => {
+          lastScrollTarget.current = null;
+        }, 1300);
+
+        scrollTimeoutRef.current = null;
     });
   }, []);
 

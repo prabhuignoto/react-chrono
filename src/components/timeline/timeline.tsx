@@ -84,6 +84,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const [hasFocus, setHasFocus] = useState(false);
+  const [isKeyboardNavigation, setIsKeyboardNavigation] = useState(false);
+  const [isToolbarNavigation, setIsToolbarNavigation] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -160,11 +162,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     activeItemIndex,
     handleTimelineItemClick,
     handleTimelineItemElapsed,
-    handleNext,
-    handlePrevious,
-    handleFirst,
-    handleLast,
+    handleNext: handleNextInternal,
+    handlePrevious: handlePreviousInternal,
+    handleFirst: handleFirstInternal,
+    handleLast: handleLastInternal,
     handleKeySelection,
+    syncActiveItemIndex,
   } = useTimelineNavigation({
     items,
     mode: timelineMode,
@@ -178,6 +181,38 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onFirst,
     onLast,
   });
+
+  // Enhanced navigation handlers that track source
+  const handleNext = React.useCallback(() => {
+    setIsToolbarNavigation(true);
+    setIsKeyboardNavigation(false);
+    handleNextInternal();
+  }, [handleNextInternal]);
+
+  const handlePrevious = React.useCallback(() => {
+    setIsToolbarNavigation(true);
+    setIsKeyboardNavigation(false);
+    handlePreviousInternal();
+  }, [handlePreviousInternal]);
+
+  const handleFirst = React.useCallback(() => {
+    setIsToolbarNavigation(true);
+    setIsKeyboardNavigation(false);
+    handleFirstInternal();
+  }, [handleFirstInternal]);
+
+  const handleLast = React.useCallback(() => {
+    setIsToolbarNavigation(true);
+    setIsKeyboardNavigation(false);
+    handleLastInternal();
+  }, [handleLastInternal]);
+
+  // Sync activeItemIndex with activeTimelineItem prop
+  useEffect(() => {
+    if (activeTimelineItem !== undefined && activeTimelineItem !== activeItemIndex.current) {
+      syncActiveItemIndex(activeTimelineItem);
+    }
+  }, [activeTimelineItem, syncActiveItemIndex]);
 
   const {
     searchQuery,
@@ -240,11 +275,33 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     (evt: React.KeyboardEvent<HTMLDivElement>) => {
       if (!disableNavOnKey && !slideShowRunning) {
         setHasFocus(true);
+        setIsKeyboardNavigation(true);
+        setIsToolbarNavigation(false);
         handleKeySelection(evt);
       }
     },
     [disableNavOnKey, slideShowRunning, handleKeySelection],
   );
+
+  // Handle focus events to maintain proper focus state
+  const handleFocus = React.useCallback(() => {
+    if (!slideShowRunning) {
+      setHasFocus(true);
+    }
+  }, [slideShowRunning]);
+
+  const handleBlur = React.useCallback((evt: React.FocusEvent<HTMLDivElement>) => {
+    // Only lose focus if focus is moving outside the timeline entirely
+    const relatedTarget = evt.relatedTarget as HTMLElement;
+    const currentTarget = evt.currentTarget as HTMLElement;
+    
+    // Check if focus is moving to a child element (like toolbar buttons)
+    if (!currentTarget.contains(relatedTarget)) {
+      // Only set hasFocus to false if focus is truly leaving the timeline
+      // Keep focus active for better keyboard navigation experience
+      // setHasFocus(false);
+    }
+  }, []);
 
   // Update active item information
   useEffect(() => {
@@ -265,38 +322,38 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       title,
     });
 
-    if (mode === 'HORIZONTAL') {
-      const card = horizontalContentRef.current?.querySelector(
-        `#timeline-card-${activeItem.id}`,
-      );
+    // Centering is now handled predictively by navigation hooks
+    // Only handle slideshow mode here to avoid conflicts
+    if (slideShowRunning) {
+      if (mode === 'HORIZONTAL') {
+        const card = horizontalContentRef.current?.querySelector(
+          `#timeline-card-${activeItem.id}`,
+        );
 
-      const cardRect = card?.getBoundingClientRect();
-      const contentRect = horizontalContentRef.current?.getBoundingClientRect();
+        if (card && horizontalContentRef.current) {
+          const cardRect = card.getBoundingClientRect();
+          const contentRect = horizontalContentRef.current.getBoundingClientRect();
 
-      if (cardRect && contentRect) {
-        const { width: cardWidth, left: cardLeft } = cardRect;
-        const { width: contentWidth, left: contentLeft } = contentRect;
+          if (cardRect && contentRect) {
+            const { width: cardWidth, left: cardLeft } = cardRect;
+            const { width: contentWidth, left: contentLeft } = contentRect;
 
-        // Defer DOM manipulation to next tick
-        requestAnimationFrame(() => {
-          const ele = horizontalContentRef.current as HTMLElement;
-          if (!ele) return;
+            requestAnimationFrame(() => {
+              const ele = horizontalContentRef.current as HTMLElement;
+              if (!ele) return;
 
-          ele.style.scrollBehavior = 'smooth';
-          ele.scrollLeft +=
-            cardLeft - contentLeft + cardWidth / 2 - contentWidth / 2;
-        });
-      }
-    } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
-      // Handle vertical scrolling for slideshow mode
-      if (slideShowRunning) {
-        // Find the vertical item row for the active item
+              ele.style.scrollBehavior = 'smooth';
+              const targetScrollLeft = cardLeft - contentLeft + cardWidth / 2 - contentWidth / 2;
+              ele.scrollLeft += targetScrollLeft;
+            });
+          }
+        }
+      } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
         const verticalItemRow = document.querySelector(
           `[data-testid="vertical-item-row"][data-item-id="${activeItem.id}"]`,
         );
         
         if (verticalItemRow) {
-          // Scroll the item into view smoothly
           requestAnimationFrame(() => {
             (verticalItemRow as HTMLElement).scrollIntoView({
               behavior: 'smooth',
@@ -334,12 +391,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     <Wrapper
       ref={wrapperRef}
       onKeyDown={handleKeyDown}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       className={wrapperClass}
       $cardPositionHorizontal={cardPositionHorizontal}
       theme={theme}
       $isDarkMode={darkMode}
       $isFullscreen={isFullscreen}
       data-fullscreen={isFullscreen}
+      data-keyboard-focus={isKeyboardNavigation}
+      data-toolbar-navigation={isToolbarNavigation}
       onMouseDown={() => setHasFocus(true)}
       onKeyUp={(evt) => {
         if (evt.key === 'Escape') {
