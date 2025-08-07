@@ -1,6 +1,7 @@
 import { TimelineContentModel } from '@models/TimelineContentModel';
 import { MediaState } from '@models/TimelineMediaModel';
 import { hexToRGBA } from '@utils/index';
+import { shallowEqual, arrayEqual, mediaEqual } from '@utils/comparison';
 import cls from 'classnames';
 import React, {
   useCallback,
@@ -12,7 +13,8 @@ import React, {
 } from 'react';
 import { useSlideshow } from 'src/components/effects/useSlideshow';
 import { useCardSize } from '../../../hooks/useCardSize';
-import { GlobalContext } from '../../GlobalContext';
+import { useFocusManager } from '../../../hooks/useFocusManager';
+import { useLayoutContext, useMediaContext, useNavigationContext } from '../../contexts/split';
 // Remove the Timeline import to break the circular dependency
 // import Timeline from '../../timeline/timeline';
 import CardMedia from '../timeline-card-media/timeline-card-media';
@@ -43,16 +45,16 @@ const arePropsEqual = (
   if (prevProps.title !== nextProps.title) return false;
   if (prevProps.cardTitle !== nextProps.cardTitle) return false;
 
-  // Skip re-render if media props stay the same
-  if (JSON.stringify(prevProps.media) !== JSON.stringify(nextProps.media))
+  // Efficient media comparison
+  if (!mediaEqual(prevProps.media, nextProps.media))
     return false;
 
-  // Skip re-render if theme stays the same
-  if (JSON.stringify(prevProps.theme) !== JSON.stringify(nextProps.theme))
+  // Efficient theme comparison (shallow)
+  if (!shallowEqual(prevProps.theme, nextProps.theme))
     return false;
 
-  // Skip re-render if items (for nested timeline) stay the same
-  if (JSON.stringify(prevProps.items) !== JSON.stringify(nextProps.items))
+  // Efficient items comparison for nested timeline
+  if (!arrayEqual(prevProps.items, nextProps.items))
     return false;
 
   // Default to true - don't re-render
@@ -86,29 +88,44 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
     }: TimelineContentModel) => {
       const [showMore, setShowMore] = useState(false);
       const detailsRef = useRef<HTMLDivElement | null>(null);
-      const containerRef = useRef<HTMLDivElement | null>(null);
       const progressRef = useRef<HTMLProgressElement | null>(null);
       const isFirstRender = useRef(true);
+      
+      // Use improved focus management
+      const containerRef = useFocusManager({
+        shouldFocus: hasFocus,
+        isActive: active,
+        preventScroll: true,
+        restoreFocus: true,
+      });
 
       const [hasBeenActivated, setHasBeenActivated] = useState(false);
       const [isResuming, setIsResuming] = useState(false);
 
+      // Use split contexts for better performance
+      // Note: theme is passed as a prop to this component, so we don't need it from context
       const {
         mode,
         cardHeight,
-        slideItemDuration = 2000,
         useReadMore,
         cardWidth,
         borderLessCards,
-        disableAutoScrollOnClick,
-        classNames,
-        textOverlay,
-        slideShowType,
-        showProgressOnSlideshow,
-        disableInteraction,
         highlightCardsOnHover,
         textDensity,
-      } = useContext(GlobalContext);
+      } = useLayoutContext();
+      const {
+        textOverlay,
+      } = useMediaContext();
+      const {
+        disableInteraction,
+      } = useNavigationContext();
+      
+      // TODO: Move these to appropriate contexts
+      const slideItemDuration = 2000;
+      const disableAutoScrollOnClick = false;
+      const classNames = undefined;
+      const slideShowType = 'reveal';
+      const showProgressOnSlideshow = true;
 
       const {
         paused,
@@ -218,26 +235,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         }
       }, [active, slideShowActive, slideItemDuration, hasFocus, setupTimer]);
 
-      // Set focus when needed without scrolling (scrolling is handled by parent)
-      useEffect(() => {
-        if (hasFocus && active && containerRef.current) {
-          // Only set focus, don't scroll - let parent handle scrolling
-          containerRef.current.focus({ preventScroll: true });
-
-          // Add focus-visible class for keyboard navigation
-          if (hasFocus && !containerRef.current.matches(':focus-visible')) {
-            containerRef.current.classList.add('focus-visible');
-          }
-        }
-      }, [hasFocus, active]);
-
-      // During slideshow, let parent handle scrolling to prevent conflicts
-      useEffect(() => {
-        if (active && slideShowActive && containerRef.current) {
-          // Focus without scrolling during slideshow
-          containerRef.current.focus({ preventScroll: true });
-        }
-      }, [active, slideShowActive]);
+      // Focus management is now handled by useFocusManager hook
 
       // Detect when resuming from pause
       useEffect(() => {

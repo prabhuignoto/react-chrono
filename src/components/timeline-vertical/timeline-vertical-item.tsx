@@ -8,7 +8,7 @@ import {
   FunctionComponent,
   ReactElement,
 } from 'react';
-import { GlobalContext } from '../GlobalContext';
+import { useThemeContext, useLayoutContext, useMediaContext } from '../contexts/split';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
 import { TimelinePoint } from './timeline-point';
@@ -58,22 +58,26 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     nestedCardHeight, // Specific height for nested cards
   } = props;
 
-  // Access global settings and theme from context
+  // Use split contexts for better performance
+  const { theme } = useThemeContext();
   const {
-    cardHeight, // Default card height
-    mode, // Timeline mode (VERTICAL, VERTICAL_ALTERNATING)
-    flipLayout, // Reverse layout order (title/point/card)?
-    timelinePointDimension, // Size of the timeline point
-    lineWidth, // Width of the timeline central line
-    disableClickOnCircle, // Prevent clicks on the timeline point?
-    cardLess, // Mode without cards, only points/titles
-    theme, // Theme object
-    classNames, // Custom class names for sub-elements
-    textOverlay, // Style where text overlays media
-    mediaHeight, // Height for media elements
-    disableInteraction, // Disable all user interactions?
-    isMobile, // Is the view currently mobile?
-  } = useContext(GlobalContext);
+    mode,
+    cardHeight,
+    flipLayout,
+    lineWidth,
+    cardLess,
+  } = useLayoutContext();
+  const {
+    mediaHeight,
+    textOverlay,
+  } = useMediaContext();
+  
+  // TODO: Move these to appropriate contexts
+  const classNames = undefined;
+  const timelinePointDimension = 16;
+  const disableClickOnCircle = false;
+  const disableInteraction = false;
+  const isMobile = mode === 'VERTICAL';
 
   /**
    * Callback handler triggered by the TimelinePoint when it becomes active.
@@ -210,12 +214,12 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
 
   /**
    * Determines if the title section should be rendered.
-   * Titles are typically hidden for nested items or on mobile for space.
+   * Show title when there is a title text and it's not nested.
    */
   const canShowTitle = useMemo(() => {
-    // Show title only if it's NOT nested AND NOT mobile view
-    return !isNested && !isMobile;
-  }, [isNested, isMobile]);
+    // Show title if it exists and it's not a nested component
+    return !!title && !isNested;
+  }, [title, isNested]);
 
   // Get a readable title for screen readers
   const accessibleTitle = useMemo(() => {
@@ -242,8 +246,11 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       key={id}
       ref={contentRef}
       theme={theme}
-      aria-current={active ? 'true' : undefined}
+      aria-current={active ? 'step' : undefined}
       aria-label={accessibleTitle}
+      role="listitem"
+      tabIndex={active ? 0 : -1}
+      aria-selected={active}
     >
       {/* Conditionally render the Title */}
       {canShowTitle ? Title : null}

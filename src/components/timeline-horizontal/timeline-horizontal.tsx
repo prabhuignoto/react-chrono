@@ -1,7 +1,7 @@
 import { TimelineHorizontalModel } from '@models/TimelineHorizontalModel';
 import cls from 'classnames';
 import React, { ReactNode, useContext, useMemo } from 'react';
-import { GlobalContext } from '../GlobalContext';
+import { useLayoutContext, useThemeContext } from '../contexts/split';
 import TimelineCard from '../timeline-elements/timeline-card/timeline-horizontal-card';
 import {
   TimelineHorizontalWrapper,
@@ -37,15 +37,16 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   nestedCardHeight,
   isNested,
 }: TimelineHorizontalModel) => {
+  // Use split contexts for better performance
+  const { theme } = useThemeContext();
   const {
     mode = 'HORIZONTAL',
     itemWidth = 200,
     cardHeight,
     flipLayout,
     showAllCardsHorizontal,
-    theme,
     cardWidth,
-  } = useContext(GlobalContext);
+  } = useLayoutContext();
 
   // Memoize the wrapper class to avoid unnecessary re-renders
   const wrapperClass = useMemo(

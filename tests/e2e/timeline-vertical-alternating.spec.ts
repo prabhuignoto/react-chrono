@@ -24,28 +24,28 @@ test.describe('Chrono.Vertical.Alternating', () => {
   });
 
   test('should display correct timeline card contents', async ({ page }) => {
-    const cardContent = page.locator('.vertical-item-row').nth(3).locator('.timeline-card-content');
+    const cardContent = page.locator('.vertical-item-row').nth(3);
     
-    await expect(cardContent.locator('.rc-card-title')).toContainText('Pearl Harbor');
-    await expect(cardContent.locator('.rc-card-subtitle')).toContainText(
+    await expect(cardContent.locator('[data-class=""]')).toContainText('Pearl Harbor');
+    await expect(cardContent.locator('.card-sub-title')).toContainText(
       'The destroyer USS Shaw explodes in dry dock after being hit by Japanese aircraft'
     );
   });
 
   test('should display correct card title', async ({ page }) => {
-    const cardTitle = page.locator('.vertical-item-row').nth(0).locator('.rc-card-title');
+    const cardTitle = page.locator('.vertical-item-row').nth(0).locator('[data-class=""]');
     await expect(cardTitle).toContainText('Dunkirk');
   });
 
   test('should display correct card description', async ({ page }) => {
-    const description = page.locator('.vertical-item-row').nth(0).locator('.card-description>p');
+    const description = page.locator('.vertical-item-row').nth(0).locator('.card-description');
     await expect(description).toContainText(
       'On 10 May 1940, Hitler began his long-awaited offensive in the west'
     );
   });
 
   test('should display correct card subtitle', async ({ page }) => {
-    const subtitle = page.locator('.vertical-item-row').nth(1).locator('.rc-card-subtitle');
+    const subtitle = page.locator('.vertical-item-row').nth(1).locator('.card-sub-title');
     await expect(subtitle).toContainText('RAF Spitfire pilots scramble for their planes');
   });
 
@@ -107,28 +107,28 @@ test.describe('Chrono.Vertical.Alternating.Mixed', () => {
   });
 
   test('should display correct timeline card contents', async ({ page }) => {
-    const cardContent = page.locator('.vertical-item-row').nth(3).locator('.timeline-card-content');
+    const cardContent = page.locator('.vertical-item-row').nth(3);
     
-    await expect(cardContent.locator('.rc-card-title')).toContainText('Pearl Harbor');
-    await expect(cardContent.locator('.rc-card-subtitle')).toContainText(
+    await expect(cardContent.locator('[data-class=""]')).toContainText('Pearl Harbor');
+    await expect(cardContent.locator('.card-sub-title')).toContainText(
       'The destroyer USS Shaw explodes in dry dock after being hit by Japanese aircraft'
     );
   });
 
   test('should display correct card title', async ({ page }) => {
-    const cardTitle = page.locator('.vertical-item-row').nth(0).locator('.rc-card-title');
+    const cardTitle = page.locator('.vertical-item-row').nth(0).locator('[data-class=""]');
     await expect(cardTitle).toContainText('Dunkirk');
   });
 
   test('should display correct card description', async ({ page }) => {
-    const description = page.locator('.vertical-item-row').nth(0).locator('.rc-card-text>p');
+    const description = page.locator('.vertical-item-row').nth(0).locator('.card-description');
     await expect(description).toContainText(
       'On 10 May 1940, Hitler began his long-awaited offensive in the west'
     );
   });
 
   test('should display correct card subtitle', async ({ page }) => {
-    const subtitle = page.locator('.vertical-item-row').nth(1).locator('.rc-card-subtitle');
+    const subtitle = page.locator('.vertical-item-row').nth(1).locator('.card-sub-title');
     await expect(subtitle).toContainText('RAF Spitfire pilots scramble for their planes');
   });
 

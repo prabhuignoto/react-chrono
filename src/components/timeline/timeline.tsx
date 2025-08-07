@@ -2,7 +2,7 @@ import { TimelineModel } from '@models/TimelineModel';
 import { getUniqueID } from '@utils/index';
 import cls from 'classnames';
 import React, { useEffect, useMemo, useState, useRef } from 'react';
-import { useStableContext, useDynamicContext } from '../contexts';
+import { useNavigationContext, useThemeContext, useLayoutContext } from '../contexts/split';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
 import {
@@ -48,27 +48,32 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     noUniqueId,
   } = props;
 
+  // Use split contexts for better performance
+  const navigation = useNavigationContext();
+  const { theme, isDarkMode: darkMode, toggleDarkMode } = useThemeContext();
+  const layout = useLayoutContext();
+  
+  // Extract values from contexts
+  const {
+    scrollable = true,
+    disableNavOnKey,
+    onScrollEnd,
+  } = navigation;
+  
   const {
     cardPositionHorizontal,
-    disableNavOnKey,
     flipLayout,
     itemWidth = 200,
     lineWidth,
-    onScrollEnd,
-    scrollable = true,
     toolbarPosition,
     disableToolbar,
-    slideItemDuration = 2000,
-  } = useStableContext();
-
-  const {
-    horizontalAll: showAllCardsHorizontal,
-    memoizedTheme: theme,
-    isDarkMode: darkMode,
-    toggleDarkMode,
+    showAllCardsHorizontal,
     updateHorizontalAllCards,
     updateTextContentDensity,
-  } = useDynamicContext();
+  } = layout;
+  
+  // Default slideItemDuration - will be moved to a separate context later
+  const slideItemDuration = 2000;
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const [hasFocus, setHasFocus] = useState(false);
@@ -78,11 +83,17 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   // Listen to native fullscreen change events to keep state in sync
   useEffect(() => {
     const handleFullscreenChange = () => {
+      const doc = document as Document & {
+        webkitFullscreenElement?: Element;
+        mozFullScreenElement?: Element;
+        msFullscreenElement?: Element;
+      };
+      
       const isCurrentlyFullscreen = !!(
-        document.fullscreenElement ||
-        (document as any).webkitFullscreenElement ||
-        (document as any).mozFullScreenElement ||
-        (document as any).msFullscreenElement
+        doc.fullscreenElement ||
+        doc.webkitFullscreenElement ||
+        doc.mozFullScreenElement ||
+        doc.msFullscreenElement
       );
       setIsFullscreen(isCurrentlyFullscreen);
     };
@@ -115,9 +126,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     [noUniqueId, uniqueId],
   );
 
-  // Use custom hooks
+  // Use custom hooks - prioritize component prop mode over context mode
   const { timelineMode, handleTimelineUpdate } = useTimelineMode({
-    initialMode: mode,
+    initialMode: mode || layout.mode, // Component prop takes priority
     showAllCardsHorizontal,
     updateHorizontalAllCards,
   });
@@ -167,7 +178,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     handlePreviousMatch,
     handleSearchKeyDown,
   } = useTimelineSearch({
-    items: items.map((item) => ({ ...item, wrapperId: id })),
+    items: useMemo(
+      () => items.map((item) => ({ ...item, wrapperId: id })),
+      [items, id]
+    ),
     onTimelineUpdated,
     handleTimelineItemClick,
   });
@@ -304,13 +318,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   }, [newOffSet, mode, timelineMainRef]);
 
+
   // Ensure all styled components are properly integrated
   return (
     <Wrapper
       ref={wrapperRef}
       onKeyDown={handleKeyDown}
       className={wrapperClass}
-      cardPositionHorizontal={cardPositionHorizontal}
+      $cardPositionHorizontal={cardPositionHorizontal}
       theme={theme}
       $isDarkMode={darkMode}
       $isFullscreen={isFullscreen}

@@ -67,6 +67,7 @@ const TimelineView: React.FC<TimelineViewProps> = ({
     return (
       <TimelineVertical
         activeTimelineItem={activeTimelineItem}
+        alternateCards={true}
         autoScroll={autoScroll}
         contentDetailsChildren={contentDetailsChildren}
         hasFocus={hasFocus}

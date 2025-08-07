@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { GlobalContext } from '../../GlobalContext';
 import { TimelineHorizontalModel } from '../../../models/TimelineHorizontalModel';
+import { TestWrapper } from '../../../test-utils/test-wrapper';
 import TimelineHorizontal from '../timeline-horizontal';
 
 const mockItems = [
@@ -74,7 +75,17 @@ const renderWithContext = (
 ) => {
   return render(
     <GlobalContext.Provider value={contextValue}>
-      <TimelineHorizontal {...defaultProps} {...props} />
+      <TestWrapper 
+        theme={contextValue.theme} 
+        mode={contextValue.mode}
+        layoutOverrides={{
+          showAllCardsHorizontal: contextValue.showAllCardsHorizontal,
+          flipLayout: contextValue.flipLayout,
+          itemWidth: contextValue.itemWidth,
+        }}
+      >
+        <TimelineHorizontal {...defaultProps} {...props} />
+      </TestWrapper>
     </GlobalContext.Provider>,
   );
 };
@@ -256,7 +267,9 @@ describe('TimelineHorizontal', () => {
     // Re-render with same props
     rerender(
       <GlobalContext.Provider value={mockContextValue}>
-        <TimelineHorizontal {...defaultProps} />
+        <TestWrapper theme={mockContextValue.theme} mode={mockContextValue.mode}>
+          <TimelineHorizontal {...defaultProps} />
+        </TestWrapper>
       </GlobalContext.Provider>,
     );
 
@@ -270,7 +283,9 @@ describe('TimelineHorizontal', () => {
     // Re-render with same props
     rerender(
       <GlobalContext.Provider value={mockContextValue}>
-        <TimelineHorizontal {...defaultProps} />
+        <TestWrapper theme={mockContextValue.theme} mode={mockContextValue.mode}>
+          <TimelineHorizontal {...defaultProps} />
+        </TestWrapper>
       </GlobalContext.Provider>,
     );
 

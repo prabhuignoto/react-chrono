@@ -9,7 +9,7 @@ import React, {
   useState,
   useMemo,
 } from 'react';
-import GlobalContextProvider from './GlobalContext';
+import MigrationContextProvider from './contexts/MigrationContextProvider';
 import Timeline from './timeline/timeline';
 const toReactArray = React.Children.toArray;
 
@@ -300,7 +300,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   }, [children]);
 
   return (
-    <GlobalContextProvider {...props}>
+    <MigrationContextProvider {...props}>
       <Timeline
         activeTimelineItem={activeTimelineItem}
         contentDetailsChildren={contentDetailsChildren}
@@ -321,7 +321,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         mode={mode}
         onPaused={onPaused}
       />
-    </GlobalContextProvider>
+    </MigrationContextProvider>
   );
 };
 

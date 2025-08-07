@@ -7,7 +7,7 @@ import {
   useMemo,
   ReactElement,
 } from 'react';
-import { useDynamicContext } from '../contexts';
+// Note: This component receives mode and theme as props, so no context needed here
 import TimelineVerticalItem from './timeline-vertical-item';
 import { TimelineVerticalWrapper } from './timeline-vertical.styles';
 
@@ -39,8 +39,11 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
     cardLess, // Render without cards? (Passed down)
     nestedCardHeight, // Specific height for nested cards (Passed down)
   }: TimelineVerticalModel): ReactElement => {
-    // Access dynamic context for mobile view detection
-    const { isMobile } = useDynamicContext();
+    // Access split contexts for better performance
+    // Note: mode is passed as a prop to this component
+    // Check if mobile based on mode - TODO: add responsive detection to layout context
+    // Only VERTICAL mode should be considered mobile-like, VERTICAL_ALTERNATING should allow alternating
+    const isMobile = mode === 'VERTICAL';
 
     /**
      * Callback handler passed to each TimelineVerticalItem's onActive.
@@ -133,7 +136,12 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
 
     // Render the main timeline wrapper
     return (
-      <TimelineVerticalWrapper as="ul" data-testid="tree-main">
+      <TimelineVerticalWrapper 
+        as="ul" 
+        data-testid="tree-main"
+        role="list"
+        aria-label="Timeline events"
+      >
         {renderItems}
       </TimelineVerticalWrapper>
     );

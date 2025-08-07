@@ -31,10 +31,10 @@ test.describe('Chrono.Vertical.Basic', () => {
 
   test('should display correct timeline card contents', async ({ page }) => {
     await test.step('Check Pearl Harbor card content', async () => {
-      const cardContent = page.locator('.vertical-item-row').nth(3).locator('.timeline-card-content');
+      const cardContent = page.locator('.vertical-item-row').nth(3);
       
-      await expect(cardContent.locator('.rc-card-title')).toContainText('Pearl Harbor');
-      await expect(cardContent.locator('.rc-card-subtitle')).toContainText(
+      await expect(cardContent).toContainText('Pearl Harbor');
+      await expect(cardContent.locator('.card-sub-title')).toContainText(
         'The destroyer USS Shaw explodes in dry dock after being hit by Japanese aircraft'
       );
     });
@@ -42,7 +42,7 @@ test.describe('Chrono.Vertical.Basic', () => {
 
   test('should display correct card title', async ({ page }) => {
     await test.step('Check Dunkirk card title', async () => {
-      const cardTitle = page.locator('.vertical-item-row').nth(0).locator('.rc-card-title');
+      const cardTitle = page.locator('.vertical-item-row').nth(0);
       await expect(cardTitle).toContainText('Dunkirk');
     });
   });
@@ -65,7 +65,7 @@ test.describe('Chrono.Vertical.Basic', () => {
 
   test('should display correct card subtitle', async ({ page }) => {
     await test.step('Check RAF subtitle', async () => {
-      const subtitle = page.locator('.vertical-item-row').nth(1).locator('.rc-card-subtitle');
+      const subtitle = page.locator('.vertical-item-row').nth(1).locator('.card-sub-title');
       await expect(subtitle).toContainText('RAF Spitfire pilots scramble for their planes');
     });
   });

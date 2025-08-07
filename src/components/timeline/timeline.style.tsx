@@ -3,7 +3,7 @@ import { Theme } from '../../models/Theme';
 import { TimelineMode } from '../../models/TimelineModel';
 
 export const Wrapper = styled.div<{
-  cardPositionHorizontal?: 'TOP' | 'BOTTOM';
+  $cardPositionHorizontal?: 'TOP' | 'BOTTOM';
   theme?: Theme;
 }>`
   width: 100%;
