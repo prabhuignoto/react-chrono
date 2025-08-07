@@ -8,7 +8,7 @@ import {
   FunctionComponent,
   ReactElement,
 } from 'react';
-import { useThemeContext, useLayoutContext, useMediaContext } from '../contexts/split';
+import { useTimelineContext } from '../contexts';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
 import { TimelinePoint } from './timeline-point';
@@ -58,25 +58,21 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     nestedCardHeight, // Specific height for nested cards
   } = props;
 
-  // Use split contexts for better performance
-  const { theme } = useThemeContext();
+  // Use unified context
   const {
+    theme,
     mode,
     cardHeight,
     flipLayout,
     lineWidth,
     cardLess,
-  } = useLayoutContext();
-  const {
     mediaHeight,
     textOverlay,
-  } = useMediaContext();
-  
-  // TODO: Move these to appropriate contexts
-  const classNames = undefined;
-  const timelinePointDimension = 16;
-  const disableClickOnCircle = false;
-  const disableInteraction = false;
+    classNames,
+    timelinePointDimension,
+    disableClickOnCircle,
+    disableInteraction,
+  } = useTimelineContext();
   const isMobile = mode === 'VERTICAL';
 
   /**

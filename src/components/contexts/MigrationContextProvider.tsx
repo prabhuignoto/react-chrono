@@ -10,7 +10,7 @@ import { CombinedContextProvider } from './split';
 import GlobalContextProvider from '../GlobalContext';
 import { useMatchMedia } from '../effects/useMatchMedia';
 
-interface MigrationContextProviderProps extends Partial<TimelineProps> {
+interface MigrationContextProviderProps extends Omit<Partial<TimelineProps>, 'children'> {
   children: React.ReactNode;
 }
 

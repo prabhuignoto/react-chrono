@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useStableContext, useDynamicContext } from '../contexts';
+import { useTimelineContext } from '../contexts';
 import { List } from '../elements/list/list';
 import PopOver from '../elements/popover';
 import { ArrowDownIcon, LayoutIcon, ParaIcon } from '../icons';
@@ -17,8 +17,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   position,
   isMobile,
 }: LayoutSwitcherProp) => {
-  const { memoizedButtonTexts: buttonTexts } = useStableContext();
-  const { horizontalAll: showAllCardsHorizontal } = useDynamicContext();
+  const { buttonTexts, showAllCardsHorizontal } = useTimelineContext();
 
   const LayoutIconMemo = useMemo(() => <LayoutIcon />, []);
 
@@ -113,7 +112,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
   position,
   isMobile,
 }: QuickJumpProp) => {
-  const { memoizedButtonTexts: buttonTexts } = useStableContext();
+  const { buttonTexts } = useTimelineContext();
 
   const ArrowDownIconMemo = useMemo(() => <ArrowDownIcon />, []);
 
@@ -151,7 +150,7 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
   position,
   isMobile,
 }) => {
-  const { memoizedButtonTexts: buttonTexts } = useStableContext();
+  const { buttonTexts } = useTimelineContext();
 
   const ParaIconMemo = useMemo(() => <ParaIcon />, []);
 

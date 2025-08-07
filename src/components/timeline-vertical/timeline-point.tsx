@@ -8,7 +8,7 @@ import React, {
   FunctionComponent, // Explicit import
   MouseEvent,
 } from 'react';
-import { useStableContext, useDynamicContext } from '../contexts'; // Context for global theme/settings
+import { useTimelineStaticConfig, useTimelineDynamicState, useTimelineMemoizedObjects } from '../contexts/TimelineContextProvider';
 // Shape seems to be a shared styled component, potentially defined elsewhere
 import { Shape } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
 import {
@@ -47,20 +47,16 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
 
     // Access context settings
     const {
-      staticDefaults: {
-        focusActiveItemOnLoad,
-        timelinePointShape,
-        disableTimelinePoint,
-        disableClickOnCircle: contextDisableClickOnCircle,
-        disableInteraction: contextDisableInteraction,
-        disableAutoScrollOnClick: contextDisableAutoScrollOnClick,
-      },
-      memoizedButtonTexts: buttonTexts, // Custom button text labels
-    } = useStableContext();
+      focusActiveItemOnLoad,
+      timelinePointShape,
+      disableTimelinePoint,
+      disableClickOnCircle: contextDisableClickOnCircle,
+      disableInteraction: contextDisableInteraction,
+      disableAutoScrollOnClick: contextDisableAutoScrollOnClick,
+    } = useTimelineStaticConfig();
 
-    const {
-      memoizedTheme: theme, // Theme object (primary color, etc.)
-    } = useDynamicContext();
+    const { theme } = useTimelineMemoizedObjects();
+    const { buttonTexts } = useTimelineMemoizedObjects();
 
     // Consolidated disable flags - prioritize props over context
     const finalDisableClickOnCircle =

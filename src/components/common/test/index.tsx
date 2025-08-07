@@ -138,12 +138,11 @@ export const customRender = (
       <TestWrapper 
         theme={providerProps?.theme} 
         mode={timelineMode}
-        navigationOverrides={{
-          disableInteraction: providerProps?.disableInteraction,
-        }}
-        mediaOverrides={{
-          textOverlay: providerProps?.textOverlay,
-        }}
+        disableInteraction={providerProps?.disableInteraction}
+        enableDarkToggle={providerProps?.enableDarkToggle}
+        textOverlay={providerProps?.textOverlay}
+        slideShowEnabled={providerProps?.slideShowEnabled}
+        {...providerProps}
       >
         {ui}
       </TestWrapper>

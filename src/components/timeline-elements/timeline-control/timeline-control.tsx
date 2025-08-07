@@ -1,8 +1,7 @@
 import { TimelineControlModel } from '@models/TimelineControlModel';
 import cls from 'classnames';
 import React, { useCallback, useMemo } from 'react';
-import { useLayoutContext, useThemeContext, useNavigationContext } from '../../contexts/split';
-import { useStableContext } from '../../contexts';
+import { useTimelineContext } from '../../contexts';
 import { MoonIcon, StopIcon, SunIcon } from '../../icons';
 import ChevronLeft from '../../icons/chev-left';
 import ChevronRightIcon from '../../icons/chev-right';
@@ -51,20 +50,16 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
   activeTimelineItem = 0,
   totalItems = 0,
 }: TimelineControlModel) => {
-  // Use split contexts for better performance
-  const { theme } = useThemeContext();
+  // Use unified context
   const {
+    theme,
     mode,
     flipLayout,
-  } = useLayoutContext();
-  const {
     disableInteraction,
-  } = useNavigationContext();
-  
-  // Get button texts from stable context
-  const { memoizedButtonTexts: buttonTexts } = useStableContext();
-  const classNames = undefined;
-  const enableDarkToggle = true;
+    buttonTexts,
+    classNames,
+    enableDarkToggle,
+  } = useTimelineContext();
 
   const rotate = useMemo(() => mode !== 'HORIZONTAL', [mode]);
 

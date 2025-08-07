@@ -19,7 +19,7 @@ export const useTimelineSearch = ({
   const [currentMatchIndex, setCurrentMatchIndex] = useState(-1);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const activeItemIndex = useRef<number>(0);
-  const searchTimeoutRef = useRef<NodeJS.Timeout>();
+  const searchTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const isFirstSearchRef = useRef<boolean>(true);
 
   // Cache callback refs to prevent unnecessary re-renders

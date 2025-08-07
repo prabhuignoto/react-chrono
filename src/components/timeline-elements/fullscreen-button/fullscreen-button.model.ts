@@ -24,7 +24,7 @@ export interface FullscreenButtonProps
   /**
    * Callback function triggered when the fullscreen state should toggle
    */
-  onToggle?: () => void;
+  onToggle?: (() => void) | ((event?: any) => void);
 
   /**
    * Theme configuration for styling

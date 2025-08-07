@@ -55,22 +55,17 @@ const FullscreenControl = memo(
         return null;
       }
 
-      // Handle toggle with error reporting
-      const handleToggle = async () => {
-        try {
-          await toggleFullscreen();
-        } catch (err) {
-          const errorMessage =
-            err instanceof Error ? err.message : 'Fullscreen operation failed';
-          onError?.(errorMessage);
-        }
-      };
-
       return (
         <FullscreenButton
           ref={ref}
           isFullscreen={isFullscreen}
-          onToggle={handleToggle}
+          onToggle={() => {
+            toggleFullscreen().catch((err) => {
+              const errorMessage =
+                err instanceof Error ? err.message : 'Fullscreen operation failed';
+              onError?.(errorMessage);
+            });
+          }}
           theme={theme}
           disabled={disabled || !!error}
           size={size}

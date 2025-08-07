@@ -16,7 +16,7 @@ import { LayoutProvider } from './LayoutContext';
 
 interface CombinedProviderProps {
   children: React.ReactNode;
-  navigation: React.ComponentProps<typeof NavigationProvider>['value'];
+  navigation?: React.ComponentProps<typeof NavigationProvider>['value'];
   theme: Omit<React.ComponentProps<typeof ThemeProvider>, 'children'>;
   media: React.ComponentProps<typeof MediaProvider>['value'];
   layout: React.ComponentProps<typeof LayoutProvider>['initialValues'];

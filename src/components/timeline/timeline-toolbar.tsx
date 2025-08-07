@@ -1,6 +1,6 @@
 // Import necessary dependencies
 import React, { FunctionComponent, useMemo } from 'react';
-import { useStableContext, useDynamicContext } from '../contexts';
+import { useTimelineContext } from '../contexts';
 import Controls from '../timeline-elements/timeline-control/timeline-control';
 import { FullscreenControl } from '../timeline-elements/fullscreen-control';
 import { TimelineNavButton } from '../timeline-elements/timeline-control/timeline-control.styles';
@@ -80,15 +80,12 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     enableQuickJump,
     toolbarPosition,
     enableLayoutSwitch,
-    memoizedButtonTexts: buttonTexts,
-  } = useStableContext();
-
-  const {
-    memoizedTheme: theme,
+    buttonTexts,
+    theme,
     isDarkMode: darkMode,
     textContentDensity: textDensity,
     isMobile,
-  } = useDynamicContext();
+  } = useTimelineContext();
 
   // Prepare QuickJump items with proper string conversions
   const quickJumpItems = useMemo(() => {

@@ -9,7 +9,7 @@ import React, {
   useState,
   useMemo,
 } from 'react';
-import MigrationContextProvider from './contexts/MigrationContextProvider';
+import { TimelineContextProvider } from './contexts/TimelineContextProvider';
 import Timeline from './timeline/timeline';
 const toReactArray = React.Children.toArray;
 
@@ -157,12 +157,29 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   const handleTimelineUpdate = useCallback(
     (actvTimelineIndex: number) => {
+      // Debug logging for visibility logic
+      if (typeof window !== 'undefined') {
+        console.log('Timeline Update - Mode:', mode, 'Active Index:', actvTimelineIndex);
+      }
+      
       setTimeLineItems((lineItems) =>
-        lineItems.map((item, index) => ({
-          ...item,
-          active: index === actvTimelineIndex,
-          visible: actvTimelineIndex >= 0,
-        })),
+        lineItems.map((item, index) => {
+          // FIXED: Don't use mode comparison here, use explicit HORIZONTAL_ALL check
+          let isVisible = true; // Default to visible for all modes
+          if (mode === 'HORIZONTAL') {
+            isVisible = index === actvTimelineIndex; // Only active item visible in HORIZONTAL mode
+          }
+          // For HORIZONTAL_ALL and all other modes, keep visible = true
+          
+          if (typeof window !== 'undefined' && index < 3) { // Log first 3 items
+            console.log(`Item ${index}: visible=${isVisible}, active=${index === actvTimelineIndex}`);
+          }
+          return {
+            ...item,
+            active: index === actvTimelineIndex,
+            visible: isVisible,
+          };
+        }),
       );
 
       setActiveTimelineItem(actvTimelineIndex);
@@ -173,7 +190,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         }
       }
     },
-    [items],
+    [items, mode],
   );
 
   useEffect(() => {
@@ -203,7 +220,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
           lineItems.map((item, index) => ({
             ...item,
             active: index === newTimeLineItem,
-            visible: newTimeLineItem >= 0,
+            visible: index === newTimeLineItem,
           })),
         );
         setActiveTimelineItem(newTimeLineItem);
@@ -236,7 +253,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
           lineItems.map((item, index) => ({
             ...item,
             active: index === newTimeLineItem,
-            visible: newTimeLineItem >= 0,
+            visible: index === newTimeLineItem,
           })),
         );
         setActiveTimelineItem(newTimeLineItem);
@@ -300,7 +317,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   }, [children]);
 
   return (
-    <MigrationContextProvider {...props}>
+    <TimelineContextProvider {...props}>
       <Timeline
         activeTimelineItem={activeTimelineItem}
         contentDetailsChildren={contentDetailsChildren}
@@ -321,7 +338,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         mode={mode}
         onPaused={onPaused}
       />
-    </MigrationContextProvider>
+    </TimelineContextProvider>
   );
 };
 

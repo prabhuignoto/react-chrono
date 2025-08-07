@@ -58,8 +58,8 @@ export const useUnmount = (cleanup: () => void): void => {
 export const useRAFThrottle = <T extends (...args: any[]) => void>(
   callback: T,
 ): T => {
-  const frameRef = useRef<number>();
-  const argsRef = useRef<any[]>();
+  const frameRef = useRef<number | undefined>(undefined);
+  const argsRef = useRef<any[] | undefined>(undefined);
   const callbackRef = useRef(callback);
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import { TimelineModel } from '@models/TimelineModel';
 import { getUniqueID } from '@utils/index';
 import cls from 'classnames';
 import React, { useEffect, useMemo, useState, useRef } from 'react';
-import { useNavigationContext, useThemeContext, useLayoutContext } from '../contexts/split';
+import { useTimelineContext } from '../contexts';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
 import {
@@ -40,7 +40,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onOutlineSelection,
     slideShowEnabled,
     slideShowRunning,
-    mode = 'HORIZONTAL',
     nestedCardHeight,
     isChild = false,
     onPaused,
@@ -48,29 +47,37 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     noUniqueId,
   } = props;
 
-  // Use split contexts for better performance
-  const navigation = useNavigationContext();
-  const { theme, isDarkMode: darkMode, toggleDarkMode } = useThemeContext();
-  const layout = useLayoutContext();
-  
-  // Extract values from contexts
+  // Use unified context
   const {
-    scrollable = true,
+    // Navigation context properties
+    scrollable,
     disableNavOnKey,
+    disableInteraction,
     onScrollEnd,
-  } = navigation;
-  
-  const {
-    cardPositionHorizontal,
+    
+    // Theme context properties
+    theme,
+    isDarkMode: darkMode,
+    toggleDarkMode,
+    
+    // Layout context properties
+    mode,
+    cardHeight,
+    cardLess,
     flipLayout,
-    itemWidth = 200,
+    itemWidth,
     lineWidth,
     toolbarPosition,
     disableToolbar,
+    borderLessCards,
     showAllCardsHorizontal,
-    updateHorizontalAllCards,
+    textContentDensity,
+    enableLayoutSwitch,
+    useReadMore,
+    cardPositionHorizontal,
+    updateShowAllCardsHorizontal: updateHorizontalAllCards,
     updateTextContentDensity,
-  } = layout;
+  } = useTimelineContext();
   
   // Default slideItemDuration - will be moved to a separate context later
   const slideItemDuration = 2000;
@@ -126,12 +133,17 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     [noUniqueId, uniqueId],
   );
 
-  // Use custom hooks - prioritize component prop mode over context mode
+  // Use custom hooks - prioritize component prop mode over context mode  
   const { timelineMode, handleTimelineUpdate } = useTimelineMode({
-    initialMode: mode || layout.mode, // Component prop takes priority
+    initialMode: mode, // Use mode from context
     showAllCardsHorizontal,
     updateHorizontalAllCards,
   });
+
+  // Debug logging for timeline mode
+  if (typeof window !== 'undefined') {
+    console.log('Timeline Component - Context Mode:', mode, 'Timeline Mode:', timelineMode, 'ShowAllCards:', showAllCardsHorizontal);
+  }
 
   const {
     timelineMainRef,
@@ -190,8 +202,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   useSlideshowProgress({
     slideShowRunning: slideShowRunning ?? false,
     activeTimelineItem: activeTimelineItem ?? 0,
-    totalItems: items.length,
-    slideItemDuration,
   });
 
   useTimelineMedia({

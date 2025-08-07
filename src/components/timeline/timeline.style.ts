@@ -17,7 +17,7 @@ const transitionMixin = css`
 
 // Timeline wrapper with improved cross-browser support
 export const Wrapper = styled.div<{
-  cardPositionHorizontal?: 'TOP' | 'BOTTOM';
+  $cardPositionHorizontal?: 'TOP' | 'BOTTOM';
   theme?: Theme;
   $translate?: string;
   $isDarkMode?: boolean;
@@ -195,6 +195,13 @@ export const TimelineMain = styled.div`
     height: 100%;
   }
 
+  &.horizontal {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: row;
+  }
+
   /* Fullscreen mode styles for timeline main */
   :fullscreen & {
     position: relative;
@@ -234,6 +241,9 @@ export const Outline = styled.div<{ color?: string; height?: number }>`
   margin-right: auto;
   margin-left: auto;
   background: ${(p) => p.color};
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
 `;
 
 export const TimelineControlContainer = styled.div<{
@@ -329,13 +339,14 @@ export const ToolbarWrapper = styled.div<{ position: 'top' | 'bottom' }>`
     top: 0 !important;
     z-index: 1000001 !important;
     background: ${(p) => {
+      const theme = p.theme as Theme;
       // In fullscreen, ensure the toolbar has a visible background
-      if (p.theme?.toolbarBgColor) {
-        return p.theme.toolbarBgColor;
+      if (theme?.toolbarBgColor) {
+        return theme.toolbarBgColor;
       }
       // Use a semi-transparent background as fallback
-      return p.theme?.primary
-        ? `${p.theme.primary}10`
+      return theme?.primary
+        ? `${theme.primary}10`
         : 'rgba(255, 255, 255, 0.95)';
     }} !important;
     backdrop-filter: blur(10px) !important;

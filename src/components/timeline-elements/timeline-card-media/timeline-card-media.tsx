@@ -1,7 +1,7 @@
 import { CardMediaModel } from '@models/TimelineMediaModel';
 import cls from 'classnames';
 import React, { memo, useCallback, useContext } from 'react';
-import { useLayoutContext, useMediaContext, useThemeContext } from '../../contexts/split';
+import { useTimelineContext } from '../../contexts';
 import { MediaWrapper } from './timeline-card-media.styles';
 import { useMediaLoad } from './hooks/useMediaLoad';
 import { useYouTubeDetection } from './hooks/useYouTubeDetection';
@@ -32,18 +32,16 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     const { expandDetails, showText, toggleExpand, toggleText } =
       useToggleControls();
 
-    // Use split contexts for better performance
-    const { theme } = useThemeContext();
+    // Use unified timeline context
     const {
+      theme,
       mode,
       cardHeight,
       borderLessCards,
-    } = useLayoutContext();
-    const {
       mediaHeight,
       textOverlay,
       mediaSettings,
-    } = useMediaContext();
+    } = useTimelineContext();
     
     // TODO: Move these to appropriate contexts
     const fontSizes = undefined;

@@ -71,22 +71,19 @@ const mockContextValue = {
 
 const renderWithContext = (
   props: Partial<TimelineHorizontalModel> = {},
-  contextValue: any = mockContextValue,
+  contextOverrides: any = {},
 ) => {
   return render(
-    <GlobalContext.Provider value={contextValue}>
-      <TestWrapper 
-        theme={contextValue.theme} 
-        mode={contextValue.mode}
-        layoutOverrides={{
-          showAllCardsHorizontal: contextValue.showAllCardsHorizontal,
-          flipLayout: contextValue.flipLayout,
-          itemWidth: contextValue.itemWidth,
-        }}
-      >
-        <TimelineHorizontal {...defaultProps} {...props} />
-      </TestWrapper>
-    </GlobalContext.Provider>,
+    <TestWrapper 
+      theme={contextOverrides.theme || mockContextValue.theme}
+      mode={contextOverrides.mode || mockContextValue.mode}
+      showAllCardsHorizontal={contextOverrides.showAllCardsHorizontal}
+      flipLayout={contextOverrides.flipLayout}
+      itemWidth={contextOverrides.itemWidth}
+      {...contextOverrides}
+    >
+      <TimelineHorizontal {...defaultProps} {...props} />
+    </TestWrapper>
   );
 };
 

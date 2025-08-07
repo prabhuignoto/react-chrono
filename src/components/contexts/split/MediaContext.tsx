@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useMemo } from 'react';
-import { MediaSettings } from '@models/TimelineMediaModel';
+
+type MediaSettings = {
+  align?: 'left' | 'right' | 'center';
+  fit?: 'cover' | 'contain' | 'fill' | 'none';
+};
 
 interface MediaContextValue {
   mediaHeight: number;

@@ -14,7 +14,7 @@ import React, {
 import { useSlideshow } from 'src/components/effects/useSlideshow';
 import { useCardSize } from '../../../hooks/useCardSize';
 import { useFocusManager } from '../../../hooks/useFocusManager';
-import { useLayoutContext, useMediaContext, useNavigationContext } from '../../contexts/split';
+import { useTimelineContext } from '../../contexts';
 // Remove the Timeline import to break the circular dependency
 // import Timeline from '../../timeline/timeline';
 import CardMedia from '../timeline-card-media/timeline-card-media';
@@ -102,7 +102,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       const [hasBeenActivated, setHasBeenActivated] = useState(false);
       const [isResuming, setIsResuming] = useState(false);
 
-      // Use split contexts for better performance
+      // Use unified timeline context
       // Note: theme is passed as a prop to this component, so we don't need it from context
       const {
         mode,
@@ -111,14 +111,13 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         cardWidth,
         borderLessCards,
         highlightCardsOnHover,
-        textDensity,
-      } = useLayoutContext();
-      const {
+        textContentDensity,
         textOverlay,
-      } = useMediaContext();
-      const {
         disableInteraction,
-      } = useNavigationContext();
+      } = useTimelineContext();
+      
+      // Map textContentDensity to textDensity for backward compatibility
+      const textDensity = textContentDensity;
       
       // TODO: Move these to appropriate contexts
       const slideItemDuration = 2000;

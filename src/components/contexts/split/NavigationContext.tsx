@@ -2,7 +2,7 @@ import React, { createContext, useContext, useMemo } from 'react';
 
 interface NavigationContextValue {
   activeItemIndex: number;
-  scrollable: boolean;
+  scrollable: boolean | { scrollbar: boolean };
   disableNavOnKey?: boolean;
   disableInteraction?: boolean;
   disableClickOnCircle?: boolean;

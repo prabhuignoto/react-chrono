@@ -13,6 +13,11 @@ export const TimelineHorizontalWrapper = styled.ul<{ $flipLayout?: boolean }>`
   &.horizontal {
     flex-direction: row;
   }
+  &.show-all-cards-horizontal {
+    overflow-x: auto;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
 `;
 
 export const TimelineItemWrapper = styled.li<{ width: number }>`
@@ -23,6 +28,7 @@ export const TimelineItemWrapper = styled.li<{ width: number }>`
   justify-content: center;
   height: 150px;
   flex-direction: column;
+  flex-shrink: 0;
 
   &.vertical {
     margin-bottom: 2rem;
@@ -31,5 +37,11 @@ export const TimelineItemWrapper = styled.li<{ width: number }>`
 
   &.visible {
     visibility: visible;
+  }
+
+  .show-all-cards-horizontal & {
+    min-width: ${(p) => p.width}px;
+    margin: 0 0.5rem;
+    flex-shrink: 0;
   }
 `;

@@ -57,6 +57,8 @@ export const ShapeWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 5em;
+  z-index: 2;
+  position: relative;
 `;
 
 type ShapeModel = {
@@ -87,9 +89,10 @@ export const Shape = styled.div<ShapeModel>`
   overflow: hidden;
 
   /* Reset button styles when used as a button */
-  background: none;
-  border: none;
+  background: ${(p) => p.theme?.iconBackgroundColor || p.theme?.primary || '#007bff'};
+  border: 2px solid ${(p) => p.theme?.primary || '#007bff'};
   padding: 0;
+  z-index: 2;
 
   /* Ripple effect */
   &::before {

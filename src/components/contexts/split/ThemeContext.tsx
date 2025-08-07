@@ -25,7 +25,7 @@ export const ThemeProvider: React.FC<{
   }, [onThemeChange]);
 
   const theme = useMemo(
-    () => getDefaultThemeOrDark(isDarkMode, initialTheme),
+    () => initialTheme || getDefaultThemeOrDark(isDarkMode),
     [isDarkMode, initialTheme]
   );
 

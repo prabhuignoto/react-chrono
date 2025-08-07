@@ -60,14 +60,14 @@ const baseButtonStyles = css<FullscreenButtonStyleProps>`
 
   /* Color and theming */
   color: ${({ theme }) =>
-    theme?.controlsButtonColor || theme?.primary || '#333'};
+    theme?.iconColor || theme?.primary || '#333'};
   background-color: ${({ theme }) =>
-    theme?.controlsButtonBgColor || theme?.cardBgColor || 'transparent'};
+    theme?.toolbarBtnBgColor || theme?.cardBgColor || 'transparent'};
 
   /* Modern shadow and border */
   border: 1px solid
     ${({ theme }) =>
-      theme?.controlsButtonBorderColor ||
+      theme?.buttonBorderColor ||
       theme?.shadowColor ||
       'rgba(0, 0, 0, 0.1)'};
   box-shadow:
@@ -81,7 +81,7 @@ const baseButtonStyles = css<FullscreenButtonStyleProps>`
   &:hover:not(:disabled) {
     color: ${({ theme }) => theme?.primary || '#007bff'};
     background-color: ${({ theme }) =>
-      theme?.controlsButtonBgColor ||
+      theme?.buttonHoverBgColor ||
       theme?.cardBgColor ||
       'rgba(0, 0, 0, 0.02)'};
     border-color: ${({ theme }) => theme?.primary || '#007bff'};
@@ -113,7 +113,7 @@ const baseButtonStyles = css<FullscreenButtonStyleProps>`
     cursor: not-allowed;
     color: ${({ theme }) => theme?.iconColor || '#999'};
     background-color: ${({ theme }) =>
-      theme?.controlsButtonBgColor || 'rgba(0, 0, 0, 0.02)'};
+      theme?.buttonActiveBgColor || 'rgba(0, 0, 0, 0.02)'};
     border-color: ${({ theme }) => theme?.shadowColor || 'rgba(0, 0, 0, 0.1)'};
     box-shadow: none;
     transform: none;

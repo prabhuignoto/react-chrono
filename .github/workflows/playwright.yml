@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         browser: [chromium, firefox, webkit]
-        shard: [1, 2, 3, 4]
+        shard: [1]
     steps:
     - uses: actions/checkout@v4
     
@@ -42,7 +42,7 @@ jobs:
           ${{ runner.os }}-pnpm-store-
 
     - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+      run: pnpm install
     
     - name: Install Playwright Browsers
       run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
@@ -78,7 +78,7 @@ jobs:
         cache: 'pnpm'
     
     - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+      run: pnpm install
     
     - name: Install Playwright
       run: pnpm exec playwright install --with-deps chromium

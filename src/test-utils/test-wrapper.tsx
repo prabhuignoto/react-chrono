@@ -1,15 +1,10 @@
 import React from 'react';
-import { CombinedContextProvider } from '../components/contexts/split';
+import { TimelineContextProvider } from '../components/contexts/TimelineContextProvider';
 import { Theme } from '@models/Theme';
+import { TimelineProps } from '@models/TimelineModel';
 
-interface TestWrapperProps {
+interface TestWrapperProps extends Omit<Partial<TimelineProps>, 'children'> {
   children: React.ReactNode;
-  theme?: Theme;
-  mode?: 'HORIZONTAL' | 'VERTICAL' | 'VERTICAL_ALTERNATING';
-  mediaHeight?: number;
-  layoutOverrides?: Partial<any>; // Allow overriding layout context values
-  navigationOverrides?: Partial<any>; // Allow overriding navigation context values
-  mediaOverrides?: Partial<any>; // Allow overriding media context values
 }
 
 /**
@@ -20,9 +15,7 @@ export const TestWrapper: React.FC<TestWrapperProps> = ({
   theme,
   mode = 'VERTICAL_ALTERNATING',
   mediaHeight = 200,
-  layoutOverrides = {},
-  navigationOverrides = {},
-  mediaOverrides = {},
+  ...props
 }) => {
   const defaultTheme: Theme = {
     primary: '#3b82f6',
@@ -46,7 +39,11 @@ export const TestWrapper: React.FC<TestWrapperProps> = ({
     toolbarTextColor: '#475569',
   };
 
-  const navigationValue = {
+  // Default props for testing
+  const defaultProps: Partial<TimelineProps> = {
+    mode,
+    mediaHeight,
+    theme: theme || defaultTheme,
     activeItemIndex: 0,
     scrollable: true,
     disableNavOnKey: false,
@@ -54,53 +51,71 @@ export const TestWrapper: React.FC<TestWrapperProps> = ({
     disableClickOnCircle: false,
     disableTimelinePoint: false,
     enableQuickJump: true,
-    onScrollEnd: undefined,
-    ...navigationOverrides, // Allow overriding any navigation values
-  };
-
-  const themeProps = {
-    initialTheme: theme || defaultTheme,
-    darkMode: false,
-    onThemeChange: undefined,
-  };
-
-  const mediaValue = {
-    mediaHeight,
-    mediaSettings: undefined,
-    mediaAlign: 'center' as const,
-    textOverlay: false,
-    ...mediaOverrides, // Allow overriding any media values
-  };
-
-  const layoutValue = {
-    mode,
     cardHeight: 200,
-    cardWidth: undefined,
     cardLess: false,
     flipLayout: false,
     itemWidth: 200,
     lineWidth: 3,
-    cardPositionHorizontal: 'TOP' as const,
-    toolbarPosition: 'top' as const,
+    cardPositionHorizontal: 'TOP',
+    toolbarPosition: 'top',
     disableToolbar: false,
     borderLessCards: false,
     showAllCardsHorizontal: false,
-    textDensity: 'HIGH' as const,
+    textDensity: 'HIGH',
     enableLayoutSwitch: true,
     highlightCardsOnHover: false,
     useReadMore: true,
-    ...layoutOverrides, // Allow overriding any layout values
+    darkMode: false,
+    enableDarkToggle: true,
+    // Provide test buttonTexts to match test expectations
+    buttonTexts: {
+      changeDensity: 'Change density',
+      changeDensityOptions: {
+        high: {
+          helpText: 'Show cards more tightly packed',
+          text: 'High',
+        },
+        low: {
+          helpText: 'Show cards more spaced out',
+          text: 'Low',
+        },
+      },
+      changeLayout: 'Change layout',
+      changeLayoutOptions: {
+        alternating: {
+          helpText: 'Show cards in a vertical layout with alternating fashion',
+          text: 'Alternating',
+        },
+        horizontal: {
+          helpText: 'Show cards in a horizontal layout',
+          text: 'Horizontal',
+        },
+        horizontal_all: {
+          helpText: 'Show all cards in a horizontal layout',
+          text: 'Show all cards',
+        },
+        vertical: {
+          helpText: 'Show cards in a vertical layout',
+          text: 'Vertical',
+        },
+      },
+      dark: 'dark',
+      first: 'first',
+      jumpTo: 'Jump to',
+      last: 'last',
+      light: 'light',
+      next: 'next',
+      play: 'start slideshow',
+      previous: 'previous',
+      stop: 'stop slideshow',
+    },
+    ...props, // Allow overriding any values
   };
 
   return (
-    <CombinedContextProvider
-      navigation={navigationValue}
-      theme={themeProps}
-      media={mediaValue}
-      layout={layoutValue}
-    >
+    <TimelineContextProvider {...defaultProps}>
       {children}
-    </CombinedContextProvider>
+    </TimelineContextProvider>
   );
 };
 

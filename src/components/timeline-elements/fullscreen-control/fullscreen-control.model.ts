@@ -9,7 +9,7 @@ import { FullscreenButtonSize } from '../fullscreen-button/fullscreen-button.mod
 export interface FullscreenControlProps
   extends Omit<
     ButtonHTMLAttributes<HTMLButtonElement>,
-    'onClick' | 'onKeyDown'
+    'onClick' | 'onKeyDown' | 'onError'
   > {
   /**
    * Reference to the element that should be made fullscreen
