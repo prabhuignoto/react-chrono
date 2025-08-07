@@ -77,9 +77,9 @@ const renderWithContext = (
     <TestWrapper 
       theme={contextOverrides.theme || mockContextValue.theme}
       mode={contextOverrides.mode || mockContextValue.mode}
-      showAllCardsHorizontal={contextOverrides.showAllCardsHorizontal}
-      flipLayout={contextOverrides.flipLayout}
-      itemWidth={contextOverrides.itemWidth}
+      showAllCardsHorizontal={contextOverrides.showAllCardsHorizontal ?? mockContextValue.showAllCardsHorizontal}
+      flipLayout={contextOverrides.flipLayout ?? mockContextValue.flipLayout}
+      itemWidth={contextOverrides.itemWidth ?? mockContextValue.itemWidth}
       {...contextOverrides}
     >
       <TimelineHorizontal {...defaultProps} {...props} />

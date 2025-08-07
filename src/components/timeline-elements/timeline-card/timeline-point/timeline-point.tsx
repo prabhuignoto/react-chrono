@@ -26,6 +26,16 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
   active = false,
   disabled = false,
 }) => {
+  // Focus the timeline point when it becomes active
+  React.useEffect(() => {
+    if (active && circleRef.current && !disabled) {
+      // Use setTimeout to ensure focus happens after DOM updates
+      setTimeout(() => {
+        circleRef.current?.focus();
+      }, 0);
+    }
+  }, [active, disabled]);
+
   return (
     <ShapeWrapper>
       <Shape

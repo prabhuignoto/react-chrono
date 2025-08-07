@@ -1,12 +1,11 @@
 import React, {
   useCallback,
-  useContext,
   useEffect,
   useState,
   PropsWithChildren,
   memo,
 } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import { useTimelineContext } from '../../contexts';
 import CloseIcon from '../../icons/close';
 import MenuIcon from '../../icons/menu';
 import { OutlineItemList } from './timeline-outline-item-list';
@@ -54,7 +53,7 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
   const [openPane, setOpenPane] = useState(false);
   const [showList, setShowList] = useState(false);
 
-  const { theme: globalTheme } = useContext(GlobalContext);
+  const { theme: globalTheme } = useTimelineContext();
   const mergedTheme = theme || globalTheme;
 
   // Extract position logic to a custom hook

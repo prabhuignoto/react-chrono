@@ -1,5 +1,5 @@
-import { forwardRef, useContext } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import { forwardRef } from 'react';
+import { useTimelineContext } from '../../contexts';
 import { DetailsTextProps } from './details-text.model';
 import { getTextOrContent } from './text-or-content';
 import { TimelineContentDetailsWrapper } from './timeline-card-content.styles';
@@ -23,7 +23,7 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
       contentDetailsHeight,
       textOverlay,
       theme,
-    } = useContext(GlobalContext);
+    } = useTimelineContext();
 
     const TextContent = getTextOrContent({
       detailedText,

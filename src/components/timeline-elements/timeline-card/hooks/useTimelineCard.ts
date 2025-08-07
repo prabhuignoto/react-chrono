@@ -1,6 +1,6 @@
-import { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import cls from 'classnames';
-import { GlobalContext } from '../../../GlobalContext';
+import { useTimelineContext } from '../../../contexts';
 
 export const useTimelineCard = ({
   active,
@@ -19,7 +19,7 @@ export const useTimelineCard = ({
   const contentRef = useRef<HTMLDivElement>(null);
 
   const { disableClickOnCircle, disableInteraction, disableAutoScrollOnClick } =
-    useContext(GlobalContext);
+    useTimelineContext();
 
   const handleClick = useCallback(() => {
     if (

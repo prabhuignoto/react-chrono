@@ -12,7 +12,7 @@ exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
       <button
         aria-disabled="false"
         aria-label=""
-        aria-selected="false"
+        aria-selected="true"
         class="sc-dTvVRJ drSpiP timeline-circle using-icon vertical_alternating active"
         data-testid="timeline-circle"
         dimension="16"
@@ -23,7 +23,7 @@ exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
       </button>
     </div>
     <div
-      class="sc-jwTyAe jjiCuv vertical_alternating"
+      class="sc-jwTyAe emnBLX vertical_alternating TOP"
       data-testid="timeline-title"
     >
       <div

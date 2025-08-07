@@ -204,7 +204,7 @@ export const Shape = styled.div<ShapeModel>`
 export const TimelineTitleContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 
   &.vertical {
     margin-bottom: 1em;
@@ -212,7 +212,11 @@ export const TimelineTitleContainer = styled.div`
 
   &.horizontal {
     position: absolute;
-    top: 0;
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 3;
   }
 `;
 

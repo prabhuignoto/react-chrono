@@ -198,8 +198,16 @@ export const TimelineMain = styled.div`
   &.horizontal {
     align-items: center;
     justify-content: center;
+    // width: 100%;
+    flex-direction: row;
+  }
+  
+  &.horizontal_all {
+    align-items: center;
+    justify-content: flex-start;
     width: 100%;
     flex-direction: row;
+    overflow-x: auto;
   }
 
   /* Fullscreen mode styles for timeline main */
@@ -237,13 +245,19 @@ export const Outline = styled.div<{ color?: string; height?: number }>`
   right: 0;
   left: 0;
   width: 100%;
-  height: ${(p) => `${p.height}px`};
+  height: ${(p) => `${p.height || 3}px`};
   margin-right: auto;
   margin-left: auto;
-  background: ${(p) => p.color};
+  background: ${(p) => p.color || '#007bff'};
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1;
+  z-index: 2;
+  
+  /* Show all cards horizontal mode - extend line */
+  .show-all-cards-horizontal & {
+    width: calc(100% + 2rem);
+    left: -1rem;
+  }
 `;
 
 export const TimelineControlContainer = styled.div<{

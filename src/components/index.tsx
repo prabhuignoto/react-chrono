@@ -164,16 +164,13 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       
       setTimeLineItems((lineItems) =>
         lineItems.map((item, index) => {
-          // FIXED: Don't use mode comparison here, use explicit HORIZONTAL_ALL check
+          // Visibility logic based on mode
           let isVisible = true; // Default to visible for all modes
           if (mode === 'HORIZONTAL') {
             isVisible = index === actvTimelineIndex; // Only active item visible in HORIZONTAL mode
           }
-          // For HORIZONTAL_ALL and all other modes, keep visible = true
+          // For HORIZONTAL_ALL and all other modes, all items should be visible
           
-          if (typeof window !== 'undefined' && index < 3) { // Log first 3 items
-            console.log(`Item ${index}: visible=${isVisible}, active=${index === actvTimelineIndex}`);
-          }
           return {
             ...item,
             active: index === actvTimelineIndex,

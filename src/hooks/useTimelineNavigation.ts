@@ -55,8 +55,6 @@ export const useTimelineNavigation = ({
 
   // Navigation handlers
   const handleNext = useCallback(() => {
-    if (!hasFocus) return;
-
     const newIndex = Math.min(activeItemIndex.current + 1, items.length - 1);
     if (newIndex !== activeItemIndex.current) {
       activeItemIndex.current = newIndex;
@@ -68,11 +66,9 @@ export const useTimelineNavigation = ({
         if (targetElement) scrollToElement(targetElement, mode);
       }
     }
-  }, [hasFocus, items, findTargetElement, mode, scrollToElement, stableOnNext]);
+  }, [items, findTargetElement, mode, scrollToElement, stableOnNext]);
 
   const handlePrevious = useCallback(() => {
-    if (!hasFocus) return;
-
     const newIndex = Math.max(activeItemIndex.current - 1, 0);
     if (newIndex !== activeItemIndex.current) {
       activeItemIndex.current = newIndex;
@@ -85,7 +81,6 @@ export const useTimelineNavigation = ({
       }
     }
   }, [
-    hasFocus,
     items,
     findTargetElement,
     mode,
@@ -94,7 +89,6 @@ export const useTimelineNavigation = ({
   ]);
 
   const handleFirst = useCallback(() => {
-    if (!hasFocus) return;
     if (activeItemIndex.current !== 0) {
       activeItemIndex.current = 0;
       stableOnFirst();
@@ -106,7 +100,6 @@ export const useTimelineNavigation = ({
       }
     }
   }, [
-    hasFocus,
     items,
     findTargetElement,
     mode,
@@ -115,7 +108,6 @@ export const useTimelineNavigation = ({
   ]);
 
   const handleLast = useCallback(() => {
-    if (!hasFocus) return;
     const lastIndex = items.length - 1;
     if (activeItemIndex.current !== lastIndex) {
       activeItemIndex.current = lastIndex;
@@ -127,7 +119,7 @@ export const useTimelineNavigation = ({
         if (targetElement) scrollToElement(targetElement, mode);
       }
     }
-  }, [hasFocus, items, findTargetElement, mode, scrollToElement, stableOnLast]);
+  }, [items, findTargetElement, mode, scrollToElement, stableOnLast]);
 
   // Use keyboard navigation hook
   const { handleKeySelection } = useTimelineKeyboardNavigation({

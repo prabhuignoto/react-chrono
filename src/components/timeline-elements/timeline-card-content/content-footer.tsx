@@ -2,10 +2,9 @@ import {
   FunctionComponent,
   PointerEvent,
   useCallback,
-  useContext,
   useMemo,
 } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import { useTimelineContext } from '../../contexts';
 import ChevronIcon from '../../icons/chev-right';
 import { ContentFooterProps } from './header-footer.model';
 import { ChevronIconWrapper, ShowMore } from './timeline-card-content.styles';
@@ -41,7 +40,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   showReadMore,
   canShow,
 }: ContentFooterProps) => {
-  const { theme } = useContext(GlobalContext);
+  const { theme } = useTimelineContext();
 
   const handleClick = useCallback(
     (ev: PointerEvent) => {

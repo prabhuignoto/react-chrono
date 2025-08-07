@@ -1,7 +1,7 @@
 import { TitleModel } from '@models/TimelineCardTitleModel';
 import cls from 'classnames';
-import React, { useContext, useMemo } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import React, { useMemo } from 'react';
+import { useTimelineContext } from '../../contexts';
 import { TitleWrapper } from './timeline-card-title.styles';
 
 /**
@@ -30,8 +30,8 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
     [active, classString],
   );
 
-  // Get font size from global context
-  const { fontSizes } = useContext(GlobalContext);
+  // Get font size from unified context
+  const { fontSizes } = useTimelineContext();
 
   return (
     <TitleWrapper

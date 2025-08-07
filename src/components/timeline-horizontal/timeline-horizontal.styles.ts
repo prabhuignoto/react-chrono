@@ -29,6 +29,7 @@ export const TimelineItemWrapper = styled.li<{ width: number }>`
   height: 150px;
   flex-direction: column;
   flex-shrink: 0;
+  position: relative;
 
   &.vertical {
     margin-bottom: 2rem;
@@ -40,6 +41,7 @@ export const TimelineItemWrapper = styled.li<{ width: number }>`
   }
 
   .show-all-cards-horizontal & {
+    visibility: visible; /* Force visibility in show-all mode */
     min-width: ${(p) => p.width}px;
     margin: 0 0.5rem;
     flex-shrink: 0;

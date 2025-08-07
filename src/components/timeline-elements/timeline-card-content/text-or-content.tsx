@@ -4,11 +4,10 @@ import {
   ForwardRefExoticComponent,
   ReactNode,
   forwardRef,
-  useContext,
   useMemo,
 } from 'react';
 import xss from 'xss';
-import { GlobalContext } from '../../GlobalContext';
+import { useTimelineContext } from '../../contexts';
 import {
   TimelineContentDetails,
   TimelineSubContent,
@@ -71,12 +70,12 @@ const getTextOrContent: (
   const TextOrContent = forwardRef<HTMLParagraphElement, TextOrContentModel>(
     (prop, ref) => {
       const isTextArray = Array.isArray(detailedText);
-      const { fontSizes, classNames, parseDetailsAsHTML, textDensity } =
-        useContext(GlobalContext);
+      const { fontSizes, classNames, parseDetailsAsHTML, textContentDensity } =
+        useTimelineContext();
 
       const shouldNotShowText = useMemo(() => {
-        return (parseDetailsAsHTML && !isTextArray) || textDensity === 'LOW';
-      }, [isTextArray, parseDetailsAsHTML, textDensity]);
+        return (parseDetailsAsHTML && !isTextArray) || textContentDensity === 'LOW';
+      }, [isTextArray, parseDetailsAsHTML, textContentDensity]);
 
       // Generate the text content based on detailedText
       const getTextContent = () => {

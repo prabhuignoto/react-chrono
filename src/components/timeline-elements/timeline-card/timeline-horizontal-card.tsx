@@ -1,6 +1,6 @@
 import { TimelineCardModel } from '@models/TimelineItemModel';
-import React, { useContext } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import React from 'react';
+import { useTimelineContext } from '../../contexts';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import {
   TimelineTitleContainer,
@@ -43,7 +43,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     theme,
     timelinePointShape,
     disableInteraction,
-  } = useContext(GlobalContext);
+  } = useTimelineContext();
 
   const {
     circleRef,
@@ -128,6 +128,8 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         timelinePointDimension={timelinePointDimension}
         timelinePointShape={timelinePointShape}
         iconChild={iconChild}
+        active={active}
+        disabled={disableInteraction}
       />
 
       <TimelineTitleContainer
