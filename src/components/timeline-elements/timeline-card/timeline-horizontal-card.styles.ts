@@ -89,7 +89,8 @@ export const Shape = styled.div<ShapeModel>`
   overflow: hidden;
 
   /* Reset button styles when used as a button */
-  background: ${(p) => p.theme?.iconBackgroundColor || p.theme?.primary || '#007bff'};
+  background: ${(p) =>
+    p.theme?.iconBackgroundColor || p.theme?.primary || '#007bff'};
   border: 2px solid ${(p) => p.theme?.primary || '#007bff'};
   padding: 0;
   z-index: 2;
@@ -117,8 +118,18 @@ export const Shape = styled.div<ShapeModel>`
 
   /* Improve focus styles for accessibility */
   &:focus-visible {
-    outline: 3px solid ${(p) => p.theme?.primary ?? '#007bff'};
+    outline: 3px solid transparent;
     outline-offset: 2px;
+  }
+
+  /* Show outline only when keyboard navigation is active */
+  [data-keyboard-focus='true'] &:focus-visible {
+    outline-color: ${(p) => p.theme?.primary ?? '#007bff'};
+  }
+
+  /* Remove outline when toolbar navigation is active */
+  [data-toolbar-navigation='true'] &:focus-visible {
+    outline-color: transparent;
   }
 
   /* Add subtle hover effect */
@@ -230,10 +241,21 @@ export const TimelineContentContainer = styled.div<{
   align-items: flex-start;
   animation: ${show} 0.25s ease-in;
 
-  outline: 2px solid
-    ${(p) => (p.$highlight && p.$active ? p.theme?.primary : 'transparent')};
+  /* Only show outline when navigating via keyboard, not toolbar */
+  outline: 2px solid transparent;
   outline-offset: 2px;
   border-radius: 12px;
+
+  /* Show outline only when keyboard navigation is active */
+  [data-keyboard-focus='true'] & {
+    outline-color: ${(p) =>
+      p.$highlight && p.$active ? p.theme?.primary : 'transparent'};
+  }
+
+  /* Remove outline when toolbar navigation is active */
+  [data-toolbar-navigation='true'] & {
+    outline-color: transparent;
+  }
 
   margin: 1rem;
 

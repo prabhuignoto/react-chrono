@@ -200,15 +200,27 @@ export const TimelineItemContentWrapper = styled.section<
       0 8px 16px rgba(0, 0, 0, 0.08);
   }
 
-  // Show outline for keyboard navigation
+  // Show outline only for keyboard navigation, not toolbar navigation
   &:focus-visible,
   &.focus-visible {
-    outline: 3px solid ${(p) => p.$theme?.primary};
+    outline: 3px solid transparent;
     outline-offset: 4px;
     box-shadow:
       0 2px 4px rgba(0, 0, 0, 0.04),
       0 4px 8px rgba(0, 0, 0, 0.06),
       0 8px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Show outline only when keyboard navigation is active */
+  [data-keyboard-focus='true'] &:focus-visible,
+  [data-keyboard-focus='true'] &.focus-visible {
+    outline-color: ${(p) => p.$theme?.primary};
+  }
+
+  /* Remove outline when toolbar navigation is active */
+  [data-toolbar-navigation='true'] &:focus-visible,
+  [data-toolbar-navigation='true'] &.focus-visible {
+    outline-color: transparent;
   }
 
   // Prevent layout shift on focus
@@ -499,9 +511,19 @@ export const ShowMore = styled.button<{
   }
 
   &:focus-visible {
-    outline: 2px solid ${(p) => p.theme.primary};
+    outline: 2px solid transparent;
     outline-offset: 2px;
     border-radius: 2px;
+  }
+
+  /* Show outline only when keyboard navigation is active */
+  [data-keyboard-focus='true'] &:focus-visible {
+    outline-color: ${(p) => p.theme.primary};
+  }
+
+  /* Remove outline when toolbar navigation is active */
+  [data-toolbar-navigation='true'] &:focus-visible {
+    outline-color: transparent;
   }
 
   @media (max-width: 768px) {

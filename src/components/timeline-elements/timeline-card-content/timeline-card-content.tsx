@@ -46,16 +46,13 @@ const arePropsEqual = (
   if (prevProps.cardTitle !== nextProps.cardTitle) return false;
 
   // Efficient media comparison
-  if (!mediaEqual(prevProps.media, nextProps.media))
-    return false;
+  if (!mediaEqual(prevProps.media, nextProps.media)) return false;
 
   // Efficient theme comparison (shallow)
-  if (!shallowEqual(prevProps.theme, nextProps.theme))
-    return false;
+  if (!shallowEqual(prevProps.theme, nextProps.theme)) return false;
 
   // Efficient items comparison for nested timeline
-  if (!arrayEqual(prevProps.items, nextProps.items))
-    return false;
+  if (!arrayEqual(prevProps.items, nextProps.items)) return false;
 
   // Default to true - don't re-render
   return true;
@@ -90,7 +87,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       const detailsRef = useRef<HTMLDivElement | null>(null);
       const progressRef = useRef<HTMLProgressElement | null>(null);
       const isFirstRender = useRef(true);
-      
+
       // Use improved focus management
       const containerRef = useFocusManager({
         shouldFocus: hasFocus,
@@ -115,10 +112,10 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         textOverlay,
         disableInteraction,
       } = useTimelineContext();
-      
+
       // Map textContentDensity to textDensity for backward compatibility
       const textDensity = textContentDensity;
-      
+
       // TODO: Move these to appropriate contexts
       const slideItemDuration = 2000;
       const disableAutoScrollOnClick = false;
@@ -225,9 +222,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           setupTimer(slideItemDuration);
         }
 
-        if (active && hasFocus && containerRef.current) {
-          containerRef.current.focus({ preventScroll: true });
-        }
+        // Focus is now handled by useTimelineNavigation hook
+        // Only during keyboard navigation, not toolbar navigation
 
         if (!slideShowActive) {
           setHasBeenActivated(false);
