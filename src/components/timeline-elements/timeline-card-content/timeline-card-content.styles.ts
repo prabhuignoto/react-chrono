@@ -25,19 +25,23 @@ const baseFontStyles = css`
 
 const baseCardStyles = css<{ $theme?: Theme }>`
   background: ${(p) => p.$theme?.cardBgColor};
-  border-radius: 8px;
+  border-radius: 12px;
   -webkit-box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.06),
-    0 4px 10px rgba(0, 0, 0, 0.08);
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 4px 8px rgba(0, 0, 0, 0.06),
+    0 8px 16px rgba(0, 0, 0, 0.08);
   box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.06),
-    0 4px 10px rgba(0, 0, 0, 0.08);
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 4px 8px rgba(0, 0, 0, 0.06),
+    0 8px 16px rgba(0, 0, 0, 0.08);
   -webkit-transition:
-    -webkit-transform 0.2s ease-out,
-    box-shadow 0.2s ease-out;
+    -webkit-transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transition:
-    transform 0.2s ease-out,
-    box-shadow 0.2s ease-out;
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 `;
 
 const scrollbarStyles = css<{ theme?: Theme }>`
@@ -125,11 +129,13 @@ const sharedSemanticStyles = css<{
   theme: Theme;
 }>`
   ${baseFontStyles}
-  font-size: ${(p) => p.$fontSize || '1.1rem'};
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-size: ${(p) => p.$fontSize || '1.25rem'};
+  font-weight: 700;
+  margin-bottom: 0.75rem;
   padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
   display: block;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
 `;
 
 // Card Components
@@ -159,9 +165,14 @@ export const TimelineItemContentWrapper = styled.section<
   justify-content: flex-start;
   line-height: 1.5;
   margin: 0;
-  max-width: ${(p) => p.$maxWidth}px;
+  max-width: ${(p) => (p.$maxWidth ? `${p.$maxWidth}px` : '100%')};
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    border-radius: 8px;
+  }
   position: relative;
-  padding: 1rem;
+  padding: 1.5rem;
   z-index: ${zIndex.timelineCard};
   overflow: hidden;
   width: 100%;
@@ -173,20 +184,70 @@ export const TimelineItemContentWrapper = styled.section<
   ${(p) => (p.$textOverlay ? `min-height: ${p.$minHeight}px` : '')};
   ${(p) => (p.$textOverlay ? 'height: 0' : '')};
 
-  // Focus state
-  &:focus {
-    outline: 1px solid ${(p) => p.$theme?.primary};
+  // Focus state with transition
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    outline 0.15s ease-out,
+    outline-offset 0.15s ease-out;
+
+  // Remove default outline for mouse clicks
+  &:focus:not(:focus-visible):not(.focus-visible) {
+    outline: none;
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      0 4px 8px rgba(0, 0, 0, 0.06),
+      0 8px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  // Show outline only for keyboard navigation, not toolbar navigation
+  &:focus-visible,
+  &.focus-visible {
+    outline: 3px solid transparent;
+    outline-offset: 4px;
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      0 4px 8px rgba(0, 0, 0, 0.06),
+      0 8px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Show outline only when keyboard navigation is active */
+  [data-keyboard-focus='true'] &:focus-visible,
+  [data-keyboard-focus='true'] &.focus-visible {
+    outline-color: ${(p) => p.$theme?.primary};
+  }
+
+  /* Remove outline when toolbar navigation is active */
+  [data-toolbar-navigation='true'] &:focus-visible,
+  [data-toolbar-navigation='true'] &.focus-visible {
+    outline-color: transparent;
+  }
+
+  // Prevent layout shift on focus
+  &:focus,
+  &:focus-visible,
+  &.focus-visible {
+    position: relative;
+    z-index: ${zIndex.timelineCard + 1};
   }
 
   // Highlight effect
   ${(p) =>
     p.$highlight &&
     css`
+      cursor: pointer;
+
       &:hover {
-        transform: translateY(-2px);
+        transform: translateY(-4px);
         box-shadow:
-          0 2px 5px ${p.$theme?.shadowColor || 'rgba(0, 0, 0, 0.08)'},
-          0 8px 16px ${p.$theme?.shadowColor || 'rgba(0, 0, 0, 0.1)'};
+          0 4px 8px rgba(0, 0, 0, 0.08),
+          0 12px 24px rgba(0, 0, 0, 0.12),
+          0 16px 32px rgba(0, 0, 0, 0.08);
+      }
+
+      &:active {
+        transform: translateY(-1px);
+        transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
       }
     `}
 
@@ -195,7 +256,10 @@ export const TimelineItemContentWrapper = styled.section<
     p.$isNested &&
     css`
       background: ${p.$theme?.nestedCardBgColor};
-      box-shadow: 0 1px 2px ${p.$theme?.shadowColor || 'rgba(0, 0, 0, 0.05)'};
+      box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.03),
+        0 2px 4px rgba(0, 0, 0, 0.04);
+      border: 1px solid ${p.$theme?.shadowColor || 'rgba(0, 0, 0, 0.06)'};
     `}
 
   // Animations
@@ -207,7 +271,7 @@ export const TimelineItemContentWrapper = styled.section<
 export const TimelineCardHeader = styled.header`
   width: 100%;
   padding: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 `;
 
 export const CardTitle = styled.h1<{
@@ -218,13 +282,20 @@ export const CardTitle = styled.h1<{
 }>`
   ${baseFontStyles}
   color: ${(p) => p.theme.cardTitleColor};
-  font-size: ${(p) => p.$fontSize && '1.1rem'};
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-size: ${(p) => p.$fontSize || '1.25rem'};
+  font-weight: 700;
+  margin-bottom: 0.75rem;
   padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
+  letter-spacing: -0.02em;
+  line-height: 1.3;
 
   &.active {
     color: ${(p) => p.theme.primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: ${(p) => p.$fontSize || '1.125rem'};
+    margin-bottom: 0.5rem;
   }
 `;
 
@@ -236,10 +307,17 @@ export const CardSubTitle = styled.h2<{
 }>`
   ${baseFontStyles}
   color: ${(p) => p.theme.cardSubtitleColor};
-  font-size: ${(p) => p.$fontSize && '0.9rem'};
+  font-size: ${(p) => p.$fontSize || '0.95rem'};
   font-weight: 500;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
   padding: ${(p) => (p.$padding ? '0.5rem 0 0.5rem 0.5rem' : '0')};
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  opacity: 0.9;
+
+  @media (max-width: 768px) {
+    font-size: ${(p) => p.$fontSize || '0.875rem'};
+  }
 `;
 
 // Refactor CardTitleSemantic to use shared styles
@@ -287,22 +365,34 @@ export const CardTitleAnchor = styled.a`
 
 // Content Components
 export const TimelineContentDetails = styled.p<{ theme?: Theme }>`
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 400;
   margin: 0;
   width: 100%;
   color: ${(p) => p.theme.cardDetailsColor};
-  line-height: 1.5;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+
+  & + & {
+    margin-top: 0.75rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
 `;
 
 export const TimelineSubContent = styled.span<{
   fontSize?: string;
   theme?: Theme;
 }>`
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   display: block;
-  font-size: ${(p) => p.fontSize && '0.8rem'};
+  font-size: ${(p) => p.fontSize || '0.875rem'};
   color: ${(p) => p.theme.cardDetailsColor};
+  line-height: 1.5;
+  opacity: 0.85;
 `;
 
 export const TimelineContentDetailsWrapper = styled.div<{
@@ -325,49 +415,48 @@ export const TimelineContentDetailsWrapper = styled.div<{
   margin: 0;
   position: relative;
   overflow-x: hidden;
-  overflow-y: auto;
-  transition: max-height 0.25s ease-in-out;
+  overflow-y: ${(p) => (p.$showMore ? 'auto' : 'hidden')};
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   width: ${(p) => (p.$borderLess ? 'calc(100% - 0.5rem)' : '100%')};
   padding: 0;
   background: ${(p) => p.theme?.cardDetailsBackGround || p.theme?.cardBgColor};
 
-  // Height handling based on different conditions
-  ${({ $useReadMore, $customContent, $showMore, height = 0, $textOverlay }) =>
-    $useReadMore && !$customContent && !$showMore && !$textOverlay
-      ? `max-height: ${height}px;`
-      : 'height: 100%'};
-
+  // Simplified height handling
   ${({
-    $cardHeight = 0,
-    $contentHeight = 0,
-    height = 0,
-    $showMore,
-    $textOverlay,
-  }) =>
-    $showMore && !$textOverlay
-      ? `max-height: ${($cardHeight ?? 0) + ($contentHeight ?? 0) - height}px;`
-      : ''}
-
-  ${(p) => (p.$customContent ? `height: 100%;` : '')}
-
-  // Animation for show more
-  ${({
-    height = 0,
-    $cardHeight = 0,
-    $contentHeight = 0,
-    $showMore,
     $useReadMore,
-  }) =>
-    $showMore && $useReadMore && $cardHeight
+    $customContent,
+    $showMore,
+    height = 150,
+    $textOverlay,
+  }) => {
+    if ($customContent) return 'height: 100%;';
+    if ($textOverlay) return '';
+    if (!$useReadMore) return 'height: auto;';
+
+    // When collapsed, limit height; when expanded, allow full height
+    return $showMore ? 'max-height: 1000px;' : `max-height: ${height}px;`;
+  }}
+
+  // Show gradient overlay when content is collapsed
+  ${({ $useReadMore, $showMore, $gradientColor }) =>
+    $useReadMore && !$showMore && $gradientColor
       ? css`
-          animation: ${keyframes`
-            0% {
-              max-height: ${height}px;
-            }
-            100% {
-             max-height: ${$cardHeight + $contentHeight - height}px;
-            }
-          `} 0.25s ease-in-out;
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(
+              to bottom,
+              transparent,
+              ${$gradientColor} 50%,
+              ${$gradientColor}
+            );
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+          }
         `
       : ''}
       
@@ -379,9 +468,8 @@ export const TimelineContentDetailsWrapper = styled.div<{
     overflow: hidden;
   }
 
-  // Gradient for "show more" functionality
+  // Set gradient color variable
   --rc-gradient-color: ${(p) => p.$gradientColor};
-  ${linearGradient}
 `;
 
 // Interactive Elements
@@ -389,21 +477,58 @@ export const ShowMore = styled.button<{
   show?: 'true' | 'false';
   theme?: Theme;
 }>`
+  /* Reset button styles to look like a link */
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 1rem 0.5rem 0.5rem auto;
+
+  /* Link-like appearance */
+  color: ${(p) => p.theme.primary};
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+
+  /* Layout */
   align-items: center;
   align-self: flex-end;
-  border-radius: 4px;
-  cursor: pointer;
   display: ${(p) => (p.show === 'true' ? 'flex' : 'none')};
-  font-size: 0.75rem;
   justify-self: flex-end;
-  margin: auto 0.5em 0.5em auto;
-  padding: 0.25em;
-  color: ${(p) => p.theme.primary};
-  border: 0;
-  background: none;
+
+  /* Smooth transitions */
+  transition: all 0.2s ease;
 
   &:hover {
+    color: ${(p) => p.theme.primary}CC;
     text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+
+  &:active {
+    color: ${(p) => p.theme.primary}AA;
+  }
+
+  &:focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Show outline only when keyboard navigation is active */
+  [data-keyboard-focus='true'] &:focus-visible {
+    outline-color: ${(p) => p.theme.primary};
+  }
+
+  /* Remove outline when toolbar navigation is active */
+  [data-toolbar-navigation='true'] &:focus-visible {
+    outline-color: transparent;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.8125rem;
+    margin: 0.75rem 0.25rem 0.25rem auto;
   }
 `;
 
@@ -473,6 +598,7 @@ export const ChevronIconWrapper = styled.span<{ collapsed?: 'true' | 'false' }>`
   width: 1.25em;
   transform: ${(p) =>
     p.collapsed === 'false' ? 'rotate(90deg)' : 'rotate(-90deg)'};
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   svg {
     height: 100%;
@@ -512,14 +638,15 @@ export const Mark = styled.mark<{ theme: Theme }>`
     (p.theme?.primary ? `${p.theme.primary}30` : 'rgba(255, 217, 0, 0.3)')};
   color: inherit;
   font-weight: 600;
-  padding: 0.1em 0.25em;
-  margin: 0 -0.1em;
-  border-radius: 2px;
+  padding: 0.15em 0.3em;
+  margin: 0 0.05em;
+  border-radius: 4px;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   transition:
     background-color 0.2s ease-out,
-    box-shadow 0.15s ease-out;
+    box-shadow 0.15s ease-out,
+    transform 0.15s ease-out;
 
   &[data-current-match='true'] {
     background-color: ${(p) => {
@@ -541,19 +668,22 @@ export const Mark = styled.mark<{ theme: Theme }>`
       }
       return 'rgba(255, 217, 0, 0.5)';
     }};
-    box-shadow: 0 0 0 1px
-      ${(p) => {
-        if (p.theme?.iconColor) {
-          return p.theme.iconColor;
-        }
+    box-shadow:
+      0 0 0 2px
+        ${(p) => {
+          if (p.theme?.iconColor) {
+            return p.theme.iconColor;
+          }
 
-        // Fallback logic
-        if (p.theme?.primary) {
-          return p.theme.cardBgColor === '#1f2937'
-            ? 'rgba(96, 165, 250, 0.8)'
-            : p.theme.primary;
-        }
-        return 'rgba(255, 217, 0, 0.5)';
-      }};
+          // Fallback logic
+          if (p.theme?.primary) {
+            return p.theme.cardBgColor === '#1f2937'
+              ? 'rgba(96, 165, 250, 0.8)'
+              : p.theme.primary;
+          }
+          return 'rgba(255, 217, 0, 0.5)';
+        }},
+      0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
   }
 `;

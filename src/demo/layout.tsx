@@ -5,6 +5,7 @@ import styles from './layout.module.scss';
 
 const items = [
   { path: '/theme-showcase', label: 'Theme Showcase' },
+  { path: '/vertical-comprehensive', label: 'Technology Evolution Timeline', featured: true },
   { path: '/vertical-basic', label: 'Vertical Basic' },
   {
     path: '/vertical-basic-nested',
@@ -57,9 +58,16 @@ const Layout = () => {
             {items.map((item, index) => (
               <li
                 key={index}
-                className={cls('m-1', 'py-1', 'pl-1', 'hover:text-blue-800')}
+                className={cls(
+                  'm-1', 'py-1', 'pl-1', 'hover:text-blue-800',
+                  item.featured ? 'bg-blue-50 border-l-4 border-blue-500 pl-3 font-semibold text-blue-700' : ''
+                )}
               >
-                <NavLink to={item.path} style={{ height: '100%' }}>
+                <NavLink 
+                  to={item.path} 
+                  style={{ height: '100%' }}
+                  className={item.featured ? 'text-blue-700' : ''}
+                >
                   {item.label}
                 </NavLink>
               </li>

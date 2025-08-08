@@ -1,0 +1,186 @@
+import { test, expect } from '../fixtures/test-fixtures';
+
+test.describe('Timeline with API Integration', () => {
+  test('should load timeline data from API', async ({ page, testHelpers, apiMocker }) => {
+    // Mock API response
+    await test.step('Setup API mocks', async () => {
+      await apiMocker.mockRoute('**/api/timeline-items', {
+        items: [
+          {
+            id: 1,
+            title: 'First Event',
+            cardTitle: 'Project Started',
+            cardSubtitle: '2024-01-01',
+            cardDetailedText: 'This is when our journey began...',
+            media: {
+              type: 'IMAGE',
+              source: { url: 'https://example.com/image1.jpg' }
+            }
+          },
+          {
+            id: 2,
+            title: 'Second Event',
+            cardTitle: 'Major Milestone',
+            cardSubtitle: '2024-06-01',
+            cardDetailedText: 'We achieved something great...',
+          }
+        ]
+      }, { delay: 100 }); // Simulate network delay
+    });
+
+    await test.step('Navigate to dynamic timeline', async () => {
+      await testHelpers.navigateTo('/timeline/dynamic');
+    });
+
+    await test.step('Wait for data to load', async () => {
+      // Use expect.poll for dynamic content
+      await expect.poll(
+        async () => {
+          const items = await page.locator('.timeline-item-container').count();
+          return items;
+        },
+        {
+          message: 'Waiting for timeline items to load',
+          timeout: 5000,
+        }
+      ).toBe(2);
+    });
+
+    await test.step('Verify loaded content', async () => {
+      await testHelpers.assertText('.timeline-item-title:first-child', 'First Event');
+      await testHelpers.assertText('.timeline-item-title:last-child', 'Second Event');
+    });
+  });
+
+  test('should handle API errors gracefully', async ({ page, testHelpers, apiMocker }) => {
+    await test.step('Mock API error', async () => {
+      await apiMocker.mockRoute('**/api/timeline-items', 
+        { error: 'Internal Server Error' }, 
+        { status: 500 }
+      );
+    });
+
+    await test.step('Navigate and verify error handling', async () => {
+      await testHelpers.navigateTo('/timeline/dynamic');
+      
+      // Wait for error message
+      await testHelpers.waitForElement('.error-message');
+      await testHelpers.assertText('.error-message', /failed to load|error occurred/i);
+    });
+  });
+
+  test('should handle real-time updates via WebSocket', async ({ page, testHelpers }) => {
+    await test.step('Setup WebSocket mock', async () => {
+      await page.addInitScript(() => {
+        // Mock WebSocket
+        window.WebSocket = class MockWebSocket {
+          constructor(url: string) {
+            setTimeout(() => {
+              // @ts-ignore
+              this.onmessage?.({
+                data: JSON.stringify({
+                  type: 'timeline-update',
+                  item: {
+                    id: 3,
+                    title: 'Live Update',
+                    cardTitle: 'Breaking News',
+                    cardSubtitle: new Date().toISOString(),
+                  }
+                })
+              });
+            }, 2000);
+          }
+          send() {}
+          close() {}
+        } as any;
+      });
+    });
+
+    await test.step('Navigate and wait for live update', async () => {
+      await testHelpers.navigateTo('/timeline/live');
+      
+      // Wait for initial load
+      await testHelpers.waitForElement('.timeline-item-container');
+      
+      // Wait for WebSocket update
+      await expect(page.locator('.timeline-item-container')).toHaveCount(3, { timeout: 5000 });
+      await testHelpers.assertText('.timeline-item-title:last-child', 'Live Update');
+    });
+  });
+
+  test('should track form submission', async ({ page, testHelpers, apiMocker }) => {
+    await test.step('Navigate to timeline with form', async () => {
+      await testHelpers.navigateTo('/timeline/interactive');
+    });
+
+    await test.step('Fill and submit form', async () => {
+      await testHelpers.typeInField('#event-title', 'New Event');
+      await testHelpers.typeInField('#event-description', 'This is a test event');
+      await testHelpers.clickElement('button[type="submit"]');
+    });
+
+    await test.step('Verify API call was made', async () => {
+      const request = await apiMocker.waitForRequest('**/api/timeline-items');
+      expect(request).toMatchObject({
+        title: 'New Event',
+        description: 'This is a test event',
+      });
+    });
+  });
+
+  test('should handle pagination', async ({ page, testHelpers, apiMocker }) => {
+    // Mock paginated responses
+    await test.step('Setup paginated API responses', async () => {
+      await page.route('**/api/timeline-items*', async (route) => {
+        const url = new URL(route.request().url());
+        const page = parseInt(url.searchParams.get('page') || '1');
+        
+        await route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            items: Array.from({ length: 10 }, (_, i) => ({
+              id: (page - 1) * 10 + i + 1,
+              title: `Event ${(page - 1) * 10 + i + 1}`,
+              cardTitle: `Title ${(page - 1) * 10 + i + 1}`,
+            })),
+            totalPages: 5,
+            currentPage: page,
+          }),
+        });
+      });
+    });
+
+    await test.step('Navigate and test pagination', async () => {
+      await testHelpers.navigateTo('/timeline/paginated');
+      
+      // Verify first page loaded
+      await testHelpers.assertElementCount('.timeline-item-container', 10);
+      await testHelpers.assertText('.timeline-item-title:first-child', 'Event 1');
+      
+      // Go to next page
+      await testHelpers.clickElement('button[aria-label="Next page"]');
+      await testHelpers.waitForNetworkIdle();
+      
+      // Verify second page loaded
+      await testHelpers.assertText('.timeline-item-title:first-child', 'Event 11');
+    });
+  });
+
+  test('should download timeline data', async ({ page, testHelpers }) => {
+    await test.step('Setup download handler', async () => {
+      const downloadPromise = page.waitForEvent('download');
+      
+      await testHelpers.navigateTo('/timeline/exportable');
+      await testHelpers.clickElement('button[aria-label="Export timeline"]');
+      
+      const download = await downloadPromise;
+      
+      // Verify download
+      expect(download.suggestedFilename()).toBe('timeline-export.json');
+      
+      // Save to test results
+      await download.saveAs('test-results/timeline-export.json');
+    });
+  });
+});

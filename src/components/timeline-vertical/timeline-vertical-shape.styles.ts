@@ -107,8 +107,18 @@ export const TimelinePointContainer = styled.button<TimelinePointContainerProps>
 
   /* Add focus styles for accessibility */
   &:focus-visible {
-    outline: 3px solid ${(p) => p.theme?.primary ?? '#007bff'}; /* Focus ring */
+    outline: 3px solid transparent; /* Focus ring */
     outline-offset: 3px;
+  }
+
+  /* Show outline only when keyboard navigation is active */
+  [data-keyboard-focus='true'] &:focus-visible {
+    outline-color: ${(p) => p.theme?.primary ?? '#007bff'};
+  }
+
+  /* Remove outline when toolbar navigation is active */
+  [data-toolbar-navigation='true'] &:focus-visible {
+    outline-color: transparent;
   }
 
   &:disabled {

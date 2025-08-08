@@ -12,6 +12,9 @@ export interface StableContextProps {
     cardLess: boolean;
     disableTimelinePoint: boolean;
     disableToolbar: boolean;
+    disableAutoScrollOnClick: boolean;
+    disableInteraction: boolean;
+    disableClickOnCircle: boolean;
     enableBreakPoint: boolean;
     enableDarkToggle: boolean;
     enableLayoutSwitch: boolean;
@@ -91,6 +94,9 @@ export const StableContext = createContext<StableContextProps>({
     cardLess: false,
     disableTimelinePoint: false,
     disableToolbar: false,
+    disableAutoScrollOnClick: false,
+    disableInteraction: false,
+    disableClickOnCircle: false,
     enableBreakPoint: true,
     enableDarkToggle: false,
     enableLayoutSwitch: true,

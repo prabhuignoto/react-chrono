@@ -1,7 +1,7 @@
 import { CardMediaModel } from '@models/TimelineMediaModel';
 import cls from 'classnames';
 import React, { memo, useCallback, useContext } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import { useTimelineContext } from '../../contexts';
 import { MediaWrapper } from './timeline-card-media.styles';
 import { useMediaLoad } from './hooks/useMediaLoad';
 import { useYouTubeDetection } from './hooks/useYouTubeDetection';
@@ -32,18 +32,19 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     const { expandDetails, showText, toggleExpand, toggleText } =
       useToggleControls();
 
-    // Get context
+    // Use unified timeline context
     const {
+      theme,
       mode,
+      cardHeight,
+      borderLessCards,
+      mediaHeight,
+      textOverlay,
+      mediaSettings,
+      // consume from context rather than placeholders
       fontSizes,
       classNames,
-      mediaHeight,
-      borderLessCards,
-      textOverlay,
-      theme,
-      cardHeight,
-      mediaSettings,
-    } = useContext(GlobalContext);
+    } = useTimelineContext();
 
     // Use view options hook for calculated values
     const {

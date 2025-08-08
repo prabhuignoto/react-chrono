@@ -8,7 +8,7 @@ import React, {
   FunctionComponent, // Explicit import
   MouseEvent,
 } from 'react';
-import { useStableContext, useDynamicContext } from '../contexts'; // Context for global theme/settings
+import { useTimelineStaticConfig, useTimelineMemoizedObjects } from '../contexts';
 // Shape seems to be a shared styled component, potentially defined elsewhere
 import { Shape } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
 import {
@@ -47,17 +47,22 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
 
     // Access context settings
     const {
-      staticDefaults: {
-        focusActiveItemOnLoad,
-        timelinePointShape,
-        disableTimelinePoint,
-      },
-      memoizedButtonTexts: buttonTexts, // Custom button text labels
-    } = useStableContext();
+      focusActiveItemOnLoad,
+      timelinePointShape,
+      disableTimelinePoint,
+      disableClickOnCircle: contextDisableClickOnCircle,
+      disableInteraction: contextDisableInteraction,
+      disableAutoScrollOnClick: contextDisableAutoScrollOnClick,
+    } = useTimelineStaticConfig();
 
-    const {
-      memoizedTheme: theme, // Theme object (primary color, etc.)
-    } = useDynamicContext();
+    const { theme } = useTimelineMemoizedObjects();
+    const { buttonTexts } = useTimelineMemoizedObjects();
+
+    // Consolidated disable flags - prioritize props over context
+    const finalDisableClickOnCircle =
+      disableClickOnCircle ?? contextDisableClickOnCircle;
+    const finalDisableInteraction = contextDisableInteraction;
+    const finalDisableAutoScrollOnClick = contextDisableAutoScrollOnClick;
 
     // Ref to track if this is the component's first render cycle
     const isFirstRender = useRef(true);
@@ -108,8 +113,12 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
      * Only adds onClick if clicks are enabled and slideshow isn't running.
      */
     const clickHandlerProps = useMemo(() => {
-      // Return empty object (no click handler) if clicks are disabled
-      if (disableClickOnCircle) {
+      // Return empty object (no click handler) if any disable condition is met
+      if (
+        finalDisableClickOnCircle ||
+        finalDisableInteraction ||
+        finalDisableAutoScrollOnClick
+      ) {
         return {};
       }
 
@@ -123,7 +132,14 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
           }
         },
       };
-    }, [id, onClick, slideShowRunning, disableClickOnCircle]); // Dependencies for the click logic
+    }, [
+      id,
+      onClick,
+      slideShowRunning,
+      finalDisableClickOnCircle,
+      finalDisableInteraction,
+      finalDisableAutoScrollOnClick,
+    ]); // Dependencies for the click logic
 
     /**
      * Effect to update the isFirstRender flag after the initial render is complete.
@@ -165,9 +181,26 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
           ref={circleRef} // Attach ref for position measurement
           data-testid="tree-leaf-click" // Test ID for the clickable element
           aria-label={timelinePointLabel} // Accessibility label
-          aria-disabled={disableClickOnCircle ?? disableTimelinePoint} // Disable button if needed
-          disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
-          tabIndex={disableClickOnCircle || disableTimelinePoint ? -1 : 0} // Manage tab order
+          aria-disabled={
+            finalDisableClickOnCircle ||
+            finalDisableInteraction ||
+            finalDisableAutoScrollOnClick ||
+            disableTimelinePoint
+          } // Disable button if needed
+          disabled={
+            finalDisableClickOnCircle ||
+            finalDisableInteraction ||
+            finalDisableAutoScrollOnClick ||
+            disableTimelinePoint
+          } // Disable button if needed
+          tabIndex={
+            finalDisableClickOnCircle ||
+            finalDisableInteraction ||
+            finalDisableAutoScrollOnClick ||
+            disableTimelinePoint
+              ? -1
+              : 0
+          } // Manage tab order
         >
           {/* The visual shape (circle, square, or custom icon) */}
           <Shape

@@ -4,8 +4,8 @@ import {
   CardTitleSemantic,
 } from '../timeline-card-content/timeline-card-content.styles';
 import { Title } from './memoized-model';
-import React, { useContext } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import React from 'react';
+import { useTimelineContext } from '../../contexts';
 
 /**
  * Renders the timeline's title with optional link using configurable semantic tags.
@@ -22,7 +22,7 @@ const TitleMemoComponent = ({
   fontSize = '1rem',
   classString = '',
 }: Title) => {
-  const { semanticTags } = useContext(GlobalContext);
+  const { semanticTags } = useTimelineContext();
 
   return title ? (
     <CardTitleSemantic

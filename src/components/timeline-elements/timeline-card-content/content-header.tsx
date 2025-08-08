@@ -1,5 +1,5 @@
-import { FunctionComponent, memo, useContext, useMemo } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import { FunctionComponent, memo, useMemo } from 'react';
+import { useTimelineContext } from '../../contexts';
 import { SubTitleMemo } from '../memoized/subtitle-memo';
 import { TitleMemo } from '../memoized/title-memo';
 import { ContentHeaderProps } from './header-footer.model';
@@ -24,7 +24,7 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
   ({ title, url, media, content, cardTitle }: ContentHeaderProps) => {
     // Using context to get global values
     const { fontSizes, classNames, theme, isMobile, semanticTags } =
-      useContext(GlobalContext);
+      useTimelineContext();
 
     const isNotMedia = useMemo(() => !media, [media]);
 

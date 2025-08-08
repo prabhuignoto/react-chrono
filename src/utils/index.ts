@@ -65,8 +65,8 @@ const DEFAULT_BUTTON_TEXTS: Readonly<ButtonTexts> = Object.freeze({
   timelinePoint: 'Timeline point',
 });
 
-// Pre-compiled regex for hex validation
-const HEX_COLOR_REGEX = /^#[0-9a-fA-F]{6}$/;
+// Pre-compiled regex for hex validation (supports both 3 and 6 character formats)
+const HEX_COLOR_REGEX = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
 
 // Character set for ID generation
 const ID_CHARS =
@@ -91,8 +91,14 @@ export const hexToRGBA = (hex: string, alpha: number): string => {
     return `rgba(0, 0, 0, ${Math.max(0, Math.min(1, alpha))})`;
   }
 
+  // Expand 3-character hex to 6-character
+  let fullHex = hex;
+  if (hex.length === 4) {
+    fullHex = '#' + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3];
+  }
+
   // Extract RGB values directly with bit shifting (more efficient)
-  const hexValue = parseInt(hex.slice(1), 16);
+  const hexValue = parseInt(fullHex.slice(1), 16);
   const r = (hexValue >> 16) & 255;
   const g = (hexValue >> 8) & 255;
   const b = hexValue & 255;
