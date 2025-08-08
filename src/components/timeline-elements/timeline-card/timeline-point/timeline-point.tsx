@@ -12,6 +12,7 @@ interface TimelinePointProps {
   iconChild?: React.ReactNode;
   active?: boolean;
   disabled?: boolean;
+  itemId?: string;
 }
 
 const TimelinePoint: React.FC<TimelinePointProps> = ({
@@ -25,6 +26,7 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
   iconChild,
   active = false,
   disabled = false,
+  itemId,
 }) => {
   // Focus is now handled by useTimelineNavigation hook
   // Only during keyboard navigation, not toolbar navigation
@@ -37,6 +39,7 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
         onClick={handleClick}
         ref={circleRef}
         data-testid="timeline-circle"
+        data-item-id={itemId}
         theme={theme}
         aria-label={title ?? 'Timeline point'}
         aria-selected={active}

@@ -80,7 +80,7 @@ const useNewScrollPosition = (
         contentOffset = 0,
       } = scroll;
 
-      if (mode === 'HORIZONTAL' && itemWidth) {
+      if ((mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL') && itemWidth) {
         computeHorizontalOffset(
           scrollLeft,
           clientWidth,

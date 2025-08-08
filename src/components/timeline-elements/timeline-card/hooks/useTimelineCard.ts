@@ -53,6 +53,15 @@ export const useTimelineCard = ({
           pointOffset: circleOffsetLeft + wrapperOffsetLeft,
           pointWidth: circle.clientWidth,
         });
+
+        // Bring the timeline point itself to keyboard focus for accessibility
+        requestAnimationFrame(() => {
+          try {
+            circle.focus({ preventScroll: true });
+          } catch (_) {
+            // ignore focus errors
+          }
+        });
       }
     }
   }, [active, autoScroll, mode]);

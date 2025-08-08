@@ -1,6 +1,6 @@
 import { TimelineHorizontalModel } from '@models/TimelineHorizontalModel';
 import cls from 'classnames';
-import React, { ReactNode, useContext, useMemo } from 'react';
+import React, { ReactNode, useContext, useMemo, useEffect, useRef } from 'react';
 import { useTimelineContext } from '../contexts';
 import TimelineCard from '../timeline-elements/timeline-card/timeline-horizontal-card';
 import {
@@ -63,6 +63,30 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     [mode, showAllCardsHorizontal],
   );
 
+  // Ref to the horizontal list to scope focus queries
+  const listRef = useRef<HTMLUListElement>(null);
+
+  // Find and focus the active timeline point button when items update
+  const activeId = useMemo(() => items.find((i) => i.active)?.id, [items]);
+
+  useEffect(() => {
+    if (!activeId) return;
+    // In both horizontal modes, focus the active point button if it exists
+    const root = listRef.current ?? document;
+    const activePoint = root.querySelector(
+      `button[data-testid="timeline-circle"][data-item-id="${activeId}"]`,
+    ) as HTMLButtonElement | null;
+    if (activePoint) {
+      requestAnimationFrame(() => {
+        try {
+          activePoint.focus({ preventScroll: false });
+        } catch (_) {
+          // ignore focus errors
+        }
+      });
+    }
+  }, [activeId]);
+
   const iconChildColln = useMemo(
     () => React.Children.toArray(iconChildren),
     [iconChildren],
@@ -120,6 +144,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
 
   return (
     <TimelineHorizontalWrapper
+      ref={listRef}
       className={wrapperClass}
       $flipLayout={flipLayout}
       data-testid="timeline-collection"

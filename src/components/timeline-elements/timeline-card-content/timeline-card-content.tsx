@@ -111,17 +111,18 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         textContentDensity,
         textOverlay,
         disableInteraction,
+        // Pull previously hard-coded values from context
+        slideItemDuration,
+        disableAutoScrollOnClick,
+        classNames,
+        slideShowType,
+        showProgressOnSlideshow,
       } = useTimelineContext();
 
       // Map textContentDensity to textDensity for backward compatibility
       const textDensity = textContentDensity;
 
-      // TODO: Move these to appropriate contexts
-      const slideItemDuration = 2000;
-      const disableAutoScrollOnClick = false;
-      const classNames = undefined;
-      const slideShowType = 'reveal';
-      const showProgressOnSlideshow = true;
+      // Values now sourced from context above
 
       const {
         paused,

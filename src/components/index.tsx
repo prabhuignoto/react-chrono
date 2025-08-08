@@ -163,20 +163,12 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       }
       
       setTimeLineItems((lineItems) =>
-        lineItems.map((item, index) => {
-          // Visibility logic based on mode
-          let isVisible = true; // Default to visible for all modes
-          if (mode === 'HORIZONTAL') {
-            isVisible = index === actvTimelineIndex; // Only active item visible in HORIZONTAL mode
-          }
-          // For HORIZONTAL_ALL and all other modes, all items should be visible
-          
-          return {
-            ...item,
-            active: index === actvTimelineIndex,
-            visible: isVisible,
-          };
-        }),
+        lineItems.map((item, index) => ({
+          ...item,
+          active: index === actvTimelineIndex,
+          // Always keep horizontal items visible so points are always shown
+          visible: true,
+        })),
       );
 
       setActiveTimelineItem(actvTimelineIndex);

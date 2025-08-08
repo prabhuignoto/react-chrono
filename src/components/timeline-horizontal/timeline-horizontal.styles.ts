@@ -22,7 +22,7 @@ export const TimelineHorizontalWrapper = styled.ul<{ $flipLayout?: boolean }>`
 
 export const TimelineItemWrapper = styled.li<{ width: number }>`
   width: ${(p) => p.width}px;
-  visibility: hidden;
+  visibility: visible; /* Always show timeline points */
   display: flex;
   align-items: center;
   justify-content: center;

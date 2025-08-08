@@ -41,11 +41,10 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
       mediaHeight,
       textOverlay,
       mediaSettings,
+      // consume from context rather than placeholders
+      fontSizes,
+      classNames,
     } = useTimelineContext();
-    
-    // TODO: Move these to appropriate contexts
-    const fontSizes = undefined;
-    const classNames = undefined;
 
     // Use view options hook for calculated values
     const {

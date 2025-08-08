@@ -252,6 +252,14 @@ export const TimelineContentContainer = styled.div<{
       p.$highlight && p.$active ? p.theme?.primary : 'transparent'};
   }
 
+  /* Highlight active cards in horizontal_all mode */
+  ${(p) =>
+    p.$highlight && p.$active &&
+    `
+    border: 2px solid ${p.theme?.primary};
+    box-shadow: 0 0 0 2px ${p.theme?.primary}22;
+  `}
+
   /* Remove outline when toolbar navigation is active */
   [data-toolbar-navigation='true'] & {
     outline-color: transparent;

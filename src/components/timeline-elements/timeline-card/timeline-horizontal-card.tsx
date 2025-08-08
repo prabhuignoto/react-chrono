@@ -130,6 +130,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         iconChild={iconChild}
         active={active}
         disabled={disableInteraction}
+        itemId={id}
       />
 
       <TimelineTitleContainer

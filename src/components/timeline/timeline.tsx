@@ -142,6 +142,15 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     updateHorizontalAllCards,
   });
 
+  // Ensure context's showAllCardsHorizontal stays in sync with computed mode
+  useEffect(() => {
+    if (timelineMode === 'HORIZONTAL_ALL') {
+      updateHorizontalAllCards(true);
+    } else if (timelineMode === 'HORIZONTAL') {
+      updateHorizontalAllCards(false);
+    }
+  }, [timelineMode, updateHorizontalAllCards]);
+
   // Debug logging for timeline mode
   if (typeof window !== 'undefined') {
     console.log(
@@ -249,8 +258,43 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       activeTimelineItem !== activeItemIndex.current
     ) {
       syncActiveItemIndex(activeTimelineItem);
+      // On activation change in horizontal modes, move keyboard focus to the active timeline point if present
+      if (mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL') {
+        requestAnimationFrame(() => {
+          const activeId = items[activeTimelineItem ?? 0]?.id;
+          if (activeId) {
+            const circle = document.querySelector(
+              `button[data-testid="timeline-circle"][data-item-id="${activeId}"]`,
+            ) as HTMLButtonElement | null;
+            if (circle) {
+              try {
+                circle.focus({ preventScroll: false });
+                return;
+              } catch (_) {
+                // fall through to card focus
+              }
+            }
+            // Fallback: focus the active card container rendered via portal
+            const cardContainer = document.getElementById(
+              `timeline-card-${activeId}`,
+            );
+            if (cardContainer) {
+              try {
+                (cardContainer as HTMLElement).focus({ preventScroll: false });
+                return;
+              } catch (_) {
+                // fall through
+              }
+            }
+          }
+          const ele = timelineMainRef.current;
+          if (ele) {
+            ele.focus({ preventScroll: false });
+          }
+        });
+      }
     }
-  }, [activeTimelineItem, syncActiveItemIndex]);
+  }, [activeTimelineItem, syncActiveItemIndex, mode, timelineMainRef, items]);
 
   const {
     searchQuery,

@@ -63,8 +63,8 @@ const TimelineCardPortal: React.FC<TimelineCardPortalProps> = ({
         ref={contentRef}
         id={`timeline-card-${id}`}
         theme={theme}
-        $active={active && !disableInteraction}
-        $highlight={showAllCardsHorizontal}
+        $active={active}
+        $highlight={showAllCardsHorizontal || active}
         tabIndex={0}
         $cardWidth={cardWidth}
       >

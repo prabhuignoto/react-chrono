@@ -8,7 +8,7 @@ import React, {
   FunctionComponent, // Explicit import
   MouseEvent,
 } from 'react';
-import { useTimelineStaticConfig, useTimelineDynamicState, useTimelineMemoizedObjects } from '../contexts/TimelineContextProvider';
+import { useTimelineStaticConfig, useTimelineMemoizedObjects } from '../contexts';
 // Shape seems to be a shared styled component, potentially defined elsewhere
 import { Shape } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
 import {

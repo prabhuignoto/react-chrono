@@ -216,6 +216,7 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
     showProgressOnSlideshow = true,
     showOverallSlideshowProgress,
     slideShow,
+    slideShowType,
     
     // Other props
     titleDateFormat = 'MMM DD, YYYY',
@@ -276,14 +277,15 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
   // ==========================================
   // MODE SYNCHRONIZATION
   // ==========================================
-  // Update showAllCardsHorizontal when mode changes
+  // Update showAllCardsHorizontal when mode or prop changes
   useEffect(() => {
     if (mode === 'HORIZONTAL_ALL') {
       setShowAllCards(true);
     } else if (mode === 'HORIZONTAL') {
-      setShowAllCards(false);
+      // Respect the incoming prop to allow HORIZONTAL + showAllCardsHorizontal
+      setShowAllCards(showAllCardsHorizontal);
     }
-  }, [mode]);
+  }, [mode, showAllCardsHorizontal]);
 
   // ==========================================
   // RESPONSIVE DETECTION
@@ -373,8 +375,8 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
   );
 
   const memoizedSlideShowType = useMemo(
-    () => getSlideShowType(mode),
-    [mode]
+    () => slideShowType ?? getSlideShowType(mode),
+    [slideShowType, mode]
   );
 
   // ==========================================
