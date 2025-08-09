@@ -70,7 +70,7 @@ export const useTimelineNavigation = ({
         const targetElement = findTargetElement(targetItem.id);
         if (targetElement) {
           scrollToElement(targetElement, mode);
-          if (isKeyboardNavigation && hasFocus && (targetElement as any).focus) {
+          if (hasFocus && (targetElement as any).focus) {
             try {
               (targetElement as any).focus({ preventScroll: true });
             } catch {}
@@ -104,7 +104,7 @@ export const useTimelineNavigation = ({
         const targetElement = findTargetElement(targetItem.id);
         if (targetElement) {
           scrollToElement(targetElement, mode);
-          if (isKeyboardNavigation && hasFocus && (targetElement as any).focus) {
+          if (hasFocus && (targetElement as any).focus) {
             try {
               (targetElement as any).focus({ preventScroll: true });
             } catch {}
@@ -136,7 +136,7 @@ export const useTimelineNavigation = ({
         const targetElement = findTargetElement(targetItem.id);
         if (targetElement) {
           scrollToElement(targetElement, mode);
-          if (isKeyboardNavigation && hasFocus && (targetElement as any).focus) {
+          if (hasFocus && (targetElement as any).focus) {
             try {
               (targetElement as any).focus({ preventScroll: true });
             } catch {}
@@ -169,7 +169,7 @@ export const useTimelineNavigation = ({
         const targetElement = findTargetElement(targetItem.id);
         if (targetElement) {
           scrollToElement(targetElement, mode);
-          if (isKeyboardNavigation && hasFocus && (targetElement as any).focus) {
+          if (hasFocus && (targetElement as any).focus) {
             try {
               (targetElement as any).focus({ preventScroll: true });
             } catch {}

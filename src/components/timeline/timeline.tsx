@@ -263,24 +263,23 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         requestAnimationFrame(() => {
           const activeId = items[activeTimelineItem ?? 0]?.id;
           if (activeId) {
+            // Prefer focusing the card container in horizontal modes
+            const cardContainer = document.getElementById(`timeline-card-${activeId}`);
+            if (cardContainer) {
+              try {
+                (cardContainer as HTMLElement).focus({ preventScroll: false });
+                return;
+              } catch (_) {
+                // fall through to point focus
+              }
+            }
+
             const circle = document.querySelector(
               `button[data-testid="timeline-circle"][data-item-id="${activeId}"]`,
             ) as HTMLButtonElement | null;
             if (circle) {
               try {
                 circle.focus({ preventScroll: false });
-                return;
-              } catch (_) {
-                // fall through to card focus
-              }
-            }
-            // Fallback: focus the active card container rendered via portal
-            const cardContainer = document.getElementById(
-              `timeline-card-${activeId}`,
-            );
-            if (cardContainer) {
-              try {
-                (cardContainer as HTMLElement).focus({ preventScroll: false });
                 return;
               } catch (_) {
                 // fall through

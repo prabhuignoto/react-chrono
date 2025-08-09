@@ -80,7 +80,16 @@ export const useTimelineItemNavigation = ({
           }
         }
       } else {
-        // For horizontal modes, try multiple selectors
+        // For horizontal modes, prefer focusing the card container first
+        const cardElement = document.getElementById(`timeline-card-${itemId}`) as HTMLElement;
+        if (cardElement) {
+          if (!cardElement.hasAttribute('tabindex')) {
+            cardElement.setAttribute('tabindex', '-1');
+          }
+          return cardElement;
+        }
+
+        // Fallback to the timeline point wrapper element
         const timelinePointElement = document.getElementById(
           `timeline-${mode.toLowerCase()}-item-${itemId}`,
         ) as any;
@@ -97,15 +106,6 @@ export const useTimelineItemNavigation = ({
             // Ignore attribute errors in test environment
           }
           return timelinePointElement as unknown as HTMLElement;
-        }
-
-        // Try to find the card element
-        const cardElement = document.getElementById(`timeline-card-${itemId}`) as HTMLElement;
-        if (cardElement) {
-          if (!cardElement.hasAttribute('tabindex')) {
-            cardElement.setAttribute('tabindex', '-1');
-          }
-          return cardElement;
         }
 
         // Try to find any element with the item ID

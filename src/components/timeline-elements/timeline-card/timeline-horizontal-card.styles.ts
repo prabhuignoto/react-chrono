@@ -221,7 +221,8 @@ export const TimelineTitleContainer = styled.div`
     margin-bottom: 1em;
   }
 
-  &.horizontal {
+  &.horizontal,
+  &.horizontal_all {
     position: absolute;
     top: -2rem;
     left: 50%;
@@ -267,7 +268,8 @@ export const TimelineContentContainer = styled.div<{
 
   margin: 1rem;
 
-  &.horizontal {
+  &.horizontal,
+  &.horizontal_all {
     min-width: ${(p) => p.$cardWidth}px;
   }
 

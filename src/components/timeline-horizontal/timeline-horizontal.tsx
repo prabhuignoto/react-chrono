@@ -104,6 +104,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
         )}
         as="li"
         aria-current={item.active ? 'true' : undefined}
+        id={`timeline-${mode.toLowerCase()}-item-${item.id}`}
       >
         <TimelineCard
           {...item}
