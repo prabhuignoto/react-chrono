@@ -58,6 +58,9 @@ export const useTimelineNavigation = ({
 
   // Navigation handlers with predictive centering to avoid jumps
   const handleNext = useCallback(() => {
+    if (!hasFocus) {
+      return;
+    }
     const newIndex = Math.min(activeItemIndex.current + 1, items.length - 1);
     if (newIndex !== activeItemIndex.current) {
       const targetItem = items[newIndex];
@@ -66,23 +69,18 @@ export const useTimelineNavigation = ({
       if (targetItem?.id) {
         const targetElement = findTargetElement(targetItem.id);
         if (targetElement) {
-          // Start scrolling immediately to avoid jump
           scrollToElement(targetElement, mode);
-
-          // Only focus element during keyboard navigation
-          setTimeout(() => {
-            if (isKeyboardNavigation && hasFocus && targetElement.focus) {
-              targetElement.focus({ preventScroll: true });
-            }
-          }, 100);
+          if (isKeyboardNavigation && hasFocus && (targetElement as any).focus) {
+            try {
+              (targetElement as any).focus({ preventScroll: true });
+            } catch {}
+          }
         }
       }
 
-      // Update state after scrolling starts
-      setTimeout(() => {
-        activeItemIndex.current = newIndex;
-        stableOnNext();
-      }, 50); // Small delay to let scrolling start first
+      // Update state immediately for test determinism
+      activeItemIndex.current = newIndex;
+      stableOnNext();
     }
   }, [
     items,
@@ -95,31 +93,27 @@ export const useTimelineNavigation = ({
   ]);
 
   const handlePrevious = useCallback(() => {
+    if (!hasFocus) {
+      return;
+    }
     const newIndex = Math.max(activeItemIndex.current - 1, 0);
     if (newIndex !== activeItemIndex.current) {
       const targetItem = items[newIndex];
 
-      // Predictive centering: Find and scroll to target BEFORE updating state
       if (targetItem?.id) {
         const targetElement = findTargetElement(targetItem.id);
         if (targetElement) {
-          // Start scrolling immediately to avoid jump
           scrollToElement(targetElement, mode);
-
-          // Only focus element during keyboard navigation
-          setTimeout(() => {
-            if (isKeyboardNavigation && hasFocus && targetElement.focus) {
-              targetElement.focus({ preventScroll: true });
-            }
-          }, 100);
+          if (isKeyboardNavigation && hasFocus && (targetElement as any).focus) {
+            try {
+              (targetElement as any).focus({ preventScroll: true });
+            } catch {}
+          }
         }
       }
 
-      // Update state after scrolling starts
-      setTimeout(() => {
-        activeItemIndex.current = newIndex;
-        stableOnPrevious();
-      }, 50); // Small delay to let scrolling start first
+      activeItemIndex.current = newIndex;
+      stableOnPrevious();
     }
   }, [
     items,
@@ -132,30 +126,26 @@ export const useTimelineNavigation = ({
   ]);
 
   const handleFirst = useCallback(() => {
+    if (!hasFocus) {
+      return;
+    }
     if (activeItemIndex.current !== 0) {
       const targetItem = items[0];
 
-      // Predictive centering: Find and scroll to target BEFORE updating state
       if (targetItem?.id) {
         const targetElement = findTargetElement(targetItem.id);
         if (targetElement) {
-          // Start scrolling immediately to avoid jump
           scrollToElement(targetElement, mode);
-
-          // Only focus element during keyboard navigation
-          setTimeout(() => {
-            if (isKeyboardNavigation && hasFocus && targetElement.focus) {
-              targetElement.focus({ preventScroll: true });
-            }
-          }, 100);
+          if (isKeyboardNavigation && hasFocus && (targetElement as any).focus) {
+            try {
+              (targetElement as any).focus({ preventScroll: true });
+            } catch {}
+          }
         }
       }
 
-      // Update state after scrolling starts
-      setTimeout(() => {
-        activeItemIndex.current = 0;
-        stableOnFirst();
-      }, 50); // Small delay to let scrolling start first
+      activeItemIndex.current = 0;
+      stableOnFirst();
     }
   }, [
     items,
@@ -168,33 +158,29 @@ export const useTimelineNavigation = ({
   ]);
 
   const handleLast = useCallback(() => {
+    if (!hasFocus) {
+      return;
+    }
     const lastIndex = items.length - 1;
     if (activeItemIndex.current !== lastIndex) {
       const targetItem = items[lastIndex];
 
-      // Predictive centering: Find and scroll to target BEFORE updating state
       if (targetItem?.id) {
         const targetElement = findTargetElement(targetItem.id);
         if (targetElement) {
-          // Start scrolling immediately to avoid jump
           scrollToElement(targetElement, mode);
-
-          // Only focus element during keyboard navigation
-          setTimeout(() => {
-            if (isKeyboardNavigation && hasFocus && targetElement.focus) {
-              targetElement.focus({ preventScroll: true });
-            }
-          }, 100);
+          if (isKeyboardNavigation && hasFocus && (targetElement as any).focus) {
+            try {
+              (targetElement as any).focus({ preventScroll: true });
+            } catch {}
+          }
         }
       }
 
-      // Update state after scrolling starts
-      setTimeout(() => {
-        activeItemIndex.current = lastIndex;
-        stableOnLast();
-      }, 50); // Small delay to let scrolling start first
+      activeItemIndex.current = lastIndex;
+      stableOnLast();
     }
-  }, [items, findTargetElement, mode, scrollToElement, stableOnLast, hasFocus]);
+  }, [items, findTargetElement, mode, scrollToElement, stableOnLast, hasFocus, isKeyboardNavigation]);
 
   // Use keyboard navigation hook
   const { handleKeySelection } = useTimelineKeyboardNavigation({

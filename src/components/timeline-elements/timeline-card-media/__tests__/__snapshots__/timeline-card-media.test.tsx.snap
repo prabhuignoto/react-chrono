@@ -4,7 +4,7 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
 <div>
   <div
     align="center"
-    class="sc-bRKDuR kiHqwW card-media-wrapper"
+    class="sc-bRKDuR kiHqwW card-media-wrapper card-media"
     mode="VERTICAL_ALTERNATING"
   >
     <div
@@ -32,7 +32,7 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
       class="sc-hwkwBN bqxVgB"
     />
     <span
-      class="sc-dntSTA bSdsRI card-sub-title"
+      class="sc-dntSTA LYbsP card-sub-title card-subtitle"
     >
       This is another test
     </span>
@@ -44,7 +44,7 @@ exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
 <div>
   <div
     align="center"
-    class="sc-bRKDuR kiHqwW card-media-wrapper"
+    class="sc-bRKDuR kiHqwW card-media-wrapper card-media"
     mode="VERTICAL_ALTERNATING"
   >
     <iframe
@@ -65,7 +65,7 @@ exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
       class="sc-hwkwBN bqxVgB"
     />
     <span
-      class="sc-dntSTA bSdsRI card-sub-title"
+      class="sc-dntSTA LYbsP card-sub-title card-subtitle"
     >
       This is another test
     </span>

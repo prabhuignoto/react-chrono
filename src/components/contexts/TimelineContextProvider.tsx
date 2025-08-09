@@ -17,6 +17,7 @@ import {
   TimelineProps as TimelinePropsModel,
   TextDensity,
   ButtonTexts,
+  SlideShowType,
 } from '@models/TimelineModel';
 import { Theme } from '@models/Theme';
 import {
@@ -123,7 +124,7 @@ export interface TimelineMemoizedObjects {
   classNames: Record<string, string>;
   fontSizes: Record<string, string>;
   semanticTags: Record<string, string>;
-  slideShowType: string;
+  slideShowType: SlideShowType;
 }
 
 /**
@@ -204,8 +205,8 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
     useReadMore = true,
     textOverlay,
     
-    // Scrolling props
-    scrollable = true,
+    // Scrolling props (default aligns with legacy behavior: no scrollbar)
+    scrollable = { scrollbar: false },
     
     // Toolbar props
     toolbarPosition = 'top',

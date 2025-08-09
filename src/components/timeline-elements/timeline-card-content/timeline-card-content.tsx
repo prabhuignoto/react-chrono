@@ -23,6 +23,7 @@ import { ContentHeader } from './content-header';
 import { DetailsText } from './details-text';
 import { getTextOrContent } from './text-or-content';
 import { TimelineItemContentWrapper } from './timeline-card-content.styles';
+import { SlideShowType } from '@models/TimelineModel';
 import NestedTimelineRenderer from '../nested-timeline-renderer/nested-timeline-renderer';
 
 // Custom equality function for React.memo to prevent unnecessary re-renders
@@ -378,7 +379,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           $active={active}
           $branchDir={branchDir}
           $slideShowActive={slideShowActive}
-          $slideShowType={slideShowType}
+          $slideShowType={slideShowType as SlideShowType}
           tabIndex={active ? 0 : -1}
           role="article"
           aria-current={active ? 'true' : 'false'}
