@@ -30,6 +30,10 @@ export const lightThemeClass = createTheme(vars, {
   zIndex: {
     base: '1',
     timelineCard: '10',
+    controls: '1000',
+    popover: '100',
+    outlinePane: '50',
+    verticalItem: '9',
   },
 });
 
@@ -62,6 +66,10 @@ export const darkThemeClass = createTheme(vars, {
   zIndex: {
     base: '1',
     timelineCard: '10',
+    controls: '1000',
+    popover: '100',
+    outlinePane: '50',
+    verticalItem: '9',
   },
 });
 

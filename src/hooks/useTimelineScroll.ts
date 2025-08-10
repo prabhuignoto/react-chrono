@@ -14,7 +14,7 @@ export const useTimelineScroll = ({
   setNewOffset,
   scrollEndThrottleMs = 100,
 }: UseTimelineScrollProps) => {
-  const timelineMainRef = useRef<HTMLDivElement>(null);
+  const timelineMainRef = useRef<HTMLDivElement>(null!);
   const horizontalContentRef = useRef<HTMLDivElement | null>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const setNewOffsetRef = useRef(setNewOffset);

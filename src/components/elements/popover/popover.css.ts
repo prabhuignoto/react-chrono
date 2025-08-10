@@ -25,7 +25,7 @@ export const popoverHolder = style({
   opacity: 0,
   transition: 'opacity 0.2s ease-in-out, transform 0.2s ease-in-out',
   transform: 'translateY(-10px)',
-  zIndex: 100, // aligned with zIndex.popover intent
+  zIndex: vars.zIndex.popover,
   selectors: {
     '&::-webkit-scrollbar': { width: '0.3em' },
     '&::-webkit-scrollbar-track': { backgroundColor: vars.color.toolbarBg },

@@ -22,7 +22,7 @@ export const verticalItemWrapper = style({
   width: '100%',
   alignItems: 'stretch',
   justifyContent: 'center',
-  zIndex: 9,
+  zIndex: vars.zIndex.verticalItem,
   margin: '1rem 0',
   listStyle: 'none',
 });

@@ -48,7 +48,7 @@ export const checkbox = style({
   height: '1.25rem',
   margin: '0 0.25rem 0 0.1rem',
   borderRadius: '50%',
-  color: '#fff',
+  color: vars.color.cardBg,
 });
 
 export const checkboxSelected = style({

@@ -170,7 +170,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     handleMainScroll,
   } = useTimelineScroll({
     mode,
-    onScrollEnd,
+    onScrollEnd: onScrollEnd || (() => {}),
     setNewOffset,
   });
 
@@ -189,14 +189,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     mode: timelineMode,
     timelineId: id,
     hasFocus,
-    flipLayout,
-    slideShowRunning,
-    isKeyboardNavigation,
-    onTimelineUpdated,
-    onNext,
-    onPrevious,
-    onFirst,
-    onLast,
+    flipLayout: !!flipLayout,
+    slideShowRunning: !!slideShowRunning,
+    isKeyboardNavigation: !!isKeyboardNavigation,
+    onTimelineUpdated: onTimelineUpdated || (() => {}),
+    onNext: onNext || (() => {}),
+    onPrevious: onPrevious || (() => {}),
+    onFirst: onFirst || (() => {}),
+    onLast: onLast || (() => {}),
   });
 
   // Wrap timeline item click to reset navigation states
@@ -325,7 +325,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       () => items.map((item) => ({ ...item, wrapperId: id })),
       [items, id],
     ),
-    onTimelineUpdated,
+    onTimelineUpdated: onTimelineUpdated || (() => {}),
     handleTimelineItemClick,
   });
 
@@ -500,12 +500,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   // Ensure all styled components are properly integrated
   return (
     <Wrapper
-      ref={wrapperRef}
+      ref={wrapperRef as unknown as React.RefObject<HTMLDivElement>}
       onKeyDown={handleKeyDown}
       onFocus={handleFocus}
       onBlur={handleBlur}
       className={wrapperClass}
-      $cardPositionHorizontal={cardPositionHorizontal}
+      $cardPositionHorizontal={(cardPositionHorizontal || 'TOP') as 'TOP' | 'BOTTOM'}
       theme={theme}
       $isDarkMode={darkMode}
       $isFullscreen={isFullscreen}
@@ -519,24 +519,29 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         }
       }}
       tabIndex={isChild ? -1 : 0}
+    $timelineHeight={
+      typeof props.timelineHeight === 'number'
+        ? `${props.timelineHeight}px`
+        : props.timelineHeight || '100%'
+    }
     >
       {canShowToolbar && (
         <ToolbarWrapper position={toolbarPosition}>
           <TimelineToolbar
-            activeTimelineItem={activeTimelineItem}
+            activeTimelineItem={activeTimelineItem ?? 0}
             totalItems={items.length}
-            slideShowEnabled={slideShowEnabled}
-            slideShowRunning={slideShowRunning}
+            slideShowEnabled={!!slideShowEnabled}
+            slideShowRunning={!!slideShowRunning}
             onFirst={handleFirst}
             onLast={handleLast}
             onNext={handleNext}
             onPrevious={handlePrevious}
-            onRestartSlideshow={onRestartSlideshow}
+            onRestartSlideshow={onRestartSlideshow || (() => {})}
             darkMode={darkMode}
             toggleDarkMode={toggleDarkMode}
-            onPaused={onPaused}
+            onPaused={onPaused || (() => {})}
             id={id}
-            flipLayout={flipLayout}
+            flipLayout={!!flipLayout}
             items={items}
             onActivateTimelineItem={handleTimelineItemClick}
             onUpdateTimelineMode={handleTimelineUpdate}
@@ -550,8 +555,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             totalMatches={searchResults.length}
             currentMatchIndex={currentMatchIndex}
             onSearchKeyDown={handleSearchKeyDown}
-            searchInputRef={searchInputRef}
-            timelineRef={wrapperRef}
+            searchInputRef={searchInputRef as unknown as React.RefObject<HTMLInputElement>}
+            timelineRef={wrapperRef as unknown as React.RefObject<HTMLElement>}
             onEnterFullscreen={() => {
               console.log('Entered fullscreen mode');
               setIsFullscreen(true);
@@ -579,33 +584,33 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         />
       )} */}
 
-      <TimelineMainWrapper
-        ref={timelineMainRef}
+    <TimelineMainWrapper
+      ref={timelineMainRef as React.RefObject<HTMLDivElement>}
         $scrollable={canScrollTimeline}
         className={`${mode.toLowerCase()} timeline-main-wrapper`}
         id="timeline-main-wrapper"
-        data-testid="timeline-main-wrapper"
+      data-testid="timeline-main-wrapper"
         theme={theme}
         mode={mode}
         position={toolbarPosition}
         onScroll={handleMainScroll}
       >
         <TimelineView
-          timelineMode={timelineMode}
-          activeTimelineItem={activeTimelineItem}
+        timelineMode={timelineMode}
+        activeTimelineItem={activeTimelineItem ?? 0}
           autoScroll={handleScroll}
           contentDetailsChildren={contentDetailsChildren}
-          hasFocus={hasFocus}
+        hasFocus={hasFocus}
           iconChildren={iconChildren}
           items={items}
           handleTimelineItemClick={handleTimelineItemClick}
           handleTimelineItemElapsed={handleTimelineItemElapsed}
-          slideShowRunning={slideShowRunning}
+        slideShowRunning={!!slideShowRunning}
           id={id}
           theme={theme}
           lineWidth={lineWidth}
-          onOutlineSelection={onOutlineSelection}
-          nestedCardHeight={nestedCardHeight}
+        onOutlineSelection={onOutlineSelection || (() => {})}
+          nestedCardHeight={nestedCardHeight ?? 0}
         />
       </TimelineMainWrapper>
 

@@ -12,8 +12,8 @@ export const closeAnim = keyframes({
 });
 
 export const outlineWrapper = style({
-  background: 'rgba(255, 255, 255, 0.98)',
-  border: `1px solid #f5f5f5`,
+  background: vars.color.cardBg,
+  border: `1px solid ${vars.color.buttonBorder}`,
   height: '50%',
   width: '100%',
   position: 'absolute',
@@ -42,7 +42,7 @@ export const outlinePane = style({
   display: 'flex',
   justifyContent: 'center',
   position: 'absolute',
-  zIndex: 50,
+  zIndex: vars.zIndex.outlinePane,
   boxShadow: `0 5px 10px 2px ${vars.color.shadow}`,
   top: '0',
   left: '0',
@@ -96,7 +96,7 @@ export const listItem = style({
       width: '100%',
       position: 'absolute',
       height: '1px',
-      background: '#ddd',
+      background: vars.color.buttonBorder,
       left: 0,
       right: 0,
       margin: '0 auto',

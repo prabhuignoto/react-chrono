@@ -22,6 +22,7 @@ export const Wrapper = styled.div<{
   $translate?: string;
   $isDarkMode?: boolean;
   $isFullscreen?: boolean;
+  $timelineHeight?: string;
 }>`
   -webkit-transform: ${(props) => getTransform(props.$translate)};
   -moz-transform: ${(props) => getTransform(props.$translate)};
@@ -31,7 +32,7 @@ export const Wrapper = styled.div<{
   display: flex;
   flex-direction: column;
   /* cannot remove this */
-  height: 100%;
+  height: ${(props) => props.$timelineHeight || '100%'};
   z-index: ${zIndex.timelineCard - 2}; /* Base z-index for timeline */
 
   &:focus {
@@ -153,6 +154,9 @@ export const TimelineMainWrapper = styled.div<{
   align-items: flex-start;
   display: flex;
   justify-content: center;
+  /* Fill remaining height under/over the toolbar */
+  flex: 1 1 auto;
+  min-height: 0; /* allow content to shrink within flex container */
   overflow-y: auto;
   overflow-x: visible; /* Allow toolbar to overflow horizontally if needed */
   overscroll-behavior: contain;

@@ -21,7 +21,7 @@ export const navWrapper = style({
   padding: '0.25rem',
   background: vars.color.toolbarBg,
   position: 'relative',
-  zIndex: 20,
+  zIndex: vars.zIndex.controls,
 });
 
 export const navItem = style({
@@ -94,7 +94,7 @@ export const timelineControlContainer = style({
   justifyContent: 'center',
   margin: '0.5rem 0',
   position: 'relative',
-  zIndex: 20,
+  zIndex: vars.zIndex.controls,
 });
 
 export const controlButton = style({

@@ -1,5 +1,7 @@
 import React, { useRef, ReactNode } from 'react';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { cardMediaHeader, mediaDetailsWrapper, mediaDetailsAbsolute, mediaDetailsCard, mediaDetailsGradient } from '../timeline-card-media.css';
+import { gradientVar } from '../timeline-card-media.css';
 import { TitleMemo } from '../../memoized/title-memo';
 import { ButtonWrapper } from '../timeline-card-media-buttons';
 import { ShowOrHideTextButtonMemo } from '../../memoized/show-hide-button';
@@ -68,13 +70,18 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
       ]
         .filter(Boolean)
         .join(' ')}
+      style={
+        canShowGradient && gradientColor
+          ? assignInlineVars({ [gradientVar]: gradientColor })
+          : undefined
+      }
     >
       <div className={cardMediaHeader}>
         <TitleMemo
           title={title}
           theme={theme}
           active={active}
-          url={url}
+          url={url ?? ''}
           fontSize={fontSizes?.cardTitle}
           classString={classNames?.cardTitle}
         />

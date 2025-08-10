@@ -29,6 +29,11 @@ export const vars = createThemeContract({
   zIndex: {
     base: null,
     timelineCard: null,
+    // Centralized z-index tokens to avoid magic numbers in styles
+    controls: null,
+    popover: null,
+    outlinePane: null,
+    verticalItem: null,
   },
 });
 

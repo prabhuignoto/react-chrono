@@ -2,20 +2,22 @@
 
 exports[`Content Header > should match the snapshot 1`] = `
 <div>
-  <header
-    class="sc-hvigdm gMUCoZ"
+  <div
+    class="timeline-card-content_timelineCardHeader__chzdno2"
   >
     <span
-      class="sc-dTvVRJ cBLNAf card-title"
+      class="card-title"
       data-class="card-title"
+      style="font-size: 1.25rem;"
     >
       title
     </span>
     <span
-      class="sc-jwTyAe jKsabi card-sub-title card-subtitle"
+      class="card-sub-title card-subtitle"
+      style="font-size: 0.85rem;"
     >
       content
     </span>
-  </header>
+  </div>
 </div>
 `;
