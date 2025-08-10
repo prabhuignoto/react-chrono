@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/experimental-ct-react';
 import react from '@vitejs/plugin-react';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { resolve } from 'path';
 
 /**
@@ -34,7 +35,7 @@ export default defineConfig({
 
     /* Vite config for component testing */
     ctViteConfig: {
-      plugins: [react()],
+      plugins: [vanillaExtractPlugin(), react()],
       resolve: {
         alias: {
           '@': resolve(__dirname, './src'),

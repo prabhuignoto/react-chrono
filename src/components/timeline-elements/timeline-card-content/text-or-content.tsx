@@ -8,10 +8,7 @@ import {
 } from 'react';
 import xss from 'xss';
 import { useTimelineContext } from '../../contexts';
-import {
-  TimelineContentDetails,
-  TimelineSubContent,
-} from './timeline-card-content.styles';
+import { timelineContentDetails, timelineSubContent } from './timeline-card-content.css';
 
 // Define the type for the TextOrContentModel
 export type TextOrContentModel = Pick<
@@ -45,15 +42,13 @@ const renderTextArray: (
           }
         : null;
     return (
-      <TimelineSubContent
+      <span
+        className={`${timelineSubContent} ${cardTextClassName ?? ''}`}
         key={`timeline-text-${typeof text === 'string' ? text.substring(0, 10) : ''}-${index}`}
-        fontSize={fontSizes?.cardText}
-        className={cardTextClassName}
-        theme={theme}
         {...props}
       >
         {parseDetailsAsHTML ? null : text}
-      </TimelineSubContent>
+      </span>
     );
   });
 };
@@ -110,14 +105,14 @@ const getTextOrContent: (
         const textContentProps = getTextContentProps(textContent);
 
         return (
-          <TimelineContentDetails
-            className={showMore ? 'active' : ''}
-            ref={ref}
-            theme={theme}
+          <p
+            className={timelineContentDetails + ' ' + (showMore ? 'active' : '')}
+            ref={ref as any}
             {...textContentProps}
+            style={{ color: theme?.cardDetailsColor }}
           >
             {shouldNotShowText ? null : textContent}
-          </TimelineContentDetails>
+          </p>
         );
       };
 

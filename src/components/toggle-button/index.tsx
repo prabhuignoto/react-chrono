@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode, memo } from 'react';
 import { useUIState } from '../../hooks/useUIState';
-import { ButtonWrapper, ToggleSwitch } from './toggle-button.styles';
+import { buttonWrapper, toggleSwitch } from './toggle-button.css';
 
 export interface ToggleButtonProps {
   offIcon: ReactNode;
@@ -19,9 +19,9 @@ const ToggleButton: FunctionComponent<ToggleButtonProps> = memo(
     };
 
     return (
-      <ButtonWrapper onClick={handleToggle}>
-        <ToggleSwitch>{on ? offIcon : onIcon}</ToggleSwitch>
-      </ButtonWrapper>
+      <button className={buttonWrapper} onClick={handleToggle} type="button">
+        <span className={toggleSwitch}>{on ? offIcon : onIcon}</span>
+      </button>
     );
   },
 );

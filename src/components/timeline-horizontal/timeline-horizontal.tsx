@@ -3,10 +3,7 @@ import cls from 'classnames';
 import React, { ReactNode, useContext, useMemo, useEffect, useRef } from 'react';
 import { useTimelineContext } from '../contexts';
 import TimelineCard from '../timeline-elements/timeline-card/timeline-horizontal-card';
-import {
-  TimelineHorizontalWrapper,
-  TimelineItemWrapper,
-} from './timeline-horizontal.styles';
+import { timelineHorizontalWrapper, timelineItemWrapper } from './timeline-horizontal.css';
 
 /**
  * TimelineHorizontal
@@ -95,14 +92,14 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   // Memoize the timeline items to prevent unnecessary re-renders
   const timelineItems = useMemo(() => {
     return items.map((item, index) => (
-      <TimelineItemWrapper
+      <li
         key={item.id}
-        width={itemWidth}
         className={cls(
+          timelineItemWrapper,
           (item.visible || showAllCardsHorizontal) ? 'visible' : '',
           'timeline-horz-item-container',
         )}
-        as="li"
+        style={{ width: itemWidth, minWidth: showAllCardsHorizontal ? itemWidth : undefined }}
         aria-current={item.active ? 'true' : undefined}
         id={`timeline-${mode.toLowerCase()}-item-${item.id}`}
       >
@@ -123,7 +120,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
           isNested={isNested}
           nestedCardHeight={nestedCardHeight}
         />
-      </TimelineItemWrapper>
+      </li>
     ));
   }, [
     items,
@@ -144,16 +141,15 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   ]);
 
   return (
-    <TimelineHorizontalWrapper
+    <ul
       ref={listRef}
-      className={wrapperClass}
-      $flipLayout={flipLayout}
+      className={`${timelineHorizontalWrapper} ${wrapperClass}`}
+      style={{ direction: flipLayout ? 'rtl' : 'ltr' }}
       data-testid="timeline-collection"
-      as="ul"
       aria-label="Timeline"
     >
       {timelineItems}
-    </TimelineHorizontalWrapper>
+    </ul>
   );
 };
 

@@ -9,11 +9,22 @@ import ChevronsLeftIcon from '../../icons/chevs-left';
 import ChevronsRightIcon from '../../icons/chevs-right';
 import ReplayIcon from '../../icons/replay-icon';
 import {
-  TimelineControlContainer,
-  TimelineNavButton,
-  TimelineNavWrapper,
-  ScreenReaderOnly,
-} from './timeline-control.styles';
+  controlContainer,
+  controlButton,
+  controlButtonSvg,
+  navButton,
+  navButtonActive,
+  navButtonFocus,
+  navButtonHover,
+  navButtonRotate,
+  navItem,
+  navItemDisabled,
+  navWrapper,
+  srOnly,
+  timelineControlContainer,
+  navButtonSvg,
+} from './timeline-control.css';
+import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
 /**
  * TimelineControl component
@@ -124,100 +135,95 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
   }, [slideShowRunning, slideShowEnabled]);
 
   return (
-    <TimelineControlContainer key="control-wrapper">
+    <div className={timelineControlContainer} key="control-wrapper" style={computeCssVarsFromTheme(theme)}>
       {/* Visually hidden status information for screen readers */}
-      <ScreenReaderOnly as="output" aria-live="polite">
+      <output className={srOnly} aria-live="polite">
         {positionStatus}
         {slideshowStatus && ` ${slideshowStatus}`}
-      </ScreenReaderOnly>
+      </output>
 
-      <TimelineNavWrapper
-        className={cls('timeline-controls', classNames?.controls)}
-        theme={theme}
-        aria-label="Timeline Navigation"
-        role="toolbar"
-      >
+      <div className={cls(navWrapper, 'timeline-controls', classNames?.controls)} aria-label="Timeline Navigation" role="toolbar">
         {/* jump to first */}
         {disableInteraction ? null : (
           <>
-            <div className={`nav-item ${canDisableLeft ? 'disabled' : ''}`}>
-              <TimelineNavButton
-                mode={mode}
-                theme={theme}
+            <div className={cls(navItem, { [navItemDisabled]: canDisableLeft })}>
+              <button
+                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus, {
+                  [navButtonRotate]: rotate,
+                })}
                 onClick={flippedHorizontally ? onLast : onFirst}
                 title={jumpToFirstTitle}
                 aria-label={jumpToFirstTitle}
                 aria-disabled={disableLeft}
                 aria-controls="timeline-main-wrapper"
                 tabIndex={!disableLeft ? 0 : -1}
-                rotate={rotate ? 'TRUE' : 'FALSE'}
                 data-test-id="jump-to-first"
               >
-                <ChevronsLeftIcon />
-              </TimelineNavButton>
+                <span className={navButtonSvg}><ChevronsLeftIcon /></span>
+              </button>
             </div>
 
             {/* previous */}
-            <div className={`nav-item ${canDisableLeft ? 'disabled' : ''}`}>
-              <TimelineNavButton
-                mode={mode}
-                theme={theme}
+            <div className={cls(navItem, { [navItemDisabled]: canDisableLeft })}>
+              <button
+                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus, {
+                  [navButtonRotate]: rotate,
+                })}
                 onClick={flippedHorizontally ? onNext : onPrevious}
                 title={previousTitle}
                 aria-label={previousTitle}
                 aria-disabled={disableLeft}
                 aria-controls="timeline-main-wrapper"
                 tabIndex={!disableLeft ? 0 : -1}
-                rotate={rotate ? 'TRUE' : 'FALSE'}
                 data-test-id="previous"
               >
-                <ChevronLeft />
-              </TimelineNavButton>
+                <span className={navButtonSvg}><ChevronLeft /></span>
+              </button>
             </div>
 
             {/* next */}
-            <div className={`nav-item ${canDisableRight ? 'disabled' : ''}`}>
-              <TimelineNavButton
-                mode={mode}
-                theme={theme}
+            <div className={cls(navItem, { [navItemDisabled]: canDisableRight })}>
+              <button
+                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus, {
+                  [navButtonRotate]: rotate,
+                })}
                 onClick={flippedHorizontally ? onPrevious : onNext}
                 title={nextTitle}
                 aria-label={nextTitle}
                 aria-disabled={disableRight}
                 aria-controls="timeline-main-wrapper"
-                rotate={rotate ? 'TRUE' : 'FALSE'}
                 tabIndex={!disableRight ? 0 : -1}
                 data-test-id="next"
               >
-                <ChevronRightIcon />
-              </TimelineNavButton>
+                <span className={navButtonSvg}><ChevronRightIcon /></span>
+              </button>
             </div>
 
             {/* jump to last */}
-            <div className={`nav-item ${canDisableRight ? 'disabled' : ''}`}>
-              <TimelineNavButton
-                mode={mode}
-                theme={theme}
+            <div className={cls(navItem, { [navItemDisabled]: canDisableRight })}>
+              <button
+                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus, {
+                  [navButtonRotate]: rotate,
+                })}
                 onClick={flippedHorizontally ? onFirst : onLast}
                 title={jumpToLastTitle}
                 aria-label={jumpToLastTitle}
                 aria-disabled={disableRight}
                 aria-controls="timeline-main-wrapper"
                 tabIndex={!disableRight ? 0 : -1}
-                rotate={rotate ? 'TRUE' : 'FALSE'}
                 data-test-id="jump-to-last"
               >
-                <ChevronsRightIcon />
-              </TimelineNavButton>
+                <span className={navButtonSvg}><ChevronsRightIcon /></span>
+              </button>
             </div>
           </>
         )}
 
         {/* slideshow button */}
-        <div className="nav-item">
+        <div className={navItem}>
           {slideShowEnabled && (
-            <TimelineNavButton
-              theme={theme}
+            <button
+              className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus)}
               onClick={slideShowRunning ? handlePause : handlePlay}
               title={playOrPauseTile}
               tabIndex={0}
@@ -226,16 +232,16 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
               aria-pressed={slideShowRunning ? 'true' : 'false'}
               data-test-id="play-pause"
             >
-              {slideShowRunning ? <StopIcon /> : <ReplayIcon />}
-            </TimelineNavButton>
+              <span className={navButtonSvg}>{slideShowRunning ? <StopIcon /> : <ReplayIcon />}</span>
+            </button>
           )}
         </div>
 
         {/* dark toggle button */}
         {enableDarkToggle ? (
-          <div className={`nav-item ${slideShowRunning ? 'disabled' : ''}`}>
-            <TimelineNavButton
-              theme={theme}
+          <div className={cls(navItem, { [navItemDisabled]: slideShowRunning })}>
+            <button
+              className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus)}
               onClick={onToggleDarkMode}
               title={isDark ? buttonTexts?.light : buttonTexts?.dark}
               tabIndex={0}
@@ -243,14 +249,13 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
               aria-label={isDark ? buttonTexts?.light : buttonTexts?.dark}
               aria-pressed={isDark ? 'true' : 'false'}
               data-test-id="dark-toggle"
-              $active={isDark}
             >
-              {isDark ? <SunIcon /> : <MoonIcon />}
-            </TimelineNavButton>
+              <span className={navButtonSvg}>{isDark ? <SunIcon /> : <MoonIcon />}</span>
+            </button>
           </div>
         ) : null}
-      </TimelineNavWrapper>
-    </TimelineControlContainer>
+      </div>
+    </div>
   );
 };
 

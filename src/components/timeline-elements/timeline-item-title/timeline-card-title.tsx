@@ -2,7 +2,8 @@ import { TitleModel } from '@models/TimelineCardTitleModel';
 import cls from 'classnames';
 import React, { useMemo } from 'react';
 import { useTimelineContext } from '../../contexts';
-import { TitleWrapper } from './timeline-card-title.styles';
+import { titleActive, titleWrapper } from './timeline-card-title.css';
+import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
 /**
  * TimelineItemTitle component
@@ -34,15 +35,19 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
   const { fontSizes } = useTimelineContext();
 
   return (
-    <TitleWrapper
+    <div
       className={titleClass}
-      theme={theme}
-      $hide={!title}
-      align={align}
-      $fontSize={fontSizes?.title}
+      style={{
+        ...computeCssVarsFromTheme(theme),
+        fontSize: fontSizes?.title || '1rem',
+        textAlign: align || undefined,
+        visibility: title ? 'visible' : 'hidden',
+      }}
+      data-ve-class={titleWrapper}
+      data-ve-active-class={titleActive}
     >
       {title}
-    </TitleWrapper>
+    </div>
   );
 };
 

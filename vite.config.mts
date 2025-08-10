@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import dts from 'vite-plugin-dts';
 import tsconfig from 'vite-tsconfig-paths';
 import { defineConfig } from 'vite';
@@ -6,9 +7,11 @@ import { defineConfig } from 'vite';
 export default defineConfig(({ mode }) => ({
   publicDir: false,
   plugins: [
+    vanillaExtractPlugin(),
     react(),
     tsconfig(),
-    dts({
+    // Cast to any to allow skipDiagnostics while migrating types
+    (dts as any)({
       entryRoot: 'src',
       tsconfigPath: 'tsconfig.json',
       outDir: 'dist/types',

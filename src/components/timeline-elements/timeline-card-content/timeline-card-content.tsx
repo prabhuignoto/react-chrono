@@ -22,7 +22,8 @@ import { ContentFooter } from './content-footer';
 import { ContentHeader } from './content-header';
 import { DetailsText } from './details-text';
 import { getTextOrContent } from './text-or-content';
-import { TimelineItemContentWrapper } from './timeline-card-content.styles';
+import { baseCard, itemContentWrapper } from './timeline-card-content.css';
+import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { SlideShowType } from '@models/TimelineModel';
 import NestedTimelineRenderer from '../nested-timeline-renderer/nested-timeline-renderer';
 
@@ -98,8 +99,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       // Use improved focus management
       const containerRef = useFocusManager({
-        shouldFocus: hasFocus,
-        isActive: active,
+        shouldFocus: !!hasFocus,
+        isActive: !!active,
         preventScroll: true,
         restoreFocus: true,
       });
@@ -140,12 +141,12 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         setupTimer,
         setStartWidth,
       } = useSlideshow(
-        progressRef,
-        active,
-        slideShowActive,
+        progressRef as unknown as React.RefObject<HTMLElement>,
+        !!active,
+        !!slideShowActive,
         slideItemDuration,
-        id,
-        onElapsed,
+        id || '',
+               onElapsed,
       );
 
       const {
@@ -289,7 +290,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             }
 
             // Then trigger the click handler which will handle scrolling
-            onClick(id);
+            onClick(id || '');
           }
         },
         [onClick, id, disableInteraction, slideShowActive, active],
@@ -346,8 +347,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         if (textOverlay && (detailedText ?? customContent ?? timelineContent)) {
           return getTextOrContent({
             timelineContent,
-            theme,
-            detailedText,
+            theme: theme!,
+            detailedText: detailedText!,
             showMore,
           });
         }
@@ -373,69 +374,57 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [textOverlay, media, isNested, cardHeight, nestedCardHeight]);
 
       return (
-        <TimelineItemContentWrapper
-          as="article"
+        <section
           aria-label={accessibleLabel}
           ref={containerRef}
           onClick={handleCardClick}
-          className={`timeline-card-content ${active ? 'active' : ''} ${
-            classNames?.card ?? ''
-          }`}
+          className={`timeline-card-content ${active ? 'active' : ''} ${classNames?.card ?? ''} ${baseCard} ${itemContentWrapper}`}
           data-testid="timeline-card-content"
           data-item-id={id}
-          $active={active}
-          $branchDir={branchDir}
-          $slideShowActive={slideShowActive}
-          $slideShowType={slideShowType as SlideShowType}
           tabIndex={active ? 0 : -1}
           role="article"
           aria-current={active ? 'true' : 'false'}
           onDoubleClick={toggleShowMore}
-          $minHeight={cardMinHeight}
-          $maxWidth={cardWidth}
-          mode={mode}
-          $noMedia={!media}
-          $textOverlay={textOverlay}
-          $isNested={isNested}
-          $highlight={highlightCardsOnHover}
-          $borderLessCards={borderLessCards}
-          $textDensity={textDensity}
-          $customContent={!!customContent}
-          $theme={theme}
+          style={{
+            ...computeCssVarsFromTheme(theme),
+            minHeight: customContent ? undefined : cardMinHeight,
+            height: textOverlay ? 0 : customContent ? cardMinHeight : undefined,
+            maxWidth: cardWidth ? `${cardWidth}px` : '100%',
+          }}
         >
           {/* Only show the content header if we're not using text overlay mode with media */}
           {(!textOverlay || !media) && (
             <ContentHeader
               title={title}
-              url={url}
-              media={media}
+              url={url || ''}
+              media={media as any}
               content={content}
               cardTitle={cardTitle}
-              theme={theme}
+              theme={theme as any}
             />
           )}
 
           {media && (
             <CardMedia
-              active={active}
+              active={!!active}
               cardHeight={cardHeight}
               content={content}
               hideMedia={showMore}
-              id={id}
-              media={media}
+              id={id || ''}
+              media={media as any}
               onMediaStateChange={handleMediaState}
-              slideshowActive={slideShowActive}
-              theme={theme}
+              slideshowActive={!!slideShowActive}
+              theme={theme as any}
               title={typeof title === 'string' ? title : ''}
-              url={url}
+               url={url || ''}
               startWidth={startWidth}
-              detailsText={detailsTextComponent}
+              detailsText={detailsTextComponent as any}
               paused={paused}
               remainInterval={remainInterval}
-              showProgressBar={canShowProgressBar}
-              triangleDir={triangleDir}
+              showProgressBar={!!canShowProgressBar}
+              triangleDir={triangleDir || ''}
               resuming={isResuming}
-              progressRef={progressRef}
+              progressRef={progressRef as any}
             />
           )}
 
@@ -455,9 +444,9 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
           {canShowNestedTimeline && (
             <NestedTimelineRenderer
-              items={items}
+              items={items || []}
               mode={'VERTICAL'}
-              nestedCardHeight={nestedCardHeight}
+              nestedCardHeight={nestedCardHeight || 0}
               isChild={true}
             />
           )}
@@ -465,18 +454,18 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           {canShowReadMore && canShowMore && !textOverlay && (
             <ContentFooter
               onExpand={toggleShowMore}
-              triangleDir={triangleDir}
+              triangleDir={triangleDir || ''}
               showMore={showMore}
               textContentIsLarge={textContentLarge}
               showReadMore={canShowReadMore}
               remainInterval={remainInterval}
               startWidth={startWidth}
               canShow={!!detailedText}
-              isNested={isNested}
-              theme={theme}
+              isNested={!!isNested}
+              theme={theme as any}
             />
           )}
-        </TimelineItemContentWrapper>
+        </section>
       );
     },
     arePropsEqual,

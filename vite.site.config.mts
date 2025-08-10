@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { defineConfig } from 'vite';
 import tsconfig from 'vite-tsconfig-paths';
 
@@ -7,7 +8,7 @@ export default defineConfig({
     outDir: 'dist_site',
     sourcemap: true,
   },
-  plugins: [react(), tsconfig()],
+  plugins: [vanillaExtractPlugin(), react(), tsconfig()],
   root: './',
   server: {
     port: 4444,

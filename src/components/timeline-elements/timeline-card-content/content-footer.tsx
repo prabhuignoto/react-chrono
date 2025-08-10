@@ -7,7 +7,7 @@ import {
 import { useTimelineContext } from '../../contexts';
 import ChevronIcon from '../../icons/chev-right';
 import { ContentFooterProps } from './header-footer.model';
-import { ChevronIconWrapper, ShowMore } from './timeline-card-content.styles';
+import { chevronIconWrapper, showMoreButton } from './timeline-card-content.css';
 
 /**
  * ContentFooter
@@ -62,23 +62,21 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   return (
     <>
       {canShowMore ? (
-        <ShowMore
-          className="show-more"
+        <button
+          className={showMoreButton}
           onPointerDown={handleClick}
           onKeyUp={(event) => {
             if (event.key === 'Enter') {
               onExpand();
             }
           }}
-          show={'true'}
-          theme={theme}
           tabIndex={0}
         >
           {<span>{showMore ? 'read less' : 'read more'}</span>}
-          <ChevronIconWrapper collapsed={showMore ? 'true' : 'false'}>
+          <span className={chevronIconWrapper}>
             <ChevronIcon />
-          </ChevronIconWrapper>
-        </ShowMore>
+          </span>
+        </button>
       ) : null}
     </>
   );

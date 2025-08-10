@@ -3,10 +3,8 @@ import { useTimelineContext } from '../../contexts';
 import { SubTitleMemo } from '../memoized/subtitle-memo';
 import { TitleMemo } from '../memoized/title-memo';
 import { ContentHeaderProps } from './header-footer.model';
-import {
-  CardTitleSemantic,
-  TimelineCardHeader,
-} from './timeline-card-content.styles';
+import { timelineCardHeader } from './timeline-card-content.css';
+// Styled component removed in VE migration
 
 /**
  * ContentHeader component
@@ -29,16 +27,12 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
     const isNotMedia = useMemo(() => !media, [media]);
 
     return (
-      <TimelineCardHeader>
+      <div className={timelineCardHeader}>
         {/* Render mobile title only if cardTitle exists */}
         {isMobile && cardTitle ? (
-          <CardTitleSemantic
-            as={semanticTags?.cardTitle ?? 'span'}
-            $fontSize={'1.2rem'}
-            theme={theme}
-          >
+          <span style={{ fontSize: '1.2rem', color: theme?.cardTitleColor }}>
             {cardTitle}
-          </CardTitleSemantic>
+          </span>
         ) : null}
 
         {isNotMedia ? (
@@ -61,7 +55,7 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
             classString={classNames?.cardSubTitle}
           />
         ) : null}
-      </TimelineCardHeader>
+      </div>
     );
   },
 );

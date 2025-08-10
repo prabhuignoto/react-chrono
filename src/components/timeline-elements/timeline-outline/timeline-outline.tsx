@@ -11,10 +11,17 @@ import MenuIcon from '../../icons/menu';
 import { OutlineItemList } from './timeline-outline-item-list';
 import { TimelineOutlineModel } from './timeline-outline.model';
 import {
-  OutlineButton,
-  OutlinePane,
-  OutlineWrapper,
-} from './timeline-outline.styles';
+  outlineButton,
+  buttonLeft,
+  buttonRight,
+  outlinePane,
+  outlineWrapper,
+  outlineWrapperClosed,
+  outlineWrapperOpen,
+  outlineLeft,
+  outlineRight,
+} from './timeline-outline.css';
+import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { useOutlinePosition } from './hooks/useOutlinePosition';
 
 class TimelineOutlineError extends React.Component<
@@ -94,22 +101,27 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
   }
 
   return (
-    <TimelineOutlineError onError={onError}>
-      <OutlineWrapper
-        position={position}
-        open={openPane}
+    <TimelineOutlineError onError={onError as (error: Error) => void}>
+      <div
+        className={[
+          outlineWrapper,
+          openPane ? outlineWrapperOpen : outlineWrapperClosed,
+          position === 0 ? outlineLeft : outlineRight,
+        ].join(' ')}
         aria-expanded={openPane}
         role="complementary"
+        style={computeCssVarsFromTheme(mergedTheme)}
       >
-        <OutlineButton
+        <button
           onPointerDown={togglePane}
-          theme={mergedTheme}
-          open={openPane}
-          position={position}
+          className={[
+            outlineButton,
+            position === 0 ? buttonLeft : buttonRight,
+          ].join(' ')}
         >
           {openPane ? <CloseIcon /> : <MenuIcon />}
-        </OutlineButton>
-        <OutlinePane open={openPane}>
+        </button>
+        <div className={outlinePane}>
           {showList && (
             <OutlineItemList
               items={items}
@@ -117,8 +129,8 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
               theme={mergedTheme}
             />
           )}
-        </OutlinePane>
-      </OutlineWrapper>
+        </div>
+      </div>
     </TimelineOutlineError>
   );
 };

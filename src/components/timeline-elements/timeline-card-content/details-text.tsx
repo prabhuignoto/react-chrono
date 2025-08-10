@@ -2,7 +2,8 @@ import { forwardRef } from 'react';
 import { useTimelineContext } from '../../contexts';
 import { DetailsTextProps } from './details-text.model';
 import { getTextOrContent } from './text-or-content';
-import { TimelineContentDetailsWrapper } from './timeline-card-content.styles';
+import { contentDetailsWrapper } from './timeline-card-content.css';
+import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
 const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
   (prop, ref) => {
@@ -35,27 +36,28 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
     return (
       <>
         {/* detailed text */}
-        <TimelineContentDetailsWrapper
+        <div
           aria-expanded={showMore}
-          className={contentDetailsClass}
-          $customContent={!!customContent}
+          className={contentDetailsClass + ' ' + contentDetailsWrapper}
           ref={ref}
-          theme={theme}
-          $useReadMore={useReadMore}
-          $borderLess={borderLessCards}
-          $showMore={showMore}
-          $cardHeight={!textOverlay ? cardActualHeight : null}
-          $contentHeight={detailsHeight}
-          height={contentDetailsHeight}
-          $textOverlay={textOverlay}
-          $gradientColor={gradientColor}
+          style={{
+            ...computeCssVarsFromTheme(theme),
+            overflowY: showMore ? 'auto' : 'hidden',
+            width: borderLessCards ? 'calc(100% - 0.5rem)' : '100%',
+            background: theme?.cardDetailsBackGround || theme?.cardBgColor,
+            maxHeight: !useReadMore
+              ? 'none'
+              : showMore
+              ? '1000px'
+              : `${contentDetailsHeight ?? 150}px`,
+          }}
         >
           {customContent ?? (
             <TextContent
               {...{ detailedText, showMore, theme, timelineContent }}
             />
           )}
-        </TimelineContentDetailsWrapper>
+        </div>
       </>
     );
   },

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { ErrorMessage as StyledErrorMessage } from '../timeline-card-media.styles';
+import { errorMessage } from '../timeline-card-media.css';
 
 interface ErrorMessageProps {
   message: string;
@@ -9,5 +9,5 @@ interface ErrorMessageProps {
  * Displays an error message when media fails to load
  */
 export const LazyErrorMessage = memo(({ message }: ErrorMessageProps) => (
-  <StyledErrorMessage>{message}</StyledErrorMessage>
+  <span className={errorMessage}>{message}</span>
 ));

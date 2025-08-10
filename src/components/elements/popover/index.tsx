@@ -10,19 +10,25 @@ import useCloseClickOutside from 'src/components/effects/useCloseClickOutside';
 import { ChevronDown, CloseIcon } from 'src/components/icons';
 import { PopOverModel } from './popover.model';
 import {
-  CloseButton,
-  Content,
-  Header,
-  PopoverHolder,
-  PopoverWrapper,
-  Selecter,
-  SelecterIcon,
-  SelecterLabel,
-} from './popover.styles';
+  closeButton,
+  content,
+  header,
+  holderBottom,
+  holderLeftMobile,
+  holderTop,
+  holderVisible,
+  popoverHolder,
+  popoverWrapper,
+  selecter,
+  selecterIcon,
+  selecterIconOpen,
+  selecterLabel,
+} from './popover.css';
+import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
-// Memoized Content component
+// Memoized content wrapper applying the class from CSS module
 const MemoizedContent = memo(({ children }: { children: React.ReactNode }) => (
-  <Content>{children}</Content>
+  <div className={content}>{children}</div>
 ));
 
 // Reducer for state management
@@ -95,42 +101,42 @@ const PopOver: FunctionComponent<PopOverModel> = ({
 
   return (
     <>
-      <PopoverWrapper ref={ref}>
-        <Selecter
+      <div className={popoverWrapper} ref={ref}>
+        <div
           role="button"
           onClick={toggleOpen}
-          $theme={theme}
-          $open={state.open}
-          $isDarkMode={isDarkMode}
           tabIndex={0}
           onKeyUp={handleKeyPress}
-          $isMobile={$isMobile}
           title={placeholder}
+          className={selecter}
+          style={computeCssVarsFromTheme(theme)}
         >
-          <SelecterIcon $theme={theme} $open={state.open}>
+          <span className={[selecterIcon, state.open ? selecterIconOpen : ''].join(' ')}>
             {icon || <ChevronDown />}
-          </SelecterIcon>
+          </span>
           {placeholder && !$isMobile ? (
-            <SelecterLabel>{placeholder}</SelecterLabel>
+            <span className={selecterLabel}>{placeholder}</span>
           ) : null}
-        </Selecter>
-      </PopoverWrapper>
-      {state.open ? (
-        <PopoverHolder
-          $position={position}
-          $width={width}
-          $theme={theme}
-          $isMobile={$isMobile}
-          $visible={state.isVisible}
-        >
-          <Header>
-            <CloseButton theme={theme} onClick={closePopover}>
-              <CloseIcon />
-            </CloseButton>
-          </Header>
-          <MemoizedContent>{children}</MemoizedContent>
-        </PopoverHolder>
-      ) : null}
+        </div>
+        {state.open ? (
+          <div
+            className={[
+              popoverHolder,
+              state.isVisible ? holderVisible : '',
+              position === 'bottom' ? holderBottom : holderTop,
+              $isMobile ? holderLeftMobile : '',
+            ].join(' ')}
+            style={{ ...computeCssVarsFromTheme(theme), width: $isMobile ? '90%' : `${width}px` }}
+          >
+            <div className={header}>
+              <button className={closeButton} onClick={closePopover}>
+                <CloseIcon />
+              </button>
+            </div>
+            <MemoizedContent>{children}</MemoizedContent>
+          </div>
+        ) : null}
+      </div>
     </>
   );
 };

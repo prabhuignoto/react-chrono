@@ -206,6 +206,21 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       setIsKeyboardNavigation(false);
       setIsToolbarNavigation(false);
       handleTimelineItemClickInternal(itemId, isSlideShow);
+
+      // After activating, bring the card/row to focus for accessibility
+      if (itemId) {
+        requestAnimationFrame(() => {
+          const verticalRow = document.querySelector(
+            `[data-testid="vertical-item-row"][data-item-id="${itemId}"]`,
+          ) as HTMLElement | null;
+          const target =
+            verticalRow ||
+            (document.getElementById(`timeline-card-${itemId}`) as HTMLElement | null);
+          try {
+            target?.focus?.({ preventScroll: true });
+          } catch {}
+        });
+      }
     },
     [handleTimelineItemClickInternal],
   );

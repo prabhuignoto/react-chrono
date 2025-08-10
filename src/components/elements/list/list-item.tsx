@@ -2,13 +2,16 @@ import { FunctionComponent, KeyboardEvent, memo, useCallback } from 'react';
 import { CheckIcon } from 'src/components/icons';
 import { ListItemModel } from './list.model';
 import {
-  CheckboxStyle,
-  CheckboxWrapper,
-  ListItemStyle,
-  StyleAndDescription,
-  TitleDescriptionStyle,
-  TitleStyle,
-} from './list.styles';
+  checkbox,
+  checkboxSelected,
+  checkboxWrapper,
+  description,
+  listItem,
+  listItemActive,
+  styleAndDescription,
+  title,
+} from './list.css';
+import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
 /**
  * ListItem component displays a selectable/clickable item with title and description
@@ -52,36 +55,37 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
       }
     }, []);
 
+    const itemClass = `${listItem} ${active ? listItemActive : ''}`;
     return (
-      <ListItemStyle
+      <li
         data-testid="list-item"
         key={id}
-        $theme={theme}
         onClick={() => handleOnClick(id)}
-        $active={active}
         tabIndex={0}
-        $selectable={selectable}
         onKeyUp={(ev) => handleKeyPress(ev, id)}
+        className={itemClass}
+        style={computeCssVarsFromTheme(theme)}
       >
         {selectable ? (
-          <CheckboxWrapper>
-            <CheckboxStyle
+          <span className={checkboxWrapper}>
+            <span
               role="checkbox"
               aria-checked={selected}
-              selected={selected}
-              theme={theme}
+              className={`${checkbox} ${selected ? checkboxSelected : ''}`}
             >
               {selected && <CheckIcon />}
-            </CheckboxStyle>
-          </CheckboxWrapper>
+            </span>
+          </span>
         ) : null}
-        <StyleAndDescription $selectable={selectable}>
-          <TitleStyle theme={theme}>{title}</TitleStyle>
-          <TitleDescriptionStyle theme={theme}>
+        <div className={styleAndDescription} style={{ width: selectable ? 'calc(100% - 2rem)' : '100%' }}>
+          <h1 className={title}>
+            {title}
+          </h1>
+          <p className={description} style={{ color: theme.cardSubtitleColor }}>
             {description}
-          </TitleDescriptionStyle>
-        </StyleAndDescription>
-      </ListItemStyle>
+          </p>
+        </div>
+      </li>
     );
   },
 );

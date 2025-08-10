@@ -1,10 +1,6 @@
 import cls from 'classnames';
-import {
-  CardTitleAnchor,
-  CardTitleSemantic,
-} from '../timeline-card-content/timeline-card-content.styles';
-import { Title } from './memoized-model';
 import React from 'react';
+import { Title } from './memoized-model';
 import { useTimelineContext } from '../../contexts';
 
 /**
@@ -24,24 +20,23 @@ const TitleMemoComponent = ({
 }: Title) => {
   const { semanticTags } = useTimelineContext();
 
+  const Tag: any = semanticTags?.cardTitle ?? 'span';
+
   return title ? (
-    <CardTitleSemantic
-      as={semanticTags?.cardTitle ?? 'span'}
+    <Tag
       className={cls(active ? 'active' : '', { [classString]: true })}
-      theme={theme}
-      style={{ color }}
+      style={{ color, fontSize }}
       dir={dir}
-      $fontSize={fontSize}
       data-class={classString}
     >
       {url ? (
-        <CardTitleAnchor href={url} target="_blank" rel="noreferrer">
+        <a href={url} target="_blank" rel="noreferrer">
           {title}
-        </CardTitleAnchor>
+        </a>
       ) : (
         title
       )}
-    </CardTitleSemantic>
+    </Tag>
   ) : null;
 };
 

@@ -115,6 +115,20 @@ export const useTimelineSearch = ({
           searchTimeoutRef.current = setTimeout(() => {
             onTimelineUpdatedRef.current?.(results[0]);
             handleTimelineItemClickRef.current(firstMatchData.id);
+            // After navigating to first match, focus the item row/card
+            requestAnimationFrame(() => {
+              const itemId = firstMatchData.id;
+              // Try vertical first
+              const verticalRow = document.querySelector(
+                `[data-testid="vertical-item-row"][data-item-id="${itemId}"]`,
+              ) as HTMLElement | null;
+              const target =
+                verticalRow ||
+                (document.getElementById(`timeline-card-${itemId}`) as HTMLElement | null);
+              try {
+                target?.focus?.({ preventScroll: true });
+              } catch {}
+            });
           }, delay);
         }
       } else {
@@ -190,7 +204,20 @@ export const useTimelineSearch = ({
 
       if (matchData?.id) {
         handleTimelineItemClickRef.current(matchData.id);
-        // Force refocus after navigation
+        // Focus the matched item to make it visible to screen readers
+        requestAnimationFrame(() => {
+          const itemId = matchData.id;
+          const verticalRow = document.querySelector(
+            `[data-testid="vertical-item-row"][data-item-id="${itemId}"]`,
+          ) as HTMLElement | null;
+          const target =
+            verticalRow ||
+            (document.getElementById(`timeline-card-${itemId}`) as HTMLElement | null);
+          try {
+            target?.focus?.({ preventScroll: true });
+          } catch {}
+        });
+        // Then return focus to search for continued navigation
         focusSearchInput(true);
       }
     },

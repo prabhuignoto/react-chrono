@@ -182,6 +182,18 @@ export const useTimelineItemNavigation = ({
       if (targetElement) {
         // Start scrolling immediately for predictive centering
         scrollToElement(targetElement, mode);
+
+        // After initiating scroll, move focus to the target element
+        // Use requestAnimationFrame to avoid fighting with scrollIntoView
+        requestAnimationFrame(() => {
+          try {
+            if (typeof (targetElement as HTMLElement).focus === 'function') {
+              (targetElement as HTMLElement).focus({ preventScroll: true });
+            }
+          } catch {
+            /* no-op */
+          }
+        });
       }
     },
     [

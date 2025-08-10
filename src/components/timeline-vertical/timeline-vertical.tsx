@@ -9,7 +9,7 @@ import {
 } from 'react';
 // Note: This component receives mode and theme as props, so no context needed here
 import TimelineVerticalItem from './timeline-vertical-item';
-import { TimelineVerticalWrapper } from './timeline-vertical.styles';
+import { timelineVerticalWrapper } from './timeline-vertical.css';
 
 /**
  * Renders the main vertical timeline structure.
@@ -136,14 +136,9 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
 
     // Render the main timeline wrapper
     return (
-      <TimelineVerticalWrapper 
-        as="ul" 
-        data-testid="tree-main"
-        role="list"
-        aria-label="Timeline events"
-      >
+      <ul className={timelineVerticalWrapper} data-testid="tree-main" role="list" aria-label="Timeline events">
         {renderItems}
-      </TimelineVerticalWrapper>
+      </ul>
     );
   },
 );

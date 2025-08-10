@@ -1,6 +1,6 @@
 import cls from 'classnames';
 import React from 'react';
-import { CardSubTitleSemantic } from '../timeline-card-content/timeline-card-content.styles';
+// Replaced styled component with semantic tag + classes
 import { Content } from './memoized-model';
 import { useTimelineContext } from '../../contexts';
 
@@ -13,18 +13,15 @@ const SubTitleMemo = React.memo<Content>(
   ({ content, color, dir, theme, fontSize, classString, padding }: Content) => {
     const { semanticTags } = useTimelineContext();
 
+    const Tag: any = semanticTags?.cardSubtitle ?? 'span';
     return content ? (
-      <CardSubTitleSemantic
-        as={semanticTags?.cardSubtitle ?? 'span'}
-        style={{ color }}
+      <Tag
+        style={{ color, fontSize }}
         dir={dir}
-        theme={theme}
-        $fontSize={fontSize}
         className={cls('card-sub-title', classString)}
-        $padding={padding}
       >
         {content}
-      </CardSubTitleSemantic>
+      </Tag>
     ) : null;
   },
   (prev, next) =>

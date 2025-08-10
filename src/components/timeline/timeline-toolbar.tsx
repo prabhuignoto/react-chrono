@@ -3,9 +3,10 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useTimelineContext } from '../contexts';
 import Controls from '../timeline-elements/timeline-control/timeline-control';
 import { FullscreenControl } from '../timeline-elements/fullscreen-control';
-import { TimelineNavButton } from '../timeline-elements/timeline-control/timeline-control.styles';
+// Removed direct styled import; buttons use native <button> with classes now
 import { ChevronLeft, ChevronRight, CloseIcon } from '../icons';
 import { Toolbar } from '../toolbar';
+import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
 import {
   ChangeDensity,
   LayoutSwitcher,
@@ -22,6 +23,7 @@ import {
   SearchGroup,
   ActionGroup,
 } from './timeline.style';
+import { navButton, navButtonSvg } from '../timeline-elements/timeline-control/timeline-control.css';
 
 // Helper function to convert ReactNode to string safely
 const getTextFromNode = (
@@ -206,7 +208,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
 
   // Render the TimelineToolbar component
   return (
-    <Toolbar items={toolbarItems} theme={theme}>
+    <div style={computeCssVarsFromTheme(theme)}>
+      <Toolbar items={toolbarItems} theme={theme}>
       <NavigationGroup $primary>
         <Controls
           disableLeft={isLeftDisabled}
@@ -242,19 +245,15 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             disabled={slideShowRunning}
           />
           {searchQuery && (
-            <TimelineNavButton
+            <button
+              className={navButton}
               onClick={handleClearSearch}
               title={buttonTexts?.clearSearch ?? 'Clear Search'}
               aria-label={buttonTexts?.clearSearch ?? 'Clear Search'}
-              theme={theme}
-              style={{
-                height: '24px',
-                width: '24px',
-                marginRight: '0.5rem',
-              }}
+              style={{ height: '24px', width: '24px', marginRight: '0.5rem' }}
             >
-              <CloseIcon />
-            </TimelineNavButton>
+              <span className={navButtonSvg}><CloseIcon /></span>
+            </button>
           )}
           <SearchControls>
             {totalMatches > 0 && (
@@ -265,28 +264,28 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             {searchQuery && (
               <>
                 <div className="timeline-nav-wrapper">
-                  <TimelineNavButton
+                  <button
+                    className={navButton}
                     onClick={onPreviousMatch}
                     title={buttonTexts?.previousMatch ?? 'Previous Match'}
                     aria-label={buttonTexts?.previousMatch ?? 'Previous Match'}
                     disabled={disableSearchNav}
-                    theme={theme}
                     style={{ height: '28px', width: '28px' }}
                   >
-                    <ChevronLeft />
-                  </TimelineNavButton>
+                    <span className={navButtonSvg}><ChevronLeft /></span>
+                  </button>
                 </div>
                 <div className="timeline-nav-wrapper">
-                  <TimelineNavButton
+                  <button
+                    className={navButton}
                     onClick={onNextMatch}
                     title={buttonTexts?.nextMatch ?? 'Next Match'}
                     aria-label={buttonTexts?.nextMatch ?? 'Next Match'}
                     disabled={disableSearchNav}
-                    theme={theme}
                     style={{ height: '28px', width: '28px' }}
                   >
-                    <ChevronRight />
-                  </TimelineNavButton>
+                    <span className={navButtonSvg}><ChevronRight /></span>
+                  </button>
                 </div>
               </>
             )}
@@ -349,7 +348,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           </div>
         </ExtraControls>
       </ActionGroup>
-    </Toolbar>
+      </Toolbar>
+    </div>
   );
 };
 

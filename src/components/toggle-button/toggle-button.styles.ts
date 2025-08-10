@@ -1,5 +1,2 @@
-import styled from 'styled-components';
-
-export const ButtonWrapper = styled.div``;
-
-export const ToggleSwitch = styled.span``;
+// Deprecated: styled-components styles replaced by vanilla-extract in toggle-button.css.ts
+export {};

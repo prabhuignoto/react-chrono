@@ -28,6 +28,7 @@ export { useMediaState } from './useMediaState';
 export { useCardSize } from './useCardSize';
 export { useSlideshowProgress } from './useSlideshowProgress';
 export { useFullscreen } from './useFullscreen';
+export { useFocusManager, useFocusTrap } from './useFocusManager';
 
 // Shared utilities (for internal use)
 export {

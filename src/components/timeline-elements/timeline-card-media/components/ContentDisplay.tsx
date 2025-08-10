@@ -1,8 +1,5 @@
 import React, { useRef, ReactNode } from 'react';
-import {
-  CardMediaHeader,
-  MediaDetailsWrapper,
-} from '../timeline-card-media.styles';
+import { cardMediaHeader, mediaDetailsWrapper, mediaDetailsAbsolute, mediaDetailsCard, mediaDetailsGradient } from '../timeline-card-media.css';
 import { TitleMemo } from '../../memoized/title-memo';
 import { ButtonWrapper } from '../timeline-card-media-buttons';
 import { ShowOrHideTextButtonMemo } from '../../memoized/show-hide-button';
@@ -61,18 +58,18 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
   const moreRef = useRef(null);
 
   return (
-    <MediaDetailsWrapper
-      mode={mode}
-      $absolutePosition={textOverlay}
-      $textInMedia={textOverlay}
+    <div
       ref={moreRef}
-      theme={theme}
-      $expandFull={expandDetails}
-      $showText={showText}
-      $expandable={canExpand}
-      $gradientColor={canShowGradient ? gradientColor : null}
+      className={[
+        mediaDetailsWrapper,
+        textOverlay ? mediaDetailsAbsolute : undefined,
+        (canExpand || !showText) ? mediaDetailsCard : undefined,
+        canShowGradient ? mediaDetailsGradient : undefined,
+      ]
+        .filter(Boolean)
+        .join(' ')}
     >
-      <CardMediaHeader>
+      <div className={cardMediaHeader}>
         <TitleMemo
           title={title}
           theme={theme}
@@ -97,7 +94,7 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
             />
           </ButtonWrapper>
         )}
-      </CardMediaHeader>
+      </div>
       {showText && (
         <SubTitleMemo
           content={content}
@@ -117,7 +114,7 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
           textOverlay={textOverlay}
         />
       )}
-    </MediaDetailsWrapper>
+    </div>
   ) as React.ReactElement;
 };
 

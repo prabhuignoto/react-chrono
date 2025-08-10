@@ -11,6 +11,7 @@ import React, {
 } from 'react';
 import { TimelineContextProvider } from './contexts/TimelineContextProvider';
 import Timeline from './timeline/timeline';
+import { computeCssVarsFromTheme } from '../styles/theme-bridge';
 const toReactArray = React.Children.toArray;
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
@@ -283,7 +284,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   return (
     <TimelineContextProvider {...props}>
-      <Timeline
+      <div style={computeCssVarsFromTheme(props.theme)} id="testette">
+        <Timeline
         activeTimelineItem={activeTimelineItem}
         contentDetailsChildren={contentDetailsChildren}
         iconChildren={iconChildren}
@@ -302,7 +304,8 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         onOutlineSelection={handleOutlineSelection}
         mode={mode}
         onPaused={onPaused}
-      />
+        />
+      </div>
     </TimelineContextProvider>
   );
 };
