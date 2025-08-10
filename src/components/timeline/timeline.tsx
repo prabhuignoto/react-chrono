@@ -594,6 +594,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         mode={mode}
         position={toolbarPosition}
         onScroll={handleMainScroll}
+        $height={
+          typeof props.timelineHeight === 'number'
+            ? `${props.timelineHeight}px`
+            : props.timelineHeight || undefined
+        }
       >
         <TimelineView
         timelineMode={timelineMode}

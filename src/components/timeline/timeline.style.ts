@@ -150,13 +150,15 @@ export const TimelineMainWrapper = styled.div<{
   mode?: TimelineMode;
   position?: 'top' | 'bottom';
   theme?: Theme;
+  $height?: string;
 }>`
   align-items: flex-start;
   display: flex;
   justify-content: center;
-  /* Fill remaining height under/over the toolbar */
-  flex: 1 1 auto;
+  /* Fill remaining height under/over the toolbar by default; if a fixed height is provided, don't flex */
+  flex: ${(p) => (p.$height ? '0 0 auto' : '1 1 auto')};
   min-height: 0; /* allow content to shrink within flex container */
+  height: ${(p) => p.$height || 'auto'};
   overflow-y: auto;
   overflow-x: visible; /* Allow toolbar to overflow horizontally if needed */
   overscroll-behavior: contain;

@@ -16,7 +16,6 @@ import {
   navButtonActive,
   navButtonFocus,
   navButtonHover,
-  navButtonRotate,
   navItem,
   navItemDisabled,
   navWrapper,
@@ -72,7 +71,8 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
     enableDarkToggle,
   } = useTimelineContext();
 
-  const rotate = useMemo(() => mode !== 'HORIZONTAL', [mode]);
+  // Remove icon rotation in non-horizontal modes for consistent UX
+  const rotate = false;
 
   const flippedHorizontally = useMemo(
     () => flipLayout && mode === 'HORIZONTAL',
@@ -148,9 +148,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
           <>
             <div className={cls(navItem, { [navItemDisabled]: canDisableLeft })}>
               <button
-                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus, {
-                  [navButtonRotate]: rotate,
-                })}
+                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus)}
                 onClick={flippedHorizontally ? onLast : onFirst}
                 title={jumpToFirstTitle}
                 aria-label={jumpToFirstTitle}
@@ -166,9 +164,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
             {/* previous */}
             <div className={cls(navItem, { [navItemDisabled]: canDisableLeft })}>
               <button
-                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus, {
-                  [navButtonRotate]: rotate,
-                })}
+                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus)}
                 onClick={flippedHorizontally ? onNext : onPrevious}
                 title={previousTitle}
                 aria-label={previousTitle}
@@ -184,9 +180,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
             {/* next */}
             <div className={cls(navItem, { [navItemDisabled]: canDisableRight })}>
               <button
-                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus, {
-                  [navButtonRotate]: rotate,
-                })}
+                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus)}
                 onClick={flippedHorizontally ? onPrevious : onNext}
                 title={nextTitle}
                 aria-label={nextTitle}
@@ -202,9 +196,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
             {/* jump to last */}
             <div className={cls(navItem, { [navItemDisabled]: canDisableRight })}>
               <button
-                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus, {
-                  [navButtonRotate]: rotate,
-                })}
+                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus)}
                 onClick={flippedHorizontally ? onFirst : onLast}
                 title={jumpToLastTitle}
                 aria-label={jumpToLastTitle}
