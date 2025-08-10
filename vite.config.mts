@@ -1,41 +1,54 @@
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
 import tsconfig from 'vite-tsconfig-paths';
+import { defineConfig } from 'vite';
 
-export default defineConfig({
-  build: {
-    outDir: 'dist_site',
-    // Adding sourcemap for better debugging
-    sourcemap: true,
-  },
-  plugins: [react(), tsconfig()],
-  root: './',
-  server: {
-    port: 4444,
-    watch: {
-      ignored: [
-        'node_modules',
-        'dist',
-        'build',
-        'public',
-        'package.json',
-        'package-lock.json',
-        'tsconfig.json',
-        'vite.config.mts',
-        'yarn.lock',
+export default defineConfig(({ mode }) => ({
+  publicDir: false,
+  plugins: [
+    react(),
+    tsconfig(),
+    dts({
+      entryRoot: 'src',
+      tsconfigPath: 'tsconfig.json',
+      outDir: 'dist/types',
+      insertTypesEntry: true,
+      skipDiagnostics: true,
+      exclude: [
+        'src/demo/**',
+        'src/examples/**',
+        'src/**/__tests__/**',
+        'src/**/*.test.*',
+        'src/**/*.spec.*',
+        'src/test-setup.js',
       ],
+    }),
+  ],
+  build: {
+    lib: {
+      entry: 'src/react-chrono.ts',
+      name: 'ReactChronoUI',
+      formats: ['es', 'cjs'],
+      fileName: (format) => (format === 'es' ? 'index.esm.js' : 'index.cjs'),
     },
-    // Adding open option to automatically open the browser
-    open: true,
-    // Set host to true to listen on all addresses
-    host: true,
-  },
-  // Adding resolve.alias for better path management
-  resolve: {
-    alias: {
-      '@components': '/src/components',
-      '@models': '/src/models',
-      '@utils': '/src/utils',
+    target: 'es2020',
+    sourcemap: true,
+    minify: mode === 'production' ? 'esbuild' : false,
+    rollupOptions: {
+      external: (id) =>
+        ['react', 'react-dom', 'styled-components'].includes(id) ||
+        /\.(svg|mp4|webm|png|jpe?g|gif)$/i.test(id),
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          'styled-components': 'styled',
+        },
+        chunkFileNames: 'chunks/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash][extname]',
+      },
     },
+    outDir: 'dist',
+    emptyOutDir: true,
   },
-})
+}));

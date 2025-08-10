@@ -1,6 +1,7 @@
 import { CardMediaModel } from '@models/TimelineMediaModel';
 import cls from 'classnames';
-import React, { memo, useCallback, useContext } from 'react';
+import React, { memo, useCallback } from 'react';
+import { mediaEqual } from '@utils/comparison';
 import { useTimelineContext } from '../../contexts';
 import { MediaWrapper } from './timeline-card-media.styles';
 import { useMediaLoad } from './hooks/useMediaLoad';
@@ -132,14 +133,16 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     ) as React.ReactElement;
   },
   (prevProps, nextProps) => {
-    // Custom comparison function to avoid unnecessary re-renders
+    // Only compare props that this component actually uses/render depends on
     return (
       prevProps.active === nextProps.active &&
       prevProps.slideshowActive === nextProps.slideshowActive &&
-      prevProps.paused === nextProps.paused &&
-      prevProps.startWidth === nextProps.startWidth &&
-      prevProps.remainInterval === nextProps.remainInterval &&
-      JSON.stringify(prevProps.theme) === JSON.stringify(nextProps.theme)
+      prevProps.id === nextProps.id &&
+      prevProps.title === nextProps.title &&
+      prevProps.url === nextProps.url &&
+      prevProps.content === nextProps.content &&
+      prevProps.detailsText === nextProps.detailsText &&
+      mediaEqual(prevProps.media, nextProps.media)
     );
   },
 );

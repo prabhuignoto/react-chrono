@@ -65,7 +65,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
 
   const flippedHorizontally = useMemo(
     () => flipLayout && mode === 'HORIZONTAL',
-    [],
+    [flipLayout, mode],
   );
 
   const canDisableLeft = useMemo(
@@ -88,27 +88,27 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
 
   const previousTitle = useMemo(
     () => (flipLayout ? buttonTexts?.next : buttonTexts?.previous),
-    [flipLayout],
+    [flipLayout, buttonTexts?.next, buttonTexts?.previous],
   );
 
   const nextTitle = useMemo(
     () => (flipLayout ? buttonTexts?.previous : buttonTexts?.next),
-    [flipLayout],
+    [flipLayout, buttonTexts?.previous, buttonTexts?.next],
   );
 
   const playOrPauseTile = useMemo(
     () => (slideShowRunning ? buttonTexts?.stop : buttonTexts?.play),
-    [slideShowRunning],
+    [slideShowRunning, buttonTexts?.stop, buttonTexts?.play],
   );
 
   const jumpToLastTitle = useMemo(
     () => (flipLayout ? buttonTexts?.first : buttonTexts?.last),
-    [flipLayout],
+    [flipLayout, buttonTexts?.first, buttonTexts?.last],
   );
 
   const jumpToFirstTitle = useMemo(
     () => (flipLayout ? buttonTexts?.last : buttonTexts?.first),
-    [flipLayout],
+    [flipLayout, buttonTexts?.last, buttonTexts?.first],
   );
 
   // Create a message about current position for screen readers

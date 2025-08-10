@@ -26,13 +26,17 @@ import { TimelineItemContentWrapper } from './timeline-card-content.styles';
 import { SlideShowType } from '@models/TimelineModel';
 import NestedTimelineRenderer from '../nested-timeline-renderer/nested-timeline-renderer';
 
-// Custom equality function for React.memo to prevent unnecessary re-renders
+  // Custom equality function for React.memo to prevent unnecessary re-renders
 const arePropsEqual = (
   prevProps: TimelineContentModel,
   nextProps: TimelineContentModel,
 ): boolean => {
   // Always re-render if active state changes
   if (prevProps.active !== nextProps.active) return false;
+    // If detailedText arrays are passed, compare structurally
+    if (Array.isArray(prevProps.detailedText) || Array.isArray(nextProps.detailedText)) {
+      if (!arrayEqual(prevProps.detailedText as any, nextProps.detailedText as any)) return false;
+    }
 
   // Re-render if slideshow state changes
   if (prevProps.slideShowActive !== nextProps.slideShowActive) return false;
@@ -42,7 +46,10 @@ const arePropsEqual = (
 
   // Only re-render content-related props if they actually change
   if (prevProps.content !== nextProps.content) return false;
-  if (prevProps.detailedText !== nextProps.detailedText) return false;
+  // For non-array detailedText, compare by reference
+  if (!Array.isArray(prevProps.detailedText) && !Array.isArray(nextProps.detailedText)) {
+    if (prevProps.detailedText !== nextProps.detailedText) return false;
+  }
   if (prevProps.title !== nextProps.title) return false;
   if (prevProps.cardTitle !== nextProps.cardTitle) return false;
 

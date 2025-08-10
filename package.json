@@ -15,6 +15,8 @@
     "type": "git"
   },
   "scripts": {
+    "ladle": "ladle serve",
+    "ladle:build": "ladle build",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:debug": "playwright test --debug",
@@ -43,14 +45,17 @@
     "rollup": "rollup -c rollup.config.mjs",
     "snyk": "snyk test",
     "prepare": "husky install",
-    "dev": "vite --config vite.config.mts --host",
+    "dev": "vite --config vite.site.config.mts --host",
     "clean": "npx concurrently \"pnpm format\" \"pnpm lint:all\"",
     "test": "vitest --config vitest.config.mts",
     "test-ui": "vitest --config vitest.config.mts --ui",
     "vite:build": "vite build --config vite.config.mts",
+    "build:site": "vite build --config vite.site.config.mts",
+    "preview:site": "vite preview --config vite.site.config.mts",
     "coveralls": "pnpx coveralls < coverage/lcov.info",
-    "size-limit": "pnpm rollup && pnpm size-limit",
-    "build": "rollup -c",
+    "size-limit": "pnpm vite:build && pnpm size-limit",
+    "build": "vite build --config vite.config.mts",
+    "build:legacy": "rollup -c",
     "build:analyze": "ANALYZE=true rollup -c",
     "fix-css": "stylelint src/**/*style.ts --fix"
   },
@@ -63,8 +68,8 @@
     "xss": "^1.0.15"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0",
     "styled-components": "^6.0.0"
   },
   "publishConfig": {
@@ -160,30 +165,29 @@
     "typescript-plugin-styled-components": "^3.0.0",
     "typescript-transform-paths": "^3.5.5",
     "vite": "^7.1.1",
+    "vite-plugin-dts": "^4.3.0",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "@ladle/react": "^4.0.0"
   },
   "resolutions": {
     "ansi-regex": "5.0.1",
     "json-schema": "0.4.0",
     "semver": "7.5.4"
   },
-  "files": [
-    "dist"
-  ],
-  "size-limit": [
-    {
-      "path": "dist/react-chrono.js",
-      "limit": "110 KB"
-    },
-    {
-      "path": "dist/react-chrono.esm.js",
-      "limit": "110 KB"
-    },
-    {
-      "path": "dist/react-chrono.umd.js",
-      "limit": "110 KB"
+  "files": ["dist"],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.esm.js"
     }
+  },
+  "size-limit": [
+    { "path": "dist/index.cjs", "limit": "110 KB" },
+    { "path": "dist/index.esm.js", "limit": "110 KB" }
   ],
   "lint-staged": {
     "src/components/**/*.{ts,tsx}": [
@@ -204,8 +208,10 @@
       "pre-commit": "pretty-quick --staged"
     }
   },
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "module": "dist/index.esm.js",
-  "umd": "dist/index.umd.js",
-  "types": "dist/index.d.ts"
+  "types": "dist/types/index.d.ts",
+  "engines": {
+    "node": ">=18"
+  }
 }

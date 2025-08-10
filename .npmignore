@@ -1,0 +1,9 @@
+src
+coverage
+cypress
+playwright*
+.github
+.vscode
+scripts
+vite.site.config.mts
+

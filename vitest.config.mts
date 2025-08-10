@@ -10,7 +10,7 @@ export default defineConfig({
   test: {
     coverage: {
       clean: true,
-      enabled: false,
+      enabled: !!process.env.CI,
       exclude: [
         // Type definitions and configuration files
         '**/*.d.ts',

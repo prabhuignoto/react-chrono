@@ -81,12 +81,16 @@ export const useTimelineItemNavigation = ({
         }
       } else {
         // For horizontal modes, prefer focusing the card container first
-        const cardElement = document.getElementById(`timeline-card-${itemId}`) as HTMLElement;
+        const cardElement = document.getElementById(`timeline-card-${itemId}`) as any;
         if (cardElement) {
-          if (!cardElement.hasAttribute('tabindex')) {
-            cardElement.setAttribute('tabindex', '-1');
-          }
-          return cardElement;
+          try {
+            if (cardElement.hasAttribute && cardElement.setAttribute) {
+              if (!cardElement.hasAttribute('tabindex')) {
+                cardElement.setAttribute('tabindex', '-1');
+              }
+            }
+          } catch {}
+          return cardElement as unknown as HTMLElement;
         }
 
         // Fallback to the timeline point wrapper element
