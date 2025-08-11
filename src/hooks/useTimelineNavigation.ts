@@ -58,6 +58,9 @@ export const useTimelineNavigation = ({
 
   // Navigation handlers with predictive centering to avoid jumps
   const handleNext = useCallback(() => {
+    if (!hasFocus) {
+      return;
+    }
     const newIndex = Math.min(activeItemIndex.current + 1, items.length - 1);
     if (newIndex !== activeItemIndex.current) {
       const targetItem = items[newIndex];
@@ -90,6 +93,9 @@ export const useTimelineNavigation = ({
   ]);
 
   const handlePrevious = useCallback(() => {
+    if (!hasFocus) {
+      return;
+    }
     const newIndex = Math.max(activeItemIndex.current - 1, 0);
     if (newIndex !== activeItemIndex.current) {
       const targetItem = items[newIndex];
@@ -120,6 +126,9 @@ export const useTimelineNavigation = ({
   ]);
 
   const handleFirst = useCallback(() => {
+    if (!hasFocus) {
+      return;
+    }
     if (activeItemIndex.current !== 0) {
       const targetItem = items[0];
 
@@ -149,6 +158,9 @@ export const useTimelineNavigation = ({
   ]);
 
   const handleLast = useCallback(() => {
+    if (!hasFocus) {
+      return;
+    }
     const lastIndex = items.length - 1;
     if (activeItemIndex.current !== lastIndex) {
       const targetItem = items[lastIndex];

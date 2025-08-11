@@ -36,6 +36,7 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
 
   return (
     <div
+      {...(align ? ({ align } as any) : {})}
       className={titleClass}
       style={{
         ...computeCssVarsFromTheme(theme),
