@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import ReactDOM from 'react-dom';
-import { TimelineContentContainer } from '../timeline-horizontal-card.styles';
+import { wrapper as veCardWrapper } from '../timeline-horizontal-card.css';
 import TimelineCardContent from '../../timeline-card-content/timeline-card-content';
 
 interface TimelineCardPortalProps {
@@ -58,15 +58,12 @@ const TimelineCardPortal: React.FC<TimelineCardPortalProps> = ({
 
   const Content = useMemo(() => {
     return (
-      <TimelineContentContainer
-        className={containerClass}
+      <div
+        className={`${containerClass} ${veCardWrapper} ${showAllCardsHorizontal || active ? 'highlight-active' : ''}`}
         ref={contentRef}
         id={`timeline-card-${id}`}
-        theme={theme}
-        $active={active}
-        $highlight={showAllCardsHorizontal || active}
         tabIndex={0}
-        $cardWidth={cardWidth}
+        style={{ minWidth: cardWidth && (Number.isFinite(cardWidth) ? `${cardWidth}px` : undefined) }}
       >
         <TimelineCardContent
           content={cardSubtitle}
@@ -88,7 +85,7 @@ const TimelineCardPortal: React.FC<TimelineCardPortalProps> = ({
           nestedCardHeight={nestedCardHeight}
           items={items}
         />
-      </TimelineContentContainer>
+      </div>
     );
   }, [
     containerClass,

@@ -8,37 +8,67 @@ export const toolbarWrapper = style([
   {
     listStyle: 'none',
     margin: 0,
-    padding: '0.5rem',
+    padding: '0.75rem 1rem',
     backgroundColor: vars.color.toolbarBg,
     width: '100%',
-    minHeight: '60px',
-    borderRadius: '8px',
+    minHeight: '64px',
+    borderRadius: '10px',
     flexWrap: 'wrap',
+    columnGap: '0.75rem',
+    rowGap: '0.5rem',
     border: `1px solid ${vars.color.buttonBorder}`,
+    boxShadow: vars.shadow.elevationSm,
     alignItems: 'center',
     transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
+    containerType: 'inline-size',
     selectors: {
       '& > *': { alignSelf: 'center' },
+      // visually group search in the middle
+      '& > :nth-child(2)': { flex: 1 },
     },
     '@media': {
-      '(max-width: 768px)': { padding: '0.75rem 0.5rem' },
-      '(max-width: 480px)': { padding: '0.5rem', flexDirection: 'column' },
+      '(max-width: 768px)': { padding: '0.75rem 0.75rem' },
+      '(max-width: 480px)': { padding: '0.5rem 0.5rem', flexDirection: 'column', gap: '0.75rem' },
     },
   },
 ]);
 
+// Normalize all toolbar buttons to be minimal and borderless by default
+globalStyle(`${toolbarWrapper} button`, {
+  background: 'transparent',
+  border: '1px solid transparent',
+  borderRadius: '8px',
+  padding: '6px',
+  transition: `background-color ${vars.transition.duration.normal} ${vars.transition.easing.standard}, box-shadow ${vars.transition.duration.normal} ${vars.transition.easing.standard}, transform ${vars.transition.duration.fast} ${vars.transition.easing.standard}`,
+});
+globalStyle(`${toolbarWrapper} button:hover`, {
+  background: vars.color.toolbarBtnBg,
+  borderColor: vars.color.buttonBorder,
+  boxShadow: vars.shadow.elevationSm,
+});
+globalStyle(`${toolbarWrapper} button:active`, {
+  transform: 'scale(0.97)',
+  boxShadow: vars.shadow.insetSm,
+});
+globalStyle(`${toolbarWrapper} button:focus`, {
+  outline: `2px solid ${vars.color.primary}`,
+  outlineOffset: '2px',
+});
+globalStyle(`${toolbarWrapper} button:focus:not(:focus-visible)`, { outline: 'none' });
+
 export const toolbarListItem = style([
   sprinkles({ display: 'flex' }),
   {
-    padding: 0,
+    padding: '0 0.25rem',
     margin: 0,
     alignItems: 'center',
-    gap: '0.5rem',
-    minHeight: '44px',
+    gap: '0.6rem',
+    minHeight: '48px',
     cursor: 'pointer',
-    borderRadius: '4px',
-    transition: 'all 0.2s ease-in-out',
+    borderRadius: '6px',
+    transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
     selectors: {
+      '&:hover': { backgroundColor: vars.color.toolbarBtnBg },
       '&:focus': { outline: `2px solid ${vars.color.primary}`, outlineOffset: '2px', borderRadius: '4px' },
       '&:focus:not(:focus-visible)': { outline: 'none' },
       '&:focus-visible': { outline: `2px solid ${vars.color.primary}`, outlineOffset: '2px' },
@@ -49,11 +79,11 @@ export const toolbarListItem = style([
 
 export const iconWrapper = style([
   sprinkles({ display: 'flex' }),
-  { justifyContent: 'center', alignItems: 'center', width: '1.25rem', height: '1.25rem', flexShrink: 0, transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}` },
+  { justifyContent: 'center', alignItems: 'center', width: '20px', height: '20px', flexShrink: 0, transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}` },
 ]);
-globalStyle(`${iconWrapper} svg`, { width: '100%', height: '100%', transition: 'transform 0.2s ease, opacity 0.2s ease' });
+globalStyle(`${iconWrapper} svg`, { width: '20px', height: '20px', transition: 'transform 0.2s ease, opacity 0.2s ease' });
 globalStyle(`${iconWrapper}:hover svg`, { transform: 'scale(1.1)' });
-globalStyle(`@media (max-width: 480px) { ${iconWrapper} { width: 24px; height: 24px; } }`, {} as never);
+globalStyle(`@media (max-width: 480px) { ${iconWrapper} { width: 22px; height: 22px; } ${iconWrapper} svg { width: 22px; height: 22px; } }`, {} as never);
 
 export const contentWrapper = style([
   sprinkles({ display: 'flex' }),
@@ -64,7 +94,7 @@ globalStyle(`@media (max-width: 480px) { ${contentWrapper} { width: '100%'; } }`
 
 export const toolbarSection = style([
   sprinkles({ display: 'flex', alignItems: 'center' }),
-  { gap: '0.5rem', flexShrink: 0 },
+  { gap: '0.75rem', flexShrink: 0 },
 ]);
 
 export const toolbarSectionRecipe = recipe({
@@ -73,7 +103,7 @@ export const toolbarSectionRecipe = recipe({
     primary: {
       true: {
         padding: '0.25rem 0.5rem',
-        borderRadius: '6px',
+        borderRadius: '8px',
         backgroundColor: vars.color.toolbarBtnBg,
         border: `1px solid ${vars.color.buttonBorder}`,
       },
@@ -86,13 +116,13 @@ export const toolbarSectionRecipe = recipe({
 export const navigationGroup = style([toolbarSection, { flexWrap: 'nowrap' }]);
 export const searchGroup = style([
   toolbarSection,
-  { flex: '1 1 300px', maxWidth: '600px', justifyContent: 'center' },
+  { flex: '2 1 480px', maxWidth: '860px', justifyContent: 'center' },
 ]);
 globalStyle(`@media (max-width: 480px) { ${searchGroup} { flex: '1 1 auto'; order: -1; width: '100%'; } }`, {} as never);
 
 export const actionGroup = style([
   toolbarSection,
-  { flexWrap: 'wrap', justifyContent: 'flex-end' },
+  { flexWrap: 'wrap', justifyContent: 'flex-end', rowGap: '0.5rem' },
 ]);
 globalStyle(`@media (max-width: 768px) { ${actionGroup} { justify-content: center; } }`, {} as never);
 
@@ -100,17 +130,17 @@ export const searchWrapper = style([
   sprinkles({ display: 'flex', alignItems: 'center' }),
   {
     backgroundColor: vars.color.toolbarBtnBg,
-    padding: '0.2rem 0.6rem',
-    borderRadius: '6px',
+    padding: '0.35rem 0.75rem',
+    borderRadius: '8px',
     border: `1px solid ${vars.color.buttonBorder}`,
     width: '100%',
     transition: 'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
-    minHeight: '38px',
+    minHeight: '40px',
     position: 'relative',
     selectors: {
       '&:focus-within': {
         borderColor: vars.color.primary,
-        boxShadow: `0 0 0 2px ${vars.color.primary}`,
+        boxShadow: vars.shadow.focusRing,
         backgroundColor: vars.color.toolbarBtnBg,
       },
       '&:hover': { borderColor: vars.color.primary },
@@ -124,8 +154,8 @@ export const searchInput = style({
   outline: 'none',
   background: 'transparent',
   color: vars.color.toolbarText,
-  fontSize: '0.9rem',
-  padding: '0.4rem 0.2rem',
+  fontSize: '0.95rem',
+  padding: '0.35rem 0.25rem',
   minHeight: '28px',
   selectors: {
     '&::placeholder': { color: vars.color.toolbarText, opacity: 0.8, fontWeight: 400 },
@@ -137,7 +167,7 @@ export const searchInfo = style({ fontSize: '0.8rem', color: vars.color.toolbarT
 
 export const searchControls = style([
   sprinkles({ display: 'flex', alignItems: 'center' }),
-  { gap: '0.25rem', flexShrink: 0, marginLeft: 'auto' },
+  { gap: '0.5rem', flexShrink: 0, marginLeft: 'auto' },
 ]);
 globalStyle(`${searchControls} .timeline-nav-wrapper`, { display: 'flex', alignItems: 'center' });
 
@@ -147,9 +177,9 @@ export const extraControls = style([
     alignSelf: 'center',
     listStyle: 'none',
     margin: 0,
-    padding: '0.125rem',
+    padding: '0.25rem',
     flexShrink: 0,
-    gap: '0.5rem',
+    gap: '0.75rem',
     flexWrap: 'wrap',
   },
 ]);

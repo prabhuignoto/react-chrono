@@ -291,6 +291,15 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
             // Then trigger the click handler which will handle scrolling
             onClick(id || '');
+            // After an item is activated via click, ensure focus moves to its row for a11y
+            requestAnimationFrame(() => {
+              const row = document.querySelector(
+                `[data-testid="vertical-item-row"][data-item-id="${id}"]`,
+              ) as HTMLElement | null;
+              try {
+                row?.focus?.({ preventScroll: true });
+              } catch {}
+            });
           }
         },
         [onClick, id, disableInteraction, slideShowActive, active],

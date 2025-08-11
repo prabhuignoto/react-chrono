@@ -10,6 +10,7 @@ import {
 // Note: This component receives mode and theme as props, so no context needed here
 import TimelineVerticalItem from './timeline-vertical-item';
 import { timelineVerticalWrapper } from './timeline-vertical.css';
+import React from 'react';
 
 /**
  * Renders the main vertical timeline structure.
@@ -106,16 +107,15 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
             className={itemClassName} // Pass down the calculated 'left'/'right' class
             contentDetailsChildren={contentDetails} // Pass down the specific content details node
             iconChild={customIcon} // Pass down the specific icon node
-            hasFocus={hasFocus} // Pass down the focus state
+            hasFocus={!!hasFocus} // Pass down the focus state
             index={index} // Pass down the item's index
-            key={item.id ?? `timeline-item-${index}`} // Unique key for React rendering
             onActive={handleOnActive} // Pass down the memoized active handler
             onClick={onClick} // Pass down the global click handler
-            onElapsed={onElapsed} // Pass down the global elapsed handler
+            onElapsed={onElapsed || (() => {})} // Pass down the global elapsed handler
             // Removed onShowMore as the handler was empty
-            slideShowRunning={slideShowRunning} // Pass down the slideshow state
-            cardLess={cardLess} // Pass down the cardLess flag
-            nestedCardHeight={nestedCardHeight} // Pass down the nested card height
+            slideShowRunning={!!slideShowRunning} // Pass down the slideshow state
+            cardLess={!!cardLess} // Pass down the cardLess flag
+            nestedCardHeight={nestedCardHeight ?? 0} // Pass down the nested card height
           />
         );
       });
@@ -136,7 +136,12 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
 
     // Render the main timeline wrapper
     return (
-      <ul className={timelineVerticalWrapper} data-testid="tree-main" role="list" aria-label="Timeline events">
+      <ul
+        className={timelineVerticalWrapper}
+        data-testid="tree-main"
+        role="list"
+        aria-label="Timeline events"
+      >
         {renderItems}
       </ul>
     );

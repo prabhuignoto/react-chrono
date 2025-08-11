@@ -5,7 +5,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
   <li
     aria-label="vertical item title"
     aria-selected="false"
-    class="timeline-vertical_verticalItemWrapper__mb2y384 timeline-vertical__mb2y383 properties_marginBlock_lg_mobile__12ug0493c properties_display_flex_mobile__12ug0496 properties_justifyContent_center_mobile__12ug04913 vertical-item-row no-alt "
+    class="timeline-vertical_verticalItemWrapper__mb2y384 timeline-vertical__mb2y383 properties_display_flex_mobile__12ug0496 properties_justifyContent_center_mobile__12ug04913 vertical-item-row no-alt "
     data-item-id=""
     data-testid="vertical-item-row"
     role="listitem"

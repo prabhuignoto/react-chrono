@@ -124,15 +124,11 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
 
   // Create a message about current position for screen readers
   const positionStatus = useMemo(() => {
-    if (totalItems <= 0) return '';
-    return `Item ${activeTimelineItem + 1} of ${totalItems}`;
-  }, [activeTimelineItem, totalItems]);
+    return '';
+  }, []);
 
   // Create a message about slideshow status for screen readers
-  const slideshowStatus = useMemo(() => {
-    if (!slideShowEnabled) return '';
-    return slideShowRunning ? 'Slideshow is playing' : 'Slideshow is paused';
-  }, [slideShowRunning, slideShowEnabled]);
+  const slideshowStatus = useMemo(() => '', []);
 
   return (
     <div className={timelineControlContainer} key="control-wrapper" style={computeCssVarsFromTheme(theme)}>

@@ -7,14 +7,20 @@ import { reveal, slideFromRight, slideInFromLeft, slideInFromTop } from './card-
 export const baseCard = style({
   background: vars.color.cardBg,
   borderRadius: '12px',
+  border: `1px solid ${vars.color.buttonBorder}`,
   boxShadow: vars.shadow.elevationLg,
   backdropFilter: 'blur(10px)',
+  transition: `transform ${vars.transition.duration.normal} ${vars.transition.easing.standard}, box-shadow ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
 });
 
 export const itemContentWrapper = style([
   sprinkles({ display: 'flex' }),
   {
     selectors: {
+      '&:hover': {
+        transform: 'translateY(-4px)',
+        boxShadow: vars.shadow.elevationLg,
+      },
       '&:focus:not(:focus-visible):not(.focus-visible)': {
         outline: 'none',
         boxShadow: vars.shadow.elevationLg,

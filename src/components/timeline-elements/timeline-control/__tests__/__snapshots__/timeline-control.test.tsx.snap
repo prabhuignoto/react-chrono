@@ -12,7 +12,7 @@ exports[`TimelineControl > should render 1`] = `
     />
     <div
       aria-label="Timeline Navigation"
-      class="timeline-control_navWrapper__1g3kfsd1 timeline-control__1g3kfsd0 properties_padding_xs_mobile__12ug0491u properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r timeline-controls controls"
+      class="timeline-control_navWrapper__1g3kfsd1 timeline-control__1g3kfsd0 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r timeline-controls controls"
       role="toolbar"
     >
       <div

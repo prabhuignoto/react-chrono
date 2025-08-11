@@ -58,9 +58,7 @@ export const selecter = style([
     background: vars.color.toolbarBtnBg,
     color: vars.color.toolbarText,
     borderRadius: '6px',
-    borderStyle: 'solid',
-    borderWidth: '1px',
-    borderColor: vars.color.buttonBorder,
+    border: '1px solid transparent',
     boxShadow: `0 1px 1px ${vars.color.shadow}`,
     cursor: 'pointer',
     userSelect: 'none',
@@ -74,7 +72,6 @@ export const selecter = style([
     selectors: {
       '&:hover': {
         background: vars.color.buttonHoverBg,
-        borderColor: vars.color.buttonHoverBorder,
         boxShadow: vars.shadow.elevationMd,
         transform: 'translateY(-1px)',
       },

@@ -274,7 +274,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       activeTimelineItem !== activeItemIndex.current
     ) {
       syncActiveItemIndex(activeTimelineItem);
-      // On activation change in horizontal modes, move keyboard focus to the active timeline point if present
+      // Move keyboard focus to the active element once activation changes
       if (mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL') {
         requestAnimationFrame(() => {
           const activeId = items[activeTimelineItem ?? 0]?.id;
@@ -299,6 +299,28 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
                 return;
               } catch (_) {
                 // fall through
+              }
+            }
+          }
+          const ele = timelineMainRef.current;
+          if (ele) {
+            ele.focus({ preventScroll: false });
+          }
+        });
+      } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
+        // In vertical modes, focus the vertical row (li) for the active item
+        requestAnimationFrame(() => {
+          const activeId = items[activeTimelineItem ?? 0]?.id;
+          if (activeId) {
+            const verticalRow = document.querySelector(
+              `[data-testid="vertical-item-row"][data-item-id="${activeId}"]`,
+            ) as HTMLElement | null;
+            if (verticalRow) {
+              try {
+                verticalRow.focus({ preventScroll: false });
+                return;
+              } catch (_) {
+                // fall back to container focus
               }
             }
           }
@@ -587,20 +609,15 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
     <TimelineMainWrapper
       ref={timelineMainRef as React.RefObject<HTMLDivElement>}
-        $scrollable={canScrollTimeline}
-        className={`${mode.toLowerCase()} timeline-main-wrapper ${ve.timelineMainWrapper}`}
-        id="timeline-main-wrapper"
+      $scrollable={canScrollTimeline}
+      className={`${mode.toLowerCase()} timeline-main-wrapper ${ve.timelineMainWrapper}`}
+      id="timeline-main-wrapper"
       data-testid="timeline-main-wrapper"
-        theme={theme}
-        mode={mode}
-        position={toolbarPosition}
-        onScroll={handleMainScroll}
-        $height={
-          typeof props.timelineHeight === 'number'
-            ? `${props.timelineHeight}px`
-            : props.timelineHeight || undefined
-        }
-      >
+      theme={theme}
+      mode={mode}
+      position={toolbarPosition}
+      onScroll={handleMainScroll}
+    >
         <TimelineView
         timelineMode={timelineMode}
         activeTimelineItem={activeTimelineItem ?? 0}

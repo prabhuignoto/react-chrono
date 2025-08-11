@@ -21,7 +21,7 @@ export const animateVisible = keyframes({
 });
 
 export const verticalItemWrapper = style([
-  sprinkles({ display: 'flex', justifyContent: 'center', my: 'lg' }),
+  sprinkles({ display: 'flex', justifyContent: 'center' }),
   {
     position: 'relative',
     visibility: 'hidden',
@@ -29,6 +29,7 @@ export const verticalItemWrapper = style([
     alignItems: 'stretch',
     zIndex: vars.zIndex.verticalItem,
     listStyle: 'none',
+    marginBlock: '1.5rem',
   },
 ]);
 

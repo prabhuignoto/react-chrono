@@ -7,13 +7,12 @@ import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
 export const srOnly = visuallyHidden;
 
 export const navWrapper = style([
-  sprinkles({ display: 'flex', alignItems: 'center', p: 'xs' }),
+  sprinkles({ display: 'flex', alignItems: 'center' }),
   {
-    borderRadius: '8px',
     listStyle: 'none',
-    background: vars.color.toolbarBg,
     position: 'relative',
     zIndex: vars.zIndex.controls,
+    gap: '0.25rem',
   },
 ]);
 
@@ -29,9 +28,9 @@ export const navItemDisabled = style({
 
 export const navButton = style({
   alignItems: 'center',
-  background: vars.color.toolbarBtnBg,
-  borderRadius: '6px',
-  border: `1px solid ${vars.color.buttonBorder}`,
+  background: 'transparent',
+  borderRadius: '8px',
+  border: '1px solid transparent',
   color: vars.color.toolbarText,
   cursor: 'pointer',
   display: 'flex',
@@ -42,22 +41,21 @@ export const navButton = style({
   padding: 0,
   transition: `background-color ${vars.transition.duration.normal} ${vars.transition.easing.standard}, transform ${vars.transition.duration.fast} ${vars.transition.easing.standard}, box-shadow ${vars.transition.duration.normal} ${vars.transition.easing.standard}, border-color ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
   width: '36px',
-  boxShadow: vars.shadow.elevationSm,
 });
 
 export const navButtonRotate = style({ transform: 'rotate(90deg)' });
 
 export const navButtonHover = style({});
 globalStyle(`${navButton}:hover`, {
-  background: vars.color.buttonHoverBg,
-  borderColor: vars.color.buttonHoverBorder,
-  boxShadow: vars.shadow.elevationMd,
+  background: vars.color.toolbarBtnBg,
+  borderColor: vars.color.buttonBorder,
+  boxShadow: vars.shadow.elevationSm,
   transform: 'translateY(-1px)',
 });
 
 export const navButtonActive = style({});
 globalStyle(`${navButton}:active`, {
-  transform: 'scale(0.95)',
+  transform: 'scale(0.97)',
   background: vars.color.toolbarBtnBg,
   boxShadow: vars.shadow.insetSm,
 });
