@@ -14,7 +14,8 @@ import { Shape } from '../timeline-elements/timeline-card/timeline-horizontal-ca
 import {
   TimelinePointContainer,
   TimelinePointWrapper,
-} from './timeline-vertical-shape.styles'; // Associated styled components
+} from './timeline-vertical-shape.styles'; // existing SC styles
+import * as veShape from './timeline-vertical-shape.css'; // additive VE classes
 
 /**
  * Renders the circular point or icon on the timeline line for a vertical item.
@@ -168,7 +169,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
         $cardLess={cardLess} // Pass cardLess state
         $isMobile={isMobile} // Pass mobile state
         // --- Standard React props ---
-        className={className} // 'left' or 'right'
+        className={`${className} ${veShape.timelinePointWrapper}`}
         data-testid="tree-leaf" // Test ID for the wrapper
       >
         {/* Container is a button for accessibility and click handling */}
@@ -176,7 +177,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
           // --- Props passed to styled-component ---
           $hide={disableTimelinePoint} // Hide based on global setting
           // --- Standard React props ---
-          className={`${className} timeline-vertical-circle`} // Combine classes
+          className={`${className} timeline-vertical-circle ${veShape.timelinePointContainer}`}
           {...clickHandlerProps} // Spread the memoized click handler props
           ref={circleRef} // Attach ref for position measurement
           data-testid="tree-leaf-click" // Test ID for the clickable element
@@ -209,7 +210,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
             dimension={timelinePointDimension} // Controls the size
             $timelinePointShape={timelinePointShape} // Controls the shape ('circle', 'square')
             // --- Standard React props ---
-            className={circleClass} // Apply 'active' and 'using-icon' classes
+            className={`${circleClass} ${veShape.shape}`} // Apply 'active' and 'using-icon' classes
             aria-hidden="true" // Hide from screen readers as it's decorative
           >
             {iconChild}

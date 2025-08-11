@@ -1,35 +1,26 @@
 import { globalStyle, style } from '@vanilla-extract/css';
+import { visuallyHidden } from '../../../styles/a11y.css';
 import { vars } from '../../../styles/tokens.css';
+import { recipe } from '@vanilla-extract/recipes';
+import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
 
-export const srOnly = style({
-  position: 'absolute',
-  width: 1,
-  height: 1,
-  padding: 0,
-  margin: -1,
-  overflow: 'hidden',
-  clip: 'rect(0, 0, 0, 0)',
-  whiteSpace: 'nowrap',
-  borderWidth: 0,
-});
+export const srOnly = visuallyHidden;
 
-export const navWrapper = style({
-  borderRadius: '8px',
-  display: 'flex',
-  alignItems: 'center',
-  listStyle: 'none',
-  padding: '0.25rem',
-  background: vars.color.toolbarBg,
-  position: 'relative',
-  zIndex: vars.zIndex.controls,
-});
+export const navWrapper = style([
+  sprinkles({ display: 'flex', alignItems: 'center', p: 'xs' }),
+  {
+    borderRadius: '8px',
+    listStyle: 'none',
+    background: vars.color.toolbarBg,
+    position: 'relative',
+    zIndex: vars.zIndex.controls,
+  },
+]);
 
-export const navItem = style({
-  padding: 0,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-});
+export const navItem = style([
+  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'center' }),
+  { padding: 0 },
+]);
 
 export const navItemDisabled = style({
   pointerEvents: 'none',
@@ -49,10 +40,9 @@ export const navButton = style({
   alignSelf: 'center',
   margin: '0 0.25rem',
   padding: 0,
-  transition:
-    'background-color 0.2s ease-out, transform 0.15s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out',
+  transition: `background-color ${vars.transition.duration.normal} ${vars.transition.easing.standard}, transform ${vars.transition.duration.fast} ${vars.transition.easing.standard}, box-shadow ${vars.transition.duration.normal} ${vars.transition.easing.standard}, border-color ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
   width: '36px',
-  boxShadow: `0 1px 1px ${vars.color.shadow}`,
+  boxShadow: vars.shadow.elevationSm,
 });
 
 export const navButtonRotate = style({ transform: 'rotate(90deg)' });
@@ -61,7 +51,7 @@ export const navButtonHover = style({});
 globalStyle(`${navButton}:hover`, {
   background: vars.color.buttonHoverBg,
   borderColor: vars.color.buttonHoverBorder,
-  boxShadow: `0 2px 4px ${vars.color.shadow}`,
+  boxShadow: vars.shadow.elevationMd,
   transform: 'translateY(-1px)',
 });
 
@@ -69,7 +59,7 @@ export const navButtonActive = style({});
 globalStyle(`${navButton}:active`, {
   transform: 'scale(0.95)',
   background: vars.color.toolbarBtnBg,
-  boxShadow: `inset 0 1px 1px ${vars.color.shadow}`,
+  boxShadow: vars.shadow.insetSm,
 });
 
 export const navButtonFocus = style({});
@@ -78,38 +68,50 @@ globalStyle(`${navButton}:focus:not(:focus-visible)`, { outline: 'none' });
 
 export const navButtonSvg = style({ width: '20px', height: '20px', color: vars.color.icon });
 
-export const controlContainer = style({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.5rem',
-  padding: '0.5rem',
-  background: vars.color.cardBg,
-  borderRadius: '4px',
-  boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+// Optional recipe API for variant-driven usage without breaking existing exports
+export const navButtonRecipe = recipe({
+  base: [navButton],
+  variants: {
+    rotated: {
+      true: [navButtonRotate],
+      false: {},
+    },
+    size: {
+      sm: { width: '28px', height: '28px' },
+      md: { width: '36px', height: '36px' },
+      lg: { width: '40px', height: '40px' },
+    },
+  },
+  defaultVariants: { rotated: false, size: 'md' },
 });
 
-export const timelineControlContainer = style({
-  alignItems: 'center',
-  display: 'flex',
-  justifyContent: 'center',
-  margin: '0.5rem 0',
-  position: 'relative',
-  zIndex: vars.zIndex.controls,
-});
+export const controlContainer = style([
+  sprinkles({ display: 'flex', alignItems: 'center', gap: 'sm', p: 'sm' }),
+  {
+    background: vars.color.cardBg,
+    borderRadius: '4px',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+  },
+]);
 
-export const controlButton = style({
-  alignItems: 'center',
-  background: vars.color.primary,
-  borderRadius: '50%',
-  cursor: 'pointer',
-  display: 'flex',
-  height: '3em',
-  justifyContent: 'center',
-  marginLeft: '0.5em',
-  width: '3em',
-  outline: 0,
-  color: '#fff',
-});
+export const timelineControlContainer = style([
+  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 'sm' }),
+  { position: 'relative', zIndex: vars.zIndex.controls },
+]);
+
+export const controlButton = style([
+  sprinkles({ display: 'flex', placeCenter: 'center' }),
+  {
+    background: vars.color.primary,
+    borderRadius: '50%',
+    cursor: 'pointer',
+    height: '3em',
+    marginLeft: '0.5em',
+    width: '3em',
+    outline: 0,
+    color: '#fff',
+  },
+]);
 
 export const controlButtonSvg = style({ width: '80%', height: '80%' });
 

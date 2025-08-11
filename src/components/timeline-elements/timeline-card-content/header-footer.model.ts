@@ -17,4 +17,6 @@ export type ContentFooterProps = {
   textContentIsLarge: boolean;
   theme?: Theme;
   triangleDir?: string;
+  buttonClassName?: string;
+  iconWrapperClassName?: string;
 };

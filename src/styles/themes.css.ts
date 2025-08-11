@@ -35,6 +35,20 @@ export const lightThemeClass = createTheme(vars, {
     outlinePane: '50',
     verticalItem: '9',
   },
+  shadow: {
+    elevationSm: '0 1px 2px rgba(0,0,0,0.05)',
+    elevationMd: '0 2px 4px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.1)',
+    elevationLg: '0 8px 16px rgba(0,0,0,0.12)',
+    insetSm: 'inset 0 1px 1px rgba(0,0,0,0.08)',
+    focusRing: '0 0 0 3px rgba(37,99,235,0.2)',
+  },
+  transition: {
+    duration: { fast: '150ms', normal: '200ms', slow: '300ms' },
+    easing: {
+      standard: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      emphasized: 'cubic-bezier(0.2, 0, 0, 1)',
+    },
+  },
 });
 
 export const darkThemeClass = createTheme(vars, {
@@ -70,6 +84,20 @@ export const darkThemeClass = createTheme(vars, {
     popover: '100',
     outlinePane: '50',
     verticalItem: '9',
+  },
+  shadow: {
+    elevationSm: '0 1px 2px rgba(0,0,0,0.4)',
+    elevationMd: '0 2px 4px rgba(0,0,0,0.45), 0 4px 8px rgba(0,0,0,0.5)',
+    elevationLg: '0 8px 16px rgba(0,0,0,0.6)',
+    insetSm: 'inset 0 1px 1px rgba(0,0,0,0.5)',
+    focusRing: '0 0 0 3px rgba(96,165,250,0.25)',
+  },
+  transition: {
+    duration: { fast: '150ms', normal: '200ms', slow: '300ms' },
+    easing: {
+      standard: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      emphasized: 'cubic-bezier(0.2, 0, 0, 1)',
+    },
   },
 });
 

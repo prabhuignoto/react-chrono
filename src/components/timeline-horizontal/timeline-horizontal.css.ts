@@ -1,22 +1,27 @@
 import { globalStyle, style } from '@vanilla-extract/css';
+import { sprinkles } from '../../styles/sprinkles/sprinkles.css';
 
-export const timelineHorizontalWrapper = style({
-  display: 'flex',
-  listStyle: 'none',
-  margin: 0,
-  width: '100%',
-});
+export const timelineHorizontalWrapper = style([
+  sprinkles({ display: 'flex' }),
+  {
+    listStyle: 'none',
+    margin: 0,
+    width: '100%',
+    // Enable container queries for children
+    containerType: 'inline-size',
+  },
+]);
 
-export const timelineItemWrapper = style({
-  visibility: 'visible',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '150px',
-  flexDirection: 'column',
-  flexShrink: 0,
-  position: 'relative',
-});
+export const timelineItemWrapper = style([
+  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'center' }),
+  {
+    visibility: 'visible',
+    height: '150px',
+    flexDirection: 'column',
+    flexShrink: 0,
+    position: 'relative',
+  },
+]);
 
 globalStyle(`${timelineHorizontalWrapper}.vertical`, { flexDirection: 'column' });
 globalStyle(`${timelineHorizontalWrapper}.horizontal`, { flexDirection: 'row' });

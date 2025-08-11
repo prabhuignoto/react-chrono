@@ -22,7 +22,7 @@ import { ContentFooter } from './content-footer';
 import { ContentHeader } from './content-header';
 import { DetailsText } from './details-text';
 import { getTextOrContent } from './text-or-content';
-import { baseCard, itemContentWrapper } from './timeline-card-content.css';
+import { baseCard, itemContentWrapper, contentDetailsWrapper, showMoreButton, chevronIconWrapper } from './timeline-card-content.css';
 import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { SlideShowType } from '@models/TimelineModel';
 import NestedTimelineRenderer from '../nested-timeline-renderer/nested-timeline-renderer';
@@ -435,7 +435,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               detailedText={detailedText}
               customContent={customContent}
               timelineContent={timelineContent}
-              contentDetailsClass={contentDetailsClass}
+              contentDetailsClass={`${contentDetailsClass} ${contentDetailsWrapper}`}
               cardActualHeight={cardActualHeight}
               detailsHeight={detailsHeight}
               ref={detailsRef}
@@ -463,6 +463,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               canShow={!!detailedText}
               isNested={!!isNested}
               theme={theme as any}
+              buttonClassName={showMoreButton}
+              iconWrapperClassName={chevronIconWrapper}
             />
           )}
         </section>

@@ -3,6 +3,7 @@ import cls from 'classnames';
 import React, { useMemo } from 'react';
 import { useTimelineContext } from '../../contexts';
 import { titleActive, titleWrapper } from './timeline-card-title.css';
+import { cardTitleRecipe } from '../timeline-card-content/timeline-card-content.css';
 import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
 /**
@@ -27,7 +28,7 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
 
   // Computed class name for the title, combining base class, active state, and additional classes
   const titleClass = useMemo(
-    () => cls(TITLE_CLASS, active ? 'active' : '', classString),
+    () => cls(TITLE_CLASS, active ? 'active' : '', classString, cardTitleRecipe({ active: !!active })),
     [active, classString],
   );
 
@@ -36,7 +37,6 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
 
   return (
     <div
-      {...(align ? ({ align } as any) : {})}
       className={titleClass}
       style={{
         ...computeCssVarsFromTheme(theme),

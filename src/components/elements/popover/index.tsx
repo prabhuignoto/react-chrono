@@ -24,6 +24,7 @@ import {
   selecterIconOpen,
   selecterLabel,
 } from './popover.css';
+import { popoverHolderRecipe } from './popover.css';
 import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
 // Memoized content wrapper applying the class from CSS module
@@ -122,9 +123,11 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           <div
             className={[
               popoverHolder,
-              state.isVisible ? holderVisible : '',
-              position === 'bottom' ? holderBottom : holderTop,
-              $isMobile ? holderLeftMobile : '',
+              popoverHolderRecipe({
+                visible: state.isVisible,
+                position: position === 'bottom' ? 'bottom' : 'top',
+                leftMobile: !!$isMobile,
+              }),
             ].join(' ')}
             style={{ ...computeCssVarsFromTheme(theme), width: $isMobile ? '90%' : `${width}px` }}
           >

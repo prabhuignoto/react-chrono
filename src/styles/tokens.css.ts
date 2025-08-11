@@ -35,6 +35,17 @@ export const vars = createThemeContract({
     outlinePane: null,
     verticalItem: null,
   },
+  shadow: {
+    elevationSm: null,
+    elevationMd: null,
+    elevationLg: null,
+    insetSm: null,
+    focusRing: null,
+  },
+  transition: {
+    duration: { fast: null, normal: null, slow: null },
+    easing: { standard: null, emphasized: null },
+  },
 });
 
 

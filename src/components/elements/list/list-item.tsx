@@ -12,6 +12,7 @@ import {
   title,
 } from './list.css';
 import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
+import { listItemRecipe } from './list.css';
 
 /**
  * ListItem component displays a selectable/clickable item with title and description
@@ -55,7 +56,7 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
       }
     }, []);
 
-    const itemClass = `${listItem} ${active ? listItemActive : ''}`;
+    const itemClass = `${listItem} ${active ? listItemActive : ''} ${listItemRecipe({ active: !!active })}`;
     return (
       <li
         data-testid="list-item"

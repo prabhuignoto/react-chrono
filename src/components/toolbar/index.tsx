@@ -1,11 +1,21 @@
-import { FunctionComponent, memo, useCallback } from 'react';
+import { FunctionComponent, ReactNode, memo, useCallback } from 'react';
 import { jsx as _jsx } from 'react/jsx-runtime';
+// styled-components toolbar removed; using Vanilla Extract classes
 import {
-  ContentWrapper,
-  IconWrapper,
-  ToolbarListItem,
-  ToolbarWrapper,
-} from './toolbar.styles';
+  actionGroup as veActionGroup,
+  contentWrapper as veContentWrapper,
+  iconWrapper as veIconWrapper,
+  navigationGroup as veNavigationGroup,
+  searchControls as veSearchControls,
+  searchGroup as veSearchGroup,
+  searchInfo as veSearchInfo,
+  searchInput as veSearchInput,
+  searchWrapper as veSearchWrapper,
+  toolbarListItem as veToolbarListItem,
+  toolbarSection as veToolbarSection,
+  toolbarSectionRecipe as veToolbarSectionRecipe,
+  toolbarWrapper as veToolbarWrapper,
+} from './toolbar.css';
 import { ToolbarProps } from '@models/ToolbarProps';
 
 /**
@@ -27,7 +37,7 @@ import { ToolbarProps } from '@models/ToolbarProps';
  * ```
  */
 const Toolbar: FunctionComponent<ToolbarProps> = memo(
-  ({ items = [], children = [], theme }) => {
+  ({ items = [], children = [], theme, useVeStyles = true }) => {
     if (!items.length) {
       return null;
     }
@@ -75,11 +85,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
     );
 
     return (
-      <ToolbarWrapper
-        theme={theme}
-        role="toolbar"
-        aria-label="Timeline toolbar"
-      >
+      <div className={veToolbarWrapper} role="toolbar" aria-label="Timeline toolbar">
         {items.map(({ label, id, icon }, index) => {
           if (!id) {
             console.warn('Toolbar item is missing required id property');
@@ -87,22 +93,15 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
           }
 
           return (
-            <ToolbarListItem
-              aria-label={label}
-              key={id}
-              role="button"
-              tabIndex={0}
-              theme={theme}
-              onKeyDown={(event) => handleKeyDown(event, index)}
-            >
-              {icon && <IconWrapper>{icon}</IconWrapper>}
-              {children[index] && (
-                <ContentWrapper>{children[index]}</ContentWrapper>
+            <div className={veToolbarListItem} aria-label={label} key={id} role="button" tabIndex={0} onKeyDown={(event) => handleKeyDown(event, index)}>
+              {icon && <span className={veIconWrapper}>{icon}</span>}
+              {Array.isArray(children) && (children as ReactNode[])[index] && (
+                <span className={veContentWrapper}>{(children as ReactNode[])[index]}</span>
               )}
-            </ToolbarListItem>
+            </div>
           );
         })}
-      </ToolbarWrapper>
+      </div>
     );
   },
 );

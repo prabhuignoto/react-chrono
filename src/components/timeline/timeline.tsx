@@ -11,6 +11,7 @@ import {
   TimelineContentRender,
   ToolbarWrapper,
 } from './timeline.style';
+import * as ve from './timeline.css';
 import { TimelineToolbar } from './timeline-toolbar';
 import { useTimelineSearch } from '../../hooks/useTimelineSearch';
 import { useTimelineNavigation } from '../../hooks/useTimelineNavigation';
@@ -343,7 +344,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   // Memoize classes and display flags
   const wrapperClass = useMemo(
     () =>
-      cls(mode.toLocaleLowerCase(), {
+      cls(mode.toLocaleLowerCase(), ve.wrapper, {
         'focus-visible': !isChild,
         'js-focus-visible': !isChild,
       }),
@@ -526,7 +527,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
     >
       {canShowToolbar && (
-        <ToolbarWrapper position={toolbarPosition}>
+        <ToolbarWrapper position={toolbarPosition} className={ve.toolbarWrapper}>
           <TimelineToolbar
             activeTimelineItem={activeTimelineItem ?? 0}
             totalItems={items.length}
@@ -587,7 +588,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     <TimelineMainWrapper
       ref={timelineMainRef as React.RefObject<HTMLDivElement>}
         $scrollable={canScrollTimeline}
-        className={`${mode.toLowerCase()} timeline-main-wrapper`}
+        className={`${mode.toLowerCase()} timeline-main-wrapper ${ve.timelineMainWrapper}`}
         id="timeline-main-wrapper"
       data-testid="timeline-main-wrapper"
         theme={theme}
@@ -623,6 +624,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         id={id}
         $showAllCards={showAllCardsHorizontal}
         ref={horizontalContentRef}
+        className={ve.timelineContentRender}
       />
     </Wrapper>
   );

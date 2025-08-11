@@ -39,6 +39,8 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
   textContentIsLarge,
   showReadMore,
   canShow,
+  buttonClassName,
+  iconWrapperClassName,
 }: ContentFooterProps) => {
   const { theme } = useTimelineContext();
 
@@ -63,7 +65,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
     <>
       {canShowMore ? (
         <button
-          className={showMoreButton}
+          className={buttonClassName || showMoreButton}
           onPointerDown={handleClick}
           onKeyUp={(event) => {
             if (event.key === 'Enter') {
@@ -73,7 +75,7 @@ const ContentFooter: FunctionComponent<ContentFooterProps> = ({
           tabIndex={0}
         >
           {<span>{showMore ? 'read less' : 'read more'}</span>}
-          <span className={chevronIconWrapper}>
+          <span className={iconWrapperClassName || chevronIconWrapper}>
             <ChevronIcon />
           </span>
         </button>

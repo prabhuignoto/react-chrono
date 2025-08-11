@@ -3,32 +3,32 @@
 exports[`TimelineControl > should render 1`] = `
 <div>
   <div
-    class="timeline-control_timelineControlContainer__1g3kfsdb"
+    class="timeline-control_timelineControlContainer__1g3kfsdk timeline-control__1g3kfsdj properties_marginBlock_sm_mobile__12ug04936 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
     style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1);"
   >
     <output
       aria-live="polite"
-      class="timeline-control_srOnly__1g3kfsd0"
+      class="a11y_visuallyHidden__1j3zf2m0"
     />
     <div
       aria-label="Timeline Navigation"
-      class="timeline-control_navWrapper__1g3kfsd1 timeline-controls controls"
+      class="timeline-control_navWrapper__1g3kfsd1 timeline-control__1g3kfsd0 properties_padding_xs_mobile__12ug0491u properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r timeline-controls controls"
       role="toolbar"
     >
       <div
-        class="timeline-control_navItem__1g3kfsd2"
+        class="timeline-control_navItem__1g3kfsd3 timeline-control__1g3kfsd2 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="first"
-          class="timeline-control_navButton__1g3kfsd4 timeline-control_navButtonHover__1g3kfsd6 timeline-control_navButtonActive__1g3kfsd7 timeline-control_navButtonFocus__1g3kfsd8"
+          class="timeline-control_navButton__1g3kfsd5 timeline-control_navButtonHover__1g3kfsd7 timeline-control_navButtonActive__1g3kfsd8 timeline-control_navButtonFocus__1g3kfsd9"
           data-test-id="jump-to-first"
           tabindex="0"
           title="first"
         >
           <span
-            class="timeline-control_navButtonSvg__1g3kfsd9"
+            class="timeline-control_navButtonSvg__1g3kfsda"
           >
             <svg
               class="feather feather-chevrons-left"
@@ -53,19 +53,19 @@ exports[`TimelineControl > should render 1`] = `
         </button>
       </div>
       <div
-        class="timeline-control_navItem__1g3kfsd2"
+        class="timeline-control_navItem__1g3kfsd3 timeline-control__1g3kfsd2 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="previous"
-          class="timeline-control_navButton__1g3kfsd4 timeline-control_navButtonHover__1g3kfsd6 timeline-control_navButtonActive__1g3kfsd7 timeline-control_navButtonFocus__1g3kfsd8"
+          class="timeline-control_navButton__1g3kfsd5 timeline-control_navButtonHover__1g3kfsd7 timeline-control_navButtonActive__1g3kfsd8 timeline-control_navButtonFocus__1g3kfsd9"
           data-test-id="previous"
           tabindex="0"
           title="previous"
         >
           <span
-            class="timeline-control_navButtonSvg__1g3kfsd9"
+            class="timeline-control_navButtonSvg__1g3kfsda"
           >
             <svg
               class="feather feather-chevron-left"
@@ -87,19 +87,19 @@ exports[`TimelineControl > should render 1`] = `
         </button>
       </div>
       <div
-        class="timeline-control_navItem__1g3kfsd2"
+        class="timeline-control_navItem__1g3kfsd3 timeline-control__1g3kfsd2 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="next"
-          class="timeline-control_navButton__1g3kfsd4 timeline-control_navButtonHover__1g3kfsd6 timeline-control_navButtonActive__1g3kfsd7 timeline-control_navButtonFocus__1g3kfsd8"
+          class="timeline-control_navButton__1g3kfsd5 timeline-control_navButtonHover__1g3kfsd7 timeline-control_navButtonActive__1g3kfsd8 timeline-control_navButtonFocus__1g3kfsd9"
           data-test-id="next"
           tabindex="0"
           title="next"
         >
           <span
-            class="timeline-control_navButtonSvg__1g3kfsd9"
+            class="timeline-control_navButtonSvg__1g3kfsda"
           >
             <svg
               class="feather feather-chevron-right"
@@ -121,19 +121,19 @@ exports[`TimelineControl > should render 1`] = `
         </button>
       </div>
       <div
-        class="timeline-control_navItem__1g3kfsd2"
+        class="timeline-control_navItem__1g3kfsd3 timeline-control__1g3kfsd2 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-disabled="false"
           aria-label="last"
-          class="timeline-control_navButton__1g3kfsd4 timeline-control_navButtonHover__1g3kfsd6 timeline-control_navButtonActive__1g3kfsd7 timeline-control_navButtonFocus__1g3kfsd8"
+          class="timeline-control_navButton__1g3kfsd5 timeline-control_navButtonHover__1g3kfsd7 timeline-control_navButtonActive__1g3kfsd8 timeline-control_navButtonFocus__1g3kfsd9"
           data-test-id="jump-to-last"
           tabindex="0"
           title="last"
         >
           <span
-            class="timeline-control_navButtonSvg__1g3kfsd9"
+            class="timeline-control_navButtonSvg__1g3kfsda"
           >
             <svg
               class="feather feather-chevrons-right"
@@ -158,22 +158,22 @@ exports[`TimelineControl > should render 1`] = `
         </button>
       </div>
       <div
-        class="timeline-control_navItem__1g3kfsd2"
+        class="timeline-control_navItem__1g3kfsd3 timeline-control__1g3kfsd2 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
       />
       <div
-        class="timeline-control_navItem__1g3kfsd2"
+        class="timeline-control_navItem__1g3kfsd3 timeline-control__1g3kfsd2 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
       >
         <button
           aria-controls="timeline-main-wrapper"
           aria-label="dark"
           aria-pressed="false"
-          class="timeline-control_navButton__1g3kfsd4 timeline-control_navButtonHover__1g3kfsd6 timeline-control_navButtonActive__1g3kfsd7 timeline-control_navButtonFocus__1g3kfsd8"
+          class="timeline-control_navButton__1g3kfsd5 timeline-control_navButtonHover__1g3kfsd7 timeline-control_navButtonActive__1g3kfsd8 timeline-control_navButtonFocus__1g3kfsd9"
           data-test-id="dark-toggle"
           tabindex="0"
           title="dark"
         >
           <span
-            class="timeline-control_navButtonSvg__1g3kfsd9"
+            class="timeline-control_navButtonSvg__1g3kfsda"
           >
             <svg
               fill="none"

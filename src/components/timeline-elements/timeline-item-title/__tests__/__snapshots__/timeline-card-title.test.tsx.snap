@@ -3,9 +3,9 @@
 exports[`Timeline item title > should match the snapshot 1`] = `
 <div>
   <div
-    class="timeline-item-title"
-    data-ve-active-class="timeline-card-title_titleActive__1m05k8t1"
-    data-ve-class="timeline-card-title_titleWrapper__1m05k8t0"
+    class="timeline-item-title timeline-card-content_cardTitleRecipe__chzdno7 timeline-card-content_cardTitleBase__chzdno4 timeline-card-content_cardTitleRecipe_active_false__chzdno9"
+    data-ve-active-class="timeline-card-title_titleActive__1m05k8t2"
+    data-ve-class="timeline-card-title_titleWrapper__1m05k8t1 timeline-card-title__1m05k8t0 properties_paddingInline_xs_mobile__12ug0492o properties_paddingBlock_xs_mobile__12ug04929"
     style="--color-background__9df7601: #fff; --color-text__9df7600: #111827; --color-primary__9df7602: #2563eb; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #fff; --color-cardTitle__9df7605: #111827; --color-cardSubtitle__9df7606: #374151; --color-cardDetails__9df7607: #4b5563; --color-toolbarBg__9df7608: #f1f5f9; --color-toolbarBtnBg__9df7609: #ffffff; --color-toolbarText__9df760a: #1e293b; --color-icon__9df760b: #2563eb; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #2563eb; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #2563eb; --color-shadow__9df760g: rgba(0,0,0,0.1); font-size: 1.5rem; visibility: visible;"
   >
     title

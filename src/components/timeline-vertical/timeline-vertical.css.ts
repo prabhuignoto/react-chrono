@@ -1,31 +1,36 @@
 import { globalStyle, keyframes, style } from '@vanilla-extract/css';
 import { vars } from '../../styles/tokens.css';
+import { sprinkles } from '../../styles/sprinkles/sprinkles.css';
 
-export const timelineVerticalWrapper = style({
-  display: 'flex',
-  flexDirection: 'column',
-  width: '100%',
-  padding: '0.25rem',
-  outline: 0,
-  position: 'relative',
-});
+export const timelineVerticalWrapper = style([
+  sprinkles({ display: 'flex' }),
+  {
+    flexDirection: 'column',
+    width: '100%',
+    padding: '0.25rem',
+    outline: 0,
+    position: 'relative',
+    // Enable container queries for children without affecting layout
+    containerType: 'inline-size',
+  },
+]);
 
 export const animateVisible = keyframes({
   from: { opacity: 0, visibility: 'hidden' },
   to: { opacity: 1, visibility: 'visible' },
 });
 
-export const verticalItemWrapper = style({
-  display: 'flex',
-  position: 'relative',
-  visibility: 'hidden',
-  width: '100%',
-  alignItems: 'stretch',
-  justifyContent: 'center',
-  zIndex: vars.zIndex.verticalItem,
-  margin: '1rem 0',
-  listStyle: 'none',
-});
+export const verticalItemWrapper = style([
+  sprinkles({ display: 'flex', justifyContent: 'center', my: 'lg' }),
+  {
+    position: 'relative',
+    visibility: 'hidden',
+    width: '100%',
+    alignItems: 'stretch',
+    zIndex: vars.zIndex.verticalItem,
+    listStyle: 'none',
+  },
+]);
 
 globalStyle(`${verticalItemWrapper}.visible`, { visibility: 'visible' });
 globalStyle(`${verticalItemWrapper}.no-alt.left`, { marginRight: 'auto' });
@@ -57,11 +62,9 @@ export const timelineCardContentVisible = style({
   animationTimingFunction: 'ease-in',
 });
 
-export const timelineTitleWrapper = style({
-  alignItems: 'center',
-  display: 'flex',
-  minWidth: 0,
-  overflow: 'hidden',
-});
+export const timelineTitleWrapper = style([
+  sprinkles({ display: 'flex', alignItems: 'center' }),
+  { minWidth: 0, overflow: 'hidden' },
+]);
 
 

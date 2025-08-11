@@ -23,6 +23,16 @@ import {
   SearchGroup,
   ActionGroup,
 } from './timeline.style';
+import {
+  actionGroup as veActionGroup,
+  navigationGroup as veNavigationGroup,
+  searchControls as veSearchControls,
+  searchGroup as veSearchGroup,
+  searchInfo as veSearchInfo,
+  searchInput as veSearchInput,
+  searchWrapper as veSearchWrapper,
+  extraControls as veExtraControls,
+} from '../toolbar/toolbar.css';
 import { navButton, navButtonSvg } from '../timeline-elements/timeline-control/timeline-control.css';
 
 // Helper function to convert ReactNode to string safely
@@ -209,8 +219,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   // Render the TimelineToolbar component
   return (
     <div style={computeCssVarsFromTheme(theme)}>
-      <Toolbar items={toolbarItems} theme={theme}>
-      <NavigationGroup $primary>
+       <Toolbar items={toolbarItems} theme={theme}>
+      <NavigationGroup $primary className={veNavigationGroup}>
         <Controls
           disableLeft={isLeftDisabled}
           disableRight={isRightDisabled}
@@ -229,8 +239,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           totalItems={totalItems}
         />
       </NavigationGroup>
-      <SearchGroup>
-        <SearchWrapper theme={theme}>
+      <SearchGroup className={veSearchGroup}>
+        <SearchWrapper theme={theme} className={veSearchWrapper}>
           <SearchInput
             ref={searchInputRef}
             type="search"
@@ -243,6 +253,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               buttonTexts?.searchAriaLabel ?? 'Search timeline content'
             }
             disabled={slideShowRunning}
+            className={veSearchInput}
           />
           {searchQuery && (
             <button
@@ -255,9 +266,9 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               <span className={navButtonSvg}><CloseIcon /></span>
             </button>
           )}
-          <SearchControls>
+          <SearchControls className={veSearchControls}>
             {totalMatches > 0 && (
-              <SearchInfo theme={theme}>
+              <SearchInfo theme={theme} className={veSearchInfo}>
                 {`${currentMatchIndex + 1} / ${totalMatches}`}
               </SearchInfo>
             )}
@@ -292,11 +303,12 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           </SearchControls>
         </SearchWrapper>
       </SearchGroup>
-      <ActionGroup>
+      <ActionGroup className={veActionGroup}>
         <ExtraControls
           $hide={hideExtraControls}
           $slideShowRunning={slideShowRunning}
           key="timeline-extra-controls"
+          className={veExtraControls}
         >
           <div className="control-wrapper" key="quick-jump">
             {enableQuickJump ? (

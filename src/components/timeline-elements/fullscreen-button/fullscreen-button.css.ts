@@ -21,24 +21,22 @@ export const baseButton = style({
   borderStyle: 'solid',
   borderWidth: '1px',
   borderColor: vars.color.buttonBorder,
-  boxShadow: `0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1)`,
-  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+  boxShadow: vars.shadow.elevationSm,
+  transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
   selectors: {
     '&:hover:not(:disabled)': {
       color: vars.color.primary,
       backgroundColor: vars.color.buttonHoverBg,
       borderColor: vars.color.buttonHoverBorder,
-      boxShadow:
-        '0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.1)',
+      boxShadow: vars.shadow.elevationMd,
       transform: 'translateY(-1px)',
     },
     '&:active:not(:disabled)': {
       transform: 'translateY(0)',
-      boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1)',
+      boxShadow: vars.shadow.elevationSm,
     },
     '&:focus-visible': {
-      boxShadow:
-        `0 0 0 3px ${vars.color.primary}33, 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1)`,
+      boxShadow: `${vars.shadow.focusRing}, ${vars.shadow.elevationSm}`,
     },
     '&:disabled': {
       opacity: 0.5,
@@ -105,5 +103,8 @@ export const fullscreenButton = recipe({
   },
   defaultVariants: { size: 'medium', isFullscreen: false },
 });
+
+// Secondary recipe name for clearer import site usage without breaking the existing one
+export const fullscreenButtonRecipe = fullscreenButton;
 
 
