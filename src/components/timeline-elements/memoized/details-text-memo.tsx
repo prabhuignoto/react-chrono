@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useBackground } from '../../../hooks/useBackground';
 import { useMeasureHeight } from '../../../hooks/useMeasureHeight';
-import { DetailsTextWrapper } from '../timeline-card-media/timeline-card-media.styles';
+import { detailsTextWrapper } from '../timeline-card-media/timeline-card-media.css';
 import { DetailsTextMemoModel } from './memoized-model';
 
 const arePropsEqual = (
@@ -24,15 +24,17 @@ const DetailsTextMemo = memo<DetailsTextMemoModel>(
     if (!textOverlay) return null;
 
     return (
-      <DetailsTextWrapper
+      <div
         ref={measureRef}
-        $expandFull={expand}
-        theme={theme}
-        $show={show}
-        background={background}
+        className={detailsTextWrapper}
+        style={{
+          background,
+          height: show ? '100%' : 0,
+          overflow: expand ? 'auto' : 'hidden',
+        }}
       >
         <Text />
-      </DetailsTextWrapper>
+      </div>
     );
   },
   arePropsEqual,

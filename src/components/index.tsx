@@ -9,8 +9,9 @@ import React, {
   useState,
   useMemo,
 } from 'react';
-import GlobalContextProvider from './GlobalContext';
+import { TimelineContextProvider } from './contexts/TimelineContextProvider';
 import Timeline from './timeline/timeline';
+import { computeCssVarsFromTheme } from '../styles/theme-bridge';
 const toReactArray = React.Children.toArray;
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
@@ -157,11 +158,17 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   const handleTimelineUpdate = useCallback(
     (actvTimelineIndex: number) => {
+      // Debug logging for visibility logic
+      if (typeof window !== 'undefined') {
+        console.log('Timeline Update - Mode:', mode, 'Active Index:', actvTimelineIndex);
+      }
+      
       setTimeLineItems((lineItems) =>
         lineItems.map((item, index) => ({
           ...item,
           active: index === actvTimelineIndex,
-          visible: actvTimelineIndex >= 0,
+          // Always keep horizontal items visible so points are always shown
+          visible: true,
         })),
       );
 
@@ -173,7 +180,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         }
       }
     },
-    [items],
+    [items, mode],
   );
 
   useEffect(() => {
@@ -196,24 +203,12 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     if (activeTimelineItem < timeLineItems.length - 1) {
       const newTimeLineItem = activeTimelineItem + 1;
 
-      // Skip timeline update (which triggers scrolling) in horizontal mode during slideshow
-      if (mode === 'HORIZONTAL' && slideShowActive) {
-        // Only update the timeline items state and active item, skip scroll triggering updates
-        setTimeLineItems((lineItems) =>
-          lineItems.map((item, index) => ({
-            ...item,
-            active: index === newTimeLineItem,
-            visible: newTimeLineItem >= 0,
-          })),
-        );
-        setActiveTimelineItem(newTimeLineItem);
+      // Update timeline state and trigger smooth navigation
+      handleTimelineUpdate(newTimeLineItem);
+      setActiveTimelineItem(newTimeLineItem);
 
-        if (items && items.length - 1 === newTimeLineItem) {
-          setSlideShowActive(false);
-        }
-      } else {
-        handleTimelineUpdate(newTimeLineItem);
-        setActiveTimelineItem(newTimeLineItem);
+      if (mode === 'HORIZONTAL' && slideShowActive && items && items.length - 1 === newTimeLineItem) {
+        setSlideShowActive(false);
       }
     }
   }, [
@@ -229,23 +224,11 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     if (activeTimelineItem > 0) {
       const newTimeLineItem = activeTimelineItem - 1;
 
-      // Skip timeline update (which triggers scrolling) in horizontal mode during slideshow
-      if (mode === 'HORIZONTAL' && slideShowActive) {
-        // Only update the timeline items state and active item, skip scroll triggering updates
-        setTimeLineItems((lineItems) =>
-          lineItems.map((item, index) => ({
-            ...item,
-            active: index === newTimeLineItem,
-            visible: newTimeLineItem >= 0,
-          })),
-        );
-        setActiveTimelineItem(newTimeLineItem);
-      } else {
-        handleTimelineUpdate(newTimeLineItem);
-        setActiveTimelineItem(newTimeLineItem);
-      }
+      // Update timeline state and trigger smooth navigation
+      handleTimelineUpdate(newTimeLineItem);
+      setActiveTimelineItem(newTimeLineItem);
     }
-  }, [activeTimelineItem, handleTimelineUpdate, mode, slideShowActive]);
+  }, [activeTimelineItem, handleTimelineUpdate]);
 
   const handleFirst = useCallback(() => {
     setActiveTimelineItem(0);
@@ -300,8 +283,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   }, [children]);
 
   return (
-    <GlobalContextProvider {...props}>
-      <Timeline
+    <TimelineContextProvider {...props}>
+      <div style={computeCssVarsFromTheme(props.theme)} id="testette">
+        <Timeline
         activeTimelineItem={activeTimelineItem}
         contentDetailsChildren={contentDetailsChildren}
         iconChildren={iconChildren}
@@ -320,8 +304,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         onOutlineSelection={handleOutlineSelection}
         mode={mode}
         onPaused={onPaused}
-      />
-    </GlobalContextProvider>
+        />
+      </div>
+    </TimelineContextProvider>
   );
 };
 

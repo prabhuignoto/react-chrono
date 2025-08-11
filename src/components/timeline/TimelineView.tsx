@@ -7,7 +7,7 @@ import { Scroll } from '@models/TimelineHorizontalModel';
 
 interface TimelineViewProps {
   timelineMode: string;
-  activeTimelineItem?: number;
+  activeTimelineItem: number;
   autoScroll: (scroll: Partial<Scroll>) => void;
   contentDetailsChildren?: React.ReactNode;
   hasFocus: boolean;
@@ -19,8 +19,8 @@ interface TimelineViewProps {
   id: string;
   theme?: any;
   lineWidth?: number;
-  onOutlineSelection?: (index: number) => void;
-  nestedCardHeight?: number;
+  onOutlineSelection: (index: number) => void;
+  nestedCardHeight: number;
 }
 
 const TimelineView: React.FC<TimelineViewProps> = ({
@@ -67,6 +67,7 @@ const TimelineView: React.FC<TimelineViewProps> = ({
     return (
       <TimelineVertical
         activeTimelineItem={activeTimelineItem}
+        alternateCards={true}
         autoScroll={autoScroll}
         contentDetailsChildren={contentDetailsChildren}
         hasFocus={hasFocus}

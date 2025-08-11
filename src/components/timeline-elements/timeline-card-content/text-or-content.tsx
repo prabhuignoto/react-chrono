@@ -4,15 +4,11 @@ import {
   ForwardRefExoticComponent,
   ReactNode,
   forwardRef,
-  useContext,
   useMemo,
 } from 'react';
 import xss from 'xss';
-import { GlobalContext } from '../../GlobalContext';
-import {
-  TimelineContentDetails,
-  TimelineSubContent,
-} from './timeline-card-content.styles';
+import { useTimelineContext } from '../../contexts';
+import { timelineContentDetails, timelineSubContent } from './timeline-card-content.css';
 
 // Define the type for the TextOrContentModel
 export type TextOrContentModel = Pick<
@@ -46,15 +42,13 @@ const renderTextArray: (
           }
         : null;
     return (
-      <TimelineSubContent
+      <span
+        className={`${timelineSubContent} ${cardTextClassName ?? ''}`}
         key={`timeline-text-${typeof text === 'string' ? text.substring(0, 10) : ''}-${index}`}
-        fontSize={fontSizes?.cardText}
-        className={cardTextClassName}
-        theme={theme}
         {...props}
       >
         {parseDetailsAsHTML ? null : text}
-      </TimelineSubContent>
+      </span>
     );
   });
 };
@@ -71,12 +65,12 @@ const getTextOrContent: (
   const TextOrContent = forwardRef<HTMLParagraphElement, TextOrContentModel>(
     (prop, ref) => {
       const isTextArray = Array.isArray(detailedText);
-      const { fontSizes, classNames, parseDetailsAsHTML, textDensity } =
-        useContext(GlobalContext);
+      const { fontSizes, classNames, parseDetailsAsHTML, textContentDensity } =
+        useTimelineContext();
 
       const shouldNotShowText = useMemo(() => {
-        return (parseDetailsAsHTML && !isTextArray) || textDensity === 'LOW';
-      }, [isTextArray, parseDetailsAsHTML, textDensity]);
+        return (parseDetailsAsHTML && !isTextArray) || textContentDensity === 'LOW';
+      }, [isTextArray, parseDetailsAsHTML, textContentDensity]);
 
       // Generate the text content based on detailedText
       const getTextContent = () => {
@@ -111,14 +105,14 @@ const getTextOrContent: (
         const textContentProps = getTextContentProps(textContent);
 
         return (
-          <TimelineContentDetails
-            className={showMore ? 'active' : ''}
-            ref={ref}
-            theme={theme}
+          <p
+            className={timelineContentDetails + ' ' + (showMore ? 'active' : '')}
+            ref={ref as any}
             {...textContentProps}
+            style={{ color: theme?.cardDetailsColor }}
           >
             {shouldNotShowText ? null : textContent}
-          </TimelineContentDetails>
+          </p>
         );
       };
 

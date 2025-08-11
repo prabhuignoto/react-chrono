@@ -1,10 +1,13 @@
 import { Theme } from '@models/Theme';
 import {
-  List,
-  ListItem,
-  ListItemBullet,
-  ListItemName,
-} from './timeline-outline.styles';
+  listRoot,
+  listItem,
+  listItemBullet,
+  listItemBulletSelected,
+  listItemName,
+  listItemNameSelected,
+} from './timeline-outline.css';
+import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { memo, FunctionComponent, useCallback, useMemo } from 'react';
 import { TimelineOutlineItem } from './timeline-outline.model';
 import { useWindowSize } from '../../../hooks/useWindowSize';
@@ -28,18 +31,21 @@ const OutlineItem = memo(
     );
 
     return (
-      <ListItem
+      <li
         key={item.id ?? index}
         onPointerDown={onClick}
         aria-disabled={item.disabled}
         aria-selected={item.selected}
         aria-label={item.ariaLabel ?? item.name}
+        className={listItem}
       >
-        <ListItemBullet theme={theme} selected={item.selected}></ListItemBullet>
-        <ListItemName theme={theme} selected={item.selected}>
+        <span
+          className={item.selected ? `${listItemBullet} ${listItemBulletSelected}` : listItemBullet}
+        ></span>
+        <span className={item.selected ? `${listItemName} ${listItemNameSelected}` : listItemName}>
           {item.name}
-        </ListItemName>
-      </ListItem>
+        </span>
+      </li>
     );
   },
 );
@@ -76,7 +82,7 @@ const OutlineItemList: FunctionComponent<OutlineItemListModel> = memo(
     }, [items, height]);
 
     return (
-      <List>
+      <ul className={listRoot} style={computeCssVarsFromTheme(theme)}>
         {visibleItems.map((item, index) => (
           <OutlineItem
             key={item.id ?? index}
@@ -87,13 +93,13 @@ const OutlineItemList: FunctionComponent<OutlineItemListModel> = memo(
           />
         ))}
         {items.length > visibleItems.length && (
-          <ListItem>
-            <ListItemName theme={theme}>
+          <li className={listItem}>
+            <span className={listItemName}>
               {`+ ${items.length - visibleItems.length} more items`}
-            </ListItemName>
-          </ListItem>
+            </span>
+          </li>
         )}
-      </List>
+      </ul>
     );
   },
 );

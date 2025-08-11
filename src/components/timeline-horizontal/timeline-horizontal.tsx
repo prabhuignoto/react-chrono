@@ -1,12 +1,9 @@
 import { TimelineHorizontalModel } from '@models/TimelineHorizontalModel';
 import cls from 'classnames';
-import React, { ReactNode, useContext, useMemo } from 'react';
-import { GlobalContext } from '../GlobalContext';
+import React, { ReactNode, useContext, useMemo, useEffect, useRef } from 'react';
+import { useTimelineContext } from '../contexts';
 import TimelineCard from '../timeline-elements/timeline-card/timeline-horizontal-card';
-import {
-  TimelineHorizontalWrapper,
-  TimelineItemWrapper,
-} from './timeline-horizontal.styles';
+import { timelineHorizontalWrapper, timelineItemWrapper } from './timeline-horizontal.css';
 
 /**
  * TimelineHorizontal
@@ -36,16 +33,21 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   iconChildren,
   nestedCardHeight,
   isNested,
+  mode: propMode,
 }: TimelineHorizontalModel) => {
+  // Use unified context
   const {
-    mode = 'HORIZONTAL',
-    itemWidth = 200,
+    theme,
+    mode: contextMode,
+    itemWidth,
     cardHeight,
     flipLayout,
     showAllCardsHorizontal,
-    theme,
     cardWidth,
-  } = useContext(GlobalContext);
+  } = useTimelineContext();
+
+  // Prioritize prop mode over context mode
+  const mode = propMode || contextMode;
 
   // Memoize the wrapper class to avoid unnecessary re-renders
   const wrapperClass = useMemo(
@@ -58,6 +60,30 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     [mode, showAllCardsHorizontal],
   );
 
+  // Ref to the horizontal list to scope focus queries
+  const listRef = useRef<HTMLUListElement>(null);
+
+  // Find and focus the active timeline point button when items update
+  const activeId = useMemo(() => items.find((i) => i.active)?.id, [items]);
+
+  useEffect(() => {
+    if (!activeId) return;
+    // In both horizontal modes, focus the active point button if it exists
+    const root = listRef.current ?? document;
+    const activePoint = root.querySelector(
+      `button[data-testid="timeline-circle"][data-item-id="${activeId}"]`,
+    ) as HTMLButtonElement | null;
+    if (activePoint) {
+      requestAnimationFrame(() => {
+        try {
+          activePoint.focus({ preventScroll: false });
+        } catch (_) {
+          // ignore focus errors
+        }
+      });
+    }
+  }, [activeId]);
+
   const iconChildColln = useMemo(
     () => React.Children.toArray(iconChildren),
     [iconChildren],
@@ -66,15 +92,16 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   // Memoize the timeline items to prevent unnecessary re-renders
   const timelineItems = useMemo(() => {
     return items.map((item, index) => (
-      <TimelineItemWrapper
+      <li
         key={item.id}
-        width={itemWidth}
         className={cls(
-          item.visible ? 'visible' : '',
+          timelineItemWrapper,
+          (item.visible || showAllCardsHorizontal) ? 'visible' : '',
           'timeline-horz-item-container',
         )}
-        as="li"
+        style={{ width: itemWidth, minWidth: showAllCardsHorizontal ? itemWidth : undefined }}
         aria-current={item.active ? 'true' : undefined}
+        id={`timeline-${mode.toLowerCase()}-item-${item.id}`}
       >
         <TimelineCard
           {...item}
@@ -93,7 +120,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
           isNested={isNested}
           nestedCardHeight={nestedCardHeight}
         />
-      </TimelineItemWrapper>
+      </li>
     ));
   }, [
     items,
@@ -114,15 +141,15 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   ]);
 
   return (
-    <TimelineHorizontalWrapper
-      className={wrapperClass}
-      flipLayout={flipLayout}
+    <ul
+      ref={listRef}
+      className={`${timelineHorizontalWrapper} ${wrapperClass}`}
+      style={{ direction: flipLayout ? 'rtl' : 'ltr' }}
       data-testid="timeline-collection"
-      as="ul"
       aria-label="Timeline"
     >
       {timelineItems}
-    </TimelineHorizontalWrapper>
+    </ul>
   );
 };
 

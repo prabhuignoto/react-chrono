@@ -1,8 +1,10 @@
 import { CardMediaModel } from '@models/TimelineMediaModel';
 import cls from 'classnames';
-import React, { memo, useCallback, useContext } from 'react';
-import { GlobalContext } from '../../GlobalContext';
-import { MediaWrapper } from './timeline-card-media.styles';
+import React, { memo, useCallback } from 'react';
+import { mediaEqual } from '@utils/comparison';
+import { useTimelineContext } from '../../contexts';
+import { mediaWrapper, justifyEnd, justifyStart } from './timeline-card-media.css';
+import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { useMediaLoad } from './hooks/useMediaLoad';
 import { useYouTubeDetection } from './hooks/useYouTubeDetection';
 import { useToggleControls } from './hooks/useToggleControls';
@@ -32,18 +34,19 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     const { expandDetails, showText, toggleExpand, toggleText } =
       useToggleControls();
 
-    // Get context
+    // Use unified timeline context
     const {
+      theme,
       mode,
+      cardHeight,
+      borderLessCards,
+      mediaHeight,
+      textOverlay,
+      mediaSettings,
+      // consume from context rather than placeholders
       fontSizes,
       classNames,
-      mediaHeight,
-      borderLessCards,
-      textOverlay,
-      theme,
-      cardHeight,
-      mediaSettings,
-    } = useContext(GlobalContext);
+    } = useTimelineContext();
 
     // Use view options hook for calculated values
     const {
@@ -77,15 +80,14 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
 
     return (
       <>
-        <MediaWrapper
-          theme={theme}
-          $active={active}
-          mode={timelineMode}
-          $slideShowActive={slideshowActive}
-          className={cls('card-media-wrapper', classNames?.cardMedia)}
-          $cardHeight={getCardHeight}
-          align={mediaSettings?.align}
-          $textOverlay={textOverlay}
+        <div
+          className={cls(
+            mediaWrapper,
+            'card-media-wrapper',
+            classNames?.cardMedia,
+            mediaSettings?.align === 'right' ? justifyEnd : justifyStart,
+          )}
+          style={{ ...computeCssVarsFromTheme(theme), height: textOverlay ? 'calc(100% - 1em)' : 0, minHeight: getCardHeight }}
         >
           <MediaContent
             media={media}
@@ -102,7 +104,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
             handleError={handleError}
             onMediaStateChange={onMediaStateChange}
           />
-        </MediaWrapper>
+        </div>
 
         {canShowTextContent && (
           <ContentDisplay
@@ -131,14 +133,16 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
     ) as React.ReactElement;
   },
   (prevProps, nextProps) => {
-    // Custom comparison function to avoid unnecessary re-renders
+    // Only compare props that this component actually uses/render depends on
     return (
       prevProps.active === nextProps.active &&
       prevProps.slideshowActive === nextProps.slideshowActive &&
-      prevProps.paused === nextProps.paused &&
-      prevProps.startWidth === nextProps.startWidth &&
-      prevProps.remainInterval === nextProps.remainInterval &&
-      JSON.stringify(prevProps.theme) === JSON.stringify(nextProps.theme)
+      prevProps.id === nextProps.id &&
+      prevProps.title === nextProps.title &&
+      prevProps.url === nextProps.url &&
+      prevProps.content === nextProps.content &&
+      prevProps.detailsText === nextProps.detailsText &&
+      mediaEqual(prevProps.media, nextProps.media)
     );
   },
 );

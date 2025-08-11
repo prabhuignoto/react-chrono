@@ -5,15 +5,8 @@ import { Theme } from '@models/Theme';
 import { vi, Mock } from 'vitest';
 import { TimelineOutlineItem } from '../timeline-outline.model';
 
-// Mock GlobalContext and icons
-vi.mock('../../GlobalContext', () => ({
-  GlobalContext: {
-    Consumer: ({ children }) =>
-      children({
-        theme: {},
-      }),
-  },
-}));
+// Wrap component with TimelineContextProvider to satisfy useTimelineContext
+import { TimelineContextProvider } from '../../../contexts/TimelineContextProvider';
 
 vi.mock('../../icons/close', () => () => 'CloseIcon');
 vi.mock('../../icons/menu', () => () => 'MenuIcon');
@@ -40,12 +33,14 @@ describe('<TimelineOutline />', () => {
   // Test 1: Component rendering
   it('should render correctly with initial state', () => {
     const { getByRole, queryByText } = render(
-      <TimelineOutline
-        items={mockItems}
-        onSelect={mockOnSelect}
-        mode={'VERTICAL'}
-        theme={mockTheme}
-      />,
+      <TimelineContextProvider>
+        <TimelineOutline
+          items={mockItems}
+          onSelect={mockOnSelect}
+          mode={'VERTICAL'}
+          theme={mockTheme}
+        />
+      </TimelineContextProvider>,
     );
     expect(getByRole('button')).toBeInTheDocument();
     expect(queryByText('Item 1')).not.toBeInTheDocument(); // List should be hidden initially
@@ -54,12 +49,14 @@ describe('<TimelineOutline />', () => {
   // Test 2: Test component interactions (Toggle Pane)
   it('should toggle pane on button click', async () => {
     const { getByText, getByRole } = render(
-      <TimelineOutline
-        items={mockItems}
-        onSelect={mockOnSelect}
-        mode={'VERTICAL'}
-        theme={mockTheme}
-      />,
+      <TimelineContextProvider>
+        <TimelineOutline
+          items={mockItems}
+          onSelect={mockOnSelect}
+          mode={'VERTICAL'}
+          theme={mockTheme}
+        />
+      </TimelineContextProvider>,
     );
 
     fireEvent.pointerDown(getByRole('button'));
@@ -72,12 +69,14 @@ describe('<TimelineOutline />', () => {
   // // Test 3: Test component state and props (Items and Selection)
   it('should correctly handle item selection', async () => {
     const { getByRole, getByText } = render(
-      <TimelineOutline
-        items={mockItems}
-        onSelect={mockOnSelect}
-        mode={'VERTICAL'}
-        theme={mockTheme}
-      />,
+      <TimelineContextProvider>
+        <TimelineOutline
+          items={mockItems}
+          onSelect={mockOnSelect}
+          mode={'VERTICAL'}
+          theme={mockTheme}
+        />
+      </TimelineContextProvider>,
     );
 
     fireEvent.pointerDown(getByRole('button'));
@@ -95,12 +94,14 @@ describe('<TimelineOutline />', () => {
   // // Test 4: Test component state and props (Edge Cases)
   it('should handle empty items array gracefully', async () => {
     const { getByRole, queryByText } = render(
-      <TimelineOutline
-        items={[]}
-        onSelect={mockOnSelect}
-        mode={'VERTICAL'}
-        theme={mockTheme}
-      />,
+      <TimelineContextProvider>
+        <TimelineOutline
+          items={[]}
+          onSelect={mockOnSelect}
+          mode={'VERTICAL'}
+          theme={mockTheme}
+        />
+      </TimelineContextProvider>,
     );
 
     fireEvent.pointerDown(getByRole('button'));
@@ -112,13 +113,15 @@ describe('<TimelineOutline />', () => {
 
   it('should show loading state', () => {
     const { getByRole } = render(
-      <TimelineOutline
-        items={mockItems}
-        isLoading={true}
-        onSelect={mockOnSelect}
-        mode={'VERTICAL'}
-        theme={mockTheme}
-      />,
+      <TimelineContextProvider>
+        <TimelineOutline
+          items={mockItems}
+          isLoading={true}
+          onSelect={mockOnSelect}
+          mode={'VERTICAL'}
+          theme={mockTheme}
+        />
+      </TimelineContextProvider>,
     );
     expect(getByRole('status')).toHaveTextContent('Loading outline...');
   });
@@ -126,13 +129,15 @@ describe('<TimelineOutline />', () => {
   it('should show error state', () => {
     const error = new Error('Test error');
     const { getByRole } = render(
-      <TimelineOutline
-        items={mockItems}
-        error={error}
-        onSelect={mockOnSelect}
-        mode={'VERTICAL'}
-        theme={mockTheme}
-      />,
+      <TimelineContextProvider>
+        <TimelineOutline
+          items={mockItems}
+          error={error}
+          onSelect={mockOnSelect}
+          mode={'VERTICAL'}
+          theme={mockTheme}
+        />
+      </TimelineContextProvider>,
     );
     expect(getByRole('alert')).toHaveTextContent('Error: Test error');
   });

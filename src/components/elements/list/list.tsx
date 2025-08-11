@@ -7,7 +7,8 @@ import {
 } from 'react';
 import { ListItem } from './list-item';
 import { ListModel } from './list.model';
-import { ListStyle } from './list.styles';
+import { list } from './list.css';
+import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
 /**
  * Extends the base list item with a unique identifier
@@ -88,7 +89,11 @@ const List: FunctionComponent<ListModel> = ({
     [theme, handleItemSelection, multiSelectable, activeItemIndex],
   );
 
-  return <ListStyle>{listItems.map(renderListItem)}</ListStyle>;
+  return (
+    <ul className={list} style={computeCssVarsFromTheme(theme)}>
+      {listItems.map(renderListItem)}
+    </ul>
+  );
 };
 
 export { List };

@@ -1,14 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import { zIndex } from '../../../styles/z-index';
+import { controlsWrapper } from './timeline-controls-wrapper.css';
 
 /**
  * Wraps timeline controls and provides proper z-index stacking context
  */
-const ControlsWrapper = styled.div`
-  position: relative;
-  z-index: ${zIndex.controls};
-`;
+const ControlsWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className={controlsWrapper}>{children}</div>
+);
 
 interface TimelineControlsWrapperProps {
   children: React.ReactNode;

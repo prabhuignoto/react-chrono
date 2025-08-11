@@ -1,11 +1,9 @@
 import { TimelineCardModel } from '@models/TimelineItemModel';
-import React, { useContext } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import React from 'react';
+import { useTimelineContext } from '../../contexts';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
-import {
-  TimelineTitleContainer,
-  Wrapper,
-} from './timeline-horizontal-card.styles';
+import { timelineTitleContainer, wrapper } from './timeline-horizontal-card.css';
+import { timelineTitleContainer as veTitleContainer } from './timeline-horizontal-card.css';
 import { useTimelineCard } from './hooks/useTimelineCard';
 import TimelinePoint from './timeline-point/timeline-point';
 import TimelineCardPortal from './timeline-card-portal/timeline-card-portal';
@@ -43,7 +41,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     theme,
     timelinePointShape,
     disableInteraction,
-  } = useContext(GlobalContext);
+  } = useTimelineContext();
 
   const {
     circleRef,
@@ -84,7 +82,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   };
 
   return (
-    <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
+    <div ref={wrapperRef} className={`${wrapper} ${modeLower}`} data-testid="timeline-item">
       {canShowTimelineContent && (
         <TimelineCardPortal
           containerClass={containerClass}
@@ -128,20 +126,20 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         timelinePointDimension={timelinePointDimension}
         timelinePointShape={timelinePointShape}
         iconChild={iconChild}
+        active={active}
+        disabled={disableInteraction}
+        itemId={id}
       />
 
-      <TimelineTitleContainer
-        className={titleClass}
-        data-testid="timeline-title"
-      >
+      <div className={`${timelineTitleContainer} ${veTitleContainer} ${titleClass}`} data-testid="timeline-title">
         <TimelineItemTitle
           title={title}
           active={active && !disableInteraction}
           theme={theme}
           classString={classNames?.title}
         />
-      </TimelineTitleContainer>
-    </Wrapper>
+      </div>
+    </div>
   );
 };
 

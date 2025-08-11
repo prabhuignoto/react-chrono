@@ -1,6 +1,6 @@
-import { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import cls from 'classnames';
-import { GlobalContext } from '../../../GlobalContext';
+import { useTimelineContext } from '../../../contexts';
 
 export const useTimelineCard = ({
   active,
@@ -18,13 +18,27 @@ export const useTimelineCard = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const { disableClickOnCircle } = useContext(GlobalContext);
+  const { disableClickOnCircle, disableInteraction, disableAutoScrollOnClick } =
+    useTimelineContext();
 
   const handleClick = useCallback(() => {
-    if (!disableClickOnCircle && onClick && !slideShowRunning) {
+    if (
+      !disableClickOnCircle &&
+      !disableInteraction &&
+      !disableAutoScrollOnClick &&
+      onClick &&
+      !slideShowRunning
+    ) {
       onClick(id);
     }
-  }, [disableClickOnCircle, onClick, slideShowRunning, id]);
+  }, [
+    disableClickOnCircle,
+    disableInteraction,
+    disableAutoScrollOnClick,
+    onClick,
+    slideShowRunning,
+    id,
+  ]);
 
   useEffect(() => {
     if (active) {
@@ -38,6 +52,15 @@ export const useTimelineCard = ({
         autoScroll?.({
           pointOffset: circleOffsetLeft + wrapperOffsetLeft,
           pointWidth: circle.clientWidth,
+        });
+
+        // Bring the timeline point itself to keyboard focus for accessibility
+        requestAnimationFrame(() => {
+          try {
+            circle.focus({ preventScroll: true });
+          } catch (_) {
+            // ignore focus errors
+          }
         });
       }
     }

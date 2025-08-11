@@ -8,13 +8,14 @@ import React, {
   FunctionComponent, // Explicit import
   MouseEvent,
 } from 'react';
-import { useStableContext, useDynamicContext } from '../contexts'; // Context for global theme/settings
+import { useTimelineStaticConfig, useTimelineMemoizedObjects } from '../contexts';
 // Shape seems to be a shared styled component, potentially defined elsewhere
 import { Shape } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
 import {
   TimelinePointContainer,
   TimelinePointWrapper,
-} from './timeline-vertical-shape.styles'; // Associated styled components
+} from './timeline-vertical-shape.styles'; // existing SC styles
+import * as veShape from './timeline-vertical-shape.css'; // additive VE classes
 
 /**
  * Renders the circular point or icon on the timeline line for a vertical item.
@@ -47,17 +48,22 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
 
     // Access context settings
     const {
-      staticDefaults: {
-        focusActiveItemOnLoad,
-        timelinePointShape,
-        disableTimelinePoint,
-      },
-      memoizedButtonTexts: buttonTexts, // Custom button text labels
-    } = useStableContext();
+      focusActiveItemOnLoad,
+      timelinePointShape,
+      disableTimelinePoint,
+      disableClickOnCircle: contextDisableClickOnCircle,
+      disableInteraction: contextDisableInteraction,
+      disableAutoScrollOnClick: contextDisableAutoScrollOnClick,
+    } = useTimelineStaticConfig();
 
-    const {
-      memoizedTheme: theme, // Theme object (primary color, etc.)
-    } = useDynamicContext();
+    const { theme } = useTimelineMemoizedObjects();
+    const { buttonTexts } = useTimelineMemoizedObjects();
+
+    // Consolidated disable flags - prioritize props over context
+    const finalDisableClickOnCircle =
+      disableClickOnCircle ?? contextDisableClickOnCircle;
+    const finalDisableInteraction = contextDisableInteraction;
+    const finalDisableAutoScrollOnClick = contextDisableAutoScrollOnClick;
 
     // Ref to track if this is the component's first render cycle
     const isFirstRender = useRef(true);
@@ -108,8 +114,12 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
      * Only adds onClick if clicks are enabled and slideshow isn't running.
      */
     const clickHandlerProps = useMemo(() => {
-      // Return empty object (no click handler) if clicks are disabled
-      if (disableClickOnCircle) {
+      // Return empty object (no click handler) if any disable condition is met
+      if (
+        finalDisableClickOnCircle ||
+        finalDisableInteraction ||
+        finalDisableAutoScrollOnClick
+      ) {
         return {};
       }
 
@@ -123,7 +133,14 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
           }
         },
       };
-    }, [id, onClick, slideShowRunning, disableClickOnCircle]); // Dependencies for the click logic
+    }, [
+      id,
+      onClick,
+      slideShowRunning,
+      finalDisableClickOnCircle,
+      finalDisableInteraction,
+      finalDisableAutoScrollOnClick,
+    ]); // Dependencies for the click logic
 
     /**
      * Effect to update the isFirstRender flag after the initial render is complete.
@@ -152,7 +169,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
         $cardLess={cardLess} // Pass cardLess state
         $isMobile={isMobile} // Pass mobile state
         // --- Standard React props ---
-        className={className} // 'left' or 'right'
+        className={`${className} ${veShape.timelinePointWrapper}`}
         data-testid="tree-leaf" // Test ID for the wrapper
       >
         {/* Container is a button for accessibility and click handling */}
@@ -160,14 +177,31 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
           // --- Props passed to styled-component ---
           $hide={disableTimelinePoint} // Hide based on global setting
           // --- Standard React props ---
-          className={`${className} timeline-vertical-circle`} // Combine classes
+          className={`${className} timeline-vertical-circle ${veShape.timelinePointContainer}`}
           {...clickHandlerProps} // Spread the memoized click handler props
           ref={circleRef} // Attach ref for position measurement
           data-testid="tree-leaf-click" // Test ID for the clickable element
           aria-label={timelinePointLabel} // Accessibility label
-          aria-disabled={disableClickOnCircle ?? disableTimelinePoint} // Disable button if needed
-          disabled={disableClickOnCircle || disableTimelinePoint} // Disable button if needed
-          tabIndex={disableClickOnCircle || disableTimelinePoint ? -1 : 0} // Manage tab order
+          aria-disabled={
+            finalDisableClickOnCircle ||
+            finalDisableInteraction ||
+            finalDisableAutoScrollOnClick ||
+            disableTimelinePoint
+          } // Disable button if needed
+          disabled={
+            finalDisableClickOnCircle ||
+            finalDisableInteraction ||
+            finalDisableAutoScrollOnClick ||
+            disableTimelinePoint
+          } // Disable button if needed
+          tabIndex={
+            finalDisableClickOnCircle ||
+            finalDisableInteraction ||
+            finalDisableAutoScrollOnClick ||
+            disableTimelinePoint
+              ? -1
+              : 0
+          } // Manage tab order
         >
           {/* The visual shape (circle, square, or custom icon) */}
           <Shape
@@ -176,7 +210,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
             dimension={timelinePointDimension} // Controls the size
             $timelinePointShape={timelinePointShape} // Controls the shape ('circle', 'square')
             // --- Standard React props ---
-            className={circleClass} // Apply 'active' and 'using-icon' classes
+            className={`${circleClass} ${veShape.shape}`} // Apply 'active' and 'using-icon' classes
             aria-hidden="true" // Hide from screen readers as it's decorative
           >
             {iconChild}

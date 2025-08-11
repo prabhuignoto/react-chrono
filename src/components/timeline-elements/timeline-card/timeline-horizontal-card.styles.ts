@@ -40,10 +40,10 @@ const ripple = keyframes`
 
 const pulse = keyframes`
   0% {
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.6);
   }
   70% {
-    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+    box-shadow: 0 0 0 12px rgba(0, 123, 255, 0);
   }
   100% {
     box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
@@ -57,6 +57,8 @@ export const ShapeWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 5em;
+  z-index: 2;
+  position: relative;
 `;
 
 type ShapeModel = {
@@ -87,9 +89,11 @@ export const Shape = styled.div<ShapeModel>`
   overflow: hidden;
 
   /* Reset button styles when used as a button */
-  background: none;
-  border: none;
+  background: ${(p) =>
+    p.theme?.iconBackgroundColor || p.theme?.primary || '#007bff'};
+  border: 2px solid ${(p) => p.theme?.primary || '#007bff'};
   padding: 0;
+  z-index: 2;
 
   /* Ripple effect */
   &::before {
@@ -114,24 +118,35 @@ export const Shape = styled.div<ShapeModel>`
 
   /* Improve focus styles for accessibility */
   &:focus-visible {
-    outline: 3px solid ${(p) => p.theme?.primary ?? '#007bff'};
+    outline: 3px solid transparent;
     outline-offset: 2px;
+  }
+
+  /* Show outline only when keyboard navigation is active */
+  [data-keyboard-focus='true'] &:focus-visible {
+    outline-color: ${(p) => p.theme?.primary ?? '#007bff'};
+  }
+
+  /* Remove outline when toolbar navigation is active */
+  [data-toolbar-navigation='true'] &:focus-visible {
+    outline-color: transparent;
   }
 
   /* Add subtle hover effect */
   &:hover:not(:disabled) {
     transform: ${(p) =>
       p.$timelinePointShape === 'diamond'
-        ? 'rotate(45deg) scale(1.08)'
-        : 'scale(1.08)'};
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        ? 'rotate(45deg) scale(1.12)'
+        : 'scale(1.12)'};
+    box-shadow: 0 0 0 4px ${(p) => p.theme?.primary}22;
   }
 
   &:active:not(:disabled) {
     transform: ${(p) =>
       p.$timelinePointShape === 'diamond'
-        ? 'rotate(45deg) scale(0.95)'
-        : 'scale(0.95)'};
+        ? 'rotate(45deg) scale(0.98)'
+        : 'scale(0.98)'};
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &.active {
@@ -200,15 +215,20 @@ export const Shape = styled.div<ShapeModel>`
 export const TimelineTitleContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 
   &.vertical {
     margin-bottom: 1em;
   }
 
-  &.horizontal {
+  &.horizontal,
+  &.horizontal_all {
     position: absolute;
-    top: 0;
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 3;
   }
 `;
 
@@ -222,12 +242,34 @@ export const TimelineContentContainer = styled.div<{
   align-items: flex-start;
   animation: ${show} 0.25s ease-in;
 
-  outline: 2px solid
-    ${(p) => (p.$highlight && p.$active ? p.theme?.primary : 'transparent')};
+  /* Only show outline when navigating via keyboard, not toolbar */
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-radius: 12px;
+
+  /* Show outline only when keyboard navigation is active */
+  [data-keyboard-focus='true'] & {
+    outline-color: ${(p) =>
+      p.$highlight && p.$active ? p.theme?.primary : 'transparent'};
+  }
+
+  /* Highlight active cards in horizontal_all mode */
+  ${(p) =>
+    p.$highlight && p.$active &&
+    `
+    border: 2px solid ${p.theme?.primary};
+    box-shadow: 0 0 0 2px ${p.theme?.primary}22;
+  `}
+
+  /* Remove outline when toolbar navigation is active */
+  [data-toolbar-navigation='true'] & {
+    outline-color: transparent;
+  }
 
   margin: 1rem;
 
-  &.horizontal {
+  &.horizontal,
+  &.horizontal_all {
     min-width: ${(p) => p.$cardWidth}px;
   }
 
@@ -235,6 +277,20 @@ export const TimelineContentContainer = styled.div<{
     width: calc(100% - 5em);
     margin-left: auto;
     flex-direction: column;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0.5rem;
+    outline-width: 1px;
+
+    &.horizontal {
+      min-width: auto;
+      width: 100%;
+    }
+
+    &.vertical {
+      width: calc(100% - 3.5em);
+    }
   }
 `;
 
@@ -251,30 +307,49 @@ export const CardContainer = styled.div<{ theme: Theme }>`
   min-width: 250px;
   max-width: 350px;
   margin: 0.5rem;
-  padding: 1rem;
+  padding: 1.5rem;
   background: ${(p) => p.theme.cardBgColor};
-  border-radius: 8px;
+  border-radius: 12px;
   -webkit-box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.06),
-    0 4px 10px rgba(0, 0, 0, 0.08);
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 4px 8px rgba(0, 0, 0, 0.06),
+    0 8px 16px rgba(0, 0, 0, 0.08);
   box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.06),
-    0 4px 10px rgba(0, 0, 0, 0.08);
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 4px 8px rgba(0, 0, 0, 0.06),
+    0 8px 16px rgba(0, 0, 0, 0.08);
   -webkit-transition:
-    -webkit-transform 0.2s ease-out,
-    box-shadow 0.2s ease-out;
+    -webkit-transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transition:
-    transform 0.2s ease-out,
-    box-shadow 0.2s ease-out;
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   &:hover {
-    -webkit-transform: translateY(-2px);
-    transform: translateY(-2px);
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
     -webkit-box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.08),
-      0 6px 12px rgba(0, 0, 0, 0.12);
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      0 12px 24px rgba(0, 0, 0, 0.12),
+      0 16px 32px rgba(0, 0, 0, 0.08);
     box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.08),
-      0 6px 12px rgba(0, 0, 0, 0.12);
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      0 12px 24px rgba(0, 0, 0, 0.12),
+      0 16px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  @media (max-width: 768px) {
+    min-width: 200px;
+    max-width: 100%;
+    margin: 0.25rem;
+    padding: 1rem;
+    border-radius: 8px;
+
+    &:hover {
+      transform: none;
+      -webkit-transform: none;
+    }
   }
 `;

@@ -61,13 +61,17 @@ export const VerticalItemWrapper = styled.li<VerticalItemWrapperProps>`
   margin: 1rem 0; /* Vertical spacing between items */
   list-style: none; /* Remove default list styling */
 
-  /* Alignment adjustments based on side (used in non-alternating modes) */
-  &.left {
-    margin-right: auto; /* Align left */
-  }
-  &.right {
-    margin-left: auto; /* Align right */
-  }
+  /* Alignment adjustments based on side (used in non-alternating modes only) */
+  ${(p) =>
+    !p.$alternateCards && // Apply only when not in alternating mode
+    css`
+      &.left {
+        margin-right: auto; /* Align left */
+      }
+      &.right {
+        margin-left: auto; /* Align right */
+      }
+    `}
 
   /* Class added when the item should become visible */
   &.visible {
