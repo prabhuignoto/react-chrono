@@ -87,7 +87,7 @@ export const useTimelineSearch = ({
 
       // Use for-loop with early break for better performance
       for (let i = 0; i < searchableContent.length; i++) {
-        if (searchableContent[i].content.includes(queryLower)) {
+        if (searchableContent[i]?.content?.includes(queryLower)) {
           results.push(i);
 
           // Early break if we have enough results
@@ -101,9 +101,10 @@ export const useTimelineSearch = ({
 
       if (results.length > 0) {
         setCurrentMatchIndex(0);
-        const firstMatchData = searchableContent[results[0]];
-        if (firstMatchData?.id) {
-          activeItemIndex.current = results[0];
+        const firstResult = results[0];
+        const firstMatchData = firstResult !== undefined ? searchableContent[firstResult] : undefined;
+        if (firstMatchData?.id && firstResult !== undefined) {
+          activeItemIndex.current = firstResult;
 
           // Clear any existing timeout
           if (searchTimeoutRef.current) {
@@ -115,7 +116,7 @@ export const useTimelineSearch = ({
           isFirstSearchRef.current = false;
 
           searchTimeoutRef.current = setTimeout(() => {
-            onTimelineUpdatedRef.current?.(results[0]);
+            onTimelineUpdatedRef.current?.(firstResult);
             handleTimelineItemClickRef.current(firstMatchData.id);
             // After navigating to first match, focus the item row/card
             requestAnimationFrame(() => {
@@ -199,12 +200,13 @@ export const useTimelineSearch = ({
       if (nextIndex === currentMatchIndex) return;
 
       const newTimelineIndex = searchResults[nextIndex];
-      const matchData = searchableContent[newTimelineIndex];
+      const matchData = newTimelineIndex !== undefined ? searchableContent[newTimelineIndex] : undefined;
 
       setCurrentMatchIndex(nextIndex);
-      activeItemIndex.current = newTimelineIndex;
-
-      onTimelineUpdatedRef.current?.(newTimelineIndex);
+      if (newTimelineIndex !== undefined) {
+        activeItemIndex.current = newTimelineIndex;
+        onTimelineUpdatedRef.current?.(newTimelineIndex);
+      }
 
       if (matchData?.id) {
         handleTimelineItemClickRef.current(matchData.id);

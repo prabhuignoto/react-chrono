@@ -34,8 +34,8 @@ const NestedTimelineRenderer: React.FC<NestedTimelineRendererProps> = ({
     <TimelineComponent
       items={items}
       mode={mode as any}
-      nestedCardHeight={nestedCardHeight}
-      isChild={isChild}
+      {...(nestedCardHeight ? { nestedCardHeight } : {})}
+      {...(isChild ? { isChild } : {})}
     />
   );
 };

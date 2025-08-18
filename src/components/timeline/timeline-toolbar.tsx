@@ -12,6 +12,7 @@ import {
   QuickJump,
 } from './timeline-popover-elements';
 import { TimelineToolbarProps } from './timeline-toolbar.model';
+import { TimelineMode } from '@models/TimelineModel';
 import {
   actionGroup as veActionGroup,
   navigationGroup as veNavigationGroup,
@@ -98,7 +99,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       id: item.id ?? '',
       title: getTextFromNode(item.title),
       description: getTextFromNode(item.cardSubtitle),
-      active: item.active,
+      ...(item.active !== undefined ? { active: item.active } : {}),
     }));
   }, [items]);
 
@@ -202,17 +203,17 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           disableLeft={isLeftDisabled}
           disableRight={isRightDisabled}
           id={id}
-          onFirst={onFirst}
-          onLast={onLast}
-          onNext={onNext}
-          onPrevious={onPrevious}
-          onReplay={onRestartSlideshow}
-          slideShowEnabled={slideShowEnabled}
-          slideShowRunning={slideShowRunning}
+          {...(onFirst ? { onFirst } : {})}
+          {...(onLast ? { onLast } : {})}
+          {...(onNext ? { onNext } : {})}
+          {...(onPrevious ? { onPrevious } : {})}
+          {...(onRestartSlideshow ? { onReplay: onRestartSlideshow } : {})}
+          {...(slideShowEnabled !== undefined ? { slideShowEnabled } : {})}
+          {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
           isDark={darkMode}
           onToggleDarkMode={toggleDarkMode}
-          onPaused={onPaused}
-          activeTimelineItem={activeTimelineItem}
+          {...(onPaused ? { onPaused } : {})}
+          activeTimelineItem={activeTimelineItem ?? 0}
           totalItems={totalItems}
         />
       </div>
@@ -303,7 +304,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                   border: 0,
                 }}
               >
-                {buttonTexts?.noMatches ?? 'No matches found'}
+                {'No matches found'}
               </span>
             )}
             {searchQuery && (
@@ -360,7 +361,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           <div className="control-wrapper" key="quick-jump">
             {enableQuickJump ? (
               <QuickJump
-                activeItem={activeTimelineItem}
+                activeItem={activeTimelineItem ?? 0}
                 isDarkMode={darkMode}
                 items={quickJumpItems}
                 onActivateItem={onActivateTimelineItem}
@@ -375,8 +376,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               <LayoutSwitcher
                 isDarkMode={darkMode}
                 theme={theme}
-                onUpdateTimelineMode={onUpdateTimelineMode}
-                mode={mode}
+                onUpdateTimelineMode={(modeString: string) => onUpdateTimelineMode(modeString as TimelineMode)}
+                {...(mode ? { mode } : {})}
                 position={toolbarPosition}
                 isMobile={isMobile}
               />
@@ -395,15 +396,17 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             </div>
           ) : null}
           <div className="control-wrapper" key="fullscreen-control">
-            <FullscreenControl
-              targetRef={timelineRef}
-              theme={theme}
-              onEnterFullscreen={onEnterFullscreen}
-              onExitFullscreen={onExitFullscreen}
-              onError={onFullscreenError}
-              size="medium"
-              disabled={false}
-            />
+            {timelineRef && (
+              <FullscreenControl
+                targetRef={timelineRef}
+                theme={theme}
+                {...(onEnterFullscreen ? { onEnterFullscreen } : {})}
+                {...(onExitFullscreen ? { onExitFullscreen } : {})}
+                {...(onFullscreenError ? { onError: onFullscreenError } : {})}
+                size="medium"
+                disabled={false}
+              />
+            )}
           </div>
         </div>
       </div>

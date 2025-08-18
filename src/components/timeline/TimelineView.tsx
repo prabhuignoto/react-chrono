@@ -60,7 +60,7 @@ const TimelineView: React.FC<TimelineViewProps> = ({
           items={items}
           mode={timelineMode as TimelineMode}
           onElapsed={handleTimelineItemElapsed}
-          slideShowRunning={slideShowRunning}
+          {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
           wrapperId={id}
           nestedCardHeight={nestedCardHeight}
         />
@@ -83,7 +83,7 @@ const TimelineView: React.FC<TimelineViewProps> = ({
         onClick={handleTimelineItemClick}
         onElapsed={handleTimelineItemElapsed}
         onOutlineSelection={onOutlineSelection}
-        slideShowRunning={slideShowRunning}
+        {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
         theme={theme}
         nestedCardHeight={nestedCardHeight}
       />
@@ -104,7 +104,7 @@ const TimelineView: React.FC<TimelineViewProps> = ({
       onClick={handleTimelineItemClick}
       onElapsed={handleTimelineItemElapsed}
       onOutlineSelection={onOutlineSelection}
-      slideShowRunning={slideShowRunning}
+      {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
       theme={theme}
       nestedCardHeight={nestedCardHeight}
     />

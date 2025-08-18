@@ -172,10 +172,10 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
     // Render the timeline point structure
     return (
       <TimelinePointWrapper
-        width={lineWidth}
-        bg={theme?.primary}
-        $cardLess={cardLess}
-        $isMobile={isMobile}
+        {...(lineWidth !== undefined ? { width: lineWidth } : {})}
+        {...(theme?.primary ? { bg: theme.primary } : {})}
+        {...(cardLess !== undefined ? { $cardLess: cardLess } : {})}
+        {...(isMobile !== undefined ? { $isMobile: isMobile } : {})}
         className={`${className} ${veShape.timelinePointWrapper}`}
         data-testid="tree-leaf"
       >
@@ -209,7 +209,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
         >
           <Shape
             theme={theme}
-            dimension={timelinePointDimension}
+            {...(timelinePointDimension !== undefined ? { dimension: timelinePointDimension } : {})}
             $timelinePointShape={timelinePointShape}
             className={`${circleClass} ${veShape.shape}`}
             aria-hidden="true"

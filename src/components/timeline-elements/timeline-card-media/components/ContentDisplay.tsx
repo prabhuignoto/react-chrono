@@ -103,7 +103,7 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
         />
         {(canExpand || textOverlay) && (
           <ButtonWrapper>
-            {canExpand && (
+            {canExpand && !textOverlay && (
               <>
                 <ShowOrHideTextButtonMemo
                   onToggle={toggleText}
@@ -137,10 +137,10 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
-                aria-label={isMinimized ? 'Maximize text' : 'Minimize text'}
-                title={isMinimized ? 'Maximize text' : 'Minimize text'}
+                aria-label={isMinimized ? 'Expand text' : 'Minimize text'}
+                title={isMinimized ? 'Expand text' : 'Minimize text'}
               >
-                {isMinimized ? '⬆️' : '⬇️'}
+                {isMinimized ? '📖' : '📝'}
               </button>
             )}
           </ButtonWrapper>

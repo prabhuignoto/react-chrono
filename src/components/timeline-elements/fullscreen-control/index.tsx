@@ -45,9 +45,9 @@ const FullscreenControl = memo(
       // Use the fullscreen hook
       const { isFullscreen, isSupported, toggleFullscreen, error } =
         useFullscreen(targetRef, {
-          onEnter: onEnterFullscreen,
-          onExit: onExitFullscreen,
-          onError: onError,
+          onEnter: onEnterFullscreen || (() => {}),
+          onExit: onExitFullscreen || (() => {}),
+          onError: onError || (() => {}),
         });
 
       // Don't render if fullscreen is not supported
@@ -57,6 +57,7 @@ const FullscreenControl = memo(
 
       return (
         <FullscreenButton
+          {...rest}
           ref={ref}
           isFullscreen={isFullscreen}
           onToggle={() => {
@@ -71,13 +72,12 @@ const FullscreenControl = memo(
           theme={theme}
           disabled={disabled || !!error}
           size={size}
-          className={className}
-          ariaLabel={ariaLabel}
-          title={
-            title || (error ? `Fullscreen unavailable: ${error}` : undefined)
-          }
+          {...(className ? { className } : {})}
+          {...(ariaLabel ? { ariaLabel } : {})}
+          {...(title || (error ? `Fullscreen unavailable: ${error}` : undefined) 
+            ? { title: title || `Fullscreen unavailable: ${error}` } 
+            : {})}
           testId={testId}
-          {...rest}
         />
       );
     },

@@ -123,11 +123,11 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       >
         <TimelineItemTitle
           title={title as string}
-          active={active && !disableInteraction} // Highlight if active and interaction enabled
+          {...(active !== undefined ? { active: active && !disableInteraction } : {})}
           theme={theme}
           // Align text based on layout mode
           align={flipLayout && !alternateCards ? 'left' : 'right'}
-          classString={classNames?.title} // Optional custom class
+          {...(classNames?.title ? { classString: classNames.title } : {})}
         />
       </div>
     );
@@ -178,20 +178,20 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   const TimelinePointMemo = useMemo(
     () => (
       <TimelinePoint
-        active={active}
-        alternateCards={alternateCards}
+        {...(active !== undefined ? { active } : {})}
+        {...(alternateCards !== undefined ? { alternateCards } : {})}
         className={className} // 'left' or 'right'
-        id={id}
+        {...(id ? { id } : {})}
         mode={mode}
         onActive={handleOnActive} // Pass down the memoized handler
-        onClick={onClick}
-        slideShowRunning={slideShowRunning}
+        onClick={onClick || (() => {})}
+        {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
         iconChild={iconChild} // Custom icon
-        timelinePointDimension={timelinePointDimension}
-        lineWidth={lineWidth}
-        disableClickOnCircle={disableClickOnCircle}
-        cardLess={cardLess}
-        isMobile={isMobile}
+        {...(timelinePointDimension !== undefined ? { timelinePointDimension } : {})}
+        {...(lineWidth !== undefined ? { lineWidth } : {})}
+        {...(disableClickOnCircle !== undefined ? { disableClickOnCircle } : {})}
+        {...(cardLess !== undefined ? { cardLess } : {})}
+        {...(isMobile !== undefined ? { isMobile } : {})}
       />
     ),
     [
@@ -279,28 +279,28 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
         {/* Conditionally render the TimelineCard (only if not cardLess mode) */}
         {!cardLess ? (
           <TimelineCard
-            active={active}
+            {...(active !== undefined ? { active } : {})}
             branchDir={className} // Pass 'left' or 'right'
-            content={cardSubtitle}
-            customContent={contentDetailsChildren}
-            detailedText={cardDetailedText as string | string[]}
-            hasFocus={hasFocus}
-            id={id}
-            media={media}
-            onClick={onClick}
-            onElapsed={onElapsed}
+            {...(cardSubtitle ? { content: cardSubtitle } : {})}
+            {...(contentDetailsChildren ? { customContent: contentDetailsChildren } : {})}
+            {...(cardDetailedText ? { detailedText: cardDetailedText as string | string[] } : {})}
+            {...(hasFocus !== undefined ? { hasFocus } : {})}
+            {...(id ? { id } : {})}
+            {...(media ? { media } : {})}
+            {...(onClick && typeof onClick === 'function' ? { onClick } : {})}
+            {...(onElapsed ? { onElapsed } : {})}
             onShowMore={handleShowMore} // Pass down the memoized handler
-            slideShowActive={slideShowRunning}
-            theme={theme}
-            url={url}
+            {...(slideShowRunning !== undefined ? { slideShowActive: slideShowRunning } : {})}
+            {...(theme ? { theme } : {})}
+            {...(url ? { url } : {})}
             // Flip card content only in non-alternating vertical mode
             flip={!alternateCards && flipLayout}
-            timelineContent={timelineContent}
-            items={items} // Pass nested items data
-            isNested={isNested}
-            nestedCardHeight={nestedCardHeight}
-            title={cardTitle as string} // Card-specific title
-            cardTitle={title as string} // Item title (might be redundant if cardTitle is used)
+            {...(timelineContent ? { timelineContent } : {})}
+            {...(items ? { items } : {})}
+            {...(isNested !== undefined ? { isNested } : {})}
+            {...(nestedCardHeight !== undefined ? { nestedCardHeight } : {})}
+            {...(cardTitle ? { title: cardTitle as string } : {})}
+            {...(title ? { cardTitle: title as string } : {})}
           />
         ) : null}
       </div>

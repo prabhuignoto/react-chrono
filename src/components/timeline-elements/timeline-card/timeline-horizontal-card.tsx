@@ -57,13 +57,13 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     circleClass,
     canShowTimelineContent,
   } = useTimelineCard({
-    active,
-    autoScroll,
-    slideShowRunning,
+    ...(active !== undefined ? { active } : {}),
+    ...(autoScroll ? { autoScroll } : {}),
+    ...(slideShowRunning !== undefined ? { slideShowRunning } : {}),
     cardLess,
     showAllCardsHorizontal,
-    id,
-    onClick,
+    ...(id !== undefined ? { id } : {}),
+    ...(onClick ? { onClick } : {}),
     mode,
     position,
     iconChild,
@@ -84,6 +84,8 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     return cardDetailedText ? String(cardDetailedText) : undefined;
   };
 
+  const formattedDetailedText = formatDetailedText();
+
   return (
     <div
       ref={wrapperRef}
@@ -93,13 +95,13 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       {canShowTimelineContent && (
         <TimelineCardPortal
           containerClass={containerClass}
-          contentRef={contentRef}
-          id={id}
+          contentRef={contentRef as React.RefObject<HTMLDivElement>}
+          id={id || ''}
           theme={theme}
-          active={active}
+          active={active || false}
           disableInteraction={disableInteraction}
           showAllCardsHorizontal={showAllCardsHorizontal}
-          cardWidth={cardWidth}
+          {...(cardWidth ? { cardWidth } : {})}
           cardSubtitle={
             typeof cardSubtitle === 'string'
               ? cardSubtitle
@@ -108,18 +110,18 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           cardTitle={
             typeof cardTitle === 'string' ? cardTitle : String(cardTitle ?? '')
           }
-          url={url}
-          cardDetailedText={formatDetailedText()}
-          slideShowRunning={slideShowRunning}
-          media={media}
-          onElapsed={onElapsed}
-          customContent={customContent}
-          hasFocus={hasFocus}
-          onClick={onClick}
-          timelineContent={timelineContent}
-          isNested={isNested}
-          nestedCardHeight={nestedCardHeight}
-          items={items}
+          {...(url ? { url } : {})}
+          {...(formattedDetailedText ? { cardDetailedText: formattedDetailedText } : {})}
+          {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
+          {...(media ? { media } : {})}
+          {...(onElapsed ? { onElapsed } : {})}
+          {...(customContent ? { customContent } : {})}
+          {...(hasFocus !== undefined ? { hasFocus } : {})}
+          {...(onClick ? { onClick } : {})}
+          {...(timelineContent ? { timelineContent } : {})}
+          {...(isNested !== undefined ? { isNested } : {})}
+          {...(nestedCardHeight !== undefined ? { nestedCardHeight } : {})}
+          {...(items ? { items } : {})}
           wrapperId={wrapperId}
         />
       )}
@@ -127,15 +129,15 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       <TimelinePoint
         circleClass={circleClass}
         handleClick={handleClick}
-        circleRef={circleRef}
+        circleRef={circleRef as React.RefObject<HTMLButtonElement>}
         title={typeof title === 'string' ? title : String(title ?? '')}
         theme={theme}
         timelinePointDimension={timelinePointDimension}
         timelinePointShape={timelinePointShape}
         iconChild={iconChild}
-        active={active}
+        {...(active !== undefined ? { active } : {})}
         disabled={disableInteraction}
-        itemId={id}
+        {...(id ? { itemId: id } : {})}
       />
 
       <div
@@ -144,9 +146,9 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       >
         <TimelineItemTitle
           title={title}
-          active={active && !disableInteraction}
+          active={(active || false) && !disableInteraction}
           theme={theme}
-          classString={classNames?.title}
+          classString={classNames?.title || ''}
         />
       </div>
     </div>

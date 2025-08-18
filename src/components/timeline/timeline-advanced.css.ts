@@ -57,18 +57,18 @@ export const timelineWrapperAdvanced = recipe({
     fullscreen: {
       true: {
         background: '#ffffff',
-        padding: '2rem !important',
-        display: 'flex !important',
-        flexDirection: 'column !important',
-        justifyContent: 'flex-start !important',
-        alignItems: 'center !important',
-        width: '100vw !important',
-        height: '100vh !important',
-        overflowY: 'auto !important',
-        position: 'fixed !important',
-        top: '0 !important',
-        left: '0 !important',
-        zIndex: '999999 !important',
+        padding: '2rem',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width: '100vw',
+        height: '100vh',
+        overflowY: 'auto',
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        zIndex: '999999',
         // Cross-browser user selection
         WebkitUserSelect: 'none',
         MozUserSelect: 'none',
@@ -117,7 +117,7 @@ globalStyle(`${timelineWrapperAdvanced}.js-focus-visible .focus-visible`, {
 
 // Toolbar navigation focus override
 globalStyle(`${timelineWrapperAdvanced}[data-toolbar-navigation='true'] :focus`, {
-  outline: '0 !important',
+  outline: '0',
 });
 
 // Keyboard navigation focus
@@ -129,18 +129,18 @@ globalStyle(`${timelineWrapperAdvanced}[data-keyboard-focus='true'] :focus-visib
 // Cross-browser fullscreen support
 globalStyle(`${timelineWrapperAdvanced}:fullscreen, ${timelineWrapperAdvanced}:-webkit-full-screen, ${timelineWrapperAdvanced}:-moz-full-screen, ${timelineWrapperAdvanced}:-ms-fullscreen`, {
   background: '#ffffff',
-  padding: '2rem !important',
-  display: 'flex !important',
-  flexDirection: 'column !important',
-  justifyContent: 'flex-start !important',
-  alignItems: 'center !important',
-  width: '100vw !important',
-  height: '100vh !important',
-  overflowY: 'auto !important',
-  position: 'fixed !important',
-  top: '0 !important',
-  left: '0 !important',
-  zIndex: '999999 !important',
+  padding: '2rem',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  width: '100vw',
+  height: '100vh',
+  overflowY: 'auto',
+  position: 'fixed',
+  top: '0',
+  left: '0',
+  zIndex: '999999',
 });
 
 // Fullscreen children styles
@@ -229,27 +229,28 @@ export const timelineMainWrapperAdvanced = recipe({
 
 // Scrollbar styles
 globalStyle(`${timelineMainWrapperAdvanced}`, {
-  // Custom scrollbar for webkit browsers
-  selectors: {
-    '&::-webkit-scrollbar': {
-      width: '0.3em',
-    },
-    '&::-webkit-scrollbar-track': {
-      boxShadow: 'inset 0 0 6px rgba(0, 0, 0, 0.2)',
-    },
-    '&::-webkit-scrollbar-thumb': {
-      background: '#3b82f6',
-      outline: '1px solid #3b82f6',
-    },
-  },
   // Firefox scrollbar
   scrollbarColor: '#3b82f6 transparent',
   scrollbarWidth: 'thin',
 });
 
+// Webkit scrollbar styles
+globalStyle(`${timelineMainWrapperAdvanced}::-webkit-scrollbar`, {
+  width: '0.3em',
+});
+
+globalStyle(`${timelineMainWrapperAdvanced}::-webkit-scrollbar-track`, {
+  boxShadow: 'inset 0 0 6px rgba(0, 0, 0, 0.2)',
+});
+
+globalStyle(`${timelineMainWrapperAdvanced}::-webkit-scrollbar-thumb`, {
+  background: '#3b82f6',
+  outline: '1px solid #3b82f6',
+});
+
 // Fullscreen styles for main wrapper
 globalStyle(`:fullscreen ${timelineMainWrapperAdvanced}, :-webkit-full-screen ${timelineMainWrapperAdvanced}, :-moz-full-screen ${timelineMainWrapperAdvanced}, :-ms-fullscreen ${timelineMainWrapperAdvanced}`, {
-  background: 'transparent !important',
+  background: 'transparent',
   flex: '1',
   overflowY: 'auto',
   overflowX: 'visible',

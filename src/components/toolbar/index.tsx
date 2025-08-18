@@ -51,7 +51,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
 
     // Avoid nested toolbar roles if children already provide one
     const hasNestedToolbarRole = React.Children.toArray(children).some(
-      (child) => React.isValidElement(child) && child.props?.role === 'toolbar',
+      (child) => React.isValidElement(child) && (child.props as any)?.role === 'toolbar',
     );
 
     return (

@@ -47,9 +47,9 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
           <TitleMemo
             title={title}
             theme={theme}
-            url={url}
-            fontSize={fontSizes?.cardTitle}
-            classString={classNames?.cardTitle}
+            url={url || ''}
+            fontSize={fontSizes?.cardTitle || ''}
+            classString={classNames?.cardTitle || ''}
           />
         ) : null}
 
@@ -59,8 +59,8 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
           <SubTitleMemo
             content={content}
             theme={theme}
-            fontSize={fontSizes?.cardSubtitle}
-            classString={classNames?.cardSubTitle}
+            fontSize={fontSizes?.cardSubtitle || ''}
+            classString={classNames?.cardSubTitle || ''}
           />
         ) : null}
       </header>

@@ -7,16 +7,16 @@ exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
     data-testid="timeline-item"
   >
     <div
-      class="sc-fhHczv lmRZik"
+      class="timeline-point_shapeWrapper__mpv93b3 timeline-point__mpv93b2 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
     >
       <button
         aria-disabled="false"
         aria-label=""
         aria-selected="true"
-        class="sc-ggWZvA ikWVeC timeline-circle using-icon vertical_alternating active"
+        class="timeline-circle using-icon vertical_alternating active timeline-point__mpv93b5 timeline-point_timelinePointBase__mpv93b4 timeline-point_timelinePoint_shape_circle__mpv93b6 timeline-point_timelinePoint_usingIcon_true__mpv93b9 timeline-point_timelinePoint_active_true__mpv93bb timeline-point_timelinePoint_disabled_false__mpv93be using-icon active"
         data-item-id="id-12345"
         data-testid="timeline-circle"
-        dimension="16"
+        style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); --timeline-bg-color: #ffffff; --timeline-text-color: #000; --timeline-primary-color: #0f52ba; --timeline-card-bg-color: #ffffff; --timeline-muted-color: #6b7280; --timeline-toolbar-bg-color: #ffffff; --timeline-shadow-color: rgba(0, 0, 0, 0.1); height: 16px; width: 16px; background: rgb(255, 255, 255); border: 3px solid rgb(15, 82, 186);"
         tabindex="0"
         type="button"
       >
@@ -31,7 +31,7 @@ exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
         class="timeline-item-title active title timeline-card-content_cardTitleRecipe__chzdno7 timeline-card-content_cardTitleBase__chzdno4 timeline-card-content_cardTitleRecipe_active_true__chzdno8"
         data-ve-active-class="timeline-card-title_titleActive__1m05k8t2"
         data-ve-class="timeline-card-title_titleWrapper__1m05k8t1 timeline-card-title__1m05k8t0 properties_paddingInline_xs_mobile__12ug0492o properties_paddingBlock_xs_mobile__12ug04929"
-        style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); font-size: 1.5rem; visibility: hidden;"
+        style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); --timeline-bg-color: #ffffff; --timeline-text-color: #000; --timeline-primary-color: #0f52ba; --timeline-card-bg-color: #ffffff; --timeline-muted-color: #6b7280; --timeline-toolbar-bg-color: #ffffff; --timeline-shadow-color: rgba(0, 0, 0, 0.1); font-size: 1.5rem; visibility: hidden;"
       />
     </div>
   </div>

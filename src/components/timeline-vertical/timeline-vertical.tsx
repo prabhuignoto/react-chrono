@@ -101,6 +101,7 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
         // Render the individual timeline item component
         return (
           <TimelineVerticalItem
+            key={item.id || index} // Add key prop for React list rendering
             {...item} // Spread all properties from the item data object
             // --- Pass down calculated or specific props ---
             alternateCards={alternateCards} // Pass down the alternating mode flag

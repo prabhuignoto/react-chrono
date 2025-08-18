@@ -116,21 +116,31 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
         id={`timeline-${mode.toLowerCase()}-item-${item.id}`}
       >
         <TimelineCard
-          {...item}
+          {...(item.id ? { id: item.id } : {})}
+          title={item.title}
+          cardTitle={item.cardTitle}
+          cardSubtitle={item.cardSubtitle}
+          cardDetailedText={item.cardDetailedText}
+          {...(item.url ? { url: item.url } : {})}
+          {...(item.media ? { media: item.media } : {})}
+          {...(item.timelineContent ? { timelineContent: item.timelineContent } : {})}
+          {...(item.items ? { items: item.items } : {})}
+          {...(item.isNested !== undefined ? { isNested: item.isNested } : {})}
+          {...(item.hasNestedItems !== undefined ? { hasNestedItems: item.hasNestedItems } : {})}
+          {...(item.visible !== undefined ? { visible: item.visible } : {})}
+          {...(item.active !== undefined ? { active: item.active } : {})}
           onClick={handleItemClick}
           autoScroll={autoScroll}
           wrapperId={wrapperId}
           theme={theme}
-          slideShowRunning={slideShowRunning}
+          {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
           cardHeight={cardHeight}
-          onElapsed={onElapsed}
+          {...(onElapsed ? { onElapsed } : {})}
           customContent={children ? (children as ReactNode[])[index] : null}
-          hasFocus={hasFocus}
+          {...(hasFocus !== undefined ? { hasFocus } : {})}
           iconChild={iconChildColln[index]}
-          active={item.active}
           cardWidth={cardWidth}
-          isNested={isNested}
-          nestedCardHeight={nestedCardHeight}
+          {...(nestedCardHeight !== undefined ? { nestedCardHeight } : {})}
         />
       </li>
     ));

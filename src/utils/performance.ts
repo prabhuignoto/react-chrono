@@ -53,7 +53,7 @@ class PerformanceMonitor {
       componentName,
       renderTime,
       timestamp: Date.now(),
-      props,
+      props: props || {},
     };
 
     this.entries.push(entry);

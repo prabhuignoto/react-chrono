@@ -8,6 +8,7 @@ import {
 import { ListItem } from './list-item';
 import { ListModel } from './list.model';
 import { list } from './list.css';
+import { defaultTheme } from '../../common/themes';
 import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
 /**
@@ -40,7 +41,7 @@ const List: FunctionComponent<ListModel> = ({
    * Memoized list items with generated unique IDs
    */
   const listItems = useMemo(
-    () => items.map((item) => ({ id: getUniqueID(), ...item })),
+    () => items.map((item) => ({ ...item, id: item.id || getUniqueID() })),
     [items],
   );
 
@@ -53,7 +54,7 @@ const List: FunctionComponent<ListModel> = ({
     (id: string, item: EnhancedListItem) => {
       if (multiSelectable && item.onSelect) {
         startTransition(() => {
-          item.onSelect();
+          item.onSelect?.();
         });
       } else {
         onClick?.(id);
@@ -79,7 +80,7 @@ const List: FunctionComponent<ListModel> = ({
         <ListItem
           key={item.id}
           {...item}
-          theme={theme}
+          theme={theme || defaultTheme}
           onClick={handleClick}
           selectable={multiSelectable}
           active={activeItemIndex === index}

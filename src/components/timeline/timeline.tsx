@@ -510,10 +510,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
       if (verticalItemRow) {
         requestAnimationFrame(() => {
-          (verticalItemRow as HTMLElement).scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-          });
+          // Check if scrollIntoView is available (not available in JSDOM)
+          if ((verticalItemRow as HTMLElement).scrollIntoView) {
+            (verticalItemRow as HTMLElement).scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+            });
+          }
         });
       }
     }

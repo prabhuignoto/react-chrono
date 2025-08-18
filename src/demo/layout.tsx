@@ -1,6 +1,9 @@
 import cls from 'classnames';
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+// SCSS module types are declared globally; if missing at build time, fall back to an empty object
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import styles from './layout.module.scss';
 
 const items = [

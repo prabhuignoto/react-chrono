@@ -39,9 +39,9 @@ export interface TimelineStaticConfig {
   // Core layout
   mode: NonNullable<TimelinePropsModel['mode']>;
   cardHeight: number;
-  cardWidth?: number;
+  cardWidth: number;
   cardLess: boolean;
-  flipLayout?: boolean;
+  flipLayout: boolean;
   itemWidth: number;
   lineWidth: number;
 
@@ -73,10 +73,10 @@ export interface TimelineStaticConfig {
 
   // Cards and content
   borderLessCards: boolean;
-  cardPositionHorizontal?: 'TOP' | 'BOTTOM';
+  cardPositionHorizontal: 'TOP' | 'BOTTOM';
   parseDetailsAsHTML: boolean;
   useReadMore: boolean;
-  textOverlay?: boolean;
+  textOverlay: boolean;
 
   // Scrolling
   scrollable: boolean | { scrollbar: boolean };
@@ -145,8 +145,8 @@ export interface TimelineContextValue
   activeItemIndex?: number;
 
   // Callbacks
-  onScrollEnd?: () => void;
-  onThemeChange?: () => void;
+  onScrollEnd: () => void;
+  onThemeChange: () => void;
 }
 
 // ==========================================
@@ -392,9 +392,9 @@ export const TimelineContextProvider: FunctionComponent<
       // Static configuration
       mode,
       cardHeight,
-      cardWidth,
+      cardWidth: cardWidth || 400,
       cardLess,
-      flipLayout,
+      flipLayout: flipLayout || false,
       itemWidth,
       lineWidth,
       mediaHeight,
@@ -413,10 +413,10 @@ export const TimelineContextProvider: FunctionComponent<
       focusActiveItemOnLoad,
       highlightCardsOnHover,
       borderLessCards,
-      cardPositionHorizontal,
+      cardPositionHorizontal: cardPositionHorizontal ?? 'BOTTOM',
       parseDetailsAsHTML,
       useReadMore,
-      textOverlay,
+      textOverlay: textOverlay || false,
       scrollable,
       toolbarPosition,
       disableToolbar,
@@ -458,8 +458,8 @@ export const TimelineContextProvider: FunctionComponent<
       activeItemIndex,
 
       // Callbacks
-      onScrollEnd,
-      onThemeChange,
+      onScrollEnd: onScrollEnd || (() => {}),
+      onThemeChange: onThemeChange || (() => {}),
     }),
     [
       // Static config dependencies
@@ -573,9 +573,9 @@ export const useTimelineStaticConfig = (): TimelineStaticConfig => {
     () => ({
       mode: context.mode,
       cardHeight: context.cardHeight,
-      cardWidth: context.cardWidth,
+      cardWidth: context.cardWidth || 400,
       cardLess: context.cardLess,
-      flipLayout: context.flipLayout,
+      flipLayout: context.flipLayout || false,
       itemWidth: context.itemWidth,
       lineWidth: context.lineWidth,
       mediaHeight: context.mediaHeight,

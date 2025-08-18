@@ -129,7 +129,7 @@ const LegacyContextBridge: FunctionComponent<{
     disableTimelinePoint: ctx.disableTimelinePoint,
 
     // Data + callbacks
-    items: originalProps.items ?? ctx.items,
+    items: originalProps.items ?? ctx.items ?? [],
     onScrollEnd: ctx.onScrollEnd,
     onThemeChange: ctx.onThemeChange,
     toggleDarkMode: ctx.toggleDarkMode,

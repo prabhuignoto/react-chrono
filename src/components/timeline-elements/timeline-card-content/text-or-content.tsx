@@ -1,5 +1,6 @@
 import { TimelineContentModel } from '@models/TimelineContentModel';
 import { TimelineProps } from '@models/TimelineModel';
+import { Theme } from '@models/Theme';
 import {
   ForwardRefExoticComponent,
   ReactNode,
@@ -86,16 +87,16 @@ const getTextOrContent: (
         }
 
         return renderTextArray({
-          cardTextClassName: classNames?.cardText,
+          cardTextClassName: classNames?.cardText || '',
           detailedText: detailedText as (string | ReactNode)[],
           fontSizes,
           parseDetailsAsHTML,
-          theme,
+          theme: theme || ({} as Theme),
         });
       };
 
       // Create props for HTML content if needed
-      const getTextContentProps = (textContent) => {
+      const getTextContentProps = (textContent: string) => {
         if (parseDetailsAsHTML && !isTextArray) {
           return {
             dangerouslySetInnerHTML: {
@@ -106,7 +107,7 @@ const getTextOrContent: (
         return {};
       };
 
-      const renderDetailedContent = (textContent) => {
+      const renderDetailedContent = (textContent: string) => {
         const textContentProps = getTextContentProps(textContent);
 
         return (
@@ -129,7 +130,25 @@ const getTextOrContent: (
         }
 
         const textContent = getTextContent();
-        return textContent ? renderDetailedContent(textContent) : null;
+        if (!textContent) return null;
+
+        // If detailedText was an array, render the array of spans directly as children
+        if (isTextArray) {
+          return (
+            <p
+              className={
+                timelineContentDetails + ' ' + (showMore ? 'active' : '')
+              }
+              ref={ref as any}
+              style={{ color: theme?.cardDetailsColor }}
+            >
+              {shouldNotShowText ? null : textContent}
+            </p>
+          );
+        }
+
+        // Non-array case: render as string/HTML as appropriate
+        return renderDetailedContent(String(textContent));
       };
 
       return renderTimelineContent();

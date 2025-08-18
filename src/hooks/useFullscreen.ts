@@ -21,11 +21,11 @@ const getBrowserInfo = () => {
     // Safari version detection for method selection
     safariVersion:
       /Safari/.test(userAgent) && !/Chrome/.test(userAgent)
-        ? parseFloat((userAgent.match(/Version\/(\d+\.\d+)/) || ['', '0'])[1])
+        ? parseFloat((userAgent.match(/Version\/(\d+\.\d+)/) || ['', '0'])[1] || '0')
         : 0,
     // Chrome version for modern API support
     chromeVersion: /Chrome/.test(userAgent)
-      ? parseInt((userAgent.match(/Chrome\/(\d+)/) || ['', '0'])[1], 10)
+      ? parseInt((userAgent.match(/Chrome\/(\d+)/) || ['', '0'])[1] || '0', 10)
       : 0,
   };
 };
@@ -206,30 +206,30 @@ export const useFullscreen = (
       } else if (browserInfo.isSafari) {
         // Safari-specific handling - try both variants
         if (element.webkitRequestFullscreen) {
-          requestMethod = () => element.webkitRequestFullscreen();
+          requestMethod = () => element.webkitRequestFullscreen?.() || Promise.resolve();
         } else if (element.webkitRequestFullScreen) {
           // Older Safari versions
-          requestMethod = () => element.webkitRequestFullScreen();
+          requestMethod = () => element.webkitRequestFullScreen?.() || Promise.resolve();
         }
       } else if (browserInfo.isChrome && element.webkitRequestFullscreen) {
         // Chrome and Chromium-based browsers
-        requestMethod = () => element.webkitRequestFullscreen();
+        requestMethod = () => element.webkitRequestFullscreen?.() || Promise.resolve();
       } else if (browserInfo.isFirefox && element.mozRequestFullScreen) {
         // Firefox
-        requestMethod = () => element.mozRequestFullScreen();
+        requestMethod = () => element.mozRequestFullScreen?.() || Promise.resolve();
       } else if (browserInfo.isEdge && element.msRequestFullscreen) {
         // Legacy Edge
-        requestMethod = () => element.msRequestFullscreen();
+        requestMethod = () => element.msRequestFullscreen?.() || Promise.resolve();
       } else {
         // Fallback chain for undetected browsers
         if (element.webkitRequestFullscreen) {
-          requestMethod = () => element.webkitRequestFullscreen();
+          requestMethod = () => element.webkitRequestFullscreen?.() || Promise.resolve();
         } else if (element.webkitRequestFullScreen) {
-          requestMethod = () => element.webkitRequestFullScreen();
+          requestMethod = () => element.webkitRequestFullScreen?.() || Promise.resolve();
         } else if (element.mozRequestFullScreen) {
-          requestMethod = () => element.mozRequestFullScreen();
+          requestMethod = () => element.mozRequestFullScreen?.() || Promise.resolve();
         } else if (element.msRequestFullscreen) {
-          requestMethod = () => element.msRequestFullscreen();
+          requestMethod = () => element.msRequestFullscreen?.() || Promise.resolve();
         }
       }
 
@@ -296,30 +296,30 @@ export const useFullscreen = (
       } else if (browserInfo.isSafari) {
         // Safari-specific handling - try both variants
         if (doc.webkitExitFullscreen) {
-          exitMethod = () => doc.webkitExitFullscreen();
+          exitMethod = () => doc.webkitExitFullscreen?.() || Promise.resolve();
         } else if (doc.webkitCancelFullScreen) {
           // Older Safari versions
-          exitMethod = () => doc.webkitCancelFullScreen();
+          exitMethod = () => doc.webkitCancelFullScreen?.() || Promise.resolve();
         }
       } else if (browserInfo.isChrome && doc.webkitExitFullscreen) {
         // Chrome and Chromium-based browsers
-        exitMethod = () => doc.webkitExitFullscreen();
+        exitMethod = () => doc.webkitExitFullscreen?.() || Promise.resolve();
       } else if (browserInfo.isFirefox && doc.mozCancelFullScreen) {
         // Firefox
-        exitMethod = () => doc.mozCancelFullScreen();
+        exitMethod = () => doc.mozCancelFullScreen?.() || Promise.resolve();
       } else if (browserInfo.isEdge && doc.msExitFullscreen) {
         // Legacy Edge
-        exitMethod = () => doc.msExitFullscreen();
+        exitMethod = () => doc.msExitFullscreen?.() || Promise.resolve();
       } else {
         // Fallback chain for undetected browsers
         if (doc.webkitExitFullscreen) {
-          exitMethod = () => doc.webkitExitFullscreen();
+          exitMethod = () => doc.webkitExitFullscreen?.() || Promise.resolve();
         } else if (doc.webkitCancelFullScreen) {
-          exitMethod = () => doc.webkitCancelFullScreen();
+          exitMethod = () => doc.webkitCancelFullScreen?.() || Promise.resolve();
         } else if (doc.mozCancelFullScreen) {
-          exitMethod = () => doc.mozCancelFullScreen();
+          exitMethod = () => doc.mozCancelFullScreen?.() || Promise.resolve();
         } else if (doc.msExitFullscreen) {
-          exitMethod = () => doc.msExitFullscreen();
+          exitMethod = () => doc.msExitFullscreen?.() || Promise.resolve();
         }
       }
 

@@ -2,6 +2,23 @@ import { useCallback, useEffect, useMemo, useRef } from 'react';
 import cls from 'classnames';
 import { useTimelineContext } from '../../../contexts';
 
+interface UseTimelineCardProps {
+  active?: boolean;
+  autoScroll?: (params: { 
+    pointOffset?: number; 
+    contentHeight?: number; 
+    contentOffset?: number; 
+  }) => void;
+  slideShowRunning?: boolean;
+  cardLess?: boolean;
+  showAllCardsHorizontal?: boolean;
+  id?: string;
+  onClick?: (id?: string) => void;
+  mode?: 'HORIZONTAL' | 'VERTICAL' | 'VERTICAL_ALTERNATING' | 'HORIZONTAL_ALL';
+  position?: 'TOP' | 'BOTTOM';
+  iconChild?: React.ReactNode;
+}
+
 export const useTimelineCard = ({
   active,
   autoScroll,
@@ -13,7 +30,7 @@ export const useTimelineCard = ({
   mode,
   position,
   iconChild,
-}) => {
+}: UseTimelineCardProps) => {
   const circleRef = useRef<HTMLButtonElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -51,7 +68,6 @@ export const useTimelineCard = ({
 
         autoScroll?.({
           pointOffset: circleOffsetLeft + wrapperOffsetLeft,
-          pointWidth: circle.clientWidth,
         });
 
         // Bring the timeline point itself to keyboard focus for accessibility

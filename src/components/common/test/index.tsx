@@ -130,7 +130,7 @@ export const customRender = (
   { providerProps, ...renderOptions }: any,
 ): RenderResult => {
   // Extract mode from Timeline component props if available
-  const timelineMode = ui.props?.mode || providerProps?.mode;
+  const timelineMode = (ui.props as any)?.mode || providerProps?.mode;
 
   // Use both old GlobalContext and new split contexts for backward compatibility during migration
   return render(

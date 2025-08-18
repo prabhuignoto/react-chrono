@@ -80,21 +80,21 @@ const TimelineCardPortal: React.FC<TimelineCardPortalProps> = ({
           content={cardSubtitle}
           active={active}
           title={cardTitle}
-          url={url}
+          {...(url ? { url } : {})}
           detailedText={cardDetailedText}
           onShowMore={handleOnShowMore}
           theme={theme}
-          slideShowActive={slideShowRunning}
+          {...(slideShowRunning !== undefined ? { slideShowActive: slideShowRunning } : {})}
           media={media}
-          onElapsed={onElapsed}
+          {...(onElapsed ? { onElapsed: (id?: string) => id && onElapsed(id) } : {})}
           id={id}
           customContent={customContent}
-          hasFocus={hasFocus}
-          onClick={onClick}
-          timelineContent={timelineContent}
-          isNested={isNested}
-          nestedCardHeight={nestedCardHeight}
-          items={items}
+          {...(hasFocus !== undefined ? { hasFocus } : {})}
+          {...(onClick ? { onClick } : {})}
+          {...(timelineContent ? { timelineContent } : {})}
+          {...(isNested !== undefined ? { isNested } : {})}
+          {...(nestedCardHeight !== undefined ? { nestedCardHeight } : {})}
+          {...(items !== undefined ? { items } : {})}
         />
       </div>
     );

@@ -37,9 +37,8 @@ export const AlternatingVertical: FunctionComponent<AlternatingVerticalProps> = 
         enableBreakPoint
         highlightCardsOnHover
         contentDetailsHeight={200}
-      >
-        {children}
-      </Chrono>
+        {...(children ? { children } : {})}
+      />
     </ComponentContainerTree>
   </Vertical>
 ); 

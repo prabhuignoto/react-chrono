@@ -33,7 +33,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
   }: CardMediaModel) => {
     // Custom hooks for state management
     const { loadFailed, mediaLoaded, handleMediaLoaded, handleError } =
-      useMediaLoad(id, onMediaStateChange);
+      useMediaLoad(id || '', onMediaStateChange);
     const isYouTube = useYouTubeDetection(media.source.url);
     const { expandDetails, showText, toggleExpand, toggleText } =
       useToggleControls();
@@ -65,7 +65,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
       showText,
       expandDetails,
       textOverlay,
-      detailsText,
+      detailsText: detailsText as React.ForwardRefExoticComponent<any>,
       title,
       content,
       theme,
@@ -103,8 +103,8 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
             isYouTube={isYouTube}
             loadFailed={loadFailed}
             mediaLoaded={mediaLoaded}
-            active={active}
-            id={id}
+            active={active || false}
+            id={id || ''}
             mediaHeight={mediaHeight}
             mode={timelineMode}
             borderLessCards={borderLessCards}
@@ -126,8 +126,8 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
             canShowGradient={canShowGradient}
             gradientColor={gradientColor}
             title={title}
-            active={active}
-            url={url}
+            active={active || false}
+            url={url || ''}
             fontSizes={fontSizes}
             classNames={classNames}
             toggleText={toggleText}

@@ -2,7 +2,7 @@
 
 exports[`Content Header > should match the snapshot 1`] = `
 <div>
-  <div
+  <header
     class="timeline-card-content_timelineCardHeader__chzdno3"
   >
     <span
@@ -18,6 +18,6 @@ exports[`Content Header > should match the snapshot 1`] = `
     >
       content
     </span>
-  </div>
+  </header>
 </div>
 `;

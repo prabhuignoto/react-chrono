@@ -120,13 +120,13 @@ export const useFocusTrap = (isActive: boolean) => {
         // Shift + Tab
         if (document.activeElement === firstElement) {
           e.preventDefault();
-          lastElement.focus();
+          lastElement?.focus();
         }
       } else {
         // Tab
         if (document.activeElement === lastElement) {
           e.preventDefault();
-          firstElement.focus();
+          firstElement?.focus();
         }
       }
     };

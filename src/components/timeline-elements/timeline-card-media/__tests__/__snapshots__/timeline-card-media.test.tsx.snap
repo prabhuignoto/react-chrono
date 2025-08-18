@@ -4,7 +4,7 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
 <div>
   <div
     class="timeline-card-media_mediaWrapper__18oaqop2 timeline-card-media__18oaqop1 properties_display_flex_mobile__12ug0496 card-media-wrapper card-media timeline-card-media_justifyStart__18oaqop3"
-    style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); height: 0px; min-height: 200px;"
+    style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); --timeline-bg-color: #ffffff; --timeline-text-color: #000; --timeline-primary-color: #0f52ba; --timeline-card-bg-color: #ffffff; --timeline-muted-color: #6b7280; --timeline-toolbar-bg-color: #ffffff; --timeline-shadow-color: rgba(0, 0, 0, 0.1); height: 0px; min-height: 200px;"
   >
     <div
       class="timeline-card-media_imageWrapper__18oaqop5"
@@ -26,7 +26,7 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
     class="timeline-card-media_mediaDetailsWrapper__18oaqoph timeline-card-media__18oaqopg properties_display_flex_mobile__12ug0496"
   >
     <div
-      class="timeline-card-media_cardMediaHeader__18oaqopq timeline-card-media__18oaqopp properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
+      class="timeline-card-media_cardMediaHeader__18oaqops timeline-card-media__18oaqopr properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
     />
     <span
       class="card-sub-title card-subtitle"
@@ -42,12 +42,12 @@ exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
 <div>
   <div
     class="timeline-card-media_mediaWrapper__18oaqop2 timeline-card-media__18oaqop1 properties_display_flex_mobile__12ug0496 card-media-wrapper card-media timeline-card-media_justifyStart__18oaqop3"
-    style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); height: 0px; min-height: 200px;"
+    style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); --timeline-bg-color: #ffffff; --timeline-text-color: #000; --timeline-primary-color: #0f52ba; --timeline-card-bg-color: #ffffff; --timeline-muted-color: #6b7280; --timeline-toolbar-bg-color: #ffffff; --timeline-shadow-color: rgba(0, 0, 0, 0.1); height: 0px; min-height: 200px;"
   >
     <iframe
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen=""
-      class="timeline-card-media_iframeVideo__18oaqopm"
+      class="timeline-card-media_iframeVideo__18oaqopo"
       data-testid="timeline-card-content-video"
       loading="lazy"
       src="https://www.youtube.com/watch?v=9bZkp7q19f0?enablejsapi=1"
@@ -58,7 +58,7 @@ exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
     class="timeline-card-media_mediaDetailsWrapper__18oaqoph timeline-card-media__18oaqopg properties_display_flex_mobile__12ug0496"
   >
     <div
-      class="timeline-card-media_cardMediaHeader__18oaqopq timeline-card-media__18oaqopp properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
+      class="timeline-card-media_cardMediaHeader__18oaqops timeline-card-media__18oaqopr properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
     />
     <span
       class="card-sub-title card-subtitle"

@@ -9,7 +9,7 @@ export const timelinePointWrapper = style({
   position: 'relative',
   selectors: {
     '&.left': { order: 2 },
-    '&.right': { order: 1 },
+    '&.right': { order: 2 },
   },
 });
 

@@ -51,7 +51,7 @@ export const useTimelineNavigation = ({
     mode,
     timelineId,
     slideShowRunning,
-    onTimelineUpdated,
+    ...(onTimelineUpdated ? { onTimelineUpdated } : {}),
   });
 
   const { scrollToElement } = useTimelineScrolling();

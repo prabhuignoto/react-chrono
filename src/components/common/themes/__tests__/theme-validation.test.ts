@@ -366,11 +366,11 @@ describe('Theme Validation and Edge Cases', () => {
     });
 
     it('should not have circular references', () => {
-      const hasCircularRef = (obj: any, seen = new Set()) => {
+      const hasCircularRef = (obj: any, seen = new Set()): boolean => {
         if (seen.has(obj)) return true;
         if (obj && typeof obj === 'object') {
           seen.add(obj);
-          return Object.values(obj).some((value) =>
+          return Object.values(obj).some((value: any) =>
             hasCircularRef(value, seen),
           );
         }

@@ -23,7 +23,7 @@ export const CustomContentWithIconsVertical: FunctionComponent<CustomContentWith
         scrollable
         flipLayout
         timelinePointDimension={30}
-        items={items}
+        {...(items ? { items } : {})}
       >
         <div>
           <div style={{ width: '250px', height: '250px' }}>

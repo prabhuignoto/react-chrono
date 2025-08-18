@@ -58,7 +58,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
               id: getUniqueID(),
               isNested: true,
               visible: true,
-            })),
+            })) || [],
             title: item.date
               ? dayjs(item.date).format(titleDateFormat)
               : item.title,
@@ -309,10 +309,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
           slideShow={slideShow}
           slideShowEnabled={slideShow}
           slideShowRunning={slideShowActive}
-          onScrollEnd={onScrollEnd}
-          onItemSelected={onItemSelected}
+          {...(onScrollEnd ? { onScrollEnd } : {})}
+          {...(onItemSelected ? { onItemSelected } : {})}
           onOutlineSelection={handleOutlineSelection}
-          mode={mode}
+          mode={mode || 'VERTICAL_ALTERNATING'}
           onPaused={onPaused}
         />
       </div>

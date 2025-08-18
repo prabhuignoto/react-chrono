@@ -54,12 +54,14 @@ export function computeCssVarsFromTheme(
       [vars.color.shadow]: t.shadowColor ?? defaultShadow,
     }),
     // Additional CSS custom properties for compatibility
-    '--timeline-bg-color': t.timelineBgColor ?? t.cardBgColor ?? defaultBackground,
-    '--timeline-text-color': t.textColor ?? defaultText,
-    '--timeline-primary-color': t.primary ?? '#3b82f6',
-    '--timeline-card-bg-color': t.cardBgColor ?? defaultCardBg,
-    '--timeline-muted-color': defaultMuted,
-    '--timeline-toolbar-bg-color': t.toolbarBgColor ?? defaultToolbarBg,
-    '--timeline-shadow-color': t.shadowColor ?? defaultShadow,
+    ...(({
+      '--timeline-bg-color': t.timelineBgColor ?? t.cardBgColor ?? defaultBackground,
+      '--timeline-text-color': t.textColor ?? defaultText,
+      '--timeline-primary-color': t.primary ?? '#3b82f6',
+      '--timeline-card-bg-color': t.cardBgColor ?? defaultCardBg,
+      '--timeline-muted-color': defaultMuted,
+      '--timeline-toolbar-bg-color': t.toolbarBgColor ?? defaultToolbarBg,
+      '--timeline-shadow-color': t.shadowColor ?? defaultShadow,
+    }) as any),
   };
 }

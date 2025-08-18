@@ -1,7 +1,8 @@
 import { Theme } from '@models/Theme';
 import { css } from 'styled-components';
 
-export const ScrollBar = css<{ theme: Theme }>`
+// Theme is optional on styled-components props to satisfy interpolation types
+export const ScrollBar = css<{ theme?: Theme }>`
   scrollbar-color: ${(p) => p.theme?.primary} default;
   scrollbar-width: thin;
 
