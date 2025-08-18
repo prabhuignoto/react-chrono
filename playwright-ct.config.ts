@@ -35,7 +35,7 @@ export default defineConfig({
 
     /* Vite config for component testing */
     ctViteConfig: {
-      plugins: [vanillaExtractPlugin(), react()],
+      plugins: [vanillaExtractPlugin({ identifiers: 'debug' }), react()],
       resolve: {
         alias: {
           '@': resolve(__dirname, './src'),

@@ -255,7 +255,8 @@ export const TimelineContentContainer = styled.div<{
 
   /* Highlight active cards in horizontal_all mode */
   ${(p) =>
-    p.$highlight && p.$active &&
+    p.$highlight &&
+    p.$active &&
     `
     border: 2px solid ${p.theme?.primary};
     box-shadow: 0 0 0 2px ${p.theme?.primary}22;

@@ -35,14 +35,17 @@ export const useFocusManager = ({
     if (shouldFocus && isActive) {
       // Set focus with proper options
       const focusOptions: FocusOptions = { preventScroll };
-      
+
       // Use requestAnimationFrame to ensure DOM is ready
       requestAnimationFrame(() => {
-        if (elementRef.current && !elementRef.current.contains(document.activeElement)) {
+        if (
+          elementRef.current &&
+          !elementRef.current.contains(document.activeElement)
+        ) {
           elementRef.current.focus(focusOptions);
-          
-          // Add focus-visible class for keyboard navigation
-          if (!elementRef.current.matches(':focus-visible')) {
+
+          // Add focus-visible class for keyboard navigation (avoid selector)
+          if (!elementRef.current.classList.contains('focus-visible')) {
             elementRef.current.classList.add('focus-visible');
           }
         }
@@ -69,8 +72,10 @@ export const useFocusManager = ({
       ) {
         // Restore focus to previous element
         requestAnimationFrame(() => {
-          if (previousFocusRef.current && 
-              typeof previousFocusRef.current.focus === 'function') {
+          if (
+            previousFocusRef.current &&
+            typeof previousFocusRef.current.focus === 'function'
+          ) {
             previousFocusRef.current.focus();
             hasRestoredRef.current = true;
           }
@@ -100,7 +105,7 @@ export const useFocusTrap = (isActive: boolean) => {
 
     const container = containerRef.current;
     const focusableElements = container.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
     );
 
     if (focusableElements.length === 0) return;

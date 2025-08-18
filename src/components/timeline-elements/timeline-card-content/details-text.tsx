@@ -50,8 +50,8 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
             maxHeight: !useReadMore
               ? 'none'
               : showMore
-              ? '1000px'
-              : `${contentDetailsHeight ?? 150}px`,
+                ? '1000px'
+                : `${contentDetailsHeight ?? 150}px`,
           }}
         >
           {customContent ?? (

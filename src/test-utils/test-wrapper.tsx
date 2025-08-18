@@ -124,7 +124,7 @@ export const TestWrapper: React.FC<TestWrapperProps> = ({
  */
 export const renderWithProviders = (
   ui: React.ReactElement,
-  options?: Omit<TestWrapperProps, 'children'>
+  options?: Omit<TestWrapperProps, 'children'>,
 ) => {
   return {
     wrapper: ({ children }: { children: React.ReactNode }) => (

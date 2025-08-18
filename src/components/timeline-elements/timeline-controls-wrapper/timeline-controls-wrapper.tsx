@@ -4,9 +4,9 @@ import { controlsWrapper } from './timeline-controls-wrapper.css';
 /**
  * Wraps timeline controls and provides proper z-index stacking context
  */
-const ControlsWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className={controlsWrapper}>{children}</div>
-);
+const ControlsWrapper: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => <div className={controlsWrapper}>{children}</div>;
 
 interface TimelineControlsWrapperProps {
   children: React.ReactNode;

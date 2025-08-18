@@ -1,6 +1,12 @@
 import React, { useRef, ReactNode } from 'react';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { cardMediaHeader, mediaDetailsWrapper, mediaDetailsAbsolute, mediaDetailsCard, mediaDetailsGradient } from '../timeline-card-media.css';
+import {
+  cardMediaHeader,
+  mediaDetailsWrapper,
+  mediaDetailsAbsolute,
+  mediaDetailsCard,
+  mediaDetailsGradient,
+} from '../timeline-card-media.css';
 import { gradientVar } from '../timeline-card-media.css';
 import { TitleMemo } from '../../memoized/title-memo';
 import { ButtonWrapper } from '../timeline-card-media-buttons';
@@ -65,7 +71,7 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
       className={[
         mediaDetailsWrapper,
         textOverlay ? mediaDetailsAbsolute : undefined,
-        (canExpand || !showText) ? mediaDetailsCard : undefined,
+        canExpand || !showText ? mediaDetailsCard : undefined,
         canShowGradient ? mediaDetailsGradient : undefined,
       ]
         .filter(Boolean)

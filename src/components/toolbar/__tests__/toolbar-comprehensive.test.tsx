@@ -44,7 +44,7 @@ describe('Toolbar Comprehensive Tests', () => {
       const { container } = renderWithTheme(
         <Toolbar items={[]} theme={mockTheme}>
           <div>Content</div>
-        </Toolbar>
+        </Toolbar>,
       );
 
       // Toolbar returns null when there are no items
@@ -53,17 +53,25 @@ describe('Toolbar Comprehensive Tests', () => {
 
     it('should render toolbar with single item', () => {
       const items: ToolbarItem[] = [
-        { name: 'Single Item', onSelect: mockOnSelect, id: '1', label: 'Single Item' }
+        {
+          name: 'Single Item',
+          onSelect: mockOnSelect,
+          id: '1',
+          label: 'Single Item',
+        },
       ];
 
       renderWithTheme(
         <Toolbar items={items} theme={mockTheme}>
           {items.map((item, index) => (
-            <button key={index} onClick={() => item.onSelect(item.id || '', item.name)}>
+            <button
+              key={index}
+              onClick={() => item.onSelect(item.id || '', item.name)}
+            >
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       const button = screen.getByText('Single Item');
@@ -80,11 +88,14 @@ describe('Toolbar Comprehensive Tests', () => {
       renderWithTheme(
         <Toolbar items={items} theme={mockTheme}>
           {items.map((item, index) => (
-            <button key={index} onClick={() => item.onSelect(item.id || '', item.name)}>
+            <button
+              key={index}
+              onClick={() => item.onSelect(item.id || '', item.name)}
+            >
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       expect(screen.getByText('Item 1')).toBeInTheDocument();
@@ -99,18 +110,21 @@ describe('Toolbar Comprehensive Tests', () => {
           onSelect: mockOnSelect,
           id: '1',
           label: 'Item with Icon',
-          icon: <span data-testid="custom-icon">🔧</span>
-        }
+          icon: <span data-testid="custom-icon">🔧</span>,
+        },
       ];
 
       renderWithTheme(
         <Toolbar items={items} theme={mockTheme}>
           {items.map((item, index) => (
-            <button key={index} onClick={() => item.onSelect(item.id || '', item.name)}>
+            <button
+              key={index}
+              onClick={() => item.onSelect(item.id || '', item.name)}
+            >
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       // The icon should be rendered once in the toolbar structure
@@ -125,8 +139,8 @@ describe('Toolbar Comprehensive Tests', () => {
           name: 'Custom Item',
           onSelect: mockOnSelect,
           id: '1',
-          content: <div data-testid="custom-content">Custom Content</div>
-        }
+          content: <div data-testid="custom-content">Custom Content</div>,
+        },
       ];
 
       renderWithTheme(
@@ -136,7 +150,7 @@ describe('Toolbar Comprehensive Tests', () => {
               {item.content || item.name}
             </div>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       expect(screen.getByTestId('custom-content')).toBeInTheDocument();
@@ -147,7 +161,12 @@ describe('Toolbar Comprehensive Tests', () => {
     it('should call onSelect when item is clicked', async () => {
       const user = userEvent.setup();
       const items: ToolbarItem[] = [
-        { name: 'Clickable Item', onSelect: mockOnSelect, id: '1', label: 'Clickable Item' }
+        {
+          name: 'Clickable Item',
+          onSelect: mockOnSelect,
+          id: '1',
+          label: 'Clickable Item',
+        },
       ];
 
       renderWithTheme(
@@ -157,7 +176,7 @@ describe('Toolbar Comprehensive Tests', () => {
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       const button = screen.getByText('Clickable Item');
@@ -172,7 +191,7 @@ describe('Toolbar Comprehensive Tests', () => {
       const mockOnSelect2 = vi.fn();
       const items: ToolbarItem[] = [
         { name: 'Item 1', onSelect: mockOnSelect1, id: '1', label: 'Item 1' },
-        { name: 'Item 2', onSelect: mockOnSelect2, id: '2', label: 'Item 2' }
+        { name: 'Item 2', onSelect: mockOnSelect2, id: '2', label: 'Item 2' },
       ];
 
       renderWithTheme(
@@ -182,7 +201,7 @@ describe('Toolbar Comprehensive Tests', () => {
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       await user.click(screen.getByText('Item 1'));
@@ -197,7 +216,12 @@ describe('Toolbar Comprehensive Tests', () => {
     it.skip('should handle keyboard interactions', async () => {
       const user = userEvent.setup();
       const items: ToolbarItem[] = [
-        { name: 'Keyboard Item', onSelect: mockOnSelect, id: '1', label: 'Keyboard Item' }
+        {
+          name: 'Keyboard Item',
+          onSelect: mockOnSelect,
+          id: '1',
+          label: 'Keyboard Item',
+        },
       ];
 
       renderWithTheme(
@@ -207,12 +231,12 @@ describe('Toolbar Comprehensive Tests', () => {
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       const toolbarItem = screen.getByLabelText('Keyboard Item');
       toolbarItem.focus();
-      
+
       await user.keyboard('{Enter}');
       expect(mockOnSelect).toHaveBeenCalledTimes(1);
 
@@ -222,22 +246,32 @@ describe('Toolbar Comprehensive Tests', () => {
 
     it('should handle disabled items', () => {
       const items: ToolbarItem[] = [
-        { name: 'Disabled Item', onSelect: mockOnSelect, id: '1', disabled: true, label: 'Disabled Item' }
+        {
+          name: 'Disabled Item',
+          onSelect: mockOnSelect,
+          id: '1',
+          disabled: true,
+          label: 'Disabled Item',
+        },
       ];
 
       renderWithTheme(
         <Toolbar items={items} theme={mockTheme}>
           {items.map((item, index) => (
-            <button key={index} onClick={item.onSelect} disabled={item.disabled}>
+            <button
+              key={index}
+              onClick={item.onSelect}
+              disabled={item.disabled}
+            >
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       const button = screen.getByText('Disabled Item');
       expect(button).toBeDisabled();
-      
+
       fireEvent.click(button);
       expect(mockOnSelect).not.toHaveBeenCalled();
     });
@@ -246,7 +280,12 @@ describe('Toolbar Comprehensive Tests', () => {
   describe('Theme Integration', () => {
     it('should apply theme colors correctly', () => {
       const items: ToolbarItem[] = [
-        { name: 'Themed Item', onSelect: mockOnSelect, id: '1', label: 'Themed Item' }
+        {
+          name: 'Themed Item',
+          onSelect: mockOnSelect,
+          id: '1',
+          label: 'Themed Item',
+        },
       ];
 
       const { container } = renderWithTheme(
@@ -256,17 +295,19 @@ describe('Toolbar Comprehensive Tests', () => {
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       // Check if toolbar has proper styling
-      const toolbar = container.querySelector('[data-testid="toolbar"]') || container.firstChild;
+      const toolbar =
+        container.querySelector('[data-testid="toolbar"]') ||
+        container.firstChild;
       expect(toolbar).toBeInTheDocument();
     });
 
     it('should handle theme changes', () => {
       const items: ToolbarItem[] = [
-        { name: 'Item', onSelect: mockOnSelect, id: '1', label: 'Item' }
+        { name: 'Item', onSelect: mockOnSelect, id: '1', label: 'Item' },
       ];
 
       const darkTheme: Theme = {
@@ -282,7 +323,7 @@ describe('Toolbar Comprehensive Tests', () => {
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       // Rerender with dark theme
@@ -295,7 +336,7 @@ describe('Toolbar Comprehensive Tests', () => {
               </button>
             ))}
           </Toolbar>
-        </ThemeProvider>
+        </ThemeProvider>,
       );
 
       expect(screen.getByText('Item')).toBeInTheDocument();
@@ -308,7 +349,7 @@ describe('Toolbar Comprehensive Tests', () => {
       } as Theme;
 
       const items: ToolbarItem[] = [
-        { name: 'Item', onSelect: mockOnSelect, id: '1', label: 'Item' }
+        { name: 'Item', onSelect: mockOnSelect, id: '1', label: 'Item' },
       ];
 
       expect(() => {
@@ -319,7 +360,7 @@ describe('Toolbar Comprehensive Tests', () => {
                 {item.name}
               </button>
             ))}
-          </Toolbar>
+          </Toolbar>,
         );
       }).not.toThrow();
     });
@@ -328,26 +369,22 @@ describe('Toolbar Comprehensive Tests', () => {
   describe('Advanced Features', () => {
     it('should handle items with tooltips', async () => {
       const items: ToolbarItem[] = [
-        { 
-          name: 'Item with Tooltip', 
-          onSelect: mockOnSelect, 
+        {
+          name: 'Item with Tooltip',
+          onSelect: mockOnSelect,
           id: '1',
-          tooltip: 'This is a helpful tooltip'
-        }
+          tooltip: 'This is a helpful tooltip',
+        },
       ];
 
       renderWithTheme(
         <Toolbar items={items} theme={mockTheme}>
           {items.map((item, index) => (
-            <button 
-              key={index} 
-              onClick={item.onSelect}
-              title={item.tooltip}
-            >
+            <button key={index} onClick={item.onSelect} title={item.tooltip}>
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       const button = screen.getByText('Item with Tooltip');
@@ -356,12 +393,12 @@ describe('Toolbar Comprehensive Tests', () => {
 
     it('should handle items with badges/counts', () => {
       const items: ToolbarItem[] = [
-        { 
-          name: 'Item with Badge', 
-          onSelect: mockOnSelect, 
+        {
+          name: 'Item with Badge',
+          onSelect: mockOnSelect,
           id: '1',
-          badge: '5'
-        }
+          badge: '5',
+        },
       ];
 
       renderWithTheme(
@@ -372,7 +409,7 @@ describe('Toolbar Comprehensive Tests', () => {
               {item.badge && <span data-testid="badge">{item.badge}</span>}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       expect(screen.getByTestId('badge')).toHaveTextContent('5');
@@ -380,15 +417,27 @@ describe('Toolbar Comprehensive Tests', () => {
 
     it('should handle active/selected states', () => {
       const items: ToolbarItem[] = [
-        { name: 'Active Item', onSelect: mockOnSelect, id: '1', active: true, label: 'Active Item' },
-        { name: 'Inactive Item', onSelect: mockOnSelect, id: '2', active: false, label: 'Inactive Item' }
+        {
+          name: 'Active Item',
+          onSelect: mockOnSelect,
+          id: '1',
+          active: true,
+          label: 'Active Item',
+        },
+        {
+          name: 'Inactive Item',
+          onSelect: mockOnSelect,
+          id: '2',
+          active: false,
+          label: 'Inactive Item',
+        },
       ];
 
       renderWithTheme(
         <Toolbar items={items} theme={mockTheme}>
           {items.map((item, index) => (
-            <button 
-              key={index} 
+            <button
+              key={index}
               onClick={item.onSelect}
               className={item.active ? 'active' : ''}
               data-active={item.active}
@@ -396,7 +445,7 @@ describe('Toolbar Comprehensive Tests', () => {
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       const activeButton = screen.getByText('Active Item');
@@ -410,20 +459,41 @@ describe('Toolbar Comprehensive Tests', () => {
 
     it('should handle grouped items', () => {
       const items: ToolbarItem[] = [
-        { name: 'Group 1 Item 1', onSelect: mockOnSelect, id: '1', group: 'group1', label: 'Group 1 Item 1' },
-        { name: 'Group 1 Item 2', onSelect: mockOnSelect, id: '2', group: 'group1', label: 'Group 1 Item 2' },
-        { name: 'Group 2 Item 1', onSelect: mockOnSelect, id: '3', group: 'group2', label: 'Group 2 Item 1' },
+        {
+          name: 'Group 1 Item 1',
+          onSelect: mockOnSelect,
+          id: '1',
+          group: 'group1',
+          label: 'Group 1 Item 1',
+        },
+        {
+          name: 'Group 1 Item 2',
+          onSelect: mockOnSelect,
+          id: '2',
+          group: 'group1',
+          label: 'Group 1 Item 2',
+        },
+        {
+          name: 'Group 2 Item 1',
+          onSelect: mockOnSelect,
+          id: '3',
+          group: 'group2',
+          label: 'Group 2 Item 1',
+        },
       ];
 
       renderWithTheme(
         <Toolbar items={items} theme={mockTheme}>
           {Object.entries(
-            items.reduce((groups, item) => {
-              const group = item.group || 'default';
-              if (!groups[group]) groups[group] = [];
-              groups[group].push(item);
-              return groups;
-            }, {} as Record<string, ToolbarItem[]>)
+            items.reduce(
+              (groups, item) => {
+                const group = item.group || 'default';
+                if (!groups[group]) groups[group] = [];
+                groups[group].push(item);
+                return groups;
+              },
+              {} as Record<string, ToolbarItem[]>,
+            ),
           ).map(([groupName, groupItems], groupIndex) => (
             <div key={groupName} data-testid={`group-${groupName}`}>
               {groupItems.map((item, index) => (
@@ -433,7 +503,7 @@ describe('Toolbar Comprehensive Tests', () => {
               ))}
             </div>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       expect(screen.getByTestId('group-group1')).toBeInTheDocument();
@@ -444,15 +514,20 @@ describe('Toolbar Comprehensive Tests', () => {
   describe('Accessibility', () => {
     it('should have proper ARIA attributes', () => {
       const items: ToolbarItem[] = [
-        { name: 'Accessible Item', onSelect: mockOnSelect, id: '1', label: 'Accessible Item' }
+        {
+          name: 'Accessible Item',
+          onSelect: mockOnSelect,
+          id: '1',
+          label: 'Accessible Item',
+        },
       ];
 
       renderWithTheme(
         <Toolbar items={items} theme={mockTheme}>
           <div role="toolbar" aria-label="Timeline toolbar">
             {items.map((item, index) => (
-              <button 
-                key={index} 
+              <button
+                key={index}
                 onClick={item.onSelect}
                 aria-label={item.name}
               >
@@ -460,7 +535,7 @@ describe('Toolbar Comprehensive Tests', () => {
               </button>
             ))}
           </div>
-        </Toolbar>
+        </Toolbar>,
       );
 
       const toolbar = screen.getByRole('toolbar');
@@ -485,11 +560,11 @@ describe('Toolbar Comprehensive Tests', () => {
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       const buttons = screen.getAllByRole('button');
-      
+
       // Tab through buttons
       buttons[0].focus();
       expect(buttons[0]).toHaveFocus();
@@ -503,31 +578,33 @@ describe('Toolbar Comprehensive Tests', () => {
 
     it('should announce state changes to screen readers', () => {
       const items: ToolbarItem[] = [
-        { 
-          name: 'Toggle Item', 
-          onSelect: mockOnSelect, 
+        {
+          name: 'Toggle Item',
+          onSelect: mockOnSelect,
           id: '1',
           active: false,
-          label: 'Toggle Item'
-        }
+          label: 'Toggle Item',
+        },
       ];
 
       const { rerender } = renderWithTheme(
         <Toolbar items={items} theme={mockTheme}>
           {items.map((item, index) => (
-            <button 
-              key={index} 
+            <button
+              key={index}
               onClick={item.onSelect}
               aria-pressed={item.active}
             >
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       const buttons = screen.getAllByRole('button');
-      const toggleButton = buttons.find(button => button.getAttribute('aria-pressed') === 'false');
+      const toggleButton = buttons.find(
+        (button) => button.getAttribute('aria-pressed') === 'false',
+      );
       expect(toggleButton).toHaveAttribute('aria-pressed', 'false');
 
       // Simulate state change
@@ -536,8 +613,8 @@ describe('Toolbar Comprehensive Tests', () => {
         <ThemeProvider theme={mockTheme}>
           <Toolbar items={updatedItems} theme={mockTheme}>
             {updatedItems.map((item, index) => (
-              <button 
-                key={index} 
+              <button
+                key={index}
                 onClick={() => item.onSelect(item.id || '', item.name)}
                 aria-pressed={item.active}
               >
@@ -545,11 +622,13 @@ describe('Toolbar Comprehensive Tests', () => {
               </button>
             ))}
           </Toolbar>
-        </ThemeProvider>
+        </ThemeProvider>,
       );
 
       const updatedButtons = screen.getAllByRole('button');
-      const updatedToggleButton = updatedButtons.find(button => button.getAttribute('aria-pressed') === 'true');
+      const updatedToggleButton = updatedButtons.find(
+        (button) => button.getAttribute('aria-pressed') === 'true',
+      );
       expect(updatedToggleButton).toHaveAttribute('aria-pressed', 'true');
     });
   });
@@ -560,7 +639,7 @@ describe('Toolbar Comprehensive Tests', () => {
         name: `Item ${i + 1}`,
         onSelect: mockOnSelect,
         id: `${i + 1}`,
-        label: `Item ${i + 1}`
+        label: `Item ${i + 1}`,
       }));
 
       expect(() => {
@@ -571,7 +650,7 @@ describe('Toolbar Comprehensive Tests', () => {
                 {item.name}
               </button>
             ))}
-          </Toolbar>
+          </Toolbar>,
         );
       }).not.toThrow();
 
@@ -581,9 +660,24 @@ describe('Toolbar Comprehensive Tests', () => {
 
     it('should handle items with special characters', () => {
       const items: ToolbarItem[] = [
-        { name: 'Item with émojis 🚀', onSelect: mockOnSelect, id: '1', label: 'Item with émojis 🚀' },
-        { name: 'Item with "quotes" & symbols', onSelect: mockOnSelect, id: '2', label: 'Item with "quotes" & symbols' },
-        { name: 'Item with <HTML> tags', onSelect: mockOnSelect, id: '3', label: 'Item with <HTML> tags' },
+        {
+          name: 'Item with émojis 🚀',
+          onSelect: mockOnSelect,
+          id: '1',
+          label: 'Item with émojis 🚀',
+        },
+        {
+          name: 'Item with "quotes" & symbols',
+          onSelect: mockOnSelect,
+          id: '2',
+          label: 'Item with "quotes" & symbols',
+        },
+        {
+          name: 'Item with <HTML> tags',
+          onSelect: mockOnSelect,
+          id: '3',
+          label: 'Item with <HTML> tags',
+        },
       ];
 
       renderWithTheme(
@@ -593,19 +687,36 @@ describe('Toolbar Comprehensive Tests', () => {
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       expect(screen.getByText('Item with émojis 🚀')).toBeInTheDocument();
-      expect(screen.getByText('Item with "quotes" & symbols')).toBeInTheDocument();
+      expect(
+        screen.getByText('Item with "quotes" & symbols'),
+      ).toBeInTheDocument();
       expect(screen.getByText('Item with <HTML> tags')).toBeInTheDocument();
     });
 
     it('should handle items with null/undefined properties', () => {
       const items: ToolbarItem[] = [
-        { name: 'Valid Item', onSelect: mockOnSelect, id: '1', label: 'Valid Item' },
-        { name: null as any, onSelect: mockOnSelect, id: '2', label: null as any },
-        { name: undefined as any, onSelect: mockOnSelect, id: '3', label: undefined as any },
+        {
+          name: 'Valid Item',
+          onSelect: mockOnSelect,
+          id: '1',
+          label: 'Valid Item',
+        },
+        {
+          name: null as any,
+          onSelect: mockOnSelect,
+          id: '2',
+          label: null as any,
+        },
+        {
+          name: undefined as any,
+          onSelect: mockOnSelect,
+          id: '3',
+          label: undefined as any,
+        },
         { name: '', onSelect: mockOnSelect, id: '4', label: '' },
       ];
 
@@ -617,7 +728,7 @@ describe('Toolbar Comprehensive Tests', () => {
                 {item.name || `Item ${index + 1}`}
               </button>
             ))}
-          </Toolbar>
+          </Toolbar>,
         );
       }).not.toThrow();
     });
@@ -625,7 +736,12 @@ describe('Toolbar Comprehensive Tests', () => {
     it('should handle rapid successive clicks', async () => {
       const user = userEvent.setup();
       const items: ToolbarItem[] = [
-        { name: 'Rapid Click Item', onSelect: mockOnSelect, id: '1', label: 'Rapid Click Item' }
+        {
+          name: 'Rapid Click Item',
+          onSelect: mockOnSelect,
+          id: '1',
+          label: 'Rapid Click Item',
+        },
       ];
 
       renderWithTheme(
@@ -635,11 +751,11 @@ describe('Toolbar Comprehensive Tests', () => {
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       const button = screen.getByText('Rapid Click Item');
-      
+
       // Click rapidly multiple times
       await user.click(button);
       await user.click(button);
@@ -652,7 +768,12 @@ describe('Toolbar Comprehensive Tests', () => {
 
     it('should handle component unmounting gracefully', () => {
       const items: ToolbarItem[] = [
-        { name: 'Unmount Test', onSelect: mockOnSelect, id: '1', label: 'Unmount Test' }
+        {
+          name: 'Unmount Test',
+          onSelect: mockOnSelect,
+          id: '1',
+          label: 'Unmount Test',
+        },
       ];
 
       const { unmount } = renderWithTheme(
@@ -662,7 +783,7 @@ describe('Toolbar Comprehensive Tests', () => {
               {item.name}
             </button>
           ))}
-        </Toolbar>
+        </Toolbar>,
       );
 
       expect(() => unmount()).not.toThrow();

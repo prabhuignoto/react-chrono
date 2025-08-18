@@ -47,5 +47,3 @@ export const vars = createThemeContract({
     easing: { standard: null, emphasized: null },
   },
 });
-
-

@@ -5,13 +5,14 @@ import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { useTimelineContext } from '../contexts';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
-import {
-  Wrapper,
-  TimelineMainWrapper,
-  TimelineContentRender,
-  ToolbarWrapper,
-} from './timeline.style';
 import * as ve from './timeline.css';
+// Temporarily disabled new Vanilla Extract styles due to PostCSS errors
+// import { 
+//   timelineWrapper, 
+//   timelineMainWrapper as timelineMainWrapperVE,
+//   timelineContentRender 
+// } from './timeline-main.css';
+import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
 import { TimelineToolbar } from './timeline-toolbar';
 import { useTimelineSearch } from '../../hooks/useTimelineSearch';
 import { useTimelineNavigation } from '../../hooks/useTimelineNavigation';
@@ -216,7 +217,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           ) as HTMLElement | null;
           const target =
             verticalRow ||
-            (document.getElementById(`timeline-card-${itemId}`) as HTMLElement | null);
+            (document.getElementById(
+              `timeline-card-${itemId}`,
+            ) as HTMLElement | null);
           try {
             target?.focus?.({ preventScroll: true });
           } catch {}
@@ -280,7 +283,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           const activeId = items[activeTimelineItem ?? 0]?.id;
           if (activeId) {
             // Prefer focusing the card container in horizontal modes
-            const cardContainer = document.getElementById(`timeline-card-${activeId}`);
+            const cardContainer = document.getElementById(
+              `timeline-card-${activeId}`,
+            );
             if (cardContainer) {
               try {
                 (cardContainer as HTMLElement).focus({ preventScroll: false });
@@ -447,55 +452,69 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     if (!items.length || !activeItem) return;
 
     const { title, cardTitle, cardSubtitle, cardDetailedText } = activeItem;
+    
+    // Use the activeTimelineItem directly instead of activeItemIndex.current
+    // to prevent infinite loops caused by ref changes
     onItemSelected?.({
       cardDetailedText,
       cardSubtitle,
       cardTitle,
-      index: activeItemIndex.current,
+      index: activeTimelineItem ?? 0,
       title,
     });
 
-    // Centering is now handled predictively by navigation hooks
-    // Only handle slideshow mode here to avoid conflicts
-    if (slideShowRunning) {
-      if (mode === 'HORIZONTAL') {
-        const card = horizontalContentRef.current?.querySelector(
-          `#timeline-card-${activeItem.id}`,
-        );
+    // Handle centering for both slideshow and manual navigation
+    if (mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL') {
+      const card = horizontalContentRef.current?.querySelector(
+        `#timeline-card-${activeItem.id}`,
+      );
 
-        if (card && horizontalContentRef.current) {
-          const cardRect = card.getBoundingClientRect();
-          const contentRect =
-            horizontalContentRef.current.getBoundingClientRect();
+      if (card && horizontalContentRef.current) {
+        const cardRect = card.getBoundingClientRect();
+        const contentRect =
+          horizontalContentRef.current.getBoundingClientRect();
 
-          if (cardRect && contentRect) {
-            const { width: cardWidth, left: cardLeft } = cardRect;
-            const { width: contentWidth, left: contentLeft } = contentRect;
+        if (cardRect && contentRect) {
+          const { width: cardWidth, left: cardLeft } = cardRect;
+          const { width: contentWidth, left: contentLeft } = contentRect;
 
-            requestAnimationFrame(() => {
-              const ele = horizontalContentRef.current as HTMLElement;
-              if (!ele) return;
-
-              ele.style.scrollBehavior = 'smooth';
-              const targetScrollLeft =
-                cardLeft - contentLeft + cardWidth / 2 - contentWidth / 2;
-              ele.scrollLeft += targetScrollLeft;
-            });
-          }
-        }
-      } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
-        const verticalItemRow = document.querySelector(
-          `[data-testid="vertical-item-row"][data-item-id="${activeItem.id}"]`,
-        );
-
-        if (verticalItemRow) {
           requestAnimationFrame(() => {
-            (verticalItemRow as HTMLElement).scrollIntoView({
-              behavior: 'smooth',
-              block: 'center',
-            });
+            const ele = horizontalContentRef.current as HTMLElement;
+            if (!ele) return;
+
+            ele.style.scrollBehavior = 'smooth';
+            const targetScrollLeft =
+              cardLeft - contentLeft + cardWidth / 2 - contentWidth / 2;
+            ele.scrollLeft += targetScrollLeft;
+            
+            // Also ensure the card gets focus
+            (card as HTMLElement).focus({ preventScroll: true });
           });
         }
+      }
+      
+      // Also ensure timeline point is visible
+      const point = document.querySelector(
+        `button[data-testid="timeline-circle"][data-item-id="${activeItem.id}"]`,
+      ) as HTMLButtonElement | null;
+      
+      if (point) {
+        requestAnimationFrame(() => {
+          point.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        });
+      }
+    } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
+      const verticalItemRow = document.querySelector(
+        `[data-testid="vertical-item-row"][data-item-id="${activeItem.id}"]`,
+      );
+
+      if (verticalItemRow) {
+        requestAnimationFrame(() => {
+          (verticalItemRow as HTMLElement).scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+          });
+        });
       }
     }
   }, [
@@ -504,7 +523,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     slideShowRunning,
     mode,
     onItemSelected,
-    activeItemIndex,
     horizontalContentRef,
   ]);
 
@@ -520,18 +538,24 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   }, [newOffSet, mode, timelineMainRef]);
 
-  // Ensure all styled components are properly integrated
+  // Use Vanilla Extract styles with proper CSS variables
+  const wrapperHeight = useMemo(() => {
+    return typeof props.timelineHeight === 'number'
+      ? `${props.timelineHeight}px`
+      : props.timelineHeight || '100%';
+  }, [props.timelineHeight]);
+
   return (
-    <Wrapper
-      ref={wrapperRef as unknown as React.RefObject<HTMLDivElement>}
+    <div
+      ref={wrapperRef}
       onKeyDown={handleKeyDown}
       onFocus={handleFocus}
       onBlur={handleBlur}
-      className={wrapperClass}
-      $cardPositionHorizontal={(cardPositionHorizontal || 'TOP') as 'TOP' | 'BOTTOM'}
-      theme={theme}
-      $isDarkMode={darkMode}
-      $isFullscreen={isFullscreen}
+      className={`timeline-wrapper ${mode.toLowerCase()} ${ve.wrapper}`}
+      style={{
+        ...computeCssVarsFromTheme(theme, darkMode),
+        height: wrapperHeight,
+      }}
       data-fullscreen={isFullscreen}
       data-keyboard-focus={isKeyboardNavigation}
       data-toolbar-navigation={isToolbarNavigation}
@@ -542,58 +566,53 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         }
       }}
       tabIndex={isChild ? -1 : 0}
-    $timelineHeight={
-      typeof props.timelineHeight === 'number'
-        ? `${props.timelineHeight}px`
-        : props.timelineHeight || '100%'
-    }
     >
       {canShowToolbar && (
-        <ToolbarWrapper position={toolbarPosition} className={ve.toolbarWrapper}>
-          <TimelineToolbar
-            activeTimelineItem={activeTimelineItem ?? 0}
-            totalItems={items.length}
-            slideShowEnabled={!!slideShowEnabled}
-            slideShowRunning={!!slideShowRunning}
-            onFirst={handleFirst}
-            onLast={handleLast}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-            onRestartSlideshow={onRestartSlideshow || (() => {})}
-            darkMode={darkMode}
-            toggleDarkMode={toggleDarkMode}
-            onPaused={onPaused || (() => {})}
-            id={id}
-            flipLayout={!!flipLayout}
-            items={items}
-            onActivateTimelineItem={handleTimelineItemClick}
-            onUpdateTimelineMode={handleTimelineUpdate}
-            onUpdateTextContentDensity={updateTextContentDensity}
-            mode={timelineMode}
-            searchQuery={searchQuery}
-            onSearchChange={handleSearchChange}
-            onClearSearch={clearSearch}
-            onNextMatch={handleNextMatch}
-            onPreviousMatch={handlePreviousMatch}
-            totalMatches={searchResults.length}
-            currentMatchIndex={currentMatchIndex}
-            onSearchKeyDown={handleSearchKeyDown}
-            searchInputRef={searchInputRef as unknown as React.RefObject<HTMLInputElement>}
-            timelineRef={wrapperRef as unknown as React.RefObject<HTMLElement>}
-            onEnterFullscreen={() => {
-              console.log('Entered fullscreen mode');
-              setIsFullscreen(true);
-            }}
-            onExitFullscreen={() => {
-              console.log('Exited fullscreen mode');
-              setIsFullscreen(false);
-            }}
-            onFullscreenError={(error: string) => {
-              console.error('Fullscreen error:', error);
-              setIsFullscreen(false);
-            }}
-          />
-        </ToolbarWrapper>
+        <TimelineToolbar
+          activeTimelineItem={activeTimelineItem ?? 0}
+          totalItems={items.length}
+          slideShowEnabled={!!slideShowEnabled}
+          slideShowRunning={!!slideShowRunning}
+          onFirst={handleFirst}
+          onLast={handleLast}
+          onNext={handleNext}
+          onPrevious={handlePrevious}
+          onRestartSlideshow={onRestartSlideshow || (() => {})}
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
+          onPaused={onPaused || (() => {})}
+          id={id}
+          flipLayout={!!flipLayout}
+          items={items}
+          onActivateTimelineItem={handleTimelineItemClick}
+          onUpdateTimelineMode={handleTimelineUpdate}
+          onUpdateTextContentDensity={updateTextContentDensity}
+          mode={timelineMode}
+          searchQuery={searchQuery}
+          onSearchChange={handleSearchChange}
+          onClearSearch={clearSearch}
+          onNextMatch={handleNextMatch}
+          onPreviousMatch={handlePreviousMatch}
+          totalMatches={searchResults.length}
+          currentMatchIndex={currentMatchIndex}
+          onSearchKeyDown={handleSearchKeyDown}
+          searchInputRef={
+            searchInputRef as unknown as React.RefObject<HTMLInputElement>
+          }
+          timelineRef={wrapperRef as unknown as React.RefObject<HTMLElement>}
+          onEnterFullscreen={() => {
+            console.log('Entered fullscreen mode');
+            setIsFullscreen(true);
+          }}
+          onExitFullscreen={() => {
+            console.log('Exited fullscreen mode');
+            setIsFullscreen(false);
+          }}
+          onFullscreenError={(error: string) => {
+            console.error('Fullscreen error:', error);
+            setIsFullscreen(false);
+          }}
+        />
       )}
 
       {/* Overall slideshow progress bar - positioned below toolbar */}
@@ -607,43 +626,39 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         />
       )} */}
 
-    <TimelineMainWrapper
-      ref={timelineMainRef as React.RefObject<HTMLDivElement>}
-      $scrollable={canScrollTimeline}
-      className={`${mode.toLowerCase()} timeline-main-wrapper ${ve.timelineMainWrapper}`}
-      id="timeline-main-wrapper"
-      data-testid="timeline-main-wrapper"
-      theme={theme}
-      mode={mode}
-      position={toolbarPosition}
-      onScroll={handleMainScroll}
-    >
+      <div
+        ref={timelineMainRef}
+        className={`timeline-main-wrapper ${mode.toLowerCase()} ${ve.timelineMainWrapper}`}
+        id="timeline-main-wrapper"
+        data-testid="timeline-main-wrapper"
+        style={computeCssVarsFromTheme(theme, darkMode)}
+        onScroll={handleMainScroll}
+      >
         <TimelineView
-        timelineMode={timelineMode}
-        activeTimelineItem={activeTimelineItem ?? 0}
+          timelineMode={timelineMode}
+          activeTimelineItem={activeTimelineItem ?? 0}
           autoScroll={handleScroll}
           contentDetailsChildren={contentDetailsChildren}
-        hasFocus={hasFocus}
+          hasFocus={hasFocus}
           iconChildren={iconChildren}
           items={items}
           handleTimelineItemClick={handleTimelineItemClick}
           handleTimelineItemElapsed={handleTimelineItemElapsed}
-        slideShowRunning={!!slideShowRunning}
+          slideShowRunning={!!slideShowRunning}
           id={id}
           theme={theme}
           lineWidth={lineWidth}
-        onOutlineSelection={onOutlineSelection || (() => {})}
+          onOutlineSelection={onOutlineSelection || (() => {})}
           nestedCardHeight={nestedCardHeight ?? 0}
         />
-      </TimelineMainWrapper>
+      </div>
 
-      <TimelineContentRender
+      <div
         id={id}
-        $showAllCards={showAllCardsHorizontal}
         ref={horizontalContentRef}
-        className={ve.timelineContentRender}
+        className={`timeline-content-render ${ve.timelineContentRender}`}
       />
-    </Wrapper>
+    </div>
   );
 };
 

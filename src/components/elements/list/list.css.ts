@@ -3,7 +3,6 @@ import { vars } from '../../../styles/tokens.css';
 import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
 import { recipe } from '@vanilla-extract/recipes';
 
-
 export const list = style([
   sprinkles({ display: 'flex' }),
   {
@@ -91,5 +90,3 @@ export const listItemRecipe = recipe({
   },
   defaultVariants: { active: false },
 });
-
-

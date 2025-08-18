@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 
 interface WindowSize {
   width: number;
@@ -69,11 +69,11 @@ export const useWindowSize = (
     const scrollBarHeight =
       window.innerHeight - document.documentElement.clientHeight;
 
-    const isMobile = width < (breakpoints.mobile || 768);
-    const isTablet =
-      width >= (breakpoints.mobile || 768) &&
-      width < (breakpoints.tablet || 1024);
-    const isDesktop = width >= (breakpoints.tablet || 1024);
+    const mobileBp = breakpoints?.mobile ?? 768;
+    const tabletBp = breakpoints?.tablet ?? 1024;
+    const isMobile = width < mobileBp;
+    const isTablet = width >= mobileBp && width < tabletBp;
+    const isDesktop = width >= tabletBp;
     const orientation = width > height ? 'landscape' : 'portrait';
 
     return {
@@ -95,9 +95,19 @@ export const useWindowSize = (
   // Initialize with current window size
   const [windowSize, setWindowSize] = useState<WindowSize>(getWindowInfo);
 
-  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
   const frameRef = useRef<number | undefined>(undefined);
   const lastSize = useRef<WindowSize>(windowSize);
+
+  const stableBreakpoints = useMemo(
+    () => ({
+      mobile: breakpoints?.mobile ?? 768,
+      tablet: breakpoints?.tablet ?? 1024,
+    }),
+    [breakpoints?.mobile, breakpoints?.tablet],
+  );
 
   const updateSize = useCallback(() => {
     const newSize = getWindowInfo();
@@ -111,7 +121,7 @@ export const useWindowSize = (
       lastSize.current = newSize;
       setWindowSize(newSize);
     }
-  }, [includeScrollBar, breakpoints]);
+  }, [includeScrollBar, stableBreakpoints.mobile, stableBreakpoints.tablet]);
 
   const handleResize = useCallback(() => {
     // Clear existing timeouts and frames

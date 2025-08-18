@@ -92,7 +92,8 @@ export const mediaDetailsAbsolute = style({
   left: '50%',
   transform: 'translateX(-50%)',
   padding: '0.25rem',
-  transition: 'height 0.25s ease-out, width 0.25s ease-out, bottom 0.25s ease-out, background 0.25s ease-out',
+  transition:
+    'height 0.25s ease-out, width 0.25s ease-out, bottom 0.25s ease-out, background 0.25s ease-out',
   background: vars.color.cardBg,
   zIndex: 13,
 });
@@ -122,10 +123,18 @@ export const errorMessage = style({
   transform: 'translateY(-50%) translateX(-50%)',
 });
 
-export const iframeVideo = style({ position: 'relative', height: '100%', width: '100%' });
+export const iframeVideo = style({
+  position: 'relative',
+  height: '100%',
+  width: '100%',
+});
 
 export const detailsTextWrapper = style([
-  sprinkles({ display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }),
+  sprinkles({
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  }),
   {
     alignSelf: 'center',
     transition: 'height 0.5s ease',
@@ -140,7 +149,11 @@ export const detailsTextWrapper = style([
 ]);
 
 export const cardMediaHeader = style([
-  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'center' }),
+  sprinkles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }),
   { padding: '0.5rem 0 0.5rem 0.5rem' },
 ]);
 
@@ -154,5 +167,3 @@ export const buttonWrapper = style([
     marginLeft: 'auto',
   },
 ]);
-
-

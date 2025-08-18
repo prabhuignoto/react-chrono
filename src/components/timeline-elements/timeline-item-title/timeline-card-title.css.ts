@@ -18,7 +18,10 @@ export const titleWrapper = style([
   },
 ]);
 
-export const titleActive = style({ background: vars.color.muted, color: vars.color.primary });
+export const titleActive = style({
+  background: vars.color.muted,
+  color: vars.color.primary,
+});
 
 export const titleRecipe = recipe({
   base: [titleWrapper],
@@ -30,5 +33,3 @@ export const titleRecipe = recipe({
   },
   defaultVariants: { active: false },
 });
-
-

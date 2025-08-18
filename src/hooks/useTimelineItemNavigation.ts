@@ -59,7 +59,9 @@ export const useTimelineItemNavigation = ({
           `.timeline-card-content[data-item-id="${itemId}"]`,
         );
         if (cardContent) {
-          const row = cardContent.closest('[data-testid="vertical-item-row"]') as HTMLElement;
+          const row = cardContent.closest(
+            '[data-testid="vertical-item-row"]',
+          ) as HTMLElement;
           if (row) {
             if (!row.hasAttribute('tabindex')) {
               row.setAttribute('tabindex', '-1');
@@ -71,7 +73,9 @@ export const useTimelineItemNavigation = ({
         // Additional fallback: try to find any element with the item ID
         const anyElement = document.querySelector(`[data-item-id="${itemId}"]`);
         if (anyElement) {
-          const row = anyElement.closest('[data-testid="vertical-item-row"]') as HTMLElement;
+          const row = anyElement.closest(
+            '[data-testid="vertical-item-row"]',
+          ) as HTMLElement;
           if (row) {
             if (!row.hasAttribute('tabindex')) {
               row.setAttribute('tabindex', '-1');
@@ -81,7 +85,9 @@ export const useTimelineItemNavigation = ({
         }
       } else {
         // For horizontal modes, prefer focusing the card container first
-        const cardElement = document.getElementById(`timeline-card-${itemId}`) as any;
+        const cardElement = document.getElementById(
+          `timeline-card-${itemId}`,
+        ) as any;
         if (cardElement) {
           try {
             if (cardElement.hasAttribute && cardElement.setAttribute) {
@@ -99,7 +105,10 @@ export const useTimelineItemNavigation = ({
         ) as any;
         if (timelinePointElement) {
           try {
-            if (!timelinePointElement.hasAttribute || !timelinePointElement.setAttribute) {
+            if (
+              !timelinePointElement.hasAttribute ||
+              !timelinePointElement.setAttribute
+            ) {
               // Not a full HTMLElement (test mock). Return as-is.
               return timelinePointElement as unknown as HTMLElement;
             }
@@ -113,7 +122,9 @@ export const useTimelineItemNavigation = ({
         }
 
         // Try to find any element with the item ID
-        const anyElement = document.querySelector(`[data-item-id="${itemId}"]`) as any;
+        const anyElement = document.querySelector(
+          `[data-item-id="${itemId}"]`,
+        ) as any;
         if (anyElement) {
           try {
             if (anyElement.hasAttribute && anyElement.setAttribute) {

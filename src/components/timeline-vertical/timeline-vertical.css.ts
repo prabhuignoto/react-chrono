@@ -67,5 +67,3 @@ export const timelineTitleWrapper = style([
   sprinkles({ display: 'flex', alignItems: 'center' }),
   { minWidth: 0, overflow: 'hidden' },
 ]);
-
-

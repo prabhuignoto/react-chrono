@@ -7,7 +7,9 @@ import { defineConfig } from 'vite';
 export default defineConfig(({ mode }) => ({
   publicDir: false,
   plugins: [
-    vanillaExtractPlugin(),
+    vanillaExtractPlugin({
+      identifiers: mode === 'production' ? 'short' : 'debug',
+    }),
     react(),
     tsconfig(),
     // Cast to any to allow skipDiagnostics while migrating types

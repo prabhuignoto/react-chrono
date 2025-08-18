@@ -27,5 +27,3 @@ globalFontFace('Inter', {
   src: 'local(Inter)',
   fontDisplay: 'swap',
 });
-
-

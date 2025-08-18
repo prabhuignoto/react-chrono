@@ -8,7 +8,11 @@ export default defineConfig({
     outDir: 'dist_site',
     sourcemap: true,
   },
-  plugins: [vanillaExtractPlugin(), react(), tsconfig()],
+  plugins: [
+    vanillaExtractPlugin({ identifiers: process.env.NODE_ENV === 'production' ? 'short' : 'debug' }),
+    react(),
+    tsconfig(),
+  ],
   root: './',
   server: {
     port: 4444,

@@ -22,22 +22,34 @@ import { ContentFooter } from './content-footer';
 import { ContentHeader } from './content-header';
 import { DetailsText } from './details-text';
 import { getTextOrContent } from './text-or-content';
-import { baseCard, itemContentWrapper, contentDetailsWrapper, showMoreButton, chevronIconWrapper } from './timeline-card-content.css';
+import {
+  baseCard,
+  itemContentWrapper,
+  contentDetailsWrapper,
+  showMoreButton,
+  chevronIconWrapper,
+} from './timeline-card-content.css';
 import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { SlideShowType } from '@models/TimelineModel';
 import NestedTimelineRenderer from '../nested-timeline-renderer/nested-timeline-renderer';
 
-  // Custom equality function for React.memo to prevent unnecessary re-renders
+// Custom equality function for React.memo to prevent unnecessary re-renders
 const arePropsEqual = (
   prevProps: TimelineContentModel,
   nextProps: TimelineContentModel,
 ): boolean => {
   // Always re-render if active state changes
   if (prevProps.active !== nextProps.active) return false;
-    // If detailedText arrays are passed, compare structurally
-    if (Array.isArray(prevProps.detailedText) || Array.isArray(nextProps.detailedText)) {
-      if (!arrayEqual(prevProps.detailedText as any, nextProps.detailedText as any)) return false;
-    }
+  // If detailedText arrays are passed, compare structurally
+  if (
+    Array.isArray(prevProps.detailedText) ||
+    Array.isArray(nextProps.detailedText)
+  ) {
+    if (
+      !arrayEqual(prevProps.detailedText as any, nextProps.detailedText as any)
+    )
+      return false;
+  }
 
   // Re-render if slideshow state changes
   if (prevProps.slideShowActive !== nextProps.slideShowActive) return false;
@@ -48,7 +60,10 @@ const arePropsEqual = (
   // Only re-render content-related props if they actually change
   if (prevProps.content !== nextProps.content) return false;
   // For non-array detailedText, compare by reference
-  if (!Array.isArray(prevProps.detailedText) && !Array.isArray(nextProps.detailedText)) {
+  if (
+    !Array.isArray(prevProps.detailedText) &&
+    !Array.isArray(nextProps.detailedText)
+  ) {
     if (prevProps.detailedText !== nextProps.detailedText) return false;
   }
   if (prevProps.title !== nextProps.title) return false;
@@ -146,7 +161,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         !!slideShowActive,
         slideItemDuration,
         id || '',
-               onElapsed,
+        onElapsed,
       );
 
       const {
@@ -280,29 +295,42 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         (event: React.MouseEvent) => {
           event.stopPropagation(); // Prevent event bubbling to parent handlers
 
-          // Don't handle clicks if we're in slideshow mode
-          if (slideShowActive) return;
+          // Don't handle clicks if we're in slideshow mode or if already active
+          if (slideShowActive || active) return;
 
           if (onClick && !disableInteraction) {
             // Focus the card first
-            if (containerRef.current && !active) {
+            if (containerRef.current) {
               containerRef.current.focus({ preventScroll: true });
             }
 
             // Then trigger the click handler which will handle scrolling
             onClick(id || '');
-            // After an item is activated via click, ensure focus moves to its row for a11y
-            requestAnimationFrame(() => {
-              const row = document.querySelector(
-                `[data-testid="vertical-item-row"][data-item-id="${id}"]`,
-              ) as HTMLElement | null;
-              try {
-                row?.focus?.({ preventScroll: true });
-              } catch {}
-            });
+            
+            // For horizontal modes, ensure the timeline point gets focus
+            if (mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL') {
+              requestAnimationFrame(() => {
+                const point = document.querySelector(
+                  `button[data-testid="timeline-circle"][data-item-id="${id}"]`,
+                ) as HTMLButtonElement | null;
+                try {
+                  point?.focus?.({ preventScroll: true });
+                } catch {}
+              });
+            } else {
+              // For vertical modes, focus the row
+              requestAnimationFrame(() => {
+                const row = document.querySelector(
+                  `[data-testid="vertical-item-row"][data-item-id="${id}"]`,
+                ) as HTMLElement | null;
+                try {
+                  row?.focus?.({ preventScroll: true });
+                } catch {}
+              });
+            }
           }
         },
-        [onClick, id, disableInteraction, slideShowActive, active],
+        [onClick, id, disableInteraction, slideShowActive, active, mode],
       );
 
       const toggleShowMore = useCallback(() => {
@@ -425,7 +453,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               slideshowActive={!!slideShowActive}
               theme={theme as any}
               title={typeof title === 'string' ? title : ''}
-               url={url || ''}
+              url={url || ''}
               startWidth={startWidth}
               detailsText={detailsTextComponent as any}
               paused={paused}

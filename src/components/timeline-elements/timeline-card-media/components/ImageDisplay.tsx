@@ -1,5 +1,11 @@
 import React, { memo } from 'react';
-import { cardImage, imageHidden, imageRounded, imageVisible, imageWrapper } from '../timeline-card-media.css';
+import {
+  cardImage,
+  imageHidden,
+  imageRounded,
+  imageVisible,
+  imageWrapper,
+} from '../timeline-card-media.css';
 import { TimelineMode } from '@models/TimelineModel';
 
 interface ImageDisplayProps {
@@ -35,7 +41,9 @@ export const ImageDisplay = memo(
           cardImage,
           mediaLoaded ? imageVisible : imageHidden,
           borderLessCards ? imageRounded : undefined,
-        ].filter(Boolean).join(' ')}
+        ]
+          .filter(Boolean)
+          .join(' ')}
         src={url}
         onLoad={handleMediaLoaded}
         onError={handleError}

@@ -35,7 +35,7 @@ export function arrayEqual<T>(
   for (let i = 0; i < arr1.length; i++) {
     const item1 = arr1[i];
     const item2 = arr2[i];
-    
+
     // For objects with id property, compare by id
     if (typeof item1 === 'object' && item1 !== null && 'id' in item1) {
       if ((item1 as any).id !== (item2 as any).id) return false;
@@ -56,7 +56,7 @@ export function mediaEqual(
 ): boolean {
   if (media1 === media2) return true;
   if (!media1 || !media2) return false;
-  
+
   // Compare relevant media properties
   return (
     media1.source?.url === media2.source?.url &&

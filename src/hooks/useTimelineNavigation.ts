@@ -180,7 +180,15 @@ export const useTimelineNavigation = ({
       activeItemIndex.current = lastIndex;
       stableOnLast();
     }
-  }, [items, findTargetElement, mode, scrollToElement, stableOnLast, hasFocus, isKeyboardNavigation]);
+  }, [
+    items,
+    findTargetElement,
+    mode,
+    scrollToElement,
+    stableOnLast,
+    hasFocus,
+    isKeyboardNavigation,
+  ]);
 
   // Use keyboard navigation hook
   const { handleKeySelection } = useTimelineKeyboardNavigation({

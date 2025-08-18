@@ -1,5 +1,6 @@
 import React from 'react';
-import { Shape, ShapeWrapper } from '../timeline-horizontal-card.styles';
+import { shapeWrapper, timelinePoint } from './timeline-point.css';
+import { computeCssVarsFromTheme } from '../../../../styles/theme-bridge';
 
 interface TimelinePointProps {
   circleClass: string;
@@ -31,28 +32,44 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
   // Focus is now handled by useTimelineNavigation hook
   // Only during keyboard navigation, not toolbar navigation
 
+  const usingIcon = !!iconChild;
+
   return (
-    <ShapeWrapper>
-      <Shape
-        as="button"
-        className={circleClass}
+    <div className={shapeWrapper}>
+      <button
+        className={`${circleClass} ${timelinePoint({
+          shape: timelinePointShape,
+          usingIcon,
+          active,
+          disabled,
+        })} ${usingIcon ? 'using-icon' : ''} ${active ? 'active' : ''}`}
         onClick={handleClick}
         ref={circleRef}
         data-testid="timeline-circle"
         data-item-id={itemId}
-        theme={theme}
         aria-label={title ?? 'Timeline point'}
         aria-selected={active}
         aria-disabled={disabled}
         disabled={disabled}
-        dimension={timelinePointDimension}
-        $timelinePointShape={timelinePointShape}
         tabIndex={disabled ? -1 : 0}
         type="button"
+        style={{
+          ...computeCssVarsFromTheme(theme),
+          height: timelinePointDimension ? `${timelinePointDimension}px` : undefined,
+          width: timelinePointDimension ? `${timelinePointDimension}px` : undefined,
+          background: usingIcon 
+            ? theme?.iconBackgroundColor 
+            : active 
+              ? theme?.secondary 
+              : theme?.primary,
+          border: active 
+            ? `${timelinePointDimension ? Math.round(timelinePointDimension * 0.2) : 3}px solid ${theme?.primary}` 
+            : `2px solid ${theme?.primary}`,
+        }}
       >
         {iconChild ?? null}
-      </Shape>
-    </ShapeWrapper>
+      </button>
+    </div>
   ) as React.ReactElement;
 };
 

@@ -1,9 +1,18 @@
 import { TimelineHorizontalModel } from '@models/TimelineHorizontalModel';
 import cls from 'classnames';
-import React, { ReactNode, useContext, useMemo, useEffect, useRef } from 'react';
+import React, {
+  ReactNode,
+  useContext,
+  useMemo,
+  useEffect,
+  useRef,
+} from 'react';
 import { useTimelineContext } from '../contexts';
 import TimelineCard from '../timeline-elements/timeline-card/timeline-horizontal-card';
-import { timelineHorizontalWrapper, timelineItemWrapper } from './timeline-horizontal.css';
+import {
+  timelineHorizontalWrapper,
+  timelineItemWrapper,
+} from './timeline-horizontal.css';
 
 /**
  * TimelineHorizontal
@@ -96,10 +105,13 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
         key={item.id}
         className={cls(
           timelineItemWrapper,
-          (item.visible || showAllCardsHorizontal) ? 'visible' : '',
+          item.visible || showAllCardsHorizontal ? 'visible' : '',
           'timeline-horz-item-container',
         )}
-        style={{ width: itemWidth, minWidth: showAllCardsHorizontal ? itemWidth : undefined }}
+        style={{
+          width: itemWidth,
+          minWidth: showAllCardsHorizontal ? itemWidth : undefined,
+        }}
         aria-current={item.active ? 'true' : undefined}
         id={`timeline-${mode.toLowerCase()}-item-${item.id}`}
       >

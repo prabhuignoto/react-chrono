@@ -131,12 +131,12 @@ export const customRender = (
 ): RenderResult => {
   // Extract mode from Timeline component props if available
   const timelineMode = ui.props?.mode || providerProps?.mode;
-  
+
   // Use both old GlobalContext and new split contexts for backward compatibility during migration
   return render(
     <GlobalContext.Provider value={providerProps}>
-      <TestWrapper 
-        theme={providerProps?.theme} 
+      <TestWrapper
+        theme={providerProps?.theme}
         mode={timelineMode}
         disableInteraction={providerProps?.disableInteraction}
         enableDarkToggle={providerProps?.enableDarkToggle}

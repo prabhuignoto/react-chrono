@@ -59,11 +59,22 @@ const TimelineCardPortal: React.FC<TimelineCardPortalProps> = ({
   const Content = useMemo(() => {
     return (
       <div
-        className={`${containerClass} ${veCardWrapper} ${showAllCardsHorizontal || active ? 'highlight-active' : ''}`}
+        className={`${containerClass} ${veCardWrapper} ${showAllCardsHorizontal || active ? 'highlight-active' : ''} ${active ? 'active' : ''}`}
         ref={contentRef}
         id={`timeline-card-${id}`}
-        tabIndex={0}
-        style={{ minWidth: cardWidth && (Number.isFinite(cardWidth) ? `${cardWidth}px` : undefined) }}
+        tabIndex={active ? 0 : -1}
+        style={{
+          minWidth:
+            cardWidth &&
+            (Number.isFinite(cardWidth) ? `${cardWidth}px` : undefined),
+          display: active || showAllCardsHorizontal ? 'flex' : 'none',
+          margin: showAllCardsHorizontal ? '0 1rem' : '0 auto',
+          transform: active ? 'scale(1.02)' : 'scale(1)',
+          transition: 'all 0.3s ease-in-out',
+          opacity: active ? 1 : (showAllCardsHorizontal ? 0.7 : 0),
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
       >
         <TimelineCardContent
           content={cardSubtitle}

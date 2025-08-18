@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode, memo, useCallback } from 'react';
+import React, { FunctionComponent, ReactNode, memo } from 'react';
 import { jsx as _jsx } from 'react/jsx-runtime';
 // styled-components toolbar removed; using Vanilla Extract classes
 import {
@@ -37,55 +37,32 @@ import { ToolbarProps } from '@models/ToolbarProps';
  * ```
  */
 const Toolbar: FunctionComponent<ToolbarProps> = memo(
-  ({ items = [], children = [], theme, useVeStyles = true }) => {
+  ({
+    items = [],
+    children = [],
+    theme,
+    useVeStyles = true,
+    style,
+    ...rest
+  }) => {
     if (!items.length) {
       return null;
     }
 
-    const handleKeyDown = useCallback(
-      (event: React.KeyboardEvent, index: number) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          // Trigger click on the child element if it exists
-          const contentWrapper = event.currentTarget.querySelector(
-            '[role="button"]',
-          ) as HTMLElement;
-          if (contentWrapper && contentWrapper.click) {
-            contentWrapper.click();
-          }
-        }
-
-        // Arrow key navigation
-        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-          event.preventDefault();
-          const toolbar = event.currentTarget.parentElement;
-          const toolbarItems = toolbar?.querySelectorAll(
-            '[role="button"][tabindex="0"]',
-          );
-
-          if (toolbarItems && toolbarItems.length > 1) {
-            const currentIndex = Array.from(toolbarItems).indexOf(
-              event.currentTarget,
-            );
-            let nextIndex;
-
-            if (event.key === 'ArrowLeft') {
-              nextIndex =
-                currentIndex > 0 ? currentIndex - 1 : toolbarItems.length - 1;
-            } else {
-              nextIndex =
-                currentIndex < toolbarItems.length - 1 ? currentIndex + 1 : 0;
-            }
-
-            (toolbarItems[nextIndex] as HTMLElement).focus();
-          }
-        }
-      },
-      [],
+    // Avoid nested toolbar roles if children already provide one
+    const hasNestedToolbarRole = React.Children.toArray(children).some(
+      (child) => React.isValidElement(child) && child.props?.role === 'toolbar',
     );
 
     return (
-      <div className={veToolbarWrapper} role="toolbar" aria-label="Timeline toolbar">
+      <div
+        className={veToolbarWrapper}
+        role={hasNestedToolbarRole ? undefined : 'toolbar'}
+        aria-label={hasNestedToolbarRole ? undefined : 'Timeline toolbar'}
+        aria-orientation={hasNestedToolbarRole ? undefined : 'horizontal'}
+        style={style}
+        {...rest}
+      >
         {items.map(({ label, id, icon }, index) => {
           if (!id) {
             console.warn('Toolbar item is missing required id property');
@@ -93,10 +70,22 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
           }
 
           return (
-            <div className={veToolbarListItem} aria-label={label} key={id} role="button" tabIndex={0} onKeyDown={(event) => handleKeyDown(event, index)}>
+            <div
+              className={veToolbarListItem}
+              aria-label={label}
+              key={id}
+              role="group"
+            >
               {icon && <span className={veIconWrapper}>{icon}</span>}
               {Array.isArray(children) && (children as ReactNode[])[index] && (
-                <span className={veContentWrapper}>{(children as ReactNode[])[index]}</span>
+                <span className={veContentWrapper}>
+                  {(children as ReactNode[])[index]}
+                </span>
+              )}
+              {!Array.isArray(children) && index === 0 && children && (
+                <span className={veContentWrapper}>
+                  {children as ReactNode}
+                </span>
               )}
             </div>
           );

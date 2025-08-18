@@ -48,7 +48,11 @@ describe('TimelineCardContent', () => {
   // should render the detailedText when a string is passed
   it('should render the detailedText when a string is passed', () => {
     customRender(<TimelineCardContent detailedText="detailedText" />, {
-      providerProps: { ...providerProps, toolbarPosition: "bottom", textDensity: "HIGH" },
+      providerProps: {
+        ...providerProps,
+        toolbarPosition: 'bottom',
+        textDensity: 'HIGH',
+      },
     });
 
     expect(screen.getByText('detailedText')).toBeInTheDocument();
@@ -57,9 +61,16 @@ describe('TimelineCardContent', () => {
 
   // should render the detailedText when a array of strings is passed
   it('should render the detailedText when a array of strings is passed', () => {
-    customRender(<TimelineCardContent detailedText={['detailedText', 'text 2']} />, {
-      providerProps: { ...providerProps, toolbarPosition: "bottom", textDensity: "HIGH" },
-    });
+    customRender(
+      <TimelineCardContent detailedText={['detailedText', 'text 2']} />,
+      {
+        providerProps: {
+          ...providerProps,
+          toolbarPosition: 'bottom',
+          textDensity: 'HIGH',
+        },
+      },
+    );
 
     expect(screen.getByText('detailedText')).toBeInTheDocument();
     expect(screen.getByText('text 2')).toBeInTheDocument();

@@ -40,9 +40,19 @@ const OutlineItem = memo(
         className={listItem}
       >
         <span
-          className={item.selected ? `${listItemBullet} ${listItemBulletSelected}` : listItemBullet}
+          className={
+            item.selected
+              ? `${listItemBullet} ${listItemBulletSelected}`
+              : listItemBullet
+          }
         ></span>
-        <span className={item.selected ? `${listItemName} ${listItemNameSelected}` : listItemName}>
+        <span
+          className={
+            item.selected
+              ? `${listItemName} ${listItemNameSelected}`
+              : listItemName
+          }
+        >
           {item.name}
         </span>
       </li>

@@ -5,7 +5,6 @@ import Controls from '../timeline-elements/timeline-control/timeline-control';
 import { FullscreenControl } from '../timeline-elements/fullscreen-control';
 // Removed direct styled import; buttons use native <button> with classes now
 import { ChevronLeft, ChevronRight, CloseIcon } from '../icons';
-import { Toolbar } from '../toolbar';
 import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
 import {
   ChangeDensity,
@@ -13,16 +12,6 @@ import {
   QuickJump,
 } from './timeline-popover-elements';
 import { TimelineToolbarProps } from './timeline-toolbar.model';
-import {
-  ExtraControls,
-  SearchInput,
-  SearchWrapper,
-  SearchInfo,
-  SearchControls,
-  NavigationGroup,
-  SearchGroup,
-  ActionGroup,
-} from './timeline.style';
 import {
   actionGroup as veActionGroup,
   navigationGroup as veNavigationGroup,
@@ -32,8 +21,12 @@ import {
   searchInput as veSearchInput,
   searchWrapper as veSearchWrapper,
   extraControls as veExtraControls,
+  toolbarWrapper as veToolbarWrapper,
 } from '../toolbar/toolbar.css';
-import { navButton, navButtonSvg } from '../timeline-elements/timeline-control/timeline-control.css';
+import {
+  navButton,
+  navButtonSvg,
+} from '../timeline-elements/timeline-control/timeline-control.css';
 
 // Helper function to convert ReactNode to string safely
 const getTextFromNode = (
@@ -108,36 +101,6 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       active: item.active,
     }));
   }, [items]);
-
-  // Define the toolbar items
-  const toolbarItems = useMemo(() => {
-    return [
-      {
-        id: 'timeline-controls',
-        label: 'Timeline Controls',
-        name: 'timeline_control',
-        onSelect: () => {},
-      },
-      {
-        id: 'timeline-popover',
-        label: 'timeline_popover',
-        name: 'popover',
-        onSelect: () => {},
-      },
-      {
-        id: 'layout-popover',
-        label: 'layout_popover',
-        name: 'popover',
-        onSelect: () => {},
-      },
-      // {
-      //   id: 'change-density',
-      //   label: 'change_density',
-      //   name: 'changeDensity',
-      //   onSelect: () => {},
-      // },
-    ];
-  }, []);
 
   // Define methods to determine button state
   const isLeftDisabled = useMemo(() => {
@@ -216,11 +179,25 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     [totalMatches, slideShowRunning],
   );
 
+  // ARIA: tie the input to the live match count
+  const searchInfoId = useMemo(() => {
+    return id ? `timeline-search-info-${id}` : 'timeline-search-info';
+  }, [id]);
+
   // Render the TimelineToolbar component
   return (
-    <div style={computeCssVarsFromTheme(theme)}>
-       <Toolbar items={toolbarItems} theme={theme}>
-      <NavigationGroup $primary className={veNavigationGroup}>
+    <div
+      className={veToolbarWrapper}
+      style={computeCssVarsFromTheme(theme, darkMode)}
+      role="toolbar"
+      aria-label="Timeline toolbar"
+      aria-orientation="horizontal"
+    >
+      <div
+        className={veNavigationGroup}
+        role="group"
+        aria-label="Timeline navigation controls"
+      >
         <Controls
           disableLeft={isLeftDisabled}
           disableRight={isRightDisabled}
@@ -238,21 +215,44 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           activeTimelineItem={activeTimelineItem}
           totalItems={totalItems}
         />
-      </NavigationGroup>
-      <SearchGroup className={veSearchGroup}>
-        <SearchWrapper theme={theme} className={veSearchWrapper}>
-          <SearchInput
+      </div>
+      <div className={veSearchGroup} role="search" aria-label="Timeline search">
+        <div className={veSearchWrapper}>
+          <input
             ref={searchInputRef}
             type="search"
             placeholder={buttonTexts?.searchPlaceholder ?? 'Search Timeline'}
             value={searchQuery}
             onChange={handleInputChange}
-            onKeyDown={handleSearchKeyDown}
+            onKeyDown={(event) => {
+              // Support Enter for next, Shift+Enter for previous, Escape to clear
+              if (event.key === 'Escape') {
+                event.preventDefault();
+                handleClearSearch();
+                return;
+              }
+              if (event.key === 'Enter' && totalMatches > 0) {
+                event.preventDefault();
+                if (event.shiftKey) {
+                  onPreviousMatch();
+                } else {
+                  onNextMatch();
+                }
+                return;
+              }
+              handleSearchKeyDown(event);
+            }}
             onBlur={handleSearchInputBlur}
             aria-label={
               buttonTexts?.searchAriaLabel ?? 'Search timeline content'
             }
             disabled={slideShowRunning}
+            aria-keyshortcuts="Enter Shift+Enter Escape"
+            aria-describedby={
+              searchQuery && totalMatches > 0 ? searchInfoId : undefined
+            }
+            autoComplete="off"
+            spellCheck="false"
             className={veSearchInput}
           />
           {searchQuery && (
@@ -262,15 +262,49 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               title={buttonTexts?.clearSearch ?? 'Clear Search'}
               aria-label={buttonTexts?.clearSearch ?? 'Clear Search'}
               style={{ height: '24px', width: '24px', marginRight: '0.5rem' }}
+              type="button"
             >
-              <span className={navButtonSvg}><CloseIcon /></span>
+              <span className={navButtonSvg}>
+                <CloseIcon />
+              </span>
             </button>
           )}
-          <SearchControls className={veSearchControls}>
+          <div
+            className={veSearchControls}
+            role="group"
+            aria-label="Search navigation"
+          >
             {totalMatches > 0 && (
-              <SearchInfo theme={theme} className={veSearchInfo}>
+              <span
+                id={searchInfoId}
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+                className={veSearchInfo}
+                aria-label={`Search result ${currentMatchIndex + 1} of ${totalMatches}`}
+              >
                 {`${currentMatchIndex + 1} / ${totalMatches}`}
-              </SearchInfo>
+              </span>
+            )}
+            {searchQuery && totalMatches === 0 && (
+              <span
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+                style={{
+                  position: 'absolute',
+                  width: 1,
+                  height: 1,
+                  padding: 0,
+                  margin: -1,
+                  overflow: 'hidden',
+                  clip: 'rect(0, 0, 0, 0)',
+                  whiteSpace: 'nowrap',
+                  border: 0,
+                }}
+              >
+                {buttonTexts?.noMatches ?? 'No matches found'}
+              </span>
             )}
             {searchQuery && (
               <>
@@ -278,37 +312,50 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                   <button
                     className={navButton}
                     onClick={onPreviousMatch}
-                    title={buttonTexts?.previousMatch ?? 'Previous Match'}
-                    aria-label={buttonTexts?.previousMatch ?? 'Previous Match'}
+                    title={
+                      buttonTexts?.previousMatch ??
+                      'Previous Match (Shift+Enter)'
+                    }
+                    aria-label={
+                      buttonTexts?.previousMatch ??
+                      'Previous Match (Shift+Enter)'
+                    }
                     disabled={disableSearchNav}
                     style={{ height: '28px', width: '28px' }}
+                    type="button"
                   >
-                    <span className={navButtonSvg}><ChevronLeft /></span>
+                    <span className={navButtonSvg}>
+                      <ChevronLeft />
+                    </span>
                   </button>
                 </div>
                 <div className="timeline-nav-wrapper">
                   <button
                     className={navButton}
                     onClick={onNextMatch}
-                    title={buttonTexts?.nextMatch ?? 'Next Match'}
-                    aria-label={buttonTexts?.nextMatch ?? 'Next Match'}
+                    title={buttonTexts?.nextMatch ?? 'Next Match (Enter)'}
+                    aria-label={buttonTexts?.nextMatch ?? 'Next Match (Enter)'}
                     disabled={disableSearchNav}
                     style={{ height: '28px', width: '28px' }}
+                    type="button"
                   >
-                    <span className={navButtonSvg}><ChevronRight /></span>
+                    <span className={navButtonSvg}>
+                      <ChevronRight />
+                    </span>
                   </button>
                 </div>
               </>
             )}
-          </SearchControls>
-        </SearchWrapper>
-      </SearchGroup>
-      <ActionGroup className={veActionGroup}>
-        <ExtraControls
-          $hide={hideExtraControls}
-          $slideShowRunning={slideShowRunning}
-          key="timeline-extra-controls"
+          </div>
+        </div>
+      </div>
+      <div className={veActionGroup} role="group" aria-label="Timeline actions">
+        <div
           className={veExtraControls}
+          key="timeline-extra-controls"
+          style={{ visibility: hideExtraControls ? 'hidden' : 'visible' }}
+          role="group"
+          aria-label="Additional timeline controls"
         >
           <div className="control-wrapper" key="quick-jump">
             {enableQuickJump ? (
@@ -358,9 +405,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               disabled={false}
             />
           </div>
-        </ExtraControls>
-      </ActionGroup>
-      </Toolbar>
+        </div>
+      </div>
     </div>
   );
 };

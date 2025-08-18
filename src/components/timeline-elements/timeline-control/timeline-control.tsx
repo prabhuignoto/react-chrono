@@ -131,20 +131,35 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
   const slideshowStatus = useMemo(() => '', []);
 
   return (
-    <div className={timelineControlContainer} key="control-wrapper" style={computeCssVarsFromTheme(theme)}>
+    <div
+      className={timelineControlContainer}
+      key="control-wrapper"
+      style={computeCssVarsFromTheme(theme)}
+    >
       {/* Visually hidden status information for screen readers */}
       <output className={srOnly} aria-live="polite">
         {positionStatus}
         {slideshowStatus && ` ${slideshowStatus}`}
       </output>
 
-      <div className={cls(navWrapper, 'timeline-controls', classNames?.controls)} aria-label="Timeline Navigation" role="toolbar">
+      <div
+        className={cls(navWrapper, 'timeline-controls', classNames?.controls)}
+        aria-label="Timeline Navigation"
+        role="toolbar"
+      >
         {/* jump to first */}
         {disableInteraction ? null : (
           <>
-            <div className={cls(navItem, { [navItemDisabled]: canDisableLeft })}>
+            <div
+              className={cls(navItem, { [navItemDisabled]: canDisableLeft })}
+            >
               <button
-                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus)}
+                className={cls(
+                  navButton,
+                  navButtonHover,
+                  navButtonActive,
+                  navButtonFocus,
+                )}
                 onClick={flippedHorizontally ? onLast : onFirst}
                 title={jumpToFirstTitle}
                 aria-label={jumpToFirstTitle}
@@ -153,14 +168,23 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 tabIndex={!disableLeft ? 0 : -1}
                 data-test-id="jump-to-first"
               >
-                <span className={navButtonSvg}><ChevronsLeftIcon /></span>
+                <span className={navButtonSvg}>
+                  <ChevronsLeftIcon />
+                </span>
               </button>
             </div>
 
             {/* previous */}
-            <div className={cls(navItem, { [navItemDisabled]: canDisableLeft })}>
+            <div
+              className={cls(navItem, { [navItemDisabled]: canDisableLeft })}
+            >
               <button
-                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus)}
+                className={cls(
+                  navButton,
+                  navButtonHover,
+                  navButtonActive,
+                  navButtonFocus,
+                )}
                 onClick={flippedHorizontally ? onNext : onPrevious}
                 title={previousTitle}
                 aria-label={previousTitle}
@@ -169,14 +193,23 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 tabIndex={!disableLeft ? 0 : -1}
                 data-test-id="previous"
               >
-                <span className={navButtonSvg}><ChevronLeft /></span>
+                <span className={navButtonSvg}>
+                  <ChevronLeft />
+                </span>
               </button>
             </div>
 
             {/* next */}
-            <div className={cls(navItem, { [navItemDisabled]: canDisableRight })}>
+            <div
+              className={cls(navItem, { [navItemDisabled]: canDisableRight })}
+            >
               <button
-                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus)}
+                className={cls(
+                  navButton,
+                  navButtonHover,
+                  navButtonActive,
+                  navButtonFocus,
+                )}
                 onClick={flippedHorizontally ? onPrevious : onNext}
                 title={nextTitle}
                 aria-label={nextTitle}
@@ -185,14 +218,23 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 tabIndex={!disableRight ? 0 : -1}
                 data-test-id="next"
               >
-                <span className={navButtonSvg}><ChevronRightIcon /></span>
+                <span className={navButtonSvg}>
+                  <ChevronRightIcon />
+                </span>
               </button>
             </div>
 
             {/* jump to last */}
-            <div className={cls(navItem, { [navItemDisabled]: canDisableRight })}>
+            <div
+              className={cls(navItem, { [navItemDisabled]: canDisableRight })}
+            >
               <button
-                className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus)}
+                className={cls(
+                  navButton,
+                  navButtonHover,
+                  navButtonActive,
+                  navButtonFocus,
+                )}
                 onClick={flippedHorizontally ? onFirst : onLast}
                 title={jumpToLastTitle}
                 aria-label={jumpToLastTitle}
@@ -201,7 +243,9 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 tabIndex={!disableRight ? 0 : -1}
                 data-test-id="jump-to-last"
               >
-                <span className={navButtonSvg}><ChevronsRightIcon /></span>
+                <span className={navButtonSvg}>
+                  <ChevronsRightIcon />
+                </span>
               </button>
             </div>
           </>
@@ -211,7 +255,12 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
         <div className={navItem}>
           {slideShowEnabled && (
             <button
-              className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus)}
+              className={cls(
+                navButton,
+                navButtonHover,
+                navButtonActive,
+                navButtonFocus,
+              )}
               onClick={slideShowRunning ? handlePause : handlePlay}
               title={playOrPauseTile}
               tabIndex={0}
@@ -220,16 +269,25 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
               aria-pressed={slideShowRunning ? 'true' : 'false'}
               data-test-id="play-pause"
             >
-              <span className={navButtonSvg}>{slideShowRunning ? <StopIcon /> : <ReplayIcon />}</span>
+              <span className={navButtonSvg}>
+                {slideShowRunning ? <StopIcon /> : <ReplayIcon />}
+              </span>
             </button>
           )}
         </div>
 
         {/* dark toggle button */}
         {enableDarkToggle ? (
-          <div className={cls(navItem, { [navItemDisabled]: slideShowRunning })}>
+          <div
+            className={cls(navItem, { [navItemDisabled]: slideShowRunning })}
+          >
             <button
-              className={cls(navButton, navButtonHover, navButtonActive, navButtonFocus)}
+              className={cls(
+                navButton,
+                navButtonHover,
+                navButtonActive,
+                navButtonFocus,
+              )}
               onClick={onToggleDarkMode}
               title={isDark ? buttonTexts?.light : buttonTexts?.dark}
               tabIndex={0}
@@ -238,7 +296,9 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
               aria-pressed={isDark ? 'true' : 'false'}
               data-test-id="dark-toggle"
             >
-              <span className={navButtonSvg}>{isDark ? <SunIcon /> : <MoonIcon />}</span>
+              <span className={navButtonSvg}>
+                {isDark ? <SunIcon /> : <MoonIcon />}
+              </span>
             </button>
           </div>
         ) : null}

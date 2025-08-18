@@ -16,5 +16,3 @@ globalStyle(`${scrollbarThin}::-webkit-scrollbar-thumb`, {
   backgroundColor: 'currentcolor',
   outline: '1px solid currentcolor',
 });
-
-

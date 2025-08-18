@@ -1,7 +1,7 @@
 /**
  * Unified Timeline Context Provider
- * 
- * This provider replaces the multiple context layers with a single, 
+ *
+ * This provider replaces the multiple context layers with a single,
  * clean context system that properly handles all timeline props.
  */
 import React, {
@@ -44,25 +44,25 @@ export interface TimelineStaticConfig {
   flipLayout?: boolean;
   itemWidth: number;
   lineWidth: number;
-  
+
   // Media configuration
   mediaHeight: number;
   mediaSettings: {
     align: 'left' | 'right' | 'center';
     fit: 'cover' | 'contain' | 'fill' | 'none';
   };
-  
+
   // Timeline point configuration
   timelinePointDimension: number;
   timelinePointShape: 'circle' | 'square' | 'diamond';
-  
+
   // Interaction settings
   disableNavOnKey: boolean;
   disableAutoScrollOnClick: boolean;
   disableInteraction: boolean;
   disableClickOnCircle: boolean;
   disableTimelinePoint: boolean;
-  
+
   // UI features
   enableBreakPoint: boolean;
   enableDarkToggle: boolean;
@@ -70,26 +70,26 @@ export interface TimelineStaticConfig {
   enableQuickJump: boolean;
   focusActiveItemOnLoad: boolean;
   highlightCardsOnHover: boolean;
-  
+
   // Cards and content
   borderLessCards: boolean;
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
   parseDetailsAsHTML: boolean;
   useReadMore: boolean;
   textOverlay?: boolean;
-  
+
   // Scrolling
   scrollable: boolean | { scrollbar: boolean };
-  
+
   // Toolbar
   toolbarPosition: 'top' | 'bottom';
   disableToolbar: boolean;
-  
+
   // Slideshow
   slideItemDuration: number;
   showProgressOnSlideshow: boolean;
   showOverallSlideshowProgress: boolean;
-  
+
   // Misc
   titleDateFormat: string;
   uniqueId: string;
@@ -108,7 +108,7 @@ export interface TimelineDynamicState {
   isMobile: boolean;
   showAllCardsHorizontal: boolean;
   textContentDensity: TextDensity;
-  
+
   // Actions
   toggleDarkMode: () => void;
   updateShowAllCardsHorizontal: (state: boolean) => void;
@@ -130,20 +130,19 @@ export interface TimelineMemoizedObjects {
 /**
  * Combined context interface
  */
-export interface TimelineContextValue extends 
-  TimelineStaticConfig,
-  TimelineDynamicState,
-  TimelineMemoizedObjects {
-  
+export interface TimelineContextValue
+  extends TimelineStaticConfig,
+    TimelineDynamicState,
+    TimelineMemoizedObjects {
   // Computed values
   computedCardHeight: number;
   computedActiveItemIndex: number;
   computedMediaAlign: string;
-  
+
   // Timeline-specific data
   items?: TimelinePropsModel['items'];
   activeItemIndex?: number;
-  
+
   // Callbacks
   onScrollEnd?: () => void;
   onThemeChange?: () => void;
@@ -159,11 +158,14 @@ const TimelineContext = createContext<TimelineContextValue | null>(null);
 // PROVIDER PROPS AND COMPONENT
 // ==========================================
 
-export interface TimelineContextProviderProps extends Omit<Partial<TimelinePropsModel>, 'children'> {
+export interface TimelineContextProviderProps
+  extends Omit<Partial<TimelinePropsModel>, 'children'> {
   children: React.ReactNode;
 }
 
-export const TimelineContextProvider: FunctionComponent<TimelineContextProviderProps> = (props) => {
+export const TimelineContextProvider: FunctionComponent<
+  TimelineContextProviderProps
+> = (props) => {
   const {
     children,
     // Core props with defaults
@@ -174,22 +176,22 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
     flipLayout,
     itemWidth = 200,
     lineWidth = 3,
-    
+
     // Media props
     mediaHeight = 200,
     mediaSettings,
-    
+
     // Timeline point props
     timelinePointDimension = 16,
     timelinePointShape = 'circle',
-    
+
     // Interaction props
     disableNavOnKey = false,
     disableAutoScrollOnClick = false,
     disableInteraction = false,
     disableClickOnCircle = false,
     disableTimelinePoint = false,
-    
+
     // UI feature props
     enableBreakPoint = true,
     enableDarkToggle = false,
@@ -197,28 +199,28 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
     enableQuickJump = true,
     focusActiveItemOnLoad = false,
     highlightCardsOnHover = false,
-    
+
     // Cards and content props
     borderLessCards = false,
     cardPositionHorizontal,
     parseDetailsAsHTML = false,
     useReadMore = true,
     textOverlay,
-    
+
     // Scrolling props (default aligns with legacy behavior: no scrollbar)
     scrollable = { scrollbar: false },
-    
+
     // Toolbar props
     toolbarPosition = 'top',
     disableToolbar = false,
-    
+
     // Slideshow props
     slideItemDuration = 2000,
     showProgressOnSlideshow = true,
     showOverallSlideshowProgress,
     slideShow,
     slideShowType,
-    
+
     // Other props
     titleDateFormat = 'MMM DD, YYYY',
     uniqueId = 'react-chrono',
@@ -227,23 +229,23 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
     responsiveBreakPoint = 1024,
     noUniqueId = false,
     isChild = false,
-    
+
     // Dynamic props
     darkMode = false,
     showAllCardsHorizontal = false,
     textDensity = 'HIGH' as TextDensity,
-    
+
     // Customization props
     theme,
     buttonTexts,
     classNames,
     fontSizes,
     semanticTags,
-    
+
     // Data props
     items,
     activeItemIndex = 0,
-    
+
     // Callbacks
     onScrollEnd,
     onThemeChange,
@@ -254,10 +256,11 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
   // ==========================================
   const [isDarkMode, setIsDarkMode] = useState(darkMode);
   const [showAllCards, setShowAllCards] = useState(
-    mode === 'HORIZONTAL_ALL' ? true : showAllCardsHorizontal
+    mode === 'HORIZONTAL_ALL' ? true : showAllCardsHorizontal,
   );
   const [isMobileDetected, setIsMobileDetected] = useState(false);
-  const [textContentDensity, setTextContentDensity] = useState<TextDensity>(textDensity);
+  const [textContentDensity, setTextContentDensity] =
+    useState<TextDensity>(textDensity);
 
   // ==========================================
   // CALLBACKS
@@ -306,17 +309,17 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
   // ==========================================
   const computedCardHeight = useMemo(
     () => (cardLess ? Math.min(cardHeight, 80) : cardHeight),
-    [cardLess, cardHeight]
+    [cardLess, cardHeight],
   );
 
   const computedActiveItemIndex = useMemo(
     () => (flipLayout && items ? items.length - 1 : 0),
-    [flipLayout, items?.length]
+    [flipLayout, items?.length],
   );
 
   const computedMediaAlign = useMemo(
     () => (mode === 'VERTICAL' && !textOverlay ? 'left' : 'center'),
-    [mode, textOverlay]
+    [mode, textOverlay],
   );
 
   // ==========================================
@@ -327,7 +330,7 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
       ...getDefaultThemeOrDark(isDarkMode),
       ...theme,
     }),
-    [isDarkMode, theme]
+    [isDarkMode, theme],
   );
 
   const memoizedButtonTexts = useMemo(
@@ -335,7 +338,7 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
       ...getDefaultButtonTexts(),
       ...buttonTexts,
     }),
-    [buttonTexts]
+    [buttonTexts],
   );
 
   const memoizedClassNames = useMemo(
@@ -343,7 +346,7 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
       ...getDefaultClassNames(),
       ...classNames,
     }),
-    [classNames]
+    [classNames],
   );
 
   const memoizedFontSizes = useMemo(
@@ -354,7 +357,7 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
       title: '1rem',
       ...fontSizes,
     }),
-    [fontSizes]
+    [fontSizes],
   );
 
   const memoizedMediaSettings = useMemo(
@@ -363,7 +366,7 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
       fit: 'cover' as const,
       ...mediaSettings,
     }),
-    [computedMediaAlign, mediaSettings]
+    [computedMediaAlign, mediaSettings],
   );
 
   const memoizedSemanticTags = useMemo(
@@ -372,118 +375,166 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
       cardSubtitle: 'span' as const,
       ...semanticTags,
     }),
-    [semanticTags]
+    [semanticTags],
   );
 
   const memoizedSlideShowType = useMemo(
     () => slideShowType ?? getSlideShowType(mode),
-    [slideShowType, mode]
+    [slideShowType, mode],
   );
 
   // ==========================================
   // CONTEXT VALUE
   // ==========================================
-  const contextValue = useMemo((): TimelineContextValue => ({
-    // Static configuration
-    mode,
-    cardHeight,
-    cardWidth,
-    cardLess,
-    flipLayout,
-    itemWidth,
-    lineWidth,
-    mediaHeight,
-    mediaSettings: memoizedMediaSettings,
-    timelinePointDimension,
-    timelinePointShape,
-    disableNavOnKey,
-    disableAutoScrollOnClick: disableAutoScrollOnClick || disableInteraction,
-    disableInteraction,
-    disableClickOnCircle: disableClickOnCircle || disableInteraction,
-    disableTimelinePoint: disableTimelinePoint || disableInteraction,
-    enableBreakPoint,
-    enableDarkToggle,
-    enableLayoutSwitch,
-    enableQuickJump,
-    focusActiveItemOnLoad,
-    highlightCardsOnHover,
-    borderLessCards,
-    cardPositionHorizontal,
-    parseDetailsAsHTML,
-    useReadMore,
-    textOverlay,
-    scrollable,
-    toolbarPosition,
-    disableToolbar,
-    slideItemDuration,
-    showProgressOnSlideshow: showProgressOnSlideshow && !!slideShow,
-    showOverallSlideshowProgress: showOverallSlideshowProgress ?? !!slideShow,
-    titleDateFormat,
-    uniqueId,
-    nestedCardHeight,
-    contentDetailsHeight: Math.max(contentDetailsHeight, mediaHeight * 0.75),
-    responsiveBreakPoint,
-    noUniqueId,
-    isChild,
-    
-    // Dynamic state
-    isDarkMode,
-    isMobile: isMobileDetected,
-    showAllCardsHorizontal: showAllCards,
-    textContentDensity,
-    toggleDarkMode,
-    updateShowAllCardsHorizontal,
-    updateTextContentDensity,
-    
-    // Memoized objects
-    theme: memoizedTheme,
-    buttonTexts: memoizedButtonTexts,
-    classNames: memoizedClassNames,
-    fontSizes: memoizedFontSizes,
-    semanticTags: memoizedSemanticTags,
-    slideShowType: memoizedSlideShowType,
-    
-    // Computed values
-    computedCardHeight,
-    computedActiveItemIndex,
-    computedMediaAlign,
-    
-    // Timeline-specific data
-    items,
-    activeItemIndex,
-    
-    // Callbacks
-    onScrollEnd,
-    onThemeChange,
-  }), [
-    // Static config dependencies
-    mode, cardHeight, cardWidth, cardLess, flipLayout, itemWidth, lineWidth,
-    mediaHeight, memoizedMediaSettings, timelinePointDimension, timelinePointShape,
-    disableNavOnKey, disableAutoScrollOnClick, disableInteraction, disableClickOnCircle,
-    disableTimelinePoint, enableBreakPoint, enableDarkToggle, enableLayoutSwitch,
-    enableQuickJump, focusActiveItemOnLoad, highlightCardsOnHover, borderLessCards,
-    cardPositionHorizontal, parseDetailsAsHTML, useReadMore, textOverlay, scrollable,
-    toolbarPosition, disableToolbar, slideItemDuration, showProgressOnSlideshow,
-    showOverallSlideshowProgress, slideShow, titleDateFormat, uniqueId, nestedCardHeight,
-    contentDetailsHeight, responsiveBreakPoint, noUniqueId, isChild,
-    
-    // Dynamic state dependencies
-    isDarkMode, isMobileDetected, showAllCards, textContentDensity,
-    toggleDarkMode, updateShowAllCardsHorizontal, updateTextContentDensity,
-    
-    // Memoized objects dependencies
-    memoizedTheme, memoizedButtonTexts, memoizedClassNames, memoizedFontSizes,
-    memoizedSemanticTags, memoizedSlideShowType,
-    
-    // Computed values dependencies
-    computedCardHeight, computedActiveItemIndex, computedMediaAlign,
-    
-    // Data dependencies
-    items, activeItemIndex,
-    
-    // Callback dependencies
-    onScrollEnd, onThemeChange,
-  ]);
+  const contextValue = useMemo(
+    (): TimelineContextValue => ({
+      // Static configuration
+      mode,
+      cardHeight,
+      cardWidth,
+      cardLess,
+      flipLayout,
+      itemWidth,
+      lineWidth,
+      mediaHeight,
+      mediaSettings: memoizedMediaSettings,
+      timelinePointDimension,
+      timelinePointShape,
+      disableNavOnKey,
+      disableAutoScrollOnClick: disableAutoScrollOnClick || disableInteraction,
+      disableInteraction,
+      disableClickOnCircle: disableClickOnCircle || disableInteraction,
+      disableTimelinePoint: disableTimelinePoint || disableInteraction,
+      enableBreakPoint,
+      enableDarkToggle,
+      enableLayoutSwitch,
+      enableQuickJump,
+      focusActiveItemOnLoad,
+      highlightCardsOnHover,
+      borderLessCards,
+      cardPositionHorizontal,
+      parseDetailsAsHTML,
+      useReadMore,
+      textOverlay,
+      scrollable,
+      toolbarPosition,
+      disableToolbar,
+      slideItemDuration,
+      showProgressOnSlideshow: showProgressOnSlideshow && !!slideShow,
+      showOverallSlideshowProgress: showOverallSlideshowProgress ?? !!slideShow,
+      titleDateFormat,
+      uniqueId,
+      nestedCardHeight,
+      contentDetailsHeight: Math.max(contentDetailsHeight, mediaHeight * 0.75),
+      responsiveBreakPoint,
+      noUniqueId,
+      isChild,
+
+      // Dynamic state
+      isDarkMode,
+      isMobile: isMobileDetected,
+      showAllCardsHorizontal: showAllCards,
+      textContentDensity,
+      toggleDarkMode,
+      updateShowAllCardsHorizontal,
+      updateTextContentDensity,
+
+      // Memoized objects
+      theme: memoizedTheme,
+      buttonTexts: memoizedButtonTexts,
+      classNames: memoizedClassNames,
+      fontSizes: memoizedFontSizes,
+      semanticTags: memoizedSemanticTags,
+      slideShowType: memoizedSlideShowType,
+
+      // Computed values
+      computedCardHeight,
+      computedActiveItemIndex,
+      computedMediaAlign,
+
+      // Timeline-specific data
+      items,
+      activeItemIndex,
+
+      // Callbacks
+      onScrollEnd,
+      onThemeChange,
+    }),
+    [
+      // Static config dependencies
+      mode,
+      cardHeight,
+      cardWidth,
+      cardLess,
+      flipLayout,
+      itemWidth,
+      lineWidth,
+      mediaHeight,
+      memoizedMediaSettings,
+      timelinePointDimension,
+      timelinePointShape,
+      disableNavOnKey,
+      disableAutoScrollOnClick,
+      disableInteraction,
+      disableClickOnCircle,
+      disableTimelinePoint,
+      enableBreakPoint,
+      enableDarkToggle,
+      enableLayoutSwitch,
+      enableQuickJump,
+      focusActiveItemOnLoad,
+      highlightCardsOnHover,
+      borderLessCards,
+      cardPositionHorizontal,
+      parseDetailsAsHTML,
+      useReadMore,
+      textOverlay,
+      scrollable,
+      toolbarPosition,
+      disableToolbar,
+      slideItemDuration,
+      showProgressOnSlideshow,
+      showOverallSlideshowProgress,
+      slideShow,
+      titleDateFormat,
+      uniqueId,
+      nestedCardHeight,
+      contentDetailsHeight,
+      responsiveBreakPoint,
+      noUniqueId,
+      isChild,
+
+      // Dynamic state dependencies
+      isDarkMode,
+      isMobileDetected,
+      showAllCards,
+      textContentDensity,
+      toggleDarkMode,
+      updateShowAllCardsHorizontal,
+      updateTextContentDensity,
+
+      // Memoized objects dependencies
+      memoizedTheme,
+      memoizedButtonTexts,
+      memoizedClassNames,
+      memoizedFontSizes,
+      memoizedSemanticTags,
+      memoizedSlideShowType,
+
+      // Computed values dependencies
+      computedCardHeight,
+      computedActiveItemIndex,
+      computedMediaAlign,
+
+      // Data dependencies
+      items,
+      activeItemIndex,
+
+      // Callback dependencies
+      onScrollEnd,
+      onThemeChange,
+    ],
+  );
 
   return (
     <TimelineContext.Provider value={contextValue}>
@@ -501,11 +552,13 @@ export const TimelineContextProvider: FunctionComponent<TimelineContextProviderP
  */
 export const useTimelineContext = (): TimelineContextValue => {
   const context = useContext(TimelineContext);
-  
+
   if (!context) {
-    throw new Error('useTimelineContext must be used within a TimelineContextProvider');
+    throw new Error(
+      'useTimelineContext must be used within a TimelineContextProvider',
+    );
   }
-  
+
   return context;
 };
 
@@ -514,49 +567,52 @@ export const useTimelineContext = (): TimelineContextValue => {
  */
 export const useTimelineStaticConfig = (): TimelineStaticConfig => {
   const context = useTimelineContext();
-  
-  return useMemo(() => ({
-    mode: context.mode,
-    cardHeight: context.cardHeight,
-    cardWidth: context.cardWidth,
-    cardLess: context.cardLess,
-    flipLayout: context.flipLayout,
-    itemWidth: context.itemWidth,
-    lineWidth: context.lineWidth,
-    mediaHeight: context.mediaHeight,
-    mediaSettings: context.mediaSettings,
-    timelinePointDimension: context.timelinePointDimension,
-    timelinePointShape: context.timelinePointShape,
-    disableNavOnKey: context.disableNavOnKey,
-    disableAutoScrollOnClick: context.disableAutoScrollOnClick,
-    disableInteraction: context.disableInteraction,
-    disableClickOnCircle: context.disableClickOnCircle,
-    disableTimelinePoint: context.disableTimelinePoint,
-    enableBreakPoint: context.enableBreakPoint,
-    enableDarkToggle: context.enableDarkToggle,
-    enableLayoutSwitch: context.enableLayoutSwitch,
-    enableQuickJump: context.enableQuickJump,
-    focusActiveItemOnLoad: context.focusActiveItemOnLoad,
-    highlightCardsOnHover: context.highlightCardsOnHover,
-    borderLessCards: context.borderLessCards,
-    cardPositionHorizontal: context.cardPositionHorizontal,
-    parseDetailsAsHTML: context.parseDetailsAsHTML,
-    useReadMore: context.useReadMore,
-    textOverlay: context.textOverlay,
-    scrollable: context.scrollable,
-    toolbarPosition: context.toolbarPosition,
-    disableToolbar: context.disableToolbar,
-    slideItemDuration: context.slideItemDuration,
-    showProgressOnSlideshow: context.showProgressOnSlideshow,
-    showOverallSlideshowProgress: context.showOverallSlideshowProgress,
-    titleDateFormat: context.titleDateFormat,
-    uniqueId: context.uniqueId,
-    nestedCardHeight: context.nestedCardHeight,
-    contentDetailsHeight: context.contentDetailsHeight,
-    responsiveBreakPoint: context.responsiveBreakPoint,
-    noUniqueId: context.noUniqueId,
-    isChild: context.isChild,
-  }), [context]);
+
+  return useMemo(
+    () => ({
+      mode: context.mode,
+      cardHeight: context.cardHeight,
+      cardWidth: context.cardWidth,
+      cardLess: context.cardLess,
+      flipLayout: context.flipLayout,
+      itemWidth: context.itemWidth,
+      lineWidth: context.lineWidth,
+      mediaHeight: context.mediaHeight,
+      mediaSettings: context.mediaSettings,
+      timelinePointDimension: context.timelinePointDimension,
+      timelinePointShape: context.timelinePointShape,
+      disableNavOnKey: context.disableNavOnKey,
+      disableAutoScrollOnClick: context.disableAutoScrollOnClick,
+      disableInteraction: context.disableInteraction,
+      disableClickOnCircle: context.disableClickOnCircle,
+      disableTimelinePoint: context.disableTimelinePoint,
+      enableBreakPoint: context.enableBreakPoint,
+      enableDarkToggle: context.enableDarkToggle,
+      enableLayoutSwitch: context.enableLayoutSwitch,
+      enableQuickJump: context.enableQuickJump,
+      focusActiveItemOnLoad: context.focusActiveItemOnLoad,
+      highlightCardsOnHover: context.highlightCardsOnHover,
+      borderLessCards: context.borderLessCards,
+      cardPositionHorizontal: context.cardPositionHorizontal,
+      parseDetailsAsHTML: context.parseDetailsAsHTML,
+      useReadMore: context.useReadMore,
+      textOverlay: context.textOverlay,
+      scrollable: context.scrollable,
+      toolbarPosition: context.toolbarPosition,
+      disableToolbar: context.disableToolbar,
+      slideItemDuration: context.slideItemDuration,
+      showProgressOnSlideshow: context.showProgressOnSlideshow,
+      showOverallSlideshowProgress: context.showOverallSlideshowProgress,
+      titleDateFormat: context.titleDateFormat,
+      uniqueId: context.uniqueId,
+      nestedCardHeight: context.nestedCardHeight,
+      contentDetailsHeight: context.contentDetailsHeight,
+      responsiveBreakPoint: context.responsiveBreakPoint,
+      noUniqueId: context.noUniqueId,
+      isChild: context.isChild,
+    }),
+    [context],
+  );
 };
 
 /**
@@ -564,16 +620,19 @@ export const useTimelineStaticConfig = (): TimelineStaticConfig => {
  */
 export const useTimelineDynamicState = (): TimelineDynamicState => {
   const context = useTimelineContext();
-  
-  return useMemo(() => ({
-    isDarkMode: context.isDarkMode,
-    isMobile: context.isMobile,
-    showAllCardsHorizontal: context.showAllCardsHorizontal,
-    textContentDensity: context.textContentDensity,
-    toggleDarkMode: context.toggleDarkMode,
-    updateShowAllCardsHorizontal: context.updateShowAllCardsHorizontal,
-    updateTextContentDensity: context.updateTextContentDensity,
-  }), [context]);
+
+  return useMemo(
+    () => ({
+      isDarkMode: context.isDarkMode,
+      isMobile: context.isMobile,
+      showAllCardsHorizontal: context.showAllCardsHorizontal,
+      textContentDensity: context.textContentDensity,
+      toggleDarkMode: context.toggleDarkMode,
+      updateShowAllCardsHorizontal: context.updateShowAllCardsHorizontal,
+      updateTextContentDensity: context.updateTextContentDensity,
+    }),
+    [context],
+  );
 };
 
 /**
@@ -581,13 +640,16 @@ export const useTimelineDynamicState = (): TimelineDynamicState => {
  */
 export const useTimelineMemoizedObjects = (): TimelineMemoizedObjects => {
   const context = useTimelineContext();
-  
-  return useMemo(() => ({
-    theme: context.theme,
-    buttonTexts: context.buttonTexts,
-    classNames: context.classNames,
-    fontSizes: context.fontSizes,
-    semanticTags: context.semanticTags,
-    slideShowType: context.slideShowType,
-  }), [context]);
+
+  return useMemo(
+    () => ({
+      theme: context.theme,
+      buttonTexts: context.buttonTexts,
+      classNames: context.classNames,
+      fontSizes: context.fontSizes,
+      semanticTags: context.semanticTags,
+      slideShowType: context.slideShowType,
+    }),
+    [context],
+  );
 };

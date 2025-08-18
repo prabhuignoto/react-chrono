@@ -103,22 +103,28 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   return (
     <>
       <div className={popoverWrapper} ref={ref}>
-        <div
-          role="button"
+        <button
+          type="button"
           onClick={toggleOpen}
-          tabIndex={0}
-          onKeyUp={handleKeyPress}
+          onKeyDown={handleKeyPress}
           title={placeholder}
           className={selecter}
           style={computeCssVarsFromTheme(theme)}
+          aria-expanded={state.open}
+          aria-haspopup="dialog"
+          aria-label={placeholder || 'Open menu'}
         >
-          <span className={[selecterIcon, state.open ? selecterIconOpen : ''].join(' ')}>
+          <span
+            className={[selecterIcon, state.open ? selecterIconOpen : ''].join(
+              ' ',
+            )}
+          >
             {icon || <ChevronDown />}
           </span>
           {placeholder && !$isMobile ? (
             <span className={selecterLabel}>{placeholder}</span>
           ) : null}
-        </div>
+        </button>
         {state.open ? (
           <div
             className={[
@@ -129,10 +135,22 @@ const PopOver: FunctionComponent<PopOverModel> = ({
                 leftMobile: !!$isMobile,
               }),
             ].join(' ')}
-            style={{ ...computeCssVarsFromTheme(theme), width: $isMobile ? '90%' : `${width}px` }}
+            style={{
+              ...computeCssVarsFromTheme(theme),
+              width: $isMobile ? '90%' : `${width}px`,
+            }}
+            role="dialog"
+            aria-modal="false"
+            aria-labelledby={placeholder ? undefined : 'popover-content'}
           >
             <div className={header}>
-              <button className={closeButton} onClick={closePopover}>
+              <button
+                className={closeButton}
+                onClick={closePopover}
+                type="button"
+                aria-label="Close menu"
+                title="Close menu"
+              >
                 <CloseIcon />
               </button>
             </div>

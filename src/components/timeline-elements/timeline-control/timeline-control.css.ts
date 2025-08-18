@@ -17,7 +17,11 @@ export const navWrapper = style([
 ]);
 
 export const navItem = style([
-  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'center' }),
+  sprinkles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }),
   { padding: 0 },
 ]);
 
@@ -39,8 +43,24 @@ export const navButton = style({
   alignSelf: 'center',
   margin: '0 0.25rem',
   padding: 0,
+  minWidth: '36px',
   transition: `background-color ${vars.transition.duration.normal} ${vars.transition.easing.standard}, transform ${vars.transition.duration.fast} ${vars.transition.easing.standard}, box-shadow ${vars.transition.duration.normal} ${vars.transition.easing.standard}, border-color ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
   width: '36px',
+  selectors: {
+    '&:disabled': {
+      opacity: 0.4,
+      cursor: 'not-allowed',
+      pointerEvents: 'none',
+    },
+  },
+  '@media': {
+    '(max-width: 480px)': {
+      height: '44px',
+      width: '44px',
+      minWidth: '44px',
+      // Ensure touch targets are at least 44x44px
+    },
+  },
 });
 
 export const navButtonRotate = style({ transform: 'rotate(90deg)' });
@@ -61,10 +81,24 @@ globalStyle(`${navButton}:active`, {
 });
 
 export const navButtonFocus = style({});
-globalStyle(`${navButton}:focus`, { outline: `2px solid ${vars.color.primary}`, outlineOffset: '2px' });
+globalStyle(`${navButton}:focus`, {
+  outline: `2px solid ${vars.color.primary}`,
+  outlineOffset: '2px',
+});
 globalStyle(`${navButton}:focus:not(:focus-visible)`, { outline: 'none' });
 
-export const navButtonSvg = style({ width: '20px', height: '20px', color: vars.color.icon });
+export const navButtonSvg = style({
+  width: '20px',
+  height: '20px',
+  color: vars.color.icon,
+  transition: `transform ${vars.transition.duration.fast} ${vars.transition.easing.standard}`,
+  '@media': {
+    '(max-width: 480px)': {
+      width: '22px',
+      height: '22px',
+    },
+  },
+});
 
 // Optional recipe API for variant-driven usage without breaking existing exports
 export const navButtonRecipe = recipe({
@@ -93,7 +127,12 @@ export const controlContainer = style([
 ]);
 
 export const timelineControlContainer = style([
-  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 'sm' }),
+  sprinkles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    my: 'sm',
+  }),
   { position: 'relative', zIndex: vars.zIndex.controls },
 ]);
 
@@ -112,4 +151,3 @@ export const controlButton = style([
 ]);
 
 export const controlButtonSvg = style({ width: '80%', height: '80%' });
-

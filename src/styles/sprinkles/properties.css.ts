@@ -13,7 +13,13 @@ export const responsiveProperties = defineProperties({
     display: ['none', 'block', 'flex', 'grid', 'inline-flex', 'inline-block'],
     flexDirection: ['row', 'column'],
     alignItems: ['stretch', 'center', 'flex-start', 'flex-end'],
-    justifyContent: ['flex-start', 'center', 'space-between', 'space-around', 'space-evenly'],
+    justifyContent: [
+      'flex-start',
+      'center',
+      'space-between',
+      'space-around',
+      'space-evenly',
+    ],
     gap: vars.space,
     // logical spacing
     padding: vars.space,
@@ -65,5 +71,3 @@ export const colorAndBordersProperties = defineProperties({
     borderRadius: vars.radius,
   },
 });
-
-

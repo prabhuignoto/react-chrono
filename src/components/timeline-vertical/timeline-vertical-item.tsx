@@ -113,19 +113,12 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   const Title = useMemo(() => {
     return (
       <div
-        className={`${timelineTitleWrapper} ${className}`}
+        className={`${timelineTitleWrapper} ${className} ${flipLayout ? 'flipped' : ''}`}
+        data-mode={mode}
         style={{
-          ...computeCssVarsFromTheme(theme),
+          ...computeCssVarsFromTheme(theme, false), // Will be determined from theme properties
           display: !title && mode === 'VERTICAL' ? 'none' : 'flex',
           width: alternateCards ? '37.5%' : '10%',
-          justifyContent:
-            className === 'left'
-              ? (!alternateCards && flipLayout ? 'flex-end' : 'flex-start')
-              : (!alternateCards && flipLayout ? 'flex-start' : 'flex-end'),
-          order:
-            className === 'left'
-              ? (!alternateCards && mode === 'VERTICAL_ALTERNATING' && flipLayout ? 1 : 3)
-              : (!alternateCards && mode === 'VERTICAL_ALTERNATING' && flipLayout ? 3 : 1),
         }}
       >
         <TimelineItemTitle
@@ -248,7 +241,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       data-item-id={id}
       key={id}
       ref={contentRef}
-      style={computeCssVarsFromTheme(theme)}
+      style={computeCssVarsFromTheme(theme, false)}
       aria-current={active ? 'step' : undefined}
       aria-label={accessibleTitle}
       role="listitem"
@@ -262,7 +255,15 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       <div
         className={`${timelineCardContentWrapper} ${contentClass} ${visible ? timelineCardContentVisible : ''}`}
         style={{
-          width: alternateCards ? (isMobile ? '75%' : '37.5%') : (!title ? '95%' : (isMobile ? '75%' : '85%')),
+          width: alternateCards
+            ? isMobile
+              ? '75%'
+              : '37.5%'
+            : !title
+              ? '95%'
+              : isMobile
+                ? '75%'
+                : '85%',
           justifyContent: (() => {
             const flip = !alternateCards && flipLayout;
             if (flip) return 'flex-end';

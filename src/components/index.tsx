@@ -160,9 +160,14 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     (actvTimelineIndex: number) => {
       // Debug logging for visibility logic
       if (typeof window !== 'undefined') {
-        console.log('Timeline Update - Mode:', mode, 'Active Index:', actvTimelineIndex);
+        console.log(
+          'Timeline Update - Mode:',
+          mode,
+          'Active Index:',
+          actvTimelineIndex,
+        );
       }
-      
+
       setTimeLineItems((lineItems) =>
         lineItems.map((item, index) => ({
           ...item,
@@ -207,7 +212,12 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       handleTimelineUpdate(newTimeLineItem);
       setActiveTimelineItem(newTimeLineItem);
 
-      if (mode === 'HORIZONTAL' && slideShowActive && items && items.length - 1 === newTimeLineItem) {
+      if (
+        mode === 'HORIZONTAL' &&
+        slideShowActive &&
+        items &&
+        items.length - 1 === newTimeLineItem
+      ) {
         setSlideShowActive(false);
       }
     }
@@ -284,26 +294,26 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   return (
     <TimelineContextProvider {...props}>
-      <div style={computeCssVarsFromTheme(props.theme)} id="testette">
+      <div style={{ ...computeCssVarsFromTheme(props.theme), width: '100%' }} id="testette">
         <Timeline
-        activeTimelineItem={activeTimelineItem}
-        contentDetailsChildren={contentDetailsChildren}
-        iconChildren={iconChildren}
-        items={timeLineItems}
-        onFirst={handleFirst}
-        onLast={handleLast}
-        onNext={handleOnNext}
-        onPrevious={handleOnPrevious}
-        onRestartSlideshow={restartSlideShow}
-        onTimelineUpdated={handleTimelineUpdate}
-        slideShow={slideShow}
-        slideShowEnabled={slideShow}
-        slideShowRunning={slideShowActive}
-        onScrollEnd={onScrollEnd}
-        onItemSelected={onItemSelected}
-        onOutlineSelection={handleOutlineSelection}
-        mode={mode}
-        onPaused={onPaused}
+          activeTimelineItem={activeTimelineItem}
+          contentDetailsChildren={contentDetailsChildren}
+          iconChildren={iconChildren}
+          items={timeLineItems}
+          onFirst={handleFirst}
+          onLast={handleLast}
+          onNext={handleOnNext}
+          onPrevious={handleOnPrevious}
+          onRestartSlideshow={restartSlideShow}
+          onTimelineUpdated={handleTimelineUpdate}
+          slideShow={slideShow}
+          slideShowEnabled={slideShow}
+          slideShowRunning={slideShowActive}
+          onScrollEnd={onScrollEnd}
+          onItemSelected={onItemSelected}
+          onOutlineSelection={handleOutlineSelection}
+          mode={mode}
+          onPaused={onPaused}
         />
       </div>
     </TimelineContextProvider>

@@ -53,13 +53,11 @@ export const useTimelineMode = ({
       setTimelineMode(mappedMode);
 
       // Handle horizontal cards update with stable reference
-      if (updateHorizontalAllCards) {
-        const shouldShowAll =
-          mappedMode === ExtendedTimelineModeEnum.HORIZONTAL_ALL;
-        stableUpdateHorizontalAllCards(shouldShowAll);
-      }
+      const shouldShowAll =
+        mappedMode === ExtendedTimelineModeEnum.HORIZONTAL_ALL;
+      stableUpdateHorizontalAllCards(shouldShowAll);
     },
-    [timelineMode, updateHorizontalAllCards, stableUpdateHorizontalAllCards],
+    [timelineMode, stableUpdateHorizontalAllCards],
   );
 
   return {

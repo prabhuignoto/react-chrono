@@ -10,52 +10,66 @@ export const wrapper = style([
     position: 'relative',
     width: '100%',
     overflow: 'visible',
-    zIndex: vars.zIndex.timelineCard.toString() ? (Number(vars.zIndex.timelineCard) - 2) as unknown as number : undefined,
+    // Use a token directly; arithmetic with CSS vars isn't supported in vanilla-extract
+    zIndex: vars.zIndex.base,
     selectors: {
       '&:focus': { outline: 0 },
       '&.horizontal': { justifyContent: 'flex-start' },
-      '&.js-focus-visible :focus:not(.focus-visible)': { outline: 0 },
-      '&[data-toolbar-navigation="true"] :focus': { outline: 0 },
     },
   },
 ]);
 
-// Fullscreen adjustments (cross-browser)
-globalStyle(`${wrapper}:fullscreen, ${wrapper}:-webkit-full-screen, ${wrapper}:-moz-full-screen, ${wrapper}:-ms-fullscreen, ${wrapper}[data-fullscreen='true']`, {
-  background: vars.color.background,
-  padding: '2rem',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-  width: '100vw',
-  height: '100vh',
-  overflowY: 'auto',
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  zIndex: 999999,
-  boxSizing: 'border-box',
+// Global selectors that target descendants must use globalStyle
+globalStyle(`${wrapper}.js-focus-visible :focus:not(.focus-visible)`, {
+  outline: 0,
+});
+globalStyle(`${wrapper}[data-toolbar-navigation="true"] :focus`, {
+  outline: 0,
 });
 
-globalStyle(`${wrapper}:fullscreen::backdrop, ${wrapper}:-webkit-full-screen::backdrop, ${wrapper}:-moz-full-screen::backdrop, ${wrapper}:-ms-fullscreen::backdrop`, {
-  background: vars.color.background,
-});
+// Fullscreen adjustments (cross-browser)
+globalStyle(
+  `${wrapper}:fullscreen, ${wrapper}:-webkit-full-screen, ${wrapper}:-moz-full-screen, ${wrapper}:-ms-fullscreen, ${wrapper}[data-fullscreen='true']`,
+  {
+    background: vars.color.background,
+    padding: '2rem',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100vw',
+    height: '100vh',
+    overflowY: 'auto',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    zIndex: 999999,
+    boxSizing: 'border-box',
+  },
+);
+
+globalStyle(
+  `${wrapper}:fullscreen::backdrop, ${wrapper}:-webkit-full-screen::backdrop, ${wrapper}:-moz-full-screen::backdrop, ${wrapper}:-ms-fullscreen::backdrop`,
+  {
+    background: vars.color.background,
+  },
+);
 
 export const timelineMainWrapper = style([
   sprinkles({ display: 'flex' }),
   {
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    flex: '0 0 auto',
-    minHeight: 0,
-    height: '520px',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    flex: '1 1 auto',
+    minHeight: '500px',
+    height: '0',
     overflowY: 'auto',
-    overflowX: 'visible',
+    overflowX: 'hidden',
     overscrollBehavior: 'contain',
     width: '100%',
     background: 'transparent',
-    padding: 0,
+    padding: '1.5rem 0',
+    position: 'relative',
   },
 ]);
 
@@ -68,9 +82,24 @@ export const timelineMain = style([
     transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
     transform: 'translate(0, -50%)',
     selectors: {
-      '&.vertical': { alignItems: 'flex-start', justifyContent: 'flex-start', width: '100%', height: '100%' },
-      '&.horizontal': { alignItems: 'center', justifyContent: 'center', flexDirection: 'row' },
-      '&.horizontal_all': { alignItems: 'center', justifyContent: 'flex-start', width: '100%', flexDirection: 'row', overflowX: 'auto' },
+      '&.vertical': {
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        width: '100%',
+        height: '100%',
+      },
+      '&.horizontal': {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+      },
+      '&.horizontal_all': {
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '100%',
+        flexDirection: 'row',
+        overflowX: 'auto',
+      },
     },
   },
 ]);
@@ -80,46 +109,35 @@ export const outline = style({
   right: 0,
   left: 0,
   width: '100%',
-  marginRight: 'auto',
-  marginLeft: 'auto',
+  marginRight: 0,
+  marginLeft: 0,
   top: '50%',
   transform: 'translateY(-50%)',
-  zIndex: 2,
+  zIndex: 0,
+  borderRadius: '4px',
 });
 
 export const timelineControlContainer = style([
-  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'center' }),
+  sprinkles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }),
   { minHeight: '3rem' },
 ]);
 
 export const timelineContentRender = style([
   sprinkles({ display: 'flex' }),
   {
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'center',
-    width: '98%',
+    width: '100%',
     marginRight: 'auto',
     marginLeft: 'auto',
-    overflowX: 'hidden',
-  },
-]);
-
-export const toolbarWrapper = style([
-  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }),
-  {
-    fontWeight: 'bold',
-    textAlign: 'center',
-    textDecoration: 'none',
-    borderRadius: '10px',
-    background: vars.color.toolbarBg,
-    border: `1px solid ${vars.color.buttonBorder}`,
-    boxShadow: vars.shadow.elevationMd,
-    width: '100%',
-    padding: '0.75rem 1rem',
-    marginBlockEnd: '1rem',
-    zIndex: vars.zIndex.controls,
-    gap: '0.75rem',
-    flexWrap: 'wrap',
+    overflowX: 'auto',
+    position: 'relative',
+    minHeight: '200px',
+    padding: '1rem 0',
   },
 ]);
 
@@ -169,10 +187,19 @@ export const searchInput = style({
   color: vars.color.text,
   fontSize: '0.9rem',
   padding: '0.4rem 0.2rem',
-  selectors: { '&::placeholder': { color: vars.color.text, opacity: 0.8, fontWeight: 400 } },
+  selectors: {
+    '&::placeholder': { color: vars.color.text, opacity: 0.8, fontWeight: 400 },
+  },
 });
 
-export const searchInfo = style({ fontSize: '0.8rem', color: vars.color.text, opacity: 0.8, margin: '0 0.4rem', whiteSpace: 'nowrap', flexShrink: 0 });
+export const searchInfo = style({
+  fontSize: '0.8rem',
+  color: vars.color.text,
+  opacity: 0.8,
+  margin: '0 0.4rem',
+  whiteSpace: 'nowrap',
+  flexShrink: 0,
+});
 
 export const searchControls = style([
   sprinkles({ display: 'flex', alignItems: 'center' }),
@@ -185,7 +212,11 @@ export const toolbarSection = style([
 ]);
 
 export const navigationGroup = style([toolbarSection, { flexWrap: 'nowrap' }]);
-export const searchGroup = style([toolbarSection, { flex: '1 1 300px', maxWidth: '600px', justifyContent: 'center' }]);
-export const actionGroup = style([toolbarSection, { flexWrap: 'wrap', justifyContent: 'flex-end' }]);
-
-
+export const searchGroup = style([
+  toolbarSection,
+  { flex: '1 1 300px', maxWidth: '600px', justifyContent: 'center' },
+]);
+export const actionGroup = style([
+  toolbarSection,
+  { flexWrap: 'wrap', justifyContent: 'flex-end' },
+]);

@@ -29,7 +29,7 @@ describe('Theme Validation and Edge Cases', () => {
         'timelineBgColor',
       ];
 
-      requiredProps.forEach(prop => {
+      requiredProps.forEach((prop) => {
         expect(defaultTheme).toHaveProperty(prop);
         expect(typeof defaultTheme[prop as keyof Theme]).toBe('string');
         expect(defaultTheme[prop as keyof Theme]).toBeTruthy();
@@ -56,10 +56,10 @@ describe('Theme Validation and Edge Cases', () => {
         'timelineBgColor',
       ];
 
-      colorProperties.forEach(prop => {
+      colorProperties.forEach((prop) => {
         const colorValue = defaultTheme[prop as keyof Theme] as string;
         // Should be valid hex, rgb, rgba, or CSS color name
-        const isValidColor = 
+        const isValidColor =
           /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(colorValue) || // hex
           /^rgb\(\d+,\s*\d+,\s*\d+\)$/.test(colorValue) || // rgb
           /^rgba\(\d+,\s*\d+,\s*\d+,\s*[\d.]+\)$/.test(colorValue) || // rgba
@@ -87,7 +87,7 @@ describe('Theme Validation and Edge Cases', () => {
         'darkToggleGlowColor',
       ];
 
-      darkModeProps.forEach(prop => {
+      darkModeProps.forEach((prop) => {
         expect(defaultTheme).toHaveProperty(prop);
         expect(typeof defaultTheme[prop as keyof Theme]).toBe('string');
         expect(defaultTheme[prop as keyof Theme]).toBeTruthy();
@@ -109,7 +109,7 @@ describe('Theme Validation and Edge Cases', () => {
         'timelineBgColor',
       ];
 
-      requiredProps.forEach(prop => {
+      requiredProps.forEach((prop) => {
         expect(darkTheme).toHaveProperty(prop);
         expect(typeof darkTheme[prop as keyof Theme]).toBe('string');
         expect(darkTheme[prop as keyof Theme]).toBeTruthy();
@@ -127,8 +127,10 @@ describe('Theme Validation and Edge Cases', () => {
         'toolbarTextColor',
       ];
 
-      keyProps.forEach(prop => {
-        expect(darkTheme[prop as keyof Theme]).not.toBe(defaultTheme[prop as keyof Theme]);
+      keyProps.forEach((prop) => {
+        expect(darkTheme[prop as keyof Theme]).not.toBe(
+          defaultTheme[prop as keyof Theme],
+        );
       });
     });
 
@@ -140,7 +142,7 @@ describe('Theme Validation and Edge Cases', () => {
         darkTheme.toolbarBgColor,
       ];
 
-      darkBackgrounds.forEach(color => {
+      darkBackgrounds.forEach((color) => {
         expect(color).toBeTruthy();
         // Should be dark colors (hex values starting with low values)
         if (color?.startsWith('#')) {
@@ -164,7 +166,7 @@ describe('Theme Validation and Edge Cases', () => {
       if (textColor?.startsWith('#') && backgroundColor?.startsWith('#')) {
         const textHex = parseInt(textColor.slice(1), 16);
         const bgHex = parseInt(backgroundColor.slice(1), 16);
-        
+
         // Text should be significantly lighter than background in dark theme
         expect(textHex).toBeGreaterThan(bgHex);
       }
@@ -287,31 +289,33 @@ describe('Theme Validation and Edge Cases', () => {
   describe('Theme Consistency', () => {
     it('should have consistent property naming', () => {
       const allProps = Object.keys(defaultTheme);
-      
+
       // All color properties should follow consistent naming patterns
       const validPatterns = [
-        /Color$/,      // ends with Color
-        /BgColor$/,    // ends with BgColor  
-        /BackGround$/  // ends with BackGround
+        /Color$/, // ends with Color
+        /BgColor$/, // ends with BgColor
+        /BackGround$/, // ends with BackGround
       ];
-      
+
       const knownExceptions = [
-        'primary', 
-        'secondary', 
-        'cardDetailsBackGround', 
+        'primary',
+        'secondary',
+        'cardDetailsBackGround',
         'nestedCardDetailsBackGround',
-        'textColor' // This is optional in the interface
+        'textColor', // This is optional in the interface
       ];
-      
-      allProps.forEach(prop => {
+
+      allProps.forEach((prop) => {
         if (!knownExceptions.includes(prop)) {
-          const isValidNaming = validPatterns.some(pattern => pattern.test(prop));
-          
+          const isValidNaming = validPatterns.some((pattern) =>
+            pattern.test(prop),
+          );
+
           if (!isValidNaming) {
             // Log for debugging but don't fail the test for this specific case
             console.warn(`Property with non-standard naming: ${prop}`);
           }
-          
+
           // For now, just ensure properties are strings and not empty
           expect(typeof prop).toBe('string');
           expect(prop.length).toBeGreaterThan(0);
@@ -324,12 +328,12 @@ describe('Theme Validation and Edge Cases', () => {
       const darkProps = Object.keys(darkTheme);
 
       // Dark theme should have all the same properties as light theme
-      lightProps.forEach(prop => {
+      lightProps.forEach((prop) => {
         expect(darkTheme).toHaveProperty(prop);
       });
 
       // Light theme should have all dark theme properties
-      darkProps.forEach(prop => {
+      darkProps.forEach((prop) => {
         expect(defaultTheme).toHaveProperty(prop);
       });
     });
@@ -355,7 +359,7 @@ describe('Theme Validation and Edge Cases', () => {
 
     it('should have reasonable property count', () => {
       const propCount = Object.keys(defaultTheme).length;
-      
+
       // Should have a reasonable number of properties (not too few, not too many)
       expect(propCount).toBeGreaterThan(10);
       expect(propCount).toBeLessThan(100);
@@ -366,7 +370,9 @@ describe('Theme Validation and Edge Cases', () => {
         if (seen.has(obj)) return true;
         if (obj && typeof obj === 'object') {
           seen.add(obj);
-          return Object.values(obj).some(value => hasCircularRef(value, seen));
+          return Object.values(obj).some((value) =>
+            hasCircularRef(value, seen),
+          );
         }
         return false;
       };

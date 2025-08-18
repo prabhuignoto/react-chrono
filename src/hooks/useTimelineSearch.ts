@@ -19,7 +19,9 @@ export const useTimelineSearch = ({
   const [currentMatchIndex, setCurrentMatchIndex] = useState(-1);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const activeItemIndex = useRef<number>(0);
-  const searchTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
   const isFirstSearchRef = useRef<boolean>(true);
 
   // Cache callback refs to prevent unnecessary re-renders
@@ -124,7 +126,9 @@ export const useTimelineSearch = ({
               ) as HTMLElement | null;
               const target =
                 verticalRow ||
-                (document.getElementById(`timeline-card-${itemId}`) as HTMLElement | null);
+                (document.getElementById(
+                  `timeline-card-${itemId}`,
+                ) as HTMLElement | null);
               try {
                 target?.focus?.({ preventScroll: true });
               } catch {}
@@ -135,7 +139,7 @@ export const useTimelineSearch = ({
         setCurrentMatchIndex(-1);
       }
     },
-    [searchableContent, focusSearchInput],
+    [searchableContent],
   );
 
   // Optimized debounced search with better performance
@@ -212,7 +216,9 @@ export const useTimelineSearch = ({
           ) as HTMLElement | null;
           const target =
             verticalRow ||
-            (document.getElementById(`timeline-card-${itemId}`) as HTMLElement | null);
+            (document.getElementById(
+              `timeline-card-${itemId}`,
+            ) as HTMLElement | null);
           try {
             target?.focus?.({ preventScroll: true });
           } catch {}

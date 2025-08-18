@@ -1,13 +1,11 @@
-import {
-  FunctionComponent,
-  PointerEvent,
-  useCallback,
-  useMemo,
-} from 'react';
+import { FunctionComponent, PointerEvent, useCallback, useMemo } from 'react';
 import { useTimelineContext } from '../../contexts';
 import ChevronIcon from '../../icons/chev-right';
 import { ContentFooterProps } from './header-footer.model';
-import { chevronIconWrapper, showMoreButton } from './timeline-card-content.css';
+import {
+  chevronIconWrapper,
+  showMoreButton,
+} from './timeline-card-content.css';
 
 /**
  * ContentFooter

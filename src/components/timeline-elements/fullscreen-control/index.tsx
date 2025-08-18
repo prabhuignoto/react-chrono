@@ -62,7 +62,9 @@ const FullscreenControl = memo(
           onToggle={() => {
             toggleFullscreen().catch((err) => {
               const errorMessage =
-                err instanceof Error ? err.message : 'Fullscreen operation failed';
+                err instanceof Error
+                  ? err.message
+                  : 'Fullscreen operation failed';
               onError?.(errorMessage);
             });
           }}

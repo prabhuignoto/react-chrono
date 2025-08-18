@@ -1,9 +1,7 @@
 import React, { forwardRef, memo } from 'react';
 import { MaximizeIcon, MinimizeIcon } from '../../icons';
 import { FullscreenButtonProps } from './fullscreen-button.model';
-import {
-  fullscreenButton,
-} from './fullscreen-button.css';
+import { fullscreenButton } from './fullscreen-button.css';
 import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
 /**

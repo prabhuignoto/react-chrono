@@ -3,7 +3,11 @@ import cls from 'classnames';
 import React, { memo, useCallback } from 'react';
 import { mediaEqual } from '@utils/comparison';
 import { useTimelineContext } from '../../contexts';
-import { mediaWrapper, justifyEnd, justifyStart } from './timeline-card-media.css';
+import {
+  mediaWrapper,
+  justifyEnd,
+  justifyStart,
+} from './timeline-card-media.css';
 import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { useMediaLoad } from './hooks/useMediaLoad';
 import { useYouTubeDetection } from './hooks/useYouTubeDetection';
@@ -87,7 +91,11 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
             classNames?.cardMedia,
             mediaSettings?.align === 'right' ? justifyEnd : justifyStart,
           )}
-          style={{ ...computeCssVarsFromTheme(theme), height: textOverlay ? 'calc(100% - 1em)' : 0, minHeight: getCardHeight }}
+          style={{
+            ...computeCssVarsFromTheme(theme),
+            height: textOverlay ? 'calc(100% - 1em)' : 0,
+            minHeight: getCardHeight,
+          }}
         >
           <MediaContent
             media={media}

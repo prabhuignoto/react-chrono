@@ -5,5 +5,3 @@ export const controlsWrapper = style([
   sprinkles({}),
   { position: 'relative', zIndex: 20 },
 ]);
-
-

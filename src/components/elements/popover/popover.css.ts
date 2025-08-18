@@ -3,10 +3,17 @@ import { vars } from '../../../styles/tokens.css';
 import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const popoverWrapper = style({ position: 'relative', display: 'inline-block' });
+export const popoverWrapper = style({
+  position: 'relative',
+  display: 'inline-block',
+});
 
 export const popoverHolder = style([
-  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'center' }),
+  sprinkles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }),
   {
     flexDirection: 'column',
     background: vars.color.toolbarBg,
@@ -27,7 +34,10 @@ export const popoverHolder = style([
     selectors: {
       '&::-webkit-scrollbar': { width: '0.3em' },
       '&::-webkit-scrollbar-track': { backgroundColor: vars.color.toolbarBg },
-      '&::-webkit-scrollbar-thumb': { backgroundColor: vars.color.primary, borderRadius: '3px' },
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: vars.color.primary,
+        borderRadius: '3px',
+      },
     },
   },
 ]);
@@ -53,7 +63,11 @@ export const popoverHolderRecipe = recipe({
 });
 
 export const selecter = style([
-  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }),
+  sprinkles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  }),
   {
     background: vars.color.toolbarBtnBg,
     color: vars.color.toolbarText,
@@ -76,11 +90,23 @@ export const selecter = style([
         transform: 'translateY(-1px)',
       },
       '&:active': { transform: 'scale(0.95)', boxShadow: vars.shadow.insetSm },
-      '&:focus': { outline: `2px solid ${vars.color.primary}`, outlineOffset: '2px' },
+      '&:focus': {
+        outline: `2px solid ${vars.color.primary}`,
+        outlineOffset: '2px',
+      },
       '&:focus:not(:focus-visible)': { outline: 'none' },
+      '&:focus-visible': {
+        outline: `2px solid ${vars.color.primary}`,
+        outlineOffset: '2px',
+      },
     },
     '@media': {
-      '(max-width: 480px)': { height: '40px', minWidth: '40px', padding: '0 0.6rem' },
+      '(max-width: 480px)': {
+        height: '44px',
+        minWidth: '44px',
+        padding: '0 0.6rem',
+        // Ensure touch targets are at least 44x44px
+      },
     },
   },
 ]);
@@ -100,8 +126,11 @@ export const selecterIcon = style({
   flexShrink: 0,
 });
 
-globalStyle(`${selecterIcon} svg`, { width: '20px', height: '20px' });
-globalStyle(`@media (max-width: 480px) { ${selecterIcon} svg { width: 22px; height: 22px; } }`, {} as never);
+globalStyle(`${selecterIcon} svg`, {
+  width: '20px',
+  height: '20px',
+  '@media': { '(max-width: 480px)': { width: '22px', height: '22px' } },
+});
 
 export const selecterIconOpen = style({
   transform: 'rotate(180deg)',
@@ -132,6 +161,30 @@ export const closeButton = style({
   cursor: 'pointer',
   marginBottom: '0.5rem',
   marginLeft: 'auto',
+  padding: '0.5rem',
+  borderRadius: '4px',
+  minWidth: '32px',
+  minHeight: '32px',
+  transition: `background-color ${vars.transition.duration.normal} ${vars.transition.easing.standard}, transform ${vars.transition.duration.fast} ${vars.transition.easing.standard}`,
+  selectors: {
+    '&:hover': {
+      background: vars.color.toolbarBtnBg,
+      transform: 'scale(1.1)',
+    },
+    '&:active': {
+      transform: 'scale(0.95)',
+    },
+    '&:focus': {
+      outline: `2px solid ${vars.color.primary}`,
+      outlineOffset: '2px',
+    },
+    '&:focus:not(:focus-visible)': { outline: 'none' },
+  },
+  '@media': {
+    '(max-width: 480px)': {
+      minWidth: '44px',
+      minHeight: '44px',
+      padding: '0.75rem',
+    },
+  },
 });
-
-

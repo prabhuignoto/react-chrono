@@ -57,12 +57,12 @@ export const Wrapper = styled.div<{
   }
 
   /* Hide focus outline for toolbar-triggered navigation */
-  &[data-toolbar-navigation="true"] :focus {
+  &[data-toolbar-navigation='true'] :focus {
     outline: 0 !important;
   }
 
   /* Ensure keyboard navigation focus is visible */
-  &[data-keyboard-focus="true"] :focus-visible {
+  &[data-keyboard-focus='true'] :focus-visible {
     outline: 2px solid #528deb;
     outline-offset: 2px;
   }
@@ -222,7 +222,7 @@ export const TimelineMain = styled.div`
     // width: 100%;
     flex-direction: row;
   }
-  
+
   &.horizontal_all {
     align-items: center;
     justify-content: flex-start;
@@ -273,7 +273,7 @@ export const Outline = styled.div<{ color?: string; height?: number }>`
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
-  
+
   /* Show all cards horizontal mode - extend line */
   .show-all-cards-horizontal & {
     width: calc(100% + 2rem);

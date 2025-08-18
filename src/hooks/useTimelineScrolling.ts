@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 type ScrollOptions = {
   behavior: ScrollBehavior;
@@ -74,7 +74,24 @@ const smoothScrollTo = (
 export const useTimelineScrolling = () => {
   const scrollTimeoutRef = useRef<number | null>(null);
   const lastScrollTarget = useRef<HTMLElement | null>(null);
-  const animationRef = useRef<number | null>(null);
+  // Timeout to clear last target after animation ends
+  const clearLastTargetTimeoutRef = useRef<ReturnType<
+    typeof setTimeout
+  > | null>(null);
+
+  // Cleanup any pending clear-timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (clearLastTargetTimeoutRef.current) {
+        clearTimeout(clearLastTargetTimeoutRef.current);
+        clearLastTargetTimeoutRef.current = null;
+      }
+      if (scrollTimeoutRef.current) {
+        cancelAnimationFrame(scrollTimeoutRef.current);
+        scrollTimeoutRef.current = null;
+      }
+    };
+  }, []);
 
   const scrollToElement = useCallback((element: HTMLElement, mode: string) => {
     if (!element) return;
@@ -88,73 +105,74 @@ export const useTimelineScrolling = () => {
     if (scrollTimeoutRef.current) {
       cancelAnimationFrame(scrollTimeoutRef.current);
     }
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
-    }
 
     // Schedule the scroll for the next animation frame
     scrollTimeoutRef.current = requestAnimationFrame(() => {
       // Start scrolling immediately since we're now doing predictive centering
-        const isVerticalMode =
-          mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
+      const isVerticalMode =
+        mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
 
-        // Find the scrollable container - handle test environment gracefully
-        let container: Element | null = null;
+      // Find the scrollable container - handle test environment gracefully
+      let container: Element | null = null;
 
-        if (typeof element.closest === 'function') {
-          container = element.closest('[data-testid="timeline-main-wrapper"]');
+      if (typeof element.closest === 'function') {
+        container = element.closest('[data-testid="timeline-main-wrapper"]');
+      }
+
+      if (!container) {
+        container = element.parentElement?.parentElement || null;
+      }
+
+      if (!container) {
+        // Fallback to native scrollIntoView if available
+        if (typeof element.scrollIntoView === 'function') {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: isVerticalMode ? 'center' : 'nearest',
+            inline: isVerticalMode ? 'center' : 'center',
+          });
         }
+        return;
+      }
 
-        if (!container) {
-          container = element.parentElement?.parentElement || null;
-        }
+      // Calculate target position to center the element
+      const containerRect = container.getBoundingClientRect();
+      const elementRect = element.getBoundingClientRect();
 
-        if (!container) {
-          // Fallback to native scrollIntoView if available
-          if (typeof element.scrollIntoView === 'function') {
-            element.scrollIntoView({
-              behavior: 'smooth',
-              block: isVerticalMode ? 'center' : 'nearest',
-              inline: isVerticalMode ? 'center' : 'center',
-            });
-          }
-          return;
-        }
+      if (isVerticalMode) {
+        // Center vertically with improved positioning
+        const targetScrollTop =
+          container.scrollTop +
+          (elementRect.top - containerRect.top) -
+          containerRect.height / 2 +
+          elementRect.height / 2;
 
-        // Calculate target position to center the element
-        const containerRect = container.getBoundingClientRect();
-        const elementRect = element.getBoundingClientRect();
+        // Use much longer duration for smoother vertical scrolling
+        smoothScrollTo(container, targetScrollTop, 1200, false);
+      } else {
+        // Center horizontally with improved positioning
+        const targetScrollLeft =
+          container.scrollLeft +
+          (elementRect.left - containerRect.left) -
+          containerRect.width / 2 +
+          elementRect.width / 2;
 
-        if (isVerticalMode) {
-          // Center vertically with improved positioning
-          const targetScrollTop =
-            container.scrollTop +
-            (elementRect.top - containerRect.top) -
-            containerRect.height / 2 +
-            elementRect.height / 2;
+        // Use much longer duration for smoother horizontal scrolling
+        smoothScrollTo(container, targetScrollLeft, 1200, true);
+      }
 
-          // Use much longer duration for smoother vertical scrolling
-          smoothScrollTo(container, targetScrollTop, 1200, false);
-        } else {
-          // Center horizontally with improved positioning
-          const targetScrollLeft =
-            container.scrollLeft +
-            (elementRect.left - containerRect.left) -
-            containerRect.width / 2 +
-            elementRect.width / 2;
+      lastScrollTarget.current = element;
 
-          // Use much longer duration for smoother horizontal scrolling
-          smoothScrollTo(container, targetScrollLeft, 1200, true);
-        }
+      // Clear the target after scrolling completes
+      if (clearLastTargetTimeoutRef.current) {
+        clearTimeout(clearLastTargetTimeoutRef.current);
+      }
+      clearLastTargetTimeoutRef.current = setTimeout(() => {
+        lastScrollTarget.current = null;
+        clearLastTargetTimeoutRef.current = null;
+      }, 1300);
 
-        lastScrollTarget.current = element;
-
-        // Clear the target after scrolling completes
-        setTimeout(() => {
-          lastScrollTarget.current = null;
-        }, 1300);
-
-        scrollTimeoutRef.current = null;
+      scrollTimeoutRef.current = null;
     });
   }, []);
 

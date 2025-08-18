@@ -18,9 +18,11 @@ const MeasuredItem: React.FC<MeasuredItemProps> = ({ onMeasure, children }) => {
     return () => ro.disconnect();
   }, [onMeasure]);
 
-  return <li ref={ref} style={{ listStyle: 'none' }}>{children}</li>;
+  return (
+    <li ref={ref} style={{ listStyle: 'none' }}>
+      {children}
+    </li>
+  );
 };
 
 export default MeasuredItem;
-
-

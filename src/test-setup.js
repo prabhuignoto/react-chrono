@@ -8,7 +8,7 @@ import '@testing-library/jest-dom/vitest';
 // Mock window.matchMedia which is not available in Jest/Vitest environment
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: vi.fn().mockImplementation(query => ({
+  value: vi.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,

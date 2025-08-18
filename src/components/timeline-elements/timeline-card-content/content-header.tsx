@@ -27,12 +27,20 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
     const isNotMedia = useMemo(() => !media, [media]);
 
     return (
-      <div className={timelineCardHeader}>
+      <header className={timelineCardHeader}>
         {/* Render mobile title only if cardTitle exists */}
         {isMobile && cardTitle ? (
-          <span style={{ fontSize: '1.2rem', color: theme?.cardTitleColor }}>
+          <h3 
+            style={{ 
+              fontSize: '1.5rem', 
+              color: theme?.cardTitleColor,
+              margin: 0,
+              fontWeight: 600,
+              lineHeight: 1.4,
+            }}
+          >
             {cardTitle}
-          </span>
+          </h3>
         ) : null}
 
         {isNotMedia ? (
@@ -55,7 +63,7 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
             classString={classNames?.cardSubTitle}
           />
         ) : null}
-      </div>
+      </header>
     );
   },
 );

@@ -39,7 +39,11 @@ export const outlineLeft = style({ left: '1rem' });
 export const outlineRight = style({ right: '3rem' });
 
 export const outlinePane = style([
-  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'center' }),
+  sprinkles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }),
   {
     borderRadius: '4px',
     position: 'absolute',
@@ -86,7 +90,11 @@ export const listRoot = style([
 ]);
 
 export const listItem = style([
-  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }),
+  sprinkles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  }),
   {
     fontSize: '0.9rem',
     margin: '0.75rem 0',
@@ -144,5 +152,3 @@ globalStyle(`${listItemBulletSelected}::after`, {
   background: vars.color.primary,
   border: `2px solid ${vars.color.primary}`,
 });
-
-

@@ -8,7 +8,10 @@ import {
 } from 'react';
 import xss from 'xss';
 import { useTimelineContext } from '../../contexts';
-import { timelineContentDetails, timelineSubContent } from './timeline-card-content.css';
+import {
+  timelineContentDetails,
+  timelineSubContent,
+} from './timeline-card-content.css';
 
 // Define the type for the TextOrContentModel
 export type TextOrContentModel = Pick<
@@ -69,7 +72,9 @@ const getTextOrContent: (
         useTimelineContext();
 
       const shouldNotShowText = useMemo(() => {
-        return (parseDetailsAsHTML && !isTextArray) || textContentDensity === 'LOW';
+        return (
+          (parseDetailsAsHTML && !isTextArray) || textContentDensity === 'LOW'
+        );
       }, [isTextArray, parseDetailsAsHTML, textContentDensity]);
 
       // Generate the text content based on detailedText
@@ -106,7 +111,9 @@ const getTextOrContent: (
 
         return (
           <p
-            className={timelineContentDetails + ' ' + (showMore ? 'active' : '')}
+            className={
+              timelineContentDetails + ' ' + (showMore ? 'active' : '')
+            }
             ref={ref as any}
             {...textContentProps}
             style={{ color: theme?.cardDetailsColor }}

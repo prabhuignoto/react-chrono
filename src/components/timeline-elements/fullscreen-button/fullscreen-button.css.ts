@@ -82,9 +82,21 @@ export const sizeVariants = {
   }),
 };
 
-globalStyle(`${sizeVariants.small} svg`, { width: '16px', height: '16px', flexShrink: 0 });
-globalStyle(`${sizeVariants.medium} svg`, { width: '20px', height: '20px', flexShrink: 0 });
-globalStyle(`${sizeVariants.large} svg`, { width: '22px', height: '22px', flexShrink: 0 });
+globalStyle(`${sizeVariants.small} svg`, {
+  width: '16px',
+  height: '16px',
+  flexShrink: 0,
+});
+globalStyle(`${sizeVariants.medium} svg`, {
+  width: '20px',
+  height: '20px',
+  flexShrink: 0,
+});
+globalStyle(`${sizeVariants.large} svg`, {
+  width: '22px',
+  height: '22px',
+  flexShrink: 0,
+});
 
 export const fullscreenState = {
   true: style({
@@ -106,5 +118,3 @@ export const fullscreenButton = recipe({
 
 // Secondary recipe name for clearer import site usage without breaking the existing one
 export const fullscreenButtonRecipe = fullscreenButton;
-
-

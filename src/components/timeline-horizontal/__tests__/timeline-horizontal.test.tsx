@@ -74,16 +74,19 @@ const renderWithContext = (
   contextOverrides: any = {},
 ) => {
   return render(
-    <TestWrapper 
+    <TestWrapper
       theme={contextOverrides.theme || mockContextValue.theme}
       mode={contextOverrides.mode || mockContextValue.mode}
-      showAllCardsHorizontal={contextOverrides.showAllCardsHorizontal ?? mockContextValue.showAllCardsHorizontal}
+      showAllCardsHorizontal={
+        contextOverrides.showAllCardsHorizontal ??
+        mockContextValue.showAllCardsHorizontal
+      }
       flipLayout={contextOverrides.flipLayout ?? mockContextValue.flipLayout}
       itemWidth={contextOverrides.itemWidth ?? mockContextValue.itemWidth}
       {...contextOverrides}
     >
       <TimelineHorizontal {...defaultProps} {...props} />
-    </TestWrapper>
+    </TestWrapper>,
   );
 };
 
@@ -264,7 +267,10 @@ describe('TimelineHorizontal', () => {
     // Re-render with same props
     rerender(
       <GlobalContext.Provider value={mockContextValue}>
-        <TestWrapper theme={mockContextValue.theme} mode={mockContextValue.mode}>
+        <TestWrapper
+          theme={mockContextValue.theme}
+          mode={mockContextValue.mode}
+        >
           <TimelineHorizontal {...defaultProps} />
         </TestWrapper>
       </GlobalContext.Provider>,
@@ -280,7 +286,10 @@ describe('TimelineHorizontal', () => {
     // Re-render with same props
     rerender(
       <GlobalContext.Provider value={mockContextValue}>
-        <TestWrapper theme={mockContextValue.theme} mode={mockContextValue.mode}>
+        <TestWrapper
+          theme={mockContextValue.theme}
+          mode={mockContextValue.mode}
+        >
           <TimelineHorizontal {...defaultProps} />
         </TestWrapper>
       </GlobalContext.Provider>,

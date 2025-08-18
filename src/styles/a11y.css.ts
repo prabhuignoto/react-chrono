@@ -11,5 +11,3 @@ export const visuallyHidden = style({
   whiteSpace: 'nowrap',
   borderWidth: 0,
 });
-
-

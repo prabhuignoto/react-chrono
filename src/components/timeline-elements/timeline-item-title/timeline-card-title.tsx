@@ -28,7 +28,13 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
 
   // Computed class name for the title, combining base class, active state, and additional classes
   const titleClass = useMemo(
-    () => cls(TITLE_CLASS, active ? 'active' : '', classString, cardTitleRecipe({ active: !!active })),
+    () =>
+      cls(
+        TITLE_CLASS,
+        active ? 'active' : '',
+        classString,
+        cardTitleRecipe({ active: !!active }),
+      ),
     [active, classString],
   );
 

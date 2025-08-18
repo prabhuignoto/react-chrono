@@ -2,8 +2,8 @@ import React from 'react';
 import { TimelineMode } from '@models/TimelineModel';
 import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
-import { Outline, TimelineMain } from './timeline.style';
 import { Scroll } from '@models/TimelineHorizontalModel';
+import { outline as outlineStyle, timelineMain } from './timeline.css';
 
 interface TimelineViewProps {
   timelineMode: string;
@@ -43,8 +43,14 @@ const TimelineView: React.FC<TimelineViewProps> = ({
   // Horizontal Timeline (regular or "all cards" mode)
   if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
     return (
-      <TimelineMain className={timelineMode.toLowerCase()}>
-        <Outline color={theme?.primary} height={lineWidth} />
+      <>
+        <div 
+          className={outlineStyle}
+          style={{
+            backgroundColor: theme?.primary,
+            height: `${lineWidth}px`,
+          }}
+        />
         <TimelineHorizontal
           autoScroll={autoScroll}
           contentDetailsChildren={contentDetailsChildren}
@@ -58,7 +64,7 @@ const TimelineView: React.FC<TimelineViewProps> = ({
           wrapperId={id}
           nestedCardHeight={nestedCardHeight}
         />
-      </TimelineMain>
+      </>
     );
   }
 

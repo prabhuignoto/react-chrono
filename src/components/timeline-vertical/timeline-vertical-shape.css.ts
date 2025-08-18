@@ -17,9 +17,9 @@ export const timelinePointWrapper = style({
 globalStyle(`${timelinePointWrapper}::before`, {
   content: '',
   position: 'absolute',
-  width: 'var(--rc-line-width, 4px)',
+  width: '4px',
   height: '2rem',
-  background: 'var(--rc-line-color, currentColor)',
+  background: 'currentColor',
   left: '50%',
   top: '-1rem',
   transform: 'translate(-50%, -50%)',
@@ -30,9 +30,9 @@ globalStyle(`${timelinePointWrapper}::after`, {
   content: '',
   position: 'absolute',
   left: '50%',
-  width: 'var(--rc-line-width, 4px)',
+  width: '4px',
   height: '100%',
-  background: 'var(--rc-line-color, currentColor)',
+  background: 'currentColor',
   transform: 'translateX(-50%)',
   zIndex: 0,
 });
@@ -87,5 +87,3 @@ globalStyle(`${shape}::before`, {
   pointerEvents: 'none',
   opacity: 0,
 });
-
-

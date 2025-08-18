@@ -29,20 +29,20 @@ describe('FullscreenControl Basic Tests', () => {
     const targetRef = { current: document.createElement('div') };
     const mockOnEnter = vi.fn();
     const mockOnExit = vi.fn();
-    
+
     // Mock fullscreen API to be supported
     Object.defineProperty(document, 'fullscreenEnabled', {
       writable: true,
       configurable: true,
       value: true,
     });
-    
+
     Object.defineProperty(targetRef.current, 'requestFullscreen', {
       writable: true,
       configurable: true,
       value: vi.fn(),
     });
-    
+
     const { container } = render(
       <ThemeProvider theme={mockTheme}>
         <FullscreenControl
@@ -51,7 +51,7 @@ describe('FullscreenControl Basic Tests', () => {
           onEnterFullscreen={mockOnEnter}
           onExitFullscreen={mockOnExit}
         />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
 
     // Component may or may not render depending on fullscreen support detection
@@ -63,14 +63,14 @@ describe('FullscreenControl Basic Tests', () => {
     const targetRef = { current: document.createElement('div') };
     const mockOnEnter = vi.fn();
     const mockOnExit = vi.fn();
-    
+
     // Mock fullscreen API to not be supported
     Object.defineProperty(document, 'fullscreenEnabled', {
       writable: true,
       configurable: true,
       value: false,
     });
-    
+
     const { container } = render(
       <ThemeProvider theme={mockTheme}>
         <FullscreenControl
@@ -79,7 +79,7 @@ describe('FullscreenControl Basic Tests', () => {
           onEnterFullscreen={mockOnEnter}
           onExitFullscreen={mockOnExit}
         />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
 
     // Should render nothing when not supported

@@ -2,7 +2,10 @@ import { TimelineCardModel } from '@models/TimelineItemModel';
 import React from 'react';
 import { useTimelineContext } from '../../contexts';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
-import { timelineTitleContainer, wrapper } from './timeline-horizontal-card.css';
+import {
+  timelineTitleContainer,
+  wrapper,
+} from './timeline-horizontal-card.css';
 import { timelineTitleContainer as veTitleContainer } from './timeline-horizontal-card.css';
 import { useTimelineCard } from './hooks/useTimelineCard';
 import TimelinePoint from './timeline-point/timeline-point';
@@ -82,7 +85,11 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   };
 
   return (
-    <div ref={wrapperRef} className={`${wrapper} ${modeLower}`} data-testid="timeline-item">
+    <div
+      ref={wrapperRef}
+      className={`${wrapper} ${modeLower}`}
+      data-testid="timeline-item"
+    >
       {canShowTimelineContent && (
         <TimelineCardPortal
           containerClass={containerClass}
@@ -131,7 +138,10 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         itemId={id}
       />
 
-      <div className={`${timelineTitleContainer} ${veTitleContainer} ${titleClass}`} data-testid="timeline-title">
+      <div
+        className={`${timelineTitleContainer} ${veTitleContainer} ${titleClass}`}
+        data-testid="timeline-title"
+      >
         <TimelineItemTitle
           title={title}
           active={active && !disableInteraction}

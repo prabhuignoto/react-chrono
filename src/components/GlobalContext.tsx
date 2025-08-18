@@ -31,7 +31,9 @@ export const GlobalContext = createContext<LegacyContextProps>({});
 const GlobalContextProvider: FunctionComponent<ContextProps> = (props) => {
   return (
     <TimelineContextProvider {...props}>
-      <LegacyContextBridge originalProps={props}>{props.children}</LegacyContextBridge>
+      <LegacyContextBridge originalProps={props}>
+        {props.children}
+      </LegacyContextBridge>
     </TimelineContextProvider>
   );
 };
@@ -49,7 +51,10 @@ const LegacyContextBridge: FunctionComponent<{
     const cardHeight = originalProps.cardHeight ?? 200;
     const mediaHeight = originalProps.mediaHeight ?? 200;
     const contentDetailsHeight = originalProps.contentDetailsHeight ?? 10;
-    const newCardHeight = Math.max((contentDetailsHeight ?? 0) + (mediaHeight ?? 0), cardHeight);
+    const newCardHeight = Math.max(
+      (contentDetailsHeight ?? 0) + (mediaHeight ?? 0),
+      cardHeight,
+    );
     const detailsHeightApprox = Math.round(newCardHeight * 0.75);
     return Math.max(contentDetailsHeight ?? 0, detailsHeightApprox);
   };

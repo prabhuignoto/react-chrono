@@ -139,6 +139,7 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
       <ul
         className={timelineVerticalWrapper}
         data-testid="tree-main"
+        data-cardless={cardLess}
         role="list"
         aria-label="Timeline events"
       >

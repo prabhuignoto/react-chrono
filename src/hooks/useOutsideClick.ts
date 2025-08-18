@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useCallback, useRef } from 'react';
+import { RefObject, useEffect, useCallback, useRef, useMemo } from 'react';
 import { useStableCallback } from './utils';
 
 interface UseOutsideClickOptions {
@@ -33,7 +33,7 @@ export default function useOutsideClick(
 
   // Normalize refs to array
   const refs = Array.isArray(el) ? el : [el];
-  const allRefs = [...refs, ...excludeRefs];
+  const allRefs = useMemo(() => [...refs, ...excludeRefs], [refs, excludeRefs]);
 
   const handleClick = useCallback(
     (e: MouseEvent | TouchEvent) => {

@@ -8,14 +8,23 @@ import React, {
   FunctionComponent, // Explicit import
   MouseEvent,
 } from 'react';
-import { useTimelineStaticConfig, useTimelineMemoizedObjects } from '../contexts';
-// Shape seems to be a shared styled component, potentially defined elsewhere
+import {
+  useTimelineStaticConfig,
+  useTimelineMemoizedObjects,
+} from '../contexts';
+// Temporarily disabled new Vanilla Extract styles
+// import { shape } from '../timeline-elements/timeline-card/timeline-horizontal-card-ve.css';
+// import {
+//   timelinePointContainer,
+//   timelinePointWrapper,
+// } from './timeline-vertical-shape-ve.css';
 import { Shape } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
 import {
   TimelinePointContainer,
   TimelinePointWrapper,
-} from './timeline-vertical-shape.styles'; // existing SC styles
+} from './timeline-vertical-shape.styles';
 import * as veShape from './timeline-vertical-shape.css'; // additive VE classes
+import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
 
 /**
  * Renders the circular point or icon on the timeline line for a vertical item.
@@ -163,37 +172,32 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
     // Render the timeline point structure
     return (
       <TimelinePointWrapper
-        // --- Props passed to styled-component ---
-        width={lineWidth} // Controls the width of the connecting lines (via ::before/::after)
-        bg={theme?.primary} // Background color for the connecting lines
-        $cardLess={cardLess} // Pass cardLess state
-        $isMobile={isMobile} // Pass mobile state
-        // --- Standard React props ---
+        width={lineWidth}
+        bg={theme?.primary}
+        $cardLess={cardLess}
+        $isMobile={isMobile}
         className={`${className} ${veShape.timelinePointWrapper}`}
-        data-testid="tree-leaf" // Test ID for the wrapper
+        data-testid="tree-leaf"
       >
-        {/* Container is a button for accessibility and click handling */}
         <TimelinePointContainer
-          // --- Props passed to styled-component ---
-          $hide={disableTimelinePoint} // Hide based on global setting
-          // --- Standard React props ---
+          $hide={disableTimelinePoint}
           className={`${className} timeline-vertical-circle ${veShape.timelinePointContainer}`}
-          {...clickHandlerProps} // Spread the memoized click handler props
-          ref={circleRef} // Attach ref for position measurement
-          data-testid="tree-leaf-click" // Test ID for the clickable element
-          aria-label={timelinePointLabel} // Accessibility label
+          {...clickHandlerProps}
+          ref={circleRef}
+          data-testid="tree-leaf-click"
+          aria-label={timelinePointLabel}
           aria-disabled={
             finalDisableClickOnCircle ||
             finalDisableInteraction ||
             finalDisableAutoScrollOnClick ||
             disableTimelinePoint
-          } // Disable button if needed
+          }
           disabled={
             finalDisableClickOnCircle ||
             finalDisableInteraction ||
             finalDisableAutoScrollOnClick ||
             disableTimelinePoint
-          } // Disable button if needed
+          }
           tabIndex={
             finalDisableClickOnCircle ||
             finalDisableInteraction ||
@@ -201,17 +205,14 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
             disableTimelinePoint
               ? -1
               : 0
-          } // Manage tab order
+          }
         >
-          {/* The visual shape (circle, square, or custom icon) */}
           <Shape
-            // --- Props passed to styled-component ---
             theme={theme}
-            dimension={timelinePointDimension} // Controls the size
-            $timelinePointShape={timelinePointShape} // Controls the shape ('circle', 'square')
-            // --- Standard React props ---
-            className={`${circleClass} ${veShape.shape}`} // Apply 'active' and 'using-icon' classes
-            aria-hidden="true" // Hide from screen readers as it's decorative
+            dimension={timelinePointDimension}
+            $timelinePointShape={timelinePointShape}
+            className={`${circleClass} ${veShape.shape}`}
+            aria-hidden="true"
           >
             {iconChild}
           </Shape>
