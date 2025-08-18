@@ -50,6 +50,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
       // consume from context rather than placeholders
       fontSizes,
       classNames,
+      isDarkMode,
     } = useTimelineContext();
 
     // Use view options hook for calculated values
@@ -92,7 +93,7 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
             mediaSettings?.align === 'right' ? justifyEnd : justifyStart,
           )}
           style={{
-            ...computeCssVarsFromTheme(theme),
+            ...computeCssVarsFromTheme(theme, isDarkMode),
             height: textOverlay ? 'calc(100% - 1em)' : 0,
             minHeight: getCardHeight,
           }}

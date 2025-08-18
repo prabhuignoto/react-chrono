@@ -628,7 +628,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
       <div
         ref={timelineMainRef}
-        className={`timeline-main-wrapper ${mode.toLowerCase()} ${ve.timelineMainWrapper}`}
+        className={`timeline-main-wrapper ${mode.toLowerCase()} ${ve.timelineMainWrapper({
+          mode: mode === 'VERTICAL' ? 'vertical' : 
+                mode === 'VERTICAL_ALTERNATING' ? 'verticalAlternating' :
+                mode === 'HORIZONTAL_ALL' ? 'horizontalAll' : 'horizontal'
+        })}`}
         id="timeline-main-wrapper"
         data-testid="timeline-main-wrapper"
         style={computeCssVarsFromTheme(theme, darkMode)}

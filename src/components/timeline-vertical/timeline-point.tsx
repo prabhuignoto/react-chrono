@@ -65,7 +65,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
       disableAutoScrollOnClick: contextDisableAutoScrollOnClick,
     } = useTimelineStaticConfig();
 
-    const { theme } = useTimelineMemoizedObjects();
+    const { theme, isDarkMode } = useTimelineMemoizedObjects();
     const { buttonTexts } = useTimelineMemoizedObjects();
 
     // Consolidated disable flags - prioritize props over context

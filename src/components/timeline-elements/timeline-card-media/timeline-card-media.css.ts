@@ -89,18 +89,39 @@ export const mediaDetailsWrapper = style([
 
 export const mediaDetailsAbsolute = style({
   position: 'absolute',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  padding: '0.25rem',
-  transition:
-    'height 0.25s ease-out, width 0.25s ease-out, bottom 0.25s ease-out, background 0.25s ease-out',
-  background: vars.color.cardBg,
+  left: '0.5rem',
+  right: '0.5rem',
+  bottom: '0.5rem',
+  padding: '0.75rem',
+  transition: 'all 0.3s ease-in-out',
+  background: `${vars.color.cardBg}ee`,
+  backdropFilter: 'blur(8px)',
+  borderRadius: '12px',
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+  border: '1px solid rgba(255, 255, 255, 0.2)',
   zIndex: 13,
+  maxHeight: '70%',
+  overflow: 'hidden',
 });
 
 export const mediaDetailsCard = style({
   borderRadius: '10px',
   boxShadow: vars.shadow.elevationMd,
+});
+
+export const mediaDetailsMinimized = style({
+  maxHeight: '3.5rem',
+  cursor: 'pointer',
+  overflow: 'hidden',
+  ':hover': {
+    transform: 'scale(1.02)',
+    boxShadow: '0 6px 25px rgba(0, 0, 0, 0.2)',
+  },
+});
+
+export const mediaDetailsMaximized = style({
+  maxHeight: '80%',
+  overflowY: 'auto',
 });
 
 export const mediaDetailsGradient = style({});

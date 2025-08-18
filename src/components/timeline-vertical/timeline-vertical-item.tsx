@@ -116,7 +116,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
         className={`${timelineTitleWrapper} ${className} ${flipLayout ? 'flipped' : ''}`}
         data-mode={mode}
         style={{
-          ...computeCssVarsFromTheme(theme, false), // Will be determined from theme properties
+          ...computeCssVarsFromTheme(theme),
           display: !title && mode === 'VERTICAL' ? 'none' : 'flex',
           width: alternateCards ? '37.5%' : '10%',
         }}
@@ -241,7 +241,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       data-item-id={id}
       key={id}
       ref={contentRef}
-      style={computeCssVarsFromTheme(theme, false)}
+      style={computeCssVarsFromTheme(theme)}
       aria-current={active ? 'step' : undefined}
       aria-label={accessibleTitle}
       role="listitem"

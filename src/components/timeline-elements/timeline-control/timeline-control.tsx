@@ -69,6 +69,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
     buttonTexts,
     classNames,
     enableDarkToggle,
+    isDarkMode,
   } = useTimelineContext();
 
   // Remove icon rotation in non-horizontal modes for consistent UX
@@ -134,7 +135,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
     <div
       className={timelineControlContainer}
       key="control-wrapper"
-      style={computeCssVarsFromTheme(theme)}
+      style={computeCssVarsFromTheme(theme, isDarkMode)}
     >
       {/* Visually hidden status information for screen readers */}
       <output className={srOnly} aria-live="polite">

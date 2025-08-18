@@ -123,6 +123,7 @@ export interface TimelineMemoizedObjects {
   buttonTexts: ButtonTexts;
   classNames: Record<string, string>;
   fontSizes: Record<string, string>;
+  isDarkMode: boolean;
   semanticTags: Record<string, string>;
   slideShowType: SlideShowType;
 }
@@ -647,6 +648,7 @@ export const useTimelineMemoizedObjects = (): TimelineMemoizedObjects => {
       buttonTexts: context.buttonTexts,
       classNames: context.classNames,
       fontSizes: context.fontSizes,
+      isDarkMode: context.isDarkMode,
       semanticTags: context.semanticTags,
       slideShowType: context.slideShowType,
     }),

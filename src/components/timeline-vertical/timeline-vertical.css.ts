@@ -29,7 +29,8 @@ export const verticalItemWrapper = style([
     alignItems: 'stretch',
     zIndex: vars.zIndex.verticalItem,
     listStyle: 'none',
-    marginBlock: '1.5rem',
+    marginBottom: '1.5rem', // Adjusted for vertical spacing
+    // marginBlock: '1.5rem',
   },
 ]);
 

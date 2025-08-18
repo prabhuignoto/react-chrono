@@ -38,14 +38,14 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
     [active, classString],
   );
 
-  // Get font size from unified context
-  const { fontSizes } = useTimelineContext();
+  // Get font size and dark mode from unified context
+  const { fontSizes, isDarkMode } = useTimelineContext();
 
   return (
     <div
       className={titleClass}
       style={{
-        ...computeCssVarsFromTheme(theme),
+        ...computeCssVarsFromTheme(theme, isDarkMode),
         fontSize: fontSizes?.title || '1rem',
         textAlign: align || undefined,
         visibility: title ? 'visible' : 'hidden',

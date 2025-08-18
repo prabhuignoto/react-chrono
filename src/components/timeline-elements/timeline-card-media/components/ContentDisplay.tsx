@@ -1,4 +1,4 @@
-import React, { useRef, ReactNode } from 'react';
+import React, { useRef, ReactNode, useState, useCallback } from 'react';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import {
   cardMediaHeader,
@@ -6,6 +6,8 @@ import {
   mediaDetailsAbsolute,
   mediaDetailsCard,
   mediaDetailsGradient,
+  mediaDetailsMinimized,
+  mediaDetailsMaximized,
 } from '../timeline-card-media.css';
 import { gradientVar } from '../timeline-card-media.css';
 import { TitleMemo } from '../../memoized/title-memo';
@@ -64,6 +66,11 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
   } = props;
 
   const moreRef = useRef(null);
+  const [isMinimized, setIsMinimized] = useState(false);
+
+  const toggleMinimize = useCallback(() => {
+    setIsMinimized(!isMinimized);
+  }, [isMinimized]);
 
   return (
     <div
@@ -73,6 +80,8 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
         textOverlay ? mediaDetailsAbsolute : undefined,
         canExpand || !showText ? mediaDetailsCard : undefined,
         canShowGradient ? mediaDetailsGradient : undefined,
+        textOverlay && isMinimized ? mediaDetailsMinimized : undefined,
+        textOverlay && !isMinimized ? mediaDetailsMaximized : undefined,
       ]
         .filter(Boolean)
         .join(' ')}
@@ -81,6 +90,7 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
           ? assignInlineVars({ [gradientVar]: gradientColor })
           : undefined
       }
+      onClick={textOverlay && isMinimized ? toggleMinimize : undefined}
     >
       <div className={cardMediaHeader}>
         <TitleMemo
@@ -91,24 +101,52 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
           fontSize={fontSizes?.cardTitle}
           classString={classNames?.cardTitle}
         />
-        {canExpand && (
+        {(canExpand || textOverlay) && (
           <ButtonWrapper>
-            <ShowOrHideTextButtonMemo
-              onToggle={toggleText}
-              show={showText}
-              textOverlay
-              theme={theme}
-            />
-            <ExpandButtonMemo
-              theme={theme}
-              expanded={expandDetails}
-              onExpand={toggleExpand}
-              textOverlay
-            />
+            {canExpand && (
+              <>
+                <ShowOrHideTextButtonMemo
+                  onToggle={toggleText}
+                  show={showText}
+                  textOverlay
+                  theme={theme}
+                />
+                <ExpandButtonMemo
+                  theme={theme}
+                  expanded={expandDetails}
+                  onExpand={toggleExpand}
+                  textOverlay
+                />
+              </>
+            )}
+            {textOverlay && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleMinimize();
+                }}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: theme?.cardSubTitle || '#666',
+                  cursor: 'pointer',
+                  fontSize: '1.2rem',
+                  padding: '0.25rem',
+                  borderRadius: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                aria-label={isMinimized ? 'Maximize text' : 'Minimize text'}
+                title={isMinimized ? 'Maximize text' : 'Minimize text'}
+              >
+                {isMinimized ? '⬆️' : '⬇️'}
+              </button>
+            )}
           </ButtonWrapper>
         )}
       </div>
-      {showText && (
+      {showText && !isMinimized && (
         <SubTitleMemo
           content={content}
           fontSize={fontSizes?.cardSubtitle}
@@ -117,7 +155,7 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
           theme={theme}
         />
       )}
-      {canShowTextMemo && detailsText && (
+      {canShowTextMemo && detailsText && !isMinimized && (
         <DetailsTextMemo
           theme={theme}
           show={showText}

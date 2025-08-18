@@ -141,6 +141,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         classNames,
         slideShowType,
         showProgressOnSlideshow,
+        isDarkMode,
       } = useTimelineContext();
 
       // Map textContentDensity to textDensity for backward compatibility
@@ -423,9 +424,9 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           aria-current={active ? 'true' : 'false'}
           onDoubleClick={toggleShowMore}
           style={{
-            ...computeCssVarsFromTheme(theme),
+            ...computeCssVarsFromTheme(theme, isDarkMode),
             minHeight: customContent ? undefined : cardMinHeight,
-            height: textOverlay ? 0 : customContent ? cardMinHeight : undefined,
+            height: customContent ? cardMinHeight : undefined,
             maxWidth: cardWidth ? `${cardWidth}px` : '100%',
           }}
         >

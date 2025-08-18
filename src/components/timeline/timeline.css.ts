@@ -1,4 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 import { vars } from '../../styles/tokens.css';
 import { sprinkles } from '../../styles/sprinkles/sprinkles.css';
 
@@ -55,13 +56,11 @@ globalStyle(
   },
 );
 
-export const timelineMainWrapper = style([
+// Base style for timeline main wrapper
+const baseTimelineMainWrapper = style([
   sprinkles({ display: 'flex' }),
   {
-    // alignItems: 'center',
-    // justifyContent: 'center',
     flex: '1 1 auto',
-    minHeight: '500px',
     height: '0',
     overflowY: 'auto',
     overflowX: 'hidden',
@@ -72,6 +71,30 @@ export const timelineMainWrapper = style([
     position: 'relative',
   },
 ]);
+
+// Recipe for timeline main wrapper with mode-specific min heights
+export const timelineMainWrapper = recipe({
+  base: baseTimelineMainWrapper,
+  variants: {
+    mode: {
+      vertical: {
+        minHeight: '500px',
+      },
+      verticalAlternating: {
+        minHeight: '500px',
+      },
+      horizontal: {
+        minHeight: '200px',
+      },
+      horizontalAll: {
+        minHeight: '200px',
+      },
+    },
+  },
+  defaultVariants: {
+    mode: 'vertical',
+  },
+});
 
 export const timelineMain = style([
   sprinkles({ display: 'flex', alignItems: 'center' }),
