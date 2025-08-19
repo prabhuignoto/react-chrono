@@ -61,19 +61,43 @@ export const shape = style({
   width: '1.25rem',
   transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
   position: 'relative',
-  overflow: 'hidden',
   background: vars.color.primary,
   border: `2px solid ${vars.color.primary}`,
+  borderRadius: '50%',
   padding: 0,
   zIndex: 2,
+  // Icon support
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   selectors: {
-    '&.diamond': { transform: 'rotate(45deg)' },
-    '&.active.using-icon': { boxShadow: '0 0 0 4px currentColor22' },
+    '&.diamond': { 
+      transform: 'rotate(45deg)',
+      borderRadius: '0',
+    },
+    '&.using-icon': {
+      overflow: 'visible', // Allow icons to be visible
+      background: 'transparent',
+    },
+    '&.active.using-icon': { 
+      boxShadow: '0 0 0 4px rgba(59, 130, 246, 0.2)',
+      transform: 'scale(1.1)',
+    },
+    '&.active:not(.using-icon)': {
+      boxShadow: '0 0 12px rgba(59, 130, 246, 0.6)',
+      transform: 'scale(1.1)',
+    },
+    '&:hover:not(:disabled):not(.active)': { 
+      transform: 'scale(1.05)' 
+    },
+    '&:active:not(:disabled)': { 
+      transform: 'scale(0.95)' 
+    },
   },
 });
 
-// Ripple effect pseudo for press feedback
-globalStyle(`${shape}::before`, {
+// Ripple effect pseudo for press feedback - only for non-icon shapes
+globalStyle(`${shape}:not(.using-icon)::before`, {
   content: '',
   position: 'absolute',
   top: '50%',
@@ -86,4 +110,23 @@ globalStyle(`${shape}::before`, {
   transformOrigin: 'top left',
   pointerEvents: 'none',
   opacity: 0,
+});
+
+// Icon image styling
+globalStyle(`${shape}.using-icon img`, {
+  maxWidth: '90%',
+  maxHeight: '90%',
+  objectFit: 'contain',
+});
+
+// Icon SVG styling  
+globalStyle(`${shape}.using-icon svg`, {
+  width: '80%',
+  height: '80%',
+  fill: 'currentColor',
+});
+
+// Diamond shape icon adjustments
+globalStyle(`${shape}.diamond.using-icon svg, ${shape}.diamond.using-icon img`, {
+  transform: 'rotate(-45deg)', // Counter-rotate the icon inside rotated diamond
 });

@@ -29,6 +29,7 @@ import {
   showMoreButton,
   chevronIconWrapper,
 } from './timeline-card-content.css';
+import { nestedTimelineWrapper } from '../../timeline-vertical/timeline-vertical.css';
 import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { SlideShowType } from '@models/TimelineModel';
 import NestedTimelineRenderer from '../nested-timeline-renderer/nested-timeline-renderer';
@@ -481,12 +482,14 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           )}
 
           {canShowNestedTimeline && (
-            <NestedTimelineRenderer
-              items={items || []}
-              mode={'VERTICAL'}
-              nestedCardHeight={nestedCardHeight || 0}
-              isChild={true}
-            />
+            <div className={nestedTimelineWrapper}>
+              <NestedTimelineRenderer
+                items={items || []}
+                mode={'VERTICAL'}
+                nestedCardHeight={nestedCardHeight || 0}
+                isChild={true}
+              />
+            </div>
           )}
 
           {canShowReadMore && canShowMore && !textOverlay && (

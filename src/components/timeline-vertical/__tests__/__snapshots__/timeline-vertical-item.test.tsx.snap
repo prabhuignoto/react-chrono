@@ -5,7 +5,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
   <li
     aria-label="vertical item title"
     aria-selected="false"
-    class="timeline-vertical_verticalItemWrapper__mb2y384 timeline-vertical__mb2y383 properties_display_flex_mobile__12ug0496 properties_justifyContent_center_mobile__12ug04913 vertical-item-row no-alt "
+    class="timeline-vertical_verticalItemWrapper__mb2y384 timeline-vertical__mb2y383 enhanced-properties_display_flex_mobile__dvkhhv6 enhanced-properties_justifyContent_center_mobile__dvkhhv2c enhanced-properties_position_relative_mobile__dvkhhvl enhanced-properties_width_full_mobile__dvkhhvg3 timeline-vertical_verticalItemWrapper_visible_false__mb2y386 timeline-vertical_verticalItemWrapper_alignment_center__mb2y389 timeline-vertical_verticalItemWrapper_alternating_false__mb2y38b vertical-item-row no-alt "
     data-item-id=""
     data-testid="vertical-item-row"
     role="listitem"
@@ -13,9 +13,9 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     tabindex="-1"
   >
     <div
-      class="timeline-vertical_timelineTitleWrapper__mb2y389 timeline-vertical__mb2y388 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r  "
+      class="timeline-vertical_timelineTitleWrapper__mb2y38j timeline-vertical__mb2y38i enhanced-properties_display_flex_mobile__dvkhhv6 enhanced-properties_alignItems_center_mobile__dvkhhv2u  "
       data-mode="VERTICAL_ALTERNATING"
-      style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); --timeline-bg-color: #ffffff; --timeline-text-color: #000; --timeline-primary-color: #0f52ba; --timeline-card-bg-color: #ffffff; --timeline-muted-color: #6b7280; --timeline-toolbar-bg-color: #ffffff; --timeline-shadow-color: rgba(0, 0, 0, 0.1); display: flex; width: 10%; border: 1px solid red; order: 3; text-align: right;"
+      style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); --timeline-bg-color: #ffffff; --timeline-text-color: #000; --timeline-primary-color: #0f52ba; --timeline-card-bg-color: #ffffff; --timeline-muted-color: #6b7280; --timeline-toolbar-bg-color: #ffffff; --timeline-shadow-color: rgba(0, 0, 0, 0.1); display: flex; width: 10%; order: 3; text-align: right;"
     >
       <div
         class="timeline-item-title title timeline-card-content_cardTitleRecipe__chzdno7 timeline-card-content_cardTitleBase__chzdno4 timeline-card-content_cardTitleRecipe_active_false__chzdno9"
@@ -27,7 +27,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
       </div>
     </div>
     <div
-      class="timeline-vertical_timelineCardContentWrapper__mb2y386 card-content-wrapper "
+      class="timeline-vertical_timelineCardContentWrapper__mb2y38g card-content-wrapper "
       style="width: 85%; justify-content: flex-start; order: 3;"
     >
       <section

@@ -4,6 +4,8 @@ import { jsx as _jsx } from 'react/jsx-runtime';
 import {
   actionGroup as veActionGroup,
   contentWrapper as veContentWrapper,
+  extraControls as veExtraControls,
+  extraControlChild as veExtraControlChild,
   iconWrapper as veIconWrapper,
   navigationGroup as veNavigationGroup,
   searchControls as veSearchControls,
@@ -16,6 +18,7 @@ import {
   toolbarSectionRecipe as veToolbarSectionRecipe,
   toolbarWrapper as veToolbarWrapper,
 } from './toolbar.css';
+import { toolbarIconButton } from './toolbar-system.css';
 import { ToolbarProps } from '@models/ToolbarProps';
 
 /**
@@ -92,14 +95,31 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
                 {icon && <span className={veIconWrapper}>{icon}</span>}
                 {minimizable && (
                   <button
-                    className={veIconWrapper}
+                    className={toolbarIconButton({
+                      state: isMinimized ? 'minimized' : 'expanded',
+                      animation: 'bounce',
+                    })}
                     onClick={handleMinimizeToggle}
                     aria-label={
                       isMinimized ? `Maximize ${label}` : `Minimize ${label}`
                     }
                     type="button"
+                    title={
+                      isMinimized ? `Maximize ${label}` : `Minimize ${label}`
+                    }
                   >
-                    {isMinimized ? '⬜' : '➖'}
+                    <span
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        lineHeight: 1,
+                        fontSize: 'inherit',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {isMinimized ? '⬛' : '⬜'}
+                    </span>
                   </button>
                 )}
                 {!isMinimized &&

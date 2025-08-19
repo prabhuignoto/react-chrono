@@ -6,12 +6,11 @@ import { useTimelineContext } from '../contexts';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
 import * as ve from './timeline.css';
-// Temporarily disabled new Vanilla Extract styles due to PostCSS errors
-// import {
-//   timelineWrapper,
-//   timelineMainWrapper as timelineMainWrapperVE,
-//   timelineContentRender
-// } from './timeline-main.css';
+import {
+  timelineWrapper,
+  timelineMainWrapper as timelineMainWrapperVE,
+  timelineContentRender
+} from './timeline-main.css';
 import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
 import { TimelineToolbar } from './timeline-toolbar';
 import { useTimelineSearch } from '../../hooks/useTimelineSearch';

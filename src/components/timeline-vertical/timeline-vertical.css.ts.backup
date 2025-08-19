@@ -1,0 +1,94 @@
+import { globalStyle, keyframes, style } from '@vanilla-extract/css';
+import { vars } from '../../styles/tokens.css';
+import { sprinkles } from '../../styles/sprinkles/sprinkles.css';
+
+export const timelineVerticalWrapper = style([
+  sprinkles({ display: 'flex' }),
+  {
+    flexDirection: 'column',
+    width: '100%',
+    padding: '0.25rem',
+    outline: 0,
+    position: 'relative',
+    // Enable container queries for children without affecting layout
+    containerType: 'inline-size',
+  },
+]);
+
+export const animateVisible = keyframes({
+  from: { opacity: 0, visibility: 'hidden' },
+  to: { opacity: 1, visibility: 'visible' },
+});
+
+export const verticalItemWrapper = style([
+  sprinkles({ display: 'flex', justifyContent: 'center' }),
+  {
+    position: 'relative',
+    visibility: 'hidden',
+    width: '100%',
+    alignItems: 'stretch',
+    zIndex: vars.zIndex.verticalItem,
+    listStyle: 'none',
+    marginBottom: '1.5rem', // Adjusted for vertical spacing
+  },
+]);
+
+globalStyle(`${verticalItemWrapper}.visible`, { visibility: 'visible' });
+globalStyle(`${verticalItemWrapper}.no-alt.left`, { marginRight: 'auto' });
+globalStyle(`${verticalItemWrapper}.no-alt.right`, { marginLeft: 'auto' });
+
+export const verticalItemWrapperNested = style({
+  position: 'relative',
+  marginBottom: '1rem', // Reduced margin for nested items
+});
+
+// Nested timeline connector lines
+globalStyle(`${verticalItemWrapperNested}:not(:last-child)::after`, {
+  content: '',
+  position: 'absolute',
+  width: '2px',
+  height: '1rem', // Reduced connector height
+  background: vars.color.primary,
+  left: '50%',
+  transform: 'translateX(-50%)',
+  bottom: '-1rem',
+});
+
+// Nested timeline wrapper with reduced top spacing
+export const nestedTimelineWrapper = style({
+  marginTop: '0.5rem',
+  marginBottom: '0.25rem',
+});
+
+// Add styling for nested timeline vertical wrapper to reduce excess spacing
+globalStyle(`${nestedTimelineWrapper} ${timelineVerticalWrapper}`, {
+  paddingTop: '0',
+  paddingBottom: '0.5rem',
+});
+
+// Reduce spacing for first nested item
+globalStyle(
+  `${nestedTimelineWrapper} ${timelineVerticalWrapper} > li:first-child`,
+  {
+    marginTop: '0.5rem',
+  },
+);
+
+export const timelineCardContentWrapper = style({
+  visibility: 'hidden',
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+});
+
+export const timelineCardContentVisible = style({
+  visibility: 'visible',
+  animationName: animateVisible,
+  animationDuration: '0.25s',
+  animationTimingFunction: 'ease-in',
+});
+
+export const timelineTitleWrapper = style([
+  sprinkles({ display: 'flex', alignItems: 'center' }),
+  { minWidth: 0, overflow: 'hidden' },
+]);

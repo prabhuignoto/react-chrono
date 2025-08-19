@@ -1,89 +1,128 @@
-import { globalStyle, style } from '@vanilla-extract/css';
-import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
-import { vars } from '../../../styles/tokens.css';
+import { recipe } from '@vanilla-extract/recipes';
+import { sprinkles } from '../../../styles/sprinkles/enhanced-sprinkles.css';
+import { cardWrapper, cardHeader } from '../card-system-v2.css';
+import { semanticTokens } from '../../../styles/tokens/semantic-tokens.css';
 
-export const wrapper = style([
-  sprinkles({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }),
-  {
-    border: 'none',
-    borderRadius: '16px',
-    position: 'relative',
-    width: '100%',
-    height: '100%',
-    flexDirection: 'column',
-    gap: '0.5rem',
-    transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
-    isolation: 'isolate',
-  },
-]);
-
-globalStyle(`${wrapper}.vertical`, {
-  justifyContent: 'flex-start',
-});
-
-globalStyle(`${wrapper}:hover`, {
-  transform: 'translateY(-2px) scale(1.01)',
-  willChange: 'transform',
-});
-
-globalStyle(`${wrapper}:active`, {
-  transform: 'translateY(0px) scale(1)',
-});
-
-// Reduced motion preferences using separate globalStyle calls
-globalStyle(`${wrapper}:hover`, {
-  '@media': {
-    '(prefers-reduced-motion: reduce)': {
-      transform: 'none',
-      willChange: 'auto',
+// Main wrapper using cardWrapper with horizontal mode and interactive features
+export const wrapper = recipe({
+  base: [
+    cardWrapper({
+      mode: 'horizontal',
+      interactive: true,
+      elevation: 'medium',
+      theme: 'default'
+    }),
+    {
+      border: 'none',
+      borderRadius: '16px',
+      flexDirection: 'column',
+      gap: '0.5rem',
+      isolation: 'isolate',
+      
+      // Hover effects with proper motion handling
+      selectors: {
+        '&:hover': {
+          transform: 'translateY(-2px) scale(1.01)',
+          willChange: 'transform',
+        },
+        '&:active': {
+          transform: 'translateY(0px) scale(1)',
+        },
+      },
+      
+      // Reduced motion support
+      '@media': {
+        '(prefers-reduced-motion: reduce)': {
+          selectors: {
+            '&:hover': {
+              transform: 'none',
+              willChange: 'auto',
+            },
+            '&:active': {
+              transform: 'none',
+            },
+          },
+        },
+      },
+    },
+  ],
+  variants: {
+    orientation: {
+      vertical: {
+        justifyContent: 'flex-start',
+      },
+      horizontal: {
+        justifyContent: 'center',
+      },
+    },
+    size: {
+      sm: [cardWrapper({ size: 'sm' })],
+      md: [cardWrapper({ size: 'md' })],
+      lg: [cardWrapper({ size: 'lg' })],
     },
   },
+  defaultVariants: {
+    orientation: 'horizontal',
+    size: 'md',
+  },
 });
 
-globalStyle(`${wrapper}:active`, {
-  '@media': {
-    '(prefers-reduced-motion: reduce)': {
-      transform: 'none',
+// Timeline title container using cardHeader with enhanced styling
+export const timelineTitleContainer = recipe({
+  base: [
+    cardHeader({ variant: 'emphasized' }),
+    sprinkles({
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }),
+    {
+      padding: '0.5rem 1rem',
+      borderRadius: '12px',
+      background: `linear-gradient(135deg, ${semanticTokens.card.background.default} 0%, ${semanticTokens.card.background.default}f8 100%)`,
+      boxShadow: semanticTokens.card.shadow.low,
+      backdropFilter: 'blur(12px)',
+      border: `1px solid ${semanticTokens.card.border.color}`,
+      transition: `all ${semanticTokens.motion.duration.normal} ${semanticTokens.motion.easing.easeInOut}`,
+    },
+  ],
+  variants: {
+    mode: {
+      vertical: {
+        marginBottom: '1.5rem',
+        alignSelf: 'stretch',
+      },
+      horizontal: {
+        position: 'relative',
+        whiteSpace: 'nowrap',
+        zIndex: 3,
+        marginBottom: '0.5rem',
+      },
+      horizontal_all: {
+        position: 'relative',
+        whiteSpace: 'nowrap',
+        zIndex: 3,
+        marginBottom: '0.5rem',
+      },
+    },
+    interactive: {
+      true: {
+        cursor: 'pointer',
+        selectors: {
+          '&:hover': {
+            boxShadow: semanticTokens.card.shadow.interactive,
+            transform: 'translateY(-1px)',
+          },
+        },
+      },
+      false: {},
     },
   },
-});
-
-export const timelineTitleContainer = style([
-  sprinkles({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }),
-  {
-    padding: '0.5rem 1rem',
-    borderRadius: '12px',
-    background: `linear-gradient(135deg, ${vars.color.cardBg} 0%, ${vars.color.cardBg}f8 100%)`,
-    boxShadow: '0 2px 12px rgba(0, 0, 0, 0.08)',
-    backdropFilter: 'blur(12px)',
-    border: `1px solid ${vars.color.buttonBorder}`,
-    transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
+  defaultVariants: {
+    mode: 'horizontal',
+    interactive: false,
   },
-]);
-
-globalStyle(`${timelineTitleContainer}.vertical`, {
-  marginBottom: '1.5rem',
-  alignSelf: 'stretch',
 });
 
-globalStyle(`${timelineTitleContainer}.horizontal`, {
-  position: 'relative',
-  whiteSpace: 'nowrap',
-  zIndex: 3,
-  marginBottom: '0.5rem',
-});
-
-globalStyle(`${timelineTitleContainer}.horizontal_all`, {
-  position: 'relative',
-  whiteSpace: 'nowrap',
-  zIndex: 3,
-  marginBottom: '0.5rem',
-});
+// Legacy export for backward compatibility (can be removed later)
+export { wrapper as cardWrapper, timelineTitleContainer as titleContainer };

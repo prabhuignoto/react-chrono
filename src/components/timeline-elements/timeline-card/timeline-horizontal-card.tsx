@@ -3,10 +3,9 @@ import React from 'react';
 import { useTimelineContext } from '../../contexts';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import {
-  timelineTitleContainer,
   wrapper,
+  timelineTitleContainer,
 } from './timeline-horizontal-card.css';
-import { timelineTitleContainer as veTitleContainer } from './timeline-horizontal-card.css';
 import { useTimelineCard } from './hooks/useTimelineCard';
 import TimelinePoint from './timeline-point/timeline-point';
 import TimelineCardPortal from './timeline-card-portal/timeline-card-portal';
@@ -89,7 +88,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   return (
     <div
       ref={wrapperRef}
-      className={`${wrapper} ${modeLower}`}
+      className={wrapper({ orientation: modeLower as 'vertical' | 'horizontal', size: 'md' })}
       data-testid="timeline-item"
     >
       {canShowTimelineContent && (
@@ -143,7 +142,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       />
 
       <div
-        className={`${timelineTitleContainer} ${veTitleContainer} ${titleClass}`}
+        className={`${timelineTitleContainer({ mode: modeLower as 'vertical' | 'horizontal' | 'horizontal_all', interactive: !disableInteraction })} ${titleClass}`}
         data-testid="timeline-title"
       >
         <TimelineItemTitle
