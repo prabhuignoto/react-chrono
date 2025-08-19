@@ -52,7 +52,9 @@ export const ImageDisplay = memo(
         data-testid="timeline-card-content-image"
         width="100%"
         height="auto"
-        style={{ objectFit: (imageFit as React.CSSProperties['objectFit']) ?? 'cover' }}
+        style={{
+          objectFit: (imageFit as React.CSSProperties['objectFit']) ?? 'cover',
+        }}
       />
     </div>
   ),

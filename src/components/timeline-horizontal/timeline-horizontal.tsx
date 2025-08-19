@@ -123,10 +123,14 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
           cardDetailedText={item.cardDetailedText}
           {...(item.url ? { url: item.url } : {})}
           {...(item.media ? { media: item.media } : {})}
-          {...(item.timelineContent ? { timelineContent: item.timelineContent } : {})}
+          {...(item.timelineContent
+            ? { timelineContent: item.timelineContent }
+            : {})}
           {...(item.items ? { items: item.items } : {})}
           {...(item.isNested !== undefined ? { isNested: item.isNested } : {})}
-          {...(item.hasNestedItems !== undefined ? { hasNestedItems: item.hasNestedItems } : {})}
+          {...(item.hasNestedItems !== undefined
+            ? { hasNestedItems: item.hasNestedItems }
+            : {})}
           {...(item.visible !== undefined ? { visible: item.visible } : {})}
           {...(item.active !== undefined ? { active: item.active } : {})}
           onClick={handleItemClick}

@@ -55,15 +55,19 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
         type="button"
         style={{
           ...computeCssVarsFromTheme(theme),
-          height: timelinePointDimension ? `${timelinePointDimension}px` : undefined,
-          width: timelinePointDimension ? `${timelinePointDimension}px` : undefined,
-          background: usingIcon 
-            ? theme?.iconBackgroundColor 
-            : active 
-              ? theme?.secondary 
+          height: timelinePointDimension
+            ? `${timelinePointDimension}px`
+            : undefined,
+          width: timelinePointDimension
+            ? `${timelinePointDimension}px`
+            : undefined,
+          background: usingIcon
+            ? theme?.iconBackgroundColor
+            : active
+              ? theme?.secondary
               : theme?.primary,
-          border: active 
-            ? `${timelinePointDimension ? Math.round(timelinePointDimension * 0.2) : 3}px solid ${theme?.primary}` 
+          border: active
+            ? `${timelinePointDimension ? Math.round(timelinePointDimension * 0.2) : 3}px solid ${theme?.primary}`
             : `2px solid ${theme?.primary}`,
         }}
       >

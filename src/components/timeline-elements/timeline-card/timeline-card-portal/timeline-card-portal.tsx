@@ -71,7 +71,7 @@ const TimelineCardPortal: React.FC<TimelineCardPortalProps> = ({
           margin: showAllCardsHorizontal ? '0 1rem' : '0 auto',
           transform: active ? 'scale(1.02)' : 'scale(1)',
           transition: 'all 0.3s ease-in-out',
-          opacity: active ? 1 : (showAllCardsHorizontal ? 0.7 : 0),
+          opacity: active ? 1 : showAllCardsHorizontal ? 0.7 : 0,
           justifyContent: 'center',
           alignItems: 'center',
         }}
@@ -84,9 +84,13 @@ const TimelineCardPortal: React.FC<TimelineCardPortalProps> = ({
           detailedText={cardDetailedText}
           onShowMore={handleOnShowMore}
           theme={theme}
-          {...(slideShowRunning !== undefined ? { slideShowActive: slideShowRunning } : {})}
+          {...(slideShowRunning !== undefined
+            ? { slideShowActive: slideShowRunning }
+            : {})}
           media={media}
-          {...(onElapsed ? { onElapsed: (id?: string) => id && onElapsed(id) } : {})}
+          {...(onElapsed
+            ? { onElapsed: (id?: string) => id && onElapsed(id) }
+            : {})}
           id={id}
           customContent={customContent}
           {...(hasFocus !== undefined ? { hasFocus } : {})}

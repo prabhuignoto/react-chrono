@@ -51,45 +51,76 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
 
     // Avoid nested toolbar roles if children already provide one
     const hasNestedToolbarRole = React.Children.toArray(children).some(
-      (child) => React.isValidElement(child) && (child.props as any)?.role === 'toolbar',
+      (child) =>
+        React.isValidElement(child) && (child.props as any)?.role === 'toolbar',
     );
 
     return (
       <div
         className={veToolbarWrapper}
         role={hasNestedToolbarRole ? undefined : 'toolbar'}
-        aria-label={hasNestedToolbarRole ? undefined : 'Timeline toolbar'}
+        aria-label={
+          hasNestedToolbarRole ? undefined : 'Timeline toolbar sample'
+        }
         aria-orientation={hasNestedToolbarRole ? undefined : 'horizontal'}
         style={style}
         {...rest}
       >
-        {items.map(({ label, id, icon }, index) => {
-          if (!id) {
-            console.warn('Toolbar item is missing required id property');
-            return null;
-          }
+        {items.map(
+          (
+            { label, id, icon, minimizable, isMinimized, onToggleMinimize },
+            index,
+          ) => {
+            if (!id) {
+              console.warn('Toolbar item is missing required id property');
+              return null;
+            }
 
-          return (
-            <div
-              className={veToolbarListItem}
-              aria-label={label}
-              key={id}
-              role="group"
-            >
-              {icon && <span className={veIconWrapper}>{icon}</span>}
-              {Array.isArray(children) && (children as ReactNode[])[index] && (
-                <span className={veContentWrapper}>
-                  {(children as ReactNode[])[index]}
-                </span>
-              )}
-              {!Array.isArray(children) && index === 0 && children && (
-                <span className={veContentWrapper}>
-                  {children as ReactNode}
-                </span>
-              )}
-            </div>
-          );
-        })}
+            const handleMinimizeToggle = () => {
+              if (onToggleMinimize && minimizable) {
+                onToggleMinimize(id, !isMinimized);
+              }
+            };
+
+            return (
+              <div
+                className={veToolbarListItem}
+                aria-label={label}
+                key={id}
+                role="group"
+              >
+                {icon && <span className={veIconWrapper}>{icon}</span>}
+                {minimizable && (
+                  <button
+                    className={veIconWrapper}
+                    onClick={handleMinimizeToggle}
+                    aria-label={
+                      isMinimized ? `Maximize ${label}` : `Minimize ${label}`
+                    }
+                    type="button"
+                  >
+                    {isMinimized ? '⬜' : '➖'}
+                  </button>
+                )}
+                {!isMinimized &&
+                  Array.isArray(children) &&
+                  (children as ReactNode[])[index] && (
+                    <span className={veContentWrapper}>
+                      {(children as ReactNode[])[index]}
+                    </span>
+                  )}
+                {!isMinimized &&
+                  !Array.isArray(children) &&
+                  index === 0 &&
+                  children && (
+                    <span className={veContentWrapper}>
+                      {children as ReactNode}
+                    </span>
+                  )}
+              </div>
+            );
+          },
+        )}
       </div>
     );
   },

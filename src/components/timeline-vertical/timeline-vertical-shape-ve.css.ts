@@ -108,14 +108,20 @@ globalStyle(`${timelinePointContainer}:focus-visible`, {
 });
 
 // Keyboard navigation focus
-globalStyle(`[data-keyboard-focus='true'] ${timelinePointContainer}:focus-visible`, {
-  outlineColor: `#3b82f6`,
-});
+globalStyle(
+  `[data-keyboard-focus='true'] ${timelinePointContainer}:focus-visible`,
+  {
+    outlineColor: `#3b82f6`,
+  },
+);
 
 // Toolbar navigation focus (hidden)
-globalStyle(`[data-toolbar-navigation='true'] ${timelinePointContainer}:focus-visible`, {
-  outlineColor: 'transparent',
-});
+globalStyle(
+  `[data-toolbar-navigation='true'] ${timelinePointContainer}:focus-visible`,
+  {
+    outlineColor: 'transparent',
+  },
+);
 
 // Disabled state
 globalStyle(`${timelinePointContainer}:disabled`, {

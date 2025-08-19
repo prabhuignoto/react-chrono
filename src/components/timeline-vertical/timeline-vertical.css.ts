@@ -30,6 +30,7 @@ export const verticalItemWrapper = style([
     zIndex: vars.zIndex.verticalItem,
     listStyle: 'none',
     marginBottom: '1.5rem', // Adjusted for vertical spacing
+    border: '1px solid red', // Default border to avoid layout shift
     // marginBlock: '1.5rem',
   },
 ]);
@@ -55,6 +56,7 @@ export const timelineCardContentWrapper = style({
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
+  border: '1px solid blue',
 });
 
 export const timelineCardContentVisible = style({

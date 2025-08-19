@@ -89,28 +89,34 @@ globalStyle(`${timelineWrapper}[data-keyboard-focus='true'] :focus-visible`, {
 });
 
 // Fullscreen browser-specific styles
-globalStyle(`${timelineWrapper}:fullscreen, ${timelineWrapper}:-webkit-full-screen, ${timelineWrapper}:-moz-full-screen, ${timelineWrapper}:-ms-fullscreen`, {
-  background: '#ffffff',
-  padding: '2rem',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-  width: '100vw',
-  height: '100vh',
-  overflowY: 'auto',
-  position: 'fixed',
-  top: '0',
-  left: '0',
-  zIndex: '999999',
-});
+globalStyle(
+  `${timelineWrapper}:fullscreen, ${timelineWrapper}:-webkit-full-screen, ${timelineWrapper}:-moz-full-screen, ${timelineWrapper}:-ms-fullscreen`,
+  {
+    background: '#ffffff',
+    padding: '2rem',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100vw',
+    height: '100vh',
+    overflowY: 'auto',
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    zIndex: '999999',
+  },
+);
 
-globalStyle(`${timelineWrapper}:fullscreen > *, ${timelineWrapper}:-webkit-full-screen > *, ${timelineWrapper}:-moz-full-screen > *, ${timelineWrapper}:-ms-fullscreen > *`, {
-  width: '100%',
-  maxWidth: '1200px',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-});
+globalStyle(
+  `${timelineWrapper}:fullscreen > *, ${timelineWrapper}:-webkit-full-screen > *, ${timelineWrapper}:-moz-full-screen > *, ${timelineWrapper}:-ms-fullscreen > *`,
+  {
+    width: '100%',
+    maxWidth: '1200px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+);
 
 // Safari fullscreen handling
 globalStyle(`${timelineWrapper}:-webkit-full-screen`, {
@@ -124,9 +130,12 @@ globalStyle(`${timelineWrapper}:-moz-full-screen`, {
 });
 
 // Backdrop styles
-globalStyle(`${timelineWrapper}:fullscreen::backdrop, ${timelineWrapper}:-webkit-full-screen::backdrop, ${timelineWrapper}:-moz-full-screen::backdrop, ${timelineWrapper}:-ms-fullscreen::backdrop`, {
-  background: '#ffffff',
-});
+globalStyle(
+  `${timelineWrapper}:fullscreen::backdrop, ${timelineWrapper}:-webkit-full-screen::backdrop, ${timelineWrapper}:-moz-full-screen::backdrop, ${timelineWrapper}:-ms-fullscreen::backdrop`,
+  {
+    background: '#ffffff',
+  },
+);
 
 // Timeline main wrapper base
 const baseMainWrapper = style([
@@ -201,21 +210,24 @@ export const timelineMainWrapper = recipe({
 });
 
 // Fullscreen styles for main wrapper
-globalStyle(`:fullscreen ${timelineMainWrapper}, :-webkit-full-screen ${timelineMainWrapper}, :-moz-full-screen ${timelineMainWrapper}, :-ms-fullscreen ${timelineMainWrapper}`, {
-  background: 'transparent !important',
-  flex: '1',
-  overflowY: 'auto',
-  overflowX: 'visible',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '100%',
-  maxWidth: '1200px',
-  margin: '0 auto',
-  padding: '0 2rem',
-  minHeight: '0',
-});
+globalStyle(
+  `:fullscreen ${timelineMainWrapper}, :-webkit-full-screen ${timelineMainWrapper}, :-moz-full-screen ${timelineMainWrapper}, :-ms-fullscreen ${timelineMainWrapper}`,
+  {
+    background: 'transparent !important',
+    flex: '1',
+    overflowY: 'auto',
+    overflowX: 'visible',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: '0 2rem',
+    minHeight: '0',
+  },
+);
 
 // Timeline main content
 const baseTimelineMain = style({
@@ -279,29 +291,35 @@ export const timelineMain = recipe({
 });
 
 // Fullscreen styles for timeline main
-globalStyle(`:fullscreen ${timelineMain}, :-webkit-full-screen ${timelineMain}, :-moz-full-screen ${timelineMain}, :-ms-fullscreen ${timelineMain}`, {
-  position: 'relative',
-  top: 'auto',
-  left: 'auto',
-  transform: 'none',
-  width: '100%',
-  height: 'auto',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-});
+globalStyle(
+  `:fullscreen ${timelineMain}, :-webkit-full-screen ${timelineMain}, :-moz-full-screen ${timelineMain}, :-ms-fullscreen ${timelineMain}`,
+  {
+    position: 'relative',
+    top: 'auto',
+    left: 'auto',
+    transform: 'none',
+    width: '100%',
+    height: 'auto',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+);
 
-globalStyle(`:fullscreen ${timelineMain}.vertical, :-webkit-full-screen ${timelineMain}.vertical, :-moz-full-screen ${timelineMain}.vertical, :-ms-fullscreen ${timelineMain}.vertical`, {
-  position: 'relative',
-  top: 'auto',
-  left: 'auto',
-  transform: 'none',
-  width: '100%',
-  height: 'auto',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'flex-start',
-});
+globalStyle(
+  `:fullscreen ${timelineMain}.vertical, :-webkit-full-screen ${timelineMain}.vertical, :-moz-full-screen ${timelineMain}.vertical, :-ms-fullscreen ${timelineMain}.vertical`,
+  {
+    position: 'relative',
+    top: 'auto',
+    left: 'auto',
+    transform: 'none',
+    width: '100%',
+    height: 'auto',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+);
 
 // Timeline outline
 export const timelineOutline = recipe({
@@ -397,11 +415,14 @@ export const timelineContentRender = recipe({
 });
 
 // Fullscreen styles for content render
-globalStyle(`:fullscreen ${timelineContentRender}, :-webkit-full-screen ${timelineContentRender}, :-moz-full-screen ${timelineContentRender}, :-ms-fullscreen ${timelineContentRender}`, {
-  width: '100%',
-  maxWidth: '1200px',
-  margin: '0 auto',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flex: '1',
-});
+globalStyle(
+  `:fullscreen ${timelineContentRender}, :-webkit-full-screen ${timelineContentRender}, :-moz-full-screen ${timelineContentRender}, :-ms-fullscreen ${timelineContentRender}`,
+  {
+    width: '100%',
+    maxWidth: '1200px',
+    margin: '0 auto',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: '1',
+  },
+);

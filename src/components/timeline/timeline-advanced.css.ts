@@ -106,9 +106,12 @@ globalStyle(`${timelineWrapperAdvanced}:focus`, {
   outline: '0',
 });
 
-globalStyle(`${timelineWrapperAdvanced}.js-focus-visible :focus:not(.focus-visible)`, {
-  outline: '0',
-});
+globalStyle(
+  `${timelineWrapperAdvanced}.js-focus-visible :focus:not(.focus-visible)`,
+  {
+    outline: '0',
+  },
+);
 
 globalStyle(`${timelineWrapperAdvanced}.js-focus-visible .focus-visible`, {
   outline: '2px solid #528deb',
@@ -116,40 +119,52 @@ globalStyle(`${timelineWrapperAdvanced}.js-focus-visible .focus-visible`, {
 });
 
 // Toolbar navigation focus override
-globalStyle(`${timelineWrapperAdvanced}[data-toolbar-navigation='true'] :focus`, {
-  outline: '0',
-});
+globalStyle(
+  `${timelineWrapperAdvanced}[data-toolbar-navigation='true'] :focus`,
+  {
+    outline: '0',
+  },
+);
 
 // Keyboard navigation focus
-globalStyle(`${timelineWrapperAdvanced}[data-keyboard-focus='true'] :focus-visible`, {
-  outline: '2px solid #528deb',
-  outlineOffset: '2px',
-});
+globalStyle(
+  `${timelineWrapperAdvanced}[data-keyboard-focus='true'] :focus-visible`,
+  {
+    outline: '2px solid #528deb',
+    outlineOffset: '2px',
+  },
+);
 
 // Cross-browser fullscreen support
-globalStyle(`${timelineWrapperAdvanced}:fullscreen, ${timelineWrapperAdvanced}:-webkit-full-screen, ${timelineWrapperAdvanced}:-moz-full-screen, ${timelineWrapperAdvanced}:-ms-fullscreen`, {
-  background: '#ffffff',
-  padding: '2rem',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-  width: '100vw',
-  height: '100vh',
-  overflowY: 'auto',
-  position: 'fixed',
-  top: '0',
-  left: '0',
-  zIndex: '999999',
-});
+globalStyle(
+  `${timelineWrapperAdvanced}:fullscreen, ${timelineWrapperAdvanced}:-webkit-full-screen, ${timelineWrapperAdvanced}:-moz-full-screen, ${timelineWrapperAdvanced}:-ms-fullscreen`,
+  {
+    background: '#ffffff',
+    padding: '2rem',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100vw',
+    height: '100vh',
+    overflowY: 'auto',
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    zIndex: '999999',
+  },
+);
 
 // Fullscreen children styles
-globalStyle(`${timelineWrapperAdvanced}:fullscreen > *, ${timelineWrapperAdvanced}:-webkit-full-screen > *, ${timelineWrapperAdvanced}:-moz-full-screen > *, ${timelineWrapperAdvanced}:-ms-fullscreen > *`, {
-  width: '100%',
-  maxWidth: '1200px',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-});
+globalStyle(
+  `${timelineWrapperAdvanced}:fullscreen > *, ${timelineWrapperAdvanced}:-webkit-full-screen > *, ${timelineWrapperAdvanced}:-moz-full-screen > *, ${timelineWrapperAdvanced}:-ms-fullscreen > *`,
+  {
+    width: '100%',
+    maxWidth: '1200px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+);
 
 // Safari-specific fullscreen
 globalStyle(`${timelineWrapperAdvanced}:-webkit-full-screen`, {
@@ -163,9 +178,12 @@ globalStyle(`${timelineWrapperAdvanced}:-moz-full-screen`, {
 });
 
 // Backdrop styles
-globalStyle(`${timelineWrapperAdvanced}:fullscreen::backdrop, ${timelineWrapperAdvanced}:-webkit-full-screen::backdrop, ${timelineWrapperAdvanced}:-moz-full-screen::backdrop, ${timelineWrapperAdvanced}:-ms-fullscreen::backdrop`, {
-  background: '#ffffff',
-});
+globalStyle(
+  `${timelineWrapperAdvanced}:fullscreen::backdrop, ${timelineWrapperAdvanced}:-webkit-full-screen::backdrop, ${timelineWrapperAdvanced}:-moz-full-screen::backdrop, ${timelineWrapperAdvanced}:-ms-fullscreen::backdrop`,
+  {
+    background: '#ffffff',
+  },
+);
 
 // Advanced timeline main wrapper
 const baseMainWrapperAdvanced = style([
@@ -249,21 +267,24 @@ globalStyle(`${timelineMainWrapperAdvanced}::-webkit-scrollbar-thumb`, {
 });
 
 // Fullscreen styles for main wrapper
-globalStyle(`:fullscreen ${timelineMainWrapperAdvanced}, :-webkit-full-screen ${timelineMainWrapperAdvanced}, :-moz-full-screen ${timelineMainWrapperAdvanced}, :-ms-fullscreen ${timelineMainWrapperAdvanced}`, {
-  background: 'transparent',
-  flex: '1',
-  overflowY: 'auto',
-  overflowX: 'visible',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '100%',
-  maxWidth: '1200px',
-  margin: '0 auto',
-  padding: '0 2rem',
-  minHeight: '0',
-});
+globalStyle(
+  `:fullscreen ${timelineMainWrapperAdvanced}, :-webkit-full-screen ${timelineMainWrapperAdvanced}, :-moz-full-screen ${timelineMainWrapperAdvanced}, :-ms-fullscreen ${timelineMainWrapperAdvanced}`,
+  {
+    background: 'transparent',
+    flex: '1',
+    overflowY: 'auto',
+    overflowX: 'visible',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: '0 2rem',
+    minHeight: '0',
+  },
+);
 
 // Advanced timeline main content
 export const timelineMainAdvanced = recipe({
@@ -310,29 +331,35 @@ export const timelineMainAdvanced = recipe({
 });
 
 // Fullscreen styles for timeline main
-globalStyle(`:fullscreen ${timelineMainAdvanced}, :-webkit-full-screen ${timelineMainAdvanced}, :-moz-full-screen ${timelineMainAdvanced}, :-ms-fullscreen ${timelineMainAdvanced}`, {
-  position: 'relative',
-  top: 'auto',
-  left: 'auto',
-  transform: 'none',
-  width: '100%',
-  height: 'auto',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-});
+globalStyle(
+  `:fullscreen ${timelineMainAdvanced}, :-webkit-full-screen ${timelineMainAdvanced}, :-moz-full-screen ${timelineMainAdvanced}, :-ms-fullscreen ${timelineMainAdvanced}`,
+  {
+    position: 'relative',
+    top: 'auto',
+    left: 'auto',
+    transform: 'none',
+    width: '100%',
+    height: 'auto',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+);
 
-globalStyle(`:fullscreen ${timelineMainAdvanced}.vertical, :-webkit-full-screen ${timelineMainAdvanced}.vertical, :-moz-full-screen ${timelineMainAdvanced}.vertical, :-ms-fullscreen ${timelineMainAdvanced}.vertical`, {
-  position: 'relative',
-  top: 'auto',
-  left: 'auto',
-  transform: 'none',
-  width: '100%',
-  height: 'auto',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'flex-start',
-});
+globalStyle(
+  `:fullscreen ${timelineMainAdvanced}.vertical, :-webkit-full-screen ${timelineMainAdvanced}.vertical, :-moz-full-screen ${timelineMainAdvanced}.vertical, :-ms-fullscreen ${timelineMainAdvanced}.vertical`,
+  {
+    position: 'relative',
+    top: 'auto',
+    left: 'auto',
+    transform: 'none',
+    width: '100%',
+    height: 'auto',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+);
 
 // Advanced outline with proper positioning
 export const timelineOutlineAdvanced = recipe({
@@ -425,11 +452,14 @@ export const timelineContentRenderAdvanced = recipe({
 });
 
 // Fullscreen styles for content render
-globalStyle(`:fullscreen ${timelineContentRenderAdvanced}, :-webkit-full-screen ${timelineContentRenderAdvanced}, :-moz-full-screen ${timelineContentRenderAdvanced}, :-ms-fullscreen ${timelineContentRenderAdvanced}`, {
-  width: '100%',
-  maxWidth: '1200px',
-  margin: '0 auto',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flex: '1',
-});
+globalStyle(
+  `:fullscreen ${timelineContentRenderAdvanced}, :-webkit-full-screen ${timelineContentRenderAdvanced}, :-moz-full-screen ${timelineContentRenderAdvanced}, :-ms-fullscreen ${timelineContentRenderAdvanced}`,
+  {
+    width: '100%',
+    maxWidth: '1200px',
+    margin: '0 auto',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: '1',
+  },
+);

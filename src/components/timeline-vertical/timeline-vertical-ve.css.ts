@@ -36,7 +36,8 @@ globalStyle(`${timelineVerticalWrapper}::before`, {
   top: '0',
   bottom: '0',
   width: '2px',
-  background: 'linear-gradient(to bottom, transparent 0%, var(--timeline-primary-color, #3b82f6) 5%, var(--timeline-primary-color, #3b82f6) 95%, transparent 100%)',
+  background:
+    'linear-gradient(to bottom, transparent 0%, var(--timeline-primary-color, #3b82f6) 5%, var(--timeline-primary-color, #3b82f6) 95%, transparent 100%)',
   transform: 'translateX(-50%)',
   zIndex: '1',
   pointerEvents: 'none',
@@ -380,21 +381,27 @@ globalStyle(`${timelineTitleWrapper}.right[data-mode="VERTICAL_ALTERNATING"]`, {
   paddingRight: '1rem',
 });
 
-globalStyle(`${timelineTitleWrapper}.left[data-mode="VERTICAL_ALTERNATING"].flipped`, {
-  order: '1',
-  justifyContent: 'flex-end',
-  textAlign: 'right',
-  paddingRight: '1rem',
-  paddingLeft: '0',
-});
+globalStyle(
+  `${timelineTitleWrapper}.left[data-mode="VERTICAL_ALTERNATING"].flipped`,
+  {
+    order: '1',
+    justifyContent: 'flex-end',
+    textAlign: 'right',
+    paddingRight: '1rem',
+    paddingLeft: '0',
+  },
+);
 
-globalStyle(`${timelineTitleWrapper}.right[data-mode="VERTICAL_ALTERNATING"].flipped`, {
-  order: '3',
-  justifyContent: 'flex-start',
-  textAlign: 'left',
-  paddingLeft: '1rem',
-  paddingRight: '0',
-});
+globalStyle(
+  `${timelineTitleWrapper}.right[data-mode="VERTICAL_ALTERNATING"].flipped`,
+  {
+    order: '3',
+    justifyContent: 'flex-start',
+    textAlign: 'left',
+    paddingLeft: '1rem',
+    paddingRight: '0',
+  },
+);
 
 // Ensure proper date alignment in vertical mode
 globalStyle(`${timelineTitleWrapper}[data-mode="VERTICAL"]`, {

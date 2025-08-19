@@ -56,7 +56,12 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
         >
           {customContent ?? (
             <TextContent
-              {...{ detailedText, showMore: showMore || false, theme, timelineContent }}
+              {...{
+                detailedText,
+                showMore: showMore || false,
+                theme,
+                timelineContent,
+              }}
             />
           )}
         </div>

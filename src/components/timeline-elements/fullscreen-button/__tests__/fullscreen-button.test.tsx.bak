@@ -20,7 +20,7 @@ const mockTheme: Theme = {
 };
 
 const renderWithTheme = (component: React.ReactElement) => {
-  return render(component);
+  return render(<ThemeProvider theme={mockTheme}>{component}</ThemeProvider>);
 };
 
 describe('FullscreenButton', () => {
@@ -178,12 +178,14 @@ describe('FullscreenButton', () => {
     expect(button).toBeInTheDocument();
 
     rerender(
-      <FullscreenButton
-        isFullscreen={false}
-        onToggle={mockOnToggle}
-        theme={mockTheme}
-        size="large"
-      />,
+      <ThemeProvider theme={mockTheme}>
+        <FullscreenButton
+          isFullscreen={false}
+          onToggle={mockOnToggle}
+          theme={mockTheme}
+          size="large"
+        />
+      </ThemeProvider>,
     );
 
     button = screen.getByRole('button');
@@ -220,11 +222,13 @@ describe('FullscreenButton', () => {
 
     // Rerender with fullscreen active
     rerender(
-      <FullscreenButton
-        isFullscreen={true}
-        onToggle={mockOnToggle}
-        theme={mockTheme}
-      />,
+      <ThemeProvider theme={mockTheme}>
+        <FullscreenButton
+          isFullscreen={true}
+          onToggle={mockOnToggle}
+          theme={mockTheme}
+        />
+      </ThemeProvider>,
     );
 
     // Icon should still be present but representing exit fullscreen

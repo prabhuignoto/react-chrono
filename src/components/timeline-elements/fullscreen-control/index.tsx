@@ -74,8 +74,8 @@ const FullscreenControl = memo(
           size={size}
           {...(className ? { className } : {})}
           {...(ariaLabel ? { ariaLabel } : {})}
-          {...(title || (error ? `Fullscreen unavailable: ${error}` : undefined) 
-            ? { title: title || `Fullscreen unavailable: ${error}` } 
+          {...(title || (error ? `Fullscreen unavailable: ${error}` : undefined)
+            ? { title: title || `Fullscreen unavailable: ${error}` }
             : {})}
           testId={testId}
         />

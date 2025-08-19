@@ -111,7 +111,9 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
             typeof cardTitle === 'string' ? cardTitle : String(cardTitle ?? '')
           }
           {...(url ? { url } : {})}
-          {...(formattedDetailedText ? { cardDetailedText: formattedDetailedText } : {})}
+          {...(formattedDetailedText
+            ? { cardDetailedText: formattedDetailedText }
+            : {})}
           {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
           {...(media ? { media } : {})}
           {...(onElapsed ? { onElapsed } : {})}

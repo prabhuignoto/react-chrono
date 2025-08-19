@@ -15,7 +15,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     <div
       class="timeline-vertical_timelineTitleWrapper__mb2y389 timeline-vertical__mb2y388 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r  "
       data-mode="VERTICAL_ALTERNATING"
-      style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); --timeline-bg-color: #ffffff; --timeline-text-color: #000; --timeline-primary-color: #0f52ba; --timeline-card-bg-color: #ffffff; --timeline-muted-color: #6b7280; --timeline-toolbar-bg-color: #ffffff; --timeline-shadow-color: rgba(0, 0, 0, 0.1); display: flex; width: 10%;"
+      style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); --timeline-bg-color: #ffffff; --timeline-text-color: #000; --timeline-primary-color: #0f52ba; --timeline-card-bg-color: #ffffff; --timeline-muted-color: #6b7280; --timeline-toolbar-bg-color: #ffffff; --timeline-shadow-color: rgba(0, 0, 0, 0.1); display: flex; width: 10%; border: 1px solid red; order: 3; text-align: right;"
     >
       <div
         class="timeline-item-title title timeline-card-content_cardTitleRecipe__chzdno7 timeline-card-content_cardTitleBase__chzdno4 timeline-card-content_cardTitleRecipe_active_false__chzdno9"
@@ -65,22 +65,21 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
       </section>
     </div>
     <div
-      bg="#0f52ba"
-      class="sc-jJLAfE hQeXvh  timeline-vertical-shape_timelinePointWrapper__iy9f2s0"
+      class=" timeline-vertical-shape_timelinePointWrapper__iy9f2s0"
       data-testid="tree-leaf"
-      width="3"
+      style="width: 10%; --line-width: 3px; --timeline-primary: #0f52ba; color: rgb(15, 82, 186);"
     >
       <button
         aria-disabled="false"
         aria-label="Timeline point"
-        class="sc-hwkwBN bgejuJ  timeline-vertical-circle timeline-vertical-shape_timelinePointContainer__iy9f2s1"
+        class=" timeline-vertical-circle timeline-vertical-shape_timelinePointContainer__iy9f2s1"
         data-testid="tree-leaf-click"
         tabindex="0"
       >
         <div
           aria-hidden="true"
-          class="sc-ggWZvA ikWVeC  timeline-vertical-shape_shape__iy9f2s2"
-          dimension="16"
+          class=" timeline-vertical-shape_shape__iy9f2s2   "
+          style="width: 16px; height: 16px; border-color: rgb(15, 82, 186); background-color: rgb(255, 255, 255);"
         />
       </button>
     </div>

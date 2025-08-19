@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import { ThemeProvider } from 'styled-components';
+// ThemeProvider no longer needed with vanilla-extract migration
 import { FullscreenControl } from '../index';
 import { Theme } from '@models/Theme';
 import React from 'react';
@@ -44,14 +44,12 @@ describe('FullscreenControl Basic Tests', () => {
     });
 
     const { container } = render(
-      <ThemeProvider theme={mockTheme}>
-        <FullscreenControl
-          targetRef={targetRef}
-          theme={mockTheme}
-          onEnterFullscreen={mockOnEnter}
-          onExitFullscreen={mockOnExit}
-        />
-      </ThemeProvider>,
+      <FullscreenControl
+        targetRef={targetRef}
+        theme={mockTheme}
+        onEnterFullscreen={mockOnEnter}
+        onExitFullscreen={mockOnExit}
+      />,
     );
 
     // Component may or may not render depending on fullscreen support detection
@@ -72,14 +70,12 @@ describe('FullscreenControl Basic Tests', () => {
     });
 
     const { container } = render(
-      <ThemeProvider theme={mockTheme}>
-        <FullscreenControl
-          targetRef={targetRef}
-          theme={mockTheme}
-          onEnterFullscreen={mockOnEnter}
-          onExitFullscreen={mockOnExit}
-        />
-      </ThemeProvider>,
+      <FullscreenControl
+        targetRef={targetRef}
+        theme={mockTheme}
+        onEnterFullscreen={mockOnEnter}
+        onExitFullscreen={mockOnExit}
+      />,
     );
 
     // Should render nothing when not supported

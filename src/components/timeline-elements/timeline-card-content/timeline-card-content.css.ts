@@ -20,7 +20,7 @@ export const baseCard = style({
   overflow: 'hidden',
   minWidth: '280px',
   maxWidth: '100%',
-  
+
   '@media': {
     '(max-width: 768px)': {
       borderRadius: '12px',
@@ -29,14 +29,15 @@ export const baseCard = style({
     '(max-width: 480px)': {
       borderRadius: '10px',
       minWidth: '200px',
-      boxShadow: '0 2px 12px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.08)',
+      boxShadow:
+        '0 2px 12px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.08)',
     },
     '(max-width: 320px)': {
       minWidth: '180px',
       borderRadius: '8px',
     },
   },
-  
+
   // Add subtle border gradient effect
   '::before': {
     content: '""',
@@ -50,7 +51,8 @@ export const baseCard = style({
     background: `linear-gradient(135deg, ${vars.color.primary}20 0%, transparent 50%, ${vars.color.primary}10 100%)`,
     mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
     maskComposite: 'xor',
-    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+    WebkitMask:
+      'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
     WebkitMaskComposite: 'xor',
     pointerEvents: 'none',
   },
@@ -62,17 +64,20 @@ export const itemContentWrapper = style([
     selectors: {
       '&:hover': {
         transform: 'translateY(-2px)',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)',
+        boxShadow:
+          '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)',
         willChange: 'transform, box-shadow',
       },
       '&:focus:not(:focus-visible):not(.focus-visible)': {
         outline: 'none',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)',
+        boxShadow:
+          '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)',
       },
       '&:focus-visible, &.focus-visible': {
         outline: `2px solid ${vars.color.primary}`,
         outlineOffset: '2px',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)',
+        boxShadow:
+          '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)',
       },
       '&:active': {
         transform: 'translateY(0px)',
@@ -89,7 +94,7 @@ export const itemContentWrapper = style([
     overflow: 'hidden',
     width: '100%',
     gap: '0.5rem',
-    
+
     '@media': {
       '(max-width: 768px)': {
         padding: '0.875rem',
@@ -113,7 +118,7 @@ export const timelineCardHeader = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.25rem',
-  
+
   '@media': {
     '(max-width: 768px)': {
       marginBottom: '0.375rem',
@@ -138,7 +143,7 @@ export const cardTitle = style([
     color: vars.color.cardTitle,
     fontSize: '1.5rem',
     marginBottom: '0.25rem',
-    
+
     '@media': {
       '(max-width: 768px)': {
         fontSize: '1.375rem',
@@ -181,7 +186,7 @@ export const cardSubTitle = style([
     opacity: 0.85,
     fontSize: '0.875rem',
     marginBottom: '0.5rem',
-    
+
     '@media': {
       '(max-width: 768px)': {
         fontSize: '0.8rem',
@@ -202,7 +207,7 @@ export const timelineContentDetails = style({
   lineHeight: 1.5,
   letterSpacing: '0.01em',
   wordBreak: 'break-word',
-  
+
   '@media': {
     '(max-width: 768px)': {
       fontSize: '0.75rem',
@@ -212,8 +217,8 @@ export const timelineContentDetails = style({
       fontSize: '0.7rem',
     },
   },
-  
-  selectors: { 
+
+  selectors: {
     '& + &': { marginTop: '0.5rem' },
   },
 });
@@ -252,7 +257,7 @@ export const timelineSubContent = style({
   color: vars.color.cardDetails,
   lineHeight: 1.5,
   opacity: 0.8,
-  
+
   '@media': {
     '(max-width: 768px)': {
       fontSize: '0.7rem',
@@ -292,7 +297,7 @@ export const showMoreButton = style([
     justifySelf: 'flex-end',
     gap: '0.125rem',
     transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
-    
+
     selectors: {
       '&:hover': {
         background: `linear-gradient(135deg, ${vars.color.primary}12 0%, ${vars.color.primary}08 100%)`,
@@ -311,7 +316,7 @@ export const showMoreButton = style([
         outline: 'none',
       },
     },
-    
+
     '@media': {
       '(max-width: 480px)': {
         fontSize: '0.7rem',
@@ -337,7 +342,7 @@ export const chevronIconWrapper = style([
     width: '1rem',
     transition: `transform ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
     color: 'currentColor',
-    
+
     selectors: {
       [`${showMoreButton}:hover &`]: {
         transform: 'rotate(180deg)',

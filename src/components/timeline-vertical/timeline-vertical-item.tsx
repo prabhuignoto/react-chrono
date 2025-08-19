@@ -119,11 +119,16 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           ...computeCssVarsFromTheme(theme),
           display: !title && mode === 'VERTICAL' ? 'none' : 'flex',
           width: alternateCards ? '37.5%' : '10%',
+          border: '1px solid red', // Temporary border for debugging
+          order: 3,
+          textAlign: !alternateCards ? 'right' : 'left',
         }}
       >
         <TimelineItemTitle
           title={title as string}
-          {...(active !== undefined ? { active: active && !disableInteraction } : {})}
+          {...(active !== undefined
+            ? { active: active && !disableInteraction }
+            : {})}
           theme={theme}
           // Align text based on layout mode
           align={flipLayout && !alternateCards ? 'left' : 'right'}
@@ -187,9 +192,13 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
         onClick={onClick || (() => {})}
         {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
         iconChild={iconChild} // Custom icon
-        {...(timelinePointDimension !== undefined ? { timelinePointDimension } : {})}
+        {...(timelinePointDimension !== undefined
+          ? { timelinePointDimension }
+          : {})}
         {...(lineWidth !== undefined ? { lineWidth } : {})}
-        {...(disableClickOnCircle !== undefined ? { disableClickOnCircle } : {})}
+        {...(disableClickOnCircle !== undefined
+          ? { disableClickOnCircle }
+          : {})}
         {...(cardLess !== undefined ? { cardLess } : {})}
         {...(isMobile !== undefined ? { isMobile } : {})}
       />
@@ -271,6 +280,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           })(),
           order: (() => {
             const flip = !alternateCards && flipLayout;
+            console.log('card will be on order: ', className, alternateCards);
             if (className === 'left') return flip ? 3 : 1;
             return flip ? 1 : 3;
           })(),
@@ -282,15 +292,21 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
             {...(active !== undefined ? { active } : {})}
             branchDir={className} // Pass 'left' or 'right'
             {...(cardSubtitle ? { content: cardSubtitle } : {})}
-            {...(contentDetailsChildren ? { customContent: contentDetailsChildren } : {})}
-            {...(cardDetailedText ? { detailedText: cardDetailedText as string | string[] } : {})}
+            {...(contentDetailsChildren
+              ? { customContent: contentDetailsChildren }
+              : {})}
+            {...(cardDetailedText
+              ? { detailedText: cardDetailedText as string | string[] }
+              : {})}
             {...(hasFocus !== undefined ? { hasFocus } : {})}
             {...(id ? { id } : {})}
             {...(media ? { media } : {})}
             {...(onClick && typeof onClick === 'function' ? { onClick } : {})}
             {...(onElapsed ? { onElapsed } : {})}
             onShowMore={handleShowMore} // Pass down the memoized handler
-            {...(slideShowRunning !== undefined ? { slideShowActive: slideShowRunning } : {})}
+            {...(slideShowRunning !== undefined
+              ? { slideShowActive: slideShowRunning }
+              : {})}
             {...(theme ? { theme } : {})}
             {...(url ? { url } : {})}
             // Flip card content only in non-alternating vertical mode

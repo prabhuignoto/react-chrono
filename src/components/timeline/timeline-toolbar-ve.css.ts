@@ -22,7 +22,8 @@ const baseToolbarWrapper = style([
     flexWrap: 'wrap',
     position: 'sticky',
     top: '0',
-    backgroundColor: 'var(--timeline-toolbar-bg-color, var(--timeline-bg-color, #ffffff))',
+    backgroundColor:
+      'var(--timeline-toolbar-bg-color, var(--timeline-bg-color, #ffffff))',
     backdropFilter: 'blur(10px)',
     WebkitBackdropFilter: 'blur(10px)',
     boxShadow: '0 2px 8px var(--timeline-shadow-color, rgba(0, 0, 0, 0.1))',
@@ -75,25 +76,28 @@ globalStyle(`${toolbarWrapper}`, {
 });
 
 // Fullscreen toolbar styles
-globalStyle(`:fullscreen ${toolbarWrapper}, :-webkit-full-screen ${toolbarWrapper}, :-moz-full-screen ${toolbarWrapper}, :-ms-fullscreen ${toolbarWrapper}`, {
-  position: 'sticky',
-  top: '0',
-  zIndex: '1000001',
-  background: '#ffffff',
-  backdropFilter: 'blur(10px)',
-  WebkitBackdropFilter: 'blur(10px)',
-  borderRadius: '8px',
-  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-  margin: '0 0 1rem 0',
-  width: '100%',
-  maxWidth: '1200px',
-  display: 'flex',
-  visibility: 'visible',
-  opacity: '1',
-  pointerEvents: 'auto',
-  height: 'auto',
-  overflow: 'visible',
-});
+globalStyle(
+  `:fullscreen ${toolbarWrapper}, :-webkit-full-screen ${toolbarWrapper}, :-moz-full-screen ${toolbarWrapper}, :-ms-fullscreen ${toolbarWrapper}`,
+  {
+    position: 'sticky',
+    top: '0',
+    zIndex: '1000001',
+    background: '#ffffff',
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
+    borderRadius: '8px',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+    margin: '0 0 1rem 0',
+    width: '100%',
+    maxWidth: '1200px',
+    display: 'flex',
+    visibility: 'visible',
+    opacity: '1',
+    pointerEvents: 'auto',
+    height: 'auto',
+    overflow: 'visible',
+  },
+);
 
 // Extra controls
 export const extraControls = recipe({
@@ -170,7 +174,8 @@ export const searchWrapper = recipe({
       borderRadius: '6px',
       border: '1px solid #e5e7eb',
       width: '100%',
-      transition: 'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
+      transition:
+        'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
       minHeight: '38px',
       position: 'relative',
       background: '#ffffff',

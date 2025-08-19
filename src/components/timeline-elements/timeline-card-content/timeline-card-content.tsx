@@ -307,7 +307,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
             // Then trigger the click handler which will handle scrolling
             onClick(id || '');
-            
+
             // For horizontal modes, ensure the timeline point gets focus
             if (mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL') {
               requestAnimationFrame(() => {

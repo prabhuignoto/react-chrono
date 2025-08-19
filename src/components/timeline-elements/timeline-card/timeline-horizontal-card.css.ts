@@ -69,7 +69,7 @@ export const timelineTitleContainer = style([
   },
 ]);
 
-globalStyle(`${timelineTitleContainer}.vertical`, { 
+globalStyle(`${timelineTitleContainer}.vertical`, {
   marginBottom: '1.5rem',
   alignSelf: 'stretch',
 });

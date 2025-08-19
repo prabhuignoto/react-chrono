@@ -3,22 +3,21 @@
 exports[`Timeline point > Should match snapshot 1`] = `
 <DocumentFragment>
   <div
-    bg="#0f52ba"
-    class="sc-jJLAfE hQeXvh test_class_name timeline-vertical-shape_timelinePointWrapper__iy9f2s0"
+    class="test_class_name timeline-vertical-shape_timelinePointWrapper__iy9f2s0"
     data-testid="tree-leaf"
-    width="3"
+    style="width: 10%; --line-width: 3px; --timeline-primary: #0f52ba; color: rgb(15, 82, 186);"
   >
     <button
       aria-disabled="false"
       aria-label="Timeline point"
-      class="sc-hwkwBN bgejuJ test_class_name timeline-vertical-circle timeline-vertical-shape_timelinePointContainer__iy9f2s1"
+      class="test_class_name timeline-vertical-circle timeline-vertical-shape_timelinePointContainer__iy9f2s1"
       data-testid="tree-leaf-click"
       tabindex="0"
     >
       <div
         aria-hidden="true"
-        class="sc-ggWZvA htdIMd  timeline-vertical-shape_shape__iy9f2s2"
-        dimension="20"
+        class=" timeline-vertical-shape_shape__iy9f2s2   "
+        style="width: 20px; height: 20px; border-color: rgb(15, 82, 186); background-color: rgb(255, 255, 255);"
       />
     </button>
   </div>

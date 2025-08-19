@@ -12,17 +12,11 @@ import {
   useTimelineStaticConfig,
   useTimelineMemoizedObjects,
 } from '../contexts';
-// Temporarily disabled new Vanilla Extract styles
-// import { shape } from '../timeline-elements/timeline-card/timeline-horizontal-card-ve.css';
-// import {
-//   timelinePointContainer,
-//   timelinePointWrapper,
-// } from './timeline-vertical-shape-ve.css';
-import { Shape } from '../timeline-elements/timeline-card/timeline-horizontal-card.styles';
+// Using shape from veShape import below
 import {
-  TimelinePointContainer,
-  TimelinePointWrapper,
-} from './timeline-vertical-shape.styles';
+  timelinePointContainer,
+  timelinePointWrapper,
+} from './timeline-vertical-shape.css';
 import * as veShape from './timeline-vertical-shape.css'; // additive VE classes
 import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
 
@@ -171,21 +165,29 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
 
     // Render the timeline point structure
     return (
-      <TimelinePointWrapper
-        {...(lineWidth !== undefined ? { width: lineWidth } : {})}
-        {...(theme?.primary ? { bg: theme.primary } : {})}
-        {...(cardLess !== undefined ? { $cardLess: cardLess } : {})}
-        {...(isMobile !== undefined ? { $isMobile: isMobile } : {})}
-        className={`${className} ${veShape.timelinePointWrapper}`}
+      <div
+        className={`${className} ${timelinePointWrapper}`}
+        style={{
+          ...(isMobile ? { width: '25%' } : { width: '10%' }),
+          ...(lineWidth !== undefined && {
+            '--line-width': `${lineWidth}px`,
+          }),
+          ...(theme?.primary && {
+            '--timeline-primary': theme.primary,
+            color: theme.primary,
+          }),
+        }}
         data-testid="tree-leaf"
       >
-        <TimelinePointContainer
-          $hide={disableTimelinePoint}
-          className={`${className} timeline-vertical-circle ${veShape.timelinePointContainer}`}
+        <button
+          className={`${className} timeline-vertical-circle ${timelinePointContainer}`}
           {...clickHandlerProps}
           ref={circleRef}
           data-testid="tree-leaf-click"
           aria-label={timelinePointLabel}
+          style={{
+            ...(disableTimelinePoint && { visibility: 'hidden' }),
+          }}
           aria-disabled={
             finalDisableClickOnCircle ||
             finalDisableInteraction ||
@@ -207,17 +209,26 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
               : 0
           }
         >
-          <Shape
-            theme={theme}
-            {...(timelinePointDimension !== undefined ? { dimension: timelinePointDimension } : {})}
-            $timelinePointShape={timelinePointShape}
-            className={`${circleClass} ${veShape.shape}`}
+          <div
+            className={`${circleClass} ${veShape.shape} ${
+              timelinePointShape === 'diamond' ? 'diamond' : ''
+            } ${active ? 'active' : ''} ${iconChild ? 'using-icon' : ''}`}
+            style={{
+              ...(timelinePointDimension !== undefined && {
+                width: `${timelinePointDimension}px`,
+                height: `${timelinePointDimension}px`,
+              }),
+              ...(theme?.primary && {
+                borderColor: theme.primary,
+                backgroundColor: theme.iconBackgroundColor || theme.primary,
+              }),
+            }}
             aria-hidden="true"
           >
             {iconChild}
-          </Shape>
-        </TimelinePointContainer>
-      </TimelinePointWrapper>
+          </div>
+        </button>
+      </div>
     ) as React.ReactElement;
   },
   // Use default shallow comparison for memoization.

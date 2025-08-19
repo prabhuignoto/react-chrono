@@ -36,7 +36,7 @@ export const timelinePointBase = style({
   overflow: 'hidden',
   padding: 0,
   zIndex: 2,
-  
+
   // Ripple effect
   '::before': {
     content: '""',
@@ -53,7 +53,7 @@ export const timelinePointBase = style({
     zIndex: 3,
     opacity: 0,
   },
-  
+
   selectors: {
     '&:active::before': {
       animation: `${ripple} 0.6s ease-out`,
@@ -67,7 +67,7 @@ export const timelinePointBase = style({
       cursor: 'default',
     },
   },
-  
+
   '@media': {
     '(prefers-reduced-motion: reduce)': {
       animation: 'none',

@@ -376,7 +376,9 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               <LayoutSwitcher
                 isDarkMode={darkMode}
                 theme={theme}
-                onUpdateTimelineMode={(modeString: string) => onUpdateTimelineMode(modeString as TimelineMode)}
+                onUpdateTimelineMode={(modeString: string) =>
+                  onUpdateTimelineMode(modeString as TimelineMode)
+                }
                 {...(mode ? { mode } : {})}
                 position={toolbarPosition}
                 isMobile={isMobile}

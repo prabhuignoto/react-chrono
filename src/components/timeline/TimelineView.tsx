@@ -44,7 +44,7 @@ const TimelineView: React.FC<TimelineViewProps> = ({
   if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
     return (
       <>
-        <div 
+        <div
           className={outlineStyle}
           style={{
             backgroundColor: theme?.primary,

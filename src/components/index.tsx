@@ -52,13 +52,14 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
             active: index === activeItemIndex,
             id,
             hasNestedItems,
-            items: item.items?.map((subItem) => ({
-              ...subItem,
-              _dayjs: dayjs(subItem.date),
-              id: getUniqueID(),
-              isNested: true,
-              visible: true,
-            })) || [],
+            items:
+              item.items?.map((subItem) => ({
+                ...subItem,
+                _dayjs: dayjs(subItem.date),
+                id: getUniqueID(),
+                isNested: true,
+                visible: true,
+              })) || [],
             title: item.date
               ? dayjs(item.date).format(titleDateFormat)
               : item.title,
@@ -294,7 +295,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   return (
     <TimelineContextProvider {...props}>
-      <div style={{ ...computeCssVarsFromTheme(props.theme), width: '100%' }} id="testette">
+      <div
+        style={{ ...computeCssVarsFromTheme(props.theme), width: '100%' }}
+        id="testette"
+      >
         <Timeline
           activeTimelineItem={activeTimelineItem}
           contentDetailsChildren={contentDetailsChildren}

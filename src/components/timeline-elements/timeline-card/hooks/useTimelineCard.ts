@@ -4,10 +4,10 @@ import { useTimelineContext } from '../../../contexts';
 
 interface UseTimelineCardProps {
   active?: boolean;
-  autoScroll?: (params: { 
-    pointOffset?: number; 
-    contentHeight?: number; 
-    contentOffset?: number; 
+  autoScroll?: (params: {
+    pointOffset?: number;
+    contentHeight?: number;
+    contentOffset?: number;
   }) => void;
   slideShowRunning?: boolean;
   cardLess?: boolean;

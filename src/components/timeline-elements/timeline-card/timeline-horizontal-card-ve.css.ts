@@ -101,7 +101,7 @@ export const shape = recipe({
     timelinePointShape: {
       circle: { borderRadius: '50%' },
       square: { borderRadius: '2px' },
-      diamond: { 
+      diamond: {
         borderRadius: '0',
         transform: 'rotate(45deg)',
       },
@@ -162,13 +162,21 @@ export const shape = recipe({
     },
     // Diamond transform adjustments for active state
     {
-      variants: { timelinePointShape: 'diamond', active: true, usingIcon: true },
+      variants: {
+        timelinePointShape: 'diamond',
+        active: true,
+        usingIcon: true,
+      },
       style: {
         transform: 'rotate(45deg) scale(1.1)',
       },
     },
     {
-      variants: { timelinePointShape: 'diamond', active: true, usingIcon: false },
+      variants: {
+        timelinePointShape: 'diamond',
+        active: true,
+        usingIcon: false,
+      },
       style: {
         transform: 'rotate(45deg)',
       },
@@ -418,10 +426,14 @@ export const cardContainer = style({
   padding: '1.5rem',
   background: '#ffffff',
   borderRadius: '12px',
-  WebkitBoxShadow: '0 2px 4px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06), 0 8px 16px rgba(0, 0, 0, 0.08)',
-  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06), 0 8px 16px rgba(0, 0, 0, 0.08)',
-  WebkitTransition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  WebkitBoxShadow:
+    '0 2px 4px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06), 0 8px 16px rgba(0, 0, 0, 0.08)',
+  boxShadow:
+    '0 2px 4px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06), 0 8px 16px rgba(0, 0, 0, 0.08)',
+  WebkitTransition:
+    'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  transition:
+    'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   backdropFilter: 'blur(10px)',
   WebkitBackdropFilter: 'blur(10px)',
 });
@@ -429,8 +441,10 @@ export const cardContainer = style({
 globalStyle(`${cardContainer}:hover`, {
   WebkitTransform: 'translateY(-4px)',
   transform: 'translateY(-4px)',
-  WebkitBoxShadow: '0 4px 8px rgba(0, 0, 0, 0.08), 0 12px 24px rgba(0, 0, 0, 0.12), 0 16px 32px rgba(0, 0, 0, 0.08)',
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.08), 0 12px 24px rgba(0, 0, 0, 0.12), 0 16px 32px rgba(0, 0, 0, 0.08)',
+  WebkitBoxShadow:
+    '0 4px 8px rgba(0, 0, 0, 0.08), 0 12px 24px rgba(0, 0, 0, 0.12), 0 16px 32px rgba(0, 0, 0, 0.08)',
+  boxShadow:
+    '0 4px 8px rgba(0, 0, 0, 0.08), 0 12px 24px rgba(0, 0, 0, 0.12), 0 16px 32px rgba(0, 0, 0, 0.08)',
 });
 
 globalStyle(`${cardContainer}`, {

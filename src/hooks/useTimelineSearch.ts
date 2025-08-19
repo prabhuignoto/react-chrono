@@ -102,7 +102,10 @@ export const useTimelineSearch = ({
       if (results.length > 0) {
         setCurrentMatchIndex(0);
         const firstResult = results[0];
-        const firstMatchData = firstResult !== undefined ? searchableContent[firstResult] : undefined;
+        const firstMatchData =
+          firstResult !== undefined
+            ? searchableContent[firstResult]
+            : undefined;
         if (firstMatchData?.id && firstResult !== undefined) {
           activeItemIndex.current = firstResult;
 
@@ -200,7 +203,10 @@ export const useTimelineSearch = ({
       if (nextIndex === currentMatchIndex) return;
 
       const newTimelineIndex = searchResults[nextIndex];
-      const matchData = newTimelineIndex !== undefined ? searchableContent[newTimelineIndex] : undefined;
+      const matchData =
+        newTimelineIndex !== undefined
+          ? searchableContent[newTimelineIndex]
+          : undefined;
 
       setCurrentMatchIndex(nextIndex);
       if (newTimelineIndex !== undefined) {

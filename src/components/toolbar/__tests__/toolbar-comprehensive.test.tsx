@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { ThemeProvider } from 'styled-components';
+// ThemeProvider no longer needed with vanilla-extract migration
 import { Toolbar } from '../index';
 import { ToolbarItem } from '@models/ToolbarItem';
 import { Theme } from '@models/Theme';
@@ -28,7 +28,7 @@ const mockTheme: Theme = {
 };
 
 const renderWithTheme = (component: React.ReactElement) => {
-  return render(<ThemeProvider theme={mockTheme}>{component}</ThemeProvider>);
+  return render(component);
 };
 
 describe('Toolbar Comprehensive Tests', () => {
@@ -328,15 +328,13 @@ describe('Toolbar Comprehensive Tests', () => {
 
       // Rerender with dark theme
       rerender(
-        <ThemeProvider theme={darkTheme}>
-          <Toolbar items={items} theme={darkTheme}>
-            {items.map((item, index) => (
-              <button key={index} onClick={item.onSelect}>
-                {item.name}
-              </button>
-            ))}
-          </Toolbar>
-        </ThemeProvider>,
+        <Toolbar items={items} theme={darkTheme}>
+          {items.map((item, index) => (
+            <button key={index} onClick={item.onSelect}>
+              {item.name}
+            </button>
+          ))}
+        </Toolbar>,
       );
 
       expect(screen.getByText('Item')).toBeInTheDocument();
@@ -610,19 +608,17 @@ describe('Toolbar Comprehensive Tests', () => {
       // Simulate state change
       const updatedItems = [{ ...items[0], active: true }];
       rerender(
-        <ThemeProvider theme={mockTheme}>
-          <Toolbar items={updatedItems} theme={mockTheme}>
-            {updatedItems.map((item, index) => (
-              <button
-                key={index}
-                onClick={() => item.onSelect(item.id || '', item.name)}
-                aria-pressed={item.active}
-              >
-                {item.name}
-              </button>
-            ))}
-          </Toolbar>
-        </ThemeProvider>,
+        <Toolbar items={updatedItems} theme={mockTheme}>
+          {updatedItems.map((item, index) => (
+            <button
+              key={index}
+              onClick={() => item.onSelect(item.id || '', item.name)}
+              aria-pressed={item.active}
+            >
+              {item.name}
+            </button>
+          ))}
+        </Toolbar>,
       );
 
       const updatedButtons = screen.getAllByRole('button');

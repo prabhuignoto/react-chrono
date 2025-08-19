@@ -30,9 +30,9 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
       <header className={timelineCardHeader}>
         {/* Render mobile title only if cardTitle exists */}
         {isMobile && cardTitle ? (
-          <h3 
-            style={{ 
-              fontSize: '1.5rem', 
+          <h3
+            style={{
+              fontSize: '1.5rem',
               color: theme?.cardTitleColor,
               margin: 0,
               fontWeight: 600,

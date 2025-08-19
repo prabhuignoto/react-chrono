@@ -7,10 +7,10 @@ import useNewScrollPosition from '../effects/useNewScrollPosition';
 import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
 import * as ve from './timeline.css';
 // Temporarily disabled new Vanilla Extract styles due to PostCSS errors
-// import { 
-//   timelineWrapper, 
+// import {
+//   timelineWrapper,
 //   timelineMainWrapper as timelineMainWrapperVE,
-//   timelineContentRender 
+//   timelineContentRender
 // } from './timeline-main.css';
 import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
 import { TimelineToolbar } from './timeline-toolbar';
@@ -452,7 +452,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     if (!items.length || !activeItem) return;
 
     const { title, cardTitle, cardSubtitle, cardDetailedText } = activeItem;
-    
+
     // Use the activeTimelineItem directly instead of activeItemIndex.current
     // to prevent infinite loops caused by ref changes
     onItemSelected?.({
@@ -486,21 +486,25 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             const targetScrollLeft =
               cardLeft - contentLeft + cardWidth / 2 - contentWidth / 2;
             ele.scrollLeft += targetScrollLeft;
-            
+
             // Also ensure the card gets focus
             (card as HTMLElement).focus({ preventScroll: true });
           });
         }
       }
-      
+
       // Also ensure timeline point is visible
       const point = document.querySelector(
         `button[data-testid="timeline-circle"][data-item-id="${activeItem.id}"]`,
       ) as HTMLButtonElement | null;
-      
+
       if (point) {
         requestAnimationFrame(() => {
-          point.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          point.scrollIntoView({
+            behavior: 'smooth',
+            inline: 'center',
+            block: 'nearest',
+          });
         });
       }
     } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
@@ -631,11 +635,18 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
       <div
         ref={timelineMainRef}
-        className={`timeline-main-wrapper ${mode.toLowerCase()} ${ve.timelineMainWrapper({
-          mode: mode === 'VERTICAL' ? 'vertical' : 
-                mode === 'VERTICAL_ALTERNATING' ? 'verticalAlternating' :
-                mode === 'HORIZONTAL_ALL' ? 'horizontalAll' : 'horizontal'
-        })}`}
+        className={`timeline-main-wrapper ${mode.toLowerCase()} ${ve.timelineMainWrapper(
+          {
+            mode:
+              mode === 'VERTICAL'
+                ? 'vertical'
+                : mode === 'VERTICAL_ALTERNATING'
+                  ? 'verticalAlternating'
+                  : mode === 'HORIZONTAL_ALL'
+                    ? 'horizontalAll'
+                    : 'horizontal',
+          },
+        )}`}
         id="timeline-main-wrapper"
         data-testid="timeline-main-wrapper"
         style={computeCssVarsFromTheme(theme, darkMode)}
