@@ -298,10 +298,12 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   // Determine if we should use dark mode based on theme properties
   const isDarkMode = useMemo(() => {
     const t = props.theme;
-    return t?.timelineBgColor === '#000000' ||
+    return (
+      t?.timelineBgColor === '#000000' ||
       t?.cardBgColor === '#1f2937' ||
       t?.textColor === '#ffffff' ||
-      t?.textColor === '#f9fafb';
+      t?.textColor === '#f9fafb'
+    );
   }, [props.theme]);
 
   return (

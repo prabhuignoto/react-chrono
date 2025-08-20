@@ -41,7 +41,11 @@ export const toolbarWrapper = style([
 ]);
 
 export const toolbarListItem = style([
-  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'center' }),
+  sprinkles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }),
   {
     flexShrink: 0,
     gap: '0.5rem',
@@ -65,7 +69,11 @@ export const contentWrapper = style([
 ]);
 
 export const iconWrapper = style([
-  sprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'center' }),
+  sprinkles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }),
   {
     flexShrink: 0,
     width: '1.5rem',

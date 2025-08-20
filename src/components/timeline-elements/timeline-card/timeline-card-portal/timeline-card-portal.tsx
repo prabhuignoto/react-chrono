@@ -97,7 +97,9 @@ const TimelineCardPortal: React.FC<TimelineCardPortalProps> = ({
             nestedCardHeight,
             items,
           })}
-          {...(onElapsed ? { onElapsed: (id?: string) => id && onElapsed(id) } : {})}
+          {...(onElapsed
+            ? { onElapsed: (id?: string) => id && onElapsed(id) }
+            : {})}
         />
       </div>
     );

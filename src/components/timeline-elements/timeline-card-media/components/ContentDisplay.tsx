@@ -127,14 +127,20 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';
+                  e.currentTarget.style.boxShadow =
+                    '0 4px 8px rgba(0, 0, 0, 0.15)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                  e.currentTarget.style.boxShadow =
+                    '0 2px 4px rgba(0, 0, 0, 0.1)';
                 }}
-                aria-label={isMinimized ? 'Expand text overlay' : 'Minimize text overlay'}
-                title={isMinimized ? 'Expand text overlay' : 'Minimize text overlay'}
+                aria-label={
+                  isMinimized ? 'Expand text overlay' : 'Minimize text overlay'
+                }
+                title={
+                  isMinimized ? 'Expand text overlay' : 'Minimize text overlay'
+                }
                 type="button"
               >
                 <div style={{ width: '16px', height: '16px' }}>

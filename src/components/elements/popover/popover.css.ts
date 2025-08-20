@@ -101,9 +101,9 @@ export const selecter = style([
         transform: 'translateY(-1px)',
         color: vars.color.primary,
       },
-      '&:active': { 
-        transform: 'translateY(0) scale(0.97)', 
-        boxShadow: vars.shadow.elevationSm 
+      '&:active': {
+        transform: 'translateY(0) scale(0.97)',
+        boxShadow: vars.shadow.elevationSm,
       },
       '&:focus': {
         outline: `2px solid ${vars.color.primary}`,

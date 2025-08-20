@@ -67,7 +67,7 @@ const baseTimelineMainWrapper = style([
     overscrollBehavior: 'contain',
     width: '100%',
     background: 'transparent',
-    padding: '1.5rem 0',
+    padding: '0.5rem 0',
     position: 'relative',
   },
 ]);
@@ -84,10 +84,10 @@ export const timelineMainWrapper = recipe({
         minHeight: '500px',
       },
       horizontal: {
-        minHeight: '200px',
+        minHeight: '150px',
       },
       horizontalAll: {
-        minHeight: '200px',
+        minHeight: '150px',
       },
     },
   },
@@ -131,7 +131,7 @@ export const outline = style({
   position: 'absolute',
   right: 0,
   left: 0,
-  width: '100%',
+  width: '1000%',
   marginRight: 0,
   marginLeft: 0,
   top: '50%',
@@ -140,18 +140,52 @@ export const outline = style({
   borderRadius: '4px',
 });
 
-export const timelineContentRender = style([
-  sprinkles({ display: 'flex' }),
-  {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    marginRight: 'auto',
-    marginLeft: 'auto',
-    overflowX: 'auto',
-    position: 'relative',
-    minHeight: '200px',
-    padding: '1rem 0',
+export const timelineContentRender = recipe({
+  base: [
+    sprinkles({ display: 'flex' }),
+    {
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      width: '100%',
+      marginRight: 'auto',
+      marginLeft: 'auto',
+      overflowX: 'auto',
+      position: 'relative',
+      overflowY: 'hidden',
+      msOverflowX: 'hidden', // For IE11
+      WebkitOverflowScrolling: 'touch', // For smooth scrolling on iOS
+    },
+  ],
+  variants: {
+    mode: {
+      vertical: {
+        minHeight: '200px',
+        padding: '1rem 0',
+      },
+      verticalAlternating: {
+        minHeight: '200px',
+        padding: '1rem 0',
+      },
+      horizontal: {
+        // Height = card height + padding + timeline point space + title space
+        // Assuming typical card height around 300-350px, add extra for timeline points and titles
+        minHeight: 'calc(var(--card-height, 350px) + 120px)',
+        height: 0,
+        padding: '2rem 1rem', // Increased vertical padding for better spacing
+        paddingTop: '1.5rem', // Space for timeline points above cards
+        paddingBottom: '2.5rem', // Extra space for titles below cards
+      },
+      horizontalAll: {
+        // Similar to horizontal but with slightly more padding for multiple cards
+        minHeight: 'calc(var(--card-height, 350px) + 140px)',
+        height: 0,
+        padding: '2.5rem 1rem', // Even more vertical padding for multiple cards
+        paddingTop: '2rem', // Extra space for timeline points above cards
+        paddingBottom: '3rem', // More space for titles below cards
+      },
+    },
   },
-]);
-
+  defaultVariants: {
+    mode: 'vertical',
+  },
+});

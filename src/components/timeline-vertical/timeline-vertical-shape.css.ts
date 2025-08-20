@@ -55,8 +55,12 @@ export const timelinePointContainer = style({
   cursor: 'pointer',
   transition: `transform ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
   selectors: {
-    '&:hover:not(:disabled)': { transform: 'translate(-50%, -50%) scale(1.05)' },
-    '&:active:not(:disabled)': { transform: 'translate(-50%, -50%) scale(0.95)' },
+    '&:hover:not(:disabled)': {
+      transform: 'translate(-50%, -50%) scale(1.05)',
+    },
+    '&:active:not(:disabled)': {
+      transform: 'translate(-50%, -50%) scale(0.95)',
+    },
     '&:disabled': { cursor: 'default', opacity: 0.6 },
     '&:focus-visible': { outline: '3px solid transparent', outlineOffset: 3 },
   },
@@ -79,7 +83,7 @@ export const shape = style({
   alignItems: 'center',
   justifyContent: 'center',
   selectors: {
-    '&.diamond': { 
+    '&.diamond': {
       transform: 'rotate(45deg)',
       borderRadius: '0',
     },
@@ -87,7 +91,7 @@ export const shape = style({
       overflow: 'visible', // Allow icons to be visible
       background: 'transparent',
     },
-    '&.active.using-icon': { 
+    '&.active.using-icon': {
       boxShadow: '0 0 0 4px rgba(59, 130, 246, 0.2)',
       transform: 'scale(1.1)',
     },
@@ -95,11 +99,11 @@ export const shape = style({
       boxShadow: '0 0 12px rgba(59, 130, 246, 0.6)',
       transform: 'scale(1.1)',
     },
-    '&:hover:not(:disabled):not(.active)': { 
-      transform: 'scale(1.05)' 
+    '&:hover:not(:disabled):not(.active)': {
+      transform: 'scale(1.05)',
     },
-    '&:active:not(:disabled)': { 
-      transform: 'scale(0.95)' 
+    '&:active:not(:disabled)': {
+      transform: 'scale(0.95)',
     },
   },
 });
@@ -127,7 +131,7 @@ globalStyle(`${shape}.using-icon img`, {
   objectFit: 'contain',
 });
 
-// Icon SVG styling  
+// Icon SVG styling
 globalStyle(`${shape}.using-icon svg`, {
   width: '80%',
   height: '80%',
@@ -135,6 +139,9 @@ globalStyle(`${shape}.using-icon svg`, {
 });
 
 // Diamond shape icon adjustments
-globalStyle(`${shape}.diamond.using-icon svg, ${shape}.diamond.using-icon img`, {
-  transform: 'rotate(-45deg)', // Counter-rotate the icon inside rotated diamond
-});
+globalStyle(
+  `${shape}.diamond.using-icon svg, ${shape}.diamond.using-icon img`,
+  {
+    transform: 'rotate(-45deg)', // Counter-rotate the icon inside rotated diamond
+  },
+);

@@ -34,7 +34,7 @@ export const baseContainer = recipe({
       evenly: sprinkles({ justifyContent: 'space-evenly' }),
     },
     spacing: {
-      none: sprinkles({ gap: 'xs' }),  // Use xs instead of '0'
+      none: sprinkles({ gap: 'xs' }), // Use xs instead of '0'
       xs: sprinkles({ gap: 'xs' }),
       sm: sprinkles({ gap: 'sm' }),
       md: sprinkles({ gap: 'md' }),
@@ -187,7 +187,8 @@ export const baseCard = recipe({
           background: semanticTokens.card.border.gradient,
           mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
           maskComposite: 'xor',
-          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          WebkitMask:
+            'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
           WebkitMaskComposite: 'xor',
           pointerEvents: 'none',
         },
@@ -275,15 +276,24 @@ export const baseButton = recipe({
     size: {
       sm: [
         sprinkles({ padding: 'xs', fontSize: 'xs' }),
-        { minWidth: semanticTokens.toolbar.button.size.sm, height: semanticTokens.toolbar.button.size.sm },
+        {
+          minWidth: semanticTokens.toolbar.button.size.sm,
+          height: semanticTokens.toolbar.button.size.sm,
+        },
       ],
       md: [
         sprinkles({ padding: 'sm', fontSize: 'sm' }),
-        { minWidth: semanticTokens.toolbar.button.size.md, height: semanticTokens.toolbar.button.size.md },
+        {
+          minWidth: semanticTokens.toolbar.button.size.md,
+          height: semanticTokens.toolbar.button.size.md,
+        },
       ],
       lg: [
         sprinkles({ padding: 'md', fontSize: 'base' }),
-        { minWidth: semanticTokens.toolbar.button.size.lg, height: semanticTokens.toolbar.button.size.lg },
+        {
+          minWidth: semanticTokens.toolbar.button.size.lg,
+          height: semanticTokens.toolbar.button.size.lg,
+        },
       ],
     },
     shape: {
@@ -413,7 +423,7 @@ export const layoutContainer = recipe({
       full: { maxWidth: 'none' },
     },
     padding: {
-      none: sprinkles({ padding: 'xs' }),  // Use xs instead of '0'
+      none: sprinkles({ padding: 'xs' }), // Use xs instead of '0'
       sm: [
         sprinkles({ paddingX: { mobile: 'sm', tablet: 'md', desktop: 'lg' } }),
       ],
@@ -445,7 +455,7 @@ export const utilityPatterns = {
     whiteSpace: 'nowrap',
     borderWidth: '0',
   }),
-  
+
   // Reset button styles
   resetButton: style({
     background: 'none',
@@ -455,19 +465,19 @@ export const utilityPatterns = {
     font: 'inherit',
     cursor: 'pointer',
   }),
-  
+
   // Reset list styles
   resetList: style({
     listStyleType: 'none',
     padding: '0',
     margin: '0',
   }),
-  
+
   // Smooth scroll
   smoothScroll: style({
     scrollBehavior: 'smooth',
   }),
-  
+
   // Focus trap helper
   focusTrap: style({
     selectors: {

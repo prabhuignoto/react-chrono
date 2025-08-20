@@ -3,29 +3,39 @@
 exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
 <div>
   <div
-    class="timeline-horizontal-card_wrapper__6cplvp0 card-system-v2_cardWrapper__17c6vrh4 component-patterns_baseCard__1inszw11r component-patterns__1inszw11m enhanced-properties_position_relative_mobile__dvkhhvl enhanced-properties_display_flex_mobile__dvkhhv6 enhanced-properties_flexDirection_column_mobile__dvkhhv20 component-patterns_baseCard_size_md__1inszw11t component-patterns__1inszw11o enhanced-properties_padding_md_mobile__dvkhhv79 component-patterns_baseCard_elevation_medium__1inszw11x component-patterns_baseCard_interactive_false__1inszw120 component-patterns_baseCard_bordered_false__1inszw122 component-patterns_baseCard_fullWidth_false__1inszw124 card-system-v2__17c6vrh0 enhanced-properties_width_full_mobile__dvkhhvg3 card-system-v2_cardWrapper_mode_horizontal__17c6vrh5 card-system-v2_cardWrapper_side_left__17c6vrh8 card-system-v2_cardWrapper_size_md__17c6vrhc card-system-v2_cardWrapper_elevation_medium__17c6vrhg card-system-v2_cardWrapper_interactive_true__17c6vrhi component-patterns_baseCard_interactive_true__1inszw11z component-patterns_baseInteractive__1inszw11e component-patterns__1inszw11c enhanced-properties_display_inline-flex_mobile__dvkhhv9 enhanced-properties_cursor_pointer_mobile__dvkhhvpu component-patterns_baseInteractive_state_default__1inszw11f component-patterns_baseInteractive_focusRing_true__1inszw11k card-system-v2_cardWrapper_selected_false__17c6vrhl card-system-v2_cardWrapper_theme_default__17c6vrhm card-system-v2_cardWrapper_visible_false__17c6vrhq card-system-v2__17c6vrh3 enhanced-properties_opacity_0_mobile__dvkhhvlx enhanced-properties_visibility_hidden_mobile__dvkhhvqx card-system-v2_cardWrapper_compound_0__17c6vrhr timeline-horizontal-card_wrapper_size_md__6cplvp4 card-system-v2_cardWrapper__17c6vrh4 component-patterns_baseCard__1inszw11r component-patterns__1inszw11m enhanced-properties_position_relative_mobile__dvkhhvl enhanced-properties_display_flex_mobile__dvkhhv6 enhanced-properties_flexDirection_column_mobile__dvkhhv20 component-patterns_baseCard_size_md__1inszw11t component-patterns__1inszw11o enhanced-properties_padding_md_mobile__dvkhhv79 component-patterns_baseCard_elevation_medium__1inszw11x component-patterns_baseCard_interactive_false__1inszw120 component-patterns_baseCard_bordered_false__1inszw122 component-patterns_baseCard_fullWidth_false__1inszw124 card-system-v2__17c6vrh0 enhanced-properties_width_full_mobile__dvkhhvg3 card-system-v2_cardWrapper_mode_vertical__17c6vrh6 card-system-v2_cardWrapper_side_left__17c6vrh8 card-system-v2_cardWrapper_size_md__17c6vrhc card-system-v2_cardWrapper_elevation_medium__17c6vrhg card-system-v2_cardWrapper_interactive_false__17c6vrhj card-system-v2_cardWrapper_selected_false__17c6vrhl card-system-v2_cardWrapper_theme_default__17c6vrhm card-system-v2_cardWrapper_visible_false__17c6vrhq card-system-v2__17c6vrh3 enhanced-properties_opacity_0_mobile__dvkhhvlx enhanced-properties_visibility_hidden_mobile__dvkhhvqx"
+    class="timeline-horizontal-item"
     data-testid="timeline-item"
+    style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; width: 100%; height: 100%; position: relative; gap: 1rem;"
   >
     <div
-      class="timeline-point_shapeWrapper__mpv93b3 timeline-point__mpv93b2 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
+      class="timeline-point-section"
+      style="display: flex; justify-content: center; align-items: center; padding: 0.5rem; z-index: 10; position: relative;"
     >
-      <button
-        aria-disabled="false"
-        aria-label=""
-        aria-selected="true"
-        class="timeline-circle using-icon vertical_alternating active timeline-point__mpv93b5 timeline-point_timelinePointBase__mpv93b4 timeline-point_timelinePoint_shape_circle__mpv93b6 timeline-point_timelinePoint_usingIcon_true__mpv93b9 timeline-point_timelinePoint_active_true__mpv93bb timeline-point_timelinePoint_disabled_false__mpv93be using-icon active"
-        data-item-id="id-12345"
-        data-testid="timeline-circle"
-        style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); --timeline-bg-color: #ffffff; --timeline-text-color: #000; --timeline-primary-color: #0f52ba; --timeline-card-bg-color: #ffffff; --timeline-muted-color: #6b7280; --timeline-toolbar-bg-color: #ffffff; --timeline-shadow-color: rgba(0, 0, 0, 0.1); height: 16px; width: 16px; background: rgb(255, 255, 255); border: 3px solid rgb(15, 82, 186); color: rgb(15, 82, 186);"
-        tabindex="0"
-        type="button"
+      <div
+        class="timeline-point_shapeWrapper__mpv93b3 timeline-point__mpv93b2 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
       >
-        icon child
-      </button>
+        <button
+          aria-disabled="false"
+          aria-label=""
+          aria-selected="true"
+          class="timeline-circle using-icon vertical_alternating active timeline-point__mpv93b5 timeline-point_timelinePointBase__mpv93b4 timeline-point_timelinePoint_shape_circle__mpv93b6 timeline-point_timelinePoint_usingIcon_true__mpv93b9 timeline-point_timelinePoint_active_true__mpv93bb timeline-point_timelinePoint_disabled_false__mpv93be using-icon active"
+          data-item-id="id-12345"
+          data-testid="timeline-circle"
+          style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); --timeline-bg-color: #ffffff; --timeline-text-color: #000; --timeline-primary-color: #0f52ba; --timeline-card-bg-color: #ffffff; --timeline-muted-color: #6b7280; --timeline-toolbar-bg-color: #ffffff; --timeline-shadow-color: rgba(0, 0, 0, 0.1); height: 16px; width: 16px; background: rgb(255, 255, 255); border: 3px solid rgb(15, 82, 186); color: rgb(15, 82, 186);"
+          tabindex="0"
+          type="button"
+        >
+          icon child
+        </button>
+      </div>
     </div>
     <div
-      class="timeline-horizontal-card_timelineTitleContainer__6cplvp7 card-system-v2_cardHeader__17c6vrhv component-patterns_baseContainer__1inszw1o component-patterns__1inszw10 enhanced-properties_position_relative_mobile__dvkhhvl enhanced-properties_display_flex_mobile__dvkhhv6 component-patterns_baseContainer_direction_row__1inszw1p component-patterns__1inszw11 enhanced-properties_flexDirection_row_mobile__dvkhhv1x component-patterns_baseContainer_alignment_center__1inszw1u component-patterns__1inszw16 enhanced-properties_alignItems_center_mobile__dvkhhv2u component-patterns_baseContainer_distribution_start__1inszw1y component-patterns__1inszw1a enhanced-properties_justifyContent_flex-start_mobile__dvkhhv29 component-patterns_baseContainer_spacing_sm__1inszw116 component-patterns__1inszw1i enhanced-properties_gap_sm_mobile__dvkhhv4c component-patterns_baseContainer_wrap_false__1inszw11b component-patterns__1inszw1n enhanced-properties_flexWrap_nowrap_mobile__dvkhhv3o card-system-v2__17c6vrhu enhanced-properties_width_full_mobile__dvkhhvg3 enhanced-properties_padding_xs_mobile__dvkhhv73 enhanced-properties_marginBottom_sm_mobile__dvkhhvco card-system-v2_cardHeader_variant_emphasized__17c6vrhy timeline-horizontal-card__6cplvp6 enhanced-properties_justifyContent_center_mobile__dvkhhv2c timeline-horizontal-card_timelineTitleContainer_interactive_true__6cplvpb vertical_alternating TOP"
-      data-testid="timeline-title"
+      class="timeline-card-section"
+      style="display: flex; justify-content: center; align-items: center; width: 100%; flex-grow: 1;"
+    />
+    <div
+      class="timeline-title-section"
+      style="display: flex; justify-content: center; align-items: center; padding: 0.5rem; min-height: 3rem; position: relative; z-index: 5;"
     >
       <div
         class="timeline-item-title active title timeline-card-content_cardTitleRecipe__chzdno7 timeline-card-content_cardTitleBase__chzdno4 timeline-card-content_cardTitleRecipe_active_true__chzdno8"

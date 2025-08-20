@@ -19,26 +19,33 @@ export const responsiveProperties = defineProperties({
     overflow: ['visible', 'hidden', 'scroll', 'auto'],
     overflowX: ['visible', 'hidden', 'scroll', 'auto'],
     overflowY: ['visible', 'hidden', 'scroll', 'auto'],
-    
+
     // Flexbox & Grid
     flexDirection: ['row', 'column', 'row-reverse', 'column-reverse'],
     justifyContent: [
-      'flex-start', 
-      'center', 
-      'flex-end', 
-      'space-between', 
-      'space-around', 
-      'space-evenly'
+      'flex-start',
+      'center',
+      'flex-end',
+      'space-between',
+      'space-around',
+      'space-evenly',
     ],
     alignItems: ['flex-start', 'center', 'flex-end', 'stretch', 'baseline'],
-    alignSelf: ['auto', 'flex-start', 'center', 'flex-end', 'stretch', 'baseline'],
+    alignSelf: [
+      'auto',
+      'flex-start',
+      'center',
+      'flex-end',
+      'stretch',
+      'baseline',
+    ],
     flexWrap: ['nowrap', 'wrap', 'wrap-reverse'],
     flexGrow: [0, 1],
     flexShrink: [0, 1],
     gap: designTokens.spacing,
     columnGap: designTokens.spacing,
     rowGap: designTokens.spacing,
-    
+
     // Grid
     gridTemplateColumns: {
       1: 'repeat(1, minmax(0, 1fr))',
@@ -57,7 +64,7 @@ export const responsiveProperties = defineProperties({
       span3: 'span 3 / span 3',
       span4: 'span 4 / span 4',
     },
-    
+
     // Spacing with responsive support
     padding: designTokens.spacing,
     paddingTop: designTokens.spacing,
@@ -95,7 +102,7 @@ export const responsiveProperties = defineProperties({
       ...designTokens.spacing,
       auto: 'auto',
     },
-    
+
     // Dimensions
     width: {
       auto: 'auto',
@@ -151,7 +158,7 @@ export const responsiveProperties = defineProperties({
       full: '100%',
       screen: '100vh',
     },
-    
+
     // Visual
     borderRadius: designTokens.radius,
     borderTopLeftRadius: designTokens.radius,
@@ -176,7 +183,7 @@ export const responsiveProperties = defineProperties({
       95: '0.95',
       100: '1',
     },
-    
+
     // Typography
     fontSize: designTokens.typography.fontSize,
     fontWeight: designTokens.typography.fontWeight,
@@ -184,29 +191,29 @@ export const responsiveProperties = defineProperties({
     textAlign: ['left', 'center', 'right', 'justify'],
     textTransform: ['none', 'uppercase', 'lowercase', 'capitalize'],
     textDecoration: ['none', 'underline', 'line-through'],
-    
+
     // Z-Index
     zIndex: designTokens.zIndex,
-    
+
     // Cursor
     cursor: [
-      'auto', 
-      'default', 
-      'pointer', 
-      'wait', 
-      'text', 
-      'move', 
-      'help', 
-      'not-allowed'
+      'auto',
+      'default',
+      'pointer',
+      'wait',
+      'text',
+      'move',
+      'help',
+      'not-allowed',
     ],
-    
+
     // User interaction
     pointerEvents: ['auto', 'none'],
     userSelect: ['auto', 'none', 'text', 'all'],
-    
+
     // Visibility
     visibility: ['visible', 'hidden'],
-    
+
     // Transform
     transform: {
       none: 'none',
@@ -231,7 +238,7 @@ export const staticProperties = defineProperties({
       '4': '4px',
     },
     borderStyle: ['solid', 'dashed', 'dotted', 'none'],
-    
+
     // Background properties
     backgroundRepeat: ['repeat', 'no-repeat', 'repeat-x', 'repeat-y'],
     backgroundSize: ['auto', 'cover', 'contain'],
@@ -246,16 +253,23 @@ export const staticProperties = defineProperties({
       'bottom left',
       'bottom right',
     ],
-    
+
     // List properties
     listStyleType: ['none', 'disc', 'decimal'],
     listStylePosition: ['inside', 'outside'],
-    
+
     // Table properties
     borderCollapse: ['separate', 'collapse'],
-    
+
     // Animation properties
-    transitionProperty: ['none', 'all', 'colors', 'opacity', 'shadow', 'transform'],
+    transitionProperty: [
+      'none',
+      'all',
+      'colors',
+      'opacity',
+      'shadow',
+      'transform',
+    ],
     transitionDuration: {
       75: '75ms',
       100: '100ms',
@@ -266,8 +280,14 @@ export const staticProperties = defineProperties({
       700: '700ms',
       1000: '1000ms',
     },
-    transitionTimingFunction: ['linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out'],
-    
+    transitionTimingFunction: [
+      'linear',
+      'ease',
+      'ease-in',
+      'ease-out',
+      'ease-in-out',
+    ],
+
     // Order for flexbox/grid
     order: {
       first: '-9999',

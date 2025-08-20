@@ -32,7 +32,7 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
 }) => {
   // Get disableTimelinePoint from context to match vertical timeline behavior
   const { disableTimelinePoint } = useTimelineContext();
-  
+
   // Focus is now handled by useTimelineNavigation hook
   // Only during keyboard navigation, not toolbar navigation
 

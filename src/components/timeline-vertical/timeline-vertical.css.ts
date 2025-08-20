@@ -177,6 +177,14 @@ export const timelineTitleWrapper = style([
 ]);
 
 // Additional static variants for common use cases
-export const verticalItemWrapperVisible = verticalItemWrapper({ visible: true });
-export const verticalItemWrapperLeft = verticalItemWrapper({ alignment: 'left', alternating: false });
-export const verticalItemWrapperRight = verticalItemWrapper({ alignment: 'right', alternating: false });
+export const verticalItemWrapperVisible = verticalItemWrapper({
+  visible: true,
+});
+export const verticalItemWrapperLeft = verticalItemWrapper({
+  alignment: 'left',
+  alternating: false,
+});
+export const verticalItemWrapperRight = verticalItemWrapper({
+  alignment: 'right',
+  alternating: false,
+});

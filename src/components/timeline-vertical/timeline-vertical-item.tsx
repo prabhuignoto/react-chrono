@@ -97,12 +97,12 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       // Alternating mode: left side = card first (1), right side = card last (3)
       return className === 'left' ? 1 : 3;
     }
-    
+
     if (flipLayout) {
       // Vertical flip mode: card first (1)
       return 1;
     }
-    
+
     // Standard vertical mode: card last (3)
     return 3;
   }, [alternateCards, flipLayout, className]);
@@ -112,12 +112,12 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       // Alternating mode: left side = title last (3), right side = title first (1)
       return className === 'left' ? 3 : 1;
     }
-    
+
     if (flipLayout) {
       // Vertical flip mode: title last (3)
       return 3;
     }
-    
+
     // Standard vertical mode: title first (1)
     return 1;
   }, [alternateCards, flipLayout, className]);
@@ -154,12 +154,14 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     () => ({
       display: !title && mode === 'VERTICAL' ? 'none' : 'flex',
       width: alternateCards ? '37.5%' : '10%',
-      // Fix text alignment for alternating mode: 
+      // Fix text alignment for alternating mode:
       // - Left side (title appears last): align left
       // - Right side (title appears first): align right
-      textAlign: alternateCards 
-        ? (className === 'left' ? 'left' : 'right')
-        : 'right' as 'left' | 'right',
+      textAlign: alternateCards
+        ? className === 'left'
+          ? 'left'
+          : 'right'
+        : ('right' as 'left' | 'right'),
       align: (flipLayout && !alternateCards ? 'left' : 'right') as
         | 'left'
         | 'right',
@@ -197,7 +199,9 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           title={title as string}
           theme={theme}
           align={titleConfig.align}
-          {...(active !== undefined ? { active: active && !disableInteraction } : {})}
+          {...(active !== undefined
+            ? { active: active && !disableInteraction }
+            : {})}
           {...pickDefined({
             classString: classNames?.title,
           })}
@@ -248,39 +252,42 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   );
 
   // TimelinePoint props configuration
-  const timelinePointProps = useMemo(() => ({
-    className,
-    mode,
-    onActive: handleOnActive,
-    onClick: onClick || (() => {}),
-    isMobile,
-    ...pickDefined({
+  const timelinePointProps = useMemo(
+    () => ({
+      className,
+      mode,
+      onActive: handleOnActive,
+      onClick: onClick || (() => {}),
+      isMobile,
+      ...pickDefined({
+        active,
+        alternateCards,
+        id,
+        slideShowRunning,
+        iconChild,
+        timelinePointDimension,
+        lineWidth,
+        disableClickOnCircle,
+        cardLess,
+      }),
+    }),
+    [
       active,
       alternateCards,
+      className,
       id,
+      mode,
+      handleOnActive,
+      onClick,
       slideShowRunning,
       iconChild,
       timelinePointDimension,
       lineWidth,
       disableClickOnCircle,
       cardLess,
-    }),
-  }), [
-    active,
-    alternateCards,
-    className,
-    id,
-    mode,
-    handleOnActive,
-    onClick,
-    slideShowRunning,
-    iconChild,
-    timelinePointDimension,
-    lineWidth,
-    disableClickOnCircle,
-    cardLess,
-    isMobile,
-  ]);
+      isMobile,
+    ],
+  );
 
   const TimelinePointMemo = useMemo(
     () => (
@@ -328,10 +335,14 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   // Render the complete timeline item structure
   return (
     <li
-      className={`${verticalItemWrapper({ 
+      className={`${verticalItemWrapper({
         visible: visible !== false,
-        alignment: alternateCards ? (className === 'left' ? 'left' : 'right') : 'center',
-        alternating: alternateCards 
+        alignment: alternateCards
+          ? className === 'left'
+            ? 'left'
+            : 'right'
+          : 'center',
+        alternating: alternateCards,
       })} ${verticalItemClass} ${isNested ? verticalItemWrapperNested : ''}`}
       data-testid="vertical-item-row"
       data-item-id={id}
@@ -357,8 +368,18 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           // Add proper spacing for card content
           paddingLeft: alternateCards ? '0' : '0.75rem',
           paddingRight: alternateCards ? '0' : '0.75rem',
-          marginLeft: alternateCards && className === 'left' ? '0' : alternateCards && className === 'right' ? '1rem' : '0',
-          marginRight: alternateCards && className === 'right' ? '0' : alternateCards && className === 'left' ? '1rem' : '0',
+          marginLeft:
+            alternateCards && className === 'left'
+              ? '0'
+              : alternateCards && className === 'right'
+                ? '1rem'
+                : '0',
+          marginRight:
+            alternateCards && className === 'right'
+              ? '0'
+              : alternateCards && className === 'left'
+                ? '1rem'
+                : '0',
         }}
       >
         {!cardLess && (

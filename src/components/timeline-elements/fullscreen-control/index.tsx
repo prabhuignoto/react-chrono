@@ -78,7 +78,9 @@ const FullscreenControl = memo(
             className,
             ariaLabel,
           })}
-          {...(title || error ? { title: title || `Fullscreen unavailable: ${error}` } : {})}
+          {...(title || error
+            ? { title: title || `Fullscreen unavailable: ${error}` }
+            : {})}
         />
       );
     },

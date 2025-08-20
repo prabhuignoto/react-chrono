@@ -111,10 +111,12 @@ export const useTimelineCard = ({
     [active, iconChild, modeLower],
   );
 
-  const canShowTimelineContent = useMemo(
-    () => (active && !cardLess) || showAllCardsHorizontal,
-    [active, cardLess, showAllCardsHorizontal],
-  );
+  const canShowTimelineContent = useMemo(() => {
+    // In horizontal_all mode with showAllCardsHorizontal, always show content
+    // In regular horizontal mode, only show content for active items (unless cardLess)
+    const shouldShowContent = showAllCardsHorizontal || (active && !cardLess);
+    return shouldShowContent;
+  }, [active, cardLess, showAllCardsHorizontal]);
 
   return {
     circleRef,

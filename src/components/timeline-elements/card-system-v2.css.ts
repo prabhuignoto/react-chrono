@@ -42,23 +42,12 @@ export const cardWrapper = recipe({
     side: {
       left: {},
       right: {},
-      center: [
-        sprinkles({ marginLeft: 'auto', marginRight: 'auto' }),
-      ],
+      center: [sprinkles({ marginLeft: 'auto', marginRight: 'auto' })],
     },
     size: {
-      sm: [
-        componentPatterns.card({ size: 'sm' }),
-        { minHeight: '120px' },
-      ],
-      md: [
-        componentPatterns.card({ size: 'md' }),
-        { minHeight: '160px' },
-      ],
-      lg: [
-        componentPatterns.card({ size: 'lg' }),
-        { minHeight: '200px' },
-      ],
+      sm: [componentPatterns.card({ size: 'sm' }), { minHeight: '120px' }],
+      md: [componentPatterns.card({ size: 'md' }), { minHeight: '160px' }],
+      lg: [componentPatterns.card({ size: 'lg' }), { minHeight: '200px' }],
     },
     elevation: {
       flat: [componentPatterns.card({ elevation: 'flat' })],
@@ -169,7 +158,7 @@ export const cardHeader = recipe({
     }),
     sprinkles({
       width: 'full',
-      padding: 'xs',  // Use valid padding value
+      padding: 'xs', // Use valid padding value
       marginBottom: 'sm',
     }),
     {
@@ -352,7 +341,8 @@ export const cardMedia = recipe({
             content: '""',
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(45deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%)',
+            background:
+              'linear-gradient(45deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%)',
           },
         },
       ],
@@ -493,14 +483,8 @@ export const cardBadge = recipe({
       },
     },
     size: {
-      sm: [
-        sprinkles({ fontSize: 'xs', padding: 'xs' }),
-        { minHeight: '20px' },
-      ],
-      md: [
-        sprinkles({ fontSize: 'sm', padding: 'sm' }),
-        { minHeight: '24px' },
-      ],
+      sm: [sprinkles({ fontSize: 'xs', padding: 'xs' }), { minHeight: '20px' }],
+      md: [sprinkles({ fontSize: 'sm', padding: 'sm' }), { minHeight: '24px' }],
     },
     position: {
       inline: {},
@@ -556,7 +540,7 @@ export const skeletonLine = style([
     height: '12px',
     background: `${semanticTokens.card.border.color}20`,
     animation: `pulse ${semanticTokens.motion.duration.slow} ${semanticTokens.motion.easing.easeInOut} infinite`,
-    
+
     selectors: {
       '&:nth-child(1)': { width: '100%' },
       '&:nth-child(2)': { width: '85%' },
@@ -608,11 +592,11 @@ const pulseKeyframes = keyframes({
 });
 
 const bounceKeyframes = keyframes({
-  '0%, 100%': { 
+  '0%, 100%': {
     transform: 'translateY(0) scale(1)',
     animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
   },
-  '50%': { 
+  '50%': {
     transform: 'translateY(-5px) scale(1.02)',
     animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)',
   },
@@ -645,25 +629,32 @@ export const cardSystem = {
 // Utility functions for card styling
 export const cardUtils = {
   // Calculate card width based on mode and constraints
-  getCardWidth: (mode: 'horizontal' | 'vertical' | 'alternating', isMobile: boolean) => {
+  getCardWidth: (
+    mode: 'horizontal' | 'vertical' | 'alternating',
+    isMobile: boolean,
+  ) => {
     if (mode === 'horizontal') {
       return isMobile ? '280px' : '320px';
     }
     return '100%';
   },
-  
+
   // Get animation delay for staggered animations
   getAnimationDelay: (index: number, staggerDelay = 100) => {
     return `${index * staggerDelay}ms`;
   },
-  
+
   // Calculate if card should be truncated
   shouldTruncateContent: (content: string, maxLength = 200) => {
     return content.length > maxLength;
   },
-  
+
   // Get appropriate card elevation based on interaction
-  getElevation: (isInteractive: boolean, isSelected: boolean, isHovered: boolean) => {
+  getElevation: (
+    isInteractive: boolean,
+    isSelected: boolean,
+    isHovered: boolean,
+  ) => {
     if (isSelected) return 'high' as const;
     if (isHovered && isInteractive) return 'high' as const;
     if (isInteractive) return 'medium' as const;

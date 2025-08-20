@@ -1,8 +1,14 @@
 import { createSprinkles } from '@vanilla-extract/sprinkles';
-import { responsiveProperties, staticProperties } from './enhanced-properties.css';
+import {
+  responsiveProperties,
+  staticProperties,
+} from './enhanced-properties.css';
 
 // Create enhanced sprinkles system
-export const sprinkles = createSprinkles(responsiveProperties, staticProperties);
+export const sprinkles = createSprinkles(
+  responsiveProperties,
+  staticProperties,
+);
 
 // Create responsive-only sprinkles for specific use cases
 export const responsiveSprinkles = createSprinkles(responsiveProperties);
@@ -23,58 +29,58 @@ export const sprinkleUtils = {
     alignItems: 'center',
     justifyContent: 'center',
   }),
-  
+
   // Full size helper
   fullSize: sprinkles({
     width: 'full',
     height: 'full',
   }),
-  
+
   // Absolute positioning helpers
   absoluteFull: sprinkles({
     position: 'absolute',
     width: 'full',
     height: 'full',
   }),
-  
+
   // Hidden helper
   hidden: sprinkles({
     display: 'none',
   }),
-  
+
   // Visually hidden but accessible
   srOnly: sprinkles({
     position: 'absolute',
     overflow: 'hidden',
   }),
-  
+
   // Reset list styles
   resetList: sprinkles({
     listStyleType: 'none',
   }),
-  
+
   // Flex column helper
   flexCol: sprinkles({
     display: 'flex',
     flexDirection: 'column',
   }),
-  
+
   // Flex row helper
   flexRow: sprinkles({
     display: 'flex',
     flexDirection: 'row',
   }),
-  
+
   // Grid helper
   grid: sprinkles({
     display: 'grid',
   }),
-  
+
   // Interactive cursor
   interactive: sprinkles({
     cursor: 'pointer',
   }),
-  
+
   // Disabled state
   disabled: sprinkles({
     cursor: 'not-allowed',
@@ -86,48 +92,60 @@ export const sprinkleUtils = {
 // Responsive breakpoint helpers
 export const breakpoints = {
   mobile: (styles: ResponsiveSprinkles) => sprinkles({ ...styles }),
-  tablet: (styles: ResponsiveSprinkles) => sprinkles({ 
-    ...Object.fromEntries(
-      Object.entries(styles).map(([key, value]) => [key, { mobile: undefined, tablet: value }])
-    ) 
-  }),
-  desktop: (styles: ResponsiveSprinkles) => sprinkles({ 
-    ...Object.fromEntries(
-      Object.entries(styles).map(([key, value]) => [key, { mobile: undefined, tablet: undefined, desktop: value }])
-    ) 
-  }),
+  tablet: (styles: ResponsiveSprinkles) =>
+    sprinkles({
+      ...Object.fromEntries(
+        Object.entries(styles).map(([key, value]) => [
+          key,
+          { mobile: undefined, tablet: value },
+        ]),
+      ),
+    }),
+  desktop: (styles: ResponsiveSprinkles) =>
+    sprinkles({
+      ...Object.fromEntries(
+        Object.entries(styles).map(([key, value]) => [
+          key,
+          { mobile: undefined, tablet: undefined, desktop: value },
+        ]),
+      ),
+    }),
 };
 
 // Layout composition helpers (simplified)
 export const layouts = {
   // Stack layout (flex column with gap)
-  stack: () => sprinkles({
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 'md',
-  }),
-  
+  stack: () =>
+    sprinkles({
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 'md',
+    }),
+
   // Inline layout (flex row with gap)
-  inline: () => sprinkles({
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 'md',
-  }),
-  
+  inline: () =>
+    sprinkles({
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 'md',
+    }),
+
   // Grid layout
-  gridLayout: () => sprinkles({
-    display: 'grid',
-    gridTemplateColumns: 1,
-    gap: 'md',
-  }),
-  
+  gridLayout: () =>
+    sprinkles({
+      display: 'grid',
+      gridTemplateColumns: 1,
+      gap: 'md',
+    }),
+
   // Cluster layout (flex wrap with gap)
-  cluster: () => sprinkles({
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: 'md',
-  }),
+  cluster: () =>
+    sprinkles({
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 'md',
+    }),
 };
 
 // Animation helpers (simplified)
@@ -138,7 +156,7 @@ export const animations = {
     transitionDuration: 150,
     transitionTimingFunction: 'ease-out',
   }),
-  
+
   // Slow transitions
   slowTransition: staticSprinkles({
     transitionProperty: 'all',
@@ -149,10 +167,10 @@ export const animations = {
 
 // Simple property creators
 export const createProperty = {
-  spacing: (value: 'xs' | 'sm' | 'md' | 'lg' | 'xl') => ({ 
-    padding: value 
+  spacing: (value: 'xs' | 'sm' | 'md' | 'lg' | 'xl') => ({
+    padding: value,
   }),
-  margin: (value: 'xs' | 'sm' | 'md' | 'lg' | 'xl') => ({ 
-    margin: value 
+  margin: (value: 'xs' | 'sm' | 'md' | 'lg' | 'xl') => ({
+    margin: value,
   }),
 };

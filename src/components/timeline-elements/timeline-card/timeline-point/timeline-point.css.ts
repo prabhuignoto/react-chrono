@@ -22,13 +22,11 @@ export const shapeWrapper = style([
     justifyContent: 'center',
   }),
   {
-    flexDirection: 'column',
-    width: '100%', // Changed from '5em' to '100%' to ensure visibility in horizontal mode
-    minWidth: '3rem', // Ensure minimum width for the timeline point
-    zIndex: 10, // Ensure timeline points appear above cards and other elements
+    width: 'auto', // Let content determine width
+    height: 'auto', // Let content determine height
     position: 'relative',
-    paddingTop: '0.5rem', // Add some padding to separate from card content
-    paddingBottom: '0.5rem',
+    // Simplified - no complex z-index or excessive padding
+    flexShrink: 0,
   },
 ]);
 
@@ -36,13 +34,15 @@ export const timelinePointBase = style({
   cursor: 'pointer',
   transition: 'all 0.2s ease-in-out',
   position: 'relative',
-  overflow: 'visible', // Changed from 'hidden' to 'visible' to ensure icon visibility
+  overflow: 'visible',
   padding: 0,
-  zIndex: 11, // Higher z-index than wrapper to ensure visibility
-  width: '2rem', // Ensure minimum size
-  height: '2rem',
-  minWidth: '2rem',
-  minHeight: '2rem',
+  width: '1.5rem', // Smaller size for horizontal modes
+  height: '1.5rem',
+  minWidth: '1.5rem',
+  minHeight: '1.5rem',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 
   // Ripple effect
   '::before': {
@@ -87,19 +87,19 @@ export const timelinePoint = recipe({
   base: timelinePointBase,
   variants: {
     shape: {
-      circle: { 
+      circle: {
         borderRadius: '50%',
         // Ensure circle shape is always visible
         backgroundColor: 'currentColor',
         border: '2px solid white',
       },
-      square: { 
+      square: {
         borderRadius: '2px',
         backgroundColor: 'currentColor',
         border: '2px solid white',
       },
-      diamond: { 
-        borderRadius: '0', 
+      diamond: {
+        borderRadius: '0',
         transform: 'rotate(45deg)',
         backgroundColor: 'currentColor',
         border: '2px solid white',
@@ -115,14 +115,17 @@ export const timelinePoint = recipe({
     },
     active: {
       true: {
-        transform: 'scale(1.2)',
+        transform: 'scale(1.2)', // Slightly smaller scale for smaller points
         transition: 'all 0.3s ease-in-out',
+        backgroundColor: 'currentColor',
+        border: '2px solid white',
+        boxShadow: '0 3px 10px rgba(0, 123, 255, 0.4)',
         selectors: {
           '&.using-icon': {
             animation: `${pulse} 1.5s infinite`,
           },
           '&:not(.using-icon)': {
-            boxShadow: '0 0 12px rgba(0, 123, 255, 0.6)',
+            boxShadow: '0 0 10px rgba(0, 123, 255, 0.6)',
             animation: `${pulse} 1.5s infinite`,
           },
         },
@@ -130,10 +133,17 @@ export const timelinePoint = recipe({
       false: {
         transform: 'scale(1)',
         transition: 'all 0.3s ease-in-out',
-        // Add visible background to ensure timeline points are always visible
+        // Ensure timeline points are always visible with strong styling
         backgroundColor: 'currentColor',
         border: '2px solid white',
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 2px 6px rgba(0, 0, 0, 0.15)',
+        // Add hover effect for non-active points
+        selectors: {
+          '&:hover:not(:disabled)': {
+            transform: 'scale(1.15)',
+            boxShadow: '0 3px 10px rgba(0, 0, 0, 0.2)',
+          },
+        },
       },
     },
     disabled: {

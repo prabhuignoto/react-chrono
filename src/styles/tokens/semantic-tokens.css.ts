@@ -66,7 +66,7 @@ export const semanticTokens = createThemeContract({
       },
     },
   },
-  
+
   // Toolbar-specific tokens
   toolbar: {
     height: {
@@ -115,7 +115,7 @@ export const semanticTokens = createThemeContract({
       },
     },
   },
-  
+
   // Card system tokens
   card: {
     padding: {
@@ -152,7 +152,7 @@ export const semanticTokens = createThemeContract({
       },
     },
   },
-  
+
   // Interaction state tokens
   states: {
     hover: {
@@ -182,7 +182,7 @@ export const semanticTokens = createThemeContract({
       filter: null,
     },
   },
-  
+
   // Animation tokens
   motion: {
     duration: {
@@ -206,7 +206,7 @@ export const semanticTokens = createThemeContract({
       stiff: null,
     },
   },
-  
+
   // Layout tokens
   layout: {
     container: {
@@ -301,7 +301,7 @@ export const defaultSemanticTheme = createTheme(semanticTokens, {
       },
     },
   },
-  
+
   toolbar: {
     height: {
       sm: '48px',
@@ -349,7 +349,7 @@ export const defaultSemanticTheme = createTheme(semanticTokens, {
       },
     },
   },
-  
+
   card: {
     padding: {
       sm: designTokens.spacing.sm,
@@ -385,7 +385,7 @@ export const defaultSemanticTheme = createTheme(semanticTokens, {
       },
     },
   },
-  
+
   states: {
     hover: {
       opacity: '0.8',
@@ -414,7 +414,7 @@ export const defaultSemanticTheme = createTheme(semanticTokens, {
       filter: 'grayscale(0.3)',
     },
   },
-  
+
   motion: {
     duration: {
       instant: '0ms',
@@ -437,7 +437,7 @@ export const defaultSemanticTheme = createTheme(semanticTokens, {
       stiff: 'cubic-bezier(0.35, 0, 0.25, 1)',
     },
   },
-  
+
   layout: {
     container: {
       maxWidth: {

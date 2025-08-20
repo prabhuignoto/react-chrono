@@ -10,7 +10,7 @@ export const wrapper = recipe({
       mode: 'horizontal',
       interactive: true,
       elevation: 'medium',
-      theme: 'default'
+      theme: 'default',
     }),
     {
       border: 'none',
@@ -18,7 +18,10 @@ export const wrapper = recipe({
       flexDirection: 'column',
       gap: '0.5rem',
       isolation: 'isolate',
-      
+      // Ensure wrapper is always visible in horizontal modes
+      visibility: 'visible',
+      display: 'flex',
+
       // Hover effects with proper motion handling
       selectors: {
         '&:hover': {
@@ -29,7 +32,7 @@ export const wrapper = recipe({
           transform: 'translateY(0px) scale(1)',
         },
       },
-      
+
       // Reduced motion support
       '@media': {
         '(prefers-reduced-motion: reduce)': {
@@ -103,6 +106,10 @@ export const timelineTitleContainer = recipe({
         whiteSpace: 'nowrap',
         zIndex: 3,
         marginBottom: '0.5rem',
+        // Ensure visibility in horizontal_all mode
+        display: 'flex',
+        visibility: 'visible',
+        opacity: 1,
       },
     },
     interactive: {

@@ -551,7 +551,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   // Memoize theme CSS variables to prevent re-creation on every render
   const themeCssVars = useMemo(
     () => computeCssVarsFromTheme(theme, darkMode),
-    [theme, darkMode]
+    [theme, darkMode],
   );
 
   return (
@@ -676,7 +676,22 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       <div
         id={id}
         ref={horizontalContentRef}
-        className={`timeline-content-render ${ve.timelineContentRender}`}
+        className={`timeline-content-render ${ve.timelineContentRender({
+          mode:
+            timelineMode === 'HORIZONTAL_ALL'
+              ? 'horizontalAll'
+              : timelineMode === 'HORIZONTAL'
+                ? 'horizontal'
+                : timelineMode === 'VERTICAL_ALTERNATING'
+                  ? 'verticalAlternating'
+                  : 'vertical',
+        })}`}
+        style={
+          {
+            // Pass card height as CSS variable for dynamic height calculation
+            '--card-height': `${cardHeight || 350}px`,
+          } as React.CSSProperties
+        }
       />
     </div>
   );

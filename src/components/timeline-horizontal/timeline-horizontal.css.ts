@@ -43,15 +43,19 @@ globalStyle(`${timelineHorizontalWrapper}.horizontal`, {
 });
 globalStyle(`${timelineHorizontalWrapper}.horizontal_all`, {
   flexDirection: 'row',
-  overflowX: 'auto',
+  overflowX: 'hidden',
+  overflowY: 'hidden',
   justifyContent: 'flex-start',
   gap: '2rem',
   padding: '0 2rem',
 });
 globalStyle(`${timelineHorizontalWrapper}.show-all-cards-horizontal`, {
-  overflowX: 'auto',
+  overflowX: 'hidden',
+  overflowY: 'hidden',
   justifyContent: 'flex-start',
   gap: '1rem',
+  width: '100%',
+  flexWrap: 'nowrap', // Ensure items don't wrap to new line
 });
 
 globalStyle(`${timelineItemWrapper}.vertical`, {
@@ -59,10 +63,14 @@ globalStyle(`${timelineItemWrapper}.vertical`, {
   width: '100%',
 });
 globalStyle(`${timelineItemWrapper}.visible`, { visibility: 'visible' });
+
 globalStyle(`.show-all-cards-horizontal ${timelineItemWrapper}`, {
   visibility: 'visible',
+  display: 'flex', // Ensure display is flex
   margin: '0 0.5rem',
   flexShrink: 0,
+  minWidth: 'fit-content', // Ensure minimum width for content
+  opacity: 1, // Ensure full opacity
 });
 
 // Responsive styles for horizontal timeline

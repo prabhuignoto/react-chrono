@@ -112,6 +112,11 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
         style={{
           width: itemWidth,
           minWidth: showAllCardsHorizontal ? itemWidth : undefined,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          height: '100%',
         }}
         aria-current={item.active ? 'true' : undefined}
         id={`timeline-${mode.toLowerCase()}-item-${item.id}`}
@@ -172,10 +177,27 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     <ul
       ref={listRef}
       className={`${timelineHorizontalWrapper} ${wrapperClass}`}
-      style={{ direction: flipLayout ? 'rtl' : 'ltr' }}
+      style={{
+        direction: flipLayout ? 'rtl' : 'ltr',
+        position: 'relative',
+      }}
       data-testid="timeline-collection"
       aria-label="Timeline"
     >
+      {/* Horizontal line that runs between timeline points and titles */}
+      {/* <div
+        className="timeline-horizontal-connector"
+        style={{
+          position: 'absolute',
+          top: '3.5rem', // Position between timeline points (1.5rem height + padding) and titles
+          left: '5%',
+          right: '5%',
+          height: '2px',
+          backgroundColor: theme?.primary || '#2563eb',
+          opacity: 0.2,
+          zIndex: 1,
+        }}
+      /> */}
       {timelineItems}
     </ul>
   );
