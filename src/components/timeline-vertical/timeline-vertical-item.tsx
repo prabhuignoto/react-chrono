@@ -19,6 +19,7 @@ import {
   verticalItemWrapperNested,
 } from './timeline-vertical.css';
 import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
+import { pickDefined } from '../../utils/propUtils';
 
 /**
  * Represents a single item (row) in the vertical timeline.
@@ -194,12 +195,12 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       >
         <TimelineItemTitle
           title={title as string}
-          {...(active !== undefined && {
-            active: active && !disableInteraction,
-          })}
           theme={theme}
           align={titleConfig.align}
-          {...(classNames?.title && { classString: classNames.title })}
+          {...(active !== undefined ? { active: active && !disableInteraction } : {})}
+          {...pickDefined({
+            classString: classNames?.title,
+          })}
         />
       </div>
     ),
@@ -247,31 +248,24 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   );
 
   // TimelinePoint props configuration
-  const timelinePointProps = useMemo(() => {
-    const props: any = {
-      className,
-      mode,
-      onActive: handleOnActive,
-      onClick: onClick || (() => {}),
-      isMobile,
-    };
-
-    // Only add defined props to avoid TypeScript strict mode issues
-    if (active !== undefined) props.active = active;
-    if (alternateCards !== undefined) props.alternateCards = alternateCards;
-    if (id) props.id = id;
-    if (slideShowRunning !== undefined)
-      props.slideShowRunning = slideShowRunning;
-    if (iconChild) props.iconChild = iconChild;
-    if (timelinePointDimension !== undefined)
-      props.timelinePointDimension = timelinePointDimension;
-    if (lineWidth !== undefined) props.lineWidth = lineWidth;
-    if (disableClickOnCircle !== undefined)
-      props.disableClickOnCircle = disableClickOnCircle;
-    if (cardLess !== undefined) props.cardLess = cardLess;
-
-    return props;
-  }, [
+  const timelinePointProps = useMemo(() => ({
+    className,
+    mode,
+    onActive: handleOnActive,
+    onClick: onClick || (() => {}),
+    isMobile,
+    ...pickDefined({
+      active,
+      alternateCards,
+      id,
+      slideShowRunning,
+      iconChild,
+      timelinePointDimension,
+      lineWidth,
+      disableClickOnCircle,
+      cardLess,
+    }),
+  }), [
     active,
     alternateCards,
     className,
@@ -369,33 +363,29 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       >
         {!cardLess && (
           <TimelineCard
-            {...(active !== undefined && { active })}
             branchDir={className}
-            {...(cardSubtitle && { content: cardSubtitle })}
-            {...(contentDetailsChildren && {
-              customContent: contentDetailsChildren,
-            })}
-            {...(cardDetailedText && {
-              detailedText: cardDetailedText as string | string[],
-            })}
-            {...(hasFocus !== undefined && { hasFocus })}
-            {...(id && { id })}
-            {...(media && { media })}
-            {...(onClick && typeof onClick === 'function' && { onClick })}
-            {...(onElapsed && { onElapsed })}
             onShowMore={handleShowMore}
-            {...(slideShowRunning !== undefined && {
-              slideShowActive: slideShowRunning,
-            })}
-            {...(theme && { theme })}
-            {...(url && { url })}
             flip={!alternateCards && flipLayout}
-            {...(timelineContent && { timelineContent })}
-            {...(items && { items })}
-            {...(isNested !== undefined && { isNested })}
-            {...(nestedCardHeight !== undefined && { nestedCardHeight })}
-            {...(cardTitle && { title: cardTitle as string })}
-            {...(title && { cardTitle: title as string })}
+            {...pickDefined({
+              active,
+              content: cardSubtitle,
+              customContent: contentDetailsChildren,
+              detailedText: cardDetailedText as string | string[],
+              hasFocus,
+              id,
+              media,
+              onElapsed,
+              slideShowActive: slideShowRunning,
+              theme,
+              url,
+              timelineContent,
+              items,
+              isNested,
+              nestedCardHeight,
+              title: cardTitle as string,
+              cardTitle: title as string,
+            })}
+            {...(onClick && typeof onClick === 'function' ? { onClick } : {})}
           />
         )}
       </div>

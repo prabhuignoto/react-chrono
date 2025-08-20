@@ -34,6 +34,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
         aria-current="false"
         aria-label="vertical item title"
         class="timeline-card-content  card timeline-card-content_baseCard__chzdno0 timeline-card-content_itemContentWrapper__chzdno2 timeline-card-content__chzdno1 properties_display_flex_mobile__12ug0496"
+        data-item-id=""
         data-testid="timeline-card-content"
         role="article"
         style="--color-background__9df7601: #ffffff; --color-text__9df7600: #000; --color-primary__9df7602: #0f52ba; --color-muted__9df7603: #6b7280; --color-cardBg__9df7604: #ffffff; --color-cardTitle__9df7605: #000; --color-cardSubtitle__9df7606: #000; --color-cardDetails__9df7607: #000; --color-toolbarBg__9df7608: #ffffff; --color-toolbarBtnBg__9df7609: #0f52ba; --color-toolbarText__9df760a: #000; --color-icon__9df760b: #007FFF; --color-buttonBorder__9df760c: #e2e8f0; --color-buttonHoverBorder__9df760d: #007FFF; --color-buttonHoverBg__9df760e: #e2e8f0; --color-buttonActiveBg__9df760f: #007FFF; --color-shadow__9df760g: rgba(0, 0, 0, 0.1); --timeline-bg-color: #ffffff; --timeline-text-color: #000; --timeline-primary-color: #0f52ba; --timeline-card-bg-color: #ffffff; --timeline-muted-color: #6b7280; --timeline-toolbar-bg-color: #ffffff; --timeline-shadow-color: rgba(0, 0, 0, 0.1); min-height: 200px; max-width: 400px;"
