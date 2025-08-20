@@ -31,7 +31,7 @@ export const lightThemeClass = createTheme(vars, {
     base: '1',
     timelineCard: '10',
     controls: '1000',
-    popover: '100',
+    popover: '1100', // Higher than controls to ensure popover appears above everything
     outlinePane: '50',
     verticalItem: '9',
   },
@@ -81,7 +81,7 @@ export const darkThemeClass = createTheme(vars, {
     base: '1',
     timelineCard: '10',
     controls: '1000',
-    popover: '100',
+    popover: '1100', // Higher than controls to ensure popover appears above everything
     outlinePane: '50',
     verticalItem: '9',
   },

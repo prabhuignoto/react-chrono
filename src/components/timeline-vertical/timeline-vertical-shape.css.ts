@@ -7,30 +7,35 @@ export const timelinePointWrapper = style({
   display: 'flex',
   justifyContent: 'center',
   position: 'relative',
+  height: '100%',
+  // minHeight: '8rem', // Ensure minimum height matches container for proper line visibility
   selectors: {
     '&.left': { order: 2 },
     '&.right': { order: 2 },
   },
 });
 
-// Top connector line
+// Extended connector line to previous item - bridges the gap between timeline items
 globalStyle(`${timelinePointWrapper}::before`, {
   content: '',
   position: 'absolute',
   width: '4px',
-  height: '2rem',
+  height: '4rem', // Extended to bridge the increased spacing between items
   background: 'currentColor',
   left: '50%',
-  top: '-1rem',
-  transform: 'translate(-50%, -50%)',
+  top: '-4rem',
+  transform: 'translateX(-50%)',
+  zIndex: 0,
 });
 
-// Main connector line
+// Main connector line - full height of container
 globalStyle(`${timelinePointWrapper}::after`, {
   content: '',
   position: 'absolute',
   left: '50%',
   width: '4px',
+  top: '0',
+  bottom: '0',
   height: '100%',
   background: 'currentColor',
   transform: 'translateX(-50%)',
@@ -39,16 +44,19 @@ globalStyle(`${timelinePointWrapper}::after`, {
 
 // Button container for the point (circle/square/diamond)
 export const timelinePointContainer = style({
-  position: 'relative',
-  zIndex: 2,
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  zIndex: 3,
   background: 'none',
   border: 0,
   padding: 0,
   cursor: 'pointer',
   transition: `transform ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
   selectors: {
-    '&:hover:not(:disabled)': { transform: 'scale(1.05)' },
-    '&:active:not(:disabled)': { transform: 'scale(0.95)' },
+    '&:hover:not(:disabled)': { transform: 'translate(-50%, -50%) scale(1.05)' },
+    '&:active:not(:disabled)': { transform: 'translate(-50%, -50%) scale(0.95)' },
     '&:disabled': { cursor: 'default', opacity: 0.6 },
     '&:focus-visible': { outline: '3px solid transparent', outlineOffset: 3 },
   },

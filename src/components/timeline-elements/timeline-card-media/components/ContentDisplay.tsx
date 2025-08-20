@@ -17,6 +17,7 @@ import { ExpandButtonMemo } from '../../memoized/expand-button-memo';
 import { SubTitleMemo } from '../../memoized/subtitle-memo';
 import { DetailsTextMemo } from '../../memoized/details-text-memo';
 import { TimelineMode } from '@models/TimelineModel';
+import { TextMaximizeIcon, TextMinimizeIcon } from '../../../icons';
 
 export interface ContentDisplayProps {
   readonly mode: TimelineMode;
@@ -103,7 +104,7 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
         />
         {(canExpand || textOverlay) && (
           <ButtonWrapper>
-            {canExpand && !textOverlay && (
+            {canExpand && (
               <>
                 <ShowOrHideTextButtonMemo
                   onToggle={toggleText}
@@ -119,28 +120,42 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
                 />
               </>
             )}
-            {textOverlay && (
+            {textOverlay && !canExpand && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   toggleMinimize();
                 }}
                 style={{
-                  background: 'transparent',
+                  background: theme?.primary || '#2563eb',
                   border: 'none',
-                  color: theme?.cardSubTitle || '#666',
+                  color: '#ffffff',
                   cursor: 'pointer',
-                  fontSize: '1.2rem',
-                  padding: '0.25rem',
-                  borderRadius: '4px',
+                  padding: '0.5rem',
+                  borderRadius: '6px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  width: '32px',
+                  height: '32px',
+                  transition: 'all 0.2s ease-in-out',
+                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
                 }}
-                aria-label={isMinimized ? 'Expand text' : 'Minimize text'}
-                title={isMinimized ? 'Expand text' : 'Minimize text'}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                }}
+                aria-label={isMinimized ? 'Expand text overlay' : 'Minimize text overlay'}
+                title={isMinimized ? 'Expand text overlay' : 'Minimize text overlay'}
+                type="button"
               >
-                {isMinimized ? '📖' : '📝'}
+                <div style={{ width: '16px', height: '16px' }}>
+                  {isMinimized ? <TextMaximizeIcon /> : <TextMinimizeIcon />}
+                </div>
               </button>
             )}
           </ButtonWrapper>

@@ -32,10 +32,11 @@ export const navItemDisabled = style({
 
 export const navButton = style({
   alignItems: 'center',
-  background: 'transparent',
-  borderRadius: '8px',
-  border: '1px solid transparent',
-  color: vars.color.toolbarText,
+  background: vars.color.toolbarBtnBg,
+  borderRadius: '6px',
+  border: '1px solid',
+  borderColor: vars.color.buttonBorder,
+  color: vars.color.icon,
   cursor: 'pointer',
   display: 'flex',
   height: '36px',
@@ -44,7 +45,8 @@ export const navButton = style({
   margin: '0 0.25rem',
   padding: 0,
   minWidth: '36px',
-  transition: `background-color ${vars.transition.duration.normal} ${vars.transition.easing.standard}, transform ${vars.transition.duration.fast} ${vars.transition.easing.standard}, box-shadow ${vars.transition.duration.normal} ${vars.transition.easing.standard}, border-color ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
+  boxShadow: vars.shadow.elevationSm,
+  transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
   width: '36px',
   selectors: {
     '&:disabled': {
@@ -66,18 +68,19 @@ export const navButton = style({
 export const navButtonRotate = style({ transform: 'rotate(90deg)' });
 
 export const navButtonHover = style({});
-globalStyle(`${navButton}:hover`, {
-  background: vars.color.toolbarBtnBg,
-  borderColor: vars.color.buttonBorder,
-  boxShadow: vars.shadow.elevationSm,
+globalStyle(`${navButton}:hover:not(:disabled)`, {
+  background: vars.color.buttonHoverBg,
+  borderColor: vars.color.buttonHoverBorder,
+  boxShadow: vars.shadow.elevationMd,
   transform: 'translateY(-1px)',
+  color: vars.color.primary,
 });
 
 export const navButtonActive = style({});
-globalStyle(`${navButton}:active`, {
-  transform: 'scale(0.97)',
-  background: vars.color.toolbarBtnBg,
-  boxShadow: vars.shadow.insetSm,
+globalStyle(`${navButton}:active:not(:disabled)`, {
+  transform: 'translateY(0) scale(0.97)',
+  background: vars.color.buttonHoverBg,
+  boxShadow: vars.shadow.elevationSm,
 });
 
 export const navButtonFocus = style({});

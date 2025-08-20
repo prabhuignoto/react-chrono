@@ -31,12 +31,22 @@ export const popoverHolder = style([
     transition: `opacity ${vars.transition.duration.normal} ${vars.transition.easing.standard}, transform ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
     transform: 'translateY(-10px)',
     zIndex: vars.zIndex.popover,
+    // Ensure popover stays within timeline container bounds
+    maxWidth: 'calc(100vw - 2rem)',
     selectors: {
       '&::-webkit-scrollbar': { width: '0.3em' },
       '&::-webkit-scrollbar-track': { backgroundColor: vars.color.toolbarBg },
       '&::-webkit-scrollbar-thumb': {
         backgroundColor: vars.color.primary,
         borderRadius: '3px',
+      },
+    },
+    '@media': {
+      '(max-width: 480px)': {
+        width: '280px',
+        maxWidth: 'calc(100vw - 1rem)',
+        left: '0.5rem !important',
+        right: '0.5rem !important',
       },
     },
   },
@@ -70,10 +80,11 @@ export const selecter = style([
   }),
   {
     background: vars.color.toolbarBtnBg,
-    color: vars.color.toolbarText,
+    color: vars.color.icon,
     borderRadius: '6px',
-    border: '1px solid transparent',
-    boxShadow: `0 1px 1px ${vars.color.shadow}`,
+    border: '1px solid',
+    borderColor: vars.color.buttonBorder,
+    boxShadow: vars.shadow.elevationSm,
     cursor: 'pointer',
     userSelect: 'none',
     marginRight: '0.5rem',
@@ -81,15 +92,19 @@ export const selecter = style([
     minWidth: '36px',
     width: 'auto',
     padding: '0 0.5rem',
-    transition:
-      'background-color 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.2s ease-out, transform 0.15s ease-out',
+    transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
     selectors: {
       '&:hover': {
         background: vars.color.buttonHoverBg,
+        borderColor: vars.color.buttonHoverBorder,
         boxShadow: vars.shadow.elevationMd,
         transform: 'translateY(-1px)',
+        color: vars.color.primary,
       },
-      '&:active': { transform: 'scale(0.95)', boxShadow: vars.shadow.insetSm },
+      '&:active': { 
+        transform: 'translateY(0) scale(0.97)', 
+        boxShadow: vars.shadow.elevationSm 
+      },
       '&:focus': {
         outline: `2px solid ${vars.color.primary}`,
         outlineOffset: '2px',

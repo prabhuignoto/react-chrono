@@ -492,7 +492,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             </div>
           )}
 
-          {canShowReadMore && canShowMore && !textOverlay && (
+          {canShowReadMore && canShowMore && (
             <ContentFooter
               onExpand={toggleShowMore}
               triangleDir={triangleDir || ''}

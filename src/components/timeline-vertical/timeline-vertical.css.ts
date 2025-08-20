@@ -38,7 +38,8 @@ export const verticalItemWrapper = recipe({
       visibility: 'visible',
       alignItems: 'stretch',
       listStyle: 'none',
-      marginBottom: '1.5rem', // Adjusted for vertical spacing
+      marginBottom: '4rem', // Generous spacing between timeline items for better visual separation
+      // minHeight: '8rem', // Increased minimum height for better visual presence and line display
       zIndex: 1,
     },
   ],
@@ -147,6 +148,9 @@ export const timelineCardContentWrapper = style({
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
+  minHeight: '100%', // Ensure cards stretch to full container height
+  paddingTop: '0.5rem',
+  paddingBottom: '0.5rem',
 });
 
 // Timeline card content visible state
@@ -166,6 +170,9 @@ export const timelineTitleWrapper = style([
   {
     minWidth: 0,
     overflow: 'hidden',
+    minHeight: '100%', // Ensure titles stretch to full container height
+    paddingTop: '0.5rem',
+    paddingBottom: '0.5rem',
   },
 ]);
 

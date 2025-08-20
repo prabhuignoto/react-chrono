@@ -23,9 +23,12 @@ export const shapeWrapper = style([
   }),
   {
     flexDirection: 'column',
-    width: '5em',
-    zIndex: 2,
+    width: '100%', // Changed from '5em' to '100%' to ensure visibility in horizontal mode
+    minWidth: '3rem', // Ensure minimum width for the timeline point
+    zIndex: 10, // Ensure timeline points appear above cards and other elements
     position: 'relative',
+    paddingTop: '0.5rem', // Add some padding to separate from card content
+    paddingBottom: '0.5rem',
   },
 ]);
 
@@ -33,9 +36,13 @@ export const timelinePointBase = style({
   cursor: 'pointer',
   transition: 'all 0.2s ease-in-out',
   position: 'relative',
-  overflow: 'hidden',
+  overflow: 'visible', // Changed from 'hidden' to 'visible' to ensure icon visibility
   padding: 0,
-  zIndex: 2,
+  zIndex: 11, // Higher z-index than wrapper to ensure visibility
+  width: '2rem', // Ensure minimum size
+  height: '2rem',
+  minWidth: '2rem',
+  minHeight: '2rem',
 
   // Ripple effect
   '::before': {
@@ -80,9 +87,23 @@ export const timelinePoint = recipe({
   base: timelinePointBase,
   variants: {
     shape: {
-      circle: { borderRadius: '50%' },
-      square: { borderRadius: '2px' },
-      diamond: { borderRadius: '0', transform: 'rotate(45deg)' },
+      circle: { 
+        borderRadius: '50%',
+        // Ensure circle shape is always visible
+        backgroundColor: 'currentColor',
+        border: '2px solid white',
+      },
+      square: { 
+        borderRadius: '2px',
+        backgroundColor: 'currentColor',
+        border: '2px solid white',
+      },
+      diamond: { 
+        borderRadius: '0', 
+        transform: 'rotate(45deg)',
+        backgroundColor: 'currentColor',
+        border: '2px solid white',
+      },
     },
     usingIcon: {
       true: {
@@ -109,6 +130,10 @@ export const timelinePoint = recipe({
       false: {
         transform: 'scale(1)',
         transition: 'all 0.3s ease-in-out',
+        // Add visible background to ensure timeline points are always visible
+        backgroundColor: 'currentColor',
+        border: '2px solid white',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
       },
     },
     disabled: {

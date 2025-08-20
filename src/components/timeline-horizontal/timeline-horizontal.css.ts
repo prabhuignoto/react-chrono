@@ -81,11 +81,11 @@ globalStyle(`${timelineItemWrapper}`, {
   '@media': {
     '(max-width: 768px)': {
       padding: '0 0.5rem',
-      height: '120px',
+      minHeight: '120px', // Changed from height to minHeight to prevent clipping
     },
     '(max-width: 480px)': {
       padding: '0 0.25rem',
-      height: '100px',
+      minHeight: '120px', // Increased from 100px and changed to minHeight
     },
   },
 });

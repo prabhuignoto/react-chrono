@@ -92,17 +92,40 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     return className === 'left' ? 'flex-end' : 'flex-start';
   }, [alternateCards, flipLayout, className]);
 
-  const calculateOrder = useCallback(() => {
-    const flip = !alternateCards && flipLayout;
-
+  const calculateCardOrder = useCallback(() => {
     if (alternateCards) {
-      // Standard alternating: left=1, right=3
+      // Alternating mode: left side = card first (1), right side = card last (3)
       return className === 'left' ? 1 : 3;
     }
-
-    // Non-alternating mode with potential flip
-    return className === 'left' ? (flip ? 3 : 1) : flip ? 1 : 3;
+    
+    if (flipLayout) {
+      // Vertical flip mode: card first (1)
+      return 1;
+    }
+    
+    // Standard vertical mode: card last (3)
+    return 3;
   }, [alternateCards, flipLayout, className]);
+
+  const calculateTitleOrder = useCallback(() => {
+    if (alternateCards) {
+      // Alternating mode: left side = title last (3), right side = title first (1)
+      return className === 'left' ? 3 : 1;
+    }
+    
+    if (flipLayout) {
+      // Vertical flip mode: title last (3)
+      return 3;
+    }
+    
+    // Standard vertical mode: title first (1)
+    return 1;
+  }, [alternateCards, flipLayout, className]);
+
+  const calculatePointOrder = useCallback(() => {
+    // Point is always in the middle (order 2) for all modes
+    return 2;
+  }, []);
 
   /**
    * Callback handler triggered by the TimelinePoint when it becomes active.
@@ -131,12 +154,17 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     () => ({
       display: !title && mode === 'VERTICAL' ? 'none' : 'flex',
       width: alternateCards ? '37.5%' : '10%',
-      textAlign: (!alternateCards ? 'right' : 'left') as 'left' | 'right',
+      // Fix text alignment for alternating mode: 
+      // - Left side (title appears last): align left
+      // - Right side (title appears first): align right
+      textAlign: alternateCards 
+        ? (className === 'left' ? 'left' : 'right')
+        : 'right' as 'left' | 'right',
       align: (flipLayout && !alternateCards ? 'left' : 'right') as
         | 'left'
         | 'right',
     }),
-    [title, mode, alternateCards, flipLayout],
+    [title, mode, alternateCards, flipLayout, className],
   );
 
   const titleClassName = useMemo(
@@ -153,8 +181,13 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           ...computeCssVarsFromTheme(theme),
           display: titleConfig.display,
           width: titleConfig.width,
-          order: 3,
+          order: calculateTitleOrder(),
           textAlign: titleConfig.textAlign,
+          // Add proper spacing for title
+          paddingLeft: alternateCards ? '0' : '0.75rem',
+          paddingRight: alternateCards ? '0' : '0.75rem',
+          marginRight: alternateCards && className === 'right' ? '1rem' : '0',
+          marginLeft: alternateCards && className === 'left' ? '1rem' : '0',
         }}
       >
         <TimelineItemTitle
@@ -177,6 +210,9 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       active,
       disableInteraction,
       classNames?.title,
+      calculateTitleOrder,
+      alternateCards,
+      className,
     ],
   );
 
@@ -251,8 +287,26 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   ]);
 
   const TimelinePointMemo = useMemo(
-    () => <TimelinePoint {...timelinePointProps} />,
-    [timelinePointProps],
+    () => (
+      <div
+        style={{
+          order: calculatePointOrder(),
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'stretch',
+          minHeight: '100%',
+          width: alternateCards ? '10%' : '10%',
+          position: 'relative',
+          zIndex: 10,
+          // Add proper spacing margins
+          marginLeft: alternateCards ? '1rem' : '0.75rem',
+          marginRight: alternateCards ? '1rem' : '0.75rem',
+        }}
+      >
+        <TimelinePoint {...timelinePointProps} />
+      </div>
+    ),
+    [timelinePointProps, calculatePointOrder, alternateCards],
   );
 
   /**
@@ -303,7 +357,12 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
         style={{
           width: calculateCardWidth(),
           justifyContent: calculateJustifyContent(),
-          order: calculateOrder(),
+          order: calculateCardOrder(),
+          // Add proper spacing for card content
+          paddingLeft: alternateCards ? '0' : '0.75rem',
+          paddingRight: alternateCards ? '0' : '0.75rem',
+          marginLeft: alternateCards && className === 'left' ? '0' : alternateCards && className === 'right' ? '1rem' : '0',
+          marginRight: alternateCards && className === 'right' ? '0' : alternateCards && className === 'left' ? '1rem' : '0',
         }}
       >
         {!cardLess && (

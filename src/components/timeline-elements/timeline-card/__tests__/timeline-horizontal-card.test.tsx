@@ -131,4 +131,36 @@ describe('TimelineHorizontalCard', () => {
     expect(getByRole('link')).toBeInTheDocument();
     expect(getByRole('link')).toHaveAttribute('href', 'http://www.google.com');
   });
+
+  // should hide timeline point when disableTimelinePoint is true
+  it('should hide timeline point when disableTimelinePoint is true', () => {
+    const { queryByTestId } = customRender(
+      <TimelineCard {...defaultProps} />,
+      {
+        providerProps: {
+          ...providerProps,
+          disableTimelinePoint: true,
+        },
+      },
+    );
+
+    // Timeline point should not be rendered when disabled
+    expect(queryByTestId('timeline-circle')).not.toBeInTheDocument();
+  });
+
+  // should show timeline point when disableTimelinePoint is false
+  it('should show timeline point when disableTimelinePoint is false', () => {
+    const { getByTestId } = customRender(
+      <TimelineCard {...defaultProps} />,
+      {
+        providerProps: {
+          ...providerProps,
+          disableTimelinePoint: false,
+        },
+      },
+    );
+
+    // Timeline point should be rendered when enabled
+    expect(getByTestId('timeline-circle')).toBeInTheDocument();
+  });
 });
