@@ -71,9 +71,8 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     timelinePointDimension,
     disableClickOnCircle,
     disableInteraction,
+    isMobile, // Use responsive detection from context
   } = useTimelineContext();
-
-  const isMobile = mode === 'VERTICAL';
 
   // Helper functions for layout calculations
   const calculateCardWidth = useCallback(() => {

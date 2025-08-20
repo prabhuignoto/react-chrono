@@ -7,7 +7,7 @@ import {
   useMemo,
   ReactElement,
 } from 'react';
-// Note: This component receives mode and theme as props, so no context needed here
+import { useTimelineContext } from '../contexts';
 import TimelineVerticalItem from './timeline-vertical-item';
 import { timelineVerticalWrapper } from './timeline-vertical.css';
 import React from 'react';
@@ -40,11 +40,9 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
     cardLess, // Render without cards? (Passed down)
     nestedCardHeight, // Specific height for nested cards (Passed down)
   }: TimelineVerticalModel): ReactElement => {
-    // Access split contexts for better performance
-    // Note: mode is passed as a prop to this component
-    // Check if mobile based on mode - TODO: add responsive detection to layout context
-    // Only VERTICAL mode should be considered mobile-like, VERTICAL_ALTERNATING should allow alternating
-    const isMobile = mode === 'VERTICAL';
+    // Use responsive detection from context instead of hardcoding based on mode
+    // This enables proper responsive behavior for VERTICAL_ALTERNATING mode
+    const { isMobile } = useTimelineContext();
 
     /**
      * Callback handler passed to each TimelineVerticalItem's onActive.
