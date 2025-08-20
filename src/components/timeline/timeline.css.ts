@@ -140,15 +140,6 @@ export const outline = style({
   borderRadius: '4px',
 });
 
-export const timelineControlContainer = style([
-  sprinkles({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }),
-  { minHeight: '3rem' },
-]);
-
 export const timelineContentRender = style([
   sprinkles({ display: 'flex' }),
   {
@@ -164,82 +155,3 @@ export const timelineContentRender = style([
   },
 ]);
 
-export const extraControls = style([
-  sprinkles({ display: 'flex', alignItems: 'center', p: 'xs' }),
-  {
-    listStyle: 'none',
-    margin: 0,
-    visibility: 'visible',
-    flexShrink: 0,
-    gap: '0.5rem',
-    flexWrap: 'wrap',
-  },
-]);
-
-export const extraControlChild = style([
-  sprinkles({ display: 'flex' }),
-  { margin: '0.5rem 0.5rem 0.5rem 0' },
-]);
-
-export const searchWrapper = style([
-  sprinkles({ display: 'flex', alignItems: 'center' }),
-  {
-    backgroundColor: vars.color.toolbarBtnBg,
-    padding: '0.2rem 0.6rem',
-    borderRadius: '6px',
-    border: `1px solid ${vars.color.buttonBorder}`,
-    width: '100%',
-    minHeight: '38px',
-    position: 'relative',
-    transition: `border-color ${vars.transition.duration.normal} ${vars.transition.easing.standard}, box-shadow ${vars.transition.duration.normal} ${vars.transition.easing.standard}, background-color ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
-    selectors: {
-      '&:focus-within': {
-        borderColor: vars.color.primary,
-        boxShadow: vars.shadow.focusRing,
-        backgroundColor: vars.color.toolbarBtnBg,
-      },
-    },
-  },
-]);
-
-export const searchInput = style({
-  flexGrow: 1,
-  border: 'none',
-  outline: 'none',
-  background: 'transparent',
-  color: vars.color.text,
-  fontSize: '0.9rem',
-  padding: '0.4rem 0.2rem',
-  selectors: {
-    '&::placeholder': { color: vars.color.text, opacity: 0.8, fontWeight: 400 },
-  },
-});
-
-export const searchInfo = style({
-  fontSize: '0.8rem',
-  color: vars.color.text,
-  opacity: 0.8,
-  margin: '0 0.4rem',
-  whiteSpace: 'nowrap',
-  flexShrink: 0,
-});
-
-export const searchControls = style([
-  sprinkles({ display: 'flex', alignItems: 'center' }),
-  { gap: '0.25rem', flexShrink: 0, marginLeft: 'auto' },
-]);
-
-export const toolbarSection = style([
-  sprinkles({ display: 'flex', alignItems: 'center' }),
-  { gap: '0.5rem', flexShrink: 0 },
-]);
-
-export const navigationGroup = style([toolbarSection, { flexWrap: 'nowrap' }]);
-export const searchGroup = style([
-  toolbarSection,
-  { flex: '1 1 300px', maxWidth: '600px', justifyContent: 'center' },
-]);
-export const actionGroup = style([
-  toolbarSection,
-  { flexWrap: 'wrap', justifyContent: 'flex-end' },
-]);

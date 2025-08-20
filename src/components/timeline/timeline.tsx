@@ -6,11 +6,7 @@ import { useTimelineContext } from '../contexts';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
 import * as ve from './timeline.css';
-import {
-  timelineWrapper,
-  timelineMainWrapper as timelineMainWrapperVE,
-  timelineContentRender
-} from './timeline-main.css';
+// Note: Removed unused imports from timeline-main.css
 import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
 import { TimelineToolbar } from './timeline-toolbar';
 import { useTimelineSearch } from '../../hooks/useTimelineSearch';

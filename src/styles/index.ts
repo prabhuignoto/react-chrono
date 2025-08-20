@@ -17,7 +17,7 @@ export { layoutBase, container, spacing, gap } from './layout.css';
 
 // Component systems
 export * from '../components/timeline-elements/timeline-card-content/card-system.css';
-export * from '../components/toolbar/toolbar-system.css';
+// Note: Removed unused toolbar-system.css export
 
 // Legacy exports for backward compatibility
 export { sprinkles } from './sprinkles/sprinkles.css';

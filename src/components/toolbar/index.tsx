@@ -17,8 +17,8 @@ import {
   toolbarSection as veToolbarSection,
   toolbarSectionRecipe as veToolbarSectionRecipe,
   toolbarWrapper as veToolbarWrapper,
+  toolbarIconButton,
 } from './toolbar.css';
-import { toolbarIconButton } from './toolbar-system.css';
 import { ToolbarProps } from '@models/ToolbarProps';
 
 /**
