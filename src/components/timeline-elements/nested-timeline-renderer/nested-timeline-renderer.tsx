@@ -1,5 +1,5 @@
 import React from 'react';
-import { TimelineModel } from '@models/TimelineModel';
+import NestedTimelineCards from './nested-timeline-cards';
 
 interface NestedTimelineRendererProps {
   items: any[];
@@ -8,34 +8,19 @@ interface NestedTimelineRendererProps {
   isChild?: boolean;
 }
 
-// This component will be used to dynamically load the Timeline component
-// to avoid circular dependency issues
+/**
+ * Renders nested timeline items using a card-based layout with center connecting line
+ * instead of full timeline rendering to avoid complex nested timeline layouts
+ */
 const NestedTimelineRenderer: React.FC<NestedTimelineRendererProps> = ({
   items,
   nestedCardHeight,
-  mode = 'HORIZONTAL',
-  isChild,
 }) => {
-  const [TimelineComponent, setTimelineComponent] =
-    React.useState<React.ComponentType<TimelineModel> | null>(null);
-
-  // Dynamically import the Timeline component only when needed
-  React.useEffect(() => {
-    import('../../timeline/timeline').then((module) => {
-      setTimelineComponent(() => module.default);
-    });
-  }, []);
-
-  if (!TimelineComponent) {
-    return <div>Loading nested timeline...</div>;
-  }
-
+  // Always use the card-based layout for nested timelines
   return (
-    <TimelineComponent
+    <NestedTimelineCards
       items={items}
-      mode={mode as any}
-      nestedCardHeight={nestedCardHeight}
-      isChild={isChild}
+      {...(nestedCardHeight !== undefined && { nestedCardHeight })}
     />
   );
 };

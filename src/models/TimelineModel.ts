@@ -28,6 +28,7 @@ export type TimelineModel = Pick<
   contentDetailsChildren?: React.ReactNode | React.ReactNode[];
   iconChildren?: React.ReactNode | React.ReactNode[];
   isChild?: boolean;
+  timelineHeight?: number | string;
   onFirst?: () => void;
   onLast?: () => void;
   onNext?: () => void;
@@ -238,6 +239,9 @@ export type TimelineProps = {
 
   // custom theme
   theme?: Theme;
+
+  // fixed height for the timeline container (number = px or CSS length)
+  timelineHeight?: number | string;
 
   // width of the timeline circle
   timelinePointDimension?: number;

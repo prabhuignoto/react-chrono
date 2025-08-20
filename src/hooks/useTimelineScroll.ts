@@ -5,14 +5,16 @@ interface UseTimelineScrollProps {
   mode: string;
   onScrollEnd?: () => void;
   setNewOffset: (element: HTMLDivElement, scroll: Partial<Scroll>) => void;
+  scrollEndThrottleMs?: number;
 }
 
 export const useTimelineScroll = ({
   mode,
   onScrollEnd,
   setNewOffset,
+  scrollEndThrottleMs = 100,
 }: UseTimelineScrollProps) => {
-  const timelineMainRef = useRef<HTMLDivElement>(null);
+  const timelineMainRef = useRef<HTMLDivElement>(null!);
   const horizontalContentRef = useRef<HTMLDivElement | null>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const setNewOffsetRef = useRef(setNewOffset);
@@ -58,9 +60,9 @@ export const useTimelineScroll = ({
             onScrollEndRef.current();
           }
         }
-      }, 100); // Throttle to 100ms
+      }, scrollEndThrottleMs);
     },
-    [mode],
+    [mode, scrollEndThrottleMs],
   );
 
   return {

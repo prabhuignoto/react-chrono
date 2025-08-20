@@ -7,7 +7,9 @@ import {
 } from 'react';
 import { ListItem } from './list-item';
 import { ListModel } from './list.model';
-import { ListStyle } from './list.styles';
+import { list } from './list.css';
+import { defaultTheme } from '../../common/themes';
+import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
 /**
  * Extends the base list item with a unique identifier
@@ -39,7 +41,7 @@ const List: FunctionComponent<ListModel> = ({
    * Memoized list items with generated unique IDs
    */
   const listItems = useMemo(
-    () => items.map((item) => ({ id: getUniqueID(), ...item })),
+    () => items.map((item) => ({ ...item, id: item.id || getUniqueID() })),
     [items],
   );
 
@@ -52,7 +54,7 @@ const List: FunctionComponent<ListModel> = ({
     (id: string, item: EnhancedListItem) => {
       if (multiSelectable && item.onSelect) {
         startTransition(() => {
-          item.onSelect();
+          item.onSelect?.();
         });
       } else {
         onClick?.(id);
@@ -78,7 +80,7 @@ const List: FunctionComponent<ListModel> = ({
         <ListItem
           key={item.id}
           {...item}
-          theme={theme}
+          theme={theme || defaultTheme}
           onClick={handleClick}
           selectable={multiSelectable}
           active={activeItemIndex === index}
@@ -88,7 +90,11 @@ const List: FunctionComponent<ListModel> = ({
     [theme, handleItemSelection, multiSelectable, activeItemIndex],
   );
 
-  return <ListStyle>{listItems.map(renderListItem)}</ListStyle>;
+  return (
+    <ul className={list} style={computeCssVarsFromTheme(theme)}>
+      {listItems.map(renderListItem)}
+    </ul>
+  );
 };
 
 export { List };

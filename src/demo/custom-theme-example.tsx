@@ -1,4 +1,5 @@
 import React from 'react';
+import { computeCssVarsFromTheme } from '../styles/theme-bridge';
 import Chrono from '../components';
 
 // Example 1: Custom Brand Colors Dark Theme
@@ -81,7 +82,14 @@ export const CustomThemeExample: React.FC = () => {
       <div style={{ marginBottom: '3rem' }}>
         <h2>Brand Colors Theme</h2>
         <p>Example showing custom brand color integration with cyan/orange palette:</p>
-        <div style={{ height: '400px', border: '1px solid #ccc', borderRadius: '8px' }}>
+        <div
+          style={{
+            height: '400px',
+            border: '1px solid #ccc',
+            borderRadius: '8px',
+            ...computeCssVarsFromTheme(brandDarkTheme),
+          }}
+        >
           <Chrono
             items={timelineItems}
             mode="VERTICAL"
@@ -95,7 +103,14 @@ export const CustomThemeExample: React.FC = () => {
       <div style={{ marginBottom: '3rem' }}>
         <h2>High Contrast Theme</h2>
         <p>Example showing high contrast colors for accessibility:</p>
-        <div style={{ height: '400px', border: '1px solid #ccc', borderRadius: '8px' }}>
+        <div
+          style={{
+            height: '400px',
+            border: '1px solid #ccc',
+            borderRadius: '8px',
+            ...computeCssVarsFromTheme(highContrastDarkTheme),
+          }}
+        >
           <Chrono
             items={timelineItems}
             mode="VERTICAL"

@@ -18,7 +18,6 @@ const ExpandButtonMemo = memo<ExpandButtonModel>(
       <ExpandButton
         onPointerDown={onExpand}
         onKeyDown={(ev) => ev.key === 'Enter' && onExpand?.(ev)}
-        theme={theme}
         aria-expanded={expanded}
         tabIndex={0}
         aria-label={label}

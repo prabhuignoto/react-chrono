@@ -1,48 +1,22 @@
-import { Theme } from '@models/Theme';
-import styled, { css } from 'styled-components';
+import { button, buttonIcon } from './timeline-card-media-buttons.css';
+import { buttonWrapper } from './timeline-card-media.css';
 
-const Button = css<{ theme: Theme }>`
-  align-items: center;
-  background: none;
-  // background: rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  height: 1.5rem;
-  justify-content: center;
-  padding: 0;
-  width: 1.5rem;
-  margin: 0 0.25rem;
-  background: ${(p) => p.theme?.primary};
-  color: #fff;
+export const ExpandButton = (
+  props: React.PropsWithChildren<React.HTMLAttributes<HTMLButtonElement>>,
+) => (
+  <button className={button} {...props}>
+    <span className={buttonIcon}>{props.children}</span>
+  </button>
+);
 
-  svg {
-    width: 70%;
-    height: 70%;
-  }
-`;
+export const ShowHideTextButton = (
+  props: React.PropsWithChildren<React.HTMLAttributes<HTMLButtonElement>>,
+) => (
+  <button className={button} {...props}>
+    <span className={buttonIcon}>{props.children}</span>
+  </button>
+);
 
-export const ExpandButton = styled.button<{
-  // expandFull?: boolean;
-  theme: Theme;
-}>`
-  ${Button}
-`;
-
-export const ShowHideTextButton = styled.button<{
-  showText?: boolean;
-  theme: Theme;
-}>`
-  ${Button}
-`;
-
-export const ButtonWrapper = styled.ul`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  margin-left: auto;
-`;
+export const ButtonWrapper: React.FC<React.PropsWithChildren<{}>> = ({
+  children,
+}) => <ul className={buttonWrapper}>{children}</ul>;

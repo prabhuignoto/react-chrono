@@ -9,8 +9,11 @@ import React, {
   useState,
   useMemo,
 } from 'react';
-import GlobalContextProvider from './GlobalContext';
+import { TimelineContextProvider } from './contexts/TimelineContextProvider';
 import Timeline from './timeline/timeline';
+import { computeCssVarsFromTheme } from '../styles/theme-bridge';
+import { lightThemeClass, darkThemeClass } from '../styles/themes.css';
+import { pickDefined } from '../utils/propUtils';
 const toReactArray = React.Children.toArray;
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
@@ -51,13 +54,14 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
             active: index === activeItemIndex,
             id,
             hasNestedItems,
-            items: item.items?.map((subItem) => ({
-              ...subItem,
-              _dayjs: dayjs(subItem.date),
-              id: getUniqueID(),
-              isNested: true,
-              visible: true,
-            })),
+            items:
+              item.items?.map((subItem) => ({
+                ...subItem,
+                _dayjs: dayjs(subItem.date),
+                id: getUniqueID(),
+                isNested: true,
+                visible: true,
+              })) || [],
             title: item.date
               ? dayjs(item.date).format(titleDateFormat)
               : item.title,
@@ -157,11 +161,22 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   const handleTimelineUpdate = useCallback(
     (actvTimelineIndex: number) => {
+      // Debug logging for visibility logic
+      if (typeof window !== 'undefined') {
+        console.log(
+          'Timeline Update - Mode:',
+          mode,
+          'Active Index:',
+          actvTimelineIndex,
+        );
+      }
+
       setTimeLineItems((lineItems) =>
         lineItems.map((item, index) => ({
           ...item,
           active: index === actvTimelineIndex,
-          visible: actvTimelineIndex >= 0,
+          // Always keep horizontal items visible so points are always shown
+          visible: true,
         })),
       );
 
@@ -173,7 +188,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
         }
       }
     },
-    [items],
+    [items, mode],
   );
 
   useEffect(() => {
@@ -196,24 +211,17 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     if (activeTimelineItem < timeLineItems.length - 1) {
       const newTimeLineItem = activeTimelineItem + 1;
 
-      // Skip timeline update (which triggers scrolling) in horizontal mode during slideshow
-      if (mode === 'HORIZONTAL' && slideShowActive) {
-        // Only update the timeline items state and active item, skip scroll triggering updates
-        setTimeLineItems((lineItems) =>
-          lineItems.map((item, index) => ({
-            ...item,
-            active: index === newTimeLineItem,
-            visible: newTimeLineItem >= 0,
-          })),
-        );
-        setActiveTimelineItem(newTimeLineItem);
+      // Update timeline state and trigger smooth navigation
+      handleTimelineUpdate(newTimeLineItem);
+      setActiveTimelineItem(newTimeLineItem);
 
-        if (items && items.length - 1 === newTimeLineItem) {
-          setSlideShowActive(false);
-        }
-      } else {
-        handleTimelineUpdate(newTimeLineItem);
-        setActiveTimelineItem(newTimeLineItem);
+      if (
+        mode === 'HORIZONTAL' &&
+        slideShowActive &&
+        items &&
+        items.length - 1 === newTimeLineItem
+      ) {
+        setSlideShowActive(false);
       }
     }
   }, [
@@ -229,23 +237,11 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     if (activeTimelineItem > 0) {
       const newTimeLineItem = activeTimelineItem - 1;
 
-      // Skip timeline update (which triggers scrolling) in horizontal mode during slideshow
-      if (mode === 'HORIZONTAL' && slideShowActive) {
-        // Only update the timeline items state and active item, skip scroll triggering updates
-        setTimeLineItems((lineItems) =>
-          lineItems.map((item, index) => ({
-            ...item,
-            active: index === newTimeLineItem,
-            visible: newTimeLineItem >= 0,
-          })),
-        );
-        setActiveTimelineItem(newTimeLineItem);
-      } else {
-        handleTimelineUpdate(newTimeLineItem);
-        setActiveTimelineItem(newTimeLineItem);
-      }
+      // Update timeline state and trigger smooth navigation
+      handleTimelineUpdate(newTimeLineItem);
+      setActiveTimelineItem(newTimeLineItem);
     }
-  }, [activeTimelineItem, handleTimelineUpdate, mode, slideShowActive]);
+  }, [activeTimelineItem, handleTimelineUpdate]);
 
   const handleFirst = useCallback(() => {
     setActiveTimelineItem(0);
@@ -299,29 +295,48 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     );
   }, [children]);
 
+  // Determine if we should use dark mode based on theme properties
+  const isDarkMode = useMemo(() => {
+    const t = props.theme;
+    return (
+      t?.timelineBgColor === '#000000' ||
+      t?.cardBgColor === '#1f2937' ||
+      t?.textColor === '#ffffff' ||
+      t?.textColor === '#f9fafb'
+    );
+  }, [props.theme]);
+
   return (
-    <GlobalContextProvider {...props}>
-      <Timeline
-        activeTimelineItem={activeTimelineItem}
-        contentDetailsChildren={contentDetailsChildren}
-        iconChildren={iconChildren}
-        items={timeLineItems}
-        onFirst={handleFirst}
-        onLast={handleLast}
-        onNext={handleOnNext}
-        onPrevious={handleOnPrevious}
-        onRestartSlideshow={restartSlideShow}
-        onTimelineUpdated={handleTimelineUpdate}
-        slideShow={slideShow}
-        slideShowEnabled={slideShow}
-        slideShowRunning={slideShowActive}
-        onScrollEnd={onScrollEnd}
-        onItemSelected={onItemSelected}
-        onOutlineSelection={handleOutlineSelection}
-        mode={mode}
-        onPaused={onPaused}
-      />
-    </GlobalContextProvider>
+    <TimelineContextProvider {...props}>
+      <div
+        className={isDarkMode ? darkThemeClass : lightThemeClass}
+        style={{ ...computeCssVarsFromTheme(props.theme), width: '100%' }}
+        id="testette"
+      >
+        <Timeline
+          activeTimelineItem={activeTimelineItem}
+          contentDetailsChildren={contentDetailsChildren}
+          iconChildren={iconChildren}
+          items={timeLineItems}
+          onFirst={handleFirst}
+          onLast={handleLast}
+          onNext={handleOnNext}
+          onPrevious={handleOnPrevious}
+          onRestartSlideshow={restartSlideShow}
+          onTimelineUpdated={handleTimelineUpdate}
+          slideShow={slideShow}
+          slideShowEnabled={slideShow}
+          slideShowRunning={slideShowActive}
+          {...pickDefined({
+            onScrollEnd,
+            onItemSelected,
+          })}
+          onOutlineSelection={handleOutlineSelection}
+          mode={mode || 'VERTICAL_ALTERNATING'}
+          onPaused={onPaused}
+        />
+      </div>
+    </TimelineContextProvider>
   );
 };
 

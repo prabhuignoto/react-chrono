@@ -1,5 +1,11 @@
 import React, { memo } from 'react';
-import { CardImage, ImageWrapper } from '../timeline-card-media.styles';
+import {
+  cardImage,
+  imageHidden,
+  imageRounded,
+  imageVisible,
+  imageWrapper,
+} from '../timeline-card-media.css';
 import { TimelineMode } from '@models/TimelineModel';
 
 interface ImageDisplayProps {
@@ -29,21 +35,27 @@ export const ImageDisplay = memo(
     handleMediaLoaded,
     handleError,
   }: ImageDisplayProps) => (
-    <ImageWrapper height={mediaHeight}>
-      <CardImage
+    <div className={imageWrapper} style={{ height: mediaHeight }}>
+      <img
+        className={[
+          cardImage,
+          mediaLoaded ? imageVisible : imageHidden,
+          borderLessCards ? imageRounded : undefined,
+        ]
+          .filter(Boolean)
+          .join(' ')}
         src={url}
-        mode={mode}
         onLoad={handleMediaLoaded}
         onError={handleError}
-        $visible={mediaLoaded}
         alt={name}
         loading="lazy"
-        $enableBorderRadius={borderLessCards}
-        fit={imageFit}
         data-testid="timeline-card-content-image"
         width="100%"
         height="auto"
+        style={{
+          objectFit: (imageFit as React.CSSProperties['objectFit']) ?? 'cover',
+        }}
       />
-    </ImageWrapper>
+    </div>
   ),
 );

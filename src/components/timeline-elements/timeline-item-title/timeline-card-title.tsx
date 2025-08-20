@@ -1,8 +1,10 @@
 import { TitleModel } from '@models/TimelineCardTitleModel';
 import cls from 'classnames';
-import React, { useContext, useMemo } from 'react';
-import { GlobalContext } from '../../GlobalContext';
-import { TitleWrapper } from './timeline-card-title.styles';
+import React, { useMemo } from 'react';
+import { useTimelineContext } from '../../contexts';
+import { titleActive, titleWrapper } from './timeline-card-title.css';
+import { cardTitleRecipe } from '../timeline-card-content/timeline-card-content.css';
+import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
 /**
  * TimelineItemTitle component
@@ -26,23 +28,33 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
 
   // Computed class name for the title, combining base class, active state, and additional classes
   const titleClass = useMemo(
-    () => cls(TITLE_CLASS, active ? 'active' : '', classString),
+    () =>
+      cls(
+        TITLE_CLASS,
+        active ? 'active' : '',
+        classString,
+        cardTitleRecipe({ active: !!active }),
+      ),
     [active, classString],
   );
 
-  // Get font size from global context
-  const { fontSizes } = useContext(GlobalContext);
+  // Get font size and dark mode from unified context
+  const { fontSizes, isDarkMode } = useTimelineContext();
 
   return (
-    <TitleWrapper
+    <div
       className={titleClass}
-      theme={theme}
-      $hide={!title}
-      align={align}
-      $fontSize={fontSizes?.title}
+      style={{
+        ...computeCssVarsFromTheme(theme, isDarkMode),
+        fontSize: fontSizes?.title || '1rem',
+        textAlign: align || undefined,
+        visibility: title ? 'visible' : 'hidden',
+      }}
+      data-ve-class={titleWrapper}
+      data-ve-active-class={titleActive}
     >
       {title}
-    </TitleWrapper>
+    </div>
   );
 };
 

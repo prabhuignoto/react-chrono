@@ -1,6 +1,23 @@
-import { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import cls from 'classnames';
-import { GlobalContext } from '../../../GlobalContext';
+import { useTimelineContext } from '../../../contexts';
+
+interface UseTimelineCardProps {
+  active?: boolean;
+  autoScroll?: (params: {
+    pointOffset?: number;
+    contentHeight?: number;
+    contentOffset?: number;
+  }) => void;
+  slideShowRunning?: boolean;
+  cardLess?: boolean;
+  showAllCardsHorizontal?: boolean;
+  id?: string;
+  onClick?: (id?: string) => void;
+  mode?: 'HORIZONTAL' | 'VERTICAL' | 'VERTICAL_ALTERNATING' | 'HORIZONTAL_ALL';
+  position?: 'TOP' | 'BOTTOM';
+  iconChild?: React.ReactNode;
+}
 
 export const useTimelineCard = ({
   active,
@@ -13,18 +30,32 @@ export const useTimelineCard = ({
   mode,
   position,
   iconChild,
-}) => {
+}: UseTimelineCardProps) => {
   const circleRef = useRef<HTMLButtonElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const { disableClickOnCircle } = useContext(GlobalContext);
+  const { disableClickOnCircle, disableInteraction, disableAutoScrollOnClick } =
+    useTimelineContext();
 
   const handleClick = useCallback(() => {
-    if (!disableClickOnCircle && onClick && !slideShowRunning) {
+    if (
+      !disableClickOnCircle &&
+      !disableInteraction &&
+      !disableAutoScrollOnClick &&
+      onClick &&
+      !slideShowRunning
+    ) {
       onClick(id);
     }
-  }, [disableClickOnCircle, onClick, slideShowRunning, id]);
+  }, [
+    disableClickOnCircle,
+    disableInteraction,
+    disableAutoScrollOnClick,
+    onClick,
+    slideShowRunning,
+    id,
+  ]);
 
   useEffect(() => {
     if (active) {
@@ -37,7 +68,15 @@ export const useTimelineCard = ({
 
         autoScroll?.({
           pointOffset: circleOffsetLeft + wrapperOffsetLeft,
-          pointWidth: circle.clientWidth,
+        });
+
+        // Bring the timeline point itself to keyboard focus for accessibility
+        requestAnimationFrame(() => {
+          try {
+            circle.focus({ preventScroll: true });
+          } catch (_) {
+            // ignore focus errors
+          }
         });
       }
     }
@@ -72,10 +111,12 @@ export const useTimelineCard = ({
     [active, iconChild, modeLower],
   );
 
-  const canShowTimelineContent = useMemo(
-    () => (active && !cardLess) || showAllCardsHorizontal,
-    [active, cardLess, showAllCardsHorizontal],
-  );
+  const canShowTimelineContent = useMemo(() => {
+    // In horizontal_all mode with showAllCardsHorizontal, always show content
+    // In regular horizontal mode, only show content for active items (unless cardLess)
+    const shouldShowContent = showAllCardsHorizontal || (active && !cardLess);
+    return shouldShowContent;
+  }, [active, cardLess, showAllCardsHorizontal]);
 
   return {
     circleRef,

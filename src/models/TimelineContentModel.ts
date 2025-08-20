@@ -68,4 +68,7 @@ export type TimelineContentModel = {
 
   // URL associated with the timeline item.
   url?: string;
+
+  // Control focus behavior for the content wrapper
+  focusable?: boolean;
 };

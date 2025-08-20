@@ -1,15 +1,9 @@
 import React, { useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import { videoElement } from './video.css';
 
 interface VideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
   children: React.ReactNode;
 }
-
-const VideoElement = styled.video`
-  width: 100%;
-  height: auto;
-  display: block;
-`;
 
 /**
  * Accessible Video component
@@ -34,8 +28,9 @@ const Video: React.FC<VideoProps> = ({
   }, [autoPlay]);
 
   return (
-    <VideoElement
+    <video
       ref={videoRef}
+      className={videoElement}
       autoPlay={autoPlay}
       muted={muted}
       controls={controls}
@@ -46,7 +41,7 @@ const Video: React.FC<VideoProps> = ({
       {...rest}
     >
       {children}
-    </VideoElement>
+    </video>
   );
 };
 

@@ -27,7 +27,9 @@ describe('TimelineCardContent', () => {
 
   // should render the component successfully
   it('should render the component successfully', () => {
-    const { getByTestId } = render(<TimelineCardContent />);
+    const { getByTestId } = customRender(<TimelineCardContent />, {
+      providerProps,
+    });
 
     expect(getByTestId('timeline-card-content')).toBeInTheDocument();
     // expect(getByTestId('timeline-card-content')).toBeVisible();
@@ -35,7 +37,9 @@ describe('TimelineCardContent', () => {
 
   //should render the title
   it('should render the title', () => {
-    render(<TimelineCardContent title="title" />);
+    customRender(<TimelineCardContent title="title" />, {
+      providerProps,
+    });
 
     expect(screen.getByText('title')).toBeInTheDocument();
     expect(screen.getByText('title')).toBeVisible();
@@ -43,11 +47,13 @@ describe('TimelineCardContent', () => {
 
   // should render the detailedText when a string is passed
   it('should render the detailedText when a string is passed', () => {
-    render(
-      <GlobalContextProvider toolbarPosition="bottom" textDensity="HIGH">
-        <TimelineCardContent detailedText="detailedText" />
-      </GlobalContextProvider>,
-    );
+    customRender(<TimelineCardContent detailedText="detailedText" />, {
+      providerProps: {
+        ...providerProps,
+        toolbarPosition: 'bottom',
+        textDensity: 'HIGH',
+      },
+    });
 
     expect(screen.getByText('detailedText')).toBeInTheDocument();
     expect(screen.getByText('detailedText')).toBeVisible();
@@ -55,10 +61,15 @@ describe('TimelineCardContent', () => {
 
   // should render the detailedText when a array of strings is passed
   it('should render the detailedText when a array of strings is passed', () => {
-    render(
-      <GlobalContextProvider toolbarPosition="bottom" textDensity="HIGH">
-        <TimelineCardContent detailedText={['detailedText', 'text 2']} />
-      </GlobalContextProvider>,
+    customRender(
+      <TimelineCardContent detailedText={['detailedText', 'text 2']} />,
+      {
+        providerProps: {
+          ...providerProps,
+          toolbarPosition: 'bottom',
+          textDensity: 'HIGH',
+        },
+      },
     );
 
     expect(screen.getByText('detailedText')).toBeInTheDocument();

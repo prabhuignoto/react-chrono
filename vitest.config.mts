@@ -1,16 +1,17 @@
 /// <reference types="vite/client" />
 
 import react from '@vitejs/plugin-react';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import tsconfig from 'vite-tsconfig-paths';
 import { defineConfig } from 'vitest/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), tsconfig()],
+  plugins: [vanillaExtractPlugin({ identifiers: 'debug' }), react(), tsconfig()],
   test: {
     coverage: {
       clean: true,
-      enabled: false,
+      enabled: !!process.env.CI,
       exclude: [
         // Type definitions and configuration files
         '**/*.d.ts',
@@ -22,7 +23,6 @@ export default defineConfig({
         '**/postcss.config.js',
         '**/tailwind.config.js',
         '**/babel.config.js',
-        '**/webpack.config.js',
         '**/rollup.config.*',
         '**/vite.config.*',
         '**/vitest.config.*',

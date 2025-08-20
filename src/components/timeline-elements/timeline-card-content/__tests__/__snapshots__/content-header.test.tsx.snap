@@ -3,16 +3,18 @@
 exports[`Content Header > should match the snapshot 1`] = `
 <div>
   <header
-    class="sc-dYwGCk jmCnZH"
+    class="timeline-card-content_timelineCardHeader__chzdno3"
   >
     <span
-      class="sc-kcLKEh gOJTBo card-title"
+      class="card-title"
       data-class="card-title"
+      style="color: rgb(0, 0, 0); font-size: 1.25rem;"
     >
       title
     </span>
     <span
-      class="sc-dntSTA hTcZlr card-sub-title card-subtitle"
+      class="card-sub-title card-subtitle"
+      style="color: rgb(0, 0, 0); font-size: 0.85rem;"
     >
       content
     </span>

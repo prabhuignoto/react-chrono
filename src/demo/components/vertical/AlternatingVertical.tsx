@@ -3,6 +3,7 @@ import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent } from 'react';
 import Chrono from '../../../components';
 import { ComponentContainerTree, Vertical } from '../../App.styles';
+import { pickDefined } from '../../../utils/propUtils';
 
 export interface AlternatingVerticalProps {
   type: string;
@@ -37,9 +38,8 @@ export const AlternatingVertical: FunctionComponent<AlternatingVerticalProps> = 
         enableBreakPoint
         highlightCardsOnHover
         contentDetailsHeight={200}
-      >
-        {children}
-      </Chrono>
+        {...pickDefined({ children })}
+      />
     </ComponentContainerTree>
   </Vertical>
 ); 

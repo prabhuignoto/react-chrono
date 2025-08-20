@@ -1,3 +1,9 @@
+node_modules
+coverage
+dist
+dist_site
+build
+*.log
 env
 icons
 src/demo

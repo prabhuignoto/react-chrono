@@ -2,12 +2,13 @@ import React from 'react';
 import { TimelineMode } from '@models/TimelineModel';
 import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
-import { Outline, TimelineMain } from './timeline.style';
 import { Scroll } from '@models/TimelineHorizontalModel';
+import { outline as outlineStyle, timelineMain } from './timeline.css';
+import { pickDefined } from '../../utils/propUtils';
 
 interface TimelineViewProps {
   timelineMode: string;
-  activeTimelineItem?: number;
+  activeTimelineItem: number;
   autoScroll: (scroll: Partial<Scroll>) => void;
   contentDetailsChildren?: React.ReactNode;
   hasFocus: boolean;
@@ -19,8 +20,8 @@ interface TimelineViewProps {
   id: string;
   theme?: any;
   lineWidth?: number;
-  onOutlineSelection?: (index: number) => void;
-  nestedCardHeight?: number;
+  onOutlineSelection: (index: number) => void;
+  nestedCardHeight: number;
 }
 
 const TimelineView: React.FC<TimelineViewProps> = ({
@@ -43,8 +44,14 @@ const TimelineView: React.FC<TimelineViewProps> = ({
   // Horizontal Timeline (regular or "all cards" mode)
   if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
     return (
-      <TimelineMain className={timelineMode.toLowerCase()}>
-        <Outline color={theme?.primary} height={lineWidth} />
+      <>
+        <div
+          className={outlineStyle}
+          style={{
+            backgroundColor: theme?.primary,
+            height: `${lineWidth}px`,
+          }}
+        />
         <TimelineHorizontal
           autoScroll={autoScroll}
           contentDetailsChildren={contentDetailsChildren}
@@ -54,11 +61,13 @@ const TimelineView: React.FC<TimelineViewProps> = ({
           items={items}
           mode={timelineMode as TimelineMode}
           onElapsed={handleTimelineItemElapsed}
-          slideShowRunning={slideShowRunning}
           wrapperId={id}
           nestedCardHeight={nestedCardHeight}
+          {...pickDefined({
+            slideShowRunning,
+          })}
         />
-      </TimelineMain>
+      </>
     );
   }
 
@@ -67,6 +76,7 @@ const TimelineView: React.FC<TimelineViewProps> = ({
     return (
       <TimelineVertical
         activeTimelineItem={activeTimelineItem}
+        alternateCards={true}
         autoScroll={autoScroll}
         contentDetailsChildren={contentDetailsChildren}
         hasFocus={hasFocus}
@@ -76,9 +86,11 @@ const TimelineView: React.FC<TimelineViewProps> = ({
         onClick={handleTimelineItemClick}
         onElapsed={handleTimelineItemElapsed}
         onOutlineSelection={onOutlineSelection}
-        slideShowRunning={slideShowRunning}
         theme={theme}
         nestedCardHeight={nestedCardHeight}
+        {...pickDefined({
+          slideShowRunning,
+        })}
       />
     );
   }
@@ -97,9 +109,11 @@ const TimelineView: React.FC<TimelineViewProps> = ({
       onClick={handleTimelineItemClick}
       onElapsed={handleTimelineItemElapsed}
       onOutlineSelection={onOutlineSelection}
-      slideShowRunning={slideShowRunning}
       theme={theme}
       nestedCardHeight={nestedCardHeight}
+      {...pickDefined({
+        slideShowRunning,
+      })}
     />
   );
 };

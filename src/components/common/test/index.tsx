@@ -9,6 +9,7 @@ import { TimelineProps } from '@models/TimelineModel';
 import { render, RenderResult } from '@testing-library/react';
 import { ReactElement } from 'react';
 import { GlobalContext } from '../../GlobalContext';
+import { TestWrapper } from '../../../test-utils/test-wrapper';
 
 export const providerProps: TimelineProps = {
   buttonTexts: {
@@ -128,8 +129,24 @@ export const customRender = (
   ui: ReactElement,
   { providerProps, ...renderOptions }: any,
 ): RenderResult => {
+  // Extract mode from Timeline component props if available
+  const timelineMode = (ui.props as any)?.mode || providerProps?.mode;
+
+  // Use both old GlobalContext and new split contexts for backward compatibility during migration
   return render(
-    <GlobalContext.Provider value={providerProps}>{ui}</GlobalContext.Provider>,
+    <GlobalContext.Provider value={providerProps}>
+      <TestWrapper
+        theme={providerProps?.theme}
+        mode={timelineMode}
+        disableInteraction={providerProps?.disableInteraction}
+        enableDarkToggle={providerProps?.enableDarkToggle}
+        textOverlay={providerProps?.textOverlay}
+        slideShowEnabled={providerProps?.slideShowEnabled}
+        {...providerProps}
+      >
+        {ui}
+      </TestWrapper>
+    </GlobalContext.Provider>,
     renderOptions,
   );
 };

@@ -1,6 +1,6 @@
 import { MediaState } from '@models/TimelineMediaModel';
 import React, { memo, useEffect, useRef } from 'react';
-import { CardVideo } from '../timeline-card-media.styles';
+import { cardVideo } from '../timeline-card-media.css';
 
 interface VideoPlayerProps {
   url: string;
@@ -40,7 +40,8 @@ export const VideoPlayer = memo(
     }, [active]);
 
     return (
-      <CardVideo
+      <video
+        className={cardVideo}
         controls
         autoPlay={active}
         ref={videoRef}
@@ -71,7 +72,7 @@ export const VideoPlayer = memo(
         preload="metadata"
       >
         <source src={url}></source>
-      </CardVideo>
+      </video>
     );
   },
 );

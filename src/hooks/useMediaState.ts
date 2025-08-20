@@ -32,22 +32,28 @@ export const useMediaState = ({
     (state: MediaState) => {
       // Early return for inactive slideshow
       if (!slideShowActive) {
-        if (isPlaying) setIsPlaying(false);
+        setIsPlaying((prevIsPlaying) => {
+          if (prevIsPlaying) return false;
+          return prevIsPlaying;
+        });
         return;
       }
 
       // Batch state updates when possible
       const shouldSetPlaying = state.playing ?? false;
-      if (isPlaying !== shouldSetPlaying) {
-        setIsPlaying(shouldSetPlaying);
-      }
+      setIsPlaying((prevIsPlaying) => {
+        if (prevIsPlaying !== shouldSetPlaying) {
+          return shouldSetPlaying;
+        }
+        return prevIsPlaying;
+      });
 
       // Handle elapsed callback with stable reference
       if (state.paused && paused && id && onElapsedRef.current) {
         onElapsedRef.current(id);
       }
     },
-    [slideShowActive, paused, id, isPlaying],
+    [slideShowActive, paused, id],
   );
 
   const cleanup = useCallback(() => {
