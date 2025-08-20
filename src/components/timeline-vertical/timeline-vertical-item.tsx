@@ -171,13 +171,16 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     [className, flipLayout],
   );
 
+  // Memoize theme CSS variables to prevent re-creation on every render
+  const themeCssVars = useMemo(() => computeCssVarsFromTheme(theme), [theme]);
+
   const Title = useMemo(
     () => (
       <div
         className={titleClassName}
         data-mode={mode}
         style={{
-          ...computeCssVarsFromTheme(theme),
+          ...themeCssVars,
           display: titleConfig.display,
           width: titleConfig.width,
           order: calculateTitleOrder(),
@@ -203,7 +206,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     [
       titleClassName,
       mode,
-      theme,
+      themeCssVars,
       titleConfig,
       title,
       active,
@@ -340,7 +343,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       data-item-id={id}
       key={id}
       ref={contentRef}
-      style={computeCssVarsFromTheme(theme)}
+      style={themeCssVars}
       aria-current={active ? 'step' : undefined}
       aria-label={accessibleTitle}
       role="listitem"

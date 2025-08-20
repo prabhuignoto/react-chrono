@@ -112,7 +112,7 @@ globalStyle(`${verticalItemWrapperNested}:not(:last-child)::after`, {
 export const nestedTimelineWrapper = style({
   marginTop: '0.5rem',
   marginBottom: '0.25rem',
-  paddingLeft: '1rem',
+  // paddingLeft: '1rem',
   borderLeft: `2px solid ${semanticTokens.timeline.point.background.active}20`,
   position: 'relative',
 });

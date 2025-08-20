@@ -17,7 +17,7 @@ import { ExpandButtonMemo } from '../../memoized/expand-button-memo';
 import { SubTitleMemo } from '../../memoized/subtitle-memo';
 import { DetailsTextMemo } from '../../memoized/details-text-memo';
 import { TimelineMode } from '@models/TimelineModel';
-import { TextMaximizeIcon, TextMinimizeIcon } from '../../../icons';
+import { PlusIcon, MinusIcon } from '../../../icons';
 
 export interface ContentDisplayProps {
   readonly mode: TimelineMode;
@@ -104,23 +104,7 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
         />
         {(canExpand || textOverlay) && (
           <ButtonWrapper>
-            {canExpand && (
-              <>
-                <ShowOrHideTextButtonMemo
-                  onToggle={toggleText}
-                  show={showText}
-                  textOverlay
-                  theme={theme}
-                />
-                <ExpandButtonMemo
-                  theme={theme}
-                  expanded={expandDetails}
-                  onExpand={toggleExpand}
-                  textOverlay
-                />
-              </>
-            )}
-            {textOverlay && !canExpand && (
+            {textOverlay ? (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -154,10 +138,25 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
                 type="button"
               >
                 <div style={{ width: '16px', height: '16px' }}>
-                  {isMinimized ? <TextMaximizeIcon /> : <TextMinimizeIcon />}
+                  {isMinimized ? <PlusIcon /> : <MinusIcon />}
                 </div>
               </button>
-            )}
+            ) : canExpand ? (
+              <>
+                <ShowOrHideTextButtonMemo
+                  onToggle={toggleText}
+                  show={showText}
+                  textOverlay
+                  theme={theme}
+                />
+                <ExpandButtonMemo
+                  theme={theme}
+                  expanded={expandDetails}
+                  onExpand={toggleExpand}
+                  textOverlay
+                />
+              </>
+            ) : null}
           </ButtonWrapper>
         )}
       </div>

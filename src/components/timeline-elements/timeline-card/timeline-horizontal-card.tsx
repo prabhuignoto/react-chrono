@@ -7,6 +7,7 @@ import {
   timelineTitleContainer,
 } from './timeline-horizontal-card.css';
 import { useTimelineCard } from './hooks/useTimelineCard';
+import { pickDefined } from '../../../utils/propUtils';
 import TimelinePoint from './timeline-point/timeline-point';
 import TimelineCardPortal from './timeline-card-portal/timeline-card-portal';
 
@@ -56,16 +57,18 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     circleClass,
     canShowTimelineContent,
   } = useTimelineCard({
-    ...(active !== undefined ? { active } : {}),
-    ...(autoScroll ? { autoScroll } : {}),
-    ...(slideShowRunning !== undefined ? { slideShowRunning } : {}),
     cardLess,
     showAllCardsHorizontal,
-    ...(id !== undefined ? { id } : {}),
-    ...(onClick ? { onClick } : {}),
     mode,
     position,
     iconChild,
+    ...pickDefined({
+      active,
+      autoScroll,
+      slideShowRunning,
+      id,
+      onClick,
+    }),
   });
 
   // Convert cardDetailedText to the expected string or string[] format
@@ -100,7 +103,6 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           active={active || false}
           disableInteraction={disableInteraction}
           showAllCardsHorizontal={showAllCardsHorizontal}
-          {...(cardWidth ? { cardWidth } : {})}
           cardSubtitle={
             typeof cardSubtitle === 'string'
               ? cardSubtitle
@@ -109,21 +111,22 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           cardTitle={
             typeof cardTitle === 'string' ? cardTitle : String(cardTitle ?? '')
           }
-          {...(url ? { url } : {})}
-          {...(formattedDetailedText
-            ? { cardDetailedText: formattedDetailedText }
-            : {})}
-          {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
-          {...(media ? { media } : {})}
-          {...(onElapsed ? { onElapsed } : {})}
-          {...(customContent ? { customContent } : {})}
-          {...(hasFocus !== undefined ? { hasFocus } : {})}
-          {...(onClick ? { onClick } : {})}
-          {...(timelineContent ? { timelineContent } : {})}
-          {...(isNested !== undefined ? { isNested } : {})}
-          {...(nestedCardHeight !== undefined ? { nestedCardHeight } : {})}
-          {...(items ? { items } : {})}
           wrapperId={wrapperId}
+          {...pickDefined({
+            cardWidth,
+            url,
+            slideShowRunning,
+            media,
+            onElapsed,
+            customContent,
+            hasFocus,
+            onClick,
+            timelineContent,
+            isNested,
+            nestedCardHeight,
+            items,
+          })}
+          {...(formattedDetailedText ? { cardDetailedText: formattedDetailedText } : {})}
         />
       )}
 
@@ -136,9 +139,11 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
         timelinePointDimension={timelinePointDimension}
         timelinePointShape={timelinePointShape}
         iconChild={iconChild}
-        {...(active !== undefined ? { active } : {})}
         disabled={disableInteraction}
-        {...(id ? { itemId: id } : {})}
+        {...pickDefined({
+          active,
+          itemId: id,
+        })}
       />
 
       <div

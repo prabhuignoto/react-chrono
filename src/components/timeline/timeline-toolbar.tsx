@@ -3,6 +3,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useTimelineContext } from '../contexts';
 import Controls from '../timeline-elements/timeline-control/timeline-control';
 import { FullscreenControl } from '../timeline-elements/fullscreen-control';
+import { pickDefined } from '../../utils/propUtils';
 // Removed direct styled import; buttons use native <button> with classes now
 import { ChevronLeft, ChevronRight, CloseIcon } from '../icons';
 import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
@@ -99,7 +100,9 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       id: item.id ?? '',
       title: getTextFromNode(item.title),
       description: getTextFromNode(item.cardSubtitle),
-      ...(item.active !== undefined ? { active: item.active } : {}),
+      ...pickDefined({
+        active: item.active,
+      }),
     }));
   }, [items]);
 
@@ -203,18 +206,20 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           disableLeft={isLeftDisabled}
           disableRight={isRightDisabled}
           id={id}
-          {...(onFirst ? { onFirst } : {})}
-          {...(onLast ? { onLast } : {})}
-          {...(onNext ? { onNext } : {})}
-          {...(onPrevious ? { onPrevious } : {})}
-          {...(onRestartSlideshow ? { onReplay: onRestartSlideshow } : {})}
-          {...(slideShowEnabled !== undefined ? { slideShowEnabled } : {})}
-          {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
           isDark={darkMode}
           onToggleDarkMode={toggleDarkMode}
-          {...(onPaused ? { onPaused } : {})}
           activeTimelineItem={activeTimelineItem ?? 0}
           totalItems={totalItems}
+          {...pickDefined({
+            onFirst,
+            onLast,
+            onNext,
+            onPrevious,
+            onReplay: onRestartSlideshow,
+            slideShowEnabled,
+            slideShowRunning,
+            onPaused,
+          })}
         />
       </div>
       <div className={veSearchGroup} role="search" aria-label="Timeline search">
@@ -379,9 +384,11 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                 onUpdateTimelineMode={(modeString: string) =>
                   onUpdateTimelineMode(modeString as TimelineMode)
                 }
-                {...(mode ? { mode } : {})}
                 position={toolbarPosition}
                 isMobile={isMobile}
+                {...pickDefined({
+                  mode,
+                })}
               />
             ) : null}
           </div>
@@ -402,11 +409,13 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               <FullscreenControl
                 targetRef={timelineRef}
                 theme={theme}
-                {...(onEnterFullscreen ? { onEnterFullscreen } : {})}
-                {...(onExitFullscreen ? { onExitFullscreen } : {})}
-                {...(onFullscreenError ? { onError: onFullscreenError } : {})}
                 size="medium"
                 disabled={false}
+                {...pickDefined({
+                  onEnterFullscreen,
+                  onExitFullscreen,
+                  onError: onFullscreenError,
+                })}
               />
             )}
           </div>

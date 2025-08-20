@@ -8,6 +8,7 @@ import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
 import * as ve from './timeline.css';
 // Note: Removed unused imports from timeline-main.css
 import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
+import { lightThemeClass, darkThemeClass } from '../../styles/themes.css';
 import { TimelineToolbar } from './timeline-toolbar';
 import { useTimelineSearch } from '../../hooks/useTimelineSearch';
 import { useTimelineNavigation } from '../../hooks/useTimelineNavigation';
@@ -547,15 +548,21 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       : props.timelineHeight || '100%';
   }, [props.timelineHeight]);
 
+  // Memoize theme CSS variables to prevent re-creation on every render
+  const themeCssVars = useMemo(
+    () => computeCssVarsFromTheme(theme, darkMode),
+    [theme, darkMode]
+  );
+
   return (
     <div
       ref={wrapperRef}
       onKeyDown={handleKeyDown}
       onFocus={handleFocus}
       onBlur={handleBlur}
-      className={`timeline-wrapper ${mode.toLowerCase()} ${ve.wrapper}`}
+      className={`timeline-wrapper ${mode.toLowerCase()} ${ve.wrapper} ${darkMode ? darkThemeClass : lightThemeClass}`}
       style={{
-        ...computeCssVarsFromTheme(theme, darkMode),
+        ...themeCssVars,
         height: wrapperHeight,
       }}
       data-fullscreen={isFullscreen}
@@ -644,7 +651,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         )}`}
         id="timeline-main-wrapper"
         data-testid="timeline-main-wrapper"
-        style={computeCssVarsFromTheme(theme, darkMode)}
+        style={themeCssVars}
         onScroll={handleMainScroll}
       >
         <TimelineView

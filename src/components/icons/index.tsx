@@ -13,7 +13,5 @@ export { default as MoonIcon } from './moon';
 export { default as PlusIcon } from './plus';
 export { default as StopIcon } from "./stop";
 export { default as SunIcon } from './sun';
-export { default as TextMaximizeIcon } from './text-maximize';
-export { default as TextMinimizeIcon } from './text-minimize';
 
 export {default as ParaIcon} from './para';

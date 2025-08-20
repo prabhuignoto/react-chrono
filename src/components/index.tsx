@@ -12,6 +12,8 @@ import React, {
 import { TimelineContextProvider } from './contexts/TimelineContextProvider';
 import Timeline from './timeline/timeline';
 import { computeCssVarsFromTheme } from '../styles/theme-bridge';
+import { lightThemeClass, darkThemeClass } from '../styles/themes.css';
+import { pickDefined } from '../utils/propUtils';
 const toReactArray = React.Children.toArray;
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
@@ -293,9 +295,19 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     );
   }, [children]);
 
+  // Determine if we should use dark mode based on theme properties
+  const isDarkMode = useMemo(() => {
+    const t = props.theme;
+    return t?.timelineBgColor === '#000000' ||
+      t?.cardBgColor === '#1f2937' ||
+      t?.textColor === '#ffffff' ||
+      t?.textColor === '#f9fafb';
+  }, [props.theme]);
+
   return (
     <TimelineContextProvider {...props}>
       <div
+        className={isDarkMode ? darkThemeClass : lightThemeClass}
         style={{ ...computeCssVarsFromTheme(props.theme), width: '100%' }}
         id="testette"
       >
@@ -313,8 +325,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
           slideShow={slideShow}
           slideShowEnabled={slideShow}
           slideShowRunning={slideShowActive}
-          {...(onScrollEnd ? { onScrollEnd } : {})}
-          {...(onItemSelected ? { onItemSelected } : {})}
+          {...pickDefined({
+            onScrollEnd,
+            onItemSelected,
+          })}
           onOutlineSelection={handleOutlineSelection}
           mode={mode || 'VERTICAL_ALTERNATING'}
           onPaused={onPaused}

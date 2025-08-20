@@ -3,6 +3,7 @@ import { useTimelineKeyboardNavigation } from './useTimelineKeyboardNavigation';
 import { useTimelineItemNavigation } from './useTimelineItemNavigation';
 import { useTimelineScrolling } from './useTimelineScrolling';
 import { useStableCallback } from './utils';
+import { pickDefined } from '../utils/propUtils';
 
 interface UseTimelineNavigationProps {
   items: any[]; // Use any to avoid type conflicts
@@ -51,7 +52,7 @@ export const useTimelineNavigation = ({
     mode,
     timelineId,
     slideShowRunning,
-    ...(onTimelineUpdated ? { onTimelineUpdated } : {}),
+    ...pickDefined({ onTimelineUpdated }),
   });
 
   const { scrollToElement } = useTimelineScrolling();

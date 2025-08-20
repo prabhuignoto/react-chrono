@@ -2,6 +2,7 @@ import React, { forwardRef, memo, RefObject } from 'react';
 import { useFullscreen } from '../../../hooks/useFullscreen';
 import { FullscreenButton } from '../fullscreen-button';
 import { FullscreenControlProps } from './fullscreen-control.model';
+import { pickDefined } from '../../../utils/propUtils';
 
 /**
  * FullscreenControl Component
@@ -72,12 +73,12 @@ const FullscreenControl = memo(
           theme={theme}
           disabled={disabled || !!error}
           size={size}
-          {...(className ? { className } : {})}
-          {...(ariaLabel ? { ariaLabel } : {})}
-          {...(title || (error ? `Fullscreen unavailable: ${error}` : undefined)
-            ? { title: title || `Fullscreen unavailable: ${error}` }
-            : {})}
           testId={testId}
+          {...pickDefined({
+            className,
+            ariaLabel,
+          })}
+          {...(title || error ? { title: title || `Fullscreen unavailable: ${error}` } : {})}
         />
       );
     },

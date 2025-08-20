@@ -4,6 +4,7 @@ import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
 import { Scroll } from '@models/TimelineHorizontalModel';
 import { outline as outlineStyle, timelineMain } from './timeline.css';
+import { pickDefined } from '../../utils/propUtils';
 
 interface TimelineViewProps {
   timelineMode: string;
@@ -60,9 +61,11 @@ const TimelineView: React.FC<TimelineViewProps> = ({
           items={items}
           mode={timelineMode as TimelineMode}
           onElapsed={handleTimelineItemElapsed}
-          {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
           wrapperId={id}
           nestedCardHeight={nestedCardHeight}
+          {...pickDefined({
+            slideShowRunning,
+          })}
         />
       </>
     );
@@ -83,9 +86,11 @@ const TimelineView: React.FC<TimelineViewProps> = ({
         onClick={handleTimelineItemClick}
         onElapsed={handleTimelineItemElapsed}
         onOutlineSelection={onOutlineSelection}
-        {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
         theme={theme}
         nestedCardHeight={nestedCardHeight}
+        {...pickDefined({
+          slideShowRunning,
+        })}
       />
     );
   }
@@ -104,9 +109,11 @@ const TimelineView: React.FC<TimelineViewProps> = ({
       onClick={handleTimelineItemClick}
       onElapsed={handleTimelineItemElapsed}
       onOutlineSelection={onOutlineSelection}
-      {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
       theme={theme}
       nestedCardHeight={nestedCardHeight}
+      {...pickDefined({
+        slideShowRunning,
+      })}
     />
   );
 };

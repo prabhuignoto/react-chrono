@@ -8,6 +8,7 @@ import React, {
   useRef,
 } from 'react';
 import { useTimelineContext } from '../contexts';
+import { pickDefined } from '../../utils/propUtils';
 import TimelineCard from '../timeline-elements/timeline-card/timeline-horizontal-card';
 import {
   timelineHorizontalWrapper,
@@ -116,35 +117,36 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
         id={`timeline-${mode.toLowerCase()}-item-${item.id}`}
       >
         <TimelineCard
-          {...(item.id ? { id: item.id } : {})}
-          title={item.title}
-          cardTitle={item.cardTitle}
-          cardSubtitle={item.cardSubtitle}
-          cardDetailedText={item.cardDetailedText}
-          {...(item.url ? { url: item.url } : {})}
-          {...(item.media ? { media: item.media } : {})}
-          {...(item.timelineContent
-            ? { timelineContent: item.timelineContent }
-            : {})}
-          {...(item.items ? { items: item.items } : {})}
-          {...(item.isNested !== undefined ? { isNested: item.isNested } : {})}
-          {...(item.hasNestedItems !== undefined
-            ? { hasNestedItems: item.hasNestedItems }
-            : {})}
-          {...(item.visible !== undefined ? { visible: item.visible } : {})}
-          {...(item.active !== undefined ? { active: item.active } : {})}
+          // Always required props
           onClick={handleItemClick}
           autoScroll={autoScroll}
           wrapperId={wrapperId}
           theme={theme}
-          {...(slideShowRunning !== undefined ? { slideShowRunning } : {})}
           cardHeight={cardHeight}
-          {...(onElapsed ? { onElapsed } : {})}
-          customContent={children ? (children as ReactNode[])[index] : null}
-          {...(hasFocus !== undefined ? { hasFocus } : {})}
-          iconChild={iconChildColln[index]}
           cardWidth={cardWidth}
-          {...(nestedCardHeight !== undefined ? { nestedCardHeight } : {})}
+          // Always provided props
+          title={item.title}
+          cardTitle={item.cardTitle}
+          cardSubtitle={item.cardSubtitle}
+          cardDetailedText={item.cardDetailedText}
+          customContent={children ? (children as ReactNode[])[index] : null}
+          iconChild={iconChildColln[index]}
+          // Conditionally provided props - clean approach
+          {...pickDefined({
+            id: item.id,
+            url: item.url,
+            media: item.media,
+            timelineContent: item.timelineContent,
+            items: item.items,
+            isNested: item.isNested,
+            hasNestedItems: item.hasNestedItems,
+            visible: item.visible,
+            active: item.active,
+            slideShowRunning: slideShowRunning,
+            onElapsed: onElapsed,
+            hasFocus: hasFocus,
+            nestedCardHeight: nestedCardHeight,
+          })}
         />
       </li>
     ));

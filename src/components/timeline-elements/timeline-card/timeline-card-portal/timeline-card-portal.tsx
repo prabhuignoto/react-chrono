@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import ReactDOM from 'react-dom';
 import { wrapper as veCardWrapper } from '../timeline-horizontal-card.css';
 import TimelineCardContent from '../../timeline-card-content/timeline-card-content';
+import { pickDefined } from '../../../../utils/propUtils';
 
 interface TimelineCardPortalProps {
   containerClass: string;
@@ -80,25 +81,23 @@ const TimelineCardPortal: React.FC<TimelineCardPortalProps> = ({
           content={cardSubtitle}
           active={active}
           title={cardTitle}
-          {...(url ? { url } : {})}
           detailedText={cardDetailedText}
           onShowMore={handleOnShowMore}
           theme={theme}
-          {...(slideShowRunning !== undefined
-            ? { slideShowActive: slideShowRunning }
-            : {})}
           media={media}
-          {...(onElapsed
-            ? { onElapsed: (id?: string) => id && onElapsed(id) }
-            : {})}
           id={id}
           customContent={customContent}
-          {...(hasFocus !== undefined ? { hasFocus } : {})}
-          {...(onClick ? { onClick } : {})}
-          {...(timelineContent ? { timelineContent } : {})}
-          {...(isNested !== undefined ? { isNested } : {})}
-          {...(nestedCardHeight !== undefined ? { nestedCardHeight } : {})}
-          {...(items !== undefined ? { items } : {})}
+          {...pickDefined({
+            url,
+            slideShowActive: slideShowRunning,
+            hasFocus,
+            onClick,
+            timelineContent,
+            isNested,
+            nestedCardHeight,
+            items,
+          })}
+          {...(onElapsed ? { onElapsed: (id?: string) => id && onElapsed(id) } : {})}
         />
       </div>
     );

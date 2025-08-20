@@ -2,6 +2,7 @@ import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent } from 'react';
 import Chrono from '../../../components';
 import { ComponentContainerTree, Vertical } from '../../App.styles';
+import { pickDefined } from '../../../utils/propUtils';
 
 export interface CustomContentWithIconsVerticalProps {
   type: string;
@@ -23,7 +24,7 @@ export const CustomContentWithIconsVertical: FunctionComponent<CustomContentWith
         scrollable
         flipLayout
         timelinePointDimension={30}
-        {...(items ? { items } : {})}
+        {...pickDefined({ items })}
       >
         <div>
           <div style={{ width: '250px', height: '250px' }}>
