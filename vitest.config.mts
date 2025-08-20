@@ -23,7 +23,6 @@ export default defineConfig({
         '**/postcss.config.js',
         '**/tailwind.config.js',
         '**/babel.config.js',
-        '**/webpack.config.js',
         '**/rollup.config.*',
         '**/vite.config.*',
         '**/vitest.config.*',
