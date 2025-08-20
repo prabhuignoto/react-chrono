@@ -4,6 +4,7 @@ import { DetailsTextProps } from './details-text.model';
 import { getTextOrContent } from './text-or-content';
 import { contentDetailsWrapper } from './timeline-card-content.css';
 import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
+import { vars } from 'src/styles/tokens.css';
 
 const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
   (prop, ref) => {
@@ -44,9 +45,10 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
             ...computeCssVarsFromTheme(theme),
             overflowY: showMore ? 'auto' : 'hidden',
             width: borderLessCards ? 'calc(100% - 0.5rem)' : '100%',
-            background: theme?.cardDetailsBackGround || theme?.cardBgColor,
+            background: `${vars.color.cardBg}`,
+            // background: theme?.cardDetailsBackGround || theme?.cardBgColor,
             // Ensure custom scrollbar color reflects theme primary color for tests and styling parity
-            scrollbarColor: `${theme?.primary} default` as unknown as string,
+            // scrollbarColor: `${theme?.primary} default` as unknown as string,
             maxHeight: !useReadMore
               ? 'none'
               : showMore
@@ -64,7 +66,7 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
               }}
             />
           )}
-        </div>
+        </div>  
       </>
     );
   },

@@ -170,7 +170,7 @@ export const timelineContentRender = recipe({
         // Height = card height + padding + timeline point space + title space
         // Assuming typical card height around 300-350px, add extra for timeline points and titles
         minHeight: 'calc(var(--card-height, 350px) + 120px)',
-        height: 0,
+        // height: 0,
         padding: '2rem 1rem', // Increased vertical padding for better spacing
         paddingTop: '1.5rem', // Space for timeline points above cards
         paddingBottom: '2.5rem', // Extra space for titles below cards

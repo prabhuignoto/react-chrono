@@ -4,6 +4,7 @@ import { SubTitleMemo } from '../memoized/subtitle-memo';
 import { TitleMemo } from '../memoized/title-memo';
 import { ContentHeaderProps } from './header-footer.model';
 import { timelineCardHeader } from './timeline-card-content.css';
+import { pickDefined } from '../../../utils/propUtils';
 // Styled component removed in VE migration
 
 /**
@@ -33,7 +34,7 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
           <h3
             style={{
               fontSize: '1.5rem',
-              color: theme?.cardTitleColor,
+              color: theme?.cardTitleColor || theme?.titleColor,
               margin: 0,
               fontWeight: 600,
               lineHeight: 1.4,
@@ -50,6 +51,9 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
             url={url || ''}
             fontSize={fontSizes?.cardTitle || ''}
             classString={classNames?.cardTitle || ''}
+            {...pickDefined({
+              color: theme?.cardTitleColor || theme?.titleColor,
+            })}
           />
         ) : null}
 
@@ -61,6 +65,9 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
             theme={theme}
             fontSize={fontSizes?.cardSubtitle || ''}
             classString={classNames?.cardSubTitle || ''}
+            {...pickDefined({
+              color: theme?.cardSubtitleColor,
+            })}
           />
         ) : null}
       </header>

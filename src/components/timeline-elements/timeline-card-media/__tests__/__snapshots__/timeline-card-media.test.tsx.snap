@@ -30,7 +30,7 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
     />
     <span
       class="card-sub-title card-subtitle"
-      style="font-size: 0.85rem;"
+      style="color: rgb(0, 0, 0); font-size: 0.85rem;"
     >
       This is another test
     </span>
@@ -62,7 +62,7 @@ exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
     />
     <span
       class="card-sub-title card-subtitle"
-      style="font-size: 0.85rem;"
+      style="color: rgb(0, 0, 0); font-size: 0.85rem;"
     >
       This is another test
     </span>

@@ -73,6 +73,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     disableClickOnCircle,
     disableInteraction,
     isMobile, // Use responsive detection from context
+    isDarkMode, // Add isDarkMode for proper theme application
   } = useTimelineContext();
 
   // Helper functions for layout calculations
@@ -175,7 +176,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   );
 
   // Memoize theme CSS variables to prevent re-creation on every render
-  const themeCssVars = useMemo(() => computeCssVarsFromTheme(theme), [theme]);
+  const themeCssVars = useMemo(() => computeCssVarsFromTheme(theme, isDarkMode), [theme, isDarkMode]);
 
   const Title = useMemo(
     () => (
@@ -362,6 +363,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       <div
         className={`${timelineCardContentWrapper} ${contentClass} ${visible ? timelineCardContentVisible : ''}`}
         style={{
+          ...themeCssVars, // Apply theme CSS variables for proper dark mode support
           width: calculateCardWidth(),
           justifyContent: calculateJustifyContent(),
           order: calculateCardOrder(),

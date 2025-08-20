@@ -13,6 +13,8 @@ import {
   timelineContentDetails,
   timelineSubContent,
 } from './timeline-card-content.css';
+import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
+import { vars } from 'src/styles/tokens.css';
 
 // Define the type for the TextOrContentModel
 export type TextOrContentModel = Pick<
@@ -27,6 +29,7 @@ const renderTextArray: (
   p: Pick<TimelineProps, 'parseDetailsAsHTML' | 'fontSizes' | 'theme'> & {
     cardTextClassName: string;
     detailedText: (string | ReactNode)[];
+    isDarkMode?: boolean;
   },
 ) => ReactNode = ({
   fontSizes,
@@ -34,7 +37,11 @@ const renderTextArray: (
   theme,
   detailedText,
   cardTextClassName,
+  isDarkMode,
 }) => {
+  // Compute theme styles once for all spans
+  const themeStyle = computeCssVarsFromTheme(theme, isDarkMode);
+
   return detailedText.map((text, index) => {
     // Only apply xss if text is a string
     const props =
@@ -49,6 +56,10 @@ const renderTextArray: (
       <span
         className={`${timelineSubContent} ${cardTextClassName ?? ''}`}
         key={`timeline-text-${typeof text === 'string' ? text.substring(0, 10) : ''}-${index}`}
+        style={{ 
+          ...themeStyle,
+          color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
+        }}
         {...props}
       >
         {parseDetailsAsHTML ? null : text}
@@ -69,7 +80,7 @@ const getTextOrContent: (
   const TextOrContent = forwardRef<HTMLParagraphElement, TextOrContentModel>(
     (prop, ref) => {
       const isTextArray = Array.isArray(detailedText);
-      const { fontSizes, classNames, parseDetailsAsHTML, textContentDensity } =
+      const { fontSizes, classNames, parseDetailsAsHTML, textContentDensity, isDarkMode } =
         useTimelineContext();
 
       const shouldNotShowText = useMemo(() => {
@@ -92,6 +103,7 @@ const getTextOrContent: (
           fontSizes,
           parseDetailsAsHTML,
           theme: theme || ({} as Theme),
+          isDarkMode,
         });
       };
 
@@ -109,6 +121,8 @@ const getTextOrContent: (
 
       const renderDetailedContent = (textContent: string) => {
         const textContentProps = getTextContentProps(textContent);
+        // Use computed CSS variables for proper theme support
+        const themeStyle = computeCssVarsFromTheme(theme, isDarkMode);
 
         return (
           <p
@@ -117,7 +131,11 @@ const getTextOrContent: (
             }
             ref={ref as any}
             {...textContentProps}
-            style={{ color: theme?.cardDetailsColor }}
+            style={{ 
+              ...themeStyle,
+              color: `${vars.color.cardTitle} !important`, // Ensure color is applied correctly
+              // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
+            }}
           >
             {shouldNotShowText ? null : textContent}
           </p>
@@ -134,13 +152,20 @@ const getTextOrContent: (
 
         // If detailedText was an array, render the array of spans directly as children
         if (isTextArray) {
+          // Use computed CSS variables for proper theme support
+          const themeStyle = computeCssVarsFromTheme(theme, isDarkMode);
+
           return (
             <p
               className={
                 timelineContentDetails + ' ' + (showMore ? 'active' : '')
               }
               ref={ref as any}
-              style={{ color: theme?.cardDetailsColor }}
+              style={{ 
+                ...themeStyle,
+                color: `${vars.color.text} !important`, // Ensure color is applied correctly
+                // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
+              }}
             >
               {shouldNotShowText ? null : textContent}
             </p>

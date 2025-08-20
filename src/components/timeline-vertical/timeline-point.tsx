@@ -168,13 +168,10 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
       <div
         className={`${className} ${timelinePointWrapper}`}
         style={{
+          ...computeCssVarsFromTheme(theme, isDarkMode), // Apply comprehensive theme CSS variables
           ...(isMobile ? { width: '25%' } : { width: '10%' }),
           ...(lineWidth !== undefined && {
             '--line-width': `${lineWidth}px`,
-          }),
-          ...(theme?.primary && {
-            '--timeline-primary': theme.primary,
-            color: theme.primary,
           }),
         }}
         data-testid="tree-leaf"
@@ -218,10 +215,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
                 width: `${timelinePointDimension}px`,
                 height: `${timelinePointDimension}px`,
               }),
-              ...(theme?.primary && {
-                borderColor: theme.primary,
-                backgroundColor: theme.iconBackgroundColor || theme.primary,
-              }),
+              // Theme colors are now applied via CSS variables from computeCssVarsFromTheme
             }}
             aria-hidden="true"
           >

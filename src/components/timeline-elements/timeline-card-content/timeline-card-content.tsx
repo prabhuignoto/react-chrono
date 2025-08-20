@@ -107,6 +107,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       nestedCardHeight,
       title,
       cardTitle,
+      focusable,
     }: TimelineContentModel) => {
       const [showMore, setShowMore] = useState(false);
       const detailsRef = useRef<HTMLDivElement | null>(null);
@@ -183,8 +184,11 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [active, slideShowActive, showProgressOnSlideshow]);
 
       const canShowMore = useMemo(() => {
-        return !!detailedText;
-      }, [detailedText]);
+        // Show read more functionality when:
+        // 1. We have detailed text content
+        // 2. The text is large enough to be truncated OR we're already in expanded state
+        return !!detailedText && (textContentLarge || showMore);
+      }, [detailedText, textContentLarge, showMore]);
 
       const canShowReadMore = useMemo(() => {
         return (
@@ -420,7 +424,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           className={`timeline-card-content ${active ? 'active' : ''} ${classNames?.card ?? ''} ${baseCard} ${itemContentWrapper}`}
           data-testid="timeline-card-content"
           data-item-id={id}
-          tabIndex={active ? 0 : -1}
+          tabIndex={focusable !== false && active ? 0 : -1}
           role="article"
           aria-current={active ? 'true' : 'false'}
           onDoubleClick={toggleShowMore}

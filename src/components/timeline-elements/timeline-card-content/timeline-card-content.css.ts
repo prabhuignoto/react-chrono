@@ -10,7 +10,7 @@ import {
 } from './card-animations.css';
 
 export const baseCard = style({
-  background: `linear-gradient(135deg, ${vars.color.cardBg} 0%, ${vars.color.cardBg}f5 100%)`,
+  // background: `linear-gradient(135deg, ${vars.color.cardBg} 0%, ${vars.color.cardBg}f5 100%)`,
   borderRadius: '16px',
   border: `1px solid ${vars.color.buttonBorder}`,
   boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.1)',
@@ -20,6 +20,7 @@ export const baseCard = style({
   overflow: 'hidden',
   minWidth: '280px',
   maxWidth: '100%',
+  background: `${vars.color.cardBg}`,
 
   '@media': {
     '(max-width: 768px)': {
@@ -203,7 +204,7 @@ export const timelineContentDetails = style({
   fontWeight: 400,
   margin: 0,
   width: '100%',
-  color: vars.color.cardDetails,
+  color: vars.color.text,
   lineHeight: 1.5,
   letterSpacing: '0.01em',
   wordBreak: 'break-word',

@@ -30,8 +30,8 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
   disabled = false,
   itemId,
 }) => {
-  // Get disableTimelinePoint from context to match vertical timeline behavior
-  const { disableTimelinePoint } = useTimelineContext();
+  // Get disableTimelinePoint and isDarkMode from context to match vertical timeline behavior
+  const { disableTimelinePoint, isDarkMode } = useTimelineContext();
 
   // Focus is now handled by useTimelineNavigation hook
   // Only during keyboard navigation, not toolbar navigation
@@ -63,7 +63,7 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
         tabIndex={disabled ? -1 : 0}
         type="button"
         style={{
-          ...computeCssVarsFromTheme(theme),
+          ...computeCssVarsFromTheme(theme, isDarkMode),
           height: timelinePointDimension
             ? `${timelinePointDimension}px`
             : '2rem', // Fallback height to ensure visibility

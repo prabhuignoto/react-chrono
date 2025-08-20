@@ -8,13 +8,13 @@ exports[`Content Header > should match the snapshot 1`] = `
     <span
       class="card-title"
       data-class="card-title"
-      style="font-size: 1.25rem;"
+      style="color: rgb(0, 0, 0); font-size: 1.25rem;"
     >
       title
     </span>
     <span
       class="card-sub-title card-subtitle"
-      style="font-size: 0.85rem;"
+      style="color: rgb(0, 0, 0); font-size: 0.85rem;"
     >
       content
     </span>

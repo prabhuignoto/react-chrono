@@ -6,6 +6,7 @@ import {
   useState,
   useRef,
 } from 'react';
+import { useTimelineContext } from '../components/contexts';
 
 interface UseCardSizeProps {
   containerRef: RefObject<HTMLElement | null>;
@@ -42,6 +43,14 @@ export const useCardSize = ({
   detailsRef,
   setStartWidth,
 }: UseCardSizeProps): UseCardSizeReturn => {
+  // Safely get contentDetailsHeight from context with fallback
+  let contentDetailsHeight = 150; // Default fallback
+  try {
+    const context = useTimelineContext();
+    contentDetailsHeight = context.contentDetailsHeight;
+  } catch {
+    // Context not available, use fallback
+  }
   const [dimensions, setDimensions] = useState<CardDimensions>({
     cardHeight: 0,
     detailsHeight: 0,
@@ -145,10 +154,10 @@ export const useCardSize = ({
       textContentLarge: calculateTextContentSize(
         cache.scrollHeight,
         cache.clientHeight,
-        150, // Default content height threshold
+        contentDetailsHeight, // Use context value instead of hardcoded 150
       ),
     };
-  }, [dimensions]);
+  }, [dimensions, contentDetailsHeight]);
 
   return {
     cardActualHeight,

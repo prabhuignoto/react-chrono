@@ -63,7 +63,7 @@ const TimelineCardPortal: React.FC<TimelineCardPortalProps> = ({
         className={`${containerClass} ${veCardWrapper} ${showAllCardsHorizontal || active ? 'highlight-active' : ''} ${active ? 'active' : ''}`}
         ref={contentRef}
         id={`timeline-card-${id}`}
-        tabIndex={active ? 0 : -1}
+        tabIndex={-1}
         style={{
           minWidth:
             cardWidth &&
@@ -87,6 +87,7 @@ const TimelineCardPortal: React.FC<TimelineCardPortalProps> = ({
           media={media}
           id={id}
           customContent={customContent}
+          focusable={false}
           {...pickDefined({
             url,
             slideShowActive: slideShowRunning,

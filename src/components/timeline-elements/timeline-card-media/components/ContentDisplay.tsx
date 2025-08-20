@@ -18,6 +18,7 @@ import { SubTitleMemo } from '../../memoized/subtitle-memo';
 import { DetailsTextMemo } from '../../memoized/details-text-memo';
 import { TimelineMode } from '@models/TimelineModel';
 import { PlusIcon, MinusIcon } from '../../../icons';
+import { pickDefined } from '../../../../utils/propUtils';
 
 export interface ContentDisplayProps {
   readonly mode: TimelineMode;
@@ -101,6 +102,9 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
           url={url ?? ''}
           fontSize={fontSizes?.cardTitle}
           classString={classNames?.cardTitle}
+          {...pickDefined({
+            color: theme?.cardTitleColor || theme?.titleColor,
+          })}
         />
         {(canExpand || textOverlay) && (
           <ButtonWrapper>
@@ -173,6 +177,9 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
           classString={classNames?.cardSubTitle}
           padding
           theme={theme}
+          {...pickDefined({
+            color: theme?.cardSubtitleColor,
+          })}
         />
       )}
       {canShowTextMemo && detailsText && !isMinimized && (
