@@ -24,15 +24,21 @@ export const listItem = style([
     background: vars.color.toolbarBtnBg,
     borderRadius: '4px',
     boxShadow: `0px 1px 1px ${vars.color.shadow}`,
-    marginBottom: '0.5rem',
+    marginBottom: '0.4rem', // Slightly reduced spacing
     selectors: {
       '&:last-child': { marginBottom: 0 },
-      '&:hover': { cursor: 'pointer', borderColor: vars.color.primary },
+      '&:hover': {
+        cursor: 'pointer',
+        borderColor: vars.color.primary,
+        boxShadow: `0px 2px 4px ${vars.color.shadow}`, // Enhanced hover shadow
+        transform: 'translateY(-1px)', // Subtle hover lift
+      },
     },
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'transparent',
-    padding: '0.25rem',
+    padding: '0.3rem 0.4rem', // Better padding for compact design
+    transition: `all ${vars.transition.duration.fast} ${vars.transition.easing.standard}`,
   },
 ]);
 
@@ -46,11 +52,18 @@ export const checkboxWrapper = style([
 export const checkbox = style([
   sprinkles({ display: 'flex', placeCenter: 'center' }),
   {
-    width: '1.25rem',
-    height: '1.25rem',
-    margin: '0 0.25rem 0 0.1rem',
+    width: '1.1rem', // Slightly smaller for better proportion
+    height: '1.1rem',
+    margin: '0 0.3rem 0 0.1rem', // Better spacing
     borderRadius: '50%',
     color: vars.color.cardBg,
+    border: `1px solid ${vars.color.buttonBorder}`,
+    transition: `all ${vars.transition.duration.fast} ${vars.transition.easing.standard}`,
+    selectors: {
+      '&:hover': {
+        borderColor: vars.color.primary,
+      },
+    },
   },
 ]);
 
@@ -65,22 +78,25 @@ export const styleAndDescription = style([
 
 export const title = style({
   color: vars.color.primary,
-  fontSize: '1rem',
-  fontWeight: 'normal',
-  margin: '0.2rem 0',
+  fontSize: '0.875rem', // Reduced from 1rem
+  fontWeight: 500, // Slightly bolder for better hierarchy
+  margin: '0.15rem 0', // Reduced margin
   textAlign: 'left',
   whiteSpace: 'nowrap',
   alignSelf: 'flex-start',
+  lineHeight: 1.3,
 });
 
 export const description = style({
-  fontSize: '0.8rem',
+  fontSize: '0.75rem', // Reduced from 0.8rem
   fontWeight: 'normal',
   margin: 0,
-  padding: '0.1rem',
+  padding: '0.05rem 0', // Reduced padding
   textAlign: 'left',
   width: '100%',
   color: vars.color.cardSubtitle,
+  lineHeight: 1.2,
+  opacity: 0.85, // Slightly reduced opacity for better hierarchy
 });
 
 export const listItemRecipe = recipe({

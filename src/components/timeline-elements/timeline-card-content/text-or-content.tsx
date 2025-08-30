@@ -56,9 +56,11 @@ const renderTextArray: (
       <span
         className={`${timelineSubContent} ${cardTextClassName ?? ''}`}
         key={`timeline-text-${typeof text === 'string' ? text.substring(0, 10) : ''}-${index}`}
-        style={{ 
+        style={{
           ...themeStyle,
-          color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
+          color:
+            theme?.cardDetailsColor ||
+            'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))',
         }}
         {...props}
       >
@@ -80,8 +82,13 @@ const getTextOrContent: (
   const TextOrContent = forwardRef<HTMLParagraphElement, TextOrContentModel>(
     (prop, ref) => {
       const isTextArray = Array.isArray(detailedText);
-      const { fontSizes, classNames, parseDetailsAsHTML, textContentDensity, isDarkMode } =
-        useTimelineContext();
+      const {
+        fontSizes,
+        classNames,
+        parseDetailsAsHTML,
+        textContentDensity,
+        isDarkMode,
+      } = useTimelineContext();
 
       const shouldNotShowText = useMemo(() => {
         return (
@@ -131,7 +138,7 @@ const getTextOrContent: (
             }
             ref={ref as any}
             {...textContentProps}
-            style={{ 
+            style={{
               ...themeStyle,
               color: `${vars.color.cardTitle} !important`, // Ensure color is applied correctly
               // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
@@ -161,7 +168,7 @@ const getTextOrContent: (
                 timelineContentDetails + ' ' + (showMore ? 'active' : '')
               }
               ref={ref as any}
-              style={{ 
+              style={{
                 ...themeStyle,
                 color: `${vars.color.text} !important`, // Ensure color is applied correctly
                 // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'

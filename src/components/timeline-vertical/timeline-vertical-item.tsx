@@ -176,7 +176,10 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   );
 
   // Memoize theme CSS variables to prevent re-creation on every render
-  const themeCssVars = useMemo(() => computeCssVarsFromTheme(theme, isDarkMode), [theme, isDarkMode]);
+  const themeCssVars = useMemo(
+    () => computeCssVarsFromTheme(theme, isDarkMode),
+    [theme, isDarkMode],
+  );
 
   const Title = useMemo(
     () => (

@@ -22,7 +22,7 @@ export const popoverHolder = style([
     borderWidth: '1px',
     borderColor: vars.color.buttonBorder,
     boxShadow: vars.shadow.elevationLg,
-    maxHeight: '500px',
+    maxHeight: '400px',
     overflowY: 'auto',
     padding: '0.5rem',
     position: 'absolute',
@@ -31,8 +31,11 @@ export const popoverHolder = style([
     transition: `opacity ${vars.transition.duration.normal} ${vars.transition.easing.standard}, transform ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
     transform: 'translateY(-10px)',
     zIndex: vars.zIndex.popover,
-    // Ensure popover stays within timeline container bounds
+    // Smart positioning to stay within container bounds
     maxWidth: 'calc(100vw - 2rem)',
+    // Prevent popover from overflowing horizontally
+    left: 'auto',
+    right: 'auto',
     selectors: {
       '&::-webkit-scrollbar': { width: '0.3em' },
       '&::-webkit-scrollbar-track': { backgroundColor: vars.color.toolbarBg },
@@ -40,13 +43,21 @@ export const popoverHolder = style([
         backgroundColor: vars.color.primary,
         borderRadius: '3px',
       },
+      // Smart horizontal positioning based on container space
+      '&[data-position-x="left"]': { left: '0' },
+      '&[data-position-x="right"]': { right: '0' },
+      '&[data-position-x="center"]': {
+        left: '50%',
+        transform: 'translateX(-50%) translateY(-10px)',
+      },
     },
     '@media': {
       '(max-width: 480px)': {
         width: '280px',
         maxWidth: 'calc(100vw - 1rem)',
         left: '0.5rem !important',
-        right: '0.5rem !important',
+        right: 'auto !important',
+        transform: 'translateY(-10px) !important',
       },
     },
   },
@@ -54,7 +65,14 @@ export const popoverHolder = style([
 
 export const holderVisible = style({
   opacity: 1,
-  transform: 'translateY(0)',
+  selectors: {
+    '&[data-position-x="center"]': {
+      transform: 'translateX(-50%) translateY(0)',
+    },
+    '&:not([data-position-x="center"])': {
+      transform: 'translateY(0)',
+    },
+  },
 });
 
 export const holderTop = style({ top: '4rem' });

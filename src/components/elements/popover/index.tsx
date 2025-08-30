@@ -2,9 +2,11 @@ import React, {
   FunctionComponent,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useReducer,
   useRef,
   memo,
+  useState,
 } from 'react';
 import useCloseClickOutside from 'src/components/effects/useCloseClickOutside';
 import { ChevronDown, CloseIcon } from 'src/components/icons';
@@ -68,10 +70,14 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   $isMobile = false,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
   const [state, dispatch] = useReducer(popoverReducer, {
     open: false,
     isVisible: false,
   });
+  const [horizontalPosition, setHorizontalPosition] = useState<
+    'left' | 'right' | 'center'
+  >('center');
 
   const toggleOpen = useCallback(() => {
     dispatch({ type: 'TOGGLE' });
@@ -88,6 +94,41 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   }, []);
 
   useCloseClickOutside(ref, closePopover);
+
+  // Calculate optimal horizontal positioning
+  const calculateHorizontalPosition = useCallback(() => {
+    if (!ref.current || !popoverRef.current || $isMobile) return;
+
+    const triggerRect = ref.current.getBoundingClientRect();
+    const popoverWidth = width;
+    const viewportWidth = window.innerWidth;
+    const timelineContainer =
+      ref.current.closest('[data-testid="timeline"]') || document.body;
+    const containerRect = timelineContainer.getBoundingClientRect();
+
+    // Calculate space available on each side
+    const spaceLeft = triggerRect.left - containerRect.left;
+    const spaceRight = containerRect.right - triggerRect.right;
+    const spaceCenter = Math.min(spaceLeft, spaceRight);
+
+    // Choose position based on available space
+    if (popoverWidth <= spaceCenter * 2) {
+      setHorizontalPosition('center');
+    } else if (spaceLeft >= popoverWidth && spaceLeft > spaceRight) {
+      setHorizontalPosition('left');
+    } else if (spaceRight >= popoverWidth) {
+      setHorizontalPosition('right');
+    } else {
+      setHorizontalPosition('center'); // Fallback to center with potential overflow
+    }
+  }, [width, $isMobile]);
+
+  // Position calculation on layout changes
+  useLayoutEffect(() => {
+    if (state.open) {
+      calculateHorizontalPosition();
+    }
+  }, [state.open, calculateHorizontalPosition]);
 
   // Use CSS transition instead of setTimeout
   useEffect(() => {
@@ -127,6 +168,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         </button>
         {state.open ? (
           <div
+            ref={popoverRef}
             className={[
               popoverHolder,
               popoverHolderRecipe({
@@ -139,6 +181,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
               ...computeCssVarsFromTheme(theme),
               width: $isMobile ? '90%' : `${width}px`,
             }}
+            data-position-x={horizontalPosition}
             role="dialog"
             aria-modal="false"
             aria-labelledby={placeholder ? undefined : 'popover-content'}

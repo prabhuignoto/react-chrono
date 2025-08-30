@@ -66,7 +66,7 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
               }}
             />
           )}
-        </div>  
+        </div>
       </>
     );
   },
