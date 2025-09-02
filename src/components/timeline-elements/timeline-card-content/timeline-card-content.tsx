@@ -287,14 +287,17 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             return;
           }
           if (state.playing) {
+            // Pause slideshow when video starts playing
             tryPause();
-          } else if (state.paused) {
-            if (paused && id && onElapsed) {
+          } else if (state.paused || state.ended) {
+            // Resume slideshow when video is paused or ends
+            // Continue to next slide immediately when video is paused/ended
+            if (id && onElapsed) {
               onElapsed(id);
             }
           }
         },
-        [slideShowActive, tryPause, paused, id, onElapsed],
+        [slideShowActive, tryPause, id, onElapsed],
       );
 
       const handleCardClick = useCallback(

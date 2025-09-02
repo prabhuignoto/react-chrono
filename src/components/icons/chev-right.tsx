@@ -11,7 +11,7 @@ const ChevronRightIcon: React.FunctionComponent = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="feather feather-chevron-right"
+    style={{ display: 'block', width: '100%', height: '100%' }}
   >
     <polyline points="9 18 15 12 9 6"></polyline>
   </svg>

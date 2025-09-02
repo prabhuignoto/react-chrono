@@ -236,14 +236,13 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }, 0);
   }, [handleTimelineUpdate]);
 
-  // Auto-start slideshow when slideShow prop is true
+  // Only sync slideshow state when slideShow prop changes, don't auto-start
   useEffect(() => {
-    if (slideShow && timeLineItems.length > 0) {
-      setSlideShowActive(true);
-    } else {
+    if (!slideShow) {
       setSlideShowActive(false);
     }
-  }, [slideShow, timeLineItems.length]);
+    // Note: slideshow should be started manually by user interaction, not auto-started
+  }, [slideShow]);
 
   const handleOnNext = useCallback(() => {
     if (!timeLineItems.length) {

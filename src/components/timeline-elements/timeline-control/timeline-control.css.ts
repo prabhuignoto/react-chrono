@@ -91,14 +91,17 @@ globalStyle(`${navButton}:focus`, {
 globalStyle(`${navButton}:focus:not(:focus-visible)`, { outline: 'none' });
 
 export const navButtonSvg = style({
-  width: '20px',
-  height: '20px',
+  width: '1.25rem', // 20px - standardized button icon size
+  height: '1.25rem',
   color: vars.color.icon,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   transition: `transform ${vars.transition.duration.fast} ${vars.transition.easing.standard}`,
   '@media': {
     '(max-width: 480px)': {
-      width: '22px',
-      height: '22px',
+      width: '1.375rem', // 22px
+      height: '1.375rem',
     },
   },
 });
@@ -153,4 +156,10 @@ export const controlButton = style([
   },
 ]);
 
-export const controlButtonSvg = style({ width: '80%', height: '80%' });
+export const controlButtonSvg = style({ 
+  width: '80%', 
+  height: '80%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});

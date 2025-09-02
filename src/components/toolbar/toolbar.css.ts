@@ -76,8 +76,8 @@ export const iconWrapper = style([
   }),
   {
     flexShrink: 0,
-    width: '1.5rem',
-    height: '1.5rem',
+    width: '1rem', // 16px - smaller for compact toolbar
+    height: '1rem',
     color: vars.color.toolbarText,
     opacity: 0.8,
     transition: `opacity ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,

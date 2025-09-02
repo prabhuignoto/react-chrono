@@ -13,7 +13,7 @@ const PlusIcon: React.FunctionComponent = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="feather feather-plus"
+    style={{ display: 'block', width: '100%', height: '100%' }}
   >
     <path d="M12 5v14M5 12h14" />
   </svg>
