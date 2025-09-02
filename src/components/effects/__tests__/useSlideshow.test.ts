@@ -32,7 +32,7 @@ describe('useSlideshow', () => {
     );
 
     expect(result.current.paused).toBe(false);
-    expect(result.current.remainInterval).toBe(0);
+    expect(result.current.remainInterval).toBe(slideItemDuration); // Auto-starts with full duration
     expect(result.current.startWidth).toBe(0);
   });
 

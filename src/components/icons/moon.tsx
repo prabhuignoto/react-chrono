@@ -19,4 +19,4 @@ const MoonIcon: React.FunctionComponent = () => (
   </svg>
 );
 
-export default MoonIcon;
+export default React.memo(MoonIcon);

@@ -20,4 +20,4 @@ const SunIcon: React.FunctionComponent = () => (
   </svg>
 );
 
-export default SunIcon;
+export default React.memo(SunIcon);

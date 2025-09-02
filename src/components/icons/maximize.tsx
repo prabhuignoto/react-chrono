@@ -18,4 +18,4 @@ const MaximizeIcon: React.FunctionComponent = () => (
   </svg>
 );
 
-export default MaximizeIcon;
+export default React.memo(MaximizeIcon);

@@ -18,4 +18,4 @@ const MinimizeIcon: React.FunctionComponent = () => (
   </svg>
 );
 
-export default MinimizeIcon;
+export default React.memo(MinimizeIcon);

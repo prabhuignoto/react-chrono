@@ -66,28 +66,18 @@ export const useTimelineNavigation = ({
     if (newIndex !== activeItemIndex.current) {
       const targetItem = items[newIndex];
 
-      // Predictive centering: Find and scroll to target BEFORE updating state
       if (targetItem?.id) {
-        const targetElement = findTargetElement(targetItem.id);
-        if (targetElement) {
-          scrollToElement(targetElement, mode);
-          if ((targetElement as any).focus) {
-            try {
-              (targetElement as any).focus({ preventScroll: true });
-            } catch {}
-          }
-        }
+        // Use the same pathway as slideshow: call handleTimelineItemClick
+        // This ensures consistent state updates through the main component
+        handleTimelineItemClick(targetItem.id, false);
       }
 
-      // Update state immediately for test determinism
-      activeItemIndex.current = newIndex;
+      // Also call the toolbar callback for any additional toolbar-specific logic
       stableOnNext();
     }
   }, [
     items,
-    findTargetElement,
-    mode,
-    scrollToElement,
+    handleTimelineItemClick,
     stableOnNext,
     hasFocus,
     isKeyboardNavigation,
@@ -102,25 +92,17 @@ export const useTimelineNavigation = ({
       const targetItem = items[newIndex];
 
       if (targetItem?.id) {
-        const targetElement = findTargetElement(targetItem.id);
-        if (targetElement) {
-          scrollToElement(targetElement, mode);
-          if ((targetElement as any).focus) {
-            try {
-              (targetElement as any).focus({ preventScroll: true });
-            } catch {}
-          }
-        }
+        // Use the same pathway as slideshow: call handleTimelineItemClick
+        // This ensures consistent state updates through the main component
+        handleTimelineItemClick(targetItem.id, false);
       }
 
-      activeItemIndex.current = newIndex;
+      // Also call the toolbar callback for any additional toolbar-specific logic
       stableOnPrevious();
     }
   }, [
     items,
-    findTargetElement,
-    mode,
-    scrollToElement,
+    handleTimelineItemClick,
     stableOnPrevious,
     hasFocus,
     isKeyboardNavigation,
@@ -134,25 +116,17 @@ export const useTimelineNavigation = ({
       const targetItem = items[0];
 
       if (targetItem?.id) {
-        const targetElement = findTargetElement(targetItem.id);
-        if (targetElement) {
-          scrollToElement(targetElement, mode);
-          if ((targetElement as any).focus) {
-            try {
-              (targetElement as any).focus({ preventScroll: true });
-            } catch {}
-          }
-        }
+        // Use the same pathway as slideshow: call handleTimelineItemClick
+        // This ensures consistent state updates through the main component
+        handleTimelineItemClick(targetItem.id, false);
       }
 
-      activeItemIndex.current = 0;
+      // Also call the toolbar callback for any additional toolbar-specific logic
       stableOnFirst();
     }
   }, [
     items,
-    findTargetElement,
-    mode,
-    scrollToElement,
+    handleTimelineItemClick,
     stableOnFirst,
     hasFocus,
     isKeyboardNavigation,
@@ -167,25 +141,17 @@ export const useTimelineNavigation = ({
       const targetItem = items[lastIndex];
 
       if (targetItem?.id) {
-        const targetElement = findTargetElement(targetItem.id);
-        if (targetElement) {
-          scrollToElement(targetElement, mode);
-          if ((targetElement as any).focus) {
-            try {
-              (targetElement as any).focus({ preventScroll: true });
-            } catch {}
-          }
-        }
+        // Use the same pathway as slideshow: call handleTimelineItemClick
+        // This ensures consistent state updates through the main component
+        handleTimelineItemClick(targetItem.id, false);
       }
 
-      activeItemIndex.current = lastIndex;
+      // Also call the toolbar callback for any additional toolbar-specific logic
       stableOnLast();
     }
   }, [
     items,
-    findTargetElement,
-    mode,
-    scrollToElement,
+    handleTimelineItemClick,
     stableOnLast,
     hasFocus,
     isKeyboardNavigation,

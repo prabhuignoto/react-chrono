@@ -7,14 +7,14 @@
  * @param props - Object with potentially undefined values
  * @returns Object with only defined values
  */
-export function filterDefinedProps<T extends Record<string, any>>(
+export function filterDefinedProps<T extends Record<string, unknown>>(
   props: T,
 ): Partial<T> {
   const result: Partial<T> = {};
 
   for (const [key, value] of Object.entries(props)) {
     if (value !== undefined) {
-      (result as any)[key] = value;
+      (result as Record<string, unknown>)[key] = value;
     }
   }
 
@@ -26,14 +26,14 @@ export function filterDefinedProps<T extends Record<string, any>>(
  * @param props - Object with potentially falsy values
  * @returns Object with only truthy values
  */
-export function filterTruthyProps<T extends Record<string, any>>(
+export function filterTruthyProps<T extends Record<string, unknown>>(
   props: T,
 ): Partial<T> {
   const result: Partial<T> = {};
 
   for (const [key, value] of Object.entries(props)) {
     if (value) {
-      (result as any)[key] = value;
+      (result as Record<string, unknown>)[key] = value;
     }
   }
 
@@ -45,14 +45,14 @@ export function filterTruthyProps<T extends Record<string, any>>(
  * @param conditions - Object mapping prop names to their conditions and values
  * @returns Object with conditionally included props
  */
-export function conditionalProps<T extends Record<string, any>>(
-  conditions: Record<string, { condition: boolean; value: any }>,
+export function conditionalProps<T extends Record<string, unknown>>(
+  conditions: Record<string, { condition: boolean; value: unknown }>,
 ): Partial<T> {
   const result: Partial<T> = {};
 
   for (const [key, { condition, value }] of Object.entries(conditions)) {
     if (condition) {
-      (result as any)[key] = value;
+      (result as Record<string, unknown>)[key] = value;
     }
   }
 

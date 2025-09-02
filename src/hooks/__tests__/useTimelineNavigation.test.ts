@@ -87,7 +87,7 @@ describe('useTimelineNavigation', () => {
       result.current.handleTimelineItemElapsed('2');
     });
 
-    expect(result.current.activeItemIndex.current).toBe(1);
+    expect(result.current.activeItemIndex.current).toBe(2); // Advanced to next item (index 2)
     expect(mockOnTimelineUpdated).toHaveBeenCalledWith(2); // isSlideShow is true
   });
 

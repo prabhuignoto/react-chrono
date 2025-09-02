@@ -13,4 +13,4 @@ const ParaIcon: React.FunctionComponent = () => (
   </svg>
 );
 
-export default ParaIcon;
+export default React.memo(ParaIcon);

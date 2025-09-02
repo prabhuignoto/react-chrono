@@ -19,4 +19,4 @@ const MinusIcon: React.FunctionComponent = () => (
   </svg>
 );
 
-export default MinusIcon;
+export default React.memo(MinusIcon);

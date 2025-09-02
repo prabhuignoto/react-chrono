@@ -17,4 +17,4 @@ const ChevronLeft: React.FunctionComponent = () => (
   </svg>
 );
 
-export default ChevronLeft;
+export default React.memo(ChevronLeft);

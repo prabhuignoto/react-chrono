@@ -1,6 +1,7 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import { TimelineProps } from '@models/TimelineModel';
 import { getUniqueID } from '@utils/index';
+import { safeValidateTimelineProps } from '@utils/validation';
 import dayjs from 'dayjs';
 import React, {
   useCallback,
@@ -14,17 +15,29 @@ import Timeline from './timeline/timeline';
 import { computeCssVarsFromTheme } from '../styles/theme-bridge';
 import { lightThemeClass, darkThemeClass } from '../styles/themes.css';
 import { pickDefined } from '../utils/propUtils';
+import { TimelineErrorBoundary } from './common/error-boundary';
 const toReactArray = React.Children.toArray;
 
 const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   props: TimelineProps,
 ) => {
+  // Validate props early with development warnings
+  if (process.env.NODE_ENV === 'development') {
+    const validationResult = safeValidateTimelineProps(props);
+    if (!validationResult.success) {
+      console.warn('Timeline props validation warnings:', validationResult.errors.map(
+        error => `${error.path.join('.')}: ${error.message}`
+      ).join(', '));
+    }
+  }
+
   const {
     allowDynamicUpdate = false,
     children,
     items,
     onScrollEnd,
     slideShow = false,
+    slideItemDuration = 2000,
     onItemSelected,
     activeItemIndex = 0,
     titleDateFormat = 'MMM DD, YYYY',
@@ -35,6 +48,9 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   const timeLineItemsRef = useRef<TimelineItemModel[]>([]);
   const [slideShowActive, setSlideShowActive] = useState(false);
   const [activeTimelineItem, setActiveTimelineItem] = useState(activeItemIndex);
+  
+  // Track the previous prop value to avoid circular updates
+  const previousActiveItemIndexRef = useRef(activeItemIndex);
 
   // Cache the last processed items to avoid unnecessary reprocessing
   const itemsHashRef = useRef<string>('');
@@ -204,11 +220,12 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
   useEffect(() => {
     // Only update if the activeItemIndex prop has actually changed from its previous value
-    // This prevents unwanted resets during dynamic loading
-    if (activeItemIndex !== activeTimelineItem) {
+    // This prevents unwanted resets during dynamic loading and circular updates
+    if (activeItemIndex !== previousActiveItemIndexRef.current) {
+      previousActiveItemIndexRef.current = activeItemIndex;
       handleTimelineUpdate(activeItemIndex);
     }
-  }, [activeItemIndex, handleTimelineUpdate, activeTimelineItem]);
+  }, [activeItemIndex, handleTimelineUpdate]);
 
   const restartSlideShow = useCallback(() => {
     handleTimelineUpdate(-1);
@@ -218,6 +235,15 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
       handleTimelineUpdate(0);
     }, 0);
   }, [handleTimelineUpdate]);
+
+  // Auto-start slideshow when slideShow prop is true
+  useEffect(() => {
+    if (slideShow && timeLineItems.length > 0) {
+      setSlideShowActive(true);
+    } else {
+      setSlideShowActive(false);
+    }
+  }, [slideShow, timeLineItems.length]);
 
   const handleOnNext = useCallback(() => {
     if (!timeLineItems.length) {
@@ -322,36 +348,39 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   }, [props.theme]);
 
   return (
-    <TimelineContextProvider {...props}>
-      <div
-        className={isDarkMode ? darkThemeClass : lightThemeClass}
-        style={{ ...computeCssVarsFromTheme(props.theme), width: '100%' }}
-        id="testette"
-      >
-        <Timeline
-          activeTimelineItem={activeTimelineItem}
-          contentDetailsChildren={contentDetailsChildren}
-          iconChildren={iconChildren}
-          items={timeLineItems}
-          onFirst={handleFirst}
-          onLast={handleLast}
-          onNext={handleOnNext}
-          onPrevious={handleOnPrevious}
-          onRestartSlideshow={restartSlideShow}
-          onTimelineUpdated={handleTimelineUpdate}
-          slideShow={slideShow}
-          slideShowEnabled={slideShow}
-          slideShowRunning={slideShowActive}
-          {...pickDefined({
-            onScrollEnd,
-            onItemSelected,
-          })}
-          onOutlineSelection={handleOutlineSelection}
-          mode={mode || 'VERTICAL_ALTERNATING'}
-          onPaused={onPaused}
-        />
-      </div>
-    </TimelineContextProvider>
+    <TimelineErrorBoundary>
+      <TimelineContextProvider {...props}>
+        <div
+          className={isDarkMode ? darkThemeClass : lightThemeClass}
+          style={{ ...computeCssVarsFromTheme(props.theme), width: '100%' }}
+          id="testette"
+        >
+          <Timeline
+            activeTimelineItem={activeTimelineItem}
+            contentDetailsChildren={contentDetailsChildren}
+            iconChildren={iconChildren}
+            items={timeLineItems}
+            onFirst={handleFirst}
+            onLast={handleLast}
+            onNext={handleOnNext}
+            onPrevious={handleOnPrevious}
+            onRestartSlideshow={restartSlideShow}
+            onTimelineUpdated={handleTimelineUpdate}
+            slideShow={slideShow}
+            slideShowEnabled={slideShow}
+            slideShowRunning={slideShowActive}
+            slideItemDuration={slideItemDuration}
+            {...pickDefined({
+              onScrollEnd,
+              onItemSelected,
+            })}
+            onOutlineSelection={handleOutlineSelection}
+            mode={mode || 'VERTICAL_ALTERNATING'}
+            onPaused={onPaused}
+          />
+        </div>
+      </TimelineContextProvider>
+    </TimelineErrorBoundary>
   );
 };
 

@@ -19,4 +19,4 @@ const PlusIcon: React.FunctionComponent = () => (
   </svg>
 );
 
-export default PlusIcon;
+export default React.memo(PlusIcon);

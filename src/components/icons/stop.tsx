@@ -20,4 +20,4 @@ const StopIcon: React.FunctionComponent = () => (
   </svg>
 );
 
-export default StopIcon;
+export default React.memo(StopIcon);

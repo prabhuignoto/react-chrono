@@ -158,10 +158,8 @@ export const useTimelineItemNavigation = ({
     (targetIndex: number, isSlideShow?: boolean) => {
       activeItemIndex.current = targetIndex;
 
-      const updateIndex =
-        isSlideShow && targetIndex < items.length - 1
-          ? targetIndex + 1
-          : targetIndex;
+      // Fixed: Don't add +1 here since handleTimelineItemElapsed already calculated the correct next index
+      const updateIndex = targetIndex;
 
       stableOnTimelineUpdated(updateIndex);
     },
@@ -217,10 +215,31 @@ export const useTimelineItemNavigation = ({
     ],
   );
 
-  // Handler for item elapsed (used in slideshow)
+  // Handler for item elapsed (used in slideshow) - advances to NEXT item
   const handleTimelineItemElapsed = useCallback(
-    (itemId?: string) => handleTimelineItemClick(itemId, true),
-    [handleTimelineItemClick],
+    (itemId?: string) => {
+      if (!itemId) return;
+      
+      const currentIndex = itemsMap.get(itemId);
+      if (currentIndex === undefined) return;
+      
+      const nextIndex = currentIndex + 1;
+      
+      // If there's a next item, advance to it
+      if (nextIndex < itemsMap.size) {
+        const nextItemId = Array.from(itemsMap.entries()).find(([_, index]) => index === nextIndex)?.[0];
+        if (nextItemId) {
+          handleTimelineItemClick(nextItemId, true);
+        }
+      } else {
+        // If we're at the last item, restart from beginning
+        const firstItemId = Array.from(itemsMap.entries()).find(([_, index]) => index === 0)?.[0];
+        if (firstItemId) {
+          handleTimelineItemClick(firstItemId, true);
+        }
+      }
+    },
+    [handleTimelineItemClick, itemsMap],
   );
 
   return {

@@ -11,7 +11,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { useSlideshow } from 'src/components/effects/useSlideshow';
+import { useSlideshow } from '../../effects/useSlideshow';
 import { useCardSize } from '../../../hooks/useCardSize';
 import { useFocusManager } from '../../../hooks/useFocusManager';
 import { useTimelineContext } from '../../contexts';

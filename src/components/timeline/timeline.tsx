@@ -38,6 +38,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onOutlineSelection,
     slideShowEnabled,
     slideShowRunning,
+    slideItemDuration = 2000,
     nestedCardHeight,
     isChild = false,
     onPaused,
@@ -77,8 +78,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     updateTextContentDensity,
   } = useTimelineContext();
 
-  // Default slideItemDuration - will be moved to a separate context later
-  const slideItemDuration = 2000;
 
   const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const [hasFocus, setHasFocus] = useState(false);
@@ -437,8 +436,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       // Check if focus is moving to a child element (like toolbar buttons)
       if (!currentTarget.contains(relatedTarget)) {
         // Only set hasFocus to false if focus is truly leaving the timeline
-        // Keep focus active for better keyboard navigation experience
-        // setHasFocus(false);
+        setHasFocus(false);
       }
     },
     [],

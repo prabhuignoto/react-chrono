@@ -1,5 +1,6 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useMemo } from 'react';
 import { Scroll } from '@models/TimelineHorizontalModel';
+import { throttle } from '@utils/throttle';
 
 interface UseTimelineScrollProps {
   mode: string;
@@ -45,17 +46,9 @@ export const useTimelineScroll = ({
     }
   }, []);
 
-  // Optimized scroll handler with throttling and timeline navigation
-  const handleMainScroll = useCallback(
-    (ev: React.UIEvent<HTMLDivElement>) => {
-      const target = ev.target as HTMLElement;
-
-      // Throttle scroll end detection for better performance
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-
-      scrollTimeoutRef.current = setTimeout(() => {
+  // Create throttled scroll handler for better performance
+  const throttledScrollHandler = useMemo(
+    () => throttle((target: HTMLElement) => {
         const isVertical = mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
         
         if (isVertical) {
@@ -114,9 +107,17 @@ export const useTimelineScroll = ({
             }
           }
         }
-      }, scrollEndThrottleMs);
+      }, 16), // Throttle to 60fps for smooth scrolling
+    [mode, totalItems],
+  );
+
+  // Optimized scroll handler that uses throttling
+  const handleMainScroll = useCallback(
+    (ev: React.UIEvent<HTMLDivElement>) => {
+      const target = ev.target as HTMLElement;
+      throttledScrollHandler(target);
     },
-    [mode, scrollEndThrottleMs, totalItems],
+    [throttledScrollHandler],
   );
 
   return {
