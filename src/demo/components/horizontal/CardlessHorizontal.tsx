@@ -22,13 +22,17 @@ export const CardlessHorizontal: FunctionComponent<CardlessHorizontalProps> = ({
     }>
       <Chrono
         items={items}
-        mode="HORIZONTAL"
-        cardLess
+        mode="horizontal"
+        onItemSelected={(selected) => console.log(selected.cardTitle)}
+        
+        display={{
+          cardsDisabled: true,
+        }}
+        
         theme={{
           cardBgColor: '#fff',
           titleColorActive: 'red',
         }}
-        onItemSelected={(selected) => console.log(selected.cardTitle)}
       />
     </div>
   </div>

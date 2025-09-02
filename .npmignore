@@ -1,6 +1,5 @@
 src
 coverage
-cypress
 playwright*
 .github
 .vscode

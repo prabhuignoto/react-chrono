@@ -1,5 +1,7 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import { TimelineProps } from '@models/TimelineModel';
+import { TimelinePropsV2 } from '@models/TimelinePropsV2';
+import { migrateLegacyProps, warnDeprecatedProps } from '@utils/propMigration';
 import { getUniqueID } from '@utils/index';
 import { safeValidateTimelineProps } from '@utils/validation';
 import dayjs from 'dayjs';
@@ -18,12 +20,163 @@ import { pickDefined } from '../utils/propUtils';
 import { TimelineErrorBoundary } from './common/error-boundary';
 const toReactArray = React.Children.toArray;
 
-const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
-  props: TimelineProps,
+/**
+ * Converts new grouped props back to legacy format for internal compatibility
+ */
+function convertToLegacyProps(props: TimelinePropsV2): TimelineProps {
+  return pickDefined({
+    // Core props
+    items: props.items,
+    children: props.children,
+    theme: props.theme,
+    activeItemIndex: props.activeItemIndex,
+    allowDynamicUpdate: props.allowDynamicUpdate,
+    uniqueId: props.id,
+    onItemSelected: props.onItemSelected,
+    onScrollEnd: props.onScrollEnd,
+    onThemeChange: props.onThemeChange as any,
+    onRestartSlideshow: props.onRestartSlideshow,
+    
+    // Mode conversion
+    mode: mapNewModeToLegacy(props.mode),
+    
+    // Layout props
+    cardWidth: props.layout?.cardWidth,
+    cardHeight: props.layout?.cardHeight,
+    timelinePointDimension: props.layout?.pointSize,
+    lineWidth: props.layout?.lineWidth,
+    itemWidth: props.layout?.itemWidth,
+    timelineHeight: props.layout?.timelineHeight,
+    responsiveBreakPoint: props.layout?.responsive?.breakpoint,
+    enableBreakPoint: props.layout?.responsive?.enabled,
+    cardPositionHorizontal: mapNewCardPositionToLegacy(props.layout?.positioning?.cardPosition),
+    flipLayout: props.layout?.positioning?.flipLayout,
+    
+    // Interaction props
+    disableNavOnKey: props.interaction?.keyboardNavigation === false ? true : undefined,
+    disableClickOnCircle: props.interaction?.pointClick === false ? true : undefined,
+    disableAutoScrollOnClick: props.interaction?.autoScroll === false ? true : undefined,
+    focusActiveItemOnLoad: props.interaction?.focusOnLoad,
+    highlightCardsOnHover: props.interaction?.cardHover,
+    disableInteraction: props.interaction?.disabled,
+    
+    // Content props
+    parseDetailsAsHTML: props.content?.allowHTML,
+    useReadMore: props.content?.readMore,
+    textOverlay: props.content?.textOverlay,
+    titleDateFormat: props.content?.dateFormat,
+    textDensity: props.content?.compactText ? 'LOW' : 'HIGH',
+    semanticTags: props.content?.semanticTags ? pickDefined({
+      cardTitle: props.content.semanticTags.title,
+      cardSubtitle: props.content.semanticTags.subtitle,
+    }) : undefined,
+    
+    // Display props
+    borderLessCards: props.display?.borderless,
+    cardLess: props.display?.cardsDisabled,
+    disableTimelinePoint: props.display?.pointsDisabled,
+    timelinePointShape: props.display?.pointShape,
+    showAllCardsHorizontal: props.display?.allCardsVisible,
+    disableToolbar: props.display?.toolbar?.enabled === false ? true : undefined,
+    toolbarPosition: props.display?.toolbar?.position,
+    scrollable: props.display?.scrollable,
+    
+    // Media props
+    mediaHeight: props.media?.height,
+    mediaSettings: props.media ? pickDefined({
+      align: props.media?.align,
+      fit: props.media?.fit as 'cover' | 'contain' | 'fill' | 'none' | undefined,
+    }) : undefined,
+    
+    // Animation props
+    slideShow: props.animation?.slideshow?.enabled,
+    slideItemDuration: props.animation?.slideshow?.duration,
+    slideShowType: mapNewSlideshowTypeToLegacy(props.animation?.slideshow?.type) as any,
+    showProgressOnSlideshow: props.animation?.slideshow?.showProgress,
+    showOverallSlideshowProgress: props.animation?.slideshow?.showOverallProgress,
+    
+    // Style props
+    classNames: props.style?.classNames,
+    fontSizes: props.style?.fontSizes,
+    
+    // Accessibility props
+    buttonTexts: props.accessibility?.buttonTexts as any,
+    
+    // Dark mode
+    darkMode: props.darkMode?.enabled,
+    enableDarkToggle: props.darkMode?.showToggle,
+  }) as TimelineProps;
+}
+
+function mapNewModeToLegacy(mode?: TimelinePropsV2['mode']): string {
+  switch (mode) {
+    case 'horizontal':
+      return 'HORIZONTAL';
+    case 'vertical':
+      return 'VERTICAL';
+    case 'alternating':
+      return 'VERTICAL_ALTERNATING';
+    case 'horizontal-all':
+      return 'HORIZONTAL_ALL';
+    default:
+      return 'VERTICAL_ALTERNATING';
+  }
+}
+
+function mapNewCardPositionToLegacy(position?: 'top' | 'bottom'): 'TOP' | 'BOTTOM' | undefined {
+  switch (position) {
+    case 'top':
+      return 'TOP';
+    case 'bottom':
+      return 'BOTTOM';
+    default:
+      return undefined;
+  }
+}
+
+function mapNewSlideshowTypeToLegacy(type?: 'reveal' | 'slide' | 'fade'): string | undefined {
+  switch (type) {
+    case 'reveal':
+      return 'reveal';
+    case 'slide':
+      return 'slide_in';
+    case 'fade':
+      return 'slide_from_sides';
+    default:
+      return undefined;
+  }
+}
+
+// Union type to accept both old and new prop formats
+type ChronoProps = TimelineProps | TimelinePropsV2;
+
+const Chrono: React.FunctionComponent<ChronoProps> = (
+  inputProps: ChronoProps,
 ) => {
+  // Handle backward compatibility and migration
+  const props = useMemo(() => {
+    // Check if using new grouped prop structure
+    const hasNewProps = 'layout' in inputProps || 'interaction' in inputProps || 
+                       'content' in inputProps || 'display' in inputProps || 
+                       'media' in inputProps || 'animation' in inputProps;
+    
+    if (hasNewProps) {
+      // Already using new format
+      return inputProps as TimelinePropsV2;
+    } else {
+      // Migrate legacy props and warn about deprecations
+      if (process.env.NODE_ENV === 'development') {
+        warnDeprecatedProps(inputProps as TimelineProps);
+      }
+      return migrateLegacyProps(inputProps as TimelineProps);
+    }
+  }, [inputProps]);
+
   // Validate props early with development warnings
   if (process.env.NODE_ENV === 'development') {
-    const validationResult = safeValidateTimelineProps(props);
+    // Convert back to legacy format for existing validation
+    const legacyProps = convertToLegacyProps(props);
+    const validationResult = safeValidateTimelineProps(legacyProps);
     if (!validationResult.success) {
       console.warn('Timeline props validation warnings:', validationResult.errors.map(
         error => `${error.path.join('.')}: ${error.message}`
@@ -31,18 +184,35 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     }
   }
 
+  // Extract props with new grouped structure
   const {
     allowDynamicUpdate = false,
     children,
-    items,
+    items = [],
     onScrollEnd,
-    slideShow = false,
-    slideItemDuration = 2000,
     onItemSelected,
     activeItemIndex = 0,
-    titleDateFormat = 'MMM DD, YYYY',
-    mode,
+    mode = 'alternating',
+    theme,
+    onThemeChange,
+    onRestartSlideshow,
+    id,
+    darkMode,
+    // Grouped configurations
+    layout,
+    interaction,
+    content,
+    display,
+    media,
+    animation,
+    style,
+    accessibility,
   } = props;
+
+  // Extract specific values from grouped configs with defaults
+  const slideShow = animation?.slideshow?.enabled || false;
+  const slideItemDuration = animation?.slideshow?.duration || 2000;
+  const titleDateFormat = content?.dateFormat || 'MMM DD, YYYY';
 
   const [timeLineItems, setTimeLineItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>([]);
@@ -346,9 +516,12 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     );
   }, [props.theme]);
 
+  // Convert to legacy props for internal compatibility
+  const legacyProps = useMemo(() => convertToLegacyProps(props), [props]);
+
   return (
     <TimelineErrorBoundary>
-      <TimelineContextProvider {...props}>
+      <TimelineContextProvider {...legacyProps}>
         <div
           className={isDarkMode ? darkThemeClass : lightThemeClass}
           style={{ ...computeCssVarsFromTheme(props.theme), width: '100%' }}
@@ -374,7 +547,7 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
               onItemSelected,
             })}
             onOutlineSelection={handleOutlineSelection}
-            mode={mode || 'VERTICAL_ALTERNATING'}
+            mode={mapNewModeToLegacy(mode)}
             onPaused={onPaused}
           />
         </div>

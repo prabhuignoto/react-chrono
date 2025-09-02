@@ -16,40 +16,67 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
     <div className={componentContainerTree}>
       <Chrono
         items={items}
-        mode="VERTICAL"
-        slideShow
-        cardWidth={650}
-        slideItemDuration={2500}
-        scrollable={{ scrollbar: false }}
-        noUniqueId
-        uniqueId="vertical_basic_test"
-        parseDetailsAsHTML
-        highlightCardsOnHover
-        enableQuickJump={true}
-        toolbarPosition="top"
-        onItemSelected={(selected) => console.log(selected.index)}
-        fontSizes={{
-          title: '1.5rem',
-        }}
-        theme={{
-          cardDetailsColor: '#555555',
-        }}
-        focusActiveItemOnLoad
+        mode="vertical"
+        id="vertical_basic_test"
         activeItemIndex={2}
-        cardHeight={200}
-        contentDetailsHeight={10}
-        timelinePointDimension={20}
-        classNames={{
-          cardText: 'custom-text',
+        onItemSelected={(selected) => console.log(selected.index)}
+        
+        layout={{
+          cardWidth: 650,
+          cardHeight: 200,
+          pointSize: 20,
+          responsive: {
+            enabled: true,
+            breakpoint: 768,
+          },
         }}
-        mediaSettings={{
+        
+        interaction={{
+          focusOnLoad: true,
+          cardHover: true,
+        }}
+        
+        content={{
+          allowHTML: true,
+          compactText: true,
+        }}
+        
+        display={{
+          scrollable: { scrollbar: false },
+          toolbar: { 
+            enabled: true, 
+            position: 'top' 
+          },
+        }}
+        
+        media={{
           align: 'center',
           fit: 'cover',
         }}
-        enableDarkToggle
-        enableBreakPoint={true}
-        responsiveBreakPoint={768}
-        textDensity='HIGH'
+        
+        animation={{
+          slideshow: {
+            enabled: true,
+            duration: 2500,
+          },
+        }}
+        
+        style={{
+          fontSizes: {
+            title: '1.5rem',
+          },
+          classNames: {
+            cardText: 'custom-text',
+          },
+        }}
+        
+        theme={{
+          cardDetailsColor: '#555555',
+        }}
+        
+        darkMode={{
+          showToggle: true,
+        }}
       />
     </div>
   </div>

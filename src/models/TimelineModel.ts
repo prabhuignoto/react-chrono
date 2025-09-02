@@ -90,8 +90,6 @@ export type TimelineProps = {
   // active item index
   activeItemIndex?: number;
 
-  // alignMedia?: 'left' | 'right' | 'center';
-
   // allow dynamic update of the timeline items
   allowDynamicUpdate?: boolean;
 
@@ -185,7 +183,7 @@ export type TimelineProps = {
   };
 
   // mode of the timeline. VERTICAL, HORIZONTAL, VERTICAL_ALTERNATING
-  mode?: TimelineMode;
+  mode?: TimelineMode | string;
 
   nestedCardHeight?: number;
 
@@ -284,4 +282,5 @@ export type TimelineMode =
   | 'VERTICAL'
   | 'HORIZONTAL'
   | 'VERTICAL_ALTERNATING'
-  | 'HORIZONTAL_ALL';
+  | 'HORIZONTAL_ALL'
+  | string; // Allow string for backward compatibility

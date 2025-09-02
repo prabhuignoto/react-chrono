@@ -19,27 +19,48 @@ export const BasicHorizontal: FunctionComponent<BasicHorizontalProps> = ({
       <div className={componentContainerBigScreen}>
         <Chrono
           items={items}
-          mode="HORIZONTAL"
-          cardHeight={450}
-          cardWidth={550}
-          mediaHeight={300}
-          slideShow
-          slideItemDuration={2550}
-          itemWidth={300}
+          mode="horizontal"
           onItemSelected={(selected) => setItemSelected(selected.index)}
-          timelinePointDimension={20}
-          timelinePointShape="square"
-          parseDetailsAsHTML
-          buttonTexts={{
-            first: 'Jump to First',
-            last: 'Jump to Last',
-            next: 'Next',
-            previous: 'Previous',
+          
+          layout={{
+            cardHeight: 450,
+            cardWidth: 550,
+            itemWidth: 300,
+            pointSize: 20,
           }}
-          enableDarkToggle
-          mediaSettings={{
+          
+          content={{
+            allowHTML: true,
+          }}
+          
+          display={{
+            pointShape: 'square',
+          }}
+          
+          media={{
+            height: 300,
             align: 'center',
             fit: 'cover',
+          }}
+          
+          animation={{
+            slideshow: {
+              enabled: true,
+              duration: 2550,
+            },
+          }}
+          
+          accessibility={{
+            buttonTexts: {
+              first: 'Jump to First',
+              last: 'Jump to Last',
+              next: 'Next',
+              previous: 'Previous',
+            },
+          }}
+          
+          darkMode={{
+            showToggle: true,
           }}
         >
           <div className="chrono-icons">

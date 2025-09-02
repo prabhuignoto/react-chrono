@@ -28,22 +28,43 @@ export const AlternatingVertical: FunctionComponent<AlternatingVerticalProps> = 
     }>
       <Chrono
         items={items}
-        mode="VERTICAL_ALTERNATING"
+        mode="alternating"
         theme={theme}
-        slideShow
-        slideItemDuration={2050}
-        slideShowType="slide_from_sides"
         allowDynamicUpdate
-        cardHeight={200}
-        disableToolbar
-        focusActiveItemOnLoad
-        enableDarkToggle
-        cardWidth={400}
         onItemSelected={(selected) => console.log(selected)}
         onScrollEnd={() => console.log('end reached')}
-        enableBreakPoint
-        highlightCardsOnHover
-        contentDetailsHeight={200}
+        
+        layout={{
+          cardHeight: 200,
+          cardWidth: 400,
+          responsive: {
+            enabled: true,
+          },
+        }}
+        
+        interaction={{
+          focusOnLoad: true,
+          cardHover: true,
+        }}
+        
+        display={{
+          toolbar: { 
+            enabled: false 
+          },
+        }}
+        
+        animation={{
+          slideshow: {
+            enabled: true,
+            duration: 2050,
+            type: 'slide',
+          },
+        }}
+        
+        darkMode={{
+          showToggle: true,
+        }}
+        
         {...pickDefined({ children })}
       />
     </div>

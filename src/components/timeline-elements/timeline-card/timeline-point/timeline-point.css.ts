@@ -25,7 +25,7 @@ export const shapeWrapper = style([
     width: 'auto', // Let content determine width
     height: 'auto', // Let content determine height
     position: 'relative',
-    // Simplified - no complex z-index or excessive padding
+    zIndex: 2, // Ensure timeline points are above the timeline line
     flexShrink: 0,
   },
 ]);

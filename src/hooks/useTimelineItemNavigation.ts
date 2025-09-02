@@ -198,6 +198,11 @@ export const useTimelineItemNavigation = ({
           try {
             if (typeof (targetElement as HTMLElement).focus === 'function') {
               (targetElement as HTMLElement).focus({ preventScroll: true });
+              // Ensure the wrapper maintains keyboard focus capability
+              const wrapper = targetElement.closest('.timeline-wrapper') as HTMLElement;
+              if (wrapper && !wrapper.contains(document.activeElement)) {
+                wrapper.focus();
+              }
             }
           } catch {
             /* no-op */
@@ -226,7 +231,7 @@ export const useTimelineItemNavigation = ({
       const nextIndex = currentIndex + 1;
       
       // If there's a next item, advance to it
-      if (nextIndex < itemsMap.size) {
+      if (nextIndex < items.length) {
         const nextItemId = Array.from(itemsMap.entries()).find(([_, index]) => index === nextIndex)?.[0];
         if (nextItemId) {
           handleTimelineItemClick(nextItemId, true);
@@ -239,7 +244,7 @@ export const useTimelineItemNavigation = ({
         }
       }
     },
-    [handleTimelineItemClick, itemsMap],
+    [handleTimelineItemClick, itemsMap, items.length],
   );
 
   return {

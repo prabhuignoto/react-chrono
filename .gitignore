@@ -61,9 +61,6 @@ cache
 .idea
 .tmp
 
-# Legacy Cypress files (can be removed after full migration)
-cypress/videos
-cypress/screenshots
 
 .scannerwork
 # sonar-project.properties

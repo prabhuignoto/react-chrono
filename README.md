@@ -17,7 +17,6 @@
 [![Build Status](https://dev.azure.com/prabhummurthy/react-chrono/_apis/build/status/prabhuignoto.react-chrono?branchName=master)](https://dev.azure.com/prabhummurthy/react-chrono/_build/latest?definitionId=7&branchName=master)
 [![DeepScan grade](https://deepscan.io/api/teams/10074/projects/13644/branches/234929/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10074&pid=13644&bid=234929)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/f2e24a98defd4e4fa7f6f24d86b8dab5)](https://www.codacy.com/manual/prabhuignoto/react-chrono?utm_source=github.com&utm_medium=referral&utm_content=prabhuignoto/react-chrono&utm_campaign=Badge_Grade)
-[![react-chrono](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/8zb5a5&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/8zb5a5/runs)
 [![Known Vulnerabilities](https://snyk.io/test/github/prabhuignoto/react-chrono/badge.svg)](https://snyk.io/test/github/prabhuignoto/react-chrono)
 [![Depfu](https://badges.depfu.com/badges/48a23a6a830309649b7e516467cd9a48/overview.svg)](https://depfu.com/github/prabhuignoto/react-chrono?project_id=15325)
 [![Coverage Status](https://coveralls.io/repos/github/prabhuignoto/react-chrono/badge.svg?branch=master)](https://coveralls.io/github/prabhuignoto/react-chrono?branch=master)
@@ -31,11 +30,12 @@
 React Chrono is a modern timeline component for React that offers a variety of features and customization options. It allows you to render timelines in horizontal, vertical, vertical-alternating, and horizontal-all modes, display images and videos, and much more.
 
 **🚀 Recent Enhancements:**
-- **Advanced Dark Mode**: 15+ new themeable properties for complete dark mode customization
-- **Enhanced Search**: Built-in search with keyboard navigation and match highlighting  
-- **Fullscreen Support**: Cross-browser fullscreen mode for immersive viewing
-- **Improved Accessibility**: Better focus management and ARIA support
-- **Enhanced Testing**: Comprehensive Playwright E2E and component testing suite
+- **🎯 New Grouped API**: Cleaner, more intuitive prop structure with logical groupings
+- **🔄 Backward Compatibility**: Seamless migration from old to new API with deprecation warnings
+- **🏗️ Better Architecture**: Improved type safety and development experience
+- **⚡ Enhanced Performance**: Optimized prop handling and validation
+- **📚 Cleaner Documentation**: Organized by feature groups for better understanding
+- **🧪 Modern Testing**: Comprehensive Playwright E2E testing (Cypress removed)
 
 ## Table of Contents
 
@@ -45,18 +45,14 @@ React Chrono is a modern timeline component for React that offers a variety of f
   - [Basic Horizontal Mode](#basic-horizontal-mode)
   - [Vertical Mode](#vertical-mode)
   - [Vertical Alternating Mode](#vertical-alternating-mode)
-- [⚙️ Props](#️-props)
+- [🎯 New Grouped API Structure](#-new-grouped-api-structure)
+  - [Basic Usage with New API](#basic-usage-with-new-api)
+  - [Configuration Groups](#configuration-groups)
+  - [Migration from Old API](#migration-from-old-api)
+- [⚙️ Props Reference](#️-props-reference)
   - [Core Props](#core-props)
+  - [Configuration Objects](#configuration-objects)
   - [Timeline Item Model](#timeline-item-model)
-  - [Navigation & Interaction](#navigation--interaction)
-  - [Layout & Sizing](#layout--sizing)
-  - [Media Handling](#media-handling)
-  - [Content & Display](#content--display)
-  - [Theming & Styling](#theming--styling)
-  - [Slideshow](#slideshow)
-  - [Search](#search)
-  - [Fullscreen](#fullscreen)
-  - [Miscellaneous](#miscellaneous)
 - [🎨 Customization](#-customization)
   - [Rendering Custom Content](#rendering-custom-content-1)
   - [Custom Icons](#custom-icons)
@@ -178,17 +174,425 @@ For a layout where cards alternate sides, use `VERTICAL_ALTERNATING`.
 
 ![Vertical Alternating Timeline Example](./readme-assets/vertical_alternating.jpg)
 
-## ⚙️ Props
+## 🎯 New Grouped API Structure
 
-React Chrono offers a wide range of props for customization.
+React Chrono now offers a cleaner, more intuitive API with logically grouped configuration objects. This makes it easier to understand and configure the timeline while maintaining full backward compatibility.
+
+### Basic Usage with New API
+
+```jsx
+import { Chrono } from 'react-chrono';
+
+const App = () => {
+  const items = [
+    {
+      title: 'May 1940',
+      cardTitle: 'Dunkirk',
+      cardSubtitle: 'Evacuation of Allied soldiers',
+      cardDetailedText: 'Men of the British Expeditionary Force...',
+    },
+    // ... more items
+  ];
+
+  return (
+    <div style={{ width: '800px', height: '600px' }}>
+      <Chrono
+        items={items}
+        mode="alternating"
+        layout={{
+          cardWidth: 400,
+          cardHeight: 200,
+          pointSize: 20,
+        }}
+        interaction={{
+          keyboardNavigation: true,
+          pointClick: true,
+          autoScroll: true,
+        }}
+        display={{
+          borderless: false,
+          pointShape: 'circle',
+          toolbar: { enabled: true, position: 'top' },
+        }}
+        animation={{
+          slideshow: {
+            enabled: true,
+            duration: 3000,
+            showProgress: true,
+          },
+        }}
+        theme={{
+          primary: '#0070f3',
+          cardBgColor: '#ffffff',
+          titleColor: '#333333',
+        }}
+      />
+    </div>
+  );
+};
+```
+
+### Configuration Groups
+
+The new API organizes props into logical groups:
+
+- **`layout`** - Sizing, positioning, and responsive behavior
+- **`interaction`** - User interaction and navigation options
+- **`content`** - Text handling, HTML parsing, and semantic tags
+- **`display`** - Visual appearance, borders, points, and toolbar
+- **`media`** - Image and video configuration
+- **`animation`** - Slideshow and transition effects
+- **`style`** - Custom CSS classes and font sizes
+- **`accessibility`** - Button labels and ARIA support
+
+### Migration from Old API
+
+The new API is fully backward compatible. Existing code will continue to work with deprecation warnings in development:
+
+```jsx
+// ✅ Old API - Still works with deprecation warnings
+<Chrono
+  items={items}
+  borderLessCards={true}           // ⚠️ Deprecated
+  disableNavOnKey={false}          // ⚠️ Deprecated
+  timelinePointDimension={18}      // ⚠️ Deprecated
+/>
+
+// ✅ New API - Recommended
+<Chrono
+  items={items}
+  display={{ borderless: true }}
+  interaction={{ keyboardNavigation: true }}
+  layout={{ pointSize: 18 }}
+/>
+```
+
+### ⚡ Quick Migration Guide
+
+Here's how common prop patterns map to the new API:
+
+#### Layout & Sizing
+```jsx
+// Old API ❌
+<Chrono
+  cardWidth={400}
+  cardHeight={200}
+  timelinePointDimension={16}
+  lineWidth={3}
+  itemWidth={300}
+  responsiveBreakPoint={768}
+  enableBreakPoint={true}
+  cardPositionHorizontal="TOP"
+  flipLayout={true}
+/>
+
+// New API ✅
+<Chrono
+  layout={{
+    cardWidth: 400,
+    cardHeight: 200,
+    pointSize: 16,
+    lineWidth: 3,
+    itemWidth: 300,
+    responsive: {
+      breakpoint: 768,
+      enabled: true,
+    },
+    positioning: {
+      cardPosition: 'top',
+      flipLayout: true,
+    },
+  }}
+/>
+```
+
+#### Interaction & Navigation
+```jsx
+// Old API ❌
+<Chrono
+  disableNavOnKey={false}
+  disableClickOnCircle={false}
+  disableAutoScrollOnClick={false}
+  focusActiveItemOnLoad={true}
+  highlightCardsOnHover={true}
+  disableInteraction={false}
+/>
+
+// New API ✅
+<Chrono
+  interaction={{
+    keyboardNavigation: true,
+    pointClick: true,
+    autoScroll: true,
+    focusOnLoad: true,
+    cardHover: true,
+    disabled: false,
+  }}
+/>
+```
+
+#### Display & Visual
+```jsx
+// Old API ❌
+<Chrono
+  borderLessCards={true}
+  cardLess={false}
+  disableTimelinePoint={false}
+  timelinePointShape="circle"
+  showAllCardsHorizontal={false}
+  disableToolbar={false}
+  toolbarPosition="top"
+  scrollable={{ scrollbar: false }}
+/>
+
+// New API ✅
+<Chrono
+  display={{
+    borderless: true,
+    cardsDisabled: false,
+    pointsDisabled: false,
+    pointShape: 'circle',
+    allCardsVisible: false,
+    toolbar: {
+      enabled: true,
+      position: 'top',
+    },
+    scrollable: { scrollbar: false },
+  }}
+/>
+```
+
+#### Content & Media
+```jsx
+// Old API ❌
+<Chrono
+  parseDetailsAsHTML={true}
+  useReadMore={true}
+  textOverlay={false}
+  titleDateFormat="MMM DD, YYYY"
+  textDensity="HIGH"
+  mediaHeight={200}
+  mediaSettings={{
+    align: 'center',
+    fit: 'cover',
+  }}
+/>
+
+// New API ✅
+<Chrono
+  content={{
+    allowHTML: true,
+    readMore: true,
+    textOverlay: false,
+    dateFormat: 'MMM DD, YYYY',
+    compactText: true,
+  }}
+  media={{
+    height: 200,
+    align: 'center',
+    fit: 'cover',
+  }}
+/>
+```
+
+#### Slideshow & Animation
+```jsx
+// Old API ❌
+<Chrono
+  slideShow={true}
+  slideItemDuration={2000}
+  slideShowType="slide_from_sides"
+  showProgressOnSlideshow={true}
+  showOverallSlideshowProgress={true}
+/>
+
+// New API ✅
+<Chrono
+  animation={{
+    slideshow: {
+      enabled: true,
+      duration: 2000,
+      type: 'slide',
+      showProgress: true,
+      showOverallProgress: true,
+    },
+  }}
+/>
+```
+
+## ⚙️ Props Reference
 
 ### Core Props
 
-| Name    | Type                                                                     | Default        | Description                                                                                                                                       |
-| :------ | :----------------------------------------------------------------------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `items` | `TimelineItemModel[]`                                                    | `[]`           | An array of [Timeline Item objects](#timeline-item-model) to display.                                                                             |
-| `mode`  | `'HORIZONTAL'`, `'VERTICAL'`, `'VERTICAL_ALTERNATING'`, `'HORIZONTAL_ALL'` | `'HORIZONTAL'` | Sets the layout mode of the timeline. `HORIZONTAL_ALL` shows all cards simultaneously in horizontal mode.                                        |
-| `theme` | `Theme`                                                                  | `{...}`        | **Enhanced theming** with 15+ new dark mode properties for complete visual customization. See [Theming & Styling](#theming--styling) for details. |
+| Name              | Type                                           | Default       | Description                                                                |
+| :---------------- | :--------------------------------------------- | :------------ | :------------------------------------------------------------------------- |
+| `items`           | `TimelineItem[]`                               | `[]`          | Array of [Timeline Item objects](#timeline-item-model) to display         |
+| `mode`            | `'horizontal'`, `'vertical'`, `'alternating'`, `'horizontal-all'` | `'alternating'` | Timeline display mode                                             |
+| `theme`           | `Theme`                                        | `{}`          | Visual theme configuration with 15+ customizable properties               |
+| `children`        | `ReactNode`                                    | -             | Custom React content for timeline cards                                   |
+| `activeItemIndex` | `number`                                       | `0`           | Index of initially active timeline item                                   |
+
+### Configuration Objects
+
+#### Layout Configuration (`layout`)
+
+Configure sizing, positioning, and responsive behavior:
+
+```typescript
+layout?: {
+  cardWidth?: number;           // Maximum width of cards (default: 450px)
+  cardHeight?: number;          // Minimum height of cards (default: 200px) 
+  pointSize?: number;           // Size of timeline points (default: 16px)
+  lineWidth?: number;           // Width of timeline track (default: 3px)
+  itemWidth?: number;           // Width of sections in horizontal mode (default: 200px)
+  
+  responsive?: {
+    breakpoint?: number;        // Viewport breakpoint (default: 768px)
+    enabled?: boolean;          // Enable responsive switching (default: true)
+  };
+  
+  positioning?: {
+    cardPosition?: 'top' | 'bottom';  // Card position in horizontal mode
+    flipLayout?: boolean;             // Flip layout for RTL support
+  };
+}
+```
+
+#### Interaction Configuration (`interaction`)
+
+Control user interaction and navigation:
+
+```typescript
+interaction?: {
+  keyboardNavigation?: boolean; // Enable arrow key navigation (default: true)
+  pointClick?: boolean;         // Enable clicking on timeline points (default: true)
+  autoScroll?: boolean;         // Auto-scroll to active items (default: true)
+  focusOnLoad?: boolean;        // Focus active item on load (default: false)
+  cardHover?: boolean;          // Highlight cards on hover (default: false)
+  disabled?: boolean;           // Disable all interactions (default: false)
+}
+```
+
+#### Content Configuration (`content`)
+
+Handle text content and parsing:
+
+```typescript
+content?: {
+  allowHTML?: boolean;          // Allow HTML in card content (default: false)
+  readMore?: boolean;           // Enable read more functionality (default: true)
+  textOverlay?: boolean;        // Display text over media (default: false)
+  dateFormat?: string;          // Date format for titles (default: 'MMM DD, YYYY')
+  compactText?: boolean;        // Use compact text display (default: false)
+  
+  semanticTags?: {
+    title?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
+    subtitle?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
+  };
+}
+```
+
+#### Display Configuration (`display`)
+
+Control visual appearance and UI elements:
+
+```typescript
+display?: {
+  borderless?: boolean;         // Remove card borders (default: false)
+  cardsDisabled?: boolean;      // Hide cards entirely (default: false)
+  pointsDisabled?: boolean;     // Hide timeline points (default: false)
+  pointShape?: 'circle' | 'square' | 'diamond'; // Point shape (default: 'circle')
+  allCardsVisible?: boolean;    // Show all cards in horizontal mode (default: false)
+  
+  toolbar?: {
+    enabled?: boolean;          // Show toolbar (default: true)
+    position?: 'top' | 'bottom'; // Toolbar position (default: 'top')
+  };
+  
+  scrollable?: boolean | {      // Enable scrolling (default: false)
+    scrollbar: boolean;         // Show scrollbar
+  };
+}
+```
+
+#### Media Configuration (`media`)
+
+Configure images and videos:
+
+```typescript
+media?: {
+  height?: number;              // Media height in pixels (default: 200)
+  align?: 'left' | 'center' | 'right'; // Media alignment (default: 'left')
+  fit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down'; // CSS object-fit (default: 'cover')
+}
+```
+
+#### Animation Configuration (`animation`)
+
+Control slideshow and transitions:
+
+```typescript
+animation?: {
+  slideshow?: {
+    enabled?: boolean;          // Enable slideshow (default: false)
+    duration?: number;          // Duration per slide in ms (default: 2000)
+    type?: 'reveal' | 'slide' | 'fade'; // Transition type (default: 'fade')
+    autoStart?: boolean;        // Auto-start slideshow (default: false)
+    showProgress?: boolean;     // Show progress on cards (default: false)
+    showOverallProgress?: boolean; // Show overall progress bar (default: true)
+  };
+}
+```
+
+#### Style Configuration (`style`)
+
+Customize CSS classes and fonts:
+
+```typescript
+style?: {
+  classNames?: {
+    card?: string;
+    cardMedia?: string;
+    cardSubTitle?: string;
+    cardText?: string;
+    cardTitle?: string;
+    controls?: string;
+    title?: string;
+    timelinePoint?: string;
+    timelineTrack?: string;
+  };
+  
+  fontSizes?: {
+    cardSubtitle?: string;
+    cardText?: string;
+    cardTitle?: string;
+    title?: string;
+  };
+}
+```
+
+#### Accessibility Configuration (`accessibility`)
+
+Customize labels for screen readers:
+
+```typescript
+accessibility?: {
+  buttonTexts?: {
+    first?: string;             // First button label
+    last?: string;              // Last button label
+    next?: string;              // Next button label
+    previous?: string;          // Previous button label
+    play?: string;              // Play slideshow label
+    stop?: string;              // Stop slideshow label
+  };
+  
+  search?: {
+    placeholder?: string;       // Search input placeholder
+    ariaLabel?: string;         // Search input ARIA label
+    clearLabel?: string;        // Clear search button label
+  };
+}
+```
 
 ### Timeline Item Model
 
@@ -275,10 +679,19 @@ interface SemanticTagsConfig {
 
 **Keyboard Navigation:**
 
-- **Horizontal Mode**: Use <kbd>LEFT</kbd> and <kbd>RIGHT</kbd> arrow keys.
-- **Vertical/Vertical Alternating Mode**: Use <kbd>UP</kbd> and <kbd>DOWN</kbd> arrow keys.
-- <kbd>HOME</kbd>: Jump to the first item.
-- <kbd>END</kbd>: Jump to the last item.
+React Chrono is fully keyboard accessible with smooth scrolling transitions:
+
+- **Horizontal Mode**: 
+  - <kbd>LEFT</kbd> / <kbd>RIGHT</kbd>: Navigate between timeline items
+- **Vertical/Vertical Alternating Mode**: 
+  - <kbd>UP</kbd> / <kbd>DOWN</kbd>: Navigate between timeline items
+- **All Modes**:
+  - <kbd>HOME</kbd>: Jump to the first item instantly
+  - <kbd>END</kbd>: Jump to the last item instantly
+  - <kbd>ESC</kbd>: Exit fullscreen mode or pause slideshow
+  - <kbd>ENTER</kbd>: Select focused timeline item
+
+All keyboard navigation features smooth scrolling animations that are cross-browser compatible and respect user's prefers-reduced-motion settings.
 
 ### Layout & Sizing
 
@@ -856,6 +1269,59 @@ React Chrono uses a comprehensive testing setup with multiple frameworks:
 - Performance testing
 
 See the [Development Commands](#-development--build-commands) section for all available testing commands.
+
+## ♿ Accessibility
+
+React Chrono is built with accessibility in mind, following WAI-ARIA best practices to ensure your timelines are usable by everyone.
+
+### Accessibility Features
+
+- **Full Keyboard Navigation**: Navigate through timeline items using arrow keys, Home/End keys, and Enter
+- **Screen Reader Support**: Proper ARIA labels and roles for all interactive elements
+- **Focus Management**: Clear focus indicators and logical focus order
+- **Reduced Motion Support**: Respects user's `prefers-reduced-motion` settings
+- **High Contrast Mode**: Compatible with high contrast display modes
+- **WCAG Compliance**: Default themes meet WCAG AA contrast requirements (4.5:1 ratio)
+
+### ARIA Implementation
+
+- Timeline wrapper has `role="region"` with proper `aria-label`
+- Timeline points use `aria-selected` for current state
+- Cards include `aria-expanded` for expandable content
+- Live regions announce timeline navigation changes
+- Proper heading hierarchy with configurable semantic tags
+
+### Best Practices for Accessibility
+
+1. **Always provide descriptive titles** for timeline items
+2. **Use semantic HTML** in custom content when possible
+3. **Ensure custom themes maintain sufficient color contrast**
+4. **Test with keyboard navigation and screen readers**
+5. **Provide alternative text for media content**
+
+### Accessibility Configuration
+
+```jsx
+<Chrono
+  items={items}
+  accessibility={{
+    buttonTexts: {
+      first: 'Go to first item',
+      last: 'Go to last item',
+      next: 'Next item',
+      previous: 'Previous item',
+      play: 'Start slideshow',
+      stop: 'Stop slideshow'
+    }
+  }}
+  content={{
+    semanticTags: {
+      title: 'h2',      // Use appropriate heading levels
+      subtitle: 'h3'
+    }
+  }}
+/>
+```
 
 ## 🤝 Contributing
 

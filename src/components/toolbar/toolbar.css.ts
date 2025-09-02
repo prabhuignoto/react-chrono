@@ -463,6 +463,6 @@ export const toolbarIconButton = recipe({
   defaultVariants: {
     state: 'expanded',
     size: 'md',
-    animation: 'bounce',
+    animation: 'none',
   },
 });

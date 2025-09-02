@@ -580,6 +580,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         }
       }}
       tabIndex={isChild ? -1 : 0}
+      role="region"
+      aria-label="Timeline"
+      aria-live="polite"
+      aria-atomic="false"
     >
       {canShowToolbar && (
         <TimelineToolbar

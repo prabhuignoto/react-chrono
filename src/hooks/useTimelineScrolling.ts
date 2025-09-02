@@ -19,6 +19,9 @@ const SCROLL_OPTIONS: Record<'HORIZONTAL' | 'VERTICAL', ScrollOptions> = {
   },
 };
 
+// Default scroll duration that balances smoothness with responsiveness
+const DEFAULT_SCROLL_DURATION = 600; // Reduced from 1200ms for better responsiveness
+
 /**
  * Smooth scroll with improved easing function for more fluid motion
  */
@@ -39,8 +42,9 @@ const easeInOutQuart = (t: number): number => {
 const smoothScrollTo = (
   container: Element,
   targetPosition: number,
-  duration: number,
+  duration: number = DEFAULT_SCROLL_DURATION,
   isHorizontal: boolean = false,
+  onComplete?: () => void,
 ) => {
   const startPosition = isHorizontal
     ? container.scrollLeft
@@ -62,6 +66,9 @@ const smoothScrollTo = (
 
     if (progress < 1) {
       requestAnimationFrame(animateScroll);
+    } else if (onComplete) {
+      // Call completion callback when animation is done
+      onComplete();
     }
   };
 
@@ -147,8 +154,8 @@ export const useTimelineScrolling = () => {
           containerRect.height / 2 +
           elementRect.height / 2;
 
-        // Use much longer duration for smoother vertical scrolling
-        smoothScrollTo(container, targetScrollTop, 1200, false);
+        // Use appropriate duration for smooth but responsive scrolling
+        smoothScrollTo(container, targetScrollTop, DEFAULT_SCROLL_DURATION, false);
       } else {
         // Center horizontally with improved positioning
         const targetScrollLeft =
@@ -157,8 +164,8 @@ export const useTimelineScrolling = () => {
           containerRect.width / 2 +
           elementRect.width / 2;
 
-        // Use much longer duration for smoother horizontal scrolling
-        smoothScrollTo(container, targetScrollLeft, 1200, true);
+        // Use appropriate duration for smooth but responsive scrolling
+        smoothScrollTo(container, targetScrollLeft, DEFAULT_SCROLL_DURATION, true);
       }
 
       lastScrollTarget.current = element;
@@ -170,7 +177,7 @@ export const useTimelineScrolling = () => {
       clearLastTargetTimeoutRef.current = setTimeout(() => {
         lastScrollTarget.current = null;
         clearLastTargetTimeoutRef.current = null;
-      }, 1300);
+      }, DEFAULT_SCROLL_DURATION + 100); // Add small buffer after scroll completes
 
       scrollTimeoutRef.current = null;
     });
