@@ -2,6 +2,7 @@ import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { vars } from '../../styles/tokens.css';
 import { sprinkles } from '../../styles/sprinkles/sprinkles.css';
+import { lightThemeClass, darkThemeClass } from '../../styles/themes.css';
 
 export const wrapper = style([
   sprinkles({ display: 'flex' }),
@@ -33,6 +34,7 @@ globalStyle(
   `${wrapper}:fullscreen, ${wrapper}:-webkit-full-screen, ${wrapper}:-moz-full-screen, ${wrapper}:-ms-fullscreen, ${wrapper}[data-fullscreen='true']`,
   {
     background: vars.color.background,
+    color: vars.color.text,
     padding: '2rem',
     display: 'flex',
     flexDirection: 'column',
@@ -53,6 +55,23 @@ globalStyle(
   `${wrapper}:fullscreen::backdrop, ${wrapper}:-webkit-full-screen::backdrop, ${wrapper}:-moz-full-screen::backdrop, ${wrapper}:-ms-fullscreen::backdrop`,
   {
     background: vars.color.background,
+  },
+);
+
+// Ensure theme-specific backgrounds for fullscreen mode with higher specificity
+globalStyle(
+  `${wrapper}.${darkThemeClass}:fullscreen, ${wrapper}.${darkThemeClass}:-webkit-full-screen, ${wrapper}.${darkThemeClass}:-moz-full-screen, ${wrapper}.${darkThemeClass}:-ms-fullscreen, ${wrapper}.${darkThemeClass}[data-fullscreen='true']`,
+  {
+    background: '#0b0f19',
+    color: '#e5e7eb',
+  },
+);
+
+globalStyle(
+  `${wrapper}.${lightThemeClass}:fullscreen, ${wrapper}.${lightThemeClass}:-webkit-full-screen, ${wrapper}.${lightThemeClass}:-moz-full-screen, ${wrapper}.${lightThemeClass}:-ms-fullscreen, ${wrapper}.${lightThemeClass}[data-fullscreen='true']`,
+  {
+    background: '#ffffff', 
+    color: '#111827',
   },
 );
 

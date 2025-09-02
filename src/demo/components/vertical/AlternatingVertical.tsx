@@ -2,7 +2,7 @@ import { Theme } from '@models/Theme';
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent } from 'react';
 import Chrono from '../../../components';
-import { ComponentContainerTree, Vertical } from '../../App.styles';
+import { componentContainerTree, componentContainerTreeDesktop, componentContainerTreeBigScreen, componentContainerTreeTablet, componentContainerTreeMobile, vertical } from '../../App.css';
 import { pickDefined } from '../../../utils/propUtils';
 
 export interface AlternatingVerticalProps {
@@ -18,8 +18,14 @@ export const AlternatingVertical: FunctionComponent<AlternatingVerticalProps> = 
   theme,
   children 
 }) => (
-  <Vertical id="tree">
-    <ComponentContainerTree type={type}>
+  <div className={vertical} id="tree">
+    <div className={
+      type === 'desktop' ? componentContainerTreeDesktop :
+      type === 'big-screen' ? componentContainerTreeBigScreen :
+      type === 'tablet' ? componentContainerTreeTablet :
+      type === 'mobile' ? componentContainerTreeMobile :
+      componentContainerTree
+    }>
       <Chrono
         items={items}
         mode="VERTICAL_ALTERNATING"
@@ -40,6 +46,6 @@ export const AlternatingVertical: FunctionComponent<AlternatingVerticalProps> = 
         contentDetailsHeight={200}
         {...pickDefined({ children })}
       />
-    </ComponentContainerTree>
-  </Vertical>
+    </div>
+  </div>
 ); 

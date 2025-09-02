@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode, memo } from 'react';
 import { jsx as _jsx } from 'react/jsx-runtime';
-// styled-components toolbar removed; using Vanilla Extract classes
+// Using Vanilla Extract CSS classes instead of styled-components
 import {
   actionGroup as veActionGroup,
   contentWrapper as veContentWrapper,

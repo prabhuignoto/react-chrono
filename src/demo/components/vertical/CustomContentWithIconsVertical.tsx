@@ -1,7 +1,7 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent } from 'react';
 import Chrono from '../../../components';
-import { ComponentContainerTree, Vertical } from '../../App.styles';
+import { componentContainerTree, componentContainerTreeDesktop, componentContainerTreeBigScreen, componentContainerTreeTablet, componentContainerTreeMobile, vertical } from '../../App.css';
 import { pickDefined } from '../../../utils/propUtils';
 
 export interface CustomContentWithIconsVerticalProps {
@@ -15,8 +15,14 @@ export const CustomContentWithIconsVertical: FunctionComponent<CustomContentWith
   cardHeight, 
   items 
 }) => (
-  <Vertical>
-    <ComponentContainerTree type={type}>
+  <div className={vertical}>
+    <div className={
+      type === 'desktop' ? componentContainerTreeDesktop :
+      type === 'big-screen' ? componentContainerTreeBigScreen :
+      type === 'tablet' ? componentContainerTreeTablet :
+      type === 'mobile' ? componentContainerTreeMobile :
+      componentContainerTree
+    }>
       <Chrono
         mode="VERTICAL"
         cardHeight={200}
@@ -103,6 +109,6 @@ export const CustomContentWithIconsVertical: FunctionComponent<CustomContentWith
           <img src="rss.svg" alt="rss" />
         </div>
       </Chrono>
-    </ComponentContainerTree>
-  </Vertical>
+    </div>
+  </div>
 ); 

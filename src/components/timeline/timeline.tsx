@@ -161,17 +161,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     );
   }
 
-  const {
-    timelineMainRef,
-    horizontalContentRef,
-    handleScroll,
-    handleMainScroll,
-  } = useTimelineScroll({
-    mode,
-    onScrollEnd: onScrollEnd || (() => {}),
-    setNewOffset,
-  });
-
+  // First get the navigation functions
   const {
     activeItemIndex,
     handleTimelineItemClick: handleTimelineItemClickInternal,
@@ -196,6 +186,23 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onFirst: onFirst || (() => {}),
     onLast: onLast || (() => {}),
   });
+
+  const {
+    timelineMainRef,
+    horizontalContentRef,
+    handleScroll,
+    handleMainScroll,
+  } = useTimelineScroll({
+    mode,
+    onScrollEnd: onScrollEnd || (() => {}),
+    setNewOffset,
+    onNextItem: handleNextInternal,
+    onPreviousItem: handlePreviousInternal,
+    activeItemIndex: activeItemIndex,
+    totalItems: items.length,
+  });
+
+  // Navigation functions are now available from the earlier useTimelineNavigation call
 
   // Wrap timeline item click to reset navigation states
   const handleTimelineItemClick = React.useCallback(

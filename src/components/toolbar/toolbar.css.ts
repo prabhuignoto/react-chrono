@@ -190,12 +190,13 @@ export const searchWrapper = style([
   sprinkles({ display: 'flex', alignItems: 'center' }),
   {
     backgroundColor: vars.color.toolbarBtnBg,
-    padding: '0.4rem 0.75rem',
+    padding: '0.375rem 0.625rem',
     borderRadius: '6px',
     border: `1px solid ${vars.color.buttonBorder}`,
     width: '100%',
-    minHeight: '38px',
+    minHeight: '34px',
     position: 'relative',
+    gap: '0.375rem',
     transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
     selectors: {
       '&:focus-within': {
@@ -210,8 +211,9 @@ export const searchWrapper = style([
     },
     '@media': {
       '(max-width: 768px)': {
-        minHeight: '36px',
-        padding: '0.35rem 0.65rem',
+        minHeight: '32px',
+        padding: '0.3rem 0.5rem',
+        gap: '0.25rem',
       },
     },
   },
@@ -262,11 +264,88 @@ export const searchInfo = style({
 export const searchControls = style([
   sprinkles({ display: 'flex', alignItems: 'center' }),
   {
-    gap: '0.25rem',
+    gap: '0.375rem',
     flexShrink: 0,
     marginLeft: 'auto',
   },
 ]);
+
+// Consistent search button styling
+export const searchButton = style({
+  alignItems: 'center',
+  background: vars.color.toolbarBtnBg,
+  borderRadius: '4px',
+  border: '1px solid',
+  borderColor: vars.color.buttonBorder,
+  color: vars.color.icon,
+  cursor: 'pointer',
+  display: 'flex',
+  height: '26px',
+  justifyContent: 'center',
+  padding: 0,
+  minWidth: '26px',
+  boxShadow: vars.shadow.elevationSm,
+  transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
+  flexShrink: 0,
+  selectors: {
+    '&:hover:not(:disabled)': {
+      background: vars.color.buttonHoverBg,
+      borderColor: vars.color.buttonHoverBorder,
+      boxShadow: vars.shadow.elevationMd,
+      transform: 'translateY(-1px)',
+      color: vars.color.primary,
+    },
+    '&:active:not(:disabled)': {
+      transform: 'translateY(0) scale(0.97)',
+      background: vars.color.buttonHoverBg,
+      boxShadow: vars.shadow.elevationSm,
+    },
+    '&:focus': {
+      outline: `2px solid ${vars.color.primary}`,
+      outlineOffset: '2px',
+    },
+    '&:focus:not(:focus-visible)': { 
+      outline: 'none' 
+    },
+    '&:disabled': {
+      opacity: 0.4,
+      cursor: 'not-allowed',
+      pointerEvents: 'none',
+    },
+  },
+  '@media': {
+    '(max-width: 768px)': {
+      height: '24px',
+      minWidth: '24px',
+    },
+  },
+});
+
+export const searchButtonIcon = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '16px',
+  height: '16px',
+  color: 'currentColor',
+  transition: `transform ${vars.transition.duration.fast} ${vars.transition.easing.standard}`,
+  flexShrink: 0,
+  '@media': {
+    '(max-width: 768px)': {
+      width: '14px',
+      height: '14px',
+    },
+  },
+});
+
+// Ensure SVGs inside search button icons are properly centered
+globalStyle(`${searchButtonIcon} svg`, {
+  width: '100%',
+  height: '100%',
+  display: 'block',
+  margin: 0,
+  padding: 0,
+});
 
 // Container queries for adaptive toolbar behavior
 globalStyle(`@container (max-width: 600px)`, {

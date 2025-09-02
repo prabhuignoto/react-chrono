@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import Chrono from '../../../components';
-import { ComponentContainerTree, Vertical } from '../../App.styles';
+import { componentContainerTree, componentContainerTreeDesktop, componentContainerTreeBigScreen, componentContainerTreeTablet, componentContainerTreeMobile, vertical } from '../../App.css';
 import { mixedTimeline } from '../../data';
 
 export interface MixedVerticalProps {
@@ -12,8 +12,14 @@ export const MixedVertical: FunctionComponent<MixedVerticalProps> = ({
   type, 
   cardHeight 
 }) => (
-  <Vertical>
-    <ComponentContainerTree type={type}>
+  <div className={vertical}>
+    <div className={
+      type === 'desktop' ? componentContainerTreeDesktop :
+      type === 'big-screen' ? componentContainerTreeBigScreen :
+      type === 'tablet' ? componentContainerTreeTablet :
+      type === 'mobile' ? componentContainerTreeMobile :
+      componentContainerTree
+    }>
       <Chrono
         items={mixedTimeline}
         mode="VERTICAL"
@@ -25,6 +31,6 @@ export const MixedVertical: FunctionComponent<MixedVerticalProps> = ({
         enableDarkToggle
         parseDetailsAsHTML
       />
-    </ComponentContainerTree>
-  </Vertical>
+    </div>
+  </div>
 );

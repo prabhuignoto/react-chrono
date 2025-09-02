@@ -217,7 +217,7 @@ describe('Theme Validation and Edge Cases', () => {
       };
 
       // The theme system should accept these values
-      // Validation would be handled by CSS/styled-components
+      // Validation would be handled by CSS or vanilla-extract
       const mergedTheme = { ...defaultTheme, ...invalidTheme };
 
       expect(mergedTheme.primary).toBe('not-a-color');

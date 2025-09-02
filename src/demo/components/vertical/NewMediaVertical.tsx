@@ -1,7 +1,7 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent } from 'react';
 import Chrono from '../../../components';
-import { ComponentContainerTree, Vertical } from '../../App.styles';
+import { componentContainerTree, componentContainerTreeDesktop, componentContainerTreeBigScreen, componentContainerTreeTablet, componentContainerTreeMobile, vertical } from '../../App.css';
 
 export interface NewMediaVerticalProps {
   type: string;
@@ -12,8 +12,14 @@ export const NewMediaVertical: FunctionComponent<NewMediaVerticalProps> = ({
   type, 
   items 
 }) => (
-  <Vertical id="vertical">
-    <ComponentContainerTree type={type}>
+  <div className={vertical} id="vertical">
+    <div className={
+      type === 'desktop' ? componentContainerTreeDesktop :
+      type === 'big-screen' ? componentContainerTreeBigScreen :
+      type === 'tablet' ? componentContainerTreeTablet :
+      type === 'mobile' ? componentContainerTreeMobile :
+      componentContainerTree
+    }>
       <Chrono
         items={items}
         mode="VERTICAL_ALTERNATING"
@@ -41,6 +47,6 @@ export const NewMediaVertical: FunctionComponent<NewMediaVerticalProps> = ({
           cardText: 'custom-text',
         }}
       />
-    </ComponentContainerTree>
-  </Vertical>
+    </div>
+  </div>
 ); 

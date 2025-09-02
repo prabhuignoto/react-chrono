@@ -138,7 +138,10 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
 
     itemsHashRef.current = currentHash;
 
-    if (timeLineItems.length && _items.length > timeLineItems.length) {
+    const previousItemsLength = timeLineItems.length;
+    const isDynamicUpdate = timeLineItems.length && _items.length > timeLineItems.length;
+    
+    if (isDynamicUpdate) {
       newItems = updateItems(_items);
     } else if (_items.length) {
       newItems = initItems(_items);
@@ -147,7 +150,15 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
     if (newItems.length) {
       timeLineItemsRef.current = newItems;
       setTimeLineItems(newItems);
-      setActiveTimelineItem(0);
+      
+      if (isDynamicUpdate && allowDynamicUpdate && previousItemsLength > 0) {
+        // For dynamic updates, focus on the first newly loaded item
+        setActiveTimelineItem(previousItemsLength);
+      } else {
+        // For initial load or full refresh, start at the beginning
+        setActiveTimelineItem(0);
+      }
+      
       processedItemsCache.current = newItems;
     }
   }, [
@@ -192,8 +203,12 @@ const Chrono: React.FunctionComponent<Partial<TimelineProps>> = (
   );
 
   useEffect(() => {
-    handleTimelineUpdate(activeItemIndex);
-  }, [activeItemIndex, handleTimelineUpdate]);
+    // Only update if the activeItemIndex prop has actually changed from its previous value
+    // This prevents unwanted resets during dynamic loading
+    if (activeItemIndex !== activeTimelineItem) {
+      handleTimelineUpdate(activeItemIndex);
+    }
+  }, [activeItemIndex, handleTimelineUpdate, activeTimelineItem]);
 
   const restartSlideShow = useCallback(() => {
     handleTimelineUpdate(-1);

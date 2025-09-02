@@ -36,7 +36,7 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
     onElapsed, // Global handler for media elapsed events (passed down)
     onOutlineSelection, // Handler for outline selection (potentially unused here, passed down?)
     slideShowRunning, // Is a slideshow active? (Passed down)
-    theme, // Theme object (Used by children via context or styled-components)
+    theme, // Theme object (Used by children via context)
     cardLess, // Render without cards? (Passed down)
     nestedCardHeight, // Specific height for nested cards (Passed down)
   }: TimelineVerticalModel): ReactElement => {

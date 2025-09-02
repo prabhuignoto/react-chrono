@@ -16,7 +16,7 @@ export type ToolbarProps = {
    */
   theme: Theme;
   /**
-   * Opt-in to Vanilla Extract toolbar styles. Defaults to false to preserve styled-components.
+   * Use Vanilla Extract toolbar styles (styled-components have been removed).
    */
   useVeStyles?: boolean;
   /**

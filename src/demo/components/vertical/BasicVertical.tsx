@@ -1,7 +1,7 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent } from 'react';
 import Chrono from '../../../components';
-import { ComponentContainerTree, Vertical } from '../../App.styles';
+import { componentContainerTree, vertical } from '../../App.css';
 
 export interface BasicVerticalProps {
   type: string;
@@ -12,8 +12,8 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
   type, 
   items 
 }) => (
-  <Vertical id="vertical">
-    <ComponentContainerTree type={type}>
+  <div id="vertical" className={vertical}>
+    <div className={componentContainerTree}>
       <Chrono
         items={items}
         mode="VERTICAL"
@@ -51,6 +51,6 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
         responsiveBreakPoint={768}
         textDensity='HIGH'
       />
-    </ComponentContainerTree>
-  </Vertical>
+    </div>
+  </div>
 ); 

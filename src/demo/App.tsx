@@ -3,7 +3,7 @@ import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { useEffect, useState } from 'react';
 import { computeCssVarsFromTheme } from '../styles/theme-bridge';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import './App.css';
+import './App.styles.css';
 import {
   // Vertical components
   BasicVertical,

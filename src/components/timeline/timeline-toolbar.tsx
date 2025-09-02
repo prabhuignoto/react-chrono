@@ -24,6 +24,8 @@ import {
   searchWrapper as veSearchWrapper,
   extraControls as veExtraControls,
   toolbarWrapper as veToolbarWrapper,
+  searchButton as veSearchButton,
+  searchButtonIcon as veSearchButtonIcon,
 } from '../toolbar/toolbar.css';
 import {
   navButton,
@@ -263,14 +265,13 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           />
           {searchQuery && (
             <button
-              className={navButton}
+              className={veSearchButton}
               onClick={handleClearSearch}
               title={buttonTexts?.clearSearch ?? 'Clear Search'}
               aria-label={buttonTexts?.clearSearch ?? 'Clear Search'}
-              style={{ height: '24px', width: '24px', marginRight: '0.5rem' }}
               type="button"
             >
-              <span className={navButtonSvg}>
+              <span className={veSearchButtonIcon}>
                 <CloseIcon />
               </span>
             </button>
@@ -314,42 +315,36 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             )}
             {searchQuery && (
               <>
-                <div className="timeline-nav-wrapper">
-                  <button
-                    className={navButton}
-                    onClick={onPreviousMatch}
-                    title={
-                      buttonTexts?.previousMatch ??
-                      'Previous Match (Shift+Enter)'
-                    }
-                    aria-label={
-                      buttonTexts?.previousMatch ??
-                      'Previous Match (Shift+Enter)'
-                    }
-                    disabled={disableSearchNav}
-                    style={{ height: '28px', width: '28px' }}
-                    type="button"
-                  >
-                    <span className={navButtonSvg}>
-                      <ChevronLeft />
-                    </span>
-                  </button>
-                </div>
-                <div className="timeline-nav-wrapper">
-                  <button
-                    className={navButton}
-                    onClick={onNextMatch}
-                    title={buttonTexts?.nextMatch ?? 'Next Match (Enter)'}
-                    aria-label={buttonTexts?.nextMatch ?? 'Next Match (Enter)'}
-                    disabled={disableSearchNav}
-                    style={{ height: '28px', width: '28px' }}
-                    type="button"
-                  >
-                    <span className={navButtonSvg}>
-                      <ChevronRight />
-                    </span>
-                  </button>
-                </div>
+                <button
+                  className={veSearchButton}
+                  onClick={onPreviousMatch}
+                  title={
+                    buttonTexts?.previousMatch ??
+                    'Previous Match (Shift+Enter)'
+                  }
+                  aria-label={
+                    buttonTexts?.previousMatch ??
+                    'Previous Match (Shift+Enter)'
+                  }
+                  disabled={disableSearchNav}
+                  type="button"
+                >
+                  <span className={veSearchButtonIcon}>
+                    <ChevronLeft />
+                  </span>
+                </button>
+                <button
+                  className={veSearchButton}
+                  onClick={onNextMatch}
+                  title={buttonTexts?.nextMatch ?? 'Next Match (Enter)'}
+                  aria-label={buttonTexts?.nextMatch ?? 'Next Match (Enter)'}
+                  disabled={disableSearchNav}
+                  type="button"
+                >
+                  <span className={veSearchButtonIcon}>
+                    <ChevronRight />
+                  </span>
+                </button>
               </>
             )}
           </div>

@@ -1,2 +1,2 @@
-// Deprecated: styled-components styles replaced by vanilla-extract in toggle-button.css.ts
+// Deprecated file: styles moved to toggle-button.css.ts using vanilla-extract
 export {};

@@ -1,7 +1,7 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent, useState } from 'react';
 import Chrono from '../../../components';
-import { ComponentContainer, Horizontal } from '../../App.styles';
+import { componentContainer, componentContainerDesktop, componentContainerBigScreen, componentContainerTablet, horizontal } from '../../App.css';
 
 export interface BasicHorizontalProps {
   type: string;
@@ -14,9 +14,9 @@ export const BasicHorizontal: FunctionComponent<BasicHorizontalProps> = ({
   const [itemSelected, setItemSelected] = useState(0);
 
   return (
-    <Horizontal id="horizontal">
+    <div className={horizontal} id="horizontal">
       <span>{itemSelected}</span>
-      <ComponentContainer type={'big-screen'}>
+      <div className={componentContainerBigScreen}>
         <Chrono
           items={items}
           mode="HORIZONTAL"
@@ -50,7 +50,7 @@ export const BasicHorizontal: FunctionComponent<BasicHorizontalProps> = ({
             <img src="color-circle.svg" alt="github" />
           </div>
         </Chrono>
-      </ComponentContainer>
-    </Horizontal>
+      </div>
+    </div>
   );
 }; 

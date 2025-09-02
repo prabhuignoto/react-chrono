@@ -1,7 +1,7 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent, useState } from 'react';
 import Chrono from '../../../components';
-import { ComponentContainerTree, Vertical } from '../../App.styles';
+import { componentContainerTree, componentContainerTreeDesktop, componentContainerTreeBigScreen, componentContainerTreeTablet, componentContainerTreeMobile, vertical } from '../../App.css';
 
 export interface ComprehensiveVerticalProps {
   type: string;
@@ -87,8 +87,14 @@ export const ComprehensiveVertical: FunctionComponent<ComprehensiveVerticalProps
   };
 
   return (
-    <Vertical id="comprehensive-vertical" style={{ backgroundColor: darkMode ? '#0f172a' : '#ffffff' }}>
-      <ComponentContainerTree type={type}>
+    <div className={vertical} id="comprehensive-vertical" style={{ backgroundColor: darkMode ? '#0f172a' : '#ffffff' }}>
+      <div className={
+        type === 'desktop' ? componentContainerTreeDesktop :
+        type === 'big-screen' ? componentContainerTreeBigScreen :
+        type === 'tablet' ? componentContainerTreeTablet :
+        type === 'mobile' ? componentContainerTreeMobile :
+        componentContainerTree
+      }>
         {/* Simple header */}
         {/* <div style={{ 
           marginBottom: '20px', 
@@ -198,7 +204,7 @@ export const ComprehensiveVertical: FunctionComponent<ComprehensiveVerticalProps
             Complete dark mode theme with adaptive colors. Current mode: {darkMode ? 'Dark' : 'Light'}
           </p>
         </div>
-      </ComponentContainerTree>
-    </Vertical>
+      </div>
+    </div>
   );
 };
