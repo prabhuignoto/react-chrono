@@ -121,6 +121,7 @@ export const ThemeShowcase: React.FC = () => {
             theme={modernMinimalTheme}
             enableDarkToggle={false}
             disableToolbar={false}
+            stickyToolbar={true}
           />
         </div>
       </div>
@@ -137,6 +138,7 @@ export const ThemeShowcase: React.FC = () => {
             theme={vibrantTheme}
             enableDarkToggle={false}
             disableToolbar={false}
+            stickyToolbar={false}
           />
         </div>
       </div>
@@ -153,6 +155,7 @@ export const ThemeShowcase: React.FC = () => {
             theme={natureTheme}
             enableDarkToggle={false}
             disableToolbar={false}
+            stickyToolbar={true}
           />
         </div>
       </div>

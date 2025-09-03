@@ -25,11 +25,13 @@ export const MixedVertical: FunctionComponent<MixedVerticalProps> = ({
         mode="VERTICAL"
         cardHeight={cardHeight ?? 300}
         cardWidth={550}
+        timelineHeight="80vh"
         scrollable
         slideShow
         slideItemDuration={2500}
         enableDarkToggle
         parseDetailsAsHTML
+        stickyToolbar={true}
       />
     </div>
   </div>

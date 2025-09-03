@@ -49,9 +49,10 @@ export const AlternatingVertical: FunctionComponent<AlternatingVerticalProps> = 
         
         display={{
           toolbar: { 
-            enabled: false 
+            enabled: true
           },
         }}
+        stickyToolbar={true}
         
         animation={{
           slideshow: {

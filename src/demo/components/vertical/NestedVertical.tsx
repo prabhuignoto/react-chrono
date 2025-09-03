@@ -43,6 +43,7 @@ export const NestedVertical: FunctionComponent<NestedVerticalProps> = ({
         parseDetailsAsHTML
         enableDarkToggle
         mediaSettings={{ align: 'center' }}
+        stickyToolbar={false}
       />
     </div>
   </div>

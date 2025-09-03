@@ -164,7 +164,7 @@ export const detailsTextWrapper = style([
   sprinkles({
     display: 'flex',
     alignItems: 'flex-start',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   }),
   {
     alignSelf: 'center',
@@ -183,7 +183,7 @@ export const cardMediaHeader = style([
   sprinkles({
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   }),
   { padding: '0.5rem 0 0.5rem 0.5rem' },
 ]);

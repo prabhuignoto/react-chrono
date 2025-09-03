@@ -82,6 +82,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   onEnterFullscreen,
   onExitFullscreen,
   onFullscreenError,
+  stickyToolbar,
 }: TimelineToolbarProps) => {
   // Access the stable and dynamic contexts
   const {
@@ -193,7 +194,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   // Render the TimelineToolbar component
   return (
     <div
-      className={veToolbarWrapper}
+      className={veToolbarWrapper({ sticky: Boolean(stickyToolbar) })}
       style={computeCssVarsFromTheme(theme, darkMode)}
       role="toolbar"
       aria-label="Timeline toolbar"

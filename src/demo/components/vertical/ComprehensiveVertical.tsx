@@ -170,6 +170,7 @@ export const ComprehensiveVertical: FunctionComponent<ComprehensiveVerticalProps
           onThemeChange={handleThemeChange}
           cardHeight={250}
           cardWidth={700}
+          stickyToolbar={true}
         />
 
         {/* Simple controls */}

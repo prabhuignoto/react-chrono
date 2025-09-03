@@ -35,6 +35,7 @@ export const AllHorizontal: FunctionComponent<AllHorizontalProps> = ({
           timelinePointDimension={20}
           showAllCardsHorizontal
           activeItemIndex={8}
+          stickyToolbar={true}
         >
           <div className="chrono-icons">
             <img src="color-circle.svg" alt="github" />

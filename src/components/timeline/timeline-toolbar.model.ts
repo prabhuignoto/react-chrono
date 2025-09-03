@@ -43,4 +43,4 @@ export type TimelineToolbarProps = Pick<
   onEnterFullscreen?: () => void;
   onExitFullscreen?: () => void;
   onFullscreenError?: (error: string) => void;
-} & Pick<TimelineProps, 'darkMode' | 'flipLayout'>;
+} & Pick<TimelineProps, 'darkMode' | 'flipLayout' | 'stickyToolbar'>;

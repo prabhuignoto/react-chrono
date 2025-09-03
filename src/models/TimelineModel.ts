@@ -23,6 +23,7 @@ export type TimelineModel = Pick<
   | 'nestedCardHeight'
   | 'noUniqueId'
   | 'uniqueId'
+  | 'stickyToolbar'
 > & {
   activeTimelineItem?: number;
   contentDetailsChildren?: React.ReactNode | React.ReactNode[];
@@ -141,6 +142,9 @@ export type TimelineProps = {
   disableTimelinePoint?: boolean;
 
   disableToolbar?: boolean;
+
+  // makes the toolbar sticky to the top when scrolling
+  stickyToolbar?: boolean;
 
   enableBreakPoint?: boolean;
 

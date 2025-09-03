@@ -59,7 +59,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
 
     return (
       <div
-        className={veToolbarWrapper}
+        className={veToolbarWrapper()}
         role={hasNestedToolbarRole ? undefined : 'toolbar'}
         aria-label={
           hasNestedToolbarRole ? undefined : 'Timeline toolbar sample'
@@ -95,8 +95,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
                 {minimizable && (
                   <button
                     className={toolbarIconButton({
-                      state: isMinimized ? 'minimized' : 'expanded',
-                      animation: 'bounce',
+                      state: isMinimized ? 'minimized' : 'active',
                     })}
                     onClick={handleMinimizeToggle}
                     aria-label={

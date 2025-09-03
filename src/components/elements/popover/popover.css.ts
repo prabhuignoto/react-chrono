@@ -26,11 +26,11 @@ export const popoverHolder = style([
     background: tokens.semantic.color.background.elevated,
     borderRadius: tokens.semantic.borderRadius.md,
     border: `1px solid ${tokens.semantic.color.border.default}`,
-    boxShadow: tokens.semantic.shadow.modal,
+    boxShadow: `0 8px 32px -4px rgba(0, 0, 0, 0.12), 0 4px 16px -2px rgba(0, 0, 0, 0.08)`,
     maxHeight: '400px',
     overflowY: 'auto',
-    padding: tokens.semantic.spacing.sm,
-    width: '300px',
+    padding: tokens.semantic.spacing.lg,
+    width: '320px',
     opacity: 0,
     transition: `opacity ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}, transform ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
     transform: 'translateY(-10px)',
@@ -41,11 +41,17 @@ export const popoverHolder = style([
     left: 'auto',
     right: 'auto',
     selectors: {
-      '&::-webkit-scrollbar': { width: '0.3em' },
-      '&::-webkit-scrollbar-track': { backgroundColor: tokens.semantic.color.background.elevated },
-      '&::-webkit-scrollbar-thumb': {
-        backgroundColor: tokens.semantic.color.interactive.primary,
+      '&::-webkit-scrollbar': { width: '6px' },
+      '&::-webkit-scrollbar-track': { 
+        backgroundColor: tokens.semantic.color.background.secondary,
         borderRadius: '3px',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: `${tokens.semantic.color.interactive.primary}60`,
+        borderRadius: '3px',
+      },
+      '&::-webkit-scrollbar-thumb:hover': {
+        backgroundColor: `${tokens.semantic.color.interactive.primary}80`,
       },
       // Smart horizontal positioning based on container space
       '&[data-position-x="left"]': { left: '0' },
@@ -103,7 +109,7 @@ export const selecter = style([
   {
     background: tokens.semantic.color.background.elevated,
     color: tokens.semantic.color.text.secondary,
-    borderRadius: '6px',
+    borderRadius: tokens.semantic.borderRadius.lg,
     border: '1px solid',
     borderColor: tokens.semantic.color.border.default,
     boxShadow: tokens.semantic.shadow.card,
@@ -117,24 +123,27 @@ export const selecter = style([
     transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
     selectors: {
       '&:hover': {
-        background: tokens.semantic.color.interactive.muted,
-        borderColor: tokens.semantic.color.border.interactive,
-        boxShadow: tokens.semantic.shadow.cardHover,
-        transform: 'translateY(-1px)',
+        background: `${tokens.semantic.color.interactive.primary}08`,
+        borderColor: `${tokens.semantic.color.interactive.primary}40`,
+        boxShadow: `0 4px 12px -2px ${tokens.semantic.color.interactive.primary}20, 0 2px 6px -1px rgba(0, 0, 0, 0.1)`,
+        transform: 'translateY(-2px)',
         color: tokens.semantic.color.interactive.primary,
       },
       '&:active': {
-        transform: 'translateY(0) scale(0.97)',
-        boxShadow: tokens.semantic.shadow.card,
+        transform: 'translateY(0) scale(0.96)',
+        background: `${tokens.semantic.color.interactive.primary}12`,
+        borderColor: `${tokens.semantic.color.interactive.primary}60`,
+        boxShadow: `inset 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 4px -1px ${tokens.semantic.color.interactive.primary}30`,
       },
       '&:focus': {
-        outline: `2px solid ${tokens.semantic.color.interactive.primary}`,
-        outlineOffset: '2px',
+        outline: 'none',
+        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}40`,
       },
-      '&:focus:not(:focus-visible)': { outline: 'none' },
+      '&:focus:not(:focus-visible)': { boxShadow: 'none' },
       '&:focus-visible': {
-        outline: `2px solid ${tokens.semantic.color.interactive.primary}`,
-        outlineOffset: '2px',
+        outline: 'none',
+        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}40`,
+        background: `${tokens.semantic.color.interactive.primary}04`,
       },
     },
     '@media': {
@@ -174,10 +183,10 @@ export const selecterIconOpen = style({
 });
 
 export const selecterLabel = style({
-  fontSize: '0.9rem',
+  fontSize: tokens.semantic.typography.fontSize.body,
   textAlign: 'left',
   whiteSpace: 'nowrap',
-  fontWeight: 500,
+  fontWeight: tokens.semantic.typography.fontWeight.medium,
 });
 
 export const header = style({ height: '30px', width: '100%' });

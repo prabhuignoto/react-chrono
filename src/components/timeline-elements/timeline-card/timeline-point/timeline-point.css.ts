@@ -13,16 +13,16 @@ const ripple = keyframes({
 
 const activePointPulse = keyframes({
   '0%': { 
-    transform: 'scale(1)',
-    boxShadow: `0 0 0 0 ${tokens.semantic.color.interactive.primary}60`,
+    transform: 'scale(1.3)',
+    boxShadow: `0 0 0 4px ${tokens.semantic.color.interactive.primary}30, 0 6px 20px -4px ${tokens.semantic.color.interactive.primary}50, 0 4px 12px -2px rgba(0, 0, 0, 0.15)`,
   },
-  '70%': { 
-    transform: 'scale(1.05)',
-    boxShadow: `0 0 0 12px ${tokens.semantic.color.interactive.primary}00`,
+  '50%': { 
+    transform: 'scale(1.35)',
+    boxShadow: `0 0 0 6px ${tokens.semantic.color.interactive.primary}25, 0 8px 24px -4px ${tokens.semantic.color.interactive.primary}40, 0 6px 16px -2px rgba(0, 0, 0, 0.12)`,
   },
   '100%': { 
-    transform: 'scale(1)',
-    boxShadow: `0 0 0 0 ${tokens.semantic.color.interactive.primary}00`,
+    transform: 'scale(1.3)',
+    boxShadow: `0 0 0 4px ${tokens.semantic.color.interactive.primary}30, 0 6px 20px -4px ${tokens.semantic.color.interactive.primary}50, 0 4px 12px -2px rgba(0, 0, 0, 0.15)`,
   },
 });
 
@@ -61,10 +61,10 @@ export const timelinePointBase = style([
     minHeight: tokens.component.timeline.point.size.md,
     padding: 0,
     overflow: 'visible',
-    border: `2px solid ${tokens.semantic.color.background.elevated}`,
-    backgroundColor: tokens.component.timeline.point.color.inactive,
-    transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
-    boxShadow: tokens.semantic.shadow.card,
+    border: `3px solid ${tokens.semantic.color.interactive.primary}20`,
+    backgroundColor: `linear-gradient(135deg, ${tokens.semantic.color.background.elevated} 0%, ${tokens.semantic.color.interactive.primary}05 100%)`,
+    transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.emphasized}`,
+    boxShadow: `0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06)`,
 
     // Ripple effect using new tokens
     '::before': {
@@ -88,9 +88,10 @@ export const timelinePointBase = style([
         animation: `${ripple} 0.6s ease-out`,
       },
       '&:hover:not(:disabled)': {
-        transform: 'scale(1.1)',
-        boxShadow: tokens.semantic.shadow.cardHover,
-        backgroundColor: tokens.component.timeline.point.color.hover,
+        transform: 'scale(1.2)',
+        boxShadow: `0 0 0 4px ${tokens.semantic.color.interactive.primary}15, 0 4px 16px -2px ${tokens.semantic.color.interactive.primary}35, 0 2px 8px -1px rgba(0, 0, 0, 0.15)`,
+        background: `linear-gradient(135deg, ${tokens.semantic.color.interactive.primary} 0%, ${tokens.semantic.color.interactive.primaryHover} 100%)`,
+        borderColor: tokens.semantic.color.interactive.primary,
       },
       '&:focus-visible': {
         outline: `2px solid ${tokens.semantic.color.border.interactive}`,
@@ -146,21 +147,28 @@ export const timelinePoint = recipe({
     },
     state: {
       inactive: {
-        backgroundColor: tokens.component.timeline.point.color.inactive,
-        borderColor: tokens.semantic.color.background.elevated,
+        background: `linear-gradient(135deg, ${tokens.semantic.color.background.elevated} 0%, ${tokens.component.timeline.point.color.inactive}40 100%)`,
+        borderColor: `${tokens.component.timeline.point.color.inactive}60`,
+        boxShadow: `0 1px 3px -1px rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.04)`,
       },
       active: [
         {
-          backgroundColor: tokens.component.timeline.point.color.active,
-          borderColor: tokens.component.timeline.point.color.active,
-          transform: 'scale(1.2)',
-          boxShadow: `0 0 0 4px ${tokens.semantic.color.interactive.primary}20`,
-          animation: `${activePointPulse} 2s infinite`,
+          background: `radial-gradient(circle at 30% 30%, ${tokens.semantic.color.interactive.primaryHover} 0%, ${tokens.semantic.color.interactive.primary} 70%, ${tokens.component.timeline.point.color.active} 100%)`,
+          borderColor: tokens.semantic.color.interactive.primary,
+          color: '#ffffff',
+          transform: 'scale(1.3)',
+          boxShadow: `0 0 0 4px ${tokens.semantic.color.interactive.primary}30, 0 6px 20px -4px ${tokens.semantic.color.interactive.primary}50, 0 4px 12px -2px rgba(0, 0, 0, 0.15)`,
+          animation: `${activePointPulse} 3s ease-in-out infinite`,
+          position: 'relative',
+          zIndex: 10,
         },
       ],
       hover: {
-        backgroundColor: tokens.component.timeline.point.color.hover,
-        borderColor: tokens.component.timeline.point.color.hover,
+        background: `linear-gradient(135deg, ${tokens.semantic.color.interactive.primary}80 0%, ${tokens.semantic.color.interactive.primary} 100%)`,
+        borderColor: tokens.semantic.color.interactive.primary,
+        color: '#ffffff',
+        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}25, 0 4px 12px -2px ${tokens.semantic.color.interactive.primary}40`,
+        transform: 'scale(1.15)',
       },
     },
     interactive: {
@@ -169,10 +177,10 @@ export const timelinePoint = recipe({
         {
           selectors: {
             '&:hover:not(:disabled)': {
-              transform: 'scale(1.15)',
+              transform: 'scale(1.25)',
             },
             '&:active:not(:disabled)': {
-              transform: 'scale(0.95)',
+              transform: 'scale(1.1)',
             },
           },
         },

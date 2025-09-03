@@ -19,7 +19,7 @@ const ToggleButton: FunctionComponent<ToggleButtonProps> = memo(
     };
 
     return (
-      <button className={buttonWrapper} onClick={handleToggle} type="button">
+      <button className={buttonWrapper()} onClick={handleToggle} type="button">
         <span className={toggleSwitch}>{on ? offIcon : onIcon}</span>
       </button>
     );
