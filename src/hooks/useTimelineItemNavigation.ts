@@ -21,7 +21,7 @@ export const useTimelineItemNavigation = ({
   slideShowRunning = false,
   onTimelineUpdated,
 }: UseTimelineItemNavigationProps) => {
-  const activeItemIndex = useRef<number>(0);
+  const activeItemIndex = useRef<number>(-1); // -1 indicates no selection initially
   const { scrollToElement } = useTimelineScrolling();
   const stableOnTimelineUpdated = useStableCallback(
     onTimelineUpdated || (() => {}),

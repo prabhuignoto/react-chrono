@@ -11,6 +11,7 @@ interface UseTimelineScrollProps {
   onPreviousItem?: () => void;
   activeItemIndex?: React.MutableRefObject<number>;
   totalItems?: number;
+  isKeyboardNavigation?: boolean;
 }
 
 export const useTimelineScroll = ({
@@ -22,6 +23,7 @@ export const useTimelineScroll = ({
   onPreviousItem,
   activeItemIndex,
   totalItems,
+  isKeyboardNavigation = false,
 }: UseTimelineScrollProps) => {
   const timelineMainRef = useRef<HTMLDivElement>(null!);
   const horizontalContentRef = useRef<HTMLDivElement | null>(null);
@@ -62,8 +64,8 @@ export const useTimelineScroll = ({
             onScrollEndRef.current();
           }
 
-          // Handle timeline navigation for tall cards
-          if (onNextItemRef.current && onPreviousItemRef.current && activeItemIndex && totalItems) {
+          // Handle timeline navigation for tall cards (disable during keyboard navigation)
+          if (onNextItemRef.current && onPreviousItemRef.current && activeItemIndex && totalItems && !isKeyboardNavigation) {
             const currentIndex = activeItemIndex.current;
             // Navigate to next item when scrolled to bottom (if not last item)
             if (isAtBottom && currentIndex < totalItems - 1) {
@@ -88,8 +90,8 @@ export const useTimelineScroll = ({
             onScrollEndRef.current();
           }
 
-          // Handle horizontal timeline navigation for wide cards
-          if (onNextItemRef.current && onPreviousItemRef.current && activeItemIndex && totalItems) {
+          // Handle horizontal timeline navigation for wide cards (disable during keyboard navigation)
+          if (onNextItemRef.current && onPreviousItemRef.current && activeItemIndex && totalItems && !isKeyboardNavigation) {
             const currentIndex = activeItemIndex.current;
             const isAtRight = target.scrollLeft + target.offsetWidth >= target.scrollWidth - 1;
             const isAtLeft = target.scrollLeft <= 1;
@@ -108,7 +110,7 @@ export const useTimelineScroll = ({
           }
         }
       }, 16), // Throttle to 60fps for smooth scrolling
-    [mode, totalItems],
+    [mode, totalItems, isKeyboardNavigation],
   );
 
   // Optimized scroll handler that uses throttling

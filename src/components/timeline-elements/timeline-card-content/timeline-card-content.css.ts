@@ -1,88 +1,83 @@
 import { globalStyle, keyframes, style } from '@vanilla-extract/css';
-import { vars } from '../../../styles/tokens.css';
 import { recipe } from '@vanilla-extract/recipes';
-import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
-import {
-  reveal,
-  slideFromRight,
-  slideInFromLeft,
-  slideInFromTop,
-} from './card-animations.css';
+import { tokens } from '../../../styles/tokens/index.css';
+import { vars } from '../../../styles/tokens.css';
+import { sprinkles } from '../../../styles/system/sprinkles.css';
+import { patterns } from '../../../styles/system/recipes.css';
+import { animations, baseStyles } from '../../../styles/system/static.css';
 
-export const baseCard = style({
-  // background: `linear-gradient(135deg, ${vars.color.cardBg} 0%, ${vars.color.cardBg}f5 100%)`,
-  borderRadius: '16px',
-  border: `1px solid ${vars.color.buttonBorder}`,
-  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.1)',
-  backdropFilter: 'blur(20px)',
-  transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
-  position: 'relative',
-  overflow: 'hidden',
-  minWidth: '280px',
-  maxWidth: '100%',
-  background: `${vars.color.cardBg}`,
+export const baseCard = style([
+  patterns.card({ size: 'lg', elevation: 'high' }),
+  baseStyles.willChange,
+  {
+    borderRadius: tokens.semantic.borderRadius.lg,
+    border: `1px solid ${tokens.semantic.color.border.default}`,
+    boxShadow: tokens.semantic.shadow.card,
+    backdropFilter: 'blur(20px)',
+    transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+    position: 'relative',
+    overflow: 'hidden',
+    minWidth: '280px',
+    maxWidth: '400px',
+    backgroundColor: tokens.semantic.color.background.elevated,
 
-  '@media': {
-    '(max-width: 768px)': {
-      borderRadius: '12px',
-      minWidth: '240px',
+    '@media': {
+      '(max-width: 768px)': {
+        borderRadius: tokens.semantic.borderRadius.lg,
+        minWidth: '240px',
+      },
+      '(max-width: 480px)': {
+        borderRadius: tokens.semantic.borderRadius.md,
+        minWidth: '200px',
+        boxShadow: tokens.semantic.shadow.cardHover,
+      },
+      '(max-width: 320px)': {
+        minWidth: '180px',
+        borderRadius: tokens.semantic.borderRadius.sm,
+      },
     },
-    '(max-width: 480px)': {
-      borderRadius: '10px',
-      minWidth: '200px',
-      boxShadow:
-        '0 2px 12px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.08)',
-    },
-    '(max-width: 320px)': {
-      minWidth: '180px',
-      borderRadius: '8px',
+
+    '::before': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      borderRadius: 'inherit',
+      padding: '1px',
+      background: `linear-gradient(135deg, ${tokens.semantic.color.interactive.primary}20 0%, transparent 50%, ${tokens.semantic.color.interactive.primary}10 100%)`,
+      mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+      maskComposite: 'xor',
+      WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+      WebkitMaskComposite: 'xor',
+      pointerEvents: 'none',
     },
   },
-
-  // Add subtle border gradient effect
-  '::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    borderRadius: 'inherit',
-    padding: '1px',
-    background: `linear-gradient(135deg, ${vars.color.primary}20 0%, transparent 50%, ${vars.color.primary}10 100%)`,
-    mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-    maskComposite: 'xor',
-    WebkitMask:
-      'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-    WebkitMaskComposite: 'xor',
-    pointerEvents: 'none',
-  },
-});
+]);
 
 export const itemContentWrapper = style([
-  sprinkles({ display: 'flex' }),
+  patterns.interactive({ hover: 'lift' }),
+  sprinkles({ display: 'flex', width: 'full' }),
   {
     selectors: {
       '&:hover': {
         transform: 'translateY(-2px)',
-        boxShadow:
-          '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)',
+        boxShadow: tokens.semantic.shadow.cardHover,
         willChange: 'transform, box-shadow',
       },
       '&:focus:not(:focus-visible):not(.focus-visible)': {
         outline: 'none',
-        boxShadow:
-          '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)',
+        boxShadow: tokens.semantic.shadow.cardHover,
       },
       '&:focus-visible, &.focus-visible': {
-        outline: `2px solid ${vars.color.primary}`,
+        outline: `2px solid ${tokens.semantic.color.border.interactive}`,
         outlineOffset: '2px',
-        boxShadow:
-          '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)',
+        boxShadow: tokens.semantic.shadow.cardHover,
       },
       '&:active': {
         transform: 'translateY(0px)',
-        transition: `transform ${vars.transition.duration.fast} ${vars.transition.easing.standard}`,
+        transition: `transform ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
       },
     },
     alignItems: 'flex-start',
@@ -91,19 +86,18 @@ export const itemContentWrapper = style([
     lineHeight: 1.6,
     margin: 0,
     position: 'relative',
-    padding: '1rem',
+    padding: tokens.semantic.spacing.md,
     overflow: 'hidden',
-    width: '100%',
-    gap: '0.5rem',
+    gap: tokens.semantic.spacing.sm,
 
     '@media': {
       '(max-width: 768px)': {
-        padding: '0.875rem',
-        gap: '0.375rem',
+        padding: tokens.semantic.spacing.sm,
+        gap: tokens.semantic.spacing.xs,
       },
       '(max-width: 480px)': {
-        padding: '0.75rem',
-        gap: '0.25rem',
+        padding: tokens.semantic.spacing.xs,
+        gap: tokens.semantic.spacing.xs,
       },
       '(prefers-reduced-motion: reduce)': {
         transition: 'none',
@@ -112,65 +106,72 @@ export const itemContentWrapper = style([
   },
 ]);
 
-export const timelineCardHeader = style({
-  width: '100%',
-  padding: 0,
-  marginBottom: '0.5rem',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.25rem',
-
-  '@media': {
-    '(max-width: 768px)': {
-      marginBottom: '0.375rem',
-    },
-  },
-});
-
-export const cardTitleBase = style({
-  margin: 0,
-  width: '100%',
-  textAlign: 'left',
-  fontWeight: 600,
-  letterSpacing: '-0.025em',
-  lineHeight: 1.4,
-  wordBreak: 'break-word',
-  transition: `color ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
-});
-
-export const cardTitle = style([
-  cardTitleBase,
+export const timelineCardHeader = style([
+  sprinkles({
+    display: 'flex',
+    flexDirection: 'column',
+    width: 'full',
+    gap: 'xs',
+  }),
   {
-    color: vars.color.cardTitle,
-    fontSize: '1.5rem',
-    marginBottom: '0.25rem',
+    padding: 0,
+    marginBottom: tokens.semantic.spacing.sm,
 
     '@media': {
       '(max-width: 768px)': {
-        fontSize: '1.375rem',
-      },
-      '(max-width: 480px)': {
-        fontSize: '1.25rem',
+        marginBottom: tokens.semantic.spacing.xs,
       },
     },
   },
 ]);
 
-export const cardTitleActive = style({ color: vars.color.primary });
+export const cardTitleBase = style([
+  patterns.text({ variant: 'h2' }),
+  {
+    margin: 0,
+    width: '100%',
+    textAlign: 'left',
+    fontWeight: tokens.semantic.typography.fontWeight.semibold,
+    letterSpacing: '-0.025em',
+    lineHeight: 1.4,
+    wordBreak: 'break-word',
+    transition: `color ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+  },
+]);
 
-// Optional recipe to compose title state without changing existing exports
+export const cardTitle = style([
+  cardTitleBase,
+  {
+    color: tokens.semantic.color.text.primary,
+    fontSize: tokens.semantic.typography.fontSize.heading1,
+    marginBottom: tokens.semantic.spacing.xs,
+
+    '@media': {
+      '(max-width: 768px)': {
+        fontSize: tokens.semantic.typography.fontSize.heading2,
+      },
+      '(max-width: 480px)': {
+        fontSize: tokens.semantic.typography.fontSize.body,
+      },
+    },
+  },
+]);
+
+export const cardTitleActive = style({ color: tokens.semantic.color.interactive.primary });
+
+// Enhanced title recipe using new tokens
 export const cardTitleRecipe = recipe({
   base: [
     cardTitleBase,
     {
-      color: vars.color.cardTitle,
-      fontSize: '1.25rem',
-      marginBottom: '0.75rem',
+      color: tokens.semantic.color.text.primary,
+      fontSize: '20px',
+      marginBottom: tokens.semantic.spacing.md,
     },
   ],
   variants: {
     active: {
-      true: { color: vars.color.primary },
+      true: { color: tokens.semantic.color.interactive.primary },
       false: {},
     },
   },
@@ -178,15 +179,19 @@ export const cardTitleRecipe = recipe({
 });
 
 export const cardSubTitle = style([
-  cardTitleBase,
+  patterns.text({ variant: 'caption' }),
   {
-    color: vars.color.cardSubtitle,
-    fontWeight: 500,
+    color: tokens.semantic.color.text.secondary,
+    fontWeight: tokens.semantic.typography.fontWeight.medium,
     letterSpacing: '-0.01em',
     lineHeight: 1.5,
     opacity: 0.85,
-    fontSize: '0.875rem',
-    marginBottom: '0.5rem',
+    fontSize: tokens.semantic.typography.fontSize.caption,
+    marginBottom: tokens.semantic.spacing.sm,
+    margin: 0,
+    width: '100%',
+    textAlign: 'left',
+    wordBreak: 'break-word',
 
     '@media': {
       '(max-width: 768px)': {
@@ -199,30 +204,33 @@ export const cardSubTitle = style([
   },
 ]);
 
-export const timelineContentDetails = style({
-  fontSize: '0.8rem',
-  fontWeight: 400,
-  margin: 0,
-  width: '100%',
-  color: vars.color.text,
-  lineHeight: 1.5,
-  letterSpacing: '0.01em',
-  wordBreak: 'break-word',
+export const timelineContentDetails = style([
+  patterns.text({ variant: 'body' }),
+  {
+    fontSize: tokens.semantic.typography.fontSize.body,
+    fontWeight: tokens.semantic.typography.fontWeight.normal,
+    margin: 0,
+    width: '100%',
+    color: tokens.semantic.color.text.primary,
+    lineHeight: 1.5,
+    letterSpacing: '0.01em',
+    wordBreak: 'break-word',
 
-  '@media': {
-    '(max-width: 768px)': {
-      fontSize: '0.75rem',
-      lineHeight: 1.4,
+    '@media': {
+      '(max-width: 768px)': {
+        fontSize: '0.75rem',
+        lineHeight: 1.4,
+      },
+      '(max-width: 480px)': {
+        fontSize: '0.7rem',
+      },
     },
-    '(max-width: 480px)': {
-      fontSize: '0.7rem',
+
+    selectors: {
+      '& + &': { marginTop: tokens.semantic.spacing.sm },
     },
   },
-
-  selectors: {
-    '& + &': { marginTop: '0.5rem' },
-  },
-});
+]);
 
 // Global styles for paragraph elements within content details
 globalStyle(`${timelineContentDetails} p`, {
@@ -251,82 +259,85 @@ globalStyle(`${itemContentWrapper}:active`, {
   },
 });
 
-export const timelineSubContent = style({
-  marginBottom: '0.5rem',
-  display: 'block',
-  fontSize: '0.75rem',
-  color: vars.color.cardDetails,
-  lineHeight: 1.5,
-  opacity: 0.8,
+export const timelineSubContent = style([
+  patterns.text({ variant: 'caption', color: 'muted' }),
+  {
+    marginBottom: tokens.semantic.spacing.sm,
+    display: 'block',
+    fontSize: tokens.semantic.typography.fontSize.caption,
+    color: tokens.semantic.color.text.muted,
+    lineHeight: 1.5,
+    opacity: 0.8,
 
-  '@media': {
-    '(max-width: 768px)': {
-      fontSize: '0.7rem',
+    '@media': {
+      '(max-width: 768px)': {
+        fontSize: '0.7rem',
+      },
     },
   },
-});
+]);
 
 export const contentDetailsWrapper = style([
-  sprinkles({ display: 'flex', width: '100%' }),
-  {
-    alignItems: 'flex-start',
+  sprinkles({ 
+    display: 'flex', 
+    width: 'full',
     flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: 'xs',
+  }),
+  {
     margin: 0,
     position: 'relative',
     overflowX: 'hidden',
-    transition: `max-height ${vars.transition.duration.slow} ${vars.transition.easing.standard}, opacity ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
+    transition: `max-height ${tokens.semantic.motion.duration.slow} ${tokens.semantic.motion.easing.standard}, opacity ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
     padding: 0,
     background: 'transparent',
-    gap: '0.25rem',
   },
 ]);
 
 export const showMoreButton = style([
-  sprinkles({ display: 'flex' }),
-  {
-    background: `linear-gradient(135deg, ${vars.color.primary}08 0%, ${vars.color.primary}04 100%)`,
-    border: `1px solid ${vars.color.primary}20`,
-    borderRadius: '6px',
-    padding: '0.375rem 0.5rem',
-    margin: '0.5rem 0 0 auto',
-    color: vars.color.primary,
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    cursor: 'pointer',
+  patterns.button({ variant: 'ghost', size: 'sm' }),
+  sprinkles({ 
+    display: 'flex',
     alignItems: 'center',
+    gap: 'xs',
+  }),
+  {
+    background: `linear-gradient(135deg, ${tokens.semantic.color.interactive.primary}08 0%, ${tokens.semantic.color.interactive.primary}04 100%)`,
+    border: `1px solid ${tokens.semantic.color.interactive.primary}20`,
+    borderRadius: tokens.semantic.borderRadius.sm,
+    padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
+    margin: `${tokens.semantic.spacing.sm} 0 0 auto`,
+    color: tokens.semantic.color.interactive.primary,
+    fontSize: tokens.semantic.typography.fontSize.caption,
+    fontWeight: tokens.semantic.typography.fontWeight.medium,
+    cursor: 'pointer',
     alignSelf: 'flex-end',
-    justifySelf: 'flex-end',
-    gap: '0.125rem',
-    transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
+    transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
 
     selectors: {
       '&:hover': {
-        background: `linear-gradient(135deg, ${vars.color.primary}12 0%, ${vars.color.primary}08 100%)`,
-        borderColor: `${vars.color.primary}30`,
+        background: `linear-gradient(135deg, ${tokens.semantic.color.interactive.primary}12 0%, ${tokens.semantic.color.interactive.primary}08 100%)`,
+        borderColor: `${tokens.semantic.color.interactive.primary}30`,
         transform: 'translateY(-1px)',
-        willChange: 'transform, background-color, border-color',
       },
       '&:active': {
         transform: 'translateY(0)',
       },
-      '&:focus': {
-        outline: `2px solid ${vars.color.primary}40`,
+      '&:focus-visible': {
+        outline: `2px solid ${tokens.semantic.color.border.interactive}`,
         outlineOffset: '2px',
-      },
-      '&:focus:not(:focus-visible)': {
-        outline: 'none',
       },
     },
 
     '@media': {
       '(max-width: 480px)': {
         fontSize: '0.7rem',
-        padding: '0.3rem 0.4rem',
+        padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
       },
       '(prefers-reduced-motion: reduce)': {
         transform: 'none',
         transition: 'none',
-        willChange: 'auto',
       },
     },
   },
@@ -341,7 +352,7 @@ export const chevronIconWrapper = style([
   {
     height: '1rem',
     width: '1rem',
-    transition: `transform ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
+    transition: `transform ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
     color: 'currentColor',
 
     selectors: {

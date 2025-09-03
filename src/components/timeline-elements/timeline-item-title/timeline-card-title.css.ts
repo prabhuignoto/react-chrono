@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '../../../styles/tokens.css';
+import { tokens } from '../../../styles/tokens/index.css';
 import { recipe } from '@vanilla-extract/recipes';
-import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
+import { sprinkles } from '../../../styles/system/sprinkles.css';
 
 export const titleWrapper = style([
   sprinkles({ px: 'xs', py: 'xs' }),
@@ -14,13 +14,13 @@ export const titleWrapper = style([
     textOverflow: 'ellipsis',
     minWidth: 0,
     maxWidth: '100%',
-    color: vars.color.cardTitle,
+    color: tokens.semantic.color.text.primary,
   },
 ]);
 
 export const titleActive = style({
-  background: vars.color.muted,
-  color: vars.color.primary,
+  background: tokens.semantic.color.background.secondary,
+  color: tokens.semantic.color.interactive.primary,
 });
 
 export const titleRecipe = recipe({

@@ -52,9 +52,11 @@ export const useTimelineKeyboardNavigation = ({
       } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
         if (key === 'ArrowDown') {
           event.preventDefault();
+          event.stopPropagation();
           onNext();
         } else if (key === 'ArrowUp') {
           event.preventDefault();
+          event.stopPropagation();
           onPrevious();
         }
       }

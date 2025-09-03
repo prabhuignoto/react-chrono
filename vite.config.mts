@@ -3,6 +3,7 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import dts from 'vite-plugin-dts';
 import tsconfig from 'vite-tsconfig-paths';
 import { defineConfig } from 'vite';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig(({ mode }) => ({
   publicDir: false,
@@ -12,21 +13,28 @@ export default defineConfig(({ mode }) => ({
     }),
     react(),
     tsconfig(),
-    // Cast to any to allow skipDiagnostics while migrating types
-    (dts as any)({
+    dts({
       entryRoot: 'src',
-      tsconfigPath: 'tsconfig.json',
+      tsconfigPath: 'tsconfig.build.json',
       outDir: 'dist/types',
       insertTypesEntry: true,
       skipDiagnostics: true,
+      rollupTypes: false,
       exclude: [
         'src/demo/**',
         'src/examples/**',
         'src/**/__tests__/**',
         'src/**/*.test.*',
         'src/**/*.spec.*',
+        'src/**/*.stories.*',
         'src/test-setup.js',
       ],
+    }),
+    mode === 'production' && visualizer({
+      filename: 'dist/stats.html',
+      template: 'treemap',
+      gzipSize: true,
+      brotliSize: true,
     }),
   ],
   build: {
@@ -36,9 +44,26 @@ export default defineConfig(({ mode }) => ({
       formats: ['es', 'cjs'],
       fileName: (format) => (format === 'es' ? 'index.esm.js' : 'index.cjs'),
     },
-    target: 'es2020',
+    target: 'es2022',
     sourcemap: true,
-    minify: mode === 'production' ? 'esbuild' : false,
+    minify: mode === 'production' ? 'terser' : false,
+    terserOptions: mode === 'production' ? {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        passes: 2,
+      },
+      mangle: {
+        safari10: true,
+      },
+      format: {
+        comments: false,
+        ecma: 2022,
+      },
+    } : undefined,
+    cssMinify: mode === 'production',
+    cssCodeSplit: false,
     rollupOptions: {
       external: (id) =>
         ['react', 'react-dom', 'styled-components'].includes(id) ||
@@ -51,6 +76,21 @@ export default defineConfig(({ mode }) => ({
         },
         chunkFileNames: 'chunks/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash][extname]',
+        generatedCode: {
+          preset: 'es2015',
+          arrowFunctions: true,
+          constBindings: true,
+          objectShorthand: true,
+        },
+        interop: 'auto',
+        exports: 'named',
+        preserveModules: false,
+        manualChunks: undefined,
+      },
+      treeshake: {
+        moduleSideEffects: 'no-external',
+        propertyReadSideEffects: false,
+        tryCatchDeoptimization: false,
       },
     },
     outDir: 'dist',

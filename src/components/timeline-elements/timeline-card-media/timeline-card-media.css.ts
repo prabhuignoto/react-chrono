@@ -1,37 +1,43 @@
 import { globalStyle, style, createVar } from '@vanilla-extract/css';
-import { vars } from '../../../styles/tokens.css';
 import { recipe } from '@vanilla-extract/recipes';
-import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
+import { tokens } from '../../../styles/tokens/index.css';
+import { sprinkles } from '../../../styles/system/sprinkles.css';
+import { patterns } from '../../../styles/system/recipes.css';
+import { baseStyles } from '../../../styles/system/static.css';
 
 export const gradientVar = createVar();
 
 export const mediaWrapper = style([
+  patterns.card({ size: 'md', elevation: 'low' }),
   sprinkles({ display: 'flex' }),
   {
     alignItems: 'flex-start',
     alignSelf: 'center',
-    background: vars.color.cardBg,
-    borderRadius: '4px',
+    background: tokens.semantic.color.background.elevated,
+    borderRadius: tokens.semantic.borderRadius.sm,
     flexDirection: 'row',
-    padding: '0.5em',
+    padding: tokens.semantic.spacing.sm,
     position: 'relative',
     textAlign: 'left',
     width: 'calc(100% - 1em)',
     overflow: 'hidden',
-    zIndex: 12,
+    zIndex: tokens.semantic.zIndex.timelineCard,
   },
 ]);
 
 export const justifyStart = style({ justifyContent: 'flex-start' });
 export const justifyEnd = style({ justifyContent: 'flex-end' });
 
-export const imageWrapper = style({
-  width: '100%',
-  height: '100%',
-  overflow: 'hidden',
-  borderRadius: '6px',
-  position: 'relative',
-});
+export const imageWrapper = style([
+  baseStyles.containLayout,
+  {
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden',
+    borderRadius: tokens.semantic.borderRadius.md,
+    position: 'relative',
+  },
+]);
 
 globalStyle(`${imageWrapper} img`, {
   maxWidth: '100%',
@@ -39,19 +45,23 @@ globalStyle(`${imageWrapper} img`, {
   objectFit: 'contain',
 });
 
-export const cardImage = style({
-  justifySelf: 'center',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  height: '100%',
-  width: '100%',
-  objectPosition: 'center',
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  bottom: 0,
-  right: 0,
-});
+export const cardImage = style([
+  sprinkles({
+    position: 'absolute',
+  }),
+  {
+    justifySelf: 'center',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    height: '100%',
+    width: '100%',
+    objectPosition: 'center',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+]);
 
 export const imageVisible = style({ visibility: 'visible' });
 export const imageHidden = style({ visibility: 'hidden' });
@@ -94,7 +104,7 @@ export const mediaDetailsAbsolute = style({
   bottom: '0.5rem',
   padding: '0.75rem',
   transition: 'all 0.3s ease-in-out',
-  background: `${vars.color.cardBg}ee`,
+  background: `${tokens.semantic.color.background.elevated}ee`,
   backdropFilter: 'blur(8px)',
   borderRadius: '12px',
   boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
@@ -106,7 +116,7 @@ export const mediaDetailsAbsolute = style({
 
 export const mediaDetailsCard = style({
   borderRadius: '10px',
-  boxShadow: vars.shadow.elevationMd,
+  boxShadow: tokens.semantic.shadow.cardHover,
 });
 
 export const mediaDetailsMinimized = style({
@@ -160,12 +170,12 @@ export const detailsTextWrapper = style([
     alignSelf: 'center',
     transition: 'height 0.5s ease',
     width: '100%',
-    color: vars.color.cardDetails,
+    color: tokens.semantic.color.text.secondary,
     padding: '0.5rem',
     borderBottomLeftRadius: '8px',
     borderBottomRightRadius: '8px',
     position: 'relative',
-    background: vars.color.cardBg,
+    background: tokens.semantic.color.background.elevated,
   },
 ]);
 

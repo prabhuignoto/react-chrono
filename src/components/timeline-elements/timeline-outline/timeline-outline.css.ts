@@ -1,5 +1,5 @@
 import { keyframes, globalStyle, style } from '@vanilla-extract/css';
-import { vars } from '../../../styles/tokens.css';
+import { tokens } from '../../../styles/tokens/index.css';
 import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
 import { recipe } from '@vanilla-extract/recipes';
 
@@ -14,8 +14,8 @@ export const closeAnim = keyframes({
 });
 
 export const outlineWrapper = style({
-  background: vars.color.cardBg,
-  border: `1px solid ${vars.color.buttonBorder}`,
+  background: tokens.semantic.color.background.elevated,
+  border: `1px solid ${tokens.semantic.color.border.default}`,
   height: '50%',
   width: '100%',
   position: 'absolute',
@@ -47,8 +47,8 @@ export const outlinePane = style([
   {
     borderRadius: '4px',
     position: 'absolute',
-    zIndex: vars.zIndex.outlinePane,
-    boxShadow: `0 5px 10px 2px ${vars.color.shadow}`,
+    zIndex: tokens.semantic.zIndex.outline,
+    boxShadow: tokens.semantic.shadow.modal,
     top: '0',
     left: '0',
     right: '0',
@@ -60,7 +60,7 @@ export const outlineButton = style([
   sprinkles({ display: 'flex', placeCenter: 'center' }),
   {
     alignSelf: 'flex-end',
-    background: vars.color.cardBg,
+    background: tokens.semantic.color.background.elevated,
     borderRadius: '4px',
     border: 0,
     cursor: 'pointer',
@@ -74,7 +74,7 @@ export const buttonLeft = style({ marginRight: 'auto' });
 export const buttonRight = style({ marginLeft: 'auto' });
 
 globalStyle(`${outlineButton} svg`, { width: '70%', height: '70%' });
-globalStyle(`${outlineButton} svg path`, { color: vars.color.icon });
+globalStyle(`${outlineButton} svg path`, { color: tokens.semantic.color.icon.default });
 
 export const listRoot = style([
   sprinkles({ display: 'flex' }),
@@ -107,7 +107,7 @@ export const listItem = style([
         width: '100%',
         position: 'absolute',
         height: '1px',
-        background: vars.color.buttonBorder,
+        background: tokens.semantic.color.border.default,
         left: 0,
         right: 0,
         margin: '0 auto',
@@ -120,13 +120,13 @@ export const listItem = style([
 export const listItemName = style({
   fontSize: '0.75rem',
   paddingLeft: '0.25rem',
-  color: vars.color.cardSubtitle,
+  color: tokens.semantic.color.text.secondary,
   selectors: {
-    '&:hover': { color: vars.color.primary },
+    '&:hover': { color: tokens.semantic.color.interactive.primary },
   },
 });
 
-export const listItemNameSelected = style({ color: vars.color.primary });
+export const listItemNameSelected = style({ color: tokens.semantic.color.interactive.primary });
 
 export const listItemBullet = style([
   sprinkles({ display: 'flex', placeCenter: 'center' }),
@@ -140,15 +140,15 @@ globalStyle(`${listItemBullet}::after`, {
   width: '8px',
   height: '8px',
   borderRadius: '50%',
-  background: vars.color.icon,
+  background: tokens.semantic.color.icon.default,
   left: 0,
   margin: '0 auto',
-  border: `2px solid ${vars.color.icon}`,
+  border: `2px solid ${tokens.semantic.color.icon.default}`,
 });
 
 export const listItemBulletSelected = style({});
 
 globalStyle(`${listItemBulletSelected}::after`, {
-  background: vars.color.primary,
-  border: `2px solid ${vars.color.primary}`,
+  background: tokens.semantic.color.interactive.primary,
+  border: `2px solid ${tokens.semantic.color.interactive.primary}`,
 });

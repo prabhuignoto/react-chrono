@@ -59,60 +59,68 @@ export const useTimelineNavigation = ({
 
   // Navigation handlers with predictive centering to avoid jumps
   const handleNext = useCallback(() => {
-    if (!hasFocus) {
-      return;
-    }
-    const newIndex = Math.min(activeItemIndex.current + 1, items.length - 1);
-    if (newIndex !== activeItemIndex.current) {
-      const targetItem = items[newIndex];
+    // Remove hasFocus check as it can block navigation
+    const currentIndex = activeItemIndex.current;
+    
+    // Handle case where no item is currently selected (-1)
+    const nextIndex = currentIndex === -1 ? 0 : Math.min(currentIndex + 1, items.length - 1);
+    
+    // Always attempt navigation if there are items
+    if (items.length > 0) {
+      // If no selection (-1), start from first item (0)
+      // If at last item, stay there (no navigation)
+      if (currentIndex === -1 || currentIndex < items.length - 1) {
+        const targetItem = items[nextIndex];
 
-      if (targetItem?.id) {
-        // Use the same pathway as slideshow: call handleTimelineItemClick
-        // This ensures consistent state updates through the main component
-        handleTimelineItemClick(targetItem.id, false);
+        if (targetItem?.id) {
+          // Use the same pathway as slideshow: call handleTimelineItemClick
+          // This ensures consistent state updates through the main component
+          handleTimelineItemClick(targetItem.id, false);
+        }
+
+        // Also call the toolbar callback for any additional toolbar-specific logic
+        stableOnNext();
       }
-
-      // Also call the toolbar callback for any additional toolbar-specific logic
-      stableOnNext();
     }
   }, [
     items,
     handleTimelineItemClick,
     stableOnNext,
-    hasFocus,
-    isKeyboardNavigation,
   ]);
 
   const handlePrevious = useCallback(() => {
-    if (!hasFocus) {
-      return;
-    }
-    const newIndex = Math.max(activeItemIndex.current - 1, 0);
-    if (newIndex !== activeItemIndex.current) {
-      const targetItem = items[newIndex];
+    // Remove hasFocus check as it can block navigation
+    const currentIndex = activeItemIndex.current;
+    
+    // Handle case where no item is currently selected (-1)
+    const prevIndex = currentIndex === -1 ? items.length - 1 : Math.max(currentIndex - 1, 0);
+    
+    // Always attempt navigation if there are items
+    if (items.length > 0) {
+      // If no selection (-1), start from last item
+      // If at first item, stay there (no navigation)
+      if (currentIndex === -1 || currentIndex > 0) {
+        const targetItem = items[prevIndex];
 
-      if (targetItem?.id) {
-        // Use the same pathway as slideshow: call handleTimelineItemClick
-        // This ensures consistent state updates through the main component
-        handleTimelineItemClick(targetItem.id, false);
+        if (targetItem?.id) {
+          // Use the same pathway as slideshow: call handleTimelineItemClick
+          // This ensures consistent state updates through the main component
+          handleTimelineItemClick(targetItem.id, false);
+        }
+
+        // Also call the toolbar callback for any additional toolbar-specific logic
+        stableOnPrevious();
       }
-
-      // Also call the toolbar callback for any additional toolbar-specific logic
-      stableOnPrevious();
     }
   }, [
     items,
     handleTimelineItemClick,
     stableOnPrevious,
-    hasFocus,
-    isKeyboardNavigation,
   ]);
 
   const handleFirst = useCallback(() => {
-    if (!hasFocus) {
-      return;
-    }
-    if (activeItemIndex.current !== 0) {
+    // Always allow navigation to first item if we're not already there (including -1 no selection)
+    if (items.length > 0 && activeItemIndex.current !== 0) {
       const targetItem = items[0];
 
       if (targetItem?.id) {
@@ -128,16 +136,12 @@ export const useTimelineNavigation = ({
     items,
     handleTimelineItemClick,
     stableOnFirst,
-    hasFocus,
-    isKeyboardNavigation,
   ]);
 
   const handleLast = useCallback(() => {
-    if (!hasFocus) {
-      return;
-    }
+    // Always allow navigation to last item if we're not already there (including -1 no selection)
     const lastIndex = items.length - 1;
-    if (activeItemIndex.current !== lastIndex) {
+    if (items.length > 0 && activeItemIndex.current !== lastIndex) {
       const targetItem = items[lastIndex];
 
       if (targetItem?.id) {
@@ -153,8 +157,6 @@ export const useTimelineNavigation = ({
     items,
     handleTimelineItemClick,
     stableOnLast,
-    hasFocus,
-    isKeyboardNavigation,
   ]);
 
   // Use keyboard navigation hook

@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '../../../styles/tokens.css';
+import { tokens } from '../../../styles/tokens/index.css';
 
 export const errorBoundaryContainer = style({
   display: 'flex',
@@ -8,8 +8,8 @@ export const errorBoundaryContainer = style({
   justifyContent: 'center',
   padding: '2rem',
   minHeight: '200px',
-  backgroundColor: vars.color.background,
-  border: `1px solid ${vars.color.buttonBorder}`,
+  backgroundColor: tokens.semantic.color.background.primary,
+  border: `1px solid ${tokens.semantic.color.border.default}`,
   borderRadius: '8px',
   margin: '1rem',
 });
@@ -17,13 +17,13 @@ export const errorBoundaryContainer = style({
 export const errorTitle = style({
   fontSize: '1.5rem',
   fontWeight: 600,
-  color: vars.color.text,
+  color: tokens.semantic.color.text.primary,
   marginBottom: '1rem',
 });
 
 export const errorMessage = style({
   fontSize: '1rem',
-  color: vars.color.muted,
+  color: tokens.semantic.color.text.secondary,
   textAlign: 'center',
   marginBottom: '1.5rem',
   maxWidth: '500px',
@@ -34,15 +34,15 @@ export const retryButton = style({
   fontSize: '1rem',
   fontWeight: 500,
   color: '#ffffff',
-  backgroundColor: vars.color.primary,
+  backgroundColor: tokens.semantic.color.interactive.primary,
   border: 'none',
   borderRadius: '6px',
   cursor: 'pointer',
-  transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
+  transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
   ':hover': {
-    backgroundColor: vars.color.buttonHoverBg,
+    backgroundColor: tokens.semantic.color.interactive.primaryHover,
     transform: 'translateY(-1px)',
-    boxShadow: vars.shadow.elevationMd,
+    boxShadow: tokens.semantic.shadow.cardHover,
   },
   ':active': {
     transform: 'translateY(0)',

@@ -191,7 +191,7 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     items = [],
     onScrollEnd,
     onItemSelected,
-    activeItemIndex = 0,
+    activeItemIndex,
     mode = 'alternating',
     theme,
     onThemeChange,
@@ -217,7 +217,11 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
   const [timeLineItems, setTimeLineItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>([]);
   const [slideShowActive, setSlideShowActive] = useState(false);
-  const [activeTimelineItem, setActiveTimelineItem] = useState(activeItemIndex);
+  // Don't auto-highlight first item in vertical modes unless explicitly set
+  const [activeTimelineItem, setActiveTimelineItem] = useState(
+    activeItemIndex !== undefined ? activeItemIndex : 
+    (mode === 'vertical' || mode === 'alternating') ? undefined : 0
+  );
   
   // Track the previous prop value to avoid circular updates
   const previousActiveItemIndexRef = useRef(activeItemIndex);
@@ -237,7 +241,7 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
           return {
             ...item,
             _dayjs: dayjs(item.date),
-            active: index === activeItemIndex,
+            active: activeItemIndex !== undefined && index === activeItemIndex,
             id,
             hasNestedItems,
             items:
@@ -338,11 +342,16 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
       setTimeLineItems(newItems);
       
       if (isDynamicUpdate && allowDynamicUpdate && previousItemsLength > 0) {
-        // For dynamic updates, focus on the first newly loaded item
-        setActiveTimelineItem(previousItemsLength);
+        // For dynamic updates, preserve current focus if it exists
+        // Only focus on first newly loaded item if no current active item
+        if (activeTimelineItem === undefined || activeTimelineItem === null) {
+          setActiveTimelineItem(previousItemsLength);
+        }
       } else {
-        // For initial load or full refresh, start at the beginning
-        setActiveTimelineItem(0);
+        // For initial load or full refresh, respect the initial activeItemIndex setting
+        const initialIndex = activeItemIndex !== undefined ? activeItemIndex : 
+                           (mode === 'vertical' || mode === 'alternating') ? undefined : 0;
+        setActiveTimelineItem(initialIndex);
       }
       
       processedItemsCache.current = newItems;

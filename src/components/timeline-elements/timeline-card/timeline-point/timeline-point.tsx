@@ -48,8 +48,8 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
       <button
         className={`${circleClass} ${timelinePoint({
           shape: timelinePointShape,
-          usingIcon,
-          active,
+          hasIcon: usingIcon,
+          state: active ? 'active' : 'inactive',
           disabled,
         })} ${usingIcon ? 'using-icon' : ''} ${active ? 'active' : ''}`}
         onClick={handleClick}

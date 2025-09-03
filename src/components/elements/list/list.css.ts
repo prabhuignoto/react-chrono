@@ -1,74 +1,87 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '../../../styles/tokens.css';
-import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
 import { recipe } from '@vanilla-extract/recipes';
+import { tokens } from '../../../styles/tokens/index.css';
+import { sprinkles } from '../../../styles/system/sprinkles.css';
+import { patterns } from '../../../styles/system/recipes.css';
+import { baseStyles } from '../../../styles/system/static.css';
 
 export const list = style([
-  sprinkles({ display: 'flex' }),
-  {
+  sprinkles({ 
+    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    width: 'full',
+  }),
+  {
     listStyle: 'none',
     padding: 0,
-    width: '100%',
     maxWidth: '100%',
+    gap: tokens.semantic.spacing.xs,
   },
 ]);
 
 export const listItem = style([
-  sprinkles({ display: 'flex' }),
-  {
+  patterns.interactive({ hover: 'lift' }),
+  sprinkles({ 
+    display: 'flex',
     flexDirection: 'column',
+    width: 'full',
+  }),
+  {
     margin: 0,
-    width: '100%',
-    background: vars.color.toolbarBtnBg,
-    borderRadius: '4px',
-    boxShadow: `0px 1px 1px ${vars.color.shadow}`,
-    marginBottom: '0.4rem', // Slightly reduced spacing
+    background: tokens.semantic.color.background.elevated,
+    borderRadius: tokens.semantic.borderRadius.sm,
+    boxShadow: tokens.semantic.shadow.card,
+    padding: tokens.semantic.spacing.sm,
+    border: `1px solid ${tokens.semantic.color.border.default}`,
+    transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+    
     selectors: {
-      '&:last-child': { marginBottom: 0 },
       '&:hover': {
         cursor: 'pointer',
-        borderColor: vars.color.primary,
-        boxShadow: `0px 2px 4px ${vars.color.shadow}`, // Enhanced hover shadow
-        transform: 'translateY(-1px)', // Subtle hover lift
+        borderColor: tokens.semantic.color.border.interactive,
+        boxShadow: tokens.semantic.shadow.cardHover,
+        transform: 'translateY(-1px)',
       },
     },
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: 'transparent',
-    padding: '0.3rem 0.4rem', // Better padding for compact design
-    transition: `all ${vars.transition.duration.fast} ${vars.transition.easing.standard}`,
   },
 ]);
 
-export const listItemActive = style({ borderColor: vars.color.primary });
+export const listItemActive = style({ borderColor: tokens.semantic.color.interactive.primary });
 
 export const checkboxWrapper = style([
-  sprinkles({ display: 'flex', placeCenter: 'center' }),
+  sprinkles({ 
+    display: 'flex', 
+    alignItems: 'center',
+    justifyContent: 'center',
+  }),
   { width: '2rem' },
 ]);
 
 export const checkbox = style([
-  sprinkles({ display: 'flex', placeCenter: 'center' }),
+  sprinkles({ 
+    display: 'flex', 
+    alignItems: 'center',
+    justifyContent: 'center',
+  }),
   {
-    width: '1.1rem', // Slightly smaller for better proportion
+    width: '1.1rem',
     height: '1.1rem',
-    margin: '0 0.3rem 0 0.1rem', // Better spacing
-    borderRadius: '50%',
-    color: vars.color.cardBg,
-    border: `1px solid ${vars.color.buttonBorder}`,
-    transition: `all ${vars.transition.duration.fast} ${vars.transition.easing.standard}`,
+    margin: `0 ${tokens.semantic.spacing.xs} 0 ${tokens.semantic.spacing.xs}`,
+    borderRadius: tokens.semantic.borderRadius.full,
+    color: tokens.semantic.color.background.elevated,
+    border: `1px solid ${tokens.semantic.color.border.default}`,
+    transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
     selectors: {
       '&:hover': {
-        borderColor: vars.color.primary,
+        borderColor: tokens.semantic.color.interactive.primary,
       },
     },
   },
 ]);
 
 export const checkboxSelected = style({
-  background: vars.color.primary,
+  background: tokens.semantic.color.interactive.primary,
 });
 
 export const styleAndDescription = style([
@@ -77,7 +90,7 @@ export const styleAndDescription = style([
 ]);
 
 export const title = style({
-  color: vars.color.primary,
+  color: tokens.semantic.color.interactive.primary,
   fontSize: '0.875rem', // Reduced from 1rem
   fontWeight: 500, // Slightly bolder for better hierarchy
   margin: '0.15rem 0', // Reduced margin
@@ -94,7 +107,7 @@ export const description = style({
   padding: '0.05rem 0', // Reduced padding
   textAlign: 'left',
   width: '100%',
-  color: vars.color.cardSubtitle,
+  color: tokens.semantic.color.text.secondary,
   lineHeight: 1.2,
   opacity: 0.85, // Slightly reduced opacity for better hierarchy
 });

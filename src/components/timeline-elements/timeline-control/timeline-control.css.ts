@@ -1,6 +1,6 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { visuallyHidden } from '../../../styles/a11y.css';
-import { vars } from '../../../styles/tokens.css';
+import { tokens } from '../../../styles/tokens/index.css';
 import { recipe } from '@vanilla-extract/recipes';
 import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
 
@@ -11,7 +11,7 @@ export const navWrapper = style([
   {
     listStyle: 'none',
     position: 'relative',
-    zIndex: vars.zIndex.controls,
+    zIndex: tokens.semantic.zIndex.controls,
     gap: '0.25rem',
   },
 ]);
@@ -32,11 +32,11 @@ export const navItemDisabled = style({
 
 export const navButton = style({
   alignItems: 'center',
-  background: vars.color.toolbarBtnBg,
+  background: tokens.semantic.color.background.secondary,
   borderRadius: '6px',
   border: '1px solid',
-  borderColor: vars.color.buttonBorder,
-  color: vars.color.icon,
+  borderColor: tokens.semantic.color.border.default,
+  color: tokens.semantic.color.text.secondary,
   cursor: 'pointer',
   display: 'flex',
   height: '36px',
@@ -45,8 +45,8 @@ export const navButton = style({
   margin: '0 0.25rem',
   padding: 0,
   minWidth: '36px',
-  boxShadow: vars.shadow.elevationSm,
-  transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
+  boxShadow: tokens.semantic.shadow.card,
+  transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
   width: '36px',
   selectors: {
     '&:disabled': {
@@ -69,23 +69,23 @@ export const navButtonRotate = style({ transform: 'rotate(90deg)' });
 
 export const navButtonHover = style({});
 globalStyle(`${navButton}:hover:not(:disabled)`, {
-  background: vars.color.buttonHoverBg,
-  borderColor: vars.color.buttonHoverBorder,
-  boxShadow: vars.shadow.elevationMd,
+  background: tokens.semantic.color.interactive.muted,
+  borderColor: tokens.semantic.color.border.interactive,
+  boxShadow: tokens.semantic.shadow.cardHover,
   transform: 'translateY(-1px)',
-  color: vars.color.primary,
+  color: tokens.semantic.color.interactive.primary,
 });
 
 export const navButtonActive = style({});
 globalStyle(`${navButton}:active:not(:disabled)`, {
   transform: 'translateY(0) scale(0.97)',
-  background: vars.color.buttonHoverBg,
-  boxShadow: vars.shadow.elevationSm,
+  background: tokens.semantic.color.interactive.muted,
+  boxShadow: tokens.semantic.shadow.card,
 });
 
 export const navButtonFocus = style({});
 globalStyle(`${navButton}:focus`, {
-  outline: `2px solid ${vars.color.primary}`,
+  outline: `2px solid ${tokens.semantic.color.interactive.primary}`,
   outlineOffset: '2px',
 });
 globalStyle(`${navButton}:focus:not(:focus-visible)`, { outline: 'none' });
@@ -93,11 +93,11 @@ globalStyle(`${navButton}:focus:not(:focus-visible)`, { outline: 'none' });
 export const navButtonSvg = style({
   width: '1.25rem', // 20px - standardized button icon size
   height: '1.25rem',
-  color: vars.color.icon,
+  color: tokens.semantic.color.text.secondary,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  transition: `transform ${vars.transition.duration.fast} ${vars.transition.easing.standard}`,
+  transition: `transform ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
   '@media': {
     '(max-width: 480px)': {
       width: '1.375rem', // 22px
@@ -126,7 +126,7 @@ export const navButtonRecipe = recipe({
 export const controlContainer = style([
   sprinkles({ display: 'flex', alignItems: 'center', gap: 'sm', p: 'sm' }),
   {
-    background: vars.color.cardBg,
+    background: tokens.semantic.color.background.elevated,
     borderRadius: '4px',
     boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
   },
@@ -139,13 +139,13 @@ export const timelineControlContainer = style([
     justifyContent: 'center',
     my: 'sm',
   }),
-  { position: 'relative', zIndex: vars.zIndex.controls },
+  { position: 'relative', zIndex: tokens.semantic.zIndex.controls },
 ]);
 
 export const controlButton = style([
   sprinkles({ display: 'flex', placeCenter: 'center' }),
   {
-    background: vars.color.primary,
+    background: tokens.semantic.color.interactive.primary,
     borderRadius: '50%',
     cursor: 'pointer',
     height: '3em',

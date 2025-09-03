@@ -1,36 +1,40 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { vars } from '../../../styles/tokens.css';
-import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
 import { recipe } from '@vanilla-extract/recipes';
+import { tokens } from '../../../styles/tokens/index.css';
+import { sprinkles } from '../../../styles/system/sprinkles.css';
+import { patterns } from '../../../styles/system/recipes.css';
+import { baseStyles } from '../../../styles/system/static.css';
 
-export const popoverWrapper = style({
-  position: 'relative',
-  display: 'inline-block',
-});
+export const popoverWrapper = style([
+  sprinkles({
+    position: 'relative',
+    display: 'inline-block',
+  }),
+  baseStyles.containLayout,
+]);
 
 export const popoverHolder = style([
+  patterns.card({ size: 'md', elevation: 'high' }),
   sprinkles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'column',
+    position: 'absolute',
   }),
   {
-    flexDirection: 'column',
-    background: vars.color.toolbarBg,
-    borderRadius: '6px',
-    borderStyle: 'solid',
-    borderWidth: '1px',
-    borderColor: vars.color.buttonBorder,
-    boxShadow: vars.shadow.elevationLg,
+    background: tokens.semantic.color.background.elevated,
+    borderRadius: tokens.semantic.borderRadius.md,
+    border: `1px solid ${tokens.semantic.color.border.default}`,
+    boxShadow: tokens.semantic.shadow.modal,
     maxHeight: '400px',
     overflowY: 'auto',
-    padding: '0.5rem',
-    position: 'absolute',
+    padding: tokens.semantic.spacing.sm,
     width: '300px',
     opacity: 0,
-    transition: `opacity ${vars.transition.duration.normal} ${vars.transition.easing.standard}, transform ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
+    transition: `opacity ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}, transform ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
     transform: 'translateY(-10px)',
-    zIndex: vars.zIndex.popover,
+    zIndex: tokens.semantic.zIndex.popover,
     // Smart positioning to stay within container bounds
     maxWidth: 'calc(100vw - 2rem)',
     // Prevent popover from overflowing horizontally
@@ -38,9 +42,9 @@ export const popoverHolder = style([
     right: 'auto',
     selectors: {
       '&::-webkit-scrollbar': { width: '0.3em' },
-      '&::-webkit-scrollbar-track': { backgroundColor: vars.color.toolbarBg },
+      '&::-webkit-scrollbar-track': { backgroundColor: tokens.semantic.color.background.elevated },
       '&::-webkit-scrollbar-thumb': {
-        backgroundColor: vars.color.primary,
+        backgroundColor: tokens.semantic.color.interactive.primary,
         borderRadius: '3px',
       },
       // Smart horizontal positioning based on container space
@@ -97,12 +101,12 @@ export const selecter = style([
     justifyContent: 'space-between',
   }),
   {
-    background: vars.color.toolbarBtnBg,
-    color: vars.color.icon,
+    background: tokens.semantic.color.background.elevated,
+    color: tokens.semantic.color.text.secondary,
     borderRadius: '6px',
     border: '1px solid',
-    borderColor: vars.color.buttonBorder,
-    boxShadow: vars.shadow.elevationSm,
+    borderColor: tokens.semantic.color.border.default,
+    boxShadow: tokens.semantic.shadow.card,
     cursor: 'pointer',
     userSelect: 'none',
     marginRight: '0.5rem',
@@ -110,26 +114,26 @@ export const selecter = style([
     minWidth: '36px',
     width: 'auto',
     padding: '0 0.5rem',
-    transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
+    transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
     selectors: {
       '&:hover': {
-        background: vars.color.buttonHoverBg,
-        borderColor: vars.color.buttonHoverBorder,
-        boxShadow: vars.shadow.elevationMd,
+        background: tokens.semantic.color.interactive.muted,
+        borderColor: tokens.semantic.color.border.interactive,
+        boxShadow: tokens.semantic.shadow.cardHover,
         transform: 'translateY(-1px)',
-        color: vars.color.primary,
+        color: tokens.semantic.color.interactive.primary,
       },
       '&:active': {
         transform: 'translateY(0) scale(0.97)',
-        boxShadow: vars.shadow.elevationSm,
+        boxShadow: tokens.semantic.shadow.card,
       },
       '&:focus': {
-        outline: `2px solid ${vars.color.primary}`,
+        outline: `2px solid ${tokens.semantic.color.interactive.primary}`,
         outlineOffset: '2px',
       },
       '&:focus:not(:focus-visible)': { outline: 'none' },
       '&:focus-visible': {
-        outline: `2px solid ${vars.color.primary}`,
+        outline: `2px solid ${tokens.semantic.color.interactive.primary}`,
         outlineOffset: '2px',
       },
     },
@@ -152,7 +156,7 @@ export const selecterIcon = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: vars.color.icon,
+  color: tokens.semantic.color.text.secondary,
   height: '20px',
   width: '20px',
   transition: 'transform 0.2s ease-in-out',
@@ -166,7 +170,7 @@ globalStyle(`${selecterIcon} svg`, {
 });
 
 export const selecterIconOpen = style({
-  transform: 'rotate(180deg)',
+  transform: 'none',
 });
 
 export const selecterLabel = style({
@@ -190,7 +194,7 @@ export const closeButton = style({
   justifyContent: 'center',
   background: 'transparent',
   border: 'none',
-  color: vars.color.primary,
+  color: tokens.semantic.color.interactive.primary,
   cursor: 'pointer',
   marginBottom: '0.5rem',
   marginLeft: 'auto',
@@ -198,17 +202,17 @@ export const closeButton = style({
   borderRadius: '4px',
   minWidth: '32px',
   minHeight: '32px',
-  transition: `background-color ${vars.transition.duration.normal} ${vars.transition.easing.standard}, transform ${vars.transition.duration.fast} ${vars.transition.easing.standard}`,
+  transition: `background-color ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}, transform ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
   selectors: {
     '&:hover': {
-      background: vars.color.toolbarBtnBg,
+      background: tokens.semantic.color.background.elevated,
       transform: 'scale(1.1)',
     },
     '&:active': {
       transform: 'scale(0.95)',
     },
     '&:focus': {
-      outline: `2px solid ${vars.color.primary}`,
+      outline: `2px solid ${tokens.semantic.color.interactive.primary}`,
       outlineOffset: '2px',
     },
     '&:focus:not(:focus-visible)': { outline: 'none' },

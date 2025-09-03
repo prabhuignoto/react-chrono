@@ -27,6 +27,7 @@ describe('useTimelineKeyboardNavigation', () => {
     const mockEvent = {
       key: 'ArrowDown',
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     } as any;
 
     act(() => {
@@ -51,6 +52,7 @@ describe('useTimelineKeyboardNavigation', () => {
     const rightEvent = {
       key: 'ArrowRight',
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     } as any;
 
     act(() => {
@@ -66,6 +68,7 @@ describe('useTimelineKeyboardNavigation', () => {
     const leftEvent = {
       key: 'ArrowLeft',
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     } as any;
 
     act(() => {
@@ -90,6 +93,7 @@ describe('useTimelineKeyboardNavigation', () => {
     const rightEvent = {
       key: 'ArrowRight',
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     } as any;
 
     act(() => {
@@ -105,6 +109,7 @@ describe('useTimelineKeyboardNavigation', () => {
     const leftEvent = {
       key: 'ArrowLeft',
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     } as any;
 
     act(() => {
@@ -129,6 +134,7 @@ describe('useTimelineKeyboardNavigation', () => {
     const homeEvent = {
       key: 'Home',
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     } as any;
 
     act(() => {
@@ -142,6 +148,7 @@ describe('useTimelineKeyboardNavigation', () => {
     const endEvent = {
       key: 'End',
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     } as any;
 
     act(() => {
@@ -166,6 +173,7 @@ describe('useTimelineKeyboardNavigation', () => {
     const rightEvent = {
       key: 'ArrowRight',
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     } as any;
 
     act(() => {
@@ -181,6 +189,7 @@ describe('useTimelineKeyboardNavigation', () => {
     const leftEvent = {
       key: 'ArrowLeft',
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     } as any;
 
     act(() => {
@@ -205,6 +214,7 @@ describe('useTimelineKeyboardNavigation', () => {
     const downEvent = {
       key: 'ArrowDown',
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     } as any;
 
     act(() => {
@@ -220,6 +230,7 @@ describe('useTimelineKeyboardNavigation', () => {
     const upEvent = {
       key: 'ArrowUp',
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     } as any;
 
     act(() => {
@@ -243,6 +254,7 @@ describe('useTimelineKeyboardNavigation', () => {
     const mockEvent = {
       key: 'ArrowDown',
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     } as any;
 
     act(() => {

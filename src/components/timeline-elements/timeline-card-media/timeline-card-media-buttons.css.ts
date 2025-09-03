@@ -1,12 +1,12 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '../../../styles/tokens.css';
+import { tokens } from '../../../styles/tokens/index.css';
 import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const button = style([
   sprinkles({ display: 'flex', placeCenter: 'center', mx: 'xs' }),
   {
-    background: vars.color.primary,
+    background: tokens.semantic.color.interactive.primary,
     borderRadius: '50%',
     border: 'none',
     cursor: 'pointer',

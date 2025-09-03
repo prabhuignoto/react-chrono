@@ -1,5 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { vars } from '../../styles/tokens.css';
+import { tokens } from '../../styles/tokens/index.css';
 
 // Wrapper for the vertical timeline point and connecting lines
 export const timelinePointWrapper = style({
@@ -53,7 +53,7 @@ export const timelinePointContainer = style({
   border: 0,
   padding: 0,
   cursor: 'pointer',
-  transition: `transform ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
+  transition: `transform ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
   selectors: {
     '&:hover:not(:disabled)': {
       transform: 'translate(-50%, -50%) scale(1.05)',
@@ -71,10 +71,10 @@ export const shape = style({
   cursor: 'pointer',
   height: '1.25rem',
   width: '1.25rem',
-  transition: `all ${vars.transition.duration.normal} ${vars.transition.easing.standard}`,
+  transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
   position: 'relative',
-  background: vars.color.primary,
-  border: `2px solid ${vars.color.primary}`,
+  background: tokens.semantic.color.interactive.primary,
+  border: `2px solid ${tokens.semantic.color.interactive.primary}`,
   borderRadius: '50%',
   padding: 0,
   zIndex: 2,

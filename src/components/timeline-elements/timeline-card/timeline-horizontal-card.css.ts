@@ -1,45 +1,47 @@
 import { recipe } from '@vanilla-extract/recipes';
-import { sprinkles } from '../../../styles/sprinkles/enhanced-sprinkles.css';
-import { cardWrapper, cardHeader } from '../card-system-v2.css';
-import { semanticTokens } from '../../../styles/tokens/semantic-tokens.css';
+import { tokens } from '../../../styles/tokens/index.css';
+import { sprinkles } from '../../../styles/system/sprinkles.css';
+import { patterns } from '../../../styles/system/recipes.css';
+import { baseStyles } from '../../../styles/system/static.css';
 
-// Main wrapper using cardWrapper with horizontal mode and interactive features
+// Main wrapper using new unified system
 export const wrapper = recipe({
   base: [
-    cardWrapper({
-      mode: 'horizontal',
+    patterns.card({
+      size: 'md',
+      elevation: 'high',
       interactive: true,
-      elevation: 'medium',
-      theme: 'default',
     }),
-    {
-      border: 'none',
-      borderRadius: '16px',
-      flexDirection: 'column',
-      gap: '0.5rem',
-      isolation: 'isolate',
-      // Ensure wrapper is always visible in horizontal modes
-      visibility: 'visible',
+    sprinkles({
       display: 'flex',
+      flexDirection: 'column',
+      gap: 'sm',
+    }),
+    baseStyles.willChange,
+    {
+      border: `1px solid ${tokens.semantic.color.border.default}`,
+      borderRadius: tokens.semantic.borderRadius.xl,
+      isolation: 'isolate',
+      visibility: 'visible',
+      backgroundColor: tokens.semantic.color.background.elevated,
+      transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
 
-      // Hover effects with proper motion handling
       selectors: {
         '&:hover': {
           transform: 'translateY(-2px) scale(1.01)',
-          willChange: 'transform',
+          boxShadow: tokens.semantic.shadow.cardHover,
         },
         '&:active': {
           transform: 'translateY(0px) scale(1)',
+          boxShadow: tokens.semantic.shadow.cardActive,
         },
       },
 
-      // Reduced motion support
       '@media': {
         '(prefers-reduced-motion: reduce)': {
           selectors: {
             '&:hover': {
               transform: 'none',
-              willChange: 'auto',
             },
             '&:active': {
               transform: 'none',
@@ -51,17 +53,13 @@ export const wrapper = recipe({
   ],
   variants: {
     orientation: {
-      vertical: {
-        justifyContent: 'flex-start',
-      },
-      horizontal: {
-        justifyContent: 'center',
-      },
+      vertical: sprinkles({ justifyContent: 'flex-start' }),
+      horizontal: sprinkles({ justifyContent: 'center' }),
     },
     size: {
-      sm: [cardWrapper({ size: 'sm' })],
-      md: [cardWrapper({ size: 'md' })],
-      lg: [cardWrapper({ size: 'lg' })],
+      sm: patterns.card({ size: 'sm' }),
+      md: patterns.card({ size: 'md' }),
+      lg: patterns.card({ size: 'lg' }),
     },
   },
   defaultVariants: {
@@ -70,43 +68,43 @@ export const wrapper = recipe({
   },
 });
 
-// Timeline title container using cardHeader with enhanced styling
+// Timeline title container using new patterns
 export const timelineTitleContainer = recipe({
   base: [
-    cardHeader({ variant: 'emphasized' }),
+    patterns.text({ variant: 'h2' }),
     sprinkles({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
     }),
     {
-      padding: '0.5rem 1rem',
-      borderRadius: '12px',
-      background: `linear-gradient(135deg, ${semanticTokens.card.background.default} 0%, ${semanticTokens.card.background.default}f8 100%)`,
-      boxShadow: semanticTokens.card.shadow.low,
+      padding: `${tokens.semantic.spacing.sm} ${tokens.semantic.spacing.md}`,
+      borderRadius: tokens.semantic.borderRadius.lg,
+      background: `linear-gradient(135deg, ${tokens.semantic.color.background.elevated} 0%, ${tokens.semantic.color.background.elevated}f8 100%)`,
+      boxShadow: tokens.semantic.shadow.card,
       backdropFilter: 'blur(12px)',
-      border: `1px solid ${semanticTokens.card.border.color}`,
-      transition: `all ${semanticTokens.motion.duration.normal} ${semanticTokens.motion.easing.easeInOut}`,
+      border: `1px solid ${tokens.semantic.color.border.default}`,
+      transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+      color: tokens.semantic.color.text.primary,
     },
   ],
   variants: {
     mode: {
       vertical: {
-        marginBottom: '1.5rem',
+        marginBottom: tokens.semantic.spacing.xl,
         alignSelf: 'stretch',
       },
       horizontal: {
         position: 'relative',
         whiteSpace: 'nowrap',
-        zIndex: 3,
-        marginBottom: '0.5rem',
+        zIndex: tokens.semantic.zIndex.controls,
+        marginBottom: tokens.semantic.spacing.sm,
       },
       horizontal_all: {
         position: 'relative',
         whiteSpace: 'nowrap',
-        zIndex: 3,
-        marginBottom: '0.5rem',
-        // Ensure visibility in horizontal_all mode
+        zIndex: tokens.semantic.zIndex.controls,
+        marginBottom: tokens.semantic.spacing.sm,
         display: 'flex',
         visibility: 'visible',
         opacity: 1,
@@ -117,8 +115,9 @@ export const timelineTitleContainer = recipe({
         cursor: 'pointer',
         selectors: {
           '&:hover': {
-            boxShadow: semanticTokens.card.shadow.interactive,
+            boxShadow: tokens.semantic.shadow.cardHover,
             transform: 'translateY(-1px)',
+            backgroundColor: `${tokens.semantic.color.interactive.primary}05`,
           },
         },
       },
@@ -131,5 +130,6 @@ export const timelineTitleContainer = recipe({
   },
 });
 
-// Legacy export for backward compatibility (can be removed later)
-export { wrapper as cardWrapper, timelineTitleContainer as titleContainer };
+// Export types for TypeScript integration
+export type WrapperVariants = Parameters<typeof wrapper>[0];
+export type TimelineTitleContainerVariants = Parameters<typeof timelineTitleContainer>[0];

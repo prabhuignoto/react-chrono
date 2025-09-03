@@ -162,9 +162,6 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           >
             {icon || <ChevronDown />}
           </span>
-          {placeholder && !$isMobile ? (
-            <span className={selecterLabel}>{placeholder}</span>
-          ) : null}
         </button>
         {state.open ? (
           <div

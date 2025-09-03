@@ -1,196 +1,318 @@
 import { keyframes, style, globalStyle } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
-import { vars } from '../../../../styles/tokens.css';
-import { sprinkles } from '../../../../styles/sprinkles/sprinkles.css';
+import { tokens } from '../../../../styles/tokens/index.css';
+import { sprinkles } from '../../../../styles/system/sprinkles.css';
+import { animations, baseStyles, stateStyles } from '../../../../styles/system/static.css';
+import { patterns } from '../../../../styles/system/recipes.css';
 
-// Keyframe animations
+// Updated keyframe animations using new system
 const ripple = keyframes({
   '0%': { transform: 'scale(0)', opacity: 0.8 },
   '100%': { transform: 'scale(4)', opacity: 0 },
 });
 
-const pulse = keyframes({
-  '0%': { boxShadow: '0 0 0 0 rgba(0, 123, 255, 0.6)' },
-  '70%': { boxShadow: '0 0 0 12px rgba(0, 123, 255, 0)' },
-  '100%': { boxShadow: '0 0 0 0 rgba(0, 123, 255, 0)' },
+const activePointPulse = keyframes({
+  '0%': { 
+    transform: 'scale(1)',
+    boxShadow: `0 0 0 0 ${tokens.semantic.color.interactive.primary}60`,
+  },
+  '70%': { 
+    transform: 'scale(1.05)',
+    boxShadow: `0 0 0 12px ${tokens.semantic.color.interactive.primary}00`,
+  },
+  '100%': { 
+    transform: 'scale(1)',
+    boxShadow: `0 0 0 0 ${tokens.semantic.color.interactive.primary}00`,
+  },
 });
 
+// Shape wrapper using new sprinkles system
 export const shapeWrapper = style([
   sprinkles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  }),
-  {
-    width: 'auto', // Let content determine width
-    height: 'auto', // Let content determine height
     position: 'relative',
-    zIndex: 2, // Ensure timeline points are above the timeline line
+  }),
+  baseStyles.containLayout,
+  {
+    width: 'auto',
+    height: 'auto',
+    zIndex: tokens.semantic.zIndex.timelineCard,
     flexShrink: 0,
   },
 ]);
 
-export const timelinePointBase = style({
-  cursor: 'pointer',
-  transition: 'all 0.2s ease-in-out',
-  position: 'relative',
-  overflow: 'visible',
-  padding: 0,
-  width: '1.5rem', // Smaller size for horizontal modes
-  height: '1.5rem',
-  minWidth: '1.5rem',
-  minHeight: '1.5rem',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+// Base timeline point styles using new tokens
+export const timelinePointBase = style([
+  patterns.interactive({ hover: 'scale' }),
+  sprinkles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+    borderRadius: 'full',
+  }),
+  baseStyles.willChange,
+  {
+    width: tokens.component.timeline.point.size.md,
+    height: tokens.component.timeline.point.size.md,
+    minWidth: tokens.component.timeline.point.size.md,
+    minHeight: tokens.component.timeline.point.size.md,
+    padding: 0,
+    overflow: 'visible',
+    border: `2px solid ${tokens.semantic.color.background.elevated}`,
+    backgroundColor: tokens.component.timeline.point.color.inactive,
+    transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+    boxShadow: tokens.semantic.shadow.card,
 
-  // Ripple effect
-  '::before': {
-    content: '""',
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    width: '10px',
-    height: '10px',
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    borderRadius: '50%',
-    transform: 'scale(0) translate(-50%, -50%)',
-    transformOrigin: 'top left',
-    pointerEvents: 'none',
-    zIndex: 3,
-    opacity: 0,
+    // Ripple effect using new tokens
+    '::before': {
+      content: '""',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      width: '10px',
+      height: '10px',
+      backgroundColor: `${tokens.semantic.color.background.elevated}80`,
+      borderRadius: '50%',
+      transform: 'scale(0) translate(-50%, -50%)',
+      transformOrigin: 'top left',
+      pointerEvents: 'none',
+      zIndex: 1,
+      opacity: 0,
+    },
+
+    selectors: {
+      '&:active::before': {
+        animation: `${ripple} 0.6s ease-out`,
+      },
+      '&:hover:not(:disabled)': {
+        transform: 'scale(1.1)',
+        boxShadow: tokens.semantic.shadow.cardHover,
+        backgroundColor: tokens.component.timeline.point.color.hover,
+      },
+      '&:focus-visible': {
+        outline: `2px solid ${tokens.semantic.color.border.interactive}`,
+        outlineOffset: '2px',
+      },
+      '&:disabled': {
+        opacity: 0.5,
+        cursor: 'not-allowed',
+        transform: 'none',
+      },
+    },
+
+    '@media': {
+      '(prefers-reduced-motion: reduce)': {
+        animation: 'none !important',
+        transition: 'none',
+      },
+    },
   },
+]);
 
-  selectors: {
-    '&:active::before': {
-      animation: `${ripple} 0.6s ease-out`,
-    },
-    '&:focus-visible': {
-      outline: '3px solid transparent',
-      outlineOffset: '2px',
-    },
-    '&:disabled': {
-      opacity: 0.6,
-      cursor: 'default',
-    },
-  },
-
-  '@media': {
-    '(prefers-reduced-motion: reduce)': {
-      animation: 'none',
-      transition: 'none',
-    },
-  },
-});
-
+// Main timeline point recipe with new variant system
 export const timelinePoint = recipe({
   base: timelinePointBase,
   variants: {
-    shape: {
-      circle: {
-        borderRadius: '50%',
-        // Ensure circle shape is always visible
-        backgroundColor: 'currentColor',
-        border: '2px solid white',
+    size: {
+      sm: {
+        width: tokens.component.timeline.point.size.sm,
+        height: tokens.component.timeline.point.size.sm,
+        minWidth: tokens.component.timeline.point.size.sm,
+        minHeight: tokens.component.timeline.point.size.sm,
       },
-      square: {
-        borderRadius: '2px',
-        backgroundColor: 'currentColor',
-        border: '2px solid white',
+      md: {
+        width: tokens.component.timeline.point.size.md,
+        height: tokens.component.timeline.point.size.md,
+        minWidth: tokens.component.timeline.point.size.md,
+        minHeight: tokens.component.timeline.point.size.md,
       },
-      diamond: {
-        borderRadius: '0',
-        transform: 'rotate(45deg)',
-        backgroundColor: 'currentColor',
-        border: '2px solid white',
+      lg: {
+        width: tokens.component.timeline.point.size.lg,
+        height: tokens.component.timeline.point.size.lg,
+        minWidth: tokens.component.timeline.point.size.lg,
+        minHeight: tokens.component.timeline.point.size.lg,
       },
     },
-    usingIcon: {
+    shape: {
+      circle: sprinkles({ borderRadius: 'full' }),
+      square: sprinkles({ borderRadius: 'sm' }),
+      diamond: [
+        sprinkles({ borderRadius: 'sm' }),
+        { transform: 'rotate(45deg)' },
+      ],
+    },
+    state: {
+      inactive: {
+        backgroundColor: tokens.component.timeline.point.color.inactive,
+        borderColor: tokens.semantic.color.background.elevated,
+      },
+      active: [
+        {
+          backgroundColor: tokens.component.timeline.point.color.active,
+          borderColor: tokens.component.timeline.point.color.active,
+          transform: 'scale(1.2)',
+          boxShadow: `0 0 0 4px ${tokens.semantic.color.interactive.primary}20`,
+          animation: `${activePointPulse} 2s infinite`,
+        },
+      ],
+      hover: {
+        backgroundColor: tokens.component.timeline.point.color.hover,
+        borderColor: tokens.component.timeline.point.color.hover,
+      },
+    },
+    interactive: {
+      true: [
+        patterns.interactive({ hover: 'scale' }),
+        {
+          selectors: {
+            '&:hover:not(:disabled)': {
+              transform: 'scale(1.15)',
+            },
+            '&:active:not(:disabled)': {
+              transform: 'scale(0.95)',
+            },
+          },
+        },
+      ],
+      false: {
+        cursor: 'default',
+        selectors: {
+          '&:hover': {
+            transform: 'none',
+          },
+        },
+      },
+    },
+    hasIcon: {
       true: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        padding: tokens.semantic.spacing.xs,
+        backgroundColor: 'transparent',
+        border: `2px solid ${tokens.component.timeline.point.color.active}`,
       },
       false: {},
     },
-    active: {
-      true: {
-        transform: 'scale(1.2)', // Slightly smaller scale for smaller points
-        transition: 'all 0.3s ease-in-out',
-        backgroundColor: 'currentColor',
-        border: '2px solid white',
-        boxShadow: '0 3px 10px rgba(0, 123, 255, 0.4)',
-        selectors: {
-          '&.using-icon': {
-            animation: `${pulse} 1.5s infinite`,
-          },
-          '&:not(.using-icon)': {
-            boxShadow: '0 0 10px rgba(0, 123, 255, 0.6)',
-            animation: `${pulse} 1.5s infinite`,
-          },
-        },
-      },
-      false: {
-        transform: 'scale(1)',
-        transition: 'all 0.3s ease-in-out',
-        // Ensure timeline points are always visible with strong styling
-        backgroundColor: 'currentColor',
-        border: '2px solid white',
-        boxShadow: '0 2px 6px rgba(0, 0, 0, 0.15)',
-        // Add hover effect for non-active points
-        selectors: {
-          '&:hover:not(:disabled)': {
-            transform: 'scale(1.15)',
-            boxShadow: '0 3px 10px rgba(0, 0, 0, 0.2)',
-          },
-        },
-      },
-    },
     disabled: {
-      true: {
-        opacity: 0.6,
-        cursor: 'default',
-      },
+      true: stateStyles.disabled,
       false: {},
     },
   },
   compoundVariants: [
+    // Diamond shape specific interactions
     {
-      variants: { shape: 'diamond', active: false },
+      variants: { shape: 'diamond', interactive: true },
       style: {
         selectors: {
           '&:hover:not(:disabled)': {
-            transform: 'rotate(45deg) scale(1.12)',
+            transform: 'rotate(45deg) scale(1.15)',
           },
           '&:active:not(:disabled)': {
-            transform: 'rotate(45deg) scale(0.98)',
+            transform: 'rotate(45deg) scale(0.95)',
           },
         },
       },
     },
+    // Active diamond with icon
     {
-      variants: { shape: 'diamond', active: true, usingIcon: true },
+      variants: { shape: 'diamond', state: 'active', hasIcon: true },
       style: {
-        transform: 'rotate(45deg) scale(1.1)',
+        transform: 'rotate(45deg) scale(1.2)',
+        animation: `${activePointPulse} 2s infinite`,
       },
     },
+    // Active diamond without icon
     {
-      variants: { shape: 'diamond', active: true, usingIcon: false },
+      variants: { shape: 'diamond', state: 'active', hasIcon: false },
       style: {
-        transform: 'rotate(45deg)',
+        transform: 'rotate(45deg) scale(1.2)',
+      },
+    },
+    // Small size adjustments
+    {
+      variants: { size: 'sm', state: 'active' },
+      style: {
+        transform: 'scale(1.1)',
+      },
+    },
+    // Large size adjustments
+    {
+      variants: { size: 'lg', state: 'active' },
+      style: {
+        transform: 'scale(1.25)',
       },
     },
   ],
   defaultVariants: {
+    size: 'md',
     shape: 'circle',
-    usingIcon: false,
-    active: false,
+    state: 'inactive',
+    interactive: true,
+    hasIcon: false,
     disabled: false,
   },
 });
 
-// Global styles for icon images
-globalStyle(`${timelinePointBase}.using-icon img`, {
+// Icon styling within timeline points
+globalStyle(`${timelinePointBase} img`, {
   maxWidth: '90%',
   maxHeight: '90%',
+  objectFit: 'contain',
+  borderRadius: 'inherit',
 });
+
+globalStyle(`${timelinePointBase} svg`, {
+  maxWidth: '80%',
+  maxHeight: '80%',
+  fill: 'currentColor',
+});
+
+// Enhanced focus styles for accessibility
+globalStyle(`${timelinePointBase}:focus-visible`, {
+  outline: `3px solid ${tokens.semantic.color.border.interactive}`,
+  outlineOffset: '3px',
+});
+
+// Loading state animation
+export const loadingPoint = style([
+  timelinePointBase,
+  {
+    backgroundColor: tokens.semantic.color.background.secondary,
+    animation: `${animations.pulse} 1.5s ease-in-out infinite`,
+  },
+]);
+
+// Export types for new system
+export type TimelinePointVariants = Parameters<typeof timelinePoint>[0];
+
+// Utility classes for common point patterns
+export const pointPatterns = {
+  // Standard interactive point
+  standard: timelinePoint({ 
+    size: 'md', 
+    shape: 'circle', 
+    interactive: true 
+  }),
+  
+  // Large active point
+  featured: timelinePoint({ 
+    size: 'lg', 
+    shape: 'circle', 
+    state: 'active' 
+  }),
+  
+  // Small indicator point
+  indicator: timelinePoint({ 
+    size: 'sm', 
+    shape: 'circle', 
+    interactive: false 
+  }),
+  
+  // Diamond milestone
+  milestone: timelinePoint({ 
+    size: 'lg', 
+    shape: 'diamond', 
+    state: 'active' 
+  }),
+};

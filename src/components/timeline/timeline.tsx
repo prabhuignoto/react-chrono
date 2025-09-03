@@ -199,6 +199,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     onPreviousItem: handlePreviousInternal,
     activeItemIndex: activeItemIndex,
     totalItems: items.length,
+    isKeyboardNavigation: isKeyboardNavigation,
   });
 
   // Navigation functions are now available from the earlier useTimelineNavigation call
@@ -274,11 +275,20 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // Sync activeItemIndex with activeTimelineItem prop
   useEffect(() => {
-    if (
-      activeTimelineItem !== undefined &&
-      activeTimelineItem !== activeItemIndex.current
-    ) {
-      syncActiveItemIndex(activeTimelineItem);
+    // For defined activeTimelineItem, always sync
+    if (activeTimelineItem !== undefined) {
+      if (activeTimelineItem !== activeItemIndex.current) {
+        syncActiveItemIndex(activeTimelineItem);
+      }
+    } else {
+      // For undefined activeTimelineItem (no selection), reset to -1 to indicate no selection
+      // This helps with navigation logic
+      if (activeItemIndex.current !== -1) {
+        activeItemIndex.current = -1;
+      }
+    }
+    
+    if (activeTimelineItem !== undefined) {
       // Move keyboard focus to the active element once activation changes
       if (mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL') {
         requestAnimationFrame(() => {

@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useTimelineContext } from '../../contexts';
 import TimelineCard from '../timeline-card-content/timeline-card-content';
 import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
+import { vars } from '../../../styles/tokens.css';
 
 interface NestedTimelineCardsProps {
   items: any[];
@@ -45,11 +46,11 @@ const NestedTimelineCards: React.FC<NestedTimelineCardsProps> = ({
       top: '0',
       bottom: '0',
       width: '2px',
-      background: theme?.primary || '#2563eb',
+      background: vars.color.primary,
       transform: 'translateX(-50%)',
       zIndex: 1,
     }),
-    [theme?.primary],
+    [],
   );
 
   // Memoize item wrapper styles
@@ -69,11 +70,8 @@ const NestedTimelineCards: React.FC<NestedTimelineCardsProps> = ({
     () => ({
       width: '100%',
       maxWidth: '600px',
-      background:
-        theme?.nestedCardBgColor ||
-        theme?.cardBgColor ||
-        (isDarkMode ? '#1f2937' : '#ffffff'),
-      border: `1px solid ${theme?.buttonBorderColor || (isDarkMode ? '#4b5563' : '#e2e8f0')}`,
+      background: vars.color.nestedCardBg,
+      border: `1px solid ${vars.color.buttonBorder}`,
       borderRadius: '8px',
       padding: '1rem',
       boxShadow: isDarkMode
@@ -81,48 +79,34 @@ const NestedTimelineCards: React.FC<NestedTimelineCardsProps> = ({
         : '0 2px 4px rgba(0, 0, 0, 0.1)',
       position: 'relative' as const,
     }),
-    [
-      theme?.nestedCardBgColor,
-      theme?.cardBgColor,
-      theme?.buttonBorderColor,
-      isDarkMode,
-    ],
+    [],
   );
 
   // Memoize title styles
   const titleStyles = useMemo(
     () => ({
       margin: '0 0 0.5rem 0',
-      color:
-        theme?.nestedCardTitleColor ||
-        theme?.cardTitleColor ||
-        (isDarkMode ? '#60a5fa' : '#1e3a8a'),
+      color: vars.color.nestedCardTitle,
       fontSize: '1.1rem',
       fontWeight: '600',
     }),
-    [theme?.nestedCardTitleColor, theme?.cardTitleColor, isDarkMode],
+    [],
   );
 
   // Memoize subtitle styles
   const subtitleStyles = useMemo(
     () => ({
       margin: '0 0 0.75rem 0',
-      color:
-        theme?.nestedCardSubtitleColor ||
-        theme?.cardSubtitleColor ||
-        (isDarkMode ? '#d1d5db' : '#64748b'),
+      color: vars.color.nestedCardSubtitle,
       fontSize: '0.95rem',
     }),
-    [theme?.nestedCardSubtitleColor, theme?.cardSubtitleColor, isDarkMode],
+    [],
   );
 
   // Memoize details text styles with nested card height
   const getDetailsStyles = useMemo(
     () => ({
-      color:
-        theme?.nestedCardDetailsColor ||
-        theme?.cardDetailsColor ||
-        (isDarkMode ? '#9ca3af' : '#475569'),
+      color: vars.color.nestedCardDetails,
       fontSize: '0.9rem',
       lineHeight: '1.5',
       ...(nestedCardHeight && {
@@ -130,12 +114,7 @@ const NestedTimelineCards: React.FC<NestedTimelineCardsProps> = ({
         overflow: 'auto' as const,
       }),
     }),
-    [
-      theme?.nestedCardDetailsColor,
-      theme?.cardDetailsColor,
-      isDarkMode,
-      nestedCardHeight,
-    ],
+    [nestedCardHeight],
   );
 
   // Memoize link styles
@@ -143,12 +122,12 @@ const NestedTimelineCards: React.FC<NestedTimelineCardsProps> = ({
     () => ({
       display: 'inline-block',
       marginTop: '0.75rem',
-      color: theme?.primary || '#2563eb',
+      color: vars.color.primary,
       textDecoration: 'none',
       fontSize: '0.9rem',
       fontWeight: '500',
     }),
-    [theme?.primary],
+    [],
   );
 
   if (!items || items.length === 0) {

@@ -1,48 +1,30 @@
 import { style, globalStyle, keyframes } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
-import { sprinkles } from '../../../styles/sprinkles/sprinkles.css';
+import { tokens } from '../../../styles/tokens/index.css';
+import { sprinkles } from '../../../styles/system/sprinkles.css';
+import { patterns } from '../../../styles/system/recipes.css';
+import { animations, baseStyles } from '../../../styles/system/static.css';
 
-// Keyframe animations
-const show = keyframes({
-  from: { opacity: 0 },
-  to: { opacity: 1 },
-});
+// Use animations from unified system
+const show = animations.fadeIn;
+const ripple = animations.ripple;
+const pulse = animations.timelinePointPulse;
 
-const ripple = keyframes({
-  '0%': {
-    transform: 'scale(0)',
-    opacity: 0.8,
-  },
-  '100%': {
-    transform: 'scale(4)',
-    opacity: 0,
-  },
-});
-
-const pulse = keyframes({
-  '0%': {
-    boxShadow: '0 0 0 0 rgba(0, 123, 255, 0.6)',
-  },
-  '70%': {
-    boxShadow: '0 0 0 12px rgba(0, 123, 255, 0)',
-  },
-  '100%': {
-    boxShadow: '0 0 0 0 rgba(0, 123, 255, 0)',
-  },
-});
-
-// Base wrapper
+// Base wrapper using new patterns
 export const wrapper = style([
+  patterns.card({ size: 'md', elevation: 'low' }),
   sprinkles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
+    width: 'full',
   }),
   {
-    border: '1px solid transparent',
+    border: `1px solid ${tokens.semantic.color.border.default}`,
     position: 'relative',
     height: '100%',
+    background: tokens.semantic.color.background.elevated,
+    borderRadius: tokens.semantic.borderRadius.lg,
   },
 ]);
 
@@ -53,7 +35,7 @@ globalStyle(`${wrapper}.vertical`, {
 // Item wrapper
 export const item = style({});
 
-// Shape wrapper
+// Shape wrapper using new token system
 export const shapeWrapper = style([
   sprinkles({
     display: 'flex',
@@ -61,78 +43,86 @@ export const shapeWrapper = style([
     justifyContent: 'center',
     flexDirection: 'column',
   }),
+  baseStyles.containLayout,
   {
     width: '5em',
-    zIndex: '2',
+    zIndex: tokens.semantic.zIndex.timelineCard,
     position: 'relative',
   },
 ]);
 
-// Shape border utility function converted to variants
-const getShapeBorder = (shape: string) => {
-  switch (shape) {
-    case 'circle':
-      return { borderRadius: '50%' };
-    case 'square':
-      return { borderRadius: '2px' };
-    case 'diamond':
-      return { borderRadius: '0' };
-    default:
-      return { borderRadius: '50%' };
-  }
-};
+// Remove utility function - now handled by recipe variants
 
-// Base shape styles
-const baseShape = style({
-  cursor: 'pointer',
-  transition: 'all 0.2s ease-in-out',
-  position: 'relative',
-  overflow: 'hidden',
-  border: `2px solid #3b82f6`,
-  background: `#3b82f6`,
-  padding: '0',
-  zIndex: '2',
-});
+// Base shape styles using new tokens
+const baseShape = style([
+  patterns.interactive({ hover: 'scale' }),
+  {
+    cursor: 'pointer',
+    transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+    position: 'relative',
+    overflow: 'hidden',
+    border: `2px solid ${tokens.component.timeline.point.color.active}`,
+    background: tokens.component.timeline.point.color.active,
+    padding: 0,
+    zIndex: tokens.semantic.zIndex.timelineCard,
+  },
+]);
 
-// Shape recipe
+// Shape recipe using new unified system
 export const shape = recipe({
   base: baseShape,
   variants: {
     timelinePointShape: {
-      circle: { borderRadius: '50%' },
-      square: { borderRadius: '2px' },
+      circle: sprinkles({ borderRadius: 'full' }),
+      square: sprinkles({ borderRadius: 'sm' }),
       diamond: {
-        borderRadius: '0',
+        borderRadius: 0,
         transform: 'rotate(45deg)',
       },
     },
     active: {
-      true: {},
-      false: {},
+      true: {
+        backgroundColor: tokens.component.timeline.point.color.active,
+        borderColor: tokens.component.timeline.point.color.active,
+        transform: 'scale(1.1)',
+        boxShadow: `0 0 0 4px ${tokens.semantic.color.interactive.primary}20`,
+      },
+      false: {
+        backgroundColor: tokens.component.timeline.point.color.inactive,
+        borderColor: tokens.component.timeline.point.color.inactive,
+      },
     },
     usingIcon: {
       true: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#3b82f6',
+        padding: tokens.semantic.spacing.xs,
       },
-      false: {
-        background: `#3b82f6`,
-      },
+      false: {},
     },
     disabled: {
       true: {
-        opacity: '0.6',
-        cursor: 'default',
+        opacity: 0.5,
+        cursor: 'not-allowed',
+        pointerEvents: 'none',
       },
       false: {},
     },
     size: {
-      small: { width: '20px', height: '20px' },
-      medium: { width: '24px', height: '24px' },
-      large: { width: '32px', height: '32px' },
-      custom: {}, // Will be overridden by dimension prop
+      small: { 
+        width: tokens.component.timeline.point.size.sm,
+        height: tokens.component.timeline.point.size.sm,
+      },
+      medium: { 
+        width: tokens.component.timeline.point.size.md,
+        height: tokens.component.timeline.point.size.md,
+      },
+      large: { 
+        width: tokens.component.timeline.point.size.lg,
+        height: tokens.component.timeline.point.size.lg,
+      },
+      custom: {},
     },
   },
   defaultVariants: {
@@ -143,42 +133,29 @@ export const shape = recipe({
     size: 'medium',
   },
   compoundVariants: [
-    // Active states for icons
     {
       variants: { active: true, usingIcon: true },
       style: {
         animation: `${pulse} 1.5s infinite`,
       },
     },
-    // Active states for non-icons
     {
       variants: { active: true, usingIcon: false },
       style: {
-        background: '#3b82f6',
-        border: '3px solid #3b82f6',
-        boxShadow: '0 0 8px rgba(0, 0, 0, 0.2)',
         animation: `${pulse} 1.5s infinite`,
+        boxShadow: tokens.semantic.shadow.cardHover,
       },
     },
-    // Diamond transform adjustments for active state
     {
-      variants: {
-        timelinePointShape: 'diamond',
-        active: true,
-        usingIcon: true,
-      },
+      variants: { timelinePointShape: 'diamond', active: true, usingIcon: true },
       style: {
         transform: 'rotate(45deg) scale(1.1)',
       },
     },
     {
-      variants: {
-        timelinePointShape: 'diamond',
-        active: true,
-        usingIcon: false,
-      },
+      variants: { timelinePointShape: 'diamond', active: true, usingIcon: false },
       style: {
-        transform: 'rotate(45deg)',
+        transform: 'rotate(45deg) scale(1.1)',
       },
     },
   ],
@@ -266,19 +243,28 @@ globalStyle(`${shape} img`, {
   maxHeight: '90%',
 });
 
-// Timeline title container
+// Timeline title container using new patterns
 export const timelineTitleContainer = recipe({
-  base: style([
+  base: [
+    patterns.text({ variant: 'title' }),
     sprinkles({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
     }),
-  ]),
+    {
+      padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
+      borderRadius: tokens.semantic.borderRadius.md,
+      backgroundColor: tokens.semantic.color.background.elevated,
+      border: `1px solid ${tokens.semantic.color.border.default}`,
+      boxShadow: tokens.semantic.shadow.card,
+      transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+    },
+  ],
   variants: {
     mode: {
       vertical: {
-        marginBottom: '1em',
+        marginBottom: tokens.semantic.spacing.md,
       },
       horizontal: {
         position: 'absolute',
@@ -286,7 +272,7 @@ export const timelineTitleContainer = recipe({
         left: '50%',
         transform: 'translateX(-50%)',
         whiteSpace: 'nowrap',
-        zIndex: '3',
+        zIndex: tokens.semantic.zIndex.controls,
       },
       horizontal_all: {
         position: 'absolute',
@@ -294,10 +280,10 @@ export const timelineTitleContainer = recipe({
         left: '50%',
         transform: 'translateX(-50%)',
         whiteSpace: 'nowrap',
-        zIndex: '3',
+        zIndex: tokens.semantic.zIndex.controls,
       },
       tree: {
-        marginBottom: '1em',
+        marginBottom: tokens.semantic.spacing.md,
       },
     },
   },
@@ -306,8 +292,9 @@ export const timelineTitleContainer = recipe({
   },
 });
 
-// Base timeline content container
+// Base timeline content container using new system
 const baseTimelineContentContainer = style([
+  patterns.card({ size: 'md', elevation: 'medium' }),
   sprinkles({
     alignItems: 'flex-start',
   }),
@@ -315,25 +302,32 @@ const baseTimelineContentContainer = style([
     animation: `${show} 0.25s ease-in`,
     outline: '2px solid transparent',
     outlineOffset: '2px',
-    borderRadius: '12px',
-    margin: '1rem',
+    borderRadius: tokens.semantic.borderRadius.lg,
+    margin: tokens.semantic.spacing.md,
   },
 ]);
 
-// Timeline content container recipe
+// Timeline content container recipe using new tokens
 export const timelineContentContainer = recipe({
   base: baseTimelineContentContainer,
   variants: {
     active: {
-      true: {},
+      true: {
+        borderColor: tokens.semantic.color.border.interactive,
+        boxShadow: `0 0 0 2px ${tokens.semantic.color.border.interactive}20`,
+        backgroundColor: tokens.semantic.color.background.elevated,
+      },
       false: {},
     },
     cardWidth: {
       auto: {},
-      custom: {}, // Will be overridden by minWidth
+      custom: {},
     },
     highlight: {
-      true: {},
+      true: {
+        backgroundColor: `${tokens.semantic.color.interactive.primary}08`,
+        borderColor: tokens.semantic.color.border.interactive,
+      },
       false: {},
     },
     position: {
@@ -365,12 +359,12 @@ export const timelineContentContainer = recipe({
     mode: 'vertical',
   },
   compoundVariants: [
-    // Highlight active cards in horizontal_all mode
     {
       variants: { highlight: true, active: true },
       style: {
-        border: '2px solid #3b82f6',
-        boxShadow: '0 0 0 2px rgba(59, 130, 246, 0.13)',
+        border: `2px solid ${tokens.semantic.color.interactive.primary}`,
+        boxShadow: `0 0 0 2px ${tokens.semantic.color.interactive.primary}20`,
+        backgroundColor: `${tokens.semantic.color.interactive.primary}10`,
       },
     },
   ],
@@ -412,31 +406,29 @@ globalStyle(`${timelineContentContainer}.vertical`, {
   },
 });
 
-// Card container with improved cross-browser support
-export const cardContainer = style({
-  position: 'relative',
-  display: 'flex',
-  WebkitBoxOrient: 'vertical',
-  WebkitBoxDirection: 'normal',
-  msFlexDirection: 'column',
-  flexDirection: 'column',
-  minWidth: '250px',
-  maxWidth: '350px',
-  margin: '0.5rem',
-  padding: '1.5rem',
-  background: '#ffffff',
-  borderRadius: '12px',
-  WebkitBoxShadow:
-    '0 2px 4px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06), 0 8px 16px rgba(0, 0, 0, 0.08)',
-  boxShadow:
-    '0 2px 4px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.06), 0 8px 16px rgba(0, 0, 0, 0.08)',
-  WebkitTransition:
-    'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  transition:
-    'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  backdropFilter: 'blur(10px)',
-  WebkitBackdropFilter: 'blur(10px)',
-});
+// Card container using new unified system
+export const cardContainer = style([
+  patterns.card({ size: 'lg', elevation: 'medium' }),
+  sprinkles({
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'relative',
+  }),
+  baseStyles.willChange,
+  {
+    minWidth: tokens.component.timeline.card.width.min,
+    maxWidth: tokens.component.timeline.card.width.max,
+    margin: tokens.semantic.spacing.sm,
+    padding: tokens.semantic.spacing.lg,
+    backgroundColor: tokens.semantic.color.background.elevated,
+    borderRadius: tokens.semantic.borderRadius.lg,
+    boxShadow: tokens.semantic.shadow.card,
+    transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
+    border: `1px solid ${tokens.semantic.color.border.default}`,
+  },
+]);
 
 globalStyle(`${cardContainer}:hover`, {
   WebkitTransform: 'translateY(-4px)',

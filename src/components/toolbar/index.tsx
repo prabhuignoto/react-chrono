@@ -15,7 +15,6 @@ import {
   searchWrapper as veSearchWrapper,
   toolbarListItem as veToolbarListItem,
   toolbarSection as veToolbarSection,
-  toolbarSectionRecipe as veToolbarSectionRecipe,
   toolbarWrapper as veToolbarWrapper,
   toolbarIconButton,
 } from './toolbar.css';
