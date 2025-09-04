@@ -5,6 +5,9 @@ import { sprinkles } from '../../../styles/system/sprinkles.css';
 import { patterns } from '../../../styles/system/recipes.css';
 import { baseStyles } from '../../../styles/system/static.css';
 
+// Base font family with proper CSS custom property fallback for Google Fonts
+const baseFontFamily = `var(--timeline-font-family, 'Inter, system-ui, ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif')`;
+
 export const list = style([
   sprinkles({ 
     display: 'flex',
@@ -97,8 +100,10 @@ export const styleAndDescription = style([
 
 export const title = style({
   color: tokens.semantic.color.interactive.primary,
-  fontSize: '0.875rem', // Reduced from 1rem
-  fontWeight: 500, // Slightly bolder for better hierarchy
+  fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
+  fontSize: `var(--timeline-controls-font-size, 0.875rem)`, // Reduced from 1rem
+  fontWeight: `var(--timeline-controls-font-weight, 500)`, // Slightly bolder for better hierarchy
+  fontStyle: `var(--timeline-controls-font-style, normal)`,
   margin: '0.15rem 0', // Reduced margin
   textAlign: 'left',
   whiteSpace: 'nowrap',
@@ -107,8 +112,10 @@ export const title = style({
 });
 
 export const description = style({
-  fontSize: '0.75rem', // Reduced from 0.8rem
-  fontWeight: 'normal',
+  fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
+  fontSize: `var(--timeline-controls-font-size, 0.75rem)`, // Reduced from 0.8rem
+  fontWeight: `var(--timeline-controls-font-weight, normal)`,
+  fontStyle: `var(--timeline-controls-font-style, normal)`,
   margin: 0,
   padding: '0.05rem 0', // Reduced padding
   textAlign: 'left',

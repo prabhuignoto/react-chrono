@@ -6,6 +6,9 @@ import { sprinkles } from '../../../styles/system/sprinkles.css';
 import { patterns } from '../../../styles/system/recipes.css';
 import { animations, baseStyles } from '../../../styles/system/static.css';
 
+// Base font family with proper CSS custom property fallback for Google Fonts
+const baseFontFamily = `var(--timeline-font-family, 'Inter, system-ui, ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif')`;
+
 export const baseCard = style([
   patterns.card({ size: 'lg', elevation: 'high' }),
   baseStyles.willChange,
@@ -131,7 +134,10 @@ export const cardTitleBase = style([
     margin: 0,
     width: '100%',
     textAlign: 'left',
-    fontWeight: tokens.semantic.typography.fontWeight.semibold,
+    fontFamily: `var(--timeline-cardTitle-font-family, ${baseFontFamily})`,
+    fontSize: `var(--timeline-cardTitle-font-size, ${tokens.semantic.typography.fontSize.heading1})`,
+    fontWeight: `var(--timeline-cardTitle-font-weight, ${tokens.semantic.typography.fontWeight.semibold})`,
+    fontStyle: `var(--timeline-cardTitle-font-style, normal)`,
     letterSpacing: '-0.025em',
     lineHeight: 1.4,
     wordBreak: 'break-word',
@@ -143,15 +149,14 @@ export const cardTitle = style([
   cardTitleBase,
   {
     color: tokens.semantic.color.text.primary,
-    fontSize: tokens.semantic.typography.fontSize.heading1,
     marginBottom: tokens.semantic.spacing.xs,
 
     '@media': {
       '(max-width: 768px)': {
-        fontSize: tokens.semantic.typography.fontSize.heading2,
+        fontSize: `var(--timeline-cardTitle-font-size, ${tokens.semantic.typography.fontSize.heading2})`,
       },
       '(max-width: 480px)': {
-        fontSize: tokens.semantic.typography.fontSize.body,
+        fontSize: `var(--timeline-cardTitle-font-size, ${tokens.semantic.typography.fontSize.body})`,
       },
     },
   },
@@ -182,11 +187,13 @@ export const cardSubTitle = style([
   patterns.text({ variant: 'caption' }),
   {
     color: tokens.semantic.color.text.secondary,
-    fontWeight: tokens.semantic.typography.fontWeight.medium,
+    fontFamily: `var(--timeline-cardSubtitle-font-family, ${baseFontFamily})`,
+    fontSize: `var(--timeline-cardSubtitle-font-size, ${tokens.semantic.typography.fontSize.caption})`,
+    fontWeight: `var(--timeline-cardSubtitle-font-weight, ${tokens.semantic.typography.fontWeight.medium})`,
+    fontStyle: `var(--timeline-cardSubtitle-font-style, normal)`,
     letterSpacing: '-0.01em',
     lineHeight: 1.5,
     opacity: 0.85,
-    fontSize: tokens.semantic.typography.fontSize.caption,
     marginBottom: tokens.semantic.spacing.sm,
     margin: 0,
     width: '100%',
@@ -195,10 +202,10 @@ export const cardSubTitle = style([
 
     '@media': {
       '(max-width: 768px)': {
-        fontSize: '0.8rem',
+        fontSize: `var(--timeline-cardSubtitle-font-size, 0.8rem)`,
       },
       '(max-width: 480px)': {
-        fontSize: '0.75rem',
+        fontSize: `var(--timeline-cardSubtitle-font-size, 0.75rem)`,
       },
     },
   },
@@ -207,8 +214,10 @@ export const cardSubTitle = style([
 export const timelineContentDetails = style([
   patterns.text({ variant: 'body' }),
   {
-    fontSize: tokens.semantic.typography.fontSize.body,
-    fontWeight: tokens.semantic.typography.fontWeight.normal,
+    fontFamily: `var(--timeline-cardText-font-family, ${baseFontFamily})`,
+    fontSize: `var(--timeline-cardText-font-size, ${tokens.semantic.typography.fontSize.body})`,
+    fontWeight: `var(--timeline-cardText-font-weight, ${tokens.semantic.typography.fontWeight.normal})`,
+    fontStyle: `var(--timeline-cardText-font-style, normal)`,
     margin: 0,
     width: '100%',
     color: tokens.semantic.color.text.primary,
@@ -218,11 +227,11 @@ export const timelineContentDetails = style([
 
     '@media': {
       '(max-width: 768px)': {
-        fontSize: '0.75rem',
+        fontSize: `var(--timeline-cardText-font-size, 0.75rem)`,
         lineHeight: 1.4,
       },
       '(max-width: 480px)': {
-        fontSize: '0.7rem',
+        fontSize: `var(--timeline-cardText-font-size, 0.7rem)`,
       },
     },
 

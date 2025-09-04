@@ -126,6 +126,7 @@ export interface TimelineMemoizedObjects {
   isDarkMode: boolean;
   semanticTags: Record<string, string>;
   slideShowType: SlideShowType;
+  googleFonts: any;
 }
 
 /**
@@ -376,7 +377,7 @@ export const TimelineContextProvider: FunctionComponent<
 
   // Google Fonts integration
   const googleFontsConfig = useMemo(() => {
-    if (!fontSizes && !props.googleFonts) return null;
+    if (!props.googleFonts) return null;
     
     // If we have both fontSizes and googleFonts, merge them
     if (props.googleFonts) {
@@ -502,6 +503,7 @@ export const TimelineContextProvider: FunctionComponent<
       fontSizes: memoizedFontSizes,
       semanticTags: memoizedSemanticTags,
       slideShowType: memoizedSlideShowType,
+      googleFonts: googleFontsConfig,
 
       // Computed values
       computedCardHeight,
@@ -576,6 +578,7 @@ export const TimelineContextProvider: FunctionComponent<
       memoizedFontSizes,
       memoizedSemanticTags,
       memoizedSlideShowType,
+      googleFontsConfig,
 
       // Computed values dependencies
       computedCardHeight,

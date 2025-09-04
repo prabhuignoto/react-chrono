@@ -68,6 +68,39 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
           classNames: {
             cardText: 'custom-text',
           },
+          googleFonts: {
+            fontFamily: 'Poppins',
+            elements: {
+              title: {
+                weight: 'bold',
+                style: 'normal',
+                size: '2rem'
+              },
+              cardTitle: {
+                weight: 'semi-bold',
+                style: 'normal',
+                size: '1.2rem'
+              },
+              cardSubtitle: {
+                weight: 'normal',
+                style: 'italic',
+                size: '1rem'
+              },
+              cardText: {
+                weight: 'light',
+                style: 'normal',
+                size: '0.95rem'
+              },
+              controls: {
+                weight: 'medium',
+                style: 'normal',
+                size: '0.875rem'
+              }
+            },
+            weights: [300, 400, 500, 600, 700, 'italic'],
+            display: 'swap',
+            preconnect: true
+          }
         }}
         
         theme={{

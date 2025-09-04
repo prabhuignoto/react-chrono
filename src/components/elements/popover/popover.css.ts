@@ -5,6 +5,9 @@ import { sprinkles } from '../../../styles/system/sprinkles.css';
 import { patterns } from '../../../styles/system/recipes.css';
 import { baseStyles } from '../../../styles/system/static.css';
 
+// Base font family with proper CSS custom property fallback for Google Fonts
+const baseFontFamily = `var(--timeline-font-family, 'Inter, system-ui, ui-sans-serif, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif')`;
+
 export const popoverWrapper = style([
   sprinkles({
     position: 'relative',
@@ -183,10 +186,12 @@ export const selecterIconOpen = style({
 });
 
 export const selecterLabel = style({
-  fontSize: tokens.semantic.typography.fontSize.body,
+  fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
+  fontSize: `var(--timeline-controls-font-size, ${tokens.semantic.typography.fontSize.body})`,
+  fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.medium})`,
+  fontStyle: `var(--timeline-controls-font-style, normal)`,
   textAlign: 'left',
   whiteSpace: 'nowrap',
-  fontWeight: tokens.semantic.typography.fontWeight.medium,
 });
 
 export const header = style({ height: '30px', width: '100%' });

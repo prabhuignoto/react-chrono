@@ -34,6 +34,7 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
         active ? 'active' : '',
         classString,
         cardTitleRecipe({ active: !!active }),
+        titleWrapper, // Add the base CSS class that includes Google Fonts styling
       ),
     [active, classString],
   );
@@ -46,7 +47,6 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
       className={titleClass}
       style={{
         ...computeCssVarsFromTheme(theme, isDarkMode),
-        fontSize: fontSizes?.title || '1rem',
         textAlign: align || undefined,
         visibility: title ? 'visible' : 'hidden',
       }}

@@ -109,6 +109,7 @@ function convertToLegacyProps(props: TimelinePropsV2): TimelineProps {
     // Style props
     classNames: props.style?.classNames,
     fontSizes: props.style?.fontSizes,
+    googleFonts: props.style?.googleFonts,
     
     // Accessibility props
     buttonTexts: props.accessibility?.buttonTexts as any,

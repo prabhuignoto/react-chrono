@@ -83,10 +83,7 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
           style={{ width: selectable ? 'calc(100% - 2rem)' : '100%' }}
         >
           <h1 className={title}>{title}</h1>
-          <p
-            className={description}
-            style={{ color: theme?.cardSubtitleColor || '#666' }}
-          >
+          <p className={description}>
             {description}
           </p>
         </div>

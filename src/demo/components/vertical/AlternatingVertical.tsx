@@ -66,6 +66,17 @@ export const AlternatingVertical: FunctionComponent<AlternatingVerticalProps> = 
           showToggle: true,
         }}
         
+        googleFonts={{
+          fontFamily: 'Lato',
+          elements: {
+            title: { weight: 'bold', style: 'normal', size: '2rem' },
+            cardTitle: { weight: 'semi-bold', style: 'normal', size: '1.1rem' },
+            cardSubtitle: { weight: 'normal', style: 'normal', size: '0.9rem' },
+            cardText: { weight: 'light', style: 'normal', size: '0.85rem' },
+            controls: { weight: 'medium', style: 'normal', size: '0.8rem' },
+          }
+        }}
+        
         {...pickDefined({ children })}
       />
     </div>

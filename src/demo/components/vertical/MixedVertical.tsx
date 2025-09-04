@@ -23,15 +23,48 @@ export const MixedVertical: FunctionComponent<MixedVerticalProps> = ({
       <Chrono
         items={mixedTimeline}
         mode="VERTICAL"
-        cardHeight={cardHeight ?? 300}
-        cardWidth={550}
-        timelineHeight="80vh"
-        scrollable
-        slideShow
-        slideItemDuration={2500}
-        enableDarkToggle
-        parseDetailsAsHTML
-        stickyToolbar={true}
+        
+        layout={{
+          cardHeight: cardHeight ?? 300,
+          cardWidth: 550,
+          timelineHeight: "80vh",
+          scrollable: true,
+        }}
+        
+        animation={{
+          slideshow: {
+            enabled: true,
+            duration: 2500,
+          },
+        }}
+        
+        darkMode={{
+          showToggle: true,
+        }}
+        
+        content={{
+          allowHTML: true,
+        }}
+        
+        display={{
+          toolbar: {
+            enabled: true,
+            sticky: true,
+          },
+        }}
+        
+        style={{
+          googleFonts: {
+            fontFamily: 'Source Sans Pro',
+            elements: {
+              title: { weight: 'bold', style: 'normal', size: '3rem' },
+              cardTitle: { weight: 'semi-bold', style: 'normal', size: '1.4rem' },
+              cardSubtitle: { weight: 'normal', style: 'italic', size: '1.1rem' },
+              cardText: { weight: 'light', style: 'normal', size: '1rem' },
+              controls: { weight: 'medium', style: 'normal', size: '0.9rem' },
+            }
+          }
+        }}
       />
     </div>
   </div>

@@ -3,6 +3,7 @@ import React from 'react';
 // Replaced styled component with semantic tag + classes
 import { Content } from './memoized-model';
 import { useTimelineContext } from '../../contexts';
+import { subtitleStyles } from '../../../styles/system/font-styles.css';
 
 /**
  * Renders the subtitle content for the timeline card using configurable semantic tags.
@@ -16,9 +17,9 @@ const SubTitleMemo = React.memo<Content>(
     const Tag: any = semanticTags?.cardSubtitle ?? 'span';
     return content ? (
       <Tag
-        style={{ color, fontSize }}
+        style={{ color }}
         dir={dir}
-        className={cls('card-sub-title', classString)}
+        className={cls(subtitleStyles.card, 'card-sub-title', classString)}
       >
         {content}
       </Tag>

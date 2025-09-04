@@ -15,6 +15,7 @@ import { useTimelineNavigation } from '../../hooks/useTimelineNavigation';
 import { useTimelineMode } from '../../hooks/useTimelineMode';
 import { useTimelineScroll } from '../../hooks/useTimelineScroll';
 import { useTimelineMedia } from '../../hooks/useTimelineMedia';
+import { FontProvider } from '../fonts/font-provider';
 import TimelineView from './TimelineView';
 
 // Disable TypeScript checking for the Timeline component
@@ -76,6 +77,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     cardPositionHorizontal,
     updateShowAllCardsHorizontal: updateHorizontalAllCards,
     updateTextContentDensity,
+    
+    // Font properties
+    googleFonts,
   } = useTimelineContext();
 
 
@@ -585,31 +589,32 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   );
 
   return (
-    <div
-      ref={wrapperRef}
-      onKeyDown={handleKeyDown}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      className={`timeline-wrapper ${mode.toLowerCase()} ${ve.wrapper} ${darkMode ? darkThemeClass : lightThemeClass}`}
-      style={{
-        ...themeCssVars,
-        height: wrapperHeight,
-      }}
-      data-fullscreen={isFullscreen}
-      data-keyboard-focus={isKeyboardNavigation}
-      data-toolbar-navigation={isToolbarNavigation}
-      onMouseDown={() => setHasFocus(true)}
-      onKeyUp={(evt) => {
-        if (evt.key === 'Escape') {
-          onPaused?.();
-        }
-      }}
-      tabIndex={isChild ? -1 : 0}
-      role="region"
-      aria-label="Timeline"
-      aria-live="polite"
-      aria-atomic="false"
-    >
+    <FontProvider googleFonts={googleFonts}>
+      <div
+        ref={wrapperRef}
+        onKeyDown={handleKeyDown}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        className={`timeline-wrapper ${mode.toLowerCase()} ${ve.wrapper} ${darkMode ? darkThemeClass : lightThemeClass}`}
+        style={{
+          ...themeCssVars,
+          height: wrapperHeight,
+        }}
+        data-fullscreen={isFullscreen}
+        data-keyboard-focus={isKeyboardNavigation}
+        data-toolbar-navigation={isToolbarNavigation}
+        onMouseDown={() => setHasFocus(true)}
+        onKeyUp={(evt) => {
+          if (evt.key === 'Escape') {
+            onPaused?.();
+          }
+        }}
+        tabIndex={isChild ? -1 : 0}
+        role="region"
+        aria-label="Timeline"
+        aria-live="polite"
+        aria-atomic="false"
+      >
       {canShowToolbar && (
         <TimelineToolbar
           activeTimelineItem={activeTimelineItem}
@@ -728,7 +733,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           } as React.CSSProperties
         }
       />
-    </div>
+      </div>
+    </FontProvider>
   );
 };
 

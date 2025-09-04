@@ -62,6 +62,17 @@ export const BasicHorizontal: FunctionComponent<BasicHorizontalProps> = ({
           darkMode={{
             showToggle: true,
           }}
+          
+          googleFonts={{
+            fontFamily: 'Roboto',
+            elements: {
+              title: { weight: 'bold', style: 'normal', size: '2.5rem' },
+              cardTitle: { weight: 'medium', style: 'normal', size: '1.3rem' },
+              cardSubtitle: { weight: 'normal', style: 'normal', size: '1rem' },
+              cardText: { weight: 'light', style: 'normal', size: '0.9rem' },
+              controls: { weight: 'medium', style: 'normal', size: '0.85rem' },
+            }
+          }}
         >
           <div className="chrono-icons">
             <img src="color-circle.svg" alt="github" />

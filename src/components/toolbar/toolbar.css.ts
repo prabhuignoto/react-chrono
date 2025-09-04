@@ -6,6 +6,9 @@ import { sprinkles } from '../../styles/system/sprinkles.css';
 import { baseStyles, mediaQueries } from '../../styles/system/static.css';
 import { patterns } from '../../styles/system/recipes.css';
 
+// Base font family with proper CSS custom property fallback for Google Fonts
+const baseFontFamily = `var(--timeline-font-family, 'Inter, system-ui, ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif')`;
+
 // Updated toolbar wrapper using new unified system
 export const toolbarWrapper = recipe({
   base: [
@@ -267,7 +270,7 @@ export const searchWrapper = style([
   },
 ]);
 
-// Search input using new typography tokens
+// Search input using new typography tokens and Google Fonts integration
 export const searchInput = style([
   patterns.text({ variant: 'body' }),
   {
@@ -276,7 +279,10 @@ export const searchInput = style([
     outline: 'none',
     background: 'transparent',
     color: tokens.semantic.color.text.primary,
-    fontSize: tokens.semantic.typography.fontSize.body,
+    fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
+    fontSize: `var(--timeline-controls-font-size, ${tokens.semantic.typography.fontSize.body})`,
+    fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.normal})`,
+    fontStyle: `var(--timeline-controls-font-style, normal)`,
     padding: tokens.semantic.spacing.xs,
     minWidth: 0,
     
@@ -284,7 +290,9 @@ export const searchInput = style([
       '&::placeholder': {
         color: tokens.semantic.color.text.muted,
         opacity: 0.7,
-        fontWeight: tokens.semantic.typography.fontWeight.normal,
+        fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
+        fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.normal})`,
+        fontStyle: `var(--timeline-controls-font-style, normal)`,
       },
       '&:focus': {
         outline: 'none',
@@ -299,14 +307,17 @@ export const searchInput = style([
   },
 ]);
 
-// Search info text
+// Search info text with Google Fonts integration
 export const searchInfo = style([
   patterns.text({ variant: 'caption', color: 'muted' }),
   {
     margin: `0 ${tokens.semantic.spacing.xs}`,
     whiteSpace: 'nowrap',
     flexShrink: 0,
-    fontWeight: tokens.semantic.typography.fontWeight.medium,
+    fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
+    fontSize: `var(--timeline-controls-font-size, ${tokens.semantic.typography.fontSize.caption})`,
+    fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.medium})`,
+    fontStyle: `var(--timeline-controls-font-style, normal)`,
     
     '@media': {
       'screen and (max-width: 767px)': {

@@ -3,12 +3,17 @@ import { tokens } from '../../../styles/tokens/index.css';
 import { recipe } from '@vanilla-extract/recipes';
 import { sprinkles } from '../../../styles/system/sprinkles.css';
 
+// Base font family with proper CSS custom property fallback for Google Fonts
+const baseFontFamily = `var(--timeline-font-family, 'Inter, system-ui, ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif')`;
+
 export const titleWrapper = style([
   sprinkles({ px: 'xs', py: 'xs' }),
   {
     borderRadius: '0.2rem',
-    fontSize: '1rem',
-    fontWeight: 600,
+    fontFamily: `var(--timeline-title-font-family, ${baseFontFamily})`,
+    fontSize: `var(--timeline-title-font-size, 1rem)`,
+    fontWeight: `var(--timeline-title-font-weight, 600)`,
+    fontStyle: `var(--timeline-title-font-style, normal)`,
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',

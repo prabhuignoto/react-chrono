@@ -8,7 +8,7 @@ import { style, styleVariants } from '@vanilla-extract/css';
 import { tokens } from '../tokens/index.css';
 
 // Base font family with CSS custom property fallback
-const baseFontFamily = `var(--timeline-font-family, ${tokens.semantic.typography.fontFamily.default})`;
+const baseFontFamily = `var(--timeline-font-family, 'Inter, system-ui, ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif')`;
 
 // Base typography styles
 export const typography = {

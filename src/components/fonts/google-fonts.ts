@@ -196,6 +196,9 @@ export function generateFontCssVars(config: GoogleFontsConfig): Record<string, s
     Object.entries(config.elements).forEach(([elementType, elementConfig]) => {
       const prefix = `--timeline-${elementType}`;
       
+      // Set element-specific font family (inherits from base font family)
+      cssVars[`${prefix}-font-family`] = cssVars['--timeline-font-family'];
+      
       if (elementConfig.weight) {
         const numericWeight = normalizeFontWeight(elementConfig.weight);
         cssVars[`${prefix}-font-weight`] = numericWeight.toString();

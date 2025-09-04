@@ -30,7 +30,7 @@ globalStyle('html', {
 globalStyle('body', {
   backgroundColor: tokens.semantic.color.background.primary,
   color: tokens.semantic.color.text.primary,
-  fontFamily: 'Inter, system-ui, ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  fontFamily: `var(--timeline-font-family, 'Inter, system-ui, ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif')`,
   fontSize: tokens.semantic.typography.fontSize.body,
   lineHeight: tokens.semantic.typography.lineHeight.normal,
   fontWeight: tokens.semantic.typography.fontWeight.normal,
