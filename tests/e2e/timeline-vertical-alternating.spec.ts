@@ -19,21 +19,21 @@ test.describe('Chrono.Vertical.Alternating', () => {
   });
 
   test('should display timeline title for first item', async ({ page }) => {
-    const titleElement = page.locator('.vertical-item-row>div').nth(1).last();
+    const titleElement = page.locator('.vertical-item-row').first().locator('.timeline-item-title');
     await expect(titleElement).toContainText('May 1940');
   });
 
   test('should display correct timeline card contents', async ({ page }) => {
     const cardContent = page.locator('.vertical-item-row').nth(3);
     
-    await expect(cardContent.locator('[data-class=""]')).toContainText('Pearl Harbor');
+    await expect(cardContent.locator('.rc-card-title')).toContainText('Pearl Harbor');
     await expect(cardContent.locator('.card-sub-title')).toContainText(
       'The destroyer USS Shaw explodes in dry dock after being hit by Japanese aircraft'
     );
   });
 
   test('should display correct card title', async ({ page }) => {
-    const cardTitle = page.locator('.vertical-item-row').nth(0).locator('[data-class=""]');
+    const cardTitle = page.locator('.vertical-item-row').nth(0).locator('.rc-card-title');
     await expect(cardTitle).toContainText('Dunkirk');
   });
 
@@ -102,21 +102,21 @@ test.describe('Chrono.Vertical.Alternating.Mixed', () => {
   });
 
   test('should display timeline title for first item', async ({ page }) => {
-    const titleElement = page.locator('.vertical-item-row>div').nth(1).last();
+    const titleElement = page.locator('.vertical-item-row').first().locator('.timeline-item-title');
     await expect(titleElement).toContainText('May 1940');
   });
 
   test('should display correct timeline card contents', async ({ page }) => {
     const cardContent = page.locator('.vertical-item-row').nth(3);
     
-    await expect(cardContent.locator('[data-class=""]')).toContainText('Pearl Harbor');
+    await expect(cardContent.locator('.rc-card-title')).toContainText('Pearl Harbor');
     await expect(cardContent.locator('.card-sub-title')).toContainText(
       'The destroyer USS Shaw explodes in dry dock after being hit by Japanese aircraft'
     );
   });
 
   test('should display correct card title', async ({ page }) => {
-    const cardTitle = page.locator('.vertical-item-row').nth(0).locator('[data-class=""]');
+    const cardTitle = page.locator('.vertical-item-row').nth(0).locator('.rc-card-title');
     await expect(cardTitle).toContainText('Dunkirk');
   });
 

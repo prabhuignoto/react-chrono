@@ -52,18 +52,14 @@ test.describe('Timeline Cardless and Nested Features', () => {
     test('should maintain timeline structure without cards', async ({ page }) => {
       await test.step('Verify timeline structure integrity', async () => {
         // Check for timeline points/markers
-        const timelinePoints = page.locator(
-          '.timeline-point, .timeline-marker, [class*="point"], [class*="marker"]'
-        );
+        const timelinePoints = page.locator('[data-testid="tree-leaf"]');
         
         if (await timelinePoints.count() > 0) {
           await expect(timelinePoints.first()).toBeVisible();
         }
         
         // Check for timeline line/connector
-        const timelineLine = page.locator(
-          '.timeline-line, .timeline-connector, [class*="line"], [class*="connector"]'
-        );
+        const timelineLine = page.locator('[data-testid="tree-main"]');
         
         if (await timelineLine.count() > 0) {
           await expect(timelineLine.first()).toBeVisible();

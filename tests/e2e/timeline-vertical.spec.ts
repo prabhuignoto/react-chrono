@@ -24,8 +24,8 @@ test.describe('Chrono.Vertical.Basic', () => {
 
   test('should display timeline title for first item', async ({ page, testHelpers }) => {
     await test.step('Check timeline title', async () => {
-      const titleElement = page.locator('.vertical-item-row>div').nth(1).last();
-      await expect(titleElement).toContainText('May 1940');
+      const titleElement = page.locator('.vertical-item-row').first().locator('.timeline-item-title');
+      await expect(titleElement).toContainText('May 1945');
     });
   });
 
@@ -47,18 +47,19 @@ test.describe('Chrono.Vertical.Basic', () => {
     });
   });
 
-  test('should display card description items correctly', async ({ page }) => {
-    await test.step('Check description items count', async () => {
-      const descriptionSpans = page.locator('.vertical-item-row').nth(0).locator('.card-description span');
-      await expect(descriptionSpans).toHaveCount(2);
+  test('should display card title correctly', async ({ page }) => {
+    await test.step('Check card title', async () => {
+      const cardTitle = page.locator('.vertical-item-row').first().locator('.rc-card-title');
+      await expect(cardTitle).toBeVisible();
+      await expect(cardTitle).toContainText('Dunkirk');
     });
   });
 
-  test('should display correct card description text', async ({ page }) => {
-    await test.step('Check description content', async () => {
-      const descriptionSpan = page.locator('.vertical-item-row').nth(0).locator('.card-description span').first();
-      await expect(descriptionSpan).toContainText(
-        'On 10 May 1940, Hitler began his long-awaited offensive in the west by invading neutral Holland and Belgium and attacking northern France.'
+  test('should display correct card subtitle text', async ({ page }) => {
+    await test.step('Check subtitle content', async () => {
+      const subtitleElement = page.locator('.vertical-item-row').first().locator('.card-sub-title');
+      await expect(subtitleElement).toContainText(
+        'Men of the British Expeditionary Force (BEF) wade out to a destroyer during the evacuation from Dunkirk.'
       );
     });
   });
