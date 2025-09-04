@@ -64,25 +64,14 @@ export const useTimelineScroll = ({
             onScrollEndRef.current();
           }
 
-          // Handle timeline navigation for tall cards (disable during keyboard navigation)
+          // Disabled auto-navigation feature to prevent unwanted timeline jumping
+          // Users should navigate explicitly via keyboard/buttons only
+          // Original auto-navigation caused issues with scrolling to bottom/top
+          /* 
           if (onNextItemRef.current && onPreviousItemRef.current && activeItemIndex && totalItems && !isKeyboardNavigation) {
-            const currentIndex = activeItemIndex.current;
-            // Navigate to next item when scrolled to bottom (if not last item)
-            if (isAtBottom && currentIndex < totalItems - 1) {
-              // Only navigate if the content actually overflows (indicating tall content)
-              if (target.scrollHeight > target.clientHeight + 10) { // 10px threshold
-                onNextItemRef.current();
-              }
-            }
-            
-            // Navigate to previous item when scrolled to top (if not first item)  
-            if (isAtTop && currentIndex > 0) {
-              // Only navigate if the content actually overflows and we're not at the natural top
-              if (target.scrollHeight > target.clientHeight + 10 && target.scrollTop === 0) {
-                onPreviousItemRef.current();
-              }
-            }
+            // Auto-navigation logic removed to prevent unwanted jumps
           }
+          */
         } else {
           // Horizontal mode - existing functionality
           const scrolled = target.scrollLeft + target.offsetWidth;
@@ -90,24 +79,13 @@ export const useTimelineScroll = ({
             onScrollEndRef.current();
           }
 
-          // Handle horizontal timeline navigation for wide cards (disable during keyboard navigation)
+          // Disabled horizontal auto-navigation to prevent unwanted timeline jumping
+          // Users should navigate explicitly via keyboard/buttons only
+          /*
           if (onNextItemRef.current && onPreviousItemRef.current && activeItemIndex && totalItems && !isKeyboardNavigation) {
-            const currentIndex = activeItemIndex.current;
-            const isAtRight = target.scrollLeft + target.offsetWidth >= target.scrollWidth - 1;
-            const isAtLeft = target.scrollLeft <= 1;
-
-            if (isAtRight && currentIndex < totalItems - 1) {
-              if (target.scrollWidth > target.offsetWidth + 10) {
-                onNextItemRef.current();
-              }
-            }
-            
-            if (isAtLeft && currentIndex > 0) {
-              if (target.scrollWidth > target.offsetWidth + 10 && target.scrollLeft === 0) {
-                onPreviousItemRef.current();
-              }
-            }
+            // Horizontal auto-navigation logic removed to prevent unwanted jumps
           }
+          */
         }
       }, 16), // Throttle to 60fps for smooth scrolling
     [mode, totalItems, isKeyboardNavigation],

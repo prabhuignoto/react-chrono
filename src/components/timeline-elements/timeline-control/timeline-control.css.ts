@@ -58,7 +58,7 @@ export const navButton = style({
   '@media': {
     '(max-width: 480px)': {
       height: '44px',
-      width: '44px',
+      width: '44px',  
       minWidth: '44px',
       // Ensure touch targets are at least 44x44px
     },
@@ -69,18 +69,20 @@ export const navButtonRotate = style({ transform: 'rotate(90deg)' });
 
 export const navButtonHover = style({});
 globalStyle(`${navButton}:hover:not(:disabled)`, {
-  background: tokens.semantic.color.interactive.muted,
-  borderColor: tokens.semantic.color.border.interactive,
-  boxShadow: tokens.semantic.shadow.cardHover,
-  transform: 'translateY(-1px)',
+  background: `${tokens.semantic.color.interactive.primary}08`,
+  borderColor: `${tokens.semantic.color.interactive.primary}40`,
+  boxShadow: `0 4px 12px -2px ${tokens.semantic.color.interactive.primary}20, 0 2px 6px -1px rgba(0, 0, 0, 0.1)`,
+  transform: 'translateY(-2px)',
   color: tokens.semantic.color.interactive.primary,
 });
 
 export const navButtonActive = style({});
 globalStyle(`${navButton}:active:not(:disabled)`, {
-  transform: 'translateY(0) scale(0.97)',
-  background: tokens.semantic.color.interactive.muted,
-  boxShadow: tokens.semantic.shadow.card,
+  transform: 'translateY(0) scale(0.96)',
+  background: `${tokens.semantic.color.interactive.primary}12`,
+  borderColor: `${tokens.semantic.color.interactive.primary}60`,
+  boxShadow: `inset 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 4px -1px ${tokens.semantic.color.interactive.primary}30`,
+  color: tokens.semantic.color.interactive.primary,
 });
 
 export const navButtonFocus = style({});
@@ -93,7 +95,7 @@ globalStyle(`${navButton}:focus:not(:focus-visible)`, { outline: 'none' });
 export const navButtonSvg = style({
   width: '1.25rem', // 20px - standardized button icon size
   height: '1.25rem',
-  color: tokens.semantic.color.text.secondary,
+  color: 'inherit', // Inherit color from parent button
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

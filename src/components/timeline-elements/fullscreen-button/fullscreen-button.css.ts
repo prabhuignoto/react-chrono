@@ -30,15 +30,18 @@ export const baseButton = style([
     
     selectors: {
       '&:hover:not(:disabled)': {
+        background: `${tokens.semantic.color.interactive.primary}08`,
+        borderColor: `${tokens.semantic.color.interactive.primary}40`,
+        boxShadow: `0 4px 12px -2px ${tokens.semantic.color.interactive.primary}20, 0 2px 6px -1px rgba(0, 0, 0, 0.1)`,
+        transform: 'translateY(-2px)',
         color: tokens.semantic.color.interactive.primary,
-        backgroundColor: tokens.semantic.color.interactive.muted,
-        borderColor: tokens.semantic.color.border.interactive,
-        boxShadow: tokens.semantic.shadow.cardHover,
-        transform: 'translateY(-1px)',
       },
       '&:active:not(:disabled)': {
-        transform: 'translateY(0)',
-        boxShadow: tokens.semantic.shadow.cardActive,
+        transform: 'translateY(0) scale(0.96)',
+        background: `${tokens.semantic.color.interactive.primary}12`,
+        borderColor: `${tokens.semantic.color.interactive.primary}60`,
+        boxShadow: `inset 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 4px -1px ${tokens.semantic.color.interactive.primary}30`,
+        color: tokens.semantic.color.interactive.primary,
       },
       '&:focus-visible': {
         outline: `2px solid ${tokens.semantic.color.border.interactive}`,

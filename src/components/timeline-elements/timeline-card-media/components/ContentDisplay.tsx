@@ -8,6 +8,7 @@ import {
   mediaDetailsGradient,
   mediaDetailsMinimized,
   mediaDetailsMaximized,
+  textOverlayButton,
 } from '../timeline-card-media.css';
 import { gradientVar } from '../timeline-card-media.css';
 import { TitleMemo } from '../../memoized/title-memo';
@@ -114,31 +115,10 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
                   e.stopPropagation();
                   toggleMinimize();
                 }}
-                style={{
-                  background: theme?.primary || '#2563eb',
-                  border: 'none',
-                  color: '#ffffff',
-                  cursor: 'pointer',
-                  padding: '0.5rem',
-                  borderRadius: '6px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '32px',
-                  height: '32px',
-                  transition: 'all 0.2s ease-in-out',
-                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'scale(1.05)';
-                  e.currentTarget.style.boxShadow =
-                    '0 4px 8px rgba(0, 0, 0, 0.15)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.boxShadow =
-                    '0 2px 4px rgba(0, 0, 0, 0.1)';
-                }}
+                className={textOverlayButton}
+                style={theme ? assignInlineVars({
+                  [gradientVar]: theme?.primary || theme?.cardBgColor || '',
+                }) : undefined}
                 aria-label={
                   isMinimized ? 'Expand text overlay' : 'Minimize text overlay'
                 }

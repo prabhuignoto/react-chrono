@@ -32,7 +32,7 @@ export const listItem = style([
     background: tokens.semantic.color.background.elevated,
     borderRadius: tokens.semantic.borderRadius.sm,
     boxShadow: tokens.semantic.shadow.card,
-    padding: tokens.semantic.spacing.sm,
+    padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`, // Reduced vertical padding
     border: `1px solid ${tokens.semantic.color.border.default}`,
     transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
     
@@ -42,6 +42,12 @@ export const listItem = style([
         borderColor: tokens.semantic.color.border.interactive,
         boxShadow: tokens.semantic.shadow.cardHover,
         transform: 'translateY(-1px)',
+        backgroundColor: `${tokens.semantic.color.interactive.primary}05`,
+      },
+      '&:active': {
+        transform: 'translateY(0px) scale(0.98)',
+        backgroundColor: `${tokens.semantic.color.interactive.primary}10`,
+        borderColor: tokens.semantic.color.interactive.primary,
       },
     },
   },

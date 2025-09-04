@@ -550,7 +550,7 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
           id="testette"
         >
           <Timeline
-            activeTimelineItem={activeTimelineItem ?? 0}
+            activeTimelineItem={activeTimelineItem}
             contentDetailsChildren={contentDetailsChildren}
             iconChildren={iconChildren}
             items={timeLineItems}

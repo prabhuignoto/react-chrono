@@ -85,10 +85,16 @@ globalStyle(`${wrapper.classNames.base}[data-keyboard-navigation="true"] :focus-
   borderRadius: tokens.semantic.borderRadius.sm,
 });
 
-globalStyle(`${wrapper.classNames.base}[data-keyboard-navigation="true"] [data-testid="vertical-item-row"]:focus`, {
+// Focus outline should only appear on the timeline card, not the entire vertical item row
+globalStyle(`${wrapper.classNames.base}[data-keyboard-navigation="true"] [data-testid="vertical-item-row"]:focus .timeline-card-content`, {
   outline: `2px solid ${tokens.semantic.color.border.interactive}`,
   outlineOffset: '2px',
   borderRadius: tokens.semantic.borderRadius.sm,
+});
+
+// Remove outline from vertical-item-row itself
+globalStyle(`${wrapper.classNames.base}[data-keyboard-navigation="true"] [data-testid="vertical-item-row"]:focus`, {
+  outline: 'none',
 });
 
 // Fullscreen styles with theme support

@@ -5,7 +5,7 @@ import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { useTimelineContext } from '../contexts';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
-import * as ve from './timeline.css';
+import * as ve from './timeline-new.css';
 // Note: Removed unused imports from timeline-main.css
 import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
 import { lightThemeClass, darkThemeClass } from '../../styles/themes.css';
@@ -85,6 +85,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const [isToolbarNavigation, setIsToolbarNavigation] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const keyboardTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Listen to native fullscreen change events to keep state in sync
   useEffect(() => {
@@ -123,6 +124,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         'msfullscreenchange',
         handleFullscreenChange,
       );
+      // Cleanup keyboard timeout
+      if (keyboardTimeoutRef.current) {
+        clearTimeout(keyboardTimeoutRef.current);
+        keyboardTimeoutRef.current = null;
+      }
     };
   }, []);
 
@@ -424,6 +430,15 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           setIsKeyboardNavigation(true);
           setIsToolbarNavigation(false);
           handleKeySelection(evt);
+          
+          // Clear keyboard navigation flag after scroll animation completes
+          if (keyboardTimeoutRef.current) {
+            clearTimeout(keyboardTimeoutRef.current);
+          }
+          keyboardTimeoutRef.current = setTimeout(() => {
+            setIsKeyboardNavigation(false);
+            keyboardTimeoutRef.current = null;
+          }, 400); // Slightly longer than scroll animation (300ms)
         }
       }
     },
@@ -597,7 +612,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     >
       {canShowToolbar && (
         <TimelineToolbar
-          activeTimelineItem={activeTimelineItem ?? 0}
+          activeTimelineItem={activeTimelineItem}
           totalItems={items.length}
           slideShowEnabled={!!slideShowEnabled}
           slideShowRunning={!!slideShowRunning}
@@ -657,7 +672,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
       <div
         ref={timelineMainRef}
-        className={`timeline-main-wrapper ${mode.toLowerCase()} ${ve.timelineMainWrapper(
+        className={`timeline-main-wrapper ${mode.toLowerCase()} ${ve.mainWrapper(
           {
             mode:
               mode === 'VERTICAL'
@@ -676,7 +691,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       >
         <TimelineView
           timelineMode={timelineMode}
-          activeTimelineItem={activeTimelineItem ?? 0}
+          activeTimelineItem={activeTimelineItem}
           autoScroll={handleScroll}
           contentDetailsChildren={contentDetailsChildren}
           hasFocus={hasFocus}
@@ -696,7 +711,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       <div
         id={id}
         ref={horizontalContentRef}
-        className={`timeline-content-render ${ve.timelineContentRender({
+        className={`timeline-content-render ${ve.contentRenderer({
           mode:
             timelineMode === 'HORIZONTAL_ALL'
               ? 'horizontalAll'

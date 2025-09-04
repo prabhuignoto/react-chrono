@@ -65,7 +65,6 @@ export const componentContainerTree = style({
   height: '300px',
   margin: '0 auto',
   width: "100%",
-  border: '1px solid #ccc',
 });
 
 export const componentContainerTreeDesktop = style([

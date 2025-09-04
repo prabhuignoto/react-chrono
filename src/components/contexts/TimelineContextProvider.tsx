@@ -162,6 +162,19 @@ const TimelineContext = createContext<TimelineContextValue | null>(null);
 export interface TimelineContextProviderProps
   extends Omit<Partial<TimelinePropsModel>, 'children'> {
   children: React.ReactNode;
+  googleFonts?: {
+    fontFamily: string;
+    elements?: {
+      title?: { weight?: any; style?: any; size?: string; };
+      cardTitle?: { weight?: any; style?: any; size?: string; };
+      cardSubtitle?: { weight?: any; style?: any; size?: string; };
+      cardText?: { weight?: any; style?: any; size?: string; };
+      controls?: { weight?: any; style?: any; size?: string; };
+    };
+    weights?: any[];
+    display?: string;
+    preconnect?: boolean;
+  };
 }
 
 export const TimelineContextProvider: FunctionComponent<
@@ -360,6 +373,48 @@ export const TimelineContextProvider: FunctionComponent<
     }),
     [fontSizes],
   );
+
+  // Google Fonts integration
+  const googleFontsConfig = useMemo(() => {
+    if (!fontSizes && !props.googleFonts) return null;
+    
+    // If we have both fontSizes and googleFonts, merge them
+    if (props.googleFonts) {
+      return {
+        ...props.googleFonts,
+        elements: {
+          ...props.googleFonts.elements,
+          // Override sizes from fontSizes if provided
+          ...(memoizedFontSizes.title && {
+            title: { 
+              ...props.googleFonts.elements?.title,
+              size: memoizedFontSizes.title 
+            }
+          }),
+          ...(memoizedFontSizes.cardTitle && {
+            cardTitle: { 
+              ...props.googleFonts.elements?.cardTitle,
+              size: memoizedFontSizes.cardTitle 
+            }
+          }),
+          ...(memoizedFontSizes.cardSubtitle && {
+            cardSubtitle: { 
+              ...props.googleFonts.elements?.cardSubtitle,
+              size: memoizedFontSizes.cardSubtitle 
+            }
+          }),
+          ...(memoizedFontSizes.cardText && {
+            cardText: { 
+              ...props.googleFonts.elements?.cardText,
+              size: memoizedFontSizes.cardText 
+            }
+          }),
+        }
+      };
+    }
+    
+    return null;
+  }, [props.googleFonts, memoizedFontSizes]);
 
   const memoizedMediaSettings = useMemo(
     () => ({

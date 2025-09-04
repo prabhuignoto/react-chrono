@@ -34,6 +34,9 @@ export const wrapper = recipe({
       alternating: sprinkles({
         justifyContent: 'flex-start',
       }),
+      horizontalAll: sprinkles({
+        justifyContent: 'flex-start',
+      }),
     },
     fullscreen: {
       true: {
@@ -86,6 +89,9 @@ export const mainWrapper = recipe({
       vertical: {
         minHeight: '500px',
         flexDirection: 'column',
+        height: 0,
+        overflowY: 'auto',
+        overflowX: 'hidden',
       },
       horizontal: {
         minHeight: '150px',
@@ -93,9 +99,18 @@ export const mainWrapper = recipe({
         alignItems: 'center',
         justifyContent: 'center',
       },
+      horizontalAll: {
+        minHeight: '200px',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+      },
       alternating: {
         minHeight: '500px',
         flexDirection: 'column',
+        height: 0,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        border: "1px solid red"
       },
     },
   },
@@ -145,6 +160,16 @@ export const contentRenderer = recipe({
         flexDirection: 'column',
         scrollSnapType: 'y mandatory',
       },
+      horizontalAll: {
+        minHeight: `calc(${tokens.component.timeline.card.width.horizontal} + 120px)`,
+        padding: `${tokens.semantic.spacing.xl} ${tokens.semantic.spacing.md}`,
+        paddingTop: tokens.semantic.spacing.lg,
+        paddingBottom: `calc(${tokens.semantic.spacing.xl} + ${tokens.semantic.spacing.lg})`,
+        scrollSnapType: 'x mandatory',
+        overflowX: 'auto',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+      },
     },
   },
   defaultVariants: {
@@ -191,6 +216,16 @@ export const main = recipe({
         width: '100%',
         height: '100%',
         flexDirection: 'column',
+        position: 'static',
+        transform: 'none',
+      },
+      horizontalAll: {
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        width: '100%',
+        height: '100%',
+        overflowX: 'auto',
         position: 'static',
         transform: 'none',
       },

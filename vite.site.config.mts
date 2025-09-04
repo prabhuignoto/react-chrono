@@ -8,18 +8,36 @@ export default defineConfig({
     outDir: 'dist_site',
     sourcemap: true,
   },
+  css: {
+    devSourcemap: true,
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react/jsx-runtime'],
+    exclude: ['@vanilla-extract/css', '@vanilla-extract/dynamic'],
+  },
   plugins: [
-    vanillaExtractPlugin({ identifiers: process.env.NODE_ENV === 'production' ? 'short' : 'debug' }),
-    react(),
-    tsconfig(),
+    vanillaExtractPlugin({ 
+      identifiers: process.env.NODE_ENV === 'production' ? 'short' : 'debug',
+    }),
+    react({
+      include: "**/*.{jsx,tsx}",
+    }),
+    tsconfig({
+      projects: ['./tsconfig.dev.json']
+    }),
   ],
   root: './',
   server: {
     port: 4444,
+    hmr: {
+      overlay: true,
+    },
     watch: {
+      usePolling: process.platform === 'win32',
       ignored: [
         'node_modules',
         'dist',
+        'dist_site',
         'build',
         'public',
         'package.json',
@@ -27,6 +45,7 @@ export default defineConfig({
         'tsconfig.json',
         'vite.config.mts',
         'yarn.lock',
+        'pnpm-lock.yaml',
       ],
     },
     open: true,

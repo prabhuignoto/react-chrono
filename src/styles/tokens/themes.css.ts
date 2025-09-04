@@ -211,7 +211,7 @@ export const lightTheme = createTheme(tokens, {
     zIndex: {
       timelineCard: '10',
       controls: '1000',
-      popover: '1100',
+      popover: '9999',
       outline: '50',
     },
     motion: {
@@ -479,7 +479,7 @@ export const darkTheme = createTheme(tokens, {
     zIndex: {
       timelineCard: '10',
       controls: '1000',
-      popover: '1100',
+      popover: '9999',
       outline: '50',
     },
     motion: {

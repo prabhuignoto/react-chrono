@@ -146,13 +146,49 @@ globalStyle(`${mediaDetailsGradient}::after`, {
 });
 
 export const errorMessage = style({
-  color: '#a3a3a3',
+  color: tokens.semantic.color.text.muted,
   left: '50%',
   position: 'absolute',
   textAlign: 'center',
   top: '50%',
   transform: 'translateY(-50%) translateX(-50%)',
 });
+
+// Text overlay toggle button
+export const textOverlayButton = style([
+  patterns.toolbarButton(),
+  {
+    background: tokens.semantic.color.interactive.primary,
+    border: 'none',
+    color: tokens.semantic.color.text.inverse,
+    cursor: 'pointer',
+    padding: tokens.semantic.spacing.xs,
+    borderRadius: tokens.semantic.borderRadius.md,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '32px',
+    height: '32px',
+    transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+    boxShadow: tokens.semantic.shadow.card,
+    
+    selectors: {
+      '&:hover': {
+        background: tokens.semantic.color.interactive.primaryHover,
+        transform: 'scale(1.05)',
+        boxShadow: tokens.semantic.shadow.cardHover,
+      },
+      '&:active': {
+        transform: 'scale(0.95)',
+        background: tokens.semantic.color.interactive.primaryActive,
+      },
+      '&:focus-visible': {
+        outline: `2px solid ${tokens.semantic.color.interactive.primary}`,
+        outlineOffset: '2px',
+      },
+    },
+  },
+]);
 
 export const iframeVideo = style({
   position: 'relative',

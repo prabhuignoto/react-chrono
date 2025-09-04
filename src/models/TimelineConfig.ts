@@ -188,6 +188,55 @@ export interface StyleConfig {
     cardTitle?: string;
     title?: string;
   };
+
+  /** Google Fonts configuration */
+  googleFonts?: {
+    /** Primary font family name from Google Fonts */
+    fontFamily: string;
+    
+    /** Font configurations for different text elements */
+    elements?: {
+      /** Timeline item titles */
+      title?: {
+        weight?: 'thin' | 'extra-light' | 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold' | 'extra-bold' | 'black' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+        style?: 'normal' | 'italic';
+        size?: string;
+      };
+      /** Timeline card titles */
+      cardTitle?: {
+        weight?: 'thin' | 'extra-light' | 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold' | 'extra-bold' | 'black' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+        style?: 'normal' | 'italic';
+        size?: string;
+      };
+      /** Timeline card subtitles */
+      cardSubtitle?: {
+        weight?: 'thin' | 'extra-light' | 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold' | 'extra-bold' | 'black' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+        style?: 'normal' | 'italic';
+        size?: string;
+      };
+      /** Timeline card main text content */
+      cardText?: {
+        weight?: 'thin' | 'extra-light' | 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold' | 'extra-bold' | 'black' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+        style?: 'normal' | 'italic';
+        size?: string;
+      };
+      /** Timeline controls and UI text */
+      controls?: {
+        weight?: 'thin' | 'extra-light' | 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold' | 'extra-bold' | 'black' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+        style?: 'normal' | 'italic';
+        size?: string;
+      };
+    };
+    
+    /** Additional font weights to load */
+    weights?: Array<'thin' | 'extra-light' | 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold' | 'extra-bold' | 'black' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 'italic' | string>;
+    
+    /** Font display strategy for loading */
+    display?: 'auto' | 'block' | 'swap' | 'fallback' | 'optional';
+    
+    /** Preconnect to Google Fonts for faster loading */
+    preconnect?: boolean;
+  };
 }
 
 /**

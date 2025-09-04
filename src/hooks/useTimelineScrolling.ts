@@ -20,7 +20,7 @@ const SCROLL_OPTIONS: Record<'HORIZONTAL' | 'VERTICAL', ScrollOptions> = {
 };
 
 // Default scroll duration that balances smoothness with responsiveness
-const DEFAULT_SCROLL_DURATION = 600; // Reduced from 1200ms for better responsiveness
+const DEFAULT_SCROLL_DURATION = 300; // Further reduced for more responsive keyboard navigation
 
 /**
  * Smooth scroll with improved easing function for more fluid motion
@@ -100,11 +100,11 @@ export const useTimelineScrolling = () => {
     };
   }, []);
 
-  const scrollToElement = useCallback((element: HTMLElement, mode: string) => {
+  const scrollToElement = useCallback((element: HTMLElement, mode: string, forceScroll?: boolean) => {
     if (!element) return;
 
-    // Prevent scrolling to the same element repeatedly
-    if (lastScrollTarget.current === element) {
+    // Prevent scrolling to the same element repeatedly (unless forced for keyboard navigation)
+    if (lastScrollTarget.current === element && !forceScroll) {
       return;
     }
 
