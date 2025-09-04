@@ -26,7 +26,7 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
     class="timeline-card-media_mediaDetailsWrapper__18oaqopi timeline-card-media__18oaqoph sprinkles_display_flex_mobile__1v4ezef6"
   >
     <div
-      class="timeline-card-media_cardMediaHeader__18oaqopt timeline-card-media__18oaqops sprinkles_display_flex_mobile__1v4ezef6 sprinkles_alignItems_center_mobile__1v4ezef10 sprinkles_justifyContent_center_mobile__1v4ezef1c"
+      class="timeline-card-media_cardMediaHeader__18oaqopt timeline-card-media__18oaqops sprinkles_display_flex_mobile__1v4ezef6 sprinkles_alignItems_center_mobile__1v4ezef10 sprinkles_justifyContent_flex-start_mobile__1v4ezef1f"
     />
     <span
       class="card-sub-title card-subtitle"
@@ -58,7 +58,7 @@ exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
     class="timeline-card-media_mediaDetailsWrapper__18oaqopi timeline-card-media__18oaqoph sprinkles_display_flex_mobile__1v4ezef6"
   >
     <div
-      class="timeline-card-media_cardMediaHeader__18oaqopt timeline-card-media__18oaqops sprinkles_display_flex_mobile__1v4ezef6 sprinkles_alignItems_center_mobile__1v4ezef10 sprinkles_justifyContent_center_mobile__1v4ezef1c"
+      class="timeline-card-media_cardMediaHeader__18oaqopt timeline-card-media__18oaqops sprinkles_display_flex_mobile__1v4ezef6 sprinkles_alignItems_center_mobile__1v4ezef10 sprinkles_justifyContent_flex-start_mobile__1v4ezef1f"
     />
     <span
       class="card-sub-title card-subtitle"

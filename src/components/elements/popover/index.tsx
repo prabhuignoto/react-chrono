@@ -155,6 +155,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           aria-haspopup="dialog"
           aria-label={placeholder || 'Open menu'}
         >
+          {placeholder && <span className={selecterLabel}>{placeholder}</span>}
           <span
             className={[selecterIcon, state.open ? selecterIconOpen : ''].join(
               ' ',
