@@ -32,7 +32,18 @@ function convertToLegacyProps(props: TimelinePropsV2): TimelineProps {
     activeItemIndex: props.activeItemIndex,
     allowDynamicUpdate: props.allowDynamicUpdate,
     uniqueId: props.id,
-    onItemSelected: props.onItemSelected,
+    onItemSelected: props.onItemSelected ? 
+      (data: any) => {
+        // Convert from legacy flat structure to new nested structure
+        if ('item' in data) {
+          // Already in new format
+          props.onItemSelected!(data);
+        } else {
+          // Convert from legacy format
+          const { index, ...item } = data;
+          props.onItemSelected!({ item, index });
+        }
+      } : undefined,
     onScrollEnd: props.onScrollEnd,
     onThemeChange: props.onThemeChange as any,
     onRestartSlideshow: props.onRestartSlideshow,
@@ -402,7 +413,9 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     // This prevents unwanted resets during dynamic loading and circular updates
     if (activeItemIndex !== previousActiveItemIndexRef.current) {
       previousActiveItemIndexRef.current = activeItemIndex;
-      handleTimelineUpdate(activeItemIndex);
+      if (activeItemIndex !== undefined) {
+        handleTimelineUpdate(activeItemIndex);
+      }
     }
   }, [activeItemIndex, handleTimelineUpdate]);
 
@@ -427,7 +440,7 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     if (!timeLineItems.length) {
       return;
     }
-    if (activeTimelineItem < timeLineItems.length - 1) {
+    if (activeTimelineItem !== undefined && activeTimelineItem < timeLineItems.length - 1) {
       const newTimeLineItem = activeTimelineItem + 1;
 
       // Update timeline state and trigger smooth navigation
@@ -435,7 +448,7 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
       setActiveTimelineItem(newTimeLineItem);
 
       if (
-        mode === 'HORIZONTAL' &&
+        mapNewModeToLegacy(mode) === 'HORIZONTAL' &&
         slideShowActive &&
         items &&
         items.length - 1 === newTimeLineItem
@@ -453,7 +466,7 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
   ]);
 
   const handleOnPrevious = useCallback(() => {
-    if (activeTimelineItem > 0) {
+    if (activeTimelineItem !== undefined && activeTimelineItem > 0) {
       const newTimeLineItem = activeTimelineItem - 1;
 
       // Update timeline state and trigger smooth navigation
@@ -537,7 +550,7 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
           id="testette"
         >
           <Timeline
-            activeTimelineItem={activeTimelineItem}
+            activeTimelineItem={activeTimelineItem ?? 0}
             contentDetailsChildren={contentDetailsChildren}
             iconChildren={iconChildren}
             items={timeLineItems}
@@ -553,7 +566,7 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
             slideItemDuration={slideItemDuration}
             {...pickDefined({
               onScrollEnd,
-              onItemSelected,
+              onItemSelected: legacyProps.onItemSelected,
             })}
             onOutlineSelection={handleOutlineSelection}
             mode={mapNewModeToLegacy(mode)}

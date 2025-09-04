@@ -118,6 +118,8 @@ export interface DisplayConfig {
     enabled?: boolean;
     /** Position of the toolbar */
     position?: 'top' | 'bottom';
+    /** Make toolbar sticky during scroll */
+    sticky?: boolean;
   };
   
   /** Scrolling configuration */

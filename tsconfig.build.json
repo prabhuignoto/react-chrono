@@ -20,6 +20,8 @@
     "src/**/__tests__/**",
     "src/demo/**",
     "src/examples/**",
-    "src/test-setup.js"
+    "src/test-setup.js",
+    "src/index.tsx",
+    "src/styles/types.ts"
   ]
 }

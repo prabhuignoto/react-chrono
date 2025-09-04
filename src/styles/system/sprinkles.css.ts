@@ -276,20 +276,20 @@ export const responsive = {
           key, 
           { mobile: value, tablet: undefined, desktop: undefined }
         ])
-      ) as T,
+      ) as unknown as T,
     tablet: <T extends Sprinkles>(styles: T) => 
       Object.fromEntries(
         Object.entries(styles).map(([key, value]) => [
           key, 
           { mobile: undefined, tablet: value, desktop: undefined }
         ])
-      ) as T,
+      ) as unknown as T,
     desktop: <T extends Sprinkles>(styles: T) => 
       Object.fromEntries(
         Object.entries(styles).map(([key, value]) => [
           key, 
           { mobile: undefined, tablet: undefined, desktop: value }
         ])
-      ) as T,
+      ) as unknown as T,
   },
 };

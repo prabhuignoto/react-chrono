@@ -48,7 +48,16 @@
     "dist",
     "rollup.config.mjs",
     "cypress",
-    "cypress.config.ts"
+    "cypress.config.ts",
+    "src/demo/**",
+    "src/examples/**",
+    "src/**/__tests__/**",
+    "src/**/*.test.*",
+    "src/**/*.spec.*",
+    "src/**/*.stories.*",
+    "src/test-setup.js",
+    "src/index.tsx",
+    "src/styles/types.ts"
   ],
   "files": ["src/react-chrono.ts"]
 }

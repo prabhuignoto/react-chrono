@@ -38,7 +38,7 @@ export const useTimelineMode = ({
   const [timelineMode, setTimelineMode] = useState<ExtendedTimelineMode>(
     initialMode === 'HORIZONTAL' && showAllCardsHorizontal
       ? 'HORIZONTAL_ALL'
-      : initialMode,
+      : (initialMode as ExtendedTimelineMode),
   );
 
   const stableUpdateHorizontalAllCards = useStableCallback(

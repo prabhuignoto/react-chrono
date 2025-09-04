@@ -640,7 +640,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             console.error('Fullscreen error:', error);
             setIsFullscreen(false);
           }}
-          stickyToolbar={props.stickyToolbar}
+          stickyToolbar={props.stickyToolbar ?? false}
         />
       )}
 

@@ -246,7 +246,7 @@ globalStyle(`${shape} img`, {
 // Timeline title container using new patterns
 export const timelineTitleContainer = recipe({
   base: [
-    patterns.text({ variant: 'title' }),
+    patterns.text({ variant: 'h3' }),
     sprinkles({
       display: 'flex',
       alignItems: 'center',
@@ -294,7 +294,7 @@ export const timelineTitleContainer = recipe({
 
 // Base timeline content container using new system
 const baseTimelineContentContainer = style([
-  patterns.card({ size: 'md', elevation: 'medium' }),
+  patterns.card({ size: 'md', elevation: 'low' }),
   sprinkles({
     alignItems: 'flex-start',
   }),
@@ -408,7 +408,7 @@ globalStyle(`${timelineContentContainer}.vertical`, {
 
 // Card container using new unified system
 export const cardContainer = style([
-  patterns.card({ size: 'lg', elevation: 'medium' }),
+  patterns.card({ size: 'lg', elevation: 'low' }),
   sprinkles({
     display: 'flex',
     flexDirection: 'column',

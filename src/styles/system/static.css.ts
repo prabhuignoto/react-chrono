@@ -380,8 +380,6 @@ globalStyle('*', {
 globalStyle('html', {
   // Prevent layout shifts
   scrollPaddingTop: '2rem',
-  // Optimize font loading
-  fontDisplay: 'swap',
 });
 
 globalStyle('body', {

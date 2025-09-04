@@ -1,4 +1,4 @@
-import { globalFontFace, globalStyle } from '@vanilla-extract/css';
+import { globalFontFace, globalStyle, keyframes } from '@vanilla-extract/css';
 import { lightTheme, darkTheme } from '../tokens/themes.css';
 import { tokens } from '../tokens/index.css';
 
@@ -23,7 +23,6 @@ globalStyle('html, body, #root', {
 
 globalStyle('html', {
   scrollPaddingTop: '2rem',
-  fontDisplay: 'swap',
   // Prevent layout shifts during font loading
   fontOpticalSizing: 'auto',
 });
@@ -83,15 +82,22 @@ globalStyle('*', {
 });
 
 // Print styles
-globalStyle('@media print', {
-  '*': {
-    background: 'transparent !important',
-    boxShadow: 'none !important',
-    textShadow: 'none !important',
+globalStyle('*', {
+  '@media': {
+    'print': {
+      background: 'transparent !important',
+      boxShadow: 'none !important',
+      textShadow: 'none !important',
+    },
   },
-  'body': {
-    fontSize: '12pt',
-    lineHeight: 1.5,
+});
+
+globalStyle('body', {
+  '@media': {
+    'print': {
+      fontSize: '12pt',
+      lineHeight: 1.5,
+    },
   },
 });
 
@@ -228,7 +234,7 @@ globalStyle('::placeholder', {
 });
 
 // Loading skeleton animation
-globalStyle('@keyframes skeleton-loading', {
+export const skeletonLoading = keyframes({
   '0%': {
     backgroundColor: tokens.semantic.color.background.secondary,
   },
@@ -238,5 +244,5 @@ globalStyle('@keyframes skeleton-loading', {
 });
 
 globalStyle('[data-loading="skeleton"]', {
-  animation: 'skeleton-loading 1s ease-in-out infinite alternate',
+  animation: `${skeletonLoading} 1s ease-in-out infinite alternate`,
 });

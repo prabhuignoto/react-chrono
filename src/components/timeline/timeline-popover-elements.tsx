@@ -118,7 +118,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
 
   return (
     <PopOver
-      placeholder={buttonTexts?.jumpToTimeline || "Jump to timeline item"}
+      placeholder={buttonTexts?.jumpTo || "Jump to timeline item"}
       position={position}
       theme={theme}
       width={400}

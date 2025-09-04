@@ -975,6 +975,7 @@ const handleFullscreenChange = (isFullscreen) => {
 | `uniqueId`              | `string`              |         | Sets a custom unique ID for the timeline wrapper. Useful with `noUniqueId={true}`.                              |
 | `disableToolbar`        | `boolean`             | `false` | Hides the entire toolbar/control panel.                                                                         |
 | `toolbarPosition`       | `'top'` or `'bottom'` | `'top'` | Positions the toolbar at the top or bottom of the timeline.                                                     |
+| `stickyToolbar`         | `boolean`             | `false` | Makes the toolbar sticky at the top while scrolling, keeping controls visible for long timelines.              |
 | `highlightCardsOnHover` | `boolean`             | `false` | Highlights timeline cards on mouse hover.                                                                       |
 
 ## 🎨 Customization

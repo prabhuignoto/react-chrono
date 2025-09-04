@@ -20,6 +20,9 @@ export default defineConfig(({ mode }) => ({
       insertTypesEntry: true,
       skipDiagnostics: true,
       rollupTypes: false,
+      compilerOptions: {
+        skipLibCheck: true,
+      },
       exclude: [
         'src/demo/**',
         'src/examples/**',
@@ -28,6 +31,8 @@ export default defineConfig(({ mode }) => ({
         'src/**/*.spec.*',
         'src/**/*.stories.*',
         'src/test-setup.js',
+        'src/index.tsx',
+        'src/styles/types.ts',
       ],
     }),
     mode === 'production' && visualizer({

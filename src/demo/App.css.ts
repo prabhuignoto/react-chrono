@@ -64,6 +64,8 @@ export const componentContainerTree = style({
   borderRadius: '4px',
   height: '300px',
   margin: '0 auto',
+  width: "100%",
+  border: '1px solid #ccc',
 });
 
 export const componentContainerTreeDesktop = style([
