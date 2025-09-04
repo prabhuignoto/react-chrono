@@ -26,6 +26,7 @@ import {
   toolbarWrapper as veToolbarWrapper,
   searchButton as veSearchButton,
   searchButtonIcon as veSearchButtonIcon,
+  hideOnMobile,
 } from '../toolbar/toolbar.css';
 import {
   navButton,
@@ -225,7 +226,11 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           })}
         />
       </div>
-      <div className={veSearchGroup} role="search" aria-label="Timeline search">
+      <div
+        className={`${veSearchGroup} ${hideOnMobile}`}
+        role="search"
+        aria-label="Timeline search"
+      >
         <div className={veSearchWrapper}>
           <input
             ref={searchInputRef}
@@ -320,12 +325,10 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                   className={veSearchButton}
                   onClick={onPreviousMatch}
                   title={
-                    buttonTexts?.previousMatch ??
-                    'Previous Match (Shift+Enter)'
+                    buttonTexts?.previousMatch ?? 'Previous Match (Shift+Enter)'
                   }
                   aria-label={
-                    buttonTexts?.previousMatch ??
-                    'Previous Match (Shift+Enter)'
+                    buttonTexts?.previousMatch ?? 'Previous Match (Shift+Enter)'
                   }
                   disabled={disableSearchNav}
                   type="button"
@@ -353,7 +356,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       </div>
       <div className={veActionGroup} role="group" aria-label="Timeline actions">
         <div
-          className={veExtraControls}
+          className={`${veExtraControls} ${hideOnMobile}`}
           key="timeline-extra-controls"
           style={{ visibility: hideExtraControls ? 'hidden' : 'visible' }}
           role="group"

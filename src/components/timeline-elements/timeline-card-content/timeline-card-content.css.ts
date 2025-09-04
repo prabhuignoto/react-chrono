@@ -52,7 +52,8 @@ export const baseCard = style([
       background: `linear-gradient(135deg, ${tokens.semantic.color.interactive.primary}20 0%, transparent 50%, ${tokens.semantic.color.interactive.primary}10 100%)`,
       mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
       maskComposite: 'xor',
-      WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+      WebkitMask:
+        'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
       WebkitMaskComposite: 'xor',
       pointerEvents: 'none',
     },
@@ -162,7 +163,9 @@ export const cardTitle = style([
   },
 ]);
 
-export const cardTitleActive = style({ color: tokens.semantic.color.interactive.primary });
+export const cardTitleActive = style({
+  color: tokens.semantic.color.interactive.primary,
+});
 
 // Enhanced title recipe using new tokens
 export const cardTitleRecipe = recipe({
@@ -287,8 +290,8 @@ export const timelineSubContent = style([
 ]);
 
 export const contentDetailsWrapper = style([
-  sprinkles({ 
-    display: 'flex', 
+  sprinkles({
+    display: 'flex',
     width: 'full',
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -306,7 +309,7 @@ export const contentDetailsWrapper = style([
 
 export const showMoreButton = style([
   patterns.button({ variant: 'ghost', size: 'sm' }),
-  sprinkles({ 
+  sprinkles({
     display: 'flex',
     alignItems: 'center',
     gap: 'xs',

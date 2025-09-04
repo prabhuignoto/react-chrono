@@ -20,7 +20,7 @@ export const lightThemeClass = createTheme(vars, {
     nestedCardSubtitle: '#475569',
     nestedCardDetails: '#64748b',
     nestedCardDetailsBackground: '#ffffff',
-    // Icon properties  
+    // Icon properties
     icon: '#2563eb',
     iconBackground: '#e2e8f0',
     // Active state properties
@@ -38,7 +38,7 @@ export const lightThemeClass = createTheme(vars, {
     buttonActiveBg: '#2563eb',
     buttonActiveIcon: '#ffffff',
     buttonActiveBorder: '#1d4ed8',
-    // Dark mode specific enhancements  
+    // Dark mode specific enhancements
     searchHighlight: '#fef3c7',
     darkToggleActiveBg: '#2563eb',
     darkToggleActiveIcon: '#ffffff',

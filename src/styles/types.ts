@@ -1,6 +1,6 @@
 // TypeScript definitions for the design system
 import type { RecipeVariants } from '@vanilla-extract/recipes';
-import type { 
+import type {
   interactive,
   flexContainer,
   card,
@@ -46,8 +46,10 @@ export type MotionDurationScale = keyof SemanticTokens['motion']['duration'];
 export type MotionEasingScale = keyof SemanticTokens['motion']['easing'];
 
 // Component-specific types
-export type TimelinePointSizeScale = keyof ComponentTokens['timeline']['point']['size'];
-export type TimelinePointColorScale = keyof ComponentTokens['timeline']['point']['color'];
+export type TimelinePointSizeScale =
+  keyof ComponentTokens['timeline']['point']['size'];
+export type TimelinePointColorScale =
+  keyof ComponentTokens['timeline']['point']['color'];
 
 // Recipe variant types
 export type InteractiveVariants = RecipeVariants<typeof interactive>;
@@ -160,12 +162,12 @@ export interface ThemeContextValue {
 }
 
 // Animation and transition types
-export type AnimationType = 
-  | 'fadeIn' 
-  | 'fadeOut' 
-  | 'slideInUp' 
-  | 'slideInDown' 
-  | 'slideInLeft' 
+export type AnimationType =
+  | 'fadeIn'
+  | 'fadeOut'
+  | 'slideInUp'
+  | 'slideInDown'
+  | 'slideInLeft'
   | 'slideInRight'
   | 'scaleIn'
   | 'scaleOut'
@@ -196,9 +198,9 @@ export interface StyleComposition {
 }
 
 // Media query types
-export type MediaQueryCondition = 
+export type MediaQueryCondition =
   | 'mobile'
-  | 'tablet' 
+  | 'tablet'
   | 'desktop'
   | 'reducedMotion'
   | 'highContrast'
@@ -214,7 +216,13 @@ export type MediaQueryCondition =
 export type ComponentSize = 'sm' | 'md' | 'lg';
 
 // Component state types
-export type ComponentState = 'default' | 'hover' | 'active' | 'focus' | 'disabled' | 'loading';
+export type ComponentState =
+  | 'default'
+  | 'hover'
+  | 'active'
+  | 'focus'
+  | 'disabled'
+  | 'loading';
 
 // Accessibility types
 export interface A11yProps {
@@ -262,7 +270,10 @@ export interface TimelineProps {
 export type ClassNameValue = string | number | boolean | undefined | null;
 export type ClassNameArray = ClassNameValue[];
 export type ClassNameDictionary = Record<string, boolean | undefined | null>;
-export type ClassNameInput = ClassNameValue | ClassNameArray | ClassNameDictionary;
+export type ClassNameInput =
+  | ClassNameValue
+  | ClassNameArray
+  | ClassNameDictionary;
 
 // CSS custom property types for runtime theming
 export type CSSCustomProperties = Record<`--${string}`, string | number>;
@@ -275,7 +286,10 @@ export type WithDesignSystemProps<T = {}> = T & {
 };
 
 // Helper type for polymorphic components
-export type PolymorphicComponentProps<T extends React.ElementType, P = {}> = P & {
+export type PolymorphicComponentProps<
+  T extends React.ElementType,
+  P = {},
+> = P & {
   as?: T;
 } & Omit<React.ComponentPropsWithoutRef<T>, keyof P | 'as'>;
 
@@ -288,9 +302,9 @@ export type FocusEventHandler<T = Element> = React.FocusEventHandler<T>;
 export type ChangeEventHandler<T = Element> = React.ChangeEventHandler<T>;
 
 // Re-export React types that are commonly needed
-export type { 
-  ReactNode, 
-  ReactElement, 
+export type {
+  ReactNode,
+  ReactElement,
   ComponentType,
   ElementType,
   HTMLProps,

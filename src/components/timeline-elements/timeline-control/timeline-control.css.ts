@@ -58,7 +58,7 @@ export const navButton = style({
   '@media': {
     '(max-width: 480px)': {
       height: '44px',
-      width: '44px',  
+      width: '44px',
       minWidth: '44px',
       // Ensure touch targets are at least 44x44px
     },
@@ -158,8 +158,8 @@ export const controlButton = style([
   },
 ]);
 
-export const controlButtonSvg = style({ 
-  width: '80%', 
+export const controlButtonSvg = style({
+  width: '80%',
   height: '80%',
   display: 'flex',
   alignItems: 'center',

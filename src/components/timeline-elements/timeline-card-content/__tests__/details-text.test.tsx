@@ -1,5 +1,5 @@
 // test utils
-import { customRender, providerProps } from 'src/components/common/test';
+import { customRender, providerProps } from '../../../common/test';
 import { DetailsText } from '../details-text';
 
 describe('DetailsText', () => {

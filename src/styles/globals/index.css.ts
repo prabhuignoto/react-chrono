@@ -84,7 +84,7 @@ globalStyle('*', {
 // Print styles
 globalStyle('*', {
   '@media': {
-    'print': {
+    print: {
       background: 'transparent !important',
       boxShadow: 'none !important',
       textShadow: 'none !important',
@@ -94,7 +94,7 @@ globalStyle('*', {
 
 globalStyle('body', {
   '@media': {
-    'print': {
+    print: {
       fontSize: '12pt',
       lineHeight: 1.5,
     },
@@ -110,15 +110,21 @@ globalStyle('[data-timeline-wrapper]:focus', {
   outline: 0,
 });
 
-globalStyle('[data-timeline-wrapper]:not([data-keyboard-navigation="true"]) :focus', {
-  outline: 0,
-});
+globalStyle(
+  '[data-timeline-wrapper]:not([data-keyboard-navigation="true"]) :focus',
+  {
+    outline: 0,
+  },
+);
 
-globalStyle('[data-timeline-wrapper][data-keyboard-navigation="true"] :focus-visible', {
-  outline: `2px solid ${tokens.semantic.color.border.interactive}`,
-  outlineOffset: '2px',
-  borderRadius: tokens.semantic.borderRadius.sm,
-});
+globalStyle(
+  '[data-timeline-wrapper][data-keyboard-navigation="true"] :focus-visible',
+  {
+    outline: `2px solid ${tokens.semantic.color.border.interactive}`,
+    outlineOffset: '2px',
+    borderRadius: tokens.semantic.borderRadius.sm,
+  },
+);
 
 // Scrollbar styling for webkit browsers
 globalStyle('::-webkit-scrollbar', {
@@ -210,7 +216,8 @@ globalStyle('th, td', {
 
 // Code styles
 globalStyle('code, pre', {
-  fontFamily: 'ui-monospace, SFMono-Regular, "Roboto Mono", "Cascadia Code", "Liberation Mono", Menlo, Monaco, Consolas, monospace',
+  fontFamily:
+    'ui-monospace, SFMono-Regular, "Roboto Mono", "Cascadia Code", "Liberation Mono", Menlo, Monaco, Consolas, monospace',
   fontSize: '0.875em',
 });
 

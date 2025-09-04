@@ -61,10 +61,11 @@ export const useTimelineNavigation = ({
   const handleNext = useCallback(() => {
     // Remove hasFocus check as it can block navigation
     const currentIndex = activeItemIndex.current;
-    
+
     // Handle case where no item is currently selected (-1)
-    const nextIndex = currentIndex === -1 ? 0 : Math.min(currentIndex + 1, items.length - 1);
-    
+    const nextIndex =
+      currentIndex === -1 ? 0 : Math.min(currentIndex + 1, items.length - 1);
+
     // Always attempt navigation if there are items
     if (items.length > 0) {
       // If no selection (-1), start from first item (0)
@@ -82,19 +83,16 @@ export const useTimelineNavigation = ({
         stableOnNext();
       }
     }
-  }, [
-    items,
-    handleTimelineItemClick,
-    stableOnNext,
-  ]);
+  }, [items, handleTimelineItemClick, stableOnNext]);
 
   const handlePrevious = useCallback(() => {
     // Remove hasFocus check as it can block navigation
     const currentIndex = activeItemIndex.current;
-    
+
     // Handle case where no item is currently selected (-1)
-    const prevIndex = currentIndex === -1 ? items.length - 1 : Math.max(currentIndex - 1, 0);
-    
+    const prevIndex =
+      currentIndex === -1 ? items.length - 1 : Math.max(currentIndex - 1, 0);
+
     // Always attempt navigation if there are items
     if (items.length > 0) {
       // If no selection (-1), start from last item
@@ -112,11 +110,7 @@ export const useTimelineNavigation = ({
         stableOnPrevious();
       }
     }
-  }, [
-    items,
-    handleTimelineItemClick,
-    stableOnPrevious,
-  ]);
+  }, [items, handleTimelineItemClick, stableOnPrevious]);
 
   const handleFirst = useCallback(() => {
     // Always allow navigation to first item if we're not already there (including -1 no selection)
@@ -132,11 +126,7 @@ export const useTimelineNavigation = ({
       // Also call the toolbar callback for any additional toolbar-specific logic
       stableOnFirst();
     }
-  }, [
-    items,
-    handleTimelineItemClick,
-    stableOnFirst,
-  ]);
+  }, [items, handleTimelineItemClick, stableOnFirst]);
 
   const handleLast = useCallback(() => {
     // Always allow navigation to last item if we're not already there (including -1 no selection)
@@ -153,11 +143,7 @@ export const useTimelineNavigation = ({
       // Also call the toolbar callback for any additional toolbar-specific logic
       stableOnLast();
     }
-  }, [
-    items,
-    handleTimelineItemClick,
-    stableOnLast,
-  ]);
+  }, [items, handleTimelineItemClick, stableOnLast]);
 
   // Use keyboard navigation hook
   const { handleKeySelection } = useTimelineKeyboardNavigation({

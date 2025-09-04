@@ -59,7 +59,11 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   } = useTimelineCard({
     cardLess,
     showAllCardsHorizontal,
-    mode: mode as 'HORIZONTAL' | 'VERTICAL' | 'VERTICAL_ALTERNATING' | 'HORIZONTAL_ALL',
+    mode: mode as
+      | 'HORIZONTAL'
+      | 'VERTICAL'
+      | 'VERTICAL_ALTERNATING'
+      | 'HORIZONTAL_ALL',
     position,
     iconChild,
     ...pickDefined({

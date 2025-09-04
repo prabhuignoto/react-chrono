@@ -20,7 +20,7 @@ export const buttonWrapper = recipe({
       userSelect: 'none',
       backgroundColor: tokens.semantic.color.background.elevated,
       transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
-      
+
       selectors: {
         '&:hover': {
           backgroundColor: tokens.semantic.color.interactive.muted,
@@ -61,12 +61,12 @@ export const buttonWrapper = recipe({
 });
 
 export const toggleSwitch = style([
-  sprinkles({ 
-    display: 'flex', 
+  sprinkles({
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   }),
-  { 
+  {
     color: tokens.semantic.color.text.primary,
     transition: `color ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
   },

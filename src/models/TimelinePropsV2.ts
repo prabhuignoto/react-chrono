@@ -17,7 +17,7 @@ import {
  */
 export type TimelineMode =
   | 'horizontal'
-  | 'vertical' 
+  | 'vertical'
   | 'alternating'
   | 'horizontal-all';
 
@@ -27,75 +27,78 @@ export type TimelineMode =
  */
 export interface TimelinePropsV2 {
   // === Core Required Props ===
-  
+
   /** Array of timeline items to display */
   items: TimelineItemModel[];
-  
+
   // === Core Optional Props ===
-  
+
   /** Timeline display mode */
   mode?: TimelineMode;
-  
+
   /** Custom React content for timeline cards */
   children?: ReactNode | ReactNode[];
-  
+
   /** Visual theme configuration */
   theme?: Theme;
-  
+
   /** Index of initially active timeline item */
   activeItemIndex?: number;
-  
+
   // === Grouped Configuration Objects ===
-  
+
   /** Layout and sizing options */
   layout?: LayoutConfig;
-  
+
   /** User interaction and navigation options */
   interaction?: InteractionConfig;
-  
+
   /** Content handling and display options */
   content?: ContentConfig;
-  
+
   /** Visual display and styling options */
   display?: DisplayConfig;
-  
+
   /** Media content configuration */
   media?: MediaConfig;
-  
+
   /** Animation and slideshow options */
   animation?: AnimationConfig;
-  
+
   /** Custom styling and CSS classes */
   style?: StyleConfig;
-  
+
   /** Accessibility and internationalization */
   accessibility?: AccessibilityConfig;
-  
+
   // === Event Callbacks ===
-  
+
   /** Callback when a timeline item is selected */
   onItemSelected?: (data: {
-    item: Pick<TimelineItemModel, 'title' | 'cardDetailedText' | 'cardSubtitle' | 'cardTitle'>;
+    item: Pick<
+      TimelineItemModel,
+      'title' | 'cardDetailedText' | 'cardSubtitle' | 'cardTitle'
+    >;
     index: number;
   }) => void;
-  
+
   /** Callback when scrolling reaches the end */
   onScrollEnd?: () => void;
-  
+
   /** Callback when theme changes (e.g., dark mode toggle) */
   onThemeChange?: (theme: Theme) => void;
-  
+
   /** Callback when slideshow restarts */
   onRestartSlideshow?: () => void;
-  
+
   // === Advanced Options ===
-  
+
   /** Enable dynamic updates to timeline items */
   allowDynamicUpdate?: boolean;
-  
+
   /** Custom unique identifier for the timeline */
   id?: string;
-  
+
   /** Dark mode configuration */
   darkMode?: {
     /** Enable dark mode */
@@ -128,7 +131,7 @@ export interface LegacyTimelineProps {
   cardPositionHorizontal?: 'TOP' | 'BOTTOM';
   /** @deprecated Use layout.positioning.flipLayout */
   flipLayout?: boolean;
-  
+
   // Interaction props (deprecated - use interaction config)
   /** @deprecated Use interaction.keyboardNavigation */
   disableNavOnKey?: boolean;
@@ -142,7 +145,7 @@ export interface LegacyTimelineProps {
   highlightCardsOnHover?: boolean;
   /** @deprecated Use interaction.disabled */
   disableInteraction?: boolean;
-  
+
   // Content props (deprecated - use content config)
   /** @deprecated Use content.allowHTML */
   parseDetailsAsHTML?: boolean;
@@ -159,7 +162,7 @@ export interface LegacyTimelineProps {
     cardTitle?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
     cardSubtitle?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
   };
-  
+
   // Display props (deprecated - use display config)
   /** @deprecated Use display.borderless */
   borderLessCards?: boolean;
@@ -177,7 +180,7 @@ export interface LegacyTimelineProps {
   toolbarPosition?: 'top' | 'bottom';
   /** @deprecated Use display.scrollable */
   scrollable?: boolean | { scrollbar: boolean };
-  
+
   // Media props (deprecated - use media config)
   /** @deprecated Use media.height */
   mediaHeight?: number;
@@ -186,7 +189,7 @@ export interface LegacyTimelineProps {
     align?: 'left' | 'right' | 'center';
     fit?: 'cover' | 'contain' | 'fill' | 'none';
   };
-  
+
   // Animation props (deprecated - use animation config)
   /** @deprecated Use animation.slideshow.enabled */
   slideShow?: boolean;
@@ -198,7 +201,7 @@ export interface LegacyTimelineProps {
   showProgressOnSlideshow?: boolean;
   /** @deprecated Use animation.slideshow.showOverallProgress */
   showOverallSlideshowProgress?: boolean;
-  
+
   // Style props (deprecated - use style config)
   /** @deprecated Use style.classNames */
   classNames?: {
@@ -217,7 +220,7 @@ export interface LegacyTimelineProps {
     cardTitle?: string;
     title?: string;
   };
-  
+
   // Accessibility props (deprecated - use accessibility config)
   /** @deprecated Use accessibility.buttonTexts */
   buttonTexts?: {
@@ -228,7 +231,7 @@ export interface LegacyTimelineProps {
     play?: string;
     stop?: string;
   };
-  
+
   // Deprecated/removed props
   /** @deprecated No longer used */
   noUniqueId?: boolean;

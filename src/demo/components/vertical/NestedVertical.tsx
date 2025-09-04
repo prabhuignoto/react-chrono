@@ -28,9 +28,26 @@ export const NestedVertical: FunctionComponent<NestedVerticalProps> = ({
         slideItemDuration={2500}
         scrollable={{ scrollbar: false }}
         onItemSelected={(selected) => console.log(selected.index)}
-        fontSizes={{
-          title: '1rem',
+        
+        style={{
+          fontSizes: {
+            title: '1rem',
+          },
+          googleFonts: {
+            fontFamily: 'Roboto Slab',
+            elements: {
+              title: { weight: 'bold', style: 'normal', size: '1.8rem' },
+              cardTitle: { weight: 'bold', style: 'normal', size: '1.3rem' },
+              cardSubtitle: { weight: 'normal', style: 'italic', size: '1rem' },
+              cardText: { weight: 'light', style: 'normal', size: '0.95rem' },
+              controls: { weight: 'medium', style: 'normal', size: '0.875rem' },
+            },
+            weights: [300, 400, 500, 600, 700, 'italic'],
+            display: 'swap',
+            preconnect: true
+          }
         }}
+        
         focusActiveItemOnLoad
         activeItemIndex={2}
         mediaHeight={200}

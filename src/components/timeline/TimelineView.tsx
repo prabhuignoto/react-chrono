@@ -3,7 +3,10 @@ import { TimelineMode } from '@models/TimelineModel';
 import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
 import { Scroll } from '@models/TimelineHorizontalModel';
-import { outline as outlineStyle, main as timelineMain } from './timeline-new.css';
+import {
+  outline as outlineStyle,
+  main as timelineMain,
+} from './timeline-new.css';
 import { pickDefined } from '../../utils/propUtils';
 
 interface TimelineViewProps {

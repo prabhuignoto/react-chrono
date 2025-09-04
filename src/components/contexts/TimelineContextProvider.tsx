@@ -166,11 +166,11 @@ export interface TimelineContextProviderProps
   googleFonts?: {
     fontFamily: string;
     elements?: {
-      title?: { weight?: any; style?: any; size?: string; };
-      cardTitle?: { weight?: any; style?: any; size?: string; };
-      cardSubtitle?: { weight?: any; style?: any; size?: string; };
-      cardText?: { weight?: any; style?: any; size?: string; };
-      controls?: { weight?: any; style?: any; size?: string; };
+      title?: { weight?: any; style?: any; size?: string };
+      cardTitle?: { weight?: any; style?: any; size?: string };
+      cardSubtitle?: { weight?: any; style?: any; size?: string };
+      cardText?: { weight?: any; style?: any; size?: string };
+      controls?: { weight?: any; style?: any; size?: string };
     };
     weights?: any[];
     display?: string;
@@ -377,8 +377,23 @@ export const TimelineContextProvider: FunctionComponent<
 
   // Google Fonts integration
   const googleFontsConfig = useMemo(() => {
-    if (!props.googleFonts) return null;
-    
+    // If no Google Fonts specified, use a default one
+    if (!props.googleFonts) {
+      return {
+        fontFamily: 'Inter',
+        elements: {
+          title: { weight: 600, style: 'normal' },
+          cardTitle: { weight: 500, style: 'normal' },
+          cardSubtitle: { weight: 400, style: 'normal' },
+          cardText: { weight: 400, style: 'normal' },
+          controls: { weight: 500, style: 'normal' },
+        },
+        weights: [400, 500, 600],
+        display: 'swap',
+        preconnect: true,
+      };
+    }
+
     // If we have both fontSizes and googleFonts, merge them
     if (props.googleFonts) {
       return {
@@ -387,33 +402,33 @@ export const TimelineContextProvider: FunctionComponent<
           ...props.googleFonts.elements,
           // Override sizes from fontSizes if provided
           ...(memoizedFontSizes.title && {
-            title: { 
+            title: {
               ...props.googleFonts.elements?.title,
-              size: memoizedFontSizes.title 
-            }
+              size: memoizedFontSizes.title,
+            },
           }),
           ...(memoizedFontSizes.cardTitle && {
-            cardTitle: { 
+            cardTitle: {
               ...props.googleFonts.elements?.cardTitle,
-              size: memoizedFontSizes.cardTitle 
-            }
+              size: memoizedFontSizes.cardTitle,
+            },
           }),
           ...(memoizedFontSizes.cardSubtitle && {
-            cardSubtitle: { 
+            cardSubtitle: {
               ...props.googleFonts.elements?.cardSubtitle,
-              size: memoizedFontSizes.cardSubtitle 
-            }
+              size: memoizedFontSizes.cardSubtitle,
+            },
           }),
           ...(memoizedFontSizes.cardText && {
-            cardText: { 
+            cardText: {
               ...props.googleFonts.elements?.cardText,
-              size: memoizedFontSizes.cardText 
-            }
+              size: memoizedFontSizes.cardText,
+            },
           }),
-        }
+        },
       };
     }
-    
+
     return null;
   }, [props.googleFonts, memoizedFontSizes]);
 

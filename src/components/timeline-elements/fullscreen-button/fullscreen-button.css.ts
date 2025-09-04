@@ -27,7 +27,7 @@ export const baseButton = style([
     border: `1px solid ${tokens.semantic.color.border.default}`,
     boxShadow: tokens.semantic.shadow.card,
     transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
-    
+
     selectors: {
       '&:hover:not(:disabled)': {
         background: `${tokens.semantic.color.interactive.primary}08`,
@@ -56,7 +56,7 @@ export const baseButton = style([
         transform: 'none',
       },
     },
-    
+
     '@media': {
       '(max-width: 480px)': {
         width: '40px',

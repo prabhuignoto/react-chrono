@@ -74,7 +74,9 @@ export const buttonLeft = style({ marginRight: 'auto' });
 export const buttonRight = style({ marginLeft: 'auto' });
 
 globalStyle(`${outlineButton} svg`, { width: '70%', height: '70%' });
-globalStyle(`${outlineButton} svg path`, { color: tokens.semantic.color.icon.default });
+globalStyle(`${outlineButton} svg path`, {
+  color: tokens.semantic.color.icon.default,
+});
 
 export const listRoot = style([
   sprinkles({ display: 'flex' }),
@@ -126,7 +128,9 @@ export const listItemName = style({
   },
 });
 
-export const listItemNameSelected = style({ color: tokens.semantic.color.interactive.primary });
+export const listItemNameSelected = style({
+  color: tokens.semantic.color.interactive.primary,
+});
 
 export const listItemBullet = style([
   sprinkles({ display: 'flex', placeCenter: 'center' }),

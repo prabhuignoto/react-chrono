@@ -1,6 +1,6 @@
 /**
  * Font utilities and components for React Chrono Timeline
- * 
+ *
  * Provides Google Fonts integration and font management utilities
  */
 

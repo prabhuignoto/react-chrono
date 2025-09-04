@@ -11,22 +11,22 @@ import { ReactNode } from 'react';
 export interface LayoutConfig {
   /** Maximum width of timeline cards in pixels */
   cardWidth?: number;
-  
+
   /** Minimum height of timeline cards in pixels */
   cardHeight?: number;
-  
+
   /** Size of timeline points in pixels */
   pointSize?: number;
-  
+
   /** Width of the timeline track line in pixels */
   lineWidth?: number;
-  
+
   /** Width of each timeline section in horizontal mode */
   itemWidth?: number;
-  
+
   /** Height of the timeline container (number = px or CSS length string) */
   timelineHeight?: number | string;
-  
+
   /** Responsive behavior configuration */
   responsive?: {
     /** Viewport width breakpoint for switching modes */
@@ -34,7 +34,7 @@ export interface LayoutConfig {
     /** Whether responsive breakpoint switching is enabled */
     enabled?: boolean;
   };
-  
+
   /** Positioning and layout options */
   positioning?: {
     /** Card position in horizontal mode */
@@ -50,19 +50,19 @@ export interface LayoutConfig {
 export interface InteractionConfig {
   /** Enable keyboard navigation with arrow keys */
   keyboardNavigation?: boolean;
-  
+
   /** Enable clicking on timeline points */
   pointClick?: boolean;
-  
+
   /** Enable auto-scroll to active items */
   autoScroll?: boolean;
-  
+
   /** Focus active item on component load */
   focusOnLoad?: boolean;
-  
+
   /** Highlight cards on mouse hover */
   cardHover?: boolean;
-  
+
   /** Disable all user interactions */
   disabled?: boolean;
 }
@@ -73,19 +73,19 @@ export interface InteractionConfig {
 export interface ContentConfig {
   /** Allow HTML parsing in card content */
   allowHTML?: boolean;
-  
+
   /** Enable read more functionality for long content */
   readMore?: boolean;
-  
+
   /** Display text as overlay on media */
   textOverlay?: boolean;
-  
+
   /** Date format for timeline titles */
   dateFormat?: string;
-  
+
   /** Use compact text display */
   compactText?: boolean;
-  
+
   /** Semantic HTML tags for accessibility */
   semanticTags?: {
     title?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
@@ -99,19 +99,19 @@ export interface ContentConfig {
 export interface DisplayConfig {
   /** Remove borders and shadows from cards */
   borderless?: boolean;
-  
+
   /** Hide timeline cards completely */
   cardsDisabled?: boolean;
-  
+
   /** Hide timeline points */
   pointsDisabled?: boolean;
-  
+
   /** Shape of timeline points */
   pointShape?: 'circle' | 'square' | 'diamond';
-  
+
   /** Show all cards simultaneously in horizontal mode */
   allCardsVisible?: boolean;
-  
+
   /** Toolbar configuration */
   toolbar?: {
     /** Enable/disable the toolbar */
@@ -121,12 +121,14 @@ export interface DisplayConfig {
     /** Make toolbar sticky during scroll */
     sticky?: boolean;
   };
-  
+
   /** Scrolling configuration */
-  scrollable?: boolean | { 
-    /** Show scrollbar */
-    scrollbar: boolean; 
-  };
+  scrollable?:
+    | boolean
+    | {
+        /** Show scrollbar */
+        scrollbar: boolean;
+      };
 }
 
 /**
@@ -135,10 +137,10 @@ export interface DisplayConfig {
 export interface MediaConfig {
   /** Minimum height of media elements in pixels */
   height?: number;
-  
+
   /** Media alignment within cards */
   align?: 'left' | 'center' | 'right';
-  
+
   /** CSS object-fit property for images */
   fit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
 }
@@ -180,7 +182,7 @@ export interface StyleConfig {
     timelinePoint?: string;
     timelineTrack?: string;
   };
-  
+
   /** Custom font sizes */
   fontSizes?: {
     cardSubtitle?: string;
@@ -193,47 +195,158 @@ export interface StyleConfig {
   googleFonts?: {
     /** Primary font family name from Google Fonts */
     fontFamily: string;
-    
+
     /** Font configurations for different text elements */
     elements?: {
       /** Timeline item titles */
       title?: {
-        weight?: 'thin' | 'extra-light' | 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold' | 'extra-bold' | 'black' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+        weight?:
+          | 'thin'
+          | 'extra-light'
+          | 'light'
+          | 'regular'
+          | 'medium'
+          | 'semi-bold'
+          | 'bold'
+          | 'extra-bold'
+          | 'black'
+          | 100
+          | 200
+          | 300
+          | 400
+          | 500
+          | 600
+          | 700
+          | 800
+          | 900;
         style?: 'normal' | 'italic';
         size?: string;
       };
       /** Timeline card titles */
       cardTitle?: {
-        weight?: 'thin' | 'extra-light' | 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold' | 'extra-bold' | 'black' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+        weight?:
+          | 'thin'
+          | 'extra-light'
+          | 'light'
+          | 'regular'
+          | 'medium'
+          | 'semi-bold'
+          | 'bold'
+          | 'extra-bold'
+          | 'black'
+          | 100
+          | 200
+          | 300
+          | 400
+          | 500
+          | 600
+          | 700
+          | 800
+          | 900;
         style?: 'normal' | 'italic';
         size?: string;
       };
       /** Timeline card subtitles */
       cardSubtitle?: {
-        weight?: 'thin' | 'extra-light' | 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold' | 'extra-bold' | 'black' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+        weight?:
+          | 'thin'
+          | 'extra-light'
+          | 'light'
+          | 'regular'
+          | 'medium'
+          | 'semi-bold'
+          | 'bold'
+          | 'extra-bold'
+          | 'black'
+          | 100
+          | 200
+          | 300
+          | 400
+          | 500
+          | 600
+          | 700
+          | 800
+          | 900;
         style?: 'normal' | 'italic';
         size?: string;
       };
       /** Timeline card main text content */
       cardText?: {
-        weight?: 'thin' | 'extra-light' | 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold' | 'extra-bold' | 'black' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+        weight?:
+          | 'thin'
+          | 'extra-light'
+          | 'light'
+          | 'regular'
+          | 'medium'
+          | 'semi-bold'
+          | 'bold'
+          | 'extra-bold'
+          | 'black'
+          | 100
+          | 200
+          | 300
+          | 400
+          | 500
+          | 600
+          | 700
+          | 800
+          | 900;
         style?: 'normal' | 'italic';
         size?: string;
       };
       /** Timeline controls and UI text */
       controls?: {
-        weight?: 'thin' | 'extra-light' | 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold' | 'extra-bold' | 'black' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+        weight?:
+          | 'thin'
+          | 'extra-light'
+          | 'light'
+          | 'regular'
+          | 'medium'
+          | 'semi-bold'
+          | 'bold'
+          | 'extra-bold'
+          | 'black'
+          | 100
+          | 200
+          | 300
+          | 400
+          | 500
+          | 600
+          | 700
+          | 800
+          | 900;
         style?: 'normal' | 'italic';
         size?: string;
       };
     };
-    
+
     /** Additional font weights to load */
-    weights?: Array<'thin' | 'extra-light' | 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold' | 'extra-bold' | 'black' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 'italic' | string>;
-    
+    weights?: Array<
+      | 'thin'
+      | 'extra-light'
+      | 'light'
+      | 'regular'
+      | 'medium'
+      | 'semi-bold'
+      | 'bold'
+      | 'extra-bold'
+      | 'black'
+      | 100
+      | 200
+      | 300
+      | 400
+      | 500
+      | 600
+      | 700
+      | 800
+      | 900
+      | 'italic'
+      | string
+    >;
+
     /** Font display strategy for loading */
     display?: 'auto' | 'block' | 'swap' | 'fallback' | 'optional';
-    
+
     /** Preconnect to Google Fonts for faster loading */
     preconnect?: boolean;
   };
@@ -252,7 +365,7 @@ export interface AccessibilityConfig {
     play?: string;
     stop?: string;
   };
-  
+
   /** Search functionality labels */
   search?: {
     placeholder?: string;

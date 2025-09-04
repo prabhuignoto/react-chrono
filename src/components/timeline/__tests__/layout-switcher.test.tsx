@@ -1,6 +1,6 @@
 import { fireEvent } from '@testing-library/react';
-import { getDefaultThemeOrDark } from '@utils/index';
-import { customRender, providerProps } from 'src/components/common/test';
+import { getDefaultThemeOrDark } from '../../../utils/index';
+import { customRender, providerProps } from '../../common/test';
 import { vi } from 'vitest';
 import { LayoutSwitcher } from '../timeline-popover-elements';
 

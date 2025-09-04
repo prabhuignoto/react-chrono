@@ -67,35 +67,53 @@ export const wrapper = recipe({
 });
 
 // Focus management using globalStyle
-globalStyle(`${wrapper.classNames.base}.js-focus-visible :focus:not(.focus-visible)`, {
-  outline: 0,
-});
+globalStyle(
+  `${wrapper.classNames.base}.js-focus-visible :focus:not(.focus-visible)`,
+  {
+    outline: 0,
+  },
+);
 
-globalStyle(`${wrapper.classNames.base}[data-toolbar-navigation="true"] :focus`, {
-  outline: 0,
-});
+globalStyle(
+  `${wrapper.classNames.base}[data-toolbar-navigation="true"] :focus`,
+  {
+    outline: 0,
+  },
+);
 
-globalStyle(`${wrapper.classNames.base}:not([data-keyboard-navigation="true"]) :focus`, {
-  outline: 0,
-});
+globalStyle(
+  `${wrapper.classNames.base}:not([data-keyboard-navigation="true"]) :focus`,
+  {
+    outline: 0,
+  },
+);
 
-globalStyle(`${wrapper.classNames.base}[data-keyboard-navigation="true"] :focus-visible`, {
-  outline: `2px solid ${tokens.semantic.color.border.interactive}`,
-  outlineOffset: '2px',
-  borderRadius: tokens.semantic.borderRadius.sm,
-});
+globalStyle(
+  `${wrapper.classNames.base}[data-keyboard-navigation="true"] :focus-visible`,
+  {
+    outline: `2px solid ${tokens.semantic.color.border.interactive}`,
+    outlineOffset: '2px',
+    borderRadius: tokens.semantic.borderRadius.sm,
+  },
+);
 
 // Focus outline should only appear on the timeline card, not the entire vertical item row
-globalStyle(`${wrapper.classNames.base}[data-keyboard-navigation="true"] [data-testid="vertical-item-row"]:focus .timeline-card-content`, {
-  outline: `2px solid ${tokens.semantic.color.border.interactive}`,
-  outlineOffset: '2px',
-  borderRadius: tokens.semantic.borderRadius.sm,
-});
+globalStyle(
+  `${wrapper.classNames.base}[data-keyboard-navigation="true"] [data-testid="vertical-item-row"]:focus .timeline-card-content`,
+  {
+    outline: `2px solid ${tokens.semantic.color.border.interactive}`,
+    outlineOffset: '2px',
+    borderRadius: tokens.semantic.borderRadius.sm,
+  },
+);
 
 // Remove outline from vertical-item-row itself
-globalStyle(`${wrapper.classNames.base}[data-keyboard-navigation="true"] [data-testid="vertical-item-row"]:focus`, {
-  outline: 'none',
-});
+globalStyle(
+  `${wrapper.classNames.base}[data-keyboard-navigation="true"] [data-testid="vertical-item-row"]:focus`,
+  {
+    outline: 'none',
+  },
+);
 
 // Fullscreen styles with theme support
 globalStyle(
@@ -103,14 +121,14 @@ globalStyle(
   {
     backgroundColor: tokens.semantic.color.background.primary,
     color: tokens.semantic.color.text.primary,
-  }
+  },
 );
 
 globalStyle(
   `${wrapper.classNames.base}:fullscreen::backdrop, ${wrapper.classNames.base}:-webkit-full-screen::backdrop`,
   {
     backgroundColor: tokens.semantic.color.background.primary,
-  }
+  },
 );
 
 // Theme-specific fullscreen backgrounds
@@ -119,7 +137,7 @@ globalStyle(
   {
     backgroundColor: tokens.primitive.color.gray[900],
     color: tokens.primitive.color.gray[100],
-  }
+  },
 );
 
 globalStyle(
@@ -127,7 +145,7 @@ globalStyle(
   {
     backgroundColor: tokens.primitive.color.white,
     color: tokens.primitive.color.gray[900],
-  }
+  },
 );
 
 // Timeline main wrapper - optimized with new system
@@ -334,6 +352,10 @@ export const timelineContentRender = recipe({
 
 // Export types for new system
 export type TimelineWrapperVariants = Parameters<typeof wrapper>[0];
-export type TimelineMainWrapperVariants = Parameters<typeof timelineMainWrapper>[0];
+export type TimelineMainWrapperVariants = Parameters<
+  typeof timelineMainWrapper
+>[0];
 export type TimelineMainVariants = Parameters<typeof timelineMain>[0];
-export type TimelineContentRenderVariants = Parameters<typeof timelineContentRender>[0];
+export type TimelineContentRenderVariants = Parameters<
+  typeof timelineContentRender
+>[0];

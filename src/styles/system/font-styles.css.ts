@@ -1,6 +1,6 @@
 /**
  * Font styles using vanilla-extract for the design system
- * 
+ *
  * Provides modular font styling that can be enhanced with Google Fonts
  */
 
@@ -21,63 +21,81 @@ export const typography = {
 
 // Title styles
 export const titleStyles = styleVariants({
-  default: [typography.base, {
-    fontFamily: `var(--timeline-title-font-family, ${baseFontFamily})`,
-    fontSize: `var(--timeline-title-font-size, ${tokens.semantic.typography.fontSize.lg})`,
-    fontWeight: `var(--timeline-title-font-weight, ${tokens.semantic.typography.fontWeight.semibold})`,
-    fontStyle: `var(--timeline-title-font-style, normal)`,
-    lineHeight: tokens.semantic.typography.lineHeight.tight,
-  }],
-  
-  card: [typography.base, {
-    fontFamily: `var(--timeline-cardTitle-font-family, ${baseFontFamily})`,
-    fontSize: `var(--timeline-cardTitle-font-size, ${tokens.semantic.typography.fontSize.md})`,
-    fontWeight: `var(--timeline-cardTitle-font-weight, ${tokens.semantic.typography.fontWeight.medium})`,
-    fontStyle: `var(--timeline-cardTitle-font-style, normal)`,
-    lineHeight: tokens.semantic.typography.lineHeight.tight,
-  }],
+  default: [
+    typography.base,
+    {
+      fontFamily: `var(--timeline-title-font-family, ${baseFontFamily})`,
+      fontSize: `var(--timeline-title-font-size, ${tokens.semantic.typography.fontSize.lg})`,
+      fontWeight: `var(--timeline-title-font-weight, ${tokens.semantic.typography.fontWeight.semibold})`,
+      fontStyle: `var(--timeline-title-font-style, normal)`,
+      lineHeight: tokens.semantic.typography.lineHeight.tight,
+    },
+  ],
+
+  card: [
+    typography.base,
+    {
+      fontFamily: `var(--timeline-cardTitle-font-family, ${baseFontFamily})`,
+      fontSize: `var(--timeline-cardTitle-font-size, ${tokens.semantic.typography.fontSize.md})`,
+      fontWeight: `var(--timeline-cardTitle-font-weight, ${tokens.semantic.typography.fontWeight.medium})`,
+      fontStyle: `var(--timeline-cardTitle-font-style, normal)`,
+      lineHeight: tokens.semantic.typography.lineHeight.tight,
+    },
+  ],
 });
 
-// Subtitle styles  
+// Subtitle styles
 export const subtitleStyles = styleVariants({
-  card: [typography.base, {
-    fontFamily: `var(--timeline-cardSubtitle-font-family, ${baseFontFamily})`,
-    fontSize: `var(--timeline-cardSubtitle-font-size, ${tokens.semantic.typography.fontSize.sm})`,
-    fontWeight: `var(--timeline-cardSubtitle-font-weight, ${tokens.semantic.typography.fontWeight.normal})`,
-    fontStyle: `var(--timeline-cardSubtitle-font-style, normal)`,
-    color: tokens.semantic.color.text.secondary,
-    lineHeight: tokens.semantic.typography.lineHeight.normal,
-  }],
+  card: [
+    typography.base,
+    {
+      fontFamily: `var(--timeline-cardSubtitle-font-family, ${baseFontFamily})`,
+      fontSize: `var(--timeline-cardSubtitle-font-size, ${tokens.semantic.typography.fontSize.sm})`,
+      fontWeight: `var(--timeline-cardSubtitle-font-weight, ${tokens.semantic.typography.fontWeight.normal})`,
+      fontStyle: `var(--timeline-cardSubtitle-font-style, normal)`,
+      color: tokens.semantic.color.text.secondary,
+      lineHeight: tokens.semantic.typography.lineHeight.normal,
+    },
+  ],
 });
 
 // Body text styles
 export const textStyles = styleVariants({
-  card: [typography.base, {
-    fontFamily: `var(--timeline-cardText-font-family, ${baseFontFamily})`,
-    fontSize: `var(--timeline-cardText-font-size, ${tokens.semantic.typography.fontSize.sm})`,
-    fontWeight: `var(--timeline-cardText-font-weight, ${tokens.semantic.typography.fontWeight.normal})`,
-    fontStyle: `var(--timeline-cardText-font-style, normal)`,
-    lineHeight: tokens.semantic.typography.lineHeight.relaxed,
-  }],
+  card: [
+    typography.base,
+    {
+      fontFamily: `var(--timeline-cardText-font-family, ${baseFontFamily})`,
+      fontSize: `var(--timeline-cardText-font-size, ${tokens.semantic.typography.fontSize.sm})`,
+      fontWeight: `var(--timeline-cardText-font-weight, ${tokens.semantic.typography.fontWeight.normal})`,
+      fontStyle: `var(--timeline-cardText-font-style, normal)`,
+      lineHeight: tokens.semantic.typography.lineHeight.relaxed,
+    },
+  ],
 });
 
 // Control/UI text styles
 export const controlStyles = styleVariants({
-  default: [typography.base, {
-    fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
-    fontSize: `var(--timeline-controls-font-size, ${tokens.semantic.typography.fontSize.sm})`,
-    fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.medium})`,
-    fontStyle: `var(--timeline-controls-font-style, normal)`,
-    lineHeight: tokens.semantic.typography.lineHeight.normal,
-  }],
-  
-  button: [typography.base, {
-    fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
-    fontSize: `var(--timeline-controls-font-size, ${tokens.semantic.typography.fontSize.xs})`,
-    fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.medium})`,
-    fontStyle: `var(--timeline-controls-font-style, normal)`,
-    lineHeight: tokens.semantic.typography.lineHeight.none,
-  }],
+  default: [
+    typography.base,
+    {
+      fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
+      fontSize: `var(--timeline-controls-font-size, ${tokens.semantic.typography.fontSize.sm})`,
+      fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.medium})`,
+      fontStyle: `var(--timeline-controls-font-style, normal)`,
+      lineHeight: tokens.semantic.typography.lineHeight.normal,
+    },
+  ],
+
+  button: [
+    typography.base,
+    {
+      fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
+      fontSize: `var(--timeline-controls-font-size, ${tokens.semantic.typography.fontSize.xs})`,
+      fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.medium})`,
+      fontStyle: `var(--timeline-controls-font-style, normal)`,
+      lineHeight: tokens.semantic.typography.lineHeight.none,
+    },
+  ],
 });
 
 // Responsive font size adjustments
@@ -89,7 +107,7 @@ export const responsiveFontSizes = {
       },
     },
   }),
-  
+
   cardTitle: style({
     '@media': {
       '(max-width: 768px)': {
@@ -97,7 +115,7 @@ export const responsiveFontSizes = {
       },
     },
   }),
-  
+
   cardText: style({
     '@media': {
       '(max-width: 768px)': {
@@ -133,7 +151,7 @@ export const fontCombinations = {
   textCard: [textStyles.card],
   controlDefault: [controlStyles.default],
   controlButton: [controlStyles.button],
-  
+
   // Responsive combinations
   titleDefaultResponsive: [titleStyles.default, responsiveFontSizes.title],
   titleCardResponsive: [titleStyles.card, responsiveFontSizes.cardTitle],

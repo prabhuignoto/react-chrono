@@ -171,7 +171,7 @@ export const textOverlayButton = style([
     height: '32px',
     transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
     boxShadow: tokens.semantic.shadow.card,
-    
+
     selectors: {
       '&:hover': {
         background: tokens.semantic.color.interactive.primaryHover,

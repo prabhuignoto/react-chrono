@@ -9,7 +9,7 @@ import { baseStyles } from '../../../styles/system/static.css';
 const baseFontFamily = `var(--timeline-font-family, 'Inter, system-ui, ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif')`;
 
 export const list = style([
-  sprinkles({ 
+  sprinkles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -25,7 +25,7 @@ export const list = style([
 
 export const listItem = style([
   patterns.interactive({ hover: 'lift' }),
-  sprinkles({ 
+  sprinkles({
     display: 'flex',
     flexDirection: 'column',
     width: 'full',
@@ -38,7 +38,7 @@ export const listItem = style([
     padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`, // Reduced vertical padding
     border: `1px solid ${tokens.semantic.color.border.default}`,
     transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
-    
+
     selectors: {
       '&:hover': {
         cursor: 'pointer',
@@ -56,11 +56,13 @@ export const listItem = style([
   },
 ]);
 
-export const listItemActive = style({ borderColor: tokens.semantic.color.interactive.primary });
+export const listItemActive = style({
+  borderColor: tokens.semantic.color.interactive.primary,
+});
 
 export const checkboxWrapper = style([
-  sprinkles({ 
-    display: 'flex', 
+  sprinkles({
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   }),
@@ -68,8 +70,8 @@ export const checkboxWrapper = style([
 ]);
 
 export const checkbox = style([
-  sprinkles({ 
-    display: 'flex', 
+  sprinkles({
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   }),

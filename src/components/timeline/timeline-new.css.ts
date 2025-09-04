@@ -110,7 +110,7 @@ export const mainWrapper = recipe({
         height: 0,
         overflowY: 'auto',
         overflowX: 'hidden',
-        border: "1px solid red"
+        border: '1px solid red',
       },
     },
   },
@@ -260,15 +260,21 @@ globalStyle(`${wrapper.classNames.base}:focus`, {
   outline: 0,
 });
 
-globalStyle(`${wrapper.classNames.base}:not([data-keyboard-navigation="true"]) :focus`, {
-  outline: 0,
-});
+globalStyle(
+  `${wrapper.classNames.base}:not([data-keyboard-navigation="true"]) :focus`,
+  {
+    outline: 0,
+  },
+);
 
-globalStyle(`${wrapper.classNames.base}[data-keyboard-navigation="true"] :focus-visible`, {
-  outline: `2px solid ${tokens.semantic.color.border.interactive}`,
-  outlineOffset: '2px',
-  borderRadius: tokens.semantic.borderRadius.sm,
-});
+globalStyle(
+  `${wrapper.classNames.base}[data-keyboard-navigation="true"] :focus-visible`,
+  {
+    outline: `2px solid ${tokens.semantic.color.border.interactive}`,
+    outlineOffset: '2px',
+    borderRadius: tokens.semantic.borderRadius.sm,
+  },
+);
 
 // Fullscreen mode styles
 globalStyle(
@@ -289,14 +295,14 @@ globalStyle(
     left: 0,
     zIndex: 999999,
     boxSizing: 'border-box',
-  }
+  },
 );
 
 globalStyle(
   `${wrapper.classNames.base}:fullscreen::backdrop, ${wrapper.classNames.base}:-webkit-full-screen::backdrop`,
   {
     backgroundColor: tokens.semantic.color.background.primary,
-  }
+  },
 );
 
 // Animation classes for timeline items
@@ -331,7 +337,7 @@ export const timelineStates = {
       },
     },
   ]),
-  
+
   error: style({
     border: `2px solid ${tokens.semantic.color.status.error}`,
     borderRadius: tokens.semantic.borderRadius.md,
@@ -339,7 +345,7 @@ export const timelineStates = {
     backgroundColor: `${tokens.semantic.color.status.error}10`,
     color: tokens.semantic.color.status.error,
   }),
-  
+
   empty: style([
     sprinkles({
       display: 'flex',
@@ -360,5 +366,7 @@ export const timelineStates = {
 // Export recipe variants for type safety
 export type TimelineWrapperVariants = Parameters<typeof wrapper>[0];
 export type TimelineMainWrapperVariants = Parameters<typeof mainWrapper>[0];
-export type TimelineContentRendererVariants = Parameters<typeof contentRenderer>[0];
+export type TimelineContentRendererVariants = Parameters<
+  typeof contentRenderer
+>[0];
 export type TimelineMainVariants = Parameters<typeof main>[0];

@@ -32,25 +32,26 @@ function convertToLegacyProps(props: TimelinePropsV2): TimelineProps {
     activeItemIndex: props.activeItemIndex,
     allowDynamicUpdate: props.allowDynamicUpdate,
     uniqueId: props.id,
-    onItemSelected: props.onItemSelected ? 
-      (data: any) => {
-        // Convert from legacy flat structure to new nested structure
-        if ('item' in data) {
-          // Already in new format
-          props.onItemSelected!(data);
-        } else {
-          // Convert from legacy format
-          const { index, ...item } = data;
-          props.onItemSelected!({ item, index });
+    onItemSelected: props.onItemSelected
+      ? (data: any) => {
+          // Convert from legacy flat structure to new nested structure
+          if ('item' in data) {
+            // Already in new format
+            props.onItemSelected!(data);
+          } else {
+            // Convert from legacy format
+            const { index, ...item } = data;
+            props.onItemSelected!({ item, index });
+          }
         }
-      } : undefined,
+      : undefined,
     onScrollEnd: props.onScrollEnd,
     onThemeChange: props.onThemeChange as any,
     onRestartSlideshow: props.onRestartSlideshow,
-    
+
     // Mode conversion
     mode: mapNewModeToLegacy(props.mode),
-    
+
     // Layout props
     cardWidth: props.layout?.cardWidth,
     cardHeight: props.layout?.cardHeight,
@@ -60,60 +61,78 @@ function convertToLegacyProps(props: TimelinePropsV2): TimelineProps {
     timelineHeight: props.layout?.timelineHeight,
     responsiveBreakPoint: props.layout?.responsive?.breakpoint,
     enableBreakPoint: props.layout?.responsive?.enabled,
-    cardPositionHorizontal: mapNewCardPositionToLegacy(props.layout?.positioning?.cardPosition),
+    cardPositionHorizontal: mapNewCardPositionToLegacy(
+      props.layout?.positioning?.cardPosition,
+    ),
     flipLayout: props.layout?.positioning?.flipLayout,
-    
+
     // Interaction props
-    disableNavOnKey: props.interaction?.keyboardNavigation === false ? true : undefined,
-    disableClickOnCircle: props.interaction?.pointClick === false ? true : undefined,
-    disableAutoScrollOnClick: props.interaction?.autoScroll === false ? true : undefined,
+    disableNavOnKey:
+      props.interaction?.keyboardNavigation === false ? true : undefined,
+    disableClickOnCircle:
+      props.interaction?.pointClick === false ? true : undefined,
+    disableAutoScrollOnClick:
+      props.interaction?.autoScroll === false ? true : undefined,
     focusActiveItemOnLoad: props.interaction?.focusOnLoad,
     highlightCardsOnHover: props.interaction?.cardHover,
     disableInteraction: props.interaction?.disabled,
-    
+
     // Content props
     parseDetailsAsHTML: props.content?.allowHTML,
     useReadMore: props.content?.readMore,
     textOverlay: props.content?.textOverlay,
     titleDateFormat: props.content?.dateFormat,
     textDensity: props.content?.compactText ? 'LOW' : 'HIGH',
-    semanticTags: props.content?.semanticTags ? pickDefined({
-      cardTitle: props.content.semanticTags.title,
-      cardSubtitle: props.content.semanticTags.subtitle,
-    }) : undefined,
-    
+    semanticTags: props.content?.semanticTags
+      ? pickDefined({
+          cardTitle: props.content.semanticTags.title,
+          cardSubtitle: props.content.semanticTags.subtitle,
+        })
+      : undefined,
+
     // Display props
     borderLessCards: props.display?.borderless,
     cardLess: props.display?.cardsDisabled,
     disableTimelinePoint: props.display?.pointsDisabled,
     timelinePointShape: props.display?.pointShape,
     showAllCardsHorizontal: props.display?.allCardsVisible,
-    disableToolbar: props.display?.toolbar?.enabled === false ? true : undefined,
+    disableToolbar:
+      props.display?.toolbar?.enabled === false ? true : undefined,
     toolbarPosition: props.display?.toolbar?.position,
     scrollable: props.display?.scrollable,
-    
+
     // Media props
     mediaHeight: props.media?.height,
-    mediaSettings: props.media ? pickDefined({
-      align: props.media?.align,
-      fit: props.media?.fit as 'cover' | 'contain' | 'fill' | 'none' | undefined,
-    }) : undefined,
-    
+    mediaSettings: props.media
+      ? pickDefined({
+          align: props.media?.align,
+          fit: props.media?.fit as
+            | 'cover'
+            | 'contain'
+            | 'fill'
+            | 'none'
+            | undefined,
+        })
+      : undefined,
+
     // Animation props
     slideShow: props.animation?.slideshow?.enabled,
     slideItemDuration: props.animation?.slideshow?.duration,
-    slideShowType: mapNewSlideshowTypeToLegacy(props.animation?.slideshow?.type) as any,
+    slideShowType: mapNewSlideshowTypeToLegacy(
+      props.animation?.slideshow?.type,
+    ) as any,
     showProgressOnSlideshow: props.animation?.slideshow?.showProgress,
-    showOverallSlideshowProgress: props.animation?.slideshow?.showOverallProgress,
-    
+    showOverallSlideshowProgress:
+      props.animation?.slideshow?.showOverallProgress,
+
     // Style props
     classNames: props.style?.classNames,
     fontSizes: props.style?.fontSizes,
     googleFonts: props.style?.googleFonts,
-    
+
     // Accessibility props
     buttonTexts: props.accessibility?.buttonTexts as any,
-    
+
     // Dark mode
     darkMode: props.darkMode?.enabled,
     enableDarkToggle: props.darkMode?.showToggle,
@@ -135,7 +154,9 @@ function mapNewModeToLegacy(mode?: TimelinePropsV2['mode']): string {
   }
 }
 
-function mapNewCardPositionToLegacy(position?: 'top' | 'bottom'): 'TOP' | 'BOTTOM' | undefined {
+function mapNewCardPositionToLegacy(
+  position?: 'top' | 'bottom',
+): 'TOP' | 'BOTTOM' | undefined {
   switch (position) {
     case 'top':
       return 'TOP';
@@ -146,7 +167,9 @@ function mapNewCardPositionToLegacy(position?: 'top' | 'bottom'): 'TOP' | 'BOTTO
   }
 }
 
-function mapNewSlideshowTypeToLegacy(type?: 'reveal' | 'slide' | 'fade'): string | undefined {
+function mapNewSlideshowTypeToLegacy(
+  type?: 'reveal' | 'slide' | 'fade',
+): string | undefined {
   switch (type) {
     case 'reveal':
       return 'reveal';
@@ -168,10 +191,14 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
   // Handle backward compatibility and migration
   const props = useMemo(() => {
     // Check if using new grouped prop structure
-    const hasNewProps = 'layout' in inputProps || 'interaction' in inputProps || 
-                       'content' in inputProps || 'display' in inputProps || 
-                       'media' in inputProps || 'animation' in inputProps;
-    
+    const hasNewProps =
+      'layout' in inputProps ||
+      'interaction' in inputProps ||
+      'content' in inputProps ||
+      'display' in inputProps ||
+      'media' in inputProps ||
+      'animation' in inputProps;
+
     if (hasNewProps) {
       // Already using new format
       return inputProps as TimelinePropsV2;
@@ -190,9 +217,12 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     const legacyProps = convertToLegacyProps(props);
     const validationResult = safeValidateTimelineProps(legacyProps);
     if (!validationResult.success) {
-      console.warn('Timeline props validation warnings:', validationResult.errors.map(
-        error => `${error.path.join('.')}: ${error.message}`
-      ).join(', '));
+      console.warn(
+        'Timeline props validation warnings:',
+        validationResult.errors
+          .map((error) => `${error.path.join('.')}: ${error.message}`)
+          .join(', '),
+      );
     }
   }
 
@@ -231,10 +261,13 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
   const [slideShowActive, setSlideShowActive] = useState(false);
   // Don't auto-highlight first item in vertical modes unless explicitly set
   const [activeTimelineItem, setActiveTimelineItem] = useState(
-    activeItemIndex !== undefined ? activeItemIndex : 
-    (mode === 'vertical' || mode === 'alternating') ? undefined : 0
+    activeItemIndex !== undefined
+      ? activeItemIndex
+      : mode === 'vertical' || mode === 'alternating'
+        ? undefined
+        : 0,
   );
-  
+
   // Track the previous prop value to avoid circular updates
   const previousActiveItemIndexRef = useRef(activeItemIndex);
 
@@ -341,8 +374,9 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     itemsHashRef.current = currentHash;
 
     const previousItemsLength = timeLineItems.length;
-    const isDynamicUpdate = timeLineItems.length && _items.length > timeLineItems.length;
-    
+    const isDynamicUpdate =
+      timeLineItems.length && _items.length > timeLineItems.length;
+
     if (isDynamicUpdate) {
       newItems = updateItems(_items);
     } else if (_items.length) {
@@ -352,7 +386,7 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     if (newItems.length) {
       timeLineItemsRef.current = newItems;
       setTimeLineItems(newItems);
-      
+
       if (isDynamicUpdate && allowDynamicUpdate && previousItemsLength > 0) {
         // For dynamic updates, preserve current focus if it exists
         // Only focus on first newly loaded item if no current active item
@@ -361,11 +395,15 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
         }
       } else {
         // For initial load or full refresh, respect the initial activeItemIndex setting
-        const initialIndex = activeItemIndex !== undefined ? activeItemIndex : 
-                           (mode === 'vertical' || mode === 'alternating') ? undefined : 0;
+        const initialIndex =
+          activeItemIndex !== undefined
+            ? activeItemIndex
+            : mode === 'vertical' || mode === 'alternating'
+              ? undefined
+              : 0;
         setActiveTimelineItem(initialIndex);
       }
-      
+
       processedItemsCache.current = newItems;
     }
   }, [
@@ -441,7 +479,10 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     if (!timeLineItems.length) {
       return;
     }
-    if (activeTimelineItem !== undefined && activeTimelineItem < timeLineItems.length - 1) {
+    if (
+      activeTimelineItem !== undefined &&
+      activeTimelineItem < timeLineItems.length - 1
+    ) {
       const newTimeLineItem = activeTimelineItem + 1;
 
       // Update timeline state and trigger smooth navigation

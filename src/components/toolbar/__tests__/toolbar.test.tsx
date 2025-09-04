@@ -1,7 +1,7 @@
 // Toolbar.test.tsx
 
 import { render } from '@testing-library/react';
-import { getDefaultThemeOrDark } from '@utils/index';
+import { getDefaultThemeOrDark } from '../../../utils/index';
 import { Toolbar } from '../index';
 import { ToolbarItem } from '@models/ToolbarItem';
 

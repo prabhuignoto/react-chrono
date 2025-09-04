@@ -45,7 +45,7 @@ export const popoverHolder = style([
     right: 'auto',
     selectors: {
       '&::-webkit-scrollbar': { width: '6px' },
-      '&::-webkit-scrollbar-track': { 
+      '&::-webkit-scrollbar-track': {
         backgroundColor: tokens.semantic.color.background.secondary,
         borderRadius: '3px',
       },
@@ -88,7 +88,7 @@ export const holderVisible = style({
   },
 });
 
-export const holderTop = style({ top: '4rem' });
+export const holderTop = style({ top: '3.5rem' });
 export const holderBottom = style({ bottom: '3.5rem' });
 export const holderLeftMobile = style({ left: '4px' });
 
@@ -108,6 +108,7 @@ export const selecter = style([
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    gap: 'xs',
   }),
   {
     background: tokens.semantic.color.background.elevated,
@@ -122,7 +123,7 @@ export const selecter = style([
     height: '36px',
     minWidth: '36px',
     width: 'auto',
-    padding: '0 0.5rem',
+    padding: '0 0.75rem',
     transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
     selectors: {
       '&:hover': {
@@ -171,8 +172,13 @@ export const selecterIcon = style({
   color: tokens.semantic.color.text.secondary,
   height: '20px',
   width: '20px',
-  transition: 'transform 0.2s ease-in-out',
+  transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out',
   flexShrink: 0,
+  selectors: {
+    [`${selecter}:hover &`]: {
+      color: tokens.semantic.color.interactive.primary,
+    },
+  },
 });
 
 globalStyle(`${selecterIcon} svg`, {

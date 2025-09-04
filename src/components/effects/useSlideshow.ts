@@ -111,7 +111,13 @@ const useSlideshow = (
 
       rafRef.current = window.requestAnimationFrame(animationStep);
     },
-    [slideItemDuration, active, slideShowActive, cleanupTimer, handleTimerComplete],
+    [
+      slideItemDuration,
+      active,
+      slideShowActive,
+      cleanupTimer,
+      handleTimerComplete,
+    ],
   );
 
   /**

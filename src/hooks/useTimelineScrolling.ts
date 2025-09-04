@@ -100,88 +100,101 @@ export const useTimelineScrolling = () => {
     };
   }, []);
 
-  const scrollToElement = useCallback((element: HTMLElement, mode: string, forceScroll?: boolean) => {
-    if (!element) return;
+  const scrollToElement = useCallback(
+    (element: HTMLElement, mode: string, forceScroll?: boolean) => {
+      if (!element) return;
 
-    // Prevent scrolling to the same element repeatedly (unless forced for keyboard navigation)
-    if (lastScrollTarget.current === element && !forceScroll) {
-      return;
-    }
-
-    // Clear any pending scroll or animation
-    if (scrollTimeoutRef.current) {
-      cancelAnimationFrame(scrollTimeoutRef.current);
-    }
-
-    // Schedule the scroll for the next animation frame
-    scrollTimeoutRef.current = requestAnimationFrame(() => {
-      // Start scrolling immediately since we're now doing predictive centering
-      const isVerticalMode =
-        mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
-
-      // Find the scrollable container - handle test environment gracefully
-      let container: Element | null = null;
-
-      if (typeof element.closest === 'function') {
-        container = element.closest('[data-testid="timeline-main-wrapper"]');
-      }
-
-      if (!container) {
-        container = element.parentElement?.parentElement || null;
-      }
-
-      if (!container) {
-        // Fallback to native scrollIntoView if available
-        if (typeof element.scrollIntoView === 'function') {
-          element.scrollIntoView({
-            behavior: 'smooth',
-            block: isVerticalMode ? 'center' : 'nearest',
-            inline: isVerticalMode ? 'center' : 'center',
-          });
-        }
+      // Prevent scrolling to the same element repeatedly (unless forced for keyboard navigation)
+      if (lastScrollTarget.current === element && !forceScroll) {
         return;
       }
 
-      // Calculate target position to center the element
-      const containerRect = container.getBoundingClientRect();
-      const elementRect = element.getBoundingClientRect();
-
-      if (isVerticalMode) {
-        // Center vertically with improved positioning
-        const targetScrollTop =
-          container.scrollTop +
-          (elementRect.top - containerRect.top) -
-          containerRect.height / 2 +
-          elementRect.height / 2;
-
-        // Use appropriate duration for smooth but responsive scrolling
-        smoothScrollTo(container, targetScrollTop, DEFAULT_SCROLL_DURATION, false);
-      } else {
-        // Center horizontally with improved positioning
-        const targetScrollLeft =
-          container.scrollLeft +
-          (elementRect.left - containerRect.left) -
-          containerRect.width / 2 +
-          elementRect.width / 2;
-
-        // Use appropriate duration for smooth but responsive scrolling
-        smoothScrollTo(container, targetScrollLeft, DEFAULT_SCROLL_DURATION, true);
+      // Clear any pending scroll or animation
+      if (scrollTimeoutRef.current) {
+        cancelAnimationFrame(scrollTimeoutRef.current);
       }
 
-      lastScrollTarget.current = element;
+      // Schedule the scroll for the next animation frame
+      scrollTimeoutRef.current = requestAnimationFrame(() => {
+        // Start scrolling immediately since we're now doing predictive centering
+        const isVerticalMode =
+          mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
 
-      // Clear the target after scrolling completes
-      if (clearLastTargetTimeoutRef.current) {
-        clearTimeout(clearLastTargetTimeoutRef.current);
-      }
-      clearLastTargetTimeoutRef.current = setTimeout(() => {
-        lastScrollTarget.current = null;
-        clearLastTargetTimeoutRef.current = null;
-      }, DEFAULT_SCROLL_DURATION + 100); // Add small buffer after scroll completes
+        // Find the scrollable container - handle test environment gracefully
+        let container: Element | null = null;
 
-      scrollTimeoutRef.current = null;
-    });
-  }, []);
+        if (typeof element.closest === 'function') {
+          container = element.closest('[data-testid="timeline-main-wrapper"]');
+        }
+
+        if (!container) {
+          container = element.parentElement?.parentElement || null;
+        }
+
+        if (!container) {
+          // Fallback to native scrollIntoView if available
+          if (typeof element.scrollIntoView === 'function') {
+            element.scrollIntoView({
+              behavior: 'smooth',
+              block: isVerticalMode ? 'center' : 'nearest',
+              inline: isVerticalMode ? 'center' : 'center',
+            });
+          }
+          return;
+        }
+
+        // Calculate target position to center the element
+        const containerRect = container.getBoundingClientRect();
+        const elementRect = element.getBoundingClientRect();
+
+        if (isVerticalMode) {
+          // Center vertically with improved positioning
+          const targetScrollTop =
+            container.scrollTop +
+            (elementRect.top - containerRect.top) -
+            containerRect.height / 2 +
+            elementRect.height / 2;
+
+          // Use appropriate duration for smooth but responsive scrolling
+          smoothScrollTo(
+            container,
+            targetScrollTop,
+            DEFAULT_SCROLL_DURATION,
+            false,
+          );
+        } else {
+          // Center horizontally with improved positioning
+          const targetScrollLeft =
+            container.scrollLeft +
+            (elementRect.left - containerRect.left) -
+            containerRect.width / 2 +
+            elementRect.width / 2;
+
+          // Use appropriate duration for smooth but responsive scrolling
+          smoothScrollTo(
+            container,
+            targetScrollLeft,
+            DEFAULT_SCROLL_DURATION,
+            true,
+          );
+        }
+
+        lastScrollTarget.current = element;
+
+        // Clear the target after scrolling completes
+        if (clearLastTargetTimeoutRef.current) {
+          clearTimeout(clearLastTargetTimeoutRef.current);
+        }
+        clearLastTargetTimeoutRef.current = setTimeout(() => {
+          lastScrollTarget.current = null;
+          clearLastTargetTimeoutRef.current = null;
+        }, DEFAULT_SCROLL_DURATION + 100); // Add small buffer after scroll completes
+
+        scrollTimeoutRef.current = null;
+      });
+    },
+    [],
+  );
 
   return { scrollToElement };
 };

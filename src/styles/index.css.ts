@@ -2,7 +2,7 @@
 export { tokens } from './tokens/index.css';
 export { lightTheme, darkTheme, defaultTheme } from './tokens/themes.css';
 export { sprinkles, sprinkleUtils, responsive } from './system/sprinkles.css';
-export { 
+export {
   patterns,
   interactive,
   flexContainer,
@@ -13,15 +13,15 @@ export {
   timelineCard,
   timelinePoint,
   toolbarButton,
-  utilityPatterns
+  utilityPatterns,
 } from './system/recipes.css';
-export { 
+export {
   staticValues,
   animations,
   animationStyles,
   baseStyles,
   stateStyles,
-  mediaQueries
+  mediaQueries,
 } from './system/static.css';
 
 // Type exports

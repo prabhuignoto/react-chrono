@@ -6,15 +6,15 @@ exports[`Content Header > should match the snapshot 1`] = `
     class="timeline-card-content_timelineCardHeader__chzdno4 timeline-card-content__chzdno3 sprinkles_display_flex_mobile__1v4ezef6 sprinkles_flexDirection_column_mobile__1v4ezefx sprinkles_width_full_mobile__1v4ezef6o sprinkles_gap_xs_mobile__1v4ezef29"
   >
     <span
-      class="card-title"
+      class="font-styles_titleStyles_card__10vuyxn2 font-styles_typography_base__10vuyxn0 card-title"
       data-class="card-title"
-      style="color: rgb(0, 0, 0); font-size: 1.25rem;"
+      style="color: rgb(0, 0, 0);"
     >
       title
     </span>
     <span
-      class="card-sub-title card-subtitle"
-      style="color: rgb(0, 0, 0); font-size: 0.85rem;"
+      class="font-styles_subtitleStyles_card__10vuyxn3 font-styles_typography_base__10vuyxn0 card-sub-title card-subtitle"
+      style="color: rgb(0, 0, 0);"
     >
       content
     </span>

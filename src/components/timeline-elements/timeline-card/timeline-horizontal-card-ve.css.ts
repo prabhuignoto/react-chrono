@@ -110,15 +110,15 @@ export const shape = recipe({
       false: {},
     },
     size: {
-      small: { 
+      small: {
         width: tokens.component.timeline.point.size.sm,
         height: tokens.component.timeline.point.size.sm,
       },
-      medium: { 
+      medium: {
         width: tokens.component.timeline.point.size.md,
         height: tokens.component.timeline.point.size.md,
       },
-      large: { 
+      large: {
         width: tokens.component.timeline.point.size.lg,
         height: tokens.component.timeline.point.size.lg,
       },
@@ -147,13 +147,21 @@ export const shape = recipe({
       },
     },
     {
-      variants: { timelinePointShape: 'diamond', active: true, usingIcon: true },
+      variants: {
+        timelinePointShape: 'diamond',
+        active: true,
+        usingIcon: true,
+      },
       style: {
         transform: 'rotate(45deg) scale(1.1)',
       },
     },
     {
-      variants: { timelinePointShape: 'diamond', active: true, usingIcon: false },
+      variants: {
+        timelinePointShape: 'diamond',
+        active: true,
+        usingIcon: false,
+      },
       style: {
         transform: 'rotate(45deg) scale(1.1)',
       },

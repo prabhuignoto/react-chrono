@@ -197,7 +197,7 @@ describe('useTimelineNavigation', () => {
       result.current.handleKeySelection(createMockKeyboardEvent('ArrowDown'));
     });
 
-    // Skip internal state check - focus on callback behavior  
+    // Skip internal state check - focus on callback behavior
     expect(mockOnNext).toHaveBeenCalledTimes(2);
 
     // Now test arrow up (should work from middle position)

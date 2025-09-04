@@ -27,7 +27,7 @@ const {
   mockUseMatchMedia: vi.fn(),
 }));
 
-vi.mock('@utils/index', () => ({
+vi.mock('../../utils/index', () => ({
   getDefaultButtonTexts: mockGetDefaultButtonTexts,
   getDefaultClassNames: mockGetDefaultClassNames,
   getDefaultThemeOrDark: mockGetDefaultThemeOrDark,

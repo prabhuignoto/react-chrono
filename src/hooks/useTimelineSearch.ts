@@ -161,35 +161,38 @@ export const useTimelineSearch = ({
     [debouncedSearch],
   );
 
-  const clearSearch = useCallback((preservePosition = false) => {
-    setSearchQuery('');
-    setSearchResults([]);
-    setCurrentMatchIndex(-1);
-    debouncedSearch.cancel();
+  const clearSearch = useCallback(
+    (preservePosition = false) => {
+      setSearchQuery('');
+      setSearchResults([]);
+      setCurrentMatchIndex(-1);
+      debouncedSearch.cancel();
 
-    // Clear any pending auto-focus timeout
-    if (searchTimeoutRef.current) {
-      clearTimeout(searchTimeoutRef.current);
-    }
-
-    // Reset first search flag when clearing
-    isFirstSearchRef.current = true;
-
-    if (items.length > 0 && !preservePosition) {
-      activeItemIndex.current = 0;
-      onTimelineUpdatedRef.current?.(0);
-
-      const firstItem = items[0];
-      if (firstItem?.id) {
-        handleTimelineItemClickRef.current(firstItem.id);
+      // Clear any pending auto-focus timeout
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
       }
-    }
 
-    // Force refocus after clearing (only when user explicitly clears)
-    if (!preservePosition) {
-      focusSearchInput(true);
-    }
-  }, [items, debouncedSearch, focusSearchInput]);
+      // Reset first search flag when clearing
+      isFirstSearchRef.current = true;
+
+      if (items.length > 0 && !preservePosition) {
+        activeItemIndex.current = 0;
+        onTimelineUpdatedRef.current?.(0);
+
+        const firstItem = items[0];
+        if (firstItem?.id) {
+          handleTimelineItemClickRef.current(firstItem.id);
+        }
+      }
+
+      // Force refocus after clearing (only when user explicitly clears)
+      if (!preservePosition) {
+        focusSearchInput(true);
+      }
+    },
+    [items, debouncedSearch, focusSearchInput],
+  );
 
   // Optimized navigation with bounds checking
   const navigateMatches = useCallback(

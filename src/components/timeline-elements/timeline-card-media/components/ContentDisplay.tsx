@@ -116,9 +116,14 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
                   toggleMinimize();
                 }}
                 className={textOverlayButton}
-                style={theme ? assignInlineVars({
-                  [gradientVar]: theme?.primary || theme?.cardBgColor || '',
-                }) : undefined}
+                style={
+                  theme
+                    ? assignInlineVars({
+                        [gradientVar]:
+                          theme?.primary || theme?.cardBgColor || '',
+                      })
+                    : undefined
+                }
                 aria-label={
                   isMinimized ? 'Expand text overlay' : 'Minimize text overlay'
                 }

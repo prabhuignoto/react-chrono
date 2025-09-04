@@ -1,14 +1,14 @@
 /**
  * FontProvider component for Google Fonts integration
- * 
+ *
  * Handles loading Google Fonts and providing font styles via CSS custom properties
  */
 
 import React, { useEffect, useState, useMemo } from 'react';
-import { 
-  GoogleFontsConfig, 
-  loadGoogleFonts, 
-  generateFontCssVars 
+import {
+  GoogleFontsConfig,
+  loadGoogleFonts,
+  generateFontCssVars,
 } from './google-fonts';
 
 interface FontProviderProps {
@@ -61,7 +61,7 @@ export const FontProvider: React.FC<FontProviderProps> = ({
       fontLoaded,
       cssVars,
       cssVarsKeys: Object.keys(cssVars || {}),
-      googleFonts
+      googleFonts,
     });
 
     if (!fontLoaded || !cssVars || Object.keys(cssVars).length === 0) {
@@ -89,14 +89,14 @@ export const FontProvider: React.FC<FontProviderProps> = ({
   const containerStyle = useMemo(() => {
     return {
       // Provide fallback fonts while loading
-      fontFamily: googleFonts?.fontFamily 
+      fontFamily: googleFonts?.fontFamily
         ? `"${googleFonts.fontFamily}", system-ui, ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`
         : undefined,
     };
   }, [googleFonts]);
 
   return (
-    <div 
+    <div
       className={`timeline-font-provider ${className}`}
       style={containerStyle}
       data-font-loaded={fontLoaded}

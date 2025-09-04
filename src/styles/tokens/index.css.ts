@@ -52,13 +52,13 @@ export const tokens = createThemeContract({
     },
     spacing: {
       0: null,
-      1: null,  // 4px
-      2: null,  // 8px
-      3: null,  // 12px
-      4: null,  // 16px
-      5: null,  // 20px
-      6: null,  // 24px
-      8: null,  // 32px
+      1: null, // 4px
+      2: null, // 8px
+      3: null, // 12px
+      4: null, // 16px
+      5: null, // 20px
+      6: null, // 24px
+      8: null, // 32px
       10: null, // 40px
       12: null, // 48px
       16: null, // 64px
@@ -66,34 +66,34 @@ export const tokens = createThemeContract({
       24: null, // 96px
     },
     fontSize: {
-      xs: null,   // 12px
-      sm: null,   // 14px
+      xs: null, // 12px
+      sm: null, // 14px
       base: null, // 16px
-      lg: null,   // 18px
-      xl: null,   // 20px
+      lg: null, // 18px
+      xl: null, // 20px
       '2xl': null, // 24px
       '3xl': null, // 30px
       '4xl': null, // 36px
     },
     lineHeight: {
-      tight: null,  // 1.2
+      tight: null, // 1.2
       normal: null, // 1.5
       relaxed: null, // 1.8
     },
     fontWeight: {
-      normal: null,    // 400
-      medium: null,    // 500
-      semibold: null,  // 600
-      bold: null,      // 700
+      normal: null, // 400
+      medium: null, // 500
+      semibold: null, // 600
+      bold: null, // 700
     },
     borderRadius: {
-      none: null,   // 0
-      sm: null,     // 4px
-      md: null,     // 8px
-      lg: null,     // 12px
-      xl: null,     // 16px
-      '2xl': null,  // 24px
-      full: null,   // 9999px
+      none: null, // 0
+      sm: null, // 4px
+      md: null, // 8px
+      lg: null, // 12px
+      xl: null, // 16px
+      '2xl': null, // 24px
+      full: null, // 9999px
     },
     shadow: {
       xs: null,
@@ -103,19 +103,19 @@ export const tokens = createThemeContract({
       xl: null,
     },
     zIndex: {
-      base: null,     // 0
+      base: null, // 0
       elevated: null, // 10
-      sticky: null,   // 20
-      overlay: null,  // 30
-      modal: null,    // 40
-      tooltip: null,  // 50
+      sticky: null, // 20
+      overlay: null, // 30
+      modal: null, // 40
+      tooltip: null, // 50
     },
     transition: {
       duration: {
         instant: null, // 0ms
-        fast: null,    // 150ms
-        normal: null,  // 300ms
-        slow: null,    // 500ms
+        fast: null, // 150ms
+        normal: null, // 300ms
+        slow: null, // 500ms
       },
       easing: {
         linear: null,
@@ -127,7 +127,7 @@ export const tokens = createThemeContract({
       },
     },
   },
-  
+
   // Semantic tokens - meaningful names that map to primitives
   semantic: {
     color: {
@@ -177,18 +177,18 @@ export const tokens = createThemeContract({
       },
     },
     spacing: {
-      xs: null,    // maps to primitive.spacing.1
-      sm: null,    // maps to primitive.spacing.2
-      md: null,    // maps to primitive.spacing.4
-      lg: null,    // maps to primitive.spacing.6
-      xl: null,    // maps to primitive.spacing.8
+      xs: null, // maps to primitive.spacing.1
+      sm: null, // maps to primitive.spacing.2
+      md: null, // maps to primitive.spacing.4
+      lg: null, // maps to primitive.spacing.6
+      xl: null, // maps to primitive.spacing.8
       '2xl': null, // maps to primitive.spacing.12
       '3xl': null, // maps to primitive.spacing.16
     },
     typography: {
       fontSize: {
-        caption: null,  // maps to primitive.fontSize.xs
-        body: null,     // maps to primitive.fontSize.base
+        caption: null, // maps to primitive.fontSize.xs
+        body: null, // maps to primitive.fontSize.base
         heading3: null, // maps to primitive.fontSize.lg
         heading2: null, // maps to primitive.fontSize.xl
         heading1: null, // maps to primitive.fontSize.2xl
@@ -206,11 +206,11 @@ export const tokens = createThemeContract({
       },
     },
     borderRadius: {
-      sm: null,    // maps to primitive.borderRadius.sm
-      md: null,    // maps to primitive.borderRadius.md
-      lg: null,    // maps to primitive.borderRadius.lg
-      xl: null,    // maps to primitive.borderRadius.xl
-      full: null,  // maps to primitive.borderRadius.full
+      sm: null, // maps to primitive.borderRadius.sm
+      md: null, // maps to primitive.borderRadius.md
+      lg: null, // maps to primitive.borderRadius.lg
+      xl: null, // maps to primitive.borderRadius.xl
+      full: null, // maps to primitive.borderRadius.full
     },
     shadow: {
       card: null,
@@ -237,7 +237,7 @@ export const tokens = createThemeContract({
       },
     },
   },
-  
+
   // Component-specific tokens
   component: {
     timeline: {

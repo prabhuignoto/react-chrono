@@ -199,7 +199,9 @@ export const useTimelineItemNavigation = ({
             if (typeof (targetElement as HTMLElement).focus === 'function') {
               (targetElement as HTMLElement).focus({ preventScroll: true });
               // Ensure the wrapper maintains keyboard focus capability
-              const wrapper = targetElement.closest('.timeline-wrapper') as HTMLElement;
+              const wrapper = targetElement.closest(
+                '.timeline-wrapper',
+              ) as HTMLElement;
               if (wrapper && !wrapper.contains(document.activeElement)) {
                 wrapper.focus();
               }
@@ -224,21 +226,25 @@ export const useTimelineItemNavigation = ({
   const handleTimelineItemElapsed = useCallback(
     (itemId?: string) => {
       if (!itemId) return;
-      
+
       const currentIndex = itemsMap.get(itemId);
       if (currentIndex === undefined) return;
-      
+
       const nextIndex = currentIndex + 1;
-      
+
       // If there's a next item, advance to it
       if (nextIndex < items.length) {
-        const nextItemId = Array.from(itemsMap.entries()).find(([_, index]) => index === nextIndex)?.[0];
+        const nextItemId = Array.from(itemsMap.entries()).find(
+          ([_, index]) => index === nextIndex,
+        )?.[0];
         if (nextItemId) {
           handleTimelineItemClick(nextItemId, true);
         }
       } else {
         // If we're at the last item, restart from beginning
-        const firstItemId = Array.from(itemsMap.entries()).find(([_, index]) => index === 0)?.[0];
+        const firstItemId = Array.from(itemsMap.entries()).find(
+          ([_, index]) => index === 0,
+        )?.[0];
         if (firstItemId) {
           handleTimelineItemClick(firstItemId, true);
         }

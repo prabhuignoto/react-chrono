@@ -83,7 +83,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
 
   return (
     <PopOver
-      placeholder={buttonTexts?.changeLayout || "Change layout"}
+      placeholder={buttonTexts?.changeLayout || 'Change layout'}
       position={position}
       theme={theme}
       isDarkMode={isDarkMode}
@@ -118,7 +118,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
 
   return (
     <PopOver
-      placeholder={buttonTexts?.jumpTo || "Jump to timeline item"}
+      placeholder={buttonTexts?.jumpTo || 'Jump to timeline item'}
       position={position}
       theme={theme}
       width={400}
@@ -176,7 +176,7 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
 
   return (
     <PopOver
-      placeholder={buttonTexts?.changeDensity || "Change text density"}
+      placeholder={buttonTexts?.changeDensity || 'Change text density'}
       theme={theme}
       isDarkMode={isDarkMode}
       position={position}

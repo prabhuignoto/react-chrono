@@ -10,8 +10,10 @@ export const staticValues = {
     borderGlow: `linear-gradient(135deg, var(--border-interactive)20 0%, transparent 50%, var(--border-interactive)10 100%)`,
   },
   shadows: {
-    cardElevated: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
-    cardHover: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
+    cardElevated:
+      '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
+    cardHover:
+      '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
     inset: 'inset 0 1px 1px rgba(0, 0, 0, 0.05)',
     glow: '0 0 0 1px rgba(59, 130, 246, 0.3), 0 0 20px rgba(59, 130, 246, 0.2)',
   },
@@ -41,12 +43,12 @@ export const animations = {
     from: { opacity: 0 },
     to: { opacity: 1 },
   }),
-  
+
   fadeOut: keyframes({
     from: { opacity: 1 },
     to: { opacity: 0 },
   }),
-  
+
   slideInUp: keyframes({
     from: {
       opacity: 0,
@@ -57,7 +59,7 @@ export const animations = {
       transform: 'translateY(0)',
     },
   }),
-  
+
   slideInDown: keyframes({
     from: {
       opacity: 0,
@@ -68,7 +70,7 @@ export const animations = {
       transform: 'translateY(0)',
     },
   }),
-  
+
   slideInLeft: keyframes({
     from: {
       opacity: 0,
@@ -79,7 +81,7 @@ export const animations = {
       transform: 'translateX(0)',
     },
   }),
-  
+
   slideInRight: keyframes({
     from: {
       opacity: 0,
@@ -90,7 +92,7 @@ export const animations = {
       transform: 'translateX(0)',
     },
   }),
-  
+
   scaleIn: keyframes({
     from: {
       opacity: 0,
@@ -101,7 +103,7 @@ export const animations = {
       transform: 'scale(1)',
     },
   }),
-  
+
   scaleOut: keyframes({
     from: {
       opacity: 1,
@@ -112,17 +114,17 @@ export const animations = {
       transform: 'scale(0.95)',
     },
   }),
-  
+
   spin: keyframes({
     from: { transform: 'rotate(0deg)' },
     to: { transform: 'rotate(360deg)' },
   }),
-  
+
   pulse: keyframes({
     '0%, 100%': { opacity: 1 },
     '50%': { opacity: 0.5 },
   }),
-  
+
   bounce: keyframes({
     '0%, 100%': {
       transform: 'translateY(-25%)',
@@ -144,7 +146,7 @@ export const animations = {
       opacity: 0,
     },
   }),
-  
+
   // Timeline-specific animations
   timelineCardEnter: keyframes({
     from: {
@@ -156,7 +158,7 @@ export const animations = {
       transform: 'translateY(0) scale(1)',
     },
   }),
-  
+
   timelineCardExit: keyframes({
     from: {
       opacity: 1,
@@ -167,7 +169,7 @@ export const animations = {
       transform: 'translateY(-20px) scale(0.95)',
     },
   }),
-  
+
   timelinePointPulse: keyframes({
     '0%': {
       transform: 'scale(1)',
@@ -189,56 +191,56 @@ export const animationStyles = {
   fadeIn: style({
     animation: `${animations.fadeIn} ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
   }),
-  
+
   fadeOut: style({
     animation: `${animations.fadeOut} ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
   }),
-  
+
   slideInUp: style({
     animation: `${animations.slideInUp} ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
   }),
-  
+
   slideInDown: style({
     animation: `${animations.slideInDown} ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
   }),
-  
+
   slideInLeft: style({
     animation: `${animations.slideInLeft} ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
   }),
-  
+
   slideInRight: style({
     animation: `${animations.slideInRight} ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
   }),
-  
+
   scaleIn: style({
     animation: `${animations.scaleIn} ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.emphasized}`,
   }),
-  
+
   scaleOut: style({
     animation: `${animations.scaleOut} ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.emphasized}`,
   }),
-  
+
   spin: style({
     animation: `${animations.spin} 1s linear infinite`,
   }),
-  
+
   pulse: style({
     animation: `${animations.pulse} 2s cubic-bezier(0.4, 0, 0.6, 1) infinite`,
   }),
-  
+
   bounce: style({
     animation: `${animations.bounce} 1s infinite`,
   }),
-  
+
   // Timeline-specific
   timelineCardEnter: style({
     animation: `${animations.timelineCardEnter} ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.emphasized}`,
   }),
-  
+
   timelineCardExit: style({
     animation: `${animations.timelineCardExit} ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
   }),
-  
+
   timelinePointPulse: style({
     animation: `${animations.timelinePointPulse} 2s infinite`,
   }),
@@ -250,32 +252,32 @@ export const baseStyles = {
   willChange: style({
     willChange: 'transform, opacity',
   }),
-  
+
   // Optimized transforms
   transform3d: style({
     transform: 'translate3d(0, 0, 0)',
   }),
-  
+
   // GPU-accelerated opacity
   gpuAccelerated: style({
     backfaceVisibility: 'hidden',
     perspective: 1000,
     WebkitFontSmoothing: 'subpixel-antialiased',
   }),
-  
+
   // Containment for layout performance
   containLayout: style({
     contain: 'layout',
   }),
-  
+
   containPaint: style({
     contain: 'paint',
   }),
-  
+
   containStrict: style({
     contain: 'strict',
   }),
-  
+
   // Scroll optimization
   smoothScroll: style({
     scrollBehavior: 'smooth',
@@ -285,18 +287,18 @@ export const baseStyles = {
       },
     },
   }),
-  
+
   // Backdrop filters for modern effects
   backdropBlur: style({
     backdropFilter: staticValues.filters.blur,
     WebkitBackdropFilter: staticValues.filters.blur,
   }),
-  
+
   backdropBlurSm: style({
     backdropFilter: staticValues.filters.blurSm,
     WebkitBackdropFilter: staticValues.filters.blurSm,
   }),
-  
+
   // Text rendering optimization
   optimizeText: style({
     textRendering: 'optimizeLegibility',
@@ -315,7 +317,7 @@ export const stateStyles = {
       },
     },
   }),
-  
+
   active: style({
     selectors: {
       '&:active': {
@@ -324,7 +326,7 @@ export const stateStyles = {
       },
     },
   }),
-  
+
   focus: style({
     selectors: {
       '&:focus-visible': {
@@ -334,14 +336,14 @@ export const stateStyles = {
       },
     },
   }),
-  
+
   disabled: style({
     opacity: 0.5,
     cursor: 'not-allowed',
     pointerEvents: 'none',
     filter: staticValues.filters.grayscale,
   }),
-  
+
   loading: style({
     opacity: 0.7,
     cursor: 'wait',
@@ -355,19 +357,19 @@ export const mediaQueries = {
   mobile: '@media screen and (max-width: 767px)',
   tablet: '@media screen and (min-width: 768px) and (max-width: 1023px)',
   desktop: '@media screen and (min-width: 1024px)',
-  
+
   // Accessibility
   reducedMotion: '@media (prefers-reduced-motion: reduce)',
   highContrast: '@media (prefers-contrast: high)',
   darkMode: '@media (prefers-color-scheme: dark)',
   lightMode: '@media (prefers-color-scheme: light)',
-  
+
   // Device capabilities
   hover: '@media (hover: hover)',
   noHover: '@media (hover: none)',
   pointer: '@media (pointer: fine)',
   coarsePointer: '@media (pointer: coarse)',
-  
+
   // Print styles
   print: '@media print',
 };

@@ -32,16 +32,25 @@ export function validateTimelineProps(props: any): ValidationError[] {
   if (!props.items || !Array.isArray(props.items)) {
     errors.push({ path: ['items'], message: 'Items must be an array' });
   } else if (props.items.length === 0) {
-    errors.push({ path: ['items'], message: 'At least one timeline item is required' });
+    errors.push({
+      path: ['items'],
+      message: 'At least one timeline item is required',
+    });
   } else {
     // Validate each item
     props.items.forEach((item: any, index: number) => {
       if (item.url && typeof item.url === 'string' && !isValidUrl(item.url)) {
-        errors.push({ path: ['items', index.toString(), 'url'], message: 'Invalid URL format' });
+        errors.push({
+          path: ['items', index.toString(), 'url'],
+          message: 'Invalid URL format',
+        });
       }
-      
+
       if (item.media?.source?.url && !isValidUrl(item.media.source.url)) {
-        errors.push({ path: ['items', index.toString(), 'media', 'source', 'url'], message: 'Invalid media URL format' });
+        errors.push({
+          path: ['items', index.toString(), 'media', 'source', 'url'],
+          message: 'Invalid media URL format',
+        });
       }
     });
   }
@@ -49,32 +58,61 @@ export function validateTimelineProps(props: any): ValidationError[] {
   // Validate mode
   const validModes = ['VERTICAL', 'HORIZONTAL', 'VERTICAL_ALTERNATING'];
   if (props.mode && !validModes.includes(props.mode)) {
-    errors.push({ path: ['mode'], message: `Mode must be one of: ${validModes.join(', ')}` });
+    errors.push({
+      path: ['mode'],
+      message: `Mode must be one of: ${validModes.join(', ')}`,
+    });
   }
 
   // Validate numeric props
-  const numericProps = ['cardHeight', 'cardWidth', 'itemWidth', 'lineWidth', 'slideItemDuration', 'activeItemIndex'];
-  numericProps.forEach(prop => {
+  const numericProps = [
+    'cardHeight',
+    'cardWidth',
+    'itemWidth',
+    'lineWidth',
+    'slideItemDuration',
+    'activeItemIndex',
+  ];
+  numericProps.forEach((prop) => {
     const value = props[prop];
     if (value !== undefined && (typeof value !== 'number' || value < 0)) {
-      errors.push({ path: [prop], message: `${prop} must be a positive number` });
+      errors.push({
+        path: [prop],
+        message: `${prop} must be a positive number`,
+      });
     }
   });
 
   // Validate theme colors if present
   if (props.theme && typeof props.theme === 'object') {
-    const colorProps = ['primary', 'secondary', 'cardBgColor', 'cardForeColor', 'titleColor', 'titleColorActive'];
-    colorProps.forEach(prop => {
+    const colorProps = [
+      'primary',
+      'secondary',
+      'cardBgColor',
+      'cardForeColor',
+      'titleColor',
+      'titleColorActive',
+    ];
+    colorProps.forEach((prop) => {
       const color = props.theme[prop];
       if (color && typeof color === 'string' && !isValidHexColor(color)) {
-        errors.push({ path: ['theme', prop], message: `${prop} must be a valid hex color (e.g., #ff0000 or #f00)` });
+        errors.push({
+          path: ['theme', prop],
+          message: `${prop} must be a valid hex color (e.g., #ff0000 or #f00)`,
+        });
       }
     });
   }
 
   // Validate boolean props
-  const booleanProps = ['slideShow', 'flipLayout', 'cardLess', 'hideControls', 'disableNavOnKey'];
-  booleanProps.forEach(prop => {
+  const booleanProps = [
+    'slideShow',
+    'flipLayout',
+    'cardLess',
+    'hideControls',
+    'disableNavOnKey',
+  ];
+  booleanProps.forEach((prop) => {
     const value = props[prop];
     if (value !== undefined && typeof value !== 'boolean') {
       errors.push({ path: [prop], message: `${prop} must be a boolean` });
@@ -89,12 +127,13 @@ export function validateTimelineProps(props: any): ValidationError[] {
  * @param props - Raw timeline props
  * @returns Success result or error result with validation errors
  */
-export function safeValidateTimelineProps(props: unknown): 
+export function safeValidateTimelineProps(
+  props: unknown,
+):
   | { success: true; data: any }
   | { success: false; errors: ValidationError[] } {
-  
   const errors = validateTimelineProps(props);
-  
+
   if (errors.length === 0) {
     return { success: true, data: props };
   } else {

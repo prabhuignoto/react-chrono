@@ -14,40 +14,23 @@ const responsiveProperties = defineProperties({
   defaultCondition: 'mobile',
   properties: {
     // Layout & Display
-    display: [
-      'none',
-      'block', 
-      'flex', 
-      'inline-flex', 
-      'grid',
-      'inline-block'
-    ],
-    position: [
-      'relative', 
-      'absolute', 
-      'fixed', 
-      'sticky'
-    ],
-    
+    display: ['none', 'block', 'flex', 'inline-flex', 'grid', 'inline-block'],
+    position: ['relative', 'absolute', 'fixed', 'sticky'],
+
     // Flexbox (most used)
     flexDirection: ['row', 'column'],
-    alignItems: [
-      'center', 
-      'flex-start', 
-      'flex-end', 
-      'stretch'
-    ],
+    alignItems: ['center', 'flex-start', 'flex-end', 'stretch'],
     justifyContent: [
       'center',
-      'flex-start', 
+      'flex-start',
       'flex-end',
       'space-between',
-      'space-around'
+      'space-around',
     ],
     flexWrap: ['nowrap', 'wrap'],
     flexGrow: [0, 1],
     flexShrink: [0, 1],
-    
+
     // Spacing (responsive)
     gap: tokens.semantic.spacing,
     padding: tokens.semantic.spacing,
@@ -65,7 +48,7 @@ const responsiveProperties = defineProperties({
       ...tokens.semantic.spacing,
       auto: 'auto',
     },
-    
+
     // Sizing
     width: {
       auto: 'auto',
@@ -90,7 +73,7 @@ const responsiveProperties = defineProperties({
       full: '100%',
       screen: '100vw',
     },
-    
+
     // Visual
     borderRadius: tokens.semantic.borderRadius,
     opacity: {
@@ -100,25 +83,25 @@ const responsiveProperties = defineProperties({
       75: '0.75',
       100: '1',
     },
-    
+
     // Typography
     fontSize: tokens.semantic.typography.fontSize,
     fontWeight: tokens.semantic.typography.fontWeight,
     textAlign: ['left', 'center', 'right'],
-    
+
     // Z-index
     zIndex: tokens.semantic.zIndex,
-    
+
     // Overflow
     overflow: ['visible', 'hidden', 'scroll', 'auto'],
     overflowX: ['visible', 'hidden', 'scroll', 'auto'],
     overflowY: ['visible', 'hidden', 'scroll', 'auto'],
   },
-  
+
   // Shorthand properties for common patterns
   shorthands: {
     p: ['padding'],
-    px: ['paddingX'], 
+    px: ['paddingX'],
     py: ['paddingY'],
     m: ['margin'],
     mx: ['marginX'],
@@ -131,15 +114,10 @@ const responsiveProperties = defineProperties({
 const staticProperties = defineProperties({
   properties: {
     // Interaction
-    cursor: [
-      'auto',
-      'pointer',
-      'not-allowed',
-      'text'
-    ],
+    cursor: ['auto', 'pointer', 'not-allowed', 'text'],
     pointerEvents: ['auto', 'none'],
     userSelect: ['none', 'text', 'all'],
-    
+
     // Border
     borderWidth: {
       0: '0',
@@ -147,25 +125,19 @@ const staticProperties = defineProperties({
       2: '2px',
     },
     borderStyle: ['solid', 'dashed', 'dotted', 'none'],
-    
+
     // Background
     backgroundSize: ['auto', 'cover', 'contain'],
     backgroundRepeat: ['repeat', 'no-repeat'],
-    
+
     // List
     listStyleType: ['none', 'disc', 'decimal'],
-    
+
     // Animation/Transition
-    transitionProperty: [
-      'none',
-      'all', 
-      'colors',
-      'opacity',
-      'transform'
-    ],
+    transitionProperty: ['none', 'all', 'colors', 'opacity', 'transform'],
     transitionDuration: tokens.semantic.motion.duration,
     transitionTimingFunction: tokens.semantic.motion.easing,
-    
+
     // Transform (common ones)
     transform: {
       none: 'none',
@@ -174,10 +146,10 @@ const staticProperties = defineProperties({
       translateY1: 'translateY(-1px)',
       translateY2: 'translateY(-2px)',
     },
-    
+
     // Visibility
     visibility: ['visible', 'hidden'],
-    
+
     // Grid (basic)
     gridTemplateColumns: {
       1: 'repeat(1, minmax(0, 1fr))',
@@ -191,7 +163,7 @@ const staticProperties = defineProperties({
 // Create optimized sprinkles
 export const sprinkles = createSprinkles(
   responsiveProperties,
-  staticProperties
+  staticProperties,
 );
 
 // Export types
@@ -205,7 +177,7 @@ export const sprinkleUtils = {
     alignItems: 'center',
     justifyContent: 'center',
   }),
-  
+
   // Stack (flex column with gap)
   stack: (gap: keyof typeof tokens.semantic.spacing = 'md') =>
     sprinkles({
@@ -213,7 +185,7 @@ export const sprinkleUtils = {
       flexDirection: 'column',
       gap,
     }),
-    
+
   // Inline (flex row with gap)
   inline: (gap: keyof typeof tokens.semantic.spacing = 'sm') =>
     sprinkles({
@@ -222,44 +194,44 @@ export const sprinkleUtils = {
       alignItems: 'center',
       gap,
     }),
-    
+
   // Reset button
   resetButton: sprinkles({
     cursor: 'pointer',
     borderWidth: 0,
   }),
-  
+
   // Reset list
   resetList: sprinkles({
     listStyleType: 'none',
     padding: 'xs', // Use smallest value instead of 0
     margin: 'xs',
   }),
-  
+
   // Full size
   fullSize: sprinkles({
     width: 'full',
     height: 'full',
   }),
-  
+
   // Absolute positioning
   absoluteFull: sprinkles({
     position: 'absolute',
     width: 'full',
     height: 'full',
   }),
-  
+
   // Interactive element
   interactive: sprinkles({
     cursor: 'pointer',
     userSelect: 'none',
   }),
-  
+
   // Hidden
   hidden: sprinkles({
     display: 'none',
   }),
-  
+
   // Visually hidden (accessible)
   visuallyHidden: sprinkles({
     position: 'absolute',
@@ -270,26 +242,26 @@ export const sprinkleUtils = {
 // Responsive utility functions
 export const responsive = {
   only: {
-    mobile: <T extends Sprinkles>(styles: T) => 
+    mobile: <T extends Sprinkles>(styles: T) =>
       Object.fromEntries(
         Object.entries(styles).map(([key, value]) => [
-          key, 
-          { mobile: value, tablet: undefined, desktop: undefined }
-        ])
+          key,
+          { mobile: value, tablet: undefined, desktop: undefined },
+        ]),
       ) as unknown as T,
-    tablet: <T extends Sprinkles>(styles: T) => 
+    tablet: <T extends Sprinkles>(styles: T) =>
       Object.fromEntries(
         Object.entries(styles).map(([key, value]) => [
-          key, 
-          { mobile: undefined, tablet: value, desktop: undefined }
-        ])
+          key,
+          { mobile: undefined, tablet: value, desktop: undefined },
+        ]),
       ) as unknown as T,
-    desktop: <T extends Sprinkles>(styles: T) => 
+    desktop: <T extends Sprinkles>(styles: T) =>
       Object.fromEntries(
         Object.entries(styles).map(([key, value]) => [
-          key, 
-          { mobile: undefined, tablet: undefined, desktop: value }
-        ])
+          key,
+          { mobile: undefined, tablet: undefined, desktop: value },
+        ]),
       ) as unknown as T,
   },
 };

@@ -25,7 +25,9 @@ const TitleMemoComponent = ({
 
   return title ? (
     <Tag
-      className={cls(titleStyles.card, active ? 'active' : '', { [classString]: true })}
+      className={cls(titleStyles.card, active ? 'active' : '', {
+        [classString]: true,
+      })}
       style={{ color }}
       dir={dir}
       data-class={classString}

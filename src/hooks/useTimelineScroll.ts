@@ -34,7 +34,7 @@ export const useTimelineScroll = ({
   // Keep refs updated without triggering re-renders
   setNewOffsetRef.current = setNewOffset;
   onScrollEndRef.current = onScrollEnd;
-  
+
   const onNextItemRef = useRef(onNextItem);
   const onPreviousItemRef = useRef(onPreviousItem);
   onNextItemRef.current = onNextItem;
@@ -50,9 +50,11 @@ export const useTimelineScroll = ({
 
   // Create throttled scroll handler for better performance
   const throttledScrollHandler = useMemo(
-    () => throttle((target: HTMLElement) => {
-        const isVertical = mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
-        
+    () =>
+      throttle((target: HTMLElement) => {
+        const isVertical =
+          mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
+
         if (isVertical) {
           const scrolled = target.scrollTop + target.clientHeight;
           const threshold = target.scrollHeight - 1;

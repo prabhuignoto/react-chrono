@@ -1,5 +1,10 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { errorBoundaryContainer, errorMessage, errorTitle, retryButton } from './error-boundary.css';
+import {
+  errorBoundaryContainer,
+  errorMessage,
+  errorTitle,
+  retryButton,
+} from './error-boundary.css';
 
 interface Props {
   children: ReactNode;
@@ -26,7 +31,7 @@ export class TimelineErrorBoundary extends Component<Props, State> {
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // Log error to console or external service
     console.error('Timeline Error:', error, errorInfo);
-    
+
     // Call optional error handler
     if (this.props.onError) {
       this.props.onError(error, errorInfo);
@@ -49,9 +54,10 @@ export class TimelineErrorBoundary extends Component<Props, State> {
         <div className={errorBoundaryContainer}>
           <h2 className={errorTitle}>Something went wrong</h2>
           <p className={errorMessage}>
-            {this.state.error?.message || 'An unexpected error occurred in the timeline component.'}
+            {this.state.error?.message ||
+              'An unexpected error occurred in the timeline component.'}
           </p>
-          <button 
+          <button
             className={retryButton}
             onClick={this.handleReset}
             type="button"

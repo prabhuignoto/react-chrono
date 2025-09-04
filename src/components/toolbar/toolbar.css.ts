@@ -6,6 +6,23 @@ import { sprinkles } from '../../styles/system/sprinkles.css';
 import { baseStyles, mediaQueries } from '../../styles/system/static.css';
 import { patterns } from '../../styles/system/recipes.css';
 
+// Responsive utility classes
+export const hideOnMobile = style({
+  '@media': {
+    '(max-width: 767px)': {
+      display: 'none !important',
+    },
+  },
+});
+
+export const hideOnTabletAndBelow = style({
+  '@media': {
+    '(max-width: 1023px)': {
+      display: 'none !important',
+    },
+  },
+});
+
 // Base font family with proper CSS custom property fallback for Google Fonts
 const baseFontFamily = `var(--timeline-font-family, 'Inter, system-ui, ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif')`;
 
@@ -50,7 +67,7 @@ export const toolbarWrapper = recipe({
       },
     },
     layout: {
-      horizontal: sprinkles({ 
+      horizontal: sprinkles({
         flexDirection: 'row',
         flexWrap: 'wrap',
       }),
@@ -62,9 +79,11 @@ export const toolbarWrapper = recipe({
         {
           '@media': {
             'screen and (max-width: 767px)': {
-              flexDirection: 'column',
-              alignItems: 'stretch',
-              gap: tokens.semantic.spacing.sm,
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: tokens.semantic.spacing.xs,
             },
           },
         },
@@ -78,11 +97,14 @@ export const toolbarWrapper = recipe({
             justifyContent: 'center',
           },
           'screen and (max-width: 767px)': {
-            padding: tokens.semantic.spacing.xs,
-            minHeight: '56px',
-            flexDirection: 'column',
-            alignItems: 'stretch',
+            padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
+            minHeight: '48px',
+            flexDirection: 'row',
+            flexWrap: 'nowrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
             gap: tokens.semantic.spacing.xs,
+            overflow: 'hidden',
           },
         },
       },
@@ -143,6 +165,13 @@ export const contentWrapper = style([
     flexGrow: 1,
     minWidth: 0,
     position: 'relative',
+    overflow: 'hidden',
+    '@media': {
+      '(max-width: 767px)': {
+        gap: tokens.semantic.spacing.xs,
+        flexShrink: 1,
+      },
+    },
   },
 ]);
 
@@ -248,7 +277,7 @@ export const searchWrapper = style([
     minHeight: '36px',
     position: 'relative',
     transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
-    
+
     selectors: {
       '&:focus-within': {
         borderColor: tokens.semantic.color.border.interactive,
@@ -260,7 +289,7 @@ export const searchWrapper = style([
         backgroundColor: `${tokens.semantic.color.interactive.primary}05`,
       },
     },
-    
+
     '@media': {
       'screen and (max-width: 767px)': {
         minHeight: '32px',
@@ -285,7 +314,7 @@ export const searchInput = style([
     fontStyle: `var(--timeline-controls-font-style, normal)`,
     padding: tokens.semantic.spacing.xs,
     minWidth: 0,
-    
+
     selectors: {
       '&::placeholder': {
         color: tokens.semantic.color.text.muted,
@@ -298,7 +327,7 @@ export const searchInput = style([
         outline: 'none',
       },
     },
-    
+
     '@media': {
       'screen and (max-width: 767px)': {
         fontSize: tokens.semantic.typography.fontSize.caption,
@@ -318,7 +347,7 @@ export const searchInfo = style([
     fontSize: `var(--timeline-controls-font-size, ${tokens.semantic.typography.fontSize.caption})`,
     fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.medium})`,
     fontStyle: `var(--timeline-controls-font-style, normal)`,
-    
+
     '@media': {
       'screen and (max-width: 767px)': {
         fontSize: '0.7rem',
@@ -359,7 +388,7 @@ export const searchButton = style([
     padding: 0,
     boxShadow: tokens.semantic.shadow.card,
     transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
-    
+
     selectors: {
       '&:hover:not(:disabled)': {
         backgroundColor: tokens.semantic.color.interactive.primary,
@@ -388,7 +417,7 @@ export const searchButton = style([
         color: tokens.semantic.color.text.muted,
       },
     },
-    
+
     '@media': {
       'screen and (max-width: 767px)': {
         width: '24px',
@@ -412,7 +441,7 @@ export const searchButtonIcon = style([
     color: 'currentColor',
     transition: `transform ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
     flexShrink: 0,
-    
+
     '@media': {
       'screen and (max-width: 767px)': {
         width: '14px',
@@ -447,7 +476,7 @@ export const toolbarIconButton = recipe({
       transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
       userSelect: 'none',
       outline: 'none',
-      
+
       selectors: {
         '&:hover:not(:disabled)': {
           backgroundColor: tokens.semantic.color.interactive.primary,
@@ -482,7 +511,7 @@ export const toolbarIconButton = recipe({
           boxShadow: 'none',
         },
       },
-      
+
       '@media': {
         '(prefers-reduced-motion: reduce)': {
           animation: 'none',
@@ -527,19 +556,19 @@ export const toolbarIconButton = recipe({
       },
     },
     size: {
-      sm: { 
-        width: '24px', 
-        height: '24px', 
+      sm: {
+        width: '24px',
+        height: '24px',
         fontSize: tokens.semantic.typography.fontSize.caption,
       },
-      md: { 
-        width: tokens.component.toolbar.button.size, 
-        height: tokens.component.toolbar.button.size, 
+      md: {
+        width: tokens.component.toolbar.button.size,
+        height: tokens.component.toolbar.button.size,
         fontSize: tokens.semantic.typography.fontSize.caption,
       },
-      lg: { 
-        width: '32px', 
-        height: '32px', 
+      lg: {
+        width: '32px',
+        height: '32px',
         fontSize: tokens.semantic.typography.fontSize.body,
       },
     },
@@ -626,19 +655,19 @@ export const searchGroup = toolbarSection({ type: 'search' });
 // Utility patterns for common toolbar configurations
 export const toolbarPatterns = {
   // Basic horizontal toolbar
-  basic: toolbarWrapper({ 
-    size: 'md', 
-    layout: 'horizontal', 
-    responsive: true 
+  basic: toolbarWrapper({
+    size: 'md',
+    layout: 'horizontal',
+    responsive: true,
   }),
-  
+
   // Compact toolbar for mobile
-  compact: toolbarWrapper({ 
-    size: 'sm', 
-    layout: 'vertical', 
-    responsive: true 
+  compact: toolbarWrapper({
+    size: 'sm',
+    layout: 'vertical',
+    responsive: true,
   }),
-  
+
   // Fixed toolbar
   fixed: [
     toolbarWrapper({ size: 'md' }),

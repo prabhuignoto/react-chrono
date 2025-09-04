@@ -132,4 +132,6 @@ export const timelineTitleContainer = recipe({
 
 // Export types for TypeScript integration
 export type WrapperVariants = Parameters<typeof wrapper>[0];
-export type TimelineTitleContainerVariants = Parameters<typeof timelineTitleContainer>[0];
+export type TimelineTitleContainerVariants = Parameters<
+  typeof timelineTitleContainer
+>[0];

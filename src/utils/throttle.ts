@@ -15,7 +15,7 @@ export function throttle<T extends (...args: any[]) => any>(
     if (!inThrottle) {
       fn.apply(this, args);
       inThrottle = true;
-      
+
       setTimeout(() => {
         inThrottle = false;
         if (lastArgs) {
@@ -49,7 +49,7 @@ export function debounce<T extends (...args: unknown[]) => unknown>(
     if (timeoutId) {
       clearTimeout(timeoutId);
     }
-    
+
     timeoutId = setTimeout(() => {
       fn.apply(this, args);
       timeoutId = null;
@@ -70,7 +70,7 @@ export function rafThrottle<T extends (...args: unknown[]) => unknown>(
 
   return function (this: unknown, ...args: Parameters<T>) {
     lastArgs = args;
-    
+
     if (rafId === null) {
       rafId = requestAnimationFrame(() => {
         if (lastArgs) {

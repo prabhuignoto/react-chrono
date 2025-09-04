@@ -2,7 +2,11 @@ import { keyframes, style, globalStyle } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { tokens } from '../../../../styles/tokens/index.css';
 import { sprinkles } from '../../../../styles/system/sprinkles.css';
-import { animations, baseStyles, stateStyles } from '../../../../styles/system/static.css';
+import {
+  animations,
+  baseStyles,
+  stateStyles,
+} from '../../../../styles/system/static.css';
 import { patterns } from '../../../../styles/system/recipes.css';
 
 // Updated keyframe animations using new system
@@ -12,15 +16,15 @@ const ripple = keyframes({
 });
 
 const activePointPulse = keyframes({
-  '0%': { 
+  '0%': {
     transform: 'scale(1.3)',
     boxShadow: `0 0 0 4px ${tokens.semantic.color.interactive.primary}30, 0 6px 20px -4px ${tokens.semantic.color.interactive.primary}50, 0 4px 12px -2px rgba(0, 0, 0, 0.15)`,
   },
-  '50%': { 
+  '50%': {
     transform: 'scale(1.35)',
     boxShadow: `0 0 0 6px ${tokens.semantic.color.interactive.primary}25, 0 8px 24px -4px ${tokens.semantic.color.interactive.primary}40, 0 6px 16px -2px rgba(0, 0, 0, 0.12)`,
   },
-  '100%': { 
+  '100%': {
     transform: 'scale(1.3)',
     boxShadow: `0 0 0 4px ${tokens.semantic.color.interactive.primary}30, 0 6px 20px -4px ${tokens.semantic.color.interactive.primary}50, 0 4px 12px -2px rgba(0, 0, 0, 0.15)`,
   },
@@ -297,30 +301,30 @@ export type TimelinePointVariants = Parameters<typeof timelinePoint>[0];
 // Utility classes for common point patterns
 export const pointPatterns = {
   // Standard interactive point
-  standard: timelinePoint({ 
-    size: 'md', 
-    shape: 'circle', 
-    interactive: true 
+  standard: timelinePoint({
+    size: 'md',
+    shape: 'circle',
+    interactive: true,
   }),
-  
+
   // Large active point
-  featured: timelinePoint({ 
-    size: 'lg', 
-    shape: 'circle', 
-    state: 'active' 
+  featured: timelinePoint({
+    size: 'lg',
+    shape: 'circle',
+    state: 'active',
   }),
-  
+
   // Small indicator point
-  indicator: timelinePoint({ 
-    size: 'sm', 
-    shape: 'circle', 
-    interactive: false 
+  indicator: timelinePoint({
+    size: 'sm',
+    shape: 'circle',
+    interactive: false,
   }),
-  
+
   // Diamond milestone
-  milestone: timelinePoint({ 
-    size: 'lg', 
-    shape: 'diamond', 
-    state: 'active' 
+  milestone: timelinePoint({
+    size: 'lg',
+    shape: 'diamond',
+    state: 'active',
   }),
 };

@@ -49,28 +49,28 @@ export const lightTheme = createTheme(tokens, {
     },
     spacing: {
       0: '0',
-      1: '0.25rem',  // 4px
-      2: '0.5rem',   // 8px
-      3: '0.75rem',  // 12px
-      4: '1rem',     // 16px
-      5: '1.25rem',  // 20px
-      6: '1.5rem',   // 24px
-      8: '2rem',     // 32px
-      10: '2.5rem',  // 40px
-      12: '3rem',    // 48px
-      16: '4rem',    // 64px
-      20: '5rem',    // 80px
-      24: '6rem',    // 96px
+      1: '0.25rem', // 4px
+      2: '0.5rem', // 8px
+      3: '0.75rem', // 12px
+      4: '1rem', // 16px
+      5: '1.25rem', // 20px
+      6: '1.5rem', // 24px
+      8: '2rem', // 32px
+      10: '2.5rem', // 40px
+      12: '3rem', // 48px
+      16: '4rem', // 64px
+      20: '5rem', // 80px
+      24: '6rem', // 96px
     },
     fontSize: {
-      xs: '0.75rem',   // 12px
-      sm: '0.875rem',  // 14px
-      base: '1rem',    // 16px
-      lg: '1.125rem',  // 18px
-      xl: '1.25rem',   // 20px
+      xs: '0.75rem', // 12px
+      sm: '0.875rem', // 14px
+      base: '1rem', // 16px
+      lg: '1.125rem', // 18px
+      xl: '1.25rem', // 20px
       '2xl': '1.5rem', // 24px
       '3xl': '1.875rem', // 30px
-      '4xl': '2.25rem',  // 36px
+      '4xl': '2.25rem', // 36px
     },
     lineHeight: {
       tight: '1.2',
@@ -85,10 +85,10 @@ export const lightTheme = createTheme(tokens, {
     },
     borderRadius: {
       none: '0',
-      sm: '0.25rem',   // 4px
-      md: '0.5rem',    // 8px
-      lg: '0.75rem',   // 12px
-      xl: '1rem',      // 16px
+      sm: '0.25rem', // 4px
+      md: '0.5rem', // 8px
+      lg: '0.75rem', // 12px
+      xl: '1rem', // 16px
       '2xl': '1.5rem', // 24px
       full: '9999px',
     },
@@ -127,60 +127,60 @@ export const lightTheme = createTheme(tokens, {
   semantic: {
     color: {
       text: {
-        primary: '#111827',    // gray.900
-        secondary: '#374151',  // gray.700
-        muted: '#6b7280',      // gray.500
-        inverse: '#ffffff',    // white
+        primary: '#111827', // gray.900
+        secondary: '#374151', // gray.700
+        muted: '#6b7280', // gray.500
+        inverse: '#ffffff', // white
       },
       background: {
-        primary: '#ffffff',    // white
-        secondary: '#f9fafb',  // gray.50
-        elevated: '#ffffff',   // white
+        primary: '#ffffff', // white
+        secondary: '#f9fafb', // gray.50
+        elevated: '#ffffff', // white
         overlay: 'rgba(0, 0, 0, 0.5)',
       },
       interactive: {
-        primary: '#2563eb',      // blue.600
+        primary: '#2563eb', // blue.600
         primaryHover: '#1d4ed8', // blue.700
         primaryActive: '#1e40af', // blue.800
-        secondary: '#e5e7eb',    // gray.200
+        secondary: '#e5e7eb', // gray.200
         secondaryHover: '#d1d5db', // gray.300
-        muted: '#f3f4f6',        // gray.100
-        mutedHover: '#e5e7eb',   // gray.200
+        muted: '#f3f4f6', // gray.100
+        mutedHover: '#e5e7eb', // gray.200
       },
       border: {
-        default: '#e5e7eb',      // gray.200
-        muted: '#f3f4f6',        // gray.100
-        emphasis: '#d1d5db',     // gray.300
-        interactive: '#2563eb',   // blue.600
+        default: '#e5e7eb', // gray.200
+        muted: '#f3f4f6', // gray.100
+        emphasis: '#d1d5db', // gray.300
+        interactive: '#2563eb', // blue.600
       },
       status: {
-        success: '#22c55e',  // green.500
-        warning: '#eab308',  // yellow.500
-        error: '#ef4444',    // red.500
-        info: '#3b82f6',     // blue.500
+        success: '#22c55e', // green.500
+        warning: '#eab308', // yellow.500
+        error: '#ef4444', // red.500
+        info: '#3b82f6', // blue.500
       },
       icon: {
-        default: '#6b7280',  // gray.500
-        muted: '#9ca3af',    // gray.400
+        default: '#6b7280', // gray.500
+        muted: '#9ca3af', // gray.400
         emphasis: '#374151', // gray.700
       },
     },
     spacing: {
-      xs: '0.25rem',   // 4px
-      sm: '0.5rem',    // 8px
-      md: '1rem',      // 16px
-      lg: '1.5rem',    // 24px
-      xl: '2rem',      // 32px
-      '2xl': '3rem',   // 48px
-      '3xl': '4rem',   // 64px
+      xs: '0.25rem', // 4px
+      sm: '0.5rem', // 8px
+      md: '1rem', // 16px
+      lg: '1.5rem', // 24px
+      xl: '2rem', // 32px
+      '2xl': '3rem', // 48px
+      '3xl': '4rem', // 64px
     },
     typography: {
       fontSize: {
-        caption: '0.75rem',   // 12px
-        body: '1rem',         // 16px
+        caption: '0.75rem', // 12px
+        body: '1rem', // 16px
         heading3: '1.125rem', // 18px
-        heading2: '1.25rem',  // 20px
-        heading1: '1.5rem',   // 24px
+        heading2: '1.25rem', // 20px
+        heading1: '1.5rem', // 24px
       },
       lineHeight: {
         tight: '1.2',
@@ -195,18 +195,21 @@ export const lightTheme = createTheme(tokens, {
       },
     },
     borderRadius: {
-      sm: '0.25rem',   // 4px
-      md: '0.5rem',    // 8px
-      lg: '0.75rem',   // 12px
-      xl: '1rem',      // 16px
+      sm: '0.25rem', // 4px
+      md: '0.5rem', // 8px
+      lg: '0.75rem', // 12px
+      xl: '1rem', // 16px
       full: '9999px',
     },
     shadow: {
       card: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-      cardHover: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
-      cardActive: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+      cardHover:
+        '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+      cardActive:
+        '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
       toolbar: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-      modal: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+      modal:
+        '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
     },
     zIndex: {
       timelineCard: '10',
@@ -239,9 +242,9 @@ export const lightTheme = createTheme(tokens, {
           lg: '40px',
         },
         color: {
-          active: '#2563eb',   // blue.600
+          active: '#2563eb', // blue.600
           inactive: '#6b7280', // gray.500
-          hover: '#1d4ed8',    // blue.700
+          hover: '#1d4ed8', // blue.700
         },
       },
       card: {
@@ -252,14 +255,14 @@ export const lightTheme = createTheme(tokens, {
           max: '400px',
         },
         spacing: {
-          vertical: '2rem',    // 32px
-          horizontal: '1rem',  // 16px
+          vertical: '2rem', // 32px
+          horizontal: '1rem', // 16px
         },
       },
     },
     toolbar: {
       height: '64px',
-      padding: '1rem',     // 16px
+      padding: '1rem', // 16px
       background: '#f1f5f9',
       button: {
         size: '36px',
@@ -276,7 +279,7 @@ export const darkTheme = createTheme(tokens, {
       white: '#ffffff',
       black: '#000000',
       gray: {
-        50: '#1f2937',   // Inverted for dark theme
+        50: '#1f2937', // Inverted for dark theme
         100: '#374151',
         200: '#4b5563',
         300: '#6b7280',
@@ -288,7 +291,7 @@ export const darkTheme = createTheme(tokens, {
         900: '#ffffff',
       },
       blue: {
-        50: '#1e3a8a',   // Darker blues for dark theme
+        50: '#1e3a8a', // Darker blues for dark theme
         100: '#1e40af',
         200: '#1d4ed8',
         300: '#2563eb',
@@ -395,25 +398,25 @@ export const darkTheme = createTheme(tokens, {
   semantic: {
     color: {
       text: {
-        primary: '#e5e7eb',    // gray.600 in dark theme
-        secondary: '#d1d5db',  // gray.500 in dark theme
-        muted: '#9ca3af',      // gray.400 in dark theme
-        inverse: '#111827',    // gray.900
+        primary: '#e5e7eb', // gray.600 in dark theme
+        secondary: '#d1d5db', // gray.500 in dark theme
+        muted: '#9ca3af', // gray.400 in dark theme
+        inverse: '#111827', // gray.900
       },
       background: {
-        primary: '#0b0f19',    // Very dark blue-gray
-        secondary: '#111827',  // gray.900
-        elevated: '#1f2937',   // gray.800
+        primary: '#0b0f19', // Very dark blue-gray
+        secondary: '#111827', // gray.900
+        elevated: '#1f2937', // gray.800
         overlay: 'rgba(0, 0, 0, 0.7)',
       },
       interactive: {
-        primary: '#60a5fa',      // blue.400
+        primary: '#60a5fa', // blue.400
         primaryHover: '#93c5fd', // blue.300
         primaryActive: '#bfdbfe', // blue.200
-        secondary: '#374151',    // gray.700
+        secondary: '#374151', // gray.700
         secondaryHover: '#4b5563', // gray.600
-        muted: '#1f2937',        // gray.800
-        mutedHover: '#374151',   // gray.700
+        muted: '#1f2937', // gray.800
+        mutedHover: '#374151', // gray.700
       },
       border: {
         default: 'rgba(255, 255, 255, 0.1)',
@@ -428,8 +431,8 @@ export const darkTheme = createTheme(tokens, {
         info: '#60a5fa',
       },
       icon: {
-        default: '#9ca3af',  // gray.400
-        muted: '#6b7280',    // gray.500
+        default: '#9ca3af', // gray.400
+        muted: '#6b7280', // gray.500
         emphasis: '#f3f4f6', // gray.100
       },
     },
@@ -471,10 +474,13 @@ export const darkTheme = createTheme(tokens, {
     },
     shadow: {
       card: '0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4)',
-      cardHover: '0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4)',
-      cardActive: '0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4)',
+      cardHover:
+        '0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4)',
+      cardActive:
+        '0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4)',
       toolbar: '0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4)',
-      modal: '0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4)',
+      modal:
+        '0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4)',
     },
     zIndex: {
       timelineCard: '10',
@@ -507,9 +513,9 @@ export const darkTheme = createTheme(tokens, {
           lg: '40px',
         },
         color: {
-          active: '#60a5fa',   // blue.400
+          active: '#60a5fa', // blue.400
           inactive: '#9ca3af', // gray.400
-          hover: '#93c5fd',    // blue.300
+          hover: '#93c5fd', // blue.300
         },
       },
       card: {
