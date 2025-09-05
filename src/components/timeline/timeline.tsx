@@ -69,6 +69,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     lineWidth,
     toolbarPosition,
     disableToolbar,
+    toolbarSearchConfig,
     borderLessCards,
     showAllCardsHorizontal,
     textContentDensity,
@@ -587,6 +588,19 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     [theme, darkMode],
   );
 
+  // Memoize search width CSS variables
+  const searchWidthVars = useMemo(() => {
+    if (!toolbarSearchConfig) return {};
+    
+    return {
+      '--timeline-search-width': toolbarSearchConfig.width,
+      '--timeline-search-max-width': toolbarSearchConfig.maxWidth,
+      '--timeline-search-min-width': toolbarSearchConfig.minWidth,
+      '--timeline-search-input-width': toolbarSearchConfig.inputWidth,
+      '--timeline-search-input-max-width': toolbarSearchConfig.inputMaxWidth,
+    };
+  }, [toolbarSearchConfig]);
+
   return (
     <FontProvider googleFonts={googleFonts}>
       <div
@@ -597,6 +611,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         className={`timeline-wrapper ${mode.toLowerCase()} ${ve.wrapper({ fullscreen: isFullscreen })} ${darkMode ? darkThemeClass : lightThemeClass}`}
         style={{
           ...themeCssVars,
+          ...searchWidthVars,
           height: wrapperHeight,
         }}
         data-fullscreen={isFullscreen}
@@ -615,7 +630,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         aria-atomic="false"
       >
         {canShowToolbar && (
-          <TimelineToolbar
+          <div
+            className={ve.toolbarContainer({
+              position: toolbarPosition as 'top' | 'bottom',
+              sticky: Boolean(props.stickyToolbar),
+            })}
+          >
+            <TimelineToolbar
             activeTimelineItem={activeTimelineItem}
             totalItems={items.length}
             slideShowEnabled={!!slideShowEnabled}
@@ -660,7 +681,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               setIsFullscreen(false);
             }}
             stickyToolbar={props.stickyToolbar ?? false}
-          />
+            />
+          </div>
         )}
 
         {/* Overall slideshow progress bar - positioned below toolbar */}
@@ -712,26 +734,25 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           />
         </div>
 
-        <div
-          id={id}
-          ref={horizontalContentRef}
-          className={`timeline-content-render ${ve.contentRenderer({
-            mode:
-              timelineMode === 'HORIZONTAL_ALL'
-                ? 'horizontalAll'
-                : timelineMode === 'HORIZONTAL'
-                  ? 'horizontal'
-                  : timelineMode === 'VERTICAL_ALTERNATING'
-                    ? 'verticalAlternating'
-                    : 'vertical',
-          })}`}
-          style={
-            {
-              // Pass card height as CSS variable for dynamic height calculation
-              '--card-height': `${cardHeight || 350}px`,
-            } as React.CSSProperties
-          }
-        />
+        {/* Only render content renderer for horizontal modes */}
+        {(timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') && (
+          <div
+            id={id}
+            ref={horizontalContentRef}
+            className={`timeline-content-render ${ve.contentRenderer({
+              mode:
+                timelineMode === 'HORIZONTAL_ALL'
+                  ? 'horizontalAll'
+                  : 'horizontal',
+            })}`}
+            style={
+              {
+                // Pass card height as CSS variable for dynamic height calculation
+                '--card-height': `${cardHeight || 350}px`,
+              } as React.CSSProperties
+            }
+          />
+        )}
       </div>
     </FontProvider>
   );

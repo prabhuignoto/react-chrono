@@ -609,6 +609,7 @@ describe('GlobalContext', () => {
       expect(context.uniqueId).toBe('react-chrono');
       expect(context.useReadMore).toBe(true);
       expect(context.scrollable).toEqual({ scrollbar: false });
+      expect(context.toolbarSearchConfig).toBeUndefined();
     });
 
     it('should allow overriding static defaults', () => {
@@ -624,6 +625,15 @@ describe('GlobalContext', () => {
       expect(context.lineWidth).toBe(5);
       expect(context.uniqueId).toBe('custom-timeline');
       expect(context.timelinePointShape).toBe('square');
+    });
+
+    it('should handle toolbar position configuration', () => {
+      const { getContext } = renderWithContext({
+        toolbarPosition: 'bottom',
+      });
+
+      const context = getContext();
+      expect(context.toolbarPosition).toBe('bottom');
     });
   });
 

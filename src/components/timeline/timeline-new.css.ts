@@ -363,6 +363,68 @@ export const timelineStates = {
   ]),
 };
 
+// Toolbar container styles for positioning
+export const toolbarContainer = recipe({
+  base: [
+    sprinkles({
+      display: 'flex',
+      width: 'full',
+      position: 'relative',
+    }),
+    {
+      flexShrink: 0,
+      zIndex: tokens.semantic.zIndex.controls,
+      transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+    },
+  ],
+  variants: {
+    position: {
+      top: {
+        order: -1, // Ensure toolbar appears before main content
+        borderBottom: `1px solid ${tokens.semantic.color.border.muted}`,
+        marginBottom: tokens.semantic.spacing.xs,
+      },
+      bottom: {
+        order: 1, // Ensure toolbar appears after main content
+        borderTop: `1px solid ${tokens.semantic.color.border.muted}`,
+        marginTop: tokens.semantic.spacing.xs,
+      },
+    },
+    sticky: {
+      true: {
+        position: 'sticky',
+        backgroundColor: `${tokens.semantic.color.background.primary}f5`,
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
+        boxShadow: `0 2px 8px -2px ${tokens.semantic.color.background.overlay}`,
+      },
+      false: {},
+    },
+  },
+  compoundVariants: [
+    {
+      variants: { position: 'top', sticky: true },
+      style: {
+        top: 0,
+        borderBottom: `1px solid ${tokens.semantic.color.border.default}`,
+        boxShadow: `0 2px 12px -4px ${tokens.semantic.color.background.overlay}`,
+      },
+    },
+    {
+      variants: { position: 'bottom', sticky: true },
+      style: {
+        bottom: 0,
+        borderTop: `1px solid ${tokens.semantic.color.border.default}`,
+        boxShadow: `0 -2px 12px -4px ${tokens.semantic.color.background.overlay}`,
+      },
+    },
+  ],
+  defaultVariants: {
+    position: 'top',
+    sticky: false,
+  },
+});
+
 // Export recipe variants for type safety
 export type TimelineWrapperVariants = Parameters<typeof wrapper>[0];
 export type TimelineMainWrapperVariants = Parameters<typeof mainWrapper>[0];
@@ -370,3 +432,4 @@ export type TimelineContentRendererVariants = Parameters<
   typeof contentRenderer
 >[0];
 export type TimelineMainVariants = Parameters<typeof main>[0];
+export type ToolbarContainerVariants = Parameters<typeof toolbarContainer>[0];

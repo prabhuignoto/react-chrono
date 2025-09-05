@@ -257,6 +257,14 @@ export type TimelineProps = {
 
   toolbarPosition?: 'top' | 'bottom';
 
+  toolbarSearchConfig?: {
+    width?: string;
+    maxWidth?: string;
+    minWidth?: string;
+    inputWidth?: string;
+    inputMaxWidth?: string;
+  };
+
   uniqueId?: string;
 
   // enables the read more button

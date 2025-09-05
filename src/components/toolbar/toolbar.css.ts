@@ -218,10 +218,10 @@ export const toolbarSection = recipe({
         gap: tokens.semantic.spacing.xs,
       },
       search: {
-        flex: '1 1 300px',
-        maxWidth: '600px',
+        flex: '1 1 var(--timeline-search-width, 300px)',
+        maxWidth: 'var(--timeline-search-max-width, 600px)',
         justifyContent: 'center',
-        minWidth: '200px',
+        minWidth: 'var(--timeline-search-min-width, 200px)',
       },
       actions: {
         flexWrap: 'wrap',
@@ -275,6 +275,8 @@ export const searchWrapper = style([
     borderRadius: tokens.semantic.borderRadius.md,
     padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
     minHeight: '36px',
+    width: 'var(--timeline-search-input-width, 100%)',
+    maxWidth: 'var(--timeline-search-input-max-width, 100%)',
     position: 'relative',
     transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
 

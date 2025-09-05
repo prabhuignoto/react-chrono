@@ -84,6 +84,13 @@ export interface TimelineStaticConfig {
   // Toolbar
   toolbarPosition: 'top' | 'bottom';
   disableToolbar: boolean;
+  toolbarSearchConfig: {
+    width?: string;
+    maxWidth?: string;
+    minWidth?: string;
+    inputWidth?: string;
+    inputMaxWidth?: string;
+  } | undefined;
 
   // Slideshow
   slideItemDuration: number;
@@ -163,6 +170,13 @@ const TimelineContext = createContext<TimelineContextValue | null>(null);
 export interface TimelineContextProviderProps
   extends Omit<Partial<TimelinePropsModel>, 'children'> {
   children: React.ReactNode;
+  toolbarSearchConfig?: {
+    width?: string;
+    maxWidth?: string;
+    minWidth?: string;
+    inputWidth?: string;
+    inputMaxWidth?: string;
+  };
   googleFonts?: {
     fontFamily: string;
     elements?: {
@@ -228,6 +242,7 @@ export const TimelineContextProvider: FunctionComponent<
     // Toolbar props
     toolbarPosition = 'top',
     disableToolbar = false,
+    toolbarSearchConfig,
 
     // Slideshow props
     slideItemDuration = 2000,
@@ -491,6 +506,7 @@ export const TimelineContextProvider: FunctionComponent<
       scrollable,
       toolbarPosition,
       disableToolbar,
+      toolbarSearchConfig,
       slideItemDuration,
       showProgressOnSlideshow: showProgressOnSlideshow && !!slideShow,
       showOverallSlideshowProgress: showOverallSlideshowProgress ?? !!slideShow,
@@ -565,6 +581,7 @@ export const TimelineContextProvider: FunctionComponent<
       scrollable,
       toolbarPosition,
       disableToolbar,
+      toolbarSearchConfig,
       slideItemDuration,
       showProgressOnSlideshow,
       showOverallSlideshowProgress,
@@ -674,6 +691,7 @@ export const useTimelineStaticConfig = (): TimelineStaticConfig => {
       scrollable: context.scrollable,
       toolbarPosition: context.toolbarPosition,
       disableToolbar: context.disableToolbar,
+      toolbarSearchConfig: context.toolbarSearchConfig,
       slideItemDuration: context.slideItemDuration,
       showProgressOnSlideshow: context.showProgressOnSlideshow,
       showOverallSlideshowProgress: context.showOverallSlideshowProgress,

@@ -120,6 +120,19 @@ export interface DisplayConfig {
     position?: 'top' | 'bottom';
     /** Make toolbar sticky during scroll */
     sticky?: boolean;
+    /** Search input width configuration */
+    search?: {
+      /** Default width of search section (CSS length string) */
+      width?: string;
+      /** Maximum width of search section (CSS length string) */
+      maxWidth?: string;
+      /** Minimum width of search section (CSS length string) */
+      minWidth?: string;
+      /** Width of actual input field (CSS length string) */
+      inputWidth?: string;
+      /** Maximum width of actual input field (CSS length string) */
+      inputMaxWidth?: string;
+    };
   };
 
   /** Scrolling configuration */

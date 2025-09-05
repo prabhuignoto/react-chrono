@@ -99,6 +99,7 @@ function convertToLegacyProps(props: TimelinePropsV2): TimelineProps {
     disableToolbar:
       props.display?.toolbar?.enabled === false ? true : undefined,
     toolbarPosition: props.display?.toolbar?.position,
+    toolbarSearchConfig: props.display?.toolbar?.search,
     scrollable: props.display?.scrollable,
 
     // Media props

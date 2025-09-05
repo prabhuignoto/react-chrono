@@ -45,7 +45,12 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
           scrollable: { scrollbar: false },
           toolbar: { 
             enabled: true, 
-            position: 'top' 
+            position: 'bottom',
+            search: {
+              width: '250px',
+              maxWidth: '400px',
+              inputWidth: '100%',
+            }
           },
         }}
         
