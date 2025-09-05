@@ -153,6 +153,7 @@ export const contentRenderer = recipe({
         paddingTop: tokens.semantic.spacing.lg,
         paddingBottom: `calc(${tokens.semantic.spacing.xl} + ${tokens.semantic.spacing.lg})`,
         scrollSnapType: 'x mandatory',
+        overflow: 'visible', // Ensure timeline line is not clipped
       },
       alternating: {
         minHeight: '200px',
@@ -167,6 +168,7 @@ export const contentRenderer = recipe({
         paddingBottom: `calc(${tokens.semantic.spacing.xl} + ${tokens.semantic.spacing.lg})`,
         scrollSnapType: 'x mandatory',
         overflowX: 'auto',
+        overflowY: 'visible', // Ensure timeline line is not clipped vertically
         flexDirection: 'row',
         alignItems: 'flex-start',
       },
@@ -242,16 +244,38 @@ export const outline = style([
     position: 'absolute',
   }),
   {
-    right: 0,
-    left: 0,
+    right: '0',
+    left: '0',
     width: '100%',
     top: '50%',
     transform: 'translateY(-50%)',
-    zIndex: tokens.semantic.zIndex.timelineCard,
+    zIndex: tokens.semantic.zIndex.timelineCard - 1, // Behind timeline points
     borderRadius: tokens.semantic.borderRadius.sm,
     height: tokens.component.timeline.line.width,
     backgroundColor: tokens.component.timeline.line.color,
-    opacity: 0.3,
+    opacity: 0.4,
+    
+    // Ensure the line extends fully across horizontal timelines
+    selectors: {
+      '[data-mode="HORIZONTAL"] &': {
+        // For horizontal mode, align with timeline points
+        top: '80px', // Adjust based on typical point position
+        transform: 'translateY(-50%)',
+        margin: '0 -20px', // Extend beyond container padding
+        width: 'calc(100% + 40px)',
+        left: '-20px',
+        right: 'auto',
+      },
+      '[data-mode="HORIZONTAL_ALL"] &': {
+        // For horizontal-all mode
+        top: '80px',
+        transform: 'translateY(-50%)',
+        margin: '0 -20px',
+        width: 'calc(100% + 40px)',
+        left: '-20px',
+        right: 'auto',
+      },
+    },
   },
 ]);
 

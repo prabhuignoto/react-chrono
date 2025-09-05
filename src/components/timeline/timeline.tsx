@@ -614,6 +614,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           ...searchWidthVars,
           height: wrapperHeight,
         }}
+        data-mode={timelineMode}
         data-fullscreen={isFullscreen}
         data-keyboard-focus={isKeyboardNavigation}
         data-toolbar-navigation={isToolbarNavigation}

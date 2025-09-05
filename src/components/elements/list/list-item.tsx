@@ -78,12 +78,9 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
             </span>
           </span>
         ) : null}
-        <div
-          className={styleAndDescription}
-          style={{ width: selectable ? 'calc(100% - 2rem)' : '100%' }}
-        >
+        <div className={styleAndDescription}>
           <h1 className={title}>{title}</h1>
-          <p className={description}>{description}</p>
+          {description && <p className={description}>{description}</p>}
         </div>
       </li>
     );

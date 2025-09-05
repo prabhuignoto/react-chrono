@@ -56,8 +56,14 @@ export default function App() {
       <div style={{ width: '650px', height: '650px' }}>
         <Chrono
           items={items}
-          mode="VERTICAL_ALTERNATING"
-          scrollable={{ scrollbar: true }}
+          mode="alternating"
+          display={{
+            scrollable: { scrollbar: true },
+            toolbar: { enabled: true },
+          }}
+          interaction={{
+            autoScroll: true,
+          }}
           onScrollEnd={handleLoadMore}
           allowDynamicUpdate={true}
         />
