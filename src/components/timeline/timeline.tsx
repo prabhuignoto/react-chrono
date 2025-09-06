@@ -29,6 +29,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     contentDetailsChildren,
     iconChildren,
     items = [],
+    mode: propMode,
     onFirst,
     onLast,
     onNext,
@@ -82,8 +83,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     // Font properties
     googleFonts,
   } = useTimelineContext();
-
-  const [newOffSet, setNewOffset] = useNewScrollPosition(mode, itemWidth);
   const [hasFocus, setHasFocus] = useState(false);
   const [isKeyboardNavigation, setIsKeyboardNavigation] = useState(false);
   const [isToolbarNavigation, setIsToolbarNavigation] = useState(false);
@@ -144,10 +143,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // Use custom hooks - prioritize component prop mode over context mode
   const { timelineMode, handleTimelineUpdate } = useTimelineMode({
-    initialMode: mode, // Use mode from context
+    initialMode: propMode || mode, // Prioritize prop mode over context mode
     showAllCardsHorizontal,
     updateHorizontalAllCards,
   });
+
+  const [newOffSet, setNewOffset] = useNewScrollPosition(timelineMode, itemWidth);
 
   // Ensure context's showAllCardsHorizontal stays in sync with computed mode
   useEffect(() => {
@@ -202,7 +203,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     handleScroll,
     handleMainScroll,
   } = useTimelineScroll({
-    mode,
+    mode: timelineMode,
     onScrollEnd: onScrollEnd || (() => {}),
     setNewOffset,
     onNextItem: handleNextInternal,
@@ -300,7 +301,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
     if (activeTimelineItem !== undefined) {
       // Move keyboard focus to the active element once activation changes
-      if (mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL') {
+      if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
         requestAnimationFrame(() => {
           const activeId = items[activeTimelineItem ?? 0]?.id;
           if (activeId) {
@@ -334,7 +335,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             ele.focus({ preventScroll: false });
           }
         });
-      } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
+      } else if (timelineMode === 'VERTICAL' || timelineMode === 'VERTICAL_ALTERNATING') {
         // In vertical modes, focus the vertical row (li) for the active item
         requestAnimationFrame(() => {
           const activeId = items[activeTimelineItem ?? 0]?.id;
@@ -494,7 +495,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     });
 
     // Handle centering for both slideshow and manual navigation
-    if (mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL') {
+    if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
       const card = horizontalContentRef.current?.querySelector(
         `#timeline-card-${activeItem.id}`,
       );
@@ -537,7 +538,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           });
         });
       }
-    } else if (mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING') {
+    } else if (timelineMode === 'VERTICAL' || timelineMode === 'VERTICAL_ALTERNATING') {
       const verticalItemRow = document.querySelector(
         `[data-testid="vertical-item-row"][data-item-id="${activeItem.id}"]`,
       );
@@ -568,7 +569,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     const ele = timelineMainRef.current;
     if (!ele) return;
 
-    if (mode === 'HORIZONTAL') {
+    if (timelineMode === 'HORIZONTAL') {
       ele.scrollLeft = Math.max(newOffSet, 0);
     } else {
       ele.scrollTop = newOffSet;
@@ -638,7 +639,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             })}
           >
             <TimelineToolbar
-            activeTimelineItem={activeTimelineItem}
+            activeTimelineItem={activeTimelineItem ?? 0}
             totalItems={items.length}
             slideShowEnabled={!!slideShowEnabled}
             slideShowRunning={!!slideShowRunning}
@@ -699,14 +700,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
         <div
           ref={timelineMainRef}
-          className={`timeline-main-wrapper ${mode.toLowerCase()} ${ve.mainWrapper(
+          className={`timeline-main-wrapper ${timelineMode.toLowerCase()} ${ve.mainWrapper(
             {
               mode:
-                mode === 'VERTICAL'
+                timelineMode === 'VERTICAL'
                   ? 'vertical'
-                  : mode === 'VERTICAL_ALTERNATING'
-                    ? 'verticalAlternating'
-                    : mode === 'HORIZONTAL_ALL'
+                  : timelineMode === 'VERTICAL_ALTERNATING'
+                    ? 'alternating'
+                    : timelineMode === 'HORIZONTAL_ALL'
                       ? 'horizontalAll'
                       : 'horizontal',
             },
@@ -718,7 +719,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         >
           <TimelineView
             timelineMode={timelineMode}
-            activeTimelineItem={activeTimelineItem}
+            activeTimelineItem={activeTimelineItem ?? 0}
             autoScroll={handleScroll}
             contentDetailsChildren={contentDetailsChildren}
             hasFocus={hasFocus}
