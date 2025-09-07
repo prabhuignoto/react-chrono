@@ -19,3 +19,6 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: vi.fn(),
   })),
 });
+
+// Mock scrollIntoView which is not available in Jest/Vitest environment
+Element.prototype.scrollIntoView = vi.fn();

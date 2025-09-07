@@ -80,7 +80,7 @@ export const listItemActive = style({
   borderColor: tokens.semantic.color.interactive.primary,
   backgroundColor: `${tokens.semantic.color.interactive.primary}15`,
   boxShadow: `0 0 0 1px ${tokens.semantic.color.interactive.primary}30, 0 2px 8px -2px ${tokens.semantic.color.background.overlay}`,
-  
+
   selectors: {
     '&::before': {
       content: '""',
@@ -132,7 +132,7 @@ export const checkboxSelected = style({
 
 export const styleAndDescription = style([
   sprinkles({ display: 'flex' }),
-  { 
+  {
     flexDirection: 'column',
     flex: 1,
     minWidth: 0, // Allow flex child to shrink
@@ -152,7 +152,7 @@ export const title = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  
+
   '@media': {
     '(max-width: 768px)': {
       fontSize: '0.8rem',
@@ -175,7 +175,7 @@ export const description = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  
+
   '@media': {
     '(max-width: 768px)': {
       fontSize: '0.7rem',

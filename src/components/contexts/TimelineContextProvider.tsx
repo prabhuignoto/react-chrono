@@ -84,13 +84,15 @@ export interface TimelineStaticConfig {
   // Toolbar
   toolbarPosition: 'top' | 'bottom';
   disableToolbar: boolean;
-  toolbarSearchConfig: {
-    width?: string;
-    maxWidth?: string;
-    minWidth?: string;
-    inputWidth?: string;
-    inputMaxWidth?: string;
-  } | undefined;
+  toolbarSearchConfig:
+    | {
+        width?: string;
+        maxWidth?: string;
+        minWidth?: string;
+        inputWidth?: string;
+        inputMaxWidth?: string;
+      }
+    | undefined;
 
   // Slideshow
   slideItemDuration: number;
@@ -742,6 +744,7 @@ export const useTimelineMemoizedObjects = (): TimelineMemoizedObjects => {
       isDarkMode: context.isDarkMode,
       semanticTags: context.semanticTags,
       slideShowType: context.slideShowType,
+      googleFonts: context.googleFonts,
     }),
     [context],
   );

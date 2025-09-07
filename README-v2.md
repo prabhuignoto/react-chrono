@@ -95,7 +95,7 @@ yarn add react-chrono
 pnpm add react-chrono
 ```
 
-**Requirements**: React 16.8+ | TypeScript 4.0+ (optional) | Modern browsers
+**Requirements**: React 18.2+ | TypeScript 4.0+ (optional) | Modern browsers
 
 ## 🎯 Basic Usage
 
@@ -373,9 +373,9 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 <td width="50%">
 
 **Core Technologies**
-- [React 19](https://reactjs.org/) - Modern React features
+- [React 18+](https://reactjs.org/) - Modern React features
 - [TypeScript](https://www.typescriptlang.org/) - Type safety
-- [Styled Components](https://styled-components.com/) - CSS-in-JS
+- [Vanilla Extract](https://vanilla-extract.style/) - Zero-runtime CSS-in-JS
 - [Day.js](https://day.js.org/) - Date manipulation
 
 </td>

@@ -248,12 +248,12 @@ export const outline = style([
     width: '100%',
     top: '50%',
     transform: 'translateY(-50%)',
-    zIndex: tokens.semantic.zIndex.timelineCard - 1, // Behind timeline points
+    zIndex: 1, // Behind timeline points
     borderRadius: tokens.semantic.borderRadius.sm,
     height: tokens.component.timeline.line.width,
     backgroundColor: tokens.component.timeline.line.color,
     opacity: 0.4,
-    
+
     // Ensure the line extends fully across horizontal timelines
     selectors: {
       '[data-mode="HORIZONTAL"] &': {

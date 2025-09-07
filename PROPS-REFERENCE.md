@@ -207,6 +207,13 @@ display?: {
     enabled?: boolean;
     position?: 'top' | 'bottom';
     sticky?: boolean;
+    search?: {
+      width?: string;
+      maxWidth?: string;
+      minWidth?: string;
+      inputWidth?: string;
+      inputMaxWidth?: string;
+    };
   };
   scrollable?: boolean | {
     scrollbar: boolean;
@@ -231,6 +238,11 @@ display?: {
 | `toolbar.enabled` | `boolean` | `true` | Show/hide the toolbar |
 | `toolbar.position` | `'top' \| 'bottom'` | `'top'` | Position of the toolbar |
 | `toolbar.sticky` | `boolean` | `false` | Make toolbar sticky during scroll |
+| `toolbar.search.width` | `string` | - | Default width of search section (CSS length) |
+| `toolbar.search.maxWidth` | `string` | - | Maximum width of search section (CSS length) |
+| `toolbar.search.minWidth` | `string` | - | Minimum width of search section (CSS length) |
+| `toolbar.search.inputWidth` | `string` | - | Width of actual input field (CSS length) |
+| `toolbar.search.inputMaxWidth` | `string` | - | Maximum width of actual input field (CSS length) |
 
 ### Scrollable Configuration
 
@@ -473,6 +485,7 @@ interface Theme {
   cardMediaBgColor?: string;
   cardSubtitleColor?: string;
   cardTitleColor?: string;
+  detailsColor?: string;
   
   // Timeline Colors
   titleColor?: string;
@@ -532,6 +545,7 @@ interface Theme {
 | `cardMediaBgColor` | `string` | Background color for media section |
 | `cardSubtitleColor` | `string` | Color for card subtitles |
 | `cardTitleColor` | `string` | Color for card titles |
+| `detailsColor` | `string` | Color for detailed content text |
 
 #### Timeline Theme Colors
 
@@ -645,7 +659,6 @@ interface Media {
     type?: string;  // MIME type or file extension
   };
   name?: string;    // Alt text / description
-  active?: boolean; // Auto-play video when active
 }
 ```
 
@@ -657,7 +670,6 @@ interface Media {
 | `source.url` | `string` | ✅ | URL of the media file |
 | `source.type` | `string` | ❌ | MIME type or file extension |
 | `name` | `string` | ❌ | Alt text for images or description |
-| `active` | `boolean` | ❌ | Auto-play video when item becomes active |
 
 ### Media Examples
 

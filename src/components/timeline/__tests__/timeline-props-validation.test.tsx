@@ -32,7 +32,7 @@ describe('Timeline Props Validation', () => {
   const baseItems = [
     {
       cardDetailedText: 'Detailed text 1',
-      cardSubtitle: 'Subtitle 1', 
+      cardSubtitle: 'Subtitle 1',
       cardTitle: 'Card 1',
       id: '1',
       title: 'Item 1',
@@ -40,7 +40,7 @@ describe('Timeline Props Validation', () => {
     {
       cardDetailedText: 'Detailed text 2',
       cardSubtitle: 'Subtitle 2',
-      cardTitle: 'Card 2', 
+      cardTitle: 'Card 2',
       id: '2',
       title: 'Item 2',
     },
@@ -60,7 +60,7 @@ describe('Timeline Props Validation', () => {
     onNext: vi.fn(),
     onOutlineSelection: vi.fn(),
     onPaused: vi.fn(),
-    onPrevious: vi.fn(), 
+    onPrevious: vi.fn(),
     onRestartSlideshow: vi.fn(),
     onTimelineUpdated: vi.fn(),
     slideShowEnabled: true,
@@ -72,40 +72,48 @@ describe('Timeline Props Validation', () => {
     it('should render with VERTICAL mode when prop is provided', () => {
       const { container } = customRender(
         <Timeline {...baseProps} mode="VERTICAL" />,
-        { providerProps }
+        { providerProps },
       );
 
-      const mainWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+      const mainWrapper = container.querySelector(
+        '[data-testid="timeline-main-wrapper"]',
+      );
       expect(mainWrapper).toHaveClass('vertical');
     });
 
     it('should render with HORIZONTAL mode when prop is provided', () => {
       const { container } = customRender(
         <Timeline {...baseProps} mode="HORIZONTAL" />,
-        { providerProps }
+        { providerProps },
       );
 
-      const mainWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]'); 
+      const mainWrapper = container.querySelector(
+        '[data-testid="timeline-main-wrapper"]',
+      );
       expect(mainWrapper).toHaveClass('horizontal');
     });
 
     it('should render with VERTICAL_ALTERNATING mode when prop is provided', () => {
       const { container } = customRender(
         <Timeline {...baseProps} mode="VERTICAL_ALTERNATING" />,
-        { providerProps }
+        { providerProps },
       );
 
-      const mainWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+      const mainWrapper = container.querySelector(
+        '[data-testid="timeline-main-wrapper"]',
+      );
       expect(mainWrapper).toHaveClass('vertical_alternating');
     });
 
     it('should render with HORIZONTAL_ALL mode when prop is provided', () => {
       const { container } = customRender(
         <Timeline {...baseProps} mode="HORIZONTAL_ALL" />,
-        { providerProps }
+        { providerProps },
       );
 
-      const mainWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+      const mainWrapper = container.querySelector(
+        '[data-testid="timeline-main-wrapper"]',
+      );
       expect(mainWrapper).toHaveClass('horizontal_all');
     });
 
@@ -113,38 +121,41 @@ describe('Timeline Props Validation', () => {
       // Context has VERTICAL_ALTERNATING but component prop is HORIZONTAL
       const { container } = customRender(
         <Timeline {...baseProps} mode="HORIZONTAL" />,
-        { providerProps: { ...providerProps, mode: 'VERTICAL_ALTERNATING' } }
+        { providerProps: { ...providerProps, mode: 'VERTICAL_ALTERNATING' } },
       );
 
-      const mainWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]'); 
+      const mainWrapper = container.querySelector(
+        '[data-testid="timeline-main-wrapper"]',
+      );
       expect(mainWrapper).toHaveClass('horizontal');
     });
   });
 
   describe('ActiveTimelineItem Prop Validation', () => {
     it('should handle undefined activeTimelineItem gracefully', () => {
-      const propsWithUndefinedActive = { ...baseProps, activeTimelineItem: undefined };
-      
+      const propsWithUndefinedActive = {
+        ...baseProps,
+        activeTimelineItem: undefined,
+      };
+
       expect(() => {
-        customRender(
-          <Timeline {...propsWithUndefinedActive} />,
-          { providerProps }
-        );
+        customRender(<Timeline {...propsWithUndefinedActive} />, {
+          providerProps,
+        });
       }).not.toThrow();
     });
 
     it('should default to 0 when activeTimelineItem is undefined', () => {
       const onItemSelected = vi.fn();
-      const propsWithUndefinedActive = { 
-        ...baseProps, 
+      const propsWithUndefinedActive = {
+        ...baseProps,
         activeTimelineItem: undefined,
-        onItemSelected
+        onItemSelected,
       };
-      
-      customRender(
-        <Timeline {...propsWithUndefinedActive} />,
-        { providerProps }
-      );
+
+      customRender(<Timeline {...propsWithUndefinedActive} />, {
+        providerProps,
+      });
 
       // The component should internally handle undefined and default to 0
       // We can verify this by checking that no errors are thrown
@@ -159,23 +170,24 @@ describe('Timeline Props Validation', () => {
 
     it('should handle negative activeTimelineItem values', () => {
       const propsWithNegativeActive = { ...baseProps, activeTimelineItem: -1 };
-      
+
       expect(() => {
-        customRender(
-          <Timeline {...propsWithNegativeActive} />,
-          { providerProps }
-        );
+        customRender(<Timeline {...propsWithNegativeActive} />, {
+          providerProps,
+        });
       }).not.toThrow();
     });
 
     it('should handle activeTimelineItem beyond items array length', () => {
-      const propsWithOutOfBoundsActive = { ...baseProps, activeTimelineItem: 99 };
-      
+      const propsWithOutOfBoundsActive = {
+        ...baseProps,
+        activeTimelineItem: 99,
+      };
+
       expect(() => {
-        customRender(
-          <Timeline {...propsWithOutOfBoundsActive} />,
-          { providerProps }
-        );
+        customRender(<Timeline {...propsWithOutOfBoundsActive} />, {
+          providerProps,
+        });
       }).not.toThrow();
     });
   });
@@ -183,12 +195,9 @@ describe('Timeline Props Validation', () => {
   describe('Items Prop Validation', () => {
     it('should handle empty items array', () => {
       const propsWithEmptyItems = { ...baseProps, items: [] };
-      
+
       expect(() => {
-        customRender(
-          <Timeline {...propsWithEmptyItems} />,
-          { providerProps }
-        );
+        customRender(<Timeline {...propsWithEmptyItems} />, { providerProps });
       }).not.toThrow();
     });
 
@@ -199,19 +208,21 @@ describe('Timeline Props Validation', () => {
           title: 'Item 1',
         },
         {
-          id: '2', 
+          id: '2',
           title: 'Item 2',
           cardTitle: 'Card 2',
         },
       ];
-      
-      const propsWithIncompleteItems = { ...baseProps, items: itemsWithMissingProps };
-      
+
+      const propsWithIncompleteItems = {
+        ...baseProps,
+        items: itemsWithMissingProps,
+      };
+
       expect(() => {
-        customRender(
-          <Timeline {...propsWithIncompleteItems} />,
-          { providerProps }
-        );
+        customRender(<Timeline {...propsWithIncompleteItems} />, {
+          providerProps,
+        });
       }).not.toThrow();
     });
   });
@@ -230,36 +241,39 @@ describe('Timeline Props Validation', () => {
         onRestartSlideshow: undefined,
         onTimelineUpdated: undefined,
       };
-      
+
       expect(() => {
-        customRender(
-          <Timeline {...propsWithoutCallbacks} />,
-          { providerProps }
-        );
+        customRender(<Timeline {...propsWithoutCallbacks} />, {
+          providerProps,
+        });
       }).not.toThrow();
     });
   });
 
   describe('Boolean Props Validation', () => {
     it('should handle slideShowEnabled as undefined', () => {
-      const propsWithUndefinedSlideShow = { ...baseProps, slideShowEnabled: undefined };
-      
+      const propsWithUndefinedSlideShow = {
+        ...baseProps,
+        slideShowEnabled: undefined,
+      };
+
       expect(() => {
-        customRender(
-          <Timeline {...propsWithUndefinedSlideShow} />,
-          { providerProps }
-        );
+        customRender(<Timeline {...propsWithUndefinedSlideShow} />, {
+          providerProps,
+        });
       }).not.toThrow();
     });
 
     it('should handle slideShowRunning as undefined', () => {
-      const propsWithUndefinedSlideShowRunning = { ...baseProps, slideShowRunning: undefined };
-      
+      const propsWithUndefinedSlideShowRunning = {
+        ...baseProps,
+        slideShowRunning: undefined,
+      };
+
       expect(() => {
-        customRender(
-          <Timeline {...propsWithUndefinedSlideShowRunning} />,
-          { providerProps }
-        );
+        customRender(<Timeline {...propsWithUndefinedSlideShowRunning} />, {
+          providerProps,
+        });
       }).not.toThrow();
     });
   });
@@ -267,47 +281,45 @@ describe('Timeline Props Validation', () => {
   describe('String Props Validation', () => {
     it('should handle uniqueId as undefined', () => {
       const propsWithUndefinedId = { ...baseProps, uniqueId: undefined };
-      
+
       expect(() => {
-        customRender(
-          <Timeline {...propsWithUndefinedId} />,
-          { providerProps }
-        );
+        customRender(<Timeline {...propsWithUndefinedId} />, { providerProps });
       }).not.toThrow();
     });
 
     it('should handle empty string uniqueId', () => {
       const propsWithEmptyId = { ...baseProps, uniqueId: '' };
-      
+
       expect(() => {
-        customRender(
-          <Timeline {...propsWithEmptyId} />,
-          { providerProps }
-        );
+        customRender(<Timeline {...propsWithEmptyId} />, { providerProps });
       }).not.toThrow();
     });
   });
 
   describe('Number Props Validation', () => {
     it('should handle slideItemDuration as undefined', () => {
-      const propsWithUndefinedDuration = { ...baseProps, slideItemDuration: undefined };
-      
+      const propsWithUndefinedDuration = {
+        ...baseProps,
+        slideItemDuration: undefined,
+      };
+
       expect(() => {
-        customRender(
-          <Timeline {...propsWithUndefinedDuration} />,
-          { providerProps }
-        );
+        customRender(<Timeline {...propsWithUndefinedDuration} />, {
+          providerProps,
+        });
       }).not.toThrow();
     });
 
     it('should handle nestedCardHeight as undefined', () => {
-      const propsWithUndefinedHeight = { ...baseProps, nestedCardHeight: undefined };
-      
+      const propsWithUndefinedHeight = {
+        ...baseProps,
+        nestedCardHeight: undefined,
+      };
+
       expect(() => {
-        customRender(
-          <Timeline {...propsWithUndefinedHeight} />,
-          { providerProps }
-        );
+        customRender(<Timeline {...propsWithUndefinedHeight} />, {
+          providerProps,
+        });
       }).not.toThrow();
     });
   });

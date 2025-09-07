@@ -148,7 +148,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     updateHorizontalAllCards,
   });
 
-  const [newOffSet, setNewOffset] = useNewScrollPosition(timelineMode, itemWidth);
+  const [newOffSet, setNewOffset] = useNewScrollPosition(
+    timelineMode,
+    itemWidth,
+  );
 
   // Ensure context's showAllCardsHorizontal stays in sync with computed mode
   useEffect(() => {
@@ -335,7 +338,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             ele.focus({ preventScroll: false });
           }
         });
-      } else if (timelineMode === 'VERTICAL' || timelineMode === 'VERTICAL_ALTERNATING') {
+      } else if (
+        timelineMode === 'VERTICAL' ||
+        timelineMode === 'VERTICAL_ALTERNATING'
+      ) {
         // In vertical modes, focus the vertical row (li) for the active item
         requestAnimationFrame(() => {
           const activeId = items[activeTimelineItem ?? 0]?.id;
@@ -531,14 +537,20 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
       if (point) {
         requestAnimationFrame(() => {
-          point.scrollIntoView({
-            behavior: 'smooth',
-            inline: 'center',
-            block: 'nearest',
-          });
+          // Check if scrollIntoView is available (not available in JSDOM)
+          if (point.scrollIntoView) {
+            point.scrollIntoView({
+              behavior: 'smooth',
+              inline: 'center',
+              block: 'nearest',
+            });
+          }
         });
       }
-    } else if (timelineMode === 'VERTICAL' || timelineMode === 'VERTICAL_ALTERNATING') {
+    } else if (
+      timelineMode === 'VERTICAL' ||
+      timelineMode === 'VERTICAL_ALTERNATING'
+    ) {
       const verticalItemRow = document.querySelector(
         `[data-testid="vertical-item-row"][data-item-id="${activeItem.id}"]`,
       );
@@ -592,7 +604,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   // Memoize search width CSS variables
   const searchWidthVars = useMemo(() => {
     if (!toolbarSearchConfig) return {};
-    
+
     return {
       '--timeline-search-width': toolbarSearchConfig.width,
       '--timeline-search-max-width': toolbarSearchConfig.maxWidth,
@@ -639,50 +651,52 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             })}
           >
             <TimelineToolbar
-            activeTimelineItem={activeTimelineItem ?? 0}
-            totalItems={items.length}
-            slideShowEnabled={!!slideShowEnabled}
-            slideShowRunning={!!slideShowRunning}
-            onFirst={handleFirst}
-            onLast={handleLast}
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-            onRestartSlideshow={onRestartSlideshow || (() => {})}
-            darkMode={darkMode}
-            toggleDarkMode={toggleDarkMode}
-            onPaused={onPaused || (() => {})}
-            id={id}
-            flipLayout={!!flipLayout}
-            items={items}
-            onActivateTimelineItem={handleTimelineItemClick}
-            onUpdateTimelineMode={handleTimelineUpdate}
-            onUpdateTextContentDensity={updateTextContentDensity}
-            mode={timelineMode}
-            searchQuery={searchQuery}
-            onSearchChange={handleSearchChange}
-            onClearSearch={clearSearch}
-            onNextMatch={handleNextMatch}
-            onPreviousMatch={handlePreviousMatch}
-            totalMatches={searchResults.length}
-            currentMatchIndex={currentMatchIndex}
-            onSearchKeyDown={handleSearchKeyDown}
-            searchInputRef={
-              searchInputRef as unknown as React.RefObject<HTMLInputElement>
-            }
-            timelineRef={wrapperRef as unknown as React.RefObject<HTMLElement>}
-            onEnterFullscreen={() => {
-              console.log('Entered fullscreen mode');
-              setIsFullscreen(true);
-            }}
-            onExitFullscreen={() => {
-              console.log('Exited fullscreen mode');
-              setIsFullscreen(false);
-            }}
-            onFullscreenError={(error: string) => {
-              console.error('Fullscreen error:', error);
-              setIsFullscreen(false);
-            }}
-            stickyToolbar={props.stickyToolbar ?? false}
+              activeTimelineItem={activeTimelineItem ?? 0}
+              totalItems={items.length}
+              slideShowEnabled={!!slideShowEnabled}
+              slideShowRunning={!!slideShowRunning}
+              onFirst={handleFirst}
+              onLast={handleLast}
+              onNext={handleNext}
+              onPrevious={handlePrevious}
+              onRestartSlideshow={onRestartSlideshow || (() => {})}
+              darkMode={darkMode}
+              toggleDarkMode={toggleDarkMode}
+              onPaused={onPaused || (() => {})}
+              id={id}
+              flipLayout={!!flipLayout}
+              items={items}
+              onActivateTimelineItem={handleTimelineItemClick}
+              onUpdateTimelineMode={handleTimelineUpdate}
+              onUpdateTextContentDensity={updateTextContentDensity}
+              mode={timelineMode}
+              searchQuery={searchQuery}
+              onSearchChange={handleSearchChange}
+              onClearSearch={clearSearch}
+              onNextMatch={handleNextMatch}
+              onPreviousMatch={handlePreviousMatch}
+              totalMatches={searchResults.length}
+              currentMatchIndex={currentMatchIndex}
+              onSearchKeyDown={handleSearchKeyDown}
+              searchInputRef={
+                searchInputRef as unknown as React.RefObject<HTMLInputElement>
+              }
+              timelineRef={
+                wrapperRef as unknown as React.RefObject<HTMLElement>
+              }
+              onEnterFullscreen={() => {
+                console.log('Entered fullscreen mode');
+                setIsFullscreen(true);
+              }}
+              onExitFullscreen={() => {
+                console.log('Exited fullscreen mode');
+                setIsFullscreen(false);
+              }}
+              onFullscreenError={(error: string) => {
+                console.error('Fullscreen error:', error);
+                setIsFullscreen(false);
+              }}
+              stickyToolbar={props.stickyToolbar ?? false}
             />
           </div>
         )}
@@ -737,7 +751,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         </div>
 
         {/* Only render content renderer for horizontal modes */}
-        {(timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') && (
+        {(timelineMode === 'HORIZONTAL' ||
+          timelineMode === 'HORIZONTAL_ALL') && (
           <div
             id={id}
             ref={horizontalContentRef}

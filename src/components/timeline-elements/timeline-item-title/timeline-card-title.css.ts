@@ -21,11 +21,11 @@ export const titleWrapper = style([
     // Better responsive text handling
     wordBreak: 'break-word',
     hyphens: 'auto',
-    
+
     // Default: single line with ellipsis on larger screens
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
-    
+
     // Responsive behavior for smaller screens
     '@media': {
       // On tablets and below, allow text wrapping

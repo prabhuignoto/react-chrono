@@ -230,7 +230,7 @@ export function generateFontCssVars(
       const prefix = `--timeline-${elementType}`;
 
       // Set element-specific font family (inherits from base font family)
-      cssVars[`${prefix}-font-family`] = cssVars['--timeline-font-family'];
+      cssVars[`${prefix}-font-family`] = cssVars['--timeline-font-family'] || '';
 
       if (elementConfig.weight) {
         const numericWeight = normalizeFontWeight(elementConfig.weight);
