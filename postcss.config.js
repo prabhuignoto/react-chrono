@@ -1,5 +1,7 @@
 module.exports = {
   plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
     'postcss-preset-env': {
       stage: 3,
       features: {
@@ -11,7 +13,6 @@ module.exports = {
         'color-mix': true,
       },
     },
-    autoprefixer: {},
     cssnano: process.env.NODE_ENV === 'production' ? { preset: 'default' } : false,
   },
 };

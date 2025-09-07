@@ -110,7 +110,6 @@ export const mainWrapper = recipe({
         height: 0,
         overflowY: 'auto',
         overflowX: 'hidden',
-        border: '1px solid red',
       },
     },
   },

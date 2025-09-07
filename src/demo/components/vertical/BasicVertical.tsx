@@ -1,19 +1,67 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent } from 'react';
 import Chrono from '../../../components';
-import { componentContainerTree, vertical } from '../../App.css';
+import DemoPageLayout from '../DemoPageLayout';
 
 export interface BasicVerticalProps {
   type: string;
   items: TimelineItemModel[];
 }
 
+const codeExample = `import { Chrono } from 'react-chrono';
+
+const items = [
+  {
+    title: "May 1940",
+    cardTitle: "World War II",
+    cardSubtitle: "The Battle of France",
+    cardDetailedText: "The German forces invaded France..."
+  },
+  // ... more items
+];
+
+function BasicVerticalTimeline() {
+  return (
+    <Chrono
+      items={items}
+      mode="vertical"
+      activeItemIndex={2}
+      layout={{
+        cardWidth: 650,
+        cardHeight: 200,
+        responsive: {
+          enabled: true,
+          breakpoint: 768,
+        },
+      }}
+      display={{
+        toolbar: { enabled: true, position: 'bottom' },
+      }}
+      animation={{
+        slideshow: { enabled: true, duration: 2500 },
+      }}
+    />
+  );
+}`;
+
 export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({ 
   type, 
   items 
 }) => (
-  <div id="vertical" className={vertical}>
-    <div className={componentContainerTree}>
+  <DemoPageLayout
+    title="Basic Vertical Timeline"
+    description="A clean, vertical timeline layout perfect for chronological storytelling. This is the most commonly used timeline format, displaying events from top to bottom with cards alternating on either side of a central timeline trunk."
+    features={[
+      'Vertical Layout',
+      'Responsive Design', 
+      'Alternating Cards',
+      'Auto Slideshow',
+      'Search & Navigation',
+      'Keyboard Accessible'
+    ]}
+    codeExample={codeExample}
+  >
+    <div style={{ height: '700px', padding: '20px' }}>
       <Chrono
         items={items}
         mode="vertical"
@@ -117,5 +165,5 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
         }}
       />
     </div>
-  </div>
+  </DemoPageLayout>
 ); 

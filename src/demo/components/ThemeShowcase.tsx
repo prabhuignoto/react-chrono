@@ -104,76 +104,160 @@ const timelineItems = [
   },
 ];
 
+import DemoPageLayout from './DemoPageLayout';
+
+const codeExample = `import { Chrono } from 'react-chrono';
+
+// Define your custom theme
+const customTheme = {
+  cardBgColor: '#ffffff',
+  primary: '#2d3748',
+  secondary: '#4a5568',
+  titleColor: '#1a202c',
+  titleColorActive: '#2b6cb0',
+  cardTitleColor: '#2d3748',
+  cardSubtitleColor: '#4a5568',
+  cardDetailsColor: '#718096',
+  iconBackgroundColor: '#edf2f7',
+  iconColor: '#4a5568',
+  shadowColor: 'rgba(0, 0, 0, 0.1)',
+  glowColor: 'rgba(43, 108, 176, 0.2)',
+};
+
+function ThemedTimeline() {
+  return (
+    <Chrono
+      items={items}
+      mode="VERTICAL"
+      theme={customTheme}
+      enableDarkToggle={false}
+      disableToolbar={false}
+    />
+  );
+}`;
+
 export const ThemeShowcase: React.FC = () => {
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1 style={{ marginBottom: '2rem', color: '#2d3748' }}>Timeline Theme Showcase</h1>
-      
-      <div style={{ marginBottom: '3rem' }}>
-        <h2 style={{ color: '#2d3748', marginBottom: '1rem' }}>Modern Minimal Theme</h2>
-        <p style={{ color: '#4a5568', marginBottom: '1rem' }}>
-          A clean, professional theme with subtle colors and modern typography.
-        </p>
-        <div style={{ height: '400px', border: '1px solid #e2e8f0', borderRadius: '8px', overflow: 'hidden' }}>
-          <Chrono
-            items={timelineItems}
-            mode="VERTICAL"
-            theme={modernMinimalTheme}
-            enableDarkToggle={false}
-            disableToolbar={false}
-            stickyToolbar={true}
-          />
+    <DemoPageLayout
+      title="Theme Showcase Gallery"
+      description="Explore the powerful theming capabilities of React Chrono. From minimal professional designs to vibrant creative themes, customize every aspect of your timeline's appearance to match your brand and content."
+      features={[
+        'Custom Color Schemes',
+        'Complete Theme Control',
+        'Dark Mode Support',
+        'Professional Templates',
+        'Brand Integration',
+        'Accessibility Compliant'
+      ]}
+      codeExample={codeExample}
+    >
+      <div className="space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Modern Minimal Theme */}
+          <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
+            <div className="p-4 border-b bg-gray-50">
+              <h3 className="font-semibold text-gray-900">Modern Minimal</h3>
+              <p className="text-sm text-gray-600 mt-1">Clean and professional</p>
+            </div>
+            <div style={{ height: '300px', padding: '10px' }}>
+              <Chrono
+                items={timelineItems}
+                mode="VERTICAL"
+                theme={modernMinimalTheme}
+                enableDarkToggle={false}
+                disableToolbar={true}
+              />
+            </div>
+          </div>
+
+          {/* Vibrant Theme */}
+          <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
+            <div className="p-4 border-b bg-gray-50">
+              <h3 className="font-semibold text-gray-900">Vibrant Dark</h3>
+              <p className="text-sm text-gray-600 mt-1">Bold and dynamic</p>
+            </div>
+            <div style={{ height: '300px', padding: '10px', backgroundColor: '#1a1a2e' }}>
+              <Chrono
+                items={timelineItems}
+                mode="VERTICAL"
+                theme={vibrantTheme}
+                enableDarkToggle={false}
+                disableToolbar={true}
+              />
+            </div>
+          </div>
+
+          {/* Nature Theme */}
+          <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
+            <div className="p-4 border-b bg-gray-50">
+              <h3 className="font-semibold text-gray-900">Nature Inspired</h3>
+              <p className="text-sm text-gray-600 mt-1">Calm and organic</p>
+            </div>
+            <div style={{ height: '300px', padding: '10px' }}>
+              <Chrono
+                items={timelineItems}
+                mode="VERTICAL"
+                theme={natureTheme}
+                enableDarkToggle={false}
+                disableToolbar={true}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Interactive Full-Size Demo */}
+        <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
+          <div className="p-6 border-b bg-gray-50">
+            <h3 className="text-lg font-semibold text-gray-900">Interactive Theme Demo</h3>
+            <p className="text-sm text-gray-600 mt-1">
+              Full-featured timeline with the Modern Minimal theme - try the controls and interactions
+            </p>
+          </div>
+          <div style={{ height: '500px', padding: '20px' }}>
+            <Chrono
+              items={timelineItems}
+              mode="VERTICAL"
+              theme={modernMinimalTheme}
+              enableDarkToggle={false}
+              disableToolbar={false}
+              stickyToolbar={true}
+            />
+          </div>
+        </div>
+
+        {/* Theme Properties Reference */}
+        <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg p-6 border border-indigo-200">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Theme Property Reference</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div>
+              <h4 className="font-medium text-gray-900 mb-2">Core Colors</h4>
+              <ul className="text-sm text-gray-700 space-y-1">
+                <li><code className="bg-gray-100 px-1 rounded">primary</code> - Main brand color</li>
+                <li><code className="bg-gray-100 px-1 rounded">secondary</code> - Accent color</li>
+                <li><code className="bg-gray-100 px-1 rounded">cardBgColor</code> - Card background</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-medium text-gray-900 mb-2">Typography</h4>
+              <ul className="text-sm text-gray-700 space-y-1">
+                <li><code className="bg-gray-100 px-1 rounded">titleColor</code> - Timeline titles</li>
+                <li><code className="bg-gray-100 px-1 rounded">cardTitleColor</code> - Card titles</li>
+                <li><code className="bg-gray-100 px-1 rounded">cardDetailsColor</code> - Body text</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-medium text-gray-900 mb-2">Interactive</h4>
+              <ul className="text-sm text-gray-700 space-y-1">
+                <li><code className="bg-gray-100 px-1 rounded">iconColor</code> - Timeline icons</li>
+                <li><code className="bg-gray-100 px-1 rounded">shadowColor</code> - Drop shadows</li>
+                <li><code className="bg-gray-100 px-1 rounded">glowColor</code> - Hover effects</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-      
-      <div style={{ marginBottom: '3rem' }}>
-        <h2 style={{ color: '#2d3748', marginBottom: '1rem' }}>Vibrant Theme</h2>
-        <p style={{ color: '#4a5568', marginBottom: '1rem' }}>
-          A bold, high-contrast theme perfect for creative content.
-        </p>
-        <div style={{ height: '400px', border: '1px solid #e2e8f0', borderRadius: '8px', overflow: 'hidden' }}>
-          <Chrono
-            items={timelineItems}
-            mode="VERTICAL"
-            theme={vibrantTheme}
-            enableDarkToggle={false}
-            disableToolbar={false}
-            stickyToolbar={false}
-          />
-        </div>
-      </div>
-      
-      <div style={{ marginBottom: '3rem' }}>
-        <h2 style={{ color: '#2d3748', marginBottom: '1rem' }}>Nature Theme</h2>
-        <p style={{ color: '#4a5568', marginBottom: '1rem' }}>
-          A calming, nature-inspired theme with earthy tones.
-        </p>
-        <div style={{ height: '400px', border: '1px solid #e2e8f0', borderRadius: '8px', overflow: 'hidden' }}>
-          <Chrono
-            items={timelineItems}
-            mode="VERTICAL"
-            theme={natureTheme}
-            enableDarkToggle={false}
-            disableToolbar={false}
-            stickyToolbar={true}
-          />
-        </div>
-      </div>
-      
-      <div style={{ marginTop: '2rem', padding: '1.5rem', backgroundColor: '#f7fafc', borderRadius: '8px' }}>
-        <h3 style={{ color: '#2d3748', marginBottom: '1rem' }}>Theme Customization Guide</h3>
-        <p style={{ color: '#4a5568', marginBottom: '1rem' }}>
-          The timeline component supports extensive theme customization through the following properties:
-        </p>
-        <ul style={{ color: '#4a5568', listStyle: 'disc', paddingLeft: '1.5rem' }}>
-          <li><strong>Primary & Secondary Colors</strong> - Main brand colors for the timeline</li>
-          <li><strong>Card Colors</strong> - Background, title, subtitle, and text colors for timeline cards</li>
-          <li><strong>Icon Colors</strong> - Colors for timeline icons and their backgrounds</li>
-          <li><strong>Toolbar Colors</strong> - Colors for the timeline toolbar and its buttons</li>
-          <li><strong>Interactive States</strong> - Colors for hover, active, and focus states</li>
-          <li><strong>Effects</strong> - Shadow and glow effects for enhanced visual hierarchy</li>
-        </ul>
-      </div>
-    </div>
+    </DemoPageLayout>
   );
 }; 

@@ -7,11 +7,12 @@
 :before {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: var(--timeline-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Inter', var(--timeline-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif);
   -webkit-font-smoothing: antialiased;
@@ -21,4 +22,27 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+html {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  max-width: none !important;
+  min-height: 100vh;
+}
+
+/* Ensure full-width layout */
+.App, .app-container, [data-reactroot] {
+  width: 100% !important;
+  max-width: none !important;
 }

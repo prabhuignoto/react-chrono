@@ -1,9 +1,6 @@
 .App {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -42,9 +39,7 @@
 }
 
 #root {
-  display: flex;
-  align-items: center;
-  justify-items: center;
+  width: 100%;
   min-height: 100vh;
 }
 
