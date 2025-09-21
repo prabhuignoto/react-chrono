@@ -19,7 +19,7 @@ export const NestedVertical: FunctionComponent<NestedVerticalProps> = ({
       type === 'tablet' ? componentContainerTreeTablet :
       type === 'mobile' ? componentContainerTreeMobile :
       componentContainerTree
-    }>
+    } style={{ minHeight: '600px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
       <Chrono
         items={items}
         mode="HORIZONTAL"

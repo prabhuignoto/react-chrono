@@ -19,7 +19,7 @@ export const MixedVertical: FunctionComponent<MixedVerticalProps> = ({
       type === 'tablet' ? componentContainerTreeTablet :
       type === 'mobile' ? componentContainerTreeMobile :
       componentContainerTree
-    }>
+    } style={{ minHeight: '600px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
       <Chrono
         items={mixedTimeline}
         mode="VERTICAL"

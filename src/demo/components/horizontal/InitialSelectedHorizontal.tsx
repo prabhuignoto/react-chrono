@@ -12,7 +12,7 @@ export const InitialSelectedHorizontal: FunctionComponent<InitialSelectedHorizon
   items 
 }) => (
   <div className={horizontal} id="horizontal">
-    <div className={componentContainerBigScreen}>
+    <div className={componentContainerBigScreen} style={{ minHeight: '600px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
       <Chrono
         items={items}
         activeItemIndex={2}

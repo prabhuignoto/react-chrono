@@ -21,6 +21,7 @@
 - [🎬 Animation Configuration](#-animation-configuration)
 - [✨ Style Configuration](#-style-configuration)
 - [♿ Accessibility Configuration](#-accessibility-configuration)
+- [🌍 Internationalization Configuration](#-internationalization-configuration)
 - [🎨 Theme Properties](#-theme-properties)
 - [📊 Timeline Item Model](#-timeline-item-model)
 - [🔄 Legacy Props (Deprecated)](#-legacy-props-deprecated)
@@ -462,6 +463,164 @@ accessibility?: {
 | `search.placeholder` | `string` | `'Search...'` | Search input placeholder |
 | `search.ariaLabel` | `string` | `'Search timeline'` | ARIA label for search input |
 | `search.clearLabel` | `string` | `'Clear search'` | Clear search button label |
+
+---
+
+## 🌍 Internationalization Configuration
+
+Complete internationalization support for all user-facing text in the timeline component.
+
+### i18n Config Object
+
+```typescript
+i18n?: {
+  texts?: TimelineI18nConfig;
+  locale?: string;
+  direction?: 'ltr' | 'rtl';
+}
+```
+
+### Comprehensive Text Configuration
+
+The `texts` configuration provides internationalization support for all timeline text elements:
+
+```typescript
+i18n: {
+  texts: {
+    navigation: {
+      first: 'Go to first item',
+      last: 'Go to last item',
+      next: 'Next item',
+      previous: 'Previous item',
+      play: 'Start slideshow',
+      stop: 'Stop slideshow',
+    },
+    search: {
+      placeholder: 'Search Timeline',
+      ariaLabel: 'Search timeline content',
+      clearLabel: 'Clear Search',
+      nextMatch: 'Next Match (Enter)',
+      previousMatch: 'Previous Match (Shift+Enter)',
+      resultsCount: '{current} of {total}',
+      noResults: 'No results found',
+    },
+    theme: {
+      darkMode: 'Switch to dark mode',
+      lightMode: 'Switch to light mode',
+      toggleTheme: 'Toggle theme',
+    },
+    fullscreen: {
+      enterFullscreen: 'Enter fullscreen',
+      exitFullscreen: 'Exit fullscreen',
+      notSupported: 'Fullscreen not supported',
+    },
+    content: {
+      readMore: 'Read More',
+      showLess: 'Show Less',
+      expand: 'Expand',
+      collapse: 'Collapse',
+    },
+    // ... additional text categories
+  }
+}
+```
+
+### Text Categories
+
+| Category | Description | Covers |
+|----------|-------------|--------|
+| `navigation` | Navigation control labels | First, last, next, previous, play/stop buttons |
+| `search` | Search functionality text | Search input, results, navigation |
+| `theme` | Theme switching labels | Dark/light mode toggles |
+| `layout` | Layout mode labels | Vertical, horizontal, alternating modes |
+| `fullscreen` | Fullscreen functionality | Enter/exit fullscreen, error messages |
+| `quickJump` | Quick navigation | Jump to item dropdown |
+| `content` | Content interaction | Read more, expand/collapse |
+| `status` | Loading and error states | Loading, error, empty states |
+| `accessibility` | Screen reader labels | ARIA labels and descriptions |
+| `view` | View options | Compact/detailed view toggles |
+| `keyboard` | Keyboard help | Keyboard navigation instructions |
+
+### Template String Support
+
+Some text properties support template variables using `{variable}` syntax:
+
+```typescript
+search: {
+  resultsCount: '{current} of {total}',  // "1 of 5"
+},
+accessibility: {
+  itemPosition: 'Item {current} of {total}',  // "Item 3 of 10"
+},
+quickJump: {
+  itemTemplate: '{index}: {title}',  // "1: My Title"
+}
+```
+
+### Multi-language Example
+
+```typescript
+// English (default)
+const englishTexts = {
+  navigation: {
+    first: 'Go to first item',
+    last: 'Go to last item',
+    next: 'Next item',
+    previous: 'Previous item',
+  },
+  search: {
+    placeholder: 'Search Timeline',
+    clearLabel: 'Clear Search',
+  }
+};
+
+// Spanish
+const spanishTexts = {
+  navigation: {
+    first: 'Ir al primer elemento',
+    last: 'Ir al último elemento', 
+    next: 'Siguiente elemento',
+    previous: 'Elemento anterior',
+  },
+  search: {
+    placeholder: 'Buscar en la Línea de Tiempo',
+    clearLabel: 'Limpiar Búsqueda',
+  }
+};
+
+<Chrono
+  items={items}
+  i18n={{ texts: spanishTexts, locale: 'es' }}
+/>
+```
+
+### Legacy Compatibility
+
+The new i18n system is fully compatible with existing `accessibility.buttonTexts` configuration. When both are provided, i18n texts take precedence for supported properties.
+
+```typescript
+// Legacy (still works)
+<Chrono
+  accessibility={{
+    buttonTexts: {
+      first: 'First',
+      next: 'Next',
+    }
+  }}
+/>
+
+// New i18n (recommended)
+<Chrono
+  i18n={{
+    texts: {
+      navigation: {
+        first: 'First',
+        next: 'Next',
+      }
+    }
+  }}
+/>
+```
 
 ---
 

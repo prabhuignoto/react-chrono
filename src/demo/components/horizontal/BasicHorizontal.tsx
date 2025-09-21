@@ -16,7 +16,7 @@ export const BasicHorizontal: FunctionComponent<BasicHorizontalProps> = ({
   return (
     <div className={horizontal} id="horizontal">
       <span>{itemSelected}</span>
-      <div className={componentContainerBigScreen}>
+      <div className={componentContainerBigScreen} style={{ minHeight: '600px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
         <Chrono
           items={items}
           mode="horizontal"

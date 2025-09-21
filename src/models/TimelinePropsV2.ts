@@ -10,6 +10,7 @@ import {
   AnimationConfig,
   StyleConfig,
   AccessibilityConfig,
+  I18nConfig,
 } from './TimelineConfig';
 
 /**
@@ -70,6 +71,9 @@ export interface TimelinePropsV2 {
 
   /** Accessibility and internationalization */
   accessibility?: AccessibilityConfig;
+
+  /** Comprehensive internationalization configuration */
+  i18n?: I18nConfig;
 
   // === Event Callbacks ===
 

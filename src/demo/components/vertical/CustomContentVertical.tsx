@@ -24,7 +24,7 @@ export const CustomContentVertical: FunctionComponent<CustomContentVerticalProps
         type === 'tablet' ? componentContainerTreeTablet :
         type === 'mobile' ? componentContainerTreeMobile :
         componentContainerTree
-      }>
+      } style={{ minHeight: '600px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
         <Chrono mode="VERTICAL" cardHeight={200} cardWidth={650} scrollable>
           <div>
             <div style={{ width: '250px', height: '250px' }}>

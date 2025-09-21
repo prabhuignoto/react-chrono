@@ -94,7 +94,7 @@ export const ComprehensiveVertical: FunctionComponent<ComprehensiveVerticalProps
         type === 'tablet' ? componentContainerTreeTablet :
         type === 'mobile' ? componentContainerTreeMobile :
         componentContainerTree
-      }>
+      } style={{ minHeight: '600px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
         {/* Simple header */}
         {/* <div style={{ 
           marginBottom: '20px', 

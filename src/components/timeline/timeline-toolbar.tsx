@@ -96,6 +96,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     isDarkMode: darkMode,
     textContentDensity: textDensity,
     isMobile,
+    textResolver,
   } = useTimelineContext();
 
   // Prepare QuickJump items with proper string conversions
@@ -235,7 +236,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           <input
             ref={searchInputRef}
             type="search"
-            placeholder={buttonTexts?.searchPlaceholder ?? 'Search Timeline'}
+            placeholder={textResolver.searchPlaceholder()}
             value={searchQuery}
             onChange={handleInputChange}
             onKeyDown={(event) => {
@@ -257,9 +258,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               handleSearchKeyDown(event);
             }}
             onBlur={handleSearchInputBlur}
-            aria-label={
-              buttonTexts?.searchAriaLabel ?? 'Search timeline content'
-            }
+            aria-label={textResolver.searchAriaLabel()}
             disabled={slideShowRunning}
             aria-keyshortcuts="Enter Shift+Enter Escape"
             aria-describedby={
@@ -273,8 +272,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             <button
               className={veSearchButton}
               onClick={handleClearSearch}
-              title={buttonTexts?.clearSearch ?? 'Clear Search'}
-              aria-label={buttonTexts?.clearSearch ?? 'Clear Search'}
+              title={textResolver.clearSearch()}
+              aria-label={textResolver.clearSearch()}
               type="button"
             >
               <span className={veSearchButtonIcon}>
@@ -316,7 +315,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                   border: 0,
                 }}
               >
-                {'No matches found'}
+{textResolver.noSearchResults()}
               </span>
             )}
             {searchQuery && (
@@ -324,12 +323,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                 <button
                   className={veSearchButton}
                   onClick={onPreviousMatch}
-                  title={
-                    buttonTexts?.previousMatch ?? 'Previous Match (Shift+Enter)'
-                  }
-                  aria-label={
-                    buttonTexts?.previousMatch ?? 'Previous Match (Shift+Enter)'
-                  }
+                  title={textResolver.previousMatch()}
+                  aria-label={textResolver.previousMatch()}
                   disabled={disableSearchNav}
                   type="button"
                 >
@@ -340,8 +335,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                 <button
                   className={veSearchButton}
                   onClick={onNextMatch}
-                  title={buttonTexts?.nextMatch ?? 'Next Match (Enter)'}
-                  aria-label={buttonTexts?.nextMatch ?? 'Next Match (Enter)'}
+                  title={textResolver.nextMatch()}
+                  aria-label={textResolver.nextMatch()}
                   disabled={disableSearchNav}
                   type="button"
                 >

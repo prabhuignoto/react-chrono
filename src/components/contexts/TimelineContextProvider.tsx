@@ -27,6 +27,10 @@ import {
   getSlideShowType,
 } from '@utils/index';
 import { useMatchMedia } from '../effects/useMatchMedia';
+import { I18nConfig } from '@models/TimelineConfig';
+import { TimelineI18nConfig } from '@models/TimelineI18n';
+import { useI18n, mapI18nToButtonTexts } from '@hooks/useI18n';
+import { createTextResolver, TextResolver } from '@utils/textResolver';
 
 // ==========================================
 // CONTEXT INTERFACES
@@ -136,6 +140,9 @@ export interface TimelineMemoizedObjects {
   semanticTags: Record<string, string>;
   slideShowType: SlideShowType;
   googleFonts: any;
+  i18nConfig: TimelineI18nConfig | undefined;
+  i18nHelper: ReturnType<typeof useI18n>;
+  textResolver: TextResolver;
 }
 
 /**
@@ -192,6 +199,7 @@ export interface TimelineContextProviderProps
     display?: string;
     preconnect?: boolean;
   };
+  i18nConfig?: TimelineI18nConfig;
 }
 
 export const TimelineContextProvider: FunctionComponent<
@@ -273,6 +281,9 @@ export const TimelineContextProvider: FunctionComponent<
     classNames,
     fontSizes,
     semanticTags,
+
+    // i18n props
+    i18nConfig,
 
     // Data props
     items,
@@ -365,12 +376,23 @@ export const TimelineContextProvider: FunctionComponent<
     [isDarkMode, theme],
   );
 
+  // Setup i18n helper first
+  const i18nHelper = useI18n(i18nConfig);
+  
+  // Create text resolver with i18n and legacy support
+  const textResolver = useMemo(
+    () => createTextResolver(i18nHelper, buttonTexts),
+    [i18nHelper, buttonTexts]
+  );
+
   const memoizedButtonTexts = useMemo(
     () => ({
       ...getDefaultButtonTexts(),
       ...buttonTexts,
+      // Merge with i18n texts for legacy compatibility
+      ...(i18nConfig && mapI18nToButtonTexts(i18nConfig)),
     }),
-    [buttonTexts],
+    [buttonTexts, i18nConfig],
   );
 
   const memoizedClassNames = useMemo(
@@ -537,6 +559,9 @@ export const TimelineContextProvider: FunctionComponent<
       semanticTags: memoizedSemanticTags,
       slideShowType: memoizedSlideShowType,
       googleFonts: googleFontsConfig,
+      i18nConfig,
+      i18nHelper,
+      textResolver,
 
       // Computed values
       computedCardHeight,
@@ -613,6 +638,8 @@ export const TimelineContextProvider: FunctionComponent<
       memoizedSemanticTags,
       memoizedSlideShowType,
       googleFontsConfig,
+      i18nConfig,
+      textResolver,
 
       // Computed values dependencies
       computedCardHeight,
@@ -745,6 +772,9 @@ export const useTimelineMemoizedObjects = (): TimelineMemoizedObjects => {
       semanticTags: context.semanticTags,
       slideShowType: context.slideShowType,
       googleFonts: context.googleFonts,
+      i18nConfig: context.i18nConfig,
+      i18nHelper: context.i18nHelper,
+      textResolver: context.textResolver,
     }),
     [context],
   );

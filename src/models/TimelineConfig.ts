@@ -3,8 +3,6 @@
  * This provides a cleaner, more intuitive way to configure the timeline
  */
 
-import { ReactNode } from 'react';
-
 /**
  * Layout and sizing configuration
  */
@@ -385,4 +383,16 @@ export interface AccessibilityConfig {
     ariaLabel?: string;
     clearLabel?: string;
   };
+}
+
+/**
+ * Comprehensive internationalization configuration
+ */
+export interface I18nConfig {
+  /** Complete internationalization configuration for all timeline texts */
+  texts?: import('./TimelineI18n').TimelineI18nConfig;
+  /** Locale code (e.g., 'en', 'es', 'fr', 'de') for future locale-specific features */
+  locale?: string;
+  /** Text direction for RTL language support */
+  direction?: 'ltr' | 'rtl';
 }

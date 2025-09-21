@@ -159,7 +159,7 @@ export const ThemeShowcase: React.FC = () => {
               <h3 className="font-semibold text-gray-900">Modern Minimal</h3>
               <p className="text-sm text-gray-600 mt-1">Clean and professional</p>
             </div>
-            <div style={{ height: '300px', padding: '10px' }}>
+            <div style={{ minHeight: '300px', maxHeight: '400px', padding: '10px', overflow: 'hidden' }}>
               <Chrono
                 items={timelineItems}
                 mode="VERTICAL"
@@ -176,7 +176,7 @@ export const ThemeShowcase: React.FC = () => {
               <h3 className="font-semibold text-gray-900">Vibrant Dark</h3>
               <p className="text-sm text-gray-600 mt-1">Bold and dynamic</p>
             </div>
-            <div style={{ height: '300px', padding: '10px', backgroundColor: '#1a1a2e' }}>
+            <div style={{ minHeight: '300px', maxHeight: '400px', padding: '10px', backgroundColor: '#1a1a2e', overflow: 'hidden' }}>
               <Chrono
                 items={timelineItems}
                 mode="VERTICAL"
@@ -193,7 +193,7 @@ export const ThemeShowcase: React.FC = () => {
               <h3 className="font-semibold text-gray-900">Nature Inspired</h3>
               <p className="text-sm text-gray-600 mt-1">Calm and organic</p>
             </div>
-            <div style={{ height: '300px', padding: '10px' }}>
+            <div style={{ minHeight: '300px', maxHeight: '400px', padding: '10px', overflow: 'hidden' }}>
               <Chrono
                 items={timelineItems}
                 mode="VERTICAL"
@@ -213,7 +213,7 @@ export const ThemeShowcase: React.FC = () => {
               Full-featured timeline with the Modern Minimal theme - try the controls and interactions
             </p>
           </div>
-          <div style={{ height: '500px', padding: '20px' }}>
+          <div style={{ minHeight: '500px', maxHeight: '700px', padding: '20px', overflow: 'hidden' }}>
             <Chrono
               items={timelineItems}
               mode="VERTICAL"

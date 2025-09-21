@@ -5,6 +5,7 @@ import { migrateLegacyProps, warnDeprecatedProps } from '@utils/propMigration';
 import { getUniqueID } from '@utils/index';
 import { safeValidateTimelineProps } from '@utils/validation';
 import dayjs from 'dayjs';
+import { mapI18nToButtonTexts } from '@hooks/useI18n';
 import React, {
   useCallback,
   useEffect,
@@ -133,6 +134,9 @@ function convertToLegacyProps(props: TimelinePropsV2): TimelineProps {
 
     // Accessibility props
     buttonTexts: props.accessibility?.buttonTexts as any,
+
+    // i18n props
+    i18nConfig: props.i18n?.texts,
 
     // Dark mode
     darkMode: props.darkMode?.enabled,
