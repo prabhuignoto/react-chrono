@@ -138,5 +138,105 @@ describe('textResolver', () => {
       expect(textResolver.nextMatch()).toBe('Next Legacy');
       expect(textResolver.previousMatch()).toBe('Previous Legacy');
     });
+
+    it('should handle undefined and null values gracefully', () => {
+      const textResolver = createTextResolver(undefined, undefined);
+
+      // Should return default values when both params are undefined
+      expect(textResolver.firstItem()).toBe('Go to first item');
+      expect(textResolver.searchPlaceholder()).toBe('Search Timeline');
+      expect(textResolver.darkMode()).toBe('Switch to dark mode');
+    });
+
+    it('should handle empty i18n helper objects', () => {
+      const emptyI18nHelper = {
+        navigation: {},
+        search: {},
+        theme: {},
+      } as any;
+
+      const textResolver = createTextResolver(emptyI18nHelper);
+
+      // Should fall back to defaults when i18n methods are missing
+      expect(textResolver.firstItem()).toBe('Go to first item');
+      expect(textResolver.searchPlaceholder()).toBe('Search Timeline');
+    });
+
+    it('should handle i18n methods that return empty strings', () => {
+      const i18nHelper = {
+        navigation: {
+          first: () => '',
+          next: () => '',
+        },
+        search: {
+          placeholder: () => '',
+        },
+      } as any;
+
+      const textResolver = createTextResolver(i18nHelper);
+
+      // Should return empty strings when i18n returns them
+      expect(textResolver.firstItem()).toBe('');
+      expect(textResolver.nextItem()).toBe('');
+      expect(textResolver.searchPlaceholder()).toBe('');
+    });
+
+    it('should handle mixed i18n and legacy configurations', () => {
+      const i18nHelper = {
+        navigation: {
+          first: () => 'i18n First',
+          // next is missing
+        },
+        search: {
+          placeholder: () => 'i18n Search',
+        },
+      } as any;
+
+      const buttonTexts = {
+        first: 'Legacy First', // should be overridden by i18n
+        next: 'Legacy Next', // should be used since i18n missing
+        searchPlaceholder: 'Legacy Search', // should be overridden by i18n
+      } as any;
+
+      const textResolver = createTextResolver(i18nHelper, buttonTexts);
+
+      expect(textResolver.firstItem()).toBe('i18n First'); // i18n wins
+      expect(textResolver.nextItem()).toBe('Legacy Next'); // fallback to legacy
+      expect(textResolver.searchPlaceholder()).toBe('i18n Search'); // i18n wins
+    });
+
+    it('should handle all text resolver methods without errors', () => {
+      const textResolver = createTextResolver();
+
+      // Test all methods exist and return strings
+      expect(typeof textResolver.pauseSlideshow()).toBe('string');
+      expect(typeof textResolver.resumeSlideshow()).toBe('string');
+      expect(typeof textResolver.searchNavigation()).toBe('string');
+      expect(typeof textResolver.toggleTheme()).toBe('string');
+      expect(typeof textResolver.alternatingLayout()).toBe('string');
+      expect(typeof textResolver.horizontalAllLayout()).toBe('string');
+      expect(typeof textResolver.switchLayout()).toBe('string');
+      expect(typeof textResolver.fullscreenNotSupported()).toBe('string');
+      expect(typeof textResolver.fullscreenError()).toBe('string');
+      expect(typeof textResolver.expandContent()).toBe('string');
+      expect(typeof textResolver.collapseContent()).toBe('string');
+      expect(typeof textResolver.timelineNavigation()).toBe('string');
+      expect(typeof textResolver.timelineContainer()).toBe('string');
+      expect(typeof textResolver.timelineItem()).toBe('string');
+      expect(typeof textResolver.activeItem()).toBe('string');
+      expect(typeof textResolver.empty()).toBe('string');
+    });
+
+    it('should handle parameter-based functions with edge cases', () => {
+      const textResolver = createTextResolver();
+
+      // Test with zero values
+      expect(textResolver.searchResults(0, 0)).toBe('0 of 0');
+      expect(textResolver.itemPosition(0, 0)).toBe('Item 0 of 0');
+
+      // Test with large numbers
+      expect(textResolver.searchResults(999, 1000)).toBe('999 of 1000');
+      expect(textResolver.itemPosition(999, 1000)).toBe('Item 999 of 1000');
+    });
   });
 });

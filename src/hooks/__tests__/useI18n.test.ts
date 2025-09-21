@@ -102,6 +102,59 @@ describe('useI18n', () => {
     expect(result.current.navigation.first()).toBe('First Config 2');
   });
 
+  it('should handle empty strings gracefully', () => {
+    const customConfig: TimelineI18nConfig = {
+      navigation: {
+        first: '',
+        next: '',
+      },
+      search: {
+        placeholder: '',
+      },
+    };
+
+    const { result } = renderHook(() => useI18n(customConfig));
+
+    expect(result.current.navigation.first()).toBe('');
+    expect(result.current.navigation.next()).toBe('');
+    expect(result.current.search.placeholder()).toBe('');
+  });
+
+  it('should handle undefined config gracefully', () => {
+    const { result } = renderHook(() => useI18n(undefined));
+
+    expect(result.current.navigation.first()).toBe('Go to first item');
+    expect(result.current.search.placeholder()).toBe('Search Timeline');
+  });
+
+  it('should handle nested interpolation edge cases', () => {
+    const customConfig: TimelineI18nConfig = {
+      search: {
+        resultsCount: 'Result {current} out of {total} items ({missing})',
+      },
+    };
+
+    const { result } = renderHook(() => useI18n(customConfig));
+
+    // Should handle missing variables gracefully
+    expect(result.current.search.resultsCount(3, 10)).toBe('Result 3 out of 10 items ({missing})');
+  });
+
+  it('should handle all category functions', () => {
+    const { result } = renderHook(() => useI18n());
+
+    // Test all category methods exist and return strings
+    expect(typeof result.current.layout.vertical()).toBe('string');
+    expect(typeof result.current.layout.horizontal()).toBe('string');
+    expect(typeof result.current.layout.alternating()).toBe('string');
+    expect(typeof result.current.fullscreen.enterFullscreen()).toBe('string');
+    expect(typeof result.current.fullscreen.exitFullscreen()).toBe('string');
+    expect(typeof result.current.quickJump.jumpTo()).toBe('string');
+    expect(typeof result.current.view.compact()).toBe('string');
+    expect(typeof result.current.view.detailed()).toBe('string');
+    expect(typeof result.current.keyboard.arrowKeys()).toBe('string');
+  });
+
   describe('mapI18nToButtonTexts', () => {
     it('should map i18n config to legacy buttonTexts format', () => {
       const customConfig: TimelineI18nConfig = {
@@ -151,6 +204,27 @@ describe('useI18n', () => {
       expect(buttonTexts.first).toBe('Go to first item');
       expect(buttonTexts.searchPlaceholder).toBe('Search Timeline');
       expect(buttonTexts.dark).toBe('Switch to dark mode');
+    });
+
+    it('should handle partial config mapping correctly', () => {
+      const partialConfig: TimelineI18nConfig = {
+        navigation: {
+          first: 'Custom First',
+          // other navigation items missing
+        },
+        search: {
+          placeholder: 'Custom Search',
+          // other search items missing
+        },
+      };
+
+      const { result } = renderHook(() => mapI18nToButtonTexts(partialConfig));
+      const buttonTexts = result.current;
+
+      expect(buttonTexts.first).toBe('Custom First');
+      expect(buttonTexts.last).toBe('Go to last item'); // default
+      expect(buttonTexts.searchPlaceholder).toBe('Custom Search');
+      expect(buttonTexts.clearSearch).toBe('Clear Search'); // default
     });
   });
 });

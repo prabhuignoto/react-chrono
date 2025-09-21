@@ -389,10 +389,8 @@ export const TimelineContextProvider: FunctionComponent<
     () => ({
       ...getDefaultButtonTexts(),
       ...buttonTexts,
-      // Merge with i18n texts for legacy compatibility
-      ...(i18nConfig && mapI18nToButtonTexts(i18nConfig)),
     }),
-    [buttonTexts, i18nConfig],
+    [buttonTexts],
   );
 
   const memoizedClassNames = useMemo(

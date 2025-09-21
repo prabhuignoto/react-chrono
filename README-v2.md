@@ -194,6 +194,33 @@ React Chrono's theming system adapts to any visual identity. Dark mode isn't jus
 
 Google Fonts integration makes typography customization effortless. Define font families, weights, and sizes for different content types, and React Chrono handles the loading optimization and fallback strategies automatically. Your timeline typography becomes an extension of your brand voice.
 
+### 🌍 Global Reach with Complete Internationalization
+
+**Comprehensive Multi-Language Support**: React Chrono speaks your users' language with complete internationalization coverage. Every piece of user-facing text - from navigation buttons to search placeholders, error messages to accessibility labels - can be customized for any language or locale.
+
+**Smart Text Resolution**: The i18n system uses intelligent fallback strategies. Configure only the texts you need to change, and React Chrono automatically fills in the gaps with sensible defaults. Template strings support variable interpolation, so "Page {current} of {total}" becomes "Página 3 de 10" seamlessly.
+
+**Developer-Friendly Implementation**: No complex setup required. Simply pass your text configurations through the `i18n` prop, and React Chrono handles the rest. The type-safe interface guides you through available text categories, while maintaining full backward compatibility with existing applications.
+
+```jsx
+<Chrono
+  items={items}
+  i18n={{
+    texts: {
+      navigation: {
+        first: 'Premier élément',
+        next: 'Suivant',
+        previous: 'Précédent'
+      },
+      search: {
+        placeholder: 'Rechercher dans la chronologie',
+        noResults: 'Aucun résultat trouvé'
+      }
+    }
+  }}
+/>
+```
+
 ### 🏗️ Advanced Architecture for Complex Content
 
 **Nested Timeline Hierarchies**: Create sophisticated multi-level narratives where major events contain their own detailed sub-timelines. Perfect for historical periods with multiple concurrent storylines, project phases with individual task breakdowns, or biographical timelines with detailed life chapters.
@@ -274,6 +301,9 @@ From basic theming to complete visual overhauls
 
 ### ♿ **Accessibility Built-in**
 WCAG AA compliant with comprehensive keyboard navigation
+
+### 🌍 **Complete Internationalization**
+Comprehensive i18n support for global applications with 40+ configurable text elements
 
 ### 📱 **Mobile First**
 Responsive design that adapts to any screen size

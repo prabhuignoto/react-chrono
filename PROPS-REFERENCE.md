@@ -43,6 +43,8 @@ These are the essential properties that define the basic behavior of your timeli
 | `activeItemIndex` | `number` | `0` | ❌ | Index of initially active timeline item |
 | `allowDynamicUpdate` | `boolean` | `false` | ❌ | Enable dynamic updates to timeline items |
 | `id` | `string` | - | ❌ | Custom unique identifier for the timeline |
+| `i18n` | `I18nConfig` | - | ❌ | Internationalization configuration for multi-language support |
+| `darkMode` | `DarkModeConfig` | - | ❌ | Dark mode configuration and toggle options |
 
 ### Timeline Mode Values
 
@@ -1185,6 +1187,45 @@ interface FontElement {
   weight?: FontWeight;
   style?: 'normal' | 'italic';
   size?: string;
+}
+```
+
+### Internationalization Configuration
+
+```typescript
+interface I18nConfig {
+  /** Complete internationalization configuration for all timeline texts */
+  texts?: TimelineI18nConfig;
+  /** Locale code (e.g., 'en', 'es', 'fr', 'de') for future locale-specific features */
+  locale?: string;
+  /** Text direction for RTL language support */
+  direction?: 'ltr' | 'rtl';
+}
+
+// Complete text configuration interface with all categories
+interface TimelineI18nConfig {
+  navigation?: NavigationTexts;
+  search?: SearchTexts;
+  theme?: ThemeTexts;
+  layout?: LayoutTexts;
+  fullscreen?: FullscreenTexts;
+  quickJump?: QuickJumpTexts;
+  content?: ContentTexts;
+  status?: StatusTexts;
+  accessibility?: AccessibilityTexts;
+  view?: ViewTexts;
+  keyboard?: KeyboardTexts;
+}
+```
+
+### Dark Mode Configuration
+
+```typescript
+interface DarkModeConfig {
+  /** Enable dark mode */
+  enabled?: boolean;
+  /** Show dark mode toggle in toolbar */
+  showToggle?: boolean;
 }
 ```
 

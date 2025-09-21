@@ -335,6 +335,7 @@ export function mergeI18nConfig(userConfig?: TimelineI18nConfig): Required<Timel
  */
 export function interpolateString(template: string, variables: Record<string, string | number>): string {
   return template.replace(/\{(\w+)\}/g, (match, key) => {
-    return variables[key]?.toString() || match;
+    const value = variables[key];
+    return value !== undefined && value !== null ? value.toString() : match;
   });
 }

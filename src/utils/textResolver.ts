@@ -84,7 +84,11 @@ export function createTextResolver(
     legacyValue: string | undefined,
     defaultValue: string
   ): string => {
-    return i18nGetter?.() || legacyValue || defaultValue;
+    if (i18nGetter) {
+      const i18nValue = i18nGetter();
+      if (i18nValue !== undefined) return i18nValue;
+    }
+    return legacyValue !== undefined ? legacyValue : defaultValue;
   };
 
   return {
