@@ -252,25 +252,26 @@ export const outline = style([
     borderRadius: tokens.semantic.borderRadius.sm,
     height: tokens.component.timeline.line.width,
     backgroundColor: tokens.component.timeline.line.color,
-    opacity: 0.4,
+    opacity: 1.0,
+    overflow: 'hidden',
 
     // Ensure the line extends fully across horizontal timelines
     selectors: {
       '[data-mode="HORIZONTAL"] &': {
         // For horizontal mode, align with timeline points
-        top: '80px', // Adjust based on typical point position
+        top: '70px', // Adjust based on typical point position
         transform: 'translateY(-50%)',
         margin: '0 -20px', // Extend beyond container padding
-        width: 'calc(100% + 40px)',
+        width: '1000%',
         left: '-20px',
         right: 'auto',
       },
       '[data-mode="HORIZONTAL_ALL"] &': {
         // For horizontal-all mode
-        top: '80px',
+        top: '70px',
         transform: 'translateY(-50%)',
         margin: '0 -20px',
-        width: 'calc(100% + 40px)',
+        width: '1000%',
         left: '-20px',
         right: 'auto',
       },

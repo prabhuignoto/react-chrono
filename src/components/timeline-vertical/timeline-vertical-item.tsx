@@ -181,8 +181,8 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     [theme, isDarkMode],
   );
 
-  const Title = useMemo(
-    () => (
+  const Title = 
+    useMemo(() => (
       <div
         className={titleClassName}
         data-mode={mode}
@@ -191,7 +191,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           display: titleConfig.display,
           width: titleConfig.width,
           order: calculateTitleOrder(),
-          textAlign: titleConfig.textAlign,
+          // textAlign: titleConfig.textAlign,
           // Add proper spacing for title
           paddingLeft: alternateCards ? '0' : '0.75rem',
           paddingRight: alternateCards ? '0' : '0.75rem',
@@ -202,7 +202,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
         <TimelineItemTitle
           title={title as string}
           theme={theme}
-          align={titleConfig.align}
+          align={titleConfig.textAlign}
           {...(active !== undefined
             ? { active: active && !disableInteraction }
             : {})}
@@ -211,12 +211,12 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           })}
         />
       </div>
-    ),
-    [
+    ),[
+    
       titleClassName,
       mode,
       themeCssVars,
-      titleConfig,
+      titleConfig.textAlign,
       title,
       active,
       disableInteraction,
@@ -224,8 +224,8 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       calculateTitleOrder,
       alternateCards,
       className,
-    ],
-  );
+    ]);
+  
 
   /**
    * Memoized CSS classes for the main VerticalItemWrapper.
@@ -304,7 +304,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           minHeight: '100%',
           width: alternateCards ? '10%' : '10%',
           position: 'relative',
-          zIndex: 10,
+          zIndex: -1,
           // Add proper spacing margins
           marginLeft: alternateCards ? '1rem' : '0.75rem',
           marginRight: alternateCards ? '1rem' : '0.75rem',

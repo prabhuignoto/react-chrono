@@ -120,7 +120,7 @@ export const selecter = style([
     cursor: 'pointer',
     userSelect: 'none',
     marginRight: '0.5rem',
-    height: '36px',
+    height: '38px',
     minWidth: '36px',
     width: 'auto',
     padding: '0 0.75rem',
