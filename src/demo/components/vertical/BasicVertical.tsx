@@ -69,10 +69,9 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
         activeItemIndex={2}
         onItemSelected={(selected) => console.log(selected.index)}
         
-        
         layout={{
           cardWidth: 650,
-          cardHeight: 200,
+          cardHeight: 300,
           pointSize: 20,
           responsive: {
             enabled: true,
@@ -92,12 +91,13 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
         
         display={{
           scrollable: { scrollbar: false },
+          borderless: true,
           toolbar: { 
             enabled: true, 
-            position: 'bottom',
+            position: 'top',
             search: {
-              width: '250px',
-              maxWidth: '400px',
+              width: '450px',
+              maxWidth: '600px',
               inputWidth: '100%',
             }
           },
