@@ -9,9 +9,6 @@ import ChevronsLeftIcon from '../../icons/chevs-left';
 import ChevronsRightIcon from '../../icons/chevs-right';
 import ReplayIcon from '../../icons/replay-icon';
 import {
-  controlContainer,
-  controlButton,
-  controlButtonSvg,
   navButton,
   navButtonActive,
   navButtonFocus,

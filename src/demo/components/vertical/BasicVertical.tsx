@@ -69,6 +69,7 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
         activeItemIndex={2}
         onItemSelected={(selected) => console.log(selected.index)}
         
+        
         layout={{
           cardWidth: 650,
           cardHeight: 200,

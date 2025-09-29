@@ -70,25 +70,25 @@ export type ResponsiveCondition = 'mobile' | 'tablet' | 'desktop';
 export type ResponsiveValue<T> = T | Partial<Record<ResponsiveCondition, T>>;
 
 // Component prop types that combine variants with common props
-export interface InteractiveProps extends InteractiveVariants {
+export type InteractiveProps = InteractiveVariants & {
   className?: string;
   children?: React.ReactNode;
-}
+};
 
-export interface FlexContainerProps extends FlexContainerVariants {
+export type FlexContainerProps = FlexContainerVariants & {
   className?: string;
   children?: React.ReactNode;
   as?: React.ElementType;
-}
+};
 
-export interface CardProps extends CardVariants {
+export type CardProps = CardVariants & {
   className?: string;
   children?: React.ReactNode;
   as?: React.ElementType;
   onClick?: () => void;
-}
+};
 
-export interface ButtonProps extends ButtonVariants {
+export type ButtonProps = ButtonVariants & {
   className?: string;
   children?: React.ReactNode;
   type?: 'button' | 'submit' | 'reset';
@@ -97,16 +97,16 @@ export interface ButtonProps extends ButtonVariants {
   onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
   'aria-label'?: string;
   'aria-describedby'?: string;
-}
+};
 
-export interface TextProps extends TextVariants {
+export type TextProps = TextVariants & {
   className?: string;
   children?: React.ReactNode;
   as?: React.ElementType;
   id?: string;
-}
+};
 
-export interface InputProps extends InputVariants {
+export type InputProps = InputVariants & {
   className?: string;
   type?: React.HTMLInputTypeAttribute;
   value?: string;
@@ -119,27 +119,27 @@ export interface InputProps extends InputVariants {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-}
+};
 
-export interface TimelineCardProps extends TimelineCardVariants {
+export type TimelineCardProps = TimelineCardVariants & {
   className?: string;
   children?: React.ReactNode;
   onClick?: () => void;
   onKeyDown?: (event: React.KeyboardEvent) => void;
   'aria-label'?: string;
   'data-testid'?: string;
-}
+};
 
-export interface TimelinePointProps extends TimelinePointVariants {
+export type TimelinePointProps = TimelinePointVariants & {
   className?: string;
   onClick?: () => void;
   onKeyDown?: (event: React.KeyboardEvent) => void;
   'aria-label'?: string;
   'aria-current'?: boolean | 'step';
   'data-testid'?: string;
-}
+};
 
-export interface ToolbarButtonProps extends ButtonVariants {
+export type ToolbarButtonProps = ButtonVariants & {
   className?: string;
   children?: React.ReactNode;
   disabled?: boolean;
@@ -149,7 +149,7 @@ export interface ToolbarButtonProps extends ButtonVariants {
   'aria-label': string; // Required for toolbar buttons
   'aria-pressed'?: boolean;
   'data-testid'?: string;
-}
+};
 
 // Theme-related types
 export type ThemeMode = 'light' | 'dark' | 'system';

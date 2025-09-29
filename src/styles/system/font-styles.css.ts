@@ -93,7 +93,7 @@ export const controlStyles = styleVariants({
       fontSize: `var(--timeline-controls-font-size, ${tokens.semantic.typography.fontSize.xs})`,
       fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.medium})`,
       fontStyle: `var(--timeline-controls-font-style, normal)`,
-      lineHeight: tokens.semantic.typography.lineHeight.none,
+      lineHeight: tokens.semantic.typography.lineHeight.normal,
     },
   ],
 });
@@ -103,7 +103,7 @@ export const responsiveFontSizes = {
   title: style({
     '@media': {
       '(max-width: 768px)': {
-        fontSize: tokens.semantic.typography.fontSize.md,
+        fontSize: tokens.semantic.typography.fontSize.title,
       },
     },
   }),
@@ -111,7 +111,7 @@ export const responsiveFontSizes = {
   cardTitle: style({
     '@media': {
       '(max-width: 768px)': {
-        fontSize: tokens.semantic.typography.fontSize.sm,
+        fontSize: tokens.semantic.typography.fontSize.cardTitle,
       },
     },
   }),
@@ -119,7 +119,7 @@ export const responsiveFontSizes = {
   cardText: style({
     '@media': {
       '(max-width: 768px)': {
-        fontSize: tokens.semantic.typography.fontSize.xs,
+        fontSize: tokens.semantic.typography.fontSize.cardText,
       },
     },
   }),

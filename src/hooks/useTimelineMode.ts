@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import { TimelineMode } from '@models/TimelineModel';
 import { useStableCallback } from './utils';
 

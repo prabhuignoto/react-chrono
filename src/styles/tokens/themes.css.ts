@@ -181,6 +181,13 @@ export const lightTheme = createTheme(tokens, {
         heading3: '1.125rem', // 18px
         heading2: '1.25rem', // 20px
         heading1: '1.5rem', // 24px
+        cardTitle: '1.2rem',
+        cardText: '1rem',
+        title: '1.5rem',
+        sm: '0.5rem',
+        md: '0.75rem',
+        xs: '0.25rem',
+        lg: '1.5rem'
       },
       lineHeight: {
         tight: '1.2',
@@ -452,6 +459,13 @@ export const darkTheme = createTheme(tokens, {
         heading3: '1.125rem',
         heading2: '1.25rem',
         heading1: '1.5rem',
+        cardTitle: '1.2rem',
+        cardText: '1rem',
+        title: '1.5rem',
+        sm: '0.5rem',
+        md: '0.75rem',
+        xs: '0.25rem',
+        lg: '1.5rem'
       },
       lineHeight: {
         tight: '1.2',

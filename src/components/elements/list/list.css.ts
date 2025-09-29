@@ -70,7 +70,7 @@ export const listItem = style([
       '(max-width: 768px)': {
         padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
         minHeight: '2.75rem',
-        gap: tokens.semantic.spacing.xxs,
+        gap: tokens.semantic.spacing.xs,
       },
     },
   },
@@ -136,7 +136,7 @@ export const styleAndDescription = style([
     flexDirection: 'column',
     flex: 1,
     minWidth: 0, // Allow flex child to shrink
-    gap: tokens.semantic.spacing.xxs,
+    gap: tokens.semantic.spacing.xs,
   },
 ]);
 

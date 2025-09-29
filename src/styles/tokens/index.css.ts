@@ -192,6 +192,13 @@ export const tokens = createThemeContract({
         heading3: null, // maps to primitive.fontSize.lg
         heading2: null, // maps to primitive.fontSize.xl
         heading1: null, // maps to primitive.fontSize.2xl
+        cardTitle: null,
+        cardText: null,
+        title: null,
+        sm: null,
+        md: null,
+        xs: null,
+        lg: null
       },
       lineHeight: {
         tight: null,

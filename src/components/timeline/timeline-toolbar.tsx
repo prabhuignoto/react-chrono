@@ -213,7 +213,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           id={id}
           isDark={darkMode}
           onToggleDarkMode={toggleDarkMode}
-          activeTimelineItem={activeTimelineItem}
+          activeTimelineItem={activeTimelineItem || 0}
           totalItems={totalItems}
           {...pickDefined({
             onFirst,
