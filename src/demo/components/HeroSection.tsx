@@ -4,7 +4,7 @@ import cls from 'classnames';
 
 const HeroSection: React.FC = () => {
   return (
-    <div className="relative bg-gradient-to-r from-indigo-50 to-blue-50 overflow-hidden">
+    <div className="relative bg-linear-to-r from-indigo-50 to-blue-50 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <svg className="w-full h-full" viewBox="0 0 100 100">
@@ -28,7 +28,7 @@ const HeroSection: React.FC = () => {
           {/* Main Heading */}
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 font-display">
             Beautiful{' '}
-            <span className="bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
               Timeline
             </span>{' '}
             Component

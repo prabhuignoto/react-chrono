@@ -226,7 +226,7 @@ export const ThemeShowcase: React.FC = () => {
         </div>
 
         {/* Theme Properties Reference */}
-        <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg p-6 border border-indigo-200">
+        <div className="bg-linear-to-r from-indigo-50 to-blue-50 rounded-lg p-6 border border-indigo-200">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Theme Property Reference</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div>

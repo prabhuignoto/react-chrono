@@ -12,9 +12,9 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle }) => {
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 w-full">
           {/* Logo and Brand */}
-          <div className="flex items-center flex-shrink-0 min-w-0">
+          <div className="flex items-center shrink-0 min-w-0">
             <NavLink to="/" className="flex items-center space-x-2 group">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-linear-to-br from-indigo-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
                 <svg className="w-4 h-4 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -75,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle }) => {
           </nav>
 
           {/* Right side actions */}
-          <div className="flex items-center space-x-2 flex-shrink-0">
+          <div className="flex items-center space-x-2 shrink-0">
             {/* GitHub Link */}
             <a 
               href="https://github.com/prabhuignoto/react-chrono" 
