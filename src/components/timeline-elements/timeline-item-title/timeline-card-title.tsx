@@ -45,6 +45,7 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
         textAlign: align || undefined,
         visibility: title ? 'visible' : 'hidden',
       }}
+      title={typeof title === 'string' ? title : undefined} // Native tooltip for full text on hover
       data-ve-class={titleWrapper}
       data-ve-active-class={titleActive}
     >

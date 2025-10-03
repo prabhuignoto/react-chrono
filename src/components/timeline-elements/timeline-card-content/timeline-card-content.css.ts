@@ -9,7 +9,8 @@ import { animations, baseStyles } from '../../../styles/system/static.css';
 // Base font family with proper CSS custom property fallback for Google Fonts
 const baseFontFamily = `var(--timeline-font-family, 'Inter, system-ui, ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif')`;
 
-export const baseCard = style([
+// Base card with border styles
+const baseCardWithBorder = style([
   patterns.card({ size: 'lg', elevation: 'high' }),
   baseStyles.willChange,
   {
@@ -59,6 +60,51 @@ export const baseCard = style([
     },
   },
 ]);
+
+// Borderless variant - no border, no shadow, no gradient overlay
+const baseCardBorderless = style([
+  baseStyles.willChange,
+  {
+    borderRadius: tokens.semantic.borderRadius.lg,
+    border: 'none',
+    boxShadow: 'none',
+    transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+    position: 'relative',
+    overflow: 'hidden',
+    minWidth: '280px',
+    maxWidth: '400px',
+    backgroundColor: 'transparent',
+
+    '@media': {
+      '(max-width: 768px)': {
+        borderRadius: tokens.semantic.borderRadius.lg,
+        minWidth: '240px',
+      },
+      '(max-width: 480px)': {
+        borderRadius: tokens.semantic.borderRadius.md,
+        minWidth: '200px',
+      },
+      '(max-width: 320px)': {
+        minWidth: '180px',
+        borderRadius: tokens.semantic.borderRadius.sm,
+      },
+    },
+  },
+]);
+
+// Card recipe with borderless variant
+export const baseCard = recipe({
+  base: baseCardWithBorder,
+  variants: {
+    borderless: {
+      true: baseCardBorderless,
+      false: baseCardWithBorder,
+    },
+  },
+  defaultVariants: {
+    borderless: false,
+  },
+});
 
 export const itemContentWrapper = style([
   patterns.interactive({ hover: 'lift' }),

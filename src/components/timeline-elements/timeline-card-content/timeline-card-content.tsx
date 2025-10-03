@@ -436,7 +436,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           aria-label={accessibleLabel}
           ref={containerRef}
           onClick={handleCardClick}
-          className={`timeline-card-content ${active ? 'active' : ''} ${classNames?.card ?? ''} ${baseCard} ${itemContentWrapper}`}
+          className={`timeline-card-content ${active ? 'active' : ''} ${classNames?.card ?? ''} ${baseCard({ borderless: borderLessCards })} ${itemContentWrapper}`}
           data-testid="timeline-card-content"
           data-item-id={id}
           tabIndex={focusable !== false && active ? 0 : -1}

@@ -18,40 +18,60 @@ export const titleWrapper = style([
     minWidth: 0,
     maxWidth: '100%',
     color: tokens.semantic.color.text.primary,
-    // Better responsive text handling
+    position: 'relative',
+    cursor: 'default',
+
+    // Better responsive text handling with intelligent truncation
     wordBreak: 'break-word',
     hyphens: 'auto',
+    lineHeight: 1.4,
 
-    // Default: single line with ellipsis on larger screens
-    whiteSpace: 'nowrap',
+    // Desktop: Multi-line clamp for better readability
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
     textOverflow: 'ellipsis',
+    maxHeight: 'calc(1.4em * 2)', // 2 lines max
 
-    // Responsive behavior for smaller screens
+    // Responsive behavior
     '@media': {
-      // On tablets and below, allow text wrapping
-      'screen and (max-width: 1023px)': {
-        whiteSpace: 'normal',
-        textOverflow: 'clip',
+      // Large screens: 2 lines, larger font
+      'screen and (min-width: 1440px)': {
+        fontSize: `var(--timeline-title-font-size, 1.1rem)`,
         WebkitLineClamp: 2,
-        WebkitBoxOrient: 'vertical',
-        display: '-webkit-box',
-        lineHeight: 1.3,
-        maxHeight: 'calc(1.3em * 2)', // 2 lines max
+        maxHeight: 'calc(1.4em * 2)',
       },
-      // On mobile, hide completely or show very compact
-      'screen and (max-width: 767px)': {
-        display: 'var(--timeline-title-mobile-display, none)', // Allow override via CSS variable
-        fontSize: 'var(--timeline-title-mobile-size, 0.8rem)',
-        padding: '2px 4px',
+      // Desktop/Laptop: 2 lines
+      'screen and (min-width: 1024px) and (max-width: 1439px)': {
+        fontSize: `var(--timeline-title-font-size, 1rem)`,
+        WebkitLineClamp: 2,
+        maxHeight: 'calc(1.4em * 2)',
+      },
+      // Tablets: 2 lines, slightly smaller
+      'screen and (min-width: 768px) and (max-width: 1023px)': {
+        fontSize: `var(--timeline-title-font-size, 0.95rem)`,
+        WebkitLineClamp: 2,
+        maxHeight: 'calc(1.4em * 2)',
+      },
+      // Mobile landscape: 1 line
+      'screen and (min-width: 480px) and (max-width: 767px)': {
+        fontSize: `var(--timeline-title-font-size, 0.9rem)`,
         WebkitLineClamp: 1,
-        maxHeight: '1.3em',
-        whiteSpace: 'nowrap',
-        textOverflow: 'ellipsis',
+        maxHeight: '1.4em',
+        padding: '4px 6px',
       },
-      // On very small screens, hide by default unless overridden
+      // Mobile portrait: 1 line, compact
       'screen and (max-width: 479px)': {
-        display: 'var(--timeline-title-mobile-display, none)',
+        fontSize: `var(--timeline-title-font-size, 0.85rem)`,
+        WebkitLineClamp: 1,
+        maxHeight: '1.4em',
+        padding: '3px 5px',
       },
+    },
+
+    // Hover effect to show full title in tooltip (browser native)
+    ':hover': {
+      cursor: 'help',
     },
   },
 ]);

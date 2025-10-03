@@ -61,7 +61,7 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
     ]}
     codeExample={codeExample}
   >
-    <div style={{ minHeight: '600px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
+    <div style={{ minHeight: '600px', maxHeight: '800px', padding: '20px' }}>
       <Chrono
         items={items}
         mode="vertical"
