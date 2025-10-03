@@ -84,6 +84,59 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     left: 0,
     width: 0,
   });
+  const [portalContainer, setPortalContainer] = useState<HTMLElement>(
+    document.body,
+  );
+
+  // Get the current fullscreen element (with vendor prefix support)
+  const getFullscreenElement = useCallback((): HTMLElement | null => {
+    if (typeof document === 'undefined') return null;
+
+    const doc = document as Document & {
+      fullscreenElement?: Element;
+      webkitFullscreenElement?: Element;
+      mozFullScreenElement?: Element;
+      msFullscreenElement?: Element;
+    };
+
+    const fullscreenEl =
+      doc.fullscreenElement ||
+      doc.webkitFullscreenElement ||
+      doc.mozFullScreenElement ||
+      doc.msFullscreenElement ||
+      null;
+
+    return fullscreenEl as HTMLElement | null;
+  }, []);
+
+  // Update portal container when fullscreen state changes
+  useEffect(() => {
+    const updatePortalContainer = () => {
+      const fullscreenEl = getFullscreenElement();
+      setPortalContainer(fullscreenEl || document.body);
+    };
+
+    // Update immediately
+    updatePortalContainer();
+
+    // Listen for fullscreen changes
+    const events = [
+      'fullscreenchange',
+      'webkitfullscreenchange',
+      'mozfullscreenchange',
+      'msfullscreenchange',
+    ];
+
+    events.forEach((event) => {
+      document.addEventListener(event, updatePortalContainer);
+    });
+
+    return () => {
+      events.forEach((event) => {
+        document.removeEventListener(event, updatePortalContainer);
+      });
+    };
+  }, [getFullscreenElement]);
 
   const toggleOpen = useCallback(() => {
     dispatch({ type: 'TOGGLE' });
@@ -272,7 +325,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
               </div>
               <MemoizedContent>{children}</MemoizedContent>
             </div>,
-            document.body,
+            portalContainer,
           )}
       </div>
     </>
