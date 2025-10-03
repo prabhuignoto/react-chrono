@@ -151,7 +151,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   // Memoized title display configuration
   const titleConfig = useMemo(
     () => ({
-      display: !title && mode === 'VERTICAL' ? 'none' : 'flex',
+      display: (!title && mode === 'VERTICAL') || (isMobile && !alternateCards) ? 'none' : 'flex',
       width: alternateCards ? '37.5%' : '10%',
       // Fix text alignment for alternating mode:
       // - Left side (title appears last): align left
@@ -165,7 +165,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
         | 'left'
         | 'right',
     }),
-    [title, mode, alternateCards, flipLayout, className],
+    [title, mode, alternateCards, flipLayout, className, isMobile],
   );
 
   const titleClassName = useMemo(

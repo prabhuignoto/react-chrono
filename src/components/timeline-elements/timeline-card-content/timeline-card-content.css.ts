@@ -73,7 +73,7 @@ const baseCardBorderless = style([
     overflow: 'hidden',
     minWidth: '280px',
     maxWidth: '400px',
-    backgroundColor: 'transparent',
+    backgroundColor: tokens.semantic.color.background.elevated,
 
     '@media': {
       '(max-width: 768px)': {

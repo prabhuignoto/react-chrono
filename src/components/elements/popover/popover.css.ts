@@ -56,13 +56,7 @@ export const popoverHolder = style([
       '&::-webkit-scrollbar-thumb:hover': {
         backgroundColor: `${tokens.semantic.color.interactive.primary}80`,
       },
-      // Smart horizontal positioning based on container space
-      '&[data-position-x="left"]': { left: '0' },
-      '&[data-position-x="right"]': { right: '0' },
-      '&[data-position-x="center"]': {
-        left: '50%',
-        transform: 'translateX(-50%) translateY(-10px)',
-      },
+      // Positioning is handled by JavaScript - no CSS positioning overrides
     },
     '@media': {
       '(max-width: 480px)': {
@@ -78,14 +72,7 @@ export const popoverHolder = style([
 
 export const holderVisible = style({
   opacity: 1,
-  selectors: {
-    '&[data-position-x="center"]': {
-      transform: 'translateX(-50%) translateY(0)',
-    },
-    '&:not([data-position-x="center"])': {
-      transform: 'translateY(0)',
-    },
-  },
+  transform: 'translateY(0)',
 });
 
 export const holderTop = style({ top: '3.5rem' });
