@@ -76,6 +76,7 @@ export default defineConfig({
       './src/components/**/*.test.{tsx,ts}',
       './src/utils/**/*.test.{tsx,ts}',
       './src/hooks/**/*.test.{tsx,ts}',
+      './tests/integration/**/*.test.{tsx,ts}',
     ],
     minWorkers: 2,
     setupFiles: './src/test-setup.js',

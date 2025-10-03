@@ -4,6 +4,10 @@ on:
   pull_request:
     branches: [main, master, develop]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   size:
     runs-on: ubuntu-latest
@@ -18,4 +22,8 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm size-limit
+      - name: Comment size limit results
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "✅ Size limit check passed"
 
