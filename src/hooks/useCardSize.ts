@@ -111,6 +111,26 @@ export const useCardSize = ({
       observer.observe(detailsRef.current);
     }
 
+    // Force initial measurement when detailsRef becomes available
+    // This handles the case when textDensity changes from LOW to HIGH
+    if (containerRef.current && detailsRef.current) {
+      const detailsEle = detailsRef.current;
+      const container = containerRef.current;
+
+      measurementsCache.current = {
+        scrollHeight: detailsEle.scrollHeight,
+        clientHeight: detailsEle.offsetHeight,
+        offsetTop: detailsEle.offsetTop,
+        containerHeight: container.clientHeight,
+      };
+
+      setDimensions({
+        cardHeight: detailsEle.scrollHeight,
+        detailsHeight: detailsEle.offsetHeight,
+        containerWidth: container.clientWidth,
+      });
+    }
+
     return () => {
       isUnmounted = true;
       if (rafId) cancelAnimationFrame(rafId);

@@ -227,6 +227,19 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         return () => cancelAnimationFrame(rafId);
       }, [updateCardSize]);
 
+      // Remeasure card size when textDensity changes
+      useEffect(() => {
+        // When textDensity changes (e.g., from LOW to HIGH), we need to remeasure
+        // the card to update textContentLarge value
+        const rafId = requestAnimationFrame(() => {
+          if (containerRef.current && detailsRef.current) {
+            updateCardSize(containerRef.current);
+          }
+        });
+
+        return () => cancelAnimationFrame(rafId);
+      }, [textDensity, updateCardSize]);
+
       // Reset details scroll position when toggling details
       useEffect(() => {
         const detailsEle = detailsRef.current;
