@@ -62,7 +62,12 @@ export default defineConfig(({ mode }) => ({
     cssCodeSplit: false,
     rollupOptions: {
       external: (id) =>
-        ['react', 'react-dom', 'styled-components'].includes(id) ||
+        id === 'react' ||
+        id === 'react-dom' ||
+        id === 'styled-components' ||
+        id.startsWith('react/') ||
+        id.startsWith('react-dom/') ||
+        id.startsWith('styled-components/') ||
         /\.(svg|mp4|webm|png|jpe?g|gif)$/i.test(id),
       output: {
         globals: {
