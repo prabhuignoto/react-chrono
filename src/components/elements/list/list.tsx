@@ -9,7 +9,6 @@ import { ListItem } from './list-item';
 import { ListModel } from './list.model';
 import { list } from './list.css';
 import { defaultTheme } from '../../common/themes';
-import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
 /**
  * Extends the base list item with a unique identifier
@@ -91,7 +90,7 @@ const List: FunctionComponent<ListModel> = ({
   );
 
   return (
-    <ul className={list} style={computeCssVarsFromTheme(theme)}>
+    <ul className={list}>
       {listItems.map(renderListItem)}
     </ul>
   );

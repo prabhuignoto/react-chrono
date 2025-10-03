@@ -4,7 +4,6 @@ import React, { useMemo } from 'react';
 import { useTimelineContext } from '../../contexts';
 import { titleActive, titleWrapper } from './timeline-card-title.css';
 import { cardTitleRecipe } from '../timeline-card-content/timeline-card-content.css';
-import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 
 /**
  * TimelineItemTitle component
@@ -39,14 +38,10 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
     [active, classString],
   );
 
-  // Get font size and dark mode from unified context
-  const { fontSizes, isDarkMode } = useTimelineContext();
-
   return (
     <div
       className={titleClass}
       style={{
-        ...computeCssVarsFromTheme(theme, isDarkMode),
         textAlign: align || undefined,
         visibility: title ? 'visible' : 'hidden',
       }}

@@ -18,7 +18,6 @@ import {
   verticalItemWrapper,
   verticalItemWrapperNested,
 } from './timeline-vertical.css';
-import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
 import { pickDefined } from '../../utils/propUtils';
 
 /**
@@ -73,7 +72,6 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     disableClickOnCircle,
     disableInteraction,
     isMobile, // Use responsive detection from context
-    isDarkMode, // Add isDarkMode for proper theme application
   } = useTimelineContext();
 
   // Helper functions for layout calculations
@@ -175,19 +173,12 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     [className, flipLayout],
   );
 
-  // Memoize theme CSS variables to prevent re-creation on every render
-  const themeCssVars = useMemo(
-    () => computeCssVarsFromTheme(theme, isDarkMode),
-    [theme, isDarkMode],
-  );
-
-  const Title = 
+  const Title =
     useMemo(() => (
       <div
         className={titleClassName}
         data-mode={mode}
         style={{
-          ...themeCssVars,
           display: titleConfig.display,
           width: titleConfig.width,
           order: calculateTitleOrder(),
@@ -212,10 +203,8 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
         />
       </div>
     ),[
-    
       titleClassName,
       mode,
-      themeCssVars,
       titleConfig.textAlign,
       title,
       active,
@@ -352,7 +341,6 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       data-item-id={id}
       key={id}
       ref={contentRef}
-      style={themeCssVars}
       aria-current={active ? 'step' : undefined}
       aria-label={accessibleTitle}
       role="listitem"
@@ -366,7 +354,6 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       <div
         className={`${timelineCardContentWrapper} ${contentClass} ${visible ? timelineCardContentVisible : ''}`}
         style={{
-          ...themeCssVars, // Apply theme CSS variables for proper dark mode support
           width: calculateCardWidth(),
           justifyContent: calculateJustifyContent(),
           order: calculateCardOrder(),

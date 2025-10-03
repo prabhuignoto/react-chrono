@@ -13,7 +13,6 @@ import {
   timelineContentDetails,
   timelineSubContent,
 } from './timeline-card-content.css';
-import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { vars } from 'src/styles/tokens.css';
 
 // Define the type for the TextOrContentModel
@@ -39,9 +38,6 @@ const renderTextArray: (
   cardTextClassName,
   isDarkMode,
 }) => {
-  // Compute theme styles once for all spans
-  const themeStyle = computeCssVarsFromTheme(theme, isDarkMode);
-
   return detailedText.map((text, index) => {
     // Only apply xss if text is a string
     const props =
@@ -57,7 +53,6 @@ const renderTextArray: (
         className={`${timelineSubContent} ${cardTextClassName ?? ''}`}
         key={`timeline-text-${typeof text === 'string' ? text.substring(0, 10) : ''}-${index}`}
         style={{
-          ...themeStyle,
           color:
             theme?.cardDetailsColor ||
             'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))',
@@ -128,8 +123,6 @@ const getTextOrContent: (
 
       const renderDetailedContent = (textContent: string) => {
         const textContentProps = getTextContentProps(textContent);
-        // Use computed CSS variables for proper theme support
-        const themeStyle = computeCssVarsFromTheme(theme, isDarkMode);
 
         return (
           <p
@@ -139,7 +132,6 @@ const getTextOrContent: (
             ref={ref as any}
             {...textContentProps}
             style={{
-              ...themeStyle,
               color: `${vars.color.cardTitle} !important`, // Ensure color is applied correctly
               // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
             }}
@@ -159,9 +151,6 @@ const getTextOrContent: (
 
         // If detailedText was an array, render the array of spans directly as children
         if (isTextArray) {
-          // Use computed CSS variables for proper theme support
-          const themeStyle = computeCssVarsFromTheme(theme, isDarkMode);
-
           return (
             <p
               className={
@@ -169,7 +158,6 @@ const getTextOrContent: (
               }
               ref={ref as any}
               style={{
-                ...themeStyle,
                 color: `${vars.color.text} !important`, // Ensure color is applied correctly
                 // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
               }}

@@ -51,22 +51,13 @@ export default defineConfig(({ mode }) => ({
     },
     target: 'es2022',
     sourcemap: true,
-    minify: mode === 'production' ? 'terser' : false,
-    terserOptions: mode === 'production' ? {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug'],
-        passes: 2,
+    minify: mode === 'production' ? 'esbuild' : false,
+    ...(mode === 'production' && {
+      esbuild: {
+        drop: ['console', 'debugger'],
+        legalComments: 'none',
       },
-      mangle: {
-        safari10: true,
-      },
-      format: {
-        comments: false,
-        ecma: 2022,
-      },
-    } : undefined,
+    }),
     cssMinify: mode === 'production',
     cssCodeSplit: false,
     rollupOptions: {
@@ -91,6 +82,8 @@ export default defineConfig(({ mode }) => ({
         exports: 'named',
         preserveModules: false,
         manualChunks: undefined,
+        compact: mode === 'production',
+        minifyInternalExports: mode === 'production',
       },
       treeshake: {
         moduleSideEffects: 'no-external',

@@ -172,7 +172,9 @@ export function loadGoogleFonts(config: GoogleFontsConfig): Promise<void> {
   return new Promise((resolve, reject) => {
     // Check if font is already loaded
     const fontUrl = generateGoogleFontsUrl(config);
-    const existingLink = document.querySelector(`link[href="${fontUrl}"]`);
+    const existingLink = Array.from(
+      document.querySelectorAll('link[rel="stylesheet"]'),
+    ).find((link) => (link as HTMLLinkElement).href === fontUrl);
 
     if (existingLink) {
       resolve();

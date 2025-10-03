@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { useTimelineContext } from '../../contexts';
 import TimelineCard from '../timeline-card-content/timeline-card-content';
-import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { vars } from '../../../styles/tokens.css';
 
 interface NestedTimelineCardsProps {
@@ -17,25 +16,18 @@ const NestedTimelineCards: React.FC<NestedTimelineCardsProps> = ({
   items,
   nestedCardHeight,
 }) => {
-  const { theme, isDarkMode } = useTimelineContext();
-
-  // Memoize CSS variables to prevent re-creation on every render
-  const themeCssVars = useMemo(
-    () => computeCssVarsFromTheme(theme, isDarkMode),
-    [theme, isDarkMode],
-  );
+  const { isDarkMode } = useTimelineContext();
 
   // Memoize container styles
   const containerStyles = useMemo(
     () => ({
-      ...themeCssVars,
       position: 'relative' as const,
       display: 'flex',
       flexDirection: 'column' as const,
       gap: '1rem',
       padding: '1rem 0',
     }),
-    [themeCssVars],
+    [],
   );
 
   // Memoize center line styles

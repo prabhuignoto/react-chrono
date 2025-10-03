@@ -1,6 +1,5 @@
 import React from 'react';
 import { shapeWrapper, timelinePoint } from './timeline-point.css';
-import { computeCssVarsFromTheme } from '../../../../styles/theme-bridge';
 import { useTimelineContext } from '../../../contexts';
 
 interface TimelinePointProps {
@@ -63,7 +62,6 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
         tabIndex={disabled ? -1 : 0}
         type="button"
         style={{
-          ...computeCssVarsFromTheme(theme, isDarkMode),
           height: timelinePointDimension
             ? `${timelinePointDimension}px`
             : '2rem', // Fallback height to ensure visibility

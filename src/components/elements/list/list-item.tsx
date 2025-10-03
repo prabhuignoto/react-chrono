@@ -5,13 +5,12 @@ import {
   checkbox,
   checkboxSelected,
   checkboxWrapper,
-  description,
+  description as descriptionClass,
   listItem,
   listItemActive,
   styleAndDescription,
-  title,
+  title as titleClass,
 } from './list.css';
-import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { listItemRecipe } from './list.css';
 
 /**
@@ -65,7 +64,6 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
         tabIndex={0}
         onKeyUp={(ev) => handleKeyPress(ev, id)}
         className={itemClass}
-        style={computeCssVarsFromTheme(theme)}
       >
         {selectable ? (
           <span className={checkboxWrapper}>
@@ -79,8 +77,8 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
           </span>
         ) : null}
         <div className={styleAndDescription}>
-          <h1 className={title}>{title}</h1>
-          {description && <p className={description}>{description}</p>}
+          <h1 className={titleClass}>{title}</h1>
+          {description && <p className={descriptionClass}>{description}</p>}
         </div>
       </li>
     );

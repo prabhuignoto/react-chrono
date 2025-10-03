@@ -3,7 +3,6 @@ import { useTimelineContext } from '../../contexts';
 import { DetailsTextProps } from './details-text.model';
 import { getTextOrContent } from './text-or-content';
 import { contentDetailsWrapper } from './timeline-card-content.css';
-import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { vars } from 'src/styles/tokens.css';
 
 const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
@@ -42,7 +41,6 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
           className={contentDetailsClass + ' ' + contentDetailsWrapper}
           ref={ref}
           style={{
-            ...computeCssVarsFromTheme(theme),
             overflowY: showMore ? 'auto' : 'hidden',
             width: borderLessCards ? 'calc(100% - 0.5rem)' : '100%',
             background: `${vars.color.cardBg}`,

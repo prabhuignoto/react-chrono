@@ -30,7 +30,6 @@ import {
   chevronIconWrapper,
 } from './timeline-card-content.css';
 import { nestedTimelineWrapper } from '../../timeline-vertical/timeline-vertical.css';
-import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { SlideShowType } from '@models/TimelineModel';
 import NestedTimelineRenderer from '../nested-timeline-renderer/nested-timeline-renderer';
 
@@ -432,7 +431,6 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           aria-current={active ? 'true' : 'false'}
           onDoubleClick={toggleShowMore}
           style={{
-            ...computeCssVarsFromTheme(theme, isDarkMode),
             minHeight: customContent ? undefined : cardMinHeight,
             height: customContent ? cardMinHeight : undefined,
             maxWidth: cardWidth ? `${cardWidth}px` : '100%',

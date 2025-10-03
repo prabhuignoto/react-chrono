@@ -8,7 +8,6 @@ import {
   justifyEnd,
   justifyStart,
 } from './timeline-card-media.css';
-import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { useMediaLoad } from './hooks/useMediaLoad';
 import { useYouTubeDetection } from './hooks/useYouTubeDetection';
 import { useToggleControls } from './hooks/useToggleControls';
@@ -93,7 +92,6 @@ const CardMedia: React.FunctionComponent<CardMediaModel> = memo(
             mediaSettings?.align === 'right' ? justifyEnd : justifyStart,
           )}
           style={{
-            ...computeCssVarsFromTheme(theme, isDarkMode),
             height: textOverlay ? 'calc(100% - 1em)' : 0,
             minHeight: getCardHeight,
           }}

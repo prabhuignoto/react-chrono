@@ -18,7 +18,6 @@ import {
   timelinePointWrapper,
 } from './timeline-vertical-shape.css';
 import * as veShape from './timeline-vertical-shape.css'; // additive VE classes
-import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
 
 /**
  * Renders the circular point or icon on the timeline line for a vertical item.
@@ -168,7 +167,6 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
       <div
         className={`${className} ${timelinePointWrapper}`}
         style={{
-          ...computeCssVarsFromTheme(theme, isDarkMode), // Apply comprehensive theme CSS variables
           ...(isMobile ? { width: '25%' } : { width: '10%' }),
           ...(lineWidth !== undefined && {
             '--line-width': `${lineWidth}px`,

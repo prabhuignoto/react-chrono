@@ -7,7 +7,6 @@ import {
   listItemName,
   listItemNameSelected,
 } from './timeline-outline.css';
-import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { memo, FunctionComponent, useCallback, useMemo } from 'react';
 import { TimelineOutlineItem } from './timeline-outline.model';
 import { useWindowSize } from '../../../hooks/useWindowSize';
@@ -92,7 +91,7 @@ const OutlineItemList: FunctionComponent<OutlineItemListModel> = memo(
     }, [items, height]);
 
     return (
-      <ul className={listRoot} style={computeCssVarsFromTheme(theme)}>
+      <ul className={listRoot}>
         {visibleItems.map((item, index) => (
           <OutlineItem
             key={item.id ?? index}

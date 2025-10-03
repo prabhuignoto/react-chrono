@@ -596,6 +596,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   }, [props.timelineHeight]);
 
   // Memoize theme CSS variables to prevent re-creation on every render
+  // Only compute vars for custom themes - default themes use vanilla-extract classes
   const themeCssVars = useMemo(
     () => computeCssVarsFromTheme(theme, darkMode),
     [theme, darkMode],
@@ -728,7 +729,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           )}`}
           id="timeline-main-wrapper"
           data-testid="timeline-main-wrapper"
-          style={themeCssVars}
           onScroll={handleMainScroll}
         >
           <TimelineView

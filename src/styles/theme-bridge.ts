@@ -4,10 +4,27 @@ import { vars } from './tokens.css';
 import { tokens } from './tokens/index.css';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
+/**
+ * Checks if a custom theme object has any user-defined properties
+ */
+export function hasCustomTheme(theme?: Theme): boolean {
+  return theme !== undefined && Object.keys(theme).length > 0;
+}
+
+/**
+ * Computes CSS variables from a theme object.
+ * Returns empty object for default themes to avoid CSS var duplication.
+ * Only returns vars when custom theme properties are provided.
+ */
 export function computeCssVarsFromTheme(
   theme: Theme | undefined,
   isDarkMode?: boolean,
 ): CSSProperties {
+  // If no custom theme provided, return empty - let vanilla-extract theme classes handle it
+  if (!hasCustomTheme(theme)) {
+    return {};
+  }
+
   const t = theme ?? {};
 
   // Determine if we're in dark mode based on explicit flag or theme properties

@@ -6,7 +6,6 @@ import { FullscreenControl } from '../timeline-elements/fullscreen-control';
 import { pickDefined } from '../../utils/propUtils';
 // Removed direct styled import; buttons use native <button> with classes now
 import { ChevronLeft, ChevronRight, CloseIcon } from '../icons';
-import { computeCssVarsFromTheme } from '../../styles/theme-bridge';
 import {
   ChangeDensity,
   LayoutSwitcher,
@@ -197,7 +196,6 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   return (
     <div
       className={veToolbarWrapper({ sticky: Boolean(stickyToolbar) })}
-      style={computeCssVarsFromTheme(theme, darkMode)}
       role="toolbar"
       aria-label="Timeline toolbar"
       aria-orientation="horizontal"

@@ -21,7 +21,6 @@ import {
   outlineLeft,
   outlineRight,
 } from './timeline-outline.css';
-import { computeCssVarsFromTheme } from '../../../styles/theme-bridge';
 import { useOutlinePosition } from './hooks/useOutlinePosition';
 
 class TimelineOutlineError extends React.Component<
@@ -110,7 +109,6 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
         ].join(' ')}
         aria-expanded={openPane}
         role="complementary"
-        style={computeCssVarsFromTheme(mergedTheme)}
       >
         <button
           onPointerDown={togglePane}

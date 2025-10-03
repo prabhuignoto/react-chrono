@@ -8,7 +8,7 @@ import {
 
 describe('Google Fonts Utilities', () => {
   beforeEach(() => {
-    // Clear any existing link tags
+    // Clear all link tags (stylesheet and preconnect)
     document.querySelectorAll('link').forEach((link) => link.remove());
   });
 
@@ -118,11 +118,10 @@ describe('Google Fonts Utilities', () => {
       await promise1;
 
       // Second load - should reuse existing
-      const promise2 = loadGoogleFonts(config);
-      const links = document.querySelectorAll('link[rel="stylesheet"]');
+      await loadGoogleFonts(config);
 
-      expect(links.length).toBe(1); // Only one link should exist
-      await expect(promise2).resolves.toBeUndefined();
+      const stylesheetLinks = document.querySelectorAll('link[rel="stylesheet"]');
+      expect(stylesheetLinks.length).toBe(1); // Only one stylesheet link should exist
     });
 
     it('should handle font loading errors', async () => {
