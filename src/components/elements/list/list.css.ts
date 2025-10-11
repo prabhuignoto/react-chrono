@@ -12,7 +12,7 @@ export const list = style([
   sprinkles({
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     width: 'full',
   }),
   {
@@ -20,7 +20,7 @@ export const list = style([
     margin: 0,
     padding: 0,
     maxWidth: '100%',
-    gap: tokens.semantic.spacing.xs,
+    gap: tokens.semantic.spacing.sm,
     // Smoother scrolling for long lists
     scrollBehavior: 'smooth',
   },
@@ -39,26 +39,26 @@ export const listItem = style([
     position: 'relative', // For active state pseudo-element
     background: tokens.semantic.color.background.elevated,
     borderRadius: tokens.semantic.borderRadius.md,
-    boxShadow: `0 1px 3px ${tokens.semantic.color.background.overlay}`,
-    padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
+    boxShadow: `0 1px 2px rgba(0, 0, 0, 0.04)`,
+    padding: `${tokens.semantic.spacing.sm} ${tokens.semantic.spacing.md}`,
     border: `1px solid ${tokens.semantic.color.border.muted}`,
     transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
-    minHeight: '3rem', // Consistent height for compact look
-    gap: tokens.semantic.spacing.xs,
+    minHeight: '3.5rem', // Slightly taller for better touch targets
+    gap: tokens.semantic.spacing.sm,
 
     selectors: {
       '&:hover': {
         cursor: 'pointer',
-        borderColor: tokens.semantic.color.border.interactive,
-        boxShadow: `0 4px 12px -2px ${tokens.semantic.color.background.overlay}`,
-        transform: 'translateY(-2px)',
+        borderColor: tokens.semantic.color.interactive.primary,
+        boxShadow: `0 2px 8px -1px rgba(0, 0, 0, 0.08), 0 4px 12px -2px ${tokens.semantic.color.interactive.primary}20`,
+        transform: 'translateY(-1px)',
         backgroundColor: `${tokens.semantic.color.interactive.primary}08`,
       },
       '&:active': {
         transform: 'translateY(0px) scale(0.99)',
-        backgroundColor: `${tokens.semantic.color.interactive.primary}12`,
-        borderColor: tokens.semantic.color.interactive.primary,
-        boxShadow: `0 2px 8px -2px ${tokens.semantic.color.background.overlay}`,
+        backgroundColor: `${tokens.semantic.color.interactive.primary}10`,
+        borderColor: `${tokens.semantic.color.interactive.primary}60`,
+        boxShadow: `0 1px 4px -1px rgba(0, 0, 0, 0.1)`,
       },
       '&:focus-visible': {
         outline: `2px solid ${tokens.semantic.color.interactive.primary}`,
@@ -68,9 +68,13 @@ export const listItem = style([
 
     '@media': {
       '(max-width: 768px)': {
-        padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
-        minHeight: '2.75rem',
-        gap: tokens.semantic.spacing.xs,
+        padding: `${tokens.semantic.spacing.sm} ${tokens.semantic.spacing.md}`,
+        minHeight: '3.25rem',
+        gap: tokens.semantic.spacing.sm,
+      },
+      '(prefers-reduced-motion: reduce)': {
+        transition: 'background 0.1s ease-in-out, border-color 0.1s ease-in-out',
+        transform: 'none',
       },
     },
   },
@@ -78,19 +82,25 @@ export const listItem = style([
 
 export const listItemActive = style({
   borderColor: tokens.semantic.color.interactive.primary,
-  backgroundColor: `${tokens.semantic.color.interactive.primary}15`,
-  boxShadow: `0 0 0 1px ${tokens.semantic.color.interactive.primary}30, 0 2px 8px -2px ${tokens.semantic.color.background.overlay}`,
+  backgroundColor: `${tokens.semantic.color.interactive.primary}12`,
+  boxShadow: `0 0 0 1px ${tokens.semantic.color.interactive.primary}40, 0 2px 6px -1px ${tokens.semantic.color.interactive.primary}15`,
+  fontWeight: tokens.semantic.typography.fontWeight.semibold,
 
   selectors: {
     '&::before': {
       content: '""',
       position: 'absolute',
-      left: 0,
-      top: 0,
-      bottom: 0,
-      width: '3px',
+      left: '-1px',
+      top: '-1px',
+      bottom: '-1px',
+      width: '4px',
       backgroundColor: tokens.semantic.color.interactive.primary,
-      borderRadius: '0 2px 2px 0',
+      borderRadius: `${tokens.semantic.borderRadius.md} 0 0 ${tokens.semantic.borderRadius.md}`,
+      boxShadow: `2px 0 4px -1px ${tokens.semantic.color.interactive.primary}30`,
+    },
+    '&:hover': {
+      backgroundColor: `${tokens.semantic.color.interactive.primary}15`,
+      borderColor: tokens.semantic.color.interactive.primary,
     },
   },
 });
@@ -111,16 +121,23 @@ export const checkbox = style([
     justifyContent: 'center',
   }),
   {
-    width: '1.1rem',
-    height: '1.1rem',
-    margin: `0 ${tokens.semantic.spacing.xs} 0 ${tokens.semantic.spacing.xs}`,
-    borderRadius: tokens.semantic.borderRadius.full,
+    width: '1.25rem',
+    height: '1.25rem',
+    margin: `0 ${tokens.semantic.spacing.xs} 0 0`,
+    borderRadius: tokens.semantic.borderRadius.sm,
     color: tokens.semantic.color.background.elevated,
-    border: `1px solid ${tokens.semantic.color.border.default}`,
+    border: `2px solid ${tokens.semantic.color.border.default}`,
     transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
+    backgroundColor: 'transparent',
     selectors: {
       '&:hover': {
         borderColor: tokens.semantic.color.interactive.primary,
+        backgroundColor: `${tokens.semantic.color.interactive.primary}08`,
+      },
+    },
+    '@media': {
+      '(prefers-reduced-motion: reduce)': {
+        transition: 'background 0.1s ease-in-out, border-color 0.1s ease-in-out',
       },
     },
   },
@@ -128,6 +145,14 @@ export const checkbox = style([
 
 export const checkboxSelected = style({
   background: tokens.semantic.color.interactive.primary,
+  borderColor: tokens.semantic.color.interactive.primary,
+  boxShadow: `0 0 0 2px ${tokens.semantic.color.interactive.primary}20`,
+  selectors: {
+    '&:hover': {
+      background: `${tokens.semantic.color.interactive.primary}dd`,
+      borderColor: `${tokens.semantic.color.interactive.primary}dd`,
+    },
+  },
 });
 
 export const styleAndDescription = style([
@@ -136,49 +161,51 @@ export const styleAndDescription = style([
     flexDirection: 'column',
     flex: 1,
     minWidth: 0, // Allow flex child to shrink
-    gap: tokens.semantic.spacing.xs,
+    gap: '0.25rem',
+    justifyContent: 'center',
   },
 ]);
 
 export const title = style({
   color: tokens.semantic.color.text.primary,
   fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
-  fontSize: `var(--timeline-controls-font-size, 0.875rem)`,
-  fontWeight: `var(--timeline-controls-font-weight, 600)`,
+  fontSize: `var(--timeline-controls-font-size, 0.9375rem)`,
+  fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.semibold})`,
   fontStyle: `var(--timeline-controls-font-style, normal)`,
   margin: 0,
   textAlign: 'left',
-  lineHeight: 1.4,
+  lineHeight: 1.5,
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
+  letterSpacing: '-0.01em',
 
   '@media': {
     '(max-width: 768px)': {
-      fontSize: '0.8rem',
+      fontSize: '0.875rem',
     },
   },
 });
 
 export const description = style({
   fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
-  fontSize: `var(--timeline-controls-font-size, 0.75rem)`,
-  fontWeight: `var(--timeline-controls-font-weight, normal)`,
+  fontSize: `var(--timeline-controls-font-size, 0.8125rem)`,
+  fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.normal})`,
   fontStyle: `var(--timeline-controls-font-style, normal)`,
   margin: 0,
   padding: 0,
   textAlign: 'left',
   width: '100%',
   color: tokens.semantic.color.text.secondary,
-  lineHeight: 1.3,
-  opacity: 0.85,
+  lineHeight: 1.4,
+  opacity: 0.9,
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
 
   '@media': {
     '(max-width: 768px)': {
-      fontSize: '0.7rem',
+      fontSize: '0.75rem',
     },
   },
 });

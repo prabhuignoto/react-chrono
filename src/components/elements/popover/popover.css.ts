@@ -20,41 +20,45 @@ export const popoverHolder = style([
   patterns.card({ size: 'md', elevation: 'high' }),
   sprinkles({
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     flexDirection: 'column',
     position: 'absolute',
   }),
   {
     background: tokens.semantic.color.background.elevated,
-    borderRadius: tokens.semantic.borderRadius.md,
+    borderRadius: tokens.semantic.borderRadius.lg,
     border: `1px solid ${tokens.semantic.color.border.default}`,
-    boxShadow: `0 8px 32px -4px rgba(0, 0, 0, 0.12), 0 4px 16px -2px rgba(0, 0, 0, 0.08)`,
-    maxHeight: '400px',
-    overflowY: 'auto',
-    padding: tokens.semantic.spacing.lg,
+    boxShadow: `0 12px 40px -8px rgba(0, 0, 0, 0.15), 0 6px 20px -4px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05)`,
+    maxHeight: '420px',
+    overflowY: 'hidden',
+    overflowX: 'hidden',
+    padding: 0,
     width: '320px',
     opacity: 0,
     transition: `opacity ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}, transform ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
-    transform: 'translateY(-10px)',
+    transform: 'translateY(-8px) scale(0.98)',
     zIndex: tokens.semantic.zIndex.popover,
     // Smart positioning to stay within container bounds
     maxWidth: 'calc(100vw - 2rem)',
     // Prevent popover from overflowing horizontally
     left: 'auto',
     right: 'auto',
+    backdropFilter: 'blur(8px)',
     selectors: {
-      '&::-webkit-scrollbar': { width: '6px' },
+      '&::-webkit-scrollbar': { width: '8px' },
       '&::-webkit-scrollbar-track': {
-        backgroundColor: tokens.semantic.color.background.secondary,
-        borderRadius: '3px',
+        backgroundColor: 'transparent',
+        borderRadius: '4px',
       },
       '&::-webkit-scrollbar-thumb': {
-        backgroundColor: `${tokens.semantic.color.interactive.primary}60`,
-        borderRadius: '3px',
+        backgroundColor: `${tokens.semantic.color.interactive.primary}40`,
+        borderRadius: '4px',
+        border: '2px solid transparent',
+        backgroundClip: 'padding-box',
       },
       '&::-webkit-scrollbar-thumb:hover': {
-        backgroundColor: `${tokens.semantic.color.interactive.primary}80`,
+        backgroundColor: `${tokens.semantic.color.interactive.primary}60`,
       },
       // Positioning is handled by JavaScript - no CSS positioning overrides
     },
@@ -64,7 +68,11 @@ export const popoverHolder = style([
         maxWidth: 'calc(100vw - 1rem)',
         left: '0.5rem !important',
         right: 'auto !important',
-        transform: 'translateY(-10px) !important',
+        transform: 'translateY(-8px) scale(0.98) !important',
+      },
+      '(prefers-reduced-motion: reduce)': {
+        transition: 'opacity 0.1s ease-in-out',
+        transform: 'none',
       },
     },
   },
@@ -72,7 +80,12 @@ export const popoverHolder = style([
 
 export const holderVisible = style({
   opacity: 1,
-  transform: 'translateY(0)',
+  transform: 'translateY(0) scale(1)',
+  '@media': {
+    '(prefers-reduced-motion: reduce)': {
+      transform: 'none',
+    },
+  },
 });
 
 export const holderTop = style({ top: '3.5rem' });
@@ -95,7 +108,7 @@ export const selecter = style([
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: 'xs',
+    gap: 'sm',
   }),
   {
     background: tokens.semantic.color.background.elevated,
@@ -103,46 +116,72 @@ export const selecter = style([
     borderRadius: tokens.semantic.borderRadius.lg,
     border: '1px solid',
     borderColor: tokens.semantic.color.border.default,
-    boxShadow: tokens.semantic.shadow.card,
+    boxShadow: `0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04)`,
     cursor: 'pointer',
     userSelect: 'none',
     marginRight: '0.5rem',
-    height: '38px',
-    minWidth: '36px',
+    height: '40px',
+    minWidth: '40px',
     width: 'auto',
-    padding: '0 0.75rem',
-    transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+    padding: '0 0.875rem',
+    fontWeight: tokens.semantic.typography.fontWeight.medium,
+    transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
+    position: 'relative',
+    overflow: 'hidden',
     selectors: {
+      '&::before': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: `radial-gradient(circle at center, ${tokens.semantic.color.interactive.primary}15, transparent)`,
+        opacity: 0,
+        transition: `opacity ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
+      },
       '&:hover': {
-        background: `${tokens.semantic.color.interactive.primary}08`,
-        borderColor: `${tokens.semantic.color.interactive.primary}40`,
-        boxShadow: `0 4px 12px -2px ${tokens.semantic.color.interactive.primary}20, 0 2px 6px -1px rgba(0, 0, 0, 0.1)`,
-        transform: 'translateY(-2px)',
+        background: `${tokens.semantic.color.interactive.primary}06`,
+        borderColor: `${tokens.semantic.color.interactive.primary}50`,
+        boxShadow: `0 2px 8px -1px ${tokens.semantic.color.interactive.primary}20, 0 4px 12px -2px rgba(0, 0, 0, 0.08)`,
+        transform: 'translateY(-1px)',
         color: tokens.semantic.color.interactive.primary,
       },
+      '&:hover::before': {
+        opacity: 1,
+      },
       '&:active': {
-        transform: 'translateY(0) scale(0.96)',
-        background: `${tokens.semantic.color.interactive.primary}12`,
+        transform: 'translateY(0) scale(0.98)',
+        background: `${tokens.semantic.color.interactive.primary}10`,
         borderColor: `${tokens.semantic.color.interactive.primary}60`,
-        boxShadow: `inset 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 4px -1px ${tokens.semantic.color.interactive.primary}30`,
+        boxShadow: `inset 0 2px 4px rgba(0, 0, 0, 0.06), 0 1px 2px ${tokens.semantic.color.interactive.primary}20`,
       },
       '&:focus': {
         outline: 'none',
-        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}40`,
+        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}30`,
       },
       '&:focus:not(:focus-visible)': { boxShadow: 'none' },
       '&:focus-visible': {
         outline: 'none',
-        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}40`,
-        background: `${tokens.semantic.color.interactive.primary}04`,
+        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}30, 0 1px 3px rgba(0, 0, 0, 0.1)`,
+        background: `${tokens.semantic.color.interactive.primary}05`,
+      },
+      '&[aria-expanded="true"]': {
+        background: `${tokens.semantic.color.interactive.primary}08`,
+        borderColor: `${tokens.semantic.color.interactive.primary}50`,
+        color: tokens.semantic.color.interactive.primary,
       },
     },
     '@media': {
       '(max-width: 480px)': {
         height: '44px',
         minWidth: '44px',
-        padding: '0 0.6rem',
+        padding: '0 0.75rem',
         // Ensure touch targets are at least 44x44px
+      },
+      '(prefers-reduced-motion: reduce)': {
+        transition: 'background 0.1s ease-in-out, border-color 0.1s ease-in-out',
+        transform: 'none',
       },
     },
   },
@@ -159,11 +198,21 @@ export const selecterIcon = style({
   color: tokens.semantic.color.text.secondary,
   height: '20px',
   width: '20px',
-  transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out',
+  transition: `transform ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}, color ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
   flexShrink: 0,
+  position: 'relative',
   selectors: {
     [`${selecter}:hover &`]: {
       color: tokens.semantic.color.interactive.primary,
+      transform: 'scale(1.1)',
+    },
+    [`${selecter}[aria-expanded="true"] &`]: {
+      color: tokens.semantic.color.interactive.primary,
+    },
+  },
+  '@media': {
+    '(prefers-reduced-motion: reduce)': {
+      transition: 'color 0.1s ease-in-out',
     },
   },
 });
@@ -175,7 +224,12 @@ globalStyle(`${selecterIcon} svg`, {
 });
 
 export const selecterIconOpen = style({
-  transform: 'none',
+  transform: 'rotate(180deg)',
+  '@media': {
+    '(prefers-reduced-motion: reduce)': {
+      transform: 'none',
+    },
+  },
 });
 
 export const selecterLabel = style({
@@ -187,12 +241,49 @@ export const selecterLabel = style({
   whiteSpace: 'nowrap',
 });
 
-export const header = style({ height: '30px', width: '100%' });
+export const header = style([
+  sprinkles({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  }),
+  {
+    height: '48px',
+    width: '100%',
+    padding: `${tokens.semantic.spacing.sm} ${tokens.semantic.spacing.md}`,
+    borderBottom: `1px solid ${tokens.semantic.color.border.muted}`,
+    background: `${tokens.semantic.color.background.secondary}50`,
+    backdropFilter: 'blur(4px)',
+    position: 'sticky',
+    top: 0,
+    zIndex: 10,
+    flexShrink: 0,
+  },
+]);
 
 export const content = style({
-  height: 'calc(100% - 30px)',
+  flex: 1,
   overflowY: 'auto',
+  overflowX: 'hidden',
   width: '100%',
+  padding: `${tokens.semantic.spacing.md} ${tokens.semantic.spacing.md}`,
+  minHeight: 0, // Allow flex child to shrink
+  selectors: {
+    '&::-webkit-scrollbar': { width: '8px' },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: 'transparent',
+      borderRadius: '4px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: `${tokens.semantic.color.interactive.primary}40`,
+      borderRadius: '4px',
+      border: '2px solid transparent',
+      backgroundClip: 'padding-box',
+    },
+    '&::-webkit-scrollbar-thumb:hover': {
+      backgroundColor: `${tokens.semantic.color.interactive.primary}60`,
+    },
+  },
 });
 
 export const closeButton = style({
@@ -201,34 +292,45 @@ export const closeButton = style({
   justifyContent: 'center',
   background: 'transparent',
   border: 'none',
-  color: tokens.semantic.color.interactive.primary,
+  color: tokens.semantic.color.text.secondary,
   cursor: 'pointer',
-  marginBottom: '0.5rem',
-  marginLeft: 'auto',
   padding: '0.5rem',
-  borderRadius: '4px',
-  minWidth: '32px',
-  minHeight: '32px',
-  transition: `background-color ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}, transform ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
+  borderRadius: tokens.semantic.borderRadius.md,
+  minWidth: '36px',
+  minHeight: '36px',
+  transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
+  position: 'relative',
   selectors: {
     '&:hover': {
-      background: tokens.semantic.color.background.elevated,
-      transform: 'scale(1.1)',
+      background: `${tokens.semantic.color.interactive.primary}10`,
+      color: tokens.semantic.color.interactive.primary,
+      transform: 'scale(1.05)',
     },
     '&:active': {
       transform: 'scale(0.95)',
+      background: `${tokens.semantic.color.interactive.primary}15`,
     },
     '&:focus': {
-      outline: `2px solid ${tokens.semantic.color.interactive.primary}`,
-      outlineOffset: '2px',
+      outline: 'none',
+      boxShadow: `0 0 0 2px ${tokens.semantic.color.interactive.primary}40`,
     },
-    '&:focus:not(:focus-visible)': { outline: 'none' },
+    '&:focus:not(:focus-visible)': {
+      boxShadow: 'none',
+    },
+    '&:focus-visible': {
+      outline: 'none',
+      boxShadow: `0 0 0 2px ${tokens.semantic.color.interactive.primary}40`,
+    },
   },
   '@media': {
     '(max-width: 480px)': {
-      minWidth: '44px',
-      minHeight: '44px',
-      padding: '0.75rem',
+      minWidth: '40px',
+      minHeight: '40px',
+      padding: '0.625rem',
+    },
+    '(prefers-reduced-motion: reduce)': {
+      transition: 'background 0.1s ease-in-out, color 0.1s ease-in-out',
+      transform: 'none',
     },
   },
 });
