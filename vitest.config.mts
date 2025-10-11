@@ -78,6 +78,14 @@ export default defineConfig({
       './src/hooks/**/*.test.{tsx,ts}',
       './tests/integration/**/*.test.{tsx,ts}',
     ],
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      // Exclude integration tests that require build/setup
+      // These should be run separately with their specific test commands
+      './tests/integration/demo-app.e2e.test.ts', // Run with: pnpm test:e2e
+      './tests/integration/build-output.test.ts', // Run with: pnpm build && pnpm test tests/integration/build-output.test.ts
+    ],
     minWorkers: 2,
     setupFiles: './src/test-setup.js',
     silent: false,
