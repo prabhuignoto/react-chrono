@@ -368,7 +368,7 @@ Upgrading is seamless with full backward compatibility:
 
 ---
 
-## 🌟 Why Developers Love React Chrono
+## 🌟 Why React Chrono
 
 ### ⚡ **Zero Configuration Required**
 Works beautifully out of the box with just `items` prop
