@@ -27,10 +27,6 @@ import {
   searchButtonIcon as veSearchButtonIcon,
   hideOnMobile,
 } from '../toolbar/toolbar.css';
-import {
-  navButton,
-  navButtonSvg,
-} from '../timeline-elements/timeline-control/timeline-control.css';
 
 // Helper function to convert ReactNode to string safely
 const getTextFromNode = (

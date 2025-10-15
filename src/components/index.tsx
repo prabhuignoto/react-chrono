@@ -5,7 +5,6 @@ import { migrateLegacyProps, warnDeprecatedProps } from '@utils/propMigration';
 import { getUniqueID } from '@utils/index';
 import { safeValidateTimelineProps } from '@utils/validation';
 import dayjs from 'dayjs';
-import { mapI18nToButtonTexts } from '@hooks/useI18n';
 import React, {
   useCallback,
   useEffect,
@@ -237,23 +236,12 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     children,
     items = [],
     onScrollEnd,
-    onItemSelected,
     activeItemIndex,
     mode = 'alternating',
-    theme,
     onThemeChange,
     onRestartSlideshow,
-    id,
-    darkMode,
-    // Grouped configurations
-    layout,
-    interaction,
     content,
-    display,
-    media,
     animation,
-    style,
-    accessibility,
   } = props;
 
   // Extract specific values from grouped configs with defaults
@@ -422,16 +410,6 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
 
   const handleTimelineUpdate = useCallback(
     (actvTimelineIndex: number) => {
-      // Debug logging for visibility logic
-      if (typeof window !== 'undefined') {
-        console.log(
-          'Timeline Update - Mode:',
-          mode,
-          'Active Index:',
-          actvTimelineIndex,
-        );
-      }
-
       setTimeLineItems((lineItems) =>
         lineItems.map((item, index) => ({
           ...item,

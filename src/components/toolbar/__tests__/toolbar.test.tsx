@@ -14,15 +14,13 @@ const theme = getDefaultThemeOrDark();
 
 describe('Toolbar', () => {
   it('renders toolbar items', () => {
-    const { getByText, baseElement } = render(
+    const { getByText } = render(
       <Toolbar items={items} theme={theme}>
         {items.map((item, index) => (
           <div key={index}>{item.name}</div>
         ))}
       </Toolbar>,
     );
-
-    console.log(baseElement.innerHTML);
 
     expect(getByText(/Item 1/i)).toBeInTheDocument();
     expect(getByText(/Item 2/i)).toBeInTheDocument();

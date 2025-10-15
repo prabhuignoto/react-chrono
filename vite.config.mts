@@ -64,16 +64,13 @@ export default defineConfig(({ mode }) => ({
       external: (id) =>
         id === 'react' ||
         id === 'react-dom' ||
-        id === 'styled-components' ||
         id.startsWith('react/') ||
         id.startsWith('react-dom/') ||
-        id.startsWith('styled-components/') ||
         /\.(svg|mp4|webm|png|jpe?g|gif)$/i.test(id),
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          'styled-components': 'styled',
         },
         chunkFileNames: 'chunks/[name]-[hash].js',
         assetFileNames: (assetInfo) => {

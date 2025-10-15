@@ -61,7 +61,8 @@ export default [
       'sort-keys-fix/sort-keys-fix': 'error',
       'typescript-sort-keys/interface': 'error',
       'typescript-sort-keys/string-enum': 'error',
-      'no-unused-vars': "error"
+      'no-unused-vars': "error",
+      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }]
       // 'no-restricted-imports': [
       //   'error',
       //   {

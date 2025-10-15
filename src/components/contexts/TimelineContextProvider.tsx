@@ -27,9 +27,8 @@ import {
   getSlideShowType,
 } from '@utils/index';
 import { useMatchMedia } from '../effects/useMatchMedia';
-import { I18nConfig } from '@models/TimelineConfig';
 import { TimelineI18nConfig } from '@models/TimelineI18n';
-import { useI18n, mapI18nToButtonTexts } from '@hooks/useI18n';
+import { useI18n } from '@hooks/useI18n';
 import { createTextResolver, TextResolver } from '@utils/textResolver';
 
 // ==========================================

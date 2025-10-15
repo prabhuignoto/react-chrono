@@ -162,17 +162,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   }, [timelineMode, updateHorizontalAllCards]);
 
-  // Debug logging for timeline mode
-  if (typeof window !== 'undefined') {
-    console.log(
-      'Timeline Component - Context Mode:',
-      mode,
-      'Timeline Mode:',
-      timelineMode,
-      'ShowAllCards:',
-      showAllCardsHorizontal,
-    );
-  }
 
   // First get the navigation functions
   const {
@@ -411,17 +400,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     () => !disableToolbar && !isChild,
     [isChild, disableToolbar],
   );
-
-  // Memoize scroll capability determination
-  const canScrollTimeline = useMemo(() => {
-    if (slideShowRunning) return false;
-
-    if (typeof scrollable === 'boolean') {
-      return scrollable;
-    }
-
-    return typeof scrollable === 'object' && scrollable.scrollbar;
-  }, [slideShowRunning, scrollable]);
 
   // Handle keyboard events
   const handleKeyDown = React.useCallback(
@@ -686,15 +664,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
                 wrapperRef as unknown as React.RefObject<HTMLElement>
               }
               onEnterFullscreen={() => {
-                console.log('Entered fullscreen mode');
                 setIsFullscreen(true);
               }}
               onExitFullscreen={() => {
-                console.log('Exited fullscreen mode');
                 setIsFullscreen(false);
               }}
-              onFullscreenError={(error: string) => {
-                console.error('Fullscreen error:', error);
+              onFullscreenError={(_error: string) => {
                 setIsFullscreen(false);
               }}
               stickyToolbar={props.stickyToolbar ?? false}

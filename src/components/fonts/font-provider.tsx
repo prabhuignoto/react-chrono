@@ -57,29 +57,17 @@ export const FontProvider: React.FC<FontProviderProps> = ({
 
   // Apply CSS variables to the document root instead of wrapper
   useEffect(() => {
-    console.log('FontProvider: CSS vars effect triggered', {
-      fontLoaded,
-      cssVars,
-      cssVarsKeys: Object.keys(cssVars || {}),
-      googleFonts,
-    });
-
     if (!fontLoaded || !cssVars || Object.keys(cssVars).length === 0) {
-      console.log('FontProvider: Early return due to conditions not met');
       return;
     }
 
-    console.log('FontProvider: Setting CSS custom properties:', cssVars);
-
     // Set CSS custom properties on document root
     Object.entries(cssVars).forEach(([property, value]) => {
-      console.log(`FontProvider: Setting ${property} = ${value}`);
       document.documentElement.style.setProperty(property, value);
     });
 
     // Cleanup function to remove CSS variables
     return () => {
-      console.log('FontProvider: Cleanup - removing CSS variables');
       Object.keys(cssVars).forEach((property) => {
         document.documentElement.style.removeProperty(property);
       });

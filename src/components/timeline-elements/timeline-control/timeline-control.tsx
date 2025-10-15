@@ -53,23 +53,16 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
   onToggleDarkMode,
   isDark,
   onPaused,
-  activeTimelineItem = 0,
-  totalItems = 0,
 }: TimelineControlModel) => {
   // Use unified context
   const {
-    theme,
     mode,
     flipLayout,
     disableInteraction,
     buttonTexts,
     classNames,
     enableDarkToggle,
-    isDarkMode,
   } = useTimelineContext();
-
-  // Remove icon rotation in non-horizontal modes for consistent UX
-  const rotate = false;
 
   const flippedHorizontally = useMemo(
     () => flipLayout && mode === 'HORIZONTAL',
