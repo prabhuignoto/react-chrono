@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import Chrono from '../../../components';
-import { ComponentContainerTree, Vertical } from '../../App.styles';
+import { componentContainerTree, componentContainerTreeDesktop, componentContainerTreeBigScreen, componentContainerTreeTablet, componentContainerTreeMobile, vertical } from '../../App.css';
 
 export interface CustomContentVerticalProps {
   type: string;
@@ -17,8 +17,14 @@ export const CustomContentVertical: FunctionComponent<CustomContentVerticalProps
   const decrement = () => setCounter((prev) => prev - 1);
 
   return (
-    <Vertical>
-      <ComponentContainerTree type={type}>
+    <div className={vertical}>
+      <div className={
+        type === 'desktop' ? componentContainerTreeDesktop :
+        type === 'big-screen' ? componentContainerTreeBigScreen :
+        type === 'tablet' ? componentContainerTreeTablet :
+        type === 'mobile' ? componentContainerTreeMobile :
+        componentContainerTree
+      } style={{ minHeight: '600px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
         <Chrono mode="VERTICAL" cardHeight={200} cardWidth={650} scrollable>
           <div>
             <div style={{ width: '250px', height: '250px' }}>
@@ -81,7 +87,7 @@ export const CustomContentVertical: FunctionComponent<CustomContentVerticalProps
             </table>
           </div>
         </Chrono>
-      </ComponentContainerTree>
-    </Vertical>
+      </div>
+    </div>
   );
 }; 

@@ -5,8 +5,36 @@
 /.pnp
 .pnp.js
 
+
+**/node_modules
 # testing
 # /coverage
+
+# Playwright test artifacts and reports
+/test-results/
+/playwright-report/
+/playwright-ct-report/
+/playwright/.cache/
+*.trace.zip
+/tests/**/trace*.zip
+/tests/**/*.trace.zip
+/tests/fixtures/auth.json
+/tests/downloads/
+/tests/temp/
+
+# Playwright screenshots (keep baseline, ignore test-generated)
+/tests/**/*-actual.png
+/tests/**/*-diff.png
+/tests/**/*-previous.png
+/tests/**/screenshot*.png
+
+# Additional Playwright artifacts
+/tests/results/
+/tests/output/
+/blob-report/
+*.har
+/test-results-*
+*-lighthouse-report.html
 
 # production
 /build
@@ -35,7 +63,6 @@ cache
 .idea
 .tmp
 
-cypress/videos
 
 .scannerwork
 # sonar-project.properties

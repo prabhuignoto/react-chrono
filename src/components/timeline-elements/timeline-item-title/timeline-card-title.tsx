@@ -1,8 +1,9 @@
 import { TitleModel } from '@models/TimelineCardTitleModel';
 import cls from 'classnames';
-import React, { useContext, useMemo } from 'react';
-import { GlobalContext } from '../../GlobalContext';
-import { TitleWrapper } from './timeline-card-title.styles';
+import React, { useMemo } from 'react';
+import { useTimelineContext } from '../../contexts';
+import { titleActive, titleWrapper } from './timeline-card-title.css';
+import { cardTitleRecipe } from '../timeline-card-content/timeline-card-content.css';
 
 /**
  * TimelineItemTitle component
@@ -26,23 +27,30 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
 
   // Computed class name for the title, combining base class, active state, and additional classes
   const titleClass = useMemo(
-    () => cls(TITLE_CLASS, active ? 'active' : '', classString),
+    () =>
+      cls(
+        TITLE_CLASS,
+        active ? 'active' : '',
+        classString,
+        cardTitleRecipe({ active: !!active }),
+        titleWrapper, // Add the base CSS class that includes Google Fonts styling
+      ),
     [active, classString],
   );
 
-  // Get font size from global context
-  const { fontSizes } = useContext(GlobalContext);
-
   return (
-    <TitleWrapper
+    <div
       className={titleClass}
-      theme={theme}
-      $hide={!title}
-      align={align}
-      $fontSize={fontSizes?.title}
+      style={{
+        textAlign: align || undefined,
+        visibility: title ? 'visible' : 'hidden',
+      }}
+      title={typeof title === 'string' ? title : undefined} // Native tooltip for full text on hover
+      data-ve-class={titleWrapper}
+      data-ve-active-class={titleActive}
     >
       {title}
-    </TitleWrapper>
+    </div>
   );
 };
 

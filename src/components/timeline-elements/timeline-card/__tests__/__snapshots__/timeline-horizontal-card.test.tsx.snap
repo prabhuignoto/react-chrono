@@ -3,31 +3,45 @@
 exports[`TimelineHorizontalCard > should match the snapshot 1`] = `
 <div>
   <div
-    class="sc-hvigdm dGwijf vertical_alternating"
+    class="timeline-horizontal-item"
     data-testid="timeline-item"
+    style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; width: 100%; height: 100%; position: relative; gap: 1rem;"
   >
     <div
-      class="sc-ggWZvA LXovB"
-    >
-      <button
-        aria-disabled="false"
-        aria-label=""
-        aria-selected="false"
-        class="sc-dTvVRJ fJGXiE timeline-circle using-icon vertical_alternating active"
-        data-testid="timeline-circle"
-        dimension="16"
-        tabindex="0"
-        type="button"
-      >
-        icon child
-      </button>
-    </div>
-    <div
-      class="sc-jwTyAe jjiCuv vertical_alternating"
-      data-testid="timeline-title"
+      class="timeline-point-section"
+      style="display: flex; justify-content: center; align-items: center; padding: 0.5rem; z-index: 10; position: relative;"
     >
       <div
-        class="sc-bRKDuR ePJukf timeline-item-title active title"
+        class="timeline-point_shapeWrapper__mpv93b3 timeline-point__mpv93b2 sprinkles_display_flex_mobile__1v4ezef6 sprinkles_alignItems_center_mobile__1v4ezef10 sprinkles_justifyContent_center_mobile__1v4ezef1c sprinkles_position_relative_mobile__1v4ezefi static_baseStyles_containLayout__1ta47saw"
+      >
+        <button
+          aria-disabled="false"
+          aria-label=""
+          aria-selected="true"
+          class="timeline-circle using-icon vertical_alternating active timeline-point__mpv93b9 timeline-point_timelinePointBase__mpv93b5 recipes_interactive__etntiu1 recipes__etntiu0 sprinkles_cursor_pointer__1v4ezefbm sprinkles_userSelect_none__1v4ezefbr sprinkles_transitionProperty_all__1v4ezefca sprinkles_transitionDuration_fast__1v4ezefce recipes_interactive_hover_scale__etntiu2 timeline-point__mpv93b4 sprinkles_display_flex_mobile__1v4ezef6 sprinkles_alignItems_center_mobile__1v4ezef10 sprinkles_justifyContent_center_mobile__1v4ezef1c sprinkles_position_relative_mobile__1v4ezefi sprinkles_borderRadius_full_mobile__1v4ezef86 static_baseStyles_willChange__1ta47sat timeline-point_timelinePoint_size_md__mpv93bb timeline-point_timelinePoint_shape_circle__mpv93bd timeline-point__mpv93b6 sprinkles_borderRadius_full_mobile__1v4ezef86 timeline-point_timelinePoint_state_active__mpv93bh timeline-point_timelinePoint_interactive_true__mpv93bj recipes_interactive__etntiu1 recipes__etntiu0 sprinkles_cursor_pointer__1v4ezefbm sprinkles_userSelect_none__1v4ezefbr sprinkles_transitionProperty_all__1v4ezefca sprinkles_transitionDuration_fast__1v4ezefce recipes_interactive_hover_scale__etntiu2 timeline-point_timelinePoint_hasIcon_true__mpv93bl timeline-point_timelinePoint_disabled_false__mpv93bo using-icon active"
+          data-item-id="id-12345"
+          data-testid="timeline-circle"
+          style="height: 16px; width: 16px; background: rgb(255, 255, 255); color: rgb(15, 82, 186);"
+          tabindex="0"
+          type="button"
+        >
+          icon child
+        </button>
+      </div>
+    </div>
+    <div
+      class="timeline-card-section"
+      style="display: flex; justify-content: center; align-items: center; width: 100%; flex-grow: 1;"
+    />
+    <div
+      class="timeline-title-section"
+      style="display: flex; justify-content: center; align-items: center; padding: 0.5rem; min-height: 3rem; position: relative; z-index: 5;"
+    >
+      <div
+        class="timeline-item-title active title timeline-card-content_cardTitleRecipe__chzdnoc timeline-card-content_cardTitleBase__chzdno9 recipes_text__etntiu2h recipes_text_variant_h2__etntiu2j recipes__etntiu2a sprinkles_fontSize_heading2_mobile__1v4ezef8x sprinkles_fontWeight_semibold_mobile__1v4ezef9u recipes_text_color_primary__etntiu2n recipes_text_align_left__etntiu2s recipes__etntiu2e sprinkles_textAlign_left_mobile__1v4ezefa0 recipes_text_truncate_false__etntiu2w timeline-card-content_cardTitleRecipe_active_true__chzdnod timeline-card-title_titleWrapper__1m05k8t1 timeline-card-title__1m05k8t0 sprinkles_paddingX_xs_mobile__1v4ezef3f sprinkles_paddingY_xs_mobile__1v4ezef40"
+        data-ve-active-class="timeline-card-title_titleActive__1m05k8t2"
+        data-ve-class="timeline-card-title_titleWrapper__1m05k8t1 timeline-card-title__1m05k8t0 sprinkles_paddingX_xs_mobile__1v4ezef3f sprinkles_paddingY_xs_mobile__1v4ezef40"
+        style="visibility: hidden;"
       />
     </div>
   </div>

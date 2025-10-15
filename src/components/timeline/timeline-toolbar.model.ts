@@ -37,4 +37,10 @@ export type TimelineToolbarProps = Pick<
   currentMatchIndex: number; // 0-based index
   onSearchKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   searchInputRef?: RefObject<HTMLInputElement>; // Ref for the search input
-} & Pick<TimelineProps, 'darkMode' | 'flipLayout'>;
+
+  // Fullscreen related props
+  timelineRef?: RefObject<HTMLElement>; // Ref to the timeline container for fullscreen
+  onEnterFullscreen?: () => void;
+  onExitFullscreen?: () => void;
+  onFullscreenError?: (error: string) => void;
+} & Pick<TimelineProps, 'darkMode' | 'flipLayout' | 'stickyToolbar'>;

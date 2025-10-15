@@ -1,0 +1,8 @@
+src
+coverage
+playwright*
+.github
+.vscode
+scripts
+vite.site.config.mts
+

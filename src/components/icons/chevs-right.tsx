@@ -18,4 +18,4 @@ const ChevronRightIcon: React.FunctionComponent = () => (
   </svg>
 );
 
-export default ChevronRightIcon;
+export default React.memo(ChevronRightIcon);

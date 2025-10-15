@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useStableContext, useDynamicContext } from '../contexts';
+import { useTimelineContext } from '../contexts';
 import { List } from '../elements/list/list';
 import PopOver from '../elements/popover';
 import { ArrowDownIcon, LayoutIcon, ParaIcon } from '../icons';
@@ -17,8 +17,7 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
   position,
   isMobile,
 }: LayoutSwitcherProp) => {
-  const { memoizedButtonTexts: buttonTexts } = useStableContext();
-  const { horizontalAll: showAllCardsHorizontal } = useDynamicContext();
+  const { buttonTexts, showAllCardsHorizontal } = useTimelineContext();
 
   const LayoutIconMemo = useMemo(() => <LayoutIcon />, []);
 
@@ -29,62 +28,62 @@ const LayoutSwitcher: FunctionComponent<LayoutSwitcherProp> = ({
 
   const layoutOptions = useMemo(
     () => ({
-      alternating: buttonTexts?.changeLayoutOptions.alternating,
-      horizontal: buttonTexts?.changeLayoutOptions.horizontal,
-      horizontal_all: buttonTexts?.changeLayoutOptions.horizontal_all,
-      vertical: buttonTexts?.changeLayoutOptions.vertical,
+      alternating: buttonTexts?.changeLayoutOptions?.alternating,
+      horizontal: buttonTexts?.changeLayoutOptions?.horizontal,
+      horizontal_all: buttonTexts?.changeLayoutOptions?.horizontal_all,
+      vertical: buttonTexts?.changeLayoutOptions?.vertical,
     }),
-    [],
+    [buttonTexts],
   );
 
   const verticalItems = useMemo(
     () => [
       {
-        description: layoutOptions.vertical.helpText,
+        description: layoutOptions.vertical?.helpText || '',
         id: 'VERTICAL',
         onSelect: () => onUpdateTimelineMode('VERTICAL'),
         selected: activeTimelineMode === 'VERTICAL',
-        title: layoutOptions.vertical.text,
+        title: layoutOptions.vertical?.text || 'Vertical',
       },
       {
-        description: layoutOptions.alternating.helpText,
+        description: layoutOptions.alternating?.helpText || '',
         id: 'VERTICAL_ALTERNATING',
         onSelect: () => onUpdateTimelineMode('VERTICAL_ALTERNATING'),
         selected: activeTimelineMode === 'VERTICAL_ALTERNATING',
-        title: layoutOptions.alternating.text,
+        title: layoutOptions.alternating?.text || 'Alternating',
       },
     ],
-    [activeTimelineMode],
+    [activeTimelineMode, layoutOptions],
   );
 
   // horizontal list OF options when the mode is `HORIZONTAL`
   const horizontalItems = useMemo(
     () => [
       {
-        description: layoutOptions.horizontal.helpText,
+        description: layoutOptions.horizontal?.helpText || '',
         id: 'HORIZONTAL',
         onSelect: () => {
           onUpdateTimelineMode('HORIZONTAL');
         },
         selected: activeTimelineMode === 'HORIZONTAL',
-        title: layoutOptions.horizontal.text,
+        title: layoutOptions.horizontal?.text || 'Horizontal',
       },
       {
-        description: layoutOptions.horizontal_all.helpText,
+        description: layoutOptions.horizontal_all?.helpText || '',
         id: 'HORIZONTAL_ALL',
         onSelect: () => {
           onUpdateTimelineMode('HORIZONTAL_ALL');
         },
         selected: activeTimelineMode === 'HORIZONTAL_ALL',
-        title: layoutOptions.horizontal.text,
+        title: layoutOptions.horizontal?.text || 'Horizontal All',
       },
     ],
-    [activeTimelineMode],
+    [activeTimelineMode, layoutOptions],
   );
 
   return (
     <PopOver
-      placeholder={buttonTexts.changeLayout}
+      placeholder={buttonTexts?.changeLayout || 'Change layout'}
       position={position}
       theme={theme}
       isDarkMode={isDarkMode}
@@ -113,13 +112,13 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
   position,
   isMobile,
 }: QuickJumpProp) => {
-  const { memoizedButtonTexts: buttonTexts } = useStableContext();
+  const { buttonTexts } = useTimelineContext();
 
   const ArrowDownIconMemo = useMemo(() => <ArrowDownIcon />, []);
 
   return (
     <PopOver
-      placeholder={buttonTexts.jumpTo}
+      placeholder={buttonTexts?.jumpTo || 'Jump to timeline item'}
       position={position}
       theme={theme}
       width={400}
@@ -137,7 +136,7 @@ const QuickJump: FunctionComponent<QuickJumpProp> = ({
           title: item.title ?? `Item ${index + 1}`,
         }))}
         theme={theme}
-        onClick={onActivateItem}
+        onClick={(id?: string) => id && onActivateItem(id)}
       />
     </PopOver>
   );
@@ -151,7 +150,7 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
   position,
   isMobile,
 }) => {
-  const { memoizedButtonTexts: buttonTexts } = useStableContext();
+  const { buttonTexts } = useTimelineContext();
 
   const ParaIconMemo = useMemo(() => <ParaIcon />, []);
 
@@ -177,7 +176,7 @@ const ChangeDensity: FunctionComponent<ChangeDensityProp> = ({
 
   return (
     <PopOver
-      placeholder={buttonTexts.changeDensity}
+      placeholder={buttonTexts?.changeDensity || 'Change text density'}
       theme={theme}
       isDarkMode={isDarkMode}
       position={position}

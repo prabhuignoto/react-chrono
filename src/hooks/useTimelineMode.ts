@@ -1,7 +1,15 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import { TimelineMode } from '@models/TimelineModel';
+import { useStableCallback } from './utils';
 
-type ExtendedTimelineMode = TimelineMode | 'HORIZONTAL_ALL';
+enum ExtendedTimelineModeEnum {
+  VERTICAL = 'VERTICAL',
+  HORIZONTAL = 'HORIZONTAL',
+  VERTICAL_ALTERNATING = 'VERTICAL_ALTERNATING',
+  HORIZONTAL_ALL = 'HORIZONTAL_ALL',
+}
+
+type ExtendedTimelineMode = keyof typeof ExtendedTimelineModeEnum;
 
 interface UseTimelineModeProps {
   initialMode: TimelineMode;
@@ -9,44 +17,47 @@ interface UseTimelineModeProps {
   updateHorizontalAllCards?: (showAll: boolean) => void;
 }
 
-// Optimized mode mapping for better performance
-const MODE_MAPPINGS: Record<string, ExtendedTimelineMode> = {
-  VERTICAL: 'VERTICAL',
-  HORIZONTAL: 'HORIZONTAL',
-  VERTICAL_ALTERNATING: 'VERTICAL_ALTERNATING',
-  HORIZONTAL_ALL: 'HORIZONTAL_ALL',
-} as const;
+interface UseTimelineModeReturn {
+  timelineMode: ExtendedTimelineMode;
+  handleTimelineUpdate: (newMode: string) => void;
+}
+
+// Optimized mode mapping with type safety
+const MODE_MAPPINGS = new Map<string, ExtendedTimelineMode>([
+  ['VERTICAL', ExtendedTimelineModeEnum.VERTICAL],
+  ['HORIZONTAL', ExtendedTimelineModeEnum.HORIZONTAL],
+  ['VERTICAL_ALTERNATING', ExtendedTimelineModeEnum.VERTICAL_ALTERNATING],
+  ['HORIZONTAL_ALL', ExtendedTimelineModeEnum.HORIZONTAL_ALL],
+]);
 
 export const useTimelineMode = ({
   initialMode,
   showAllCardsHorizontal = false,
   updateHorizontalAllCards,
-}: UseTimelineModeProps) => {
+}: UseTimelineModeProps): UseTimelineModeReturn => {
   const [timelineMode, setTimelineMode] = useState<ExtendedTimelineMode>(
     initialMode === 'HORIZONTAL' && showAllCardsHorizontal
       ? 'HORIZONTAL_ALL'
-      : initialMode,
+      : (initialMode as ExtendedTimelineMode),
   );
 
-  const updateHorizontalAllCardsRef = useRef(updateHorizontalAllCards);
-
-  // Keep callback ref updated without triggering re-renders
-  updateHorizontalAllCardsRef.current = updateHorizontalAllCards;
+  const stableUpdateHorizontalAllCards = useStableCallback(
+    updateHorizontalAllCards || (() => {}),
+  );
 
   const handleTimelineUpdate = useCallback(
     (newMode: string) => {
-      const mappedMode = MODE_MAPPINGS[newMode];
+      const mappedMode = MODE_MAPPINGS.get(newMode);
       if (!mappedMode || mappedMode === timelineMode) return;
 
       setTimelineMode(mappedMode);
 
       // Handle horizontal cards update with stable reference
-      if (updateHorizontalAllCardsRef.current) {
-        const shouldShowAll = mappedMode === 'HORIZONTAL_ALL';
-        updateHorizontalAllCardsRef.current(shouldShowAll);
-      }
+      const shouldShowAll =
+        mappedMode === ExtendedTimelineModeEnum.HORIZONTAL_ALL;
+      stableUpdateHorizontalAllCards(shouldShowAll);
     },
-    [timelineMode],
+    [timelineMode, stableUpdateHorizontalAllCards],
   );
 
   return {

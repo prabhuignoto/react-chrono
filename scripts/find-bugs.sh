@@ -58,37 +58,14 @@ else
   echo "✅ Tests passed."
 fi
 
-# Run cross-browser tests if time permits
-echo "Would you like to run cross-browser tests with Cypress? (y/n)"
+# Run cross-browser tests with Playwright
+echo "Would you like to run cross-browser tests with Playwright? (y/n)"
 read -r RUN_BROWSER_TESTS
 
 if [ "$RUN_BROWSER_TESTS" = "y" ]; then
-  echo "Running Cypress tests in Chrome..."
-  if ! pnpm cypress:run --browser chrome; then
-    echo "⚠️ Chrome tests failed or couldn't run. Check if Chrome is installed."
-    CHROME_STATUS=1
-  else
-    CHROME_STATUS=0
-  fi
-
-  echo "Running Cypress tests in Firefox..."
-  if ! pnpm cypress:run --browser firefox; then
-    echo "⚠️ Firefox tests failed or couldn't run. Check if Firefox is installed."
-    FIREFOX_STATUS=1
-  else
-    FIREFOX_STATUS=0
-  fi
-  
-  echo "Running Cypress tests in Edge..."
-  if ! pnpm cypress:run --browser edge; then
-    echo "⚠️ Edge tests failed or couldn't run. Check if Edge is installed."
-    EDGE_STATUS=1
-  else
-    EDGE_STATUS=0
-  fi
-  
-  if [ "${CHROME_STATUS:-1}" -ne 0 ] || [ "${FIREFOX_STATUS:-1}" -ne 0 ] || [ "${EDGE_STATUS:-1}" -ne 0 ]; then
-    echo "⚠️ Some cross-browser tests failed. Check the Cypress test reports."
+  echo "Running Playwright tests across browsers..."
+  if ! pnpm test:e2e; then
+    echo "⚠️ Cross-browser tests failed. Check the Playwright test reports."
     BROWSER_ISSUES=1
   else
     echo "✅ All cross-browser tests passed."
@@ -470,22 +447,10 @@ if [ $BROWSER_ISSUES -ne 0 ]; then
     echo "" >> bug_report.txt
     echo "Cross-Browser Test Results:" >> bug_report.txt
     
-    if [ "${CHROME_STATUS:-1}" -ne 0 ]; then
-      echo "- ⚠️ Chrome tests failed or couldn't run" >> bug_report.txt
+    if [ "$BROWSER_ISSUES" -eq 1 ]; then
+      echo "- ⚠️ Playwright cross-browser tests failed" >> bug_report.txt
     else
-      echo "- ✅ Chrome tests passed" >> bug_report.txt
-    fi
-    
-    if [ "${FIREFOX_STATUS:-1}" -ne 0 ]; then
-      echo "- ⚠️ Firefox tests failed or couldn't run" >> bug_report.txt
-    else
-      echo "- ✅ Firefox tests passed" >> bug_report.txt
-    fi
-    
-    if [ "${EDGE_STATUS:-1}" -ne 0 ]; then
-      echo "- ⚠️ Edge tests failed or couldn't run" >> bug_report.txt
-    else
-      echo "- ✅ Edge tests passed" >> bug_report.txt
+      echo "- ✅ Playwright cross-browser tests passed" >> bug_report.txt
     fi
   fi
 fi

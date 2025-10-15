@@ -18,10 +18,5 @@ export const useUIState = <T extends boolean>(
     setState((prev) => !prev as T);
   }, []);
 
-  // Memoized setState to prevent unnecessary re-renders
-  const setStateCallback = useCallback((value: T) => {
-    setState(value);
-  }, []);
-
-  return { state, toggle, setState: setStateCallback };
+  return { state, toggle, setState };
 };

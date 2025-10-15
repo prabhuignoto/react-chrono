@@ -1,22 +1,32 @@
 // Import necessary dependencies
 import React, { FunctionComponent, useMemo } from 'react';
-import { useStableContext, useDynamicContext } from '../contexts';
+import { useTimelineContext } from '../contexts';
 import Controls from '../timeline-elements/timeline-control/timeline-control';
-import { TimelineNavButton } from '../timeline-elements/timeline-control/timeline-control.styles';
+import { FullscreenControl } from '../timeline-elements/fullscreen-control';
+import { pickDefined } from '../../utils/propUtils';
+// Removed direct styled import; buttons use native <button> with classes now
 import { ChevronLeft, ChevronRight, CloseIcon } from '../icons';
-import { Toolbar } from '../toolbar';
 import {
   ChangeDensity,
   LayoutSwitcher,
   QuickJump,
 } from './timeline-popover-elements';
 import { TimelineToolbarProps } from './timeline-toolbar.model';
+import { TimelineMode } from '@models/TimelineModel';
 import {
-  ExtraControls,
-  SearchInput,
-  SearchWrapper,
-  SearchInfo,
-} from './timeline.style';
+  actionGroup as veActionGroup,
+  navigationGroup as veNavigationGroup,
+  searchControls as veSearchControls,
+  searchGroup as veSearchGroup,
+  searchInfo as veSearchInfo,
+  searchInput as veSearchInput,
+  searchWrapper as veSearchWrapper,
+  extraControls as veExtraControls,
+  toolbarWrapper as veToolbarWrapper,
+  searchButton as veSearchButton,
+  searchButtonIcon as veSearchButtonIcon,
+  hideOnMobile,
+} from '../toolbar/toolbar.css';
 
 // Helper function to convert ReactNode to string safely
 const getTextFromNode = (
@@ -64,6 +74,11 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   currentMatchIndex,
   onSearchKeyDown,
   searchInputRef,
+  timelineRef,
+  onEnterFullscreen,
+  onExitFullscreen,
+  onFullscreenError,
+  stickyToolbar,
 }: TimelineToolbarProps) => {
   // Access the stable and dynamic contexts
   const {
@@ -71,15 +86,13 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     enableQuickJump,
     toolbarPosition,
     enableLayoutSwitch,
-    memoizedButtonTexts: buttonTexts,
-  } = useStableContext();
-
-  const {
-    memoizedTheme: theme,
+    buttonTexts,
+    theme,
     isDarkMode: darkMode,
     textContentDensity: textDensity,
     isMobile,
-  } = useDynamicContext();
+    textResolver,
+  } = useTimelineContext();
 
   // Prepare QuickJump items with proper string conversions
   const quickJumpItems = useMemo(() => {
@@ -87,39 +100,11 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
       id: item.id ?? '',
       title: getTextFromNode(item.title),
       description: getTextFromNode(item.cardSubtitle),
-      active: item.active,
+      ...pickDefined({
+        active: item.active,
+      }),
     }));
   }, [items]);
-
-  // Define the toolbar items
-  const toolbarItems = useMemo(() => {
-    return [
-      {
-        id: 'timeline-controls',
-        label: 'Timeline Controls',
-        name: 'timeline_control',
-        onSelect: () => {},
-      },
-      {
-        id: 'timeline-popover',
-        label: 'timeline_popover',
-        name: 'popover',
-        onSelect: () => {},
-      },
-      {
-        id: 'layout-popover',
-        label: 'layout_popover',
-        name: 'popover',
-        onSelect: () => {},
-      },
-      {
-        id: 'change-density',
-        label: 'change_density',
-        name: 'changeDensity',
-        onSelect: () => {},
-      },
-    ];
-  }, []);
 
   // Define methods to determine button state
   const isLeftDisabled = useMemo(() => {
@@ -149,13 +134,31 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     onSearchChange(event.target.value);
   };
 
+  // Prevent search input from losing focus when timeline elements are clicked
+  const handleSearchInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    // Check if the new focus target is a timeline card or navigation element
+    const relatedTarget = event.relatedTarget as HTMLElement;
+
+    // If focus is moving to a timeline card or navigation, prevent blur
+    if (
+      relatedTarget &&
+      (relatedTarget.closest('[data-testid*="timeline"]') ||
+        relatedTarget.closest('.timeline-card') ||
+        relatedTarget.closest('.timeline-item'))
+    ) {
+      // Restore focus to search input after a short delay
+      setTimeout(() => {
+        if (searchInputRef?.current) {
+          searchInputRef.current.focus();
+        }
+      }, 10);
+    }
+  };
+
   // Handle clear search and focus the input
   const handleClearSearch = () => {
     onClearSearch();
-    // Focus the search input after clearing
-    setTimeout(() => {
-      searchInputRef?.current?.focus();
-    }, 0);
+    // The focus restoration is now handled in the hook
   };
 
   // Add KeyDown handler for Enter key navigation
@@ -165,35 +168,12 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     if (event.key === 'Enter' && totalMatches > 0) {
       event.preventDefault(); // Prevent potential form submission
 
-      // Save the current search query before navigation
-      const currentQuery = searchQuery;
-
-      // Navigate to next match
+      // Navigate to next match - focus restoration is handled in the hook
       if (onSearchKeyDown) {
-        // Use the provided handler if available
         onSearchKeyDown(event);
       } else {
-        onNextMatch(); // Use default navigation
+        onNextMatch();
       }
-
-      // Re-focus the search input after a short delay
-      // This allows the navigation to complete first
-      setTimeout(() => {
-        if (searchInputRef?.current) {
-          searchInputRef.current.focus();
-
-          // If the value has been cleared, restore it
-          if (searchInputRef.current.value === '' && currentQuery) {
-            // This is a backup to ensure the search query persists
-            // The main handling should be in the parent component
-            onSearchChange(currentQuery);
-          }
-
-          // Ensure the cursor is at the end of the text
-          const length = searchInputRef.current.value.length;
-          searchInputRef.current.setSelectionRange(length, length);
-        }
-      }, 50);
     }
   };
 
@@ -203,130 +183,233 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     [totalMatches, slideShowRunning],
   );
 
+  // ARIA: tie the input to the live match count
+  const searchInfoId = useMemo(() => {
+    return id ? `timeline-search-info-${id}` : 'timeline-search-info';
+  }, [id]);
+
   // Render the TimelineToolbar component
   return (
-    <Toolbar items={toolbarItems} theme={theme}>
-      <Controls
-        disableLeft={isLeftDisabled}
-        disableRight={isRightDisabled}
-        id={id}
-        onFirst={onFirst}
-        onLast={onLast}
-        onNext={onNext}
-        onPrevious={onPrevious}
-        onReplay={onRestartSlideshow}
-        slideShowEnabled={slideShowEnabled}
-        slideShowRunning={slideShowRunning}
-        isDark={darkMode}
-        onToggleDarkMode={toggleDarkMode}
-        onPaused={onPaused}
-        activeTimelineItem={activeTimelineItem}
-        totalItems={totalItems}
-      />
-      <SearchWrapper theme={theme}>
-        <SearchInput
-          ref={searchInputRef}
-          type="search"
-          placeholder={buttonTexts?.searchPlaceholder ?? 'Search Timeline'}
-          value={searchQuery}
-          onChange={handleInputChange}
-          onKeyDown={handleSearchKeyDown}
-          aria-label={buttonTexts?.searchAriaLabel ?? 'Search timeline content'}
-          disabled={slideShowRunning}
-        />
-        {searchQuery && (
-          <TimelineNavButton
-            onClick={handleClearSearch}
-            title={buttonTexts?.clearSearch ?? 'Clear Search'}
-            aria-label={buttonTexts?.clearSearch ?? 'Clear Search'}
-            theme={theme}
-            style={{
-              height: '24px',
-              width: '24px',
-              marginRight: '0.5rem',
-            }}
-          >
-            <CloseIcon />
-          </TimelineNavButton>
-        )}
-        {totalMatches > 0 && (
-          <SearchInfo theme={theme}>
-            {`${currentMatchIndex + 1} / ${totalMatches}`}
-          </SearchInfo>
-        )}
-        {searchQuery && (
-          <>
-            <div className="timeline-nav-wrapper">
-              <TimelineNavButton
-                onClick={onPreviousMatch}
-                title={buttonTexts?.previousMatch ?? 'Previous Match'}
-                aria-label={buttonTexts?.previousMatch ?? 'Previous Match'}
-                disabled={disableSearchNav}
-                theme={theme}
-                style={{ height: '24px', width: '24px' }}
-              >
-                <ChevronLeft />
-              </TimelineNavButton>
-            </div>
-            <div className="timeline-nav-wrapper">
-              <TimelineNavButton
-                onClick={onNextMatch}
-                title={buttonTexts?.nextMatch ?? 'Next Match'}
-                aria-label={buttonTexts?.nextMatch ?? 'Next Match'}
-                disabled={disableSearchNav}
-                theme={theme}
-                style={{ height: '24px', width: '24px' }}
-              >
-                <ChevronRight />
-              </TimelineNavButton>
-            </div>
-          </>
-        )}
-      </SearchWrapper>
-      <ExtraControls
-        $hide={hideExtraControls}
-        $slideShowRunning={slideShowRunning}
-        key="timeline-extra-controls"
+    <div
+      className={veToolbarWrapper({ sticky: Boolean(stickyToolbar) })}
+      role="toolbar"
+      aria-label="Timeline toolbar"
+      aria-orientation="horizontal"
+    >
+      <div
+        className={veNavigationGroup}
+        role="group"
+        aria-label="Timeline navigation controls"
       >
-        <div className="control-wrapper" key="quick-jump">
-          {enableQuickJump ? (
-            <QuickJump
-              activeItem={activeTimelineItem}
-              isDarkMode={darkMode}
-              items={quickJumpItems}
-              onActivateItem={onActivateTimelineItem}
-              theme={theme}
-              position={toolbarPosition}
-              isMobile={isMobile}
-            />
-          ) : null}
-        </div>
-        <div className="control-wrapper" key="layout-switcher">
-          {!cardLess && enableLayoutSwitch ? (
-            <LayoutSwitcher
-              isDarkMode={darkMode}
-              theme={theme}
-              onUpdateTimelineMode={onUpdateTimelineMode}
-              mode={mode}
-              position={toolbarPosition}
-              isMobile={isMobile}
-            />
-          ) : null}
-        </div>
-        {canShowDensity ? (
-          <div className="control-wrapper" key="change-density">
-            <ChangeDensity
-              isDarkMode={darkMode}
-              theme={theme}
-              onChange={onUpdateTextContentDensity}
-              position={toolbarPosition}
-              selectedDensity={textDensity}
-              isMobile={isMobile}
-            ></ChangeDensity>
+        <Controls
+          disableLeft={isLeftDisabled}
+          disableRight={isRightDisabled}
+          id={id}
+          isDark={darkMode}
+          onToggleDarkMode={toggleDarkMode}
+          activeTimelineItem={activeTimelineItem || 0}
+          totalItems={totalItems}
+          {...pickDefined({
+            onFirst,
+            onLast,
+            onNext,
+            onPrevious,
+            onReplay: onRestartSlideshow,
+            slideShowEnabled,
+            slideShowRunning,
+            onPaused,
+          })}
+        />
+      </div>
+      <div
+        className={`${veSearchGroup} ${hideOnMobile}`}
+        role="search"
+        aria-label="Timeline search"
+      >
+        <div className={veSearchWrapper}>
+          <input
+            ref={searchInputRef}
+            type="search"
+            placeholder={textResolver.searchPlaceholder()}
+            value={searchQuery}
+            onChange={handleInputChange}
+            onKeyDown={(event) => {
+              // Support Enter for next, Shift+Enter for previous, Escape to clear
+              if (event.key === 'Escape') {
+                event.preventDefault();
+                handleClearSearch();
+                return;
+              }
+              if (event.key === 'Enter' && totalMatches > 0) {
+                event.preventDefault();
+                if (event.shiftKey) {
+                  onPreviousMatch();
+                } else {
+                  onNextMatch();
+                }
+                return;
+              }
+              handleSearchKeyDown(event);
+            }}
+            onBlur={handleSearchInputBlur}
+            aria-label={textResolver.searchAriaLabel()}
+            disabled={slideShowRunning}
+            aria-keyshortcuts="Enter Shift+Enter Escape"
+            aria-describedby={
+              searchQuery && totalMatches > 0 ? searchInfoId : undefined
+            }
+            autoComplete="off"
+            spellCheck="false"
+            className={veSearchInput}
+          />
+          {searchQuery && (
+            <button
+              className={veSearchButton}
+              onClick={handleClearSearch}
+              title={textResolver.clearSearch()}
+              aria-label={textResolver.clearSearch()}
+              type="button"
+            >
+              <span className={veSearchButtonIcon}>
+                <CloseIcon />
+              </span>
+            </button>
+          )}
+          <div
+            className={veSearchControls}
+            role="group"
+            aria-label="Search navigation"
+          >
+            {totalMatches > 0 && (
+              <span
+                id={searchInfoId}
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+                className={veSearchInfo}
+                aria-label={`Search result ${currentMatchIndex + 1} of ${totalMatches}`}
+              >
+                {`${currentMatchIndex + 1} / ${totalMatches}`}
+              </span>
+            )}
+            {searchQuery && totalMatches === 0 && (
+              <span
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+                style={{
+                  position: 'absolute',
+                  width: 1,
+                  height: 1,
+                  padding: 0,
+                  margin: -1,
+                  overflow: 'hidden',
+                  clip: 'rect(0, 0, 0, 0)',
+                  whiteSpace: 'nowrap',
+                  border: 0,
+                }}
+              >
+                {textResolver.noSearchResults()}
+              </span>
+            )}
+            {searchQuery && (
+              <>
+                <button
+                  className={veSearchButton}
+                  onClick={onPreviousMatch}
+                  title={textResolver.previousMatch()}
+                  aria-label={textResolver.previousMatch()}
+                  disabled={disableSearchNav}
+                  type="button"
+                >
+                  <span className={veSearchButtonIcon}>
+                    <ChevronLeft />
+                  </span>
+                </button>
+                <button
+                  className={veSearchButton}
+                  onClick={onNextMatch}
+                  title={textResolver.nextMatch()}
+                  aria-label={textResolver.nextMatch()}
+                  disabled={disableSearchNav}
+                  type="button"
+                >
+                  <span className={veSearchButtonIcon}>
+                    <ChevronRight />
+                  </span>
+                </button>
+              </>
+            )}
           </div>
-        ) : null}{' '}
-      </ExtraControls>
-    </Toolbar>
+        </div>
+      </div>
+      <div className={veActionGroup} role="group" aria-label="Timeline actions">
+        <div
+          className={`${veExtraControls} ${hideOnMobile}`}
+          key="timeline-extra-controls"
+          style={{ visibility: hideExtraControls ? 'hidden' : 'visible' }}
+          role="group"
+          aria-label="Additional timeline controls"
+        >
+          <div className="control-wrapper" key="quick-jump">
+            {enableQuickJump ? (
+              <QuickJump
+                activeItem={activeTimelineItem ?? 0}
+                isDarkMode={darkMode}
+                items={quickJumpItems}
+                onActivateItem={onActivateTimelineItem}
+                theme={theme}
+                position={toolbarPosition}
+                isMobile={isMobile}
+              />
+            ) : null}
+          </div>
+          <div className="control-wrapper" key="layout-switcher">
+            {!cardLess && enableLayoutSwitch ? (
+              <LayoutSwitcher
+                isDarkMode={darkMode}
+                theme={theme}
+                onUpdateTimelineMode={(modeString: string) =>
+                  onUpdateTimelineMode(modeString as TimelineMode)
+                }
+                position={toolbarPosition}
+                isMobile={isMobile}
+                {...pickDefined({
+                  mode,
+                })}
+              />
+            ) : null}
+          </div>
+          {canShowDensity ? (
+            <div className="control-wrapper" key="change-density">
+              <ChangeDensity
+                isDarkMode={darkMode}
+                theme={theme}
+                onChange={onUpdateTextContentDensity}
+                position={toolbarPosition}
+                selectedDensity={textDensity}
+                isMobile={isMobile}
+              ></ChangeDensity>
+            </div>
+          ) : null}
+          <div className="control-wrapper" key="fullscreen-control">
+            {timelineRef && (
+              <FullscreenControl
+                targetRef={timelineRef}
+                theme={theme}
+                size="medium"
+                disabled={false}
+                {...pickDefined({
+                  onEnterFullscreen,
+                  onExitFullscreen,
+                  onError: onFullscreenError,
+                })}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,12 +1,11 @@
-import { FunctionComponent, memo, useContext, useMemo } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import { FunctionComponent, memo, useMemo } from 'react';
+import { useTimelineContext } from '../../contexts';
 import { SubTitleMemo } from '../memoized/subtitle-memo';
 import { TitleMemo } from '../memoized/title-memo';
 import { ContentHeaderProps } from './header-footer.model';
-import {
-  CardTitleSemantic,
-  TimelineCardHeader,
-} from './timeline-card-content.styles';
+import { timelineCardHeader } from './timeline-card-content.css';
+import { pickDefined } from '../../../utils/propUtils';
+// Styled component removed in VE migration
 
 /**
  * ContentHeader component
@@ -24,30 +23,37 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
   ({ title, url, media, content, cardTitle }: ContentHeaderProps) => {
     // Using context to get global values
     const { fontSizes, classNames, theme, isMobile, semanticTags } =
-      useContext(GlobalContext);
+      useTimelineContext();
 
     const isNotMedia = useMemo(() => !media, [media]);
 
     return (
-      <TimelineCardHeader>
+      <header className={timelineCardHeader}>
         {/* Render mobile title only if cardTitle exists */}
         {isMobile && cardTitle ? (
-          <CardTitleSemantic
-            as={semanticTags?.cardTitle ?? 'span'}
-            $fontSize={'1.2rem'}
-            theme={theme}
+          <h3
+            style={{
+              fontSize: '1.5rem',
+              color: theme?.cardTitleColor || theme?.titleColor,
+              margin: 0,
+              fontWeight: 600,
+              lineHeight: 1.4,
+            }}
           >
             {cardTitle}
-          </CardTitleSemantic>
+          </h3>
         ) : null}
 
         {isNotMedia ? (
           <TitleMemo
             title={title}
             theme={theme}
-            url={url}
-            fontSize={fontSizes?.cardTitle}
-            classString={classNames?.cardTitle}
+            url={url || ''}
+            fontSize={fontSizes?.cardTitle || ''}
+            classString={classNames?.cardTitle || ''}
+            {...pickDefined({
+              color: theme?.cardTitleColor || theme?.titleColor,
+            })}
           />
         ) : null}
 
@@ -57,11 +63,14 @@ const ContentHeader: FunctionComponent<ContentHeaderProps> = memo(
           <SubTitleMemo
             content={content}
             theme={theme}
-            fontSize={fontSizes?.cardSubtitle}
-            classString={classNames?.cardSubTitle}
+            fontSize={fontSizes?.cardSubtitle || ''}
+            classString={classNames?.cardSubTitle || ''}
+            {...pickDefined({
+              color: theme?.cardSubtitleColor,
+            })}
           />
         ) : null}
-      </TimelineCardHeader>
+      </header>
     );
   },
 );

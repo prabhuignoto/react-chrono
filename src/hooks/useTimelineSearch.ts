@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef, useMemo } from 'react';
+import { useCallback, useState, useRef, useMemo, useEffect } from 'react';
 import { TimelineCardModel } from '@models/TimelineItemModel';
 import { getSearchableText } from '../utils/timelineUtils';
 import { useDebouncedCallback } from 'use-debounce';
@@ -19,6 +19,10 @@ export const useTimelineSearch = ({
   const [currentMatchIndex, setCurrentMatchIndex] = useState(-1);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const activeItemIndex = useRef<number>(0);
+  const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
+  const isFirstSearchRef = useRef<boolean>(true);
 
   // Cache callback refs to prevent unnecessary re-renders
   const onTimelineUpdatedRef = useRef(onTimelineUpdated);
@@ -47,11 +51,19 @@ export const useTimelineSearch = ({
     });
   }, [items]);
 
-  // Optimized focus helper with reduced timeout
-  const focusSearchInput = useCallback(() => {
+  // Optimized focus helper - only focus when needed, not during typing
+  const focusSearchInput = useCallback((forceRefocus = false) => {
+    // Only refocus if the search input is not currently focused or if forced
+    if (!forceRefocus && document.activeElement === searchInputRef.current) {
+      return;
+    }
+
     // Use requestAnimationFrame for better performance
     requestAnimationFrame(() => {
-      if (searchInputRef.current) {
+      if (
+        searchInputRef.current &&
+        (forceRefocus || document.activeElement !== searchInputRef.current)
+      ) {
         searchInputRef.current.focus();
         const length = searchInputRef.current.value.length;
         searchInputRef.current.setSelectionRange(length, length);
@@ -71,11 +83,17 @@ export const useTimelineSearch = ({
 
       const queryLower = trimmedQuery.toLowerCase();
       const results: number[] = [];
+      const maxResults = 100; // Limit results for performance
 
-      // Use for-loop for better performance than array methods
+      // Use for-loop with early break for better performance
       for (let i = 0; i < searchableContent.length; i++) {
-        if (searchableContent[i].content.includes(queryLower)) {
+        if (searchableContent[i]?.content?.includes(queryLower)) {
           results.push(i);
+
+          // Early break if we have enough results
+          if (results.length >= maxResults) {
+            break;
+          }
         }
       }
 
@@ -83,24 +101,54 @@ export const useTimelineSearch = ({
 
       if (results.length > 0) {
         setCurrentMatchIndex(0);
-        const firstMatchData = searchableContent[results[0]];
-        if (firstMatchData?.id) {
-          activeItemIndex.current = results[0];
-          onTimelineUpdatedRef.current?.(results[0]);
-          handleTimelineItemClickRef.current(firstMatchData.id);
-          focusSearchInput();
+        const firstResult = results[0];
+        const firstMatchData =
+          firstResult !== undefined
+            ? searchableContent[firstResult]
+            : undefined;
+        if (firstMatchData?.id && firstResult !== undefined) {
+          activeItemIndex.current = firstResult;
+
+          // Clear any existing timeout
+          if (searchTimeoutRef.current) {
+            clearTimeout(searchTimeoutRef.current);
+          }
+
+          // On first search, focus immediately. On subsequent searches, use delay
+          const delay = isFirstSearchRef.current ? 100 : 400;
+          isFirstSearchRef.current = false;
+
+          searchTimeoutRef.current = setTimeout(() => {
+            onTimelineUpdatedRef.current?.(firstResult);
+            handleTimelineItemClickRef.current(firstMatchData.id);
+            // After navigating to first match, focus the item row/card
+            requestAnimationFrame(() => {
+              const itemId = firstMatchData.id;
+              // Try vertical first
+              const verticalRow = document.querySelector(
+                `[data-testid="vertical-item-row"][data-item-id="${itemId}"]`,
+              ) as HTMLElement | null;
+              const target =
+                verticalRow ||
+                (document.getElementById(
+                  `timeline-card-${itemId}`,
+                ) as HTMLElement | null);
+              try {
+                target?.focus?.({ preventScroll: true });
+              } catch {}
+            });
+          }, delay);
         }
       } else {
         setCurrentMatchIndex(-1);
-        focusSearchInput();
       }
     },
-    [searchableContent, focusSearchInput],
+    [searchableContent],
   );
 
   // Optimized debounced search with better performance
-  const debouncedSearch = useDebouncedCallback(findMatches, 150, {
-    maxWait: 500,
+  const debouncedSearch = useDebouncedCallback(findMatches, 200, {
+    maxWait: 600,
     leading: false,
     trailing: true,
   });
@@ -113,22 +161,38 @@ export const useTimelineSearch = ({
     [debouncedSearch],
   );
 
-  const clearSearch = useCallback(() => {
-    setSearchQuery('');
-    setSearchResults([]);
-    setCurrentMatchIndex(-1);
-    debouncedSearch.cancel();
+  const clearSearch = useCallback(
+    (preservePosition = false) => {
+      setSearchQuery('');
+      setSearchResults([]);
+      setCurrentMatchIndex(-1);
+      debouncedSearch.cancel();
 
-    if (items.length > 0) {
-      activeItemIndex.current = 0;
-      onTimelineUpdatedRef.current?.(0);
-
-      const firstItem = items[0];
-      if (firstItem?.id) {
-        handleTimelineItemClickRef.current(firstItem.id);
+      // Clear any pending auto-focus timeout
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
       }
-    }
-  }, [items, debouncedSearch]);
+
+      // Reset first search flag when clearing
+      isFirstSearchRef.current = true;
+
+      if (items.length > 0 && !preservePosition) {
+        activeItemIndex.current = 0;
+        onTimelineUpdatedRef.current?.(0);
+
+        const firstItem = items[0];
+        if (firstItem?.id) {
+          handleTimelineItemClickRef.current(firstItem.id);
+        }
+      }
+
+      // Force refocus after clearing (only when user explicitly clears)
+      if (!preservePosition) {
+        focusSearchInput(true);
+      }
+    },
+    [items, debouncedSearch, focusSearchInput],
+  );
 
   // Optimized navigation with bounds checking
   const navigateMatches = useCallback(
@@ -144,16 +208,36 @@ export const useTimelineSearch = ({
       if (nextIndex === currentMatchIndex) return;
 
       const newTimelineIndex = searchResults[nextIndex];
-      const matchData = searchableContent[newTimelineIndex];
+      const matchData =
+        newTimelineIndex !== undefined
+          ? searchableContent[newTimelineIndex]
+          : undefined;
 
       setCurrentMatchIndex(nextIndex);
-      activeItemIndex.current = newTimelineIndex;
-
-      onTimelineUpdatedRef.current?.(newTimelineIndex);
+      if (newTimelineIndex !== undefined) {
+        activeItemIndex.current = newTimelineIndex;
+        onTimelineUpdatedRef.current?.(newTimelineIndex);
+      }
 
       if (matchData?.id) {
         handleTimelineItemClickRef.current(matchData.id);
-        focusSearchInput();
+        // Focus the matched item to make it visible to screen readers
+        requestAnimationFrame(() => {
+          const itemId = matchData.id;
+          const verticalRow = document.querySelector(
+            `[data-testid="vertical-item-row"][data-item-id="${itemId}"]`,
+          ) as HTMLElement | null;
+          const target =
+            verticalRow ||
+            (document.getElementById(
+              `timeline-card-${itemId}`,
+            ) as HTMLElement | null);
+          try {
+            target?.focus?.({ preventScroll: true });
+          } catch {}
+        });
+        // Then return focus to search for continued navigation
+        focusSearchInput(true);
       }
     },
     [searchResults, currentMatchIndex, searchableContent, focusSearchInput],
@@ -186,6 +270,15 @@ export const useTimelineSearch = ({
     },
     [searchResults.length, handleNextMatch, clearSearch],
   );
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return {
     searchQuery,

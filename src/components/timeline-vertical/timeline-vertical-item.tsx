@@ -2,21 +2,23 @@ import { VerticalItemModel } from '@models/TimelineVerticalModel';
 import cls from 'classnames';
 import {
   useCallback,
-  useContext,
   useMemo,
   useRef,
   FunctionComponent,
   ReactElement,
 } from 'react';
-import { GlobalContext } from '../GlobalContext';
+import { useTimelineContext } from '../contexts';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
 import { TimelinePoint } from './timeline-point';
 import {
-  TimelineCardContentWrapper,
-  TimelineTitleWrapper,
-  VerticalItemWrapper,
-} from './timeline-vertical.styles';
+  timelineCardContentVisible,
+  timelineCardContentWrapper,
+  timelineTitleWrapper,
+  verticalItemWrapper,
+  verticalItemWrapperNested,
+} from './timeline-vertical.css';
+import { pickDefined } from '../../utils/propUtils';
 
 /**
  * Represents a single item (row) in the vertical timeline.
@@ -58,86 +60,165 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     nestedCardHeight, // Specific height for nested cards
   } = props;
 
-  // Access global settings and theme from context
+  // Extract only used context values to avoid unused variable warnings
   const {
-    cardHeight, // Default card height
-    mode, // Timeline mode (VERTICAL, VERTICAL_ALTERNATING)
-    flipLayout, // Reverse layout order (title/point/card)?
-    timelinePointDimension, // Size of the timeline point
-    lineWidth, // Width of the timeline central line
-    disableClickOnCircle, // Prevent clicks on the timeline point?
-    cardLess, // Mode without cards, only points/titles
-    theme, // Theme object
-    classNames, // Custom class names for sub-elements
-    textOverlay, // Style where text overlays media
-    mediaHeight, // Height for media elements
-    disableInteraction, // Disable all user interactions?
-    isMobile, // Is the view currently mobile?
-  } = useContext(GlobalContext);
+    theme,
+    mode,
+    flipLayout,
+    lineWidth,
+    cardLess,
+    classNames,
+    timelinePointDimension,
+    disableClickOnCircle,
+    disableInteraction,
+    isMobile, // Use responsive detection from context
+  } = useTimelineContext();
+
+  // Helper functions for layout calculations
+  const calculateCardWidth = useCallback(() => {
+    if (alternateCards) {
+      return isMobile ? '75%' : '37.5%';
+    }
+    if (!title) {
+      return '95%';
+    }
+    return isMobile ? '75%' : '85%';
+  }, [alternateCards, isMobile, title]);
+
+  const calculateJustifyContent = useCallback(() => {
+    const flip = !alternateCards && flipLayout;
+    if (flip) return 'flex-end';
+    return className === 'left' ? 'flex-end' : 'flex-start';
+  }, [alternateCards, flipLayout, className]);
+
+  const calculateCardOrder = useCallback(() => {
+    if (alternateCards) {
+      // Alternating mode: left side = card first (1), right side = card last (3)
+      return className === 'left' ? 1 : 3;
+    }
+
+    if (flipLayout) {
+      // Vertical flip mode: card first (1)
+      return 1;
+    }
+
+    // Standard vertical mode: card last (3)
+    return 3;
+  }, [alternateCards, flipLayout, className]);
+
+  const calculateTitleOrder = useCallback(() => {
+    if (alternateCards) {
+      // Alternating mode: left side = title last (3), right side = title first (1)
+      return className === 'left' ? 3 : 1;
+    }
+
+    if (flipLayout) {
+      // Vertical flip mode: title last (3)
+      return 3;
+    }
+
+    // Standard vertical mode: title first (1)
+    return 1;
+  }, [alternateCards, flipLayout, className]);
+
+  const calculatePointOrder = useCallback(() => {
+    // Point is always in the middle (order 2) for all modes
+    return 2;
+  }, []);
 
   /**
    * Callback handler triggered by the TimelinePoint when it becomes active.
    * Calculates the item's position and notifies the parent.
-   * @param {number} offset - Vertical offset within the point element itself.
    */
   const handleOnActive = useCallback(
     (offset: number) => {
       if (contentRef.current && onActive) {
         const { offsetTop, clientHeight } = contentRef.current;
-        // Call the parent's onActive with calculated position data
         onActive(offsetTop + offset, offsetTop, clientHeight);
       }
     },
-    [onActive], // Dependency: only recreate if onActive changes
+    [onActive],
   );
 
   /**
    * Handler for the "Read More" action within the card.
-   * Uses a short timeout to likely ensure the DOM has updated (card expanded)
-   * before recalculating the active position.
+   * Recalculates position after content changes with a small delay.
    */
   const handleShowMore = useCallback(() => {
-    // Use timeout to defer execution, allowing potential layout shifts to settle
-    setTimeout(() => {
-      handleOnActive(0); // Recalculate position after content change
-    }, 100); // Small delay (adjust if needed)
-  }, [handleOnActive]); // Dependency: handleOnActive
+    setTimeout(() => handleOnActive(0), 100);
+  }, [handleOnActive]);
 
-  /**
-   * Memoized Timeline Item Title component.
-   * Avoids re-rendering the title if its specific props haven't changed.
-   */
-  const Title = useMemo(() => {
-    return (
-      <TimelineTitleWrapper
-        className={className} // 'left' or 'right'
-        $alternateCards={alternateCards} // Pass prop to styled-component
-        mode={mode}
-        $hide={!title} // Hide wrapper if no title text
-        // Flip title position only in non-alternating vertical mode
-        $flip={!alternateCards && flipLayout}
+  // Memoized title display configuration
+  const titleConfig = useMemo(
+    () => ({
+      display:
+        (!title && mode === 'VERTICAL') || (isMobile && !alternateCards)
+          ? 'none'
+          : 'flex',
+      width: alternateCards ? '37.5%' : '10%',
+      // Fix text alignment for alternating mode:
+      // - Left side (title appears last): align left
+      // - Right side (title appears first): align right
+      textAlign: alternateCards
+        ? className === 'left'
+          ? 'left'
+          : 'right'
+        : ('right' as 'left' | 'right'),
+      align: (flipLayout && !alternateCards ? 'left' : 'right') as
+        | 'left'
+        | 'right',
+    }),
+    [title, mode, alternateCards, flipLayout, className, isMobile],
+  );
+
+  const titleClassName = useMemo(
+    () => `${timelineTitleWrapper} ${className} ${flipLayout ? 'flipped' : ''}`,
+    [className, flipLayout],
+  );
+
+  const Title = useMemo(
+    () => (
+      <div
+        className={titleClassName}
+        data-mode={mode}
+        style={{
+          display: titleConfig.display,
+          width: titleConfig.width,
+          order: calculateTitleOrder(),
+          // textAlign: titleConfig.textAlign,
+          // Add proper spacing for title
+          paddingLeft: alternateCards ? '0' : '0.75rem',
+          paddingRight: alternateCards ? '0' : '0.75rem',
+          marginRight: alternateCards && className === 'right' ? '1rem' : '0',
+          marginLeft: alternateCards && className === 'left' ? '1rem' : '0',
+        }}
       >
         <TimelineItemTitle
           title={title as string}
-          active={active && !disableInteraction} // Highlight if active and interaction enabled
           theme={theme}
-          // Align text based on layout mode
-          align={flipLayout && !alternateCards ? 'left' : 'right'}
-          classString={classNames?.title} // Optional custom class
+          align={titleConfig.textAlign}
+          {...(active !== undefined
+            ? { active: active && !disableInteraction }
+            : {})}
+          {...pickDefined({
+            classString: classNames?.title,
+          })}
         />
-      </TimelineTitleWrapper>
-    );
-  }, [
-    active,
-    title,
-    className,
-    alternateCards,
-    mode,
-    flipLayout,
-    theme,
-    classNames?.title, // Correct dependency
-    disableInteraction, // Added dependency
-  ]);
+      </div>
+    ),
+    [
+      titleClassName,
+      mode,
+      titleConfig.textAlign,
+      title,
+      active,
+      disableInteraction,
+      classNames?.title,
+      calculateTitleOrder,
+      alternateCards,
+      className,
+    ],
+  );
 
   /**
    * Memoized CSS classes for the main VerticalItemWrapper.
@@ -146,11 +227,12 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   const verticalItemClass = useMemo(
     () =>
       cls(
-        'vertical-item-row', // Base class
-        { [className]: !!className }, // Add 'left' or 'right' if className is present
-        { visible: visible }, // Add 'visible' class if visible prop is true
+        'vertical-item-row',
+        { [className]: !!className },
+        { visible: visible },
+        { 'no-alt': !alternateCards },
       ),
-    [className, visible],
+    [className, visible, alternateCards],
   );
 
   /**
@@ -166,37 +248,33 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     [className, visible],
   );
 
-  /**
-   * Memoized Timeline Point component.
-   * Avoids re-rendering the point if its specific props haven't changed.
-   */
-  const TimelinePointMemo = useMemo(
-    () => (
-      <TimelinePoint
-        active={active}
-        alternateCards={alternateCards}
-        className={className} // 'left' or 'right'
-        id={id}
-        mode={mode}
-        onActive={handleOnActive} // Pass down the memoized handler
-        onClick={onClick}
-        slideShowRunning={slideShowRunning}
-        iconChild={iconChild} // Custom icon
-        timelinePointDimension={timelinePointDimension}
-        lineWidth={lineWidth}
-        disableClickOnCircle={disableClickOnCircle}
-        cardLess={cardLess}
-        isMobile={isMobile}
-      />
-    ),
+  // TimelinePoint props configuration
+  const timelinePointProps = useMemo(
+    () => ({
+      className,
+      mode,
+      onActive: handleOnActive,
+      onClick: onClick || (() => {}),
+      isMobile,
+      ...pickDefined({
+        active,
+        alternateCards,
+        id,
+        slideShowRunning,
+        iconChild,
+        timelinePointDimension,
+        lineWidth,
+        disableClickOnCircle,
+        cardLess,
+      }),
+    }),
     [
-      // Comprehensive dependency list for memoization
       active,
       alternateCards,
       className,
       id,
       mode,
-      handleOnActive, // Use the memoized callback
+      handleOnActive,
       onClick,
       slideShowRunning,
       iconChild,
@@ -208,14 +286,37 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     ],
   );
 
+  const TimelinePointMemo = useMemo(
+    () => (
+      <div
+        style={{
+          order: calculatePointOrder(),
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'stretch',
+          minHeight: '100%',
+          width: alternateCards ? '10%' : '10%',
+          position: 'relative',
+          zIndex: -1,
+          // Add proper spacing margins
+          marginLeft: alternateCards ? '1rem' : '0.75rem',
+          marginRight: alternateCards ? '1rem' : '0.75rem',
+        }}
+      >
+        <TimelinePoint {...timelinePointProps} />
+      </div>
+    ),
+    [timelinePointProps, calculatePointOrder, alternateCards],
+  );
+
   /**
    * Determines if the title section should be rendered.
-   * Titles are typically hidden for nested items or on mobile for space.
+   * Show title when there is a title text and it's not nested.
    */
   const canShowTitle = useMemo(() => {
-    // Show title only if it's NOT nested AND NOT mobile view
-    return !isNested && !isMobile;
-  }, [isNested, isMobile]);
+    // Show title if it exists and it's not a nested component
+    return !!title && !isNested;
+  }, [title, isNested]);
 
   // Get a readable title for screen readers
   const accessibleTitle = useMemo(() => {
@@ -230,69 +331,85 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
 
   // Render the complete timeline item structure
   return (
-    <VerticalItemWrapper
-      as="li"
-      $alternateCards={alternateCards}
-      $cardHeight={isNested ? nestedCardHeight : cardHeight}
-      $cardLess={cardLess}
-      $isNested={isNested}
-      className={verticalItemClass}
+    <li
+      className={`${verticalItemWrapper({
+        visible: visible !== false,
+        alignment: alternateCards
+          ? className === 'left'
+            ? 'left'
+            : 'right'
+          : 'center',
+        alternating: alternateCards,
+      })} ${verticalItemClass} ${isNested ? verticalItemWrapperNested : ''}`}
       data-testid="vertical-item-row"
       data-item-id={id}
       key={id}
       ref={contentRef}
-      theme={theme}
-      aria-current={active ? 'true' : undefined}
+      aria-current={active ? 'step' : undefined}
       aria-label={accessibleTitle}
+      role="listitem"
+      tabIndex={active ? 0 : -1}
+      aria-selected={active}
     >
       {/* Conditionally render the Title */}
       {canShowTitle ? Title : null}
 
       {/* Wrapper for the card content */}
-      <TimelineCardContentWrapper
-        // --- Props passed to styled-component ---
-        $alternateCards={alternateCards}
-        $noTitle={!title} // Adjust width if title is absent
-        // Flip content position only in non-alternating vertical mode
-        $flip={!alternateCards && flipLayout}
-        // Use media height if text overlay is active, otherwise card height
-        height={textOverlay ? mediaHeight : cardHeight}
-        $isMobile={isMobile}
-        // --- Standard React props ---
-        className={contentClass} // Apply memoized classes
+      <div
+        className={`${timelineCardContentWrapper} ${contentClass} ${visible ? timelineCardContentVisible : ''}`}
+        style={{
+          width: calculateCardWidth(),
+          justifyContent: calculateJustifyContent(),
+          order: calculateCardOrder(),
+          // Add proper spacing for card content
+          paddingLeft: alternateCards ? '0' : '0.75rem',
+          paddingRight: alternateCards ? '0' : '0.75rem',
+          marginLeft:
+            alternateCards && className === 'left'
+              ? '0'
+              : alternateCards && className === 'right'
+                ? '1rem'
+                : '0',
+          marginRight:
+            alternateCards && className === 'right'
+              ? '0'
+              : alternateCards && className === 'left'
+                ? '1rem'
+                : '0',
+        }}
       >
-        {/* Conditionally render the TimelineCard (only if not cardLess mode) */}
-        {!cardLess ? (
+        {!cardLess && (
           <TimelineCard
-            active={active}
-            branchDir={className} // Pass 'left' or 'right'
-            content={cardSubtitle}
-            customContent={contentDetailsChildren}
-            detailedText={cardDetailedText as string | string[]}
-            hasFocus={hasFocus}
-            id={id}
-            media={media}
-            onClick={onClick}
-            onElapsed={onElapsed}
-            onShowMore={handleShowMore} // Pass down the memoized handler
-            slideShowActive={slideShowRunning}
-            theme={theme}
-            url={url}
-            // Flip card content only in non-alternating vertical mode
+            branchDir={className}
+            onShowMore={handleShowMore}
             flip={!alternateCards && flipLayout}
-            timelineContent={timelineContent}
-            items={items} // Pass nested items data
-            isNested={isNested}
-            nestedCardHeight={nestedCardHeight}
-            title={cardTitle as string} // Card-specific title
-            cardTitle={title as string} // Item title (might be redundant if cardTitle is used)
+            {...pickDefined({
+              active,
+              content: cardSubtitle,
+              customContent: contentDetailsChildren,
+              detailedText: cardDetailedText as string | string[],
+              hasFocus,
+              id,
+              media,
+              onElapsed,
+              slideShowActive: slideShowRunning,
+              theme,
+              url,
+              timelineContent,
+              items,
+              isNested,
+              nestedCardHeight,
+              title: cardTitle as string,
+              cardTitle: title as string,
+            })}
+            {...(onClick && typeof onClick === 'function' ? { onClick } : {})}
           />
-        ) : null}
-      </TimelineCardContentWrapper>
+        )}
+      </div>
 
       {/* Conditionally render the Timeline Point (hidden for nested items) */}
       {!isNested ? TimelinePointMemo : null}
-    </VerticalItemWrapper>
+    </li>
   );
 };
 

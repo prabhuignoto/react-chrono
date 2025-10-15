@@ -4,75 +4,89 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
 <div>
   <li
     aria-label="vertical item title"
-    class="sc-jYczwO cFlZWy vertical-item-row"
+    aria-selected="false"
+    class="timeline-vertical_verticalItemWrapper__mb2y384 timeline-vertical__mb2y383 enhanced-properties_display_flex_mobile__dvkhhv6 enhanced-properties_justifyContent_center_mobile__dvkhhv2c enhanced-properties_position_relative_mobile__dvkhhvl enhanced-properties_width_full_mobile__dvkhhvg3 timeline-vertical_verticalItemWrapper_visible_false__mb2y386 timeline-vertical_verticalItemWrapper_alignment_center__mb2y389 timeline-vertical_verticalItemWrapper_alternating_false__mb2y38b vertical-item-row no-alt "
     data-item-id=""
     data-testid="vertical-item-row"
+    role="listitem"
+    tabindex="-1"
   >
     <div
-      class="sc-fszimp criaYi"
-      mode="VERTICAL_ALTERNATING"
+      class="timeline-vertical_timelineTitleWrapper__mb2y38j timeline-vertical__mb2y38i enhanced-properties_display_flex_mobile__dvkhhv6 enhanced-properties_alignItems_center_mobile__dvkhhv2u  "
+      data-mode="VERTICAL_ALTERNATING"
+      style="display: flex; width: 10%; order: 1; padding-left: 0.75rem; padding-right: 0.75rem; margin-right: 0px; margin-left: 0px;"
     >
       <div
-        align="right"
-        class="sc-eQwNpu vsucr timeline-item-title title"
+        class="timeline-item-title title timeline-card-content_cardTitleRecipe__chzdnoc timeline-card-content_cardTitleBase__chzdno9 recipes_text__etntiu2h recipes_text_variant_h2__etntiu2j recipes__etntiu2a sprinkles_fontSize_heading2_mobile__1v4ezef8x sprinkles_fontWeight_semibold_mobile__1v4ezef9u recipes_text_color_primary__etntiu2n recipes_text_align_left__etntiu2s recipes__etntiu2e sprinkles_textAlign_left_mobile__1v4ezefa0 recipes_text_truncate_false__etntiu2w timeline-card-content_cardTitleRecipe_active_false__chzdnoe timeline-card-title_titleWrapper__1m05k8t1 timeline-card-title__1m05k8t0 sprinkles_paddingX_xs_mobile__1v4ezef3f sprinkles_paddingY_xs_mobile__1v4ezef40"
+        data-ve-active-class="timeline-card-title_titleActive__1m05k8t2"
+        data-ve-class="timeline-card-title_titleWrapper__1m05k8t1 timeline-card-title__1m05k8t0 sprinkles_paddingX_xs_mobile__1v4ezef3f sprinkles_paddingY_xs_mobile__1v4ezef40"
+        style="text-align: right; visibility: visible;"
+        title="vertical item title"
       >
         vertical item title
       </div>
     </div>
     <div
-      class="sc-dNFkOE xVabF card-content-wrapper"
+      class="timeline-vertical_timelineCardContentWrapper__mb2y38g card-content-wrapper "
+      style="width: 85%; justify-content: flex-start; order: 3; padding-left: 0.75rem; padding-right: 0.75rem; margin-left: 0px; margin-right: 0px;"
     >
-      <article
+      <section
+        aria-current="false"
         aria-label="vertical item title"
-        class="sc-kNOymR dnEYbX timeline-card-content  card"
+        class="timeline-card-content  card timeline-card-content__chzdno2 timeline-card-content_baseCardWithBorder__chzdno0 recipes_card__etntiu1f recipes__etntiu1a sprinkles_position_relative_mobile__1v4ezefi sprinkles_borderRadius_lg_mobile__1v4ezef80 sprinkles_padding_md_mobile__1v4ezef30 recipes_card_size_lg__etntiu1i recipes__etntiu1d sprinkles_padding_lg_mobile__1v4ezef33 recipes_card_elevation_high__etntiu1l recipes_card_interactive_false__etntiu1n recipes_card_fullWidth_false__etntiu1p static_baseStyles_willChange__1ta47sat timeline-card-content_baseCard_borderless_false__chzdno4 timeline-card-content_baseCardWithBorder__chzdno0 recipes_card__etntiu1f recipes__etntiu1a sprinkles_position_relative_mobile__1v4ezefi sprinkles_borderRadius_lg_mobile__1v4ezef80 sprinkles_padding_md_mobile__1v4ezef30 recipes_card_size_lg__etntiu1i recipes__etntiu1d sprinkles_padding_lg_mobile__1v4ezef33 recipes_card_elevation_high__etntiu1l recipes_card_interactive_false__etntiu1n recipes_card_fullWidth_false__etntiu1p static_baseStyles_willChange__1ta47sat timeline-card-content_itemContentWrapper__chzdno6 recipes_interactive__etntiu1 recipes__etntiu0 sprinkles_cursor_pointer__1v4ezefbm sprinkles_userSelect_none__1v4ezefbr sprinkles_transitionProperty_all__1v4ezefca sprinkles_transitionDuration_fast__1v4ezefce recipes_interactive_hover_lift__etntiu3 timeline-card-content__chzdno5 sprinkles_display_flex_mobile__1v4ezef6 sprinkles_width_full_mobile__1v4ezef6o"
         data-item-id=""
         data-testid="timeline-card-content"
-        mode="VERTICAL_ALTERNATING"
+        role="article"
+        style="min-height: 200px; max-width: 400px;"
         tabindex="-1"
       >
         <header
-          class="sc-dYwGCk jmCnZH"
+          class="timeline-card-content_timelineCardHeader__chzdno8 timeline-card-content__chzdno7 sprinkles_display_flex_mobile__1v4ezef6 sprinkles_flexDirection_column_mobile__1v4ezefx sprinkles_width_full_mobile__1v4ezef6o sprinkles_gap_xs_mobile__1v4ezef29"
         />
         <div
-          class="sc-bRKDuR khFSwl card-media-wrapper card-media"
-          mode="VERTICAL_ALTERNATING"
+          class="timeline-card-media_mediaWrapper__18oaqop2 recipes_card__etntiu1f recipes__etntiu1a sprinkles_position_relative_mobile__1v4ezefi sprinkles_borderRadius_lg_mobile__1v4ezef80 sprinkles_padding_md_mobile__1v4ezef30 recipes_card_size_md__etntiu1h recipes__etntiu1c recipes_card_elevation_low__etntiu1k recipes_card_interactive_false__etntiu1n recipes_card_fullWidth_false__etntiu1p timeline-card-media__18oaqop1 sprinkles_display_flex_mobile__1v4ezef6 card-media-wrapper card-media timeline-card-media_justifyStart__18oaqop3"
+          style="height: 0px; min-height: 200px;"
         >
           <div
-            class="sc-hvigdm iEEmax"
-            height="200"
+            class="timeline-card-media_imageWrapper__18oaqop5 static_baseStyles_containLayout__1ta47saw"
+            style="height: 200px;"
           >
             <img
               alt=""
-              class="sc-fhHczv kywTIv"
+              class="timeline-card-media_cardImage__18oaqop7 timeline-card-media__18oaqop6 sprinkles_position_absolute_mobile__1v4ezefl timeline-card-media_imageHidden__18oaqop9"
               data-testid="timeline-card-content-image"
               height="auto"
               loading="lazy"
-              mode="VERTICAL_ALTERNATING"
               src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+              style="object-fit: cover;"
               width="100%"
             />
           </div>
         </div>
-      </article>
+      </section>
     </div>
     <div
-      bg="#007FFF"
-      class="sc-eknHtZ bdtwCJ"
-      data-testid="tree-leaf"
+      style="order: 2; display: flex; justify-content: center; align-items: stretch; min-height: 100%; width: 10%; position: relative; z-index: -1; margin-left: 0.75rem; margin-right: 0.75rem;"
     >
-      <button
-        aria-disabled="false"
-        aria-label="Timeline point"
-        class="sc-pYNGo dyMaoC  timeline-vertical-circle"
-        data-testid="tree-leaf-click"
-        tabindex="0"
+      <div
+        class=" timeline-vertical-shape_timelinePointWrapper__iy9f2s0"
+        data-testid="tree-leaf"
+        style="width: 10%; --line-width: 3px;"
       >
-        <div
-          aria-hidden="true"
-          class="sc-eVqvcJ ifMCtn"
-          dimension="16"
-        />
-      </button>
+        <button
+          aria-disabled="false"
+          aria-label="Timeline point"
+          class=" timeline-vertical-circle timeline-vertical-shape_timelinePointContainer__iy9f2s1"
+          data-testid="tree-leaf-click"
+          tabindex="0"
+        >
+          <div
+            aria-hidden="true"
+            class=" timeline-vertical-shape_shape__iy9f2s2   "
+            style="width: 16px; height: 16px;"
+          />
+        </button>
+      </div>
     </div>
   </li>
 </div>

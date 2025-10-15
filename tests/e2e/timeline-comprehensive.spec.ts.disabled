@@ -1,0 +1,293 @@
+import { test, expect } from '../fixtures/test-fixtures';
+import { TimelineHelpers } from '../helpers/timeline-helpers';
+
+test.describe('Comprehensive Timeline Tests', () => {
+  let timelineHelpers: TimelineHelpers;
+
+  test.beforeEach(async ({ page }) => {
+    timelineHelpers = new TimelineHelpers(page);
+  });
+
+  test.describe('Horizontal Timeline Complete Tests', () => {
+    test.beforeEach(async ({ page, testHelpers }) => {
+      await testHelpers.navigateTo('/horizontal');
+    });
+
+    test('should handle complete user journey', async ({ page }) => {
+      await test.step('Verify initial state', async () => {
+        const items = await timelineHelpers.getTimelineItems('horizontal');
+        await expect(items).toHaveCount(10);
+        
+        const activeItem = await timelineHelpers.getActiveItem();
+        await expect(activeItem).toHaveAttribute('data-index', '0');
+      });
+
+      await test.step('Navigate through items', async () => {
+        // Click navigation
+        await page.locator('[aria-label="Next"]').click();
+        await page.waitForTimeout(300);
+        
+        let activeItem = await timelineHelpers.getActiveItem();
+        await expect(activeItem).toHaveAttribute('data-index', '1');
+        
+        // Keyboard navigation
+        await timelineHelpers.navigateWithKeyboard('ArrowRight');
+        activeItem = await timelineHelpers.getActiveItem();
+        await expect(activeItem).toHaveAttribute('data-index', '2');
+        
+        // Direct click
+        await timelineHelpers.navigateToItem(5, 'horizontal');
+        activeItem = await timelineHelpers.getActiveItem();
+        await expect(activeItem).toHaveAttribute('data-index', '5');
+      });
+
+      await test.step('Test slideshow functionality', async () => {
+        await timelineHelpers.toggleSlideshow('play');
+        await timelineHelpers.waitForSlideshowAdvance(5, 6);
+        await timelineHelpers.toggleSlideshow('pause');
+      });
+
+      await test.step('Test keyboard shortcuts', async () => {
+        await timelineHelpers.navigateWithKeyboard('Home');
+        let activeItem = await timelineHelpers.getActiveItem();
+        await expect(activeItem).toHaveAttribute('data-index', '0');
+        
+        await timelineHelpers.navigateWithKeyboard('End');
+        activeItem = await timelineHelpers.getActiveItem();
+        await expect(activeItem).toHaveAttribute('data-index', '9');
+      });
+    });
+
+    test('should handle theme switching', async ({ page }) => {
+      await test.step('Toggle theme', async () => {
+        await timelineHelpers.toggleTheme();
+        await timelineHelpers.checkTheme('dark');
+        
+        await timelineHelpers.toggleTheme();
+        await timelineHelpers.checkTheme('light');
+      });
+    });
+
+    test('should be fully responsive', async ({ page }) => {
+      const viewports = [
+        { width: 1920, height: 1080, name: 'desktop-full' },
+        { width: 1366, height: 768, name: 'desktop-standard' },
+        { width: 1024, height: 768, name: 'tablet-landscape' },
+        { width: 768, height: 1024, name: 'tablet-portrait' },
+        { width: 414, height: 896, name: 'mobile-large' },
+        { width: 375, height: 667, name: 'mobile-standard' },
+        { width: 320, height: 568, name: 'mobile-small' },
+      ];
+
+      await timelineHelpers.checkResponsiveBehavior(viewports);
+    });
+
+    test('should meet performance benchmarks', async ({ page }) => {
+      const metrics = await timelineHelpers.measureTimelinePerformance();
+      
+      expect(metrics.domContentLoaded).toBeLessThan(1000);
+      expect(metrics.loadComplete).toBeLessThan(2000);
+      if (metrics.firstContentfulPaint) {
+        expect(metrics.firstContentfulPaint).toBeLessThan(1500);
+      }
+    });
+
+    test('should be accessible', async ({ page }) => {
+      await timelineHelpers.checkAccessibility();
+    });
+  });
+
+  test.describe('Vertical Timeline Complete Tests', () => {
+    test.beforeEach(async ({ page, testHelpers }) => {
+      await testHelpers.navigateTo('/vertical-alternating-mixed');
+    });
+
+    test('should handle all content types', async ({ page }) => {
+      await test.step('Check text content', async () => {
+        await timelineHelpers.verifyCardDetails(0, {
+          title: 'Dunkirk',
+          description: 'On 10 May 1940, Hitler began his long-awaited offensive',
+        });
+      });
+
+      await test.step('Check image content', async () => {
+        const img = await timelineHelpers.checkMediaContent(1, 'image');
+        const src = await img.getAttribute('src');
+        expect(src).toBeTruthy();
+      });
+
+      await test.step('Check video content', async () => {
+        const iframe = await timelineHelpers.checkMediaContent(2, 'youtube');
+        await expect(iframe).toHaveAttribute('src', /youtube\.com\/embed/);
+      });
+    });
+
+    test('should handle complex scrolling scenarios', async ({ page }) => {
+      await test.step('Scroll to different positions', async () => {
+        // Start at top
+        await timelineHelpers.checkVisibilityAfterScroll(0, true);
+        
+        // Scroll to bottom
+        await timelineHelpers.scrollTimeline('bottom');
+        await timelineHelpers.checkVisibilityAfterScroll(12, true);
+        await timelineHelpers.checkVisibilityAfterScroll(0, false);
+        
+        // Scroll to center
+        await timelineHelpers.scrollTimeline('center');
+        await timelineHelpers.checkVisibilityAfterScroll(6, true);
+      });
+
+      await test.step('Test smooth scrolling', async () => {
+        await page.evaluate(() => {
+          const wrapper = document.querySelector('.timeline-main-wrapper');
+          wrapper?.scrollTo({ top: 500, behavior: 'smooth' });
+        });
+        
+        await page.waitForTimeout(1000);
+        
+        // Verify scroll position
+        const scrollTop = await page.evaluate(() => {
+          const wrapper = document.querySelector('.timeline-main-wrapper');
+          return wrapper?.scrollTop || 0;
+        });
+        
+        expect(scrollTop).toBeGreaterThan(400);
+        expect(scrollTop).toBeLessThan(600);
+      });
+    });
+
+    test('should handle alternating layout correctly', async ({ page }) => {
+      const items = await timelineHelpers.getTimelineItems('vertical');
+      const count = await items.count();
+      
+      for (let i = 0; i < Math.min(5, count); i++) {
+        const item = items.nth(i);
+        const boundingBox = await item.boundingBox();
+        
+        if (i % 2 === 0) {
+          // Even items should be on the left
+          expect(boundingBox?.x).toBeLessThan(500);
+        } else {
+          // Odd items should be on the right
+          expect(boundingBox?.x).toBeGreaterThan(500);
+        }
+      }
+    });
+
+    test('should handle dynamic content updates', async ({ page }) => {
+      await test.step('Simulate content update', async () => {
+        // Add new item dynamically
+        await page.evaluate(() => {
+          const event = new CustomEvent('timeline-update', {
+            detail: {
+              item: {
+                title: 'New Event',
+                cardTitle: 'Dynamic Update',
+                cardSubtitle: 'Just added',
+              },
+            },
+          });
+          document.dispatchEvent(event);
+        });
+        
+        // Wait for potential update
+        await page.waitForTimeout(500);
+        
+        // In a real app, verify the new item appears
+        // This is a placeholder for actual implementation
+      });
+    });
+  });
+
+  test.describe('Edge Cases and Error Handling', () => {
+    test('should handle empty timeline gracefully', async ({ page, testHelpers }) => {
+      await testHelpers.navigateTo('/timeline/empty');
+      
+      const items = await timelineHelpers.getTimelineItems();
+      const count = await items.count();
+      
+      if (count === 0) {
+        // Should show empty state message
+        await expect(page.locator('.empty-state')).toBeVisible();
+      }
+    });
+
+    test('should handle very long content', async ({ page, testHelpers }) => {
+      await testHelpers.navigateTo('/timeline/long-content');
+      
+      const longText = 'Lorem ipsum '.repeat(100);
+      await page.evaluate((text) => {
+        const firstCard = document.querySelector('.card-description');
+        if (firstCard) {
+          firstCard.textContent = text;
+        }
+      }, longText);
+      
+      // Verify text is truncated or scrollable
+      const description = page.locator('.card-description').first();
+      const box = await description.boundingBox();
+      expect(box?.height).toBeLessThan(500); // Should not exceed reasonable height
+    });
+
+    test('should recover from network errors', async ({ page, testHelpers, apiMocker }) => {
+      // Mock network failure
+      await apiMocker.mockRoute('**/api/**', null, { status: 500 });
+      
+      await testHelpers.navigateTo('/timeline/dynamic');
+      
+      // Should show error state
+      await expect(page.locator('.error-state')).toBeVisible({ timeout: 5000 });
+      
+      // Mock recovery
+      await apiMocker.mockRoute('**/api/**', { items: [] }, { status: 200 });
+      
+      // Retry button
+      const retryButton = page.locator('button:has-text("Retry")');
+      if (await retryButton.isVisible()) {
+        await retryButton.click();
+        await expect(page.locator('.error-state')).not.toBeVisible();
+      }
+    });
+  });
+
+  test.describe('Cross-browser specific tests', () => {
+    test('should handle Safari-specific issues', async ({ page, browserName }) => {
+      test.skip(browserName !== 'webkit', 'Safari-specific test');
+      
+      // Test Safari-specific date formatting
+      await page.evaluate(() => {
+        const date = new Date('2024-01-01');
+        const formatted = date.toLocaleDateString('en-US');
+        return formatted;
+      });
+      
+      // Test Safari-specific CSS issues
+      const hasWebkitPrefix = await page.evaluate(() => {
+        const el = document.createElement('div');
+        return 'webkitTransform' in el.style;
+      });
+      
+      expect(hasWebkitPrefix).toBeTruthy();
+    });
+
+    test('should handle Firefox-specific issues', async ({ page, browserName }) => {
+      test.skip(browserName !== 'firefox', 'Firefox-specific test');
+      
+      // Test Firefox-specific scrollbar behavior
+      await page.evaluate(() => {
+        const wrapper = document.querySelector('.timeline-main-wrapper');
+        if (wrapper) {
+          (wrapper as HTMLElement).style.scrollbarWidth = 'thin';
+        }
+      });
+      
+      // Verify Firefox handles the custom scrollbar
+      const scrollbarWidth = await page.evaluate(() => {
+        const wrapper = document.querySelector('.timeline-main-wrapper');
+        return wrapper ? window.getComputedStyle(wrapper).scrollbarWidth : null;
+      });
+      
+      expect(scrollbarWidth).toBe('thin');
+    });
+  });
+});

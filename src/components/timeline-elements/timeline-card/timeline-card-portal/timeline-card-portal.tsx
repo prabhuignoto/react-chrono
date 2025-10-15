@@ -1,7 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 import ReactDOM from 'react-dom';
-import { TimelineContentContainer } from '../timeline-horizontal-card.styles';
+import { wrapper as veCardWrapper } from '../timeline-horizontal-card.css';
 import TimelineCardContent from '../../timeline-card-content/timeline-card-content';
+import { pickDefined } from '../../../../utils/propUtils';
 
 interface TimelineCardPortalProps {
   containerClass: string;
@@ -58,37 +59,50 @@ const TimelineCardPortal: React.FC<TimelineCardPortalProps> = ({
 
   const Content = useMemo(() => {
     return (
-      <TimelineContentContainer
-        className={containerClass}
+      <div
+        className={`${containerClass} ${veCardWrapper} ${showAllCardsHorizontal || active ? 'highlight-active' : ''} ${active ? 'active' : ''}`}
         ref={contentRef}
         id={`timeline-card-${id}`}
-        theme={theme}
-        $active={active && !disableInteraction}
-        $highlight={showAllCardsHorizontal}
-        tabIndex={0}
-        $cardWidth={cardWidth}
+        tabIndex={-1}
+        style={{
+          minWidth:
+            cardWidth &&
+            (Number.isFinite(cardWidth) ? `${cardWidth}px` : undefined),
+          display: active || showAllCardsHorizontal ? 'flex' : 'none',
+          margin: showAllCardsHorizontal ? '0 1rem' : '0 auto',
+          transform: active ? 'scale(1.02)' : 'scale(1)',
+          transition: 'all 0.3s ease-in-out',
+          opacity: active ? 1 : showAllCardsHorizontal ? 0.7 : 0,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
       >
         <TimelineCardContent
           content={cardSubtitle}
           active={active}
           title={cardTitle}
-          url={url}
           detailedText={cardDetailedText}
           onShowMore={handleOnShowMore}
           theme={theme}
-          slideShowActive={slideShowRunning}
           media={media}
-          onElapsed={onElapsed}
           id={id}
           customContent={customContent}
-          hasFocus={hasFocus}
-          onClick={onClick}
-          timelineContent={timelineContent}
-          isNested={isNested}
-          nestedCardHeight={nestedCardHeight}
-          items={items}
+          focusable={false}
+          {...pickDefined({
+            url,
+            slideShowActive: slideShowRunning,
+            hasFocus,
+            onClick,
+            timelineContent,
+            isNested,
+            nestedCardHeight,
+            items,
+          })}
+          {...(onElapsed
+            ? { onElapsed: (id?: string) => id && onElapsed(id) }
+            : {})}
         />
-      </TimelineContentContainer>
+      </div>
     );
   }, [
     containerClass,

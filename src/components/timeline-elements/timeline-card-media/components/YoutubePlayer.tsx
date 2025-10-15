@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { IFrameVideo } from '../timeline-card-media.styles';
+import { iframeVideo } from '../timeline-card-media.css';
 
 interface YoutubePlayerProps {
   url: string;
@@ -12,7 +12,8 @@ interface YoutubePlayerProps {
  */
 export const YoutubePlayer = memo(
   ({ url, active, name }: YoutubePlayerProps) => (
-    <IFrameVideo
+    <iframe
+      className={iframeVideo}
       style={{ border: 'none' }}
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen

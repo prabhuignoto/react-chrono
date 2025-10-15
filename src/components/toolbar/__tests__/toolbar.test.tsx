@@ -1,8 +1,7 @@
 // Toolbar.test.tsx
 
 import { render } from '@testing-library/react';
-import { getDefaultThemeOrDark } from '@utils/index';
-import { ThemeProvider } from 'styled-components';
+import { getDefaultThemeOrDark } from '../../../utils/index';
 import { Toolbar } from '../index';
 import { ToolbarItem } from '@models/ToolbarItem';
 
@@ -15,17 +14,13 @@ const theme = getDefaultThemeOrDark();
 
 describe('Toolbar', () => {
   it('renders toolbar items', () => {
-    const { getByText, baseElement } = render(
-      <ThemeProvider theme={theme}>
-        <Toolbar items={items} theme={theme}>
-          {items.map((item, index) => (
-            <div key={index}>{item.name}</div>
-          ))}
-        </Toolbar>
-      </ThemeProvider>,
+    const { getByText } = render(
+      <Toolbar items={items} theme={theme}>
+        {items.map((item, index) => (
+          <div key={index}>{item.name}</div>
+        ))}
+      </Toolbar>,
     );
-
-    console.log(baseElement.innerHTML);
 
     expect(getByText(/Item 1/i)).toBeInTheDocument();
     expect(getByText(/Item 2/i)).toBeInTheDocument();
@@ -40,11 +35,9 @@ describe('Toolbar', () => {
     };
 
     const { getByText } = render(
-      <ThemeProvider theme={theme}>
-        <Toolbar items={[itemWithIcon]} theme={theme}>
-          <div>Content</div>
-        </Toolbar>
-      </ThemeProvider>,
+      <Toolbar items={[itemWithIcon]} theme={theme}>
+        <div>Content</div>
+      </Toolbar>,
     );
 
     expect(getByText(/Icon/i)).toBeInTheDocument();

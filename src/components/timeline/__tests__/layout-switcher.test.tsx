@@ -1,6 +1,6 @@
 import { fireEvent } from '@testing-library/react';
-import { getDefaultThemeOrDark } from '@utils/index';
-import { customRender, providerProps } from 'src/components/common/test';
+import { getDefaultThemeOrDark } from '../../../utils/index';
+import { customRender, providerProps } from '../../common/test';
 import { vi } from 'vitest';
 import { LayoutSwitcher } from '../timeline-popover-elements';
 
@@ -11,7 +11,7 @@ describe('LayoutSwitcher Component', () => {
   const position = 'top';
 
   test('Renders correctly with vertical layout options', () => {
-    const { getByText } = customRender(
+    const { getByText, getByRole } = customRender(
       <LayoutSwitcher
         onUpdateTimelineMode={onUpdateTimelineMode}
         theme={theme}
@@ -27,17 +27,18 @@ describe('LayoutSwitcher Component', () => {
       },
     );
 
-    // Add your assertions here
-    expect(getByText('Change layout')).toBeInTheDocument();
+    // Find the button by role since we removed the text label
+    const layoutButton = getByRole('button');
+    expect(layoutButton).toBeInTheDocument();
 
-    fireEvent.click(getByText('Change layout'));
+    fireEvent.click(layoutButton);
 
     expect(getByText('Vertical')).toBeInTheDocument();
     expect(getByText('Alternating')).toBeInTheDocument();
   });
 
   test('Renders correctly with horizontal layout options', () => {
-    const { getByText } = customRender(
+    const { getByRole } = customRender(
       <LayoutSwitcher
         onUpdateTimelineMode={onUpdateTimelineMode}
         theme={theme}
@@ -53,10 +54,11 @@ describe('LayoutSwitcher Component', () => {
       },
     );
 
-    // Add your assertions here
-    expect(getByText('Change layout')).toBeInTheDocument();
+    // Find the button by role since we removed the text label
+    const layoutButton = getByRole('button');
+    expect(layoutButton).toBeInTheDocument();
 
-    fireEvent.click(getByText('Change layout'));
+    fireEvent.click(layoutButton);
 
     // expect(getByText('Horizontal')).toBeInTheDocument();
     // expect(getByText('Show all cards')).toBeInTheDocument();

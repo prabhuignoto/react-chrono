@@ -1,21 +1,26 @@
 import React, {
   useCallback,
-  useContext,
   useEffect,
   useState,
   PropsWithChildren,
   memo,
 } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import { useTimelineContext } from '../../contexts';
 import CloseIcon from '../../icons/close';
 import MenuIcon from '../../icons/menu';
 import { OutlineItemList } from './timeline-outline-item-list';
 import { TimelineOutlineModel } from './timeline-outline.model';
 import {
-  OutlineButton,
-  OutlinePane,
-  OutlineWrapper,
-} from './timeline-outline.styles';
+  outlineButton,
+  buttonLeft,
+  buttonRight,
+  outlinePane,
+  outlineWrapper,
+  outlineWrapperClosed,
+  outlineWrapperOpen,
+  outlineLeft,
+  outlineRight,
+} from './timeline-outline.css';
 import { useOutlinePosition } from './hooks/useOutlinePosition';
 
 class TimelineOutlineError extends React.Component<
@@ -54,7 +59,7 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
   const [openPane, setOpenPane] = useState(false);
   const [showList, setShowList] = useState(false);
 
-  const { theme: globalTheme } = useContext(GlobalContext);
+  const { theme: globalTheme } = useTimelineContext();
   const mergedTheme = theme || globalTheme;
 
   // Extract position logic to a custom hook
@@ -95,22 +100,26 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
   }
 
   return (
-    <TimelineOutlineError onError={onError}>
-      <OutlineWrapper
-        position={position}
-        open={openPane}
+    <TimelineOutlineError onError={onError as (error: Error) => void}>
+      <div
+        className={[
+          outlineWrapper,
+          openPane ? outlineWrapperOpen : outlineWrapperClosed,
+          position === 0 ? outlineLeft : outlineRight,
+        ].join(' ')}
         aria-expanded={openPane}
         role="complementary"
       >
-        <OutlineButton
+        <button
           onPointerDown={togglePane}
-          theme={mergedTheme}
-          open={openPane}
-          position={position}
+          className={[
+            outlineButton,
+            position === 0 ? buttonLeft : buttonRight,
+          ].join(' ')}
         >
           {openPane ? <CloseIcon /> : <MenuIcon />}
-        </OutlineButton>
-        <OutlinePane open={openPane}>
+        </button>
+        <div className={outlinePane}>
           {showList && (
             <OutlineItemList
               items={items}
@@ -118,8 +127,8 @@ const TimelineOutline: React.FC<TimelineOutlineModel> = ({
               theme={mergedTheme}
             />
           )}
-        </OutlinePane>
-      </OutlineWrapper>
+        </div>
+      </div>
     </TimelineOutlineError>
   );
 };

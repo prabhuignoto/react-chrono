@@ -2,13 +2,16 @@ import { FunctionComponent, KeyboardEvent, memo, useCallback } from 'react';
 import { CheckIcon } from 'src/components/icons';
 import { ListItemModel } from './list.model';
 import {
-  CheckboxStyle,
-  CheckboxWrapper,
-  ListItemStyle,
-  StyleAndDescription,
-  TitleDescriptionStyle,
-  TitleStyle,
-} from './list.styles';
+  checkbox,
+  checkboxSelected,
+  checkboxWrapper,
+  description as descriptionClass,
+  listItem,
+  listItemActive,
+  styleAndDescription,
+  title as titleClass,
+} from './list.css';
+import { listItemRecipe } from './list.css';
 
 /**
  * ListItem component displays a selectable/clickable item with title and description
@@ -52,36 +55,32 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
       }
     }, []);
 
+    const itemClass = `${listItem} ${active ? listItemActive : ''} ${listItemRecipe({ active: !!active })}`;
     return (
-      <ListItemStyle
+      <li
         data-testid="list-item"
         key={id}
-        $theme={theme}
         onClick={() => handleOnClick(id)}
-        $active={active}
         tabIndex={0}
-        $selectable={selectable}
         onKeyUp={(ev) => handleKeyPress(ev, id)}
+        className={itemClass}
       >
         {selectable ? (
-          <CheckboxWrapper>
-            <CheckboxStyle
+          <span className={checkboxWrapper}>
+            <span
               role="checkbox"
               aria-checked={selected}
-              selected={selected}
-              theme={theme}
+              className={`${checkbox} ${selected ? checkboxSelected : ''}`}
             >
               {selected && <CheckIcon />}
-            </CheckboxStyle>
-          </CheckboxWrapper>
+            </span>
+          </span>
         ) : null}
-        <StyleAndDescription $selectable={selectable}>
-          <TitleStyle theme={theme}>{title}</TitleStyle>
-          <TitleDescriptionStyle theme={theme}>
-            {description}
-          </TitleDescriptionStyle>
-        </StyleAndDescription>
-      </ListItemStyle>
+        <div className={styleAndDescription}>
+          <h1 className={titleClass}>{title}</h1>
+          {description && <p className={descriptionClass}>{description}</p>}
+        </div>
+      </li>
     );
   },
 );

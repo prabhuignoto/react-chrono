@@ -1,8 +1,16 @@
-import React, { useRef, ReactNode } from 'react';
+import React, { useRef, ReactNode, useState, useCallback } from 'react';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
 import {
-  CardMediaHeader,
-  MediaDetailsWrapper,
-} from '../timeline-card-media.styles';
+  cardMediaHeader,
+  mediaDetailsWrapper,
+  mediaDetailsAbsolute,
+  mediaDetailsCard,
+  mediaDetailsGradient,
+  mediaDetailsMinimized,
+  mediaDetailsMaximized,
+  textOverlayButton,
+} from '../timeline-card-media.css';
+import { gradientVar } from '../timeline-card-media.css';
 import { TitleMemo } from '../../memoized/title-memo';
 import { ButtonWrapper } from '../timeline-card-media-buttons';
 import { ShowOrHideTextButtonMemo } from '../../memoized/show-hide-button';
@@ -10,6 +18,8 @@ import { ExpandButtonMemo } from '../../memoized/expand-button-memo';
 import { SubTitleMemo } from '../../memoized/subtitle-memo';
 import { DetailsTextMemo } from '../../memoized/details-text-memo';
 import { TimelineMode } from '@models/TimelineModel';
+import { PlusIcon, MinusIcon } from '../../../icons';
+import { pickDefined } from '../../../../utils/propUtils';
 
 export interface ContentDisplayProps {
   readonly mode: TimelineMode;
@@ -59,55 +69,105 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
   } = props;
 
   const moreRef = useRef(null);
+  const [isMinimized, setIsMinimized] = useState(false);
+
+  const toggleMinimize = useCallback(() => {
+    setIsMinimized(!isMinimized);
+  }, [isMinimized]);
 
   return (
-    <MediaDetailsWrapper
-      mode={mode}
-      $absolutePosition={textOverlay}
-      $textInMedia={textOverlay}
+    <div
       ref={moreRef}
-      theme={theme}
-      $expandFull={expandDetails}
-      $showText={showText}
-      $expandable={canExpand}
-      $gradientColor={canShowGradient ? gradientColor : null}
+      className={[
+        mediaDetailsWrapper,
+        textOverlay ? mediaDetailsAbsolute : undefined,
+        canExpand || !showText ? mediaDetailsCard : undefined,
+        canShowGradient ? mediaDetailsGradient : undefined,
+        textOverlay && isMinimized ? mediaDetailsMinimized : undefined,
+        textOverlay && !isMinimized ? mediaDetailsMaximized : undefined,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      style={
+        canShowGradient && gradientColor
+          ? assignInlineVars({ [gradientVar]: gradientColor })
+          : undefined
+      }
+      onClick={textOverlay && isMinimized ? toggleMinimize : undefined}
     >
-      <CardMediaHeader>
+      <div className={cardMediaHeader}>
         <TitleMemo
           title={title}
           theme={theme}
           active={active}
-          url={url}
+          url={url ?? ''}
           fontSize={fontSizes?.cardTitle}
           classString={classNames?.cardTitle}
+          {...pickDefined({
+            color: theme?.cardTitleColor || theme?.titleColor,
+          })}
         />
-        {canExpand && (
+        {(canExpand || textOverlay) && (
           <ButtonWrapper>
-            <ShowOrHideTextButtonMemo
-              onToggle={toggleText}
-              show={showText}
-              textOverlay
-              theme={theme}
-            />
-            <ExpandButtonMemo
-              theme={theme}
-              expanded={expandDetails}
-              onExpand={toggleExpand}
-              textOverlay
-            />
+            {textOverlay ? (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleMinimize();
+                }}
+                className={textOverlayButton}
+                style={
+                  theme
+                    ? assignInlineVars({
+                        [gradientVar]:
+                          theme?.primary || theme?.cardBgColor || '',
+                      })
+                    : undefined
+                }
+                aria-label={
+                  isMinimized ? 'Expand text overlay' : 'Minimize text overlay'
+                }
+                title={
+                  isMinimized ? 'Expand text overlay' : 'Minimize text overlay'
+                }
+                type="button"
+              >
+                <div style={{ width: '16px', height: '16px' }}>
+                  {isMinimized ? <PlusIcon /> : <MinusIcon />}
+                </div>
+              </button>
+            ) : canExpand ? (
+              <>
+                <ShowOrHideTextButtonMemo
+                  onToggle={toggleText}
+                  show={showText}
+                  textOverlay
+                  theme={theme}
+                />
+                <ExpandButtonMemo
+                  theme={theme}
+                  expanded={expandDetails}
+                  onExpand={toggleExpand}
+                  textOverlay
+                />
+              </>
+            ) : null}
           </ButtonWrapper>
         )}
-      </CardMediaHeader>
-      {showText && (
+      </div>
+      {showText && !isMinimized && (
         <SubTitleMemo
           content={content}
           fontSize={fontSizes?.cardSubtitle}
           classString={classNames?.cardSubTitle}
           padding
           theme={theme}
+          {...pickDefined({
+            color: theme?.cardSubtitleColor,
+          })}
         />
       )}
-      {canShowTextMemo && detailsText && (
+      {canShowTextMemo && detailsText && !isMinimized && (
         <DetailsTextMemo
           theme={theme}
           show={showText}
@@ -117,7 +177,7 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
           textOverlay={textOverlay}
         />
       )}
-    </MediaDetailsWrapper>
+    </div>
   ) as React.ReactElement;
 };
 

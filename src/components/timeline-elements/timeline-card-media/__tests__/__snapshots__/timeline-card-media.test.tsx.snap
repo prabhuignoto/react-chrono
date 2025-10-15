@@ -3,34 +3,34 @@
 exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
 <div>
   <div
-    class="sc-bRKDuR khFSwl card-media-wrapper card-media"
-    mode="VERTICAL_ALTERNATING"
+    class="timeline-card-media_mediaWrapper__18oaqop2 recipes_card__etntiu1f recipes__etntiu1a sprinkles_position_relative_mobile__1v4ezefi sprinkles_borderRadius_lg_mobile__1v4ezef80 sprinkles_padding_md_mobile__1v4ezef30 recipes_card_size_md__etntiu1h recipes__etntiu1c recipes_card_elevation_low__etntiu1k recipes_card_interactive_false__etntiu1n recipes_card_fullWidth_false__etntiu1p timeline-card-media__18oaqop1 sprinkles_display_flex_mobile__1v4ezef6 card-media-wrapper card-media timeline-card-media_justifyStart__18oaqop3"
+    style="height: 0px; min-height: 200px;"
   >
     <div
-      class="sc-hvigdm iEEmax"
-      height="200"
+      class="timeline-card-media_imageWrapper__18oaqop5 static_baseStyles_containLayout__1ta47saw"
+      style="height: 200px;"
     >
       <img
         alt="Image"
-        class="sc-fhHczv kywTIv"
+        class="timeline-card-media_cardImage__18oaqop7 timeline-card-media__18oaqop6 sprinkles_position_absolute_mobile__1v4ezefl timeline-card-media_imageHidden__18oaqop9"
         data-testid="timeline-card-content-image"
         height="auto"
         loading="lazy"
-        mode="VERTICAL_ALTERNATING"
         src="https://picsum.photos/200/300"
+        style="object-fit: cover;"
         width="100%"
       />
     </div>
   </div>
   <div
-    class="sc-dTvVRJ bXyjTr"
-    mode="VERTICAL_ALTERNATING"
+    class="timeline-card-media_mediaDetailsWrapper__18oaqopi timeline-card-media__18oaqoph sprinkles_display_flex_mobile__1v4ezef6"
   >
     <div
-      class="sc-hwkwBN bqxVgB"
+      class="timeline-card-media_cardMediaHeader__18oaqopu timeline-card-media__18oaqopt sprinkles_display_flex_mobile__1v4ezef6 sprinkles_alignItems_center_mobile__1v4ezef10 sprinkles_justifyContent_flex-start_mobile__1v4ezef1f"
     />
     <span
-      class="sc-dntSTA bSjCIK card-sub-title card-subtitle"
+      class="font-styles_subtitleStyles_card__10vuyxn3 font-styles_typography_base__10vuyxn0 card-sub-title card-subtitle"
+      style="color: rgb(0, 0, 0);"
     >
       This is another test
     </span>
@@ -41,28 +41,29 @@ exports[`Timeline Card media > should match the snapshot ( IMAGE ) 1`] = `
 exports[`Timeline Card media > should match the snapshot ( VIDEO ) 1`] = `
 <div>
   <div
-    class="sc-bRKDuR khFSwl card-media-wrapper card-media"
-    mode="VERTICAL_ALTERNATING"
+    class="timeline-card-media_mediaWrapper__18oaqop2 recipes_card__etntiu1f recipes__etntiu1a sprinkles_position_relative_mobile__1v4ezefi sprinkles_borderRadius_lg_mobile__1v4ezef80 sprinkles_padding_md_mobile__1v4ezef30 recipes_card_size_md__etntiu1h recipes__etntiu1c recipes_card_elevation_low__etntiu1k recipes_card_interactive_false__etntiu1n recipes_card_fullWidth_false__etntiu1p timeline-card-media__18oaqop1 sprinkles_display_flex_mobile__1v4ezef6 card-media-wrapper card-media timeline-card-media_justifyStart__18oaqop3"
+    style="height: 0px; min-height: 200px;"
   >
     <iframe
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen=""
-      class="sc-hjsuWn bxMWPl"
+      class="timeline-card-media_iframeVideo__18oaqopq"
       data-testid="timeline-card-content-video"
       loading="lazy"
       src="https://www.youtube.com/watch?v=9bZkp7q19f0?enablejsapi=1"
+      style="border: medium;"
       title="Video"
     />
   </div>
   <div
-    class="sc-dTvVRJ bXyjTr"
-    mode="VERTICAL_ALTERNATING"
+    class="timeline-card-media_mediaDetailsWrapper__18oaqopi timeline-card-media__18oaqoph sprinkles_display_flex_mobile__1v4ezef6"
   >
     <div
-      class="sc-hwkwBN bqxVgB"
+      class="timeline-card-media_cardMediaHeader__18oaqopu timeline-card-media__18oaqopt sprinkles_display_flex_mobile__1v4ezef6 sprinkles_alignItems_center_mobile__1v4ezef10 sprinkles_justifyContent_flex-start_mobile__1v4ezef1f"
     />
     <span
-      class="sc-dntSTA bSjCIK card-sub-title card-subtitle"
+      class="font-styles_subtitleStyles_card__10vuyxn3 font-styles_typography_base__10vuyxn0 card-sub-title card-subtitle"
+      style="color: rgb(0, 0, 0);"
     >
       This is another test
     </span>

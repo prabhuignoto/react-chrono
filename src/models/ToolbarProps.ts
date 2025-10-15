@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, CSSProperties, HTMLAttributes } from 'react';
 import { Theme } from '@models/Theme';
 import { ToolbarItem } from './ToolbarItem';
 
@@ -15,4 +15,12 @@ export type ToolbarProps = {
    * Theme settings for the toolbar.
    */
   theme: Theme;
-};
+  /**
+   * Use Vanilla Extract toolbar styles (styled-components have been removed).
+   */
+  useVeStyles?: boolean;
+  /**
+   * Custom CSS styles to apply to the toolbar.
+   */
+  style?: CSSProperties;
+} & Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'style'>;

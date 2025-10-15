@@ -1,7 +1,7 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent } from 'react';
 import Chrono from '../../../components';
-import { ComponentContainerTree, Vertical } from '../../App.styles';
+import { componentContainerTree, componentContainerTreeDesktop, componentContainerTreeBigScreen, componentContainerTreeTablet, componentContainerTreeMobile, vertical } from '../../App.css';
 
 export interface AlternatingNestedVerticalProps {
   type: string;
@@ -12,8 +12,14 @@ export const AlternatingNestedVertical: FunctionComponent<AlternatingNestedVerti
   type, 
   items 
 }) => (
-  <Vertical id="vertical">
-    <ComponentContainerTree type={type}>
+  <div className={vertical} id="vertical">
+    <div className={
+      type === 'desktop' ? componentContainerTreeDesktop :
+      type === 'big-screen' ? componentContainerTreeBigScreen :
+      type === 'tablet' ? componentContainerTreeTablet :
+      type === 'mobile' ? componentContainerTreeMobile :
+      componentContainerTree
+    } style={{ minHeight: '600px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
       <Chrono
         items={items}
         mode="VERTICAL_ALTERNATING"
@@ -104,6 +110,6 @@ export const AlternatingNestedVertical: FunctionComponent<AlternatingNestedVerti
           />
         </div>
       </Chrono>
-    </ComponentContainerTree>
-  </Vertical>
+    </div>
+  </div>
 ); 

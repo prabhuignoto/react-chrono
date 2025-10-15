@@ -4,8 +4,8 @@ import { basicTimeline } from './data';
 
 export default function App() {
   const [pageIndex, setPageIndex] = useState(0);
-  const [allItems, setAllItems] = useState([null]);
-  const [items, setItems] = useState([null]);
+  const [allItems, setAllItems] = useState<any[]>([]);
+  const [items, setItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   const handleAutoLoad = useCallback(() => {
@@ -56,8 +56,14 @@ export default function App() {
       <div style={{ width: '650px', height: '650px' }}>
         <Chrono
           items={items}
-          mode="VERTICAL_ALTERNATING"
-          scrollable={{ scrollbar: true }}
+          mode="alternating"
+          display={{
+            scrollable: { scrollbar: true },
+            toolbar: { enabled: true },
+          }}
+          interaction={{
+            autoScroll: true,
+          }}
           onScrollEnd={handleLoadMore}
           allowDynamicUpdate={true}
         />

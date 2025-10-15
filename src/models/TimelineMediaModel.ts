@@ -44,6 +44,9 @@ export interface MediaState {
 
   // Indicates if media is currently playing.
   playing?: boolean;
+
+  // Indicates if media has ended.
+  ended?: boolean;
 }
 
 /**

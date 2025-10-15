@@ -58,6 +58,19 @@ const useSlideshow = (
   }, []);
 
   /**
+   * Handles timer completion
+   */
+  const handleTimerComplete = useCallback(() => {
+    cleanupTimer();
+    setPaused(true);
+    setStartWidth(0);
+    setRemainInterval(slideItemDuration);
+    if (id && onElapsed) {
+      onElapsed(id);
+    }
+  }, [id, onElapsed, slideItemDuration, cleanupTimer]);
+
+  /**
    * Sets up a new timer for the slideshow using requestAnimationFrame for smoother animations
    * @param interval - Duration in milliseconds for the timer
    */
@@ -98,21 +111,14 @@ const useSlideshow = (
 
       rafRef.current = window.requestAnimationFrame(animationStep);
     },
-    [slideItemDuration, active, slideShowActive],
+    [
+      slideItemDuration,
+      active,
+      slideShowActive,
+      cleanupTimer,
+      handleTimerComplete,
+    ],
   );
-
-  /**
-   * Handles timer completion
-   */
-  const handleTimerComplete = useCallback(() => {
-    cleanupTimer();
-    setPaused(true);
-    setStartWidth(0);
-    setRemainInterval(slideItemDuration);
-    if (id && onElapsed) {
-      onElapsed(id);
-    }
-  }, [id, onElapsed, slideItemDuration, cleanupTimer]);
 
   /**
    * Pauses the current slideshow if conditions are met
@@ -150,13 +156,15 @@ const useSlideshow = (
     }
   }, [active, slideShowActive, slideItemDuration, setupTimer]);
 
-  // Cleanup effect when slideShowActive changes or component unmounts
+  // Auto-start timer when slideshow becomes active
   useEffect(() => {
-    if (!slideShowActive) {
+    if (slideShowActive && active && slideItemDuration > 0) {
+      setupTimer(slideItemDuration);
+    } else if (!slideShowActive) {
       cleanupTimer();
     }
     return cleanupTimer;
-  }, [slideShowActive, cleanupTimer]);
+  }, [slideShowActive, active, slideItemDuration, setupTimer, cleanupTimer]);
 
   // Cleanup effect when active state changes
   useEffect(() => {

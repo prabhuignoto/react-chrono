@@ -2,7 +2,8 @@ import { Theme } from '@models/Theme';
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent } from 'react';
 import Chrono from '../../../components';
-import { ComponentContainerTree, Vertical } from '../../App.styles';
+import { componentContainerTree, componentContainerTreeDesktop, componentContainerTreeBigScreen, componentContainerTreeTablet, componentContainerTreeMobile, vertical } from '../../App.css';
+import { pickDefined } from '../../../utils/propUtils';
 
 export interface AlternatingVerticalProps {
   type: string;
@@ -17,29 +18,67 @@ export const AlternatingVertical: FunctionComponent<AlternatingVerticalProps> = 
   theme,
   children 
 }) => (
-  <Vertical id="tree">
-    <ComponentContainerTree type={type}>
+  <div className={vertical} id="tree">
+    <div className={
+      type === 'desktop' ? componentContainerTreeDesktop :
+      type === 'big-screen' ? componentContainerTreeBigScreen :
+      type === 'tablet' ? componentContainerTreeTablet :
+      type === 'mobile' ? componentContainerTreeMobile :
+      componentContainerTree
+    } style={{ minHeight: '600px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
       <Chrono
         items={items}
-        mode="VERTICAL_ALTERNATING"
+        mode="alternating"
         theme={theme}
-        slideShow
-        slideItemDuration={2050}
-        slideShowType="slide_from_sides"
         allowDynamicUpdate
-        cardHeight={200}
-        disableToolbar
-        focusActiveItemOnLoad
-        enableDarkToggle
-        cardWidth={400}
         onItemSelected={(selected) => console.log(selected)}
         onScrollEnd={() => console.log('end reached')}
-        enableBreakPoint
-        highlightCardsOnHover
-        contentDetailsHeight={200}
-      >
-        {children}
-      </Chrono>
-    </ComponentContainerTree>
-  </Vertical>
+        
+        layout={{
+          cardHeight: 200,
+          cardWidth: 400,
+          responsive: {
+            enabled: true,
+          },
+        }}
+        
+        interaction={{
+          focusOnLoad: true,
+          cardHover: true,
+        }}
+        
+        display={{
+          toolbar: { 
+            enabled: true,
+            sticky: true
+          },
+        }}
+        
+        animation={{
+          slideshow: {
+            enabled: true,
+            duration: 2050,
+            type: 'slide',
+          },
+        }}
+        
+        darkMode={{
+          showToggle: true,
+        }}
+        
+        googleFonts={{
+          fontFamily: 'Lato',
+          elements: {
+            title: { weight: 'bold', style: 'normal', size: '2rem' },
+            cardTitle: { weight: 'semi-bold', style: 'normal', size: '1.1rem' },
+            cardSubtitle: { weight: 'normal', style: 'normal', size: '0.9rem' },
+            cardText: { weight: 'light', style: 'normal', size: '0.85rem' },
+            controls: { weight: 'medium', style: 'normal', size: '0.8rem' },
+          }
+        }}
+        
+        {...pickDefined({ children })}
+      />
+    </div>
+  </div>
 ); 

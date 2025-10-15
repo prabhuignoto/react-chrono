@@ -3,13 +3,14 @@ import { Theme } from './Theme';
 import { Scroll } from './TimelineHorizontalModel';
 import { Media } from './TimelineMediaModel';
 import { TimelineProps } from './TimelineModel';
+import type { Dayjs } from 'dayjs';
 
 /**
  * Represents the model for a timeline item.
  */
 export interface TimelineItemModel {
   // Internal property for handling date.
-  _dayjs?: any;
+  _dayjs?: Dayjs;
 
   // Indicates if the timeline item is active.
   active?: boolean;

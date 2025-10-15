@@ -1,41 +1,105 @@
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
+import dts from 'vite-plugin-dts';
 import tsconfig from 'vite-tsconfig-paths';
+import { defineConfig } from 'vite';
+import { visualizer } from 'rollup-plugin-visualizer';
 
-export default defineConfig({
-  build: {
-    outDir: 'dist_site',
-    // Adding sourcemap for better debugging
-    sourcemap: true,
-  },
-  plugins: [react(), tsconfig()],
-  root: './',
-  server: {
-    port: 4444,
-    watch: {
-      ignored: [
-        'node_modules',
-        'dist',
-        'build',
-        'public',
-        'package.json',
-        'package-lock.json',
-        'tsconfig.json',
-        'vite.config.mts',
-        'yarn.lock',
+export default defineConfig(({ mode }) => ({
+  publicDir: false,
+  plugins: [
+    vanillaExtractPlugin({
+      identifiers: mode === 'production' ? 'short' : 'debug',
+    }),
+    react(),
+    tsconfig(),
+    dts({
+      entryRoot: 'src',
+      tsconfigPath: 'tsconfig.build.json',
+      outDir: 'dist/types',
+      insertTypesEntry: true,
+      skipDiagnostics: true,
+      rollupTypes: false,
+      compilerOptions: {
+        skipLibCheck: true,
+      },
+      exclude: [
+        'src/demo/**',
+        'src/examples/**',
+        'src/**/__tests__/**',
+        'src/**/*.test.*',
+        'src/**/*.spec.*',
+        'src/**/*.stories.*',
+        'src/test-setup.js',
+        'src/index.tsx',
+        'src/styles/types.ts',
       ],
+    }),
+    mode === 'production' && visualizer({
+      filename: 'dist/stats.html',
+      template: 'treemap',
+      gzipSize: true,
+      brotliSize: true,
+    }),
+  ],
+  build: {
+    lib: {
+      entry: 'src/react-chrono.ts',
+      name: 'ReactChronoUI',
+      formats: ['es', 'cjs'],
+      fileName: (format) => (format === 'es' ? 'index.esm.js' : 'index.cjs'),
     },
-    // Adding open option to automatically open the browser
-    open: true,
-    // Set host to true to listen on all addresses
-    host: true,
-  },
-  // Adding resolve.alias for better path management
-  resolve: {
-    alias: {
-      '@components': '/src/components',
-      '@models': '/src/models',
-      '@utils': '/src/utils',
+    target: 'es2022',
+    sourcemap: true,
+    minify: mode === 'production' ? 'esbuild' : false,
+    ...(mode === 'production' && {
+      esbuild: {
+        drop: ['console', 'debugger'],
+        legalComments: 'none',
+      },
+    }),
+    cssMinify: mode === 'production',
+    cssCodeSplit: false,
+    rollupOptions: {
+      external: (id) =>
+        id === 'react' ||
+        id === 'react-dom' ||
+        id.startsWith('react/') ||
+        id.startsWith('react-dom/') ||
+        /\.(svg|mp4|webm|png|jpe?g|gif)$/i.test(id),
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
+        chunkFileNames: 'chunks/[name]-[hash].js',
+        assetFileNames: (assetInfo) => {
+          // Use static filename for CSS to allow easier importing
+          if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+            return 'style.css';
+          }
+          return 'assets/[name]-[hash][extname]';
+        },
+        generatedCode: {
+          preset: 'es2015',
+          arrowFunctions: true,
+          constBindings: true,
+          objectShorthand: true,
+        },
+        interop: 'auto',
+        exports: 'named',
+        preserveModules: false,
+        manualChunks: undefined,
+        compact: mode === 'production',
+        minifyInternalExports: mode === 'production',
+      },
+      treeshake: {
+        moduleSideEffects: 'no-external',
+        propertyReadSideEffects: false,
+        tryCatchDeoptimization: false,
+      },
     },
+    outDir: 'dist',
+    emptyOutDir: true,
   },
-})
+}));

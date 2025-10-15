@@ -1,6 +1,7 @@
 import { TimelineContentModel } from '@models/TimelineContentModel';
 import { MediaState } from '@models/TimelineMediaModel';
 import { hexToRGBA } from '@utils/index';
+import { shallowEqual, arrayEqual, mediaEqual } from '@utils/comparison';
 import cls from 'classnames';
 import React, {
   useCallback,
@@ -10,9 +11,10 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { useSlideshow } from 'src/components/effects/useSlideshow';
+import { useSlideshow } from '../../effects/useSlideshow';
 import { useCardSize } from '../../../hooks/useCardSize';
-import { GlobalContext } from '../../GlobalContext';
+import { useFocusManager } from '../../../hooks/useFocusManager';
+import { useTimelineContext } from '../../contexts';
 // Remove the Timeline import to break the circular dependency
 // import Timeline from '../../timeline/timeline';
 import CardMedia from '../timeline-card-media/timeline-card-media';
@@ -20,7 +22,15 @@ import { ContentFooter } from './content-footer';
 import { ContentHeader } from './content-header';
 import { DetailsText } from './details-text';
 import { getTextOrContent } from './text-or-content';
-import { TimelineItemContentWrapper } from './timeline-card-content.styles';
+import {
+  baseCard,
+  itemContentWrapper,
+  contentDetailsWrapper,
+  showMoreButton,
+  chevronIconWrapper,
+} from './timeline-card-content.css';
+import { nestedTimelineWrapper } from '../../timeline-vertical/timeline-vertical.css';
+import { SlideShowType } from '@models/TimelineModel';
 import NestedTimelineRenderer from '../nested-timeline-renderer/nested-timeline-renderer';
 
 // Custom equality function for React.memo to prevent unnecessary re-renders
@@ -30,6 +40,16 @@ const arePropsEqual = (
 ): boolean => {
   // Always re-render if active state changes
   if (prevProps.active !== nextProps.active) return false;
+  // If detailedText arrays are passed, compare structurally
+  if (
+    Array.isArray(prevProps.detailedText) ||
+    Array.isArray(nextProps.detailedText)
+  ) {
+    if (
+      !arrayEqual(prevProps.detailedText as any, nextProps.detailedText as any)
+    )
+      return false;
+  }
 
   // Re-render if slideshow state changes
   if (prevProps.slideShowActive !== nextProps.slideShowActive) return false;
@@ -39,21 +59,24 @@ const arePropsEqual = (
 
   // Only re-render content-related props if they actually change
   if (prevProps.content !== nextProps.content) return false;
-  if (prevProps.detailedText !== nextProps.detailedText) return false;
+  // For non-array detailedText, compare by reference
+  if (
+    !Array.isArray(prevProps.detailedText) &&
+    !Array.isArray(nextProps.detailedText)
+  ) {
+    if (prevProps.detailedText !== nextProps.detailedText) return false;
+  }
   if (prevProps.title !== nextProps.title) return false;
   if (prevProps.cardTitle !== nextProps.cardTitle) return false;
 
-  // Skip re-render if media props stay the same
-  if (JSON.stringify(prevProps.media) !== JSON.stringify(nextProps.media))
-    return false;
+  // Efficient media comparison
+  if (!mediaEqual(prevProps.media, nextProps.media)) return false;
 
-  // Skip re-render if theme stays the same
-  if (JSON.stringify(prevProps.theme) !== JSON.stringify(nextProps.theme))
-    return false;
+  // Efficient theme comparison (shallow)
+  if (!shallowEqual(prevProps.theme, nextProps.theme)) return false;
 
-  // Skip re-render if items (for nested timeline) stay the same
-  if (JSON.stringify(prevProps.items) !== JSON.stringify(nextProps.items))
-    return false;
+  // Efficient items comparison for nested timeline
+  if (!arrayEqual(prevProps.items, nextProps.items)) return false;
 
   // Default to true - don't re-render
   return true;
@@ -83,32 +106,49 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       nestedCardHeight,
       title,
       cardTitle,
+      focusable,
     }: TimelineContentModel) => {
       const [showMore, setShowMore] = useState(false);
       const detailsRef = useRef<HTMLDivElement | null>(null);
-      const containerRef = useRef<HTMLDivElement | null>(null);
       const progressRef = useRef<HTMLProgressElement | null>(null);
       const isFirstRender = useRef(true);
+
+      // Use improved focus management
+      const containerRef = useFocusManager({
+        shouldFocus: !!hasFocus,
+        isActive: !!active,
+        preventScroll: true,
+        restoreFocus: true,
+      });
 
       const [hasBeenActivated, setHasBeenActivated] = useState(false);
       const [isResuming, setIsResuming] = useState(false);
 
+      // Use unified timeline context
+      // Note: theme is passed as a prop to this component, so we don't need it from context
       const {
         mode,
         cardHeight,
-        slideItemDuration = 2000,
         useReadMore,
         cardWidth,
         borderLessCards,
+        highlightCardsOnHover,
+        textContentDensity,
+        textOverlay,
+        disableInteraction,
+        // Pull previously hard-coded values from context
+        slideItemDuration,
         disableAutoScrollOnClick,
         classNames,
-        textOverlay,
         slideShowType,
         showProgressOnSlideshow,
-        disableInteraction,
-        highlightCardsOnHover,
-        textDensity,
-      } = useContext(GlobalContext);
+        isDarkMode,
+      } = useTimelineContext();
+
+      // Map textContentDensity to textDensity for backward compatibility
+      const textDensity = textContentDensity;
+
+      // Values now sourced from context above
 
       const {
         paused,
@@ -118,21 +158,24 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         setupTimer,
         setStartWidth,
       } = useSlideshow(
-        progressRef,
-        active,
-        slideShowActive,
+        progressRef as unknown as React.RefObject<HTMLElement>,
+        !!active,
+        !!slideShowActive,
         slideItemDuration,
-        id,
+        id || '',
         onElapsed,
       );
 
-      const { cardActualHeight, detailsHeight, textContentLarge } = useCardSize(
-        {
-          containerRef,
-          detailsRef,
-          setStartWidth,
-        },
-      );
+      const {
+        cardActualHeight,
+        detailsHeight,
+        textContentLarge,
+        updateCardSize,
+      } = useCardSize({
+        containerRef,
+        detailsRef,
+        setStartWidth,
+      });
 
       // Memoize all calculated values to prevent re-renders
       const canShowProgressBar = useMemo(() => {
@@ -140,15 +183,15 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [active, slideShowActive, showProgressOnSlideshow]);
 
       const canShowMore = useMemo(() => {
-        return !!detailedText;
-      }, [detailedText]);
+        // Show read more functionality when:
+        // 1. We have detailed text content
+        // 2. The text is large enough to be truncated OR we're already in expanded state
+        return !!detailedText && (textContentLarge || showMore);
+      }, [detailedText, textContentLarge, showMore]);
 
       const canShowReadMore = useMemo(() => {
         return (
-          useReadMore &&
-          detailedText &&
-          !customContent &&
-          textDensity === 'HIGH'
+          useReadMore && detailedText && !customContent && textDensity !== 'LOW'
         );
       }, [useReadMore, detailedText, customContent, textDensity]);
 
@@ -171,6 +214,31 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         media,
         textDensity,
       ]);
+
+      // Initialize card size measurements when refs are ready
+      useEffect(() => {
+        // Use RAF to defer the initial measurement
+        const rafId = requestAnimationFrame(() => {
+          if (containerRef.current && detailsRef.current) {
+            updateCardSize(containerRef.current);
+          }
+        });
+
+        return () => cancelAnimationFrame(rafId);
+      }, [updateCardSize]);
+
+      // Remeasure card size when textDensity changes
+      useEffect(() => {
+        // When textDensity changes (e.g., from LOW to HIGH), we need to remeasure
+        // the card to update textContentLarge value
+        const rafId = requestAnimationFrame(() => {
+          if (containerRef.current && detailsRef.current) {
+            updateCardSize(containerRef.current);
+          }
+        });
+
+        return () => cancelAnimationFrame(rafId);
+      }, [textDensity, updateCardSize]);
 
       // Reset details scroll position when toggling details
       useEffect(() => {
@@ -197,98 +265,15 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           setupTimer(slideItemDuration);
         }
 
-        if (active && hasFocus && containerRef.current) {
-          containerRef.current.focus();
-        }
+        // Focus is now handled by useTimelineNavigation hook
+        // Only during keyboard navigation, not toolbar navigation
 
         if (!slideShowActive) {
           setHasBeenActivated(false);
         }
       }, [active, slideShowActive, slideItemDuration, hasFocus, setupTimer]);
 
-      // Set focus when needed and ensure entire card row is completely visible
-      useEffect(() => {
-        if (hasFocus && active && containerRef.current) {
-          containerRef.current.focus();
-
-          // Ensure the entire vertical item row is completely visible when it receives focus
-          setTimeout(() => {
-            if (containerRef.current) {
-              const isVerticalMode =
-                mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
-
-              if (isVerticalMode) {
-                // In vertical mode, scroll the entire vertical-item-row into view
-                const verticalItemRow = containerRef.current.closest(
-                  '[data-testid="vertical-item-row"]',
-                );
-                if (verticalItemRow) {
-                  verticalItemRow.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'nearest',
-                  });
-                } else {
-                  // Fallback to card content if row not found
-                  containerRef.current.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'nearest',
-                  });
-                }
-              } else {
-                // In horizontal mode, use 'nearest' for optimal positioning
-                containerRef.current.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'nearest',
-                  inline: 'nearest',
-                });
-              }
-            }
-          }, 0);
-        }
-      }, [hasFocus, active, mode]);
-
-      // Ensure card alignment during slideshow, independent of hasFocus state
-      useEffect(() => {
-        if (active && slideShowActive && containerRef.current) {
-          // During slideshow, ensure the active card is properly aligned and visible
-          setTimeout(() => {
-            if (containerRef.current) {
-              const isVerticalMode =
-                mode === 'VERTICAL' || mode === 'VERTICAL_ALTERNATING';
-
-              if (isVerticalMode) {
-                // In vertical mode, scroll the entire vertical-item-row into view
-                const verticalItemRow = containerRef.current.closest(
-                  '[data-testid="vertical-item-row"]',
-                );
-                if (verticalItemRow) {
-                  verticalItemRow.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'nearest',
-                  });
-                } else {
-                  // Fallback to card content if row not found
-                  containerRef.current.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'nearest',
-                  });
-                }
-              } else {
-                // In horizontal mode, use 'nearest' for optimal positioning
-                containerRef.current.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'nearest',
-                  inline: 'nearest',
-                });
-              }
-            }
-          }, 100); // Slightly longer delay for slideshow to ensure proper DOM updates
-        }
-      }, [active, slideShowActive, mode]);
+      // Focus management is now handled by useFocusManager hook
 
       // Detect when resuming from pause
       useEffect(() => {
@@ -314,34 +299,74 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             return;
           }
           if (state.playing) {
+            // Pause slideshow when video starts playing
             tryPause();
-          } else if (state.paused) {
-            if (paused && id && onElapsed) {
+          } else if (state.paused || state.ended) {
+            // Resume slideshow when video is paused or ends
+            // Continue to next slide immediately when video is paused/ended
+            if (id && onElapsed) {
               onElapsed(id);
             }
           }
         },
-        [slideShowActive, tryPause, paused, id, onElapsed],
+        [slideShowActive, tryPause, id, onElapsed],
       );
 
-      const handleCardClick = useCallback(() => {
-        if (onClick && !disableInteraction && !disableAutoScrollOnClick) {
-          onClick(id);
-        }
-      }, [onClick, id, disableInteraction, disableAutoScrollOnClick]);
+      const handleCardClick = useCallback(
+        (event: React.MouseEvent) => {
+          event.stopPropagation(); // Prevent event bubbling to parent handlers
+
+          // Don't handle clicks if we're in slideshow mode or if already active
+          if (slideShowActive || active) return;
+
+          if (onClick && !disableInteraction) {
+            // Focus the card first
+            if (containerRef.current) {
+              containerRef.current.focus({ preventScroll: true });
+            }
+
+            // Then trigger the click handler which will handle scrolling
+            onClick(id || '');
+
+            // For horizontal modes, ensure the timeline point gets focus
+            if (mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL') {
+              requestAnimationFrame(() => {
+                const point = document.querySelector(
+                  `button[data-testid="timeline-circle"][data-item-id="${id}"]`,
+                ) as HTMLButtonElement | null;
+                try {
+                  point?.focus?.({ preventScroll: true });
+                } catch {}
+              });
+            } else {
+              // For vertical modes, focus the row
+              requestAnimationFrame(() => {
+                const row = document.querySelector(
+                  `[data-testid="vertical-item-row"][data-item-id="${id}"]`,
+                ) as HTMLElement | null;
+                try {
+                  row?.focus?.({ preventScroll: true });
+                } catch {}
+              });
+            }
+          }
+        },
+        [onClick, id, disableInteraction, slideShowActive, active, mode],
+      );
 
       const toggleShowMore = useCallback(() => {
         if ((active && paused) || !slideShowActive) {
           setShowMore((prev) => !prev);
           onShowMore?.();
           // Use setTimeout to ensure the DOM has updated before focusing
-          setTimeout(() => {
+          // Focus immediately without delay
+          requestAnimationFrame(() => {
             if (containerRef.current) {
-              containerRef.current.focus();
+              containerRef.current.focus({ preventScroll: true });
               // Force focus styles to be visible
               containerRef.current.classList.add('focus-visible');
             }
-          }, 0);
+          });
         }
       }, [active, paused, slideShowActive, onShowMore]);
 
@@ -380,8 +405,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         if (textOverlay && (detailedText ?? customContent ?? timelineContent)) {
           return getTextOrContent({
             timelineContent,
-            theme,
-            detailedText,
+            theme: theme!,
+            detailedText: detailedText!,
             showMore,
           });
         }
@@ -407,67 +432,56 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       }, [textOverlay, media, isNested, cardHeight, nestedCardHeight]);
 
       return (
-        <TimelineItemContentWrapper
-          as="article"
+        <section
           aria-label={accessibleLabel}
           ref={containerRef}
           onClick={handleCardClick}
-          className={`timeline-card-content ${active ? 'active' : ''} ${
-            classNames?.card ?? ''
-          }`}
+          className={`timeline-card-content ${active ? 'active' : ''} ${classNames?.card ?? ''} ${baseCard({ borderless: borderLessCards })} ${itemContentWrapper}`}
           data-testid="timeline-card-content"
           data-item-id={id}
-          $active={active}
-          $branchDir={branchDir}
-          $slideShowActive={slideShowActive}
-          $slideShowType={slideShowType}
-          tabIndex={active ? 0 : -1}
+          tabIndex={focusable !== false && active ? 0 : -1}
+          role="article"
+          aria-current={active ? 'true' : 'false'}
           onDoubleClick={toggleShowMore}
-          $minHeight={cardMinHeight}
-          $maxWidth={cardWidth}
-          mode={mode}
-          $noMedia={!media}
-          $textOverlay={textOverlay}
-          $isNested={isNested}
-          $highlight={highlightCardsOnHover}
-          $borderLessCards={borderLessCards}
-          $textDensity={textDensity}
-          $customContent={!!customContent}
-          $theme={theme}
+          style={{
+            minHeight: customContent ? undefined : cardMinHeight,
+            height: customContent ? cardMinHeight : undefined,
+            maxWidth: cardWidth ? `${cardWidth}px` : '100%',
+          }}
         >
           {/* Only show the content header if we're not using text overlay mode with media */}
           {(!textOverlay || !media) && (
             <ContentHeader
               title={title}
-              url={url}
-              media={media}
+              url={url || ''}
+              media={media as any}
               content={content}
               cardTitle={cardTitle}
-              theme={theme}
+              theme={theme as any}
             />
           )}
 
           {media && (
             <CardMedia
-              active={active}
+              active={!!active}
               cardHeight={cardHeight}
               content={content}
               hideMedia={showMore}
-              id={id}
-              media={media}
+              id={id || ''}
+              media={media as any}
               onMediaStateChange={handleMediaState}
-              slideshowActive={slideShowActive}
-              theme={theme}
+              slideshowActive={!!slideShowActive}
+              theme={theme as any}
               title={typeof title === 'string' ? title : ''}
-              url={url}
+              url={url || ''}
               startWidth={startWidth}
-              detailsText={detailsTextComponent}
+              detailsText={detailsTextComponent as any}
               paused={paused}
               remainInterval={remainInterval}
-              showProgressBar={canShowProgressBar}
-              triangleDir={triangleDir}
+              showProgressBar={!!canShowProgressBar}
+              triangleDir={triangleDir || ''}
               resuming={isResuming}
-              progressRef={progressRef}
+              progressRef={progressRef as any}
             />
           )}
 
@@ -478,7 +492,7 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
               detailedText={detailedText}
               customContent={customContent}
               timelineContent={timelineContent}
-              contentDetailsClass={contentDetailsClass}
+              contentDetailsClass={`${contentDetailsClass} ${contentDetailsWrapper}`}
               cardActualHeight={cardActualHeight}
               detailsHeight={detailsHeight}
               ref={detailsRef}
@@ -486,29 +500,33 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           )}
 
           {canShowNestedTimeline && (
-            <NestedTimelineRenderer
-              items={items}
-              mode={'VERTICAL'}
-              nestedCardHeight={nestedCardHeight}
-              isChild={true}
-            />
+            <div className={nestedTimelineWrapper}>
+              <NestedTimelineRenderer
+                items={items || []}
+                mode={'VERTICAL'}
+                nestedCardHeight={nestedCardHeight || 0}
+                isChild={true}
+              />
+            </div>
           )}
 
-          {canShowReadMore && canShowMore && !textOverlay && (
+          {canShowReadMore && canShowMore && (
             <ContentFooter
               onExpand={toggleShowMore}
-              triangleDir={triangleDir}
+              triangleDir={triangleDir || ''}
               showMore={showMore}
               textContentIsLarge={textContentLarge}
               showReadMore={canShowReadMore}
               remainInterval={remainInterval}
               startWidth={startWidth}
-              canShow={!!detailedText && !showMore}
-              isNested={isNested}
-              theme={theme}
+              canShow={!!detailedText}
+              isNested={!!isNested}
+              theme={theme as any}
+              buttonClassName={showMoreButton}
+              iconWrapperClassName={chevronIconWrapper}
             />
           )}
-        </TimelineItemContentWrapper>
+        </section>
       );
     },
     arePropsEqual,

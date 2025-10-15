@@ -23,11 +23,13 @@ export type TimelineModel = Pick<
   | 'nestedCardHeight'
   | 'noUniqueId'
   | 'uniqueId'
+  | 'stickyToolbar'
 > & {
   activeTimelineItem?: number;
   contentDetailsChildren?: React.ReactNode | React.ReactNode[];
   iconChildren?: React.ReactNode | React.ReactNode[];
   isChild?: boolean;
+  timelineHeight?: number | string;
   onFirst?: () => void;
   onLast?: () => void;
   onNext?: () => void;
@@ -89,8 +91,6 @@ export type TimelineProps = {
   // active item index
   activeItemIndex?: number;
 
-  // alignMedia?: 'left' | 'right' | 'center';
-
   // allow dynamic update of the timeline items
   allowDynamicUpdate?: boolean;
 
@@ -143,6 +143,9 @@ export type TimelineProps = {
 
   disableToolbar?: boolean;
 
+  // makes the toolbar sticky to the top when scrolling
+  stickyToolbar?: boolean;
+
   enableBreakPoint?: boolean;
 
   enableDarkToggle?: boolean;
@@ -184,7 +187,7 @@ export type TimelineProps = {
   };
 
   // mode of the timeline. VERTICAL, HORIZONTAL, VERTICAL_ALTERNATING
-  mode?: TimelineMode;
+  mode?: TimelineMode | string;
 
   nestedCardHeight?: number;
 
@@ -239,6 +242,9 @@ export type TimelineProps = {
   // custom theme
   theme?: Theme;
 
+  // fixed height for the timeline container (number = px or CSS length)
+  timelineHeight?: number | string;
+
   // width of the timeline circle
   timelinePointDimension?: number;
 
@@ -250,6 +256,14 @@ export type TimelineProps = {
   titleDateFormat?: string;
 
   toolbarPosition?: 'top' | 'bottom';
+
+  toolbarSearchConfig?: {
+    width?: string;
+    maxWidth?: string;
+    minWidth?: string;
+    inputWidth?: string;
+    inputMaxWidth?: string;
+  };
 
   uniqueId?: string;
 
@@ -280,4 +294,5 @@ export type TimelineMode =
   | 'VERTICAL'
   | 'HORIZONTAL'
   | 'VERTICAL_ALTERNATING'
-  | 'HORIZONTAL_ALL';
+  | 'HORIZONTAL_ALL'
+  | string; // Allow string for backward compatibility

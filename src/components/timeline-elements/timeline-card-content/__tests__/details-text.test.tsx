@@ -1,5 +1,5 @@
 // test utils
-import { customRender, providerProps } from 'src/components/common/test';
+import { customRender, providerProps } from '../../../common/test';
 import { DetailsText } from '../details-text';
 
 describe('DetailsText', () => {
@@ -51,9 +51,16 @@ describe('DetailsText', () => {
         },
       });
 
-      expect(getByText('Hello world').parentElement).toHaveStyle({
-        'scrollbar-color': `${providerProps.theme.primary} default`,
-      });
+      // Check that theme styles are applied through computeCssVarsFromTheme
+      const element = getByText('Hello world').parentElement;
+
+      // Verify that the element has the computed theme styles applied
+      const styles = window.getComputedStyle(element!);
+      expect(styles.getPropertyValue('overflow-y')).toBe('hidden');
+
+      // Check that background is set using CSS variables (the exact variable name may have hash suffix)
+      const backgroundStyle = element!.style.background;
+      expect(backgroundStyle).toContain('var(--');
     });
   });
 

@@ -2,8 +2,8 @@ import { fireEvent, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import userEvent from '@testing-library/user-event';
-import { getDefaultThemeOrDark } from '@utils/index';
-import { customRender, providerProps } from 'src/components/common/test';
+import { getDefaultThemeOrDark } from '../../../../utils/index';
+import { customRender, providerProps } from '../../../common/test';
 import PopOver from '../index';
 
 describe('PopOver', () => {

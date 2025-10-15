@@ -1,6 +1,6 @@
 // Imports
-import { getDefaultClassNames } from '@utils/index';
-import { customRender, providerProps } from 'src/components/common/test';
+import { getDefaultClassNames } from '../../../../utils/index';
+import { customRender, providerProps } from '../../../common/test';
 import { getTextOrContent } from '../text-or-content';
 
 describe('getTextOrContent', () => {

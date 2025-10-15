@@ -11,10 +11,10 @@ const ChevronLeft: React.FunctionComponent = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="feather feather-chevron-left"
+    style={{ display: 'block', width: '100%', height: '100%' }}
   >
     <polyline points="15 18 9 12 15 6"></polyline>
   </svg>
 );
 
-export default ChevronLeft;
+export default React.memo(ChevronLeft);

@@ -1,7 +1,7 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { FunctionComponent } from 'react';
 import Chrono from '../../../components';
-import { ComponentContainerTree, Vertical } from '../../App.styles';
+import { componentContainerTree, componentContainerTreeDesktop, componentContainerTreeBigScreen, componentContainerTreeTablet, componentContainerTreeMobile, vertical } from '../../App.css';
 
 export interface CardlessHorizontalProps {
   type: string;
@@ -12,18 +12,28 @@ export const CardlessHorizontal: FunctionComponent<CardlessHorizontalProps> = ({
   type, 
   items 
 }) => (
-  <Vertical id="vertical">
-    <ComponentContainerTree type={type}>
+  <div className={vertical} id="vertical">
+    <div className={
+      type === 'desktop' ? componentContainerTreeDesktop :
+      type === 'big-screen' ? componentContainerTreeBigScreen :
+      type === 'tablet' ? componentContainerTreeTablet :
+      type === 'mobile' ? componentContainerTreeMobile :
+      componentContainerTree
+    } style={{ minHeight: '600px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
       <Chrono
         items={items}
-        mode="HORIZONTAL"
-        cardLess
+        mode="horizontal"
+        onItemSelected={(selected) => console.log(selected.cardTitle)}
+        
+        display={{
+          cardsDisabled: true,
+        }}
+        
         theme={{
           cardBgColor: '#fff',
           titleColorActive: 'red',
         }}
-        onItemSelected={(selected) => console.log(selected.cardTitle)}
       />
-    </ComponentContainerTree>
-  </Vertical>
+    </div>
+  </div>
 ); 

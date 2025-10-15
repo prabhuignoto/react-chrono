@@ -1,8 +1,9 @@
 import { Theme } from '@models/Theme';
 import { TimelineItemModel } from '@models/TimelineItemModel';
 import React, { useEffect, useState } from 'react';
+import { computeCssVarsFromTheme } from '../styles/theme-bridge';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import './App.css';
+import './App.styles.css';
 import {
   // Vertical components
   BasicVertical,
@@ -14,6 +15,7 @@ import {
   CardlessVertical,
   CustomContentVertical,
   CustomContentWithIconsVertical,
+  ComprehensiveVertical,
   // Horizontal components  
   BasicHorizontal,
   AllHorizontal,
@@ -26,14 +28,17 @@ import {
   mixedTimeline,
   nestedTimeline,
   worldHistoryTimeline,
+  technologyEvolutionTimeline,
 } from './data';
 import DynamicLoad from './dynamic-load';
 import { Layout } from './layout';
+import HomePage from './components/HomePage';
 
 const NewDemo: React.FunctionComponent = () => {
   const [items, setItems] = useState<TimelineItemModel[]>([]);
   const [nestedItems, setNestedItems] = useState<TimelineItemModel[]>([]);
   const [historyItems, setHistoryItems] = useState<TimelineItemModel[]>([]);
+  const [techItems, setTechItems] = useState<TimelineItemModel[]>([]);
   const [state, setState] = useState(0);
 
   const [customTheme, setCustomTheme] = useState<Theme>({
@@ -64,39 +69,33 @@ const NewDemo: React.FunctionComponent = () => {
     setItems(basicTimeline);
     setHistoryItems(worldHistoryTimeline);
     setNestedItems(nestedTimeline);
+    setTechItems(technologyEvolutionTimeline);
   }, []);
 
-  const router = items.length
-    ? createBrowserRouter([
+  const router = createBrowserRouter([
         {
           path: '/',
           element: <Layout />,
           children: [
             {
               path: '/',
-              element: <BasicVertical type={'big-screen'} items={items} />,
+              element: <HomePage />,
             },
             {
               path: '/vertical-basic',
-              element: items.length ? (
-                <BasicVertical type={'big-screen'} items={items} />
-              ) : null,
+              element: <BasicVertical type={'big-screen'} items={items} />,
             },
             {
               path: '/vertical-basic-nested',
-              element: items.length ? (
-                <NestedVertical type={'big-screen'} items={nestedItems} />
-              ) : null,
+              element: <NestedVertical type={'big-screen'} items={nestedItems} />,
             },
             {
               path: '/vertical-alternating-mixed',
-              element: items.length > 0 && (
-                <MixedVertical type={'big-screen'} />
-              ),
+              element: <MixedVertical type={'big-screen'} />,
             },
             {
               path: '/vertical-alternating-nested',
-              element: items.length > 0 && (
+              element: (
                 <AlternatingNestedVertical
                   type={'big-screen'}
                   items={nestedItems}
@@ -127,66 +126,53 @@ const NewDemo: React.FunctionComponent = () => {
             },
             {
               path: '/horizontal',
-              element: items.length > 0 && (
-                <BasicHorizontal items={items} type="big-screen" />
-              ),
+              element: <BasicHorizontal items={items} type="big-screen" />,
             },
             {
               path: '/vertical-world-history',
-              element: historyItems.length ? (
-                <NewMediaVertical items={historyItems} type="big-screen" />
-              ) : null,
+              element: <NewMediaVertical items={historyItems} type="big-screen" />,
             },
             {
               path: '/horizontal-all',
-              element: items.length > 0 && (
-                <AllHorizontal items={historyItems} type="big-screen" />
-              ),
+              element: <AllHorizontal items={historyItems} type="big-screen" />,
             },
             {
               path: '/horizontal-initial-select',
-              element: items.length > 0 && (
-                <InitialSelectedHorizontal items={items} type="big-screen" />
-              ),
+              element: <InitialSelectedHorizontal items={items} type="big-screen" />,
             },
             {
               path: '/vertical-custom',
-              element: items.length > 0 && (
-                <CustomContentVertical type="big-screen" />
-              ),
+              element: <CustomContentVertical type="big-screen" />,
             },
             {
               path: '/vertical-custom-icon',
-              element: items.length > 0 && (
-                <CustomContentWithIconsVertical type="big-screen" items={items} />
-              ),
+              element: <CustomContentWithIconsVertical type="big-screen" items={items} />,
             },
             {
               path: '/dynamic-load',
-              element: items.length > 0 && <DynamicLoad />,
+              element: <DynamicLoad />,
             },
             {
               path: '/timeline-without-cards',
-              element: items.length > 0 && (
-                <CardlessVertical type="big-screen" items={items} />
-              ),
+              element: <CardlessVertical type="big-screen" items={items} />,
             },
             {
               path: '/timeline-without-cards-horizontal',
-              element: items.length > 0 && (
-                <CardlessHorizontal type="big-screen" items={items} />
-              ),
+              element: <CardlessHorizontal type="big-screen" items={items} />,
             },
             {
               path: '/theme-showcase',
               element: <ThemeShowcase />,
             },
+            {
+              path: '/vertical-comprehensive',
+              element: <ComprehensiveVertical type="big-screen" items={techItems} />,
+            },
           ],
         },
-      ])
-    : null;
+      ]);
 
-  return router ? <RouterProvider router={router}></RouterProvider> : null;
+  return <RouterProvider router={router}></RouterProvider>;
 };
 
 export default NewDemo;

@@ -1,8 +1,9 @@
-import { forwardRef, useContext } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import { forwardRef } from 'react';
+import { useTimelineContext } from '../../contexts';
 import { DetailsTextProps } from './details-text.model';
 import { getTextOrContent } from './text-or-content';
-import { TimelineContentDetailsWrapper } from './timeline-card-content.styles';
+import { contentDetailsWrapper } from './timeline-card-content.css';
+import { vars } from 'src/styles/tokens.css';
 
 const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
   (prop, ref) => {
@@ -23,11 +24,11 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
       contentDetailsHeight,
       textOverlay,
       theme,
-    } = useContext(GlobalContext);
+    } = useTimelineContext();
 
     const TextContent = getTextOrContent({
       detailedText,
-      showMore,
+      showMore: showMore || false,
       theme,
       timelineContent,
     });
@@ -35,27 +36,35 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
     return (
       <>
         {/* detailed text */}
-        <TimelineContentDetailsWrapper
+        <div
           aria-expanded={showMore}
-          className={contentDetailsClass}
-          $customContent={!!customContent}
+          className={contentDetailsClass + ' ' + contentDetailsWrapper}
           ref={ref}
-          theme={theme}
-          $useReadMore={useReadMore}
-          $borderLess={borderLessCards}
-          $showMore={showMore}
-          $cardHeight={!textOverlay ? cardActualHeight : null}
-          $contentHeight={detailsHeight}
-          height={contentDetailsHeight}
-          $textOverlay={textOverlay}
-          $gradientColor={gradientColor}
+          style={{
+            overflowY: showMore ? 'auto' : 'hidden',
+            width: borderLessCards ? 'calc(100% - 0.5rem)' : '100%',
+            background: `${vars.color.cardBg}`,
+            // background: theme?.cardDetailsBackGround || theme?.cardBgColor,
+            // Ensure custom scrollbar color reflects theme primary color for tests and styling parity
+            // scrollbarColor: `${theme?.primary} default` as unknown as string,
+            maxHeight: !useReadMore
+              ? 'none'
+              : showMore
+                ? '1000px'
+                : `${contentDetailsHeight ?? 150}px`,
+          }}
         >
           {customContent ?? (
             <TextContent
-              {...{ detailedText, showMore, theme, timelineContent }}
+              {...{
+                detailedText,
+                showMore: showMore || false,
+                theme,
+                timelineContent,
+              }}
             />
           )}
-        </TimelineContentDetailsWrapper>
+        </div>
       </>
     );
   },

@@ -23,4 +23,18 @@ export type ToolbarItem = {
    * @param name - The name of the selected toolbar item.
    */
   onSelect: (id: string, name: string) => void;
+  /**
+   * Whether this toolbar item can be minimized/maximized.
+   */
+  minimizable?: boolean;
+  /**
+   * Current minimized state of the toolbar item.
+   */
+  isMinimized?: boolean;
+  /**
+   * Callback function to be called when minimize/maximize is toggled.
+   * @param id - The id of the toolbar item.
+   * @param isMinimized - The new minimized state.
+   */
+  onToggleMinimize?: (id: string, isMinimized: boolean) => void;
 };

@@ -51,9 +51,7 @@ describe('Timeline item title', () => {
     expect(getByText('title')).toBeInTheDocument();
 
     await waitFor(() => {
-      expect(getByText('title')).toHaveProperty('align');
-      expect(getByText('title')).toHaveProperty('align', 'left');
-      // expect(getByText('title')).toHaveStyle('text-align: left');
+      expect(getByText('title')).toHaveStyle('text-align: left');
     });
   });
 });

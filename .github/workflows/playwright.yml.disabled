@@ -1,0 +1,115 @@
+name: Playwright Tests
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, webkit]
+        shard: [1]
+    steps:
+    - uses: actions/checkout@v4
+    
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 10.15.1
+    
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: 'pnpm'
+    
+    # Cache is handled by setup-node with cache: 'pnpm'
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+    
+    - name: Install Playwright Browsers
+      run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
+    
+    - name: Run Playwright tests
+      run: pnpm exec playwright test --project=${{ matrix.browser }} --shard=${{ matrix.shard }}/4
+      env:
+        CI: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-results-${{ matrix.browser }}-${{ matrix.shard }}
+        path: |
+          playwright-report/
+          test-results/
+        retention-days: 30
+
+  test-components:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 10.15.1
+    
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: 'pnpm'
+    
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+    
+    - name: Install Playwright
+      run: pnpm exec playwright install --with-deps chromium
+    
+    - name: Run component tests
+      run: pnpm exec playwright test -c playwright-ct.config.ts
+    
+    - name: Upload component test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-ct-results
+        path: |
+          playwright-ct-report/
+          test-results/
+        retention-days: 30
+
+  report:
+    needs: [test, test-components]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - uses: actions/download-artifact@v4
+      with:
+        path: all-results
+        pattern: playwright-*
+    
+    - name: Merge reports
+      run: |
+        npx playwright merge-reports --reporter html ./all-results/playwright-results-*
+    
+    - name: Upload merged report
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
+    
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./playwright-report

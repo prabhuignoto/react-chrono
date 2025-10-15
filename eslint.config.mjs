@@ -45,7 +45,6 @@ export default [
           jsx: true,
         },
       },
-
       sourceType: 'module',
     },
 
@@ -62,11 +61,25 @@ export default [
       'sort-keys-fix/sort-keys-fix': 'error',
       'typescript-sort-keys/interface': 'error',
       'typescript-sort-keys/string-enum': 'error',
+      'no-unused-vars': "error",
+      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }]
+      // 'no-restricted-imports': [
+      //   'error',
+      //   {
+      //     paths: [
+      //       {
+      //         name: 'styled-components',
+      //         message: 'Use vanilla-extract instead. If this is a legacy file, add a file-level disable comment and include a migration note.',
+      //       },
+      //     ],
+      //     patterns: ['styled-components/*'],
+      //   },
+      // ],
     },
 
     settings: {
       react: {
-        version: '18.1.0',
+        version: 'detect',
       },
     },
   },

@@ -1,18 +1,19 @@
 import { TimelineContentModel } from '@models/TimelineContentModel';
 import { TimelineProps } from '@models/TimelineModel';
+import { Theme } from '@models/Theme';
 import {
   ForwardRefExoticComponent,
   ReactNode,
   forwardRef,
-  useContext,
   useMemo,
 } from 'react';
 import xss from 'xss';
-import { GlobalContext } from '../../GlobalContext';
+import { useTimelineContext } from '../../contexts';
 import {
-  TimelineContentDetails,
-  TimelineSubContent,
-} from './timeline-card-content.styles';
+  timelineContentDetails,
+  timelineSubContent,
+} from './timeline-card-content.css';
+import { vars } from 'src/styles/tokens.css';
 
 // Define the type for the TextOrContentModel
 export type TextOrContentModel = Pick<
@@ -27,6 +28,7 @@ const renderTextArray: (
   p: Pick<TimelineProps, 'parseDetailsAsHTML' | 'fontSizes' | 'theme'> & {
     cardTextClassName: string;
     detailedText: (string | ReactNode)[];
+    isDarkMode?: boolean;
   },
 ) => ReactNode = ({
   fontSizes,
@@ -34,6 +36,7 @@ const renderTextArray: (
   theme,
   detailedText,
   cardTextClassName,
+  isDarkMode,
 }) => {
   return detailedText.map((text, index) => {
     // Only apply xss if text is a string
@@ -46,15 +49,18 @@ const renderTextArray: (
           }
         : null;
     return (
-      <TimelineSubContent
+      <span
+        className={`${timelineSubContent} ${cardTextClassName ?? ''}`}
         key={`timeline-text-${typeof text === 'string' ? text.substring(0, 10) : ''}-${index}`}
-        fontSize={fontSizes?.cardText}
-        className={cardTextClassName}
-        theme={theme}
+        style={{
+          color:
+            theme?.cardDetailsColor ||
+            'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))',
+        }}
         {...props}
       >
         {parseDetailsAsHTML ? null : text}
-      </TimelineSubContent>
+      </span>
     );
   });
 };
@@ -71,12 +77,19 @@ const getTextOrContent: (
   const TextOrContent = forwardRef<HTMLParagraphElement, TextOrContentModel>(
     (prop, ref) => {
       const isTextArray = Array.isArray(detailedText);
-      const { fontSizes, classNames, parseDetailsAsHTML, textDensity } =
-        useContext(GlobalContext);
+      const {
+        fontSizes,
+        classNames,
+        parseDetailsAsHTML,
+        textContentDensity,
+        isDarkMode,
+      } = useTimelineContext();
 
       const shouldNotShowText = useMemo(() => {
-        return (parseDetailsAsHTML && !isTextArray) || textDensity === 'LOW';
-      }, [isTextArray, parseDetailsAsHTML, textDensity]);
+        return (
+          (parseDetailsAsHTML && !isTextArray) || textContentDensity === 'LOW'
+        );
+      }, [isTextArray, parseDetailsAsHTML, textContentDensity]);
 
       // Generate the text content based on detailedText
       const getTextContent = () => {
@@ -87,16 +100,17 @@ const getTextOrContent: (
         }
 
         return renderTextArray({
-          cardTextClassName: classNames?.cardText,
+          cardTextClassName: classNames?.cardText || '',
           detailedText: detailedText as (string | ReactNode)[],
           fontSizes,
           parseDetailsAsHTML,
-          theme,
+          theme: theme || ({} as Theme),
+          isDarkMode,
         });
       };
 
       // Create props for HTML content if needed
-      const getTextContentProps = (textContent) => {
+      const getTextContentProps = (textContent: string) => {
         if (parseDetailsAsHTML && !isTextArray) {
           return {
             dangerouslySetInnerHTML: {
@@ -107,18 +121,23 @@ const getTextOrContent: (
         return {};
       };
 
-      const renderDetailedContent = (textContent) => {
+      const renderDetailedContent = (textContent: string) => {
         const textContentProps = getTextContentProps(textContent);
 
         return (
-          <TimelineContentDetails
-            className={showMore ? 'active' : ''}
-            ref={ref}
-            theme={theme}
+          <p
+            className={
+              timelineContentDetails + ' ' + (showMore ? 'active' : '')
+            }
+            ref={ref as any}
             {...textContentProps}
+            style={{
+              color: `${vars.color.cardTitle} !important`, // Ensure color is applied correctly
+              // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
+            }}
           >
             {shouldNotShowText ? null : textContent}
-          </TimelineContentDetails>
+          </p>
         );
       };
 
@@ -128,7 +147,28 @@ const getTextOrContent: (
         }
 
         const textContent = getTextContent();
-        return textContent ? renderDetailedContent(textContent) : null;
+        if (!textContent) return null;
+
+        // If detailedText was an array, render the array of spans directly as children
+        if (isTextArray) {
+          return (
+            <p
+              className={
+                timelineContentDetails + ' ' + (showMore ? 'active' : '')
+              }
+              ref={ref as any}
+              style={{
+                color: `${vars.color.text} !important`, // Ensure color is applied correctly
+                // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
+              }}
+            >
+              {shouldNotShowText ? null : textContent}
+            </p>
+          );
+        }
+
+        // Non-array case: render as string/HTML as appropriate
+        return renderDetailedContent(String(textContent));
       };
 
       return renderTimelineContent();

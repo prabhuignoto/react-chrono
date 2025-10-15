@@ -1,12 +1,13 @@
 import { TimelineCardModel } from '@models/TimelineItemModel';
-import React, { useContext } from 'react';
-import { GlobalContext } from '../../GlobalContext';
+import React, { useMemo } from 'react';
+import { useTimelineContext } from '../../contexts';
 import TimelineItemTitle from '../timeline-item-title/timeline-card-title';
 import {
-  TimelineTitleContainer,
-  Wrapper,
-} from './timeline-horizontal-card.styles';
+  wrapper,
+  timelineTitleContainer,
+} from './timeline-horizontal-card.css';
 import { useTimelineCard } from './hooks/useTimelineCard';
+import { pickDefined } from '../../../utils/propUtils';
 import TimelinePoint from './timeline-point/timeline-point';
 import TimelineCardPortal from './timeline-card-portal/timeline-card-portal';
 
@@ -43,7 +44,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     theme,
     timelinePointShape,
     disableInteraction,
-  } = useContext(GlobalContext);
+  } = useTimelineContext();
 
   const {
     circleRef,
@@ -56,16 +57,22 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     circleClass,
     canShowTimelineContent,
   } = useTimelineCard({
-    active,
-    autoScroll,
-    slideShowRunning,
     cardLess,
     showAllCardsHorizontal,
-    id,
-    onClick,
-    mode,
+    mode: mode as
+      | 'HORIZONTAL'
+      | 'VERTICAL'
+      | 'VERTICAL_ALTERNATING'
+      | 'HORIZONTAL_ALL',
     position,
     iconChild,
+    ...pickDefined({
+      active,
+      autoScroll,
+      slideShowRunning,
+      id,
+      onClick,
+    }),
   });
 
   // Convert cardDetailedText to the expected string or string[] format
@@ -83,65 +90,144 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
     return cardDetailedText ? String(cardDetailedText) : undefined;
   };
 
+  const formattedDetailedText = formatDetailedText();
+
+  // Memoized timeline point props similar to vertical timeline implementation
+  const timelinePointProps = useMemo(
+    () => ({
+      circleClass,
+      handleClick,
+      circleRef: circleRef as React.RefObject<HTMLButtonElement>,
+      title: typeof title === 'string' ? title : String(title ?? ''),
+      theme,
+      timelinePointDimension,
+      timelinePointShape,
+      iconChild,
+      disabled: disableInteraction,
+      ...pickDefined({
+        active,
+        itemId: id,
+      }),
+    }),
+    [
+      circleClass,
+      handleClick,
+      circleRef,
+      title,
+      theme,
+      timelinePointDimension,
+      timelinePointShape,
+      iconChild,
+      disableInteraction,
+      active,
+      id,
+    ],
+  );
+
   return (
-    <Wrapper ref={wrapperRef} className={modeLower} data-testid="timeline-item">
+    <div
+      ref={wrapperRef}
+      className="timeline-horizontal-item"
+      data-testid="timeline-item"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        gap: '1rem',
+      }}
+    >
+      {/* Timeline Point - Always at top */}
+      <div
+        className="timeline-point-section"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '0.5rem',
+          zIndex: 10,
+          position: 'relative',
+        }}
+      >
+        <TimelinePoint {...timelinePointProps} />
+      </div>
+
+      {/* Card Content - Only show if conditions are met */}
       {canShowTimelineContent && (
-        <TimelineCardPortal
-          containerClass={containerClass}
-          contentRef={contentRef}
-          id={id}
-          theme={theme}
-          active={active}
-          disableInteraction={disableInteraction}
-          showAllCardsHorizontal={showAllCardsHorizontal}
-          cardWidth={cardWidth}
-          cardSubtitle={
-            typeof cardSubtitle === 'string'
-              ? cardSubtitle
-              : String(cardSubtitle ?? '')
-          }
-          cardTitle={
-            typeof cardTitle === 'string' ? cardTitle : String(cardTitle ?? '')
-          }
-          url={url}
-          cardDetailedText={formatDetailedText()}
-          slideShowRunning={slideShowRunning}
-          media={media}
-          onElapsed={onElapsed}
-          customContent={customContent}
-          hasFocus={hasFocus}
-          onClick={onClick}
-          timelineContent={timelineContent}
-          isNested={isNested}
-          nestedCardHeight={nestedCardHeight}
-          items={items}
-          wrapperId={wrapperId}
-        />
+        <div
+          className="timeline-card-section"
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            flexGrow: 1,
+          }}
+        >
+          <TimelineCardPortal
+            containerClass={containerClass}
+            contentRef={contentRef as React.RefObject<HTMLDivElement>}
+            id={id || ''}
+            theme={theme}
+            active={active || false}
+            disableInteraction={disableInteraction}
+            showAllCardsHorizontal={showAllCardsHorizontal}
+            cardSubtitle={
+              typeof cardSubtitle === 'string'
+                ? cardSubtitle
+                : String(cardSubtitle ?? '')
+            }
+            cardTitle={
+              typeof cardTitle === 'string'
+                ? cardTitle
+                : String(cardTitle ?? '')
+            }
+            wrapperId={wrapperId}
+            {...pickDefined({
+              cardWidth,
+              url,
+              slideShowRunning,
+              media,
+              onElapsed,
+              customContent,
+              hasFocus,
+              onClick,
+              timelineContent,
+              isNested,
+              nestedCardHeight,
+              items,
+            })}
+            {...(formattedDetailedText
+              ? { cardDetailedText: formattedDetailedText }
+              : {})}
+          />
+        </div>
       )}
 
-      <TimelinePoint
-        circleClass={circleClass}
-        handleClick={handleClick}
-        circleRef={circleRef}
-        title={typeof title === 'string' ? title : String(title ?? '')}
-        theme={theme}
-        timelinePointDimension={timelinePointDimension}
-        timelinePointShape={timelinePointShape}
-        iconChild={iconChild}
-      />
-
-      <TimelineTitleContainer
-        className={titleClass}
-        data-testid="timeline-title"
+      {/* Title - Always at bottom */}
+      <div
+        className="timeline-title-section"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '0.5rem',
+          minHeight: '3rem', // Ensure consistent spacing
+          position: 'relative',
+          zIndex: 5, // Above the line
+        }}
       >
         <TimelineItemTitle
           title={title}
-          active={active && !disableInteraction}
+          active={(active || false) && !disableInteraction}
           theme={theme}
-          classString={classNames?.title}
+          classString={classNames?.title || ''}
         />
-      </TimelineTitleContainer>
-    </Wrapper>
+      </div>
+    </div>
   );
 };
 

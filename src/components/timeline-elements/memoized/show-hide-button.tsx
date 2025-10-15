@@ -17,7 +17,6 @@ const ShowOrHideTextButtonMemo = memo<ShowHideTextButtonModel>(
     return textOverlay ? (
       <ShowHideTextButton
         onPointerDown={onToggle}
-        theme={theme}
         tabIndex={0}
         onKeyDown={(ev) => ev.key === 'Enter' && onToggle?.(ev)}
         aria-label={label}

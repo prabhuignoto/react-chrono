@@ -16,4 +16,4 @@ const ReplayIcon: React.FunctionComponent = () => (
   </svg>
 );
 
-export default ReplayIcon;
+export default React.memo(ReplayIcon);
