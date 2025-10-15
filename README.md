@@ -395,19 +395,33 @@ Responsive design that adapts to any screen size
 
 ## 🎬 Live Examples & Playground
 
-### 🚀 **Interactive Demo**
-Try React Chrono with a live, editable example:
+### 🚀 **v3.0 Complete Feature Showcase** ✨ NEW
 
-[![Edit react-chrono](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/silly-wilbur-1fcs3?file=%2Fsrc%2FApp.js)
+Experience all the new v3.0 features with our comprehensive CodeSandbox example:
 
-### 📚 **Component Gallery**
-Explore our demo site with interactive examples showcasing all timeline modes and features. Run `pnpm run dev` locally to access the full demo experience with:
+**[🎯 Open v3.0 Feature Showcase →](./codesandbox-example)**
+
+This interactive example demonstrates:
+- ✅ **Grouped Configuration API** - All 9 configuration groups in action
+- ✅ **Google Fonts Integration** - Per-element font styling with Inter
+- ✅ **Comprehensive i18n** - 60+ customizable text elements
+- ✅ **Enhanced Dark Mode** - Dynamic theme switching with 36 properties
+- ✅ **Sticky Toolbar** - With advanced search configuration
+- ✅ **Fullscreen Mode** - Cross-browser support
+- ✅ **Rich Media** - Images with lazy loading
+- ✅ **HTML Content** - Formatted text with lists
+
+> **📁 Want to create your own?** The complete CodeSandbox example is available in the [`/codesandbox-example`](./codesandbox-example) directory. Simply upload to CodeSandbox or fork our example to customize!
+
+### 📚 **Local Demo Site**
+Explore our comprehensive demo site with interactive examples. Run `pnpm run dev` locally to access:
 - All timeline layout modes (horizontal, vertical, alternating, horizontal-all)
 - Dark mode theming examples
 - Google Fonts integration demos
 - Internationalization samples
 - Media-rich timelines
 - Custom content examples
+- Nested timeline structures
 
 ---
 

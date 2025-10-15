@@ -1,18 +1,18 @@
 # React Chrono v3.0: A Complete Evolution
 
-We're thrilled to announce **React Chrono v3.0**, the most significant release in the library's history. After **87 commits** and a complete architectural overhaul, v3.0 delivers enhanced performance, developer experience, and a rich set of new features while maintaining backward compatibility with your existing code.
+We're thrilled to announce **React Chrono v3.0**, the most significant release in the library's history. After months of development and a complete architectural overhaul, v3.0 delivers enhanced performance, developer experience, and a rich set of new features while maintaining backward compatibility with your existing code.
 
 ## What's New at a Glance
 
 React Chrono v3.0 introduces:
 
-- 🎨 **Zero-runtime CSS** with Vanilla Extract migration
-- 🌐 **Comprehensive internationalization** supporting 40+ text elements
+- 🎨 **Zero-runtime CSS** with Vanilla Extract migration (46+ CSS files)
+- 🌐 **Comprehensive internationalization** supporting 60+ text elements across 11 categories
 - 🎭 **Google Fonts integration** with per-element font control
 - 🖼️ **Fullscreen mode** with cross-browser support
 - 🎯 **Grouped configuration API** for better developer experience
 - 🧪 **Playwright testing** for robust E2E coverage
-- 🎪 **Enhanced dark mode** with 25+ theme properties
+- 🎪 **Enhanced dark mode** with 36 theme properties (13 new in v3.0)
 - 📌 **Sticky toolbar** for always-accessible controls
 - 🔍 **Advanced search** with configurable dimensions
 
@@ -103,7 +103,7 @@ This results in **fewer re-renders** and **better performance** across the entir
 
 ### 🌐 Comprehensive Internationalization (i18n)
 
-v3.0 introduces a **complete internationalization system** supporting 40+ configurable text elements across 11 categories, making React Chrono truly global-ready.
+v3.0 introduces a **complete internationalization system** supporting **60+ configurable text elements across 11 categories**, making React Chrono truly global-ready.
 
 > **Full localization support**
 > Every user-facing text in the timeline is now configurable, from navigation buttons to accessibility labels, search placeholders to keyboard help text.
@@ -492,9 +492,9 @@ Fine-tune search input dimensions and positioning with **granular width controls
 
 ### 🎪 Enhanced Dark Mode
 
-v3.0 introduces **25+ comprehensive theme properties** for complete dark mode customization.
+v3.0 introduces **36 comprehensive theme properties** (including 13 new dark mode-specific properties) for complete customization.
 
-**New dark mode properties:**
+**Enhanced theme system:**
 ```tsx
 <Chrono
   items={items}
@@ -922,3 +922,61 @@ npm install react-chrono@latest
 We can't wait to see what you build with React Chrono v3.0! If you have questions, feedback, or want to showcase your timeline, join us on [GitHub Discussions](https://github.com/prabhuignoto/react-chrono/discussions).
 
 Happy timeline building! 🎉
+
+---
+
+## 💬 Feedback & Support
+
+We value your feedback and want to make React Chrono better for everyone. Here's how you can get help or contribute:
+
+### 📝 Bug Reports & Feature Requests
+
+Found a bug or have an idea for a new feature?
+
+- **Report issues:** [GitHub Issues](https://github.com/prabhuignoto/react-chrono/issues)
+- **Feature requests:** [GitHub Discussions - Ideas](https://github.com/prabhuignoto/react-chrono/discussions/categories/ideas)
+
+When reporting bugs, please include:
+- React Chrono version
+- React version
+- Browser and OS information
+- Minimal reproduction example (CodeSandbox or StackBlitz preferred)
+- Steps to reproduce the issue
+
+### 💡 Questions & Help
+
+Need help using React Chrono?
+
+- **Ask questions:** [GitHub Discussions - Q&A](https://github.com/prabhuignoto/react-chrono/discussions/categories/q-a)
+- **Browse documentation:** [Props Reference](./PROPS-REFERENCE.md)
+- **Check examples:** Run `pnpm dev` to see live demos locally
+
+### 🤝 Contributing
+
+We welcome contributions from the community!
+
+- **Code contributions:** Check out open issues labeled [good first issue](https://github.com/prabhuignoto/react-chrono/labels/good%20first%20issue)
+- **Documentation:** Help improve our docs and examples
+- **Testing:** Add test coverage or report edge cases
+- **Spread the word:** Star the repo ⭐ and share with others
+
+See our [Contributing Guidelines](https://github.com/prabhuignoto/react-chrono/blob/master/CONTRIBUTING.md) for more details.
+
+### 🌟 Show Your Support
+
+If React Chrono has been helpful in your projects:
+
+- ⭐ **Star the repository** on [GitHub](https://github.com/prabhuignoto/react-chrono)
+- 🐦 **Share your projects** using #ReactChrono on social media
+- 💬 **Join the discussion** and help others in the community
+- ☕ **Sponsor development** via [GitHub Sponsors](https://github.com/sponsors/prabhuignoto)
+
+### 📧 Direct Contact
+
+For security issues or sensitive matters:
+- **Email:** prabhu.m.murthy@gmail.com
+- **Security vulnerabilities:** Please use [GitHub Security Advisories](https://github.com/prabhuignoto/react-chrono/security/advisories)
+
+---
+
+Thank you for using React Chrono! Your feedback drives our development and helps us build a better library for everyone. 🙏
