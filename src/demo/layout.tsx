@@ -11,7 +11,7 @@ const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50 font-sans overflow-hidden">
+    <div className="h-screen flex flex-col bg-gray-50 font-sans">
       <Header onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />
 
       <div className="flex-1 flex relative overflow-hidden">
@@ -40,8 +40,7 @@ const Layout = () => {
           <div className={`flex-1 ${isHomePage ? 'px-0' : 'p-4 sm:p-6 lg:p-8'}`}>
             <Outlet />
           </div>
-
-          <Footer />
+        <Footer />
         </main>
       </div>
     </div>

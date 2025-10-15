@@ -4,7 +4,7 @@ import cls from 'classnames';
 
 const HeroSection: React.FC = () => {
   return (
-    <div className="relative bg-linear-to-r from-indigo-50 to-blue-50 overflow-hidden">
+    <div className="relative bg-linear-to-r from-indigo-50 to-blue-50">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <svg className="w-full h-full" viewBox="0 0 100 100">
