@@ -30,6 +30,7 @@ Built entirely in TypeScript with a grouped API that organizes props into logica
 
 ### 🚀 **Production-Ready Performance**
 Native lazy loading for images, IntersectionObserver-managed visibility, and automatic video pause optimization ensure smooth performance with large datasets. Cross-browser compatible with comprehensive WCAG AA accessibility.
+
 ---
 
 ## 📑 Table of Contents
