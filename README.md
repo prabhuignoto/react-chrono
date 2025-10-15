@@ -346,35 +346,7 @@ Fundamentally adapts to each device: precision hover states and multi-column lay
 
 ---
 
-## 🎨 Use Cases & Examples
-
-### 📈 **Business & Corporate**
-- Company milestones and achievements
-- Product development roadmaps  
-- Project progress tracking
-- Employee journey timelines
-
-### 🎓 **Education & History**
-- Historical events and periods
-- Course curriculum progression
-- Student learning paths
-- Research timelines
-
-### 👥 **Personal & Lifestyle**
-- Life events and memories
-- Travel itineraries  
-- Career progression
-- Achievement showcases
-
-### 💻 **Technical & Development**
-- Software release cycles
-- Bug tracking and resolution
-- Feature implementation progress
-- API version history
-
----
-
-## 🔄 Migration from v1 to v2
+## 🔄 Migration from v2 to v3
 
 Upgrading is seamless with full backward compatibility:
 
