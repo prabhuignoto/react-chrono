@@ -104,7 +104,6 @@ React Chrono v3.0 represents a complete evolution of the timeline component with
 - **Smoother Animations** - Refined slideshow transitions and card reveals
 
 ### 🧪 **Testing & Quality**
-- **Playwright Migration** - Modern E2E testing replacing Cypress with comprehensive cross-browser coverage
 - **Component Testing** - Isolated component tests with visual regression testing
 - **Enhanced Coverage** - Expanded test suite with integration tests for build output
 
@@ -487,14 +486,9 @@ pnpm run build
 # Run unit tests
 pnpm test
 
-# Run E2E tests with Playwright
-pnpm run test:e2e
-
 # Lint and format code
 pnpm run clean
 
-# Start Storybook
-pnpm run ladle
 ```
 
 ### Testing Framework
@@ -502,9 +496,6 @@ pnpm run ladle
 React Chrono uses a comprehensive testing approach:
 
 - **Unit Tests**: Vitest with @testing-library/react
-- **E2E Tests**: Playwright for cross-browser testing
-- **Component Tests**: Playwright Component Testing
-- **Visual Testing**: Playwright visual regression tests
 
 ---
 
@@ -540,7 +531,6 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 
 **Development Tools**
 - [Vite](https://vitejs.dev/) - Fast bundling
-- [Playwright](https://playwright.dev/) - E2E testing
 - [Vitest](https://vitest.dev/) - Unit testing
 - [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/) - Code quality
 
