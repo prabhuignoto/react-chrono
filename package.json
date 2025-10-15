@@ -178,7 +178,8 @@
       "import": "./dist/index.esm.js",
       "require": "./dist/index.cjs",
       "default": "./dist/index.esm.js"
-    }
+    },
+    "./dist/style.css": "./dist/style.css"
   },
   "size-limit": [
     {

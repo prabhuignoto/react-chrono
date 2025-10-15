@@ -120,7 +120,9 @@ describe('Google Fonts Utilities', () => {
       // Second load - should reuse existing
       await loadGoogleFonts(config);
 
-      const stylesheetLinks = document.querySelectorAll('link[rel="stylesheet"]');
+      const stylesheetLinks = document.querySelectorAll(
+        'link[rel="stylesheet"]',
+      );
       expect(stylesheetLinks.length).toBe(1); // Only one stylesheet link should exist
     });
 

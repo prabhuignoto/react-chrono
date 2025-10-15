@@ -73,7 +73,8 @@ export const listItem = style([
         gap: tokens.semantic.spacing.sm,
       },
       '(prefers-reduced-motion: reduce)': {
-        transition: 'background 0.1s ease-in-out, border-color 0.1s ease-in-out',
+        transition:
+          'background 0.1s ease-in-out, border-color 0.1s ease-in-out',
         transform: 'none',
       },
     },
@@ -137,7 +138,8 @@ export const checkbox = style([
     },
     '@media': {
       '(prefers-reduced-motion: reduce)': {
-        transition: 'background 0.1s ease-in-out, border-color 0.1s ease-in-out',
+        transition:
+          'background 0.1s ease-in-out, border-color 0.1s ease-in-out',
       },
     },
   },

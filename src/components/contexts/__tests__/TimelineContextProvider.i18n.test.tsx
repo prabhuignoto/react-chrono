@@ -1,7 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import React from 'react';
-import { TimelineContextProvider, useTimelineContext } from '../TimelineContextProvider';
+import {
+  TimelineContextProvider,
+  useTimelineContext,
+} from '../TimelineContextProvider';
 import { TimelineI18nConfig } from '@models/TimelineI18n';
 
 // Test component to access context
@@ -11,7 +14,9 @@ const TestComponent: React.FC = () => {
   return (
     <div>
       <span data-testid="first-item">{textResolver.firstItem()}</span>
-      <span data-testid="search-placeholder">{textResolver.searchPlaceholder()}</span>
+      <span data-testid="search-placeholder">
+        {textResolver.searchPlaceholder()}
+      </span>
       <span data-testid="legacy-first">{buttonTexts?.first}</span>
     </div>
   );
@@ -41,11 +46,13 @@ describe('TimelineContextProvider i18n Integration', () => {
     const { getByTestId } = render(
       <TimelineContextProvider {...defaultProps}>
         <TestComponent />
-      </TimelineContextProvider>
+      </TimelineContextProvider>,
     );
 
     expect(getByTestId('first-item')).toHaveTextContent('Go to first item');
-    expect(getByTestId('search-placeholder')).toHaveTextContent('Search Timeline');
+    expect(getByTestId('search-placeholder')).toHaveTextContent(
+      'Search Timeline',
+    );
   });
 
   it('should use custom i18n texts when provided', () => {
@@ -61,11 +68,13 @@ describe('TimelineContextProvider i18n Integration', () => {
     const { getByTestId } = render(
       <TimelineContextProvider {...defaultProps} i18nConfig={customI18n}>
         <TestComponent />
-      </TimelineContextProvider>
+      </TimelineContextProvider>,
     );
 
     expect(getByTestId('first-item')).toHaveTextContent('Premier élément');
-    expect(getByTestId('search-placeholder')).toHaveTextContent('Rechercher dans la chronologie');
+    expect(getByTestId('search-placeholder')).toHaveTextContent(
+      'Rechercher dans la chronologie',
+    );
   });
 
   it('should maintain legacy compatibility with buttonTexts', () => {
@@ -76,9 +85,12 @@ describe('TimelineContextProvider i18n Integration', () => {
     };
 
     const { getByTestId } = render(
-      <TimelineContextProvider {...defaultProps} buttonTexts={legacyButtonTexts}>
+      <TimelineContextProvider
+        {...defaultProps}
+        buttonTexts={legacyButtonTexts}
+      >
         <TestComponent />
-      </TimelineContextProvider>
+      </TimelineContextProvider>,
     );
 
     // With default i18n, textResolver uses i18n defaults, but legacy buttonTexts are still available
@@ -104,7 +116,7 @@ describe('TimelineContextProvider i18n Integration', () => {
         buttonTexts={legacyButtonTexts}
       >
         <TestComponent />
-      </TimelineContextProvider>
+      </TimelineContextProvider>,
     );
 
     // textResolver should use i18n
@@ -125,11 +137,13 @@ describe('TimelineContextProvider i18n Integration', () => {
     const { getByTestId } = render(
       <TimelineContextProvider {...defaultProps} i18nConfig={partialI18n}>
         <TestComponent />
-      </TimelineContextProvider>
+      </TimelineContextProvider>,
     );
 
     expect(getByTestId('first-item')).toHaveTextContent('Custom First');
-    expect(getByTestId('search-placeholder')).toHaveTextContent('Search Timeline'); // default
+    expect(getByTestId('search-placeholder')).toHaveTextContent(
+      'Search Timeline',
+    ); // default
   });
 
   it('should provide textResolver in context', () => {
@@ -141,7 +155,9 @@ describe('TimelineContextProvider i18n Integration', () => {
           <span data-testid="next-item">{textResolver.nextItem()}</span>
           <span data-testid="dark-mode">{textResolver.darkMode()}</span>
           <span data-testid="read-more">{textResolver.readMore()}</span>
-          <span data-testid="search-results">{textResolver.searchResults(3, 10)}</span>
+          <span data-testid="search-results">
+            {textResolver.searchResults(3, 10)}
+          </span>
         </div>
       );
     };
@@ -149,7 +165,7 @@ describe('TimelineContextProvider i18n Integration', () => {
     const { getByTestId } = render(
       <TimelineContextProvider {...defaultProps}>
         <TestTextResolver />
-      </TimelineContextProvider>
+      </TimelineContextProvider>,
     );
 
     expect(getByTestId('next-item')).toHaveTextContent('Next item');
@@ -173,8 +189,12 @@ describe('TimelineContextProvider i18n Integration', () => {
 
       return (
         <div>
-          <span data-testid="search-results">{textResolver.searchResults(2, 8)}</span>
-          <span data-testid="item-position">{textResolver.itemPosition(5, 12)}</span>
+          <span data-testid="search-results">
+            {textResolver.searchResults(2, 8)}
+          </span>
+          <span data-testid="item-position">
+            {textResolver.itemPosition(5, 12)}
+          </span>
         </div>
       );
     };
@@ -182,7 +202,7 @@ describe('TimelineContextProvider i18n Integration', () => {
     const { getByTestId } = render(
       <TimelineContextProvider {...defaultProps} i18nConfig={customI18n}>
         <TestInterpolation />
-      </TimelineContextProvider>
+      </TimelineContextProvider>,
     );
 
     expect(getByTestId('search-results')).toHaveTextContent('Résultat 2 sur 8');

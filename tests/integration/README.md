@@ -8,7 +8,9 @@ This directory contains integration tests for the React Chrono library build out
 Validates the Vite build output to ensure:
 - ESM and CJS bundles are generated correctly
 - TypeScript definitions are created
-- CSS assets are bundled and minified
+- **Vanilla Extract CSS assets are bundled and minified**
+- **CSS contains design tokens (CSS custom properties)**
+- **No source .css.ts references in production CSS**
 - Bundles meet size limits
 - Package.json exports are configured correctly
 - Peer dependencies are externalized
@@ -19,7 +21,9 @@ End-to-end test using Playwright that:
 - Installs the built package in a demo React app (using `file:` protocol)
 - Launches the demo app in a real browser
 - **Verifies timeline component renders in the DOM**
-- **Validates CSS is loaded and applied correctly** (computed styles check)
+- **Validates Vanilla Extract CSS is loaded and applied correctly** (computed styles check)
+- **Checks for Vanilla Extract hash-based class names**
+- **Verifies CSS custom properties (design tokens) are applied**
 - **Tests timeline items and cards are visible and styled**
 - Checks navigation controls are functional
 - Monitors for console errors during rendering
@@ -76,8 +80,10 @@ These integration tests provide confidence that:
 1. **Build Artifacts** - The Vite build produces valid ESM/CJS bundles and TypeScript definitions
 2. **Real-World Usage** - The package can be imported and used in real React applications
 3. **Rendering Validation** - Timeline component actually renders in a browser (not just builds)
-4. **CSS Loading** - Styles are correctly bundled and applied (verified via computed styles)
-5. **TypeScript Support** - Types are correctly generated and usable in consuming apps
-6. **Bundle Quality** - Build output meets size limits and minification standards
+4. **Vanilla Extract CSS** - Styles generated from `.css.ts` files are correctly bundled, minified, and applied
+5. **Design Tokens** - CSS custom properties (design tokens) are present and functional
+6. **Style Application** - Computed styles verify CSS is loaded and active in the browser
+7. **TypeScript Support** - Types are correctly generated and usable in consuming apps
+8. **Bundle Quality** - Build output meets size limits and minification standards
 
-This is critical for catching issues before publishing to npm, ensuring the package works end-to-end in production scenarios.
+This is critical for catching issues before publishing to npm, ensuring the package works end-to-end in production scenarios. The Vanilla Extract specific tests ensure the migration from styled-components is complete and functional.

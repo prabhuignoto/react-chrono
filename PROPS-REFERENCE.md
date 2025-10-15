@@ -1224,7 +1224,7 @@ interface TimelineI18nConfig {
 interface DarkModeConfig {
   /** Enable dark mode */
   enabled?: boolean;
-  /** Show dark mode toggle in toolbar */
+  /** Show dark mode toggle button in toolbar */
   showToggle?: boolean;
 }
 ```
@@ -1254,10 +1254,7 @@ interface TimelinePropsV2 {
   accessibility?: AccessibilityConfig;
   
   // Dark mode
-  darkMode?: {
-    enabled?: boolean;
-    showToggle?: boolean;
-  };
+  darkMode?: DarkModeConfig;
   
   // Event callbacks
   onItemSelected?: (data: { item: TimelineItem; index: number }) => void;

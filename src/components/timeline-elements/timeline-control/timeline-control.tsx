@@ -128,10 +128,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
   const slideshowStatus = useMemo(() => '', []);
 
   return (
-    <div
-      className={timelineControlContainer}
-      key="control-wrapper"
-    >
+    <div className={timelineControlContainer} key="control-wrapper">
       {/* Visually hidden status information for screen readers */}
       <output className={srOnly} aria-live="polite">
         {positionStatus}

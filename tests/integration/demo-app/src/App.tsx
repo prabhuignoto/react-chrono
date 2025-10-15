@@ -1,4 +1,6 @@
 import { Chrono } from 'react-chrono';
+// Import Vanilla Extract CSS
+import 'react-chrono/dist/style.css';
 
 const items = [
   {

@@ -89,11 +89,7 @@ const List: FunctionComponent<ListModel> = ({
     [theme, handleItemSelection, multiSelectable, activeItemIndex],
   );
 
-  return (
-    <ul className={list}>
-      {listItems.map(renderListItem)}
-    </ul>
-  );
+  return <ul className={list}>{listItems.map(renderListItem)}</ul>;
 };
 
 export { List };

@@ -1,6 +1,6 @@
 /**
  * Comprehensive internationalization configuration for React Chrono Timeline
- * 
+ *
  * This interface provides complete localization support for all user-facing
  * text content within the timeline component, including navigation controls,
  * search functionality, accessibility labels, and interactive elements.
@@ -311,7 +311,9 @@ export const defaultI18nTexts: Required<TimelineI18nConfig> = {
 /**
  * Utility function to merge user-provided i18n config with defaults
  */
-export function mergeI18nConfig(userConfig?: TimelineI18nConfig): Required<TimelineI18nConfig> {
+export function mergeI18nConfig(
+  userConfig?: TimelineI18nConfig,
+): Required<TimelineI18nConfig> {
   if (!userConfig) return defaultI18nTexts;
 
   return {
@@ -323,7 +325,10 @@ export function mergeI18nConfig(userConfig?: TimelineI18nConfig): Required<Timel
     quickJump: { ...defaultI18nTexts.quickJump, ...userConfig.quickJump },
     content: { ...defaultI18nTexts.content, ...userConfig.content },
     status: { ...defaultI18nTexts.status, ...userConfig.status },
-    accessibility: { ...defaultI18nTexts.accessibility, ...userConfig.accessibility },
+    accessibility: {
+      ...defaultI18nTexts.accessibility,
+      ...userConfig.accessibility,
+    },
     view: { ...defaultI18nTexts.view, ...userConfig.view },
     keyboard: { ...defaultI18nTexts.keyboard, ...userConfig.keyboard },
   };
@@ -333,7 +338,10 @@ export function mergeI18nConfig(userConfig?: TimelineI18nConfig): Required<Timel
  * Utility function to interpolate template strings with variables
  * Example: interpolateString('{current} of {total}', { current: 1, total: 5 }) => '1 of 5'
  */
-export function interpolateString(template: string, variables: Record<string, string | number>): string {
+export function interpolateString(
+  template: string,
+  variables: Record<string, string | number>,
+): string {
   return template.replace(/\{(\w+)\}/g, (match, key) => {
     const value = variables[key];
     return value !== undefined && value !== null ? value.toString() : match;

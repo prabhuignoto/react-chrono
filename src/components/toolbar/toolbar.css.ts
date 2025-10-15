@@ -607,7 +607,7 @@ export const extraControls = style([
     visibility: 'visible',
     flexShrink: 0,
     flexWrap: 'wrap',
-    alignItems: "flex-start"
+    alignItems: 'flex-start',
   },
 ]);
 

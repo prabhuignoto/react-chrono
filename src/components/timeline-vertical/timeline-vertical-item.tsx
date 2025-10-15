@@ -151,7 +151,10 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   // Memoized title display configuration
   const titleConfig = useMemo(
     () => ({
-      display: (!title && mode === 'VERTICAL') || (isMobile && !alternateCards) ? 'none' : 'flex',
+      display:
+        (!title && mode === 'VERTICAL') || (isMobile && !alternateCards)
+          ? 'none'
+          : 'flex',
       width: alternateCards ? '37.5%' : '10%',
       // Fix text alignment for alternating mode:
       // - Left side (title appears last): align left
@@ -173,8 +176,8 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     [className, flipLayout],
   );
 
-  const Title =
-    useMemo(() => (
+  const Title = useMemo(
+    () => (
       <div
         className={titleClassName}
         data-mode={mode}
@@ -202,7 +205,8 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           })}
         />
       </div>
-    ),[
+    ),
+    [
       titleClassName,
       mode,
       titleConfig.textAlign,
@@ -213,8 +217,8 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       calculateTitleOrder,
       alternateCards,
       className,
-    ]);
-  
+    ],
+  );
 
   /**
    * Memoized CSS classes for the main VerticalItemWrapper.

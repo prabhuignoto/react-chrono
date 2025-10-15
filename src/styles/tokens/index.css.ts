@@ -198,7 +198,7 @@ export const tokens = createThemeContract({
         sm: null,
         md: null,
         xs: null,
-        lg: null
+        lg: null,
       },
       lineHeight: {
         tight: null,

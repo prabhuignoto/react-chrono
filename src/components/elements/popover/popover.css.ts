@@ -180,7 +180,8 @@ export const selecter = style([
         // Ensure touch targets are at least 44x44px
       },
       '(prefers-reduced-motion: reduce)': {
-        transition: 'background 0.1s ease-in-out, border-color 0.1s ease-in-out',
+        transition:
+          'background 0.1s ease-in-out, border-color 0.1s ease-in-out',
         transform: 'none',
       },
     },

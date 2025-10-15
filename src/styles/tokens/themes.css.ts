@@ -187,7 +187,7 @@ export const lightTheme = createTheme(tokens, {
         sm: '0.5rem',
         md: '0.75rem',
         xs: '0.25rem',
-        lg: '1.5rem'
+        lg: '1.5rem',
       },
       lineHeight: {
         tight: '1.2',
@@ -465,7 +465,7 @@ export const darkTheme = createTheme(tokens, {
         sm: '0.5rem',
         md: '0.75rem',
         xs: '0.25rem',
-        lg: '1.5rem'
+        lg: '1.5rem',
       },
       lineHeight: {
         tight: '1.2',

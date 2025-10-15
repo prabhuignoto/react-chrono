@@ -29,9 +29,11 @@ describe('useI18n', () => {
 
     expect(result.current.navigation.first()).toBe('Premier élément');
     expect(result.current.navigation.next()).toBe('Suivant');
-    expect(result.current.search.placeholder()).toBe('Rechercher dans la chronologie');
+    expect(result.current.search.placeholder()).toBe(
+      'Rechercher dans la chronologie',
+    );
     expect(result.current.search.ariaLabel()).toBe('Rechercher du contenu');
-    
+
     // Should fallback to defaults for non-provided values
     expect(result.current.navigation.last()).toBe('Go to last item');
   });
@@ -49,7 +51,9 @@ describe('useI18n', () => {
     const { result } = renderHook(() => useI18n(customConfig));
 
     expect(result.current.search.resultsCount(3, 10)).toBe('Résultat 3 sur 10');
-    expect(result.current.accessibility.itemPosition(2, 5)).toBe('Élément 2 de 5');
+    expect(result.current.accessibility.itemPosition(2, 5)).toBe(
+      'Élément 2 de 5',
+    );
   });
 
   it('should provide all text categories', () => {
@@ -91,10 +95,9 @@ describe('useI18n', () => {
       navigation: { first: 'First Config 2' },
     };
 
-    const { result, rerender } = renderHook(
-      ({ config }) => useI18n(config),
-      { initialProps: { config: config1 } }
-    );
+    const { result, rerender } = renderHook(({ config }) => useI18n(config), {
+      initialProps: { config: config1 },
+    });
 
     expect(result.current.navigation.first()).toBe('First Config 1');
 
@@ -137,7 +140,9 @@ describe('useI18n', () => {
     const { result } = renderHook(() => useI18n(customConfig));
 
     // Should handle missing variables gracefully
-    expect(result.current.search.resultsCount(3, 10)).toBe('Result 3 out of 10 items ({missing})');
+    expect(result.current.search.resultsCount(3, 10)).toBe(
+      'Result 3 out of 10 items ({missing})',
+    );
   });
 
   it('should handle all category functions', () => {

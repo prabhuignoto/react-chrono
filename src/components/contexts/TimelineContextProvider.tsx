@@ -378,11 +378,11 @@ export const TimelineContextProvider: FunctionComponent<
 
   // Setup i18n helper first
   const i18nHelper = useI18n(i18nConfig);
-  
+
   // Create text resolver with i18n and legacy support
   const textResolver = useMemo(
     () => createTextResolver(i18nHelper, buttonTexts),
-    [i18nHelper, buttonTexts]
+    [i18nHelper, buttonTexts],
   );
 
   const memoizedButtonTexts = useMemo(

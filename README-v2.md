@@ -40,6 +40,7 @@ Break free from generic timeline designs with our comprehensive theming system. 
 <details>
 <summary><strong>Quick Start</strong></summary>
 
+- [What's New in v3.0](#-whats-new-in-v30)
 - [Installation](#-installation)
 - [Basic Usage](#-basic-usage)
 - [Timeline Modes](#-timeline-modes)
@@ -78,6 +79,44 @@ Break free from generic timeline designs with our comprehensive theming system. 
 
 ---
 
+## 🎉 What's New in v3.0
+
+React Chrono v3.0 represents a complete evolution of the timeline component with architectural improvements and powerful new features:
+
+### 🏗️ **Architectural Overhaul**
+- **Grouped Configuration API** - Props organized into logical groups (`layout`, `interaction`, `content`, `display`, `media`, `animation`, `style`, `accessibility`, `i18n`) for intuitive configuration and better IDE autocomplete
+- **Vanilla Extract Migration** - Complete migration from styled-components to Vanilla Extract for zero-runtime CSS, improved performance, and type-safe styling
+- **Unified Context System** - Streamlined from multiple contexts to a single optimized provider, reducing complexity and improving performance
+
+### ✨ **New Features**
+- **Google Fonts Integration** - Dynamic font loading with per-element weight/style control and intelligent caching
+- **Comprehensive Internationalization** - 40+ configurable text elements across 11 categories with template string support
+- **Fullscreen Mode** - Cross-browser fullscreen support with proper portal handling and keyboard shortcuts
+- **Enhanced Dark Mode** - 25+ theme properties including button states, shadows, glows, and search highlighting
+- **Sticky Toolbar** - Optional sticky positioning for toolbar with configurable placement
+- **Borderless Cards** - Clean, minimal card variant for modern designs
+- **Advanced Search Configuration** - Customizable search input widths and positioning
+
+### 🎨 **UX Improvements**
+- **Responsive Popover System** - Smart positioning with fullscreen awareness
+- **Improved Navigation** - Enhanced keyboard navigation with better focus management
+- **Text Density Control** - Dynamic card remeasurement when switching between compact/detailed views
+- **Smoother Animations** - Refined slideshow transitions and card reveals
+
+### 🧪 **Testing & Quality**
+- **Playwright Migration** - Modern E2E testing replacing Cypress with comprehensive cross-browser coverage
+- **Component Testing** - Isolated component tests with visual regression testing
+- **Enhanced Coverage** - Expanded test suite with integration tests for build output
+
+### 📦 **Developer Experience**
+- **TypeScript-First** - Enhanced type definitions with proper interface exports
+- **Better Documentation** - Comprehensive props reference with migration guides
+- **Improved Demos** - Redesigned demo site with full-width layouts and modern UX
+
+All v2.x props remain fully supported with automatic mapping to the new grouped API, ensuring seamless upgrades without breaking changes.
+
+---
+
 ## 🚀 Quick Start
 
 ### Installation
@@ -99,42 +138,132 @@ pnpm add react-chrono
 
 ## 🎯 Basic Usage
 
-### Your First Timeline in 30 Seconds
+### Minimal Setup - Your First Timeline
 
-React Chrono transforms complex chronological data into beautiful, interactive experiences with minimal setup. Simply provide your timeline items as an array of objects containing titles, descriptions, and optional media elements. The component intelligently handles layout, responsive behavior, and user interactions automatically.
-
-Each timeline item can include rich content - from simple text descriptions to high-resolution images, videos, and even custom React components. The component's smart media loading ensures optimal performance, while built-in features like keyboard navigation, search functionality, and slideshow modes create engaging user experiences without additional configuration.
+Get started with just two lines of code:
 
 ```jsx
 import { Chrono } from 'react-chrono';
 
 const items = [
-  { title: 'May 1940', cardTitle: 'Dunkirk Evacuation', cardDetailedText: '...' },
-  { title: 'June 1944', cardTitle: 'D-Day Landing', cardDetailedText: '...' }
+  { title: 'May 1940', cardTitle: 'Dunkirk', cardDetailedText: 'Allied evacuation from France' },
+  { title: 'June 1944', cardTitle: 'D-Day', cardDetailedText: 'Normandy invasion begins' }
 ];
 
-<Chrono items={items} mode="alternating" theme={{ primary: '#0070f3' }} />
+<Chrono items={items} />
 ```
 
-> **💡 Pro Tip**: React Chrono automatically adapts to your container size, but providing explicit dimensions ensures optimal initial rendering and prevents layout shifts.
+### Common Configurations
+
+**Horizontal Timeline with Custom Theme**
+```jsx
+<Chrono
+  items={items}
+  mode="horizontal"
+  theme={{ primary: '#0070f3', cardBgColor: '#f5f5f5' }}
+/>
+```
+
+**Vertical Timeline with Media**
+```jsx
+const items = [
+  {
+    title: 'January 2024',
+    cardTitle: 'Product Launch',
+    cardDetailedText: 'Released version 3.0 with new features',
+    media: {
+      type: 'IMAGE',
+      source: { url: 'https://example.com/launch.jpg' },
+      name: 'Product launch event'
+    }
+  }
+];
+
+<Chrono items={items} mode="vertical" />
+```
+
+**Alternating Timeline with Slideshow**
+```jsx
+<Chrono
+  items={items}
+  mode="alternating"
+  animation={{
+    slideshow: {
+      enabled: true,
+      duration: 3000,
+      type: 'fade'
+    }
+  }}
+/>
+```
 
 ### Advanced Configuration with Grouped API ✨
 
-The new grouped API transforms timeline customization from scattered props into logical, discoverable sections. Instead of memorizing dozens of individual properties, organize your configuration by purpose - layout settings control dimensions and responsive behavior, interaction settings manage user engagement features, and theme settings handle visual appearance.
-
-This architectural improvement makes complex timelines maintainable and reduces configuration errors. IDE autocompletion guides you through available options within each group, while TypeScript ensures type safety across all settings. The grouped approach also enables preset configurations that can be easily shared and reused across projects.
+The new grouped API organizes configuration into logical sections for better discoverability and maintainability:
 
 ```jsx
 <Chrono
   items={items}
-  layout={{ cardWidth: 450, responsive: { breakpoint: 768 } }}
-  interaction={{ keyboardNavigation: true, pointClick: true }}
-  animation={{ slideshow: { enabled: true, duration: 4000 } }}
-  theme={{ primary: '#0070f3', cardBgColor: '#ffffff' }}
+  mode="alternating"
+
+  layout={{
+    cardWidth: 450,
+    cardHeight: 200,
+    responsive: { enabled: true, breakpoint: 768 }
+  }}
+
+  interaction={{
+    keyboardNavigation: true,
+    pointClick: true,
+    autoScroll: true
+  }}
+
+  display={{
+    borderless: false,
+    toolbar: { enabled: true, sticky: true }
+  }}
+
+  animation={{
+    slideshow: { enabled: true, duration: 4000, type: 'fade' }
+  }}
+
+  theme={{
+    primary: '#0070f3',
+    cardBgColor: '#ffffff',
+    cardTitleColor: '#1f2937'
+  }}
 />
 ```
 
-> **🚀 Migration Made Easy**: All existing individual props continue to work alongside the new grouped API, ensuring seamless upgrades without breaking changes.
+**Quick Start Examples by Use Case:**
+
+```jsx
+// Corporate Timeline
+<Chrono items={milestones} mode="horizontal" theme={{ primary: '#1a73e8' }} />
+
+// Project Roadmap
+<Chrono
+  items={tasks}
+  mode="vertical"
+  display={{ toolbar: { enabled: true, sticky: true } }}
+/>
+
+// Photo Timeline
+<Chrono
+  items={memories}
+  mode="alternating"
+  media={{ height: 300, fit: 'cover' }}
+/>
+
+// Documentation Timeline
+<Chrono
+  items={releases}
+  mode="vertical"
+  content={{ allowHTML: true, readMore: true }}
+/>
+```
+
+> **🚀 Migration Made Easy**: All existing v2.x props work alongside the new grouped API for seamless upgrades.
 
 ## 🎭 Timeline Modes
 
@@ -312,21 +441,19 @@ Responsive design that adapts to any screen size
 
 ## 🎬 Live Examples & Playground
 
-### 🚀 **Interactive Demos**
-Explore React Chrono in action with live, editable examples:
+### 🚀 **Interactive Demo**
+Try React Chrono with a live, editable example:
 
 [![Edit react-chrono](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/silly-wilbur-1fcs3?file=%2Fsrc%2FApp.js)
 
-### 📚 **Storybook Gallery**
-Browse our comprehensive component gallery with all features demonstrated:
-
-[![Storybook](https://img.shields.io/badge/Storybook-Explore%20Components-ff4785?style=for-the-badge&logo=storybook)](https://5f985eb478dcb00022cfd60e-crlyulevwt.chromatic.com/)
-
-### 🎯 **Featured Examples**
-- [Corporate Timeline](https://codesandbox.io/s/corporate-timeline) - Company milestones
-- [Historical Events](https://codesandbox.io/s/history-timeline) - World War II timeline  
-- [Project Roadmap](https://codesandbox.io/s/project-roadmap) - Development timeline
-- [Personal Journey](https://codesandbox.io/s/personal-timeline) - Career progression
+### 📚 **Component Gallery**
+Explore our demo site with interactive examples showcasing all timeline modes and features. Run `pnpm run dev` locally to access the full demo experience with:
+- All timeline layout modes (horizontal, vertical, alternating, horizontal-all)
+- Dark mode theming examples
+- Google Fonts integration demos
+- Internationalization samples
+- Media-rich timelines
+- Custom content examples
 
 ---
 

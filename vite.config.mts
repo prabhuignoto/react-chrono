@@ -76,7 +76,13 @@ export default defineConfig(({ mode }) => ({
           'styled-components': 'styled',
         },
         chunkFileNames: 'chunks/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash][extname]',
+        assetFileNames: (assetInfo) => {
+          // Use static filename for CSS to allow easier importing
+          if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+            return 'style.css';
+          }
+          return 'assets/[name]-[hash][extname]';
+        },
         generatedCode: {
           preset: 'es2015',
           arrowFunctions: true,

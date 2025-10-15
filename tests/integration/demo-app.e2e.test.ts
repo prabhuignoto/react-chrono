@@ -65,7 +65,7 @@ test.describe('Demo App Integration Test - Build Validation', () => {
     await expect(cardTitle).toBeAttached({ timeout: 20000 });
     await expect(cardTitle).toContainText('Event'); // Should contain "First Event" or similar
 
-    // 6. Verify CSS is loaded by checking computed styles
+    // 6. Verify Vanilla Extract CSS is loaded by checking computed styles
     const firstTimeline = timelineWrapper.first();
     const backgroundColor = await firstTimeline.evaluate((el) => {
       return window.getComputedStyle(el).backgroundColor;
@@ -76,6 +76,25 @@ test.describe('Demo App Integration Test - Build Validation', () => {
       return window.getComputedStyle(el).display;
     });
     expect(display).not.toBe('none');
+
+    // 6a. Verify Vanilla Extract class names are applied (hash-based classes)
+    const timelineClasses = await firstTimeline.evaluate((el) => el.className);
+    expect(timelineClasses).toBeTruthy();
+    // Vanilla Extract generates hash-based class names
+    expect(timelineClasses.length).toBeGreaterThan(0);
+
+    // 6b. Check for CSS variables (Vanilla Extract tokens)
+    const cssVars = await firstTimeline.evaluate((el) => {
+      const styles = window.getComputedStyle(el);
+      return {
+        fontFamily: styles.fontFamily,
+        color: styles.color,
+        // Check if any CSS custom properties are applied
+        hasCustomProps: styles.getPropertyValue('--timeline-primary') !== '',
+      };
+    });
+    expect(cssVars.fontFamily).toBeTruthy();
+    expect(cssVars.color).toBeTruthy();
 
     // 7. Verify interactive elements exist (buttons, etc.)
     const buttons = page.locator('button');

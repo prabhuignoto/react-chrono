@@ -32,7 +32,10 @@ describe('textResolver', () => {
         next: 'Next (legacy)',
       };
 
-      const textResolver = createTextResolver(undefined, buttonTexts as ButtonTexts);
+      const textResolver = createTextResolver(
+        undefined,
+        buttonTexts as ButtonTexts,
+      );
 
       expect(textResolver.firstItem()).toBe('First (legacy)');
       expect(textResolver.nextItem()).toBe('Next (legacy)');
@@ -60,7 +63,10 @@ describe('textResolver', () => {
         first: 'First (legacy)',
       };
 
-      const textResolver = createTextResolver(mockI18nHelper, buttonTexts as ButtonTexts);
+      const textResolver = createTextResolver(
+        mockI18nHelper,
+        buttonTexts as ButtonTexts,
+      );
 
       expect(textResolver.firstItem()).toBe('First (i18n)');
     });
@@ -68,10 +74,12 @@ describe('textResolver', () => {
     it('should handle dynamic text functions with parameters', () => {
       const mockI18nHelper = {
         search: {
-          resultsCount: (current: number, total: number) => `Result ${current} of ${total} (i18n)`,
+          resultsCount: (current: number, total: number) =>
+            `Result ${current} of ${total} (i18n)`,
         },
         accessibility: {
-          itemPosition: (current: number, total: number) => `Item ${current} of ${total} (i18n)`,
+          itemPosition: (current: number, total: number) =>
+            `Item ${current} of ${total} (i18n)`,
         },
       } as any;
 

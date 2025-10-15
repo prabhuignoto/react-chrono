@@ -313,7 +313,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                   border: 0,
                 }}
               >
-{textResolver.noSearchResults()}
+                {textResolver.noSearchResults()}
               </span>
             )}
             {searchQuery && (

@@ -396,3 +396,13 @@ export interface I18nConfig {
   /** Text direction for RTL language support */
   direction?: 'ltr' | 'rtl';
 }
+
+/**
+ * Dark mode configuration
+ */
+export interface DarkModeConfig {
+  /** Enable dark mode */
+  enabled?: boolean;
+  /** Show dark mode toggle button in toolbar */
+  showToggle?: boolean;
+}

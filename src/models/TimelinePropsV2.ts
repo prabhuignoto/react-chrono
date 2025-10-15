@@ -11,6 +11,7 @@ import {
   StyleConfig,
   AccessibilityConfig,
   I18nConfig,
+  DarkModeConfig,
 } from './TimelineConfig';
 
 /**
@@ -104,12 +105,7 @@ export interface TimelinePropsV2 {
   id?: string;
 
   /** Dark mode configuration */
-  darkMode?: {
-    /** Enable dark mode */
-    enabled?: boolean;
-    /** Show dark mode toggle in toolbar */
-    showToggle?: boolean;
-  };
+  darkMode?: DarkModeConfig;
 }
 
 /**

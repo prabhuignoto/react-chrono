@@ -89,8 +89,8 @@ describe('Build Output Validation', () => {
     });
   });
 
-  describe('CSS Assets', () => {
-    it('should generate CSS assets', () => {
+  describe('CSS Assets (Vanilla Extract)', () => {
+    it('should generate CSS assets from Vanilla Extract', () => {
       const assetsPath = resolve(DIST_DIR, 'assets');
       expect(existsSync(assetsPath)).toBe(true);
     });
@@ -111,6 +111,44 @@ describe('Build Output Validation', () => {
       // Minified CSS should not have excessive newlines
       const newlineCount = (cssContent.match(/\n/g) || []).length;
       expect(newlineCount).toBeLessThan(50); // Arbitrary but reasonable limit
+    });
+
+    it('should contain Vanilla Extract generated styles', () => {
+      const assetsPath = resolve(DIST_DIR, 'assets');
+      const files = require('fs').readdirSync(assetsPath);
+      const cssFiles = files.filter((f: string) => f.endsWith('.css'));
+
+      expect(cssFiles.length).toBeGreaterThan(0);
+
+      const cssContent = readFileSync(
+        resolve(assetsPath, cssFiles[0]),
+        'utf-8'
+      );
+
+      // Vanilla Extract generates hash-based class names
+      // Check for common patterns
+      expect(cssContent.length).toBeGreaterThan(1000); // Should have substantial CSS
+
+      // Should contain CSS custom properties (design tokens)
+      // Vanilla Extract uses these for theming
+      const hasCustomProps = cssContent.includes('--') ||
+                            cssContent.includes('var(');
+      expect(hasCustomProps).toBe(true);
+    });
+
+    it('should not contain source .css.ts references', () => {
+      const assetsPath = resolve(DIST_DIR, 'assets');
+      const files = require('fs').readdirSync(assetsPath);
+      const cssFiles = files.filter((f: string) => f.endsWith('.css'));
+
+      const cssContent = readFileSync(
+        resolve(assetsPath, cssFiles[0]),
+        'utf-8'
+      );
+
+      // Should not contain source file references
+      expect(cssContent).not.toContain('.css.ts');
+      expect(cssContent).not.toContain('src/');
     });
   });
 

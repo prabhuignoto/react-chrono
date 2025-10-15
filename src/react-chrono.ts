@@ -12,6 +12,9 @@ import {
   AccessibilityConfig,
 } from './models/TimelineConfig';
 
+// Import Vanilla Extract styles (Vite will bundle the CSS automatically)
+import './styles/global.css';
+
 export { ReactChrono as Chrono };
 
 // Main types

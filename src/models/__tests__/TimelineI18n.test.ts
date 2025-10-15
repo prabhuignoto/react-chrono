@@ -3,7 +3,7 @@ import {
   mergeI18nConfig,
   interpolateString,
   TimelineI18nConfig,
-  defaultI18nTexts
+  defaultI18nTexts,
 } from '../TimelineI18n';
 
 describe('TimelineI18n', () => {
@@ -120,7 +120,9 @@ describe('TimelineI18n', () => {
       const template = '{current} of {total} ({missing})';
       const variables = { current: 3, total: 10 };
 
-      expect(interpolateString(template, variables)).toBe('3 of 10 ({missing})');
+      expect(interpolateString(template, variables)).toBe(
+        '3 of 10 ({missing})',
+      );
     });
 
     it('should handle empty variables object', () => {
@@ -142,10 +144,12 @@ describe('TimelineI18n', () => {
       const variables = {
         name: 'John',
         count: 42,
-        active: true
+        active: true,
       };
 
-      expect(interpolateString(template, variables)).toBe('User John has 42 points and true status');
+      expect(interpolateString(template, variables)).toBe(
+        'User John has 42 points and true status',
+      );
     });
 
     it('should handle duplicate placeholders', () => {
@@ -159,7 +163,9 @@ describe('TimelineI18n', () => {
       const template = 'Path: {path}';
       const variables = { path: '/users/{id}/profile' };
 
-      expect(interpolateString(template, variables)).toBe('Path: /users/{id}/profile');
+      expect(interpolateString(template, variables)).toBe(
+        'Path: /users/{id}/profile',
+      );
     });
 
     it('should handle zero and null values', () => {
@@ -167,14 +173,18 @@ describe('TimelineI18n', () => {
       const variables = { count: 0, value: null };
 
       // null values should not be interpolated, leaving the placeholder
-      expect(interpolateString(template, variables)).toBe('Count: 0, Value: {value}');
+      expect(interpolateString(template, variables)).toBe(
+        'Count: 0, Value: {value}',
+      );
     });
 
     it('should handle undefined values', () => {
       const template = 'Name: {name}, Age: {age}';
       const variables = { name: 'John', age: undefined };
 
-      expect(interpolateString(template, variables)).toBe('Name: John, Age: {age}');
+      expect(interpolateString(template, variables)).toBe(
+        'Name: John, Age: {age}',
+      );
     });
   });
 
@@ -219,9 +229,15 @@ describe('TimelineI18n', () => {
 
     it('should have template strings with proper placeholder format', () => {
       // Check that template strings use {variable} format
-      expect(defaultI18nTexts.search.resultsCount).toMatch(/\{current\}.*\{total\}/);
-      expect(defaultI18nTexts.accessibility.itemPosition).toMatch(/\{current\}.*\{total\}/);
-      expect(defaultI18nTexts.quickJump.itemTemplate).toMatch(/\{index\}.*\{title\}/);
+      expect(defaultI18nTexts.search.resultsCount).toMatch(
+        /\{current\}.*\{total\}/,
+      );
+      expect(defaultI18nTexts.accessibility.itemPosition).toMatch(
+        /\{current\}.*\{total\}/,
+      );
+      expect(defaultI18nTexts.quickJump.itemTemplate).toMatch(
+        /\{index\}.*\{title\}/,
+      );
     });
   });
 });
