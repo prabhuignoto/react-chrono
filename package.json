@@ -214,6 +214,6 @@
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   }
 }
