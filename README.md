@@ -19,20 +19,17 @@
 
 ## ✨ Why Choose React Chrono?
 
-React Chrono stands out as the premier timeline component for React, offering unparalleled flexibility and ease of use:
+### 🏆 **Flexible Storytelling**
+Four distinct layout modes adapt to any narrative: horizontal for traditional timelines, vertical for mobile-first feeds, alternating for visual balance, or dashboard for complete overviews. Perfect for company milestones, historical events, project roadmaps, or personal journeys.
 
-### 🏆 **Transform Your Storytelling**
-React Chrono revolutionizes how you present chronological information. Whether you're showcasing company milestones, historical events, project roadmaps, or personal journeys, our timeline component adapts to your narrative needs. With four distinct layout modes, your content flows naturally from traditional horizontal storytelling to space-efficient vertical feeds, balanced alternating presentations, or comprehensive dashboard-style overviews.
+### 🎯 **Modern Development Experience**
+Built entirely in TypeScript with a grouped API that organizes props into logical sections. Exceptional IDE support with intelligent autocomplete, type checking, and zero external dependencies for a lean foundation.
 
-### 🎯 **Built for Modern Development**
-Experience the perfect balance of power and simplicity. Our new grouped API organizes complex configurations into logical sections, making it intuitive to customize everything from layout dimensions to animation behaviors. Built entirely in TypeScript, React Chrono provides exceptional IDE support with intelligent autocomplete and type checking, while maintaining zero external dependencies for a lean, reliable foundation.
+### 🎨 **Complete Customization**
+25+ theme properties for pixel-perfect control - from subtle brand colors to full dark mode transformations. Effortless Google Fonts integration and support for custom React components within timeline cards.
 
-### 🚀 **Enterprise-Grade Reliability**
-Trusted by thousands of developers worldwide, React Chrono delivers production-ready performance with intelligent media loading, cross-browser compatibility, and comprehensive accessibility compliance. Our intersection observer-based optimizations ensure smooth performance even with large datasets, while automatic responsive adaptation provides seamless experiences across all devices.
-
-### 🎨 **Limitless Visual Expression**
-Break free from generic timeline designs with our comprehensive theming system. From subtle brand color adjustments to complete dark mode transformations, React Chrono's 25+ theme properties give you pixel-perfect control. Integrate Google Fonts effortlessly, customize every visual element, and even embed custom React components to create truly unique timeline experiences that reflect your brand identity.
-
+### 🚀 **Production-Ready Performance**
+Native lazy loading for images, IntersectionObserver-managed visibility, and automatic video pause optimization ensure smooth performance with large datasets. Cross-browser compatible with comprehensive WCAG AA accessibility.
 ---
 
 ## 📑 Table of Contents
