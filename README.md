@@ -38,6 +38,7 @@ Native lazy loading for images, IntersectionObserver-managed visibility, and aut
 <details>
 <summary><strong>Quick Start</strong></summary>
 
+- [Why Choose React Chrono?](#-why-choose-react-chrono)
 - [What's New in v3.0](#-whats-new-in-v30)
 - [Installation](#-installation)
 - [Basic Usage](#-basic-usage)
@@ -48,30 +49,42 @@ Native lazy loading for images, IntersectionObserver-managed visibility, and aut
 <details>
 <summary><strong>API Documentation</strong></summary>
 
-- [Core Props](#-core-props)
-- [Configuration Groups](#-configuration-groups)
-- [Timeline Item Model](#-timeline-item-model)
-- [Migration Guide](#-migration-guide)
+- [Essential Props](#-essential-props)
+- [Complete Props Reference](./PROPS-REFERENCE.md) 📋
+- [Migration from v2 to v3](#-migration-from-v2-to-v3)
 
 </details>
 
 <details>
 <summary><strong>Features & Customization</strong></summary>
 
-- [Features Overview](#-features-overview)
-- [Media Handling](#-media-handling)
-- [Custom Content](#-custom-content)
-- [Theming & Styling](#-theming--styling)
-- [Accessibility](#-accessibility)
+- [Showcase: What React Chrono Can Do](#-showcase-what-react-chrono-can-do)
+- [Rich Media Integration](#-rich-media-integration)
+- [Interactive Features](#-interactive-features)
+- [Theming & Branding](#-theming--branding)
+- [Complete Internationalization](#-complete-internationalization)
+- [Advanced Architecture](#-advanced-architecture)
+- [Responsive Design](#-responsive-design)
+
+</details>
+
+<details>
+<summary><strong>Why React Chrono</strong></summary>
+
+- [Key Benefits](#-why-react-chrono)
+- [Zero Configuration](#-zero-configuration-required)
+- [TypeScript Native](#-typescript-native)
+- [Accessibility Built-in](#-accessibility-built-in)
 
 </details>
 
 <details>
 <summary><strong>Examples & Development</strong></summary>
 
-- [Live Examples](#-live-examples)
+- [Live Examples & Playground](#-live-examples--playground)
 - [Development Setup](#-development-setup)
 - [Contributing](#-contributing)
+- [Built With Modern Technologies](#-built-with-modern-technologies)
 
 </details>
 

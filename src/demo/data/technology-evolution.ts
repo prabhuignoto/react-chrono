@@ -19,20 +19,20 @@ export const technologyEvolutionTimeline: TimelineItemModel[] = [
       'The 4004 could execute 60,000 operations per second and had a 4-bit data bus with a 12-bit address bus, allowing it to address 4,096 4-bit memory locations. Despite its limitations by today\'s standards, it laid the foundation for all modern processors.',
       'This breakthrough opened the door for personal computers, embedded systems, and the digital revolution that would transform every aspect of human life over the following decades.',
     ],
-    items: [
-      {
-        cardTitle: 'Technical Specifications',
-        cardDetailedText: 'Clock Speed: 740 kHz, Transistors: 2,300, Process: 10 μm, Architecture: 4-bit',
-      },
-      {
-        cardTitle: 'Key Innovation',
-        cardDetailedText: 'First CPU on a single chip, enabling miniaturization of computing devices',
-      },
-      {
-        cardTitle: 'Market Impact',
-        cardDetailedText: 'Launched the microprocessor industry, leading to $500+ billion semiconductor market',
-      },
-    ],
+    // items: [
+    //   {
+    //     cardTitle: 'Technical Specifications',
+    //     cardDetailedText: 'Clock Speed: 740 kHz, Transistors: 2,300, Process: 10 μm, Architecture: 4-bit',
+    //   },
+    //   {
+    //     cardTitle: 'Key Innovation',
+    //     cardDetailedText: 'First CPU on a single chip, enabling miniaturization of computing devices',
+    //   },
+    //   {
+    //     cardTitle: 'Market Impact',
+    //     cardDetailedText: 'Launched the microprocessor industry, leading to $500+ billion semiconductor market',
+    //   },
+    // ],
   },
   {
     title: '1973',
@@ -90,17 +90,17 @@ export const technologyEvolutionTimeline: TimelineItemModel[] = [
       'Berners-Lee created the first web browser (called WorldWideWeb, later renamed Nexus), the first web server software, and the first website (info.cern.ch). He made the crucial decision to make the Web free and open, refusing to patent his invention.',
       'By 1991, the Web was made available to the public, and by the mid-1990s, it had transformed from a tool for scientists to a global platform for commerce, communication, and entertainment. Today, over 4.6 billion people use the Web daily.',
     ],
-    items: [
-      {
-        cardTitle: 'First Website',
-        cardDetailedText: 'info.cern.ch - explained what the Web was and how to use it',
-        url: 'http://info.cern.ch/hypertext/WWW/TheProject.html',
-      },
-      {
-        cardTitle: 'Core Technologies',
-        cardDetailedText: 'HTML, HTTP, URLs - still the foundation of the Web today',
-      },
-    ],
+    // items: [
+    //   {
+    //     cardTitle: 'First Website',
+    //     cardDetailedText: 'info.cern.ch - explained what the Web was and how to use it',
+    //     url: 'http://info.cern.ch/hypertext/WWW/TheProject.html',
+    //   },
+    //   {
+    //     cardTitle: 'Core Technologies',
+    //     cardDetailedText: 'HTML, HTTP, URLs - still the foundation of the Web today',
+    //   },
+    // ],
   },
   {
     title: '1995',
@@ -196,16 +196,16 @@ export const technologyEvolutionTimeline: TimelineItemModel[] = [
       'Beyond hardware innovation, the iPhone introduced the concept of mobile apps through the App Store (launched in 2008). This created a new economy for mobile software and enabled developers to reach millions of users directly through Apple\'s platform.',
       'The iPhone sparked the smartphone revolution, inspiring competitors and establishing the template for modern mobile devices. It transformed industries from photography to transportation (enabling services like Uber) and made powerful computing accessible to billions worldwide.',
     ],
-    items: [
-      {
-        cardTitle: 'Launch Impact',
-        cardDetailedText: 'Apple stock rose 8% on launch day, validating the revolutionary design',
-      },
-      {
-        cardTitle: 'Industry Disruption',
-        cardDetailedText: 'Displaced BlackBerry, Palm, and Windows Mobile within five years',
-      },
-    ],
+    // items: [
+    //   {
+    //     cardTitle: 'Launch Impact',
+    //     cardDetailedText: 'Apple stock rose 8% on launch day, validating the revolutionary design',
+    //   },
+    //   {
+    //     cardTitle: 'Industry Disruption',
+    //     cardDetailedText: 'Displaced BlackBerry, Palm, and Windows Mobile within five years',
+    //   },
+    // ],
   },
   {
     title: '2008',
