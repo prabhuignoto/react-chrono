@@ -302,62 +302,47 @@ React Chrono requires minimal configuration to get started:
 
 ## 🎬 Showcase: What React Chrono Can Do
 
-### 📺 Rich Media Integration That Just Works
+### 📺 Rich Media Integration
 
-React Chrono transforms media-heavy timelines into smooth, engaging experiences. Images load intelligently using intersection observers - only when they're about to enter the viewport, ensuring fast initial page loads even with dozens of high-resolution photos. Videos can auto-play when their timeline item becomes active, creating cinematic storytelling experiences where each moment unfolds naturally.
+Images load intelligently using intersection observers - only when entering the viewport - ensuring fast initial loads even with dozens of high-resolution photos. Videos auto-play when timeline items become active, creating cinematic storytelling experiences. The component handles responsive sizing, buffering states, accessibility attributes, and performance optimization automatically.
 
-The component handles all media complexities automatically: responsive image sizing, video buffering states, accessibility attributes, and performance optimization. Whether you're showcasing a product development journey with screenshots, a historical timeline with archival footage, or a personal story with family photos, React Chrono ensures every visual element enhances rather than hinders the user experience.
+### 🎮 Interactive Features
 
-### 🎮 Interactive Features That Engage Users
+**Slideshow Mode**: Auto-playing presentations with customizable durations, transition effects, and progress indicators - perfect for kiosks and guided storytelling.
 
-**Immersive Slideshow Experience**: Transform your timeline into an auto-playing presentation with customizable durations, transition effects, and progress indicators. Perfect for kiosks, presentations, or guided storytelling where you want to control the narrative pace.
+**Keyboard Navigation**: Full accessibility with arrow keys for navigation, Home/End for quick jumps to first/last items, and Escape for closing modals. Smooth animations respect user motion preferences.
 
-**Universal Keyboard Navigation**: Full keyboard accessibility goes beyond compliance - it creates power-user experiences. Arrow keys for navigation, Home/End for quick jumps, Enter for selections, and Escape for mode exits. Every interaction includes smooth animations that respect user motion preferences.
+**Real-time Search**: Instantly highlights matching content across titles, descriptions, and metadata, helping users find specific events without losing context.
 
-**Intelligent Real-time Search**: Built-in search functionality instantly highlights matching content across titles, descriptions, and metadata. Users can quickly find specific events in long timelines without losing context of the overall narrative structure.
+### 🎨 Theming & Branding
 
-### 🎨 Theming That Matches Your Brand
+Adapt to any visual identity with a comprehensive theming system. Dark mode is a first-class feature with dedicated properties for shadows, glows, and interaction states. Google Fonts integration handles loading optimization and fallback strategies automatically, making typography customization effortless.
 
-React Chrono's theming system adapts to any visual identity. Dark mode isn't just an afterthought - it's a first-class feature with dedicated properties for shadows, glows, hover states, and interaction feedback. Create high-contrast themes for accessibility, subtle branded experiences for corporate sites, or bold artistic expressions for creative portfolios.
+### 🌍 Complete Internationalization
 
-Google Fonts integration makes typography customization effortless. Define font families, weights, and sizes for different content types, and React Chrono handles the loading optimization and fallback strategies automatically. Your timeline typography becomes an extension of your brand voice.
-
-### 🌍 Global Reach with Complete Internationalization
-
-**Comprehensive Multi-Language Support**: React Chrono speaks your users' language with complete internationalization coverage. Every piece of user-facing text - from navigation buttons to search placeholders, error messages to accessibility labels - can be customized for any language or locale.
-
-**Smart Text Resolution**: The i18n system uses intelligent fallback strategies. Configure only the texts you need to change, and React Chrono automatically fills in the gaps with sensible defaults. Template strings support variable interpolation, so "Page {current} of {total}" becomes "Página 3 de 10" seamlessly.
-
-**Developer-Friendly Implementation**: No complex setup required. Simply pass your text configurations through the `i18n` prop, and React Chrono handles the rest. The type-safe interface guides you through available text categories, while maintaining full backward compatibility with existing applications.
+Customize every piece of user-facing text for any language or locale. The i18n system uses intelligent fallbacks - configure only what you need to change. Template strings support variable interpolation with full type safety.
 
 ```jsx
 <Chrono
   items={items}
   i18n={{
     texts: {
-      navigation: {
-        first: 'Premier élément',
-        next: 'Suivant',
-        previous: 'Précédent'
-      },
-      search: {
-        placeholder: 'Rechercher dans la chronologie',
-        noResults: 'Aucun résultat trouvé'
-      }
+      navigation: { first: 'Premier élément', next: 'Suivant', previous: 'Précédent' },
+      search: { placeholder: 'Rechercher dans la chronologie', noResults: 'Aucun résultat trouvé' }
     }
   }}
 />
 ```
 
-### 🏗️ Advanced Architecture for Complex Content
+### 🏗️ Advanced Architecture
 
-**Nested Timeline Hierarchies**: Create sophisticated multi-level narratives where major events contain their own detailed sub-timelines. Perfect for historical periods with multiple concurrent storylines, project phases with individual task breakdowns, or biographical timelines with detailed life chapters.
+**Nested Timelines**: Create multi-level narratives where major events contain detailed sub-timelines - ideal for historical periods, project phases, or biographical chapters.
 
-**Custom Component Integration**: Beyond text and media, embed fully interactive React components within timeline cards. Display data visualizations, interactive maps, embedded widgets, or custom UI elements that turn static timeline items into dynamic experiences.
+**Custom Components**: Embed fully interactive React components within timeline cards - data visualizations, interactive maps, widgets, or custom UI elements.
 
-### 📱 Responsive Intelligence Across All Devices
+### 📱 Responsive Design
 
-React Chrono doesn't just shrink to fit smaller screens - it fundamentally adapts its interaction model. Desktop users get precision hover states and multi-column layouts. Tablet users experience optimized touch targets and gesture-friendly navigation. Mobile users receive simplified interfaces that prioritize content over chrome, with smart font sizing and spacing adjustments that maintain readability without compromising information density.
+Fundamentally adapts to each device: precision hover states and multi-column layouts on desktop, optimized touch targets on tablets, and content-prioritized interfaces on mobile with smart font sizing and spacing.
 
 ---
 
