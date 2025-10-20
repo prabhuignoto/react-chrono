@@ -70,16 +70,26 @@ The project uses a **single unified context** (`TimelineContextProvider`) instea
 **Context structure:**
 ```typescript
 // Three logical groups in the context:
-TimelineStaticConfig    // Rarely changing configuration
-TimelineDynamicState    // Frequently changing state
-TimelineMemoizedObjects // Computed/memoized values
+TimelineStaticConfig    // Rarely changing configuration (mode, cardHeight, cardWidth, etc.)
+TimelineDynamicState    // Frequently changing state (isDarkMode, isMobile, textContentDensity)
+TimelineMemoizedObjects // Computed/memoized values (theme, buttonTexts, i18nHelper)
 ```
 
-**Usage pattern:**
+**Usage patterns:**
 ```typescript
+// Full context (use sparingly - subscribes to all changes)
 import { useTimelineContext } from '../contexts';
-
 const { theme, mode, isDarkMode, toggleDarkMode } = useTimelineContext();
+
+// Performance-optimized selective subscriptions:
+import { useTimelineStaticConfig } from '../contexts';
+const { mode, cardHeight } = useTimelineStaticConfig(); // Rarely re-renders
+
+import { useTimelineDynamicState } from '../contexts';
+const { isDarkMode, toggleDarkMode } = useTimelineDynamicState(); // Frequently re-renders
+
+import { useTimelineMemoizedObjects } from '../contexts';
+const { theme, buttonTexts } = useTimelineMemoizedObjects(); // Computed values
 ```
 
 ### 3. Custom Hooks Organization
@@ -88,27 +98,40 @@ The project uses custom hooks extensively to separate concerns:
 
 **Location:** `src/hooks/`
 
-**Key hooks:**
-- `useFullscreen.ts` - Cross-browser fullscreen API with vendor prefixes
-- `useTimelineNavigation.ts` - Handles item navigation and keyboard controls
+**Key hooks (hierarchical composition):**
+- `useTimelineNavigation.ts` - **Main orchestrator** - Composes navigation hooks and coordinates next/previous/first/last navigation
+  - `useTimelineItemNavigation.ts` - Manages active item state and click events
+  - `useTimelineKeyboardNavigation.ts` - Handles keyboard events (Arrow keys, Home, End)
+  - `useTimelineScrolling.ts` - Calculates scroll positions and target elements
 - `useTimelineScroll.ts` - Scroll behavior and positioning
 - `useTimelineSearch.ts` - Search functionality with match highlighting
 - `useTimelineMode.ts` - Timeline mode switching logic
-- `useI18n.ts` - Internationalization support
+- `useTimelineMedia.ts` - Handles media loading and lazy-loading lifecycle
+- `useFullscreen.ts` - Cross-browser fullscreen API with vendor prefixes
+- `useI18n.ts` - Internationalization support with text resolution
+- `useFocusManager.ts` - Focus trap and management for modals/popovers
+- `useMeasureHeight.ts` - Reactive element height measurement
 
-**Pattern:** Hooks return stable references using `useCallback` and `useMemo` to prevent unnecessary re-renders.
+**Pattern:** Hooks return stable references using `useCallback` and `useMemo` to prevent unnecessary re-renders. Major hooks compose smaller specialized hooks for modularity.
 
 ### 4. Component Structure
 
-**Main timeline component:**
-- `src/components/timeline/timeline.tsx` - Root Timeline component
-- `src/components/timeline/TimelineView.tsx` - Renders timeline layout
+**Component hierarchy:**
+- `src/components/index.tsx` - **Root Chrono component** - Handles prop migration, validation, and wraps with context/error boundary
+- `src/components/timeline/timeline.tsx` - **Main Timeline orchestrator** - Coordinates hooks, navigation, and focus management
+- `src/components/timeline/TimelineView.tsx` - **Layout renderer** - Delegates to mode-specific implementations
+  - `src/components/timeline-horizontal/` - Horizontal mode implementation
+  - `src/components/timeline-vertical/` - Vertical/alternating mode implementation
 - `src/components/timeline/timeline-toolbar.tsx` - Toolbar with controls
 
 **Reusable elements:**
-- `src/components/elements/` - Generic UI elements (popover, list, etc.)
-- `src/components/timeline-elements/` - Timeline-specific components
+- `src/components/elements/` - Generic UI elements (popover, list, icons)
+- `src/components/timeline-elements/` - Timeline-specific components (cards, points, media)
+  - `timeline-card/` - Card containers with media support
+  - `timeline-card-content/` - Content sections (header, body, footer)
+  - `timeline-card-media/` - Media display (images, videos, YouTube)
 - `src/components/toolbar/` - Toolbar components
+- `src/components/fonts/` - Font provider and Google Fonts integration
 
 ### 5. Portal Rendering and Fullscreen Support
 
@@ -151,7 +174,34 @@ import { useFullscreen } from '@hooks/useFullscreen';
 - `@components/*` → `src/components/*`
 - `@hooks/*` → `src/hooks/*`
 
-### 7. Props API: Old vs New (Grouped API)
+### 7. Google Fonts Integration
+
+The project supports dynamic Google Fonts loading with per-element control:
+
+**Location:** `src/components/fonts/`
+
+**Features:**
+- Dynamic font loading with intelligent caching
+- Per-element font weight and style control
+- Automatic fallback handling
+- Font provider wraps timeline for global availability
+
+**Configuration:**
+```typescript
+<Chrono
+  style={{
+    fontFamily: {
+      googleFont: {
+        name: 'Inter',
+        weights: [400, 600, 700],
+        styles: ['normal', 'italic']
+      }
+    }
+  }}
+/>
+```
+
+### 8. Props API: Old vs New (Grouped API)
 
 The project supports both legacy and new grouped API for backward compatibility:
 
@@ -173,21 +223,34 @@ The project supports both legacy and new grouped API for backward compatibility:
 />
 ```
 
-When adding new props, support both patterns using the prop mapping system in `TimelineContextProvider`.
+**Automatic Migration System:**
+- Located in `src/utils/propMigration.ts`
+- Root component (`src/components/index.tsx`) detects which API is used
+- `migrateLegacyProps()` automatically converts old → new format
+- `warnDeprecatedProps()` logs development warnings for deprecated props
+- All internal components work exclusively with the new format
+
+**When adding new props:**
+1. Add to the appropriate group in `src/models/TimelinePropsV2.ts` (layout, interaction, content, display, media, animation, style, accessibility, i18n)
+2. Update prop migration mapping in `src/utils/propMigration.ts` for backward compatibility
+3. Add deprecation warning if replacing an old prop
 
 ## Important Technical Details
 
 ### Build System
 - **Bundler:** Vite for development and production builds
 - **Target:** ES2022 with React 18/19 support
-- **Externals:** React, React-DOM, and styled-components are peer dependencies
-- **Output:** ESM (`index.esm.js`) and CJS (`index.cjs`) formats
+- **Externals:** React and React-DOM are peer dependencies (not bundled)
+- **Output:** ESM (`dist/index.esm.js`), CJS (`dist/index.cjs`), Types (`dist/types/index.d.ts`), CSS (`dist/style.css`)
+- **Entry Points:** `src/react-chrono.ts` (library entry) exports from `src/components/index.tsx` (root component)
+- **Bundle Size Limit:** 250 KB for both ESM and CJS outputs
 
 ### Testing Strategy
 - **Unit tests:** Vitest with @testing-library/react (prefer `@testing-library/react` over enzyme)
 - **E2E tests:** Playwright with cross-browser testing (Chrome, Firefox, Safari, Edge)
 - **Component tests:** Playwright component testing for isolated behavior
-- **Test location:** Co-located with source files in `__tests__/` directories
+- **Test location:** Co-located with source files in `__tests__/` subdirectories
+- **Run specific test:** `pnpm test <filename>` or `pnpm test -- --run` for single run
 
 ### Browser Compatibility
 - Modern browsers: Chrome, Firefox, Safari, Edge
@@ -197,9 +260,16 @@ When adding new props, support both patterns using the prop mapping system in `T
 ### Accessibility Requirements
 - All interactive elements must have proper ARIA labels
 - Keyboard navigation is critical (arrow keys, Home/End, Enter, Escape)
-- Focus management must be explicit and logical
+- Focus management must be explicit and logical (use `useFocusManager` hook for focus trapping)
 - Respect `prefers-reduced-motion` for animations
 - Maintain WCAG AA contrast ratios (4.5:1) in themes
+
+### Internationalization (i18n)
+- The project has comprehensive i18n support via `useI18n` hook
+- Customize UI text through the `i18n` prop group with 40+ configurable text elements
+- Located in `src/models/TimelineI18n.ts` for type definitions
+- Text resolution handled by `src/utils/textResolver.ts`
+- Supports template strings with variable interpolation
 
 ## Common Development Workflows
 
@@ -220,9 +290,11 @@ If a component doesn't appear in fullscreen mode:
 ### Working with Styles
 1. Create `component-name.css.ts` file
 2. Import design tokens from `src/styles/tokens/`
-3. Use sprinkles for common utilities
-4. Use recipes for component variants
-5. Import with `.css` extension: `import { className } from './component.css'`
+3. Use sprinkles for common utilities (`src/styles/system/sprinkles.css.ts`)
+4. Use recipes from `@vanilla-extract/recipes` for component variants
+5. Import with `.css` extension: `import { className } from './component.css'` (NOT `.css.ts`)
+6. For responsive styles, use sprinkles conditions: `{ mobile: 'block', desktop: 'flex' }`
+7. Runtime theme CSS variables are handled by `src/styles/theme-bridge.ts`
 
 ### Adding a Custom Hook
 1. Create hook in `src/hooks/` directory
@@ -242,9 +314,63 @@ If a component doesn't appear in fullscreen mode:
 
 The project uses pnpm for faster installs and better dependency management. Do not use npm or yarn.
 
+## Common Pitfalls & Important Patterns
+
+### 1. Vanilla Extract Import Extensions
+**ALWAYS** import Vanilla Extract styles with `.css` extension (not `.css.ts`):
+```typescript
+// ✅ Correct
+import { wrapper } from './component.css';
+
+// ❌ Wrong
+import { wrapper } from './component.css.ts';
+```
+
+### 2. Context Subscriptions
+Use selective context hooks to prevent unnecessary re-renders:
+```typescript
+// ❌ Avoid - subscribes to all context changes
+const context = useTimelineContext();
+
+// ✅ Prefer - only subscribes to static config
+const { mode, cardHeight } = useTimelineStaticConfig();
+```
+
+### 3. Portal Rendering
+Any component using `ReactDOM.createPortal()` MUST detect and portal to fullscreen element:
+```typescript
+const fullscreenEl = getFullscreenElement();
+const container = fullscreenEl || document.body;
+ReactDOM.createPortal(content, container);
+```
+
+### 4. Prop Migration
+When adding/modifying props, always update both:
+- `src/models/TimelinePropsV2.ts` - New grouped API
+- `src/utils/propMigration.ts` - Legacy prop mapping
+
+### 5. Stable Hook References
+Always use `useCallback` and `useMemo` in custom hooks to prevent downstream re-renders:
+```typescript
+const stableFunction = useCallback(() => { /* ... */ }, [deps]);
+const memoizedValue = useMemo(() => computeValue(), [deps]);
+```
+
+### Performance Considerations
+- Components use `React.memo()` for render optimization
+- Context values are memoized with comprehensive dependency tracking
+- Use selective context subscriptions (`useTimelineStaticConfig`, `useTimelineDynamicState`) to prevent unnecessary re-renders
+- Hooks return stable references via `useCallback` and `useMemo`
+- Media loading is lazy with IntersectionObserver
+- Item comparison uses hash-based diffing for efficiency
+
 ## Critical Files
-- `src/react-chrono.ts` - Main library entry point
-- `src/components/timeline/timeline.tsx` - Root component
-- `src/components/contexts/TimelineContextProvider.tsx` - Context system
+- `src/react-chrono.ts` - Main library entry point (exports)
+- `src/components/index.tsx` - Root Chrono component (prop migration and validation)
+- `src/components/timeline/timeline.tsx` - Main Timeline orchestrator
+- `src/components/contexts/TimelineContextProvider.tsx` - Unified context system
+- `src/utils/propMigration.ts` - Legacy to new props conversion
+- `src/models/TimelinePropsV2.ts` - New grouped props interface
+- `src/models/TimelineI18n.ts` - i18n type definitions
 - `vite.config.mts` - Build configuration
 - `tsconfig.json` - TypeScript configuration with path aliases
