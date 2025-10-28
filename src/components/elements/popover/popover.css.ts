@@ -120,8 +120,8 @@ export const selecter = style([
     cursor: 'pointer',
     userSelect: 'none',
     marginRight: '0.5rem',
-    height: '40px',
-    minWidth: '40px',
+    height: '36px',
+    minWidth: '36px',
     width: 'auto',
     padding: '0 0.875rem',
     fontWeight: tokens.semantic.typography.fontWeight.medium,
@@ -225,12 +225,7 @@ globalStyle(`${selecterIcon} svg`, {
 });
 
 export const selecterIconOpen = style({
-  transform: 'rotate(180deg)',
-  '@media': {
-    '(prefers-reduced-motion: reduce)': {
-      transform: 'none',
-    },
-  },
+  // Rotation animation removed
 });
 
 export const selecterLabel = style({

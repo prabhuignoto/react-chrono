@@ -1,11 +1,12 @@
 import { test, expect } from '../fixtures/test-fixtures';
+import { SELECTORS } from '../fixtures/selector-map';
 
 test.describe('Timeline Theme and Responsive Features', () => {
   test.describe('Theme Switching', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to theme showcase', async () => {
-        await testHelpers.navigateTo('/theme-showcase');
-        await page.waitForTimeout(2000);
+        await testHelpers.navigateAndWaitForTimeline('/theme-showcase');
+        // Removed waitForTimeout
       });
     });
 
@@ -40,7 +41,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
           // Switch themes
           for (let i = 0; i < Math.min(count, 3); i++) {
             await themeButtons.nth(i).click();
-            await page.waitForTimeout(500);
+            // Removed waitForTimeout
             
             // Verify timeline is still visible and functional
             await expect(timeline).toBeVisible();
@@ -59,7 +60,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
         
         if (await themeButtons.count() > 0) {
           await themeButtons.first().click();
-          await page.waitForTimeout(500);
+          // Removed waitForTimeout
           
           // Check if theme is applied to various timeline elements
           const timelineElements = page.locator(
@@ -91,10 +92,9 @@ test.describe('Timeline Theme and Responsive Features', () => {
   });
 
   test.describe('Dynamic Theme Configuration', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to timeline with dynamic theme', async () => {
-        await testHelpers.navigateTo('/vertical-alternating');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/vertical-alternating');
       });
     });
 
@@ -145,7 +145,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
           if (await toggle.isVisible()) {
             // Toggle theme
             await toggle.click();
-            await page.waitForTimeout(300);
+            // Removed waitForTimeout
             
             // Verify timeline elements are still visible and functional
             const timelineItems = page.locator('.vertical-item-row');
@@ -153,7 +153,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
             
             // Toggle back
             await toggle.click();
-            await page.waitForTimeout(300);
+            // Removed waitForTimeout
             await expect(timelineItems.first()).toBeVisible();
           }
         }
@@ -162,10 +162,9 @@ test.describe('Timeline Theme and Responsive Features', () => {
   });
 
   test.describe('Dark Mode Support', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to timeline with dark mode', async () => {
-        await testHelpers.navigateTo('/vertical-basic');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/vertical-basic');
       });
     });
 
@@ -200,7 +199,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
           
           // Toggle dark mode
           await darkToggle.first().click();
-          await page.waitForTimeout(500);
+          // Removed waitForTimeout
           
           // Verify theme changed
           const newStyle = await timeline.evaluate(el => {
@@ -216,7 +215,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
           
           // Toggle back to light mode
           await darkToggle.first().click();
-          await page.waitForTimeout(500);
+          // Removed waitForTimeout
           await expect(timeline).toBeVisible();
         }
       });
@@ -229,7 +228,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
         if (await darkToggle.count() > 0 && await darkToggle.first().isVisible()) {
           // Switch to dark mode
           await darkToggle.first().click();
-          await page.waitForTimeout(500);
+          // Removed waitForTimeout
           
           // Check text readability
           const textElements = page.locator('.rc-card-title, .rc-card-subtitle, p, span');
@@ -268,29 +267,28 @@ test.describe('Timeline Theme and Responsive Features', () => {
       { width: 320, height: 568, name: 'mobile-small' },
     ];
 
-    test('should adapt to different screen sizes', async ({ page, testHelpers }) => {
+    test('should adapt to different screen sizes', async ({ testHelpers, page }) => {
       // Start with a standard size first
-      await testHelpers.navigateTo('/vertical-basic');
-      await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
-      
+      await testHelpers.navigateAndWaitForTimeline('/vertical-basic');
+
       for (const viewport of viewports) {
         await test.step(`Test ${viewport.name} (${viewport.width}x${viewport.height})`, async () => {
           await page.setViewportSize({ width: viewport.width, height: viewport.height });
           await page.waitForTimeout(500); // Allow time for responsive adjustments
-          
+
           // Verify timeline container exists and adapts to viewport
           const timeline = page.locator('[data-testid="tree-main"]');
           await expect(timeline).toBeVisible();
-          
+
           const box = await timeline.boundingBox();
           if (box) {
             // Timeline should not exceed viewport width (with some tolerance for borders)
             expect(box.width).toBeLessThanOrEqual(viewport.width + 20);
-            
+
             // Timeline should be visible (basic existence check)
             expect(box.width).toBeGreaterThan(0);
           }
-          
+
           // Check if timeline items exist (may not be visible on very small screens)
           const timelineItems = page.locator('.vertical-item-row');
           const itemCount = await timelineItems.count();
@@ -299,17 +297,16 @@ test.describe('Timeline Theme and Responsive Features', () => {
       }
     });
 
-    test('should handle horizontal timeline responsiveness', async ({ page, testHelpers }) => {
+    test('should handle horizontal timeline responsiveness', async ({ testHelpers, page }) => {
       for (const viewport of viewports.slice(0, 4)) { // Test fewer viewports for horizontal
         await test.step(`Test horizontal on ${viewport.name}`, async () => {
           await page.setViewportSize({ width: viewport.width, height: viewport.height });
-          await testHelpers.navigateTo('/horizontal');
-          await page.waitForSelector('.timeline-horz-item-container', { timeout: 10000 });
-          
+          await testHelpers.navigateAndWaitForTimeline('/horizontal');
+
           // Verify horizontal timeline adapts
           const timelineItems = page.locator('.timeline-horz-item-container');
           await expect(timelineItems.first()).toBeVisible();
-          
+
           // Check navigation is accessible
           const nextButton = page.locator('[aria-label="Next"]').first();
           if (await nextButton.isVisible()) {
@@ -326,10 +323,9 @@ test.describe('Timeline Theme and Responsive Features', () => {
   });
 
   test.describe('Breakpoint Behavior', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to responsive timeline', async () => {
-        await testHelpers.navigateTo('/vertical-basic');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/vertical-basic');
       });
     });
 
@@ -337,7 +333,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
       await test.step('Test mobile breakpoint behavior', async () => {
         // Start with desktop size
         await page.setViewportSize({ width: 1024, height: 768 });
-        await page.waitForTimeout(300);
+        // Removed waitForTimeout
         
         const timelineItems = page.locator('.vertical-item-row');
         await expect(timelineItems.first()).toBeVisible();
@@ -352,7 +348,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
         // Test interaction on mobile
         const firstItem = timelineItems.first();
         await firstItem.click();
-        await page.waitForTimeout(300);
+        // Removed waitForTimeout
         await expect(firstItem).toBeVisible();
       });
     });
@@ -361,7 +357,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
       await test.step('Test touch-friendly controls', async () => {
         // Set mobile viewport
         await page.setViewportSize({ width: 375, height: 667 });
-        await page.waitForTimeout(300);
+        // Removed waitForTimeout
         
         // Look for controls that should be touch-friendly
         const controls = page.locator(
@@ -386,31 +382,30 @@ test.describe('Timeline Theme and Responsive Features', () => {
   });
 
   test.describe('High DPI and Retina Display Support', () => {
-    test('should render properly on high DPI displays', async ({ page, testHelpers }) => {
+    test('should render properly on high DPI displays', async ({ testHelpers, page }) => {
       await test.step('Test high DPI rendering', async () => {
         // Simulate high DPI display
         await page.setViewportSize({ width: 1440, height: 900 });
-        await page.emulateMedia({ 
+        await page.emulateMedia({
           colorScheme: 'light',
         });
-        
-        await testHelpers.navigateTo('/vertical-world-history');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
-        
+
+        await testHelpers.navigateAndWaitForTimeline('/vertical-world-history');
+
         // Check for crisp rendering of images and icons
         const images = page.locator('img');
         const count = await images.count();
-        
+
         if (count > 0) {
           const img = images.first();
           if (await img.isVisible()) {
             // Wait for image to load
             await img.waitFor({ state: 'visible', timeout: 5000 });
-            
+
             // Verify image loads properly (only if loaded)
             const naturalWidth = await img.evaluate(el => (el as HTMLImageElement).naturalWidth);
             const naturalHeight = await img.evaluate(el => (el as HTMLImageElement).naturalHeight);
-            
+
             // Only check if image has actually loaded (naturalWidth/Height > 0 means loaded)
             if (naturalWidth > 0 && naturalHeight > 0) {
               expect(naturalWidth).toBeGreaterThan(0);
@@ -418,7 +413,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
             }
           }
         }
-        
+
         // Verify timeline elements are crisp
         const timelineItems = page.locator('.vertical-item-row');
         await expect(timelineItems.first()).toBeVisible();
@@ -427,14 +422,13 @@ test.describe('Timeline Theme and Responsive Features', () => {
   });
 
   test.describe('Print Media Support', () => {
-    test('should handle print media queries', async ({ page, testHelpers }) => {
+    test('should handle print media queries', async ({ testHelpers }) => {
       await test.step('Test print layout', async () => {
-        await testHelpers.navigateTo('/vertical-basic');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/vertical-basic');
         
         // Emulate print media
         await page.emulateMedia({ media: 'print' });
-        await page.waitForTimeout(500);
+        // Removed waitForTimeout
         
         // Verify timeline is still visible in print mode
         const timelineItems = page.locator('.vertical-item-row');
@@ -447,13 +441,12 @@ test.describe('Timeline Theme and Responsive Features', () => {
   });
 
   test.describe('Color Scheme Preferences', () => {
-    test('should respect system color scheme preferences', async ({ page, testHelpers }) => {
+    test('should respect system color scheme preferences', async ({ testHelpers }) => {
       await test.step('Test system dark mode preference', async () => {
         // Emulate system dark mode preference
         await page.emulateMedia({ colorScheme: 'dark' });
         
-        await testHelpers.navigateTo('/vertical-basic');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/vertical-basic');
         
         // Verify timeline adapts to system preference
         const timeline = page.locator('[class*="timeline"]').first();
@@ -465,12 +458,11 @@ test.describe('Timeline Theme and Responsive Features', () => {
       });
     });
 
-    test('should handle no-preference color scheme', async ({ page, testHelpers }) => {
+    test('should handle no-preference color scheme', async ({ testHelpers }) => {
       await test.step('Test no-preference color scheme', async () => {
         await page.emulateMedia({ colorScheme: 'no-preference' });
         
-        await testHelpers.navigateTo('/vertical-alternating');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/vertical-alternating');
         
         // Verify timeline renders with default colors
         const timelineItems = page.locator('.vertical-item-row');

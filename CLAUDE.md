@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 React Chrono is a modern, flexible timeline component library for React that supports multiple layout modes (horizontal, vertical, vertical-alternating, horizontal-all) with rich media support, theming, and accessibility features. Built with TypeScript, Vanilla Extract CSS, and tested with Vitest + Playwright.
 
+**Compatibility:** React 18.2+ and React 19+ | Node.js 22+ | Modern browsers (Chrome, Firefox, Safari, Edge)
+
 ## Essential Commands
 
 ### Development
@@ -13,22 +15,66 @@ React Chrono is a modern, flexible timeline component library for React that sup
 pnpm run dev              # Start dev server with hot reload (site preview)
 pnpm run build            # Production build (generates dist/)
 pnpm run build:analyze    # Build with bundle analysis
+pnpm run ladle            # Start Ladle component development environment
+pnpm run ladle:build      # Build Ladle site
 ```
+
+**Demo & Examples:**
+- Demo site code: `src/demo/` (runs with `pnpm run dev`)
+- Example components: `src/examples/`
+- CodesandBox example: `codesandbox-example/`
 
 ### Testing
 ```bash
-pnpm test                 # Run unit tests (Vitest)
+# Unit Tests (Vitest)
+pnpm test                 # Run unit tests in watch mode
 pnpm test -- --run        # Run tests once without watch mode
+pnpm test timeline        # Run tests matching "timeline" in filename
 pnpm run test-ui          # Run tests with Vitest UI
 
-# E2E Testing (Playwright)
-pnpm run test:e2e         # Run all E2E tests
-pnpm run test:e2e:ui      # Run E2E with Playwright UI
+# E2E Testing (Playwright) - Cross-browser (Chromium, Firefox, WebKit)
+pnpm run test:e2e         # Run all E2E tests (all browsers)
+pnpm run test:e2e:ui      # Run E2E with Playwright UI (interactive debugging)
 pnpm run test:e2e:headed  # Run E2E in headed mode (visible browser)
-pnpm run test:e2e:chrome  # Run E2E in Chrome only
+pnpm run test:e2e:debug   # Run E2E in debug mode (step-through)
+pnpm run test:e2e:chrome  # Run E2E in Chromium only
 pnpm run test:e2e:firefox # Run E2E in Firefox only
+pnpm run test:e2e:webkit  # Run E2E in WebKit (Safari) only
+
+# Component Tests (Playwright) - Cross-browser isolation testing
 pnpm run test:ct          # Component tests with Playwright
+pnpm run test:ct:ui       # Component tests with Playwright UI
+
+# Integration Tests - Tests built package in real browser
+pnpm run test:integration        # Run integration tests (validates dist/ works)
+pnpm run test:integration:ui     # Run integration tests with UI
+pnpm run test:integration:headed # Run integration tests in headed mode
+
+# Test Utilities
+pnpm run test:install     # Install Playwright browsers (required once)
+pnpm run test:report      # View Playwright HTML test report
+pnpm run test:trace       # View Playwright trace (for debugging failures)
+pnpm run test:codegen     # Record interactions as test code
+pnpm run test:update-snapshots # Update visual snapshots
+
+# CI Testing
+pnpm run test:e2e:ci      # Run E2E with GitHub Actions reporter
+pnpm run test:e2e:shard   # Run sharded tests (parallel across machines)
 ```
+
+**Cross-Browser Testing:**
+- All Playwright E2E tests run on **Chromium, Firefox, and WebKit** by default
+- Integration tests run on **Chromium and Firefox** (WebKit optional due to longer build times)
+- Component tests run on **all three browsers** for comprehensive coverage
+- GitHub Actions workflow (`.github/workflows/playwright.yml`) runs full cross-browser matrix automatically
+- First time setup: Run `pnpm run test:install` to install browser binaries
+
+**Test Organization:**
+- **E2E Tests** (`tests/e2e/`): Test complete user workflows in demo site
+- **Integration Tests** (`tests/integration/`): Validate built package works in real apps
+- **Component Tests** (`tests/components/`): Test individual components in isolation
+- **Test Fixtures** (`tests/fixtures/`): Shared helpers and utilities
+- **Test Coverage**: Accessibility, keyboard navigation, nested timelines, media support, performance
 
 ### Code Quality
 ```bash
@@ -239,18 +285,20 @@ The project supports both legacy and new grouped API for backward compatibility:
 
 ### Build System
 - **Bundler:** Vite for development and production builds
-- **Target:** ES2022 with React 18/19 support
+- **Target:** ES2022 with React 18.2+ and React 19+ support
 - **Externals:** React and React-DOM are peer dependencies (not bundled)
 - **Output:** ESM (`dist/index.esm.js`), CJS (`dist/index.cjs`), Types (`dist/types/index.d.ts`), CSS (`dist/style.css`)
 - **Entry Points:** `src/react-chrono.ts` (library entry) exports from `src/components/index.tsx` (root component)
 - **Bundle Size Limit:** 250 KB for both ESM and CJS outputs
+- **Node Version:** Requires Node.js 22+ (specified in package.json engines)
 
 ### Testing Strategy
 - **Unit tests:** Vitest with @testing-library/react (prefer `@testing-library/react` over enzyme)
 - **E2E tests:** Playwright with cross-browser testing (Chrome, Firefox, Safari, Edge)
 - **Component tests:** Playwright component testing for isolated behavior
+- **Integration tests:** Playwright integration tests for build output validation
 - **Test location:** Co-located with source files in `__tests__/` subdirectories
-- **Run specific test:** `pnpm test <filename>` or `pnpm test -- --run` for single run
+- **Run specific test:** `pnpm test <pattern>` (e.g., `pnpm test timeline` runs tests matching "timeline")
 
 ### Browser Compatibility
 - Modern browsers: Chrome, Firefox, Safari, Edge
@@ -309,8 +357,11 @@ If a component doesn't appear in fullscreen mode:
 - View traces: `pnpm run test:trace` for Playwright traces
 - Update snapshots: `pnpm run test:update-snapshots` when intentional changes occur
 
-## Package Manager
-**Required:** pnpm (version 10.15.1 or compatible)
+## Requirements & Package Manager
+
+**Node.js:** Version 22 or higher (required by package.json engines)
+
+**Package Manager:** pnpm (version 10.15.1 or compatible)
 
 The project uses pnpm for faster installs and better dependency management. Do not use npm or yarn.
 

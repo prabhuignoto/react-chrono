@@ -1,0 +1,264 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [main, master, develop, updates_31072025]
+  pull_request:
+    branches: [main, master, develop]
+  workflow_dispatch: # Allow manual trigger
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # E2E Tests - Cross-browser testing
+  e2e-tests:
+    name: E2E Tests (${{ matrix.project }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false # Continue running other browsers even if one fails
+      matrix:
+        project: [chromium, firefox, webkit]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps ${{ matrix.project }}
+
+      - name: Run E2E tests
+        run: pnpm test:e2e --project=${{ matrix.project }}
+        env:
+          CI: true
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-results-${{ matrix.project }}
+          path: |
+            test-results/
+            playwright-report/
+            blob-report/
+          retention-days: 7
+
+      - name: Upload traces on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-traces-${{ matrix.project }}
+          path: test-results/**/*.zip
+          retention-days: 7
+
+  # Integration Tests - Test built package
+  integration-tests:
+    name: Integration Tests (${{ matrix.project }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [chromium, firefox]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build library
+        run: pnpm build
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps ${{ matrix.project }}
+
+      - name: Run integration tests
+        run: pnpm test:integration --project=${{ matrix.project }}
+        env:
+          CI: true
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-results-${{ matrix.project }}
+          path: |
+            test-results-integration/
+            playwright-report-integration/
+            blob-report-integration/
+          retention-days: 7
+
+      - name: Upload build artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-build-${{ matrix.project }}
+          path: |
+            dist/
+            tests/integration/demo-app/dist/
+          retention-days: 3
+
+  # Component Tests - Cross-browser component testing
+  component-tests:
+    name: Component Tests (${{ matrix.project }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [chromium, firefox, webkit]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps ${{ matrix.project }}
+
+      - name: Run component tests
+        run: pnpm test:ct --project=${{ matrix.project }}
+        env:
+          CI: true
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ct-results-${{ matrix.project }}
+          path: |
+            test-results/
+            playwright-ct-report/
+            blob-report-ct/
+          retention-days: 7
+
+  # Merge test reports
+  merge-reports:
+    name: Merge Test Reports
+    if: always()
+    needs: [e2e-tests, integration-tests, component-tests]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download E2E blob reports
+        uses: actions/download-artifact@v4
+        with:
+          pattern: e2e-results-*
+          path: all-blob-reports
+          merge-multiple: true
+
+      - name: Download Integration blob reports
+        uses: actions/download-artifact@v4
+        with:
+          pattern: integration-results-*
+          path: all-blob-reports
+          merge-multiple: true
+
+      - name: Download Component blob reports
+        uses: actions/download-artifact@v4
+        with:
+          pattern: ct-results-*
+          path: all-blob-reports
+          merge-multiple: true
+
+      - name: Merge E2E reports
+        if: always()
+        run: |
+          if [ -d "all-blob-reports/blob-report" ]; then
+            pnpm exec playwright merge-reports --reporter html ./all-blob-reports/blob-report
+          fi
+
+      - name: Upload merged HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-merged
+          path: playwright-report/
+          retention-days: 14
+
+      - name: Comment PR with test results
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reportPath = 'playwright-report/index.html';
+
+            if (fs.existsSync(reportPath)) {
+              const comment = `## 🎭 Playwright Test Results
+
+              The test suite has completed. View the full report in the artifacts section.
+
+              **Test Coverage:**
+              - ✅ E2E Tests (Chromium, Firefox, WebKit)
+              - ✅ Integration Tests (Chromium, Firefox)
+              - ✅ Component Tests (Chromium, Firefox, WebKit)
+
+              [View Artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`;
+
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }

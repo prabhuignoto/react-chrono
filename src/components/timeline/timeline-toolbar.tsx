@@ -22,6 +22,7 @@ import {
   searchInput as veSearchInput,
   searchWrapper as veSearchWrapper,
   extraControls as veExtraControls,
+  extraControlChild as veExtraControlChild,
   toolbarWrapper as veToolbarWrapper,
   searchButton as veSearchButton,
   searchButtonIcon as veSearchButtonIcon,
@@ -351,7 +352,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           role="group"
           aria-label="Additional timeline controls"
         >
-          <div className="control-wrapper" key="quick-jump">
+          <div className={veExtraControlChild} key="quick-jump">
             {enableQuickJump ? (
               <QuickJump
                 activeItem={activeTimelineItem ?? 0}
@@ -364,7 +365,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               />
             ) : null}
           </div>
-          <div className="control-wrapper" key="layout-switcher">
+          <div className={veExtraControlChild} key="layout-switcher">
             {!cardLess && enableLayoutSwitch ? (
               <LayoutSwitcher
                 isDarkMode={darkMode}
@@ -381,7 +382,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             ) : null}
           </div>
           {canShowDensity ? (
-            <div className="control-wrapper" key="change-density">
+            <div className={veExtraControlChild} key="change-density">
               <ChangeDensity
                 isDarkMode={darkMode}
                 theme={theme}
@@ -392,7 +393,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               ></ChangeDensity>
             </div>
           ) : null}
-          <div className="control-wrapper" key="fullscreen-control">
+          <div className={veExtraControlChild} key="fullscreen-control">
             {timelineRef && (
               <FullscreenControl
                 targetRef={timelineRef}

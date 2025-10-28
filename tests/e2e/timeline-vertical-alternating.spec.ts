@@ -1,14 +1,14 @@
 import { test, expect } from '../fixtures/test-fixtures';
+import { SELECTORS } from '../fixtures/selector-map';
 
 test.describe('Chrono.Vertical.Alternating', () => {
-  test.beforeEach(async ({ page, testHelpers }) => {
+  test.beforeEach(async ({ testHelpers }) => {
     await test.step('Navigate to vertical alternating timeline', async () => {
-      await testHelpers.navigateTo('/vertical-alternating');
-      await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+      await testHelpers.navigateAndWaitForTimeline('/vertical-alternating');
     });
   });
 
-  test('should display correct number of timeline items', async ({ page, testHelpers }) => {
+  test('should display correct number of timeline items', async ({ testHelpers }) => {
     await testHelpers.assertElementCount('.vertical-item-row', 13);
   });
 
@@ -53,7 +53,7 @@ test.describe('Chrono.Vertical.Alternating', () => {
     const cardContent = page.locator('.vertical-item-row').nth(1).locator('.timeline-card-content');
     await expect(cardContent).toBeVisible();
     await cardContent.click();
-    await page.waitForTimeout(300);
+    // Removed waitForTimeout
     // Just verify the card is clickable
     await expect(cardContent).toBeVisible();
   });
@@ -62,7 +62,7 @@ test.describe('Chrono.Vertical.Alternating', () => {
     await test.step('Scroll to bottom', async () => {
       const wrapper = page.locator('.timeline-main-wrapper');
       await wrapper.evaluate(el => el.scrollTo(0, el.scrollHeight));
-      await page.waitForTimeout(1000);
+      // Removed waitForTimeout
       
       const lastItem = page.locator('.vertical-item-row').last().locator('.card-content-wrapper').first();
       if (await lastItem.isVisible()) {
@@ -73,7 +73,7 @@ test.describe('Chrono.Vertical.Alternating', () => {
     await test.step('Scroll to top', async () => {
       const wrapper = page.locator('.timeline-main-wrapper');
       await wrapper.evaluate(el => el.scrollTo(0, 0));
-      await page.waitForTimeout(1000);
+      // Removed waitForTimeout
       
       const firstItem = page.locator('.vertical-item-row').first().locator('.card-content-wrapper').first();
       if (await firstItem.isVisible()) {
@@ -84,14 +84,13 @@ test.describe('Chrono.Vertical.Alternating', () => {
 });
 
 test.describe('Chrono.Vertical.Alternating.Mixed', () => {
-  test.beforeEach(async ({ page, testHelpers }) => {
+  test.beforeEach(async ({ testHelpers }) => {
     await test.step('Navigate to vertical alternating mixed timeline', async () => {
-      await testHelpers.navigateTo('/vertical-alternating-mixed');
-      await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+      await testHelpers.navigateAndWaitForTimeline('/vertical-alternating-mixed');
     });
   });
 
-  test('should display correct number of timeline items', async ({ page, testHelpers }) => {
+  test('should display correct number of timeline items', async ({ testHelpers }) => {
     await testHelpers.assertElementCount('.vertical-item-row', 13);
   });
 
@@ -136,7 +135,7 @@ test.describe('Chrono.Vertical.Alternating.Mixed', () => {
     const cardContent = page.locator('.vertical-item-row').nth(1).locator('.timeline-card-content');
     await expect(cardContent).toBeVisible();
     await cardContent.click();
-    await page.waitForTimeout(300);
+    // Removed waitForTimeout
     // Just verify the card is clickable
     await expect(cardContent).toBeVisible();
   });
@@ -187,7 +186,7 @@ test.describe('Chrono.Vertical.Alternating.Mixed', () => {
       
       // Scroll to bottom
       await wrapper.evaluate(el => el.scrollTo(0, el.scrollHeight));
-      await page.waitForTimeout(1000);
+      // Removed waitForTimeout
       
       const lastItem = page.locator('.vertical-item-row').last().locator('.card-content-wrapper');
       if (await lastItem.isVisible()) {
@@ -202,7 +201,7 @@ test.describe('Chrono.Vertical.Alternating.Mixed', () => {
       
       // Scroll the middle item into view
       await items.nth(middleIndex).scrollIntoViewIfNeeded();
-      await page.waitForTimeout(500);
+      // Removed waitForTimeout
       
       // Just verify the middle item is visible (don't require specific viewport ratio)
       const middleItem = items.nth(middleIndex);
@@ -210,7 +209,7 @@ test.describe('Chrono.Vertical.Alternating.Mixed', () => {
       
       // Scroll to top
       await wrapper.evaluate(el => el.scrollTo(0, 0));
-      await page.waitForTimeout(1000);
+      // Removed waitForTimeout
       
       const firstItem = page.locator('.vertical-item-row').first().locator('.card-content-wrapper');
       if (await firstItem.isVisible()) {

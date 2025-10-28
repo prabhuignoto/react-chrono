@@ -1,10 +1,10 @@
 import { test, expect } from '../fixtures/test-fixtures';
+import { SELECTORS } from '../fixtures/selector-map';
 
 test.describe('Chrono.Vertical.Basic', () => {
-  test.beforeEach(async ({ page, testHelpers }) => {
+  test.beforeEach(async ({ testHelpers }) => {
     await test.step('Navigate to vertical basic timeline', async () => {
-      await testHelpers.navigateTo('/vertical-basic');
-      await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+      await testHelpers.navigateAndWaitForTimeline('/vertical-basic');
     });
   });
 
@@ -71,12 +71,11 @@ test.describe('Chrono.Vertical.Basic', () => {
     });
   });
 
-  test('should activate card on click', async ({ page, testHelpers }) => {
+  test('should activate card on click', async ({ page }) => {
     await test.step('Click and verify interaction', async () => {
-      const cardContent = page.locator('.vertical-item-row').nth(1).locator('.timeline-card-content');
+      const cardContent = page.locator('.vertical-item-row').nth(1).locator(SELECTORS.CARD_CONTENT);
       await expect(cardContent).toBeVisible();
       await cardContent.click();
-      await page.waitForTimeout(300);
       // Just verify the card is clickable - no need to check for specific active class
       await expect(cardContent).toBeVisible();
     });
@@ -84,19 +83,17 @@ test.describe('Chrono.Vertical.Basic', () => {
 
   test('should handle scroll visibility', async ({ page }) => {
     await test.step('Scroll to bottom and check visibility', async () => {
-      const wrapper = page.locator('.timeline-main-wrapper');
+      const wrapper = page.locator(SELECTORS.TIMELINE_MAIN);
       await wrapper.evaluate(el => el.scrollTo(0, el.scrollHeight));
-      await page.waitForTimeout(1000);
-      
+
       const lastItem = page.locator('.vertical-item-row').last().locator('.card-content-wrapper');
       await expect(lastItem).toHaveClass(/visible/);
     });
 
     await test.step('Scroll to top and check visibility', async () => {
-      const wrapper = page.locator('.timeline-main-wrapper');
+      const wrapper = page.locator(SELECTORS.TIMELINE_MAIN);
       await wrapper.evaluate(el => el.scrollTo(0, 0));
-      await page.waitForTimeout(1000);
-      
+
       const firstItem = page.locator('.vertical-item-row').first().locator('.card-content-wrapper');
       await expect(firstItem).toHaveClass(/visible/);
     });

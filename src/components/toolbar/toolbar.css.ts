@@ -273,8 +273,8 @@ export const searchWrapper = style([
     backgroundColor: tokens.semantic.color.background.elevated,
     border: `1px solid ${tokens.semantic.color.border.default}`,
     borderRadius: tokens.semantic.borderRadius.md,
-    padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
-    minHeight: '36px',
+    padding: `0 ${tokens.semantic.spacing.sm}`,
+    height: '36px',
     width: 'var(--timeline-search-input-width, 100%)',
     maxWidth: 'var(--timeline-search-input-max-width, 100%)',
     position: 'relative',
@@ -294,8 +294,8 @@ export const searchWrapper = style([
 
     '@media': {
       'screen and (max-width: 767px)': {
-        minHeight: '32px',
-        padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
+        height: '36px',
+        padding: `0 ${tokens.semantic.spacing.sm}`,
       },
     },
   },
@@ -376,9 +376,9 @@ export const searchControls = style([
 export const searchButton = style([
   patterns.toolbarButton(),
   {
-    width: '28px',
-    height: '28px',
-    minWidth: '28px',
+    width: '36px',
+    height: '36px',
+    minWidth: '36px',
     backgroundColor: tokens.semantic.color.background.elevated,
     border: `1px solid ${tokens.semantic.color.border.default}`,
     borderRadius: tokens.semantic.borderRadius.sm,
@@ -422,9 +422,9 @@ export const searchButton = style([
 
     '@media': {
       'screen and (max-width: 767px)': {
-        width: '24px',
-        height: '24px',
-        minWidth: '24px',
+        width: '36px',
+        height: '36px',
+        minWidth: '36px',
       },
     },
   },
@@ -607,16 +607,17 @@ export const extraControls = style([
     visibility: 'visible',
     flexShrink: 0,
     flexWrap: 'wrap',
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
 ]);
 
 export const extraControlChild = style([
   sprinkles({
     display: 'flex',
+    alignItems: 'center',
   }),
   {
-    margin: `${tokens.semantic.spacing.xs} 0`,
+    margin: 0,
     marginRight: tokens.semantic.spacing.xs,
   },
 ]);

@@ -405,7 +405,7 @@ export const toolbarContainer = recipe({
     position: {
       top: {
         order: -1, // Ensure toolbar appears before main content
-        borderBottom: `1px solid ${tokens.semantic.color.border.muted}`,
+        // borderBottom: `1px solid ${tokens.semantic.color.border.muted}`,
         marginBottom: tokens.semantic.spacing.xs,
       },
       bottom: {

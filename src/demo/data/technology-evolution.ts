@@ -339,19 +339,19 @@ export const technologyEvolutionTimeline: TimelineItemModel[] = [
       'Major challenges remain, including AI safety, alignment with human values, job displacement concerns, and the need for robust governance frameworks. The race to develop AGI (Artificial General Intelligence) intensifies while researchers work to ensure beneficial outcomes.',
       'Looking ahead, AI promises to accelerate scientific discovery, enable new forms of creativity, and solve complex global challenges. The next decade may see AI systems that match or exceed human capability across most cognitive tasks, ushering in a new era of human-AI collaboration.',
     ],
-    items: [
-      {
-        cardTitle: 'Current Capabilities',
-        cardDetailedText: 'Multimodal AI, advanced reasoning, code generation, creative writing, scientific research assistance',
-      },
-      {
-        cardTitle: 'Key Challenges',
-        cardDetailedText: 'AI safety, alignment, governance, economic disruption, misinformation, privacy concerns',
-      },
-      {
-        cardTitle: 'Future Potential',
-        cardDetailedText: 'Scientific breakthroughs, personalized education, healthcare advances, climate solutions',
-      },
-    ],
+    // items: [
+    //   {
+    //     cardTitle: 'Current Capabilities',
+    //     cardDetailedText: 'Multimodal AI, advanced reasoning, code generation, creative writing, scientific research assistance',
+    //   },
+    //   {
+    //     cardTitle: 'Key Challenges',
+    //     cardDetailedText: 'AI safety, alignment, governance, economic disruption, misinformation, privacy concerns',
+    //   },
+    //   {
+    //     cardTitle: 'Future Potential',
+    //     cardDetailedText: 'Scientific breakthroughs, personalized education, healthcare advances, climate solutions',
+    //   },
+    // ],
   },
 ];
