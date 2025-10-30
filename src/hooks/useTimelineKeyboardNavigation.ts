@@ -28,6 +28,13 @@ export const useTimelineKeyboardNavigation = ({
 
       const { key } = event;
 
+      // Don't handle timeline navigation if event is from popover menu
+      // Popover menus (ARIA menu pattern) handle their own arrow keys
+      const target = event.target as HTMLElement;
+      if (target.closest('[role="menu"]') || target.closest('[aria-haspopup="dialog"]')) {
+        return; // Let menu handle its own navigation
+      }
+
       // Common handlers
       switch (key) {
         case 'Home':

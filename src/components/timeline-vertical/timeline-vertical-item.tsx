@@ -348,7 +348,6 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       aria-current={active ? 'step' : undefined}
       aria-label={accessibleTitle}
       role="listitem"
-      tabIndex={active ? 0 : -1}
       aria-selected={active}
     >
       {/* Conditionally render the Title */}

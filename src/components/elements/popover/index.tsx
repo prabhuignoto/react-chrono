@@ -5,8 +5,10 @@ import React, {
   useLayoutEffect,
   useReducer,
   useRef,
+  useMemo,
   memo,
   useState,
+  Children,
 } from 'react';
 import ReactDOM from 'react-dom';
 import useCloseClickOutside from 'src/components/effects/useCloseClickOutside';
@@ -67,6 +69,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   isDarkMode = false,
   icon,
   $isMobile = false,
+  onItemSelect,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const triggerButtonRef = useRef<HTMLButtonElement>(null);
@@ -147,6 +150,27 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   const closePopover = useCallback(() => {
     dispatch({ type: 'CLOSE' });
   }, []);
+
+  /**
+   * Handle menu item selection - close popover and restore focus
+   * This is called when a menu item is selected via Enter/Space
+   * @param {string} itemId - The selected item ID
+   */
+  const handleItemSelect = useCallback(
+    (itemId: string) => {
+      // Call parent's onItemSelect callback if provided
+      onItemSelect?.(itemId);
+
+      // Close popover
+      closePopover();
+
+      // Restore focus to trigger button
+      requestAnimationFrame(() => {
+        triggerButtonRef.current?.focus();
+      });
+    },
+    [onItemSelect, closePopover],
+  );
 
   const handleKeyPress = useCallback((ev: React.KeyboardEvent) => {
     if (ev.key === 'Enter' || ev.key === ' ') {
@@ -284,7 +308,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     }
   }, [state.open]);
 
-  // Set focus to first toolbar item when popover opens (WCAG 2.1.1: Keyboard)
+  // Set focus to first menu item when popover opens (WCAG 2.1.1: Keyboard)
   useEffect(() => {
     if (!state.open || !popoverRef.current) return;
 
@@ -292,23 +316,50 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     requestAnimationFrame(() => {
       if (!popoverRef.current) return;
 
-      // Find the content section and get the first button within it (skipping close button)
-      const contentSection = popoverRef.current.querySelector('[class*="content"]');
-      if (contentSection) {
-        const firstButton = contentSection.querySelector('button');
-        if (firstButton) {
-          firstButton.focus();
-          return;
-        }
+      // Find the first menu item (for ARIA menu pattern)
+      const firstMenuItem = popoverRef.current.querySelector('[role="menuitem"]');
+      if (firstMenuItem instanceof HTMLElement) {
+        firstMenuItem.focus();
+        return;
       }
 
-      // Fallback: find first button in popover
-      const firstButton = popoverRef.current.querySelector('button');
-      if (firstButton) {
-        firstButton.focus();
+      // Fallback: find first focusable element (button or tabindex=0)
+      const firstFocusable = popoverRef.current.querySelector(
+        'button:not([tabindex="-1"]), [tabindex="0"]'
+      );
+      if (firstFocusable instanceof HTMLElement) {
+        firstFocusable.focus();
       }
     });
   }, [state.open]);
+
+  /**
+   * Wrap children to intercept onClick and close popover on item selection
+   */
+  const wrappedChildren = useMemo(
+    () =>
+      Children.map(children, (child) => {
+        if (!React.isValidElement(child)) return child;
+        const typedChild = child as React.ReactElement<any>;
+
+        // Only wrap if it's a List component (has onClick prop)
+        if (typedChild.props?.onClick) {
+          return React.cloneElement(typedChild, {
+            onClick: (id?: string) => {
+              // Call original onClick
+              typedChild.props.onClick?.(id);
+              // Trigger item selection (closes popover + restores focus)
+              if (id) {
+                handleItemSelect(id);
+              }
+            },
+          });
+        }
+
+        return typedChild;
+      }),
+    [children, handleItemSelect],
+  );
 
   return (
     <>
@@ -377,7 +428,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
                   <CloseIcon />
                 </button>
               </div>
-              <MemoizedContent>{children}</MemoizedContent>
+              <MemoizedContent>{wrappedChildren}</MemoizedContent>
             </div>,
             portalContainer,
           )}

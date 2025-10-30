@@ -62,7 +62,8 @@ export const timelinePointContainer = style({
       transform: 'translate(-50%, -50%) scale(0.95)',
     },
     '&:disabled': { cursor: 'default', opacity: 0.6 },
-    '&:focus-visible': { outline: `3px solid ${tokens.semantic.color.interactive.primary}`, outlineOffset: 3 },
+    // Focus styles removed: Timeline point is not focusable (tabIndex={-1})
+    // Focus is managed by the timeline row container instead
   },
 });
 
