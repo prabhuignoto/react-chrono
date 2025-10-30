@@ -194,6 +194,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
       enabled: state.open,
       eventType: 'keydown',
       preventDefault: true,
+      stopPropagation: true, // Prevent fullscreen handler from executing when popover is open
     },
   );
 
