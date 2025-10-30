@@ -56,9 +56,13 @@ globalStyle('[tabindex="-1"]:focus', {
   outline: 'none !important',
 });
 
+// Enhanced focus-visible styles for WCAG 2.4.11 (Focus Appearance - Level AA)
+// Requires 3:1 contrast ratio and at least 2px thick indicator
 globalStyle(':focus-visible', {
-  outline: `2px solid ${tokens.semantic.color.border.interactive}`,
+  outline: `3px solid ${tokens.semantic.color.border.interactive}`,
   outlineOffset: '2px',
+  // Add box-shadow as secondary indicator for better visibility
+  boxShadow: `0 0 0 1px ${tokens.semantic.color.border.interactive}40`,
 });
 
 // Reduced motion support
@@ -106,23 +110,27 @@ globalStyle('[data-timeline-wrapper]', {
   isolation: 'isolate',
 });
 
-globalStyle('[data-timeline-wrapper]:focus', {
-  outline: 0,
-});
-
-globalStyle(
-  '[data-timeline-wrapper]:not([data-keyboard-navigation="true"]) :focus',
-  {
-    outline: 0,
-  },
-);
-
 globalStyle(
   '[data-timeline-wrapper][data-keyboard-navigation="true"] :focus-visible',
   {
-    outline: `2px solid ${tokens.semantic.color.border.interactive}`,
+    outline: `3px solid ${tokens.semantic.color.border.interactive}`,
     outlineOffset: '2px',
     borderRadius: tokens.semantic.borderRadius.sm,
+    boxShadow: `0 0 0 1px ${tokens.semantic.color.border.interactive}40`,
+  },
+);
+
+// Dark mode specific focus colors for better contrast
+globalStyle(`.${darkTheme} :focus-visible`, {
+  outline: '3px solid #58A6FF',
+  boxShadow: '0 0 0 1px #58A6FF40',
+});
+
+globalStyle(
+  `.${darkTheme} [data-timeline-wrapper][data-keyboard-navigation="true"] :focus-visible`,
+  {
+    outline: '3px solid #58A6FF',
+    boxShadow: '0 0 0 1px #58A6FF40',
   },
 );
 

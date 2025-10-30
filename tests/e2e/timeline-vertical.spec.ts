@@ -83,7 +83,7 @@ test.describe('Chrono.Vertical.Basic', () => {
 
   test('should handle scroll visibility', async ({ page }) => {
     await test.step('Scroll to bottom and check visibility', async () => {
-      const wrapper = page.locator(SELECTORS.TIMELINE_MAIN);
+      const wrapper = page.locator(SELECTORS.TIMELINE_MAIN).first();
       await wrapper.evaluate(el => el.scrollTo(0, el.scrollHeight));
 
       const lastItem = page.locator('.vertical-item-row').last().locator('.card-content-wrapper');
@@ -91,7 +91,7 @@ test.describe('Chrono.Vertical.Basic', () => {
     });
 
     await test.step('Scroll to top and check visibility', async () => {
-      const wrapper = page.locator(SELECTORS.TIMELINE_MAIN);
+      const wrapper = page.locator(SELECTORS.TIMELINE_MAIN).first();
       await wrapper.evaluate(el => el.scrollTo(0, 0));
 
       const firstItem = page.locator('.vertical-item-row').first().locator('.card-content-wrapper');

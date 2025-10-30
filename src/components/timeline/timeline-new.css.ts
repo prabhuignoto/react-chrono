@@ -280,17 +280,6 @@ export const outline = style([
 ]);
 
 // Focus management styles using globalStyle for complex selectors
-globalStyle(`${wrapper.classNames.base}:focus`, {
-  outline: 0,
-});
-
-globalStyle(
-  `${wrapper.classNames.base}:not([data-keyboard-navigation="true"]) :focus`,
-  {
-    outline: 0,
-  },
-);
-
 globalStyle(
   `${wrapper.classNames.base}[data-keyboard-navigation="true"] :focus-visible`,
   {

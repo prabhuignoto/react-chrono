@@ -618,10 +618,30 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         }}
         tabIndex={isChild ? -1 : 0}
         role="region"
-        aria-label="Timeline"
-        aria-live="polite"
-        aria-atomic="false"
+        aria-roledescription="interactive timeline"
+        aria-label="Timeline navigation"
       >
+        {/* Visually hidden live region for screen reader announcements */}
+        <div
+          aria-live="polite"
+          aria-atomic="true"
+          style={{
+            position: 'absolute',
+            left: '-10000px',
+            width: '1px',
+            height: '1px',
+            overflow: 'hidden',
+          }}
+        >
+          {activeTimelineItem !== undefined && items[activeTimelineItem] && (
+            <>
+              Viewing item {activeTimelineItem + 1} of {items.length}
+              {items[activeTimelineItem].title &&
+                `: ${items[activeTimelineItem].title}`}
+            </>
+          )}
+        </div>
+
         {canShowToolbar && (
           <div
             className={ve.toolbarContainer({

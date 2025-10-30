@@ -153,7 +153,6 @@ export const controlButton = style([
     height: '3em',
     marginLeft: '0.5em',
     width: '3em',
-    outline: 0,
     color: '#fff',
   },
 ]);

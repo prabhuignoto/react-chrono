@@ -11,6 +11,8 @@ import React, {
 import ReactDOM from 'react-dom';
 import useCloseClickOutside from 'src/components/effects/useCloseClickOutside';
 import { ChevronDown, CloseIcon } from 'src/components/icons';
+import { useFocusTrap } from 'src/hooks/useFocusManager';
+import { useKeyHandler } from 'src/hooks/useEscapeKey';
 import { PopOverModel } from './popover.model';
 import {
   closeButton,
@@ -67,6 +69,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   $isMobile = false,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const triggerButtonRef = useRef<HTMLButtonElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
   const [state, dispatch] = useReducer(popoverReducer, {
     open: false,
@@ -83,6 +86,9 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   const [portalContainer, setPortalContainer] = useState<HTMLElement>(
     document.body,
   );
+
+  // Use focus trap for keyboard accessibility (WCAG 2.1.2)
+  const focusTrapRef = useFocusTrap(state.open);
 
   // Get the current fullscreen element (with vendor prefix support)
   const getFullscreenElement = useCallback((): HTMLElement | null => {
@@ -143,10 +149,29 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   }, []);
 
   const handleKeyPress = useCallback((ev: React.KeyboardEvent) => {
-    if (ev.key === 'Enter') {
+    if (ev.key === 'Enter' || ev.key === ' ') {
+      ev.preventDefault();
       dispatch({ type: 'TOGGLE' });
     }
   }, []);
+
+  // Handle Escape key to close popover and restore focus (WCAG 2.1.2)
+  // Using useKeyHandler hook for cleaner, reusable implementation
+  useKeyHandler(
+    () => {
+      dispatch({ type: 'CLOSE' });
+      // Restore focus to trigger button
+      requestAnimationFrame(() => {
+        triggerButtonRef.current?.focus();
+      });
+    },
+    {
+      keys: 'Escape',
+      enabled: state.open,
+      eventType: 'keydown',
+      preventDefault: true,
+    },
+  );
 
   useCloseClickOutside(ref, closePopover);
 
@@ -259,6 +284,32 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     }
   }, [state.open]);
 
+  // Set focus to first toolbar item when popover opens (WCAG 2.1.1: Keyboard)
+  useEffect(() => {
+    if (!state.open || !popoverRef.current) return;
+
+    // Use requestAnimationFrame to ensure DOM is updated
+    requestAnimationFrame(() => {
+      if (!popoverRef.current) return;
+
+      // Find the content section and get the first button within it (skipping close button)
+      const contentSection = popoverRef.current.querySelector('[class*="content"]');
+      if (contentSection) {
+        const firstButton = contentSection.querySelector('button');
+        if (firstButton) {
+          firstButton.focus();
+          return;
+        }
+      }
+
+      // Fallback: find first button in popover
+      const firstButton = popoverRef.current.querySelector('button');
+      if (firstButton) {
+        firstButton.focus();
+      }
+    });
+  }, [state.open]);
+
   return (
     <>
       <div className={popoverWrapper} ref={ref}>
@@ -272,6 +323,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           aria-expanded={state.open}
           aria-haspopup="dialog"
           aria-label={placeholder || 'Open menu'}
+          ref={triggerButtonRef}
         >
           {placeholder && <span className={selecterLabel}>{placeholder}</span>}
           <span
@@ -285,7 +337,13 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         {state.open &&
           ReactDOM.createPortal(
             <div
-              ref={popoverRef}
+              ref={(el) => {
+                // Combine focus trap ref with popover ref
+                popoverRef.current = el;
+                if (focusTrapRef.current !== el) {
+                  focusTrapRef.current = el;
+                }
+              }}
               className={[
                 popoverHolder,
                 popoverHolderRecipe({
@@ -305,7 +363,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
               }}
               data-position-x={horizontalPosition}
               role="dialog"
-              aria-modal="false"
+              aria-modal="true"
               aria-labelledby={placeholder ? undefined : 'popover-content'}
             >
               <div className={header}>

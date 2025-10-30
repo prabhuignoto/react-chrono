@@ -62,7 +62,7 @@ export const timelinePointContainer = style({
       transform: 'translate(-50%, -50%) scale(0.95)',
     },
     '&:disabled': { cursor: 'default', opacity: 0.6 },
-    '&:focus-visible': { outline: '3px solid transparent', outlineOffset: 3 },
+    '&:focus-visible': { outline: `3px solid ${tokens.semantic.color.interactive.primary}`, outlineOffset: 3 },
   },
 });
 

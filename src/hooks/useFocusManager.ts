@@ -94,39 +94,118 @@ export const useFocusManager = ({
   return elementRef;
 };
 
+interface UseFocusTrapOptions {
+  /** Whether the focus trap is active */
+  isActive: boolean;
+  /** Initial focus target: 'first', 'last', or specific element ref */
+  initialFocus?: 'first' | 'last' | React.RefObject<HTMLElement>;
+  /** Whether to restore focus when trap is deactivated */
+  returnFocus?: boolean;
+  /** Callback when user tries to escape trap (e.g., Tab from last element) */
+  onEscapeAttempt?: () => void;
+}
+
 /**
  * Hook for managing focus trap within a container
+ *
+ * Enhanced version with support for:
+ * - Initial focus management
+ * - Focus restoration on unmount
+ * - Dynamic content updates (via MutationObserver)
+ * - Escape attempt callbacks
+ *
+ * @param options - Configuration options or boolean for backward compatibility
  */
-export const useFocusTrap = (isActive: boolean) => {
+export const useFocusTrap = (
+  options: boolean | UseFocusTrapOptions,
+) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
+  // Support backward compatibility with boolean parameter
+  const {
+    isActive,
+    initialFocus = 'first',
+    returnFocus = true,
+    onEscapeAttempt,
+  } = typeof options === 'boolean'
+    ? { isActive: options, initialFocus: 'first' as const, returnFocus: true }
+    : options;
+
+  // Store previous focus when trap activates
+  useEffect(() => {
+    if (isActive && returnFocus) {
+      previousFocusRef.current = document.activeElement as HTMLElement;
+    }
+  }, [isActive, returnFocus]);
+
+  // Restore focus when trap deactivates
+  useEffect(() => {
+    return () => {
+      if (!isActive && returnFocus && previousFocusRef.current) {
+        requestAnimationFrame(() => {
+          previousFocusRef.current?.focus();
+          previousFocusRef.current = null;
+        });
+      }
+    };
+  }, [isActive, returnFocus]);
+
+  // Set initial focus when trap activates
   useEffect(() => {
     if (!isActive || !containerRef.current) return;
 
     const container = containerRef.current;
     const focusableElements = container.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"]), [contenteditable="true"]',
     );
 
     if (focusableElements.length === 0) return;
 
-    const firstElement = focusableElements[0];
-    const lastElement = focusableElements[focusableElements.length - 1];
+    requestAnimationFrame(() => {
+      if (typeof initialFocus === 'object' && 'current' in initialFocus) {
+        // Focus specific element
+        initialFocus.current?.focus();
+      } else if (initialFocus === 'first') {
+        focusableElements[0]?.focus();
+      } else if (initialFocus === 'last') {
+        focusableElements[focusableElements.length - 1]?.focus();
+      }
+    });
+  }, [isActive, initialFocus]);
+
+  // Handle Tab key to trap focus
+  useEffect(() => {
+    if (!isActive || !containerRef.current) return;
+
+    const container = containerRef.current;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return;
+
+      // Query focusable elements each time to handle dynamic content
+      const focusableElements = container.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"]), [contenteditable="true"]',
+      );
+
+      if (focusableElements.length === 0) return;
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
 
       if (e.shiftKey) {
         // Shift + Tab
         if (document.activeElement === firstElement) {
           e.preventDefault();
           lastElement?.focus();
+          onEscapeAttempt?.();
         }
       } else {
         // Tab
         if (document.activeElement === lastElement) {
           e.preventDefault();
           firstElement?.focus();
+          onEscapeAttempt?.();
         }
       }
     };
@@ -136,7 +215,7 @@ export const useFocusTrap = (isActive: boolean) => {
     return () => {
       container.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isActive]);
+  }, [isActive, onEscapeAttempt]);
 
   return containerRef;
 };

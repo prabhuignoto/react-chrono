@@ -320,6 +320,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                   onClick={onPreviousMatch}
                   title={textResolver.previousMatch()}
                   aria-label={textResolver.previousMatch()}
+                  aria-controls={searchInfoId}
+                  aria-describedby={totalMatches > 0 ? searchInfoId : undefined}
                   disabled={disableSearchNav}
                   type="button"
                 >
@@ -332,6 +334,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                   onClick={onNextMatch}
                   title={textResolver.nextMatch()}
                   aria-label={textResolver.nextMatch()}
+                  aria-controls={searchInfoId}
+                  aria-describedby={totalMatches > 0 ? searchInfoId : undefined}
                   disabled={disableSearchNav}
                   type="button"
                 >

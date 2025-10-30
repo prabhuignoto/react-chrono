@@ -29,6 +29,23 @@ export { useCardSize } from './useCardSize';
 export { useSlideshowProgress } from './useSlideshowProgress';
 export { useFullscreen } from './useFullscreen';
 export { useFocusManager, useFocusTrap } from './useFocusManager';
+export type { UseFocusTrapOptions } from './useFocusManager';
+
+// Accessibility hooks
+export {
+  useRovingTabIndex,
+  useAriaLiveRegion,
+  useAccessibleDialog,
+  usePrefersReducedMotion,
+} from './accessibility';
+export type {
+  UseRovingTabIndexOptions,
+  UseRovingTabIndexReturn,
+  UseAriaLiveRegionOptions,
+  UseAriaLiveRegionReturn,
+  UseAccessibleDialogOptions,
+  UseAccessibleDialogReturn,
+} from './accessibility';
 
 // Shared utilities (for internal use)
 export {

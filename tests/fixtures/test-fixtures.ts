@@ -76,7 +76,8 @@ export class TestHelpers {
 
   // Wait for network idle
   async waitForNetworkIdle() {
-    await this.page.waitForLoadState('networkidle');
+    // Vite dev server keeps persistent connections; avoid waiting for 'networkidle'
+    await this.page.waitForLoadState('load').catch(() => {});
   }
 
   // Get timeline items
@@ -98,8 +99,8 @@ export class TestHelpers {
     await this.page.locator('[class*="timeline"], .timeline-main-wrapper').first().waitFor({ state: 'visible' });
     // Wait for at least one timeline item
     await this.page.locator('.vertical-item-row, .timeline-horz-item-container').first().waitFor({ state: 'visible' });
-    // Wait for network idle
-    await this.page.waitForLoadState('networkidle');
+    // Avoid 'networkidle' which may never fire under dev server websockets
+    await this.page.waitForLoadState('load').catch(() => {});
   }
 
   // Get currently active timeline item
@@ -294,8 +295,8 @@ export class TestHelpers {
     // Wait for at least one timeline item
     await this.page.locator(`${SELECTORS.VERTICAL_ITEM}, ${SELECTORS.HORIZONTAL_ITEM}`).first().waitFor({ state: 'visible', timeout: 10000 });
 
-    // Wait for network idle
-    await this.page.waitForLoadState('networkidle');
+    // Avoid waiting for 'networkidle' due to persistent websocket connections in dev
+    await this.page.waitForLoadState('load').catch(() => {});
 
     // Small delay for any animations to complete
     await this.page.waitForTimeout(500);

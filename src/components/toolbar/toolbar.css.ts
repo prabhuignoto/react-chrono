@@ -307,7 +307,6 @@ export const searchInput = style([
   {
     flexGrow: 1,
     border: 'none',
-    outline: 'none',
     background: 'transparent',
     color: tokens.semantic.color.text.primary,
     fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
@@ -326,7 +325,8 @@ export const searchInput = style([
         fontStyle: `var(--timeline-controls-font-style, normal)`,
       },
       '&:focus': {
-        outline: 'none',
+        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}, 0 0 0 5px ${tokens.semantic.color.interactive.primary}40, inset 0 0 0 1px ${tokens.semantic.color.interactive.primary}`,
+        borderColor: tokens.semantic.color.interactive.primary,
       },
     },
 
@@ -406,9 +406,8 @@ export const searchButton = style([
         color: '#ffffff',
         boxShadow: `inset 0 1px 2px rgba(0, 0, 0, 0.1)`,
       },
-      '&:focus-visible': {
-        outline: 'none',
-        boxShadow: `0 0 0 2px ${tokens.semantic.color.interactive.primary}40`,
+      '&:focus': {
+        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}, 0 0 0 5px ${tokens.semantic.color.interactive.primary}40`,
         borderColor: tokens.semantic.color.interactive.primary,
       },
       '&:disabled': {
@@ -477,7 +476,6 @@ export const toolbarIconButton = recipe({
       boxShadow: `0 2px 8px -2px rgba(0, 0, 0, 0.1), 0 1px 4px -1px rgba(0, 0, 0, 0.06)`,
       transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
       userSelect: 'none',
-      outline: 'none',
 
       selectors: {
         '&:hover:not(:disabled)': {
@@ -495,9 +493,8 @@ export const toolbarIconButton = recipe({
           boxShadow: `0 1px 4px -1px ${tokens.semantic.color.interactive.primary}50, inset 0 1px 2px rgba(0, 0, 0, 0.1)`,
           transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.emphasized}`,
         },
-        '&:focus-visible': {
-          outline: 'none',
-          boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}60, 0 2px 8px -2px rgba(0, 0, 0, 0.1)`,
+        '&:focus': {
+          boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}, 0 0 0 5px ${tokens.semantic.color.interactive.primary}40, 0 2px 8px -2px rgba(0, 0, 0, 0.15)`,
           borderColor: tokens.semantic.color.interactive.primary,
           backgroundColor: `${tokens.semantic.color.interactive.primary}10`,
           color: tokens.semantic.color.interactive.primary,

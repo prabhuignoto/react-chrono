@@ -422,7 +422,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
   });
 
   test.describe('Print Media Support', () => {
-    test('should handle print media queries', async ({ testHelpers }) => {
+    test('should handle print media queries', async ({ testHelpers, page }) => {
       await test.step('Test print layout', async () => {
         await testHelpers.navigateAndWaitForTimeline('/vertical-basic');
         
@@ -441,7 +441,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
   });
 
   test.describe('Color Scheme Preferences', () => {
-    test('should respect system color scheme preferences', async ({ testHelpers }) => {
+    test('should respect system color scheme preferences', async ({ testHelpers, page }) => {
       await test.step('Test system dark mode preference', async () => {
         // Emulate system dark mode preference
         await page.emulateMedia({ colorScheme: 'dark' });
@@ -458,7 +458,7 @@ test.describe('Timeline Theme and Responsive Features', () => {
       });
     });
 
-    test('should handle no-preference color scheme', async ({ testHelpers }) => {
+    test('should handle no-preference color scheme', async ({ testHelpers, page }) => {
       await test.step('Test no-preference color scheme', async () => {
         await page.emulateMedia({ colorScheme: 'no-preference' });
         

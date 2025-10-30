@@ -1,7 +1,8 @@
 import { TimelineControlModel } from '@models/TimelineControlModel';
 import cls from 'classnames';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useRef, useEffect } from 'react';
 import { useTimelineContext } from '../../contexts';
+import { useAriaLiveRegion } from '../../../hooks';
 import { MoonIcon, StopIcon, SunIcon } from '../../icons';
 import ChevronLeft from '../../icons/chev-left';
 import ChevronRightIcon from '../../icons/chev-right';
@@ -53,6 +54,8 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
   onToggleDarkMode,
   isDark,
   onPaused,
+  activeTimelineItem,
+  totalItems,
 }: TimelineControlModel) => {
   // Use unified context
   const {
@@ -63,6 +66,16 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
     classNames,
     enableDarkToggle,
   } = useTimelineContext();
+
+  // Use ARIA live region for screen reader announcements (WCAG 4.1.3)
+  const { announce, LiveRegion } = useAriaLiveRegion({
+    politeness: 'polite',
+  });
+
+  // Create button refs for roving tabindex
+  const buttonRefsMap = useRef<Map<string, React.RefObject<HTMLButtonElement>>>(
+    new Map(),
+  );
 
   const flippedHorizontally = useMemo(
     () => flipLayout && mode === 'HORIZONTAL',
@@ -78,6 +91,9 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
     () => disableRight || slideShowRunning,
     [disableRight, slideShowRunning],
   );
+
+  // WCAG 2.4.3: Focus Order - Sequential tab navigation
+  // All buttons are tabbable in order, disabled buttons are skipped by browser
 
   const handlePause = useCallback(() => {
     onPaused?.();
@@ -112,30 +128,39 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
     [flipLayout, buttonTexts?.last, buttonTexts?.first],
   );
 
-  // Create a message about current position for screen readers
-  const positionStatus = useMemo(() => {
-    return '';
-  }, []);
+  // Announce position changes to screen readers (WCAG 4.1.3)
+  useEffect(() => {
+    if (
+      activeTimelineItem !== undefined &&
+      totalItems !== undefined &&
+      totalItems > 0
+    ) {
+      const current = activeTimelineItem + 1;
+      announce(`Item ${current} of ${totalItems}`);
+    }
+  }, [activeTimelineItem, totalItems, announce]);
 
-  // Create a message about slideshow status for screen readers
-  const slideshowStatus = useMemo(() => '', []);
+  // Announce slideshow status changes to screen readers
+  useEffect(() => {
+    if (slideShowRunning) {
+      announce('Slideshow is running');
+    }
+  }, [slideShowRunning, announce]);
 
   return (
     <div className={timelineControlContainer} key="control-wrapper">
-      {/* Visually hidden status information for screen readers */}
-      <output className={srOnly} aria-live="polite">
-        {positionStatus}
-        {slideshowStatus && ` ${slideshowStatus}`}
-      </output>
+      {/* ARIA live region for screen reader announcements */}
+      <LiveRegion />
 
       <div
         className={cls(navWrapper, 'timeline-controls', classNames?.controls)}
-        aria-label="Timeline Navigation"
+        aria-label="Timeline navigation controls"
         role="toolbar"
       >
-        {/* jump to first */}
+        {/* Navigation group: First, Previous, Next, Last */}
         {disableInteraction ? null : (
-          <>
+          <div role="group" aria-label="Item navigation" style={{display: "flex"}}>
+            {/* jump to first */}
             <div
               className={cls(navItem, { [navItemDisabled]: canDisableLeft })}
             >
@@ -149,9 +174,8 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 onClick={flippedHorizontally ? onLast : onFirst}
                 title={jumpToFirstTitle}
                 aria-label={jumpToFirstTitle}
-                aria-disabled={disableLeft}
                 aria-controls="timeline-main-wrapper"
-                tabIndex={!disableLeft ? 0 : -1}
+                disabled={!!canDisableLeft}
                 data-test-id="jump-to-first"
               >
                 <span className={navButtonSvg}>
@@ -174,9 +198,8 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 onClick={flippedHorizontally ? onNext : onPrevious}
                 title={previousTitle}
                 aria-label={previousTitle}
-                aria-disabled={disableLeft}
                 aria-controls="timeline-main-wrapper"
-                tabIndex={!disableLeft ? 0 : -1}
+                disabled={!!canDisableLeft}
                 data-test-id="previous"
               >
                 <span className={navButtonSvg}>
@@ -199,9 +222,8 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 onClick={flippedHorizontally ? onPrevious : onNext}
                 title={nextTitle}
                 aria-label={nextTitle}
-                aria-disabled={disableRight}
                 aria-controls="timeline-main-wrapper"
-                tabIndex={!disableRight ? 0 : -1}
+                disabled={!!canDisableRight}
                 data-test-id="next"
               >
                 <span className={navButtonSvg}>
@@ -224,9 +246,8 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 onClick={flippedHorizontally ? onFirst : onLast}
                 title={jumpToLastTitle}
                 aria-label={jumpToLastTitle}
-                aria-disabled={disableRight}
                 aria-controls="timeline-main-wrapper"
-                tabIndex={!disableRight ? 0 : -1}
+                disabled={!!canDisableRight}
                 data-test-id="jump-to-last"
               >
                 <span className={navButtonSvg}>
@@ -234,58 +255,63 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 </span>
               </button>
             </div>
-          </>
+          </div>
         )}
 
-        {/* slideshow button */}
-        <div className={navItem}>
-          {slideShowEnabled && (
-            <button
-              className={cls(
-                navButton,
-                navButtonHover,
-                navButtonActive,
-                navButtonFocus,
-              )}
-              onClick={slideShowRunning ? handlePause : handlePlay}
-              title={playOrPauseTile}
-              tabIndex={0}
-              aria-controls="timeline-main-wrapper"
-              aria-label={playOrPauseTile}
-              aria-pressed={slideShowRunning ? 'true' : 'false'}
-              data-test-id="play-pause"
-            >
-              <span className={navButtonSvg}>
-                {slideShowRunning ? <StopIcon /> : <ReplayIcon />}
-              </span>
-            </button>
-          )}
-        </div>
+        {/* Slideshow control group */}
+        {slideShowEnabled && (
+          <div role="group" aria-label="Slideshow controls">
+            <div className={navItem}>
+              <button
+                className={cls(
+                  navButton,
+                  navButtonHover,
+                  navButtonActive,
+                  navButtonFocus,
+                )}
+                onClick={slideShowRunning ? handlePause : handlePlay}
+                title={playOrPauseTile}
+                aria-controls="timeline-main-wrapper"
+                aria-label={playOrPauseTile}
+                aria-pressed={slideShowRunning ? 'true' : 'false'}
+                data-test-id="play-pause"
+              >
+                <span className={navButtonSvg}>
+                  {slideShowRunning ? <StopIcon /> : <ReplayIcon />}
+                </span>
+              </button>
+            </div>
+          </div>
+        )}
 
-        {/* dark toggle button */}
+        {/* Theme control group */}
         {enableDarkToggle ? (
-          <div
-            className={cls(navItem, { [navItemDisabled]: slideShowRunning })}
-          >
-            <button
-              className={cls(
-                navButton,
-                navButtonHover,
-                navButtonActive,
-                navButtonFocus,
-              )}
-              onClick={onToggleDarkMode}
-              title={isDark ? buttonTexts?.light : buttonTexts?.dark}
-              tabIndex={0}
-              aria-controls="timeline-main-wrapper"
-              aria-label={isDark ? buttonTexts?.light : buttonTexts?.dark}
-              aria-pressed={isDark ? 'true' : 'false'}
-              data-test-id="dark-toggle"
+          <div role="group" aria-label="Theme controls">
+            <div
+              className={cls(navItem, {
+                [navItemDisabled]: slideShowRunning,
+              })}
             >
-              <span className={navButtonSvg}>
-                {isDark ? <SunIcon /> : <MoonIcon />}
-              </span>
-            </button>
+              <button
+                className={cls(
+                  navButton,
+                  navButtonHover,
+                  navButtonActive,
+                  navButtonFocus,
+                )}
+                onClick={onToggleDarkMode}
+                title={isDark ? buttonTexts?.light : buttonTexts?.dark}
+                aria-controls="timeline-main-wrapper"
+                aria-label={isDark ? buttonTexts?.light : buttonTexts?.dark}
+                aria-pressed={isDark ? 'true' : 'false'}
+                disabled={!!slideShowRunning}
+                data-test-id="dark-toggle"
+              >
+                <span className={navButtonSvg}>
+                  {isDark ? <SunIcon /> : <MoonIcon />}
+                </span>
+              </button>
+            </div>
           </div>
         ) : null}
       </div>
