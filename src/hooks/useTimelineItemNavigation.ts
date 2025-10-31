@@ -189,6 +189,12 @@ export const useTimelineItemNavigation = ({
       // Find target element using improved element finding and start scrolling immediately
       const targetElement = findTargetElement(itemId);
       if (targetElement) {
+        // Capture whether search is active NOW before RAF callback runs
+        // This prevents timing issues where focus changes before RAF executes
+        const wasSearchActive =
+          document.activeElement?.tagName === 'INPUT' &&
+          (document.activeElement as HTMLInputElement).type === 'search';
+
         // Start scrolling immediately for predictive centering
         scrollToElement(targetElement, mode);
 
@@ -196,7 +202,9 @@ export const useTimelineItemNavigation = ({
         // Use requestAnimationFrame to avoid fighting with scrollIntoView
         requestAnimationFrame(() => {
           try {
-            if (typeof (targetElement as HTMLElement).focus === 'function') {
+            // Only focus timeline element if search was NOT active
+            // This prevents stealing focus during search navigation
+            if (!wasSearchActive && typeof (targetElement as HTMLElement).focus === 'function') {
               (targetElement as HTMLElement).focus({ preventScroll: true });
               // Ensure the wrapper maintains keyboard focus capability
               const wrapper = targetElement.closest(

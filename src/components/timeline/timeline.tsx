@@ -210,12 +210,19 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   // Wrap timeline item click to reset navigation states
   const handleTimelineItemClick = React.useCallback(
     (itemId?: string, isSlideShow?: boolean) => {
+      // Capture whether search is active NOW, before any RAF callbacks run
+      // This prevents timing issues where focus changes before RAF executes
+      const wasSearchActive =
+        document.activeElement?.tagName === 'INPUT' &&
+        (document.activeElement as HTMLInputElement).type === 'search';
+
       // Reset navigation states when clicking directly on items
       setIsKeyboardNavigation(false);
       setIsToolbarNavigation(false);
       handleTimelineItemClickInternal(itemId, isSlideShow);
 
       // After activating, bring the card/row to focus for accessibility
+      // BUT: Don't steal focus if user is searching - let them continue navigating search
       if (itemId) {
         requestAnimationFrame(() => {
           const verticalRow = document.querySelector(
@@ -226,8 +233,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             (document.getElementById(
               `timeline-card-${itemId}`,
             ) as HTMLElement | null);
+
           try {
-            target?.focus?.({ preventScroll: true });
+            // Only focus card if search was NOT active when function was called
+            // Timeline card is still updated/scrolled, just not focused
+            if (!wasSearchActive) {
+              target?.focus?.({ preventScroll: true });
+            }
           } catch {}
         });
       }
@@ -294,71 +306,76 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     if (activeTimelineItem !== undefined) {
       // Move keyboard focus to the active element once activation changes
       // BUT: Don't steal focus if user is currently typing in search box
-      const isSearchActive =
+      // CRITICAL: Capture search state NOW before scheduling RAF to avoid timing issues
+      const wasSearchActive =
         document.activeElement?.tagName === 'INPUT' &&
         (document.activeElement as HTMLInputElement).type === 'search';
 
-      if (!isSearchActive) {
-        if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
-          requestAnimationFrame(() => {
-            const activeId = items[activeTimelineItem ?? 0]?.id;
-            if (activeId) {
-              // Prefer focusing the card container in horizontal modes
-              const cardContainer = document.getElementById(
-                `timeline-card-${activeId}`,
-              );
-              if (cardContainer) {
-                try {
-                  (cardContainer as HTMLElement).focus({ preventScroll: false });
-                  return;
-                } catch (_) {
-                  // fall through to point focus
-                }
-              }
+      if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
+        requestAnimationFrame(() => {
+          // Only focus if search was NOT active when this effect ran
+          if (wasSearchActive) return;
 
-              const circle = document.querySelector(
-                `button[data-testid="timeline-circle"][data-item-id="${activeId}"]`,
-              ) as HTMLButtonElement | null;
-              if (circle) {
-                try {
-                  circle.focus({ preventScroll: false });
-                  return;
-                } catch (_) {
-                  // fall through
-                }
+          const activeId = items[activeTimelineItem ?? 0]?.id;
+          if (activeId) {
+            // Prefer focusing the card container in horizontal modes
+            const cardContainer = document.getElementById(
+              `timeline-card-${activeId}`,
+            );
+            if (cardContainer) {
+              try {
+                (cardContainer as HTMLElement).focus({ preventScroll: false });
+                return;
+              } catch (_) {
+                // fall through to point focus
               }
             }
-            const ele = timelineMainRef.current;
-            if (ele) {
-              ele.focus({ preventScroll: false });
-            }
-          });
-        } else if (
-          timelineMode === 'VERTICAL' ||
-          timelineMode === 'VERTICAL_ALTERNATING'
-        ) {
-          // In vertical modes, focus the vertical row (li) for the active item
-          requestAnimationFrame(() => {
-            const activeId = items[activeTimelineItem ?? 0]?.id;
-            if (activeId) {
-              const verticalRow = document.querySelector(
-                `[data-testid="vertical-item-row"][data-item-id="${activeId}"]`,
-              ) as HTMLElement | null;
-              if (verticalRow) {
-                try {
-                  verticalRow.focus({ preventScroll: false });
-                  return;
-                } catch (_) {
-                  // fall back to container focus
-                }
+
+            const circle = document.querySelector(
+              `button[data-testid="timeline-circle"][data-item-id="${activeId}"]`,
+            ) as HTMLButtonElement | null;
+            if (circle) {
+              try {
+                circle.focus({ preventScroll: false });
+                return;
+              } catch (_) {
+                // fall through
               }
             }
-            const ele = timelineMainRef.current;
-            if (ele) {
-              ele.focus({ preventScroll: false });
+          }
+          const ele = timelineMainRef.current;
+          if (ele) {
+            ele.focus({ preventScroll: false });
+          }
+        });
+      } else if (
+        timelineMode === 'VERTICAL' ||
+        timelineMode === 'VERTICAL_ALTERNATING'
+      ) {
+        // In vertical modes, focus the vertical row (li) for the active item
+        requestAnimationFrame(() => {
+          // Only focus if search was NOT active when this effect ran
+          if (wasSearchActive) return;
+
+          const activeId = items[activeTimelineItem ?? 0]?.id;
+          if (activeId) {
+            const verticalRow = document.querySelector(
+              `[data-testid="vertical-item-row"][data-item-id="${activeId}"]`,
+            ) as HTMLElement | null;
+            if (verticalRow) {
+              try {
+                verticalRow.focus({ preventScroll: false });
+                return;
+              } catch (_) {
+                // fall back to container focus
+              }
             }
-          });
-        }
+          }
+          const ele = timelineMainRef.current;
+          if (ele) {
+            ele.focus({ preventScroll: false });
+          }
+        });
       }
     }
   }, [activeTimelineItem, syncActiveItemIndex, mode, timelineMainRef, items]);
@@ -485,12 +502,13 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // Update active item information
   useEffect(() => {
-    // Skip all focus-related updates if search input is active
-    const isSearchActive =
+    // CRITICAL: Capture search state NOW to prevent timing issues with RAF callbacks
+    // This ensures we check the state at the moment this effect runs, not later
+    const wasSearchActive =
       document.activeElement?.tagName === 'INPUT' &&
       (document.activeElement as HTMLInputElement).type === 'search';
 
-    if (isSearchActive) {
+    if (wasSearchActive) {
       return; // Don't do any focus-stealing operations while searching
     }
 
@@ -538,12 +556,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               cardLeft - contentLeft + cardWidth / 2 - contentWidth / 2;
             ele.scrollLeft += targetScrollLeft;
 
-            // Also ensure the card gets focus (but not if search is active)
-            const isSearchActive =
-              document.activeElement?.tagName === 'INPUT' &&
-              (document.activeElement as HTMLInputElement).type === 'search';
-
-            if (!isSearchActive) {
+            // Use captured state - don't check document.activeElement here (timing issue)
+            if (!wasSearchActive) {
               (card as HTMLElement).focus({ preventScroll: true });
             }
           });

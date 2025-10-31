@@ -319,6 +319,11 @@ export const searchInput = style([
     outline: 'none',
 
     selectors: {
+      '&:focus': {
+        outline: 'none',
+        boxShadow: 'none',
+        border: 'none',
+      },
       '&::placeholder': {
         color: tokens.semantic.color.text.muted,
         opacity: 0.7,

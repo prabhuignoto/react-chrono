@@ -187,6 +187,12 @@ export const useTimelineSearch = ({
         handleTimelineItemClickRef.current?.(matchData.id);
         // Keep focus in search input for continued navigation
         // Timeline component handles item focus/visibility internally
+        // Explicitly return focus to search input after navigation
+        requestAnimationFrame(() => {
+          if (searchInputRef.current) {
+            searchInputRef.current.focus();
+          }
+        });
       }
     },
     [searchResults, currentMatchIndex, searchableContent],
