@@ -128,8 +128,17 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   const closePopover = useCallback(() => {
     setIsOpen(false);
     // Restore focus to trigger button (WCAG 2.1.2)
+    // BUT: Don't steal focus if user is clicking on search input
     requestAnimationFrame(() => {
-      triggerButtonRef.current?.focus();
+      const activeElement = document.activeElement;
+      const isSearchInput =
+        activeElement?.tagName === 'INPUT' &&
+        (activeElement as HTMLInputElement).type === 'search';
+
+      // Only restore focus if not moving to search input
+      if (!isSearchInput) {
+        triggerButtonRef.current?.focus();
+      }
     });
   }, []);
 

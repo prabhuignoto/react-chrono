@@ -294,7 +294,7 @@ export const searchWrapper = style([
 
     '@media': {
       'screen and (max-width: 767px)': {
-        height: '36px',
+        height: '32px',
         padding: `0 ${tokens.semantic.spacing.sm}`,
       },
     },
@@ -383,9 +383,9 @@ export const searchControls = style([
 export const searchButton = style([
   patterns.toolbarButton(),
   {
-    width: '28px',
-    height: '28px',
-    minWidth: '28px',
+    width: '24px',
+    height: '24px',
+    minWidth: '24px',
     backgroundColor: tokens.semantic.color.background.elevated,
     border: `1px solid ${tokens.semantic.color.border.default}`,
     borderRadius: tokens.semantic.borderRadius.sm,
@@ -428,9 +428,9 @@ export const searchButton = style([
 
     '@media': {
       'screen and (max-width: 767px)': {
-        width: '28px',
-        height: '28px',
-        minWidth: '28px',
+        width: '24px',
+        height: '24px',
+        minWidth: '24px',
       },
     },
   },
@@ -444,16 +444,16 @@ export const searchButtonIcon = style([
     justifyContent: 'center',
   }),
   {
-    width: '12px',
-    height: '12px',
+    width: '10px',
+    height: '10px',
     color: 'currentColor',
     transition: `transform ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
     flexShrink: 0,
 
     '@media': {
       'screen and (max-width: 767px)': {
-        width: '12px',
-        height: '12px',
+        width: '10px',
+        height: '10px',
       },
     },
   },
