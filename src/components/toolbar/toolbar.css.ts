@@ -315,6 +315,8 @@ export const searchInput = style([
     fontStyle: `var(--timeline-controls-font-style, normal)`,
     padding: tokens.semantic.spacing.xs,
     minWidth: 0,
+    // Remove focus outline - parent searchWrapper handles focus styling
+    outline: 'none',
 
     selectors: {
       '&::placeholder': {
@@ -324,9 +326,14 @@ export const searchInput = style([
         fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.normal})`,
         fontStyle: `var(--timeline-controls-font-style, normal)`,
       },
-      '&:focus': {
-        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}, 0 0 0 5px ${tokens.semantic.color.interactive.primary}40, inset 0 0 0 1px ${tokens.semantic.color.interactive.primary}`,
-        borderColor: tokens.semantic.color.interactive.primary,
+      // Hide native browser clear button (Chrome, Safari)
+      '&::-webkit-search-cancel-button': {
+        display: 'none',
+        WebkitAppearance: 'none',
+      },
+      '&::-webkit-search-decoration': {
+        display: 'none',
+        WebkitAppearance: 'none',
       },
     },
 
@@ -342,7 +349,7 @@ export const searchInput = style([
 export const searchInfo = style([
   patterns.text({ variant: 'caption', color: 'muted' }),
   {
-    margin: `0 ${tokens.semantic.spacing.xs}`,
+    margin: '0 4px',
     whiteSpace: 'nowrap',
     flexShrink: 0,
     fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
@@ -353,7 +360,7 @@ export const searchInfo = style([
     '@media': {
       'screen and (max-width: 767px)': {
         fontSize: '0.7rem',
-        margin: `0 ${tokens.semantic.spacing.xs}`,
+        margin: '0 4px',
       },
     },
   },
@@ -364,9 +371,9 @@ export const searchControls = style([
   sprinkles({
     display: 'flex',
     alignItems: 'center',
-    gap: 'xs',
   }),
   {
+    gap: '4px',
     flexShrink: 0,
     marginLeft: 'auto',
   },
@@ -376,9 +383,9 @@ export const searchControls = style([
 export const searchButton = style([
   patterns.toolbarButton(),
   {
-    width: '36px',
-    height: '36px',
-    minWidth: '36px',
+    width: '28px',
+    height: '28px',
+    minWidth: '28px',
     backgroundColor: tokens.semantic.color.background.elevated,
     border: `1px solid ${tokens.semantic.color.border.default}`,
     borderRadius: tokens.semantic.borderRadius.sm,
@@ -421,9 +428,9 @@ export const searchButton = style([
 
     '@media': {
       'screen and (max-width: 767px)': {
-        width: '36px',
-        height: '36px',
-        minWidth: '36px',
+        width: '28px',
+        height: '28px',
+        minWidth: '28px',
       },
     },
   },
@@ -437,16 +444,16 @@ export const searchButtonIcon = style([
     justifyContent: 'center',
   }),
   {
-    width: '16px',
-    height: '16px',
+    width: '12px',
+    height: '12px',
     color: 'currentColor',
     transition: `transform ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
     flexShrink: 0,
 
     '@media': {
       'screen and (max-width: 767px)': {
-        width: '14px',
-        height: '14px',
+        width: '12px',
+        height: '12px',
       },
     },
   },

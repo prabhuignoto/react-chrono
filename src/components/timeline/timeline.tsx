@@ -293,65 +293,72 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
     if (activeTimelineItem !== undefined) {
       // Move keyboard focus to the active element once activation changes
-      if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
-        requestAnimationFrame(() => {
-          const activeId = items[activeTimelineItem ?? 0]?.id;
-          if (activeId) {
-            // Prefer focusing the card container in horizontal modes
-            const cardContainer = document.getElementById(
-              `timeline-card-${activeId}`,
-            );
-            if (cardContainer) {
-              try {
-                (cardContainer as HTMLElement).focus({ preventScroll: false });
-                return;
-              } catch (_) {
-                // fall through to point focus
-              }
-            }
+      // BUT: Don't steal focus if user is currently typing in search box
+      const isSearchActive =
+        document.activeElement?.tagName === 'INPUT' &&
+        (document.activeElement as HTMLInputElement).type === 'search';
 
-            const circle = document.querySelector(
-              `button[data-testid="timeline-circle"][data-item-id="${activeId}"]`,
-            ) as HTMLButtonElement | null;
-            if (circle) {
-              try {
-                circle.focus({ preventScroll: false });
-                return;
-              } catch (_) {
-                // fall through
+      if (!isSearchActive) {
+        if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
+          requestAnimationFrame(() => {
+            const activeId = items[activeTimelineItem ?? 0]?.id;
+            if (activeId) {
+              // Prefer focusing the card container in horizontal modes
+              const cardContainer = document.getElementById(
+                `timeline-card-${activeId}`,
+              );
+              if (cardContainer) {
+                try {
+                  (cardContainer as HTMLElement).focus({ preventScroll: false });
+                  return;
+                } catch (_) {
+                  // fall through to point focus
+                }
+              }
+
+              const circle = document.querySelector(
+                `button[data-testid="timeline-circle"][data-item-id="${activeId}"]`,
+              ) as HTMLButtonElement | null;
+              if (circle) {
+                try {
+                  circle.focus({ preventScroll: false });
+                  return;
+                } catch (_) {
+                  // fall through
+                }
               }
             }
-          }
-          const ele = timelineMainRef.current;
-          if (ele) {
-            ele.focus({ preventScroll: false });
-          }
-        });
-      } else if (
-        timelineMode === 'VERTICAL' ||
-        timelineMode === 'VERTICAL_ALTERNATING'
-      ) {
-        // In vertical modes, focus the vertical row (li) for the active item
-        requestAnimationFrame(() => {
-          const activeId = items[activeTimelineItem ?? 0]?.id;
-          if (activeId) {
-            const verticalRow = document.querySelector(
-              `[data-testid="vertical-item-row"][data-item-id="${activeId}"]`,
-            ) as HTMLElement | null;
-            if (verticalRow) {
-              try {
-                verticalRow.focus({ preventScroll: false });
-                return;
-              } catch (_) {
-                // fall back to container focus
+            const ele = timelineMainRef.current;
+            if (ele) {
+              ele.focus({ preventScroll: false });
+            }
+          });
+        } else if (
+          timelineMode === 'VERTICAL' ||
+          timelineMode === 'VERTICAL_ALTERNATING'
+        ) {
+          // In vertical modes, focus the vertical row (li) for the active item
+          requestAnimationFrame(() => {
+            const activeId = items[activeTimelineItem ?? 0]?.id;
+            if (activeId) {
+              const verticalRow = document.querySelector(
+                `[data-testid="vertical-item-row"][data-item-id="${activeId}"]`,
+              ) as HTMLElement | null;
+              if (verticalRow) {
+                try {
+                  verticalRow.focus({ preventScroll: false });
+                  return;
+                } catch (_) {
+                  // fall back to container focus
+                }
               }
             }
-          }
-          const ele = timelineMainRef.current;
-          if (ele) {
-            ele.focus({ preventScroll: false });
-          }
-        });
+            const ele = timelineMainRef.current;
+            if (ele) {
+              ele.focus({ preventScroll: false });
+            }
+          });
+        }
       }
     }
   }, [activeTimelineItem, syncActiveItemIndex, mode, timelineMainRef, items]);
@@ -362,6 +369,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     currentMatchIndex,
     searchInputRef,
     handleSearchChange,
+    triggerSearch,
     clearSearch,
     handleNextMatch,
     handlePreviousMatch,
@@ -435,19 +443,38 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   );
 
   // Handle focus events to maintain proper focus state
-  const handleFocus = React.useCallback(() => {
-    if (!slideShowRunning) {
-      setHasFocus(true);
-    }
-  }, [slideShowRunning]);
+  const handleFocus = React.useCallback(
+    (evt: React.FocusEvent<HTMLDivElement>) => {
+      // Don't manage focus if it's coming from within toolbar (search, buttons, etc)
+      const timelineToolbar = (evt.currentTarget as HTMLElement).querySelector('[role="toolbar"]');
+      const isFocusFromToolbar = timelineToolbar?.contains(evt.target as Node);
+
+      if (isFocusFromToolbar) {
+        return; // Let toolbar items operate independently
+      }
+
+      if (!slideShowRunning) {
+        setHasFocus(true);
+      }
+    },
+    [slideShowRunning],
+  );
 
   const handleBlur = React.useCallback(
     (evt: React.FocusEvent<HTMLDivElement>) => {
+      // Don't manage focus if blur is due to focus moving within toolbar
+      const timelineToolbar = (evt.currentTarget as HTMLElement).querySelector('[role="toolbar"]');
+      const isBlurWithinToolbar = timelineToolbar?.contains(evt.relatedTarget as Node);
+
+      if (isBlurWithinToolbar) {
+        return; // Let toolbar items manage their own focus
+      }
+
       // Only lose focus if focus is moving outside the timeline entirely
       const relatedTarget = evt.relatedTarget as HTMLElement;
       const currentTarget = evt.currentTarget as HTMLElement;
 
-      // Check if focus is moving to a child element (like toolbar buttons)
+      // Check if focus is moving to a child element (like timeline cards)
       if (!currentTarget.contains(relatedTarget)) {
         // Only set hasFocus to false if focus is truly leaving the timeline
         setHasFocus(false);
@@ -458,6 +485,15 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // Update active item information
   useEffect(() => {
+    // Skip all focus-related updates if search input is active
+    const isSearchActive =
+      document.activeElement?.tagName === 'INPUT' &&
+      (document.activeElement as HTMLInputElement).type === 'search';
+
+    if (isSearchActive) {
+      return; // Don't do any focus-stealing operations while searching
+    }
+
     const activeItem = items[activeTimelineItem ?? 0];
 
     if (slideShowRunning) {
@@ -502,8 +538,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               cardLeft - contentLeft + cardWidth / 2 - contentWidth / 2;
             ele.scrollLeft += targetScrollLeft;
 
-            // Also ensure the card gets focus
-            (card as HTMLElement).focus({ preventScroll: true });
+            // Also ensure the card gets focus (but not if search is active)
+            const isSearchActive =
+              document.activeElement?.tagName === 'INPUT' &&
+              (document.activeElement as HTMLInputElement).type === 'search';
+
+            if (!isSearchActive) {
+              (card as HTMLElement).focus({ preventScroll: true });
+            }
           });
         }
       }
@@ -610,7 +652,16 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         data-fullscreen={isFullscreen}
         data-keyboard-focus={isKeyboardNavigation}
         data-toolbar-navigation={isToolbarNavigation}
-        onMouseDown={() => setHasFocus(true)}
+        onMouseDown={(evt) => {
+          // Don't steal focus from search input or toolbar
+          // Check if click is within toolbar (which contains search input)
+          const timelineToolbar = (evt.currentTarget as HTMLElement).querySelector('[role="toolbar"]');
+          const isWithinToolbar = timelineToolbar?.contains(evt.target as Node);
+
+          if (!isWithinToolbar) {
+            setHasFocus(true);
+          }
+        }}
         onKeyUp={(evt) => {
           if (evt.key === 'Escape') {
             onPaused?.();
@@ -671,6 +722,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               mode={timelineMode}
               searchQuery={searchQuery}
               onSearchChange={handleSearchChange}
+              onTriggerSearch={triggerSearch}
               onClearSearch={clearSearch}
               onNextMatch={handleNextMatch}
               onPreviousMatch={handlePreviousMatch}

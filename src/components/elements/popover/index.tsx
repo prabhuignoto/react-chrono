@@ -3,7 +3,6 @@ import React, {
   useCallback,
   useEffect,
   useLayoutEffect,
-  useReducer,
   useRef,
   useMemo,
   memo,
@@ -11,10 +10,9 @@ import React, {
   Children,
 } from 'react';
 import ReactDOM from 'react-dom';
-import useCloseClickOutside from 'src/components/effects/useCloseClickOutside';
-import { ChevronDown, CloseIcon } from 'src/components/icons';
-import { useFocusTrap } from 'src/hooks/useFocusManager';
-import { useKeyHandler } from 'src/hooks/useEscapeKey';
+import useCloseClickOutside from '@components/effects/useCloseClickOutside';
+import { ChevronDown, CloseIcon } from '@components/icons';
+import { useFocusTrap } from '@hooks/useFocusManager';
 import { PopOverModel } from './popover.model';
 import {
   closeButton,
@@ -35,26 +33,6 @@ const MemoizedContent = memo(({ children }: { children: React.ReactNode }) => (
   <div className={content}>{children}</div>
 ));
 
-// Reducer for state management
-type State = { open: boolean; isVisible: boolean };
-type Action =
-  | { type: 'TOGGLE' }
-  | { type: 'CLOSE' }
-  | { type: 'SET_VISIBLE'; payload: boolean };
-
-const popoverReducer = (state: State, action: Action): State => {
-  switch (action.type) {
-    case 'TOGGLE':
-      return { ...state, open: !state.open };
-    case 'CLOSE':
-      return { ...state, open: false };
-    case 'SET_VISIBLE':
-      return { ...state, isVisible: action.payload };
-    default:
-      return state;
-  }
-};
-
 /**
  * A customizable popover component that displays content in a floating panel
  * @param {PopOverModel} props - Component props
@@ -74,24 +52,24 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   const ref = useRef<HTMLDivElement>(null);
   const triggerButtonRef = useRef<HTMLButtonElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
-  const [state, dispatch] = useReducer(popoverReducer, {
-    open: false,
-    isVisible: false,
-  });
-  const [horizontalPosition, setHorizontalPosition] = useState<
-    'left' | 'right' | 'center'
-  >('center');
-  const [popoverPosition, setPopoverPosition] = useState({
-    top: 0,
-    left: 0,
-    width: 0,
+  const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [popoverLayout, setPopoverLayout] = useState({
+    position: { top: 0, left: 0, width: 0 },
+    horizontalPosition: 'center' as 'left' | 'right' | 'center',
   });
   const [portalContainer, setPortalContainer] = useState<HTMLElement>(
     document.body,
   );
 
   // Use focus trap for keyboard accessibility (WCAG 2.1.2)
-  const focusTrapRef = useFocusTrap(state.open);
+  const focusTrapRef = useFocusTrap(isOpen);
+
+  // Memoize theme CSS variables to prevent recalculation on every render
+  const themeCssVars = useMemo(
+    () => computeCssVarsFromTheme(theme),
+    [theme],
+  );
 
   // Get the current fullscreen element (with vendor prefix support)
   const getFullscreenElement = useCallback((): HTMLElement | null => {
@@ -144,11 +122,15 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   }, [getFullscreenElement]);
 
   const toggleOpen = useCallback(() => {
-    dispatch({ type: 'TOGGLE' });
+    setIsOpen((prev) => !prev);
   }, []);
 
   const closePopover = useCallback(() => {
-    dispatch({ type: 'CLOSE' });
+    setIsOpen(false);
+    // Restore focus to trigger button (WCAG 2.1.2)
+    requestAnimationFrame(() => {
+      triggerButtonRef.current?.focus();
+    });
   }, []);
 
   /**
@@ -161,13 +143,8 @@ const PopOver: FunctionComponent<PopOverModel> = ({
       // Call parent's onItemSelect callback if provided
       onItemSelect?.(itemId);
 
-      // Close popover
+      // Close popover (handles focus restoration via closePopover)
       closePopover();
-
-      // Restore focus to trigger button
-      requestAnimationFrame(() => {
-        triggerButtonRef.current?.focus();
-      });
     },
     [onItemSelect, closePopover],
   );
@@ -179,25 +156,8 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     }
   }, []);
 
-  // Handle Escape key to close popover and restore focus (WCAG 2.1.2)
-  // Using useKeyHandler hook for cleaner, reusable implementation
-  useKeyHandler(
-    () => {
-      dispatch({ type: 'CLOSE' });
-      // Restore focus to trigger button
-      requestAnimationFrame(() => {
-        triggerButtonRef.current?.focus();
-      });
-    },
-    {
-      keys: 'Escape',
-      enabled: state.open,
-      eventType: 'keydown',
-      preventDefault: true,
-      stopPropagation: true, // Prevent fullscreen handler from executing when popover is open
-    },
-  );
-
+  // Handle Escape key and click outside to close popover
+  // useCloseClickOutside hook handles both scenarios (WCAG 2.1.2)
   useCloseClickOutside(ref, closePopover);
 
   // Calculate optimal positioning for portal rendering
@@ -268,53 +228,66 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     // Ensure minimum distance from viewport edge
     top = Math.max(16, top);
 
-    setPopoverPosition({ top, left, width: popoverWidth });
-    setHorizontalPosition(horizontalPos);
+    // Combine state updates to prevent double re-render
+    setPopoverLayout({
+      position: { top, left, width: popoverWidth },
+      horizontalPosition: horizontalPos,
+    });
   }, [width, $isMobile, position]);
 
   // Position calculation on layout changes and scroll/resize
   useLayoutEffect(() => {
-    if (state.open) {
+    if (isOpen) {
       calculatePopoverPosition();
     }
-  }, [state.open, calculatePopoverPosition]);
+  }, [isOpen, calculatePopoverPosition]);
 
-  // Recalculate position on scroll or resize
+  // Recalculate position on scroll or resize with RAF-based throttling
   useEffect(() => {
-    if (!state.open) return;
+    if (!isOpen) return;
 
+    // Use RAF to throttle position recalculation and prevent layout thrashing
+    let rafId: number | null = null;
     const handlePositionUpdate = () => {
-      if (state.open) {
+      if (rafId !== null) return; // Skip if RAF already scheduled
+
+      rafId = requestAnimationFrame(() => {
         calculatePopoverPosition();
-      }
+        rafId = null;
+      });
     };
 
     window.addEventListener('scroll', handlePositionUpdate, { passive: true });
     window.addEventListener('resize', handlePositionUpdate, { passive: true });
 
     return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
       window.removeEventListener('scroll', handlePositionUpdate);
       window.removeEventListener('resize', handlePositionUpdate);
     };
-  }, [state.open, calculatePopoverPosition]);
+  }, [isOpen, calculatePopoverPosition]);
 
-  // Use CSS transition instead of setTimeout
+  // Handle fade in/out animations with CSS
+  // Use RAF to ensure state change is applied to DOM before CSS animation plays
   useEffect(() => {
-    if (state.open) {
+    if (isOpen) {
+      // Fade in: trigger animation with RAF to ensure DOM is ready
       requestAnimationFrame(() => {
-        dispatch({ type: 'SET_VISIBLE', payload: true });
+        setIsVisible(true);
       });
     } else {
-      dispatch({ type: 'SET_VISIBLE', payload: false });
+      // Fade out: CSS animation plays naturally while portal stays in DOM
+      // Then isVisible becomes false, triggering opacity transition
+      setIsVisible(false);
     }
-  }, [state.open]);
+  }, [isOpen]);
 
   // Set focus to first menu item when popover opens (WCAG 2.1.1: Keyboard)
   useEffect(() => {
-    if (!state.open || !popoverRef.current) return;
+    if (!isOpen || !popoverRef.current) return;
 
     // Use requestAnimationFrame to ensure DOM is updated
-    requestAnimationFrame(() => {
+    const rafId = requestAnimationFrame(() => {
       if (!popoverRef.current) return;
 
       // Find the first menu item (for ARIA menu pattern)
@@ -332,24 +305,38 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         firstFocusable.focus();
       }
     });
-  }, [state.open]);
+
+    // Clean up RAF on unmount or when popover closes
+    return () => cancelAnimationFrame(rafId);
+  }, [isOpen]);
 
   /**
-   * Wrap children to intercept onClick and close popover on item selection
+   * Wrap children to intercept onClick for non-multiSelectable lists
+   * For multiSelectable lists, popover stays open to allow multiple selections
+   * and closes via Escape key or click outside
    */
   const wrappedChildren = useMemo(
     () =>
       Children.map(children, (child) => {
         if (!React.isValidElement(child)) return child;
-        const typedChild = child as React.ReactElement<any>;
+        const typedChild = child as React.ReactElement<{
+          onClick?: (id?: string) => void;
+          multiSelectable?: boolean;
+          [key: string]: unknown;
+        }>;
 
-        // Only wrap if it's a List component (has onClick prop)
-        if (typedChild.props?.onClick) {
+        // Check if this is a List component with onClick (non-multiSelectable)
+        const hasOnClick = !!typedChild.props?.onClick;
+        const isMultiSelectable = !!typedChild.props?.multiSelectable;
+
+        // Only wrap onClick for non-multiSelectable lists to avoid infinite loops
+        // MultiSelectable lists keep popover open for multiple selections
+        if (hasOnClick && !isMultiSelectable) {
           return React.cloneElement(typedChild, {
             onClick: (id?: string) => {
               // Call original onClick
               typedChild.props.onClick?.(id);
-              // Trigger item selection (closes popover + restores focus)
+              // Close popover after selection
               if (id) {
                 handleItemSelect(id);
               }
@@ -357,6 +344,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           });
         }
 
+        // Return unmodified for multiSelectable lists
         return typedChild;
       }),
     [children, handleItemSelect],
@@ -366,58 +354,59 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     <>
       <div className={popoverWrapper} ref={ref}>
         <button
+          id="popover-trigger"
           type="button"
           onClick={toggleOpen}
           onKeyDown={handleKeyPress}
           title={placeholder}
           className={selecter}
-          style={computeCssVarsFromTheme(theme)}
-          aria-expanded={state.open}
-          aria-haspopup="dialog"
+          style={themeCssVars}
+          aria-expanded={isOpen}
+          aria-haspopup="menu"
           aria-label={placeholder || 'Open menu'}
           ref={triggerButtonRef}
         >
           {placeholder && <span className={selecterLabel}>{placeholder}</span>}
           <span
-            className={[selecterIcon, state.open ? selecterIconOpen : ''].join(
+            className={[selecterIcon, isOpen ? selecterIconOpen : ''].join(
               ' ',
             )}
           >
             {icon || <ChevronDown />}
           </span>
         </button>
-        {state.open &&
-          ReactDOM.createPortal(
-            <div
-              ref={(el) => {
-                // Combine focus trap ref with popover ref
-                popoverRef.current = el;
-                if (focusTrapRef.current !== el) {
-                  focusTrapRef.current = el;
-                }
-              }}
-              className={[
-                popoverHolder,
-                popoverHolderRecipe({
-                  visible: state.isVisible,
-                  position: position === 'bottom' ? 'bottom' : 'top',
-                  leftMobile: !!$isMobile,
-                }),
-              ].join(' ')}
-              style={{
-                ...computeCssVarsFromTheme(theme),
-                width: `${popoverPosition.width}px`,
-                position: 'fixed',
-                zIndex: 99999,
-                left: `${popoverPosition.left}px`,
-                top: `${popoverPosition.top}px`,
-                transform: 'none',
-              }}
-              data-position-x={horizontalPosition}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby={placeholder ? undefined : 'popover-content'}
-            >
+        {ReactDOM.createPortal(
+          <div
+            ref={(el) => {
+              // Combine focus trap ref with popover ref
+              popoverRef.current = el;
+              if (focusTrapRef.current !== el) {
+                focusTrapRef.current = el;
+              }
+            }}
+            className={[
+              popoverHolder,
+              popoverHolderRecipe({
+                visible: isVisible,
+                position: position === 'bottom' ? 'bottom' : 'top',
+                leftMobile: !!$isMobile,
+              }),
+            ].join(' ')}
+            style={{
+              ...themeCssVars,
+              width: `${popoverLayout.position.width}px`,
+              position: 'fixed',
+              zIndex: 99999,
+              left: `${popoverLayout.position.left}px`,
+              top: `${popoverLayout.position.top}px`,
+              transform: 'none',
+              // Prevent interaction when popover is not visible (fade-out animation playing)
+              pointerEvents: isVisible ? 'auto' : 'none',
+            }}
+            data-position-x={popoverLayout.horizontalPosition}
+            role="menu"
+            aria-labelledby="popover-trigger"
+          >
               <div className={header}>
                 <button
                   className={closeButton}

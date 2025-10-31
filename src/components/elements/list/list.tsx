@@ -97,17 +97,12 @@ const List: FunctionComponent<ListModel> = ({
    */
   const renderListItem = useCallback(
     (item: EnhancedListItem, index: number) => {
-      const handleClick = useCallback(
-        () => handleItemSelection(item.id, item),
-        [item, handleItemSelection],
-      );
-
       return (
         <ListItem
           key={item.id}
           {...item}
           theme={theme || defaultTheme}
-          onClick={handleClick}
+          onClick={() => handleItemSelection(item.id, item)}
           selectable={multiSelectable}
           active={activeItemIndex === index}
           rovingProps={getItemProps(item.id) as any}

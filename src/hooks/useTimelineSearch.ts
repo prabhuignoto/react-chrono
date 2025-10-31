@@ -1,7 +1,6 @@
-import { useCallback, useState, useRef, useMemo, useEffect } from 'react';
+import { useCallback, useState, useRef, useMemo } from 'react';
 import { TimelineCardModel } from '@models/TimelineItemModel';
 import { getSearchableText } from '../utils/timelineUtils';
-import { useDebouncedCallback } from 'use-debounce';
 
 interface UseTimelineSearchProps {
   items: TimelineCardModel[];
@@ -19,9 +18,6 @@ export const useTimelineSearch = ({
   const [currentMatchIndex, setCurrentMatchIndex] = useState(-1);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const activeItemIndex = useRef<number>(0);
-  const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
-    undefined,
-  );
   const isFirstSearchRef = useRef<boolean>(true);
 
   // Cache callback refs to prevent unnecessary re-renders
@@ -72,6 +68,7 @@ export const useTimelineSearch = ({
   }, []);
 
   // Enhanced search with better performance
+  // Now synchronous - only triggered explicitly on Enter key
   const findMatches = useCallback(
     (query: string) => {
       const trimmedQuery = query.trim();
@@ -87,7 +84,8 @@ export const useTimelineSearch = ({
 
       // Use for-loop with early break for better performance
       for (let i = 0; i < searchableContent.length; i++) {
-        if (searchableContent[i]?.content?.includes(queryLower)) {
+        // No optional chaining needed: i is always a valid index within bounds
+        if (searchableContent[i].content.includes(queryLower)) {
           results.push(i);
 
           // Early break if we have enough results
@@ -101,43 +99,17 @@ export const useTimelineSearch = ({
 
       if (results.length > 0) {
         setCurrentMatchIndex(0);
-        const firstResult = results[0];
-        const firstMatchData =
-          firstResult !== undefined
-            ? searchableContent[firstResult]
-            : undefined;
-        if (firstMatchData?.id && firstResult !== undefined) {
+        const firstResult = results[0]!; // Non-null: we just checked results.length > 0
+        const firstMatchData = searchableContent[firstResult];
+        if (firstMatchData?.id) {
           activeItemIndex.current = firstResult;
-
-          // Clear any existing timeout
-          if (searchTimeoutRef.current) {
-            clearTimeout(searchTimeoutRef.current);
-          }
-
-          // On first search, focus immediately. On subsequent searches, use delay
-          const delay = isFirstSearchRef.current ? 100 : 400;
           isFirstSearchRef.current = false;
 
-          searchTimeoutRef.current = setTimeout(() => {
-            onTimelineUpdatedRef.current?.(firstResult);
-            handleTimelineItemClickRef.current(firstMatchData.id);
-            // After navigating to first match, focus the item row/card
-            requestAnimationFrame(() => {
-              const itemId = firstMatchData.id;
-              // Try vertical first
-              const verticalRow = document.querySelector(
-                `[data-testid="vertical-item-row"][data-item-id="${itemId}"]`,
-              ) as HTMLElement | null;
-              const target =
-                verticalRow ||
-                (document.getElementById(
-                  `timeline-card-${itemId}`,
-                ) as HTMLElement | null);
-              try {
-                target?.focus?.({ preventScroll: true });
-              } catch {}
-            });
-          }, delay);
+          // Update active timeline item visually without clicking it
+          // This scrolls to the item but doesn't steal focus from search input
+          onTimelineUpdatedRef.current?.(firstResult);
+          // Don't call handleTimelineItemClick - it steals focus
+          // Only navigate explicitly when user presses Enter or next/previous buttons
         }
       } else {
         setCurrentMatchIndex(-1);
@@ -146,32 +118,27 @@ export const useTimelineSearch = ({
     [searchableContent],
   );
 
-  // Optimized debounced search with better performance
-  const debouncedSearch = useDebouncedCallback(findMatches, 200, {
-    maxWait: 600,
-    leading: false,
-    trailing: true,
-  });
+  // Handle query input changes (typing) - does NOT trigger search
+  // Search is triggered explicitly via triggerSearch() when user presses Enter
+  const handleSearchChange = useCallback((query: string) => {
+    setSearchQuery(query);
+    // Clear results if query is empty
+    if (!query.trim()) {
+      setSearchResults([]);
+      setCurrentMatchIndex(-1);
+    }
+  }, []);
 
-  const handleSearchChange = useCallback(
-    (query: string) => {
-      setSearchQuery(query);
-      debouncedSearch(query);
-    },
-    [debouncedSearch],
-  );
+  // Explicitly trigger search - called when user presses Enter
+  const triggerSearch = useCallback(() => {
+    findMatches(searchQuery);
+  }, [searchQuery, findMatches]);
 
   const clearSearch = useCallback(
     (preservePosition = false) => {
       setSearchQuery('');
       setSearchResults([]);
       setCurrentMatchIndex(-1);
-      debouncedSearch.cancel();
-
-      // Clear any pending auto-focus timeout
-      if (searchTimeoutRef.current) {
-        clearTimeout(searchTimeoutRef.current);
-      }
 
       // Reset first search flag when clearing
       isFirstSearchRef.current = true;
@@ -179,11 +146,8 @@ export const useTimelineSearch = ({
       if (items.length > 0 && !preservePosition) {
         activeItemIndex.current = 0;
         onTimelineUpdatedRef.current?.(0);
-
-        const firstItem = items[0];
-        if (firstItem?.id) {
-          handleTimelineItemClickRef.current(firstItem.id);
-        }
+        // Note: Don't call handleTimelineItemClick here to avoid focus stealing
+        // Focus management is handled by the timeline component's useEffect
       }
 
       // Force refocus after clearing (only when user explicitly clears)
@@ -191,7 +155,7 @@ export const useTimelineSearch = ({
         focusSearchInput(true);
       }
     },
-    [items, debouncedSearch, focusSearchInput],
+    [items, focusSearchInput],
   );
 
   // Optimized navigation with bounds checking
@@ -220,27 +184,12 @@ export const useTimelineSearch = ({
       }
 
       if (matchData?.id) {
-        handleTimelineItemClickRef.current(matchData.id);
-        // Focus the matched item to make it visible to screen readers
-        requestAnimationFrame(() => {
-          const itemId = matchData.id;
-          const verticalRow = document.querySelector(
-            `[data-testid="vertical-item-row"][data-item-id="${itemId}"]`,
-          ) as HTMLElement | null;
-          const target =
-            verticalRow ||
-            (document.getElementById(
-              `timeline-card-${itemId}`,
-            ) as HTMLElement | null);
-          try {
-            target?.focus?.({ preventScroll: true });
-          } catch {}
-        });
-        // Then return focus to search for continued navigation
-        focusSearchInput(true);
+        handleTimelineItemClickRef.current?.(matchData.id);
+        // Keep focus in search input for continued navigation
+        // Timeline component handles item focus/visibility internally
       }
     },
-    [searchResults, currentMatchIndex, searchableContent, focusSearchInput],
+    [searchResults, currentMatchIndex, searchableContent],
   );
 
   const handleNextMatch = useCallback(
@@ -271,15 +220,6 @@ export const useTimelineSearch = ({
     [searchResults.length, handleNextMatch, clearSearch],
   );
 
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (searchTimeoutRef.current) {
-        clearTimeout(searchTimeoutRef.current);
-      }
-    };
-  }, []);
-
   return {
     searchQuery,
     searchResults,
@@ -287,6 +227,7 @@ export const useTimelineSearch = ({
     searchInputRef,
     activeItemIndex,
     handleSearchChange,
+    triggerSearch,
     clearSearch,
     handleNextMatch,
     handlePreviousMatch,

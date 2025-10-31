@@ -30,6 +30,7 @@ export type TimelineToolbarProps = Pick<
   // Search related props
   searchQuery: string;
   onSearchChange: (query: string) => void;
+  onTriggerSearch: () => void; // Explicitly trigger search on Enter
   onClearSearch: () => void;
   onNextMatch: () => void;
   onPreviousMatch: () => void;

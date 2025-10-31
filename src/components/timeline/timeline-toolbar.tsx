@@ -68,6 +68,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   mode,
   searchQuery,
   onSearchChange,
+  onTriggerSearch,
   onClearSearch,
   onNextMatch,
   onPreviousMatch,
@@ -133,27 +134,6 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSearchChange(event.target.value);
-  };
-
-  // Prevent search input from losing focus when timeline elements are clicked
-  const handleSearchInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    // Check if the new focus target is a timeline card or navigation element
-    const relatedTarget = event.relatedTarget as HTMLElement;
-
-    // If focus is moving to a timeline card or navigation, prevent blur
-    if (
-      relatedTarget &&
-      (relatedTarget.closest('[data-testid*="timeline"]') ||
-        relatedTarget.closest('.timeline-card') ||
-        relatedTarget.closest('.timeline-item'))
-    ) {
-      // Restore focus to search input after a short delay
-      setTimeout(() => {
-        if (searchInputRef?.current) {
-          searchInputRef.current.focus();
-        }
-      }, 10);
-    }
   };
 
   // Handle clear search and focus the input
@@ -235,24 +215,33 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             value={searchQuery}
             onChange={handleInputChange}
             onKeyDown={(event) => {
-              // Support Enter for next, Shift+Enter for previous, Escape to clear
+              // Support Enter for search/navigation, Shift+Enter for previous, Escape to clear
               if (event.key === 'Escape') {
                 event.preventDefault();
                 handleClearSearch();
                 return;
               }
-              if (event.key === 'Enter' && totalMatches > 0) {
+              if (event.key === 'Enter') {
                 event.preventDefault();
-                if (event.shiftKey) {
-                  onPreviousMatch();
-                } else {
-                  onNextMatch();
+
+                // First Enter: Trigger search if no results exist yet
+                if (totalMatches === 0 && searchQuery.trim()) {
+                  onTriggerSearch();
+                  return;
+                }
+
+                // Subsequent Enters: Navigate through existing results
+                if (totalMatches > 0) {
+                  if (event.shiftKey) {
+                    onPreviousMatch();
+                  } else {
+                    onNextMatch();
+                  }
                 }
                 return;
               }
               handleSearchKeyDown(event);
             }}
-            onBlur={handleSearchInputBlur}
             aria-label={textResolver.searchAriaLabel()}
             disabled={slideShowRunning}
             aria-keyshortcuts="Enter Shift+Enter Escape"
