@@ -62,8 +62,11 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     document.body,
   );
 
-  // Use focus trap for keyboard accessibility (WCAG 2.1.2)
-  const focusTrapRef = useFocusTrap(isOpen);
+  // Focus trap DISABLED for dropdown menu pattern (WCAG 2.4.3)
+  // Dropdown menus should allow Tab to exit naturally to next toolbar element
+  // Focus trap is only appropriate for modal dialogs, not menu popups
+  // const focusTrapRef = useFocusTrap(isOpen);
+  const focusTrapRef = useRef<HTMLElement | null>(null);
 
   // Memoize theme CSS variables to prevent recalculation on every render
   const themeCssVars = useMemo(
@@ -127,17 +130,32 @@ const PopOver: FunctionComponent<PopOverModel> = ({
 
   const closePopover = useCallback(() => {
     setIsOpen(false);
-    // Restore focus to trigger button (WCAG 2.4.3: Focus Order)
-    // Called when: ESC key pressed, Enter/Space on menu item, or click outside
-    // BUT: Don't steal focus if user is clicking on search input
+
+    // IMPROVED: Conditional focus restoration (WCAG 2.4.3: Focus Order)
+    // Only restore focus when closing via Escape or item selection
+    // Do NOT restore focus when:
+    // - User clicked outside (they chose where to focus)
+    // - User pressed Tab (they're navigating away)
+    // - User clicked on search input (let them continue)
+    // - Another toolbar button was clicked (let that button keep focus)
+
     requestAnimationFrame(() => {
       const activeElement = document.activeElement;
+
+      // Check if user is moving to another interactive element
       const isSearchInput =
         activeElement?.tagName === 'INPUT' &&
         (activeElement as HTMLInputElement).type === 'search';
 
-      // Only restore focus if not moving to search input (let user continue searching)
-      if (!isSearchInput && triggerButtonRef.current) {
+      const isToolbarButton = activeElement?.closest('[role="toolbar"]') !== null;
+      const hasActiveElement = activeElement && activeElement !== document.body;
+
+      // Only restore focus if:
+      // 1. No other element has focus (closing via ESC while popover has focus)
+      // 2. Not moving to search or another toolbar button
+      const shouldRestoreFocus = !hasActiveElement && !isSearchInput && !isToolbarButton;
+
+      if (shouldRestoreFocus && triggerButtonRef.current) {
         try {
           triggerButtonRef.current.focus({ preventScroll: true });
         } catch (_) {
@@ -296,33 +314,34 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     }
   }, [isOpen]);
 
-  // Set focus to first menu item when popover opens (WCAG 2.1.1: Keyboard)
-  useEffect(() => {
-    if (!isOpen || !popoverRef.current) return;
+  // AUTO-FOCUS DISABLED for natural keyboard navigation (WCAG 2.4.3: Focus Order)
+  // Per ARIA Authoring Practices, dropdown menu buttons should:
+  // 1. Keep focus on trigger button when opened via mouse click
+  // 2. Only move focus to first item when opened via Arrow Down key
+  // 3. Allow Tab key to move to next toolbar element (not trap focus)
+  // This preserves natural tab order and prevents unexpected focus stealing
+  //
+  // If auto-focus is needed in specific cases, implement via parent component
+  // using the onItemSelect callback or custom keyboard handler
 
-    // Use requestAnimationFrame to ensure DOM is updated
-    const rafId = requestAnimationFrame(() => {
-      if (!popoverRef.current) return;
-
-      // Find the first menu item (for ARIA menu pattern)
-      const firstMenuItem = popoverRef.current.querySelector('[role="menuitem"]');
-      if (firstMenuItem instanceof HTMLElement) {
-        firstMenuItem.focus();
-        return;
-      }
-
-      // Fallback: find first focusable element (button or tabindex=0)
-      const firstFocusable = popoverRef.current.querySelector(
-        'button:not([tabindex="-1"]), [tabindex="0"]'
-      );
-      if (firstFocusable instanceof HTMLElement) {
-        firstFocusable.focus();
-      }
-    });
-
-    // Clean up RAF on unmount or when popover closes
-    return () => cancelAnimationFrame(rafId);
-  }, [isOpen]);
+  // useEffect(() => {
+  //   if (!isOpen || !popoverRef.current) return;
+  //   const rafId = requestAnimationFrame(() => {
+  //     if (!popoverRef.current) return;
+  //     const firstMenuItem = popoverRef.current.querySelector('[role="menuitem"]');
+  //     if (firstMenuItem instanceof HTMLElement) {
+  //       firstMenuItem.focus();
+  //       return;
+  //     }
+  //     const firstFocusable = popoverRef.current.querySelector(
+  //       'button:not([tabindex="-1"]), [tabindex="0"]'
+  //     );
+  //     if (firstFocusable instanceof HTMLElement) {
+  //       firstFocusable.focus();
+  //     }
+  //   });
+  //   return () => cancelAnimationFrame(rafId);
+  // }, [isOpen]);
 
   /**
    * Wrap children to intercept onClick for non-multiSelectable lists

@@ -171,11 +171,16 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                   navButtonActive,
                   navButtonFocus,
                 )}
-                onClick={flippedHorizontally ? onLast : onFirst}
+                onClick={(event) => {
+                  if (!canDisableLeft) {
+                    const handler = flippedHorizontally ? onLast : onFirst;
+                    handler?.(event);
+                  }
+                }}
                 title={jumpToFirstTitle}
                 aria-label={jumpToFirstTitle}
                 aria-controls="timeline-main-wrapper"
-                disabled={!!canDisableLeft}
+                aria-disabled={!!canDisableLeft}
                 data-test-id="jump-to-first"
               >
                 <span className={navButtonSvg}>
@@ -195,11 +200,16 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                   navButtonActive,
                   navButtonFocus,
                 )}
-                onClick={flippedHorizontally ? onNext : onPrevious}
+                onClick={(event) => {
+                  if (!canDisableLeft) {
+                    const handler = flippedHorizontally ? onNext : onPrevious;
+                    handler?.(event);
+                  }
+                }}
                 title={previousTitle}
                 aria-label={previousTitle}
                 aria-controls="timeline-main-wrapper"
-                disabled={!!canDisableLeft}
+                aria-disabled={!!canDisableLeft}
                 data-test-id="previous"
               >
                 <span className={navButtonSvg}>
@@ -219,11 +229,16 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                   navButtonActive,
                   navButtonFocus,
                 )}
-                onClick={flippedHorizontally ? onPrevious : onNext}
+                onClick={(event) => {
+                  if (!canDisableRight) {
+                    const handler = flippedHorizontally ? onPrevious : onNext;
+                    handler?.(event);
+                  }
+                }}
                 title={nextTitle}
                 aria-label={nextTitle}
                 aria-controls="timeline-main-wrapper"
-                disabled={!!canDisableRight}
+                aria-disabled={!!canDisableRight}
                 data-test-id="next"
               >
                 <span className={navButtonSvg}>
@@ -243,11 +258,16 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                   navButtonActive,
                   navButtonFocus,
                 )}
-                onClick={flippedHorizontally ? onFirst : onLast}
+                onClick={(event) => {
+                  if (!canDisableRight) {
+                    const handler = flippedHorizontally ? onFirst : onLast;
+                    handler?.(event);
+                  }
+                }}
                 title={jumpToLastTitle}
                 aria-label={jumpToLastTitle}
                 aria-controls="timeline-main-wrapper"
-                disabled={!!canDisableRight}
+                aria-disabled={!!canDisableRight}
                 data-test-id="jump-to-last"
               >
                 <span className={navButtonSvg}>
@@ -269,7 +289,13 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                   navButtonActive,
                   navButtonFocus,
                 )}
-                onClick={slideShowRunning ? handlePause : handlePlay}
+                onClick={(event) => {
+                  if (slideShowRunning) {
+                    handlePause(event);
+                  } else {
+                    handlePlay(event);
+                  }
+                }}
                 title={playOrPauseTile}
                 aria-controls="timeline-main-wrapper"
                 aria-label={playOrPauseTile}
@@ -299,12 +325,16 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                   navButtonActive,
                   navButtonFocus,
                 )}
-                onClick={onToggleDarkMode}
+                onClick={(event) => {
+                  if (!slideShowRunning) {
+                    onToggleDarkMode?.(event);
+                  }
+                }}
                 title={isDark ? buttonTexts?.light : buttonTexts?.dark}
                 aria-controls="timeline-main-wrapper"
                 aria-label={isDark ? buttonTexts?.light : buttonTexts?.dark}
                 aria-pressed={isDark ? 'true' : 'false'}
-                disabled={!!slideShowRunning}
+                aria-disabled={!!slideShowRunning}
                 data-test-id="dark-toggle"
               >
                 <span className={navButtonSvg}>

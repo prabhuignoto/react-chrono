@@ -49,7 +49,7 @@ export const navButton = style({
   transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
   width: '36px',
   selectors: {
-    '&:disabled': {
+    '&:disabled, &[aria-disabled="true"]': {
       opacity: 0.4,
       cursor: 'not-allowed',
       pointerEvents: 'none',

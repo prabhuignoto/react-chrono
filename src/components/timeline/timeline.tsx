@@ -1,7 +1,7 @@
 import { TimelineModel } from '@models/TimelineModel';
 import { getUniqueID } from '@utils/index';
 import cls from 'classnames';
-import React, { useEffect, useMemo, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import { useTimelineContext } from '../contexts';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
@@ -85,7 +85,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   } = useTimelineContext();
   const [hasFocus, setHasFocus] = useState(false);
   const [isKeyboardNavigation, setIsKeyboardNavigation] = useState(false);
-  const [isToolbarNavigation, setIsToolbarNavigation] = useState(false);
+  // Use ref instead of state to avoid race conditions with useEffect (WCAG 2.4.3: Focus Order)
+  // Refs are synchronously updated, ensuring focus prevention logic sees latest value
+  const isToolbarNavigationRef = useRef(false);
+  // Track if current navigation is from search to enable/disable focus (WCAG 2.1.1: Keyboard)
+  // Timeline items should ONLY receive focus during search navigation, not in other scenarios
+  const isSearchNavigationRef = useRef(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const keyboardTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -248,11 +253,14 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
       // Reset navigation states when clicking directly on items
       setIsKeyboardNavigation(false);
-      setIsToolbarNavigation(false);
+      isToolbarNavigationRef.current = false;
       handleTimelineItemClickInternal(itemId, isSlideShow);
 
-      // After activating, bring the card/row to focus for accessibility
-      // BUT: Don't steal focus if user is searching - let them continue navigating search
+      // DISABLED: Direct click focus
+      // Timeline items should ONLY receive focus during search navigation (WCAG 2.1.1: Keyboard)
+      // Not during direct clicks, keyboard navigation, or other scenarios
+      // Focus logic is now centralized in the main useEffect and only triggered for search
+      /*
       if (itemId) {
         requestAnimationFrame(() => {
           const verticalRow = document.querySelector(
@@ -273,51 +281,141 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           } catch {}
         });
       }
+      */
     },
     [handleTimelineItemClickInternal],
   );
 
   // Enhanced navigation handlers that track source
   // WCAG 2.4.3: Keep focus on toolbar button during activation (not on timeline item)
-  const handleNext = React.useCallback(() => {
-    setIsToolbarNavigation(true);
+  const handleNext = React.useCallback((event?: React.MouseEvent | React.KeyboardEvent) => {
+    const clickedButton = (event?.currentTarget as HTMLElement) || null;
+    isToolbarNavigationRef.current = true;
     setIsKeyboardNavigation(false);
     handleNextInternal();
-    // Clear keyboard state after a delay to ensure styles are applied
-    setTimeout(() => {
-      setIsToolbarNavigation(false);
-    }, 500);
+    // Explicitly refocus button after navigation to prevent focus stealing
+    requestAnimationFrame(() => {
+      if (clickedButton) {
+        try {
+          clickedButton.focus({ preventScroll: true });
+        } catch (_) {
+          // Silently ignore focus errors
+        }
+      }
+      isToolbarNavigationRef.current = false;
+    });
   }, [handleNextInternal]);
 
-  const handlePrevious = React.useCallback(() => {
-    setIsToolbarNavigation(true);
+  const handlePrevious = React.useCallback((event?: React.MouseEvent | React.KeyboardEvent) => {
+    const clickedButton = (event?.currentTarget as HTMLElement) || null;
+    isToolbarNavigationRef.current = true;
     setIsKeyboardNavigation(false);
     handlePreviousInternal();
-    // Clear keyboard state after a delay to ensure styles are applied
-    setTimeout(() => {
-      setIsToolbarNavigation(false);
-    }, 500);
+    // Explicitly refocus button after navigation to prevent focus stealing
+    requestAnimationFrame(() => {
+      if (clickedButton) {
+        try {
+          clickedButton.focus({ preventScroll: true });
+        } catch (_) {
+          // Silently ignore focus errors
+        }
+      }
+      isToolbarNavigationRef.current = false;
+    });
   }, [handlePreviousInternal]);
 
-  const handleFirst = React.useCallback(() => {
-    setIsToolbarNavigation(true);
+  const handleFirst = React.useCallback((event?: React.MouseEvent | React.KeyboardEvent) => {
+    const clickedButton = (event?.currentTarget as HTMLElement) || null;
+    isToolbarNavigationRef.current = true;
     setIsKeyboardNavigation(false);
     handleFirstInternal();
-    // Clear keyboard state after a delay to ensure styles are applied
-    setTimeout(() => {
-      setIsToolbarNavigation(false);
-    }, 500);
+    // Explicitly refocus button after navigation to prevent focus stealing
+    requestAnimationFrame(() => {
+      if (clickedButton) {
+        try {
+          clickedButton.focus({ preventScroll: true });
+        } catch (_) {
+          // Silently ignore focus errors
+        }
+      }
+      isToolbarNavigationRef.current = false;
+    });
   }, [handleFirstInternal]);
 
-  const handleLast = React.useCallback(() => {
-    setIsToolbarNavigation(true);
+  const handleLast = React.useCallback((event?: React.MouseEvent | React.KeyboardEvent) => {
+    const clickedButton = (event?.currentTarget as HTMLElement) || null;
+    isToolbarNavigationRef.current = true;
     setIsKeyboardNavigation(false);
     handleLastInternal();
-    // Clear keyboard state after a delay to ensure styles are applied
-    setTimeout(() => {
-      setIsToolbarNavigation(false);
-    }, 500);
+    // Explicitly refocus button after navigation to prevent focus stealing
+    requestAnimationFrame(() => {
+      if (clickedButton) {
+        try {
+          clickedButton.focus({ preventScroll: true });
+        } catch (_) {
+          // Silently ignore focus errors
+        }
+      }
+      isToolbarNavigationRef.current = false;
+    });
   }, [handleLastInternal]);
+
+  // Wrap toggleDarkMode to prevent focus stealing (WCAG 2.4.3)
+  const handleToggleDarkMode = React.useCallback((event?: React.MouseEvent) => {
+    const clickedButton = (event?.currentTarget as HTMLElement) || null;
+    isToolbarNavigationRef.current = true;
+    setIsKeyboardNavigation(false);
+    toggleDarkMode?.();
+    // Explicitly refocus button after action to prevent focus stealing
+    requestAnimationFrame(() => {
+      if (clickedButton) {
+        try {
+          clickedButton.focus({ preventScroll: true });
+        } catch (_) {
+          // Silently ignore focus errors
+        }
+      }
+      isToolbarNavigationRef.current = false;
+    });
+  }, [toggleDarkMode]);
+
+  // Wrap onRestartSlideshow to prevent focus stealing (WCAG 2.4.3)
+  const handleRestartSlideshow = React.useCallback((event?: React.MouseEvent) => {
+    const clickedButton = (event?.currentTarget as HTMLElement) || null;
+    isToolbarNavigationRef.current = true;
+    setIsKeyboardNavigation(false);
+    onRestartSlideshow?.();
+    // Explicitly refocus button after action to prevent focus stealing
+    requestAnimationFrame(() => {
+      if (clickedButton) {
+        try {
+          clickedButton.focus({ preventScroll: true });
+        } catch (_) {
+          // Silently ignore focus errors
+        }
+      }
+      isToolbarNavigationRef.current = false;
+    });
+  }, [onRestartSlideshow]);
+
+  // Wrap onPaused to prevent focus stealing (WCAG 2.4.3)
+  const handlePausedWrapper = React.useCallback((event?: React.MouseEvent) => {
+    const clickedButton = (event?.currentTarget as HTMLElement) || null;
+    isToolbarNavigationRef.current = true;
+    setIsKeyboardNavigation(false);
+    onPaused?.();
+    // Explicitly refocus button after action to prevent focus stealing
+    requestAnimationFrame(() => {
+      if (clickedButton) {
+        try {
+          clickedButton.focus({ preventScroll: true });
+        } catch (_) {
+          // Silently ignore focus errors
+        }
+      }
+      isToolbarNavigationRef.current = false;
+    });
+  }, [onPaused]);
 
   // Sync activeItemIndex with activeTimelineItem prop
   // FOCUS COORDINATION STRATEGY:
@@ -343,9 +441,15 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       }
     }
 
+    // CRITICAL: Only focus timeline items during search navigation (WCAG 2.1.1: Keyboard)
+    // Timeline items should NOT auto-focus for keyboard navigation, toolbar buttons, slideshow, etc.
+    if (!isSearchNavigationRef.current) {
+      return;
+    }
+
     if (activeTimelineItem !== undefined) {
       // Move keyboard focus to the active element once activation changes
-      // BUT: Don't steal focus if user is currently typing in search box or interacting with toolbar
+      // This is ONLY called during search navigation
       // CRITICAL: Capture search state NOW before scheduling RAF to avoid timing issues
       const activeElement = document.activeElement;
       const wasSearchActive =
@@ -358,8 +462,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
       if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
         requestAnimationFrame(() => {
-          // Only focus if search was NOT active and toolbar was NOT focused when this effect ran
-          if (wasSearchActive || isToolbarFocused) return;
+          // Only focus if search is still marked as active and conditions allow focus
+          if (!isSearchNavigationRef.current || wasSearchActive || isToolbarFocused) return;
 
           const activeId = items[activeTimelineItem ?? 0]?.id;
           if (activeId) {
@@ -399,8 +503,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       ) {
         // In vertical modes, focus the vertical row (li) for the active item
         requestAnimationFrame(() => {
-          // Only focus if search was NOT active and toolbar was NOT focused when this effect ran
-          if (wasSearchActive || isToolbarFocused) return;
+          // Only focus if search is still marked as active and conditions allow focus
+          if (!isSearchNavigationRef.current || wasSearchActive || isToolbarFocused) return;
 
           const activeId = items[activeTimelineItem ?? 0]?.id;
           if (activeId) {
@@ -422,8 +526,32 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
           }
         });
       }
+
+      // Clear search navigation marker after focus operations are scheduled
+      // This ensures the ref is reset for next search navigation
+      requestAnimationFrame(() => {
+        isSearchNavigationRef.current = false;
+      });
     }
-  }, [activeTimelineItem, syncActiveItemIndex, mode, timelineMainRef, items]);
+  }, [activeTimelineItem, syncActiveItemIndex, mode, timelineMode, timelineMainRef, items]);
+
+  // Wrapper callbacks for search navigation that mark it as search-triggered
+  // This ensures timeline items only receive focus during search (WCAG 2.1.1: Keyboard)
+  const wrappedOnTimelineUpdated = useCallback(
+    (index: number) => {
+      isSearchNavigationRef.current = true;
+      (onTimelineUpdated || (() => {}))(index);
+    },
+    [onTimelineUpdated],
+  );
+
+  const wrappedHandleTimelineItemClick = useCallback(
+    (itemId?: string) => {
+      isSearchNavigationRef.current = true;
+      handleTimelineItemClick(itemId);
+    },
+    [handleTimelineItemClick],
+  );
 
   const {
     searchQuery,
@@ -441,8 +569,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       () => items.map((item) => ({ ...item, wrapperId: id })),
       [items, id],
     ),
-    onTimelineUpdated: onTimelineUpdated || (() => {}),
-    handleTimelineItemClick,
+    onTimelineUpdated: wrappedOnTimelineUpdated,
+    handleTimelineItemClick: wrappedHandleTimelineItemClick,
   });
 
   // Overall slideshow progress hook
@@ -487,7 +615,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         if (isNavigationKey) {
           setHasFocus(true);
           setIsKeyboardNavigation(true);
-          setIsToolbarNavigation(false);
+          isToolbarNavigationRef.current = false;
           handleKeySelection(evt);
 
           // Clear keyboard navigation flag after scroll animation completes
@@ -710,7 +838,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         data-mode={timelineMode}
         data-fullscreen={isFullscreen}
         data-keyboard-focus={isKeyboardNavigation}
-        data-toolbar-navigation={isToolbarNavigation}
+        data-toolbar-navigation={isToolbarNavigationRef.current}
         onMouseDown={(evt) => {
           // Don't steal focus from search input or toolbar
           // Check if click is within toolbar (which contains search input)
@@ -774,10 +902,10 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               onLast={handleLast}
               onNext={handleNext}
               onPrevious={handlePrevious}
-              onRestartSlideshow={onRestartSlideshow || (() => {})}
+              onRestartSlideshow={handleRestartSlideshow}
               darkMode={darkMode}
-              toggleDarkMode={toggleDarkMode}
-              onPaused={onPaused || (() => {})}
+              toggleDarkMode={handleToggleDarkMode}
+              onPaused={handlePausedWrapper}
               id={id}
               flipLayout={!!flipLayout}
               items={items}
