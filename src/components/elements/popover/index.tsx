@@ -127,7 +127,8 @@ const PopOver: FunctionComponent<PopOverModel> = ({
 
   const closePopover = useCallback(() => {
     setIsOpen(false);
-    // Restore focus to trigger button (WCAG 2.1.2)
+    // Restore focus to trigger button (WCAG 2.4.3: Focus Order)
+    // Called when: ESC key pressed, Enter/Space on menu item, or click outside
     // BUT: Don't steal focus if user is clicking on search input
     requestAnimationFrame(() => {
       const activeElement = document.activeElement;
@@ -135,9 +136,13 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         activeElement?.tagName === 'INPUT' &&
         (activeElement as HTMLInputElement).type === 'search';
 
-      // Only restore focus if not moving to search input
-      if (!isSearchInput) {
-        triggerButtonRef.current?.focus();
+      // Only restore focus if not moving to search input (let user continue searching)
+      if (!isSearchInput && triggerButtonRef.current) {
+        try {
+          triggerButtonRef.current.focus({ preventScroll: true });
+        } catch (_) {
+          // Silently ignore focus errors
+        }
       }
     });
   }, []);
@@ -161,9 +166,9 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   const handleKeyPress = useCallback((ev: React.KeyboardEvent) => {
     if (ev.key === 'Enter' || ev.key === ' ') {
       ev.preventDefault();
-      dispatch({ type: 'TOGGLE' });
+      toggleOpen();
     }
-  }, []);
+  }, [toggleOpen]);
 
   // Handle Escape key and click outside to close popover
   // useCloseClickOutside hook handles both scenarios (WCAG 2.1.2)

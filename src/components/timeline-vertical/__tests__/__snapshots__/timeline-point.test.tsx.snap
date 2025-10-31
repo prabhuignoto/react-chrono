@@ -12,7 +12,7 @@ exports[`Timeline point > Should match snapshot 1`] = `
       aria-label="Timeline point"
       class="test_class_name timeline-vertical-circle timeline-vertical-shape_timelinePointContainer__iy9f2s1"
       data-testid="tree-leaf-click"
-      tabindex="0"
+      tabindex="-1"
     >
       <div
         aria-hidden="true"

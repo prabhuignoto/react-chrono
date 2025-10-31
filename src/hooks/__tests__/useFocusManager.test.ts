@@ -1,4 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { useFocusManager, useFocusTrap } from '../useFocusManager';
 
 describe('useFocusManager', () => {
@@ -22,8 +23,8 @@ describe('useFocusManager', () => {
     );
 
     const mockElement = {
-      focus: jest.fn(),
-      classList: { contains: jest.fn(() => false), add: jest.fn() },
+      focus: vi.fn(),
+      classList: { contains: vi.fn(() => false), add: vi.fn() },
     };
 
     act(() => {
@@ -130,7 +131,7 @@ describe('useFocusManager', () => {
   });
 
   it('should use requestAnimationFrame for focus', () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
 
     const { result } = renderHook(() =>
       useFocusManager({
@@ -139,8 +140,8 @@ describe('useFocusManager', () => {
       }),
     );
 
-    jest.runAllTimers();
-    jest.useRealTimers();
+    vi.runAllTimers();
+    vi.useRealTimers();
 
     expect(result.current).toBeDefined();
   });
@@ -158,26 +159,39 @@ describe('useFocusTrap', () => {
   });
 
   it('should set up event listener when active', () => {
-    const addEventListenerSpy = jest.spyOn(
-      HTMLDivElement.prototype,
-      'addEventListener',
-    );
+    const mockContainer = document.createElement('div');
+    const button = document.createElement('button');
+    mockContainer.appendChild(button);
+    document.body.appendChild(mockContainer);
+
+    const addEventListenerSpy = vi.spyOn(mockContainer, 'addEventListener');
 
     const { result } = renderHook(() => useFocusTrap(true));
+
+    act(() => {
+      result.current.current = mockContainer;
+    });
 
     expect(addEventListenerSpy).toHaveBeenCalledWith('keydown', expect.any(Function));
 
     addEventListenerSpy.mockRestore();
+    document.body.removeChild(mockContainer);
   });
 
   it('should remove event listener when inactive', () => {
-    const removeEventListenerSpy = jest.spyOn(
-      HTMLDivElement.prototype,
-      'removeEventListener',
-    );
+    const mockContainer = document.createElement('div');
+    const button = document.createElement('button');
+    mockContainer.appendChild(button);
+    document.body.appendChild(mockContainer);
+
+    const removeEventListenerSpy = vi.spyOn(mockContainer, 'removeEventListener');
 
     const { result, rerender } = renderHook((isActive) => useFocusTrap(isActive), {
       initialProps: true,
+    });
+
+    act(() => {
+      result.current.current = mockContainer;
     });
 
     rerender(false);
@@ -185,6 +199,7 @@ describe('useFocusTrap', () => {
     expect(removeEventListenerSpy).toHaveBeenCalledWith('keydown', expect.any(Function));
 
     removeEventListenerSpy.mockRestore();
+    document.body.removeChild(mockContainer);
   });
 
   it('should trap Tab key within container', () => {
@@ -249,7 +264,7 @@ describe('useFocusTrap', () => {
 
     // Simulate Arrow key (should be ignored)
     const arrowEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });
-    const preventDefault = jest.fn();
+    const preventDefault = vi.fn();
     arrowEvent.preventDefault = preventDefault;
 
     mockContainer.dispatchEvent(arrowEvent);
@@ -380,6 +395,8 @@ describe('useFocusTrap', () => {
 
   describe('Initial focus management', () => {
     it('should focus first element when initialFocus="first"', async () => {
+      vi.useFakeTimers();
+
       const mockContainer = document.createElement('div');
       const button1 = document.createElement('button');
       const button2 = document.createElement('button');
@@ -401,15 +418,20 @@ describe('useFocusTrap', () => {
         result.current.current = mockContainer;
       });
 
-      // Wait for requestAnimationFrame
-      await new Promise((resolve) => setTimeout(resolve, 20));
+      // Run all timers to execute requestAnimationFrame
+      await act(async () => {
+        vi.runAllTimers();
+      });
 
       expect(document.activeElement).toBe(button1);
 
       document.body.removeChild(mockContainer);
+      vi.useRealTimers();
     });
 
     it('should focus last element when initialFocus="last"', async () => {
+      vi.useFakeTimers();
+
       const mockContainer = document.createElement('div');
       const button1 = document.createElement('button');
       const button2 = document.createElement('button');
@@ -431,14 +453,19 @@ describe('useFocusTrap', () => {
         result.current.current = mockContainer;
       });
 
-      await new Promise((resolve) => setTimeout(resolve, 20));
+      await act(async () => {
+        vi.runAllTimers();
+      });
 
       expect(document.activeElement).toBe(button2);
 
       document.body.removeChild(mockContainer);
+      vi.useRealTimers();
     });
 
     it('should focus custom ref when provided', async () => {
+      vi.useFakeTimers();
+
       const mockContainer = document.createElement('div');
       const button1 = document.createElement('button');
       const button2 = document.createElement('button');
@@ -465,14 +492,19 @@ describe('useFocusTrap', () => {
         result.current.current = mockContainer;
       });
 
-      await new Promise((resolve) => setTimeout(resolve, 20));
+      await act(async () => {
+        vi.runAllTimers();
+      });
 
       expect(document.activeElement).toBe(customButton);
 
       document.body.removeChild(mockContainer);
+      vi.useRealTimers();
     });
 
     it('should use first element as default initial focus', async () => {
+      vi.useFakeTimers();
+
       const mockContainer = document.createElement('div');
       const button1 = document.createElement('button');
       const button2 = document.createElement('button');
@@ -494,11 +526,14 @@ describe('useFocusTrap', () => {
         result.current.current = mockContainer;
       });
 
-      await new Promise((resolve) => setTimeout(resolve, 20));
+      await act(async () => {
+        vi.runAllTimers();
+      });
 
       expect(document.activeElement).toBe(button1);
 
       document.body.removeChild(mockContainer);
+      vi.useRealTimers();
     });
 
     it('should handle no focusable elements gracefully', async () => {
@@ -576,27 +611,25 @@ describe('useFocusTrap', () => {
       mockContainer.appendChild(button);
       document.body.appendChild(mockContainer);
 
-      const { result, rerender } = renderHook(
-        (isActive) =>
-          useFocusTrap({
-            isActive,
-            returnFocus: true,
-          }),
-        { initialProps: false },
+      const { result, unmount } = renderHook(() =>
+        useFocusTrap({
+          isActive: true,
+          returnFocus: true,
+        }),
       );
 
       act(() => {
         result.current.current = mockContainer;
-        rerender(true);
       });
 
-      await new Promise((resolve) => setTimeout(resolve, 20));
+      // Wait for initial focus
+      await new Promise((resolve) => setTimeout(resolve, 50));
 
-      act(() => {
-        rerender(false);
-      });
+      // Unmount to trigger cleanup and focus restoration
+      unmount();
 
-      await new Promise((resolve) => setTimeout(resolve, 20));
+      // Wait for requestAnimationFrame in cleanup
+      await new Promise((resolve) => setTimeout(resolve, 50));
 
       expect(document.activeElement).toBe(triggerButton);
 
@@ -616,28 +649,27 @@ describe('useFocusTrap', () => {
       mockContainer.appendChild(button);
       document.body.appendChild(mockContainer);
 
-      const { result, rerender } = renderHook(
-        (isActive) =>
-          useFocusTrap({
-            isActive,
-            returnFocus: false,
-          }),
-        { initialProps: false },
+      const { result, unmount } = renderHook(() =>
+        useFocusTrap({
+          isActive: true,
+          returnFocus: false,
+        }),
       );
 
       act(() => {
         result.current.current = mockContainer;
-        rerender(true);
       });
 
-      await new Promise((resolve) => setTimeout(resolve, 20));
+      await new Promise((resolve) => setTimeout(resolve, 50));
 
-      act(() => {
-        rerender(false);
-      });
+      // Store focus before unmount
+      const focusBeforeUnmount = document.activeElement;
 
-      await new Promise((resolve) => setTimeout(resolve, 20));
+      unmount();
 
+      await new Promise((resolve) => setTimeout(resolve, 50));
+
+      // Focus should not be restored to triggerButton
       expect(document.activeElement).not.toBe(triggerButton);
 
       document.body.removeChild(triggerButton);
@@ -682,6 +714,8 @@ describe('useFocusTrap', () => {
 
   describe('Escape attempt callback', () => {
     it('should call onEscapeAttempt when Tab at last element', async () => {
+      vi.useFakeTimers();
+
       const mockContainer = document.createElement('div');
       const button1 = document.createElement('button');
       const button2 = document.createElement('button');
@@ -692,7 +726,7 @@ describe('useFocusTrap', () => {
       mockContainer.appendChild(button2);
       document.body.appendChild(mockContainer);
 
-      const onEscapeAttempt = jest.fn();
+      const onEscapeAttempt = vi.fn();
 
       const { result } = renderHook(() =>
         useFocusTrap({
@@ -705,7 +739,15 @@ describe('useFocusTrap', () => {
         result.current.current = mockContainer;
       });
 
-      button2.focus();
+      // Run timers to set initial focus
+      await act(async () => {
+        vi.runAllTimers();
+      });
+
+      // Manually set focus to button2 (last element)
+      act(() => {
+        button2.focus();
+      });
 
       const tabEvent = new KeyboardEvent('keydown', {
         key: 'Tab',
@@ -716,15 +758,15 @@ describe('useFocusTrap', () => {
         mockContainer.dispatchEvent(tabEvent);
       });
 
-      // Wait a bit for the callback
-      await new Promise((resolve) => setTimeout(resolve, 10));
-
       expect(onEscapeAttempt).toHaveBeenCalled();
 
       document.body.removeChild(mockContainer);
+      vi.useRealTimers();
     });
 
     it('should call onEscapeAttempt when Shift+Tab at first element', async () => {
+      vi.useFakeTimers();
+
       const mockContainer = document.createElement('div');
       const button1 = document.createElement('button');
       const button2 = document.createElement('button');
@@ -735,7 +777,7 @@ describe('useFocusTrap', () => {
       mockContainer.appendChild(button2);
       document.body.appendChild(mockContainer);
 
-      const onEscapeAttempt = jest.fn();
+      const onEscapeAttempt = vi.fn();
 
       const { result } = renderHook(() =>
         useFocusTrap({
@@ -748,7 +790,15 @@ describe('useFocusTrap', () => {
         result.current.current = mockContainer;
       });
 
-      button1.focus();
+      // Run timers to set initial focus
+      await act(async () => {
+        vi.runAllTimers();
+      });
+
+      // Manually set focus to button1 (first element)
+      act(() => {
+        button1.focus();
+      });
 
       const shiftTabEvent = new KeyboardEvent('keydown', {
         key: 'Tab',
@@ -760,11 +810,10 @@ describe('useFocusTrap', () => {
         mockContainer.dispatchEvent(shiftTabEvent);
       });
 
-      await new Promise((resolve) => setTimeout(resolve, 10));
-
       expect(onEscapeAttempt).toHaveBeenCalled();
 
       document.body.removeChild(mockContainer);
+      vi.useRealTimers();
     });
 
     it('should not call onEscapeAttempt when not at boundaries', async () => {
@@ -781,7 +830,7 @@ describe('useFocusTrap', () => {
       mockContainer.appendChild(button3);
       document.body.appendChild(mockContainer);
 
-      const onEscapeAttempt = jest.fn();
+      const onEscapeAttempt = vi.fn();
 
       const { result } = renderHook(() =>
         useFocusTrap({

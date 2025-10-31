@@ -42,7 +42,7 @@ describe('ListItem', () => {
         },
       },
     );
-    fireEvent.click(getByRole('listitem'));
+    fireEvent.click(getByRole('menuitem'));
     expect(mockOnClick).toHaveBeenCalledWith('test-id');
   });
 
@@ -79,6 +79,6 @@ describe('ListItem', () => {
         },
       },
     );
-    expect(getByRole('listitem')).toHaveAttribute('tabIndex', '0');
+    expect(getByRole('menuitem')).toHaveAttribute('tabIndex', '-1');
   });
 });

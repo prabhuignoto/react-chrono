@@ -58,6 +58,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     items, // Data for nested items (if any)
     isNested, // Is this item part of a nested structure?
     nestedCardHeight, // Specific height for nested cards
+    rovingProps, // Roving tabindex props for keyboard navigation (WCAG 2.1.1)
   } = props;
 
   // Extract only used context values to avoid unused variable warnings
@@ -349,6 +350,9 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       aria-label={accessibleTitle}
       role="listitem"
       aria-selected={active}
+      tabIndex={rovingProps?.tabIndex ?? -1}
+      onKeyDown={rovingProps?.onKeyDown}
+      onFocus={rovingProps?.onFocus}
     >
       {/* Conditionally render the Title */}
       {canShowTitle ? Title : null}

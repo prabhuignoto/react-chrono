@@ -185,10 +185,20 @@ export const useTimelineSearch = ({
 
       if (matchData?.id) {
         handleTimelineItemClickRef.current?.(matchData.id);
-        // Keep focus in search input for continued navigation
-        // Timeline component handles item focus/visibility internally
-        // Explicitly return focus to search input after navigation
+
+        // Announce search navigation to screen readers (WCAG 4.1.3: Status Messages)
         requestAnimationFrame(() => {
+          // Create/update aria-live region announcement
+          const ariaLiveRegion = document.querySelector(
+            '[data-testid="search-live-region"]'
+          );
+          if (ariaLiveRegion) {
+            ariaLiveRegion.textContent = `Match ${nextIndex + 1} of ${searchResults.length}`;
+          }
+
+          // Keep focus in search input for continued navigation
+          // Timeline component handles item focus/visibility internally
+          // Explicitly return focus to search input after navigation
           if (searchInputRef.current) {
             searchInputRef.current.focus();
           }

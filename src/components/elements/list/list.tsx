@@ -79,12 +79,15 @@ const List: FunctionComponent<ListModel> = ({
   );
 
   /**
-   * Prevent arrow key events from bubbling to parent (e.g., timeline)
+   * Prevent arrow key and Home/End events from bubbling to parent (e.g., timeline)
    * @param {React.KeyboardEvent} e - Keyboard event
    */
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     // Stop propagation for menu navigation keys to prevent timeline from capturing them
-    if (['ArrowUp', 'ArrowDown', 'Enter', ' '].includes(e.key)) {
+    // Includes arrow keys, Home/End for first/last items, Enter/Space for selection
+    if (
+      ['ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '].includes(e.key)
+    ) {
       e.stopPropagation();
     }
   }, []);

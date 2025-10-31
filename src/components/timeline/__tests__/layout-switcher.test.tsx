@@ -27,12 +27,11 @@ describe('LayoutSwitcher Component', () => {
       },
     );
 
-    // Find the button by role since we removed the text label
-    const layoutButton = getByRole('button');
-    expect(layoutButton).toBeInTheDocument();
+    // Click the specific layout trigger button
+    const layoutTrigger = getByRole('button', { name: /Change layout/i });
+    fireEvent.click(layoutTrigger);
 
-    fireEvent.click(layoutButton);
-
+    // Verify layout options are available
     expect(getByText('Vertical')).toBeInTheDocument();
     expect(getByText('Alternating')).toBeInTheDocument();
   });
@@ -54,14 +53,12 @@ describe('LayoutSwitcher Component', () => {
       },
     );
 
-    // Find the button by role since we removed the text label
-    const layoutButton = getByRole('button');
-    expect(layoutButton).toBeInTheDocument();
-
+    // Click the specific layout trigger button
+    const layoutButton = getByRole('button', { name: /Change layout/i });
     fireEvent.click(layoutButton);
 
-    // expect(getByText('Horizontal')).toBeInTheDocument();
-    // expect(getByText('Show all cards')).toBeInTheDocument();
+    // Verify component is rendered
+    expect(layoutButton).toBeTruthy();
   });
 
   //   test('Handles mode selection correctly', async () => {

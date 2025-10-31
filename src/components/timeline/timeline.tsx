@@ -135,6 +135,36 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     };
   }, []);
 
+  // Focus first timeline item when entering fullscreen (WCAG 2.4.3: Focus Order)
+  // This ensures keyboard users can immediately navigate the timeline after fullscreen
+  useEffect(() => {
+    if (!isFullscreen || !items.length) return;
+
+    // Use requestAnimationFrame to ensure DOM is updated
+    requestAnimationFrame(() => {
+      // Check if search is active - don't steal focus if user is searching
+      const activeElement = document.activeElement;
+      const isSearchActive =
+        activeElement?.tagName === 'INPUT' &&
+        (activeElement as HTMLInputElement).type === 'search';
+
+      if (isSearchActive) return;
+
+      // Find first timeline item and focus it
+      const firstItem = timelineMainRef.current?.querySelector(
+        '[data-testid="vertical-item-row"], [data-testid="timeline-circle"]'
+      ) as HTMLElement | null;
+
+      if (firstItem) {
+        try {
+          firstItem.focus({ preventScroll: true });
+        } catch (_) {
+          // Silently ignore focus errors (element may not be focusable)
+        }
+      }
+    });
+  }, [isFullscreen, items.length]);
+
   // Memoize ID generation to prevent unnecessary regeneration
   const id = useMemo(
     () => `react-chrono-timeline-${noUniqueId ? uniqueId : getUniqueID()}`,
@@ -248,47 +278,57 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   );
 
   // Enhanced navigation handlers that track source
+  // WCAG 2.4.3: Keep focus on toolbar button during activation (not on timeline item)
   const handleNext = React.useCallback(() => {
     setIsToolbarNavigation(true);
     setIsKeyboardNavigation(false);
+    handleNextInternal();
     // Clear keyboard state after a delay to ensure styles are applied
     setTimeout(() => {
       setIsToolbarNavigation(false);
     }, 500);
-    handleNextInternal();
   }, [handleNextInternal]);
 
   const handlePrevious = React.useCallback(() => {
     setIsToolbarNavigation(true);
     setIsKeyboardNavigation(false);
+    handlePreviousInternal();
     // Clear keyboard state after a delay to ensure styles are applied
     setTimeout(() => {
       setIsToolbarNavigation(false);
     }, 500);
-    handlePreviousInternal();
   }, [handlePreviousInternal]);
 
   const handleFirst = React.useCallback(() => {
     setIsToolbarNavigation(true);
     setIsKeyboardNavigation(false);
+    handleFirstInternal();
     // Clear keyboard state after a delay to ensure styles are applied
     setTimeout(() => {
       setIsToolbarNavigation(false);
     }, 500);
-    handleFirstInternal();
   }, [handleFirstInternal]);
 
   const handleLast = React.useCallback(() => {
     setIsToolbarNavigation(true);
     setIsKeyboardNavigation(false);
+    handleLastInternal();
     // Clear keyboard state after a delay to ensure styles are applied
     setTimeout(() => {
       setIsToolbarNavigation(false);
     }, 500);
-    handleLastInternal();
   }, [handleLastInternal]);
 
   // Sync activeItemIndex with activeTimelineItem prop
+  // FOCUS COORDINATION STRATEGY:
+  // This effect manages timeline item focus when activeTimelineItem changes.
+  // It coordinates with other focus operations through several mechanisms:
+  // 1. Search input focus is protected - never stolen during search
+  // 2. Toolbar button focus is protected - never stolen while using toolbar
+  // 3. All focus operations use requestAnimationFrame for proper sequencing
+  // 4. Popover focus is restored to trigger button via useCloseClickOutside
+  // 5. Search navigation returns focus to search input via useTimelineSearch
+  // Order of precedence: Search focus > Toolbar focus > Timeline focus
   useEffect(() => {
     // For defined activeTimelineItem, always sync
     if (activeTimelineItem !== undefined) {
@@ -305,16 +345,21 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
     if (activeTimelineItem !== undefined) {
       // Move keyboard focus to the active element once activation changes
-      // BUT: Don't steal focus if user is currently typing in search box
+      // BUT: Don't steal focus if user is currently typing in search box or interacting with toolbar
       // CRITICAL: Capture search state NOW before scheduling RAF to avoid timing issues
+      const activeElement = document.activeElement;
       const wasSearchActive =
-        document.activeElement?.tagName === 'INPUT' &&
-        (document.activeElement as HTMLInputElement).type === 'search';
+        activeElement?.tagName === 'INPUT' &&
+        (activeElement as HTMLInputElement).type === 'search';
+
+      // Don't steal focus from toolbar buttons (navigation, play, dark mode, popovers, fullscreen)
+      const isToolbarFocused =
+        activeElement?.closest('[role="toolbar"]') !== null;
 
       if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
         requestAnimationFrame(() => {
-          // Only focus if search was NOT active when this effect ran
-          if (wasSearchActive) return;
+          // Only focus if search was NOT active and toolbar was NOT focused when this effect ran
+          if (wasSearchActive || isToolbarFocused) return;
 
           const activeId = items[activeTimelineItem ?? 0]?.id;
           if (activeId) {
@@ -354,8 +399,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       ) {
         // In vertical modes, focus the vertical row (li) for the active item
         requestAnimationFrame(() => {
-          // Only focus if search was NOT active when this effect ran
-          if (wasSearchActive) return;
+          // Only focus if search was NOT active and toolbar was NOT focused when this effect ran
+          if (wasSearchActive || isToolbarFocused) return;
 
           const activeId = items[activeTimelineItem ?? 0]?.id;
           if (activeId) {
@@ -685,6 +730,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         role="region"
         aria-roledescription="interactive timeline"
         aria-label="Timeline navigation"
+        aria-keyshortcuts={
+          timelineMode === 'VERTICAL' ||
+          timelineMode === 'VERTICAL_ALTERNATING'
+            ? 'ArrowUp ArrowDown Home End'
+            : 'ArrowLeft ArrowRight Home End'
+        }
       >
         {/* Visually hidden live region for screen reader announcements */}
         <div

@@ -9,7 +9,6 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
     data-item-id=""
     data-testid="vertical-item-row"
     role="listitem"
-    tabindex="-1"
   >
     <div
       class="timeline-vertical_timelineTitleWrapper__mb2y38j timeline-vertical__mb2y38i enhanced-properties_display_flex_mobile__dvkhhv6 enhanced-properties_alignItems_center_mobile__dvkhhv2u  "
@@ -78,7 +77,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
           aria-label="Timeline point"
           class=" timeline-vertical-circle timeline-vertical-shape_timelinePointContainer__iy9f2s1"
           data-testid="tree-leaf-click"
-          tabindex="0"
+          tabindex="-1"
         >
           <div
             aria-hidden="true"

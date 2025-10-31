@@ -23,7 +23,7 @@ describe('List', () => {
         },
       },
     );
-    const listItems = getAllByRole('listitem');
+    const listItems = getAllByRole('menuitem');
     expect(listItems).toHaveLength(items.length);
   });
 

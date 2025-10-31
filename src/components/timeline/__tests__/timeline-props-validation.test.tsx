@@ -16,17 +16,15 @@ window.matchMedia = vi.fn().mockImplementation((query) => {
   };
 });
 
-window.IntersectionObserver = vi.fn().mockImplementation(() => {
-  return {
-    disconnect: vi.fn(),
-    observe: vi.fn(),
-    root: null,
-    rootMargin: '',
-    takeRecords: vi.fn(),
-    thresholds: [],
-    unobserve: vi.fn(),
-  } as IntersectionObserver;
-});
+window.IntersectionObserver = vi.fn(function (callback) {
+  this.disconnect = vi.fn();
+  this.observe = vi.fn();
+  this.root = null;
+  this.rootMargin = '';
+  this.takeRecords = vi.fn();
+  this.thresholds = [];
+  this.unobserve = vi.fn();
+} as any);
 
 describe('Timeline Props Validation', () => {
   const baseItems = [

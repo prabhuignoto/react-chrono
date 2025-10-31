@@ -16,6 +16,10 @@ vi.mock('../../useOutsideClick', () => ({
   default: vi.fn(),
 }));
 
+// Import mocked modules for direct access inside tests
+import * as EscapeKey from '../../useEscapeKey';
+import OutsideClick from '../../useOutsideClick';
+
 describe('useAccessibleDialog', () => {
   let mockOnClose: ReturnType<typeof vi.fn>;
 
@@ -342,7 +346,7 @@ describe('useAccessibleDialog', () => {
 
   describe('Keyboard handling', () => {
     it('should call onClose when Escape is pressed and closeOnEscape=true', () => {
-      const { useKeyHandler } = require('../../useEscapeKey');
+      const { useKeyHandler } = EscapeKey as any;
 
       renderHook(() =>
         useAccessibleDialog({
@@ -371,7 +375,7 @@ describe('useAccessibleDialog', () => {
     });
 
     it('should not call onClose when Escape is pressed and closeOnEscape=false', () => {
-      const { useKeyHandler } = require('../../useEscapeKey');
+      const { useKeyHandler } = EscapeKey as any;
 
       renderHook(() =>
         useAccessibleDialog({
@@ -391,7 +395,7 @@ describe('useAccessibleDialog', () => {
     });
 
     it('should only enable Escape handler when dialog is open', () => {
-      const { useKeyHandler } = require('../../useEscapeKey');
+      const { useKeyHandler } = EscapeKey as any;
 
       const { rerender } = renderHook(
         ({ isOpen }) =>
@@ -415,7 +419,7 @@ describe('useAccessibleDialog', () => {
     });
 
     it('should use preventDefault for Escape key', () => {
-      const { useKeyHandler } = require('../../useEscapeKey');
+      const { useKeyHandler } = EscapeKey as any;
 
       renderHook(() =>
         useAccessibleDialog({
@@ -429,7 +433,7 @@ describe('useAccessibleDialog', () => {
     });
 
     it('should use keydown event type', () => {
-      const { useKeyHandler } = require('../../useEscapeKey');
+      const { useKeyHandler } = EscapeKey as any;
 
       renderHook(() =>
         useAccessibleDialog({
@@ -445,7 +449,7 @@ describe('useAccessibleDialog', () => {
 
   describe('Click handling', () => {
     it('should call onClose on outside click when closeOnOutsideClick=true', () => {
-      const useOutsideClick = require('../../useOutsideClick').default;
+      const useOutsideClick = OutsideClick as any;
 
       const { result } = renderHook(() =>
         useAccessibleDialog({
@@ -466,7 +470,7 @@ describe('useAccessibleDialog', () => {
     });
 
     it('should not setup outside click when closeOnOutsideClick=false', () => {
-      const useOutsideClick = require('../../useOutsideClick').default;
+      const useOutsideClick = OutsideClick as any;
 
       renderHook(() =>
         useAccessibleDialog({
@@ -530,7 +534,7 @@ describe('useAccessibleDialog', () => {
       expect(mockOnClose).not.toHaveBeenCalled();
 
       // Outside click should close
-      const useOutsideClick = require('../../useOutsideClick').default;
+      const useOutsideClick = OutsideClick as any;
       const callback = useOutsideClick.mock.calls[0][1];
       act(() => {
         callback();

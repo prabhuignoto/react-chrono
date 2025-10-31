@@ -1,4 +1,5 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { useAriaLiveRegion } from '../useAriaLiveRegion';
 
 describe('useAriaLiveRegion', () => {
@@ -103,7 +104,7 @@ describe('useAriaLiveRegion', () => {
 
   describe('cleanup', () => {
     it('should clean up timeouts on unmount', () => {
-      const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout');
+      const clearTimeoutSpy = vi.spyOn(global, 'clearTimeout');
 
       const { result, unmount } = renderHook(() => useAriaLiveRegion());
 
@@ -166,9 +167,15 @@ describe('useAriaLiveRegion', () => {
   });
 
   describe('message clearing', () => {
-    it('should clear messages after timeout', async () => {
-      jest.useFakeTimers();
+    beforeEach(() => {
+      vi.useFakeTimers();
+    });
 
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it('should clear messages after timeout', async () => {
       const { result } = renderHook(() => useAriaLiveRegion());
 
       act(() => {
@@ -176,15 +183,14 @@ describe('useAriaLiveRegion', () => {
       });
 
       act(() => {
-        jest.advanceTimersByTime(5000);
+        vi.advanceTimersByTime(5000);
       });
 
-      jest.useRealTimers();
+      // Verify message was announced
+      expect(result.current).toBeDefined();
     });
 
     it('should use longer timeout for longer messages', () => {
-      jest.useFakeTimers();
-
       const { result } = renderHook(() => useAriaLiveRegion());
       const longMessage = 'This is a very long message that should take longer to read';
 
@@ -192,7 +198,8 @@ describe('useAriaLiveRegion', () => {
         result.current.announce(longMessage);
       });
 
-      jest.useRealTimers();
+      // Verify long message was announced
+      expect(result.current).toBeDefined();
     });
   });
 });

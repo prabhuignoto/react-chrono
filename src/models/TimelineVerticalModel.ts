@@ -82,6 +82,16 @@ export type TimelinePointModel = Omit<VerticalModel, 'timelineContent'> & {
 };
 
 /**
+ * Roving tabindex props for keyboard navigation (WCAG 2.1.1)
+ */
+export interface RovingTabIndexProps {
+  tabIndex: number;
+  ref?: React.RefObject<HTMLLIElement>;
+  onKeyDown?: (event: React.KeyboardEvent) => void;
+  onFocus?: (event: React.FocusEvent) => void;
+}
+
+/**
  * Represents the model for a vertical timeline item.
  */
 export interface VerticalItemModel extends VerticalModel {
@@ -112,6 +122,9 @@ export interface VerticalItemModel extends VerticalModel {
 
   // Indicates if the timeline item is visible.
   visible?: boolean;
+
+  // Roving tabindex props for keyboard navigation
+  rovingProps?: RovingTabIndexProps;
 }
 
 /**

@@ -174,8 +174,9 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     <div
       className={veToolbarWrapper({ sticky: Boolean(stickyToolbar) })}
       role="toolbar"
-      aria-label="Timeline toolbar"
+      aria-label="Timeline toolbar with navigation, search, and layout controls"
       aria-orientation="horizontal"
+      aria-keyshortcuts="Tab to navigate controls sequentially"
     >
       <div
         className={veNavigationGroup}
@@ -270,6 +271,24 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             role="group"
             aria-label="Search navigation"
           >
+            {/* ARIA live region for search match announcements (WCAG 4.1.3: Status Messages) */}
+            <span
+              data-testid="search-live-region"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+              style={{
+                position: 'absolute',
+                width: '1px',
+                height: '1px',
+                padding: 0,
+                margin: -1,
+                overflow: 'hidden',
+                clip: 'rect(0, 0, 0, 0)',
+                whiteSpace: 'nowrap',
+                border: 0,
+              }}
+            />
             {totalMatches > 0 && (
               <span
                 id={searchInfoId}
