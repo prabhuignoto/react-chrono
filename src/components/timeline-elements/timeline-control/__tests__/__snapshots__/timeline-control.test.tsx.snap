@@ -20,9 +20,11 @@ exports[`TimelineControl > should render 1`] = `
         >
           <button
             aria-controls="timeline-main-wrapper"
+            aria-disabled="false"
             aria-label="first"
             class="timeline-control_navButton__1g3kfsd5 timeline-control_navButtonHover__1g3kfsd7 timeline-control_navButtonActive__1g3kfsd8 timeline-control_navButtonFocus__1g3kfsd9"
             data-test-id="jump-to-first"
+            tabindex="0"
             title="first"
           >
             <span
@@ -55,9 +57,11 @@ exports[`TimelineControl > should render 1`] = `
         >
           <button
             aria-controls="timeline-main-wrapper"
+            aria-disabled="false"
             aria-label="previous"
             class="timeline-control_navButton__1g3kfsd5 timeline-control_navButtonHover__1g3kfsd7 timeline-control_navButtonActive__1g3kfsd8 timeline-control_navButtonFocus__1g3kfsd9"
             data-test-id="previous"
+            tabindex="0"
             title="previous"
           >
             <span
@@ -87,9 +91,11 @@ exports[`TimelineControl > should render 1`] = `
         >
           <button
             aria-controls="timeline-main-wrapper"
+            aria-disabled="false"
             aria-label="next"
             class="timeline-control_navButton__1g3kfsd5 timeline-control_navButtonHover__1g3kfsd7 timeline-control_navButtonActive__1g3kfsd8 timeline-control_navButtonFocus__1g3kfsd9"
             data-test-id="next"
+            tabindex="0"
             title="next"
           >
             <span
@@ -119,9 +125,11 @@ exports[`TimelineControl > should render 1`] = `
         >
           <button
             aria-controls="timeline-main-wrapper"
+            aria-disabled="false"
             aria-label="last"
             class="timeline-control_navButton__1g3kfsd5 timeline-control_navButtonHover__1g3kfsd7 timeline-control_navButtonActive__1g3kfsd8 timeline-control_navButtonFocus__1g3kfsd9"
             data-test-id="jump-to-last"
+            tabindex="0"
             title="last"
           >
             <span
@@ -159,10 +167,12 @@ exports[`TimelineControl > should render 1`] = `
         >
           <button
             aria-controls="timeline-main-wrapper"
+            aria-disabled="false"
             aria-label="dark"
             aria-pressed="false"
             class="timeline-control_navButton__1g3kfsd5 timeline-control_navButtonHover__1g3kfsd7 timeline-control_navButtonActive__1g3kfsd8 timeline-control_navButtonFocus__1g3kfsd9"
             data-test-id="dark-toggle"
+            tabindex="0"
             title="dark"
           >
             <span

@@ -8,6 +8,7 @@ interface UseTimelineItemNavigationProps {
   mode: string;
   timelineId: string;
   slideShowRunning?: boolean;
+  isToolbarNavigationRef?: React.MutableRefObject<boolean>;
   onTimelineUpdated?: (index: number) => void;
 }
 
@@ -19,6 +20,7 @@ export const useTimelineItemNavigation = ({
   mode,
   timelineId,
   slideShowRunning = false,
+  isToolbarNavigationRef,
   onTimelineUpdated,
 }: UseTimelineItemNavigationProps) => {
   const activeItemIndex = useRef<number>(-1); // -1 indicates no selection initially
@@ -202,9 +204,15 @@ export const useTimelineItemNavigation = ({
         // Use requestAnimationFrame to avoid fighting with scrollIntoView
         requestAnimationFrame(() => {
           try {
-            // Only focus timeline element if search was NOT active
-            // This prevents stealing focus during search navigation
-            if (!wasSearchActive && typeof (targetElement as HTMLElement).focus === 'function') {
+            // CRITICAL: Protect focus from being stolen (WCAG 2.4.3: Focus Order)
+            // Don't focus timeline items when:
+            // 1. Search input is active (wasSearchActive)
+            // 2. Toolbar button is active (isToolbarNavigationRef - includes play, navigation, dark mode, popovers)
+            // 3. Slideshow is running (slideShowRunning)
+            const isToolbarActive = isToolbarNavigationRef?.current ?? false;
+            const shouldPreventFocus = wasSearchActive || isToolbarActive || slideShowRunning;
+
+            if (!shouldPreventFocus && typeof (targetElement as HTMLElement).focus === 'function') {
               (targetElement as HTMLElement).focus({ preventScroll: true });
               // Ensure the wrapper maintains keyboard focus capability
               const wrapper = targetElement.closest(
@@ -227,6 +235,7 @@ export const useTimelineItemNavigation = ({
       mode,
       scrollToElement,
       slideShowRunning,
+      isToolbarNavigationRef,
     ],
   );
 

@@ -217,6 +217,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     flipLayout: !!flipLayout,
     slideShowRunning: !!slideShowRunning,
     isKeyboardNavigation: !!isKeyboardNavigation,
+    isToolbarNavigationRef,
     onTimelineUpdated: onTimelineUpdated || (() => {}),
     onNext: onNext || (() => {}),
     onPrevious: onPrevious || (() => {}),
@@ -416,6 +417,33 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       isToolbarNavigationRef.current = false;
     });
   }, [onPaused]);
+
+  // Wrap popover callbacks to prevent focus stealing to timeline items
+  // These callbacks trigger timeline state changes that would normally cause focus to jump to timeline items
+  // By setting isToolbarNavigationRef.current = true, we signal to the main focus useEffect to skip timeline focus
+  const wrappedOnActivateTimelineItem = React.useCallback((itemId?: string) => {
+    isToolbarNavigationRef.current = true;
+    handleTimelineItemClick(itemId);
+    // Note: RAF cleanup happens in handleTimelineItemClick via isToolbarNavigationRef reset
+  }, [handleTimelineItemClick]);
+
+  const wrappedOnUpdateTimelineMode = React.useCallback((newMode: string) => {
+    isToolbarNavigationRef.current = true;
+    handleTimelineUpdate(newMode);
+    // Reset after state update completes
+    requestAnimationFrame(() => {
+      isToolbarNavigationRef.current = false;
+    });
+  }, [handleTimelineUpdate]);
+
+  const wrappedOnUpdateTextContentDensity = React.useCallback((density: string) => {
+    isToolbarNavigationRef.current = true;
+    updateTextContentDensity(density);
+    // Reset after state update completes
+    requestAnimationFrame(() => {
+      isToolbarNavigationRef.current = false;
+    });
+  }, [updateTextContentDensity]);
 
   // Sync activeItemIndex with activeTimelineItem prop
   // FOCUS COORDINATION STRATEGY:
@@ -909,9 +937,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               id={id}
               flipLayout={!!flipLayout}
               items={items}
-              onActivateTimelineItem={handleTimelineItemClick}
-              onUpdateTimelineMode={handleTimelineUpdate}
-              onUpdateTextContentDensity={updateTextContentDensity}
+              onActivateTimelineItem={wrappedOnActivateTimelineItem}
+              onUpdateTimelineMode={wrappedOnUpdateTimelineMode}
+              onUpdateTextContentDensity={wrappedOnUpdateTextContentDensity}
               mode={timelineMode}
               searchQuery={searchQuery}
               onSearchChange={handleSearchChange}

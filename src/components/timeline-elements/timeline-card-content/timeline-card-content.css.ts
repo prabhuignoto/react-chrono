@@ -125,6 +125,12 @@ export const itemContentWrapper = style([
         outlineOffset: '2px',
         boxShadow: tokens.semantic.shadow.cardHover,
       },
+      '&.active': {
+        // Visual highlighting for active timeline item (NOT keyboard focus)
+        // Uses subtle border and shadow to indicate selection without stealing focus
+        boxShadow: `0 0 0 2px ${tokens.semantic.color.border.interactive}, ${tokens.semantic.shadow.cardHover}`,
+        transform: 'translateY(-2px)',
+      },
       '&:active': {
         transform: 'translateY(0px)',
         transition: `transform ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,

@@ -13,7 +13,6 @@ import React, {
 } from 'react';
 import { useSlideshow } from '../../effects/useSlideshow';
 import { useCardSize } from '../../../hooks/useCardSize';
-import { useFocusManager } from '../../../hooks/useFocusManager';
 import { useTimelineContext } from '../../contexts';
 // Remove the Timeline import to break the circular dependency
 // import Timeline from '../../timeline/timeline';
@@ -113,13 +112,11 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
       const progressRef = useRef<HTMLProgressElement | null>(null);
       const isFirstRender = useRef(true);
 
-      // Use improved focus management
-      const containerRef = useFocusManager({
-        shouldFocus: !!hasFocus,
-        isActive: !!active,
-        preventScroll: true,
-        restoreFocus: true,
-      });
+      // NOTE: Focus management is now handled separately (WCAG 2.4.3)
+      // Visual highlighting of active items is done via CSS (.active class)
+      // Keyboard focus is only set during actual keyboard navigation
+      // This prevents toolbar buttons from losing focus when timeline items are activated
+      const containerRef = useRef<HTMLDivElement>(null);
 
       const [hasBeenActivated, setHasBeenActivated] = useState(false);
       const [isResuming, setIsResuming] = useState(false);
@@ -320,53 +317,24 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
           if (slideShowActive || active) return;
 
           if (onClick && !disableInteraction) {
-            // Focus the card first
-            if (containerRef.current) {
-              containerRef.current.focus({ preventScroll: true });
-            }
+            // REMOVED: Manual focus calls (WCAG 2.4.3: Focus Order)
+            // Focus is no longer moved to timeline items during card click
+            // Visual highlighting is handled via CSS (.active class)
+            // Keyboard focus remains on the element that triggered the action
 
-            // Then trigger the click handler which will handle scrolling
+            // Trigger the click handler which will handle scrolling and state updates
             onClick(id || '');
-
-            // For horizontal modes, ensure the timeline point gets focus
-            if (mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL') {
-              requestAnimationFrame(() => {
-                const point = document.querySelector(
-                  `button[data-testid="timeline-circle"][data-item-id="${id}"]`,
-                ) as HTMLButtonElement | null;
-                try {
-                  point?.focus?.({ preventScroll: true });
-                } catch {}
-              });
-            } else {
-              // For vertical modes, focus the row
-              requestAnimationFrame(() => {
-                const row = document.querySelector(
-                  `[data-testid="vertical-item-row"][data-item-id="${id}"]`,
-                ) as HTMLElement | null;
-                try {
-                  row?.focus?.({ preventScroll: true });
-                } catch {}
-              });
-            }
           }
         },
-        [onClick, id, disableInteraction, slideShowActive, active, mode],
+        [onClick, id, disableInteraction, slideShowActive, active],
       );
 
       const toggleShowMore = useCallback(() => {
         if ((active && paused) || !slideShowActive) {
           setShowMore((prev) => !prev);
           onShowMore?.();
-          // Use setTimeout to ensure the DOM has updated before focusing
-          // Focus immediately without delay
-          requestAnimationFrame(() => {
-            if (containerRef.current) {
-              containerRef.current.focus({ preventScroll: true });
-              // Force focus styles to be visible
-              containerRef.current.classList.add('focus-visible');
-            }
-          });
+          // REMOVED: Manual focus call (WCAG 2.4.3: Focus Order)
+          // Visual state is handled by CSS, not by moving keyboard focus
         }
       }, [active, paused, slideShowActive, onShowMore]);
 

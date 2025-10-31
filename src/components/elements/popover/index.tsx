@@ -185,6 +185,54 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     if (ev.key === 'Enter' || ev.key === ' ') {
       ev.preventDefault();
       toggleOpen();
+    } else if (ev.key === 'ArrowDown') {
+      // Arrow Down: Open menu and focus first item
+      ev.preventDefault();
+      setIsOpen(true);
+
+      // Focus first menu item after menu opens
+      requestAnimationFrame(() => {
+        if (!popoverRef.current) return;
+        const firstMenuItem = popoverRef.current.querySelector('[role="menuitem"]');
+        if (firstMenuItem instanceof HTMLElement) {
+          firstMenuItem.focus();
+          return;
+        }
+        // Fallback: focus first focusable element
+        const firstFocusable = popoverRef.current.querySelector(
+          'button:not([tabindex="-1"]), [tabindex="0"]'
+        );
+        if (firstFocusable instanceof HTMLElement) {
+          firstFocusable.focus();
+        }
+      });
+    } else if (ev.key === 'ArrowUp') {
+      // Arrow Up: Open menu and focus last item
+      ev.preventDefault();
+      setIsOpen(true);
+
+      // Focus last menu item after menu opens
+      requestAnimationFrame(() => {
+        if (!popoverRef.current) return;
+        const menuItems = popoverRef.current.querySelectorAll('[role="menuitem"]');
+        if (menuItems.length > 0) {
+          const lastMenuItem = menuItems[menuItems.length - 1];
+          if (lastMenuItem instanceof HTMLElement) {
+            lastMenuItem.focus();
+            return;
+          }
+        }
+        // Fallback: focus last focusable element
+        const focusableElements = popoverRef.current.querySelectorAll(
+          'button:not([tabindex="-1"]), [tabindex="0"]'
+        );
+        if (focusableElements.length > 0) {
+          const lastFocusable = focusableElements[focusableElements.length - 1];
+          if (lastFocusable instanceof HTMLElement) {
+            lastFocusable.focus();
+          }
+        }
+      });
     }
   }, [toggleOpen]);
 

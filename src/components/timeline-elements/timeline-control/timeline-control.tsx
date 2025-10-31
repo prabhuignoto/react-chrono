@@ -181,6 +181,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 aria-label={jumpToFirstTitle}
                 aria-controls="timeline-main-wrapper"
                 aria-disabled={!!canDisableLeft}
+                tabIndex={canDisableLeft ? -1 : 0}
                 data-test-id="jump-to-first"
               >
                 <span className={navButtonSvg}>
@@ -210,6 +211,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 aria-label={previousTitle}
                 aria-controls="timeline-main-wrapper"
                 aria-disabled={!!canDisableLeft}
+                tabIndex={canDisableLeft ? -1 : 0}
                 data-test-id="previous"
               >
                 <span className={navButtonSvg}>
@@ -239,6 +241,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 aria-label={nextTitle}
                 aria-controls="timeline-main-wrapper"
                 aria-disabled={!!canDisableRight}
+                tabIndex={canDisableRight ? -1 : 0}
                 data-test-id="next"
               >
                 <span className={navButtonSvg}>
@@ -268,6 +271,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 aria-label={jumpToLastTitle}
                 aria-controls="timeline-main-wrapper"
                 aria-disabled={!!canDisableRight}
+                tabIndex={canDisableRight ? -1 : 0}
                 data-test-id="jump-to-last"
               >
                 <span className={navButtonSvg}>
@@ -335,6 +339,7 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 aria-label={isDark ? buttonTexts?.light : buttonTexts?.dark}
                 aria-pressed={isDark ? 'true' : 'false'}
                 aria-disabled={!!slideShowRunning}
+                tabIndex={slideShowRunning ? -1 : 0}
                 data-test-id="dark-toggle"
               >
                 <span className={navButtonSvg}>
