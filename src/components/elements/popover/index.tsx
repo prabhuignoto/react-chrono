@@ -10,7 +10,8 @@ import React, {
   Children,
 } from 'react';
 import ReactDOM from 'react-dom';
-import useCloseClickOutside from '@components/effects/useCloseClickOutside';
+import useOutsideClick from '@hooks/useOutsideClick';
+import useEscapeKey from '@hooks/useEscapeKey';
 import { ChevronDown, CloseIcon } from '@components/icons';
 import { useFocusTrap } from '@hooks/useFocusManager';
 import { PopOverModel } from './popover.model';
@@ -52,6 +53,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   const ref = useRef<HTMLDivElement>(null);
   const triggerButtonRef = useRef<HTMLButtonElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
+  const closeReasonRef = useRef<'escape' | 'click-outside' | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [popoverLayout, setPopoverLayout] = useState({
@@ -128,34 +130,17 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     setIsOpen((prev) => !prev);
   }, []);
 
-  const closePopover = useCallback(() => {
+  const closePopover = useCallback((closeReason: 'escape' | 'click-outside' = 'click-outside') => {
     setIsOpen(false);
+    closeReasonRef.current = closeReason;
 
-    // IMPROVED: Conditional focus restoration (WCAG 2.4.3: Focus Order)
-    // Only restore focus when closing via Escape or item selection
-    // Do NOT restore focus when:
-    // - User clicked outside (they chose where to focus)
-    // - User pressed Tab (they're navigating away)
-    // - User clicked on search input (let them continue)
-    // - Another toolbar button was clicked (let that button keep focus)
+    // IMPROVED: Selective focus restoration (WCAG 2.4.3: Focus Order)
+    // Only restore focus when closing via Escape key
+    // When user clicks outside, leave focus where they clicked
 
     requestAnimationFrame(() => {
-      const activeElement = document.activeElement;
-
-      // Check if user is moving to another interactive element
-      const isSearchInput =
-        activeElement?.tagName === 'INPUT' &&
-        (activeElement as HTMLInputElement).type === 'search';
-
-      const isToolbarButton = activeElement?.closest('[role="toolbar"]') !== null;
-      const hasActiveElement = activeElement && activeElement !== document.body;
-
-      // Only restore focus if:
-      // 1. No other element has focus (closing via ESC while popover has focus)
-      // 2. Not moving to search or another toolbar button
-      const shouldRestoreFocus = !hasActiveElement && !isSearchInput && !isToolbarButton;
-
-      if (shouldRestoreFocus && triggerButtonRef.current) {
+      // Only restore focus if explicitly closed via Escape key
+      if (closeReason === 'escape' && triggerButtonRef.current) {
         try {
           triggerButtonRef.current.focus({ preventScroll: true });
         } catch (_) {
@@ -188,6 +173,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     } else if (ev.key === 'ArrowDown') {
       // Arrow Down: Open menu and focus first item
       ev.preventDefault();
+      ev.stopPropagation(); // Prevent timeline navigation from receiving this event
       setIsOpen(true);
 
       // Focus first menu item after menu opens
@@ -209,6 +195,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     } else if (ev.key === 'ArrowUp') {
       // Arrow Up: Open menu and focus last item
       ev.preventDefault();
+      ev.stopPropagation(); // Prevent timeline navigation from receiving this event
       setIsOpen(true);
 
       // Focus last menu item after menu opens
@@ -236,9 +223,11 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     }
   }, [toggleOpen]);
 
-  // Handle Escape key and click outside to close popover
-  // useCloseClickOutside hook handles both scenarios (WCAG 2.1.2)
-  useCloseClickOutside(ref, closePopover);
+  // Handle click outside to close popover with 'click-outside' reason (WCAG 2.1.2)
+  useOutsideClick(ref, () => closePopover('click-outside'));
+
+  // Handle Escape key to close popover with 'escape' reason (WCAG 2.1.2)
+  useEscapeKey(() => closePopover('escape'));
 
   // Calculate optimal positioning for portal rendering
   const calculatePopoverPosition = useCallback(() => {
@@ -445,6 +434,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
           aria-expanded={isOpen}
           aria-haspopup="menu"
           aria-label={placeholder || 'Open menu'}
+          tabIndex={0}
           ref={triggerButtonRef}
         >
           {placeholder && <span className={selecterLabel}>{placeholder}</span>}
