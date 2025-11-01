@@ -17,6 +17,9 @@ const createMockKeyboardEvent = (
     key,
     preventDefault: vi.fn(),
     stopPropagation: vi.fn(),
+    target: {
+      closest: vi.fn(() => null),
+    },
   }) as unknown as React.KeyboardEvent<HTMLDivElement>;
 
 describe('useTimelineNavigation', () => {

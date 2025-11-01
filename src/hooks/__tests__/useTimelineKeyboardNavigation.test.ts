@@ -24,10 +24,15 @@ describe('useTimelineKeyboardNavigation', () => {
       }),
     );
 
+    const mockTarget = {
+      closest: vi.fn(() => null),
+    };
+
     const mockEvent = {
       key: 'ArrowDown',
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
+      target: mockTarget,
     } as any;
 
     act(() => {
@@ -49,10 +54,15 @@ describe('useTimelineKeyboardNavigation', () => {
     );
 
     // Test ArrowRight
+    const mockTarget = {
+      closest: vi.fn(() => null),
+    };
+
     const rightEvent = {
       key: 'ArrowRight',
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
+      target: mockTarget,
     } as any;
 
     act(() => {
@@ -69,6 +79,7 @@ describe('useTimelineKeyboardNavigation', () => {
       key: 'ArrowLeft',
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
+      target: mockTarget,
     } as any;
 
     act(() => {
@@ -89,11 +100,16 @@ describe('useTimelineKeyboardNavigation', () => {
       }),
     );
 
+    const mockTarget = {
+      closest: vi.fn(() => null),
+    };
+
     // Test ArrowRight with flipLayout - should go to previous
     const rightEvent = {
       key: 'ArrowRight',
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
+      target: mockTarget,
     } as any;
 
     act(() => {
@@ -110,6 +126,7 @@ describe('useTimelineKeyboardNavigation', () => {
       key: 'ArrowLeft',
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
+      target: mockTarget,
     } as any;
 
     act(() => {
@@ -130,11 +147,16 @@ describe('useTimelineKeyboardNavigation', () => {
       }),
     );
 
+    const mockTarget = {
+      closest: vi.fn(() => null),
+    };
+
     // Test Home key
     const homeEvent = {
       key: 'Home',
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
+      target: mockTarget,
     } as any;
 
     act(() => {
@@ -149,6 +171,7 @@ describe('useTimelineKeyboardNavigation', () => {
       key: 'End',
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
+      target: mockTarget,
     } as any;
 
     act(() => {
@@ -169,11 +192,16 @@ describe('useTimelineKeyboardNavigation', () => {
       }),
     );
 
+    const mockTarget = {
+      closest: vi.fn(() => null),
+    };
+
     // Test ArrowRight
     const rightEvent = {
       key: 'ArrowRight',
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
+      target: mockTarget,
     } as any;
 
     act(() => {
@@ -190,6 +218,7 @@ describe('useTimelineKeyboardNavigation', () => {
       key: 'ArrowLeft',
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
+      target: mockTarget,
     } as any;
 
     act(() => {
@@ -210,11 +239,16 @@ describe('useTimelineKeyboardNavigation', () => {
       }),
     );
 
+    const mockTarget = {
+      closest: vi.fn(() => null),
+    };
+
     // Test ArrowDown
     const downEvent = {
       key: 'ArrowDown',
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
+      target: mockTarget,
     } as any;
 
     act(() => {
@@ -231,6 +265,7 @@ describe('useTimelineKeyboardNavigation', () => {
       key: 'ArrowUp',
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
+      target: mockTarget,
     } as any;
 
     act(() => {
@@ -251,10 +286,15 @@ describe('useTimelineKeyboardNavigation', () => {
       }),
     );
 
+    const mockTarget = {
+      closest: vi.fn(() => null),
+    };
+
     const mockEvent = {
       key: 'ArrowDown',
       preventDefault: vi.fn(),
       stopPropagation: vi.fn(),
+      target: mockTarget,
     } as any;
 
     act(() => {

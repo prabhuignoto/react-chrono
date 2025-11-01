@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 import { Chrono } from '../../index';
 import { TimelineCardModel } from '@models/TimelineItemModel';
 
@@ -171,7 +172,7 @@ describe('Timeline - Keyboard Navigation', () => {
 
   it('should navigate popover menu with arrow keys and close with Escape', async () => {
     const user = userEvent.setup();
-    const mockOnSelect = jest.fn();
+    const mockOnSelect = vi.fn();
 
     render(
       <Chrono

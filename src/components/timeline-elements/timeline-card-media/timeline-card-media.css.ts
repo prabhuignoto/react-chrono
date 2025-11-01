@@ -8,7 +8,6 @@ import { baseStyles } from '../../../styles/system/static.css';
 export const gradientVar = createVar();
 
 export const mediaWrapper = style([
-  patterns.card({ size: 'md', elevation: 'low' }),
   sprinkles({ display: 'flex' }),
   {
     alignItems: 'flex-start',
@@ -22,6 +21,8 @@ export const mediaWrapper = style([
     width: 'calc(100% - 1em)',
     overflow: 'hidden',
     zIndex: tokens.semantic.zIndex.timelineCard,
+    boxShadow: tokens.semantic.shadow.card,
+    border: `1px solid ${tokens.semantic.color.border.default}`,
   },
 ]);
 
@@ -155,40 +156,37 @@ export const errorMessage = style({
 });
 
 // Text overlay toggle button
-export const textOverlayButton = style([
-  patterns.toolbarButton(),
-  {
-    background: tokens.semantic.color.interactive.primary,
-    border: 'none',
-    color: tokens.semantic.color.text.inverse,
-    cursor: 'pointer',
-    padding: tokens.semantic.spacing.xs,
-    borderRadius: tokens.semantic.borderRadius.md,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '32px',
-    height: '32px',
-    transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
-    boxShadow: tokens.semantic.shadow.card,
+export const textOverlayButton = style({
+  background: tokens.semantic.color.interactive.primary,
+  border: 'none',
+  color: tokens.semantic.color.text.inverse,
+  cursor: 'pointer',
+  padding: tokens.semantic.spacing.xs,
+  borderRadius: tokens.semantic.borderRadius.md,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '32px',
+  height: '32px',
+  transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+  boxShadow: tokens.semantic.shadow.card,
 
-    selectors: {
-      '&:hover': {
-        background: tokens.semantic.color.interactive.primaryHover,
-        transform: 'scale(1.05)',
-        boxShadow: tokens.semantic.shadow.cardHover,
-      },
-      '&:active': {
-        transform: 'scale(0.95)',
-        background: tokens.semantic.color.interactive.primaryActive,
-      },
-      '&:focus-visible': {
-        outline: `2px solid ${tokens.semantic.color.interactive.primary}`,
-        outlineOffset: '2px',
-      },
+  selectors: {
+    '&:hover': {
+      background: tokens.semantic.color.interactive.primaryHover,
+      transform: 'scale(1.05)',
+      boxShadow: tokens.semantic.shadow.cardHover,
+    },
+    '&:active': {
+      transform: 'scale(0.95)',
+      background: tokens.semantic.color.interactive.primaryActive,
+    },
+    '&:focus-visible': {
+      outline: `2px solid ${tokens.semantic.color.interactive.primary}`,
+      outlineOffset: '2px',
     },
   },
-]);
+});
 
 export const iframeVideo = style({
   position: 'relative',

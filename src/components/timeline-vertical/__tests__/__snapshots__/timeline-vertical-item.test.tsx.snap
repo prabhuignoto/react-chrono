@@ -44,7 +44,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
           class="timeline-card-content_timelineCardHeader__chzdno8 timeline-card-content__chzdno7 sprinkles_display_flex_mobile__1v4ezef6 sprinkles_flexDirection_column_mobile__1v4ezefx sprinkles_width_full_mobile__1v4ezef6o sprinkles_gap_xs_mobile__1v4ezef29"
         />
         <div
-          class="timeline-card-media_mediaWrapper__18oaqop2 recipes_card__etntiu1f recipes__etntiu1a sprinkles_position_relative_mobile__1v4ezefi sprinkles_borderRadius_lg_mobile__1v4ezef80 sprinkles_padding_md_mobile__1v4ezef30 recipes_card_size_md__etntiu1h recipes__etntiu1c recipes_card_elevation_low__etntiu1k recipes_card_interactive_false__etntiu1n recipes_card_fullWidth_false__etntiu1p timeline-card-media__18oaqop1 sprinkles_display_flex_mobile__1v4ezef6 card-media-wrapper card-media timeline-card-media_justifyStart__18oaqop3"
+          class="timeline-card-media_mediaWrapper__18oaqop2 timeline-card-media__18oaqop1 sprinkles_display_flex_mobile__1v4ezef6 card-media-wrapper card-media timeline-card-media_justifyStart__18oaqop3"
           style="height: 0px; min-height: 200px;"
         >
           <div
