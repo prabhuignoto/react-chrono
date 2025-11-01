@@ -94,7 +94,7 @@ export const useFocusManager = ({
   return elementRef;
 };
 
-interface UseFocusTrapOptions {
+export interface UseFocusTrapOptions {
   /** Whether the focus trap is active */
   isActive: boolean;
   /** Initial focus target: 'first', 'last', or specific element ref */

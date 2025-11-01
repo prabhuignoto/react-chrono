@@ -481,7 +481,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
               <div className={header}>
                 <button
                   className={closeButton}
-                  onClick={closePopover}
+                  onClick={() => closePopover()}
                   type="button"
                   aria-label="Close menu"
                   title="Close menu"

@@ -85,7 +85,7 @@ export const useTimelineSearch = ({
       // Use for-loop with early break for better performance
       for (let i = 0; i < searchableContent.length; i++) {
         // No optional chaining needed: i is always a valid index within bounds
-        if (searchableContent[i].content.includes(queryLower)) {
+        if (searchableContent[i]?.content.includes(queryLower)) {
           results.push(i);
 
           // Early break if we have enough results

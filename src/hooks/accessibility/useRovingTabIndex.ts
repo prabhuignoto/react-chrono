@@ -24,7 +24,7 @@ export interface UseRovingTabIndexReturn {
   activeId: string;
   /** Get props for an item (tabIndex, onKeyDown, onFocus, ref) */
   getItemProps: (id: string) => {
-    ref: React.RefObject<HTMLElement>;
+    ref: React.RefObject<HTMLElement | null>;
     tabIndex: 0 | -1;
     onKeyDown: (e: React.KeyboardEvent<HTMLElement>) => void;
     onFocus: () => void;
@@ -89,7 +89,7 @@ export const useRovingTabIndex = (
   }, [initialActiveId, items]);
 
   const [activeId, setActiveIdState] = useState<string>(getInitialActiveId());
-  const itemRefsMap = useRef<Map<string, React.RefObject<HTMLElement>>>(
+  const itemRefsMap = useRef<Map<string, React.RefObject<HTMLElement | null>>>(
     new Map(),
   );
 
@@ -175,7 +175,7 @@ export const useRovingTabIndex = (
       const maxAttempts = items.length;
       while (
         attempts < maxAttempts &&
-        items[nextIndex].disabled &&
+        items[nextIndex]?.disabled &&
         nextIndex !== currentIndex
       ) {
         if (direction === 'next' || direction === 'first') {

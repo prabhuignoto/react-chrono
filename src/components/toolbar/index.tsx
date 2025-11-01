@@ -24,7 +24,7 @@ import {
   toolbarWrapper as veToolbarWrapper,
   toolbarIconButton,
 } from './toolbar.css';
-import { useRovingTabIndex } from '@hooks/useRovingTabIndex';
+import { useRovingTabIndex } from '@hooks/accessibility';
 import { ToolbarProps } from '@models/ToolbarProps';
 
 /**
@@ -67,7 +67,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
     // Create toolbar items for roving tabindex pattern
     // WCAG 2.4.3: Focus Order - Toolbar with roving tabindex
     const toolbarItems = useMemo(
-      () => items.map((item) => ({ id: item.id, disabled: false })),
+      () => items.map((item, index) => ({ id: item.id || String(index), disabled: false })),
       [items],
     );
 
@@ -113,6 +113,9 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
               }
             };
 
+            const itemProps = getItemProps(id);
+            const { ref, ...otherProps } = itemProps;
+
             return (
               <div
                 className={veToolbarListItem}
@@ -120,7 +123,8 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
                 role="group"
               >
                 <button
-                  {...getItemProps(id)}
+                  {...otherProps}
+                  ref={ref as React.RefObject<HTMLButtonElement>}
                   className={toolbarIconButton()}
                   onClick={handleItemClick}
                   aria-label={label || name}

@@ -295,9 +295,9 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
                 )}
                 onClick={(event) => {
                   if (slideShowRunning) {
-                    handlePause(event);
+                    handlePause();
                   } else {
-                    handlePlay(event);
+                    handlePlay();
                   }
                 }}
                 title={playOrPauseTile}

@@ -1,4 +1,4 @@
-import { TimelineModel } from '@models/TimelineModel';
+import { TimelineModel, TextDensity } from '@models/TimelineModel';
 import { getUniqueID } from '@utils/index';
 import cls from 'classnames';
 import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
@@ -438,7 +438,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   const wrappedOnUpdateTextContentDensity = React.useCallback((density: string) => {
     isToolbarNavigationRef.current = true;
-    updateTextContentDensity(density);
+    updateTextContentDensity(density as TextDensity);
     // Reset after state update completes
     requestAnimationFrame(() => {
       isToolbarNavigationRef.current = false;

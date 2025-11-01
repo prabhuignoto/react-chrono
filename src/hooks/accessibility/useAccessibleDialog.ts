@@ -35,7 +35,7 @@ export interface UseAccessibleDialogOptions {
 export interface UseAccessibleDialogReturn {
   /** Props to spread on the dialog container element */
   dialogProps: {
-    ref: React.RefObject<HTMLDivElement>;
+    ref: React.Ref<HTMLDivElement>;
     role: 'dialog';
     'aria-modal': boolean;
     'aria-label'?: string;
@@ -171,7 +171,7 @@ export const useAccessibleDialog = (
     },
   );
 
-  // Handle outside click to close dialog
+  // Handle outside click to close dialog (mousedown)
   useOutsideClick(
     closeOnOutsideClick ? [dialogRef] : [],
     () => {
@@ -180,7 +180,20 @@ export const useAccessibleDialog = (
       }
     },
     {
-      eventTypes: ['mousedown', 'touchstart'],
+      eventType: 'mousedown',
+    },
+  );
+
+  // Handle outside touch to close dialog (touchstart)
+  useOutsideClick(
+    closeOnOutsideClick ? [dialogRef] : [],
+    () => {
+      if (isOpen) {
+        onClose();
+      }
+    },
+    {
+      eventType: 'touchstart',
     },
   );
 
@@ -204,12 +217,12 @@ export const useAccessibleDialog = (
 
   return {
     dialogProps: {
-      ref: combinedRef as React.RefObject<HTMLDivElement>,
+      ref: combinedRef,
       role: 'dialog' as const,
       'aria-modal': true,
-      'aria-label': ariaLabel,
-      'aria-describedby': ariaDescribedBy,
-      'aria-labelledby': ariaLabelledBy,
+      ...(ariaLabel !== undefined && { 'aria-label': ariaLabel }),
+      ...(ariaDescribedBy !== undefined && { 'aria-describedby': ariaDescribedBy }),
+      ...(ariaLabelledBy !== undefined && { 'aria-labelledby': ariaLabelledBy }),
       tabIndex: -1,
     },
     backdropProps: {

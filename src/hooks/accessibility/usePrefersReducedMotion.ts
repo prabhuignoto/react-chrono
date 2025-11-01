@@ -61,7 +61,7 @@ export const usePrefersReducedMotion = (): boolean => {
   );
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') return undefined;
 
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -81,12 +81,14 @@ export const usePrefersReducedMotion = (): boolean => {
       };
     }
     // Fallback for older browsers
-    else if (mediaQuery.addListener) {
+    if (mediaQuery.addListener) {
       mediaQuery.addListener(handleChange);
       return () => {
         mediaQuery.removeListener(handleChange);
       };
     }
+
+    return undefined;
   }, []);
 
   return prefersReducedMotion;
