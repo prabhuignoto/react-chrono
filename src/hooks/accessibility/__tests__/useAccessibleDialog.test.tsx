@@ -233,10 +233,11 @@ describe('useAccessibleDialog', () => {
       dialog.appendChild(button2);
       document.body.appendChild(dialog);
 
-      // Simulate ref assignment
-      if (result.current.dialogProps.ref && 'current' in result.current.dialogProps.ref) {
-        // @ts-expect-error - ref assignment
-        result.current.dialogProps.ref.current = dialog;
+      // Assign dialog to ref by calling the callback
+      if (typeof result.current.dialogProps.ref === 'function') {
+        act(() => {
+          result.current.dialogProps.ref(dialog);
+        });
       }
 
       act(() => {
@@ -268,9 +269,11 @@ describe('useAccessibleDialog', () => {
       dialog.appendChild(button2);
       document.body.appendChild(dialog);
 
-      if (result.current.dialogProps.ref && 'current' in result.current.dialogProps.ref) {
-        // @ts-expect-error - ref assignment
-        result.current.dialogProps.ref.current = dialog;
+      // Assign dialog to ref by calling the callback
+      if (typeof result.current.dialogProps.ref === 'function') {
+        act(() => {
+          result.current.dialogProps.ref(dialog);
+        });
       }
 
       act(() => {
@@ -291,7 +294,7 @@ describe('useAccessibleDialog', () => {
       // Create a ref for the custom button
       const customRef = { current: customButton };
 
-      const { rerender } = renderHook(
+      const { result, rerender } = renderHook(
         ({ isOpen }) =>
           useAccessibleDialog({
             isOpen,
@@ -301,6 +304,17 @@ describe('useAccessibleDialog', () => {
         { initialProps: { isOpen: false } },
       );
 
+      // Create a dialog and assign it to the ref
+      const dialog = document.createElement('div');
+      dialog.appendChild(customButton);
+      document.body.appendChild(dialog);
+
+      if (typeof result.current.dialogProps.ref === 'function') {
+        act(() => {
+          result.current.dialogProps.ref(dialog);
+        });
+      }
+
       act(() => {
         rerender({ isOpen: true });
       });
@@ -309,7 +323,7 @@ describe('useAccessibleDialog', () => {
         expect(document.activeElement).toBe(customButton);
       });
 
-      document.body.removeChild(customButton);
+      document.body.removeChild(dialog);
     });
 
     it('should focus dialog itself when no focusable elements', async () => {
@@ -327,9 +341,11 @@ describe('useAccessibleDialog', () => {
       dialog.tabIndex = -1;
       document.body.appendChild(dialog);
 
-      if (result.current.dialogProps.ref && 'current' in result.current.dialogProps.ref) {
-        // @ts-expect-error - ref assignment
-        result.current.dialogProps.ref.current = dialog;
+      // Assign dialog to ref by calling the callback
+      if (typeof result.current.dialogProps.ref === 'function') {
+        act(() => {
+          result.current.dialogProps.ref(dialog);
+        });
       }
 
       act(() => {
