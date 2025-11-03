@@ -97,3 +97,14 @@ globalStyle(`${timelineItemWrapper}`, {
     },
   },
 });
+
+// Remove focus ring from the list item itself in horizontal timeline
+// The focus ring should only appear on the inner card content, not the wrapper
+globalStyle(`li.timeline-horz-item-container:focus`, {
+  outline: 'none',
+});
+
+globalStyle(`li.timeline-horz-item-container:focus-visible`, {
+  outline: 'none',
+  boxShadow: 'none',
+});

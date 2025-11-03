@@ -176,6 +176,17 @@ export const timelineTitleWrapper = style([
   },
 ]);
 
+// Remove focus ring from the list item itself
+// The focus ring should only appear on the inner card content, not the wrapper
+globalStyle(`li.vertical-item-row:focus`, {
+  outline: 'none',
+});
+
+globalStyle(`li.vertical-item-row:focus-visible`, {
+  outline: 'none',
+  boxShadow: 'none',
+});
+
 // Additional static variants for common use cases
 export const verticalItemWrapperVisible = verticalItemWrapper({
   visible: true,

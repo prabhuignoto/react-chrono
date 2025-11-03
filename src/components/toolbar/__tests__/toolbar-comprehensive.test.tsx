@@ -32,7 +32,7 @@ const renderWithTheme = (component: React.ReactElement) => {
 };
 
 describe('Toolbar Comprehensive Tests', () => {
-  let mockOnSelect: jest.Mock;
+  let mockOnSelect: ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
     vi.clearAllMocks();
