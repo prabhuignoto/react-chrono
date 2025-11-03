@@ -13,6 +13,7 @@ interface UseTimelineNavigationProps {
   flipLayout?: boolean;
   slideShowRunning?: boolean;
   isKeyboardNavigation?: boolean;
+  isToolbarNavigationRef?: React.MutableRefObject<boolean>;
   onTimelineUpdated?: (index: number) => void;
   onNext?: () => void;
   onPrevious?: () => void;
@@ -28,6 +29,7 @@ export const useTimelineNavigation = ({
   flipLayout = false,
   slideShowRunning = false,
   isKeyboardNavigation = false,
+  isToolbarNavigationRef,
   onTimelineUpdated,
   onNext,
   onPrevious,
@@ -52,7 +54,7 @@ export const useTimelineNavigation = ({
     mode,
     timelineId,
     slideShowRunning,
-    ...pickDefined({ onTimelineUpdated }),
+    ...pickDefined({ onTimelineUpdated, isToolbarNavigationRef }),
   });
 
   const { scrollToElement } = useTimelineScrolling();

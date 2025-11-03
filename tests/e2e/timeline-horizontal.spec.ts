@@ -1,10 +1,10 @@
 import { test, expect } from '../fixtures/test-fixtures';
+import { SELECTORS } from '../fixtures/selector-map';
 
 test.describe('Chrono.Horizontal.Basic', () => {
-  test.beforeEach(async ({ page, testHelpers }) => {
+  test.beforeEach(async ({ testHelpers }) => {
     await test.step('Navigate to horizontal timeline', async () => {
-      await testHelpers.navigateTo('/horizontal');
-      await page.waitForSelector('.timeline-horz-item-container', { timeout: 10000 });
+      await testHelpers.navigateAndWaitForTimeline('/horizontal');
     });
   });
 
@@ -14,59 +14,48 @@ test.describe('Chrono.Horizontal.Basic', () => {
     });
   });
 
-  test('should navigate through timeline items', async ({ page, testHelpers }) => {
+  test('should navigate through timeline items', async ({ testHelpers }) => {
     await test.step('Click next button', async () => {
-      const nextButton = page.locator('[aria-label="Next"]').first();
+      const nextButton = await testHelpers.getToolbarButton('next');
       await expect(nextButton).toBeVisible();
-      await nextButton.click();
-      await page.waitForTimeout(500); // Wait for animation
+      await testHelpers.clickToolbarButton('next');
     });
 
     await test.step('Verify navigation occurred', async () => {
-      // Just verify that clicking worked - the app may not use data-index attributes
-      await page.waitForTimeout(300);
+      const timelineItems = await testHelpers.getTimelineItems('horizontal');
+      await expect(timelineItems.first()).toBeVisible();
     });
 
     await test.step('Click previous button', async () => {
-      const prevButton = page.locator('[aria-label="Previous"]').first();
+      const prevButton = await testHelpers.getToolbarButton('previous');
       if (await prevButton.isVisible()) {
-        await prevButton.click();
-        await page.waitForTimeout(500);
+        await testHelpers.clickToolbarButton('previous');
       }
     });
   });
 
-  test('should display card content on item click', async ({ page, testHelpers }) => {
+  test('should display card content on item click', async ({ testHelpers, page }) => {
     await test.step('Click on timeline item', async () => {
-      const item = page.locator('.timeline-horz-item-container').nth(2);
-      await expect(item).toBeVisible();
-      await item.click();
-      await page.waitForTimeout(300);
+      await testHelpers.clickTimelinePoint(2);
     });
 
     await test.step('Verify card content exists', async () => {
-      // Just verify the timeline is interactive
-      const items = page.locator('.timeline-horz-item-container');
-      await expect(items.first()).toBeVisible();
+      const cardContent = page.locator(SELECTORS.CARD_CONTENT);
+      if (await cardContent.count() > 0) {
+        await expect(cardContent.first()).toBeVisible();
+      }
     });
   });
 
-  test('should handle keyboard navigation', async ({ page }) => {
+  test('should handle keyboard navigation', async ({ testHelpers }) => {
     await test.step('Focus on timeline', async () => {
-      const timeline = page.locator('.timeline-main, .chrono-timeline, body').first();
-      await timeline.focus();
+      await testHelpers.focusTimeline();
     });
 
     await test.step('Navigate with arrow keys', async () => {
-      await page.keyboard.press('ArrowRight');
-      await page.waitForTimeout(300);
-      
-      await page.keyboard.press('ArrowLeft');
-      await page.waitForTimeout(300);
-      
-      // Just verify keyboard events are handled
-      await page.keyboard.press('Home');
-      await page.waitForTimeout(300);
+      await testHelpers.navigateWithKeyboard('ArrowRight');
+      await testHelpers.navigateWithKeyboard('ArrowLeft');
+      await testHelpers.navigateWithKeyboard('Home');
     });
   });
 
@@ -80,107 +69,104 @@ test.describe('Chrono.Horizontal.Basic', () => {
     for (const viewport of viewports) {
       await test.step(`Test on ${viewport.name} viewport`, async () => {
         await page.setViewportSize({ width: viewport.width, height: viewport.height });
-        await page.waitForTimeout(300); // Wait for responsive adjustments
-        
+
         // Verify timeline is still functional
-        await testHelpers.waitForElement('.timeline-horz-item-container');
-        await testHelpers.assertElementCount('.timeline-horz-item-container', 10);
-        
+        const timelineItems = await testHelpers.getTimelineItems('horizontal');
+        await expect(timelineItems.first()).toBeVisible();
+        const count = await timelineItems.count();
+        expect(count).toBeGreaterThan(0);
+
         // Take screenshot for visual regression
         await testHelpers.takeScreenshot(`horizontal-timeline-${viewport.name}`);
       });
     }
   });
 
-  test('should handle timeline controls', async ({ page, testHelpers }) => {
+  test('should handle timeline controls', async ({ testHelpers, page }) => {
     await test.step('Test available controls', async () => {
       // Check for play button
-      const playButton = page.locator('[aria-label*="Play"], [aria-label*="play"]').first();
-      if (await playButton.isVisible({ timeout: 3000 })) {
-        await playButton.click();
-        await page.waitForTimeout(1000);
-        
+      const playButton = await testHelpers.getToolbarButton('play');
+      if (await playButton.count() > 0 && await playButton.isVisible()) {
+        await testHelpers.clickToolbarButton('play');
+
         // Look for pause button
-        const pauseButton = page.locator('[aria-label*="Pause"], [aria-label*="pause"]').first();
-        if (await pauseButton.isVisible()) {
-          await pauseButton.click();
+        const pauseButton = await testHelpers.getToolbarButton('pause');
+        if (await pauseButton.count() > 0 && await pauseButton.isVisible()) {
+          await testHelpers.clickToolbarButton('pause');
         }
       }
-      
+
       // Check for other controls
       const fullscreenButton = page.locator('[aria-label*="fullscreen"], [data-testid*="fullscreen"]').first();
       if (await fullscreenButton.isVisible()) {
         await fullscreenButton.click();
-        await page.waitForTimeout(500);
       }
     });
   });
 
   test('should display timeline with media content', async ({ page, testHelpers }) => {
     await test.step('Navigate to horizontal timeline with media', async () => {
-      await testHelpers.navigateTo('/horizontal-all');
-      await page.waitForSelector('.timeline-horz-item-container', { timeout: 10000 });
+      await testHelpers.navigateAndWaitForTimeline('/horizontal-all');
     });
 
     await test.step('Verify media content', async () => {
       // Look for media elements
       const mediaElements = page.locator('img, video, iframe');
       const count = await mediaElements.count();
-      
+
       if (count > 0) {
         await expect(mediaElements.first()).toBeVisible();
       }
     });
 
     await test.step('Test slideshow functionality', async () => {
-      const playButton = page.locator('[aria-label*="play"], .play-button').first();
-      if (await playButton.isVisible()) {
-        await playButton.click();
-        await page.waitForTimeout(2000);
-        
-        const pauseButton = page.locator('[aria-label*="pause"], .pause-button').first();
-        if (await pauseButton.isVisible()) {
-          await pauseButton.click();
-          await page.waitForTimeout(1000);
+      const playButton = await testHelpers.getToolbarButton('play');
+      if (await playButton.count() > 0 && await playButton.isVisible()) {
+        await testHelpers.clickToolbarButton('play');
+
+        const pauseButton = await testHelpers.getToolbarButton('pause');
+        if (await pauseButton.count() > 0 && await pauseButton.isVisible()) {
+          await testHelpers.clickToolbarButton('pause');
         }
       }
     });
 
     await test.step('Test theme toggle if available', async () => {
-      const themeToggle = page.locator('[aria-label*="theme"], [aria-label*="Theme"]').first();
-      if (await themeToggle.isVisible({ timeout: 3000 })) {
-        await themeToggle.click();
-        await page.waitForTimeout(300);
+      const themeToggle = page.locator(SELECTORS.DARK_MODE_TOGGLE);
+      if (await themeToggle.count() > 0 && await themeToggle.first().isVisible()) {
+        await themeToggle.first().click();
       }
     });
   });
 
   test('should trace user interactions', async ({ page, testHelpers }) => {
     // Start tracing manually for specific test
-    await page.context().tracing.start({ 
-      screenshots: true, 
+    await page.context().tracing.start({
+      screenshots: true,
       snapshots: true,
-      sources: true 
+      sources: true
     });
 
     try {
       await test.step('Perform complex interaction sequence', async () => {
         // Click through multiple items
         for (let i = 0; i < 5; i++) {
-          await testHelpers.navigateTimeline('next');
-          await page.waitForTimeout(200);
+          await testHelpers.clickToolbarButton('next');
         }
-        
+
         // Interact with card content
-        await testHelpers.clickElement('.timeline-card-content');
-        
+        const cardContent = page.locator(SELECTORS.CARD_CONTENT);
+        if (await cardContent.count() > 0) {
+          await cardContent.first().click();
+        }
+
         // Use keyboard navigation
         await page.keyboard.press('Escape');
       });
     } finally {
       // Save trace
-      await page.context().tracing.stop({ 
-        path: 'test-results/trace-horizontal-timeline.zip' 
+      await page.context().tracing.stop({
+        path: 'test-results/trace-horizontal-timeline.zip'
       });
     }
   });

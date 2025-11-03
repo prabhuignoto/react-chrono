@@ -139,16 +139,14 @@ export const card = recipe({
       high: { boxShadow: tokens.semantic.shadow.cardHover },
     },
     interactive: {
-      true: [
-        interactive({ hover: 'lift' }),
-        {
-          selectors: {
-            '&:hover': {
-              boxShadow: tokens.semantic.shadow.cardHover,
-            },
+      true: {
+        selectors: {
+          '&:hover': {
+            boxShadow: tokens.semantic.shadow.cardHover,
+            transform: 'translateY(-1px)',
           },
         },
-      ],
+      },
       false: {},
     },
     fullWidth: {

@@ -120,8 +120,8 @@ export const selecter = style([
     cursor: 'pointer',
     userSelect: 'none',
     marginRight: '0.5rem',
-    height: '40px',
-    minWidth: '40px',
+    height: '36px',
+    minWidth: '36px',
     width: 'auto',
     padding: '0 0.875rem',
     fontWeight: tokens.semantic.typography.fontWeight.medium,
@@ -158,13 +158,14 @@ export const selecter = style([
       },
       '&:focus': {
         outline: 'none',
-        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}30`,
+        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}, 0 0 0 5px ${tokens.semantic.color.interactive.primary}40`,
       },
       '&:focus:not(:focus-visible)': { boxShadow: 'none' },
       '&:focus-visible': {
         outline: 'none',
-        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}30, 0 1px 3px rgba(0, 0, 0, 0.1)`,
-        background: `${tokens.semantic.color.interactive.primary}05`,
+        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}, 0 0 0 5px ${tokens.semantic.color.interactive.primary}40, 0 2px 8px -2px rgba(0, 0, 0, 0.15)`,
+        background: `${tokens.semantic.color.interactive.primary}08`,
+        borderColor: tokens.semantic.color.interactive.primary,
       },
       '&[aria-expanded="true"]': {
         background: `${tokens.semantic.color.interactive.primary}08`,
@@ -225,12 +226,7 @@ globalStyle(`${selecterIcon} svg`, {
 });
 
 export const selecterIconOpen = style({
-  transform: 'rotate(180deg)',
-  '@media': {
-    '(prefers-reduced-motion: reduce)': {
-      transform: 'none',
-    },
-  },
+  // Rotation animation removed
 });
 
 export const selecterLabel = style({
@@ -313,14 +309,15 @@ export const closeButton = style({
     },
     '&:focus': {
       outline: 'none',
-      boxShadow: `0 0 0 2px ${tokens.semantic.color.interactive.primary}40`,
+      boxShadow: `0 0 0 2px ${tokens.semantic.color.interactive.primary}, 0 0 0 4px ${tokens.semantic.color.interactive.primary}40`,
     },
     '&:focus:not(:focus-visible)': {
       boxShadow: 'none',
     },
     '&:focus-visible': {
       outline: 'none',
-      boxShadow: `0 0 0 2px ${tokens.semantic.color.interactive.primary}40`,
+      boxShadow: `0 0 0 2px ${tokens.semantic.color.interactive.primary}, 0 0 0 4px ${tokens.semantic.color.interactive.primary}40, 0 2px 8px -2px rgba(0, 0, 0, 0.15)`,
+      background: `${tokens.semantic.color.interactive.primary}08`,
     },
   },
   '@media': {

@@ -10,6 +10,7 @@ import {
 import { useTimelineContext } from '../contexts';
 import TimelineVerticalItem from './timeline-vertical-item';
 import { timelineVerticalWrapper } from './timeline-vertical.css';
+import { useRovingTabIndex } from '@hooks/accessibility/useRovingTabIndex';
 import React from 'react';
 
 /**
@@ -17,6 +18,9 @@ import React from 'react';
  * It maps over the provided `items` array and renders a `TimelineVerticalItem`
  * for each, handling layout variations (like alternating cards) and distributing
  * props and callbacks appropriately.
+ *
+ * Implements roving tabindex pattern for keyboard navigation (WCAG 2.1.1)
+ * Up/Down arrows navigate timeline items, Tab moves to next component
  *
  * @param {TimelineVerticalModel} props - The properties for the TimelineVertical component.
  * @returns {JSX.Element} The rendered TimelineVertical component.
@@ -43,6 +47,26 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
     // Use responsive detection from context instead of hardcoding based on mode
     // This enables proper responsive behavior for VERTICAL_ALTERNATING mode
     const { isMobile } = useTimelineContext();
+
+    /**
+     * Initialize roving tabindex for timeline items (WCAG 2.1.1: Keyboard)
+     * Handles Up/Down arrow key navigation through timeline items
+     * Only active item has tabIndex={0}, others have tabIndex={-1}
+     */
+    const rovingItemsConfig = useMemo(
+      () =>
+        items.map((item, index) => ({
+          id: item.id || `item-${index}`,
+          disabled: false,
+        })),
+      [items],
+    );
+
+    const { getItemProps } = useRovingTabIndex({
+      items: rovingItemsConfig,
+      orientation: 'vertical',
+      loop: false, // Explicit navigation, don't loop around
+    });
 
     /**
      * Callback handler passed to each TimelineVerticalItem's onActive.
@@ -96,6 +120,10 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
           customIcon = iconChildren;
         }
 
+        // Get roving tabindex props for this item
+        const itemId = item.id || `item-${index}`;
+        const rovingProps = getItemProps(itemId) as any;
+
         // Render the individual timeline item component
         return (
           <TimelineVerticalItem
@@ -115,6 +143,7 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
             slideShowRunning={!!slideShowRunning} // Pass down the slideshow state
             cardLess={!!cardLess} // Pass down the cardLess flag
             nestedCardHeight={nestedCardHeight ?? 0} // Pass down the nested card height
+            rovingProps={rovingProps} // Pass roving tabindex props
           />
         );
       });
@@ -131,6 +160,7 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
       slideShowRunning,
       cardLess,
       nestedCardHeight,
+      getItemProps,
     ]);
 
     // Render the main timeline wrapper

@@ -273,8 +273,8 @@ export const searchWrapper = style([
     backgroundColor: tokens.semantic.color.background.elevated,
     border: `1px solid ${tokens.semantic.color.border.default}`,
     borderRadius: tokens.semantic.borderRadius.md,
-    padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
-    minHeight: '36px',
+    padding: `0 ${tokens.semantic.spacing.sm}`,
+    height: '36px',
     width: 'var(--timeline-search-input-width, 100%)',
     maxWidth: 'var(--timeline-search-input-max-width, 100%)',
     position: 'relative',
@@ -294,8 +294,8 @@ export const searchWrapper = style([
 
     '@media': {
       'screen and (max-width: 767px)': {
-        minHeight: '32px',
-        padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
+        height: '32px',
+        padding: `0 ${tokens.semantic.spacing.sm}`,
       },
     },
   },
@@ -307,7 +307,6 @@ export const searchInput = style([
   {
     flexGrow: 1,
     border: 'none',
-    outline: 'none',
     background: 'transparent',
     color: tokens.semantic.color.text.primary,
     fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
@@ -316,8 +315,15 @@ export const searchInput = style([
     fontStyle: `var(--timeline-controls-font-style, normal)`,
     padding: tokens.semantic.spacing.xs,
     minWidth: 0,
+    // Remove focus outline - parent searchWrapper handles focus styling
+    outline: 'none',
 
     selectors: {
+      '&:focus': {
+        outline: 'none',
+        boxShadow: 'none',
+        border: 'none',
+      },
       '&::placeholder': {
         color: tokens.semantic.color.text.muted,
         opacity: 0.7,
@@ -325,8 +331,14 @@ export const searchInput = style([
         fontWeight: `var(--timeline-controls-font-weight, ${tokens.semantic.typography.fontWeight.normal})`,
         fontStyle: `var(--timeline-controls-font-style, normal)`,
       },
-      '&:focus': {
-        outline: 'none',
+      // Hide native browser clear button (Chrome, Safari)
+      '&::-webkit-search-cancel-button': {
+        display: 'none',
+        WebkitAppearance: 'none',
+      },
+      '&::-webkit-search-decoration': {
+        display: 'none',
+        WebkitAppearance: 'none',
       },
     },
 
@@ -342,7 +354,7 @@ export const searchInput = style([
 export const searchInfo = style([
   patterns.text({ variant: 'caption', color: 'muted' }),
   {
-    margin: `0 ${tokens.semantic.spacing.xs}`,
+    margin: '0 4px',
     whiteSpace: 'nowrap',
     flexShrink: 0,
     fontFamily: `var(--timeline-controls-font-family, ${baseFontFamily})`,
@@ -353,7 +365,7 @@ export const searchInfo = style([
     '@media': {
       'screen and (max-width: 767px)': {
         fontSize: '0.7rem',
-        margin: `0 ${tokens.semantic.spacing.xs}`,
+        margin: '0 4px',
       },
     },
   },
@@ -364,9 +376,9 @@ export const searchControls = style([
   sprinkles({
     display: 'flex',
     alignItems: 'center',
-    gap: 'xs',
   }),
   {
+    gap: '4px',
     flexShrink: 0,
     marginLeft: 'auto',
   },
@@ -376,9 +388,9 @@ export const searchControls = style([
 export const searchButton = style([
   patterns.toolbarButton(),
   {
-    width: '28px',
-    height: '28px',
-    minWidth: '28px',
+    width: '24px',
+    height: '24px',
+    minWidth: '24px',
     backgroundColor: tokens.semantic.color.background.elevated,
     border: `1px solid ${tokens.semantic.color.border.default}`,
     borderRadius: tokens.semantic.borderRadius.sm,
@@ -406,9 +418,8 @@ export const searchButton = style([
         color: '#ffffff',
         boxShadow: `inset 0 1px 2px rgba(0, 0, 0, 0.1)`,
       },
-      '&:focus-visible': {
-        outline: 'none',
-        boxShadow: `0 0 0 2px ${tokens.semantic.color.interactive.primary}40`,
+      '&:focus': {
+        boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}, 0 0 0 5px ${tokens.semantic.color.interactive.primary}40`,
         borderColor: tokens.semantic.color.interactive.primary,
       },
       '&:disabled': {
@@ -438,16 +449,16 @@ export const searchButtonIcon = style([
     justifyContent: 'center',
   }),
   {
-    width: '16px',
-    height: '16px',
+    width: '10px',
+    height: '10px',
     color: 'currentColor',
     transition: `transform ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
     flexShrink: 0,
 
     '@media': {
       'screen and (max-width: 767px)': {
-        width: '14px',
-        height: '14px',
+        width: '10px',
+        height: '10px',
       },
     },
   },
@@ -477,7 +488,6 @@ export const toolbarIconButton = recipe({
       boxShadow: `0 2px 8px -2px rgba(0, 0, 0, 0.1), 0 1px 4px -1px rgba(0, 0, 0, 0.06)`,
       transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.standard}`,
       userSelect: 'none',
-      outline: 'none',
 
       selectors: {
         '&:hover:not(:disabled)': {
@@ -495,9 +505,8 @@ export const toolbarIconButton = recipe({
           boxShadow: `0 1px 4px -1px ${tokens.semantic.color.interactive.primary}50, inset 0 1px 2px rgba(0, 0, 0, 0.1)`,
           transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.emphasized}`,
         },
-        '&:focus-visible': {
-          outline: 'none',
-          boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}60, 0 2px 8px -2px rgba(0, 0, 0, 0.1)`,
+        '&:focus': {
+          boxShadow: `0 0 0 3px ${tokens.semantic.color.interactive.primary}, 0 0 0 5px ${tokens.semantic.color.interactive.primary}40, 0 2px 8px -2px rgba(0, 0, 0, 0.15)`,
           borderColor: tokens.semantic.color.interactive.primary,
           backgroundColor: `${tokens.semantic.color.interactive.primary}10`,
           color: tokens.semantic.color.interactive.primary,
@@ -607,16 +616,17 @@ export const extraControls = style([
     visibility: 'visible',
     flexShrink: 0,
     flexWrap: 'wrap',
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
 ]);
 
 export const extraControlChild = style([
   sprinkles({
     display: 'flex',
+    alignItems: 'center',
   }),
   {
-    margin: `${tokens.semantic.spacing.xs} 0`,
+    margin: 0,
     marginRight: tokens.semantic.spacing.xs,
   },
 ]);

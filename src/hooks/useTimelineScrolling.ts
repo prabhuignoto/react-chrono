@@ -1,22 +1,10 @@
 import { useCallback, useEffect, useRef } from 'react';
+import { usePrefersReducedMotion } from './accessibility';
 
 type ScrollOptions = {
   behavior: ScrollBehavior;
   block: ScrollLogicalPosition;
   inline: ScrollLogicalPosition;
-};
-
-const SCROLL_OPTIONS: Record<'HORIZONTAL' | 'VERTICAL', ScrollOptions> = {
-  HORIZONTAL: {
-    behavior: 'smooth',
-    block: 'nearest',
-    inline: 'center',
-  },
-  VERTICAL: {
-    behavior: 'smooth',
-    block: 'center',
-    inline: 'center',
-  },
 };
 
 // Default scroll duration that balances smoothness with responsiveness
@@ -38,14 +26,29 @@ const easeInOutQuart = (t: number): number => {
 
 /**
  * Custom smooth scroll implementation for better control and smoother animation
+ * Respects user's motion preferences for accessibility (WCAG 2.3.3)
  */
 const smoothScrollTo = (
   container: Element,
   targetPosition: number,
   duration: number = DEFAULT_SCROLL_DURATION,
   isHorizontal: boolean = false,
+  prefersReducedMotion: boolean = false,
   onComplete?: () => void,
 ) => {
+  // Instant scroll when user prefers reduced motion
+  if (prefersReducedMotion || duration === 0) {
+    if (isHorizontal) {
+      container.scrollLeft = targetPosition;
+    } else {
+      container.scrollTop = targetPosition;
+    }
+    if (onComplete) {
+      onComplete();
+    }
+    return;
+  }
+
   const startPosition = isHorizontal
     ? container.scrollLeft
     : container.scrollTop;
@@ -77,8 +80,10 @@ const smoothScrollTo = (
 
 /**
  * Hook for handling timeline scrolling with smooth animation
+ * Respects user's motion preferences for accessibility (WCAG 2.3.3)
  */
 export const useTimelineScrolling = () => {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const scrollTimeoutRef = useRef<number | null>(null);
   const lastScrollTarget = useRef<HTMLElement | null>(null);
   // Timeout to clear last target after animation ends
@@ -135,7 +140,7 @@ export const useTimelineScrolling = () => {
           // Fallback to native scrollIntoView if available
           if (typeof element.scrollIntoView === 'function') {
             element.scrollIntoView({
-              behavior: 'smooth',
+              behavior: prefersReducedMotion ? 'auto' : 'smooth',
               block: isVerticalMode ? 'center' : 'nearest',
               inline: isVerticalMode ? 'center' : 'center',
             });
@@ -161,6 +166,7 @@ export const useTimelineScrolling = () => {
             targetScrollTop,
             DEFAULT_SCROLL_DURATION,
             false,
+            prefersReducedMotion,
           );
         } else {
           // Center horizontally with improved positioning
@@ -176,6 +182,7 @@ export const useTimelineScrolling = () => {
             targetScrollLeft,
             DEFAULT_SCROLL_DURATION,
             true,
+            prefersReducedMotion,
           );
         }
 
@@ -193,7 +200,7 @@ export const useTimelineScrolling = () => {
         scrollTimeoutRef.current = null;
       });
     },
-    [],
+    [prefersReducedMotion],
   );
 
   return { scrollToElement };

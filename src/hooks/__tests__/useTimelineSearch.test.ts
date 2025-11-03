@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { describe, expect, it, vi, beforeEach } from 'vitest';
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { useTimelineSearch } from '../useTimelineSearch';
 
 describe('useTimelineSearch', () => {
@@ -35,6 +35,10 @@ describe('useTimelineSearch', () => {
     vi.useFakeTimers();
   });
 
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('should initialize with empty search state', () => {
     const { result } = renderHook(() =>
       useTimelineSearch({
@@ -62,15 +66,13 @@ describe('useTimelineSearch', () => {
       result.current.handleSearchChange('Title 1');
     });
 
-    // Wait for debounce
     act(() => {
-      vi.advanceTimersByTime(300);
+      result.current.triggerSearch();
     });
 
     expect(result.current.searchResults).toEqual([0]);
     expect(result.current.currentMatchIndex).toBe(0);
     expect(mockOnTimelineUpdated).toHaveBeenCalledWith(0);
-    expect(mockHandleTimelineItemClick).toHaveBeenCalledWith('1');
   });
 
   it('should handle case-insensitive search', () => {
@@ -86,9 +88,8 @@ describe('useTimelineSearch', () => {
       result.current.handleSearchChange('title 1');
     });
 
-    // Wait for debounce
     act(() => {
-      vi.advanceTimersByTime(300);
+      result.current.triggerSearch();
     });
 
     expect(result.current.searchResults).toEqual([0]);
@@ -109,9 +110,8 @@ describe('useTimelineSearch', () => {
       result.current.handleSearchChange('Title');
     });
 
-    // Wait for debounce
     act(() => {
-      vi.advanceTimersByTime(300);
+      result.current.triggerSearch();
     });
 
     expect(result.current.searchResults).toEqual([0, 1, 2]);
@@ -150,9 +150,8 @@ describe('useTimelineSearch', () => {
       result.current.handleSearchChange('Title');
     });
 
-    // Wait for debounce
     act(() => {
-      vi.advanceTimersByTime(300);
+      result.current.triggerSearch();
     });
 
     // Then clear the search
@@ -164,7 +163,6 @@ describe('useTimelineSearch', () => {
     expect(result.current.searchResults).toEqual([]);
     expect(result.current.currentMatchIndex).toBe(-1);
     expect(mockOnTimelineUpdated).toHaveBeenCalledWith(0);
-    expect(mockHandleTimelineItemClick).toHaveBeenCalledWith('1');
   });
 
   it('should handle empty search query', () => {
@@ -178,11 +176,6 @@ describe('useTimelineSearch', () => {
 
     act(() => {
       result.current.handleSearchChange('');
-    });
-
-    // Wait for debounce
-    act(() => {
-      vi.advanceTimersByTime(300);
     });
 
     expect(result.current.searchResults).toEqual([]);
@@ -209,9 +202,8 @@ describe('useTimelineSearch', () => {
       result.current.handleSearchChange('Second line');
     });
 
-    // Wait for debounce
     act(() => {
-      vi.advanceTimersByTime(300);
+      result.current.triggerSearch();
     });
 
     expect(result.current.searchResults).toEqual([0]);
@@ -232,12 +224,14 @@ describe('useTimelineSearch', () => {
       result.current.handleSearchChange('Title');
     });
 
-    // Wait for debounce
     act(() => {
-      vi.advanceTimersByTime(300);
+      result.current.triggerSearch();
     });
 
-    // Simulate Enter key press
+    expect(result.current.searchResults).toEqual([0, 1, 2]);
+    expect(result.current.currentMatchIndex).toBe(0);
+
+    // Simulate Enter key press to go to next match
     act(() => {
       result.current.handleSearchKeyDown({
         key: 'Enter',

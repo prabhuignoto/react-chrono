@@ -22,6 +22,7 @@ import {
   searchInput as veSearchInput,
   searchWrapper as veSearchWrapper,
   extraControls as veExtraControls,
+  extraControlChild as veExtraControlChild,
   toolbarWrapper as veToolbarWrapper,
   searchButton as veSearchButton,
   searchButtonIcon as veSearchButtonIcon,
@@ -67,6 +68,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
   mode,
   searchQuery,
   onSearchChange,
+  onTriggerSearch,
   onClearSearch,
   onNextMatch,
   onPreviousMatch,
@@ -134,27 +136,6 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     onSearchChange(event.target.value);
   };
 
-  // Prevent search input from losing focus when timeline elements are clicked
-  const handleSearchInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    // Check if the new focus target is a timeline card or navigation element
-    const relatedTarget = event.relatedTarget as HTMLElement;
-
-    // If focus is moving to a timeline card or navigation, prevent blur
-    if (
-      relatedTarget &&
-      (relatedTarget.closest('[data-testid*="timeline"]') ||
-        relatedTarget.closest('.timeline-card') ||
-        relatedTarget.closest('.timeline-item'))
-    ) {
-      // Restore focus to search input after a short delay
-      setTimeout(() => {
-        if (searchInputRef?.current) {
-          searchInputRef.current.focus();
-        }
-      }, 10);
-    }
-  };
-
   // Handle clear search and focus the input
   const handleClearSearch = () => {
     onClearSearch();
@@ -193,8 +174,9 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
     <div
       className={veToolbarWrapper({ sticky: Boolean(stickyToolbar) })}
       role="toolbar"
-      aria-label="Timeline toolbar"
+      aria-label="Timeline toolbar with navigation, search, and layout controls"
       aria-orientation="horizontal"
+      aria-keyshortcuts="Tab to navigate controls sequentially"
     >
       <div
         className={veNavigationGroup}
@@ -234,24 +216,33 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             value={searchQuery}
             onChange={handleInputChange}
             onKeyDown={(event) => {
-              // Support Enter for next, Shift+Enter for previous, Escape to clear
+              // Support Enter for search/navigation, Shift+Enter for previous, Escape to clear
               if (event.key === 'Escape') {
                 event.preventDefault();
                 handleClearSearch();
                 return;
               }
-              if (event.key === 'Enter' && totalMatches > 0) {
+              if (event.key === 'Enter') {
                 event.preventDefault();
-                if (event.shiftKey) {
-                  onPreviousMatch();
-                } else {
-                  onNextMatch();
+
+                // First Enter: Trigger search if no results exist yet
+                if (totalMatches === 0 && searchQuery.trim()) {
+                  onTriggerSearch();
+                  return;
+                }
+
+                // Subsequent Enters: Navigate through existing results
+                if (totalMatches > 0) {
+                  if (event.shiftKey) {
+                    onPreviousMatch();
+                  } else {
+                    onNextMatch();
+                  }
                 }
                 return;
               }
               handleSearchKeyDown(event);
             }}
-            onBlur={handleSearchInputBlur}
             aria-label={textResolver.searchAriaLabel()}
             disabled={slideShowRunning}
             aria-keyshortcuts="Enter Shift+Enter Escape"
@@ -280,6 +271,24 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             role="group"
             aria-label="Search navigation"
           >
+            {/* ARIA live region for search match announcements (WCAG 4.1.3: Status Messages) */}
+            <span
+              data-testid="search-live-region"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+              style={{
+                position: 'absolute',
+                width: '1px',
+                height: '1px',
+                padding: 0,
+                margin: -1,
+                overflow: 'hidden',
+                clip: 'rect(0, 0, 0, 0)',
+                whiteSpace: 'nowrap',
+                border: 0,
+              }}
+            />
             {totalMatches > 0 && (
               <span
                 id={searchInfoId}
@@ -319,6 +328,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                   onClick={onPreviousMatch}
                   title={textResolver.previousMatch()}
                   aria-label={textResolver.previousMatch()}
+                  aria-controls={searchInfoId}
+                  aria-describedby={totalMatches > 0 ? searchInfoId : undefined}
                   disabled={disableSearchNav}
                   type="button"
                 >
@@ -331,6 +342,8 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
                   onClick={onNextMatch}
                   title={textResolver.nextMatch()}
                   aria-label={textResolver.nextMatch()}
+                  aria-controls={searchInfoId}
+                  aria-describedby={totalMatches > 0 ? searchInfoId : undefined}
                   disabled={disableSearchNav}
                   type="button"
                 >
@@ -351,7 +364,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
           role="group"
           aria-label="Additional timeline controls"
         >
-          <div className="control-wrapper" key="quick-jump">
+          <div className={veExtraControlChild} key="quick-jump">
             {enableQuickJump ? (
               <QuickJump
                 activeItem={activeTimelineItem ?? 0}
@@ -364,7 +377,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               />
             ) : null}
           </div>
-          <div className="control-wrapper" key="layout-switcher">
+          <div className={veExtraControlChild} key="layout-switcher">
             {!cardLess && enableLayoutSwitch ? (
               <LayoutSwitcher
                 isDarkMode={darkMode}
@@ -381,7 +394,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
             ) : null}
           </div>
           {canShowDensity ? (
-            <div className="control-wrapper" key="change-density">
+            <div className={veExtraControlChild} key="change-density">
               <ChangeDensity
                 isDarkMode={darkMode}
                 theme={theme}
@@ -392,7 +405,7 @@ const TimelineToolbar: FunctionComponent<TimelineToolbarProps> = ({
               ></ChangeDensity>
             </div>
           ) : null}
-          <div className="control-wrapper" key="fullscreen-control">
+          <div className={veExtraControlChild} key="fullscreen-control">
             {timelineRef && (
               <FullscreenControl
                 targetRef={timelineRef}

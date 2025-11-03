@@ -3,14 +3,17 @@ import React, {
   useCallback,
   useEffect,
   useLayoutEffect,
-  useReducer,
   useRef,
+  useMemo,
   memo,
   useState,
+  Children,
 } from 'react';
 import ReactDOM from 'react-dom';
-import useCloseClickOutside from 'src/components/effects/useCloseClickOutside';
-import { ChevronDown, CloseIcon } from 'src/components/icons';
+import useOutsideClick from '@hooks/useOutsideClick';
+import useEscapeKey from '@hooks/useEscapeKey';
+import { ChevronDown, CloseIcon } from '@components/icons';
+import { useFocusTrap } from '@hooks/useFocusManager';
 import { PopOverModel } from './popover.model';
 import {
   closeButton,
@@ -31,26 +34,6 @@ const MemoizedContent = memo(({ children }: { children: React.ReactNode }) => (
   <div className={content}>{children}</div>
 ));
 
-// Reducer for state management
-type State = { open: boolean; isVisible: boolean };
-type Action =
-  | { type: 'TOGGLE' }
-  | { type: 'CLOSE' }
-  | { type: 'SET_VISIBLE'; payload: boolean };
-
-const popoverReducer = (state: State, action: Action): State => {
-  switch (action.type) {
-    case 'TOGGLE':
-      return { ...state, open: !state.open };
-    case 'CLOSE':
-      return { ...state, open: false };
-    case 'SET_VISIBLE':
-      return { ...state, isVisible: action.payload };
-    default:
-      return state;
-  }
-};
-
 /**
  * A customizable popover component that displays content in a floating panel
  * @param {PopOverModel} props - Component props
@@ -65,23 +48,32 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   isDarkMode = false,
   icon,
   $isMobile = false,
+  onItemSelect,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const triggerButtonRef = useRef<HTMLButtonElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
-  const [state, dispatch] = useReducer(popoverReducer, {
-    open: false,
-    isVisible: false,
-  });
-  const [horizontalPosition, setHorizontalPosition] = useState<
-    'left' | 'right' | 'center'
-  >('center');
-  const [popoverPosition, setPopoverPosition] = useState({
-    top: 0,
-    left: 0,
-    width: 0,
+  const closeReasonRef = useRef<'escape' | 'click-outside' | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [popoverLayout, setPopoverLayout] = useState({
+    position: { top: 0, left: 0, width: 0 },
+    horizontalPosition: 'center' as 'left' | 'right' | 'center',
   });
   const [portalContainer, setPortalContainer] = useState<HTMLElement>(
     document.body,
+  );
+
+  // Focus trap DISABLED for dropdown menu pattern (WCAG 2.4.3)
+  // Dropdown menus should allow Tab to exit naturally to next toolbar element
+  // Focus trap is only appropriate for modal dialogs, not menu popups
+  // const focusTrapRef = useFocusTrap(isOpen);
+  const focusTrapRef = useRef<HTMLElement | null>(null);
+
+  // Memoize theme CSS variables to prevent recalculation on every render
+  const themeCssVars = useMemo(
+    () => computeCssVarsFromTheme(theme),
+    [theme],
   );
 
   // Get the current fullscreen element (with vendor prefix support)
@@ -135,20 +127,107 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   }, [getFullscreenElement]);
 
   const toggleOpen = useCallback(() => {
-    dispatch({ type: 'TOGGLE' });
+    setIsOpen((prev) => !prev);
   }, []);
 
-  const closePopover = useCallback(() => {
-    dispatch({ type: 'CLOSE' });
+  const closePopover = useCallback((closeReason: 'escape' | 'click-outside' = 'click-outside') => {
+    setIsOpen(false);
+    closeReasonRef.current = closeReason;
+
+    // IMPROVED: Selective focus restoration (WCAG 2.4.3: Focus Order)
+    // Only restore focus when closing via Escape key
+    // When user clicks outside, leave focus where they clicked
+
+    requestAnimationFrame(() => {
+      // Only restore focus if explicitly closed via Escape key
+      if (closeReason === 'escape' && triggerButtonRef.current) {
+        try {
+          triggerButtonRef.current.focus({ preventScroll: true });
+        } catch (_) {
+          // Silently ignore focus errors
+        }
+      }
+    });
   }, []);
+
+  /**
+   * Handle menu item selection - close popover and restore focus
+   * This is called when a menu item is selected via Enter/Space
+   * @param {string} itemId - The selected item ID
+   */
+  const handleItemSelect = useCallback(
+    (itemId: string) => {
+      // Call parent's onItemSelect callback if provided
+      onItemSelect?.(itemId);
+
+      // Close popover (handles focus restoration via closePopover)
+      closePopover();
+    },
+    [onItemSelect, closePopover],
+  );
 
   const handleKeyPress = useCallback((ev: React.KeyboardEvent) => {
-    if (ev.key === 'Enter') {
-      dispatch({ type: 'TOGGLE' });
-    }
-  }, []);
+    if (ev.key === 'Enter' || ev.key === ' ') {
+      ev.preventDefault();
+      toggleOpen();
+    } else if (ev.key === 'ArrowDown') {
+      // Arrow Down: Open menu and focus first item
+      ev.preventDefault();
+      ev.stopPropagation(); // Prevent timeline navigation from receiving this event
+      setIsOpen(true);
 
-  useCloseClickOutside(ref, closePopover);
+      // Focus first menu item after menu opens
+      requestAnimationFrame(() => {
+        if (!popoverRef.current) return;
+        const firstMenuItem = popoverRef.current.querySelector('[role="menuitem"]');
+        if (firstMenuItem instanceof HTMLElement) {
+          firstMenuItem.focus();
+          return;
+        }
+        // Fallback: focus first focusable element
+        const firstFocusable = popoverRef.current.querySelector(
+          'button:not([tabindex="-1"]), [tabindex="0"]'
+        );
+        if (firstFocusable instanceof HTMLElement) {
+          firstFocusable.focus();
+        }
+      });
+    } else if (ev.key === 'ArrowUp') {
+      // Arrow Up: Open menu and focus last item
+      ev.preventDefault();
+      ev.stopPropagation(); // Prevent timeline navigation from receiving this event
+      setIsOpen(true);
+
+      // Focus last menu item after menu opens
+      requestAnimationFrame(() => {
+        if (!popoverRef.current) return;
+        const menuItems = popoverRef.current.querySelectorAll('[role="menuitem"]');
+        if (menuItems.length > 0) {
+          const lastMenuItem = menuItems[menuItems.length - 1];
+          if (lastMenuItem instanceof HTMLElement) {
+            lastMenuItem.focus();
+            return;
+          }
+        }
+        // Fallback: focus last focusable element
+        const focusableElements = popoverRef.current.querySelectorAll(
+          'button:not([tabindex="-1"]), [tabindex="0"]'
+        );
+        if (focusableElements.length > 0) {
+          const lastFocusable = focusableElements[focusableElements.length - 1];
+          if (lastFocusable instanceof HTMLElement) {
+            lastFocusable.focus();
+          }
+        }
+      });
+    }
+  }, [toggleOpen]);
+
+  // Handle click outside to close popover with 'click-outside' reason (WCAG 2.1.2)
+  useOutsideClick(ref, () => closePopover('click-outside'));
+
+  // Handle Escape key to close popover with 'escape' reason (WCAG 2.1.2)
+  useEscapeKey(() => closePopover('escape'));
 
   // Calculate optimal positioning for portal rendering
   const calculatePopoverPosition = useCallback(() => {
@@ -218,100 +297,191 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     // Ensure minimum distance from viewport edge
     top = Math.max(16, top);
 
-    setPopoverPosition({ top, left, width: popoverWidth });
-    setHorizontalPosition(horizontalPos);
+    // Combine state updates to prevent double re-render
+    setPopoverLayout({
+      position: { top, left, width: popoverWidth },
+      horizontalPosition: horizontalPos,
+    });
   }, [width, $isMobile, position]);
 
   // Position calculation on layout changes and scroll/resize
   useLayoutEffect(() => {
-    if (state.open) {
+    if (isOpen) {
       calculatePopoverPosition();
     }
-  }, [state.open, calculatePopoverPosition]);
+  }, [isOpen, calculatePopoverPosition]);
 
-  // Recalculate position on scroll or resize
+  // Recalculate position on scroll or resize with RAF-based throttling
   useEffect(() => {
-    if (!state.open) return;
+    if (!isOpen) return;
 
+    // Use RAF to throttle position recalculation and prevent layout thrashing
+    let rafId: number | null = null;
     const handlePositionUpdate = () => {
-      if (state.open) {
+      if (rafId !== null) return; // Skip if RAF already scheduled
+
+      rafId = requestAnimationFrame(() => {
         calculatePopoverPosition();
-      }
+        rafId = null;
+      });
     };
 
     window.addEventListener('scroll', handlePositionUpdate, { passive: true });
     window.addEventListener('resize', handlePositionUpdate, { passive: true });
 
     return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
       window.removeEventListener('scroll', handlePositionUpdate);
       window.removeEventListener('resize', handlePositionUpdate);
     };
-  }, [state.open, calculatePopoverPosition]);
+  }, [isOpen, calculatePopoverPosition]);
 
-  // Use CSS transition instead of setTimeout
+  // Handle fade in/out animations with CSS
+  // Use RAF to ensure state change is applied to DOM before CSS animation plays
   useEffect(() => {
-    if (state.open) {
+    if (isOpen) {
+      // Fade in: trigger animation with RAF to ensure DOM is ready
       requestAnimationFrame(() => {
-        dispatch({ type: 'SET_VISIBLE', payload: true });
+        setIsVisible(true);
       });
     } else {
-      dispatch({ type: 'SET_VISIBLE', payload: false });
+      // Fade out: CSS animation plays naturally while portal stays in DOM
+      // Then isVisible becomes false, triggering opacity transition
+      setIsVisible(false);
     }
-  }, [state.open]);
+  }, [isOpen]);
+
+  // AUTO-FOCUS DISABLED for natural keyboard navigation (WCAG 2.4.3: Focus Order)
+  // Per ARIA Authoring Practices, dropdown menu buttons should:
+  // 1. Keep focus on trigger button when opened via mouse click
+  // 2. Only move focus to first item when opened via Arrow Down key
+  // 3. Allow Tab key to move to next toolbar element (not trap focus)
+  // This preserves natural tab order and prevents unexpected focus stealing
+  //
+  // If auto-focus is needed in specific cases, implement via parent component
+  // using the onItemSelect callback or custom keyboard handler
+
+  // useEffect(() => {
+  //   if (!isOpen || !popoverRef.current) return;
+  //   const rafId = requestAnimationFrame(() => {
+  //     if (!popoverRef.current) return;
+  //     const firstMenuItem = popoverRef.current.querySelector('[role="menuitem"]');
+  //     if (firstMenuItem instanceof HTMLElement) {
+  //       firstMenuItem.focus();
+  //       return;
+  //     }
+  //     const firstFocusable = popoverRef.current.querySelector(
+  //       'button:not([tabindex="-1"]), [tabindex="0"]'
+  //     );
+  //     if (firstFocusable instanceof HTMLElement) {
+  //       firstFocusable.focus();
+  //     }
+  //   });
+  //   return () => cancelAnimationFrame(rafId);
+  // }, [isOpen]);
+
+  /**
+   * Wrap children to intercept onClick for non-multiSelectable lists
+   * For multiSelectable lists, popover stays open to allow multiple selections
+   * and closes via Escape key or click outside
+   */
+  const wrappedChildren = useMemo(
+    () =>
+      Children.map(children, (child) => {
+        if (!React.isValidElement(child)) return child;
+        const typedChild = child as React.ReactElement<{
+          onClick?: (id?: string) => void;
+          multiSelectable?: boolean;
+          [key: string]: unknown;
+        }>;
+
+        // Check if this is a List component with onClick (non-multiSelectable)
+        const hasOnClick = !!typedChild.props?.onClick;
+        const isMultiSelectable = !!typedChild.props?.multiSelectable;
+
+        // Only wrap onClick for non-multiSelectable lists to avoid infinite loops
+        // MultiSelectable lists keep popover open for multiple selections
+        if (hasOnClick && !isMultiSelectable) {
+          return React.cloneElement(typedChild, {
+            onClick: (id?: string) => {
+              // Call original onClick
+              typedChild.props.onClick?.(id);
+              // Close popover after selection
+              if (id) {
+                handleItemSelect(id);
+              }
+            },
+          });
+        }
+
+        // Return unmodified for multiSelectable lists
+        return typedChild;
+      }),
+    [children, handleItemSelect],
+  );
 
   return (
     <>
       <div className={popoverWrapper} ref={ref}>
         <button
+          id="popover-trigger"
           type="button"
           onClick={toggleOpen}
           onKeyDown={handleKeyPress}
           title={placeholder}
           className={selecter}
-          style={computeCssVarsFromTheme(theme)}
-          aria-expanded={state.open}
-          aria-haspopup="dialog"
+          style={themeCssVars}
+          aria-expanded={isOpen}
+          aria-haspopup="menu"
           aria-label={placeholder || 'Open menu'}
+          tabIndex={0}
+          ref={triggerButtonRef}
         >
           {placeholder && <span className={selecterLabel}>{placeholder}</span>}
           <span
-            className={[selecterIcon, state.open ? selecterIconOpen : ''].join(
+            className={[selecterIcon, isOpen ? selecterIconOpen : ''].join(
               ' ',
             )}
           >
             {icon || <ChevronDown />}
           </span>
         </button>
-        {state.open &&
-          ReactDOM.createPortal(
-            <div
-              ref={popoverRef}
-              className={[
-                popoverHolder,
-                popoverHolderRecipe({
-                  visible: state.isVisible,
-                  position: position === 'bottom' ? 'bottom' : 'top',
-                  leftMobile: !!$isMobile,
-                }),
-              ].join(' ')}
-              style={{
-                ...computeCssVarsFromTheme(theme),
-                width: `${popoverPosition.width}px`,
-                position: 'fixed',
-                zIndex: 99999,
-                left: `${popoverPosition.left}px`,
-                top: `${popoverPosition.top}px`,
-                transform: 'none',
-              }}
-              data-position-x={horizontalPosition}
-              role="dialog"
-              aria-modal="false"
-              aria-labelledby={placeholder ? undefined : 'popover-content'}
-            >
+        {ReactDOM.createPortal(
+          <div
+            ref={(el) => {
+              // Combine focus trap ref with popover ref
+              popoverRef.current = el;
+              if (focusTrapRef.current !== el) {
+                focusTrapRef.current = el;
+              }
+            }}
+            className={[
+              popoverHolder,
+              popoverHolderRecipe({
+                visible: isVisible,
+                position: position === 'bottom' ? 'bottom' : 'top',
+                leftMobile: !!$isMobile,
+              }),
+            ].join(' ')}
+            style={{
+              ...themeCssVars,
+              width: `${popoverLayout.position.width}px`,
+              position: 'fixed',
+              zIndex: 99999,
+              left: `${popoverLayout.position.left}px`,
+              top: `${popoverLayout.position.top}px`,
+              transform: 'none',
+              // Prevent interaction when popover is not visible (fade-out animation playing)
+              pointerEvents: isVisible ? 'auto' : 'none',
+            }}
+            data-position-x={popoverLayout.horizontalPosition}
+            role="menu"
+            aria-labelledby="popover-trigger"
+          >
               <div className={header}>
                 <button
                   className={closeButton}
-                  onClick={closePopover}
+                  onClick={() => closePopover()}
                   type="button"
                   aria-label="Close menu"
                   title="Close menu"
@@ -319,7 +489,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
                   <CloseIcon />
                 </button>
               </div>
-              <MemoizedContent>{children}</MemoizedContent>
+              <MemoizedContent>{wrappedChildren}</MemoizedContent>
             </div>,
             portalContainer,
           )}

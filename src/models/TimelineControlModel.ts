@@ -18,25 +18,25 @@ export interface TimelineControlModel {
   isDark?: boolean;
 
   // Click event handler for moving to the first item.
-  onFirst?: () => void;
+  onFirst?: (event?: React.MouseEvent | React.KeyboardEvent) => void;
 
   // Click event handler for moving to the last item.
-  onLast?: () => void;
+  onLast?: (event?: React.MouseEvent | React.KeyboardEvent) => void;
 
   // Click event handler for moving to the next item.
-  onNext?: () => void;
+  onNext?: (event?: React.MouseEvent | React.KeyboardEvent) => void;
 
   // Click event handler for pausing the slide show.
-  onPaused?: () => void;
+  onPaused?: (event?: React.MouseEvent) => void;
 
   // Click event handler for moving to the previous item.
-  onPrevious?: () => void;
+  onPrevious?: (event?: React.MouseEvent | React.KeyboardEvent) => void;
 
   // Click event handler for replaying the slide show.
-  onReplay?: () => void;
+  onReplay?: (event?: React.MouseEvent) => void;
 
   // Click event handler for toggling dark mode.
-  onToggleDarkMode?: () => void;
+  onToggleDarkMode?: (event?: React.MouseEvent) => void;
 
   // Indicates whether slide show mode is enabled.
   slideShowEnabled?: boolean;

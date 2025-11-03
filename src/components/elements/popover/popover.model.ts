@@ -10,4 +10,5 @@ export type PopOverModel = {
   position: 'top' | 'bottom';
   theme?: Theme;
   width?: number;
+  onItemSelect?: (itemId: string) => void; // Called when menu item is selected
 };

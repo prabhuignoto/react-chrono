@@ -1,11 +1,11 @@
 import { test, expect } from '../fixtures/test-fixtures';
+import { SELECTORS } from '../fixtures/selector-map';
 
 test.describe('Timeline Cardless and Nested Features', () => {
   test.describe('Cardless Vertical Timeline', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to cardless vertical timeline', async () => {
-        await testHelpers.navigateTo('/timeline-without-cards');
-        await page.waitForTimeout(2000); // Allow timeline to load
+        await testHelpers.navigateAndWaitForTimeline('/timeline-without-cards');
       });
     });
 
@@ -71,15 +71,14 @@ test.describe('Timeline Cardless and Nested Features', () => {
       await test.step('Test interactions without cards', async () => {
         const timelineItems = page.locator('.vertical-item-row, .timeline-item');
         const count = await timelineItems.count();
-        
+
         if (count > 1) {
           // Click on timeline items
           for (let i = 0; i < Math.min(2, count); i++) {
             const item = timelineItems.nth(i);
             if (await item.isVisible()) {
               await item.click();
-              await page.waitForTimeout(300);
-              
+
               // Verify item is still functional
               await expect(item).toBeVisible();
             }
@@ -90,10 +89,9 @@ test.describe('Timeline Cardless and Nested Features', () => {
   });
 
   test.describe('Cardless Horizontal Timeline', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to cardless horizontal timeline', async () => {
-        await testHelpers.navigateTo('/timeline-without-cards-horizontal');
-        await page.waitForTimeout(2000);
+        await testHelpers.navigateAndWaitForTimeline('/timeline-without-cards-horizontal');
       });
     });
 
@@ -120,7 +118,7 @@ test.describe('Timeline Cardless and Nested Features', () => {
         
         if (await nextButton.isVisible()) {
           await nextButton.click();
-          await page.waitForTimeout(500);
+          // Removed waitForTimeout
           
           // Verify navigation still works
           const timelineItems = page.locator('.timeline-horz-item-container, .horizontal-item');
@@ -128,7 +126,7 @@ test.describe('Timeline Cardless and Nested Features', () => {
           
           if (await prevButton.isVisible()) {
             await prevButton.click();
-            await page.waitForTimeout(500);
+            // Removed waitForTimeout
           }
         }
       });
@@ -136,10 +134,9 @@ test.describe('Timeline Cardless and Nested Features', () => {
   });
 
   test.describe('Nested Timeline Items', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to nested timeline', async () => {
-        await testHelpers.navigateTo('/vertical-alternating-nested');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/vertical-alternating-nested');
       });
     });
 
@@ -177,14 +174,14 @@ test.describe('Timeline Cardless and Nested Features', () => {
           
           // Toggle expansion
           await expandButton.click();
-          await page.waitForTimeout(500);
+          // Removed waitForTimeout
           
           const newExpanded = await expandButton.getAttribute('aria-expanded');
           expect(newExpanded).not.toBe(initialExpanded);
           
           // Toggle back
           await expandButton.click();
-          await page.waitForTimeout(500);
+          // Removed waitForTimeout
         }
       });
     });
@@ -225,7 +222,7 @@ test.describe('Timeline Cardless and Nested Features', () => {
           for (let i = 0; i < Math.min(3, count); i++) {
             const item = timelineItems.nth(i);
             await item.click();
-            await page.waitForTimeout(300);
+            // Removed waitForTimeout
             
             // Look for nested content that might appear
             const nestedContent = page.locator('.nested-content, .sub-content');
@@ -239,10 +236,9 @@ test.describe('Timeline Cardless and Nested Features', () => {
   });
 
   test.describe('Alternating Nested Timeline', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to alternating nested timeline', async () => {
-        await testHelpers.navigateTo('/vertical-alternating-nested');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/vertical-alternating-nested');
       });
     });
 
@@ -278,7 +274,7 @@ test.describe('Timeline Cardless and Nested Features', () => {
           
           // Test interaction with nested content
           await nestedInAlternating.first().click();
-          await page.waitForTimeout(300);
+          // Removed waitForTimeout
           
           // Verify timeline remains functional
           const timelineItems = page.locator('.vertical-item-row');
@@ -296,7 +292,7 @@ test.describe('Timeline Cardless and Nested Features', () => {
           // Click on items to potentially reveal nested content
           const item = timelineItems.first();
           await item.click();
-          await page.waitForTimeout(500);
+          // Removed waitForTimeout
           
           // Look for any nested timeline that appears
           const nestedTimeline = page.locator(
@@ -310,7 +306,7 @@ test.describe('Timeline Cardless and Nested Features', () => {
             
             if (nestedCount > 0) {
               await nestedItems.first().click();
-              await page.waitForTimeout(300);
+              // Removed waitForTimeout
               await expect(nestedItems.first()).toBeVisible();
             }
           }
@@ -320,26 +316,25 @@ test.describe('Timeline Cardless and Nested Features', () => {
   });
 
   test.describe('Mixed Cardless and Nested Features', () => {
-    test('should handle combination of cardless and nested features', async ({ page, testHelpers }) => {
+    test('should handle combination of cardless and nested features', async ({ testHelpers, page }) => {
       await test.step('Test combined cardless and nested functionality', async () => {
         // This might not be a specific route, but test the concept
-        await testHelpers.navigateTo('/vertical-alternating-nested');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
-        
+        await testHelpers.navigateAndWaitForTimeline('/vertical-alternating-nested');
+
         const timelineItems = page.locator('.vertical-item-row');
         const count = await timelineItems.count();
-        
+
         if (count > 0) {
           // Test that nested items can work without heavy card styling
           const item = timelineItems.first();
           await item.click();
-          await page.waitForTimeout(500);
-          
+          // Removed waitForTimeout
+
           // Look for nested content without card containers
           const contentElements = page.locator(
             '.nested-content, .sub-content, p, span, .timeline-content'
           );
-          
+
           if (await contentElements.count() > 0) {
             await expect(contentElements.first()).toBeVisible();
           }
@@ -347,14 +342,13 @@ test.describe('Timeline Cardless and Nested Features', () => {
       });
     });
 
-    test('should maintain performance with complex nested structures', async ({ page, testHelpers }) => {
+    test('should maintain performance with complex nested structures', async ({ testHelpers, page }) => {
       await test.step('Test performance with complex structures', async () => {
-        await testHelpers.navigateTo('/vertical-alternating-nested');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
-        
+        await testHelpers.navigateAndWaitForTimeline('/vertical-alternating-nested');
+
         // Measure interaction responsiveness
         const startTime = Date.now();
-        
+
         const timelineItems = page.locator('.vertical-item-row');
         const count = await timelineItems.count();
         
@@ -379,10 +373,9 @@ test.describe('Timeline Cardless and Nested Features', () => {
   });
 
   test.describe('Custom Content in Cardless Mode', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to custom content timeline', async () => {
-        await testHelpers.navigateTo('/vertical-custom');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/vertical-custom');
       });
     });
 
@@ -416,7 +409,7 @@ test.describe('Timeline Cardless and Nested Features', () => {
           const element = interactiveElements.first();
           if (await element.isVisible()) {
             await element.click();
-            await page.waitForTimeout(300);
+            // Removed waitForTimeout
             
             // Verify timeline remains functional after custom interaction
             const timelineItems = page.locator('.vertical-item-row');

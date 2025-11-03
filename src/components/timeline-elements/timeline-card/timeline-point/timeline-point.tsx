@@ -59,7 +59,7 @@ const TimelinePoint: React.FC<TimelinePointProps> = ({
         aria-selected={active}
         aria-disabled={disabled}
         disabled={disabled}
-        tabIndex={disabled ? -1 : 0}
+        tabIndex={-1}
         type="button"
         style={{
           height: timelinePointDimension

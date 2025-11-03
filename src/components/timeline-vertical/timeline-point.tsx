@@ -195,14 +195,7 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
             finalDisableAutoScrollOnClick ||
             disableTimelinePoint
           }
-          tabIndex={
-            finalDisableClickOnCircle ||
-            finalDisableInteraction ||
-            finalDisableAutoScrollOnClick ||
-            disableTimelinePoint
-              ? -1
-              : 0
-          }
+          tabIndex={-1}
         >
           <div
             className={`${circleClass} ${veShape.shape} ${

@@ -16,4 +16,5 @@ export type ListItemModel = {
   selectable?: boolean;
   selected?: boolean;
   title: string;
+  rovingProps?: Record<string, any>; // Roving tabindex props from parent
 } & Pick<TimelineModel, 'theme'>;

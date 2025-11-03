@@ -1,4 +1,10 @@
-import React, { FunctionComponent, ReactNode, memo } from 'react';
+import React, {
+  FunctionComponent,
+  ReactNode,
+  memo,
+  useMemo,
+  useRef,
+} from 'react';
 import { jsx as _jsx } from 'react/jsx-runtime';
 // Using Vanilla Extract CSS classes instead of styled-components
 import {
@@ -18,6 +24,7 @@ import {
   toolbarWrapper as veToolbarWrapper,
   toolbarIconButton,
 } from './toolbar.css';
+import { useRovingTabIndex } from '@hooks/accessibility';
 import { ToolbarProps } from '@models/ToolbarProps';
 
 /**
@@ -57,20 +64,34 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
         React.isValidElement(child) && (child.props as any)?.role === 'toolbar',
     );
 
+    // Create toolbar items for roving tabindex pattern
+    // WCAG 2.4.3: Focus Order - Toolbar with roving tabindex
+    const toolbarItems = useMemo(
+      () => items.map((item, index) => ({ id: item.id || String(index), disabled: false })),
+      [items],
+    );
+
+    const { getItemProps, activeId } = useRovingTabIndex({
+      items: toolbarItems,
+      orientation: 'horizontal',
+      loop: false,
+    });
+
     return (
       <div
         className={veToolbarWrapper()}
         role={hasNestedToolbarRole ? undefined : 'toolbar'}
         aria-label={
-          hasNestedToolbarRole ? undefined : 'Timeline toolbar sample'
+          hasNestedToolbarRole ? undefined : 'Timeline controls'
         }
         aria-orientation={hasNestedToolbarRole ? undefined : 'horizontal'}
+        aria-keyshortcuts="ArrowLeft ArrowRight Home End"
         style={style}
         {...rest}
       >
         {items.map(
           (
-            { label, id, icon, minimizable, isMinimized, onToggleMinimize },
+            { label, id, icon, minimizable, isMinimized, onToggleMinimize, name, onSelect },
             index,
           ) => {
             if (!id) {
@@ -78,20 +99,40 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
               return null;
             }
 
+            const contentId = `toolbar-content-${id}`;
+
             const handleMinimizeToggle = () => {
               if (onToggleMinimize && minimizable) {
                 onToggleMinimize(id, !isMinimized);
               }
             };
 
+            const handleItemClick = () => {
+              if (onSelect && name) {
+                onSelect(id, name);
+              }
+            };
+
+            const itemProps = getItemProps(id);
+            const { ref, ...otherProps } = itemProps;
+
             return (
               <div
                 className={veToolbarListItem}
-                aria-label={label}
                 key={id}
                 role="group"
               >
-                {icon && <span className={veIconWrapper}>{icon}</span>}
+                <button
+                  {...otherProps}
+                  ref={ref as React.RefObject<HTMLButtonElement>}
+                  className={toolbarIconButton()}
+                  onClick={handleItemClick}
+                  aria-label={label || name}
+                  type="button"
+                  title={label || name}
+                >
+                  {icon && <span className={veIconWrapper}>{icon}</span>}
+                </button>
                 {minimizable && (
                   <button
                     className={toolbarIconButton({
@@ -101,6 +142,8 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
                     aria-label={
                       isMinimized ? `Maximize ${label}` : `Minimize ${label}`
                     }
+                    aria-controls={contentId}
+                    aria-expanded={!isMinimized}
                     type="button"
                     title={
                       isMinimized ? `Maximize ${label}` : `Minimize ${label}`
@@ -123,7 +166,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
                 {!isMinimized &&
                   Array.isArray(children) &&
                   (children as ReactNode[])[index] && (
-                    <span className={veContentWrapper}>
+                    <span className={veContentWrapper} id={contentId}>
                       {(children as ReactNode[])[index]}
                     </span>
                   )}
@@ -131,7 +174,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
                   !Array.isArray(children) &&
                   index === 0 &&
                   children && (
-                    <span className={veContentWrapper}>
+                    <span className={veContentWrapper} id={contentId}>
                       {children as ReactNode}
                     </span>
                   )}

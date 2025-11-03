@@ -33,7 +33,7 @@ const TitleMemoComponent = ({
       data-class={classString}
     >
       {url ? (
-        <a href={url} target="_blank" rel="noreferrer">
+        <a href={url} target="_blank" rel="noreferrer" tabIndex={-1}>
           {title}
         </a>
       ) : (

@@ -37,6 +37,7 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
     active,
     selected = false,
     selectable = false,
+    rovingProps,
   }: ListItemModel) => {
     /**
      * Memoized click handler
@@ -45,25 +46,37 @@ const ListItem: FunctionComponent<ListItemModel> = memo(
     const handleOnClick = useCallback((id: string) => onClick?.(id), [onClick]);
 
     /**
-     * Keyboard event handler for accessibility
+     * Merged keyboard event handler for menu item (WCAG 2.1.1: Keyboard)
+     * Combines roving tabindex (arrows) + menu selection (Enter/Space)
      * @param {KeyboardEvent} ev - Keyboard event
-     * @param {string} id - Item identifier
      */
-    const handleKeyPress = useCallback((ev: KeyboardEvent, id: string) => {
-      if (ev.key === 'Enter') {
-        handleOnClick(id);
-      }
-    }, []);
+    const handleKeyDown = useCallback(
+      (ev: KeyboardEvent) => {
+        // First, let roving tabindex handle arrow key navigation
+        if (rovingProps?.onKeyDown) {
+          rovingProps.onKeyDown(ev as any);
+        }
+
+        // Then handle Enter/Space for selection (if not already handled)
+        if (!ev.defaultPrevented && (ev.key === 'Enter' || ev.key === ' ')) {
+          ev.preventDefault();
+          handleOnClick(id);
+        }
+      },
+      [rovingProps, handleOnClick, id],
+    );
 
     const itemClass = `${listItem} ${active ? listItemActive : ''} ${listItemRecipe({ active: !!active })}`;
     return (
       <li
         data-testid="list-item"
-        key={id}
+        role="menuitem"
         onClick={() => handleOnClick(id)}
-        tabIndex={0}
-        onKeyUp={(ev) => handleKeyPress(ev, id)}
+        onKeyDown={handleKeyDown}
         className={itemClass}
+        tabIndex={rovingProps?.tabIndex ?? -1}
+        ref={rovingProps?.ref}
+        onFocus={rovingProps?.onFocus}
       >
         {selectable ? (
           <span className={checkboxWrapper}>

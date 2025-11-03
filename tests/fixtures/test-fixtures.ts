@@ -2,6 +2,7 @@ import { test as base, expect } from '@playwright/test';
 import { Page } from '@playwright/test';
 import fs from 'fs/promises';
 import path from 'path';
+import { SELECTORS, getTimelineItemSelector, getNavigationButtonSelector } from './selector-map';
 
 // Define custom fixture types
 export type TestFixtures = {
@@ -75,7 +76,8 @@ export class TestHelpers {
 
   // Wait for network idle
   async waitForNetworkIdle() {
-    await this.page.waitForLoadState('networkidle');
+    // Vite dev server keeps persistent connections; avoid waiting for 'networkidle'
+    await this.page.waitForLoadState('load').catch(() => {});
   }
 
   // Get timeline items
@@ -87,6 +89,314 @@ export class TestHelpers {
   async navigateTimeline(direction: 'next' | 'prev') {
     const selector = direction === 'next' ? '[aria-label="Next"]' : '[aria-label="Previous"]';
     await this.clickElement(selector);
+  }
+
+  // Modern Helper Methods for Timeline Testing
+
+  // Wait for timeline to be ready (replaces hardcoded waits)
+  async waitForTimelineReady() {
+    // Wait for timeline wrapper
+    await this.page.locator('[class*="timeline"], .timeline-main-wrapper').first().waitFor({ state: 'visible' });
+    // Wait for at least one timeline item
+    await this.page.locator('.vertical-item-row, .timeline-horz-item-container').first().waitFor({ state: 'visible' });
+    // Avoid 'networkidle' which may never fire under dev server websockets
+    await this.page.waitForLoadState('load').catch(() => {});
+  }
+
+  // Get currently active timeline item
+  async getActiveTimelineItem() {
+    return this.page.locator('[class*="active"], [aria-current], [data-active="true"]').first();
+  }
+
+  // Navigate timeline with keyboard
+  async navigateWithKeyboard(key: 'ArrowUp' | 'ArrowDown' | 'ArrowLeft' | 'ArrowRight' | 'Home' | 'End') {
+    await this.page.keyboard.press(key);
+    // Use web-first assertion instead of timeout
+    await this.page.locator('.vertical-item-row, .timeline-horz-item-container').first().waitFor({ state: 'visible' });
+  }
+
+  // Check for console errors (improved error detection)
+  async assertNoConsoleErrors(excludePatterns: string[] = []) {
+    const consoleErrors: string[] = [];
+
+    this.page.on('console', (msg) => {
+      if (msg.type() === 'error') {
+        const text = msg.text();
+        const shouldExclude = excludePatterns.some(pattern => text.includes(pattern));
+        if (!shouldExclude) {
+          consoleErrors.push(text);
+        }
+      }
+    });
+
+    return consoleErrors;
+  }
+
+  // Measure performance metrics
+  async measurePerformance() {
+    return this.page.evaluate(() => {
+      const perfEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+      if (perfEntries.length > 0) {
+        const navEntry = perfEntries[0];
+        return {
+          domContentLoaded: navEntry.domContentLoadedEventEnd - navEntry.fetchStart,
+          loadComplete: navEntry.loadEventEnd - navEntry.fetchStart,
+          timeToInteractive: navEntry.domInteractive - navEntry.fetchStart,
+        };
+      }
+      return null;
+    });
+  }
+
+  // Basic accessibility checks
+  async checkAccessibility() {
+    const issues: string[] = [];
+
+    // Check for images without alt text
+    const imagesWithoutAlt = await this.page.locator('img:not([alt])').count();
+    if (imagesWithoutAlt > 0) {
+      issues.push(`${imagesWithoutAlt} images without alt text`);
+    }
+
+    // Check for buttons without labels
+    const buttonsWithoutLabel = await this.page.locator('button:not([aria-label]):not(:has-text(" "))').count();
+    if (buttonsWithoutLabel > 0) {
+      issues.push(`${buttonsWithoutLabel} buttons without labels`);
+    }
+
+    // Check for proper heading hierarchy
+    const headings = await this.page.locator('h1, h2, h3, h4, h5, h6').evaluateAll(elements => {
+      return elements.map(el => parseInt(el.tagName.substring(1)));
+    });
+
+    // Check if headings skip levels
+    for (let i = 1; i < headings.length; i++) {
+      if (headings[i] - headings[i - 1] > 1) {
+        issues.push('Heading hierarchy skips levels');
+        break;
+      }
+    }
+
+    return issues;
+  }
+
+  // Wait for element with custom retry logic (replaces hardcoded waits)
+  async waitForElementWithRetry(selector: string, maxRetries = 3, retryDelay = 1000) {
+    for (let i = 0; i < maxRetries; i++) {
+      try {
+        await this.page.locator(selector).first().waitFor({ state: 'visible', timeout: retryDelay });
+        return true;
+      } catch (e) {
+        if (i === maxRetries - 1) throw e;
+      }
+    }
+    return false;
+  }
+
+  // Smart wait that combines multiple wait strategies
+  async smartWait(condition: () => Promise<boolean>, timeout = 5000, pollInterval = 100) {
+    const startTime = Date.now();
+    while (Date.now() - startTime < timeout) {
+      if (await condition()) {
+        return true;
+      }
+      await this.page.waitForTimeout(pollInterval);
+    }
+    return false;
+  }
+
+  // ============================================================================
+  // NEW HELPER METHODS FOR REDESIGNED APP (2025-10-27)
+  // ============================================================================
+
+  /**
+   * Get timeline items based on mode (uses centralized selectors)
+   * @param mode - Timeline mode: 'vertical', 'horizontal', or 'alternating'
+   * @returns Locator for all timeline items
+   */
+  async getTimelineItems(mode: 'vertical' | 'horizontal' | 'alternating' = 'vertical') {
+    const selector = getTimelineItemSelector(mode);
+    return this.page.locator(selector);
+  }
+
+  /**
+   * Get a specific timeline item by index
+   * @param index - Zero-based index of the item
+   * @param mode - Timeline mode
+   */
+  async getTimelineItemByIndex(index: number, mode: 'vertical' | 'horizontal' | 'alternating' = 'vertical') {
+    const items = await this.getTimelineItems(mode);
+    return items.nth(index);
+  }
+
+  /**
+   * Get toolbar button by type (uses ARIA labels)
+   * @param type - Button type
+   * @returns Locator for the button
+   */
+  async getToolbarButton(type: 'next' | 'previous' | 'first' | 'last' | 'play' | 'pause') {
+    const selector = getNavigationButtonSelector(type);
+    return this.page.locator(selector).first();
+  }
+
+  /**
+   * Click a toolbar button and wait for navigation to complete
+   * @param type - Button type
+   */
+  async clickToolbarButton(type: 'next' | 'previous' | 'first' | 'last' | 'play' | 'pause') {
+    const button = await this.getToolbarButton(type);
+    await button.waitFor({ state: 'visible' });
+    await button.click();
+    // Wait for any active item transition
+    await this.page.locator(SELECTORS.ACTIVE_ITEM).first().waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+  }
+
+  /**
+   * Get currently active timeline item using multiple strategies
+   */
+  async getActiveItem() {
+    return this.page.locator(SELECTORS.ACTIVE_ITEM).first();
+  }
+
+  /**
+   * Get timeline card content by index
+   * @param index - Zero-based index
+   */
+  async getCardContent(index: number) {
+    return this.page.locator(SELECTORS.CARD_CONTENT).nth(index);
+  }
+
+  /**
+   * Get timeline card title
+   * @param cardIndex - Zero-based card index
+   */
+  async getCardTitle(cardIndex: number) {
+    const card = await this.getCardContent(cardIndex);
+    return card.locator(SELECTORS.CARD_TITLE).first();
+  }
+
+  /**
+   * Get timeline card media (image/video)
+   * @param cardIndex - Zero-based card index
+   */
+  async getCardMedia(cardIndex: number) {
+    const card = await this.getCardContent(cardIndex);
+    return card.locator(SELECTORS.CARD_MEDIA).first();
+  }
+
+  /**
+   * Wait for timeline to be fully loaded and interactive
+   * Updated to work with redesigned demo app structure
+   */
+  async waitForTimelineFullyLoaded() {
+    // Wait for timeline wrapper
+    await this.page.locator(SELECTORS.TIMELINE_WRAPPER).first().waitFor({ state: 'visible', timeout: 10000 });
+
+    // Wait for at least one timeline item
+    await this.page.locator(`${SELECTORS.VERTICAL_ITEM}, ${SELECTORS.HORIZONTAL_ITEM}`).first().waitFor({ state: 'visible', timeout: 10000 });
+
+    // Avoid waiting for 'networkidle' due to persistent websocket connections in dev
+    await this.page.waitForLoadState('load').catch(() => {});
+
+    // Small delay for any animations to complete
+    await this.page.waitForTimeout(500);
+  }
+
+  /**
+   * Get timeline toolbar
+   */
+  async getToolbar() {
+    return this.page.locator(SELECTORS.TOOLBAR).first();
+  }
+
+  /**
+   * Check if toolbar button is enabled
+   * @param type - Button type
+   */
+  async isToolbarButtonEnabled(type: 'next' | 'previous' | 'first' | 'last' | 'play' | 'pause') {
+    const button = await this.getToolbarButton(type);
+    return !(await button.isDisabled());
+  }
+
+  /**
+   * Get nested timeline items (if any)
+   */
+  async getNestedItems() {
+    return this.page.locator(SELECTORS.NESTED_ITEM);
+  }
+
+  /**
+   * Focus on timeline wrapper for keyboard navigation
+   */
+  async focusTimeline() {
+    const timeline = this.page.locator(SELECTORS.TIMELINE_WRAPPER).first();
+    await timeline.focus();
+  }
+
+  /**
+   * Assert that an element has focus
+   * @param selector - Element selector
+   */
+  async assertHasFocus(selector: string) {
+    const focusedElement = await this.page.evaluate(() => document.activeElement?.className || '');
+    const targetElement = await this.page.locator(selector).first();
+    const targetClass = await targetElement.getAttribute('class');
+    expect(focusedElement).toContain(targetClass || '');
+  }
+
+  /**
+   * Get all timeline points/circles
+   */
+  async getTimelinePoints() {
+    return this.page.locator(SELECTORS.TIMELINE_POINT);
+  }
+
+  /**
+   * Click a timeline point by index
+   * @param index - Zero-based index
+   */
+  async clickTimelinePoint(index: number) {
+    const points = await this.getTimelinePoints();
+    const point = points.nth(index);
+    await point.waitFor({ state: 'visible' });
+    await point.click();
+    // Wait for transition
+    await this.page.waitForTimeout(300);
+  }
+
+  /**
+   * Assert timeline item count
+   * @param expectedCount - Expected number of items
+   * @param mode - Timeline mode
+   */
+  async assertTimelineItemCount(expectedCount: number, mode: 'vertical' | 'horizontal' | 'alternating' = 'vertical') {
+    const items = await this.getTimelineItems(mode);
+    await expect(items).toHaveCount(expectedCount);
+  }
+
+  /**
+   * Get demo page layout wrapper (new in redesigned app)
+   */
+  async getDemoPageLayout() {
+    return this.page.locator(SELECTORS.DEMO_PAGE_LAYOUT).first();
+  }
+
+  /**
+   * Check if element is visible in viewport
+   * @param selector - Element selector
+   */
+  async isVisibleInViewport(selector: string) {
+    const element = this.page.locator(selector).first();
+    return await element.isVisible();
+  }
+
+  /**
+   * Navigate and wait for timeline to be ready (combined helper)
+   * @param url - URL to navigate to
+   */
+  async navigateAndWaitForTimeline(url: string) {
+    await this.navigateTo(url);
+    await this.waitForTimelineFullyLoaded();
   }
 }
 

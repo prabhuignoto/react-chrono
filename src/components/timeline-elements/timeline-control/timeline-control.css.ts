@@ -49,7 +49,7 @@ export const navButton = style({
   transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
   width: '36px',
   selectors: {
-    '&:disabled': {
+    '&:disabled, &[aria-disabled="true"]': {
       opacity: 0.4,
       cursor: 'not-allowed',
       pointerEvents: 'none',
@@ -153,7 +153,6 @@ export const controlButton = style([
     height: '3em',
     marginLeft: '0.5em',
     width: '3em',
-    outline: 0,
     color: '#fff',
   },
 ]);

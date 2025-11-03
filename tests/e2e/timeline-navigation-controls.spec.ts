@@ -1,45 +1,44 @@
 import { test, expect } from '../fixtures/test-fixtures';
+import { SELECTORS } from '../fixtures/selector-map';
 
 test.describe('Timeline Navigation and Controls', () => {
   test.describe('Basic Navigation Controls', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to horizontal timeline', async () => {
-        await testHelpers.navigateTo('/horizontal');
-        await page.waitForSelector('.timeline-horz-item-container', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/horizontal');
       });
     });
 
-    test('should display navigation buttons', async ({ page }) => {
+    test('should display navigation buttons', async ({ testHelpers }) => {
       await test.step('Check for next and previous buttons', async () => {
-        const nextButton = page.locator('[aria-label="Next"], [data-testid*="next"], .next-button');
-        const prevButton = page.locator('[aria-label="Previous"], [data-testid*="prev"], .prev-button');
-        
+        const nextButton = await testHelpers.getToolbarButton('next');
+        const prevButton = await testHelpers.getToolbarButton('previous');
+
         // At least one navigation button should be visible
         const nextCount = await nextButton.count();
         const prevCount = await prevButton.count();
-        
+
         expect(nextCount + prevCount).toBeGreaterThan(0);
-        
+
         if (nextCount > 0) {
-          await expect(nextButton.first()).toBeVisible();
+          await expect(nextButton).toBeVisible();
         }
       });
     });
 
-    test('should navigate forward through timeline items', async ({ page, testHelpers }) => {
+    test('should navigate forward through timeline items', async ({ testHelpers }) => {
       await test.step('Test forward navigation', async () => {
-        const nextButton = page.locator('[aria-label="Next"]').first();
-        
+        const nextButton = await testHelpers.getToolbarButton('next');
+
         if (await nextButton.isVisible()) {
           // Get initial timeline state
-          const timelineItems = page.locator('.timeline-horz-item-container');
+          const timelineItems = await testHelpers.getTimelineItems('horizontal');
           const initialCount = await timelineItems.count();
-          
+
           // Click next multiple times
           for (let i = 0; i < Math.min(3, initialCount); i++) {
-            await nextButton.click();
-            await page.waitForTimeout(500);
-            
+            await testHelpers.clickToolbarButton('next');
+
             // Verify timeline is still functional
             await expect(timelineItems.first()).toBeVisible();
           }
@@ -47,56 +46,53 @@ test.describe('Timeline Navigation and Controls', () => {
       });
     });
 
-    test('should navigate backward through timeline items', async ({ page }) => {
+    test('should navigate backward through timeline items', async ({ testHelpers }) => {
       await test.step('Test backward navigation', async () => {
-        const nextButton = page.locator('[aria-label="Next"]').first();
-        const prevButton = page.locator('[aria-label="Previous"]').first();
-        
+        const nextButton = await testHelpers.getToolbarButton('next');
+        const prevButton = await testHelpers.getToolbarButton('previous');
+
         if (await nextButton.isVisible()) {
           // First navigate forward
-          await nextButton.click();
-          await page.waitForTimeout(500);
-          
+          await testHelpers.clickToolbarButton('next');
+
           // Then navigate backward
           if (await prevButton.isVisible()) {
-            await prevButton.click();
-            await page.waitForTimeout(500);
-            
+            await testHelpers.clickToolbarButton('previous');
+
             // Verify timeline is still functional
-            const timelineItems = page.locator('.timeline-horz-item-container');
+            const timelineItems = await testHelpers.getTimelineItems('horizontal');
             await expect(timelineItems.first()).toBeVisible();
           }
         }
       });
     });
 
-    test('should handle navigation boundaries', async ({ page }) => {
+    test('should handle navigation boundaries', async ({ testHelpers }) => {
       await test.step('Test navigation limits', async () => {
-        const prevButton = page.locator('[aria-label="Previous"]').first();
-        
+        const prevButton = await testHelpers.getToolbarButton('previous');
+
         // At the beginning, previous button might be disabled or not visible
         if (await prevButton.count() > 0) {
           const isEnabled = await prevButton.isEnabled();
           const isVisible = await prevButton.isVisible();
-          
+
           // Button might be disabled or hidden at start
           if (isVisible && !isEnabled) {
             // This is expected behavior at the beginning
             expect(isEnabled).toBeFalsy();
           }
         }
-        
+
         // Navigate to end and test next button
-        const nextButton = page.locator('[aria-label="Next"]').first();
-        const timelineItems = page.locator('.timeline-horz-item-container');
+        const nextButton = await testHelpers.getToolbarButton('next');
+        const timelineItems = await testHelpers.getTimelineItems('horizontal');
         const totalItems = await timelineItems.count();
-        
+
         if (await nextButton.isVisible() && totalItems > 1) {
           // Navigate to near the end
           for (let i = 0; i < Math.min(totalItems - 1, 5); i++) {
             if (await nextButton.isEnabled()) {
-              await nextButton.click();
-              await page.waitForTimeout(300);
+              await testHelpers.clickToolbarButton('next');
             } else {
               break;
             }
@@ -107,48 +103,42 @@ test.describe('Timeline Navigation and Controls', () => {
   });
 
   test.describe('Timeline Item Selection', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to vertical timeline', async () => {
-        await testHelpers.navigateTo('/vertical-basic');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/vertical-basic');
       });
     });
 
-    test('should select timeline items on click', async ({ page }) => {
+    test('should select timeline items on click', async ({ testHelpers }) => {
       await test.step('Test item selection', async () => {
-        const timelineItems = page.locator('.vertical-item-row');
+        const timelineItems = await testHelpers.getTimelineItems('vertical');
         const count = await timelineItems.count();
-        
+
         if (count > 1) {
           // Click on different items
           for (let i = 0; i < Math.min(3, count); i++) {
             const item = timelineItems.nth(i);
             await expect(item).toBeVisible();
             await item.click();
-            await page.waitForTimeout(300);
-            
-            // Verify item is interactive
+            // Wait for active state change
             await expect(item).toBeVisible();
           }
         }
       });
     });
 
-    test('should show active item state', async ({ page }) => {
+    test('should show active item state', async ({ testHelpers, page }) => {
       await test.step('Test active item indication', async () => {
-        const timelineItems = page.locator('.vertical-item-row');
+        const timelineItems = await testHelpers.getTimelineItems('vertical');
         const count = await timelineItems.count();
-        
+
         if (count > 0) {
           const firstItem = timelineItems.first();
           await firstItem.click();
-          await page.waitForTimeout(300);
-          
-          // Look for active state indicators
-          const activeElements = page.locator(
-            '[class*="active"], [aria-current], [data-active="true"], .selected'
-          );
-          
+
+          // Look for active state indicators using SELECTORS
+          const activeElements = page.locator(SELECTORS.ACTIVE_ITEM);
+
           // At least some element should indicate active state
           const activeCount = await activeElements.count();
           if (activeCount > 0) {
@@ -158,21 +148,18 @@ test.describe('Timeline Navigation and Controls', () => {
       });
     });
 
-    test('should display card content for selected items', async ({ page }) => {
+    test('should display card content for selected items', async ({ testHelpers, page }) => {
       await test.step('Test card content display', async () => {
-        const timelineItems = page.locator('.vertical-item-row');
+        const timelineItems = await testHelpers.getTimelineItems('vertical');
         const count = await timelineItems.count();
-        
+
         if (count > 0) {
           const item = timelineItems.nth(1);
           await item.click();
-          await page.waitForTimeout(500);
-          
-          // Look for card content
-          const cardContent = page.locator(
-            '.timeline-card-content, .card-content, .rc-card-title, .rc-card-subtitle'
-          );
-          
+
+          // Look for card content using SELECTORS
+          const cardContent = page.locator(SELECTORS.CARD_CONTENT);
+
           const contentCount = await cardContent.count();
           if (contentCount > 0) {
             await expect(cardContent.first()).toBeVisible();
@@ -183,70 +170,60 @@ test.describe('Timeline Navigation and Controls', () => {
   });
 
   test.describe('Toolbar Controls', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to timeline with toolbar', async () => {
-        await testHelpers.navigateTo('/vertical-basic');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/vertical-basic');
       });
     });
 
-    test('should display toolbar controls', async ({ page }) => {
+    test('should display toolbar controls', async ({ testHelpers }) => {
       await test.step('Check for toolbar presence', async () => {
-        // Look for various toolbar elements
-        const toolbarElements = page.locator(
-          '.toolbar, [class*="toolbar"], [role="toolbar"], ' +
-          '[aria-label*="dark"], [aria-label*="fullscreen"], [aria-label*="outline"]'
-        );
-        
-        const count = await toolbarElements.count();
+        // Use helper to get toolbar
+        const toolbar = await testHelpers.getToolbar();
+
+        const count = await toolbar.count();
         if (count > 0) {
-          await expect(toolbarElements.first()).toBeVisible();
+          await expect(toolbar).toBeVisible();
         }
       });
     });
 
-    test('should toggle layout modes', async ({ page }) => {
+    test('should toggle layout modes', async ({ testHelpers, page }) => {
       await test.step('Test layout switching', async () => {
         // Look for layout toggle buttons
         const layoutButtons = page.locator(
           '[aria-label*="layout"], .layout-button, button:has([class*="layout"])'
         );
-        
+
         if (await layoutButtons.count() > 0) {
           const button = layoutButtons.first();
           if (await button.isVisible()) {
             await button.click();
-            await page.waitForTimeout(500);
-            
+
             // Verify timeline still renders after layout change
-            const timelineItems = page.locator('.vertical-item-row, .timeline-horz-item-container');
+            const timelineItems = await testHelpers.getTimelineItems('vertical');
             await expect(timelineItems.first()).toBeVisible();
           }
         }
       });
     });
 
-    test('should control timeline playback', async ({ page }) => {
+    test('should control timeline playback', async ({ testHelpers }) => {
       await test.step('Test playback controls', async () => {
-        // Look for play/pause controls
-        const playControls = page.locator(
-          '[aria-label*="play"], [aria-label*="pause"], ' +
-          '.play-button, .pause-button, button:has-text("Play"), button:has-text("Pause")'
-        );
-        
-        if (await playControls.count() > 0) {
-          const control = playControls.first();
-          if (await control.isVisible()) {
-            await control.click();
-            await page.waitForTimeout(1000);
-            
-            // Look for state change
-            const pauseButton = page.locator('[aria-label*="pause"], .pause-button');
+        // Use helper to get play button
+        const playButton = await testHelpers.getToolbarButton('play');
+
+        if (await playButton.count() > 0) {
+          if (await playButton.isVisible()) {
+            await testHelpers.clickToolbarButton('play');
+
+            // Look for pause button (state change)
+            const pauseButton = await testHelpers.getToolbarButton('pause');
             if (await pauseButton.count() > 0) {
-              await expect(pauseButton.first()).toBeVisible();
-              
+              await expect(pauseButton).toBeVisible();
+
               // Stop playback
-              await pauseButton.first().click();
+              await testHelpers.clickToolbarButton('pause');
             }
           }
         }
@@ -255,69 +232,64 @@ test.describe('Timeline Navigation and Controls', () => {
   });
 
   test.describe('Scroll-based Navigation', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to scrollable timeline', async () => {
-        await testHelpers.navigateTo('/vertical-basic');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/vertical-basic');
       });
     });
 
-    test('should respond to scroll events', async ({ page }) => {
+    test('should respond to scroll events', async ({ page, testHelpers }) => {
       await test.step('Test scroll-based navigation', async () => {
-        const timeline = page.locator('.timeline-main-wrapper, [class*="timeline"]').first();
-        const timelineItems = page.locator('.vertical-item-row');
+        const timeline = page.locator(SELECTORS.TIMELINE_MAIN).first();
+        const timelineItems = await testHelpers.getTimelineItems('vertical');
         const count = await timelineItems.count();
-        
+
         if (count > 3) {
           // Scroll down
           await timeline.evaluate(el => el.scrollBy(0, 500));
-          await page.waitForTimeout(300);
-          
+
           // Verify timeline items are still visible
           await expect(timelineItems.first()).toBeVisible();
-          
+
           // Scroll back up
           await timeline.evaluate(el => el.scrollBy(0, -500));
-          await page.waitForTimeout(300);
-          
+
           await expect(timelineItems.first()).toBeVisible();
         }
       });
     });
 
-    test('should handle smooth scrolling', async ({ page }) => {
+    test('should handle smooth scrolling', async ({ testHelpers }) => {
       await test.step('Test smooth scroll behavior', async () => {
-        const timelineItems = page.locator('.vertical-item-row');
+        const timelineItems = await testHelpers.getTimelineItems('vertical');
         const count = await timelineItems.count();
-        
+
         if (count > 2) {
           // Scroll to a specific item
           const targetItem = timelineItems.nth(2);
           await targetItem.scrollIntoViewIfNeeded();
-          await page.waitForTimeout(500);
-          
+
           // Verify item is visible
           await expect(targetItem).toBeVisible();
         }
       });
     });
 
-    test('should update active item based on scroll position', async ({ page }) => {
+    test('should update active item based on scroll position', async ({ page, testHelpers }) => {
       await test.step('Test scroll-based active item updates', async () => {
-        const timeline = page.locator('.timeline-main-wrapper, [class*="timeline"]').first();
-        const timelineItems = page.locator('.vertical-item-row');
+        const timeline = page.locator(SELECTORS.TIMELINE_MAIN).first();
+        const timelineItems = await testHelpers.getTimelineItems('vertical');
         const count = await timelineItems.count();
-        
+
         if (count > 3) {
           // Scroll to middle
           await timeline.evaluate(el => {
             const middle = el.scrollHeight / 2;
             el.scrollTo(0, middle);
           });
-          await page.waitForTimeout(1000);
-          
+
           // Look for active state changes
-          const activeElements = page.locator('[class*="active"], [aria-current]');
+          const activeElements = page.locator(SELECTORS.ACTIVE_ITEM);
           if (await activeElements.count() > 0) {
             await expect(activeElements.first()).toBeVisible();
           }
@@ -331,24 +303,21 @@ test.describe('Timeline Navigation and Controls', () => {
       await test.step('Test mobile touch navigation', async () => {
         // Set mobile viewport
         await page.setViewportSize({ width: 375, height: 667 });
-        await testHelpers.navigateTo('/horizontal');
-        await page.waitForSelector('.timeline-horz-item-container', { timeout: 10000 });
-        
+        await testHelpers.navigateAndWaitForTimeline('/horizontal');
+
         // Simulate touch interactions
-        const timeline = page.locator('[class*="timeline"]').first();
+        const timeline = page.locator(SELECTORS.TIMELINE_MAIN).first();
         const box = await timeline.boundingBox();
-        
+
         if (box) {
           // Simulate swipe gesture
           await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
           await page.mouse.down();
           await page.mouse.move(box.x + box.width / 4, box.y + box.height / 2);
           await page.mouse.up();
-          
-          await page.waitForTimeout(500);
-          
+
           // Verify timeline still works
-          const timelineItems = page.locator('.timeline-horz-item-container');
+          const timelineItems = await testHelpers.getTimelineItems('horizontal');
           await expect(timelineItems.first()).toBeVisible();
         }
       });
@@ -357,20 +326,17 @@ test.describe('Timeline Navigation and Controls', () => {
     test('should handle pinch zoom gestures', async ({ page, testHelpers }) => {
       await test.step('Test pinch zoom support', async () => {
         await page.setViewportSize({ width: 375, height: 667 });
-        await testHelpers.navigateTo('/vertical-basic');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
-        
+        await testHelpers.navigateAndWaitForTimeline('/vertical-basic');
+
         // Simulate zoom (limited testing in browser environment)
         await page.keyboard.down('Control');
         await page.keyboard.press('Equal'); // Zoom in
         await page.keyboard.up('Control');
-        
-        await page.waitForTimeout(300);
-        
+
         // Verify timeline still renders properly
-        const timelineItems = page.locator('.vertical-item-row');
+        const timelineItems = await testHelpers.getTimelineItems('vertical');
         await expect(timelineItems.first()).toBeVisible();
-        
+
         // Reset zoom
         await page.keyboard.down('Control');
         await page.keyboard.press('Digit0'); // Reset zoom
@@ -380,21 +346,17 @@ test.describe('Timeline Navigation and Controls', () => {
   });
 
   test.describe('Search and Filter Navigation', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to timeline with search', async () => {
-        await testHelpers.navigateTo('/vertical-basic');
-        await page.waitForSelector('.vertical-item-row', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/vertical-basic');
       });
     });
 
     test('should display search controls if available', async ({ page }) => {
       await test.step('Check for search functionality', async () => {
-        // Look for search input or button
-        const searchElements = page.locator(
-          'input[type="search"], input[placeholder*="search"], ' +
-          '[aria-label*="search"], .search-input, .search-button'
-        );
-        
+        // Look for search input or button using SELECTORS
+        const searchElements = page.locator(SELECTORS.SEARCH_INPUT);
+
         const count = await searchElements.count();
         if (count > 0) {
           await expect(searchElements.first()).toBeVisible();
@@ -402,33 +364,30 @@ test.describe('Timeline Navigation and Controls', () => {
       });
     });
 
-    test('should filter timeline items based on search', async ({ page }) => {
+    test('should filter timeline items based on search', async ({ page, testHelpers }) => {
       await test.step('Test search filtering', async () => {
-        const searchInput = page.locator('input[type="search"], input[placeholder*="search"]');
-        
+        const searchInput = page.locator(SELECTORS.SEARCH_INPUT);
+
         if (await searchInput.count() > 0) {
           const input = searchInput.first();
           await input.fill('test');
-          await page.waitForTimeout(500);
-          
+
           // Verify timeline still displays (filtered results)
-          const timelineItems = page.locator('.vertical-item-row');
+          const timelineItems = await testHelpers.getTimelineItems('vertical');
           const visibleItems = await timelineItems.count();
           expect(visibleItems).toBeGreaterThanOrEqual(0);
-          
+
           // Clear search
           await input.clear();
-          await page.waitForTimeout(300);
         }
       });
     });
   });
 
   test.describe('Breadcrumb and Position Navigation', () => {
-    test.beforeEach(async ({ page, testHelpers }) => {
+    test.beforeEach(async ({ testHelpers }) => {
       await test.step('Navigate to timeline with position indicators', async () => {
-        await testHelpers.navigateTo('/horizontal-all');
-        await page.waitForSelector('.timeline-horz-item-container', { timeout: 10000 });
+        await testHelpers.navigateAndWaitForTimeline('/horizontal-all');
       });
     });
 
@@ -439,7 +398,7 @@ test.describe('Timeline Navigation and Controls', () => {
           '.position-indicator, .breadcrumb, .progress, ' +
           '[class*="position"], [class*="progress"], [aria-label*="progress"]'
         );
-        
+
         const count = await positionIndicators.count();
         if (count > 0) {
           await expect(positionIndicators.first()).toBeVisible();
@@ -447,26 +406,19 @@ test.describe('Timeline Navigation and Controls', () => {
       });
     });
 
-    test('should allow direct navigation to positions', async ({ page }) => {
+    test('should allow direct navigation to positions', async ({ testHelpers }) => {
       await test.step('Test direct position navigation', async () => {
-        // Look for clickable position indicators
-        const positionLinks = page.locator(
-          'button[data-index], .timeline-point, .position-marker, ' +
-          '[role="button"][data-position], .nav-dot'
-        );
-        
-        const count = await positionLinks.count();
+        // Look for clickable timeline points using helper
+        const points = await testHelpers.getTimelinePoints();
+
+        const count = await points.count();
         if (count > 1) {
           // Click on different position markers
-          const marker = positionLinks.nth(1);
-          if (await marker.isVisible()) {
-            await marker.click();
-            await page.waitForTimeout(500);
-            
-            // Verify navigation occurred
-            const timelineItems = page.locator('.timeline-horz-item-container');
-            await expect(timelineItems.first()).toBeVisible();
-          }
+          await testHelpers.clickTimelinePoint(1);
+
+          // Verify navigation occurred
+          const timelineItems = await testHelpers.getTimelineItems('horizontal');
+          await expect(timelineItems.first()).toBeVisible();
         }
       });
     });

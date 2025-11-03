@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import { useTimelineContext } from '../contexts';
 import { pickDefined } from '../../utils/propUtils';
+import { useRovingTabIndex } from '../../hooks/accessibility/useRovingTabIndex';
 import TimelineCard from '../timeline-elements/timeline-card/timeline-horizontal-card';
 import {
   timelineHorizontalWrapper,
@@ -73,6 +74,25 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   // Ref to the horizontal list to scope focus queries
   const listRef = useRef<HTMLUListElement>(null);
 
+  /**
+   * Initialize roving tabindex for timeline cards (WCAG 2.1.1: Keyboard)
+   * Handles Left/Right arrow key navigation through timeline items in horizontal mode
+   */
+  const rovingItemsConfig = useMemo(
+    () =>
+      items.map((item, index) => ({
+        id: item.id || `item-${index}`,
+        disabled: false,
+      })),
+    [items],
+  );
+
+  const { getItemProps } = useRovingTabIndex({
+    items: rovingItemsConfig,
+    orientation: 'horizontal',
+    loop: false, // Explicit navigation, don't loop around
+  });
+
   // Find and focus the active timeline point button when items update
   const activeId = useMemo(() => items.find((i) => i.active)?.id, [items]);
 
@@ -101,26 +121,34 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
 
   // Memoize the timeline items to prevent unnecessary re-renders
   const timelineItems = useMemo(() => {
-    return items.map((item, index) => (
-      <li
-        key={item.id}
-        className={cls(
-          timelineItemWrapper,
-          item.visible || showAllCardsHorizontal ? 'visible' : '',
-          'timeline-horz-item-container',
-        )}
-        style={{
-          width: itemWidth,
-          minWidth: showAllCardsHorizontal ? itemWidth : undefined,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          height: '100%',
-        }}
-        aria-current={item.active ? 'true' : undefined}
-        id={`timeline-${mode.toLowerCase()}-item-${item.id}`}
-      >
+    return items.map((item, index) => {
+      // Get roving tabindex props for this item
+      const itemId = item.id || `item-${index}`;
+      const rovingProps = getItemProps(itemId) as any;
+
+      return (
+        <li
+          key={item.id}
+          className={cls(
+            timelineItemWrapper,
+            item.visible || showAllCardsHorizontal ? 'visible' : '',
+            'timeline-horz-item-container',
+          )}
+          style={{
+            width: itemWidth,
+            minWidth: showAllCardsHorizontal ? itemWidth : undefined,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            height: '100%',
+          }}
+          aria-current={item.active ? 'true' : undefined}
+          id={`timeline-${mode.toLowerCase()}-item-${item.id}`}
+          tabIndex={rovingProps?.tabIndex ?? -1}
+          onKeyDown={rovingProps?.onKeyDown}
+          onFocus={rovingProps?.onFocus}
+        >
         <TimelineCard
           // Always required props
           onClick={handleItemClick}
@@ -153,8 +181,9 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
             nestedCardHeight: nestedCardHeight,
           })}
         />
-      </li>
-    ));
+        </li>
+      );
+    });
   }, [
     items,
     itemWidth,
@@ -171,6 +200,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     cardWidth,
     isNested,
     nestedCardHeight,
+    getItemProps,
   ]);
 
   return (

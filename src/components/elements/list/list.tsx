@@ -5,6 +5,7 @@ import {
   useCallback,
   useMemo,
 } from 'react';
+import { useRovingTabIndex } from '@hooks/accessibility/useRovingTabIndex';
 import { ListItem } from './list-item';
 import { ListModel } from './list.model';
 import { list } from './list.css';
@@ -45,6 +46,21 @@ const List: FunctionComponent<ListModel> = ({
   );
 
   /**
+   * Initialize roving tabindex for keyboard navigation (WCAG 2.1.1: Keyboard)
+   * Supports ARIA Menu pattern: Up/Down arrows navigate, Enter selects
+   */
+  const rovingItems = useMemo(
+    () => listItems.map((item) => ({ id: item.id, disabled: false })),
+    [listItems],
+  );
+
+  const { getItemProps } = useRovingTabIndex({
+    items: rovingItems,
+    orientation: 'vertical',
+    loop: true, // Circular navigation within menu
+  });
+
+  /**
    * Handles item selection and triggers appropriate callbacks
    * @param {string} id - Item identifier
    * @param {EnhancedListItem} item - Selected list item
@@ -63,6 +79,20 @@ const List: FunctionComponent<ListModel> = ({
   );
 
   /**
+   * Prevent arrow key and Home/End events from bubbling to parent (e.g., timeline)
+   * @param {React.KeyboardEvent} e - Keyboard event
+   */
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    // Stop propagation for menu navigation keys to prevent timeline from capturing them
+    // Includes arrow keys, Home/End for first/last items, Enter/Space for selection
+    if (
+      ['ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '].includes(e.key)
+    ) {
+      e.stopPropagation();
+    }
+  }, []);
+
+  /**
    * Renders individual list items with proper props
    * @param {EnhancedListItem} item - Item to render
    * @param {number} index - Item index in the list
@@ -70,26 +100,26 @@ const List: FunctionComponent<ListModel> = ({
    */
   const renderListItem = useCallback(
     (item: EnhancedListItem, index: number) => {
-      const handleClick = useCallback(
-        () => handleItemSelection(item.id, item),
-        [item, handleItemSelection],
-      );
-
       return (
         <ListItem
           key={item.id}
           {...item}
           theme={theme || defaultTheme}
-          onClick={handleClick}
+          onClick={() => handleItemSelection(item.id, item)}
           selectable={multiSelectable}
           active={activeItemIndex === index}
+          rovingProps={getItemProps(item.id) as any}
         />
       );
     },
-    [theme, handleItemSelection, multiSelectable, activeItemIndex],
+    [theme, handleItemSelection, multiSelectable, activeItemIndex, getItemProps],
   );
 
-  return <ul className={list}>{listItems.map(renderListItem)}</ul>;
+  return (
+    <ul className={list} role="menu" onKeyDown={handleKeyDown}>
+      {listItems.map(renderListItem)}
+    </ul>
+  );
 };
 
 export { List };
