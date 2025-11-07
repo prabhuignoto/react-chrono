@@ -100,6 +100,8 @@ React Chrono v3.0 represents a complete evolution of the timeline component with
 - **Unified Context System** - Streamlined from multiple contexts to a single optimized provider, reducing complexity and improving performance
 
 ### ✨ **New Features**
+- **Auto Card Height** - Set `cardHeight: 'auto'` to automatically size cards based on their content
+- **Content Alignment Control** - Fine-grained control over horizontal and vertical alignment of card content
 - **Google Fonts Integration** - Dynamic font loading with per-element weight/style control and intelligent caching
 - **Comprehensive Internationalization** - 40+ configurable text elements across 11 categories with template string support
 - **Fullscreen Mode** - Cross-browser fullscreen support with proper portal handling and keyboard shortcuts
@@ -218,8 +220,15 @@ The new grouped API organizes configuration into logical sections for better dis
 
   layout={{
     cardWidth: 450,
-    cardHeight: 200,
+    cardHeight: 'auto',  // NEW: Automatic sizing based on content
     responsive: { enabled: true, breakpoint: 768 }
+  }}
+
+  content={{
+    alignment: {  // NEW: Control content alignment
+      horizontal: 'center',
+      vertical: 'center'
+    }
   }}
 
   interaction={{
@@ -258,10 +267,11 @@ The new grouped API organizes configuration into logical sections for better dis
   display={{ toolbar: { enabled: true, sticky: true } }}
 />
 
-// Photo Timeline
+// Photo Timeline with Auto Height
 <Chrono
   items={memories}
   mode="alternating"
+  layout={{ cardHeight: 'auto' }}  // Cards size automatically to content
   media={{ height: 300, fit: 'cover' }}
 />
 

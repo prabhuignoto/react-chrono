@@ -7,7 +7,15 @@ import { defineConfig } from 'vitest/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vanillaExtractPlugin({ identifiers: 'debug' }), react(), tsconfig()],
+  plugins: [
+    vanillaExtractPlugin({
+      identifiers: 'debug',
+      // Fix for Vitest transformResult bug with Vanilla Extract
+      emitCssInSsr: true,
+    }),
+    react(),
+    tsconfig()
+  ],
   test: {
     coverage: {
       clean: true,
@@ -90,5 +98,13 @@ export default defineConfig({
     setupFiles: './src/test-setup.js',
     silent: false,
     update: true,
+    // Use threads pool to avoid Vanilla Extract transform issues
+    pool: 'threads',
+    poolOptions: {
+      threads: {
+        singleThread: false,
+        isolate: true,
+      },
+    },
   },
 });

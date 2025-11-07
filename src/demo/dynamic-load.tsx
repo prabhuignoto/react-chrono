@@ -15,12 +15,15 @@ export default function App() {
       return;
     }
 
-    const newItems = [...items, ...allItems.splice(pageIndex * 2, 2)];
+    // FIX: Use slice() instead of splice() to avoid mutating allItems
+    const startIdx = pageIndex * 2;
+    const newBatch = allItems.slice(startIdx, startIdx + 2);
+    const newItems = [...items, ...newBatch];
 
     console.log('handleAutoLoad', { pageIndex, newItems });
 
     setItems(newItems);
-  }, [items.length, pageIndex]);
+  }, [items, allItems, pageIndex]); // FIX: Add items and allItems to dependencies
 
   useEffect(() => {
     const newAllItems = [...basicTimeline];
@@ -29,7 +32,8 @@ export default function App() {
 
     setAllItems(newAllItems);
     setPageIndex(0);
-    setItems(newAllItems.splice(0, 2));
+    // FIX: Use slice() instead of splice() to avoid mutating newAllItems
+    setItems(newAllItems.slice(0, 2));
   }, []);
 
   useEffect(() => {

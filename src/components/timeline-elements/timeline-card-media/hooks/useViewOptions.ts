@@ -10,7 +10,7 @@ interface UseViewOptionsParams {
   title?: ReactNode;
   content?: ReactNode;
   theme: any;
-  cardHeight: number;
+  cardHeight: number | 'auto' | undefined;
   mediaHeight: number;
 }
 
@@ -20,7 +20,7 @@ interface UseViewOptionsResult {
   canExpand: boolean;
   gradientColor: string;
   canShowGradient: boolean;
-  getCardHeight: number;
+  getCardHeight: number | undefined;
 }
 
 /**
@@ -62,10 +62,11 @@ export const useViewOptions = ({
     [expandDetails, showText, textOverlay],
   );
 
-  const getCardHeight = useMemo(
-    () => (textOverlay ? cardHeight : mediaHeight),
-    [textOverlay, cardHeight, mediaHeight],
-  );
+  const getCardHeight = useMemo(() => {
+    // FIX for Issue #498: Handle 'auto' cardHeight
+    const height = textOverlay ? cardHeight : mediaHeight;
+    return height === 'auto' ? undefined : height;
+  }, [textOverlay, cardHeight, mediaHeight]);
 
   return {
     canShowTextMemo,

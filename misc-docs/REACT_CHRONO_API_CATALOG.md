@@ -32,7 +32,7 @@
 | Property | Type | Description |
 |----------|------|-------------|
 | `cardWidth` | `number` | Maximum width of timeline cards (px) |
-| `cardHeight` | `number` | Minimum height of timeline cards (px) |
+| `cardHeight` | `number \| 'auto'` | Height of timeline cards (px), or 'auto' for automatic sizing based on content |
 | `pointSize` | `number` | Size of timeline points (px) |
 | `lineWidth` | `number` | Width of the timeline track line (px) |
 | `itemWidth` | `number` | Width of each timeline section in horizontal mode |
@@ -71,6 +71,8 @@
 | `compactText` | `boolean` | - | Use compact text display |
 | `semanticTags.title` | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'span' \| 'div'` | - | Semantic HTML tag for title |
 | `semanticTags.subtitle` | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'span' \| 'div'` | - | Semantic HTML tag for subtitle |
+| `alignment.horizontal` | `'left' \| 'center' \| 'right' \| 'stretch'` | `'left'` | Horizontal alignment of card content |
+| `alignment.vertical` | `'top' \| 'center' \| 'bottom' \| 'stretch'` | `'top'` | Vertical alignment of card content |
 
 ### Display Configuration (`display` prop)
 

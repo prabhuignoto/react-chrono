@@ -82,6 +82,10 @@ export const providerProps: TimelineProps = {
   slideShowType: 'reveal',
   textDensity: 'HIGH',
   textOverlay: false,
+  contentAlignment: {
+    horizontal: 'left',
+    vertical: 'top',
+  },
   theme: {
     cardBgColor: '#ffffff',
     cardDetailsBackGround: '#ffffff',
