@@ -10,8 +10,8 @@ export interface LayoutConfig {
   /** Maximum width of timeline cards in pixels */
   cardWidth?: number;
 
-  /** Minimum height of timeline cards in pixels */
-  cardHeight?: number;
+  /** Height of timeline cards in pixels, or 'auto' for automatic sizing based on content */
+  cardHeight?: number | 'auto';
 
   /** Size of timeline points in pixels */
   pointSize?: number;
@@ -88,6 +88,14 @@ export interface ContentConfig {
   semanticTags?: {
     title?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
     subtitle?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
+  };
+
+  /** Content alignment within timeline cards */
+  alignment?: {
+    /** Horizontal alignment of content */
+    horizontal?: 'left' | 'center' | 'right' | 'stretch';
+    /** Vertical alignment of content */
+    vertical?: 'top' | 'center' | 'bottom' | 'stretch';
   };
 }
 

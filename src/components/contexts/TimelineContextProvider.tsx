@@ -41,7 +41,7 @@ import { createTextResolver, TextResolver } from '@utils/textResolver';
 export interface TimelineStaticConfig {
   // Core layout
   mode: NonNullable<TimelinePropsModel['mode']>;
-  cardHeight: number;
+  cardHeight: number | 'auto';
   cardWidth: number;
   cardLess: boolean;
   flipLayout: boolean;
@@ -80,6 +80,10 @@ export interface TimelineStaticConfig {
   parseDetailsAsHTML: boolean;
   useReadMore: boolean;
   textOverlay: boolean;
+  contentAlignment: {
+    horizontal: 'left' | 'center' | 'right' | 'stretch';
+    vertical: 'top' | 'center' | 'bottom' | 'stretch';
+  };
 
   // Scrolling
   scrollable: boolean | { scrollbar: boolean };
@@ -152,7 +156,7 @@ export interface TimelineContextValue
     TimelineDynamicState,
     TimelineMemoizedObjects {
   // Computed values
-  computedCardHeight: number;
+  computedCardHeight: number | 'auto';
   computedActiveItemIndex: number;
   computedMediaAlign: string;
 
@@ -244,6 +248,7 @@ export const TimelineContextProvider: FunctionComponent<
     parseDetailsAsHTML = false,
     useReadMore = true,
     textOverlay,
+    contentAlignment = { horizontal: 'left', vertical: 'top' },
 
     // Scrolling props (default aligns with legacy behavior: no scrollbar)
     scrollable = { scrollbar: false },
@@ -349,10 +354,13 @@ export const TimelineContextProvider: FunctionComponent<
   // ==========================================
   // COMPUTED VALUES
   // ==========================================
-  const computedCardHeight = useMemo(
-    () => (cardLess ? Math.min(cardHeight, 80) : cardHeight),
-    [cardLess, cardHeight],
-  );
+  const computedCardHeight = useMemo(() => {
+    // FIX for Issue #498: Handle 'auto' cardHeight
+    if (cardHeight === 'auto') {
+      return 'auto';
+    }
+    return cardLess ? Math.min(cardHeight, 80) : cardHeight;
+  }, [cardLess, cardHeight]);
 
   const computedActiveItemIndex = useMemo(
     () => (flipLayout && items ? items.length - 1 : 0),
@@ -477,6 +485,14 @@ export const TimelineContextProvider: FunctionComponent<
     [computedMediaAlign, mediaSettings],
   );
 
+  const memoizedContentAlignment = useMemo(
+    () => ({
+      horizontal: contentAlignment.horizontal || ('left' as const),
+      vertical: contentAlignment.vertical || ('top' as const),
+    }),
+    [contentAlignment],
+  );
+
   const memoizedSemanticTags = useMemo(
     () => ({
       cardTitle: 'span' as const,
@@ -524,6 +540,7 @@ export const TimelineContextProvider: FunctionComponent<
       parseDetailsAsHTML,
       useReadMore,
       textOverlay: textOverlay || false,
+      contentAlignment: memoizedContentAlignment,
       scrollable,
       toolbarPosition,
       disableToolbar,
@@ -584,6 +601,7 @@ export const TimelineContextProvider: FunctionComponent<
       lineWidth,
       mediaHeight,
       memoizedMediaSettings,
+      memoizedContentAlignment,
       timelinePointDimension,
       timelinePointShape,
       disableNavOnKey,
@@ -602,6 +620,7 @@ export const TimelineContextProvider: FunctionComponent<
       parseDetailsAsHTML,
       useReadMore,
       textOverlay,
+      contentAlignment,
       scrollable,
       toolbarPosition,
       disableToolbar,
@@ -714,6 +733,7 @@ export const useTimelineStaticConfig = (): TimelineStaticConfig => {
       parseDetailsAsHTML: context.parseDetailsAsHTML,
       useReadMore: context.useReadMore,
       textOverlay: context.textOverlay,
+      contentAlignment: context.contentAlignment,
       scrollable: context.scrollable,
       toolbarPosition: context.toolbarPosition,
       disableToolbar: context.disableToolbar,

@@ -48,12 +48,13 @@ const LegacyContextBridge: FunctionComponent<{
   const ctx = useTimelineContext();
 
   const computeLegacyContentDetailsHeight = (): number => {
-    const cardHeight = originalProps.cardHeight ?? 200;
+    // FIX for Issue #498: Handle 'auto' cardHeight
+    const cardHeightValue = originalProps.cardHeight === 'auto' ? 200 : (originalProps.cardHeight ?? 200);
     const mediaHeight = originalProps.mediaHeight ?? 200;
     const contentDetailsHeight = originalProps.contentDetailsHeight ?? 10;
     const newCardHeight = Math.max(
       (contentDetailsHeight ?? 0) + (mediaHeight ?? 0),
-      cardHeight,
+      cardHeightValue,
     );
     const detailsHeightApprox = Math.round(newCardHeight * 0.75);
     return Math.max(contentDetailsHeight ?? 0, detailsHeightApprox);

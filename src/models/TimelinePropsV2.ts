@@ -116,7 +116,7 @@ export interface LegacyTimelineProps {
   /** @deprecated Use layout.cardWidth */
   cardWidth?: number;
   /** @deprecated Use layout.cardHeight */
-  cardHeight?: number;
+  cardHeight?: number | 'auto';
   /** @deprecated Use layout.pointSize */
   timelinePointDimension?: number;
   /** @deprecated Use layout.lineWidth */

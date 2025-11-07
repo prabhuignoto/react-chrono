@@ -56,8 +56,8 @@ export interface CardMediaModel {
   // Indicates if the media is active.
   active?: boolean;
 
-  // Height of the card containing the media.
-  cardHeight?: number;
+  // Height of the card containing the media, or 'auto' for automatic sizing.
+  cardHeight?: number | 'auto';
 
   // Content associated with the media.
   content?: string | ReactNode;

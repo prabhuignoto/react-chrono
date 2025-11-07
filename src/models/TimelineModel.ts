@@ -100,8 +100,8 @@ export type TimelineProps = {
   // custom button texts
   buttonTexts?: ButtonTexts;
 
-  // minimum height of the card
-  cardHeight?: number;
+  // minimum height of the card, or 'auto' for automatic sizing
+  cardHeight?: number | 'auto';
 
   // remove/hide cards
   cardLess?: boolean;
@@ -127,6 +127,12 @@ export type TimelineProps = {
 
   // height of the details text
   contentDetailsHeight?: number;
+
+  // alignment of content within timeline cards
+  contentAlignment?: {
+    horizontal?: 'left' | 'center' | 'right' | 'stretch';
+    vertical?: 'top' | 'center' | 'bottom' | 'stretch';
+  };
 
   darkMode?: boolean;
   // disables the auto scroll on click

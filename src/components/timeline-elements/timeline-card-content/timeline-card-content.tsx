@@ -311,6 +311,18 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
 
       const handleCardClick = useCallback(
         (event: React.MouseEvent) => {
+          // Check if click originated from an interactive element
+          const target = event.target as HTMLElement;
+          const isInteractiveElement = target.closest(
+            'a, button, input, textarea, select, [role="button"]',
+          );
+
+          // If clicking an interactive element, let it handle its own events
+          if (isInteractiveElement) {
+            // Allow default behavior (link navigation, button click, etc.)
+            return;
+          }
+
           event.stopPropagation(); // Prevent event bubbling to parent handlers
 
           // Don't handle clicks if we're in slideshow mode or if already active
@@ -388,15 +400,20 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
         showMore,
       ]);
 
-      // The card's minimum height
+      // The card's minimum height - FIX for Issue #498: Support 'auto' for dynamic sizing
       const cardMinHeight = useMemo(() => {
+        let height: number | 'auto' | undefined;
+
         if (textOverlay && media) {
-          return cardHeight;
+          height = cardHeight;
         } else if (!isNested) {
-          return cardHeight;
+          height = cardHeight;
         } else {
-          return nestedCardHeight;
+          height = nestedCardHeight;
         }
+
+        // When 'auto', return undefined to let content determine height
+        return height === 'auto' ? undefined : height;
       }, [textOverlay, media, isNested, cardHeight, nestedCardHeight]);
 
       return (

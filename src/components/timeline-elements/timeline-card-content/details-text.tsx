@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { useTimelineContext } from '../../contexts';
 import { DetailsTextProps } from './details-text.model';
 import { getTextOrContent } from './text-or-content';
-import { contentDetailsWrapper } from './timeline-card-content.css';
+import { contentDetailsWrapperRecipe } from './timeline-card-content.css';
 import { vars } from 'src/styles/tokens.css';
 
 const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
@@ -24,6 +24,7 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
       contentDetailsHeight,
       textOverlay,
       theme,
+      contentAlignment,
     } = useTimelineContext();
 
     const TextContent = getTextOrContent({
@@ -38,7 +39,14 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
         {/* detailed text */}
         <div
           aria-expanded={showMore}
-          className={contentDetailsClass + ' ' + contentDetailsWrapper}
+          className={
+            contentDetailsClass +
+            ' ' +
+            contentDetailsWrapperRecipe({
+              alignHorizontal: contentAlignment.horizontal,
+              alignVertical: contentAlignment.vertical,
+            })
+          }
           ref={ref}
           style={{
             overflowY: showMore ? 'auto' : 'hidden',

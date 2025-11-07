@@ -89,6 +89,12 @@ function convertToLegacyProps(props: TimelinePropsV2): TimelineProps {
           cardSubtitle: props.content.semanticTags.subtitle,
         })
       : undefined,
+    contentAlignment: props.content?.alignment
+      ? {
+          horizontal: props.content.alignment.horizontal || 'left',
+          vertical: props.content.alignment.vertical || 'top',
+        }
+      : { horizontal: 'left' as const, vertical: 'top' as const },
 
     // Display props
     borderLessCards: props.display?.borderless,
@@ -268,6 +274,9 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
   const itemsHashRef = useRef<string>('');
   const processedItemsCache = useRef<TimelineItemModel[]>([]);
 
+  // Track children count for Array.map() pattern detection
+  const childrenCount = React.Children.count(children);
+
   // Memoize the initItems function
   const initItems = useCallback(
     (lineItems?: TimelineItemModel[]): TimelineItemModel[] => {
@@ -351,6 +360,27 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     const _items = items?.filter((item) => item);
     let newItems: TimelineItemModel[] = [];
 
+    // FIX for Issue #291: Handle children pattern (Array.map())
+    // When items array is not provided but children exist, track children count changes
+    if (!_items?.length && children) {
+      const currentChildrenHash = String(childrenCount);
+
+      // Check if children count changed or if dynamic updates are allowed
+      if (allowDynamicUpdate || currentChildrenHash !== itemsHashRef.current) {
+        itemsHashRef.current = currentChildrenHash;
+        const lineItems = initItems();
+        setTimeLineItems(lineItems);
+
+        // For dynamic updates via children, focus on first new item if no active item
+        if (allowDynamicUpdate && timeLineItems.length > 0 && lineItems.length > timeLineItems.length) {
+          if (activeTimelineItem === undefined || activeTimelineItem === null) {
+            setActiveTimelineItem(timeLineItems.length);
+          }
+        }
+      }
+      return;
+    }
+
     if (!_items?.length) {
       const lineItems = initItems();
       setTimeLineItems(lineItems);
@@ -401,11 +431,16 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     }
   }, [
     items,
+    children,
+    childrenCount,
     allowDynamicUpdate,
     timeLineItems.length,
     initItems,
     updateItems,
     createItemsHash,
+    activeTimelineItem,
+    mode,
+    activeItemIndex,
   ]);
 
   const handleTimelineUpdate = useCallback(

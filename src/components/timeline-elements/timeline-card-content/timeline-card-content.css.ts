@@ -359,6 +359,63 @@ export const contentDetailsWrapper = style([
   },
 ]);
 
+/**
+ * Recipe for content details wrapper with configurable alignment
+ * Allows users to control horizontal and vertical alignment of timeline card content
+ */
+export const contentDetailsWrapperRecipe = recipe({
+  base: [
+    sprinkles({
+      display: 'flex',
+      width: 'full',
+      flexDirection: 'column',
+      gap: 'xs',
+    }),
+    {
+      margin: 0,
+      position: 'relative',
+      overflowX: 'hidden',
+      transition: `max-height ${tokens.semantic.motion.duration.slow} ${tokens.semantic.motion.easing.standard}, opacity ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
+      padding: 0,
+      background: 'transparent',
+    },
+  ],
+  variants: {
+    alignHorizontal: {
+      left: {
+        alignItems: 'flex-start',
+      },
+      center: {
+        alignItems: 'center',
+      },
+      right: {
+        alignItems: 'flex-end',
+      },
+      stretch: {
+        alignItems: 'stretch',
+      },
+    },
+    alignVertical: {
+      top: {
+        justifyContent: 'flex-start',
+      },
+      center: {
+        justifyContent: 'center',
+      },
+      bottom: {
+        justifyContent: 'flex-end',
+      },
+      stretch: {
+        justifyContent: 'stretch',
+      },
+    },
+  },
+  defaultVariants: {
+    alignHorizontal: 'left',
+    alignVertical: 'top',
+  },
+});
+
 export const showMoreButton = style([
   patterns.button({ variant: 'ghost', size: 'sm' }),
   sprinkles({
