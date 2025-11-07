@@ -67,7 +67,7 @@ Control the size, positioning, and responsive behavior of your timeline.
 ```typescript
 layout?: {
   cardWidth?: number;
-  cardHeight?: number;
+  cardHeight?: number | 'auto';
   pointSize?: number;
   lineWidth?: number;
   itemWidth?: number;
@@ -88,7 +88,7 @@ layout?: {
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
 | `cardWidth` | `number` | `450` | Maximum width of timeline cards in pixels |
-| `cardHeight` | `number` | `200` | Minimum height of timeline cards in pixels |
+| `cardHeight` | `number \| 'auto'` | `200` | Height of timeline cards in pixels, or `'auto'` for automatic sizing based on content |
 | `pointSize` | `number` | `16` | Size of timeline points/circles in pixels |
 | `lineWidth` | `number` | `3` | Width of the timeline track line in pixels |
 | `itemWidth` | `number` | `200` | Width of each timeline section in horizontal mode (px) |
@@ -168,6 +168,10 @@ content?: {
     title?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
     subtitle?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
   };
+  alignment?: {
+    horizontal?: 'left' | 'center' | 'right' | 'stretch';
+    vertical?: 'top' | 'center' | 'bottom' | 'stretch';
+  };
 }
 ```
 
@@ -180,6 +184,28 @@ content?: {
 | `textOverlay` | `boolean` | `false` | Display text as overlay on media |
 | `dateFormat` | `string` | `'MMM DD, YYYY'` | Date format for timeline titles (Day.js format) |
 | `compactText` | `boolean` | `false` | Use compact text display mode |
+
+### Content Alignment Configuration
+
+Control how text content is aligned within timeline cards.
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `alignment.horizontal` | `'left' \| 'center' \| 'right' \| 'stretch'` | `'left'` | Horizontal alignment of card content |
+| `alignment.vertical` | `'top' \| 'center' \| 'bottom' \| 'stretch'` | `'top'` | Vertical alignment of card content |
+
+**Example:**
+```jsx
+<Chrono
+  items={items}
+  content={{
+    alignment: {
+      horizontal: 'center',  // Center-align text horizontally
+      vertical: 'center'     // Center-align text vertically
+    }
+  }}
+/>
+```
 
 ### Semantic Tags Configuration
 
@@ -937,7 +963,7 @@ These props are maintained for backward compatibility but are deprecated in favo
 | Legacy Prop | New API | Type | Description |
 |-------------|---------|------|-------------|
 | `cardWidth` | `layout.cardWidth` | `number` | ⚠️ **Deprecated** |
-| `cardHeight` | `layout.cardHeight` | `number` | ⚠️ **Deprecated** |
+| `cardHeight` | `layout.cardHeight` | `number \| 'auto'` | ⚠️ **Deprecated** |
 | `timelinePointDimension` | `layout.pointSize` | `number` | ⚠️ **Deprecated** |
 | `lineWidth` | `layout.lineWidth` | `number` | ⚠️ **Deprecated** |
 | `itemWidth` | `layout.itemWidth` | `number` | ⚠️ **Deprecated** |
@@ -1059,7 +1085,7 @@ type HTMLTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
 ```typescript
 interface LayoutConfig {
   cardWidth?: number;
-  cardHeight?: number;
+  cardHeight?: number | 'auto';
   pointSize?: number;
   lineWidth?: number;
   itemWidth?: number;
@@ -1092,6 +1118,10 @@ interface ContentConfig {
   semanticTags?: {
     title?: HTMLTag;
     subtitle?: HTMLTag;
+  };
+  alignment?: {
+    horizontal?: 'left' | 'center' | 'right' | 'stretch';
+    vertical?: 'top' | 'center' | 'bottom' | 'stretch';
   };
 }
 
@@ -1306,7 +1336,7 @@ const App = () => {
         
         layout={{
           cardWidth: 450,
-          cardHeight: 250,
+          cardHeight: 'auto',  // Automatic sizing based on content
           pointSize: 18,
           responsive: {
             enabled: true,
@@ -1328,6 +1358,10 @@ const App = () => {
           semanticTags: {
             title: 'h2',
             subtitle: 'h3',
+          },
+          alignment: {
+            horizontal: 'center',
+            vertical: 'center',
           },
         }}
         
