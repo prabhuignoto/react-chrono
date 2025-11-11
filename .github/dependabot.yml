@@ -1,0 +1,125 @@
+# Dependabot Configuration for react-chrono (pnpm project)
+# Note: Dependabot uses "npm" ecosystem for pnpm projects (auto-detects pnpm-lock.yaml)
+#
+# SECURITY UPDATES: Dependabot opens security PRs immediately when detected (not on schedule).
+# However, with grouping enabled, security updates still follow grouping rules.
+# Production dependencies are NOT grouped to ensure security updates are visible as individual PRs.
+version: 2
+
+updates:
+  # NPM ecosystem - main dependency updates
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "05:00"
+      timezone: UTC
+    open-pull-requests-limit: 10
+    rebase-strategy: auto
+    versioning-strategy: increase
+    commit-message:
+      prefix: "chore(deps):"
+      include: "scope"
+    labels:
+      - dependencies
+      - npm
+
+    # Development dependencies - grouped by ecosystem for easier review
+    # Production dependencies (runtime) are NOT grouped for maximum visibility
+    groups:
+
+      # Babel ecosystem
+      babel-ecosystem:
+        dependency-type: development
+        patterns:
+          - "@babel/*"
+
+      # TypeScript and type definitions
+      typescript-types:
+        dependency-type: development
+        patterns:
+          - "typescript"
+          - "@types/*"
+
+      # ESLint ecosystem
+      eslint-ecosystem:
+        dependency-type: development
+        patterns:
+          - "eslint"
+          - "@eslint/*"
+          - "@typescript-eslint/*"
+          - "eslint-plugin-*"
+
+      # Playwright testing
+      testing-playwright:
+        dependency-type: development
+        patterns:
+          - "@playwright/test"
+          - "@playwright/experimental-ct-react"
+
+      # Vitest testing framework
+      testing-vitest:
+        dependency-type: development
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+
+      # Testing library
+      testing-library:
+        dependency-type: development
+        patterns:
+          - "@testing-library/*"
+
+      # Vanilla Extract CSS
+      vanilla-extract:
+        dependency-type: development
+        patterns:
+          - "@vanilla-extract/*"
+
+      # Vite ecosystem
+      vite-ecosystem:
+        dependency-type: development
+        patterns:
+          - "vite"
+          - "@vitejs/*"
+          - "vite-plugin-*"
+
+      # Build and bundling tools
+      build-tools:
+        dependency-type: development
+        patterns:
+          - "rollup*"
+          - "@rollup/*"
+          - "@size-limit/*"
+
+      # CSS and styling tools
+      css-tools:
+        dependency-type: development
+        patterns:
+          - "postcss"
+          - "autoprefixer"
+          - "cssnano"
+          - "stylelint"
+          - "tailwindcss"
+          - "@tailwindcss/*"
+
+      # Remaining dev dependencies
+      other-dev-deps:
+        dependency-type: development
+
+  # GitHub Actions - keep workflow dependencies current
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "05:00"
+      timezone: UTC
+    open-pull-requests-limit: 5
+    rebase-strategy: auto
+    commit-message:
+      prefix: "chore(ci):"
+    labels:
+      - dependencies
+      - github-actions

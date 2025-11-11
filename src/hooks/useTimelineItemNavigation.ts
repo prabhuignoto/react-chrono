@@ -185,10 +185,8 @@ export const useTimelineItemNavigation = ({
       // Update timeline position
       updateTimelinePosition(targetIndex, isSlideShow);
 
-      // Skip scrolling when slideshow is running - let timeline.tsx handle slideshow scrolling
-      if (slideShowRunning) return;
-
       // Find target element using improved element finding and start scrolling immediately
+      // Note: Scrolling should happen regardless of slideshow state to ensure proper centering
       const targetElement = findTargetElement(itemId);
       if (targetElement) {
         // Capture whether search is active NOW before RAF callback runs
