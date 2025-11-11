@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Chrono } from 'react-chrono';
 import './styles.css';
+import 'react-chrono/dist/style.css';
 
 /**
  * React Chrono v3.0 - Complete Feature Showcase
@@ -125,10 +126,11 @@ function App() {
     }
   ];
 
-  // Handle theme changes
+  // Handle theme changes (observe color updates)
   const handleThemeChange = (theme) => {
-    setIsDark(theme.isDark);
-    console.log('Theme changed:', theme);
+    // Note: theme object contains color values, not isDark flag
+    // isDark state is controlled by darkMode.enabled prop
+    console.log('Theme colors updated:', theme);
   };
 
   return (
