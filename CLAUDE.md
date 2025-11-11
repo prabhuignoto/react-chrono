@@ -67,7 +67,11 @@ pnpm run test:e2e:shard   # Run sharded tests (parallel across machines)
 - Integration tests run on **Chromium and Firefox** (WebKit optional due to longer build times)
 - Component tests run on **all three browsers** for comprehensive coverage
 - GitHub Actions workflow (`.github/workflows/playwright.yml`) runs full cross-browser matrix automatically
-- First time setup: Run `pnpm run test:install` to install browser binaries
+
+**⚠️ First-Time Setup Required:**
+- Run `pnpm run test:install` **once before running any E2E tests** to install Playwright browser binaries
+- This is mandatory and takes a few minutes to complete
+- After installation, all E2E, integration, and component tests will work across all browsers
 
 **Test Organization:**
 - **E2E Tests** (`tests/e2e/`): Test complete user workflows in demo site
@@ -85,6 +89,11 @@ pnpm run lint             # Check Prettier formatting
 pnpm run lint:all         # Run all linting (ESLint + CSS + Prettier)
 pnpm run clean            # Format and lint everything
 pnpm run find-bugs        # TypeScript check + lint + test
+pnpm run build:analyze    # Analyze bundle size (verify < 250 KB limit)
+
+# Unit Test Debugging
+pnpm run test-ui          # Interactive Vitest UI (watch mode with visual browser)
+pnpm test -- --reporter=verbose  # Run tests with detailed output
 ```
 
 ## Architecture & Key Patterns
