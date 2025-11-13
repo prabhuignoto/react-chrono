@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react';
 import React from 'react';
-// Import Vanilla Extract global styles
+// Import Vanilla Extract global styles (same as main entry point)
 import '../src/styles/global.css';
 
 const preview: Preview = {
