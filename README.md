@@ -17,68 +17,43 @@
 
 ---
 
-<div align="center">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin: 30px 0;">
 
-<table style="border-collapse: separate; border-spacing: 12px; border: none;">
-<tr>
-<td align="center" width="33%" style="border: none;">
-<div style="background: linear-gradient(135deg, #a8c0ff 0%, #c2e9fb 100%); padding: 18px 14px; border-radius: 8px; min-height: 100px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
-<div style="margin-bottom: 10px;">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+<div style="background: linear-gradient(135deg, #a8c0ff 0%, #c2e9fb 100%); padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%231e3a8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='7' height='7'%3E%3C/rect%3E%3Crect x='14' y='3' width='7' height='7'%3E%3C/rect%3E%3Crect x='14' y='14' width='7' height='7'%3E%3C/rect%3E%3Crect x='3' y='14' width='7' height='7'%3E%3C/rect%3E%3C/svg%3E" alt="Timeline Modes icon" style="display: block; margin: 0 auto 12px; width: 32px; height: 32px;">
+<strong style="color: #1e3a8a; font-size: 14px;">Timeline Modes & Layouts</strong>
+<p style="color: #334155; font-size: 13px; margin: 8px 0 0 0;">4 Flexible Modes • Nested Timelines • Responsive</p>
 </div>
-<strong style="color: #1e3a8a; font-size: 15px; display: block; margin-bottom: 6px;">Timeline Modes & Layouts</strong>
-<span style="color: #334155; font-size: 12.5px; line-height: 1.4;">4 Flexible Modes • Nested Timelines • Responsive</span>
+
+<div style="background: linear-gradient(135deg, #a7f3d0 0%, #d1fae5 100%); padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%23065f46' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='2' width='20' height='20' rx='2.18' ry='2.18'%3E%3C/rect%3E%3Cline x1='7' y1='2' x2='7' y2='22'%3E%3C/line%3E%3Cline x1='17' y1='2' x2='17' y2='22'%3E%3C/line%3E%3Cline x1='2' y1='12' x2='22' y2='12'%3E%3C/line%3E%3Cline x1='2' y1='7' x2='7' y2='7'%3E%3C/line%3E%3Cline x1='2' y1='17' x2='7' y2='17'%3E%3C/line%3E%3Cline x1='17' y1='17' x2='22' y2='17'%3E%3C/line%3E%3Cline x1='17' y1='7' x2='22' y2='7'%3E%3C/line%3E%3C/svg%3E" alt="Rich Media icon" style="display: block; margin: 0 auto 12px; width: 32px; height: 32px;">
+<strong style="color: #065f46; font-size: 14px;">Rich Media & Content</strong>
+<p style="color: #334155; font-size: 13px; margin: 8px 0 0 0;">Images • Videos • YouTube • Custom Components</p>
 </div>
-</td>
-<td align="center" width="33%" style="border: none;">
-<div style="background: linear-gradient(135deg, #a7f3d0 0%, #d1fae5 100%); padding: 18px 14px; border-radius: 8px; min-height: 100px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
-<div style="margin-bottom: 10px;">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#065f46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+
+<div style="background: linear-gradient(135deg, #fecaca 0%, #fed7aa 100%); padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%237c2d12' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z'%3E%3C/path%3E%3C/svg%3E" alt="Theming icon" style="display: block; margin: 0 auto 12px; width: 32px; height: 32px;">
+<strong style="color: #7c2d12; font-size: 14px;">Theming & Customization</strong>
+<p style="color: #334155; font-size: 13px; margin: 8px 0 0 0;">Dark Mode • 36 Properties • Google Fonts</p>
 </div>
-<strong style="color: #065f46; font-size: 15px; display: block; margin-bottom: 6px;">Rich Media & Content</strong>
-<span style="color: #334155; font-size: 12.5px; line-height: 1.4;">Images • Videos • YouTube • Custom Components</span>
+
+<div style="background: linear-gradient(135deg, #bfdbfe 0%, #ddd6fe 100%); padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%233730a3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='16 18 22 12 16 6'%3E%3C/polyline%3E%3Cpolyline points='8 6 2 12 8 18'%3E%3C/polyline%3E%3C/svg%3E" alt="Developer Experience icon" style="display: block; margin: 0 auto 12px; width: 32px; height: 32px;">
+<strong style="color: #3730a3; font-size: 14px;">Developer Experience</strong>
+<p style="color: #334155; font-size: 13px; margin: 8px 0 0 0;">TypeScript • Zero Dependencies • Vanilla Extract</p>
 </div>
-</td>
-<td align="center" width="33%" style="border: none;">
-<div style="background: linear-gradient(135deg, #fecaca 0%, #fed7aa 100%); padding: 18px 14px; border-radius: 8px; min-height: 100px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
-<div style="margin-bottom: 10px;">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7c2d12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+
+<div style="background: linear-gradient(135deg, #fbcfe8 0%, #fae8ff 100%); padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%23831843' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'%3E%3C/path%3E%3Ccircle cx='9' cy='7' r='4'%3E%3C/circle%3E%3Cpath d='M23 21v-2a4 4 0 0 0-3-3.87'%3E%3C/path%3E%3Cpath d='M16 3.13a4 4 0 0 1 0 7.75'%3E%3C/path%3E%3C/svg%3E" alt="User Experience icon" style="display: block; margin: 0 auto 12px; width: 32px; height: 32px;">
+<strong style="color: #831843; font-size: 14px;">User Experience</strong>
+<p style="color: #334155; font-size: 13px; margin: 8px 0 0 0;">Slideshow • Search • Keyboard Navigation</p>
 </div>
-<strong style="color: #7c2d12; font-size: 15px; display: block; margin-bottom: 6px;">Theming & Customization</strong>
-<span style="color: #334155; font-size: 12.5px; line-height: 1.4;">Dark Mode • 36 Properties • Google Fonts</span>
+
+<div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%2378350f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z'%3E%3C/path%3E%3Cpath d='M5 3v4'%3E%3C/path%3E%3Cpath d='M19 17v4'%3E%3C/path%3E%3Cpath d='M3 5h4'%3E%3C/path%3E%3Cpath d='M17 19h4'%3E%3C/path%3E%3C/svg%3E" alt="Accessibility icon" style="display: block; margin: 0 auto 12px; width: 32px; height: 32px;">
+<strong style="color: #78350f; font-size: 14px;">Accessibility & i18n</strong>
+<p style="color: #334155; font-size: 13px; margin: 8px 0 0 0;">WCAG AA • 40+ i18n Elements • Mobile First</p>
 </div>
-</td>
-</tr>
-<tr>
-<td align="center" width="33%" style="border: none;">
-<div style="background: linear-gradient(135deg, #bfdbfe 0%, #ddd6fe 100%); padding: 18px 14px; border-radius: 8px; min-height: 100px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
-<div style="margin-bottom: 10px;">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3730a3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-</div>
-<strong style="color: #3730a3; font-size: 15px; display: block; margin-bottom: 6px;">Developer Experience</strong>
-<span style="color: #334155; font-size: 12.5px; line-height: 1.4;">TypeScript • Zero Dependencies • Vanilla Extract</span>
-</div>
-</td>
-<td align="center" width="33%" style="border: none;">
-<div style="background: linear-gradient(135deg, #fbcfe8 0%, #fae8ff 100%); padding: 18px 14px; border-radius: 8px; min-height: 100px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
-<div style="margin-bottom: 10px;">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#831843" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-</div>
-<strong style="color: #831843; font-size: 15px; display: block; margin-bottom: 6px;">User Experience</strong>
-<span style="color: #334155; font-size: 12.5px; line-height: 1.4;">Slideshow • Search • Keyboard Navigation</span>
-</div>
-</td>
-<td align="center" width="33%" style="border: none;">
-<div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 18px 14px; border-radius: 8px; min-height: 100px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
-<div style="margin-bottom: 10px;">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#78350f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M19 17v4"></path><path d="M3 5h4"></path><path d="M17 19h4"></path></svg>
-</div>
-<strong style="color: #78350f; font-size: 15px; display: block; margin-bottom: 6px;">Accessibility & i18n</strong>
-<span style="color: #334155; font-size: 12.5px; line-height: 1.4;">WCAG AA • 40+ i18n Elements • Mobile First</span>
-</div>
-</td>
-</tr>
-</table>
 
 </div>
 
