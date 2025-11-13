@@ -17,120 +17,161 @@
 
 ---
 
-## ✨ Why Choose React Chrono?
+<div align="center">
 
-### 🏆 **Flexible Storytelling**
-Four distinct layout modes adapt to any narrative: horizontal for traditional timelines, vertical for mobile-first feeds, alternating for visual balance, or dashboard for complete overviews. Perfect for company milestones, historical events, project roadmaps, or personal journeys.
+<table style="border-collapse: separate; border-spacing: 12px; border: none;">
+<tr>
+<td align="center" width="33%" style="border: none;">
+<div style="background: linear-gradient(135deg, #a8c0ff 0%, #c2e9fb 100%); padding: 18px 14px; border-radius: 8px; min-height: 100px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+<div style="margin-bottom: 10px;">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+</div>
+<strong style="color: #1e3a8a; font-size: 15px; display: block; margin-bottom: 6px;">Timeline Modes & Layouts</strong>
+<span style="color: #334155; font-size: 12.5px; line-height: 1.4;">4 Flexible Modes • Nested Timelines • Responsive</span>
+</div>
+</td>
+<td align="center" width="33%" style="border: none;">
+<div style="background: linear-gradient(135deg, #a7f3d0 0%, #d1fae5 100%); padding: 18px 14px; border-radius: 8px; min-height: 100px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+<div style="margin-bottom: 10px;">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#065f46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+</div>
+<strong style="color: #065f46; font-size: 15px; display: block; margin-bottom: 6px;">Rich Media & Content</strong>
+<span style="color: #334155; font-size: 12.5px; line-height: 1.4;">Images • Videos • YouTube • Custom Components</span>
+</div>
+</td>
+<td align="center" width="33%" style="border: none;">
+<div style="background: linear-gradient(135deg, #fecaca 0%, #fed7aa 100%); padding: 18px 14px; border-radius: 8px; min-height: 100px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+<div style="margin-bottom: 10px;">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7c2d12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+</div>
+<strong style="color: #7c2d12; font-size: 15px; display: block; margin-bottom: 6px;">Theming & Customization</strong>
+<span style="color: #334155; font-size: 12.5px; line-height: 1.4;">Dark Mode • 36 Properties • Google Fonts</span>
+</div>
+</td>
+</tr>
+<tr>
+<td align="center" width="33%" style="border: none;">
+<div style="background: linear-gradient(135deg, #bfdbfe 0%, #ddd6fe 100%); padding: 18px 14px; border-radius: 8px; min-height: 100px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+<div style="margin-bottom: 10px;">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3730a3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+</div>
+<strong style="color: #3730a3; font-size: 15px; display: block; margin-bottom: 6px;">Developer Experience</strong>
+<span style="color: #334155; font-size: 12.5px; line-height: 1.4;">TypeScript • Zero Dependencies • Vanilla Extract</span>
+</div>
+</td>
+<td align="center" width="33%" style="border: none;">
+<div style="background: linear-gradient(135deg, #fbcfe8 0%, #fae8ff 100%); padding: 18px 14px; border-radius: 8px; min-height: 100px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+<div style="margin-bottom: 10px;">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#831843" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+</div>
+<strong style="color: #831843; font-size: 15px; display: block; margin-bottom: 6px;">User Experience</strong>
+<span style="color: #334155; font-size: 12.5px; line-height: 1.4;">Slideshow • Search • Keyboard Navigation</span>
+</div>
+</td>
+<td align="center" width="33%" style="border: none;">
+<div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 18px 14px; border-radius: 8px; min-height: 100px; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+<div style="margin-bottom: 10px;">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#78350f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M19 17v4"></path><path d="M3 5h4"></path><path d="M17 19h4"></path></svg>
+</div>
+<strong style="color: #78350f; font-size: 15px; display: block; margin-bottom: 6px;">Accessibility & i18n</strong>
+<span style="color: #334155; font-size: 12.5px; line-height: 1.4;">WCAG AA • 40+ i18n Elements • Mobile First</span>
+</div>
+</td>
+</tr>
+</table>
 
-### 🎯 **Modern Development Experience**
-Built entirely in TypeScript with a grouped API that organizes props into logical sections. Exceptional IDE support with intelligent autocomplete, type checking, and zero external dependencies for a lean foundation.
-
-### 🎨 **Complete Customization**
-25+ theme properties for pixel-perfect control - from subtle brand colors to full dark mode transformations. Effortless Google Fonts integration and support for custom React components within timeline cards.
-
-### 🚀 **Production-Ready Performance**
-Native lazy loading for images, IntersectionObserver-managed visibility, and automatic video pause optimization ensure smooth performance with large datasets. Cross-browser compatible with comprehensive WCAG AA accessibility.
+</div>
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
 <details>
 <summary><strong>Quick Start</strong></summary>
 
-- [Why Choose React Chrono?](#-why-choose-react-chrono)
-- [What's New in v3.0](#-whats-new-in-v30)
-- [Installation](#-installation)
-- [Basic Usage](#-basic-usage)
-- [Timeline Modes](#-timeline-modes)
+- [What's New in v3.0](#whats-new-in-v30)
+- [Installation](#installation)
+- [Basic Usage](#basic-usage)
+- [Timeline Modes](#timeline-modes)
 
 </details>
 
 <details>
 <summary><strong>API Documentation</strong></summary>
 
-- [Essential Props](#-essential-props)
-- [Complete Props Reference](./PROPS-REFERENCE.md) 📋
-- [Migration from v2 to v3](#-migration-from-v2-to-v3)
+- [Essential Props](#essential-props)
+- [Complete Props Reference](./PROPS-REFERENCE.md)
+- [Migration from v2 to v3](#migration-from-v2-to-v3)
 
 </details>
 
 <details>
 <summary><strong>Features & Customization</strong></summary>
 
-- [Showcase: What React Chrono Can Do](#-showcase-what-react-chrono-can-do)
-- [Rich Media Integration](#-rich-media-integration)
-- [Interactive Features](#-interactive-features)
-- [Theming & Branding](#-theming--branding)
-- [Complete Internationalization](#-complete-internationalization)
-- [Advanced Architecture](#-advanced-architecture)
-- [Responsive Design](#-responsive-design)
+- [Showcase: What React Chrono Can Do](#showcase-what-react-chrono-can-do)
+- [Rich Media Integration](#rich-media-integration)
+- [Interactive Features](#interactive-features)
+- [Theming & Branding](#theming--branding)
+- [Complete Internationalization](#complete-internationalization)
+- [Advanced Architecture](#advanced-architecture)
+- [Responsive Design](#responsive-design)
 
 </details>
 
-<details>
-<summary><strong>Why React Chrono</strong></summary>
-
-- [Key Benefits](#-why-react-chrono)
-- [Zero Configuration](#-zero-configuration-required)
-- [TypeScript Native](#-typescript-native)
-- [Accessibility Built-in](#-accessibility-built-in)
-
-</details>
 
 <details>
 <summary><strong>Examples & Development</strong></summary>
 
-- [Live Examples & Playground](#-live-examples--playground)
-  - [CodeSandbox Examples Collection](#-codesandbox-examples-collection)
-- [Development Setup](#-development-setup)
-- [Contributing](#-contributing)
-- [Built With Modern Technologies](#-built-with-modern-technologies)
+- [Live Examples & Playground](#live-examples--playground)
+  - [CodeSandbox Examples Collection](#codesandbox-examples-collection)
+- [Development Setup](#development-setup)
+- [Contributing](#contributing)
+- [Built With Modern Technologies](#built-with-modern-technologies)
 
 </details>
 
 ---
 
-## 🎉 What's New in v3.0
+## What's New in v3.0
 
 React Chrono v3.0 represents a complete evolution of the timeline component with architectural improvements and powerful new features:
 
-### 🏗️ **Architectural Overhaul**
+### Architectural Overhaul
 - **Grouped Configuration API** - Props organized into logical groups (`layout`, `interaction`, `content`, `display`, `media`, `animation`, `style`, `accessibility`, `i18n`) for intuitive configuration and better IDE autocomplete
 - **Vanilla Extract Migration** - Complete migration from styled-components to Vanilla Extract for zero-runtime CSS, improved performance, and type-safe styling
 - **Unified Context System** - Streamlined from multiple contexts to a single optimized provider, reducing complexity and improving performance
 
-### ✨ **New Features**
-- **Auto Card Height** - Set `cardHeight: 'auto'` to automatically size cards based on their content
-- **Content Alignment Control** - Fine-grained control over horizontal and vertical alignment of card content
-- **Google Fonts Integration** - Dynamic font loading with per-element weight/style control and intelligent caching
-- **Comprehensive Internationalization** - 40+ configurable text elements across 11 categories with template string support
-- **Fullscreen Mode** - Cross-browser fullscreen support with proper portal handling and keyboard shortcuts
-- **Enhanced Dark Mode** - 25+ theme properties including button states, shadows, glows, and search highlighting
-- **Sticky Toolbar** - Optional sticky positioning for toolbar with configurable placement
-- **Borderless Cards** - Clean, minimal card variant for modern designs
-- **Advanced Search Configuration** - Customizable search input widths and positioning
+### New Features
+- **Auto Card Height** - `cardHeight: 'auto'` for content-based sizing
+- **Content Alignment** - Horizontal and vertical alignment control within cards
+- **Google Fonts** - Dynamic font loading with per-element customization
+- **i18n Support** - 40+ configurable text elements for global applications
+- **Fullscreen Mode** - Cross-browser support with keyboard shortcuts
+- **Enhanced Dark Mode** - 36 theme properties for complete customization
+- **Sticky Toolbar** - Optional sticky positioning with configurable placement
+- **Borderless Cards** - Minimal card variant for modern designs
+- **Advanced Search** - Customizable search input sizing and positioning
 
-### 🎨 **UX Improvements**
-- **Responsive Popover System** - Smart positioning with fullscreen awareness
-- **Improved Navigation** - Enhanced keyboard navigation with better focus management
-- **Text Density Control** - Dynamic card remeasurement when switching between compact/detailed views
-- **Smoother Animations** - Refined slideshow transitions and card reveals
+### UX Improvements
+- **Responsive Popovers** - Smart positioning that adapts to fullscreen mode
+- **Enhanced Navigation** - Keyboard support with improved focus management
+- **Text Density** - Compact and detailed view options for different use cases
+- **Smooth Animations** - Refined transitions and interactions
 
-### 🧪 **Testing & Quality**
-- **Component Testing** - Isolated component tests with visual regression testing
-- **Enhanced Coverage** - Expanded test suite with integration tests for build output
+### Quality Assurance
+- **Component Testing** - Isolated tests with visual regression checks
+- **Integration Tests** - Build output validation and cross-browser testing
 
-### 📦 **Developer Experience**
-- **TypeScript-First** - Enhanced type definitions with proper interface exports
-- **Better Documentation** - Comprehensive props reference with migration guides
-- **Improved Demos** - Redesigned demo site with full-width layouts and modern UX
+### Developer Experience
+- **TypeScript First** - Full type definitions and IntelliSense support
+- **Comprehensive Docs** - Props reference and migration guides
+- **Interactive Examples** - Live CodeSandbox and Storybook demos
 
 All v2.x props remain fully supported with automatic mapping to the new grouped API, ensuring seamless upgrades without breaking changes.
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -149,7 +190,7 @@ pnpm add react-chrono
 
 **Requirements**: React 18.2+ | TypeScript 4.0+ (optional) | Modern browsers
 
-## 🎯 Basic Usage
+## Basic Usage
 
 ### Minimal Setup - Your First Timeline
 
@@ -286,27 +327,42 @@ The new grouped API organizes configuration into logical sections for better dis
 
 > **🚀 Migration Made Easy**: All existing v2.x props work alongside the new grouped API for seamless upgrades.
 
-## 🎭 Timeline Modes
+## Timeline Modes
 
 React Chrono offers four thoughtfully designed layout modes, each optimized for specific content types and user experiences:
 
-### 🔄 **Horizontal Mode - Classic Storytelling**
-The traditional timeline experience where users navigate chronologically from left to right. Perfect for historical narratives, project phases, or any sequential story where the journey matters as much as the destinations. Users can smoothly scroll through time or use navigation controls for precise movement.
+### Horizontal Mode
+Left-to-right chronological flow. Ideal for historical narratives and project phases where the journey matters.
 
-### 📱 **Vertical Mode - Mobile-First Design** 
-A space-efficient, scroll-friendly layout that works beautifully on all devices. Content flows naturally from top to bottom, making it ideal for social media feeds, news timelines, or any scenario where users expect familiar scrolling behavior. Automatically adapts to narrow screens without sacrificing readability.
+### Vertical Mode
+Top-to-bottom scroll-friendly layout. Perfect for feeds, news timelines, and mobile experiences.
 
-### ⚖️ **Alternating Mode - Visual Balance**
-The most visually striking option, where timeline cards gracefully alternate between left and right sides of a central axis. This symmetric design creates natural visual rhythm, prevents monotony, and maximizes screen real estate utilization. Excellent for portfolios, company milestones, or any content that benefits from balanced presentation.
+### Alternating Mode
+Cards alternate left and right of a central axis. Great for portfolios and company milestones with balanced visual rhythm.
 
-### 🖥️ **Horizontal All - Dashboard Overview**
-Displays all timeline items simultaneously in a comprehensive dashboard view. Users can see the entire timeline at once, making it perfect for project overviews, comparative analysis, or situations where the complete picture is more important than individual item focus.
+### Horizontal All
+Shows all timeline items at once. Perfect for dashboards, comparisons, and seeing the complete picture.
 
+#### Visual Examples
+
+**Vertical Mode** - Scroll-friendly chronological flow:
+![Vertical Timeline Mode](./readme-assets/vertical_mode.png)
+
+**Vertical Mode (High Text Density)** - Compact view showing detailed information:
+![Vertical Timeline High Density](./readme-assets/vertical_mode_high_density.png)
+
+**Alternating Mode** - Cards alternate left and right with visual balance:
+![Alternating Timeline Mode](./readme-assets/vertical_alternating_full.png)
+
+**Dark Mode** - Complete theme control with 36 customizable properties:
+![Dark Mode Timeline](./readme-assets/dark_mode.png)
+
+**Horizontal All** - Dashboard view showing complete timeline:
 ![Timeline Modes](./readme-assets/horizontal_all.jpg)
 
 ---
 
-## 🎯 Essential Props
+## Essential Props
 
 React Chrono requires minimal configuration to get started:
 
@@ -316,19 +372,17 @@ React Chrono requires minimal configuration to get started:
 | `mode` | `string` | Layout mode: `'horizontal'` \| `'vertical'` \| `'alternating'` \| `'horizontal-all'` |
 | `theme` | `Theme` | Customize colors and appearance |
 
-**📋 Need complete prop documentation?** See our comprehensive [Props Reference](./PROPS-REFERENCE.md)
+**Need complete prop documentation?** See our comprehensive [Props Reference](./PROPS-REFERENCE.md)
 
 ---
 
----
+## Showcase: What React Chrono Can Do
 
-## 🎬 Showcase: What React Chrono Can Do
-
-### 📺 Rich Media Integration
+### Rich Media Integration
 
 Images load intelligently using intersection observers - only when entering the viewport - ensuring fast initial loads even with dozens of high-resolution photos. Videos auto-play when timeline items become active, creating cinematic storytelling experiences. The component handles responsive sizing, buffering states, accessibility attributes, and performance optimization automatically.
 
-### 🎮 Interactive Features
+### Interactive Features
 
 **Slideshow Mode**: Auto-playing presentations with customizable durations, transition effects, and progress indicators - perfect for kiosks and guided storytelling.
 
@@ -336,11 +390,11 @@ Images load intelligently using intersection observers - only when entering the 
 
 **Real-time Search**: Instantly highlights matching content across titles, descriptions, and metadata, helping users find specific events without losing context.
 
-### 🎨 Theming & Branding
+### Theming & Branding
 
 Adapt to any visual identity with a comprehensive theming system. Dark mode is a first-class feature with dedicated properties for shadows, glows, and interaction states. Google Fonts integration handles loading optimization and fallback strategies automatically, making typography customization effortless.
 
-### 🌍 Complete Internationalization
+### Complete Internationalization
 
 Customize every piece of user-facing text for any language or locale. The i18n system uses intelligent fallbacks - configure only what you need to change. Template strings support variable interpolation with full type safety.
 
@@ -356,19 +410,19 @@ Customize every piece of user-facing text for any language or locale. The i18n s
 />
 ```
 
-### 🏗️ Advanced Architecture
+### Advanced Architecture
 
 **Nested Timelines**: Create multi-level narratives where major events contain detailed sub-timelines - ideal for historical periods, project phases, or biographical chapters.
 
 **Custom Components**: Embed fully interactive React components within timeline cards - data visualizations, interactive maps, widgets, or custom UI elements.
 
-### 📱 Responsive Design
+### Responsive Design
 
 Fundamentally adapts to each device: precision hover states and multi-column layouts on desktop, optimized touch targets on tablets, and content-prioritized interfaces on mobile with smart font sizing and spacing.
 
 ---
 
-## 🔄 Migration from v2 to v3
+## Migration from v2 to v3
 
 Upgrading is seamless with full backward compatibility:
 
@@ -392,76 +446,24 @@ Upgrading is seamless with full backward compatibility:
 
 ---
 
-## 🌟 Why React Chrono
+## Live Examples & Playground
 
-### ⚡ **Zero Configuration Required**
-Works beautifully out of the box with just `items` prop
+### CodeSandbox Examples
 
-### 🎯 **TypeScript Native**
-Built with TypeScript for excellent IDE support and type safety
+Try interactive examples with real-time editing:
 
-### 📦 **Lightweight & Tree Shakeable**
-Optimized bundle size - only import what you use
+1. [**Quick Start**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/01-quick-start) - Basic vertical timeline for beginners
+2. [**Product Roadmap**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/02-product-roadmap) - Horizontal timeline with slideshow
+3. [**Media Gallery**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/03-media-gallery) - Alternating layout with images
+4. [**Nested Timeline**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/04-nested-timeline) - Hierarchical project structure
+5. [**Dark Portfolio**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/05-dark-portfolio) - Horizontal-all mode with dark theme
+6. [**Full Feature Demo**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/06-full-demo) - Comprehensive v3.0 showcase
 
-### 🔧 **Highly Customizable**
-From basic theming to complete visual overhauls
+### Storybook Documentation
 
-### ♿ **Accessibility Built-in**
-WCAG AA compliant with comprehensive keyboard navigation
+Browse component stories and interactive documentation on [Chromatic](https://chromatic.com).
 
-### 🌍 **Complete Internationalization**
-Comprehensive i18n support for global applications with 40+ configurable text elements
-
-### 📱 **Mobile First**
-Responsive design that adapts to any screen size
-
----
-
-## 🎬 Live Examples & Playground
-
-### 🎯 CodeSandbox Examples Collection
-
-Explore React Chrono's capabilities with these 6 ready-to-use examples:
-
-1. **Quick Start** - Basic vertical timeline for beginners
-   https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/01-quick-start
-
-2. **Product Roadmap** - Horizontal timeline with slideshow
-   https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/02-product-roadmap
-
-3. **Media Gallery** - Alternating layout with images
-   https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/03-media-gallery
-
-4. **Nested Timeline** - Hierarchical project structure
-   https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/04-nested-timeline
-
-5. **Dark Portfolio** - Horizontal-all mode with dark theme
-   https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/05-dark-portfolio
-
-6. **Full Feature Demo** - All v3.0 features showcase
-   https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/06-full-demo
-
----
-
-### 🚀 **v3.0 Complete Feature Showcase** ✨ NEW
-
-Experience all the new v3.0 features with our comprehensive CodeSandbox example:
-
-**[🎯 Open v3.0 Feature Showcase →](./codesandbox-example)**
-
-This interactive example demonstrates:
-- ✅ **Grouped Configuration API** - All 9 configuration groups in action
-- ✅ **Google Fonts Integration** - Per-element font styling with Inter
-- ✅ **Comprehensive i18n** - 60+ customizable text elements
-- ✅ **Enhanced Dark Mode** - Dynamic theme switching with 36 properties
-- ✅ **Sticky Toolbar** - With advanced search configuration
-- ✅ **Fullscreen Mode** - Cross-browser support
-- ✅ **Rich Media** - Images with lazy loading
-- ✅ **HTML Content** - Formatted text with lists
-
-> **📁 Want to create your own?** The complete CodeSandbox example is available in the [`/codesandbox-example`](./codesandbox-example) directory. Simply upload to CodeSandbox or fork our example to customize!
-
-### 📚 **Local Demo Site**
+### Local Demo Site
 Explore our comprehensive demo site with interactive examples. Run `pnpm run dev` locally to access:
 - All timeline layout modes (horizontal, vertical, alternating, horizontal-all)
 - Dark mode theming examples
@@ -473,7 +475,7 @@ Explore our comprehensive demo site with interactive examples. Run `pnpm run dev
 
 ---
 
-## 🛠️ Development Setup
+## Development Setup
 
 ### Prerequisites
 
@@ -516,7 +518,7 @@ React Chrono uses a comprehensive testing approach:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
 
@@ -531,7 +533,7 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 
 ---
 
-## 🧱 Built With Modern Technologies
+## Built With Modern Technologies
 
 <table>
 <tr>
@@ -557,7 +559,7 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 
 ---
 
-## 💖 Support the Project
+## Support the Project
 
 <div align="center">
 
