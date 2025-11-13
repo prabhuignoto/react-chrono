@@ -82,6 +82,7 @@ Native lazy loading for images, IntersectionObserver-managed visibility, and aut
 <summary><strong>Examples & Development</strong></summary>
 
 - [Live Examples & Playground](#-live-examples--playground)
+  - [CodeSandbox Examples Collection](#-codesandbox-examples-collection)
 - [Development Setup](#-development-setup)
 - [Contributing](#-contributing)
 - [Built With Modern Technologies](#-built-with-modern-technologies)
@@ -417,6 +418,30 @@ Responsive design that adapts to any screen size
 ---
 
 ## 🎬 Live Examples & Playground
+
+### 🎯 CodeSandbox Examples Collection
+
+Explore React Chrono's capabilities with these 6 ready-to-use examples:
+
+1. **Quick Start** - Basic vertical timeline for beginners
+   https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/01-quick-start
+
+2. **Product Roadmap** - Horizontal timeline with slideshow
+   https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/02-product-roadmap
+
+3. **Media Gallery** - Alternating layout with images
+   https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/03-media-gallery
+
+4. **Nested Timeline** - Hierarchical project structure
+   https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/04-nested-timeline
+
+5. **Dark Portfolio** - Horizontal-all mode with dark theme
+   https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/05-dark-portfolio
+
+6. **Full Feature Demo** - All v3.0 features showcase
+   https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/06-full-demo
+
+---
 
 ### 🚀 **v3.0 Complete Feature Showcase** ✨ NEW
 
