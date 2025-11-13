@@ -1,0 +1,8 @@
+{
+  "projectToken": "CHROMATIC_PROJECT_TOKEN",
+  "autoAcceptChanges": "ci",
+  "exitOnceUploaded": true,
+  "skipBuildScript": false,
+  "allowConsoleErrors": true,
+  "viewLayer": "react"
+}
