@@ -43,7 +43,7 @@
 </td>
 <td align="center" valign="top">
 <h3>Accessibility & i18n</h3>
-<p>WCAG AA • 40+ i18n Elements • Mobile First</p>
+<p>WCAG AA • 60+ i18n Elements • Mobile First</p>
 </td>
 </tr>
 </table>
@@ -154,7 +154,7 @@ yarn add react-chrono
 pnpm add react-chrono
 ```
 
-**Requirements**: React 18.2+ | TypeScript 4.0+ (optional) | Modern browsers
+**Requirements**: React 18.2+ or 19+ | Node.js 22+ | TypeScript 4.0+ (optional) | Modern browsers
 
 ## Basic Usage
 
@@ -418,12 +418,12 @@ Upgrading is seamless with full backward compatibility:
 
 Try interactive examples with real-time editing:
 
-1. [**Quick Start**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/01-quick-start) - Basic vertical timeline for beginners
-2. [**Product Roadmap**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/02-product-roadmap) - Horizontal timeline with slideshow
-3. [**Media Gallery**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/03-media-gallery) - Alternating layout with images
-4. [**Nested Timeline**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/04-nested-timeline) - Hierarchical project structure
-5. [**Dark Portfolio**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/05-dark-portfolio) - Horizontal-all mode with dark theme
-6. [**Full Feature Demo**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/feat/comprehensive-examples-storybook/codesandbox-examples/06-full-demo) - Comprehensive v3.0 showcase
+1. [**Quick Start**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/01-quick-start) - Basic vertical timeline for beginners
+2. [**Product Roadmap**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/02-product-roadmap) - Horizontal timeline with slideshow
+3. [**Media Gallery**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/03-media-gallery) - Alternating layout with images
+4. [**Nested Timeline**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/04-nested-timeline) - Hierarchical project structure
+5. [**Dark Portfolio**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/05-dark-portfolio) - Horizontal-all mode with dark theme
+6. [**Full Feature Demo**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/06-full-demo) - Comprehensive v3.0 showcase
 
 ### Storybook Documentation
 
@@ -445,7 +445,7 @@ Explore our comprehensive demo site with interactive examples. Run `pnpm run dev
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 22+
 - pnpm (recommended) or npm
 
 ### Initial Setup
