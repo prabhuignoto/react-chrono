@@ -654,7 +654,7 @@ The new i18n system is fully compatible with existing `accessibility.buttonTexts
 
 ## 🎨 Theme Properties
 
-Comprehensive theming system with 25+ customizable properties.
+Comprehensive theming system with 36 customizable properties.
 
 ### Theme Interface
 
@@ -1444,6 +1444,6 @@ const App = () => {
 
 ---
 
-*This documentation covers React Chrono v2.9.1 and later*
+*This documentation covers React Chrono v3.0 and later*
 
 </div>
