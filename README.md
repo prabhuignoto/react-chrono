@@ -418,12 +418,12 @@ Upgrading is seamless with full backward compatibility:
 
 Try interactive examples with real-time editing:
 
-1. [**Quick Start**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/01-quick-start) - Basic vertical timeline for beginners
-2. [**Product Roadmap**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/02-product-roadmap) - Horizontal timeline with slideshow
-3. [**Media Gallery**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/03-media-gallery) - Alternating layout with images
-4. [**Nested Timeline**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/04-nested-timeline) - Hierarchical project structure
-5. [**Dark Portfolio**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/05-dark-portfolio) - Horizontal-all mode with dark theme
-6. [**Full Feature Demo**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/06-full-demo) - Comprehensive v3.0 showcase
+1. [**Quick Start**](https://codesandbox.io/s/github/prabhuignoto/react-chrono/tree/master/codesandbox-examples/01-quick-start) - Basic vertical timeline for beginners
+2. [**Product Roadmap**](https://codesandbox.io/s/github/prabhuignoto/react-chrono/tree/master/codesandbox-examples/02-product-roadmap) - Horizontal timeline with slideshow
+3. [**Media Gallery**](https://codesandbox.io/s/github/prabhuignoto/react-chrono/tree/master/codesandbox-examples/03-media-gallery) - Alternating layout with images
+4. [**Nested Timeline**](https://codesandbox.io/s/github/prabhuignoto/react-chrono/tree/master/codesandbox-examples/04-nested-timeline) - Hierarchical project structure
+5. [**Dark Portfolio**](https://codesandbox.io/s/github/prabhuignoto/react-chrono/tree/master/codesandbox-examples/05-dark-portfolio) - Horizontal-all mode with dark theme
+6. [**Full Feature Demo**](https://codesandbox.io/s/github/prabhuignoto/react-chrono/tree/master/codesandbox-examples/06-full-demo) - Comprehensive v3.0 showcase
 
 ### Storybook Documentation
 
