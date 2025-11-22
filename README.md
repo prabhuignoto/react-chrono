@@ -414,21 +414,6 @@ Upgrading is seamless with full backward compatibility:
 
 ## Live Examples & Playground
 
-### CodeSandbox Examples
-
-Try interactive examples with real-time editing:
-
-1. [**Quick Start**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/01-quick-start) - Basic vertical timeline for beginners
-2. [**Product Roadmap**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/02-product-roadmap) - Horizontal timeline with slideshow
-3. [**Media Gallery**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/03-media-gallery) - Alternating layout with images
-4. [**Nested Timeline**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/04-nested-timeline) - Hierarchical project structure
-5. [**Dark Portfolio**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/05-dark-portfolio) - Horizontal-all mode with dark theme
-6. [**Full Feature Demo**](https://codesandbox.io/p/github/prabhuignoto/react-chrono/master/codesandbox-examples/06-full-demo) - Comprehensive v3.0 showcase
-
-### Storybook Documentation
-
-Browse component stories and interactive documentation on [Chromatic](https://chromatic.com).
-
 ### Local Demo Site
 Explore our comprehensive demo site with interactive examples. Run `pnpm run dev` locally to access:
 - All timeline layout modes (horizontal, vertical, alternating, horizontal-all)
