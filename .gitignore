@@ -45,6 +45,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.chromatic.json
 
 npm-debug.log*
 yarn-debug.log*

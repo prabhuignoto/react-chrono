@@ -156,6 +156,10 @@ pnpm add react-chrono
 
 **Requirements**: React 18.2+ or 19+ | Node.js 22+ | TypeScript 4.0+ (optional) | Modern browsers
 
+### Storybook
+
+Browse interactive examples in [Storybook](https://691574b1d6fa2f35b1f812a9-qukrtwoznl.chromatic.com/?path=/story/layout-modes-vertical--basic).
+
 ## Basic Usage
 
 ### Minimal Setup - Your First Timeline
