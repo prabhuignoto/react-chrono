@@ -80,6 +80,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     updateShowAllCardsHorizontal: updateHorizontalAllCards,
     updateTextContentDensity,
 
+    // Focus behavior
+    focusActiveItemOnLoad,
+
     // Font properties
     googleFonts,
   } = useTimelineContext();
@@ -94,6 +97,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const [isFullscreen, setIsFullscreen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const keyboardTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Track if this is the initial render to prevent auto-focus unless focusActiveItemOnLoad is true
+  const isInitialRenderRef = useRef(true);
 
   // Listen to native fullscreen change events to keep state in sync
   useEffect(() => {
@@ -218,11 +223,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     slideShowRunning: !!slideShowRunning,
     isKeyboardNavigation: !!isKeyboardNavigation,
     isToolbarNavigationRef,
-    onTimelineUpdated: onTimelineUpdated || (() => {}),
-    onNext: onNext || (() => {}),
-    onPrevious: onPrevious || (() => {}),
-    onFirst: onFirst || (() => {}),
-    onLast: onLast || (() => {}),
+    onTimelineUpdated: onTimelineUpdated || (() => { }),
+    onNext: onNext || (() => { }),
+    onPrevious: onPrevious || (() => { }),
+    onFirst: onFirst || (() => { }),
+    onLast: onLast || (() => { }),
   });
 
   const {
@@ -232,7 +237,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     handleMainScroll,
   } = useTimelineScroll({
     mode: timelineMode,
-    onScrollEnd: onScrollEnd || (() => {}),
+    onScrollEnd: onScrollEnd || (() => { }),
     setNewOffset,
     onNextItem: handleNextInternal,
     onPreviousItem: handlePreviousInternal,
@@ -568,7 +573,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const wrappedOnTimelineUpdated = useCallback(
     (index: number) => {
       isSearchNavigationRef.current = true;
-      (onTimelineUpdated || (() => {}))(index);
+      (onTimelineUpdated || (() => { }))(index);
     },
     [onTimelineUpdated],
   );
@@ -733,6 +738,15 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       title,
     });
 
+    // Determine if we should focus elements
+    // Only focus on initial render if focusActiveItemOnLoad is true
+    const shouldFocus = !isInitialRenderRef.current || focusActiveItemOnLoad;
+
+    // Mark that initial render is complete
+    if (isInitialRenderRef.current) {
+      isInitialRenderRef.current = false;
+    }
+
     // Handle centering for both slideshow and manual navigation
     if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
       const card = horizontalContentRef.current?.querySelector(
@@ -757,8 +771,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
               cardLeft - contentLeft + cardWidth / 2 - contentWidth / 2;
             ele.scrollLeft += targetScrollLeft;
 
-            // Use captured state - don't check document.activeElement here (timing issue)
-            if (!wasSearchActive) {
+            // Only focus if conditions allow and it's not initial render (unless focusActiveItemOnLoad is true)
+            if (!wasSearchActive && shouldFocus) {
               (card as HTMLElement).focus({ preventScroll: true });
             }
           });
@@ -792,8 +806,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
       if (verticalItemRow) {
         requestAnimationFrame(() => {
-          // Check if scrollIntoView is available (not available in JSDOM)
-          if ((verticalItemRow as HTMLElement).scrollIntoView) {
+          // Only scroll into view if it's not initial render or if focusOnLoad is enabled
+          // scrollIntoView can trigger browser focus behavior
+          if ((verticalItemRow as HTMLElement).scrollIntoView && shouldFocus) {
             (verticalItemRow as HTMLElement).scrollIntoView({
               behavior: 'smooth',
               block: 'center',
@@ -888,7 +903,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         aria-label="Timeline navigation"
         aria-keyshortcuts={
           timelineMode === 'VERTICAL' ||
-          timelineMode === 'VERTICAL_ALTERNATING'
+            timelineMode === 'VERTICAL_ALTERNATING'
             ? 'ArrowUp ArrowDown Home End'
             : 'ArrowLeft ArrowRight Home End'
         }
@@ -1013,7 +1028,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             id={id}
             theme={theme}
             lineWidth={lineWidth}
-            onOutlineSelection={onOutlineSelection || (() => {})}
+            onOutlineSelection={onOutlineSelection || (() => { })}
             nestedCardHeight={nestedCardHeight ?? 0}
           />
         </div>
@@ -1021,23 +1036,23 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         {/* Only render content renderer for horizontal modes */}
         {(timelineMode === 'HORIZONTAL' ||
           timelineMode === 'HORIZONTAL_ALL') && (
-          <div
-            id={id}
-            ref={horizontalContentRef}
-            className={`timeline-content-render ${ve.contentRenderer({
-              mode:
-                timelineMode === 'HORIZONTAL_ALL'
-                  ? 'horizontalAll'
-                  : 'horizontal',
-            })}`}
-            style={
-              {
-                // Pass card height as CSS variable for dynamic height calculation
-                '--card-height': `${cardHeight || 350}px`,
-              } as React.CSSProperties
-            }
-          />
-        )}
+            <div
+              id={id}
+              ref={horizontalContentRef}
+              className={`timeline-content-render ${ve.contentRenderer({
+                mode:
+                  timelineMode === 'HORIZONTAL_ALL'
+                    ? 'horizontalAll'
+                    : 'horizontal',
+              })}`}
+              style={
+                {
+                  // Pass card height as CSS variable for dynamic height calculation
+                  '--card-height': `${cardHeight || 350}px`,
+                } as React.CSSProperties
+              }
+            />
+          )}
       </div>
     </FontProvider>
   );

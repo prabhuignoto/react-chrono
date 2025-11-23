@@ -23,7 +23,7 @@ interface TimelineViewProps {
   id: string;
   theme?: any;
   lineWidth?: number;
-  onOutlineSelection: (index: number) => void;
+  onOutlineSelection?: (index: number) => void;
   nestedCardHeight: number;
 }
 
@@ -88,7 +88,6 @@ const TimelineView: React.FC<TimelineViewProps> = ({
         mode={timelineMode as TimelineMode}
         onClick={handleTimelineItemClick}
         onElapsed={handleTimelineItemElapsed}
-        onOutlineSelection={onOutlineSelection}
         theme={theme}
         nestedCardHeight={nestedCardHeight}
         {...pickDefined({
@@ -111,11 +110,11 @@ const TimelineView: React.FC<TimelineViewProps> = ({
       mode={timelineMode as TimelineMode}
       onClick={handleTimelineItemClick}
       onElapsed={handleTimelineItemElapsed}
-      onOutlineSelection={onOutlineSelection}
       theme={theme}
       nestedCardHeight={nestedCardHeight}
       {...pickDefined({
         slideShowRunning,
+        onOutlineSelection,
       })}
     />
   );

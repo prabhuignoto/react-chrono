@@ -149,38 +149,38 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
           onKeyDown={rovingProps?.onKeyDown}
           onFocus={rovingProps?.onFocus}
         >
-        <TimelineCard
-          // Always required props
-          onClick={handleItemClick}
-          autoScroll={autoScroll}
-          wrapperId={wrapperId}
-          theme={theme}
-          cardHeight={cardHeight}
-          cardWidth={cardWidth}
-          // Always provided props
-          title={item.title}
-          cardTitle={item.cardTitle}
-          cardSubtitle={item.cardSubtitle}
-          cardDetailedText={item.cardDetailedText}
-          customContent={children ? (children as ReactNode[])[index] : null}
-          iconChild={iconChildColln[index]}
-          // Conditionally provided props - clean approach
-          {...pickDefined({
-            id: item.id,
-            url: item.url,
-            media: item.media,
-            timelineContent: item.timelineContent,
-            items: item.items,
-            isNested: item.isNested,
-            hasNestedItems: item.hasNestedItems,
-            visible: item.visible,
-            active: item.active,
-            slideShowRunning: slideShowRunning,
-            onElapsed: onElapsed,
-            hasFocus: hasFocus,
-            nestedCardHeight: nestedCardHeight,
-          })}
-        />
+          <TimelineCard
+            // Always required props
+            onClick={handleItemClick}
+            autoScroll={autoScroll}
+            wrapperId={wrapperId}
+            theme={theme}
+            cardHeight={cardHeight}
+            cardWidth={cardWidth}
+            // Always provided props
+            title={item.title}
+            cardTitle={item.cardTitle}
+            cardSubtitle={item.cardSubtitle}
+            cardDetailedText={item.cardDetailedText}
+            customContent={children ? (children as ReactNode[])[index] : null}
+            iconChild={iconChildColln[index]}
+            // Conditionally provided props - clean approach
+            {...pickDefined({
+              id: item.id,
+              url: item.url,
+              media: item.media,
+              timelineContent: item.timelineContent,
+              items: item.items,
+              isNested: item.isNested,
+              hasNestedItems: item.hasNestedItems,
+              visible: item.visible,
+              active: item.active,
+              slideShowRunning: slideShowRunning,
+              onElapsed: onElapsed,
+              hasFocus: hasFocus,
+              nestedCardHeight: nestedCardHeight,
+            })}
+          />
         </li>
       );
     });

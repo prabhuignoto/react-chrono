@@ -44,16 +44,16 @@ function BasicVerticalTimeline() {
   );
 }`;
 
-export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({ 
-  type, 
-  items 
+export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
+  type,
+  items
 }) => (
   <DemoPageLayout
     title="Basic Vertical Timeline"
     description="A clean, vertical timeline layout perfect for chronological storytelling. This is the most commonly used timeline format, displaying events from top to bottom with cards alternating on either side of a central timeline trunk."
     features={[
       'Vertical Layout',
-      'Responsive Design', 
+      'Responsive Design',
       'Alternating Cards',
       'Auto Slideshow',
       'Search & Navigation',
@@ -68,7 +68,7 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
         id="vertical_basic_test"
         activeItemIndex={2}
         onItemSelected={(selected) => console.log(selected.index)}
-        
+
         layout={{
           cardWidth: 650,
           cardHeight: 300,
@@ -78,22 +78,22 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
             breakpoint: 768,
           },
         }}
-        
+
         interaction={{
-          focusOnLoad: true,
+          focusOnLoad: false,
           cardHover: true,
         }}
-        
+
         content={{
           allowHTML: true,
           compactText: true,
         }}
-        
+
         display={{
           scrollable: { scrollbar: false },
           borderless: true,
-          toolbar: { 
-            enabled: true, 
+          toolbar: {
+            enabled: true,
             position: 'top',
             search: {
               width: '450px',
@@ -102,19 +102,19 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
             }
           },
         }}
-        
+
         media={{
           align: 'center',
           fit: 'cover',
         }}
-        
+
         animation={{
           slideshow: {
             enabled: true,
             duration: 2500,
           },
         }}
-        
+
         style={{
           fontSizes: {
             title: '1.5rem',
@@ -156,11 +156,11 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
             preconnect: true
           }
         }}
-        
+
         theme={{
           cardDetailsColor: '#555555',
         }}
-        
+
         darkMode={{
           showToggle: true,
         }}

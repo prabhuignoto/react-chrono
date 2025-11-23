@@ -255,7 +255,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       className,
       mode,
       onActive: handleOnActive,
-      onClick: onClick || (() => {}),
+      onClick: onClick || (() => { }),
       isMobile,
       ...pickDefined({
         active,

@@ -90,7 +90,7 @@ export const shape = style({
     },
     '&.using-icon': {
       overflow: 'visible', // Allow icons to be visible
-      background: 'transparent',
+      background: 'var(--icon-bg-color)',
     },
     '&.active.using-icon': {
       boxShadow: '0 0 0 4px rgba(59, 130, 246, 0.2)',
@@ -127,15 +127,15 @@ globalStyle(`${shape}:not(.using-icon)::before`, {
 
 // Icon image styling
 globalStyle(`${shape}.using-icon img`, {
-  maxWidth: '90%',
-  maxHeight: '90%',
+  maxWidth: '70%',
+  maxHeight: '70%',
   objectFit: 'contain',
 });
 
 // Icon SVG styling
 globalStyle(`${shape}.using-icon svg`, {
-  width: '80%',
-  height: '80%',
+  width: '70%',
+  height: '70%',
   fill: 'currentColor',
 });
 
