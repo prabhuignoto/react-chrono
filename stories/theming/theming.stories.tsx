@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import Chrono from '../../src/components';
 import { basicTimeline } from '../../src/demo/data/basic-timeline';

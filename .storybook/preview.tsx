@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react-vite';
 import React from 'react';
 // Import Vanilla Extract global styles (same as main entry point)
 import '../src/styles/global.css';

@@ -4,30 +4,38 @@ import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(ts|tsx)', '../stories/**/*.stories.@(ts|tsx)'],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-controls',
-    '@storybook/addon-themes',
-  ],
+  addons: ['@storybook/addon-themes', '@storybook/addon-docs'],
+
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
+
   core: {
     disableTelemetry: true,
   },
-  docs: {
-    autodocs: false,
-  },
-  async viteFinal(config) {
+
+  async viteFinal(config, { configType }) {
     return mergeConfig(config, {
       plugins: [
         vanillaExtractPlugin({
-          identifiers: 'debug',
+          // Use 'short' identifiers for production builds, 'debug' for development
+          // This ensures consistent class names in production and readable names in dev
+          identifiers: configType === 'PRODUCTION' ? 'short' : 'debug',
         }),
       ],
+      // Ensure CSS is properly handled in production builds
+      css: {
+        devSourcemap: configType === 'DEVELOPMENT',
+      },
+      // Optimize dependencies - exclude vanilla-extract from optimization
+      // This ensures vanilla-extract CSS is processed correctly in both dev and prod
+      // and prevents issues with CSS not being loaded in production builds
+      optimizeDeps: {
+        exclude: ['@vanilla-extract/css', '@vanilla-extract/dynamic'],
+      },
     });
-  },
+  }
 };
 
 export default config;
