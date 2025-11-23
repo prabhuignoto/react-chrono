@@ -46,7 +46,7 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
   }: TimelineVerticalModel): ReactElement => {
     // Use responsive detection from context instead of hardcoding based on mode
     // This enables proper responsive behavior for VERTICAL_ALTERNATING mode
-    const { isMobile } = useTimelineContext();
+    const { isMobile, focusActiveItemOnLoad } = useTimelineContext();
 
     /**
      * Initialize roving tabindex for timeline items (WCAG 2.1.1: Keyboard)
@@ -66,6 +66,7 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
       items: rovingItemsConfig,
       orientation: 'vertical',
       loop: false, // Explicit navigation, don't loop around
+      focusOnLoad: focusActiveItemOnLoad, // Respect focus-on-load setting
     });
 
     /**
@@ -138,7 +139,7 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
             index={index} // Pass down the item's index
             onActive={handleOnActive} // Pass down the memoized active handler
             onClick={onClick} // Pass down the global click handler
-            onElapsed={onElapsed || (() => {})} // Pass down the global elapsed handler
+            onElapsed={onElapsed || (() => { })} // Pass down the global elapsed handler
             // Removed onShowMore as the handler was empty
             slideShowRunning={!!slideShowRunning} // Pass down the slideshow state
             cardLess={!!cardLess} // Pass down the cardLess flag

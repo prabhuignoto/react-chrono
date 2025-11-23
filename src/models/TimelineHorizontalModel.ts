@@ -45,6 +45,8 @@ export interface TimelineHorizontalModel {
 
   // Unique identifier for the timeline wrapper.
   wrapperId: string;
+
+  onOutlineSelection?: (index: number) => void;
 }
 
 export interface Scroll {

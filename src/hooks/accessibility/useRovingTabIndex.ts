@@ -14,6 +14,8 @@ export interface UseRovingTabIndexOptions {
   initialActiveId?: string;
   /** Callback when active item changes */
   onActiveChange?: (id: string) => void;
+  /** Whether to focus active item on initial load (default: true) */
+  focusOnLoad?: boolean;
 }
 
 /**
@@ -77,6 +79,7 @@ export const useRovingTabIndex = (
     loop = false,
     initialActiveId,
     onActiveChange,
+    focusOnLoad = true,
   } = options;
 
   // Initialize active ID from first non-disabled item or provided initial ID
@@ -92,6 +95,8 @@ export const useRovingTabIndex = (
   const itemRefsMap = useRef<Map<string, React.RefObject<HTMLElement | null>>>(
     new Map(),
   );
+  // Track if this is the initial render to prevent auto-focus unless focusOnLoad is true
+  const isInitialRenderRef = useRef(true);
 
   // Initialize refs for all items
   useEffect(() => {
@@ -269,14 +274,30 @@ export const useRovingTabIndex = (
       const item = items.find((item) => item.id === id);
       const isDisabled = item?.disabled ?? false;
 
+      // Determine tabIndex based on focusOnLoad and initial render state
+      // On initial render with focusOnLoad=false, all items get tabIndex={-1}
+      // After initial render or with focusOnLoad=true, active item gets tabIndex={0}
+      let tabIndex: 0 | -1 = -1;
+      if (isActive && !isDisabled) {
+        if (focusOnLoad || !isInitialRenderRef.current) {
+          tabIndex = 0;
+        }
+      }
+
       return {
         ref,
-        tabIndex: isActive && !isDisabled ? (0 as const) : (-1 as const),
+        tabIndex,
         onKeyDown: handleKeyDown,
-        onFocus: () => handleFocus(id),
+        onFocus: () => {
+          // Mark that initial render is complete on first interaction
+          if (isInitialRenderRef.current) {
+            isInitialRenderRef.current = false;
+          }
+          handleFocus(id);
+        },
       };
     },
-    [activeId, items, handleKeyDown, handleFocus],
+    [activeId, items, handleKeyDown, handleFocus, focusOnLoad],
   );
 
   return {
