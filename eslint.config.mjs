@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from "eslint-plugin-storybook";
+
 import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
 import _import from 'eslint-plugin-import';
 import react from 'eslint-plugin-react';
@@ -20,67 +23,63 @@ const compat = new FlatCompat({
   recommendedConfig: js.configs.recommended,
 });
 
-export default [
-  {
-    ignores: ['src/demo/*', 'src/assets/*', 'src/examples/*', 'coverage/**', 'dist/**', 'build/**'],
-  },
-  ...fixupConfigRules(
-    compat.extends(
-      'plugin:import/typescript',
-      'plugin:react/recommended',
-      'prettier',
-      'plugin:react/jsx-runtime',
-    ),
+export default [{
+  ignores: ['src/demo/*', 'src/assets/*', 'src/examples/*', 'coverage/**', 'dist/**', 'build/**'],
+}, ...fixupConfigRules(
+  compat.extends(
+    'plugin:import/typescript',
+    'plugin:react/recommended',
+    'prettier',
+    'plugin:react/jsx-runtime',
   ),
-  {
-    languageOptions: {
-      ecmaVersion: 12,
+), {
+  languageOptions: {
+    ecmaVersion: 12,
 
-      globals: {
-        ...globals.browser,
-      },
-      parser: tsParser,
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-      sourceType: 'module',
+    globals: {
+      ...globals.browser,
     },
-
-    plugins: {
-      '@typescript-eslint': typescriptEslint,
-      import: fixupPluginRules(_import),
-      'jsx-a11y': jsxA11Y,
-      react: fixupPluginRules(react),
-      'sort-keys-fix': sortKeysFix,
-      'typescript-sort-keys': typescriptSortKeys,
-    },
-
-    rules: {
-      'sort-keys-fix/sort-keys-fix': 'error',
-      'typescript-sort-keys/interface': 'error',
-      'typescript-sort-keys/string-enum': 'error',
-      'no-unused-vars': "error",
-      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }]
-      // 'no-restricted-imports': [
-      //   'error',
-      //   {
-      //     paths: [
-      //       {
-      //         name: 'styled-components',
-      //         message: 'Use vanilla-extract instead. If this is a legacy file, add a file-level disable comment and include a migration note.',
-      //       },
-      //     ],
-      //     patterns: ['styled-components/*'],
-      //   },
-      // ],
-    },
-
-    settings: {
-      react: {
-        version: 'detect',
+    parser: tsParser,
+    parserOptions: {
+      ecmaFeatures: {
+        jsx: true,
       },
+    },
+    sourceType: 'module',
+  },
+
+  plugins: {
+    '@typescript-eslint': typescriptEslint,
+    import: fixupPluginRules(_import),
+    'jsx-a11y': jsxA11Y,
+    react: fixupPluginRules(react),
+    'sort-keys-fix': sortKeysFix,
+    'typescript-sort-keys': typescriptSortKeys,
+  },
+
+  rules: {
+    'sort-keys-fix/sort-keys-fix': 'error',
+    'typescript-sort-keys/interface': 'error',
+    'typescript-sort-keys/string-enum': 'error',
+    'no-unused-vars': "error",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }]
+    // 'no-restricted-imports': [
+    //   'error',
+    //   {
+    //     paths: [
+    //       {
+    //         name: 'styled-components',
+    //         message: 'Use vanilla-extract instead. If this is a legacy file, add a file-level disable comment and include a migration note.',
+    //       },
+    //     ],
+    //     patterns: ['styled-components/*'],
+    //   },
+    // ],
+  },
+
+  settings: {
+    react: {
+      version: 'detect',
     },
   },
-];
+}, ...storybook.configs["flat/recommended"]];
