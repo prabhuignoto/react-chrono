@@ -273,6 +273,12 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
   // Cache the last processed items to avoid unnecessary reprocessing
   const itemsHashRef = useRef<string>('');
   const processedItemsCache = useRef<TimelineItemModel[]>([]);
+  
+  // Store the last original items array for comparison (to detect append vs replace)
+  const lastOriginalItemsRef = useRef<any[]>([]);
+  
+  // Store scroll position to preserve it during item updates
+  const scrollPositionRef = useRef<{ scrollLeft?: number; scrollTop?: number }>({});
 
   // Track children count for Array.map() pattern detection
   const childrenCount = React.Children.count(children);
@@ -321,22 +327,39 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     [activeItemIndex, titleDateFormat, children],
   );
 
-  // Optimize updateItems function
+  // Optimize updateItems function - only for truly appending items
+  // This function merges existing items with new ones, preserving existing item states
   const updateItems = useCallback(
-    (lineItems: TimelineItemModel[]) => {
-      if (lineItems) {
-        const pos = timeLineItems.length;
-
-        return lineItems.map((item, index) => ({
-          ...item,
-          active: index === pos,
-          visible: true,
-        }));
+    (lineItems: TimelineItemModel[], existingItems: TimelineItemModel[]) => {
+      if (lineItems && existingItems.length > 0) {
+        // Merge existing items with new ones, preserving existing item states
+        const existingItemsMap = new Map(
+          existingItems.map((item, idx) => [idx, item])
+        );
+        
+        return lineItems.map((item, index) => {
+          // If this is an existing item, preserve its state
+          const existingItem = existingItemsMap.get(index);
+          if (existingItem) {
+            return {
+              ...item,
+              id: existingItem.id, // Preserve existing ID
+              active: existingItem.active,
+              visible: existingItem.visible,
+            };
+          }
+          // New item - set visible and inactive (active will be set by active item logic)
+          return {
+            ...item,
+            active: false,
+            visible: true,
+          };
+        });
       } else {
         return [];
       }
     },
-    [timeLineItems.length],
+    [], // No dependencies - function is pure
   );
 
   // Helper function to convert ReactNode to hashable string
@@ -404,6 +427,7 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     if (!_items?.length) {
       const lineItems = initItems();
       setTimeLineItems(lineItems);
+      lastOriginalItemsRef.current = [];
       return;
     }
 
@@ -416,15 +440,44 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
       return; // No changes to items data, skip processing
     }
 
+    // Capture scroll position before items update (for horizontal/vertical modes)
+    const timelineElement = document.querySelector(
+      '[data-testid="timeline-main-wrapper"]'
+    ) as HTMLElement | null;
+    
+    if (timelineElement) {
+      scrollPositionRef.current = {
+        scrollLeft: timelineElement.scrollLeft,
+        scrollTop: timelineElement.scrollTop,
+      };
+    }
+
     itemsHashRef.current = currentHash;
 
     const previousItemsLength = timeLineItems.length;
-    const isDynamicUpdate =
-      allowDynamicUpdate && timeLineItems.length && _items.length > timeLineItems.length;
+    
+    // Check if items are truly appended (same items + new ones at end) vs replaced (completely different)
+    // Compare first N items (where N = previous length) to see if they match
+    const isTrulyAppended = allowDynamicUpdate && 
+      timeLineItems.length > 0 && 
+      _items.length > timeLineItems.length &&
+      lastOriginalItemsRef.current.length > 0 &&
+      // Verify existing items are preserved at the beginning by comparing original items
+      (() => {
+        const previousOriginalSlice = lastOriginalItemsRef.current;
+        const newItemsSlice = _items.slice(0, previousOriginalSlice.length);
+        
+        // Compare by hash (which uses id, date, title, cardTitle from original items)
+        const previousHash = createItemsHash(previousOriginalSlice);
+        const newHash = createItemsHash(newItemsSlice);
+        return previousHash === newHash && previousHash !== '';
+      })();
 
-    if (isDynamicUpdate) {
-      newItems = updateItems(_items);
+    if (isTrulyAppended) {
+      // Items are truly appended - use updateItems to merge
+      newItems = updateItems(_items, timeLineItems);
     } else if (_items.length) {
+      // Items are replaced or initial load - use initItems
       newItems = initItems(_items);
     }
 
@@ -432,24 +485,71 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
       timeLineItemsRef.current = newItems;
       setTimeLineItems(newItems);
 
-      if (isDynamicUpdate && allowDynamicUpdate && previousItemsLength > 0) {
-        // For dynamic updates, preserve current focus if it exists
-        // Only focus on first newly loaded item if no current active item
-        if (activeTimelineItem === undefined || activeTimelineItem === null) {
-          setActiveTimelineItem(previousItemsLength);
+      // Validate and clamp activeTimelineItem to valid range
+      let validActiveIndex: number | undefined;
+      if (isTrulyAppended && allowDynamicUpdate && previousItemsLength > 0) {
+        // For truly appended items, preserve current active item if valid
+        if (activeTimelineItem !== undefined && activeTimelineItem !== null) {
+          validActiveIndex = Math.min(activeTimelineItem, newItems.length - 1);
+        } else {
+          // No active item - focus on first newly loaded item
+          validActiveIndex = previousItemsLength;
         }
       } else {
-        // For initial load or full refresh, respect the initial activeItemIndex setting
+        // For replaced items or initial load, respect the initial activeItemIndex setting
         const initialIndex =
           activeItemIndex !== undefined
             ? activeItemIndex
             : mode === 'vertical' || mode === 'alternating'
               ? undefined
               : 0;
-        setActiveTimelineItem(initialIndex);
+        validActiveIndex = initialIndex !== undefined 
+          ? Math.min(initialIndex, newItems.length - 1)
+          : undefined;
+      }
+
+      // Ensure validActiveIndex is within bounds
+      if (validActiveIndex !== undefined && validActiveIndex < 0) {
+        validActiveIndex = 0;
+      }
+
+      setActiveTimelineItem(validActiveIndex);
+
+      // Restore scroll position after DOM update
+      if (timelineElement && (scrollPositionRef.current.scrollLeft !== undefined || scrollPositionRef.current.scrollTop !== undefined)) {
+        requestAnimationFrame(() => {
+          const updatedElement = document.querySelector(
+            '[data-testid="timeline-main-wrapper"]'
+          ) as HTMLElement | null;
+          
+          if (updatedElement) {
+            const mappedMode = mapNewModeToLegacy(mode);
+            // For horizontal mode, preserve scrollLeft (clamped to valid range)
+            if (scrollPositionRef.current.scrollLeft !== undefined && 
+                (mappedMode === 'HORIZONTAL' || mappedMode === 'HORIZONTAL_ALL')) {
+              const maxScrollLeft = updatedElement.scrollWidth - updatedElement.clientWidth;
+              updatedElement.scrollLeft = Math.max(
+                0, 
+                Math.min(scrollPositionRef.current.scrollLeft, maxScrollLeft)
+              );
+            }
+            // For vertical modes, preserve scrollTop (clamped to valid range)
+            if (scrollPositionRef.current.scrollTop !== undefined && 
+                (mappedMode === 'VERTICAL' || mappedMode === 'VERTICAL_ALTERNATING')) {
+              const maxScrollTop = updatedElement.scrollHeight - updatedElement.clientHeight;
+              updatedElement.scrollTop = Math.max(
+                0, 
+                Math.min(scrollPositionRef.current.scrollTop, maxScrollTop)
+              );
+            }
+          }
+        });
       }
 
       processedItemsCache.current = newItems;
+      
+      // Store the original items for next comparison
+      lastOriginalItemsRef.current = _items;
     }
   }, [
     items,

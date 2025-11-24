@@ -16,10 +16,12 @@ export const wrapper = recipe({
       height: 'full',
     }),
     {
-      overflow: 'visible',
+      overflow: 'visible', // Allow cards to extend beyond wrapper boundaries
+      overflowX: 'visible', // Explicitly allow horizontal overflow
+      overflowY: 'auto', // Allow vertical scrolling
       zIndex: tokens.semantic.zIndex.timelineCard,
       // Performance optimizations
-      contain: 'layout',
+      // Removed 'contain: layout' as it can cause clipping of cards at edges
       willChange: 'transform',
     },
   ],
@@ -75,7 +77,7 @@ export const mainWrapper = recipe({
     {
       flex: '1 1 auto',
       overflowY: 'auto',
-      overflowX: 'hidden',
+      overflowX: 'visible', // Allow cards to extend beyond container (will be overridden per mode)
       overscrollBehavior: 'contain',
       background: 'transparent',
       padding: `${tokens.semantic.spacing.sm} 0`,
@@ -91,7 +93,10 @@ export const mainWrapper = recipe({
         flexDirection: 'column',
         height: 0,
         overflowY: 'auto',
-        overflowX: 'hidden',
+        overflowX: 'visible', // Allow cards to extend beyond container - they won't be clipped
+        // No fixed padding - let cards use their natural widths controlled by user props
+        paddingLeft: 0,
+        paddingRight: 0,
       },
       horizontal: {
         minHeight: '150px',
@@ -109,7 +114,10 @@ export const mainWrapper = recipe({
         flexDirection: 'column',
         height: 0,
         overflowY: 'auto',
-        overflowX: 'hidden',
+        overflowX: 'visible', // Allow cards to extend beyond container - they won't be clipped
+        // No fixed padding - let cards use their natural widths controlled by user props
+        paddingLeft: 0,
+        paddingRight: 0,
       },
     },
   },

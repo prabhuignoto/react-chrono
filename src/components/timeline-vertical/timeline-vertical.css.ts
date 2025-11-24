@@ -11,11 +11,14 @@ export const timelineVerticalWrapper = style([
     width: 'full',
   }),
   {
-    padding: '0.25rem',
+    padding: '0.25rem 0', // Vertical padding only
     outline: '0',
     position: 'relative',
     // Enable container queries for children without affecting layout
     containerType: 'inline-size',
+    // Ensure cards are not clipped at edges
+    overflowX: 'visible',
+    width: '100%',
   },
 ]);
 
