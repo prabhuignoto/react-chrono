@@ -339,6 +339,26 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     [timeLineItems.length],
   );
 
+  // Helper function to convert ReactNode to hashable string
+  const getHashableValue = useCallback((value: any, itemId: string): string => {
+    if (!value) return '';
+    if (typeof value === 'string') return value;
+    if (typeof value === 'number') return String(value);
+    
+    // For ReactNode, use a stable identifier
+    // If it's a React element, try to get a stable key
+    if (React.isValidElement(value)) {
+      const key = value.key;
+      const type = typeof value.type === 'string' 
+        ? value.type 
+        : value.type?.name || 'Component';
+      return `[ReactNode:${type}${key ? `:${key}` : ''}]`;
+    }
+    
+    // For other ReactNode types (arrays, fragments, etc.), use item id as fallback
+    return `[ReactNode:${itemId}]`;
+  }, []);
+
   // Create a stable hash for items comparison - optimized version
   const createItemsHash = useCallback((items: any[]) => {
     if (!items?.length) return '';
@@ -349,12 +369,12 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
         // Use simple string concatenation which is more efficient than JSON.stringify
         const id = item.id || '';
         const date = item.date || '';
-        const title = item.title || '';
-        const cardTitle = item.cardTitle || '';
+        const title = getHashableValue(item.title, id);
+        const cardTitle = getHashableValue(item.cardTitle, id);
         return `${id}:${date}:${title}:${cardTitle}`;
       })
       .join('|');
-  }, []);
+  }, [getHashableValue]);
 
   useEffect(() => {
     const _items = items?.filter((item) => item);
@@ -390,15 +410,17 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     // Use efficient comparison instead of JSON.stringify on entire array
     const currentHash = createItemsHash(_items);
 
-    if (!allowDynamicUpdate && currentHash === itemsHashRef.current) {
-      return; // No changes, skip processing
+    // Check if hash has changed - if not, skip processing (even with allowDynamicUpdate)
+    // This prevents unnecessary re-renders when only active state changes
+    if (currentHash === itemsHashRef.current) {
+      return; // No changes to items data, skip processing
     }
 
     itemsHashRef.current = currentHash;
 
     const previousItemsLength = timeLineItems.length;
     const isDynamicUpdate =
-      timeLineItems.length && _items.length > timeLineItems.length;
+      allowDynamicUpdate && timeLineItems.length && _items.length > timeLineItems.length;
 
     if (isDynamicUpdate) {
       newItems = updateItems(_items);
