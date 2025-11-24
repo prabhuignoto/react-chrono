@@ -55,6 +55,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     flipLayout,
     showAllCardsHorizontal,
     cardWidth,
+    focusActiveItemOnLoad,
   } = useTimelineContext();
 
   // Prioritize prop mode over context mode
@@ -91,13 +92,27 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     items: rovingItemsConfig,
     orientation: 'horizontal',
     loop: false, // Explicit navigation, don't loop around
+    focusOnLoad: focusActiveItemOnLoad, // Respect focus-on-load setting
   });
+
+  // Track if this is the initial render to prevent auto-focus unless focusActiveItemOnLoad is true
+  const isInitialRenderRef = useRef(true);
+
+  useEffect(() => {
+    isInitialRenderRef.current = false;
+  }, []);
 
   // Find and focus the active timeline point button when items update
   const activeId = useMemo(() => items.find((i) => i.active)?.id, [items]);
 
   useEffect(() => {
     if (!activeId) return;
+
+    // Only focus on initial render if focusActiveItemOnLoad is true
+    if (isInitialRenderRef.current && !focusActiveItemOnLoad) {
+      return;
+    }
+
     // In both horizontal modes, focus the active point button if it exists
     const root = listRef.current ?? document;
     const activePoint = root.querySelector(
@@ -112,7 +127,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
         }
       });
     }
-  }, [activeId]);
+  }, [activeId, focusActiveItemOnLoad]);
 
   const iconChildColln = useMemo(
     () => React.Children.toArray(iconChildren),

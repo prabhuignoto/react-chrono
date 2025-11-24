@@ -30,6 +30,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
   iconChild,
   timelineContent,
   cardWidth,
+  cardHeight,
   isNested,
   nestedCardHeight,
   items,
@@ -188,6 +189,7 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
             wrapperId={wrapperId}
             {...pickDefined({
               cardWidth,
+              cardHeight,
               url,
               slideShowRunning,
               media,

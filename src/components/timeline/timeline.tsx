@@ -99,6 +99,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const keyboardTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // Track if this is the initial render to prevent auto-focus unless focusActiveItemOnLoad is true
   const isInitialRenderRef = useRef(true);
+  // Track if we've made the initial focus decision (to handle multiple useEffect runs on mount)
+  const hasInitialFocusedRef = useRef(false);
 
   // Listen to native fullscreen change events to keep state in sync
   useEffect(() => {
@@ -739,13 +741,25 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     });
 
     // Determine if we should focus elements
-    // Only focus on initial render if focusActiveItemOnLoad is true
-    const shouldFocus = !isInitialRenderRef.current || focusActiveItemOnLoad;
+    // During initial mount (tracked by isInitialRenderRef): only focus if focusActiveItemOnLoad is true
+    // After mount: always focus for subsequent navigations
+    const shouldFocus = isInitialRenderRef.current ? focusActiveItemOnLoad : true;
 
-    // Mark that initial render is complete
+    // Mark that initial render is complete AFTER this effect runs
+    // Use setTimeout to ensure this happens after all synchronous code
     if (isInitialRenderRef.current) {
-      isInitialRenderRef.current = false;
+      setTimeout(() => {
+        isInitialRenderRef.current = false;
+      }, 0);
     }
+
+    console.log('Timeline focus decision:', {
+      isInitialRender: isInitialRenderRef.current,
+      focusActiveItemOnLoad,
+      shouldFocus,
+      activeTimelineItem,
+      timelineMode,
+    });
 
     // Handle centering for both slideshow and manual navigation
     if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
@@ -784,7 +798,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         `button[data-testid="timeline-circle"][data-item-id="${activeItem.id}"]`,
       ) as HTMLButtonElement | null;
 
-      if (point) {
+      if (point && shouldFocus) {
         requestAnimationFrame(() => {
           // Check if scrollIntoView is available (not available in JSDOM)
           if (point.scrollIntoView) {

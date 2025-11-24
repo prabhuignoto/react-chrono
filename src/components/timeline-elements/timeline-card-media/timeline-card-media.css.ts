@@ -103,15 +103,14 @@ export const mediaDetailsAbsolute = style({
   left: '0.5rem',
   right: '0.5rem',
   bottom: '0.5rem',
-  padding: '0.75rem',
+  padding: '1rem',
   transition: 'all 0.3s ease-in-out',
-  background: `${tokens.semantic.color.background.elevated}f5`,
-  backdropFilter: 'blur(4px)',
-  borderRadius: '12px',
-  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.15)',
-  border: `1px solid ${tokens.semantic.color.border.default}40`,
+  background: tokens.semantic.color.background.elevated, // Solid background for maximum readability
+  borderRadius: '16px',
+  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1)',
+  border: `1px solid ${tokens.semantic.color.border.default}60`,
   zIndex: 13,
-  maxHeight: '70%',
+  maxHeight: '50%',
   overflow: 'hidden',
 });
 
@@ -121,18 +120,44 @@ export const mediaDetailsCard = style({
 });
 
 export const mediaDetailsMinimized = style({
-  maxHeight: '3.5rem',
+  maxHeight: '4rem',
   cursor: 'pointer',
   overflow: 'hidden',
   ':hover': {
-    transform: 'scale(1.02)',
-    boxShadow: '0 6px 25px rgba(0, 0, 0, 0.2)',
+    transform: 'translateY(-2px)',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+    background: `${tokens.semantic.color.background.elevated}f2`,
   },
 });
 
 export const mediaDetailsMaximized = style({
-  maxHeight: '80%',
+  maxHeight: '50%',
+  overflowY: 'hidden', // Hide overflow when collapsed to show "Read More"
+});
+
+export const mediaDetailsExpanded = style({
+  maxHeight: '100%', // Take full card height when expanded
   overflowY: 'auto',
+});
+
+export const readMoreButton = style({
+  background: `linear-gradient(to bottom, transparent, ${tokens.semantic.color.background.elevated} 40%)`,
+  border: 'none',
+  color: tokens.semantic.color.interactive.primary,
+  cursor: 'pointer',
+  fontSize: '0.875rem',
+  fontWeight: 600,
+  padding: '1rem 0 0.5rem 0',
+  textDecoration: 'none',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  width: '100%',
+  zIndex: 20,
+  textAlign: 'center',
+  ':hover': {
+    textDecoration: 'underline',
+  },
 });
 
 export const mediaDetailsGradient = style({});
@@ -142,8 +167,9 @@ globalStyle(`${mediaDetailsGradient}::after`, {
   bottom: 0,
   left: 0,
   width: '100%',
-  height: '2rem',
+  height: '3rem',
   background: `linear-gradient(0deg, ${gradientVar} 0%, rgba(255,255,255,0) 100%)`,
+  pointerEvents: 'none',
 });
 
 export const errorMessage = style({
@@ -162,19 +188,20 @@ export const textOverlayButton = style({
   color: tokens.semantic.color.text.inverse,
   cursor: 'pointer',
   padding: tokens.semantic.spacing.xs,
-  borderRadius: tokens.semantic.borderRadius.md,
+  borderRadius: '50%',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: '32px',
-  height: '32px',
+  width: '28px',
+  height: '28px',
   transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
   boxShadow: tokens.semantic.shadow.card,
+  marginLeft: '0.5rem',
 
   selectors: {
     '&:hover': {
       background: tokens.semantic.color.interactive.primaryHover,
-      transform: 'scale(1.05)',
+      transform: 'scale(1.1)',
       boxShadow: tokens.semantic.shadow.cardHover,
     },
     '&:active': {
@@ -219,7 +246,10 @@ export const cardMediaHeader = style([
     alignItems: 'center',
     justifyContent: 'flex-start',
   }),
-  { padding: '0.5rem 0 0.5rem 0.5rem' },
+  {
+    padding: '0.5rem 0 0.5rem 0.5rem',
+    height: '100%',
+  },
 ]);
 
 export const buttonWrapper = style([
@@ -232,3 +262,4 @@ export const buttonWrapper = style([
     marginLeft: 'auto',
   },
 ]);
+
