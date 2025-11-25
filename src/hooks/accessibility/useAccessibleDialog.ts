@@ -138,9 +138,10 @@ export const useAccessibleDialog = (
         initialFocus.current?.focus();
       } else if (initialFocus === 'first' || initialFocus === 'last') {
         // Focus first or last focusable element
-        const focusableElements = dialogRef.current.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
-        );
+        const focusableElements =
+          dialogRef.current.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          );
 
         if (focusableElements.length > 0) {
           const targetElement =
@@ -221,8 +222,12 @@ export const useAccessibleDialog = (
       role: 'dialog' as const,
       'aria-modal': true,
       ...(ariaLabel !== undefined && { 'aria-label': ariaLabel }),
-      ...(ariaDescribedBy !== undefined && { 'aria-describedby': ariaDescribedBy }),
-      ...(ariaLabelledBy !== undefined && { 'aria-labelledby': ariaLabelledBy }),
+      ...(ariaDescribedBy !== undefined && {
+        'aria-describedby': ariaDescribedBy,
+      }),
+      ...(ariaLabelledBy !== undefined && {
+        'aria-labelledby': ariaLabelledBy,
+      }),
       tabIndex: -1,
     },
     backdropProps: {

@@ -190,7 +190,7 @@ export const useTimelineSearch = ({
         requestAnimationFrame(() => {
           // Create/update aria-live region announcement
           const ariaLiveRegion = document.querySelector(
-            '[data-testid="search-live-region"]'
+            '[data-testid="search-live-region"]',
           );
           if (ariaLiveRegion) {
             ariaLiveRegion.textContent = `Match ${nextIndex + 1} of ${searchResults.length}`;

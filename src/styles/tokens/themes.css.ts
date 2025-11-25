@@ -273,7 +273,8 @@ export const lightTheme = createTheme(tokens, {
       },
       border: {
         color: '#e5e7eb',
-        gradient: 'linear-gradient(135deg, #3b82f620 0%, transparent 50%, #3b82f610 100%)',
+        gradient:
+          'linear-gradient(135deg, #3b82f620 0%, transparent 50%, #3b82f610 100%)',
         radius: {
           sm: '0.25rem',
           md: '0.5rem',
@@ -286,9 +287,11 @@ export const lightTheme = createTheme(tokens, {
         active: '0 1px 2px rgba(0, 0, 0, 0.2)',
         flat: 'none',
         low: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-        medium: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+        medium:
+          '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
         high: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
-        interactive: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+        interactive:
+          '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
       },
       content: {
         spacing: {
@@ -695,7 +698,8 @@ export const darkTheme = createTheme(tokens, {
       },
       border: {
         color: '#374151',
-        gradient: 'linear-gradient(135deg, #60a5fa20 0%, transparent 50%, #60a5fa10 100%)',
+        gradient:
+          'linear-gradient(135deg, #60a5fa20 0%, transparent 50%, #60a5fa10 100%)',
         radius: {
           sm: '0.25rem',
           md: '0.5rem',
@@ -708,9 +712,11 @@ export const darkTheme = createTheme(tokens, {
         active: '0 1px 2px rgba(0, 0, 0, 0.5)',
         flat: 'none',
         low: '0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4)',
-        medium: '0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4)',
+        medium:
+          '0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4)',
         high: '0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4)',
-        interactive: '0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4)',
+        interactive:
+          '0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4)',
       },
       content: {
         spacing: {

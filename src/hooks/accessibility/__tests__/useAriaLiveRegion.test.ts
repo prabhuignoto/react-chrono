@@ -86,9 +86,7 @@ describe('useAriaLiveRegion', () => {
     });
 
     it('should support atomic announcements', () => {
-      const { result } = renderHook(() =>
-        useAriaLiveRegion({ atomic: true }),
-      );
+      const { result } = renderHook(() => useAriaLiveRegion({ atomic: true }));
 
       expect(result.current).toBeDefined();
     });
@@ -192,7 +190,8 @@ describe('useAriaLiveRegion', () => {
 
     it('should use longer timeout for longer messages', () => {
       const { result } = renderHook(() => useAriaLiveRegion());
-      const longMessage = 'This is a very long message that should take longer to read';
+      const longMessage =
+        'This is a very long message that should take longer to read';
 
       act(() => {
         result.current.announce(longMessage);

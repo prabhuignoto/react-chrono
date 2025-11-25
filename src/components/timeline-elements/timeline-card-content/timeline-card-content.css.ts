@@ -186,7 +186,7 @@ export const cardTitleBase = style([
   {
     margin: 0,
     width: '100%',
-    textAlign: 'left',
+    textAlign: 'center',
     fontFamily: `var(--timeline-cardTitle-font-family, ${baseFontFamily})`,
     fontSize: `var(--timeline-cardTitle-font-size, ${tokens.semantic.typography.fontSize.heading1})`,
     fontWeight: `var(--timeline-cardTitle-font-weight, ${tokens.semantic.typography.fontWeight.semibold})`,

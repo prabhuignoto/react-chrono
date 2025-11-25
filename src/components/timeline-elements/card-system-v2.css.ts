@@ -62,7 +62,9 @@ export const cardWrapper = recipe({
           cursor: 'pointer',
           selectors: {
             '&:hover': {
-              boxShadow: tokens.semantic.card.shadow.interactive || tokens.semantic.shadow.cardHover,
+              boxShadow:
+                tokens.semantic.card.shadow.interactive ||
+                tokens.semantic.shadow.cardHover,
               transform: 'translateY(-2px) scale(1.02)',
             },
             '&:active': {
@@ -76,17 +78,21 @@ export const cardWrapper = recipe({
     },
     selected: {
       true: {
-        borderColor: tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active,
-        boxShadow: `0 0 0 2px ${(tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active)}20, ${tokens.semantic.card.shadow.interactive || tokens.semantic.shadow.cardHover}`,
+        borderColor:
+          tokens.semantic.timeline.point.background.active ||
+          tokens.component.timeline.point.background.active,
+        boxShadow: `0 0 0 2px ${tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active}20, ${tokens.semantic.card.shadow.interactive || tokens.semantic.shadow.cardHover}`,
       },
       false: {},
     },
     theme: {
       default: {},
       primary: {
-        borderColor: tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active,
+        borderColor:
+          tokens.semantic.timeline.point.background.active ||
+          tokens.component.timeline.point.background.active,
         '::before': {
-          background: `linear-gradient(135deg, ${(tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active)}10 0%, transparent 50%, ${(tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active)}05 100%)`,
+          background: `linear-gradient(135deg, ${tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active}10 0%, transparent 50%, ${tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active}05 100%)`,
         },
       },
       minimal: {
@@ -174,7 +180,7 @@ export const cardHeader = recipe({
         paddingBottom: 0,
       },
       emphasized: {
-        background: `${(tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active)}05`,
+        background: `${tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active}05`,
         borderRadius: tokens.semantic.card.border.radius.sm,
         padding: tokens.semantic.card.content.spacing.normal,
         marginBottom: tokens.semantic.card.content.spacing.normal,
@@ -403,14 +409,16 @@ export const cardButton = recipe({
       shape: 'rounded',
     }),
     {
-      color: tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active,
+      color:
+        tokens.semantic.timeline.point.background.active ||
+        tokens.component.timeline.point.background.active,
       selectors: {
         '&:hover': {
-          background: `${(tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active)}10`,
-          borderColor: `${(tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active)}20`,
+          background: `${tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active}10`,
+          borderColor: `${tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active}20`,
         },
         '&:active': {
-          background: `${(tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active)}20`,
+          background: `${tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active}20`,
         },
       },
     },
@@ -419,21 +427,31 @@ export const cardButton = recipe({
     variant: {
       ghost: {},
       filled: {
-        background: tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active,
+        background:
+          tokens.semantic.timeline.point.background.active ||
+          tokens.component.timeline.point.background.active,
         color: 'white',
         selectors: {
           '&:hover': {
-            background: tokens.semantic.timeline.point.background.hover || tokens.component.timeline.point.background.hover,
-            borderColor: tokens.semantic.timeline.point.background.hover || tokens.component.timeline.point.background.hover,
+            background:
+              tokens.semantic.timeline.point.background.hover ||
+              tokens.component.timeline.point.background.hover,
+            borderColor:
+              tokens.semantic.timeline.point.background.hover ||
+              tokens.component.timeline.point.background.hover,
           },
         },
       },
       outline: {
         border: `1px solid ${tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active}`,
-        color: tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active,
+        color:
+          tokens.semantic.timeline.point.background.active ||
+          tokens.component.timeline.point.background.active,
         selectors: {
           '&:hover': {
-            background: tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active,
+            background:
+              tokens.semantic.timeline.point.background.active ||
+              tokens.component.timeline.point.background.active,
             color: 'white',
           },
         },
@@ -463,9 +481,11 @@ export const cardBadge = recipe({
       borderRadius: 'md',
     }),
     {
-      background: `${(tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active)}15`,
-      color: tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active,
-      border: `1px solid ${(tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active)}30`,
+      background: `${tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active}15`,
+      color:
+        tokens.semantic.timeline.point.background.active ||
+        tokens.component.timeline.point.background.active,
+      border: `1px solid ${tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active}30`,
       lineHeight: 1,
     },
   ],
@@ -473,7 +493,9 @@ export const cardBadge = recipe({
     variant: {
       default: {},
       filled: {
-        background: tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active,
+        background:
+          tokens.semantic.timeline.point.background.active ||
+          tokens.component.timeline.point.background.active,
         color: 'white',
         border: `1px solid ${tokens.semantic.timeline.point.background.active || tokens.component.timeline.point.background.active}`,
       },

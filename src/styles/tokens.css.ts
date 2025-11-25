@@ -1,13 +1,13 @@
 /**
  * @deprecated This file is deprecated. Use `tokens` from '@/styles/tokens/index.css' instead.
- * 
+ *
  * This legacy token contract is maintained for backward compatibility only.
  * It will be removed in a future major version.
- * 
+ *
  * Migration guide:
  * - Old: `import { vars } from '@/styles/tokens.css'`
  * - New: `import { tokens } from '@/styles/tokens/index.css'`
- * 
+ *
  * Token mapping:
  * - `vars.color` → `tokens.semantic.color`
  * - `vars.space` → `tokens.semantic.spacing`
@@ -92,4 +92,3 @@ export const vars = createThemeContract({
     easing: { standard: null, emphasized: null },
   },
 });
-

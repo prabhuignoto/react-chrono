@@ -129,7 +129,7 @@ export const tokens = createThemeContract({
   },
 
   // Semantic tokens - meaningful names that map to primitives
-    semantic: {
+  semantic: {
     // Timeline semantic tokens (maps to component.timeline)
     timeline: {
       point: {

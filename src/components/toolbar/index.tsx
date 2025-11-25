@@ -67,7 +67,11 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
     // Create toolbar items for roving tabindex pattern
     // WCAG 2.4.3: Focus Order - Toolbar with roving tabindex
     const toolbarItems = useMemo(
-      () => items.map((item, index) => ({ id: item.id || String(index), disabled: false })),
+      () =>
+        items.map((item, index) => ({
+          id: item.id || String(index),
+          disabled: false,
+        })),
       [items],
     );
 
@@ -81,9 +85,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
       <div
         className={veToolbarWrapper()}
         role={hasNestedToolbarRole ? undefined : 'toolbar'}
-        aria-label={
-          hasNestedToolbarRole ? undefined : 'Timeline controls'
-        }
+        aria-label={hasNestedToolbarRole ? undefined : 'Timeline controls'}
         aria-orientation={hasNestedToolbarRole ? undefined : 'horizontal'}
         aria-keyshortcuts="ArrowLeft ArrowRight Home End"
         style={style}
@@ -91,7 +93,16 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
       >
         {items.map(
           (
-            { label, id, icon, minimizable, isMinimized, onToggleMinimize, name, onSelect },
+            {
+              label,
+              id,
+              icon,
+              minimizable,
+              isMinimized,
+              onToggleMinimize,
+              name,
+              onSelect,
+            },
             index,
           ) => {
             if (!id) {
@@ -117,11 +128,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = memo(
             const { ref, ...otherProps } = itemProps;
 
             return (
-              <div
-                className={veToolbarListItem}
-                key={id}
-                role="group"
-              >
+              <div className={veToolbarListItem} key={id} role="group">
                 <button
                   {...otherProps}
                   ref={ref as React.RefObject<HTMLButtonElement>}

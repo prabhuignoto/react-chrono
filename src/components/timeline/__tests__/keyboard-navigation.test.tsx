@@ -76,7 +76,7 @@ describe('Timeline - Keyboard Navigation', () => {
   it('should render timeline items in vertical mode', () => {
     const { container } = customRender(
       <Timeline {...commonProps} mode="VERTICAL" />,
-      { providerProps }
+      { providerProps },
     );
 
     const timelineItems = container.querySelectorAll('[class*="point"]');
@@ -88,7 +88,7 @@ describe('Timeline - Keyboard Navigation', () => {
     const mockOnNext = vi.fn();
     const { getByLabelText } = customRender(
       <Timeline {...commonProps} onNext={mockOnNext} />,
-      { providerProps }
+      { providerProps },
     );
 
     const nextButton = getByLabelText('next');
@@ -104,25 +104,36 @@ describe('Timeline - Keyboard Navigation', () => {
     const user = userEvent.setup();
     const mockOnPrevious = vi.fn();
     const { getByLabelText } = customRender(
-      <Timeline {...commonProps} activeTimelineItem={2} onPrevious={mockOnPrevious} />,
-      { providerProps }
+      <Timeline
+        {...commonProps}
+        activeTimelineItem={2}
+        onPrevious={mockOnPrevious}
+      />,
+      { providerProps },
     );
 
     const previousButton = getByLabelText('previous');
     expect(previousButton).toBeInTheDocument();
 
     await user.click(previousButton);
-    await waitFor(() => {
-      expect(mockOnPrevious).toHaveBeenCalled();
-    }, { timeout: 3000 });
+    await waitFor(
+      () => {
+        expect(mockOnPrevious).toHaveBeenCalled();
+      },
+      { timeout: 3000 },
+    );
   });
 
   it('should support First button to go to first item', async () => {
     const user = userEvent.setup();
     const mockOnFirst = vi.fn();
     const { getByLabelText } = customRender(
-      <Timeline {...commonProps} activeTimelineItem={2} onFirst={mockOnFirst} />,
-      { providerProps }
+      <Timeline
+        {...commonProps}
+        activeTimelineItem={2}
+        onFirst={mockOnFirst}
+      />,
+      { providerProps },
     );
 
     const firstButton = getByLabelText('first');
@@ -139,7 +150,7 @@ describe('Timeline - Keyboard Navigation', () => {
     const mockOnLast = vi.fn();
     const { getByLabelText } = customRender(
       <Timeline {...commonProps} activeTimelineItem={0} onLast={mockOnLast} />,
-      { providerProps }
+      { providerProps },
     );
 
     const lastButton = getByLabelText('last');
@@ -152,10 +163,9 @@ describe('Timeline - Keyboard Navigation', () => {
   });
 
   it('should have ARIA attributes for accessibility', () => {
-    const { container } = customRender(
-      <Timeline {...commonProps} />,
-      { providerProps }
-    );
+    const { container } = customRender(<Timeline {...commonProps} />, {
+      providerProps,
+    });
 
     const timelineRegion = container.querySelector('[role="region"]');
     expect(timelineRegion).toBeInTheDocument();
@@ -163,10 +173,9 @@ describe('Timeline - Keyboard Navigation', () => {
   });
 
   it('should have proper ARIA roles on buttons', () => {
-    const { getByLabelText } = customRender(
-      <Timeline {...commonProps} />,
-      { providerProps }
-    );
+    const { getByLabelText } = customRender(<Timeline {...commonProps} />, {
+      providerProps,
+    });
 
     const nextButton = getByLabelText('next');
     // button elements have implicit role="button"
@@ -178,7 +187,7 @@ describe('Timeline - Keyboard Navigation', () => {
     const mockOnItemSelected = vi.fn();
     const { container } = customRender(
       <Timeline {...commonProps} onItemSelected={mockOnItemSelected} />,
-      { providerProps }
+      { providerProps },
     );
 
     const items = container.querySelectorAll('[role="button"][class*="point"]');
@@ -193,7 +202,7 @@ describe('Timeline - Keyboard Navigation', () => {
   it('should support disabled state on navigation buttons at boundaries', () => {
     const { getByLabelText } = customRender(
       <Timeline {...commonProps} activeTimelineItem={0} />,
-      { providerProps }
+      { providerProps },
     );
 
     const previousButton = getByLabelText('previous');
@@ -201,10 +210,9 @@ describe('Timeline - Keyboard Navigation', () => {
   });
 
   it('should have tab-accessible navigation controls', () => {
-    const { getByLabelText } = customRender(
-      <Timeline {...commonProps} />,
-      { providerProps }
-    );
+    const { getByLabelText } = customRender(<Timeline {...commonProps} />, {
+      providerProps,
+    });
 
     const nextButton = getByLabelText('next');
     const previousButton = getByLabelText('previous');
@@ -218,10 +226,9 @@ describe('Timeline - Keyboard Navigation', () => {
   });
 
   it('should have Home and End key support via keyboard navigation', () => {
-    const { container } = customRender(
-      <Timeline {...commonProps} />,
-      { providerProps }
-    );
+    const { container } = customRender(<Timeline {...commonProps} />, {
+      providerProps,
+    });
 
     const timelineRegion = container.querySelector('[role="region"]');
     expect(timelineRegion).toBeInTheDocument();
@@ -232,7 +239,7 @@ describe('Timeline - Keyboard Navigation', () => {
     const mockOnNext = vi.fn();
     const { getByLabelText } = customRender(
       <Timeline {...commonProps} onNext={mockOnNext} />,
-      { providerProps }
+      { providerProps },
     );
 
     const nextButton = getByLabelText('next');

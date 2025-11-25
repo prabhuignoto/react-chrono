@@ -1,9 +1,9 @@
 /**
  * @deprecated This file is deprecated and no longer used.
- * 
+ *
  * All semantic tokens have been consolidated into the unified token system.
  * This file is kept only to prevent build errors during migration.
- * 
+ *
  * Use `tokens` from '@/styles/tokens/index.css' instead.
  */
 

@@ -7,7 +7,9 @@ import { layoutBase } from '../../../styles/layout.css';
 // Base card foundation
 const cardBase = style([
   {
-    background: tokens.semantic.card.background.gradient || `linear-gradient(135deg, ${tokens.semantic.color.card.bg} 0%, ${tokens.semantic.color.card.bg}f5 100%)`,
+    background:
+      tokens.semantic.card.background.gradient ||
+      `linear-gradient(135deg, ${tokens.semantic.color.card.bg} 0%, ${tokens.semantic.color.card.bg}f5 100%)`,
     borderRadius: tokens.semantic.borderRadius.xl,
     border: `1px solid ${tokens.semantic.color.card.border}`,
     boxShadow: tokens.semantic.shadow.card,
@@ -79,7 +81,9 @@ export const card = recipe({
           inset: 0,
           borderRadius: 'inherit',
           padding: '1px',
-          background: tokens.semantic.card.border.gradient || `linear-gradient(135deg, ${tokens.semantic.color.interactive.primary}20 0%, transparent 50%, ${tokens.semantic.color.interactive.primary}10 100%)`,
+          background:
+            tokens.semantic.card.border.gradient ||
+            `linear-gradient(135deg, ${tokens.semantic.color.interactive.primary}20 0%, transparent 50%, ${tokens.semantic.color.interactive.primary}10 100%)`,
           mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
           maskComposite: 'xor',
           WebkitMask:
@@ -171,7 +175,8 @@ export const cardSubtitle = style({
   fontSize: tokens.semantic.typography.fontSize.sm,
   fontWeight: tokens.semantic.typography.fontWeight.medium,
   lineHeight: tokens.semantic.typography.lineHeight.normal,
-  color: tokens.semantic.color.card.subtitle || tokens.semantic.color.text.secondary,
+  color:
+    tokens.semantic.color.card.subtitle || tokens.semantic.color.text.secondary,
   margin: 0,
   opacity: 0.8,
 });
@@ -180,7 +185,8 @@ export const cardSubtitle = style({
 export const cardBody = style({
   fontSize: tokens.semantic.typography.fontSize.body,
   lineHeight: tokens.semantic.typography.lineHeight.relaxed,
-  color: tokens.semantic.color.card.details || tokens.semantic.color.text.primary,
+  color:
+    tokens.semantic.color.card.details || tokens.semantic.color.text.primary,
 });
 
 // Focus management for interactive cards

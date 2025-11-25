@@ -59,7 +59,7 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     cardWidth,
     focusActiveItemOnLoad,
   } = useTimelineContext();
-  
+
   // Prioritize prop theme over context theme
   const theme = propTheme || contextTheme;
   const lineWidth = propLineWidth || 2;
@@ -228,13 +228,15 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     <ul
       ref={listRef}
       className={`${timelineHorizontalWrapper} ${wrapperClass}`}
-      style={{
-        direction: flipLayout ? 'rtl' : 'ltr',
-        position: 'relative',
-        // Set CSS variables for the connecting line
-        '--timeline-line-color': theme?.primary || '#2563eb',
-        '--timeline-line-width': `${lineWidth}px`,
-      } as React.CSSProperties}
+      style={
+        {
+          direction: flipLayout ? 'rtl' : 'ltr',
+          position: 'relative',
+          // Set CSS variables for the connecting line
+          '--timeline-line-color': theme?.primary || '#2563eb',
+          '--timeline-line-width': `${lineWidth}px`,
+        } as React.CSSProperties
+      }
       data-testid="timeline-collection"
       aria-label="Timeline"
     >

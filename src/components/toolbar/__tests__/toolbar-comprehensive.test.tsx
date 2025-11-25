@@ -542,7 +542,7 @@ describe('Toolbar Comprehensive Tests', () => {
       // Get all buttons and find the one with aria-label
       const allButtons = screen.getAllByRole('button');
       const accessibleButton = allButtons.find(
-        (btn) => btn.getAttribute('aria-label') === 'Accessible Item'
+        (btn) => btn.getAttribute('aria-label') === 'Accessible Item',
       );
       expect(accessibleButton).toHaveAttribute('aria-label', 'Accessible Item');
     });

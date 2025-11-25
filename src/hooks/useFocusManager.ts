@@ -116,9 +116,7 @@ export interface UseFocusTrapOptions {
  *
  * @param options - Configuration options or boolean for backward compatibility
  */
-export const useFocusTrap = (
-  options: boolean | UseFocusTrapOptions,
-) => {
+export const useFocusTrap = (options: boolean | UseFocusTrapOptions) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 

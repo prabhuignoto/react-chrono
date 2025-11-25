@@ -159,7 +159,11 @@ const Controls: React.FunctionComponent<TimelineControlModel> = ({
       >
         {/* Navigation group: First, Previous, Next, Last */}
         {disableInteraction ? null : (
-          <div role="group" aria-label="Item navigation" style={{display: "flex"}}>
+          <div
+            role="group"
+            aria-label="Item navigation"
+            style={{ display: 'flex' }}
+          >
             {/* jump to first */}
             <div
               className={cls(navItem, { [navItemDisabled]: canDisableLeft })}

@@ -49,7 +49,10 @@ const LegacyContextBridge: FunctionComponent<{
 
   const computeLegacyContentDetailsHeight = (): number => {
     // FIX for Issue #498: Handle 'auto' cardHeight
-    const cardHeightValue = originalProps.cardHeight === 'auto' ? 200 : (originalProps.cardHeight ?? 200);
+    const cardHeightValue =
+      originalProps.cardHeight === 'auto'
+        ? 200
+        : (originalProps.cardHeight ?? 200);
     const mediaHeight = originalProps.mediaHeight ?? 200;
     const contentDetailsHeight = originalProps.contentDetailsHeight ?? 10;
     const newCardHeight = Math.max(

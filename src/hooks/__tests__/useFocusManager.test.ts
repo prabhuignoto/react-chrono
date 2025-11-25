@@ -48,16 +48,13 @@ describe('useFocusManager', () => {
   });
 
   it('should handle focus restoration', () => {
-    const { result, rerender } = renderHook(
-      (props) => useFocusManager(props),
-      {
-        initialProps: {
-          shouldFocus: true,
-          isActive: true,
-          restoreFocus: true,
-        },
+    const { result, rerender } = renderHook((props) => useFocusManager(props), {
+      initialProps: {
+        shouldFocus: true,
+        isActive: true,
+        restoreFocus: true,
       },
-    );
+    });
 
     expect(result.current).toBeDefined();
 
@@ -107,15 +104,12 @@ describe('useFocusManager', () => {
   });
 
   it('should handle multiple activations and deactivations', () => {
-    const { result, rerender } = renderHook(
-      (props) => useFocusManager(props),
-      {
-        initialProps: {
-          shouldFocus: true,
-          isActive: true,
-        },
+    const { result, rerender } = renderHook((props) => useFocusManager(props), {
+      initialProps: {
+        shouldFocus: true,
+        isActive: true,
       },
-    );
+    });
 
     rerender({
       shouldFocus: true,
@@ -348,9 +342,7 @@ describe('useFocusTrap', () => {
 
   describe('Options object parameter', () => {
     it('should accept options object with isActive', () => {
-      const { result } = renderHook(() =>
-        useFocusTrap({ isActive: true }),
-      );
+      const { result } = renderHook(() => useFocusTrap({ isActive: true }));
 
       expect(result.current).toHaveProperty('current');
     });

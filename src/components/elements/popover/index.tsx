@@ -71,10 +71,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
   const focusTrapRef = useRef<HTMLElement | null>(null);
 
   // Memoize theme CSS variables to prevent recalculation on every render
-  const themeCssVars = useMemo(
-    () => computeCssVarsFromTheme(theme),
-    [theme],
-  );
+  const themeCssVars = useMemo(() => computeCssVarsFromTheme(theme), [theme]);
 
   // Get the current fullscreen element (with vendor prefix support)
   const getFullscreenElement = useCallback((): HTMLElement | null => {
@@ -130,25 +127,28 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     setIsOpen((prev) => !prev);
   }, []);
 
-  const closePopover = useCallback((closeReason: 'escape' | 'click-outside' = 'click-outside') => {
-    setIsOpen(false);
-    closeReasonRef.current = closeReason;
+  const closePopover = useCallback(
+    (closeReason: 'escape' | 'click-outside' = 'click-outside') => {
+      setIsOpen(false);
+      closeReasonRef.current = closeReason;
 
-    // IMPROVED: Selective focus restoration (WCAG 2.4.3: Focus Order)
-    // Only restore focus when closing via Escape key
-    // When user clicks outside, leave focus where they clicked
+      // IMPROVED: Selective focus restoration (WCAG 2.4.3: Focus Order)
+      // Only restore focus when closing via Escape key
+      // When user clicks outside, leave focus where they clicked
 
-    requestAnimationFrame(() => {
-      // Only restore focus if explicitly closed via Escape key
-      if (closeReason === 'escape' && triggerButtonRef.current) {
-        try {
-          triggerButtonRef.current.focus({ preventScroll: true });
-        } catch (_) {
-          // Silently ignore focus errors
+      requestAnimationFrame(() => {
+        // Only restore focus if explicitly closed via Escape key
+        if (closeReason === 'escape' && triggerButtonRef.current) {
+          try {
+            triggerButtonRef.current.focus({ preventScroll: true });
+          } catch (_) {
+            // Silently ignore focus errors
+          }
         }
-      }
-    });
-  }, []);
+      });
+    },
+    [],
+  );
 
   /**
    * Handle menu item selection - close popover and restore focus
@@ -166,62 +166,68 @@ const PopOver: FunctionComponent<PopOverModel> = ({
     [onItemSelect, closePopover],
   );
 
-  const handleKeyPress = useCallback((ev: React.KeyboardEvent) => {
-    if (ev.key === 'Enter' || ev.key === ' ') {
-      ev.preventDefault();
-      toggleOpen();
-    } else if (ev.key === 'ArrowDown') {
-      // Arrow Down: Open menu and focus first item
-      ev.preventDefault();
-      ev.stopPropagation(); // Prevent timeline navigation from receiving this event
-      setIsOpen(true);
+  const handleKeyPress = useCallback(
+    (ev: React.KeyboardEvent) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        toggleOpen();
+      } else if (ev.key === 'ArrowDown') {
+        // Arrow Down: Open menu and focus first item
+        ev.preventDefault();
+        ev.stopPropagation(); // Prevent timeline navigation from receiving this event
+        setIsOpen(true);
 
-      // Focus first menu item after menu opens
-      requestAnimationFrame(() => {
-        if (!popoverRef.current) return;
-        const firstMenuItem = popoverRef.current.querySelector('[role="menuitem"]');
-        if (firstMenuItem instanceof HTMLElement) {
-          firstMenuItem.focus();
-          return;
-        }
-        // Fallback: focus first focusable element
-        const firstFocusable = popoverRef.current.querySelector(
-          'button:not([tabindex="-1"]), [tabindex="0"]'
-        );
-        if (firstFocusable instanceof HTMLElement) {
-          firstFocusable.focus();
-        }
-      });
-    } else if (ev.key === 'ArrowUp') {
-      // Arrow Up: Open menu and focus last item
-      ev.preventDefault();
-      ev.stopPropagation(); // Prevent timeline navigation from receiving this event
-      setIsOpen(true);
-
-      // Focus last menu item after menu opens
-      requestAnimationFrame(() => {
-        if (!popoverRef.current) return;
-        const menuItems = popoverRef.current.querySelectorAll('[role="menuitem"]');
-        if (menuItems.length > 0) {
-          const lastMenuItem = menuItems[menuItems.length - 1];
-          if (lastMenuItem instanceof HTMLElement) {
-            lastMenuItem.focus();
+        // Focus first menu item after menu opens
+        requestAnimationFrame(() => {
+          if (!popoverRef.current) return;
+          const firstMenuItem =
+            popoverRef.current.querySelector('[role="menuitem"]');
+          if (firstMenuItem instanceof HTMLElement) {
+            firstMenuItem.focus();
             return;
           }
-        }
-        // Fallback: focus last focusable element
-        const focusableElements = popoverRef.current.querySelectorAll(
-          'button:not([tabindex="-1"]), [tabindex="0"]'
-        );
-        if (focusableElements.length > 0) {
-          const lastFocusable = focusableElements[focusableElements.length - 1];
-          if (lastFocusable instanceof HTMLElement) {
-            lastFocusable.focus();
+          // Fallback: focus first focusable element
+          const firstFocusable = popoverRef.current.querySelector(
+            'button:not([tabindex="-1"]), [tabindex="0"]',
+          );
+          if (firstFocusable instanceof HTMLElement) {
+            firstFocusable.focus();
           }
-        }
-      });
-    }
-  }, [toggleOpen]);
+        });
+      } else if (ev.key === 'ArrowUp') {
+        // Arrow Up: Open menu and focus last item
+        ev.preventDefault();
+        ev.stopPropagation(); // Prevent timeline navigation from receiving this event
+        setIsOpen(true);
+
+        // Focus last menu item after menu opens
+        requestAnimationFrame(() => {
+          if (!popoverRef.current) return;
+          const menuItems =
+            popoverRef.current.querySelectorAll('[role="menuitem"]');
+          if (menuItems.length > 0) {
+            const lastMenuItem = menuItems[menuItems.length - 1];
+            if (lastMenuItem instanceof HTMLElement) {
+              lastMenuItem.focus();
+              return;
+            }
+          }
+          // Fallback: focus last focusable element
+          const focusableElements = popoverRef.current.querySelectorAll(
+            'button:not([tabindex="-1"]), [tabindex="0"]',
+          );
+          if (focusableElements.length > 0) {
+            const lastFocusable =
+              focusableElements[focusableElements.length - 1];
+            if (lastFocusable instanceof HTMLElement) {
+              lastFocusable.focus();
+            }
+          }
+        });
+      }
+    },
+    [toggleOpen],
+  );
 
   // Handle click outside to close popover with 'click-outside' reason (WCAG 2.1.2)
   useOutsideClick(ref, () => closePopover('click-outside'));
@@ -439,9 +445,7 @@ const PopOver: FunctionComponent<PopOverModel> = ({
         >
           {placeholder && <span className={selecterLabel}>{placeholder}</span>}
           <span
-            className={[selecterIcon, isOpen ? selecterIconOpen : ''].join(
-              ' ',
-            )}
+            className={[selecterIcon, isOpen ? selecterIconOpen : ''].join(' ')}
           >
             {icon || <ChevronDown />}
           </span>
@@ -478,21 +482,21 @@ const PopOver: FunctionComponent<PopOverModel> = ({
             role="menu"
             aria-labelledby="popover-trigger"
           >
-              <div className={header}>
-                <button
-                  className={closeButton}
-                  onClick={() => closePopover()}
-                  type="button"
-                  aria-label="Close menu"
-                  title="Close menu"
-                >
-                  <CloseIcon />
-                </button>
-              </div>
-              <MemoizedContent>{wrappedChildren}</MemoizedContent>
-            </div>,
-            portalContainer,
-          )}
+            <div className={header}>
+              <button
+                className={closeButton}
+                onClick={() => closePopover()}
+                type="button"
+                aria-label="Close menu"
+                title="Close menu"
+              >
+                <CloseIcon />
+              </button>
+            </div>
+            <MemoizedContent>{wrappedChildren}</MemoizedContent>
+          </div>,
+          portalContainer,
+        )}
       </div>
     </>
   );

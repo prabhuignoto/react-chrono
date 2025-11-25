@@ -5,7 +5,8 @@ import { usePrefersReducedMotion } from '../usePrefersReducedMotion';
 describe('usePrefersReducedMotion', () => {
   let mockMatchMedia: ReturnType<typeof vi.fn>;
   let originalMatchMedia: typeof window.matchMedia | undefined;
-  let listeners: Array<(event: MediaQueryListEvent | MediaQueryList) => void> = [];
+  let listeners: Array<(event: MediaQueryListEvent | MediaQueryList) => void> =
+    [];
 
   beforeEach(() => {
     listeners = [];
@@ -252,7 +253,10 @@ describe('usePrefersReducedMotion', () => {
 
       // Simulate passing MediaQueryList object directly
       act(() => {
-        listener({ matches: true, media: '(prefers-reduced-motion: reduce)' } as MediaQueryList);
+        listener({
+          matches: true,
+          media: '(prefers-reduced-motion: reduce)',
+        } as MediaQueryList);
       });
 
       expect(result.current).toBe(true);
@@ -325,7 +329,9 @@ describe('usePrefersReducedMotion', () => {
 
       unmount();
 
-      expect(mediaQuery.removeListener).toHaveBeenCalledWith(expect.any(Function));
+      expect(mediaQuery.removeListener).toHaveBeenCalledWith(
+        expect.any(Function),
+      );
     });
 
     it('should clean up listener on unmount even after preference changes', () => {
@@ -542,7 +548,9 @@ describe('usePrefersReducedMotion', () => {
 
       expect(result.current).toBe(false);
       // Should only add listener once despite multiple renders
-      expect(mediaQuery.addEventListener.mock.calls.length).toBeGreaterThanOrEqual(1);
+      expect(
+        mediaQuery.addEventListener.mock.calls.length,
+      ).toBeGreaterThanOrEqual(1);
     });
   });
 });

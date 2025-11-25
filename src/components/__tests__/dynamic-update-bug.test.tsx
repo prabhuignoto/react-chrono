@@ -50,7 +50,9 @@ const createTestItems = (count: number, prefix: string = 'Item') => {
 describe('Dynamic Update Bug Fix (Issue #501)', () => {
   beforeEach(() => {
     // Clear any existing timeline elements
-    document.querySelectorAll('[data-testid="timeline-main-wrapper"]').forEach((el) => el.remove());
+    document
+      .querySelectorAll('[data-testid="timeline-main-wrapper"]')
+      .forEach((el) => el.remove());
   });
 
   afterEach(() => {
@@ -70,12 +72,14 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
             allowDynamicUpdate={true}
             disableToolbar
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       // Wait for initial render
       await waitFor(() => {
-        const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+        const timelineWrapper = container.querySelector(
+          '[data-testid="timeline-main-wrapper"]',
+        );
         expect(timelineWrapper).toBeInTheDocument();
       });
 
@@ -90,19 +94,26 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
               allowDynamicUpdate={true}
               disableToolbar
             />
-          </TestWrapper>
+          </TestWrapper>,
         );
       });
 
       // Wait for update to complete - component should not be stuck
-      await waitFor(() => {
-        const updatedWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
-        expect(updatedWrapper).toBeInTheDocument();
-      }, { timeout: 2000 });
+      await waitFor(
+        () => {
+          const updatedWrapper = container.querySelector(
+            '[data-testid="timeline-main-wrapper"]',
+          );
+          expect(updatedWrapper).toBeInTheDocument();
+        },
+        { timeout: 2000 },
+      );
 
       // Verify component is still interactive (not stuck)
       // The main test: component should render without errors
-      const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+      const timelineWrapper = container.querySelector(
+        '[data-testid="timeline-main-wrapper"]',
+      );
       expect(timelineWrapper).toBeInTheDocument();
     });
 
@@ -119,11 +130,13 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
             activeItemIndex={4} // Set to last item (index 4)
             disableToolbar
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       await waitFor(() => {
-        const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+        const timelineWrapper = container.querySelector(
+          '[data-testid="timeline-main-wrapper"]',
+        );
         expect(timelineWrapper).toBeInTheDocument();
       });
 
@@ -138,17 +151,24 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
               activeItemIndex={4} // Keep same index
               disableToolbar
             />
-          </TestWrapper>
+          </TestWrapper>,
         );
       });
 
-      await waitFor(() => {
-        const updatedWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
-        expect(updatedWrapper).toBeInTheDocument();
-      }, { timeout: 2000 });
+      await waitFor(
+        () => {
+          const updatedWrapper = container.querySelector(
+            '[data-testid="timeline-main-wrapper"]',
+          );
+          expect(updatedWrapper).toBeInTheDocument();
+        },
+        { timeout: 2000 },
+      );
 
       // Component should render without errors (active item should be valid)
-      const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+      const timelineWrapper = container.querySelector(
+        '[data-testid="timeline-main-wrapper"]',
+      );
       expect(timelineWrapper).toBeInTheDocument();
     });
   });
@@ -166,11 +186,13 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
             allowDynamicUpdate={true}
             disableToolbar
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       await waitFor(() => {
-        const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+        const timelineWrapper = container.querySelector(
+          '[data-testid="timeline-main-wrapper"]',
+        );
         expect(timelineWrapper).toBeInTheDocument();
       });
 
@@ -184,17 +206,24 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
               allowDynamicUpdate={true}
               disableToolbar
             />
-          </TestWrapper>
+          </TestWrapper>,
         );
       });
 
-      await waitFor(() => {
-        const updatedWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
-        expect(updatedWrapper).toBeInTheDocument();
-      }, { timeout: 2000 });
+      await waitFor(
+        () => {
+          const updatedWrapper = container.querySelector(
+            '[data-testid="timeline-main-wrapper"]',
+          );
+          expect(updatedWrapper).toBeInTheDocument();
+        },
+        { timeout: 2000 },
+      );
 
       // Component should render without errors
-      const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+      const timelineWrapper = container.querySelector(
+        '[data-testid="timeline-main-wrapper"]',
+      );
       expect(timelineWrapper).toBeInTheDocument();
     });
   });
@@ -213,11 +242,13 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
             allowDynamicUpdate={true}
             disableToolbar
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       await waitFor(() => {
-        const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+        const timelineWrapper = container.querySelector(
+          '[data-testid="timeline-main-wrapper"]',
+        );
         expect(timelineWrapper).toBeInTheDocument();
       });
 
@@ -231,14 +262,19 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
               allowDynamicUpdate={true}
               disableToolbar
             />
-          </TestWrapper>
+          </TestWrapper>,
         );
       });
 
-      await waitFor(() => {
-        const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
-        expect(timelineWrapper).toBeInTheDocument();
-      }, { timeout: 2000 });
+      await waitFor(
+        () => {
+          const timelineWrapper = container.querySelector(
+            '[data-testid="timeline-main-wrapper"]',
+          );
+          expect(timelineWrapper).toBeInTheDocument();
+        },
+        { timeout: 2000 },
+      );
 
       // Second transition: 5 → 13 (the bug case)
       await act(async () => {
@@ -250,17 +286,24 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
               allowDynamicUpdate={true}
               disableToolbar
             />
-          </TestWrapper>
+          </TestWrapper>,
         );
       });
 
-      await waitFor(() => {
-        const updatedWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
-        expect(updatedWrapper).toBeInTheDocument();
-      }, { timeout: 2000 });
+      await waitFor(
+        () => {
+          const updatedWrapper = container.querySelector(
+            '[data-testid="timeline-main-wrapper"]',
+          );
+          expect(updatedWrapper).toBeInTheDocument();
+        },
+        { timeout: 2000 },
+      );
 
       // Component should still be interactive after multiple transitions
-      const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+      const timelineWrapper = container.querySelector(
+        '[data-testid="timeline-main-wrapper"]',
+      );
       expect(timelineWrapper).toBeInTheDocument();
     });
   });
@@ -268,10 +311,7 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
   describe('True Append vs Replacement Detection', () => {
     it('should detect true append (same items + new ones)', async () => {
       const initialItems = createTestItems(5, 'Item');
-      const appendedItems = [
-        ...initialItems,
-        ...createTestItems(3, 'New'),
-      ];
+      const appendedItems = [...initialItems, ...createTestItems(3, 'New')];
 
       const { rerender, container } = render(
         <TestWrapper mode="HORIZONTAL">
@@ -281,11 +321,13 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
             allowDynamicUpdate={true}
             disableToolbar
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       await waitFor(() => {
-        const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+        const timelineWrapper = container.querySelector(
+          '[data-testid="timeline-main-wrapper"]',
+        );
         expect(timelineWrapper).toBeInTheDocument();
       });
 
@@ -299,17 +341,24 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
               allowDynamicUpdate={true}
               disableToolbar
             />
-          </TestWrapper>
+          </TestWrapper>,
         );
       });
 
-      await waitFor(() => {
-        const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
-        expect(timelineWrapper).toBeInTheDocument();
-      }, { timeout: 2000 });
+      await waitFor(
+        () => {
+          const timelineWrapper = container.querySelector(
+            '[data-testid="timeline-main-wrapper"]',
+          );
+          expect(timelineWrapper).toBeInTheDocument();
+        },
+        { timeout: 2000 },
+      );
 
       // Component should render without errors
-      const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+      const timelineWrapper = container.querySelector(
+        '[data-testid="timeline-main-wrapper"]',
+      );
       expect(timelineWrapper).toBeInTheDocument();
     });
 
@@ -325,11 +374,13 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
             allowDynamicUpdate={true}
             disableToolbar
           />
-        </TestWrapper>
+        </TestWrapper>,
       );
 
       await waitFor(() => {
-        const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+        const timelineWrapper = container.querySelector(
+          '[data-testid="timeline-main-wrapper"]',
+        );
         expect(timelineWrapper).toBeInTheDocument();
       });
 
@@ -343,17 +394,24 @@ describe('Dynamic Update Bug Fix (Issue #501)', () => {
               allowDynamicUpdate={true}
               disableToolbar
             />
-          </TestWrapper>
+          </TestWrapper>,
         );
       });
 
-      await waitFor(() => {
-        const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
-        expect(timelineWrapper).toBeInTheDocument();
-      }, { timeout: 2000 });
+      await waitFor(
+        () => {
+          const timelineWrapper = container.querySelector(
+            '[data-testid="timeline-main-wrapper"]',
+          );
+          expect(timelineWrapper).toBeInTheDocument();
+        },
+        { timeout: 2000 },
+      );
 
       // Component should render without errors
-      const timelineWrapper = container.querySelector('[data-testid="timeline-main-wrapper"]');
+      const timelineWrapper = container.querySelector(
+        '[data-testid="timeline-main-wrapper"]',
+      );
       expect(timelineWrapper).toBeInTheDocument();
     });
   });

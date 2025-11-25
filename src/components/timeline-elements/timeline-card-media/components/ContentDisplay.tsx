@@ -71,10 +71,13 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
   const [isExpanded, setIsExpanded] = useState(false);
   const [showReadMore, setShowReadMore] = useState(false);
 
-  const toggleReadMore = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsExpanded(!isExpanded);
-  }, [isExpanded]);
+  const toggleReadMore = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setIsExpanded(!isExpanded);
+    },
+    [isExpanded],
+  );
 
   React.useLayoutEffect(() => {
     if (moreRef.current && textOverlay) {
@@ -109,7 +112,8 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
             containerHeight,
             totalChildrenHeight,
             hasInternalOverflow,
-            hasOverflow: totalChildrenHeight > containerHeight || hasInternalOverflow,
+            hasOverflow:
+              totalChildrenHeight > containerHeight || hasInternalOverflow,
             showText,
             hasDetailsText: !!detailsText,
             hasContent: !!content,
@@ -117,7 +121,8 @@ const ContentDisplayComponent: React.FunctionComponent<ContentDisplayProps> = (
           });
 
           // Check if children exceed container height OR if any child has internal overflow
-          const hasOverflow = totalChildrenHeight > containerHeight + 5 || hasInternalOverflow;
+          const hasOverflow =
+            totalChildrenHeight > containerHeight + 5 || hasInternalOverflow;
           if (hasOverflow) {
             console.log('SETTING SHOW READ MORE TO TRUE');
             setShowReadMore(true);
