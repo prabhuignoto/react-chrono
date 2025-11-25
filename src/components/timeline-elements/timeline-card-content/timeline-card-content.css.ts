@@ -193,7 +193,9 @@ export const cardTitleBase = style([
     fontStyle: `var(--timeline-cardTitle-font-style, normal)`,
     letterSpacing: '-0.025em',
     lineHeight: 1.4,
-    wordBreak: 'break-word',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
     transition: `color ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.standard}`,
   },
 ]);
