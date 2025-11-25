@@ -330,9 +330,9 @@ export const baseText = recipe({
       small: sprinkles({ fontSize: 'xs', fontWeight: 'normal' }),
     },
     color: {
-      primary: { color: tokens.semantic.timeline.point.background.active },
-      secondary: { color: tokens.semantic.toolbar.button.text.default },
-      muted: { color: tokens.semantic.toolbar.button.text.disabled },
+      primary: { color: tokens.component.timeline.point.color.active },
+      secondary: { color: tokens.semantic.toolbar.text.default },
+      muted: { color: tokens.semantic.toolbar.text.muted },
       inherit: { color: 'inherit' },
     },
     align: {

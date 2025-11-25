@@ -58,7 +58,7 @@ const TimelineView: React.FC<TimelineViewProps> = ({
         wrapperId={id}
         nestedCardHeight={nestedCardHeight}
         theme={theme}
-        lineWidth={lineWidth}
+        {...(lineWidth !== undefined && { lineWidth })}
         {...pickDefined({
           slideShowRunning,
         })}

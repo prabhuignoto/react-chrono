@@ -146,6 +146,11 @@ export const lightTheme = createTheme(tokens, {
         secondaryHover: '#d1d5db', // gray.300
         muted: '#f3f4f6', // gray.100
         mutedHover: '#e5e7eb', // gray.200
+        toolbarBg: '#f1f5f9',
+        toolbarText: '#1e293b',
+        buttonBg: '#ffffff',
+        buttonBorder: '#e5e7eb',
+        focusRing: '#2563eb',
       },
       border: {
         default: '#e5e7eb', // gray.200
@@ -164,6 +169,24 @@ export const lightTheme = createTheme(tokens, {
         muted: '#9ca3af', // gray.400
         emphasis: '#374151', // gray.700
       },
+      // Card colors (legacy compatibility)
+      card: {
+        bg: '#ffffff',
+        border: '#e5e7eb',
+        title: '#111827',
+        subtitle: '#374151',
+        details: '#6b7280',
+      },
+      // Primary color (legacy compatibility)
+      primary: '#2563eb',
+      muted: '#6b7280',
+      // Nested card colors (legacy compatibility)
+      nestedCardBg: '#f9fafb',
+      nestedCardTitle: '#1f2937',
+      nestedCardSubtitle: '#6b7280',
+      nestedCardDetails: '#374151',
+      // Button colors (legacy compatibility)
+      buttonBorder: '#e5e7eb',
     },
     spacing: {
       xs: '0.25rem', // 4px
@@ -178,6 +201,7 @@ export const lightTheme = createTheme(tokens, {
       fontSize: {
         caption: '0.75rem', // 12px
         body: '1rem', // 16px
+        base: '1rem', // 16px - alias for body
         heading3: '1.125rem', // 18px
         heading2: '1.25rem', // 20px
         heading1: '1.5rem', // 24px
@@ -188,6 +212,7 @@ export const lightTheme = createTheme(tokens, {
         md: '1rem', // 16px - fixed from 0.75rem
         xs: '0.75rem', // 12px - fixed from 0.25rem
         lg: '1.5rem',
+        xl: '1.25rem', // 20px
       },
       lineHeight: {
         tight: '1.2',
@@ -217,6 +242,7 @@ export const lightTheme = createTheme(tokens, {
       toolbar: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
       modal:
         '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+      none: 'none',
     },
     zIndex: {
       timelineCard: '10',
@@ -233,6 +259,119 @@ export const lightTheme = createTheme(tokens, {
       easing: {
         standard: 'cubic-bezier(0.4, 0, 0.2, 1)',
         emphasized: 'cubic-bezier(0.2, 0, 0, 1)',
+        easeIn: 'cubic-bezier(0.4, 0, 1, 1)',
+        easeOut: 'cubic-bezier(0, 0, 0.2, 1)',
+        easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
+    },
+    card: {
+      background: {
+        default: '#ffffff',
+        hover: '#f9fafb',
+        active: '#f3f4f6',
+        gradient: 'linear-gradient(135deg, #ffffff 0%, #f9fafb 100%)',
+      },
+      border: {
+        color: '#e5e7eb',
+        gradient: 'linear-gradient(135deg, #3b82f620 0%, transparent 50%, #3b82f610 100%)',
+        radius: {
+          sm: '0.25rem',
+          md: '0.5rem',
+          lg: '0.75rem',
+        },
+      },
+      shadow: {
+        default: '0 2px 4px rgba(0, 0, 0, 0.1)',
+        hover: '0 4px 8px rgba(0, 0, 0, 0.15)',
+        active: '0 1px 2px rgba(0, 0, 0, 0.2)',
+        flat: 'none',
+        low: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+        medium: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+        high: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+        interactive: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+      },
+      content: {
+        spacing: {
+          tight: '0.5rem',
+          normal: '1rem',
+          loose: '1.5rem',
+        },
+      },
+    },
+    toolbar: {
+      background: {
+        default: '#f1f5f9',
+        hover: '#e2e8f0',
+      },
+      text: {
+        default: '#1e293b',
+        muted: '#64748b',
+      },
+      button: {
+        background: {
+          default: '#ffffff',
+          hover: '#f1f5f9',
+          active: '#e2e8f0',
+        },
+        border: {
+          default: '#e2e8f0',
+          hover: '#3b82f6',
+        },
+        text: {
+          default: '#1e293b',
+          disabled: '#94a3b8',
+        },
+        size: {
+          sm: '32px',
+          md: '40px',
+          lg: '48px',
+        },
+      },
+    },
+    states: {
+      focus: {
+        outline: '2px solid #3b82f6',
+        ring: {
+          color: '#3b82f6',
+          width: '2px',
+          offset: '2px',
+          outline: '2px solid #3b82f6',
+        },
+      },
+      disabled: {
+        opacity: '0.5',
+        filter: 'grayscale(50%)',
+      },
+      hover: {
+        opacity: '0.8',
+        transform: 'translateY(-1px)',
+        background: '#f9fafb',
+        border: '#3b82f6',
+      },
+      active: {
+        opacity: '0.9',
+        transform: 'translateY(0px) scale(0.98)',
+        background: '#f3f4f6',
+        border: '#2563eb',
+      },
+    },
+    layout: {
+      container: {
+        maxWidth: {
+          sm: '640px',
+          md: '768px',
+          lg: '1024px',
+          xl: '1280px',
+        },
+      },
+    },
+    timeline: {
+      point: {
+        background: {
+          active: '#2563eb',
+          inactive: '#ffffff',
+          hover: '#1d4ed8',
+        },
       },
     },
   },
@@ -251,6 +390,11 @@ export const lightTheme = createTheme(tokens, {
         color: {
           active: '#2563eb', // blue.600
           inactive: '#6b7280', // gray.500
+          hover: '#1d4ed8', // blue.700
+        },
+        background: {
+          active: '#2563eb', // blue.600
+          inactive: '#ffffff', // white
           hover: '#1d4ed8', // blue.700
         },
       },
@@ -424,6 +568,11 @@ export const darkTheme = createTheme(tokens, {
         secondaryHover: '#4b5563', // gray.600
         muted: '#1f2937', // gray.800
         mutedHover: '#374151', // gray.700
+        toolbarBg: '#111827',
+        toolbarText: '#e5e7eb',
+        buttonBg: '#1f2937',
+        buttonBorder: 'rgba(255, 255, 255, 0.1)',
+        focusRing: '#60a5fa',
       },
       border: {
         default: 'rgba(255, 255, 255, 0.1)',
@@ -442,6 +591,24 @@ export const darkTheme = createTheme(tokens, {
         muted: '#6b7280', // gray.500
         emphasis: '#f3f4f6', // gray.100
       },
+      // Card colors (legacy compatibility)
+      card: {
+        bg: '#1f2937',
+        border: 'rgba(255, 255, 255, 0.1)',
+        title: '#e5e7eb',
+        subtitle: '#d1d5db',
+        details: '#9ca3af',
+      },
+      // Primary color (legacy compatibility)
+      primary: '#60a5fa',
+      muted: '#9ca3af',
+      // Nested card colors (legacy compatibility)
+      nestedCardBg: '#111827',
+      nestedCardTitle: '#f3f4f6',
+      nestedCardSubtitle: '#9ca3af',
+      nestedCardDetails: '#d1d5db',
+      // Button colors (legacy compatibility)
+      buttonBorder: 'rgba(255, 255, 255, 0.1)',
     },
     spacing: {
       xs: '0.25rem',
@@ -456,6 +623,7 @@ export const darkTheme = createTheme(tokens, {
       fontSize: {
         caption: '0.75rem',
         body: '1rem',
+        base: '1rem', // alias for body
         heading3: '1.125rem',
         heading2: '1.25rem', // 20px
         heading1: '1.5rem', // 24px
@@ -466,6 +634,7 @@ export const darkTheme = createTheme(tokens, {
         md: '1rem', // 16px - fixed from 0.75rem
         xs: '0.75rem', // 12px - fixed from 0.25rem
         lg: '1.5rem',
+        xl: '1.25rem', // 20px
       },
       lineHeight: {
         tight: '1.2',
@@ -495,6 +664,7 @@ export const darkTheme = createTheme(tokens, {
       toolbar: '0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4)',
       modal:
         '0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4)',
+      none: 'none',
     },
     zIndex: {
       timelineCard: '10',
@@ -511,6 +681,119 @@ export const darkTheme = createTheme(tokens, {
       easing: {
         standard: 'cubic-bezier(0.4, 0, 0.2, 1)',
         emphasized: 'cubic-bezier(0.2, 0, 0, 1)',
+        easeIn: 'cubic-bezier(0.4, 0, 1, 1)',
+        easeOut: 'cubic-bezier(0, 0, 0.2, 1)',
+        easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
+    },
+    card: {
+      background: {
+        default: '#111827',
+        hover: '#1f2937',
+        active: '#374151',
+        gradient: 'linear-gradient(135deg, #111827 0%, #1f2937 100%)',
+      },
+      border: {
+        color: '#374151',
+        gradient: 'linear-gradient(135deg, #60a5fa20 0%, transparent 50%, #60a5fa10 100%)',
+        radius: {
+          sm: '0.25rem',
+          md: '0.5rem',
+          lg: '0.75rem',
+        },
+      },
+      shadow: {
+        default: '0 2px 4px rgba(0, 0, 0, 0.3)',
+        hover: '0 4px 8px rgba(0, 0, 0, 0.4)',
+        active: '0 1px 2px rgba(0, 0, 0, 0.5)',
+        flat: 'none',
+        low: '0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4)',
+        medium: '0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4)',
+        high: '0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4)',
+        interactive: '0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4)',
+      },
+      content: {
+        spacing: {
+          tight: '0.5rem',
+          normal: '1rem',
+          loose: '1.5rem',
+        },
+      },
+    },
+    toolbar: {
+      background: {
+        default: '#111827',
+        hover: '#1f2937',
+      },
+      text: {
+        default: '#f3f4f6',
+        muted: '#9ca3af',
+      },
+      button: {
+        background: {
+          default: '#1f2937',
+          hover: '#374151',
+          active: '#4b5563',
+        },
+        border: {
+          default: '#374151',
+          hover: '#60a5fa',
+        },
+        text: {
+          default: '#f3f4f6',
+          disabled: '#6b7280',
+        },
+        size: {
+          sm: '32px',
+          md: '40px',
+          lg: '48px',
+        },
+      },
+    },
+    states: {
+      focus: {
+        outline: '2px solid #60a5fa',
+        ring: {
+          color: '#60a5fa',
+          width: '2px',
+          offset: '2px',
+          outline: '2px solid #60a5fa',
+        },
+      },
+      disabled: {
+        opacity: '0.5',
+        filter: 'grayscale(50%)',
+      },
+      hover: {
+        opacity: '0.8',
+        transform: 'translateY(-1px)',
+        background: '#1f2937',
+        border: '#60a5fa',
+      },
+      active: {
+        opacity: '0.9',
+        transform: 'translateY(0px) scale(0.98)',
+        background: '#374151',
+        border: '#3b82f6',
+      },
+    },
+    layout: {
+      container: {
+        maxWidth: {
+          sm: '640px',
+          md: '768px',
+          lg: '1024px',
+          xl: '1280px',
+        },
+      },
+    },
+    timeline: {
+      point: {
+        background: {
+          active: '#60a5fa',
+          inactive: '#1f2937',
+          hover: '#93c5fd',
+        },
       },
     },
   },
@@ -529,6 +812,11 @@ export const darkTheme = createTheme(tokens, {
         color: {
           active: '#60a5fa', // blue.400
           inactive: '#9ca3af', // gray.400
+          hover: '#93c5fd', // blue.300
+        },
+        background: {
+          active: '#60a5fa', // blue.400
+          inactive: '#1f2937', // gray.800
           hover: '#93c5fd', // blue.300
         },
       },

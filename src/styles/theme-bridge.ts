@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { Theme } from '../models/Theme';
-import { vars } from './tokens/index.css';
+import { vars } from './tokens.css';
 import { tokens } from './tokens/index.css';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 

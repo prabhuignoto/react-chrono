@@ -129,7 +129,17 @@ export const tokens = createThemeContract({
   },
 
   // Semantic tokens - meaningful names that map to primitives
-  semantic: {
+    semantic: {
+    // Timeline semantic tokens (maps to component.timeline)
+    timeline: {
+      point: {
+        background: {
+          active: null,
+          inactive: null,
+          hover: null,
+        },
+      },
+    },
     color: {
       // Text colors
       text: {
@@ -154,6 +164,11 @@ export const tokens = createThemeContract({
         secondaryHover: null,
         muted: null,
         mutedHover: null,
+        toolbarBg: null,
+        toolbarText: null,
+        buttonBg: null,
+        buttonBorder: null,
+        focusRing: null,
       },
       // Border colors
       border: {
@@ -175,6 +190,24 @@ export const tokens = createThemeContract({
         muted: null,
         emphasis: null,
       },
+      // Card colors (legacy compatibility)
+      card: {
+        bg: null,
+        border: null,
+        title: null,
+        subtitle: null,
+        details: null,
+      },
+      // Primary color (legacy compatibility)
+      primary: null,
+      muted: null,
+      // Nested card colors (legacy compatibility)
+      nestedCardBg: null,
+      nestedCardTitle: null,
+      nestedCardSubtitle: null,
+      nestedCardDetails: null,
+      // Button colors (legacy compatibility)
+      buttonBorder: null,
     },
     spacing: {
       xs: null, // maps to primitive.spacing.1
@@ -189,6 +222,7 @@ export const tokens = createThemeContract({
       fontSize: {
         caption: null, // maps to primitive.fontSize.xs
         body: null, // maps to primitive.fontSize.base
+        base: null, // alias for body - maps to primitive.fontSize.base
         heading3: null, // maps to primitive.fontSize.lg
         heading2: null, // maps to primitive.fontSize.xl
         heading1: null, // maps to primitive.fontSize.2xl
@@ -199,6 +233,7 @@ export const tokens = createThemeContract({
         md: null,
         xs: null,
         lg: null,
+        xl: null, // maps to primitive.fontSize.xl
       },
       lineHeight: {
         tight: null,
@@ -225,6 +260,7 @@ export const tokens = createThemeContract({
       cardActive: null,
       toolbar: null,
       modal: null,
+      none: null,
     },
     zIndex: {
       timelineCard: null,
@@ -241,6 +277,111 @@ export const tokens = createThemeContract({
       easing: {
         standard: null,
         emphasized: null,
+        easeIn: null,
+        easeOut: null,
+        easeInOut: null,
+      },
+    },
+    // Component-specific semantic tokens
+    card: {
+      background: {
+        default: null,
+        hover: null,
+        active: null,
+        gradient: null,
+      },
+      border: {
+        color: null,
+        gradient: null,
+        radius: {
+          sm: null,
+          md: null,
+          lg: null,
+        },
+      },
+      shadow: {
+        default: null,
+        hover: null,
+        active: null,
+        flat: null,
+        low: null,
+        medium: null,
+        high: null,
+        interactive: null,
+      },
+      content: {
+        spacing: {
+          tight: null,
+          normal: null,
+          loose: null,
+        },
+      },
+    },
+    toolbar: {
+      background: {
+        default: null,
+        hover: null,
+      },
+      text: {
+        default: null,
+        muted: null,
+      },
+      button: {
+        background: {
+          default: null,
+          hover: null,
+          active: null,
+        },
+        border: {
+          default: null,
+          hover: null,
+        },
+        text: {
+          default: null,
+          disabled: null,
+        },
+        size: {
+          sm: null,
+          md: null,
+          lg: null,
+        },
+      },
+    },
+    states: {
+      focus: {
+        outline: null,
+        ring: {
+          color: null,
+          width: null,
+          offset: null,
+          outline: null,
+        },
+      },
+      disabled: {
+        opacity: null,
+        filter: null,
+      },
+      hover: {
+        opacity: null,
+        transform: null,
+        background: null,
+        border: null,
+      },
+      active: {
+        opacity: null,
+        transform: null,
+        background: null,
+        border: null,
+      },
+    },
+    layout: {
+      container: {
+        maxWidth: {
+          sm: null,
+          md: null,
+          lg: null,
+          xl: null,
+        },
       },
     },
   },
@@ -259,6 +400,11 @@ export const tokens = createThemeContract({
           lg: null,
         },
         color: {
+          active: null,
+          inactive: null,
+          hover: null,
+        },
+        background: {
           active: null,
           inactive: null,
           hover: null,

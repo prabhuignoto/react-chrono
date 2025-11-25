@@ -137,7 +137,7 @@ const getTextOrContent: (
               ref={ref as any}
               {...textContentProps}
               style={{
-                color: `${vars.color.cardTitle} !important`, // Ensure color is applied correctly
+                color: `${vars.color.card?.title || vars.color.text?.primary || 'currentColor'} !important`, // Ensure color is applied correctly
                 // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
               }}
             >

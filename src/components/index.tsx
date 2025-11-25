@@ -343,9 +343,9 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
           if (existingItem) {
             return {
               ...item,
-              id: existingItem.id, // Preserve existing ID
-              active: existingItem.active,
-              visible: existingItem.visible,
+              ...(existingItem.id !== undefined && { id: existingItem.id }),
+              ...(existingItem.active !== undefined && { active: existingItem.active }),
+              ...(existingItem.visible !== undefined && { visible: existingItem.visible }),
             };
           }
           // New item - set visible and inactive (active will be set by active item logic)

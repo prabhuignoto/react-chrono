@@ -1,16 +1,16 @@
 import { style, globalStyle } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
-import { designTokens } from '../../../styles/design-system.css';
+import { tokens } from '../../../styles/tokens/index.css';
 import { animationUtils, transitions } from '../../../styles/animations.css';
 import { layoutBase } from '../../../styles/layout.css';
 
 // Base card foundation
 const cardBase = style([
   {
-    background: `linear-gradient(135deg, ${designTokens.color.card.bg} 0%, ${designTokens.color.card.bg}f5 100%)`,
-    borderRadius: designTokens.radius.xl,
-    border: `1px solid ${designTokens.color.card.border}`,
-    boxShadow: designTokens.elevation.md,
+    background: tokens.semantic.card.background.gradient || `linear-gradient(135deg, ${tokens.semantic.color.card.bg} 0%, ${tokens.semantic.color.card.bg}f5 100%)`,
+    borderRadius: tokens.semantic.borderRadius.xl,
+    border: `1px solid ${tokens.semantic.color.card.border}`,
+    boxShadow: tokens.semantic.shadow.card,
     backdropFilter: 'blur(20px)',
     transition: transitions.normal,
     position: 'relative',
@@ -26,24 +26,24 @@ export const card = recipe({
     size: {
       sm: {
         minWidth: '200px',
-        padding: designTokens.spacing.sm,
-        borderRadius: designTokens.radius.md,
+        padding: tokens.semantic.spacing.sm,
+        borderRadius: tokens.semantic.borderRadius.md,
       },
       md: {
         minWidth: '280px',
-        padding: designTokens.spacing.md,
+        padding: tokens.semantic.spacing.md,
       },
       lg: {
         minWidth: '320px',
-        padding: designTokens.spacing.lg,
+        padding: tokens.semantic.spacing.lg,
       },
     },
 
     elevation: {
-      flat: { boxShadow: designTokens.elevation.none },
-      low: { boxShadow: designTokens.elevation.sm },
-      medium: { boxShadow: designTokens.elevation.md },
-      high: { boxShadow: designTokens.elevation.lg },
+      flat: { boxShadow: tokens.semantic.shadow.none || 'none' },
+      low: { boxShadow: tokens.semantic.shadow.card },
+      medium: { boxShadow: tokens.semantic.shadow.card },
+      high: { boxShadow: tokens.semantic.shadow.cardHover },
     },
 
     interactive: {
@@ -52,7 +52,7 @@ export const card = recipe({
         selectors: {
           '&:hover': {
             transform: 'translateY(-2px)',
-            boxShadow: designTokens.elevation.xl,
+            boxShadow: tokens.semantic.shadow.cardHover,
           },
           '&:active': {
             transform: 'translateY(0px)',
@@ -79,7 +79,7 @@ export const card = recipe({
           inset: 0,
           borderRadius: 'inherit',
           padding: '1px',
-          background: `linear-gradient(135deg, ${designTokens.color.primary}20 0%, transparent 50%, ${designTokens.color.primary}10 100%)`,
+          background: tokens.semantic.card.border.gradient || `linear-gradient(135deg, ${tokens.semantic.color.interactive.primary}20 0%, transparent 50%, ${tokens.semantic.color.interactive.primary}10 100%)`,
           mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
           maskComposite: 'xor',
           WebkitMask:
@@ -123,16 +123,16 @@ export const cardContent = recipe({
   base: [
     layoutBase.flexColumn,
     {
-      gap: designTokens.spacing.sm,
+      gap: tokens.semantic.spacing.sm,
       width: '100%',
     },
   ],
 
   variants: {
     spacing: {
-      tight: { gap: designTokens.spacing.xs },
-      normal: { gap: designTokens.spacing.sm },
-      loose: { gap: designTokens.spacing.md },
+      tight: { gap: tokens.semantic.spacing.xs },
+      normal: { gap: tokens.semantic.spacing.sm },
+      loose: { gap: tokens.semantic.spacing.md },
     },
 
     alignment: {
@@ -152,39 +152,39 @@ export const cardContent = recipe({
 export const cardHeader = style([
   layoutBase.flexColumn,
   {
-    gap: designTokens.spacing.xs,
-    marginBottom: designTokens.spacing.sm,
+    gap: tokens.semantic.spacing.xs,
+    marginBottom: tokens.semantic.spacing.sm,
   },
 ]);
 
 // Card title
 export const cardTitle = style({
-  fontSize: designTokens.typography.fontSize.lg,
-  fontWeight: designTokens.typography.fontWeight.semibold,
-  lineHeight: designTokens.typography.lineHeight.tight,
-  color: designTokens.color.card.title,
+  fontSize: tokens.semantic.typography.fontSize.lg,
+  fontWeight: tokens.semantic.typography.fontWeight.semibold,
+  lineHeight: tokens.semantic.typography.lineHeight.tight,
+  color: tokens.semantic.color.card.title || tokens.semantic.color.text.primary,
   margin: 0,
 });
 
 // Card subtitle
 export const cardSubtitle = style({
-  fontSize: designTokens.typography.fontSize.sm,
-  fontWeight: designTokens.typography.fontWeight.medium,
-  lineHeight: designTokens.typography.lineHeight.normal,
-  color: designTokens.color.card.subtitle,
+  fontSize: tokens.semantic.typography.fontSize.sm,
+  fontWeight: tokens.semantic.typography.fontWeight.medium,
+  lineHeight: tokens.semantic.typography.lineHeight.normal,
+  color: tokens.semantic.color.card.subtitle || tokens.semantic.color.text.secondary,
   margin: 0,
   opacity: 0.8,
 });
 
 // Card body
 export const cardBody = style({
-  fontSize: designTokens.typography.fontSize.base,
-  lineHeight: designTokens.typography.lineHeight.relaxed,
-  color: designTokens.color.card.details,
+  fontSize: tokens.semantic.typography.fontSize.body,
+  lineHeight: tokens.semantic.typography.lineHeight.relaxed,
+  color: tokens.semantic.color.card.details || tokens.semantic.color.text.primary,
 });
 
 // Focus management for interactive cards
 globalStyle(`${card.classNames.base}:focus-visible`, {
-  outline: `2px solid ${designTokens.color.interactive.focusRing}`,
+  outline: `2px solid ${tokens.semantic.color.interactive.focusRing || tokens.semantic.color.interactive.primary}`,
   outlineOffset: '2px',
 });
