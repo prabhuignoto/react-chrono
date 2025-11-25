@@ -56,9 +56,8 @@ export const usePrefersReducedMotion = (): boolean => {
     return mediaQuery.matches;
   };
 
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(
-    getInitialState,
-  );
+  const [prefersReducedMotion, setPrefersReducedMotion] =
+    useState<boolean>(getInitialState);
 
   useEffect(() => {
     if (typeof window === 'undefined') return undefined;

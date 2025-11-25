@@ -139,7 +139,7 @@ const TimelineVertical: FunctionComponent<TimelineVerticalModel> = memo(
             index={index} // Pass down the item's index
             onActive={handleOnActive} // Pass down the memoized active handler
             onClick={onClick} // Pass down the global click handler
-            onElapsed={onElapsed || (() => { })} // Pass down the global elapsed handler
+            onElapsed={onElapsed || (() => {})} // Pass down the global elapsed handler
             // Removed onShowMore as the handler was empty
             slideShowRunning={!!slideShowRunning} // Pass down the slideshow state
             cardLess={!!cardLess} // Pass down the cardLess flag

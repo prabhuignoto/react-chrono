@@ -35,9 +35,7 @@ describe('useRovingTabIndex', () => {
       { id: 'third', disabled: false },
     ];
 
-    const { result } = renderHook(() =>
-      useRovingTabIndex({ items }),
-    );
+    const { result } = renderHook(() => useRovingTabIndex({ items }));
 
     expect(result.current.activeId).toBe('second');
   });
@@ -285,9 +283,7 @@ describe('useRovingTabIndex', () => {
         { id: 'second', disabled: true },
       ];
 
-      const { result } = renderHook(() =>
-        useRovingTabIndex({ items }),
-      );
+      const { result } = renderHook(() => useRovingTabIndex({ items }));
 
       act(() => {
         result.current.setActiveId('second');
@@ -317,9 +313,7 @@ describe('useRovingTabIndex', () => {
         { id: 'second', disabled: true },
       ];
 
-      const { result } = renderHook(() =>
-        useRovingTabIndex({ items }),
-      );
+      const { result } = renderHook(() => useRovingTabIndex({ items }));
 
       act(() => {
         result.current.setActiveId('second');
@@ -336,10 +330,7 @@ describe('useRovingTabIndex', () => {
         { initialProps: { items: defaultItems } },
       );
 
-      const newItems = [
-        ...defaultItems,
-        { id: 'fourth', disabled: false },
-      ];
+      const newItems = [...defaultItems, { id: 'fourth', disabled: false }];
 
       rerender({ items: newItems });
 

@@ -3,7 +3,7 @@
 exports[`TimelineControl > should render 1`] = `
 <div>
   <div
-    class="timeline-control_timelineControlContainer__1g3kfsdk timeline-control__1g3kfsdj properties_marginBlock_sm_mobile__12ug04936 properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
+    class="timeline-control_timelineControlContainer__1g3kfsdk timeline-control__1g3kfsdj properties_marginBlock_sm_mobile__12ug0493u properties_display_flex_mobile__12ug0496 properties_alignItems_center_mobile__12ug049r properties_justifyContent_center_mobile__12ug04913"
   >
     <div
       aria-label="Timeline navigation controls"

@@ -423,14 +423,16 @@ describe('useAccessibleDialog', () => {
         { initialProps: { isOpen: false } },
       );
 
-      let options = useKeyHandler.mock.calls[useKeyHandler.mock.calls.length - 1][1];
+      let options =
+        useKeyHandler.mock.calls[useKeyHandler.mock.calls.length - 1][1];
       expect(options.enabled).toBe(false);
 
       act(() => {
         rerender({ isOpen: true });
       });
 
-      options = useKeyHandler.mock.calls[useKeyHandler.mock.calls.length - 1][1];
+      options =
+        useKeyHandler.mock.calls[useKeyHandler.mock.calls.length - 1][1];
       expect(options.enabled).toBe(true);
     });
 
@@ -569,7 +571,9 @@ describe('useAccessibleDialog', () => {
         }),
       );
 
-      expect(result.current.dialogProps['aria-label']).toBe('Custom Dialog Label');
+      expect(result.current.dialogProps['aria-label']).toBe(
+        'Custom Dialog Label',
+      );
     });
 
     it('should apply aria-describedby when provided', () => {
@@ -595,7 +599,9 @@ describe('useAccessibleDialog', () => {
         }),
       );
 
-      expect(result.current.dialogProps['aria-labelledby']).toBe('dialog-title');
+      expect(result.current.dialogProps['aria-labelledby']).toBe(
+        'dialog-title',
+      );
     });
 
     it('should always set aria-modal to true', () => {

@@ -328,6 +328,11 @@ export const TimelineContextProvider: FunctionComponent<
   // ==========================================
   // MODE SYNCHRONIZATION
   // ==========================================
+  // Sync internal darkMode state with prop changes
+  useEffect(() => {
+    setIsDarkMode(darkMode);
+  }, [darkMode]);
+
   // Update showAllCardsHorizontal when mode or prop changes
   useEffect(() => {
     if (mode === 'HORIZONTAL_ALL') {

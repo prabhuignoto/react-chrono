@@ -208,9 +208,13 @@ export const useTimelineItemNavigation = ({
             // 2. Toolbar button is active (isToolbarNavigationRef - includes play, navigation, dark mode, popovers)
             // 3. Slideshow is running (slideShowRunning)
             const isToolbarActive = isToolbarNavigationRef?.current ?? false;
-            const shouldPreventFocus = wasSearchActive || isToolbarActive || slideShowRunning;
+            const shouldPreventFocus =
+              wasSearchActive || isToolbarActive || slideShowRunning;
 
-            if (!shouldPreventFocus && typeof (targetElement as HTMLElement).focus === 'function') {
+            if (
+              !shouldPreventFocus &&
+              typeof (targetElement as HTMLElement).focus === 'function'
+            ) {
               (targetElement as HTMLElement).focus({ preventScroll: true });
               // Ensure the wrapper maintains keyboard focus capability
               const wrapper = targetElement.closest(

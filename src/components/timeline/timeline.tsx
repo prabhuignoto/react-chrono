@@ -1,7 +1,13 @@
 import { TimelineModel, TextDensity } from '@models/TimelineModel';
 import { getUniqueID } from '@utils/index';
 import cls from 'classnames';
-import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useRef,
+} from 'react';
 import { useTimelineContext } from '../contexts';
 import useNewScrollPosition from '../effects/useNewScrollPosition';
 import { useSlideshowProgress } from '../../hooks/useSlideshowProgress';
@@ -99,6 +105,8 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const keyboardTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // Track if this is the initial render to prevent auto-focus unless focusActiveItemOnLoad is true
   const isInitialRenderRef = useRef(true);
+  // Track if we've made the initial focus decision (to handle multiple useEffect runs on mount)
+  const hasInitialFocusedRef = useRef(false);
 
   // Listen to native fullscreen change events to keep state in sync
   useEffect(() => {
@@ -162,7 +170,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
       // Find first timeline item and focus it
       const firstItem = timelineMainRef.current?.querySelector(
-        '[data-testid="vertical-item-row"], [data-testid="timeline-circle"]'
+        '[data-testid="vertical-item-row"], [data-testid="timeline-circle"]',
       ) as HTMLElement | null;
 
       if (firstItem) {
@@ -202,7 +210,6 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     }
   }, [timelineMode, updateHorizontalAllCards]);
 
-
   // First get the navigation functions
   const {
     activeItemIndex,
@@ -223,11 +230,11 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     slideShowRunning: !!slideShowRunning,
     isKeyboardNavigation: !!isKeyboardNavigation,
     isToolbarNavigationRef,
-    onTimelineUpdated: onTimelineUpdated || (() => { }),
-    onNext: onNext || (() => { }),
-    onPrevious: onPrevious || (() => { }),
-    onFirst: onFirst || (() => { }),
-    onLast: onLast || (() => { }),
+    onTimelineUpdated: onTimelineUpdated || (() => {}),
+    onNext: onNext || (() => {}),
+    onPrevious: onPrevious || (() => {}),
+    onFirst: onFirst || (() => {}),
+    onLast: onLast || (() => {}),
   });
 
   const {
@@ -237,7 +244,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     handleMainScroll,
   } = useTimelineScroll({
     mode: timelineMode,
-    onScrollEnd: onScrollEnd || (() => { }),
+    onScrollEnd: onScrollEnd || (() => {}),
     setNewOffset,
     onNextItem: handleNextInternal,
     onPreviousItem: handlePreviousInternal,
@@ -294,161 +301,191 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
 
   // Enhanced navigation handlers that track source
   // WCAG 2.4.3: Keep focus on toolbar button during activation (not on timeline item)
-  const handleNext = React.useCallback((event?: React.MouseEvent | React.KeyboardEvent) => {
-    const clickedButton = (event?.currentTarget as HTMLElement) || null;
-    isToolbarNavigationRef.current = true;
-    setIsKeyboardNavigation(false);
-    handleNextInternal();
-    // Explicitly refocus button after navigation to prevent focus stealing
-    requestAnimationFrame(() => {
-      if (clickedButton) {
-        try {
-          clickedButton.focus({ preventScroll: true });
-        } catch (_) {
-          // Silently ignore focus errors
+  const handleNext = React.useCallback(
+    (event?: React.MouseEvent | React.KeyboardEvent) => {
+      const clickedButton = (event?.currentTarget as HTMLElement) || null;
+      isToolbarNavigationRef.current = true;
+      setIsKeyboardNavigation(false);
+      handleNextInternal();
+      // Explicitly refocus button after navigation to prevent focus stealing
+      requestAnimationFrame(() => {
+        if (clickedButton) {
+          try {
+            clickedButton.focus({ preventScroll: true });
+          } catch (_) {
+            // Silently ignore focus errors
+          }
         }
-      }
-      isToolbarNavigationRef.current = false;
-    });
-  }, [handleNextInternal]);
+        isToolbarNavigationRef.current = false;
+      });
+    },
+    [handleNextInternal],
+  );
 
-  const handlePrevious = React.useCallback((event?: React.MouseEvent | React.KeyboardEvent) => {
-    const clickedButton = (event?.currentTarget as HTMLElement) || null;
-    isToolbarNavigationRef.current = true;
-    setIsKeyboardNavigation(false);
-    handlePreviousInternal();
-    // Explicitly refocus button after navigation to prevent focus stealing
-    requestAnimationFrame(() => {
-      if (clickedButton) {
-        try {
-          clickedButton.focus({ preventScroll: true });
-        } catch (_) {
-          // Silently ignore focus errors
+  const handlePrevious = React.useCallback(
+    (event?: React.MouseEvent | React.KeyboardEvent) => {
+      const clickedButton = (event?.currentTarget as HTMLElement) || null;
+      isToolbarNavigationRef.current = true;
+      setIsKeyboardNavigation(false);
+      handlePreviousInternal();
+      // Explicitly refocus button after navigation to prevent focus stealing
+      requestAnimationFrame(() => {
+        if (clickedButton) {
+          try {
+            clickedButton.focus({ preventScroll: true });
+          } catch (_) {
+            // Silently ignore focus errors
+          }
         }
-      }
-      isToolbarNavigationRef.current = false;
-    });
-  }, [handlePreviousInternal]);
+        isToolbarNavigationRef.current = false;
+      });
+    },
+    [handlePreviousInternal],
+  );
 
-  const handleFirst = React.useCallback((event?: React.MouseEvent | React.KeyboardEvent) => {
-    const clickedButton = (event?.currentTarget as HTMLElement) || null;
-    isToolbarNavigationRef.current = true;
-    setIsKeyboardNavigation(false);
-    handleFirstInternal();
-    // Explicitly refocus button after navigation to prevent focus stealing
-    requestAnimationFrame(() => {
-      if (clickedButton) {
-        try {
-          clickedButton.focus({ preventScroll: true });
-        } catch (_) {
-          // Silently ignore focus errors
+  const handleFirst = React.useCallback(
+    (event?: React.MouseEvent | React.KeyboardEvent) => {
+      const clickedButton = (event?.currentTarget as HTMLElement) || null;
+      isToolbarNavigationRef.current = true;
+      setIsKeyboardNavigation(false);
+      handleFirstInternal();
+      // Explicitly refocus button after navigation to prevent focus stealing
+      requestAnimationFrame(() => {
+        if (clickedButton) {
+          try {
+            clickedButton.focus({ preventScroll: true });
+          } catch (_) {
+            // Silently ignore focus errors
+          }
         }
-      }
-      isToolbarNavigationRef.current = false;
-    });
-  }, [handleFirstInternal]);
+        isToolbarNavigationRef.current = false;
+      });
+    },
+    [handleFirstInternal],
+  );
 
-  const handleLast = React.useCallback((event?: React.MouseEvent | React.KeyboardEvent) => {
-    const clickedButton = (event?.currentTarget as HTMLElement) || null;
-    isToolbarNavigationRef.current = true;
-    setIsKeyboardNavigation(false);
-    handleLastInternal();
-    // Explicitly refocus button after navigation to prevent focus stealing
-    requestAnimationFrame(() => {
-      if (clickedButton) {
-        try {
-          clickedButton.focus({ preventScroll: true });
-        } catch (_) {
-          // Silently ignore focus errors
+  const handleLast = React.useCallback(
+    (event?: React.MouseEvent | React.KeyboardEvent) => {
+      const clickedButton = (event?.currentTarget as HTMLElement) || null;
+      isToolbarNavigationRef.current = true;
+      setIsKeyboardNavigation(false);
+      handleLastInternal();
+      // Explicitly refocus button after navigation to prevent focus stealing
+      requestAnimationFrame(() => {
+        if (clickedButton) {
+          try {
+            clickedButton.focus({ preventScroll: true });
+          } catch (_) {
+            // Silently ignore focus errors
+          }
         }
-      }
-      isToolbarNavigationRef.current = false;
-    });
-  }, [handleLastInternal]);
+        isToolbarNavigationRef.current = false;
+      });
+    },
+    [handleLastInternal],
+  );
 
   // Wrap toggleDarkMode to prevent focus stealing (WCAG 2.4.3)
-  const handleToggleDarkMode = React.useCallback((event?: React.MouseEvent) => {
-    const clickedButton = (event?.currentTarget as HTMLElement) || null;
-    isToolbarNavigationRef.current = true;
-    setIsKeyboardNavigation(false);
-    toggleDarkMode?.();
-    // Explicitly refocus button after action to prevent focus stealing
-    requestAnimationFrame(() => {
-      if (clickedButton) {
-        try {
-          clickedButton.focus({ preventScroll: true });
-        } catch (_) {
-          // Silently ignore focus errors
+  const handleToggleDarkMode = React.useCallback(
+    (event?: React.MouseEvent) => {
+      const clickedButton = (event?.currentTarget as HTMLElement) || null;
+      isToolbarNavigationRef.current = true;
+      setIsKeyboardNavigation(false);
+      toggleDarkMode?.();
+      // Explicitly refocus button after action to prevent focus stealing
+      requestAnimationFrame(() => {
+        if (clickedButton) {
+          try {
+            clickedButton.focus({ preventScroll: true });
+          } catch (_) {
+            // Silently ignore focus errors
+          }
         }
-      }
-      isToolbarNavigationRef.current = false;
-    });
-  }, [toggleDarkMode]);
+        isToolbarNavigationRef.current = false;
+      });
+    },
+    [toggleDarkMode],
+  );
 
   // Wrap onRestartSlideshow to prevent focus stealing (WCAG 2.4.3)
-  const handleRestartSlideshow = React.useCallback((event?: React.MouseEvent) => {
-    const clickedButton = (event?.currentTarget as HTMLElement) || null;
-    isToolbarNavigationRef.current = true;
-    setIsKeyboardNavigation(false);
-    onRestartSlideshow?.();
-    // Explicitly refocus button after action to prevent focus stealing
-    requestAnimationFrame(() => {
-      if (clickedButton) {
-        try {
-          clickedButton.focus({ preventScroll: true });
-        } catch (_) {
-          // Silently ignore focus errors
+  const handleRestartSlideshow = React.useCallback(
+    (event?: React.MouseEvent) => {
+      const clickedButton = (event?.currentTarget as HTMLElement) || null;
+      isToolbarNavigationRef.current = true;
+      setIsKeyboardNavigation(false);
+      onRestartSlideshow?.();
+      // Explicitly refocus button after action to prevent focus stealing
+      requestAnimationFrame(() => {
+        if (clickedButton) {
+          try {
+            clickedButton.focus({ preventScroll: true });
+          } catch (_) {
+            // Silently ignore focus errors
+          }
         }
-      }
-      isToolbarNavigationRef.current = false;
-    });
-  }, [onRestartSlideshow]);
+        isToolbarNavigationRef.current = false;
+      });
+    },
+    [onRestartSlideshow],
+  );
 
   // Wrap onPaused to prevent focus stealing (WCAG 2.4.3)
-  const handlePausedWrapper = React.useCallback((event?: React.MouseEvent) => {
-    const clickedButton = (event?.currentTarget as HTMLElement) || null;
-    isToolbarNavigationRef.current = true;
-    setIsKeyboardNavigation(false);
-    onPaused?.();
-    // Explicitly refocus button after action to prevent focus stealing
-    requestAnimationFrame(() => {
-      if (clickedButton) {
-        try {
-          clickedButton.focus({ preventScroll: true });
-        } catch (_) {
-          // Silently ignore focus errors
+  const handlePausedWrapper = React.useCallback(
+    (event?: React.MouseEvent) => {
+      const clickedButton = (event?.currentTarget as HTMLElement) || null;
+      isToolbarNavigationRef.current = true;
+      setIsKeyboardNavigation(false);
+      onPaused?.();
+      // Explicitly refocus button after action to prevent focus stealing
+      requestAnimationFrame(() => {
+        if (clickedButton) {
+          try {
+            clickedButton.focus({ preventScroll: true });
+          } catch (_) {
+            // Silently ignore focus errors
+          }
         }
-      }
-      isToolbarNavigationRef.current = false;
-    });
-  }, [onPaused]);
+        isToolbarNavigationRef.current = false;
+      });
+    },
+    [onPaused],
+  );
 
   // Wrap popover callbacks to prevent focus stealing to timeline items
   // These callbacks trigger timeline state changes that would normally cause focus to jump to timeline items
   // By setting isToolbarNavigationRef.current = true, we signal to the main focus useEffect to skip timeline focus
-  const wrappedOnActivateTimelineItem = React.useCallback((itemId?: string) => {
-    isToolbarNavigationRef.current = true;
-    handleTimelineItemClick(itemId);
-    // Note: RAF cleanup happens in handleTimelineItemClick via isToolbarNavigationRef reset
-  }, [handleTimelineItemClick]);
+  const wrappedOnActivateTimelineItem = React.useCallback(
+    (itemId?: string) => {
+      isToolbarNavigationRef.current = true;
+      handleTimelineItemClick(itemId);
+      // Note: RAF cleanup happens in handleTimelineItemClick via isToolbarNavigationRef reset
+    },
+    [handleTimelineItemClick],
+  );
 
-  const wrappedOnUpdateTimelineMode = React.useCallback((newMode: string) => {
-    isToolbarNavigationRef.current = true;
-    handleTimelineUpdate(newMode);
-    // Reset after state update completes
-    requestAnimationFrame(() => {
-      isToolbarNavigationRef.current = false;
-    });
-  }, [handleTimelineUpdate]);
+  const wrappedOnUpdateTimelineMode = React.useCallback(
+    (newMode: string) => {
+      isToolbarNavigationRef.current = true;
+      handleTimelineUpdate(newMode);
+      // Reset after state update completes
+      requestAnimationFrame(() => {
+        isToolbarNavigationRef.current = false;
+      });
+    },
+    [handleTimelineUpdate],
+  );
 
-  const wrappedOnUpdateTextContentDensity = React.useCallback((density: string) => {
-    isToolbarNavigationRef.current = true;
-    updateTextContentDensity(density as TextDensity);
-    // Reset after state update completes
-    requestAnimationFrame(() => {
-      isToolbarNavigationRef.current = false;
-    });
-  }, [updateTextContentDensity]);
+  const wrappedOnUpdateTextContentDensity = React.useCallback(
+    (density: string) => {
+      isToolbarNavigationRef.current = true;
+      updateTextContentDensity(density as TextDensity);
+      // Reset after state update completes
+      requestAnimationFrame(() => {
+        isToolbarNavigationRef.current = false;
+      });
+    },
+    [updateTextContentDensity],
+  );
 
   // Sync activeItemIndex with activeTimelineItem prop
   // FOCUS COORDINATION STRATEGY:
@@ -496,7 +533,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
       if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
         requestAnimationFrame(() => {
           // Only focus if search is still marked as active and conditions allow focus
-          if (!isSearchNavigationRef.current || wasSearchActive || isToolbarFocused) return;
+          if (
+            !isSearchNavigationRef.current ||
+            wasSearchActive ||
+            isToolbarFocused
+          )
+            return;
 
           const activeId = items[activeTimelineItem ?? 0]?.id;
           if (activeId) {
@@ -537,7 +579,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         // In vertical modes, focus the vertical row (li) for the active item
         requestAnimationFrame(() => {
           // Only focus if search is still marked as active and conditions allow focus
-          if (!isSearchNavigationRef.current || wasSearchActive || isToolbarFocused) return;
+          if (
+            !isSearchNavigationRef.current ||
+            wasSearchActive ||
+            isToolbarFocused
+          )
+            return;
 
           const activeId = items[activeTimelineItem ?? 0]?.id;
           if (activeId) {
@@ -566,14 +613,21 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         isSearchNavigationRef.current = false;
       });
     }
-  }, [activeTimelineItem, syncActiveItemIndex, mode, timelineMode, timelineMainRef, items]);
+  }, [
+    activeTimelineItem,
+    syncActiveItemIndex,
+    mode,
+    timelineMode,
+    timelineMainRef,
+    items,
+  ]);
 
   // Wrapper callbacks for search navigation that mark it as search-triggered
   // This ensures timeline items only receive focus during search (WCAG 2.1.1: Keyboard)
   const wrappedOnTimelineUpdated = useCallback(
     (index: number) => {
       isSearchNavigationRef.current = true;
-      (onTimelineUpdated || (() => { }))(index);
+      (onTimelineUpdated || (() => {}))(index);
     },
     [onTimelineUpdated],
   );
@@ -669,7 +723,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const handleFocus = React.useCallback(
     (evt: React.FocusEvent<HTMLDivElement>) => {
       // Don't manage focus if it's coming from within toolbar (search, buttons, etc)
-      const timelineToolbar = (evt.currentTarget as HTMLElement).querySelector('[role="toolbar"]');
+      const timelineToolbar = (evt.currentTarget as HTMLElement).querySelector(
+        '[role="toolbar"]',
+      );
       const isFocusFromToolbar = timelineToolbar?.contains(evt.target as Node);
 
       if (isFocusFromToolbar) {
@@ -686,8 +742,12 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
   const handleBlur = React.useCallback(
     (evt: React.FocusEvent<HTMLDivElement>) => {
       // Don't manage focus if blur is due to focus moving within toolbar
-      const timelineToolbar = (evt.currentTarget as HTMLElement).querySelector('[role="toolbar"]');
-      const isBlurWithinToolbar = timelineToolbar?.contains(evt.relatedTarget as Node);
+      const timelineToolbar = (evt.currentTarget as HTMLElement).querySelector(
+        '[role="toolbar"]',
+      );
+      const isBlurWithinToolbar = timelineToolbar?.contains(
+        evt.relatedTarget as Node,
+      );
 
       if (isBlurWithinToolbar) {
         return; // Let toolbar items manage their own focus
@@ -739,13 +799,27 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
     });
 
     // Determine if we should focus elements
-    // Only focus on initial render if focusActiveItemOnLoad is true
-    const shouldFocus = !isInitialRenderRef.current || focusActiveItemOnLoad;
+    // During initial mount (tracked by isInitialRenderRef): only focus if focusActiveItemOnLoad is true
+    // After mount: always focus for subsequent navigations
+    const shouldFocus = isInitialRenderRef.current
+      ? focusActiveItemOnLoad
+      : true;
 
-    // Mark that initial render is complete
+    // Mark that initial render is complete AFTER this effect runs
+    // Use setTimeout to ensure this happens after all synchronous code
     if (isInitialRenderRef.current) {
-      isInitialRenderRef.current = false;
+      setTimeout(() => {
+        isInitialRenderRef.current = false;
+      }, 0);
     }
+
+    console.log('Timeline focus decision:', {
+      isInitialRender: isInitialRenderRef.current,
+      focusActiveItemOnLoad,
+      shouldFocus,
+      activeTimelineItem,
+      timelineMode,
+    });
 
     // Handle centering for both slideshow and manual navigation
     if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
@@ -784,7 +858,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         `button[data-testid="timeline-circle"][data-item-id="${activeItem.id}"]`,
       ) as HTMLButtonElement | null;
 
-      if (point) {
+      if (point && shouldFocus) {
         requestAnimationFrame(() => {
           // Check if scrollIntoView is available (not available in JSDOM)
           if (point.scrollIntoView) {
@@ -885,7 +959,9 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         onMouseDown={(evt) => {
           // Don't steal focus from search input or toolbar
           // Check if click is within toolbar (which contains search input)
-          const timelineToolbar = (evt.currentTarget as HTMLElement).querySelector('[role="toolbar"]');
+          const timelineToolbar = (
+            evt.currentTarget as HTMLElement
+          ).querySelector('[role="toolbar"]');
           const isWithinToolbar = timelineToolbar?.contains(evt.target as Node);
 
           if (!isWithinToolbar) {
@@ -902,8 +978,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         aria-roledescription="interactive timeline"
         aria-label="Timeline navigation"
         aria-keyshortcuts={
-          timelineMode === 'VERTICAL' ||
-            timelineMode === 'VERTICAL_ALTERNATING'
+          timelineMode === 'VERTICAL' || timelineMode === 'VERTICAL_ALTERNATING'
             ? 'ArrowUp ArrowDown Home End'
             : 'ArrowLeft ArrowRight Home End'
         }
@@ -1028,7 +1103,7 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
             id={id}
             theme={theme}
             lineWidth={lineWidth}
-            onOutlineSelection={onOutlineSelection || (() => { })}
+            onOutlineSelection={onOutlineSelection || (() => {})}
             nestedCardHeight={nestedCardHeight ?? 0}
           />
         </div>
@@ -1036,23 +1111,23 @@ const Timeline: React.FunctionComponent<TimelineModel> = (
         {/* Only render content renderer for horizontal modes */}
         {(timelineMode === 'HORIZONTAL' ||
           timelineMode === 'HORIZONTAL_ALL') && (
-            <div
-              id={id}
-              ref={horizontalContentRef}
-              className={`timeline-content-render ${ve.contentRenderer({
-                mode:
-                  timelineMode === 'HORIZONTAL_ALL'
-                    ? 'horizontalAll'
-                    : 'horizontal',
-              })}`}
-              style={
-                {
-                  // Pass card height as CSS variable for dynamic height calculation
-                  '--card-height': `${cardHeight || 350}px`,
-                } as React.CSSProperties
-              }
-            />
-          )}
+          <div
+            id={id}
+            ref={horizontalContentRef}
+            className={`timeline-content-render ${ve.contentRenderer({
+              mode:
+                timelineMode === 'HORIZONTAL_ALL'
+                  ? 'horizontalAll'
+                  : 'horizontal',
+            })}`}
+            style={
+              {
+                // Pass card height as CSS variable for dynamic height calculation
+                '--card-height': `${cardHeight || 350}px`,
+              } as React.CSSProperties
+            }
+          />
+        )}
       </div>
     </FontProvider>
   );

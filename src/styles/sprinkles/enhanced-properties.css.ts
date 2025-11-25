@@ -1,5 +1,5 @@
 import { defineProperties } from '@vanilla-extract/sprinkles';
-import { designTokens } from '../design-system.css';
+import { tokens } from '../tokens/index.css';
 
 // Define responsive conditions
 const responsiveConditions = {
@@ -42,9 +42,9 @@ export const responsiveProperties = defineProperties({
     flexWrap: ['nowrap', 'wrap', 'wrap-reverse'],
     flexGrow: [0, 1],
     flexShrink: [0, 1],
-    gap: designTokens.spacing,
-    columnGap: designTokens.spacing,
-    rowGap: designTokens.spacing,
+    gap: tokens.semantic.spacing,
+    columnGap: tokens.semantic.spacing,
+    rowGap: tokens.semantic.spacing,
 
     // Grid
     gridTemplateColumns: {
@@ -66,40 +66,40 @@ export const responsiveProperties = defineProperties({
     },
 
     // Spacing with responsive support
-    padding: designTokens.spacing,
-    paddingTop: designTokens.spacing,
-    paddingBottom: designTokens.spacing,
-    paddingLeft: designTokens.spacing,
-    paddingRight: designTokens.spacing,
-    paddingX: designTokens.spacing,
-    paddingY: designTokens.spacing,
+    padding: tokens.semantic.spacing,
+    paddingTop: tokens.semantic.spacing,
+    paddingBottom: tokens.semantic.spacing,
+    paddingLeft: tokens.semantic.spacing,
+    paddingRight: tokens.semantic.spacing,
+    paddingX: tokens.semantic.spacing,
+    paddingY: tokens.semantic.spacing,
     margin: {
-      ...designTokens.spacing,
+      ...tokens.semantic.spacing,
       auto: 'auto',
       '-1': '-0.25rem',
     },
     marginTop: {
-      ...designTokens.spacing,
+      ...tokens.semantic.spacing,
       auto: 'auto',
     },
     marginBottom: {
-      ...designTokens.spacing,
+      ...tokens.semantic.spacing,
       auto: 'auto',
     },
     marginLeft: {
-      ...designTokens.spacing,
+      ...tokens.semantic.spacing,
       auto: 'auto',
     },
     marginRight: {
-      ...designTokens.spacing,
+      ...tokens.semantic.spacing,
       auto: 'auto',
     },
     marginX: {
-      ...designTokens.spacing,
+      ...tokens.semantic.spacing,
       auto: 'auto',
     },
     marginY: {
-      ...designTokens.spacing,
+      ...tokens.semantic.spacing,
       auto: 'auto',
     },
 
@@ -160,12 +160,12 @@ export const responsiveProperties = defineProperties({
     },
 
     // Visual
-    borderRadius: designTokens.radius,
-    borderTopLeftRadius: designTokens.radius,
-    borderTopRightRadius: designTokens.radius,
-    borderBottomLeftRadius: designTokens.radius,
-    borderBottomRightRadius: designTokens.radius,
-    boxShadow: designTokens.elevation,
+    borderRadius: tokens.semantic.borderRadius,
+    borderTopLeftRadius: tokens.semantic.borderRadius,
+    borderTopRightRadius: tokens.semantic.borderRadius,
+    borderBottomLeftRadius: tokens.semantic.borderRadius,
+    borderBottomRightRadius: tokens.semantic.borderRadius,
+    boxShadow: tokens.primitive.shadow,
     opacity: {
       0: '0',
       5: '0.05',
@@ -185,15 +185,15 @@ export const responsiveProperties = defineProperties({
     },
 
     // Typography
-    fontSize: designTokens.typography.fontSize,
-    fontWeight: designTokens.typography.fontWeight,
-    lineHeight: designTokens.typography.lineHeight,
+    fontSize: tokens.semantic.typography.fontSize,
+    fontWeight: tokens.semantic.typography.fontWeight,
+    lineHeight: tokens.semantic.typography.lineHeight,
     textAlign: ['left', 'center', 'right', 'justify'],
     textTransform: ['none', 'uppercase', 'lowercase', 'capitalize'],
     textDecoration: ['none', 'underline', 'line-through'],
 
     // Z-Index
-    zIndex: designTokens.zIndex,
+    zIndex: tokens.semantic.zIndex,
 
     // Cursor
     cursor: [

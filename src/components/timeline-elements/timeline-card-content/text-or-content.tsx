@@ -13,7 +13,7 @@ import {
   timelineContentDetails,
   timelineSubContent,
 } from './timeline-card-content.css';
-import { vars } from 'src/styles/tokens.css';
+import { vars } from 'src/styles/tokens/index.css';
 
 // Define the type for the TextOrContentModel
 export type TextOrContentModel = Pick<
@@ -38,35 +38,33 @@ const renderTextArray: (
   cardTextClassName,
   isDarkMode,
 }) => {
-    return detailedText.map((text, index) => {
-      // Only apply xss if text is a string
-      const props =
-        parseDetailsAsHTML && typeof text === 'string'
-          ? {
+  return detailedText.map((text, index) => {
+    // Only apply xss if text is a string
+    const props =
+      parseDetailsAsHTML && typeof text === 'string'
+        ? {
             dangerouslySetInnerHTML: {
               __html: xss(text),
             },
           }
-          : null;
+        : null;
 
-
-
-      return (
-        <span
-          className={`${timelineSubContent} ${cardTextClassName ?? ''}`}
-          key={`timeline-text-${typeof text === 'string' ? text.substring(0, 10) : ''}-${index}`}
-          style={{
-            color:
-              theme?.cardDetailsColor ||
-              'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))',
-          }}
-          {...props}
-        >
-          {parseDetailsAsHTML ? null : text}
-        </span>
-      );
-    });
-  };
+    return (
+      <span
+        className={`${timelineSubContent} ${cardTextClassName ?? ''}`}
+        key={`timeline-text-${typeof text === 'string' ? text.substring(0, 10) : ''}-${index}`}
+        style={{
+          color:
+            theme?.cardDetailsColor ||
+            'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))',
+        }}
+        {...props}
+      >
+        {parseDetailsAsHTML ? null : text}
+      </span>
+    );
+  });
+};
 
 // Function to get the TextOrContent component
 const getTextOrContent: (
@@ -77,112 +75,110 @@ const getTextOrContent: (
   detailedText,
   showMore,
 }) => {
-    const TextOrContent = forwardRef<HTMLParagraphElement, TextOrContentModel>(
-      (prop, ref) => {
-        const isTextArray = Array.isArray(detailedText);
-        const {
+  const TextOrContent = forwardRef<HTMLParagraphElement, TextOrContentModel>(
+    (prop, ref) => {
+      const isTextArray = Array.isArray(detailedText);
+      const {
+        fontSizes,
+        classNames,
+        parseDetailsAsHTML,
+        textContentDensity,
+        isDarkMode,
+      } = useTimelineContext();
+
+      const shouldNotShowText = useMemo(() => {
+        return (
+          (parseDetailsAsHTML && !isTextArray) || textContentDensity === 'LOW'
+        );
+      }, [isTextArray, parseDetailsAsHTML, textContentDensity]);
+
+      // Generate the text content based on detailedText
+      const getTextContent = () => {
+        if (!isTextArray) {
+          return parseDetailsAsHTML && typeof detailedText === 'string'
+            ? xss(detailedText)
+            : detailedText;
+        }
+
+        return renderTextArray({
+          cardTextClassName: classNames?.cardText || '',
+          detailedText: detailedText as (string | ReactNode)[],
           fontSizes,
-          classNames,
           parseDetailsAsHTML,
-          textContentDensity,
+          theme: theme || ({} as Theme),
           isDarkMode,
-        } = useTimelineContext();
+        });
+      };
 
-        const shouldNotShowText = useMemo(() => {
-          return (
-            (parseDetailsAsHTML && !isTextArray) || textContentDensity === 'LOW'
-          );
-        }, [isTextArray, parseDetailsAsHTML, textContentDensity]);
+      // Create props for HTML content if needed
+      const getTextContentProps = (textContent: string) => {
+        if (parseDetailsAsHTML && !isTextArray) {
+          return {
+            dangerouslySetInnerHTML: {
+              __html: xss(textContent),
+            },
+          };
+        }
+        return {};
+      };
 
-        // Generate the text content based on detailedText
-        const getTextContent = () => {
-          if (!isTextArray) {
-            return parseDetailsAsHTML && typeof detailedText === 'string'
-              ? xss(detailedText)
-              : detailedText;
-          }
+      const renderDetailedContent = (textContent: string) => {
+        const textContentProps = getTextContentProps(textContent);
 
-          return renderTextArray({
-            cardTextClassName: classNames?.cardText || '',
-            detailedText: detailedText as (string | ReactNode)[],
-            fontSizes,
-            parseDetailsAsHTML,
-            theme: theme || ({} as Theme),
-            isDarkMode,
-          });
-        };
+        return (
+          <p
+            className={
+              timelineContentDetails + ' ' + (showMore ? 'active' : '')
+            }
+            ref={ref as any}
+            {...textContentProps}
+            style={{
+              color: `${vars.color.card?.title || vars.color.text?.primary || 'currentColor'} !important`, // Ensure color is applied correctly
+              // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
+            }}
+          >
+            {shouldNotShowText ? null : parseDetailsAsHTML ? null : textContent}
+          </p>
+        );
+      };
 
-        // Create props for HTML content if needed
-        const getTextContentProps = (textContent: string) => {
-          if (parseDetailsAsHTML && !isTextArray) {
-            return {
-              dangerouslySetInnerHTML: {
-                __html: xss(textContent),
-              },
-            };
-          }
-          return {};
-        };
+      const renderTimelineContent = () => {
+        if (timelineContent) {
+          return <div ref={ref}>{timelineContent}</div>;
+        }
 
-        const renderDetailedContent = (textContent: string) => {
-          const textContentProps = getTextContentProps(textContent);
+        const textContent = getTextContent();
+        if (!textContent) return null;
 
-
-
+        // If detailedText was an array, render the array of spans directly as children
+        if (isTextArray) {
           return (
             <p
               className={
                 timelineContentDetails + ' ' + (showMore ? 'active' : '')
               }
               ref={ref as any}
-              {...textContentProps}
               style={{
-                color: `${vars.color.cardTitle} !important`, // Ensure color is applied correctly
+                color: `${vars.color.text} !important`, // Ensure color is applied correctly
                 // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
               }}
             >
-              {shouldNotShowText ? null : (parseDetailsAsHTML ? null : textContent)}
+              {shouldNotShowText ? null : textContent}
             </p>
           );
-        };
+        }
 
-        const renderTimelineContent = () => {
-          if (timelineContent) {
-            return <div ref={ref}>{timelineContent}</div>;
-          }
+        // Non-array case: render as string/HTML as appropriate
+        return renderDetailedContent(String(textContent));
+      };
 
-          const textContent = getTextContent();
-          if (!textContent) return null;
+      return renderTimelineContent();
+    },
+  );
 
-          // If detailedText was an array, render the array of spans directly as children
-          if (isTextArray) {
-            return (
-              <p
-                className={
-                  timelineContentDetails + ' ' + (showMore ? 'active' : '')
-                }
-                ref={ref as any}
-                style={{
-                  color: `${vars.color.text} !important`, // Ensure color is applied correctly
-                  // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
-                }}
-              >
-                {shouldNotShowText ? null : textContent}
-              </p>
-            );
-          }
+  TextOrContent.displayName = 'Text Or Content';
 
-          // Non-array case: render as string/HTML as appropriate
-          return renderDetailedContent(String(textContent));
-        };
-
-        return renderTimelineContent();
-      },
-    );
-
-    TextOrContent.displayName = 'Text Or Content';
-
-    return TextOrContent;
-  };
+  return TextOrContent;
+};
 
 export { getTextOrContent };

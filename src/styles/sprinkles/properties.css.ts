@@ -1,5 +1,5 @@
 import { defineProperties } from '@vanilla-extract/sprinkles';
-import { vars } from '../tokens.css';
+import { tokens } from '../tokens/index.css';
 
 // Responsive, logical spacing, layout, and sizing utilities
 export const responsiveProperties = defineProperties({
@@ -20,26 +20,25 @@ export const responsiveProperties = defineProperties({
       'space-around',
       'space-evenly',
     ],
-    gap: vars.space,
+    gap: tokens.semantic.spacing,
     // logical spacing
-    padding: vars.space,
-    paddingBlock: vars.space,
-    paddingInline: vars.space,
-    marginBlock: vars.space,
-    marginInline: vars.space,
+    padding: tokens.semantic.spacing,
+    paddingBlock: tokens.semantic.spacing,
+    paddingInline: tokens.semantic.spacing,
+    marginBlock: tokens.semantic.spacing,
+    marginInline: tokens.semantic.spacing,
     // legacy individual spacing (kept for back-compat)
-    paddingTop: vars.space,
-    paddingBottom: vars.space,
-    paddingLeft: vars.space,
-    paddingRight: vars.space,
-    marginTop: vars.space,
-    marginBottom: vars.space,
+    paddingTop: tokens.semantic.spacing,
+    paddingBottom: tokens.semantic.spacing,
+    paddingLeft: tokens.semantic.spacing,
+    paddingRight: tokens.semantic.spacing,
+    marginTop: tokens.semantic.spacing,
+    marginBottom: tokens.semantic.spacing,
     // sizing helpers
     width: ['auto', '100%'],
     minWidth: ['0', '100%'],
-    borderRadius: vars.radius,
-    color: vars.color,
-    background: vars.color,
+    borderRadius: tokens.semantic.borderRadius,
+    // Note: color and background removed - use style() directly for complex color tokens
   },
   shorthands: {
     p: ['padding'],
@@ -63,11 +62,6 @@ export const containersProperties = defineProperties({
   },
 });
 
-// Color/border helpers to reduce repetition
-export const colorAndBordersProperties = defineProperties({
-  properties: {
-    color: vars.color,
-    background: vars.color,
-    borderRadius: vars.radius,
-  },
-});
+// Note: Color and border properties removed from sprinkles
+// Vanilla Extract sprinkles doesn't support deeply nested token structures
+// Use style() directly with tokens.semantic.color.* for color properties

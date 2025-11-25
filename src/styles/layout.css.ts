@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
-import { designTokens } from './design-system.css';
+import { tokens } from './tokens/index.css';
 
 // Base layout utilities
 export const layoutBase = {
@@ -45,8 +45,8 @@ export const container = recipe({
     width: '100%',
     marginLeft: 'auto',
     marginRight: 'auto',
-    paddingLeft: designTokens.spacing.md,
-    paddingRight: designTokens.spacing.md,
+    paddingLeft: tokens.semantic.spacing.md,
+    paddingRight: tokens.semantic.spacing.md,
   },
 
   variants: {
@@ -61,16 +61,16 @@ export const container = recipe({
     padding: {
       none: { paddingLeft: 0, paddingRight: 0 },
       sm: {
-        paddingLeft: designTokens.spacing.sm,
-        paddingRight: designTokens.spacing.sm,
+        paddingLeft: tokens.semantic.spacing.sm,
+        paddingRight: tokens.semantic.spacing.sm,
       },
       md: {
-        paddingLeft: designTokens.spacing.md,
-        paddingRight: designTokens.spacing.md,
+        paddingLeft: tokens.semantic.spacing.md,
+        paddingRight: tokens.semantic.spacing.md,
       },
       lg: {
-        paddingLeft: designTokens.spacing.lg,
-        paddingRight: designTokens.spacing.lg,
+        paddingLeft: tokens.semantic.spacing.lg,
+        paddingRight: tokens.semantic.spacing.lg,
       },
     },
   },
@@ -84,45 +84,45 @@ export const container = recipe({
 // Spacing utilities
 export const spacing = {
   // Margins
-  marginTop: (size: keyof typeof designTokens.spacing) =>
+  marginTop: (size: keyof typeof tokens.semantic.spacing) =>
     style({
-      marginTop: designTokens.spacing[size],
+      marginTop: tokens.semantic.spacing[size],
     }),
 
-  marginBottom: (size: keyof typeof designTokens.spacing) =>
+  marginBottom: (size: keyof typeof tokens.semantic.spacing) =>
     style({
-      marginBottom: designTokens.spacing[size],
+      marginBottom: tokens.semantic.spacing[size],
     }),
 
-  marginLeft: (size: keyof typeof designTokens.spacing) =>
+  marginLeft: (size: keyof typeof tokens.semantic.spacing) =>
     style({
-      marginLeft: designTokens.spacing[size],
+      marginLeft: tokens.semantic.spacing[size],
     }),
 
-  marginRight: (size: keyof typeof designTokens.spacing) =>
+  marginRight: (size: keyof typeof tokens.semantic.spacing) =>
     style({
-      marginRight: designTokens.spacing[size],
+      marginRight: tokens.semantic.spacing[size],
     }),
 
   // Padding
-  paddingTop: (size: keyof typeof designTokens.spacing) =>
+  paddingTop: (size: keyof typeof tokens.semantic.spacing) =>
     style({
-      paddingTop: designTokens.spacing[size],
+      paddingTop: tokens.semantic.spacing[size],
     }),
 
-  paddingBottom: (size: keyof typeof designTokens.spacing) =>
+  paddingBottom: (size: keyof typeof tokens.semantic.spacing) =>
     style({
-      paddingBottom: designTokens.spacing[size],
+      paddingBottom: tokens.semantic.spacing[size],
     }),
 
-  paddingLeft: (size: keyof typeof designTokens.spacing) =>
+  paddingLeft: (size: keyof typeof tokens.semantic.spacing) =>
     style({
-      paddingLeft: designTokens.spacing[size],
+      paddingLeft: tokens.semantic.spacing[size],
     }),
 
-  paddingRight: (size: keyof typeof designTokens.spacing) =>
+  paddingRight: (size: keyof typeof tokens.semantic.spacing) =>
     style({
-      paddingRight: designTokens.spacing[size],
+      paddingRight: tokens.semantic.spacing[size],
     }),
 };
 
@@ -130,11 +130,11 @@ export const spacing = {
 export const gap = recipe({
   variants: {
     size: {
-      xs: { gap: designTokens.spacing.xs },
-      sm: { gap: designTokens.spacing.sm },
-      md: { gap: designTokens.spacing.md },
-      lg: { gap: designTokens.spacing.lg },
-      xl: { gap: designTokens.spacing.xl },
+      xs: { gap: tokens.semantic.spacing.xs },
+      sm: { gap: tokens.semantic.spacing.sm },
+      md: { gap: tokens.semantic.spacing.md },
+      lg: { gap: tokens.semantic.spacing.lg },
+      xl: { gap: tokens.semantic.spacing.xl },
     },
     direction: {
       both: {},
