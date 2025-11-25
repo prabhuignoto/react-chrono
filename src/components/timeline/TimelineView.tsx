@@ -4,7 +4,6 @@ import TimelineHorizontal from '../timeline-horizontal/timeline-horizontal';
 import TimelineVertical from '../timeline-vertical/timeline-vertical';
 import { Scroll } from '@models/TimelineHorizontalModel';
 import {
-  outline as outlineStyle,
   main as timelineMain,
 } from './timeline-new.css';
 import { pickDefined } from '../../utils/propUtils';
@@ -47,30 +46,23 @@ const TimelineView: React.FC<TimelineViewProps> = ({
   // Horizontal Timeline (regular or "all cards" mode)
   if (timelineMode === 'HORIZONTAL' || timelineMode === 'HORIZONTAL_ALL') {
     return (
-      <>
-        <div
-          className={outlineStyle}
-          style={{
-            backgroundColor: theme?.primary,
-            height: `${lineWidth}px`,
-          }}
-        />
-        <TimelineHorizontal
-          autoScroll={autoScroll}
-          contentDetailsChildren={contentDetailsChildren}
-          handleItemClick={handleTimelineItemClick}
-          hasFocus={hasFocus}
-          iconChildren={iconChildren}
-          items={items}
-          mode={timelineMode as TimelineMode}
-          onElapsed={handleTimelineItemElapsed}
-          wrapperId={id}
-          nestedCardHeight={nestedCardHeight}
-          {...pickDefined({
-            slideShowRunning,
-          })}
-        />
-      </>
+      <TimelineHorizontal
+        autoScroll={autoScroll}
+        contentDetailsChildren={contentDetailsChildren}
+        handleItemClick={handleTimelineItemClick}
+        hasFocus={hasFocus}
+        iconChildren={iconChildren}
+        items={items}
+        mode={timelineMode as TimelineMode}
+        onElapsed={handleTimelineItemElapsed}
+        wrapperId={id}
+        nestedCardHeight={nestedCardHeight}
+        theme={theme}
+        lineWidth={lineWidth}
+        {...pickDefined({
+          slideShowRunning,
+        })}
+      />
     );
   }
 

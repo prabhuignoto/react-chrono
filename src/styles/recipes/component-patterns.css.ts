@@ -1,7 +1,7 @@
 import { recipe } from '@vanilla-extract/recipes';
 import { style } from '@vanilla-extract/css';
 import { sprinkles } from '../sprinkles/enhanced-sprinkles.css';
-import { semanticTokens } from '../tokens/semantic-tokens.css';
+import { tokens } from '../tokens/index.css';
 
 // Base container pattern for all components
 export const baseContainer = recipe({
@@ -65,22 +65,22 @@ export const baseInteractive = recipe({
     }),
     {
       outline: 'none',
-      transition: `all ${semanticTokens.motion.duration.fast} ${semanticTokens.motion.easing.easeOut}`,
+      transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.easeOut}`,
     },
   ],
   variants: {
     state: {
       default: {},
       hover: {
-        opacity: semanticTokens.states.hover.opacity,
-        transform: semanticTokens.states.hover.transform,
+        opacity: tokens.semantic.states.hover.opacity,
+        transform: tokens.semantic.states.hover.transform,
       },
       active: {
-        opacity: semanticTokens.states.active.opacity,
-        transform: semanticTokens.states.active.transform,
+        opacity: tokens.semantic.states.active.opacity,
+        transform: tokens.semantic.states.active.transform,
       },
       focus: {
-        boxShadow: `0 0 0 ${semanticTokens.states.focus.ring.width} ${semanticTokens.states.focus.ring.color}`,
+        boxShadow: `0 0 0 ${tokens.semantic.states.focus.ring.width} ${tokens.semantic.states.focus.ring.color}`,
       },
       disabled: [
         sprinkles({
@@ -88,8 +88,8 @@ export const baseInteractive = recipe({
           pointerEvents: 'none',
         }),
         {
-          opacity: semanticTokens.states.disabled.opacity,
-          filter: semanticTokens.states.disabled.filter,
+          opacity: tokens.semantic.states.disabled.opacity,
+          filter: tokens.semantic.states.disabled.filter,
         },
       ],
     },
@@ -97,8 +97,8 @@ export const baseInteractive = recipe({
       true: {
         selectors: {
           '&:focus-visible': {
-            outline: semanticTokens.states.focus.outline,
-            outlineOffset: semanticTokens.states.focus.ring.offset,
+            outline: tokens.semantic.states.focus.outline,
+            outlineOffset: tokens.semantic.states.focus.ring.offset,
           },
         },
       },
@@ -120,12 +120,12 @@ export const baseCard = recipe({
       flexDirection: 'column',
     }),
     {
-      background: semanticTokens.card.background.gradient,
-      border: `1px solid ${semanticTokens.card.border.color}`,
+      background: tokens.semantic.card.background.gradient,
+      border: `1px solid ${tokens.semantic.card.border.color}`,
       backdropFilter: 'blur(20px)',
       WebkitBackdropFilter: 'blur(20px)',
       overflow: 'hidden',
-      transition: `all ${semanticTokens.motion.duration.normal} ${semanticTokens.motion.easing.easeInOut}`,
+      transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.easeInOut}`,
     },
   ],
   variants: {
@@ -133,30 +133,30 @@ export const baseCard = recipe({
       sm: [
         sprinkles({ padding: 'sm' }),
         {
-          borderRadius: semanticTokens.card.border.radius.sm,
+          borderRadius: tokens.semantic.card.border.radius.sm,
           minWidth: '200px',
         },
       ],
       md: [
         sprinkles({ padding: 'md' }),
         {
-          borderRadius: semanticTokens.card.border.radius.md,
+          borderRadius: tokens.semantic.card.border.radius.md,
           minWidth: '280px',
         },
       ],
       lg: [
         sprinkles({ padding: 'lg' }),
         {
-          borderRadius: semanticTokens.card.border.radius.lg,
+          borderRadius: tokens.semantic.card.border.radius.lg,
           minWidth: '320px',
         },
       ],
     },
     elevation: {
-      flat: { boxShadow: semanticTokens.card.shadow.flat },
-      low: { boxShadow: semanticTokens.card.shadow.low },
-      medium: { boxShadow: semanticTokens.card.shadow.medium },
-      high: { boxShadow: semanticTokens.card.shadow.high },
+      flat: { boxShadow: tokens.semantic.card.shadow.flat },
+      low: { boxShadow: tokens.semantic.card.shadow.low },
+      medium: { boxShadow: tokens.semantic.card.shadow.medium },
+      high: { boxShadow: tokens.semantic.card.shadow.high },
     },
     interactive: {
       true: [
@@ -164,12 +164,12 @@ export const baseCard = recipe({
         {
           selectors: {
             '&:hover': {
-              boxShadow: semanticTokens.card.shadow.interactive,
+              boxShadow: tokens.semantic.card.shadow.interactive,
               transform: 'translateY(-2px)',
             },
             '&:active': {
               transform: 'translateY(0px)',
-              transition: `all ${semanticTokens.motion.duration.fast} ${semanticTokens.motion.easing.easeIn}`,
+              transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.easeIn}`,
             },
           },
         },
@@ -184,7 +184,7 @@ export const baseCard = recipe({
           inset: 0,
           borderRadius: 'inherit',
           padding: '1px',
-          background: semanticTokens.card.border.gradient,
+          background: tokens.semantic.card.border.gradient,
           mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
           maskComposite: 'xor',
           WebkitMask:
@@ -240,35 +240,35 @@ export const baseButton = recipe({
   variants: {
     variant: {
       primary: {
-        background: `linear-gradient(135deg, ${semanticTokens.toolbar.button.background.default} 0%, ${semanticTokens.toolbar.button.background.default}f0 100%)`,
-        color: semanticTokens.toolbar.button.text.default,
+        background: `linear-gradient(135deg, ${tokens.semantic.toolbar.button.background.default} 0%, ${tokens.semantic.toolbar.button.background.default}f0 100%)`,
+        color: tokens.semantic.toolbar.button.text.default,
         selectors: {
           '&:hover': {
-            background: semanticTokens.toolbar.button.background.hover,
-            borderColor: semanticTokens.toolbar.button.border.hover,
+            background: tokens.semantic.toolbar.button.background.hover,
+            borderColor: tokens.semantic.toolbar.button.border.hover,
           },
           '&:active': {
-            background: semanticTokens.toolbar.button.background.active,
+            background: tokens.semantic.toolbar.button.background.active,
           },
         },
       },
       secondary: {
         background: 'transparent',
-        color: semanticTokens.toolbar.button.text.default,
-        borderColor: semanticTokens.toolbar.button.border.default,
+        color: tokens.semantic.toolbar.button.text.default,
+        borderColor: tokens.semantic.toolbar.button.border.default,
         selectors: {
           '&:hover': {
-            background: semanticTokens.toolbar.button.background.hover,
-            borderColor: semanticTokens.toolbar.button.border.hover,
+            background: tokens.semantic.toolbar.button.background.hover,
+            borderColor: tokens.semantic.toolbar.button.border.hover,
           },
         },
       },
       ghost: {
         background: 'transparent',
-        color: semanticTokens.toolbar.button.text.default,
+        color: tokens.semantic.toolbar.button.text.default,
         selectors: {
           '&:hover': {
-            background: semanticTokens.toolbar.button.background.hover,
+            background: tokens.semantic.toolbar.button.background.hover,
           },
         },
       },
@@ -277,22 +277,22 @@ export const baseButton = recipe({
       sm: [
         sprinkles({ padding: 'xs', fontSize: 'xs' }),
         {
-          minWidth: semanticTokens.toolbar.button.size.sm,
-          height: semanticTokens.toolbar.button.size.sm,
+          minWidth: tokens.semantic.toolbar.button.size.sm,
+          height: tokens.semantic.toolbar.button.size.sm,
         },
       ],
       md: [
         sprinkles({ padding: 'sm', fontSize: 'sm' }),
         {
-          minWidth: semanticTokens.toolbar.button.size.md,
-          height: semanticTokens.toolbar.button.size.md,
+          minWidth: tokens.semantic.toolbar.button.size.md,
+          height: tokens.semantic.toolbar.button.size.md,
         },
       ],
       lg: [
         sprinkles({ padding: 'md', fontSize: 'base' }),
         {
-          minWidth: semanticTokens.toolbar.button.size.lg,
-          height: semanticTokens.toolbar.button.size.lg,
+          minWidth: tokens.semantic.toolbar.button.size.lg,
+          height: tokens.semantic.toolbar.button.size.lg,
         },
       ],
     },
@@ -330,9 +330,9 @@ export const baseText = recipe({
       small: sprinkles({ fontSize: 'xs', fontWeight: 'normal' }),
     },
     color: {
-      primary: { color: semanticTokens.timeline.point.background.active },
-      secondary: { color: semanticTokens.toolbar.button.text.default },
-      muted: { color: semanticTokens.toolbar.button.text.disabled },
+      primary: { color: tokens.semantic.timeline.point.background.active },
+      secondary: { color: tokens.semantic.toolbar.button.text.default },
+      muted: { color: tokens.semantic.toolbar.button.text.disabled },
       inherit: { color: 'inherit' },
     },
     align: {
@@ -369,16 +369,16 @@ export const baseInput = recipe({
       fontSize: 'base',
     }),
     {
-      border: `1px solid ${semanticTokens.card.border.color}`,
+      border: `1px solid ${tokens.semantic.card.border.color}`,
       outline: 'none',
-      transition: `all ${semanticTokens.motion.duration.fast} ${semanticTokens.motion.easing.easeOut}`,
+      transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.easeOut}`,
       selectors: {
         '&:focus': {
-          borderColor: semanticTokens.states.focus.ring.color,
-          boxShadow: `0 0 0 ${semanticTokens.states.focus.ring.width} ${semanticTokens.states.focus.ring.color}`,
+          borderColor: tokens.semantic.states.focus.ring.color,
+          boxShadow: `0 0 0 ${tokens.semantic.states.focus.ring.width} ${tokens.semantic.states.focus.ring.color}`,
         },
         '&:disabled': {
-          opacity: semanticTokens.states.disabled.opacity,
+          opacity: tokens.semantic.states.disabled.opacity,
           cursor: 'not-allowed',
         },
       },
@@ -392,10 +392,10 @@ export const baseInput = recipe({
     },
     variant: {
       default: {
-        background: semanticTokens.card.background.default,
+        background: tokens.semantic.card.background.default,
       },
       filled: {
-        background: semanticTokens.toolbar.background.default,
+        background: tokens.semantic.toolbar.background.default,
       },
     },
   },
@@ -416,10 +416,10 @@ export const layoutContainer = recipe({
   ],
   variants: {
     size: {
-      sm: { maxWidth: semanticTokens.layout.container.maxWidth.sm },
-      md: { maxWidth: semanticTokens.layout.container.maxWidth.md },
-      lg: { maxWidth: semanticTokens.layout.container.maxWidth.lg },
-      xl: { maxWidth: semanticTokens.layout.container.maxWidth.xl },
+      sm: { maxWidth: tokens.semantic.layout.container.maxWidth.sm },
+      md: { maxWidth: tokens.semantic.layout.container.maxWidth.md },
+      lg: { maxWidth: tokens.semantic.layout.container.maxWidth.lg },
+      xl: { maxWidth: tokens.semantic.layout.container.maxWidth.xl },
       full: { maxWidth: 'none' },
     },
     padding: {

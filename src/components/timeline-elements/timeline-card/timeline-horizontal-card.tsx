@@ -130,44 +130,25 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
       ref={wrapperRef}
       className="timeline-horizontal-item"
       data-testid="timeline-item"
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        width: '100%',
-        height: '100%',
-        position: 'relative',
-        gap: '1rem',
-      }}
     >
-      {/* Timeline Point - Always at top */}
-      <div
-        className="timeline-point-section"
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '0.5rem',
-          zIndex: 10,
-          position: 'relative',
-        }}
-      >
+      {/* Timeline Point - At the top */}
+      <div className="timeline-point-section">
         <TimelinePoint {...timelinePointProps} />
       </div>
 
-      {/* Card Content - Only show if conditions are met */}
+      {/* Title - Right below the point */}
+      <div className="timeline-title-section">
+        <TimelineItemTitle
+          title={title}
+          active={(active || false) && !disableInteraction}
+          theme={theme}
+          classString={classNames?.title || ''}
+        />
+      </div>
+
+      {/* Card Content - Below the title */}
       {canShowTimelineContent && (
-        <div
-          className="timeline-card-section"
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            flexGrow: 1,
-          }}
-        >
+        <div className="timeline-card-section">
           <TimelineCardPortal
             containerClass={containerClass}
             contentRef={contentRef as React.RefObject<HTMLDivElement>}
@@ -208,27 +189,6 @@ const TimelineCard: React.FunctionComponent<TimelineCardModel> = ({
           />
         </div>
       )}
-
-      {/* Title - Always at bottom */}
-      <div
-        className="timeline-title-section"
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '0.5rem',
-          minHeight: '3rem', // Ensure consistent spacing
-          position: 'relative',
-          zIndex: 5, // Above the line
-        }}
-      >
-        <TimelineItemTitle
-          title={title}
-          active={(active || false) && !disableInteraction}
-          theme={theme}
-          classString={classNames?.title || ''}
-        />
-      </div>
     </div>
   );
 };

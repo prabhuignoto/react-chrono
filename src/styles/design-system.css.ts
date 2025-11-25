@@ -1,122 +1,28 @@
-import { createThemeContract } from '@vanilla-extract/css';
+/**
+ * @deprecated This file is deprecated. Use `tokens` from '@/styles/tokens/index.css' instead.
+ * 
+ * This design system token contract is maintained for backward compatibility only.
+ * It has been superseded by the unified token system in `tokens/index.css`.
+ * 
+ * Migration guide:
+ * - Old: `import { designTokens } from '@/styles/design-system.css'`
+ * - New: `import { tokens } from '@/styles/tokens/index.css'`
+ * 
+ * Token mapping:
+ * - `designTokens.color` → `tokens.semantic.color`
+ * - `designTokens.spacing` → `tokens.semantic.spacing`
+ * - `designTokens.typography` → `tokens.semantic.typography`
+ * - `designTokens.radius` → `tokens.semantic.borderRadius`
+ * - `designTokens.elevation` → `tokens.semantic.shadow`
+ * - `designTokens.animation` → `tokens.semantic.motion`
+ * - `designTokens.zIndex` → `tokens.semantic.zIndex`
+ */
 
-// Centralized design system tokens
-export const designTokens = createThemeContract({
-  color: {
-    // Base colors
-    text: null,
-    background: null,
-    primary: null,
-    secondary: null,
-    muted: null,
+import { tokens } from './tokens/index.css';
 
-    // Card colors
-    card: {
-      bg: null,
-      title: null,
-      subtitle: null,
-      details: null,
-      border: null,
-    },
-
-    // Interactive elements
-    interactive: {
-      toolbarBg: null,
-      toolbarText: null,
-      buttonBg: null,
-      buttonBorder: null,
-      buttonHover: null,
-      buttonActive: null,
-      focusRing: null,
-    },
-
-    // Status/state colors
-    status: {
-      success: null,
-      warning: null,
-      error: null,
-      info: null,
-    },
-  },
-
-  // Consistent spacing scale
-  spacing: {
-    xs: null, // 4px
-    sm: null, // 8px
-    md: null, // 16px
-    lg: null, // 24px
-    xl: null, // 32px
-    '2xl': null, // 48px
-    '3xl': null, // 64px
-  },
-
-  // Typography system
-  typography: {
-    fontSize: {
-      xs: null,
-      sm: null,
-      base: null,
-      lg: null,
-      xl: null,
-      '2xl': null,
-    },
-    lineHeight: {
-      tight: null,
-      normal: null,
-      relaxed: null,
-    },
-    fontWeight: {
-      normal: null,
-      medium: null,
-      semibold: null,
-      bold: null,
-    },
-  },
-
-  // Consistent border radius
-  radius: {
-    sm: null, // 4px
-    md: null, // 8px
-    lg: null, // 12px
-    xl: null, // 16px
-    full: null, // 9999px
-  },
-
-  // Elevation system (shadows)
-  elevation: {
-    none: null,
-    sm: null,
-    md: null,
-    lg: null,
-    xl: null,
-  },
-
-  // Animation tokens
-  animation: {
-    duration: {
-      fast: null, // 150ms
-      normal: null, // 300ms
-      slow: null, // 500ms
-    },
-    easing: {
-      linear: null,
-      ease: null,
-      easeIn: null,
-      easeOut: null,
-      easeInOut: null,
-    },
-  },
-
-  // Z-index scale
-  zIndex: {
-    base: null, // 0
-    elevated: null, // 10
-    sticky: null, // 20
-    overlay: null, // 30
-    modal: null, // 40
-    tooltip: null, // 50
-  },
-});
+// Re-export for backward compatibility
+export const designTokens = tokens;
 
 // Legacy compatibility - re-export with old structure
-export const vars = designTokens;
+export const vars = tokens.semantic;
+

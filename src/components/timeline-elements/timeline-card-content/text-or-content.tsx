@@ -13,7 +13,7 @@ import {
   timelineContentDetails,
   timelineSubContent,
 } from './timeline-card-content.css';
-import { vars } from 'src/styles/tokens.css';
+import { vars } from 'src/styles/tokens/index.css';
 
 // Define the type for the TextOrContentModel
 export type TextOrContentModel = Pick<

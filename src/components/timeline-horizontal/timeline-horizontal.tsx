@@ -45,10 +45,12 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
   nestedCardHeight,
   isNested,
   mode: propMode,
+  theme: propTheme,
+  lineWidth: propLineWidth,
 }: TimelineHorizontalModel) => {
   // Use unified context
   const {
-    theme,
+    theme: contextTheme,
     mode: contextMode,
     itemWidth,
     cardHeight,
@@ -57,6 +59,10 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
     cardWidth,
     focusActiveItemOnLoad,
   } = useTimelineContext();
+  
+  // Prioritize prop theme over context theme
+  const theme = propTheme || contextTheme;
+  const lineWidth = propLineWidth || 2;
 
   // Prioritize prop mode over context mode
   const mode = propMode || contextMode;
@@ -225,24 +231,13 @@ const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
       style={{
         direction: flipLayout ? 'rtl' : 'ltr',
         position: 'relative',
-      }}
+        // Set CSS variables for the connecting line
+        '--timeline-line-color': theme?.primary || '#2563eb',
+        '--timeline-line-width': `${lineWidth}px`,
+      } as React.CSSProperties}
       data-testid="timeline-collection"
       aria-label="Timeline"
     >
-      {/* Horizontal line that runs between timeline points and titles */}
-      {/* <div
-        className="timeline-horizontal-connector"
-        style={{
-          position: 'absolute',
-          top: '3.5rem', // Position between timeline points (1.5rem height + padding) and titles
-          left: '5%',
-          right: '5%',
-          height: '2px',
-          backgroundColor: theme?.primary || '#2563eb',
-          opacity: 0.2,
-          zIndex: 1,
-        }}
-      /> */}
       {timelineItems}
     </ul>
   );

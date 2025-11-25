@@ -2,7 +2,7 @@ import { recipe } from '@vanilla-extract/recipes';
 import { style, keyframes } from '@vanilla-extract/css';
 import { sprinkles } from '../../styles/sprinkles/enhanced-sprinkles.css';
 import { componentPatterns } from '../../styles/recipes/component-patterns.css';
-import { semanticTokens } from '../../styles/tokens/semantic-tokens.css';
+import { tokens } from '../../styles/tokens/index.css';
 
 // Card wrapper - replaces card-related globalStyles
 export const cardWrapper = recipe({
@@ -20,7 +20,7 @@ export const cardWrapper = recipe({
       width: 'full',
     }),
     {
-      transition: `all ${semanticTokens.motion.duration.normal} ${semanticTokens.motion.easing.easeInOut}`,
+      transition: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.easeInOut}`,
       transformOrigin: 'center',
     },
   ],
@@ -62,12 +62,12 @@ export const cardWrapper = recipe({
           cursor: 'pointer',
           selectors: {
             '&:hover': {
-              boxShadow: semanticTokens.card.shadow.interactive,
+              boxShadow: tokens.semantic.card.shadow.interactive,
               transform: 'translateY(-2px) scale(1.02)',
             },
             '&:active': {
               transform: 'translateY(0px) scale(0.98)',
-              transition: `all ${semanticTokens.motion.duration.fast} ${semanticTokens.motion.easing.easeIn}`,
+              transition: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.easeIn}`,
             },
           },
         },
@@ -76,17 +76,17 @@ export const cardWrapper = recipe({
     },
     selected: {
       true: {
-        borderColor: semanticTokens.timeline.point.background.active,
-        boxShadow: `0 0 0 2px ${semanticTokens.timeline.point.background.active}20, ${semanticTokens.card.shadow.interactive}`,
+        borderColor: tokens.semantic.timeline.point.background.active,
+        boxShadow: `0 0 0 2px ${tokens.semantic.timeline.point.background.active}20, ${tokens.semantic.card.shadow.interactive}`,
       },
       false: {},
     },
     theme: {
       default: {},
       primary: {
-        borderColor: semanticTokens.timeline.point.background.active,
+        borderColor: tokens.semantic.timeline.point.background.active,
         '::before': {
-          background: `linear-gradient(135deg, ${semanticTokens.timeline.point.background.active}10 0%, transparent 50%, ${semanticTokens.timeline.point.background.active}05 100%)`,
+          background: `linear-gradient(135deg, ${tokens.semantic.timeline.point.background.active}10 0%, transparent 50%, ${tokens.semantic.timeline.point.background.active}05 100%)`,
         },
       },
       minimal: {
@@ -100,8 +100,8 @@ export const cardWrapper = recipe({
         sprinkles({ opacity: 100, visibility: 'visible' }),
         {
           animationName: 'slideInCard',
-          animationDuration: semanticTokens.motion.duration.normal,
-          animationTimingFunction: semanticTokens.motion.easing.easeOut,
+          animationDuration: tokens.semantic.motion.duration.normal,
+          animationTimingFunction: tokens.semantic.motion.easing.easeOut,
           animationFillMode: 'both',
         },
       ],
@@ -162,8 +162,8 @@ export const cardHeader = recipe({
       marginBottom: 'sm',
     }),
     {
-      borderBottom: `1px solid ${semanticTokens.card.border.color}20`,
-      paddingBottom: semanticTokens.card.content.spacing.normal,
+      borderBottom: `1px solid ${tokens.semantic.card.border.color}20`,
+      paddingBottom: tokens.semantic.card.content.spacing.normal,
     },
   ],
   variants: {
@@ -174,10 +174,10 @@ export const cardHeader = recipe({
         paddingBottom: 0,
       },
       emphasized: {
-        background: `${semanticTokens.timeline.point.background.active}05`,
-        borderRadius: semanticTokens.card.border.radius.sm,
-        padding: semanticTokens.card.content.spacing.normal,
-        marginBottom: semanticTokens.card.content.spacing.normal,
+        background: `${tokens.semantic.timeline.point.background.active}05`,
+        borderRadius: tokens.semantic.card.border.radius.sm,
+        padding: tokens.semantic.card.content.spacing.normal,
+        marginBottom: tokens.semantic.card.content.spacing.normal,
       },
     },
   },
@@ -305,8 +305,8 @@ export const cardMedia = recipe({
       overflow: 'hidden',
     }),
     {
-      borderRadius: semanticTokens.card.border.radius.md,
-      backgroundColor: `${semanticTokens.card.border.color}10`,
+      borderRadius: tokens.semantic.card.border.radius.md,
+      backgroundColor: `${tokens.semantic.card.border.color}10`,
     },
   ],
   variants: {
@@ -326,11 +326,11 @@ export const cardMedia = recipe({
     position: {
       top: {
         order: -1,
-        marginBottom: semanticTokens.card.content.spacing.normal,
+        marginBottom: tokens.semantic.card.content.spacing.normal,
       },
       bottom: {
         order: 1,
-        marginTop: semanticTokens.card.content.spacing.normal,
+        marginTop: tokens.semantic.card.content.spacing.normal,
       },
       background: [
         sprinkles({ position: 'absolute' }),
@@ -369,7 +369,7 @@ export const cardActions = recipe({
       paddingTop: 'sm',
     }),
     {
-      borderTop: `1px solid ${semanticTokens.card.border.color}20`,
+      borderTop: `1px solid ${tokens.semantic.card.border.color}20`,
     },
   ],
   variants: {
@@ -384,7 +384,7 @@ export const cardActions = recipe({
       minimal: {
         border: 'none',
         paddingTop: 0,
-        marginTop: semanticTokens.card.content.spacing.tight,
+        marginTop: tokens.semantic.card.content.spacing.tight,
       },
     },
   },
@@ -403,14 +403,14 @@ export const cardButton = recipe({
       shape: 'rounded',
     }),
     {
-      color: semanticTokens.timeline.point.background.active,
+      color: tokens.semantic.timeline.point.background.active,
       selectors: {
         '&:hover': {
-          background: `${semanticTokens.timeline.point.background.active}10`,
-          borderColor: `${semanticTokens.timeline.point.background.active}20`,
+          background: `${tokens.semantic.timeline.point.background.active}10`,
+          borderColor: `${tokens.semantic.timeline.point.background.active}20`,
         },
         '&:active': {
-          background: `${semanticTokens.timeline.point.background.active}20`,
+          background: `${tokens.semantic.timeline.point.background.active}20`,
         },
       },
     },
@@ -419,21 +419,21 @@ export const cardButton = recipe({
     variant: {
       ghost: {},
       filled: {
-        background: semanticTokens.timeline.point.background.active,
+        background: tokens.semantic.timeline.point.background.active,
         color: 'white',
         selectors: {
           '&:hover': {
-            background: semanticTokens.timeline.point.background.hover,
-            borderColor: semanticTokens.timeline.point.background.hover,
+            background: tokens.semantic.timeline.point.background.hover,
+            borderColor: tokens.semantic.timeline.point.background.hover,
           },
         },
       },
       outline: {
-        border: `1px solid ${semanticTokens.timeline.point.background.active}`,
-        color: semanticTokens.timeline.point.background.active,
+        border: `1px solid ${tokens.semantic.timeline.point.background.active}`,
+        color: tokens.semantic.timeline.point.background.active,
         selectors: {
           '&:hover': {
-            background: semanticTokens.timeline.point.background.active,
+            background: tokens.semantic.timeline.point.background.active,
             color: 'white',
           },
         },
@@ -463,9 +463,9 @@ export const cardBadge = recipe({
       borderRadius: 'md',
     }),
     {
-      background: `${semanticTokens.timeline.point.background.active}15`,
-      color: semanticTokens.timeline.point.background.active,
-      border: `1px solid ${semanticTokens.timeline.point.background.active}30`,
+      background: `${tokens.semantic.timeline.point.background.active}15`,
+      color: tokens.semantic.timeline.point.background.active,
+      border: `1px solid ${tokens.semantic.timeline.point.background.active}30`,
       lineHeight: 1,
     },
   ],
@@ -473,13 +473,13 @@ export const cardBadge = recipe({
     variant: {
       default: {},
       filled: {
-        background: semanticTokens.timeline.point.background.active,
+        background: tokens.semantic.timeline.point.background.active,
         color: 'white',
-        border: `1px solid ${semanticTokens.timeline.point.background.active}`,
+        border: `1px solid ${tokens.semantic.timeline.point.background.active}`,
       },
       outline: {
         background: 'transparent',
-        border: `1px solid ${semanticTokens.timeline.point.background.active}`,
+        border: `1px solid ${tokens.semantic.timeline.point.background.active}`,
       },
     },
     size: {
@@ -491,8 +491,8 @@ export const cardBadge = recipe({
       absolute: [
         sprinkles({ position: 'absolute' }),
         {
-          top: semanticTokens.card.content.spacing.tight,
-          right: semanticTokens.card.content.spacing.tight,
+          top: tokens.semantic.card.content.spacing.tight,
+          right: tokens.semantic.card.content.spacing.tight,
         },
       ],
     },
@@ -514,7 +514,7 @@ export const cardSkeleton = recipe({
       width: 'full',
     }),
     {
-      animation: `pulse ${semanticTokens.motion.duration.slow} ${semanticTokens.motion.easing.easeInOut} infinite`,
+      animation: `pulse ${tokens.semantic.motion.duration.slow} ${tokens.semantic.motion.easing.easeInOut} infinite`,
     },
   ],
   variants: {
@@ -538,8 +538,8 @@ export const skeletonLine = style([
   }),
   {
     height: '12px',
-    background: `${semanticTokens.card.border.color}20`,
-    animation: `pulse ${semanticTokens.motion.duration.slow} ${semanticTokens.motion.easing.easeInOut} infinite`,
+    background: `${tokens.semantic.card.border.color}20`,
+    animation: `pulse ${tokens.semantic.motion.duration.slow} ${tokens.semantic.motion.easing.easeInOut} infinite`,
 
     selectors: {
       '&:nth-child(1)': { width: '100%' },

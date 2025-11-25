@@ -39,7 +39,7 @@ export const AllHorizontal: FunctionComponent<AllHorizontalProps> = ({
         <span>{index}</span>
         <Chrono
           items={items}
-          mode="horizontal_all"
+          mode="horizontal"
           cardHeight={350}
           cardWidth={500}
           enableDarkToggle

@@ -184,9 +184,9 @@ export const lightTheme = createTheme(tokens, {
         cardTitle: '1.2rem',
         cardText: '1rem',
         title: '1.5rem',
-        sm: '0.5rem',
-        md: '0.75rem',
-        xs: '0.25rem',
+        sm: '0.875rem', // 14px - fixed from 0.5rem
+        md: '1rem', // 16px - fixed from 0.75rem
+        xs: '0.75rem', // 12px - fixed from 0.25rem
         lg: '1.5rem',
       },
       lineHeight: {
@@ -457,14 +457,14 @@ export const darkTheme = createTheme(tokens, {
         caption: '0.75rem',
         body: '1rem',
         heading3: '1.125rem',
-        heading2: '1.25rem',
-        heading1: '1.5rem',
+        heading2: '1.25rem', // 20px
+        heading1: '1.5rem', // 24px
         cardTitle: '1.2rem',
         cardText: '1rem',
         title: '1.5rem',
-        sm: '0.5rem',
-        md: '0.75rem',
-        xs: '0.25rem',
+        sm: '0.875rem', // 14px - fixed from 0.5rem
+        md: '1rem', // 16px - fixed from 0.75rem
+        xs: '0.75rem', // 12px - fixed from 0.25rem
         lg: '1.5rem',
       },
       lineHeight: {

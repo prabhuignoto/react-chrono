@@ -1,7 +1,7 @@
 import { keyframes, style, globalStyle } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { sprinkles } from '../../styles/sprinkles/enhanced-sprinkles.css';
-import { semanticTokens } from '../../styles/tokens/semantic-tokens.css';
+import { tokens } from '../../styles/tokens/index.css';
 
 // Main timeline wrapper with proper styling
 export const timelineVerticalWrapper = style([
@@ -105,7 +105,7 @@ globalStyle(`${verticalItemWrapperNested}:not(:last-child)::after`, {
   position: 'absolute',
   width: '2px',
   height: '1rem', // Reduced connector height
-  background: semanticTokens.timeline.point.background.active,
+  background: tokens.component.timeline.point.color.active,
   left: '50%',
   transform: 'translateX(-50%)',
   bottom: '-1rem',
@@ -116,7 +116,7 @@ export const nestedTimelineWrapper = style({
   marginTop: '0.5rem',
   marginBottom: '0.25rem',
   // paddingLeft: '1rem',
-  borderLeft: `2px solid ${semanticTokens.timeline.point.background.active}20`,
+  borderLeft: `2px solid ${tokens.component.timeline.point.color.active}20`,
   position: 'relative',
 });
 
