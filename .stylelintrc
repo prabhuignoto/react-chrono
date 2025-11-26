@@ -1,5 +1,0 @@
-{
-  "customSyntax": "postcss-styled-syntax",
-  "rules": {},
-  "ignoreFiles": ["node_modules/**/*", "dist/**/*"]
-}

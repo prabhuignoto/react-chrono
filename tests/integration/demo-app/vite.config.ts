@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 5555, // Must match playwright.integration.config.ts
+    port: 5555, // Must match config/playwright/playwright.integration.config.ts
     strictPort: true, // Fail if port is already in use
   },
   optimizeDeps: {

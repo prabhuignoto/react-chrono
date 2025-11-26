@@ -1,0 +1,67 @@
+module.exports = {
+  extends: [
+    'stylelint-config-recommended',
+    'stylelint-config-recess-order',
+  ],
+  rules: {
+    'alpha-value-notation': 'number',
+    'color-function-notation': 'modern',
+    'color-hex-case': 'lower',
+    'color-hex-length': 'short',
+    'color-no-invalid-hex': true,
+    'declaration-block-no-duplicate-properties': true,
+    'declaration-block-no-redundant-longhand-properties': true,
+    'declaration-block-single-line-max-declarations': 1,
+    'font-family-name-quotes': 'always-unless-keyword',
+    'function-calc-no-unspaced-operator': true,
+    'function-linear-gradient-no-nonstandard-direction': true,
+    'function-name-case': 'lower',
+    'length-zero-no-unit': true,
+    'max-nesting-depth': 3,
+    'no-descending-specificity': null,
+    'no-duplicate-selectors': true,
+    'no-empty-source': null,
+    'no-invalid-double-slash-comments': null,
+    'number-leading-zero': 'always',
+    'property-no-vendor-prefix': [
+      true,
+      {
+        ignoreProperties: ['appearance', 'background-clip', 'backdrop-filter'],
+      },
+    ],
+    'selector-class-pattern': null,
+    'selector-id-pattern': null,
+    'selector-max-id': 0,
+    'selector-no-vendor-prefix': true,
+    'selector-pseudo-class-no-unknown': [
+      true,
+      {
+        ignorePseudoClasses: ['global', 'local'],
+      },
+    ],
+    'shorthand-property-no-redundant-values': true,
+    'string-quotes': 'single',
+    'unit-no-unknown': true,
+    'value-keyword-case': [
+      'lower',
+      {
+        ignoreKeywords: ['currentColor'],
+      },
+    ],
+    'value-no-vendor-prefix': true,
+  },
+  ignoreFiles: [
+    'node_modules/**/*',
+    'dist/**/*',
+    'coverage/**/*',
+    '**/*.ts',
+    '**/*.tsx',
+    '**/*.js',
+    '**/*.jsx',
+    '**/*.css.ts',
+    '**/*.css.js',
+    'src/index.css',
+    'src/demo/App.styles.css',
+  ],
+};
+
