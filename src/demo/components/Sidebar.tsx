@@ -79,6 +79,14 @@ const sidebarSections: SidebarSection[] = [
         featured: true,
       },
       {
+        path: '/vertical-media-showcase',
+        label: 'Media Showcase',
+        description: 'Images & videos timeline',
+        icon: '🎬',
+        featured: true,
+        new: true,
+      },
+      {
         path: '/vertical-alternating-mixed',
         label: 'Mixed Content',
         description: 'Various content types',
@@ -180,11 +188,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onItemClick }) => {
         <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
           Demo Examples
         </h3>
-        
+
         <nav className="space-y-2">
           {sidebarSections.map((section) => {
             const isExpanded = expandedSections.has(section.title);
-            
+
             return (
               <div key={section.title}>
                 <button
@@ -206,7 +214,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onItemClick }) => {
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
                 </button>
-                
+
                 {isExpanded && (
                   <div className="ml-6 mt-1 space-y-1">
                     {section.items.map((item) => (

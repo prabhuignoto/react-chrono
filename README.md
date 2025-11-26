@@ -316,19 +316,25 @@ Shows all timeline items at once. Perfect for dashboards, comparisons, and seein
 #### Visual Examples
 
 **Vertical Mode** - Scroll-friendly chronological flow:
-![Vertical Timeline Mode](./readme-assets/vertical_mode.png)
 
-**Vertical Mode (High Text Density)** - Compact view showing detailed information:
-![Vertical Timeline High Density](./readme-assets/vertical_mode_high_density.png)
+![Vertical Timeline Mode](./readme-assets/vertical_mode.jpg)
+
 
 **Alternating Mode** - Cards alternate left and right with visual balance:
-![Alternating Timeline Mode](./readme-assets/vertical_alternating_full.png)
 
-**Dark Mode** - Complete theme control with 36 customizable properties:
+![Alternating Timeline Mode](./readme-assets/vertical_alternating_full.jpg)
+
+**Dark Mode** - Complete theme control with customizable properties:
+
 ![Dark Mode Timeline](./readme-assets/dark_mode.png)
 
 **Horizontal All** - Dashboard view showing complete timeline:
-![Timeline Modes](./readme-assets/horizontal_all.jpg)
+
+![Timeline Modes](./readme-assets/horizontal-all.jpg)
+
+**Timeline with Media** - Embed youtube videos and images in timeline items:
+
+![Timeline with Media](./readme-assets/timeline-with-media.jpg)
 
 ---
 
