@@ -86,3 +86,6 @@ sonarqube_issues.csv
 requirements.txt
 
 bug_report.txt
+
+benchmark-results
+benchmark-tests
