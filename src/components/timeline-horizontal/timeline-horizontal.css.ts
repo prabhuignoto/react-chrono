@@ -31,6 +31,7 @@ export const timelineItemWrapper = style([
     position: 'relative',
     padding: '0.5rem 1rem',
     gap: '0.5rem',
+    flex: 1,
     background: `linear-gradient(
     to bottom,
     transparent 24%, 
