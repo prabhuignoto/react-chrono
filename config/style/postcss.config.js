@@ -1,10 +1,18 @@
+const postcssPresetEnv = require('postcss-preset-env');
+const autoprefixer = require('autoprefixer');
+
+/** @type {import('tailwindcss').Config} */
+const tailwindPlugin = require('@tailwindcss/postcss');
+
+const cssnano = require('cssnano');
+
 module.exports = {
-  plugins: {
-    "@tailwindcss/postcss": {
-      config: "./tailwind.config.js",
-    },
-    autoprefixer: {},
-    'postcss-preset-env': {
+  plugins: [
+    tailwindPlugin({
+      config: './tailwind.config.js',
+    }),
+    autoprefixer(),
+    postcssPresetEnv({
       stage: 3,
       features: {
         'nesting-rules': true,
@@ -14,7 +22,7 @@ module.exports = {
         'color-functional-notation': true,
         'color-mix': true,
       },
-    },
-    cssnano: process.env.NODE_ENV === 'production' ? { preset: 'default' } : false,
-  },
+    }),
+    process.env.NODE_ENV === 'production' ? cssnano({ preset: 'default' }) : false,
+  ].filter(Boolean),
 };
