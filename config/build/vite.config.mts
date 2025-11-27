@@ -4,6 +4,28 @@ import dts from 'vite-plugin-dts';
 import tsconfig from 'vite-tsconfig-paths';
 import { defineConfig } from 'vite';
 import { visualizer } from 'rollup-plugin-visualizer';
+import path from 'path';
+import { createRequire } from 'node:module';
+import { cssescDistPath } from '../style/cssesc-path.mjs';
+
+const require = createRequire(import.meta.url);
+const postcssConfig = require('../style/postcss.config.js');
+
+const vanillaExtractDir = path.resolve(
+  __dirname,
+  '../../node_modules/@vanilla-extract/css',
+);
+const vanillaExtractAlias = (subpath: string, distFile: string) => ({
+  find: `@vanilla-extract/css/${subpath}`,
+  replacement: path.resolve(vanillaExtractDir, `${subpath}/dist/${distFile}`),
+});
+const vanillaExtractRootAlias = {
+  find: /^@vanilla-extract\/css$/,
+  replacement: path.resolve(
+    vanillaExtractDir,
+    'dist/vanilla-extract-css.cjs.js',
+  ),
+};
 
 export default defineConfig(({ mode }) => ({
   publicDir: false,
@@ -11,7 +33,12 @@ export default defineConfig(({ mode }) => ({
     vanillaExtractPlugin({
       identifiers: mode === 'production' ? 'short' : 'debug',
     }),
-    react(),
+    react({
+      include: '**/*.{jsx,tsx}',
+      babel: {
+        plugins: mode === 'production' ? ['babel-plugin-jsx-remove-data-test-id'] : [],
+      },
+    }),
     tsconfig(),
     dts({
       entryRoot: 'src',
@@ -35,12 +62,13 @@ export default defineConfig(({ mode }) => ({
         'src/styles/types.ts',
       ],
     }),
-    mode === 'production' && visualizer({
-      filename: 'dist/stats.html',
-      template: 'treemap',
-      gzipSize: true,
-      brotliSize: true,
-    }),
+    mode === 'production' &&
+      visualizer({
+        filename: 'dist/stats.html',
+        template: 'treemap',
+        gzipSize: true,
+        brotliSize: true,
+      }),
   ],
   build: {
     lib: {
@@ -74,7 +102,6 @@ export default defineConfig(({ mode }) => ({
         },
         chunkFileNames: 'chunks/[name]-[hash].js',
         assetFileNames: (assetInfo) => {
-          // Use static filename for CSS to allow easier importing
           if (assetInfo.name && assetInfo.name.endsWith('.css')) {
             return 'style.css';
           }
@@ -101,5 +128,34 @@ export default defineConfig(({ mode }) => ({
     },
     outDir: 'dist',
     emptyOutDir: true,
+  },
+  resolve: {
+    alias: [
+      {
+        find: /^cssesc$/,
+        replacement: path.resolve(__dirname, '../style/cssesc-wrapper.js'),
+      },
+      {
+        find: 'cssesc/cssesc.js',
+        replacement: cssescDistPath,
+      },
+      vanillaExtractRootAlias,
+      vanillaExtractAlias('adapter', 'vanilla-extract-css-adapter.cjs.js'),
+      vanillaExtractAlias('fileScope', 'vanilla-extract-css-fileScope.cjs.js'),
+      vanillaExtractAlias(
+        'functionSerializer',
+        'vanilla-extract-css-functionSerializer.cjs.js',
+      ),
+      vanillaExtractAlias('injectStyles', 'vanilla-extract-css-injectStyles.cjs.js'),
+      vanillaExtractAlias(
+        'disableRuntimeStyles',
+        'vanilla-extract-css-disableRuntimeStyles.cjs.js',
+      ),
+      vanillaExtractAlias('transformCss', 'vanilla-extract-css-transformCss.cjs.js'),
+      vanillaExtractAlias('recipe', 'vanilla-extract-css-recipe.cjs.js'),
+    ],
+  },
+  css: {
+    postcss: postcssConfig,
   },
 }));

@@ -38,7 +38,8 @@
       "@models/*": ["src/models/*"],
       "@effects/*": ["src/effects/*"],
       "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"]
+      "@hooks/*": ["src/hooks/*"],
+      "src/*": ["src/*"]
     },
     "plugins": []
   },

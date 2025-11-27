@@ -138,7 +138,7 @@ const NewDemo: React.FunctionComponent = () => {
         },
         {
           path: '/horizontal-all',
-          element: <AllHorizontal items={historyItems} type="big-screen" />,
+          element: <AllHorizontal items={techItems} type="big-screen" />,
         },
         {
           path: '/horizontal-initial-select',

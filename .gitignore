@@ -37,7 +37,8 @@
 *-lighthouse-report.html
 
 # production
-/build
+!config/build/
+!config/build/*
 
 # misc
 .DS_Store
@@ -76,6 +77,9 @@ react-test-bed
 # Ignore Gradle build output directory
 build
 
+!config/build/
+!config/build/*
+
 ## Panda
 styled-system
 styled-system-studio
@@ -86,3 +90,6 @@ sonarqube_issues.csv
 requirements.txt
 
 bug_report.txt
+
+benchmark-results
+benchmark-tests

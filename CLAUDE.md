@@ -432,5 +432,5 @@ const memoizedValue = useMemo(() => computeValue(), [deps]);
 - `src/utils/propMigration.ts` - Legacy to new props conversion
 - `src/models/TimelinePropsV2.ts` - New grouped props interface
 - `src/models/TimelineI18n.ts` - i18n type definitions
-- `vite.config.mts` - Build configuration
+- `config/build/vite.config.mts` - Build configuration
 - `tsconfig.json` - TypeScript configuration with path aliases

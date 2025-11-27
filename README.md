@@ -1,6 +1,6 @@
 <div align="center">
-  <img src="./readme-assets/social-logo-small.png" alt="React Chrono UI Logo" width="300" />
-  <h1>React Chrono</h1>
+  <img src="./readme-assets/logo.png" alt="React Chrono UI Logo" width="300" />
+  <!-- <h2>React Chrono</h2> -->
   <p><strong>The Ultimate Timeline Component for React Applications</strong></p>
   <p>Build stunning, interactive timelines with rich media support, accessibility-first design, and comprehensive customization options</p>
 </div>
