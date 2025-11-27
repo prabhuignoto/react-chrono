@@ -26,7 +26,7 @@ export const popoverHolder = style([
     position: 'absolute',
   }),
   {
-    background: tokens.semantic.color.background.elevated,
+    background: tokens.semantic.color.background.secondary,
     borderRadius: tokens.semantic.borderRadius.lg,
     border: `1px solid ${tokens.semantic.color.border.default}`,
     boxShadow: `0 12px 40px -8px rgba(0, 0, 0, 0.15), 0 6px 20px -4px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05)`,

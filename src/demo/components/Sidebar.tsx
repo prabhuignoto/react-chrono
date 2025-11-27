@@ -164,12 +164,12 @@ const sidebarSections: SidebarSection[] = [
 ];
 
 interface SidebarProps {
-  onItemClick?: () => void;
+  onClose?: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ onItemClick }) => {
+const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
-    new Set(['Getting Started', 'Vertical Timelines'])
+    () => new Set(sidebarSections.map((section) => section.title))
   );
 
   const toggleSection = (sectionTitle: string) => {
@@ -183,8 +183,19 @@ const Sidebar: React.FC<SidebarProps> = ({ onItemClick }) => {
   };
 
   return (
-    <aside className="bg-gray-50 border-r border-gray-200 h-full overflow-y-auto">
-      <div className="p-4">
+    <aside className="bg-gray-50 border-r border-gray-200 h-full overflow-y-auto relative">
+      <div className="p-4 pt-6 relative">
+        {onClose && (
+          <button
+            onClick={onClose}
+            aria-label="Close sidebar"
+            className="absolute top-3 right-3 p-1 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+          >
+            <svg className="w-4 h-4" viewBox="0 0 24 24" stroke="currentColor" fill="none">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
         <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
           Demo Examples
         </h3>
@@ -221,7 +232,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onItemClick }) => {
                       <NavLink
                         key={item.path}
                         to={item.path}
-                        onClick={onItemClick}
                         className={({ isActive }) =>
                           cls(
                             'group flex items-start px-3 py-2 text-sm rounded-md transition-colors',

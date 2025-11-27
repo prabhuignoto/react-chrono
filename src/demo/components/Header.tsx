@@ -4,15 +4,37 @@ import cls from 'classnames';
 
 interface HeaderProps {
   onMenuToggle?: () => void;
+  isMenuOpen?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ onMenuToggle }) => {
+const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen = false }) => {
   return (
     <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50 font-sans">
       <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 w-full">
-          {/* Logo and Brand */}
-          <div className="flex items-center shrink-0 min-w-0">
+        <div className="flex items-center justify-between h-16 w-full gap-4">
+          <div className="flex items-center gap-3 shrink-0">
+            <button
+              onClick={onMenuToggle}
+              aria-expanded={isMenuOpen}
+              className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+            >
+              <span className="sr-only">{isMenuOpen ? 'Close sidebar' : 'Open sidebar'}</span>
+              {isMenuOpen ? (
+                <svg className="w-6 h-6" viewBox="0 0 24 24" stroke="currentColor" fill="none">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
+
             <NavLink to="/" className="flex items-center space-x-2 group">
               <div className="w-8 h-8 sm:w-10 sm:h-10 bg-linear-to-br from-indigo-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
                 <svg className="w-4 h-4 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -26,7 +48,6 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle }) => {
             </NavLink>
           </div>
 
-          {/* Main Navigation - Desktop */}
           <nav className="hidden lg:flex items-center space-x-1 flex-1 justify-center max-w-2xl">
             <NavLink 
               to="/" 
@@ -74,9 +95,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle }) => {
             </NavLink>
           </nav>
 
-          {/* Right side actions */}
           <div className="flex items-center space-x-2 shrink-0">
-            {/* GitHub Link */}
             <a
               href="https://github.com/prabhuignoto/react-chrono"
               target="_blank"
@@ -88,17 +107,6 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle }) => {
               </svg>
               <span className="hidden sm:inline whitespace-nowrap text-white">GitHub</span>
             </a>
-
-            {/* Mobile menu button */}
-            <button 
-              onClick={onMenuToggle}
-              className="lg:hidden p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
-            >
-              <span className="sr-only">Open menu</span>
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
           </div>
         </div>
       </div>
