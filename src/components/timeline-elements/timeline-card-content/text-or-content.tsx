@@ -126,23 +126,23 @@ const getTextOrContent: (
         const textContentProps = getTextContentProps(textContent);
 
         return (
-            <p
-              className={
-                timelineContentDetails + ' ' + (showMore ? 'active' : '')
-              }
-              ref={ref as any}
-              {...textContentProps}
-              style={{
-                color: `${
-                  theme?.detailsColor ??
-                  theme?.cardDetailsColor ??
-                  vars.color.card?.details ??
-                  vars.color.text?.primary ??
-                  'currentColor'
-                } !important`,
-                // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
-              }}
-            >
+          <p
+            className={
+              timelineContentDetails + ' ' + (showMore ? 'active' : '')
+            }
+            ref={ref as any}
+            {...textContentProps}
+            style={{
+              color: `${
+                theme?.detailsColor ??
+                theme?.cardDetailsColor ??
+                vars.color.card?.details ??
+                vars.color.text?.primary ??
+                'currentColor'
+              } !important`,
+              // color: theme?.cardDetailsColor || 'var(--vep-color-cardDetails, var(--timeline-text-color, currentColor))'
+            }}
+          >
             {shouldNotShowText ? null : parseDetailsAsHTML ? null : textContent}
           </p>
         );
