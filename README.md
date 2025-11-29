@@ -567,25 +567,63 @@ React Chrono requires minimal configuration to get started:
 
 ## Migration from v2 to v3
 
-Upgrading is seamless with full backward compatibility:
+React Chrono v3.0 maintains **full backward compatibility** - your existing v2.x code will work without changes. However, we recommend migrating to the new grouped API for better maintainability and IDE support.
 
+### Quick Migration
+
+**v2.x (still works):**
 ```jsx
-// ✅ Both syntaxes work
 <Chrono 
-  cardWidth={400}           // Legacy prop
-  disableNavOnKey={false}   // Legacy prop
-  theme={{ primary: '#blue' }}
-/>
-
-// 🚀 New grouped API (recommended)
-<Chrono
-  layout={{ cardWidth: 400 }}
-  interaction={{ keyboardNavigation: true }}
-  theme={{ primary: '#blue' }}
+  items={items}
+  cardWidth={400}
+  disableNavOnKey={false}
+  borderLessCards={true}
+  slideShow={true}
+  slideItemDuration={3000}
+  mediaHeight={400}
 />
 ```
 
-**🔗 Complete migration guide**: [Props Reference](./PROPS-REFERENCE.md#-legacy-props-deprecated)
+**v3.0 (recommended):**
+```jsx
+<Chrono
+  items={items}
+  layout={{ cardWidth: 400 }}
+  interaction={{ keyboardNavigation: true }}
+  display={{ borderless: true }}
+  animation={{
+    slideshow: {
+      enabled: true,
+      duration: 3000
+    }
+  }}
+  media={{ height: 400 }}
+/>
+```
+
+### Common Prop Mappings
+
+| v2.x Prop | v3.0 Prop |
+|-----------|-----------|
+| `borderLessCards` | `display.borderless` |
+| `disableNavOnKey` | `interaction.keyboardNavigation` (inverted) |
+| `timelinePointDimension` | `layout.pointSize` |
+| `slideShow` | `animation.slideshow.enabled` |
+| `slideItemDuration` | `animation.slideshow.duration` |
+| `mediaHeight` | `media.height` |
+| `parseDetailsAsHTML` | `content.allowHTML` |
+| `disableToolbar` | `display.toolbar.enabled` (inverted) |
+
+### What's New in v3.0
+
+- 🎨 **Grouped API** - Props organized into logical groups (`layout`, `interaction`, `content`, `display`, `media`, `animation`)
+- ⚡ **Zero-runtime CSS** - Migrated to Vanilla Extract for better performance
+- 🌐 **i18n Support** - 60+ configurable text elements
+- 🎭 **Google Fonts** - Per-element font control
+- 🖼️ **Fullscreen Mode** - Cross-browser fullscreen support
+- 📌 **Sticky Toolbar** - Always-accessible controls
+
+**🔗 Complete migration guide**: [Props Reference](./PROPS-REFERENCE.md#-legacy-props-deprecated) | [Blog Post](./BLOG_V3.md#-migration-guide)
 
 ---
 
