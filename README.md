@@ -485,7 +485,7 @@ Instantly highlights matching content across titles, descriptions, and metadata.
 <td width="60%">
 
 **Global Ready**
-- 40+ configurable text elements
+- 60+ configurable text elements
 - Intelligent fallbacks
 - Template strings with variable interpolation
 - Full type safety
@@ -585,7 +585,7 @@ Upgrading is seamless with full backward compatibility:
 />
 ```
 
-**🔗 Complete migration guide**: [Props Reference](./PROPS-REFERENCE.md#migration-from-v1)
+**🔗 Complete migration guide**: [Props Reference](./PROPS-REFERENCE.md#-legacy-props-deprecated)
 
 ---
 
