@@ -65,6 +65,7 @@ export default defineConfig({
     environment: 'jsdom',
     include: [
       'src/**/*.{test,spec}.{ts,tsx,cts,mts,js,jsx}',
+      'benchmark-tests/**/*.{test,spec}.{ts,tsx,cts,mts,js,jsx}',
     ],
     setupFiles: [path.resolve(rootDir, 'src/test-setup.js')],
     coverage: {

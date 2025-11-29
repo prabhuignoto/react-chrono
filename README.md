@@ -55,41 +55,46 @@
 <details>
 <summary><strong>Quick Start</strong></summary>
 
-- [What's New in v3.0](#whats-new-in-v30)
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
-- [Timeline Modes](#timeline-modes)
+- [Visual Examples](#visual-examples)
 
 </details>
 
 <details>
-<summary><strong>API Documentation</strong></summary>
+<summary><strong>Timeline Modes</strong></summary>
+
+- [Mode Comparison](#timeline-modes)
+- [Visual Examples](#visual-examples)
+- [Use Case Guide](#use-case-guide)
+
+</details>
+
+<details>
+<summary><strong>Features</strong></summary>
+
+- [Key Features](#key-features)
+- [Rich Media Integration](#rich-media-integration)
+- [Interactive Features](#interactive-features)
+- [Theming & Customization](#theming--customization)
+- [Internationalization](#internationalization)
+- [Advanced Features](#advanced-features)
+
+</details>
+
+<details>
+<summary><strong>API & Documentation</strong></summary>
 
 - [Essential Props](#essential-props)
 - [Complete Props Reference](./PROPS-REFERENCE.md)
 - [Migration from v2 to v3](#migration-from-v2-to-v3)
+- [What's New in v3.0](#whats-new-in-v30)
 
 </details>
 
 <details>
-<summary><strong>Features & Customization</strong></summary>
+<summary><strong>Development</strong></summary>
 
-- [Showcase: What React Chrono Can Do](#showcase-what-react-chrono-can-do)
-- [Rich Media Integration](#rich-media-integration)
-- [Interactive Features](#interactive-features)
-- [Theming & Branding](#theming--branding)
-- [Complete Internationalization](#complete-internationalization)
-- [Advanced Architecture](#advanced-architecture)
-- [Responsive Design](#responsive-design)
-
-</details>
-
-
-<details>
-<summary><strong>Examples & Development</strong></summary>
-
-- [Live Examples & Playground](#live-examples--playground)
-  - [CodeSandbox Examples Collection](#codesandbox-examples-collection)
 - [Development Setup](#development-setup)
 - [Contributing](#contributing)
 - [Built With Modern Technologies](#built-with-modern-technologies)
@@ -98,50 +103,15 @@
 
 ---
 
-## What's New in v3.0
-
-React Chrono v3.0 represents a complete evolution of the timeline component with architectural improvements and powerful new features:
-
-### Architectural Overhaul
-- **Grouped Configuration API** - Props organized into logical groups (`layout`, `interaction`, `content`, `display`, `media`, `animation`, `style`, `accessibility`, `i18n`) for intuitive configuration and better IDE autocomplete
-- **Vanilla Extract Migration** - Complete migration from styled-components to Vanilla Extract for zero-runtime CSS, improved performance, and type-safe styling
-- **Unified Context System** - Streamlined from multiple contexts to a single optimized provider, reducing complexity and improving performance
-
-### New Features
-- **Auto Card Height** - `cardHeight: 'auto'` for content-based sizing
-- **Content Alignment** - Horizontal and vertical alignment control within cards
-- **Google Fonts** - Dynamic font loading with per-element customization
-- **i18n Support** - 40+ configurable text elements for global applications
-- **Fullscreen Mode** - Cross-browser support with keyboard shortcuts
-- **Enhanced Dark Mode** - 36 theme properties for complete customization
-- **Sticky Toolbar** - Optional sticky positioning with configurable placement
-- **Borderless Cards** - Minimal card variant for modern designs
-- **Advanced Search** - Customizable search input sizing and positioning
-
-### UX Improvements
-- **Responsive Popovers** - Smart positioning that adapts to fullscreen mode
-- **Enhanced Navigation** - Keyboard support with improved focus management
-- **Text Density** - Compact and detailed view options for different use cases
-- **Smooth Animations** - Refined transitions and interactions
-
-### Quality Assurance
-- **Component Testing** - Isolated tests with visual regression checks
-- **Integration Tests** - Build output validation and cross-browser testing
-
-### Developer Experience
-- **TypeScript First** - Full type definitions and IntelliSense support
-- **Comprehensive Docs** - Props reference and migration guides
-- **Interactive Examples** - Live CodeSandbox and Storybook demos
-
-All v2.x props remain fully supported with automatic mapping to the new grouped API, ensuring seamless upgrades without breaking changes.
-
----
-
 ## Quick Start
 
-### Installation
+<div align="center">
 
-Get started with React Chrono in seconds:
+**⚡ Get started in 30 seconds**
+
+</div>
+
+### Installation
 
 ```bash
 # Using npm
@@ -156,15 +126,9 @@ pnpm add react-chrono
 
 **Requirements**: React 18.2+ or 19+ | Node.js 22+ | TypeScript 4.0+ (optional) | Modern browsers
 
-### Storybook
+### Basic Usage
 
-Browse interactive examples in [Storybook](https://691574b1d6fa2f35b1f812a9-qukrtwoznl.chromatic.com/?path=/story/layout-modes-vertical--basic).
-
-## Basic Usage
-
-### Minimal Setup - Your First Timeline
-
-Get started with just two lines of code:
+**Minimal Setup - Your First Timeline**
 
 ```jsx
 import { Chrono } from 'react-chrono';
@@ -177,9 +141,15 @@ const items = [
 <Chrono items={items} />
 ```
 
+**Result Preview:**
+
+![Vertical Timeline Mode](./readme-assets/vertical_mode.jpg)
+
 ### Common Configurations
 
-**Horizontal Timeline with Custom Theme**
+<details>
+<summary><strong>Horizontal Timeline with Custom Theme</strong></summary>
+
 ```jsx
 <Chrono
   items={items}
@@ -188,7 +158,11 @@ const items = [
 />
 ```
 
-**Vertical Timeline with Media**
+</details>
+
+<details>
+<summary><strong>Vertical Timeline with Media</strong></summary>
+
 ```jsx
 const items = [
   {
@@ -206,7 +180,11 @@ const items = [
 <Chrono items={items} mode="vertical" />
 ```
 
-**Alternating Timeline with Slideshow**
+</details>
+
+<details>
+<summary><strong>Alternating Timeline with Slideshow</strong></summary>
+
 ```jsx
 <Chrono
   items={items}
@@ -221,43 +199,45 @@ const items = [
 />
 ```
 
+</details>
+
 ### Advanced Configuration with Grouped API ✨
 
-The new grouped API organizes configuration into logical sections for better discoverability and maintainability:
+The new grouped API organizes configuration into logical sections:
 
 ```jsx
 <Chrono
   items={items}
   mode="alternating"
-
+  
   layout={{
     cardWidth: 450,
-    cardHeight: 'auto',  // NEW: Automatic sizing based on content
+    cardHeight: 'auto',  // Automatic sizing based on content
     responsive: { enabled: true, breakpoint: 768 }
   }}
-
+  
   content={{
-    alignment: {  // NEW: Control content alignment
+    alignment: {
       horizontal: 'center',
       vertical: 'center'
     }
   }}
-
+  
   interaction={{
     keyboardNavigation: true,
     pointClick: true,
     autoScroll: true
   }}
-
+  
   display={{
     borderless: false,
     toolbar: { enabled: true, sticky: true }
   }}
-
+  
   animation={{
     slideshow: { enabled: true, duration: 4000, type: 'fade' }
   }}
-
+  
   theme={{
     primary: '#0070f3',
     cardBgColor: '#ffffff',
@@ -266,75 +246,308 @@ The new grouped API organizes configuration into logical sections for better dis
 />
 ```
 
-**Quick Start Examples by Use Case:**
+> **💡 Try it live**: Browse interactive examples in [Storybook](https://691574b1d6fa2f35b1f812a9-qukrtwoznl.chromatic.com/?path=/story/layout-modes-vertical--basic)
 
-```jsx
-// Corporate Timeline
-<Chrono items={milestones} mode="horizontal" theme={{ primary: '#1a73e8' }} />
+---
 
-// Project Roadmap
-<Chrono
-  items={tasks}
-  mode="vertical"
-  display={{ toolbar: { enabled: true, sticky: true } }}
-/>
+## Visual Examples
 
-// Photo Timeline with Auto Height
-<Chrono
-  items={memories}
-  mode="alternating"
-  layout={{ cardHeight: 'auto' }}  // Cards size automatically to content
-  media={{ height: 300, fit: 'cover' }}
-/>
+<div align="center">
 
-// Documentation Timeline
-<Chrono
-  items={releases}
-  mode="vertical"
-  content={{ allowHTML: true, readMore: true }}
-/>
-```
+**See React Chrono in action**
 
-> **🚀 Migration Made Easy**: All existing v2.x props work alongside the new grouped API for seamless upgrades.
+</div>
 
-## Timeline Modes
+<table>
+<tr>
+<td width="50%">
 
-React Chrono offers four thoughtfully designed layout modes, each optimized for specific content types and user experiences:
-
-### Horizontal Mode
-Left-to-right chronological flow. Ideal for historical narratives and project phases where the journey matters.
-
-### Vertical Mode
-Top-to-bottom scroll-friendly layout. Perfect for feeds, news timelines, and mobile experiences.
-
-### Alternating Mode
-Cards alternate left and right of a central axis. Great for portfolios and company milestones with balanced visual rhythm.
-
-### Horizontal All
-Shows all timeline items at once. Perfect for dashboards, comparisons, and seeing the complete picture.
-
-#### Visual Examples
-
-**Vertical Mode** - Scroll-friendly chronological flow:
+**Vertical Mode**
+Scroll-friendly chronological flow
 
 ![Vertical Timeline Mode](./readme-assets/vertical_mode.jpg)
 
+</td>
+<td width="50%">
 
-**Alternating Mode** - Cards alternate left and right with visual balance:
+**Alternating Mode**
+Cards alternate left and right
 
 ![Alternating Timeline Mode](./readme-assets/vertical_alternating_full.jpg)
 
-**Dark Mode** - Complete theme control with customizable properties:
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**Dark Mode**
+Complete theme control
 
 ![Dark Mode Timeline](./readme-assets/dark_mode.png)
 
-**Horizontal All** - Dashboard view showing complete timeline:
+</td>
+<td width="50%">
+
+**Horizontal All**
+Dashboard view showing complete timeline
 
 ![Timeline Modes](./readme-assets/horizontal-all.jpg)
 
-**Timeline with Media** - Embed youtube videos and images in timeline items:
+</td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+
+**Timeline with Media**
+Embed YouTube videos and images
 
 ![Timeline with Media](./readme-assets/timeline-with-media.jpg)
+
+</td>
+</tr>
+</table>
+
+---
+
+## Timeline Modes
+
+React Chrono offers four layout modes, each optimized for specific use cases:
+
+| Mode | Best For | Visual Style |
+|------|----------|--------------|
+| **Vertical** | Feeds, news timelines, mobile experiences | Top-to-bottom scroll-friendly layout |
+| **Horizontal** | Historical narratives, project phases | Left-to-right chronological flow |
+| **Alternating** | Portfolios, company milestones | Cards alternate left and right of central axis |
+| **Horizontal All** | Dashboards, comparisons | Shows all timeline items at once |
+
+### Use Case Guide
+
+<details>
+<summary><strong>📱 Mobile-First Content → Use Vertical Mode</strong></summary>
+
+Perfect for feeds, news timelines, and mobile experiences where scrolling is natural.
+
+```jsx
+<Chrono items={items} mode="vertical" />
+```
+
+</details>
+
+<details>
+<summary><strong>📊 Historical Narratives → Use Horizontal Mode</strong></summary>
+
+Ideal for historical narratives and project phases where the journey matters.
+
+```jsx
+<Chrono items={items} mode="horizontal" />
+```
+
+</details>
+
+<details>
+<summary><strong>💼 Portfolios & Milestones → Use Alternating Mode</strong></summary>
+
+Great for portfolios and company milestones with balanced visual rhythm.
+
+```jsx
+<Chrono items={items} mode="alternating" />
+```
+
+</details>
+
+<details>
+<summary><strong>📈 Dashboards & Comparisons → Use Horizontal All</strong></summary>
+
+Perfect for dashboards, comparisons, and seeing the complete picture at once.
+
+```jsx
+<Chrono items={items} mode="horizontal-all" />
+```
+
+</details>
+
+---
+
+## Key Features
+
+### Rich Media Integration
+
+<table>
+<tr>
+<td width="60%">
+
+**Smart Loading & Performance**
+- Images load only when entering viewport (intersection observers)
+- Videos auto-play when timeline items become active
+- Automatic responsive sizing and buffering
+- Built-in accessibility attributes
+
+</td>
+<td width="40%">
+
+```jsx
+const items = [{
+  title: 'Event',
+  cardTitle: 'Media Example',
+  media: {
+    type: 'IMAGE',
+    source: { url: 'image.jpg' }
+  }
+}];
+
+<Chrono items={items} />
+```
+
+</td>
+</tr>
+</table>
+
+### Interactive Features
+
+<table>
+<tr>
+<td width="60%">
+
+**Slideshow Mode**
+Auto-playing presentations with customizable durations, transition effects, and progress indicators.
+
+**Keyboard Navigation**
+Full accessibility with arrow keys, Home/End for quick jumps, Escape for modals.
+
+**Real-time Search**
+Instantly highlights matching content across titles, descriptions, and metadata.
+
+</td>
+<td width="40%">
+
+```jsx
+<Chrono
+  items={items}
+  animation={{
+    slideshow: {
+      enabled: true,
+      duration: 3000,
+      type: 'fade'
+    }
+  }}
+  interaction={{
+    keyboardNavigation: true
+  }}
+  display={{
+    toolbar: {
+      enabled: true,
+      search: { enabled: true }
+    }
+  }}
+/>
+```
+
+</td>
+</tr>
+</table>
+
+### Theming & Customization
+
+<table>
+<tr>
+<td width="60%">
+
+**Complete Theme Control**
+- 36 customizable theme properties
+- Dark mode with dedicated properties
+- Google Fonts integration with automatic loading
+- Per-element typography customization
+
+</td>
+<td width="40%">
+
+```jsx
+<Chrono
+  items={items}
+  theme={{
+    primary: '#0070f3',
+    cardBgColor: '#ffffff',
+    cardTitleColor: '#1f2937',
+    timelineBgColor: '#f5f5f5'
+  }}
+  darkMode={{ enabled: true }}
+/>
+```
+
+</td>
+</tr>
+</table>
+
+### Internationalization
+
+<table>
+<tr>
+<td width="60%">
+
+**Global Ready**
+- 40+ configurable text elements
+- Intelligent fallbacks
+- Template strings with variable interpolation
+- Full type safety
+
+</td>
+<td width="40%">
+
+```jsx
+<Chrono
+  items={items}
+  i18n={{
+    texts: {
+      navigation: {
+        first: 'Premier élément',
+        next: 'Suivant',
+        previous: 'Précédent'
+      },
+      search: {
+        placeholder: 'Rechercher',
+        noResults: 'Aucun résultat'
+      }
+    }
+  }}
+/>
+```
+
+</td>
+</tr>
+</table>
+
+### Advanced Features
+
+<table>
+<tr>
+<td width="60%">
+
+**Nested Timelines**
+Create multi-level narratives where major events contain detailed sub-timelines.
+
+**Custom Components**
+Embed fully interactive React components within timeline cards.
+
+**Responsive Design**
+Fundamentally adapts to each device with smart font sizing and spacing.
+
+</td>
+<td width="40%">
+
+```jsx
+// Nested timeline example
+const items = [{
+  title: 'Major Event',
+  cardTitle: 'Period',
+  children: <Chrono items={subItems} />
+}];
+
+<Chrono items={items} />
+```
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -348,53 +561,7 @@ React Chrono requires minimal configuration to get started:
 | `mode` | `string` | Layout mode: `'horizontal'` \| `'vertical'` \| `'alternating'` \| `'horizontal-all'` |
 | `theme` | `Theme` | Customize colors and appearance |
 
-**Need complete prop documentation?** See our comprehensive [Props Reference](./PROPS-REFERENCE.md)
-
----
-
-## Showcase: What React Chrono Can Do
-
-### Rich Media Integration
-
-Images load intelligently using intersection observers - only when entering the viewport - ensuring fast initial loads even with dozens of high-resolution photos. Videos auto-play when timeline items become active, creating cinematic storytelling experiences. The component handles responsive sizing, buffering states, accessibility attributes, and performance optimization automatically.
-
-### Interactive Features
-
-**Slideshow Mode**: Auto-playing presentations with customizable durations, transition effects, and progress indicators - perfect for kiosks and guided storytelling.
-
-**Keyboard Navigation**: Full accessibility with arrow keys for navigation, Home/End for quick jumps to first/last items, and Escape for closing modals. Smooth animations respect user motion preferences.
-
-**Real-time Search**: Instantly highlights matching content across titles, descriptions, and metadata, helping users find specific events without losing context.
-
-### Theming & Branding
-
-Adapt to any visual identity with a comprehensive theming system. Dark mode is a first-class feature with dedicated properties for shadows, glows, and interaction states. Google Fonts integration handles loading optimization and fallback strategies automatically, making typography customization effortless.
-
-### Complete Internationalization
-
-Customize every piece of user-facing text for any language or locale. The i18n system uses intelligent fallbacks - configure only what you need to change. Template strings support variable interpolation with full type safety.
-
-```jsx
-<Chrono
-  items={items}
-  i18n={{
-    texts: {
-      navigation: { first: 'Premier élément', next: 'Suivant', previous: 'Précédent' },
-      search: { placeholder: 'Rechercher dans la chronologie', noResults: 'Aucun résultat trouvé' }
-    }
-  }}
-/>
-```
-
-### Advanced Architecture
-
-**Nested Timelines**: Create multi-level narratives where major events contain detailed sub-timelines - ideal for historical periods, project phases, or biographical chapters.
-
-**Custom Components**: Embed fully interactive React components within timeline cards - data visualizations, interactive maps, widgets, or custom UI elements.
-
-### Responsive Design
-
-Fundamentally adapts to each device: precision hover states and multi-column layouts on desktop, optimized touch targets on tablets, and content-prioritized interfaces on mobile with smart font sizing and spacing.
+**📚 Need complete prop documentation?** See our comprehensive [Props Reference](./PROPS-REFERENCE.md)
 
 ---
 
@@ -422,17 +589,42 @@ Upgrading is seamless with full backward compatibility:
 
 ---
 
-## Live Examples & Playground
+## What's New in v3.0
 
-### Local Demo Site
-Explore our comprehensive demo site with interactive examples. Run `pnpm run dev` locally to access:
-- All timeline layout modes (horizontal, vertical, alternating, horizontal-all)
-- Dark mode theming examples
-- Google Fonts integration demos
-- Internationalization samples
-- Media-rich timelines
-- Custom content examples
-- Nested timeline structures
+<div align="center">
+
+**🎉 Major updates and improvements**
+
+</div>
+
+### Key Highlights
+
+<table>
+<tr>
+<td width="33%">
+
+**🏗️ Grouped API**
+Props organized into logical groups (`layout`, `interaction`, `content`, `display`, `media`, `animation`, `style`, `accessibility`, `i18n`) for better IDE autocomplete
+
+</td>
+<td width="33%">
+
+**⚡ Performance**
+Complete migration to Vanilla Extract for zero-runtime CSS and improved performance
+
+</td>
+<td width="33%">
+
+**🎨 New Features**
+Auto card height, content alignment, Google Fonts, i18n support, fullscreen mode, and more
+
+</td>
+</tr>
+</table>
+
+**📋 Full changelog**: See [CHANGELOG.md](./CHANGELOG.md) for complete details
+
+> **🔄 Backward Compatible**: All v2.x props remain fully supported with automatic mapping to the new grouped API
 
 ---
 
@@ -468,7 +660,6 @@ pnpm test
 
 # Lint and format code
 pnpm run clean
-
 ```
 
 ### Testing Framework

@@ -53,6 +53,9 @@
     "clean": "npx concurrently \"pnpm format\" \"pnpm lint:all\"",
     "test": "vitest --config config/build/vitest.config.mts",
     "test-ui": "vitest --config config/build/vitest.config.mts --ui",
+    "test:perf": "vitest --config config/build/vitest.config.mts benchmark-tests/performance.test.tsx",
+    "test:perf:setup": "./benchmark-tests/setup.sh",
+    "benchmark": "node benchmark-tests/benchmark-suite.js",
     "vite:build": "vite build --config config/build/vite.config.mts",
     "build:site": "vite build --config config/build/vite.site.config.mts",
     "preview:site": "vite preview --config config/build/vite.site.config.mts",
@@ -78,6 +81,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
+    "react-chrono-v2": "npm:react-chrono@2.9.0",
     "@babel/core": "^7.28.5",
     "@babel/plugin-transform-optional-chaining": "^7.28.5",
     "@babel/plugin-transform-runtime": "^7.28.5",
