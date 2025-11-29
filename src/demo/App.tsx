@@ -16,6 +16,7 @@ import {
   CustomContentVertical,
   CustomContentWithIconsVertical,
   ComprehensiveVertical,
+  MediaShowcaseVertical,
   // Horizontal components  
   BasicHorizontal,
   AllHorizontal,
@@ -29,6 +30,7 @@ import {
   nestedTimeline,
   worldHistoryTimeline,
   technologyEvolutionTimeline,
+  mediaShowcaseTimeline,
 } from './data';
 import DynamicLoad from './dynamic-load';
 import { Layout } from './layout';
@@ -39,6 +41,7 @@ const NewDemo: React.FunctionComponent = () => {
   const [nestedItems, setNestedItems] = useState<TimelineItemModel[]>([]);
   const [historyItems, setHistoryItems] = useState<TimelineItemModel[]>([]);
   const [techItems, setTechItems] = useState<TimelineItemModel[]>([]);
+  const [mediaItems, setMediaItems] = useState<TimelineItemModel[]>([]);
   const [state, setState] = useState(0);
 
   const [customTheme, setCustomTheme] = useState<Theme>({
@@ -70,107 +73,112 @@ const NewDemo: React.FunctionComponent = () => {
     setHistoryItems(worldHistoryTimeline);
     setNestedItems(nestedTimeline);
     setTechItems(technologyEvolutionTimeline);
+    setMediaItems(mediaShowcaseTimeline);
   }, []);
 
   const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout />,
+      children: [
         {
           path: '/',
-          element: <Layout />,
-          children: [
-            {
-              path: '/',
-              element: <HomePage />,
-            },
-            {
-              path: '/vertical-basic',
-              element: <BasicVertical type={'big-screen'} items={items} />,
-            },
-            {
-              path: '/vertical-basic-nested',
-              element: <NestedVertical type={'big-screen'} items={nestedItems} />,
-            },
-            {
-              path: '/vertical-alternating-mixed',
-              element: <MixedVertical type={'big-screen'} />,
-            },
-            {
-              path: '/vertical-alternating-nested',
-              element: (
-                <AlternatingNestedVertical
-                  type={'big-screen'}
-                  items={nestedItems}
-                />
-              ),
-            },
-            {
-              path: '/vertical-alternating',
-              element: (
-                <>
-                  <button
-                    onClick={() => {
-                      setState(1 - state);
-                    }}
-                    className="rounded-full"
-                  >
-                    change
-                  </button>
-                  {
-                    <AlternatingVertical
-                      type={'big-screen'}
-                      items={state > 0 ? items : mixedTimeline}
-                      theme={customTheme}
-                    />
-                  }
-                </>
-              ),
-            },
-            {
-              path: '/horizontal',
-              element: <BasicHorizontal items={items} type="big-screen" />,
-            },
-            {
-              path: '/vertical-world-history',
-              element: <NewMediaVertical items={historyItems} type="big-screen" />,
-            },
-            {
-              path: '/horizontal-all',
-              element: <AllHorizontal items={historyItems} type="big-screen" />,
-            },
-            {
-              path: '/horizontal-initial-select',
-              element: <InitialSelectedHorizontal items={items} type="big-screen" />,
-            },
-            {
-              path: '/vertical-custom',
-              element: <CustomContentVertical type="big-screen" />,
-            },
-            {
-              path: '/vertical-custom-icon',
-              element: <CustomContentWithIconsVertical type="big-screen" items={items} />,
-            },
-            {
-              path: '/dynamic-load',
-              element: <DynamicLoad />,
-            },
-            {
-              path: '/timeline-without-cards',
-              element: <CardlessVertical type="big-screen" items={items} />,
-            },
-            {
-              path: '/timeline-without-cards-horizontal',
-              element: <CardlessHorizontal type="big-screen" items={items} />,
-            },
-            {
-              path: '/theme-showcase',
-              element: <ThemeShowcase />,
-            },
-            {
-              path: '/vertical-comprehensive',
-              element: <ComprehensiveVertical type="big-screen" items={techItems} />,
-            },
-          ],
+          element: <HomePage />,
         },
-      ]);
+        {
+          path: '/vertical-basic',
+          element: <BasicVertical type={'big-screen'} items={items} />,
+        },
+        {
+          path: '/vertical-basic-nested',
+          element: <NestedVertical type={'big-screen'} items={nestedItems} />,
+        },
+        {
+          path: '/vertical-alternating-mixed',
+          element: <MixedVertical type={'big-screen'} />,
+        },
+        {
+          path: '/vertical-alternating-nested',
+          element: (
+            <AlternatingNestedVertical
+              type={'big-screen'}
+              items={nestedItems}
+            />
+          ),
+        },
+        {
+          path: '/vertical-alternating',
+          element: (
+            <>
+              <button
+                onClick={() => {
+                  setState(1 - state);
+                }}
+                className="rounded-full"
+              >
+                change
+              </button>
+              {
+                <AlternatingVertical
+                  type={'big-screen'}
+                  items={state > 0 ? items : mixedTimeline}
+                  theme={customTheme}
+                />
+              }
+            </>
+          ),
+        },
+        {
+          path: '/horizontal',
+          element: <BasicHorizontal items={items} type="big-screen" />,
+        },
+        {
+          path: '/vertical-world-history',
+          element: <NewMediaVertical items={historyItems} type="big-screen" />,
+        },
+        {
+          path: '/horizontal-all',
+          element: <AllHorizontal items={techItems} type="big-screen" />,
+        },
+        {
+          path: '/horizontal-initial-select',
+          element: <InitialSelectedHorizontal items={items} type="big-screen" />,
+        },
+        {
+          path: '/vertical-custom',
+          element: <CustomContentVertical type="big-screen" />,
+        },
+        {
+          path: '/vertical-custom-icon',
+          element: <CustomContentWithIconsVertical type="big-screen" items={items} />,
+        },
+        {
+          path: '/dynamic-load',
+          element: <DynamicLoad />,
+        },
+        {
+          path: '/timeline-without-cards',
+          element: <CardlessVertical type="big-screen" items={items} />,
+        },
+        {
+          path: '/timeline-without-cards-horizontal',
+          element: <CardlessHorizontal type="big-screen" items={items} />,
+        },
+        {
+          path: '/theme-showcase',
+          element: <ThemeShowcase />,
+        },
+        {
+          path: '/vertical-comprehensive',
+          element: <ComprehensiveVertical type="big-screen" items={techItems} />,
+        },
+        {
+          path: '/vertical-media-showcase',
+          element: <MediaShowcaseVertical type="big-screen" items={mediaItems} />,
+        },
+      ],
+    },
+  ]);
 
   return <RouterProvider router={router}></RouterProvider>;
 };

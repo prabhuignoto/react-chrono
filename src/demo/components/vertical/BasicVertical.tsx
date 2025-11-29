@@ -67,6 +67,7 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
         mode="vertical"
         id="vertical_basic_test"
         activeItemIndex={2}
+        allowDynamicUpdate={true}
         onItemSelected={(selected) => console.log(selected.index)}
 
         layout={{

@@ -77,12 +77,13 @@ fi
 # Check for cross-browser compatibility
 echo "Checking for cross-browser compatibility issues..."
 BROWSER_ISSUES=0
+BROWSERSTACK_CONFIG="config/playwright/browserstack.json"
 
 # Check if browserstack.json exists and has adequate browser coverage
-if [ -f "browserstack.json" ]; then
-  BROWSER_COUNT=$(grep -o '"browser":' browserstack.json | wc -l | tr -d ' ')
-  OS_COUNT=$(grep -o '"os":' browserstack.json | wc -l | tr -d ' ')
-  BROWSERS_LIST=$(grep -A1 '"browser":' browserstack.json | grep -v '"browser":' | tr -d ' ",')
+if [ -f "$BROWSERSTACK_CONFIG" ]; then
+  BROWSER_COUNT=$(grep -o '"browser":' "$BROWSERSTACK_CONFIG" | wc -l | tr -d ' ')
+  OS_COUNT=$(grep -o '"os":' "$BROWSERSTACK_CONFIG" | wc -l | tr -d ' ')
+  BROWSERS_LIST=$(grep -A1 '"browser":' "$BROWSERSTACK_CONFIG" | grep -v '"browser":' | tr -d ' ",')
   
   if [ "$BROWSER_COUNT" -lt 3 ]; then
     echo "⚠️ Warning: Limited browser coverage in BrowserStack configuration. Consider adding more browsers."
@@ -325,7 +326,7 @@ if [ $BROWSER_ISSUES -ne 0 ]; then
   echo "==================================" >> bug_report.txt
   
   # BrowserStack configuration issues
-  if [ ! -f "browserstack.json" ]; then
+  if [ ! -f "$BROWSERSTACK_CONFIG" ]; then
     echo "- ⚠️ No BrowserStack configuration found" >> bug_report.txt
     echo "  Recommendation: Set up BrowserStack for cross-browser testing" >> bug_report.txt
   elif [ "$BROWSER_COUNT" -lt 3 ]; then
@@ -334,7 +335,7 @@ if [ $BROWSER_ISSUES -ne 0 ]; then
     echo "  Recommendation: Add at least Chrome, Firefox, and Safari for comprehensive testing" >> bug_report.txt
   fi
   
-  if [ -f "browserstack.json" ] && [ "$OS_COUNT" -lt 2 ]; then
+  if [ -f "$BROWSERSTACK_CONFIG" ] && [ "$OS_COUNT" -lt 2 ]; then
     echo "- ⚠️ Limited OS coverage in BrowserStack configuration" >> bug_report.txt
     echo "  Recommendation: Test on both Windows and macOS" >> bug_report.txt
   fi

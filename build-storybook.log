@@ -1,0 +1,40 @@
+
+> react-chrono@3.3.0 build-storybook /Users/prabhu/code/react-chrono
+> storybook build --output-dir=/var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs
+
+[1mstorybook v10.0.8
+[22m
+info => Cleaning outputDir: [36m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs[39m
+info => Loading presets
+info => Building manager..
+info => Building preview..
+info Using tsconfig paths for react-docgen
+[36mvite v7.2.4 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32m✓[39m 379 modules transformed.
+rendering chunks...
+computing gzip size...
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[32miframe.html                                    [39m[1m[2m   18.18 kB[22m[1m[22m[2m │ gzip:   5.09 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[35miframe-LC6P8eoW.css                     [39m[1m[2m   16.19 kB[22m[1m[22m[2m │ gzip:   3.14 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[35mStoryContainer-o6x2-nTN.css             [39m[1m[2m  126.50 kB[22m[1m[22m[2m │ gzip:  18.80 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mindex-BXvDH6lU.js                       [39m[1m[2m    0.13 kB[22m[1m[22m[2m │ gzip:   0.12 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mformatter-OMEEQ6HG-DNUufhv8.js          [39m[1m[2m    0.31 kB[22m[1m[22m[2m │ gzip:   0.24 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mindex-BNK_SA9g.js                       [39m[1m[2m    0.46 kB[22m[1m[22m[2m │ gzip:   0.30 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mpreload-helper-PPVm8Dsz.js              [39m[1m[2m    1.23 kB[22m[1m[22m[2m │ gzip:   0.71 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mindex-CJtnqljQ.js                       [39m[1m[2m    3.66 kB[22m[1m[22m[2m │ gzip:   1.38 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mhorizontal.stories-B3BhvRvZ.js          [39m[1m[2m    4.71 kB[22m[1m[22m[2m │ gzip:   1.08 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mvertical.stories-D_h71g9l.js            [39m[1m[2m    5.38 kB[22m[1m[22m[2m │ gzip:   1.41 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mcustom-content.stories-Cr-Zqj-T.js      [39m[1m[2m    6.45 kB[22m[1m[22m[2m │ gzip:   1.76 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mmedia-support.stories-D__ufTzi.js       [39m[1m[2m    6.47 kB[22m[1m[22m[2m │ gzip:   1.51 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mtheming.stories-C9AbIo-4.js             [39m[1m[2m    9.33 kB[22m[1m[22m[2m │ gzip:   1.73 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36minteractive.stories-DAZn8pT8.js         [39m[1m[2m   10.67 kB[22m[1m[22m[2m │ gzip:   2.16 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mbasic-timeline-XOCKHiSF.js              [39m[1m[2m   12.91 kB[22m[1m[22m[2m │ gzip:   5.54 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[36mvite-inject-mocker-entry.js                    [39m[1m[2m   28.30 kB[22m[1m[22m[2m │ gzip:   9.84 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mColor-64QXVMR3-Dx8pN2-Y.js              [39m[1m[2m   31.68 kB[22m[1m[22m[2m │ gzip:  11.96 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36msyntaxhighlighter-CAVLW7PM-CnMdQ1_t.js  [39m[1m[2m   80.86 kB[22m[1m[22m[2m │ gzip:  28.53 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mreact-18-Df7Dsubs.js                    [39m[1m[2m  181.47 kB[22m[1m[22m[2m │ gzip:  57.16 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mStoryContainer-4131PGY0.js              [39m[1m[2m  233.43 kB[22m[1m[22m[2m │ gzip:  64.10 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36mWithTooltip-SK46ZJ2J-DfSvS3rt.js        [39m[1m[33m  648.48 kB[39m[22m[2m │ gzip: 212.52 kB[22m
+[2m../../../../var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs/[22m[2massets/[22m[36miframe-Ch7wzDif.js                      [39m[1m[33m1,157.14 kB[39m[22m[2m │ gzip: 331.21 kB[22m
+[32m✓ built in 2.73s[39m
+info => Output directory: /var/folders/t6/bqrbmncd7p7_7mxgzx4zxb1r0000gn/T/chromatic--10254-1f98Kl07SSUs

@@ -69,7 +69,9 @@ export const useAriaLiveRegion = (
   } = options;
 
   const [messages, setMessages] = useState<string[]>([]);
-  const regionId = containerId || `aria-live-region-${Math.random().toString(36).substr(2, 9)}`;
+  const regionId =
+    containerId ||
+    `aria-live-region-${Math.random().toString(36).substr(2, 9)}`;
   const messageTimeoutsRef = useRef<Map<string, NodeJS.Timeout>>(new Map());
 
   /**

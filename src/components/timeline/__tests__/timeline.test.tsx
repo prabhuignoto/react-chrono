@@ -163,7 +163,11 @@ describe('Timeline', () => {
     const user = userEvent.setup();
     const mockOnLast = vi.fn();
     const { getByLabelText } = customRender(
-      <Timeline {...commonProps} mode="VERTICAL_ALTERNATING" onLast={mockOnLast} />,
+      <Timeline
+        {...commonProps}
+        mode="VERTICAL_ALTERNATING"
+        onLast={mockOnLast}
+      />,
       {
         providerProps,
       },
@@ -231,7 +235,11 @@ describe('Timeline', () => {
     const user = userEvent.setup();
     const mockOnItemSelected = vi.fn();
     const { container } = customRender(
-      <Timeline {...commonProps} mode="VERTICAL" onItemSelected={mockOnItemSelected} />,
+      <Timeline
+        {...commonProps}
+        mode="VERTICAL"
+        onItemSelected={mockOnItemSelected}
+      />,
       {
         providerProps,
       },

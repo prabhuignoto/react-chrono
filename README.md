@@ -1,6 +1,6 @@
 <div align="center">
-  <img src="./readme-assets/social-logo-small.png" alt="React Chrono UI Logo" width="300" />
-  <h1>React Chrono</h1>
+  <img src="./readme-assets/logo.png" alt="React Chrono UI Logo" width="300" />
+  <!-- <h2>React Chrono</h2> -->
   <p><strong>The Ultimate Timeline Component for React Applications</strong></p>
   <p>Build stunning, interactive timelines with rich media support, accessibility-first design, and comprehensive customization options</p>
 </div>
@@ -316,19 +316,25 @@ Shows all timeline items at once. Perfect for dashboards, comparisons, and seein
 #### Visual Examples
 
 **Vertical Mode** - Scroll-friendly chronological flow:
-![Vertical Timeline Mode](./readme-assets/vertical_mode.png)
 
-**Vertical Mode (High Text Density)** - Compact view showing detailed information:
-![Vertical Timeline High Density](./readme-assets/vertical_mode_high_density.png)
+![Vertical Timeline Mode](./readme-assets/vertical_mode.jpg)
+
 
 **Alternating Mode** - Cards alternate left and right with visual balance:
-![Alternating Timeline Mode](./readme-assets/vertical_alternating_full.png)
 
-**Dark Mode** - Complete theme control with 36 customizable properties:
+![Alternating Timeline Mode](./readme-assets/vertical_alternating_full.jpg)
+
+**Dark Mode** - Complete theme control with customizable properties:
+
 ![Dark Mode Timeline](./readme-assets/dark_mode.png)
 
 **Horizontal All** - Dashboard view showing complete timeline:
-![Timeline Modes](./readme-assets/horizontal_all.jpg)
+
+![Timeline Modes](./readme-assets/horizontal-all.jpg)
+
+**Timeline with Media** - Embed youtube videos and images in timeline items:
+
+![Timeline with Media](./readme-assets/timeline-with-media.jpg)
 
 ---
 

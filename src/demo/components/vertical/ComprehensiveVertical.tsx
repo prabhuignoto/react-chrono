@@ -1,5 +1,5 @@
 import { TimelineItemModel } from '@models/TimelineItemModel';
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, useMemo, useCallback } from 'react';
 import Chrono from '../../../components';
 import { componentContainerTree, componentContainerTreeDesktop, componentContainerTreeBigScreen, componentContainerTreeTablet, componentContainerTreeMobile, vertical } from '../../App.css';
 
@@ -17,7 +17,8 @@ export const ComprehensiveVertical: FunctionComponent<ComprehensiveVerticalProps
   const [darkMode, setDarkMode] = useState(false);
 
   // Complete Blue, Amber, White Theme with Dark Mode Support
-  const comprehensiveTheme = {
+  // Memoize theme to prevent infinite re-renders - only recreate when darkMode changes
+  const comprehensiveTheme = useMemo(() => ({
     // Base colors - Adaptive for light/dark mode
     cardBgColor: darkMode ? '#1e293b' : '#ffffff',
     cardDetailsBackGround: darkMode ? '#334155' : '#fff',
@@ -72,19 +73,19 @@ export const ComprehensiveVertical: FunctionComponent<ComprehensiveVerticalProps
     darkToggleActiveIconColor: '#1e3a8a',
     darkToggleActiveBorderColor: '#d97706',
     darkToggleGlowColor: 'rgba(245, 158, 11, 0.4)',
-  };
+  }), [darkMode]);
 
-  const handleItemSelected = (selected: any) => {
+  const handleItemSelected = useCallback((selected: any) => {
     setSelectedItem(selected);
-  };
+  }, []);
 
-  const handleSlideshowToggle = () => {
-    setSlideshowActive(!slideshowActive);
-  };
+  const handleSlideshowToggle = useCallback(() => {
+    setSlideshowActive(prev => !prev);
+  }, []);
 
-  const handleThemeChange = () => {
-    setDarkMode(!darkMode);
-  };
+  const handleThemeChange = useCallback(() => {
+    setDarkMode(prev => !prev);
+  }, []);
 
   return (
     <div className={vertical} id="comprehensive-vertical" style={{ backgroundColor: darkMode ? '#0f172a' : '#ffffff' }}>

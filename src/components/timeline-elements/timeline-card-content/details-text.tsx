@@ -51,7 +51,7 @@ const DetailsText = forwardRef<HTMLDivElement, DetailsTextProps>(
           style={{
             overflowY: showMore ? 'auto' : 'hidden',
             width: borderLessCards ? 'calc(100% - 0.5rem)' : '100%',
-            background: `${vars.color.cardBg}`,
+            background: vars.color.cardBg,
             // background: theme?.cardDetailsBackGround || theme?.cardBgColor,
             // Ensure custom scrollbar color reflects theme primary color for tests and styling parity
             // scrollbarColor: `${theme?.primary} default` as unknown as string,

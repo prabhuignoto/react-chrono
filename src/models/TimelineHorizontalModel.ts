@@ -47,6 +47,12 @@ export interface TimelineHorizontalModel {
   wrapperId: string;
 
   onOutlineSelection?: (index: number) => void;
+
+  // Theme for styling the timeline line
+  theme?: any;
+
+  // Width of the timeline line
+  lineWidth?: number;
 }
 
 export interface Scroll {

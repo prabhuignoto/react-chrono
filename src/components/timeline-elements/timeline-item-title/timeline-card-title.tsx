@@ -9,7 +9,7 @@ import { cardTitleRecipe } from '../timeline-card-content/timeline-card-content.
  * TimelineItemTitle component
  * This component renders the title of a timeline item and applies appropriate styling based on the given props.
  *
- * @property {string} title - The text of the title.
+ * @property {string | ReactNode} title - The text or JSX element of the title.
  * @property {boolean} active - Indicates whether the title is active or not.
  * @property {Theme} theme - The theme object, used for styling.
  * @property {string} align - The alignment of the title.

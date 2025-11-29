@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { tokens } from '../../styles/tokens/index.css';
-import { vars } from '../../styles/tokens.css';
+import { vars } from '../../styles/tokens/index.css';
 import { sprinkles } from '../../styles/system/sprinkles.css';
 import { baseStyles, mediaQueries } from '../../styles/system/static.css';
 import { patterns } from '../../styles/system/recipes.css';

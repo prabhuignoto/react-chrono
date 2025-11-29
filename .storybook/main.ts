@@ -1,6 +1,9 @@
+import path from 'path';
 import type { StorybookConfig } from '@storybook/react-vite';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { mergeConfig } from 'vite';
+import { fileURLToPath } from 'node:url';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(ts|tsx)', '../stories/**/*.stories.@(ts|tsx)'],
@@ -16,8 +19,13 @@ const config: StorybookConfig = {
   },
 
   async viteFinal(config, { configType }) {
+    const storybookDir = path.dirname(fileURLToPath(import.meta.url));
+    const srcDir = path.resolve(storybookDir, '../src');
     return mergeConfig(config, {
       plugins: [
+        tsconfigPaths({
+          projects: ['./tsconfig.json'],
+        }),
         vanillaExtractPlugin({
           // Use 'short' identifiers for production builds, 'debug' for development
           // This ensures consistent class names in production and readable names in dev
@@ -33,6 +41,11 @@ const config: StorybookConfig = {
       // and prevents issues with CSS not being loaded in production builds
       optimizeDeps: {
         exclude: ['@vanilla-extract/css', '@vanilla-extract/dynamic'],
+      },
+      resolve: {
+        alias: {
+          src: srcDir,
+        },
       },
     });
   }

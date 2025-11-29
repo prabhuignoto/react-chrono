@@ -274,6 +274,14 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
   const itemsHashRef = useRef<string>('');
   const processedItemsCache = useRef<TimelineItemModel[]>([]);
 
+  // Store the last original items array for comparison (to detect append vs replace)
+  const lastOriginalItemsRef = useRef<any[]>([]);
+
+  // Store scroll position to preserve it during item updates
+  const scrollPositionRef = useRef<{ scrollLeft?: number; scrollTop?: number }>(
+    {},
+  );
+
   // Track children count for Array.map() pattern detection
   const childrenCount = React.Children.count(children);
 
@@ -321,40 +329,85 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     [activeItemIndex, titleDateFormat, children],
   );
 
-  // Optimize updateItems function
+  // Optimize updateItems function - only for truly appending items
+  // This function merges existing items with new ones, preserving existing item states
   const updateItems = useCallback(
-    (lineItems: TimelineItemModel[]) => {
-      if (lineItems) {
-        const pos = timeLineItems.length;
+    (lineItems: TimelineItemModel[], existingItems: TimelineItemModel[]) => {
+      if (lineItems && existingItems.length > 0) {
+        // Merge existing items with new ones, preserving existing item states
+        const existingItemsMap = new Map(
+          existingItems.map((item, idx) => [idx, item]),
+        );
 
-        return lineItems.map((item, index) => ({
-          ...item,
-          active: index === pos,
-          visible: true,
-        }));
+        return lineItems.map((item, index) => {
+          // If this is an existing item, preserve its state
+          const existingItem = existingItemsMap.get(index);
+          if (existingItem) {
+            return {
+              ...item,
+              ...(existingItem.id !== undefined && { id: existingItem.id }),
+              ...(existingItem.active !== undefined && {
+                active: existingItem.active,
+              }),
+              ...(existingItem.visible !== undefined && {
+                visible: existingItem.visible,
+              }),
+            };
+          }
+          // New item - set visible and inactive (active will be set by active item logic)
+          return {
+            ...item,
+            active: false,
+            visible: true,
+          };
+        });
       } else {
         return [];
       }
     },
-    [timeLineItems.length],
+    [], // No dependencies - function is pure
   );
 
-  // Create a stable hash for items comparison - optimized version
-  const createItemsHash = useCallback((items: any[]) => {
-    if (!items?.length) return '';
+  // Helper function to convert ReactNode to hashable string
+  const getHashableValue = useCallback((value: any, itemId: string): string => {
+    if (!value) return '';
+    if (typeof value === 'string') return value;
+    if (typeof value === 'number') return String(value);
 
-    // Only extract the needed properties and create a single string
-    return items
-      .map((item) => {
-        // Use simple string concatenation which is more efficient than JSON.stringify
-        const id = item.id || '';
-        const date = item.date || '';
-        const title = item.title || '';
-        const cardTitle = item.cardTitle || '';
-        return `${id}:${date}:${title}:${cardTitle}`;
-      })
-      .join('|');
+    // For ReactNode, use a stable identifier
+    // If it's a React element, try to get a stable key
+    if (React.isValidElement(value)) {
+      const key = value.key;
+      const type =
+        typeof value.type === 'string'
+          ? value.type
+          : value.type?.name || 'Component';
+      return `[ReactNode:${type}${key ? `:${key}` : ''}]`;
+    }
+
+    // For other ReactNode types (arrays, fragments, etc.), use item id as fallback
+    return `[ReactNode:${itemId}]`;
   }, []);
+
+  // Create a stable hash for items comparison - optimized version
+  const createItemsHash = useCallback(
+    (items: any[]) => {
+      if (!items?.length) return '';
+
+      // Only extract the needed properties and create a single string
+      return items
+        .map((item) => {
+          // Use simple string concatenation which is more efficient than JSON.stringify
+          const id = item.id || '';
+          const date = item.date || '';
+          const title = getHashableValue(item.title, id);
+          const cardTitle = getHashableValue(item.cardTitle, id);
+          return `${id}:${date}:${title}:${cardTitle}`;
+        })
+        .join('|');
+    },
+    [getHashableValue],
+  );
 
   useEffect(() => {
     const _items = items?.filter((item) => item);
@@ -372,7 +425,11 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
         setTimeLineItems(lineItems);
 
         // For dynamic updates via children, focus on first new item if no active item
-        if (allowDynamicUpdate && timeLineItems.length > 0 && lineItems.length > timeLineItems.length) {
+        if (
+          allowDynamicUpdate &&
+          timeLineItems.length > 0 &&
+          lineItems.length > timeLineItems.length
+        ) {
           if (activeTimelineItem === undefined || activeTimelineItem === null) {
             setActiveTimelineItem(timeLineItems.length);
           }
@@ -384,25 +441,58 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
     if (!_items?.length) {
       const lineItems = initItems();
       setTimeLineItems(lineItems);
+      lastOriginalItemsRef.current = [];
       return;
     }
 
     // Use efficient comparison instead of JSON.stringify on entire array
     const currentHash = createItemsHash(_items);
 
-    if (!allowDynamicUpdate && currentHash === itemsHashRef.current) {
-      return; // No changes, skip processing
+    // Check if hash has changed - if not, skip processing (even with allowDynamicUpdate)
+    // This prevents unnecessary re-renders when only active state changes
+    if (currentHash === itemsHashRef.current) {
+      return; // No changes to items data, skip processing
+    }
+
+    // Capture scroll position before items update (for horizontal/vertical modes)
+    const timelineElement = document.querySelector(
+      '[data-testid="timeline-main-wrapper"]',
+    ) as HTMLElement | null;
+
+    if (timelineElement) {
+      scrollPositionRef.current = {
+        scrollLeft: timelineElement.scrollLeft,
+        scrollTop: timelineElement.scrollTop,
+      };
     }
 
     itemsHashRef.current = currentHash;
 
     const previousItemsLength = timeLineItems.length;
-    const isDynamicUpdate =
-      timeLineItems.length && _items.length > timeLineItems.length;
 
-    if (isDynamicUpdate) {
-      newItems = updateItems(_items);
+    // Check if items are truly appended (same items + new ones at end) vs replaced (completely different)
+    // Compare first N items (where N = previous length) to see if they match
+    const isTrulyAppended =
+      allowDynamicUpdate &&
+      timeLineItems.length > 0 &&
+      _items.length > timeLineItems.length &&
+      lastOriginalItemsRef.current.length > 0 &&
+      // Verify existing items are preserved at the beginning by comparing original items
+      (() => {
+        const previousOriginalSlice = lastOriginalItemsRef.current;
+        const newItemsSlice = _items.slice(0, previousOriginalSlice.length);
+
+        // Compare by hash (which uses id, date, title, cardTitle from original items)
+        const previousHash = createItemsHash(previousOriginalSlice);
+        const newHash = createItemsHash(newItemsSlice);
+        return previousHash === newHash && previousHash !== '';
+      })();
+
+    if (isTrulyAppended) {
+      // Items are truly appended - use updateItems to merge
+      newItems = updateItems(_items, timeLineItems);
     } else if (_items.length) {
+      // Items are replaced or initial load - use initItems
       newItems = initItems(_items);
     }
 
@@ -410,24 +500,83 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
       timeLineItemsRef.current = newItems;
       setTimeLineItems(newItems);
 
-      if (isDynamicUpdate && allowDynamicUpdate && previousItemsLength > 0) {
-        // For dynamic updates, preserve current focus if it exists
-        // Only focus on first newly loaded item if no current active item
-        if (activeTimelineItem === undefined || activeTimelineItem === null) {
-          setActiveTimelineItem(previousItemsLength);
+      // Validate and clamp activeTimelineItem to valid range
+      let validActiveIndex: number | undefined;
+      if (isTrulyAppended && allowDynamicUpdate && previousItemsLength > 0) {
+        // For truly appended items, preserve current active item if valid
+        if (activeTimelineItem !== undefined && activeTimelineItem !== null) {
+          validActiveIndex = Math.min(activeTimelineItem, newItems.length - 1);
+        } else {
+          // No active item - focus on first newly loaded item
+          validActiveIndex = previousItemsLength;
         }
       } else {
-        // For initial load or full refresh, respect the initial activeItemIndex setting
+        // For replaced items or initial load, respect the initial activeItemIndex setting
         const initialIndex =
           activeItemIndex !== undefined
             ? activeItemIndex
             : mode === 'vertical' || mode === 'alternating'
               ? undefined
               : 0;
-        setActiveTimelineItem(initialIndex);
+        validActiveIndex =
+          initialIndex !== undefined
+            ? Math.min(initialIndex, newItems.length - 1)
+            : undefined;
+      }
+
+      // Ensure validActiveIndex is within bounds
+      if (validActiveIndex !== undefined && validActiveIndex < 0) {
+        validActiveIndex = 0;
+      }
+
+      setActiveTimelineItem(validActiveIndex);
+
+      // Restore scroll position after DOM update
+      if (
+        timelineElement &&
+        (scrollPositionRef.current.scrollLeft !== undefined ||
+          scrollPositionRef.current.scrollTop !== undefined)
+      ) {
+        requestAnimationFrame(() => {
+          const updatedElement = document.querySelector(
+            '[data-testid="timeline-main-wrapper"]',
+          ) as HTMLElement | null;
+
+          if (updatedElement) {
+            const mappedMode = mapNewModeToLegacy(mode);
+            // For horizontal mode, preserve scrollLeft (clamped to valid range)
+            if (
+              scrollPositionRef.current.scrollLeft !== undefined &&
+              (mappedMode === 'HORIZONTAL' || mappedMode === 'HORIZONTAL_ALL')
+            ) {
+              const maxScrollLeft =
+                updatedElement.scrollWidth - updatedElement.clientWidth;
+              updatedElement.scrollLeft = Math.max(
+                0,
+                Math.min(scrollPositionRef.current.scrollLeft, maxScrollLeft),
+              );
+            }
+            // For vertical modes, preserve scrollTop (clamped to valid range)
+            if (
+              scrollPositionRef.current.scrollTop !== undefined &&
+              (mappedMode === 'VERTICAL' ||
+                mappedMode === 'VERTICAL_ALTERNATING')
+            ) {
+              const maxScrollTop =
+                updatedElement.scrollHeight - updatedElement.clientHeight;
+              updatedElement.scrollTop = Math.max(
+                0,
+                Math.min(scrollPositionRef.current.scrollTop, maxScrollTop),
+              );
+            }
+          }
+        });
       }
 
       processedItemsCache.current = newItems;
+
+      // Store the original items for next comparison
+      lastOriginalItemsRef.current = _items;
     }
   }, [
     items,

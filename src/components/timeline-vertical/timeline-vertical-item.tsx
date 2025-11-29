@@ -195,7 +195,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
         }}
       >
         <TimelineItemTitle
-          title={title as string}
+          title={title}
           theme={theme}
           align={titleConfig.textAlign}
           {...(active !== undefined
@@ -255,7 +255,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       className,
       mode,
       onActive: handleOnActive,
-      onClick: onClick || (() => { }),
+      onClick: onClick || (() => {}),
       isMobile,
       ...pickDefined({
         active,
@@ -402,8 +402,8 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
               items,
               isNested,
               nestedCardHeight,
-              title: cardTitle as string,
-              cardTitle: title as string,
+              title: cardTitle,
+              cardTitle: title,
             })}
             {...(onClick && typeof onClick === 'function' ? { onClick } : {})}
           />

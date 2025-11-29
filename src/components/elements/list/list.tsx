@@ -85,9 +85,7 @@ const List: FunctionComponent<ListModel> = ({
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     // Stop propagation for menu navigation keys to prevent timeline from capturing them
     // Includes arrow keys, Home/End for first/last items, Enter/Space for selection
-    if (
-      ['ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '].includes(e.key)
-    ) {
+    if (['ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '].includes(e.key)) {
       e.stopPropagation();
     }
   }, []);
@@ -112,7 +110,13 @@ const List: FunctionComponent<ListModel> = ({
         />
       );
     },
-    [theme, handleItemSelection, multiSelectable, activeItemIndex, getItemProps],
+    [
+      theme,
+      handleItemSelection,
+      multiSelectable,
+      activeItemIndex,
+      getItemProps,
+    ],
   );
 
   return (

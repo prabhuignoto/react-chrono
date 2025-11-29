@@ -19,25 +19,58 @@ export const NestedVertical: FunctionComponent<NestedVerticalProps> = ({
       type === 'tablet' ? componentContainerTreeTablet :
       type === 'mobile' ? componentContainerTreeMobile :
       componentContainerTree
-    } style={{ minHeight: '600px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
+    } style={{ minHeight: '1200px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
       <Chrono
         items={items}
-        mode="HORIZONTAL"
-        slideShow
-        cardWidth={500}
-        slideItemDuration={2500}
-        scrollable={{ scrollbar: false }}
+        mode="horizontal"
+        activeItemIndex={2}
         onItemSelected={(selected) => console.log(selected.index)}
+        
+        layout={{
+          cardWidth: 650,
+          cardHeight: 300,
+          pointSize: 20,
+        }}
+        
+        interaction={{
+          focusOnLoad: true,
+        }}
+        
+        content={{
+          allowHTML: true,
+        }}
+        
+        display={{
+          scrollable: { scrollbar: false },
+          toolbar: {
+            sticky: false,
+          },
+        }}
+        
+        media={{
+          height: 300,
+          align: 'center',
+        }}
+        
+        animation={{
+          slideshow: {
+            enabled: true,
+            duration: 2500,
+          },
+        }}
         
         style={{
           fontSizes: {
-            title: '1rem',
+            title: '0.6rem',
+          },
+          classNames: {
+            cardText: 'custom-text',
           },
           googleFonts: {
             fontFamily: 'Roboto Slab',
             elements: {
-              title: { weight: 'bold', style: 'normal', size: '1.8rem' },
-              cardTitle: { weight: 'bold', style: 'normal', size: '1.3rem' },
+              title: { weight: 'normal', style: 'normal', size: '1rem' },
+              cardTitle: { weight: 'normal', style: 'normal', size: '1rem' },
               cardSubtitle: { weight: 'normal', style: 'italic', size: '1rem' },
               cardText: { weight: 'light', style: 'normal', size: '0.95rem' },
               controls: { weight: 'medium', style: 'normal', size: '0.875rem' },
@@ -48,19 +81,9 @@ export const NestedVertical: FunctionComponent<NestedVerticalProps> = ({
           }
         }}
         
-        focusActiveItemOnLoad
-        activeItemIndex={2}
-        mediaHeight={200}
-        nestedCardHeight={100}
-        cardHeight={300}
-        timelinePointDimension={20}
-        classNames={{
-          cardText: 'custom-text',
+        darkMode={{
+          showToggle: true,
         }}
-        parseDetailsAsHTML
-        enableDarkToggle
-        mediaSettings={{ align: 'center' }}
-        stickyToolbar={false}
       />
     </div>
   </div>

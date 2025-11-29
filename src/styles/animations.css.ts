@@ -1,5 +1,5 @@
 import { keyframes, style } from '@vanilla-extract/css';
-import { designTokens } from './design-system.css';
+import { tokens } from './tokens/index.css';
 
 // Centralized keyframe animations
 export const keyframeAnimations = {
@@ -54,9 +54,9 @@ export const keyframeAnimations = {
   }),
 
   pulse: keyframes({
-    '0%': { boxShadow: `0 0 0 0 ${designTokens.color.primary}40` },
-    '70%': { boxShadow: `0 0 0 12px ${designTokens.color.primary}00` },
-    '100%': { boxShadow: `0 0 0 0 ${designTokens.color.primary}00` },
+    '0%': { boxShadow: `0 0 0 0 ${tokens.semantic.color.primary}40` },
+    '70%': { boxShadow: `0 0 0 12px ${tokens.semantic.color.primary}00` },
+    '100%': { boxShadow: `0 0 0 0 ${tokens.semantic.color.primary}00` },
   }),
 
   // Button micro-animations
@@ -78,15 +78,15 @@ export const keyframeAnimations = {
 
   glowPulse: keyframes({
     '0%': {
-      boxShadow: `0 0 4px ${designTokens.color.primary}20`,
+      boxShadow: `0 0 4px ${tokens.semantic.color.primary}20`,
       borderColor: 'transparent',
     },
     '50%': {
-      boxShadow: `0 0 12px ${designTokens.color.primary}40, 0 0 20px ${designTokens.color.primary}10`,
-      borderColor: `${designTokens.color.primary}30`,
+      boxShadow: `0 0 12px ${tokens.semantic.color.primary}40, 0 0 20px ${tokens.semantic.color.primary}10`,
+      borderColor: `${tokens.semantic.color.primary}30`,
     },
     '100%': {
-      boxShadow: `0 0 4px ${designTokens.color.primary}20`,
+      boxShadow: `0 0 4px ${tokens.semantic.color.primary}20`,
       borderColor: 'transparent',
     },
   }),
@@ -97,29 +97,29 @@ export const animationUtils = {
   // Entrance animations
   entranceLeft: style({
     animationName: keyframeAnimations.slideInFromLeft,
-    animationDuration: designTokens.animation.duration.normal,
-    animationTimingFunction: designTokens.animation.easing.easeOut,
+    animationDuration: tokens.semantic.motion.duration.normal,
+    animationTimingFunction: tokens.semantic.motion.easing.easeOut,
     animationFillMode: 'both',
   }),
 
   entranceRight: style({
     animationName: keyframeAnimations.slideInFromRight,
-    animationDuration: designTokens.animation.duration.normal,
-    animationTimingFunction: designTokens.animation.easing.easeOut,
+    animationDuration: tokens.semantic.motion.duration.normal,
+    animationTimingFunction: tokens.semantic.motion.easing.easeOut,
     animationFillMode: 'both',
   }),
 
   entranceTop: style({
     animationName: keyframeAnimations.slideInFromTop,
-    animationDuration: designTokens.animation.duration.normal,
-    animationTimingFunction: designTokens.animation.easing.easeOut,
+    animationDuration: tokens.semantic.motion.duration.normal,
+    animationTimingFunction: tokens.semantic.motion.easing.easeOut,
     animationFillMode: 'both',
   }),
 
   fadeIn: style({
     animationName: keyframeAnimations.fadeIn,
-    animationDuration: designTokens.animation.duration.normal,
-    animationTimingFunction: designTokens.animation.easing.ease,
+    animationDuration: tokens.semantic.motion.duration.normal,
+    animationTimingFunction: tokens.semantic.motion.easing.standard,
     animationFillMode: 'both',
   }),
 
@@ -139,8 +139,8 @@ export const animationUtils = {
     selectors: {
       '&:active': {
         animationName: keyframeAnimations.buttonPress,
-        animationDuration: designTokens.animation.duration.fast,
-        animationTimingFunction: designTokens.animation.easing.easeInOut,
+        animationDuration: tokens.semantic.motion.duration.fast,
+        animationTimingFunction: tokens.semantic.motion.easing.easeInOut,
       },
     },
   }),
@@ -150,7 +150,7 @@ export const animationUtils = {
       '&:hover': {
         animationName: keyframeAnimations.iconBounce,
         animationDuration: '0.4s',
-        animationTimingFunction: designTokens.animation.easing.easeOut,
+        animationTimingFunction: tokens.semantic.motion.easing.easeOut,
       },
     },
   }),
@@ -160,7 +160,7 @@ export const animationUtils = {
       '&:focus-visible': {
         animationName: keyframeAnimations.glowPulse,
         animationDuration: '1.5s',
-        animationTimingFunction: designTokens.animation.easing.ease,
+        animationTimingFunction: tokens.semantic.motion.easing.standard,
         animationIterationCount: 'infinite',
       },
     },
@@ -169,7 +169,7 @@ export const animationUtils = {
 
 // Common transition presets
 export const transitions = {
-  fast: `all ${designTokens.animation.duration.fast} ${designTokens.animation.easing.easeInOut}`,
-  normal: `all ${designTokens.animation.duration.normal} ${designTokens.animation.easing.easeInOut}`,
-  slow: `all ${designTokens.animation.duration.slow} ${designTokens.animation.easing.easeInOut}`,
+  fast: `all ${tokens.semantic.motion.duration.fast} ${tokens.semantic.motion.easing.easeInOut}`,
+  normal: `all ${tokens.semantic.motion.duration.normal} ${tokens.semantic.motion.easing.easeInOut}`,
+  slow: `all ${tokens.semantic.motion.duration.slow} ${tokens.semantic.motion.easing.easeInOut}`,
 };

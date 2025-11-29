@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTimelineContext } from '../../contexts';
 import TimelineCard from '../timeline-card-content/timeline-card-content';
-import { vars } from '../../../styles/tokens.css';
+import { vars } from '../../../styles/tokens/index.css';
 
 interface NestedTimelineCardsProps {
   items: any[];
