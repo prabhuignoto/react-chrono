@@ -1,8 +1,10 @@
 /**
  * Context index file - exports the new unified context system
+ * @public
  */
 
 // New unified context system (recommended)
+/** @public */
 export {
   TimelineContextProvider,
   useTimelineContext,

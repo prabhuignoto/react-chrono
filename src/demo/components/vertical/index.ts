@@ -1,4 +1,8 @@
-// Vertical timeline components
+/**
+ * Vertical timeline components
+ * @public
+ */
+/** @public */
 export { BasicVertical } from './BasicVertical';
 export { AlternatingVertical } from './AlternatingVertical';
 export { MixedVertical } from './MixedVertical';

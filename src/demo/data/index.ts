@@ -1,4 +1,8 @@
-// Centralized data exports
+/**
+ * Centralized data exports
+ * @public
+ */
+/** @public */
 export { basicTimeline } from './basic-timeline';
 export { mixedTimeline } from './mixed-timeline';
 export { nestedTimeline } from './nested-timeline';

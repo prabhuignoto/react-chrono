@@ -1,4 +1,8 @@
-// Horizontal timeline components
+/**
+ * Horizontal timeline components
+ * @public
+ */
+/** @public */
 export { BasicHorizontal } from './BasicHorizontal';
 export { AllHorizontal } from './AllHorizontal';
 export { CardlessHorizontal } from './CardlessHorizontal';

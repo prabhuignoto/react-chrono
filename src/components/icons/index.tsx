@@ -1,3 +1,8 @@
+/**
+ * Icon components exports
+ * @public
+ */
+/** @public */
 export { default as ArrowDownIcon } from './arrow-down';
 export { default as CheckIcon } from './check';
 export { default as ChevronDown } from './chev-down';

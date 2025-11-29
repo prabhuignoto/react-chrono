@@ -22,8 +22,10 @@
  * ARIA References:
  * - WAI-ARIA 1.2 Authoring Practices Guide
  * - https://www.w3.org/WAI/ARIA/apg/
+ * @public
  */
 
+/** @public */
 export { useRovingTabIndex } from './useRovingTabIndex';
 export type {
   UseRovingTabIndexOptions,

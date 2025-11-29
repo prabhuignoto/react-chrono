@@ -1,8 +1,10 @@
 /**
  * Design System & Utilities Export
+ * @public
  */
 
 // Core design system
+/** @public */
 export { designTokens, vars } from './design-system.css';
 
 // Animation utilities
