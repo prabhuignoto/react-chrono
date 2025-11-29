@@ -52,7 +52,7 @@
 
 ## Table of Contents
 
-<details>
+<details open>
 <summary><strong>Quick Start</strong></summary>
 
 - [Installation](#installation)
@@ -61,7 +61,7 @@
 
 </details>
 
-<details>
+<details open>
 <summary><strong>Timeline Modes</strong></summary>
 
 - [Mode Comparison](#timeline-modes)
@@ -70,7 +70,7 @@
 
 </details>
 
-<details>
+<details open>
 <summary><strong>Features</strong></summary>
 
 - [Key Features](#key-features)
@@ -82,7 +82,7 @@
 
 </details>
 
-<details>
+<details open>
 <summary><strong>API & Documentation</strong></summary>
 
 - [Essential Props](#essential-props)
@@ -92,7 +92,7 @@
 
 </details>
 
-<details>
+<details open>
 <summary><strong>Development</strong></summary>
 
 - [Development Setup](#development-setup)
