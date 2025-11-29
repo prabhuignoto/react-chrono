@@ -1,9 +1,11 @@
 /**
  * Centralized export file for all hooks
  * Optimized for tree-shaking - each hook is individually exported
+ * @public
  */
 
 // Core utility hooks
+/** @public */
 export { useBackground } from './useBackground';
 export { useMeasure, useMeasureHeight } from './useMeasureHeight';
 export { useKeyHandler } from './useEscapeKey';

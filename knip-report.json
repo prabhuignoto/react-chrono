@@ -1,0 +1,19 @@
+node:path:1323
+    validateString(path, 'path');
+    ^
+
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received an instance of Object
+    at isAbsolute (node:path:1323:5)
+    at toAbsolute (file:///Users/prabhu/code/react-chrono/node_modules/.pnpm/knip@5.70.2_@types+node@24.10.1_typescript@5.9.3/node_modules/knip/dist/util/path.js:11:42)
+    at Object.resolveConfig (file:///Users/prabhu/code/react-chrono/node_modules/.pnpm/knip@5.70.2_@types+node@24.10.1_typescript@5.9.3/node_modules/knip/dist/plugins/ladle/index.js:15:50)
+    at runPlugin (file:///Users/prabhu/code/react-chrono/node_modules/.pnpm/knip@5.70.2_@types+node@24.10.1_typescript@5.9.3/node_modules/knip/dist/WorkspaceWorker.js:265:53)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async WorkspaceWorker.runPlugins (file:///Users/prabhu/code/react-chrono/node_modules/.pnpm/knip@5.70.2_@types+node@24.10.1_typescript@5.9.3/node_modules/knip/dist/WorkspaceWorker.js:314:33)
+    at async build (file:///Users/prabhu/code/react-chrono/node_modules/.pnpm/knip@5.70.2_@types+node@24.10.1_typescript@5.9.3/node_modules/knip/dist/graph/build.js:105:35)
+    at async main (file:///Users/prabhu/code/react-chrono/node_modules/.pnpm/knip@5.70.2_@types+node@24.10.1_typescript@5.9.3/node_modules/knip/dist/index.js:32:88)
+    at async run (file:///Users/prabhu/code/react-chrono/node_modules/.pnpm/knip@5.70.2_@types+node@24.10.1_typescript@5.9.3/node_modules/knip/dist/cli.js:33:91)
+    at async file:///Users/prabhu/code/react-chrono/node_modules/.pnpm/knip@5.70.2_@types+node@24.10.1_typescript@5.9.3/node_modules/knip/dist/cli.js:96:1 {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+
+Node.js v24.11.1

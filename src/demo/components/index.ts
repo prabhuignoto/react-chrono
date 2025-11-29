@@ -1,4 +1,8 @@
-// Demo components exports
+/**
+ * Demo components exports
+ * @public
+ */
+/** @public */
 export { BasicVertical } from './vertical/BasicVertical';
 export { AlternatingVertical } from './vertical/AlternatingVertical';
 export { MixedVertical } from './vertical/MixedVertical';
