@@ -623,7 +623,7 @@ React Chrono v3.0 maintains **full backward compatibility** - your existing v2.x
 - 🖼️ **Fullscreen Mode** - Cross-browser fullscreen support
 - 📌 **Sticky Toolbar** - Always-accessible controls
 
-**🔗 Complete migration guide**: [Props Reference](./PROPS-REFERENCE.md#-legacy-props-deprecated) | [Blog Post](./BLOG_V3.md#-migration-guide)
+**🔗 Complete migration guide**: [Props Reference](./PROPS-REFERENCE.md#-legacy-props-deprecated)
 
 ---
 
