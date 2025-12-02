@@ -1,5 +1,26 @@
 # Changelog
 
+## [3.3.1] - 2025-11-27
+
+### Bug Fixes
+- Fix gaps between timeline points in horizontal mode when there are few items (#582)
+
+### Features
+- Add collapsible demo sidebar (#583)
+- Add media showcase demo component
+
+### Improvements
+- Refactor JSX formatting in text-or-content component
+- Fix theme details propagation to text details section
+- Optimize README assets and images (#581)
+- Reorganize build configuration files (Vite, ESLint, TypeScript, Storybook)
+- Add BACKLOG.md for tracking future features
+
+### Chores
+- Remove obsolete configuration files and update project structure
+- Update package dependencies and snapshots
+- Clean up demo components and data files
+
 ## [3.3.0] - 2025-11-25
 
 ### Features
