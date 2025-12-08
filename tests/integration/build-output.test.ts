@@ -8,7 +8,7 @@ describe('Build Output Validation', () => {
   beforeAll(() => {
     if (!existsSync(DIST_DIR)) {
       throw new Error(
-        'dist directory does not exist. Run "pnpm build" before running integration tests.'
+        'dist directory does not exist. Run "bun run build" before running integration tests.'
       );
     }
   });

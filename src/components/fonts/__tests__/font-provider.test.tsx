@@ -145,9 +145,8 @@ describe('FontProvider', () => {
   });
 
   it('should update fonts when config changes', async () => {
-    const { loadGoogleFonts, generateFontCssVars } = await import(
-      '../google-fonts'
-    );
+    const { loadGoogleFonts, generateFontCssVars } =
+      await import('../google-fonts');
 
     const firstConfig: GoogleFontsConfig = {
       fontFamily: 'Roboto',

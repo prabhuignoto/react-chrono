@@ -10,11 +10,10 @@ export type FullscreenButtonSize = 'small' | 'medium' | 'large';
  * Props interface for the FullscreenButton component
  * Extends standard HTML button attributes for maximum flexibility
  */
-export interface FullscreenButtonProps
-  extends Omit<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    'onClick' | 'onKeyDown'
-  > {
+export interface FullscreenButtonProps extends Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'onClick' | 'onKeyDown'
+> {
   /**
    * Whether the element is currently in fullscreen mode
    * @default false

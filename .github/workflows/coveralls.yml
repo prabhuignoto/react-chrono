@@ -16,24 +16,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          version: 10.15.1
+          bun-version: latest
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'pnpm'
+          cache: 'bun'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Run tests
-        run: pnpm test -- --run
+        run: bun test -- --run
 
       - name: Upload coverage report
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_SECRET }}
-        run: pnpm run coveralls
+        run: bun run coveralls

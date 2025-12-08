@@ -19,25 +19,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          version: 10.15.1
+          bun-version: latest
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'pnpm'
+          cache: 'bun'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Cache Snyk cache folder
         uses: actions/cache@v4
         with:
           path: ~/.cache/snyk
-          key: ${{ runner.os }}-snyk-${{ hashFiles('pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-snyk-${{ hashFiles('bun.lock') }}
           restore-keys: |
             ${{ runner.os }}-snyk-
 

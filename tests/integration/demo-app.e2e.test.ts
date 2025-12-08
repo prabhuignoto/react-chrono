@@ -10,13 +10,13 @@ const DEMO_APP_DIR = resolve(__dirname, './demo-app');
 test.beforeAll(async () => {
   // Build the library first
   console.log('Building react-chrono library...');
-  await execAsync('pnpm build', {
+  await execAsync('bun run build', {
     cwd: resolve(__dirname, '../../'),
   });
 
   // Install dependencies in demo app
   console.log('Installing demo app dependencies...');
-  await execAsync('pnpm install --no-frozen-lockfile', {
+  await execAsync('bun install', {
     cwd: DEMO_APP_DIR,
   });
 });
@@ -138,7 +138,7 @@ test.describe('Demo App Integration Test - Build Validation', () => {
 
   test('should build demo app successfully with built package', async () => {
     // Build the demo app using the built react-chrono package
-    const { stderr } = await execAsync('pnpm build', {
+    const { stderr } = await execAsync('bun run build', {
       cwd: DEMO_APP_DIR,
     });
 

@@ -120,8 +120,8 @@ npm install react-chrono
 # Using yarn
 yarn add react-chrono
 
-# Using pnpm (recommended)
-pnpm add react-chrono
+# Using bun (recommended)
+bun add react-chrono
 ```
 
 **Requirements**: React 18.2+ or 19+ | Node.js 22+ | TypeScript 4.0+ (optional) | Modern browsers
@@ -671,7 +671,7 @@ Auto card height, content alignment, Google Fonts, i18n support, fullscreen mode
 ### Prerequisites
 
 - Node.js 22+
-- pnpm (recommended) or npm
+- bun (recommended) or npm
 
 ### Initial Setup
 
@@ -681,23 +681,23 @@ git clone https://github.com/prabhuignoto/react-chrono.git
 cd react-chrono
 
 # Install dependencies
-pnpm install
+bun install
 ```
 
 ### Development Commands
 
 ```bash
 # Start development server with hot reload
-pnpm run dev
+bun run dev
 
 # Build for production
-pnpm run build
+bun run build
 
 # Run unit tests
-pnpm test
+bun test
 
 # Lint and format code
-pnpm run clean
+bun run clean
 ```
 
 ### Testing Framework
@@ -716,8 +716,8 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 
 - [ ] Fork the repo and create a feature branch
 - [ ] Write tests for new features  
-- [ ] Ensure all tests pass: `pnpm run find-bugs`
-- [ ] Follow our code style: `pnpm run clean`
+- [ ] Ensure all tests pass: `bun run find-bugs`
+- [ ] Follow our code style: `bun run clean`
 - [ ] Update documentation if needed
 - [ ] Submit a pull request
 
