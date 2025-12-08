@@ -41,7 +41,7 @@ jobs:
             ${{ runner.os }}-build-
 
       - name: Run unit tests (Vitest)
-        run: bun test -- --run
+        run: bun run test
         env:
           CI: true
 
