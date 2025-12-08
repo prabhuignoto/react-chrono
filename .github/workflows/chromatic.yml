@@ -33,7 +33,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'bun'
 
       - name: Cache Storybook build
         uses: actions/cache@v4
