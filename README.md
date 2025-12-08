@@ -246,7 +246,7 @@ The new grouped API organizes configuration into logical sections:
 />
 ```
 
-> **💡 Try it live**: Browse interactive examples in [Storybook](https://691574b1d6fa2f35b1f812a9-qukrtwoznl.chromatic.com/?path=/story/layout-modes-vertical--basic)
+> **💡 Try it live**: Browse interactive examples in [Storybook](https://691574b1d6fa2f35b1f812a9-xcdgzhacyn.chromatic.com/?path=/story/layout-modes-vertical--basic)
 
 ---
 
