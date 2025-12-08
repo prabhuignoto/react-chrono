@@ -34,16 +34,16 @@ End-to-end test using Playwright that:
 
 ```bash
 # Run build validation tests (Vitest)
-pnpm vitest run tests/integration/build-output.test.ts
+bun vitest run tests/integration/build-output.test.ts
 
 # Run E2E integration tests (Playwright - validates rendering and CSS)
-pnpm test:integration
+bun test:integration
 
 # Run E2E tests with UI mode (interactive debugging)
-pnpm test:integration:ui
+bun test:integration:ui
 
 # Run E2E tests in headed mode (visible browser)
-pnpm test:integration:headed
+bun test:integration:headed
 ```
 
 ## Demo App
@@ -59,19 +59,19 @@ The `demo-app/` directory contains a minimal React application that imports `rea
 
 ```bash
 # Build the library
-pnpm build
+bun run build
 
 # Navigate to demo app
 cd tests/integration/demo-app
 
 # Install dependencies
-pnpm install
+bun install
 
 # Start dev server
-pnpm dev
+bun dev
 
 # Build demo app
-pnpm build
+bun run build
 ```
 
 ## Why These Tests Matter

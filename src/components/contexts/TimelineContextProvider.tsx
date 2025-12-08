@@ -152,9 +152,7 @@ export interface TimelineMemoizedObjects {
  * Combined context interface
  */
 export interface TimelineContextValue
-  extends TimelineStaticConfig,
-    TimelineDynamicState,
-    TimelineMemoizedObjects {
+  extends TimelineStaticConfig, TimelineDynamicState, TimelineMemoizedObjects {
   // Computed values
   computedCardHeight: number | 'auto';
   computedActiveItemIndex: number;
@@ -179,8 +177,10 @@ const TimelineContext = createContext<TimelineContextValue | null>(null);
 // PROVIDER PROPS AND COMPONENT
 // ==========================================
 
-export interface TimelineContextProviderProps
-  extends Omit<Partial<TimelinePropsModel>, 'children'> {
+export interface TimelineContextProviderProps extends Omit<
+  Partial<TimelinePropsModel>,
+  'children'
+> {
   children: React.ReactNode;
   toolbarSearchConfig?: {
     width?: string;

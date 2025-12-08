@@ -24,31 +24,30 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          version: 10.15.1
+          bun-version: latest
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'pnpm'
 
       - name: Cache Storybook build
         uses: actions/cache@v4
         with:
           path: storybook-static
-          key: ${{ runner.os }}-storybook-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('stories/**', 'src/**/*.tsx', 'src/**/*.ts', '.storybook/**') }}
+          key: ${{ runner.os }}-storybook-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('stories/**', 'src/**/*.tsx', 'src/**/*.ts', '.storybook/**') }}
           restore-keys: |
-            ${{ runner.os }}-storybook-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            ${{ runner.os }}-storybook-${{ hashFiles('**/bun.lock') }}-
             ${{ runner.os }}-storybook-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Build Storybook
-        run: pnpm run build-storybook
+        run: bun run build-storybook
 
       - name: Run Chromatic
         uses: chromaui/action@v1

@@ -15,7 +15,7 @@ const SERVER_IGNORED_FILES = [
   'public',
   'package.json',
   'package-lock.json',
-  'pnpm-lock.yaml',
+  'bun.lock',
   'tsconfig.json',
   'vite.config.mts',
   'vite.site.config.mts',
