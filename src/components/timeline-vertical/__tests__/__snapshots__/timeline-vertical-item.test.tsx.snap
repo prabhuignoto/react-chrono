@@ -16,7 +16,7 @@ exports[`Timeline vertical item > Should match snapshot 1`] = `
       style="width: 90%; justify-content: flex-start; order: 3; display: flex; flex-direction: column; flex-shrink: 0; flex-grow: 0; padding-left: 0.75rem; padding-right: 0.75rem;"
     >
       <div
-        style="width: fit-content; max-width: 100%; padding: var(--semantic-spacing-xs__15akvq03p) var(--semantic-spacing-sm__15akvq03q); border-radius: var(--semantic-borderRadius-lg__15akvq04j); background: var(--semantic-color-background-elevated__15akvq02o); border: 1px solid var(--semantic-color-border-default__15akvq032); box-shadow: var(--semantic-shadow-card__15akvq04m); margin-bottom: var(--semantic-spacing-md__15akvq03r); align-self: flex-start;"
+        class="timeline-vertical_timelineItemTitleWrapper__mb2y38k"
       >
         <div
           class="timeline-item-title title timeline-card-content_cardTitleRecipe__chzdnoc timeline-card-content_cardTitleBase__chzdno9 recipes_text__etntiu2h recipes_text_variant_h2__etntiu2j recipes__etntiu2a sprinkles_fontSize_heading2_mobile__1v4ezef90 sprinkles_fontWeight_semibold_mobile__1v4ezefa0 recipes_text_color_primary__etntiu2n recipes_text_align_left__etntiu2s recipes__etntiu2e sprinkles_textAlign_left_mobile__1v4ezefa6 recipes_text_truncate_false__etntiu2w timeline-card-content_cardTitleRecipe_active_false__chzdnoe timeline-card-content_cardTitleRecipe_hasMarginBottom_false__chzdnog timeline-card-title_titleWrapper__1m05k8t1 timeline-card-title__1m05k8t0 sprinkles_paddingX_xs_mobile__1v4ezef3f sprinkles_paddingY_xs_mobile__1v4ezef40"
