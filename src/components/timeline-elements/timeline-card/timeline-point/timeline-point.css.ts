@@ -201,8 +201,18 @@ export const timelinePoint = recipe({
     hasIcon: {
       true: {
         padding: tokens.semantic.spacing.xs,
-        backgroundColor: 'transparent',
-        border: `2px solid ${tokens.component.timeline.point.color.active}`,
+        overflow: 'visible',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        zIndex: 2,
+        selectors: {
+          // Hide ripple effect when using icons
+          '&::before': {
+            display: 'none',
+          },
+        },
       },
       false: {},
     },
@@ -233,6 +243,11 @@ export const timelinePoint = recipe({
         transform: 'rotate(45deg) scale(1.2)',
         animation: `${activePointPulse} 2s infinite`,
       },
+    },
+    // Diamond with icon (non-active)
+    {
+      variants: { shape: 'diamond', hasIcon: true },
+      style: {},
     },
     // Active diamond without icon
     {
@@ -266,20 +281,6 @@ export const timelinePoint = recipe({
   },
 });
 
-// Icon styling within timeline points
-globalStyle(`${timelinePointBase} img`, {
-  maxWidth: '90%',
-  maxHeight: '90%',
-  objectFit: 'contain',
-  borderRadius: 'inherit',
-});
-
-globalStyle(`${timelinePointBase} svg`, {
-  maxWidth: '80%',
-  maxHeight: '80%',
-  fill: 'currentColor',
-});
-
 // Enhanced focus styles for accessibility
 globalStyle(`${timelinePointBase}:focus-visible`, {
   outline: `3px solid ${tokens.semantic.color.border.interactive}`,
@@ -294,6 +295,46 @@ export const loadingPoint = style([
     animation: `${animations.pulse} 1.5s ease-in-out infinite`,
   },
 ]);
+
+// Icon styling for horizontal timeline points
+// Target img and svg within elements with using-icon class
+// Using shapeWrapper as parent to scope the styles
+globalStyle(`${shapeWrapper} button.using-icon img`, {
+  maxWidth: '70%',
+  maxHeight: '70%',
+  width: 'auto',
+  height: 'auto',
+  minWidth: 0,
+  minHeight: 0,
+  objectFit: 'contain',
+  borderRadius: 'inherit',
+  display: 'block',
+  position: 'relative',
+  zIndex: 2,
+  visibility: 'visible',
+  opacity: 1,
+});
+
+globalStyle(`${shapeWrapper} button.using-icon svg`, {
+  width: '70%',
+  height: '70%',
+  maxWidth: '70%',
+  maxHeight: '70%',
+  minWidth: 0,
+  minHeight: 0,
+  fill: 'currentColor',
+  display: 'block',
+  flexShrink: 0,
+  position: 'relative',
+  zIndex: 2,
+  visibility: 'visible',
+  opacity: 1,
+});
+
+// Diamond shape icon counter-rotation
+globalStyle(`${shapeWrapper} button.diamond.using-icon svg, ${shapeWrapper} button.diamond.using-icon img`, {
+  transform: 'rotate(-45deg)',
+});
 
 // Export types for new system
 export type TimelinePointVariants = Parameters<typeof timelinePoint>[0];

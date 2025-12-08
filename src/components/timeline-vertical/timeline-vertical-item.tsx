@@ -8,13 +8,13 @@ import {
   ReactElement,
 } from 'react';
 import { useTimelineContext } from '../contexts';
-import { tokens } from '../../styles/tokens/index.css';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
 import { TimelinePoint } from './timeline-point';
 import {
   timelineCardContentVisible,
   timelineCardContentWrapper,
+  timelineItemTitleWrapper,
   verticalItemWrapper,
   verticalItemWrapperNested,
 } from './timeline-vertical.css';
@@ -304,19 +304,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
         }}
       >
         {title && !isNested && (
-          <div
-            style={{
-              width: 'fit-content',
-              maxWidth: '100%',
-              padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
-              borderRadius: tokens.semantic.borderRadius.lg,
-              background: tokens.semantic.color.background.elevated,
-              border: `1px solid ${tokens.semantic.color.border.default}`,
-              boxShadow: tokens.semantic.shadow.card,
-              marginBottom: tokens.semantic.spacing.md,
-              alignSelf: 'flex-start',
-            }}
-          >
+          <div className={timelineItemTitleWrapper}>
             <TimelineItemTitle
               title={title}
               theme={theme}
