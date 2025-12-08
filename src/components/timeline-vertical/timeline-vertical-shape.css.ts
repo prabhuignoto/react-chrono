@@ -158,7 +158,7 @@ export const timelinePointTitleWrapper = style({
   borderRadius: tokens.semantic.borderRadius.md,
   background: tokens.semantic.color.background.elevated,
   border: `1px solid ${tokens.semantic.color.border.default}`,
-  boxShadow: tokens.semantic.shadow.sm,
+  boxShadow: tokens.semantic.shadow.card,
   maxWidth: '200px',
   textAlign: 'center',
   whiteSpace: 'nowrap',
