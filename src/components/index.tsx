@@ -258,13 +258,9 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
   const [timeLineItems, setTimeLineItems] = useState<TimelineItemModel[]>([]);
   const timeLineItemsRef = useRef<TimelineItemModel[]>([]);
   const [slideShowActive, setSlideShowActive] = useState(false);
-  // Don't auto-highlight first item in vertical modes unless explicitly set
+  // Auto-select first item when activeItemIndex is not provided
   const [activeTimelineItem, setActiveTimelineItem] = useState(
-    activeItemIndex !== undefined
-      ? activeItemIndex
-      : mode === 'vertical' || mode === 'alternating'
-        ? undefined
-        : 0,
+    activeItemIndex !== undefined ? activeItemIndex : 0,
   );
 
   // Track the previous prop value to avoid circular updates
@@ -296,7 +292,7 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
           return {
             ...item,
             _dayjs: dayjs(item.date),
-            active: activeItemIndex !== undefined && index === activeItemIndex,
+            active: index === (activeTimelineItem ?? 0),
             id,
             hasNestedItems,
             items:
@@ -321,12 +317,12 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
       ).length;
 
       return Array.from({ length: itemLength }).map((_, index) => ({
-        active: index === activeItemIndex,
+        active: index === (activeTimelineItem ?? 0),
         id: getUniqueID(),
         visible: true,
       }));
     },
-    [activeItemIndex, titleDateFormat, children],
+    [activeTimelineItem, titleDateFormat, children],
   );
 
   // Optimize updateItems function - only for truly appending items
@@ -513,15 +509,8 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
       } else {
         // For replaced items or initial load, respect the initial activeItemIndex setting
         const initialIndex =
-          activeItemIndex !== undefined
-            ? activeItemIndex
-            : mode === 'vertical' || mode === 'alternating'
-              ? undefined
-              : 0;
-        validActiveIndex =
-          initialIndex !== undefined
-            ? Math.min(initialIndex, newItems.length - 1)
-            : undefined;
+          activeItemIndex !== undefined ? activeItemIndex : 0;
+        validActiveIndex = Math.min(initialIndex, newItems.length - 1);
       }
 
       // Ensure validActiveIndex is within bounds
@@ -624,6 +613,25 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
       }
     }
   }, [activeItemIndex, handleTimelineUpdate]);
+
+  // Sync items' active property when activeTimelineItem is auto-set
+  useEffect(() => {
+    // Only sync if activeTimelineItem is set and items exist
+    // Skip if this was triggered by activeItemIndex prop change (handled separately)
+    if (
+      activeTimelineItem !== undefined &&
+      timeLineItems.length > 0 &&
+      activeItemIndex === undefined
+    ) {
+      // Check if items need active property update
+      const hasActiveItem = timeLineItems.some(
+        (item, idx) => item.active && idx === activeTimelineItem,
+      );
+      if (!hasActiveItem) {
+        handleTimelineUpdate(activeTimelineItem);
+      }
+    }
+  }, [activeTimelineItem, timeLineItems.length, activeItemIndex, handleTimelineUpdate]);
 
   const restartSlideShow = useCallback(() => {
     handleTimelineUpdate(-1);
