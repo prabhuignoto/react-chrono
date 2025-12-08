@@ -51,7 +51,7 @@
     "snyk": "snyk test",
     "dev": "vite --config config/build/vite.site.config.mts --host",
     "clean": "npx concurrently \"bun format\" \"bun lint:all\"",
-    "test": "vitest --config config/build/vitest.config.mts",
+    "test": "vitest --config config/build/vitest.config.mts --update",
     "test-ui": "vitest --config config/build/vitest.config.mts --ui",
     "test:perf": "vitest --config config/build/vitest.config.mts benchmark-tests/performance.test.tsx",
     "test:perf:setup": "./benchmark-tests/setup.sh",

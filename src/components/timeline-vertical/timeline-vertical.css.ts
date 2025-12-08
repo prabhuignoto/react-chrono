@@ -150,7 +150,7 @@ export const timelineCardContentWrapper = style({
   visibility: 'hidden',
   position: 'relative',
   display: 'flex',
-  alignItems: 'center',
+  // alignItems: 'center',
   minHeight: '100%', // Ensure cards stretch to full container height
   paddingTop: '0.5rem',
   paddingBottom: '0.5rem',
@@ -174,10 +174,22 @@ export const timelineTitleWrapper = style([
     minWidth: 0,
     overflow: 'hidden',
     minHeight: '100%', // Ensure titles stretch to full container height
-    paddingTop: '0.5rem',
-    paddingBottom: '0.5rem',
+    // Remove padding that could affect vertical alignment
+    // Vertical centering is handled by alignItems: center
   },
 ]);
+
+export const timelineItemTitleWrapper = style({
+  width: 'fit-content',
+  maxWidth: '100%',
+  padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
+  borderRadius: tokens.semantic.borderRadius.lg,
+  background: tokens.semantic.color.background.elevated,
+  border: `1px solid ${tokens.semantic.color.border.default}`,
+  boxShadow: tokens.semantic.shadow.card,
+  marginBottom: tokens.semantic.spacing.md,
+  alignSelf: 'flex-start',
+});
 
 // Remove focus ring from the list item itself
 // The focus ring should only appear on the inner card content, not the wrapper

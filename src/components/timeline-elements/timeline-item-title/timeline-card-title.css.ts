@@ -71,7 +71,7 @@ export const titleWrapper = style([
 
     // Hover effect to show full title in tooltip (browser native)
     ':hover': {
-      cursor: 'help',
+      cursor: 'default',
     },
   },
 ]);

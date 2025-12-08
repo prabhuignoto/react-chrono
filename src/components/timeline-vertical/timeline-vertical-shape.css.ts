@@ -5,6 +5,7 @@ import { tokens } from '../../styles/tokens/index.css';
 export const timelinePointWrapper = style({
   alignItems: 'center',
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'center',
   position: 'relative',
   height: '100%',
@@ -146,3 +147,30 @@ globalStyle(
     transform: 'rotate(-45deg)', // Counter-rotate the icon inside rotated diamond
   },
 );
+
+export const timelinePointTitleWrapper = style({
+  position: 'absolute',
+  bottom: '100%',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  zIndex: 4,
+  // border: `1px solid ${tokens.semantic.color.border.default}`,
+  padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
+  borderRadius: tokens.semantic.borderRadius.md,
+  background: tokens.semantic.color.background.elevated,
+  // border: `1px solid ${tokens.semantic.color.border.default}`,
+  // boxShadow: tokens.semantic.shadow.card,
+  textAlign: 'center',
+  whiteSpace: 'nowrap',
+  fontSize: tokens.semantic.typography.fontSize.body,
+  '@media': {
+    '(max-width: 768px)': {
+      padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.xs}`,
+      fontSize: tokens.semantic.typography.fontSize.sm,
+    },
+    '(max-width: 480px)': {
+      padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.xs}`,
+      fontSize: tokens.semantic.typography.fontSize.caption,
+    },
+  },
+});

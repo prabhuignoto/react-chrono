@@ -162,7 +162,6 @@ const TimelinePoint: FunctionComponent<TimelinePointModel> = memo(
       );
     }, [active, buttonTexts]);
 
-    // Render the timeline point structure
     return (
       <div
         className={`${className} ${timelinePointWrapper}`}
