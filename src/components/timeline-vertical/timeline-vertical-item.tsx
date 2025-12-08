@@ -8,13 +8,13 @@ import {
   ReactElement,
 } from 'react';
 import { useTimelineContext } from '../contexts';
+import { tokens } from '../../styles/tokens/index.css';
 import TimelineCard from '../timeline-elements/timeline-card-content/timeline-card-content';
 import TimelineItemTitle from '../timeline-elements/timeline-item-title/timeline-card-title';
 import { TimelinePoint } from './timeline-point';
 import {
   timelineCardContentVisible,
   timelineCardContentWrapper,
-  timelineTitleWrapper,
   verticalItemWrapper,
   verticalItemWrapperNested,
 } from './timeline-vertical.css';
@@ -72,7 +72,8 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     timelinePointDimension,
     disableClickOnCircle,
     disableInteraction,
-    isMobile, // Use responsive detection from context
+    isMobile,
+    isDarkMode,
   } = useTimelineContext();
 
   // Helper functions for layout calculations
@@ -80,11 +81,8 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     if (alternateCards) {
       return isMobile ? '75%' : '37.5%';
     }
-    if (!title) {
-      return '95%';
-    }
-    return isMobile ? '75%' : '85%';
-  }, [alternateCards, isMobile, title]);
+    return isMobile ? '75%' : '90%';
+  }, [alternateCards, isMobile]);
 
   const calculateJustifyContent = useCallback(() => {
     const flip = !alternateCards && flipLayout;
@@ -107,25 +105,37 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     return 3;
   }, [alternateCards, flipLayout, className]);
 
-  const calculateTitleOrder = useCallback(() => {
-    if (alternateCards) {
-      // Alternating mode: left side = title last (3), right side = title first (1)
-      return className === 'left' ? 3 : 1;
-    }
-
-    if (flipLayout) {
-      // Vertical flip mode: title last (3)
-      return 3;
-    }
-
-    // Standard vertical mode: title first (1)
-    return 1;
-  }, [alternateCards, flipLayout, className]);
 
   const calculatePointOrder = useCallback(() => {
-    // Point is always in the middle (order 2) for all modes
     return 2;
   }, []);
+
+  const calculateEmptySpaceOrder = useCallback(() => {
+    if (alternateCards) {
+      return className === 'left' ? 3 : 1;
+    }
+    return null;
+  }, [alternateCards, className]);
+
+  const EmptySpace = useMemo(() => {
+    if (!alternateCards || isNested) return null;
+    
+    const emptySpaceOrder = calculateEmptySpaceOrder();
+    if (emptySpaceOrder === null) return null;
+    
+    return (
+      <div
+        style={{
+          order: emptySpaceOrder,
+          width: '37.5%',
+          minHeight: '100%',
+          flexShrink: 0,
+          flexGrow: 0,
+        }}
+        aria-hidden="true"
+      />
+    );
+  }, [alternateCards, isNested, calculateEmptySpaceOrder]);
 
   /**
    * Callback handler triggered by the TimelinePoint when it becomes active.
@@ -149,77 +159,6 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     setTimeout(() => handleOnActive(0), 100);
   }, [handleOnActive]);
 
-  // Memoized title display configuration
-  const titleConfig = useMemo(
-    () => ({
-      display:
-        (!title && mode === 'VERTICAL') || (isMobile && !alternateCards)
-          ? 'none'
-          : 'flex',
-      width: alternateCards ? '37.5%' : '10%',
-      // Fix text alignment for alternating mode:
-      // - Left side (title appears last): align left
-      // - Right side (title appears first): align right
-      textAlign: alternateCards
-        ? className === 'left'
-          ? 'left'
-          : 'right'
-        : ('right' as 'left' | 'right'),
-      align: (flipLayout && !alternateCards ? 'left' : 'right') as
-        | 'left'
-        | 'right',
-    }),
-    [title, mode, alternateCards, flipLayout, className, isMobile],
-  );
-
-  const titleClassName = useMemo(
-    () => `${timelineTitleWrapper} ${className} ${flipLayout ? 'flipped' : ''}`,
-    [className, flipLayout],
-  );
-
-  const Title = useMemo(
-    () => (
-      <div
-        className={titleClassName}
-        data-mode={mode}
-        style={{
-          display: titleConfig.display,
-          width: titleConfig.width,
-          order: calculateTitleOrder(),
-          // textAlign: titleConfig.textAlign,
-          // Add proper spacing for title
-          paddingLeft: alternateCards ? '0' : '0.75rem',
-          paddingRight: alternateCards ? '0' : '0.75rem',
-          marginRight: alternateCards && className === 'right' ? '1rem' : '0',
-          marginLeft: alternateCards && className === 'left' ? '1rem' : '0',
-        }}
-      >
-        <TimelineItemTitle
-          title={title}
-          theme={theme}
-          align={titleConfig.textAlign}
-          {...(active !== undefined
-            ? { active: active && !disableInteraction }
-            : {})}
-          {...pickDefined({
-            classString: classNames?.title,
-          })}
-        />
-      </div>
-    ),
-    [
-      titleClassName,
-      mode,
-      titleConfig.textAlign,
-      title,
-      active,
-      disableInteraction,
-      classNames?.title,
-      calculateTitleOrder,
-      alternateCards,
-      className,
-    ],
-  );
 
   /**
    * Memoized CSS classes for the main VerticalItemWrapper.
@@ -267,6 +206,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
         lineWidth,
         disableClickOnCircle,
         cardLess,
+        isNested,
       }),
     }),
     [
@@ -284,6 +224,9 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       disableClickOnCircle,
       cardLess,
       isMobile,
+      title,
+      theme,
+      isNested,
     ],
   );
 
@@ -296,28 +239,19 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           justifyContent: 'center',
           alignItems: 'stretch',
           minHeight: '100%',
-          width: alternateCards ? '10%' : '10%',
+          width: '10%',
           position: 'relative',
           zIndex: -1,
-          // Add proper spacing margins
-          marginLeft: alternateCards ? '1rem' : '0.75rem',
-          marginRight: alternateCards ? '1rem' : '0.75rem',
+          flexShrink: 0,
+          flexGrow: 0,
         }}
       >
         <TimelinePoint {...timelinePointProps} />
       </div>
     ),
-    [timelinePointProps, calculatePointOrder, alternateCards],
+    [timelinePointProps, calculatePointOrder],
   );
 
-  /**
-   * Determines if the title section should be rendered.
-   * Show title when there is a title text and it's not nested.
-   */
-  const canShowTitle = useMemo(() => {
-    // Show title if it exists and it's not a nested component
-    return !!title && !isNested;
-  }, [title, isNested]);
 
   // Get a readable title for screen readers
   const accessibleTitle = useMemo(() => {
@@ -354,9 +288,6 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       onKeyDown={rovingProps?.onKeyDown}
       onFocus={rovingProps?.onFocus}
     >
-      {/* Conditionally render the Title */}
-      {canShowTitle ? Title : null}
-
       {/* Wrapper for the card content */}
       <div
         className={`${timelineCardContentWrapper} ${contentClass} ${visible ? timelineCardContentVisible : ''}`}
@@ -364,23 +295,41 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           width: calculateCardWidth(),
           justifyContent: calculateJustifyContent(),
           order: calculateCardOrder(),
-          // Add proper spacing for card content
+          display: 'flex',
+          flexDirection: 'column',
+          flexShrink: 0,
+          flexGrow: 0,
           paddingLeft: alternateCards ? '0' : '0.75rem',
           paddingRight: alternateCards ? '0' : '0.75rem',
-          marginLeft:
-            alternateCards && className === 'left'
-              ? '0'
-              : alternateCards && className === 'right'
-                ? '1rem'
-                : '0',
-          marginRight:
-            alternateCards && className === 'right'
-              ? '0'
-              : alternateCards && className === 'left'
-                ? '1rem'
-                : '0',
         }}
       >
+        {title && !isNested && (
+          <div
+            style={{
+              width: 'fit-content',
+              maxWidth: '100%',
+              padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
+              borderRadius: tokens.semantic.borderRadius.lg,
+              background: tokens.semantic.color.background.elevated,
+              border: `1px solid ${tokens.semantic.color.border.default}`,
+              boxShadow: tokens.semantic.shadow.card,
+              marginBottom: tokens.semantic.spacing.md,
+              alignSelf: 'flex-start',
+            }}
+          >
+            <TimelineItemTitle
+              title={title}
+              theme={theme}
+              align="left"
+              {...(active !== undefined
+                ? { active: active && !disableInteraction }
+                : {})}
+              {...pickDefined({
+                classString: classNames?.title,
+              })}
+            />
+          </div>
+        )}
         {!cardLess && (
           <TimelineCard
             branchDir={className}
@@ -409,6 +358,9 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           />
         )}
       </div>
+
+      {/* Empty space for alternating mode to balance layout after removing title column */}
+      {EmptySpace}
 
       {/* Conditionally render the Timeline Point (hidden for nested items) */}
       {!isNested ? TimelinePointMemo : null}

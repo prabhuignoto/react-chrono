@@ -23,7 +23,14 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
   align,
   classString,
 }: TitleModel) => {
+  const { mode } = useTimelineContext();
   const TITLE_CLASS = 'timeline-item-title'; // Base class name for the title
+
+  // Determine if margin-bottom should be applied (only for horizontal modes)
+  const isHorizontalMode = useMemo(
+    () => mode === 'HORIZONTAL' || mode === 'HORIZONTAL_ALL',
+    [mode],
+  );
 
   // Computed class name for the title, combining base class, active state, and additional classes
   const titleClass = useMemo(
@@ -32,10 +39,10 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
         TITLE_CLASS,
         active ? 'active' : '',
         classString,
-        cardTitleRecipe({ active: !!active }),
+        cardTitleRecipe({ active: !!active, hasMarginBottom: isHorizontalMode }),
         titleWrapper, // Add the base CSS class that includes Google Fonts styling
       ),
-    [active, classString],
+    [active, classString, isHorizontalMode],
   );
 
   return (

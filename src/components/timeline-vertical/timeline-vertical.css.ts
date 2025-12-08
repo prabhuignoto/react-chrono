@@ -150,7 +150,7 @@ export const timelineCardContentWrapper = style({
   visibility: 'hidden',
   position: 'relative',
   display: 'flex',
-  alignItems: 'center',
+  // alignItems: 'center',
   minHeight: '100%', // Ensure cards stretch to full container height
   paddingTop: '0.5rem',
   paddingBottom: '0.5rem',
@@ -174,8 +174,8 @@ export const timelineTitleWrapper = style([
     minWidth: 0,
     overflow: 'hidden',
     minHeight: '100%', // Ensure titles stretch to full container height
-    paddingTop: '0.5rem',
-    paddingBottom: '0.5rem',
+    // Remove padding that could affect vertical alignment
+    // Vertical centering is handled by alignItems: center
   },
 ]);
 

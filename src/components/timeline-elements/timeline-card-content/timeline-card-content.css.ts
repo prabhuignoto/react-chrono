@@ -228,7 +228,6 @@ export const cardTitleRecipe = recipe({
     {
       color: tokens.semantic.color.text.primary,
       fontSize: '20px',
-      marginBottom: tokens.semantic.spacing.md,
     },
   ],
   variants: {
@@ -236,8 +235,12 @@ export const cardTitleRecipe = recipe({
       true: { color: tokens.semantic.color.interactive.primary },
       false: {},
     },
+    hasMarginBottom: {
+      true: { marginBottom: tokens.semantic.spacing.md },
+      false: {},
+    },
   },
-  defaultVariants: { active: false },
+  defaultVariants: { active: false, hasMarginBottom: false },
 });
 
 export const cardSubTitle = style([
