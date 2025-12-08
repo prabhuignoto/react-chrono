@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.3.2] - 2025-12-08
+
+### Features
+- Auto-select-first item in Horizontal mode (#593)
+
+### Improvements
+- Show timeline titles above the timeline card in vertical modes for better UX
+
+### Infrastructure
+- Migrate from pnpm to Bun (#590)
+- Update GitHub Actions workflows for improved caching and dependency management
+
 ## [3.3.1] - 2025-11-27
 
 ### Bug Fixes
