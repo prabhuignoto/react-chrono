@@ -81,7 +81,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     if (alternateCards) {
       return isMobile ? '75%' : '37.5%';
     }
-    return isMobile ? '75%' : '90%';
+    return isMobile ? '75%' : '85%';
   }, [alternateCards, isMobile]);
 
   const calculateJustifyContent = useCallback(() => {
@@ -301,10 +301,18 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           flexGrow: 0,
           paddingLeft: alternateCards ? '0' : '0.75rem',
           paddingRight: alternateCards ? '0' : '0.75rem',
+          // In flip mode, add margin-left: auto to push card content to the right
+          ...((!alternateCards && flipLayout) ? { marginLeft: 'auto' } : {}),
         }}
       >
         {title && !isNested && (
-          <div className={timelineItemTitleWrapper}>
+          <div 
+            className={timelineItemTitleWrapper}
+            style={{
+              // In flip mode, set align-self to flex-end
+              ...((!alternateCards && flipLayout) ? { alignSelf: 'flex-end' } : {}),
+            }}
+          >
             <TimelineItemTitle
               title={title}
               theme={theme}

@@ -1,5 +1,6 @@
 const postcssPresetEnv = require('postcss-preset-env');
 const autoprefixer = require('autoprefixer');
+const path = require('path');
 
 /** @type {import('tailwindcss').Config} */
 const tailwindPlugin = require('@tailwindcss/postcss');
@@ -9,7 +10,7 @@ const cssnano = require('cssnano');
 module.exports = {
   plugins: [
     tailwindPlugin({
-      config: './tailwind.config.js',
+      config: path.join(__dirname, 'tailwind.config.js'),
     }),
     autoprefixer(),
     postcssPresetEnv({

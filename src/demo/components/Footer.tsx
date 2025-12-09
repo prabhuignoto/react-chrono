@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
           {/* Brand Section */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-electric-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">⧖</span>
               </div>
               <h3 className="text-xl font-bold">React Chrono</h3>
@@ -118,7 +118,7 @@ const Footer: React.FC = () => {
               href="https://github.com/prabhuignoto" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-indigo-400 hover:text-indigo-300 transition-colors"
+              className="text-electric-400 hover:text-electric-300 transition-colors"
             >
               Prabhu Murthy
             </a>
