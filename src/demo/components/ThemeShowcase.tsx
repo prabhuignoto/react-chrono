@@ -154,10 +154,10 @@ export const ThemeShowcase: React.FC = () => {
       <div className="space-y-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Modern Minimal Theme */}
-          <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
-            <div className="p-4 border-b bg-gray-50">
-              <h3 className="font-semibold text-gray-900">Modern Minimal</h3>
-              <p className="text-sm text-gray-600 mt-1">Clean and professional</p>
+          <div className="bg-white rounded-lg border border-electric-200 shadow-sm overflow-hidden">
+            <div className="p-4 border-b bg-electric-50">
+              <h3 className="font-semibold text-electric-700">Modern Minimal</h3>
+              <p className="text-sm text-electric-600 mt-1">Clean and professional</p>
             </div>
             <div style={{ minHeight: '300px', maxHeight: '400px', padding: '10px', overflow: 'hidden' }}>
               <Chrono
@@ -171,10 +171,10 @@ export const ThemeShowcase: React.FC = () => {
           </div>
 
           {/* Vibrant Theme */}
-          <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
-            <div className="p-4 border-b bg-gray-50">
-              <h3 className="font-semibold text-gray-900">Vibrant Dark</h3>
-              <p className="text-sm text-gray-600 mt-1">Bold and dynamic</p>
+          <div className="bg-white rounded-lg border border-electric-200 shadow-sm overflow-hidden">
+            <div className="p-4 border-b bg-electric-50">
+              <h3 className="font-semibold text-electric-700">Vibrant Dark</h3>
+              <p className="text-sm text-electric-600 mt-1">Bold and dynamic</p>
             </div>
             <div style={{ minHeight: '300px', maxHeight: '400px', padding: '10px', backgroundColor: '#1a1a2e', overflow: 'hidden' }}>
               <Chrono
@@ -188,10 +188,10 @@ export const ThemeShowcase: React.FC = () => {
           </div>
 
           {/* Nature Theme */}
-          <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
-            <div className="p-4 border-b bg-gray-50">
-              <h3 className="font-semibold text-gray-900">Nature Inspired</h3>
-              <p className="text-sm text-gray-600 mt-1">Calm and organic</p>
+          <div className="bg-white rounded-lg border border-electric-200 shadow-sm overflow-hidden">
+            <div className="p-4 border-b bg-electric-50">
+              <h3 className="font-semibold text-electric-700">Nature Inspired</h3>
+              <p className="text-sm text-electric-600 mt-1">Calm and organic</p>
             </div>
             <div style={{ minHeight: '300px', maxHeight: '400px', padding: '10px', overflow: 'hidden' }}>
               <Chrono
@@ -207,9 +207,9 @@ export const ThemeShowcase: React.FC = () => {
 
         {/* Interactive Full-Size Demo */}
         <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
-          <div className="p-6 border-b bg-gray-50">
-            <h3 className="text-lg font-semibold text-gray-900">Interactive Theme Demo</h3>
-            <p className="text-sm text-gray-600 mt-1">
+          <div className="p-6 border-b bg-electric-50">
+            <h3 className="text-lg font-semibold text-electric-700">Interactive Theme Demo</h3>
+            <p className="text-sm text-electric-600 mt-1">
               Full-featured timeline with the Modern Minimal theme - try the controls and interactions
             </p>
           </div>
@@ -227,32 +227,32 @@ export const ThemeShowcase: React.FC = () => {
 
         {/* Theme Properties Reference */}
         <div className="bg-gradient-to-r from-electric-50 to-electric-100 rounded-lg p-6 border border-electric-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Theme Property Reference</h3>
+          <h3 className="text-lg font-semibold text-electric-700 mb-4">Theme Property Reference</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div>
-              <h4 className="font-medium text-gray-900 mb-2">Core Colors</h4>
-              <ul className="text-sm text-gray-700 space-y-1">
-                <li><code className="bg-gray-100 px-1 rounded">primary</code> - Main brand color</li>
-                <li><code className="bg-gray-100 px-1 rounded">secondary</code> - Accent color</li>
-                <li><code className="bg-gray-100 px-1 rounded">cardBgColor</code> - Card background</li>
+              <h4 className="font-medium text-electric-700 mb-2">Core Colors</h4>
+              <ul className="text-sm text-electric-600 space-y-1">
+                <li><code className="bg-electric-100 px-1 rounded">primary</code> - Main brand color</li>
+                <li><code className="bg-electric-100 px-1 rounded">secondary</code> - Accent color</li>
+                <li><code className="bg-electric-100 px-1 rounded">cardBgColor</code> - Card background</li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-medium text-gray-900 mb-2">Typography</h4>
-              <ul className="text-sm text-gray-700 space-y-1">
-                <li><code className="bg-gray-100 px-1 rounded">titleColor</code> - Timeline titles</li>
-                <li><code className="bg-gray-100 px-1 rounded">cardTitleColor</code> - Card titles</li>
-                <li><code className="bg-gray-100 px-1 rounded">cardDetailsColor</code> - Body text</li>
+              <h4 className="font-medium text-electric-700 mb-2">Typography</h4>
+              <ul className="text-sm text-electric-600 space-y-1">
+                <li><code className="bg-electric-100 px-1 rounded">titleColor</code> - Timeline titles</li>
+                <li><code className="bg-electric-100 px-1 rounded">cardTitleColor</code> - Card titles</li>
+                <li><code className="bg-electric-100 px-1 rounded">cardDetailsColor</code> - Body text</li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-medium text-gray-900 mb-2">Interactive</h4>
-              <ul className="text-sm text-gray-700 space-y-1">
-                <li><code className="bg-gray-100 px-1 rounded">iconColor</code> - Timeline icons</li>
-                <li><code className="bg-gray-100 px-1 rounded">shadowColor</code> - Drop shadows</li>
-                <li><code className="bg-gray-100 px-1 rounded">glowColor</code> - Hover effects</li>
+              <h4 className="font-medium text-electric-700 mb-2">Interactive</h4>
+              <ul className="text-sm text-electric-600 space-y-1">
+                <li><code className="bg-electric-100 px-1 rounded">iconColor</code> - Timeline icons</li>
+                <li><code className="bg-electric-100 px-1 rounded">shadowColor</code> - Drop shadows</li>
+                <li><code className="bg-electric-100 px-1 rounded">glowColor</code> - Hover effects</li>
               </ul>
             </div>
           </div>

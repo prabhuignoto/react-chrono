@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold">React Chrono</h3>
             </div>
-            <p className="text-gray-300 mb-6 max-w-md">
+            <p className="text-electric-200 mb-6 max-w-md">
               A modern, accessible, and customizable timeline component for React applications. 
               Create beautiful timelines with ease.
             </p>
@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
                 href="https://github.com/prabhuignoto/react-chrono" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-electric-300 hover:text-electric-100 transition-colors"
               >
                 <span className="sr-only">GitHub</span>
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
                 href="https://www.npmjs.com/package/react-chrono" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-electric-300 hover:text-electric-100 transition-colors"
               >
                 <span className="sr-only">NPM</span>
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
                 <a href="https://github.com/prabhuignoto/react-chrono#getting-started" 
                    target="_blank" 
                    rel="noopener noreferrer"
-                   className="text-gray-300 hover:text-white transition-colors">
+                   className="text-electric-200 hover:text-electric-100 transition-colors">
                   Getting Started
                 </a>
               </li>
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
                 <a href="https://github.com/prabhuignoto/react-chrono#props" 
                    target="_blank" 
                    rel="noopener noreferrer"
-                   className="text-gray-300 hover:text-white transition-colors">
+                   className="text-electric-200 hover:text-electric-100 transition-colors">
                   API Reference
                 </a>
               </li>
@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
                 <a href="https://github.com/prabhuignoto/react-chrono/blob/master/README.md" 
                    target="_blank" 
                    rel="noopener noreferrer"
-                   className="text-gray-300 hover:text-white transition-colors">
+                   className="text-electric-200 hover:text-electric-100 transition-colors">
                   Documentation
                 </a>
               </li>
@@ -75,7 +75,7 @@ const Footer: React.FC = () => {
                 <a href="https://github.com/prabhuignoto/react-chrono/blob/master/CONTRIBUTING.md" 
                    target="_blank" 
                    rel="noopener noreferrer"
-                   className="text-gray-300 hover:text-white transition-colors">
+                   className="text-electric-200 hover:text-electric-100 transition-colors">
                   Contributing
                 </a>
               </li>
@@ -87,22 +87,22 @@ const Footer: React.FC = () => {
             <h4 className="font-semibold text-lg mb-4">Examples</h4>
             <ul className="space-y-2">
               <li>
-                <a href="/vertical-basic" className="text-gray-300 hover:text-white transition-colors">
+                <a href="/vertical-basic" className="text-electric-200 hover:text-electric-100 transition-colors">
                   Vertical Timeline
                 </a>
               </li>
               <li>
-                <a href="/horizontal" className="text-gray-300 hover:text-white transition-colors">
+                <a href="/horizontal" className="text-electric-200 hover:text-electric-100 transition-colors">
                   Horizontal Timeline
                 </a>
               </li>
               <li>
-                <a href="/theme-showcase" className="text-gray-300 hover:text-white transition-colors">
+                <a href="/theme-showcase" className="text-electric-200 hover:text-electric-100 transition-colors">
                   Custom Themes
                 </a>
               </li>
               <li>
-                <a href="/vertical-comprehensive" className="text-gray-300 hover:text-white transition-colors">
+                <a href="/vertical-comprehensive" className="text-electric-200 hover:text-electric-100 transition-colors">
                   Advanced Features
                 </a>
               </li>
@@ -111,8 +111,8 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-gray-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+        <div className="border-t border-electric-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-electric-300 text-sm">
             © 2025 React Chrono. Built with ❤️ by{' '}
             <a 
               href="https://github.com/prabhuignoto" 
@@ -124,8 +124,8 @@ const Footer: React.FC = () => {
             </a>
           </p>
           <div className="flex items-center space-x-6 mt-4 md:mt-0">
-            <span className="text-gray-400 text-sm">MIT License</span>
-            <span className="text-gray-400 text-sm">v2.9.1</span>
+            <span className="text-electric-300 text-sm">MIT License</span>
+            <span className="text-electric-300 text-sm">v2.9.1</span>
           </div>
         </div>
       </div>

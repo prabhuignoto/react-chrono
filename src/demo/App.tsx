@@ -46,7 +46,7 @@ const NewDemo: React.FunctionComponent = () => {
 
   const [customTheme, setCustomTheme] = useState<Theme>({
     cardBgColor: '#f5f5f5',
-    primary: '#000',
+    primary: '#0079e6', // electric-500
     secondary: '#FFA500',
   });
 
@@ -54,15 +54,15 @@ const NewDemo: React.FunctionComponent = () => {
     if (state > 0) {
       setCustomTheme({
         cardBgColor: '#efefef',
-        primary: '#000',
+        primary: '#0079e6', // electric-500
         secondary: '#FFA500',
       });
     } else {
       setCustomTheme({
         cardBgColor: '#f5f5f5',
-        primary: '#000',
+        primary: '#0079e6', // electric-500
         secondary: '#FFA500',
-        titleColorActive: '#000',
+        titleColorActive: '#0079e6', // electric-500
       });
     }
   }, [state]);

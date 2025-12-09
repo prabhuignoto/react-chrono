@@ -1,5 +1,18 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-electric-50: #e6f1ff;
+  --color-electric-100: #b3d9ff;
+  --color-electric-200: #80c1ff;
+  --color-electric-300: #4da9ff;
+  --color-electric-400: #1a91ff;
+  --color-electric-500: #0079e6;
+  --color-electric-600: #0061b3;
+  --color-electric-700: #004980;
+  --color-electric-800: #00314d;
+  --color-electric-900: #00191a;
+}
+
 *,
 :after,
 :before {

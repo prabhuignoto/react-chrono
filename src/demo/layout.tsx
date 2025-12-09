@@ -33,7 +33,7 @@ const Layout = () => {
   }, []);
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50 font-sans">
+    <div className="h-screen flex flex-col bg-white font-sans">
       <Header
         onMenuToggle={() => setSidebarOpen((prev) => !prev)}
         isMenuOpen={sidebarOpen}
