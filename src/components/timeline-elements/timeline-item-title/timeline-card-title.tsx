@@ -19,11 +19,12 @@ import { cardTitleRecipe } from '../timeline-card-content/timeline-card-content.
 const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
   title,
   active,
-  theme,
+  theme: themeProp,
   align,
   classString,
 }: TitleModel) => {
-  const { mode } = useTimelineContext();
+  const { mode, theme: contextTheme } = useTimelineContext();
+  const theme = themeProp || contextTheme;
   const TITLE_CLASS = 'timeline-item-title'; // Base class name for the title
 
   // Determine if margin-bottom should be applied (only for horizontal modes)
@@ -45,13 +46,19 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
     [active, classString, isHorizontalMode],
   );
 
+  // Inline styles for layout and visibility
+  const inlineStyles = useMemo(
+    (): React.CSSProperties => ({
+      textAlign: align || undefined,
+      visibility: title ? ('visible' as const) : ('hidden' as const),
+    }),
+    [align, title],
+  );
+
   return (
     <div
       className={titleClass}
-      style={{
-        textAlign: align || undefined,
-        visibility: title ? 'visible' : 'hidden',
-      }}
+      style={inlineStyles}
       title={typeof title === 'string' ? title : undefined} // Native tooltip for full text on hover
       data-ve-class={titleWrapper}
       data-ve-active-class={titleActive}

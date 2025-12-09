@@ -28,7 +28,7 @@ export const MediaShowcaseVertical: FunctionComponent<MediaShowcaseVerticalProps
         // Timeline colors - Teal primary, coral secondary
         primary: '#0891b2',
         secondary: '#f97316',
-        titleColor: darkMode ? '#e2e8f0' : '#374151',
+        titleColor: '#fff',
         titleColorActive: darkMode ? '#22d3ee' : '#0891b2',
 
         // Media and content

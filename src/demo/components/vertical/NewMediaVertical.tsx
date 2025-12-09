@@ -36,6 +36,7 @@ export const NewMediaVertical: FunctionComponent<NewMediaVerticalProps> = ({
         }}
         theme={{
           cardDetailsColor: '#2f4f4f',
+          titleColor: '#fff',
         }}
         cardHeight={350}
         focusActiveItemOnLoad

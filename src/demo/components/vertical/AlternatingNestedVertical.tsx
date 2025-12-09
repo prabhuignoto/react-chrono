@@ -41,7 +41,7 @@ export const AlternatingNestedVertical: FunctionComponent<AlternatingNestedVerti
         theme={{
           primary: '#191919',
           secondary: '#FFA500',
-          titleColor: '#FFA500',
+          titleColor: '#fff',
           titleColorActive: '#000',
           cardTitleColor: '#FFA500',
           iconBackgroundColor: '#fff',

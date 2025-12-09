@@ -48,6 +48,7 @@ const NewDemo: React.FunctionComponent = () => {
     cardBgColor: '#f5f5f5',
     primary: '#0079e6', // electric-500
     secondary: '#FFA500',
+    titleColor: '#fff',
   });
 
   useEffect(() => {
@@ -56,12 +57,14 @@ const NewDemo: React.FunctionComponent = () => {
         cardBgColor: '#efefef',
         primary: '#0079e6', // electric-500
         secondary: '#FFA500',
+        titleColor: '#fff',
       });
     } else {
       setCustomTheme({
         cardBgColor: '#f5f5f5',
         primary: '#0079e6', // electric-500
         secondary: '#FFA500',
+        titleColor: '#fff',
         titleColorActive: '#0079e6', // electric-500
       });
     }
