@@ -18,13 +18,13 @@ const DemoPageLayout: React.FC<DemoPageLayoutProps> = ({
   return (
     <div className="space-y-6 lg:space-y-8 w-full">
       {/* Page Header */}
-      <div className="bg-white rounded-lg shadow-sm border p-4 sm:p-6 lg:p-8 w-full">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">{title}</h1>
-        <p className="text-base sm:text-lg text-gray-600 mb-6 leading-relaxed">{description}</p>
+      <div className="bg-white rounded-lg shadow-sm border border-electric-200 p-4 sm:p-6 lg:p-8 w-full">
+        <h1 className="text-2xl sm:text-3xl font-bold text-electric-700 mb-4">{title}</h1>
+        <p className="text-base sm:text-lg text-electric-600 mb-6 leading-relaxed">{description}</p>
         
         {features.length > 0 && (
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">
+            <h3 className="text-sm font-semibold text-electric-700 uppercase tracking-wider">
               Key Features
             </h3>
             <div className="flex flex-wrap gap-2">
@@ -42,14 +42,14 @@ const DemoPageLayout: React.FC<DemoPageLayoutProps> = ({
       </div>
 
       {/* Demo Section */}
-      <div className="bg-white rounded-lg shadow-sm border overflow-hidden w-full">
-        <div className="p-4 sm:p-6 border-b border-gray-200">
-          <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Live Demo</h2>
-          <p className="text-sm text-gray-600 mt-1">
+      <div className="bg-white rounded-lg shadow-sm border border-electric-200 overflow-hidden w-full">
+        <div className="p-4 sm:p-6 border-b border-electric-200">
+          <h2 className="text-lg sm:text-xl font-semibold text-electric-700">Live Demo</h2>
+          <p className="text-sm text-electric-600 mt-1">
             Interact with the timeline below to see all features in action
           </p>
         </div>
-        <div className="p-4 sm:p-6 bg-gray-50 w-full">
+        <div className="p-4 sm:p-6 bg-electric-50 w-full">
           <div className="bg-white rounded-lg shadow-inner min-h-96 overflow-hidden w-full">
             {children}
           </div>
@@ -58,10 +58,10 @@ const DemoPageLayout: React.FC<DemoPageLayoutProps> = ({
 
       {/* Code Example */}
       {codeExample && (
-        <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-          <div className="p-4 sm:p-6 border-b border-gray-200">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Code Example</h2>
-            <p className="text-sm text-gray-600 mt-1">
+        <div className="bg-white rounded-lg shadow-sm border border-electric-200 overflow-hidden">
+          <div className="p-4 sm:p-6 border-b border-electric-200">
+            <h2 className="text-lg sm:text-xl font-semibold text-electric-700">Code Example</h2>
+            <p className="text-sm text-electric-600 mt-1">
               Basic implementation to get started with this timeline variant
             </p>
           </div>

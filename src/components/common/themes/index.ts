@@ -3,41 +3,41 @@ import { Theme } from '@models/Theme';
 export const defaultTheme: Theme = {
   cardBgColor: '#ffffff',
   cardDetailsBackGround: '#ffffff',
-  cardDetailsColor: '#374151',
+  cardDetailsColor: '#004980', // electric-700
   cardMediaBgColor: '#f8fafc',
-  cardSubtitleColor: '#6b7280',
-  cardTitleColor: '#007FFF',
-  detailsColor: '#374151',
-  iconBackgroundColor: '#007FFF',
+  cardSubtitleColor: '#0061b3', // electric-600
+  cardTitleColor: '#0079e6', // electric-500
+  detailsColor: '#004980', // electric-700
+  iconBackgroundColor: '#0079e6', // electric-500
   nestedCardBgColor: '#f8fafc',
   nestedCardDetailsBackGround: '#f8fafc',
-  nestedCardDetailsColor: '#374151',
-  nestedCardSubtitleColor: '#6b7280',
-  nestedCardTitleColor: '#1f2937',
-  primary: '#007FFF',
+  nestedCardDetailsColor: '#004980', // electric-700
+  nestedCardSubtitleColor: '#0061b3', // electric-600
+  nestedCardTitleColor: '#00314d', // electric-800
+  primary: '#0079e6', // electric-500
   secondary: '#ffdf00',
-  titleColor: '#007FFF',
-  titleColorActive: '#007FFF',
+  titleColor: '#0079e6', // electric-500
+  titleColorActive: '#0079e6', // electric-500
   toolbarBgColor: '#f1f5f9',
   toolbarBtnBgColor: '#ffffff',
-  toolbarTextColor: '#1e293b',
+  toolbarTextColor: '#00314d', // electric-800
   timelineBgColor: '#ffffff',
 
   // Light mode styling
-  iconColor: '#007FFF',
-  buttonHoverBgColor: '#e2e8f0',
-  buttonActiveBgColor: '#007FFF',
+  iconColor: '#0079e6', // electric-500
+  buttonHoverBgColor: '#e6f1ff', // electric-50
+  buttonActiveBgColor: '#0079e6', // electric-500
   buttonActiveIconColor: '#ffffff',
-  buttonBorderColor: '#e2e8f0',
-  buttonHoverBorderColor: '#007FFF',
-  buttonActiveBorderColor: '#007FFF',
-  shadowColor: 'rgba(0, 0, 0, 0.1)',
-  glowColor: 'rgba(0, 127, 255, 0.2)',
-  searchHighlightColor: 'rgba(0, 127, 255, 0.2)',
-  darkToggleActiveBgColor: '#007FFF',
+  buttonBorderColor: '#b3d9ff', // electric-100
+  buttonHoverBorderColor: '#0079e6', // electric-500
+  buttonActiveBorderColor: '#0079e6', // electric-500
+  shadowColor: 'rgba(0, 121, 230, 0.1)',
+  glowColor: 'rgba(0, 121, 230, 0.2)',
+  searchHighlightColor: 'rgba(0, 121, 230, 0.2)',
+  darkToggleActiveBgColor: '#0079e6', // electric-500
   darkToggleActiveIconColor: '#ffffff',
-  darkToggleActiveBorderColor: '#007FFF',
-  darkToggleGlowColor: 'rgba(0, 127, 255, 0.2)',
+  darkToggleActiveBorderColor: '#0079e6', // electric-500
+  darkToggleGlowColor: 'rgba(0, 121, 230, 0.2)',
 };
 
 export const darkTheme: Theme = {

@@ -183,20 +183,20 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
   };
 
   return (
-    <aside className="bg-gray-50 border-r border-gray-200 h-full overflow-y-auto relative">
+    <aside className="bg-white border-r border-gray-200 h-full overflow-y-auto relative">
       <div className="p-4 pt-6 relative">
         {onClose && (
           <button
             onClick={onClose}
             aria-label="Close sidebar"
-            className="absolute top-3 right-3 p-1 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-500"
+            className="absolute top-3 right-3 p-1 rounded-md text-electric-600 hover:text-electric-700 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-500"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" stroke="currentColor" fill="none">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         )}
-        <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
+        <h3 className="text-sm font-semibold text-electric-700 uppercase tracking-wider mb-4">
           Demo Examples
         </h3>
 
@@ -208,7 +208,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
               <div key={section.title}>
                 <button
                   onClick={() => toggleSection(section.title)}
-                  className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+                  className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-electric-600 hover:text-electric-700 hover:bg-gray-100 rounded-md transition-colors"
                 >
                   <span className="flex items-center space-x-2">
                     <span>{section.icon}</span>
@@ -236,8 +236,8 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
                           cls(
                             'group flex items-start px-3 py-2 text-sm rounded-md transition-colors',
                             isActive
-                              ? 'bg-electric-50 text-electric-700 border-l-2 border-electric-500'
-                              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                              ? 'bg-white text-electric-700 border-l-2 border-electric-500'
+                              : 'text-electric-600 hover:text-electric-700 hover:bg-gray-50'
                           )
                         }
                       >
@@ -251,7 +251,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
                               {item.label}
                             </span>
                             {item.featured && (
-                              <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-electric-100 text-electric-800">
+                              <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
                                 Featured
                               </span>
                             )}
@@ -262,7 +262,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
                             )}
                           </div>
                           {item.description && (
-                            <p className="text-xs text-gray-500 mt-0.5 truncate">
+                            <p className="text-xs text-electric-500 mt-0.5 truncate">
                               {item.description}
                             </p>
                           )}
