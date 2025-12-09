@@ -2,7 +2,7 @@
 
 ## [3.3.2] - 2025-12-08
 
-### Features
+### Fixes
 - Auto-select-first item in Horizontal mode (#593)
 
 ### Improvements
