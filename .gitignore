@@ -68,8 +68,6 @@ cache
 .tmp
 
 
-.scannerwork
-# sonar-project.properties
 react-app-tester
 
 react-test-bed
@@ -87,8 +85,6 @@ styled-system
 styled-system-studio
 
 venv
-extract_sonar_issues.py
-sonarqube_issues.csv
 requirements.txt
 
 bug_report.txt
