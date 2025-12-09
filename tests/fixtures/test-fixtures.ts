@@ -359,9 +359,17 @@ export class TestHelpers {
     const points = await this.getTimelinePoints();
     const point = points.nth(index);
     await point.waitFor({ state: 'visible' });
-    await point.click();
-    // Wait for transition
-    await this.page.waitForTimeout(300);
+    
+    // Check if point is already active, if so skip click
+    const isActive = await point.getAttribute('aria-selected') === 'true';
+    if (!isActive) {
+      await point.click({ force: true });
+      // Wait for transition
+      await this.page.waitForTimeout(300);
+    } else {
+      // Already active, just wait a bit
+      await this.page.waitForTimeout(100);
+    }
   }
 
   /**
