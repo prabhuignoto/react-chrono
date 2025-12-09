@@ -117,8 +117,67 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     return null;
   }, [alternateCards, className]);
 
+  // Computed layout flags
+  const isFlipMode = useMemo(
+    () => !alternateCards && flipLayout,
+    [alternateCards, flipLayout],
+  );
+
+  const isLeftSide = useMemo(() => className === 'left', [className]);
+
+  const shouldShowTitle = useMemo(
+    () => Boolean(title && !isNested && !isMobile),
+    [title, isNested, isMobile],
+  );
+
+  const shouldShowEmptySpace = useMemo(
+    () => alternateCards && !isNested && !isMobile,
+    [alternateCards, isNested, isMobile],
+  );
+
+  const shouldShowTimelinePoint = useMemo(() => !isNested, [isNested]);
+
+  const alignment = useMemo(() => {
+    if (alternateCards) {
+      return isLeftSide ? 'left' : 'right';
+    }
+    return 'center';
+  }, [alternateCards, isLeftSide]);
+
+  const cardPadding = useMemo(
+    () => (alternateCards ? '0' : '0.75rem'),
+    [alternateCards],
+  );
+
+  const titleAlignSelf = useMemo(
+    () => (isFlipMode ? { alignSelf: 'flex-end' as const } : {}),
+    [isFlipMode],
+  );
+
+  const cardMarginLeft = useMemo(
+    () => (isFlipMode ? { marginLeft: 'auto' } : {}),
+    [isFlipMode],
+  );
+
+  const activeTitleProp = useMemo(() => {
+    if (active === undefined) return {};
+    return { active: active && !disableInteraction };
+  }, [active, disableInteraction]);
+
+  const cardOnClickProp = useMemo(() => {
+    if (onClick && typeof onClick === 'function') {
+      return { onClick };
+    }
+    return {};
+  }, [onClick]);
+
+  const ariaCurrent = useMemo(
+    () => (active ? 'step' : undefined),
+    [active],
+  );
+
   const EmptySpace = useMemo(() => {
-    if (!alternateCards || isNested) return null;
+    if (!shouldShowEmptySpace) return null;
     
     const emptySpaceOrder = calculateEmptySpaceOrder();
     if (emptySpaceOrder === null) return null;
@@ -135,7 +194,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
         aria-hidden="true"
       />
     );
-  }, [alternateCards, isNested, calculateEmptySpaceOrder]);
+  }, [shouldShowEmptySpace, calculateEmptySpaceOrder]);
 
   /**
    * Callback handler triggered by the TimelinePoint when it becomes active.
@@ -264,23 +323,58 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     }
   }, [title, cardTitle]);
 
+  // Computed className for main wrapper
+  const wrapperClassName = useMemo(
+    () =>
+      `${verticalItemWrapper({
+        visible: visible !== false,
+        alignment,
+        alternating: alternateCards,
+      })} ${verticalItemClass} ${isNested ? verticalItemWrapperNested : ''}`,
+    [visible, alignment, alternateCards, verticalItemClass, isNested],
+  );
+
+  // Computed className for card content wrapper
+  const cardContentClassName = useMemo(
+    () =>
+      `${timelineCardContentWrapper} ${contentClass} ${
+        visible ? timelineCardContentVisible : ''
+      }`,
+    [contentClass, visible],
+  );
+
+  // Computed card content styles
+  const cardContentStyles = useMemo(
+    () => ({
+      width: calculateCardWidth(),
+      justifyContent: calculateJustifyContent(),
+      order: calculateCardOrder(),
+      display: 'flex' as const,
+      flexDirection: 'column' as const,
+      flexShrink: 0,
+      flexGrow: 0,
+      paddingLeft: cardPadding,
+      paddingRight: cardPadding,
+      ...cardMarginLeft,
+    }),
+    [
+      calculateCardWidth,
+      calculateJustifyContent,
+      calculateCardOrder,
+      cardPadding,
+      cardMarginLeft,
+    ],
+  );
+
   // Render the complete timeline item structure
   return (
     <li
-      className={`${verticalItemWrapper({
-        visible: visible !== false,
-        alignment: alternateCards
-          ? className === 'left'
-            ? 'left'
-            : 'right'
-          : 'center',
-        alternating: alternateCards,
-      })} ${verticalItemClass} ${isNested ? verticalItemWrapperNested : ''}`}
+      className={wrapperClassName}
       data-testid="vertical-item-row"
       data-item-id={id}
       key={id}
       ref={contentRef}
-      aria-current={active ? 'step' : undefined}
+      aria-current={ariaCurrent}
       aria-label={accessibleTitle}
       role="listitem"
       aria-selected={active}
@@ -289,37 +383,14 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       onFocus={rovingProps?.onFocus}
     >
       {/* Wrapper for the card content */}
-      <div
-        className={`${timelineCardContentWrapper} ${contentClass} ${visible ? timelineCardContentVisible : ''}`}
-        style={{
-          width: calculateCardWidth(),
-          justifyContent: calculateJustifyContent(),
-          order: calculateCardOrder(),
-          display: 'flex',
-          flexDirection: 'column',
-          flexShrink: 0,
-          flexGrow: 0,
-          paddingLeft: alternateCards ? '0' : '0.75rem',
-          paddingRight: alternateCards ? '0' : '0.75rem',
-          // In flip mode, add margin-left: auto to push card content to the right
-          ...((!alternateCards && flipLayout) ? { marginLeft: 'auto' } : {}),
-        }}
-      >
-        {title && !isNested && (
-          <div 
-            className={timelineItemTitleWrapper}
-            style={{
-              // In flip mode, set align-self to flex-end
-              ...((!alternateCards && flipLayout) ? { alignSelf: 'flex-end' } : {}),
-            }}
-          >
+      <div className={cardContentClassName} style={cardContentStyles}>
+        {shouldShowTitle && (
+          <div className={timelineItemTitleWrapper} style={titleAlignSelf}>
             <TimelineItemTitle
               title={title}
               theme={theme}
               align="left"
-              {...(active !== undefined
-                ? { active: active && !disableInteraction }
-                : {})}
+              {...activeTitleProp}
               {...pickDefined({
                 classString: classNames?.title,
               })}
@@ -330,7 +401,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
           <TimelineCard
             branchDir={className}
             onShowMore={handleShowMore}
-            flip={!alternateCards && flipLayout}
+            flip={isFlipMode}
             {...pickDefined({
               active,
               content: cardSubtitle,
@@ -350,7 +421,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
               title: cardTitle,
               cardTitle: title,
             })}
-            {...(onClick && typeof onClick === 'function' ? { onClick } : {})}
+            {...cardOnClickProp}
           />
         )}
       </div>
@@ -359,7 +430,7 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
       {EmptySpace}
 
       {/* Conditionally render the Timeline Point (hidden for nested items) */}
-      {!isNested ? TimelinePointMemo : null}
+      {shouldShowTimelinePoint && TimelinePointMemo}
     </li>
   );
 };

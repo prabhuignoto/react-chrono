@@ -160,6 +160,7 @@ export const BasicVertical: FunctionComponent<BasicVerticalProps> = ({
 
         theme={{
           cardDetailsColor: '#555555',
+          titleColor: '#fff',
         }}
 
         darkMode={{

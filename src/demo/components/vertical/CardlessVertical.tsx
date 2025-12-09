@@ -26,6 +26,7 @@ export const CardlessVertical: FunctionComponent<CardlessVerticalProps> = ({
         cardLess
         theme={{
           cardBgColor: '#fff',
+          titleColor: '#fff',
           titleColorActive: 'red',
         }}
         onItemSelected={(selected) => console.log(selected.cardTitle)}

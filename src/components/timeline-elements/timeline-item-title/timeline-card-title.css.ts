@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { style, globalStyle } from '@vanilla-extract/css';
 import { tokens } from '../../../styles/tokens/index.css';
 import { recipe } from '@vanilla-extract/recipes';
 import { sprinkles } from '../../../styles/system/sprinkles.css';
@@ -17,7 +17,6 @@ export const titleWrapper = style([
     overflow: 'hidden',
     minWidth: 0,
     maxWidth: '100%',
-    color: tokens.semantic.color.text.primary,
     position: 'relative',
     cursor: 'default',
 
@@ -77,8 +76,15 @@ export const titleWrapper = style([
 ]);
 
 export const titleActive = style({
-  background: tokens.semantic.color.background.secondary,
-  color: tokens.semantic.color.interactive.primary,
+  backgroundColor: `var(--timeline-primary-color, ${tokens.semantic.color.interactive.primary})`,
+  color: `var(--timeline-title-text-color, #fff)`,
+  opacity: 0.9,
+});
+
+// Override recipes text color when used in timeline item titles
+// Target timeline-item-title elements to ensure white text color
+globalStyle('.timeline-item-title', {
+  color: `var(--timeline-title-text-color, #fff)`,
 });
 
 export const titleRecipe = recipe({

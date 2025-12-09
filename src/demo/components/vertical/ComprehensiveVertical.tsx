@@ -29,7 +29,7 @@ export const ComprehensiveVertical: FunctionComponent<ComprehensiveVerticalProps
     // Timeline colors - Blue primary, amber secondary
     primary: '#2563eb',
     secondary: '#f59e0b',
-    titleColor: darkMode ? '#e2e8f0' : '#374151',
+    titleColor: '#fff',
     titleColorActive: darkMode ? '#60a5fa' : '#2563eb',
     
     // Media and content
