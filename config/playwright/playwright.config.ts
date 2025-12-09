@@ -2,7 +2,8 @@ import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Modern Playwright E2E Configuration
- * - Cross-browser testing (Chromium, Firefox, WebKit)
+ * - Local development: Chromium only (faster setup and execution)
+ * - Cross-browser testing (Firefox, WebKit) runs in GitHub Actions CI
  * - Optimized for CI/CD with parallel execution
  * - Enhanced error reporting with traces and videos
  * - Web-first assertions with smart auto-waiting
@@ -10,7 +11,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
-  testDir: './tests/e2e',
+  testDir: '../../tests/e2e',
 
   /* Match only .spec.ts files (exclude .test.ts for Vitest) */
   testMatch: '**/*.spec.ts',
@@ -69,39 +70,18 @@ export default defineConfig({
     timeout: 10000,
   },
 
-  /* Configure projects for major browsers - Cross-browser testing enabled */
+  /* Configure projects - Chromium only for local development */
+  /* Cross-browser testing (Firefox, WebKit) is handled in GitHub Actions CI */
   projects: [
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-    // Optional: Uncomment for additional browser coverage
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // Mobile testing (uncomment if needed)
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 7'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 14'] },
-    // },
   ],
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'pnpm dev',
+    command: 'bun dev',
     url: 'http://localhost:4444',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,

@@ -432,6 +432,8 @@ const TimelineCardContent: React.FunctionComponent<TimelineContentModel> =
             minHeight: customContent ? undefined : cardMinHeight,
             height: customContent ? cardMinHeight : undefined,
             maxWidth: cardWidth ? `${cardWidth}px` : '100%',
+            // In flip mode, add margin-left: auto to push card content to the right
+            ...(flip ? { marginLeft: 'auto' } : {}),
           }}
         >
           {/* Only show the content header if we're not using text overlay mode with media */}

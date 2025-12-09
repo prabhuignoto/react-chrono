@@ -39,7 +39,7 @@
     "test:report": "playwright show-report",
     "test:trace": "playwright show-trace",
     "test:codegen": "playwright codegen",
-    "test:install": "playwright install --with-deps",
+    "test:install": "playwright install chromium --with-deps",
     "test:update-snapshots": "playwright test --update-snapshots",
     "eslint": "eslint --config config/build/eslint.config.mjs src/**/*.{tsx,ts} --no-warn-ignored",
     "fix-js": "eslint --config config/build/eslint.config.mjs src/**/*.{tsx,ts} --fix --no-warn-ignored",

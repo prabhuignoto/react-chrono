@@ -189,7 +189,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
           <button
             onClick={onClose}
             aria-label="Close sidebar"
-            className="absolute top-3 right-3 p-1 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+            className="absolute top-3 right-3 p-1 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-500"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" stroke="currentColor" fill="none">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -236,7 +236,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
                           cls(
                             'group flex items-start px-3 py-2 text-sm rounded-md transition-colors',
                             isActive
-                              ? 'bg-indigo-50 text-indigo-700 border-l-2 border-indigo-500'
+                              ? 'bg-electric-50 text-electric-700 border-l-2 border-electric-500'
                               : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                           )
                         }
@@ -246,12 +246,12 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }) => {
                           <div className="flex items-center space-x-2">
                             <span className={cls(
                               'font-medium truncate',
-                              item.featured ? 'text-indigo-600' : ''
+                              item.featured ? 'text-electric-600' : ''
                             )}>
                               {item.label}
                             </span>
                             {item.featured && (
-                              <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                              <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-electric-100 text-electric-800">
                                 Featured
                               </span>
                             )}

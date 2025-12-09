@@ -4,7 +4,7 @@ import cls from 'classnames';
 
 const HeroSection: React.FC = () => {
   return (
-    <div className="relative bg-linear-to-r from-indigo-50 to-blue-50">
+    <div className="relative bg-gradient-to-r from-electric-50 to-electric-100">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <svg className="w-full h-full" viewBox="0 0 100 100">
@@ -20,7 +20,7 @@ const HeroSection: React.FC = () => {
       <div className="relative w-full px-0 py-16 lg:py-24">
         <div className="text-center px-4 sm:px-6 lg:px-8">
           {/* Hero Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-indigo-100 text-indigo-800 text-sm font-medium mb-8">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-electric-100 text-electric-800 text-sm font-medium mb-8">
             <span className="mr-2">🚀</span>
             Now with React 18 & 19 Support
           </div>
@@ -28,7 +28,7 @@ const HeroSection: React.FC = () => {
           {/* Main Heading */}
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 font-display">
             Beautiful{' '}
-            <span className="bg-linear-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-electric-500 to-electric-600 bg-clip-text text-transparent">
               Timeline
             </span>{' '}
             Component
@@ -42,7 +42,7 @@ const HeroSection: React.FC = () => {
           {/* Feature Highlights */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 w-full max-w-6xl mx-auto">
             <div className="text-center p-6 bg-white rounded-lg shadow-sm border">
-              <div className="w-12 h-12 mx-auto mb-4 bg-indigo-100 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 mx-auto mb-4 bg-electric-100 rounded-lg flex items-center justify-center">
                 <span className="text-2xl">🎨</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Highly Customizable</h3>
@@ -76,7 +76,7 @@ const HeroSection: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <NavLink
               to="/vertical-comprehensive"
-              className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-lg hover:shadow-xl"
+              className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-electric-500 hover:bg-electric-600 transition-colors shadow-lg hover:shadow-xl"
             >
               <span>Explore Showcase</span>
               <svg className="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -101,19 +101,19 @@ const HeroSection: React.FC = () => {
           <div className="mt-16 pt-8 border-t border-gray-200">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-2xl font-bold text-indigo-600 mb-1">110KB+</div>
+                <div className="text-2xl font-bold text-electric-600 mb-1">110KB+</div>
                 <div className="text-sm text-gray-600">Bundle Size</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-indigo-600 mb-1">React 18+</div>
+                <div className="text-2xl font-bold text-electric-600 mb-1">React 18+</div>
                 <div className="text-sm text-gray-600">Compatible</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-indigo-600 mb-1">TypeScript</div>
+                <div className="text-2xl font-bold text-electric-600 mb-1">TypeScript</div>
                 <div className="text-sm text-gray-600">Built-in Support</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-indigo-600 mb-1">MIT</div>
+                <div className="text-2xl font-bold text-electric-600 mb-1">MIT</div>
                 <div className="text-sm text-gray-600">Open Source</div>
               </div>
             </div>
