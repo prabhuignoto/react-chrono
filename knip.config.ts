@@ -81,7 +81,6 @@ const config: KnipConfig = {
     '@types/react-router-dom',
   ],
   ignoreBinaries: ['playwright', 'chromatic'],
-  ladle: false, // Disable ladle plugin to avoid the error
 };
 
 export default config;

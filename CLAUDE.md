@@ -15,8 +15,6 @@ React Chrono is a modern, flexible timeline component library for React that sup
 pnpm run dev              # Start dev server with hot reload (site preview)
 pnpm run build            # Production build (generates dist/)
 pnpm run build:analyze    # Build with bundle analysis
-pnpm run ladle            # Start Ladle component development environment
-pnpm run ladle:build      # Build Ladle site
 ```
 
 **Demo & Examples:**

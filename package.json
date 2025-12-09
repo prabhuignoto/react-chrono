@@ -16,8 +16,6 @@
     "type": "git"
   },
   "scripts": {
-    "ladle": "ladle serve",
-    "ladle:build": "ladle build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "dotenv -e .env.local -- chromatic --exit-zero-on-changes",
@@ -85,7 +83,6 @@
     "@eslint/compat": "^2.0.0",
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.1",
-    "@ladle/react": "^5.1.1",
     "@playwright/experimental-ct-react": "^1.57.0",
     "@playwright/test": "^1.57.0",
     "@size-limit/preset-big-lib": "^11.2.0",
