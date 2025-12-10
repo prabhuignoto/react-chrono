@@ -82,7 +82,6 @@ export const titleActive = style({
   opacity: 0.9,
 });
 
-
 export const titleRecipe = recipe({
   base: [titleWrapper],
   variants: {

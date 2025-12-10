@@ -105,7 +105,6 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     return 3;
   }, [alternateCards, flipLayout, className]);
 
-
   const calculatePointOrder = useCallback(() => {
     return 2;
   }, []);
@@ -171,17 +170,14 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     return {};
   }, [onClick]);
 
-  const ariaCurrent = useMemo(
-    () => (active ? 'step' : undefined),
-    [active],
-  );
+  const ariaCurrent = useMemo(() => (active ? 'step' : undefined), [active]);
 
   const EmptySpace = useMemo(() => {
     if (!shouldShowEmptySpace) return null;
-    
+
     const emptySpaceOrder = calculateEmptySpaceOrder();
     if (emptySpaceOrder === null) return null;
-    
+
     return (
       <div
         style={{
@@ -217,7 +213,6 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
   const handleShowMore = useCallback(() => {
     setTimeout(() => handleOnActive(0), 100);
   }, [handleOnActive]);
-
 
   /**
    * Memoized CSS classes for the main VerticalItemWrapper.
@@ -310,7 +305,6 @@ const VerticalItem: FunctionComponent<VerticalItemModel> = (
     ),
     [timelinePointProps, calculatePointOrder],
   );
-
 
   // Get a readable title for screen readers
   const accessibleTitle = useMemo(() => {

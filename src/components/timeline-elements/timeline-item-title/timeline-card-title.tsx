@@ -40,7 +40,10 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
         TITLE_CLASS,
         active ? 'active' : '',
         classString,
-        cardTitleRecipe({ active: !!active, hasMarginBottom: isHorizontalMode }),
+        cardTitleRecipe({
+          active: !!active,
+          hasMarginBottom: isHorizontalMode,
+        }),
         titleWrapper, // Add the base CSS class that includes Google Fonts styling
       ),
     [active, classString, isHorizontalMode],
@@ -51,7 +54,9 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
     (): React.CSSProperties => ({
       textAlign: align || undefined,
       visibility: title ? ('visible' as const) : ('hidden' as const),
-      color: theme?.titleColor ? theme.titleColor : 'var(--timeline-title-text-color, #fff)',
+      color: theme?.titleColor
+        ? theme.titleColor
+        : 'var(--timeline-title-text-color, #fff)',
     }),
     [align, title, theme],
   );
