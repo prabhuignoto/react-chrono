@@ -14,6 +14,7 @@ export const titleWrapper = style([
     fontSize: `var(--timeline-title-font-size, 1rem)`,
     fontWeight: `var(--timeline-title-font-weight, 600)`,
     fontStyle: `var(--timeline-title-font-style, normal)`,
+    color: `var(--timeline-title-text-color, #fff)`,
     overflow: 'hidden',
     minWidth: 0,
     maxWidth: '100%',
@@ -83,6 +84,7 @@ export const titleActive = style({
 
 // Override recipes text color when used in timeline item titles
 // Target timeline-item-title elements to ensure white text color
+// More specific selector to override cardTitleRecipe color
 globalStyle('.timeline-item-title', {
   color: `var(--timeline-title-text-color, #fff)`,
 });
