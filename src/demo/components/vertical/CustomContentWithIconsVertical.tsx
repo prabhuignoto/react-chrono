@@ -30,6 +30,9 @@ export const CustomContentWithIconsVertical: FunctionComponent<CustomContentWith
         scrollable
         flipLayout
         timelinePointDimension={30}
+        theme={{
+          titleColor: '#fff',
+        }}
         {...pickDefined({ items })}
       >
         <div>

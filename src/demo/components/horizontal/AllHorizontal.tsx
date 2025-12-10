@@ -29,6 +29,9 @@ export const AllHorizontal: FunctionComponent<AllHorizontalProps> = ({
           mediaHeight={250}
           slideItemDuration={2550}
           itemWidth={400}
+          theme={{
+            titleColor: '#fff',
+          }}
           interaction={{
             focusOnLoad: false, // Test: should NOT steal focus on load
           }}

@@ -82,12 +82,6 @@ export const titleActive = style({
   opacity: 0.9,
 });
 
-// Override recipes text color when used in timeline item titles
-// Target timeline-item-title elements to ensure white text color
-// More specific selector to override cardTitleRecipe color
-globalStyle('.timeline-item-title', {
-  color: `var(--timeline-title-text-color, #fff)`,
-});
 
 export const titleRecipe = recipe({
   base: [titleWrapper],

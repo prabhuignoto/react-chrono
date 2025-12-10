@@ -25,7 +25,15 @@ export const CustomContentVertical: FunctionComponent<CustomContentVerticalProps
         type === 'mobile' ? componentContainerTreeMobile :
         componentContainerTree
       } style={{ minHeight: '600px', maxHeight: '800px', padding: '20px', overflow: 'hidden' }}>
-        <Chrono mode="VERTICAL" cardHeight={200} cardWidth={650} scrollable>
+        <Chrono 
+          mode="VERTICAL" 
+          cardHeight={200} 
+          cardWidth={650} 
+          scrollable
+          theme={{
+            titleColor: '#fff',
+          }}
+        >
           <div>
             <div style={{ width: '250px', height: '250px' }}>
               <img

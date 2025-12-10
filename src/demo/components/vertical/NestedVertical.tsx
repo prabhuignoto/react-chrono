@@ -25,7 +25,9 @@ export const NestedVertical: FunctionComponent<NestedVerticalProps> = ({
         mode="horizontal"
         activeItemIndex={2}
         onItemSelected={(selected) => console.log(selected.index)}
-        
+        theme={{
+          titleColor: '#fff',
+        }}
         layout={{
           cardWidth: 650,
           cardHeight: 300,

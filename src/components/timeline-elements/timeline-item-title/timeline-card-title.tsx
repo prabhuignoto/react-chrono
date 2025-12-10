@@ -46,13 +46,14 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
     [active, classString, isHorizontalMode],
   );
 
-  // Inline styles for layout and visibility
+  // Inline styles for layout, visibility, and color override
   const inlineStyles = useMemo(
     (): React.CSSProperties => ({
       textAlign: align || undefined,
       visibility: title ? ('visible' as const) : ('hidden' as const),
+      color: theme?.titleColor ? theme.titleColor : 'var(--timeline-title-text-color, #fff)',
     }),
-    [align, title],
+    [align, title, theme],
   );
 
   return (

@@ -23,7 +23,9 @@ export const MixedVertical: FunctionComponent<MixedVerticalProps> = ({
       <Chrono
         items={mixedTimeline}
         mode="VERTICAL"
-        
+        theme={{
+          titleColor: '#fff',
+        }}
         layout={{
           cardHeight: cardHeight ?? 300,
           cardWidth: 550,
