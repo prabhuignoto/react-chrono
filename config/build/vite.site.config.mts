@@ -26,6 +26,8 @@ const SERVER_IGNORED_FILES = [
 
 export default defineConfig(({ mode }) => {
   const isProduction = mode === 'production';
+  const enableSiteSourcemap = process.env.SITE_SOURCEMAP === 'true';
+  const enableDevCssSourcemap = process.env.DEV_SOURCEMAP === 'true';
   const reactPlugin = react({
     include: '**/*.{jsx,tsx}',
     babel: {
@@ -36,17 +38,24 @@ export default defineConfig(({ mode }) => {
   return {
     build: {
       outDir: 'dist_site',
-      sourcemap: true,
+      sourcemap: enableSiteSourcemap,
       esbuild: {
         drop: ['console', 'debugger'],
       },
     },
     css: {
-      devSourcemap: true,
+      devSourcemap: enableDevCssSourcemap,
       postcss: postcssConfig,
     },
     optimizeDeps: {
-      include: ['react', 'react-dom', 'react/jsx-runtime'],
+      include: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        'classnames',
+        'dayjs',
+        'use-debounce',
+      ],
       exclude: ['@vanilla-extract/css', '@vanilla-extract/dynamic'],
     },
     plugins: [
