@@ -1,9 +1,0 @@
-exclude:
-  - "**/*.patch"
-  - "**/node_modules/**/*"
-  - "**/vendor/**/*"
-  - ".github/workflows/**/*"
-  - ".gitignore"
-  - "pnpm-lock.yaml"
-  - "**/tsconfig.json"
-  - coverage/**/*

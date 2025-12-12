@@ -31,6 +31,7 @@ export const CardlessHorizontal: FunctionComponent<CardlessHorizontalProps> = ({
         
         theme={{
           cardBgColor: '#fff',
+          titleColor: '#fff',
           titleColorActive: 'red',
         }}
       />

@@ -631,7 +631,12 @@ const Chrono: React.FunctionComponent<ChronoProps> = (
         handleTimelineUpdate(activeTimelineItem);
       }
     }
-  }, [activeTimelineItem, timeLineItems.length, activeItemIndex, handleTimelineUpdate]);
+  }, [
+    activeTimelineItem,
+    timeLineItems.length,
+    activeItemIndex,
+    handleTimelineUpdate,
+  ]);
 
   const restartSlideShow = useCallback(() => {
     handleTimelineUpdate(-1);

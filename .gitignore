@@ -8,6 +8,8 @@
 /cursor
 
 
+
+
 **/node_modules
 # testing
 # /coverage
@@ -91,3 +93,6 @@ bug_report.txt
 
 benchmark-results
 benchmark-tests
+
+# Knip reports
+knip-report.json

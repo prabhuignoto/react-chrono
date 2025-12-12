@@ -9,6 +9,7 @@ const brandDarkTheme = {
   toolbarBgColor: '#1a202c', 
   toolbarBtnBgColor: '#4a5568',
   toolbarTextColor: '#f7fafc',
+  titleColor: '#fff',
   
   // Custom interactive colors
   iconColor: '#63b3ed',             // Bright cyan for icons
@@ -37,6 +38,7 @@ const highContrastDarkTheme = {
   toolbarBgColor: '#111111',
   toolbarBtnBgColor: '#333333',
   toolbarTextColor: '#ffffff',
+  titleColor: '#fff',
   
   iconColor: '#00ff00',             // Bright green
   buttonHoverBgColor: '#444444',

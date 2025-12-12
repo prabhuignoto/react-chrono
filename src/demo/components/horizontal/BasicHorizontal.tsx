@@ -21,7 +21,9 @@ export const BasicHorizontal: FunctionComponent<BasicHorizontalProps> = ({
           items={items}
           mode="horizontal"
           onItemSelected={(selected) => setItemSelected(selected.index)}
-          
+          theme={{
+            titleColor: '#fff',
+          }}
           layout={{
             cardHeight: 450,
             cardWidth: 550,

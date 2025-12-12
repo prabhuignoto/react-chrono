@@ -332,9 +332,12 @@ globalStyle(`${shapeWrapper} button.using-icon svg`, {
 });
 
 // Diamond shape icon counter-rotation
-globalStyle(`${shapeWrapper} button.diamond.using-icon svg, ${shapeWrapper} button.diamond.using-icon img`, {
-  transform: 'rotate(-45deg)',
-});
+globalStyle(
+  `${shapeWrapper} button.diamond.using-icon svg, ${shapeWrapper} button.diamond.using-icon img`,
+  {
+    transform: 'rotate(-45deg)',
+  },
+);
 
 // Export types for new system
 export type TimelinePointVariants = Parameters<typeof timelinePoint>[0];

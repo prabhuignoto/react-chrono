@@ -244,6 +244,7 @@ export function computeCssVarsFromTheme(
       // Active state custom properties
       '--title-active-color':
         t.titleColorActive ?? (darkMode ? '#60a5fa' : '#1d4ed8'),
+      '--timeline-title-text-color': t.titleColor ?? '#fff',
       '--details-color': t.detailsColor ?? (darkMode ? '#cbd5e1' : '#475569'),
 
       // Dark mode specific custom properties

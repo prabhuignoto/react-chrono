@@ -19,11 +19,12 @@ import { cardTitleRecipe } from '../timeline-card-content/timeline-card-content.
 const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
   title,
   active,
-  theme,
+  theme: themeProp,
   align,
   classString,
 }: TitleModel) => {
-  const { mode } = useTimelineContext();
+  const { mode, theme: contextTheme } = useTimelineContext();
+  const theme = themeProp || contextTheme;
   const TITLE_CLASS = 'timeline-item-title'; // Base class name for the title
 
   // Determine if margin-bottom should be applied (only for horizontal modes)
@@ -39,19 +40,31 @@ const TimelineItemTitle: React.FunctionComponent<TitleModel> = ({
         TITLE_CLASS,
         active ? 'active' : '',
         classString,
-        cardTitleRecipe({ active: !!active, hasMarginBottom: isHorizontalMode }),
+        cardTitleRecipe({
+          active: !!active,
+          hasMarginBottom: isHorizontalMode,
+        }),
         titleWrapper, // Add the base CSS class that includes Google Fonts styling
       ),
     [active, classString, isHorizontalMode],
   );
 
+  // Inline styles for layout, visibility, and color override
+  const inlineStyles = useMemo(
+    (): React.CSSProperties => ({
+      textAlign: align || undefined,
+      visibility: title ? ('visible' as const) : ('hidden' as const),
+      color: theme?.titleColor
+        ? theme.titleColor
+        : 'var(--timeline-title-text-color, #fff)',
+    }),
+    [align, title, theme],
+  );
+
   return (
     <div
       className={titleClass}
-      style={{
-        textAlign: align || undefined,
-        visibility: title ? 'visible' : 'hidden',
-      }}
+      style={inlineStyles}
       title={typeof title === 'string' ? title : undefined} // Native tooltip for full text on hover
       data-ve-class={titleWrapper}
       data-ve-active-class={titleActive}

@@ -22,6 +22,9 @@ export const InitialSelectedHorizontal: FunctionComponent<InitialSelectedHorizon
         slideItemDuration={2550}
         itemWidth={200}
         cardLess
+        theme={{
+          titleColor: '#fff',
+        }}
         onItemSelected={(selected) => console.log(selected)}
       >
         <div className="chrono-icons">

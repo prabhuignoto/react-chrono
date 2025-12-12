@@ -718,7 +718,7 @@ interface Theme {
 
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
-| `primary` | `string` | Primary accent color | `'#0070f3'` |
+| `primary` | `string` | Primary accent color | `'#0079e6'` |
 | `secondary` | `string` | Secondary accent color | `'#666666'` |
 | `textColor` | `string` | Default text color | `'#333333'` |
 
@@ -1409,11 +1409,9 @@ const App = () => {
         }}
         
         theme={{
-          primary: '#0070f3',
+          primary: '#0079e6',
           cardBgColor: '#ffffff',
           cardTitleColor: '#1f2937',
-          iconColor: '#0070f3',
-          buttonActiveBgColor: '#0070f3',
         }}
         
         darkMode={{

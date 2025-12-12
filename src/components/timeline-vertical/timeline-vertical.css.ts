@@ -184,7 +184,7 @@ export const timelineItemTitleWrapper = style({
   maxWidth: '100%',
   padding: `${tokens.semantic.spacing.xs} ${tokens.semantic.spacing.sm}`,
   borderRadius: tokens.semantic.borderRadius.lg,
-  background: tokens.semantic.color.background.elevated,
+  backgroundColor: `var(--timeline-primary-color, ${tokens.semantic.color.interactive.primary})`,
   border: `1px solid ${tokens.semantic.color.border.default}`,
   boxShadow: tokens.semantic.shadow.card,
   marginBottom: tokens.semantic.spacing.md,

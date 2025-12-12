@@ -154,7 +154,7 @@ const items = [
 <Chrono
   items={items}
   mode="horizontal"
-  theme={{ primary: '#0070f3', cardBgColor: '#f5f5f5' }}
+  theme={{ primary: '#0079e6', cardBgColor: '#f5f5f5' }}
 />
 ```
 
@@ -239,7 +239,7 @@ The new grouped API organizes configuration into logical sections:
   }}
   
   theme={{
-    primary: '#0070f3',
+    primary: '#0079e6',
     cardBgColor: '#ffffff',
     cardTitleColor: '#1f2937'
   }}
@@ -465,7 +465,7 @@ Instantly highlights matching content across titles, descriptions, and metadata.
 <Chrono
   items={items}
   theme={{
-    primary: '#0070f3',
+    primary: '#0079e6',
     cardBgColor: '#ffffff',
     cardTitleColor: '#1f2937',
     timelineBgColor: '#f5f5f5'

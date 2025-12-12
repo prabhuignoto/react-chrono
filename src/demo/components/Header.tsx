@@ -9,14 +9,14 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen = false }) => {
   return (
-    <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50 font-sans">
+    <header className="bg-white border-b border-electric-200 shadow-sm sticky top-0 z-50 font-sans">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 w-full gap-4">
           <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={onMenuToggle}
               aria-expanded={isMenuOpen}
-              className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-500 focus-visible:ring-offset-2"
+              className="p-2 rounded-lg text-electric-600 hover:text-electric-700 hover:bg-electric-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-500 focus-visible:ring-offset-2"
             >
               <span className="sr-only">{isMenuOpen ? 'Close sidebar' : 'Open sidebar'}</span>
               {isMenuOpen ? (
@@ -42,8 +42,8 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen = false }) => 
                 </svg>
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-lg sm:text-xl font-bold text-gray-900 font-display whitespace-nowrap">React Chrono</h1>
-                <p className="text-xs text-gray-500 whitespace-nowrap">Modern Timeline Component</p>
+                <h1 className="text-lg sm:text-xl font-bold text-electric-700 font-display whitespace-nowrap">React Chrono</h1>
+                <p className="text-xs text-electric-600 whitespace-nowrap">Modern Timeline Component</p>
               </div>
             </NavLink>
           </div>
@@ -54,8 +54,8 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen = false }) => 
               className={({ isActive }) => cls(
                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap',
                 isActive 
-                  ? 'bg-gray-100 text-gray-900' 
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  ? 'bg-electric-100 text-electric-700' 
+                  : 'text-electric-600 hover:text-electric-700 hover:bg-electric-50'
               )}
             >
               Overview
@@ -65,8 +65,8 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen = false }) => 
               className={({ isActive }) => cls(
                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap',
                 isActive 
-                  ? 'bg-gray-100 text-gray-900' 
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  ? 'bg-electric-100 text-electric-700' 
+                  : 'text-electric-600 hover:text-electric-700 hover:bg-electric-50'
               )}
             >
               Examples
@@ -76,8 +76,8 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen = false }) => 
               className={({ isActive }) => cls(
                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap',
                 isActive 
-                  ? 'bg-gray-100 text-gray-900' 
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  ? 'bg-electric-100 text-electric-700' 
+                  : 'text-electric-600 hover:text-electric-700 hover:bg-electric-50'
               )}
             >
               Themes
@@ -87,8 +87,8 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen = false }) => 
               className={({ isActive }) => cls(
                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap',
                 isActive 
-                  ? 'bg-gray-100 text-gray-900' 
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  ? 'bg-electric-100 text-electric-700' 
+                  : 'text-electric-600 hover:text-electric-700 hover:bg-electric-50'
               )}
             >
               Showcase
