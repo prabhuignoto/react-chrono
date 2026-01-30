@@ -37,7 +37,7 @@ These are the essential properties that define the basic behavior of your timeli
 | Property | Type | Default | Required | Description |
 |----------|------|---------|----------|-------------|
 | `items` | `TimelineItem[]` | `[]` | ✅ | Array of timeline items to display |
-| `mode` | `TimelineMode` | `'alternating'` | ❌ | Timeline display mode |
+| `mode` | `TimelineMode` | `'ALTERNATING'` | ❌ | Timeline display mode |
 | `children` | `ReactNode \| ReactNode[]` | - | ❌ | Custom React content for timeline cards |
 | `theme` | `Theme` | `{}` | ❌ | Visual theme configuration |
 | `activeItemIndex` | `number` | `0` | ❌ | Index of initially active timeline item |
@@ -50,10 +50,10 @@ These are the essential properties that define the basic behavior of your timeli
 
 ```typescript
 type TimelineMode = 
-  | 'horizontal'      // Classic left-to-right layout
-  | 'vertical'        // Top-to-bottom layout  
-  | 'alternating'     // Cards alternate sides (default)
-  | 'horizontal-all'  // Show all cards simultaneously
+  | 'HORIZONTAL'      // Classic left-to-right layout
+  | 'VERTICAL'        // Top-to-bottom layout
+  | 'ALTERNATING'     // Cards alternate sides (default)
+  | 'HORIZONTAL_ALL'  // Show all cards simultaneously
 ```
 
 ---
@@ -1332,7 +1332,7 @@ const App = () => {
     <div style={{ width: '100vw', height: '100vh' }}>
       <Chrono
         items={items}
-        mode="alternating"
+        mode="ALTERNATING"
         
         layout={{
           cardWidth: 450,

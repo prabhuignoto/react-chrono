@@ -153,7 +153,7 @@ const items = [
 ```jsx
 <Chrono
   items={items}
-  mode="horizontal"
+  mode="HORIZONTAL"
   theme={{ primary: '#0079e6', cardBgColor: '#f5f5f5' }}
 />
 ```
@@ -177,7 +177,7 @@ const items = [
   }
 ];
 
-<Chrono items={items} mode="vertical" />
+<Chrono items={items} mode="VERTICAL" />
 ```
 
 </details>
@@ -188,7 +188,7 @@ const items = [
 ```jsx
 <Chrono
   items={items}
-  mode="alternating"
+  mode="ALTERNATING"
   animation={{
     slideshow: {
       enabled: true,
@@ -208,7 +208,7 @@ The new grouped API organizes configuration into logical sections:
 ```jsx
 <Chrono
   items={items}
-  mode="alternating"
+  mode="ALTERNATING"
   
   layout={{
     cardWidth: 450,
@@ -328,7 +328,7 @@ React Chrono offers four layout modes, each optimized for specific use cases:
 Perfect for feeds, news timelines, and mobile experiences where scrolling is natural.
 
 ```jsx
-<Chrono items={items} mode="vertical" />
+<Chrono items={items} mode="VERTICAL" />
 ```
 
 </details>
@@ -339,7 +339,7 @@ Perfect for feeds, news timelines, and mobile experiences where scrolling is nat
 Ideal for historical narratives and project phases where the journey matters.
 
 ```jsx
-<Chrono items={items} mode="horizontal" />
+<Chrono items={items} mode="HORIZONTAL" />
 ```
 
 </details>
@@ -350,7 +350,7 @@ Ideal for historical narratives and project phases where the journey matters.
 Great for portfolios and company milestones with balanced visual rhythm.
 
 ```jsx
-<Chrono items={items} mode="alternating" />
+<Chrono items={items} mode="ALTERNATING" />
 ```
 
 </details>
@@ -361,7 +361,7 @@ Great for portfolios and company milestones with balanced visual rhythm.
 Perfect for dashboards, comparisons, and seeing the complete picture at once.
 
 ```jsx
-<Chrono items={items} mode="horizontal-all" />
+<Chrono items={items} mode="HORIZONTAL_ALL" />
 ```
 
 </details>

@@ -101,7 +101,7 @@ const items = [{ title: userContent, cardTitle: 'Safe Title' }];
 const items = [{ title: userProvidedHTML, cardTitle: 'Unsafe' }];
 
 // ✅ Good: Type-safe props
-<Chrono items={items} mode="vertical" />
+<Chrono items={items} mode="VERTICAL" />
 
 // ❌ Bad: Untyped or any types
 <Chrono items={unsafeItems as any} />
