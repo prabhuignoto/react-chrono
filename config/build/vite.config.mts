@@ -101,6 +101,12 @@ export default defineConfig(({ mode }) => {
           id.startsWith('react-dom/') ||
           /\.(svg|mp4|webm|png|jpe?g|gif)$/i.test(id),
         output: {
+          banner: (chunk) => {
+            if (!chunk.isEntry) return '';
+            return chunk.fileName.endsWith('.esm.js')
+              ? "import './style.css';"
+              : "require('./style.css');";
+          },
           globals: {
             react: 'React',
             'react-dom': 'ReactDOM',
